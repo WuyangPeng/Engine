@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/23 16:48)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H
@@ -15,34 +18,34 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class BrentsMethodRoot
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BrentsMethodRoot final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = BrentsMethodRoot<Real>;
+        using ClassType = BrentsMethodRoot<Real>;
 
-	public:
-		// 方程无解
-		BrentsMethodRoot();
-		// 方程有解
-		BrentsMethodRoot(Real root, Real function, BrentsMethodRootType type);
+    public:
+        // 方程无解
+        BrentsMethodRoot() noexcept;
+        // 方程有解
+        BrentsMethodRoot(Real root, Real function, BrentsMethodRootType type) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		Real GetRoot() const;
-		Real GetFunction() const;
-		BrentsMethodRootType GetBrentsMethodRootType() const;
+        [[nodiscard]] Real GetRoot() const;
+        [[nodiscard]] Real GetFunction() const;
+        [[nodiscard]] BrentsMethodRootType GetBrentsMethodRootType() const noexcept;
 
-	private:
-		Real m_Root;
-		Real m_Function;
-		BrentsMethodRootType m_BrentsMethodRootType;
-	};
+    private:
+        Real m_Root;
+        Real m_Function;
+        BrentsMethodRootType m_BrentsMethodRootType;
+    };
 
-	using BrentsMethodRootf = BrentsMethodRoot<float>;
-	using BrentsMethodRootd = BrentsMethodRoot<double>;
+    using FloatBrentsMethodRoot = BrentsMethodRoot<float>;
+    using DoubleBrentsMethodRoot = BrentsMethodRoot<double>;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H

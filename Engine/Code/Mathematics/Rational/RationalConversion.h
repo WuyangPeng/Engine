@@ -37,7 +37,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] T GetValue() const;
+        [[nodiscard]] T GetValue() const noexcept;
 
     private:
         void Init(const SignedIntegerType&);
@@ -49,7 +49,7 @@ namespace Mathematics
 
         void CorrectWithShifting();
         void CalculateMantissa();
-        void Negative();
+        void Negative() noexcept;
 
     private:
         Integer m_AbsNumerator;

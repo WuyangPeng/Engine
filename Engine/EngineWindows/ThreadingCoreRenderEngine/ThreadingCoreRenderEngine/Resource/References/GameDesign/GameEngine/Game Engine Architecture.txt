@@ -8,7 +8,12 @@ http://gameenginebook.com
 作者： Jason Gregory
 
 知识点 
-1.	游戏引擎基础知识。 
+1.	游戏引擎基础知识。
+
+要点
+
+第一部分 基础
+	第1章 导论 
 
 第2版
 ★★★
@@ -16,3 +21,8 @@ http://gameenginebook.com
 
 知识点 
 1.	游戏引擎基础知识。
+
+要点
+
+第Ⅰ部分 基础
+	第1章 导论

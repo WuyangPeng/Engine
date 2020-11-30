@@ -48,7 +48,7 @@ namespace CoreTools
         [[nodiscard]] Iter GetEnd() const noexcept;
         [[nodiscard]] Iter GetCurrent() const noexcept;
 
-        [[nodiscard]] DifferenceType GetRemainingCount() const;
+        [[nodiscard]] DifferenceType GetRemainingCount() const noexcept;
 
         template <typename T>
         [[nodiscard]] T Increase();

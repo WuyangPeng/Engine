@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:53)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/27 16:10)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H
@@ -17,68 +20,66 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class PolynomialRootsRational
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class PolynomialRootsRationalImpl;
 
-		using ClassType = PolynomialRootsRational<Real>;
-		using PolynomialRational = SignRational<16 * sizeof(Real)>;
-		using Math = Math<Real>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsRationalImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsRationalImpl<double>>;
 
-	public:
-		explicit PolynomialRootsRational(Real epsilon = Math::sm_Epsilon);
-		~PolynomialRootsRational();
-		PolynomialRootsRational(const PolynomialRootsRational& rhs);
-		PolynomialRootsRational& operator=(const PolynomialRootsRational& rhs);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsRationalImpl<Real>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRootsRational final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		int GetQuantity() const;
-		Real GetRoot(int index) const;
-		int GetMultiplicity(int index) const;
+        using PolynomialRootsRationalImpl = PolynomialRootsRationalImpl<Real>;
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialRootsRational, DESTRUCTOR_DEFAULT);
 
-		// p(x) = constant + once * x
-		bool Linear(Real constant, Real once);
-		bool Linear(const PolynomialRational& constant, const PolynomialRational& once);
+        using PolynomialRational = SignRational<16 * sizeof(Real)>;
+        using Math = Math<Real>;
 
-		// p(x) = constant + once * x + secondary * x^2
-		// m(x) = constant + once * x + x^2
-		bool Quadratic(Real constant, Real once, Real secondary);
-		bool Quadratic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary);
-		bool Quadratic(const PolynomialRational& constant, const PolynomialRational& once);
+    public:
+        explicit PolynomialRootsRational(Real epsilon = Math::sm_Epsilon);
 
-		// p(x) = constant + once * x + secondary * x^2 + thrice * x^3
-		// m(x) = constant + once * x + secondary * x^2 + x^3
-		bool Cubic(Real constant, Real once, Real secondary, Real thrice);
-		bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice);
-		bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary);
+        CLASS_INVARIANT_DECLARE;
 
-		// p(x) = constant + once * x + secondary * x^2 + thrice * x^3 + quartic * x^4 (首一当 c4 = 1)
-		// m(x) = constant + once * x + secondary * x^2 + thrice * x^3 + x^4
-		bool Quartic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
-		bool Quartic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary,
-					 const PolynomialRational& thrice, const PolynomialRational& quartic);
-		bool Quartic(const PolynomialRational& constant, const PolynomialRational& once,
-					 const PolynomialRational& secondary, const PolynomialRational& thrice);
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] Real GetRoot(int index) const;
+        [[nodiscard]] int GetMultiplicity(int index) const;
 
-	private:
-		void SortRoots();
+        // p(x) = constant + once * x
+        [[nodiscard]] bool Linear(Real constant, Real once);
+        [[nodiscard]] bool Linear(const PolynomialRational& constant, const PolynomialRational& once);
 
-	private:
-		static const PolynomialRational sm_Zero;
-		static const PolynomialRational sm_One;
-		static constexpr auto sm_MaxRoot = 4;
+        // p(x) = constant + once * x + secondary * x^2
+        // m(x) = constant + once * x + x^2
+        [[nodiscard]] bool Quadratic(Real constant, Real once, Real secondary);
+        [[nodiscard]] bool Quadratic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary);
+        [[nodiscard]] bool Quadratic(const PolynomialRational& constant, const PolynomialRational& once);
 
-		int m_Quantity;
-		Real m_Root[sm_MaxRoot];
-		int m_Multiplicity[sm_MaxRoot];
-		Real m_Epsilon;
-	};
+        // p(x) = constant + once * x + secondary * x^2 + thrice * x^3
+        // m(x) = constant + once * x + secondary * x^2 + x^3
+        [[nodiscard]] bool Cubic(Real constant, Real once, Real secondary, Real thrice);
+        [[nodiscard]] bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice);
+        [[nodiscard]] bool Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary);
 
-	using PolynomialRootsRationalf = PolynomialRootsRational<float>;
-	using PolynomialRootsRationald = PolynomialRootsRational<double>;
+        // p(x) = constant + once * x + secondary * x^2 + thrice * x^3 + quartic * x^4 (首一当 c4 = 1)
+        // m(x) = constant + once * x + secondary * x^2 + thrice * x^3 + x^4
+        [[nodiscard]] bool Quartic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
+        [[nodiscard]] bool Quartic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary,
+                                   const PolynomialRational& thrice, const PolynomialRational& quartic);
+        [[nodiscard]] bool Quartic(const PolynomialRational& constant, const PolynomialRational& once,
+                                   const PolynomialRational& secondary, const PolynomialRational& thrice);
+
+    private:
+        IMPL_TYPE_DECLARE(PolynomialRootsRational);
+    };
+
+    using FloatPolynomialRootsRational = PolynomialRootsRational<float>;
+    using DoublePolynomialRootsRational = PolynomialRootsRational<double>;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_H

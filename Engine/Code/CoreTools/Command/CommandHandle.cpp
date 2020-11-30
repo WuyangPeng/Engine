@@ -191,7 +191,7 @@ void CoreTools::CommandHandle::SetUsed(const string& argumentsName)
     return m_CommandLineInformation.SetUsed(argumentsName);
 }
 
-int CoreTools::CommandHandle::GetExcessArgumentsCount() const
+int CoreTools::CommandHandle::GetExcessArgumentsCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

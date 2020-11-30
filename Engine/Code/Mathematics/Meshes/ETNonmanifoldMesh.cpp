@@ -142,8 +142,7 @@ bool Mathematics::ETNonmanifoldMesh
     return true;
 }
 
-bool Mathematics::ETNonmanifoldMesh
-	::IsManifold () const
+bool Mathematics::ETNonmanifoldMesh ::IsManifold() const noexcept
 {
     EMapCIterator eiter = mEMap.begin();
     const EMapCIterator eend = mEMap.end();
@@ -157,8 +156,7 @@ bool Mathematics::ETNonmanifoldMesh
     return true;
 }
 
-bool Mathematics::ETNonmanifoldMesh
-	::IsClosed () const
+bool Mathematics::ETNonmanifoldMesh ::IsClosed() const noexcept
 {
     EMapCIterator eiter = mEMap.begin();
     const EMapCIterator eend = mEMap.end();

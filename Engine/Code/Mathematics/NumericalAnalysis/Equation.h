@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 12:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/24 17:51)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
@@ -20,7 +23,7 @@ MATHEMATICS_EXPORT_SHARED_PTR(EquationImpl);
 
 namespace Mathematics
 {
-    class MATHEMATICS_DEFAULT_DECLARE Equation
+    class MATHEMATICS_DEFAULT_DECLARE Equation final
     {
     public:
         PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Equation);
@@ -38,16 +41,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        bool IsRealResult() const noexcept;
-        double Substitution(double value) const;
-        const Imaginary Substitution(const Imaginary& value) const;
-        int GetRealResultCount() const;
-        int GetImaginaryResultCount() const;
+        [[nodiscard]] bool IsRealResult() const noexcept;
+        [[nodiscard]] double Substitution(double value) const;
+        [[nodiscard]] const Imaginary Substitution(const Imaginary& value) const;
+        [[nodiscard]] int GetRealResultCount() const;
+        [[nodiscard]] int GetImaginaryResultCount() const;
 
-        const RealConstIterator GetRealBegin() const noexcept;
-        const RealConstIterator GetRealEnd() const noexcept;
-        const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
-        const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
+        [[nodiscard]] const RealConstIterator GetRealBegin() const noexcept;
+        [[nodiscard]] const RealConstIterator GetRealEnd() const noexcept;
+        [[nodiscard]] const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
+        [[nodiscard]] const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
     private:
         IMPL_TYPE_DECLARE(Equation);

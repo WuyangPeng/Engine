@@ -305,7 +305,7 @@ T Mathematics::SignRational<N>::ConvertTo() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    RationalConversion<N, T> rationalConversion{ *this };
+    const RationalConversion<N, T> rationalConversion{ *this };
 
     return rationalConversion.GetValue();
 }

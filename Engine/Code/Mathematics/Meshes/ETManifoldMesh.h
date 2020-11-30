@@ -98,7 +98,7 @@ namespace Mathematics
 		bool RemoveTriangle (int v0, int v1, int v2);
 		
 		// Manifold mesh is closed if each edge is shared twice.
-		bool IsClosed () const;
+                bool IsClosed() const noexcept;
 		
 		// For debugging.
 		void Print (const char* acFilename);

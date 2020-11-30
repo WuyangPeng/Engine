@@ -1,149 +1,128 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:41)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/19 13:53)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 
 namespace Mathematics
 {
-	template <typename ResultConstIter>
-	class EquationResultConstIterator;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrixInvert;
 
-	class Equation;
+    template <typename ResultConstIter>
+    class EquationResultConstIterator;
 
-	template <typename Real>
-	class Bisect1Root;
+    class Equation;
 
-	template <typename Real>
-	class Bisect1;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect1Root;
 
-	template <typename Real>
-	class Bisect2Root;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect1;
 
-	template <typename Real>
-	class Bisect2Node;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect2Root;
 
-	template <typename Real>
-	class Bisect2Storage;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect2;
 
-	template <typename Real>
-	class Bisect2Calculate;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect3Root;
 
-	template <typename Real>
-	class Bisect2;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Bisect3;
 
-	template <typename Real>
-	class Bisect3Root;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BrentsMethodRoot;
 
-	template <typename Real>
-	class Bisect3Node;
+    template <typename Real, typename UserDataType>
+    class BrentsMethodCalculate;
 
-	template <typename Real>
-	class Bisect3Storage;
+    template <typename Real, typename UserDataType>
+    class BrentsMethod;
 
-	template <typename Real>
-	class Bisect3Calculate;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EigenDecomposition;
 
-	template <typename Real>
-	class Bisect3;
+    template <typename Real, typename UserDataType>
+    class GaussianQuadrature;
 
-	template <typename Real>
-	class BrentsMethodRoot;
+    class SparseMatrixIndex;
 
-	template <typename Real, typename UserDataType>
-	class BrentsMethodCalculate;
+    template <typename Real>
+    class SparseMatrix;
 
-	template <typename Real, typename UserDataType>
-	class BrentsMethod;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE LinearSystem;
 
-	template <typename Real>
-	class EigenDecomposition;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Minimize1Data;
 
-	template <typename Real, typename UserDataType>
-	class  GaussianQuadrature;
+    template <typename Real, typename UserDataType>
+    class Minimize1;
 
-	template <typename Real>
-	class LinearSystemInverse;
+    template <typename Real>
+    class MinimizeNData;
 
-	template <typename Real, template <typename> class Matrix>
-	class SolveSymmetricConjugateGradient;
+    template <typename Real, typename UserDataType>
+    class MinimizeN;
 
-	class SparseMatrixIndex;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE NoniterativeEigen3x3;
 
-	template <typename Real>
-	class SparseMatrix;
+    template <typename Real, typename UserDataType>
+    class OdeSolver;
 
-	template <typename Real>
-	class SolveBanded;
+    template <typename Real, typename UserDataType>
+    class OdeEuler;
 
-	template <typename Real>
-	class  LinearSystem;
+    template <typename Real, typename UserDataType>
+    class OdeImplicitEuler;
 
-	template <typename Real>
-	class Minimize1Data;
+    template <typename Real, typename UserDataType>
+    class OdeMidpoint;
 
-	template <typename Real, typename UserDataType>
-	class Minimize1;
+    template <typename Real, typename UserDataType>
+    class OdeRungeKutta4;
 
-	template <typename Real>
-	class MinimizeNData;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRoots;
 
-	template <typename Real, typename UserDataType>
-	class MinimizeN;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRootsRational;
 
-	template <typename Real>
-	class NoniterativeEigen3x3;
+    template <typename Real, typename UserDataType>
+    class RombergIntegral;
 
-	template <typename Real, typename UserDataType>
-	class OdeSolver;
+    template <typename Real, typename UserDataType>
+    class TrapezoidRule;
 
-	template <typename Real, typename UserDataType>
-	class OdeEuler;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SingularValueDecomposition;
 
-	template <typename Real, typename UserDataType>
-	class OdeImplicitEuler;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix3Tools;
 
-	template <typename Real, typename UserDataType>
-	class OdeMidpoint;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SingularValue;
 
-	template <typename Real, typename UserDataType>
-	class OdeRungeKutta4;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolarDecompositionValue;
 
-	template <typename Real>
-	class PolynomialRoots;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QDUDecompositionValue;
 
-	template <typename Real>
-	class PolynomialRootsRational;
-
-	template <typename Real, typename UserDataType>
-	class  RombergIntegral;
-
-	template <typename Real, typename UserDataType>
-	class  TrapezoidRule;
-
-	template <typename Real>
-	class SingularValueDecomposition;
-
-	template <typename Real>
-	class Matrix3Tools;
-
-	template <typename Real>
-	class SingularValue;
-
-	template <typename Real>
-	class PolarDecompositionValue;
-
-	template <typename Real>
-	class QDUDecompositionValue;
-
-	enum class Bisect2StorageType;
-	enum class Bisect3StorageType;
-	enum class QuantityType;
-	enum class BisectRootType;
-	enum class BrentsMethodRootType;
+    enum class Bisect2StorageType;
+    enum class Bisect3StorageType;
+    enum class QuantityType;
+    enum class BisectRootType;
+    enum class BrentsMethodRootType;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H

@@ -18,6 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include <gsl/gsl_util>
 #include <type_traits>
 
 template <int N, typename T>
@@ -86,7 +87,7 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 
     CorrectWithShifting();
 
-    if (m_Shifting <= static_cast<int>(TraitsType::g_RealExponentDifference))
+    if (m_Shifting <= boost::numeric_cast<int>(TraitsType::g_RealExponentDifference))
     {
         CalculateMantissa();
     }
@@ -100,7 +101,10 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 
     auto mantissa = boost::numeric_cast<IntegerType>(m_Mantissa);
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
     m_Value = *(reinterpret_cast<T*>(&mantissa));
+#include STSTEM_WARNING_POP
 }
 
 // private
@@ -133,8 +137,8 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 {
     using IntegerType = typename TraitsType::IntegerType;
 
-    constexpr auto realExponentDifference = static_cast<int>(TraitsType::g_RealExponentDifference);
-    constexpr auto exponentShifting = static_cast<int>(TraitsType::g_ExponentShifting);
+    constexpr auto realExponentDifference = gsl::narrow_cast<int>(TraitsType::g_RealExponentDifference);
+    constexpr auto exponentShifting = gsl::narrow_cast<int>(TraitsType::g_ExponentShifting);
 
     // -1074 double
     // -149 float
@@ -146,8 +150,8 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
         if (-realExponentDifference < m_Shifting)
         {
             // normal_float, 1.c * 2^{e - 127}
-            auto temp = m_Shifting + realExponentDifference;
-            exponent = temp;
+            const auto value = m_Shifting + realExponentDifference;
+            exponent = value;
             bit = 1;
             shift = 0;
         }
@@ -160,7 +164,7 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
             shift = -(m_Shifting + realExponentDifference);
         }
 
-        auto beginMask = (IntegerType(1) << (exponentShifting - 1)) >> shift;
+        const auto beginMask = (IntegerType{ 1 } << (exponentShifting - 1)) >> shift;
 
         for (auto mask = beginMask; 0 < mask; mask >>= 1)
         {
@@ -181,8 +185,8 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
             }
         }
 
-        auto temp = exponent << exponentShifting;
-        m_Mantissa = static_cast<uint64_t>(temp | m_Mantissa);
+        const auto value = exponent << exponentShifting;
+        m_Mantissa = boost::numeric_cast<uint64_t>(value | m_Mantissa);
     }
     else
     {
@@ -193,7 +197,7 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 
 // private
 template <int N, typename T>
-void Mathematics::RationalConversion<N, T>::Negative()
+void Mathematics::RationalConversion<N, T>::Negative() noexcept
 {
     if (m_Symbol == NumericalValueSymbol::Negative)
     {
@@ -219,7 +223,7 @@ bool Mathematics::RationalConversion<N, T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename T>
-T Mathematics::RationalConversion<N, T>::GetValue() const
+T Mathematics::RationalConversion<N, T>::GetValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

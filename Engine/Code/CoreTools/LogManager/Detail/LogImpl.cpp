@@ -38,7 +38,7 @@ void CoreTools::LogImpl::InitIOManager()
     }
 }
 
-void CoreTools::LogImpl::ResetIOManager()
+void CoreTools::LogImpl::ResetIOManager() noexcept
 {
     for (auto& value : m_LogAppenderIOManagerContainer)
     {

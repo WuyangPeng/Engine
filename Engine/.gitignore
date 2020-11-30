@@ -29,3 +29,4 @@
 *.user
 
 CodeAnalysisResultManifest.txt
+Doxygen/*

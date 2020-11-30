@@ -225,8 +225,7 @@ bool Mathematics::TSManifoldMesh
     return true;
 }
 
-bool Mathematics::TSManifoldMesh
-	::IsClosed() const
+bool Mathematics::TSManifoldMesh ::IsClosed() const noexcept
 {
     TMapCIterator element;
     for (element = mTMap.begin(); element != mTMap.end(); ++element)

@@ -114,7 +114,7 @@ void CoreTools::CommandLineInformationImpl::SetFileNmaeUsed()
     SetUsed(GetFileNameDescription());
 }
 
-int CoreTools::CommandLineInformationImpl::GetExcessArgumentsCount() const
+int CoreTools::CommandLineInformationImpl::GetExcessArgumentsCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

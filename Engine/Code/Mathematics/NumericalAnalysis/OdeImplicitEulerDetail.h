@@ -1,95 +1,77 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 14:53)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/27 10:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H
 
-#include "OdeImplicitEuler.h"
 #include "LinearSystem.h"
-#include "CoreTools/Helper/LogMacro.h"
+#include "OdeImplicitEuler.h"
+#include "OdeSolverDetail.h" 
 
 template <typename Real, typename UserDataType>
-Mathematics::OdeImplicitEuler<Real, UserDataType>
-	::OdeImplicitEuler(int dimension, Real step, Function function, DerivativeFunction derivativeFunction, const UserDataType* userData)
-	:ParentType{ dimension, step, function, userData }, m_DerivativeFunction{ derivativeFunction }, m_DerivativeFunctionMatrix{ dimension, dimension },
-	 m_FunctionVector{ dimension }, m_Identity{ dimension, dimension }
+Mathematics::OdeImplicitEuler<Real, UserDataType>::OdeImplicitEuler(int dimension, Real step, Function function, DerivativeFunction derivativeFunction, const UserDataType* userData)
+    : ParentType{ dimension, step, function, userData },
+      m_DerivativeFunction{ derivativeFunction },
+      m_DerivativeFunctionMatrix{ dimension, dimension },
+      m_FunctionVector{ dimension },
+      m_Identity{ dimension, dimension }
 {
-	m_Identity.SetIdentity();
+    m_Identity.SetIdentity();
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename Real, typename UserDataType>
-Mathematics::OdeImplicitEuler<Real, UserDataType>
-	::~OdeImplicitEuler()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real, typename UserDataType>
-bool Mathematics::OdeImplicitEuler<Real, UserDataType>
-	::IsValid() const noexcept
+bool Mathematics::OdeImplicitEuler<Real, UserDataType>::IsValid() const noexcept
 {
-	if (ParentType::IsValid() &&
-		m_DerivativeFunction != nullptr)
-		return true;
-	else
-		return false;
-
+    if (ParentType::IsValid() && m_DerivativeFunction != nullptr)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-void Mathematics::OdeImplicitEuler<Real, UserDataType>
-	::Update(Real tIn, const RealVector& xIn, Real& tOut, Real* xOut)
+typename Mathematics::OdeImplicitEuler<Real, UserDataType>::Data Mathematics::OdeImplicitEuler<Real, UserDataType>::Update(Real tIn, const Container& xIn)
 {
-	MATHEMATICS_CLASS_IS_VALID_1;
-	if (xOut == nullptr)
-	{
-		THROW_EXCEPTION(SYSTEM_TEXT("xOut为空指针"));
-	}
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-	ParentType::CalculateFunctionValue(tIn, xIn);
-	m_DerivativeFunctionMatrix = m_DerivativeFunction(tIn, xIn, this->GetUserData());
+    ParentType::CalculateFunctionValue(tIn, xIn);
+    m_DerivativeFunctionMatrix = m_DerivativeFunction(tIn, xIn, this->GetUserData());
 
-	auto derivative = m_Identity - this->GetStepSize() * m_DerivativeFunctionMatrix;
-	auto dimension = this->GetDimension();
+    auto derivative = m_Identity - this->GetStepSize() * m_DerivativeFunctionMatrix;
 
-	try
-	{
-		Update(derivative);
+    Container xOut{};
 
-		for (auto i = 0; i < dimension; ++i)
-		{
-			xOut[i] = xIn[i] + ParentType::GetStepFunctionValue(i);
-		}
-	}
-	catch (CoreTools::Error& error)
-	{
-		memcpy(xOut, &xIn[0], dimension * sizeof(Real));
+    Update(derivative);
 
-		LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
-			<< error
-			<< CoreTools::LogAppenderIOManageSign::Refresh;
-	}
+    auto index = 0;
+    for (auto value : xIn)
+    {
+        xOut.emplace_back(value + ParentType::GetStepFunctionValue(index));
 
-	tOut = tIn + this->GetStepSize();
+        ++index;
+    }
+
+    return Data{ tIn + this->GetStepSize(), xOut };
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::OdeImplicitEuler<Real, UserDataType>
-	::Update(const VariableMatrix& derivative)
+void Mathematics::OdeImplicitEuler<Real, UserDataType>::Update(const VariableMatrix& derivative)
 {
-	auto derivativeInverse = LinearSystem<Real>().Inverse(derivative);
+    auto derivativeInverse = LinearSystem().Inverse(derivative);
 
-	VariableLengthVector<Real> variableLengthVector{ this->GetFunctionValue() };
-	auto functionValue = derivativeInverse * variableLengthVector;
+    VariableLengthVector variableLengthVector{ this->GetFunctionValue() };
+    auto functionValue = derivativeInverse * variableLengthVector;
 
-	ParentType::SetFunctionValue(functionValue.GetValue());
+    ParentType::SetFunctionValue(functionValue.GetContainer());
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H

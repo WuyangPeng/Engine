@@ -209,8 +209,7 @@ bool Mathematics::VEManifoldMesh
     return true;
 }
 
-bool Mathematics::VEManifoldMesh
-	::IsClosed () const
+bool Mathematics::VEManifoldMesh ::IsClosed() const noexcept
 {
     VMapCIterator viter = mVMap.begin();
     const VMapCIterator vend = mVMap.end();

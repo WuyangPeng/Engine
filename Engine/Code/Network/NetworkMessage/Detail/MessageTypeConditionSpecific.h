@@ -32,7 +32,7 @@ namespace Network
 
     public:
         [[nodiscard]] bool IsVersionsConform(int version) const final;
-        [[nodiscard]] int GetMinVersion() const final;
+        [[nodiscard]] int GetMinVersion() const noexcept final;
         [[nodiscard]] int GetMaxVersion() const final;
 
     private:

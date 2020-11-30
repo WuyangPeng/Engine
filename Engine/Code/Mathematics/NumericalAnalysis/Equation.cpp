@@ -1,22 +1,24 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 13:03)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/24 17:52)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "Equation.h"
+#include "Detail/EquationFactory.h"
 #include "Detail/EquationImpl.h"
-#include "Detail/EquationFactory.h" 
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-Mathematics::Equation
-	::Equation(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
-	:m_Impl{ EquationFactory::Create(constant,once, secondary,thrice, quartic, epsilon) }
+Mathematics::Equation::Equation(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
+    : m_Impl{ EquationFactory::Create(constant, once, secondary, thrice, quartic, epsilon) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, Equation)
@@ -28,11 +30,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Equation, Substitution, doubl
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Mathematics, Equation, Substitution, Imaginary, const Mathematics::Equation::Imaginary);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetRealResultCount, int);
 
-
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Mathematics, Equation, GetImaginaryResultCount, int);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealBegin, const Mathematics::Equation::RealConstIterator);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetRealEnd, const Mathematics::Equation::RealConstIterator);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryBegin, const Mathematics::Equation::ImaginaryConstIterator);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, GetImaginaryEnd, const Mathematics::Equation::ImaginaryConstIterator);
-

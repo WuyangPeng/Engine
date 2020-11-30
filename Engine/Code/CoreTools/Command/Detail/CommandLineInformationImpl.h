@@ -33,7 +33,7 @@ namespace CoreTools
 
         // 返回第一个未处理参数的名字。
         [[nodiscard]] const std::string ExcessArguments() const;
-        [[nodiscard]] int GetExcessArgumentsCount() const;
+        [[nodiscard]] int GetExcessArgumentsCount() const noexcept;
 
         [[nodiscard]] bool GetBoolean(const std::string& name) const;  // 返回存在的选项
 

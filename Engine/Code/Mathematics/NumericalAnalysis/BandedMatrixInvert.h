@@ -1,15 +1,17 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:45)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/19 14:25)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "LinearSystemConstIteratorDetail.h"
 #include "Mathematics/Algebra/BandedMatrix.h"
 #include "Mathematics/Algebra/VariableMatrix.h"
 
@@ -17,32 +19,32 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class BandedMatrixInvert
-	{
-	public:
-		using ClassType = BandedMatrixInvert<Real>;
-		using Math = Math<Real>;
-		using BandedMatrix = BandedMatrix<Real>;
-		using VariableMatrix = VariableMatrix<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrixInvert final
+    {
+    public:
+        using ClassType = BandedMatrixInvert<Real>;
+        using Math = Math<Real>;
+        using BandedMatrix = BandedMatrix<Real>;
+        using VariableMatrix = VariableMatrix<Real>;
 
-	public:
-		explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
+    public:
+        explicit BandedMatrixInvert(const BandedMatrix& matrix, Real zeroTolerance = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const VariableMatrix GetInvert() const;
+        [[nodiscard]] const VariableMatrix GetInvert() const;
 
-	private:
-		void Solve();
-		void ForwardEliminate(int reduceRow);
-		void BackwardEliminate(int reduceRow);
+    private:
+        void Solve();
+        void ForwardEliminate(int reduceRow);
+        void BackwardEliminate(int reduceRow);
 
-	private:
-		Real m_ZeroTolerance;
-		BandedMatrix m_Matrix;
-		VariableMatrix m_Output;
-	};
+    private:
+        Real m_ZeroTolerance;
+        BandedMatrix m_Matrix;
+        VariableMatrix m_Output;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H

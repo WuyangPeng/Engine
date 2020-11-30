@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/19 14:01)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H
@@ -13,43 +16,42 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_HIDDEN_DECLARE EquationQuartic :public EquationImpl
-	{
-	public:
-		using ClassType = EquationQuartic;
-		using ParentType = EquationImpl;
+    class MATHEMATICS_HIDDEN_DECLARE EquationQuartic final : public EquationImpl
+    {
+    public:
+        using ClassType = EquationQuartic;
+        using ParentType = EquationImpl;
 
-	public:
-		EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = DoubleMath::GetZeroTolerance())  ;
-	 
+    public:
+        EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon = DoubleMath::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		  double Substitution(double value) const noexcept override;
-		  const Imaginary Substitution(const Imaginary& value) const override;
+        [[nodiscard]] double Substitution(double value) const noexcept final;
+        [[nodiscard]] const Imaginary Substitution(const Imaginary& value) const final;
 
-	private:
-		  double SubstitutionTangent(double solution) const noexcept override;
-		  const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
+    private:
+        [[nodiscard]] double SubstitutionTangent(double solution) const noexcept final;
+        [[nodiscard]] const Imaginary SubstitutionTangent(const Imaginary& solution) const final;
 
-		  void Solving() override;
-		  bool Predigest() override;
+        void Solving() final;
+        [[nodiscard]] bool Predigest() final;
 
-		double CalculateP()  const noexcept;
-		double CalculateQ()   const noexcept;
-		double CalculateR()   const noexcept;
-		void CalculateThriceEquation(double p, double q, double r);
+        [[nodiscard]] double CalculateP() const noexcept;
+        [[nodiscard]] double CalculateQ() const noexcept;
+        [[nodiscard]] double CalculateR() const noexcept;
+        void CalculateThriceEquation(double p, double q, double r);
 
-		void CalculateResult(double solution, double p, double q, double r);
-		void CalculateSecondaryEquation(double thriceSolution, double constant, double once);
+        void CalculateResult(double solution, double p, double q, double r);
+        void CalculateSecondaryEquation(double thriceSolution, double constant, double once);
 
-	private:
-		double m_Constant;
-		double m_Once;
-		double m_Secondary;
-		double m_Thrice;
-		double m_Quartic;
-	};
+    private:
+        double m_Constant;
+        double m_Once;
+        double m_Secondary;
+        double m_Thrice;
+        double m_Quartic;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_QUARTIC_H

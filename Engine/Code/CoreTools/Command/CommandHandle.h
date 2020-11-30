@@ -29,7 +29,7 @@ namespace CoreTools
 
         // 返回第一个未处理参数的名字。
         [[nodiscard]] const std::string ExcessArguments() const;
-        [[nodiscard]] int GetExcessArgumentsCount() const;
+        [[nodiscard]] int GetExcessArgumentsCount() const noexcept;
 
         // 设置数字参数的范围。
         // 如果范围是必需的，他们必须为每个参数设置。

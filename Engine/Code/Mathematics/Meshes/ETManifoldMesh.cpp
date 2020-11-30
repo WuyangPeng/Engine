@@ -214,7 +214,7 @@ bool Mathematics::ETManifoldMesh
 }
 
 bool Mathematics::ETManifoldMesh
-	::IsClosed () const
+	::IsClosed () const noexcept
 {
     EMapCIterator eiter = mEMap.begin();
     const EMapCIterator eend = mEMap.end();

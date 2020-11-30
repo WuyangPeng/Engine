@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 12:48)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/24 18:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_H
@@ -11,14 +14,10 @@
 
 #include "System/Helper/PragmaWarning/IteratorFacade.h"
 
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
-
 namespace Mathematics
 {
     template <typename ResultConstIter>
-    class EquationResultConstIterator : public boost::iterator_facade<EquationResultConstIterator<ResultConstIter>, ResultConstIter, boost::forward_traversal_tag>
+    class EquationResultConstIterator final : public boost::iterator_facade<EquationResultConstIterator<ResultConstIter>, ResultConstIter, boost::forward_traversal_tag>
     {
     public:
         using ClassType = EquationResultConstIterator<ResultConstIter>;
@@ -30,13 +29,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        const ResultValueType operator*() const;
+        [[nodiscard]] const ResultValueType operator*() const noexcept;
 
     private:
         friend class boost::iterator_core_access;
         void increment();
-        bool equal(const ClassType& other) const;
-        const ResultConstIter& dereference() const;
+        [[nodiscard]] bool equal(const EquationResultConstIterator& other) const;
+        [[nodiscard]] const ResultConstIter& dereference() const;
 
     private:
         ResultConstIter m_Iter;
@@ -45,6 +44,5 @@ namespace Mathematics
     template <typename ResultConstIter>
     std::ostream& operator<<(std::ostream& os, const EquationResultConstIterator<ResultConstIter>& iter);
 }
-#include STSTEM_WARNING_POP
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_H

@@ -1,123 +1,120 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/20 17:29)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.5.2.4 (2020/11/26 10:18)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H
 
 #include "SparseMatrix.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::SparseMatrix<Real>
-	::SparseMatrix(int rowsNumber, int columnsNumber)
-	:m_RowsNumber{ rowsNumber }, m_ColumnsNumber{ columnsNumber }, m_SparseMatrixEntry{}
+Mathematics::SparseMatrix<Real>::SparseMatrix(int rowsNumber, int columnsNumber)
+    : m_RowsNumber{ rowsNumber }, m_ColumnsNumber{ columnsNumber }, m_SparseMatrixEntry{}
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
-bool Mathematics::SparseMatrix<Real>
-	::IsValid() const  noexcept
+bool Mathematics::SparseMatrix<Real>::IsValid() const noexcept
 {
-	if (0 < m_RowsNumber && 0 < m_ColumnsNumber)
-		return true;
-	else
-		return false;
+    if (0 < m_RowsNumber && 0 < m_ColumnsNumber)
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-int Mathematics::SparseMatrix<Real>
-	::GetRowsNumber() const  noexcept
+int Mathematics::SparseMatrix<Real>::GetRowsNumber() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_RowsNumber;
+    return m_RowsNumber;
 }
 
 template <typename Real>
-int Mathematics::SparseMatrix<Real>
-	::GetColumnsNumber() const  noexcept
+int Mathematics::SparseMatrix<Real>::GetColumnsNumber() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_ColumnsNumber;
+    return m_ColumnsNumber;
 }
 
 template <typename Real>
-const Real& Mathematics::SparseMatrix<Real>
-	::operator()(int row, int column) const
+const Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < m_RowsNumber, "rowË÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= column && column < m_ColumnsNumber, "columnË÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_ASSERTION_0(0 <= row && row < m_RowsNumber, "rowË÷Òý´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= column && column < m_ColumnsNumber, "columnË÷Òý´íÎó£¡");
 
-	auto iter = m_SparseMatrixEntry.find(SparseMatrixIndex(row, column));
+    const auto iter = m_SparseMatrixEntry.find(SparseMatrixIndex{ row, column });
 
-	if (iter != m_SparseMatrixEntry.end())
-	{
-		return iter->second;
-	}
-	else
-	{
-		return sm_Zero;
-	}
+    if (iter != m_SparseMatrixEntry.cend())
+    {
+        return iter->second;
+    }
+    else
+    {
+        static constexpr auto zero = Math::GetValue(0);
+
+        MATHEMATICS_ASSERTION_0(Math::Approximate(zero, Math::GetValue(0), Math::GetZeroTolerance()), "¾²Ì¬const±äÁ¿±»ÐÞ¸Ä£¡");
+
+        return zero;
+    }
 }
 
 template <typename Real>
-Real& Mathematics::SparseMatrix<Real>
-	::operator()(int row, int column)
+Real& Mathematics::SparseMatrix<Real>::operator()(int row, int column)
 {
-	MATHEMATICS_CLASS_IS_VALID_1;
-	MATHEMATICS_ASSERTION_0(0 <= row && row < m_RowsNumber, "rowË÷Òý´íÎó£¡");
-	MATHEMATICS_ASSERTION_0(0 <= column && column < m_ColumnsNumber, "columnË÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_1;
+    MATHEMATICS_ASSERTION_0(0 <= row && row < m_RowsNumber, "rowË÷Òý´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(0 <= column && column < m_ColumnsNumber, "columnË÷Òý´íÎó£¡");
 
-	return m_SparseMatrixEntry[SparseMatrixIndex(row, column)];
-}
-
-
-template <typename Real>
-typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>
-	::GetBegin() const noexcept
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-
-	return ConstIter{ m_SparseMatrixEntry.begin() };
+    return m_SparseMatrixEntry[SparseMatrixIndex{ row, column }];
 }
 
 template <typename Real>
-typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>
-	::GetEnd() const noexcept
+typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>::GetBegin() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return ConstIter{ m_SparseMatrixEntry.end() };
+    return ConstIter{ m_SparseMatrixEntry.begin() };
 }
 
 template <typename Real>
-const Mathematics::VariableLengthVector<Real> Mathematics
-	::operator*(const SparseMatrix<Real>& matrix, const VariableLengthVector<Real>& vector)
+typename const Mathematics::SparseMatrix<Real>::ConstIter Mathematics::SparseMatrix<Real>::GetEnd() const noexcept
 {
-	VariableLengthVector<Real> result{ vector.GetSize() };
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	for (auto iter = matrix.GetBegin(), end = matrix.GetEnd(); iter != end; ++iter)
-	{
-		auto row = iter.GetKey().GetRow();
-		auto column = iter.GetKey().GetColumn();
-		auto value = iter.GetMapped();
-		result[row] += value * vector[column];
-		if (row != column)
-		{
-			result[column] += value * vector[row];
-		}
-	}
-
-	return result;
+    return ConstIter{ m_SparseMatrixEntry.end() };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H
+template <typename Real>
+const Mathematics::VariableLengthVector<Real> Mathematics::operator*(const SparseMatrix<Real>& matrix, const VariableLengthVector<Real>& vector)
+{
+    VariableLengthVector<Real> result{ vector.GetSize() };
+
+    for (auto iter = matrix.GetBegin(), end = matrix.GetEnd(); iter != end; ++iter)
+    {
+        auto row = iter.GetKey().GetRow();
+        auto column = iter.GetKey().GetColumn();
+        auto value = iter.GetMapped();
+        result[row] += value * vector[column];
+        if (row != column)
+        {
+            result[column] += value * vector[row];
+        }
+    }
+
+    return result;
+}
+
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_DETAIL_H

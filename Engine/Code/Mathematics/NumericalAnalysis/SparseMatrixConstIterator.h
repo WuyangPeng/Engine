@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 12:57)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/26 10:14)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
@@ -12,23 +15,24 @@
 #include "SparseMatrixIndex.h"
 
 #include "System/Helper/PragmaWarning/IteratorFacade.h"
+
 #include <map>
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26487)
+
 namespace Mathematics
 {
     template <typename Real>
-    class SparseMatrixConstIterator : public boost::iterator_facade<SparseMatrixConstIterator<Real>,
-                                                                    typename std::map<SparseMatrixIndex, Real>::const_iterator,
-                                                                    boost::forward_traversal_tag>
+    class SparseMatrixConstIterator final : public boost::iterator_facade<SparseMatrixConstIterator<Real>,
+                                                                          typename std::map<SparseMatrixIndex, Real>::const_iterator,
+                                                                          boost::forward_traversal_tag>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = SparseMatrixConstIterator<Real>;
-        using SparseMatrixIndexMap = typename std::map<SparseMatrixIndex, Real>;
-        using SparseMatrixConstIter = typename SparseMatrixIndexMap::const_iterator;
+        using SparseMatrixIndexContainer = typename std::map<SparseMatrixIndex, Real>;
+        using SparseMatrixConstIter = typename SparseMatrixIndexContainer::const_iterator;
+        using SparseMatrixKey = typename SparseMatrixIndexContainer::key_type;
+        using SparseMatrixMapped = typename SparseMatrixIndexContainer::mapped_type;
 
     public:
         SparseMatrixConstIterator() noexcept;
@@ -36,18 +40,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        const typename SparseMatrixIndexMap::key_type GetKey() const;
-        const typename SparseMatrixIndexMap::mapped_type GetMapped() const;
+        [[nodiscard]] const SparseMatrixKey GetKey() const noexcept;
+        [[nodiscard]] const SparseMatrixMapped GetMapped() const noexcept;
 
     private:
         friend class boost::iterator_core_access;
-        void increment();
-        bool equal(const ClassType& other) const;
-        const SparseMatrixConstIter& dereference() const;
+        void increment() noexcept;
+        [[nodiscard]] bool equal(const SparseMatrixConstIterator& other) const noexcept;
+        [[nodiscard]] const SparseMatrixConstIter& dereference() const noexcept;
 
     private:
         SparseMatrixConstIter m_Iter;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H

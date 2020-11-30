@@ -104,7 +104,7 @@ namespace Mathematics
 		bool Remove(int v0, int v1, int v2, int v3);
 
 		// A manifold mesh is closed if each face is shared twice.
-		bool IsClosed() const;
+                bool IsClosed() const noexcept;
 
 		// For debugging.  The function returns 'true' iff the text file has been
 		// created and saved.

@@ -23,7 +23,7 @@ Mathematics::ConformalMap<Real>
 	mSpheres = NEW1<Vector3D<Real> >(numPoints);
 
 	// Construct sparse matrix A nondiagonal entries.
-	typename LinearSystem<Real>::SparseMatrixType AMat(numEdges, numEdges);
+	typename LinearSystem<Real>::SparseMatrix AMat(numEdges, numEdges);
 	int i, e, t, v0, v1, v2;
 	Real value = Math<Real>::GetValue(0);
 	for (e = 0; e < numEdges; ++e)
@@ -67,8 +67,8 @@ Mathematics::ConformalMap<Real>
 	// Aonstruct sparse matrix A diagonal entries.
 	Real* tmp = NEW1<Real>(numPoints);
 	memset(tmp, 0, numPoints * sizeof(Real));
-	typename LinearSystem<Real>::SparseMatrixType::ConstIter iter = AMat.GetBegin();
-	typename LinearSystem<Real>::SparseMatrixType::ConstIter end = AMat.GetEnd();
+	typename LinearSystem<Real>::SparseMatrix::ConstIter iter = AMat.begin();
+	typename LinearSystem<Real>::SparseMatrix::ConstIter end = AMat.GetEnd();
 	for (/**/; iter != end; ++iter)
 	{
 		v0 = iter.GetKey().GetRow();

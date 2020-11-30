@@ -95,8 +95,8 @@ namespace Mathematics
 		bool RemoveTriangle (int v0, int v1, int v2);
 
 		// Topological operations.
-		bool IsManifold () const;
-		bool IsClosed () const;
+                bool IsManifold() const noexcept;
+                bool IsClosed() const noexcept;
 		bool IsConnected () const;
 
 		// Extract a connected component from the mesh and remove all the

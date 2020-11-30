@@ -54,7 +54,7 @@ namespace CoreTools
 
     private:
         void InitIOManager();
-        void ResetIOManager();
+        void ResetIOManager() noexcept;
         LogAppenderIOManager& Find(LogLevel type) noexcept;
 
     private:

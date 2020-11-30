@@ -1,17 +1,10 @@
 TODO Level 9
  
-0.5.2.3
+0.5.2.4
  
-18. （NumericalAnalysis）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
-19. （NumericalAnalysis）将EquationResult的ImaginaryLess类提取出来。
-20. （NumericalAnalysis）PolynomialRoots类有一些TODO需要完成。
-21. （NumericalAnalysis）SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 
-15. （NumericalAnalysis）重构NumericalAnalysis模块。
-16. （NumericalAnalysis）导出NumericalAnalysis模块。
-17. （NumericalAnalysis）将内部类ImaginaryLess提出。
-18. （NumericalAnalysis）修改NumericalAnalysis迭代器的设计，看能否改成std。
-19. （NumericalAnalysis）将NumericalAnalysis模块的数组改成array。
-20. （NumericalAnalysis）完成SingularValueDecompositionGTE、SymmetricEigensolverGTE类。
+9.  （Query）重构Query模块。
+10. （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。
+
 2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
 3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
 4.  （综合）数学库的函数大部分要定义成noexcept。
@@ -26,8 +19,7 @@ TODO Level 9
 1.  （综合）替换掉boost库的静态断言为标准语法。
 6.  （综合）外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
 8.  （综合）修改数学库中使用的static_cast<Real>(0.5)和Math<Real>::sm_Zero，改用其他方式简化。
-9.  （Query）重构Query模块。
-10. （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。
+
 11. （Approximation）重构Approximation模块。
 12. （Approximation）导出Approximation模块。
 13. （Distance）重构Distance模块。

@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/20 12:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/19 13:58)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_IMPL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_IMPL_H
@@ -26,27 +29,27 @@ namespace Mathematics
 
     public:
         explicit EquationImpl(double epsilon = DoubleMath::GetZeroTolerance()) noexcept;
-        virtual ~EquationImpl();
-        EquationImpl(const EquationImpl&) = default;
-        EquationImpl& operator=(const EquationImpl&) = default;
-        EquationImpl(EquationImpl&&) = default;
-        EquationImpl& operator=(EquationImpl&&) = default;
+        virtual ~EquationImpl() noexcept = default;
+        EquationImpl(const EquationImpl& rhs) = default;
+        EquationImpl& operator=(const EquationImpl& rhs) = default;
+        EquationImpl(EquationImpl&& rhs) noexcept = default;
+        EquationImpl& operator=(EquationImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        double GetEpsilon() const noexcept;
+        [[nodiscard]] double GetEpsilon() const noexcept;
 
-        bool IsRealResult() const noexcept;
-        int GetRealResultCount() const;
-        int GetImaginaryResultCount() const;
+        [[nodiscard]] bool IsRealResult() const noexcept;
+        [[nodiscard]] int GetRealResultCount() const;
+        [[nodiscard]] int GetImaginaryResultCount() const;
 
-        const RealConstIterator GetRealBegin() const noexcept;
-        const RealConstIterator GetRealEnd() const noexcept;
-        const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
-        const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
+        [[nodiscard]] const RealConstIterator GetRealBegin() const noexcept;
+        [[nodiscard]] const RealConstIterator GetRealEnd() const noexcept;
+        [[nodiscard]] const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
+        [[nodiscard]] const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
-        virtual double Substitution(double value) const = 0;
-        virtual const Imaginary Substitution(const Imaginary& value) const = 0;
+        [[nodiscard]] virtual double Substitution(double value) const = 0;
+        [[nodiscard]] virtual const Imaginary Substitution(const Imaginary& value) const = 0;
 
     protected:
         void SetRealResult(double result);
@@ -56,10 +59,10 @@ namespace Mathematics
         void SortResult();
 
     private:
-        double NewtonMethod(double solution) const;
-        const Imaginary NewtonMethod(const Imaginary& solution) const;
-        const RealVector NewRealResult() const;
-        const ImaginaryVector NewImaginaryResult() const;
+        [[nodiscard]] double NewtonMethod(double solution) const;
+        [[nodiscard]] const Imaginary NewtonMethod(const Imaginary& solution) const;
+        [[nodiscard]] const RealVector NewRealResult() const;
+        [[nodiscard]] const ImaginaryVector NewImaginaryResult() const;
 
         void CleanSolution() noexcept;
         void Validate();
@@ -68,11 +71,11 @@ namespace Mathematics
         void DisplaceRealResult(const RealVector& result);
         void DisplaceImaginaryResult(const ImaginaryVector& result);
 
-        virtual double SubstitutionTangent(double solution) const = 0;
-        virtual const Imaginary SubstitutionTangent(const Imaginary& solution) const = 0;
+        [[nodiscard]] virtual double SubstitutionTangent(double solution) const = 0;
+        [[nodiscard]] virtual const Imaginary SubstitutionTangent(const Imaginary& solution) const = 0;
 
         virtual void Solving() = 0;
-        virtual bool Predigest() = 0;
+        [[nodiscard]] virtual bool Predigest() = 0;
 
     private:
         static constexpr auto sm_MaxTime = 10;

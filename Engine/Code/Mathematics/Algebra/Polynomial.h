@@ -16,6 +16,7 @@
 #include "PolynomialDivideDetail.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "Mathematics/Algebra/PolynomialDivide.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>

@@ -22,15 +22,18 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <int N>
 Mathematics::Integer<N>::Integer() noexcept
     : m_IntegerData{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 template <int N>
-Mathematics::Integer<N>::Integer(const DataType& data)  
+Mathematics::Integer<N>::Integer(const DataType& data)
     : m_IntegerData{ data }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -46,12 +49,15 @@ Mathematics::Integer<N>::Integer(T value)
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <int N>
 Mathematics::Integer<N>::Integer(const IntegerData& data) noexcept
     : m_IntegerData{ data }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 template <int N>
 template <int Other>
@@ -78,7 +84,7 @@ bool Mathematics::Integer<N>::IsZero() const noexcept
 }
 
 template <int N>
-void Mathematics::Integer<N>::SetZero()  
+void Mathematics::Integer<N>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

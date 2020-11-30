@@ -1,76 +1,64 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/20 13:00)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.5.2.4 (2020/11/19 14:08)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "EquationOnce.h"
-
-#include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
-Mathematics::EquationOnce
-	::EquationOnce(double constant, double once, double epsilon)
-	:ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }
+Mathematics::EquationOnce::EquationOnce(double constant, double once, double epsilon)
+    : ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }
 {
-	Calculate();
+    Calculate();
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
-
- 
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, EquationOnce)
 
-double Mathematics::EquationOnce
-	::Substitution(double value) const noexcept
+double Mathematics::EquationOnce::Substitution(double value) const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Constant + value * m_Once;
+    return m_Constant + value * m_Once;
 }
 
-const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce
-	::Substitution(const Imaginary& value) const
+const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::Substitution(const Imaginary& value) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Constant + value * m_Once;
+    return m_Constant + value * m_Once;
 }
 
-double Mathematics::EquationOnce ::SubstitutionTangent([[maybe_unused]] double solution) const noexcept
+double Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] double solution) const noexcept
 {
- 
-
-	return m_Once;
+    return m_Once;
 }
 
-const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce ::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
+const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
 {
- 
-
-	return m_Once;
+    return m_Once;
 }
 
-void Mathematics::EquationOnce
-	::Solving()
+void Mathematics::EquationOnce::Solving()
 {
-	MATHEMATICS_ASSERTION_0(GetEpsilon() < DoubleMath::FAbs(m_Once), "³ýÁã´íÎó£¡");
+    MATHEMATICS_ASSERTION_0(GetEpsilon() < DoubleMath::FAbs(m_Once), "³ýÁã´íÎó£¡");
 
-	const auto solution = -m_Constant / m_Once;
+    const auto solution = -m_Constant / m_Once;
 
-	SetRealResult(solution);
+    SetRealResult(solution);
 }
 
-bool Mathematics::EquationOnce
-	::Predigest() noexcept
+bool Mathematics::EquationOnce::Predigest() noexcept
 {
-	return false;
+    return false;
 }
-
-
-

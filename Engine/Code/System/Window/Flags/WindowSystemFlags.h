@@ -16,7 +16,7 @@
     #include <TlHelp32.h>
 #endif  // SYSTEM_PLATFORM_WIN32
 
-namespace SYSTEM_PLATFORM_WIN32
+namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 

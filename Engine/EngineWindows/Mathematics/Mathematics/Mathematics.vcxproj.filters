@@ -253,6 +253,9 @@
     <Filter Include="Objects3D 头文件\Detail">
       <UniqueIdentifier>{ae12d271-a85c-4241-a910-d240cb61b533}</UniqueIdentifier>
     </Filter>
+    <Filter Include="NumericalAnalysis 模板文件\Detail">
+      <UniqueIdentifier>{73f77d8e-0517-4f01-9bf1-575ee7fc697c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -471,9 +474,6 @@
       <Filter>NumericalAnalysis 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixIndex.cpp">
-      <Filter>NumericalAnalysis 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradient.cpp">
       <Filter>NumericalAnalysis 源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Equation.cpp">
@@ -700,6 +700,108 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Rational\RationalVector3.cpp">
       <Filter>Rational 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\BandedMatrixInvert.cpp">
+      <Filter>NumericalAnalysis 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1Root.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Root.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodRoot.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethod.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\EigenDecomposition.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianQuadrature.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystem.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Root.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\SolveSymmetricConjugateGradient.cpp">
+      <Filter>NumericalAnalysis 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrix.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixConstIterator.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3Tools.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolarDecompositionValue.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1Data.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNData.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeN.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\MinimizeNGetMinimum.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\NoniterativeEigen3x3.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeEuler.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeImplicitEuler.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeMidpoint.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\OdeRungeKutta4.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRoots.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsRational.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\QDUDecompositionValue.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\RombergIntegral.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValue.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecomposition.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\TrapezoidRule.cpp">
+      <Filter>NumericalAnalysis 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3238,31 +3340,13 @@
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Calculate.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Node.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Root.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Storage.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Calculate.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Node.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Root.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Storage.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethod.h">
@@ -3287,12 +3371,6 @@
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystem.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemConstIterator.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemInverse.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3Tools.h">
@@ -3358,12 +3436,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecomposition.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveBanded.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradient.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrix.h">
       <Filter>NumericalAnalysis 头文件</Filter>
     </ClInclude>
@@ -3382,34 +3454,16 @@
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1RootDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2CalculateDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2NodeDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Detail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2RootDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2StorageDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3CalculateDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3NodeDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Detail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3RootDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3StorageDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodCalculateDetail.h">
@@ -3430,13 +3484,7 @@
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\GaussianQuadratureDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemConstIteratorDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemInverseDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3ToolsDetail.h">
@@ -3491,12 +3539,6 @@
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveBandedDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SolveSymmetricConjugateGradientDetail.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SparseMatrixConstIteratorDetail.h">
@@ -3928,12 +3970,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Rational\SignRationalDetail.h">
       <Filter>Rational 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolverGTE.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionGTE.h">
-      <Filter>NumericalAnalysis 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersector.h">
       <Filter>Intersection 头文件</Filter>
     </ClInclude>
@@ -4014,12 +4050,6 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Flags\RootType.h">
       <Filter>NumericalAnalysis 头文件\Flags</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SymmetricEigensolverGTEDetail.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionGTEDeteil.h">
-      <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Query\Flags\QueryType.h">
       <Filter>Query 头文件\Flags</Filter>
@@ -4407,6 +4437,144 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Objects3D\ConvexPolyhedron3Achieve.h">
       <Filter>Objects3D 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NumericalAnalysisInternalFwd.h">
+      <Filter>NumericalAnalysis 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BandedMatrixInvertAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1Achieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect1RootAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2Achieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect2RootAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3RootAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Bisect3Achieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2NodeDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2StorageDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2CalculateDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2Storage.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2Calculate.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect2Node.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3Node.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3Storage.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3Calculate.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3CalculateDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3NodeDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\Bisect3StorageDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\BrentsMethodRootAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EigenDecompositionImpl.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\EigenDecompositionImplDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\EigenDecompositionAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\LinearSystemAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\SolveBandedDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\SolveBanded.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\LinearSystemInverse.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\LinearSystemInverseDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\SolveSymmetricConjugateGradientDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\SolveSymmetricConjugateGradient.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Matrix3ToolsAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolarDecompositionValueAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Minimize1DataAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\NoniterativeEigen3x3Impl.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\NoniterativeEigen3x3ImplDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\NoniterativeEigen3x3Achieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\PolynomialRootsImpl.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\PolynomialRootsImplDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\PolynomialRootsRationalImpl.h">
+      <Filter>NumericalAnalysis 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\Detail\PolynomialRootsRationalImplDetail.h">
+      <Filter>NumericalAnalysis 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\PolynomialRootsRationalAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\QDUDecompositionValueAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionAchieve.h">
+      <Filter>NumericalAnalysis 模板文件</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -87,7 +87,7 @@ namespace Mathematics
 		bool RemoveEdge (int v0, int v1);
 		
 		// Manifold mesh is closed if each vertex is shared twice.
-		bool IsClosed () const;
+                bool IsClosed() const noexcept;
 		
 		// For debugging.
 		void Print (const char* filename);

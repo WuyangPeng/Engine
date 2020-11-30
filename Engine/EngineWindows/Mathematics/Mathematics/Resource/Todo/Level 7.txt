@@ -1,4 +1,13 @@
 TODO Level 7
  
-0.5.2.3
+0.5.2.4
 
+1. （NumericalAnalysis）PolynomialRoots类完成以下功能：
+						bool FindNewton(const Polynomial& polynomial, int digits);
+						bool FindEigenvalues(const Polynomial& polynomial, bool doBalancing);
+						bool FindNewton(const Polynomial& polynomial, Real xMin, Real xMax,int digits);
+2. （NumericalAnalysis）将EquationResult的ImaginaryLess类提取出来。
+3. （NumericalAnalysis）SingularValueDecomposition类的Calculate函数需要从“矩阵计算”实现其他QR分解和奇异值分解代码，然后给用户指定这里使用哪些方法的能力。 
+4. （NumericalAnalysis）将内部类ImaginaryLess提出。
+5. （NumericalAnalysis）修改NumericalAnalysis迭代器的设计，看能否改成std。
+6. （NumericalAnalysis）新加SingularValueDecompositionGTE、SymmetricEigensolverGTE类。

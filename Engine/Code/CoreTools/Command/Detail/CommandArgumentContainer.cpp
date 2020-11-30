@@ -198,7 +198,7 @@ const string CoreTools::CommandArgumentContainer::ExcessArguments() const
     THROW_EXCEPTION(SYSTEM_TEXT("命令行没有未处理的参数！"s));
 }
 
-int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const
+int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

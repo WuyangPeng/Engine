@@ -519,6 +519,7 @@
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Bind.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\CallTraits.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Chrono.h" />
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26051.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26110.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26135.h" />
     <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26400.h" />

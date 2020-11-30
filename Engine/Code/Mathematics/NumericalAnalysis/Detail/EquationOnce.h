@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:43)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/19 14:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H
@@ -13,32 +16,31 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_HIDDEN_DECLARE EquationOnce : public EquationImpl
-	{
-	public:
-		using ClassType = EquationOnce;
-		using ParentType = EquationImpl;
+    class MATHEMATICS_HIDDEN_DECLARE EquationOnce final : public EquationImpl
+    {
+    public:
+        using ClassType = EquationOnce;
+        using ParentType = EquationImpl;
 
-	public:
-		EquationOnce(double constant, double once, double epsilon = DoubleMath::GetZeroTolerance());
-	 
+    public:
+        EquationOnce(double constant, double once, double epsilon = DoubleMath::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		  double Substitution(double value) const noexcept override;
-		  const Imaginary Substitution(const Imaginary& value) const override;
+        [[nodiscard]] double Substitution(double value) const noexcept final;
+        [[nodiscard]] const Imaginary Substitution(const Imaginary& value) const final;
 
-	private:
-		  double SubstitutionTangent(double solution) const noexcept override;
-		  const Imaginary SubstitutionTangent(const Imaginary& solution) const override;
+    private:
+        [[nodiscard]] double SubstitutionTangent(double solution) const noexcept final;
+        [[nodiscard]] const Imaginary SubstitutionTangent(const Imaginary& solution) const final;
 
-		  void Solving() override;
-		  bool Predigest() noexcept override;
+        void Solving() final;
+        [[nodiscard]] bool Predigest() noexcept final;
 
-	private:
-		double m_Constant;
-		double m_Once;
-	};
+    private:
+        double m_Constant;
+        double m_Once;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H

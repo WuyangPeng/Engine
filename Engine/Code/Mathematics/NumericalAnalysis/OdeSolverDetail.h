@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/20 14:55)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.5.2.4 (2020/11/27 10:05)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H
@@ -11,125 +14,108 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
+#include <gsl/gsl_util>
+
 template <typename Real, typename UserDataType>
-Mathematics::OdeSolver<Real, UserDataType>
-	::OdeSolver(int dimension, Real step, Function function, const UserDataType* userData)
-	:m_Dimension{ dimension }, m_Step{ step }, m_Function{ function }, m_UserData{ userData }, m_FunctionValue(dimension)
+Mathematics::OdeSolver<Real, UserDataType>::Data::Data(Real t, const Container& x)
+    : m_T{ t }, m_X{ x }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename UserDataType>
-Mathematics::OdeSolver<Real, UserDataType>
-	::~OdeSolver()
+Mathematics::OdeSolver<Real, UserDataType>::OdeSolver(int dimension, Real step, Function function, const UserDataType* userData)
+    : m_Dimension{ dimension }, m_Step{ step }, m_Function{ function }, m_UserData{ userData }, m_FunctionValue(dimension)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real, typename UserDataType>
-bool Mathematics::OdeSolver<Real, UserDataType>
-	::IsValid() const noexcept
+bool Mathematics::OdeSolver<Real, UserDataType>::IsValid() const noexcept
 {
-	if (0 < m_Dimension && m_Function != nullptr && m_FunctionValue.size() == static_cast<size_t>(m_Dimension))
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (0 < m_Dimension && m_Function != nullptr && m_FunctionValue.size() == gsl::narrow_cast<size_t>(m_Dimension))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-Real Mathematics::OdeSolver<Real, UserDataType>
-	::GetStepSize() const
+Real Mathematics::OdeSolver<Real, UserDataType>::GetStepSize() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_Step;
+    return m_Step;
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::OdeSolver<Real, UserDataType>
-	::SetUserData(const UserDataType* userData)
+void Mathematics::OdeSolver<Real, UserDataType>::SetUserData(const UserDataType* userData) noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-	m_UserData = userData;
+    m_UserData = userData;
 }
 
 template <typename Real, typename UserDataType>
-const UserDataType* Mathematics::OdeSolver<Real, UserDataType>
-	::GetUserData() const
+const UserDataType* Mathematics::OdeSolver<Real, UserDataType>::GetUserData() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_UserData;
+    return m_UserData;
 }
 
 template <typename Real, typename UserDataType>
-void Mathematics::OdeSolver<Real, UserDataType>
-	::SetStepSize(Real step)
+void Mathematics::OdeSolver<Real, UserDataType>::SetStepSize(Real step) noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_1;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-	m_Step = step;
+    m_Step = step;
 }
 
 // protected
 template <typename Real, typename UserDataType>
-void Mathematics::OdeSolver<Real, UserDataType>
-	::CalculateFunctionValue(Real tIn, const RealVector& xIn)
+void Mathematics::OdeSolver<Real, UserDataType>::CalculateFunctionValue(Real tIn, const Container& xIn)
 {
-	m_FunctionValue = m_Function(tIn, xIn, m_UserData);
+    m_FunctionValue = m_Function(tIn, xIn, m_UserData);
 }
 
 // protected
 template <typename Real, typename UserDataType>
-int Mathematics::OdeSolver<Real, UserDataType>
-	::GetDimension() const
+int Mathematics::OdeSolver<Real, UserDataType>::GetDimension() const noexcept
 {
-	return m_Dimension;
+    return m_Dimension;
 }
 
 // protected
 template <typename Real, typename UserDataType>
-Real Mathematics::OdeSolver<Real, UserDataType>
-	::GetStepFunctionValue(int index) const
+Real Mathematics::OdeSolver<Real, UserDataType>::GetStepFunctionValue(int index) const
 {
-	MATHEMATICS_ASSERTION_0(0 <= index && index < m_Dimension, "Ë÷Òý´íÎó£¡");
-
-	return m_Step * m_FunctionValue[index];
+    return m_Step * m_FunctionValue.at(index);
 }
 
 // protected
 template <typename Real, typename UserDataType>
-Real Mathematics::OdeSolver<Real, UserDataType>
-	::GetFunctionValue(int index) const
+Real Mathematics::OdeSolver<Real, UserDataType>::GetFunctionValue(int index) const
 {
-	MATHEMATICS_ASSERTION_0(0 <= index && index < m_Dimension, "Ë÷Òý´íÎó£¡");
-
-	return m_FunctionValue[index];
+    return m_FunctionValue.at(index);
 }
 
 // protected
 template <typename Real, typename UserDataType>
-typename const Mathematics::OdeSolver<Real, UserDataType>::RealVector Mathematics::OdeSolver<Real, UserDataType>
-	::GetFunctionValue() const
+typename const Mathematics::OdeSolver<Real, UserDataType>::Container Mathematics::OdeSolver<Real, UserDataType>::GetFunctionValue() const
 {
-	return m_FunctionValue;
+    return m_FunctionValue;
 }
 
 // protected
 template <typename Real, typename UserDataType>
-void Mathematics::OdeSolver<Real, UserDataType>
-	::SetFunctionValue(const RealVector& functionValue)
+void Mathematics::OdeSolver<Real, UserDataType>::SetFunctionValue(const Container& functionValue)
 {
-	m_FunctionValue = functionValue;
+    m_FunctionValue = functionValue;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H
-
-
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_DETAIL_H

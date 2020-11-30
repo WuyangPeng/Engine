@@ -1,88 +1,83 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 14:32)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/24 18:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
 
 #include "EquationResultConstIterator.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h" 
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h" 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-#include SYSTEM_WARNING_DISABLE(26487) 
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+
 template <typename ResultConstIter>
-Mathematics::EquationResultConstIterator<ResultConstIter>
-	::EquationResultConstIterator()
-	:m_Iter{}
+Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIterator()
+    : m_Iter{}
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename ResultConstIter>
-Mathematics::EquationResultConstIterator<ResultConstIter>
-	::EquationResultConstIterator(const ResultConstIter& iter) noexcept
-	:m_Iter{ iter }
+Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIterator(const ResultConstIter& iter) noexcept
+    : m_Iter{ iter }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename ResultConstIter>
-bool Mathematics::EquationResultConstIterator<ResultConstIter>
-	::IsValid() const noexcept
+bool Mathematics::EquationResultConstIterator<ResultConstIter>::IsValid() const noexcept
 {
-	return true;
+    return true;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename ResultConstIter>
-void Mathematics::EquationResultConstIterator<ResultConstIter>
-	::increment()
+void Mathematics::EquationResultConstIterator<ResultConstIter>::increment()
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
-	++m_Iter;
+    ++m_Iter;
 }
 
 template <typename ResultConstIter>
-bool Mathematics::EquationResultConstIterator<ResultConstIter>
-	::equal(const ClassType& other) const
+bool Mathematics::EquationResultConstIterator<ResultConstIter>::equal(const EquationResultConstIterator& other) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Iter == other.m_Iter;
+    return m_Iter == other.m_Iter;
 }
 
 template <typename ResultConstIter>
-const ResultConstIter& Mathematics::EquationResultConstIterator<ResultConstIter>
-	::dereference() const
+const ResultConstIter& Mathematics::EquationResultConstIterator<ResultConstIter>::dereference() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return m_Iter;
+    return m_Iter;
 }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename ResultConstIter>
-const typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>
-	::operator*() const
+const typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>::operator*() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-	return *m_Iter;
-}
-
-template <typename ResultConstIter>
-std::ostream& Mathematics
-	::operator<<(std::ostream& os, const EquationResultConstIterator<ResultConstIter>& iter)
-{
-	os << *iter;
-
-	return os;
+    return *m_Iter;
 }
 #include STSTEM_WARNING_POP
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
+
+template <typename ResultConstIter>
+std::ostream& Mathematics::operator<<(std::ostream& os, const EquationResultConstIterator<ResultConstIter>& iter)
+{
+    os << *iter;
+
+    return os;
+}
+
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H

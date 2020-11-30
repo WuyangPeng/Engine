@@ -112,12 +112,12 @@ void Mathematics::ConversionRational<T>::InitFloatingPoint(T value)
 {
     static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
-    FloatingPointAnalysis<T> floatingPointAnalysis{ value };
+    const FloatingPointAnalysis<T> floatingPointAnalysis{ value };
 
     if (floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Valid || floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Zero)
     {
         m_NumeratorMantissa = floatingPointAnalysis.GetRealMantissa();
-        m_DenominatorMantissa = uint64_t(1) << TraitsType::g_ExponentShifting;
+        m_DenominatorMantissa = uint64_t{ 1 } << TraitsType::g_ExponentShifting;
         m_Symbol = floatingPointAnalysis.GetSymbol();
 
         auto shifting = floatingPointAnalysis.GetRealExponent();

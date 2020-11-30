@@ -53,7 +53,7 @@ namespace CoreTools
 
         // 返回第一个未处理参数的名字。
         [[nodiscard]] const std::string ExcessArguments() const;
-        [[nodiscard]] int GetExcessArgumentsCount() const;
+        [[nodiscard]] int GetExcessArgumentsCount() const noexcept;
 
     private:
         using CommandArgumentUsedContainer = std::map<std::string, CommandArgument>;

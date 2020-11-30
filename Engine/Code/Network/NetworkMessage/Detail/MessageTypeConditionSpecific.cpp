@@ -45,7 +45,7 @@ bool Network::MessageTypeConditionSpecific::IsVersionsConform(int version) const
         return false;
 }
 
-int Network::MessageTypeConditionSpecific::GetMinVersion() const
+int Network::MessageTypeConditionSpecific::GetMinVersion() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 

@@ -173,7 +173,7 @@ Iter CoreTools::SpanIterator<Iter>::GetCurrent() const noexcept
 }
 
 template <typename Iter>
-typename CoreTools::SpanIterator<Iter>::DifferenceType CoreTools::SpanIterator<Iter>::GetRemainingCount() const
+typename CoreTools::SpanIterator<Iter>::DifferenceType CoreTools::SpanIterator<Iter>::GetRemainingCount() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

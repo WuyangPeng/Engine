@@ -1,47 +1,53 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:50)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/30 11:11)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Base/MathDetail.h"
+
 #include <type_traits>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class Minimize1Data
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Minimize1Data final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = Minimize1Data<Real>;
+        using ClassType = Minimize1Data<Real>;
+        using Math = Math<Real>;
 
-	public:
-		Minimize1Data();
-		Minimize1Data(Real minLocation, Real minValue);
+    public:
+        Minimize1Data() noexcept;
+        Minimize1Data(Real minLocation, Real minValue) noexcept;
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		Real GetMinLocation() const;
-		Real GetMinValue() const;
+        [[nodiscard]] Real GetMinLocation() const noexcept;
+        [[nodiscard]] Real GetMinValue() const noexcept;
 
-		void SetMinLocation(Real minLocation);
-		void SetMinValue(Real minValue);
-		void SetInitValue();
-		void CompareData(Real minLocation, Real minValue);
+        void SetMinLocation(Real minLocation) noexcept;
+        void SetMinValue(Real minValue) noexcept;
+        void SetInitValue() noexcept;
+        void CompareData(Real minLocation, Real minValue) noexcept;
 
-	private:
-		Real m_MinLocation;
-		Real m_MinValue;
-	};
+    private:
+        Real m_MinLocation;
+        Real m_MinValue;
+    };
 
-	using Minimize1Dataf = Minimize1Data<float>;
-	using Minimize1Datad = Minimize1Data<double>;
+    using FloatMinimize1Data = Minimize1Data<float>;
+    using DoubleMinimize1Data = Minimize1Data<double>;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_H

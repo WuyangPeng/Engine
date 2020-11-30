@@ -34,7 +34,7 @@ CoreTools::CommandLineInformation::CommandLineInformation(const char* commandLin
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CommandLineInformation)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandLineInformation, ExcessArguments, const string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandLineInformation, GetExcessArgumentsCount, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandLineInformation, GetExcessArgumentsCount, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetBoolean, string, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetInteger, string, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, CommandLineInformation, GetFloat, string, float)

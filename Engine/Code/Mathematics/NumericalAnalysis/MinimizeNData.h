@@ -1,52 +1,58 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/20 12:50)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.4 (2020/11/26 14:16)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Base/MathDetail.h"
+
 #include <type_traits>
 #include <vector>
 
 namespace Mathematics
 {
-	template <typename Real>
-	class MinimizeNData
-	{
-	public:
-		static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
+    template <typename Real>
+    class MinimizeNData final
+    {
+    public:
+        static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-		using ClassType = MinimizeNData<Real>;
-		using RealVector = std::vector<Real>;
-		using ConstIter = typename RealVector::const_iterator;
+        using ClassType = MinimizeNData<Real>;
+        using Math = Math<Real>;
+        using Container = std::vector<Real>;
+        using ConstIter = typename Container::const_iterator;
 
-	public:
-		MinimizeNData();
-		MinimizeNData(const RealVector& minLocation, Real minValue);
+    public:
+        MinimizeNData() noexcept;
+        MinimizeNData(const Container& minLocation, Real minValue);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		const ConstIter GetMinLocationBegin() const;
-		const ConstIter GetMinLocationEnd() const;
-		Real GetMinLocation(int index) const;
-		Real GetMinValue() const;
-		int GetDimensions() const;
+        [[nodiscard]] const ConstIter GetMinLocationBegin() const noexcept;
+        [[nodiscard]] const ConstIter GetMinLocationEnd() const noexcept;
+        [[nodiscard]] Real GetMinLocation(int index) const;
+        [[nodiscard]] Real GetMinValue() const noexcept;
+        [[nodiscard]] int GetDimensions() const;
 
-		void Set(Real minValue, Real minLocation, const Real* directionCurrent);
+        void Set(Real minValue, Real minLocation, const Container& direction, int directionCurrent);
 
-		const RealVector& GetMinLocation() const;
+        [[nodiscard]] const Container& GetMinLocation() const noexcept;
 
-	private:
-		RealVector m_MinLocation;
-		Real m_MinValue;
-	};
+    private:
+        Container m_MinLocation;
+        Real m_MinValue;
+    };
 
-	using MinimizeNDataf = MinimizeNData<float>;
-	using MinimizeNDatad = MinimizeNData<double>;
+    using FloatMinimizeNData = MinimizeNData<float>;
+    using DoubleMinimizeNData = MinimizeNData<double>;
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
