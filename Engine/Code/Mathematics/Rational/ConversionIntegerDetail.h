@@ -79,7 +79,7 @@ void Mathematics::ConversionInteger<T>::Init(T value, const FloatType&)
 {
     static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
-    FloatingPointAnalysis<T> floatingPointAnalysis{ value };
+    const FloatingPointAnalysis<T> floatingPointAnalysis{ value };
 
     const auto floatingPointAnalysisType = floatingPointAnalysis.GetType();
 
@@ -102,7 +102,7 @@ void Mathematics::ConversionInteger<T>::Init(T value, const DoubleType&)
 {
     static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
-    FloatingPointAnalysis<T> floatingPointAnalysis{ value };
+    const FloatingPointAnalysis<T> floatingPointAnalysis{ value };
 
     const auto floatingPointAnalysisType = floatingPointAnalysis.GetType();
 

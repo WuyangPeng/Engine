@@ -165,4 +165,12 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3Impl<Real>::GetMMCorner
     return m_Center - GetExtent0() * GetAxis0() - GetExtent1() * GetAxis1();
 }
 
+template <typename Real>
+Real Mathematics::Rectangle3Impl<Real>::GetEpsilon() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return m_Epsilon;
+}
+
 #endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_DETAIL_H

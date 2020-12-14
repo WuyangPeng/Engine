@@ -1,5 +1,5 @@
 TODO Level 0
  
-0.5.2.4
+0.5.2.5
 
 1.  （Rational）ConversionInteger的uint64_t存在溢出的问题。

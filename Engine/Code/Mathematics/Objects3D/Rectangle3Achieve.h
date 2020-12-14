@@ -132,4 +132,12 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetMMCorner() c
     return m_Impl->GetMMCorner();
 }
 
+template <typename Real>
+const Mathematics::Rectangle3<Real> Mathematics::Rectangle3<Real>::GetMove(Real t, const Vector3D& velocity) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return Rectangle3{ GetCenter() + t * velocity, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), m_Impl->GetEpsilon() };
+}
+
 #endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_ACHIEVE_H

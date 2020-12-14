@@ -341,7 +341,7 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\ReadMe.md" />
     <Text Include="Resource\References\Cpp\Advanced\Advanced.txt" />
     <Text Include="Resource\References\Cpp\Advanced\API Design for C++.txt" />
     <Text Include="Resource\References\Cpp\Advanced\Cross-Platform Development in C++.txt" />

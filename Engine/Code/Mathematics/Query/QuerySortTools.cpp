@@ -1,37 +1,37 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 09:44)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/11/30 15:30)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "QuerySortTools.h"
 #include "Detail/QuerySortToolsImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
 
-Mathematics::QuerySortTools
-	::QuerySortTools(int firstValue, int secondValue)
-	:m_Impl{ make_shared<ImplType>(firstValue,secondValue) }
+Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1)
+    : m_Impl{ make_shared<ImplType>(value0, value1) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-Mathematics::QuerySortTools
-	::QuerySortTools(int firstValue, int secondValue, int thirdValue)
-	:m_Impl{ make_shared<ImplType>(firstValue,secondValue,thirdValue) }
+Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1, int value2)
+    : m_Impl{ make_shared<ImplType>(value0, value1, value2) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-Mathematics::QuerySortTools
-	::QuerySortTools(int firstValue, int secondValue, int thirdValue, int fourthValue)
-	:m_Impl{ make_shared<ImplType>(firstValue,secondValue,thirdValue,fourthValue) }
+Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1, int value2, int value3)
+    : m_Impl{ make_shared<ImplType>(value0, value1, value2, value3) }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, QuerySortTools)

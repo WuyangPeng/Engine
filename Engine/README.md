@@ -1,10 +1,10 @@
-çº¿ç¨‹æ ¸å¿ƒæ¸²æŸ“å¼•æ“ï¼ˆThreading Core Render Engineï¼‰
+Ïß³ÌºËĞÄäÖÈ¾ÒıÇæ£¨Threading Core Render Engine£©
 
-å¼•æ“åŒ…å«åä¸ƒä¸ªæ¨¡å—ï¼Œä¸ƒä¸ªå±‚çº§ï¼š
-ç¬¬ä¸€å±‚ï¼šç³»ç»Ÿï¼ˆSystemï¼‰ã€‚
-ç¬¬äºŒå±‚ï¼šæ ¸å¿ƒå·¥å…·ï¼ˆCoreToolsï¼‰ã€‚
-ç¬¬ä¸‰å±‚ï¼šç½‘ç»œï¼ˆNetworkï¼‰ã€æ•°æ®åº“ï¼ˆDatabaseï¼‰ã€è„šæœ¬ï¼ˆScriptï¼‰ã€æ•°å­¦ï¼ˆMathematicsï¼‰ã€éŸ³æ•ˆï¼ˆSoundEffectï¼‰ã€è¾“å…¥è¾“å‡ºï¼ˆInputOutputï¼‰ã€‚
-ç¬¬å››å±‚ï¼šèµ„æºç®¡ç†ï¼ˆResourceManagerï¼‰ã€æ¸²æŸ“ï¼ˆRenderingï¼‰ã€ç‰©ç†ï¼ˆPhysicsï¼‰ã€å›¾åƒåˆ†æï¼ˆImagicsï¼‰ã€‚
-ç¬¬äº”å±‚ï¼šåŠ¨ç”»ï¼ˆAnimationï¼‰ã€äººå·¥æ™ºèƒ½ï¼ˆArtificialIntellegenceï¼‰ã€ç•Œé¢ï¼ˆUserInterfaceï¼‰ã€‚
-ç¬¬å…­å±‚ï¼šè¾…åŠ©å·¥å…·ï¼ˆAssistToolsï¼‰ã€‚
-ç¬¬ä¸ƒå±‚ï¼šæ¡†æ¶ï¼ˆFrameworkï¼‰ã€‚
+ÒıÇæ°üº¬Ê®Æß¸öÄ£¿é£¬Æß¸ö²ã¼¶£º
+µÚÒ»²ã£ºÏµÍ³£¨System£©¡£
+µÚ¶ş²ã£ººËĞÄ¹¤¾ß£¨CoreTools£©¡£
+µÚÈı²ã£ºÍøÂç£¨Network£©¡¢Êı¾İ¿â£¨Database£©¡¢½Å±¾£¨Script£©¡¢ÊıÑ§£¨Mathematics£©¡¢ÒôĞ§£¨SoundEffect£©¡¢ÊäÈëÊä³ö£¨InputOutput£©¡£
+µÚËÄ²ã£º×ÊÔ´¹ÜÀí£¨ResourceManager£©¡¢äÖÈ¾£¨Rendering£©¡¢ÎïÀí£¨Physics£©¡¢Í¼Ïñ·ÖÎö£¨Imagics£©¡£
+µÚÎå²ã£º¶¯»­£¨Animation£©¡¢ÈË¹¤ÖÇÄÜ£¨ArtificialIntellegence£©¡¢½çÃæ£¨UserInterface£©¡£
+µÚÁù²ã£º¸¨Öú¹¤¾ß£¨AssistTools£©¡£
+µÚÆß²ã£º¿ò¼Ü£¨Framework£©¡£

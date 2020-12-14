@@ -1,65 +1,47 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 19:01)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/04 18:42)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESLUT_FACTORY_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_FACTORY_DETAIL_H
 
-#include "DistanceResultFactory.h"
-#include "DistanceMultipleClosestPointsResultDetail.h"
 #include "DistanceClosestPointsParameterResultDetail.h"
+#include "DistanceMultipleClosestPointsResultDetail.h"
+#include "DistanceResultFactory.h"
 
 template <typename Real, typename Vector>
-Mathematics::DistanceResultFactory<Real, Vector>
-	::DistanceResultFactory()
+typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance)
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real, typename Vector>
-bool Mathematics::DistanceResultFactory<Real, Vector>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-template <typename Real, typename Vector>
-typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>
-	::Create(Real distance)
-{
-	return std::make_shared<DistanceResultImpl<Real, Vector>>(distance);
+    return std::make_shared<DistanceResultImpl<Real, Vector>>(distance);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>
-	::Create(Real distance, Real contactTime)
+typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance, Real contactTime)
 {
-	return std::make_shared<DistanceContactTimeResult<Real, Vector>>(distance, contactTime);
+    return std::make_shared<DistanceContactTimeResult<Real, Vector>>(distance, contactTime);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>
-	::Create(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
+typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
 {
-	return std::make_shared<DistanceClosestPointsResult<Real, Vector>>(distance, contactTime, lhsClosestPoint, rhsClosestPoint);
+    return std::make_shared<DistanceClosestPointsResult<Real, Vector>>(distance, contactTime, lhsClosestPoint, rhsClosestPoint);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>
-	::Create(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
+typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
 {
-	return std::make_shared<DistanceMultipleClosestPointsResult<Real, Vector>>(distance, contactTime, lhsClosestPoints, rhsClosestPoints);
+    return std::make_shared<DistanceMultipleClosestPointsResult<Real, Vector>>(distance, contactTime, lhsClosestPoints, rhsClosestPoints);
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>
-	::Create(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter)
+typename Mathematics::DistanceResultFactory<Real, Vector>::DistanceResultImplPtr Mathematics::DistanceResultFactory<Real, Vector>::Create(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter)
 {
-	return std::make_shared<DistanceClosestPointsParameterResult<Real, Vector>>(distance, contactTime, lhsClosestPoint, rhsClosestPoint, lhsParameter, rhsParameter);
+    return std::make_shared<DistanceClosestPointsParameterResult<Real, Vector>>(distance, contactTime, lhsClosestPoint, rhsClosestPoint, lhsParameter, rhsParameter);
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_RESLUT_FACTORY_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_RESLUT_FACTORY_DETAIL_H

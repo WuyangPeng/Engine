@@ -61,6 +61,8 @@ namespace Mathematics
         // 返回8个顶点
         [[nodiscard]] const VerticesType ComputeVertices() const;
 
+        [[nodiscard]] const Frustum3 GetMove(Real t, const Vector3D& velocity) const;
+
     private:
         // Update()函数必须被调用在更改了m_DirectionMin，m_DirectionMax，m_UpBound或m_RightBound时。
         // 该值m_DirectionRatio，m_MTwoUF和m_MTwoRF都依赖于这些值的变化。

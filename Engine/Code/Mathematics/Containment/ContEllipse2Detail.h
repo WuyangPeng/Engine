@@ -19,8 +19,8 @@ Mathematics::Ellipse2<Real> Mathematics
     // eigenvalues and U[0] and U[1] are corresponding unit-length
     // eigenvectors.
 	auto box = GaussPointsFit2<Real>(points).GetBox2();
-	Real diag[2]{ box.GetFirstExtent(),box.GetSecondExtent() };
-	Vector2D<Real> axis[2]{  box.GetFirstAxis(),box.GetSecondAxis()};
+	Real diag[2]{ box.GetExtent0(),box.GetExtent1() };
+	Vector2D<Real> axis[2]{  box.GetAxis0(),box.GetAxis1()};
 
     // If either eigenvalue is nonpositive, adjust the D[] values so that
     // we actually build an ellipse.

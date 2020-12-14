@@ -23,6 +23,7 @@ namespace Mathematics
 		using Vector2D = Vector2D<Real>;
 		using Points = std::vector<Vector2D>;
 		using Box2 = Box2<Real>;
+		using Math = Math<Real>;
 
 	public:
 		ContBox2();

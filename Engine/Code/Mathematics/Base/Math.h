@@ -50,7 +50,12 @@ namespace Mathematics
         [[nodiscard]] static Real Exp(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] static Real Pow(Real base, Real exponent) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] static Real Square(Real value) noexcept;
+
+        /// @brief  计算浮点数的平方根。
+        /// @pre    value >= 0。
+        /// @post   Fabs(result * result - value) <= GetZeroTolerance()。
         [[nodiscard]] static Real Sqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+
         [[nodiscard]] static Real InvSqrt(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
         [[nodiscard]] static Real CubeRoot(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 

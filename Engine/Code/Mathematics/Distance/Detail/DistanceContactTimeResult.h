@@ -1,41 +1,45 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 17:08)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/04 18:51)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "DistanceResultImpl.h"
 
 namespace Mathematics
 {
-	template <typename Real, typename Vector>
-	class DistanceContactTimeResult : public DistanceResultImpl<Real, Vector>
-	{
-	public:
-		using ClassType = DistanceContactTimeResult<Real, Vector>;
-		using ParentType = DistanceResultImpl<Real, Vector>;
-		using ImplTypePtr = ParentType::ImplTypePtr;
+    template <typename Real, typename Vector>
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE DistanceContactTimeResult : public DistanceResultImpl<Real, Vector>
+    {
+    public:
+        using ClassType = DistanceContactTimeResult<Real, Vector>;
+        using ParentType = DistanceResultImpl<Real, Vector>;
+        using ImplTypePtr = ParentType::ImplTypePtr;
 
-	public:
-		DistanceContactTimeResult(Real distance, Real contactTime);
-		virtual ~DistanceContactTimeResult();
+    public:
+        DistanceContactTimeResult(Real distance, Real contactTime) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// 发生在动态查询其最小距离的时间。
-		  Real GetContactTime() const override;
-		  void SetContactTime(Real contactTime) override;
+        // 发生在动态查询其最小距离的时间。
+        [[nodiscard]] Real GetContactTime() const noexcept override;
+        [[nodiscard]] void SetContactTime(Real contactTime) noexcept override;
 
-		  ImplTypePtr Clone() const override;
+        [[nodiscard]] ImplTypePtr Clone() const override;
 
-		  bool isHaveContactTime() const override;
+        [[nodiscard]] bool isHaveContactTime() const noexcept override;
 
-	private:
-		Real m_ContactTime;
-	};
+    private:
+        Real m_ContactTime;
+    };
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_H

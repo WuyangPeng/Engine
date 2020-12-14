@@ -1,77 +1,86 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 17:07)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/05 23:49)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector3D.h"
-#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
+#include <memory>
 #include <vector>
 
 namespace Mathematics
 {
-	template <typename Real, typename Vector>
-	class DistanceResultImpl;
+    template <typename Real, typename Vector>
+    class DistanceResultImpl;
 
-	template <typename Real, typename Vector>
-	class DistanceResult
-	{
-	public:
-		using ClassType = DistanceResult<Real, Vector>;
-		using ImplType = DistanceResultImpl<Real, Vector>;
-		using ClassShareType = CoreTools::DelayCopyUnsharedClasses;
-		using ClosestPoints = std::vector<Vector>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DistanceResultImpl<float, Vector2D<float>>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DistanceResultImpl<double, Vector2D<double>>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DistanceResultImpl<float, Vector3D<float>>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DistanceResultImpl<double, Vector3D<double>>>;
 
-	public:
-		explicit DistanceResult(Real distance);
-		DistanceResult(Real distance, Real contactTime);
-		DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint);
-		DistanceResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints);
-		DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter);
+    template <typename Real, typename Vector>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DistanceResultImpl<Real, Vector>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real, typename Vector>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceResult final
+    {
+    public:
+        using DistanceResultImpl = DistanceResultImpl<Real, Vector>;
+        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(DistanceResult);
 
-		Real GetDistance() const;
+        using ClosestPoints = std::vector<Vector>;
 
-		// 发生在动态查询其最小距离的时间。
-		Real GetContactTime() const;
+    public:
+        explicit DistanceResult(Real distance);
+        DistanceResult(Real distance, Real contactTime);
+        DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint);
+        DistanceResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints);
+        DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter);
 
-		// 关于两个对象的最近点。这些在静态或动态查询时是有效的。
-		// 单个对象上的集最近点的如果不是一个点时，在这种情况下，GetSize函数返回值大于1。
-		// GetPoint可以支持查询整个最近点的数组。
-		const Vector GetLhsClosestPoint() const;
-		const Vector GetRhsClosestPoint() const;
-		const Vector GetLhsClosestPoint(int index) const;
-		const Vector GetRhsClosestPoint(int index) const;
-		int GetLhsClosestPointSize() const;
-		int GetRhsClosestPointSize() const;
+        CLASS_INVARIANT_DECLARE;
 
-		void SetDistance(Real distance);
-		void SetContactTime(Real contactTime);
-		void SetSqrtDistance();
-		void Set(Real distance, Real contactTime);
+        [[nodiscard]] Real GetDistance() const noexcept;
 
-		Real GetLhsParameter() const;
-		Real GetRhsParameter() const;
+        // 发生在动态查询其最小距离的时间。
+        [[nodiscard]] Real GetContactTime() const noexcept;
 
-	private:
-		void Copy();
+        // 关于两个对象的最近点。这些在静态或动态查询时是有效的。
+        // 单个对象上的集最近点的如果不是一个点时，在这种情况下，GetSize函数返回值大于1。
+        // GetPoint可以支持查询整个最近点的数组。
+        [[nodiscard]] const Vector GetLhsClosestPoint() const;
+        [[nodiscard]] const Vector GetRhsClosestPoint() const;
+        [[nodiscard]] const Vector GetLhsClosestPoint(int index) const;
+        [[nodiscard]] const Vector GetRhsClosestPoint(int index) const;
+        [[nodiscard]] int GetLhsClosestPointSize() const;
+        [[nodiscard]] int GetRhsClosestPointSize() const;
 
-	private:
-		IMPL_TYPE_DECLARE(DistanceResult);
-	};
+        void SetDistance(Real distance);
+        void SetContactTime(Real contactTime);
+        void SetSqrtDistance();
+        void Set(Real distance, Real contactTime);
 
-	using DistanceResult2f = DistanceResult<float, FloatVector2D>;
-	using DistanceResult3f = DistanceResult<float, FloatVector3D>;
-	using DistanceResult2d = DistanceResult<double, DoubleVector2D>;
-	using DistanceResult3d = DistanceResult<double, DoubleVector3D>;
+        [[nodiscard]] Real GetLhsParameter() const;
+        [[nodiscard]] Real GetRhsParameter() const;
+
+    private:
+        IMPL_TYPE_DECLARE(DistanceResult);
+    };
+
+    using FloatDistanceResult2 = DistanceResult<float, FloatVector2D>;
+    using FloatDistanceResult3 = DistanceResult<float, FloatVector3D>;
+    using DoubleDistanceResult2 = DistanceResult<double, DoubleVector2D>;
+    using DoubleDistanceResult3 = DistanceResult<double, DoubleVector3D>;
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_RESULT_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_RESULT_H

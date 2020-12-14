@@ -67,6 +67,8 @@ namespace Mathematics
         [[nodiscard]] const Vector3D GetMPCorner() const;  // C - e0 * A0 + e1 * A1
         [[nodiscard]] const Vector3D GetMMCorner() const;  // C - e0 * A0 - e1 * A1
 
+        [[nodiscard]] const Rectangle3 GetMove(Real t, const Vector3D& velocity) const;
+
     private:
         IMPL_TYPE_DECLARE(Rectangle3);
     };

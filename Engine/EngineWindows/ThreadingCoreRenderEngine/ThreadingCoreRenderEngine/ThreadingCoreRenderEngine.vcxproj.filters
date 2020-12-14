@@ -210,9 +210,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="Resource\Schedule.txt">
       <Filter>资源文件</Filter>
     </Text>
@@ -1478,6 +1475,9 @@
     </Text>
     <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Game AI Pro.txt">
       <Filter>资源文件\References\GameDesign\ArtificialIntellegence</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@
 
 #include "StaticTestIntersectorTriangle3Sphere3.h"
 #include "StaticTestIntersectorSegment3Sphere3.h"
-#include "Mathematics/Distance/Distance3D/DistPoint3Triangle3Detail.h"
+#include "Mathematics/Distance/Distance3D/DistancePoint3Triangle3Detail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
@@ -37,7 +37,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
 	::Test ()
 {
-	DistPoint3Triangle3<Real> calc{ mSphere.GetCenter(), mTriangle };
+	DistancePoint3Triangle3<Real> calc{ mSphere.GetCenter(), mTriangle };
 	auto sqrDistance = calc.GetSquared().GetDistance();
 	auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
     if( sqrDistance <= rSqr)

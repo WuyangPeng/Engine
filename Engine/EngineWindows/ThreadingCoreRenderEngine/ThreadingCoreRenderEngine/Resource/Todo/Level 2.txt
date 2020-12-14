@@ -1,5 +1,5 @@
 TODO Level 2
 
-0.5.2.4 
+0.5.2.5
 
-1.	£¨ÆäËûÓïÑÔ£©ÔÄ¶Á¡¶Effective Java¡·¡£
+1.	ï¼ˆå…¶ä»–è¯­è¨€ï¼‰é˜…è¯»ã€ŠEffective Javaã€‹ã€‚

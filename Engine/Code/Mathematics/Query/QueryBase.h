@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 09:52)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/11/30 13:14)
 
 #ifndef MATHEMATICS_QUERY_QUERY_H
 #define MATHEMATICS_QUERY_QUERY_H
@@ -13,24 +16,24 @@
 
 namespace Mathematics
 {
-	class MATHEMATICS_DEFAULT_DECLARE QueryBase
-	{
-	public:
-		using ClassType = QueryBase;
+    class MATHEMATICS_DEFAULT_DECLARE QueryBase
+    {
+    public:
+        using ClassType = QueryBase;
 
-	public:
-		QueryBase() noexcept;
-		virtual ~QueryBase();
-		
-		QueryBase(const QueryBase&) = default;
-		 QueryBase& operator=(const QueryBase&) = default;
-		 QueryBase(QueryBase&&) = default;
-		 QueryBase& operator=(QueryBase&&) = default;
+    public:
+        QueryBase() noexcept = default;
+        virtual ~QueryBase() noexcept = default;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        QueryBase(const QueryBase& rhs) = default;
+        QueryBase& operator=(const QueryBase& rhs) = default;
+        QueryBase(QueryBase&& rhs) noexcept = default;
+        QueryBase& operator=(QueryBase&& rhs) noexcept = default;
 
-		virtual QueryType GetType() const = 0;
-	};
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+        [[nodiscard]] virtual QueryType GetType() const noexcept = 0;
+    };
 }
 
-#endif // MATHEMATICS_QUERY_QUERY_H
+#endif  // MATHEMATICS_QUERY_QUERY_H

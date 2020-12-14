@@ -1,62 +1,65 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/23 17:18)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê∞Ê±æ£∫0.5.2.5 (2020/12/10 12:52)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
-#define MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H 
+#define MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Ray3.h"
-#include "Mathematics/Objects3D/Segment3.h"
 #include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Distance/DistanceBase.h"
+#include "Mathematics/Distance/DistanceInternalFwd.h"
+#include "Mathematics/Objects3D/Ray3.h"
+#include "Mathematics/Objects3D/Segment3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DistanceRay3Segment3 : public DistanceBase<Real, Vector3D<Real> >
-	{
-	public:
-		using ClassType = DistanceRay3Segment3<Real>;
-		using Vector3D = Vector3D<Real>;
-		using ParentType = DistanceBase<Real, Vector3D>;
-		using Ray3 = Ray3<Real>;
-		using Segment3 = Segment3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
-		using DistanceResult = typename ParentType::DistanceResult;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Segment3 : public DistanceBase<Real, Vector3D<Real>>
+    {
+    public:
+        using ClassType = DistanceRay3Segment3<Real>;
+        using Vector3D = Vector3D<Real>;
+        using ParentType = DistanceBase<Real, Vector3D>;
+        using Ray3 = Ray3<Real>;
+        using Segment3 = Segment3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
+        using Math = typename ParentType::Math;
+        using DistanceResult = typename ParentType::DistanceResult;
 
-	public:
-		DistanceRay3Segment3(const Ray3& ray, const Segment3& segment);
-		virtual ~DistanceRay3Segment3();
+    public:
+        DistanceRay3Segment3(const Ray3& ray, const Segment3& segment) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		const Ray3 GetRay() const;
-		const Segment3 GetSegment() const;
+        [[nodiscard]] const Ray3 GetRay() const noexcept;
+        [[nodiscard]] const Segment3 GetSegment() const noexcept;
 
-		// æ≤Ã¨æ‡¿Î≤È—Ø°£
-		 const DistanceResult GetSquared() const override;
+        // æ≤Ã¨æ‡¿Î≤È—Ø°£
+        [[nodiscard]] const DistanceResult GetSquared() const override;
 
-		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
+        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
-	private:
-		const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-		const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-		const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+    private:
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
 
-	private:
-		Ray3 m_Ray;
-		Segment3 m_Segment;
-	};
+    private:
+        Ray3 m_Ray;
+        Segment3 m_Segment;
+    };
 
-	using DistanceRay3Segment3f = DistanceRay3Segment3<float>;
-	using DistanceRay3Segment3d = DistanceRay3Segment3<double>;
+    using FloatDistanceRay3Segment3 = DistanceRay3Segment3<float>;
+    using DoubleDistanceRay3Segment3 = DistanceRay3Segment3<double>;
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H

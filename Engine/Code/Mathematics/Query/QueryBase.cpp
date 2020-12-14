@@ -1,25 +1,15 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 09:44)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/11/30 13:15)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "QueryBase.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-Mathematics::QueryBase
-	::QueryBase() noexcept
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-Mathematics::QueryBase
-	::~QueryBase()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, QueryBase)
-

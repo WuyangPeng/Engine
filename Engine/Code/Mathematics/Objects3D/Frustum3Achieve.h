@@ -180,6 +180,22 @@ const typename Mathematics::Frustum3<Real>::VerticesType Mathematics::Frustum3<R
     return vertex;
 }
 
+template <typename Real>
+const Mathematics::Frustum3<Real> Mathematics::Frustum3<Real>::GetMove(Real t, const Vector3D& velocity) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return Frustum3{ GetOrigin() + t * velocity,
+                     GetDirectionVector(),
+                     GetUpVector(),
+                     GetRightVector(),
+                     GetDirectionMin(),
+                     GetDirectionMax(),
+                     GetUpBound(),
+                     GetRightBound(),
+                     m_Epsilon };
+}
+
 // private
 template <typename Real>
 void Mathematics::Frustum3<Real>::Update() noexcept

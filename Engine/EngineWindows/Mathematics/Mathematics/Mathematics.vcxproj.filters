@@ -256,6 +256,24 @@
     <Filter Include="NumericalAnalysis 模板文件\Detail">
       <UniqueIdentifier>{73f77d8e-0517-4f01-9bf1-575ee7fc697c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Approximation 源文件">
+      <UniqueIdentifier>{8d061ec7-d76d-4069-a6da-8676cfdd4449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Approximation 模板文件\Detail">
+      <UniqueIdentifier>{a0c1e0bd-dc6d-4fdb-8fda-ed07b871afa4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Approximation 头文件\Detail">
+      <UniqueIdentifier>{85520bb5-4fec-40c4-b7f6-a221f32b4fff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance 源文件">
+      <UniqueIdentifier>{65bfaf45-be73-4c2c-baa5-9cd15ca73be9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance 源文件\Distance2D">
+      <UniqueIdentifier>{88b7a31a-4893-496c-9f62-f2bf7a1b7553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Distance 源文件\Distance3D">
+      <UniqueIdentifier>{d17a5a9c-4625-4da8-9a16-b095dc627a3b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 2.txt">
@@ -803,6 +821,216 @@
     <ClCompile Include="..\..\..\Code\Mathematics\NumericalAnalysis\TrapezoidRule.cpp">
       <Filter>NumericalAnalysis 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query2.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query2Filtered.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query2Int64.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query2Integer.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query2Rational.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\QueryDotTools.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query3.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query3Filtered.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query3Int64.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query3Integer.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Query\Query3Rational.cpp">
+      <Filter>Query 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\CircleFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\EllipseFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\EllipsoidFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\HeightLineFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\HeightPlaneFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\OrthogonalPlaneFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\ParaboloidFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPower.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\QuadraticCircleFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit2.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\SphereFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\QuadraticSphereFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2Powers.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3Powers.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4Powers.cpp">
+      <Filter>Approximation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\DistanceResult.cpp">
+      <Filter>Distance 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\DistanceBase.cpp">
+      <Filter>Distance 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Line2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Ray2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Segment2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Box2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ellipse2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Hyperbola2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Line2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ray2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Segment2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Ray2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Segment2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceSegment2Segment2.cpp">
+      <Filter>Distance 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Box3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Line3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Ray3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Segment3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Box3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ellipsoid3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Line3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ray3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Segment3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Ray3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Segment3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Circle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Triangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Circle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\Mathematics\MathematicsLib.h">
@@ -1090,9 +1318,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Algebra\Vector2DDetail.h">
       <Filter>Algebra 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFitPowersData.h">
-      <Filter>Approximation 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPower.h">
       <Filter>Approximation 头文件</Filter>
     </ClInclude>
@@ -1123,12 +1348,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3.h">
       <Filter>Approximation 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3Update.h">
-      <Filter>Approximation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateData.h">
-      <Filter>Approximation 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2.h">
       <Filter>Approximation 头文件</Filter>
     </ClInclude>
@@ -1145,9 +1364,6 @@
       <Filter>Approximation 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3.h">
-      <Filter>Approximation 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3Item.h">
       <Filter>Approximation 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3.h">
@@ -1195,12 +1411,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3Detail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateDataDetail.h">
-      <Filter>Approximation 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3UpdateDetail.h">
-      <Filter>Approximation 模板文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2Detail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
@@ -1217,9 +1427,6 @@
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3Detail.h">
-      <Filter>Approximation 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3ItemDetail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3Detail.h">
@@ -1259,9 +1466,6 @@
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4PowersDetail.h">
-      <Filter>Approximation 模板文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFitPowersDataDetail.h">
       <Filter>Approximation 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPowerDetail.h">
@@ -1915,12 +2119,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\Detail\DistancePoint3Ellipsoid3ToolDetail.h">
       <Filter>Distance 模板文件\Distance3D\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Triangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3.h">
       <Filter>Distance 头文件\Distance3D</Filter>
     </ClInclude>
@@ -1957,57 +2155,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3.h">
       <Filter>Distance 头文件\Distance3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Box3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Circle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Triangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Circle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Frustum3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Plane3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Tetrahedron3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Triangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Box3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Triangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRectangle3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Box3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Rectangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Triangle3.h">
-      <Filter>Distance 头文件\Distance3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3Detail.h">
       <Filter>Distance 模板文件\Distance3D</Filter>
     </ClInclude>
@@ -2042,63 +2189,6 @@
       <Filter>Distance 模板文件\Distance3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Box3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Circle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistLine3Triangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Circle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Frustum3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Plane3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Tetrahedron3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistPoint3Triangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Box3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRay3Triangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistRectangle3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Box3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistSegment3Triangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Rectangle3Detail.h">
-      <Filter>Distance 模板文件\Distance3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistTriangle3Triangle3Detail.h">
       <Filter>Distance 模板文件\Distance3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Interpolation\IntpAkimaNonuniform1.h">
@@ -4575,6 +4665,375 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\NumericalAnalysis\SingularValueDecompositionAchieve.h">
       <Filter>NumericalAnalysis 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Query\QueryDotToolsAchieve.h">
+      <Filter>Query 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CylinderFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\CylinderFit3UpdateData.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\CylinderFit3Update.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\CylinderFit3UpdateDataDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\CylinderFit3UpdateDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipseByArcs2ImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipseByArcs2Impl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseByArcs2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipseFit2Impl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipseFit2ImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipseFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipsoidFit3Impl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\EllipsoidFit3ImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\EllipsoidFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GaussPointsFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatArcFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\GreatArcFit3Item.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\GreatArcFit3ItemDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\GreatCircleFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightLineFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\HeightPlaneFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalLineFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\OrthogonalPlaneFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\ParaboloidFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialSamplesPowerAchieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticCircleFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit2Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\SphereFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\QuadraticSphereFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit3Impl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\CircleFit2Achieve.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit3ImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit4Impl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit4ImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4Achieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit2PowersImpl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit3PowersImpl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit4PowersImpl.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit4PowersImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit2PowersImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFit3PowersImplDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit2PowersAchieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFitPowersData.h">
+      <Filter>Approximation 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\Detail\PolynomialFitPowersDataDetail.h">
+      <Filter>Approximation 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit3PowersAchieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Approximation\PolynomialFit4PowersAchieve.h">
+      <Filter>Approximation 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceInternalFwd.h">
+      <Filter>Distance 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceResultAchieve.h">
+      <Filter>Distance 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\DistanceBaseAchieve.h">
+      <Filter>Distance 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Line2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Ray2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceLine2Segment2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Box2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ellipse2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Hyperbola2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Line2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Ray2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistancePoint2Segment2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Ray2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceRay2Segment2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance2D\DistanceSegment2Segment2Achieve.h">
+      <Filter>Distance 模板文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Box3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Box3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceCircle3Circle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Box3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Line3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Ray3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Segment3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Box3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ellipsoid3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Line3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Ray3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Segment3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Ray3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Segment3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Segment3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Circle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Circle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Circle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Triangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Triangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Circle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Plane3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Tetrahedron3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Triangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Box3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Triangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRectangle3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Box3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Triangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Rectangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Triangle3Detail.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Circle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Plane3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Tetrahedron3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Triangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Box3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Triangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRectangle3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Box3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Triangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Rectangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Triangle3.h">
+      <Filter>Distance 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceLine3Triangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Circle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

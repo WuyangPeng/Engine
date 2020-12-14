@@ -1,63 +1,65 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/10 15:06)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê∞Ê±æ£∫0.5.2.5 (2020/12/08 21:45)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_H
-#define MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_H 
+#define MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_H
 
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/AlgebraFwd.h"
+#include "Mathematics/Distance/DistanceBase.h"
+#include "Mathematics/Distance/DistanceInternalFwd.h"
 #include "Mathematics/Objects2D/Ray2.h"
 #include "Mathematics/Objects2D/Segment2.h"
-#include "Mathematics/Distance/DistanceFwd.h"
-#include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DistanceRay2Segment2 : public DistanceBase<Real, Vector2D<Real>>
-	{
-	public:
-		using ClassType = DistanceRay2Segment2<Real>;
-		using Vector2D = Vector2D<Real>;
-		using ParentType = DistanceBase<Real, Vector2D>;
-		using Ray2 = Ray2<Real>;
-		using Segment2 = Segment2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
-		using DistanceResult = typename ParentType::DistanceResult; 
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay2Segment2 : public DistanceBase<Real, Vector2D<Real>>
+    {
+    public:
+        using ClassType = DistanceRay2Segment2<Real>;
+        using Vector2D = Vector2D<Real>;
+        using ParentType = DistanceBase<Real, Vector2D>;
+        using Ray2 = Ray2<Real>;
+        using Segment2 = Segment2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
+        using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
+        using Math = typename ParentType::Math;
+        using DistanceResult = typename ParentType::DistanceResult;
 
-	public:
-		DistanceRay2Segment2(const Ray2& ray, const Segment2& segment);
-		virtual ~DistanceRay2Segment2();
+    public:
+        DistanceRay2Segment2(const Ray2& ray, const Segment2& segment) noexcept;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		const Ray2 GetRay() const;
-		const Segment2 GetSegment() const;
+        [[nodiscard]] const Ray2 GetRay() const noexcept;
+        [[nodiscard]] const Segment2 GetSegment() const noexcept;
 
-		// æ≤Ã¨æ‡¿Î≤È—Ø°£
-		  const DistanceResult GetSquared() const override;
+        // æ≤Ã¨æ‡¿Î≤È—Ø°£
+        [[nodiscard]] const DistanceResult GetSquared() const override;
 
-		// ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£	
-		  const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
+        // ∫Ø ˝º∆À„∂ØÃ¨æ‡¿Î≤È—Ø°£
+        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
 
-	private:
-		const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-		const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
-		const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
+    private:
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
+        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine2Line2Tool& tool, Real rhsExtent) const;
 
-	private:
-		Ray2 m_Ray;
-		Segment2 m_Segment;
-	};
+    private:
+        Ray2 m_Ray;
+        Segment2 m_Segment;
+    };
 
-	using DistanceRay2Segment2f = DistanceRay2Segment2<float>;
-	using DistanceRay2Segment2d = DistanceRay2Segment2<double>;
+    using FloatDistanceRay2Segment2 = DistanceRay2Segment2<float>;
+    using DoubleDistanceRay2Segment2 = DistanceRay2Segment2<double>;
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY2_SEGMENT2_H

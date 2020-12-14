@@ -1,10 +1,10 @@
 TODO Level 9
  
-0.5.2.4
+0.5.2.5
  
-9.  （Query）重构Query模块。
-10. （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。
-
+13. （Distance）重构Distance模块。
+14. （Distance）导出Distance模块。
+15. （Distance）补全Distance模块。
 2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
 3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
 4.  （综合）数学库的函数大部分要定义成noexcept。
@@ -20,11 +20,6 @@ TODO Level 9
 6.  （综合）外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
 8.  （综合）修改数学库中使用的static_cast<Real>(0.5)和Math<Real>::sm_Zero，改用其他方式简化。
 
-11. （Approximation）重构Approximation模块。
-12. （Approximation）导出Approximation模块。
-13. （Distance）重构Distance模块。
-14. （Distance）导出Distance模块。
-15. （Distance）补全Distance模块。
 16. （Intersection）重构Intersection模块。
 17. （Intersection）导出Intersection模块。
 18. （Intersection）补全Intersection模块。 

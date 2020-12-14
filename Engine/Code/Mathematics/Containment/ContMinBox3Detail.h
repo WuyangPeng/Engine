@@ -200,7 +200,7 @@ Mathematics::MinBox3<Real>
 			auto axis0 = box2.GetAxis0().GetX()*U + box2.GetAxis0().GetY()*V;
 			auto axis1 = box2.GetAxis1().GetX()*U + box2.GetAxis1().GetY()*V;
 			auto axis2 = W;
-			auto center = origin + box2.GetCenter().GetX()*U +box2.GetCenter().GetY()*V+ mMinBox.GetThirdExtent()*W;
+			auto center = origin + box2.GetCenter().GetX()*U +box2.GetCenter().GetY()*V+ mMinBox.GetExtent2()*W;
 
 			mMinBox.Set(center, axis0, axis1, axis2, extent0, extent1, extent2);
         }

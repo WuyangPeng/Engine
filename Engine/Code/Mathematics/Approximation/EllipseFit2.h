@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 12:28)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/02 19:03)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H
@@ -23,47 +26,47 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class EllipseFit2
-	{
-	public:
-		using ClassType = EllipseFit2<Real>;
-		using Vector2D = Vector2D<Real>;
-		using Points = std::vector<Vector2D>;
-		using Matrix2 = Matrix2<Real>;
+    template <typename Real>
+    class EllipseFit2Impl;
 
-	public:
-		explicit EllipseFit2(const Points& points);
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<double>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<Real>>;
 
-		Real GetExactly() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseFit2 final
+    {
+    public:
+        using EllipseFit2Impl = EllipseFit2Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EllipseFit2);
 
-		const Vector2D GetCenter() const;
-		const Matrix2 GetRotate() const;
-		Real GetFirstExtent() const;
-		Real GetSecondExtent() const;
+        using Vector2D = Vector2D<Real>;
+        using Points = std::vector<Vector2D>;
+        using Matrix2 = Matrix2<Real>;
 
-		int GetNumPoint() const;
-		const Vector2D GetPoint(int index) const;
+    public:
+        explicit EllipseFit2(const Points& points);
 
-	private:
-		void Fit2();
-		void InitialGuess();
+        CLASS_INVARIANT_DECLARE;
 
-		static Real Energy(const std::vector<Real>& input, const ClassType* userData);
+        [[nodiscard]] Real GetExactly() const noexcept;
 
-	private:
-		Points m_Points;
-		Vector2D m_Center;
-		Matrix2 m_Rotate;
-		Real m_FirstExtent;
-		Real m_SecondExtent;
-		Real m_Exactly;
-	};
+        [[nodiscard]] const Vector2D GetCenter() const noexcept;
+        [[nodiscard]] const Matrix2 GetRotate() const noexcept;
+        [[nodiscard]] Real GetExtent0() const noexcept;
+        [[nodiscard]] Real GetExtent1() const noexcept;
 
-	using EllipseFit2f = EllipseFit2<float>;
-	using EllipseFit2d = EllipseFit2<double>;
+        [[nodiscard]] int GetNumPoint() const;
+        [[nodiscard]] const Vector2D GetPoint(int index) const;
+
+    private:
+        IMPL_TYPE_DECLARE(EllipseFit2);
+    };
+
+    using FloatEllipseFit2 = EllipseFit2<float>;
+    using DoubleEllipseFit2 = EllipseFit2<double>;
 }
 
-#endif // MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H
+#endif  // MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H

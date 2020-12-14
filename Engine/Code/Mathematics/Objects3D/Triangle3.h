@@ -59,6 +59,8 @@ namespace Mathematics
 
         [[nodiscard]] const Vector3D GetNormal() const;
 
+        [[nodiscard]] const Triangle3 GetMove(Real t, const Vector3D& velocity) const;
+
     private:
         IMPL_TYPE_DECLARE(Triangle3);
     };

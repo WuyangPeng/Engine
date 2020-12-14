@@ -26,6 +26,8 @@ EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
+    /// @brief  º”‘ÿ∂ØÃ¨ø‚
+    /// @invariant  m_Impl != nullptr°£
     class CORE_TOOLS_DEFAULT_DECLARE LoadingLibrary final : private boost::noncopyable
     {
     public:

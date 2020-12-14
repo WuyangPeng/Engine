@@ -25,6 +25,7 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Points = std::vector<Vector3D>;
 		using Box3 = Box3<Real>;
+		using Math = Math<Real>;
 
 	public:
 		ContBox3();

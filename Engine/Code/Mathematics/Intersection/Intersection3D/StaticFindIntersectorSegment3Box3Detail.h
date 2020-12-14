@@ -10,7 +10,7 @@
 #include "StaticFindIntersectorSegment3Box3.h"
 #include "IntersectorUtility3.h" 
 #include "StaticFindIntersectorLine3Box3.h"
-#include "Mathematics/Distance/Distance3D/DistLine3Box3Detail.h"
+#include "Mathematics/Distance/Distance3D/DistanceLine3Box3Detail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Box3<Real>

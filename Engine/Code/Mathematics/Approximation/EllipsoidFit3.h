@@ -1,8 +1,11 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 12:28)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/03 11:16)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H
@@ -20,7 +23,7 @@
 // 找到最小二乘拟合的一组点P[0]至P[N-1]。
 // 错误返回值是在(U,Real,D)的最小二乘能量函数。
 // EllipseFit3<Real> fit(points);
-// Real exactly = fit.GetExactly(); 
+// Real exactly = fit.GetExactly();
 
 #include "Mathematics/Algebra/Matrix3.h"
 
@@ -28,53 +31,49 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class EllipsoidFit3
-	{
-	public:
-		using ClassType = EllipsoidFit3;
-		using Vector3D = Vector3D<Real>;
-		using Points = std::vector<Vector3D>;
-		using Matrix3 = Matrix3<Real>;
-		using Angle = std::vector<Real>;
+    template <typename Real>
+    class EllipsoidFit3Impl;
 
-	public:
-		explicit EllipsoidFit3(const Points& points);
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<double>>;
 
-		CLASS_INVARIANT_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<Real>>;
 
-		Real GetExactly() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipsoidFit3 final
+    {
+    public:
+        using EllipsoidFit3Impl = EllipsoidFit3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EllipsoidFit3);
 
-		const Vector3D GetCenter() const;
-		const Matrix3 GetRotate() const;
-		Real GetFirstExtent() const;
-		Real GetSecondExtent() const;
-		Real GetThirdExtent() const;
+        using Vector3D = Vector3D<Real>;
+        using Points = std::vector<Vector3D>;
+        using Matrix3 = Matrix3<Real>;
+        using Angle = std::vector<Real>;
 
-		int GetNumPoint() const;
-		const Vector3D GetPoint(int index) const;
+    public:
+        explicit EllipsoidFit3(const Points& points);
 
-	private:
-		void Fit3();
-		void InitialGuess();
+        CLASS_INVARIANT_DECLARE;
 
-		static Real Energy(const std::vector<Real>& input, const ClassType* userData);
+        [[nodiscard]] Real GetExactly() const noexcept;
 
-		static const Angle MatrixToAngles(const Matrix3& rotate);
-		static const Matrix3 AnglesToMatrix(const Angle& angle);
+        [[nodiscard]] const Vector3D GetCenter() const noexcept;
+        [[nodiscard]] const Matrix3 GetRotate() const noexcept;
+        [[nodiscard]] Real GetExtent0() const noexcept;
+        [[nodiscard]] Real GetExtent1() const noexcept;
+        [[nodiscard]] Real GetExtent2() const noexcept;
 
-	private:
-		Points m_Points;
-		Vector3D m_Center;
-		Matrix3 m_Rotate;
-		Real m_FirstExtent;
-		Real m_SecondExtent;
-		Real m_ThirdExtent;
-		Real m_Exactly;
-	};
+        [[nodiscard]] int GetNumPoint() const;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-	using EllipsoidFit3f = EllipsoidFit3<float>;
-	using EllipsoidFit3d = EllipsoidFit3<double>;
+    private:
+        IMPL_TYPE_DECLARE(EllipsoidFit3);
+    };
+
+    using FloatEllipsoidFit3 = EllipsoidFit3<float>;
+    using DoubleEllipsoidFit3 = EllipsoidFit3<double>;
 }
 
-#endif // MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H	
+#endif  // MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H

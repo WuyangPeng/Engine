@@ -15,6 +15,7 @@
 
 
 #include <stack>
+#include <map>
 
 template <typename Real>
 Mathematics::ConvexHull3<Real>

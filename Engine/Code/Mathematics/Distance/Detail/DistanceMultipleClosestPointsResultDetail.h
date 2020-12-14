@@ -1,89 +1,78 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
-// ÒýÇæ°æ±¾£º0.0.2.5 (2020/03/23 19:00)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.5.2.5 (2020/12/05 1:10)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
 
-#include "DistanceMultipleClosestPointsResult.h"
 #include "DistanceClosestPointsResultDetail.h"
-
+#include "DistanceMultipleClosestPointsResult.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real, typename Vector>
-Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
-	:ParentType{ distance, contactTime }, m_LhsClosestPoints{ lhsClosestPoints }, m_RhsClosestPoints{ rhsClosestPoints }
+Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::DistanceMultipleClosestPointsResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
+    : ParentType{ distance, contactTime }, m_LhsClosestPoints{ lhsClosestPoints }, m_RhsClosestPoints{ rhsClosestPoints }
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-
-template <typename Real, typename Vector>
-Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::~DistanceMultipleClosestPointsResult()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real, typename Vector>
-bool Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::IsValid() const noexcept
+bool Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_LhsClosestPoints.size() == m_RhsClosestPoints.size())
-		return true;
-	else
-		return false;
+    if (ParentType::IsValid() && m_LhsClosestPoints.size() == m_RhsClosestPoints.size())
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::GetLhsClosestPoint(int index) const
+const Vector Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::GetLhsClosestPoint(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < GetLhsClosestPointSize(), "Ë÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_LhsClosestPoints[index];
+    return m_LhsClosestPoints.at(index);
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::GetRhsClosestPoint(int index) const
+const Vector Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::GetRhsClosestPoint(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < GetRhsClosestPointSize(), "Ë÷Òý´íÎó£¡");
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_RhsClosestPoints[index];
+    return m_RhsClosestPoints.at(index);
 }
 
 template <typename Real, typename Vector>
-int Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::GetLhsClosestPointSize() const
+int Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::GetLhsClosestPointSize() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return boost::numeric_cast<int>(m_LhsClosestPoints.size());
+    return boost::numeric_cast<int>(m_LhsClosestPoints.size());
 }
 
 template <typename Real, typename Vector>
-int Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::GetRhsClosestPointSize() const
+int Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::GetRhsClosestPointSize() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return boost::numeric_cast<int>(m_RhsClosestPoints.size());
+    return boost::numeric_cast<int>(m_RhsClosestPoints.size());
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::ImplTypePtr Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>
-	::Clone() const
+typename Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::ImplTypePtr Mathematics::DistanceMultipleClosestPointsResult<Real, Vector>::Clone() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return std::make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_MULTIPLE_CLOSEST_POINTS_RESULT_DETAIL_H

@@ -1,6 +1,6 @@
 TODO Level 4
 
-0.5.2.4
+0.5.2.5
 
 1.  （Helper）完成帮助模块。
 2.  （Algebra）AQuaternion类FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
@@ -8,3 +8,5 @@ TODO Level 4
 4.  （Algebra）Quaternion类的FromRotationMatrix增加断言，判断矩阵是否是旋转矩阵。
 5.  （Algebra）对有实现operator[]的类实现data函数。
 6.  （Algebra）修改部分函数返回int，但AlgebraAggregate需要int32_t。  
+7.  （Distance）最近点是无穷多个时，DistanceResult出现错误。
+8.  （Distance）DistanceResult增加三角形和矩形参数子类。

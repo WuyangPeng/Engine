@@ -23,6 +23,7 @@ namespace Mathematics
 		typedef ScribeCircle2Circumscribe<Real> ClassType;
 		using Vector2D = Vector2D<Real>;
 		typedef Circle2<Real> Circle2;
+		using Math = Math<Real>;
 
 	public:
 		ScribeCircle2Circumscribe(const Vector2D& v0, const Vector2D& v1, const Vector2D& v2);

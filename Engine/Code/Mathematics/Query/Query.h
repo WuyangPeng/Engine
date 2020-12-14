@@ -1,24 +1,27 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 09:42)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/11/30 11:40)
 
 #ifndef MATHEMATICS_QUERY_H
 #define MATHEMATICS_QUERY_H
 
-#include "QuerySortTools.h"
-#include "QueryDotToolsDetail.h"
-#include "QueryBase.h"
 #include "Query2Detail.h"
-#include "Query2IntegerDetail.h"
-#include "Query2Int64Detail.h"
-#include "Query2RationalDetail.h"
 #include "Query2FilteredDetail.h"
+#include "Query2Int64Detail.h"
+#include "Query2IntegerDetail.h"
+#include "Query2RationalDetail.h"
 #include "Query3Detail.h"
-#include "Query3IntegerDetail.h"
-#include "Query3Int64Detail.h"
-#include "Query3RationalDetail.h"
 #include "Query3FilteredDetail.h"
+#include "Query3Int64Detail.h"
+#include "Query3IntegerDetail.h"
+#include "Query3RationalDetail.h"
+#include "QueryBase.h"
+#include "QueryDotToolsDetail.h"
+#include "QuerySortTools.h"
 
-#endif // MATHEMATICS_QUERY_H
+#endif  // MATHEMATICS_QUERY_H

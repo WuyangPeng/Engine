@@ -1,133 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 14:30)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/04 13:55)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
 
 #include "PolynomialFit4.h"
-#include "PolynomialSamplesPowerDetail.h" 
-#include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
-template <typename Real>
-Mathematics::PolynomialFit4<Real>
-	::PolynomialFit4(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-					 const Samples& wSamples, size_t xDegree, size_t yDegree, size_t zDegree)
-	:m_Coeff((xDegree + 1) * (yDegree + 1) * (zDegree + 1)), m_SolveSucceed{ false }
-{
-	Calculate(xSamples, ySamples, zSamples, wSamples,boost::numeric_cast<int>(xDegree), boost::numeric_cast<int>(yDegree), boost::numeric_cast<int>(zDegree));
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_FIT4_ACHIEVE)
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
+    #include "PolynomialFit4Achieve.h"
 
-template <typename Real>
-void Mathematics::PolynomialFit4<Real>
-	::Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-				const Samples& wSamples, int xDegree, int yDegree, int zDegree)
-{
-	auto xBound = xDegree + 1;
-	auto yBound = yDegree + 1;
-	auto zBound = zDegree + 1;
-	auto quantity = xBound * yBound * zBound;
+#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_POLYNOMIAL_FIT4_ACHIEVE)
 
-	// x、y、z的幂。
-	PolynomialSamplesPower<Real> xPower{ xSamples, xDegree };
-	PolynomialSamplesPower<Real> yPower{ ySamples, yDegree };
-	PolynomialSamplesPower<Real> zPower{ zSamples, zDegree };
-
-	// Vandermonde矩阵和右手坐标系的线性系统。
-	VariableMatrix<Real> matrix{ quantity, quantity };
-	std::vector<Real> inputVector(quantity);
-
-	auto numSamples = wSamples.size();
-
-	for (auto zDegreeIndex = 0; zDegreeIndex <= zDegree; ++zDegreeIndex)
-	{
-		for (auto yDegreeIndex = 0; yDegreeIndex <= yDegree; ++yDegreeIndex)
-		{
-			for (auto xDegreeIndex = 0; xDegreeIndex <= xDegree; ++xDegreeIndex)
-			{
-				auto index = xDegreeIndex + xBound * (yDegreeIndex + yBound * zDegreeIndex);
-				inputVector[index] = Math<Real>::GetValue(0);
-				for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-				{
-					inputVector[index] += wSamples[samplesIndex] * xPower(samplesIndex, xDegreeIndex) *  yPower(samplesIndex, yDegreeIndex) * zPower(samplesIndex, zDegreeIndex);
-				}
-
-				for (auto innerZDegreeIndex = 0; innerZDegreeIndex <= zDegree; ++innerZDegreeIndex)
-				{
-					for (auto innerYDegreeIndex = 0; innerYDegreeIndex <= yDegree; ++innerYDegreeIndex)
-					{
-						for (auto innerXDegreeIndex = 0; innerXDegreeIndex <= xDegree; ++innerXDegreeIndex)
-						{
-							auto innerIndex = innerXDegreeIndex + xBound * (innerYDegreeIndex + yBound * innerZDegreeIndex);
-							auto sum = Math<Real>::GetValue(0);
-							for (auto samplesIndex = 0u; samplesIndex < numSamples; ++samplesIndex)
-							{
-								sum += xPower(samplesIndex, xDegreeIndex + innerXDegreeIndex) *
-									   yPower(samplesIndex, yDegreeIndex + innerYDegreeIndex) *
-									   zPower(samplesIndex, zDegreeIndex + innerZDegreeIndex);
-							}
-
-							matrix(index, innerIndex) = sum;
-						}
-					}
-				}
-			}
-		}
-	}
-
-	try
-	{
-		// 求解多项式系数。
-		LinearSystem<Real> linearSystem;
-
-		linearSystem.Solve(matrix, &inputVector[0], &m_Coeff[0]);
-
-		m_SolveSucceed = true;
-	}
-	catch (CoreTools::Error& error)
-	{
-		m_SolveSucceed = false;
-
-		LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
-			<< SYSTEM_TEXT("求解线性系统失败\n")
-			<< error
-			<< CoreTools::LogAppenderIOManageSign::Refresh;
-	}
-}
-
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::PolynomialFit4<Real>
-	::IsValid() const noexcept
-{
-	return true;
-}
-#endif // OPEN_CLASS_INVARIANT
-
-template <typename Real>
-const std::vector<Real> Mathematics::PolynomialFit4<Real>
-	::GetCoeff() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_Coeff;
-}
-
-template <typename Real>
-bool Mathematics::PolynomialFit4<Real>
-	::IsSolveSucceed() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-	return m_SolveSucceed;
-}
-
-#endif // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H
-
+#endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_DETAIL_H

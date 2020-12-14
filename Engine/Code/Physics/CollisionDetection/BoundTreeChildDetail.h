@@ -186,7 +186,7 @@ const typename Physics::BoundTreeChild<MeshSmartPointer, Bound>::Line3 Physics::
 	m_ModelBound.ComputeFromData(meshVertices);
 
     // 计算子网格的分割线。
-	Mathematics::OrthogonalLineFit3f fit(meshVertices);
+	Mathematics::FloatOrthogonalLineFit3 fit(meshVertices);
 
 	return fit.GetLine3();
 }

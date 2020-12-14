@@ -10,7 +10,7 @@
 #include "ContLozenge3.h"
 #include "Mathematics/Approximation/GaussPointsFit3.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Line3.h" 
-#include "Mathematics/Distance/Distance3D/DistPoint3Rectangle3.h" 
+#include "Mathematics/Distance/Distance3D/DistancePoint3Rectangle3.h" 
 
 template <typename Real>
 Mathematics::Lozenge3<Real> Mathematics
@@ -41,7 +41,7 @@ Mathematics::Lozenge3<Real> Mathematics
 	auto radius = (Real{0.5})*(wMax - wMin);
 	auto rSqr = radius*radius;
 	auto newCenter = box.GetCenter() + ((Real{0.5})*(wMax + wMin))*box.GetAxis(0);
-	box = Box3<Real>{ newCenter, box.GetFirstAxis(), box.GetSecondAxis(), box.GetThirdAxis(),
+	box = Box3<Real>{ newCenter, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(),
 					  box.GetFirstExtent(), box.GetSecondExtent(), box.GetThirdExtent() };
 
 	auto aMin = Math<Real>::sm_MaxReal;
@@ -203,7 +203,7 @@ template <typename Real>
 bool Mathematics
 	::InLozenge (const Vector3D<Real>& point, const Lozenge3<Real>& lozenge)
 {
-	auto dist = DistPoint3Rectangle3<Real>(point, lozenge.GetRectangle()).Get().GetDistance();
+	auto dist = DistancePoint3Rectangle3<Real>(point, lozenge.GetRectangle()).Get().GetDistance();
     return dist <= lozenge.GetRadius();
 }
 

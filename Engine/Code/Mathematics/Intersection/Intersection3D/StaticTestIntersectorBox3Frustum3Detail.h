@@ -36,8 +36,8 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
 	::Test ()
 {
     // for convenience
-	const Vector3D axes[] { mBox.GetAxis0(),mBox.GetAxis1(),mBox.GetThirdAxis() };
-	const Real extents[]{ mBox.GetExtent0(),mBox.GetExtent1(),mBox.GetThirdExtent() };
+	const Vector3D axes[] { mBox.GetAxis0(),mBox.GetAxis1(),mBox.GetAxis2() };
+	const Real extents[]{ mBox.GetExtent0(),mBox.GetExtent1(),mBox.GetExtent2() };
 
     auto diff = mBox.GetCenter() - mFrustum.GetOrigin();  // C-E
 

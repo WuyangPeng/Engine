@@ -1,45 +1,49 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 17:08)
+///	Copyright (c) 2011-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.5.2.5 (2020/12/04 18:44)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "DistanceContactTimeResult.h"
 
 namespace Mathematics
 {
-	template <typename Real, typename Vector>
-	class DistanceClosestPointsResult : public DistanceContactTimeResult<Real, Vector>
-	{
-	public:
-		using ClassType = DistanceClosestPointsResult<Real, Vector>;
-		using ParentType = DistanceContactTimeResult<Real, Vector>;
-		using ImplTypePtr = ParentType::ImplTypePtr;
+    template <typename Real, typename Vector>
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE DistanceClosestPointsResult : public DistanceContactTimeResult<Real, Vector>
+    {
+    public:
+        using ClassType = DistanceClosestPointsResult<Real, Vector>;
+        using ParentType = DistanceContactTimeResult<Real, Vector>;
+        using ImplTypePtr = ParentType::ImplTypePtr;
 
-	public:
-		DistanceClosestPointsResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint);
-		virtual ~DistanceClosestPointsResult();
+    public:
+        DistanceClosestPointsResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint) noexcept;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		  const Vector GetLhsClosestPoint(int index) const override;
-		   const Vector GetRhsClosestPoint(int index) const override;
+        [[nodiscard]] const Vector GetLhsClosestPoint(int index) const noexcept override;
+        [[nodiscard]] const Vector GetRhsClosestPoint(int index) const noexcept override;
 
-		  int GetLhsClosestPointSize() const override;
-		  int GetRhsClosestPointSize() const override;
+        [[nodiscard]] int GetLhsClosestPointSize() const noexcept override;
+        [[nodiscard]] int GetRhsClosestPointSize() const noexcept override;
 
-		  ImplTypePtr Clone() const override;
+        [[nodiscard]] ImplTypePtr Clone() const override;
 
-	private:
-		static constexpr auto sm_PointSize = 1;
+    private:
+        static constexpr auto sm_PointSize = 1;
 
-	private:
-		Vector m_LhsClosestPoint;
-		Vector m_RhsClosestPoint;
-	};
+    private:
+        Vector m_LhsClosestPoint;
+        Vector m_RhsClosestPoint;
+    };
 }
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_CLOSEST_POINTS_RESULT_H

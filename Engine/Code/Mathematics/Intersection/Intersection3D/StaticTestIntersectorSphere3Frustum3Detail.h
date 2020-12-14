@@ -8,7 +8,7 @@
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_FRUSTUM3_DETAIL_H
 
 #include "StaticTestIntersectorSphere3Frustum3.h"
-#include "Mathematics/Distance/Distance3D/DistPoint3Frustum3Detail.h"
+#include "Mathematics/Distance/Distance3D/DistancePoint3Frustum3Detail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
@@ -36,7 +36,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::Test()
 {
-	auto distance = DistPoint3Frustum3<Real>(mSphere.GetCenter(),mFrustum).Get().GetDistance();
+	auto distance = DistancePoint3Frustum3<Real>(mSphere.GetCenter(),mFrustum).Get().GetDistance();
 
 	if (distance <= mSphere.GetRadius())
 	{

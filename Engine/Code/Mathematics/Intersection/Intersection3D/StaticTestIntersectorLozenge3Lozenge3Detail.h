@@ -8,7 +8,7 @@
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_DETAIL_H
 
 #include "StaticTestIntersectorLozenge3Lozenge3.h"
-#include "Mathematics/Distance/Distance3D/DistRectangle3Rectangle3Detail.h"
+#include "Mathematics/Distance/Distance3D/DistanceRectangle3Rectangle3Detail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorLozenge3Lozenge3<Real>
@@ -36,7 +36,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLozenge3Lozenge3<Real>
 	::Test()
 {
-    auto distance = DistRectangle3Rectangle3<Real>(mLozenge0.GetRectangle(),mLozenge1.GetRectangle()).Get().GetDistance();
+    auto distance = DistanceRectangle3Rectangle3<Real>(mLozenge0.GetRectangle(),mLozenge1.GetRectangle()).Get().GetDistance();
 	auto rSum = mLozenge0.GetRadius() + mLozenge1.GetRadius();
 	if (distance <= rSum)
 	{

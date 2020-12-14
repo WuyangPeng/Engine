@@ -76,4 +76,12 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3D& point) const
     return m_Impl->DistanceTo(point);
 }
 
+template <typename Real>
+const Mathematics::Triangle3<Real> Mathematics::Triangle3<Real>::GetMove(Real t, const Vector3D& velocity) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return Triangle3{ GetVertex(0) + t * velocity, GetVertex(1) + t * velocity, GetVertex(2) + t * velocity };
+}
+
 #endif  // MATHEMATICS_OBJECTS3D_TRIANGLE3_ACHIEVE_H

@@ -1150,7 +1150,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>
 		// round-off errors have led to a failure to find it.  Use a slower
 		// 3D distance calculator for robustness.
 		Segment3<Real> seg{ U0, U1 };
-		DistSegment3Triangle3<Real> dcalc{ seg, tri };
+		DistanceSegment3Triangle3<Real> dcalc{ seg, tri };
 
 		// We do not need the distance, but we do need the side effect
 		// of locating the closest points.

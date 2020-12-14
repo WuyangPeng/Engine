@@ -100,11 +100,11 @@ void Mathematics::DynamicAngularTestIntersectorBox3Box3<Real>
 
 		subBox0 = Box3{ subBox0.GetCenter(),vector3DOrthonormalize0.GetUVector(),
 						vector3DOrthonormalize0.GetVVector(),vector3DOrthonormalize0.GetWVector(),
-						subBox0.GetExtent0(),subBox0.GetExtent1(),subBox0.GetThirdExtent() };
+						subBox0.GetExtent0(),subBox0.GetExtent1(),subBox0.GetExtent2() };
 
 		subBox1 = Box3{ subBox1.GetCenter(),vector3DOrthonormalize1.GetUVector(),
 						vector3DOrthonormalize1.GetVVector(),vector3DOrthonormalize1.GetWVector(),
-						subBox1.GetExtent0(),subBox1.GetExtent1(),subBox1.GetThirdExtent() };
+						subBox1.GetExtent0(),subBox1.GetExtent1(),subBox1.GetExtent2() };
 	}
 
 	// NOTE:  If the boxes do not intersect, then the application might want
