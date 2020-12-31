@@ -46,12 +46,12 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     // Set up basis function parameters.  Function 0 corresponds to the
     // output curve.  Function 1 corresponds to the input curve.
     mDegree = degree;
-    mQuantity[0] = outNumCtrlPoints;
-    mQuantity[1] = numCtrlPoints;
+    m_Quantity[0] = outNumCtrlPoints;
+    m_Quantity[1] = numCtrlPoints;
 
     for (auto j = 0; j <= 1; ++j)
     {
-        mNumKnots[j] = mQuantity[j] + mDegree + 1;
+        mNumKnots[j] = m_Quantity[j] + mDegree + 1;
         mKnot[j] = NEW1<Real>(mNumKnots[j]);
 
         int i;
@@ -60,8 +60,8 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
             mKnot[j][i] = Math<Real>::GetValue(0);
         }
 
-		auto factor = (Math::GetValue(1))/(Real)(mQuantity[j] - mDegree);
-        for (/**/; i < mQuantity[j]; ++i)
+		auto factor = (Math::GetValue(1))/(Real)(m_Quantity[j] - mDegree);
+        for (/**/; i < m_Quantity[j]; ++i)
         {
             mKnot[j][i] = (i-mDegree)*factor;
         }
@@ -79,13 +79,13 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     mBasis[0] = 0;
     mBasis[1] = 0;
 
-	BandedMatrix<Real> A{ mQuantity[0], mDegree, mDegree };
-    for (i0 = 0; i0 < mQuantity[0]; ++i0)
+	BandedMatrix<Real> A{ m_Quantity[0], mDegree, mDegree };
+    for (i0 = 0; i0 < m_Quantity[0]; ++i0)
     {
         mIndex[0] = i0;
         tmax = MaxSupport(0, i0);
 
-        for (i1 = i0; i1 <= i0 + mDegree && i1 < mQuantity[0]; ++i1)
+        for (i1 = i0; i1 <= i0 + mDegree && i1 < m_Quantity[0]; ++i1)
         {
             mIndex[1] = i1;
             tmin = MinSupport(0, i1);
@@ -97,21 +97,21 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     }
 
     // Construct A^{-1}.
-	VariableMatrix<Real> invA{ mQuantity[0], mQuantity[0] };
+	VariableMatrix<Real> invA{ m_Quantity[0], m_Quantity[0] };
     invA = LinearSystem<Real>().Invert(A); // ´íÎóÅ×³öÒì³£
     //MATHEMATICS_ASSERTION_0(solved, "Failed to solve linear system\n");
    // WM5_UNUSED(solved);
 
     // Construct B (depends on both input and output basis functions).
     mBasis[1] = 1;
-	VariableMatrix<Real> B{ mQuantity[0], mQuantity[1] };
-    for (i0 = 0; i0 < mQuantity[0]; ++i0)
+	VariableMatrix<Real> B{ m_Quantity[0], m_Quantity[1] };
+    for (i0 = 0; i0 < m_Quantity[0]; ++i0)
     {
         mIndex[0] = i0;
 		auto tmin0 = MinSupport(0, i0);
 		auto tmax0 = MaxSupport(0, i0);
 
-        for (i1 = 0; i1 < mQuantity[1]; ++i1)
+        for (i1 = 0; i1 < m_Quantity[1]; ++i1)
         {
             mIndex[1] = i1;
 			auto tmin1 = MinSupport(1, i1);
@@ -138,9 +138,9 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
 
     // Construct the control points for the least-squares curve.
     memset(outCtrlPoints,0,outNumCtrlPoints*sizeof(TVector));
-    for (i0 = 0; i0 < mQuantity[0]; ++i0)
+    for (i0 = 0; i0 < m_Quantity[0]; ++i0)
     {
-        for (i1 = 0; i1 < mQuantity[1]; ++i1)
+        for (i1 = 0; i1 < m_Quantity[1]; ++i1)
         {
             outCtrlPoints[i0] += ctrlPoints[i1]*prod[i0][i1];
         }

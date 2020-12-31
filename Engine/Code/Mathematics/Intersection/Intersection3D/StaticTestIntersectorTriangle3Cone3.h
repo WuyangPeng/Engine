@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Triangle3 = Triangle3<Real>;
 		using Cone3 = Cone3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorTriangle3Cone3(const Triangle3& triangle, const Cone3& cone);
 
-		// Object access.
-		const Triangle3 GetTriangle() const;
-		const Cone3 GetCone() const;
+CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Triangle3 GetTriangle() const;
+[[nodiscard]] const Cone3 GetCone() const;
 
 	private:
 		// Static query.
@@ -40,12 +41,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Triangle3 mTriangle;
+		Triangle3 m_Triangle;
 		Cone3 mCone;
 	};
 
-	using StaticTestIntersectorTriangle3Cone3f = StaticTestIntersectorTriangle3Cone3<float>;
-	using StaticTestIntersectorTriangle3Cone3d = StaticTestIntersectorTriangle3Cone3<double>;
+	using FloatStaticTestIntersectorTriangle3Cone3 = StaticTestIntersectorTriangle3Cone3<float>;
+	using DoubleStaticTestIntersectorTriangle3Cone3 = StaticTestIntersectorTriangle3Cone3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_CONE3_H

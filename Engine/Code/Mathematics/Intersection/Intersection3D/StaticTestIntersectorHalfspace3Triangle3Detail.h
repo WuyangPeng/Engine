@@ -8,12 +8,12 @@
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 
 #include "StaticTestIntersectorHalfspace3Triangle3.h"
-#include "IntersectorAxis.h"
+#include "FindIntersectorAxis.h"
  
 template <typename Real>
 Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>
 	::StaticTestIntersectorHalfspace3Triangle3 (const Plane3& halfspace, const Triangle3& triangle)
-	:mHalfspace{ halfspace }, mTriangle{ triangle }
+	:m_Halfspace{ halfspace }, m_Triangle{ triangle }
 {
 	Test();
 }
@@ -22,14 +22,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>
 	::GetHalfspace() const
 {
-    return mHalfspace;
+    return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>
 	::GetTriangle() const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
@@ -37,9 +37,9 @@ void Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>
 	::Test()
 {
     Real fmin, fmax;
-    IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mTriangle, fmin, fmax);
+    FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), m_Triangle, fmin, fmax);
 
-	if (fmin <= mHalfspace.GetConstant())
+	if (fmin <= m_Halfspace.GetConstant())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

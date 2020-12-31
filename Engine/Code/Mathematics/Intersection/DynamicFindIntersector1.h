@@ -1,11 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:32)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/16 18:27)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Intersector1.h"
 
@@ -13,45 +18,51 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicFindIntersector1 : public Intersector1<Real>
-	{
-	public:
-		using ClassType = DynamicFindIntersector1<Real>;
-		using ParentType = Intersector1<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class DynamicFindIntersector1Impl;
 
-	public:
-		DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());
-		virtual ~DynamicFindIntersector1();
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersector1Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersector1Impl<double>>;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersector1Impl<Real>>;
 
-		 bool IsIntersection() const override;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersector1 final : public Intersector1<Real>
+    {
+    public:
+        using DynamicFindIntersector1Impl = DynamicFindIntersector1Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersector1);
 
-		// 动态相交查询的两个区间处于第一次/最后一次接触的时间。
-		Real GetFirstTime() const;
-		Real GetLastTime() const;
+        using ParentType = Intersector1<Real>;
+        using Math = typename ParentType::Math;
 
-		// 有关交集的信息。
-		// 相交数为0（区间不重叠），
-		// 1（区间边界相交）或2（区间与区间相交）。
-		int GetNumIntersections() const;
-		Real GetIntersection(int index) const;
+    public:
+        DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon = Math::GetZeroTolerance());
 
-	private:
-		void Find(Real tMax, Real speedU, Real speedV);
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	private:
-		// 有关相交的信息。
-		Real m_FirstTime;
-		Real m_LastTime;
+        [[nodiscard]] bool IsIntersection() const noexcept final;
 
-		std::vector<Real> m_Intersections;
-	};
+        // 动态相交查询的两个区间处于第一次/最后一次接触的时间。
+        [[nodiscard]] Real GetFirstTime() const;
+        [[nodiscard]] Real GetLastTime() const;
 
-	using DynamicFindIntersector1f = DynamicFindIntersector1<float>;
-	using DynamicFindIntersector1d = DynamicFindIntersector1<double>;
+        // 有关交集的信息。
+        // 相交数为0（区间不重叠），
+        // 1（区间边界相交）或2（区间与区间相交）。
+        [[nodiscard]] int GetNumIntersections() const;
+        [[nodiscard]] Real GetIntersection(int index) const;
+
+    private:
+        void Find(Real tMax, Real speedU, Real speedV);
+
+    private:
+        IMPL_TYPE_DECLARE(DynamicFindIntersector1);
+    };
+
+    using FloatDynamicFindIntersector1 = DynamicFindIntersector1<float>;
+    using DoubleDynamicFindIntersector1 = DynamicFindIntersector1<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_H

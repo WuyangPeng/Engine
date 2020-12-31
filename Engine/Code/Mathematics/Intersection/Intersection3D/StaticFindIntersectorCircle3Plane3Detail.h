@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::StaticFindIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane)
-	:mCircle{ circle }, mPlane{ plane }
+	:m_Circle{ circle }, m_Plane{ plane }
 {
 	Find();
 }
@@ -22,27 +22,27 @@ template <typename Real>
 const Mathematics::Circle3<Real> Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::GetCircle() const
 {
-	return mCircle;
+	return m_Circle;
 }
 
 template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::GetPlane() const
 {
-	return mPlane;
+	return m_Plane;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::Find()
 {
-	mQuantity = 0;
+	m_Quantity = 0;
 
 	// Construct the plane of the circle.
-	Plane3 CPlane{ mCircle.GetNormal(),mCircle.GetCenter() };
+	Plane3 CPlane{ m_Circle.GetNormal(),m_Circle.GetCenter() };
 
 	// Compute the intersection of this plane with the input plane.
-	StaticFindIntersectorPlane3Plane3<Real> intr{ mPlane, CPlane };
+	StaticFindIntersectorPlane3Plane3<Real> intr{ m_Plane, CPlane };
 	if (!intr.IsIntersection())
 	{
 		// Planes are parallel and nonintersecting.
@@ -64,10 +64,10 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	// line is t*D+P, the circle center is C, and the circle radius is r,
 	// then r^2 = |t*D+P-C|^2 = |D|^2*t^2 + 2*Dot(D,P-C)*t + |P-C|^2.  This
 	// is a quadratic equation of the form:  a2*t^2 + 2*a1*t + a0 = 0.
-	auto diff = line.GetOrigin() - mCircle.GetCenter();
+	auto diff = line.GetOrigin() - m_Circle.GetCenter();
 	auto a2 = Vector3DTools::VectorMagnitudeSquared(line.GetDirection());
 	auto a1 = Vector3DTools::DotProduct(diff, line.GetDirection());
-	auto a0 = Vector3DTools::VectorMagnitudeSquared(diff) - mCircle.GetRadius()*mCircle.GetRadius();
+	auto a0 = Vector3DTools::VectorMagnitudeSquared(diff) - m_Circle.GetRadius()*m_Circle.GetRadius();
 
 	auto discr = a1 * a1 - a0 * a2;
 	if (discr < Math<Real>::GetZero())
@@ -83,38 +83,38 @@ void Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	if (discr < Math::GetZeroTolerance())
 	{
 		// One repeated root, the circle just touches the plane.
-		mQuantity = 1;
-		mPoint[0] = line.GetOrigin() - (a1*inv)*line.GetDirection();
+		m_Quantity = 1;
+		m_Point[0] = line.GetOrigin() - (a1*inv)*line.GetDirection();
 		return;
 	}
 
 	// Two distinct, real-valued roots, the circle intersects the plane in
 	// two points.
 	auto root = Math::Sqrt(discr);
-	mQuantity = 2;
-	mPoint[0] = line.GetOrigin() - ((a1 + root)*inv)*line.GetDirection();
-	mPoint[1] = line.GetOrigin() - ((a1 - root)*inv)*line.GetDirection();
+	m_Quantity = 2;
+	m_Point[0] = line.GetOrigin() - ((a1 + root)*inv)*line.GetDirection();
+	m_Point[1] = line.GetOrigin() - ((a1 - root)*inv)*line.GetDirection();
 }
 
 template <typename Real>
 int Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 template <typename Real>
 const Mathematics::Circle3<Real> Mathematics::StaticFindIntersectorCircle3Plane3<Real>
 	::GetIntersectionCircle() const
 {
-	return mCircle;
+	return m_Circle;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_DETAIL_H

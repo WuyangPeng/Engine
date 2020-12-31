@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 	::StaticTestIntersectorTriangle3Cone3(const Triangle3& triangle, const Cone3& cone)
-	: mTriangle{ triangle }, mCone{ cone }
+	: m_Triangle{ triangle }, mCone{ cone }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 	::GetTriangle() const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
@@ -43,7 +43,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
 
     // Test vertex P0.
-	auto diff0 = mTriangle.GetVertex()[0] - mCone.GetVertex();
+	auto diff0 = m_Triangle.GetVertex()[0] - mCone.GetVertex();
 	auto AdD0 = Vector3DTools::DotProduct(mCone.GetAxis(),diff0);
     if (AdD0 >= Math<Real>::GetZero())
     {
@@ -64,7 +64,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
     // else P0 is not on cone side of plane.
 
     // Test vertex P1.
-	auto edge0 = mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0];
+	auto edge0 = m_Triangle.GetVertex()[1] - m_Triangle.GetVertex()[0];
 	auto diff1 = diff0 + edge0;
 	auto AdD1 = Vector3DTools::DotProduct(mCone.GetAxis(),diff1);
     if (AdD1 >= Math<Real>::GetZero())
@@ -86,7 +86,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cone3<Real>
     // else P1 is not on cone side of plane.
 
     // Test vertex P2.
-	auto edge1 = mTriangle.GetVertex()[2] - mTriangle.GetVertex()[0];
+	auto edge1 = m_Triangle.GetVertex()[2] - m_Triangle.GetVertex()[0];
 	auto diff2 = diff0 + edge1;
 	auto AdD2 = Vector3DTools::DotProduct(mCone.GetAxis(),diff2);
     if (AdD2 >= Math<Real>::GetZero())

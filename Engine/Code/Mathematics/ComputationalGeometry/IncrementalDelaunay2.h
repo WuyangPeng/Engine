@@ -309,7 +309,7 @@ namespace Mathematics
 		mutable std::vector<bool>* mRatVertexEvaluated;
 
 		// The current triangulation.
-		std::set<Triangle*> mTriangle;
+		std::set<Triangle*> m_Triangle;
 
 		// Compacted informatoin about the triangulation.
 		//   N = number of triangles

@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
@@ -47,7 +47,7 @@ namespace CoreTools
         using DynamicLinkString = System::DynamicLinkString;
 
     private:
-        DynamicLinkString m_FileName;
+        DynamicLinkString fileName;
         DynamicLinkModule m_Library;
     };
 }

@@ -1,108 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 13:53)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/15 15:50)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_SEGMENT3_RECTANGLE3_DETAIL_H 
-#define MATHEMATICS_DISTANCE_DIST_SEGMENT3_RECTANGLE3_DETAIL_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_SEGMENT3_RECTANGLE3_DETAIL_H
+#define MATHEMATICS_DISTANCE_DISTANCE_SEGMENT3_RECTANGLE3_DETAIL_H
 
 #include "DistanceSegment3Rectangle3.h"
-#include "DistanceLine3Rectangle3.h"
-#include "DistancePoint3Rectangle3.h"
-#include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h" 
 
-template <typename Real>
-Mathematics::DistanceSegment3Rectangle3<Real>
-	::DistanceSegment3Rectangle3(const Segment3& segment, const Rectangle3& rectangle)
-	:ParentType{}, mSegment{ segment }, mRectangle{ rectangle }
-{
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_SEGMENT3_RECTANGLE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Segment3<Real>& Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetSegment() const
-{
-	return mSegment;
-}
+    #include "DistanceSegment3Rectangle3Achieve.h"
 
-template <typename Real>
-const Mathematics::Rectangle3<Real>& Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetRectangle() const
-{
-	return mRectangle;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_SEGMENT3_RECTANGLE3_ACHIEVE)
 
-template <typename Real>
-typename const Mathematics::DistanceSegment3Rectangle3<Real>::DistanceResult Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetSquared() const
-{
-	Vector3D mClosestPoint0;
-	Vector3D mClosestPoint1;
-
-	Line3<Real> line{ mSegment.GetCenterPoint(), mSegment.GetDirection() };
-	DistanceLine3Rectangle3<Real> queryLR{ line, mRectangle };
-	auto sqrDist = queryLR.GetSquared();
-	mSegmentParameter = queryLR.GetLineParameter();
-
-	if (mSegmentParameter >= -mSegment.GetExtent())
-	{
-		if (mSegmentParameter <= mSegment.GetExtent())
-		{
-			mClosestPoint0 = sqrDist.GetLhsClosestPoint();
-			mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-			mRectCoord[0] = queryLR.GetRectangleCoordinate(0);
-			mRectCoord[1] = queryLR.GetRectangleCoordinate(1);
-		}
-		else
-		{
-			mClosestPoint0 = mSegment.GetEndPoint();
-			DistancePoint3Rectangle3<Real> queryPR{ mClosestPoint0,mRectangle };
-			sqrDist = queryPR.GetSquared();
-			mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-			mSegmentParameter = mSegment.GetExtent();
-			mRectCoord[0] = queryPR.GetRectangleCoordinate(0);
-			mRectCoord[1] = queryPR.GetRectangleCoordinate(1);
-		}
-	}
-	else
-	{
-		mClosestPoint0 = mSegment.GetBeginPoint();
-		DistancePoint3Rectangle3<Real> queryPR{ mClosestPoint0, mRectangle };
-		sqrDist = queryPR.GetSquared();
-		mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-		mSegmentParameter = -mSegment.GetExtent();
-		mRectCoord[0] = queryPR.GetRectangleCoordinate(0);
-		mRectCoord[1] = queryPR.GetRectangleCoordinate(1);
-	}
-	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
-}
-
-
-template <typename Real>
-typename const Mathematics::DistanceSegment3Rectangle3<Real>::DistanceResult Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
-{
-	auto movedCenter0 = mSegment.GetCenterPoint() + t * lhsVelocity;
-	auto movedCenter1 = mRectangle.GetCenter() + t * rhsVelocity;
-	Segment3 movedSeg{ movedCenter0, mSegment.GetDirection(),mSegment.GetExtent() };
-	Rectangle3 movedRect{ movedCenter1, mRectangle.GetAxis0(),mRectangle.GetAxis1(),mRectangle.GetExtent0(),mRectangle.GetExtent1() };
-	return DistanceSegment3Rectangle3<Real>{ movedSeg, movedRect }.GetSquared();
-}
-
-template <typename Real>
-Real Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetSegmentParameter() const
-{
-	return mSegmentParameter;
-}
-
-template <typename Real>
-Real Mathematics::DistanceSegment3Rectangle3<Real>
-	::GetRectangleCoordinate(int i) const
-{
-	return mRectCoord[i];
-}
-
-#endif // MATHEMATICS_DISTANCE_DIST_SEGMENT3_RECTANGLE3_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_SEGMENT3_RECTANGLE3_DETAIL_H

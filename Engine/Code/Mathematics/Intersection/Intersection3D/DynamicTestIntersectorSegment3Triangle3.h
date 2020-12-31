@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,15 +25,16 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+	 using Math = typename ParentType::Math;
 
 	public:
 		DynamicTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, Real tmax,
 												const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Triangle3 GetTriangle() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Segment3 GetSegment() const;
+        [[nodiscard]] const Triangle3 GetTriangle() const;
 
 	private:
 		// Dynamic test-intersection query.
@@ -41,12 +42,12 @@ namespace Mathematics
 
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Triangle3 mTriangle;
+		Segment3 m_Segment;
+		Triangle3 m_Triangle;
 	};
 
-	using DynamicTestIntersectorSegment3Triangle3f = DynamicTestIntersectorSegment3Triangle3<float>;
-	using DynamicTestIntersectorSegment3Triangle3d = DynamicTestIntersectorSegment3Triangle3<double>;
+	using FloatDynamicTestIntersectorSegment3Triangle3 = DynamicTestIntersectorSegment3Triangle3<float>;
+	using DoubleDynamicTestIntersectorSegment3Triangle3 = DynamicTestIntersectorSegment3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_SEGMENT3_TRIANGLE3_H

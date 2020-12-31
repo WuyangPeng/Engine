@@ -76,7 +76,7 @@ namespace Mathematics
 		bool YLookup(Real y, int& yIndex, Real& dy) const;
 		bool ZLookup(Real z, int& zIndex, Real& dz) const;
 
-		int mXBound, mYBound, mZBound, mQuantity;
+		int mXBound, mYBound, mZBound, m_Quantity;
 		Real*** mF;
 		Polynomial*** mPoly;
 		Real mXMin, mXMax, mXSpacing;

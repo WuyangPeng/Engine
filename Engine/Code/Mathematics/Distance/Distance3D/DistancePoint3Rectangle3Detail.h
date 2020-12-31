@@ -1,100 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 13:50)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/14 16:05)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_DETAIL_H 
-#define MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_DETAIL_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_DETAIL_H
+#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_DETAIL_H
 
 #include "DistancePoint3Rectangle3.h"
-#include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"  
 
-template <typename Real>
-Mathematics::DistancePoint3Rectangle3<Real>
-	::DistancePoint3Rectangle3(const Vector3D& point, const Rectangle3& rectangle)
-	:ParentType{}, mPoint{ point }, mRectangle{ rectangle }
-{
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_RECTANGLE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::DistancePoint3Rectangle3<Real>
-	::GetPoint() const
-{
-	return mPoint;
-}
+    #include "DistancePoint3Rectangle3Achieve.h"
 
-template <typename Real>
-const Mathematics::Rectangle3<Real>& Mathematics::DistancePoint3Rectangle3<Real>
-	::GetRectangle() const
-{
-	return mRectangle;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_RECTANGLE3_ACHIEVE)
 
-template <typename Real>
-typename const Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>
-	::GetSquared() const
-{
-	Vector3D mClosestPoint0;
-	Vector3D mClosestPoint1;
-
-	auto diff = mRectangle.GetCenter() - mPoint;
-	auto b0 = Vector3DTools::DotProduct(diff, mRectangle.GetAxis(0));
-	auto b1 = Vector3DTools::DotProduct(diff, mRectangle.GetAxis(1));
-	auto s0 = -b0;
-	auto s1 = -b1;
-	auto sqrDistance = Vector3DTools::VectorMagnitudeSquared(diff);
-
-	if (s0 < -mRectangle.GetExtent(0))
-	{
-		s0 = -mRectangle.GetExtent(0);
-	}
-	else if (s0 > mRectangle.GetExtent(0))
-	{
-		s0 = mRectangle.GetExtent(0);
-	}
-	sqrDistance += s0 * (s0 + (Math::GetValue(2))*b0);
-
-	if (s1 < -mRectangle.GetExtent(1))
-	{
-		s1 = -mRectangle.GetExtent(1);
-	}
-	else if (s1 > mRectangle.GetExtent(1))
-	{
-		s1 = mRectangle.GetExtent(1);
-	}
-	sqrDistance += s1 * (s1 + (Math::GetValue(2))*b1);
-
-	// Account for numerical round-off error.
-	if (sqrDistance < Math<Real>::GetValue(0))
-	{
-		sqrDistance = Math<Real>::GetValue(0);
-	}
-
-	mClosestPoint0 = mPoint;
-	mClosestPoint1 = mRectangle.GetCenter() + s0 * mRectangle.GetAxis(0) + s1 * mRectangle.GetAxis(1);
-	mRectCoord[0] = s0;
-	mRectCoord[1] = s1;
-
-	return DistanceResult{ sqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
-}
-
-template <typename Real>
-typename const Mathematics::DistancePoint3Rectangle3<Real>::DistanceResult Mathematics::DistancePoint3Rectangle3<Real>
-	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
-{
-	auto movedPoint = mPoint + t * lhsVelocity;
-	auto movedCenter = mRectangle.GetCenter() + t * rhsVelocity;
-	Rectangle3 movedRectangle{ movedCenter, mRectangle.GetAxis(0), mRectangle.GetAxis(1), mRectangle.GetExtent(0), mRectangle.GetExtent(1) };
-	return DistancePoint3Rectangle3<Real>{ movedPoint, movedRectangle }.GetSquared();
-}
-
-template <typename Real>
-Real Mathematics::DistancePoint3Rectangle3<Real>
-	::GetRectangleCoordinate(int i) const
-{
-	return mRectCoord[i];
-}
-
-#endif // MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_DETAIL_H

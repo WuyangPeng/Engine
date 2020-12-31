@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSphere3Sphere3<Real>
 	::StaticTestIntersectorSphere3Sphere3(const Sphere3& rkSphere0,const Sphere3& rkSphere1)
-	: mSphere0{ rkSphere0 }, mSphere1{ rkSphere1 }
+	: m_Sphere0{ rkSphere0 }, m_Sphere1{ rkSphere1 }
 {
 	Test();
 }
@@ -21,22 +21,22 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Sphere3<Real>
 	::GetSphere0() const
 {
-    return mSphere0;
+    return m_Sphere0;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Sphere3<Real>
 	::GetSphere1() const
 {
-    return mSphere1;
+    return m_Sphere1;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Sphere3<Real>
 	::Test()
 {
-	auto diff = mSphere1.GetCenter() - mSphere0.GetCenter();
-	auto rSum = mSphere0.GetRadius() + mSphere1.GetRadius();
+	auto diff = m_Sphere1.GetCenter() - m_Sphere0.GetCenter();
+	auto rSum = m_Sphere0.GetRadius() + m_Sphere1.GetRadius();
 	if (Vector3DTools::VectorMagnitudeSquared(diff) <= rSum*rSum)
 	{
 		this->SetIntersectionType(IntersectionType::Point);

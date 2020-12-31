@@ -1,11 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 14:33)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/16 10:10)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Flags/IntersectionType.h"
 #include "Mathematics/Algebra/Vector2D.h"
@@ -17,7 +22,7 @@
 namespace Mathematics
 {
     template <typename Real, template <typename> class Vector>
-    class Intersector
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Intersector
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -28,30 +33,31 @@ namespace Mathematics
 
     public:
         explicit Intersector(const Real epsilon = Math::GetZeroTolerance()) noexcept;
-        virtual ~Intersector() = 0;
-        Intersector(const Intersector&) = default;
-        Intersector& operator=(const Intersector&) = default;
-        Intersector( Intersector&&) = default;
-        Intersector& operator=( Intersector&&) = default;
+        virtual ~Intersector() noexcept = 0;
+        Intersector(const Intersector& rhs) noexcept = default;
+        virtual Intersector& operator=(const Intersector& rhs) noexcept = default;
+        Intersector(Intersector&& rhs) noexcept = default;
+        virtual Intersector& operator=(Intersector&& rhs) noexcept = default;
 
-            CLASS_INVARIANT_VIRTUAL_DECLARE;
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        Real GetEpsilon() const noexcept;
-        IntersectionType GetIntersectionType() const;
-        bool IsIntersection() const noexcept;
+        [[nodiscard]] Real GetEpsilon() const noexcept;
+        [[nodiscard]] IntersectionType GetIntersectionType() const noexcept;
+        [[nodiscard]] bool IsIntersection() const noexcept;
 
     protected:
         void SetIntersectionType(IntersectionType intersectionType) noexcept;
+        virtual void Swap(Intersector& rhs) noexcept;
 
     private:
         IntersectionType m_IntersectionType;
         Real m_Epsilon;
     };
 
-    using Intersector2f = Intersector<float, Vector2D>;
-    using Intersector3f = Intersector<float, Vector3D>;
-    using Intersector2d = Intersector<double, Vector2D>;
-    using Intersector3d = Intersector<double, Vector3D>;
+    using FloatIntersector2D = Intersector<float, Vector2D>;
+    using FloatIntersector3D = Intersector<float, Vector3D>;
+    using DoubleIntersector2D = Intersector<double, Vector2D>;
+    using DoubleIntersector3D = Intersector<double, Vector3D>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_H

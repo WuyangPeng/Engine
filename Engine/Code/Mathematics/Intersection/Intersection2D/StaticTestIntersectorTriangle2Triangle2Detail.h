@@ -1,109 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 16:20)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/23 22:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
 
-#include "StaticTestIntersectorTriangle2Triangle2.h" 
+#include "StaticTestIntersectorTriangle2Triangle2.h"
 
-template <typename Real>
-Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
-	::StaticTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1)
-	: mTriangle0{ triangle0 }, mTriangle1{ triangle1 }
-{
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_ACHIEVE)
 
-}
+    #include "StaticTestIntersectorTriangle2Triangle2Achieve.h"
 
-template <typename Real>
-const Mathematics::Triangle2<Real> Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
-	::GetTriangle0() const
-{
-	return mTriangle0;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Triangle2<Real> Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
-	::GetTriangle1() const
-{
-	return mTriangle1;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
-	::Test()
-{
-	auto i0 = 0;
-	auto i1 = 0;
-	Vector2D dir;
-
-	// Test edges of triangle0 for separation.
-	for (i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
-	{
-		// Test axis V0[i1] + t*perp(V0[i0]-V0[i1]), perp(x,y) = (y,-x).
-		dir.SetX(mTriangle0.GetVertex()[i0].GetY() - mTriangle0.GetVertex()[i1].GetY());
-		dir.SetY(mTriangle0.GetVertex()[i1].GetX() - mTriangle0.GetVertex()[i0].GetX());
-		if (WhichSide(mTriangle1.GetVertex(), mTriangle0.GetVertex()[i1], dir) > 0)
-		{
-			// Triangle1 is entirely on positive side of triangle0 edge.
-			this->SetIntersectionType(IntersectionType::Empty);
-			return;
-		}
-	}
-
-	// Test edges of triangle1 for separation.
-	for (i0 = 0, i1 = 2; i0 < 3; i1 = i0++)
-	{
-		// Test axis V1[i1] + t*perp(V1[i0]-V1[i1]), perp(x,y) = (y,-x).
-		dir.SetX(mTriangle1.GetVertex()[i0].GetY() - mTriangle1.GetVertex()[i1].GetY());
-		dir.SetY(mTriangle1.GetVertex()[i1].GetX() - mTriangle1.GetVertex()[i0].GetX());
-		if (WhichSide(mTriangle0.GetVertex(), mTriangle1.GetVertex()[i1], dir) > 0)
-		{
-			// Triangle0 is entirely on positive side of triangle1 edge.
-			this->SetIntersectionType(IntersectionType::Empty);
-			return;
-		}
-	}
-
-	this->SetIntersectionType(IntersectionType::Point);
-}
-
-
-template <typename Real>
-int Mathematics::StaticTestIntersectorTriangle2Triangle2<Real>
-	::WhichSide(const std::vector<Vector2D>& V, const Vector2D& P, const Vector2D& D)
-{
-	// Vertices are projected to the form P+t*D.  Return value is +1 if all
-	// t > 0, -1 if all t < 0, 0 otherwise, in which case the line splits the
-	// triangle.
-
-	auto positive = 0;
-	auto negative = 0;
-	auto zero = 0;
-	for (auto i = 0; i < 3; ++i)
-	{
-		auto t = Vector2DTools::DotProduct(D, (V[i] - P));
-		if (t > Math<Real>::GetZero())
-		{
-			++positive;
-		}
-		else if (t < Math<Real>::GetZero())
-		{
-			++negative;
-		}
-		else
-		{
-			++zero;
-		}
-
-		if (positive > 0 && negative > 0)
-		{
-			return 0;
-		}
-	}
-	return (zero == 0 ? (positive > 0 ? 1 : -1) : 0);
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_DETAIL_H

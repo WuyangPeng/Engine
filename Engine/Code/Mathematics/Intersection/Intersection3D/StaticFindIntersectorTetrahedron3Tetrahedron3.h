@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -24,17 +24,18 @@ namespace Mathematics
 		using Tetrahedron3 = Tetrahedron3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1);
 
-		// Object access.
-		const Tetrahedron3 GetTetrahedron0() const;
-		const Tetrahedron3 GetTetrahedron1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Tetrahedron3 GetTetrahedron0() const;
+                [[nodiscard]] const Tetrahedron3 GetTetrahedron1() const;
 
 		// Information about the intersection set.
-		const std::vector<Tetrahedron3> GetIntersection() const;
+                [[nodiscard]] const std::vector<Tetrahedron3> GetIntersection() const;
 
 	private:
 		// Static query.
@@ -49,8 +50,8 @@ namespace Mathematics
 		std::vector<Tetrahedron3> mIntersection;
 	};
 
-	using StaticFindIntersectorTetrahedron3Tetrahedron3f = StaticFindIntersectorTetrahedron3Tetrahedron3<float>;
-	using StaticFindIntersectorTetrahedron3Tetrahedron3d = StaticFindIntersectorTetrahedron3Tetrahedron3<double>;
+	using FloatStaticFindIntersectorTetrahedron3Tetrahedron3 = StaticFindIntersectorTetrahedron3Tetrahedron3<float>;
+	using DoubleStaticFindIntersectorTetrahedron3Tetrahedron3 = StaticFindIntersectorTetrahedron3Tetrahedron3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_H

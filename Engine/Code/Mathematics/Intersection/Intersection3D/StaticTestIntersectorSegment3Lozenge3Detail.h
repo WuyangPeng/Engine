@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
 	::StaticTestIntersectorSegment3Lozenge3( const Segment3& rkSegment, const Lozenge3& rkLozenge)
-	: mSegment{ rkSegment }, mLozenge{ rkLozenge }
+	: m_Segment{ rkSegment }, mLozenge{ rkLozenge }
 {
 	Test();
 }
@@ -22,7 +22,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -36,7 +36,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
 	::Test()
 {
-	auto distance = DistanceSegment3Rectangle3<Real>(mSegment, mLozenge.GetRectangle()).Get().GetDistance();
+	auto distance = DistanceSegment3Rectangle3<Real>(m_Segment, mLozenge.GetRectangle()).Get().GetDistance();
 
 	if (distance <= mLozenge.GetRadius())
 	{

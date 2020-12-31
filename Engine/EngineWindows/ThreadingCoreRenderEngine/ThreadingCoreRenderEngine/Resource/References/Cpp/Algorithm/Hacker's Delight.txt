@@ -1,7 +1,0 @@
-高效程序的奥秘（Hacker's Delight）
-
-★
-作者：Henry S.Warren.Jr.
-
-知识点 
-1.	算法基础知识。  

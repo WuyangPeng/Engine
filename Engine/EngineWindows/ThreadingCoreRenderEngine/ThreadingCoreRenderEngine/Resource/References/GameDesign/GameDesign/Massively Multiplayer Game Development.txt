@@ -1,7 +1,0 @@
-大型多人在线游戏开发（Massively Multiplayer Game Development）
-
-☆
-作者：Thor Alexander
-
-知识点 
-1.	游戏设计基础知识。   

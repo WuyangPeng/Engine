@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -31,36 +31,37 @@ namespace Mathematics
 		using Triangle3 = Triangle3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicFindIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, Real tmax,
 												  const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Triangle3 GetTriangle() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetHalfspace() const;
+                [[nodiscard]] const Triangle3 GetTriangle() const;
 
 		// The intersection set is empty, a point, a segment, or a triangle.  The
 		// function GetQuantity() returns 0, 1, 2, or 3.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Dynamic queries.
 		void Find();
 
 		// The objects to intersect.
-		Plane3 mHalfspace;
-		Triangle3 mTriangle;
+		Plane3 m_Halfspace;
+		Triangle3 m_Triangle;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[3];
+		int m_Quantity;
+		Vector3D m_Point[3];
 	};
 
-	using DynamicFindIntersectorHalfspace3Triangle3f = DynamicFindIntersectorHalfspace3Triangle3<float>;
-	using DynamicFindIntersectorHalfspace3Triangle3d = DynamicFindIntersectorHalfspace3Triangle3<double>;
+	using FloatDynamicFindIntersectorHalfspace3Triangle3 = DynamicFindIntersectorHalfspace3Triangle3<float>;
+	using DoubleDynamicFindIntersectorHalfspace3Triangle3 = DynamicFindIntersectorHalfspace3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_H

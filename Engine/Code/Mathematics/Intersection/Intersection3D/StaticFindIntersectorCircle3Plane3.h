@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,39 +25,40 @@ namespace Mathematics
 		using Circle3 = Circle3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane);
 
-		// Object access.
-		const Circle3 GetCircle() const;
-		const Plane3 GetPlane() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Circle3 GetCircle() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
 
 		// Information about the intersection set.  Only get the specific object
 		// of intersection corresponding to the intersection type.  If the type
 		// is IT_POINT, use GetPoint(i).  If the type is IT_OTHER, the set is a
 		// circle, so use GetIntersectionCircle(), which returns the circle
 		// object.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
-		const Circle3 GetIntersectionCircle() const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
+                [[nodiscard]] const Circle3 GetIntersectionCircle() const;
 
 	private:
 		// Static intersection queries.		
 		void Find();
 
 		// The objects to intersect.
-		Circle3 mCircle;
-		Plane3 mPlane;
+		Circle3 m_Circle;
+		Plane3 m_Plane;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorCircle3Plane3f = StaticFindIntersectorCircle3Plane3<float>;
-	using StaticFindIntersectorCircle3Plane3d = StaticFindIntersectorCircle3Plane3<double>;
+	using FloatStaticFindIntersectorCircle3Plane3 = StaticFindIntersectorCircle3Plane3<float>;
+	using DoubleStaticFindIntersectorCircle3Plane3 = StaticFindIntersectorCircle3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_CIRCLE3_PLANE3_H

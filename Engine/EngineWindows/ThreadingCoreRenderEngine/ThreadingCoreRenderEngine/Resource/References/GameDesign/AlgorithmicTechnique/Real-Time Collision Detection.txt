@@ -1,7 +1,0 @@
-实时碰撞检测算法技术（Real-Time Collision Detection）
-
-★★★
-作者： Christer Ericson
-
-知识点 
-1.	算法技术基础知识。   

@@ -1,7 +1,0 @@
-3D游戏编程大师技巧（Tricks Of The 3D Game Programming Gurus） 
-
-○
-作者：Andre LaMothe
-
-知识点 
-1.	DirectX基础知识。   

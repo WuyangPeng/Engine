@@ -1,7 +1,0 @@
-C++ 面向对象高效编程（C++:Effective Object-Oriented Software Construction）
-
-○
-作者：Kayshav Dattatri
-
-知识点 
-1.	C++	基础知识。     

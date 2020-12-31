@@ -57,7 +57,7 @@ namespace Mathematics
 
 	private:
 		bool mInitialized;
-		int mQuantity;
+		int m_Quantity;
 
 		// Input data.
 		Real* mX;

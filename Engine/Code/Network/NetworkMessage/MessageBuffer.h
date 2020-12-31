@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -24,7 +24,7 @@ namespace Network
     class NETWORK_DEFAULT_DECLARE MessageBuffer final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer, = default);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer, DESTRUCTOR_DEFAULT);
         CORE_TOOLS_SHARED_PTR_DECLARE(MessageBuffer);
         using ImplTypeSharedPtr = std::shared_ptr<ImplType>;
 

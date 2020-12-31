@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
 	::StaticTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle)
-	: mSegment{ segment }, mTriangle{ triangle }
+	: m_Segment{ segment }, m_Triangle{ triangle }
 {
 	Test();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
 	::GetTriangle() const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
@@ -36,9 +36,9 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
 	::Test()
 {
     // Compute the offset origin, edges, and normal.
-    auto diff = mSegment.GetCenterPoint() - mTriangle.GetVertex()[0];
-	auto edge1 = mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0];
-	auto edge2 = mTriangle.GetVertex()[2] - mTriangle.GetVertex()[0];
+    auto diff = m_Segment.GetCenterPoint() - m_Triangle.GetVertex()[0];
+	auto edge1 = m_Triangle.GetVertex()[1] - m_Triangle.GetVertex()[0];
+	auto edge2 = m_Triangle.GetVertex()[2] - m_Triangle.GetVertex()[0];
 	auto normal = Vector3DTools::CrossProduct(edge1,edge2);
 
     // Solve Q + t*D = b1*E1 + b2*E2 (Q = diff, D = segment direction,
@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
     //   |Dot(D,N)|*b1 = sign(Dot(D,N))*Dot(D,Cross(Q,E2))
     //   |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
     //   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
-	auto DdN = Vector3DTools::DotProduct(mSegment.GetDirection(),normal);
+	auto DdN = Vector3DTools::DotProduct(m_Segment.GetDirection(),normal);
     Real sign;
     if (DdN > Math::GetZeroTolerance())
     {
@@ -66,17 +66,17 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
         return;
     }
 
-	auto DdQxE2 = sign*Vector3DTools::DotProduct(mSegment.GetDirection(), Vector3DTools::CrossProduct(diff,edge2));
+	auto DdQxE2 = sign*Vector3DTools::DotProduct(m_Segment.GetDirection(), Vector3DTools::CrossProduct(diff,edge2));
     if (DdQxE2 >= Math<Real>::GetZero())
     {
-		auto DdE1xQ = sign*Vector3DTools::DotProduct(mSegment.GetDirection(), Vector3DTools::CrossProduct(edge1,diff));
+		auto DdE1xQ = sign*Vector3DTools::DotProduct(m_Segment.GetDirection(), Vector3DTools::CrossProduct(edge1,diff));
         if (DdE1xQ >= Math<Real>::GetZero())
         {
             if (DdQxE2 + DdE1xQ <= DdN)
             {
                 // Line intersects triangle, check if segment does.
 				auto QdN = -sign*Vector3DTools::DotProduct(diff,normal);
-				auto extDdN = mSegment.GetExtent()*DdN;
+				auto extDdN = m_Segment.GetExtent()*DdN;
                 if (-extDdN <= QdN && QdN <= extDdN)
                 {
                     // Segment intersects triangle.

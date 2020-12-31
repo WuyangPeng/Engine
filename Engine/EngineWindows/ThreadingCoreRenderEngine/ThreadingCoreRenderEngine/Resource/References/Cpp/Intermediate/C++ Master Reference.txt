@@ -1,7 +1,0 @@
-C++ 高级参考手册（C++ Master Reference）
-
-○
-作者：Clayton Walnum
-
-知识点 
-1.	C++	基础知识。     

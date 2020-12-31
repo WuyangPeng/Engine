@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 	::StaticTestIntersectorPlane3Sphere3(const Plane3& plane,const Sphere3& sphere)
-	: mPlane{ plane }, mSphere{ sphere }
+	: m_Plane{ plane }, m_Sphere{ sphere }
 {
 	Test();
 }
@@ -21,22 +21,22 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 	::Test()
 {
-	auto signedDistance = mPlane.DistanceTo(mSphere.GetCenter());
-	if (Math::FAbs(signedDistance) <= mSphere.GetRadius())
+	auto signedDistance = m_Plane.DistanceTo(m_Sphere.GetCenter());
+	if (Math::FAbs(signedDistance) <= m_Sphere.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}
@@ -50,8 +50,8 @@ template <typename Real>
 bool Mathematics::StaticTestIntersectorPlane3Sphere3<Real>
 	::SphereIsCulled() const
 {
-	auto signedDistance = mPlane.DistanceTo(mSphere.GetCenter());
-    return signedDistance <= -mSphere.GetRadius();
+	auto signedDistance = m_Plane.DistanceTo(m_Sphere.GetCenter());
+    return signedDistance <= -m_Sphere.GetRadius();
 }
  
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_SPHERE3_DETAIL_H

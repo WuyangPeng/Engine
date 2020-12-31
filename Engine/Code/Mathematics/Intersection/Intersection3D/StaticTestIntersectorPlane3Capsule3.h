@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,19 +25,20 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Capsule3 = Capsule3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Capsule3 GetCapsule() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane() const;
+        [[nodiscard]] const Capsule3 GetCapsule() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The capsule is culled if it is on the negative
 		// side of the plane.
-		bool CapsuleIsCulled() const;
+        [[nodiscard]] bool CapsuleIsCulled() const;
 
 	private:
 		// Static intersection query.
@@ -45,12 +46,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Plane3 mPlane;
+		Plane3 m_Plane;
 		Capsule3 mCapsule;
 	};
 
-	using StaticTestIntersectorPlane3Capsule3f = StaticTestIntersectorPlane3Capsule3<float>;
-	using StaticTestIntersectorPlane3Capsule3d = StaticTestIntersectorPlane3Capsule3<double>;
+	using FloatStaticTestIntersectorPlane3Capsule3 = StaticTestIntersectorPlane3Capsule3<float>;
+	using DoubleStaticTestIntersectorPlane3Capsule3 = StaticTestIntersectorPlane3Capsule3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_H

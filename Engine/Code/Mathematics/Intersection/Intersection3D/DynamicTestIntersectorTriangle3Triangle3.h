@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -27,15 +27,16 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Line3 = Line3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicTestIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax,
 												 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Triangle3 GetTriangle0() const;
-		const Triangle3 GetTriangle1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Triangle3 GetTriangle0() const;
+                [[nodiscard]] const Triangle3 GetTriangle1() const;
 
 		bool mReportCoplanarIntersections;  // default 'true'
 
@@ -49,13 +50,13 @@ namespace Mathematics
 
 		static void GetInterval(const Triangle3& triangle, const Line3& line, const Real distance[3], const int sign[3], Real param[2]);
 
-		bool ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point);
+	 [[nodiscard]] bool ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point);
 
-		bool GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1);
+	 [[nodiscard]] bool GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1);
 
-		static bool TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast);
+	 [[nodiscard]] static bool TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast);
 
-		bool TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast);
+	 [[nodiscard]] bool TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast);
 
 		enum ProjectionMap
 		{
@@ -81,9 +82,9 @@ namespace Mathematics
 
 		static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Configuration& cfg);
 
-		bool FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast);
+	 [[nodiscard]] bool FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast);
 
-		bool FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, ContactSide& side,
+	 [[nodiscard]] bool FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, ContactSide& side,
 						 Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast);
 
 		void FindContactSet(const Triangle3& tri0, const Triangle3& tri1, ContactSide& side, Configuration& cfg0, Configuration& cfg1);
@@ -93,12 +94,12 @@ namespace Mathematics
 		void GetEdgeFaceIntersection(const Vector3D& U0, const Vector3D& U1, const Triangle3& tri);
 
 		// The objects to intersect.
-		Triangle3 mTriangle0;
-		Triangle3 mTriangle1;
+		Triangle3 m_Triangle0;
+		Triangle3 m_Triangle1;
 	};
 
-	using DynamicTestIntersectorTriangle3Triangle3f = DynamicTestIntersectorTriangle3Triangle3<float>;
-	using DynamicTestIntersectorTriangle3Triangle3d = DynamicTestIntersectorTriangle3Triangle3<double>;
+	using FloatDynamicTestIntersectorTriangle3Triangle3 = DynamicTestIntersectorTriangle3Triangle3<float>;
+	using DoubleDynamicTestIntersectorTriangle3Triangle3 = DynamicTestIntersectorTriangle3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_H

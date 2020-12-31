@@ -29,7 +29,7 @@ namespace Mathematics
 		virtual Real GetXMax() const;
 
 	protected:
-		using IntpAkima1<Real>::mQuantity;
+		using IntpAkima1<Real>::m_Quantity;
 		using IntpAkima1<Real>::mPoly;
 		using IntpAkima1<Real>::ComputeDerivative;
 

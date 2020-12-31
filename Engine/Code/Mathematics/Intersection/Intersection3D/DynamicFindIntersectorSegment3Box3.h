@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax,
 										   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Box3 GetBox() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Box3 GetBox() const;
+
+		 [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Dynamic find-intersection query.  The first point of contact is
@@ -47,17 +48,17 @@ namespace Mathematics
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Box3 mBox;
-		bool mSolid;
+		Segment3 m_Segment;
+		Box3 m_Box;
+		bool m_Solid;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using DynamicFindIntersectorSegment3Box3f = DynamicFindIntersectorSegment3Box3<float>;
-	using DynamicFindIntersectorSegment3Box3d = DynamicFindIntersectorSegment3Box3<double>;
+	using FloatDynamicFindIntersectorSegment3Box3 = DynamicFindIntersectorSegment3Box3<float>;
+	using DoubleDynamicFindIntersectorSegment3Box3 = DynamicFindIntersectorSegment3Box3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SEGMENT3_BOX3_H

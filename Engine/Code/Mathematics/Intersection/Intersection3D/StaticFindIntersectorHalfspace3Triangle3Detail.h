@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,9 +13,9 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::StaticFindIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle)
-	:mHalfspace{ halfspace }, mTriangle{ triangle }
+	:m_Halfspace{ halfspace }, m_Triangle{ triangle }
 {
-	mQuantity = 0;
+	m_Quantity = 0;
 
 	Find();
 }
@@ -24,14 +24,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::GetHalfspace() const
 {
-	return mHalfspace;
+	return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::GetTriangle() const
 {
-	return mTriangle;
+	return m_Triangle;
 }
 
 template <typename Real>
@@ -39,15 +39,15 @@ void Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::Find()
 {
 	// Start with the triangle and then clip it against the plane.
-	mQuantity = 3;
+	m_Quantity = 3;
 	for (auto i = 0; i < 3; ++i)
 	{
-		mPoint[i] = mTriangle.GetVertex()[i];
+		m_Point[i] = m_Triangle.GetVertex()[i];
 	}
 
-	ClipConvexPolygonAgainstPlane<Real>(-mHalfspace.GetNormal(), -mHalfspace.GetConstant(), mQuantity, mPoint);
+	IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(-m_Halfspace.GetNormal(), -m_Halfspace.GetConstant(), m_Quantity, m_Point);
 
-	if (mQuantity > 0)
+	if (m_Quantity > 0)
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}
@@ -61,14 +61,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorHalfspace3Triangle3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H

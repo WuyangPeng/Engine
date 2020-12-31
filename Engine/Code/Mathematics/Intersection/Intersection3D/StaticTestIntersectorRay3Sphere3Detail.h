@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 	::StaticTestIntersectorRay3Sphere3(const Ray3& ray,const Sphere3& sphere)
-	: mRay{ ray }, mSphere{ sphere }
+	: mRay{ ray }, m_Sphere{ sphere }
 {
 	Test();
 }
@@ -28,15 +28,15 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 	::Test()
 {
-    auto diff = mRay.GetOrigin() - mSphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
+    auto diff = mRay.GetOrigin() - m_Sphere.GetCenter();
+	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
     if (a0 <= Math<Real>::GetValue(0))
     {
         // P is inside the sphere

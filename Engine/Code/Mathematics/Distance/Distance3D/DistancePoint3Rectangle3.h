@@ -1,57 +1,61 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 17:20)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/14 16:00)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_H
-#define MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
+#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Distance/DistanceBase.h"
 #include "Mathematics/Objects3D/Rectangle3.h"
-#include "Mathematics/Distance/DistanceBase.h"    
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DistancePoint3Rectangle3 : public DistanceBase<Real, Vector3D<Real> >
-	{
-	public:
-		using ClassType = DistancePoint3Rectangle3<Real>;
-		using Vector3D = Vector3D<Real>;
-		using ParentType = DistanceBase<Real, Vector3D>;
-		using Rectangle3 = Rectangle3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult; 
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Rectangle3 : public DistanceBase<Real, Vector3D<Real>>
+    {
+    public:
+        using ClassType = DistancePoint3Rectangle3<Real>;
+        using Vector3D = Vector3D<Real>;
+        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector2D = Vector2D<Real>;
+        using Rectangle3 = Rectangle3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
+        using DistanceResult = typename ParentType::DistanceResult;
 
-	public:
-		DistancePoint3Rectangle3(const Vector3D& point, const Rectangle3& rectangle);
+    public:
+        DistancePoint3Rectangle3(const Vector3D& point, const Rectangle3& rectangle) noexcept;
 
-		// Object access.
-		const Vector3D& GetPoint() const;
-		const Rectangle3& GetRectangle() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Static distance queries.
-		 const DistanceResult GetSquared() const override;
+        [[nodiscard]] const Vector3D GetPoint() const noexcept;
+        [[nodiscard]] const Rectangle3 GetRectangle() const noexcept;
 
-		// Function calculations for dynamic distance queries.
-		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        [[nodiscard]] const DistanceResult GetSquared() const override;
 
-		// Information about the closest rectangle point.
-		Real GetRectangleCoordinate(int i) const;
+        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
-	private:
-		Vector3D mPoint;
-		Rectangle3 mRectangle;
+        // 有关最接近的矩形点的信息。
+        Real GetRectangleCoordinate(int index) const;
 
-		// Information about the closest rectangle point.
-		// closest1 = rect.center + param0*rect.dir0 + param1*rect.dir1
-		mutable Real mRectCoord[2];
-	};
+    private:
+        Vector3D m_Point;
+        Rectangle3 m_Rectangle;
 
-	using DistPoint3Rectangle3f = DistancePoint3Rectangle3<float>;
-	using DistPoint3Rectangle3d = DistancePoint3Rectangle3<double>;
+        // 有关最接近的矩形点的信息
+        // closest1 = rect.center + param0 * rect.dir0 + param1 * rect.dir1
+        mutable Vector2D m_RectCoord;
+    };
+
+    using FloatDistancePoint3Rectangle3 = DistancePoint3Rectangle3<float>;
+    using DoubleDistancePoint3Rectangle3 = DistancePoint3Rectangle3<double>;
 }
 
-#endif // MATHEMATICS_DISTANCE_DIST_POINT3_RECTANGLE3_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_RECTANGLE3_H

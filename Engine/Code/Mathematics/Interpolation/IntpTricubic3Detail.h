@@ -22,7 +22,7 @@ namespace Mathematics
 		mXBound = xBound;
 		mYBound = yBound;
 		mZBound = zBound;
-		mQuantity = xBound * yBound*zBound;
+		m_Quantity = xBound * yBound*zBound;
 
 		mXMin = xMin;
 		mXSpacing = xSpacing;
@@ -65,7 +65,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpTricubic3<Real>::GetQuantity() const
 	{
-		return mQuantity;
+		return m_Quantity;
 	}
 
 	template <typename Real>

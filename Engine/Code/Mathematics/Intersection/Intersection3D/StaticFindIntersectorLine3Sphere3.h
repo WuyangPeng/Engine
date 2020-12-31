@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,19 +25,20 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
-		Real GetLineParameter(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
+                [[nodiscard]] Real GetLineParameter(int index) const;
 
 	private:
 		// Static intersection queries.
@@ -45,16 +46,16 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Line3 mLine;
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 		Real mLineParameter[2];
 	};
 
-	using StaticFindIntersectorLine3Sphere3f = StaticFindIntersectorLine3Sphere3<float>;
-	using StaticFindIntersectorLine3Sphere3d = StaticFindIntersectorLine3Sphere3<double>;
+	using FloatStaticFindIntersectorLine3Sphere3 = StaticFindIntersectorLine3Sphere3<float>;
+	using DoubleStaticFindIntersectorLine3Sphere3 = StaticFindIntersectorLine3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_H

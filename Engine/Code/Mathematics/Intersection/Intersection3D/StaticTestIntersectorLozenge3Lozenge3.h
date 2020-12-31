@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -23,14 +23,15 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Lozenge3 = Lozenge3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorLozenge3Lozenge3(const Lozenge3& lozenge0, const Lozenge3& lozenge1);
 
-		// Object access.
-		const Lozenge3 GetLozenge0() const;
-		const Lozenge3 GetLozenge1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Lozenge3 GetLozenge0() const;
+                [[nodiscard]] const Lozenge3 GetLozenge1() const;
 
 		// Static intersection query.
 		void Test();
@@ -41,8 +42,8 @@ namespace Mathematics
 		Lozenge3 mLozenge1;
 	};
 
-	using StaticTestIntersectorLozenge3Lozenge3f = StaticTestIntersectorLozenge3Lozenge3<float>;
-	using StaticTestIntersectorLozenge3Lozenge3d = StaticTestIntersectorLozenge3Lozenge3<double>;
+	using FloatStaticTestIntersectorLozenge3Lozenge3 = StaticTestIntersectorLozenge3Lozenge3<float>;
+	using DoubleStaticTestIntersectorLozenge3Lozenge3 = StaticTestIntersectorLozenge3Lozenge3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H

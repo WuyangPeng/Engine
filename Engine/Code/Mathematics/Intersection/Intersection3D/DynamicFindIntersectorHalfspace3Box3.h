@@ -1,68 +1,73 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:43)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/31 16:32)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Objects3D/Box3.h"
-#include "Mathematics/Objects3D/Plane3.h"  
-#include "Mathematics/Intersection/DynamicIntersector.h" 
+#include "Mathematics/Objects3D/Plane3.h"
 
-// A halfspace is the set of points on the side of a plane to which the plane
-// normal points.  The queries here are for intersection of a box and a
-// halfspace.  In the dynamice find query, if the box is already
-// intersecting the halfspace, the return value is 'false'.  The idea is to
-// find first time of contact.
+/// 半空间是平面法线指向的平面侧面上的点集。 这里的查询是一个盒子和半个空格的交集。
+/// 在动态查找查询中，如果该框已经与半个空格相交，则返回值为'false'。 这个想法是寻找第一次接触。
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicFindIntersectorHalfspace3Box3 : public  DynamicIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = DynamicFindIntersectorHalfspace3Box3<Real>;
-		using ParentType = DynamicIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Box3 = Box3<Real>;
-		using Plane3 = Plane3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class DynamicFindIntersectorHalfspace3Box3Impl;
 
-	public:
-		DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box,
-											 Real tmax, const Vector3D& lhsVelocity,
-											 const Vector3D& rhsVelocity,
-											 const Real epsilon = Math::GetZeroTolerance());
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<double>>;
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Box3 GetBox() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<Real>>;
 
-		// The contact set is empty, a point, a segment, or a rectangle.  The
-		// function GetQuantity() returns 0, 1, 2, or 4.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Box3 : public DynamicIntersector<Real, Vector3D>
+    {
+    public:
+        using DynamicFindIntersectorHalfspace3Box3Impl = DynamicFindIntersectorHalfspace3Box3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
 
-	private:
-		// Dynamic queries.
-		void Find();
+        using ParentType = DynamicIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Box3 = Box3<Real>;
+        using Plane3 = Plane3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-		// The objects to intersect.
-		Plane3 mHalfspace;
-		Box3 mBox;
+    public:
+        DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box,
+                                             Real tmax, const Vector3D& lhsVelocity,
+                                             const Vector3D& rhsVelocity,
+                                             const Real epsilon = Math::GetZeroTolerance());
 
-		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[4];
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	using DynamicFindIntersectorHalfspace3Box3f = DynamicFindIntersectorHalfspace3Box3<float>;
-	using DynamicFindIntersectorHalfspace3Box3d = DynamicFindIntersectorHalfspace3Box3<double>;
+        [[nodiscard]] const Plane3 GetHalfspace() const noexcept;
+        [[nodiscard]] const Box3 GetBox() const noexcept;
+
+        // 相交点集合为空，点，线段或矩形。 函数 GetQuantity()返回0、1、2或4。
+        [[nodiscard]] int GetQuantity() const;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
+
+    private:
+        void Find();
+
+    private:
+        IMPL_TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
+    };
+
+    using FloatDynamicFindIntersectorHalfspace3Box3 = DynamicFindIntersectorHalfspace3Box3<float>;
+    using DoubleDynamicFindIntersectorHalfspace3Box3 = DynamicFindIntersectorHalfspace3Box3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H

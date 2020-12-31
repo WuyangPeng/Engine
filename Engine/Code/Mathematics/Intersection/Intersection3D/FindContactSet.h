@@ -1,56 +1,96 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:47)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/25 16:41)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_H
 #define MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Box3.h"
-#include "Mathematics/Objects3D/Segment3.h"  
-#include "Mathematics/Objects3D/Triangle3.h"  
 #include "Mathematics/Intersection/IntersectionFwd.h"
+#include "Mathematics/Objects3D/Box3.h"
+#include "Mathematics/Objects3D/Segment3.h"
+#include "Mathematics/Objects3D/Triangle3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE  FindContactSet
-	{
-	public:
-		FindContactSet(const Vector3D<Real> segment[2], const Triangle3<Real>& triangle, int side, const IntersectorConfiguration<Real>& segCfg, const IntersectorConfiguration<Real>& triCfg,
-					   const Vector3D<Real>& segVelocity, const Vector3D<Real>& triVelocity, Real tfirst, int& quantity, Vector3D<Real>* P);
+    template <typename Real>
+    class FindContactSetImpl;
 
-		FindContactSet(const Vector3D<Real> segment[2], const Box3<Real>& box, int side, const IntersectorConfiguration<Real>& segCfg, const IntersectorConfiguration<Real>& boxCfg,
-					   const Vector3D<Real>& segVelocity, const Vector3D<Real>& boxVelocity, Real tfirst, int& quantity, Vector3D<Real>* P);
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<double>>;
 
-		FindContactSet(const Triangle3<Real>& triangle, const Box3<Real>& box, int side, const IntersectorConfiguration<Real>& triCfg, const IntersectorConfiguration<Real>& boxCfg,
-					   const Vector3D<Real>& triVelocity, const Vector3D<Real>& boxVelocity, Real tfirst, int& quantity, Vector3D<Real>* P);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<Real>>;
 
-		FindContactSet(const Box3<Real>& box0, const Box3<Real>& box1, int side, const IntersectorConfiguration<Real>& box0Cfg, const IntersectorConfiguration<Real>& box1Cfg,
-					   const Vector3D<Real>& box0Velocity, const Vector3D<Real>& box1Velocity, Real tfirst, int& quantity, Vector3D<Real>* P);
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FindContactSet final
+    {
+    public:
+        using FindContactSetImpl = FindContactSetImpl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(FindContactSet);
 
-	private:
-		// These functions are called when it is known that the features are
-		// intersecting.  Consequently, they are specialized versions of the
-		// object-object intersection algorithms.
+        using Vector3D = Vector3D<Real>;
+        using Triangle3 = Triangle3<Real>;
+        using Box3 = Box3<Real>;
+        using IntersectorConfiguration = IntersectorConfiguration<Real>;
+        using SegmentType = std::array<Vector3D, 2>;
+        using TriangleType = std::array<Vector3D, 3>;
+        using RectangleType = std::array<Vector3D, 4>;
+        using PointType = std::vector<Vector3D>;
 
-		static void ColinearSegments(const Vector3D<Real> segment0[2], const Vector3D<Real> segment1[2], int& quantity, Vector3D<Real>* P);
+    public:
+        FindContactSet(const SegmentType& segment,
+                       const Triangle3& triangle,
+                       ContactSide side,
+                       const IntersectorConfiguration& segmentCfg,
+                       const IntersectorConfiguration& triangleCfg,
+                       const Vector3D& segmentVelocity,
+                       const Vector3D& triangleVelocity,
+                       Real tFirst);
 
-		static void SegmentThroughPlane(const Vector3D<Real> segment[2], const Vector3D<Real>& planeOrigin, const Vector3D<Real>& planeNormal, int& quantity, Vector3D<Real>* P);
+        FindContactSet(const SegmentType& segment,
+                       const Box3& box,
+                       ContactSide side,
+                       const IntersectorConfiguration& segmentCfg,
+                       const IntersectorConfiguration& boxCfg,
+                       const Vector3D& segmentVelocity,
+                       const Vector3D& boxVelocity,
+                       Real tFirst);
 
-		static void SegmentSegment(const Vector3D<Real> segment0[2], const Vector3D<Real> segment1[2], int& quantity, Vector3D<Real>* P);
+        FindContactSet(const Triangle3& triangle,
+                       const Box3& box,
+                       ContactSide side,
+                       const IntersectorConfiguration& triangleCfg,
+                       const IntersectorConfiguration& boxCfg,
+                       const Vector3D& triangleVelocity,
+                       const Vector3D& boxVelocity,
+                       Real tFirst);
 
-		static void ColinearSegmentTriangle(const Vector3D<Real> segment[2], const Vector3D<Real> triangle[3], int& quantity, Vector3D<Real>* P);
+        FindContactSet(const Box3& box0,
+                       const Box3& box1,
+                       ContactSide side,
+                       const IntersectorConfiguration& box0Cfg,
+                       const IntersectorConfiguration& box1Cfg,
+                       const Vector3D& box0Velocity,
+                       const Vector3D& box1Velocity,
+                       Real tFirst);
 
-		static void CoplanarSegmentRectangle(const Vector3D<Real> segment[2], const Vector3D<Real> rectangle[4], int& quantity, Vector3D<Real>* P);
+        CLASS_INVARIANT_DECLARE;
 
-		static void CoplanarTriangleRectangle(const Vector3D<Real> triangle[3], const Vector3D<Real> rectangle[4], int& quantity, Vector3D<Real>* P);
+        [[nodiscard]] PointType GetPoint() const;
 
-		static void CoplanarRectangleRectangle(const Vector3D<Real> rectangle0[4], const Vector3D<Real> rectangle1[4], int& quantity, Vector3D<Real>* P);
-	};
+    private:
+        IMPL_TYPE_DECLARE(FindContactSet);
+    };
+
+    using FloatFindContactSet = FindContactSet<float>;
+    using DoubleFindContactSet = FindContactSet<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_H
+#endif  // MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_H

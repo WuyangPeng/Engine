@@ -1,11 +1,16 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:33)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/16 15:10)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Intersector1.h"
 
@@ -13,37 +18,47 @@
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersector1 : public Intersector1<Real>
-	{
-	public:
-		using ClassType = StaticFindIntersector1<Real>;
-		using ParentType = Intersector1<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class StaticFindIntersector1Impl;
 
-	public:
-		StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::GetZeroTolerance());
-		virtual ~StaticFindIntersector1();
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<double>>;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<Real>>;
 
-		 bool IsIntersection() const override;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersector1 final : public Intersector1<Real>
+    {
+    public:
+        using StaticFindIntersector1Impl = StaticFindIntersector1Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersector1);
 
-		// 有关交集的信息。
-		// 相交数为0（区间不重叠），
-		// 1（区间边界相交）或2（区间与区间相交）。
-		int GetNumIntersections() const;
-		Real GetIntersection(int index) const;
+        using ParentType = Intersector1<Real>;
+        using Math = typename ParentType::Math;
 
-	private:
-		void Find();
+    public:
+        StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon = Math::GetZeroTolerance());
 
-	private:
-		std::vector<Real> m_Intersections;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-	using StaticFindIntersector1f = StaticFindIntersector1<float>;
-	using StaticFindIntersector1d = StaticFindIntersector1<double>;
+        [[nodiscard]] bool IsIntersection() const noexcept final;
+
+        // 有关交集的信息。
+        // 相交数为0（区间不重叠），
+        // 1（区间边界相交）或2（区间与区间相交）。
+        [[nodiscard]] int GetNumIntersections() const;
+        [[nodiscard]] Real GetIntersection(int index) const;
+
+    private:
+        void Find();
+
+    private:
+        IMPL_TYPE_DECLARE(StaticFindIntersector1);
+    };
+
+    using FloatStaticFindIntersector1 = StaticFindIntersector1<float>;
+    using DoubleStaticFindIntersector1 = StaticFindIntersector1<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_H

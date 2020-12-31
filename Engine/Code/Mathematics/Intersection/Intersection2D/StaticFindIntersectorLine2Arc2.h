@@ -1,58 +1,60 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:35)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/21 15:14)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects2D/Arc2.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects2D/Arc2.h"
 #include "Mathematics/Objects2D/Line2.h"
-#include "Mathematics/Intersection/StaticIntersector.h" 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorLine2Arc2 : public StaticIntersector<Real, Vector2D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorLine2Arc2<Real>;
-		using ParentType = StaticIntersector<Real, Vector2D>;
-		using Vector2D = Vector2D<Real>;
-		using Line2 = Line2<Real>;
-		using Arc2 = Arc2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Arc2 : public StaticIntersector<Real, Vector2D>
+    {
+    public:
+        using ClassType = StaticFindIntersectorLine2Arc2<Real>;
+        using ParentType = StaticIntersector<Real, Vector2D>;
+        using Vector2D = Vector2D<Real>;
+        using Line2 = Line2<Real>;
+        using Arc2 = Arc2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticFindIntersectorLine2Arc2(const Line2& line, const Arc2& arc);
+    public:
+        StaticFindIntersectorLine2Arc2(const Line2& line, const Arc2& arc, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Line2 GetLine() const;
-		const Arc2 GetArc() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// The intersection set.
-		int GetQuantity() const;
-		const Vector2D& GetPoint(int i) const;
+        [[nodiscard]] const Line2 GetLine() const noexcept;
+        [[nodiscard]] const Arc2 GetArc() const noexcept;
 
-	private:
-		// Static intersection query.
-		void Find();
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] const Vector2D GetPoint(int index) const;
 
-		// The objects to intersect.
-		Line2 mLine;
-		Arc2 mArc;
+    private:
+        void Find();
 
-		// Information about the intersection set.
-		int mQuantity;
-		Vector2D mPoint[2];
-	};
+    private:
+        Line2 m_Line;
+        Arc2 m_Arc;
 
-	using StaticFindIntersectorLine2Arc2f = StaticFindIntersectorLine2Arc2<float>;
-	using StaticFindIntersectorLine2Arc2d = StaticFindIntersectorLine2Arc2<double>;
+        int m_Quantity;
+        Vector2D m_Point0;
+        Vector2D m_Point1;
+    };
+
+    using FloatStaticFindIntersectorLine2Arc2 = StaticFindIntersectorLine2Arc2<float>;
+    using DoubleStaticFindIntersectorLine2Arc2 = StaticFindIntersectorLine2Arc2<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_H

@@ -7,7 +7,7 @@
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
 
-#include "IntersectorLine3Triangle3DataDetail.h"
+#include "Detail/IntersectorLine3Triangle3DataDetail.h"
 #include "StaticFindIntersectorLine3Triangle3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"

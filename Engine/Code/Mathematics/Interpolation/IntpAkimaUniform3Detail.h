@@ -30,7 +30,7 @@ namespace Mathematics
 		mZSpacing = zSpacing;
 		mF = F;
 
-		mQuantity = mXBound * mYBound*mZBound;
+		m_Quantity = mXBound * mYBound*mZBound;
 		mXMax = xMin + xSpacing * (mXBound - 1);
 		mYMax = yMin + ySpacing * (mYBound - 1);
 		mZMax = zMin + zSpacing * (mZBound - 1);
@@ -788,7 +788,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpAkimaUniform3<Real>::GetQuantity() const
 	{
-		return mQuantity;
+		return m_Quantity;
 	}
 
 	template <typename Real>

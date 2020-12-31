@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
 // 
@@ -36,18 +36,18 @@ void Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	::Find()
 {
 	Real t[2];
-	mQuantity = Find(mLine.GetOrigin(), mLine.GetDirection(), mCylinder, t);
+	m_Quantity = Find(mLine.GetOrigin(), mLine.GetDirection(), mCylinder, t);
 
-	for (int i = 0; i < mQuantity; ++i)
+	for (int i = 0; i < m_Quantity; ++i)
 	{
-		mPoint[i] = mLine.GetOrigin() + t[i] * mLine.GetDirection();
+		m_Point[i] = mLine.GetOrigin() + t[i] * mLine.GetDirection();
 	}
 
-	if (mQuantity == 2)
+	if (m_Quantity == 2)
 	{
 		this->SetIntersectionType(IntersectionType::Segment);
 	}
-	else if (mQuantity == 1)
+	else if (m_Quantity == 1)
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}
@@ -61,14 +61,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 template <typename Real>

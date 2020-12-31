@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Box3<Real>
 	::StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box)
-	: mPlane{ plane }, mBox{ box }
+	: m_Plane{ plane }, m_Box{ box }
 {
 	Test();
 }
@@ -21,27 +21,27 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Box3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::StaticTestIntersectorPlane3Box3<Real>
 	::GetBox() const
 {
-    return mBox;
+    return m_Box;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Box3<Real>
 	::Test()
 {
-    Real tmp[3] { mBox.GetExtent(0)*(Vector3DTools::DotProduct(mPlane.GetNormal(), mBox.GetAxis(0))),
-				  mBox.GetExtent(1)*(Vector3DTools::DotProduct(mPlane.GetNormal(), mBox.GetAxis(1))),
-				  mBox.GetExtent(2)*(Vector3DTools::DotProduct(mPlane.GetNormal(), mBox.GetAxis(2))) };
+    Real tmp[3] { m_Box.GetExtent(0)*(Vector3DTools::DotProduct(m_Plane.GetNormal(), m_Box.GetAxis(0))),
+				  m_Box.GetExtent(1)*(Vector3DTools::DotProduct(m_Plane.GetNormal(), m_Box.GetAxis(1))),
+				  m_Box.GetExtent(2)*(Vector3DTools::DotProduct(m_Plane.GetNormal(), m_Box.GetAxis(2))) };
 
 	auto radius = Math::FAbs(tmp[0]) + Math::FAbs(tmp[1]) + Math::FAbs(tmp[2]);
 
-	auto signedDistance = mPlane.DistanceTo(mBox.GetCenter());
+	auto signedDistance = m_Plane.DistanceTo(m_Box.GetCenter());
 	if (Math::FAbs(signedDistance) <= radius)
 	{
 		this->SetIntersectionType(IntersectionType::Point);
@@ -56,13 +56,13 @@ template <typename Real>
 bool  Mathematics::StaticTestIntersectorPlane3Box3<Real>
 	::BoxIsCulled() const
 {
-    Real tmp[3] { mBox.GetExtent(0)*(Vector3DTools::DotProduct(mPlane.GetNormal(),mBox.GetAxis(0))),
-				  mBox.GetExtent(1)*(Vector3DTools::DotProduct(mPlane.GetNormal(), mBox.GetAxis(1))),
-				  mBox.GetExtent(2)*(Vector3DTools::DotProduct(mPlane.GetNormal(), mBox.GetAxis(2))) };
+    Real tmp[3] { m_Box.GetExtent(0)*(Vector3DTools::DotProduct(m_Plane.GetNormal(),m_Box.GetAxis(0))),
+				  m_Box.GetExtent(1)*(Vector3DTools::DotProduct(m_Plane.GetNormal(), m_Box.GetAxis(1))),
+				  m_Box.GetExtent(2)*(Vector3DTools::DotProduct(m_Plane.GetNormal(), m_Box.GetAxis(2))) };
 
 	auto radius = Math::FAbs(tmp[0]) + Math::FAbs(tmp[1]) + Math::FAbs(tmp[2]);
 
-	auto signedDistance = mPlane.DistanceTo(mBox.GetCenter());
+	auto signedDistance = m_Plane.DistanceTo(m_Box.GetCenter());
     return signedDistance <= -radius;
 }
 

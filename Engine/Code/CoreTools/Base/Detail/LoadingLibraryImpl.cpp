@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -19,12 +19,12 @@
 using std::string;
 
 CoreTools::LoadingLibraryImpl::LoadingLibraryImpl(const String& fileName, LoadLibraryType flags)
-    : m_FileName{ StringConversion::StandardConversionDynamicLinkString(fileName) },
-      m_Library{ System::LoadDynamicLibrary(m_FileName.c_str(), flags) }
+    : fileName{ StringConversion::StandardConversionDynamicLinkString(fileName) },
+      m_Library{ System::LoadDynamicLibrary(fileName.c_str(), flags) }
 {
     if (m_Library == nullptr)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("º”‘ÿ£®"s) + m_FileName + SYSTEM_TEXT("£©∂ØÃ¨¡¥Ω”ø‚ ß∞‹°£"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("º”‘ÿ£®"s) + fileName + SYSTEM_TEXT("£©∂ØÃ¨¡¥Ω”ø‚ ß∞‹°£"s));
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ CoreTools::LoadingLibraryImpl::~LoadingLibraryImpl() noexcept
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT(" Õ∑≈“—º”‘ÿµƒ£®")
-            << m_FileName
+            << fileName
             << SYSTEM_TEXT("£©∂ØÃ¨¡¥Ω”ø‚ ß∞‹°£")
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }

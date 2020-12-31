@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -26,31 +26,32 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The sphere is culled if it is on the negative
 		// side of the plane.
-		bool SphereIsCulled() const;
+                [[nodiscard]] bool SphereIsCulled() const;
 
 	private:
 		// Static intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mPlane;
-		Sphere3 mSphere;
+		Plane3 m_Plane;
+		Sphere3 m_Sphere;
 	};
 
-	using StaticTestIntersectorPlane3Sphere3f = StaticTestIntersectorPlane3Sphere3<float>;
-	using StaticTestIntersectorPlane3Sphere3d = StaticTestIntersectorPlane3Sphere3<double>;
+	using FloatStaticTestIntersectorPlane3Sphere3 = StaticTestIntersectorPlane3Sphere3<float>;
+	using DoubleStaticTestIntersectorPlane3Sphere3 = StaticTestIntersectorPlane3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_SPHERE3_H

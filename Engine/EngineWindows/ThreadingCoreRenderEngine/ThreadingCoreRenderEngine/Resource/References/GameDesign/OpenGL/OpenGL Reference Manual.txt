@@ -1,8 +1,0 @@
-OpenGL 参考手册（OpenGL Reference Manual）
-（第3版）
-
-☆
-作者： Dave Shreiner
-
-知识点 
-1.	OpenGL基础知识。   

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere);
 
-		// Object access.
-		const Ray3 GetRay() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Ray3 GetRay() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 	private:
 		// Static intersection queries.
@@ -40,11 +41,11 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Ray3 mRay;
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 	};
 
-	using StaticTestIntersectorRay3Sphere3f = StaticTestIntersectorRay3Sphere3<float>;
-	using StaticTestIntersectorRay3Sphere3d = StaticTestIntersectorRay3Sphere3<double>;
+	using FloatStaticTestIntersectorRay3Sphere3 = StaticTestIntersectorRay3Sphere3<float>;
+	using DoubleStaticTestIntersectorRay3Sphere3 = StaticTestIntersectorRay3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_SPHERE3_H

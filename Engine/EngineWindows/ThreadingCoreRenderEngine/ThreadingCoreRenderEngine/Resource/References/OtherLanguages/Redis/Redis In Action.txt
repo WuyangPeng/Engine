@@ -1,8 +1,0 @@
-Redis 实战（Redis In Action）
- 
-☆
-作者：Josiah L.Carlson
-
-知识点 
-1.	Redis 基础知识。
-

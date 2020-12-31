@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>
 	::StaticFindIntersectorSegment3Cylinder3 (const Segment3& segment, const Cylinder3& cylinder)
-	:mSegment{ segment }, mCylinder{ cylinder }
+	:m_Segment{ segment }, mCylinder{ cylinder }
 {
 	Find();
 }
@@ -22,7 +22,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -37,22 +37,22 @@ void Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>
 	::Find()
 {
     Real t[2];
-	auto quantity = StaticFindIntersectorLine3Cylinder3<Real>::Find(mSegment.GetCenterPoint(), mSegment.GetDirection(), mCylinder, t);
+	auto quantity = StaticFindIntersectorLine3Cylinder3<Real>::Find(m_Segment.GetCenterPoint(), m_Segment.GetDirection(), mCylinder, t);
 
-    mQuantity = 0;
+    m_Quantity = 0;
     for (auto i = 0; i < quantity; ++i)
     {
-        if (Math::FAbs(t[i]) <= mSegment.GetExtent())
+        if (Math::FAbs(t[i]) <= m_Segment.GetExtent())
         {
-			mPoint[mQuantity++] = mSegment.GetCenterPoint() +  t[i]*mSegment.GetDirection();
+			m_Point[m_Quantity++] = m_Segment.GetCenterPoint() +  t[i]*m_Segment.GetDirection();
         }
     }
 
-    if (mQuantity == 2)
+    if (m_Quantity == 2)
     {
 		this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (mQuantity == 1)
+    else if (m_Quantity == 1)
     {
 		this->SetIntersectionType(IntersectionType::Point);
     }
@@ -66,14 +66,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Cylinder3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
  
 

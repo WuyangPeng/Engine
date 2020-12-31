@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
@@ -62,16 +62,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        const Vector3D GetVertex(int index) const;
+        [[nodiscard]] const Vector3D GetVertex(int index) const;
         void SetVertex(int index, const Vector3D& vertex);
 
         // 获取顶点索引在指定的面。
-        static IndicesType GetFaceIndices(int face);
+        [[nodiscard]] static IndicesType GetFaceIndices(int face);
 
         // 构造四面体面的平面。
         // 该四面具有外部指向的法向量。
         // 平面索引是同前面的GetFaceIndices返回的索引相同。
-        const PlaneContainerType GetPlanes() const;
+        [[nodiscard]] const PlaneContainerType GetPlanes() const;
+
+        [[nodiscard]] const Tetrahedron3 GetMove(Real t, const Vector3D& velocity) const;
 
     private:
         IMPL_TYPE_DECLARE(Tetrahedron3);

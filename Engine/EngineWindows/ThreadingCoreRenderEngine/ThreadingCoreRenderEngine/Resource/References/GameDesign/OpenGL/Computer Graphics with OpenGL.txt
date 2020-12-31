@@ -1,8 +1,0 @@
-计算机图形学（OpenGL）（Computer Graphics with OpenGL）
-（第4版）
-
-官方网站：
-http://www.pearsonhighered.com/hearn
-
-知识点 
-1.	OpenGL基础知识。   

@@ -24,7 +24,7 @@ Mathematics::BSplineFitBasis<Real>
 	::BSplineFitBasis (int quantity, int degree)
 {
     MATHEMATICS_ASSERTION_0(1 <= degree && degree < quantity, "Invalid inputs.\n");
-    mQuantity = quantity;
+    m_Quantity = quantity;
     mDegree = degree;
 
     mValue = NEW1<Real>(degree + 1);
@@ -51,7 +51,7 @@ template <typename Real>
 int Mathematics::BSplineFitBasis<Real>
 	::GetQuantity () const noexcept
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
@@ -70,7 +70,7 @@ void Mathematics::BSplineFitBasis<Real>
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
     // indices affected by local control.
-	const auto temp = mQuantity - mDegree;
+	const auto temp = m_Quantity - mDegree;
 	auto QmD = static_cast<Real>(temp);
     Real tValue { };
     if (t <= Math::GetValue(0))
@@ -82,7 +82,7 @@ void Mathematics::BSplineFitBasis<Real>
     else if (t >= Math::GetValue(1))
     {
         tValue = QmD;
-        imax = mQuantity - 1;
+        imax = m_Quantity - 1;
         imin = imax - mDegree;
     }
     else
@@ -99,7 +99,7 @@ void Mathematics::BSplineFitBasis<Real>
         {
             mKnot[i0] = Math::GetValue(0);
         }
-        else if (i1 >= mQuantity)
+        else if (i1 >= m_Quantity)
         {
             mKnot[i0] = QmD;
         }

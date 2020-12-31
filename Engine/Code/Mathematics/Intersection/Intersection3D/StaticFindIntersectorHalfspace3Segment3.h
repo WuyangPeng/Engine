@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -31,35 +31,36 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment);
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Segment3 GetSegment() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Plane3 GetHalfspace() const;
+                [[nodiscard]] const Segment3 GetSegment() const;
 
 		// The intersection set is empty, a point, or a segment.  The function
 		// GetQuantity() returns 0, 1, or 2.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static queries.
 		void Find();
 
 		// The objects to intersect.
-		Plane3 mHalfspace;
-		Segment3 mSegment;
+		Plane3 m_Halfspace;
+		Segment3 m_Segment;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorHalfspace3Segment3f = StaticFindIntersectorHalfspace3Segment3<float>;
-	using StaticFindIntersectorHalfspace3Segment3d = StaticFindIntersectorHalfspace3Segment3<double>;
+	using FloatStaticFindIntersectorHalfspace3Segment3 = StaticFindIntersectorHalfspace3Segment3<float>;
+	using DoubleStaticFindIntersectorHalfspace3Segment3 = StaticFindIntersectorHalfspace3Segment3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_H

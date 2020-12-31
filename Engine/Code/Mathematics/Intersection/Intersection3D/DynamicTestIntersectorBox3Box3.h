@@ -1,67 +1,64 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:46)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/24 17:50)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Intersection/DynamicIntersector.h" 
-#include "Mathematics/Objects3D/Box3.h" 
+#include "Mathematics/Intersection/DynamicIntersector.h"
+#include "Mathematics/Objects3D/Box3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicTestIntersectorBox3Box3 : public  DynamicIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = DynamicTestIntersectorBox3Box3<Real>;
-		using ParentType = DynamicIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Box3 = Box3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3D>
+    {
+    public:
+        using ClassType = DynamicTestIntersectorBox3Box3<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Box3 = Box3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax,
-									   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+    public:
+        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Box3 GetBox0() const;
-		const Box3 GetBox1() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		// Dynamic test-intersection query.  The first time of contact (if any)
-		// is computed, but not any information about the contact set.
-		void Test();
+        [[nodiscard]] const Box3 GetBox0() const noexcept;
+        [[nodiscard]] const Box3 GetBox1() const noexcept;
 
-		// Support for dynamic queries.  The inputs are the projection intervals
-		// for the boxes onto a potential separating axis, the relative speed of
-		// the intervals, and the maximum time for the query.  The outputs are
-		// the first time when separating fails and the last time when separation
-		// begins again along that axis.  The outputs are *updates* in the sense
-		// that this function is called repeatedly for the potential separating
-		// axes.  The output first time is updated only if it is larger than
-		// the input first time.  The output last time is updated only if it is
-		// smaller than the input last time.
-		//
-		// NOTE:  The BoxBoxAxisTest function could be used, but the box-box
-		// code optimizes the projections of the boxes onto the various axes.
-		// This function is effectively BoxBoxAxisTest but without the dot product
-		// of axis-direction and velocity to obtain speed.  The optimizations are
-		// to compute the speed with fewer operations.
-		bool IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real& tlast);
+    private:
+        using Separated = std::pair<bool, Real>;
 
-		// The objects to intersect.
-		Box3 mBox0;
-		Box3 mBox1;
-	};
+    private:
+        /// 动态测试相交查询。 计算第一次相交时间（如果有），但不计算有关相交集的任何信息。
+        void Test();
 
-	using DynamicTestIntersectorBox3Box3f = DynamicTestIntersectorBox3Box3<float>;
-	using DynamicTestIntersectorBox3Box3d = DynamicTestIntersectorBox3Box3<double>;
+        /// 支持动态查询。 输入框在潜在分隔轴上的投影间隔，间隔的相对速度以及查询的最大时间。
+        /// 输出是第一次分离失败，最后一次是沿着该轴再次开始分离。
+        /// 在某种意义上说，输出是“更新”，对于潜在的分离轴，该函数被重复调用。
+        /// 仅在输出第一次大于输入第一次时才更新。 仅在上次输出小于上次输入时才更新。
+        ///
+        /// 注意：可以使用BoxBoxAxisTest函数，但是box-box代码可以优化box在各个轴上的投影。
+        /// 该函数有效地是BoxBoxAxisTest，但是没有轴方向和速度的点积以获得速度。 优化是通过较少的操作来计算速度。
+        [[nodiscard]] Separated IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept;
+
+    private:
+        Box3 m_Box0;
+        Box3 m_Box1;
+    };
+
+    using FloatDynamicTestIntersectorBox3Box3 = DynamicTestIntersectorBox3Box3<float>;
+    using DoubleDynamicTestIntersectorBox3Box3 = DynamicTestIntersectorBox3Box3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H

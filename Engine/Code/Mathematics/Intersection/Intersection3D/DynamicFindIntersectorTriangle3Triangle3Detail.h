@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,10 +13,10 @@
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mTriangle0{ triangle0 }, mTriangle1{ triangle1 }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Triangle0{ triangle0 }, m_Triangle1{ triangle1 }
 {
 	mReportCoplanarIntersections = true;
-	mQuantity = 0;
+	m_Quantity = 0;
 	Find();
 }
 
@@ -24,14 +24,14 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::GetTriangle0() const
 {
-	return mTriangle0;
+	return m_Triangle0;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::GetTriangle1() const
 {
-	return mTriangle1;
+	return m_Triangle1;
 }
 
 template <typename Real>
@@ -53,9 +53,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	Configuration tcfg1;
 
 	// Compute edge and normal directions for triangle0.
-	Vector3D E[3]{ mTriangle0.GetVertex()[1] - mTriangle0.GetVertex()[0],
-				   mTriangle0.GetVertex()[2] - mTriangle0.GetVertex()[1],
-				   mTriangle0.GetVertex()[0] - mTriangle0.GetVertex()[2] };
+	Vector3D E[3]{ m_Triangle0.GetVertex()[1] - m_Triangle0.GetVertex()[0],
+				   m_Triangle0.GetVertex()[2] - m_Triangle0.GetVertex()[1],
+				   m_Triangle0.GetVertex()[0] - m_Triangle0.GetVertex()[2] };
 	auto N = Vector3DTools::UnitCrossProduct(E[0], E[1]);
 	if (!FindOverlap(N, tmax, relVelocity, side, tcfg0, tcfg1, tfirst, tlast))
 	{
@@ -64,9 +64,9 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 
 	// Compute edge and normal directions for triangle1.
-	Vector3D F[3]{ mTriangle1.GetVertex()[1] - mTriangle1.GetVertex()[0],
-				   mTriangle1.GetVertex()[2] - mTriangle1.GetVertex()[1],
-				   mTriangle1.GetVertex()[0] - mTriangle1.GetVertex()[2] };
+	Vector3D F[3]{ m_Triangle1.GetVertex()[1] - m_Triangle1.GetVertex()[0],
+				   m_Triangle1.GetVertex()[2] - m_Triangle1.GetVertex()[1],
+				   m_Triangle1.GetVertex()[0] - m_Triangle1.GetVertex()[2] };
 	auto M = Vector3DTools::UnitCrossProduct(F[0], F[1]);
 
 	Vector3D dir;
@@ -132,12 +132,12 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	SetContactTime(tfirst);
 
 	// adjust U and V for first time of contact before finding contact set
-	Triangle3 MTri0{ mTriangle0.GetVertex()[0] + tfirst * velocity0,
-					 mTriangle0.GetVertex()[1] + tfirst * velocity0,
-					 mTriangle0.GetVertex()[2] + tfirst * velocity0 };
-	Triangle3 MTri1{ mTriangle1.GetVertex()[0] + tfirst * velocity1,
-					 mTriangle1.GetVertex()[1] + tfirst * velocity1,
-					 mTriangle1.GetVertex()[2] + tfirst * velocity1 };
+	Triangle3 MTri0{ m_Triangle0.GetVertex()[0] + tfirst * velocity0,
+					 m_Triangle0.GetVertex()[1] + tfirst * velocity0,
+					 m_Triangle0.GetVertex()[2] + tfirst * velocity0 };
+	Triangle3 MTri1{ m_Triangle1.GetVertex()[0] + tfirst * velocity1,
+					 m_Triangle1.GetVertex()[1] + tfirst * velocity1,
+					 m_Triangle1.GetVertex()[2] + tfirst * velocity1 };
 
 	FindContactSet(MTri0, MTri1, side, tcfg0, tcfg1);
 	this->SetIntersectionType(IntersectionType::Other);
@@ -148,14 +148,14 @@ template <typename Real>
 int Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 template <typename Real>
@@ -319,8 +319,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	{
 		// Report the point of intersection to the caller.
 		this->SetIntersectionType(IntersectionType::Point);
-		mQuantity = 1;
-		mPoint[0] = point;
+		m_Quantity = 1;
+		m_Point[0] = point;
 		return true;
 	}
 
@@ -409,7 +409,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	if (calc.GetIntersectionType() == IntersectionType::Segment)
 	{
 		this->SetIntersectionType(IntersectionType::Segment);
-		mQuantity = 2;
+		m_Quantity = 2;
 		intr[0] = calc.GetPoint(0);
 		intr[1] = calc.GetPoint(1);
 	}
@@ -417,7 +417,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	{
 		MATHEMATICS_ASSERTION_0(calc.GetIntersectionType() == IntersectionType::Point, "Intersection must be a point\n");
 		this->SetIntersectionType(IntersectionType::Point);
-		mQuantity = 1;
+		m_Quantity = 1;
 		intr[0] = calc.GetPoint(0);
 	}
 
@@ -425,31 +425,31 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	if (maxNormal == 0)
 	{
 		auto invNX = (Math::GetValue(1)) / plane.GetNormal().GetX();
-		for (i = 0; i < mQuantity; ++i)
+		for (i = 0; i < m_Quantity; ++i)
 		{
-			mPoint[i][1] = intr[i].GetX();
-			mPoint[i][2] = intr[i].GetY();
-			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*mPoint[i].GetY() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
+			m_Point[i][1] = intr[i].GetX();
+			m_Point[i][2] = intr[i].GetY();
+			m_Point[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*m_Point[i].GetY() - plane.GetNormal().GetZ()*m_Point[i].GetZ());
 		}
 	}
 	else if (maxNormal == 1)
 	{
 		auto invNY = (Math::GetValue(1)) / plane.GetNormal().GetY();
-		for (i = 0; i < mQuantity; ++i)
+		for (i = 0; i < m_Quantity; ++i)
 		{
-			mPoint[i][0] = intr[i].GetX();
-			mPoint[i][1] = intr[i].GetY();
-			mPoint[i][2] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
+			m_Point[i][0] = intr[i].GetX();
+			m_Point[i][1] = intr[i].GetY();
+			m_Point[i][2] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*m_Point[i].GetX() - plane.GetNormal().GetZ()*m_Point[i].GetZ());
 		}
 	}
 	else
 	{
 		auto invNZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
-		for (i = 0; i < mQuantity; ++i)
+		for (i = 0; i < m_Quantity; ++i)
 		{
-			mPoint[i][0] = intr[i].GetX();
-			mPoint[i][1] = intr[i].GetY();
-			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetY()*mPoint[i].GetY());
+			m_Point[i][0] = intr[i].GetX();
+			m_Point[i][1] = intr[i].GetY();
+			m_Point[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*m_Point[i].GetX() - plane.GetNormal().GetY()*m_Point[i].GetY());
 		}
 	}
 
@@ -542,35 +542,35 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 
 	// Map 2D intersections back to the 3D triangle space.
-	mQuantity = intr.GetQuantity();
+	m_Quantity = intr.GetQuantity();
 	if (maxNormal == 0)
 	{
 		auto invNX = (Math::GetValue(1)) / plane.GetNormal().GetX();
-		for (i = 0; i < mQuantity; i++)
+		for (i = 0; i < m_Quantity; i++)
 		{
-			mPoint[i][1] = intr.GetPoint(i).GetX();
-			mPoint[i][2] = intr.GetPoint(i).GetY();
-			mPoint[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*mPoint[i].GetY() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
+			m_Point[i][1] = intr.GetPoint(i).GetX();
+			m_Point[i][2] = intr.GetPoint(i).GetY();
+			m_Point[i][0] = invNX * (plane.GetConstant() - plane.GetNormal().GetY()*m_Point[i].GetY() - plane.GetNormal().GetZ()*m_Point[i].GetZ());
 		}
 	}
 	else if (maxNormal == 1)
 	{
 		auto invNY = (Math::GetValue(1)) / plane.GetNormal().GetY();
-		for (i = 0; i < mQuantity; i++)
+		for (i = 0; i < m_Quantity; i++)
 		{
-			mPoint[i][0] = intr.GetPoint(i).GetX();
-			mPoint[i][2] = intr.GetPoint(i).GetY();
-			mPoint[i][1] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetZ()*mPoint[i].GetZ());
+			m_Point[i][0] = intr.GetPoint(i).GetX();
+			m_Point[i][2] = intr.GetPoint(i).GetY();
+			m_Point[i][1] = invNY * (plane.GetConstant() - plane.GetNormal().GetX()*m_Point[i].GetX() - plane.GetNormal().GetZ()*m_Point[i].GetZ());
 		}
 	}
 	else
 	{
 		auto invNZ = (Math::GetValue(1)) / plane.GetNormal().GetZ();
-		for (i = 0; i < mQuantity; i++)
+		for (i = 0; i < m_Quantity; i++)
 		{
-			mPoint[i][0] = intr.GetPoint(i).GetX();
-			mPoint[i][1] = intr.GetPoint(i).GetY();
-			mPoint[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*mPoint[i].GetX() - plane.GetNormal().GetY()*mPoint[i].GetY());
+			m_Point[i][0] = intr.GetPoint(i).GetX();
+			m_Point[i][1] = intr.GetPoint(i).GetY();
+			m_Point[i][2] = invNZ * (plane.GetConstant() - plane.GetNormal().GetX()*m_Point[i].GetX() - plane.GetNormal().GetY()*m_Point[i].GetY());
 		}
 	}
 
@@ -821,8 +821,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	auto max0 = Math::GetValue(0);
 	auto min1 = Math::GetValue(0);
 	auto max1 = Math::GetValue(0);
-	ProjectOntoAxis(mTriangle0, axis, min0, max0);
-	ProjectOntoAxis(mTriangle1, axis, min1, max1);
+	ProjectOntoAxis(m_Triangle0, axis, min0, max0);
+	ProjectOntoAxis(m_Triangle1, axis, min1, max1);
 	auto speed = Vector3DTools::DotProduct(velocity, axis);
 	return TestOverlap(tmax, speed, min0, max0, min1, max1, tfirst, tlast);
 }
@@ -833,8 +833,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 {
 	Configuration cfg0;
 	Configuration cfg1;
-	ProjectOntoAxis(mTriangle0, axis, cfg0);
-	ProjectOntoAxis(mTriangle1, axis, cfg1);
+	ProjectOntoAxis(m_Triangle0, axis, cfg0);
+	ProjectOntoAxis(m_Triangle1, axis, cfg1);
 	auto speed = Vector3DTools::DotProduct(velocity, axis);
 	return FindOverlap(tmax, speed, cfg0, cfg1, side, tcfg0, tcfg1, tfirst, tlast);
 }
@@ -976,15 +976,15 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		{
 			// tri0 touching tri1 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			mQuantity = 1;
-			mPoint[0] = tri0.GetVertex()[cfg0.mIndex[2]];
+			m_Quantity = 1;
+			m_Point[0] = tri0.GetVertex()[cfg0.mIndex[2]];
 		}
 		else if (cfg1.mMap == M12 || cfg1.mMap == M111)
 		{
 			// tri1 touching tri0 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			mQuantity = 1;
-			mPoint[0] = tri1.GetVertex()[cfg1.mIndex[0]];
+			m_Quantity = 1;
+			m_Point[0] = tri1.GetVertex()[cfg1.mIndex[0]];
 		}
 		else if (cfg0.mMap == M12)
 		{
@@ -1021,15 +1021,15 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		{
 			// tri1 touching tri0 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			mQuantity = 1;
-			mPoint[0] = tri1.GetVertex()[cfg1.mIndex[2]];
+			m_Quantity = 1;
+			m_Point[0] = tri1.GetVertex()[cfg1.mIndex[2]];
 		}
 		else if (cfg0.mMap == M12 || cfg0.mMap == M111)
 		{
 			// tri0 touching tri1 at a single point
 			this->SetIntersectionType(IntersectionType::Point);
-			mQuantity = 1;
-			mPoint[0] = tri0.GetVertex()[cfg0.mIndex[0]];
+			m_Quantity = 1;
+			m_Point[0] = tri0.GetVertex()[cfg0.mIndex[0]];
 		}
 		else if (cfg1.mMap == M12)
 		{
@@ -1066,11 +1066,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		auto result = calc.IsIntersection();
 		MATHEMATICS_ASSERTION_0(result, "Intersection must exist\n");
 		
-		mQuantity = calc.GetQuantity();
+		m_Quantity = calc.GetQuantity();
 		this->SetIntersectionType(calc.GetIntersectionType());
-		for (int i = 0; i < mQuantity; ++i)
+		for (int i = 0; i < m_Quantity; ++i)
 		{
-			mPoint[i] = calc.GetPoint(i);
+			m_Point[i] = calc.GetPoint(i);
 		}
 	}
 }
@@ -1102,8 +1102,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	}
 
 	this->SetIntersectionType(IntersectionType::Point);
-	mQuantity = 1;
-	mPoint[0] = U0 + s * edge0;
+	m_Quantity = 1;
+	m_Point[0] = U0 + s * edge0;
 
 	// TODO:  What if the edges are parallel?
 }
@@ -1144,11 +1144,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 	StaticFindIntersectorSegment2Triangle2<Real> calc{ projSeg, projTri };
 	if (calc.IsIntersection())
 	{
-		mQuantity = calc.GetQuantity();
-		for (int i = 0; i < mQuantity; ++i)
+		m_Quantity = calc.GetQuantity();
+		for (int i = 0; i < m_Quantity; ++i)
 		{
 			auto proj = calc.GetPoint(i);
-			mPoint[i] = point + proj[0] * dir0 + proj[1] * dir1;
+			m_Point[i] = point + proj[0] * dir0 + proj[1] * dir1;
 		}
 	}
 	else
@@ -1164,11 +1164,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>
 		//Real distance = dcalc.Get();
 		//WM5_UNUSED(distance);
 		auto parameter = dcalc.GetSegmentParameter();
-		mQuantity = 1;
-		mPoint[0] = seg.GetCenterPoint() + parameter * seg.GetDirection();
+		m_Quantity = 1;
+		m_Point[0] = seg.GetCenterPoint() + parameter * seg.GetDirection();
 	}
 
-	this->SetIntersectionType((mQuantity == 2 ? IntersectionType::Segment : IntersectionType::Point));
+	this->SetIntersectionType((m_Quantity == 2 ? IntersectionType::Segment : IntersectionType::Point));
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H

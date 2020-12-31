@@ -1,7 +1,0 @@
-代码本色：用编程模拟自然系统（The Nature of Code） 
-
-★
-作者： Daniel Shiffman
-
-知识点 
-1.	游戏人工智能基础知识。   

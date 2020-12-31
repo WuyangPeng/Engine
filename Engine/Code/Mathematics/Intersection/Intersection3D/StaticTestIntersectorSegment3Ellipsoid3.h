@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,26 +25,27 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Ellipsoid3 GetEllipsoid() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
 
 	private:
 		// Static intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Segment3 mSegment;
+		Segment3 m_Segment;
 		Ellipsoid3 mEllipsoid;
 	};
 
-	using StaticTestIntersectorSegment3Ellipsoid3f = StaticTestIntersectorSegment3Ellipsoid3<float>;
-	using StaticTestIntersectorSegment3Ellipsoid3d = StaticTestIntersectorSegment3Ellipsoid3<double>;
+	using FloatStaticTestIntersectorSegment3Ellipsoid3 = StaticTestIntersectorSegment3Ellipsoid3<float>;
+	using DoubleStaticTestIntersectorSegment3Ellipsoid3 = StaticTestIntersectorSegment3Ellipsoid3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_ELLIPSOID3_H

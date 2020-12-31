@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::StaticTestIntersectorPlane3Capsule3(const Plane3& plane,const Capsule3& capsule)
-	: mPlane{ plane }, mCapsule{ capsule }
+	: m_Plane{ plane }, mCapsule{ capsule }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
@@ -35,8 +35,8 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::Test()
 {
-	auto pDist = mPlane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
-	auto nDist = mPlane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
+	auto pDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
+	auto nDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
     if (pDist*nDist <= Math<Real>::GetZero())
     {
         // Capsule segment endpoints on opposite sides of the plane.
@@ -60,10 +60,10 @@ template <typename Real>
 bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::CapsuleIsCulled() const
 {
-	auto pDist = mPlane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
+	auto pDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
     if (pDist < Math<Real>::GetZero())
     {
-		auto nDist = mPlane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
+		auto nDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
         if (nDist < Math<Real>::GetZero())
         {
             if (pDist <= nDist)

@@ -1,8 +1,0 @@
-捉虫历险记——常见C++ Bug大围剿（How not to Program in C++）
-
-○
-作者：Steve Oualline
-
-
-知识点 
-1.	C++	基础知识。    

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 	::DynamicTestIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mHalfspace{ halfspace }, mTriangle{ triangle }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Halfspace{ halfspace }, m_Triangle{ triangle }
 {
 	Test();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 	::GetHalfspace() const
 {
-	return mHalfspace;
+	return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 	::GetTriangle() const
 {
-	return mTriangle;
+	return m_Triangle;
 }
 
 template <typename Real>
@@ -41,9 +41,9 @@ void Mathematics::DynamicTestIntersectorHalfspace3Triangle3<Real>
 
 	auto fmin = Math::GetValue(0);
 	auto fmax = Math::GetValue(0);
-	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mTriangle, fmin, fmax);
+	FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), m_Triangle, fmin, fmax);
 
-	if (IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
+	if (FindIntersectorAxis<Real>::Test(m_Halfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, m_Halfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Point);

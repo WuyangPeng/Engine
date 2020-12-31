@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::StaticFindIntersectorSphere3Sphere3 (const Sphere3& rkSphere0,const Sphere3& rkSphere1)
-	: mSphere0{ rkSphere0 }, mSphere1{ rkSphere1 }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::GetValue(0) }
+	: m_Sphere0{ rkSphere0 }, m_Sphere1{ rkSphere1 }, m_Circle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::GetValue(0) }
 {
 	Find();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::GetSphere0() const
 {
-    return mSphere0;
+    return m_Sphere0;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::GetSphere1() const
 {
-    return mSphere1;
+    return m_Sphere1;
 }
 
 template <typename Real>
@@ -36,9 +36,9 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::Find()
 {
     // Plane of intersection must have N as its normal.
-	auto C1mC0 = mSphere1.GetCenter() - mSphere0.GetCenter();
+	auto C1mC0 = m_Sphere1.GetCenter() - m_Sphere0.GetCenter();
 	auto sqrLen = Vector3DTools::VectorMagnitudeSquared(C1mC0);
-	auto r0 = mSphere0.GetRadius(), r1 = mSphere1.GetRadius();
+	auto r0 = m_Sphere0.GetRadius(), r1 = m_Sphere1.GetRadius();
 
 	auto rSum = r0 + r1;
 	auto rSumSqr = rSum*rSum;
@@ -56,8 +56,8 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
         // GetCircle().  The circle parameters are set just in case the caller
         // does not test for intersection type.
         C1mC0.Normalize();
-        mContactPoint = mSphere0.GetCenter() + r0*C1mC0;
-		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero() };
+        m_ContactPoint = m_Sphere0.GetCenter() + r0*C1mC0;
+		m_Circle = Circle3{ m_ContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero() };
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -73,8 +73,8 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
         // parameters are set just in case the caller does not test for
         // intersection type, but the choices are arbitrary.
         C1mC0.Normalize();
-		mContactPoint = (Real{0.5})*(mSphere0.GetCenter() + mSphere1.GetCenter());
-		mCircle = Circle3{ mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero() };
+		m_ContactPoint = (Real{0.5})*(m_Sphere0.GetCenter() + m_Sphere1.GetCenter());
+		m_Circle = Circle3{ m_ContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero() };
 
      
 		this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> (rDif <= Math<Real>::GetZero() ? IT_SPHERE0 : IT_SPHERE1));
@@ -91,16 +91,16 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
       
         if (rDif <= Math<Real>::GetZero())
         {
-            mContactPoint = mSphere1.GetCenter() + r1*C1mC0;
+            m_ContactPoint = m_Sphere1.GetCenter() + r1*C1mC0;
 			this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> ( IT_SPHERE0_POINT));
         }
         else
         {
-			mContactPoint = mSphere0.GetCenter() + r0*C1mC0;
+			m_ContactPoint = m_Sphere0.GetCenter() + r0*C1mC0;
 			this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType> (IT_SPHERE1_POINT));
         }
          
-		mCircle = Circle3(mContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero());
+		m_Circle = Circle3(m_ContactPoint, Vector3D::sm_Zero, Vector3D::sm_Zero, C1mC0, Math<Real>::GetZero());
 
         return;
     }
@@ -116,7 +116,7 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
     C1mC0.Normalize();
     
 	auto vector3DOrthonormalBasis =	Vector3DTools::GenerateComplementBasis(C1mC0);
-	mCircle = Circle3{ mSphere0.GetCenter() + t * C1mC0, vector3DOrthonormalBasis.GetUVector(),
+	m_Circle = Circle3{ m_Sphere0.GetCenter() + t * C1mC0, vector3DOrthonormalBasis.GetUVector(),
 					   vector3DOrthonormalBasis.GetVVector(), C1mC0,
 				       Math::Sqrt(Math::FAbs(r0*r0 - t * t*sqrLen)) }; 
 
@@ -129,14 +129,14 @@ template <typename Real>
 const Mathematics::Circle3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::GetCircle() const
 {
-    return mCircle;
+    return m_Circle;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>
 	::GetContactPoint() const
 {
-    return mContactPoint;
+    return m_ContactPoint;
 } 
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H

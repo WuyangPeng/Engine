@@ -1,9 +1,0 @@
-C# 高效编程（Effective C#）
- （第2版）
- 
-○
-作者：Bill Wagner
-
-知识点 
-1.	C# 基础知识。 
-

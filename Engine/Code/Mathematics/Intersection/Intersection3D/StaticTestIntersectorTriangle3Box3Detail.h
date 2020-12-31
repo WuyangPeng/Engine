@@ -9,12 +9,12 @@
 
 #include "StaticTestIntersectorTriangle3Box3.h"
 #include "StaticTestIntersectorSegment3Box3.h"
-#include "IntersectorAxis.h"
+#include "FindIntersectorAxis.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Box3<Real>
 	::StaticTestIntersectorTriangle3Box3(const Triangle3& triangle,const Box3& box)
-	:mTriangle{ triangle }, mBox{ box }
+	:m_Triangle{ triangle }, m_Box{ box }
 {
 	Test();
 }
@@ -23,14 +23,14 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorTriangle3Box3<Real>
 	::GetTriangle() const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::StaticTestIntersectorTriangle3Box3<Real>
 	::GetBox() const
 {
-    return mBox;
+    return m_Box;
 }
 
 template <typename Real>
@@ -41,12 +41,12 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>
     Vector3D D, edge[3];
 
     // Test direction of triangle normal.
-	edge[0] = mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0];
-	edge[1] = mTriangle.GetVertex()[2] - mTriangle.GetVertex()[0];
+	edge[0] = m_Triangle.GetVertex()[1] - m_Triangle.GetVertex()[0];
+	edge[1] = m_Triangle.GetVertex()[2] - m_Triangle.GetVertex()[0];
 	D = Vector3DTools::CrossProduct(edge[0],edge[1]);
-	min0 = Vector3DTools::DotProduct(D,mTriangle.GetVertex()[0]);
+	min0 = Vector3DTools::DotProduct(D,m_Triangle.GetVertex()[0]);
     max0 = min0;
-    IntersectorAxis<Real>::GetProjection(D, mBox, min1, max1);
+    FindIntersectorAxis<Real>::GetProjection(D, m_Box, min1, max1);
     if (max1 < min0 || max0 < min1)
     {
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -56,11 +56,11 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>
     // Test direction of box faces.
     for (int i = 0; i < 3; ++i)
     {
-        D = mBox.GetAxis(i);
-        IntersectorAxis<Real>::GetProjection(D, mTriangle, min0, max0);
-		auto DdC = Vector3DTools::DotProduct(D,mBox.GetCenter());
-        min1 = DdC - mBox.GetExtent(i);
-		max1 = DdC + mBox.GetExtent(i);
+        D = m_Box.GetAxis(i);
+        FindIntersectorAxis<Real>::GetProjection(D, m_Triangle, min0, max0);
+		auto DdC = Vector3DTools::DotProduct(D,m_Box.GetCenter());
+        min1 = DdC - m_Box.GetExtent(i);
+		max1 = DdC + m_Box.GetExtent(i);
         if (max1 < min0 || max0 < min1)
         {
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -74,9 +74,9 @@ void Mathematics::StaticTestIntersectorTriangle3Box3<Real>
     {
         for (int i1 = 0; i1 < 3; ++i1)
         {
-			D = Vector3DTools::CrossProduct(edge[i0],mBox.GetAxis(i1));
-            IntersectorAxis<Real>::GetProjection(D, mTriangle, min0, max0);
-            IntersectorAxis<Real>::GetProjection(D, mBox, min1, max1);
+			D = Vector3DTools::CrossProduct(edge[i0],m_Box.GetAxis(i1));
+            FindIntersectorAxis<Real>::GetProjection(D, m_Triangle, min0, max0);
+            FindIntersectorAxis<Real>::GetProjection(D, m_Box, min1, max1);
             if (max1 < min0 || max0 < min1)
             {
 				this->SetIntersectionType(IntersectionType::Empty);

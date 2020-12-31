@@ -26,7 +26,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE Triangles : public Visual
 	{
 	public:
-		using ClassType = Triangles;
+		using ClassType = Triangles; 
 		using ParentType = Visual;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
 		using APoint = Mathematics::FloatAPoint;

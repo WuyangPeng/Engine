@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
 	::StaticTestIntersectorPlane3Cylinder3 (const Plane3& rkPlane,const Cylinder3& rkCylinder)
-	:mPlane{ rkPlane }, mCylinder{ rkCylinder }
+	:m_Plane{ rkPlane }, mCylinder{ rkCylinder }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
@@ -39,8 +39,8 @@ void Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
     // cylinder.  These are
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
-	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
-	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(mPlane.GetNormal(),mCylinder.GetAxis().GetDirection()));
+	auto sDist = m_Plane.DistanceTo(mCylinder.GetAxis().GetOrigin());
+	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(m_Plane.GetNormal(),mCylinder.GetAxis().GetDirection()));
 	auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNdW*absNdW));
 	auto term = mCylinder.GetRadius()*root + (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
@@ -63,8 +63,8 @@ bool Mathematics::StaticTestIntersectorPlane3Cylinder3<Real>
     // cylinder.  These are
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
-	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
-	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(mPlane.GetNormal(),mCylinder.GetAxis().GetDirection()));
+	auto sDist = m_Plane.DistanceTo(mCylinder.GetAxis().GetOrigin());
+	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(m_Plane.GetNormal(),mCylinder.GetAxis().GetDirection()));
 	auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNdW*absNdW));
 	auto term = mCylinder.GetRadius()*root + (Real{0.5})*mCylinder.GetHeight()*absNdW;
 

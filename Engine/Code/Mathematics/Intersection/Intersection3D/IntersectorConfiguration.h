@@ -1,63 +1,61 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 14:48)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/25 11:18)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Box3.h"
-#include "Mathematics/Objects3D/Segment3.h"
-#include "Mathematics/Objects3D/Triangle3.h"
+#include "CoreTools/Helper/ExportMacro.h"
+#include "Mathematics/Intersection/Flags/VertexProjectionMap.h"
+
+#include <memory>
 
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE IntersectorConfiguration
+    class IntersectorConfigurationImpl;
+
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<double>>;
+
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<Real>>;
+
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE IntersectorConfiguration final
     {
     public:
-        IntersectorConfiguration() noexcept;
-        ~IntersectorConfiguration() = default;
-        IntersectorConfiguration(const IntersectorConfiguration&) = default;
-        IntersectorConfiguration& operator=(const IntersectorConfiguration&) = default;
-        IntersectorConfiguration(IntersectorConfiguration&&) = default;
-        IntersectorConfiguration& operator=(IntersectorConfiguration&&) = delete;
+        using IntersectorConfigurationImpl = IntersectorConfigurationImpl<Real>;
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IntersectorConfiguration, DESTRUCTOR_DEFAULT);
 
+    public:
+        IntersectorConfiguration();
 
-            // ContactSide (order of the intervals of projection).
-            enum {
-                LEFT,
-                RIGHT,
-                NONE
-            };
+        CLASS_INVARIANT_DECLARE;
 
-        // VertexProjectionMap (how the vertices are projected to the minimum
-        // and maximum points of the interval).
-        enum
-        {
-            m2,
-            m11,  // segments
-            m3,
-            m21,
-            m12,
-            m111,  // triangles
-            m44,
-            m2_2,
-            m1_1  // boxes
-        };
+        [[nodiscard]] VertexProjectionMap GetMap() const noexcept;
+        [[nodiscard]] Real GetMin() const noexcept;
+        [[nodiscard]] Real GetMax() const noexcept;
+        [[nodiscard]] int GetIndex(int index) const;
 
-        // The VertexProjectionMap value for the configuration.
-        int mMap;
+        void SetMap(VertexProjectionMap vertexProjectionMap) noexcept;
+        void SetMin(Real min) noexcept;
+        void SetMax(Real max) noexcept;
+        void SetIndex(int index, int value);
 
-        // The order of the vertices.
-        int mIndex[8];
-
-        // Projection interval.
-        Real mMin, mMax;
+    private:
+        IMPL_TYPE_DECLARE(IntersectorConfiguration);
     };
+
+    using FloatIntersectorConfiguration = IntersectorConfiguration<float>;
+    using DoubleIntersectorConfiguration = IntersectorConfiguration<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H

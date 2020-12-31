@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	::DynamicTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSegment{ segment }, mTriangle{ triangle }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Segment{ segment }, m_Triangle{ triangle }
 {
 	Test();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	::GetSegment() const
 {
-	return mSegment;
+	return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	::GetTriangle() const
 {
-	return mTriangle;
+	return m_Triangle;
 }
 
 template <typename Real>
@@ -36,11 +36,11 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	::Test()
 {
 	// Get the endpoints of the segment.
-	Vector3D segment[2]{ mSegment.GetBeginPoint(), mSegment.GetEndPoint() };
+	Vector3D segment[2]{ m_Segment.GetBeginPoint(), m_Segment.GetEndPoint() };
 
 	// Get the triangle edges.
-	auto edge0 = mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0];
-	auto edge1 = mTriangle.GetVertex()[2] - mTriangle.GetVertex()[0];
+	auto edge0 = m_Triangle.GetVertex()[1] - m_Triangle.GetVertex()[0];
+	auto edge1 = m_Triangle.GetVertex()[2] - m_Triangle.GetVertex()[0];
 
 	// Get the triangle velocity relative to the segment.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
@@ -50,7 +50,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 
 	// Test tri-normal.
 	auto normV = Vector3DTools::CrossProduct(edge0, edge1);
-	if (!IntersectorAxis<Real>::Test(normV, segment, mTriangle, relVelocity, this->GetTMax(), mContactTime, tlast))
+	if (!FindIntersectorAxis<Real>::Test(normV, segment, m_Triangle, relVelocity, this->GetTMax(), mContactTime, tlast))
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -73,7 +73,7 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 	if (norUSqrLen > oneMinusEpsilon*norVSqrLen*dirSqrLen)  // parallel
 	{
 		// Test tri-normal cross seg-direction.
-		if (!IntersectorAxis<Real>::Test(normU, segment, mTriangle, relVelocity, this->GetTMax(), mContactTime, tlast))
+		if (!FindIntersectorAxis<Real>::Test(normU, segment, m_Triangle, relVelocity, this->GetTMax(), mContactTime, tlast))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -83,9 +83,9 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 		// Test tri-normal cross tri-edges.
 		for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 		{
-			axis = Vector3DTools::CrossProduct(normV, (mTriangle.GetVertex()[i1] - mTriangle.GetVertex()[i0]));
+			axis = Vector3DTools::CrossProduct(normV, (m_Triangle.GetVertex()[i1] - m_Triangle.GetVertex()[i0]));
 
-			if (!IntersectorAxis<Real>::Test(axis, segment, mTriangle, relVelocity, this->GetTMax(), mContactTime, tlast))
+			if (!FindIntersectorAxis<Real>::Test(axis, segment, m_Triangle, relVelocity, this->GetTMax(), mContactTime, tlast))
 			{
 				SetContactTime(mContactTime);
 				this->SetIntersectionType(IntersectionType::Empty);
@@ -98,9 +98,9 @@ void Mathematics::DynamicTestIntersectorSegment3Triangle3<Real>
 		// Test seg-direction cross tri-edges.
 		for (i0 = 2, i1 = 0; i1 < 3; i0 = i1++)
 		{
-			axis = Vector3DTools::CrossProduct(dirU, (mTriangle.GetVertex()[i1] - mTriangle.GetVertex()[i0]));
+			axis = Vector3DTools::CrossProduct(dirU, (m_Triangle.GetVertex()[i1] - m_Triangle.GetVertex()[i0]));
 
-			if (!IntersectorAxis<Real>::Test(axis, segment, mTriangle, relVelocity, this->GetTMax(), mContactTime, tlast))
+			if (!FindIntersectorAxis<Real>::Test(axis, segment, m_Triangle, relVelocity, this->GetTMax(), mContactTime, tlast))
 			{
 				SetContactTime(mContactTime);
 				this->SetIntersectionType(IntersectionType::Empty);

@@ -1,58 +1,71 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:43)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/29 10:53)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Box3.h" 
-#include "Mathematics/Intersection/DynamicIntersector.h" 
+#include "Mathematics/Intersection/DynamicIntersector.h"
+#include "Mathematics/Objects3D/Box3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicFindIntersectorBox3Box3 : public  DynamicIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = DynamicFindIntersectorBox3Box3<Real>;
-		using ParentType = DynamicIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Box3 = Box3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class DynamicFindIntersectorBox3Box3Impl;
 
-	public:
-		DynamicFindIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax,
-									   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorBox3Box3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorBox3Box3Impl<double>>;
 
-		// Object access.
-		const Box3 GetBox0() const;
-		const Box3 GetBox1() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorBox3Box3Impl<Real>>;
 
-		// The intersection set for dynamic find-intersection.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3D>
+    {
+    public:
+        using DynamicFindIntersectorBox3Box3Impl = DynamicFindIntersectorBox3Box3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorBox3Box3);
 
-	private:
-		// Dynamic find-intersection query.  The contact set is computed.
-		void Find();
+        using ParentType = DynamicIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Box3 = Box3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-		// The objects to intersect.
-		Box3 mBox0;
-		Box3 mBox1;
+    public:
+        DynamicFindIntersectorBox3Box3(
+            const Box3& box0,
+            const Box3& box1,
+            Real tmax,
+            const Vector3D& lhsVelocity,
+            const Vector3D& rhsVelocity,
+            const Real epsilon = Math::GetZeroTolerance());
 
-		// The intersection set for dynamic find-intersection.  The worst case
-		// is a polygon with 8 vertices.
-		int mQuantity;
-		Vector3D mPoint[8];
-	};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	using DynamicFindIntersectorBox3Box3f = DynamicFindIntersectorBox3Box3<float>;
-	using DynamicFindIntersectorBox3Box3d = DynamicFindIntersectorBox3Box3<double>;
+        [[nodiscard]] const Box3 GetBox0() const noexcept;
+        [[nodiscard]] const Box3 GetBox1() const noexcept;
+
+        [[nodiscard]] int GetQuantity() const;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
+
+    private:
+        // 动态查找交叉点查询。 该触点组被计算出来。
+        void Find();
+
+    private:
+        IMPL_TYPE_DECLARE(DynamicFindIntersectorBox3Box3);
+    };
+
+    using FloatDynamicFindIntersectorBox3Box3 = DynamicFindIntersectorBox3Box3<float>;
+    using DoubleDynamicFindIntersectorBox3Box3 = DynamicFindIntersectorBox3Box3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H

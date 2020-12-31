@@ -1,0 +1,18 @@
+// Copyright (c) 2010-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∞Ê±æ£∫0.0.2.5 (2020/03/24 16:54)
+
+#ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_AXIS_DETAIL_H
+#define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_AXIS_DETAIL_H
+
+#include "TestIntersectorAxis.h"
+
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_TEST_INTERSECTOR_AXIS_ACHIEVE)
+
+    #include "TestIntersectorAxisAchieve.h"
+
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_TEST_INTERSECTOR_AXIS_ACHIEVE)
+
+#endif  // MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_AXIS_DETAIL_H

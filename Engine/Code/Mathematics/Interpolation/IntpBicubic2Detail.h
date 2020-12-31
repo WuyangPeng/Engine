@@ -22,7 +22,7 @@ IntpBicubic2<Real>::IntpBicubic2 (int xBound, int yBound, Real xMin, Real xSpaci
 
     mXBound = xBound;
     mYBound = yBound;
-    mQuantity = xBound*yBound;
+    m_Quantity = xBound*yBound;
 
     mXMin = xMin;
     mXSpacing = xSpacing;
@@ -53,7 +53,7 @@ int IntpBicubic2<Real>::GetYBound () const
 template <typename Real>
 int IntpBicubic2<Real>::GetQuantity () const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>

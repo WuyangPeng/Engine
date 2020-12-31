@@ -29,7 +29,7 @@ namespace Mathematics
 		mF = F;
 
 		int xBoundM1 = xBound - 1, yBoundM1 = yBound - 1;
-		mQuantity = xBound * yBound;
+		m_Quantity = xBound * yBound;
 		mXMax = xMin + xSpacing * xBoundM1;
 		mYMax = yMin + ySpacing * yBoundM1;
 
@@ -198,7 +198,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpAkimaUniform2<Real>::GetQuantity() const
 	{
-		return mQuantity;
+		return m_Quantity;
 	}
 
 	template <typename Real>

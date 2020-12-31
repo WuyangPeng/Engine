@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Cone3 = Cone3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone);
 
-		// Object access.
-		const Sphere3 GetSphere() const;
-		const Cone3 GetCone() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Sphere3 GetSphere() const;
+                [[nodiscard]] const Cone3 GetCone() const;
 
 	private:
 		// Static intersection queries.
@@ -40,12 +41,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 		Cone3 mCone;
 	};
 
-	using StaticTestIntersectorSphere3Cone3f = StaticTestIntersectorSphere3Cone3<float>;
-	using StaticTestIntersectorSphere3Cone3d = StaticTestIntersectorSphere3Cone3<double>;
+	using FloatStaticTestIntersectorSphere3Cone3 = StaticTestIntersectorSphere3Cone3<float>;
+	using DoubleStaticTestIntersectorSphere3Cone3 = StaticTestIntersectorSphere3Cone3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_CONE3_H

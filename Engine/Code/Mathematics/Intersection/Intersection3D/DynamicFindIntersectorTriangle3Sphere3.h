@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Triangle3 = Triangle3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+	 using Math = typename ParentType::Math;
 
 	public:
 		DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, Real tmax,
 											   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Triangle3 GetTriangle() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Triangle3 GetTriangle() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 		// The contact point.
-		const Vector3D GetPoint() const;
+                [[nodiscard]] const Vector3D GetPoint() const;
 
 	private:
 		// Dynamic find-intersection query.  If the query returns 'true', use
@@ -49,20 +50,20 @@ namespace Mathematics
 	private:
 
 		// Support for the dynamic query.
-		bool FindTriangleSphereCoplanarIntersection(int vertex, std::vector<Vector3D>& V, const Vector3D& sideNorm, const Vector3D& side, Real tmax, const Vector3D& velocity0, const Vector3D& velocity1);
+            [[nodiscard]] bool FindTriangleSphereCoplanarIntersection(int vertex, std::vector<Vector3D>& V, const Vector3D& sideNorm, const Vector3D& side, Real tmax, const Vector3D& velocity0, const Vector3D& velocity1);
 
-		bool FindSphereVertexIntersection(const Vector3D& vertex, Real tmax, const Vector3D& velocity0, const Vector3D& velocity1);
+	 [[nodiscard]] bool FindSphereVertexIntersection(const Vector3D& vertex, Real tmax, const Vector3D& velocity0, const Vector3D& velocity1);
 
 		// The objects to intersect.
-		Triangle3 mTriangle;
-		Sphere3 mSphere;
+		Triangle3 m_Triangle;
+		Sphere3 m_Sphere;
 
 		// The point of contact for dynamic queries.
-		Vector3D mPoint;
+		Vector3D m_Point;
 	};
 
-	using DynamicFindIntersectorTriangle3Sphere3f = DynamicFindIntersectorTriangle3Sphere3<float>;
-	using DynamicFindIntersectorTriangle3Sphere3d = DynamicFindIntersectorTriangle3Sphere3<double>;
+	using FloatDynamicFindIntersectorTriangle3Sphere3 = DynamicFindIntersectorTriangle3Sphere3<float>;
+	using DoubleDynamicFindIntersectorTriangle3Sphere3 = DynamicFindIntersectorTriangle3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_SPHERE3_H

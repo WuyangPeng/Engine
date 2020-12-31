@@ -12,9 +12,9 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	::StaticFindIntersectorRay3Sphere3 (const Ray3& ray,const Sphere3& sphere)
-	: mRay{ ray }, mSphere{ sphere }
+	: mRay{ ray }, m_Sphere{ sphere }
 {
-    mQuantity = 0;
+    m_Quantity = 0;
 	Find();
 }
 
@@ -29,15 +29,15 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
  
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	::Find()
 {
-    auto diff = mRay.GetOrigin() - mSphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
+    auto diff = mRay.GetOrigin() - m_Sphere.GetCenter();
+	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
     Real a1, discr, root;
     if (a0 <= Math<Real>::GetZero())
     {
@@ -46,8 +46,8 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
         discr = a1*a1 - a0;
         root = Math::Sqrt(discr);
         mRayParameter[0] = -a1 + root;
-        mPoint[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
-        mQuantity = 1;
+        m_Point[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
+        m_Quantity = 1;
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -56,7 +56,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	a1 = Vector3DTools::DotProduct(mRay.GetDirection(),diff);
     if (a1 >= Real{0.0})
     {
-        mQuantity = 0;
+        m_Quantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -64,7 +64,7 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
     discr = a1*a1 - a0;
     if (discr < Real{0.0})
     {
-        mQuantity = 0;
+        m_Quantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
     }
     else if (discr >= Math::GetZeroTolerance())
@@ -72,16 +72,16 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>
         root = Math::Sqrt(discr);
         mRayParameter[0] = -a1 - root;
         mRayParameter[1] = -a1 + root;
-        mPoint[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
-        mPoint[1] = mRay.GetOrigin() + mRayParameter[1]*mRay.GetDirection();
-        mQuantity = 2;
+        m_Point[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
+        m_Point[1] = mRay.GetOrigin() + mRayParameter[1]*mRay.GetDirection();
+        m_Quantity = 2;
 		this->SetIntersectionType(IntersectionType::Segment);
     }
     else
     {
         mRayParameter[0] = -a1;
-        mPoint[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
-        mQuantity = 1;
+        m_Point[0] = mRay.GetOrigin() + mRayParameter[0]*mRay.GetDirection();
+        m_Quantity = 1;
 		this->SetIntersectionType(IntersectionType::Point);
     }   
 }
@@ -90,14 +90,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 template <typename Real>

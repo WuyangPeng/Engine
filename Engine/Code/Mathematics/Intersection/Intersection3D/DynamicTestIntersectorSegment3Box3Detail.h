@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,9 +12,9 @@
 template <typename Real>
 Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	::DynamicTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSegment{ segment }, mBox{ box }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Segment{ segment }, m_Box{ box }
 {
-	mSolid = solid;
+	m_Solid = solid;
 	Test();
 }
 
@@ -22,14 +22,14 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	::GetSegment() const
 {
-	return mSegment;
+	return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	::GetBox() const
 {
-	return mBox;
+	return m_Box;
 }
 
 template <typename Real>
@@ -37,7 +37,7 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	::Test()
 {
 	// Get the endpoints of the segment.
-	Vector3D segment[2]{ mSegment.GetBeginPoint(), mSegment.GetEndPoint() };
+	Vector3D segment[2]{ m_Segment.GetBeginPoint(), m_Segment.GetEndPoint() };
 
 	// Get the box velocity relative to the segment.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
@@ -51,8 +51,8 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	// Test box normals.
 	for (i = 0; i < 3; ++i)
 	{
-		axis = mBox.GetAxis(i);
-		if (!IntersectorAxis<Real>::Test(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast))
+		axis = m_Box.GetAxis(i);
+		if (!FindIntersectorAxis<Real>::Test(axis, segment, m_Box, relVelocity, this->GetTMax(), mContactTime, tlast))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -63,8 +63,8 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	// Test seg-direction cross box-edges.
 	for (i = 0; i < 3; ++i)
 	{
-		axis = Vector3DTools::CrossProduct(mBox.GetAxis(i), mSegment.GetDirection());
-		if (!IntersectorAxis<Real>::Test(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast))
+		axis = Vector3DTools::CrossProduct(m_Box.GetAxis(i), m_Segment.GetDirection());
+		if (!FindIntersectorAxis<Real>::Test(axis, segment, m_Box, relVelocity, this->GetTMax(), mContactTime, tlast))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -75,8 +75,8 @@ void Mathematics::DynamicTestIntersectorSegment3Box3<Real>
 	// Test velocity cross box-faces.
 	for (i = 0; i < 3; i++)
 	{
-		axis = Vector3DTools::CrossProduct(relVelocity, mBox.GetAxis(i));
-		if (!IntersectorAxis<Real>::Test(axis, segment, mBox, relVelocity, this->GetTMax(), mContactTime, tlast))
+		axis = Vector3DTools::CrossProduct(relVelocity, m_Box.GetAxis(i));
+		if (!FindIntersectorAxis<Real>::Test(axis, segment, m_Box, relVelocity, this->GetTMax(), mContactTime, tlast))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);

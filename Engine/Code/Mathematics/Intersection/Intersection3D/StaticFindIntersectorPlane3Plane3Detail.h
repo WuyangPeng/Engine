@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Plane3<Real>
 	::StaticFindIntersectorPlane3Plane3(const Plane3& rkPlane0, const Plane3& rkPlane1)
-	:mPlane0{ rkPlane0 }, mPlane1{ rkPlane1 }, mIntrLine{ Vector3D::sm_Zero,Vector3D::sm_Zero }, mIntrPlane{}
+	:m_Plane0{ rkPlane0 }, m_Plane1{ rkPlane1 }, mIntrLine{ Vector3D::sm_Zero,Vector3D::sm_Zero }, mIntrPlane{}
 {
 	Find();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
 	::GetPlane0() const
 {
-    return mPlane0;
+    return m_Plane0;
 }
 
 template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
 	::GetPlane1() const
 {
-    return mPlane1;
+    return m_Plane1;
 }
  
 template <typename Real>
@@ -49,7 +49,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
     //   c1 = (d1 - d*d0)/det
     // where det = 1 - d^2.
 
-	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
+	auto dot = Vector3DTools::DotProduct(m_Plane0.GetNormal(), m_Plane1.GetNormal());
     if (Math::FAbs(dot) >= Math::GetValue(1) - Math::GetZeroTolerance())
     {
         // The planes are parallel.  Check if they are coplanar.
@@ -57,19 +57,19 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
         if (dot >= Math<Real>::GetZero())
         {
             // Normals are in same direction, need to look at c0-c1.
-			cDiff = mPlane0.GetConstant() - mPlane1.GetConstant();
+			cDiff = m_Plane0.GetConstant() - m_Plane1.GetConstant();
         }
         else
         {
             // Normals are in opposite directions, need to look at c0+c1.
-			cDiff = mPlane0.GetConstant() + mPlane1.GetConstant();
+			cDiff = m_Plane0.GetConstant() + m_Plane1.GetConstant();
         }
 
         if (Math::FAbs(cDiff) < Math::GetZeroTolerance())
         {
             // Planes are coplanar.
 			this->SetIntersectionType(IntersectionType::Plane);
-            mIntrPlane = mPlane0;
+            mIntrPlane = m_Plane0;
             return;
         }
 
@@ -79,10 +79,10 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
     }
 
 	auto invDet = (Math::GetValue(1))/(Math::GetValue(1) - dot*dot);
-	auto c0 = (mPlane0.GetConstant() - dot*mPlane1.GetConstant())*invDet;
-	auto c1 = (mPlane1.GetConstant() - dot*mPlane0.GetConstant())*invDet;
+	auto c0 = (m_Plane0.GetConstant() - dot*m_Plane1.GetConstant())*invDet;
+	auto c1 = (m_Plane1.GetConstant() - dot*m_Plane0.GetConstant())*invDet;
 	this->SetIntersectionType(IntersectionType::Line);
-	mIntrLine = Line3{ c0*mPlane0.GetNormal() + c1 * mPlane1.GetNormal(),Vector3DTools::UnitCrossProduct(mPlane0.GetNormal(),mPlane1.GetNormal()) };
+	mIntrLine = Line3{ c0*m_Plane0.GetNormal() + c1 * m_Plane1.GetNormal(),Vector3DTools::UnitCrossProduct(m_Plane0.GetNormal(),m_Plane1.GetNormal()) };
 }
  
 template <typename Real>

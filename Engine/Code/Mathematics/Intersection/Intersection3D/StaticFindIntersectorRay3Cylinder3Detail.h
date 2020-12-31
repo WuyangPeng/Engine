@@ -38,20 +38,20 @@ void Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
     Real t[2];
 	auto quantity = StaticFindIntersectorLine3Cylinder3<Real>::Find(mRay.GetOrigin(),mRay.GetDirection(), mCylinder, t);
 
-    mQuantity = 0;
+    m_Quantity = 0;
     for (auto i = 0; i < quantity; ++i)
     {
         if (t[i] >= Math<Real>::GetZero())
         {
-			mPoint[mQuantity++] = mRay.GetOrigin() + t[i] * mRay.GetDirection();
+			m_Point[m_Quantity++] = mRay.GetOrigin() + t[i] * mRay.GetDirection();
         }
     }
 
-    if (mQuantity == 2)
+    if (m_Quantity == 2)
     {
 		this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (mQuantity == 1)
+    else if (m_Quantity == 1)
     {
 		this->SetIntersectionType(IntersectionType::Point);
     }
@@ -65,14 +65,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_DETAIL_H

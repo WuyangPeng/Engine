@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	::DynamicFindIntersectorTriangle3Sphere3(const Triangle3& triangle, const Sphere3& sphere, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mTriangle{ triangle }, mSphere{ sphere }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Triangle{ triangle }, m_Sphere{ sphere }
 {
 	Find();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	::GetTriangle() const
 {
-	return mTriangle;
+	return m_Triangle;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	::GetSphere() const
 {
-	return mSphere;
+	return m_Sphere;
 }
 
 template <typename Real>
@@ -40,7 +40,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	auto velocity1 = this->GetRhsVelocity();
 
 	// Get the triangle vertices.
-	auto V = mTriangle.GetVertex();
+	auto V = m_Triangle.GetVertex();
 
 	// Get the triangle edges.
 	Vector3D edges[3]{ V[1] - V[0], V[2] - V[1], V[0] - V[2] };
@@ -49,11 +49,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	auto normal = Vector3DTools::CrossProduct(edges[1], edges[0]);
 
 	// Sphere center projection on triangle normal.
-	auto NdC = Vector3DTools::DotProduct(normal, mSphere.GetCenter());
+	auto NdC = Vector3DTools::DotProduct(normal, m_Sphere.GetCenter());
 
 	// Radius projected length in normal direction.  This defers the square
 	// root to normalize normal until absolutely needed.
-	auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
+	auto rSqr = m_Sphere.GetRadius()*m_Sphere.GetRadius();
 	auto normRadiusSqr = Vector3DTools::VectorMagnitudeSquared(normal)*rSqr;
 
 	// Triangle projection on triangle normal.
@@ -75,7 +75,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 		bool inside[3]{};
 		for (auto i = 0; i < 3; ++i)
 		{
-			inside[i] = (Vector3DTools::DotProduct(ExN[i], mSphere.GetCenter()) >= Vector3DTools::DotProduct(ExN[i], V[i]));
+			inside[i] = (Vector3DTools::DotProduct(ExN[i], m_Sphere.GetCenter()) >= Vector3DTools::DotProduct(ExN[i], V[i]));
 		}
 
 		if (inside[0])
@@ -93,11 +93,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V2,V0>.
 					Segment3<Real> seg(V[2], V[0]);
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(IntersectionType::Point);
 						return;
 					}
@@ -112,11 +112,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V1,V2>.
 					Segment3<Real> seg(V[1], V[2]);
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(IntersectionType::Point);
 						return;
 					}
@@ -149,11 +149,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V0,V1>.
 					Segment3<Real> seg(V[0], V[1]);
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(IntersectionType::Point);
 						return;
 					}
@@ -231,7 +231,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				return;
 			}
 
-			spherePoint = mSphere.GetCenter() - mSphere.GetRadius()*normal;
+			spherePoint = m_Sphere.GetCenter() - m_Sphere.GetRadius()*normal;
 		}
 		else
 		{
@@ -243,7 +243,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				return;
 			}
 
-			spherePoint = mSphere.GetCenter() + mSphere.GetRadius()*normal;
+			spherePoint = m_Sphere.GetCenter() + m_Sphere.GetRadius()*normal;
 		}
 
 		// Find intersection of velocity ray and triangle plane.
@@ -283,7 +283,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 						// TriVel is 0.  Re-adjust the point to where it 
 						// should be, were it not.
 						SetContactTime(time);
-						mPoint = intrPoint + time * velocity0;
+						m_Point = intrPoint + time * velocity0;
 						this->SetIntersectionType(IntersectionType::Empty);
 						return;
 					}
@@ -292,11 +292,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V2,V0>.
 					Segment3<Real> seg{ V[2], V[0] };
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(calc.GetIntersectionType());
 						return;
 					}
@@ -310,11 +310,11 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V1,V2>.
 					Segment3<Real> seg{ V[1], V[2] };
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(calc.GetIntersectionType());
 						return;
 					}
@@ -347,12 +347,12 @@ void Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 				{
 					// Potential intersection with edge <V0,V1>.
 					Segment3<Real> seg{ V[0], V[1] };
-					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+					DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 
 					if (calc.IsIntersection())
 					{
 						SetContactTime(calc.GetContactTime());
-						mPoint = calc.GetPoint(0);
+						m_Point = calc.GetPoint(0);
 						this->SetIntersectionType(calc.GetIntersectionType());
 						return;
 					}
@@ -406,7 +406,7 @@ template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	::GetPoint() const
 {
-	return mPoint;
+	return m_Point;
 }
 
 template <typename Real>
@@ -420,8 +420,8 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	// and the tri norm, passed so as not to recalculate
 
 	// Check for intersections at time 0.
-	auto dist = V[vertex] - mSphere.GetCenter();
-	if (Vector3DTools::VectorMagnitudeSquared(dist) < mSphere.GetRadius()*mSphere.GetRadius())
+	auto dist = V[vertex] - m_Sphere.GetCenter();
+	if (Vector3DTools::VectorMagnitudeSquared(dist) < m_Sphere.GetRadius()*m_Sphere.GetRadius())
 	{
 		// Already intersecting that vertex.
 		SetContactTime(Math<Real>::GetZero());
@@ -442,10 +442,10 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 
 	// Project ray and plane onto the plane normal.
 	auto plane = Vector3DTools::DotProduct(sideNorm, V[vertex]);
-	auto center = Vector3DTools::DotProduct(sideNorm, mSphere.GetCenter());
+	auto center = Vector3DTools::DotProduct(sideNorm, m_Sphere.GetCenter());
 	auto vel = Vector3DTools::DotProduct(sideNorm, relVelocity);
 	auto factor = (plane - center) / vel;
-	auto point = mSphere.GetCenter() + factor * relVelocity;
+	auto point = m_Sphere.GetCenter() + factor * relVelocity;
 
 	// Find which side of the hinge vertex this lies by projecting both the
 	// vertex and this new point onto the triangle edge (the same edge whose
@@ -476,11 +476,11 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	// This could be either an sphere-edge or a sphere-vertex intersection
 	// (this test isn't enough to differentiate), so use the full-on
 	// line-sphere test.
-	DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, mSphere,tmax, velocity0, velocity1 };
+	DynamicFindIntersectorSegment3Sphere3<Real> calc{ seg, m_Sphere,tmax, velocity0, velocity1 };
 	if (calc.IsIntersection())
 	{
 		SetContactTime(calc.GetContactTime());
-		mPoint = calc.GetPoint(0);
+		m_Point = calc.GetPoint(0);
 		this->SetIntersectionType(IntersectionType::Empty);
 		return true;
 	}
@@ -497,9 +497,9 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	// towards a vertex at vertex.
 
 	auto relVelocity = velocity1 - velocity0;
-	auto D = mSphere.GetCenter() - vertex;
+	auto D = m_Sphere.GetCenter() - vertex;
 	auto cross = Vector3DTools::CrossProduct(D, relVelocity);
-	auto rSqr = mSphere.GetRadius() * mSphere.GetRadius();
+	auto rSqr = m_Sphere.GetRadius() * m_Sphere.GetRadius();
 	auto vsqr = Vector3DTools::VectorMagnitudeSquared(relVelocity);
 
 	if (Vector3DTools::VectorMagnitudeSquared(cross) > rSqr*vsqr)
@@ -521,7 +521,7 @@ bool Mathematics::DynamicFindIntersectorTriangle3Sphere3<Real>
 	}
 
 	// The intersection is a triangle vertex.
-	mPoint = vertex + mContactTime * velocity0;
+	m_Point = vertex + mContactTime * velocity0;
 	return true;
 }
 

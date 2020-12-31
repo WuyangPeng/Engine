@@ -1,7 +1,0 @@
-灾难拯救：让软件项目重回轨道（Catastrophe Disentanglement:Getting Software Projects Back on Track）
-
-★★
-作者： E.M.Bennatan
-
-知识点 
-1.	软件开发基础知识。

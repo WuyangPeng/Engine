@@ -151,9 +151,6 @@
     <Filter Include="Distance 模板文件\Distance3D\Detail">
       <UniqueIdentifier>{8da0e9e5-bd99-46d5-b74e-c27defc04f36}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Intersection 模板文件\Intersection2D">
-      <UniqueIdentifier>{523f5d57-8fb3-4869-b42b-d2378d6d9e11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Intersection 头文件\Intersection2D">
       <UniqueIdentifier>{e3ba8f56-8a49-4f1f-9148-b1fd7c1b427b}</UniqueIdentifier>
     </Filter>
@@ -165,9 +162,6 @@
     </Filter>
     <Filter Include="Intersection 源文件">
       <UniqueIdentifier>{6630f29e-945b-4128-b75f-8b63b477e16b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Intersection 源文件\Intersection3D">
-      <UniqueIdentifier>{b6164224-aeda-4253-9282-5d77b7f0ea75}</UniqueIdentifier>
     </Filter>
     <Filter Include="Meshes 模板文件\Detail">
       <UniqueIdentifier>{3065b8bd-3193-45cd-b8f9-68c559301ced}</UniqueIdentifier>
@@ -273,6 +267,33 @@
     </Filter>
     <Filter Include="Distance 源文件\Distance3D">
       <UniqueIdentifier>{d17a5a9c-4625-4da8-9a16-b095dc627a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 头文件\Detail">
+      <UniqueIdentifier>{91c6c37a-3f59-4c33-92cc-cac14f57d6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 模板文件\Detail">
+      <UniqueIdentifier>{4d1768f1-4324-4c7b-bf23-f62d7c82470f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 模板文件\Intersection2D">
+      <UniqueIdentifier>{523f5d57-8fb3-4869-b42b-d2378d6d9e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 源文件\Intersection2D">
+      <UniqueIdentifier>{5beb1856-4b47-4cf3-82dc-68641706b6f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 头文件\Intersection2D\Detail">
+      <UniqueIdentifier>{dce34ceb-02a2-447f-8b98-5250790346e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 模板文件\Intersection2D\Detail">
+      <UniqueIdentifier>{d2e48f5f-5c94-4251-975a-959b12f2f117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 源文件\Intersection3D">
+      <UniqueIdentifier>{b6164224-aeda-4253-9282-5d77b7f0ea75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 头文件\Intersection3D\Detail">
+      <UniqueIdentifier>{ca603a79-e743-4d9d-a59e-624ac9358cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Intersection 模板文件\Intersection3D\Detail">
+      <UniqueIdentifier>{dcb9ee70-4229-4cca-99f5-a8406ca6e490}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -409,15 +430,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\CurvesSurfacesVolumes\SingleCurve3.cpp">
       <Filter>CurvesSurfacesVolumes 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.cpp">
-      <Filter>Intersection 源文件\Intersection3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxis.cpp">
-      <Filter>Intersection 源文件\Intersection3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.cpp">
-      <Filter>Intersection 源文件\Intersection3D</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3.cpp">
       <Filter>Intersection 源文件\Intersection3D</Filter>
@@ -1030,6 +1042,225 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3.cpp">
       <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Plane3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Tetrahedron3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Triangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Box3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Triangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRectangle3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Box3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Triangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Triangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Rectangle3.cpp">
+      <Filter>Distance 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersector.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\StaticIntersector.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\DynamicIntersector.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersector1.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\StaticTestIntersector1.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\StaticFindIntersector1.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\DynamicTestIntersector1.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\DynamicFindIntersector1.cpp">
+      <Filter>Intersection 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorBox2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorTriangle2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorTriangle2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicTestIntersectorTriangle2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Arc2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorCircle2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorEllipse2Ellipse2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Arc2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Line2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Ray2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Arc2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Ray2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Arc2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Circle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Classify.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Line2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Ray2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Ray2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Box2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Segment2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorTriangle2Triangle2.cpp">
+      <Filter>Intersection 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorBox3Box3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Box3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TestIntersectorAxis.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindIntersectorAxis.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Box3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Box3.cpp">
+      <Filter>Intersection 源文件\Intersection3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2659,18 +2890,6 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Triangle3Detail.h">
       <Filter>Intersection 模板文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSetDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxisDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfigurationDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorLine3Triangle3DataDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3Detail.h">
       <Filter>Intersection 模板文件\Intersection3D</Filter>
     </ClInclude>
@@ -2923,22 +3142,10 @@
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3Detail.h">
       <Filter>Intersection 模板文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TrianglePlaneRelationsDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TriangleProjectOntoAxisDetail.h">
-      <Filter>Intersection 模板文件\Intersection3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3Detail.h">
       <Filter>Intersection 模板文件\Intersection3D</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Box3.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Box3.h">
@@ -3011,18 +3218,6 @@
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorTriangle3Triangle3.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorAxis.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorLine3Triangle3Data.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3.h">
@@ -3098,9 +3293,6 @@
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Box3.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Capsule3.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Cylinder3.h">
@@ -3275,12 +3467,6 @@
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorTriangle3Triangle3.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TrianglePlaneRelations.h">
-      <Filter>Intersection 头文件\Intersection3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TriangleProjectOntoAxis.h">
       <Filter>Intersection 头文件\Intersection3D</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Meshes\Detail\BasicMeshVertexImpl.h">
@@ -5034,6 +5220,387 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Frustum3Achieve.h">
       <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Plane3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Tetrahedron3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistancePoint3Triangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Box3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRay3Triangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceRectangle3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Box3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceSegment3Triangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Triangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Distance\Distance3D\DistanceTriangle3Rectangle3Achieve.h">
+      <Filter>Distance 模板文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\IntersectorAchieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticIntersectorAchieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicIntersectorAchieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\DynamicIntersectorImplDetail.h">
+      <Filter>Intersection 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\DynamicIntersectorImpl.h">
+      <Filter>Intersection 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersector1Achieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticTestIntersector1Achieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticFindIntersectorSegment3Capsule3.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\StaticFindIntersector1Impl.h">
+      <Filter>Intersection 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\StaticFindIntersector1ImplDetail.h">
+      <Filter>Intersection 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\StaticFindIntersector1Achieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicTestIntersector1Achieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\DynamicFindIntersector1Impl.h">
+      <Filter>Intersection 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Detail\DynamicFindIntersector1ImplDetail.h">
+      <Filter>Intersection 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\DynamicFindIntersector1Achieve.h">
+      <Filter>Intersection 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorBox2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicFindIntersectorTriangle2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\FindIntersectorTriangle2Triangle2Impl.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\FindIntersectorTriangle2Triangle2ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorTriangle2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\DynamicTestIntersectorTriangle2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorArc2Arc2Impl.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorArc2Arc2ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Arc2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorArc2Circle2Impl.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorArc2Circle2ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorArc2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorCircle2Circle2Impl.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorCircle2Circle2ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorCircle2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorEllipse2Ellipse2Impl.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\StaticFindIntersectorEllipse2Ellipse2ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorEllipse2Ellipse2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Arc2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Circle2.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Circle2Detail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Box2.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Box2Detail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Line2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Ray2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Triangle2.h">
+      <Filter>Intersection 头文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\Detail\Line2Triangle2Detail.h">
+      <Filter>Intersection 模板文件\Intersection2D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorLine2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Arc2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Ray2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorRay2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticFindIntersectorSegment2Arc2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorBox2Circle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2ClassifyAchieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Line2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Ray2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorLine2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorRay2Ray2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Box2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Segment2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorSegment2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection2D\StaticTestIntersectorTriangle2Triangle2Achieve.h">
+      <Filter>Intersection 模板文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\IntersectorLine3Triangle3DataDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\IntersectorLine3Triangle3Data.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TrianglePlaneRelations.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TriangleProjectOntoAxis.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TrianglePlaneRelationsDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TriangleProjectOntoAxisDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicAngularTestIntersectorBox3Box3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicTestIntersectorBox3Box3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\StaticTestIntersectorBox3Box3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\DynamicFindIntersectorBox3Box3Impl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\DynamicFindIntersectorBox3Box3ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Flags\ContactSide.h">
+      <Filter>Intersection 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfigurationDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSetDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSet.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfiguration.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorUtility3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Flags\VertexProjectionMap.h">
+      <Filter>Intersection 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\IntersectorConfigurationImpl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\IntersectorConfigurationImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\IntersectorConfigurationAchieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\FindContactSetImpl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\FindContactSetImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindContactSetAchieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TestIntersectorAxisImpl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\TestIntersectorAxisImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TestIntersectorAxis.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TestIntersectorAxisAchieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\TestIntersectorAxisDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\FindIntersectorAxisImpl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\FindIntersectorAxisImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindIntersectorAxis.h">
+      <Filter>Intersection 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindIntersectorAxisDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\FindIntersectorAxisAchieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Box3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorBox3Sphere3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\DynamicFindIntersectorHalfspace3Box3Impl.h">
+      <Filter>Intersection 头文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\Detail\DynamicFindIntersectorHalfspace3Box3ImplDetail.h">
+      <Filter>Intersection 模板文件\Intersection3D\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\Intersection\Intersection3D\DynamicFindIntersectorHalfspace3Box3Achieve.h">
+      <Filter>Intersection 模板文件\Intersection3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -23,14 +23,15 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorEllipsoid3Ellipsoid3(const Ellipsoid3& ellipsoid0, const Ellipsoid3& ellipsoid1);
 
-		// Object access.
-		const Ellipsoid3 GetEllipsoid0() const;
-		const Ellipsoid3 GetEllipsoid1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Ellipsoid3 GetEllipsoid0() const;
+                [[nodiscard]] const Ellipsoid3 GetEllipsoid1() const;
 
 		// A form of test query.  The ellipsoids are separated, intersecting
 		// (at points or curves), ellipsoid0 is strictly contained in ellipsoid1,
@@ -43,7 +44,7 @@ namespace Mathematics
 			EC_ELLIPSOID1_CONTAINS_ELLIPSOID0
 		};
 
-		Classification GetClassification() const;
+	 [[nodiscard]] Classification GetClassification() const;
 
 	private:
 		void Test();
@@ -69,8 +70,8 @@ namespace Mathematics
 		Classification m_Classification;
 	};
 
-	using StaticTestIntersectorEllipsoid3Ellipsoid3f = StaticTestIntersectorEllipsoid3Ellipsoid3<float>;
-	using StaticTestIntersectorEllipsoid3Ellipsoid3d = StaticTestIntersectorEllipsoid3Ellipsoid3<double>;
+	using FloatStaticTestIntersectorEllipsoid3Ellipsoid3 = StaticTestIntersectorEllipsoid3Ellipsoid3<float>;
+	using DoubleStaticTestIntersectorEllipsoid3Ellipsoid3 = StaticTestIntersectorEllipsoid3Ellipsoid3<double>;
 
 }
 

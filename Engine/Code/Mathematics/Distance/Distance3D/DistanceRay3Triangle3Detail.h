@@ -1,98 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 13:51)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/15 13:12)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_RAY3_TRIANGLE3_DETAIL_H 
-#define MATHEMATICS_DISTANCE_DIST_RAY3_TRIANGLE3_DETAIL_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_DETAIL_H
+#define MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_DETAIL_H
 
 #include "DistanceRay3Triangle3.h"
-#include "DistanceLine3Triangle3.h"
-#include "DistancePoint3Triangle3.h"
-#include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h" 
 
-template <typename Real>
-Mathematics::DistanceRay3Triangle3<Real>
-	::DistanceRay3Triangle3(const Ray3& ray, const Triangle3& triangle)
-	:ParentType{}, mRay{ ray }, mTriangle{ triangle }
-{
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_RAY3_TRIANGLE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Ray3<Real>& Mathematics::DistanceRay3Triangle3<Real>
-	::GetRay() const
-{
-	return mRay;
-}
+    #include "DistanceRay3Triangle3Achieve.h"
 
-template <typename Real>
-const Mathematics::Triangle3<Real>& Mathematics::DistanceRay3Triangle3<Real>
-	::GetTriangle() const
-{
-	return mTriangle;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_RAY3_TRIANGLE3_ACHIEVE)
 
-template <typename Real>
-typename const Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>
-	::GetSquared() const
-{
-	Vector3D mClosestPoint0;
-	Vector3D mClosestPoint1;
-
-	Line3<Real> line{ mRay.GetOrigin(), mRay.GetDirection() };
-	DistanceLine3Triangle3<Real> queryLT{ line, mTriangle };
-	auto sqrDist = queryLT.GetSquared();
-	mRayParameter = queryLT.GetLineParameter();
-
-	if (mRayParameter >= Math<Real>::GetValue(0))
-	{
-		mClosestPoint0 = sqrDist.GetLhsClosestPoint();
-		mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-		mTriangleBary[0] = queryLT.GetTriangleBary(0);
-		mTriangleBary[1] = queryLT.GetTriangleBary(1);
-		mTriangleBary[2] = queryLT.GetTriangleBary(2);
-	}
-	else
-	{
-		mClosestPoint0 = mRay.GetOrigin();
-		DistancePoint3Triangle3<Real> queryPT{ mClosestPoint0, mTriangle };
-		sqrDist = queryPT.GetSquared();
-		mClosestPoint1 = sqrDist.GetRhsClosestPoint();
-		mRayParameter = Math<Real>::GetValue(0);
-		mTriangleBary[0] = queryPT.GetTriangleBary(0);
-		mTriangleBary[1] = queryPT.GetTriangleBary(1);
-		mTriangleBary[2] = queryPT.GetTriangleBary(2);
-	}
-	return DistanceResult{ sqrDist.GetDistance(), Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
-}
-
-template <typename Real>
-typename const Mathematics::DistanceRay3Triangle3<Real>::DistanceResult Mathematics::DistanceRay3Triangle3<Real>
-	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
-{
-	auto movedOrigin = mRay.GetOrigin() + t * lhsVelocity;
-	auto movedV0 = mTriangle.GetVertex(0) + t * rhsVelocity;
-	auto movedV1 = mTriangle.GetVertex(1) + t * rhsVelocity;
-	auto movedV2 = mTriangle.GetVertex(2) + t * rhsVelocity;
-	Ray3 movedRay{ movedOrigin, mRay.GetDirection() };
-	Triangle3 movedTriangle{ movedV0, movedV1, movedV2 };
-	return DistanceRay3Triangle3<Real>{ movedRay, movedTriangle }.GetSquared();
-}
-
-template <typename Real>
-Real Mathematics::DistanceRay3Triangle3<Real>
-	::GetRayParameter() const
-{
-	return mRayParameter;
-}
-
-template <typename Real>
-Real Mathematics::DistanceRay3Triangle3<Real>
-	::GetTriangleBary(int i) const
-{
-	return mTriangleBary[i];
-}
-
-#endif // MATHEMATICS_DISTANCE_DIST_RAY3_TRIANGLE3_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_DETAIL_H

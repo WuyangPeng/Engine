@@ -1,7 +1,0 @@
-数字图像处理疑难解析 （Image Processing,The Fundamentals）
-
-☆
-作者： Petrou.M.
-
-知识点 
-1.	数字图像基础知识。   

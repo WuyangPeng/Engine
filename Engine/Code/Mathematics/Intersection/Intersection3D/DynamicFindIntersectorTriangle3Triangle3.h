@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -27,41 +27,42 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Line3 = Line3<Real>;
 		using  Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+	 using Math = typename ParentType::Math;
 
 	public:
 		DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax,
 												 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Triangle3 GetTriangle0() const;
-		const Triangle3 GetTriangle1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Triangle3 GetTriangle0() const;
+                [[nodiscard]] const Triangle3 GetTriangle1() const;
 
 		bool mReportCoplanarIntersections;  // default 'true'
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Dynamic queries.
 		void Find();
 
-		static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Real& fmin, Real& fmax);
+	 [[nodiscard]] static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Real& fmin, Real& fmax);
 
-		static void TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, Real distance[3], int sign[3], int& positive, int& negative, int& zero);
+	 [[nodiscard]] static void TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, Real distance[3], int sign[3], int& positive, int& negative, int& zero);
 
 		static void GetInterval(const Triangle3& triangle, const Line3& line, const Real distance[3], const int sign[3], Real param[2]);
 
-		bool ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point);
+	 [[nodiscard]] bool ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point);
 
-		bool IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3D& end0, const Vector3D& end1);
+	 [[nodiscard]] bool IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3D& end0, const Vector3D& end1);
 
-		bool GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1);
+	 [[nodiscard]] bool GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1);
 
-		static bool TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast);
+		 [[nodiscard]] static bool TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast);
 
-		bool TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast);
+		 [[nodiscard]] bool TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast);
 
 		enum ProjectionMap
 		{
@@ -87,9 +88,9 @@ namespace Mathematics
 
 		static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Configuration& cfg);
 
-		bool FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast);
+	 [[nodiscard]] bool FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast);
 
-		bool FindOverlap(const Vector3D & axis, Real tmax, const Vector3D & velocity, ContactSide& side,
+	 [[nodiscard]] bool FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, ContactSide& side,
 						 Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast);
 
 		void FindContactSet(const Triangle3& tri0, const Triangle3& tri1, ContactSide& side,
@@ -100,16 +101,16 @@ namespace Mathematics
 		void GetEdgeFaceIntersection(const Vector3D& U0, const Vector3D& U1, const Triangle3& tri);
 
 		// The objects to intersect.
-		Triangle3 mTriangle0;
-		Triangle3 mTriangle1;
+		Triangle3 m_Triangle0;
+		Triangle3 m_Triangle1;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[6];
+		int m_Quantity;
+		Vector3D m_Point[6];
 	};
 
-	using DynamicFindIntersectorTriangle3Triangle3f = DynamicFindIntersectorTriangle3Triangle3<float>;
-	using DynamicFindIntersectorTriangle3Triangle3d = DynamicFindIntersectorTriangle3Triangle3<double>;
+	using FloatDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<float>;
+	using DoubleDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H

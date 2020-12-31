@@ -1,7 +1,0 @@
-Exceptional C++
-
-★★★
-作者：Herb Sutter
-
-知识点 
-1.	C++ 基础知识。 

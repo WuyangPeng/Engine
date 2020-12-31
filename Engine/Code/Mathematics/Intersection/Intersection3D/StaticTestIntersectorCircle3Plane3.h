@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,26 +25,27 @@ namespace Mathematics
 		using Circle3 = Circle3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorCircle3Plane3(const Circle3& circle, const Plane3& plane);
 
-		// Object access.
-		const Circle3 GetCircle() const;
-		const Plane3 GetPlane() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Circle3 GetCircle() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
 
 	private:
 		// Static intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Circle3 mCircle;
-		Plane3 mPlane;
+		Circle3 m_Circle;
+		Plane3 m_Plane;
 	};
 
-	using StaticTestIntersectorCircle3Plane3f = StaticTestIntersectorCircle3Plane3<float>;
-	using StaticTestIntersectorCircle3Plane3d = StaticTestIntersectorCircle3Plane3<double>;
+	using FloatStaticTestIntersectorCircle3Plane3 = StaticTestIntersectorCircle3Plane3<float>;
+	using DoubleStaticTestIntersectorCircle3Plane3 = StaticTestIntersectorCircle3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CIRCLE3_PLANE3_H

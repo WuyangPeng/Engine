@@ -1,7 +1,0 @@
-C++ 多线程编程实战（C++ Multithreading Cookbook）
-
-★★
-作者：Milos Ljumovic
-
-知识点 
-1.	并发编程基础知识。 

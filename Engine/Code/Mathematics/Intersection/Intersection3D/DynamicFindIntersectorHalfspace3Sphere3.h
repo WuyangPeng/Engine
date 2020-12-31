@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -32,34 +32,35 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicFindIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tmax,
 												const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetHalfspace() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 		// The intersection set is empty or a point.  GetPoint() returns a
 		// valid result only when Find(...) returns 'true'.
-		const Vector3D GetPoint() const;
+                [[nodiscard]] const Vector3D GetPoint() const;
 
 	private:
 		// Dynamic queries.
 		void Find();
 
 		// The objects to intersect.
-		Plane3 mHalfspace;
-		Sphere3 mSphere;
+		Plane3 m_Halfspace;
+		Sphere3 m_Sphere;
 
 		// Information about the intersection set.
-		Vector3D mPoint;
+		Vector3D m_Point;
 	};
 
-	using DynamicFindIntersectorHalfspace3Sphere3f = DynamicFindIntersectorHalfspace3Sphere3<float>;
-	using DynamicFindIntersectorHalfspace3Sphere3d = DynamicFindIntersectorHalfspace3Sphere3<double>;
+	using FloatDynamicFindIntersectorHalfspace3Sphere3 = DynamicFindIntersectorHalfspace3Sphere3<float>;
+	using DoubleDynamicFindIntersectorHalfspace3Sphere3 = DynamicFindIntersectorHalfspace3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SPHERE3_H

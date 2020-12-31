@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
 	::StaticTestIntersectorPlane3Triangle3(const Plane3& plane,const Triangle3& triangle, Real epsilon)
-	: mPlane{ plane }, mTriangle{ triangle }
+	: m_Plane{ plane }, m_Triangle{ triangle }
 {
     mEpsilon = (epsilon >= Math<Real>::GetValue(0) ? epsilon : Math<Real>::GetValue(0));
 	Test();
@@ -22,14 +22,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
 	::GetTriangle() const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
@@ -41,7 +41,7 @@ void Mathematics::StaticTestIntersectorPlane3Triangle3<Real>
     Real SD[3];
     for (auto i = 0; i < 3; ++i)
     {
-        SD[i] = mPlane.DistanceTo(mTriangle.GetVertex()[i]);
+        SD[i] = m_Plane.DistanceTo(m_Triangle.GetVertex()[i]);
         if (Math::FAbs(SD[i]) <= mEpsilon)
         {
             SD[i] = zero;

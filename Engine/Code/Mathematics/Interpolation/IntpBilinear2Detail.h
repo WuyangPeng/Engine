@@ -21,7 +21,7 @@ IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSp
 
     mXBound = xBound;
     mYBound = yBound;
-    mQuantity = xBound*yBound;
+    m_Quantity = xBound*yBound;
 
     mXMin = xMin;
     mXSpacing = xSpacing;
@@ -50,7 +50,7 @@ int IntpBilinear2<Real>::GetYBound () const
 template <typename Real>
 int IntpBilinear2<Real>::GetQuantity () const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,40 +25,41 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Box3(const Line3& line, const Box3& box);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Box3 GetBox() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Box3 GetBox() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection queries.
 		void Find();
 
-		static bool Clip(Real denom, Real numer, Real& t0, Real& t1);
+	 [[nodiscard]] static bool Clip(Real denom, Real numer, Real& t0, Real& t1);
 
 		// The objects to intersect.
 		Line3 mLine;
-		Box3 mBox;
+		Box3 m_Box;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 
 	public:
 		// Shared by IntrRay3Box3 and IntrSegment3Box3.
-		static bool DoClipping(Real t0, Real t1, const Vector3D& origin, const Vector3D& direction, const Box3& box, bool solid, int& quantity, Vector3D point[2], int& intrType);
+            [[nodiscard]] static bool DoClipping(Real t0, Real t1, const Vector3D& origin, const Vector3D& direction, const Box3& box, bool solid, int& quantity, Vector3D point[2], int& intrType);
 	};
 
-	using StaticFindIntersectorLine3Box3f = StaticFindIntersectorLine3Box3<float>;
-	using StaticFindIntersectorLine3Box3d = StaticFindIntersectorLine3Box3<double>;
+	using FloatStaticFindIntersectorLine3Box3 = StaticFindIntersectorLine3Box3<float>;
+	using DoubleStaticFindIntersectorLine3Box3 = StaticFindIntersectorLine3Box3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_BOX3_H

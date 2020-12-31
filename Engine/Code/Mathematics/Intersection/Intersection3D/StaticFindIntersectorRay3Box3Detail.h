@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Box3<Real>
 	::StaticFindIntersectorRay3Box3(const Ray3& rkRay, const Box3& rkBox)
-	: mRay{ rkRay }, mBox{ rkBox }
+	: mRay{ rkRay }, m_Box{ rkBox }
 {
 	Find();
 }
@@ -28,7 +28,7 @@ template <typename Real>
 const Mathematics::Box3<Real> Mathematics::StaticFindIntersectorRay3Box3<Real>
 	::GetBox() const
 {
-    return mBox;
+    return m_Box;
 }
  
 template <typename Real>
@@ -38,7 +38,7 @@ void Mathematics::StaticFindIntersectorRay3Box3<Real>
 	auto t0 = Math<Real>::GetZero();
 	auto t1 = Math::sm_MaxReal;
 	auto mIntersectionType = 0;
-	StaticFindIntersectorLine3Box3<Real>::DoClipping(t0, t1, mRay.GetOrigin(), mRay.GetDirection(), mBox, true, mQuantity, mPoint, mIntersectionType);
+	StaticFindIntersectorLine3Box3<Real>::DoClipping(t0, t1, mRay.GetOrigin(), mRay.GetDirection(), m_Box, true, m_Quantity, m_Point, mIntersectionType);
 	this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType>(mIntersectionType));
 }
 
@@ -46,14 +46,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorRay3Box3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Box3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_BOX3_DETAIL_H

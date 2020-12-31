@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Frustum3 = Frustum3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum);
 
-		// Object access.
-		const Sphere3 GetSphere() const;
-		const Frustum3 GetFrustum() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Sphere3 GetSphere() const;
+                [[nodiscard]] const Frustum3 GetFrustum() const;
 
 	private:
 		// Static intersection query.
@@ -40,12 +41,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 		Frustum3 mFrustum;
 	};
 
-	using StaticTestIntersectorSphere3Frustum3f = StaticTestIntersectorSphere3Frustum3<float>;
-	using StaticTestIntersectorSphere3Frustum3d = StaticTestIntersectorSphere3Frustum3<double>;
+	using FloatStaticTestIntersectorSphere3Frustum3 = StaticTestIntersectorSphere3Frustum3<float>;
+	using DoubleStaticTestIntersectorSphere3Frustum3 = StaticTestIntersectorSphere3Frustum3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_FRUSTUM3_H

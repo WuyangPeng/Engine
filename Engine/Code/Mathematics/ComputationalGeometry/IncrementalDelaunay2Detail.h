@@ -51,7 +51,7 @@ Mathematics::IncrementalDelaunay2<Real>
     mVertexPool.push_back(superVertex2);
 
     // Inert the supertriangle into the mesh.
-    mTriangle.insert(NEW0 Triangle(0, 1, 2));
+    m_Triangle.insert(NEW0 Triangle(0, 1, 2));
 }
 
 template <typename Real>
@@ -64,8 +64,8 @@ Mathematics::IncrementalDelaunay2<Real>
     DELETE1(mAdjacencies);
     DELETE1(mPath);
 
-	auto iter = mTriangle.begin();
-	auto end = mTriangle.end();
+	auto iter = m_Triangle.begin();
+	auto end = m_Triangle.end();
     for (/**/; iter != end; ++iter)
     {
         Triangle* tri = *iter;
@@ -173,7 +173,7 @@ int Mathematics::IncrementalDelaunay2<Real>
                 }
             }
         }
-        mTriangle.erase(tri);
+        m_Triangle.erase(tri);
         DELETE0(tri);
     }
 
@@ -189,7 +189,7 @@ int Mathematics::IncrementalDelaunay2<Real>
 
         // Create and insert the new triangle.
         tri = NEW0 Triangle(posIndex, edge->V[0], edge->V[1]);
-        mTriangle.insert(tri);
+        m_Triangle.insert(tri);
 
         // Establish the adjacency links across the polygon edge.
         tri->Adj[1] = edge->Tri;
@@ -282,12 +282,12 @@ template <typename Real>
 void Mathematics::IncrementalDelaunay2<Real>
 	::GetAllTriangles (int& numTriangles, int*& indices)
 {
-    numTriangles = (int)mTriangle.size();
+    numTriangles = (int)m_Triangle.size();
     indices = NEW1<int>(3*numTriangles);
 
     int* currIndex = indices;
-    auto iter = mTriangle.begin();
-	auto end = mTriangle.end();
+    auto iter = m_Triangle.begin();
+	auto end = m_Triangle.end();
     for (/**/; iter != end; ++iter)
     {
         Triangle* tri = *iter;
@@ -311,9 +311,9 @@ void Mathematics::IncrementalDelaunay2<Real>
 
     // Assign integer values to the triangles for use by the caller.
     std::map<Triangle*,int> permute;
-	auto iter = mTriangle.begin();
-	auto end = mTriangle.end();
-    mNumTriangles = (int)mTriangle.size();
+	auto iter = m_Triangle.begin();
+	auto end = m_Triangle.end();
+    mNumTriangles = (int)m_Triangle.size();
     Triangle* tri;
     int i;
     for (i = 0; iter != end; ++iter)
@@ -338,8 +338,8 @@ void Mathematics::IncrementalDelaunay2<Real>
         mIndices = NEW1<int>(3*mNumTriangles);
         mAdjacencies = NEW1<int>(3*mNumTriangles);
         i = 0;
-        iter = mTriangle.begin();
-        end = mTriangle.end();
+        iter = m_Triangle.begin();
+        end = m_Triangle.end();
         for (/**/; iter != end; ++iter)
         {
             tri = *iter;
@@ -889,8 +889,8 @@ typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::Increme
     // construction, there must be such a triangle (the vertex cannot be
     // outside the supertriangle).
 
-	auto tri = *mTriangle.begin();
-	auto numTriangles = boost::numeric_cast<int>(mTriangle.size());
+	auto tri = *m_Triangle.begin();
+	auto numTriangles = boost::numeric_cast<int>(m_Triangle.size());
     for (int t = 0; t < numTriangles; ++t)
     {
 		auto vertices = tri->V;
@@ -1324,8 +1324,8 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate
                 }
             }
 
-            mDelaunay->mTriangle.erase(triP);
-            mDelaunay->mTriangle.erase(triN);
+            mDelaunay->m_Triangle.erase(triP);
+            mDelaunay->m_Triangle.erase(triN);
             DELETE0(triP);
             DELETE0(triN);
             break;

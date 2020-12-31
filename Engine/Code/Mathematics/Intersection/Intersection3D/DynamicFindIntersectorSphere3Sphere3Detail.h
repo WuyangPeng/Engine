@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	::DynamicFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSphere0{ sphere0 }, mSphere1{ sphere1 }, mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, 0 }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Sphere0{ sphere0 }, m_Sphere1{ sphere1 }, m_Circle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, 0 }
 {
 	Find();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	::GetSphere0() const
 {
-	return mSphere0;
+	return m_Sphere0;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	::GetSphere1() const
 {
-	return mSphere1;
+	return m_Sphere1;
 }
 
 template <typename Real>
@@ -41,9 +41,9 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 
 	auto relVelocity = velocity1 - velocity0;
 	auto a = Vector3DTools::VectorMagnitudeSquared(relVelocity);
-	auto CDiff = mSphere1.GetCenter() - mSphere0.GetCenter();
+	auto CDiff = m_Sphere1.GetCenter() - m_Sphere0.GetCenter();
 	auto c = Vector3DTools::VectorMagnitudeSquared(CDiff);
-	auto rSum = mSphere0.GetRadius() + mSphere1.GetRadius();
+	auto rSum = m_Sphere0.GetRadius() + m_Sphere1.GetRadius();
 	auto rSumSqr = rSum * rSum;
 
 	if (a > Math::GetValue(0))
@@ -63,7 +63,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 						// point of contact by using the midpoint of the line
 						// segment connecting the sphere centers.
 						SetContactTime(Math::GetValue(0));
-						mContactPoint = (Real{ 0.5 })*(mSphere0.GetCenter() + mSphere1.GetCenter());
+						m_ContactPoint = (Real{ 0.5 })*(m_Sphere0.GetCenter() + m_Sphere1.GetCenter());
 					}
 					else
 					{
@@ -80,7 +80,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 
 						auto newCDiff = CDiff + this->GetContactTime()*relVelocity;
 
-						mContactPoint = mSphere0.GetCenter() + this->GetContactTime()*velocity0 + (mSphere0.GetRadius() / rSum) * newCDiff;
+						m_ContactPoint = m_Sphere0.GetCenter() + this->GetContactTime()*velocity0 + (m_Sphere0.GetRadius() / rSum) * newCDiff;
 					}
 
 					this->SetIntersectionType(IntersectionType::Other);
@@ -98,7 +98,7 @@ void Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 		// contact by using the midpoint of the line segment connecting the
 		// sphere centers.
 		SetContactTime(Math::GetValue(0));
-		mContactPoint = ( Math::GetRational(1,2)) * (mSphere0.GetCenter() + mSphere1.GetCenter());
+		m_ContactPoint = ( Math::GetRational(1,2)) * (m_Sphere0.GetCenter() + m_Sphere1.GetCenter());
 		this->SetIntersectionType(IntersectionType::Other);
 		return;
 	}
@@ -110,14 +110,14 @@ template <typename Real>
 const Mathematics::Circle3<Real> Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	::GetCircle() const
 {
-	return mCircle;
+	return m_Circle;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorSphere3Sphere3<Real>
 	::GetContactPoint() const
 {
-	return mContactPoint;
+	return m_ContactPoint;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_DETAIL_H

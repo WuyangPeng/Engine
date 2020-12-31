@@ -1,80 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 16:18)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/23 19:21)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_DETAIL_H
 
 #include "StaticTestIntersectorSegment2Box2.h"
-#include "StaticTestIntersectorLine2Box2.h" 
 
-template <typename Real>
-Mathematics::StaticTestIntersectorSegment2Box2<Real>
-	::StaticTestIntersectorSegment2Box2(const Segment2& segment, const Box2& box, bool solid)
-	:mSegment{ segment }, mBox{ box }
-{
-	mSolid = solid;
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_ACHIEVE)
 
-	Test();
-}
+    #include "StaticTestIntersectorSegment2Box2Achieve.h"
 
-template <typename Real>
-const Mathematics::Segment2<Real> Mathematics::StaticTestIntersectorSegment2Box2<Real>
-	::GetSegment() const
-{
-	return mSegment;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Box2<Real> Mathematics::StaticTestIntersectorSegment2Box2<Real>
-	::GetBox() const
-{
-	return mBox;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorSegment2Box2<Real>
-	::Test()
-{
-	auto diff = mSegment.GetCenterPoint() - mBox.GetCenter();
-
-	Real AWdU[2]{};
-	Real ADdU[2]{};
-	auto RHS = Math::GetValue(0);
-	AWdU[0] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetAxis0()));
-	ADdU[0] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetAxis0()));
-	RHS = mBox.GetExtent0() + mSegment.GetExtent() * AWdU[0];
-	if (ADdU[0] > RHS)
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-		return;
-	}
-
-	AWdU[1] = Math::FAbs(Vector2DTools::DotProduct(mSegment.GetDirection(), mBox.GetAxis1()));
-	ADdU[1] = Math::FAbs(Vector2DTools::DotProduct(diff, mBox.GetAxis1()));
-	RHS = mBox.GetExtent1() + mSegment.GetExtent() * AWdU[1];
-	if (ADdU[1] > RHS)
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-		return;
-	}
-
-	auto perp = Vector2DTools::GetPerp(mSegment.GetDirection());
-	auto LHS = Math::FAbs(Vector2DTools::DotProduct(perp, diff));
-	auto part0 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis0()));
-	auto part1 = Math::FAbs(Vector2DTools::DotProduct(perp, mBox.GetAxis1()));
-	RHS = mBox.GetExtent0() * part0 + mBox.GetExtent1()*part1;
-	if (LHS <= RHS)
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-
-	}
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT2_BOX2_DETAIL_H

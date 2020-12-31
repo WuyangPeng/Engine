@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane,const Ellipsoid3& ellipsoid)
-	: mPlane{ plane }, mEllipsoid{ ellipsoid }
+	: m_Plane{ plane }, mEllipsoid{ ellipsoid }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
@@ -36,9 +36,9 @@ void Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::Test()
 {
 	auto MInverse = mEllipsoid.GetMatrixInverse();
-	auto discr = MInverse.QuadraticForm(mPlane.GetNormal(), mPlane.GetNormal());
+	auto discr = MInverse.QuadraticForm(m_Plane.GetNormal(), m_Plane.GetNormal());
 	auto root = Math::Sqrt(Math::FAbs(discr));
-	auto sDist = mPlane.DistanceTo(mEllipsoid.GetCenter());
+	auto sDist = m_Plane.DistanceTo(mEllipsoid.GetCenter());
     if (Math::FAbs(sDist) <= root)
 	{
 		this->SetIntersectionType(IntersectionType::Other);
@@ -55,9 +55,9 @@ bool Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 {
 	auto MInverse = mEllipsoid.GetMatrixInverse();
     
-	auto discr = MInverse.QuadraticForm(mPlane.GetNormal(), mPlane.GetNormal());
+	auto discr = MInverse.QuadraticForm(m_Plane.GetNormal(), m_Plane.GetNormal());
 	auto root = Math::Sqrt(Math::FAbs(discr));
-	auto sDist = mPlane.DistanceTo(mEllipsoid.GetCenter());
+	auto sDist = m_Plane.DistanceTo(mEllipsoid.GetCenter());
     return sDist <= -root;
 }
 

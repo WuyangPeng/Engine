@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -56,27 +56,27 @@ void Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>
 	if (discr < mNegativeThreshold)
 	{
 		this->SetIntersectionType(IntersectionType::Empty);
-		mQuantity = 0;
+		m_Quantity = 0;
 	}
 	else if (discr > mPositiveThreshold)
 	{
 		this->SetIntersectionType(IntersectionType::Segment);
-		mQuantity = 2;
+		m_Quantity = 2;
 
 		auto root = Math::Sqrt(discr);
 		auto inv = (Math::GetValue(1)) / a2;
 		t[0] = (-a1 - root)*inv;
 		t[1] = (-a1 + root)*inv;
-		mPoint[0] = mLine.GetOrigin() + t[0] * mLine.GetDirection();
-		mPoint[1] = mLine.GetOrigin() + t[1] * mLine.GetDirection();
+		m_Point[0] = mLine.GetOrigin() + t[0] * mLine.GetDirection();
+		m_Point[1] = mLine.GetOrigin() + t[1] * mLine.GetDirection();
 	}
 	else
 	{
 		this->SetIntersectionType(IntersectionType::Point);
-		mQuantity = 1;
+		m_Quantity = 1;
 
 		t[0] = -a1 / a2;
-		mPoint[0] = mLine.GetOrigin() + t[0] * mLine.GetDirection();
+		m_Point[0] = mLine.GetOrigin() + t[0] * mLine.GetDirection();
 	}
 }
 
@@ -84,14 +84,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Ellipsoid3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 template <typename Real>

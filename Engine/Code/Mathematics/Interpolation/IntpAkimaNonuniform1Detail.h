@@ -82,7 +82,7 @@ namespace Mathematics
 	template <typename Real>
 	Real IntpAkimaNonuniform1<Real>::GetXMax() const
 	{
-		return mX[mQuantity - 1];
+		return mX[m_Quantity - 1];
 	}
 
 	template <typename Real>
@@ -90,9 +90,9 @@ namespace Mathematics
 	{
 		if (x >= mX[0])
 		{
-			if (x <= mX[mQuantity - 1])
+			if (x <= mX[m_Quantity - 1])
 			{
-				for (index = 0; index + 1 < mQuantity; ++index)
+				for (index = 0; index + 1 < m_Quantity; ++index)
 				{
 					if (x < mX[index + 1])
 					{

@@ -1,7 +1,0 @@
-事务处理：概念与技术（Transaction Processing:Concepts and Techniques）
-
-☆
-作者：Jim Gray、Andreas Reuter
-
-知识点 
-1.	事务处理基础知识。   

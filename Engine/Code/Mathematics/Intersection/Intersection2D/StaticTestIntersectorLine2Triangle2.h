@@ -1,62 +1,52 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:41)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/23 15:18)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_TRIANGLE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects2D/Line2.h"   
-#include "Mathematics/Objects2D/Triangle2.h"  
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects2D/Line2.h"
+#include "Mathematics/Objects2D/Triangle2.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticTestIntersectorLine2Triangle2 : public StaticIntersector<Real, Vector2D>
-	{
-	public:
-		using ClassType = StaticTestIntersectorLine2Triangle2<Real>;
-		using ParentType = StaticIntersector<Real, Vector2D>;
-		using Vector2D = Vector2D<Real>;
-		using Line2 = Line2<Real>;
-		using Triangle2 = Triangle2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorLine2Triangle2 : public StaticIntersector<Real, Vector2D>
+    {
+    public:
+        using ClassType = StaticTestIntersectorLine2Triangle2<Real>;
+        using ParentType = StaticIntersector<Real, Vector2D>;
+        using Vector2D = Vector2D<Real>;
+        using Line2 = Line2<Real>;
+        using Triangle2 = Triangle2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticTestIntersectorLine2Triangle2(const Line2& line, const Triangle2& triangle);
+    public:
+        StaticTestIntersectorLine2Triangle2(const Line2& line, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());
 
-		// Object access.
-		const Line2 GetLine() const;
-		const Triangle2 GetTriangle() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		// Static intersection query.
-		void Test();
+        [[nodiscard]] const Line2 GetLine() const noexcept;
+        [[nodiscard]] const Triangle2 GetTriangle() const noexcept;
 
-		// The objects to intersect.
-		Line2 mLine;
-		Triangle2 mTriangle;
+    private:
+        void Test();
 
-	public:
-		// Shared by IntrRay2Triangle2 and IntrSegment2Triangle2.
+        Line2 m_Line;
+        Triangle2 m_Triangle;
+    };
 
-		// Determine how the triangle and line intersect (if at all).
-		static void TriangleLineRelations(const Vector2D& origin, const Vector2D& direction, const Triangle2& triangle,
-										  Real dist[3], int sign[3], int& positive, int& negative, int& zero);
-
-		// Compute the parameter interval for the segment of intersection when
-		// the triangle transversely intersects the line.
-		static void GetInterval(const Vector2D& origin, const Vector2D& direction, const Triangle2& triangle,
-								const Real dist[3], const int sign[3], Real param[2]);
-	};
-
-	using StaticTestIntersectorLine2Triangle2f = StaticTestIntersectorLine2Triangle2<float>;
-	using StaticTestIntersectorLine2Triangle2d = StaticTestIntersectorLine2Triangle2<double>;
+    using FloatStaticTestIntersectorLine2Triangle2 = StaticTestIntersectorLine2Triangle2<float>;
+    using DoubleStaticTestIntersectorLine2Triangle2 = StaticTestIntersectorLine2Triangle2<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_TRIANGLE2_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_TRIANGLE2_H

@@ -1,7 +1,0 @@
-Cg教程：可编程实时图形权威指南 （The Cg Tutorial）
- 
-○
-作者：Randima Fermando、Mark J.Kilgard
-
-知识点 
-1.	Cg基础知识。

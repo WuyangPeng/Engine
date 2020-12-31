@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -31,26 +31,27 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle);
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Triangle3 GetTriangle() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetHalfspace() const;
+                [[nodiscard]] const Triangle3 GetTriangle() const;
 
 	private:
 		// Static queries.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mHalfspace;
-		Triangle3 mTriangle;
+		Plane3 m_Halfspace;
+		Triangle3 m_Triangle;
 	};
 
-	using StaticTestIntersectorHalfspace3Triangle3f = StaticTestIntersectorHalfspace3Triangle3<float>;
-	using StaticTestIntersectorHalfspace3Triangle3d = StaticTestIntersectorHalfspace3Triangle3<double>;
+	using FloatStaticTestIntersectorHalfspace3Triangle3 = StaticTestIntersectorHalfspace3Triangle3<float>;
+	using DoubleStaticTestIntersectorHalfspace3Triangle3 = StaticTestIntersectorHalfspace3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H

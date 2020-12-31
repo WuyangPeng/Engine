@@ -55,7 +55,7 @@ namespace Mathematics
 		Real ComputeDerivative (Real* slope) const;
 		virtual bool Lookup (Real x, int& index, Real& dx) const = 0;
 
-		int mQuantity;
+		int m_Quantity;
 		Real* mF;
 		Polynomial* mPoly;
 	};

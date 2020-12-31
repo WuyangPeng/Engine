@@ -56,7 +56,7 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
     if (discr < Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Empty);
-        mQuantity = 0;
+        m_Quantity = 0;
     }
     else if (discr > Math<Real>::GetZero())
     {
@@ -68,21 +68,21 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
         if (t[0] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Segment);
-            mQuantity = 2;
-			mPoint[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
-			mPoint[1] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
+            m_Quantity = 2;
+			m_Point[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
+			m_Point[1] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
         }
         else if (t[1] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Point);
-            mQuantity = 1;
-			mPoint[0] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
+            m_Quantity = 1;
+			m_Point[0] = mRay.GetOrigin() + t[1] * mRay.GetDirection();
             t[0] = t[1];
         }
         else
         {
 			this->SetIntersectionType(IntersectionType::Empty);
-            mQuantity = 0;
+            m_Quantity = 0;
         }
     }
     else
@@ -91,13 +91,13 @@ void Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
         if (t[0] >= Math<Real>::GetZero())
         {
 			this->SetIntersectionType(IntersectionType::Point);
-            mQuantity = 1;
-			mPoint[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
+            m_Quantity = 1;
+			m_Point[0] = mRay.GetOrigin() + t[0] * mRay.GetDirection();
         }
         else
         {
 			this->SetIntersectionType(IntersectionType::Empty);
-            mQuantity = 0;
+            m_Quantity = 0;
         }
     }   
 }
@@ -106,14 +106,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Ellipsoid3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_ELLIPSOID3_DETAIL_H

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,19 +25,20 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
-		Real GetSegmentParameter(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
+                [[nodiscard]] Real GetSegmentParameter(int index) const;
 
 		Real ZeroThreshold;  // default = Math<Real>::GetZeroTolerance()
 
@@ -46,17 +47,17 @@ namespace Mathematics
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Sphere3 mSphere;
+		Segment3 m_Segment;
+		Sphere3 m_Sphere;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
-		Real mSegmentParameter[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
+		Real m_SegmentParameter[2];
 	};
 
-	using StaticFindIntersectorSegment3Sphere3f = StaticFindIntersectorSegment3Sphere3<float>;
-	using StaticFindIntersectorSegment3Sphere3d = StaticFindIntersectorSegment3Sphere3<double>;
+	using FloatStaticFindIntersectorSegment3Sphere3 = StaticFindIntersectorSegment3Sphere3<float>;
+	using DoubleStaticFindIntersectorSegment3Sphere3 = StaticFindIntersectorSegment3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_SPHERE3_H

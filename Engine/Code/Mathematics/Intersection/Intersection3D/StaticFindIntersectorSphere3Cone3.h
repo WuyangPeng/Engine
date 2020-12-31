@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,20 +25,21 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Cone3 = Cone3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone);
 
-		// Object access.
-		const Sphere3 GetSphere() const;
-		const Cone3 GetCone() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Sphere3 GetSphere() const;
+        [[nodiscard]] const Cone3 GetCone() const;
 
 		// In the static find-intersection query, if an intersection occurs
 		// between the sphere and cone, it is potentially an infinite set.  The
 		// intersection point closest to the cone vertex is returned by this
 		// function.
-		const Vector3D GetPoint() const;
+        [[nodiscard]] const Vector3D GetPoint() const;
 
 	private:
 		// Static intersection queries.	
@@ -46,15 +47,15 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 		Cone3 mCone;
 
 		// Closest intersection point to cone vertex.
-		Vector3D mPoint;
+		Vector3D m_Point;
 	};
 
-	using StaticFindIntersectorSphere3Cone3f = StaticFindIntersectorSphere3Cone3<float>;
-	using StaticFindIntersectorSphere3Cone3d = StaticFindIntersectorSphere3Cone3<double>;
+	using FloatStaticFindIntersectorSphere3Cone3 = StaticFindIntersectorSphere3Cone3<float>;
+	using DoubleStaticFindIntersectorSphere3Cone3 = StaticFindIntersectorSphere3Cone3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H

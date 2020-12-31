@@ -8,7 +8,7 @@
 #define MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_RAY3_PLANE3_DETAIL_H
 
 #include "StaticTestIntersectorRay3Plane3.h"
-#include "IntersectorLine3Triangle3DataDetail.h"
+#include "Detail/IntersectorLine3Triangle3DataDetail.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 #include "Mathematics/Intersection/IntersectorDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"

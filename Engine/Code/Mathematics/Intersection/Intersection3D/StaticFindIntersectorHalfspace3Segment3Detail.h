@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,9 +13,9 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::StaticFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment)
-	: mHalfspace{ halfspace }, mSegment{ segment }
+	: m_Halfspace{ halfspace }, m_Segment{ segment }
 {
-	mQuantity = 0;
+	m_Quantity = 0;
 
 	Find();
 }
@@ -24,14 +24,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::GetHalfspace() const
 {
-	return mHalfspace;
+	return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::GetSegment() const
 {
-	return mSegment;
+	return m_Segment;
 }
 
 template <typename Real>
@@ -39,13 +39,13 @@ void Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::Find()
 {
 	// Start with the segment and clip it against the plane.
-	mQuantity = 2;
-	mPoint[0] = mSegment.GetBeginPoint();;
-	mPoint[1] = mSegment.GetEndPoint();
+	m_Quantity = 2;
+	m_Point[0] = m_Segment.GetBeginPoint();;
+	m_Point[1] = m_Segment.GetEndPoint();
 
-	ClipConvexPolygonAgainstPlane<Real>(-mHalfspace.GetNormal(), -mHalfspace.GetConstant(), mQuantity, mPoint);
+	IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(-m_Halfspace.GetNormal(), -m_Halfspace.GetConstant(), m_Quantity, m_Point);
 
-	if (mQuantity > 0)
+	if (m_Quantity > 0)
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}
@@ -59,14 +59,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const  Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H

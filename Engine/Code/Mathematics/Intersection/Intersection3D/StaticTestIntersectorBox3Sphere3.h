@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,26 +25,27 @@ namespace Mathematics
 		using Box3 = Box3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorBox3Sphere3(const Box3& box, const Sphere3& sphere);
 
-		// Object access.
-		const Box3 GetBox() const;
-		const Sphere3 GetSphere() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Box3 GetBox() const;
+                [[nodiscard]] const Sphere3 GetSphere() const;
 
 	private:
 		// Test-intersection query.
 		void Test();
 
 		// The objects to intersect.
-		Box3 mBox;
-		Sphere3 mSphere;
+		Box3 m_Box;
+		Sphere3 m_Sphere;
 	};
 
-	using StaticTestIntersectorBox3Sphere3f = StaticTestIntersectorBox3Sphere3<float>;
-	using StaticTestIntersectorBox3Sphere3d = StaticTestIntersectorBox3Sphere3<double>;
+	using FloatStaticTestIntersectorBox3Sphere3 = StaticTestIntersectorBox3Sphere3<float>;
+	using DoubleStaticTestIntersectorBox3Sphere3 = StaticTestIntersectorBox3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_SPHERE3_H

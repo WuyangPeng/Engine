@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 	::StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid)
-	: mSegment{ segment }, mEllipsoid{ ellipsoid }
+	: m_Segment{ segment }, mEllipsoid{ ellipsoid }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -43,11 +43,11 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 
 	auto M = mEllipsoid.GetMatrix();
 
-	auto diff = mSegment.GetCenterPoint() - mEllipsoid.GetCenter();
-	auto matDir = M*mSegment.GetDirection();
+	auto diff = m_Segment.GetCenterPoint() - mEllipsoid.GetCenter();
+	auto matDir = M*m_Segment.GetDirection();
 	auto matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDiff);
+	auto a2 = Vector3DTools::DotProduct(m_Segment.GetDirection(),matDir);
+	auto a1 = Vector3DTools::DotProduct(m_Segment.GetDirection(),matDiff);
 	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // No intersection if Q(t) has no real roots.
@@ -69,7 +69,7 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
     // the case that a2 > 0, since M is positive definite, implying that
     // D^T*M*D > 0 for any nonzero vector D.
 
-    Real q, qder, e = mSegment.GetExtent();
+    Real q, qder, e = m_Segment.GetExtent();
 
     if (a1 >= Math<Real>::GetValue(0))
     {

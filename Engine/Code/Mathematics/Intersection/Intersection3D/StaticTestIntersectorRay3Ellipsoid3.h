@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid);
 
-		// Object access.
-		const Ray3 GetRay() const;
-		const Ellipsoid3 GetEllipsoid() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Ray3 GetRay() const;
+                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
 
 	private:
 		// Static intersection queries.
@@ -43,8 +44,8 @@ namespace Mathematics
 		Ellipsoid3 mEllipsoid;
 	};
 
-	using StaticTestIntersectorRay3Ellipsoid3f = StaticTestIntersectorRay3Ellipsoid3<float>;
-	using StaticTestIntersectorRay3Ellipsoid3d = StaticTestIntersectorRay3Ellipsoid3<double>;
+	using FloatStaticTestIntersectorRay3Ellipsoid3 = StaticTestIntersectorRay3Ellipsoid3<float>;
+	using DoubleStaticTestIntersectorRay3Ellipsoid3 = StaticTestIntersectorRay3Ellipsoid3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_ELLIPSOID3_H

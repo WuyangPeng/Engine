@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorLine3Box3(const Line3& line, const Box3& box);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Box3 GetBox() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Box3 GetBox() const;
 
 	private:
 		// Static intersection queries.
@@ -40,11 +41,11 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Line3 mLine;
-		Box3 mBox;
+		Box3 m_Box;
 	};
 
-	using StaticTestIntersectorLine3Box3f = StaticTestIntersectorLine3Box3<float>;
-	using StaticTestIntersectorLine3Box3d = StaticTestIntersectorLine3Box3<double>;
+	using FloatStaticTestIntersectorLine3Box3 = StaticTestIntersectorLine3Box3<float>;
+	using DoubleStaticTestIntersectorLine3Box3 = StaticTestIntersectorLine3Box3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_BOX3_H

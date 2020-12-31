@@ -1,8 +1,0 @@
-计算机图形学（OpenGL版） （Computer Graphics Using OpenGL）
-（第3版）
-
-官方网站：
-http://www.fshiljr.com （已失效）
-
-知识点 
-1.	OpenGL基础知识。   

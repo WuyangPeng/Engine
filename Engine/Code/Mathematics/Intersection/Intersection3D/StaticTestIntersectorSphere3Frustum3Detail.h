@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere,const Frustum3& frustum)
-	: mSphere{ sphere }, mFrustum{ frustum }
+	: m_Sphere{ sphere }, mFrustum{ frustum }
 {
 	Test();
 }
@@ -22,7 +22,7 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
@@ -36,9 +36,9 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::Test()
 {
-	auto distance = DistancePoint3Frustum3<Real>(mSphere.GetCenter(),mFrustum).Get().GetDistance();
+	auto distance = DistancePoint3Frustum3<Real>(m_Sphere.GetCenter(),mFrustum).Get().GetDistance();
 
-	if (distance <= mSphere.GetRadius())
+	if (distance <= m_Sphere.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

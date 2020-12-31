@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,7 +13,7 @@ template <typename Real>
 Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 	::DynamicTestIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1,
 										   Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mSphere0{ sphere0 }, mSphere1{ sphere1 }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Sphere0{ sphere0 }, m_Sphere1{ sphere1 }
 {
 	Test();
 }
@@ -22,14 +22,14 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 	::GetSphere0() const
 {
-	return mSphere0;
+	return m_Sphere0;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 	::GetSphere1() const
 {
-	return mSphere1;
+	return m_Sphere1;
 }
 
 template <typename Real>
@@ -38,9 +38,9 @@ void Mathematics::DynamicTestIntersectorSphere3Sphere3<Real>
 {
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 	auto a = Vector3DTools::VectorMagnitudeSquared(relVelocity);
-	auto CDiff = mSphere1.GetCenter() - mSphere0.GetCenter();
+	auto CDiff = m_Sphere1.GetCenter() - m_Sphere0.GetCenter();
 	auto c = Vector3DTools::VectorMagnitudeSquared(CDiff);
-	auto rSum = mSphere0.GetRadius() + mSphere1.GetRadius();
+	auto rSum = m_Sphere0.GetRadius() + m_Sphere1.GetRadius();
 	auto rSumSqr = rSum * rSum;
 
 	auto result = false;

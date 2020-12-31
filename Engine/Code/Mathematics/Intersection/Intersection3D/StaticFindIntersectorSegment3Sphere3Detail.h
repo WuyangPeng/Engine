@@ -13,9 +13,9 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::StaticFindIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere)
-	: mSegment{ segment }, mSphere{ sphere }
+	: m_Segment{ segment }, m_Sphere{ sphere }
 {
-    mQuantity = 0;
+    m_Quantity = 0;
     ZeroThreshold = Math::GetZeroTolerance();
 	Find();
 }
@@ -24,14 +24,14 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
  
 
@@ -39,55 +39,55 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::Find()
 {
-	auto diff = mSegment.GetCenterPoint() - mSphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
-	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),diff);
+	auto diff = m_Segment.GetCenterPoint() - m_Sphere.GetCenter();
+	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
+	auto a1 = Vector3DTools::DotProduct(m_Segment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
     if (discr < Math<Real>::GetZero())
     {
-        mQuantity = 0;
+        m_Quantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-	auto tmp0 = mSegment.GetExtent()*mSegment.GetExtent() + a0;
-	auto tmp1 = (Math::GetValue(2))*a1*mSegment.GetExtent();
+	auto tmp0 = m_Segment.GetExtent()*m_Segment.GetExtent() + a0;
+	auto tmp1 = (Math::GetValue(2))*a1*m_Segment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
     Real root;
     if (qm*qp <= Math<Real>::GetZero())
     {
         root = Math::Sqrt(discr);
-        mSegmentParameter[0] = (qm > Math<Real>::GetZero() ? -a1 - root : -a1 + root);
-        mPoint[0] = mSegment.GetCenterPoint() + mSegmentParameter[0] * mSegment.GetDirection();
-        mQuantity = 1;
+        m_SegmentParameter[0] = (qm > Math<Real>::GetZero() ? -a1 - root : -a1 + root);
+        m_Point[0] = m_Segment.GetCenterPoint() + m_SegmentParameter[0] * m_Segment.GetDirection();
+        m_Quantity = 1;
 		this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < mSegment.GetExtent())
+    if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < m_Segment.GetExtent())
     {
         if (discr >= ZeroThreshold)
         {
             root = Math::Sqrt(discr);
-            mSegmentParameter[0] = -a1 - root;
-            mSegmentParameter[1] = -a1 + root;
-            mPoint[0] = mSegment.GetCenterPoint() + mSegmentParameter[0] *  mSegment.GetDirection();
-            mPoint[1] = mSegment.GetCenterPoint() + mSegmentParameter[1] * mSegment.GetDirection();
-            mQuantity = 2;
+            m_SegmentParameter[0] = -a1 - root;
+            m_SegmentParameter[1] = -a1 + root;
+            m_Point[0] = m_Segment.GetCenterPoint() + m_SegmentParameter[0] *  m_Segment.GetDirection();
+            m_Point[1] = m_Segment.GetCenterPoint() + m_SegmentParameter[1] * m_Segment.GetDirection();
+            m_Quantity = 2;
 			this->SetIntersectionType(IntersectionType::Segment);
         }
         else
         {
-            mSegmentParameter[0] = -a1;
-            mPoint[0] = mSegment.GetCenterPoint() + mSegmentParameter[0] * mSegment.GetDirection();
-            mQuantity = 1;
+            m_SegmentParameter[0] = -a1;
+            m_Point[0] = m_Segment.GetCenterPoint() + m_SegmentParameter[0] * m_Segment.GetDirection();
+            m_Quantity = 1;
 			this->SetIntersectionType(IntersectionType::Point);
         }
     }
     else
     {
-        mQuantity = 0;
+        m_Quantity = 0;
 		this->SetIntersectionType(IntersectionType::Empty);
     }   
 }
@@ -96,21 +96,21 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 template <typename Real>
 Real Mathematics::StaticFindIntersectorSegment3Sphere3<Real>
 	::GetSegmentParameter(int i) const
 {
-    return mSegmentParameter[i];
+    return m_SegmentParameter[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_SPHERE3_DETAIL_H

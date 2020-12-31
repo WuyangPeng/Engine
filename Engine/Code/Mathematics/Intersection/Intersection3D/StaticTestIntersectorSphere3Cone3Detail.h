@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	::StaticTestIntersectorSphere3Cone3 (const Sphere3& rkSphere,const Cone3& rkCone)
-	: mSphere{ rkSphere }, mCone{ rkCone }
+	: m_Sphere{ rkSphere }, mCone{ rkCone }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
@@ -38,8 +38,8 @@ void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 	auto invSin = (Math::GetValue(1))/mCone.GetSinAngle();
 	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
 
-	auto CmV = mSphere.GetCenter() - mCone.GetVertex();
-	auto D = CmV + (mSphere.GetRadius()*invSin)*mCone.GetAxis();
+	auto CmV = m_Sphere.GetCenter() - mCone.GetVertex();
+	auto D = CmV + (m_Sphere.GetRadius()*invSin)*mCone.GetAxis();
 	auto DSqrLen = Vector3DTools::VectorMagnitudeSquared(D);
 	auto e = Vector3DTools::DotProduct(D, mCone.GetAxis());
     if (e > Math<Real>::GetZero() && e*e >= DSqrLen*cosSqr)
@@ -49,7 +49,7 @@ void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
 		e = -Vector3DTools::DotProduct(CmV,mCone.GetAxis());
         if (e > Math<Real>::GetZero() && e*e >= DSqrLen*sinSqr)
         {
-			auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
+			auto rSqr = m_Sphere.GetRadius()*m_Sphere.GetRadius();
 			if (DSqrLen <= rSqr)
 			{
 				this->SetIntersectionType(IntersectionType::Other);

@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
 	::StaticFindIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid)
-	: mSegment{ segment }, mEllipsoid{ ellipsoid }
+	: m_Segment{ segment }, mEllipsoid{ ellipsoid }
 {
 	Find();
 }
@@ -22,7 +22,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -45,11 +45,11 @@ void Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
 
 	auto M = mEllipsoid.GetMatrix();
 
-	auto diff = mSegment.GetCenterPoint() - mEllipsoid.GetCenter();
-	auto  matDir = M*mSegment.GetDirection();
+	auto diff = m_Segment.GetCenterPoint() - mEllipsoid.GetCenter();
+	auto  matDir = M*m_Segment.GetDirection();
 	auto  matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),matDiff);
+	auto a2 = Vector3DTools::DotProduct(m_Segment.GetDirection(),matDir);
+	auto a1 = Vector3DTools::DotProduct(m_Segment.GetDirection(),matDiff);
 	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // Intersection occurs if Q(t) has real roots with t >= 0.
@@ -58,7 +58,7 @@ void Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
     if (discr < Math<Real>::GetZero())
     {
 		this->SetIntersectionType(IntersectionType::Empty);
-        mQuantity = 0;
+        m_Quantity = 0;
     }
     else if (discr > Math::GetZeroTolerance())
     {
@@ -68,20 +68,20 @@ void Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
         t[1] = (-a1 + root)*inv;
 
         // assert: t0 < t1 since a2 > 0
-		StaticFindIntersector1<Real> intr{ t[0], t[1], -mSegment.GetExtent(),  mSegment.GetExtent() };
+		StaticFindIntersector1<Real> intr{ t[0], t[1], -m_Segment.GetExtent(),  m_Segment.GetExtent() };
        
 
-        mQuantity = intr.GetNumIntersections();
-        if (mQuantity == 2)
+        m_Quantity = intr.GetNumIntersections();
+        if (m_Quantity == 2)
         {
 			this->SetIntersectionType(IntersectionType::Segment);
-            mPoint[0] = mSegment.GetCenterPoint() + intr.GetIntersection(0) * mSegment.GetDirection();
-            mPoint[1] = mSegment.GetCenterPoint() + intr.GetIntersection(1) * mSegment.GetDirection();
+            m_Point[0] = m_Segment.GetCenterPoint() + intr.GetIntersection(0) * m_Segment.GetDirection();
+            m_Point[1] = m_Segment.GetCenterPoint() + intr.GetIntersection(1) * m_Segment.GetDirection();
         }
-        else if (mQuantity == 1)
+        else if (m_Quantity == 1)
         {
 			this->SetIntersectionType(IntersectionType::Point);
-            mPoint[0] = mSegment.GetCenterPoint() + intr.GetIntersection(0) * mSegment.GetDirection();
+            m_Point[0] = m_Segment.GetCenterPoint() + intr.GetIntersection(0) * m_Segment.GetDirection();
         }
         else
         {
@@ -91,16 +91,16 @@ void Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
     else
     {
         t[0] = -a1/a2;
-        if (Math::FAbs(t[0]) <= mSegment.GetExtent())
+        if (Math::FAbs(t[0]) <= m_Segment.GetExtent())
         {
 			this->SetIntersectionType(IntersectionType::Point);
-            mQuantity = 1;
-            mPoint[0] = mSegment.GetCenterPoint() + t[0]*mSegment.GetDirection();
+            m_Quantity = 1;
+            m_Point[0] = m_Segment.GetCenterPoint() + t[0]*m_Segment.GetDirection();
         }
         else
         {
 			this->SetIntersectionType(IntersectionType::Empty);
-            mQuantity = 0;
+            m_Quantity = 0;
         }
     }    
 }
@@ -109,14 +109,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Ellipsoid3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 } 
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_ELLIPSOID3_DETAIL_H

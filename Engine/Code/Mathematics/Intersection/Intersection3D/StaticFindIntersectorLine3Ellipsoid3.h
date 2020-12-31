@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Ellipsoid3 GetEllipsoid() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 		// Small thresholds are used for testing the discriminant of the quadratic
 		// equation related to the computations: Q(t) = a2*t^2 + 2*a1*t + a0.  The
@@ -54,9 +55,9 @@ namespace Mathematics
 		// default is now zero, so if your application relied on the old behavior,
 		// you must modify this value.
 		void SetNegativeThreshold(Real negThreshold);
-		Real GetNegativeThreshold() const;
+                [[nodiscard]] Real GetNegativeThreshold() const;
 		void SetPositiveThreshold(Real posThreshold);
-		Real GetPositiveThreshold() const;
+                [[nodiscard]] Real GetPositiveThreshold() const;
 
 	private:
 		// Static intersection queries.		
@@ -67,8 +68,8 @@ namespace Mathematics
 		Ellipsoid3 mEllipsoid;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 
 		// For testing the discriminant.  The default values are zero.  You may
 		// set the negative threshold to a (small) negative number and the
@@ -77,8 +78,8 @@ namespace Mathematics
 		Real mPositiveThreshold;
 	};
 
-	using StaticFindIntersectorLine3Ellipsoid3f = StaticFindIntersectorLine3Ellipsoid3<float>;
-	using StaticFindIntersectorLine3Ellipsoid3d = StaticFindIntersectorLine3Ellipsoid3<double>;
+	using FloatStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<float>;
+	using DoubleStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H

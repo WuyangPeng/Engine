@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,19 +25,20 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Box3 GetBox() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane() const;
+        [[nodiscard]] const Box3 GetBox() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The box is culled if it is on the negative side
 		// of the plane.
-		bool BoxIsCulled() const;
+        [[nodiscard]] bool BoxIsCulled() const;
 
 	private:
 		// Static intersection query.
@@ -45,12 +46,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Plane3 mPlane;
-		Box3 mBox;
+		Plane3 m_Plane;
+		Box3 m_Box;
 	};
 
-	using StaticTestIntersectorPlane3Box3f = StaticTestIntersectorPlane3Box3<float>;
-	using StaticTestIntersectorPlane3Box3d = StaticTestIntersectorPlane3Box3<double>;
+	using FloatStaticTestIntersectorPlane3Box3 = StaticTestIntersectorPlane3Box3<float>;
+	using DoubleStaticTestIntersectorPlane3Box3 = StaticTestIntersectorPlane3Box3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_BOX3_H

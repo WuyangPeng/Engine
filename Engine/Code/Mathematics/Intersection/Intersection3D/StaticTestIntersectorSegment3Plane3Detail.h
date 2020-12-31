@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Plane3<Real>
 	::StaticTestIntersectorSegment3Plane3(const Segment3& rkSegment, const Plane3& rkPlane)
-	:mSegment{ rkSegment }, mPlane{ rkPlane }
+	:m_Segment{ rkSegment }, m_Plane{ rkPlane }
 {
 	Test();
 }
@@ -22,29 +22,29 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Plane3<Real>
 	::Test()
 {
-	auto P0 = mSegment.GetBeginPoint();
-	auto sdistance0 = mPlane.DistanceTo(P0);
+	auto P0 = m_Segment.GetBeginPoint();
+	auto sdistance0 = m_Plane.DistanceTo(P0);
     if (Math::FAbs(sdistance0) <= Math::GetZeroTolerance())
     {
         sdistance0 = Math<Real>::GetValue(0);
     }
 
-	auto P1 = mSegment.GetEndPoint();
-	auto sdistance1 = mPlane.DistanceTo(P1);
+	auto P1 = m_Segment.GetEndPoint();
+	auto sdistance1 = m_Plane.DistanceTo(P1);
     if (Math::FAbs(sdistance1) <= Math::GetZeroTolerance())
     {
         sdistance1 = Math<Real>::GetValue(0);

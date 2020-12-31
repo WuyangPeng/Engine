@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -31,19 +31,20 @@ namespace Mathematics
 		using Circle3 = Circle3<Real>;
 		using Ellipse3 = Ellipse3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+	using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Cylinder3 GetCylinder() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Plane3 GetPlane() const;
+                [[nodiscard]] const Cylinder3 GetCylinder() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The cylinder is culled if it is on the negative
 		// side of the plane.
-		bool CylinderIsCulled() const;
+                [[nodiscard]] bool CylinderIsCulled() const;
 
 		// The intersection set for an *infinite* cylinder and the plane.
 		enum
@@ -55,7 +56,7 @@ namespace Mathematics
 			PC_ELLIPSE
 		};
 
-		int GetType() const;
+	 [[nodiscard]] int GetType() const;
 
 		// Valid when GetType() returns PC_ONE_LINE.
 		void GetOneLine(Line3& line) const;
@@ -74,18 +75,18 @@ namespace Mathematics
 		void Find();
 
 		// The objects to intersect.
-		Plane3 mPlane;
+		Plane3 m_Plane;
 		Cylinder3 mCylinder;
 
 		// The intersection set when the cylinder is infinite.
 		int mType;
 		Line3 mLine0, mLine1;
-		Circle3 mCircle;
+		Circle3 m_Circle;
 		Ellipse3 mEllipse;
 	};
 
-	using StaticFindIntersectorPlane3Cylinder3f = StaticFindIntersectorPlane3Cylinder3<float>;
-	using StaticFindIntersectorPlane3Cylinder3d = StaticFindIntersectorPlane3Cylinder3<double>;
+	using FloatStaticFindIntersectorPlane3Cylinder3 = StaticFindIntersectorPlane3Cylinder3<float>;
+	using DoubleStaticFindIntersectorPlane3Cylinder3 = StaticFindIntersectorPlane3Cylinder3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_CYLINDER3_H

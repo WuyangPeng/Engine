@@ -1,54 +1,69 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:33)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/16 11:32)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Intersector.h"
 
 namespace Mathematics
 {
-	// 动态相交查询。默认实现返回“false”。
-	// Find查询生成一个第一次接触的相交集合。
-	// 派生类负责提供集合,因为集合的性质依赖于对象类型。
-	template <typename Real, template <typename> class Vector>
-	class DynamicIntersector : public Intersector<Real, Vector>
-	{
-	public:
-		using VectorType = Vector<Real>;
-		using ClassType = DynamicIntersector<Real, Vector>;
-		using ParentType = Intersector<Real, Vector>;
-		using Math = Math<Real>;
+    template <typename Real, template <typename> class Vector>
+    class DynamicIntersectorImpl;
 
-	public:
-		explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
-		virtual ~DynamicIntersector() = 0;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicIntersectorImpl<float, Vector2D>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicIntersectorImpl<double, Vector2D>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicIntersectorImpl<float, Vector3D>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicIntersectorImpl<double, Vector3D>>;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    template <typename Real, template <typename> class Vector>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicIntersectorImpl<Real, Vector>>;
 
-		// 两个物体在第一次接触时动态相交查询的时间。
-		Real GetContactTime() const;
-		Real GetTMax() const;
-		const VectorType GetLhsVelocity() const;
-		const VectorType GetRhsVelocity() const;
+    // 动态相交查询。默认实现返回“false”。
+    // Find查询生成一个第一次接触的相交集合。
+    // 派生类负责提供集合,因为集合的性质依赖于对象类型。
+    template <typename Real, template <typename> class Vector>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicIntersector : public Intersector<Real, Vector>
+    {
+    public:
+        using DynamicIntersectorImpl = DynamicIntersectorImpl<Real, Vector>;
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(DynamicIntersector, DESTRUCTOR_DEFAULT);
 
-	protected:
-		void SetContactTime(Real contactTime);
+        using ClassType = DynamicIntersector<Real, Vector>;
+        using ParentType = Intersector<Real, Vector>;
+        using Math = typename ParentType::Math;
+        using VectorType = typename ParentType::VectorType;
 
-	private:
-		Real m_ContactTime;
-		Real m_TMax;
-		VectorType m_LhsVelocity;
-		VectorType m_RhsVelocity;
-	};
+    public:
+        explicit DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-	using DynamicIntersector2f = DynamicIntersector<float, Vector2D>;
-	using DynamicIntersector3f = DynamicIntersector<float, Vector3D>;
-	using DynamicIntersector2d = DynamicIntersector<double, Vector2D>;
-	using DynamicIntersector3d = DynamicIntersector<double, Vector3D>;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        // 两个物体在第一次接触时动态相交查询的时间。
+        [[nodiscard]] Real GetContactTime() const noexcept;
+        [[nodiscard]] Real GetTMax() const noexcept;
+        [[nodiscard]] const VectorType GetLhsVelocity() const noexcept;
+        [[nodiscard]] const VectorType GetRhsVelocity() const noexcept;
+
+    protected:
+        void SetContactTime(Real contactTime) noexcept;
+
+    private:
+        IMPL_TYPE_DECLARE(DynamicIntersector);
+    };
+
+    using FloatDynamicIntersector2D = DynamicIntersector<float, Vector2D>;
+    using FloatDynamicIntersector3D = DynamicIntersector<float, Vector3D>;
+    using DoubleDynamicIntersector2D = DynamicIntersector<double, Vector2D>;
+    using DoubleDynamicIntersector3D = DynamicIntersector<double, Vector3D>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_H

@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
 	::StaticTestIntersectorHalfspace3Segment3 (const Plane3& halfspace, const Segment3& segment)
-	: mHalfspace{ halfspace }, mSegment{ segment }
+	: m_Halfspace{ halfspace }, m_Segment{ segment }
 {
 	Test();
 }
@@ -22,25 +22,25 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
 	::GetHalfspace() const
 {
-    return mHalfspace;
+    return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
 	::Test ()
 {
-    Vector3D segment[2]{mSegment.GetBeginPoint(),mSegment.GetEndPoint() };
+    Vector3D segment[2]{m_Segment.GetBeginPoint(),m_Segment.GetEndPoint() };
 
     Real fmin, fmax;
-    IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), segment, fmin, fmax);
-	if (fmin <= mHalfspace.GetConstant())
+    FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), segment, fmin, fmax);
+	if (fmin <= m_Halfspace.GetConstant())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

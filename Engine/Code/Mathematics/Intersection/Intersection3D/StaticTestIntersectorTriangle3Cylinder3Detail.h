@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	::StaticTestIntersectorTriangle3Cylinder3 ( const Triangle3& triangle, const Cylinder3& cylinder)
-	:mTriangle{ triangle }, mCylinder{ cylinder }
+	:m_Triangle{ triangle }, mCylinder{ cylinder }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	::GetTriangle () const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
@@ -46,7 +46,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     int i;
     for (i = 0; i < 3; ++i)
     {
-		auto delta = mTriangle.GetVertex()[i] - mCylinder.GetAxis().GetOrigin();
+		auto delta = m_Triangle.GetVertex()[i] - mCylinder.GetAxis().GetOrigin();
         temp[i][0] = Vector3DTools::DotProduct(U,delta);
         temp[i][1] = Vector3DTools::DotProduct(V,delta);
         temp[i][2] = Vector3DTools::DotProduct(mCylinder.GetAxis().GetDirection(),delta);

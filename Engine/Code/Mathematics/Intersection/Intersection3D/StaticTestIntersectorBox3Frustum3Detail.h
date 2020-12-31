@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorBox3Frustum3<Real>
 	::StaticTestIntersectorBox3Frustum3 (const Box3& box, const Frustum3& frustum)
-	:mBox{ box }, mFrustum{ frustum }
+	:m_Box{ box }, mFrustum{ frustum }
 {
 	Test();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Box3<Real> Mathematics::StaticTestIntersectorBox3Frustum3<Real>
 	::GetBox () const
 {
-    return mBox;
+    return m_Box;
 }
 
 template <typename Real>
@@ -36,10 +36,10 @@ void Mathematics::StaticTestIntersectorBox3Frustum3<Real>
 	::Test ()
 {
     // for convenience
-	const Vector3D axes[] { mBox.GetAxis0(),mBox.GetAxis1(),mBox.GetAxis2() };
-	const Real extents[]{ mBox.GetExtent0(),mBox.GetExtent1(),mBox.GetExtent2() };
+	const Vector3D axes[] { m_Box.GetAxis0(),m_Box.GetAxis1(),m_Box.GetAxis2() };
+	const Real extents[]{ m_Box.GetExtent0(),m_Box.GetExtent1(),m_Box.GetExtent2() };
 
-    auto diff = mBox.GetCenter() - mFrustum.GetOrigin();  // C-E
+    auto diff = m_Box.GetCenter() - mFrustum.GetOrigin();  // C-E
 
     Real A[3];      // Dot(Real,A[i])
     Real B[3];      // Dot(U,A[i])

@@ -8,7 +8,7 @@
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE3_TRIANGLE3_DETAIL_H
 
 #include "StaticTestIntersectorTriangle3Triangle3.h"
-#include "TriangleProjectOntoAxis.h"
+#include "Detail/TriangleProjectOntoAxisDetail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Plane3Detail.h"
 #include "Mathematics/Objects3D/Triangle3Detail.h"

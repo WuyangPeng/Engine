@@ -1,65 +1,62 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:37)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/22 15:49)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Ray2.h"
-#include "Mathematics/Objects2D/Triangle2.h"    
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Objects2D/Triangle2.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorRay2Triangle2 : public StaticIntersector<Real, Vector2D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorRay2Triangle2<Real>;
-		using ParentType = StaticIntersector<Real, Vector2D>;
-		using Vector2D = Vector2D<Real>;
-		using Ray2 = Ray2<Real>;
-		using Triangle2 = Triangle2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Triangle2 : public StaticIntersector<Real, Vector2D>
+    {
+    public:
+        using ClassType = StaticFindIntersectorRay2Triangle2<Real>;
+        using ParentType = StaticIntersector<Real, Vector2D>;
+        using Vector2D = Vector2D<Real>;
+        using Ray2 = Ray2<Real>;
+        using Triangle2 = Triangle2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticFindIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle);
+    public:
+        StaticFindIntersectorRay2Triangle2(const Ray2& ray, const Triangle2& triangle, const Real dotThreshold = Math::GetZeroTolerance());
 
-		// Object access.
-		const Ray2 GetRay() const;
-		const Triangle2 GetTriangle() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// The intersection set.  If the ray and triangle do not intersect,
-		// GetQuantity() returns 0, in which case the intersection type is
-		// IT_EMPTY.  If the ray and triangle intersect in a single point,
-		// GetQuantity() returns 1, in which case the intersection type is
-		// IT_POINT and GetPoint() returns the intersection point.  If the ray
-		// and triangle intersect in a segment, GetQuantity() returns 2, in which
-		// case the intersection type is IT_SEGMENT and GetPoint() returns the
-		// segment endpoints.
-		int GetQuantity() const;
-		const Vector2D GetPoint(int i) const;
+        [[nodiscard]] const Ray2 GetRay() const noexcept;
+        [[nodiscard]] const Triangle2 GetTriangle() const noexcept;
 
-	private:
-		// Static intersection query.
-		void Find();
+        /// 相交集。 如果射线和三角形不相交，则GetQuantity()返回0，在这种情况下，相交类型为IT_EMPTY。
+        /// 如果射线和三角形在单个点处相交，则GetQuantity()返回1，在这种情况下，相交类型为IT_POINT，而GetPoint()返回相交点。
+        ///  如果射线和三角形在段中相交，则GetQuantity()返回2，在这种情况下，相交类型为IT_SEGMENT，而GetPoint()返回段端点。
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] const Vector2D GetPoint(int index) const;
 
-		// The objects to intersect.
-		Ray2 mRay;
-		Triangle2 mTriangle;
+    private:
+        void Find();
 
-		// Information about the intersection set.
-		int mQuantity;
-		Vector2D mPoint[2];
-	};
+        Ray2 m_Ray;
+        Triangle2 m_Triangle;
 
-	using StaticFindIntersectorRay2Triangle2f = StaticFindIntersectorRay2Triangle2<float>;
-	using StaticFindIntersectorRay2Triangle2d = StaticFindIntersectorRay2Triangle2<double>;
+        int m_Quantity;
+        Vector2D m_Point0;
+        Vector2D m_Point1;
+    };
+
+    using FloatStaticFindIntersectorRay2Triangle2 = StaticFindIntersectorRay2Triangle2<float>;
+    using DoubleStaticFindIntersectorRay2Triangle2 = StaticFindIntersectorRay2Triangle2<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_TRIANGLE2_H

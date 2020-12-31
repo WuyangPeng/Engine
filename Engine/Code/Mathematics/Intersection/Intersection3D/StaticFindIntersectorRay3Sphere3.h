@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,19 +25,20 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Sphere3 = Sphere3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere);
 
-		// Object access.
-		const Ray3 GetRay() const;
-		const Sphere3 GetSphere() const;
+CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Ray3 GetRay() const;
+[[nodiscard]] const Sphere3 GetSphere() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
-		Real GetRayParameter(int i) const;
+[[nodiscard]] int GetQuantity() const;
+[[nodiscard]] const Vector3D GetPoint(int index) const;
+[[nodiscard]] Real GetRayParameter(int index) const;
 
 	private:
 		// Static intersection queries.
@@ -45,16 +46,16 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Ray3 mRay;
-		Sphere3 mSphere;
+		Sphere3 m_Sphere;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 		Real mRayParameter[2];
 	};
 
-	using StaticFindIntersectorRay3Sphere3f = StaticFindIntersectorRay3Sphere3<float>;
-	using StaticFindIntersectorRay3Sphere3d = StaticFindIntersectorRay3Sphere3<double>;
+	using FloatStaticFindIntersectorRay3Sphere3 = StaticFindIntersectorRay3Sphere3<float>;
+	using DoubleStaticFindIntersectorRay3Sphere3 = StaticFindIntersectorRay3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_SPHERE3_H

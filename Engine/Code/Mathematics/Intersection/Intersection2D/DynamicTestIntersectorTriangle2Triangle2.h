@@ -1,80 +1,102 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:34)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/18 13:49)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects2D/Triangle2.h"   
-#include "Mathematics/Intersection/Intersector1.h"   
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/DynamicIntersector.h"
+#include "Mathematics/Intersection/Intersector1.h"
+#include "Mathematics/Objects2D/Triangle2.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicTestIntersectorTriangle2Triangle2 : public DynamicIntersector<Real, Vector2D>
-	{
-	public:
-		using ClassType = DynamicTestIntersectorTriangle2Triangle2<Real>;
-		using ParentType = DynamicIntersector<Real, Vector2D>;
-		using Vector2D = Vector2D<Real>;
-		using Triangle2 = Triangle2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorTriangle2Triangle2 : public DynamicIntersector<Real, Vector2D>
+    {
+    public:
+        using ClassType = DynamicTestIntersectorTriangle2Triangle2<Real>;
+        using ParentType = DynamicIntersector<Real, Vector2D>;
+        using Math = typename ParentType::Math;
+        using Vector2D = Vector2D<Real>;
+        using Triangle2 = Triangle2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
 
-	public:
-		DynamicTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax,
-												 const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon = Math::GetZeroTolerance());
+    public:
+        DynamicTestIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Triangle2 GetTriangle0() const;
-		const Triangle2 GetTriangle1() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	private:
-		// Dynamic queries.		 
-		void Test();
+        [[nodiscard]] const Triangle2 GetTriangle0() const noexcept;
+        [[nodiscard]] const Triangle2 GetTriangle1() const noexcept;
 
-	private:
-		static int WhichSide(const Vector2D V[3], const Vector2D& P, const Vector2D& D);
+    private:
+        using Intersection = std::vector<Vector2D>;
+        static constexpr auto sm_Size = 3;
 
-		static void ClipConvexPolygonAgainstLine(const Vector2D& N, Real c, int& quantity, Vector2D V[6]);
+    private:
+        void Test();
 
-		enum ProjectionMap
-		{
-			M21,  // 2 vertices map to min, 1 vertex maps to max
-			M12,  // 1 vertex maps to min, 2 vertices map to max
-			M11   // 1 vertex maps to min, 1 vertex maps to max
-		};
+        enum class SideType
+        {
+            None = 0,
+            Left = -1,
+            Right = +1,
+        };
 
-		class Configuration
-		{
-		public:
-			ProjectionMap Map;  // how vertices map to the projection interval
-			int Index[3];       // the sorted indices of the vertices
-			Real Min, Max;      // the interval is [min,max]
-		};
+        enum class ProjectionMap
+        {
+            M21,  // 2个顶点映射到最小值，1个顶点映射到最大值
+            M12,  // 1个顶点映射到最小值，2个顶点映射到最大值
+            M11  // 1个顶点映射到最小值，1个顶点映射到最大值
+        };
 
-		void ComputeTwo(Configuration& cfg, const std::vector<Vector2D>& V, const Vector2D& D, int i0, int i1, int i2);
+        class Configuration final
+        {
+        public:
+            using IndexContainer = std::array<int, sm_Size>;
 
-		void ComputeThree(Configuration& cfg, const std::vector<Vector2D>& V, const Vector2D& D, const Vector2D& P);
+            ProjectionMap m_Map;  // 顶点如何映射到投影间隔
+            IndexContainer m_Index;  // 顶点的排序索引
 
-		static bool NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed, int& side,
-								Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast);
+            // 间隔是 [min,max]
+            Real m_Min;
+            Real m_Max;
+        };
 
-		static void GetIntersection(const Configuration& cfg0, const Configuration& cfg1, int side, const Vector2D V0[3],
-									const Vector2D V1[3], int& quantity, Vector2D vertex[6]);
+        struct IntersectInfo final
+        {
+            bool m_Result;
+            SideType m_Side;
+            Configuration m_TCfg0;
+            Configuration m_TCfg1;
+            Real m_TFirst;
+            Real m_TLast;
 
-		// The objects to intersect.
-		Triangle2 mTriangle0;
-		Triangle2 mTriangle1;
-	};
+            IntersectInfo() noexcept;
+            IntersectInfo(bool result, SideType side, const Configuration& tCfg0, const Configuration& tCfg1, Real tFirst, Real tLast) noexcept;
+        };
 
-	using DynamicTestIntersectorTriangle2Triangle2f = DynamicTestIntersectorTriangle2Triangle2<float>;
-	using DynamicTestIntersectorTriangle2Triangle2d = DynamicTestIntersectorTriangle2Triangle2<double>;
+        [[nodiscard]] Configuration ComputeTwo(const Intersection& vertex, const Vector2D& axis, int i0, int i1, int i2);
+
+        [[nodiscard]] Configuration ComputeThree(const Intersection& vertex, const Vector2D& axis, const Vector2D& point);
+
+        [[nodiscard]] static IntersectInfo NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed) noexcept;
+
+    private:
+        Triangle2 m_Triangle0;
+        Triangle2 m_Triangle1;
+    };
+
+    using FloatDynamicTestIntersectorTriangle2Triangle2 = DynamicTestIntersectorTriangle2Triangle2<float>;
+    using DoubleDynamicTestIntersectorTriangle2Triangle2 = DynamicTestIntersectorTriangle2Triangle2<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H

@@ -1,13 +1,18 @@
-///	@copyright Copyright (c) 2011-2020
+///	@copyright Copyright (c) 2010-2020
 /// Threading Core Render Engine
 ///
 ///	@author 彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
-///	@version 0.5.2.4
+///	@version 0.6.0.0
 ///	标准：std:c++17
-///
-/// @date 2020/11/29 15:10
+/// 
+/// @file Version.h
+///	@date 2020/12/15 23:24
+/// 
+/// @ingroup group_CoreTools_Base
+/// 
+/// @brief 版本号  
 
 #ifndef CORE_TOOLS_BASE_VERSION_H
 #define CORE_TOOLS_BASE_VERSION_H

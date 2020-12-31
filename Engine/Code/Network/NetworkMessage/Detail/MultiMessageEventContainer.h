@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -22,7 +22,7 @@ namespace Network
     class NETWORK_HIDDEN_DECLARE MultiMessageEventContainer final : public MessageEventContainerImpl
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MultiMessageEventContainer, = default);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MultiMessageEventContainer, DESTRUCTOR_DEFAULT);
         using ParentType = MessageEventContainerImpl;
 
     public:

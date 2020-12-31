@@ -1,45 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 15:18)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/16 11:12)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_DETAIL_H
 
 #include "StaticIntersector.h"
-#include "IntersectorDetail.h"
-#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
-#include SYSTEM_WARNING_DISABLE(26455)
-template <typename Real, template <typename> class Vector>
-Mathematics::StaticIntersector<Real, Vector>
-	::StaticIntersector(const Real epsilon)
-	:ParentType{ epsilon }
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
+ 
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_INTERSECTOR_ACHIEVE)
 
-template <typename Real, template <typename> class Vector>
-Mathematics::StaticIntersector<Real, Vector>
-	::~StaticIntersector()
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
+    #include "StaticIntersectorAchieve.h"
 
-#ifdef OPEN_CLASS_INVARIANT
-template <typename Real, template <typename> class Vector>
-bool Mathematics::StaticIntersector<Real, Vector>
-	::IsValid() const  noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else
-		return false;
-}
-#endif // OPEN_CLASS_INVARIANT	
-#include STSTEM_WARNING_POP
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_INTERSECTOR_ACHIEVE)
+
 #endif // MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_DETAIL_H

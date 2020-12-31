@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Cylinder3 = Cylinder3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Cylinder3(const Line3& line, const Cylinder3& cylinder);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Cylinder3 GetCylinder() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Line3 GetLine() const;
+        [[nodiscard]] const Cylinder3 GetCylinder() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+        [[nodiscard]] int GetQuantity() const;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection query.
@@ -47,16 +48,16 @@ namespace Mathematics
 		Cylinder3 mCylinder;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 
 	public:
 		// Shared by IntrRay3Cylinder3 and IntrSegment3Cylinder3.
-		static int Find(const Vector3D& origin, const Vector3D& dir, const Cylinder3& cylinder, Real t[2]);
+            [[nodiscard]] static int Find(const Vector3D& origin, const Vector3D& dir, const Cylinder3& cylinder, Real t[2]);
 	};
 
-	using StaticFindIntersectorLine3Cylinder3f = StaticFindIntersectorLine3Cylinder3<float>;
-	using StaticFindIntersectorLine3Cylinder3d = StaticFindIntersectorLine3Cylinder3<double>;
+	using FloatStaticFindIntersectorLine3Cylinder3 = StaticFindIntersectorLine3Cylinder3<float>;
+	using DoubleStaticFindIntersectorLine3Cylinder3 = StaticFindIntersectorLine3Cylinder3<double>;
 
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,17 +25,18 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Box3 = Box3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+	using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Box3 GetBox() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Box3 GetBox() const;
+
+		 [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static find-intersection query.  The point(s) of intersection are
@@ -43,17 +44,17 @@ namespace Mathematics
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Box3 mBox;
-		bool mSolid;
+		Segment3 m_Segment;
+		Box3 m_Box;
+		bool m_Solid;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorSegment3Box3f = StaticFindIntersectorSegment3Box3<float>;
-	using StaticFindIntersectorSegment3Box3d = StaticFindIntersectorSegment3Box3<double>;
+	using FloatStaticFindIntersectorSegment3Box3 = StaticFindIntersectorSegment3Box3<float>;
+	using DoubleStaticFindIntersectorSegment3Box3 = StaticFindIntersectorSegment3Box3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_BOX3_H

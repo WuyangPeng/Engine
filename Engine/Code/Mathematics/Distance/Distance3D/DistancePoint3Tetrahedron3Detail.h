@@ -1,101 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 13:50)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/14 16:29)
 
 #ifndef MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H 
 #define MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H
 
-#include "DistancePoint3Tetrahedron3.h"
-#include "DistancePoint3Triangle3.h"
-#include "Mathematics/Objects3D/Plane3.h"
-#include "Mathematics/Distance/DistanceBaseDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"   
+#include "DistancePoint3Tetrahedron3.h" 
 
-template <typename Real>
-Mathematics::DistancePoint3Tetrahedron3<Real>
-	::DistancePoint3Tetrahedron3(const Vector3D& point, const Tetrahedron3& tetrahedron)
-	:ParentType{}, mPoint{ point }, mTetrahedron{ tetrahedron }
-{
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_TETRAHEDRON3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::DistancePoint3Tetrahedron3<Real>
-	::GetPoint() const
-{
-	return mPoint;
-}
+    #include "DistancePoint3Tetrahedron3Achieve.h"
 
-template <typename Real>
-const Mathematics::Tetrahedron3<Real>& Mathematics::DistancePoint3Tetrahedron3<Real>
-	::GetTetrahedron() const
-{
-	return mTetrahedron;
-}
-
-template <typename Real>
-typename const Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathematics::DistancePoint3Tetrahedron3<Real>
-	::GetSquared() const
-{
-	Vector3D mClosestPoint0;
-	Vector3D mClosestPoint1;
-
-	// Construct the planes for the faces of the tetrahedron.  The normals
-	// are outer pointing, but specified not to be unit length.  We only need
-	// to know sidedness of the query point, so we will save cycles by not
-	// computing unit-length normals.
-	auto planes = mTetrahedron.GetPlanes();
-
-	// Determine which faces are visible to the query point.  Only these
-	// need to be processed by point-to-triangle distance queries.
-	auto minSqrDistance = Math<Real>::sm_MaxReal;
-	auto minTetraClosest = Vector3D::sm_Zero;
-	for (auto i = 0; i < 4; ++i)
-	{
-		if (planes[i].WhichSide(mPoint) != NumericalValueSymbol::Negative)
-		{
-			auto indices = mTetrahedron.GetFaceIndices(i);
-			Triangle3<Real> triangle{ mTetrahedron.GetVertex(indices[0]),mTetrahedron.GetVertex(indices[1]),mTetrahedron.GetVertex(indices[2]) };
-
-			DistancePoint3Triangle3<Real> query{ mPoint, triangle };
-			auto sqrDistance = query.GetSquared();
-			if (sqrDistance.GetDistance() < minSqrDistance)
-			{
-				minSqrDistance = sqrDistance.GetDistance();
-				minTetraClosest = sqrDistance.GetLhsClosestPoint();
-			}
-		}
-	}
-
-	mClosestPoint0 = mPoint;
-	if (minSqrDistance != Math<Real>::sm_MaxReal)
-	{
-		// The query point is outside the "solid" tetrahedron.
-		mClosestPoint1 = minTetraClosest;
-	}
-	else
-	{
-		// The query point is inside the "solid" tetrahedron.  Report a zero
-		// distance.  The closest points are identical.
-		minSqrDistance = Math<Real>::GetValue(0);
-		mClosestPoint1 = mPoint;
-	}
-
-	return DistanceResult{ minSqrDistance, Math<Real>::GetValue(0), mClosestPoint0, mClosestPoint1 };
-}
-
-template <typename Real>
-typename const Mathematics::DistancePoint3Tetrahedron3<Real>::DistanceResult Mathematics::DistancePoint3Tetrahedron3<Real>
-	::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
-{
-	auto movedPoint = mPoint + t * lhsVelocity;
-	auto movedV0 = mTetrahedron.GetVertex(0) + t * rhsVelocity;
-	auto movedV1 = mTetrahedron.GetVertex(1) + t * rhsVelocity;
-	auto movedV2 = mTetrahedron.GetVertex(2) + t * rhsVelocity;
-	auto movedV3 = mTetrahedron.GetVertex(3) + t * rhsVelocity;
-	Tetrahedron3 movedTetra{ movedV0, movedV1, movedV2, movedV3 };
-	return DistancePoint3Tetrahedron3<Real>{ movedPoint, movedTetra }.GetSquared();
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_TETRAHEDRON3_ACHIEVE)
 
 #endif // MATHEMATICS_DISTANCE_DIST_POINT3_TETRAHEDRON3_DETAIL_H

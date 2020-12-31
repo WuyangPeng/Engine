@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,34 +25,35 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Cylinder3 = Cylinder3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Cylinder3(const Segment3& segment, const Cylinder3& cylinder);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Cylinder3 GetCylinder() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Cylinder3 GetCylinder() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection query.
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
+		Segment3 m_Segment;
 		Cylinder3 mCylinder;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorSegment3Cylinder3f = StaticFindIntersectorSegment3Cylinder3<float>;
-	using StaticFindIntersectorSegment3Cylinder3d = StaticFindIntersectorSegment3Cylinder3<double>;
+	using FloatStaticFindIntersectorSegment3Cylinder3 = StaticFindIntersectorSegment3Cylinder3<float>;
+	using DoubleStaticFindIntersectorSegment3Cylinder3 = StaticFindIntersectorSegment3Cylinder3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CYLINDER3_H

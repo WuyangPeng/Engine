@@ -1,9 +1,0 @@
-SQL与关系数据库理论：如何编写健壮的SQL代码（SQL and Relational Theory）
-（第2版） 
-
-☆
-作者：C.J.Date 
-
-知识点 
-1.	SQL基础知识。  
-

@@ -12,8 +12,8 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	::StaticFindIntersectorPlane3Cylinder3 (const Plane3& rkPlane,const Cylinder3& rkCylinder)
-	: mPlane{ rkPlane }, mCylinder{ rkCylinder }, mLine0{ Vector3D::sm_Zero, Vector3D::sm_Zero }, mLine1{ Vector3D::sm_Zero, Vector3D::sm_Zero },
-	  mCircle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero,Math<Real>::GetValue(0) }, 
+	: m_Plane{ rkPlane }, mCylinder{ rkCylinder }, mLine0{ Vector3D::sm_Zero, Vector3D::sm_Zero }, mLine1{ Vector3D::sm_Zero, Vector3D::sm_Zero },
+	  m_Circle{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero,Math<Real>::GetValue(0) }, 
 	  mEllipse{ Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Vector3D::sm_Zero, Math<Real>::GetValue(0), Math<Real>::GetValue(0) }
 {
     mType = PC_EMPTY_SET;
@@ -25,7 +25,7 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	::GetPlane() const
 {
-    return mPlane;
+    return m_Plane;
 }
 
 template <typename Real>
@@ -39,9 +39,9 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	::Find()
 {
-	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
-	auto center =  mCylinder.GetAxis().GetOrigin() -  sDist*mPlane.GetNormal();
-	auto cosTheta = Vector3DTools::DotProduct( mCylinder.GetAxis().GetDirection(), mPlane.GetNormal());
+	auto sDist = m_Plane.DistanceTo(mCylinder.GetAxis().GetOrigin());
+	auto center =  mCylinder.GetAxis().GetOrigin() -  sDist*m_Plane.GetNormal();
+	auto cosTheta = Vector3DTools::DotProduct( mCylinder.GetAxis().GetDirection(), m_Plane.GetNormal());
 	auto absCosTheta = Math::FAbs(cosTheta);
 
     if (absCosTheta > Math<Real>::GetZero())
@@ -50,12 +50,12 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
         if (absCosTheta < Math::GetValue(1))
         {
             mType = PC_ELLIPSE;
-			auto major = (mCylinder.GetAxis().GetDirection() - cosTheta*mPlane.GetNormal());
-			auto minor = Vector3DTools::CrossProduct(mPlane.GetNormal(), major);
+			auto major = (mCylinder.GetAxis().GetDirection() - cosTheta*m_Plane.GetNormal());
+			auto minor = Vector3DTools::CrossProduct(m_Plane.GetNormal(), major);
 			major.Normalize();
 			minor.Normalize();
 			mEllipse = Ellipse3{ center - (sDist / cosTheta)*mCylinder.GetAxis().GetDirection(),
-								 mPlane.GetNormal(), major, minor,
+								 m_Plane.GetNormal(), major, minor,
 								 mCylinder.GetRadius() / absCosTheta,
 								 mCylinder.GetRadius() };
 			this->SetIntersectionType(IntersectionType::Other);
@@ -64,7 +64,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
         else
         {
             mType = PC_CIRCLE;
-			mCircle = Circle3{ center, mCircle.GetDirection0(),mCircle.GetDirection1(), mPlane.GetNormal(), mCylinder.GetRadius() };
+			m_Circle = Circle3{ center, m_Circle.GetDirection0(),m_Circle.GetDirection1(), m_Plane.GetNormal(), mCylinder.GetRadius() };
            
 			this->SetIntersectionType(IntersectionType::Other);
             return;
@@ -78,7 +78,7 @@ void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
         {
             mType = PC_TWO_LINES;
 
-			auto offset = Vector3DTools::CrossProduct(mCylinder.GetAxis().GetDirection(), mPlane.GetNormal());
+			auto offset = Vector3DTools::CrossProduct(mCylinder.GetAxis().GetDirection(), m_Plane.GetNormal());
 			auto extent = Math::Sqrt(mCylinder.GetRadius()*mCylinder.GetRadius() - sDist*sDist);
 
 			mLine0 = Line3{ center - extent * offset, mCylinder.GetAxis().GetDirection() };
@@ -112,8 +112,8 @@ bool Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
     // cylinder.  These are
     //   min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
     //   max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
-	auto sDist = mPlane.DistanceTo(mCylinder.GetAxis().GetOrigin());
-	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(mPlane.GetNormal(),mCylinder.GetAxis().GetDirection()));
+	auto sDist = m_Plane.DistanceTo(mCylinder.GetAxis().GetOrigin());
+	auto absNdW = Math::FAbs(Vector3DTools::DotProduct(m_Plane.GetNormal(),mCylinder.GetAxis().GetDirection()));
 	auto root = Math::Sqrt(Math::FAbs(Math::GetValue(1) - absNdW*absNdW));
 	auto term = mCylinder.GetRadius()*root +  (Real{0.5})*mCylinder.GetHeight()*absNdW;
 
@@ -147,7 +147,7 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorPlane3Cylinder3<Real>
 	::GetCircle(Circle3& circle) const
 {
-    circle = mCircle;
+    circle = m_Circle;
 }
 
 template <typename Real>

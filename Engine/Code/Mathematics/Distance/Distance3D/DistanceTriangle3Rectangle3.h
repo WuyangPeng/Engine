@@ -1,52 +1,55 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/23 17:21)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/15 16:12)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_TRIANGLE3_RECTANGLE3_H
-#define MATHEMATICS_DISTANCE_DIST_TRIANGLE3_RECTANGLE3_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_H
+#define MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Distance/DistanceBase.h"
-#include "Mathematics/Objects3D/Rectangle3.h"  
-#include "Mathematics/Objects3D/Triangle3.h"   
+#include "Mathematics/Objects3D/Rectangle3.h"
+#include "Mathematics/Objects3D/Triangle3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DistanceTriangle3Rectangle3 : public DistanceBase<Real, Vector3D<Real> >
-	{
-	public:
-		using ClassType = DistanceTriangle3Rectangle3<Real>;
-		using Vector3D = Vector3D<Real>;
-		using ParentType = DistanceBase<Real, Vector3D>;
-		using Rectangle3 = Rectangle3<Real>;
-		using Triangle3 = Triangle3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using DistanceResult = typename ParentType::DistanceResult; 
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceTriangle3Rectangle3 : public DistanceBase<Real, Vector3D<Real>>
+    {
+    public:
+        using ClassType = DistanceTriangle3Rectangle3<Real>;
+        using Vector3D = Vector3D<Real>;
+        using ParentType = DistanceBase<Real, Vector3D>;
+        using Rectangle3 = Rectangle3<Real>;
+        using Triangle3 = Triangle3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
+        using DistanceResult = typename ParentType::DistanceResult;
 
-	public:
-		DistanceTriangle3Rectangle3(const Triangle3& triangle, const Rectangle3& rectangle);
+    public:
+        DistanceTriangle3Rectangle3(const Triangle3& triangle, const Rectangle3& rectangle) noexcept;
 
-		// Object access.
-		const Triangle3& GetTriangle() const;
-		const Rectangle3& GetRectangle() const;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		// Static distance queries.
-		 const DistanceResult GetSquared() const override;
+        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+        [[nodiscard]] const Rectangle3 GetRectangle() const noexcept;
 
-		// Function calculations for dynamic distance queries.
-		 const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        [[nodiscard]] const DistanceResult GetSquared() const override;
 
-	private:
-		Triangle3 mTriangle;
-		Rectangle3 mRectangle;
-	};
+        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
 
-	using DistTriangle3Rectangle3f = DistanceTriangle3Rectangle3<float>;
-	using DistTriangle3Rectangle3d = DistanceTriangle3Rectangle3<double>;
+    private:
+        Triangle3 m_Triangle;
+        Rectangle3 m_Rectangle;
+    };
+
+    using FloatDistanceTriangle3Rectangle3 = DistanceTriangle3Rectangle3<float>;
+    using DoubleDistanceTriangle3Rectangle3 = DistanceTriangle3Rectangle3<double>;
 }
 
-#endif // MATHEMATICS_DISTANCE_DIST_TRIANGLE3_RECTANGLE3_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_TRIANGLE3_RECTANGLE3_H

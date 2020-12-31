@@ -1,113 +1,96 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:35)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/21 11:22)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects2D/Ellipse2.h"
 #include "Mathematics/Algebra/Polynomial.h"
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects2D/Ellipse2.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorEllipse2Ellipse2 : public StaticIntersector<Real, Vector2D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorEllipse2Ellipse2<Real>;
-		using ParentType = StaticIntersector<Real, Vector2D>;
-		using Vector2D = Vector2D<Real>;
-		using Ellipse2 = Ellipse2<Real>;
-		using Vector2DTools = Vector2DTools<Real>;
-		using Math = Math<Real>;
+    template <typename Real>
+    class StaticFindIntersectorEllipse2Ellipse2Impl;
 
-	public:
-		StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon = Math::GetZeroTolerance());
-		virtual ~StaticFindIntersectorEllipse2Ellipse2();
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorEllipse2Ellipse2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorEllipse2Ellipse2Impl<double>>;
 
-		// Object access.
-		const Ellipse2& GetEllipse0() const;
-		const Ellipse2& GetEllipse1() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorEllipse2Ellipse2Impl<Real>>;
 
-	private:
-		// Static intersection queries.
-		void Find();
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorEllipse2Ellipse2 : public StaticIntersector<Real, Vector2D>
+    {
+    public:
+        using StaticFindIntersectorEllipse2Ellipse2Impl = StaticFindIntersectorEllipse2Ellipse2Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorEllipse2Ellipse2);
 
-		// Intersection set for static find-intersection query.  The quantity Q
-		// satisfies 0 <= Q <= 4.  When Q > 0, the interpretation depends on the
-		// intersection type.
-		//   IT_POINT:  Q distinct points of intersection
-		//   IT_OTHER:  The ellipses are the same.  One of the ellipse objects is
-		//              returned by GetIntersectionEllipse.  Q is invalid.
-		int GetQuantity() const;
-		const Vector2D& GetPoint(int i) const;
-		const Ellipse2& GetIntersectionEllipse() const;
-		bool IsTransverseIntersection(int i) const;
+        using ParentType = StaticIntersector<Real, Vector2D>;
+        using Vector2D = Vector2D<Real>;
+        using Ellipse2 = Ellipse2<Real>;
+        using Vector2DTools = Vector2DTools<Real>;
+        using Math = typename ParentType::Math;
 
-		// Digits of accuracy for root finding.  The default value is 10.
-		int DIGITS_ACCURACY;
+    public:
+        StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon = Math::GetZeroTolerance());
 
-		// A form of test query.  The ellipses are separated, intersecting,
-		// ellipse0 is strictly contained in ellipse1, or ellipse1 is strictly
-		// contained in ellipse0.
-		enum Classification
-		{
-			EC_ELLIPSES_SEPARATED,
-			EC_ELLIPSES_INTERSECTING,
-			EC_ELLIPSE0_CONTAINS_ELLIPSE1,
-			EC_ELLIPSE1_CONTAINS_ELLIPSE0
-		};
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		Classification GetClassification() const;
+        [[nodiscard]] const Ellipse2 GetEllipse0() const noexcept;
+        [[nodiscard]] const Ellipse2 GetEllipse1() const noexcept;
 
-	private:
+        /// 用于静态查找相交点查询的交叉点集。 Q满足0 <= Q <= 4。
+        /// 当Q > 0时，解释取决于交叉点类型。
+        ///   IT_POINT：Q个不同的交点
+        ///   IT_OTHER：椭圆是相同的。 GetIntersectionEllipse返回椭圆对象之一。 Q无效。
+        [[nodiscard]] int GetQuantity() const;
+        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        [[nodiscard]] const Ellipse2 GetIntersectionEllipse() const noexcept;
+        [[nodiscard]] bool IsTransverseIntersection(int index) const;
 
-		// Support for sorting potential intersection points.
-		class Measurement
-		{
-		public:
-			Measurement();
-			bool operator< (const Measurement& measure) const;
+    private:
+        using CoeffType = std::array<Real, 6>;
+        using RootsType = std::vector<Real>;
 
-			// <x, y, sqrt(Q0(x,y)^2 + Q1(x,y)^2)>
-			Vector2D Point;
-			Real Q0, Q1, Norm, Angle0;
-			bool Transverse;
-		};
+    private:
+        // 静态交集查询
+        void Find();
 
-		static Polynomial<Real> GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1);
+        //  支持对潜在的相交点进行排序。
+        struct Measurement final
+        {
+        public:
+            Measurement() noexcept;
+            [[nodiscard]] bool operator<(const Measurement& measure) const noexcept;
 
-		bool RefinePoint(const Real coeff[6], Vector2D& point, Real& q0, Real& q1, Real& angle0);
+            // <x, y, sqrt(Q0(x,y)^2 + Q1(x,y)^2)>
+            Vector2D m_Point;
+            Real m_Q0;
+            Real m_Q1;
+            Real m_Norm;
+            Real m_Angle0;
+            bool m_Transverse;
+        };
 
-		// Support functions for GetClassification().
-		static void BisectF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin,
-							Real fmin, Real smax, Real fmax, Real& s, Real& f);
+        [[nodiscard]] static Polynomial<Real> GetQuartic(const Ellipse2& ellipse0, const Ellipse2& ellipse1);
 
-		static void BisectDF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin,
-							 Real dfmin, Real smax, Real dfmax, Real& s, Real& df);
+        [[nodiscard]] Measurement RefinePoint(const CoeffType& coeff, const Vector2D& point);
 
-		static void GetRoots(Real d0, Real d1, Real c0, Real c1, int& numRoots,
-							 Real* roots);
+    private:
+        IMPL_TYPE_DECLARE(StaticFindIntersectorEllipse2Ellipse2);
+    };
 
-		static void GetRoots(Real d0, Real c0, int& numRoots, Real* roots);
-
-		// The objects to intersect.
-		Ellipse2 mEllipse0;
-		Ellipse2 mEllipse1;
-
-		// Points of intersection.
-		int mQuantity;
-		Vector2D mPoint[4];
-		bool mTransverse[4];
-	};
-
-	using StaticFindIntersectorEllipse2Ellipse2f = StaticFindIntersectorEllipse2Ellipse2<float>;
-	using StaticFindIntersectorEllipse2Ellipse2d = StaticFindIntersectorEllipse2Ellipse2<double>;
+    using FloatStaticFindIntersectorEllipse2Ellipse2 = StaticFindIntersectorEllipse2Ellipse2<float>;
+    using DoubleStaticFindIntersectorEllipse2Ellipse2 = StaticFindIntersectorEllipse2Ellipse2<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_ELLIPSE2_ELLIPSE2_H

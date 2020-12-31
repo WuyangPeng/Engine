@@ -1,12 +1,15 @@
 TODO Level 8
  
-0.5.2.5
+0.6.0.0
 
 1.  （Base）在我们支持实现的平台上提供Math类的SIMD版本。 
 2.  （Base）定义类ScaledFloatToInt中的常量。
-3.  （Rational）定义有理数的转换运算符。
-4.  （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
-5.  （Rational）重构Integer类。
-6.  （Rational）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
-7.  （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。 
-8.  （Distance）重构DistanceLine3Box3类，删除mutable变量。
+3.  （Algebra）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
+4.  （Rational）定义有理数的转换运算符。
+5.  （Rational）明确宏MATHEMATICS_ASSERT_ON_RATIONAL_CONVERT_NAN的用处，没用就删掉。
+6.  （Rational）重构Integer类。
+7.  （Rational）Integer除法和求余操作，在除数为零时，返回无效或有符号的无穷大？
+8.  （Query）Query3Rational、Query2Rational修改了原有的缓存机制，改成构造时直接转换，看下是否合适。 
+9.  （Distance）重构DistanceLine3Box3类，删除mutable变量。
+10. （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
+11. （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。

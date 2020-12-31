@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Torus3 = Torus3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Torus3(const Line3& line, const Torus3& torus);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Torus3 GetTorus() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Torus3 GetTorus() const;
 
 		// The intersection set (quantity is at most 4).
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection query.
@@ -47,12 +48,12 @@ namespace Mathematics
 		Torus3 mTorus;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[4];
+		int m_Quantity;
+		Vector3D m_Point[4];
 	};
 
-	using StaticFindIntersectorLine3Torus3f = StaticFindIntersectorLine3Torus3<float>;
-	using StaticFindIntersectorLine3Torus3d = StaticFindIntersectorLine3Torus3<double>;
+	using FloatStaticFindIntersectorLine3Torus3 = StaticFindIntersectorLine3Torus3<float>;
+	using DoubleStaticFindIntersectorLine3Torus3 = StaticFindIntersectorLine3Torus3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_H

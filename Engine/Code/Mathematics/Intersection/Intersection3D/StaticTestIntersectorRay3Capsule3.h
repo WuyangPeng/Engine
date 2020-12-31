@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Ray3 = Ray3<Real>;
 		using Capsule3 = Capsule3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorRay3Capsule3(const Ray3& ray, const Capsule3& capsule);
 
-		// Object access.
-		const Ray3 GetRay() const;
-		const Capsule3 GetCapsule() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Ray3 GetRay() const;
+                [[nodiscard]] const Capsule3 GetCapsule() const;
 
 	private:
 		// Static intersection queries.
@@ -43,8 +44,8 @@ namespace Mathematics
 		Capsule3 mCapsule;
 	};
 
-	using StaticTestIntersectorRay3Capsule3f = StaticTestIntersectorRay3Capsule3<float>;
-	using StaticTestIntersectorRay3Capsule3d = StaticTestIntersectorRay3Capsule3<double>;
+	using FloatStaticTestIntersectorRay3Capsule3 = StaticTestIntersectorRay3Capsule3<float>;
+	using DoubleStaticTestIntersectorRay3Capsule3 = StaticTestIntersectorRay3Capsule3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_CAPSULE3_H

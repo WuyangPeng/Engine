@@ -1,11 +1,11 @@
-//	Copyright (c) 2011-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/09 15:55)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/19 14:43)
 
 #ifndef CORE_TOOLS_HELPER_UNIT_TEST_SUITE_MACRO_H
 #define CORE_TOOLS_HELPER_UNIT_TEST_SUITE_MACRO_H
@@ -16,7 +16,7 @@
 
 #define ADD_TEST_BEGIN(suite, suiteName) \
     const auto printRun = IsPrintRun();  \
-    Suite suite{ "【" SYSTEM_CONCATENATOR(suiteName) "组件】单元测试套件", GetStreamShared(), printRun };
+    Suite suite{ SYSTEM_MULTIPLE_CONCATENATOR("【", suiteName, "组件】单元测试套件"), GetStreamShared(), printRun };
 
 #define ADD_TEST(suite, testing) \
     AddTest<testing>((suite), (#suite), (#testing))
@@ -28,7 +28,7 @@
     AddTest<testing>((suite), (#suite), (#testing), (parameter1), (parameter2))
 
 #define ADD_TEST_END(suite) \
-    m_SuitePtr->AddSuite(suite)
+    m_Suite->AddSuite(suite)
 
 #define CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_DECLARE(className) \
     using ClassType = className;                                  \
@@ -43,26 +43,26 @@ public:                                                           \
     CLASS_INVARIANT_OVERRIDE_DECLARE
 
 #define CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE \
-    using SuitePtr = std::shared_ptr<Suite>;             \
+    using SuiteSharedPtr = std::shared_ptr<Suite>;       \
                                                          \
 private:                                                 \
-    SuitePtr m_SuitePtr
+    SuiteSharedPtr m_Suite
 
-#define UNIT_TEST_DO_RUN_DEFINE(namespaceName, className, suiteName)                                                                 \
-    int namespaceName::className::DoRun()                                                                                            \
-    {                                                                                                                                \
-        m_SuitePtr = std::make_shared<Suite>("【" SYSTEM_CONCATENATOR(suiteName) "】单元测试套件", GetStreamShared(), IsPrintRun()); \
-        AddSuite();                                                                                                                  \
-        m_SuitePtr->RunUnitTest();                                                                                                   \
-        SystemPause();                                                                                                               \
-        m_SuitePtr->PrintReport();                                                                                                   \
-        SystemPause();                                                                                                               \
-        return m_SuitePtr->GetFailedNumber();                                                                                        \
+#define UNIT_TEST_DO_RUN_DEFINE(namespaceName, className, suiteName)                                                                         \
+    int namespaceName::className::DoRun()                                                                                                    \
+    {                                                                                                                                        \
+        m_Suite = std::make_shared<Suite>(SYSTEM_MULTIPLE_CONCATENATOR("【", suiteName, "】单元测试套件"), GetStreamShared(), IsPrintRun()); \
+        AddSuites();                                                                                                                         \
+        m_Suite->RunUnitTest();                                                                                                              \
+        SystemPause();                                                                                                                       \
+        m_Suite->PrintReport();                                                                                                              \
+        SystemPause();                                                                                                                       \
+        return m_Suite->GetFailedNumber();                                                                                                   \
     }
 
 #define CMAIN_FUNCTION_HELPER_SUBCLASS_DEFINE(namespaceName, className) \
     namespaceName::className::className(int argc, char** argv)          \
-        : ParentType{ argc, argv }, m_SuitePtr{}                        \
+        : ParentType{ argc, argv }, m_Suite{}                           \
     {                                                                   \
         SELF_CLASS_IS_VALID_0;                                          \
     }

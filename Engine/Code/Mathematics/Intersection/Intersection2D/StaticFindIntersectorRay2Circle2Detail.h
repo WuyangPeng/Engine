@@ -1,88 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 15:52)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/22 15:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_DETAIL_H
 
 #include "StaticFindIntersectorRay2Circle2.h"
-#include "StaticFindIntersectorLine2Circle2.h" 
 
-template <typename Real>
-Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::StaticFindIntersectorRay2Circle2(const Ray2& ray, const Circle2& circle)
-	: mRay{ ray }, mCircle{ circle }
-{
-	Find();
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Ray2<Real> Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::GetRay() const
-{
-	return mRay;
-}
+    #include "StaticFindIntersectorRay2Circle2Achieve.h"
 
-template <typename Real>
-const Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::GetCircle() const
-{
-	return mCircle;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_ACHIEVE)
 
-template <typename Real>
-void Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::Find()
-{
-	Real t[2]{};
-	auto intersects = StaticFindIntersectorLine2Circle2<Real>::Find(mRay.GetOrigin(), mRay.GetDirection(), mCircle.GetCenter(), mCircle.GetRadius(), mQuantity, t);
-
-	if (intersects)
-	{
-		// Reduce root count if line-circle intersections are not on ray.
-		if (mQuantity == 1)
-		{
-			if (t[0] < Math<Real>::GetZero())
-			{
-				mQuantity = 0;
-			}
-		}
-		else
-		{
-			if (t[1] < Math<Real>::GetZero())
-			{
-				mQuantity = 0;
-			}
-			else if (t[0] < Math<Real>::GetZero())
-			{
-				mQuantity = 1;
-				t[0] = t[1];
-			}
-		}
-
-		for (int i = 0; i < mQuantity; ++i)
-		{
-			mPoint[i] = mRay.GetOrigin() + t[i] * mRay.GetDirection();
-		}
-	}
-
-	this->SetIntersectionType(mQuantity > 0 ? IntersectionType::Point : IntersectionType::Empty);
-}
-
-template <typename Real>
-int Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::GetQuantity() const
-{
-	return mQuantity;
-}
-
-template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::StaticFindIntersectorRay2Circle2<Real>
-	::GetPoint(int i) const
-{
-	return mPoint[i];
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_DETAIL_H

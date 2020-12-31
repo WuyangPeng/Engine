@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -80,6 +80,20 @@ const typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     return m_Impl->GetPlanes();
+}
+
+template <typename Real>
+const Mathematics::Tetrahedron3<Real> Mathematics::Tetrahedron3<Real>::GetMove(Real t, const Vector3D& velocity) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    auto movedV0 = GetVertex(0) + t * velocity;
+    auto movedV1 = GetVertex(1) + t * velocity;
+    auto movedV2 = GetVertex(2) + t * velocity;
+    auto movedV3 = GetVertex(3) + t * velocity;
+    Tetrahedron3 movedTetra{ movedV0, movedV1, movedV2, movedV3 };
+
+    return movedTetra;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_TETRAHEDRON3_ACHIEVE_H

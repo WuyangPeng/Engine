@@ -1,7 +1,0 @@
-程序员实用算法（Practical Algorithms for Programmers）
-
-★
-作者：Andrew Binstock、John Rex
-
-知识点 
-1.	算法基础知识。  

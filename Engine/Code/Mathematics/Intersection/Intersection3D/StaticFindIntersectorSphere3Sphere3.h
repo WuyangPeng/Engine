@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Circle3 = Circle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1);
 
-		// Object access.
-		const Sphere3 GetSphere0() const;
-		const Sphere3 GetSphere1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Sphere3 GetSphere0() const;
+                [[nodiscard]] const Sphere3 GetSphere1() const;
 
 		enum
 		{
@@ -46,27 +47,27 @@ namespace Mathematics
 		};
 
 		// Intersection set for static find-intersection query.
-		const Circle3 GetCircle() const;
+                [[nodiscard]] const Circle3 GetCircle() const;
 
 		// Intersection set for dynamic find-intersection query.
-		const Vector3D GetContactPoint() const;
+                [[nodiscard]] const Vector3D GetContactPoint() const;
 
 	private:
 		void Find();
 
 		// The objects to intersect.
-		Sphere3 mSphere0;
-		Sphere3 mSphere1;
+		Sphere3 m_Sphere0;
+		Sphere3 m_Sphere1;
 
 		// Circle of intersection for static spheres.
-		Circle3 mCircle;
+		Circle3 m_Circle;
 
 		// Point of intersection for dynamic spheres.
-		Vector3D mContactPoint;
+		Vector3D m_ContactPoint;
 	};
 
-	using StaticFindIntersectorSphere3Sphere3f = StaticFindIntersectorSphere3Sphere3<float>;
-	using StaticFindIntersectorSphere3Sphere3d = StaticFindIntersectorSphere3Sphere3<double>;
+	using FloatStaticFindIntersectorSphere3Sphere3 = StaticFindIntersectorSphere3Sphere3<float>;
+	using DoubleStaticFindIntersectorSphere3Sphere3 = StaticFindIntersectorSphere3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_H

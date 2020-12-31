@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,9 +12,9 @@
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mTriangle{ triangle }, mBox{ box }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Triangle{ triangle }, m_Box{ box }
 {
-	mQuantity = 0;
+	m_Quantity = 0;
 	Find();
 }
 
@@ -22,14 +22,14 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	::GetTriangle() const
 {
-	return mTriangle;
+	return m_Triangle;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	::GetBox() const
 {
-	return mBox;
+	return m_Box;
 }
 
 template <typename Real>
@@ -50,13 +50,13 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	IntersectorConfiguration<Real> triContact, boxContact;
 
 	// Test tri-normal.
-	Vector3D edge[3]{ mTriangle.GetVertex()[1] - mTriangle.GetVertex()[0],
-					  mTriangle.GetVertex()[2] - mTriangle.GetVertex()[1],
-					  mTriangle.GetVertex()[0] - mTriangle.GetVertex()[2] };
+	Vector3D edge[3]{ m_Triangle.GetVertex()[1] - m_Triangle.GetVertex()[0],
+					  m_Triangle.GetVertex()[2] - m_Triangle.GetVertex()[1],
+					  m_Triangle.GetVertex()[0] - m_Triangle.GetVertex()[2] };
 
 	auto triNorm = Vector3DTools::CrossProduct(edge[0], edge[1]);
 	auto mContactTime = this->GetContactTime();
-	if (!IntersectorAxis<Real>::Find(triNorm, mTriangle, mBox, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
+	if (!FindIntersectorAxis<Real>::Find(triNorm, m_Triangle, m_Box, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -68,8 +68,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	auto i0 = 0;
 	for (i0 = 0; i0 < 3; ++i0)
 	{
-		axis = mBox.GetAxis(i0);
-		if (!IntersectorAxis<Real>::Find(axis, mTriangle, mBox, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
+		axis = m_Box.GetAxis(i0);
+		if (!FindIntersectorAxis<Real>::Find(axis, m_Triangle, m_Box, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -95,8 +95,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		{
 			for (auto i1 = 0; i1 < 3; ++i1)
 			{
-				axis = Vector3DTools::CrossProduct(edge[i0], mBox.GetAxis(i1));
-				if (!IntersectorAxis<Real>::Find(axis, mTriangle, mBox, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
+				axis = Vector3DTools::CrossProduct(edge[i0], m_Box.GetAxis(i1));
+				if (!FindIntersectorAxis<Real>::Find(axis, m_Triangle, m_Box, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
 				{
 					SetContactTime(mContactTime);
 					this->SetIntersectionType(IntersectionType::Empty);
@@ -111,7 +111,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		for (i0 = 0; i0 < 3; ++i0)
 		{
 			axis = Vector3DTools::CrossProduct(edge[i0], triNorm);
-			if (!IntersectorAxis<Real>::Find(axis, mTriangle, mBox, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
+			if (!FindIntersectorAxis<Real>::Find(axis, m_Triangle, m_Box, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
 			{
 				SetContactTime(mContactTime);
 				this->SetIntersectionType(IntersectionType::Empty);
@@ -123,8 +123,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	// Test velocity cross box faces.
 	for (i0 = 0; i0 < 3; ++i0)
 	{
-		axis = Vector3DTools::CrossProduct(relVelocity, mBox.GetAxis(i0));
-		if (!IntersectorAxis<Real>::Find(axis, mTriangle, mBox, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
+		axis = Vector3DTools::CrossProduct(relVelocity, m_Box.GetAxis(i0));
+		if (!FindIntersectorAxis<Real>::Find(axis, m_Triangle, m_Box, relVelocity, tmax, mContactTime, tlast, side, triContact, boxContact))
 		{
 			SetContactTime(mContactTime);
 			this->SetIntersectionType(IntersectionType::Empty);
@@ -139,7 +139,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 		return;
 	}
 
-	FindContactSet<Real>(mTriangle, mBox, side, triContact, boxContact, velocity0, velocity1, mContactTime, mQuantity, mPoint);
+	FindContactSet<Real>(m_Triangle, m_Box, side, triContact, boxContact, velocity0, velocity1, mContactTime, m_Quantity, m_Point);
 
 	SetContactTime(mContactTime);
 	this->SetIntersectionType(IntersectionType::Other);
@@ -150,14 +150,14 @@ template <typename Real>
 int Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorTriangle3Box3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_DETAIL_H

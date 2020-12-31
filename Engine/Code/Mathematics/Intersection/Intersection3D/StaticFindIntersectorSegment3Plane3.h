@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,16 +25,17 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Plane3 GetPlane() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		Real GetSegmentParameter() const;
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
+
+		 [[nodiscard]] Real GetSegmentParameter() const;
 
 	private:
 		// Find-intersection query.  The point of intersection is
@@ -43,15 +44,15 @@ namespace Mathematics
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Plane3 mPlane;
+		Segment3 m_Segment;
+		Plane3 m_Plane;
 
 		// Information about the intersection set.
-		Real mSegmentParameter;
+		Real m_SegmentParameter;
 	};
 
-	using StaticFindIntersectorSegment3Plane3f = StaticFindIntersectorSegment3Plane3<float>;
-	using StaticFindIntersectorSegment3Plane3d = StaticFindIntersectorSegment3Plane3<double>;
+	using FloatStaticFindIntersectorSegment3Plane3 = StaticFindIntersectorSegment3Plane3<float>;
+	using DoubleStaticFindIntersectorSegment3Plane3 = StaticFindIntersectorSegment3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H

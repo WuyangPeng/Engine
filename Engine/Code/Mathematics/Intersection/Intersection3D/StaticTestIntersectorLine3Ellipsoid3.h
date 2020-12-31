@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Ellipsoid3 GetEllipsoid() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Line3 GetLine() const;
+        [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
 
 		// Small thresholds are used for testing the discriminant of the quadratic
 		// equation related to the computations: Q(t) = a2*t^2 + 2*a1*t + a0.  The
@@ -50,9 +51,9 @@ namespace Mathematics
 		// default is now zero, so if your application relied on the old behavior,
 		// you must modify this value.
 		void SetNegativeThreshold(Real negThreshold);
-		Real GetNegativeThreshold() const;
+        [[nodiscard]] Real GetNegativeThreshold() const;
 		void SetPositiveThreshold(Real posThreshold);
-		Real GetPositiveThreshold() const;
+        [[nodiscard]] Real GetPositiveThreshold() const;
 
 	private:
 		// Static intersection queries.
@@ -69,8 +70,8 @@ namespace Mathematics
 		Real mPositiveThreshold;
 	};
 
-	using StaticTestIntersectorLine3Ellipsoid3f = StaticTestIntersectorLine3Ellipsoid3<float>;
-	using StaticTestIntersectorLine3Ellipsoid3d = StaticTestIntersectorLine3Ellipsoid3<double>;
+	using FloatStaticTestIntersectorLine3Ellipsoid3 = StaticTestIntersectorLine3Ellipsoid3<float>;
+	using DoubleStaticTestIntersectorLine3Ellipsoid3 = StaticTestIntersectorLine3Ellipsoid3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_ELLIPSOID3_H

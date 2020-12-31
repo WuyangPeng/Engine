@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
@@ -17,7 +17,7 @@
 #include "CoreTools/Threading/Mutex.h"
 
 #define MAIN_FUNCTION(namespaceName, helperClassName)        \
-    int main(int argc, char** argv) noexcept                 \
+    int main(int argc, char** argv)                          \
     {                                                        \
         namespaceName::helperClassName helper{ argc, argv }; \
         return helper.Run();                                 \
@@ -64,7 +64,7 @@
             }                                                                                                                            \
             catch (...)                                                                                                                  \
             {                                                                                                                            \
-                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain Å×³öÒì³£¡£"));                                                    \
+                System::OutputDebugStringWithTChar(SYSTEM_TEXT("ExecuteDllMain Å×³öÒì³£¡£"));                                            \
             }                                                                                                                            \
             return System::g_True;                                                                                                       \
         }

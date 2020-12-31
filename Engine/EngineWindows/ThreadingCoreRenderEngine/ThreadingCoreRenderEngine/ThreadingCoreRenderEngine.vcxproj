@@ -142,50 +142,33 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -209,7 +192,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -223,7 +205,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -251,7 +232,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -265,7 +245,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -289,7 +268,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -303,7 +281,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;THREADINGCORERENDERENGINE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -331,7 +308,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -342,312 +318,9 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="Resource\ReadMe.md" />
-    <Text Include="Resource\References\Cpp\Advanced\Advanced.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\API Design for C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Cross-Platform Development in C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Designing and Coding Reusable C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Inside The C++ Object Model.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Large-Scale C++ Software Design.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Modern C++ Design.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Multi-Paradigm Design for C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\Secure Coding in C and C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\The Art of C++.txt" />
-    <Text Include="Resource\References\Cpp\Advanced\The Design and Evolution of C++.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Algorithm.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Algorithms Design Techniques and Analysis.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Algorithms in C++.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Concrete Mathematic.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Cryptography for Developers.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Data Structures and Algorithm Analysis in C++.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Data Structures with C++ Using STL.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Discrete Mathematics and Its Applications.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Elementary Number Theory and Its Applications.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Hacker%27s Delight.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\How to Solve.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Introduction to Algorithms.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Linear Algebra and Its Applications.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Numerical Recipes in C++.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Practical Algorithms for Programmers.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Programming Pearls.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\The Art of Computer Programming.txt" />
-    <Text Include="Resource\References\Cpp\Algorithm\Write Great Code.txt" />
-    <Text Include="Resource\References\Cpp\Boost\Beyond the C++ Standard Library An Introduction to Boost.txt" />
-    <Text Include="Resource\References\Cpp\Boost\Boost C++ Application Development Cookbook.txt" />
-    <Text Include="Resource\References\Cpp\Boost\Boost.txt" />
-    <Text Include="Resource\References\Cpp\Boost\The C++ Standard Library Extensions.txt" />
-    <Text Include="Resource\References\Cpp\Experience\C++ Coding Standards.txt" />
-    <Text Include="Resource\References\Cpp\Experience\C++ Common Knowledge.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Effective C++.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Effective Modern C++.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Effective STL.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Exceptional C++ Style.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Exceptional C++.txt" />
-    <Text Include="Resource\References\Cpp\Experience\Experience.txt" />
-    <Text Include="Resource\References\Cpp\Experience\More Effective C++.txt" />
-    <Text Include="Resource\References\Cpp\Experience\More Exceptional C++.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\C++ STL.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\Extended STL.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\Generic Programming and the STL.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\Standard C++ IOStreams and Locales.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\StandardLibrary.txt" />
-    <Text Include="Resource\References\Cpp\StandardLibrary\The C++ Standard Library.txt" />
-    <Text Include="Resource\References\Cpp\Template\C++ Template Metaprogramming.txt" />
-    <Text Include="Resource\References\Cpp\Template\C++ Templates.txt" />
-    <Text Include="Resource\References\Cpp\Template\Template.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\AlgorithmicTechnique.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Computer Animation Algorithms and Techniques.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Game Programming Algorithms an Techniques.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Ray Tracing from the Ground Up.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-time Cameras.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-Time Collision Detection.txt" />
-    <Text Include="Resource\References\GameDesign\AlgorithmicTechnique\Real-Time Shadows.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI for Game Developers.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Game Engine Programming.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Game Programming Wisdom.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\AI Techniques for Game Programming.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\ArtificialIntellegence.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Game AI Pro.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\Programming Game AI by Example.txt" />
-    <Text Include="Resource\References\GameDesign\ArtificialIntellegence\The Nature of Code.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Advanced 3D Game Programming with DirectX 10.0.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Advanced Animation with DirectX.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Beginning Game Programming.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\DirectX.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Game Coding Complete.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Game Programming All in One.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Introduction to 3D Game Programming with DirectX 9.0c.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Multiplayer Game Programming.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Programming Role Playing Games with DirectX.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Real-Time Rendering Tricks and Techniques in DirectX.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Ricks of The Windows Game Programming Gurus.txt" />
-    <Text Include="Resource\References\GameDesign\DirectX\Tricks Of The 3D Game Programming Gurus.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\236 Tips for Game Design.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\Designing Games.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\Game Design Theory and Practice.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\Game Design Workshop.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\GameDesign.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\Massively Multiplayer Game Development.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\Object-Oriented Game Development.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign\The Art of Game Design A Book of Lenses.txt" />
-    <Text Include="Resource\References\GameDesign\GameEngine\3D Game Engine Design.txt" />
-    <Text Include="Resource\References\GameDesign\GameEngine\Game Engine Architecture.txt" />
-    <Text Include="Resource\References\GameDesign\GameEngine\GameEngine.txt" />
-    <Text Include="Resource\References\GameDesign\GameEngine\Mastering Unreal Technology.txt" />
-    <Text Include="Resource\References\GameDesign\GameProgramming\Game Programming Gems.txt" />
-    <Text Include="Resource\References\GameDesign\GameProgramming\Game Programming Patterns.txt" />
-    <Text Include="Resource\References\GameDesign\GameProgramming\GameProgramming.txt" />
-    <Text Include="Resource\References\GameDesign\ImageProcessing\Image Processing,Analysis,And Machine Vision.txt" />
-    <Text Include="Resource\References\GameDesign\ImageProcessing\Image Processing,The Fundamentals.txt" />
-    <Text Include="Resource\References\GameDesign\ImageProcessing\ImageProcessing.txt" />
-    <Text Include="Resource\References\GameDesign\ImageProcessing\Pattern Recognition with Neural Networks in C++.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\Computer Graphics Using OpenGL.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\Computer Graphics with OpenGL.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL ES 3.0 Programming Guide.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Programming Guide.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Reference Manual.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL Shading Language.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL SuperBible.txt" />
-    <Text Include="Resource\References\GameDesign\OpenGL\OpenGL.txt" />
-    <Text Include="Resource\References\GameDesign\Physics\Beginning Math and Physics.txt" />
-    <Text Include="Resource\References\GameDesign\Physics\Game Physics Engine Development.txt" />
-    <Text Include="Resource\References\GameDesign\Physics\Physics for Game Developers.txt" />
-    <Text Include="Resource\References\GameDesign\Physics\Physics.txt" />
-    <Text Include="Resource\References\GameDesign\RenderingTechnology\GPU Gems.txt" />
-    <Text Include="Resource\References\GameDesign\RenderingTechnology\Graphics Shaders.txt" />
-    <Text Include="Resource\References\GameDesign\RenderingTechnology\RenderingTechnology.txt" />
-    <Text Include="Resource\References\GameDesign\SoundProgramming\Beginning Game Audio Programming.txt" />
-    <Text Include="Resource\References\GameDesign\SoundProgramming\SoundProgramming.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\libxml++.txt" />
-    <Text Include="Resource\References\Libs\Database\Database.txt" />
-    <Text Include="Resource\References\Libs\Database\mysql connector c++.txt" />
-    <Text Include="Resource\References\Libs\Database\mysql++.txt" />
-    <Text Include="Resource\References\Libs\Database\mysql.txt" />
-    <Text Include="Resource\References\Libs\Framework\Framework.txt" />
-    <Text Include="Resource\References\Libs\Framework\freeglut.txt" />
-    <Text Include="Resource\References\Libs\Imagics\Imagics.txt" />
-    <Text Include="Resource\References\Libs\Imagics\opencv.txt" />
-    <Text Include="Resource\References\Libs\Network\ACE.txt" />
-    <Text Include="Resource\References\Libs\Network\Network.txt" />
-    <Text Include="Resource\References\Libs\Network\openssl.txt" />
-    <Text Include="Resource\References\Libs\Network\protobuf.txt" />
-    <Text Include="Resource\References\Libs\Physics\chipmunk2D physics.txt" />
-    <Text Include="Resource\References\Libs\Physics\Physics.txt" />
-    <Text Include="Resource\References\Libs\Rendering\DirectX.txt" />
-    <Text Include="Resource\References\Libs\Rendering\Geometric Tools.txt" />
-    <Text Include="Resource\References\Libs\Rendering\glew.txt" />
-    <Text Include="Resource\References\Libs\Rendering\imgui.txt" />
-    <Text Include="Resource\References\Libs\Rendering\irrlicht.txt" />
-    <Text Include="Resource\References\Libs\Rendering\libpng.txt" />
-    <Text Include="Resource\References\Libs\Rendering\ogre-next.txt" />
-    <Text Include="Resource\References\Libs\Rendering\ogre.txt" />
-    <Text Include="Resource\References\Libs\Rendering\Rendering.txt" />
-    <Text Include="Resource\References\Libs\Rendering\Wild Magic.txt" />
-    <Text Include="Resource\References\Libs\Script\lua.txt" />
-    <Text Include="Resource\References\Libs\Script\perl.txt" />
-    <Text Include="Resource\References\Libs\Script\Script.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\freealut.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\ogg.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\OgreAL.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\OpenAL Soft.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\SoundEffect.txt" />
-    <Text Include="Resource\References\Libs\SoundEffect\vorbis.txt" />
-    <Text Include="Resource\References\Libs\UserInterface\FLTK.txt" />
-    <Text Include="Resource\References\Libs\UserInterface\OIS.txt" />
-    <Text Include="Resource\References\Libs\UserInterface\SDL2.txt" />
-    <Text Include="Resource\References\Libs\UserInterface\UserInterface.txt" />
-    <Text Include="Resource\References\Libs\UserInterface\wxWidgets.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\C++ Concurrency In Action.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\C++ Multithreading Cookbook.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Concurrent Programming On Windows.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\ConcurrentProgramming.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Multithreading Applications in Win32.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Object-Oriented Multithreading Using C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Parallel and Distributed Programming Using C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\ConcurrentProgramming\Professional Multicore Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\Debugging\Advanced Windows Debugging.txt" />
-    <Text Include="Resource\References\OperatingSystem\Debugging\Debugging C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\Debugging\Debugging.txt" />
-    <Text Include="Resource\References\OperatingSystem\Debugging\Safe C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\Debugging\The Developer%27s Guide to Debugging.txt" />
-    <Text Include="Resource\References\OperatingSystem\Linux\Beginning Linux Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\Linux\How Linux Works.txt" />
-    <Text Include="Resource\References\OperatingSystem\Linux\Linux Command Line and Shell Scripting Bible.txt" />
-    <Text Include="Resource\References\OperatingSystem\Linux\Linux.txt" />
-    <Text Include="Resource\References\OperatingSystem\Linux\Professional Linux Kernel Architecture.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Advanced CORBA Programming with C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Configuring Windows Server 2008 Network Infrastructure.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Effective TCP IP Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Internetworking With TCP IP.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Multiplayer Game Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Network Programming For Microsoft windows.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\Networked graphics building networked games and virtual environments.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\NetworkProgramming.txt" />
-    <Text Include="Resource\References\OperatingSystem\NetworkProgramming\UNIX Network Programming.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Beginning C# 6 Programming with Visual Studio 2015.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\C# in Depth.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\CLR via C#.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\CSharp.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Effective C#.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Essential C# 5.0.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Illstrated C# 2012.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Microsoft Visual C# 2010 Step by Step.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Pro C# 2010 and the .NET 4 Platform.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Professional C# 6 and .NET Core 1.0.txt" />
-    <Text Include="Resource\References\OtherLanguages\CSharp\Programming C#.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Core Java.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Effective Java.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Java Concurrency in Practice.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Java Puzzlers.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Java.txt" />
-    <Text Include="Resource\References\OtherLanguages\Java\Thinking in Java.txt" />
-    <Text Include="Resource\References\OtherLanguages\Lua\Lua.txt" />
-    <Text Include="Resource\References\OtherLanguages\Lua\Programming in Lua.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Beginning Python From Novice to Professional.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Core Python Applications Programming.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Expert Python Programming.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Gray Hat Python.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Learning Python.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Programming Collective Intelligence.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Programming in Python 3.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Python Cookbook.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Python Essential Reference.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Python in a Nutsbell.txt" />
-    <Text Include="Resource\References\OtherLanguages\Python\Python.txt" />
-    <Text Include="Resource\References\OtherLanguages\Redis\Redis In Action.txt" />
-    <Text Include="Resource\References\OtherLanguages\Redis\Redis.txt" />
-    <Text Include="Resource\References\OtherLanguages\RegularExpression\Beginning Regular Expressions.txt" />
-    <Text Include="Resource\References\OtherLanguages\RegularExpression\Mastering Regular Expressions.txt" />
-    <Text Include="Resource\References\OtherLanguages\RegularExpression\Regular Expressions Cookbook.txt" />
-    <Text Include="Resource\References\OtherLanguages\RegularExpression\RegularExpression.txt" />
-    <Text Include="Resource\References\OtherLanguages\RegularExpression\Sams Teach Yourself Regular Expressions in 10 Minutes.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL Server\Beginning Microsoft SQL Server 2008 Programming.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL Server\Microsoft SQL Server 2008 Administrator%27s Pocket Consultant.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL Server\Professional Microsoft SQL Server 2008 Programming.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL Server\SQL Server.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\Sams Teach Yourself SQL in 10 Minutes.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\Sams Teach Yourself SQL in 24 Hours.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\SQL and Relational Theory.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\SQL Cookbook.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\SQL The Complete Reference.txt" />
-    <Text Include="Resource\References\OtherLanguages\SQL\SQL.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Agile Modeling.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Agile Software Development Principles,Patterns,and Practices.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\AgileDevelopment.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Clean Agile.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Essential Skills for the Agile Developer.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Extreme Programming Explained.txt" />
-    <Text Include="Resource\References\SoftwareDesign\AgileDevelopment\Practices of an Agile Developer.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Artificial Intelligence A Modern Approach.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Artificial Intelligence Structures and Strategies,for Complex Problem Solving.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\ArtificialIntellegence.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Deep Learning.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ArtificialIntellegence\Macbine Learning for Hackers.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Beautiful Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Clean Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Code Complete.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Code Craft.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Code Quality.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Code Reading.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Dreaming In Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\I.M.Wright%27s Hard Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Programming Beyond Practices.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\The Art fo Readable Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\The Clean Coder.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Code\Working Effectively with Legacy Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Advanced Compiler Design and Implementation.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Compile.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Compilers Principles,techniques and Tools.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Language Implementation Patterns.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Modern Compiler Implementation in C.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Compile\Structure and Interpretation of Computer Programs.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Experience\Experience.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Experience\More Joel on Software.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Experience\Pragmatic Thinking and Learning Refactor Your Wetware.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Experience\The Mythical Man-month.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Experience\The Pragmatic Programmer.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Design Patterns Elements of Reusable Object-Oriented Software.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Design Patterns Explained.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Mode.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Pattern Hatching Design Patterns Applied.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Pattern Languages of Program Design.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Pattern-Oriented Software Arfhitecture.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Mode\Patterns of Enterprise Application Architecture.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\Object-Oriented Analysis &amp; Design.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\Object-Oriented Analysis and Design with Applications.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\ObjectOriented.txt" />
-    <Text Include="Resource\References\SoftwareDesign\ObjectOriented\The Object-Oriented Thought Process.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring Improving the Design of Existing Code.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring to Patterns.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring Workbook.txt" />
-    <Text Include="Resource\References\SoftwareDesign\Refactoring\Refactoring.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Analysis Patterns Reusable Object Models.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Anti Patterns Refactoring Software,Architectures,and Projects in Crisis.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Applying Domain-Driven Design and Patterns.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Architecture.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Security.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Beautiful Teams.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Catastrophe Disentanglement Getting Software Projects Back on Track.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Clean Architecture.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Code Optimization Effective Memory Usage.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Continuous Integration Improving Software Quality and Reducing Risk.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Functional Thinking.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Fuzzing Brute Force Vulnerability Discovery.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Software Engineering.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Software Estimation.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\SoftwareEngineering.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\The Productive Programmer.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\The Psychology of Computer Programming.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareEngineering\Writing Effective Use Cases.txt" />
-    <Text Include="Resource\References\SoftwareDesign\TestDrive\Growing Object-Oriented Software,Guided by Tests.txt" />
-    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test Driven Practical TDD and Acceptance TDD for Jave Developers.txt" />
-    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test-Driven Development A Practical Guide.txt" />
-    <Text Include="Resource\References\SoftwareDesign\TestDrive\Test-Driven Development By Example.txt" />
-    <Text Include="Resource\References\SoftwareDesign\TestDrive\TestDrive.txt" />
     <Text Include="Resource\Schedule.txt" />
     <Text Include="Resource\Project.txt" />
     <Text Include="Resource\Library.txt" />
-    <Text Include="Resource\LearningLibrary.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -658,112 +331,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     <Text Include="Resource\Todo\Level 7.txt" />
     <Text Include="Resource\Todo\Level 8.txt" />
     <Text Include="Resource\Todo\Level 9.txt" />
-    <Text Include="Resource\References\Cpp\Cpp.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ Primer.txt" />
-    <Text Include="Resource\References\Cpp\Primary\A Tour of C++.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Accelerated C++.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C &amp; C++ Code Capsules.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ A Dialog.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ Distilled.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ for the Impatient.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ How to Program.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ Primer Plus.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Primary.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ Programming From Problem Analysis To Program Design.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ Programming.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ The Complete Reference.txt" />
-    <Text Include="Resource\References\Cpp\Primary\C++ The Core Language.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Computing Concepts with C++ Essentials.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Essential C++.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Programming Principles and Practice Using C++.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Programming With C++.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Sams Teach Yourself C++ in One Hour a Day.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Standard C++ Bible.txt" />
-    <Text Include="Resource\References\Cpp\Primary\Thinking in C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Intermediate.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Advanced C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Applied C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ A Software Enginearing Approach.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Cookbook.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Effective Object-Oriented Software Construction.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ footprint and Performance Optimization.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Gotchas.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ In Action Industrial-Strength Programming Techniques.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Master Reference.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Programming Today.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\C++ Strategies and Tactics.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Efficient C++ Performance Programming Techniques.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\How not to Program in C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Imperfect C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Optimized C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Professional C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Ruminations on C++.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\The C++ Programming Language.txt" />
-    <Text Include="Resource\References\Cpp\Intermediate\Thomas Wong C + + programming secret.txt" />
-    <Text Include="Resource\References\OperatingSystem\OperatingSystem.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\WindowsAPI.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Computer Systems A Programmers%27s Perspective.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Computer Systems An Integrated Approach to Architecture and Operating Systems.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Ivor Horton%27s Beginning Visual C++.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Microsoft Windows Internals.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Programming Applications for Microsoft Windows.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Programming Windows.txt" />
-    <Text Include="Resource\References\OperatingSystem\WindowsAPI\Windows System Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\ACE\ACE.txt" />
-    <Text Include="Resource\References\OperatingSystem\ACE\C++ Network Programming.txt" />
-    <Text Include="Resource\References\OperatingSystem\ACE\The ACE Programmer%27s Guide.txt" />
-    <Text Include="Resource\References\GameDesign\GameDesign.txt" />
-    <Text Include="Resource\References\GameDesign\Geometry\Geometry.txt" />
-    <Text Include="Resource\References\GameDesign\Geometry\3D Math Primer for Graphics and Game Development.txt" />
-    <Text Include="Resource\References\GameDesign\Geometry\Geometric Tools for Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Geometry\Mathematics for 3D Game Programming and Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Geometry\Procedural Elements for Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\3D Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\3D Games.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Computer Graphics Principles and Practice.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Fundamentals of Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Interactive Computer Graphics.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\Michael Abrash%27s Graphics Programming Black Book.txt" />
-    <Text Include="Resource\References\GameDesign\Graphics\The Cg Tutorial.txt" />
-    <Text Include="Resource\References\SoftwareDesign\SoftwareDesign.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\UML.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\Applying UML and Patterns.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\Object-Oriented Modeling and Design with UML.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\Sams Teach Yourself UML in 24 Hours.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\The Unified Modeling Language Reference Manual.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\The Unified Modeling Language User Guide.txt" />
-    <Text Include="Resource\References\SoftwareDesign\UML\UML Distilled A Brief Guide to the Standard Object Modeling Language.txt" />
-    <Text Include="Resource\References\OtherLanguages\OtherLanguages.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Database.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\A First Course in Database Systems.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Data Mining Concepts and Techniques.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Data Mining Practical Machine Learning Tools and Techniques.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Database Design &amp; Relational Theory.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Database System Concepts.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Database System Implementation.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Database Systems The Complets Book.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Mining the Social Web.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Refactoring Databases Evolutionary Database Design.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Seven Databases in Seven Weeks.txt" />
-    <Text Include="Resource\References\OtherLanguages\Database\Transaction Processing Concepts and Techniques.txt" />
-    <Text Include="Resource\References\Libs\Libs.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\CoreTools.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\boost.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\CppCoreGuidelines.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\cppunit.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\freetype.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\GSL.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\loki.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\Openrj.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\Pantheios.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\shwild.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\stlsoft.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\TIFF.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\Visual Leak Detector.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\zlib.txt" />
-    <Text Include="Resource\References\Libs\CoreTools\Zthread.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngine\ThreadingCoreRenderEngine.h" />

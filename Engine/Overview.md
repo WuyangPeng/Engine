@@ -1,4 +1,4 @@
-/// @mainpage Threading Core Render Engine API Documentation
+/// @mainpage Threading Core Render Engine API 文档
 
 @copyright Copyright (c) 2011-2020
 Threading Core Render Engine
@@ -6,7 +6,7 @@ Threading Core Render Engine
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.5.2.5
+@version 0.6.0.0
 标准：std:c++17
 
 @date 2020/12/06 0:23
@@ -20,7 +20,7 @@ Threading Core Render Engine
 @section sec_Overview 概述
 
 引擎包含十七个模块，七个层级：
- 
+
 第一层：系统（System）。 
 
 第二层：核心工具（CoreTools）。 
@@ -37,8 +37,24 @@ Threading Core Render Engine
 
 @section sec_Detail 详细说明
 
-详细说明在这里。
+@li @ref page_Documentation
 
 @section sec_SeeAlso 参见
- 
 
+@li @ref page_CoreTools_Base 
+
+@page page_Documentation 说明
+
+@link group_Documentation \b 查看所有说明 @endlink
+
+@defgroup group_Documentation 说明
+有关详细说明，请参见 @ref page_Documentation 。 
+
+@page page_CoreTools_Base The CoreTools Base 
+
+详细说明在这里。
+
+@link group_CoreTools_Base \b View All CoreTools Classes @endlink
+
+@defgroup group_CoreTools_Base 核心工具库基础功能
+有关详细说明，请参见 @ref page_CoreTools_Base 。

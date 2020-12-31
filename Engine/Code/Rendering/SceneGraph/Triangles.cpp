@@ -65,7 +65,7 @@ Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSha
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+  
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Triangles)
 
@@ -391,7 +391,7 @@ const auto modelDirectionVector = worldInverseTransform * direction;
                 auto vertex2 = vertexBufferAccessor.GetPosition<Vector3D>(triangleIndex.GetThirdIndex());
                 const Triangle3 triangle{ vertex0, vertex1, vertex2 };
 
-                Mathematics::StaticFindIntersectorLine3Triangle3f intersector{ line, triangle };
+                Mathematics::FloatStaticFindIntersectorLine3Triangle3 intersector{ line, triangle };
 
                 if (intersector.IsIntersection() && tMin <= intersector.GetLineParameter() &&
                     intersector.GetLineParameter() <= tMax && SMART_POINTER_SINGLETON.IsSmartPointer(this))

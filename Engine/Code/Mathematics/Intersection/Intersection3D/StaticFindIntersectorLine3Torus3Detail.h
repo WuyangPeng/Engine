@@ -56,32 +56,32 @@ void Mathematics::StaticFindIntersectorLine3Torus3<Real>
     // Solve the quartic.
 	PolynomialRoots<Real> proots{ Math::GetZeroTolerance() };
     proots.FindBisection(poly, 6);
-    mQuantity = proots.GetCount();
+    m_Quantity = proots.GetCount();
 	auto begin = proots.GetBegin();
 	auto end = proots.GetEnd();
     // Get the intersection points.
 	auto i = 0;
 	for (; begin != end;++begin)
     {
-		mPoint[i] = mLine.GetOrigin() + (*begin)*mLine.GetDirection();
+		m_Point[i] = mLine.GetOrigin() + (*begin)*mLine.GetDirection();
 		++i;
     }
 
-	this->SetIntersectionType(mQuantity > 0 ? IntersectionType::Point : IntersectionType::Empty);
+	this->SetIntersectionType(m_Quantity > 0 ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 template <typename Real>
 int Mathematics::StaticFindIntersectorLine3Torus3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Torus3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TORUS3_DETAIL_H

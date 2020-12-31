@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -32,27 +32,28 @@ namespace Mathematics
 		using Sphere3 = Sphere3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicTestIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tmax,
 												const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Plane3 GetHalfspace() const;
-		const Sphere3 GetSphere() const;
+	CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Plane3 GetHalfspace() const;
+        [[nodiscard]] const Sphere3 GetSphere() const;
 
 	private:
 		// Dynamic queries.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mHalfspace;
-		Sphere3 mSphere;
+		Plane3 m_Halfspace;
+		Sphere3 m_Sphere;
 	};
 
-	using DynamicTestIntersectorHalfspace3Sphere3f = DynamicTestIntersectorHalfspace3Sphere3<float>;
-	using DynamicTestIntersectorHalfspace3Sphere3d = DynamicTestIntersectorHalfspace3Sphere3<double>;
+	using FloatDynamicTestIntersectorHalfspace3Sphere3 = DynamicTestIntersectorHalfspace3Sphere3<float>;
+	using DoubleDynamicTestIntersectorHalfspace3Sphere3 = DynamicTestIntersectorHalfspace3Sphere3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_H

@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -24,27 +24,28 @@ namespace Mathematics
 		using Vector3D = Vector3D<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		 using Math = typename ParentType::Math;
 
 	public:
 		DynamicTestIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, Real tmax,
 										   const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-		// Object access.
-		const Plane3 GetPlane0() const;
-		const Plane3 GetPlane1() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane0() const;
+                [[nodiscard]] const Plane3 GetPlane1() const;
 
 	private:
 		// Dynamic intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mPlane0;
-		Plane3 mPlane1;
+		Plane3 m_Plane0;
+		Plane3 m_Plane1;
 	};
 
-	using DynamicTestIntersectorPlane3Plane3f = DynamicTestIntersectorPlane3Plane3<float>;
-	using DynamicTestIntersectorPlane3Plane3d = DynamicTestIntersectorPlane3Plane3<double>;
+	using FloatDynamicTestIntersectorPlane3Plane3 = DynamicTestIntersectorPlane3Plane3<float>;
+	using DoubleDynamicTestIntersectorPlane3Plane3 = DynamicTestIntersectorPlane3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_PLANE3_PLANE3_H

@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorLine3Sphere3<Real>
 	::StaticTestIntersectorLine3Sphere3 (const Line3& line,const Sphere3& sphere)
-	: mLine{ line }, mSphere{ sphere }
+	: mLine{ line }, m_Sphere{ sphere }
 {
 	Test();
 }
@@ -28,15 +28,15 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorLine3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Sphere3<Real>
 	::Test()
 {
-    auto diff = mLine.GetOrigin() - mSphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
+    auto diff = mLine.GetOrigin() - m_Sphere.GetCenter();
+	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
 	if (discr >= Math<Real>::GetZero())

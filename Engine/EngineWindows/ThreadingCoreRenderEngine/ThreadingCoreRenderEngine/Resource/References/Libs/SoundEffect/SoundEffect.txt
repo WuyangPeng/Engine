@@ -1,8 +1,0 @@
-参考文献·开源库·音效
-
-1.	OpenAL Soft 
-2.  ogg 
-3.	vorbis
-4.  freealut 
-5.	OgreAL
- 

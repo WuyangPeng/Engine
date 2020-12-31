@@ -43,7 +43,7 @@ namespace Mathematics
 
     private:
         // The number of control points and degree for the curve.
-        int mQuantity, mDegree;
+        int m_Quantity, mDegree;
 
         // The storage for knots and basis evaluation.
         mutable Real* mValue;  // mValue[0..degree]

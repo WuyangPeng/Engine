@@ -14,7 +14,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Capsule3<Real>
 	::StaticFindIntersectorSegment3Capsule3(const Segment3& rkSegment, const Capsule3& rkCapsule)
-	: mSegment{ rkSegment }, mCapsule{ rkCapsule }
+	: m_Segment{ rkSegment }, mCapsule{ rkCapsule }
 {
 	Find();
 }
@@ -23,7 +23,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -37,22 +37,22 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorSegment3Capsule3<Real>
 	::Find()
 {
-	auto quantity = StaticFindIntersectorLine3Capsule3<Real>::Find(mSegment.GetCenterPoint(),mSegment.GetDirection(), mCapsule, mParameter);
+	auto quantity = StaticFindIntersectorLine3Capsule3<Real>::Find(m_Segment.GetCenterPoint(),m_Segment.GetDirection(), mCapsule, mParameter);
 
-    mQuantity = 0;
+    m_Quantity = 0;
     for (auto i = 0; i < quantity; ++i)
     {
-        if (Math::FAbs(mParameter[i]) <= mSegment.GetExtent())
+        if (Math::FAbs(mParameter[i]) <= m_Segment.GetExtent())
         {
-            mPoint[mQuantity++] = mSegment.GetCenterPoint() + mParameter[i]*mSegment.GetDirection();
+            m_Point[m_Quantity++] = m_Segment.GetCenterPoint() + mParameter[i]*m_Segment.GetDirection();
         }
     }
 
-    if (mQuantity == 2)
+    if (m_Quantity == 2)
     {
 		this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (mQuantity == 1)
+    else if (m_Quantity == 1)
     {
 		this->SetIntersectionType(IntersectionType::Point);
     }
@@ -66,14 +66,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorSegment3Capsule3<Real>
 	::GetQuantity() const
 {
-    return mQuantity;
+    return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>
 	::GetPoint(int i) const
 {
-    return mPoint[i];
+    return m_Point[i];
 }
 
 template <typename Real>

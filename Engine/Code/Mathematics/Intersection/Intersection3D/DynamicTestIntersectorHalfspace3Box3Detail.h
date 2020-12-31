@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>
 	::DynamicTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mHalfspace{ halfspace }, mBox{ box }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Halfspace{ halfspace }, m_Box{ box }
 {
 	Test();
 }
@@ -21,14 +21,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>
 	::GetHalfspace() const
 {
-	return mHalfspace;
+	return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Box3<Real> Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>
 	::GetBox() const
 {
-	return mBox;
+	return m_Box;
 }
 
 template <typename Real>
@@ -41,10 +41,10 @@ void Mathematics::DynamicTestIntersectorHalfspace3Box3<Real>
 
 	auto fmin = Math::GetValue(0);
 	auto fmax = Math::GetValue(0);
-	IntersectorAxis<Real>::GetProjection(mHalfspace.GetNormal(), mBox, fmin, fmax);
+	FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), m_Box, fmin, fmax);
 
 	auto mContactTime = this->GetContactTime();
-	if (IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
+	if (FindIntersectorAxis<Real>::Test(m_Halfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, m_Halfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
 	{
 		SetContactTime(mContactTime);
 		this->SetIntersectionType(IntersectionType::Point);

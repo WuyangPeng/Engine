@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,7 +25,7 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
@@ -33,8 +33,8 @@ namespace Mathematics
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		const Line3 GetLine() const;
-		const Plane3 GetPlane() const;
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
 
 	private:
 		void Test();
@@ -45,8 +45,8 @@ namespace Mathematics
 		Plane3 m_Plane;
 	};
 
-	using StaticTestIntersectorLine3Plane3f = StaticTestIntersectorLine3Plane3<float>;
-	using StaticTestIntersectorLine3Plane3d = StaticTestIntersectorLine3Plane3<double>;
+	using FloatStaticTestIntersectorLine3Plane3 = StaticTestIntersectorLine3Plane3<float>;
+	using DoubleStaticTestIntersectorLine3Plane3 = StaticTestIntersectorLine3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_LINE3_PLANE3_H

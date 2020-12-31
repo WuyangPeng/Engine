@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Box3<Real>
 	::StaticFindIntersectorLine3Box3(const Line3& line, const Box3& box)
-	: mLine{ line }, mBox{ box }
+	: mLine{ line }, m_Box{ box }
 {
 	Find();
 }
@@ -28,7 +28,7 @@ template <typename Real>
 const Mathematics::Box3<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>
 	::GetBox() const
 {
-	return mBox;
+	return m_Box;
 }
 
 template <typename Real>
@@ -38,7 +38,7 @@ void Mathematics::StaticFindIntersectorLine3Box3<Real>
 	auto t0 = -Math::sm_MaxReal;
 	auto t1 = Math::sm_MaxReal;
 	auto mIntersectionType = 0;
-	DoClipping(t0, t1, mLine.GetOrigin(), mLine.GetDirection(), mBox, true, mQuantity, mPoint, mIntersectionType);
+	DoClipping(t0, t1, mLine.GetOrigin(), mLine.GetDirection(), m_Box, true, m_Quantity, m_Point, mIntersectionType);
 	this->SetIntersectionType(System::UnderlyingCastEnum<IntersectionType>(mIntersectionType));
 }
 
@@ -46,14 +46,14 @@ template <typename Real>
 int Mathematics::StaticFindIntersectorLine3Box3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Box3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 template <typename Real>

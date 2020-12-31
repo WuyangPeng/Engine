@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,31 +25,32 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		// If you want a fuzzy determination, set the epsilon value to a small
 		// positive number.
 		StaticTestIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = Math::sm_Zero);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Triangle3 GetTriangle() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane() const;
+                [[nodiscard]] const Triangle3 GetTriangle() const;
 
 	private:
 		// Static intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mPlane;
-		Triangle3 mTriangle;
+		Plane3 m_Plane;
+		Triangle3 m_Triangle;
 
 		// For fuzzy arithmetic.
 		Real mEpsilon;
 	};
 
-	using StaticTestIntersectorPlane3Triangle3f = StaticTestIntersectorPlane3Triangle3<float>;
-	using StaticTestIntersectorPlane3Triangle3d = StaticTestIntersectorPlane3Triangle3<double>;
+	using FloatStaticTestIntersectorPlane3Triangle3 = StaticTestIntersectorPlane3Triangle3<float>;
+	using DoubleStaticTestIntersectorPlane3Triangle3 = StaticTestIntersectorPlane3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_TRIANGLE3_H

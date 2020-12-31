@@ -54,7 +54,7 @@ namespace Mathematics
 		Real operator() (int xOrder, int yOrder, int zOrder, Real x, Real y,Real z) const;
 
 	private:
-		int mXBound, mYBound, mZBound, mQuantity;
+		int mXBound, mYBound, mZBound, m_Quantity;
 		Real mXMin, mXMax, mXSpacing, mInvXSpacing;
 		Real mYMin, mYMax, mYSpacing, mInvYSpacing;
 		Real mZMin, mZMax, mZSpacing, mInvZSpacing;

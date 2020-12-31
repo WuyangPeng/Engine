@@ -19,7 +19,7 @@ namespace Mathematics
 		// the boundary derivatives.
 		MATHEMATICS_ASSERTION_0(quantity >= 3 && F, "Invalid input\n");
 
-		mQuantity = quantity;
+		m_Quantity = quantity;
 		mF = F;
 		mPoly = NEW1<Polynomial>(quantity - 1);
 	}
@@ -33,7 +33,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpAkima1<Real>::GetQuantity() const
 	{
-		return mQuantity;
+		return m_Quantity;
 	}
 
 	template <typename Real>

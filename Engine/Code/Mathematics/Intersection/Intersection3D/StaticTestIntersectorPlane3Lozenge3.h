@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,31 +25,32 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Lozenge3 = Lozenge3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Lozenge3 GetLozenge() const;
+		 CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Plane3 GetPlane() const;
+                 [[nodiscard]] const Lozenge3 GetLozenge() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The lozenge is culled if it is on the negative
 		// side of the plane.
-		bool LozengeIsCulled() const;
+                [[nodiscard]] bool LozengeIsCulled() const;
 
 	private:
 		// Static intersection query.
 		void Test();
 
 		// The objects to intersect.		
-		Plane3 mPlane;
+		Plane3 m_Plane;
 		Lozenge3 mLozenge;
 	};
 
-	using StaticTestIntersectorPlane3Lozenge3f = StaticTestIntersectorPlane3Lozenge3<float>;
-	using StaticTestIntersectorPlane3Lozenge3d = StaticTestIntersectorPlane3Lozenge3<double>;
+	using FloatStaticTestIntersectorPlane3Lozenge3 = StaticTestIntersectorPlane3Lozenge3<float>;
+	using DoubleStaticTestIntersectorPlane3Lozenge3 = StaticTestIntersectorPlane3Lozenge3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_LOZENGE3_H

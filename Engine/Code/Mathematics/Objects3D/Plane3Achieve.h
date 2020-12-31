@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -132,6 +132,17 @@ void Mathematics::Plane3<Real>::SetPlane(const Vector3D& normal, const Vector3D&
     m_Normal = normal;
 
     m_Constant = Vector3DTools::DotProduct(m_Normal, point);
+}
+
+template <typename Real>
+const Mathematics::Plane3<Real> Mathematics::Plane3<Real>::GetMove(Real t, const Vector3D& velocity) const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    auto movedConstant = GetConstant() + t * Vector3DTools::DotProduct(GetNormal(), velocity);
+    Plane3 movedPlane{ GetNormal(), movedConstant, m_Epsilon };
+
+    return movedPlane;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H

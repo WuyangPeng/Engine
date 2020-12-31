@@ -1,7 +1,0 @@
-算法设计技巧与分析（Algorithms Design Techniques and Analysis）
-
-☆
-作者：M.H.Alsuwaiyel
-
-知识点 
-1.	算法基础知识。  

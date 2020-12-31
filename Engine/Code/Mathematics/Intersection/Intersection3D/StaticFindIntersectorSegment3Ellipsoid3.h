@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Ellipsoid3 = Ellipsoid3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Ellipsoid3 GetEllipsoid() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
 
 		// The intersection set.  The ellipsoid is considered a solid, so if the
 		// segment is stricly inside the ellipsoid, the intersection type is
@@ -42,24 +43,24 @@ namespace Mathematics
 		// inside the ellipsoid, just compare the segment end points to the
 		// values from GetPoint(i) whenever IT_SEGMENT is the type.  If they
 		// are the same, consider this a "no intersection".
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection queries.
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
+		Segment3 m_Segment;
 		Ellipsoid3 mEllipsoid;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorSegment3Ellipsoid3f = StaticFindIntersectorSegment3Ellipsoid3<float>;
-	using StaticFindIntersectorSegment3Ellipsoid3d = StaticFindIntersectorSegment3Ellipsoid3<double>;
+	using FloatStaticFindIntersectorSegment3Ellipsoid3 = StaticFindIntersectorSegment3Ellipsoid3<float>;
+	using DoubleStaticFindIntersectorSegment3Ellipsoid3 = StaticFindIntersectorSegment3Ellipsoid3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_ELLIPSOID3_H

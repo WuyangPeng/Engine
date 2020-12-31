@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,7 +25,7 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Plane3 = Plane3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon = Math::GetZeroTolerance());
@@ -34,10 +34,10 @@ namespace Mathematics
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		const Line3 GetLine() const;
-		const Plane3 GetPlane() const;
+		 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
 
-		Real GetLineParameter() const;
+		 [[nodiscard]] Real GetLineParameter() const;
 
 	private:
 		void Find();
@@ -51,8 +51,8 @@ namespace Mathematics
 		Real m_LineParameter;
 	};
 
-	using StaticFindIntersectorLine3Plane3f = StaticFindIntersectorLine3Plane3<float>;
-	using StaticFindIntersectorLine3Plane3d = StaticFindIntersectorLine3Plane3<double>;
+	using FloatStaticFindIntersectorLine3Plane3 = StaticFindIntersectorLine3Plane3<float>;
+	using DoubleStaticFindIntersectorLine3Plane3 = StaticFindIntersectorLine3Plane3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H

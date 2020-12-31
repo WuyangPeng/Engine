@@ -1,9 +1,0 @@
-精通Linux（How Linux Works）
-（第二版）
-
-☆
-作者：Brian Ward
-
-知识点 
-1.	Linux基础知识。 
-  

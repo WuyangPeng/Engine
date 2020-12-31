@@ -14,7 +14,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
 	::StaticTestIntersectorTriangle3Sphere3 (const Triangle3& triangle, const Sphere3& sphere)
-	: mTriangle{ triangle }, mSphere{ sphere }
+	: m_Triangle{ triangle }, m_Sphere{ sphere }
 {
 	Test();
 }
@@ -23,23 +23,23 @@ template <typename Real>
 const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
 	::GetTriangle () const
 {
-    return mTriangle;
+    return m_Triangle;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
 	::GetSphere () const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
 	::Test ()
 {
-	DistancePoint3Triangle3<Real> calc{ mSphere.GetCenter(), mTriangle };
+	DistancePoint3Triangle3<Real> calc{ m_Sphere.GetCenter(), m_Triangle };
 	auto sqrDistance = calc.GetSquared().GetDistance();
-	auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
+	auto rSqr = m_Sphere.GetRadius()*m_Sphere.GetRadius();
     if( sqrDistance <= rSqr)
 	{
 		this->SetIntersectionType(IntersectionType::Other);

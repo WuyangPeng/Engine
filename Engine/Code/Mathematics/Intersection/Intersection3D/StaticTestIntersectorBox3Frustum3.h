@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,14 +25,15 @@ namespace Mathematics
 		using Box3 = Box3<Real>;
 		using Frustum3 = Frustum3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorBox3Frustum3(const Box3& box, const Frustum3& frustum);
 
-		// Object access.
-		const Box3 GetBox() const;
-		const Frustum3 GetFrustum() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Box3 GetBox() const;
+                [[nodiscard]] const Frustum3 GetFrustum() const;
 
 	private:
 		// Test-intersection query.
@@ -40,12 +41,12 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Box3 mBox;
+		Box3 m_Box;
 		Frustum3 mFrustum;
 	};
 
-	using StaticTestIntersectorBox3Frustum3f = StaticTestIntersectorBox3Frustum3<float>;
-	using StaticTestIntersectorBox3Frustum3d = StaticTestIntersectorBox3Frustum3<double>;
+	using FloatStaticTestIntersectorBox3Frustum3 = StaticTestIntersectorBox3Frustum3<float>;
+	using DoubleStaticTestIntersectorBox3Frustum3 = StaticTestIntersectorBox3Frustum3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX3_FRUSTUM3_H

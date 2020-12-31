@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -71,6 +71,8 @@ namespace Mathematics
         [[nodiscard]] NumericalValueSymbol WhichSide(const Vector3D& point) const noexcept;
 
         void SetPlane(const Vector3D& normal, const Vector3D& point) noexcept;
+
+        [[nodiscard]] const Plane3 GetMove(Real t, const Vector3D& velocity) const noexcept;
 
     private:
         Vector3D m_Normal;

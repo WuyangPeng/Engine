@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -24,7 +24,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE ObjectName final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName, = default);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName, DESTRUCTOR_DEFAULT);
 
     public:
         explicit ObjectName(const std::string& name);

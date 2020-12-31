@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	作者：彭武阳，彭晔恩，彭晔泽
@@ -29,7 +29,7 @@ namespace Network
     {
     public:
         // 类会返回内部变量的引用，所以无法使用延迟复制。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SockAddress, = default);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SockAddress, DESTRUCTOR_DEFAULT);
 
     public:
         explicit SockAddress(const ConfigurationStrategy& configurationStrategy);

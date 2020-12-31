@@ -1,4 +1,4 @@
-//	Copyright (c) 2011-2020
+//	Copyright (c) 2010-2020
 //	Threading Core Render Engine
 //
 //	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
@@ -22,7 +22,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE ObjectLink final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectLink, = default);
+        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectLink, DESTRUCTOR_DEFAULT);
         using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
         using LinkSequentialContainerIter = LinkSequentialContainer::iterator;
         using LinkSequentialContainerConstIter = LinkSequentialContainer::const_iterator;

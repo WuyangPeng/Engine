@@ -40,7 +40,7 @@ private:
     static Real Integrand (Real t, const BSplineReduction* data);
 
     int mDegree;
-    int mQuantity[2];
+    int m_Quantity[2];
     int mNumKnots[2];  // N+D+2
     Real* mKnot[2];
 

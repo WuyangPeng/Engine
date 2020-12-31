@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,18 +25,19 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Capsule3 = Capsule3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Capsule3 GetCapsule() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Capsule3 GetCapsule() const;
 
 		// The intersection set.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection queries.		
@@ -47,16 +48,16 @@ namespace Mathematics
 		Capsule3 mCapsule;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 
 	public:
 		// Shared by IntrRay3Capsule3 and IntrSegment3Capsule3.
-		static int Find(const Vector3D& origin, const Vector3D& dir, const Capsule3& capsule, Real t[2]);
+            [[nodiscard]] static int Find(const Vector3D& origin, const Vector3D& dir, const Capsule3& capsule, Real t[2]);
 	};
 
-	using StaticFindIntersectorLine3Capsule3f = StaticFindIntersectorLine3Capsule3<float>;
-	using StaticFindIntersectorLine3Capsule3d = StaticFindIntersectorLine3Capsule3<double>;
+	using FloatStaticFindIntersectorLine3Capsule3 = StaticFindIntersectorLine3Capsule3<float>;
+	using DoubleStaticFindIntersectorLine3Capsule3 = StaticFindIntersectorLine3Capsule3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_H

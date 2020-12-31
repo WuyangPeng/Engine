@@ -12,7 +12,7 @@
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	::StaticFindIntersectorSphere3Cone3(const Sphere3& rkSphere,const Cone3& rkCone)
-	: mSphere{ rkSphere }, mCone{ rkCone }
+	: m_Sphere{ rkSphere }, mCone{ rkCone }
 {
 	Find();
 }
@@ -21,7 +21,7 @@ template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
@@ -36,8 +36,8 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	::Find()
 {
     // Test whether cone vertex is in sphere.
-	auto diff = mSphere.GetCenter() - mCone.GetVertex();
-	auto rSqr = mSphere.GetRadius()*mSphere.GetRadius();
+	auto diff = m_Sphere.GetCenter() - mCone.GetVertex();
+	auto rSqr = m_Sphere.GetRadius()*m_Sphere.GetRadius();
 	auto lenSqr = Vector3DTools::VectorMagnitudeSquared(diff);
     if (lenSqr <= rSqr)
     {
@@ -81,7 +81,7 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	auto t = test - Math::Sqrt(discr);
 	auto B = diff - dot*mCone.GetAxis();
 	auto tmp = mCone.GetSinAngle() / uLen;
-	mPoint = t*(mCone.GetCosAngle()*mCone.GetAxis() + tmp*B);
+	m_Point = t*(mCone.GetCosAngle()*mCone.GetAxis() + tmp*B);
 
 	if (discr >= Math<Real>::GetZero() && test >= Math<Real>::GetZero())
 	{
@@ -97,7 +97,7 @@ template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>
 	::GetPoint() const
 {
-    return mPoint;
+    return m_Point;
 }
  
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_DETAIL_H

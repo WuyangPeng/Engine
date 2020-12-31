@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -13,7 +13,7 @@ template <typename Real>
 Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::DynamicTestIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1,
 										 Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mPlane0{ plane0 }, mPlane1{ plane1 }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Plane0{ plane0 }, m_Plane1{ plane1 }
 {
 	Test();
 }
@@ -22,21 +22,21 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::GetPlane0() const
 {
-	return mPlane0;
+	return m_Plane0;
 }
 
 template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::GetPlane1() const
 {
-	return mPlane1;
+	return m_Plane1;
 }
 
 template <typename Real>
 void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	::Test()
 {
-	auto dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), mPlane1.GetNormal());
+	auto dot = Vector3DTools::DotProduct(m_Plane0.GetNormal(), m_Plane1.GetNormal());
 	if (Math::FAbs(dot) < Math::GetValue(1) - Math::GetZeroTolerance())
 	{
 		// The planes are initially intersecting.  Linear velocities will
@@ -51,12 +51,12 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	if (dot >= Math::GetValue(0))
 	{
 		// Normals are in same direction, need to look at c0-c1.
-		cDiff = mPlane0.GetConstant() - mPlane1.GetConstant();
+		cDiff = m_Plane0.GetConstant() - m_Plane1.GetConstant();
 	}
 	else
 	{
 		// Normals are in opposite directions, need to look at c0+c1.
-		cDiff = mPlane0.GetConstant() + mPlane1.GetConstant();
+		cDiff = m_Plane0.GetConstant() + m_Plane1.GetConstant();
 	}
 
 	if (Math::FAbs(cDiff) < Math::GetZeroTolerance())
@@ -70,7 +70,7 @@ void Mathematics::DynamicTestIntersectorPlane3Plane3<Real>
 	// The planes are parallel and separated.  Determine when they will
 	// become coplanar.
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-	dot = Vector3DTools::DotProduct(mPlane0.GetNormal(), relVelocity);
+	dot = Vector3DTools::DotProduct(m_Plane0.GetNormal(), relVelocity);
 	if (Math::FAbs(dot) < Math::GetZeroTolerance())
 	{
 		// The relative motion of the planes keeps them parallel.

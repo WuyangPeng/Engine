@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,47 +25,48 @@ namespace Mathematics
 		using Segment3 = Segment3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle);
 
-		// Object access.
-		const Segment3 GetSegment() const;
-		const Triangle3 GetTriangle() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+		 [[nodiscard]] const Segment3 GetSegment() const;
+                [[nodiscard]] const Triangle3 GetTriangle() const;
 
 		// Find-intersection query.  The point of intersection is
 		//   P = origin + t*direction = b0*V0 + b1*V1 + b2*V2		
-		Real GetSegmentParameter() const;
-		Real GetTriBary0() const;
-		Real GetTriBary1() const;
-		Real GetTriBary2() const;
+		 [[nodiscard]] Real GetSegmentParameter() const;
+                [[nodiscard]] Real GetTriBary0() const;
+                 [[nodiscard]] Real GetTriBary1() const;
+                [[nodiscard]] Real GetTriBary2() const;
 
 		// NOTE: These functions were intended to be called after the dynamic
 		// find-intersection query.  For the 'bool Find()' query, it was intended
 		// that you use GetSegmentParameter() or the three GetTriBary?() functions
 		// to compute the contact point yourself.  Now the functions also support
 		// the 'bool Find()' query.
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		void Find();
 
 		// The objects to intersect.
-		Segment3 mSegment;
-		Triangle3 mTriangle;
+		Segment3 m_Segment;
+		Triangle3 m_Triangle;
 
 		// Information about the stationary intersection set.
-		Real mSegmentParameter, mTriBary0, mTriBary1, mTriBary2;
+		Real m_SegmentParameter, m_TriBary0, m_TriBary1, m_TriBary2;
 
 		// Information about the dynamic intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorSegment3Triangle3f = StaticFindIntersectorSegment3Triangle3<float>;
-	using StaticFindIntersectorSegment3Triangle3d = StaticFindIntersectorSegment3Triangle3<double>;
+	using FloatStaticFindIntersectorSegment3Triangle3 = StaticFindIntersectorSegment3Triangle3<float>;
+	using DoubleStaticFindIntersectorSegment3Triangle3 = StaticFindIntersectorSegment3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_TRIANGLE3_H

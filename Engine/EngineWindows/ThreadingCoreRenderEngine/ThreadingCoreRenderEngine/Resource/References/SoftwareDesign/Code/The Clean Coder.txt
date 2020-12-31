@@ -1,7 +1,0 @@
-代码整洁之道：程序员的职业素养（The Clean Coder）
-
-★★★
-作者：Robert C.Martin 
-
-知识点 
-1.	代码基础知识。

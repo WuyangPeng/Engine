@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>
 	::StaticTestIntersectorHalfspace3Sphere3 (const Plane3& rkHalfspace, const Sphere3& rkSphere)
-	:mHalfspace{ rkHalfspace }, mSphere{ rkSphere }
+	:m_Halfspace{ rkHalfspace }, m_Sphere{ rkSphere }
 {
 	Test();
 }
@@ -22,22 +22,22 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>
 	::GetHalfspace() const
 {
-    return mHalfspace;
+    return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>
 	::Test()
 {
-	auto distance = Vector3DTools::DotProduct(mHalfspace.GetNormal(),mSphere.GetCenter());
-	if (distance <= mHalfspace.GetConstant() + mSphere.GetRadius())
+	auto distance = Vector3DTools::DotProduct(m_Halfspace.GetNormal(),m_Sphere.GetCenter());
+	if (distance <= m_Halfspace.GetConstant() + m_Sphere.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

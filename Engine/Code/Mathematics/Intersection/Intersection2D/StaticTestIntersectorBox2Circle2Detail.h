@@ -1,50 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 15:57)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/23 11:17)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
-#define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H 
+#define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
 
 #include "StaticTestIntersectorBox2Circle2.h"
-#include "Mathematics/Distance/Distance2D/DistancePoint2Box2.h"
 
-template <typename Real>
-Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::StaticTestIntersectorBox2Circle2(const Box2& box, const Circle2& circle, const Real epsilon)
-	:ParentType{ epsilon }, m_Box{ box }, m_Circle{ circle }
-{
-	Test();
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_ACHIEVE)
 
-template <typename Real>
-typename const Mathematics::StaticTestIntersectorBox2Circle2<Real>::Box2 Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::GetBox() const
-{
-	return m_Box;
-}
+    #include "StaticTestIntersectorBox2Circle2Achieve.h"
 
-template <typename Real>
-typename const Mathematics::StaticTestIntersectorBox2Circle2<Real>::Circle2 Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::GetCircle() const
-{
-	return m_Circle;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_ACHIEVE)
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorBox2Circle2<Real>
-	::Test()
-{
-	auto distance = DistancePoint2Box2<Real>(m_Circle.GetCenter(), m_Box).Get().GetDistance();
-	if (distance <= m_Circle.GetRadius())
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_BOX2_CIRCLE2_DETAIL_H

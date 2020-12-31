@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
@@ -7,8 +7,8 @@
 ///	标准：std:c++17
 ///	引擎版本：0.5.2.5 (2020/12/14 12:58)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_ACHIEVE_H
-#define MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_ACHIEVE_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
+#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
 
 #include "DistancePoint3Frustum3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -433,8 +433,8 @@ typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathema
     }
 
     // 转换回原始坐标。
-    const Vector3D closestPoint = m_Frustum.GetOrigin() + closest.GetX() * m_Frustum.GetRightVector() +
-                                  closest.GetY() * m_Frustum.GetUpVector() + closest.GetZ() * m_Frustum.GetDirectionVector();
+    const auto closestPoint = m_Frustum.GetOrigin() + closest.GetX() * m_Frustum.GetRightVector() +
+                              closest.GetY() * m_Frustum.GetUpVector() + closest.GetZ() * m_Frustum.GetDirectionVector();
 
     return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(diff), Math::GetValue(0), m_Point, closestPoint };
 }
@@ -455,4 +455,4 @@ typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathema
     return distanceResult;
 }
 
-#endif  // MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_ACHIEVE_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H

@@ -13,7 +13,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere)
-	: mSegment{ segment }, mSphere{ sphere }
+	: m_Segment{ segment }, m_Sphere{ sphere }
 {
      ZeroThreshold = Math::GetZeroTolerance();
 	 Test();
@@ -23,23 +23,23 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
 const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	::GetSphere() const
 {
-    return mSphere;
+    return m_Sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>	
 	::Test()
 {
-	auto diff = mSegment.GetCenterPoint() - mSphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - mSphere.GetRadius()*mSphere.GetRadius();
-	auto a1 = Vector3DTools::DotProduct(mSegment.GetDirection(),diff);
+	auto diff = m_Segment.GetCenterPoint() - m_Sphere.GetCenter();
+	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
+	auto a1 = Vector3DTools::DotProduct(m_Segment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
     if (discr < Math<Real>::GetZero())
     {
@@ -47,8 +47,8 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
         return;
     }
 
-	auto tmp0 = mSegment.GetExtent()*mSegment.GetExtent() + a0;
-	auto tmp1 = (Math::GetValue(2))*a1*mSegment.GetExtent();
+	auto tmp0 = m_Segment.GetExtent()*m_Segment.GetExtent() + a0;
+	auto tmp1 = (Math::GetValue(2))*a1*m_Segment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
     if (qm*qp <= Math<Real>::GetZero())
@@ -57,7 +57,7 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
         return;
     }
 
-	if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < mSegment.GetExtent())
+	if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < m_Segment.GetExtent())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

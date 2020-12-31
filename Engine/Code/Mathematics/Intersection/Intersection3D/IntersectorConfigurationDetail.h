@@ -1,24 +1,21 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 16:59)
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.0 (2020/12/25 14:32)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H
 
 #include "IntersectorConfiguration.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_CONFIGURATION_DETAIL) 
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_CONFIGURATION_ACHIEVE)
 
-template <typename Real>
-Mathematics::IntersectorConfiguration<Real>
-	::IntersectorConfiguration() noexcept
-	:mMap{}, mIndex{}, mMin{}, mMax{}
-{
+    #include "IntersectorConfigurationAchieve.h"
 
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_CONFIGURATION_ACHIEVE)
 
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_INTERSECTOR_CONFIGURATION_DETAIL)
-
-#endif // MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_DETAIL_H

@@ -1,7 +1,0 @@
-C++ 必知必会（C++ Common Knowledge）
-
-★★
-作者：Stephen C. Dewhurst
-
-知识点 
-1.	C++ 基础知识。 

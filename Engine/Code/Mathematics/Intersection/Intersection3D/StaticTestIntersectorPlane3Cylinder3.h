@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -28,31 +28,32 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Cylinder3 = Cylinder3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder);
 
-		// Object access.
-		const Plane3 GetPlane() const;
-		const Cylinder3 GetCylinder() const;
+CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Plane3 GetPlane() const;
+[[nodiscard]] const Cylinder3 GetCylinder() const;
 
 		// Culling support.  The view frustum is assumed to be on the positive
 		// side of the plane.  The cylinder is culled if it is on the negative
 		// side of the plane.
-		bool CylinderIsCulled() const;
+[[nodiscard]] bool CylinderIsCulled() const;
 
 	private:
 		// Static intersection query for a *finite* cylinder.
 		void Test();
 
 		// The objects to intersect.
-		Plane3 mPlane;
+		Plane3 m_Plane;
 		Cylinder3 mCylinder;
 	};
 
-	using StaticTestIntersectorPlane3Cylinder3f = StaticTestIntersectorPlane3Cylinder3<float>;
-	using StaticTestIntersectorPlane3Cylinder3d = StaticTestIntersectorPlane3Cylinder3<double>;
+	using FloatStaticTestIntersectorPlane3Cylinder3 = StaticTestIntersectorPlane3Cylinder3<float>;
+	using DoubleStaticTestIntersectorPlane3Cylinder3 = StaticTestIntersectorPlane3Cylinder3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CYLINDER3_H

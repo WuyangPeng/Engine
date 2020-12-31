@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 //
@@ -27,20 +27,20 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3DTools = Vector3DTools<Real>;
-        using Math = Math<Real>;
+       using Math = typename ParentType::Math;
 
     public:
         StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        const Line3 GetLine() const;
-        const Triangle3 GetTriangle() const;
+       [[nodiscard]] const Line3 GetLine() const;
+        [[nodiscard]] const Triangle3 GetTriangle() const;
 
-        Real GetLineParameter() const noexcept;
-        Real GetTriangleBary0() const noexcept;
-        Real GetTriangleBary1() const noexcept;
-        Real GetTriangleBary2() const;
+       [[nodiscard]] Real GetLineParameter() const noexcept;
+        [[nodiscard]] Real GetTriangleBary0() const noexcept;
+       [[nodiscard]] Real GetTriangleBary1() const noexcept;
+        [[nodiscard]] Real GetTriangleBary2() const;
 
     private:
         void Find();
@@ -57,8 +57,8 @@ namespace Mathematics
         Real m_TriangleBary2;
     };
 
-    using StaticFindIntersectorLine3Triangle3f = StaticFindIntersectorLine3Triangle3<float>;
-    using StaticFindIntersectorLine3Triangle3d = StaticFindIntersectorLine3Triangle3<double>;
+    using FloatStaticFindIntersectorLine3Triangle3 = StaticFindIntersectorLine3Triangle3<float>;
+    using DoubleStaticFindIntersectorLine3Triangle3 = StaticFindIntersectorLine3Triangle3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H

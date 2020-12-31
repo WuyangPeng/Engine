@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -8,15 +8,15 @@
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
 
 #include "DynamicFindIntersectorHalfspace3Segment3.h"
-#include "IntersectorAxis.h"
+#include "FindIntersectorAxis.h"
 #include "IntersectorConfiguration.h"
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::DynamicFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, mHalfspace{ halfspace }, mSegment{ segment }
+	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Halfspace{ halfspace }, m_Segment{ segment }
 {
-	mQuantity = 0;
+	m_Quantity = 0;
 	Find();
 }
 
@@ -24,14 +24,14 @@ template <typename Real>
 const Mathematics::Plane3<Real> Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::GetHalfspace() const
 {
-	return mHalfspace;
+	return m_Halfspace;
 }
 
 template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::GetSegment() const
 {
-	return mSegment;
+	return m_Segment;
 }
 
 template <typename Real>
@@ -42,13 +42,13 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	auto tlast = Math::sm_MaxReal;
 	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-	Vector3D segment[2]{ mSegment.GetBeginPoint(), mSegment.GetEndPoint() };
+	Vector3D segment[2]{ m_Segment.GetBeginPoint(), m_Segment.GetEndPoint() };
 
 	IntersectorConfiguration<Real> cfg;
-	IntersectorAxis<Real>::GetConfiguration(mHalfspace.GetNormal(), segment, cfg);
+	FindIntersectorAxis<Real>::GetConfiguration(m_Halfspace.GetNormal(), segment, cfg);
 
 	auto mContactTime = this->GetContactTime();
-	if (!IntersectorAxis<Real>::Test(mHalfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, mHalfspace.GetConstant(), cfg.mMin, cfg.mMax, this->GetTMax(), mContactTime, tlast))
+	if (!FindIntersectorAxis<Real>::Test(m_Halfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, m_Halfspace.GetConstant(), cfg.mMin, cfg.mMax, this->GetTMax(), mContactTime, tlast))
 	{
 		// Never intersecting.
 		this->SetIntersectionType(IntersectionType::Empty);
@@ -67,21 +67,21 @@ void Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	// Line on positive side (right).
 	if (cfg.mMap == IntersectorConfiguration<Real>::m11)
 	{
-		mQuantity = 1;
-		mPoint[0] = segment[cfg.mIndex[0]];
+		m_Quantity = 1;
+		m_Point[0] = segment[cfg.mIndex[0]];
 	}
 	else // cfg.mMap == IntersectorConfiguration<Real>::m2
 	{
-		mQuantity = 2;
-		mPoint[0] = segment[cfg.mIndex[0]];
-		mPoint[1] = segment[cfg.mIndex[1]];
+		m_Quantity = 2;
+		m_Point[0] = segment[cfg.mIndex[0]];
+		m_Point[1] = segment[cfg.mIndex[1]];
 	}
 
 	// Adjust points to the correct place in time, as well.
 	auto diff = mContactTime * this->GetRhsVelocity();
-	for (auto i = 0; i < mQuantity; ++i)
+	for (auto i = 0; i < m_Quantity; ++i)
 	{
-		mPoint[i] += diff;
+		m_Point[i] += diff;
 	}
 	this->SetIntersectionType(IntersectionType::Other);
 	SetContactTime(mContactTime);
@@ -92,14 +92,14 @@ template <typename Real>
 int Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::GetQuantity() const
 {
-	return mQuantity;
+	return m_Quantity;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorHalfspace3Segment3<Real>
 	::GetPoint(int i) const
 {
-	return mPoint[i];
+	return m_Point[i];
 }
 
 #endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H

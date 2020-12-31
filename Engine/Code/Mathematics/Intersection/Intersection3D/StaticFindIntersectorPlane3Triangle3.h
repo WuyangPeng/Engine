@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,40 +25,42 @@ namespace Mathematics
 		using Plane3 = Plane3<Real>;
 		using Triangle3 = Triangle3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		// If you want a fuzzy determination, set the epsilon value to a small
 		// positive number.
 		StaticFindIntersectorPlane3Triangle3(const Plane3& plane, const Triangle3& triangle, Real epsilon = Math::sm_Zero);
 
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
 		// Object access.
-		const Plane3 GetPlane() const;
-		const Triangle3 GetTriangle() const;
+                [[nodiscard]] const Plane3 GetPlane() const;
+                [[nodiscard]] const Triangle3 GetTriangle() const;
 
 		// The intersection set, which is empty, a point, a line segment, or the
 		// entire triangle (GetQuantity returns 0, 1, 2, or 3).
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection queries.
 		void Find();
 
 		// The objects to intersect.
-		Plane3 mPlane;
-		Triangle3 mTriangle;
+		Plane3 m_Plane;
+		Triangle3 m_Triangle;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[3];
+		int m_Quantity;
+		Vector3D m_Point[3];
 
 		// For fuzzy arithmetic.
 		Real mEpsilon;
 	};
 
-	using StaticFindIntersectorPlane3Triangle3f = StaticFindIntersectorPlane3Triangle3<float>;
-	using StaticFindIntersectorPlane3Triangle3d = StaticFindIntersectorPlane3Triangle3<double>;
+	using FloatStaticFindIntersectorPlane3Triangle3 = StaticFindIntersectorPlane3Triangle3<float>;
+	using DoubleStaticFindIntersectorPlane3Triangle3 = StaticFindIntersectorPlane3Triangle3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_TRIANGLE3_H

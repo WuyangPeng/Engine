@@ -1,25 +1,9 @@
 TODO Level 9
  
-0.5.2.5
+0.6.0.0
  
-13. （Distance）重构Distance模块。
-14. （Distance）导出Distance模块。
-15. （Distance）补全Distance模块。
-2.  （综合）数学库过多的使用抛出异常，精度错误不应该这么做，需要进行修改。
-3.  （综合）修改包围盒的FindIntersection函数，返回值改成一个pair，以表示是否找到及相交的包围盒，这里不适合抛出异常。
-4.  （综合）数学库的函数大部分要定义成noexcept。
-5.  （综合）修改数学库中使用的NEW1，有内存泄露的可能。
-6.  （综合）模板类的子类调用基类成员，之前使用using ParentType::GetZeroThreshold;这种方式，改成调用时改成this->GetZeroThreshold()。
-1.  （综合）增加数值精度的断言和不变式。 
-2.  （综合）根据用户宏的五个断言宏在模块中使用断言。
-3.  （综合）静态数组改成std::array。
-1.  （综合）考虑使用Math::FloatingPointEqual替换Math::Approximate来比较浮点数的近似相等。
-1.   （综合）看是否能简化导出模板的宏定义。 
-6.   （综合）将数学库的智能指针改成std::shared_ptr。
-1.  （综合）替换掉boost库的静态断言为标准语法。
-6.  （综合）外部库引用数学库时，需要包含Detail.h头文件。改成根据MATHEMATICS_EXPORT_TEMPLATE是否定义包含不同的头文件。
-8.  （综合）修改数学库中使用的static_cast<Real>(0.5)和Math<Real>::sm_Zero，改用其他方式简化。
+ 
+ 
+ 
 
-16. （Intersection）重构Intersection模块。
-17. （Intersection）导出Intersection模块。
-18. （Intersection）补全Intersection模块。 
+

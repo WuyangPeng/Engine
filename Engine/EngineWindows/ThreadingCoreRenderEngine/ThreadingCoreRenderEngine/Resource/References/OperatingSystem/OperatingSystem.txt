@@ -1,8 +1,0 @@
-参考文献·操作系统
-
-1.	WindowsAPI
-2.	ACE 
-3.	NetworkProgramming（网络编程）
-4.	Debugging（调试）
-5.	ConcurrentProgramming（并发编程）
-6.	Linux

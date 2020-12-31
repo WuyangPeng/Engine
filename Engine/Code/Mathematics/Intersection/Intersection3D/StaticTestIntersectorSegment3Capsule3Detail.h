@@ -14,7 +14,7 @@
 template <typename Real>
 Mathematics::StaticTestIntersectorSegment3Capsule3<Real>
 	::StaticTestIntersectorSegment3Capsule3 (const Segment3& rkSegment, const Capsule3& rkCapsule)
-	: mSegment{ rkSegment }, mCapsule{ rkCapsule }
+	: m_Segment{ rkSegment }, mCapsule{ rkCapsule }
 {
 	Test();
 }
@@ -23,7 +23,7 @@ template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Capsule3<Real>
 	::GetSegment() const
 {
-    return mSegment;
+    return m_Segment;
 }
 
 template <typename Real>
@@ -37,7 +37,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorSegment3Capsule3<Real>
 	::Test()
 {
-	auto distance = DistanceSegment3Segment3<Real>(mSegment,mCapsule.GetSegment()).Get().GetDistance();
+	auto distance = DistanceSegment3Segment3<Real>(m_Segment,mCapsule.GetSegment()).Get().GetDistance();
 	if (distance <= mCapsule.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Other);

@@ -1,4 +1,4 @@
-///	Copyright (c) 2011-2020
+///	Copyright (c) 2010-2020
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
@@ -7,8 +7,8 @@
 ///	标准：std:c++17
 ///	引擎版本：0.5.2.5 (2020/12/14 12:55)
 
-#ifndef MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_H
-#define MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_H
+#ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_H
+#define MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_H
 
 #include "Mathematics/MathematicsDll.h"
 
@@ -50,4 +50,4 @@ namespace Mathematics
     using DoubleDistancePoint3Frustum3 = DistancePoint3Frustum3<double>;
 }
 
-#endif  // MATHEMATICS_DISTANCE_DIST_POINT3_FRUSTUM3_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_H

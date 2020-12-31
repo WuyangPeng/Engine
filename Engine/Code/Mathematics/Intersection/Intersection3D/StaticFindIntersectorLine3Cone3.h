@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2020
+// Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
 // 
@@ -25,22 +25,23 @@ namespace Mathematics
 		using Line3 = Line3<Real>;
 		using Cone3 = Cone3<Real>;
 		using Vector3DTools = Vector3DTools<Real>;
-		using Math = Math<Real>;
+		using Math = typename ParentType::Math;
 
 	public:
 		StaticFindIntersectorLine3Cone3(const Line3& line, const Cone3& cone);
 
-		// Object access.
-		const Line3 GetLine() const;
-		const Cone3 GetCone() const;
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	 [[nodiscard]] const Line3 GetLine() const;
+                [[nodiscard]] const Cone3 GetCone() const;
 
 		// The intersection set.  The possible intersection types are
 		//   IT_EMTPY:   no intersection
 		//   IT_POINT:   point[0] is the intersection point
 		//   IT_SEGMENT: <point[0],point[1]> is the intersection segment
 		//   IT_RAY:     point[0]+t*point[1] is the intersection ray
-		int GetQuantity() const;
-		const Vector3D GetPoint(int i) const;
+                [[nodiscard]] int GetQuantity() const;
+                [[nodiscard]] const Vector3D GetPoint(int index) const;
 
 	private:
 		// Static intersection query.
@@ -51,12 +52,12 @@ namespace Mathematics
 		Cone3 mCone;
 
 		// Information about the intersection set.
-		int mQuantity;
-		Vector3D mPoint[2];
+		int m_Quantity;
+		Vector3D m_Point[2];
 	};
 
-	using StaticFindIntersectorLine3Cone3f = StaticFindIntersectorLine3Cone3<float>;
-	using StaticFindIntersectorLine3Cone3d = StaticFindIntersectorLine3Cone3<double>;
+	using FloatStaticFindIntersectorLine3Cone3 = StaticFindIntersectorLine3Cone3<float>;
+	using DoubleStaticFindIntersectorLine3Cone3 = StaticFindIntersectorLine3Cone3<double>;
 }
 
 #endif // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CONE3_H
