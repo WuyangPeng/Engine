@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone);
+                StaticTestIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 

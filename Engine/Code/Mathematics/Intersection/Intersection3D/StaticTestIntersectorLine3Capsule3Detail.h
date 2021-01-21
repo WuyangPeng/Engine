@@ -11,33 +11,30 @@
 #include "Mathematics/Distance/Distance3D/DistanceLine3Segment3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Capsule3<Real>
-	::StaticTestIntersectorLine3Capsule3(const Line3& line,const Capsule3& capsule)
-	: mLine{ line }, mCapsule{ capsule }
+Mathematics::StaticTestIntersectorLine3Capsule3<Real>::StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon)
+    : m_Line{ line }, m_Capsule{ capsule }
 {
 	Test();
 }
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Capsule3<Real>
-	::GetLine() const
+const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Capsule3<Real>::GetLine() const noexcept
 {
-    return mLine;
+    return m_Line;
 }
 
 template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorLine3Capsule3<Real>
-	::GetCapsule() const
+const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorLine3Capsule3<Real>::GetCapsule() const noexcept
 {
-    return mCapsule;
+    return m_Capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Capsule3<Real>
 	::Test()
 {
-	auto distance = DistanceLine3Segment3<Real>(mLine, mCapsule.GetSegment()).Get().GetDistance();
-	if (distance <= mCapsule.GetRadius())
+	auto distance = DistanceLine3Segment3<Real>(m_Line, m_Capsule.GetSegment()).Get().GetDistance();
+	if (distance <= m_Capsule.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Point);
 	}

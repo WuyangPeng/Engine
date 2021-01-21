@@ -1,116 +1,118 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:46)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/08 10:45)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Mathematics/Intersection/DynamicIntersector.h"
+#include "Mathematics/Intersection/IntersectionFwd.h"
 #include "Mathematics/Objects3D/Line3.h"
-#include "Mathematics/Objects3D/Plane3.h" 
+#include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-#include "Mathematics/Intersection/DynamicIntersector.h" 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class DynamicFindIntersectorTriangle3Triangle3 : public  DynamicIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = DynamicFindIntersectorTriangle3Triangle3<Real>;
-		using ParentType = DynamicIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Triangle3 = Triangle3<Real>;
-		using Plane3 = Plane3<Real>;
-		using Line3 = Line3<Real>;
-		using  Vector3DTools = Vector3DTools<Real>;
-	 using Math = typename ParentType::Math;
+    template <typename Real>
+    class FindIntersectorTriangle3Triangle3Impl;
 
-	public:
-		DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax,
-												 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<double>>;
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<Real>>;
 
-	 [[nodiscard]] const Triangle3 GetTriangle0() const;
-                [[nodiscard]] const Triangle3 GetTriangle1() const;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Triangle3 : public DynamicIntersector<Real, Vector3D>
+    {
+    public:
+        using DynamicFindIntersectorTriangle3Triangle3Impl = FindIntersectorTriangle3Triangle3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorTriangle3Triangle3);
 
-		bool mReportCoplanarIntersections;  // default 'true'
+        using ParentType = DynamicIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Triangle3 = Triangle3<Real>;
+        using Plane3 = Plane3<Real>;
+        using Line3 = Line3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-		// The intersection set.
-                [[nodiscard]] int GetQuantity() const;
-                [[nodiscard]] const Vector3D GetPoint(int index) const;
+    public:
+        DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax,
+                                                 const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
-	private:
-		// Dynamic queries.
-		void Find();
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-	 [[nodiscard]] static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Real& fmin, Real& fmax);
+        [[nodiscard]] const Triangle3 GetTriangle0() const noexcept;
+        [[nodiscard]] const Triangle3 GetTriangle1() const noexcept;
 
-	 [[nodiscard]] static void TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, Real distance[3], int sign[3], int& positive, int& negative, int& zero);
+        [[nodiscard]] int GetQuantity() const;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-		static void GetInterval(const Triangle3& triangle, const Line3& line, const Real distance[3], const int sign[3], Real param[2]);
+    private:
+        using Intersection = std::vector<Vector3D>;
+        static constexpr auto sm_Size = 3;
+        using Vector3DContainer = std::array<Vector3D, sm_Size>;
 
-	 [[nodiscard]] bool ContainsPoint(const Triangle3& triangle, const Plane3& plane, const Vector3D& point);
+    private:
+        // 动态查询。
+        void Find();
 
-	 [[nodiscard]] bool IntersectsSegment(const Plane3& plane, const Triangle3& triangle, const Vector3D& end0, const Vector3D& end1);
+        class Configuration final
+        {
+        public:
+            static constexpr auto sm_IndexSize = 8;
+            using IndexContainer = std::array<int, sm_IndexSize>;
 
-	 [[nodiscard]] bool GetCoplanarIntersection(const Plane3& plane, const Triangle3& tri0, const Triangle3& tri1);
+            VertexProjectionMap m_Map;  // 顶点如何映射到投影间隔
+            IndexContainer m_Index;  // 顶点的排序索引
 
-		 [[nodiscard]] static bool TestOverlap(Real tmax, Real speed, Real umin, Real umax, Real vmin, Real vmax, Real& tfirst, Real& tlast);
+            // 间隔是 [min,max]
+            Real m_Min;
+            Real m_Max;
+        };
 
-		 [[nodiscard]] bool TestOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, Real& tfirst, Real& tlast);
+        struct IntersectInfo final
+        {
+            bool m_Result;
+            ContactSide m_Side;
+            Configuration m_TCfg0;
+            Configuration m_TCfg1;
+            Real m_TFirst;
+            Real m_TLast;
 
-		enum ProjectionMap
-		{
-			M2, M11,                // lines
-			M3, M21, M12, M111,     // triangles
-			M44, M2_2, M1_1         // boxes
-		};
+            IntersectInfo() noexcept;
+            IntersectInfo(bool result, ContactSide side, const Configuration& tCfg0, const Configuration& tCfg1, Real tFirst, Real tLast) noexcept;
+        };
 
-		enum ContactSide
-		{
-			CS_LEFT,
-			CS_RIGHT,
-			CS_NONE
-		};
+        [[nodiscard]] IntersectInfo FindOverlap(Real tmax, Real speed, const Configuration& uConfiguration, const Configuration& vConfiguration) noexcept;
 
-		class Configuration
-		{
-		public:
-			ProjectionMap mMap;  // how vertices map to the projection interval
-			int mIndex[8];       // the sorted indices of the vertices
-			Real mMin, mMax;      // the interval is [min,max]
-		};
+        [[nodiscard]] IntersectInfo FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity);
 
-		static void ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis, Configuration& cfg);
+        void FindContactSet(const Triangle3& triangle0, const Triangle3& triangle1, const ContactSide& side,
+                            const Configuration& cfg0, const Configuration& cfg1);
 
-	 [[nodiscard]] bool FindOverlap(Real tmax, Real speed, const Configuration& UC, const Configuration& VC, ContactSide& side, Configuration& TUC, Configuration& TVC, Real& tfirst, Real& tlast);
+        [[nodiscard]] static Configuration ProjectOntoAxis(const Triangle3& triangle, const Vector3D& axis);
 
-	 [[nodiscard]] bool FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity, ContactSide& side,
-						 Configuration& tcfg0, Configuration& tcfg1, Real& tfirst, Real& tlast);
+        void GetEdgeEdgeIntersection(const Vector3D& u0, const Vector3D& u1, const Vector3D& v0, const Vector3D& v1);
 
-		void FindContactSet(const Triangle3& tri0, const Triangle3& tri1, ContactSide& side,
-							Configuration& cfg0, Configuration& cfg1);
+        void GetEdgeFaceIntersection(const Vector3D& u0, const Vector3D& u1, const Triangle3& triangle);
 
-		void GetEdgeEdgeIntersection(const Vector3D& U0, const Vector3D& U1, const Vector3D& V0, const Vector3D& V1);
+        void GetCoplanarIntersection(const Plane3& plane, const Triangle3& triangle0, const Triangle3& triangle1);
 
-		void GetEdgeFaceIntersection(const Vector3D& U0, const Vector3D& U1, const Triangle3& tri);
+    private:
+        IMPL_TYPE_DECLARE(DynamicFindIntersectorTriangle3Triangle3);
+    };
 
-		// The objects to intersect.
-		Triangle3 m_Triangle0;
-		Triangle3 m_Triangle1;
-
-		// Information about the intersection set.
-		int m_Quantity;
-		Vector3D m_Point[6];
-	};
-
-	using FloatDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<float>;
-	using DoubleDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<double>;
+    using FloatDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<float>;
+    using DoubleDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_H

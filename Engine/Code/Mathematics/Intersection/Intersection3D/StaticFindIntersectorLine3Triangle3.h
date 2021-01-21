@@ -18,7 +18,7 @@ namespace Mathematics
     // 查找相交查询。这个相交点是
     // P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
     template <typename Real>
-    class StaticFindIntersectorLine3Triangle3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Triangle3 : public StaticIntersector<Real, Vector3D>
     {
     public:
         using ClassType = StaticFindIntersectorLine3Triangle3<Real>;
@@ -27,20 +27,20 @@ namespace Mathematics
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
         using Vector3DTools = Vector3DTools<Real>;
-       using Math = typename ParentType::Math;
+        using Math = typename ParentType::Math;
 
     public:
         StaticFindIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-       [[nodiscard]] const Line3 GetLine() const;
-        [[nodiscard]] const Triangle3 GetTriangle() const;
+        [[nodiscard]] const Line3 GetLine() const noexcept;
+        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
 
-       [[nodiscard]] Real GetLineParameter() const noexcept;
+        [[nodiscard]] Real GetLineParameter() const noexcept;
         [[nodiscard]] Real GetTriangleBary0() const noexcept;
-       [[nodiscard]] Real GetTriangleBary1() const noexcept;
-        [[nodiscard]] Real GetTriangleBary2() const;
+        [[nodiscard]] Real GetTriangleBary1() const noexcept;
+        [[nodiscard]] Real GetTriangleBary2() const noexcept;
 
     private:
         void Find();

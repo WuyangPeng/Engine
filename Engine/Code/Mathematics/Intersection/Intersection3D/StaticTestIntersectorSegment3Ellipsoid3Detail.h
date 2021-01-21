@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorSegment3Ellipsoid3.h"
  
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
-	::StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid)
-	: m_Segment{ segment }, mEllipsoid{ ellipsoid }
+Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>::StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon)
+    : m_Segment{ segment }, m_Ellipsoid{ ellipsoid }
 {
 	Test();
 }
@@ -28,7 +27,7 @@ template <typename Real>
 const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
 	::GetEllipsoid() const
 {
-    return mEllipsoid;
+    return m_Ellipsoid;
 }
 
 template <typename Real>
@@ -41,9 +40,9 @@ void Mathematics::StaticTestIntersectorSegment3Ellipsoid3<Real>
     //   Q(t) = a2*t^2 + 2*a1*t + a0 = 0
     // where a2 = D^T*M*D, a1 = D^T*M*(P-K), and a0 = (P-K)^T*M*(P-K)-1.
 
-	auto M = mEllipsoid.GetMatrix();
+	auto M = m_Ellipsoid.GetMatrix();
 
-	auto diff = m_Segment.GetCenterPoint() - mEllipsoid.GetCenter();
+	auto diff = m_Segment.GetCenterPoint() - m_Ellipsoid.GetCenter();
 	auto matDir = M*m_Segment.GetDirection();
 	auto matDiff = M*diff;
 	auto a2 = Vector3DTools::DotProduct(m_Segment.GetDirection(),matDir);

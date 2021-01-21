@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid);
+                StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 

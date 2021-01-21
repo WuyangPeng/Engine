@@ -1,102 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/15 09:46)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/20 17:00)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H
 
-#include "StaticFindIntersectorPlane3Plane3.h" 
+#include "StaticFindIntersectorPlane3Plane3.h"
 
-template <typename Real>
-Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::StaticFindIntersectorPlane3Plane3(const Plane3& rkPlane0, const Plane3& rkPlane1)
-	:m_Plane0{ rkPlane0 }, m_Plane1{ rkPlane1 }, mIntrLine{ Vector3D::sm_Zero,Vector3D::sm_Zero }, mIntrPlane{}
-{
-	Find();
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::GetPlane0() const
-{
-    return m_Plane0;
-}
+    #include "StaticFindIntersectorPlane3Plane3Achieve.h"
 
-template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::GetPlane1() const
-{
-    return m_Plane1;
-}
- 
-template <typename Real>
-void Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::Find()
-{
-    // If N0 and N1 are parallel, either the planes are parallel and separated
-    // or the same plane.  In both cases, 'false' is returned.  Otherwise,
-    // the intersection line is
-    //   L(t) = t*Cross(N0,N1)/|Cross(N0,N1)| + c0*N0 + c1*N1
-    // for some coefficients c0 and c1 and for t any real number (the line
-    // parameter).  Taking dot products with the normals,
-    //   d0 = Dot(N0,L) = c0*Dot(N0,N0) + c1*Dot(N0,N1) = c0 + c1*d
-    //   d1 = Dot(N1,L) = c0*Dot(N0,N1) + c1*Dot(N1,N1) = c0*d + c1
-    // where d = Dot(N0,N1).  These are two equations in two unknowns.  The
-    // solution is
-    //   c0 = (d0 - d*d1)/det
-    //   c1 = (d1 - d*d0)/det
-    // where det = 1 - d^2.
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE)
 
-	auto dot = Vector3DTools::DotProduct(m_Plane0.GetNormal(), m_Plane1.GetNormal());
-    if (Math::FAbs(dot) >= Math::GetValue(1) - Math::GetZeroTolerance())
-    {
-        // The planes are parallel.  Check if they are coplanar.
-        Real cDiff;
-        if (dot >= Math<Real>::GetZero())
-        {
-            // Normals are in same direction, need to look at c0-c1.
-			cDiff = m_Plane0.GetConstant() - m_Plane1.GetConstant();
-        }
-        else
-        {
-            // Normals are in opposite directions, need to look at c0+c1.
-			cDiff = m_Plane0.GetConstant() + m_Plane1.GetConstant();
-        }
-
-        if (Math::FAbs(cDiff) < Math::GetZeroTolerance())
-        {
-            // Planes are coplanar.
-			this->SetIntersectionType(IntersectionType::Plane);
-            mIntrPlane = m_Plane0;
-            return;
-        }
-
-        // Planes are parallel, but distinct.
-		this->SetIntersectionType(IntersectionType::Empty);
-        return;
-    }
-
-	auto invDet = (Math::GetValue(1))/(Math::GetValue(1) - dot*dot);
-	auto c0 = (m_Plane0.GetConstant() - dot*m_Plane1.GetConstant())*invDet;
-	auto c1 = (m_Plane1.GetConstant() - dot*m_Plane0.GetConstant())*invDet;
-	this->SetIntersectionType(IntersectionType::Line);
-	mIntrLine = Line3{ c0*m_Plane0.GetNormal() + c1 * m_Plane1.GetNormal(),Vector3DTools::UnitCrossProduct(m_Plane0.GetNormal(),m_Plane1.GetNormal()) };
-}
- 
-template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::GetIntersectionLine() const
-{
-    return mIntrLine;
-}
-
-template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>
-	::GetIntersectionPlane() const
-{
-    return mIntrPlane;
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_DETAIL_H

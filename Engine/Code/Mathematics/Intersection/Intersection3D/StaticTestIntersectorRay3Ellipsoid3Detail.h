@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorRay3Ellipsoid3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
-	::StaticTestIntersectorRay3Ellipsoid3 (const Ray3& rkRay,const Ellipsoid3& rkEllipsoid)
-	: mRay{ rkRay }, mEllipsoid{ rkEllipsoid }
+Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::StaticTestIntersectorRay3Ellipsoid3(const Ray3& rkRay, const Ellipsoid3& rkEllipsoid, const Real epsilon)
+    : m_Ray{ rkRay }, m_Ellipsoid{ rkEllipsoid }
 {
 	Test();
 }
@@ -21,14 +20,14 @@ template <typename Real>
 const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
 	::GetRay() const
 {
-    return mRay;
+    return m_Ray;
 }
 
 template <typename Real>
 const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
 	::GetEllipsoid() const
 {
-    return mEllipsoid;
+    return m_Ellipsoid;
 }
 
 template <typename Real>
@@ -41,13 +40,13 @@ void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
     //   Q(t) = a2*t^2 + 2*a1*t + a0 = 0
     // where a2 = D^T*M*D, a1 = D^T*M*(P-K), and a0 = (P-K)^T*M*(P-K)-1.
 
-	auto M = mEllipsoid.GetMatrix();
+	auto M = m_Ellipsoid.GetMatrix();
 
-	auto diff = mRay.GetOrigin() - mEllipsoid.GetCenter();
-	auto matDir = M*mRay.GetDirection();
+	auto diff = m_Ray.GetOrigin() - m_Ellipsoid.GetCenter();
+	auto matDir = M*m_Ray.GetDirection();
 	auto matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(mRay.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(),matDiff);
+	auto a2 = Vector3DTools::DotProduct(m_Ray.GetDirection(),matDir);
+	auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(),matDiff);
 	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // No intersection if Q(t) has no real roots.

@@ -140,7 +140,7 @@ namespace Mathematics
 		ETManifoldMesh mTriMesh;
 		
 		// The line of containment if the dimension is 1.
-		Vector2D<Real> mLineOrigin, mLineDirection;
+		Vector2D<Real> m_LineOrigin, m_LineDirection;
 		
 		// Store the path of tetrahedra visited in a GetContainingTetrahedron
 		// function call.

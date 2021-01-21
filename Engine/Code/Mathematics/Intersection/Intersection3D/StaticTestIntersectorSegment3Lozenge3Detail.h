@@ -11,9 +11,8 @@
 #include "Mathematics/Distance/Distance3D/DistanceSegment3Rectangle3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
-	::StaticTestIntersectorSegment3Lozenge3( const Segment3& rkSegment, const Lozenge3& rkLozenge)
-	: m_Segment{ rkSegment }, mLozenge{ rkLozenge }
+Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::StaticTestIntersectorSegment3Lozenge3(const Segment3& rkSegment, const Lozenge3& rkLozenge, const Real epsilon)
+    : m_Segment{ rkSegment }, mLozenge{ rkLozenge }
 {
 	Test();
 }

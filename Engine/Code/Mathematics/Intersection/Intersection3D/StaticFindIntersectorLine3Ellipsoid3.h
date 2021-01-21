@@ -1,85 +1,76 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/20 9:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Intersection/StaticIntersector.h" 
-#include "Mathematics/Objects3D/Line3.h"  
-#include "Mathematics/Objects3D/Ellipsoid3.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Ellipsoid3.h"
+#include "Mathematics/Objects3D/Line3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorLine3Ellipsoid3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorLine3Ellipsoid3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Line3 = Line3<Real>;
-		using Ellipsoid3 = Ellipsoid3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Ellipsoid3 : public StaticIntersector<Real, Vector3D>
+    {
+    public:
+        using ClassType = StaticFindIntersectorLine3Ellipsoid3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Line3 = Line3<Real>;
+        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticFindIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid);
+    public:
+        StaticFindIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Line3 GetLine() const;
-                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
+        [[nodiscard]] const Line3 GetLine() const noexcept;
+        [[nodiscard]] const Ellipsoid3 GetEllipsoid() const noexcept;
 
-		// The intersection set.
-                [[nodiscard]] int GetQuantity() const;
-                [[nodiscard]] const Vector3D GetPoint(int index) const;
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-		// Small thresholds are used for testing the discriminant of the quadratic
-		// equation related to the computations: Q(t) = a2*t^2 + 2*a1*t + a0.  The
-		// discriminant is D = a1*a1 - a0*a2.  Q(t) has no real-valued roots when
-		// D < 0, one real-valued root when D = 0, or two real-valued roots when
-		// D > 0.  The code logic involves user-defined thresholds:
-		//   if (D < negThreshold) { no roots (no intersections) }
-		//   else if (D > posThreshold) { two roots (two intersections) }
-		//   else { one root (one intersection) }
-		// The default values for the thresholds are zero, but you may set them
-		// to be nonzero (negThreshold <= 0 and posThreshold >= 0).  Previously,
-		// the negative threshold was hard-coded as zero.  The positive threshold
-		// was hard-coded to Math<Real>::GetZeroTolerance(), which is not suitable for
-		// some data sets (i.e. when ellipsoid extents are quite large).  The
-		// default is now zero, so if your application relied on the old behavior,
-		// you must modify this value.
-		void SetNegativeThreshold(Real negThreshold);
-                [[nodiscard]] Real GetNegativeThreshold() const;
-		void SetPositiveThreshold(Real posThreshold);
-                [[nodiscard]] Real GetPositiveThreshold() const;
+        /// 小阈值用于测试与计算有关的二次方程的判别式：Q(t) = a2 * t^2 + 2 * a1 * t + a0。
+        /// 判别式为D = a1 * a1 - a0 * a2。
+        ///  Q(t)在D < 0时没有实值根，在D = 0时有一个实值根，在D > 0时有两个实值根。
+        /// 代码逻辑涉及用户定义的阈值：if(D < negThreshold){ 无根（无交集）}，
+        /// else if (D > posThreshold) { 两根（两个交集）}
+        ///  else { 一个根（一个交集）}阈值的默认值为零，但您可以将其设置为非零 （negThreshold <= 0 和 posThreshold >= 0）。
+        /// 以前，负阈值被硬编码为零。 正阈值被硬编码为Math<Real>::GetZeroTolerance()，
+        /// 该阈值不适用于某些数据集（即，当椭圆范围很大时）。现在默认值为零。
+        void SetNegativeThreshold(Real negThreshold);
+        [[nodiscard]] Real GetNegativeThreshold() const noexcept;
+        void SetPositiveThreshold(Real posThreshold);
+        [[nodiscard]] Real GetPositiveThreshold() const noexcept;
 
-	private:
-		// Static intersection queries.		
-		void Find();
+    private:
+        void Find();
 
-		// The objects to intersect.
-		Line3 mLine;
-		Ellipsoid3 mEllipsoid;
+        Line3 m_Line;
+        Ellipsoid3 m_Ellipsoid;
 
-		// Information about the intersection set.
-		int m_Quantity;
-		Vector3D m_Point[2];
+        int m_Quantity;
+        Vector3D m_Point0;
+        Vector3D m_Point1;
 
-		// For testing the discriminant.  The default values are zero.  You may
-		// set the negative threshold to a (small) negative number and the
-		// positive threshold to a  (small) positive number.
-		Real mNegativeThreshold;
-		Real mPositiveThreshold;
-	};
+        /// 用于测试判别式。 默认值为零。 您可以将负阈值设置为（小）负数，将正阈值设置为（小）正数。
+        Real m_NegativeThreshold;
+        Real m_PositiveThreshold;
+    };
 
-	using FloatStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<float>;
-	using DoubleStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<double>;
+    using FloatStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<float>;
+    using DoubleStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H

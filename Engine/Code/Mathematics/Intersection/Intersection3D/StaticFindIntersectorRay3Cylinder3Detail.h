@@ -1,78 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/15 09:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/20 19:01)
+
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_DETAIL_H
 
 #include "StaticFindIntersectorRay3Cylinder3.h"
-#include "StaticFindIntersectorLine3Cylinder3.h"
- 
-template <typename Real>
-Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::StaticFindIntersectorRay3Cylinder3(const Ray3& ray,const Cylinder3& cylinder)
-	:mRay{ ray }, mCylinder{ cylinder }
-{
-	Find();
-}
 
-template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::GetRay() const
-{
-    return mRay;
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Cylinder3<Real> Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::GetCylinder() const
-{
-    return mCylinder;
-}
+    #include "StaticFindIntersectorRay3Cylinder3Achieve.h"
 
-template <typename Real>
-void Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::Find()
-{
-    Real t[2];
-	auto quantity = StaticFindIntersectorLine3Cylinder3<Real>::Find(mRay.GetOrigin(),mRay.GetDirection(), mCylinder, t);
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_ACHIEVE)
 
-    m_Quantity = 0;
-    for (auto i = 0; i < quantity; ++i)
-    {
-        if (t[i] >= Math<Real>::GetZero())
-        {
-			m_Point[m_Quantity++] = mRay.GetOrigin() + t[i] * mRay.GetDirection();
-        }
-    }
-
-    if (m_Quantity == 2)
-    {
-		this->SetIntersectionType(IntersectionType::Segment);
-    }
-    else if (m_Quantity == 1)
-    {
-		this->SetIntersectionType(IntersectionType::Point);
-    }
-    else
-    {
-		this->SetIntersectionType(IntersectionType::Empty);
-    }     
-}
-
-template <typename Real>
-int Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::GetQuantity() const
-{
-    return m_Quantity;
-}
-
-template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Cylinder3<Real>
-	::GetPoint(int i) const
-{
-    return m_Point[i];
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CYLINDER3_DETAIL_H

@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorPlane3Capsule3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
-	::StaticTestIntersectorPlane3Capsule3(const Plane3& plane,const Capsule3& capsule)
-	: m_Plane{ plane }, mCapsule{ capsule }
+Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon)
+    : m_Plane{ plane }, m_Capsule{ capsule }
 {
 	Test();
 }
@@ -28,16 +27,16 @@ template <typename Real>
 const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::GetCapsule() const
 {
-    return mCapsule;
+    return m_Capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::Test()
 {
-	auto pDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
-	auto nDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
-    if (pDist*nDist <= Math<Real>::GetZero())
+	auto pDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetEndPoint());
+	auto nDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetBeginPoint());
+    if (pDist*nDist <= Math<Real>::GetValue(0))
     {
         // Capsule segment endpoints on opposite sides of the plane.
 		this->SetIntersectionType(IntersectionType::Other);
@@ -46,7 +45,7 @@ void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 
     // Endpoints on same side of plane, but the endpoint spheres (with
     // radius of the capsule) might intersect the plane.
-	if (Math::FAbs(pDist) <= mCapsule.GetRadius()|| Math::FAbs(nDist) <= mCapsule.GetRadius())
+	if (Math::FAbs(pDist) <= m_Capsule.GetRadius()|| Math::FAbs(nDist) <= m_Capsule.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}
@@ -60,19 +59,19 @@ template <typename Real>
 bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
 	::CapsuleIsCulled() const
 {
-	auto pDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetEndPoint());
-    if (pDist < Math<Real>::GetZero())
+	auto pDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetEndPoint());
+    if (pDist < Math<Real>::GetValue(0))
     {
-		auto nDist = m_Plane.DistanceTo(mCapsule.GetSegment().GetBeginPoint());
-        if (nDist < Math<Real>::GetZero())
+		auto nDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetBeginPoint());
+        if (nDist < Math<Real>::GetValue(0))
         {
             if (pDist <= nDist)
             {
-				return (pDist <= -mCapsule.GetRadius());				
+				return (pDist <= -m_Capsule.GetRadius());				
             }
             else
             {
-				return (nDist <= -mCapsule.GetRadius());
+				return (nDist <= -m_Capsule.GetRadius());
             }
         }
     }

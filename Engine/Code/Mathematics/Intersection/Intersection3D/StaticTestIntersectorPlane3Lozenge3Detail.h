@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorPlane3Lozenge3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
-	::StaticTestIntersectorPlane3Lozenge3 (const Plane3& plane,const Lozenge3& lozenge)
-	: m_Plane{ plane }, mLozenge{ lozenge }
+Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge, const Real epsilon)
+    : m_Plane{ plane }, mLozenge{ lozenge }
 {
 	Test();
 }

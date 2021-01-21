@@ -11,23 +11,20 @@
 #include "FindIntersectorAxis.h"
  
 template <typename Real>
-Mathematics::StaticTestIntersectorHalfspace3Box3<Real>
-	::StaticTestIntersectorHalfspace3Box3(const Plane3& halfspace,const Box3& box)
-	: m_Halfspace{ halfspace }, m_Box{ box }
+Mathematics::StaticTestIntersectorHalfspace3Box3<Real>::StaticTestIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, const Real epsilon)
+    : m_Halfspace{ halfspace }, m_Box{ box }
 {
 	Test();
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Box3<Real>
-	::GetHalfspace() const
+const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Box3<Real>::GetHalfspace() const noexcept
 {
     return m_Halfspace;
 }
 
 template <typename Real>
-const Mathematics::Box3<Real> Mathematics::StaticTestIntersectorHalfspace3Box3<Real>
-	::GetBox() const
+const Mathematics::Box3<Real> Mathematics::StaticTestIntersectorHalfspace3Box3<Real>::GetBox() const noexcept
 {
     return m_Box;
 }

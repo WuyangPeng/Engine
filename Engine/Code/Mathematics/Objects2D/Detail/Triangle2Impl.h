@@ -44,6 +44,7 @@ namespace Mathematics
         [[nodiscard]] Real DistanceTo(const Vector2D& point) const;
 
         [[nodiscard]] const ContainerType GetVertex() const;
+        [[nodiscard]] const Vector2D GetVertex(int index) const;
 
     private:
         constexpr static auto sm_VertexSize = 3;

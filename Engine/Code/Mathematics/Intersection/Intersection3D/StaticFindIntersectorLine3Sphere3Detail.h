@@ -1,90 +1,21 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 17:11)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/20 10:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_DETAIL_H
 
-#include "StaticFindIntersectorLine3Sphere3.h" 
+#include "StaticFindIntersectorLine3Sphere3.h"
 
-template <typename Real>
-Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::StaticFindIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere)
-	: mLine{ line }, m_Sphere{ sphere }
-{
-	m_Quantity = 0;
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_ACHIEVE)
 
-	Find();
-}
+    #include "StaticFindIntersectorLine3Sphere3Achieve.h"
 
-template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::GetLine() const
-{
-	return mLine;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::GetSphere() const
-{
-	return m_Sphere;
-}
-
-template <typename Real>
-void Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::Find()
-{
-	auto diff = mLine.GetOrigin() - m_Sphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff, diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
-	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(), diff);
-	auto discr = a1 * a1 - a0;
-
-	if (discr < Math<Real>::GetZero())
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-		m_Quantity = 0;
-	}
-	else if (discr >= Math::GetZeroTolerance())
-	{
-		auto root = Math::Sqrt(discr);
-		mLineParameter[0] = -a1 - root;
-		mLineParameter[1] = -a1 + root;
-		m_Point[0] = mLine.GetOrigin() + mLineParameter[0] * mLine.GetDirection();
-		m_Point[1] = mLine.GetOrigin() + mLineParameter[1] * mLine.GetDirection();
-		this->SetIntersectionType(IntersectionType::Segment);
-		m_Quantity = 2;
-	}
-	else
-	{
-		mLineParameter[0] = -a1;
-		m_Point[0] = mLine.GetOrigin() + mLineParameter[0] * mLine.GetDirection();
-		this->SetIntersectionType(IntersectionType::Point);
-		m_Quantity = 1;
-	}
-}
-
-template <typename Real>
-int Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::GetQuantity() const
-{
-	return m_Quantity;
-}
-
-template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::GetPoint(int i) const
-{
-	return m_Point[i];
-}
-
-template <typename Real>
-Real Mathematics::StaticFindIntersectorLine3Sphere3<Real>
-	::GetLineParameter(int i) const
-{
-	return mLineParameter[i];
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_SPHERE3_DETAIL_H

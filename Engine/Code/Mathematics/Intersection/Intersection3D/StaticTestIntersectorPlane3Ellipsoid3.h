@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane, const Ellipsoid3& ellipsoid);
+                StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -46,7 +46,7 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Plane3 m_Plane;
-		Ellipsoid3 mEllipsoid;
+		Ellipsoid3 m_Ellipsoid;
 	};
 
 	using FloatStaticTestIntersectorPlane3Ellipsoid3 = StaticTestIntersectorPlane3Ellipsoid3<float>;

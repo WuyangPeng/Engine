@@ -28,20 +28,20 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule);
+                StaticTestIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
 
 	CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Line3 GetLine() const;
-        [[nodiscard]] const Capsule3 GetCapsule() const;
+		 [[nodiscard]] const Line3 GetLine() const noexcept;
+        [[nodiscard]] const Capsule3 GetCapsule() const noexcept;
 
 	private:
 		// Static intersection queries.
 		void Test();
 
 		// The objects to intersect.
-		Line3 mLine;
-		Capsule3 mCapsule;
+		Line3 m_Line;
+		Capsule3 m_Capsule;
 	};
 
 	using FloatStaticTestIntersectorLine3Capsule3 = StaticTestIntersectorLine3Capsule3<float>;

@@ -12,9 +12,8 @@
 #include "Mathematics/Distance/Distance3D/DistanceRay3Segment3Detail.h" 
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Capsule3<Real>
-	::StaticTestIntersectorRay3Capsule3(const Ray3& rkRay,const Capsule3& rkCapsule)
-	: mRay{ rkRay }, mCapsule{ rkCapsule }
+Mathematics::StaticTestIntersectorRay3Capsule3<Real>::StaticTestIntersectorRay3Capsule3(const Ray3& rkRay, const Capsule3& rkCapsule, const Real epsilon)
+    : m_Ray{ rkRay }, m_Capsule{ rkCapsule }
 {
 	Test();
 }
@@ -23,22 +22,22 @@ template <typename Real>
 const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Capsule3<Real>
 	::GetRay() const
 {
-    return mRay;
+    return m_Ray;
 }
 
 template <typename Real>
 const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorRay3Capsule3<Real>
 	::GetCapsule() const
 {
-    return mCapsule;
+    return m_Capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorRay3Capsule3<Real>
 	::Test()
 {
-	auto distance = DistanceRay3Segment3<Real>(mRay, mCapsule.GetSegment()).Get().GetDistance();
-	if (distance <= mCapsule.GetRadius())
+	auto distance = DistanceRay3Segment3<Real>(m_Ray, m_Capsule.GetSegment()).Get().GetDistance();
+	if (distance <= m_Capsule.GetRadius())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

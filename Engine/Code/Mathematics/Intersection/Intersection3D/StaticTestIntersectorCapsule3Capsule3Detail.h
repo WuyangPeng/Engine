@@ -1,52 +1,21 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 11:12)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/21 15:39)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_DETAIL_H
 
 #include "StaticTestIntersectorCapsule3Capsule3.h"
-#include "Mathematics/Distance/Distance3D/DistanceSegment3Segment3Detail.h"
 
-template <typename Real>
-Mathematics::StaticTestIntersectorCapsule3Capsule3<Real>
-	::StaticTestIntersectorCapsule3Capsule3 (const Capsule3& capsule0, const Capsule3& capsule1)
-	: mCapsule0{ capsule0 }, mCapsule1{ capsule1 }
-{
-	Test();
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorCapsule3Capsule3<Real>
-	::GetCapsule0 () const
-{
-    return mCapsule0;
-}
+    #include "StaticTestIntersectorCapsule3Capsule3Achieve.h"
 
-template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorCapsule3Capsule3<Real>
-	::GetCapsule1 () const
-{
-    return mCapsule1;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_ACHIEVE)
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorCapsule3Capsule3<Real>
-	::Test ()
-{
-    auto distance = DistanceSegment3Segment3<Real>(mCapsule0.GetSegment(),mCapsule1.GetSegment()).Get().GetDistance();
-	auto rSum = mCapsule0.GetRadius() + mCapsule1.GetRadius();
-    if(distance <= rSum)
-	{
-		this->SetIntersectionType(IntersectionType::Other);
-	}
-	else
-	{
-
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-}
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_DETAIL_H

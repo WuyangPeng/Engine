@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorPlane3Ellipsoid3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
-	::StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane,const Ellipsoid3& ellipsoid)
-	: m_Plane{ plane }, mEllipsoid{ ellipsoid }
+Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>::StaticTestIntersectorPlane3Ellipsoid3(const Plane3& plane, const Ellipsoid3& ellipsoid, const Real epsilon)
+    : m_Plane{ plane }, m_Ellipsoid{ ellipsoid }
 {
 	Test();
 }
@@ -28,17 +27,17 @@ template <typename Real>
 const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::GetEllipsoid() const
 {
-    return mEllipsoid;
+    return m_Ellipsoid;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::Test()
 {
-	auto MInverse = mEllipsoid.GetMatrixInverse();
+	auto MInverse = m_Ellipsoid.GetMatrixInverse();
 	auto discr = MInverse.QuadraticForm(m_Plane.GetNormal(), m_Plane.GetNormal());
 	auto root = Math::Sqrt(Math::FAbs(discr));
-	auto sDist = m_Plane.DistanceTo(mEllipsoid.GetCenter());
+	auto sDist = m_Plane.DistanceTo(m_Ellipsoid.GetCenter());
     if (Math::FAbs(sDist) <= root)
 	{
 		this->SetIntersectionType(IntersectionType::Other);
@@ -53,11 +52,11 @@ template <typename Real>
 bool Mathematics::StaticTestIntersectorPlane3Ellipsoid3<Real>
 	::EllipsoidIsCulled() const
 {
-	auto MInverse = mEllipsoid.GetMatrixInverse();
+	auto MInverse = m_Ellipsoid.GetMatrixInverse();
     
 	auto discr = MInverse.QuadraticForm(m_Plane.GetNormal(), m_Plane.GetNormal());
 	auto root = Math::Sqrt(Math::FAbs(discr));
-	auto sDist = m_Plane.DistanceTo(mEllipsoid.GetCenter());
+	auto sDist = m_Plane.DistanceTo(m_Ellipsoid.GetCenter());
     return sDist <= -root;
 }
 

@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge);
+                StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge, const Real epsilon = Math::GetZeroTolerance());
 
 		 CLASS_INVARIANT_OVERRIDE_DECLARE;
 

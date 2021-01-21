@@ -1,59 +1,59 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:51)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/20 18:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_ELLIPSOID3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Ray3.h"  
-#include "Mathematics/Objects3D/Ellipsoid3.h" 
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Ellipsoid3.h"
+#include "Mathematics/Objects3D/Ray3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorRay3Ellipsoid3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorRay3Ellipsoid3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Ray3 = Ray3<Real>;
-		using Ellipsoid3 = Ellipsoid3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Ellipsoid3 : public StaticIntersector<Real, Vector3D>
+    {
+    public:
+        using ClassType = StaticFindIntersectorRay3Ellipsoid3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Ray3 = Ray3<Real>;
+        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticFindIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid);
+    public:
+        StaticFindIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Ray3 GetRay() const;
-                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
+        [[nodiscard]] const Ray3 GetRay() const noexcept;
+        [[nodiscard]] const Ellipsoid3 GetEllipsoid() const noexcept;
 
-		// The intersection set.
-                [[nodiscard]] int GetQuantity() const;
-                [[nodiscard]] const Vector3D GetPoint(int index) const;
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-	private:
-		// Static intersection queries.
-		void Find();
+    private:
+        void Find();
 
-		// The objects to intersect.
-		Ray3 mRay;
-		Ellipsoid3 mEllipsoid;
+        Ray3 m_Ray;
+        Ellipsoid3 m_Ellipsoid;
 
-		// Information about the intersection set.
-		int m_Quantity;
-		Vector3D m_Point[2];
-	};
+        int m_Quantity;
+        Vector3D m_Point0;
+        Vector3D m_Point1;
+    };
 
-	using FloatStaticFindIntersectorRay3Ellipsoid3 = StaticFindIntersectorRay3Ellipsoid3<float>;
-	using DoubleStaticFindIntersectorRay3Ellipsoid3 = StaticFindIntersectorRay3Ellipsoid3<double>;
+    using FloatStaticFindIntersectorRay3Ellipsoid3 = StaticFindIntersectorRay3Ellipsoid3<float>;
+    using DoubleStaticFindIntersectorRay3Ellipsoid3 = StaticFindIntersectorRay3Ellipsoid3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_ELLIPSOID3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_ELLIPSOID3_H

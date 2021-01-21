@@ -19,7 +19,7 @@ template <typename Real>
 Mathematics::Delaunay3<Real>
 	::Delaunay3 (const std::vector<Vector3D<Real> >& vertices,Real epsilon, bool owner, QueryType queryType)
 	:Delaunay<Real>{ vertices.size(), epsilon, owner, queryType }, mVertices{ vertices }, mNumUniqueVertices{ 0 },
-	 mSVertices{}, mQuery{ 0 }, mLineOrigin{ Vector3D<Real>::sm_Zero }, mLineDirection{ Vector3D<Real>::sm_Zero },
+	 mSVertices{}, mQuery{ 0 }, m_LineOrigin{ Vector3D<Real>::sm_Zero }, m_LineDirection{ Vector3D<Real>::sm_Zero },
 	 mPlaneOrigin{ Vector3D<Real>::sm_Zero }, mPathLast{ -1 }, mPath{ 0 }, mLastFaceV0{ -1 },
      mLastFaceV1{ -1 },  mLastFaceV2{ -1 }, mLastFaceOpposite{ -1 }, mLastFaceOppositeIndex{ -1 }
 {
@@ -39,8 +39,8 @@ Mathematics::Delaunay3<Real>
         // The set is (nearly) collinear.  The caller is responsible for
         // creating a Delaunay1 object.
         mDimension = 1;
-        mLineOrigin = info.GetOrigin();
-        mLineDirection = info.GetDirectionX();
+        m_LineOrigin = info.GetOrigin();
+        m_LineDirection = info.GetDirectionX();
         return;
     }
 
@@ -207,14 +207,14 @@ template <typename Real>
 const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>
 	::GetLineOrigin () const
 {
-    return mLineOrigin;
+    return m_LineOrigin;
 }
 
 template <typename Real>
 const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>
 	::GetLineDirection () const
 {
-    return mLineDirection;
+    return m_LineDirection;
 }
 
 template <typename Real>
@@ -230,8 +230,8 @@ Mathematics::Delaunay1<Real>* Mathematics::Delaunay3<Real>
     Real* projection = NEW1<Real>(mNumVertices);
     for (auto i = 0; i < mNumVertices; ++i)
     {
-		auto diff = mVertices[i] - mLineOrigin;
-        projection[i] = Vector3DTools<Real>::DotProduct(mLineDirection,diff);
+		auto diff = mVertices[i] - m_LineOrigin;
+        projection[i] = Vector3DTools<Real>::DotProduct(m_LineDirection,diff);
     }
 
     return NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
@@ -603,8 +603,8 @@ bool Mathematics::Delaunay3<Real>
     inFile.Read(sizeof(Real), 3*mNumVertices, &mSVertices[0]);
     inFile.Read(sizeof(Real), 3, &mMin);
     inFile.Read(sizeof(Real), 3, &mScale);
-    inFile.Read(sizeof(Real), 3, &mLineOrigin);
-    inFile.Read(sizeof(Real), 3, &mLineDirection);
+    inFile.Read(sizeof(Real), 3, &m_LineOrigin);
+    inFile.Read(sizeof(Real), 3, &m_LineDirection);
     inFile.Read(sizeof(Real), 3, &mPlaneOrigin);
     inFile.Read(sizeof(Real), 6, mPlaneDirection);
 
@@ -662,8 +662,8 @@ bool Mathematics::Delaunay3<Real>
     outFile.Write(sizeof(Real), 3*mNumVertices, &mSVertices[0]);
     outFile.Write(sizeof(Real), 3, &mMin);
     outFile.Write(sizeof(Real), 3, &mScale);
-    outFile.Write(sizeof(Real), 3, &mLineOrigin);
-    outFile.Write(sizeof(Real), 3, &mLineDirection);
+    outFile.Write(sizeof(Real), 3, &m_LineOrigin);
+    outFile.Write(sizeof(Real), 3, &m_LineDirection);
     outFile.Write(sizeof(Real), 3, &mPlaneOrigin);
     outFile.Write(sizeof(Real), 6, mPlaneDirection);
 

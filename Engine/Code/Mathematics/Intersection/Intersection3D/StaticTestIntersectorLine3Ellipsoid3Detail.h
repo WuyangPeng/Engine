@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorLine3Ellipsoid3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::StaticTestIntersectorLine3Ellipsoid3(const Line3& line,const Ellipsoid3& ellipsoid)
-	: mLine{ line }, mEllipsoid{ ellipsoid }, mNegativeThreshold{}, mPositiveThreshold{}
+Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon)
+    : m_Line{ line }, m_Ellipsoid{ ellipsoid }, mNegativeThreshold{}, mPositiveThreshold{}
 {
 	Test();
 }
@@ -21,14 +20,14 @@ template <typename Real>
 const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::GetLine() const
 {
-    return mLine;
+    return m_Line;
 }
 
 template <typename Real>
 const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::GetEllipsoid() const
 {
-    return mEllipsoid;
+    return m_Ellipsoid;
 }
 
 template <typename Real>
@@ -41,13 +40,13 @@ void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
     //   Q(t) = a2*t^2 + 2*a1*t + a0 = 0
     // where a2 = D^T*M*D, a1 = D^T*M*(P-K), and a0 = (P-K)^T*M*(P-K)-1.
 
-	auto M = mEllipsoid.GetMatrix();
+	auto M = m_Ellipsoid.GetMatrix();
 
-	auto diff = mLine.GetOrigin() - mEllipsoid.GetCenter();
-	auto matDir = M*mLine.GetDirection();
+	auto diff = m_Line.GetOrigin() - m_Ellipsoid.GetCenter();
+	auto matDir = M*m_Line.GetDirection();
 	auto matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(mLine.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(mLine.GetDirection(),matDiff);
+	auto a2 = Vector3DTools::DotProduct(m_Line.GetDirection(),matDir);
+	auto a1 = Vector3DTools::DotProduct(m_Line.GetDirection(),matDiff);
 	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
 
     // Intersection occurs if Q(t) has real roots.
@@ -66,7 +65,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetNegativeThreshold(Real negThreshold)
 {
-    if (negThreshold <= Math<Real>::GetZero())
+    if (negThreshold <= Math<Real>::GetValue(0))
     {
         mNegativeThreshold = negThreshold;
         return;
@@ -86,7 +85,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
 	::SetPositiveThreshold(Real posThreshold)
 {
-    if (posThreshold >= Math<Real>::GetZero())
+    if (posThreshold >= Math<Real>::GetValue(0))
     {
         mPositiveThreshold = posThreshold;
         return;

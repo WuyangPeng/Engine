@@ -23,8 +23,8 @@ template <typename Real>
 Mathematics::Delaunay2<Real>
 	::Delaunay2 (const std::vector<Vector2D<Real> >& vertices,Real epsilon, bool owner, QueryType queryType)
 	:Delaunay<Real>{ vertices.size(), epsilon, owner, queryType },mVertices{ vertices },
-	 mNumUniqueVertices{ 0 },mSVertices{},mQuery{ 0 },mLineOrigin{ Vector2D<Real>::sm_Zero },
-	 mLineDirection{ Vector2D<Real>::sm_Zero },mPathLast{ -1 },mPath{ 0 },mLastEdgeV0{ -1 },
+	 mNumUniqueVertices{ 0 },mSVertices{},mQuery{ 0 },m_LineOrigin{ Vector2D<Real>::sm_Zero },
+	 m_LineDirection{ Vector2D<Real>::sm_Zero },mPathLast{ -1 },mPath{ 0 },mLastEdgeV0{ -1 },
 	 mLastEdgeV1{ -1 },mLastEdgeOpposite{ -1 },mLastEdgeOppositeIndex{ -1 }
 {
     Vector2DInformation<Real> info(mVertices, epsilon);
@@ -40,8 +40,8 @@ Mathematics::Delaunay2<Real>
         // The set is (nearly) collinear.  The caller is responsible for
         // creating a Delaunay1 object.
         mDimension = 1;
-        mLineOrigin = info.GetOrigin();
-        mLineDirection = info.GetDirectionX();
+        m_LineOrigin = info.GetOrigin();
+        m_LineDirection = info.GetDirectionX();
         return;
     }
 
@@ -198,14 +198,14 @@ template <typename Real>
 const Mathematics::Vector2D<Real>& Mathematics::Delaunay2<Real>
 	::GetLineOrigin () const
 {
-    return mLineOrigin;
+    return m_LineOrigin;
 }
 
 template <typename Real>
 const Mathematics::Vector2D<Real>& Mathematics::Delaunay2<Real>
 	::GetLineDirection () const
 {
-    return mLineDirection;
+    return m_LineDirection;
 }
 
 template <typename Real>
@@ -221,8 +221,8 @@ Mathematics::Delaunay1<Real>* Mathematics::Delaunay2<Real>
     Real* projection = NEW1<Real>(mNumVertices);
     for (int i = 0; i < mNumVertices; ++i)
     {
-        Vector2D<Real> diff = mVertices[i] - mLineOrigin;
-        projection[i] = Vector2DTools<Real>::DotProduct(mLineDirection,diff);
+        Vector2D<Real> diff = mVertices[i] - m_LineOrigin;
+        projection[i] = Vector2DTools<Real>::DotProduct(m_LineDirection,diff);
     }
 
     return NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
@@ -502,8 +502,8 @@ bool Mathematics::Delaunay2<Real>
     inFile.Read(sizeof(Real), 2*mNumVertices, &mSVertices[0]);
     inFile.Read(sizeof(Real), 2, &mMin);
     inFile.Read(sizeof(Real), 2, &mScale);
-    inFile.Read(sizeof(Real), 2, &mLineOrigin);
-    inFile.Read(sizeof(Real), 2, &mLineDirection); 
+    inFile.Read(sizeof(Real), 2, &m_LineOrigin);
+    inFile.Read(sizeof(Real), 2, &m_LineDirection); 
 
     switch (mQueryType)
     {
@@ -557,8 +557,8 @@ bool Mathematics::Delaunay2<Real>
     outFile.Write(sizeof(Real), 2*mNumVertices, &mVertices[0]);
     outFile.Write(sizeof(Real), 2, &mMin);
     outFile.Write(sizeof(Real), 2, &mScale);
-    outFile.Write(sizeof(Real), 2, &mLineOrigin);
-    outFile.Write(sizeof(Real), 2, &mLineDirection);
+    outFile.Write(sizeof(Real), 2, &m_LineOrigin);
+    outFile.Write(sizeof(Real), 2, &m_LineDirection);
  
     return true;
 }

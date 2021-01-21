@@ -28,7 +28,9 @@ namespace Mathematics
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
         using SegmentType = std::array<Vector3D, 2>;
+        using Projections = std::pair<Real, Real>;
 
+    public:
         /// 测试查询投影间隔的交集。 输入的速度是objectVelocity1 - objectVelocity0之差。
         /// 计算第一次和最后一次接触时间。
         TestIntersectorAxisImpl(const Vector3D& axis, const SegmentType& segment, const Triangle3& triangle, const Vector3D& velocity, Real tmax);
@@ -47,10 +49,6 @@ namespace Mathematics
         [[nodiscard]] Real GetTFirst() const noexcept;
         [[nodiscard]] Real GetTLast() const noexcept;
 
-    private:
-        using Projections = std::pair<Real, Real>;
-
-    private:
         // Projections.
         static Projections GetProjection(const Vector3D& axis, const SegmentType& segment) noexcept;
 
@@ -58,6 +56,7 @@ namespace Mathematics
 
         static Projections GetProjection(const Vector3D& axis, const Box3& box);
 
+    private:
         //  预测的低级测试查询。
         void Test(const Vector3D& axis, const Vector3D& velocity, Real min0, Real max0, Real min1, Real max1, Real tmax) noexcept;
 

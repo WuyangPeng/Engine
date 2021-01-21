@@ -18,7 +18,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class StaticTestIntersectorBox3Box3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox3Box3 : public StaticIntersector<Real, Vector3D>
     {
     public:
         using ClassType = StaticTestIntersectorBox3Box3<Real>;

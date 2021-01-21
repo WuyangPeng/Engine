@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorRay3Lozenge3(const Ray3& ray, const Lozenge3& lozenge);
+                StaticTestIntersectorRay3Lozenge3(const Ray3& ray, const Lozenge3& lozenge, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -41,7 +41,7 @@ namespace Mathematics
 
 	private:
 		// The objects to intersect.
-		Ray3 mRay;
+		Ray3 m_Ray;
 		Lozenge3 mLozenge;
 	};
 

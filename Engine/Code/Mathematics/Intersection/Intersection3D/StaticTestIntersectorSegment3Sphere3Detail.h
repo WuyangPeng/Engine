@@ -11,13 +11,23 @@
 #include "StaticTestIntersectorSegment3Capsule3.h" 
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
-	::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere)
-	: m_Segment{ segment }, m_Sphere{ sphere }
+Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::StaticTestIntersectorSegment3Sphere3(const Segment3& segment, const Sphere3& sphere, const Real epsilon)
+    : ParentType{ epsilon }, m_Segment{ segment }, m_Sphere{ sphere }
 {
      ZeroThreshold = Math::GetZeroTolerance();
 	 Test();
 }
+
+#ifdef OPEN_CLASS_INVARIANT
+template <typename Real>
+bool Mathematics::StaticTestIntersectorSegment3Sphere3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
 const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
@@ -41,7 +51,7 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
 	auto a1 = Vector3DTools::DotProduct(m_Segment.GetDirection(),diff);
 	auto discr = a1*a1 - a0;
-    if (discr < Math<Real>::GetZero())
+    if (discr < Math::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Empty);
         return;
@@ -51,13 +61,13 @@ void Mathematics::StaticTestIntersectorSegment3Sphere3<Real>
 	auto tmp1 = (Math::GetValue(2))*a1*m_Segment.GetExtent();
 	auto qm = tmp0 - tmp1;
 	auto qp = tmp0 + tmp1;
-    if (qm*qp <= Math<Real>::GetZero())
+    if (qm*qp <= Math::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-	if (qm > Math<Real>::GetZero() && Math::FAbs(a1) < m_Segment.GetExtent())
+	if (qm > Math::GetValue(0) && Math::FAbs(a1) < m_Segment.GetExtent())
 	{
 		this->SetIntersectionType(IntersectionType::Other);
 	}

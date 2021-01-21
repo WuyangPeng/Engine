@@ -1,60 +1,66 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/21 13:39)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Box3.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-#include "Mathematics/Intersection/StaticIntersector.h" 
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorTriangle3Box3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorTriangle3Box3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Triangle3 = Triangle3<Real>;
-		using Box3 = Box3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class StaticFindIntersectorTriangle3Box3Impl;
 
-	public:
-		StaticFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box);
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTriangle3Box3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTriangle3Box3Impl<double>>;
 
-	CLASS_INVARIANT_OVERRIDE_DECLARE;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTriangle3Box3Impl<Real>>;
 
-	 [[nodiscard]] const Triangle3 GetTriangle() const;
-        [[nodiscard]] const Box3 GetBox() const;
+    template <typename Real>
+    class StaticFindIntersectorTriangle3Box3 : public StaticIntersector<Real, Vector3D>
+    {
+    public:
+        using StaticFindIntersectorTriangle3Box3Impl = StaticFindIntersectorTriangle3Box3Impl<Real>;
+        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorTriangle3Box3);
 
-		// The intersection set.
+        using ParentType = StaticIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Triangle3 = Triangle3<Real>;
+        using Box3 = Box3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
+
+    public:
+        StaticFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon = Math::GetZeroTolerance());
+
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+        [[nodiscard]] const Box3 GetBox() const noexcept;
+
         [[nodiscard]] int GetQuantity() const;
         [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-	private:
-		// Static test-intersection query.
-		void Find();
+    private:
+        void Find();
 
-		// The objects to intersect.
-		Triangle3 m_Triangle;
-		Box3 m_Box;
+    private:
+        IMPL_TYPE_DECLARE(StaticFindIntersectorTriangle3Box3);
+    };
 
-		// The intersections for static query.  A triangle can intersect a box
-		// in at most 7 vertices.
-		int m_Quantity;
-		Vector3D m_Point[7];
-	};
-
-	using FloatStaticFindIntersectorTriangle3Box3 = StaticFindIntersectorTriangle3Box3<float>;
-	using DoubleStaticFindIntersectorTriangle3Box3 = StaticFindIntersectorTriangle3Box3<double>;
+    using FloatStaticFindIntersectorTriangle3Box3 = StaticFindIntersectorTriangle3Box3<float>;
+    using DoubleStaticFindIntersectorTriangle3Box3 = StaticFindIntersectorTriangle3Box3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_H

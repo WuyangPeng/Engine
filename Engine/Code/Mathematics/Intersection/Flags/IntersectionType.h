@@ -25,7 +25,12 @@ namespace Mathematics
         Polygon,
         Plane,
         Polyhedron,
-        Other
+        Other,
+        Circle,
+        Sphere0,
+        Sphere0Point,
+        Sphere1,
+        Sphere1Point,
     };
 
     ENUM_INCREMENTABLE_OPERATOR_DEFINE(IntersectionType);

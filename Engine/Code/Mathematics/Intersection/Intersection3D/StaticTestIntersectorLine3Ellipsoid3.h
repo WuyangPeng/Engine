@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid);
+                StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
 
 	CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -60,8 +60,8 @@ namespace Mathematics
 		void Test();
 
 		// The objects to intersect.
-		Line3 mLine;
-		Ellipsoid3 mEllipsoid;
+		Line3 m_Line;
+		Ellipsoid3 m_Ellipsoid;
 
 		// For testing the discriminant.  The default values are zero.  You may
 		// set the negative threshold to a (small) negative number and the

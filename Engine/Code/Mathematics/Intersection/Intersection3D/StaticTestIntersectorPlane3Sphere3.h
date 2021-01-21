@@ -29,7 +29,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere);
+                StaticTestIntersectorPlane3Sphere3(const Plane3& plane, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 

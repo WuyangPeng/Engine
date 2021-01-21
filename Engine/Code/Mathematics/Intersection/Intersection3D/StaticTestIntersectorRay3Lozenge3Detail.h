@@ -12,9 +12,8 @@
 
  
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Lozenge3<Real>
-	::StaticTestIntersectorRay3Lozenge3(const Ray3& ray,const Lozenge3& lozenge)
-	: mRay{ ray }, mLozenge{ lozenge }
+Mathematics::StaticTestIntersectorRay3Lozenge3<Real>::StaticTestIntersectorRay3Lozenge3(const Ray3& ray, const Lozenge3& lozenge, const Real epsilon)
+    : m_Ray{ ray }, mLozenge{ lozenge }
 {
 	Test();
 }
@@ -23,7 +22,7 @@ template <typename Real>
 const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Lozenge3<Real>
 	::GetRay() const
 {
-    return mRay;
+    return m_Ray;
 }
 
 template <typename Real>
@@ -37,7 +36,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorRay3Lozenge3<Real>
 	::Test()
 {
-	auto distance = DistanceRay3Rectangle3<Real>(mRay, mLozenge.GetRectangle()).Get().GetDistance();
+	auto distance = DistanceRay3Rectangle3<Real>(m_Ray, mLozenge.GetRectangle()).Get().GetDistance();
 
 	if (distance <= mLozenge.GetRadius())
 	{

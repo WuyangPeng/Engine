@@ -1,66 +1,64 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/18 13:07)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Plane3.h"  
-#include "Mathematics/Objects3D/Triangle3.h"  
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Plane3.h"
+#include "Mathematics/Objects3D/Triangle3.h"
 
-// A halfspace is the set of points on the side of a plane to which the plane
-// normal points.  The queries here are for intersection of a triangle and a
-// halfspace.  In the dynamice find query, if the triangle is already
-// intersecting the halfspace, the return value is 'false'.  The idea is to
-// find first time of contact.
+// 半空间是平面法线指向的平面侧面上的点集。 这里的查询是三角形和半空间的交集。
+/// 在动态查找查询中，如果三角形已经与半空间相交，则返回值为'false'。 这个想法是寻找第一次接触。
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticFindIntersectorHalfspace3Triangle3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticFindIntersectorHalfspace3Triangle3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Triangle3 = Triangle3<Real>;
-		using Plane3 = Plane3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorHalfspace3Triangle3 : public StaticIntersector<Real, Vector3D>
+    {
+    public:
+        using ClassType = StaticFindIntersectorHalfspace3Triangle3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3D>;
+        using Vector3D = Vector3D<Real>;
+        using Triangle3 = Triangle3<Real>;
+        using Plane3 = Plane3<Real>;
+        using Vector3DTools = Vector3DTools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-		StaticFindIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle);
+    public:
+        StaticFindIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Plane3 GetHalfspace() const;
-                [[nodiscard]] const Triangle3 GetTriangle() const;
+        [[nodiscard]] const Plane3 GetHalfspace() const noexcept;
+        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+ 
+        // 相交集为空，点，线段或三角形。 函数GetQuantity()返回0、1、2或3。
+        [[nodiscard]] int GetQuantity() const noexcept;
+        [[nodiscard]] const Vector3D GetPoint(int index) const;
 
-		// The intersection set is empty, a point, a segment, or a triangle.  The
-		// function GetQuantity() returns 0, 1, 2, or 3.
-                [[nodiscard]] int GetQuantity() const;
-                [[nodiscard]] const Vector3D GetPoint(int index) const;
+    private:
+        void Find();
 
-	private:
-		// Static queries.
-		void Find();
+        Plane3 m_Halfspace;
+        Triangle3 m_Triangle;
 
-		// The objects to intersect.
-		Plane3 m_Halfspace;
-		Triangle3 m_Triangle;
+        int m_Quantity;
+        Vector3D m_Point0;
+        Vector3D m_Point1;
+        Vector3D m_Point2;
+    };
 
-		// Information about the intersection set.
-		int m_Quantity;
-		Vector3D m_Point[3];
-	};
-
-	using FloatStaticFindIntersectorHalfspace3Triangle3 = StaticFindIntersectorHalfspace3Triangle3<float>;
-	using DoubleStaticFindIntersectorHalfspace3Triangle3 = StaticFindIntersectorHalfspace3Triangle3<double>;
+    using FloatStaticFindIntersectorHalfspace3Triangle3 = StaticFindIntersectorHalfspace3Triangle3<float>;
+    using DoubleStaticFindIntersectorHalfspace3Triangle3 = StaticFindIntersectorHalfspace3Triangle3<double>;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_TRIANGLE3_H

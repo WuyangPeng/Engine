@@ -21,7 +21,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class TrianglePlaneRelations final
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE TrianglePlaneRelations final
     {
     public:
         using ClassType = TrianglePlaneRelations<Real>;
@@ -37,9 +37,9 @@ namespace Mathematics
 
         [[nodiscard]] Real GetDistance(int index) const;
         [[nodiscard]] NumericalValueSymbol GetSign(int index) const;
-        [[nodiscard]] int GetPositive() const;
-        [[nodiscard]] int GetNegative() const;
-        [[nodiscard]] int GetZero() const;
+        [[nodiscard]] int GetPositive() const noexcept;
+        [[nodiscard]] int GetNegative() const noexcept;
+        [[nodiscard]] int GetZero() const noexcept;
 
     private:
         constexpr static auto sm_Size = 3;

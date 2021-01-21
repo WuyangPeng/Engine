@@ -88,7 +88,7 @@ namespace Mathematics
 		Query3<Real>* mQuery;
 		
 		// The line of containment if the dimension is 1.
-		Vector3D<Real> mLineOrigin, mLineDirection;
+		Vector3D<Real> m_LineOrigin, m_LineDirection;
 		
 		// The plane of containment if the dimension is 2.
 		Vector3D<Real> mPlaneOrigin, mPlaneDirection[2];

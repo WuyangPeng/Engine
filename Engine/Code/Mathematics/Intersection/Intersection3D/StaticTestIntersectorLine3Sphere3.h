@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere);
+                StaticTestIntersectorLine3Sphere3(const Line3& line, const Sphere3& sphere, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -40,7 +40,7 @@ namespace Mathematics
 		void Test();
 
 		// The objects to intersect.
-		Line3 mLine;
+		Line3 m_Line;
 		Sphere3 m_Sphere;
 	};
 

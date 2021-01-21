@@ -95,18 +95,20 @@ IncludeCategories:
     Priority:        13
   - Regex:           '^"(AssistTools|Framework)/.*'
     Priority:        14
+  - Regex:           '^"(Example|LibExample|Editor|Toolset)/.*'
+    Priority:        15
   - Regex:           '^".*'
     Priority:        1 
   - Regex:           '^<gsl.*>'
-    Priority:        15
-  - Regex:           '^<boost.*>'
     Priority:        16
-  - Regex:           '^<.*\.h>'
+  - Regex:           '^<boost.*>'
     Priority:        17
+  - Regex:           '^<.*\.h>'
+    Priority:        18
   - Regex:           '^<.*'
-    Priority:        18  
+    Priority:        19  
   - Regex:           '.*'
-    Priority:        19 
+    Priority:        20
 IncludeIsMainRegex: '^".*(Export|Dll).h' 
 IndentCaseLabels: true
 IndentGotoLabels: false

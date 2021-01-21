@@ -42,6 +42,14 @@ const typename Mathematics::Triangle2<Real>::ContainerType Mathematics::Triangle
 }
 
 template <typename Real>
+const Mathematics::Vector2D<Real> Mathematics::Triangle2<Real>::GetVertex(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return m_Impl->GetVertex(index);
+}
+
+template <typename Real>
 Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2D& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;

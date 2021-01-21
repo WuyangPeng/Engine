@@ -11,9 +11,8 @@
 #include "Mathematics/Distance/Distance3D/DistancePoint3Frustum3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
-	::StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere,const Frustum3& frustum)
-	: m_Sphere{ sphere }, mFrustum{ frustum }
+Mathematics::StaticTestIntersectorSphere3Frustum3<Real>::StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon)
+    : m_Sphere{ sphere }, m_Frustum{ frustum }
 {
 	Test();
 }
@@ -29,14 +28,14 @@ template <typename Real>
 const Mathematics::Frustum3<Real> Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::GetFrustum() const
 {
-    return mFrustum;
+    return m_Frustum;
 }
 
 template <typename Real>
 void Mathematics::StaticTestIntersectorSphere3Frustum3<Real>
 	::Test()
 {
-	auto distance = DistancePoint3Frustum3<Real>(m_Sphere.GetCenter(),mFrustum).Get().GetDistance();
+	auto distance = DistancePoint3Frustum3<Real>(m_Sphere.GetCenter(),m_Frustum).Get().GetDistance();
 
 	if (distance <= m_Sphere.GetRadius())
 	{

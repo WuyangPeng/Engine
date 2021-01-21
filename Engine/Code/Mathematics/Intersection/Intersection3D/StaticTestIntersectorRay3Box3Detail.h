@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorRay3Box3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Box3<Real>
-	::StaticTestIntersectorRay3Box3(const Ray3& rkRay,const Box3& rkBox)
-	: mRay{ rkRay }, m_Box{ rkBox }
+Mathematics::StaticTestIntersectorRay3Box3<Real>::StaticTestIntersectorRay3Box3(const Ray3& rkRay, const Box3& rkBox, const Real epsilon)
+    : m_Ray{ rkRay }, m_Box{ rkBox }
 {
 	Test();
 }
@@ -21,7 +20,7 @@ template <typename Real>
 const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Box3<Real>
 	::GetRay() const
 {
-    return mRay;
+    return m_Ray;
 }
 
 template <typename Real>
@@ -37,9 +36,9 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
 {
     Real WdU[3], AWdU[3], DdU[3], ADdU[3], AWxDdU[3], RHS;
 
-	auto diff = mRay.GetOrigin() - m_Box.GetCenter();
+	auto diff = m_Ray.GetOrigin() - m_Box.GetCenter();
 
-	WdU[0] = Vector3DTools::DotProduct(mRay.GetDirection(), m_Box.GetAxis(0));
+	WdU[0] = Vector3DTools::DotProduct(m_Ray.GetDirection(), m_Box.GetAxis(0));
     AWdU[0] = Math::FAbs(WdU[0]);
 	DdU[0] = Vector3DTools::DotProduct(diff, m_Box.GetAxis(0));
     ADdU[0] = Math::FAbs(DdU[0]);
@@ -49,7 +48,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
         return;
     }
 
-	WdU[1] = Vector3DTools::DotProduct(mRay.GetDirection(), m_Box.GetAxis(1));
+	WdU[1] = Vector3DTools::DotProduct(m_Ray.GetDirection(), m_Box.GetAxis(1));
     AWdU[1] = Math::FAbs(WdU[1]);
 	DdU[1] = Vector3DTools::DotProduct(diff,m_Box.GetAxis(1));
     ADdU[1] = Math::FAbs(DdU[1]);
@@ -59,7 +58,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
         return;
     }
 
-	WdU[2] = Vector3DTools::DotProduct(mRay.GetDirection(), m_Box.GetAxis(2));
+	WdU[2] = Vector3DTools::DotProduct(m_Ray.GetDirection(), m_Box.GetAxis(2));
     AWdU[2] = Math::FAbs(WdU[2]);
 	DdU[2] = Vector3DTools::DotProduct(diff, m_Box.GetAxis(2));
     ADdU[2] = Math::FAbs(DdU[2]);
@@ -69,7 +68,7 @@ void Mathematics::StaticTestIntersectorRay3Box3<Real>
 		return;
     }
 
-	auto WxD = Vector3DTools::CrossProduct(mRay.GetDirection(),diff);
+	auto WxD = Vector3DTools::CrossProduct(m_Ray.GetDirection(),diff);
 
 	AWxDdU[0] = Math::FAbs(Vector3DTools::DotProduct(WxD, m_Box.GetAxis(0)));
 	RHS = m_Box.GetExtent(1)*AWdU[2] + m_Box.GetExtent(2)*AWdU[1];

@@ -1,62 +1,21 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 16:45)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.6.0.1 (2021/01/13 13:54)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
 
 #include "DynamicTestIntersectorHalfspace3Segment3.h"
 
-template <typename Real>
-Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>
-	::DynamicTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-	:ParentType{ tmax,lhsVelocity,rhsVelocity,epsilon }, m_Halfspace{ halfspace }, m_Segment{ segment }
-{
-	Test();
-}
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_ACHIEVE)
 
-template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>
-	::GetHalfspace() const
-{
-	return m_Halfspace;
-}
+    #include "DynamicTestIntersectorHalfspace3Segment3Achieve.h"
 
-template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>
-	::GetSegment() const
-{
-	return m_Segment;
-}
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_ACHIEVE)
 
-template <typename Real>
-void Mathematics::DynamicTestIntersectorHalfspace3Segment3<Real>
-	::Test()
-{
-	SetContactTime(Math<Real>::GetZero());
-	auto tlast = Math::sm_MaxReal;
-	auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
-
-	Vector3D segment[2]{ m_Segment.GetBeginPoint(),  m_Segment.GetEndPoint() };
-
-	auto fmin = Math::GetValue(0);
-	auto fmax = Math::GetValue(0);
-	FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), segment, fmin, fmax);
-
-	auto mContactTime = Math::GetValue(0);
-	if (FindIntersectorAxis<Real>::Test(m_Halfspace.GetNormal(), relVelocity, -Math::sm_MaxReal, m_Halfspace.GetConstant(), fmin, fmax, this->GetTMax(), mContactTime, tlast))
-	{
-		SetContactTime(mContactTime);
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		SetContactTime(mContactTime);
-		this->SetIntersectionType(IntersectionType::Empty);
-
-	}
-}
-
-#endif // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SEGMENT3_DETAIL_H

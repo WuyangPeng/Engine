@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorPlane3Plane3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Plane3<Real>
-	::StaticTestIntersectorPlane3Plane3 (const Plane3& rkPlane0, const Plane3& rkPlane1)
-	: m_Plane0{ rkPlane0 }, m_Plane1{ rkPlane1 }
+Mathematics::StaticTestIntersectorPlane3Plane3<Real>::StaticTestIntersectorPlane3Plane3(const Plane3& rkPlane0, const Plane3& rkPlane1, const Real epsilon)
+    : m_Plane0{ rkPlane0 }, m_Plane1{ rkPlane1 }
 {
 	Test();
 }

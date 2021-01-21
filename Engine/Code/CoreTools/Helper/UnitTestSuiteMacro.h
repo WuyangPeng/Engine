@@ -36,7 +36,7 @@
     using Suite = CoreTools::Suite;                               \
                                                                   \
 public:                                                           \
-    className(int argc, char** argv);
+    className(int argc, char** argv)
 
 #define CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(className) \
     CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_DECLARE(className);             \

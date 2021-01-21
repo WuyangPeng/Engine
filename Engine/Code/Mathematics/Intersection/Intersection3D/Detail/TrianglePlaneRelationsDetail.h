@@ -28,6 +28,10 @@ Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle
 template <typename Real>
 void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+
     // 计算三角形顶点到平面的带符号距离。 使用epsilon平面测试。
 
     for (auto i = 0; i < sm_Size; ++i)
@@ -51,6 +55,8 @@ void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& trian
             ++m_Zero;
         }
     }
+
+#include STSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -81,7 +87,7 @@ Mathematics::NumericalValueSymbol Mathematics::TrianglePlaneRelations<Real>::Get
 }
 
 template <typename Real>
-int Mathematics::TrianglePlaneRelations<Real>::GetPositive() const
+int Mathematics::TrianglePlaneRelations<Real>::GetPositive() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -89,7 +95,7 @@ int Mathematics::TrianglePlaneRelations<Real>::GetPositive() const
 }
 
 template <typename Real>
-int Mathematics::TrianglePlaneRelations<Real>::GetNegative() const
+int Mathematics::TrianglePlaneRelations<Real>::GetNegative() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -97,7 +103,7 @@ int Mathematics::TrianglePlaneRelations<Real>::GetNegative() const
 }
 
 template <typename Real>
-int Mathematics::TrianglePlaneRelations<Real>::GetZero() const
+int Mathematics::TrianglePlaneRelations<Real>::GetZero() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

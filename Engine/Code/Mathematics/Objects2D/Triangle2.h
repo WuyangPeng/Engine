@@ -54,6 +54,7 @@ namespace Mathematics
         [[nodiscard]] Real DistanceTo(const Vector2D& point) const;
 
         [[nodiscard]] const ContainerType GetVertex() const;
+        [[nodiscard]] const Vector2D GetVertex(int index) const;
 
     private:
         IMPL_TYPE_DECLARE(Triangle2);

@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum);
+                StaticTestIntersectorSphere3Frustum3(const Sphere3& sphere, const Frustum3& frustum, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -42,7 +42,7 @@ namespace Mathematics
 	private:
 		// The objects to intersect.
 		Sphere3 m_Sphere;
-		Frustum3 mFrustum;
+		Frustum3 m_Frustum;
 	};
 
 	using FloatStaticTestIntersectorSphere3Frustum3 = StaticTestIntersectorSphere3Frustum3<float>;

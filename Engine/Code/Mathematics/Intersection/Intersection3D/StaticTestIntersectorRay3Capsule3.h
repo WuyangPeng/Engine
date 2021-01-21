@@ -28,7 +28,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorRay3Capsule3(const Ray3& ray, const Capsule3& capsule);
+                StaticTestIntersectorRay3Capsule3(const Ray3& ray, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -40,8 +40,8 @@ namespace Mathematics
 		void Test();
 
 		// The objects to intersect.
-		Ray3 mRay;
-		Capsule3 mCapsule;
+		Ray3 m_Ray;
+		Capsule3 m_Capsule;
 	};
 
 	using FloatStaticTestIntersectorRay3Capsule3 = StaticTestIntersectorRay3Capsule3<float>;

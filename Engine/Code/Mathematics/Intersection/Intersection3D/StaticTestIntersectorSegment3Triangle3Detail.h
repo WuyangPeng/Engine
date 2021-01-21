@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorSegment3Triangle3.h"
  
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
-	::StaticTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle)
-	: m_Segment{ segment }, m_Triangle{ triangle }
+Mathematics::StaticTestIntersectorSegment3Triangle3<Real>::StaticTestIntersectorSegment3Triangle3(const Segment3& segment, const Triangle3& triangle, const Real epsilon)
+    : m_Segment{ segment }, m_Triangle{ triangle }
 {
 	Test();
 }
@@ -67,10 +66,10 @@ void Mathematics::StaticTestIntersectorSegment3Triangle3<Real>
     }
 
 	auto DdQxE2 = sign*Vector3DTools::DotProduct(m_Segment.GetDirection(), Vector3DTools::CrossProduct(diff,edge2));
-    if (DdQxE2 >= Math<Real>::GetZero())
+    if (DdQxE2 >= Math<Real>::GetValue(0))
     {
 		auto DdE1xQ = sign*Vector3DTools::DotProduct(m_Segment.GetDirection(), Vector3DTools::CrossProduct(edge1,diff));
-        if (DdE1xQ >= Math<Real>::GetZero())
+        if (DdE1xQ >= Math<Real>::GetValue(0))
         {
             if (DdQxE2 + DdE1xQ <= DdN)
             {

@@ -29,7 +29,7 @@ namespace Mathematics
 		using Math = typename ParentType::Math;
 
 	public:
-		StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder);
+                StaticTestIntersectorTriangle3Cylinder3(const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
 
 	CLASS_INVARIANT_OVERRIDE_DECLARE;
 
@@ -48,7 +48,7 @@ namespace Mathematics
 
 		// The objects to intersect.
 		Triangle3 m_Triangle;
-		Cylinder3 mCylinder;
+		Cylinder3 m_Cylinder;
 	};
 
 	using FloatStaticTestIntersectorTriangle3Cylinder3 = StaticTestIntersectorTriangle3Cylinder3<float>;

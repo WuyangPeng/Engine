@@ -132,7 +132,7 @@ void CoreTools::AppenderFile::NewDirectory(const String& directory) noexcept
     const auto result = System::CreateFileDirectory(directory, nullptr);
     if (!result)
     {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("创建文件目录失败。"));
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("创建文件目录失败。\n"));
     }
 }
 

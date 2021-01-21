@@ -11,8 +11,8 @@
 
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
-	::StaticTestIntersectorTriangle3Cylinder3 ( const Triangle3& triangle, const Cylinder3& cylinder)
-	:m_Triangle{ triangle }, mCylinder{ cylinder }
+	::StaticTestIntersectorTriangle3Cylinder3 ( const Triangle3& triangle, const Cylinder3& cylinder, const Real epsilon)
+	:m_Triangle{ triangle }, m_Cylinder{ cylinder }
 {
 	Test();
 }
@@ -28,7 +28,7 @@ template <typename Real>
 const Mathematics::Cylinder3<Real> Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	::GetCylinder () const
 {
-    return mCylinder;
+    return m_Cylinder;
 }
 
 template <typename Real>
@@ -37,7 +37,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 {
     // Get an orthonormal basis {U,V,D}.
  
-	auto vector3DOrthonormalBasis =  Vector3DTools::GenerateComplementBasis(mCylinder.GetAxis().GetDirection());
+	auto vector3DOrthonormalBasis =  Vector3DTools::GenerateComplementBasis(m_Cylinder.GetAxis().GetDirection());
 	auto U = vector3DOrthonormalBasis.GetUVector();
 	auto V = vector3DOrthonormalBasis.GetVVector();
 
@@ -46,10 +46,10 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     int i;
     for (i = 0; i < 3; ++i)
     {
-		auto delta = m_Triangle.GetVertex()[i] - mCylinder.GetAxis().GetOrigin();
+		auto delta = m_Triangle.GetVertex()[i] - m_Cylinder.GetAxis().GetOrigin();
         temp[i][0] = Vector3DTools::DotProduct(U,delta);
         temp[i][1] = Vector3DTools::DotProduct(V,delta);
-        temp[i][2] = Vector3DTools::DotProduct(mCylinder.GetAxis().GetDirection(),delta);
+        temp[i][2] = Vector3DTools::DotProduct(m_Cylinder.GetAxis().GetDirection(),delta);
     }
 
     // Sort by z-value.
@@ -95,7 +95,7 @@ void Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     Real z[3] { temp[j0][2], temp[j1][2], temp[j2][2] };
 
     // Fast no-intersection.
-    const auto hhalf = 0.5f*mCylinder.GetHeight();
+    const auto hhalf = 0.5f*m_Cylinder.GetHeight();
     if (z[2] < -hhalf || z[0] > hhalf)
     {
         // Triangle strictly below or above the cylinder.
@@ -361,17 +361,17 @@ template <typename Real>
 bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	::DiskOverlapsPoint (const Vector2D& Q) const
 {
-    return Q[0]*Q[0] + Q[1]*Q[1] <= mCylinder.GetRadius()*mCylinder.GetRadius();
+    return Q[0]*Q[0] + Q[1]*Q[1] <= m_Cylinder.GetRadius()*m_Cylinder.GetRadius();
 }
 
 template <typename Real>
 bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
 	::DiskOverlapsSegment (const Vector2D& Q0, const Vector2D& Q1) const
 {
-	auto rSqr = mCylinder.GetRadius()*mCylinder.GetRadius();
+	auto rSqr = m_Cylinder.GetRadius()*m_Cylinder.GetRadius();
 	auto D = Q0 - Q1;
 	auto dot = Vector2DTools<Real>::DotProduct(Q0,D);
-    if (dot <= Math<Real>::GetZero())
+    if (dot <= Math<Real>::GetValue(0))
     {
         return Vector2DTools<Real>::DotProduct(Q0,Q0) <= rSqr;
     }
@@ -396,11 +396,11 @@ bool Mathematics::StaticTestIntersectorTriangle3Cylinder3<Real>
     for (i0 = numVertices-1, i1 = 0; i1 < numVertices; i0 = i1++)
     {
 		auto dot = Vector2DTools<Real>::DotPerp(Q[i0],(Q[i0] - Q[i1]));
-        if (dot > Math<Real>::GetZero())
+        if (dot > Math<Real>::GetValue(0))
         {
             ++positive;
         }
-        else if (dot < Math<Real>::GetZero())
+        else if (dot < Math<Real>::GetValue(0))
         {
             ++negative;
         }

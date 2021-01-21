@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorPlane3Box3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Box3<Real>
-	::StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box)
-	: m_Plane{ plane }, m_Box{ box }
+Mathematics::StaticTestIntersectorPlane3Box3<Real>::StaticTestIntersectorPlane3Box3(const Plane3& plane, const Box3& box, const Real epsilon)
+    : m_Plane{ plane }, m_Box{ box }
 {
 	Test();
 }

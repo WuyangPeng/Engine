@@ -11,9 +11,8 @@
 #include "StaticTestIntersectorLine3Plane3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Plane3<Real>
-	::StaticTestIntersectorSegment3Plane3(const Segment3& rkSegment, const Plane3& rkPlane)
-	:m_Segment{ rkSegment }, m_Plane{ rkPlane }
+Mathematics::StaticTestIntersectorSegment3Plane3<Real>::StaticTestIntersectorSegment3Plane3(const Segment3& rkSegment, const Plane3& rkPlane, const Real epsilon)
+    : m_Segment{ rkSegment }, m_Plane{ rkPlane }
 {
 	Test();
 }

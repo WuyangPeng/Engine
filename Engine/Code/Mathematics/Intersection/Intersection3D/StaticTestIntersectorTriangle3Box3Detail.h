@@ -12,9 +12,8 @@
 #include "FindIntersectorAxis.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorTriangle3Box3<Real>
-	::StaticTestIntersectorTriangle3Box3(const Triangle3& triangle,const Box3& box)
-	:m_Triangle{ triangle }, m_Box{ box }
+Mathematics::StaticTestIntersectorTriangle3Box3<Real>::StaticTestIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon)
+    : m_Triangle{ triangle }, m_Box{ box }
 {
 	Test();
 }

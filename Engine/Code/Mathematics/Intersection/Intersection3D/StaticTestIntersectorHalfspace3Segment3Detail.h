@@ -11,23 +11,20 @@
 #include "IntersectorUtility3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
-	::StaticTestIntersectorHalfspace3Segment3 (const Plane3& halfspace, const Segment3& segment)
-	: m_Halfspace{ halfspace }, m_Segment{ segment }
+Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::StaticTestIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon)
+    : m_Halfspace{ halfspace }, m_Segment{ segment }
 {
 	Test();
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
-	::GetHalfspace() const
+const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::GetHalfspace() const noexcept
 {
     return m_Halfspace;
 }
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>
-	::GetSegment() const
+const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorHalfspace3Segment3<Real>::GetSegment() const noexcept
 {
     return m_Segment;
 }

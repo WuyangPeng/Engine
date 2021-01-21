@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorRay3Sphere3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Sphere3<Real>
-	::StaticTestIntersectorRay3Sphere3(const Ray3& ray,const Sphere3& sphere)
-	: mRay{ ray }, m_Sphere{ sphere }
+Mathematics::StaticTestIntersectorRay3Sphere3<Real>::StaticTestIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere, const Real epsilon)
+    : m_Ray{ ray }, m_Sphere{ sphere }
 {
 	Test();
 }
@@ -21,7 +20,7 @@ template <typename Real>
 const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 	::GetRay() const
 {
-    return mRay;
+    return m_Ray;
 }
 
 template <typename Real>
@@ -35,7 +34,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
 	::Test()
 {
-    auto diff = mRay.GetOrigin() - m_Sphere.GetCenter();
+    auto diff = m_Ray.GetOrigin() - m_Sphere.GetCenter();
 	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
     if (a0 <= Math<Real>::GetValue(0))
     {
@@ -45,7 +44,7 @@ void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
     }
     // else: P is outside the sphere
 
-	auto a1 = Vector3DTools::DotProduct(mRay.GetDirection(),diff);
+	auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(),diff);
     if (a1 >= Math<Real>::GetValue(0))
     {
 		this->SetIntersectionType(IntersectionType::Empty);

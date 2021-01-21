@@ -11,9 +11,8 @@
 #include "Mathematics/Distance/Distance3D/DistanceLine3Rectangle3.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Lozenge3<Real>
-	::StaticTestIntersectorLine3Lozenge3(const Line3& line, const Lozenge3& lozenge)
-	: mLine{ line }, mLozenge{ lozenge }
+Mathematics::StaticTestIntersectorLine3Lozenge3<Real>::StaticTestIntersectorLine3Lozenge3(const Line3& line, const Lozenge3& lozenge, const Real epsilon)
+    : m_Line{ line }, mLozenge{ lozenge }
 {
 	Test();
 }
@@ -22,7 +21,7 @@ template <typename Real>
 const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Lozenge3<Real>
 	::GetLine() const
 {
-    return mLine;
+    return m_Line;
 }
 
 template <typename Real>
@@ -36,7 +35,7 @@ template <typename Real>
 void Mathematics::StaticTestIntersectorLine3Lozenge3<Real>
 	::Test()
 {
-    auto distance = DistanceLine3Rectangle3<Real>(mLine, mLozenge.GetRectangle()).Get().GetDistance();
+    auto distance = DistanceLine3Rectangle3<Real>(m_Line, mLozenge.GetRectangle()).Get().GetDistance();
 
 	if (distance <= mLozenge.GetRadius())
 	{

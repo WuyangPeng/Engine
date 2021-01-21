@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::StaticTestIntersectorTriangle3Sphere3<Real>
-	::StaticTestIntersectorTriangle3Sphere3 (const Triangle3& triangle, const Sphere3& sphere)
+	::StaticTestIntersectorTriangle3Sphere3 (const Triangle3& triangle, const Sphere3& sphere, const Real epsilon)
 	: m_Triangle{ triangle }, m_Sphere{ sphere }
 {
 	Test();

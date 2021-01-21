@@ -12,9 +12,8 @@
 #include "IntersectorUtility3.h" 
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Box3<Real>
-	::StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid)
-	: m_Segment{ segment }, m_Box{ box }
+Mathematics::StaticTestIntersectorSegment3Box3<Real>::StaticTestIntersectorSegment3Box3(const Segment3& segment, const Box3& box, bool solid, const Real epsilon)
+    : m_Segment{ segment }, m_Box{ box }
 {  
     m_Solid = solid;
 	Test();

@@ -82,7 +82,7 @@ namespace Mathematics
 		Query2<Real>* mQuery;
 		
 		// The line of containment if the dimension is 1.
-		Vector2D<Real> mLineOrigin, mLineDirection;
+		Vector2D<Real> m_LineOrigin, m_LineDirection;
 	};
 	
 	using ConvexHull2f = ConvexHull2<float>;

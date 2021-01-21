@@ -10,9 +10,8 @@
 #include "StaticTestIntersectorSphere3Sphere3.h" 
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Sphere3<Real>
-	::StaticTestIntersectorSphere3Sphere3(const Sphere3& rkSphere0,const Sphere3& rkSphere1)
-	: m_Sphere0{ rkSphere0 }, m_Sphere1{ rkSphere1 }
+Mathematics::StaticTestIntersectorSphere3Sphere3<Real>::StaticTestIntersectorSphere3Sphere3(const Sphere3& rkSphere0, const Sphere3& rkSphere1, const Real epsilon)
+    : m_Sphere0{ rkSphere0 }, m_Sphere1{ rkSphere1 }
 {
 	Test();
 }
