@@ -35,7 +35,7 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
     auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box2{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector2D::sm_UnitX, Vector2D::sm_UnitY,
+                 Vector2D::GetUnitX(), Vector2D::GetUnitY(),
                  halfDiagonal[0], halfDiagonal[1] };
 }
 
@@ -110,7 +110,7 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
     // 合并的包围盒的轴是输入包围盒轴的平均值。
     // 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
     Vector2D firstAxis;
-    if (Math<Real>::GetValue(0) <= Vector2DTools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
+    if (Math::GetValue(0) <= Vector2DTools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
     {
         firstAxis = Math::GetRational(1, 2) * (lhs.GetAxis0() + rhs.GetAxis0());
         firstAxis.Normalize();

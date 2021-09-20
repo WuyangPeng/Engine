@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:11)
+//	引擎版本：0.7.1.1 (2020/10/26 13:11)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
@@ -35,7 +35,7 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         // 提供对该属性的只读访问
-        [[nodiscard]] operator ConstReferenceType() const;
+        [[nodiscard]] operator ConstReferenceType() const noexcept;
 
         // 这种方法是隐藏的，以防止熟悉这个类的用户在包含的类中对属性实例使用operator=，
         // 因为使用MethodPropertyGetSet<>会导致无限循环。

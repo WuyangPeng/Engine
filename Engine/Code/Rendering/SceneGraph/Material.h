@@ -11,15 +11,23 @@
 
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/DataTypes/Colour.h"
-
-RENDERING_EXPORT_SHARED_PTR(MaterialImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, MaterialImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Material : public CoreTools::Object
     {
     public:
-       COPY_UNSHARE_CLASSES_TYPE_DECLARE(Material, DESTRUCTOR_STATEMENT);
+        void Swap(Material& rhs) noexcept;
+       
+           public:
+               TYPE_DECLARE(Material);
+               using ClassShareType = CoreTools::CopyUnsharedClasses;
+               ~Material() noexcept;
+               Material(const Material& rhs);
+               Material& operator=(const Material& rhs);
+               Material(Material&& rhs) noexcept;
+               Material& operator=(Material&& rhs) noexcept;
         using ParentType = Object;
         using Colour = Colour<float>;
 
@@ -46,7 +54,7 @@ namespace Rendering
         float GetSpecularExponent() const;
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(Material);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

@@ -17,6 +17,7 @@
 #include "Mathematics/CurvesSurfacesVolumes/BSplineRectangleDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/SurfaceDetail.h"
+#include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26409)
 #include SYSTEM_WARNING_DISABLE(26451)

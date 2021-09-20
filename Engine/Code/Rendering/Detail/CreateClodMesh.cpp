@@ -15,11 +15,11 @@ using std::make_shared;
 
 Rendering::CreateClodMesh
 	::CreateClodMesh(TrianglesMeshSharedPtr mesh)
-	:m_Impl{ make_shared<ImplType>(mesh) }
+	:impl{ mesh }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, CreateClodMesh)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CreateClodMesh)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CreateClodMesh,GetCollapseRecordArray, Rendering::CollapseRecordArraySharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CreateClodMesh, GetCollapseRecordArray, Rendering::CollapseRecordArraySharedPtr)

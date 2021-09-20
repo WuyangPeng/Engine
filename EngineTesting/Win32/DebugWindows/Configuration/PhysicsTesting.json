@@ -1,0 +1,44 @@
+{
+  "macroSuite": 
+  {
+
+  },
+
+  "collisionDetectionSuite": 
+  {
+    "BoundTreeProjectionInfoTesting":1,
+    "BoundTreeSplitTrianglesTesting":100,
+    "BoundTreeChildTesting":1,
+    "BoundTreeTesting":1
+  },
+
+  "fluidSuite": 
+  {
+
+  },
+
+  "intersectionSuite": 
+  {
+
+  },
+
+  "lCPSolverSuite": 
+  {
+
+  },
+
+  "particleSystemSuite": 
+  {
+
+  },
+
+  "rigidBodySuite": 
+  {
+
+  },
+
+  "miscellaneousSuite": 
+  {
+
+  } 
+}

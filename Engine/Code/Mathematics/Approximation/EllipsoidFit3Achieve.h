@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::EllipsoidFit3<Real>::EllipsoidFit3(const Points& points)
-    : m_Impl{ std::make_shared<ImplType>(points) }
+    : impl{  points  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,10 +26,9 @@ Mathematics::EllipsoidFit3<Real>::EllipsoidFit3(const Points& points)
 template <typename Real>
 bool Mathematics::EllipsoidFit3<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+     
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -38,7 +37,7 @@ Real Mathematics::EllipsoidFit3<Real>::GetExactly() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExactly();
+    return impl->GetExactly();
 }
 
 template <typename Real>
@@ -46,7 +45,7 @@ const Mathematics::Vector3D<Real> Mathematics::EllipsoidFit3<Real>::GetCenter() 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCenter();
+    return impl->GetCenter();
 }
 
 template <typename Real>
@@ -54,7 +53,7 @@ const Mathematics::Matrix3<Real> Mathematics::EllipsoidFit3<Real>::GetRotate() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRotate();
+    return impl->GetRotate();
 }
 
 template <typename Real>
@@ -62,7 +61,7 @@ Real Mathematics::EllipsoidFit3<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent0();
+    return impl->GetExtent0();
 }
 
 template <typename Real>
@@ -70,7 +69,7 @@ Real Mathematics::EllipsoidFit3<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent1();
+    return impl->GetExtent1();
 }
 
 template <typename Real>
@@ -78,7 +77,7 @@ Real Mathematics::EllipsoidFit3<Real>::GetExtent2() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent2();
+    return impl->GetExtent2();
 }
 
 template <typename Real>
@@ -86,7 +85,7 @@ int Mathematics::EllipsoidFit3<Real>::GetNumPoint() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumPoint();
+    return impl->GetNumPoint();
 }
 
 template <typename Real>
@@ -94,7 +93,7 @@ const Mathematics::Vector3D<Real> Mathematics::EllipsoidFit3<Real>::GetPoint(int
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_ACHIEVE_H

@@ -8,7 +8,7 @@
 
 #include "WindowMessageLoopImpl.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Window/Flags/WindowMessagesFlags.h"
+#include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
@@ -23,7 +23,7 @@ Framework::WindowMessageLoopImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageLoopImpl)
 
-System::WindowWParam Framework::WindowMessageLoopImpl
+System::WindowsWParam Framework::WindowMessageLoopImpl
 	::EnterMessageLoop(HWnd hwnd)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -39,7 +39,7 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 }
 
 // private
-System::WindowWParam Framework::WindowMessageLoopImpl
+System::WindowsWParam Framework::WindowMessageLoopImpl
 	::EnterOldMessageLoop() noexcept
 {
 	while (System::GetSystemMessage(&m_Msg))
@@ -52,7 +52,7 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 }
 
 // private
-System::WindowWParam Framework::WindowMessageLoopImpl
+System::WindowsWParam Framework::WindowMessageLoopImpl
 	::EnterNewMessageLoop(HWnd hwnd)
 {
 	// 启动消息循环。
@@ -82,12 +82,12 @@ System::WindowWParam Framework::WindowMessageLoopImpl
 bool Framework::WindowMessageLoopImpl
 	::ProcessingMessage(HWnd hwnd) noexcept
 {
-	if (System::UnderlyingCastEnum<System::WindowMessages>(m_Msg.message) == System::WindowMessages::Quit)
+	if (System::UnderlyingCastEnum<System::WindowsMessages>(m_Msg.message) == System::WindowsMessages::Quit)
 	{
 		return false;
 	}
 
-	System::WindowHAccel accel{ nullptr };
+	System::WindowsHAccel accel{ nullptr };
 	if (!System::SystemTranslateAccelerator(hwnd, accel, &m_Msg))
 	{
             [[maybe_unused]] const auto result1 = System::TranslateSystemMessage(&m_Msg);

@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorArc2Arc2<Real>::StaticFindIntersectorArc2Arc2(const Arc2& lhsArc, const Arc2& rhsArc, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(lhsArc, rhsArc) }
+    : ParentType{ epsilon }, impl{  lhsArc, rhsArc  }
 {
     Find();
 
@@ -31,8 +31,8 @@ Mathematics::StaticFindIntersectorArc2Arc2<Real>::StaticFindIntersectorArc2Arc2(
 template <typename Real>
 void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
 {
-    const auto lhsArc = m_Impl->GetLhsArc();
-    const auto rhsArc = m_Impl->GetRhsArc();
+    const auto lhsArc = impl->GetLhsArc();
+    const auto rhsArc = impl->GetRhsArc();
 
    const Circle2 lhsCircle{ lhsArc.GetCenter(), lhsArc.GetRadius() };
     const Circle2 rhsCircle{ rhsArc.GetCenter(), rhsArc.GetRadius() };
@@ -55,7 +55,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
             {
                 // m_LhsArc的m_RhsArc里, <B0,A0,A1,B1>.
                 this->SetIntersectionType(IntersectionType::Other);
-                m_Impl->SetIntersection(lhsArc);
+                impl->SetIntersection(lhsArc);
             }
             else
             {
@@ -64,13 +64,13 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
                     // m_LhsArc和m_RhsArc重叠, <B0,A0,B1,A1>.
                     this->SetIntersectionType(IntersectionType::Other);
                     const Arc2 intersectionArc{ lhsArc.GetCenter(), lhsArc.GetRadius(), lhsArc.GetEnd0(), rhsArc.GetEnd1(), this->GetEpsilon() };
-                    m_Impl->SetIntersection(intersectionArc);
+                    impl->SetIntersection(intersectionArc);
                 }
                 else
                 {
                     // m_LhsArc和m_RhsArc共享端点 <B0,A0,B1,A1>, A0 = B1.
                     this->SetIntersectionType(IntersectionType::Point);
-                    m_Impl->AddIntersection((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / Math::GetValue(2));
+                    impl->AddIntersection((lhsArc.GetEnd0() + rhsArc.GetEnd1()) / Math::GetValue(2));
                 }
             }
 
@@ -85,13 +85,13 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
                 this->SetIntersectionType(IntersectionType::Other);
                 const Arc2 intersectionArc{ lhsArc.GetCenter(), lhsArc.GetRadius(), rhsArc.GetEnd0(), lhsArc.GetEnd1(), this->GetEpsilon() };
 
-                m_Impl->SetIntersection(intersectionArc);
+                impl->SetIntersection(intersectionArc);
             }
             else
             {
                 // m_LhsArc和m_RhsArc共享端点， <A0,B0,A1,B1>, B0 = A1.
                 this->SetIntersectionType(IntersectionType::Point);
-                m_Impl->AddIntersection((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / Math::GetValue(2));
+                impl->AddIntersection((rhsArc.GetEnd0() + lhsArc.GetEnd1()) / Math::GetValue(2));
             }
 
             return;
@@ -101,7 +101,7 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
         {
             // m_RhsArc在m_LhsArc里, <A0,B0,B1,A1>.
             this->SetIntersectionType(IntersectionType::Other);
-            m_Impl->SetIntersection(rhsArc);
+            impl->SetIntersection(rhsArc);
 
             return;
         }
@@ -118,11 +118,11 @@ void Mathematics::StaticFindIntersectorArc2Arc2<Real>::Find()
     {
         if (lhsArc.Contains(intersector.GetPoint(i)) && rhsArc.Contains(intersector.GetPoint(i)))
         {
-            m_Impl->AddIntersection(intersector.GetPoint(i));
+            impl->AddIntersection(intersector.GetPoint(i));
         }
     }
 
-    this->SetIntersectionType(0 < m_Impl->GetQuantity() ? IntersectionType::Point : IntersectionType::Empty);
+    this->SetIntersectionType(0 < impl->GetQuantity() ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -141,7 +141,7 @@ const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Arc2<Real>::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsArc();
+    return impl->GetLhsArc();
 }
 
 template <typename Real>
@@ -149,7 +149,7 @@ const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Arc2<Real>::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsArc();
+    return impl->GetRhsArc();
 }
 
 template <typename Real>
@@ -157,7 +157,7 @@ int Mathematics::StaticFindIntersectorArc2Arc2<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -165,7 +165,7 @@ const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorArc2Arc2<Rea
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -175,7 +175,7 @@ const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Arc2<Real>::
 
     if (this->GetIntersectionType() == IntersectionType::Other)
     {
-        return m_Impl->GetIntersectionArc();
+        return impl->GetIntersectionArc();
     }
     else
     {

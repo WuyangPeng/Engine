@@ -16,16 +16,16 @@
 #include "LogManagerFwd.h"
 #include "Flags/LogManagerFlags.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(AppenderImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(Appender,AppenderImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Appender final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Appender);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(Appender);
         using String = System::String;
 
     public:
@@ -60,7 +60,7 @@ namespace CoreTools
         void SetIsDefault(bool isDefault);
 
     private:
-        IMPL_TYPE_DECLARE(Appender);
+        PackageType impl;
     };
 }
 

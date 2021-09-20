@@ -1,0 +1,25 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_FWD_H
+#define %ProjectCapital%_%ManagerCapital%_FWD_H
+
+#include "Macro/MacroFwd.h" 
+#include "ArtificialIntellegence/ArtificialIntellegenceFwd.h"
+#include "Audio/AudioFwd.h"
+#include "CameraSystems/CameraSystemsFwd.h"
+#include "Event/EventFwd.h"
+#include "GUI/GUIFwd.h"
+#include "Input/InputFwd.h"
+#include "Message/MessageFwd.h"
+#include "Network/NetworkFwd.h"
+#include "ObjectLogic/ObjectLogicFwd.h"
+#include "PhysicalModelling/PhysicalModellingFwd.h"
+#include "Rendering/RenderingFwd.h"
+#include "Resource/ResourceFwd.h"
+#include "System/SystemFwd.h"
+
+#endif // %ProjectCapital%_%ManagerCapital%_FWD_H

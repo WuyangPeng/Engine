@@ -16,25 +16,27 @@
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Segment3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class TestIntersectorAxisImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TestIntersectorAxisImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TestIntersectorAxisImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<TestIntersectorAxisImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<TestIntersectorAxisImpl<double>>; 
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<TestIntersectorAxisImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<TestIntersectorAxisImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE TestIntersectorAxis final
     {
     public:
         using TestIntersectorAxisImpl = TestIntersectorAxisImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(TestIntersectorAxis);
-
+     
+        TYPE_DECLARE(TestIntersectorAxis);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector3D = Vector3D<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
@@ -57,7 +59,7 @@ namespace Mathematics
         [[nodiscard]] Real GetTLast() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(TestIntersectorAxis);
+        PackageType impl;
     };
 
     using FloatTestIntersectorAxis = TestIntersectorAxis<float>;

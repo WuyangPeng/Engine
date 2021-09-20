@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 14:32)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/25 11:25)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_FLAGS_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_FLAGS_H
@@ -18,7 +18,7 @@ namespace System
 
     enum class CreateWaitableTimerReset
     {
-        CheckOnly = CREATE_WAITABLE_TIMER_MANUAL_RESET,
+        ManualReset = CREATE_WAITABLE_TIMER_MANUAL_RESET,
         Default = 0x00000000,
     };
 
@@ -34,7 +34,7 @@ namespace System
 
     enum class CreateWaitableTimerReset
     {
-        CheckOnly = 0x00000001,
+        ManualReset = 0x00000001,
         Default = 0x00000000,
     };
 

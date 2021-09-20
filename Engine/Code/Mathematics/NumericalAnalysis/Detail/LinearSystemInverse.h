@@ -20,7 +20,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_HIDDEN_DECLARE LinearSystemInverse final
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE LinearSystemInverse final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");

@@ -79,11 +79,7 @@ void Rendering::RendererImpl
 	m_PixelShaderManagement = make_shared<PixelShaderManagement>(renderer);
 } 
 
-Rendering::RendererImpl
-	::~RendererImpl()
-{
-	RENDERING_SELF_CLASS_IS_VALID_1;
-}
+
 
 #ifdef OPEN_CLASS_INVARIANT
 bool Rendering::RendererImpl

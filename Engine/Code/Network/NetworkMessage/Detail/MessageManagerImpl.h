@@ -28,7 +28,7 @@ namespace Network
         using FactoryFunction = MessageInterface::FactoryFunction;
 
     public:
-        MessageManagerImpl() noexcept;
+        MessageManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

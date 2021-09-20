@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 13:37)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/29 17:28)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_DETAIL_H
 #define CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_DETAIL_H
@@ -23,23 +23,17 @@ bool CoreTools::CaseInsensitiveStringTraits<CharT>::eq(CharType lhs, CharType rh
 }
 
 template <typename CharT>
-bool CoreTools::CaseInsensitiveStringTraits<CharT>::ne(CharType lhs, CharType rhs) noexcept
-{
-    return !eq(lhs, rhs);
-}
-
-template <typename CharT>
 bool CoreTools::CaseInsensitiveStringTraits<CharT>::lt(CharType lhs, CharType rhs) noexcept
 {
     return toupper(lhs) < toupper(rhs);
 }
 
 template <typename CharT>
-int CoreTools::CaseInsensitiveStringTraits<CharT>::compare(const CharType* lhs, const CharType* rhs, size_t size) noexcept
+int CoreTools::CaseInsensitiveStringTraits<CharT>::compare(const CharType* lhs, const CharType* rhs, size_t count) noexcept
 {
     EXCEPTION_TRY
     {
-        return DoCompare(lhs, rhs, size);
+        return DoCompare(lhs, rhs, count);
     }
     EXCEPTION_ALL_CATCH(CoreTools)
 
@@ -48,20 +42,30 @@ int CoreTools::CaseInsensitiveStringTraits<CharT>::compare(const CharType* lhs, 
 
 // private
 template <typename CharT>
-int CoreTools::CaseInsensitiveStringTraits<CharT>::DoCompare(const CharType* lhs, const CharType* rhs, size_t size) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+int CoreTools::CaseInsensitiveStringTraits<CharT>::DoCompare(const CharType* lhs, const CharType* rhs, size_t count) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
-    for (auto i = 0u; i < size; ++i)
+    for (auto i = 0u; i < count; ++i)
     {
         if (lhs == nullptr)
+        {
             return -1;
+        }
         else if (rhs == nullptr)
+        {
             return 1;
-        else if (tolower(*lhs) < tolower(*rhs))
-            return -1;
-        else if (tolower(*rhs) < tolower(*lhs))
-            return 1;
+        }
+        else
+        {
+            const auto lhsLower = tolower(*lhs);
+            const auto rhsLower = tolower(*rhs);
 
-        CORE_TOOLS_ASSERTION_2(tolower(*lhs) == tolower(*rhs), "比较字符串发生错误！");
+            if (lhsLower < rhsLower)
+                return -1;
+            else if (rhsLower < lhsLower)
+                return 1;
+
+            CORE_TOOLS_ASSERTION_2(lhsLower == rhsLower, "比较字符串发生错误！");
+        }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -74,24 +78,33 @@ int CoreTools::CaseInsensitiveStringTraits<CharT>::DoCompare(const CharType* lhs
 }
 
 template <typename CharT>
-typename const CoreTools::CaseInsensitiveStringTraits<CharT>::CharType* CoreTools::CaseInsensitiveStringTraits<CharT>::find(const CharType* str, size_t size, CharType character) noexcept
+const typename CoreTools::CaseInsensitiveStringTraits<CharT>::CharType* CoreTools::CaseInsensitiveStringTraits<CharT>::find(const CharType* first, size_t count, CharType character) noexcept
 {
-    while (0 < size--)
+    const auto lowerCharacter = tolower(character);
+    for (auto i = 0u; i < count; ++i)
     {
-        if (toupper(*str) == toupper(character))
+        if (tolower(*first) == lowerCharacter)
         {
-            return str;
+            return first;
         }
-        else
-        {
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-            ++str;
+        ++first;
 #include STSTEM_WARNING_POP
-        }
     }
 
     return nullptr;
 }
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename CharT>
+bool CoreTools::CaseInsensitiveStringTraits<CharT>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
 
 #endif  // CORE_TOOLS_CHARACTER_STRING_CASE_INSENSITIVE_STRING_DETAIL_H

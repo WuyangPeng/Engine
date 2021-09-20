@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::PolynomialFit3Powers<Real>::PolynomialFit3Powers(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, const Powers& powers, bool isRepackage)
-    : m_Impl{ std::make_shared<ImplType>(xSamples, ySamples, wSamples, powers, isRepackage) }
+    : impl{  xSamples, ySamples, wSamples, powers, isRepackage  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -25,10 +25,9 @@ Mathematics::PolynomialFit3Powers<Real>::PolynomialFit3Powers(const Samples& xSa
 template <typename Real>
 bool Mathematics::PolynomialFit3Powers<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+ 
         return true;
-    else
-        return false;
+     
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -37,7 +36,7 @@ bool Mathematics::PolynomialFit3Powers<Real>::IsSolveSucceed() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsSolveSucceed();
+    return impl->IsSolveSucceed();
 }
 
 template <typename Real>
@@ -45,7 +44,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetXMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMin();
+    return impl->GetXMin();
 }
 
 template <typename Real>
@@ -53,7 +52,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetXMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMax();
+    return impl->GetXMax();
 }
 
 template <typename Real>
@@ -61,7 +60,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetYMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetYMin();
+    return impl->GetYMin();
 }
 
 template <typename Real>
@@ -69,7 +68,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetYMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetYMax();
+    return impl->GetYMax();
 }
 
 template <typename Real>
@@ -77,7 +76,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetWMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMin();
+    return impl->GetWMin();
 }
 
 template <typename Real>
@@ -85,7 +84,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::GetWMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMax();
+    return impl->GetWMax();
 }
 
 template <typename Real>
@@ -93,7 +92,7 @@ Real Mathematics::PolynomialFit3Powers<Real>::operator()(Real x, Real y) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(x, y);
+    return (*impl)(x, y);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_POWERS_ACHIEVE_H

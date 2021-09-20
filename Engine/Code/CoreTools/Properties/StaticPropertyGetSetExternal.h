@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:15)
+//	引擎版本：0.7.1.1 (2020/10/26 13:15)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_EXTERNAL_H
@@ -26,7 +26,7 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator GetReferenceType() const;
+        [[nodiscard]] operator GetReferenceType() const noexcept;
         StaticPropertyGetSetExternal& operator=(SetReferenceType value);
     };
 }

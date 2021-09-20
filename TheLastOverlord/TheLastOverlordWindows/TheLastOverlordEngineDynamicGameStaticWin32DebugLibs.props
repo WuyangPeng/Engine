@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);$(GameEngineDynamicGameStaticWin32DebugLib);$(TheLastOverlordEngineDynamicGameStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);$(GameEngineDynamicGameStaticWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_GAME_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>

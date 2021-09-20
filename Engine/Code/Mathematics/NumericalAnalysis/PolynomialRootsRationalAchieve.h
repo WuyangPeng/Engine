@@ -23,7 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::PolynomialRootsRational<Real>::PolynomialRootsRational(Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(epsilon) }
+    : impl{ std::make_shared<ImplType>(epsilon) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -31,7 +31,7 @@ Mathematics::PolynomialRootsRational<Real>::PolynomialRootsRational(Real epsilon
 
 template <typename Real>
 Mathematics::PolynomialRootsRational<Real>::PolynomialRootsRational(const PolynomialRootsRational& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -51,14 +51,14 @@ Mathematics::PolynomialRootsRational<Real>& Mathematics::PolynomialRootsRational
 template <typename Real>
 void Mathematics::PolynomialRootsRational<Real>::Swap(PolynomialRootsRational& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::PolynomialRootsRational<Real>::PolynomialRootsRational(PolynomialRootsRational&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -68,7 +68,7 @@ Mathematics::PolynomialRootsRational<Real>& Mathematics::PolynomialRootsRational
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -77,7 +77,7 @@ Mathematics::PolynomialRootsRational<Real>& Mathematics::PolynomialRootsRational
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -89,7 +89,7 @@ int Mathematics::PolynomialRootsRational<Real>::GetQuantity() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -97,7 +97,7 @@ Real Mathematics::PolynomialRootsRational<Real>::GetRoot(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRoot(index);
+    return impl->GetRoot(index);
 }
 
 template <typename Real>
@@ -105,95 +105,95 @@ int Mathematics::PolynomialRootsRational<Real>::GetMultiplicity(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMultiplicity(index);
+    return impl->GetMultiplicity(index);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Linear(Real constant, Real once)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Linear(constant, once);
+    return impl->Linear(constant, once);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Linear(const PolynomialRational& constant, const PolynomialRational& once)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Linear(constant, once);
+    return impl->Linear(constant, once);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quadratic(Real constant, Real once, Real secondary)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quadratic(constant, once, secondary);
+    return impl->Quadratic(constant, once, secondary);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quadratic(constant, once, secondary);
+    return impl->Quadratic(constant, once, secondary);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quadratic(const PolynomialRational& constant, const PolynomialRational& once)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quadratic(constant, once);
+    return impl->Quadratic(constant, once);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Cubic(Real constant, Real once, Real secondary, Real thrice)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Cubic(constant, once, secondary, thrice);
+    return impl->Cubic(constant, once, secondary, thrice);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Cubic(constant, once, secondary, thrice);
+    return impl->Cubic(constant, once, secondary, thrice);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Cubic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Cubic(constant, once, secondary);
+    return impl->Cubic(constant, once, secondary);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quartic(Real constant, Real once, Real secondary, Real thrice, Real quartic)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quartic(constant, once, secondary, thrice, quartic);
+    return impl->Quartic(constant, once, secondary, thrice, quartic);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice, const PolynomialRational& quartic)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quartic(constant, once, secondary, thrice, quartic);
+    return impl->Quartic(constant, once, secondary, thrice, quartic);
 }
 
 template <typename Real>
 bool Mathematics::PolynomialRootsRational<Real>::Quartic(const PolynomialRational& constant, const PolynomialRational& once, const PolynomialRational& secondary, const PolynomialRational& thrice)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Quartic(constant, once, secondary, thrice);
+    return impl->Quartic(constant, once, secondary, thrice);
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_RATIONAL_ACHIEVE_H

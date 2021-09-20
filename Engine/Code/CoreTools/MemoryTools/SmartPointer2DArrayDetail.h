@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 11:10)
+//	引擎版本：0.7.1.1 (2020/10/20 11:10)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_2D_ARRAY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_2D_ARRAY_DETAIL_H
@@ -15,16 +15,17 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/MemoryMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename T>
 CoreTools::SmartPointer2DArray<T>::SmartPointer2DArray(PointerType data)
     : m_Data{ data }
 {
-    SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
+    [[maybe_unused]] const auto reference = SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 template <typename T>
 CoreTools::SmartPointer2DArray<T>::~SmartPointer2DArray() noexcept
 {
@@ -32,7 +33,7 @@ CoreTools::SmartPointer2DArray<T>::~SmartPointer2DArray() noexcept
 
     EXCEPTION_TRY
     {
-        auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
+        const auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
 
         if (reference == 0)
         {
@@ -61,7 +62,9 @@ CoreTools::SmartPointer2DArray<T>& CoreTools::SmartPointer2DArray<T>::operator=(
 
     return *this;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455) 
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename T>
 CoreTools::SmartPointer2DArray<T>& CoreTools::SmartPointer2DArray<T>::operator=(PointerType data)
 {
@@ -72,6 +75,7 @@ CoreTools::SmartPointer2DArray<T>& CoreTools::SmartPointer2DArray<T>::operator=(
 
     return *this;
 }
+#include STSTEM_WARNING_POP
 
 // private
 template <typename T>

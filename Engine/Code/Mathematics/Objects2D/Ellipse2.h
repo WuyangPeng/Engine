@@ -13,11 +13,11 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Ellipse2Coefficients.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Mathematics/Algebra/Matrix2.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 #include "Mathematics/Base/MathDetail.h"
-
 #include <type_traits>
 #include <vector>
 
@@ -39,8 +39,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Ellipse2Impl = Ellipse2Impl<Real>;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Ellipse2);
-       
+        TYPE_DECLARE(Ellipse2);
+        using PackageType = CoreTools::DelayCopyUnsharedImpl<Ellipse2, ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
+
         using Math = Math<Real>;
         using Vector2D = Vector2D<Real>;
         using Matrix2 = Matrix2<Real>;
@@ -102,7 +104,7 @@ namespace Mathematics
         [[nodiscard]] const Ellipse2 GetMove(Real t, const Vector2D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Ellipse2);
+        PackageType impl;
     };
 
     template <typename Real>

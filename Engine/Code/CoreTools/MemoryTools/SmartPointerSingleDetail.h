@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 18:42)
+//	引擎版本：0.7.1.1 (2020/10/20 18:42)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_SINGLE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_SINGLE_DETAIL_H
@@ -16,14 +16,17 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename T>
 CoreTools::SmartPointerSingle<T>::SmartPointerSingle(PointerType data)
     : m_Data{ data }
 {
-    SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
+    [[maybe_unused]] const auto reference = SMART_POINTER_SINGLETON.IncreaseReference(m_Data);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 template <typename T>
 CoreTools::SmartPointerSingle<T>::~SmartPointerSingle() noexcept
@@ -32,7 +35,7 @@ CoreTools::SmartPointerSingle<T>::~SmartPointerSingle() noexcept
 
     EXCEPTION_TRY
     {
-        auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
+        const auto reference = SMART_POINTER_SINGLETON.DecreaseReference(m_Data);
 
         if (reference == 0)
         {
@@ -61,7 +64,8 @@ CoreTools::SmartPointerSingle<T>& CoreTools::SmartPointerSingle<T>::operator=(co
 
     return *this;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename T>
 CoreTools::SmartPointerSingle<T>& CoreTools::SmartPointerSingle<T>::operator=(PointerType data)
 {
@@ -72,6 +76,7 @@ CoreTools::SmartPointerSingle<T>& CoreTools::SmartPointerSingle<T>::operator=(Po
 
     return *this;
 }
+#include STSTEM_WARNING_POP
 
 // private
 template <typename T>

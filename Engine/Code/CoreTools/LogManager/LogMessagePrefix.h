@@ -16,17 +16,17 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogMessagePrefixImpl);
+CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(LogMessagePrefixImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE LogMessagePrefix final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(LogMessagePrefix);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(LogMessagePrefix);
         using String = System::String;
 
     public:
@@ -38,7 +38,7 @@ namespace CoreTools
         [[nodiscard]] int GetPrefixSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(LogMessagePrefix);
+        PackageType impl;
     };
 }
 

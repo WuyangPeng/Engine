@@ -16,13 +16,24 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 namespace Network
 {
     class NETWORK_HIDDEN_DECLARE MultiMessageEventContainer final : public MessageEventContainerImpl
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MultiMessageEventContainer, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(MultiMessageEventContainer& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(MultiMessageEventContainer);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~MultiMessageEventContainer() noexcept = default;
+        MultiMessageEventContainer(const MultiMessageEventContainer& rhs);
+        MultiMessageEventContainer& operator=(const MultiMessageEventContainer& rhs);
+        MultiMessageEventContainer(MultiMessageEventContainer&& rhs) noexcept;
+        MultiMessageEventContainer& operator=(MultiMessageEventContainer&& rhs) noexcept;
         using ParentType = MessageEventContainerImpl;
 
     public:
@@ -44,7 +55,10 @@ namespace Network
         [[nodiscard]] bool IsPrioritySame(MessageEventPriority priority) const noexcept final;
 
     private:
-        IMPL_TYPE_DECLARE(MultiMessageEventContainer);
+        using MultiMessageEventContainerImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        MultiMessageEventContainerImplPtr impl;
         MessageEventPriority m_Priority;
     };
 }

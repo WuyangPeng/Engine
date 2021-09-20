@@ -15,6 +15,7 @@
 #include "System/Helper/UnicodeUsing.h"
 
 #include <string>
+#include <memory>
 
 namespace CoreTools
 {
@@ -22,6 +23,8 @@ namespace CoreTools
     {
     public:
         using ClassType = WriteFileManagerInterface;
+        using String = System::String;
+        using FactoryType =  WriteFileManagerInterface;
 
     public:
         WriteFileManagerInterface() = default;
@@ -38,6 +41,11 @@ namespace CoreTools
 
         [[nodiscard]] virtual void Write(size_t itemSize, const void* data) = 0;
         [[nodiscard]] virtual void Write(size_t itemSize, size_t itemsNumber, const void* data) = 0;
+
+        using WriteFileManageInterfacePtr = std::shared_ptr<WriteFileManagerInterface>;
+
+    public:
+        [[nodiscard]] static WriteFileManageInterfacePtr Create (const String& fileName);
     };
 }
 

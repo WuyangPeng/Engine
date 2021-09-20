@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:02)
+//	引擎版本：0.7.1.1 (2020/10/26 16:02)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename EventType>
-CoreTools::State<EventType>::State()
+CoreTools::State<EventType>::State() noexcept
     : m_Entity{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -88,7 +88,7 @@ const CoreTools::Rtti& CoreTools::State<EntityType>::GetCurrentRttiType() noexce
 }
 
 template <typename EntityType>
-bool CoreTools::State<EntityType>::IsExactly(const Rtti& rtti) const
+bool CoreTools::State<EntityType>::IsExactly(const Rtti& rtti) const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

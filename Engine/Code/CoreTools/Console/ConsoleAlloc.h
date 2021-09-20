@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 15:12)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 19:02)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_ALLOC_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_ALLOC_H
@@ -24,13 +24,13 @@ namespace CoreTools
         using ClassType = ConsoleAlloc;
 
     public:
-        explicit ConsoleAlloc(DisableNotThrow disableNotThrow);
+        explicit ConsoleAlloc(MAYBE_UNUSED DisableNotThrow disableNotThrow);
         ~ConsoleAlloc() noexcept;
 
-        ConsoleAlloc(const ConsoleAlloc&) = delete;
-        ConsoleAlloc& operator=(const ConsoleAlloc&) = delete;
-        ConsoleAlloc(ConsoleAlloc&&) noexcept = delete;
-        ConsoleAlloc& operator=(ConsoleAlloc&&) noexcept = delete;
+        ConsoleAlloc(const ConsoleAlloc& rhs) = delete;
+        ConsoleAlloc& operator=(const ConsoleAlloc& rhs) = delete;
+        ConsoleAlloc(ConsoleAlloc&& rhs) noexcept = delete;
+        ConsoleAlloc& operator=(ConsoleAlloc&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -38,10 +38,13 @@ namespace CoreTools
         void OpenConsole();
         void CloseConsole() noexcept;
 
+        void ReOpenConsole();
+        void CloseConsole(FILE* file) noexcept;
+
     private:
-        FILE* m_Out;
-        FILE* m_In;
-        FILE* m_Error;
+        FILE* out;
+        FILE* in;
+        FILE* error;
     };
 }
 

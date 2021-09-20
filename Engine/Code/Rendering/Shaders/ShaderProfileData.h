@@ -16,14 +16,23 @@
 
 #include <string>
 
-RENDERING_EXPORT_SHARED_PTR(ShaderProfileDataImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, ShaderProfileDataImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE ShaderProfileData : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderProfileData, DESTRUCTOR_STATEMENT);
+        void Swap(ShaderProfileData& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(ShaderProfileData);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~ShaderProfileData() noexcept;
+                ShaderProfileData(const ShaderProfileData& rhs);
+                ShaderProfileData& operator=(const ShaderProfileData& rhs);
+                ShaderProfileData(ShaderProfileData&& rhs) noexcept;
+                ShaderProfileData& operator=(ShaderProfileData&& rhs) noexcept;
         using ParentType = Object;
 
     public:
@@ -46,7 +55,7 @@ namespace Rendering
         int GetTextureUnitSize() const noexcept;
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(ShaderProfileData);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

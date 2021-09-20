@@ -8,8 +8,8 @@
 #define RENDERING_RESOURCES_TEXTURE_CUBE_H
 
 #include "Texture.h"
-
-RENDERING_EXPORT_SHARED_PTR(TextureCubeImpl);
+EXPORT_SHARED_PTR(Rendering, TextureCubeImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -18,7 +18,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE TextureCube : public Texture
     {
     public:
-         COPY_UNSHARE_CLASSES_TYPE_DECLARE(TextureCube, DESTRUCTOR_STATEMENT);
+        void Swap(TextureCube& rhs) noexcept;
+         
+             public:
+                 TYPE_DECLARE(TextureCube);
+                 using ClassShareType = CoreTools::CopyUnsharedClasses;
+                 ~TextureCube() noexcept;
+                 TextureCube(const TextureCube& rhs);
+                 TextureCube& operator=(const TextureCube& rhs);
+                 TextureCube(TextureCube&& rhs) noexcept;
+                 TextureCube& operator=(TextureCube&& rhs) noexcept;
 		using ParentType = Texture;
 		using TextureCubeSharedPtr = std::shared_ptr<ClassType>;
 		using ConstTextureCubeSharedPtr = std::shared_ptr<ClassType>;
@@ -62,7 +71,7 @@ namespace Rendering
 		  TextureSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-		IMPL_TYPE_DECLARE(TextureCube);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)  

@@ -16,14 +16,14 @@
 
 template <typename Real>
 Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const Matrix2& matrix, const Vector2D& vector, Real constants)
-    : m_Impl{ std::make_shared<ImplType>(matrix, vector, constants) }
+    : impl{  matrix, vector, constants  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const CoefficientsType& coefficient)
-    : m_Impl{ std::make_shared<ImplType>(coefficient) }
+    : impl{ coefficient  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,10 +32,9 @@ Mathematics::Ellipse2Coefficients<Real>::Ellipse2Coefficients(const Coefficients
 template <typename Real>
 bool Mathematics::Ellipse2Coefficients<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+  
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -44,7 +43,7 @@ const Mathematics::Matrix2<Real> Mathematics::Ellipse2Coefficients<Real>::GetMat
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMatrix();
+    return impl->GetMatrix();
 }
 
 template <typename Real>
@@ -52,7 +51,7 @@ const Mathematics::Vector2D<Real> Mathematics::Ellipse2Coefficients<Real>::GetVe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVector();
+    return impl->GetVector();
 }
 
 template <typename Real>
@@ -60,7 +59,7 @@ Real Mathematics::Ellipse2Coefficients<Real>::GetConstants() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetConstants();
+    return impl->GetConstants();
 }
 
 template <typename Real>
@@ -68,7 +67,7 @@ typename const Mathematics::Ellipse2Coefficients<Real>::CoefficientsType Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCoefficients();
+    return impl->GetCoefficients();
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_ELLIPSE2_COEFFICIENTS_ACHIEVE_H

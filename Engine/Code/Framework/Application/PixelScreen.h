@@ -13,15 +13,15 @@
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(PixelScreenImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(PixelScreen,PixelScreenImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE PixelScreen
 	{
 	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(PixelScreen);
+            DELAY_COPY_UNSHARED_TYPE_DECLARE(PixelScreen);
 		using Colour = Rendering::Colour<uint8_t>;
 		using Renderer = Rendering::Renderer;
 		using RendererSharedPtr = Rendering::RendererSharedPtr;
@@ -53,7 +53,7 @@ namespace Framework
 		void Draw(const Rendering::RendererSharedPtr& renderer);
 
 	private:
-		IMPL_TYPE_DECLARE(PixelScreen);
+                PackageType impl;
 	};
 }
 

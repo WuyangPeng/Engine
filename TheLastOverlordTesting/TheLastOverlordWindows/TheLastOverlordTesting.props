@@ -4,18 +4,22 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <OutDir>$(ProjectDir)..\..\..\$(Platform)\$(Configuration)Windows\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>	
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(LibsEnvironmentInclude);$(EngineInclude);$(GameInclude);$(TheLastOverlordInclude);$(TheLastOverlordTestingInclude);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(LibsEnvironmentInclude);$(EngineInclude);$(GameInclude);$(TheLastOverlordInclude);../../../Code/;</AdditionalIncludeDirectories>
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>true</TreatWarningAsError>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>true</ConformanceMode>	  
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnablePREfast>true</EnablePREfast>
     </ClCompile>
     <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 </Project>

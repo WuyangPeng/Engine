@@ -1,0 +1,14 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%/%SolutionName%/%SolutionName%Helper.h"
+#include "Framework/Helper/MainFunctionMacro.h"
+
+#include <vld.h>
+
+WINDOWS_MAIN_FUNCTION_WITH_INFORMATION(%SolutionName%,%SolutionName%Helper,CORE_TEXT("%ProjectName% %SolutionName%"),CORE_TEXT("DefaultEnvironment"),1024,768)
+	
+

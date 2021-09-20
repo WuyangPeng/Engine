@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 15:29)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/25 14:42)
 
 #ifndef SYSTEM_THREADING_THREAD_H
 #define SYSTEM_THREADING_THREAD_H
@@ -20,29 +20,42 @@ namespace System
 {
     // 创建和销毁线程
 
-    [[nodiscard]] ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSecurityAttributesPtr threadAttributes, WindowSize stackSize, ThreadStartRoutine startAddress,
-                                                                         WindowVoidPtr parameter, ThreadCreation creationFlags, WindowDWordPtr threadID) noexcept;
-    [[nodiscard]] ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSize stackSize, ThreadStartRoutine startAddress, WindowVoidPtr parameter, WindowDWordPtr threadID) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CloseSystemThread(ThreadHandle thread) noexcept;
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE ResumeSystemThread(ThreadHandle thread) noexcept;
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE SuspendSystemThread(ThreadHandle thread) noexcept;
-    [[nodiscard]] ThreadHandle SYSTEM_DEFAULT_DECLARE GetCurrentSystemThread() noexcept;
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE GetCurrentSystemThreadID() noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetSystemThreadPriority(ThreadHandle thread, int priority) noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE GetSystemThreadPriority(ThreadHandle thread) noexcept;
+    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowSecurityAttributesPtr threadAttributes,
+                                                                         WindowsSize stackSize,
+                                                                         ThreadStartRoutine startAddress,
+                                                                         WindowsVoidPtr parameter,
+                                                                         ThreadCreation creationFlags,
+                                                                         WindowsDWordPtr threadID) noexcept;
+    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE CreateSystemThread(WindowsSize stackSize,
+                                                                         ThreadStartRoutine startAddress,
+                                                                         WindowsVoidPtr parameter,
+                                                                         WindowsDWordPtr threadID) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowDWord milliseconds) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowDWord count, const ThreadHandle* handle, bool waitAll, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowDWord count, const ThreadHandle* handle, bool waitAll, WindowDWord milliseconds) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemThread(ThreadHandle thread) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE ResumeSystemThread(ThreadHandle thread) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE SuspendSystemThread(ThreadHandle thread) noexcept;
 
-    [[nodiscard]] ThreadHandle SYSTEM_DEFAULT_DECLARE BeginSystemThread(void* security, unsigned stacksize, StartAddress startAddress,
-                                                                        void* argument, unsigned createFlag, unsigned* threadAddress) noexcept;
+    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE GetCurrentSystemThread() noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetCurrentSystemThreadID() noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemThreadPriority(ThreadHandle thread, int priority) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GetSystemThreadPriority(ThreadHandle thread) noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowsDWord milliseconds) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(ThreadHandle handle, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowsDWord count, const ThreadHandle* handle, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemThread(WindowsDWord count, const ThreadHandle* handle, bool waitAll, WindowsDWord milliseconds) noexcept;
+
+    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE BeginSystemThread(void* security,
+                                                                        unsigned stacksize,
+                                                                        StartAddress startAddress,
+                                                                        void* argument,
+                                                                        unsigned createFlag,
+                                                                        unsigned* threadAddress) noexcept;
     void SYSTEM_DEFAULT_DECLARE EndSystemThread(unsigned retCode) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE IsThreadHandleValid(ThreadHandle threadHandle) noexcept;
 
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE ExitSystemThread(WindowDWord exitCode) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsThreadHandleValid(ThreadHandle threadHandle) noexcept;
+    WindowsDWord SYSTEM_DEFAULT_DECLARE ExitSystemThread(WindowsDWord exitCode) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_THREAD_H

@@ -1,0 +1,245 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{c600f300-3f03-48a8-a6ec-08aa85216bfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplicationSuite 头文件">
+      <UniqueIdentifier>{fb15db18-750e-48a7-aa99-65c35664a917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplicationSuite 源文件">
+      <UniqueIdentifier>{18ff83b1-d03b-4907-91f2-38b348500bfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowCreateSuite 头文件">
+      <UniqueIdentifier>{939375c6-621b-4700-b1be-77edc93b4c6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowCreateSuite 源文件">
+      <UniqueIdentifier>{457b387c-64d9-488c-bf5f-52baf5209e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowProcessSuite 头文件">
+      <UniqueIdentifier>{1f6d5541-590a-4be9-a9fa-1391025c33c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{c6cade71-a5fd-4bb5-b483-2e38a9da58df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegisterSuite 头文件">
+      <UniqueIdentifier>{13650470-0247-42a7-b5bb-ba0b9c918808}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegisterSuite 源文件">
+      <UniqueIdentifier>{aff74604-d124-4706-a84d-eb013c051387}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="WindowProcessSuite 源文件">
+      <UniqueIdentifier>{1df4f66c-c18c-4512-a7e1-4e5d743ec525}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\testCursor.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\FrameworkWindowTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\FrameworkWindowTestingRenderer.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\FrameworkTestingWindowMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\FontInformationTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\MousePositionTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowInstanceParameterTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowMessageInterfaceTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowMessageTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowRegisterParameterTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowRegisterTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowPictorialTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowCreateParameterTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowCreateHandleTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowProcessManagerTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowProcessHandleTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowHIconTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowHCursorTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\WindowApplicationInformationTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\FrameworkTestingWindowMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\FontInformationTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\MousePositionTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\ApplicationSuite.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowCreateSuite.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowInstanceParameterTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowMessageInterfaceTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowMessageTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowProcessSuite.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowPictorialTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowRegisterParameterTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowRegisterSuite.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowRegisterTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowCreateParameterTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowCreateSuite\WindowCreateHandleTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowProcessManagerTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowProcessSuite\WindowProcessHandleTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowHIconTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\WindowRegisterSuite\WindowHCursorTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkWindowTesting\ApplicationSuite\WindowApplicationInformationTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FrameworkWindowTesting.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\testIcon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

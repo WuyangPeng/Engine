@@ -40,7 +40,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using PolynomialImpl = PolynomialImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Polynomial, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(Polynomial& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Polynomial);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~Polynomial() noexcept = default;
+        Polynomial(const Polynomial& rhs);
+        Polynomial& operator=(const Polynomial& rhs);
+        Polynomial(Polynomial&& rhs) noexcept;
+        Polynomial& operator=(Polynomial&& rhs) noexcept;
         using PolynomialDivide = PolynomialDivide<Real>;
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
@@ -98,14 +109,14 @@ namespace Mathematics
         [[nodiscard]] const PolynomialDivide Divide(const Polynomial& divisor, Real epsilon) const;
 
     private:
-        IMPL_TYPE_DECLARE(Polynomial);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     template <typename Real>
     [[nodiscard]] const Polynomial<Real> operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon = Math<Real>::GetZeroTolerance());
+    [[nodiscard]] bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
     using FloatPolynomial = Polynomial<float>;
     using DoublePolynomial = Polynomial<double>;

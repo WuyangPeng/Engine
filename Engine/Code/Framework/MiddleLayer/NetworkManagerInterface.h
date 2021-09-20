@@ -15,8 +15,9 @@
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(NetworkManagerImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+ 
+EXPORT_SHARED_PTR(Framework, NetworkManagerImpl, FRAMEWORK_DEFAULT_DECLARE);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -25,7 +26,7 @@ namespace Framework
 	{
 	public:
 		using NetworkManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(NetworkManagerInterface);
+		NON_COPY_TYPE_DECLARE(NetworkManagerInterface);
 		using SocketType = Network::SocketType;
 		using ParentType = EngineMiddleLayerInterface;
 		using MessageEventPriority = Network::MessageEventPriority;
@@ -84,7 +85,7 @@ namespace Framework
 		virtual void RegisteredMessages();
 
 	private:
-		IMPL_TYPE_DECLARE(NetworkManagerInterface);
+                PackageType impl;
 		NetworkManagerImplPtr m_NetworkManager;
 	};
 

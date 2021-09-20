@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:58)
+//	引擎版本：0.7.1.1 (2020/10/26 15:58)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
@@ -35,13 +35,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool EventFunction(const Telegram& telegram);
+        [[nodiscard]] bool EventFunction(const Telegram& telegram) override;
 
         void Update(int64_t timeInterval);
 
-        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const;
-        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const;
-        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
+        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const noexcept;
+        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const noexcept;
+        [[nodiscard]] StateSharedPtr GetPossiblePreviousState() noexcept;
 
     private:
         void DoRegister() override;

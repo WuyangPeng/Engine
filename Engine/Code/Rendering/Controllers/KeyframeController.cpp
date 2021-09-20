@@ -28,6 +28,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26434)
 #include SYSTEM_WARNING_DISABLE(26496)
 CORE_TOOLS_RTTI_DEFINE(Rendering, KeyframeController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, KeyframeController);
@@ -36,15 +37,46 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, KeyframeController);
 Rendering::KeyframeController
 	::KeyframeController( int numCommonTimes, int numTranslations, int numRotations,int numScales, const FloatTransform& localTransform )
 	:ParentType{ localTransform },
-	m_Impl{ make_shared<ImplType>(numCommonTimes,numTranslations,numRotations,numScales) }
+	impl{ make_shared<ImplType>(numCommonTimes,numTranslations,numRotations,numScales) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
  
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, KeyframeController)
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                       
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, KeyframeController)
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, KeyframeController)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, KeyframeController)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumCommonTimes, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetCommonTimes, int,float)
@@ -52,9 +84,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetCommonTim
 void Rendering::KeyframeController
 	::SetCommonTimes(int index, float commonTimes)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetCommonTimes(index, commonTimes);
+	return impl->SetCommonTimes(index, commonTimes);
 }
 								
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumTranslations, int)
@@ -64,17 +96,17 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetTranslati
 void Rendering::KeyframeController
 	::SetTranslationTimes(int index, float translationTimes)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetTranslationTimes(index, translationTimes);
+	return impl->SetTranslationTimes(index, translationTimes);
 }
 
 void Rendering::KeyframeController
 	::SetTranslations(int index,  const APoint& translations)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetTranslations(index, translations);
+	return impl->SetTranslations(index, translations);
 }
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumRotations, int)
@@ -84,17 +116,17 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetRotations
 void Rendering::KeyframeController
 	::SetRotationTimes(int index,  float rotationTimes)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRotationTimes(index, rotationTimes);
+	return impl->SetRotationTimes(index, rotationTimes);
 }
 
 void Rendering::KeyframeController
 	::SetRotations(int index, const AQuaternion& rotations)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRotations(index, rotations);
+	return impl->SetRotations(index, rotations);
 }
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, KeyframeController,GetNumScales, int)
@@ -104,17 +136,17 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetScales, i
 void Rendering::KeyframeController
 	::SetScaleTimes(int index, float scaleTimes)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetScaleTimes(index, scaleTimes);
+	return impl->SetScaleTimes(index, scaleTimes);
 }
 
 void Rendering::KeyframeController
 	::SetScales(int index, float scales)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetScales(index, scales);
+	return impl->SetScales(index, scales);
 }
  
 void Rendering::KeyframeController
@@ -129,7 +161,7 @@ void Rendering::KeyframeController
 void Rendering::KeyframeController
 	::SetObjectInCopy(ControllerInterface* object)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::SetObject(object);
 }
@@ -155,7 +187,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, KeyframeController,GetCommo
 bool Rendering::KeyframeController
 	::Update( double applicationTime )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Update(applicationTime))
 	{
@@ -221,7 +253,7 @@ bool Rendering::KeyframeController
 										  
 Rendering::KeyframeController
 	::KeyframeController(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -233,7 +265,7 @@ int Rendering::KeyframeController
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -254,14 +286,14 @@ void Rendering::KeyframeController
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::KeyframeController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	 
 }
@@ -269,20 +301,20 @@ void Rendering::KeyframeController ::Link(const CoreTools::ObjectLinkSharedPtr& 
 void Rendering::KeyframeController
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();	 
 }
 
 void Rendering::KeyframeController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

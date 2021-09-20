@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{665A597A-02C1-473A-97A1-E8F8E536F252}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>FrameworkTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/FrameworkEngineDirectory.json" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\EngineDirectory.json" />
+    <None Include="Configuration\FrameworkEngineDirectory.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\FrameworkTesting.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Renderer.json" />
+    <None Include="Configuration\Testing.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidMessageLoopTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationTraitTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\CameraMotionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\FontInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\GLUTApplicationInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\MousePositionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ObjectMotionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PerformanceMeasurementsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PixelScreenTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\WindowApplicationInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleCallBackInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterfaceImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterface.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterfaceImpl.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperMiddleLayerFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\HelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionEntryPointTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MiddleLayerMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\UserMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxCallBackInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshCallBackInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\AndroidMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperBaseTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\Flags\DescriptionFlags.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MacintoshMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraModelMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraSystemsManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraViewMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ControllerMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EventManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\GUIManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\NetworkManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PhysicalModellingManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PixelViewMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackUnitTestSuiteTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowInstanceParameterTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowPointTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\VirtualKeysTypesTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageLoopTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageUnitTestSuiteTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHBrushTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHCursorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHIconTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowPictorialTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterParameterTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterSuite.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameBuildTesting.h" />
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameSuite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameBuildTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidMessageLoopTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationTraitTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\CameraMotionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\FontInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\GLUTApplicationInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\MousePositionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ObjectMotionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PerformanceMeasurementsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PixelScreenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\WindowApplicationInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleCallBackInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameBuildTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterfaceImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterface.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterfaceImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionEntryPointTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MiddleLayerMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\UserMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxCallBackInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameBuildTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshCallBackInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameBuildTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\AndroidMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperBaseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MacintoshMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraModelMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraSystemsManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraViewMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ControllerMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EventManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\GUIManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\NetworkManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PhysicalModellingManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PixelViewMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackUnitTestSuiteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameBuildTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowInstanceParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowPointTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\VirtualKeysTypesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageLoopTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageUnitTestSuiteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHBrushTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHCursorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHIconTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowPictorialTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameBuildTesting.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

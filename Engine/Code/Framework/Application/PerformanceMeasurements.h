@@ -1,7 +1,7 @@
 // Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 13:46)
 
 #ifndef FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_H
@@ -9,34 +9,34 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
-
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
 #include <string>
 
-FRAMEWORK_EXPORT_SHARED_PTR(PerformanceMeasurementsImpl);
+FRAMEWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(PerformanceMeasurements,PerformanceMeasurementsImpl);
 
 namespace Framework
 {
-	class FRAMEWORK_DEFAULT_DECLARE PerformanceMeasurements
-	{
-	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(PerformanceMeasurements);
+    class FRAMEWORK_DEFAULT_DECLARE PerformanceMeasurements
+    {
+    public:
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(PerformanceMeasurements);
 
-	public:
-		explicit PerformanceMeasurements(int maxTimer);
+    public:
+        explicit PerformanceMeasurements(int maxTimer);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		double GetFrameRate() const;
-		std::string GetFrameRateMessage() const;
+        double GetFrameRate() const;
+        std::string GetFrameRateMessage() const;
 
-		void ResetTime();
-		void MeasureTime();
-		void UpdateFrameCount();
+        void ResetTime();
+        void MeasureTime();
+        void UpdateFrameCount();
 
-	private:
-		IMPL_TYPE_DECLARE(PerformanceMeasurements);
-	};
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_H
+#endif  // FRAMEWORK_APPLICATION_PERFORMANCE_MEASUREMENTS_H

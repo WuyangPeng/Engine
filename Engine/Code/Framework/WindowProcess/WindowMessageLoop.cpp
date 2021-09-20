@@ -16,14 +16,14 @@ using std::make_unique;
 
 Framework::WindowMessageLoop
 	::WindowMessageLoop(Display function)
-	:m_Impl{ make_unique<ImplType>(function) }
+	:impl{  function }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::WindowMessageLoop
 	::WindowMessageLoop(WindowMessageLoop&& rhs) noexcept
-	:m_Impl{ move(rhs.m_Impl) }
+	:impl{ move(rhs.impl) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -33,13 +33,13 @@ Framework::WindowMessageLoop& Framework::WindowMessageLoop
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_Impl = move(rhs.m_Impl);
+	impl = move(rhs.impl);
 
 	return *this;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, WindowMessageLoop)
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowMessageLoop)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, WindowMessageLoop, EnterMessageLoop, HWnd, System::WindowWParam)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Framework, WindowMessageLoop, EnterMessageLoop, HWnd, System::WindowsWParam)
 
  

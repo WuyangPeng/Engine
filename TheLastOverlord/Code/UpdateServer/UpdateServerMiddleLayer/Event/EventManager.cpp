@@ -1,0 +1,29 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+//
+// 最后的霸王版本：0.0.0.1 (2019/10/13 18:59)
+
+#include "UpdateServer/UpdateServerMiddleLayer/UpdateServerMiddleLayerExport.h"
+
+#include "EventManager.h" 
+#include "UpdateServer/UpdateServerMiddleLayer/Macro/UpdateServerMiddleLayerClassInvariantMacro.h"
+
+UpdateServerMiddleLayer::EventManager
+	::EventManager(Framework::MiddleLayerPlatform middleLayerPlatform)
+	:ParentType{ middleLayerPlatform }
+{
+	UPDATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+UpdateServerMiddleLayer::EventManager
+	::~EventManager()
+{
+	UPDATE_SERVER_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(UpdateServerMiddleLayer, EventManager)
+
+ 
+
+

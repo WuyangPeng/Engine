@@ -18,25 +18,21 @@ using std::make_shared;
 using std::string;
 
 CoreTools::CReadFileManager::CReadFileManager(const String& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{ fileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CReadFileManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, CReadFileManager)
 
 void CoreTools::CReadFileManager::Read(size_t itemSize, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Read(itemSize, data);
+    return impl->Read(itemSize, data);
 }
 
 void CoreTools::CReadFileManager::Read(size_t itemSize, size_t itemsNumber, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Read(itemSize, itemsNumber, data);
+    return impl->Read(itemSize, itemsNumber, data);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CReadFileManager, GetFileByteSize, int);
@@ -49,9 +45,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, Fl
 
 bool CoreTools::CReadFileManager::Seek(long offset, FileSeek whence) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Seek(offset, whence);
+    return impl->Seek(offset, whence);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CReadFileManager, GetPosition, CoreTools::CReadFileManager::PosType);
@@ -61,7 +55,5 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CReadFileManager, Re
 
 bool CoreTools::CReadFileManager::Setvbuf(FileSetvBuf type, size_t size) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Setvbuf(type, size);
+    return impl->Setvbuf(type, size);
 }

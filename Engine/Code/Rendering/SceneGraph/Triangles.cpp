@@ -130,7 +130,7 @@ const Rendering::Triangles::Vector3D Rendering::Triangles ::GetPosition(int vert
 
 void Rendering::Triangles ::UpdateModelSpace(VisualUpdateType type)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     UpdateModelBound();
 

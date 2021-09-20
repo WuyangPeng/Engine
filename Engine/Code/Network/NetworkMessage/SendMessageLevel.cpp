@@ -11,24 +11,24 @@
 
 #include "SendMessageLevel.h"
 #include "Detail/SendMessageLevelImpl.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 using std::make_shared;
 
 Network::SendMessageLevel::SendMessageLevel(int messageMaxSize)
-    : m_Impl{ make_shared<ImplType>(messageMaxSize) }
+    : impl{ messageMaxSize }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SendMessageLevel)
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, SendMessageLevel)
+CLASS_INVARIANT_STUB_DEFINE(Network, SendMessageLevel)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, GetTopLevelSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, const Network::ConstMessageInterfaceSharedPtr)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendMessageLevel, Insert, MessageInterfaceSharedPtr, void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, Network::MessageInterfaceSharedPtr)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendMessageLevel, Insert, MessageInterfaceSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, SendMessageLevel, operator[], int, Network::MessageInterfaceSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetRemainingSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, SendMessageLevel, GetCurrentSize, int)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, Clear, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SendMessageLevel, Clear, void)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, SendMessageLevel)

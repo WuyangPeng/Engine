@@ -91,7 +91,7 @@ int Framework::WindowMainFunctionHelper<Build, Process>
 }
 
 template <template<typename> class Build, typename Process>
-System::WindowHWnd Framework::WindowMainFunctionHelper<Build, Process>
+System::WindowsHWnd Framework::WindowMainFunctionHelper<Build, Process>
 	::GetHwnd() const noexcept
 {
 	if (m_Build != nullptr)
@@ -104,7 +104,7 @@ template <template<typename> class Build, typename Process>
 void Framework::WindowMainFunctionHelper<Build, Process>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (WindowMainFunctionSchedule::Failure < m_WindowMainFunctionSchedule)
 	{

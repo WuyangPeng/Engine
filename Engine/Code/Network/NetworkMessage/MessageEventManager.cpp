@@ -11,47 +11,47 @@
 
 #include "MessageEventManager.h"
 #include "Detail/MessageEventManagerImpl.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 using std::make_shared;
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, MessageEventManager)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, MessageEventManager)
 
 Network::MessageEventManager::MessageEventManager(CoreTools::DisableNotThrow disableNotThrow)
-    : m_Impl{ make_shared<ImplType>(disableNotThrow) }
+    : impl{ disableNotThrow }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageEventManager)
+CLASS_INVARIANT_STUB_DEFINE(Network, MessageEventManager)
 
 void Network::MessageEventManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->Insert(messageID, messageEvent);
+    return impl->Insert(messageID, messageEvent);
 }
 
 void Network::MessageEventManager::Insert(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent, MessageEventPriority priority)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->Insert(messageID, messageEvent, priority);
+    return impl->Insert(messageID, messageEvent, priority);
 }
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageEventManager, Remove, int64_t, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, MessageEventManager, Remove, int64_t, void)
 
 void Network::MessageEventManager::Remove(int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->Remove(messageID, messageEvent);
+    return impl->Remove(messageID, messageEvent);
 }
 
 void Network::MessageEventManager::OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->OnEvent(messageID, socketID, message);
+    return impl->OnEvent(messageID, socketID, message);
 }

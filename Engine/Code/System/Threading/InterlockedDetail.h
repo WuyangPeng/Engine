@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 14:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/25 16:23)
 
 #ifndef SYSTEM_THREADING_INTERLOCKED_DETAIL_H
 #define SYSTEM_THREADING_INTERLOCKED_DETAIL_H
@@ -14,7 +14,7 @@
 #include "System/Helper/Platform.h"
 
 template <typename T>
-T System::SystemInterlockedIncrement(T* addend) noexcept
+T System::SystemInterlockedIncrement(T* addend) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedIncrement(addend);
@@ -24,7 +24,7 @@ T System::SystemInterlockedIncrement(T* addend) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedDecrement(T* addend) noexcept
+T System::SystemInterlockedDecrement(T* addend) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedDecrement(addend);
@@ -34,7 +34,7 @@ T System::SystemInterlockedDecrement(T* addend) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedExchangeAdd(T* addend, T value) noexcept
+T System::SystemInterlockedExchangeAdd(T* addend, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedExchangeAdd(addend, value);
@@ -44,7 +44,7 @@ T System::SystemInterlockedExchangeAdd(T* addend, T value) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedExchange(T* target, T value) noexcept
+T System::SystemInterlockedExchange(T* target, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedExchange(target, value);
@@ -56,7 +56,7 @@ T System::SystemInterlockedExchange(T* target, T value) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedExchangeSubtract(T* addend, T value) noexcept
+T System::SystemInterlockedExchangeSubtract(T* addend, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedExchangeSubtract(addend, value);
@@ -66,7 +66,7 @@ T System::SystemInterlockedExchangeSubtract(T* addend, T value) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept
+T System::SystemInterlockedCompareExchange(T* destination, T exchange, T comperand) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedCompareExchange(destination, exchange, comperand);
@@ -82,7 +82,7 @@ T System::SystemInterlockedCompareExchange(T* destination, T exchange, T compera
 }
 
 template <typename T>
-T System::SystemInterlockedAnd(T* destination, T value) noexcept
+T System::SystemInterlockedAnd(T* destination, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedAnd(destination, value);
@@ -92,7 +92,7 @@ T System::SystemInterlockedAnd(T* destination, T value) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedOr(T* destination, T value) noexcept
+T System::SystemInterlockedOr(T* destination, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedOr(destination, value);
@@ -102,7 +102,7 @@ T System::SystemInterlockedOr(T* destination, T value) noexcept
 }
 
 template <typename T>
-T System::SystemInterlockedXor(T* destination, T value) noexcept
+T System::SystemInterlockedXor(T* destination, T value) noexcept(std::is_same_v<long, T>)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
     return ::InterlockedXor(destination, value);

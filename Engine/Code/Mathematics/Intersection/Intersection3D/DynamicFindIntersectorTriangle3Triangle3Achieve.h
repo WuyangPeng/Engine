@@ -26,7 +26,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersectorTriangle3Triangle3(const Triangle3& triangle0, const Triangle3& triangle1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, m_Impl{ std::make_shared<ImplType>(triangle0, triangle1) }
+    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, impl{  triangle0, triangle1  }
 {
     Find();
 
@@ -37,7 +37,7 @@ Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::DynamicFindIntersec
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -49,7 +49,7 @@ const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3T
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle0();
+    return impl->GetTriangle0();
 }
 
 template <typename Real>
@@ -57,7 +57,7 @@ const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3T
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle1();
+    return impl->GetTriangle1();
 }
 
 template <typename Real>
@@ -65,7 +65,7 @@ int Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetQuantity() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -73,7 +73,7 @@ const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorTriangle3Tr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -94,8 +94,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
     const auto tMax = this->GetTMax();
     const auto lhsVelocity = this->GetLhsVelocity();
     const auto rhsVelocity = this->GetRhsVelocity();
-    const auto triangle0 = m_Impl->GetTriangle0();
-    const auto triangle1 = m_Impl->GetTriangle1();
+    const auto triangle0 = impl->GetTriangle0();
+    const auto triangle1 = impl->GetTriangle1();
 
     // 相对于三角形0的速度。
     auto relVelocity = rhsVelocity - lhsVelocity;
@@ -214,8 +214,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::Find()
 template <typename Real>
 typename Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::IntersectInfo Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindOverlap(const Vector3D& axis, Real tmax, const Vector3D& velocity)
 {
-    auto triangle0 = m_Impl->GetTriangle0();
-    auto triangle1 = m_Impl->GetTriangle1();
+    auto triangle0 = impl->GetTriangle0();
+    auto triangle1 = impl->GetTriangle1();
 
     const auto cfg0 = ProjectOntoAxis(triangle0, axis);
     const auto cfg1 = ProjectOntoAxis(triangle1, axis);
@@ -492,14 +492,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             // tri0单点触摸tri1
             this->SetIntersectionType(IntersectionType::Point);
 
-            m_Impl->AddPoint(triangle0.GetVertex(cfg0.m_Index[2]));
+            impl->AddPoint(triangle0.GetVertex(cfg0.m_Index[2]));
         }
         else if (cfg1.m_Map == VertexProjectionMap::M12 || cfg1.m_Map == VertexProjectionMap::M111)
         {
             // tri1单点触摸tri0
             this->SetIntersectionType(IntersectionType::Point);
 
-            m_Impl->AddPoint(triangle1.GetVertex(cfg1.m_Index[0]));
+            impl->AddPoint(triangle1.GetVertex(cfg1.m_Index[0]));
         }
         else if (cfg0.m_Map == VertexProjectionMap::M12)
         {
@@ -537,14 +537,14 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
             // tri1单点触摸tri0
             this->SetIntersectionType(IntersectionType::Point);
 
-            m_Impl->AddPoint(triangle1.GetVertex(cfg1.m_Index[2]));
+            impl->AddPoint(triangle1.GetVertex(cfg1.m_Index[2]));
         }
         else if (cfg0.m_Map == VertexProjectionMap::M12 || cfg0.m_Map == VertexProjectionMap::M111)
         {
             // tri0单点触摸tri1
             this->SetIntersectionType(IntersectionType::Point);
 
-            m_Impl->AddPoint(triangle0.GetVertex(cfg0.m_Index[0]));
+            impl->AddPoint(triangle0.GetVertex(cfg0.m_Index[0]));
         }
         else if (cfg1.m_Map == VertexProjectionMap::M12)
         {
@@ -585,7 +585,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::FindContactSet
         this->SetIntersectionType(calc.GetIntersectionType());
         for (auto i = 0; i < quantity; ++i)
         {
-            m_Impl->AddPoint(calc.GetPoint(i));
+            impl->AddPoint(calc.GetPoint(i));
         }
     }
 
@@ -683,7 +683,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
         {
             Vector3D point{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             point.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * point.GetY() - plane.GetNormal().GetZ() * point.GetZ()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else if (maxNormal == 1)
@@ -693,7 +693,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
         {
             Vector3D point{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
             point.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetZ() * point.GetZ()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else
@@ -703,7 +703,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInt
         {
             Vector3D point{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
             point.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetY() * point.GetY()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
 
@@ -737,7 +737,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeEdgeInt
 
     this->SetIntersectionType(IntersectionType::Point);
 
-    m_Impl->AddPoint(u0 + s * edge0);
+    impl->AddPoint(u0 + s * edge0);
 
     // 如果边缘是平行的怎么办？
 }
@@ -781,7 +781,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
         for (auto i = 0; i < quantity; ++i)
         {
             auto proj = calc.GetPoint(i);
-            m_Impl->AddPoint(point + proj[0] * dir0 + proj[1] * dir1);
+            impl->AddPoint(point + proj[0] * dir0 + proj[1] * dir1);
         }
     }
     else
@@ -794,10 +794,10 @@ void Mathematics::DynamicFindIntersectorTriangle3Triangle3<Real>::GetEdgeFaceInt
 
         auto parameter = dcalc.GetSquared().GetLhsParameter();
 
-        m_Impl->AddPoint(seg.GetCenterPoint() + parameter * seg.GetDirection());
+        impl->AddPoint(seg.GetCenterPoint() + parameter * seg.GetDirection());
     }
 
-    this->SetIntersectionType((m_Impl->GetQuantity() == 2 ? IntersectionType::Segment : IntersectionType::Point));
+    this->SetIntersectionType((impl->GetQuantity() == 2 ? IntersectionType::Segment : IntersectionType::Point));
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_TRIANGLE3_ACHIEVE_H

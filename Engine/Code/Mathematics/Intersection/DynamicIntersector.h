@@ -35,7 +35,18 @@ namespace Mathematics
     {
     public:
         using DynamicIntersectorImpl = DynamicIntersectorImpl<Real, Vector>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(DynamicIntersector, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(DynamicIntersector& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(DynamicIntersector);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~DynamicIntersector() noexcept = default;
+        DynamicIntersector(const DynamicIntersector& rhs);
+        DynamicIntersector& operator=(const DynamicIntersector& rhs);
+        DynamicIntersector(DynamicIntersector&& rhs) noexcept;
+        DynamicIntersector& operator=(DynamicIntersector&& rhs) noexcept;
 
         using ClassType = DynamicIntersector<Real, Vector>;
         using ParentType = Intersector<Real, Vector>;
@@ -57,7 +68,9 @@ namespace Mathematics
         void SetContactTime(Real contactTime) noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(DynamicIntersector);
+        using ImplPtr = std::shared_ptr<ImplType>;
+    private:
+        ImplPtr impl;
     };
 
     using FloatDynamicIntersector2D = DynamicIntersector<float, Vector2D>;

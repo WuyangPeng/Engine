@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 11:46)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/24 13:17)
 
 #ifndef SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
 #define SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H
@@ -19,6 +19,8 @@ namespace System
 
     // Glut
     enum class GlutMacro;
+    enum class GlutExtension;
+    enum class GlutOption;
 
     // GlutKeyCodes
     enum class GlutKeyCodes;
@@ -50,10 +52,10 @@ namespace System
     enum class ColorAttachent;
     enum class CheckFrambufferStatus;
     enum class AttributeUsage;
-	
-	// Wgl
-	enum class PixelFormatDescriptorFlags : uint32_t;
-	enum class PixelTypes;
+
+    // Wgl
+    enum class PixelFormatDescriptorFlags : uint32_t;
+    enum class PixelTypes;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_FLAGS_FWD_H

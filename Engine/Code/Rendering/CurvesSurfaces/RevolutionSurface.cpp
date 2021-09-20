@@ -10,10 +10,11 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-
+#include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
+#include "Mathematics/Algebra/Vector2DDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 13:25)
+//	引擎版本：0.7.1.1 (2020/10/23 13:25)
 
 // 使用组合模式封装UnitTest类和SuiteImpl类。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
@@ -18,6 +18,7 @@
 #include "UnitTestInterface.h"
 #include "UnitTestStream.h"
 #include "UnitTestSuiteFwd.h"
+#include "System/DynamicLink/Using/LoadLibraryUsing.h"
 
 namespace CoreTools
 {
@@ -41,9 +42,10 @@ namespace CoreTools
         void SetTestLoopCount(int TestLoopCount) noexcept;
         void SetRandomSeed(int randomSeed) noexcept;
 
-        [[nodiscard]] int GetEngineeringOffsetValue() const noexcept;
+        [[nodiscard]] int GetEngineeringOffsetValue() const noexcept;  // 待删除
         [[nodiscard]] int GetRandomSeed() const noexcept;
         [[nodiscard]] uint32_t GetEngineRandomSeed() const;
+        [[nodiscard]] System::DynamicLinkString GetEngineeringDynamicLinkSuffix() const;  // 待删除
 
     protected:
         [[nodiscard]] int GetTestLoopCount() const noexcept;

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:49)
+//	引擎版本：0.7.1.1 (2020/10/26 15:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,29 +34,29 @@ void CoreTools::EntityManager::Destroy() noexcept
 }
 
 CoreTools::EntityManager::EntityManager([[maybe_unused]] EntityManagerCreate entityManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, EntityManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, EntityManager)
 
 bool CoreTools::EntityManager::Register(const EntitySharedPtr& entity)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Register(entity);
+    return impl->Register(entity);
 }
 
 bool CoreTools::EntityManager::Unregister(uint64_t entityID)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Unregister(entityID);
+    return impl->Unregister(entityID);
 }
 
 CoreTools::EntityManager::EntitySharedPtr CoreTools::EntityManager::GetEntity(uint64_t entityID) const
@@ -65,5 +65,5 @@ CoreTools::EntityManager::EntitySharedPtr CoreTools::EntityManager::GetEntity(ui
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEntity(entityID);
+    return impl->GetEntity(entityID);
 }

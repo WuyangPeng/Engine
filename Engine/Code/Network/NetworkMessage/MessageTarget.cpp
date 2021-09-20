@@ -46,7 +46,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, MessageTarget)
 
 void Network::MessageTarget::WriteBool(const bool datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const uint8_t value{ datum ? 1u : 0u };
     Write(value);
@@ -54,7 +54,7 @@ void Network::MessageTarget::WriteBool(const bool datum)
 
 void Network::MessageTarget::WriteBoolWithNumber(int32_t elementsNumber, const bool* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(elementsNumber);
     WriteBoolWithoutNumber(elementsNumber, data);
@@ -62,7 +62,7 @@ void Network::MessageTarget::WriteBoolWithNumber(int32_t elementsNumber, const b
 
 void Network::MessageTarget::WriteBoolWithoutNumber(int32_t elementsNumber, const bool* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (data != nullptr)
     {
@@ -78,7 +78,7 @@ void Network::MessageTarget::WriteBoolWithoutNumber(int32_t elementsNumber, cons
 
 void Network::MessageTarget::WriteString(const string& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto length = boost::numeric_cast<int>(datum.size());
     Write(length);
@@ -101,7 +101,7 @@ void Network::MessageTarget::WriteString(const string& datum)
 
 void Network::MessageTarget::WriteStringWithNumber(int32_t elementsNumber, const string* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(elementsNumber);
     WriteStringWithoutNumber(elementsNumber, data);
@@ -109,7 +109,7 @@ void Network::MessageTarget::WriteStringWithNumber(int32_t elementsNumber, const
 
 void Network::MessageTarget::WriteStringWithoutNumber(int32_t elementsNumber, const string* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (data != nullptr)
     {
@@ -132,7 +132,7 @@ int Network::MessageTarget::GetBytesWritten() const noexcept
 
 void Network::MessageTarget::Write(const vector<string>& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto elementsNumber = boost::numeric_cast<int>(datum.size());
 

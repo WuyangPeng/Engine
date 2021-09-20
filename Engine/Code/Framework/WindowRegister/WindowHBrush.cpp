@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHBrush.h"
-#include "System/Window/WindowRegister.h"
+#include "System/Windows/WindowsRegister.h"
 #include "CoreTools/Helper/LogMacro.h"  
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
  
@@ -36,7 +36,7 @@ void Framework::WindowHBrush
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHBrush)
 
-System::WindowHBrush Framework::WindowHBrush
+System::WindowsHBrush Framework::WindowHBrush
 	::GetHBrush() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

@@ -12,21 +12,20 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "Rendering/Resources/Flags/BufferFlags.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-RENDERING_EXPORT_SHARED_PTR(PlatformTextureCubeImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(PlatformTextureCubeImpl); 
 
 namespace Rendering
 {
 	class Renderer;
 	class TextureCube;
 	
-	class RENDERING_DEFAULT_DECLARE PlatformTextureCube : boost::noncopyable
+	class RENDERING_DEFAULT_DECLARE PlatformTextureCube 
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(PlatformTextureCube);
+            NON_COPY_TYPE_DECLARE(PlatformTextureCube);
 		using TextureType = TextureCube;
 
 	public:
@@ -46,7 +45,7 @@ namespace Rendering
 		void Unlock (int face,int level);		
 	
 	private:
-		IMPL_TYPE_DECLARE(PlatformTextureCube);
+                PackageType impl;
 	};
 }
 

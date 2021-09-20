@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:07)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 17:43)
 
 #ifndef SYSTEM_HELPER_MPW_H
 #define SYSTEM_HELPER_MPW_H
@@ -30,25 +30,15 @@
         #define TCRE_USE_MPW 1
     #endif  // TCRE_USE_MPW
 
-    #ifndef TCRE_COMPILER_VERSION
-        #if defined(__SC__)
-            #define TCRE_COMPILER_VERSION __SC__
-        #elif defined(__MRC__)
-            #define TCRE_COMPILER_VERSION __MRC__
-        #else  // !defined(__SC__) && !defined(__MRC__)
-            #error "使用MPW编译器配置错误。"
-        #endif  // defined(__SC__)
-    #endif  // COMPILER_VERSION
-
-    #ifndef TCRE_SYSTEM_COMPILER
-        #if defined(__SC__)
-            #define TCRE_SYSTEM_COMPILER "MPW SCpp 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
-        #elif defined(__MRC__)
-            #define TCRE_SYSTEM_COMPILER "MPW MrCpp 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
-        #else  // !defined(__SC__) && !defined(__MRC__)
-            #error "使用MPW编译器配置错误。"
-        #endif  // defined(__SC__)
-    #endif  // TCRE_SYSTEM_COMPILER
+    #if defined(__SC__)
+        #define TCRE_COMPILER_VERSION __SC__
+        #define TCRE_SYSTEM_COMPILER "MPW SCpp 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+    #elif defined(__MRC__)
+        #define TCRE_COMPILER_VERSION __MRC__
+        #define TCRE_SYSTEM_COMPILER "MPW MrCpp 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
+    #else  // !defined(__SC__) && !defined(__MRC__)
+        #error "使用MPW编译器配置错误。"
+    #endif  // defined(__SC__)
 
 #endif  // defined(__MRC__) || defined(__SC__)
 

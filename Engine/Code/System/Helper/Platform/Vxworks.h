@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:17)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/08 12:00)
 
 #ifndef SYSTEM_HELPER_VXWORKS_H
 #define SYSTEM_HELPER_VXWORKS_H
@@ -21,13 +21,13 @@
     // vxWorks 具体配置选项：
 
     #define TCRE_SYSTEM_PLATFORM "vxWorks"
-    #define SYSTEM_PLATFORM_VXWORKS
+    #define SYSTEM_PLATFORM_VXWORKS static_cast<void>(0)
 
     #if (_WRS_VXWORKS_MAJOR < 7)
 
         #ifdef __RTP__
-            #include <time.h>
             #include <sysLib.h>
+            #include <time.h>
         #endif  // __RTP__
 
         #include <cstdint>

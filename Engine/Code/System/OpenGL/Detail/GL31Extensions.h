@@ -1,39 +1,40 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 15:38)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/10 11:33)
 
 #ifndef SYSTEM_OPENGL_GL_31_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_31_EXTENSIONS_H
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/Detail/OpenGL/GL31ExtensionsMacro.h"
+#include "System/Helper/GLExtensionsMacro.h" 
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
-#include "System/OpenGL/Using/GL11ExtensionsUsing.h"
-#include "System/OpenGL/Using/GL31ExtensionsUsing.h"
 
 namespace System
 {
     // OpenGL 3.1
 
-    extern PgglDrawArraysInstanced gglDrawArraysInstanced;
-    extern PgglDrawElementsInstanced gglDrawElementsInstanced;
-    extern PgglTexBuffer gglTexBuffer;
-    extern PgglPrimitiveRestartIndex gglPrimitiveRestartIndex;
+    SYSTEM_HIDDEN_DECLARE NODISCARD ExistsOpenGLExtensions IsExistsOpenGL31() noexcept;
 
-    SYSTEM_HIDDEN_DECLARE ExistsOpenGLExtensions IsExistsOpenGL31() noexcept;
+    void InitOpenGL31() noexcept;
 
-    SYSTEM_HIDDEN_DECLARE void GlDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei primcount) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GlDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const GLvoid* indices, GLsizei primcount) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GlTexBuffer(GLenum target, GLenum internalformat, GLuint buffer) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GlPrimitiveRestartIndex(GLuint index) noexcept;
-
-    void InitOpenGL31();
+    SYSTEM_HIDDEN_DECLARE void GLDrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei instancecount) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLDrawElementsInstanced(GLenum mode, GLsizei count, GLenum type, const void* indices, GLsizei instancecount) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLTexBuffer(GLenum target, GLenum internalformat, GLuint buffer) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLPrimitiveRestartIndex(GLuint index) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLCopyBufferSubData(GLenum readTarget, GLenum writeTarget, GLintptr readOffset, GLintptr writeOffset, GLsizeiptr size) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetUniformIndices(GLuint program, GLsizei uniformCount, const GLchar* const* uniformNames, GLuint* uniformIndices) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformsiv(GLuint program, GLsizei uniformCount, const GLuint* uniformIndices, GLenum pname, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformName(GLuint program, GLuint uniformIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformName) noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD GLuint GLGetUniformBlockIndex(GLuint program, const GLchar* uniformBlockName) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName) noexcept;
+    SYSTEM_HIDDEN_DECLARE void GLUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding) noexcept;   
 }
 
 #endif  // SYSTEM_OPENGL_GL_31_EXTENSIONS_H

@@ -17,37 +17,38 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <array>
+#include "../Contract/Flags/ImplFlags.h"
 
 using std::array;
 using std::string;
 
 CoreTools::WriteFileManager::WriteFileManager(const String& fileName)
-    : m_Impl{ FileManagerFactory::CreateWriteFileManage(fileName) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default,  fileName  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, WriteFileManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, WriteFileManager)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, WriteFileManager, GetFileByteSize, int)
 
 void CoreTools::WriteFileManager::Write(size_t itemSize, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, data);
+    return impl->Write(itemSize, data);
 }
 
 void CoreTools::WriteFileManager::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, itemsNumber, data);
+    return impl->Write(itemSize, itemsNumber, data);
 }
 
 void CoreTools::WriteFileManager::SaveStdString(const string& name)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     constexpr auto alignedLength = 4;
 

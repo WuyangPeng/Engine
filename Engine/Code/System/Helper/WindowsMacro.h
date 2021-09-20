@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 16:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/17 10:38)
 
 #ifndef SYSTEM_HELPER_WINDOWS_MACRO_H
 #define SYSTEM_HELPER_WINDOWS_MACRO_H
@@ -13,22 +13,28 @@
 // Windows平台使用的宏，按需要添加于此。
 
 #include "Platform.h"
-#include "PragmaWarning.h"
 #include "UnicodeUsing.h"
-#include "System/Window/Using/IUnknownUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Helper/PragmaWarning/CallTraits.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
     template <typename T, size_t N>
-    [[nodiscard]] constexpr size_t GetArraySize(T (&)[N]) noexcept
+    NODISCARD constexpr size_t GetArraySize(T (&)[N]) noexcept
     {
         return N;
     }
 
-    constexpr WindowWord g_MakeLanguageIDShift{ 10 };
+    template <typename... T>
+    void NullFunction(MAYBE_UNUSED typename boost::call_traits<T>::param_type... value) noexcept
+    {
+    }
 
-    [[nodiscard]] constexpr WindowWord MakeLanguageID(WindowWord primary, WindowWord sub) noexcept
+#ifndef SYSTEM_USE_WINDOWS_MACRO
+    constexpr WindowsWord g_MakeLanguageIDShift{ 10 };
+#endif  // SYSTEM_USE_WINDOWS_MACRO
+
+    NODISCARD constexpr WindowsWord MakeLanguageID(WindowsWord primary, WindowsWord sub) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return MAKELANGID(primary, sub);
@@ -37,18 +43,18 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr WindowWord GetPrimaryLanguageID(WindowWord languageID) noexcept
+    NODISCARD constexpr WindowsWord GetPrimaryLanguageID(WindowsWord languageID) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return PRIMARYLANGID(languageID);
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-        constexpr WindowWord g_PrimaryLanguageIDMask{ (1 << g_MakeLanguageIDShift) - 1 };
+        constexpr WindowsWord g_PrimaryLanguageIDMask{ (1 << g_MakeLanguageIDShift) - 1 };
 
         return languageID & g_PrimaryLanguageIDMask;
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr WindowWord GetSubLanguageID(WindowWord languageID) noexcept
+    NODISCARD constexpr WindowsWord GetSubLanguageID(WindowsWord languageID) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return SUBLANGID(languageID);
@@ -57,7 +63,7 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr TChar* MakeIntreSource(WindowWord id) noexcept
+    NODISCARD constexpr TChar* MakeIntreSource(WindowsWord id) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return MAKEINTRESOURCE(id);
@@ -66,18 +72,18 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr WindowDWord MakeLanguageCID(WindowWord languageID, WindowWord sortID) noexcept
+    NODISCARD constexpr WindowsDWord MakeLanguageCID(WindowsWord languageID, WindowsWord sortID) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return MAKELCID(languageID, sortID);
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-        constexpr WindowWord g_MakeLanguageCIDShift{ 16 };
+        constexpr WindowsWord g_MakeLanguageCIDShift{ 16 };
 
-        return (static_cast<WindowDWord>(sortID) << g_MakeLanguageCIDShift) | (static_cast<WindowDWord>(languageID));
+        return (static_cast<WindowsDWord>(sortID) << g_MakeLanguageCIDShift) | (static_cast<WindowsDWord>(languageID));
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr bool IsFailed(SystemHResult result) noexcept
+    NODISCARD constexpr bool IsFailed(SystemHResult result) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return FAILED(result);
@@ -86,7 +92,7 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr bool IsSucceeded(SystemHResult result) noexcept
+    NODISCARD constexpr bool IsSucceeded(SystemHResult result) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return SUCCEEDED(result);
@@ -95,41 +101,43 @@ namespace System
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    constexpr WindowWord g_WordShift{ 16 };
-    constexpr WindowWord g_WordMask{ (1 << g_WordShift) - 1 };
+#ifndef SYSTEM_USE_WINDOWS_MACRO
+    constexpr WindowsWord g_WordShift{ 16 };
+    constexpr WindowsWord g_WordMask{ (1 << g_WordShift) - 1 };
+#endif  // SYSTEM_USE_WINDOWS_MACRO
 
-    [[nodiscard]] constexpr WindowWord MakeWord(WindowPtrDWord low, WindowPtrDWord high) noexcept
+    NODISCARD constexpr WindowsWord MakeWord(WindowsPtrDWord low, WindowsPtrDWord high) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return MAKEWORD(low, high);
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-        constexpr WindowWord g_MakeWordShift{ 8 };
-        constexpr WindowWord g_MakeWordMask{ (1 << g_MakeWordShift) - 1 };
+        constexpr WindowsWord g_MakeWordShift{ 8 };
+        constexpr WindowsWord g_MakeWordMask{ (1 << g_MakeWordShift) - 1 };
 
-        return static_cast<WindowWord>(static_cast<WindowByte>(low & g_MakeWordMask) | static_cast<WindowWord>(static_cast<WindowByte>(high & g_MakeWordMask)) << g_MakeWordShift);
+        return static_cast<WindowsWord>(static_cast<WindowsByte>(low & g_MakeWordMask) | static_cast<WindowWord>(static_cast<WindowsByte>(high & g_MakeWordMask)) << g_MakeWordShift);
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr WindowWord LowWord(WindowPtrDWord param) noexcept
+    NODISCARD constexpr WindowsWord LowWord(WindowsPtrDWord param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return LOWORD(param);
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-        return static_cast<WindowWord>(param & g_WordMask);
+        return static_cast<WindowsWord>(param & g_WordMask);
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
-    [[nodiscard]] constexpr WindowWord HighWord(WindowPtrDWord param) noexcept
+    NODISCARD constexpr WindowsWord HighWord(WindowsPtrDWord param) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return HIWORD(param);
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-        return static_cast<WindowWord>(param >> g_WordShift) & g_WordMask;
+        return static_cast<WindowsWord>(param >> g_WordShift) & g_WordMask;
 #endif  // SYSTEM_USE_WINDOWS_MACRO
     }
 
     template <typename T>
-    [[nodiscard]] constexpr int PtrConversionInt(const T* ptr) noexcept
+    NODISCARD constexpr int PtrConversionInt(const T* ptr) noexcept
     {
 #ifdef SYSTEM_USE_WINDOWS_MACRO
         return PtrToInt(ptr);
@@ -139,11 +147,11 @@ namespace System
     }
 
 #ifdef SYSTEM_USE_WINDOWS_MACRO
-    constexpr WindowBool g_True{ TRUE };
-    constexpr WindowBool g_False{ FALSE };
+    constexpr WindowsBool g_True{ TRUE };
+    constexpr WindowsBool g_False{ FALSE };
 #else  // !SYSTEM_USE_WINDOWS_MACRO
-    constexpr WindowBool g_True{ 1 };
-    constexpr WindowBool g_False{ 0 };
+    constexpr WindowsBool g_True{ 1 };
+    constexpr WindowsBool g_False{ 0 };
 #endif  // SYSTEM_USE_WINDOWS_MACRO
 }
 
@@ -170,5 +178,13 @@ namespace System
     #define SYSTEM_IN_OUT_OPT
 
 #endif  // SYSTEM_USE_WINDOWS_MACRO
+
+#if defined(_DEBUG) && !defined(NDEBUG)
+constexpr auto isDebug = true;
+#else  // !_DEBUG
+constexpr auto isDebug = false;
+#endif  // _DEBUG
+
+constexpr auto isRelease = !isDebug;
 
 #endif  // SYSTEM_HELPER_WINDOWS_MACRO_H

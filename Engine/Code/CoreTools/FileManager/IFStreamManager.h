@@ -15,22 +15,27 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(IFStreamManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(IFStreamManagerImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE IFStreamManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE IFStreamManager final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(IFStreamManager);
+        NON_COPY_TYPE_DECLARE(IFStreamManager);
         using String = System::String;
 
     public:
         explicit IFStreamManager(const String& fileName);
+        ~IFStreamManager() noexcept = default;
+        IFStreamManager(const IFStreamManager& rhs) noexcept = delete;
+        IFStreamManager& operator=(const IFStreamManager& rhs) noexcept = delete;
+        IFStreamManager(IFStreamManager&& rhs) noexcept = delete;
+        IFStreamManager& operator=(IFStreamManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,7 +45,7 @@ namespace CoreTools
         void SetSimplifiedChinese();
 
     private:
-        IMPL_TYPE_DECLARE(IFStreamManager);
+        PackageType impl;
     };
 }
 

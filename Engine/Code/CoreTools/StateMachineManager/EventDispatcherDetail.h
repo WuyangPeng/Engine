@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:02)
+//	引擎版本：0.7.1.1 (2020/10/26 16:02)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_EVENT_DISPATCHER_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_EVENT_DISPATCHER_DETAIL_H
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Transition, typename Next, typename State>
-typename CoreTools::EventDispatcher<Transition, Next, State>::StateType CoreTools::EventDispatcher<Transition, Next, State>::Dispatch(FsmType& fsm, StateType state, const EventType& eventType)
+typename CoreTools::EventDispatcher<Transition, Next, State>::StateType CoreTools::EventDispatcher<Transition, Next, State>::Dispatch(FsmType& fsm, StateType state, const EventType& eventType) noexcept
 {
     if (state == Transition::sm_CurrentState)
     {

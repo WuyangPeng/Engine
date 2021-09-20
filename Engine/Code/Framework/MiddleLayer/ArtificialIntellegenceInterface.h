@@ -13,7 +13,7 @@
 #include "EngineMiddleLayerInterface.h"  
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -21,7 +21,7 @@ namespace Framework
 	{
 	public:
 		using ArtificialIntellegenceInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(ArtificialIntellegenceInterface);
+		NON_COPY_TYPE_DECLARE(ArtificialIntellegenceInterface);
 		using ParentType = EngineMiddleLayerInterface;
 
 	public:
@@ -36,7 +36,7 @@ namespace Framework
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(System);
 
 	private:
-		IMPL_TYPE_DECLARE(ArtificialIntellegenceInterface);
+                PackageType impl;
 	};
 
 	using ArtificialIntellegenceInterfaceSharedPtr = std::shared_ptr<ArtificialIntellegenceInterface>;

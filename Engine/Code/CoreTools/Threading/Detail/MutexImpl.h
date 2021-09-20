@@ -14,10 +14,12 @@
 
 namespace CoreTools
 {
+    class MutexFactory;
     class CORE_TOOLS_HIDDEN_DECLARE MutexImpl
     {
     public:
         using ClassType = MutexImpl;
+        using FactoryType = MutexFactory;
 
     public:
         MutexImpl() noexcept = default;

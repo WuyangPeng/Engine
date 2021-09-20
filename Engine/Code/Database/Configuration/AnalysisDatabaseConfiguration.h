@@ -15,18 +15,18 @@
 #include "ConfigurationStrategy.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <map>
 #include <string>
 
-DATABASE_EXPORT_SHARED_PTR(AnalysisDatabaseConfigurationImpl);
+DATABASE_PERFORMANCE_UNSHARED_EXPORT_IMPL(AnalysisDatabaseConfigurationImpl);
 
 namespace Database
 {
     class DATABASE_DEFAULT_DECLARE AnalysisDatabaseConfiguration final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(AnalysisDatabaseConfiguration);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(AnalysisDatabaseConfiguration);
         using Container = std::map<System::String, ConfigurationStrategy>;
         using ContainerConstIter = Container::const_iterator;
 
@@ -41,7 +41,7 @@ namespace Database
         [[nodiscard]] int GetSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(AnalysisDatabaseConfiguration);
+        PackageType impl;
     };
 }
 

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:55)
+//	引擎版本：0.7.1.1 (2020/10/26 15:55)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
@@ -35,7 +35,7 @@ namespace CoreTools
     public:
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
-        State();
+        State() noexcept;
         virtual ~State() noexcept = default;
 
         State(const State& rhs) noexcept = default;
@@ -60,7 +60,7 @@ namespace CoreTools
 
         [[nodiscard]] EntityTypeSharedPtr GetOwner();
 
-        [[nodiscard]] bool IsExactly(const Rtti& rtti) const;
+        [[nodiscard]] bool IsExactly(const Rtti& rtti) const noexcept;
 
         CORE_TOOLS_RTTI_DECLARE;
 

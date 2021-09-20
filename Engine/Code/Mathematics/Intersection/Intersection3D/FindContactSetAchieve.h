@@ -24,7 +24,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(
     const Vector3D& segmentVelocity,
     const Vector3D& triangleVelocity,
     Real tFirst)
-    : m_Impl{ std::make_shared<ImplType>(segment, triangle, side, segmentCfg, triangleCfg, segmentVelocity, triangleVelocity, tFirst) }
+    : impl{ segment, triangle, side, segmentCfg, triangleCfg, segmentVelocity, triangleVelocity, tFirst }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -39,7 +39,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(
     const Vector3D& segmentVelocity,
     const Vector3D& boxVelocity,
     Real tFirst)
-    : m_Impl{ std::make_shared<ImplType>(segment, box, side, segmentCfg, boxCfg, segmentVelocity, boxVelocity, tFirst) }
+    : impl{ segment, box, side, segmentCfg, boxCfg, segmentVelocity, boxVelocity, tFirst }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -54,7 +54,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(
     const Vector3D& triangleVelocity,
     const Vector3D& boxVelocity,
     Real tFirst)
-    : m_Impl{ std::make_shared<ImplType>(triangle, box, side, triangleCfg, boxCfg, triangleVelocity, boxVelocity, tFirst) }
+    : impl{ triangle, box, side, triangleCfg, boxCfg, triangleVelocity, boxVelocity, tFirst }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -69,7 +69,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(
     const Vector3D& box0Velocity,
     const Vector3D& box1Velocity,
     Real tFirst)
-    : m_Impl{ std::make_shared<ImplType>(box0, box1, side, box0Cfg, box1Cfg, box0Velocity, box1Velocity, tFirst) }
+    : impl{ box0, box1, side, box0Cfg, box1Cfg, box0Velocity, box1Velocity, tFirst }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -78,7 +78,7 @@ Mathematics::FindContactSet<Real>::FindContactSet(
 template <typename Real>
 bool Mathematics::FindContactSet<Real>::IsValid() const noexcept
 {
-    return m_Impl != nullptr;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -87,7 +87,7 @@ typename Mathematics::FindContactSet<Real>::PointType Mathematics::FindContactSe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint();
+    return impl->GetPoint();
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_CONTACT_SET_ACHIEVE_H

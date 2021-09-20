@@ -11,17 +11,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(CopyrightDataImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(CopyrightDataImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE CopyrightData
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(CopyrightData);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(CopyrightData);
 
 	public:
 		CopyrightData(int endYear, const System::String& versions, const System::String& projectChineseName);
@@ -33,7 +33,7 @@ namespace AssistTools
 		const System::String GetProjectChineseName() const;
 
 	private:
-		IMPL_TYPE_DECLARE(CopyrightData);
+		PackageType impl;
 	};
 }
 

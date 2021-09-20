@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 14:01)
+//	引擎版本：0.7.1.1 (2020/10/23 14:01)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_DETAIL_H
@@ -29,7 +29,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
 {
     static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has equal to bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs == rhs);
 
@@ -56,7 +56,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -67,7 +67,7 @@ void CoreTools::UnitTest::AssertEqualDoNotUseMessage(const LhsType& lhs, const R
 {
     static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has equal to bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs == rhs);
     AssertTest(condition, functionDescribed, std::string{}, failureThrow);
@@ -80,7 +80,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, co
     static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "LhsType and MhsType has equal to bool.");
     static_assert(boost::has_equal_to<LhsType, RhsType, bool>::value, "MhsType and RhsType has equal to bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto lhsCondition = (lhs == mhs);
     const auto rhsCondition = (mhs == rhs);
@@ -116,7 +116,7 @@ void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, 
 {
     static_assert(boost::has_not_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has not equal to bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs != rhs);
 
@@ -143,7 +143,7 @@ void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, 
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertUnequal(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -152,10 +152,10 @@ void CoreTools::UnitTest::AssertEnumUnequal(const LhsType& lhs, const RhsType& r
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertUnequalDoNotUseMessage(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
     static_assert(boost::has_not_equal_to<LhsType, RhsType, bool>::value, "LhsType and RhsType has not equal to bool.");
 
-    auto condition = (lhs != rhs);
+    const auto condition = (lhs != rhs);
     AssertTest(condition, functionDescribed, std::string{}, failureThrow);
 }
 
@@ -169,7 +169,7 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
 
     static_assert(boost::has_less_equal<EpsilonType, double, bool>::value, "EpsilonType and double has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const EpsilonType difference{ abs(lhs - rhs) };
     const auto condition = (difference <= epsilon);
@@ -197,7 +197,7 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
 template <typename Function, typename LhsType, typename RhsType, typename EpsilonType>
 void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const LhsType& lhs, const RhsType& rhs, const EpsilonType& epsilon, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = function(lhs, rhs, epsilon);
 
@@ -227,7 +227,7 @@ void CoreTools::UnitTest::AssertEqualNullPtr(const PtrType& ptr, const FunctionD
     // 为了支持智能指针，不使用
     // static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (ptr == nullptr);
 
@@ -257,7 +257,7 @@ void CoreTools::UnitTest::AssertUnequalNullPtr(const PtrType& ptr, const Functio
     // 为了支持智能指针，不使用
     // static_assert(std::is_pointer_v<PtrType>, "PtrType is pointer.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = ptr != nullptr;
 
@@ -287,7 +287,7 @@ void CoreTools::UnitTest::AssertRange(const TestType& test, const RangeType& lhs
     static_assert(boost::has_less_equal<RangeType, TestType, bool>::value, "RangeType and TestType has less equal bool.");
     static_assert(boost::has_less_equal<TestType, RangeType, bool>::value, "TestType and RangeType has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs <= test && test <= rhs);
 
@@ -316,7 +316,7 @@ void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, con
 {
     static_assert(boost::has_less<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs < rhs);
 
@@ -343,7 +343,7 @@ void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, con
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumLess(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertLess(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -354,7 +354,7 @@ void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs
 {
     static_assert(boost::has_less_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs <= rhs);
 
@@ -381,7 +381,7 @@ void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumLessEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertLessEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -392,9 +392,9 @@ void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, 
 {
     static_assert(boost::has_greater<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    auto condition = lhs > rhs;
+    const auto condition = lhs > rhs;
 
     std::string described{};
 
@@ -419,7 +419,7 @@ void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, 
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumGreater(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertGreater(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -430,7 +430,7 @@ void CoreTools::UnitTest::AssertGreaterEqual(const LhsType& lhs, const RhsType& 
 {
     static_assert(boost::has_greater_equal<LhsType, RhsType, bool>::value, "RangeType and TestType has less equal bool.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = lhs >= rhs;
 
@@ -456,7 +456,7 @@ void CoreTools::UnitTest::AssertGreaterEqual(const LhsType& lhs, const RhsType& 
 template <typename LhsType, typename RhsType>
 void CoreTools::UnitTest::AssertEnumGreaterEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertGreaterEqual(System::EnumCastUnderlying(lhs), System::EnumCastUnderlying(rhs), functionDescribed, errorMessage, failureThrow);
 }
@@ -468,7 +468,7 @@ void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function func
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -497,7 +497,7 @@ void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function func
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -526,7 +526,7 @@ void CoreTools::UnitTest::AssertNotThrowException(TestClass* test, Function func
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -555,7 +555,7 @@ void CoreTools::UnitTest::AssertThrowException(TestClass* test, Function functio
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -584,7 +584,7 @@ void CoreTools::UnitTest::AssertThrowException(TestClass* test, Function functio
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -613,7 +613,7 @@ void CoreTools::UnitTest::AssertThrowException(TestClass* test, Function functio
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
@@ -641,7 +641,7 @@ void CoreTools::UnitTest::ExecuteLoopTesting(TestClass* test, Function function)
     static_assert(std::is_member_function_pointer_v<Function>, "Function is member function pointer.");
     static_assert(std::is_base_of_v<UnitTest, TestClass>, "UnitTest is base of TestClass.");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     CoreTools::DisableNoexcept();
 

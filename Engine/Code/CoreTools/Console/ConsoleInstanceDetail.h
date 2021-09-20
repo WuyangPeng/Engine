@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 18:47)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
@@ -16,10 +16,10 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <CoreTools::StandardHandle Handle>
-CoreTools::ConsoleInstance<Handle>::ConsoleInstance([[maybe_unused]] DisableNotThrow disableNotThrow)
-    : m_Handle{ System::GetStandardHandle(Handle) }
+CoreTools::ConsoleInstance<Handle>::ConsoleInstance(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+    : handle{ System::GetStandardHandle(Handle) }
 {
-    if (!System::IsHandleValid(m_Handle))
+    if (!System::IsHandleValid(handle))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("获取标准设备的句柄失败。"s));
     }
@@ -31,7 +31,7 @@ CoreTools::ConsoleInstance<Handle>::ConsoleInstance([[maybe_unused]] DisableNotT
 template <CoreTools::StandardHandle Handle>
 bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
 {
-    if (System::IsHandleValid(m_Handle))
+    if (System::IsHandleValid(handle))
         return true;
     else
         return false;
@@ -43,7 +43,7 @@ typename CoreTools::ConsoleInstance<Handle>::ConsoleHandle CoreTools::ConsoleIns
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return m_Handle;
+    return handle;
 }
 
 #endif  // CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H

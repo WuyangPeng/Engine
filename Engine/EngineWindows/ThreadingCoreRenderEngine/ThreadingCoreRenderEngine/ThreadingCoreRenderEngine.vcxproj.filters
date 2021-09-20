@@ -18,15 +18,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Project.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Library.txt">
-      <Filter>资源文件</Filter>
-    </Text>
     <Text Include="Resource\Todo\Level 0.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -56,9 +47,6 @@
     </Text>
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.md">
-      <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
@@ -91,5 +79,19 @@
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllMain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Library.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Project.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

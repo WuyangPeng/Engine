@@ -28,7 +28,7 @@ using namespace std::literals;
 #include SYSTEM_WARNING_DISABLE(26456)
 Framework::NetworkManagerInterface
 	::NetworkManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(NetworkMiddleLayer::Count)) }, 
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(NetworkMiddleLayer::Count) }, 
 	 m_NetworkManager{ make_shared<NetworkManagerImpl>() }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
@@ -36,7 +36,7 @@ Framework::NetworkManagerInterface
 
 Framework::NetworkManagerInterface
 	::NetworkManagerInterface(NetworkManagerInterface&& rhs) noexcept
-	:ParentType{ move(rhs) }, m_Impl{ move(rhs.m_Impl) }, m_NetworkManager{ move(rhs.m_NetworkManager) }
+	:ParentType{ move(rhs) }, impl{ move(rhs.impl) }, m_NetworkManager{ move(rhs.m_NetworkManager) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -48,7 +48,7 @@ Framework::NetworkManagerInterface& Framework::NetworkManagerInterface
 
 	ParentType::operator=(move(rhs));
 
-	m_Impl = move(rhs.m_Impl);
+	impl = move(rhs.impl);
 
 	m_NetworkManager = move(rhs.m_NetworkManager);
 
@@ -59,7 +59,7 @@ Framework::NetworkManagerInterface& Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::IsValid() const noexcept
 {	
-	if (ParentType::IsValid() && m_Impl != nullptr && m_NetworkManager != nullptr)
+	if (ParentType::IsValid() &&   m_NetworkManager != nullptr)
 		return true; 
 	else 
 		return false;
@@ -69,7 +69,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::PreCreate(environmentDirectory))
 	{
@@ -90,7 +90,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Initialize() 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	
 	if (ParentType::Initialize())
 	{
@@ -115,7 +115,7 @@ void Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Destroy() 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Destroy())
 	{		
@@ -132,7 +132,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Idle(int64_t timeDelta)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	
 	if (ParentType::Idle(timeDelta))
 	{
@@ -149,7 +149,7 @@ bool Framework::NetworkManagerInterface
 
 void Framework::NetworkManagerInterface ::Send(const Network::SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	m_NetworkManager->Send(socketData, socketID, message);
 }
@@ -159,7 +159,7 @@ void Framework::NetworkManagerInterface ::Send(const Network::SocketData& socket
 Framework::NetworkManagerInterface::SendSocketManagerSharedPtr Framework::NetworkManagerInterface
 	::GetSendSocketManager() 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto sendSocketManager = m_NetworkManager->GetSendSocketManager();
 
@@ -197,7 +197,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Network, ObjectLogic)
 bool Framework::NetworkManagerInterface
 	::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Paint();
 }
@@ -205,7 +205,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Move(point);
 }
@@ -213,7 +213,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Resize(windowDisplay,size);
 }
@@ -221,7 +221,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyUp(key, point);
 }
@@ -229,7 +229,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyDown(key, point);
 }
@@ -237,7 +237,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyUp(key, point);
 }
@@ -245,7 +245,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyDown(key, point);
 }
@@ -253,7 +253,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::PassiveMotion(point);
 }
@@ -261,7 +261,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Motion(point, virtualKeys);
 }
@@ -269,7 +269,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseWheel(delta, point, virtualKeys);
 }
@@ -277,7 +277,7 @@ bool Framework::NetworkManagerInterface
 bool Framework::NetworkManagerInterface
 	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }

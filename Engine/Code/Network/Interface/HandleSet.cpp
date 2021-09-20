@@ -12,27 +12,26 @@
 #include "HandleSet.h"
 #include "Detail/HandleSetFactory.h"
 #include "Detail/HandleSetImpl.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 Network::HandleSet::HandleSet(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ HandleSetFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Network, HandleSet)
+CLASS_INVARIANT_STUB_DEFINE(Network, HandleSet)
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, HandleSet)
-
-DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, HandleSet)
-
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, SetBit, ACEHandle, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, SetBit, ACEHandle, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetMaxSet, int64_t)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetFdSet, Network::SockFdSet*)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Sync, ACEHandle, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetFdSet, Network::SockFdSet*)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Sync, ACEHandle, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, IsSet, ACEHandle, bool)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, ClearBit, ACEHandle, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, ClearBit, ACEHandle, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, GetACEHandleSet, const Network::ACEHandleSet&)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetFull, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetCount, int)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Select, int, bool)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, HandleSet, Select, int, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, HandleSet, IsFdSetCountIsOne, bool)

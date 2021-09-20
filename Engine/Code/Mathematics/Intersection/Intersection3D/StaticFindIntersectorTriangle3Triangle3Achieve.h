@@ -32,7 +32,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersectorTriangle3Triangle3(const Triangle3& lhsTriangle, const Triangle3& rhsTriangle, bool reportCoplanarIntersections, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(lhsTriangle, rhsTriangle) }, m_ReportCoplanarIntersections{ reportCoplanarIntersections }
+    : ParentType{ epsilon }, impl{ lhsTriangle, rhsTriangle  }, m_ReportCoplanarIntersections{ reportCoplanarIntersections }
 {
     Find();
 
@@ -43,8 +43,8 @@ Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::StaticFindIntersecto
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 {
-    const auto lhsTriangle = m_Impl->GetTriangle0();
-    const auto rhsTriangle = m_Impl->GetTriangle1();
+    const auto lhsTriangle = impl->GetTriangle0();
+    const auto rhsTriangle = impl->GetTriangle1();
 
     // 获取m_LhsTriangle的平面
     const Plane3 lhsPlane0{ lhsTriangle };
@@ -144,7 +144,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Find()
 template <typename Real>
 bool Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -157,7 +157,7 @@ typename const Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Trian
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle0();
+    return impl->GetTriangle0();
 }
 
 template <typename Real>
@@ -165,7 +165,7 @@ typename const Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::Trian
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle1();
+    return impl->GetTriangle1();
 }
 
 template <typename Real>
@@ -173,7 +173,7 @@ int Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetQuantity() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -181,7 +181,7 @@ const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorTriangle3Tri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -216,7 +216,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::ContainsPoint(c
     {
         // 向调用者报告交叉点。
         this->SetIntersectionType(IntersectionType::Point);
-        m_Impl->AddPoint(point);
+        impl->AddPoint(point);
     }
 }
 
@@ -328,7 +328,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
             point.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * point.GetY() - plane.GetNormal().GetZ() * point.GetZ()));
 
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else if (maxNormal == 1)
@@ -340,7 +340,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
             point.SetZ(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetZ() * point.GetZ()));
 
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else
@@ -352,7 +352,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::IntersectsSegme
 
             point.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetY() * point.GetY()));
 
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
 
@@ -450,7 +450,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
         {
             Vector3D point{ Math::GetValue(0), intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY() };
             point.SetX(invNormalX * (plane.GetConstant() - plane.GetNormal().GetY() * point.GetY() - plane.GetNormal().GetZ() * point.GetZ()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else if (maxNormal == 1)
@@ -460,7 +460,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
         {
             Vector3D point{ intr.GetPoint(i).GetX(), Math::GetValue(0), intr.GetPoint(i).GetY() };
             point.SetY(invNormalY * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetZ() * point.GetZ()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
     else
@@ -470,7 +470,7 @@ void Mathematics::StaticFindIntersectorTriangle3Triangle3<Real>::GetCoplanarInte
         {
             Vector3D point{ intr.GetPoint(i).GetX(), intr.GetPoint(i).GetY(), Math::GetValue(0) };
             point.SetZ(invNormalZ * (plane.GetConstant() - plane.GetNormal().GetX() * point.GetX() - plane.GetNormal().GetY() * point.GetY()));
-            m_Impl->AddPoint(point);
+            impl->AddPoint(point);
         }
     }
 

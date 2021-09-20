@@ -11,12 +11,12 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/Resources/Texture2D.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 #include "../Resources/RenderTarget.h"
 
-RENDERING_EXPORT_SHARED_PTR(RenderTargetManagementImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(RenderTargetManagementImpl);
+
 
 namespace Rendering
 {
@@ -24,17 +24,21 @@ namespace Rendering
 	class RenderTarget;
 	class PlatformRenderTarget;
 
-	class RENDERING_DEFAULT_DECLARE RenderTargetManagement : boost::noncopyable
+	class RENDERING_DEFAULT_DECLARE RenderTargetManagement  
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(RenderTargetManagement);
+		NON_COPY_TYPE_DECLARE(RenderTargetManagement);
 		using RenderTargetConstPtr = std::shared_ptr<const RenderTarget>;
 		using PlatformRenderTargetSharedPtr = std::shared_ptr<PlatformRenderTarget>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit RenderTargetManagement(RendererPtr ptr);
-
+            ~RenderTargetManagement() noexcept = default;
+                RenderTargetManagement(const RenderTargetManagement& rhs) noexcept = delete;
+            RenderTargetManagement& operator=(const RenderTargetManagement& rhs) noexcept = delete;
+                RenderTargetManagement(RenderTargetManagement&& rhs) noexcept = delete;
+            RenderTargetManagement& operator=(RenderTargetManagement&& rhs) noexcept = delete;
 		CLASS_INVARIANT_DECLARE;
         
         void Bind (RenderTargetConstPtr renderTarget);
@@ -46,7 +50,7 @@ namespace Rendering
         PlatformRenderTargetSharedPtr GetResource (RenderTargetConstPtr renderTarget);
         
 	private:
-        IMPL_TYPE_DECLARE(RenderTargetManagement);
+        PackageType impl;
 	};
 }
 

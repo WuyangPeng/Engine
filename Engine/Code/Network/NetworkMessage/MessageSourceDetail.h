@@ -23,7 +23,7 @@ void Network::MessageSource::Read(T& datum)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto typeSize = CoreTools::GetStreamSize<T>();
 
@@ -35,7 +35,7 @@ void Network::MessageSource::Read(int elementsNumber, T* data)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (0 < elementsNumber)
     {
@@ -50,7 +50,7 @@ void Network::MessageSource::Read(std::vector<T>& datum)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     int32_t elementsNumber{ 0 };
 
@@ -68,7 +68,7 @@ void Network::MessageSource::ReadEnum(T& datum)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using UnderlyingType = std::underlying_type_t<T>;
 
@@ -84,7 +84,7 @@ void Network::MessageSource::ReadEnum(int elementsNumber, T* data)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     for (auto i = 0; i < elementsNumber; ++i)
     {

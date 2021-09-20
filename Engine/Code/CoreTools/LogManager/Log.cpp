@@ -38,38 +38,38 @@ void CoreTools::Log::Destroy() noexcept
 }
 
 CoreTools::Log::Log([[maybe_unused]] LogCreate logCreate)
-    : m_Impl{ make_shared<ImplType>(DisableNotThrow::Disable) }
+    : impl{  DisableNotThrow::Disable   }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Log)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Log)
 
 void CoreTools::Log::InsertAppender(const String& name, const Appender& appenderPtr)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->InsertAppender(name, appenderPtr);
+    return impl->InsertAppender(name, appenderPtr);
 }
 
 void CoreTools::Log::RemoveAppender(const String& name)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->RemoveAppender(name);
+    return impl->RemoveAppender(name);
 }
 
 void CoreTools::Log::LoadConfiguration(const string& fileName)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->LoadConfiguration(fileName);
+    return impl->LoadConfiguration(fileName);
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutTrace() noexcept
@@ -83,9 +83,9 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutTrace() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutTrace抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutTrace();
+    return impl->OutTrace();
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutDebug() noexcept
@@ -99,9 +99,9 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutDebug() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutDebug抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutDebug();
+    return impl->OutDebug();
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutInfo() noexcept
@@ -115,9 +115,9 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutInfo() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutInfo抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutInfo();
+    return impl->OutInfo();
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutWarn() noexcept
@@ -131,9 +131,9 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutWarn() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutWarn抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutWarn();
+    return impl->OutWarn();
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutError() noexcept
@@ -147,9 +147,9 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutError() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutError抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutError();
+    return impl->OutError();
 }
 
 CoreTools::LogAppenderIOManager& CoreTools::Log::OutFatal() noexcept
@@ -163,16 +163,16 @@ CoreTools::LogAppenderIOManager& CoreTools::Log::OutFatal() noexcept
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("OutFatal抛出异常"));
     }
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->OutFatal();
+    return impl->OutFatal();
 }
 
 void CoreTools::Log::ReloadAppenderFile()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->ReloadAppenderFile();
+    return impl->ReloadAppenderFile();
 }

@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "Rendering/Renderers/Detail/PlatformIndexBufferImpl.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 
 namespace Rendering
 {

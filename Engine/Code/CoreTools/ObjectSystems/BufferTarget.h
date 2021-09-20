@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/21 14:27)
+//	引擎版本：0.7.1.1 (2020/10/21 14:27)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
@@ -14,21 +14,26 @@
 
 #include "ObjectSystemsFwd.h"
 #include "CoreTools/FileManager/WriteBufferIO.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <array>
 
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
-CORE_TOOLS_EXPORT_SHARED_PTR(BufferTargetImpl);
+
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(BufferTargetImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(BufferTarget);
+        NON_COPY_TYPE_DECLARE(BufferTarget);
 
     public:
         BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister);
+        ~BufferTarget() noexcept = default;
+        BufferTarget(const BufferTarget& rhs) noexcept = delete;
+        BufferTarget& operator=(const BufferTarget& rhs) noexcept = delete;
+        BufferTarget(BufferTarget&& rhs) noexcept = delete;
+        BufferTarget& operator=(BufferTarget&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -122,7 +127,7 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:
-        IMPL_TYPE_DECLARE(BufferTarget);
+        PackageType impl;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(BufferTarget);

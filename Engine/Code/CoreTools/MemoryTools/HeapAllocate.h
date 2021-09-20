@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/19 16:44)
+//	引擎版本：0.7.1.1 (2020/10/19 16:44)
 
 // 分配Heap
 #ifndef CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_H

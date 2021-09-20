@@ -16,10 +16,12 @@
 
 namespace Network
 {
+    class SockStreamFactory;
     class NETWORK_HIDDEN_DECLARE SockStreamImpl
     {
     public:
         using ClassType = SockStreamImpl;
+        using FactoryType = SockStreamFactory;
 
     public:
         SockStreamImpl() noexcept = default;

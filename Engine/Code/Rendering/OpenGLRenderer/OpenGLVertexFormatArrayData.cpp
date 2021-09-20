@@ -25,8 +25,9 @@ void Rendering
 	for (int unit = 0; unit < System::EnumCastUnderlying(Rendering::VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);++unit)
 	{
 		if (m_Data[unit].IsHas())
-		{
-			System::GlEnableTextureArray(unit,m_Data[unit].GetChannels(),m_Data[unit].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[unit].GetOffset());	
+            {
+                    stride;
+			//System::GLEnableTextureArray(unit,m_Data[unit].GetChannels(),m_Data[unit].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[unit].GetOffset());	
 		}
 	}	
 }
@@ -36,15 +37,15 @@ void Rendering
 	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
+    stride;
 	if (m_Data[0].IsHas())
 	{
-		System::GlEnableColorArray(m_Data[0].GetChannels(),m_Data[0].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[0].GetOffset());
+		//System::GLEnableColorArray(m_Data[0].GetChannels(),m_Data[0].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[0].GetOffset());
 	}
 
 	if (m_Data[1].IsHas())
 	{
-		System::GlEnableSecondaryColorArray(m_Data[1].GetChannels(),m_Data[1].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[1].GetOffset());
+		//System::GlEnableSecondaryColorArray(m_Data[1].GetChannels(),m_Data[1].GetType(), stride,reinterpret_cast<char*>(0) + m_Data[1].GetOffset());
 	}
 }
 
@@ -59,7 +60,7 @@ void Rendering
 	{
 		if (m_Data[unit].IsHas())
 		{
-			System::GlDisableTextureArray(unit);	
+			//System::GLDisableTextureArray(unit);	
 		}
 	}	
 }
@@ -73,12 +74,12 @@ void Rendering
 
 	if (m_Data[0].IsHas())
 	{
-		System::GlDisableColorArray();
+		//System::GLDisableColorArray();
 	}
 
 	if (m_Data[1].IsHas())
 	{
-		System::GlDisableSecondaryColorArray();
+		//System::GlDisableSecondaryColorArray();
 	}
 }
 #include STSTEM_WARNING_POP

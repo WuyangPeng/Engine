@@ -14,16 +14,16 @@
 
 #include "NetworkMessageEvent.h"
 #include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-NETWORK_EXPORT_SHARED_PTR(MessageEventManagerImpl);
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(MessageEventManager, MessageEventManagerImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE MessageEventManager final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageEventManager);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(MessageEventManager);
 
     public:
         explicit MessageEventManager(CoreTools::DisableNotThrow disableNotThrow);
@@ -39,7 +39,7 @@ namespace Network
         void OnEvent(int64_t messageID, uint64_t socketID, const ConstMessageInterfaceSharedPtr& message);
 
     private:
-        IMPL_TYPE_DECLARE(MessageEventManager);
+        PackageType impl;
     };
 }
 

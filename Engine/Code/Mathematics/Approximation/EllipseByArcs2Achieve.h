@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::EllipseByArcs2<Real>::EllipseByArcs2(Real begin, Real end, size_t numArcs)
-    : m_Impl{ std::make_shared<ImplType>(begin, end, numArcs) }
+    : impl{ begin, end, numArcs }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -24,10 +24,7 @@ Mathematics::EllipseByArcs2<Real>::EllipseByArcs2(Real begin, Real end, size_t n
 template <typename Real>
 bool Mathematics::EllipseByArcs2<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
-        return true;
-    else
-        return false;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -36,7 +33,7 @@ typename const Mathematics::EllipseByArcs2<Real>::PointsType Mathematics::Ellips
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoints();
+    return impl->GetPoints();
 }
 
 template <typename Real>
@@ -44,7 +41,7 @@ typename const Mathematics::EllipseByArcs2<Real>::Circle2Container Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCircle2();
+    return impl->GetCircle2();
 }
 
 template <typename Real>
@@ -52,7 +49,7 @@ int Mathematics::EllipseByArcs2<Real>::getNumArcs() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->getNumArcs();
+    return impl->getNumArcs();
 }
 
 template <typename Real>
@@ -60,7 +57,7 @@ const Mathematics::Arc2<Real> Mathematics::EllipseByArcs2<Real>::GetArc2(int ind
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetArc2(index);
+    return impl->GetArc2(index);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_ACHIEVE_H

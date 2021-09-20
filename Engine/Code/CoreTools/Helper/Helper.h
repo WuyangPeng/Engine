@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2021
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/07 19:00)
+///	引擎版本：0.7.2.1 (2021/07/29 16:09)
 
 #ifndef CORE_TOOLS_HELPER_H
 #define CORE_TOOLS_HELPER_H
@@ -31,7 +31,6 @@
 #include "SharedPtrMacro.h"
 #include "SingletonMacro.h"
 #include "StreamMacro.h"
-#include "TemplateToolsMacro.h"
 #include "UnitTestSuiteMacro.h"
 #include "UserMacro.h"
 

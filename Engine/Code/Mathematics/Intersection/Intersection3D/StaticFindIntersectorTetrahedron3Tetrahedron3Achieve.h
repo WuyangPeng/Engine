@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::StaticFindIntersectorTetrahedron3Tetrahedron3(const Tetrahedron3& tetrahedron0, const Tetrahedron3& tetrahedron1, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(tetrahedron0, tetrahedron1) }
+    : ParentType{ epsilon }, impl{  tetrahedron0, tetrahedron1  }
 {
     Find();
 
@@ -27,7 +27,7 @@ Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::StaticFindInte
 template <typename Real>
 bool Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -39,7 +39,7 @@ const Mathematics::Tetrahedron3<Real> Mathematics::StaticFindIntersectorTetrahed
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTetrahedron0();
+    return impl->GetTetrahedron0();
 }
 
 template <typename Real>
@@ -47,7 +47,7 @@ const Mathematics::Tetrahedron3<Real> Mathematics::StaticFindIntersectorTetrahed
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTetrahedron1();
+    return impl->GetTetrahedron1();
 }
 
 template <typename Real>
@@ -75,7 +75,7 @@ void Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>::Find()
 
     if (!intersection.empty())
     {
-        m_Impl->SetIntersectionContainer(intersection);
+        impl->SetIntersectionContainer(intersection);
         this->SetIntersectionType(IntersectionType::Point);
     }
     else
@@ -89,7 +89,7 @@ typename const Mathematics::StaticFindIntersectorTetrahedron3Tetrahedron3<Real>:
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIntersection();
+    return impl->GetIntersection();
 }
 
 template <typename Real>

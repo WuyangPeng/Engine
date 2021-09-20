@@ -11,8 +11,8 @@
 
 #include "Mathematics/Algebra/AVector.h"
 #include "Controller.h" 
-
-RENDERING_EXPORT_SHARED_PTR(PointControllerImpl);
+EXPORT_SHARED_PTR(Rendering, PointControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +23,17 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE PointController : public Controller
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(PointController, = default);
+
+            void Swap(PointController& rhs) noexcept;
+      
+          public:
+              TYPE_DECLARE(PointController);
+              using ClassShareType = CoreTools::CopyUnsharedClasses;
+              ~PointController() noexcept= default;
+              PointController(const PointController& rhs);
+              PointController& operator=(const PointController& rhs);
+              PointController(PointController&& rhs) noexcept;
+              PointController& operator=(PointController&& rhs) noexcept;
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 
@@ -75,7 +85,7 @@ namespace Rendering
 		virtual void UpdatePointMotion (float ctrlTime);
 
 	private:
-		IMPL_TYPE_DECLARE(SkinController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 
 		Polypoint* m_Points;
 	};

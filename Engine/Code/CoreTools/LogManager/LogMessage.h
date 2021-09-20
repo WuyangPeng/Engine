@@ -17,17 +17,17 @@
 #include "CoreTools/Contract/FunctionDescribed.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogMessageImpl);
+CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(LogMessageImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE LogMessage final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(LogMessage);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(LogMessage);
         using String = System::String;
 
     public:
@@ -42,7 +42,7 @@ namespace CoreTools
         [[nodiscard]] FunctionDescribed GetFunctionDescribed() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(LogMessage);
+        PackageType impl;
     };
 }
 

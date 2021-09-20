@@ -18,9 +18,7 @@
 #include "Rendering/DataTypes/Colour.h"
 
 #include <vector>
-
-RENDERING_EXPORT_SHARED_PTR(ShaderFloatImpl);
-
+EXPORT_SHARED_PTR(Rendering, ShaderFloatImpl, RENDERING_DEFAULT_DECLARE); 
 namespace Rendering
 {
     class Camera;
@@ -29,7 +27,18 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderFloat : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderFloat, DESTRUCTOR_STATEMENT);
+    public:
+        void Swap(ShaderFloat& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ShaderFloat);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ShaderFloat() noexcept;
+        ShaderFloat(const ShaderFloat& rhs);
+        ShaderFloat& operator=(const ShaderFloat& rhs);
+        ShaderFloat(ShaderFloat&& rhs) noexcept;
+        ShaderFloat& operator=(ShaderFloat&& rhs) noexcept;
+
         using ParentType = Object;
         using FloatVector = std::vector<float>;
         using AVector = Mathematics::FloatAVector;
@@ -84,7 +93,7 @@ namespace Rendering
         virtual ShaderFloatSharedPtr Clone() const;
 
     private:
-        IMPL_TYPE_DECLARE(ShaderFloat);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

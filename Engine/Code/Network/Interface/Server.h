@@ -16,15 +16,15 @@
 #include "SendSocket.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/NetworkMessage/SocketManager.h"
-
-NETWORK_EXPORT_SHARED_PTR(ServerImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+NETWORK_NON_COPY_EXPORT_IMPL(ServerImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE Server : public SendSocket
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Server);
+        NON_COPY_TYPE_DECLARE(Server);
         using ParentType = SendSocket;
 
     public:
@@ -38,7 +38,7 @@ namespace Network
         void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
 
     private:
-        IMPL_TYPE_DECLARE(Server);
+        PackageType impl;
     };
 
     using ServerSharedPtr = std::shared_ptr<Server>;

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/10 13:06)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/24 22:18)
 
 #ifndef CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
 #define CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
@@ -16,55 +16,54 @@
 #include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
 #include "CoreTools/Helper/CustomAssertMacro.h"
 
-#include <boost/noncopyable.hpp>
+#include <boost/format/format_fwd.hpp>
 #include <array>
-
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE TriggerAssert final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE TriggerAssert final
     {
     public:
         using ClassType = TriggerAssert;
         using DialogBoxCommand = System::DialogBoxCommand;
+        using Format = boost::format;
 
     public:
-        TriggerAssert(TriggerAssertCheck triggerAssertCheck, const FunctionDescribed& functionDescribed, const char* format, va_list arguments);
-        TriggerAssert(TriggerAssertCheck triggerAssertCheck, const FunctionDescribed& functionDescribed, const char* format, ...);
+        template <typename... Types>
+        explicit TriggerAssert(TriggerAssertCheck triggerAssertCheck, const FunctionDescribed& functionDescribed, const std::string& message, Types&&... arguments);
+
+        TriggerAssert() noexcept = delete;
+        ~TriggerAssert() noexcept = default;
+        TriggerAssert(const TriggerAssert& rhs) noexcept = delete;
+        TriggerAssert& operator=(const TriggerAssert& rhs) noexcept = delete;
+        TriggerAssert(TriggerAssert&& rhs) noexcept = delete;
+        TriggerAssert& operator=(TriggerAssert&& rhs) noexcept = delete;
 
     private:
-        void Process(const FunctionDescribed& functionDescribed, const char* format, va_list arguments);
+        template <typename Type, typename... Types>
+        void Process(const FunctionDescribed& functionDescribed, Format& format, Type&& argument, Types&&... arguments);
+        void Process(const FunctionDescribed& functionDescribed, const Format& format);
 
-        void GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const char* triggerAssertCheck) noexcept;
-        void AppendUserArguments(const char* format, va_list arguments) noexcept;
+        NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed);
+        NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage);
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
-        void WriteToOutputDebug() noexcept;
+        void WriteToOutputDebug(const std::string& message) noexcept;
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
-        void JudgeUserSelection();
-        void JudgeSelection(DialogBoxCommand selection);
+        void JudgeUserSelection(const std::string& message);
+        void JudgeSelection(DialogBoxCommand selection, const std::string& message);
+        NODISCARD static std::string GetMessageBoxTitle();
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
 
-        static size_t GetDebugPromptLength() noexcept;
-        static size_t GetMaxPrefixBytes() noexcept;
+        NODISCARD static std::string GetDebugPrompt();
+        NODISCARD static std::string GetMessagePrefix();
+        NODISCARD static std::string GetTriggerAssertCheckInvariant();
+        NODISCARD static std::string GetTriggerAssertCheckAssertion();
 
     private:
-        static constexpr size_t sm_MaxMessageBytes{ 1024u };
-        static const char* sm_DebugPrompt;
-        static const char* sm_MessagePrefix;
-        static const char* sm_TriggerAssertCheckInvariant;
-        static const char* sm_TriggerAssertCheckAssertion;
-
-#ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
-        static const char* sm_MessageBoxTitle;
-#endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
-
-    private:
-        TriggerAssertCheck m_TriggerAssertCheck;
-        std::array<char, sm_MaxMessageBytes> m_Message;
+        TriggerAssertCheck triggerAssertCheck;
     };
 }
 

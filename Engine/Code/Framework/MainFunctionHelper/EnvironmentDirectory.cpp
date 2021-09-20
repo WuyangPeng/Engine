@@ -15,12 +15,12 @@ using std::make_shared;
 
 Framework::EnvironmentDirectory
 	::EnvironmentDirectory(const String& engineEnvironment, const String& engineDirectory)
-	:m_Impl{ make_shared<ImplType>(engineEnvironment,engineDirectory) }
+	:impl{ engineEnvironment,engineDirectory }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, EnvironmentDirectory)
+CLASS_INVARIANT_STUB_DEFINE(Framework, EnvironmentDirectory)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineEnvironment, const System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, EnvironmentDirectory, GetEngineDirectory, const System::String)
@@ -32,7 +32,7 @@ const System::String Framework::EnvironmentDirectory
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetPath(renderingDirectory, analysisDirectory);
+	return impl->GetPath(renderingDirectory, analysisDirectory);
 }
 
 const System::String Framework::EnvironmentDirectory
@@ -40,5 +40,5 @@ const System::String Framework::EnvironmentDirectory
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetPath(endianDirectory, renderingDirectory, analysisDirectory);
+	return impl->GetPath(endianDirectory, renderingDirectory, analysisDirectory);
 }

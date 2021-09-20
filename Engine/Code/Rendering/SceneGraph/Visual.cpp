@@ -36,14 +36,14 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, Visual);
 
 Rendering::Visual
     ::Visual(VisualPrimitiveType type)
-	:ParentType{}, m_Impl{ make_shared<ImplType>(type) }
+	:ParentType{}, impl{ make_shared<ImplType>(type) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::Visual
 	::Visual(VisualPrimitiveType type, const VertexFormatSharedPtr& vertexformat, const VertexBufferSharedPtr& vertexbuffer,const IndexBufferSharedPtr& indexbuffer)
-	:ParentType{}, m_Impl{ make_shared<ImplType>(type, vertexformat, vertexbuffer, indexbuffer) }
+	:ParentType{}, impl{ make_shared<ImplType>(type, vertexformat, vertexbuffer, indexbuffer) }
 {
 	UpdateModelSpace(VisualUpdateType::ModelBoundOnly);
 
@@ -53,7 +53,7 @@ Rendering::Visual::Visual(Visual&& rhs) noexcept
     : ParentType{
           std::move(rhs)
       },
-      m_Impl{ std::move(rhs.m_Impl) }
+      impl{ std::move(rhs.impl) }
 {
     SELF_CLASS_IS_VALID_0;
 }
@@ -61,7 +61,7 @@ Rendering::Visual& Rendering::Visual::operator=(Visual&& rhs) noexcept
 {
     CLASS_IS_VALID_0;
     ParentType::operator=(std::move(rhs));
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
     return *this;
 }
 Rendering::Visual
@@ -72,7 +72,7 @@ Rendering::Visual
 
 Rendering::Visual
 	::Visual(const Visual& rhs)
-	:ParentType(rhs), m_Impl{ make_shared<ImplType>(rhs.GetPrimitiveType()) }
+	:ParentType(rhs), impl{ make_shared<ImplType>(rhs.GetPrimitiveType()) }
 {
 	CloneData(rhs);
 
@@ -88,7 +88,7 @@ Rendering::Visual& Rendering::Visual
 
 	ParentType::operator =(rhs);
 
-	m_Impl = make_shared<ImplType>(rhs.GetPrimitiveType());
+	impl = make_shared<ImplType>(rhs.GetPrimitiveType());
 
 	CloneData(rhs);
 
@@ -142,7 +142,7 @@ void Rendering::Visual
 		SetIndexBuffer(IndexBufferSharedPtr{});
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Visual) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Visual) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Visual,GetPrimitiveType,Rendering::VisualPrimitiveType)
 
@@ -182,7 +182,7 @@ void Rendering::Visual
 	::UpdateWorldBound()
 {	
 	auto worldTransform = GetWorldTransform();
-    const auto worldBound = m_Impl->GetWorldBound(worldTransform);
+    const auto worldBound = impl->GetWorldBound(worldTransform);
 
 	BoundGrowToContain(worldBound);
 }
@@ -190,7 +190,7 @@ void Rendering::Visual
 void Rendering::Visual
 	::UpdateModelBound()
 {
-	m_Impl->UpdateModelBound();
+	impl->UpdateModelBound();
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Visual,ComputeBounding, vector<APoint>,void)
@@ -224,7 +224,7 @@ Rendering::ConstVisualSharedPtr Rendering::Visual
 
 Rendering::Visual
 	::Visual(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -236,7 +236,7 @@ int Rendering::Visual
     
     auto size = ParentType::GetStreamingSize();
     
-    size += m_Impl->GetStreamingSize();  
+    size += impl->GetStreamingSize();  
     
     return size;
 }
@@ -250,7 +250,7 @@ const	auto uniqueID = ParentType::Register(target);
     
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		impl->Register(target);
 	}
 
     return uniqueID;
@@ -265,7 +265,7 @@ void Rendering::Visual
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);    
+	impl->Save(target);    
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -273,17 +273,17 @@ void Rendering::Visual
 void Rendering::Visual
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
     
-	m_Impl->Link(source);
+	impl->Link(source);
 }
 
 void Rendering::Visual
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();     
 }
@@ -291,13 +291,13 @@ void Rendering::Visual
 void Rendering::Visual
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:10)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 18:09)
 
 #ifndef SYSTEM_HELPER_VISUALC_H
 #define SYSTEM_HELPER_VISUALC_H
@@ -69,38 +69,39 @@
 
             #elif _MSC_VER < 1500
                 #define MSVC_COMPILER_VERSION evc8
-                #define SYSTEM_USING_VC80
+                #define SYSTEM_USING_VC80 static_cast<void>(0)
             #elif _MSC_VER < 1600
                 #define MSVC_COMPILER_VERSION evc9
-                #define SYSTEM_USING_VC90
+                #define SYSTEM_USING_VC90 static_cast<void>(0)
             #elif _MSC_VER < 1700
                 #define MSVC_COMPILER_VERSION evc10
-                #define SYSTEM_USING_VC100
+                #define SYSTEM_USING_VC100 static_cast<void>(0)
             #elif _MSC_VER < 1800
                 #define MSVC_COMPILER_VERSION evc11
-                #define SYSTEM_USING_VC110
+                #define SYSTEM_USING_VC110 static_cast<void>(0)
             #elif _MSC_VER < 1900
                 #define MSVC_COMPILER_VERSION evc12
-                #define SYSTEM_USING_VC120
+                #define SYSTEM_USING_VC120 static_cast<void>(0)
             #elif _MSC_VER < 2000
                 #define MSVC_COMPILER_VERSION evc14
-                #define SYSTEM_USING_VC140
+                #define SYSTEM_USING_VC140 static_cast<void>(0)
             #else  // 2000 <= _MSC_VER
                 #error "未知的 EVC++ 编译器版本"
             #endif  // _MSC_VER
 
-        #else  // !defined(UNDER_CE)                  \
-            // 微软的Visual Studio版本：        \
-            // MSVC 6是版本12.00                   \
-            // MSVC 7.0是版本13.00（MSVS 2002）  \
-            // MSVC 7.1是版本13.10（MSVS 2003）  \
-            // MSVC 8.0是版本14.00（MSVS 2005）  \
-            // MSVC 9.0是版本15.00（MSVS 2008）  \
-            // MSVC 10.0是版本16.00（MSVS 2010） \
-            // MSVC 11.0是版本17.00（MSVS 2012） \
-            // MSVC 12.0是版本18.00（MSVS 2013） \
-            // MSVC 14.0是版本19.00（MSVS 2015） \
+        #else  // !defined(UNDER_CE)
+            // 微软的Visual Studio版本：
+            // MSVC 6是版本12.00
+            // MSVC 7.0是版本13.00（MSVS 2002）
+            // MSVC 7.1是版本13.10（MSVS 2003）
+            // MSVC 8.0是版本14.00（MSVS 2005）
+            // MSVC 9.0是版本15.00（MSVS 2008）
+            // MSVC 10.0是版本16.00（MSVS 2010）
+            // MSVC 11.0是版本17.00（MSVS 2012）
+            // MSVC 12.0是版本18.00（MSVS 2013）
+            // MSVC 14.0是版本19.00（MSVS 2015）
             // MSVC 14.1是版本19.10（MSVS 2017）
+            // MSVC 14.2是版本19.20（MSVS 2019）
             #if _MSC_VER < 1310
                 // 注意：不支持7.0以下的版本。
                 #define MSVC_COMPILER_VERSION 5.0
@@ -112,28 +113,28 @@
                 #define MSVC_COMPILER_VERSION 7.1
             #elif _MSC_VER < 1500
                 #define MSVC_COMPILER_VERSION 8.0
-                #define SYSTEM_USING_VC80
+                #define SYSTEM_USING_VC80 static_cast<void>(0)
             #elif _MSC_VER < 1600
                 #define MSVC_COMPILER_VERSION 9.0
-                #define SYSTEM_USING_VC90
+                #define SYSTEM_USING_VC90 static_cast<void>(0)
             #elif _MSC_VER < 1700
                 #define MSVC_COMPILER_VERSION 10.0
-                #define SYSTEM_USING_VC100
+                #define SYSTEM_USING_VC100 static_cast<void>(0)
             #elif _MSC_VER < 1800
                 #define MSVC_COMPILER_VERSION 11.0
-                #define SYSTEM_USING_VC110
+                #define SYSTEM_USING_VC110 static_cast<void>(0)
             #elif _MSC_VER < 1900
                 #define MSVC_COMPILER_VERSION 12.0
-                #define SYSTEM_USING_VC120
+                #define SYSTEM_USING_VC120 static_cast<void>(0)
             #elif _MSC_VER < 1910
                 #define MSVC_COMPILER_VERSION 14.0
-                #define SYSTEM_USING_VC140                
+                #define SYSTEM_USING_VC140 static_cast<void>(0)
             #elif _MSC_VER < 1920
                 #define MSVC_COMPILER_VERSION 14.1
-                #define SYSTEM_USING_VC141
+                #define SYSTEM_USING_VC141 static_cast<void>(0)
             #elif _MSC_VER < 1930
-                #define BOOST_COMPILER_VERSION 14.2
-                #define SYSTEM_USING_VC142
+                #define MSVC_COMPILER_VERSION 14.2
+                #define SYSTEM_USING_VC142 static_cast<void>(0)
             #else  // 2000 <= _MSC_VER
                 #define MSVC_COMPILER_VERSION _MSC_VER
             #endif  // _MSC_VER
@@ -141,18 +142,22 @@
 
     #endif  // MSVC_COMPILER_VERSION
 
+    #if SYSTEM_CPP_STANDARD < 14
+        #define SYSTEM_DEPRECATED(x) __declspec(deprecated)
+    #endif  // SYSTEM_CPP_STANDARD < 14
+
     #if 1600 <= _MSC_VER
         #include <cstdint>
     #else  // _MSC_VER < 1600
 
-        typedef __int8 int8_t;
-        typedef __int16 int16_t;
-        typedef __int32 int32_t;
-        typedef __int64 int64_t;
-        typedef unsigned __int8 uint8_t;
-        typedef unsigned __int16 uint16_t;
-        typedef unsigned __int32 uint32_t;
-        typedef unsigned __int64 uint64_t;
+typedef __int8 int8_t;
+typedef __int16 int16_t;
+typedef __int32 int32_t;
+typedef __int64 int64_t;
+typedef unsigned __int8 uint8_t;
+typedef unsigned __int16 uint16_t;
+typedef unsigned __int32 uint32_t;
+typedef unsigned __int64 uint64_t;
 
         #define INT8_MIN _I8_MIN
         #define INT8_MAX _I8_MAX

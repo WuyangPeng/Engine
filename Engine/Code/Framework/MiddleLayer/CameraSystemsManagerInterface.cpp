@@ -16,7 +16,7 @@ using std::make_shared;
 
 Framework::CameraSystemsManagerInterface
 	::CameraSystemsManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(CameraSystemsMiddleLayer::Count)) }
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(CameraSystemsMiddleLayer::Count)  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +30,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, CameraSystems, GUI)
 bool Framework::CameraSystemsManagerInterface
 	::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Paint();
 }
@@ -38,7 +38,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Move(point);
 }
@@ -46,7 +46,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Resize(windowDisplay, size);
 }
@@ -54,7 +54,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyUp(key, point);
 }
@@ -62,7 +62,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyDown(key, point);
 }
@@ -70,7 +70,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyUp(key, point);
 }
@@ -78,7 +78,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyDown(key, point);
 }
@@ -86,7 +86,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::PassiveMotion(point);
 }
@@ -94,7 +94,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Motion(point, virtualKeys);
 }
@@ -102,7 +102,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseWheel(delta, point, virtualKeys);
 }
@@ -110,7 +110,7 @@ bool Framework::CameraSystemsManagerInterface
 bool Framework::CameraSystemsManagerInterface
 	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }

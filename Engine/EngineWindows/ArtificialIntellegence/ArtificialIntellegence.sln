@@ -5,16 +5,16 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegence", "ArtificialIntellegence\ArtificialIntellegence.vcxproj", "{D86FF4E4-F3C1-4C64-947C-50E401ED3391}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegenceTesting", "..\..\..\EngineTesting\EngineWindows\ArtificialIntellegence\ArtificialIntellegenceTesting\ArtificialIntellegenceTesting.vcxproj", "{C64C4BC0-603E-424B-8589-17D8E39B5F9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegenceToolset", "..\..\..\Assist\AssistWindows\Toolset\ArtificialIntellegence\ArtificialIntellegenceToolset\ArtificialIntellegenceToolset.vcxproj", "{A47DE2F4-417D-4730-A53B-E718E96EC69B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D86FF4E4-F3C1-4C64-947C-50E401ED3391} = {D86FF4E4-F3C1-4C64-947C-50E401ED3391}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegenceToolset", "..\..\..\Assist\AssistWindows\Toolset\ArtificialIntellegence\ArtificialIntellegenceToolset\ArtificialIntellegenceToolset.vcxproj", "{A47DE2F4-417D-4730-A53B-E718E96EC69B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ArtificialIntellegenceTesting", "..\..\..\EngineTesting\EngineWindows\ArtificialIntellegence\ArtificialIntellegenceTesting\ArtificialIntellegenceTesting.vcxproj", "{C64C4BC0-603E-424B-8589-17D8E39B5F9D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D86FF4E4-F3C1-4C64-947C-50E401ED3391} = {D86FF4E4-F3C1-4C64-947C-50E401ED3391}
 	EndProjectSection

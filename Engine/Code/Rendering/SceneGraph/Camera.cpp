@@ -32,25 +32,56 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,Camera);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Camera);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,Camera); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,Camera);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                       
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Camera);
 
 Rendering::Camera
     ::Camera (bool isPerspective,float epsilon)
-	:ParentType{ "Camera" }, m_Impl{ make_shared<ImplType>(isPerspective,epsilon) }
+	:ParentType{ "Camera" }, impl{ make_shared<ImplType>(isPerspective,epsilon) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,Camera)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Camera)
 
 void Rendering::Camera
      ::SetFrame (const APoint& position,const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
    
-    return m_Impl->SetFrame(position,directionVector,upVector,rightVector);
+    return impl->SetFrame(position,directionVector,upVector,rightVector);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPosition,APoint,void)
@@ -58,9 +89,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetPosition,APoint,v
 void Rendering::Camera
     ::SetAxes (const AVector& directionVector,const AVector& upVector,const AVector& rightVector)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetAxes(directionVector,upVector,rightVector);
+    return impl->SetAxes(directionVector,upVector,rightVector);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetEpsilon, float)
@@ -74,9 +105,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, IsPerspective, b
 void Rendering::Camera
     ::SetFrustum (float directionMin, float directionMax,float upMin, float upMax,float rightMin, float rightMax)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetFrustum(directionMin,directionMax,upMin,upMax,rightMin,rightMax);
+    return impl->SetFrustum(directionMin,directionMax,upMin,upMax,rightMin,rightMax);
 
 }
 
@@ -85,9 +116,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Camera,SetFrustum,const floa
 void Rendering::Camera
     ::SetFrustum (float upFovDegrees, float aspectRatio,float directionMin,float directionMax)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetFrustum(upFovDegrees,aspectRatio,directionMin,directionMax);
+    return impl->SetFrustum(upFovDegrees,aspectRatio,directionMin,directionMax);
 
 }
 
@@ -108,9 +139,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering,Camera,SetProjectionMatrix,
 void Rendering::Camera
     ::SetProjectionMatrix (const APoint& p00, const APoint& p10,const APoint& p11, const APoint& p01,float nearExtrude, float farExtrude)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetProjectionMatrix(p00,p10,p11,p01,nearExtrude,farExtrude);
+    return impl->SetProjectionMatrix(p00,p10,p11,p01,nearExtrude,farExtrude);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, GetDepthType, Rendering::DepthType)
@@ -128,15 +159,15 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Camera, PostProjectionIs
 const Rendering::Camera::AxesAlignBoundingBox2D Rendering::Camera
       ::ComputeBoundingAABB (int numVertices,const char* vertices,int stride,const Matrix& worldMatrix) const
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->ComputeBoundingAABB(numVertices,vertices,stride,worldMatrix);
+    return impl->ComputeBoundingAABB(numVertices,vertices,stride,worldMatrix);
 }
 
 
 Rendering::Camera
     ::Camera (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -148,7 +179,7 @@ int Rendering::Camera
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -170,7 +201,7 @@ void Rendering::Camera
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -178,7 +209,7 @@ void Rendering::Camera
 void Rendering::Camera
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
 }
@@ -186,7 +217,7 @@ void Rendering::Camera
 void Rendering::Camera
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -194,13 +225,13 @@ void Rendering::Camera
 void Rendering::Camera
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:02)
+//	引擎版本：0.7.1.1 (2020/10/26 16:02)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
@@ -14,14 +14,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename EntityType, typename EventType>
-CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState)
+CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState) noexcept
     : m_CurrentState{ currentState }, m_PreviousState{}, m_GlobalState{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename EntityType, typename EventType>
-CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState)
+CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState) noexcept
     : m_CurrentState{ currentState }, m_PreviousState{}, m_GlobalState{ globalState }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -52,7 +52,7 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::IsValid() const noexcep
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EntityType, typename EventType>
-typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPreviousState() const
+typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPreviousState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -60,15 +60,18 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 }
 
 template <typename EntityType, typename EventType>
-typename CoreTools::StateMachineBase<EntityType, EventType>::StateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPossiblePreviousState()
+typename CoreTools::StateMachineBase<EntityType, EventType>::StateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPossiblePreviousState() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26473)
     return std::const_pointer_cast<State>(static_cast<const ClassType*>(this)->GetPossiblePreviousState());
+#include STSTEM_WARNING_POP
 }
 
 template <typename EntityType, typename EventType>
-typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPossiblePreviousState() const
+typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetPossiblePreviousState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -79,7 +82,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 }
 
 template <typename EntityType, typename EventType>
-typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetGlobalState() const
+typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetGlobalState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -87,7 +90,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 }
 
 template <typename EntityType, typename EventType>
-typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetCurrentState() const
+typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr CoreTools::StateMachineBase<EntityType, EventType>::GetCurrentState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 

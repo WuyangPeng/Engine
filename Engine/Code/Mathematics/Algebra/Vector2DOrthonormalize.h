@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
+#include "Vector2D.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>

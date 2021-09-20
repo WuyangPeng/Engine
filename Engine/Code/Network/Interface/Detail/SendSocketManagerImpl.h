@@ -22,17 +22,22 @@
 #include <boost/noncopyable.hpp>
 #include <map>
 
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+
 
 namespace Network
 {
-    class NETWORK_HIDDEN_DECLARE SendSocketManagerImpl final : private boost::noncopyable
+    class NETWORK_HIDDEN_DECLARE SendSocketManagerImpl final 
     {
     public:
         using ClassType = SendSocketManagerImpl;
 
     public:
         explicit SendSocketManagerImpl(const std::string& fileName);
+        ~SendSocketManagerImpl() noexcept = default;
+        SendSocketManagerImpl(const SendSocketManagerImpl& rhs) noexcept = delete;
+        SendSocketManagerImpl& operator=(const SendSocketManagerImpl& rhs) noexcept = delete;
+        SendSocketManagerImpl(SendSocketManagerImpl&& rhs) noexcept = delete;
+        SendSocketManagerImpl& operator=(SendSocketManagerImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 

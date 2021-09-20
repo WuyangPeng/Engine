@@ -5,22 +5,22 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:53)
+//	引擎版本：0.7.1.1 (2020/10/23 15:53)
 
 #ifndef CORE_TOOLS_COMMAND_NUMBER_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_NUMBER_COMMAND_ARGUMENT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CommandArgumentImpl.h"
+#include "CommandArgumentPackage.h"
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE NumberCommandArgument final : public CommandArgumentImpl
+    class CORE_TOOLS_HIDDEN_DECLARE NumberCommandArgument final : public CommandArgumentPackage
     {
     public:
         using ClassType = NumberCommandArgument;
-        using ParentType = CommandArgumentImpl;
+        using ParentType = CommandArgumentPackage;
 
     public:
         NumberCommandArgument(int index, const std::string& name, const std::string& value);

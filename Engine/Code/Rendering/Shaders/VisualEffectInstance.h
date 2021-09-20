@@ -16,14 +16,24 @@
 #include "CoreTools/Helper/ExportMacro.h"
  
 
-RENDERING_EXPORT_SHARED_PTR(VisualEffectInstanceImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, VisualEffectInstanceImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE VisualEffectInstance : public CoreTools::Object
 	{
 	public:
-             COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffectInstance, DESTRUCTOR_STATEMENT);
+
+            void Swap(VisualEffectInstance& rhs) noexcept;
+             
+                 public:
+                     TYPE_DECLARE(VisualEffectInstance);
+                     using ClassShareType = CoreTools::CopyUnsharedClasses;
+                     ~VisualEffectInstance() noexcept;
+                     VisualEffectInstance(const VisualEffectInstance& rhs);
+                     VisualEffectInstance& operator=(const VisualEffectInstance& rhs);
+                     VisualEffectInstance(VisualEffectInstance&& rhs) noexcept;
+                     VisualEffectInstance& operator=(VisualEffectInstance&& rhs) noexcept;
 		using ParentType = Object;
 
 	public:
@@ -74,7 +84,7 @@ namespace Rendering
 		const ConstTextureSharedPtr GetPixelTexture(int pass, int handle) const;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(VisualEffectInstance);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 

@@ -1,120 +1,109 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/24 17:09)
 
 #include "Rendering/RenderingExport.h"
 
 #include "ShaderSamplerData.h"
 #include "Detail/ShaderSamplerDataImpl.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
-#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/SingleShaderBaseDataImpl.h"
+#include "Detail/SingleShaderSamplerDataImpl.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-using std::string;
+#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/ObjectSystems/BufferSourceDetail.h"
+#include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 using std::make_shared;
+using std::string;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::ShaderSamplerData
-	::ShaderSamplerData( int numSamplers )
-	:m_Impl{ make_shared<ImplType>(numSamplers) }
+Rendering::ShaderSamplerData ::ShaderSamplerData(int numSamplers)
+    : impl{ numSamplers }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::ShaderSamplerData
-	::ShaderSamplerData()
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::ShaderSamplerData ::ShaderSamplerData()
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, ShaderSamplerData)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, ShaderSamplerData)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, ShaderSamplerData);
-
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, ShaderSamplerData)
-
-void Rendering::ShaderSamplerData
-	::SetSampler( int index, const string& name,ShaderFlags::SamplerType type )
+void Rendering::ShaderSamplerData ::SetSampler(int index, const string& name, ShaderFlags::SamplerType type)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetSampler(index, name, type);
+    return impl->SetSampler(index, name, type);
 }
 
-void Rendering::ShaderSamplerData
-	::SetFilter( int index, ShaderFlags::SamplerFilter filter )
-{	
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->SetFilter(index, filter);
-}
-
-
-void Rendering::ShaderSamplerData
-	::SetCoordinate( int index, int dimension, ShaderFlags::SamplerCoordinate coordinate )
+void Rendering::ShaderSamplerData ::SetFilter(int index, ShaderFlags::SamplerFilter filter)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetCoordinate(index, dimension,coordinate);
+    return impl->SetFilter(index, filter);
 }
 
-void Rendering::ShaderSamplerData
-	::SetLodBias( int index, float lodBias )
+void Rendering::ShaderSamplerData ::SetCoordinate(int index, int dimension, ShaderFlags::SamplerCoordinate coordinate)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetLodBias(index, lodBias);
+    return impl->SetCoordinate(index, dimension, coordinate);
 }
 
-
-void Rendering::ShaderSamplerData
-	::SetAnisotropy( int index, float anisotropy )
+void Rendering::ShaderSamplerData ::SetLodBias(int index, float lodBias)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetAnisotropy(index, anisotropy);
+    return impl->SetLodBias(index, lodBias);
 }
 
-void Rendering::ShaderSamplerData
-	::SetBorderColor( int index, const Colour& borderColor )
+void Rendering::ShaderSamplerData ::SetAnisotropy(int index, float anisotropy)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetBorderColor(index, borderColor);
+    return impl->SetAnisotropy(index, anisotropy);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderSamplerData,GetNumSamplers, int)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetSamplerName,int, const string)
-
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetSamplerType,int, Rendering::ShaderFlags::SamplerType)
- 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetFilter,int, Rendering::ShaderFlags::SamplerFilter)
- 
- 
-Rendering::ShaderFlags::SamplerCoordinate 
-	Rendering::ShaderSamplerData
-	::GetCoordinate( int index, int dimension ) const
+void Rendering::ShaderSamplerData ::SetBorderColor(int index, const Colour& borderColor)
 {
-	RENDERING_CLASS_IS_VALID_CONST_1; 
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->GetCoordinate(index, dimension);
+    return impl->SetBorderColor(index, borderColor);
 }
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetLodBias,int, float)
- 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetAnisotropy,int, float) 
- 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,GetBorderColor,int, Rendering::ShaderSamplerData::Colour) 
- 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderSamplerData, Load,  CoreTools::BufferSourceSharedPtr, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderSamplerData, GetNumSamplers, int)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetSamplerName, int, const string)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetSamplerType, int, Rendering::ShaderFlags::SamplerType)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetFilter, int, Rendering::ShaderFlags::SamplerFilter)
+
+Rendering::ShaderFlags::SamplerCoordinate
+    Rendering::ShaderSamplerData ::GetCoordinate(int index, int dimension) const
+{
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->GetCoordinate(index, dimension);
+}
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetLodBias, int, float)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetAnisotropy, int, float)
+
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, GetBorderColor, int, Rendering::ShaderSamplerData::Colour)
+
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderSamplerData, Load, CoreTools::BufferSourceSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderSamplerData, Save, CoreTools::BufferTargetSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderSamplerData,GetStreamingSize,int) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderSamplerData, GetStreamingSize, int)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData,Resize,int,void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderSamplerData, Resize, int, void)
 #include STSTEM_WARNING_POP

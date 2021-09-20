@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineX64DebugLib);$(GameX64DebugLib);$(TheLastOverlordX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineX64DebugLib);$(GameX64DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 </Project>

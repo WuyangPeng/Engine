@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:04)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 17:18)
 
 #ifndef SYSTEM_HELPER_GCC_H
 #define SYSTEM_HELPER_GCC_H
@@ -29,7 +29,7 @@
 
     #if !defined(__CUDACC__)
         #ifndef TCRE_COMPILER_VERSION
-            #define TCRE_COMPILER_VERSION GCC_VERSION
+            #define TCRE_COMPILER_VERSION __VERSION__
         #endif  // TCRE_COMPILER_VERSION
     #endif  // __CUDACC__
 
@@ -56,9 +56,21 @@
 
     #include <cstddef>
 
-    #if 4 <= __GNUC__
-        #define SYSTEM_ATTRIBUTE_UNUSED __attribute__((__unused__))
-    #endif  // 4 <= __GNUC__
+    #if (4 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
+        #define MAYBE_UNUSED __attribute__((__unused__))
+    #endif  // (4 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
+
+    #if (7 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
+        #define FALLTHROUGH __attribute__((fallthrough))
+    #endif  // (7 <= __GNUC__) && (SYSTEM_CPP_STANDARD < 17)
+
+    // 分支预测提示
+    #define TCRE_LIKELY(x) __builtin_expect(x, 1)
+    #define TCRE_UNLIKELY(x) __builtin_expect(x, 0)
+
+    #if SYSTEM_CPP_STANDARD < 14
+        #define SYSTEM_DEPRECATED(x) __attribute__((deprecated))
+    #endif  // SYSTEM_CPP_STANDARD < 14
 
 #endif  // defined(__GNUC__) && !defined(__ibmxl__)
 

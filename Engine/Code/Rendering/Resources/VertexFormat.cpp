@@ -34,12 +34,43 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,VertexFormat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,VertexFormat); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,VertexFormat);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, VertexFormat);
 
 // private
 Rendering::VertexFormat
 	::VertexFormat( int numAttributes )
-	:ParentType{ "VertexFormat" }, m_Impl{ make_shared<ImplType>(numAttributes) }
+	:ParentType{ "VertexFormat" }, impl{ make_shared<ImplType>(numAttributes) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -57,7 +88,7 @@ Rendering::VertexFormat
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,VertexFormat)
+CLASS_INVARIANT_STUB_DEFINE(Rendering,VertexFormat)
 
 // static
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
@@ -101,25 +132,25 @@ Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat
 void Rendering::VertexFormat
 	::SetAttribute( int attribute, unsigned int streamIndex,unsigned int offset,AttributeType type,AttributeUsage usage, unsigned int usageIndex )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetAttribute(attribute,streamIndex,offset,type,usage,usageIndex);
+	return impl->SetAttribute(attribute,streamIndex,offset,type,usage,usageIndex);
 }
 
 void Rendering::VertexFormat
     ::SetAttribute(int attribute, unsigned int streamIndex,unsigned int offset,const VertexFormatType& vertexFormatType)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetAttribute(attribute, streamIndex,offset, vertexFormatType);
+	return impl->SetAttribute(attribute, streamIndex,offset, vertexFormatType);
 }
 
 void Rendering::VertexFormat
     ::SetAttribute(int attribute,const VertexFormatElement& vertexFormatElement) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetAttribute(attribute, vertexFormatElement);
+	return impl->SetAttribute(attribute, vertexFormatElement);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,VertexFormat,SetStride,int,void)
@@ -137,7 +168,7 @@ int Rendering::VertexFormat
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetIndex(usage,usageIndex);
+	return impl->GetIndex(usage,usageIndex);
 }
 
 int Rendering::VertexFormat
@@ -158,7 +189,7 @@ int Rendering::VertexFormat ::GetTypeSize(AttributeType type) noexcept
 
 Rendering::VertexFormat
 	::VertexFormat (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>(1) }
+	:ParentType{ value }, impl{ make_shared<ImplType>(1) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -170,7 +201,7 @@ int Rendering::VertexFormat
 
 	auto size = ParentType::GetStreamingSize();
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
 
 	return size;
 }
@@ -192,7 +223,7 @@ void Rendering::VertexFormat
 
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -200,7 +231,7 @@ void Rendering::VertexFormat
 void Rendering::VertexFormat
 	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source);
 }
@@ -208,7 +239,7 @@ void Rendering::VertexFormat
 void Rendering::VertexFormat
 	::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PostLink();
 }
@@ -216,13 +247,13 @@ void Rendering::VertexFormat
 void Rendering::VertexFormat
 	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -232,7 +263,7 @@ void Rendering::VertexFormat
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	m_Impl->SaveToFile(outFile);
+	impl->SaveToFile(outFile);
 }
 
 void Rendering::VertexFormat
@@ -240,7 +271,7 @@ void Rendering::VertexFormat
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	m_Impl->ReadFromFile(inFile);
+	impl->ReadFromFile(inFile);
 }
 
 Rendering::VertexFormat::VertexFormatSharedPtr Rendering::VertexFormat

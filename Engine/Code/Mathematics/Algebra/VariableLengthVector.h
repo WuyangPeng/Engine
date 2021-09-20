@@ -18,6 +18,7 @@
 
 #include <type_traits>
 #include <vector>
+#include <memory>
 
 namespace Mathematics
 {
@@ -37,7 +38,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using VariableLengthVectorImpl = VariableLengthVectorImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VariableLengthVector, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(VariableLengthVector& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(VariableLengthVector);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~VariableLengthVector() noexcept = default;
+        VariableLengthVector(const VariableLengthVector& rhs);
+        VariableLengthVector& operator=(const VariableLengthVector& rhs);
+        VariableLengthVector(VariableLengthVector&& rhs) noexcept;
+        VariableLengthVector& operator=(VariableLengthVector&& rhs) noexcept;
 
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
@@ -81,7 +93,7 @@ namespace Mathematics
         [[nodiscard]] ContainerTypeIter end() noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(VariableLengthVector);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     // STL

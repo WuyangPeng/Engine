@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 15:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 18:51)
 
-// 控制台颜色管理
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_TEXT_COLOR_MANAGER_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_TEXT_COLOR_MANAGER_H
 
@@ -15,6 +14,7 @@
 
 namespace CoreTools
 {
+    // 控制台颜色管理
     template <StandardHandle Handle>
     class ConsoleTextColorsManager final
     {
@@ -25,10 +25,10 @@ namespace CoreTools
         explicit ConsoleTextColorsManager(TextColour textColor, bool intensified = false);
         ~ConsoleTextColorsManager() noexcept;
 
-        ConsoleTextColorsManager(const ConsoleTextColorsManager&) = default;
-        ConsoleTextColorsManager& operator=(const ConsoleTextColorsManager&) = default;
-        ConsoleTextColorsManager(ConsoleTextColorsManager&&) noexcept = default;
-        ConsoleTextColorsManager& operator=(ConsoleTextColorsManager&&) noexcept = default;
+        ConsoleTextColorsManager(const ConsoleTextColorsManager& rhs) noexcept = default;
+        ConsoleTextColorsManager& operator=(const ConsoleTextColorsManager& rhs) noexcept = default;
+        ConsoleTextColorsManager(ConsoleTextColorsManager&& rhs) noexcept = default;
+        ConsoleTextColorsManager& operator=(ConsoleTextColorsManager&& rhs) noexcept = default;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,9 +40,9 @@ namespace CoreTools
         using ConsoleColorsHandle = ConsoleColors<Handle>;
 
     private:
-        ConsoleColorsHandle m_ConsoleColors;
-        TextColour m_TextColor;
-        bool m_Intensified;
+        ConsoleColorsHandle consoleColors;
+        TextColour textColor;
+        bool intensified;
     };
 }
 

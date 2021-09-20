@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 9:50)
+//	引擎版本：0.7.1.1 (2020/10/23 9:50)
 
 // 将信息输出至指定的ostream。UnitTestSuiteReportOutput为外部接口类。
 // 实现输出字符串、边界线、时间、单元测试名、测试套件名、测试结果和换行的功能。
@@ -17,8 +17,8 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-#include <boost/noncopyable.hpp>
 #include <iostream>
 #include <string>
 
@@ -30,19 +30,24 @@ namespace boost
     }
 }
 
-CORE_TOOLS_EXPORT_SHARED_PTR(UnitTestSuiteReportOutputImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(UnitTestSuiteReportOutputImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE UnitTestSuiteReportOutput final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE UnitTestSuiteReportOutput final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(UnitTestSuiteReportOutput);
+        NON_COPY_TYPE_DECLARE(UnitTestSuiteReportOutput);
         using CpuTimer = boost::timer::cpu_timer; 
 
     public:
         UnitTestSuiteReportOutput(const std::string& timeDescribe, int borderLineLength, const OStreamShared& streamShared);
+        ~UnitTestSuiteReportOutput() noexcept = default;
+        UnitTestSuiteReportOutput(const UnitTestSuiteReportOutput& rhs) noexcept = delete;
+        UnitTestSuiteReportOutput& operator=(const UnitTestSuiteReportOutput& rhs) noexcept = delete;
+        UnitTestSuiteReportOutput(UnitTestSuiteReportOutput&& rhs) noexcept = delete;
+        UnitTestSuiteReportOutput& operator=(UnitTestSuiteReportOutput&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -56,7 +61,7 @@ namespace CoreTools
         void PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth);
 
     private:
-        IMPL_TYPE_DECLARE(UnitTestSuiteReportOutput);
+        PackageType impl;
     };
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/08 11:52)
 
 #ifndef SYSTEM_HELPER_BSD_H
 #define SYSTEM_HELPER_BSD_H
@@ -24,7 +24,7 @@
         #define TCRE_SYSTEM_PLATFORM "DragonFly " SYSTEM_STRINGIZE(__DragonFly__)
     #endif  // __FreeBSD__
 
-    #define SYSTEM_PLATFORM_BSD
+    #define SYSTEM_PLATFORM_BSD static_cast<void>(0)
 
 #endif  // defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
 

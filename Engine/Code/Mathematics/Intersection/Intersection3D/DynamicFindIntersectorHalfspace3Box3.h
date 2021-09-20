@@ -15,7 +15,7 @@
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Plane3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 /// 半空间是平面法线指向的平面侧面上的点集。 这里的查询是一个盒子和半个空格的交集。
 /// 在动态查找查询中，如果该框已经与半个空格相交，则返回值为'false'。 这个想法是寻找第一次接触。
 
@@ -24,19 +24,21 @@ namespace Mathematics
     template <typename Real>
     class DynamicFindIntersectorHalfspace3Box3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorHalfspace3Box3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Box3 : public DynamicIntersector<Real, Vector3D>
     {
     public:
         using DynamicFindIntersectorHalfspace3Box3Impl = DynamicFindIntersectorHalfspace3Box3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
-
+     
+        TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = DynamicIntersector<Real, Vector3D>;
         using Vector3D = Vector3D<Real>;
         using Box3 = Box3<Real>;
@@ -63,7 +65,7 @@ namespace Mathematics
         void Find();
 
     private:
-        IMPL_TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
+        PackageType impl;
     };
 
     using FloatDynamicFindIntersectorHalfspace3Box3 = DynamicFindIntersectorHalfspace3Box3<float>;

@@ -16,19 +16,17 @@
 #include "System/FileManager/Using/CFileUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CReadFileManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(CReadFileManagerImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE CReadFileManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE CReadFileManager final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(CReadFileManager);
+        NON_COPY_TYPE_DECLARE(CReadFileManager);
         using String = System::String;
         using PosType = System::PosType;
         using FileSeek = System::FileSeek;
@@ -36,6 +34,11 @@ namespace CoreTools
 
     public:
         explicit CReadFileManager(const String& fileName);
+        ~CReadFileManager() noexcept = default;
+        CReadFileManager(const CReadFileManager& rhs) noexcept = delete;
+        CReadFileManager& operator=(const CReadFileManager& rhs) noexcept = delete;
+        CReadFileManager(CReadFileManager&& rhs) noexcept = delete;
+        CReadFileManager& operator=(CReadFileManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -58,7 +61,7 @@ namespace CoreTools
         [[nodiscard]] bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(CReadFileManager);
+        PackageType impl;
     };
 }
 

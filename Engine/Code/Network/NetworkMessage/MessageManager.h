@@ -17,19 +17,18 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
 NETWORK_EXPORT_UNIQUE_PTR(MessageManager);
-NETWORK_EXPORT_SHARED_PTR(MessageManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+NETWORK_NON_COPY_EXPORT_IMPL(MessageManagerImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE MessageManager final : public CoreTools::Singleton<MessageManager>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(MessageManager);
+        NON_COPY_TYPE_DECLARE(MessageManager);
         using ParentType = Singleton<MessageManager>;
         using FactoryFunction = MessageInterface::FactoryFunction;
 
@@ -41,6 +40,12 @@ namespace Network
 
     public:
         explicit MessageManager(MessageManagerCreate messageManagerCreate);
+        ~MessageManager() noexcept = default;
+        MessageManager(const MessageManager& rhs) noexcept = delete;
+        MessageManager& operator=(const MessageManager& rhs) noexcept = delete;
+        MessageManager(MessageManager&& rhs) noexcept = delete;
+        MessageManager& operator=(MessageManager&& rhs) noexcept = delete;
+
 
         static void Create();
         static void Destroy() noexcept;
@@ -63,7 +68,7 @@ namespace Network
 
     private:
         static MessageManagerUniquePtr sm_MessageManager;
-        IMPL_TYPE_DECLARE(MessageManager);
+        PackageType impl;
     };
 }
 

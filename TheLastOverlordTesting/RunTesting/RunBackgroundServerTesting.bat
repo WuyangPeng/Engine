@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% BackgroundServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% BackgroundServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% BackgroundServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% BackgroundServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% BackgroundServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% BackgroundServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% BackgroundServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% BackgroundServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% BackgroundServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% BackgroundServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% BackgroundServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% BackgroundServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% BackgroundServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% BackgroundServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% BackgroundServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% BackgroundServerTesting.exe
+
+pause

@@ -13,10 +13,10 @@
 
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <boost/noncopyable.hpp> 
 
-RENDERING_EXPORT_SHARED_PTR(PickRayImpl);
+RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(PickRayImpl);
 
 namespace Rendering
 {
@@ -26,7 +26,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE PickRay
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PickRay);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(PickRay);
 		using ClassType = PickRay;
 
 	public:
@@ -40,7 +40,7 @@ namespace Rendering
 		Mathematics::FloatAVector GetDirection() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(PickRay);
+                PackageType impl;
 	};
 }
 

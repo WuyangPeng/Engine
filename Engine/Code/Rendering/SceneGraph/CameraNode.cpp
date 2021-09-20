@@ -27,19 +27,51 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26434)
 CORE_TOOLS_RTTI_DEFINE(Rendering,CameraNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,CameraNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,CameraNode);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,CameraNode);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, CameraNode);
 
 Rendering::CameraNode
 	::CameraNode(const CameraSharedPtr& camera)
-     :ParentType{},m_Impl{ make_shared<ImplType>(camera) }
+     :ParentType{},impl{ make_shared<ImplType>(camera) }
 {
-	if (!m_Impl->IsNullPtr())
+	if (!impl->IsNullPtr())
     {
-        auto transform = m_Impl->GetLocalTransform();
+        auto transform = impl->GetLocalTransform();
                 
         SetLocalTransform(transform);
     }
@@ -58,13 +90,13 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,CameraNode)
 void Rendering::CameraNode
     ::SetCamera (const CameraSharedPtr& camera)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-	m_Impl->SetCamera(camera);
+	impl->SetCamera(camera);
 
-	if (!m_Impl->IsNullPtr())
+	if (!impl->IsNullPtr())
 	{
-		auto transform = m_Impl->GetLocalTransform();
+		auto transform = impl->GetLocalTransform();
 
 		SetLocalTransform(transform);
 
@@ -77,11 +109,11 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CameraNode,GetCamera,con
 bool Rendering::CameraNode
     ::UpdateWorldData (double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
   const  auto result = ParentType::UpdateWorldData(applicationTime);
 
-	if (!m_Impl->IsNullPtr())
+	if (!impl->IsNullPtr())
     {
 		auto worldTransform = GetWorldTransform();
 		auto cameraPosition = worldTransform.GetTranslate();
@@ -91,7 +123,7 @@ bool Rendering::CameraNode
 		auto cameraUpVector = rotate.GetColumn(1);
 		auto cameraRightVector = rotate.GetColumn(2);
  
-        m_Impl->SetFrame(cameraPosition, Mathematics::AVector{ cameraDirectionVector }, Mathematics::AVector{ cameraUpVector }, Mathematics::AVector{cameraRightVector});
+        impl->SetFrame(cameraPosition, Mathematics::AVector{ cameraDirectionVector }, Mathematics::AVector{ cameraUpVector }, Mathematics::AVector{cameraRightVector});
     }
 
 	return result;
@@ -100,7 +132,7 @@ bool Rendering::CameraNode
 const CoreTools::ObjectSharedPtr Rendering::CameraNode
     ::GetObjectByName(const string& name)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	auto found = ParentType::GetObjectByName(name);
     if (found != nullptr)
@@ -109,9 +141,9 @@ const CoreTools::ObjectSharedPtr Rendering::CameraNode
     }
     else
     {
-		if (!m_Impl->IsNullPtr())
+		if (!impl->IsNullPtr())
 		{
-			return m_Impl->GetObjectByName(name);
+			return impl->GetObjectByName(name);
 		}
 		else
 		{
@@ -123,13 +155,13 @@ const CoreTools::ObjectSharedPtr Rendering::CameraNode
 const vector<CoreTools::ObjectSharedPtr> Rendering::CameraNode
     ::GetAllObjectsByName(const string& name)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	auto parentObjects = ParentType::GetAllObjectsByName(name);
 
-	if (!m_Impl->IsNullPtr())
+	if (!impl->IsNullPtr())
 	{
-		auto implObjects = m_Impl->GetAllObjectsByName(name);
+		auto implObjects = impl->GetAllObjectsByName(name);
 		parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
 	}
 
@@ -148,9 +180,9 @@ const CoreTools::ConstObjectSharedPtr Rendering::CameraNode
     }
     else
     {
-		if (!m_Impl->IsNullPtr())
+		if (!impl->IsNullPtr())
 		{
-			return m_Impl->GetConstObjectByName(name);
+			return impl->GetConstObjectByName(name);
 		}
 		else
 		{
@@ -166,9 +198,9 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode
     
 	auto parentObjects = ParentType::GetAllConstObjectsByName(name);
 
-	if (!m_Impl->IsNullPtr())
+	if (!impl->IsNullPtr())
 	{
-		auto implObjects = m_Impl->GetAllConstObjectsByName(name);
+		auto implObjects = impl->GetAllConstObjectsByName(name);
 		parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());
 	}
 
@@ -177,7 +209,7 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNode
 
 Rendering::CameraNode
     ::CameraNode (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>(CameraSharedPtr{}) }
+	:ParentType{ value }, impl{ make_shared<ImplType>(CameraSharedPtr{}) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -189,7 +221,7 @@ int Rendering::CameraNode
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -202,7 +234,7 @@ uint64_t Rendering::CameraNode
 const	auto uniqueID = ParentType::Register(target);
 	if(uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		impl->Register(target);
 	}
     
     return uniqueID;
@@ -217,7 +249,7 @@ void Rendering::CameraNode
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -225,17 +257,17 @@ void Rendering::CameraNode
 void Rendering::CameraNode
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
     
-	m_Impl->Link(source);
+	impl->Link(source);
 }
 
 void Rendering::CameraNode
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -243,13 +275,13 @@ void Rendering::CameraNode
 void Rendering::CameraNode
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -17,7 +17,7 @@ using std::make_shared;
 
 Framework::ConsoleMainFunctionHelperBase
 	::ConsoleMainFunctionHelperBase(int argc, char** argv, const String& consoleTitle, const EnvironmentDirectory& environmentDirectory)
-	:MainFunctionHelperBase{ environmentDirectory }, m_Impl{ }, m_Argc{ argc }, m_Argv{ argv }
+	:MainFunctionHelperBase{ environmentDirectory }, impl{ }, m_Argc{ argc }, m_Argv{ argv }
 {
 	ConsoleMainFunctionHelperInit(consoleTitle);
 
@@ -32,7 +32,7 @@ void Framework::ConsoleMainFunctionHelperBase
 	{
 		auto engineInstallationDirectory = GetEngineInstallationDirectory();
 
-		m_Impl = make_shared<ImplType>(m_Argc, m_Argv, consoleTitle, engineInstallationDirectory);
+		impl = make_shared<ImplType>(m_Argc, m_Argv, consoleTitle, engineInstallationDirectory);
 	}
 	EXCEPTION_ENTRY_POINT_CATCH
 }
@@ -69,8 +69,8 @@ System::String Framework::ConsoleMainFunctionHelperBase
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	if (m_Impl != nullptr)
-		return m_Impl->GetApplicationProjectDirectory();
+	if (impl != nullptr)
+		return impl->GetApplicationProjectDirectory();
 	else
 		return DirectoryDefaultName::GetDefaultNullName();
 }

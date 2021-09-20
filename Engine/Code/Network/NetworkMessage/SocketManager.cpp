@@ -20,67 +20,67 @@ using std::make_unique;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 Network::SocketManager::SocketManager()
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0  }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SocketManager)
+CLASS_INVARIANT_STUB_DEFINE(Network, SocketManager)
 
 void Network::SocketManager::InsertSocket(uint64_t socketID)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    m_Impl->InsertSocket(socketID);
+    impl->InsertSocket(socketID);
 
     InitEvent(socketID);
 }
 
 void Network::SocketManager::InsertEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->InsertEvent(socketID, messageID, smartPointer);
+    return impl->InsertEvent(socketID, messageID, smartPointer);
 }
 
 void Network::SocketManager::InsertEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer, MessageEventPriority priority)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->InsertEvent(socketID, messageID, smartPointer, priority);
+    return impl->InsertEvent(socketID, messageID, smartPointer, priority);
 }
 
 void Network::SocketManager::OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    m_Impl->OnEvent(socketID, messageID, message);
+    impl->OnEvent(socketID, messageID, message);
 }
 
 void Network::SocketManager::RemoveEvent(uint64_t socketID, int64_t messageID)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->RemoveEvent(socketID, messageID);
+    return impl->RemoveEvent(socketID, messageID);
 }
 
 void Network::SocketManager::RemoveEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& smartPointer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->RemoveEvent(socketID, messageID, smartPointer);
+    return impl->RemoveEvent(socketID, messageID, smartPointer);
 }
 
 void Network::SocketManager::RemoveSocket(uint64_t socketID)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->RemoveSocket(socketID);
+    return impl->RemoveSocket(socketID);
 }
 
 int Network::SocketManager::GetSocketSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetSocketSize();
+    return impl->GetSocketSize();
 }

@@ -12,7 +12,7 @@
 #include "DirectoryImpl.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/PragmaWarning/Format.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/WindowsSystem.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 

@@ -18,7 +18,7 @@
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::Ellipsoid3CoefficientsImpl<Real>::Ellipsoid3CoefficientsImpl(const Matrix3& matrix, const Vector3D& vector, Real constants)

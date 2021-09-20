@@ -26,7 +26,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        EnvironmentImpl() noexcept;
+        EnvironmentImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

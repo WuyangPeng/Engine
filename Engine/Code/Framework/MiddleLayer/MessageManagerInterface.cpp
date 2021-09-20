@@ -16,7 +16,7 @@ using std::make_shared;
 
 Framework::MessageManagerInterface
 	::MessageManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(MessageMiddleLayer::Count)) }
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(MessageMiddleLayer::Count)  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -29,7 +29,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Message, System)
 bool Framework::MessageManagerInterface
 	::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Paint();
 }
@@ -37,7 +37,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Move(point);
 }
@@ -45,7 +45,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Resize(windowDisplay, size);
 }
@@ -53,7 +53,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyUp(key, point);
 }
@@ -61,7 +61,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyDown(key, point);
 }
@@ -69,7 +69,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyUp(key, point);
 }
@@ -77,7 +77,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyDown(key, point);
 }
@@ -85,7 +85,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::PassiveMotion(point);
 }
@@ -93,7 +93,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Motion(point, virtualKeys);
 }
@@ -101,7 +101,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseWheel(delta, point, virtualKeys);
 }
@@ -109,7 +109,7 @@ bool Framework::MessageManagerInterface
 bool Framework::MessageManagerInterface
 	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }

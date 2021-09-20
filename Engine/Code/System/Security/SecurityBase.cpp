@@ -1,263 +1,303 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 17:19)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.4 (2021/05/27 22:55)
 
 #include "System/SystemExport.h"
 
 #include "SecurityBase.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Threading/Flags/ThreadToolsFlags.h"
+#include "System/Threading/Process.h"
+#include "System/Threading/ProcessTools.h"
+#include "System/Threading/ThreadTools.h"
+#include "System/Windows/WindowsSystem.h"
 
-bool System::GetAdjustTokenGroups([[maybe_unused]] WindowHandle tokenHandle, [[maybe_unused]] bool resetToDefault, [[maybe_unused]] SecurityTokenGroupsPtr newState,
-                                  [[maybe_unused]] WindowDWord bufferLength, [[maybe_unused]] SecurityTokenGroupsPtr previousState, [[maybe_unused]] WindowDWordPtr returnLength) noexcept
+bool System::IsSystemTokenElevated() noexcept
+{
+    WindowsHandle tokenHandle{ nullptr };
+    if (!OpenSysemProcessToken(GetCurrentProcessHandle(), TokenStandardAccess::Default, TokenSpecificAccess::AllAccess, &tokenHandle))
+    {
+        return false;
+    }
+
+    SecurityTokenElevation tokenInformation{};
+    WindowsDWord returnLength{ 0 };
+
+    if (!GetSystemTokenInformation(tokenHandle, TokenElevation, &tokenInformation, sizeof(tokenInformation), &returnLength))
+    {
+        return false;
+    }
+
+    MAYBE_UNUSED const auto result = CloseTokenHandle(tokenHandle);
+
+    return tokenInformation.TokenIsElevated != g_False;
+}
+
+bool System::GetAdjustTokenGroups(WindowsHandle tokenHandle,
+                                  bool resetToDefault,
+                                  SecurityTokenGroupsPtr newState,
+                                  WindowsDWord bufferLength,
+                                  SecurityTokenGroupsPtr previousState,
+                                  WindowsDWordPtr returnLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::AdjustTokenGroups(tokenHandle, BoolConversion(resetToDefault), newState, bufferLength, previousState, returnLength) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle,
+                 bool,
+                 SecurityTokenGroupsPtr,
+                 WindowsDWord,
+                 SecurityTokenGroupsPtr,
+                 WindowsDWordPtr>(tokenHandle,
+                                 resetToDefault,
+                                 newState,
+                                 bufferLength,
+                                 previousState,
+                                 returnLength);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAdjustTokenPrivileges([[maybe_unused]] WindowHandle tokenHandle, [[maybe_unused]] bool disableAllPrivileges, [[maybe_unused]] SecurityTokenPrivilegesPtr newState,
-                                      [[maybe_unused]] WindowDWord bufferLength, [[maybe_unused]] SecurityTokenPrivilegesPtr previousState, [[maybe_unused]] WindowDWordPtr returnLength) noexcept
+bool System::GetAdjustTokenPrivileges(WindowsHandle tokenHandle,
+                                      bool disableAllPrivileges,
+                                      SecurityTokenPrivilegesPtr newState,
+                                      WindowsDWord bufferLength,
+                                      SecurityTokenPrivilegesPtr previousState,
+                                      WindowsDWordPtr returnLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::AdjustTokenPrivileges(tokenHandle, BoolConversion(disableAllPrivileges), newState, bufferLength, previousState, returnLength) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle,
+                 bool,
+                 SecurityTokenPrivilegesPtr,
+                 WindowsDWord,
+                 SecurityTokenPrivilegesPtr,
+                 WindowsDWordPtr>(tokenHandle,
+                                 disableAllPrivileges,
+                                 newState,
+                                 bufferLength,
+                                 previousState,
+                                 returnLength);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAllocateLocallyUniqueID([[maybe_unused]] LookupPrivilegeLUIDPtr luid) noexcept
+bool System::IsAreAllAccessesGranted(AccessGenericMask grantedAccess, AccessGenericMask desiredAccess) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::AllocateLocallyUniqueId(luid) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
 
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::IsAreAllAccessesGranted([[maybe_unused]] AccessGenericMask grantedAccess, [[maybe_unused]] AccessGenericMask desiredAccess) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     if (::AreAllAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<AccessGenericMask, AccessGenericMask>(grantedAccess, desiredAccess);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsAreAnyAccessesGranted([[maybe_unused]] AccessGenericMask grantedAccess, [[maybe_unused]] AccessGenericMask desiredAccess) noexcept
+bool System::IsAreAnyAccessesGranted(AccessGenericMask grantedAccess, AccessGenericMask desiredAccess) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::AreAnyAccessesGranted(EnumCastUnderlying(grantedAccess), EnumCastUnderlying(desiredAccess)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<AccessGenericMask, AccessGenericMask>(grantedAccess, desiredAccess);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CheckSystemTokenMembership([[maybe_unused]] WindowHandle tokenHandle, [[maybe_unused]] SecuritySIDPtr sidToCheck, [[maybe_unused]] bool* isMember) noexcept
+bool System::CreateSystemRestrictedToken(WindowsHandle existingTokenHandle,
+                                         SpecifiesAdditionalPrivilegeOptions flags,
+                                         WindowsDWord disableSidCount,
+                                         SecuritySidAndAttributesPtr sidsToDisable,
+                                         WindowsDWord deletePrivilegeCount,
+                                         LUIDAndAttributesPtr privilegesToDelete,
+                                         WindowsDWord restrictedSidCount,
+                                         SecuritySidAndAttributesPtr sidsToRestrict,
+                                         WindowsHandlePtr newTokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    auto result = g_False;
-    if (g_False != ::CheckTokenMembership(tokenHandle, sidToCheck, &result))
-    {
-        BoolConversion(result, isMember);
 
+    if (::CreateRestrictedToken(existingTokenHandle,
+                                EnumCastUnderlying(flags),
+                                disableSidCount,
+                                sidsToDisable,
+                                deletePrivilegeCount,
+                                privilegesToDelete,
+                                restrictedSidCount,
+                                sidsToRestrict,
+                                newTokenHandle) != g_False)
+    {
         return true;
     }
     else
     {
         return false;
     }
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle,
+                 SpecifiesAdditionalPrivilegeOptions,
+                 WindowsDWord,
+                 SecuritySidAndAttributesPtr,
+                 WindowsDWord,
+                 LUIDAndAttributesPtr,
+                 WindowsDWord,
+                 SecuritySidAndAttributesPtr,
+                 WindowsHandlePtr>(existingTokenHandle,
+                                  flags,
+                                  disableSidCount,
+                                  sidsToDisable,
+                                  deletePrivilegeCount,
+                                  privilegesToDelete,
+                                  restrictedSidCount,
+                                  sidsToRestrict,
+                                  newTokenHandle);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CreateSystemRestrictedToken([[maybe_unused]] WindowHandle existingTokenHandle, [[maybe_unused]] SpecifiesAdditionalPrivilegeOptions flags, [[maybe_unused]] WindowDWord disableSidCount,
-                                         [[maybe_unused]] SecuritySidAndAttributesPtr sidsToDisable, [[maybe_unused]] WindowDWord deletePrivilegeCount, [[maybe_unused]] LUIDAndAttributesPtr privilegesToDelete,
-                                         [[maybe_unused]] WindowDWord restrictedSidCount, [[maybe_unused]] SecuritySidAndAttributesPtr sidsToRestrict, [[maybe_unused]] WindowHandlePtr newTokenHandle) noexcept
+bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle, SecurityImpersonationLevel impersonationLevel, WindowsHandlePtr duplicateTokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::CreateRestrictedToken(existingTokenHandle, EnumCastUnderlying(flags), disableSidCount, sidsToDisable, deletePrivilegeCount,
-                                privilegesToDelete, restrictedSidCount, sidsToRestrict, newTokenHandle) != g_False)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
 
-bool System::DuplicateSystemToken([[maybe_unused]] WindowHandle existingTokenHandle, [[maybe_unused]] SecurityImpersonationLevel impersonationLevel, [[maybe_unused]] WindowHandlePtr duplicateTokenHandle) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     if (::DuplicateToken(existingTokenHandle, impersonationLevel, duplicateTokenHandle) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, SecurityImpersonationLevel, WindowsHandlePtr>(existingTokenHandle, impersonationLevel, duplicateTokenHandle);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::DuplicateSystemToken([[maybe_unused]] WindowHandle existingTokenHandle, [[maybe_unused]] TokenStandardAccess standardAccess, [[maybe_unused]] TokenSpecificAccess specificAccess, [[maybe_unused]] WindowSecurityAttributesPtr tokenAttributes,
-                                  [[maybe_unused]] SecurityImpersonationLevel impersonationLevel, [[maybe_unused]] SecurityTokenType tokenType, [[maybe_unused]] WindowHandlePtr newToken) noexcept
+bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle,
+                                  TokenStandardAccess standardAccess,
+                                  TokenSpecificAccess specificAccess,
+                                  WindowSecurityAttributesPtr tokenAttributes,
+                                  SecurityImpersonationLevel impersonationLevel,
+                                  SecurityTokenType tokenType,
+                                  WindowsHandlePtr newToken) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::DuplicateTokenEx(existingTokenHandle, EnumCastUnderlying(standardAccess) | EnumCastUnderlying(specificAccess), tokenAttributes, impersonationLevel, tokenType, newToken) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle,
+                 TokenStandardAccess,
+                 TokenSpecificAccess,
+                 WindowSecurityAttributesPtr,
+                 SecurityImpersonationLevel,
+                 SecurityTokenType,
+                 WindowsHandlePtr>(existingTokenHandle,
+                                  standardAccess,
+                                  specificAccess,
+                                  tokenAttributes,
+                                  impersonationLevel,
+                                  tokenType,
+                                  newToken);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::SecuritySIDIndentifierAuthorityPtr System::GetSecuritySidIdentifierAuthority([[maybe_unused]] SecuritySIDPtr sid) noexcept
+bool System::GetSystemTokenInformation(WindowsHandle handle,
+                                       TokenInformationClass tokenInformationClass,
+                                       WindowsVoidPtr tokenInformation,
+                                       WindowsDWord tokenInformationLength,
+                                       WindowsDWordPtr returnLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    return ::GetSidIdentifierAuthority(sid);
-#else  // !SYSTEM_PLATFORM_WIN32
-    return SecuritySIDIndentifierAuthorityPtr{};
-#endif  // SYSTEM_PLATFORM_WIN32
-}
 
-bool System::GetSystemTokenInformation([[maybe_unused]] WindowHandle handle, [[maybe_unused]] TokenInformationClass tokenInformationClass, [[maybe_unused]] WindowVoidPtr tokenInformation,
-                                       [[maybe_unused]] WindowDWord tokenInformationLength, [[maybe_unused]] WindowDWordPtr returnLength) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     if (::GetTokenInformation(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, TokenInformationClass, WindowsVoidPtr, WindowsDWord, WindowsDWordPtr>(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsImpersonateAnonymousToken([[maybe_unused]] ThreadHandle threadHandle) noexcept
+bool System::IsSystemTokenRestricted(WindowsHandle tokenHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::ImpersonateAnonymousToken(threadHandle) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
 
-bool System::IsImpersonateLoggedOnUser([[maybe_unused]] WindowHandle token) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    if (::ImpersonateLoggedOnUser(token) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::IsSystemTokenRestricted([[maybe_unused]] WindowHandle tokenHandle) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     if (::IsTokenRestricted(tokenHandle) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadHandle>(tokenHandle);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetMakeAbsoluteSD([[maybe_unused]] SecurityDescriptorPtr selfRelativeSecurityDescriptor, [[maybe_unused]] SecurityDescriptorPtr absoluteSecurityDescriptor, [[maybe_unused]] WindowDWordPtr absoluteSecurityDescriptorSize,
-                               [[maybe_unused]] AccessCheckACLPtr dacl, [[maybe_unused]] WindowDWordPtr daclSize, [[maybe_unused]] AccessCheckACLPtr sacl, [[maybe_unused]] WindowDWordPtr saclSize,
-                               [[maybe_unused]] SecuritySIDPtr owner, [[maybe_unused]] WindowDWordPtr ownerSize, [[maybe_unused]] SecuritySIDPtr primaryGroup, [[maybe_unused]] WindowDWordPtr primaryGroupSize) noexcept
+void System::QuerySystemSecurityAccessMask(SecurityRequestedInformation securityInformation, WindowsDWordPtr desiredAccess) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::MakeAbsoluteSD(selfRelativeSecurityDescriptor, absoluteSecurityDescriptor, absoluteSecurityDescriptorSize, dacl, daclSize, sacl,
-                         saclSize, owner, ownerSize, primaryGroup, primaryGroupSize) != g_False)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
 
-bool System::GetMakeSelfRelativeSD([[maybe_unused]] SecurityDescriptorPtr absoluteSecurityDescriptor, [[maybe_unused]] SecurityDescriptorPtr selfRelativeSecurityDescriptor, [[maybe_unused]] WindowDWordPtr bufferLength) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    if (::MakeSelfRelativeSD(absoluteSecurityDescriptor, selfRelativeSecurityDescriptor, bufferLength) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::GetPrivilegeCheck([[maybe_unused]] WindowHandle clientToken, [[maybe_unused]] SecurityPrivilegeSetPtr requiredPrivileges, [[maybe_unused]] WindowBoolPtr result) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    if (::PrivilegeCheck(clientToken, requiredPrivileges, result) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-void System::QuerySystemSecurityAccessMask([[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] WindowDWordPtr desiredAccess) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     ::QuerySecurityAccessMask(EnumCastUnderlying(securityInformation), desiredAccess);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
-#endif  // SYSTEM_PLATFORM_WIN32
-}
+    NullFunction<SecurityRequestedInformation, WindowsDWordPtr>(securityInformation, desiredAccess);
 
-bool System::IsRevertToSelf() noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    if (::RevertToSelf() != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-    return false;
 #endif  // SYSTEM_PLATFORM_WIN32
 }

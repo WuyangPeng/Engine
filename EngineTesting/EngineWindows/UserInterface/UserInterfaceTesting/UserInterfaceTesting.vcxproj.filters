@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{1fb30b03-c675-4a41-b271-66618e14de27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationSuite 头文件">
+      <UniqueIdentifier>{34435467-5c34-465d-ba4c-2a7d54855523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FLTKSuite 头文件">
+      <UniqueIdentifier>{14085fae-ddd8-437c-9a7f-5f1f6e5a7a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 头文件">
+      <UniqueIdentifier>{0bdefe4d-faa1-4ead-96e0-01654dbb1ca9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{1adc2985-298a-4750-b4ce-490fdf679875}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XFree86Suite 头文件">
+      <UniqueIdentifier>{aa915b68-f40c-4028-8eb1-612ce11565e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WxWidgetsSuite 头文件">
+      <UniqueIdentifier>{1b51e6eb-4eab-4959-bf5f-c70606b44e81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TrixulSuite 头文件">
+      <UniqueIdentifier>{971c6bb6-99e0-4318-9314-b021323d45a9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\UserInterfaceTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\ConfigurationSuite\ConfigurationSuite.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\FLTKSuite\FLTKSuite.h">
+      <Filter>FLTKSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\InterfaceSuite\InterfaceSuite.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\TrixulSuite\TrixulSuite.h">
+      <Filter>TrixulSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\WxWidgetsSuite\WxWidgetsSuite.h">
+      <Filter>WxWidgetsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\UserInterface\UserInterfaceTesting\XFree86Suite\XFree86Suite.h">
+      <Filter>XFree86Suite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

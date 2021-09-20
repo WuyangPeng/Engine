@@ -35,7 +35,7 @@ CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<ParamType>)
     : m_Tuple{ param0, param1 }
 {
     static_assert(Dimension == 2, "Dimension == 2");

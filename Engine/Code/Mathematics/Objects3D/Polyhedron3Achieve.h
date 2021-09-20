@@ -20,14 +20,14 @@
 
 template <typename Real>
 Mathematics::Polyhedron3<Real>::Polyhedron3(const VerticesType& vertices, const IndicesType& indices)
-    : m_Impl{ std::make_shared<ImplType>(vertices, indices) }
+    : impl{ std::make_shared<ImplType>(vertices, indices) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Polyhedron3<Real>::Polyhedron3(const Polyhedron3& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -47,14 +47,14 @@ Mathematics::Polyhedron3<Real>& Mathematics::Polyhedron3<Real>::operator=(const 
 template <typename Real>
 void Mathematics::Polyhedron3<Real>::Swap(Polyhedron3& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::Polyhedron3<Real>::Polyhedron3(Polyhedron3&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -64,7 +64,7 @@ Mathematics::Polyhedron3<Real>& Mathematics::Polyhedron3<Real>::operator=(Polyhe
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -73,7 +73,7 @@ Mathematics::Polyhedron3<Real>& Mathematics::Polyhedron3<Real>::operator=(Polyhe
 template <typename Real>
 bool Mathematics::Polyhedron3<Real>::IsValid() const noexcept
 {
-    return m_Impl != nullptr;
+    return impl != nullptr;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -82,7 +82,7 @@ int Mathematics::Polyhedron3<Real>::GetNumVertices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumVertices();
+    return impl->GetNumVertices();
 }
 
 template <typename Real>
@@ -90,7 +90,7 @@ typename const Mathematics::Polyhedron3<Real>::VerticesType Mathematics::Polyhed
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertices();
+    return impl->GetVertices();
 }
 
 template <typename Real>
@@ -98,7 +98,7 @@ const Mathematics::Vector3D<Real>& Mathematics::Polyhedron3<Real>::GetVertex(int
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex(index);
+    return impl->GetVertex(index);
 }
 
 template <typename Real>
@@ -106,7 +106,7 @@ int Mathematics::Polyhedron3<Real>::GetNumTriangles() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumTriangles();
+    return impl->GetNumTriangles();
 }
 
 template <typename Real>
@@ -114,7 +114,7 @@ int Mathematics::Polyhedron3<Real>::GetNumIndices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumIndices();
+    return impl->GetNumIndices();
 }
 
 template <typename Real>
@@ -122,7 +122,7 @@ typename const Mathematics::Polyhedron3<Real>::IndicesType Mathematics::Polyhedr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIndices();
+    return impl->GetIndices();
 }
 
 template <typename Real>
@@ -130,15 +130,15 @@ typename const Mathematics::Polyhedron3<Real>::IndicesType Mathematics::Polyhedr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle(index);
+    return impl->GetTriangle(index);
 }
 
 template <typename Real>
 void Mathematics::Polyhedron3<Real>::SetVertex(int index, const Vector3D& vertex)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetVertex(index, vertex);
+    return impl->SetVertex(index, vertex);
 }
 
 template <typename Real>
@@ -146,7 +146,7 @@ typename const Mathematics::Polyhedron3<Real>::Vector3D Mathematics::Polyhedron3
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeVertexAverage();
+    return impl->ComputeVertexAverage();
 }
 
 template <typename Real>
@@ -154,7 +154,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeSurfaceArea() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeSurfaceArea();
+    return impl->ComputeSurfaceArea();
 }
 
 template <typename Real>
@@ -162,7 +162,7 @@ Real Mathematics::Polyhedron3<Real>::ComputeVolume() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeVolume();
+    return impl->ComputeVolume();
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_POLYHEDRON3_ACHIEVE_H

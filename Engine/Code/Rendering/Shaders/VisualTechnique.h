@@ -14,8 +14,8 @@
 
 #include "CoreTools/ObjectSystems/Object.h"
 
-RENDERING_EXPORT_SHARED_PTR(VisualTechniqueImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, VisualTechniqueImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class WriteFileManager;
@@ -27,7 +27,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VisualTechnique : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualTechnique, DESTRUCTOR_STATEMENT);
+        void Swap(VisualTechnique& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(VisualTechnique);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~VisualTechnique() noexcept;
+                VisualTechnique(const VisualTechnique& rhs);
+                VisualTechnique& operator=(const VisualTechnique& rhs);
+                VisualTechnique(VisualTechnique&& rhs) noexcept;
+                VisualTechnique& operator=(VisualTechnique&& rhs) noexcept;
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -60,7 +69,7 @@ namespace Rendering
         void LoadVisualPass(ReadFileManager& manager);
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(VisualTechnique);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

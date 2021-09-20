@@ -12,6 +12,7 @@
 
 #include "BrentsMethod.h"
 #include "BrentsMethodCalculate.h"
+#include "BrentsMethodRootDetail.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"

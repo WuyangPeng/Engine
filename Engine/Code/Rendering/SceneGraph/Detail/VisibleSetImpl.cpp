@@ -16,7 +16,7 @@
 
 using std::vector;
 
-Rendering::VisibleSetImpl ::VisibleSetImpl() noexcept
+Rendering::VisibleSetImpl ::VisibleSetImpl(MAYBE_UNUSED int count) noexcept
     : m_Visible{}
 {
     RENDERING_SELF_CLASS_IS_VALID_9;

@@ -15,8 +15,8 @@
 #include "Rendering/Resources/VertexBuffer.h"
 #include "Rendering/Resources/VertexFormat.h"
 #include "Rendering/Shaders/VisualEffectInstance.h"
-
-RENDERING_EXPORT_SHARED_PTR(VisualImpl);
+EXPORT_SHARED_PTR(Rendering, VisualImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -28,7 +28,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Visual : public Spatial
     {
     public:
-         COPY_UNSHARE_CLASSES_TYPE_DECLARE(Visual, DESTRUCTOR_STATEMENT);
+        void Swap(Visual& rhs) noexcept;
+         
+             public:
+                 TYPE_DECLARE(Visual);
+                 using ClassShareType = CoreTools::CopyUnsharedClasses;
+                 ~Visual() noexcept;
+                 Visual(const Visual& rhs);
+                 Visual& operator=(const Visual& rhs);
+                 Visual(Visual&& rhs) noexcept;
+                 Visual& operator=(Visual&& rhs) noexcept;
         using ParentType = Spatial;
         using VisualSharedPtr = std::shared_ptr<ClassType>;
         using ConstVisualSharedPtr = std::shared_ptr<const ClassType>;
@@ -86,7 +95,7 @@ namespace Rendering
         void CloneVertexFormat(const Visual& rhs);
 
     private:
-        IMPL_TYPE_DECLARE(Visual);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

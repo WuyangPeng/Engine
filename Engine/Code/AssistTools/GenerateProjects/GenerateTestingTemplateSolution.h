@@ -11,17 +11,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTestingTemplateSolutionImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTestingTemplateSolutionImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTestingTemplateSolution
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTestingTemplateSolution);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTestingTemplateSolution);
 
 	public:
 		GenerateTestingTemplateSolution(const System::String& templateFileName, const System::String& projectName, const System::String& coreName);
@@ -31,7 +31,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newCoreName) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTestingTemplateSolution);
+		PackageType impl;
 	};
 }
 

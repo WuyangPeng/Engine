@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 13:10)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/24 13:06)
 
 #ifndef SYSTEM_OPENGL_GLUT_FLAGS_H
 #define SYSTEM_OPENGL_GLUT_FLAGS_H
@@ -13,9 +13,10 @@
 #include "System/Helper/EnumMacro.h"
 
 #include "System/Helper/Platform.h"
-#include "System/Helper/PragmaWarning/Freeglut.h"
 
 #if defined(SYSTEM_USE_GLUT) && defined(WIN32)
+
+    #include "System/Helper/PragmaWarning/Freeglut.h"
 
 namespace System
 {
@@ -33,6 +34,16 @@ namespace System
         Multisample = GLUT_MULTISAMPLE,
         Stereo = GLUT_STEREO,
         Luminance = GLUT_LUMINANCE,
+    };
+
+    enum class GlutOption
+    {
+        WindowClose = GLUT_ACTION_ON_WINDOW_CLOSE,
+    };
+
+    enum class GlutExtension
+    {
+        GlutMainLoopReturns = GLUT_ACTION_GLUTMAINLOOP_RETURNS,
     };
 }
 
@@ -54,6 +65,16 @@ namespace System
         Multisample = 0x0080,
         Stereo = 0x0100,
         Luminance = 0x0200,
+    };
+
+    enum class GlutOption
+    {
+        WindowClose = 0x01F9,
+    };
+
+    enum class GlutExtension
+    {
+        GlutMainLoopReturns = 1,
     };
 }
 

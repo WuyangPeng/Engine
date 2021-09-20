@@ -11,6 +11,7 @@
 
 #include "MessageEventContainerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "SingleMessageEventContainer.h"
 
 Network::MessageEventContainerImpl::MessageEventContainerImpl() noexcept
 {
@@ -18,3 +19,8 @@ Network::MessageEventContainerImpl::MessageEventContainerImpl() noexcept
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageEventContainerImpl)
+
+Network::MessageEventContainerImpl::ImplPtr Network::MessageEventContainerImpl::Create()
+{
+    return std::make_shared<SingleMessageEventContainer>();
+}

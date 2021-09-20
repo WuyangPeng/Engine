@@ -1,66 +1,61 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/22 17:54)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PickRecord.h"
 #include "Detail/PickRecordImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Detail/PickRecordContainerImpl.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26440)
-DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, PickRecord) 
 
-Rendering::PickRecord
-	::PickRecord()
-	:m_Impl{ make_shared<ImplType>() }
+Rendering::PickRecord ::PickRecord()
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,PickRecord)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, PickRecord)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetIntersected,Rendering::ConstSpatialSharedPtr)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetParameter,float)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord,GetTriangle,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,GetBary,int,float) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord, GetIntersected, Rendering::ConstSpatialSharedPtr)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord, GetParameter, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, PickRecord, GetTriangle, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord, GetBary, int, float)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, PickRecord)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PickRecord, SetIntersected, ConstSpatialSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord, SetParameter, float, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord, SetTriangle, int, void)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, PickRecord,SetIntersected,ConstSpatialSharedPtr,void)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,SetParameter,float,void) 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(Rendering, PickRecord,SetTriangle,int,void) 
- 
-
-void Rendering::PickRecord
-	::SetBary(float firstBary, float secondBary) 
+void Rendering::PickRecord ::SetBary(float firstBary, float secondBary)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetBary(firstBary, secondBary);
+    return impl->SetBary(firstBary, secondBary);
 }
 
-bool Rendering::PickRecord
-	::operator==(const PickRecord& rhs) const 
+bool Rendering::PickRecord ::operator==(const PickRecord& rhs) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return *m_Impl == *rhs.m_Impl;
+    return *impl == *rhs.impl;
 }
 
-bool Rendering::PickRecord
-	::operator<(const PickRecord& rhs) const
+bool Rendering::PickRecord ::operator<(const PickRecord& rhs) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return *m_Impl < *rhs.m_Impl;
+    return *impl < *rhs.impl;
 }
 
-
- #include STSTEM_WARNING_POP
+#include STSTEM_WARNING_POP

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 13:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.1.3 (2021/05/18 10:21)
 
 #include "System/SystemExport.h"
 
@@ -25,16 +25,20 @@ using namespace std::literals;
 bool System::OpenCFile(FILE*& file, const CFileString& fileName, const CFileString& mode) noexcept
 {
 #if defined(TCRE_USE_GCC)
-    m_File = ::fopen(fileName.c_str(), mode.c_str());
-    if (m_File != nullptr)
+
+    file = ::fopen(fileName.c_str(), mode.c_str());
+    if (file != nullptr)
         return true;
     else
         return false;
+
 #else  // !TCRE_USE_GCC
+
     if (::_tfopen_s(&file, fileName.c_str(), mode.c_str()) == 0)
         return true;
     else
         return false;
+
 #endif  // TCRE_USE_GCC
 }
 

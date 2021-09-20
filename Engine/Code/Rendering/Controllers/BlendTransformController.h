@@ -10,8 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "TransformController.h"
-
-RENDERING_EXPORT_SHARED_PTR(BlendTransformControllerImpl);
+EXPORT_SHARED_PTR(Rendering, BlendTransformControllerImpl, RENDERING_DEFAULT_DECLARE); 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -20,7 +19,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE BlendTransformController : public TransformController
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(BlendTransformController, = default);
+        void Swap(BlendTransformController& rhs) noexcept;
+       
+           public:
+               TYPE_DECLARE(BlendTransformController);
+               using ClassShareType = CoreTools::CopyUnsharedClasses;
+               ~BlendTransformController() noexcept= default;
+               BlendTransformController(const BlendTransformController& rhs);
+               BlendTransformController& operator=(const BlendTransformController& rhs);
+               BlendTransformController(BlendTransformController&& rhs) noexcept;
+               BlendTransformController& operator=(BlendTransformController&& rhs) noexcept;
         using ParentType = TransformController;
         using APoint = Mathematics::FloatAPoint;
         using Matrix = Mathematics::FloatMatrix;
@@ -80,7 +88,7 @@ namespace Rendering
         void SetObjectInCopy(ControllerInterface* object) override;
 
     private:
-        IMPL_TYPE_DECLARE(BlendTransformController);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

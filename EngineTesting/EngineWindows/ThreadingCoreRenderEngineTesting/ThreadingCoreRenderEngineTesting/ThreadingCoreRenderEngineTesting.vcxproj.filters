@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="VersionSuite 头文件">
+      <UniqueIdentifier>{fb36419a-8ddd-4640-816e-b84aec5b3d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VersionSuite 源文件">
+      <UniqueIdentifier>{397f0ab4-3025-481f-99a4-436851b7ca27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{b46501eb-7c9d-4e7b-a02d-ad891020731e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{6ab6103d-ae38-4e52-a93d-b2c1fd720b07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSuite 头文件">
+      <UniqueIdentifier>{63f4a511-c2d6-412c-84cd-c8c6b3f5dd3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineSuite 源文件">
+      <UniqueIdentifier>{21da4f6d-7967-46df-b2c9-2fdcc70460aa}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\Version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\VersionSuite\VersionTesting.h">
+      <Filter>VersionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\VersionSuite\VersionSuite.h">
+      <Filter>VersionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\EngineSuite\EngineSuite.h">
+      <Filter>EngineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\EngineSuite\EngineTesting.h">
+      <Filter>EngineSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\VersionSuite\VersionTesting.cpp">
+      <Filter>VersionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngineTesting\EngineSuite\EngineTesting.cpp">
+      <Filter>EngineSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ProjectTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ThreadingCoreRenderEngineTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EngineDirectory.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>

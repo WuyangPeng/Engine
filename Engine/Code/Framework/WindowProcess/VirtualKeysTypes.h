@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h" 
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace Framework
 {
@@ -17,7 +17,7 @@ namespace Framework
 	{
 	public:
 		using ClassType = VirtualKeysTypes;
-		using WParam = System::WindowWParam;
+		using WParam = System::WindowsWParam;
 
 	public:
 		// Ö»Ö§³ÖGLUT

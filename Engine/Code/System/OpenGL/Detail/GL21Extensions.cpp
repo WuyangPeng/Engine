@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 17:36)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/09 18:52)
 
 #include "System/SystemExport.h"
 
@@ -14,71 +14,70 @@
 #include "System/Helper/Detail/OpenGL/GLPluginMacro.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
-#include "System/OpenGL/Using/GL21ExtensionsUsing.h"
 
 // OpenGL 2.1
 namespace System
 {
-    auto g_ExistsOpenGL21 = ExistsOpenGLExtensions::Unknown;
+    auto existsOpenGL21 = ExistsOpenGLExtensions::Unknown;
+
+    PFNGLUNIFORMMATRIX2X3FVPROC glUniformMatrix2x3fv{ nullptr };
+    PFNGLUNIFORMMATRIX3X2FVPROC glUniformMatrix3x2fv{ nullptr };
+    PFNGLUNIFORMMATRIX2X4FVPROC glUniformMatrix2x4fv{ nullptr };
+    PFNGLUNIFORMMATRIX4X2FVPROC glUniformMatrix4x2fv{ nullptr };
+    PFNGLUNIFORMMATRIX3X4FVPROC glUniformMatrix3x4fv{ nullptr };
+    PFNGLUNIFORMMATRIX4X3FVPROC glUniformMatrix4x3fv{ nullptr };
 }
 
 System::ExistsOpenGLExtensions System::IsExistsOpenGL21() noexcept
 {
-    return g_ExistsOpenGL21;
+    return existsOpenGL21;
 }
 
-System::PgglUniformMatrix2x3fv System::gglUniformMatrix2x3fv{ nullptr };
-System::PgglUniformMatrix3x2fv System::gglUniformMatrix3x2fv{ nullptr };
-System::PgglUniformMatrix2x4fv System::gglUniformMatrix2x4fv{ nullptr };
-System::PgglUniformMatrix4x2fv System::gglUniformMatrix4x2fv{ nullptr };
-System::PgglUniformMatrix3x4fv System::gglUniformMatrix3x4fv{ nullptr };
-System::PgglUniformMatrix4x3fv System::gglUniformMatrix4x3fv{ nullptr };
-
-void System::GlUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix2x3fv, location, count, transpose, value);
-}
-
-void System::GlUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix3x2fv, location, count, transpose, value);
-}
-
-void System::GlUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix2x4fv, location, count, transpose, value);
-}
-
-void System::GlUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix4x2fv, location, count, transpose, value);
-}
-
-void System::GlUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix3x4fv, location, count, transpose, value);
-}
-
-void System::GlUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
-{
-    SYSTEM_BODY_4(gglUniformMatrix4x3fv, location, count, transpose, value);
-}
-
-void System::InitOpenGL21()
+void System::InitOpenGL21() noexcept
 {
     if (System::OpenGLSystemVersion::Version21 <= System::GetOpenGLVersion())
     {
-        g_ExistsOpenGL21 = ExistsOpenGLExtensions::Exists;
+        existsOpenGL21 = ExistsOpenGLExtensions::Exists;
 
-        SYSTEM_GET_FUNCTION(gglUniformMatrix2x3fv);
-        SYSTEM_GET_FUNCTION(gglUniformMatrix3x2fv);
-        SYSTEM_GET_FUNCTION(gglUniformMatrix2x4fv);
-        SYSTEM_GET_FUNCTION(gglUniformMatrix4x2fv);
-        SYSTEM_GET_FUNCTION(gglUniformMatrix3x4fv);
-        SYSTEM_GET_FUNCTION(gglUniformMatrix4x3fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix2x3fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix3x2fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix2x4fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix4x2fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix3x4fv);
+        SYSTEM_GET_FUNCTION(glUniformMatrix4x3fv);
     }
     else
     {
-        g_ExistsOpenGL21 = ExistsOpenGLExtensions::NotExist;
+        existsOpenGL21 = ExistsOpenGLExtensions::NotExist;
     }
+}
+
+void System::GLUniformMatrix2x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix2x3fv, location, count, transpose, value);
+}
+
+void System::GLUniformMatrix3x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix3x2fv, location, count, transpose, value);
+}
+
+void System::GLUniformMatrix2x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix2x4fv, location, count, transpose, value);
+}
+
+void System::GLUniformMatrix4x2fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix4x2fv, location, count, transpose, value);
+}
+
+void System::GLUniformMatrix3x4fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix3x4fv, location, count, transpose, value);
+}
+
+void System::GLUniformMatrix4x3fv(GLint location, GLsizei count, GLboolean transpose, const GLfloat* value) noexcept
+{
+    SYSTEM_BODY_4(glUniformMatrix4x3fv, location, count, transpose, value);
 }

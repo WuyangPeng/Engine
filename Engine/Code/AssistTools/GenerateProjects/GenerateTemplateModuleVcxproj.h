@@ -11,17 +11,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTemplateModuleVcxprojImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTemplateModuleVcxprojImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateModuleVcxproj
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTemplateModuleVcxproj);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTemplateModuleVcxproj);
 
 	public:
 		GenerateTemplateModuleVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName, const System::String& includeName);
@@ -31,7 +31,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newModuleName, const System::String& newIncludeName) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTemplateModuleVcxproj);
+		PackageType impl;
 	};
 }
 

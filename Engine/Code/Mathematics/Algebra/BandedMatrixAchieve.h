@@ -19,14 +19,14 @@
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>::BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber)
-    : m_Impl{ std::make_shared<ImplType>(size, lowerBandsNumber, upperBandsNumber) }
+    : impl{ std::make_shared<ImplType>(size, lowerBandsNumber, upperBandsNumber) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>::BandedMatrix(const BandedMatrix& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -46,14 +46,14 @@ Mathematics::BandedMatrix<Real>& Mathematics::BandedMatrix<Real>::operator=(cons
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::Swap(BandedMatrix& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::BandedMatrix<Real>::BandedMatrix(BandedMatrix&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -63,7 +63,7 @@ Mathematics::BandedMatrix<Real>& Mathematics::BandedMatrix<Real>::operator=(Band
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -72,7 +72,7 @@ Mathematics::BandedMatrix<Real>& Mathematics::BandedMatrix<Real>::operator=(Band
 template <typename Real>
 bool Mathematics::BandedMatrix<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -84,7 +84,7 @@ int Mathematics::BandedMatrix<Real>::GetSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetSize();
+    return impl->GetSize();
 }
 
 template <typename Real>
@@ -92,7 +92,7 @@ int Mathematics::BandedMatrix<Real>::GetLowerBandsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLowerBandsNumber();
+    return impl->GetLowerBandsNumber();
 }
 
 template <typename Real>
@@ -100,15 +100,15 @@ int Mathematics::BandedMatrix<Real>::GetUpperBandsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetUpperBandsNumber();
+    return impl->GetUpperBandsNumber();
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::ResetSize(int size, int lowerBandsNumber, int upperBandsNumber)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->ResetSize(size, lowerBandsNumber, upperBandsNumber);
+    return impl->ResetSize(size, lowerBandsNumber, upperBandsNumber);
 }
 
 template <typename Real>
@@ -116,7 +116,7 @@ int Mathematics::BandedMatrix<Real>::GetStreamSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetStreamSize();
+    return impl->GetStreamSize();
 }
 
 template <typename Real>
@@ -124,31 +124,31 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDiagonalBand();
+    return impl->GetDiagonalBand();
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetDiagonalBand(const ContainerType& diagonalBand)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetDiagonalBand(diagonalBand);
+    return impl->SetDiagonalBand(diagonalBand);
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetLowerBand(int index, const ContainerType& lowerBand)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetLowerBand(index, lowerBand);
+    return impl->SetLowerBand(index, lowerBand);
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetLowerBandZero()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetLowerBandZero();
+    return impl->SetLowerBandZero();
 }
 
 template <typename Real>
@@ -156,7 +156,7 @@ int Mathematics::BandedMatrix<Real>::GetLowerBandMax(int index) const noexcept(g
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLowerBandMax(index);
+    return impl->GetLowerBandMax(index);
 }
 
 template <typename Real>
@@ -164,7 +164,7 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLowerBand(index);
+    return impl->GetLowerBand(index);
 }
 
 template <typename Real>
@@ -172,15 +172,15 @@ int Mathematics::BandedMatrix<Real>::GetUpperBandMax(int index) const noexcept(g
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetUpperBandMax(index);
+    return impl->GetUpperBandMax(index);
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetUpperBand(int index, const ContainerType& upperBand)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetUpperBand(index, upperBand);
+    return impl->SetUpperBand(index, upperBand);
 }
 
 template <typename Real>
@@ -188,23 +188,23 @@ typename Mathematics::BandedMatrix<Real>::ContainerType Mathematics::BandedMatri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetUpperBand(index);
+    return impl->GetUpperBand(index);
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetUpperBandZero()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetUpperBandZero();
+    return impl->SetUpperBandZero();
 }
 
 template <typename Real>
 Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return (*m_Impl)(row, column);
+    return (*impl)(row, column);
 }
 
 template <typename Real>
@@ -212,23 +212,23 @@ const Real& Mathematics::BandedMatrix<Real>::operator()(int row, int column) con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(row, column);
+    return (*impl)(row, column);
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetZero()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetZero();
+    return impl->SetZero();
 }
 
 template <typename Real>
 void Mathematics::BandedMatrix<Real>::SetIdentity()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetIdentity();
+    return impl->SetIdentity();
 }
 
 template <typename Real>
@@ -236,7 +236,7 @@ typename const Mathematics::BandedMatrix<Real>::VariableMatrix Mathematics::Band
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ToVariableMatrix();
+    return impl->ToVariableMatrix();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_ACHIEVE_H

@@ -14,19 +14,19 @@
 
 #include "Int64Vector.h"
 #include "System/Helper/PragmaWarning/Operators.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 #include <iosfwd>
 
-MATHEMATICS_EXPORT_SHARED_PTR(Int64Vector3Impl);
+MATHEMATICS_DELAY_COPY_UNSHARED_EXPORT_IMPL(Int64Vector3, Int64Vector3Impl);
 
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE Int64Vector3 : private boost::additive<Int64Vector3, boost::totally_ordered<Int64Vector3, boost::multiplicative<Int64Vector3, int64_t>>>
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Int64Vector3);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(Int64Vector3);
 
     public:
         Int64Vector3();
@@ -66,7 +66,7 @@ namespace Mathematics
         [[nodiscard]] bool operator<(const Int64Vector3& rhs) const;
 
     private:
-        IMPL_TYPE_DECLARE(Int64Vector3);
+        PackageType impl;
     };
 
     MATHEMATICS_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& os, const Int64Vector3& rhs);

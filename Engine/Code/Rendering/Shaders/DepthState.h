@@ -20,14 +20,23 @@ namespace CoreTools
     class ReadFileManager;
 }
 
-RENDERING_EXPORT_SHARED_PTR(DepthStateImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, DepthStateImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE DepthState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(DepthState, DESTRUCTOR_STATEMENT); 
+        void Swap(DepthState& rhs) noexcept;
+     
+         public:
+             TYPE_DECLARE(DepthState);
+             using ClassShareType = CoreTools::CopyUnsharedClasses;
+             ~DepthState() noexcept;
+             DepthState(const DepthState& rhs);
+             DepthState& operator=(const DepthState& rhs);
+             DepthState(DepthState&& rhs) noexcept;
+             DepthState& operator=(DepthState&& rhs) noexcept;
         using ParentType = Object;
         using CompareMode = DepthStateFlags::CompareMode;
         using WriteFileManager = CoreTools::WriteFileManager;
@@ -52,7 +61,7 @@ namespace Rendering
         void LoadState(ReadFileManager& manager);
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(DepthState);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

@@ -1,19 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 13:17)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/24 20:09)
 
 #ifndef SYSTEM_OPENGL_OPENGL_GLUT_H
 #define SYSTEM_OPENGL_OPENGL_GLUT_H
 
 #include "System/SystemDll.h"
 
-#include "Flags/GlutKeyCodesFlags.h"
-#include "Using/GL11ExtensionsUsing.h"
+#include "Fwd/OpenGLFlagsFwd.h"
 #include "Using/GlutUsing.h"
 
 #include <string>
@@ -21,7 +20,7 @@
 namespace System
 {
     void SYSTEM_DEFAULT_DECLARE GlutInit(int* pargc, char** argv) noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE GlutCreateWindow(const std::string& title) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GlutCreateWindow(const std::string& title) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutInitWindowSize(int width, int height) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutInitContextVersion(int majorVersion, int minorVersion) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutDestroyWindow(int window) noexcept;
@@ -29,7 +28,7 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE GlutPostWindowRedisplay(int window) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutTimerFunc(unsigned millisecond, TimerFunctionCallback callback, int value) noexcept;
 
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE GlutGetModifiers() noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GlutGetModifiers() noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutInitDisplayMode(bool multiSample) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutInitWindowPosition(int x, int y) noexcept;
 
@@ -45,12 +44,12 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE GlutPassiveMotionFunc(PassiveMotionFunctionCallback callback) noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutMainLoop() noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutLeaveMainLoop() noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE GlutCreateMenu(ProcessMenuCallback callback) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GlutCreateMenu(ProcessMenuCallback callback) noexcept;
 
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE GlutGetWindow() noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE GlutGetWindow() noexcept;
     void SYSTEM_DEFAULT_DECLARE GlutSetWindow(int window) noexcept;
 
-    void SYSTEM_DEFAULT_DECLARE GlutSetOption(GLenum what, int value) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GlutSetOption(GlutOption what, int value) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_GLUT_H

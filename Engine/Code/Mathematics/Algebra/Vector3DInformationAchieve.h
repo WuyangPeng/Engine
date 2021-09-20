@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::Vector3DInformation<Real>::Vector3DInformation(const ContainerType& points, Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(points, epsilon) }
+    : impl{  points, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,10 +28,7 @@ Mathematics::Vector3DInformation<Real>::Vector3DInformation(const ContainerType&
 template <typename Real>
 bool Mathematics::Vector3DInformation<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
-        return true;
-    else
-        return false;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -40,7 +37,7 @@ int Mathematics::Vector3DInformation<Real>::GetDimension() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDimension();
+    return impl->GetDimension();
 }
 
 template <typename Real>
@@ -48,7 +45,7 @@ Mathematics::AxesAlignBoundingBox3D<Real> Mathematics::Vector3DInformation<Real>
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAABB();
+    return impl->GetAABB();
 }
 
 template <typename Real>
@@ -56,7 +53,7 @@ Real Mathematics::Vector3DInformation<Real>::GetMaxRange() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxRange();
+    return impl->GetMaxRange();
 }
 
 template <typename Real>
@@ -64,7 +61,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetOri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetOrigin();
+    return impl->GetOrigin();
 }
 
 template <typename Real>
@@ -72,7 +69,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetDir
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDirectionX();
+    return impl->GetDirectionX();
 }
 
 template <typename Real>
@@ -80,7 +77,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetDir
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDirectionY();
+    return impl->GetDirectionY();
 }
 
 template <typename Real>
@@ -88,7 +85,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetDir
 { 
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDirectionZ();
+    return impl->GetDirectionZ();
 }
 
 template <typename Real>
@@ -96,7 +93,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetMin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMinExtreme();
+    return impl->GetMinExtreme();
 }
 
 template <typename Real>
@@ -104,7 +101,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetMax
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxExtreme();
+    return impl->GetMaxExtreme();
 }
 
 template <typename Real>
@@ -112,7 +109,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetPer
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPerpendicularExtreme();
+    return impl->GetPerpendicularExtreme();
 }
 
 template <typename Real>
@@ -120,7 +117,7 @@ const Mathematics::Vector3D<Real> Mathematics::Vector3DInformation<Real>::GetTet
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTetrahedronExtreme();
+    return impl->GetTetrahedronExtreme();
 }
 
 template <typename Real>
@@ -128,7 +125,7 @@ bool Mathematics::Vector3DInformation<Real>::IsExtremeCCW() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsExtremeCCW();
+    return impl->IsExtremeCCW();
 }
 
 template <typename Real>
@@ -136,7 +133,7 @@ int Mathematics::Vector3DInformation<Real>::GetMinExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMinExtremeIndex();
+    return impl->GetMinExtremeIndex();
 }
 
 template <typename Real>
@@ -144,7 +141,7 @@ int Mathematics::Vector3DInformation<Real>::GetMaxExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxExtremeIndex();
+    return impl->GetMaxExtremeIndex();
 }
 
 template <typename Real>
@@ -152,7 +149,7 @@ int Mathematics::Vector3DInformation<Real>::GetPerpendicularExtremeIndex() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPerpendicularExtremeIndex();
+    return impl->GetPerpendicularExtremeIndex();
 }
 
 template <typename Real>
@@ -160,7 +157,7 @@ int Mathematics::Vector3DInformation<Real>::GetTetrahedronExtremeIndex() const n
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTetrahedronExtremeIndex();
+    return impl->GetTetrahedronExtremeIndex();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_VECTOR_3D_TOOLS_INFORMATION_ACHIEVE_H

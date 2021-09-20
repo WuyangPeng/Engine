@@ -12,12 +12,18 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include <memory>
+#include "System/Helper/UnicodeUsing.h"
+
 namespace CoreTools
 {
     class CORE_TOOLS_HIDDEN_DECLARE ReadFileManagerInterface
     {
     public:
         using ClassType = ReadFileManagerInterface;
+        using FactoryType = ReadFileManagerInterface;
+        using String = System::String;
+        using ReadFileManageInterfacePtr = std::shared_ptr<ReadFileManagerInterface>;
 
     public:
         ReadFileManagerInterface() = default;
@@ -33,6 +39,9 @@ namespace CoreTools
 
         [[nodiscard]] virtual void Read(size_t itemSize, void* data) = 0;
         [[nodiscard]] virtual void Read(size_t itemSize, size_t itemsNumber, void* data) = 0;
+
+    public:
+        [[nodiscard]] static ReadFileManageInterfacePtr Create(const String& fileName);
     };
 }
 

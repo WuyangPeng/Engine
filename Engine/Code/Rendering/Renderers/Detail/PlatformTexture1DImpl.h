@@ -23,7 +23,7 @@ namespace Rendering
 	public:
 		using ClassType = PlatformTexture1DImpl;
 		using PlatformTexture1DPtr = std::shared_ptr<ClassType>;
-
+		  using FactoryType = PlatformTexture1DImpl;
 	public:
 		PlatformTexture1DImpl() noexcept;
 		virtual ~PlatformTexture1DImpl();

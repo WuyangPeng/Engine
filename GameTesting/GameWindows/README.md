@@ -1,5 +1,9 @@
+@ingroup group_Documentation
+
+----------------------------
 引擎游戏测试工程
 
+----------------------------
 GameTesting.props：
 引擎游戏工程属性表
 
@@ -51,5 +55,8 @@ GameTestingEngineStaticGameTestingDynamicX64DebugLibs.props：
 GameTestingEngineStaticGameTestingDynamicX64ReleaseLibs.props：
 引擎（lib）和游戏（dll）都编译成X64、Release工程依赖库属性表
 
+----------------------------
 SetEnvironment.bat：
 设置引擎游戏所需要的环境变量
+
+----------------------------

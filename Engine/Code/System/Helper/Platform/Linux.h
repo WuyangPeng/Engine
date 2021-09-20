@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/08 11:56)
 
 #ifndef SYSTEM_HELPER_LINUX_H
 #define SYSTEM_HELPER_LINUX_H
@@ -15,7 +15,7 @@
     //  linux 具体配置选项：
 
     #define TCRE_SYSTEM_PLATFORM "linux"
-    #define SYSTEM_PLATFORM_LINUX
+    #define SYSTEM_PLATFORM_LINUX static_cast<void>(0)
 
     // 如果可用,确保我们有__GLIBC_PREREQ
     #include <cstdlib>
@@ -30,7 +30,7 @@
     // 支持标准的整数类型。
     #include <inttypes.h>
 
-    #define SYSTEM_LITTLE_ENDIAN
+    #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 
     #ifndef __GNUC__
 
@@ -63,7 +63,7 @@
     #endif  // __GNUC__
 
     #ifdef __ANDROID__
-        #define SYSTEM_PLATFORM_ANDROID
+        #define SYSTEM_PLATFORM_ANDROID static_cast<void>(0)
     #endif  // __ANDROID__
 
 #endif  // (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)

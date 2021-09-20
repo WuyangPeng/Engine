@@ -16,25 +16,27 @@
 #include "Mathematics/Objects3D/Line3.h"
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindIntersectorTriangle3Triangle3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle3Triangle3 : public StaticIntersector<Real, Vector3D>
     {
     public:
         using StaticFindIntersectorTriangle3Triangle3Impl = FindIntersectorTriangle3Triangle3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorTriangle3Triangle3);
-
+       
+        TYPE_DECLARE(StaticFindIntersectorTriangle3Triangle3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = StaticIntersector<Real, Vector3D>;
         using Vector3D = Vector3D<Real>;
         using Line3 = Line3<Real>;
@@ -66,7 +68,7 @@ namespace Mathematics
         // д╛хо 'true'
         bool m_ReportCoplanarIntersections;
 
-        IMPL_TYPE_DECLARE(StaticFindIntersectorTriangle3Triangle3);
+         PackageType impl;
     };
 
     using FloatStaticFindIntersectorTriangle3Triangle3 = StaticFindIntersectorTriangle3Triangle3<float>;

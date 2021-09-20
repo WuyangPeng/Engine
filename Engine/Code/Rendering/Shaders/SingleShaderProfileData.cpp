@@ -1,73 +1,65 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/24 17:13)
 
 #include "Rendering/RenderingExport.h"
 
 #include "SingleShaderProfileData.h"
 #include "Detail/SingleShaderProfileDataImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
+
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-
-using std::string;
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 using std::make_shared;
+using std::string;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Rendering::SingleShaderProfileData
-	::SingleShaderProfileData(int numConstants,int numSamplers)	
-	:m_Impl{ make_shared<ImplType>(numConstants,numSamplers) }
+Rendering::SingleShaderProfileData ::SingleShaderProfileData(int numConstants, int numSamplers)
+    : impl{ numConstants, numSamplers }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-Rendering::SingleShaderProfileData
-	::SingleShaderProfileData()
-	:m_Impl{ make_shared<ImplType>(0,0) }
+Rendering::SingleShaderProfileData ::SingleShaderProfileData()
+    : impl{ 0, 0 }
 {
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Rendering,SingleShaderProfileData);
+CLASS_INVARIANT_STUB_DEFINE(Rendering, SingleShaderProfileData)
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,SingleShaderProfileData)
-
-void Rendering::SingleShaderProfileData
-    ::SetBaseRegister( int index, int baseRegister )
+void Rendering::SingleShaderProfileData ::SetBaseRegister(int index, int baseRegister)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetBaseRegister(index,baseRegister);
+    return impl->SetBaseRegister(index, baseRegister);
 }
 
-void Rendering::SingleShaderProfileData
-	::SetTextureUnit( int index, int textureUnit )
+void Rendering::SingleShaderProfileData ::SetTextureUnit(int index, int textureUnit)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->SetTextureUnit(index,textureUnit);
+    return impl->SetTextureUnit(index, textureUnit);
 }
 
-
-void Rendering::SingleShaderProfileData
-	::ResetData(int numConstants, int numSamplers)
+void Rendering::SingleShaderProfileData ::ResetData(int numConstants, int numSamplers)
 {
-	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->ResetData(numConstants, numSamplers);
+    return impl->ResetData(numConstants, numSamplers);
 }
+COPY_UNSHARED_CLONE_SELF_DEFINE(Rendering, SingleShaderProfileData)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, SetProgram, string, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData, GetBaseRegister, int, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData, GetTextureUnit, int, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetProgram, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetBaseRegisterSize, int)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetTextureUnitSize, int)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData,SetProgram,string,void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData,GetBaseRegister,int,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData,GetTextureUnit,int,int)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData,GetProgram,const string)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData,GetBaseRegisterSize,int) 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData,GetTextureUnitSize,int) 
- 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, Load, CoreTools::BufferSourceSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, Load, CoreTools::BufferSourceSharedPtr, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, Save, CoreTools::BufferTargetSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,SingleShaderProfileData,GetStreamingSize,int) 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetStreamingSize, int)
 #include STSTEM_WARNING_POP

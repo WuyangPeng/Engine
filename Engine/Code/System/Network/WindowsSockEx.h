@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 18:04)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.4 (2021/06/04 14:48)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_H
@@ -22,44 +22,73 @@
 
 namespace System
 {
-    [[nodiscard]] WinSocket SYSTEM_DEFAULT_DECLARE GetWinSocket(ProtocolFamilies addressFamilies, SocketTypes type, SocketProtocols protocol,
-                                                                SocketProtocolInfoPtr protocolInfo, SocketGroup group, WindowDWord flags) noexcept;
+    NODISCARD WinSocket SYSTEM_DEFAULT_DECLARE GetWinSocket(ProtocolFamilies addressFamilies,
+                                                            SocketTypes type,
+                                                            SocketProtocols protocol,
+                                                            SocketProtocolInfoPtr protocolInfo,
+                                                            SocketGroup group,
+                                                            WindowsDWord flags) noexcept;
 
-    [[nodiscard]] WinSocket SYSTEM_DEFAULT_DECLARE WinSocketAccept(WinSocket winSocket, WinSockAddr* addr, WindowIntPtr addrlen, WinSockConditionProc condition, WindowPtrDWord callbackData) noexcept;
+    NODISCARD WinSocket SYSTEM_DEFAULT_DECLARE WinSocketAccept(WinSocket winSocket,
+                                                               WinSockAddr* addr,
+                                                               WindowsIntPtr addrlen,
+                                                               WinSockConditionProc condition,
+                                                               WindowsPtrDWord callbackData) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketConnect(WinSocket winSocket, const WinSockAddr* name, int namelen, WinSockBufPtr callerData,
-                                                               WinSockBufPtr calleeData, QualityOfServicePtr sQualityOfService, QualityOfServicePtr gQualityOfService) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketConnectByName(WinSocket winSocket, TChar* nodename, TChar* servicename, WindowDWordPtr localAddressLength,
-                                                                     WinSockAddr* localAddress, WindowDWordPtr remoteAddressLength, WinSockAddr* remoteAddress, const WinSockTimeval* timeout) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketConnectByList(WinSocket winSocket, SocketAddressListPtr socketAddress, WindowDWordPtr localAddressLength, WinSockAddr* localAddress,
-                                                                     WindowDWordPtr remoteAddressLength, WinSockAddr* remoteAddress, const WinSockTimeval* timeout) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketConnect(WinSocket winSocket,
+                                                           const WinSockAddr* name,
+                                                           int namelen,
+                                                           WinSockBufPtr callerData,
+                                                           WinSockBufPtr calleeData,
+                                                           QualityOfServicePtr sQualityOfService,
+                                                           QualityOfServicePtr gQualityOfService) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketConnectByName(WinSocket winSocket,
+                                                                 TChar* nodename,
+                                                                 TChar* servicename,
+                                                                 WindowsDWordPtr localAddressLength,
+                                                                 WinSockAddr* localAddress,
+                                                                 WindowsDWordPtr remoteAddressLength,
+                                                                 WinSockAddr* remoteAddress,
+                                                                 const WinSockTimeval* timeout) noexcept;
 
-    [[nodiscard]] WinSockEvent SYSTEM_DEFAULT_DECLARE WinSocketCreateEvent() noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketCloseEvent(WinSockEvent winSockEvent) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketEnumNetworkEvents(WinSocket winSocket, WinSockEvent eventObject, SocketNetworkEventsPtr networkEvents) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketEventSelect(WinSocket winSocket, WinSockEvent eventObject, long networkEvents) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketResetEvent(WinSockEvent resetEvent) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketSetEvent(WinSockEvent setEvent) noexcept;
-    [[nodiscard]] WaitForMultipleEventsReturn SYSTEM_DEFAULT_DECLARE WinSocketWaitForMultipleEvents(WindowDWord eventsCount, const WinSockEvent* events, bool waitAll, WindowDWord timeout, bool alertable) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigned long* netlong) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsigned short* netshort) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned long* hostlong) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsigned short* hostshort) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket,
+                                                       WinSockBufPtr buffers,
+                                                       WindowsDWord bufferCount,
+                                                       WindowsDWordPtr numberOfBytesRecvd,
+                                                       WindowsDWordPtr flags,
+                                                       SocketOverlappedPtr overlapped,
+                                                       SocketOverlappedCompletionRoutine completionRoutine) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketRecvFrom(WinSocket winSocket,
+                                                           WinSockBufPtr buffers,
+                                                           WindowsDWord bufferCount,
+                                                           WindowsDWordPtr numberOfBytesRecvd,
+                                                           WindowsDWordPtr flags,
+                                                           WinSockAddr* from,
+                                                           WindowsIntPtr fromlen,
+                                                           SocketOverlappedPtr overlapped,
+                                                           SocketOverlappedCompletionRoutine completionRoutine) noexcept;
 
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE WinSocketRecv(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesRecvd,
-                                                           WindowDWordPtr flags, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketRecvDisconnect(WinSocket winSocket, WinSockBufPtr inboundDisconnectData) noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE WinSocketRecvFrom(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesRecvd, WindowDWordPtr flags,
-                                                               WinSockAddr* from, WindowIntPtr fromlen, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept;
-
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE WinSocketSend(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesSent,
-                                                           WindowDWord flags, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE WinSocketSendMsg(WinSocket winSocket, SocketMsgPtr msg, WindowDWord flags,
-                                                              WindowDWordPtr numberOfBytesSent, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WinSocketSendDisconnect(WinSocket winSocket, WinSockBufPtr outboundDisconnectData) noexcept;
-    [[nodiscard]] int SYSTEM_DEFAULT_DECLARE WinSocketSendTo(WinSocket winSocket, WinSockBufPtr buffers, WindowDWord bufferCount, WindowDWordPtr numberOfBytesSent,
-                                                             WindowDWord flags, const WinSockAddr* to, int tolen, SocketOverlappedPtr overlapped, SocketOverlappedCompletionRoutine completionRoutine) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketSend(WinSocket winSocket,
+                                                       WinSockBufPtr buffers,
+                                                       WindowsDWord bufferCount,
+                                                       WindowsDWordPtr numberOfBytesSent,
+                                                       WindowsDWord flags,
+                                                       SocketOverlappedPtr overlapped,
+                                                       SocketOverlappedCompletionRoutine completionRoutine) noexcept;
+    NODISCARD int SYSTEM_DEFAULT_DECLARE WinSocketSendTo(WinSocket winSocket,
+                                                         WinSockBufPtr buffers,
+                                                         WindowsDWord bufferCount,
+                                                         WindowsDWordPtr numberOfBytesSent,
+                                                         WindowsDWord flags,
+                                                         const WinSockAddr* to,
+                                                         int tolen,
+                                                         SocketOverlappedPtr overlapped,
+                                                         SocketOverlappedCompletionRoutine completionRoutine) noexcept;
 }
 
 #endif  // SYSTEM_NETWORK_WINDOWS_SOCK_EX_H

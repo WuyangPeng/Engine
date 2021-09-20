@@ -18,15 +18,24 @@ namespace CoreTools
     class WriteFileManager;
     class ReadFileManager;
 }
-
-RENDERING_EXPORT_SHARED_PTR(CullStateImpl);
+EXPORT_SHARED_PTR(Rendering, CullStateImpl, RENDERING_DEFAULT_DECLARE);
+ 
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE CullState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(CullState, DESTRUCTOR_STATEMENT);
+        void Swap(CullState& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(CullState);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~CullState() noexcept;
+        CullState(const CullState& rhs);
+        CullState& operator=(const CullState& rhs);
+        CullState(CullState&& rhs) noexcept;
+        CullState& operator=(CullState&& rhs) noexcept;
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -47,7 +56,7 @@ namespace Rendering
         void LoadState(ReadFileManager& manager);
          ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(CullState);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

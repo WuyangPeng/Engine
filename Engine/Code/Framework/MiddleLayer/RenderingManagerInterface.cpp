@@ -21,8 +21,8 @@ using std::make_shared;
  
 Framework::RenderingManagerInterface
 	::RenderingManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(RenderingMiddleLayer::Count)) },
-	 m_ViewMiddleLayer{ make_shared<ViewMiddleLayerImpl>() }
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(RenderingMiddleLayer::Count)  },
+	 m_ViewMiddleLayer{ make_shared<ViewMiddleLayerImpl>(0) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 } 
@@ -31,7 +31,7 @@ Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Impl != nullptr && m_ViewMiddleLayer != nullptr)
+	if (ParentType::IsValid() &&   m_ViewMiddleLayer != nullptr)
 		return true;
 	else
 		return false;
@@ -43,7 +43,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Rendering, System)
 bool Framework::RenderingManagerInterface
 	::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::PreCreate(environmentDirectory))
 	{
@@ -62,7 +62,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::Initialize() 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Initialize())
 	{
@@ -79,7 +79,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Resize(windowDisplay, size))
 	{
@@ -96,7 +96,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyUp(key, point);
 }
@@ -104,7 +104,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::KeyDown(key, point);
 }
@@ -112,7 +112,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyUp(key, point);
 }
@@ -120,7 +120,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::SpecialKeyDown(key, point);
 }
@@ -128,7 +128,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::PassiveMotion(point);
 }
@@ -136,7 +136,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Motion(point, virtualKeys);
 }
@@ -144,7 +144,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseWheel(delta, point, virtualKeys);
 }
@@ -152,7 +152,7 @@ bool Framework::RenderingManagerInterface
 bool Framework::RenderingManagerInterface
 	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::MouseClick(button, state, point, virtualKeys);
 }
@@ -160,7 +160,7 @@ bool Framework::RenderingManagerInterface
 const Rendering::RendererSharedPtr Framework::RenderingManagerInterface
 	::GetRenderer() noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return m_ViewMiddleLayer->GetRenderer();
 }

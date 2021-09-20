@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:01)
+//	引擎版本：0.7.1.1 (2020/10/26 16:01)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_ROW_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_ROW_H
@@ -27,7 +27,7 @@ namespace CoreTools
         using FsmType = Derived;
 
     public:
-        static void Execute(Derived& fsm, const EventType& eventType);
+        static void Execute(Derived& fsm, const EventType& eventType) noexcept;
     };
 }
 

@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& matrix)
-    : m_Impl{ std::make_shared<ImplType>(matrix) }
+    : impl{  matrix  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,7 +26,7 @@ Mathematics::NoniterativeEigen3x3<Real>::NoniterativeEigen3x3(const Matrix3& mat
 template <typename Real>
 bool Mathematics::NoniterativeEigen3x3<Real>::IsValid() const noexcept
 {
-    return m_Impl != nullptr;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -35,7 +35,7 @@ Real Mathematics::NoniterativeEigen3x3<Real>::GetEigenvalue(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvalue(index);
+    return impl->GetEigenvalue(index);
 }
 
 template <typename Real>
@@ -43,7 +43,7 @@ const Mathematics::Vector3D<Real> Mathematics::NoniterativeEigen3x3<Real>::GetEi
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Impl->GetEigenvector(index);
+    return impl->GetEigenvector(index);
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_ACHIEVE_H

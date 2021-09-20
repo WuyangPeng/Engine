@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Threading/Mutex.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 using std::make_shared;
 using std::make_unique;
@@ -36,38 +37,38 @@ void Network::BaseMainManager::Destroy() noexcept
 }
 
 Network::BaseMainManager::BaseMainManager(const ConfigurationStrategy& configurationStrategy, [[maybe_unused]] BaseMainManagerCreate baseMainManagerCreate)
-    : m_Impl{ BaseMainManagerFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, BaseMainManager)
+CLASS_INVARIANT_STUB_DEFINE(Network, BaseMainManager)
 
 void Network::BaseMainManager::Run()
 {
     // Run调用会阻塞线程，不能加锁。
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    m_Impl->Run();
+    impl->Run();
 }
 
 Network::IOContextType& Network::BaseMainManager::GetIOContext()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->GetIOContext();
+    return impl->GetIOContext();
 }
 
 void Network::BaseMainManager::StopContext()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->StopContext();
+    return impl->StopContext();
 }
 
 bool Network::BaseMainManager::IsContextStop() const
@@ -76,14 +77,14 @@ bool Network::BaseMainManager::IsContextStop() const
 
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsContextStop();
+    return impl->IsContextStop();
 }
 
 void Network::BaseMainManager::RestartContext()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->RestartContext();
+    return impl->RestartContext();
 }

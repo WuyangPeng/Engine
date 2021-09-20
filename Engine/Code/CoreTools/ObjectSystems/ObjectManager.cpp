@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 16:39)
+//	引擎版本：0.7.1.1 (2020/10/22 16:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -37,12 +37,12 @@ void CoreTools::ObjectManager::Destroy() noexcept
 }
 
 CoreTools::ObjectManager::ObjectManager([[maybe_unused]] ObjectManagerCreate objectManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{  0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ObjectManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, ObjectManager)
 
 CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager::Find(const string& name) const
 {
@@ -50,23 +50,23 @@ CoreTools::ObjectManager::FactoryFunction CoreTools::ObjectManager::Find(const s
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Find(name);
+    return impl->Find(name);
 }
 
 void CoreTools::ObjectManager::Insert(const string& name, FactoryFunction function)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Insert(name, function);
+    return impl->Insert(name, function);
 }
 
 void CoreTools::ObjectManager::Remove(const string& name)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Remove(name);
+    return impl->Remove(name);
 }

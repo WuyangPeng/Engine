@@ -23,7 +23,7 @@
 using std::make_shared;
 using std::mem_fn;
 
-CoreTools::ThreadManagerImpl::ThreadManagerImpl() noexcept
+CoreTools::ThreadManagerImpl::ThreadManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_Thread{}, m_ThreadHandle{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

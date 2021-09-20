@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:43)
+//	引擎版本：0.7.1.1 (2020/10/26 15:43)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename EventType>
-CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference)
+CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference) noexcept
     : m_Difference{ difference < 0 ? -difference : difference }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{54dd7f76-57cc-461e-a12b-749510ad1e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionSuite 头文件">
+      <UniqueIdentifier>{498f301d-706f-4f90-901b-70deb9c610f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FontSuite 头文件">
+      <UniqueIdentifier>{6eb9e221-fbcd-4219-8c5e-4c08f419382b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameWorldMapSuite 头文件">
+      <UniqueIdentifier>{3fbc6921-44d5-4adb-a320-415e8acda487}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{5048e00e-2b58-4b89-a45d-e6254470670a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MaterialSuite 头文件">
+      <UniqueIdentifier>{4ddbaa40-f5b8-45b2-97b8-02dcc09de755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiscellaneousSuite 头文件">
+      <UniqueIdentifier>{65c1ea95-a317-4bed-bb18-49a109e18119}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreeDimensionalModelSuite 头文件">
+      <UniqueIdentifier>{27c62c3a-f30a-453a-82e2-69d60db7fc7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureSuite 头文件">
+      <UniqueIdentifier>{5628a61e-7033-44ae-b225-15787c8cd303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkeletonSuite 头文件">
+      <UniqueIdentifier>{66de2296-288e-4690-be8e-8665f216c521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicalParametersSuite 头文件">
+      <UniqueIdentifier>{b39bd29e-b8e2-4360-a6a5-6a8a76bebf6a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ResourceManagerTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\CollisionSuite\CollisionSuite.h">
+      <Filter>CollisionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\FontSuite\FontSuite.h">
+      <Filter>FontSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\GameWorldMapSuite\GameWorldMapSuite.h">
+      <Filter>GameWorldMapSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\MaterialSuite\MaterialSuite.h">
+      <Filter>MaterialSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\MiscellaneousSuite\MiscellaneousSuite.h">
+      <Filter>MiscellaneousSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\PhysicalParametersSuite\PhysicalParametersSuite.h">
+      <Filter>PhysicalParametersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\SkeletonSuite\SkeletonSuite.h">
+      <Filter>SkeletonSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\TextureSuite\TextureSuite.h">
+      <Filter>TextureSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\ResourceManager\ResourceManagerTesting\ThreeDimensionalModelSuite\ThreeDimensionalModelSuite.h">
+      <Filter>ThreeDimensionalModelSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

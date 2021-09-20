@@ -15,6 +15,7 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 using std::string;
 
@@ -22,7 +23,7 @@ using std::string;
 #include SYSTEM_WARNING_DISABLE(26455)
 
 Network::ConfigurationStrategy::ConfigurationStrategy()
-    : m_Impl{ ConfigurationStrategyFactory::Create() }
+    : impl{ CoreTools::ImplCreateUseFactory::Default  }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -30,18 +31,18 @@ Network::ConfigurationStrategy::ConfigurationStrategy()
 #include STSTEM_WARNING_POP
 
 Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const string& ip, int port)
-    : m_Impl{ ConfigurationStrategyFactory::Create(wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSSLStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default ,wrappersStrategy, connectStrategy, serverStrategy, messageStrategy, parserStrategy, openSSLStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ClientStrategy clientStrategy, MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy, const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter, SocketSendMessage socketSendMessage, const string& ip, int port)
-    : m_Impl{ ConfigurationStrategyFactory::Create(wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSSLStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default ,wrappersStrategy, connectStrategy, clientStrategy, messageStrategy, parserStrategy, openSSLStrategy, subStrategy, configurationParameter, socketSendMessage, ip, port }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationStrategy)
+CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationStrategy)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetWrappersStrategy, Network::WrappersStrategy)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Network, ConfigurationStrategy, GetPatternStrategy, Network::ServerStrategy)

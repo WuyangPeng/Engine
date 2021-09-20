@@ -13,6 +13,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/DataTypes/Transform.h" 
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 using Mathematics::FloatMath;
 using Rendering::Spatial;

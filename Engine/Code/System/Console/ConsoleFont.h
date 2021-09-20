@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 0:40)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/04/07 11:36)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_FONT_H
 #define SYSTEM_CONSOLE_CONSOLE_FONT_H
@@ -14,16 +14,16 @@
 
 #include "Using/ConsoleColoursUsing.h"
 #include "Using/ConsoleFontUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
     // 控制台字体信息的设置和获取。
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowHandle consoleOutput, bool maximumWindow, ConsoleFontInfoPtr consoleCurrentFont) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetCurrentSystemConsoleFont(WindowHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;
-    [[nodiscard]] ConsoleCoord SYSTEM_DEFAULT_DECLARE GetSystemConsoleFontSize(WindowHandle consoleOutput, WindowDWord font) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoPtr consoleCurrentFont) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoExPtr consoleCurrentFontEx) noexcept;
+    NODISCARD ConsoleCoord SYSTEM_DEFAULT_DECLARE GetSystemConsoleFontSize(WindowsHandle consoleOutput, WindowsDWord font) noexcept;
 }
 
 #endif  // SYSTEM_CONSOLE_CONSOLE_FONT_H

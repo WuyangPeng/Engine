@@ -14,14 +14,15 @@
 #include "Detail/EquationImpl.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 Mathematics::Equation::Equation(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
-    : m_Impl{ EquationFactory::Create(constant, once, secondary, thrice, quartic, epsilon) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, constant, once, secondary, thrice, quartic, epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Mathematics, Equation)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, Equation)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Mathematics, Equation, IsRealResult, bool);
 

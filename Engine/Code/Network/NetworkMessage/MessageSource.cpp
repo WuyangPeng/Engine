@@ -51,7 +51,7 @@ bool Network::MessageSource::IsValid() const noexcept
 
 bool Network::MessageSource::ReadBool()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     uint8_t value{ 0 };
 
@@ -62,7 +62,7 @@ bool Network::MessageSource::ReadBool()
 
 void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (data != nullptr)
     {
@@ -78,7 +78,7 @@ void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
 
 string Network::MessageSource::ReadString()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     int32_t length{ 0 };
     Read(length);
@@ -106,7 +106,7 @@ string Network::MessageSource::ReadString()
 
 void Network::MessageSource::ReadString(int elementsNumber, string* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (data != nullptr)
     {
@@ -136,14 +136,14 @@ int Network::MessageSource::GetBytesTotal() const noexcept
 
 void Network::MessageSource::IncrementBytesProcessed(int bytesNumber)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     m_Source->AddCurrentReadIndex(bytesNumber);
 }
 
 void Network::MessageSource::Read(vector<string>& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     int32_t elementsNumber{ 0 };
 
@@ -158,7 +158,7 @@ void Network::MessageSource::Read(vector<string>& datum)
 
 void Network::MessageSource::Read(string& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum = ReadString();
 }

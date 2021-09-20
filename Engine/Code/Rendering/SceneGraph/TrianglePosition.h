@@ -11,15 +11,15 @@
 
 #include "Mathematics/Algebra/APoint.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-RENDERING_EXPORT_SHARED_PTR(TrianglePositionImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(TrianglePositionImpl);
 
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE TrianglePosition
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(TrianglePosition);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(TrianglePosition);
 		using APoint = Mathematics::FloatAPoint;
 			
 	public:		
@@ -32,7 +32,7 @@ namespace Rendering
                 const APoint GetThirdPosition() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(TrianglePosition);
+                PackageType impl;
 	};	 
 }
 

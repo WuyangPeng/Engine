@@ -23,7 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)  // 导出类允许默认构造函数抛出异常。
 template <typename Real>
 Rendering::Transform<Real>::Transform()
-    : m_Impl{ std::make_shared<ImplType>() }
+    : impl{ std::make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -35,9 +35,9 @@ void Rendering::Transform<Real>::Copy()
     static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed.");
     RENDERING_CLASS_IS_VALID_1;
 
-    if (1 < m_Impl.use_count())
+    if (1 < impl.use_count())
     {
-        m_Impl = std::make_shared<ImplType>(*m_Impl);
+        impl = std::make_shared<ImplType>(*impl);
     }
 }
 
@@ -45,7 +45,7 @@ void Rendering::Transform<Real>::Copy()
 template <typename Real>
 bool Rendering::Transform<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -57,7 +57,7 @@ void Rendering::Transform<Real>::MakeIdentity()
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->MakeIdentity();
+    return impl->MakeIdentity();
 }
 
 template <typename Real>
@@ -65,7 +65,7 @@ void Rendering::Transform<Real>::MakeUnitScale()
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->MakeUnitScale();
+    return impl->MakeUnitScale();
 }
 
 template <typename Real>
@@ -73,7 +73,7 @@ bool Rendering::Transform<Real>::IsIdentity() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsIdentity();
+    return impl->IsIdentity();
 }
 
 template <typename Real>
@@ -81,7 +81,7 @@ bool Rendering::Transform<Real>::IsRotationOrScaleMatrix() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsRotationOrScaleMatrix();
+    return impl->IsRotationOrScaleMatrix();
 }
 
 template <typename Real>
@@ -89,7 +89,7 @@ bool Rendering::Transform<Real>::IsUniformScale() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsUniformScale();
+    return impl->IsUniformScale();
 }
 
 template <typename Real>
@@ -97,7 +97,7 @@ void Rendering::Transform<Real>::SetRotate(const Matrix& rotate)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetRotate(rotate);
+    return impl->SetRotate(rotate);
 }
 
 template <typename Real>
@@ -105,7 +105,7 @@ void Rendering::Transform<Real>::SetMatrix(const Matrix& matrix)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetMatrix(matrix);
+    return impl->SetMatrix(matrix);
 }
 
 template <typename Real>
@@ -113,7 +113,7 @@ void Rendering::Transform<Real>::SetTranslate(const APoint& translate)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetTranslate(translate);
+    return impl->SetTranslate(translate);
 }
 
 template <typename Real>
@@ -121,7 +121,7 @@ void Rendering::Transform<Real>::SetScale(const APoint& scale)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetScale(scale);
+    return impl->SetScale(scale);
 }
 
 template <typename Real>
@@ -129,7 +129,7 @@ void Rendering::Transform<Real>::SetUniformScale(Real scale)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetUniformScale(scale);
+    return impl->SetUniformScale(scale);
 }
 
 template <typename Real>
@@ -137,7 +137,7 @@ const typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRotate();
+    return impl->GetRotate();
 }
 
 template <typename Real>
@@ -145,7 +145,7 @@ const typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMatrix();
+    return impl->GetMatrix();
 }
 
 template <typename Real>
@@ -153,7 +153,7 @@ const typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTranslate();
+    return impl->GetTranslate();
 }
 
 template <typename Real>
@@ -161,7 +161,7 @@ const typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetScale();
+    return impl->GetScale();
 }
 
 template <typename Real>
@@ -169,7 +169,7 @@ Real Rendering::Transform<Real>::GetUniformScale() const noexcept(g_Assert < 2 |
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetUniformScale();
+    return impl->GetUniformScale();
 }
 
 template <typename Real>
@@ -177,7 +177,7 @@ Real Rendering::Transform<Real>::GetNorm() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNorm();
+    return impl->GetNorm();
 }
 
 template <typename Real>
@@ -185,7 +185,7 @@ typename Rendering::Transform<Real>::APoint Rendering::Transform<Real>::operator
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl) * point;
+    return (*impl) * point;
 }
 
 template <typename Real>
@@ -193,7 +193,7 @@ typename Rendering::Transform<Real>::AVector Rendering::Transform<Real>::operato
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl) * vector;
+    return (*impl) * vector;
 }
 
 template <typename Real>
@@ -201,7 +201,7 @@ Rendering::Transform<Real>& Rendering::Transform<Real>::operator*=(const Transfo
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    *m_Impl *= (*transform.m_Impl);
+    *impl *= (*transform.impl);
 
     return *this;
 }
@@ -211,7 +211,7 @@ const typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetHomogeneousMatrix();
+    return impl->GetHomogeneousMatrix();
 }
 
 template <typename Real>
@@ -219,7 +219,7 @@ const typename Rendering::Transform<Real>::Matrix Rendering::Transform<Real>::Ge
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetInverseMatrix(epsilon);
+    return impl->GetInverseMatrix(epsilon);
 }
 
 template <typename Real>
@@ -229,7 +229,7 @@ const Rendering::Transform<Real> Rendering::Transform<Real>::GetInverseTransform
 
     Transform<Real> transform{};
 
-    *transform.m_Impl = m_Impl->GetInverseTransform(epsilon);
+    *transform.impl = impl->GetInverseTransform(epsilon);
 
     return transform;
 }
@@ -239,7 +239,7 @@ int Rendering::Transform<Real>::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetStreamingSize();
+    return impl->GetStreamingSize();
 }
 
 template <typename Real>

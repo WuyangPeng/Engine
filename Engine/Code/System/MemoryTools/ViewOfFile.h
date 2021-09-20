@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 1:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/04/19 15:06)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_H
 #define SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_H
@@ -19,21 +19,30 @@ namespace System
 {
     // 文件映射系统。
 
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemFileMapping(WindowHandle file, MemoryProtect protect, FileMapProtection otherProtect, WindowDWord maximumSizeHigh,
-                                                                              WindowDWord maximumSizeLow, const wchar_t* name, bool* isExists) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CloseFileMapping(WindowHandle fileMappingHandle) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const wchar_t* name) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemFileMappingNuma(WindowHandle file, WindowSecurityAttributesPtr fileMappingAttributes, MemoryProtect protect,
-                                                                                  FileMapProtection otherProtect, WindowDWord maximumSizeHigh, WindowDWord maximumSizeLow,
-                                                                                  const wchar_t* name, WindowDWord preferred) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFileMapping(WindowsHandle file,
+                                                                              MemoryProtect protect,
+                                                                              FileMapProtection otherProtect,
+                                                                              WindowsDWord maximumSizeHigh,
+                                                                              WindowsDWord maximumSizeLow,
+                                                                              const wchar_t* name,
+                                                                              bool* isExists) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseFileMapping(WindowsHandle fileMappingHandle) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const wchar_t* name) noexcept;
 
-    [[nodiscard]] WindowVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowHandle fileMappingObject, FileMapDesiredAccess desiredAccess, WindowDWord maximumSizeHigh,
-                                                                           WindowDWord maximumSizeLow, WindowSize numberOfBytesToMap) noexcept;
-    [[nodiscard]] WindowVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowHandle fileMappingObject, FileMapDesiredAccess desiredAccess, WindowDWord maximumSizeHigh,
-                                                                           WindowDWord maximumSizeLow, WindowSize numberOfBytesToMap, WindowVoidPtr baseAddress) noexcept;
+    MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowsHandle fileMappingObject,
+                                                                           FileMapDesiredAccess desiredAccess,
+                                                                           WindowsDWord maximumSizeHigh,
+                                                                           WindowsDWord maximumSizeLow,
+                                                                           WindowsSize numberOfBytesToMap) noexcept;
+    MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE MapSystemViewOfFile(WindowsHandle fileMappingObject,
+                                                                           FileMapDesiredAccess desiredAccess,
+                                                                           WindowsDWord maximumSizeHigh,
+                                                                           WindowsDWord maximumSizeLow,
+                                                                           WindowsSize numberOfBytesToMap,
+                                                                           WindowsVoidPtr baseAddress) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE FlushSystemViewOfFile(WindowVoidPtr baseAddress, WindowSize numberOfBytesToFlush) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE UnmapSystemViewOfFile(WindowVoidPtr baseAddress) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numberOfBytesToFlush) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE UnmapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept;
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_H

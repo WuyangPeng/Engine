@@ -1,0 +1,56 @@
+{
+  "GameServer": 
+  {
+    "IP": "127.0.1.1",
+    "Port": 8010,
+    "Client": 0,
+    "Server": 2,
+    "Wrappers": "ACE",
+    "Connect": "UDP",
+    "Message": 1,
+    "Parser": 1,
+    "OpenSSL": 1,
+    "Send": 0,
+
+    "WrappersSub":
+    {
+      "Threads": 3,
+      "MultiContext": 2
+    },
+
+    "Parameter":
+    {
+      "ServerID": 1,
+      "ServerID": 2,
+      "PlatformID": 1,
+      "ServerName": "GameServer",
+      "BufferSize": 100000
+    }
+  },
+
+  "GameClient":
+  {
+    "IP": "127.0.0.1",
+    "Port": 8010,
+    "Client": 2,
+    "Server": 0,
+    "Wrappers": "Network",
+    "Connect": "tcp",
+    "Message": 1,
+    "Parser": 0,
+    "OpenSSL": 0,
+    "Send": 0,
+
+    "WrappersSub":
+    {
+    },
+
+    "Parameter":
+    {
+      "PlatformID": 1,
+      "PlatformID": 2,
+      "ClientName": "GameClient",
+      "BufferSize": 100000
+    }
+  }
+}

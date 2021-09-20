@@ -10,7 +10,7 @@
 #include "WindowName.h"
 #include "WindowPictorial.h"
 #include "WindowRegisterParameter.h"
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Command/CommandFwd.h"
 #include "Framework/MainFunctionHelper/EnvironmentDirectory.h"
@@ -27,10 +27,10 @@ namespace Framework
 		using WindowProcessType = WindowProcessHandle;
 		using ClassType = WindowRegisterHandle<WindowProcessType>;
 		using String = System::String;
-		using Atom = System::WindowAtom;		
-		using HInstance = System::WindowHInstance;	
+		using Atom = System::WindowsAtom;		
+		using HInstance = System::WindowsHInstance;	
 		using DisplayFunction = System::DisplayFunction;
-		using WindowClassStyle = System::WindowClassStyle;
+		using WindowClassStyle = System::WindowsClassStyle;
 		using Command = CoreTools::CommandHandle;
 		using CommandSharedPtr = std::shared_ptr<CoreTools::CommandHandle>;
 

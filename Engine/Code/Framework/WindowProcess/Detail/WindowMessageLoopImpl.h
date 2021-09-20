@@ -10,8 +10,8 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Time/CustomTime.h"
-#include "System/Window/WindowCreate.h"
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsCreate.h"
+#include "System/Windows/WindowsProcess.h"
 
 namespace Framework
 {
@@ -19,8 +19,8 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowMessageLoopImpl;
-		using HWnd = System::WindowHWnd;
-		using WParam = System::WindowWParam;
+		using HWnd = System::WindowsHWnd;
+		using WParam = System::WindowsWParam;
 		using DisplayFunction = System::DisplayFunction;
 
 	public:
@@ -31,7 +31,7 @@ namespace Framework
 		WParam EnterMessageLoop(HWnd hwnd);
 
 	private:
-		using WindowMsg = System::WindowMsg;
+		using WindowMsg = System::WindowsMsg;
 		using CustomTime = CoreTools::CustomTime;
 
 	private:

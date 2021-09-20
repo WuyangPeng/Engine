@@ -13,16 +13,16 @@
 #include "Network/NetworkDll.h"
 
 #include "NetworkMessageInternalFwd.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-NETWORK_EXPORT_SHARED_PTR(BufferReceiveStreamImpl);
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(BufferReceiveStream, BufferReceiveStreamImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE BufferReceiveStream final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BufferReceiveStream);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(BufferReceiveStream);
 
     public:
         explicit BufferReceiveStream(const MessageBufferSharedPtr& messageBuffer, ParserStrategy parserStrategy);
@@ -37,7 +37,7 @@ namespace Network
         void PushBack(const MessageBufferSharedPtr& messageBuffer);
 
     private:
-        IMPL_TYPE_DECLARE(BufferReceiveStream);
+        PackageType impl;
     };
 }
 

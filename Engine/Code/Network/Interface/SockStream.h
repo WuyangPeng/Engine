@@ -15,24 +15,29 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "NetworkInternalFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::SockStream>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::SockStream>;
 
-NETWORK_EXPORT_SHARED_PTR(SockStreamImpl);
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+NETWORK_NON_COPY_EXPORT_IMPL(SockStreamImpl);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SockStream final : private boost::noncopyable, public std::enable_shared_from_this<SockStream>
+    class NETWORK_DEFAULT_DECLARE SockStream final :    public std::enable_shared_from_this<SockStream>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(SockStream);
+        NON_COPY_TYPE_DECLARE(SockStream);
 
     public:
         explicit SockStream(const ConfigurationStrategy& configurationStrategy);
+        ~SockStream() noexcept = default;
+        SockStream(const SockStream& rhs) noexcept = delete;
+        SockStream& operator=(const SockStream& rhs) noexcept = delete;
+        SockStream(SockStream&& rhs) noexcept = delete;
+        SockStream& operator=(SockStream&& rhs) noexcept = delete;
+
 
         CLASS_INVARIANT_DECLARE;
 
@@ -60,7 +65,7 @@ namespace Network
         [[nodiscard]] int GetRemotePort() const;
 
     private:
-        IMPL_TYPE_DECLARE(SockStream);
+        PackageType impl;
     };
 
     using SockStreamSharedPtr = std::shared_ptr<SockStream>;

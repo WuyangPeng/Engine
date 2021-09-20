@@ -17,25 +17,25 @@
 using std::make_shared;
 
 CoreTools::WriteFileHandle::WriteFileHandle(const String& fileName, FileHandleCreationDisposition creation)
-    : m_Impl{ make_shared<ImplType>(fileName, creation) }
+    : impl{  fileName, creation  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, WriteFileHandle)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, WriteFileHandle)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, WriteFileHandle, GetFileByteSize, int)
 
 void CoreTools::WriteFileHandle::Write(size_t itemSize, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, data);
+    return impl->Write(itemSize, data);
 }
 
 void CoreTools::WriteFileHandle::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, itemsNumber, data);
+    return impl->Write(itemSize, itemsNumber, data);
 }

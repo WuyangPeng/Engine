@@ -16,22 +16,26 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(WriteBufferIOImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(WriteBufferIOImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE WriteBufferIO final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE WriteBufferIO final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(WriteBufferIO);
+        NON_COPY_TYPE_DECLARE(WriteBufferIO);
 
     public:
         explicit WriteBufferIO(int bufferSize);
-
+        ~WriteBufferIO() noexcept = default;
+        WriteBufferIO(const WriteBufferIO& rhs) noexcept = delete;
+        WriteBufferIO& operator=(const WriteBufferIO& rhs) noexcept = delete;
+        WriteBufferIO(WriteBufferIO&& rhs) noexcept = delete;
+        WriteBufferIO& operator=(WriteBufferIO&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] int GetBytesTotal() const;
@@ -42,7 +46,7 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:
-        IMPL_TYPE_DECLARE(WriteBufferIO);
+        PackageType impl;
     };
 }
 

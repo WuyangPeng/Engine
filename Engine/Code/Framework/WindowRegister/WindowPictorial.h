@@ -11,11 +11,11 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Using/WindowPictorialUsing.h"
-#include "System/Window/Flags/WindowPictorialFlags.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(WindowPictorialImpl);
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Using/WindowsPictorialUsing.h"
+#include "System/Windows/Flags/WindowsPictorialFlags.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(WindowPictorialImpl);
 
 namespace Framework
 {
@@ -23,13 +23,13 @@ namespace Framework
 	class FRAMEWORK_DEFAULT_DECLARE WindowPictorial
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowPictorial);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(WindowPictorial);
 		using TChar = System::TChar;
-		using HIcon = System::WindowHIcon;
-		using HCursor = System::WindowHCursor;
-		using HBrush = System::WindowHBrush;
-		using HInstance = System::WindowHInstance;
-		using WindowBrushTypes = System::WindowBrushTypes;
+		using HIcon = System::WindowsHIcon;
+		using HCursor = System::WindowsHCursor;
+		using HBrush = System::WindowsHBrush;
+		using HInstance = System::WindowsHInstance;
+		using WindowBrushTypes = System::WindowsBrushTypes;
 
 	public:
 		explicit WindowPictorial(WindowBrushTypes background);
@@ -46,7 +46,7 @@ namespace Framework
 		HBrush GetHBrush() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(WindowsPictorial);
+                PackageType impl;
 	};
 }
 

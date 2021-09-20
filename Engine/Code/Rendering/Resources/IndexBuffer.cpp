@@ -125,7 +125,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source);
 }
@@ -133,7 +133,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PostLink();
 }
@@ -141,7 +141,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -165,7 +165,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::ReadFromFile(ReadFileManager& inFile)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::ReadBufferDataFromFile(inFile);
 
@@ -186,7 +186,7 @@ Rendering::IndexBufferSharedPtr Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::InitIndexBuffer()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto indexSize = GetElementSize();
 
@@ -215,7 +215,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::InitIndexBuffer(const vector<int> indices) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto indexSize = GetElementSize();
 
@@ -246,7 +246,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::InitIndexBufferInParticles() 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto indexSize = GetElementSize();
 
@@ -286,7 +286,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::InitIndexBufferInRectangle(int index, int firstRectangleIndex, int secondRectangleIndex,  int thirdRectangleIndex, int fourthRectangleIndex) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto indexSize = GetElementSize();
 
@@ -325,7 +325,7 @@ void Rendering::IndexBuffer
 void Rendering::IndexBuffer
 	::InitIndexBufferInDisk(int radialSamplesMinus1, int shellSamplesMinus1)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto indexSize = GetElementSize();
 

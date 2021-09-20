@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:47)
+//	引擎版本：0.7.1.1 (2020/10/23 15:47)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_FACTORY_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_FACTORY_H
@@ -23,7 +23,7 @@ namespace CoreTools
     {
     public:
         using ClassType = CommandArgumentFactory;
-        using CommandArgumentSharedPtr = std::shared_ptr<CommandArgumentImpl>;
+        using CommandArgumentSharedPtr = std::shared_ptr<CommandArgumentPackage>;
 
     public:
         [[nodiscard]] static CommandArgumentSharedPtr Create(int index, const std::string& arguments, const std::string& value);

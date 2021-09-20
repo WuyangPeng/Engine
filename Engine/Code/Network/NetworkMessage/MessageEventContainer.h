@@ -15,15 +15,15 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "NetworkMessageInternalFwd.h"
-
-NETWORK_EXPORT_SHARED_PTR(MessageEventContainerImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(MessageEventContainer, MessageEventContainerImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE MessageEventContainer final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageEventContainer);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(MessageEventContainer);
 
     public:
         MessageEventContainer();
@@ -37,7 +37,7 @@ namespace Network
         void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message);
 
     private:
-        IMPL_TYPE_DECLARE(MessageEventContainer);
+        PackageType impl;
     };
 }
 

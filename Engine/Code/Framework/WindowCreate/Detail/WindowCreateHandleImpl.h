@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowCreate/WindowCreateParameter.h"
 #include "Framework/WindowCreate/WindowInstanceParameter.h"
@@ -22,7 +22,7 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowCreateHandleImpl;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
 
 	public:
 		WindowCreateHandleImpl(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size);

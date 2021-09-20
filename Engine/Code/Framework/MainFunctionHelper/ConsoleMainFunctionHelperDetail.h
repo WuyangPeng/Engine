@@ -69,7 +69,7 @@ template <template<typename> class Build, typename Process>
 void Framework::ConsoleMainFunctionHelper<Build, Process>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ConsoleMainFunctionSchedule::Failure < m_ConsoleMainFunctionSchedule)
 	{

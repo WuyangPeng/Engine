@@ -12,8 +12,7 @@
 #include "Controller.h"
 #include "IKGoal.h"
 #include "IKJoint.h"
-
-RENDERING_EXPORT_SHARED_PTR(IKControllerImpl);
+EXPORT_SHARED_PTR(Rendering, IKControllerImpl, RENDERING_DEFAULT_DECLARE); 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +21,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE IKController : public Controller
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKController, = default);
+        void Swap(IKController& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(IKController);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~IKController() noexcept= default;
+        IKController(const IKController& rhs);
+        IKController& operator=(const IKController& rhs);
+        IKController(IKController&& rhs) noexcept;
+        IKController& operator=(IKController&& rhs) noexcept;
         using ParentType = Controller;
         using IKJointSharedPtrVector = std::vector<IKJointSharedPtr>;
 
@@ -50,7 +58,7 @@ namespace Rendering
         int GetJointsNum() const;
 
     private:
-        IMPL_TYPE_DECLARE(IKController);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

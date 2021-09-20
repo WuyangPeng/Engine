@@ -11,17 +11,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTestingTemplateVcxprojImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTestingTemplateVcxprojImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTestingTemplateVcxproj 
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTestingTemplateVcxproj);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTestingTemplateVcxproj);
 
 	public:
 		GenerateTestingTemplateVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& moduleName,
@@ -35,7 +35,7 @@ namespace AssistTools
 						const System::String& newDebugLibName, const System::String& newReleaseLibName) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTestingTemplateVcxproj);
+		PackageType impl;
 	};
 }
 

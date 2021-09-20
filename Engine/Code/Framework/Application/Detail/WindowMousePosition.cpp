@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMousePosition.h"
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 using std::make_shared;
@@ -35,7 +35,7 @@ const Framework::WindowPoint Framework::WindowMousePosition
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	System::WindowPoint point{ };
+	System::WindowsPoint point{ };
 
 [[maybe_unused]] const auto result = System::GetCursorClientPos(m_Hwnd, point);
 
@@ -47,13 +47,12 @@ void Framework::WindowMousePosition
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	System::WindowPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
+	System::WindowsPoint point{ windowPoint.GetWindowX(), windowPoint.GetWindowY() };
 
 	[[maybe_unused]] const auto result = System::SetCursorClientPos(m_Hwnd, point);
 }
 
-Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition
-	::Clone()
+Framework::WindowMousePosition::MousePositionImplSharedPtr Framework::WindowMousePosition ::Clone() const
 {
 	return make_shared<ClassType>(m_Hwnd);
 }

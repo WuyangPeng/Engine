@@ -11,6 +11,7 @@
 
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_EXTREMAL_QUERY3_DETAIL)
 
+#include "Mathematics/Algebra/Vector3DDetail.h"
 #include "Mathematics/Algebra/Vector3DToolsDetail.h"
 #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
 #include "System/Helper/PragmaWarning.h"

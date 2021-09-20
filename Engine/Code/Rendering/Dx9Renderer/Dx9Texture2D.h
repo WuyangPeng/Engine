@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Window/Flags/WindowFlags.h"  
+#include "System/Windows/Flags/WindowsFlags.h"  
 #include "Rendering/OpenGLRenderer/OpenGLBindTexture.h"
 #include "Rendering/Renderers/Detail/PlatformTexture2DImpl.h"
 

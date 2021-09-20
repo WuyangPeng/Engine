@@ -17,9 +17,8 @@
 
 using std::string;
 
-Rendering::RendererManagerImpl
-	::RendererManagerImpl() noexcept
-	: m_Renderers() 
+Rendering::RendererManagerImpl ::RendererManagerImpl(MAYBE_UNUSED int count) noexcept
+    : m_Renderers()
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

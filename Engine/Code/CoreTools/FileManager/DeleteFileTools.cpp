@@ -16,9 +16,9 @@
 using std::make_shared;
 
 CoreTools::DeleteFileTools::DeleteFileTools(const String& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{ fileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, DeleteFileTools)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, DeleteFileTools)

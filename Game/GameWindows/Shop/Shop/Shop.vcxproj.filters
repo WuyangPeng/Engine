@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{41b584d8-0bf4-4750-9e88-b52cadbafc99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Placeholder 头文件">
+      <UniqueIdentifier>{68c06b8e-285e-414c-8e8e-c088a309423c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Placeholder 源文件">
+      <UniqueIdentifier>{27e33246-4751-43b6-9a82-64f78013a5cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Shop\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Shop\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Shop\Placeholder\Placeholder.cpp">
+      <Filter>Placeholder 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Shop\Shop.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\ShopNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Placeholder\Placeholder.h">
+      <Filter>Placeholder 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Helper\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Helper\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Helper\ShopClassInvariantMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Helper\ShopCustomAssertMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Shop\Helper\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

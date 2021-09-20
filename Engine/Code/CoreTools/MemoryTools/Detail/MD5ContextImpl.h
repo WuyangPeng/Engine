@@ -25,7 +25,7 @@ namespace CoreTools
         using ClassType = MD5ContextImpl;
 
     public:
-        MD5ContextImpl() noexcept;
+        MD5ContextImpl(  DisableNotThrow disableNotThrow) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

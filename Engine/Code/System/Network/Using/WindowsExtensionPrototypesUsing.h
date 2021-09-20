@@ -1,17 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 18:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.4 (2021/06/04 14:46)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_WINDOWS_EXTENSION_PROTOTYPES_USING_H
 
 #include "System/Helper/Platform.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
     #include <WinSock2.h>
@@ -25,13 +25,13 @@ namespace System
     using WinSockDataPtr = LPWSADATA;
     using WinSockHandle = HANDLE;
 
-    constexpr WindowWord g_WinSockDescriptionLen{ WSADESCRIPTION_LEN };
-    constexpr WindowWord g_WinSockSystemStatusLen{ WSASYS_STATUS_LEN };
+    constexpr WindowsWord g_WinSockDescriptionLen{ WSADESCRIPTION_LEN };
+    constexpr WindowsWord g_WinSockSystemStatusLen{ WSASYS_STATUS_LEN };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowWord g_WinSockDescriptionLen{ 256 };
-    constexpr WindowWord g_WinSockSystemStatusLen{ 128 };
+    constexpr WindowsWord g_WinSockDescriptionLen{ 256 };
+    constexpr WindowsWord g_WinSockSystemStatusLen{ 128 };
 
     struct WinSockData
     {

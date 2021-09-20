@@ -26,7 +26,7 @@ namespace Rendering
         using VisualContainerIter = VisualContainer::iterator;
 
     public:
-        VisibleSetImpl() noexcept;
+        VisibleSetImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

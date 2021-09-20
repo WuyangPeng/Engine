@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 10:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/05 0:08)
 
 #ifndef SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
 #define SYSTEM_HELPER_SELECT_COMPILER_CONFIG_H
@@ -45,13 +45,23 @@
 
 #elif defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
 
-    // 当同时使用clang和cuda，你想显示为gcc Clang C++模拟GCC，所以它必须出现更早。
+    // Clang C++模拟GCC，所以它必须出现更早。
     #define TCRE_COMPILER_CONFIG "Compiler/Clang.h"
 
 #elif defined(__DMC__)
 
     // Digital Mars C++
     #define TCRE_COMPILER_CONFIG "Compiler/DigitalMars.h"
+
+#elif defined(__DCC__)
+
+    //  Wind River Diab C++
+    #define TCRE_COMPILER_CONFIG "Compiler/Diab.h"
+
+#elif defined(__PGI)
+
+    // Portland Group Inc
+    #define TCRE_COMPILER_CONFIG "Compiler/Pgi.h"
 
 #elif defined(__GNUC__) && !defined(__ibmxl__)
 
@@ -80,7 +90,7 @@
 
 #elif defined(__CODEGEARC__)
 
-    // CodeGear —— 必须在Borland之前检查
+    // CodeGear——必须在Borland之前检查
     #define TCRE_COMPILER_CONFIG "Compiler/CodeGear.h"
 
 #elif defined(__BORLANDC__)
@@ -108,6 +118,11 @@
     // MPW MrCpp 或 SCpp
     #define TCRE_COMPILER_CONFIG "Compiler/Mpw.h"
 
+#elif defined(__IBMCPP__) && defined(__COMPILER_VER__) && defined(__MVS__)
+
+    //  IBM z/OS XL C/C++
+    #define TCRE_COMPILER_CONFIG "Compiler/XlcppZos.h"
+
 #elif defined(__ibmxl__)
 
     // 用于Linux的IBM XL C/C++（小端）
@@ -118,14 +133,9 @@
     // IBM Visual Age 或用于Linux的IBM XL C/C++（大端）
     #define TCRE_COMPILER_CONFIG "Compiler/Vacpp.h"
 
-#elif defined(__PGI)
-
-    // Portland Group Inc
-    #define TCRE_COMPILER_CONFIG "Compiler/Pgi.h"
-
 #elif defined _MSC_VER
 
-    // 微软 Visual C++，必须保持在最后一个#elif，因为一些其他供应商（例如Metrowerks），也定义_MSC_VER
+    // 微软Visual C++，必须保持在最后一个#elif，因为一些其他供应商（例如Metrowerks），也定义_MSC_VER
     #define TCRE_COMPILER_CONFIG "Compiler/Visualc.h"
 
 #else  // !defined(ALL_COMPILER)

@@ -26,11 +26,42 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Light);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Light);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Light); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Light);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Light);
 
 Rendering::Light
 	::Light(LightType type,float epsilon)
-	:ParentType{ "Light" }, m_Impl{ make_shared<ImplType>(type, epsilon) }
+	:ParentType{ "Light" }, impl{ make_shared<ImplType>(type, epsilon) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -41,7 +72,7 @@ Rendering::Light
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Light)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Light)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Light,SetType,LightType,void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Light,GetType, Rendering::LightType)
@@ -75,9 +106,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Light,SetPosition, APoint,
 void Rendering::Light
 	::SetVector(const AVector& up, const AVector& right, const AVector& direction)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
    
-	return m_Impl->SetVector(up, right, direction);
+	return impl->SetVector(up, right, direction);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Light,SetDirection, AVector,void)
@@ -85,9 +116,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, Light,SetDirection, AVecto
 void Rendering::Light
 	::SetAttenuation(float constant, float linear, float quadratic, float intensity)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
    
-	return m_Impl->SetAttenuation(constant,linear,quadratic,intensity);
+	return impl->SetAttenuation(constant,linear,quadratic,intensity);
 }
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Light,GetConstant, float)
@@ -99,7 +130,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Light,GetIntensity, float)
  
 Rendering::Light
 	::Light(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 } 
@@ -111,7 +142,7 @@ int Rendering::Light
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -133,7 +164,7 @@ void Rendering::Light
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -141,7 +172,7 @@ void Rendering::Light
 void Rendering::Light
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
 }
@@ -149,7 +180,7 @@ void Rendering::Light
 void Rendering::Light
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -157,13 +188,13 @@ void Rendering::Light
 void Rendering::Light
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

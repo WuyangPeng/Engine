@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:43)
+//	引擎版本：0.7.1.1 (2020/10/26 15:43)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_DETAIL_H
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram()
+CoreTools::Telegram<EventType>::Telegram() noexcept
     : m_Sender{ 0 }, m_Receiver{}, m_Message{ 0 }, m_DispatchMillisecondTime{ 0 }, m_CallbackParameters{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -44,7 +44,7 @@ CoreTools::Telegram<EventType>::Telegram(uint64_t sender, EventType message, int
 }
 
 template <typename EventType>
-CoreTools::Telegram<EventType>::Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters)
+CoreTools::Telegram<EventType>::Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters) noexcept
     : m_Sender{ sender }, m_Receiver{}, m_Message{ message }, m_DispatchMillisecondTime{ dispatchMillisecondTime }, m_CallbackParameters{ callbackParameters }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -73,7 +73,7 @@ bool CoreTools::Telegram<EventType>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventType>
-uint64_t CoreTools::Telegram<EventType>::GetSender() const
+uint64_t CoreTools::Telegram<EventType>::GetSender() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -89,7 +89,7 @@ typename CoreTools::Telegram<EventType>::ReceiverInfo CoreTools::Telegram<EventT
 }
 
 template <typename EventType>
-EventType CoreTools::Telegram<EventType>::GetMessageType() const
+EventType CoreTools::Telegram<EventType>::GetMessageType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -97,7 +97,7 @@ EventType CoreTools::Telegram<EventType>::GetMessageType() const
 }
 
 template <typename EventType>
-int64_t CoreTools::Telegram<EventType>::GetDispatchMillisecondTime() const
+int64_t CoreTools::Telegram<EventType>::GetDispatchMillisecondTime() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -105,7 +105,7 @@ int64_t CoreTools::Telegram<EventType>::GetDispatchMillisecondTime() const
 }
 
 template <typename EventType>
-const CoreTools::CallbackParameters CoreTools::Telegram<EventType>::GetCallbackParameters() const
+const CoreTools::CallbackParameters CoreTools::Telegram<EventType>::GetCallbackParameters() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

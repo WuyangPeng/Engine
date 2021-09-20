@@ -1,32 +1,32 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 12:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/17 20:10)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_USING_H
 #define SYSTEM_FILE_MANAGE_FILE_USING_H
 
 #include "System/Helper/Platform.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowDWord g_InvalidFileSize{ INVALID_FILE_SIZE };
-    constexpr WindowDWord g_InvalidSetFilePointer{ INVALID_SET_FILE_POINTER };
+    constexpr WindowsDWord g_InvalidFileSize{ INVALID_FILE_SIZE };
+    constexpr WindowsDWord g_InvalidSetFilePointer{ INVALID_SET_FILE_POINTER };
 
     using FileTime = FILETIME;
     using FileTimePtr = LPFILETIME;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    constexpr WindowDWord g_InvalidFileSize{ 0xFFFFFFFF };
-    constexpr WindowDWord g_InvalidSetFilePointer{ static_cast<WindowDWord>(-1) };
+    constexpr WindowsDWord g_InvalidFileSize{ 0xFFFFFFFF };
+    constexpr WindowsDWord g_InvalidSetFilePointer{ static_cast<WindowsDWord>(-1) };
 
     struct FileTime
     {

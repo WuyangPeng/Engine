@@ -16,23 +16,27 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ReadBufferIOImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ReadBufferIOImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ReadBufferIO final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE ReadBufferIO final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ReadBufferIO);
+        NON_COPY_TYPE_DECLARE(ReadBufferIO);
 
     public:
         explicit ReadBufferIO(const ConstFileBufferSharedPtr& fileBuffer);
-
+        ~ReadBufferIO() noexcept = default;
+        ReadBufferIO(const ReadBufferIO& rhs) noexcept = delete;
+        ReadBufferIO& operator=(const ReadBufferIO& rhs) noexcept = delete;
+        ReadBufferIO(ReadBufferIO&& rhs) noexcept = delete;
+        ReadBufferIO& operator=(ReadBufferIO&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] std::string GetText(int length) const;
@@ -45,7 +49,7 @@ namespace CoreTools
         void Read(size_t itemSize, size_t itemsNumber, void* data);
 
     private:
-        IMPL_TYPE_DECLARE(ReadBufferIO);
+        PackageType impl;
     };
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/10 13:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/25 15:59)
 
 #ifndef CORE_TOOLS_CONTRACT_ASSERTION_H
 #define CORE_TOOLS_CONTRACT_ASSERTION_H
@@ -24,7 +24,8 @@ namespace CoreTools
         using ClassType = Assertion;
 
     public:
-        Assertion(bool condition, const FunctionDescribed& functionDescribed, const char* format, ...);
+        template <typename... Types>
+        Assertion(bool condition, const FunctionDescribed& functionDescribed, const char* format, Types&&... arguments);
 
         CLASS_INVARIANT_DECLARE;
     };

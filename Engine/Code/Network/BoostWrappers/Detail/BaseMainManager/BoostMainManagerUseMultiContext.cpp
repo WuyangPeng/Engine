@@ -19,7 +19,7 @@
 
 using boost::numeric_cast;
 using std::make_unique;
-using std::move;
+using std::move; 
 
 Network::BoostMainManagerUseMultiContext::BoostMainManagerUseMultiContext(const ConfigurationSubStrategy& subStrategy)
     : ParentType{}, m_Container{}, m_CurrentIndex{ 0 }

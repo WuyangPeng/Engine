@@ -22,7 +22,7 @@ namespace Framework
 		using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
 
 	public:
-		ModelViewControllerMiddleLayerImpl() noexcept;
+                ModelViewControllerMiddleLayerImpl(MAYBE_UNUSED int count) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

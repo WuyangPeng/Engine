@@ -10,8 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "ControllerInterface.h"
-
-RENDERING_EXPORT_SHARED_PTR(ControlledObjectImpl);
+EXPORT_SHARED_PTR(Rendering, ControlledObjectImpl, RENDERING_DEFAULT_DECLARE); 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +21,16 @@ namespace Rendering
     public:
         // 复制一个Controller不会将其加入ControllerObject。
         // 销毁一个Controller不会将其从ControllerObject删除。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ControlledObject, = default);
+        void Swap(ControlledObject& rhs) noexcept;
+     
+         public:
+             TYPE_DECLARE(ControlledObject);
+             using ClassShareType = CoreTools::CopyUnsharedClasses;
+             ~ControlledObject() noexcept= default;
+             ControlledObject(const ControlledObject& rhs);
+             ControlledObject& operator=(const ControlledObject& rhs);
+             ControlledObject(ControlledObject&& rhs) noexcept;
+             ControlledObject& operator=(ControlledObject&& rhs) noexcept;
         using ParentType = ControllerInterface;
         
     public:
@@ -50,7 +58,7 @@ namespace Rendering
 		void AttachControllerInCopy(const ControlledObject& rhs);
 
     private:
-		IMPL_TYPE_DECLARE(ControlledObject);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
         ControllerInterface* m_Object;
 		uint64_t m_ObjectID{ 0 };
     };

@@ -14,48 +14,49 @@
 #include "Detail/SockAcceptorImpl.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 using std::string;
 
 Network::SockAcceptor::SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAcceptorFactory::Create(port, configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, port, configurationStrategy  }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::SockAcceptor::SockAcceptor(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAcceptorFactory::Create(hostName, port, configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, hostName, port, configurationStrategy  }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::SockAcceptor::SockAcceptor(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAcceptorFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy  }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAcceptor)
+CLASS_INVARIANT_STUB_DEFINE(Network, SockAcceptor)
 
 bool Network::SockAcceptor::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Accept(sockStream, sockAddress);
+    return impl->Accept(sockStream, sockAddress);
 }
 
 void Network::SockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->AsyncAccept(eventInterface, sockStream);
+    return impl->AsyncAccept(eventInterface, sockStream);
 }
 
 void Network::SockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->AsyncAccept(eventInterface, sockStream, sockAddress);
+    return impl->AsyncAccept(eventInterface, sockStream, sockAddress);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SockAcceptor, Accept, SockStreamSharedPtr, bool)

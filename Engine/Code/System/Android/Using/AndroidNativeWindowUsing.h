@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 17:40)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/10 20:51)
 
 #ifndef SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
 #define SYSTEM_ANDROID_ANDROID_WINDOW_TYPEDEF_H
@@ -42,15 +42,15 @@ namespace System
         AndroidNativeWindowBuffer() noexcept;
 
     private:
-        static constexpr auto sm_Size = 6;
+        static constexpr auto size = 6;
 
     private:
-        int width;
-        int height;
-        int stride;
-        int format;
+        int32_t width;
+        int32_t height;
+        int32_t stride;
+        int32_t format;
         void* bits;
-        std::array<uint32_t, sm_Size> reserved;
+        std::array<uint32_t, size> reserved;
     };
 
     class SYSTEM_DEFAULT_DECLARE AndroidRect final
@@ -61,16 +61,16 @@ namespace System
     public:
         AndroidRect() noexcept;
 
-        [[nodiscard]] int GetLeft() const noexcept;
-        [[nodiscard]] int GetTop() const noexcept;
-        [[nodiscard]] int GetRight() const noexcept;
-        [[nodiscard]] int GetBottom() const noexcept;
+        NODISCARD int GetLeft() const noexcept;
+        NODISCARD int GetTop() const noexcept;
+        NODISCARD int GetRight() const noexcept;
+        NODISCARD int GetBottom() const noexcept;
 
     private:
-        int left;
-        int top;
-        int right;
-        int bottom;
+        int32_t left;
+        int32_t top;
+        int32_t right;
+        int32_t bottom;
     };
 }
 

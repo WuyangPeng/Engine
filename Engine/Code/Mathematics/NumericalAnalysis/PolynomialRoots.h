@@ -55,7 +55,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using PolynomialRootsImpl = PolynomialRootsImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialRoots, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(PolynomialRoots& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(PolynomialRoots);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~PolynomialRoots() noexcept = default;
+        PolynomialRoots(const PolynomialRoots& rhs);
+        PolynomialRoots& operator=(const PolynomialRoots& rhs);
+        PolynomialRoots(PolynomialRoots&& rhs) noexcept;
+        PolynomialRoots& operator=(PolynomialRoots&& rhs) noexcept;
 
         using Vector3D = Vector3D<Real>;
         using Polynomial = Polynomial<Real>;
@@ -116,7 +127,7 @@ namespace Mathematics
         [[nodiscard]] int GetRootCount(const Polynomial& polynomial, Real begin, Real end);
 
     private:
-        IMPL_TYPE_DECLARE(PolynomialRoots);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatPolynomialRoots = PolynomialRoots<float>;

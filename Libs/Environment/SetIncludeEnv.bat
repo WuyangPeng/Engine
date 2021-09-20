@@ -52,8 +52,28 @@ echo LuaInclude = %LuaInclude%
 echo  %cd%
 setx  LuaInclude "%cd%\..\lua\src"
 
+echo OpenglInclude = %OpenglInclude%
+echo  %cd%
+setx  OpenglInclude "%cd%\..\OpenGL-Registry\api"
+
+echo OpengEGLlInclude = %OpengEGLlInclude%
+echo  %cd%
+setx  OpengEGLlInclude "%cd%\..\EGL-Registry\api"
+
+echo OpenXLSXInclude = %OpenXLSXInclude%
+echo  %cd%
+setx  OpenXLSXInclude "%cd%\..\OpenXLSX\library" 
+
+echo PugiXmlInclude = %PugiXmlInclude%
+echo  %cd%
+setx  PugiXmlInclude "%cd%\..\pugixml\src"  
+
+echo MinizInclude = %MinizInclude%
+echo  %cd%
+setx  MinizInclude "%cd%\..\miniz"  
+
 echo LibsEnvironmentInclude = %LibsEnvironmentInclude%
 echo %cd%
-setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;" 
+setx LibsEnvironmentInclude "%GSLInclude%;%BoostInclude%;%StlSoftInclude%;%ACEInclude%;%MysqlInclude%;%MysqlConnectorInclude%;%FreeglutInclude%;%VisualLeakDetectorInclude%;%OpenSSLInclude%;%OpenALSoftInclude%;%ZlibInclude%;%FreetypeInclude%;%LuaInclude%;%OpenglInclude%;%OpengEGLlInclude%;%OpenXLSXInclude%;%PugiXmlInclude%;%MinizInclude%" 
 
 pause

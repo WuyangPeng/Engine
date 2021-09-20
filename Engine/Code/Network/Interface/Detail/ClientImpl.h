@@ -21,6 +21,7 @@
 
 namespace Network
 {
+    class ClientFactory;
     class NETWORK_HIDDEN_DECLARE ClientImpl : public CoreTools::EventInterface, private boost::noncopyable
     {
     public:
@@ -28,6 +29,7 @@ namespace Network
         using ParentType = EventInterface;
         using EventInterfaceSharedPtr = CoreTools::EventInterfaceSharedPtr;
         using CallbackParameters = CoreTools::CallbackParameters;
+        using FactoryType = ClientFactory;
 
     public:
         ClientImpl(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager) noexcept;

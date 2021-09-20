@@ -13,25 +13,29 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Threading/Using/ThreadUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ThreadImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ThreadImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Thread final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE Thread final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Thread);
-        using ThreadSize = System::WindowSize;
+        NON_COPY_TYPE_DECLARE(Thread);
+        using ThreadSize = System::WindowsSize;
 
     public:
         Thread(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);
-
+        ~Thread() noexcept = default;
+        Thread(const Thread& rhs) noexcept = delete;
+        Thread& operator=(const Thread& rhs) noexcept = delete;
+        Thread(Thread&& rhs) noexcept = delete;
+        Thread& operator=(Thread&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         // 启动和停止线程。
@@ -44,7 +48,7 @@ namespace CoreTools
         [[nodiscard]] int GetThreadPriority() const;
 
     private:
-        IMPL_TYPE_DECLARE(Thread);
+        PackageType impl;
     };
 }
 

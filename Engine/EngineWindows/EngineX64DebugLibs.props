@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);../../../x64/DebugWindows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 </Project>

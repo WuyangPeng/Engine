@@ -28,7 +28,7 @@ template <typename MeshSmartPointer, typename Bound>
 bool Physics::BoundTree<MeshSmartPointer, Bound>
 	::IsValid() const noexcept
 {
-	if (m_Mesh.IsValidPtr() && m_BoundTreeChild != nullptr && 0 < m_MaxTrianglesPerLeaf)
+    if (m_Mesh != nullptr && m_BoundTreeChild != nullptr && 0 < m_MaxTrianglesPerLeaf)
 		return true;
 	else
 		return false;
@@ -50,7 +50,7 @@ typename const Physics::BoundTree<MeshSmartPointer, Bound>::ConstMeshSmartPointe
 {
 	PHYSICS_CLASS_IS_VALID_CONST_1;
 
-	return m_Mesh.GetConstSmartPointer();
+	return m_Mesh;
 }
 
 template <typename MeshSmartPointer, typename Bound>

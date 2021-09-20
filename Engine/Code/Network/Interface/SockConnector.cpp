@@ -12,29 +12,29 @@
 #include "SockConnector.h"
 #include "Detail/SockConnectorFactory.h"
 #include "Detail/SockConnectorImpl.h"
+
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(Network, SockConnector)
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Network, SockConnector)
 Network::SockConnector::SockConnector(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockConnectorFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockConnector)
+CLASS_INVARIANT_STUB_DEFINE(Network, SockConnector)
 
 bool Network::SockConnector::Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->Connect(sockStream, sockAddress);
+    return impl->Connect(sockStream, sockAddress);
 }
 
 void Network::SockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->AsyncConnect(eventInterface, sockStream, sockAddress);
+    return impl->AsyncConnect(eventInterface, sockStream, sockAddress);
 }

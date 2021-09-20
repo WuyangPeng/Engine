@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 13:41)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/10 13:48)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_ACE_H
@@ -20,6 +20,7 @@
         #include SYSTEM_WARNING_DISABLE(4996)
     #endif  // defined(NDEBUG)
 
+    #include SYSTEM_WARNING_DISABLE(6285)
     #include SYSTEM_WARNING_DISABLE(6320)
     #include SYSTEM_WARNING_DISABLE(6387)
     #include SYSTEM_WARNING_DISABLE(26400)
@@ -32,6 +33,7 @@
     #include SYSTEM_WARNING_DISABLE(26447)
     #include SYSTEM_WARNING_DISABLE(26451)
     #include SYSTEM_WARNING_DISABLE(26455)
+    #include SYSTEM_WARNING_DISABLE(26457)
     #include SYSTEM_WARNING_DISABLE(26460)
     #include SYSTEM_WARNING_DISABLE(26461)
     #include SYSTEM_WARNING_DISABLE(26465)

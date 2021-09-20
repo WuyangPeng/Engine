@@ -17,9 +17,8 @@ using std::make_shared;
 using std::const_pointer_cast;
 using namespace std::literals;
 
-Framework::ViewMiddleLayerImpl
-	::ViewMiddleLayerImpl() noexcept
-	:m_Renderer{ }
+Framework::ViewMiddleLayerImpl ::ViewMiddleLayerImpl(MAYBE_UNUSED int count) noexcept
+    : m_Renderer{}
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

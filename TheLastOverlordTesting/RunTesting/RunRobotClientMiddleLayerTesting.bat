@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% RobotClientMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% RobotClientMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% RobotClientMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% RobotClientMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% RobotClientMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% RobotClientMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% RobotClientMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% RobotClientMiddleLayerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% RobotClientMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% RobotClientMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% RobotClientMiddleLayerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% RobotClientMiddleLayerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% RobotClientMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% RobotClientMiddleLayerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% RobotClientMiddleLayerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% RobotClientMiddleLayerTesting.exe
+
+pause

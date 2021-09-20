@@ -11,17 +11,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTemplateMiddleLayerVcxprojImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTemplateMiddleLayerVcxprojImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateMiddleLayerVcxproj
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTemplateMiddleLayerVcxproj);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTemplateMiddleLayerVcxproj);
 
 	public:
 		GenerateTemplateMiddleLayerVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& managerName, const System::String& includeName);
@@ -31,7 +31,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newManagerName, const System::String& newIncludeName) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTemplateVcxproj);
+		PackageType impl;
 	};
 }
 

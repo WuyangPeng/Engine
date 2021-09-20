@@ -35,16 +35,46 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKGoal);
 
 Rendering::IKGoal
 	::IKGoal(const SpatialSharedPtr& target,const SpatialSharedPtr& effector,float weight)
-	:ParentType{ "IKGoal" }, m_Impl{ make_shared<ImplType>(target, effector, weight) }
+	:ParentType{ "IKGoal" }, impl{ make_shared<ImplType>(target, effector, weight) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
- 
+ #define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKGoal)
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKGoal)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, IKGoal)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal,GetTarget, const Rendering::ConstSpatialSharedPtr)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetEffector, const Rendering::ConstSpatialSharedPtr)
@@ -56,7 +86,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, IKGoal, GetWeight, float
 										  
 Rendering::IKGoal
 	::IKGoal(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -68,7 +98,7 @@ int Rendering::IKGoal
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -81,7 +111,7 @@ uint64_t Rendering::IKGoal
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		impl->Register(target);
 	}
 
 	return uniqueID;
@@ -96,37 +126,37 @@ void Rendering::IKGoal
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::IKGoal ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	
 
-	//m_Impl->Link(source);
+	//impl->Link(source);
 }
 
 void Rendering::IKGoal
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();	 
 }
 
 void Rendering::IKGoal ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	//m_Impl->Load(source);
+	//impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

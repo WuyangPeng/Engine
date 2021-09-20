@@ -1,31 +1,37 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/26 14:33)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/06/28 19:19)
 
 #include "System/SystemExport.h"
 
 #include "GLExtensions.h"
 #include "GLUtility.h"
+#include "System/CharacterString/FormatString.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
+#include "System/Helper/Noexcept.h"
 #include "System/Helper/Platform.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 
 #include <array>
+#include <iostream>
+#include <vector>
 
 using std::array;
+using std::cout;
+using std::vector;
 using namespace std::literals;
 
-constexpr auto g_Major = 4;
-constexpr auto g_Minor = 6;
-constexpr auto g_VersionSize = (g_Major + 1) * (g_Minor + 1);
+constexpr auto majorCount = 4;
+constexpr auto minorCount = 6;
+constexpr auto versionSize = (majorCount + 1) * (minorCount + 1);
 
-constexpr array<System::OpenGLSystemVersion, g_VersionSize> g_Version{
+constexpr array<System::OpenGLSystemVersion, versionSize> version{
     System::OpenGLSystemVersion::VersionNone,
     System::OpenGLSystemVersion::VersionNone,
     System::OpenGLSystemVersion::VersionNone,
@@ -34,7 +40,7 @@ constexpr array<System::OpenGLSystemVersion, g_VersionSize> g_Version{
     System::OpenGLSystemVersion::VersionNone,
     System::OpenGLSystemVersion::VersionNone,
 
-    System::OpenGLSystemVersion::VersionNone,
+    System::OpenGLSystemVersion::Version10,
     System::OpenGLSystemVersion::Version11,
     System::OpenGLSystemVersion::Version12,
     System::OpenGLSystemVersion::Version13,
@@ -67,22 +73,19 @@ constexpr array<System::OpenGLSystemVersion, g_VersionSize> g_Version{
     System::OpenGLSystemVersion::Version46,
 };
 
-System::OpenGLSystemVersion System::GetOpenGLVersion(char major, char minor) noexcept
+System::OpenGLSystemVersion System::GetOpenGLVersion(int major, int minor) noexcept
 {
-    const auto majorIndex = ToIndex(major);
-    const auto minorIndex = ToIndex(minor);
+    const auto index = major * (minorCount + 1) + minor;
 
-    const auto index = majorIndex * (g_Minor + 1) + minorIndex;
-
-    if (0 <= index && index < g_VersionSize)
+    if (0 <= index && index < versionSize)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        return g_Version[index];
+        return version[index];
 #include STSTEM_WARNING_POP
     }
-    else if (g_Major < majorIndex || (g_Major == majorIndex && g_Minor < minorIndex))
+    else if (majorCount < major || (major == majorCount && minorCount < minor))
     {
         return OpenGLSystemVersion::VersionUnkownMax;
     }
@@ -92,69 +95,56 @@ System::OpenGLSystemVersion System::GetOpenGLVersion(char major, char minor) noe
     }
 }
 
-int System::ToIndex(char index) noexcept
-{
-    switch (index)
-    {
-    case '0':
-        return 0;
-    case '1':
-        return 1;
-    case '2':
-        return 2;
-    case '3':
-        return 3;
-    case '4':
-        return 4;
-    case '5':
-        return 5;
-    case '6':
-        return 6;
-    case '7':
-        return 7;
-    case '8':
-        return 8;
-    case '9':
-        return 9;
-    default:
-        return 0;
-    }
-}
-
 namespace System
 {
     // 支持错误检查。
-    constexpr auto g_ErrorStringSize = 7;
+    constexpr auto errorStringSize = 9;
 
-    constexpr array<const char*, g_ErrorStringSize> g_ErrorString{
-        "GL_INVALID_ENUM",
-        "GL_INVALID_VALUE",
-        "GL_INVALID_OPERATION",
-        "GL_STACK_OVERFLOW",
-        "GL_STACK_UNDERFLOW",
-        "GL_OUT_OF_MEMORY",
-        "GL_UNKNOWN_ERROR_CODE"
-    };
+    constexpr array<const char*, errorStringSize> errorString{ "GL_INVALID_ENUM",
+                                                               "GL_INVALID_VALUE",
+                                                               "GL_INVALID_OPERATION",
+                                                               "GL_STACK_OVERFLOW",
+                                                               "GL_STACK_UNDERFLOW",
+                                                               "GL_OUT_OF_MEMORY",
+                                                               "GL_INVALID_FRAMEBUFFER_OPERATION",
+                                                               "GL_CONTEXT_LOST",
+                                                               "GL_UNKNOWN_ERROR_CODE" };
 }
 
 const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
 {
     const auto index = EnumCastUnderlying(code) - EnumCastUnderlying(OpenGLErrorCode::InvalidEnum);
 
-    if (0 <= index && index < g_ErrorStringSize)
+    if (0 <= index && index < errorStringSize)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        return g_ErrorString[index];
+        return errorString[index];
 #include STSTEM_WARNING_POP
     }
     else
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-        return g_ErrorString[g_ErrorStringSize - 1];
+        return errorString[errorStringSize - 1];
 #include STSTEM_WARNING_POP
+    }
+}
+
+void System::PrintExtensionsInfo(const char* extensions)
+{
+    const auto length = Strlen(extensions) + 1;
+    vector<char> ext(length);
+    if (Strcpy(ext.data(), length, extensions))
+    {
+        char* next{ nullptr };
+        auto token = Strtok(ext.data(), " \t\n", &next);
+        while (token != nullptr)
+        {
+            cout << "    " << token << "\n";
+            token = Strtok(nullptr, " \t\n", &next);
+        }
     }
 }
 
@@ -164,9 +154,9 @@ const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
     #include <cstdlib>
     #include <cstring>
 
-extern "C"
+namespace System
 {
-    void* GetOpenGLFunctionPointer(const char* glFunction) noexcept
+    void* DoGetOpenGLFunctionPointer(const char* glFunction)
     {
         // 前面加上一个'_'为Unix C符号识别编码约定。
         auto symbolName = "_"s + glFunction;
@@ -181,27 +171,31 @@ extern "C"
     }
 }
 
+void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
+{
+    return System::Noexcept<void*, const char*>(DoGetOpenGLFunctionPointer, glFunction, nullptr);
+}
+
 #elif defined(SYSTEM_PLATFORM_LINUX)
 
-    #include <X11/Xlib.h>
-    #include <X11/Xmd.h>
-    #include <X11/Xutil.h>
+    #include <GL/glx.h>
+    #include <GL/glxext.h>
 
-void* GetOpenGLFunctionPointer(const char* glFunction) noexcept
+void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 {
-    return reinterpret_cast<void*>((*glXGetProcAddressARB)(reinterpret_cast<const GLubyte*>(glFunction)));
+    return reinterpret_cast<void*>((*glXGetProcAddress)(reinterpret_cast<const GLubyte*>(glFunction)));
 }
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-void* GetOpenGLFunctionPointer(const char* glFunction) noexcept
+void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 {
-    return System::GetWglProcAddress(glFunction);
+    return GetWglProcAddress(glFunction);
 }
 
 #else  // !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_WIN32
 
-void* GetOpenGLFunctionPointer([[maybe_unused]] const char* glFunction) noexcept
+void* System::GetOpenGLFunctionPointer(MAYBE_UNUSED const char* glFunction) noexcept
 {
     return nullptr;
 }

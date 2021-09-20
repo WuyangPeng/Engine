@@ -11,7 +11,7 @@
 
 #include "System/Helper/WindowsMacro.h"
 #include "System/Helper/PragmaWarning.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "System/Android/Using/AndroidNativeAppGlueUsing.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/CharacterString/StringConversion.h"
@@ -30,8 +30,8 @@ namespace Framework
 	#include SYSTEM_WARNING_DISABLE(26414)
 	#include SYSTEM_WARNING_DISABLE(26461)
 	template<typename T>
-	int WinMainEntryPoint(System::WindowHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory,
-                          const System::TChar* windowName, int width, int height, [[maybe_unused]] System::WindowHInstance previousInstance)
+	int WinMainEntryPoint(System::WindowsHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory,
+                          const System::TChar* windowName, int width, int height, [[maybe_unused]] System::WindowsHInstance previousInstance)
 	{
 		EXCEPTION_TRY
 		{
@@ -56,7 +56,7 @@ namespace Framework
 	#include SYSTEM_WARNING_DISABLE(26414)
 	#include SYSTEM_WARNING_DISABLE(26461)
 	template<typename T>
-        int WinMainEntryPoint(System::WindowHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, const System::TChar* renderer, [[maybe_unused]] System::WindowHInstance previousInstance)
+        int WinMainEntryPoint(System::WindowsHInstance instance, char* commandLine, const System::TChar* engineEnvironment, const System::TChar* engineDirectory, const System::TChar* renderer, [[maybe_unused]] System::WindowsHInstance previousInstance)
 	{
 		EXCEPTION_TRY
 		{

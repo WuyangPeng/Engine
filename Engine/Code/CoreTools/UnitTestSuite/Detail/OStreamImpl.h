@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 11:21)
+//	引擎版本：0.7.1.1 (2020/10/23 11:21)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H

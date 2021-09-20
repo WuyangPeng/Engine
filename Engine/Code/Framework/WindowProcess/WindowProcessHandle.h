@@ -7,7 +7,7 @@
 #ifndef FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
 #define FRAMEWORK_WINDOW_PROCESS_WINDOW_PROCESS_H
 
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 
 #include "WindowMessageInterface.h"
 #include "System/Helper/UnicodeUsing.h" 
@@ -26,8 +26,8 @@ namespace Framework
 		using MessageType = WindowMessage;
 		using ClassType = WindowProcessHandle<MessageType>;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
-		using WindowProcess = System::WindowProcess;
+		using HWnd = System::WindowsHWnd;
+		using WindowProcess = System::WindowsProcess;
 		using DisplayFunction = System::DisplayFunction;
 
 	public:

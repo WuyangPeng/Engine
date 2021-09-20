@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 9:40)
+//	引擎版本：0.7.1.1 (2020/10/23 9:40)
 
 // 将信息输出至指定的ostream。ReportOutput为内部接口基类。实现输出字符串和换行的功能。
 #ifndef CORE_TOOLS_REPORT_OUTPUT_REPORT_OUTPUT_H

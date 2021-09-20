@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include <type_traits>
 
 template <int N, typename T>

@@ -18,18 +18,18 @@ using std::make_shared;
 using std::string;
 
 Network::SendSocketManager::SendSocketManager(const string& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{  fileName }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SendSocketManager)
+CLASS_INVARIANT_STUB_DEFINE(Network, SendSocketManager)
 
 void Network::SendSocketManager::Send(const SocketData& socketData, uint64_t socketID, const MessageInterfaceSharedPtr& message)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Send(socketData, socketID, message);
+    return impl->Send(socketData, socketID, message);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, SendSocketManager, GetSendSocket, SocketData, Network::SendSocketSharedPtr)

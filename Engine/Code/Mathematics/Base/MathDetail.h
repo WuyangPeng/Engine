@@ -20,44 +20,16 @@
 
 #include "System/Helper/PragmaWarning/MathConstants.h"
 
-// Math<float> constexpr函数特化。
-
-template <>
-constexpr float Mathematics::Math<float>::GetZeroTolerance() noexcept
-{
-    return 1e-06f;
-}
-
-template <>
-constexpr float Mathematics::Math<float>::GetPI() noexcept
-{
-    return boost::math::constants::pi<float>();
-}
-
-// Math<double> constexpr函数特化。
-
-template <>
-constexpr double Mathematics::Math<double>::GetZeroTolerance() noexcept
-{
-    return 1e-08;
-}
-
-template <>
-constexpr double Mathematics::Math<double>::GetPI() noexcept
-{
-    return boost::math::constants::pi<double>();
-}
-
 // 默认
 
 template <typename Real>
-constexpr Real Mathematics::Math<Real>::GetZeroTolerance() noexcept
+inline constexpr Real Mathematics::Math<Real>::GetZeroTolerance() noexcept
 {
     return GetValue(0);
 }
 
 template <typename Real>
-constexpr Real Mathematics::Math<Real>::GetPI() noexcept
+inline constexpr Real Mathematics::Math<Real>::GetPI() noexcept
 {
     return GetValue(3);
 }
@@ -90,6 +62,34 @@ template <typename Real>
 constexpr Real Mathematics::Math<Real>::GetInverseTwoPI() noexcept
 {
     return GetValue(1) / GetTwoPI();
+}
+
+// Math<float> constexpr函数特化。
+
+template <>
+inline constexpr float Mathematics::Math<float>::GetZeroTolerance() noexcept
+{
+    return 1e-06f;
+}
+
+template <>
+inline constexpr float Mathematics::Math<float>::GetPI() noexcept
+{
+    return boost::math::constants::pi<float>();
+}
+
+// Math<double> constexpr函数特化。
+
+template <>
+inline constexpr double Mathematics::Math<double>::GetZeroTolerance() noexcept
+{
+    return 1e-08;
+}
+
+template <>
+inline constexpr double Mathematics::Math<double>::GetPI() noexcept
+{
+    return boost::math::constants::pi<double>();
 }
 
 #endif  // MATHEMATICS_BASE_MATH_DETAIL_H

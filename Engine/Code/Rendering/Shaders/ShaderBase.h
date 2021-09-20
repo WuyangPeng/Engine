@@ -16,8 +16,8 @@
 
 
 #include <string>
-
-RENDERING_EXPORT_SHARED_PTR(ShaderBaseImpl);
+EXPORT_SHARED_PTR(Rendering, ShaderBaseImpl, RENDERING_DEFAULT_DECLARE);
+ 
 
 namespace CoreTools
 {
@@ -30,7 +30,19 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderBase : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderBase, DESTRUCTOR_PURE_VIRTUAL);
+        
+
+    public:
+        void Swap(ShaderBase& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ShaderBase);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ShaderBase() noexcept = 0;
+        ShaderBase(const ShaderBase& rhs);
+        ShaderBase& operator=(const ShaderBase& rhs);
+        ShaderBase(ShaderBase&& rhs) noexcept;
+        ShaderBase& operator=(ShaderBase&& rhs) noexcept;
 		using ParentType = Object;
 		using Colour = Colour<float>;
 		using WriteFileManager = CoreTools::WriteFileManager;
@@ -101,7 +113,7 @@ namespace Rendering
 		ShaderProfileDataSharedPtr GetProfile() noexcept;
 
     private:
-		IMPL_TYPE_DECLARE(ShaderBase);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

@@ -13,6 +13,8 @@
 
     #include "CoreTools/Helper/Assertion/PhysicsCustomAssertMacro.h"
     #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
+#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+
 
     #include <queue>
     #include <stack>

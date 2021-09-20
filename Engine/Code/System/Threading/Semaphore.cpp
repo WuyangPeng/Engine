@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 17:11)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/26 17:27)
 
 #include "System/SystemExport.h"
 
@@ -13,97 +13,145 @@
 #include "Flags/SemaphoreFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/WindowsSystem.h"
 
-System::WindowHandle System::CreateSystemSemaphore([[maybe_unused]] WindowSecurityAttributesPtr semaphoreAttributes, [[maybe_unused]] WindowLong initialCount, [[maybe_unused]] WindowLong maximumCount, [[maybe_unused]] const TChar* name) noexcept
+System::WindowsHandle System::CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes, WindowsLong initialCount, WindowsLong maximumCount, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::CreateSemaphore(semaphoreAttributes, initialCount, maximumCount, name);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowSecurityAttributesPtr, WindowsLong, WindowsLong, const TChar*>(semaphoreAttributes, initialCount, maximumCount, name);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::CreateSystemSemaphore(WindowLong initialCount, WindowLong maximumCount) noexcept
+System::WindowsHandle System::CreateSystemSemaphore(WindowsLong initialCount, WindowsLong maximumCount) noexcept
 {
     return CreateSystemSemaphore(nullptr, initialCount, maximumCount, nullptr);
 }
 
-bool System::WaitForSystemSemaphore(WindowHandle handle) noexcept
+bool System::WaitForSystemSemaphore(WindowsHandle handle) noexcept
 {
     return WaitForSystemSemaphore(handle, EnumCastUnderlying(MutexWait::Infinite)) != MutexWaitReturn::Failed;
 }
 
-System::MutexWaitReturn System::WaitForSystemSemaphore([[maybe_unused]] WindowHandle handle, [[maybe_unused]] WindowDWord milliseconds) noexcept
+System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, WindowsDWord milliseconds) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObject(handle, milliseconds));
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsDWord>(handle, milliseconds);
+
     return MutexWaitReturn::Failed;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::MutexWaitReturn System::WaitForSystemSemaphore([[maybe_unused]] WindowHandle handle, [[maybe_unused]] WindowDWord milliseconds, [[maybe_unused]] bool alertable) noexcept
+System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, WindowsDWord milliseconds, bool alertable) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<MutexWaitReturn>(::WaitForSingleObjectEx(handle, milliseconds, BoolConversion(alertable)));
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsDWord, bool>(handle, milliseconds, alertable);
+
     return MutexWaitReturn::Failed;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::MutexWaitReturn System::WaitForSystemSemaphore([[maybe_unused]] WindowDWord count, [[maybe_unused]] const WindowHandle* handle, [[maybe_unused]] bool waitAll, [[maybe_unused]] WindowDWord milliseconds, [[maybe_unused]] bool alertable) noexcept
+System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjectsEx(count, handle, BoolConversion(waitAll), milliseconds, BoolConversion(alertable)));
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord, bool>(count, handle, waitAll, milliseconds, alertable);
+
     return MutexWaitReturn::Failed;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::MutexWaitReturn System::WaitForSystemSemaphore([[maybe_unused]] WindowDWord count, [[maybe_unused]] const WindowHandle* handle, [[maybe_unused]] bool waitAll, [[maybe_unused]] WindowDWord milliseconds) noexcept
+System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<MutexWaitReturn>(::WaitForMultipleObjects(count, handle, BoolConversion(waitAll), milliseconds));
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord>(count, handle, waitAll, milliseconds);
+
     return MutexWaitReturn::Failed;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::ReleaseSystemSemaphore([[maybe_unused]] WindowHandle handle, [[maybe_unused]] WindowLong releaseCount, [[maybe_unused]] WindowLongPtr previousCount) noexcept
+bool System::ReleaseSystemSemaphore(WindowsHandle handle, WindowsLong releaseCount, WindowsLongPtr previousCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::ReleaseSemaphore(handle, releaseCount, previousCount) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsLong, WindowsLongPtr>(handle, releaseCount, previousCount);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CloseSystemSemaphore([[maybe_unused]] WindowHandle handle) noexcept
+bool System::CloseSystemSemaphore(WindowsHandle handle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::CloseHandle(handle) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle>(handle);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::OpenSystemSemaphore([[maybe_unused]] MutexStandardAccess desiredAccess, [[maybe_unused]] SemaphoreSpecificAccess specificAccess, [[maybe_unused]] bool inheritHandle, [[maybe_unused]] const TChar* name) noexcept
+System::WindowsHandle System::OpenSystemSemaphore(MutexStandardAccess desiredAccess, SemaphoreSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::OpenSemaphore(EnumCastUnderlying(desiredAccess) | EnumCastUnderlying(specificAccess), BoolConversion(inheritHandle), name);
+
 #else  // !SYSTEM_PLATFORM_WIN32
-    return false;
+
+    NullFunction<MutexStandardAccess, SemaphoreSpecificAccess, bool, const TChar*>(desiredAccess, specificAccess, inheritHandle, name);
+
+    return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsSystemSemaphoreValid(WindowHandle handle) noexcept
+bool System::IsSystemSemaphoreValid(WindowsHandle handle) noexcept
 {
     if (handle != nullptr && handle != g_InvalidHandleValue)
         return true;

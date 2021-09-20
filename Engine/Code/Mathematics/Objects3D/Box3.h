@@ -12,9 +12,9 @@
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Base/MathDetail.h"
-
 #include <type_traits>
 #include <vector>
 
@@ -36,7 +36,9 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Box3Impl = Box3Impl<Real>;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Box3);
+        TYPE_DECLARE(Box3);
+        using PackageType = CoreTools::DelayCopyUnsharedImpl<Box3, ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
 
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
@@ -75,7 +77,7 @@ namespace Mathematics
                  const Real extent0, const Real extent1, const Real extent2);
 
     private:
-        IMPL_TYPE_DECLARE(Box3);
+        PackageType impl;
     };
 
     using FloatBox3 = Box3<float>;

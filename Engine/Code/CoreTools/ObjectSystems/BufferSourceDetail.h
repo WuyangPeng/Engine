@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 13:07)
+//	引擎版本：0.7.1.1 (2020/10/22 13:07)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
@@ -24,7 +24,7 @@ T CoreTools::BufferSource::ReadBoolContainerWithNumber(int elementsNumber)
 
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -50,7 +50,7 @@ T CoreTools::BufferSource::ReadBoolContainerWithoutNumber()
 
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -60,7 +60,7 @@ T CoreTools::BufferSource::ReadBoolContainerWithoutNumber()
 template <int Size>
 std::array<bool, Size> CoreTools::BufferSource::ReadBoolContainer()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     return ReadBoolContainerWithNumber<std::array<bool, Size>>(Size);
 }
@@ -72,7 +72,7 @@ void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, T& container
 
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -87,7 +87,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
 
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -97,7 +97,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
 template <int Size>
 void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadBoolContainer(Size, container);
 }
@@ -109,7 +109,7 @@ T CoreTools::BufferSource::ReadStringContainerWithNumber(int elementsNumber)
 
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -135,7 +135,7 @@ T CoreTools::BufferSource::ReadStringContainerWithoutNumber()
 
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -145,7 +145,7 @@ T CoreTools::BufferSource::ReadStringContainerWithoutNumber()
 template <int Size>
 std::array<std::string, Size> CoreTools::BufferSource::ReadStringContainer()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     std::array<std::string, Size> result{};
 
@@ -164,7 +164,7 @@ void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, T& contain
 
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -179,7 +179,7 @@ void CoreTools::BufferSource::ReadStringContainer(T& container)
 
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -189,7 +189,7 @@ void CoreTools::BufferSource::ReadStringContainer(T& container)
 template <int Size>
 void CoreTools::BufferSource::ReadContainer(std::array<std::string, Size>& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadStringContainer(Size, container);
 }
@@ -198,7 +198,7 @@ template <typename T>
 T CoreTools::BufferSource::Read()
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     T datum{};
 
@@ -214,7 +214,7 @@ T CoreTools::BufferSource::ReadContainerWithNumber(int elementsNumber)
 
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -238,7 +238,7 @@ std::vector<T> CoreTools::BufferSource::ReadVectorWithNumber(int elementsNumber)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -261,7 +261,7 @@ T CoreTools::BufferSource::ReadContainerWithoutNumber()
 
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -273,7 +273,7 @@ std::vector<T> CoreTools::BufferSource::ReadVectorWithoutNumber()
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -285,7 +285,7 @@ std::array<T, Size> CoreTools::BufferSource::ReadContainer()
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     std::array<T, Size> result{};
 
@@ -299,7 +299,7 @@ void CoreTools::BufferSource::Read(T& datum)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     m_Source.Read(CORE_TOOLS_STREAM_SIZE(datum), &datum);
 }
@@ -311,7 +311,7 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, T& container)
 
     static_assert(std::is_arithmetic_v<ValueType>, "value_type is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -324,7 +324,7 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::set<T>& con
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -337,7 +337,7 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::vector<T>& 
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -352,7 +352,7 @@ void CoreTools::BufferSource::ReadContainer(T& container)
 
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -364,7 +364,7 @@ void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadContainer(Size, container);
 }
@@ -374,7 +374,7 @@ T CoreTools::BufferSource::ReadEnum()
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     T datum{};
 
@@ -390,7 +390,7 @@ T CoreTools::BufferSource::ReadEnumContainerWithNumber(int elementsNumber)
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -414,7 +414,7 @@ std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithNumber(int elementsNum
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -437,7 +437,7 @@ T CoreTools::BufferSource::ReadEnumContainerWithoutNumber()
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -449,7 +449,7 @@ std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithoutNumber()
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -461,7 +461,7 @@ std::array<T, Size> CoreTools::BufferSource::ReadEnumContainer()
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     std::array<T, Size> result{};
 
@@ -475,7 +475,7 @@ void CoreTools::BufferSource::ReadEnum(T& datum)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     m_Source.Read(CoreTools::GetStreamSize(datum), &datum);
 }
@@ -487,7 +487,7 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, T& container
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -500,7 +500,7 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::set<T>&
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -513,7 +513,7 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::vector<
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -528,7 +528,7 @@ void CoreTools::BufferSource::ReadEnumContainer(T& container)
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -540,7 +540,7 @@ void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadEnumContainer(Size, container);
 }
@@ -548,7 +548,7 @@ void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 template <typename T>
 T CoreTools::BufferSource::ReadAggregate()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     T datum{};
 
@@ -560,7 +560,7 @@ T CoreTools::BufferSource::ReadAggregate()
 template <typename T>
 T CoreTools::BufferSource::ReadAggregateContainerWithNumber(int elementsNumber)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -582,7 +582,7 @@ T CoreTools::BufferSource::ReadAggregateContainerWithNumber(int elementsNumber)
 template <typename T>
 T CoreTools::BufferSource::ReadAggregateContainerWithoutNumber()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -592,7 +592,7 @@ T CoreTools::BufferSource::ReadAggregateContainerWithoutNumber()
 template <typename T, int Size>
 std::array<T, Size> CoreTools::BufferSource::ReadAggregateContainer()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     return ReadAggregateContainerWithNumber<std::array<T, Size>>(Size);
 }
@@ -602,7 +602,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, T& cont
 {
     using ValueType = typename T::value_type;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -615,7 +615,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, std::se
 {
     using ValueType = typename T::value_type;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -626,7 +626,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, std::se
 template <typename T>
 void CoreTools::BufferSource::ReadAggregateContainer(T& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -636,7 +636,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(T& container)
 template <typename T, int Size>
 void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadAggregateContainer(Size, container);
 }
@@ -646,7 +646,7 @@ T CoreTools::BufferSource::ReadObjectAssociated()
 {
     static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     T datum{};
 
@@ -662,7 +662,7 @@ T CoreTools::BufferSource::ReadObjectAssociatedContainerWithNumber(int elementsN
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (0 < elementsNumber)
     {
@@ -688,7 +688,7 @@ T CoreTools::BufferSource::ReadObjectAssociatedContainerWithoutNumber()
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -702,7 +702,7 @@ std::array<T, Size> CoreTools::BufferSource::ReadObjectAssociatedContainer()
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     return ReadObjectAssociatedContainerWithNumber<std::array<T, Size>>(Size);
 }
@@ -714,7 +714,7 @@ void CoreTools::BufferSource::ReadObjectAssociated(T& datum)
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     datum.m_Object.reset();
     m_Source.Read(CORE_TOOLS_STREAM_SIZE(datum.m_Associated), &datum.m_Associated);
@@ -727,7 +727,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -742,7 +742,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -757,7 +757,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(T& container)
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -771,7 +771,7 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(std::array<T, Size>&
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     ReadObjectAssociatedContainer(Size, container);
 }

@@ -21,6 +21,7 @@ namespace Network
     public:
         using ClassType = MessageEventContainerImpl;
         using ImplPtr = std::shared_ptr<ClassType>;
+        using FactoryType = MessageEventContainerImpl;
 
     public:
         MessageEventContainerImpl() noexcept;
@@ -44,6 +45,8 @@ namespace Network
 
         [[nodiscard]] virtual bool IsCanInsert() const = 0;
         [[nodiscard]] virtual bool IsPrioritySame(MessageEventPriority priority) const = 0;
+
+        static ImplPtr Create();
     };
 }
 

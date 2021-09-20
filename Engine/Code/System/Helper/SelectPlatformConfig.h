@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 10:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/05 0:08)
 
 #ifndef SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
 #define SYSTEM_HELPER_SELECT_PLATFORM_CONFIG_H
@@ -15,7 +15,7 @@
 
 #if (defined(linux) || defined(__linux) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)) && !defined(_CRAYC)
 
-    // linux，还有使用GLIBC的其他平台（Hurd等） 
+    // linux，还有使用GLIBC的其他平台（Hurd等）。
     #define TCRE_PLATFORM_CONFIG "Platform/Linux.h"
 
 #elif defined(__FreeBSD__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__DragonFly__)
@@ -63,9 +63,14 @@
     // MacOS
     #define TCRE_PLATFORM_CONFIG "Platform/Macos.h"
 
+#elif defined(__TOS_MVS__)
+
+    // IBM z/OS
+    #define TCRE_PLATFORM_CONFIG "Platform/Zos.h"
+
 #elif defined(__IBMCPP__) || defined(_AIX)
 
-    // IBM
+    // IBM AIX
     #define TCRE_PLATFORM_CONFIG "Platform/Aix.h"
 
 #elif defined(__amigaos__)

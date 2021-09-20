@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 16:23)
+//	引擎版本：0.7.1.1 (2020/10/23 16:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 using std::make_pair;
 using std::make_shared;

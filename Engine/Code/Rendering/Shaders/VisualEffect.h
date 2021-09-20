@@ -20,14 +20,23 @@ namespace CoreTools
 	class ReadFileManager;
 }
 
-RENDERING_EXPORT_SHARED_PTR(VisualEffectImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, VisualEffectImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE VisualEffect : public CoreTools::Object
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualEffect, DESTRUCTOR_STATEMENT);
+            void Swap(VisualEffect& rhs) noexcept;
+           
+               public:
+                   TYPE_DECLARE(VisualEffect);
+                   using ClassShareType = CoreTools::CopyUnsharedClasses;
+                   ~VisualEffect() noexcept;
+                   VisualEffect(const VisualEffect& rhs);
+                   VisualEffect& operator=(const VisualEffect& rhs);
+                   VisualEffect(VisualEffect&& rhs) noexcept;
+                   VisualEffect& operator=(VisualEffect&& rhs) noexcept;
 		using ParentType = Object;
 		using WriteFileManager = CoreTools::WriteFileManager;
 		using ReadFileManager = CoreTools::ReadFileManager;
@@ -62,7 +71,7 @@ namespace Rendering
 		void LoadVisualTechnique(ReadFileManager& manager);
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(VisualEffect);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/21 14:19)
+//	引擎版本：0.7.1.1 (2020/10/21 14:19)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
@@ -21,11 +21,9 @@
 #include <set>
 #include <vector>
 
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
-
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE BufferSource final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE BufferSource final
     {
     public:
         using ClassType = BufferSource;
@@ -33,6 +31,11 @@ namespace CoreTools
 
     public:
         explicit BufferSource(const ConstFileBufferSharedPtr& fileBuffer);
+        ~BufferSource() noexcept = default;
+        BufferSource(const BufferSource& rhs) noexcept = delete;
+        BufferSource& operator=(const BufferSource& rhs) noexcept = delete;
+        BufferSource(BufferSource&& rhs) noexcept = delete;
+        BufferSource& operator=(BufferSource&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 14:08)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/24 16:10)
 
 #ifndef SYSTEM_SECURITY_ADD_ACCESS_FLAGS_H
 #define SYSTEM_SECURITY_ADD_ACCESS_FLAGS_H
@@ -27,8 +27,15 @@ namespace System
         DesktopEnumerate = DESKTOP_ENUMERATE,
         DesktopWriteObjects = DESKTOP_WRITEOBJECTS,
         DesktopSwitchDesktop = DESKTOP_SWITCHDESKTOP,
-        DesktopAllAccess = DesktopReadObjects | DesktopCreateWindow | DesktopCreateMenu | DesktopHookControl | DesktopJournalRecord |
-                           DesktopJournalPlayBack | DesktopEnumerate | DesktopWriteObjects | DesktopSwitchDesktop,
+        DesktopAllAccess = DesktopReadObjects |
+                           DesktopCreateWindow |
+                           DesktopCreateMenu |
+                           DesktopHookControl |
+                           DesktopJournalRecord |
+                           DesktopJournalPlayBack |
+                           DesktopEnumerate |
+                           DesktopWriteObjects |
+                           DesktopSwitchDesktop,
 
         WinstaEnumDesktops = WINSTA_ENUMDESKTOPS,
         WinstaReadAttributes = WINSTA_READATTRIBUTES,
@@ -55,8 +62,15 @@ namespace System
         DesktopEnumerate = 0x0040L,
         DesktopWriteObjects = 0x0080L,
         DesktopSwitchDesktop = 0x0100L,
-        DesktopAllAccess = DesktopReadObjects | DesktopCreateWindow | DesktopCreateMenu | DesktopHookControl | DesktopJournalRecord |
-                           DesktopJournalPlayBack | DesktopEnumerate | DesktopWriteObjects | DesktopSwitchDesktop,
+        DesktopAllAccess = DesktopReadObjects |
+                           DesktopCreateWindow |
+                           DesktopCreateMenu |
+                           DesktopHookControl |
+                           DesktopJournalRecord |
+                           DesktopJournalPlayBack |
+                           DesktopEnumerate |
+                           DesktopWriteObjects |
+                           DesktopSwitchDesktop,
 
         WinstaEnumDesktops = 0x0001L,
         WinstaReadAttributes = 0x0002L,
@@ -68,8 +82,15 @@ namespace System
         WinstaEnumerate = 0x0100L,
         WinstaReadScreen = 0x0200L,
 
-        WinstaAllAccess = (WinstaEnumDesktops | WinstaReadAttributes | WinstaAccessClipboard | WinstaCreateDesktop | WinstaWriteAttributes |
-                           WinstaAccessGlobatoms | WinstaExitWindows | WinstaEnumerate | WinstaReadScreen),
+        WinstaAllAccess = (WinstaEnumDesktops |
+                           WinstaReadAttributes |
+                           WinstaAccessClipboard |
+                           WinstaCreateDesktop |
+                           WinstaWriteAttributes |
+                           WinstaAccessGlobatoms |
+                           WinstaExitWindows |
+                           WinstaEnumerate |
+                           WinstaReadScreen),
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

@@ -15,17 +15,17 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "NetworkMessageInternalFwd.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <set>
 
-NETWORK_EXPORT_SHARED_PTR(MessageTypeConditionImpl);
+NETWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(MessageTypeConditionImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE MessageTypeCondition final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(MessageTypeCondition);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(MessageTypeCondition);
         using VersionType = std::set<int>;
 
     public:
@@ -44,7 +44,7 @@ namespace Network
         [[nodiscard]] bool operator<(const MessageTypeCondition& rhs) const;
 
     private:
-        IMPL_TYPE_DECLARE(MessageTypeCondition);
+        PackageType impl;
     };
 }
 

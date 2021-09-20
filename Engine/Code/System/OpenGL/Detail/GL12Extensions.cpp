@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 16:27)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/08 19:41)
 
 #include "System/SystemExport.h"
 
@@ -15,49 +15,28 @@
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLUtility.h"
-#include "System/OpenGL/Using/GL12ExtensionsUsing.h"
 
 // OpenGL 1.2
 namespace System
 {
-    auto g_ExistsOpenGL12 = ExistsOpenGLExtensions::Unknown;
+    auto existsOpenGL12 = ExistsOpenGLExtensions::Unknown;
+
+    PFNGLDRAWRANGEELEMENTSPROC glDrawRangeElements{ nullptr };
+    PFNGLTEXIMAGE3DPROC glTexImage3D{ nullptr };
+    PFNGLTEXSUBIMAGE3DPROC glTexSubImage3D{ nullptr };
+    PFNGLCOPYTEXSUBIMAGE3DPROC glCopyTexSubImage3D{ nullptr };
 }
 
 System::ExistsOpenGLExtensions System::IsExistsOpenGL12() noexcept
 {
-    return g_ExistsOpenGL12;
+    return existsOpenGL12;
 }
 
-System::PgglCopyTexSubImage3D System::gglCopyTexSubImage3D{ nullptr };
-System::PgglDrawRangeElements System::gglDrawRangeElements{ nullptr };
-System::PgglTexImage3D System::gglTexImage3D{ nullptr };
-System::PgglTexSubImage3D System::gglTexSubImage3D{ nullptr };
-
-void System::GlDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const GLvoid* indices) noexcept
-{
-    SYSTEM_BODY_6(gglDrawRangeElements, mode, start, end, count, type, indices);
-}
-
-void System::GlTexImage3D(GLenum target, GLint level, GLint internalFormat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const GLvoid* data) noexcept
-{
-    SYSTEM_BODY_10(gglTexImage3D, target, level, internalFormat, width, height, depth, border, format, type, data);
-}
-
-void System::GlTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const GLvoid* data) noexcept
-{
-    SYSTEM_BODY_11(gglTexSubImage3D, target, level, xOffset, yOffset, zOffset, width, height, depth, format, type, data);
-}
-
-void System::GlCopyTexSubImage3D(GLenum target, GLint level, GLint xOffset, GLint yOffset, GLint zOffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
-{
-    SYSTEM_BODY_9(gglCopyTexSubImage3D, target, level, xOffset, yOffset, zOffset, x, y, width, height);
-}
-
-void System::InitOpenGL12()
+void System::InitOpenGL12() noexcept
 {
     if (System::OpenGLSystemVersion::Version12 <= GetOpenGLVersion())
     {
-        g_ExistsOpenGL12 = ExistsOpenGLExtensions::Exists;
+        existsOpenGL12 = ExistsOpenGLExtensions::Exists;
 
         // GL_ARB_imaging
         // GL_EXT_blend_color
@@ -69,17 +48,37 @@ void System::InitOpenGL12()
         // GL_SGI_color_table
 
         // GL_EXT_copy_texture
-        SYSTEM_GET_FUNCTION(gglCopyTexSubImage3D);
+        SYSTEM_GET_FUNCTION(glCopyTexSubImage3D);
 
         // GL_EXT_draw_range_elements
-        SYSTEM_GET_FUNCTION(gglDrawRangeElements);
+        SYSTEM_GET_FUNCTION(glDrawRangeElements);
 
         // GL_EXT_texture3D
-        SYSTEM_GET_FUNCTION(gglTexImage3D);
-        SYSTEM_GET_FUNCTION(gglTexSubImage3D);
+        SYSTEM_GET_FUNCTION(glTexImage3D);
+        SYSTEM_GET_FUNCTION(glTexSubImage3D);
     }
     else
     {
-        g_ExistsOpenGL12 = ExistsOpenGLExtensions::NotExist;
+        existsOpenGL12 = ExistsOpenGLExtensions::NotExist;
     }
+}
+
+void System::GLDrawRangeElements(GLenum mode, GLuint start, GLuint end, GLsizei count, GLenum type, const void* indices) noexcept
+{
+    SYSTEM_BODY_6(glDrawRangeElements, mode, start, end, count, type, indices);
+}
+
+void System::GLTexImage3D(GLenum target, GLint level, GLint internalformat, GLsizei width, GLsizei height, GLsizei depth, GLint border, GLenum format, GLenum type, const void* pixels) noexcept
+{
+    SYSTEM_BODY_10(glTexImage3D, target, level, internalformat, width, height, depth, border, format, type, pixels);
+}
+
+void System::GLTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLenum type, const void* pixels) noexcept
+{
+    SYSTEM_BODY_11(glTexSubImage3D, target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
+}
+
+void System::GLCopyTexSubImage3D(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLint x, GLint y, GLsizei width, GLsizei height) noexcept
+{
+    SYSTEM_BODY_9(glCopyTexSubImage3D, target, level, xoffset, yoffset, zoffset, x, y, width, height);
 }

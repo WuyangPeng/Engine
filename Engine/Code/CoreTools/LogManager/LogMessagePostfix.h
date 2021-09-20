@@ -17,17 +17,17 @@
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogMessagePostfixImpl);
+CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(LogMessagePostfixImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE LogMessagePostfix final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(LogMessagePostfix);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(LogMessagePostfix);
         using String = System::String;
 
     public:
@@ -39,7 +39,7 @@ namespace CoreTools
         [[nodiscard]] int GetPostfixSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(LogMessagePrefix);
+        PackageType impl;
     };
 }
 

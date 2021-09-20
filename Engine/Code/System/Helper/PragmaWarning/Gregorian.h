@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 19:37)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/10 14:26)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_GREGORIAN_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_GREGORIAN_H
@@ -41,6 +41,7 @@
 #include SYSTEM_WARNING_DISABLE(26496)
 #include SYSTEM_WARNING_DISABLE(26812)
 #include SYSTEM_WARNING_DISABLE(26814)
+#include SYSTEM_WARNING_DISABLE(28301)
 
 #include <boost/date_time/gregorian/gregorian_io.hpp>
 

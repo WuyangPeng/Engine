@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:09)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 17:52)
 
 #ifndef SYSTEM_HELPER_SUNPRO_CC_H
 #define SYSTEM_HELPER_SUNPRO_CC_H
@@ -18,9 +18,9 @@
         #error "编译器未配置"
     #endif  // __SUNPRO_CC < 0x400
 
-    #if (0x590 < __SUNPRO_CC)
+    #if (0x5150 < __SUNPRO_CC)
         #error "未知的编译器"
-    #endif  // (0x590 < __SUNPRO_CC)
+    #endif  // (0x5150 < __SUNPRO_CC)
 
     #ifndef SYSTEM_CPP_STANDARD
         #define SYSTEM_CPP_STANDARD 3

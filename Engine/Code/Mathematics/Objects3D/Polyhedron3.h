@@ -36,7 +36,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Polyhedron3Impl = Polyhedron3Impl<Real>;
-        COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(Polyhedron3, DESTRUCTOR_DEFAULT);
+
+    protected:
+        virtual void Swap(Polyhedron3& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Polyhedron3);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        virtual ~Polyhedron3() noexcept = default;
+        Polyhedron3(const Polyhedron3& rhs);
+        virtual Polyhedron3& operator=(const Polyhedron3& rhs);
+        Polyhedron3(Polyhedron3&& rhs) noexcept;
+        virtual Polyhedron3& operator=(Polyhedron3&& rhs) noexcept;
 
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
@@ -74,7 +85,10 @@ namespace Mathematics
         [[nodiscard]] Real ComputeVolume() const;
 
     private:
-        IMPL_TYPE_DECLARE(Polyhedron3);
+        using Polyhedron3ImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        Polyhedron3ImplPtr impl;
     };
 
     using FloatPolyhedron3 = Polyhedron3<float>;

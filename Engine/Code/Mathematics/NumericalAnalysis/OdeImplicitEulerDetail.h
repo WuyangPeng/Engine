@@ -10,9 +10,12 @@
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_DETAIL_H
 
-#include "LinearSystem.h"
+#include "LinearSystemDetail.h"
 #include "OdeImplicitEuler.h"
-#include "OdeSolverDetail.h" 
+#include "OdeSolverDetail.h"
+
+#include "Mathematics/Algebra/VariableLengthVectorDetail.h"
+#include "Mathematics/Algebra/VariableMatrixDetail.h"
 
 template <typename Real, typename UserDataType>
 Mathematics::OdeImplicitEuler<Real, UserDataType>::OdeImplicitEuler(int dimension, Real step, Function function, DerivativeFunction derivativeFunction, const UserDataType* userData)

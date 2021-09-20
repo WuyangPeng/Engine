@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/19 16:44)
+//	引擎版本：0.7.1.1 (2020/10/19 16:44)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MD5_H
 #define CORE_TOOLS_MEMORY_TOOLS_MD5_H
@@ -15,20 +15,22 @@
 #include "MD5Context.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
-
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE MD5 final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE MD5 final
     {
     public:
         using ClassType = MD5;
 
     public:
         explicit MD5(DisableNotThrow disableNotThrow);
+        ~MD5() noexcept = default;
+        MD5(const MD5& rhs) noexcept = delete;
+        MD5& operator=(const MD5& rhs) noexcept = delete;
+        MD5(MD5&& rhs) noexcept = delete;
+        MD5& operator=(MD5&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 

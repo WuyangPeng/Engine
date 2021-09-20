@@ -19,6 +19,7 @@
 
 namespace Database
 {
+    class TableFactory;
     class DATABASE_HIDDEN_DECLARE TableImpl
     {
     public:
@@ -26,7 +27,7 @@ namespace Database
         using ImplTypePtr = std::shared_ptr<ClassType>;
         using ResultPtr = std::shared_ptr<Result>;
         using BindStatementType = std::map<std::string, std::string>;
-
+        using FactoryType = TableFactory;
     public:
         explicit TableImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
         virtual ~TableImpl() noexcept = default;

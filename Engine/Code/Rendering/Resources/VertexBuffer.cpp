@@ -73,7 +73,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::ReadFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::ReadHeadFromFile(inFile);
 	ParentType::ReadBufferDataFromFile(inFile, vertexformat);
@@ -82,7 +82,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::ClearModelNormals(const VertexBufferAccessor& vertexBufferAccessor)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(),"VertexBufferAccessor关联的VertexBuffer不是this！");	
 	 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -105,7 +105,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::NormalizeModelNormals(const VertexBufferAccessor& vertexBufferAccessor) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(),"VertexBufferAccessor关联的VertexBuffer不是this！");	
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -132,7 +132,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::AddTriangleNormal(const VertexBufferAccessor& vertexBufferAccessor, int index, const AVector& normal) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");	
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -159,7 +159,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetTriangleTangent(const VertexBufferAccessor& vertexBufferAccessor, int index, const AVector& tangent) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -183,7 +183,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetTriangleBinormal(const VertexBufferAccessor& vertexBufferAccessor, int index, const AVector& binormal) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -206,7 +206,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::ClearTangent(const VertexBufferAccessor& vertexBufferAccessor) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -230,7 +230,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::ClearBinormal(const VertexBufferAccessor& vertexBufferAccessor) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -254,7 +254,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetTextureCoordStandard(const VertexBufferAccessor& vertexBufferAccessor) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -290,7 +290,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetPosition(const VertexBufferAccessor& vertexBufferAccessor, int index, const APoint& position) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -313,7 +313,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetTextureCoord(const VertexBufferAccessor& vertexBufferAccessor,int index, const Vector2D& textureCoord,int unit) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();
@@ -334,7 +334,7 @@ void Rendering::VertexBuffer
 void Rendering::VertexBuffer
 	::SetTriangleNormal(const VertexBufferAccessor& vertexBufferAccessor,int index, const AVector& normal) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_1(vertexBufferAccessor.GetData() == GetReadOnlyData(), "VertexBufferAccessor关联的VertexBuffer不是this！");	
 
 	const auto numVertices = vertexBufferAccessor.GetNumVertices();

@@ -11,15 +11,15 @@
 
 #include "MiddleLayerInterface.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(ModelViewControllerMiddleLayerImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+FRAMEWORK_NON_COPY_EXPORT_IMPL(ModelViewControllerMiddleLayerImpl);
 
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE ModelViewControllerMiddleLayer : public MiddleLayerInterface
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ModelViewControllerMiddleLayer);
+        NON_COPY_TYPE_DECLARE(ModelViewControllerMiddleLayer);
         using ParentType = MiddleLayerInterface;
         using MiddleLayerSharedPtr = MiddleLayerInterfaceSharedPtr;
         using ConstMiddleLayerSharedPtr = ConstMiddleLayerInterfaceSharedPtr;
@@ -48,7 +48,7 @@ namespace Framework
         const ConstMiddleLayerSharedPtr GetConstControllerMiddleLayer() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(ModelViewControllerMiddleLayer);
+        PackageType impl;
     };
 
     using ModelViewControllerMiddleLayerSharedPtr = std::shared_ptr<ModelViewControllerMiddleLayer>;

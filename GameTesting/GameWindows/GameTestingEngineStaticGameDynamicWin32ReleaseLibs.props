@@ -7,8 +7,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32ReleaseLib);$(EngineStaticWin32ReleaseLib);$(GameEngineStaticGameDynamicWin32ReleaseLib);$(GameTestingEngineStaticGameDynamicWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>   
+      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32ReleaseLib);$(EngineStaticWin32ReleaseLib);$(GameEngineStaticGameDynamicWin32ReleaseLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>

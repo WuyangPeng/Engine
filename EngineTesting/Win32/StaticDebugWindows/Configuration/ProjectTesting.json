@@ -1,0 +1,54 @@
+{
+  "SystemTesting": 1,
+  "SystemAndroidTesting": 1,
+  "SystemOpenGLTesting": 1,
+  "SystemWindowsTesting": 1,
+
+  "CoreToolsTesting": 1,
+
+  "NetworkTesting": 1,
+
+  "DatabaseTesting": 1,
+
+  "MathematicsTesting": 1,
+
+  "SoundEffectTesting": 1,
+
+  "InputOutputTesting": 1,
+
+  "ResourceManagerTesting": 1,
+
+  "RenderingTesting": 1,
+  "RenderingOpenGLTesting": 1,
+
+  "PhysicsTesting": 1,
+
+  "ImagicsTesting": 1,
+
+  "AnimationTesting": 1,
+
+  "ArtificialIntellegenceTesting": 1,
+
+  "UserInterfaceTesting": 1,
+
+  "AssistToolsTesting": 1,
+
+  "AndroidCallBackUnitTestSuiteTesting": 1,
+  "AndroidFrameBuildTesting": 1, 
+  "AndroidMessageLoopTesting": 1,
+  "CameraModelViewControllerTesting": 1, 
+  "DefaultEngineMiddleLayerTesting": 1,
+  "EngineMiddleLayerTesting": 1,
+  "FrameworkAndroidTesting": 1,
+  "FrameworkOpenGLGlutTesting": 1,
+  "FrameworkTesting": 1,
+  "FrameworkWindowTesting": 1, 
+  "ModelViewControllerTesting": 1,
+  "OpenGLGlutCallBackUnitTestSuiteTesting": 1,
+  "OpenGLGlutFrameBuildTesting": 1, 
+  "PixelModelViewControllerTesting": 1, 
+  "WindowMessageUnitTestSuiteTesting": 1,
+  "WindowsAPIFrameTesting": 1,
+
+  "ThreadingCoreRenderEngineTesting": 1
+}

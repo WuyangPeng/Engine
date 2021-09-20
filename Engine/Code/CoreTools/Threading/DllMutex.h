@@ -14,8 +14,8 @@
 
 #include "Flags/MutexFlags.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(MutexImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(MutexImpl);
 
 namespace CoreTools
 {
@@ -23,7 +23,7 @@ namespace CoreTools
     {
     public:
         using DllMutexImpl = MutexImpl;
-        NON_COPY_CLASSES_TYPE_DECLARE(DllMutex);
+        NON_COPY_TYPE_DECLARE(DllMutex);
 
     public:
         // 参数UseCriticalSection只对Windows平台有效，非Windows平台会自动转换成UseDefault。
@@ -44,7 +44,7 @@ namespace CoreTools
         virtual void Delete() noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(DllMutex);
+        PackageType impl;
     };
 }
 

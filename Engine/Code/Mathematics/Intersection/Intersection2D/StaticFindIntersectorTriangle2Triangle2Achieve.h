@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(triangle0, triangle1) }
+    : ParentType{ epsilon }, impl{  triangle0, triangle1  }
 {
     Find();
 
@@ -27,7 +27,7 @@ Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::StaticFindIntersecto
 template <typename Real>
 bool Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -39,7 +39,7 @@ const Mathematics::Triangle2<Real> Mathematics::StaticFindIntersectorTriangle2Tr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle0();
+    return impl->GetTriangle0();
 }
 
 template <typename Real>
@@ -47,7 +47,7 @@ const Mathematics::Triangle2<Real> Mathematics::StaticFindIntersectorTriangle2Tr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle1();
+    return impl->GetTriangle1();
 }
 
 template <typename Real>
@@ -55,7 +55,7 @@ int Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::GetQuantity() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -63,14 +63,14 @@ const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorTriangle2Tri
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
 {
-    auto triangle0 = m_Impl->GetTriangle0();
-    auto triangle1 = m_Impl->GetTriangle1();
+    auto triangle0 = impl->GetTriangle0();
+    auto triangle1 = impl->GetTriangle1();
 
     // 电位交点被初始化为triangle1。 顶点集基于对三角形0的每个边进行修剪而得到优化。
     auto vertex0 = triangle0.GetVertex();
@@ -95,7 +95,7 @@ void Mathematics::StaticFindIntersectorTriangle2Triangle2<Real>::Find()
     }
 
     this->SetIntersectionType(IntersectionType::Point);
-    m_Impl->SetPoint(intersection);
+    impl->SetPoint(intersection);
 }
 
 template <typename Real>

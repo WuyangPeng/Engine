@@ -5,13 +5,14 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:23)
+//	引擎版本：0.7.1.1 (2020/10/23 15:23)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H
 
 #include "CoreTools/CoreToolsDll.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26432)
 namespace CoreTools
 {
     template <typename T, int64_t V>
@@ -21,14 +22,14 @@ namespace CoreTools
         using ClassType = LiteralCast<T, V>;
 
     private:
-        static void Constranints();
+        static void Constranints() noexcept;
 
     public:
         ~LiteralCast();
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator T() const;
+        [[nodiscard]] operator T() const noexcept;
     };
 
     template <int64_t V>
@@ -57,5 +58,5 @@ namespace CoreTools
         [[nodiscard]] operator int64_t() const;
     };
 }
-
+#include STSTEM_WARNING_POP
 #endif  //  CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H

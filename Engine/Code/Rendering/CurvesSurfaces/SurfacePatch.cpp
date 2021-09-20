@@ -24,31 +24,71 @@ using std::make_shared;
 CORE_TOOLS_RTTI_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, SurfacePatch);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, SurfacePatch); 
-CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(Rendering, SurfacePatch);
-
+Rendering::SurfacePatch::SurfacePatch(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, SurfacePatch)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, SurfacePatch)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, SurfacePatch)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, SurfacePatch)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, SurfacePatch)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, SurfacePatch)
+#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(namespaceName, className)      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(rhs);                                                         \
+        impl = std::make_shared<ImplType>(*rhs.impl);                                       \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, SurfacePatch);
 
 Rendering::SurfacePatch
 	::SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular)
-	:ParentType{ "SurfacePatch" }, m_Impl{ make_shared<ImplType>(uMin,uMax,vMin,vMax,rectangular) }
+	:ParentType{ "SurfacePatch" }, impl{ make_shared<ImplType>(uMin,uMax,vMin,vMax,rectangular) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
  
 
 #ifdef OPEN_CLASS_INVARIANT
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, SurfacePatch)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, SurfacePatch)
 
 bool Rendering::SurfacePatch
 	::IsParameterValid( float u, float v ) const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	if(m_Impl->GetUMin() <= u && u <= m_Impl->GetUMax() && m_Impl->GetVMin() <= v && v <= m_Impl->GetVMax())
+	if(impl->GetUMin() <= u && u <= impl->GetUMax() && impl->GetVMin() <= v && v <= impl->GetVMax())
 	{
-		if(!m_Impl->IsRectangular())
+		if(!impl->IsRectangular())
 		{
-			if((m_Impl->GetVMax() - m_Impl->GetVMin()) * (u - m_Impl->GetUMin()) + (m_Impl->GetUMax() - m_Impl->GetUMin()) * (v - m_Impl->GetVMax()) <= 0)
+			if((impl->GetVMax() - impl->GetVMin()) * (u - impl->GetUMin()) + (impl->GetUMax() - impl->GetUMin()) * (v - impl->GetVMax()) <= 0)
 			{
 			   return true;
 			}

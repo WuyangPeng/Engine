@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:56)
+//	引擎版本：0.7.1.1 (2020/10/23 15:56)
 
 // 命令行信息。
 #ifndef CORE_TOOLS_COMMAND_COMMAND_LINE_INFORMATION_H
@@ -13,18 +13,19 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CommandLineInformationImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(CommandLineInformation, CommandLineInformationImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE CommandLineInformation final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommandLineInformation);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(CommandLineInformation);
 
     public:
         CommandLineInformation(int argumentsNumber, char** arguments);
@@ -49,7 +50,7 @@ namespace CoreTools
         void SetFileNmaeUsed();
 
     private:
-        IMPL_TYPE_DECLARE(CommandLineInformation);
+        PackageType impl;
     };
 }
 

@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Vector2D.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <iosfwd>
 #include <type_traits>
 #include <vector>
@@ -23,11 +23,11 @@ namespace Mathematics
     template <typename Real>
     class Box2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Box2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Box2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Box2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Box2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Box2 final
@@ -36,8 +36,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Box2Impl = Box2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Box2);
-
+         
+        TYPE_DECLARE(Box2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ClassType = Box2<Real>;
         using Math = Math<Real>;
         using Vector2D = Vector2D<Real>;
@@ -64,7 +66,7 @@ namespace Mathematics
         [[nodiscard]] const Box2 GetMove(Real t, const Vector2D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Box2);
+        PackageType impl;
     };
 
     using FloatBox2 = Box2<float>;

@@ -5,13 +5,13 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 14:54)
+//	引擎版本：0.7.1.1 (2020/10/23 14:54)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "UnitTestComposite.h"
-
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -72,23 +72,7 @@ void CoreTools::UnitTestComposite::SetRandomSeed(int randomSeed) noexcept
 
 int CoreTools::UnitTestComposite::GetEngineeringOffsetValue() const noexcept
 {
-    int offsetValue{ 0 };
-
-    ++offsetValue;
-
-#ifdef _DEBUG
-    offsetValue += 4;
-#endif  // _DEBUG
-
-#ifdef BUILDING_CORE_TOOLS_STATIC
-    offsetValue += 2;
-#endif  // BUILDING_CORE_TOOLS_STATIC
-
-#ifdef _WIN64
-    offsetValue += 1;
-#endif  // _WIN64
-
-    return offsetValue;
+    return System::GetEngineeringOffsetValue();
 }
 
 int CoreTools::UnitTestComposite::GetRandomSeed() const noexcept
@@ -99,4 +83,21 @@ int CoreTools::UnitTestComposite::GetRandomSeed() const noexcept
 uint32_t CoreTools::UnitTestComposite::GetEngineRandomSeed() const
 {
     return boost::numeric_cast<uint32_t>(GetRandomSeed());
+}
+
+System::DynamicLinkString CoreTools::UnitTestComposite::GetEngineeringDynamicLinkSuffix() const
+{
+    System::DynamicLinkString result{};
+
+    result += DYNAMIC_LINK_TEXT("");
+
+#ifdef BUILDING_CORE_TOOLS_STATIC
+    result += DYNAMIC_LINK_TEXT("Static");
+#endif  // BUILDING_CORE_TOOLS_STATIC
+
+#ifdef _DEBUG
+    result += DYNAMIC_LINK_TEXT("D");
+#endif  // _DEBUG
+
+    return result;
 }

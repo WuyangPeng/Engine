@@ -11,7 +11,7 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "Framework/WindowProcess/WindowMessageInterface.h"
 
 #include <map>
@@ -25,18 +25,20 @@ namespace Framework
 	public:
 		using ClassType = WindowProcessManagerImpl;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
-		using UInt = System::WindowUInt;
-		using WParam = System::WindowWParam;
-		using LParam = System::WindowLParam;
-		using LResult = System::WindowLResult;
-		using WindowProcess = System::WindowProcess;
-		using WindowMessages = System::WindowMessages;
+		using HWnd = System::WindowsHWnd;
+		using UInt = System::WindowsUInt;
+		using WParam = System::WindowsWParam;
+		using LParam = System::WindowsLParam;
+		using LResult = System::WindowsLResult;
+		using WindowProcess = System::WindowsProcess;
+		using WindowMessages = System::WindowsMessages;
 		using DisplayFunction = System::DisplayFunction;
 		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
 
 	public:
 		CLASS_INVARIANT_DECLARE;
+
+		WindowProcessManagerImpl(MAYBE_UNUSED int count) noexcept;
 
 	public:
 		static WindowProcess GetProcess() noexcept;

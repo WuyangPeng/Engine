@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 18:36)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/10 14:28)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_PROPERTY_TREE_H
@@ -21,13 +21,18 @@
 #include SYSTEM_WARNING_DISABLE(26432)
 #include SYSTEM_WARNING_DISABLE(26433)
 #include SYSTEM_WARNING_DISABLE(26434)
+#include SYSTEM_WARNING_DISABLE(26435)
 #include SYSTEM_WARNING_DISABLE(26436)
+#include SYSTEM_WARNING_DISABLE(26438)
 #include SYSTEM_WARNING_DISABLE(26440)
 #include SYSTEM_WARNING_DISABLE(26444)
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26447)
+#include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26457)
+#include SYSTEM_WARNING_DISABLE(26461)
 #include SYSTEM_WARNING_DISABLE(26462)
 #include SYSTEM_WARNING_DISABLE(26471)
 #include SYSTEM_WARNING_DISABLE(26472)
@@ -52,8 +57,12 @@
 #include SYSTEM_WARNING_DISABLE(26814)
 #include SYSTEM_WARNING_DISABLE(26819)
 
-#include <boost/property_tree/ptree.hpp>
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
+
+#undef BOOST_BIND_GLOBAL_PLACEHOLDERS
 
 #include STSTEM_WARNING_POP
 

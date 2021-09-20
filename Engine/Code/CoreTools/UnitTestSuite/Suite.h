@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 13:17)
+//	引擎版本：0.7.1.1 (2020/10/23 13:17)
 
 // 单元测试套件类。Suite为外部接口类，可增加或删除单元测试，并获取测试的结果。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_H
@@ -18,9 +18,9 @@
 
 #include <iostream>
 #include <string>
-
-CORE_TOOLS_EXPORT_SHARED_PTR(UnitTestComposite);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+#include "../Contract/ImplStaticAssertHelper.h"
+EXPORT_SHARED_PTR(CoreTools, UnitTestComposite, CORE_TOOLS_DEFAULT_DECLARE);
+ 
 
 namespace CoreTools
 {
@@ -59,7 +59,7 @@ namespace CoreTools
         using SuiteImplSharedPtr = std::shared_ptr<UnitTestComposite>;
 
     private:
-        SuiteImplSharedPtr m_Impl;
+        SuiteImplSharedPtr impl;
     };
 }
 

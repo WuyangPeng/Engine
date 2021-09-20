@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{9dcc6ac8-6bfb-4892-950a-49c92f07a4f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BinaryOperationsSuite 头文件">
+      <UniqueIdentifier>{51caa809-c89e-41a0-8aed-b0bbadc7c5c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExtractionSuite 头文件">
+      <UniqueIdentifier>{d510adf0-f6e5-4420-bd45-7c5261c00748}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FiltersSuite 头文件">
+      <UniqueIdentifier>{a98d265d-8812-478b-b883-237b32875740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImagesSuite 头文件">
+      <UniqueIdentifier>{b86e65cc-dec8-43bb-94b5-d9675990e135}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{b5eb8403-9c33-4611-8bf4-bc17e70c4004}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SegmentersSuite 头文件">
+      <UniqueIdentifier>{d33a216b-8e31-41ac-9e1a-87409c71d604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RasterDrawingSuite 头文件">
+      <UniqueIdentifier>{805ec184-b1f1-445e-8a49-ae12bb954a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenCVSuite 头文件">
+      <UniqueIdentifier>{17648bee-d24e-44bf-b591-97604bd1ce13}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ImagicsTesting.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\BinaryOperationsSuite\BinaryOperationsSuite.h">
+      <Filter>BinaryOperationsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\ExtractionSuite\ExtractionSuite.h">
+      <Filter>ExtractionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\FiltersSuite\FiltersSuite.h">
+      <Filter>FiltersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\ImagesSuite\ImagesSuite.h">
+      <Filter>ImagesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\OpenCVSuite\OpenCVSuite.h">
+      <Filter>OpenCVSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\RasterDrawingSuite\RasterDrawingSuite.h">
+      <Filter>RasterDrawingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Imagics\ImagicsTesting\SegmentersSuite\SegmentersSuite.h">
+      <Filter>SegmentersSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Imagics\ImagicsTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\ImagicsTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Imagics\ImagicsTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

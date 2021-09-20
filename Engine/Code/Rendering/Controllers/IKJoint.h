@@ -12,14 +12,24 @@
 #include "IKGoal.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
-RENDERING_EXPORT_SHARED_PTR(IKJointImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, IKJointImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE IKJoint : public CoreTools::Object 
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKJoint, = default);
+
+            void Swap(IKJoint& rhs) noexcept;
+            
+                public:
+                    TYPE_DECLARE(IKJoint);
+                    using ClassShareType = CoreTools::CopyUnsharedClasses;
+                    ~IKJoint() noexcept= default;
+                    IKJoint(const IKJoint& rhs);
+                    IKJoint& operator=(const IKJoint& rhs);
+                    IKJoint(IKJoint&& rhs) noexcept;
+                    IKJoint& operator=(IKJoint&& rhs) noexcept;
 		using ParentType = Object;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
@@ -53,7 +63,7 @@ namespace Rendering
 		bool IsAllowRotation(MatrixRotationAxis axisIndex) const;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(IKJoint);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 
 #include STSTEM_WARNING_PUSH

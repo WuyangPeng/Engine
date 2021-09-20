@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 9:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/24 14:54)
 
 #ifndef SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
 #define SYSTEM_DYNAMIC_LINK_ENUM_RESOURCE_DATA_H
@@ -25,30 +25,30 @@ namespace System
 
     public:
         // const DynamicLinkCharType*存的是使用宏MAKEINTRESOURCE强转的指针，不能解引用和打印。
-        constexpr EnumResourceData(const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowWord language) noexcept
-            : m_Type{ type }, m_Name{ name }, m_Language{ language }
+        constexpr EnumResourceData(const DynamicLinkCharType* type, const DynamicLinkCharType* name, WindowsWord language) noexcept
+            : resourceType{ type }, name{ name }, language{ language }
         {
         }
 
-        [[nodiscard]] constexpr const DynamicLinkCharType* GetType() const noexcept
+        NODISCARD constexpr const DynamicLinkCharType* GetType() const noexcept
         {
-            return m_Type;
+            return resourceType;
         }
 
-        [[nodiscard]] constexpr const DynamicLinkCharType* GetName() const noexcept
+        NODISCARD constexpr const DynamicLinkCharType* GetName() const noexcept
         {
-            return m_Name;
+            return name;
         }
 
-        [[nodiscard]] constexpr const LanguageIDData GetLanguage() const noexcept
+        NODISCARD constexpr const LanguageIDData GetLanguage() const noexcept
         {
-            return LanguageIDData{ UnderlyingCastEnum<PrimaryLanguage>(GetPrimaryLanguageID(m_Language)), UnderlyingCastEnum<SubLanguage>(GetSubLanguageID(m_Language)) };
+            return LanguageIDData{ UnderlyingCastEnum<PrimaryLanguage>(GetPrimaryLanguageID(language)), UnderlyingCastEnum<SubLanguage>(GetSubLanguageID(language)) };
         }
 
     private:
-        const DynamicLinkCharType* m_Type;
-        const DynamicLinkCharType* m_Name;
-        WindowWord m_Language;
+        const DynamicLinkCharType* resourceType;
+        const DynamicLinkCharType* name;
+        WindowsWord language;
     };
 }
 

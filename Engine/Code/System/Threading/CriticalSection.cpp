@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 15:55)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/25 19:33)
 
 #include "System/SystemExport.h"
 
@@ -21,9 +21,9 @@
 #include "Flags/CriticalSectionFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/Flags/ExceptionFlags.h"
+#include "System/Windows/Flags/ExceptionFlags.h"
 
-bool System::InitializeSystemCriticalSection([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection, [[maybe_unused]] WindowDWord spinCount, [[maybe_unused]] CriticalSectionInfo flags) noexcept
+bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection, WindowsDWord spinCount, CriticalSectionInfo flags) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -40,7 +40,7 @@ bool System::InitializeSystemCriticalSection([[maybe_unused]] ThreadingCriticalS
     __except (EnumCastUnderlying(Exception::ExecuteHandler))
     {
         succeed = g_False;
-    } 
+    }
 
     return succeed == g_True;
 
@@ -53,20 +53,30 @@ bool System::InitializeSystemCriticalSection([[maybe_unused]] ThreadingCriticalS
 
     #endif  // (_WIN32_WINNT < 0x0600)
 
-#else  // !SYSTEM_PLATFORM_WIN32  
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord, CriticalSectionInfo>(criticalSection, spinCount, flags);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::InitializeSystemCriticalSectionAndSpinCount([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection, [[maybe_unused]] WindowDWord spinCount) noexcept
+bool System::InitializeSystemCriticalSectionAndSpinCount(ThreadingCriticalSectionPtr criticalSection, WindowsDWord spinCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::InitializeCriticalSectionAndSpinCount(criticalSection, spinCount) != g_False)
         return true;
     else
         return false;
-#else  // !SYSTEM_PLATFORM_WIN32 
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord>(criticalSection, spinCount);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
@@ -80,50 +90,74 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 #endif  // SYSTEM_SPIN_COUNT_CRITICAL_SECTION
 }
 
-void System::DeleteSystemCriticalSection([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection) noexcept
+void System::DeleteSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     ::DeleteCriticalSection(criticalSection);
+
 #else  // !SYSTEM_PLATFORM_WIN32
-    
+
+    NullFunction<ThreadingCriticalSectionPtr>(criticalSection);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::EnterSystemCriticalSection([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection) noexcept
+void System::EnterSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     ::EnterCriticalSection(criticalSection);
+
 #else  // !SYSTEM_PLATFORM_WIN32
-     
+
+    criticalSection->lock();
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::LeaveSystemCriticalSection([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection) noexcept
+void System::LeaveSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     ::LeaveCriticalSection(criticalSection);
+
 #else  // !SYSTEM_PLATFORM_WIN32
-     
+
+    criticalSection->unlock();
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::TryEnterSystemCriticalSection([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection) noexcept
+bool System::TryEnterSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::TryEnterCriticalSection(criticalSection) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    criticalSection->try_lock();
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowDWord System::SetSystemCriticalSectionSpinCount([[maybe_unused]] ThreadingCriticalSectionPtr criticalSection, [[maybe_unused]] WindowDWord spinCount) noexcept
+System::WindowsDWord System::SetSystemCriticalSectionSpinCount(ThreadingCriticalSectionPtr criticalSection, WindowsDWord spinCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::SetCriticalSectionSpinCount(criticalSection, spinCount);
-#else  // !SYSTEM_PLATFORM_WIN32 
+
+#else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord>(criticalSection, spinCount);
+
     return 0;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }

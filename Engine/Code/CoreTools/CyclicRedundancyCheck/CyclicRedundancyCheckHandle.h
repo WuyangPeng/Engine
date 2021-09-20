@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:52)
+//	引擎版本：0.7.1.1 (2020/10/26 13:52)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_H
@@ -15,17 +15,18 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include <boost/noncopyable.hpp>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(CyclicRedundancyCheckHandle);
-CORE_TOOLS_EXPORT_SHARED_PTR(CyclicRedundancyCheckHandleImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(CyclicRedundancyCheckHandleImpl); 
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE CyclicRedundancyCheckHandle final : public Singleton<CyclicRedundancyCheckHandle>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(CyclicRedundancyCheckHandle);
+        NON_COPY_TYPE_DECLARE(CyclicRedundancyCheckHandle);
         using ParentType = Singleton<CyclicRedundancyCheckHandle>;
 
     private:
@@ -53,7 +54,7 @@ namespace CoreTools
 
     private:
         static CyclicRedundancyCheckHandleUniquePtr sm_CyclicRedundancyCheckHandle;
-        IMPL_TYPE_DECLARE(CyclicRedundancyCheckHandle);
+        PackageType impl;
     };
 }
 

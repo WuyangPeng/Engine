@@ -5,33 +5,33 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 16:44)
+//	引擎版本：0.7.1.1 (2020/10/23 16:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CommandArgument.h"
 #include "Detail/CommandArgumentFactory.h"
-#include "Detail/CommandArgumentImpl.h"
+#include "Detail/CommandArgumentPackage.h"
+
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "../Contract/Flags/ImplFlags.h"
 
 using std::string;
-
-DELAY_COPY_CONSTRUCTION_CLONE_DEFINE(CoreTools, CommandArgument)
-
+COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, CommandArgument)
 CoreTools::CommandArgument::CommandArgument(int index, const string& arguments, const string& value)
-    : m_Impl{ CommandArgumentFactory::Create(index, arguments, value) }
+    : impl{ ImplCreateUseFactory::Default, index, arguments, value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::CommandArgument::CommandArgument(int index, const string& arguments)
-    : m_Impl{ CommandArgumentFactory::Create(index, arguments) }
+    : impl{ ImplCreateUseFactory::Default, index, arguments }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CommandArgument)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandArgument)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, GetIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, GetName, const string)
@@ -48,26 +48,22 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsNoVal
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CommandArgument, IsUsed, bool)
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, SetUsed, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CommandArgument, SetUsed, void)
 
 void CoreTools::CommandArgument::AddEndArgumentValue(const string& value)
 {
-    static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "Non-const copy member functions are forbidden");
-
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (m_Impl->IsNoValue())
+    if (impl.GetConstImpl()->IsNoValue())
     {
-        // 由于重设了m_Impl，不进行Copy调用。
-        const auto index = m_Impl->GetIndex();
-        auto arguments = m_Impl->GetName();
+        // 由于重设了impl，不进行Copy调用。
+        const auto index = impl.GetConstImpl()->GetIndex();
+        auto arguments = impl.GetConstImpl()->GetName();
 
-        m_Impl = CommandArgumentFactory::Create(index, arguments, value);
+        impl = PackageType{ ImplCreateUseFactory::Default, index, arguments, value };
     }
     else
     {
-        Copy();
-
-        m_Impl->AddArgumentValue(value);
+        impl->AddArgumentValue(value);
     }
 }

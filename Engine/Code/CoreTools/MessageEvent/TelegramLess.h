@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:32)
+//	引擎版本：0.7.1.1 (2020/10/26 15:32)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_H
@@ -24,7 +24,7 @@ namespace CoreTools
         using Telegram = Telegram<EventType>;
 
     public:
-        explicit TelegramLess(int64_t difference);
+        explicit TelegramLess(int64_t difference) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

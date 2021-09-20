@@ -11,41 +11,41 @@
 
 #include "MinHeapRecordIndex.h"
 #include "Detail/MinHeapRecordIndexImpl.h"
+
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 using std::make_shared;
 
-DELAY_COPY_CONSTRUCTION_DEFINE(CoreTools, MinHeapRecordIndex)
-
 CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int maxElements)
-    : m_Impl{ make_shared<ImplType>(maxElements) }
+    : impl{ maxElements }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int newMaxElements, const MinHeapRecordIndex& oldIndex)
-    : m_Impl{ make_shared<ImplType>(newMaxElements, *oldIndex.m_Impl) }
+    : impl{ newMaxElements, *oldIndex.impl }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MinHeapRecordIndex)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, MinHeapRecordIndex)
 
 #ifdef OPEN_CLASS_INVARIANT
 void CoreTools::MinHeapRecordIndex::PrintIndexInLog() const noexcept
 {
-    m_Impl->PrintIndexInLog();
+    impl->PrintIndexInLog();
 }
 #endif  // OPEN_CLASS_INVARIANT
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, MinHeapRecordIndex, GetMaxElements, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, MinHeapRecordIndex, GetHeapIndex, int, int)
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, MinHeapRecordIndex, GrowBy, int, void) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, MinHeapRecordIndex, GrowBy, int, void)
 
 void CoreTools::MinHeapRecordIndex::ChangeIndex(int lhsIndex, int rhsIndex)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Impl->ChangeIndex(lhsIndex, rhsIndex);
+    impl->ChangeIndex(lhsIndex, rhsIndex);
 }
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, MinHeapRecordIndex)

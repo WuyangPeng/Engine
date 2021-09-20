@@ -14,18 +14,18 @@ using std::string;
  
 AssistTools::GenerateTemplateEngineDirectory
 	::GenerateTemplateEngineDirectory(const System::String& directory, const string& configurationFileName)	 
-	:m_Impl(std::make_shared<ImplType>(directory, configurationFileName))
+	:impl(directory, configurationFileName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
  
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateEngineDirectory)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateEngineDirectory)
 
 void AssistTools::GenerateTemplateEngineDirectory
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newSolutionName, newCoreName, newIncludeName);
+	return impl->GenerateTo(resourceDirectory, newSolutionName, newCoreName, newIncludeName);
 }
  

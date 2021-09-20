@@ -33,7 +33,7 @@ namespace CoreTools
 
     public:
         LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager) noexcept;
-        LogAppenderIOManagerImpl() noexcept;
+        LogAppenderIOManagerImpl(MAYBE_UNUSED int count) noexcept;
         ~LogAppenderIOManagerImpl() noexcept;
 
         LogAppenderIOManagerImpl(const LogAppenderIOManagerImpl&) = delete;

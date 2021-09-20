@@ -119,10 +119,10 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::OpenGLAttribute::Float), // AttributeType::Float2
 	static_cast<GLenum>(System::OpenGLAttribute::Float), // AttributeType::Float3
 	static_cast<GLenum>(System::OpenGLAttribute::Float), // AttributeType::Float4
-	static_cast<GLenum>(System::OpenGLAttribute::HalfFloat), // AttributeType::Half1
-	static_cast<GLenum>(System::OpenGLAttribute::HalfFloat), // AttributeType::Half2
-	static_cast<GLenum>(System::OpenGLAttribute::HalfFloat), // AttributeType::Half3
-	static_cast<GLenum>(System::OpenGLAttribute::HalfFloat), // AttributeType::Half4
+	0, // AttributeType::Half1
+	0, // AttributeType::Half2
+	0, // AttributeType::Half3
+	0, // AttributeType::Half4
 	static_cast<GLenum>(System::OpenGLAttribute::UByte), // AttributeType::UByte4
 	static_cast<GLenum>(System::OpenGLAttribute::Short), // AttributeType::Short1
 	static_cast<GLenum>(System::OpenGLAttribute::Short), // AttributeType::Short2
@@ -166,13 +166,13 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::TextureInternalFormat::R5G6B5), //GL_RGB5, 
 	static_cast<GLenum>(System::TextureInternalFormat::A1R5G5B5), //GL_RGB5_A1,  
 	static_cast<GLenum>(System::TextureInternalFormat::A4R4G4B4), //GL_RGBA4,
-	static_cast<GLenum>(System::TextureInternalFormat::A8), //GL_ALPHA8,
-	static_cast<GLenum>(System::TextureInternalFormat::L8), //GL_LUMINANCE8,   
-	static_cast<GLenum>(System::TextureInternalFormat::A8L8), //GL_LUMINANCE8_ALPHA8, 
+	0, //GL_ALPHA8,
+	0, //GL_LUMINANCE8,   
+	0, //GL_LUMINANCE8_ALPHA8, 
 	static_cast<GLenum>(System::TextureInternalFormat::R8G8B8), //GL_RGB8,
 	static_cast<GLenum>(System::TextureInternalFormat::A8R8G8B8), //GL_RGBA8,
 	static_cast<GLenum>(System::TextureInternalFormat::A8R8G8B8), //GL_RGBA8,
-	static_cast<GLenum>(System::TextureInternalFormat::L16), //GL_LUMINANCE16, 
+	0, //GL_LUMINANCE16, 
 	static_cast<GLenum>(System::TextureInternalFormat::G16R16), //GL_RG16,            
 	static_cast<GLenum>(System::TextureInternalFormat::A16B16G16R16), //GL_RGBA16,            
 	static_cast<GLenum>(System::TextureInternalFormat::R16F), //GL_R16F,                     
@@ -181,10 +181,10 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::TextureInternalFormat::R32F), //GL_R32F,                       
 	static_cast<GLenum>(System::TextureInternalFormat::G32R32F), //GL_RG32F,                       
 	static_cast<GLenum>(System::TextureInternalFormat::A32B32G32R32F), //GL_RGBA32F_ARB,
-	static_cast<GLenum>(System::TextureInternalFormat::DXT1), //GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
-	static_cast<GLenum>(System::TextureInternalFormat::DXT3), //GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
-	static_cast<GLenum>(System::TextureInternalFormat::DXT5), //GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
-	static_cast<GLenum>(System::TextureInternalFormat::D24S8), //GL_DEPTH24_STENCIL8_EXT 
+	//static_cast<GLenum>(System::TextureInternalFormat::DXT1), //GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+	//static_cast<GLenum>(System::TextureInternalFormat::DXT3), //GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
+	//static_cast<GLenum>(System::TextureInternalFormat::DXT5), //GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
+	0, //GL_DEPTH24_STENCIL8_EXT 
 };
 
 Rendering::UInt Rendering
@@ -195,12 +195,12 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::TextureFormat::RGBA), // GL_RGBA
 	static_cast<GLenum>(System::TextureFormat::RGBA), // GL_RGBA
 	static_cast<GLenum>(System::TextureFormat::A), // GL_ALPHA,
-	static_cast<GLenum>(System::TextureFormat::L), // GL_LUMINANCE,
-	static_cast<GLenum>(System::TextureFormat::AL), // GL_LUMINANCE_ALPHA,
+	0, // GL_LUMINANCE,
+	0, // GL_LUMINANCE_ALPHA,
 	static_cast<GLenum>(System::TextureFormat::BGR), // GL_BGR,
 	static_cast<GLenum>(System::TextureFormat::BGRA), // GL_BGRA,
 	static_cast<GLenum>(System::TextureFormat::RGBA), // GL_RGBA
-	static_cast<GLenum>(System::TextureFormat::L), // GL_LUMINANCE,
+	0, // GL_LUMINANCE,
 	static_cast<GLenum>(System::TextureFormat::RG), // GL_RG,
 	static_cast<GLenum>(System::TextureFormat::RGBA), // GL_RGBA
 	static_cast<GLenum>(System::TextureFormat::RED), // GL_RED,
@@ -209,10 +209,10 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::TextureFormat::RED), // GL_RED,
 	static_cast<GLenum>(System::TextureFormat::RG), // GL_RG,
 	static_cast<GLenum>(System::TextureFormat::RGBA), // GL_RGBA
-	static_cast<GLenum>(System::TextureFormat::DXT1), // GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
-	static_cast<GLenum>(System::TextureFormat::DXT3), // GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
-	static_cast<GLenum>(System::TextureFormat::DXT5), // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
-	static_cast<GLenum>(System::TextureFormat::D24S8), // GL_DEPTH_STENCIL_EXT
+	//static_cast<GLenum>(System::TextureFormat::DXT1), // GL_COMPRESSED_RGBA_S3TC_DXT1_EXT,
+	//static_cast<GLenum>(System::TextureFormat::DXT3), // GL_COMPRESSED_RGBA_S3TC_DXT3_EXT,
+	//static_cast<GLenum>(System::TextureFormat::DXT5), // GL_COMPRESSED_RGBA_S3TC_DXT5_EXT,
+	0, // GL_DEPTH_STENCIL_EXT
 };
 
 Rendering::UInt Rendering
@@ -251,23 +251,23 @@ Rendering::UInt Rendering
 	static_cast<GLenum>(System::TextureType::UnsignedShort), // TextureFormat::L16
 	static_cast<GLenum>(System::TextureType::UnsignedShort), // TextureFormat::G16R16
 	static_cast<GLenum>(System::TextureType::UnsignedShort), // TextureFormat::A16B16G16R16
-	static_cast<GLenum>(System::TextureType::HalfFloat), // TextureFormat::R16F
-	static_cast<GLenum>(System::TextureType::HalfFloat), // TextureFormat::G16R16F
-	static_cast<GLenum>(System::TextureType::HalfFloat), // TextureFormat::A16B16G16R16F
+	0, // TextureFormat::R16F
+	0, // TextureFormat::G16R16F
+	0, // TextureFormat::A16B16G16R16F
 	static_cast<GLenum>(System::TextureType::Float), // TextureFormat::R32F
 	static_cast<GLenum>(System::TextureType::Float), // TextureFormat::G32R32F
 	static_cast<GLenum>(System::TextureType::Float), // TextureFormat::A32B32G32R32F
 	static_cast<GLenum>(System::TextureType::None), // TextureFormat::DXT1 (不需要)
 	static_cast<GLenum>(System::TextureType::None), // TextureFormat::DXT3 (不需要)
 	static_cast<GLenum>(System::TextureType::None), // TextureFormat::DXT5 (不需要)
-	static_cast<GLenum>(System::TextureType::UnsignedInt) // TextureFormat::D24S8
+	0 // TextureFormat::D24S8
 };
 
 Rendering::Int Rendering
     ::g_OpenGLWrapMode[System::EnumCastUnderlying(ShaderFlags::SamplerCoordinate::Quantity)] =
 {
-	static_cast<GLenum>(System::TextureSamplerCoordinate::Clamp),// GL_CLAMP,
-	static_cast<GLenum>(System::TextureSamplerCoordinate::Clamp),// GL_CLAMP,
+	0,// GL_CLAMP,
+	0,// GL_CLAMP,
 	static_cast<GLenum>(System::TextureSamplerCoordinate::Repeat),// GL_REPEAT,
 	static_cast<GLenum>(System::TextureSamplerCoordinate::MirroredRepeat),// GL_MIRRORED_REPEAT,
 	static_cast<GLenum>(System::TextureSamplerCoordinate::ClampBorder),// GL_CLAMP_TO_BORDER,

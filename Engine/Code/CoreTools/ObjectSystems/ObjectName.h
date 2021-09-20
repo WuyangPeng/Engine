@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 11:19)
+//	引擎版本：0.7.1.1 (2020/10/22 11:19)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_NAME_H
@@ -15,16 +15,27 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <string>
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ObjectNameImpl);
-
+ 
+EXPORT_SHARED_PTR(CoreTools, ObjectNameImpl, CORE_TOOLS_DEFAULT_DECLARE);
 namespace CoreTools
 {
     // Object类的名字
     class CORE_TOOLS_DEFAULT_DECLARE ObjectName final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectName, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(ObjectName& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ObjectName);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ObjectName() noexcept = default;
+        ObjectName(const ObjectName& rhs);
+        ObjectName& operator=(const ObjectName& rhs);
+        ObjectName(ObjectName&& rhs) noexcept;
+        ObjectName& operator=(ObjectName&& rhs) noexcept;
 
     public:
         explicit ObjectName(const std::string& name);
@@ -39,7 +50,10 @@ namespace CoreTools
         void SwapObjectName(ObjectName& name) noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(ObjectName);
+        using ObjectNameImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        ObjectNameImplPtr impl;
     };
 }
 

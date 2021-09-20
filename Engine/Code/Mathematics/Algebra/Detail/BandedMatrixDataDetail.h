@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::BandedMatrixData<Real>::BandedMatrixData(int size, int bandsNumber)

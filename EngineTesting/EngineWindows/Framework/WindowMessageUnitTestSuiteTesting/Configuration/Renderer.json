@@ -1,0 +1,28 @@
+{
+   "RendererType":2,
+
+  "Texture": 
+  {
+    "ColorFormat": 8,
+    "DepthStencilFormat": 22,
+    "MultisamplesNumber": 1
+  },
+
+  "ClearColor": 
+  {
+    "Red": 1.0,
+    "Green": 1.0,
+    "Blue": 1.0,
+    "Alpha": 1.0
+  },
+
+  "WindowParameter": 
+  {
+    "WindowTitle": "WindowMessageUnitTestSuiteTesting",
+    "Width": 1024,
+    "Height": 768,
+    "X": 0,
+    "Y": 0,
+    "AllowResize": true
+  }
+}

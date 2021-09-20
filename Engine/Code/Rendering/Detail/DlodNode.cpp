@@ -23,26 +23,68 @@
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26434)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, DlodNode);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, DlodNode);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, DlodNode);  
 
-CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(Rendering, DlodNode);
+Rendering::DlodNode::DlodNode(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, DlodNode)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, DlodNode)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, DlodNode)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, DlodNode)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, DlodNode)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, DlodNode)
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, DlodNode);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, DlodNode);
 
 Rendering::DlodNode
 	::DlodNode( int numLevelsOfDetail )
-	:m_Impl{ make_shared<ImplType>(numLevelsOfDetail) }
+	:impl{ make_shared<ImplType>(numLevelsOfDetail) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, DlodNode)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, DlodNode)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DlodNode,GetModelCenter,const Rendering::DlodNode::APoint)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, DlodNode,GetWorldCenter,const Rendering::DlodNode::APoint)
@@ -57,9 +99,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, DlodNode,GetWorldMaxDistance,in
 void Rendering::DlodNode
 	::SetModelDistance( int index, float minDistance, float maxDistance )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetModelDistance(index,minDistance,maxDistance); 
+	return impl->SetModelDistance(index,minDistance,maxDistance); 
 }
 
 
@@ -81,18 +123,18 @@ void Rendering::DlodNode
 	// 计算世界LOD中心
 	auto worldTransform = GetWorldTransform();
 
-	m_Impl->SetWorldCenter(worldTransform);
+	impl->SetWorldCenter(worldTransform);
 
 	// 计算世界平方距离间隔。
-	m_Impl->SetWorldDistance(worldTransform.GetUniformScale());
+	impl->SetWorldDistance(worldTransform.GetUniformScale());
 
 	// 选择LOD子节点
 	SetActiveChild(System::EnumCastUnderlying(SwitchNodeType::InvalidChild));
-	auto difference = m_Impl->GetWorldCenter() - camera->GetPosition();
+	auto difference = impl->GetWorldCenter() - camera->GetPosition();
 	auto distance = difference.Length();
-	for (auto index = 0; index < m_Impl->GetNumLevelsOfDetail(); ++index)
+	for (auto index = 0; index < impl->GetNumLevelsOfDetail(); ++index)
 	{
-		if (m_Impl->GetWorldMinDistance(index) <= distance && distance < m_Impl->GetWorldMaxDistance(index))
+		if (impl->GetWorldMinDistance(index) <= distance && distance < impl->GetWorldMaxDistance(index))
 		{
 			SetActiveChild(index);
 			break;

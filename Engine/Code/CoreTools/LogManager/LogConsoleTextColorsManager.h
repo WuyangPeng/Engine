@@ -15,28 +15,32 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <iosfwd>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogConsoleTextColorsManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogConsoleTextColorsManagerImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE LogConsoleTextColorsManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE LogConsoleTextColorsManager final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(LogConsoleTextColorsManager);
+        NON_COPY_TYPE_DECLARE(LogConsoleTextColorsManager);
 
     public:
         explicit LogConsoleTextColorsManager(LogLevel logLevel);
         LogConsoleTextColorsManager(const OStreamShared& osPtr, LogLevel logLevel);
+        ~LogConsoleTextColorsManager() noexcept = default;
+        LogConsoleTextColorsManager(const LogConsoleTextColorsManager& rhs) noexcept = delete;
+        LogConsoleTextColorsManager& operator=(const LogConsoleTextColorsManager& rhs) noexcept = delete;
+        LogConsoleTextColorsManager(LogConsoleTextColorsManager&& rhs) noexcept = delete;
+        LogConsoleTextColorsManager& operator=(LogConsoleTextColorsManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        IMPL_TYPE_DECLARE(LogConsoleTextColorsManager);
+        PackageType impl;
     };
 }
 

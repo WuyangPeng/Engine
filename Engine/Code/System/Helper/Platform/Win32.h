@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:17)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/08 12:36)
 
 #ifndef SYSTEM_HELPER_WIN32_H
 #define SYSTEM_HELPER_WIN32_H
@@ -16,7 +16,7 @@
 
     // 微软Windows平台
     #define TCRE_SYSTEM_PLATFORM "Win32"
-    #define SYSTEM_PLATFORM_WIN32
+    #define SYSTEM_PLATFORM_WIN32 static_cast<void>(0)
 
     // 获取有关MinGW运行时的信息，即__MINGW32_ * VERSION。
     #if defined(__MINGW32__)
@@ -28,14 +28,14 @@
     #endif  // _WIN32
 
     #ifndef WIN32
-        #define WIN32
+        #define WIN32 static_cast<void>(0)
     #endif  // WIN32
 
     #ifndef __WIN32__
-        #define __WIN32__
+        #define __WIN32__ static_cast<void>(0)
     #endif  // __WIN32__
 
-    #define SYSTEM_LITTLE_ENDIAN
+    #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 
     // 禁用各种子系统在 windows.h.
     #ifndef WIN32_LEAN_AND_MEAN
@@ -44,7 +44,7 @@
 
     // 禁用windows.h中的“min”和“max”宏，它与std::numeric_limits<type>::max()冲突。
     #ifndef NOMINMAX
-        #define NOMINMAX
+        #define NOMINMAX static_cast<void>(0)
     #endif  // NOMINMAX
 
 #endif  // defined(_WIN32) || defined(__WIN32__) || defined(WIN32)

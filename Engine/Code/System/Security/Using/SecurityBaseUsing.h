@@ -1,17 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 15:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/24 16:14)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
 
 #include "System/Helper/Platform.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -53,7 +53,7 @@ namespace System
     using SecuritySidHashEntry = SID_HASH_ENTRY;
     using SecurityTokenAuditPolicy = TOKEN_AUDIT_POLICY;
     using SecurityTokenAuditPolicyPtr = PTOKEN_AUDIT_POLICY;
-    constexpr WindowDWord g_TokenSourceLength{ TOKEN_SOURCE_LENGTH };
+    constexpr WindowsDWord g_TokenSourceLength{ TOKEN_SOURCE_LENGTH };
     using SecurityTokenSource = TOKEN_SOURCE;
     using SecurityTokenSourcePtr = PTOKEN_SOURCE;
     using SecurityTokenStatistics = TOKEN_STATISTICS;
@@ -66,14 +66,16 @@ namespace System
     using SecurityTokenElevationTypePtr = PTOKEN_ELEVATION_TYPE;
     using SecurityImpersonationLevel = SECURITY_IMPERSONATION_LEVEL;
     using SecurityImpersonationLevelPtr = PSECURITY_IMPERSONATION_LEVEL;
+    using SecurityTokenAppcontainerInformation = TOKEN_APPCONTAINER_INFORMATION;
+    using SecurityTokenAppcontainerInformationPtr = PTOKEN_APPCONTAINER_INFORMATION;
 
 #else  // !WIN32
 
     struct WindowSecurityAttributes
     {
-        WindowDWord nLength;
+        WindowsDWord nLength;
         void* lpSecurityDescriptor;
-        WindowBool bInheritHandle;
+        WindowsBool bInheritHandle;
     };
     using WindowSecurityAttributesPtr = WindowSecurityAttributes*;
     struct SecuritySidAndAttributes
@@ -191,7 +193,7 @@ namespace System
 
     struct SecurityTokenLinkedToken
     {
-        WindowHandle LinkedToken;
+        WindowsHandle LinkedToken;
     };
     using SecurityTokenLinkedTokenPtr = SecurityTokenLinkedToken*;
 
@@ -246,7 +248,7 @@ namespace System
     };
     using SecurityTokenAuditPolicyPtr = SecurityTokenAuditPolicy*;
 
-    constexpr WindowDWord g_TokenSourceLength{ 8 };
+    constexpr WindowsDWord g_TokenSourceLength{ 8 };
 
     struct SecurityTokenSource
     {
@@ -259,7 +261,7 @@ namespace System
     {
         LookupPrivilegeLUID TokenId;
         LookupPrivilegeLUID AuthenticationId;
-        WindowLargeInteger ExpirationTime;
+        WindowsLargeInteger ExpirationTime;
         SecurityTokenType TokenType;
         SecurityImpersonationLevel ImpersonationLevel;
         uint32_t DynamicCharged;
@@ -300,6 +302,12 @@ namespace System
         SecurityDelegation
     };
     using SecurityImpersonationLevelPtr = SecurityImpersonationLevel*;
+
+    struct SecurityTokenAppcontainerInformation
+    {
+        SecuritySIDPtr TokenAppContainer;
+    };
+    using SecurityTokenAppcontainerInformationPtr = SecurityTokenAppcontainerInformation*;
 
 #endif  // WIN32
 }

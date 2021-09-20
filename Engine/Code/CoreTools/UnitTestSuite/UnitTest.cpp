@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 14:48)
+//	引擎版本：0.7.1.1 (2020/10/23 14:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -93,7 +93,7 @@ int CoreTools::UnitTest::GetErrorNumber() const noexcept
 
 void CoreTools::UnitTest::PrintReport()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     constexpr auto characterWidth = 10;
 
@@ -112,7 +112,7 @@ string CoreTools::UnitTest::GetTestModeDescribe() const
 
 void CoreTools::UnitTest::ResetTestData()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     m_Data->ClearData();
     m_CpuTimer->Start();
@@ -128,7 +128,7 @@ void CoreTools::UnitTest::ResetOtherData()
 
 void CoreTools::UnitTest::RunUnitTest()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     TestTimingBegins();
     DoRunUnitTest();
@@ -138,7 +138,7 @@ void CoreTools::UnitTest::RunUnitTest()
 // private
 void CoreTools::UnitTest::TestTimingBegins()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     CoreTools::DisableNoexcept();
 
@@ -151,7 +151,7 @@ void CoreTools::UnitTest::TestTimingBegins()
 // private
 void CoreTools::UnitTest::TestTimingEnd()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     CoreTools::DisableNoexcept();
 
@@ -161,7 +161,7 @@ void CoreTools::UnitTest::TestTimingEnd()
 // protected
 void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (condition)
     {
@@ -187,7 +187,7 @@ void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& fu
 // protected
 void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (condition)
     {
@@ -206,7 +206,7 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
 // private
 void CoreTools::UnitTest::PrintFailReport(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     UnitTestFailPrintManager manager{ *this, functionDescribed.GetFileName(), functionDescribed.GetLine(), errorMessage };
 
@@ -226,7 +226,7 @@ const string CoreTools::UnitTest::GetName() const
 // protected
 void CoreTools::UnitTest::AssertExceptionInfoLog(const Error& error, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
         << GetCorrectThrowExceptionDescribe()
@@ -240,7 +240,7 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const Error& error, const strin
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed)
         << GetCorrectThrowExceptionDescribe()
@@ -254,7 +254,7 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const exception& error, const F
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Warn, CoreTools, functionDescribed)
         << GetCorrectThrowExceptionDescribe()
@@ -266,7 +266,7 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const FunctionDescribed& functi
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const Error& error, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
         << GetErrorThrowExceptionDescribe()
@@ -280,7 +280,7 @@ void CoreTools::UnitTest::AssertExceptionErrorLog(const Error& error, const stri
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
         << GetErrorNothrowExceptionDescribe()
@@ -292,7 +292,7 @@ void CoreTools::UnitTest::AssertExceptionErrorLog(const FunctionDescribed& funct
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
         << GetErrorThrowExceptionDescribe()
@@ -306,7 +306,7 @@ void CoreTools::UnitTest::AssertExceptionFatalLog(const exception& error, const 
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Fatal, CoreTools, functionDescribed)
         << GetErrorThrowExceptionDescribe()
@@ -318,7 +318,7 @@ void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& funct
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(float lhs, float rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -331,7 +331,7 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(float lhs, float rhs,
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(double lhs, double rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -344,7 +344,7 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(double lhs, double rh
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(float lhs, float rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -357,7 +357,7 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(float lhs, float rh
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
@@ -370,7 +370,7 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double 
 
 void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const auto condition = (lhs == rhs);
 
@@ -395,7 +395,7 @@ void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, co
 
 void CoreTools::UnitTest::AssertEqual(const char* lhs, const char* rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     AssertEqual(string{ lhs }, string{ rhs }, functionDescribed, errorMessage, failureThrow);
 }
@@ -407,7 +407,7 @@ void CoreTools::UnitTest::AssertEqual(const wchar_t* lhs, const wchar_t* rhs, co
 
 void CoreTools::UnitTest::PrintRunUnitTest()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;
 

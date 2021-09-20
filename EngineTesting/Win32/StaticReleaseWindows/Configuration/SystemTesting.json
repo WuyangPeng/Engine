@@ -1,0 +1,532 @@
+{
+  "helperSuite": {
+    "ConfigMacroTesting": 1,
+    "UserMacroTesting": 1,
+    "StringizeMacroTesting": 1,
+    "UnicodeUsingTesting": 0,
+    "PragmaMessageMacroTesting": 1,
+    "VersionTesting": 1,
+    "ExportMacroTesting": 1,
+    "SecuritySidMacroTesting": 1,
+    "NetworkMacroTesting": 1,
+    "PlatformTesting": 1,
+    "EnumCastTesting": 1,
+    "NoexceptTesting": 1,
+    "GlExtensionsMacroTesting": 1,
+    "PragmaWarningTesting": 1,
+    "VariableTemplateTypeTesting": 1
+  },
+
+  "configMacroSuite": {
+    "FixedSizeTesting": 1,
+    "CompilerConfigTesting": 1,
+    "PlatformConfigTesting": 1,
+    "StdLibConfigTesting": 1,
+    "EndianTesting": 1,
+    "ConfigMarkTesting": 1
+  },
+
+  "windowsMacroSuite": {
+    "GetArraySizeTesting": 1,
+    "NullFunctionTesting": 1,
+    "MakeLanguageIDTesting": 1000,
+    "MakeIntreSourceTesting": 1,
+    "MakeLanguageCIDTesting": 1000,
+    "HResultTesting": 1,
+    "MakeWordTesting": 1000,
+    "PtrToIntTesting": 1,
+    "MarkTesting": 1,
+    "DebugTesting": 1
+  },
+
+  "enumMacroSuite": {
+    "EnumAddableTesting": 1,
+    "EnumSubtractableTesting": 1,
+    "EnumMultiplicationTesting": 1,
+    "EnumNegateTesting": 1,
+    "EnumIncrementableTesting": 1,
+    "EnumDecrementableTesting": 1,
+    "EnumAndableTesting": 1,
+    "EnumOrableTesting": 1,
+    "EnumXorableTesting": 1,
+    "EnumShiftableTesting": 0
+  },
+
+  "openGLMacroSuite": {
+    "WglExtensionsMacroTesting": 1,
+    "GlxExtensionsMacroTesting": 1,
+    "GlPluginMacroTesting": 1,
+    "GlUtilityMacroTesting": 1
+  },
+
+  "glUtilityMacroSuite": {
+    "GlUtilityMarkTesting": 1,
+    "GlUtilityGetFunctionTesting": 1,
+    "GlUtilityPreviouslyBodyTesting": 1,
+    "GlUtilityPreviouslyBodyResultTesting": 1,
+    "GlUtilityBodyTesting": 1,
+    "GlUtilityBodyResultTesting": 1
+  },
+
+  "systemOutputSuite": {
+    "MessageBoxFlagsDataTesting": 100,
+    "LanguageIDDataTesting": 100,
+    "OutputDebugStringTesting": 1
+  },
+
+  "messageBoxSelectionSuite": {
+    "MessageBoxSelectionUseYesNoCancelTesting": 0,
+    "MessageBoxSelectionUseFlagsDataTesting": 0,
+    "MessageBoxSelectionUseLanguageIDDataTesting": 0
+  },
+
+  "dynamicLinkSuite": {
+    "LibraryDirectoryTesting": 1,
+    "EnumResourceDataTesting": 10
+  },
+
+  "loadLibrarySuite": {
+    "LoadLibraryTesting": 1,
+    "GetProcAddressTesting": 1,
+    "FreeLibraryTesting": 1
+  },
+
+  "libraryToolsSuite": {
+    "GetModuleHandleTesting": 1,
+    "GetModuleFileNameTesting": 1
+  },
+
+  "loadResourceToolsSuite": {
+    "FindResourceTesting": 1,
+    "LoadResourceTesting": 1,
+    "LoadStringTesting": 1
+  },
+
+  "enumResourceToolsSuite": {
+    "EnumResourceToolsTesting": 1,
+    "ResourceEnumTesting": 1
+  },
+
+  "characterStringSuite": {
+
+  },
+
+  "formatErrorMessageSuite": {
+    "FormatErrorMessageUseLocalAllocTesting": 1,
+    "FormatErrorMessageUseBufferTesting": 1,
+    "FormatErrorMessageUseDllMoudleAndLocalAllocTesting": 1,
+    "FormatErrorMessageUseDllMoudleAndUseBufferTesting": 1,
+    "FormatErrorMessageTesting": 1,
+    "FormatStringMessageUseArgumentArrayAndLocalAllocTesting": 1,
+    "FormatStringMessageUseArgumentArrayAndBufferTesting": 1,
+    "FormatStringMessageUseVaListAndLocalAllocTesting": 1,
+    "FormatStringMessageUseVaListAndUseBufferTesting": 1,
+    "SoftwareExceptionTesting": 100
+  },
+
+  "codePageSuite": {
+    "CodePageValidTesting": 1,
+    "CodePageTesting": 1
+  },
+
+  "stringConversionSuite": {
+    "MultiByteConversionWideCharTesting": 1,
+    "WideCharConversionMultiByteTesting": 1,
+    "UTF8ConversionWideCharTesting": 1,
+    "WideCharConversionUTF8Testing": 1,
+    "CompareStringUseLocaleFlagsTesting": 100,
+    "CompareStringUseLocaleStringTesting": 100,
+    "CompareStringOrdinalUseBinaryTesting": 100,
+    "CaseInsensitiveComparisonTesting": 1
+  },
+
+  "formatStringSuite": {
+    "VsnPrintfTesting": 1,
+    "StrcatTesting": 1,
+    "StrlenTesting": 1,
+    "StrcpyTesting": 1,
+    "StrtokTesting": 1,
+    "StrstrTesting": 1,
+    "SNPrintfTesting": 1
+  },
+
+  "consoleSuite": {
+    "ConsoleHandleTesting": 1,
+    "ConsoleFontTesting": 1,
+    "ConsoleModeTesting": 1,
+    "ConsoleCodePageTesting": 1,
+    "ConsoleCreateTesting": 1
+  },
+
+  "consoleColoursSuite": {
+    "TextColourTesting": 0,
+    "BackgroundColourTesting": 0,
+    "ConsoleCommonTesting": 0,
+    "DefaultTextAttributeTesting": 0,
+    "ReadAttributeTesting": 1,
+    "WriteAttributeTesting": 0,
+    "FillAttributeTesting": 0
+  },
+
+  "consoleScreenBufferSuite": {
+    "CreateSystemConsoleScreenBufferTesting": 1,
+    "ConsoleScreenBufferInfoTesting": 1,
+    "SetConsoleHandleScreenBufferInfoTesting": 0,
+    "SetSystemConsoleScreenBufferSizeTesting": 1
+  },
+
+  "memoryToolsSuite": {
+
+  },
+
+  "heapToolsSuite": {
+    "CreateHeapTesting": 1,
+    "AllocateHeapTesting": 1,
+    "AllocateGenerateExceptionsTesting": 1,
+    "ReAllocateHeapTesting": 1,
+    "ValidateHeapTesting": 1,
+    "CompactHeapTesting": 1,
+    "CurrentProcessHeapTesting": 1
+  },
+
+  "virtualToolsSuite": {
+    "AllocateVirtualOneStepTesting": 1,
+    "AllocateVirtualSeparationTesting": 1,
+    "VirtualProtectTesting": 1,
+    "VirtualQueryTesting": 1
+  },
+
+  "viewOfFileSuite": {
+    "CreateFileMappingTesting": 1,
+    "OpenFileMappingTesting": 1,
+    "ViewOfFileTesting": 1
+  },
+
+  "memoryHelperSuite": {
+    "MemorySetTesting": 1,
+    "MemoryCopyTesting": 1,
+    "MallocMemoryTesting": 1,
+    "FillMemoryTesting": 1,
+    "GetWindowsStructDefaultSizeTesting": 1
+  },
+
+  "localToolsSuite": {
+    "LocalMemoryAllocTesting": 1,
+    "LocalMemorySizeTesting": 1
+  },
+
+  "threadingSuite": {
+    "ThreadLocalStorageTesting": 1
+  },
+
+  "criticalSectionSuite": {
+    "CriticalSectionTesting": 1,
+    "CriticalSectionThreadTesting": 1,
+    "SpecifyCriticalSectionTesting": 1,
+    "SpecifyCriticalSectionAndSpinCountTesting": 1
+  },
+
+  "semaphoreSuite": {
+    "CreateSemaphoreThreadTesting": 1,
+    "CreateSemaphoreThreadUseNameTesting": 1,
+    "ReleaseSemaphoreTesting": 1,
+    "WaitSemaphoreTesting": 1,
+    "WaitMultipleSemaphoreTesting": 1,
+    "OpenSemaphoreTesting": 1
+  },
+
+  "eventSuite": {
+    "CreateEventTesting": 1,
+    "CreateEventUseNameTesting": 1,
+    "ManualEventThreadTesting": 1,
+    "AutoEventThreadTesting": 1,
+    "ResetEventTesting": 1,
+    "WaitForEventTesting": 1,
+    "WaitForMultipleEventTesting": 1,
+    "OpenEventTesting": 1
+  },
+
+  "mutexSuite": {
+    "CreateDefaultMutexTesting": 1,
+    "CreateMutexTesting": 1,
+    "CreateMutexUseFlagsTesting": 1,
+    "ThreadMutexTesting": 1,
+    "WaitForMutexTesting": 1,
+    "WaitForMultipleMutexTesting": 1,
+    "OpenMutexTesting": 1,
+    "PThreadMutexTesting": 1
+  },
+
+  "slimReaderWriterSuite": {
+    "SlimReaderWriterInitializeTesting": 1,
+    "SlimReaderWriterReaderTesting": 1,
+    "SlimReaderWriterWriterTesting": 1
+  },
+
+  "conditionVariableSuite": {
+    "ConditionVariableSlimReaderWriterLockTesting": 0,
+    "ConditionVariableCriticalSectionTesting": 0
+  },
+
+  "initOnceSuite": {
+    "InitOnceSynchronousTesting": 1,
+    "InitOnceAsynchronousTesting": 1
+  },
+
+  "waitableTimerSuite": {
+    "CreateWaitableTimerManualTesting": 0,
+    "CreateWaitableTimerSynchronizationTesting": 0,
+    "CreateWaitableTimerUseNameTesting": 0,
+    "CreateWaitableTimerManualUseFlagsTesting": 0,
+    "CreateWaitableTimerSynchronizationUseFlagsTesting": 0,
+    "OpenWaitableTimerTesting": 1,
+    "WaitForWaitableTimerTesting": 0,
+    "WaitForMultipleWaitableTimerTesting": 0,
+    "CancelWaitableTimerTesting": 1,
+    "SetWaitableTimerTesting": 0
+  },
+
+  "syncToolsSuite": {
+    "SleepTesting": 0,
+    "SignalObjectAndWaitTesting": 1
+  },
+
+  "interlockedSuite": {
+    "InterlockedTesting": 1,
+    "InterlockedSubtractTesting": 1,
+    "InterlockedBinaryTesting": 1
+  },
+
+  "threadSuite": {
+    "CreateDefaultThreadTesting": 0,
+    "CreateSuspendedThreadTesting": 0,
+    "CreateCThreadTesting": 0,
+    "GetCurrentThreadTesting": 1,
+    "ThreadPriorityTesting": 1,
+    "WaitForThreadTesting": 0,
+    "WaitForMultipleThreadTesting": 0
+  },
+
+  "threadToolsSuite": {
+    "OpenThreadTesting": 1,
+    "PriorityBoostTesting": 1,
+    "ThreadTokenTesting": 1,
+    "ThreadTimesTesting": 1
+  },
+
+  "processSuite": {
+    "CreateDefaultProcessTesting": 1,
+    "CreateProcessTesting": 1,
+    "GetProcessHandleTesting": 1,
+    "ProcessPriorityClassTesting": 1,
+    "OpenProcessTesting": 1
+  },
+
+  "processToolsSuite": {
+    "ProcessTokenTesting": 1
+  },
+
+  "timeSuite": {
+    "TimeOfDayDataTesting": 0,
+    "DeltaTimeValueDataTesting": 1,
+    "DeltaTimeTesting": 0,
+    "SystemPauseTesting": 0
+  },
+
+  "fileManagerSuite": {
+    "EnvironmentVariableTesting": 1
+  },
+
+  "cFileSuite": {
+    "CFileOpenTesting": 1,
+    "CFileReadTesting": 1,
+    "CFileWriteTesting": 1,
+    "CFileSetvBufTesting": 1,
+    "CFileCharacterTesting": 1,
+    "CFileOperatorTesting": 1
+  },
+
+  "fileSuite": {
+    "CreateExistingFileTesting": 1,
+    "CreateFileWithDefaultAttributesTesting": 10,
+    "CreateFileWithOtherFlagsTesting": 10,
+    "CreateFileWithSecurityFlagsTesting": 10,
+    "DirectoryTesting": 1,
+    "CreateFileWithAttributesTesting": 10,
+    "MoveFileTesting": 1,
+    "FileLengthTesting": 1,
+    "CopyFileTesting": 1,
+    "FileHandlePointerTesting": 1,
+    "OpenFileTesting": 1,
+    "ReadFileTesting": 1,
+    "WriteFileTesting": 1
+  },
+
+  "fileToolsSuite": {
+    "CreateDirectoryTesting": 1,
+    "DiskFreeTesting": 1
+  },
+
+  "fileTimeSuite": {
+    "FileTimeCompareTesting": 1,
+    "FileTimeConvertTesting": 1,
+    "FileTimeTesting": 1
+  },
+
+  "securitySuite": {
+    "LookupPrivilegeTesting": 1
+  },
+
+  "createSecuritySuite": {
+    "FileSecurityTesting": 1,
+    "KernelObjectSecurityTesting": 1,
+    "CreatePrivateObjectSecurityTesting": 1,
+    "CreateFilePrivateObjectSecurityTesting": 1,
+    "CreatePrivateObjectSecurityUseAutoInheritTesting": 1,
+    "CreatePrivateObjectSecurityWithMultipleInheritanceTesting": 1,
+    "SetPrivateObjectSecurityTesting": 1,
+    "ConvertToAutoInheritPrivateObjectSecurityTesting": 1,
+    "SecurityAccessMaskTesting": 1
+  },
+
+  "securitySidSuite": {
+    "InitializeSecurityIdentifierTesting": 1,
+    "GetSubAuthorityTesting": 1,
+    "WellKnownSidTesting": 1,
+    "CopySecurityIdentifierTesting": 1
+  },
+
+  "securityAclSuite": {
+    "InitializeAclTesting": 1,
+    "AclInformationTesting": 1
+  },
+
+  "securityDescriptorSuite": {
+    "UserObjectSecurityTesting": 1,
+    "InitializeSecurityDescriptorTesting": 1,
+    "SecurityDescriptorDaclTesting": 1,
+    "SecurityDescriptorControlTesting": 1,
+    "SecurityDescriptorGroupTesting": 1,
+    "SecurityDescriptorOwnerTesting": 1,
+    "SecurityDescriptorRMControlTesting": 1,
+    "SecurityDescriptorSaclTesting": 1
+  },
+
+  "securityAceSuite": {
+    "AddAccessControlEntriesTesting": 1,
+    "FindFirstFreeAccessControlEntriesTesting": 1,
+    "AddMandatoryAceTesting": 5
+  },
+
+  "addAccessSuite": {
+    "AddAccessAllowedAceTesting": 5,
+    "AddAccessAllowedAceUseAceFlagsTesting": 5,
+    "AddAccessAllowedObjectAceTesting": 5,
+    "AddAccessDeniedAceTesting": 5,
+    "AddAccessDeniedObjectAceTesting": 5,
+    "AddAuditAccessAceTesting": 5,
+    "AddAuditAccessObjectAceTesting": 5
+  },
+
+  "securityBaseSuite": {
+    "IsSystemTokenElevatedTesting": 1,
+    "TokenInformationTesting": 1,
+    "AdjustTokenTesting": 1,
+    "AccessesGrantedTesting": 1,
+    "DuplicateTokenTesting": 10,
+    "RestrictedTokenTesting": 1,
+    "QuerySecurityAccessMaskTesting": 1
+  },
+
+  "accessCheckSuite": {
+    "MapGenericMaskTesting": 1,
+    "AccessCheckTesting": 1
+  },
+
+  "networkSuite": {
+    "WindowsExtensionPrototypesTesting": 1
+  },
+
+  "socketPrototypesSuite": {
+    "GetSocketTesting": 10,
+    "HostNetConversionTesting": 1,
+    "AcceptTesting": 0,
+    "ConnectTesting": 0,
+    "SocketNameTesting": 1,
+    "SockOptTesting": 1,
+    "IoctlSocketTesting": 1,
+    "ShutDownTesting": 1,
+    "RecvFromTesting": 1,
+    "SendToTesting": 1,
+    "SelectTesting": 1
+  },
+
+  "databasePrototypesSuite": {
+    "WinSockHostTesting": 1,
+    "WinSockServentTesting": 1,
+    "WinSockProtoentTesting": 1
+  },
+
+  "windowsSockExSuite": {
+    "GetWinSocketTesting": 1,
+    "WinSocketAcceptTesting": 0,
+    "WinSocketConnectTesting": 0,
+    "WinSocketConnectByNameTesting": 0,
+    "WinSocketHostNetConversionTesting": 1,
+    "WinSocketRecvFromTesting": 1,
+    "WinSocketSendToTesting": 1
+  },
+
+  "openGLSuite": {
+    "OpenGLUtilityTesting": 1,
+    "OpenGLInitTesting": 1,
+    "OpenGLAPITesting": 1,
+    "OpenGLProgramTesting": 1,
+    "OpenGLShaderTesting": 1,
+    "OpenGLGlutTesting": 1,
+    "OpenGLWglPrototypesTesting": 1
+  },
+
+  "directXSuite": {
+    "DirectXD3D11Testing": 1
+  },
+
+  "windowsSuite": {
+    "LastPlatformErrorTesting": 1,
+    "WindowsCreateTesting": 1,
+    "WindowsProcessTesting": 1,
+    "WindowsRegisterTesting": 1,
+    "WindowsFontInformationTesting": 1,
+    "WindowsNamedPipeTesting": 1,
+    "WindowsUserTesting": 1,
+    "EngineeringTesting": 1
+  },
+
+  "windowsSystemSuite": {
+    "GetSystemInfoTesting": 1,
+    "DebugBreakTesting": 1,
+    "ExitTesting": 1,
+    "SystemCommandTesting": 0,
+    "SystemDirectoryTesting": 1,
+    "GetSystemUserNameTesting": 1,
+    "BoolConversionTesting": 1,
+    "GetSystemInputTesting": 0
+  },
+
+  "linuxSuite": {
+    "LinuxNativeWindowTesting": 1
+  },
+
+  "macintoshSuite": {
+    "MacintoshNativeWindowTesting": 1
+  },
+
+  "androidSuite": {
+    "AndroidInputKeyEventTesting": 1,
+    "AndroidInputMotionEventTesting": 1,
+    "AndroidLooperTesting": 1,
+    "AndroidInputQueueTesting": 1,
+    "AndroidNativeWindowTesting": 1,
+    "AndroidNativeAppGlueTesting": 1
+  }
+}

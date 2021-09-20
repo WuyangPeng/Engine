@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowCreateHandleImpl.h"
-#include "System/Window/WindowCreate.h"
+#include "System/Windows/WindowsCreate.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowProcess/WindowProcessManager.h"
@@ -28,7 +28,7 @@ void Framework::WindowCreateHandleImpl
 	::InitInstance()
 {
 	// 要求窗口有指定的客户区大小。
-	System::WindowRect rect{ 0, 0,  m_Size.GetWindowWidth() - 1, m_Size.GetWindowHeight() - 1 };
+	System::WindowsRect rect{ 0, 0,  m_Size.GetWindowWidth() - 1, m_Size.GetWindowHeight() - 1 };
 
 	if (!System::AdjustSystemWindowRect(&rect, m_WindowCreateParameter.GetStyle()))
 	{

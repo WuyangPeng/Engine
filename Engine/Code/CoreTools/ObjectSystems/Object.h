@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 9:57)
+//	引擎版本：0.7.1.1 (2020/10/22 9:57)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H

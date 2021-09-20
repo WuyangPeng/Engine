@@ -5,14 +5,14 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 14:02)
+//	引擎版本：0.7.1.1 (2020/10/26 14:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CyclicRedundancyCheckHandleImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::CyclicRedundancyCheckHandleImpl::CyclicRedundancyCheckHandleImpl() noexcept
+CoreTools::CyclicRedundancyCheckHandleImpl::CyclicRedundancyCheckHandleImpl(MAYBE_UNUSED int count) noexcept
     : m_CCITT{}, m_Table16{}, m_Table32{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

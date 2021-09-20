@@ -12,15 +12,15 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(EnvironmentDirectoryImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(EnvironmentDirectoryImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE EnvironmentDirectory
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EnvironmentDirectory);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(EnvironmentDirectory);
 		using String = System::String;
 
 	public:
@@ -38,7 +38,7 @@ namespace Framework
 		const String GetPath(EndianDirectory endianDirectory, RenderingDirectory renderingDirectory, RenderingAnalysisDirectory analysisDirectory) const;
 
 	private:
-		IMPL_TYPE_DECLARE(EnvironmentDirectory);
+                PackageType impl;
 	};
 }
 

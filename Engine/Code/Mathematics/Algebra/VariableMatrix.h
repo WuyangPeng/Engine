@@ -50,7 +50,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using VariableMatrixImpl = VariableMatrixImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VariableMatrix, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(VariableMatrix& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(VariableMatrix);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~VariableMatrix() noexcept = default;
+        VariableMatrix(const VariableMatrix& rhs);
+        VariableMatrix& operator=(const VariableMatrix& rhs);
+        VariableMatrix(VariableMatrix&& rhs) noexcept;
+        VariableMatrix& operator=(VariableMatrix&& rhs) noexcept;
 
         using Math = Math<Real>;
         using Matrix2 = Matrix2<Real>;
@@ -119,7 +130,7 @@ namespace Mathematics
 
     private:
         // 该矩阵存储在列主序来自二维数组。
-        IMPL_TYPE_DECLARE(VariableMatrix);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     // 比较 (仅使用在STL容器)。

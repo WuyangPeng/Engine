@@ -10,8 +10,8 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h" 
-#include "System/Window/Using/WindowRegistryUsing.h"
-#include "System/Window/Using/WindowPictorialUsing.h"
+#include "System/Windows/Using/WindowsRegistryUsing.h"
+#include "System/Windows/Using/WindowsPictorialUsing.h"
 
 namespace Framework
 {
@@ -20,8 +20,8 @@ namespace Framework
 	public:
 		using ClassType = WindowHCursor;
 		using TChar = System::TChar;
-		using HCursor = System::WindowHCursor;
-		using HInstance = System::WindowHInstance;
+		using HCursor = System::WindowsHCursor;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowHCursor(const TChar* cursor = System::g_Arrow) noexcept;

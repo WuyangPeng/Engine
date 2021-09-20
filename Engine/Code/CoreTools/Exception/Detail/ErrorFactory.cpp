@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 14:27)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 15:14)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,19 +13,19 @@
 #include "ErrorImpl.h"
 #include "NormalError.h"
 #include "WindowsError.h"
-#include "System/Window/Flags/PlatformErrorFlags.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Exception/LastError.h"
 
 using std::make_shared;
 
 // static
-CoreTools::ErrorFactory::ErrorImplPtr CoreTools::ErrorFactory::CreateError(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message)
+CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, const LastError& lastError, const String& message)
 {
-    return CreateError(functionDescribed, lastError.GetLastError(), message);
+    return Create(functionDescribed, lastError.GetLastError(), message);
 }
 
 // static
-CoreTools::ErrorFactory::ErrorImplPtr CoreTools::ErrorFactory::CreateError(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
+CoreTools::ErrorFactory::ErrorImplSharedPtr CoreTools::ErrorFactory::Create(const FunctionDescribed& functionDescribed, WindowError lastError, const String& message)
 {
     switch (lastError)
     {

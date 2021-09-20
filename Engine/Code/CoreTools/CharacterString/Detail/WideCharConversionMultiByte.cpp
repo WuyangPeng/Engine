@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 13:55)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/29 20:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,14 +14,18 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/HeapAllocateDetail.h"
+
+#include <gsl/narrow>
 
 using std::make_shared;
 using std::string;
 using std::wstring;
 
 CoreTools::WideCharConversionMultiByte::WideCharConversionMultiByte(const wstring& character, bool isUTF8)
-    : m_Source{ character.begin(), character.end() }, m_LengthOfMultiByteString{ 0 }, m_Heap{ nullptr }, m_ReadSize{ 0 }, m_IsUTF8{ isUTF8 }
+    : source{ character.begin(), character.end() },
+      target{},
+      lengthOfMultiByteString{ 0 },
+      isUTF8{ isUTF8 }
 {
     Conversion();
 
@@ -32,45 +36,41 @@ CoreTools::WideCharConversionMultiByte::WideCharConversionMultiByte(const wstrin
 void CoreTools::WideCharConversionMultiByte::Conversion()
 {
     FillNullWChar();
-    CreateHeap();
+    CreateTarget();
     FinishConversion();
 }
 
 // private
 void CoreTools::WideCharConversionMultiByte::FillNullWChar()
 {
-    m_Source.push_back(L'\0');
+    source.emplace_back(L'\0');
 }
 
 // private
-int CoreTools::WideCharConversionMultiByte::GetReadSize(int lengthOfMultiByteString)
+int CoreTools::WideCharConversionMultiByte::GetConversionLength()
 {
-    auto destSize = boost::numeric_cast<int>(m_Source.size());
+    auto destSize = boost::numeric_cast<int>(source.size());
+    auto targetSize = boost::numeric_cast<int>(target.size());
+    auto multiByte = target.empty() ? nullptr : target.data();
 
-    char* multiByte{ nullptr };
-    if (0 < lengthOfMultiByteString)
+    if (isUTF8)
     {
-        multiByte = m_Heap->GetPoint();
-    }
-
-    if (m_IsUTF8)
-    {
-        return System::WideCharConversionUTF8(m_Source.data(), destSize, multiByte, lengthOfMultiByteString);
+        return System::WideCharConversionUTF8(source.data(), destSize, multiByte, targetSize);
     }
     else
     {
-        return System::WideCharConversionMultiByte(m_Source.data(), destSize, multiByte, lengthOfMultiByteString);
+        return System::WideCharConversionMultiByte(source.data(), destSize, multiByte, targetSize);
     }
 }
 
 // private
-void CoreTools::WideCharConversionMultiByte::CreateHeap()
+void CoreTools::WideCharConversionMultiByte::CreateTarget()
 {
-    m_LengthOfMultiByteString = GetReadSize(0);
+    const auto length = GetConversionLength();
 
-    if (0 < m_LengthOfMultiByteString)
+    if (0 < length)
     {
-        m_Heap = make_shared<CharHeapAllocate>(m_LengthOfMultiByteString);
+        target.resize(length);
     }
     else
     {
@@ -81,9 +81,9 @@ void CoreTools::WideCharConversionMultiByte::CreateHeap()
 // private
 void CoreTools::WideCharConversionMultiByte::FinishConversion()
 {
-    m_ReadSize = GetReadSize(m_LengthOfMultiByteString);
+    lengthOfMultiByteString = GetConversionLength();
 
-    if (m_ReadSize <= 0)
+    if (lengthOfMultiByteString <= 0 || boost::numeric_cast<int>(target.size()) < lengthOfMultiByteString)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Wide Char 转换为 Multi Byte 失败！"s));
     }
@@ -92,7 +92,7 @@ void CoreTools::WideCharConversionMultiByte::FinishConversion()
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::WideCharConversionMultiByte::IsValid() const noexcept
 {
-    if (m_Heap != nullptr && 0 < m_ReadSize && m_ReadSize <= m_LengthOfMultiByteString)
+    if (0 < lengthOfMultiByteString && lengthOfMultiByteString <= gsl::narrow_cast<int>(target.size()))
     {
         return true;
     }
@@ -109,6 +109,6 @@ const string CoreTools::WideCharConversionMultiByte::GetMultiByteRepresentation(
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-    return string{ m_Heap->GetPoint(), m_Heap->GetPoint() + m_ReadSize - 1 };
+    return string{ target.data(), target.data() + lengthOfMultiByteString - 1 };
 #include STSTEM_WARNING_POP
 }

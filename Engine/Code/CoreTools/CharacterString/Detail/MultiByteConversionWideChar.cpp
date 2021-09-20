@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 13:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/27 18:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,14 +14,17 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/MemoryTools/HeapAllocateDetail.h"
 
-using std::make_shared;
+#include <gsl/narrow>
+
 using std::string;
 using std::wstring;
 
 CoreTools::MultiByteConversionWideChar::MultiByteConversionWideChar(const string& character, bool isUTF8)
-    : m_Source{ character.begin(), character.end() }, m_LengthOfWideCharString{ 0 }, m_Heap{ nullptr }, m_ReadSize{ 0 }, m_IsUTF8{ isUTF8 }
+    : source{ character.begin(), character.end() },
+      target{},
+      lengthOfWideCharString{ 0 },
+      isUTF8{ isUTF8 }
 {
     Conversion();
 
@@ -32,45 +35,24 @@ CoreTools::MultiByteConversionWideChar::MultiByteConversionWideChar(const string
 void CoreTools::MultiByteConversionWideChar::Conversion()
 {
     FillNullChar();
-    CreateHeap();
+    CreateTarget();
     FinishConversion();
 }
 
 // private
 void CoreTools::MultiByteConversionWideChar::FillNullChar()
 {
-    m_Source.push_back('\0');
+    source.emplace_back('\0');
 }
 
 // private
-int CoreTools::MultiByteConversionWideChar::GetReadSize(int lengthOfWideCharString)
+void CoreTools::MultiByteConversionWideChar::CreateTarget()
 {
-    auto destSize = boost::numeric_cast<int>(m_Source.size());
+    const auto length = GetConversionLength();
 
-    wchar_t* wideChar{ nullptr };
-    if (0 < lengthOfWideCharString)
+    if (0 < length)
     {
-        wideChar = m_Heap->GetPoint();
-    }
-
-    if (m_IsUTF8)
-    {
-        return System::UTF8ConversionWideChar(m_Source.data(), destSize, wideChar, lengthOfWideCharString);
-    }
-    else
-    {
-        return System::MultiByteConversionWideChar(m_Source.data(), destSize, wideChar, lengthOfWideCharString);
-    }
-}
-
-// private
-void CoreTools::MultiByteConversionWideChar::CreateHeap()
-{
-    m_LengthOfWideCharString = GetReadSize(0);
-
-    if (0 < m_LengthOfWideCharString)
-    {
-        m_Heap = make_shared<WCharHeapAllocate>(m_LengthOfWideCharString);
+        target.resize(length);
     }
     else
     {
@@ -79,11 +61,28 @@ void CoreTools::MultiByteConversionWideChar::CreateHeap()
 }
 
 // private
+int CoreTools::MultiByteConversionWideChar::GetConversionLength()
+{
+    auto destSize = boost::numeric_cast<int>(source.size());
+    auto targetSize = boost::numeric_cast<int>(target.size());
+    auto wideChar = target.empty() ? nullptr : target.data();
+
+    if (isUTF8)
+    {
+        return System::UTF8ConversionWideChar(source.data(), destSize, wideChar, targetSize);
+    }
+    else
+    {
+        return System::MultiByteConversionWideChar(source.data(), destSize, wideChar, targetSize);
+    }
+}
+
+// private
 void CoreTools::MultiByteConversionWideChar::FinishConversion()
 {
-    m_ReadSize = GetReadSize(m_LengthOfWideCharString);
+    lengthOfWideCharString = GetConversionLength();
 
-    if (m_ReadSize <= 0)
+    if (lengthOfWideCharString <= 0 || boost::numeric_cast<int>(target.size()) < lengthOfWideCharString)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Multi Byte 转换为 Wide Char 失败！"s));
     }
@@ -92,7 +91,7 @@ void CoreTools::MultiByteConversionWideChar::FinishConversion()
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::MultiByteConversionWideChar::IsValid() const noexcept
 {
-    if (m_Heap != nullptr && 0 < m_ReadSize && m_ReadSize <= m_LengthOfWideCharString)
+    if (0 < lengthOfWideCharString && lengthOfWideCharString <= gsl::narrow_cast<int>(target.size()))
     {
         return true;
     }
@@ -109,6 +108,6 @@ const wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation(
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-    return wstring{ m_Heap->GetPoint(), m_Heap->GetPoint() + m_ReadSize - 1 };
+    return wstring{ target.data(), target.data() + lengthOfWideCharString - 1 };
 #include STSTEM_WARNING_POP
 }

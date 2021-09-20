@@ -9,7 +9,7 @@
 
 #include "MainFunctionHelperBase.h"
 #include "MainFunctionHelperFwd.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "Framework/Application/ApplicationFwd.h"
 #include "Framework/WindowRegister/WindowPictorial.h"
 
@@ -23,8 +23,8 @@ namespace Framework
 		using ParentType = MainFunctionHelperBase;
 		using ClassShareType = CoreTools::NonCopyClasses;
 		using BuildType = Build<Process>;
-		using HWnd = System::WindowHWnd;
-		using HInstance = System::WindowHInstance;		
+		using HWnd = System::WindowsHWnd;
+		using HInstance = System::WindowsHInstance;		
 
 	public:
 		WindowMainFunctionHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,

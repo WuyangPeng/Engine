@@ -22,7 +22,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 Framework::WindowMessageUnitTestSuite
 	::WindowMessageUnitTestSuite(int64_t delta,const string& suiteName)
-	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) },  m_Impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }
+	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) },  impl{  suiteName, m_Stream->GetStreamShared()  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -32,17 +32,17 @@ Framework::WindowMessageUnitTestSuite
 bool Framework::WindowMessageUnitTestSuite
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Stream != nullptr && m_Impl != nullptr)
+	if (ParentType::IsValid() && m_Stream != nullptr  )
 		return true;
 	else
 		return false;
 }
 #endif // OPEN_CLASS_INVARIANT
 
-System::WindowLResult Framework::WindowMessageUnitTestSuite
+System::WindowsLResult Framework::WindowMessageUnitTestSuite
 	::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (GetHwnd() == nullptr)
 		return AddSuiteOnCreateMessage(hwnd, wParam, lParam);
@@ -50,14 +50,14 @@ System::WindowLResult Framework::WindowMessageUnitTestSuite
 		return ParentType::CreateMessage(hwnd, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageUnitTestSuite
+System::WindowsLResult Framework::WindowMessageUnitTestSuite
 	::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto windowsKeyCodes = boost::numeric_cast<int>(wParam);
 
-	m_Impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(windowsKeyCodes));
+	impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(windowsKeyCodes));
 
 	return ParentType::KeyDownMessage(hwnd, wParam, lParam);
 }
@@ -65,7 +65,7 @@ System::WindowLResult Framework::WindowMessageUnitTestSuite
 void Framework::WindowMessageUnitTestSuite
 	::Display(HWnd hwnd, int64_t timeDelta)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Display(hwnd, timeDelta);
 } 
@@ -78,7 +78,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, WindowMessageUnitTestSuite
 CoreTools::OStreamShared Framework::WindowMessageUnitTestSuite
 	::GetStreamShared() noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return m_Stream->GetStreamShared();
 }
@@ -87,20 +87,20 @@ CoreTools::OStreamShared Framework::WindowMessageUnitTestSuite
 void Framework::WindowMessageUnitTestSuite
 	::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestPtr& unitTest)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	m_Impl->AddTest(suiteName, suite, testName, unitTest);
+	impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
 // private
-System::WindowLResult Framework::WindowMessageUnitTestSuite
+System::WindowsLResult Framework::WindowMessageUnitTestSuite
 	::AddSuiteOnCreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	const auto result = ParentType::CreateMessage(hwnd, wParam, lParam);
 
 	InitSuite();
 
-	m_Impl->RunUnitTestOnMessage(); 
+	impl->RunUnitTestOnMessage(); 
 
 	return result;
 }

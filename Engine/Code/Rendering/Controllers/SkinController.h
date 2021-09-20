@@ -12,8 +12,8 @@
 #include "Controller.h"
 #include "Rendering/SceneGraph/Node.h"
 #include "Mathematics/Algebra/APoint.h" 
-
-RENDERING_EXPORT_SHARED_PTR(SkinControllerImpl);
+EXPORT_SHARED_PTR(Rendering, SkinControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +22,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE SkinController : public Controller
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(SkinController, = default);
+            void Swap(SkinController& rhs) noexcept;
+          
+              public:
+                  TYPE_DECLARE(SkinController);
+                  using ClassShareType = CoreTools::CopyUnsharedClasses;
+                  ~SkinController() noexcept= default;
+                  SkinController(const SkinController& rhs);
+                  SkinController& operator=(const SkinController& rhs);
+                  SkinController(SkinController&& rhs) noexcept;
+                  SkinController& operator=(SkinController&& rhs) noexcept;
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 
@@ -60,7 +69,7 @@ namespace Rendering
 		 void SetObjectInCopy(ControllerInterface* object) override;
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(SkinController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 	
 #include STSTEM_WARNING_PUSH

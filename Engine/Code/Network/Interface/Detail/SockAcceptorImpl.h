@@ -16,11 +16,12 @@
 
 namespace Network
 {
+    class SockAcceptorFactory;
     class NETWORK_HIDDEN_DECLARE SockAcceptorImpl
     {
     public:
         using ClassType = SockAcceptorImpl;
-
+         using FactoryType = SockAcceptorFactory;
     public:
         SockAcceptorImpl() noexcept;
         virtual ~SockAcceptorImpl() noexcept = default;

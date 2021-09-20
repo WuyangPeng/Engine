@@ -51,7 +51,7 @@ int Rendering::Polypoint
 void Rendering::Polypoint
 	::SetNumPoints(int numPoints)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 const	auto numVertices = GetMaxNumPoints();
     if (0 <= numPoints && numPoints <= numVertices)
@@ -116,7 +116,7 @@ void Rendering::Polypoint
 void Rendering::Polypoint
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);	
 }
@@ -124,7 +124,7 @@ void Rendering::Polypoint
 void Rendering::Polypoint
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();     
 }
@@ -132,7 +132,7 @@ void Rendering::Polypoint
 void Rendering::Polypoint
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     

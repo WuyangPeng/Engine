@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:34)
+//	引擎版本：0.7.1.1 (2020/10/23 15:34)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T, int64_t V>
-void CoreTools::LiteralCast<T, V>::Constranints()
+void CoreTools::LiteralCast<T, V>::Constranints() noexcept
 {
     static_assert(V <= stlsoft::limit_traits<T>::maximum_value, "V must <= maximum_value");
     static_assert(stlsoft::limit_traits<T>::minimum_value <= V, "V must >= minimum_value");
@@ -28,17 +28,18 @@ bool CoreTools::LiteralCast<T, V>::IsValid() const noexcept
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26432)
 template <typename T, int64_t V>
 CoreTools::LiteralCast<T, V>::~LiteralCast()
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    void (*ptr)() = Constranints;
+    [[maybe_unused]] void (*ptr)() = Constranints;
 }
-
+#include STSTEM_WARNING_POP
 template <typename T, int64_t V>
-CoreTools::LiteralCast<T, V>::operator T() const
+CoreTools::LiteralCast<T, V>::operator T() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

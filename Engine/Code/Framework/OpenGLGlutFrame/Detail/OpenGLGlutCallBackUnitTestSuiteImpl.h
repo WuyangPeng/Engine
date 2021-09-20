@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"
 

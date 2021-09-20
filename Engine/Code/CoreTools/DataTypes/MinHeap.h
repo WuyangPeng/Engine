@@ -41,7 +41,7 @@ namespace CoreTools
         void PrintMinHeapInLog() const;
 #endif  // OPEN_CLASS_INVARIANT
 
-        int GetMaxElements() const noexcept;
+        int GetMaxElements() const;
         int GetGrowBy() const noexcept;
         int GetElementsNumber() const noexcept;
         const RecordType GetMinimum() const;

@@ -38,7 +38,7 @@ bool Mathematics::operator==(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 template <typename Real>
 bool Mathematics::operator<(const Matrix<Real>& lhs, const Matrix<Real>& rhs)
 {
-    const auto iter = rhs.begin();
+    auto iter = rhs.begin();
     for (auto value : lhs)
     {
         if (iter != rhs.end())

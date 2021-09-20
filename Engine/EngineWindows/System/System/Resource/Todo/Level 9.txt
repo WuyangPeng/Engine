@@ -1,24 +1,21 @@
 TODO Level 9
 
-0.5.1.0
+0.7.1.6
 
 1. （Security）完成Security非Windows平台的实现：LookupPrivilege、CreateSecurity、SecuritySid、SecurityAcl、SecurityDescriptor、SecurityAce、AddAccess、SecurityBase、AccessCheck。
-2. （Network）完成Network非Windows平台的实现：SocketPrototypes、DatabasePrototypes、WindowsExtensionPrototypes、WindowsSockEx、WindowsInternet。
-3. （Window）完成Com非Windows平台的实现：ComObjectBase。Com其他实现根据需要添加。
-4. （Window）完成Window非Windows平台的实现：WindowCreate、WindowProcess、WindowRegister、WindowFontInformation、WindowSystem、WindowNamedPipe、WindowUser、WindowRegistry。 
-5. （Window）完成Window非Windows平台的实现：LastWindowError。
-6. （Network）补全网络库API的调用。
-7. （OpenGL）将OpenGLAPI中的类型宏改成枚举。
-8. （OpenGL）将OpenGLGlut中的类型宏改成枚举。
-9. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。
-10.（OpenGL）根据最新的glew版本对模块进行扩展。
-11.（OpenGL）完成OpenGL测试模块，对所有OpenGL API通过枚举调用函数进行封装。
-12.（OpenGL）完成UserInterface非Windows平台的实现：OpenGLWglPrototypes。
-13.（DirectX）完成DirectX库：D3D9、D3D10、D3D11。
-14.（Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
-15.（Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
-16.（Android）完成Android API以及其他平台对Android API的虚拟实现。 
-17.（综合）实现移殖到Linux平台。
-18.（综合）实现移殖到Android平台。
-19.（综合）实现移殖到Macintosh平台。
+2. （Network）完成Network非Windows平台的实现：SocketPrototypes、DatabasePrototypes、WindowsExtensionPrototypes、WindowsSockEx。
+3. （Network）补全网络库API的调用。
+4. （OpenGL）考虑使用类和锁封装opengl是否存在的全局变量。
+5. （OpenGL）完成UserInterface非Windows平台的实现：OpenGLWglPrototypes。
+6. （DirectX）完成DirectX库：D3D11。
+7. （Windows）完成Windows非Windows平台的实现：WindowsCreate、WindowsProcess、WindowsRegister、WindowsFontInformation、WindowsSystem、WindowsNamedPipe、WindowsUser。 
+8. （Windows）完成Windows非Windows平台的实现：LastWindowError。
+9. （Linux）完成Linux API以及其他平台对Linux API的虚拟实现。
+10.（Linux）实现移殖到Linux平台。
+11.（Macintosh）完成Macintosh API以及其他平台对Macintosh API的虚拟实现。 
+12.（Macintosh）实现移殖到Macintosh平台。
+13.（Android）完成Android API以及其他平台对Android API的虚拟实现。 
+14.（Android）实现移殖到Android平台。
+
+
 

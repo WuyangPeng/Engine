@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Intersector1.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <vector>
 
 namespace Mathematics
@@ -21,19 +21,21 @@ namespace Mathematics
     template <typename Real>
     class StaticFindIntersector1Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersector1Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersector1Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersector1Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersector1Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersector1 final : public Intersector1<Real>
     {
     public:
         using StaticFindIntersector1Impl = StaticFindIntersector1Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersector1);
-
+ 
+        TYPE_DECLARE(StaticFindIntersector1);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = Intersector1<Real>;
         using Math = typename ParentType::Math;
 
@@ -54,7 +56,7 @@ namespace Mathematics
         void Find();
 
     private:
-        IMPL_TYPE_DECLARE(StaticFindIntersector1);
+        PackageType impl;
     };
 
     using FloatStaticFindIntersector1 = StaticFindIntersector1<float>;

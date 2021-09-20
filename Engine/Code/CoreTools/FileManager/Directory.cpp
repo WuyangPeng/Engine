@@ -14,9 +14,9 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::Directory::Directory(const System::String& directoryName)
-    : m_Impl{ std::make_shared<ImplType>(directoryName) }
+    : impl{  directoryName  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Directory)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Directory)

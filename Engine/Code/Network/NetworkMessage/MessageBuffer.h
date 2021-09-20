@@ -16,15 +16,26 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <memory>
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
-NETWORK_EXPORT_SHARED_PTR(MessageBufferImpl);
 
+EXPORT_SHARED_PTR(Network, MessageBufferImpl, NETWORK_DEFAULT_DECLARE);
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE MessageBuffer final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(MessageBuffer, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(MessageBuffer& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(MessageBuffer);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~MessageBuffer() noexcept = default;
+        MessageBuffer(const MessageBuffer& rhs);
+        MessageBuffer& operator=(const MessageBuffer& rhs);
+        MessageBuffer(MessageBuffer&& rhs) noexcept;
+        MessageBuffer& operator=(MessageBuffer&& rhs) noexcept;
         CORE_TOOLS_SHARED_PTR_DECLARE(MessageBuffer);
         using ImplTypeSharedPtr = std::shared_ptr<ImplType>;
 
@@ -82,13 +93,16 @@ namespace Network
         [[nodiscard]] MessageBufferSharedPtr Clone() const;
 
     private:
-        IMPL_TYPE_DECLARE(MessageBuffer);
+        using MessageBufferImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        MessageBufferImplPtr impl;
     };
 
     using MessageBufferSharedPtr = MessageBuffer::MessageBufferSharedPtr;
     using ConstMessageBufferSharedPtr = MessageBuffer::ConstMessageBufferSharedPtr;
 }
 
-NETWORK_EXPORT_SHARED_PTR(MessageBuffer);
-
+ 
+EXPORT_SHARED_PTR(Network, MessageBuffer, NETWORK_DEFAULT_DECLARE);
 #endif  // NETWORK_NETWORK_MESSAGE_MESSAGE_BUFFER_H

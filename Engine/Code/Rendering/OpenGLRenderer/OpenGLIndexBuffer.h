@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
 #include "Rendering/Renderers/Detail/PlatformIndexBufferImpl.h"
 

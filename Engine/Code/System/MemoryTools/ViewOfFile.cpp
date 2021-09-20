@@ -1,25 +1,31 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 1:07)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/04/19 20:19)
 
 #include "System/SystemExport.h"
 
 #include "ViewOfFile.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/Flags/PlatformErrorFlags.h"
-#include "System/Window/LastPlatformError.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
+#include "System/Windows/LastPlatformError.h"
+#include "System/Windows/WindowsSystem.h"
 
-System::WindowHandle System::CreateSystemFileMapping([[maybe_unused]] WindowHandle file, [[maybe_unused]] MemoryProtect protect, [[maybe_unused]] FileMapProtection otherProtect, [[maybe_unused]] WindowDWord maximumSizeHigh,
-                                                     [[maybe_unused]] WindowDWord maximumSizeLow, [[maybe_unused]] const wchar_t* name, [[maybe_unused]] bool* isExists) noexcept
+System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
+                                                     MemoryProtect protect,
+                                                     FileMapProtection otherProtect,
+                                                     WindowsDWord maximumSizeHigh,
+                                                     WindowsDWord maximumSizeLow,
+                                                     const wchar_t* name,
+                                                     bool* isExists) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     auto handle = ::CreateFileMapping(file, nullptr, EnumCastUnderlying(protect) | EnumCastUnderlying(otherProtect), maximumSizeHigh, maximumSizeLow, name);
     if (isExists != nullptr)
     {
@@ -35,81 +41,114 @@ System::WindowHandle System::CreateSystemFileMapping([[maybe_unused]] WindowHand
     return handle;
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, MemoryProtect, FileMapProtection, WindowsDWord, WindowsDWord, const wchar_t*, bool*>(file, protect, otherProtect, maximumSizeHigh, maximumSizeLow, name, isExists);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::OpenSystemFileMapping([[maybe_unused]] FileMapDesiredAccess desiredAccess, [[maybe_unused]] bool inheritHandle, [[maybe_unused]] const wchar_t* name) noexcept
+System::WindowsHandle System::OpenSystemFileMapping(FileMapDesiredAccess desiredAccess, bool inheritHandle, const wchar_t* name) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::OpenFileMapping(EnumCastUnderlying(desiredAccess), BoolConversion(inheritHandle), name);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<FileMapDesiredAccess, bool, const wchar_t*>(desiredAccess, inheritHandle, name);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::CreateSystemFileMappingNuma([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowSecurityAttributesPtr fileMappingAttributes, [[maybe_unused]] MemoryProtect protect,
-                                                         [[maybe_unused]] FileMapProtection otherProtect, [[maybe_unused]] WindowDWord maximumSizeHigh, [[maybe_unused]] WindowDWord maximumSizeLow,
-                                                         [[maybe_unused]] const wchar_t* name, [[maybe_unused]] WindowDWord preferred) noexcept
+System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObject, FileMapDesiredAccess desiredAccess, WindowsDWord maximumSizeHigh, WindowsDWord maximumSizeLow, WindowsSize numberOfBytesToMap) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    return ::CreateFileMappingNuma(file, fileMappingAttributes, EnumCastUnderlying(protect) | EnumCastUnderlying(otherProtect), maximumSizeHigh, maximumSizeLow, name, preferred);
-#else  // !SYSTEM_PLATFORM_WIN32
-    return nullptr;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
 
-System::WindowVoidPtr System::MapSystemViewOfFile([[maybe_unused]] WindowHandle fileMappingObject, [[maybe_unused]] FileMapDesiredAccess desiredAccess, [[maybe_unused]] WindowDWord maximumSizeHigh, [[maybe_unused]] WindowDWord maximumSizeLow, [[maybe_unused]] WindowSize numberOfBytesToMap) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
     return ::MapViewOfFile(fileMappingObject, EnumCastUnderlying(desiredAccess), maximumSizeHigh, maximumSizeLow, numberOfBytesToMap);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, FileMapDesiredAccess, WindowsDWord, WindowsDWord, WindowsSize>(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowVoidPtr System::MapSystemViewOfFile([[maybe_unused]] WindowHandle fileMappingObject, [[maybe_unused]] FileMapDesiredAccess desiredAccess, [[maybe_unused]] WindowDWord maximumSizeHigh,
-                                                  [[maybe_unused]] WindowDWord maximumSizeLow, [[maybe_unused]] WindowSize numberOfBytesToMap, [[maybe_unused]] WindowVoidPtr baseAddress) noexcept
+System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObject,
+                                                  FileMapDesiredAccess desiredAccess,
+                                                  WindowsDWord maximumSizeHigh,
+                                                  WindowsDWord maximumSizeLow,
+                                                  WindowsSize numberOfBytesToMap,
+                                                  WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::MapViewOfFileEx(fileMappingObject, EnumCastUnderlying(desiredAccess), maximumSizeHigh, maximumSizeLow, numberOfBytesToMap, baseAddress);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, FileMapDesiredAccess, WindowsDWord, WindowsDWord, WindowsSize, WindowsVoidPtr>(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap, baseAddress);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::FlushSystemViewOfFile([[maybe_unused]] WindowVoidPtr baseAddress, [[maybe_unused]] WindowSize numberOfBytesToFlush) noexcept
+bool System::FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numberOfBytesToFlush) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::FlushViewOfFile(baseAddress, numberOfBytesToFlush) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsVoidPtr, WindowsSize>(baseAddress, numberOfBytesToFlush);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::UnmapSystemViewOfFile([[maybe_unused]] WindowVoidPtr baseAddress) noexcept
+bool System::UnmapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::UnmapViewOfFile(baseAddress) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsVoidPtr>(baseAddress);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CloseFileMapping([[maybe_unused]] WindowHandle fileMappingHandle) noexcept
+bool System::CloseFileMapping(WindowsHandle fileMappingHandle) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::CloseHandle(fileMappingHandle) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle>(fileMappingHandle);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }

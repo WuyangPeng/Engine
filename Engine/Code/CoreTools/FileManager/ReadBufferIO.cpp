@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::ReadBufferIO::ReadBufferIO(const ConstFileBufferSharedPtr& fileBuffer)
-    : m_Impl{ make_shared<ImplType>(fileBuffer) }
+    : impl{ fileBuffer }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ReadBufferIO)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadBufferIO)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, ReadBufferIO, GetText, int, std::string);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ReadBufferIO, GetBytesTotal, int);
@@ -30,21 +30,15 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, ReadBufferIO, GetBytesPr
 
 void CoreTools::ReadBufferIO::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->IncrementBytesProcessed(bytesNumber);
+    return impl->IncrementBytesProcessed(bytesNumber);
 }
 
 void CoreTools::ReadBufferIO::Read(size_t itemSize, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Read(itemSize, data);
+    return impl->Read(itemSize, data);
 }
 
 void CoreTools::ReadBufferIO::Read(size_t itemSize, size_t itemsNumber, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Read(itemSize, itemsNumber, data);
+    return impl->Read(itemSize, itemsNumber, data);
 }

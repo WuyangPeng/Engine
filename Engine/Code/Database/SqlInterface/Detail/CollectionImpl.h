@@ -17,6 +17,7 @@
 
 namespace Database
 {
+    class CollectionFactory;
     class DATABASE_HIDDEN_DECLARE CollectionImpl
     {
     public:
@@ -24,6 +25,7 @@ namespace Database
         using ImplTypePtr = std::shared_ptr<ClassType>;
         using ResultPtr = std::shared_ptr<Result>;
         using BindStatementType = std::map<std::string, std::string>;
+        using FactoryType = CollectionFactory;
 
     public:
         explicit CollectionImpl(const ConfigurationStrategy& configurationStrategy) noexcept;

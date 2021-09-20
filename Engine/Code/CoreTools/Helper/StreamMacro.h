@@ -1,18 +1,20 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/09 10:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 15:53)
 
 #ifndef CORE_TOOLS_HELPER_STREAM_MACRO_H
 #define CORE_TOOLS_HELPER_STREAM_MACRO_H
 
 #include "ExceptionMacro.h"
+#include "InitializeTerminatorMacro.h"
 #include "MemberFunctionMacro.h"
 #include "CoreTools/Contract/Assertion.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/InitTermRegisterFactory.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
@@ -54,18 +56,16 @@ public:                                              \
     explicit className(LoadConstructor value);       \
                                                      \
 public:                                              \
-    [[nodiscard]] static bool RegisterFactory();     \
-    static void InitializeFactory();                 \
-    static void TerminateFactory();                  \
-    [[nodiscard]] static CoreTools::ObjectInterfaceSharedPtr Factory(const CoreTools::BufferSourceSharedPtr& source)
+    CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);  \
+    NODISCARD static CoreTools::ObjectInterfaceSharedPtr Factory(const CoreTools::BufferSourceSharedPtr& source)
 
-#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                                     \
-    void Load(const CoreTools::BufferSourceSharedPtr& source) override;                               \
-    void Link(const CoreTools::ObjectLinkSharedPtr& source) override;                                 \
-    void PostLink() override;                                                                         \
-    [[nodiscard]] uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const override; \
-    void Save(const CoreTools::BufferTargetSharedPtr& target) const override;                         \
-    [[nodiscard]] int GetStreamingSize() const override;
+#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                                 \
+    void Load(const CoreTools::BufferSourceSharedPtr& source) override;                           \
+    void Link(const CoreTools::ObjectLinkSharedPtr& source) override;                             \
+    void PostLink() override;                                                                     \
+    NODISCARD uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const override; \
+    void Save(const CoreTools::BufferTargetSharedPtr& target) const override;                     \
+    NODISCARD int GetStreamingSize() const override;
 
 #define CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(className) \
     CORE_TOOLS_OBJECT_FACTORY_DECLARE(className);                    \
@@ -87,21 +87,17 @@ public:                                              \
     }
 
 #define CORE_TOOLS_STREAM_REGISTER(className) \
-    static auto SYSTEM_MULTIPLE_CONCATENATOR(g_, className, StreamRegistered) = className::RegisterFactory()
+    CORE_TOOLS_INITIALIZE_TERMINATE_REGISTER(className)
 
-#define CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(namespaceName, className)                                                       \
-    bool namespaceName::className::RegisterFactory()                                                                            \
-    {                                                                                                                           \
-        static CoreTools::InitTermRegisterFactory registerFactory{ ClassType::InitializeFactory, ClassType::TerminateFactory }; \
-        return true;                                                                                                            \
-    }                                                                                                                           \
-    void namespaceName::className::InitializeFactory()                                                                          \
-    {                                                                                                                           \
-        OBJECT_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), Factory);                                                      \
-    }                                                                                                                           \
-    void namespaceName::className::TerminateFactory()                                                                           \
-    {                                                                                                                           \
-        OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());                                                               \
+#define CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(namespaceName, className)         \
+    CORE_TOOLS_INITIALIZE_TERMINATE_DEFINE(namespaceName, className)              \
+    void namespaceName::className::InitializeFactory()                            \
+    {                                                                             \
+        OBJECT_MANAGER_SINGLETON.Insert(GetCurrentRttiType().GetName(), Factory); \
+    }                                                                             \
+    void namespaceName::className::TerminateFactory()                             \
+    {                                                                             \
+        OBJECT_MANAGER_SINGLETON.Remove(GetCurrentRttiType().GetName());          \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className) \
@@ -111,11 +107,11 @@ public:                                              \
         SELF_CLASS_IS_VALID_0;                                                      \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className) \
-    namespaceName::className::className(LoadConstructor value)                        \
-        : ParentType{ value }, m_Impl{ std::make_shared<ImplType>() }                 \
-    {                                                                                 \
-        SELF_CLASS_IS_VALID_0;                                                        \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_CONSTRUCTOR_DEFINE(namespaceName, className)                 \
+    namespaceName::className::className(LoadConstructor loadConstructor)                              \
+        : ParentType{ loadConstructor }, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default } \
+    {                                                                                                 \
+        SELF_CLASS_IS_VALID_0;                                                                        \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(namespaceName, className) \
@@ -123,7 +119,7 @@ public:                                              \
     {                                                                                   \
         CLASS_IS_VALID_CONST_0;                                                         \
         auto size = ParentType::GetStreamingSize();                                     \
-        size += m_Impl->GetStreamingSize();                                             \
+        size += impl->GetStreamingSize();                                               \
         return size;                                                                    \
     }
 
@@ -141,7 +137,7 @@ public:                                              \
         const auto uniqueID = ParentType::Register(target);                                             \
         if (uniqueID != 0)                                                                              \
         {                                                                                               \
-            m_Impl->Register(target);                                                                   \
+            impl->Register(target);                                                                     \
         }                                                                                               \
         return uniqueID;                                                                                \
     }
@@ -152,39 +148,39 @@ public:                                              \
         CLASS_IS_VALID_CONST_0;                                                               \
         CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);                                           \
         ParentType::Save(target);                                                             \
-        m_Impl->Save(target);                                                                 \
+        impl->Save(target);                                                                   \
         CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);                                             \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(namespaceName, className)               \
     void namespaceName::className::Link(const CoreTools::ObjectLinkSharedPtr& source) \
     {                                                                                 \
-        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                 \
+        CLASS_IS_VALID_0;                                                             \
         ParentType::Link(source);                                                     \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(namespaceName, className)             \
     void namespaceName::className::Link(const CoreTools::ObjectLinkSharedPtr& source) \
     {                                                                                 \
-        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                 \
+        CLASS_IS_VALID_0;                                                             \
         ParentType::Link(source);                                                     \
-        m_Impl->Link(source);                                                         \
+        impl->Link(source);                                                           \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(namespaceName, className) \
     void namespaceName::className::PostLink()                                \
     {                                                                        \
-        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                        \
+        CLASS_IS_VALID_0;                                                    \
         ParentType::PostLink();                                              \
     }
 
 #define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(namespaceName, className)               \
     void namespaceName::className::Load(const CoreTools::BufferSourceSharedPtr& source) \
     {                                                                                   \
-        IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;                                   \
+        CLASS_IS_VALID_0;                                                               \
         CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);                                     \
         ParentType::Load(source);                                                       \
-        m_Impl->Load(source);                                                           \
+        impl->Load(source);                                                             \
         CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);                                       \
     }
 

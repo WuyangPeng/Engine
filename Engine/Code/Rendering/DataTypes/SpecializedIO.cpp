@@ -14,6 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
 #include <array>
 
@@ -22,7 +23,7 @@ using std::array;
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::FloatTransform& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.ReadAggregate(*this);
 }
@@ -30,7 +31,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatTransform& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleTransform& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.ReadAggregate(*this);
 }
@@ -38,7 +39,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleTransform& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatTransform& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.WriteAggregate(*this);
 }
@@ -46,7 +47,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatTransform& da
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleTransform& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.WriteAggregate(*this);
 }
@@ -54,7 +55,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleTransform& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::FloatBound& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.ReadAggregate(*this);
 }
@@ -62,7 +63,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatBound& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleBound& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.ReadAggregate(*this);
 }
@@ -70,7 +71,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleBound& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatBound& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.WriteAggregate(*this);
 }
@@ -78,7 +79,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatBound& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleBound& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     datum.WriteAggregate(*this);
 }
@@ -86,7 +87,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleBound& datum
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto colour = ReadContainer<Rendering::FloatColour::ValueType, Rendering::FloatColour::sm_ArraySize>();
 
@@ -99,7 +100,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::FloatColour& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto value = datum.GetPoint();
     WriteContainer(value);
@@ -108,7 +109,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::FloatColour& datum
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto colour = ReadContainer<Rendering::DoubleColour::ValueType, Rendering::DoubleColour::sm_ArraySize>();
 
@@ -121,7 +122,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::DoubleColour& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto value = datum.GetPoint();
     WriteContainer(value);
@@ -130,7 +131,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::DoubleColour& datu
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto colour = ReadContainer<Rendering::ByteColour::ValueType, Rendering::ByteColour::sm_ArraySize>();
 
@@ -143,7 +144,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::ByteColour& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::ByteColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto value = datum.GetPoint();
     WriteContainer(value);
@@ -152,7 +153,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Rendering::ByteColour& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto colour = ReadContainer<Rendering::IntColour::ValueType, Rendering::IntColour::sm_ArraySize>();
 
@@ -165,7 +166,7 @@ void CoreTools::BufferSource::ReadAggregate(Rendering::IntColour& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Rendering::IntColour& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto value = datum.GetPoint();
     WriteContainer(value);

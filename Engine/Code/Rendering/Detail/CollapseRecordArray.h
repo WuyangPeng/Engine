@@ -15,15 +15,23 @@
 
 
 #include <vector>
-
-RENDERING_EXPORT_SHARED_PTR(CollapseRecordArrayImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, CollapseRecordArrayImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE CollapseRecordArray : public CoreTools::Object
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(CollapseRecordArray, = default);
+            void Swap(CollapseRecordArray& rhs) noexcept;
+
+        public:
+            TYPE_DECLARE(CollapseRecordArray);
+            using ClassShareType = CoreTools::CopyUnsharedClasses;
+            ~CollapseRecordArray() noexcept = default;
+            CollapseRecordArray(const CollapseRecordArray& rhs);
+            CollapseRecordArray& operator=(const CollapseRecordArray& rhs);
+            CollapseRecordArray(CollapseRecordArray&& rhs) noexcept;
+            CollapseRecordArray& operator=(CollapseRecordArray&& rhs) noexcept;
 		using ParentType = Object;
 
 	public:		
@@ -40,7 +48,7 @@ namespace Rendering
 		const CollapseRecord GetRecord(int index) const;
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(CollapseRecordArray);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

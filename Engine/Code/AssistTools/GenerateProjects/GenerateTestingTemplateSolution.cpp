@@ -12,17 +12,17 @@
  
 AssistTools::GenerateTemplateSolution
 	::GenerateTemplateSolution(const System::String& templateFileName, const System::String& projectName, const System::String& coreName)
-	:m_Impl(std::make_shared<ImplType>(templateFileName,projectName,coreName))
+	:impl(templateFileName,projectName,coreName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools,GenerateTemplateSolution)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools,GenerateTemplateSolution)
 
 void AssistTools::GenerateTemplateSolution
 	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newCoreName) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, solutionName, newCoreName);
+	return impl->GenerateTo(resourceDirectory, solutionName, newCoreName);
 }

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:31)
+//	引擎版本：0.7.1.1 (2020/10/26 15:31)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_H
@@ -26,21 +26,21 @@ namespace CoreTools
         using ReceiverInfo = std::vector<uint64_t>;
 
     public:
-        Telegram();
+        Telegram() noexcept;
         Telegram(uint64_t sender, uint64_t receiver, EventType message, int64_t dispatchMillisecondTime);
         Telegram(uint64_t sender, uint64_t receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters);
         Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime);
-        Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters);
+        Telegram(uint64_t sender, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters) noexcept;
         Telegram(uint64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime);
         Telegram(uint64_t sender, const ReceiverInfo& receiver, EventType message, int64_t dispatchMillisecondTime, const CallbackParameters& callbackParameters);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint64_t GetSender() const;
+        [[nodiscard]] uint64_t GetSender() const noexcept;
         [[nodiscard]] ReceiverInfo GetReceiver() const;
-        [[nodiscard]] EventType GetMessageType() const;
-        [[nodiscard]] int64_t GetDispatchMillisecondTime() const;
-        [[nodiscard]] const CallbackParameters GetCallbackParameters() const;
+        [[nodiscard]] EventType GetMessageType() const noexcept;
+        [[nodiscard]] int64_t GetDispatchMillisecondTime() const noexcept;
+        [[nodiscard]] const CallbackParameters GetCallbackParameters() const noexcept;
 
         void AddReceiver(uint64_t receiver);
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/10 13:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/25 15:54)
 
 #ifndef CORE_TOOLS_CONTRACT_CHECK_INVARIANT_H
 #define CORE_TOOLS_CONTRACT_CHECK_INVARIANT_H
@@ -26,22 +26,23 @@ namespace CoreTools
         using ConstReference = const T&;
 
     public:
-        CheckInvariant(ConstReference master, const FunctionDescribed& functionDescribed,
+        CheckInvariant(ConstReference master,
+                       const FunctionDescribed& functionDescribed,
                        CheckInvariantConditions conditions = CheckInvariantConditions::Fully) noexcept;
         ~CheckInvariant() noexcept;
 
-        CheckInvariant(const CheckInvariant&) = delete;
-        CheckInvariant& operator=(const CheckInvariant&) = delete;
-        CheckInvariant(CheckInvariant&&) noexcept = delete;
-        CheckInvariant& operator=(CheckInvariant&&) noexcept = delete;
+        CheckInvariant(const CheckInvariant& rhs) = delete;
+        CheckInvariant& operator=(const CheckInvariant& rhs) = delete;
+        CheckInvariant(CheckInvariant&& rhs) noexcept = delete;
+        CheckInvariant& operator=(CheckInvariant&& rhs) noexcept = delete;
 
     private:
         void CheckIsValid(const char* failLocationDescribe) const;
 
     private:
-        ConstReference m_Master;
-        const FunctionDescribed& m_FunctionDescribed;
-        CheckInvariantConditions m_Conditions;
+        ConstReference master;
+        const FunctionDescribed& functionDescribed;
+        CheckInvariantConditions conditions;
     };
 }
 

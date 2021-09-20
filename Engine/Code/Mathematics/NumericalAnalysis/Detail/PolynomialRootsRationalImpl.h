@@ -21,7 +21,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_HIDDEN_DECLARE PolynomialRootsRationalImpl final
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE PolynomialRootsRationalImpl final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");

@@ -1,0 +1,11 @@
+{
+  "DefaultEnvironment": "",
+  "Version": "0.7.1.6",
+  "PrintRun": 1,
+  "RandomSeed": 70106,
+  "TcpPort": 30000,
+  "UdpPort": 31000,
+  "Address": "127.0.0.1",
+  "ConnectTime": 20,
+  "ConnectHostname": "14.215.177.39"
+}

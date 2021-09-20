@@ -16,12 +16,12 @@ using std::make_shared;
 
 Rendering::RenderTargetManagement
 	::RenderTargetManagement(RendererPtr ptr)
-	:m_Impl{ make_shared<ImplType>(ptr) }
+    : impl{ ptr }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,RenderTargetManagement)
+CLASS_INVARIANT_STUB_DEFINE(Rendering,RenderTargetManagement)
 	
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,Bind,RenderTargetConstPtr,void)
 
@@ -35,8 +35,8 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RenderTargetManagement,GetR
 Rendering::ConstTexture2DSharedPtr  Rendering::RenderTargetManagement
      ::ReadColor(int index,RenderTargetConstPtr renderTarget)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->ReadColor(index,renderTarget);
+    return impl->ReadColor(index,renderTarget);
 }
  

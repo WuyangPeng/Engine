@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 14:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/29 20:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,14 +19,14 @@ using std::wstring;
 
 wstring CoreTools::StringConversion::MultiByteConversionWideChar(const string& character)
 {
-    CoreTools::MultiByteConversionWideChar conversion{ character, false };
+    const CoreTools::MultiByteConversionWideChar conversion{ character, false };
 
     return conversion.GetWideCharRepresentation();
 }
 
 string CoreTools::StringConversion::WideCharConversionMultiByte(const wstring& character)
 {
-    CoreTools::WideCharConversionMultiByte conversion{ character, false };
+    const CoreTools::WideCharConversionMultiByte conversion{ character, false };
 
     return conversion.GetMultiByteRepresentation();
 }
@@ -105,42 +105,42 @@ System::String CoreTools::StringConversion::DynamicLinkStringConversionStandard(
 
 wstring CoreTools::StringConversion::UTF8ConversionWideChar(const string& character)
 {
-    CoreTools::MultiByteConversionWideChar conversion{ character, true };
+    const CoreTools::MultiByteConversionWideChar conversion{ character, true };
 
     return conversion.GetWideCharRepresentation();
 }
 
 string CoreTools::StringConversion::WideCharConversionUTF8(const wstring& character)
 {
-    CoreTools::WideCharConversionMultiByte conversion{ character, true };
+    const CoreTools::WideCharConversionMultiByte conversion{ character, true };
 
     return conversion.GetMultiByteRepresentation();
 }
 
 System::String CoreTools::StringConversion::UTF8ConversionStandard(const string& character)
 {
-    auto wideChar = UTF8ConversionWideChar(character);
+    const auto wideChar = UTF8ConversionWideChar(character);
 
     return WideCharConversionStandard(wideChar);
 }
 
 string CoreTools::StringConversion::StandardConversionUTF8(const String& character)
 {
-    auto wideChar = StandardConversionWideChar(character);
+    const auto wideChar = StandardConversionWideChar(character);
 
     return WideCharConversionUTF8(wideChar);
 }
 
 string CoreTools::StringConversion::UTF8ConversionMultiByte(const string& character)
 {
-    auto wideChar = UTF8ConversionWideChar(character);
+    const auto wideChar = UTF8ConversionWideChar(character);
 
     return WideCharConversionMultiByte(wideChar);
 }
 
 string CoreTools::StringConversion::MultiByteConversionUTF8(const string& character)
 {
-    auto wideChar = MultiByteConversionWideChar(character);
+    const auto wideChar = MultiByteConversionWideChar(character);
 
     return WideCharConversionUTF8(wideChar);
 }

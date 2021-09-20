@@ -13,7 +13,7 @@
 #include "EngineMiddleLayerInterface.h"  
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -22,7 +22,7 @@ namespace Framework
 	{
 	public:
 		using AudioManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(AudioManagerInterface);
+		NON_COPY_TYPE_DECLARE(AudioManagerInterface);
 		using ParentType = EngineMiddleLayerInterface;
 
 	public:
@@ -51,7 +51,7 @@ namespace Framework
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Resource);
 
 	private:
-		IMPL_TYPE_DECLARE(AudioManagerInterface);
+                PackageType impl;
 	};
 
 	using AudioManagerInterfaceSharedPtr = std::shared_ptr<AudioManagerInterface>;

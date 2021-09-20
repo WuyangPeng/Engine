@@ -23,6 +23,7 @@ namespace Rendering
     public:
         using ClassType = PlatformRenderTargetImpl;
         using PlatformRenderTargetPtr = std::shared_ptr<ClassType>;
+        using FactoryType = PlatformRenderTargetImpl;
 
     public:
         PlatformRenderTargetImpl() noexcept;

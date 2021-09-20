@@ -19,12 +19,12 @@
 using std::make_shared;
 
 CoreTools::AppenderManager::AppenderManager([[maybe_unused]] DisableNotThrow disableNotThrow)
-    : m_Impl{ make_shared<AppenderManagerImpl>() }
+    : impl{  0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, AppenderManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, AppenderManager)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertLogger, Logger, bool)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, InsertConsoleAppender, Appender, bool)
@@ -38,16 +38,16 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, IsAppenderExi
 
 bool CoreTools::AppenderManager::InsertAppender(const String& name, const Appender& appender)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->InsertAppender(name, appender);
+    return impl->InsertAppender(name, appender);
 }
 
 void CoreTools::AppenderManager::Write(const String& name, const LogMessage& message)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(name, message);
+    return impl->Write(name, message);
 }
 
 const System::String CoreTools::AppenderManager::GetConsoleAppenderName()

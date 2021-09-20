@@ -18,11 +18,13 @@
 
 namespace Database
 {
+    class ResultRowFactory;
     class DATABASE_HIDDEN_DECLARE ResultRowImpl
     {
     public:
         using ClassType = ResultRowImpl;
         using ImplTypePtr = std::shared_ptr<ClassType>;
+        using FactoryType = ResultRowFactory;
 
     public:
         explicit ResultRowImpl(const ConfigurationStrategy& configurationStrategy) noexcept;

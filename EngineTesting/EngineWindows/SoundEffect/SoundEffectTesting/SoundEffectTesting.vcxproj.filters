@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationSuite 头文件">
+      <UniqueIdentifier>{8c79a24c-d290-4488-9118-a848975d0752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CsynUtilSuite 头文件">
+      <UniqueIdentifier>{5bd47be2-636d-48ec-8c33-2e62c3f1d62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectSoundSuite 头文件">
+      <UniqueIdentifier>{b8bd18d4-f70a-4bb1-b1fd-67650c9f2a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreeAlutSuite 头文件">
+      <UniqueIdentifier>{1cdeb2b3-3145-468b-8370-a2dc830b3dd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 头文件">
+      <UniqueIdentifier>{a1d15a7a-e403-4d57-8d69-9a66e0cb8363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{f1b40f00-c893-4d90-af5a-44ab3c63e5c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OggSuite 头文件">
+      <UniqueIdentifier>{4b41db95-bef1-413d-bea7-3793d46688d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenALSuite 头文件">
+      <UniqueIdentifier>{faf1152d-3fea-4e8e-bf15-c6196769be38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VorbisSuite 头文件">
+      <UniqueIdentifier>{3d44da55-7163-4fe0-b33d-8bc0729f6f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{8e50d221-90d3-428d-b1e2-2c2ec55edf60}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\SoundEffectTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\ConfigurationSuite\ConfigurationSuite.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\CsynUtilSuite\CsynUtilSuite.h">
+      <Filter>CsynUtilSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\DirectSoundSuite\DirectSoundSuite.h">
+      <Filter>DirectSoundSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\FreeAlutSuite\FreeAlutSuite.h">
+      <Filter>FreeAlutSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\InterfaceSuite\InterfaceSuite.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\OggSuite\OggSuite.h">
+      <Filter>OggSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\OpenALSuite\OpenALSuite.h">
+      <Filter>OpenALSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\SoundEffect\SoundEffectTesting\VorbisSuite\VorbisSuite.h">
+      <Filter>VorbisSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\SoundEffect\SoundEffectTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\SoundEffect\SoundEffectTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\SoundEffect\SoundEffectTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,35 @@
+{
+   "RendererType":2,
+
+  "Texture":
+  {
+    "ColorFormat": 8,
+    "DepthStencilFormat": 22,
+    "MultisamplesNumber": 1
+  },
+
+  "ClearColor": 
+  {
+    "Red": 0.0,
+    "Green": 0.0,
+    "Blue": 0.0,
+    "Alpha": 1.0
+  },
+
+  "WindowParameter":
+  {
+    "WindowTitle": "FrameworkWindowTesting",
+    "Width": 1024,
+    "Height": 768,
+    "X": 100,
+    "Y": 120,
+    "AllowResize": true,
+    "ClassName": "ClassName",
+    "MenuName": "MenuName",
+    "Icon": 32514,
+    "IconDefault": true,
+    "Cursor": 102,
+    "CursorDefault": false,
+    "Background": 4
+  }
+}

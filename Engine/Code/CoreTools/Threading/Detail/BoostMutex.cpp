@@ -11,7 +11,7 @@
 
 #include "BoostMutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::BoostMutex::BoostMutex() noexcept
     : ParentType{}, m_Mutex{}

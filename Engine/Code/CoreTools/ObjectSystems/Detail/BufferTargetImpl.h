@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/21 10:20)
+//	引擎版本：0.7.1.1 (2020/10/21 10:20)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
@@ -17,13 +17,18 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE BufferTargetImpl final : private boost::noncopyable
+    class CORE_TOOLS_HIDDEN_DECLARE BufferTargetImpl final
     {
     public:
         using ClassType = BufferTargetImpl;
 
     public:
         BufferTargetImpl(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister);
+        ~BufferTargetImpl() noexcept = default;
+        BufferTargetImpl(const BufferTargetImpl& rhs) noexcept = delete;
+        BufferTargetImpl& operator=(const BufferTargetImpl& rhs) noexcept = delete;
+        BufferTargetImpl(BufferTargetImpl&& rhs) noexcept = delete;
+        BufferTargetImpl& operator=(BufferTargetImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 

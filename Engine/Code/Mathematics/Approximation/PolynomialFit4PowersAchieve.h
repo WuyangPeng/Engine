@@ -18,7 +18,7 @@ template <typename Real>
 Mathematics::PolynomialFit4Powers<Real>::PolynomialFit4Powers(const Samples& xSamples, const Samples& ySamples,
                                                               const Samples& zSamples, const Samples& wSamples,
                                                               const Powers& powers, bool isRepackage)
-    : m_Impl{ std::make_shared<ImplType>(xSamples, ySamples, zSamples, wSamples, powers, isRepackage) }
+    : impl{  xSamples, ySamples, zSamples, wSamples, powers, isRepackage  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,10 +27,9 @@ Mathematics::PolynomialFit4Powers<Real>::PolynomialFit4Powers(const Samples& xSa
 template <typename Real>
 bool Mathematics::PolynomialFit4Powers<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+  
         return true;
-    else
-        return false;
+     
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -39,7 +38,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetXMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMin();
+    return impl->GetXMin();
 }
 
 template <typename Real>
@@ -47,7 +46,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetXMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMax();
+    return impl->GetXMax();
 }
 
 template <typename Real>
@@ -55,7 +54,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetYMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetYMin();
+    return impl->GetYMin();
 }
 
 template <typename Real>
@@ -63,7 +62,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetYMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetYMax();
+    return impl->GetYMax();
 }
 
 template <typename Real>
@@ -71,7 +70,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetZMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetZMin();
+    return impl->GetZMin();
 }
 
 template <typename Real>
@@ -79,7 +78,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetZMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetZMax();
+    return impl->GetZMax();
 }
 
 template <typename Real>
@@ -87,7 +86,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetWMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMin();
+    return impl->GetWMin();
 }
 
 template <typename Real>
@@ -95,7 +94,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::GetWMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMax();
+    return impl->GetWMax();
 }
 
 template <typename Real>
@@ -103,7 +102,7 @@ Real Mathematics::PolynomialFit4Powers<Real>::operator()(Real x, Real y, Real z)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(x, y, z);
+    return (*impl)(x, y, z);
 }
 
 template <typename Real>
@@ -111,7 +110,7 @@ bool Mathematics::PolynomialFit4Powers<Real>::IsSolveSucceed() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsSolveSucceed();
+    return impl->IsSolveSucceed();
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_ACHIEVE_H

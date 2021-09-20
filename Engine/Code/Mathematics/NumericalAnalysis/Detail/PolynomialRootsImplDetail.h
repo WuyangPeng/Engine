@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Algebra/PolynomialDivideDetail.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::PolynomialRootsImpl<Real>::PolynomialRootsImpl(Real epsilon)

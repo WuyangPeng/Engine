@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{754D982D-A813-40B1-88AB-83EBD535E607}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AnimationTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>true</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\Log.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\Network.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\NetworkTest.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\NetworkTesting.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEIovecSockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEMainManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockAcceptorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEWrappersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseThreadsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorNonBlockingTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorSynchronizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorSynchronizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamNonBlockingTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamSynchronizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamNonBlockingTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamSynchronizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSockStreamHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostWrappersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\AnalysisNetworkConfigurationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationParameterTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationStrategyTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSubStrategyTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestAbstractMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\HelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\InterfaceSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockConnectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNullMessage.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\IntegerMessageType.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\MultipleMessageType.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\StringMessageType.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceSharedPtrLessTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageSourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTargetTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionOperatingTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageCastTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerGroupTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageElementTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageInitValueTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingLoadTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSaveTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullDoubleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ReceiveMessageLevelTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkMainManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockAcceptorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkWrappersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\OpensslSuite\OpensslSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\SocketWrappersSuite\SocketWrappersSuite.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEIovecSockStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEMainManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockAcceptorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseThreadsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorNonBlockingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorSynchronizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorSynchronizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamNonBlockingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamSynchronizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamNonBlockingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamSynchronizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSockStreamHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\AnalysisNetworkConfigurationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationStrategyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSubStrategyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestAbstractMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockConnectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNullMessage.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceSharedPtrLessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageSourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTargetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionOperatingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageCastTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerGroupTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageElementTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageInitValueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingLoadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSaveTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullDoubleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ReceiveMessageLevelTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkMainManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockAcceptorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

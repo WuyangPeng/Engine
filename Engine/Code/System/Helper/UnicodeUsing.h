@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:33)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/16 14:58)
 
 #ifndef SYSTEM_HELPER_UNICODE_MACRO_H
 #define SYSTEM_HELPER_UNICODE_MACRO_H
@@ -21,7 +21,9 @@ namespace System
 {
 #ifdef UNICODE
 
+    using TChar = wchar_t;
     using String = std::wstring;
+    using StringView = std::wstring_view;
     using StringStream = std::wstringstream;
     using OStringStream = std::wostringstream;
     using IStringStream = std::wistringstream;
@@ -31,11 +33,12 @@ namespace System
     using Stream = std::wiostream;
     using OStream = std::wostream;
     using IStream = std::wistream;
-    using TChar = wchar_t;
 
 #else  // !UNICODE
 
+    using TChar = char;
     using String = std::string;
+    using StringView = std::string_view;
     using StringStream = std::stringstream;
     using OStringStream = std::ostringstream;
     using IStringStream = std::istringstream;
@@ -45,7 +48,6 @@ namespace System
     using Stream = std::iostream;
     using OStream = std::ostream;
     using IStream = std::istream;
-    using TChar = char;
 
 #endif  // UNICODE
 
@@ -77,5 +79,10 @@ namespace System
     #define SYSTEM_TEXT(quote) quote
 
 #endif  // UNICODE
+
+namespace System
+{
+    constexpr auto nullChar = SYSTEM_TEXT('\0');
+}
 
 #endif  // SYSTEM_HELPER_UNICODE_MACRO_H

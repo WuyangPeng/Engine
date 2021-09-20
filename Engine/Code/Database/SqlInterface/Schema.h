@@ -16,27 +16,30 @@
 #include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/MysqlConnectorWrappers/Fwd/MysqlConnectorFwd.h"
 #include "Database/SqlInterface/SqlInterfaceFwd.h"
-
-DATABASE_EXPORT_SHARED_PTR(SchemaImpl);
-EXPORT_NONCOPYABLE_CLASS(DATABASE);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+DATABASE_NON_COPY_EXPORT_IMPL(SchemaImpl); 
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE Schema final : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE Schema final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Schema);
+        NON_COPY_TYPE_DECLARE(Schema);
 
     public:
         explicit Schema(const Session& session);
         Schema(const Session& session, int dbIndex);
-
+        ~Schema() noexcept = default;
+        Schema(const Schema& rhs) noexcept = delete;
+        Schema& operator=(const Schema& rhs) noexcept = delete;
+        Schema(Schema&& rhs) noexcept = delete;
+        Schema& operator=(Schema&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(Schema);
+        PackageType impl;
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     public:

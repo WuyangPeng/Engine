@@ -15,7 +15,7 @@
 #include "Rendering/DataTypes/ColourDetail.h" 
 #include "Framework/WindowCreate/WindowCreateFwd.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(ViewMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(ViewMiddleLayerImpl);
 
 namespace Framework
 {
@@ -23,7 +23,7 @@ namespace Framework
 	class FRAMEWORK_DEFAULT_DECLARE ViewMiddleLayer : public ModelViewControllerMiddleLayer
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(ViewMiddleLayer);
+		NON_COPY_TYPE_DECLARE(ViewMiddleLayer);
 		using ParentType = ModelViewControllerMiddleLayer;
 		using Colour = Rendering::Colour<float>;
 		using Renderer = Rendering::Renderer;
@@ -67,7 +67,7 @@ namespace Framework
 		const ConstRendererSharedPtr GetRenderer() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(ViewMiddleLayer);
+                PackageType impl;
 	};
 
 	using ViewMiddleLayerSharedPtr = std::shared_ptr<ViewMiddleLayer>;

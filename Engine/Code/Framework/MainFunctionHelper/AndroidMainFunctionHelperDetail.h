@@ -70,7 +70,7 @@ template <template<typename> class Build, typename Process>
 void Framework::AndroidMainFunctionHelper<Build, Process>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (AndroidMainFunctionSchedule::Failure < m_AndroidMainFunctionSchedule)
 	{

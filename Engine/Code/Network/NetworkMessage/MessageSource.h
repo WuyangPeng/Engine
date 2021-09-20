@@ -18,7 +18,7 @@
 #include <string>
 #include <vector>
 
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+ 
 
 namespace Network
 {

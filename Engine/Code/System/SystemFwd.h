@@ -1,37 +1,32 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/20 14:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/03 0:27)
 
 #ifndef SYSTEM_FWD_H
 #define SYSTEM_FWD_H
 
-#include "Helper/HelperFwd.h"
-
-#include "CharacterString/CharacterStringFwd.h"
-#include "DynamicLink/DynamicLinkFwd.h"
-#include "SystemOutput/SystemOutputFwd.h"
-
-#include "Console/ConsoleFwd.h"
-#include "MemoryTools/MemoryToolsFwd.h"
-#include "Threading/ThreadingFwd.h"
-
-#include "FileManager/FileManagerFwd.h"
-#include "Security/SecurityFwd.h"
-#include "Time/TimeFwd.h"
-#include "Network/NetworkFwd.h"
-
-#include "DirectX/DirectXFwd.h"
-#include "OpenGL/OpenGLFwd.h"
-
 #include "Android/AndroidFwd.h"
+#include "CharacterString/CharacterStringFwd.h"
+#include "Console/ConsoleFwd.h"
+#include "DirectX/DirectXFwd.h"
+#include "DynamicLink/DynamicLinkFwd.h"
+#include "FileManager/FileManagerFwd.h"
+#include "Helper/HelperFwd.h"
 #include "Linux/LinuxFwd.h"
 #include "Macintosh/MacintoshFwd.h"
-#include "Window/WindowFwd.h"
+#include "MemoryTools/MemoryToolsFwd.h"
+#include "OpenGL/OpenGLFwd.h"
+#include "Security/SecurityFwd.h"
+#include "SystemOutput/SystemOutputFwd.h"
+#include "Threading/ThreadingFwd.h"
+#include "Time/TimeFwd.h"
+#include "Windows/WindowsFwd.h"
+#include "Network/NetworkFwd.h"
 #include "UserInterface/UserInterfaceFwd.h"
 
 #endif  // SYSTEM_FWD_H

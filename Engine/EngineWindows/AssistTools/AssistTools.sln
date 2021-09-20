@@ -1,24 +1,33 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.852
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssistTools", "AssistTools\AssistTools.vcxproj", "{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssistToolsToolset", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\AssistToolsToolset\AssistToolsToolset.vcxproj", "{06DE8AB2-2323-462C-8ABA-A434BF35A399}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07} = {D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTemplate", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\GameTemplate\GameTemplate.vcxproj", "{FC9A23FE-C19D-4A89-9D09-DEB71CE3343B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07} = {D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTestingTemplate", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\GameTestingTemplate\GameTestingTemplate.vcxproj", "{B5D502C7-4152-452C-9CD0-10934A65C7A0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07} = {D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssistToolsTesting", "..\..\..\EngineTesting\EngineWindows\AssistTools\AssistToolsTesting\AssistToolsTesting.vcxproj", "{02DFC263-3531-4524-9C44-27BBC22C3761}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07} = {D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssistToolsToolset", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\AssistToolsToolset\AssistToolsToolset.vcxproj", "{06DE8AB2-2323-462C-8ABA-A434BF35A399}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTemplate", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\GameTemplate\GameTemplate.vcxproj", "{FC9A23FE-C19D-4A89-9D09-DEB71CE3343B}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTestingTemplate", "..\..\..\Assist\AssistWindows\Toolset\AssistTools\GameTestingTemplate\GameTestingTemplate.vcxproj", "{B5D502C7-4152-452C-9CD0-10934A65C7A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{7AFD1301-ECCB-4CC6-9B57-58C33581804B}"
 EndProject
@@ -62,22 +71,6 @@ Global
 		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{D9A9EFE7-5E86-4DF0-BF5F-FCCF3B700D07}.StaticRelease|x86.Build.0 = StaticRelease|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x64.ActiveCfg = Debug|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x64.Build.0 = Debug|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x86.ActiveCfg = Debug|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x86.Build.0 = Debug|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x64.ActiveCfg = Release|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x64.Build.0 = Release|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x86.ActiveCfg = Release|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x86.Build.0 = Release|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x64.Build.0 = StaticDebug|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x86.Build.0 = StaticDebug|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x64.Build.0 = StaticRelease|x64
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
-		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 		{06DE8AB2-2323-462C-8ABA-A434BF35A399}.Debug|x64.ActiveCfg = Debug|x64
 		{06DE8AB2-2323-462C-8ABA-A434BF35A399}.Debug|x64.Build.0 = Debug|x64
 		{06DE8AB2-2323-462C-8ABA-A434BF35A399}.Debug|x86.ActiveCfg = Debug|Win32
@@ -126,6 +119,22 @@ Global
 		{B5D502C7-4152-452C-9CD0-10934A65C7A0}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{B5D502C7-4152-452C-9CD0-10934A65C7A0}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{B5D502C7-4152-452C-9CD0-10934A65C7A0}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x64.ActiveCfg = Debug|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x64.Build.0 = Debug|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x86.ActiveCfg = Debug|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Debug|x86.Build.0 = Debug|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x64.ActiveCfg = Release|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x64.Build.0 = Release|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x86.ActiveCfg = Release|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.Release|x86.Build.0 = Release|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{02DFC263-3531-4524-9C44-27BBC22C3761}.StaticRelease|x86.Build.0 = StaticRelease|Win32
 		{0148D50C-1264-4C30-B500-0AE083AA40FB}.Debug|x64.ActiveCfg = Debug|x64
 		{0148D50C-1264-4C30-B500-0AE083AA40FB}.Debug|x64.Build.0 = Debug|x64
 		{0148D50C-1264-4C30-B500-0AE083AA40FB}.Debug|x86.ActiveCfg = Debug|Win32
@@ -163,10 +172,10 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{02DFC263-3531-4524-9C44-27BBC22C3761} = {71DC1C2A-38BA-4795-99A5-0BB41EC88555}
 		{06DE8AB2-2323-462C-8ABA-A434BF35A399} = {EF3D1EDA-7B76-45DF-A95D-5F148093099B}
 		{FC9A23FE-C19D-4A89-9D09-DEB71CE3343B} = {EF3D1EDA-7B76-45DF-A95D-5F148093099B}
 		{B5D502C7-4152-452C-9CD0-10934A65C7A0} = {EF3D1EDA-7B76-45DF-A95D-5F148093099B}
+		{02DFC263-3531-4524-9C44-27BBC22C3761} = {71DC1C2A-38BA-4795-99A5-0BB41EC88555}
 		{0148D50C-1264-4C30-B500-0AE083AA40FB} = {7AFD1301-ECCB-4CC6-9B57-58C33581804B}
 		{BE26215C-6244-486D-B087-517ED6906614} = {7AFD1301-ECCB-4CC6-9B57-58C33581804B}
 		{F2019343-D535-4E98-BB9E-8A627336C6B8} = {BE26215C-6244-486D-B087-517ED6906614}

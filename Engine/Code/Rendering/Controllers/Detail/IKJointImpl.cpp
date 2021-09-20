@@ -7,7 +7,7 @@
 #include "Rendering/RenderingExport.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "IKJointImpl.h"
-
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"

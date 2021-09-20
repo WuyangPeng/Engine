@@ -1,0 +1,383 @@
+{
+  "helperSuite": {
+    "FunctionDescribedMacroTesting": 1,
+    "AssertExceptionMacroTesting": 1,
+    "InitializeTerminatorMacroTesting": 1,
+    "MainFunctionMacroTesting": 1,
+    "MemoryMacroTesting": 1,
+    "SingletonMacroTesting": 1,
+    "NameMacroTesting": 1,
+    "SharedPtrMacroTesting": 1,
+    "PropertiesMacroTesting": 1,
+    "UserMacroTesting": 1,
+    "SafetyLimitMacroTesting": 1,
+    "GetRequiredBitsTesting": 1
+  },
+
+  "assertTestMacroSuite": {
+    "AssertTestExceptionThrowTesting": 0,
+    "AssertTestConditionTesting": 1,
+    "AssertTestOperatorTesting": 1,
+    "AssertTestApproximateTesting": 1,
+    "AssertTestNullptrTesting": 1,
+    "AssertTestRangeTesting": 1
+  },
+
+  "classInvariantMacroSuite": {
+    "ClassInvariantMacroTesting": 1,
+    "ModuleClassInvariantMacroTesting": 1
+  },
+
+  "customAssertMacroSuite": {
+    "CustomAssertMacroTesting": 1,
+    "ModuleCustomAssertMacroTesting": 1
+  },
+
+  "exportMacroSuite": {
+    "ExportMacroTesting": 1,
+    "ModuleExportMacroTesting": 1,
+    "CopyModuleExportMacroTesting": 1,
+    "CopyUnsharedExportMacroTesting": 1,
+    "DelayCopyUnsharedExportMacroTesting": 1,
+    "NonCopyExportMacroTesting": 1,
+    "PerformanceUnsharedExportMacroTesting": 1,
+    "SharedExportMacroTesting": 1
+  },
+
+  "logMacroSuite": {
+    "LogDefaultMacroTesting": 1,
+    "LogFileMacroTesting": 1,
+    "LogConsoleMacroTesting": 1,
+    "LogFileAndConsoleMacroTesting": 1,
+    "LogEngineMacroTesting": 1,
+    "LogTriggerAssertMacroTesting": 0
+  },
+
+  "memberFunctionMacroSuite": {
+    "MemberFunctionNoexceptMacroTesting": 1,
+    "MemberFunctionMacroTesting": 1,
+    "CallConstMemberFunctionMacroTesting": 1,
+    "MemberFunctionStaticAssertMacroTesting": 1,
+    "CopyMemberFunctionStaticAssertMacroTesting": 1
+  },
+
+  "rttiMacroSuite": {
+    "RttiMacroBaseTesting": 1,
+    "RttiMacroTesting": 1,
+    "RttiMacroFinalTesting": 1
+  },
+
+  "streamMacroSuite": {
+    "StreamSizeMacroTesting": 1,
+    "DebugStreamMacroTesting": 1,
+    "DefaultTestingNoObjectPtrTesting": 1,
+    "DefaultTestingObjectPtrTesting": 1,
+    "TestingNoObjectPtrTesting": 1,
+    "TestingObjectPtrTesting": 1,
+    "TestingObjectSizeTesting": 1,
+    "TestingObjectTesting": 1
+  },
+
+  "unitTestSuiteMacroSuite": {
+    "UnitTestSuiteMacroTesting": 1,
+    "UnitTestSuiteMacroCompleteTesting": 1,
+    "UnitTestSuiteMacroCompleteUseTestingTypeTesting": 1
+  },
+
+  "exceptionMacroSuite": {
+    "ExceptionMacroTesting": 1,
+    "ExceptionCatchMacroTesting": 0
+  },
+
+  "contractSuite": {
+    "FunctionDescribedTesting": 1,
+    "ScopeExitTesting": 1,
+    "TriggerAssertTesting": 0,
+    "CheckInvariantTesting": 1,
+    "NoexceptTesting": 1,
+    "AssertionTesting": 0
+  },
+
+  "implSuite": {
+    "ImplStaticAssertHelperTesting": 1,
+    "CopyUnsharedImplTesting": 1,
+    "DelayCopyUnsharedImplTesting": 1,
+    "NonCopyImplTesting": 1,
+    "PerformanceUnsharedImplTesting": 1,
+    "SharedImplTesting": 1
+  },
+
+  "baseSuite": {
+    "SingletonTesting": 1,
+    "UniqueIDManagerTesting": 1,
+    "VersionTesting": 1,
+    "LoadingLibraryTesting": 1,
+    "SpanIteratorTesting": 1,
+    "StaticSingletonTesting": 1
+  },
+
+  "characterStringSuite": {
+    "StringConversionTesting": 1,
+    "FormatErrorMessageTesting": 1
+  },
+
+  "caseInsensitiveStringSuite": {
+    "CaseInsensitiveStringTesting": 1,
+    "CaseInsensitiveStringIOStreamTesting": 0
+  },
+
+  "exceptionSuite": {
+    "LastErrorTesting": 1,
+    "ErrorTesting": 1,
+    "GameErrorTesting": 1
+  },
+
+  "consoleSuite": {
+    "ConsoleTesting": 1,
+    "ConsoleColorsTesting": 0,
+    "ConsoleTextColorsManagerTesting": 0,
+    "ConsoleAllocTesting": 1
+  },
+
+  "threadingSuite": {
+    "CriticalSectionTesting": 1,
+    "WindowsMutexTesting": 1,
+    "StdMutexTesting": 1,
+    "StdRecursiveMutexTesting": 1,
+    "BoostMutexTesting": 1,
+    "BoostRecursiveMutexTesting": 1,
+    "NullMutexTesting": 1,
+    "EventTesting": 1,
+    "SemaphoreTesting": 1,
+    "ThreadTesting": 1,
+    "ThreadManagerTesting": 1
+  },
+
+  "fileManagerSuite": {
+    "EndianTesting": 1,
+    "FileBufferTesting": 1,
+    "CFileManagerTesting": 1,
+    "StreamManagerTesting": 1,
+    "DeleteFileToolsTesting": 1,
+    "CopyFileToolsTesting": 1,
+    "FileHandleTesting": 1,
+    "FileManagerTesting": 1,
+    "BufferIOTesting": 1,
+    "EnvironmentVariableTesting": 1,
+    "EnvironmentTesting": 1
+  },
+
+  "textParsingSuite": {
+
+  },
+
+  "logManagerSuite": {
+    "LogFilterManagerTesting": 1,
+    "LogLevelManagerTesting": 1,
+    "LogMessageTesting": 1,
+    "LogMessagePrefixTesting": 1,
+    "LogMessagePostfixTesting": 1,
+    "LogConsoleTextColorsManagerTesting": 1,
+    "AppenderTesting": 1,
+    "LoggerTesting": 1,
+    "AppenderManagerTesting": 1,
+    "LogFileNameTesting": 1,
+    "LogAppenderIOManagerTesting": 0,
+    "LogTesting": 1
+  },
+
+  "dataTypesSuite": {
+    "TupleTesting": 1,
+    "TableTesting": 1,
+    "MinHeapRecordTesting": 1,
+    "MinHeapRecordStoredTesting": 1,
+    "MinHeapRecordIndexTesting": 1,
+    "MinHeapRecordStoredManagerTesting": 1,
+    "MinHeapTesting": 1
+  },
+
+  "memoryToolsSuite": {
+    "HeapAllocateTesting": 1,
+    "DefaultMemoryTesting": 1,
+    "MemoryTesting": 1,
+    "MemoryManagerTesting": 1,
+    "SmartPointerTesting": 1,
+    "MD5ContextTesting": 1,
+    "MD5Testing": 1,
+    "RandomTesting": 50,
+    "PoolTesting": 1,
+    "BufferPoolTesting": 1,
+    "BufferTesting": 1,
+    "BufferStreamTesting": 1,
+    "SubclassSmartPointerTesting": 1
+  },
+
+  "objectSystemsSuite": {
+    "InitTermTesting": 1,
+    "RttiTestingBase": 1,
+    "RttiTesting": 1,
+    "ObjectNameTesting": 1,
+    "OutTopLevelTesting": 50,
+    "ObjectRegisterTesting": 50,
+    "BufferTargetTesting": 1,
+    "BufferOutStreamTesting": 1,
+    "FileOutStreamTesting": 1,
+    "StreamTesting": 1,
+    "StreamSizeTesting": 1,
+    "BufferSourceTesting": 1,
+    "InTopLevelTesting": 1,
+    "ObjectLinkTesting": 1,
+    "BufferInStreamTesting": 1,
+    "FileInStreamTesting": 1,
+    "ObjectTesting": 1,
+    "ObjectManagerTesting": 1,
+    "TypeCastingTesting": 1
+  },
+
+  "timeSuite": {
+    "CustomTimeTesting": 1,
+    "DeltaTimeManagerTesting": 1,
+    "MillisecondTimerTesting": 0,
+    "SecondTimerTesting": 0
+  },
+
+  "reportOutputSuite": {
+    "EquilongReportOutputTesting": 1,
+    "UnitTestFailReportOutputTesting": 1,
+    "UnitTestSuiteReportOutputTesting": 1
+  },
+
+  "unitTestSuite": {
+    "UnitTestTesting": 0,
+    "SuiteTesting": 1
+  },
+
+  "templateToolsSuite": {
+    "ConstraintTesting": 1,
+    "FactorialTesting": 1,
+    "FibonacciTesting": 1,
+    "ParamTypeTesting": 1,
+    "TrigonometricFunctionTesting": 1,
+    "PtrCompareTesting": 1,
+    "SqrtTesting": 1,
+    "Pow3Testing": 1,
+    "ExplicitCastTesting": 1,
+    "IncrementScopeTesting": 1,
+    "RealAddressTesting": 1,
+    "LiteralCastTesting": 1,
+    "ReferenceCastTesting": 1,
+    "ValueScopeTesting": 1,
+    "TinyTesting": 1
+  },
+
+  "commandSuite": {
+    "CommandArgumentTesting": 1,
+    "CommandLineInformationTesting": 1,
+    "CommandTesting": 1
+  },
+
+  "mainFunctionHelperSuite": {
+    "TestingInformationHelperTesting": 1,
+    "CMainFunctionHelperTesting": 1,
+    "DllFunctionHelperTesting": 1,
+    "CMainFunctionTestingHelperTesting": 1
+  },
+
+  "handleManagerSuite": {
+    "HandleManagerTesting": 1,
+    "ResourceHandleTesting": 1
+  },
+
+  "resourceManagerSuite": {
+    "CommonDataResourceTesting": 1,
+    "ResourceManagerTesting": 1,
+    "ResourceManagerLockTesting": 1,
+    "ResourceFactoryTesting": 1
+  },
+
+  "frameMemorySystemSuite": {
+    "FrameMemorySystemTesting": 1,
+    "FrameMemorySystemManagerTesting": 1,
+    "FrameMemorySystemPointerShareTesting": 1
+  },
+
+  "bitArraySuite": {
+    "BitArrayTesting": 1,
+    "BitArray2DTesting": 1,
+    "TwoBitArrayTesting": 1
+  },
+
+  "moduleInitializerTerminatorSuite": {
+
+  },
+
+  "syntacticParserSuite": {
+
+  },
+
+  "performanceProfilerSuite": {
+
+  },
+
+  "engineConfigurationSuite": {
+    "StringReplacingTesting": 1
+  },
+
+  "propertiesSuite": {
+    "SimplePropertyExternalTesting": 1,
+    "PropertyExternalTesting": 1,
+    "StaticPropertyExternalTesting": 1,
+    "DirectPropertyInternalTesting": 1,
+    "PropertyOffsetTesting": 1,
+    "MethodPropertyTesting": 1,
+    "PropertiesBaseTesting": 1
+  },
+
+  "cyclicRedundancyCheckSuite": {
+    "IntelCheckSumTesting": 1,
+    "SevenModElevenCheckSumTesting": 1,
+    "SpecifyCheckSumTesting": 1,
+    "CyclicRedundancyCheckCCITTTesting": 1,
+    "CyclicRedundancyCheckHandleTesting": 1,
+    "CyclicRedundancyCheckCCITTUsingTableTesting": 1,
+    "CyclicRedundancyCheck16Testing": 1,
+    "CyclicRedundancyCheck32Testing": 1
+  },
+
+  "regularExpressionSuite": {
+
+  },
+
+  "messageEventSuite": {
+    "ParametersInterfaceTesting": 1,
+    "CallbackParametersTesting": 1,
+    "EventInterfaceTesting": 1,
+    "EventSlotTesting": 1,
+    "EventSlotManagerTesting": 1,
+    "MessageManagerTesting": 1,
+    "TelegramTesting": 1,
+    "TelegramLessTesting": 1,
+    "BaseEntityTesting": 1,
+    "EntityManagerTesting": 1,
+    "EventEntityTesting": 1,
+    "TelegramMessageManagerTesting": 1
+  },
+
+  "stateMachineSuite": {
+    "StateMachineTesting": 1,
+    "StateEntityTesting": 1
+  },
+
+  "networkSuite": {
+    "DownloadingFilesEventTesting": 1,
+    "DownloadingFilesTesting": 1
+  },
+
+  "zlibSuite": {
+
+  },
+
+  "freetypeSuite": {
+
+  }
+}

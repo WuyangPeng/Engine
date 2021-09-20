@@ -15,25 +15,27 @@
 #include "Mathematics/Intersection/Intersector1.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Triangle2.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindIntersectorTriangle2Triangle2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle2Triangle2 : public StaticIntersector<Real, Vector2D>
     {
     public:
         using StaticFindIntersectorTriangle2Triangle2Impl = FindIntersectorTriangle2Triangle2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorTriangle2Triangle2);
-
+       
+        TYPE_DECLARE(StaticFindIntersectorTriangle2Triangle2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = StaticIntersector<Real, Vector2D>;
         using Math = typename ParentType::Math;
         using Vector2D = Vector2D<Real>;
@@ -60,7 +62,7 @@ namespace Mathematics
         static Intersection ClipConvexPolygonAgainstLine(const Vector2D& axis, Real dot, const Intersection& intersection);
 
     private:
-        IMPL_TYPE_DECLARE(StaticFindIntersectorTriangle2Triangle2);
+        PackageType impl;
     };
 
     using FloatStaticFindIntersectorTriangle2Triangle2 = StaticFindIntersectorTriangle2Triangle2<float>;

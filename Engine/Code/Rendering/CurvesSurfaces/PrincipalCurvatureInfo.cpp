@@ -15,14 +15,14 @@ using std::make_shared;
 
 Rendering::PrincipalCurvatureInfo
 	::PrincipalCurvatureInfo(float principalCurvature0, float principalCurvature1,const AVector& principalDirection0,const  AVector& principalDirection1 )
-	:m_Impl{ make_shared<ImplType>(principalCurvature0,principalCurvature1,principalDirection0,principalDirection1) }
+	:impl{ principalCurvature0,principalCurvature1,principalDirection0,principalDirection1 }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, PrincipalCurvatureInfo)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, PrincipalCurvatureInfo)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo,GetPrincipalCurvature0, float)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo, GetPrincipalCurvature0, float)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PrincipalCurvatureInfo, GetPrincipalCurvature1, float)
  

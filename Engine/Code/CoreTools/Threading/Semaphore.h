@@ -13,21 +13,26 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 
-#include <boost/noncopyable.hpp>
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(SemaphoreImpl);
 
-CORE_TOOLS_EXPORT_SHARED_PTR(SemaphoreImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Semaphore final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE Semaphore final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Semaphore);
+        NON_COPY_TYPE_DECLARE(Semaphore);
 
     public:
         Semaphore(int initialCount, int maximumCount);
+        ~Semaphore() noexcept = default;
+        Semaphore(const Semaphore& rhs) noexcept = delete;
+        Semaphore& operator=(const Semaphore& rhs) noexcept = delete;
+        Semaphore(Semaphore&& rhs) noexcept = delete;
+        Semaphore& operator=(Semaphore&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -38,7 +43,7 @@ namespace CoreTools
         [[nodiscard]] int GetMaximumCount() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(Semaphore);
+        PackageType impl;
     };
 }
 

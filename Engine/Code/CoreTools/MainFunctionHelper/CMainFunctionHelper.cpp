@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 10:02)
+//	引擎版本：0.7.1.1 (2020/10/26 10:02)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,6 +18,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemoryMacro.h"
 #include "CoreTools/MemoryTools/MemoryManager.h"
+
 
 #include <fstream>
 #include <iostream>
@@ -102,6 +103,17 @@ char** CoreTools::CMainFunctionHelper::GetArgv() noexcept
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return m_Argv;
+}
+
+char* CoreTools::CMainFunctionHelper::GetArgv(int index) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+    return m_Argv[index];
+
+#include STSTEM_WARNING_POP
 }
 
 int CoreTools::CMainFunctionHelper::Run() noexcept

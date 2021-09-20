@@ -12,18 +12,19 @@
 #include "SockStream.h"
 #include "Detail/SockStreamFactory.h"
 #include "Detail/SockStreamImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::string;
 
 Network::SockStream::SockStream(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockStreamFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockStream)
+CLASS_INVARIANT_STUB_DEFINE(Network, SockStream)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetACESockStream, Network::ACESockStreamNativeType&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetBoostSockStream, Network::BoostSockStreamType&)
@@ -38,28 +39,28 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemotePort, int)
 
 int Network::SockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Send(messageBuffer);
+    return impl->Send(messageBuffer);
 }
 
 int Network::SockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Receive(messageBuffer);
+    return impl->Receive(messageBuffer);
 }
 
 void Network::SockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->AsyncSend(eventInterface, messageBuffer);
+    return impl->AsyncSend(eventInterface, messageBuffer);
 }
 
 void Network::SockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->AsyncReceive(eventInterface, messageBuffer);
+    return impl->AsyncReceive(eventInterface, messageBuffer);
 }

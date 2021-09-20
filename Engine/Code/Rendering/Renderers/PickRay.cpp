@@ -12,23 +12,24 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 using std::make_shared;
 #include "System/Helper/PragmaWarning.h" 
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 Rendering::PickRay
 	::PickRay(bool result, const Mathematics::FloatAPoint& origin, const Mathematics::FloatAVector& direction)
-	:m_Impl{ make_shared<ImplType>(result,origin,direction) }
+	:impl{ result,origin,direction }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::PickRay
 	::PickRay()
-	:m_Impl{ make_shared<ImplType>() }
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, PickRay)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, PickRay)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, IsResult, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, PickRay, GetOrigin, Mathematics::FloatAPoint)

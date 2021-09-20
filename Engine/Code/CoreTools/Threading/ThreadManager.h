@@ -13,25 +13,29 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Threading/Using/ThreadUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 
-#include <boost/noncopyable.hpp>
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ThreadManagerImpl);
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ThreadManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ThreadManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE ThreadManager final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ThreadManager);
-        using ThreadSize = System::WindowSize;
+        NON_COPY_TYPE_DECLARE(ThreadManager);
+        using ThreadSize = System::WindowsSize;
 
     public:
         ThreadManager();
-
+        ~ThreadManager() noexcept = default;
+        ThreadManager(const ThreadManager& rhs) noexcept = delete;
+        ThreadManager& operator=(const ThreadManager& rhs) noexcept = delete;
+        ThreadManager(ThreadManager&& rhs) noexcept = delete;
+        ThreadManager& operator=(ThreadManager&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         void AddThread(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);
@@ -45,7 +49,7 @@ namespace CoreTools
         void Wait();
 
     private:
-        IMPL_TYPE_DECLARE(ThreadManager);
+        PackageType impl;
     };
 }
 

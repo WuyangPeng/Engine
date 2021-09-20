@@ -16,7 +16,7 @@
 
 #include <boost/noncopyable.hpp>
  
-EXPORT_NONCOPYABLE_CLASS(RENDERING);  
+
 
 namespace Rendering
 {

@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -24,11 +24,11 @@ namespace Mathematics
     template <typename Real>
     class Triangle2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Triangle2 final
@@ -37,8 +37,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Triangle2Impl = Triangle2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Triangle2);
-
+    
+        TYPE_DECLARE(Triangle2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Math = Math<Real>;
         using Vector2D = Vector2D<Real>;
         using Vector2DTools = Vector2DTools<Real>;
@@ -57,7 +59,7 @@ namespace Mathematics
         [[nodiscard]] const Vector2D GetVertex(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(Triangle2);
+        PackageType impl;
     };
 
     using FloatTriangle2 = Triangle2<float>;

@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 using std::make_shared;
 using std::string;
 
@@ -22,29 +23,30 @@ using std::string;
 #include SYSTEM_WARNING_DISABLE(26455)
 
 Network::ConfigurationParameter::ConfigurationParameter()
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #include STSTEM_WARNING_POP
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationParameter)
+CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationParameter)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationParameter)
+ 
 
 void Network::ConfigurationParameter::AddParameter(const String& key, const String& parameter)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->AddParameter(key, parameter);
+    return impl->AddParameter(key, parameter);
 }
 
 bool Network::ConfigurationParameter::IsParameterExist(const String& key, const String& parameter) const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsParameterExist(key, parameter);
+    return impl->IsParameterExist(key, parameter);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Network, ConfigurationParameter, GetParameter, String, const Network::ConfigurationParameter::Parameter);
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationParameter)

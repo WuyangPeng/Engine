@@ -36,22 +36,22 @@ void Rendering::RendererInputData
 }
 
 Rendering::RendererInputData ::RendererInputData([[maybe_unused]] RendererInputDataCreate rendererInputDataCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0  }
 {
  
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, RendererInputData)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererInputData)
 
 void Rendering::RendererInputData
 	::Rebuild(RendererTypes type)
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	m_Impl->Rebuild(type);
+	impl->Rebuild(type);
 }
 

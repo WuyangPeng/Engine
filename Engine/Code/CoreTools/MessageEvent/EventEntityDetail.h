@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:39)
+//	引擎版本：0.7.1.1 (2020/10/26 15:39)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_DETAIL_H
@@ -13,12 +13,15 @@
 #include "EventEntity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename EventType>
 CoreTools::EventEntity<EventType>::EventEntity()
     : ParentType{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename EventType>

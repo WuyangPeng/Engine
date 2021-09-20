@@ -9,7 +9,7 @@
 
 #include "Rendering/RenderingDll.h"
 
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/Renderers/Detail/PlatformTexture1DImpl.h"
 
 namespace Rendering

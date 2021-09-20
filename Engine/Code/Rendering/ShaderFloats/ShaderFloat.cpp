@@ -25,20 +25,61 @@ using std::make_shared;
 CORE_TOOLS_RTTI_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ShaderFloat);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ShaderFloat); 
-CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(Rendering, ShaderFloat);
+Rendering::ShaderFloat::ShaderFloat(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ShaderFloat)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ShaderFloat)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ShaderFloat)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ShaderFloat)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ShaderFloat)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ShaderFloat)
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ShaderFloat);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ShaderFloat);
 
 Rendering::ShaderFloat
 	::ShaderFloat()
-	:ParentType{ "ShaderFloat" }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ "ShaderFloat" }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::ShaderFloat
 	::ShaderFloat(int numRegisters)
-	:ParentType{ "ShaderFloat" }, m_Impl{ make_shared<ImplType>(numRegisters) } 
+	:ParentType{ "ShaderFloat" }, impl{ make_shared<ImplType>(numRegisters) } 
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -47,7 +88,7 @@ Rendering::ShaderFloat
 
 Rendering::ShaderFloat
 	::ShaderFloat(const FloatVector& data)
-	:ParentType{ "ShaderFloat" }, m_Impl{ make_shared<ImplType>(data) } 
+	:ParentType{ "ShaderFloat" }, impl{ make_shared<ImplType>(data) } 
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -58,7 +99,7 @@ Rendering::ShaderFloat
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,ShaderFloat)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ShaderFloat)
  
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ShaderFloat,SetNumRegisters, int, void)
 
@@ -71,33 +112,33 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,GetData, float*)
 void Rendering::ShaderFloat
 	::SetRegister(int index, const FloatVector& data)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRegister(index, data);
+	return impl->SetRegister(index, data);
 }
 
 void Rendering::ShaderFloat
 	::SetRegister(int index, const AVector& vector)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRegister(index, vector);
+	return impl->SetRegister(index, vector);
 }
 
 void Rendering::ShaderFloat
 	::SetRegister(int index, const APoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRegister(index, point);
+	return impl->SetRegister(index, point);
 }
 
 void Rendering::ShaderFloat
 	::SetRegister( int index, const Colour& colour )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetRegister(index, colour);
+	return impl->SetRegister(index, colour);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, ShaderFloat,SetRegisters, Matrix,void)	
@@ -121,7 +162,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, ShaderFloat,AllowUpdater, bool)
 void Rendering::ShaderFloat ::Update([[maybe_unused]] const Visual* visual, [[maybe_unused]] const Camera* camera)
 {
     // ≈……˙¿‡¥Ê∏˘°£
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	CoreTools::DisableNoexcept();
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 17:23)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/10 20:48)
 
 #include "System/SystemExport.h"
 
@@ -33,7 +33,7 @@ System::AndroidInputEventType System::AndroidInputEvent::GetAndroidInputEventTyp
     return m_AndroidInputEventType;
 }
 
-void System::AndroidInputEvent::SetAndroidInputEventType(System::AndroidInputEventType androidInputEventType) noexcept
+void System::AndroidInputEvent::SetAndroidInputEventType(AndroidInputEventType androidInputEventType) noexcept
 {
     m_AndroidInputEventType = androidInputEventType;
 }
@@ -43,7 +43,7 @@ System::AndroidInputSource System::AndroidInputEvent::GetAndroidInputSource() co
     return m_AndroidInputSource;
 }
 
-void System::AndroidInputEvent::SetAndroidInputSource(System::AndroidInputSource androidInputSource) noexcept
+void System::AndroidInputEvent::SetAndroidInputSource(AndroidInputSource androidInputSource) noexcept
 {
     m_AndroidInputSource = androidInputSource;
 }
@@ -53,7 +53,7 @@ System::AndroidMeta System::AndroidInputEvent::GetAndroidMeta() const noexcept
     return m_AndroidMeta;
 }
 
-void System::AndroidInputEvent::SetAndroidMeta(System::AndroidMeta androidMeta) noexcept
+void System::AndroidInputEvent::SetAndroidMeta(AndroidMeta androidMeta) noexcept
 {
     m_AndroidMeta = androidMeta;
 }
@@ -63,7 +63,7 @@ System::AndroidKeyEventAction System::AndroidInputEvent::GetAndroidKeyEventActio
     return m_AndroidKeyEventAction;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyEventAction(System::AndroidKeyEventAction androidKeyEventAction) noexcept
+void System::AndroidInputEvent::SetAndroidKeyEventAction(AndroidKeyEventAction androidKeyEventAction) noexcept
 {
     m_AndroidKeyEventAction = androidKeyEventAction;
 }
@@ -73,7 +73,7 @@ System::AndroidKeyEvent System::AndroidInputEvent::GetAndroidKeyEventFlag() cons
     return m_AndroidKeyEventFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyEventFlag(System::AndroidKeyEvent androidKeyEvent) noexcept
+void System::AndroidInputEvent::SetAndroidKeyEventFlag(AndroidKeyEvent androidKeyEvent) noexcept
 {
     m_AndroidKeyEventFlag = androidKeyEvent;
 }
@@ -83,7 +83,7 @@ System::AndroidKeyCodes System::AndroidInputEvent::GetAndroidKeyCodes() const no
     return m_AndroidKeyCodes;
 }
 
-void System::AndroidInputEvent::SetAndroidKeyCodes(System::AndroidKeyCodes androidKeyCodes) noexcept
+void System::AndroidInputEvent::SetAndroidKeyCodes(AndroidKeyCodes androidKeyCodes) noexcept
 {
     m_AndroidKeyCodes = androidKeyCodes;
 }
@@ -93,7 +93,7 @@ System::AndroidMotionEventAction System::AndroidInputEvent::GetAndroidMotionEven
     return m_AndroidMotionEventAction;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventAction(System::AndroidMotionEventAction androidMotionEventAction) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventAction(AndroidMotionEventAction androidMotionEventAction) noexcept
 {
     m_AndroidMotionEventAction = androidMotionEventAction;
 }
@@ -103,7 +103,7 @@ System::AndroidMotionEvent System::AndroidInputEvent::GetAndroidMotionEventFlag(
     return m_AndroidMotionEventFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventFlag(System::AndroidMotionEvent androidMotionEvent) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventFlag(AndroidMotionEvent androidMotionEvent) noexcept
 {
     m_AndroidMotionEventFlag = androidMotionEvent;
 }
@@ -113,7 +113,7 @@ System::AndroidMotionEventButton System::AndroidInputEvent::GetAndroidMotionEven
     return m_AndroidMotionEventButton;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventButton(System::AndroidMotionEventButton androidMotionEventButton) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventButton(AndroidMotionEventButton androidMotionEventButton) noexcept
 {
     m_AndroidMotionEventButton = androidMotionEventButton;
 }
@@ -123,7 +123,7 @@ System::AndroidMotionEventEdge System::AndroidInputEvent::GetAndroidMotionEventE
     return m_AndroidMotionEventEdgeFlag;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventEdgeFlag(System::AndroidMotionEventEdge androidMotionEventEdge) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventEdgeFlag(AndroidMotionEventEdge androidMotionEventEdge) noexcept
 {
     m_AndroidMotionEventEdgeFlag = androidMotionEventEdge;
 }
@@ -133,24 +133,24 @@ System::AndroidMotionEventTool System::AndroidInputEvent::GetAndroidMotionEventT
     return m_AndroidMotionEventToolType;
 }
 
-void System::AndroidInputEvent::SetAndroidMotionEventToolType(System::AndroidMotionEventTool androidMotionEventTool) noexcept
+void System::AndroidInputEvent::SetAndroidMotionEventToolType(AndroidMotionEventTool androidMotionEventTool) noexcept
 {
     m_AndroidMotionEventToolType = androidMotionEventTool;
 }
 
-System::AndroidInputQueue::AndroidInputQueue() noexcept  
-    : m_AndroidInputEvent{}
+System::AndroidInputQueue::AndroidInputQueue() noexcept
+    : androidInputEvent{}
 {
 }
 
 int System::AndroidInputQueue::GetSize() const noexcept
 {
-    return sm_Size;
+    return size;
 }
 
 System::AndroidInputEvent* System::AndroidInputQueue::GetCurrentAndroidInputEvent() noexcept
 {
-    return m_AndroidInputEvent.data();
+    return androidInputEvent.data();
 }
 
 #endif  // SYSTEM_PLATFORM_ANDROID

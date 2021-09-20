@@ -77,7 +77,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::PreCreate(environmentDirectory) && m_ModelMiddleLayer->PreCreate(environmentDirectory) && m_ViewMiddleLayer->PreCreate(environmentDirectory) && m_ControllerMiddleLayer->PreCreate(environmentDirectory))
 	{
@@ -93,7 +93,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Create()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Create() && m_ModelMiddleLayer->Create() && m_ViewMiddleLayer->Create() && m_ControllerMiddleLayer->Create())
 	{
@@ -109,7 +109,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Initialize()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Initialize() && m_ModelMiddleLayer->Initialize() && m_ViewMiddleLayer->Initialize() && m_ControllerMiddleLayer->Initialize())
 	{
@@ -125,7 +125,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Destroy() && m_ModelMiddleLayer->Destroy() && m_ViewMiddleLayer->Destroy() && m_ControllerMiddleLayer->Destroy())
 	{
@@ -141,7 +141,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Terminate()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Terminate();
 
@@ -154,7 +154,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 void Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::PreIdle()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PreIdle();
 
@@ -167,7 +167,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Idle(int64_t timeDelta)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Idle(timeDelta) && m_ModelMiddleLayer->Idle(timeDelta) && m_ViewMiddleLayer->Idle(timeDelta) && m_ControllerMiddleLayer->Idle(timeDelta))
 	{
@@ -183,7 +183,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Paint() && m_ViewMiddleLayer->Paint())
 		return true;
@@ -195,7 +195,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Move(point) && m_ViewMiddleLayer->Move(point))
 		return true;
@@ -207,7 +207,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Resize(windowDisplay, size) && m_ViewMiddleLayer->Resize(windowDisplay, size))
 		return true;
@@ -219,7 +219,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::KeyUp(key, point) && m_ControllerMiddleLayer->KeyUp(key, point))
 		return true;
@@ -231,7 +231,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::KeyDown(key, point) && m_ControllerMiddleLayer->KeyDown(key, point))
 		return true;
@@ -243,7 +243,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::SpecialKeyUp(key, point) && m_ControllerMiddleLayer->SpecialKeyUp(key, point))
 		return true;
@@ -255,7 +255,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::SpecialKeyDown(key, point) && m_ControllerMiddleLayer->SpecialKeyDown(key, point))
 		return true;
@@ -267,7 +267,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::PassiveMotion(point) && m_ControllerMiddleLayer->PassiveMotion(point))
 		return true;
@@ -279,7 +279,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Motion(point, virtualKeys) && m_ControllerMiddleLayer->Motion(point, virtualKeys))
 	{
@@ -295,7 +295,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::MouseWheel(delta, point, virtualKeys) && m_ControllerMiddleLayer->MouseWheel(delta, point, virtualKeys))
 	{
@@ -311,7 +311,7 @@ template <typename ApplicationTrait, typename ModelMiddleLayer, typename ViewMid
 bool Framework::ModelViewControllerMiddleLayerContainer<ApplicationTrait, ModelMiddleLayer, ViewMiddleLayer, ControllerMiddleLayer>
 	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::MouseClick(button, state, point, virtualKeys) && m_ControllerMiddleLayer->MouseClick(button, state, point, virtualKeys))
 	{

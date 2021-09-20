@@ -26,7 +26,7 @@
 // Real exactly = fit.GetExactly();
 
 #include "Mathematics/Algebra/Matrix3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <vector>
 
 namespace Mathematics
@@ -34,19 +34,21 @@ namespace Mathematics
     template <typename Real>
     class EllipsoidFit3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipsoidFit3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipsoidFit3 final
     {
     public:
         using EllipsoidFit3Impl = EllipsoidFit3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EllipsoidFit3);
-
+         
+        TYPE_DECLARE(EllipsoidFit3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector3D = Vector3D<Real>;
         using Points = std::vector<Vector3D>;
         using Matrix3 = Matrix3<Real>;
@@ -69,7 +71,7 @@ namespace Mathematics
         [[nodiscard]] const Vector3D GetPoint(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(EllipsoidFit3);
+        PackageType impl;
     };
 
     using FloatEllipsoidFit3 = EllipsoidFit3<float>;

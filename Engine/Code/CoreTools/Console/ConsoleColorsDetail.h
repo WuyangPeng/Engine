@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 18:50)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
@@ -18,7 +18,7 @@
 
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleColors<Handle>::ConsoleColors(DisableNotThrow disableNotThrow)
-    : m_Console{ disableNotThrow }, m_TextColor{ TextColour::White }, m_BackgroundColor{ BackgroundColour::Black }
+    : console{ disableNotThrow }, m_TextColor{ TextColour::White }, m_BackgroundColor{ BackgroundColour::Black }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -36,7 +36,7 @@ void CoreTools::ConsoleColors<Handle>::ResetColor()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto handle = m_Console.GetHandle();
+    auto handle = console.GetHandle();
 
     constexpr auto defaultTextColour = TextColour::White;
     constexpr auto defaultBackgroundColour = BackgroundColour::Black;
@@ -57,7 +57,7 @@ void CoreTools::ConsoleColors<Handle>::SetTextColor(TextColour textColor)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto handle = m_Console.GetHandle();
+    auto handle = console.GetHandle();
 
     if (!System::SetSystemConsoleTextAttribute(handle, textColor, m_BackgroundColor, System::ConsoleCommon::Default))
     {
@@ -83,7 +83,7 @@ void CoreTools::ConsoleColors<Handle>::SetBackgroundColor(BackgroundColour backg
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto handle = m_Console.GetHandle();
+    auto handle = console.GetHandle();
 
     if (!System::SetSystemConsoleTextAttribute(handle, m_TextColor, backgroundColor, System::ConsoleCommon::Default))
     {

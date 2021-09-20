@@ -23,7 +23,7 @@ Mathematics::MinBox3<Real>
 
     if (hullDim == 0)
     {
-		mMinBox.Set(points[0], Vector3D<Real>::sm_UnitX, Vector3D<Real>::sm_UnitY, Vector3D<Real>::sm_UnitZ, Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0));
+		mMinBox.Set(points[0], Vector3D<Real>::GetUnitX(), Vector3D<Real>::GetUnitY(), Vector3D<Real>::GetUnitZ(), Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0));
        
         return;
     }

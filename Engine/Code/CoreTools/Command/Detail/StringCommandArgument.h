@@ -5,22 +5,22 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:54)
+//	引擎版本：0.7.1.1 (2020/10/23 15:54)
 
 #ifndef CORE_TOOLS_COMMAND_STRING_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_STRING_COMMAND_ARGUMENT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CommandArgumentImpl.h"
+#include "CommandArgumentPackage.h"
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE StringCommandArgument final : public CommandArgumentImpl
+    class CORE_TOOLS_HIDDEN_DECLARE StringCommandArgument final : public CommandArgumentPackage
     {
     public:
         using ClassType = StringCommandArgument;
-        using ParentType = CommandArgumentImpl;
+        using ParentType = CommandArgumentPackage;
 
     public:
         StringCommandArgument(int index, const std::string& name, const std::string& value);

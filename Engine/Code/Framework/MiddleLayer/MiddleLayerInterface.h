@@ -10,7 +10,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "MiddleLayerInternalFwd.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 #include "Framework/WindowCreate/WindowCreateFwd.h"
@@ -26,7 +26,7 @@ namespace Framework
     {
     public:
         using ClassType = MiddleLayerInterface;
-        using WindowDisplay = System::WindowDisplay;
+        using WindowDisplay = System::WindowsDisplay;
 
     public:
         explicit MiddleLayerInterface(MiddleLayerPlatform middleLayerPlatform) noexcept;

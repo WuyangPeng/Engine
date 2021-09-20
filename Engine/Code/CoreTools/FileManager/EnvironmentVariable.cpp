@@ -17,11 +17,11 @@
 using std::make_shared;
 
 CoreTools::EnvironmentVariable::EnvironmentVariable(const System::String& variableName)
-    : m_Impl{ make_shared<ImplType>(variableName) }
+    : impl{  variableName  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, EnvironmentVariable)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, EnvironmentVariable)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, EnvironmentVariable, GetVariable, System::String);

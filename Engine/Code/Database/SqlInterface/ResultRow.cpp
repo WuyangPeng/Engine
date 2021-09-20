@@ -15,33 +15,34 @@
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 using std::ostream;
 using std::string;
 using std::wstring;
 
 Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ ResultRowFactory::Create(configurationStrategy) }
+    :   impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy  }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
-    : m_Impl{ ResultRowFactory::Create(configurationStrategy, mysqlxDbDoc) }
+    :  impl{ CoreTools::ImplCreateUseFactory::Default,configurationStrategy, mysqlxDbDoc  }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 Database::ResultRow::ResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
-    : m_Impl{ ResultRowFactory::Create(configurationStrategy, mysqlxRow) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default,configurationStrategy, mysqlxRow  }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 #endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ResultRow)
+CLASS_INVARIANT_STUB_DEFINE(Database, ResultRow)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, Print, ostream&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Database, ResultRow, GetIntValue, int, int)

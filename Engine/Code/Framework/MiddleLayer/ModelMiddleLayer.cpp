@@ -1,55 +1,52 @@
 // Copyright (c) 2010-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.3.0.1 (2020/05/21 14:55)
 
 #include "Framework/FrameworkExport.h"
 
-#include "ModelMiddleLayer.h" 
+#include "ModelMiddleLayer.h"
+#include "Flags/MiddleLayerPlatformFlags.h"
 #include "Detail/ModelMiddleLayerImpl.h"
-#include "Flags/MiddleLayerPlatformFlags.h" 
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
+using std::make_shared;
 using std::move;
 using std::string;
-using std::make_shared;
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
 namespace Framework
 {
-	constexpr auto g_DefaultMaxTimer = 30;
+    constexpr auto g_DefaultMaxTimer = 30;
 }
 
-Framework::ModelMiddleLayer
-	::ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(g_DefaultMaxTimer) }
+Framework::ModelMiddleLayer ::ModelMiddleLayer(MiddleLayerPlatform middleLayerPlatform)
+    : ParentType{ middleLayerPlatform }, impl{ g_DefaultMaxTimer }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::ModelMiddleLayer
-	::ModelMiddleLayer(ModelMiddleLayer&& rhs) noexcept
-	:ParentType{ move(rhs) }, m_Impl{ move(rhs.m_Impl) }
+Framework::ModelMiddleLayer ::ModelMiddleLayer(ModelMiddleLayer&& rhs) noexcept
+    : ParentType{ move(rhs) }, impl{ move(rhs.impl) }
 {
-	FRAMEWORK_SELF_CLASS_IS_VALID_1;
+    FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-Framework::ModelMiddleLayer& Framework::ModelMiddleLayer
-	::operator=(ModelMiddleLayer&& rhs) noexcept
+Framework::ModelMiddleLayer& Framework::ModelMiddleLayer ::operator=(ModelMiddleLayer&& rhs) noexcept
 {
-	FRAMEWORK_CLASS_IS_VALID_1;
+    FRAMEWORK_CLASS_IS_VALID_1;
 
-	ParentType::operator=(move(rhs));
+    ParentType::operator=(move(rhs));
 
-	m_Impl = move(rhs.m_Impl);
+    impl = move(rhs.impl);
 
-	return *this;
+    return *this;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework, ModelMiddleLayer)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ModelMiddleLayer)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, GetFrameRate, double)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, GetFrameRateMessage, string)
@@ -58,109 +55,97 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, ResetTime, 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, MeasureTime, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, ModelMiddleLayer, UpdateFrameCount, void)
 
-bool Framework::ModelMiddleLayer
-	::Idle(int64_t timeDelta)
+bool Framework::ModelMiddleLayer ::Idle(int64_t timeDelta)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	if (ParentType::Idle(timeDelta))
-	{
-		m_Impl->MeasureTime();
+    if (ParentType::Idle(timeDelta))
+    {
+        impl->MeasureTime();
 
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
-bool Framework::ModelMiddleLayer
-	::Paint()
+bool Framework::ModelMiddleLayer ::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::Paint();
+    return ParentType::Paint();
 }
 
-bool Framework::ModelMiddleLayer
-	::Move(const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::Move(point);
+    return ParentType::Move(point);
 }
 
-bool Framework::ModelMiddleLayer
-	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
+bool Framework::ModelMiddleLayer ::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::Resize(windowDisplay,size);
+    return ParentType::Resize(windowDisplay, size);
 }
 
-bool Framework::ModelMiddleLayer
-	::KeyUp(int key, const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::KeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::KeyUp(key, point);
+    return ParentType::KeyUp(key, point);
 }
 
-bool Framework::ModelMiddleLayer
-	::KeyDown(int key, const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::KeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::KeyDown(key, point);
+    return ParentType::KeyDown(key, point);
 }
 
-bool Framework::ModelMiddleLayer
-	::SpecialKeyUp(int key, const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::SpecialKeyUp(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::SpecialKeyUp(key, point);
+    return ParentType::SpecialKeyUp(key, point);
 }
 
-bool Framework::ModelMiddleLayer
-	::SpecialKeyDown(int key, const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::SpecialKeyDown(int key, const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::SpecialKeyDown(key, point);
+    return ParentType::SpecialKeyDown(key, point);
 }
 
-bool Framework::ModelMiddleLayer
-	::PassiveMotion(const WindowPoint& point)
+bool Framework::ModelMiddleLayer ::PassiveMotion(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::PassiveMotion(point);
+    return ParentType::PassiveMotion(point);
 }
 
-bool Framework::ModelMiddleLayer
-	::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::ModelMiddleLayer ::Motion(const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::Motion(point, virtualKeys);
+    return ParentType::Motion(point, virtualKeys);
 }
 
-bool Framework::ModelMiddleLayer
-	::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::ModelMiddleLayer ::MouseWheel(int delta, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::MouseWheel(delta, point, virtualKeys);
+    return ParentType::MouseWheel(delta, point, virtualKeys);
 }
 
-bool Framework::ModelMiddleLayer
-	::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
+bool Framework::ModelMiddleLayer ::MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return ParentType::MouseClick(button, state, point, virtualKeys);
+    return ParentType::MouseClick(button, state, point, virtualKeys);
 }
 
 #include STSTEM_WARNING_POP

@@ -13,11 +13,11 @@
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Base/SingletonDetail.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 RENDERING_EXPORT_UNIQUE_PTR(RendererInputData);
-RENDERING_EXPORT_SHARED_PTR(RendererInputDataImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(RendererInputDataImpl);
+
 
 namespace CoreTools
 {
@@ -30,7 +30,7 @@ namespace Rendering
 	{
 	public:
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(RendererInputData);
+		NON_COPY_TYPE_DECLARE(RendererInputData);
 		using ParentType = Singleton<RendererInputData>;
 		using RendererTypes = Rendering::RendererTypes;
 
@@ -57,7 +57,7 @@ namespace Rendering
 
 	private:
 		static RendererInputDataUniquePtr sm_RendererInputData;
-		IMPL_TYPE_DECLARE(RendererInputData);
+            PackageType impl;
 	};
 }
 

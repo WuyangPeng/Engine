@@ -16,14 +16,14 @@
 #include "Framework/MainFunctionHelper/MainFunctionHelperBase.h"
 
 FRAMEWORK_EXPORT_UNIQUE_PTR(OpenGLGlutProcessManager);
-FRAMEWORK_EXPORT_SHARED_PTR(OpenGLGlutProcessManagerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(OpenGLGlutProcessManagerImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE OpenGLGlutProcessManager : public CoreTools::Singleton<OpenGLGlutProcessManager>
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(OpenGLGlutProcessManager);
+		NON_COPY_TYPE_DECLARE(OpenGLGlutProcessManager);
 		using ParentType = Singleton<OpenGLGlutProcessManager>;		
 		using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;
 		using RenderSceneCallback = System::RenderSceneCallback;
@@ -95,7 +95,7 @@ namespace Framework
 
 	private:
 		static OpenGLGlutProcessManagerUniquePtr sm_OpenGLGlutProcessManager;
-		IMPL_TYPE_DECLARE(OpenGLGlutProcessManager);
+            PackageType impl;
 	};
 }
 

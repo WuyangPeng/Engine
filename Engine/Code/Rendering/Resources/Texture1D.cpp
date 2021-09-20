@@ -26,14 +26,45 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,Texture1D);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Texture1D);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,Texture1D); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Texture1D);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                       
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Texture1D);
 
 using std::make_shared;
 
 Rendering::Texture1D
     ::Texture1D(TextureFormat format, int dimension0,int numLevels,BufferUsage usage)
     :ParentType{},
-	m_Impl{ make_shared<ImplType>(format,dimension0,numLevels,usage) }
+	impl{ make_shared<ImplType>(format,dimension0,numLevels,usage) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -51,7 +82,7 @@ Rendering::Texture1D
     
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Texture1D)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Texture1D)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Texture1D,GetFormat,Rendering::TextureFormat)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Texture1D, GetTextureType, Rendering::TextureFlags)
@@ -66,7 +97,7 @@ int Rendering::Texture1D
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    return m_Impl->GetDimension(index,level);
+    return impl->GetDimension(index,level);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Texture1D, GetNumLevelBytes, int, int)
@@ -82,9 +113,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,Texture1D,IsMipmapable,bool)
 void Rendering::Texture1D
     ::SetUserField (int index, int userField)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetUserField(index,userField);
+    return impl->SetUserField(index,userField);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,GetUserField,int,int)
@@ -100,16 +131,16 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,Texture1D,ReadFromFile,ReadF
 void Rendering::Texture1D
     ::GenerateMipmaps ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
-    if(!m_Impl->HasMipmaps())
+    if(!impl->HasMipmaps())
     {
 		// 如果没有最大miplevels，销毁纹理绑定。稍后重建后重新。
         RENDERER_MANAGE_SINGLETON.UnbindAll(this);
         
-        m_Impl->GenerateMipmaps();
+        impl->GenerateMipmaps();
         
-       const auto numLevels = m_Impl->GetNumLevels();
+       const auto numLevels = impl->GetNumLevels();
         
         for (auto level = 0; level < numLevels; ++level)
         {
@@ -118,13 +149,13 @@ void Rendering::Texture1D
     }
     else
     {
-        m_Impl->GenerateMipmaps();
+        impl->GenerateMipmaps();
     }
 }
 
 Rendering::Texture1D
    ::Texture1D (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -136,7 +167,7 @@ int Rendering::Texture1D
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -158,7 +189,7 @@ void Rendering::Texture1D
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -166,7 +197,7 @@ void Rendering::Texture1D
 void Rendering::Texture1D
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
 }
@@ -174,7 +205,7 @@ void Rendering::Texture1D
 void Rendering::Texture1D
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PostLink();
 }
@@ -182,13 +213,13 @@ void Rendering::Texture1D
 void Rendering::Texture1D
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

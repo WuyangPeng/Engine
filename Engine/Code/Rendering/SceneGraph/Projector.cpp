@@ -81,7 +81,7 @@ void Rendering::Projector
 void Rendering::Projector
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
 }
@@ -89,7 +89,7 @@ void Rendering::Projector
 void Rendering::Projector
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -97,7 +97,7 @@ void Rendering::Projector
 void Rendering::Projector
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     

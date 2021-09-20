@@ -124,7 +124,7 @@ namespace Rendering
         void Copy();
 
     private:
-        IMPL_TYPE_DECLARE(Transform);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     template <typename Real>

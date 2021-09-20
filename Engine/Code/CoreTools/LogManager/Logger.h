@@ -13,17 +13,17 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(LoggerImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(Logger, LoggerImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Logger final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Logger);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(Logger);
 
     public:
         Logger(LogFilter logFilter, LogLevel logLevel);
@@ -36,7 +36,7 @@ namespace CoreTools
         void SetLogLevel(LogLevel level);
 
     private:
-        IMPL_TYPE_DECLARE(Logger);
+        PackageType impl;
     };
 }
 

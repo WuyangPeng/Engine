@@ -10,7 +10,7 @@
 #include "Rendering/RenderingDll.h"
 
 #include "OpenGLTextureData.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/Renderers/Detail/PlatformTextureCubeImpl.h"
 
 namespace Rendering

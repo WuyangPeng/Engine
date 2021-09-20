@@ -10,18 +10,18 @@
 #include "Framework/FrameworkDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-#include "System/Window/WindowProcess.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageLoopImpl);
+#include "System/Windows/WindowsProcess.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+FRAMEWORK_NON_COPY_EXPORT_IMPL(WindowMessageLoopImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE WindowMessageLoop
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(WindowMessageLoop);
-		using HWnd = System::WindowHWnd;
-		using WParam = System::WindowWParam;
+		NON_COPY_TYPE_DECLARE(WindowMessageLoop);
+		using HWnd = System::WindowsHWnd;
+		using WParam = System::WindowsWParam;
 		using Display = System::DisplayFunction;
 
 	public:
@@ -37,7 +37,7 @@ namespace Framework
 		WParam EnterMessageLoop(HWnd hwnd);
 
 	private:
-		IMPL_TYPE_DECLARE(WindowMessageLoop);
+                PackageType impl;
 	};
 }
 

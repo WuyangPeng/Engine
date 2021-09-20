@@ -1,16 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 14:33)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/27 11:55)
 
 #ifndef SYSTEM_THREADING_CRITICAL_SECTION_USING_H
 #define SYSTEM_THREADING_CRITICAL_SECTION_USING_H
 
 #include "System/Helper/Platform.h"
+
+#include <mutex>
 
 namespace System
 {
@@ -51,16 +53,7 @@ namespace System
     using ThreadingRtlResourceDebug = ThreadingRtlCriticalSectionDebug;
     using ThreadingRtlResourceDebugPtr = ThreadingRtlResourceDebug*;
 
-    struct ThreadingCriticalSection
-    {
-        ThreadingRtlCriticalSectionDebug DebugInfo;
-        WindowLong LockCount;
-        WindowLong RecursionCount;
-        void* OwningThread;
-        void* LockSemaphore;
-        uint64_t SpinCount;
-    };
-
+    using ThreadingCriticalSection = std::recursive_mutex;
     using ThreadingCriticalSectionPtr = ThreadingCriticalSection*;
 
 #endif  // SYSTEM_PLATFORM_WIN32

@@ -12,12 +12,12 @@
  
 AssistTools::GenerateTestingTemplateEngine
 	::GenerateTestingTemplateEngine(const System::String& templateFileName, const System::String& extension, const Replace& replace)
-	:m_Impl(std::make_shared<ImplType>(templateFileName, extension, replace))
+	:impl(templateFileName, extension, replace)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateEngine)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateEngine)
 
 void AssistTools::GenerateTestingTemplateEngine
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, 
@@ -26,6 +26,6 @@ void AssistTools::GenerateTestingTemplateEngine
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
+	return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
 }
  

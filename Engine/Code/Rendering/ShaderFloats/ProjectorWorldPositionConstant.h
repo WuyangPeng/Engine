@@ -12,8 +12,8 @@
 #include "ShaderFloat.h"
 #include "Rendering/SceneGraph/Projector.h"
 
-
-RENDERING_EXPORT_SHARED_PTR(ProjectorConstantImpl);
+EXPORT_SHARED_PTR(Rendering, ProjectorConstantImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -50,7 +50,7 @@ namespace Rendering
 		constexpr static auto sm_NumRegisters = 1;
 
 	private:
-		IMPL_TYPE_DECLARE(ProjectorWorldPositionConstant);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

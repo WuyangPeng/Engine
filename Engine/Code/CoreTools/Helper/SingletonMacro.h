@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/09 10:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 15:54)
 
 // 单例类所需要的宏
 #ifndef CORE_TOOLS_HELPER_SINGLETON_MACRO_H
@@ -21,12 +21,12 @@
 
 #else  // TCRE_USE_GCC
 
-    #define SINGLETON_GET_PTR_DECLARE(className)                    \
-    public:                                                         \
-        [[nodiscard]] static className* GetSingletonPtr() noexcept; \
-                                                                    \
-    public:                                                         \
-        [[nodiscard]] static className& GetSingleton() noexcept
+    #define SINGLETON_GET_PTR_DECLARE(className)                \
+    public:                                                     \
+        NODISCARD static className* GetSingletonPtr() noexcept; \
+                                                                \
+    public:                                                     \
+        NODISCARD static className& GetSingleton() noexcept
 
     #define SINGLETON_GET_PTR_DEFINE(namespaceName, className)                         \
         namespaceName::className* namespaceName::className::GetSingletonPtr() noexcept \

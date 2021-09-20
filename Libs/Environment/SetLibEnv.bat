@@ -86,11 +86,11 @@ setx  FreeglutX64ReleaseBin "%cd%\..\freeglut\BuildX64\bin\Release"
 
 echo VisualLeakDetectorWin32Lib = %VisualLeakDetectorWin32Lib%
 echo  %cd%
-setx  VisualLeakDetectorWin32Lib "%cd%\..\vld\src\bin\Win32\Release-v141"
+setx  VisualLeakDetectorWin32Lib "%cd%\..\vld\src\bin\Win32\Release-v142"
 
 echo VisualLeakDetectorX64Lib = %VisualLeakDetectorX64Lib%
 echo  %cd%
-setx  VisualLeakDetectorX64Lib "%cd%\..\vld\src\bin\x64\Release-v141"
+setx  VisualLeakDetectorX64Lib "%cd%\..\vld\src\bin\x64\Release-v142"
 
 echo OpenALSoftWin32DebugLib = %OpenALSoftWin32DebugLib%
 echo  %cd%
@@ -156,17 +156,49 @@ echo LuaX64ReleaseLib = %LuaX64ReleaseLib%
 echo  %cd%
 setx  LuaX64ReleaseLib "%cd%\..\lua\build\lua\x64\Release"
 
+echo OpenXLSXWin32DebugLib = %OpenXLSXWin32DebugLib%
+echo  %cd%
+setx  OpenXLSXWin32DebugLib "%cd%\..\OpenXLSX\BuildWin32\output\Debug"
+
+echo OpenXLSXWin32ReleaseLib = %OpenXLSXWin32ReleaseLib%
+echo  %cd%
+setx  OpenXLSXWin32ReleaseLib "%cd%\..\OpenXLSX\BuildWin32\output\Release"
+
+echo OpenXLSXX64DebugLib = %OpenXLSXX64DebugLib%
+echo  %cd%
+setx  OpenXLSXX64DebugLib "%cd%\..\OpenXLSX\BuildX64\output\Debug"
+
+echo OpenXLSXX64ReleaseLib = %OpenXLSXX64ReleaseLib%
+echo  %cd%
+setx  OpenXLSXX64ReleaseLib "%cd%\..\OpenXLSX\BuildX64\output\Release"
+
+echo MinizWin32DebugLib = %MinizWin32DebugLib%
+echo  %cd%
+setx  MinizWin32DebugLib "%cd%\..\miniz\miniz\Debug"
+
+echo MinizWin32ReleaseLib = %MinizWin32ReleaseLib%
+echo  %cd%
+setx  MinizWin32ReleaseLib "%cd%\..\miniz\miniz\Release"
+
+echo MinizX64DebugLib = %MinizX64DebugLib%
+echo  %cd%
+setx  MinizX64DebugLib "%cd%\..\miniz\miniz\x64\Debug"
+
+echo MinizX64ReleaseLib = %MinizX64ReleaseLib%
+echo  %cd%
+setx  MinizX64ReleaseLib "%cd%\..\miniz\miniz\x64\Release"
+
 echo LibsEnvironmentWin32Lib = %LibsEnvironmentWin32Lib%
 echo %cd%
 setx LibsEnvironmentWin32Lib "$(ProjectDir)..\..\..\$(Platform)\$(Configuration)Windows\;%BoostLib%;%ACEWin32Lib%;%OpenSSLWin32Lib%;" 
 
 echo LibsEnvironmentWin32DebugLib = %LibsEnvironmentWin32DebugLib%
 echo %cd%
-setx LibsEnvironmentWin32DebugLib "%LibsEnvironmentWin32Lib%;%MySqlWin32DebugLib%;%MySqlConnectorWin32DebugLib%;%VisualLeakDetectorWin32Lib%;%FreeglutWin32DebugLib%;%OpenALSoftWin32DebugLib%;%ZlibWin32DebugLib%;%FreetypeWin32DebugLib%;%LuaWin32DebugLib%;" 
+setx LibsEnvironmentWin32DebugLib "%LibsEnvironmentWin32Lib%;%MySqlWin32DebugLib%;%MySqlConnectorWin32DebugLib%;%VisualLeakDetectorWin32Lib%;%FreeglutWin32DebugLib%;%OpenALSoftWin32DebugLib%;%ZlibWin32DebugLib%;%FreetypeWin32DebugLib%;%LuaWin32DebugLib%;%OpenXLSXWin32DebugLib%;%MinizWin32DebugLib%;" 
 
 echo LibsEnvironmentWin32ReleaseLib = %LibsEnvironmentWin32ReleaseLib%
 echo %cd%
-setx LibsEnvironmentWin32ReleaseLib "%LibsEnvironmentWin32Lib%;%MySqlWin32ReleaseLib%;%MySqlConnectorWin32ReleaseLib%;%FreeglutWin32ReleaseLib%;%OpenALSoftWin32ReleaseLib%;%ZlibWin32ReleaseLib%;%FreetypeWin32ReleaseLib%;%LuaWin32ReleaseLib%;" 
+setx LibsEnvironmentWin32ReleaseLib "%LibsEnvironmentWin32Lib%;%MySqlWin32ReleaseLib%;%MySqlConnectorWin32ReleaseLib%;%FreeglutWin32ReleaseLib%;%OpenALSoftWin32ReleaseLib%;%ZlibWin32ReleaseLib%;%FreetypeWin32ReleaseLib%;%LuaWin32ReleaseLib%;%OpenXLSXWin32ReleaseLib%;%MinizWin32ReleaseLib%;" 
 
 echo LibsEnvironmentX64Lib = %LibsEnvironmentX64Lib%
 echo %cd%
@@ -174,10 +206,10 @@ setx LibsEnvironmentX64Lib "$(ProjectDir)..\..\..\$(Platform)\$(Configuration)Wi
 
 echo LibsEnvironmentX64DebugLib = %LibsEnvironmentX64DebugLib%
 echo %cd%
-setx LibsEnvironmentX64DebugLib "%LibsEnvironmentX64Lib%;%MySqlX64DebugLib%;%MySqlConnectorX64DebugLib%;%VisualLeakDetectorX64Lib%;%FreeglutX64DebugLib%;%OpenALSoftX64DebugLib%;%ZlibX64DebugLib%;%FreetypeX64DebugLib%;%LuaX64DebugLib%;" 
+setx LibsEnvironmentX64DebugLib "%LibsEnvironmentX64Lib%;%MySqlX64DebugLib%;%MySqlConnectorX64DebugLib%;%VisualLeakDetectorX64Lib%;%FreeglutX64DebugLib%;%OpenALSoftX64DebugLib%;%ZlibX64DebugLib%;%FreetypeX64DebugLib%;%LuaX64DebugLib%;%OpenXLSXX64DebugLib%;%MinizX64DebugLib%;" 
 
 echo LibsEnvironmentX64ReleaseLib = %LibsEnvironmentX64ReleaseLib%
 echo %cd%
-setx LibsEnvironmentX64ReleaseLib "%LibsEnvironmentX64Lib%;%MySqlX64ReleaseLib%;%MySqlConnectorX64ReleaseLib%;%FreeglutX64ReleaseLib%;%OpenALSoftX64ReleaseLib%;%ZlibX64ReleaseLib%;%FreetypeX64ReleaseLib%;%LuaX64ReleaseLib%;" 
+setx LibsEnvironmentX64ReleaseLib "%LibsEnvironmentX64Lib%;%MySqlX64ReleaseLib%;%MySqlConnectorX64ReleaseLib%;%FreeglutX64ReleaseLib%;%OpenALSoftX64ReleaseLib%;%ZlibX64ReleaseLib%;%FreetypeX64ReleaseLib%;%LuaX64ReleaseLib%;%OpenXLSXX64ReleaseLib%;%MinizX64ReleaseLib%;" 
 
 pause

@@ -11,8 +11,8 @@
 
 #include "Camera.h"
 #include "Node.h"
-
-RENDERING_EXPORT_SHARED_PTR(CameraNodeImpl);
+EXPORT_SHARED_PTR(Rendering, CameraNodeImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +23,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE CameraNode : public Node
     {
     public:
-         COPY_UNSHARE_CLASSES_TYPE_DECLARE(CameraNode, DESTRUCTOR_STATEMENT);
+        void Swap(CameraNode& rhs) noexcept;
+         
+             public:
+                 TYPE_DECLARE(CameraNode);
+                 using ClassShareType = CoreTools::CopyUnsharedClasses;
+                 ~CameraNode() noexcept;
+                 CameraNode(const CameraNode& rhs);
+                 CameraNode& operator=(const CameraNode& rhs);
+                 CameraNode(CameraNode&& rhs) noexcept;
+                 CameraNode& operator=(CameraNode&& rhs) noexcept;
 		using ParentType = Node;
         
     public:
@@ -59,7 +68,7 @@ namespace Rendering
           bool UpdateWorldData (double applicationTime) override;
         
 	private:
-		IMPL_TYPE_DECLARE(CameraNode);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

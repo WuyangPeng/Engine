@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::Matrix<Real>::Matrix(const Matrix3& rhs)
@@ -414,6 +414,7 @@ void Mathematics::Matrix<Real>::MakeIdentity() noexcept
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+        #include SYSTEM_WARNING_DISABLE(26482)
         if ((i / sm_RowSize) == (i % sm_RowSize))
         {
             m_Entry[i] = Math::GetValue(1);

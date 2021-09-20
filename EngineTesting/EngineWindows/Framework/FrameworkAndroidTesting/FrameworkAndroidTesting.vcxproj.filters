@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{db813171-e50e-460f-9afe-adb1ec38a62b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrameSuite 头文件">
+      <UniqueIdentifier>{16cba3f8-79ec-4695-9a11-e095a1858915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrameSuite 源文件">
+      <UniqueIdentifier>{cc947b01-0f1d-4768-9d83-99de4cc8a08d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\FrameworkAndroidTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidFrameBuildTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidFrameSuite.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidMessageLoopTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\FrameworkTestingAndroidCallBack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessManagerTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidFrameBuildTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidMessageLoopTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\FrameworkTestingAndroidCallBack.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkAndroidTesting\AndroidFrameSuite\AndroidProcessManagerTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

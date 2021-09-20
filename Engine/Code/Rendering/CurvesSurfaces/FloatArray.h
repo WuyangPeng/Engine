@@ -15,14 +15,23 @@
 
 #include <vector>
 
-RENDERING_EXPORT_SHARED_PTR(FloatArrayImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, FloatArrayImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE FloatArray : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(FloatArray, = default);
+        void Swap(FloatArray& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(FloatArray);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~FloatArray() noexcept = default;
+        FloatArray(const FloatArray& rhs);
+        FloatArray& operator=(const FloatArray& rhs);
+        FloatArray(FloatArray&& rhs) noexcept;
+        FloatArray& operator=(FloatArray&& rhs) noexcept;
         using ParentType = Object;
         using FloatVector = std::vector<float>;
 
@@ -43,7 +52,7 @@ namespace Rendering
          ObjectInterfaceSharedPtr CloneObject() const  override;
 
     private:
-        IMPL_TYPE_DECLARE(FloatArray);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

@@ -20,14 +20,14 @@
 #include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real, template <typename> class Vector>
 Mathematics::DynamicIntersector<Real, Vector>::DynamicIntersector(Real tMax, const VectorType& lhsVelocity, const VectorType& rhsVelocity, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(tMax, lhsVelocity, rhsVelocity) }
+    : ParentType{ epsilon }, impl{ std::make_shared<ImplType>(tMax, lhsVelocity, rhsVelocity) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, template <typename> class Vector>
 Mathematics::DynamicIntersector<Real, Vector>::DynamicIntersector(const DynamicIntersector& rhs)
-    : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -48,18 +48,18 @@ Mathematics::DynamicIntersector<Real, Vector>& Mathematics::DynamicIntersector<R
 template <typename Real, template <typename> class Vector>
 void Mathematics::DynamicIntersector<Real, Vector>::Swap(DynamicIntersector& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::Swap(rhs);
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real, template <typename> class Vector>
 Mathematics::DynamicIntersector<Real, Vector>::DynamicIntersector(DynamicIntersector&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, m_Impl{ std::move(rhs.m_Impl) }
+    : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -72,7 +72,7 @@ Mathematics::DynamicIntersector<Real, Vector>& Mathematics::DynamicIntersector<R
 
     ParentType::operator=(std::move(rhs));
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -81,7 +81,7 @@ Mathematics::DynamicIntersector<Real, Vector>& Mathematics::DynamicIntersector<R
 template <typename Real, template <typename> class Vector>
 bool Mathematics::DynamicIntersector<Real, Vector>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid() && impl != nullptr)
         return true;
     else
         return false;
@@ -93,7 +93,7 @@ Real Mathematics::DynamicIntersector<Real, Vector>::GetContactTime() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetContactTime();
+    return impl->GetContactTime();
 }
 
 template <typename Real, template <typename> class Vector>
@@ -101,7 +101,7 @@ Real Mathematics::DynamicIntersector<Real, Vector>::GetTMax() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTMax();
+    return impl->GetTMax();
 }
 
 template <typename Real, template <typename> class Vector>
@@ -109,7 +109,7 @@ const typename Mathematics::DynamicIntersector<Real, Vector>::VectorType Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsVelocity();
+    return impl->GetLhsVelocity();
 }
 
 template <typename Real, template <typename> class Vector>
@@ -117,15 +117,15 @@ const typename Mathematics::DynamicIntersector<Real, Vector>::VectorType Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsVelocity();
+    return impl->GetRhsVelocity();
 }
 
 template <typename Real, template <typename> class Vector>
 void Mathematics::DynamicIntersector<Real, Vector>::SetContactTime(Real contactTime) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetContactTime(contactTime);
+    return impl->SetContactTime(contactTime);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_INTERSECTOR_ACHIEVE_H

@@ -19,7 +19,7 @@ namespace Mathematics
         using ClassType = BasicMeshVertexImpl;
         
     public:
-        BasicMeshVertexImpl () noexcept;
+        BasicMeshVertexImpl(MAYBE_UNUSED int count) noexcept;
         
         CLASS_INVARIANT_DECLARE;
         

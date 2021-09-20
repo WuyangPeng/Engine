@@ -1,14 +1,15 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/26 14:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/12 18:21)
 
 #include "System/SystemExport.h"
 
+#include "GL10Extensions.h"
 #include "GLPlugin.h"
 #include "GLUtility.h"
 #include "System/Helper/EnumCast.h"
@@ -33,17 +34,10 @@ namespace System
 
         BOOST_ASSERT_MSG(false, msg.c_str());
     }
-}
 
-void System::ReportNullFunction(const char* glFunction) noexcept
-{
-    NoexceptNoReturn<const char*>(DoReportNullFunction, glFunction);
-}
-
-namespace System
-{
     void DoReportGLError(const char* glFunction)
     {
+        // 这里直接调用glGetError，而不是GLGetError。
         auto code = UnderlyingCastEnum<OpenGLErrorCode>(glGetError());
         while (code != OpenGLErrorCode::NoError)
         {
@@ -56,7 +50,12 @@ namespace System
     }
 }
 
-void System ::ReportGLError(const char* glFunction) noexcept
+void System::ReportNullFunction(const char* glFunction) noexcept
+{
+    NoexceptNoReturn<const char*>(DoReportNullFunction, glFunction);
+}
+
+void System::ReportGLError(const char* glFunction) noexcept
 {
     NoexceptNoReturn<const char*>(DoReportGLError, glFunction);
 }

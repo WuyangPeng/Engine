@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:17)
+//	引擎版本：0.7.1.1 (2020/10/23 15:17)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_FIBONACCI_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_FIBONACCI_H

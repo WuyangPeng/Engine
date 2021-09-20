@@ -16,10 +16,12 @@
 
 namespace Network
 {
+    class BaseMainManagerFactory;
     class NETWORK_HIDDEN_DECLARE BaseMainManagerImpl
     {
     public:
         using ClassType = BaseMainManagerImpl;
+        using FactoryType =BaseMainManagerFactory;
 
     public:
         BaseMainManagerImpl() noexcept;

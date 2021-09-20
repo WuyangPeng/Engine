@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::Event::Event(bool manualReset, bool initialState)
-    : m_Impl{ make_shared<ImplType>(manualReset, initialState) }
+    : impl{  manualReset, initialState  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Event)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Event)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Event, SetEvent, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Event, ResetEvent, void)

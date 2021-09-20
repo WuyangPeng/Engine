@@ -18,29 +18,55 @@
 using std::string;
 
 Network::SockAddress::SockAddress(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAddressFactory::Create(hostName, port, configurationStrategy) }
+    : impl{ SockAddressFactory::Create(hostName, port, configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::SockAddress::SockAddress(int port, const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAddressFactory::Create(port, configurationStrategy) }
+    : impl{ SockAddressFactory::Create(port, configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::SockAddress::SockAddress(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SockAddressFactory::Create(configurationStrategy) }
+    : impl{ SockAddressFactory::Create(configurationStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
-COPY_CONSTRUCTION_CLONE_DEFINE(Network, SockAddress)
+Network::SockAddress::SockAddress(const SockAddress& rhs)
+    : impl{ rhs.impl->Clone() }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+Network::SockAddress& Network::SockAddress::operator=(const SockAddress& rhs)
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    impl = rhs.impl->Clone();
+    return *this;
+}
+void Network::SockAddress::Swap(SockAddress& rhs) noexcept
+{
+    ;
+    std::swap(impl, rhs.impl);
+}
+Network::SockAddress::SockAddress(SockAddress&& rhs) noexcept
+    : impl{ std::move(rhs.impl) }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+Network::SockAddress& Network::SockAddress::operator=(SockAddress&& rhs) noexcept
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    impl = std::move(rhs.impl);
+    return *this;
+}
 #include STSTEM_WARNING_POP
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, SockAddress)
+CLASS_INVARIANT_STUB_DEFINE(Network, SockAddress)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetACEInetAddress, const Network::ACEInetAddressType&)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockAddress, GetACEInetAddress, Network::ACEInetAddressType&)

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/09/28 13:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 16:09)
 
 #ifndef CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_CUSTOM_ASSERT_MACRO_H
@@ -54,7 +54,7 @@ constexpr auto g_Assert = -1;
 
 #endif  // CORE_TOOLS_USE_ASSERT
 
-#if defined(_DEBUG) && 0 <= ASSERT_LEVEL
+#if defined(_DEBUG) && defined(CORE_TOOLS_USE_ASSERT) && 0 <= ASSERT_LEVEL
 
 constexpr auto g_AssertDebug = true;
 
@@ -63,14 +63,14 @@ constexpr auto g_AssertDebug = true;
     #define ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) \
         ASSERTION_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, __VA_ARGS__)
 
-#else  // !defined(_DEBUG) || ASSERT_LEVEL < 0
+#else  // !defined(_DEBUG) || defined(CORE_TOOLS_USE_ASSERT) || ASSERT_LEVEL < 0
 
 constexpr auto g_AssertDebug = false;
 
     #define ASSERTION_DEBUG(condition, format, ...) (static_cast<void>(0))
     #define ASSERTION_DEBUG_USE_FUNCTION_DESCRIBED(condition, functionDescribed, format, ...) (static_cast<void>(0))
 
-#endif  // defined(_DEBUG) && 0 <= ASSERT_LEVEL
+#endif  // defined(_DEBUG) && defined(CORE_TOOLS_USE_ASSERT) && 0 <= ASSERT_LEVEL
 
 #if 0 <= ASSERT_LEVEL
 

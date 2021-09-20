@@ -1,18 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 15:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/24 16:14)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_USING_H
 #define SYSTEM_SECURITY_SECURITY_SID_USING_H
 
 #include "LookupPrivilegeUsing.h"
 #include "System/Helper/Platform.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -24,8 +24,8 @@ namespace System
     using SecuritySIDPtr = PSID;
     using SecurityWellKnownSidType = WELL_KNOWN_SID_TYPE;
 
-    constexpr WindowDWord g_SecurityMaxSidSize{ SECURITY_MAX_SID_SIZE };
-    constexpr WindowDWord g_SecuritySidSubAuthorities{ SID_MAX_SUB_AUTHORITIES };
+    constexpr WindowsDWord g_SecurityMaxSidSize{ SECURITY_MAX_SID_SIZE };
+    constexpr WindowsDWord g_SecuritySidSubAuthorities{ SID_MAX_SUB_AUTHORITIES };
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -155,8 +155,8 @@ namespace System
         WinAccountProtectedUsersSid = 107,
     };
 
-    constexpr WindowDWord g_SecuritySidSubAuthorities{ 15 };
-    constexpr WindowDWord g_SecurityMaxSidSize{ (sizeof(SecuritySID) - sizeof(WindowDWord) + (g_SecuritySidSubAuthorities * sizeof(WindowDWord))) };
+    constexpr WindowsDWord g_SecuritySidSubAuthorities{ 15 };
+    constexpr WindowsDWord g_SecurityMaxSidSize{ (sizeof(SecuritySID) - sizeof(WindowsDWord) + (g_SecuritySidSubAuthorities * sizeof(WindowsDWord))) };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

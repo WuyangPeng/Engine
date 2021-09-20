@@ -1,18 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/07 19:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 15:55)
 
 #ifndef CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
 #define CORE_TOOLS_HELPER_SAFETY_LIMIT_MACRO_H
 
 #include "ExceptionMacro.h"
 
-namespace System
+namespace CoreTools
 {
     constexpr auto g_SafetyLimit100 = 100;
     constexpr auto g_SafetyLimit1000 = 1000;
@@ -22,14 +22,14 @@ namespace System
 
 #ifdef CORE_TOOLS_USE_SAFETY_LIMIT
 
-    #define SAFETY_WHILE_BEGIN(expression，maxCounter)                            \
-        {                                                                         \
-            auto safetyCounter = 0;                                               \
-            while (expression)                                                    \
-            {                                                                     \
-                if (SYSTEM_STRINGIZE(g_SafetyLimit, maxCounter) <= safetyCounter) \
-                {                                                                 \
-                    THROW_EXCEPTION(SYSTEM_TEXT("内部错误：违反安全计数器。"s));  \
+    #define SAFETY_WHILE_BEGIN(expression, maxCounter)                                          \
+        {                                                                                       \
+            auto safetyCounter = 0;                                                             \
+            while (expression)                                                                  \
+            {                                                                                   \
+                if (SYSTEM_CONCATENATOR(CoreTools::g_SafetyLimit, maxCounter) <= safetyCounter) \
+                {                                                                               \
+                    THROW_EXCEPTION(SYSTEM_TEXT("内部错误：违反安全计数器。"s));                \
                 }
 
     #define SAFETY_WHILE_END \

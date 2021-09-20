@@ -19,28 +19,54 @@
 
 using std::make_shared;
 
-COPY_CONSTRUCTION_CLONE_DEFINE(Network, MessageBuffer)
+Network::MessageBuffer::MessageBuffer(const MessageBuffer& rhs)
+    : impl{ rhs.impl->Clone() }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+Network::MessageBuffer& Network::MessageBuffer::operator=(const MessageBuffer& rhs)
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    impl = rhs.impl->Clone();
+    return *this;
+}
+void Network::MessageBuffer::Swap(MessageBuffer& rhs) noexcept
+{
+    ;
+    std::swap(impl, rhs.impl);
+}
+Network::MessageBuffer::MessageBuffer(MessageBuffer&& rhs) noexcept
+    : impl{ std::move(rhs.impl) }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+Network::MessageBuffer& Network::MessageBuffer::operator=(MessageBuffer&& rhs) noexcept
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    impl = std::move(rhs.impl);
+    return *this;
+}
 
 Network::MessageBuffer::MessageBuffer(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
-    : m_Impl{ MessageBufferFactory::Create(buffBlockSize, count, parserStrategy) }
+    : impl{ MessageBufferFactory::Create(buffBlockSize, count, parserStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageBuffer::MessageBuffer(const ImplTypeSharedPtr& messageBuffer) noexcept
-    : m_Impl{ messageBuffer }
+    : impl{ messageBuffer }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageBuffer::MessageBuffer(BuffBlockSize buffBlockSize, ParserStrategy parserStrategy)
-    : m_Impl{ MessageBufferFactory::Create(buffBlockSize, 0, parserStrategy) }
+    : impl{ MessageBufferFactory::Create(buffBlockSize, 0, parserStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageBuffer::MessageBuffer(int count, ParserStrategy parserStrategy)
-    : m_Impl{ MessageBufferFactory::Create(System::UnderlyingCastEnum<BuffBlockSize>(count), count, parserStrategy) }
+    : impl{ MessageBufferFactory::Create(System::UnderlyingCastEnum<BuffBlockSize>(count), count, parserStrategy) }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -82,49 +108,49 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Network, MessageBuffer, CheckingMessageC
 
 void Network::MessageBuffer::Read(int itemSize, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Read(itemSize, data);
+    return impl->Read(itemSize, data);
 }
 
 void Network::MessageBuffer::Read(int itemSize, int itemsNumber, void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Read(itemSize, itemsNumber, data);
+    return impl->Read(itemSize, itemsNumber, data);
 }
 
 void Network::MessageBuffer::Write(int itemSize, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Write(itemSize, data);
+    return impl->Write(itemSize, data);
 }
 
 void Network::MessageBuffer::Write(int itemSize, int itemsNumber, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Write(itemSize, itemsNumber, data);
+    return impl->Write(itemSize, itemsNumber, data);
 }
 
 void Network::MessageBuffer::PushBack(const MessageBuffer& messageBuffer)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->PushBack(messageBuffer.m_Impl);
+    return impl->PushBack(messageBuffer.impl);
 }
 
 Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer::Expansion(int count) const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<MessageBuffer>(m_Impl->Expansion(count));
+    return make_shared<MessageBuffer>(impl->Expansion(count));
 }
 
 Network::MessageBuffer::MessageBufferSharedPtr Network::MessageBuffer::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<MessageBuffer>(m_Impl->Clone());
+    return make_shared<MessageBuffer>(impl->Clone());
 }

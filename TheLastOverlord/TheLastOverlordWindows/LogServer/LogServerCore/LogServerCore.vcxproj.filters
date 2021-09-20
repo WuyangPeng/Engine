@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{2f17764f-e1cc-4258-ac95-8ef39d4a9e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine 头文件">
+      <UniqueIdentifier>{2fbfc1e4-a260-438f-8f5e-186ebf41b8e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine 源文件">
+      <UniqueIdentifier>{2512de7f-aa64-4033-8e61-0dadaf3ef7d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{8dda47bf-8440-43c0-b414-a603bb79858b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Engine\EngineFwd.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Engine\Placeholder.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Engine\Engine.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\LogServerCoreCustomAssertMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\ExportMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\Macro\LogServerCoreClassInvariantMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCore.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\LogServerCoreFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\LogServer\LogServerCore\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\LogServer\LogServerCore\Engine\Placeholder.cpp">
+      <Filter>Engine 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\LogServer\LogServerCore\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\LogServer\LogServerCore\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

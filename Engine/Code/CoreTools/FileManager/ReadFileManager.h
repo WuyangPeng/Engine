@@ -15,23 +15,28 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ReadFileManagerInterface);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ReadFileManagerInterface);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ReadFileManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE ReadFileManager final  
     {
     public:
         using ReadFileManagerImpl = ReadFileManagerInterface;
-        NON_COPY_CLASSES_TYPE_DECLARE(ReadFileManager);
+        NON_COPY_TYPE_DECLARE(ReadFileManager);
         using String = System::String;
 
     public:
         explicit ReadFileManager(const String& fileName);
+        ~ReadFileManager() noexcept = default;
+        ReadFileManager(const ReadFileManager& rhs) noexcept = delete;
+        ReadFileManager& operator=(const ReadFileManager& rhs) noexcept = delete;
+        ReadFileManager(ReadFileManager&& rhs) noexcept = delete;
+        ReadFileManager& operator=(ReadFileManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -44,7 +49,7 @@ namespace CoreTools
         const std::string LoadStdString();
 
     private:
-        IMPL_TYPE_DECLARE(ReadFileManager);
+        PackageType impl;
     };
 }
 

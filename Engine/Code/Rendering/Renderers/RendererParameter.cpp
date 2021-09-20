@@ -18,7 +18,7 @@ using boost::property_tree::ptree_error;
 
 Rendering::RendererParameter
 	::RendererParameter(const string& fileName)
-	:m_Impl{}
+	:impl{}
 {
 	DoLoadConfiguration(fileName); 
 
@@ -31,7 +31,7 @@ void Rendering::RendererParameter
 	try
 	{
 		AnalysisRendererParameterManager manager{ fileName };
-	    m_Impl = manager.GetRendererParameterPtr();
+	    impl = manager.GetRendererParameterPtr();
 	}
 	catch (const ptree_error& error)
 	{
@@ -41,10 +41,18 @@ void Rendering::RendererParameter
 	}
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,RendererParameter)
+CLASS_INVARIANT_STUB_DEFINE(Rendering,RendererParameter)
 
-
-DELAY_COPY_CONSTRUCTION_DEFINE(Rendering, RendererParameter)
+ void Rendering::RendererParameter::Copy()
+{
+    static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed.");
+    CLASS_IS_VALID_0;
+    if (1 < impl.use_count())
+    {
+        impl = std::make_shared<ImplType>(*impl);
+    }
+}
+ 
 
 void Rendering::RendererParameter
 	::LoadConfiguration(const string& fileName)
@@ -78,7 +86,7 @@ void Rendering::RendererParameter
 {
 	IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-	return m_Impl->Resize(width,height);
+	return impl->Resize(width,height);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RendererParameter,GetRendererBasis,const Rendering::RendererBasis);  
@@ -89,4 +97,4 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetIc
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsIconDefault, bool);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetCursor, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, IsCursorDefault, bool);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetBackground, System::WindowBrushTypes); 
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, RendererParameter, GetBackground, System::WindowsBrushTypes); 

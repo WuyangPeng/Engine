@@ -9,15 +9,15 @@
 #define FRAMEWORK_WINDOW_REGISTER_WINDOW_REGISTER_DETAIL_H
 
 #include "WindowRegisterHandle.h"
-#include "System/Window/WindowRegister.h"
+#include "System/Windows/WindowsRegister.h"
 #include "System/Time/Using/DeltaTimeUsing.h"
 #include "System/MemoryTools/MemoryHelperDetail.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
 
-template <typename WindowProcess>
-Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+Framework::WindowRegisterHandle<WindowsProcess>
 	::WindowRegisterHandle(const EnvironmentDirectory& environmentDirectory, HInstance instance, const char* commandLine, const WindowPictorial& pictorial, const WindowName& name, WindowClassStyle styles)
 	:m_EnvironmentDirectory{ environmentDirectory }, m_WindowProcess{ System::g_Microseconds / sm_Interval }, m_Command{ std::make_shared<Command>(commandLine) },
 	 m_WindowRegisterParameter{ instance,styles }, m_WindowPictorial{ pictorial }, m_WindowName{ name }
@@ -65,8 +65,8 @@ Framework::WindowRegisterHandle<WindowProcessHandle>& Framework::WindowRegisterH
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename WindowProcess>
-bool Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+bool Framework::WindowRegisterHandle<WindowsProcess>
 	::IsValid() const noexcept
 {
 	if (m_Command != nullptr)
@@ -77,16 +77,16 @@ bool Framework::WindowRegisterHandle<WindowProcess>
 #endif // OPEN_CLASS_INVARIANT
 
 // private
-template <typename WindowProcess>
-System::WindowAtom Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+System::WindowsAtom Framework::WindowRegisterHandle<WindowsProcess>
 	::InitApplication()
 {
-	auto wndclass = System::GetWindowsStructDefaultSize<System::WindowClassEx>();	
+	auto wndclass = System::GetWindowsStructDefaultSize<System::WindowsClassEx>();	
 
 	auto windowClassName = m_WindowName.GetWindowClassName();
 	auto windowMenuName = m_WindowName.GetWindowMenuName();
 
-	wndclass.style = System::EnumCastUnderlying<System::WindowUInt>(m_WindowRegisterParameter.GetStyle());
+	wndclass.style = System::EnumCastUnderlying<System::WindowsUInt>(m_WindowRegisterParameter.GetStyle());
 	wndclass.lpfnWndProc = m_WindowProcess.GetProcess();
 	wndclass.cbClsExtra = m_WindowRegisterParameter.GetWindowClassExtra();
 	wndclass.cbWndExtra = m_WindowRegisterParameter.GetWindowExtra();
@@ -101,8 +101,8 @@ System::WindowAtom Framework::WindowRegisterHandle<WindowProcess>
 	return System::RegisterSystemClass(&wndclass);
 }
 
-template <typename WindowProcess>
-System::WindowHInstance Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+System::WindowsHInstance Framework::WindowRegisterHandle<WindowsProcess>
 	::GetHInstance() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -110,8 +110,8 @@ System::WindowHInstance Framework::WindowRegisterHandle<WindowProcess>
 	return m_WindowRegisterParameter.GetHInstance();
 }
 
-template <typename WindowProcess>
-System::String Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+System::String Framework::WindowRegisterHandle<WindowsProcess>
 	::GetWindowClassName() const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -119,8 +119,8 @@ System::String Framework::WindowRegisterHandle<WindowProcess>
 	return m_WindowName.GetWindowClassName();
 }
 
-template <typename WindowProcess>
-System::String Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+System::String Framework::WindowRegisterHandle<WindowsProcess>
 	::GetWindowMenuName() const
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -128,8 +128,8 @@ System::String Framework::WindowRegisterHandle<WindowProcess>
 	return m_WindowName.GetWindowMenuName();
 }
 
-template <typename WindowProcess>
-typename Framework::WindowRegisterHandle<WindowProcess>::DisplayFunction Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+typename Framework::WindowRegisterHandle<WindowsProcess>::DisplayFunction Framework::WindowRegisterHandle<WindowsProcess>
 	::GetFunction() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -137,8 +137,8 @@ typename Framework::WindowRegisterHandle<WindowProcess>::DisplayFunction Framewo
 	return m_WindowProcess.GetFunction();
 }
 
-template <typename WindowProcess>
-typename Framework::WindowRegisterHandle<WindowProcess>::CommandSharedPtr Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+typename Framework::WindowRegisterHandle<WindowsProcess>::CommandSharedPtr Framework::WindowRegisterHandle<WindowsProcess>
 	::GetCommand() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -146,8 +146,8 @@ typename Framework::WindowRegisterHandle<WindowProcess>::CommandSharedPtr Framew
 	return m_Command;
 }
 
-template <typename WindowProcess>
-WindowProcess Framework::WindowRegisterHandle<WindowProcess>
+template <typename WindowsProcess>
+WindowsProcess Framework::WindowRegisterHandle<WindowsProcess>
 	::GetWindowProcess() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;

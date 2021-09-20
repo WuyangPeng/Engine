@@ -11,7 +11,7 @@
 
 #include "MiddleLayerInterface.h"
 #include "ModelViewControllerMiddleLayer.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 namespace Framework
 {
     class FRAMEWORK_DEFAULT_DECLARE EngineMiddleLayerInterface : public MiddleLayerInterface

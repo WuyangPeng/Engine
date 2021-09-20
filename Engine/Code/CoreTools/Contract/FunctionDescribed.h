@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/10 13:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/21 11:28)
 
 #ifndef CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
 #define CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H
@@ -14,25 +14,58 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
+#ifndef FUNCTION_DESCRIBED_NO_EXPORT
+
+    #define FUNCTION_DESCRIBED_DEFAULT_DECLARE CORE_TOOLS_DEFAULT_DECLARE
+
+#else  // !FUNCTION_DESCRIBED_NO_EXPORT
+
+    #if !defined(BUILDING_CORE_TOOLS_NO_IMPORT) && !defined(BUILDING_CORE_TOOLS_STATIC)
+        #define FUNCTION_DESCRIBED_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+    #else  // defined(BUILDING_CORE_TOOLS_NO_IMPORT) || defined(BUILDING_CORE_TOOLS_STATIC)
+        #define FUNCTION_DESCRIBED_DEFAULT_DECLARE
+    #endif  // !defined(BUILDING_CORE_TOOLS_NO_IMPORT) && !defined(BUILDING_CORE_TOOLS_STATIC)
+
+#endif  // FUNCTION_DESCRIBED_NO_EXPORT
+
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE FunctionDescribed final
+    class FUNCTION_DESCRIBED_DEFAULT_DECLARE FunctionDescribed final
     {
     public:
         using ClassType = FunctionDescribed;
 
     public:
-        FunctionDescribed(const char* currentFunction, const char* fileName, int line) noexcept;
+        constexpr FunctionDescribed(const char* currentFunction, const char* fileName, int line) noexcept
+            : currentFunction{ currentFunction }, fileName{ fileName }, line{ line }
+        {
+        }
 
-        [[nodiscard]] const char* GetCurrentFunction() const noexcept;
-        [[nodiscard]] const char* GetFileName() const noexcept;
-        [[nodiscard]] int GetLine() const noexcept;
+        NODISCARD constexpr const char* GetCurrentFunction() const noexcept
+        {
+            return currentFunction;
+        }
+
+        NODISCARD constexpr const char* GetFileName() const noexcept
+        {
+            return fileName;
+        }
+
+        NODISCARD constexpr int GetLine() const noexcept
+        {
+            return line;
+        }
 
     private:
-        const char* m_CurrentFunction;
-        const char* m_FileName;
-        int m_Line;
+        const char* currentFunction;
+        const char* fileName;
+        int line;
     };
+
+    NODISCARD constexpr bool FUNCTION_DESCRIBED_DEFAULT_DECLARE operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
+    {
+        return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() && rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();
+    }
 }
 
 #endif  // CORE_TOOLS_CONTRACT_FUNCTION_DESCRIBED_H

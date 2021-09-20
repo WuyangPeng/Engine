@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:09)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 17:53)
 
 #ifndef SYSTEM_HELPER_VACPP_H
 #define SYSTEM_HELPER_VACPP_H
@@ -13,6 +13,14 @@
 #if defined(__IBMCPP__)
 
     // Visual Age (IBM) C++ 编译器设置：
+
+    #if __IBMCPP__ < 500
+        #error "编译器未配置"
+    #endif  // __IBMCPP__ < 500
+
+    #if (1210 < __IBMCPP__)
+        #error "未知编译器"
+    #endif  // (1210 < __IBMCPP__)
 
     #ifndef SYSTEM_CPP_STANDARD
         #define SYSTEM_CPP_STANDARD 3
@@ -29,14 +37,6 @@
     #ifndef SYSTEM_COMPILER
         #define SYSTEM_COMPILER "IBM Visual Age 版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
     #endif  // SYSTEM_COMPILER
-
-    #if __IBMCPP__ < 500
-        #error "编译器未配置"
-    #endif  // __IBMCPP__ < 500
-
-    #if (1210 < __IBMCPP__)
-        #error "未知编译器"
-    #endif  // (1210 < __IBMCPP__)
 
 #endif  // defined(__IBMCPP__)
 

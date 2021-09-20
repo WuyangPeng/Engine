@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 10:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 1:37)
 
 #ifndef SYSTEM_HELPER_BORLAND_H
 #define SYSTEM_HELPER_BORLAND_H
@@ -49,11 +49,11 @@
 
     // 支持宏以帮助标准库检测
     #if (__BORLANDC__ < 0x560) || defined(_USE_OLD_RW_STL)
-        #define TCRE_BCB_WITH_ROGUE_WAVE
+        #define TCRE_BCB_WITH_ROGUE_WAVE static_cast<void>(0)
     #elif __BORLANDC__ < 0x570
-        #define TCRE_BCB_WITH_STLPORT
+        #define TCRE_BCB_WITH_STLPORT static_cast<void>(0)
     #else  // 0x570 <= __BORLANDC__
-        #define TCRE_BCB_WITH_DINKUMWARE
+        #define TCRE_BCB_WITH_DINKUMWARE static_cast<void>(0)
     #endif  // __BORLANDC__
 
     // 版本5.51及以下：
@@ -90,16 +90,6 @@
         #endif  // errno
 
     #endif  // (__BORLANDC__ <= 0x564)
-
-    // Borland C ++ Builder 2006 Update 2及更高版本：
-    #if (__BORLANDC__ <= 0x582)
-
-        #ifdef defined(linux) || defined(__linux__) || defined(__linux)
-            // _CPPUNWIND由于某种原因未自动设置
-            #pragma defineonoption CPPUNWIND - x
-        #endif  // defined(linux) || defined(__linux__) || defined(__linux)
-
-    #endif  // (__BORLANDC__ <= 0x582)
 
     // Borland C++ Builder 6默认使用STLPort。
     // 如果定义_USE_OLD_RW_STL，那么我们对Rogue Wave实现具有0x560或更高版本，这可能有std::DBL_MAX错误。

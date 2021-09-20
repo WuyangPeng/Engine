@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 13:24)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/03/31 18:27)
 
 #include "System/SystemExport.h"
 
@@ -15,7 +15,7 @@
 #include "Flags/StringConversionFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/WindowsSystem.h"
 
 #ifndef SYSTEM_PLATFORM_WIN32
 
@@ -27,6 +27,8 @@
     #endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // SYSTEM_PLATFORM_WIN32
+
+using std::min;
 
 #ifndef SYSTEM_PLATFORM_WIN32
 
@@ -83,7 +85,7 @@ int System::UTF8ConversionWideChar(const char* multiByte, int multiByteLength, w
     return MultiByteConversionWideChar(codePage, defaultMultiByte, multiByte, multiByteLength, wideChar, wideCharLength);
 }
 
-int System::MultiByteConversionWideChar(CodePage codePage, [[maybe_unused]] MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
+int System::MultiByteConversionWideChar(CodePage codePage, MAYBE_UNUSED MultiByte flag, const char* multiByte, int multiByteLength, wchar_t* wideChar, int wideCharLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -96,10 +98,12 @@ int System::MultiByteConversionWideChar(CodePage codePage, [[maybe_unused]] Mult
         return MultiByteToWideCharUseMbstowcs(codePage, multiByte, wideChar, wideCharLength);
     else
         return multiByteLength;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 #ifndef SYSTEM_PLATFORM_WIN32
+
 namespace System
 {
     int SYSTEM_HIDDEN_DECLARE WideCharToMultiByteUseWcstombs(CodePage codePage, const wchar_t* wideChar, char* multiByte, int multiByteLength) noexcept
@@ -116,6 +120,7 @@ namespace System
         return IncreaseNullNumber(readSize);
     }
 }
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 int System::WideCharConversionMultiByte(const wchar_t* wideChar, int wideCharLength, char* multiByte, int multiByteLength) noexcept
@@ -135,17 +140,27 @@ int System::WideCharConversionUTF8(const wchar_t* wideChar, int wideCharLength, 
     return WideCharConversionMultiByte(codePage, defaultWideChar, wideChar, wideCharLength, multiByte, multiByteLength, nullptr, nullptr);
 }
 
-int System::WideCharConversionMultiByte(CodePage codePage, [[maybe_unused]] WideChar flag, const wchar_t* wideChar, int wideCharLength,
-                                        char* multiByte, int multiByteLength, [[maybe_unused]] const char* defaultChar, [[maybe_unused]] bool* usedDefaultChar) noexcept
+int System::WideCharConversionMultiByte(CodePage codePage,
+                                        WideChar flag,
+                                        const wchar_t* wideChar,
+                                        int wideCharLength,
+                                        char* multiByte,
+                                        int multiByteLength,
+                                        const char* defaultChar,
+                                        bool* usedDefaultChar) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     auto result = g_False;
 
-    const auto size = ::WideCharToMultiByte(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), wideChar, wideCharLength, multiByte, multiByteLength, defaultChar, &result);
+    const auto size = ::WideCharToMultiByte(EnumCastUnderlying(codePage), EnumCastUnderlying(flag), wideChar, wideCharLength, multiByte, multiByteLength, defaultChar, defaultChar != nullptr ? &result : nullptr);
     BoolConversion(result, usedDefaultChar);
 
     return size;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WideChar, const char*, bool*>(flag, defaultChar, usedDefaultChar);
 
     // 返回值包括空终止符
     if (multiByte != nullptr)
@@ -156,75 +171,103 @@ int System::WideCharConversionMultiByte(CodePage codePage, [[maybe_unused]] Wide
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ComparesStringReturn System::CompareStringUseLocale([[maybe_unused]] LanguageLocale locale, [[maybe_unused]] Compares comparesFlag, const TChar* lhsString, [[maybe_unused]] int lhsCount, const TChar* rhsString, [[maybe_unused]] int rhsCount) noexcept
+System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale locale,
+                                                            Compares comparesFlag,
+                                                            const TChar* lhsString,
+                                                            int lhsCount,
+                                                            const TChar* rhsString,
+                                                            int rhsCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     return UnderlyingCastEnum<ComparesStringReturn>(::CompareString(EnumCastUnderlying(locale), EnumCastUnderlying(comparesFlag), lhsString, lhsCount, rhsString, rhsCount));
 
 #else  // !SYSTEM_PLATFORM_WIN32
-    if (lhsString < rhsString)
+
+    NullFunction<LanguageLocale, Compares>(locale, comparesFlag);
+
+    const auto minCount = min(lhsCount, rhsCount);
+    for (auto i = 0; i < minCount; ++i)
+    {
+        if (lhsString[i] < rhsString[i])
+            return ComparesStringReturn::LessThan;
+        else if (rhsString[i] < lhsString[i])
+            return ComparesStringReturn::GreaterThan;
+    }
+
+    if (lhsCount < rhsCount)
         return ComparesStringReturn::LessThan;
-    else if (rhsString < lhsString)
+    else if (rhsCount < lhsCount)
         return ComparesStringReturn::GreaterThan;
     else
         return ComparesStringReturn::Equal;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ComparesStringReturn System::CompareStringUseLocale([[maybe_unused]] const wchar_t* localeName, [[maybe_unused]] Compares comparesFlag, const wchar_t* lhsString, [[maybe_unused]] int lhsCount, const wchar_t* rhsString, [[maybe_unused]] int rhsCount) noexcept
+System::ComparesStringReturn System::CompareStringUseLocale(const wchar_t* localeName,
+                                                            Compares comparesFlag,
+                                                            const wchar_t* lhsString,
+                                                            int lhsCount,
+                                                            const wchar_t* rhsString,
+                                                            int rhsCount) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringEx(localeName, EnumCastUnderlying(comparesFlag), lhsString, lhsCount, rhsString, rhsCount, nullptr, nullptr, 0));
 
 #else  // !SYSTEM_PLATFORM_WIN32
-    if (lhsString < rhsString)
+
+    NullFunction<const wchar_t*, Compares>(localeName, comparesFlag);
+
+    const auto minCount = min(lhsCount, rhsCount);
+    for (auto i = 0; i < minCount; ++i)
+    {
+        if (lhsString[i] < rhsString[i])
+            return ComparesStringReturn::LessThan;
+        else if (rhsString[i] < lhsString[i])
+            return ComparesStringReturn::GreaterThan;
+    }
+
+    if (lhsCount < rhsCount)
         return ComparesStringReturn::LessThan;
-    else if (rhsString < lhsString)
+    else if (rhsCount < lhsCount)
         return ComparesStringReturn::GreaterThan;
     else
         return ComparesStringReturn::Equal;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const wchar_t* lhsString, [[maybe_unused]] int lhsCount, const wchar_t* rhsString, [[maybe_unused]] int rhsCount, [[maybe_unused]] bool ignoreCase) noexcept
+System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const wchar_t* lhsString,
+                                                                   int lhsCount,
+                                                                   const wchar_t* rhsString,
+                                                                   int rhsCount,
+                                                                   bool ignoreCase) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
     return UnderlyingCastEnum<ComparesStringReturn>(::CompareStringOrdinal(lhsString, lhsCount, rhsString, rhsCount, BoolConversion(ignoreCase)));
 
 #else  // !SYSTEM_PLATFORM_WIN32
-    if (lhsString < rhsString)
+
+    NullFunction<bool>(ignoreCase);
+
+    const auto minCount = min(lhsCount, rhsCount);
+    for (auto i = 0; i < minCount; ++i)
+    {
+        if (lhsString[i] < rhsString[i])
+            return ComparesStringReturn::LessThan;
+        else if (rhsString[i] < lhsString[i])
+            return ComparesStringReturn::GreaterThan;
+    }
+
+    if (lhsCount < rhsCount)
         return ComparesStringReturn::LessThan;
-    else if (rhsString < lhsString)
+    else if (rhsCount < lhsCount)
         return ComparesStringReturn::GreaterThan;
     else
         return ComparesStringReturn::Equal;
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-int System::FoldStringUseMapping([[maybe_unused]] LocaleIndependentMapping mapFlag, [[maybe_unused]] const TChar* src, [[maybe_unused]] int srcCount, [[maybe_unused]] TChar* dest, [[maybe_unused]] int destCount) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    return ::FoldString(EnumCastUnderlying(mapFlag), src, srcCount, dest, destCount);
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    return 0;
-
-#endif  // SYSTEM_PLATFORM_WIN32
-}
-
-bool System::GetStringTypeUseCharacterType([[maybe_unused]] LanguageLocale locale, [[maybe_unused]] CharacterType infoType, [[maybe_unused]] const TChar* src, [[maybe_unused]] int srcCount, [[maybe_unused]] WindowWordPtr charType) noexcept
-{
-#ifdef SYSTEM_PLATFORM_WIN32
-    if (::GetStringTypeEx(EnumCastUnderlying(locale), EnumCastUnderlying(infoType), src, srcCount, charType) != g_False)
-        return true;
-    else
-        return false;
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

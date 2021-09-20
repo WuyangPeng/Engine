@@ -16,19 +16,20 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include <boost/noncopyable.hpp>
 #include <shared_mutex>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(Environment);
-CORE_TOOLS_EXPORT_SHARED_PTR(EnvironmentImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(EnvironmentImpl);
+
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Environment final : public Singleton<Environment>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Environment);
+        NON_COPY_TYPE_DECLARE(Environment);
         using ParentType = Singleton<Environment>;
         using String = System::String;
 
@@ -72,7 +73,7 @@ namespace CoreTools
 
     private:
         static EnvironmentUniquePtr sm_Environment;
-        IMPL_TYPE_DECLARE(Environment);
+        PackageType impl;
     };
 }
 

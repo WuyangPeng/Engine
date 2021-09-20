@@ -1,0 +1,39 @@
+{
+  "UserInfoTesting": 1,
+
+  "CharacterInformationTesting": 1,
+
+  "ItemManagerTesting": 1,
+
+  "ShopTesting": 1,
+
+  "TimeRefreshTesting": 1,
+
+  "SceneTesting": 1,
+
+  "SceneObjectTesting": 1,
+
+  "SkillTesting": 1,
+
+  "StatusTesting": 1,
+
+  "RelationTesting": 1,
+
+  "QuestTesting": 1,
+
+  "TeamTesting": 1,
+
+  "MailTesting": 1,
+
+  "GuildTesting": 1,
+
+  "ChatTesting": 1,
+
+  "ArenaTesting": 1,
+
+  "InstanceTesting": 1,
+
+  "ActivityTesting": 1,
+
+  "ThreadingCoreRenderEngineGameTesting": 1 
+}

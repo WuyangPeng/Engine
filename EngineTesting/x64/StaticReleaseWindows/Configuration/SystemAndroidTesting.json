@@ -1,0 +1,10 @@
+{
+  "androidSuite": {
+    "AndroidInputKeyEventTesting": 1,
+    "AndroidInputMotionEventTesting": 1,
+    "AndroidLooperTesting": 1,
+    "AndroidInputQueueTesting": 1,
+    "AndroidNativeWindowTesting": 1,
+    "AndroidNativeAppGlueTesting": 1
+  }
+}

@@ -14,24 +14,27 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+ #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ReadAndWriteFileHandleImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ReadAndWriteFileHandleImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ReadAndWriteFileHandle final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE ReadAndWriteFileHandle final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ReadAndWriteFileHandle);
+        NON_COPY_TYPE_DECLARE(ReadAndWriteFileHandle);
         using String = System::String;
-
+       
     public:
         explicit ReadAndWriteFileHandle(const String& fileName);
-
+        ~ReadAndWriteFileHandle() noexcept = default;
+        ReadAndWriteFileHandle(const ReadAndWriteFileHandle& rhs) noexcept = delete;
+        ReadAndWriteFileHandle& operator=(const ReadAndWriteFileHandle& rhs) noexcept = delete;
+        ReadAndWriteFileHandle(ReadAndWriteFileHandle&& rhs) noexcept = delete;
+        ReadAndWriteFileHandle& operator=(ReadAndWriteFileHandle&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] uint64_t GetFileLength() const;
@@ -42,7 +45,7 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:
-        IMPL_TYPE_DECLARE(ReadAndWriteFileHandle);
+        PackageType impl;
     };
 }
 

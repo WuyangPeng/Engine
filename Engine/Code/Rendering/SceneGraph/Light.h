@@ -15,14 +15,23 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Rendering/DataTypes/Colour.h"
 
-RENDERING_EXPORT_SHARED_PTR(LightImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, LightImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Light : public CoreTools::Object
     {
     public:
-         COPY_UNSHARE_CLASSES_TYPE_DECLARE(Light, DESTRUCTOR_STATEMENT);
+        void Swap(Light& rhs) noexcept;
+         
+             public:
+                 TYPE_DECLARE(Light);
+                 using ClassShareType = CoreTools::CopyUnsharedClasses;
+                 ~Light() noexcept;
+                 Light(const Light& rhs);
+                 Light& operator=(const Light& rhs);
+                 Light(Light&& rhs) noexcept;
+                 Light& operator=(Light&& rhs) noexcept;
         using ParentType = Object;
         using APoint = Mathematics::APoint<float>;
         using AVector = Mathematics::AVector<float>;
@@ -78,7 +87,7 @@ namespace Rendering
         float GetIntensity() const;
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(Light);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

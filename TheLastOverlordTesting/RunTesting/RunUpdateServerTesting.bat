@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% UpdateServerTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% UpdateServerTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% UpdateServerTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% UpdateServerTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% UpdateServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% UpdateServerTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% UpdateServerTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% UpdateServerTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% UpdateServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% UpdateServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% UpdateServerTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% UpdateServerTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% UpdateServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% UpdateServerTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% UpdateServerTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% UpdateServerTesting.exe
+
+pause

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:13)
+//	引擎版本：0.7.1.1 (2020/10/26 15:13)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_H
@@ -33,7 +33,7 @@ namespace CoreTools
         void SetValue(int index, typename boost::call_traits<T>::param_type value);
 
         template <typename T>
-        [[nodiscard]] const T GetValue(int index);
+        [[nodiscard]] const T GetValue(int index) const;
 
         [[nodiscard]] int GetContainerSize() const;
 

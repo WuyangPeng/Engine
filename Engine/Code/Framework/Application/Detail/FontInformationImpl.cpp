@@ -19,13 +19,13 @@ using namespace std::literals;
 CLASS_INVARIANT_STUB_DEFINE(Framework, FontInformationImpl)
 
 Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl
-	::CreateWindowFontInformation(HWnd hwnd)
+	::Create(HWnd hwnd)
 {
 	return make_shared<WindowFontInformation>(hwnd);
 }
 
 Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInformationImpl
-	::CreateFontInformation(PlatformTypes type)
+	::Create(PlatformTypes type)
 {
 	switch (type)
 	{
@@ -37,7 +37,7 @@ Framework::FontInformationImpl::FontInformationImplSharedPtr Framework::FontInfo
 	case PlatformTypes::Window:
 	{
 		auto hwnd = WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();
-		return CreateWindowFontInformation(hwnd);
+		return Create(hwnd);
 	}
 
 	case PlatformTypes::Android:

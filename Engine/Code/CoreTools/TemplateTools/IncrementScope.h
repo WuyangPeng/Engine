@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:20)
+//	引擎版本：0.7.1.1 (2020/10/23 15:20)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_H
@@ -28,7 +28,7 @@ namespace CoreTools
         using Reference = ValueType&;
 
     public:
-        explicit IncrementScope(Reference value);
+        explicit IncrementScope(Reference value) noexcept;
         ~IncrementScope();
 
         IncrementScope(const IncrementScope&) = delete;

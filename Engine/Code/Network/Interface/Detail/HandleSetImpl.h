@@ -18,11 +18,13 @@
 
 namespace Network
 {
+    class HandleSetFactory;
     class NETWORK_HIDDEN_DECLARE HandleSetImpl
     {
     public:
         using ClassType = HandleSetImpl;
         using ImplTypePtr = std::shared_ptr<ClassType>;
+        using FactoryType = HandleSetFactory;
 
     public:
         HandleSetImpl() noexcept = default;

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/09/28 15:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 16:09)
 
 #ifndef CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
 #define CORE_TOOLS_HELPER_EXCEPTION_MACRO_H
@@ -75,18 +75,18 @@
         CERR << SYSTEM_TEXT("未知错误\n");             \
     }
 
-#define EXCEPTION_WINDOWS_ENTRY_POINT_CATCH                                                   \
-    catch (const CoreTools::Error& error)                                                     \
-    {                                                                                         \
-        System::MessageBoxSelectionWithTChar(error.GetError().c_str(), SYSTEM_TEXT("错误"));  \
-    }                                                                                         \
-    catch (const std::runtime_error& error)                                                   \
-    {                                                                                         \
-        System::MessageBoxSelectionWithChar(error.what(), "错误");                            \
-    }                                                                                         \
-    catch (...)                                                                               \
-    {                                                                                         \
-        System::MessageBoxSelectionWithTChar(SYSTEM_TEXT("未知错误！"), SYSTEM_TEXT("错误")); \
+#define EXCEPTION_WINDOWS_ENTRY_POINT_CATCH                                                                                              \
+    catch (const CoreTools::Error& error)                                                                                                \
+    {                                                                                                                                    \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(error.GetError().c_str(), SYSTEM_TEXT("错误"));  \
+    }                                                                                                                                    \
+    catch (const std::runtime_error& error)                                                                                              \
+    {                                                                                                                                    \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithChar(error.what(), "错误");                            \
+    }                                                                                                                                    \
+    catch (...)                                                                                                                          \
+    {                                                                                                                                    \
+        MAYBE_UNUSED const auto dialogBoxCommand = System::MessageBoxSelectionWithTChar(SYSTEM_TEXT("未知错误！"), SYSTEM_TEXT("错误")); \
     }
 
 #endif  // CORE_TOOLS_HELPER_EXCEPTION_MACRO_H

@@ -141,34 +141,34 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental> 
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
-    <LinkIncremental>false</LinkIncremental> 
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -179,7 +179,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -192,7 +192,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -207,7 +207,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -220,7 +220,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -231,7 +231,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -244,7 +244,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;CORETOOLS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -259,7 +259,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>      
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -269,8 +269,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.txt" />
-    <Text Include="Resource\Schedule.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -309,6 +307,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Command.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgument.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgumentImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandInternalFwd.h" />
@@ -317,7 +316,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentPackage.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.h" />
@@ -334,18 +333,31 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Console\ConsoleTextColorsManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Console\Flags\ConsoleColorsFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Assertion.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\AssertionDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\CheckInvariant.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\CheckInvariantDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Contract.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\ContractFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CopyUnsharedImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CopyUnsharedImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\DelayCopyUnsharedImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\DelayCopyUnsharedImplDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\CheckInvariantFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\DisableNotThrowFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\ImplFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\ImplStaticAssertHelper.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Noexcept.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\PerformanceUnsharedImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\PerformanceUnsharedImplDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\ScopeExit.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\ScopeExitDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\SharedImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\SharedImplDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\TriggerAssert.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\TriggerAssertDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreTools.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsDll.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsExport.h" />
@@ -458,6 +470,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\FileManager\WriteFileManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Freetype\Freetype.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Freetype\FreetypeFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\SystemCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\SystemClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\CopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\DelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\NonCopyMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\PerformanceUnsharedExportMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\SharedExportMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\GetRequiredBits.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\SafetyLimitMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Appender.h" />
@@ -551,7 +570,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\SingletonMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\StreamMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\SharedPtrMacro.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\TemplateToolsMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTestSuiteMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertExceptionMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\UnitTest\AssertTestMacro.h" />
@@ -623,11 +641,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\TelegramMessageManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminator.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminatorFwd.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Network\Network.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Network\NetworkFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.h" />
@@ -758,6 +771,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\IncrementScopeDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCast.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\LiteralCastDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MaxElement.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBePod.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSameSize.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MustBeSubscriptable.h" />
@@ -864,7 +878,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\AnalysisCommandArgumentContainer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentPackage.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\NoValueCommandArgument.cpp" />
@@ -872,7 +886,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\StringCommandArgument.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Console\ConsoleAlloc.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\Assertion.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\Noexcept.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\TriggerAssert.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CyclicRedundancyCheck\CyclicRedundancyCheck16.cpp" />
@@ -1001,11 +1014,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EntityManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferInStream.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferOutStream.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\BufferSource.cpp" />
@@ -1093,6 +1101,10 @@
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestComposite.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestInterface.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\UnitTestStream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

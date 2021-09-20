@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 10:44)
+//	引擎版本：0.7.1.1 (2020/10/22 10:44)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_H
@@ -17,18 +17,18 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(ObjectManager);
-CORE_TOOLS_EXPORT_SHARED_PTR(ObjectManagerImpl);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ObjectManagerImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE ObjectManager final : public CoreTools::Singleton<ObjectManager>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ObjectManager);
+        NON_COPY_TYPE_DECLARE(ObjectManager);
         using ParentType = Singleton<ObjectManager>;
 
     private:
@@ -60,7 +60,7 @@ namespace CoreTools
 
     private:
         static ObjectManagerUniquePtr sm_ObjectManager;
-        IMPL_TYPE_DECLARE(ObjectManager);
+        PackageType impl;
     };
 }
 

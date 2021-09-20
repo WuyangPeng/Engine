@@ -12,9 +12,9 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(MinHeapRecordIndexImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(MinHeapRecordIndex, MinHeapRecordIndexImpl);
 
 namespace CoreTools
 {
@@ -22,7 +22,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE MinHeapRecordIndex final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MinHeapRecordIndex);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(MinHeapRecordIndex);
 
     public:
         explicit MinHeapRecordIndex(int maxElements);
@@ -42,7 +42,7 @@ namespace CoreTools
         void GrowBy(int newMaxElements);
 
     private:
-        IMPL_TYPE_DECLARE(MinHeapRecordIndex);
+        PackageType impl;
     };
 }
 

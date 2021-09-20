@@ -5,16 +5,16 @@ VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Animation", "Animation\Animation.vcxproj", "{298125D4-02AE-419C-A085-D416360AE2F4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationTesting", "..\..\..\EngineTesting\EngineWindows\Animation\AnimationTesting\AnimationTesting.vcxproj", "{E67A1043-570F-4D51-9C85-8637EDD762DD}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationToolset", "..\..\..\Assist\AssistWindows\Toolset\Animation\AnimationToolset\AnimationToolset.vcxproj", "{0C40218E-18E5-4BE0-B1F8-80617C4BC8DB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{298125D4-02AE-419C-A085-D416360AE2F4} = {298125D4-02AE-419C-A085-D416360AE2F4}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationToolset", "..\..\..\Assist\AssistWindows\Toolset\Animation\AnimationToolset\AnimationToolset.vcxproj", "{0C40218E-18E5-4BE0-B1F8-80617C4BC8DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AnimationTesting", "..\..\..\EngineTesting\EngineWindows\Animation\AnimationTesting\AnimationTesting.vcxproj", "{E67A1043-570F-4D51-9C85-8637EDD762DD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{298125D4-02AE-419C-A085-D416360AE2F4} = {298125D4-02AE-419C-A085-D416360AE2F4}
 	EndProjectSection

@@ -12,8 +12,8 @@
 #include "ShaderFloat.h"
 #include "Rendering/SceneGraph/Light.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-RENDERING_EXPORT_SHARED_PTR(LightConstantImpl);
+EXPORT_SHARED_PTR(Rendering, LightConstantImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +22,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE LightConstant : public ShaderFloat
 	{
 	public:
-             COPY_UNSHARE_CLASSES_TYPE_DECLARE(LightConstant, DESTRUCTOR_DEFAULT);
+            void Swap(LightConstant& rhs) noexcept;
+            
+                public:
+                    TYPE_DECLARE(LightConstant);
+                    using ClassShareType = CoreTools::CopyUnsharedClasses;
+                    ~LightConstant() noexcept= default;
+                    LightConstant(const LightConstant& rhs);
+                    LightConstant& operator=(const LightConstant& rhs);
+                    LightConstant(LightConstant&& rhs) noexcept;
+                    LightConstant& operator=(LightConstant&& rhs) noexcept;
 		using ParentType = ShaderFloat;
 
 	public:
@@ -44,7 +53,7 @@ namespace Rendering
 		constexpr static auto sm_NumRegisters = 1;
 
 	private:
-		IMPL_TYPE_DECLARE(LightConstant);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 
 #include STSTEM_WARNING_PUSH

@@ -16,18 +16,18 @@ using  std::string;
  
 AssistTools::GenerateTestingTemplateCodeDirectory
 	::GenerateTestingTemplateCodeDirectory(const System::String& directory, const string& configurationFileName)
-	:m_Impl(std::make_shared<ImplType>(directory, configurationFileName))
+	:impl(directory, configurationFileName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateCodeDirectory)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateCodeDirectory)
 
 void AssistTools::GenerateTestingTemplateCodeDirectory
 	::GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData,const System::String& projectCapital, const System::String& newCoreName, const System::String& CoreNameCapital) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(exportDirectory, newSolutionName, copyrightData, projectCapital, newCoreName, CoreNameCapital);
+	return impl->GenerateTo(exportDirectory, newSolutionName, copyrightData, projectCapital, newCoreName, CoreNameCapital);
 }
  

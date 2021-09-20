@@ -5,15 +5,15 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:37)
+//	引擎版本：0.7.1.1 (2020/10/26 15:37)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_DETAIL_H
 
 #include "CallbackParametersImpl.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 
 template <typename T>
 void CoreTools::CallbackParametersImpl::SetValue(int index, typename boost::call_traits<T>::param_type value)
@@ -32,7 +32,7 @@ void CoreTools::CallbackParametersImpl::SetValue(int index, typename boost::call
 }
 
 template <typename T>
-const T CoreTools::CallbackParametersImpl::GetValue(int index)
+const T CoreTools::CallbackParametersImpl::GetValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

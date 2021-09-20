@@ -14,31 +14,35 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Database/SqlInterface/SqlInterfaceFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <map>
 #include <string>
 
-DATABASE_EXPORT_SHARED_PTR(CollectionImpl);
-EXPORT_NONCOPYABLE_CLASS(DATABASE);
+DATABASE_NON_COPY_EXPORT_IMPL(CollectionImpl);
+
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE Collection final : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE Collection final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Collection);
+        NON_COPY_TYPE_DECLARE(Collection);
         using DocResultPtr = std::shared_ptr<Result>;
         using BindStatementType = std::map<std::string, std::string>;
 
     public:
         explicit Collection(const Schema& schema, const std::string& collectionName);
-
+        ~Collection() noexcept = default;
+        Collection(const Collection& rhs) noexcept = delete;
+        Collection& operator=(const Collection& rhs) noexcept = delete;
+        Collection(Collection&& rhs) noexcept = delete;
+        Collection& operator=(Collection&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] DocResultPtr ExecuteDoc(const std::string& findStatement, const BindStatementType& bindStatement, int limitStatement);
 
     private:
-        IMPL_TYPE_DECLARE(Collection);
+        PackageType impl;
     };
 }
 

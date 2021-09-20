@@ -26,7 +26,7 @@ namespace CoreTools
         using ClassType = CWriteFileManagerImpl;
         using ParentType = CFileManagerImpl;
         using InterfaceType = WriteFileManagerInterface;
-
+          using String = System::String;
     public:
         explicit CWriteFileManagerImpl(const String& fileName);
 

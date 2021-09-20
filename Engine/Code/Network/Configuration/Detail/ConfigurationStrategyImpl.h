@@ -22,10 +22,13 @@
 
 namespace Network
 {
+    class ConfigurationStrategyFactory;
+
     class NETWORK_HIDDEN_DECLARE ConfigurationStrategyImpl final
     {
     public:
         using ClassType = ConfigurationStrategyImpl;
+        using FactoryType = ConfigurationStrategyFactory;
 
     public:
         ConfigurationStrategyImpl() = default;

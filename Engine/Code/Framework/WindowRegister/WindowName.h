@@ -11,15 +11,15 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(WindowNameImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(WindowNameImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE WindowName
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowName);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(WindowName);
 		using String = System::String;
 
 	public:
@@ -31,7 +31,7 @@ namespace Framework
 		const String GetWindowMenuName() const;
 
 	private:
-		IMPL_TYPE_DECLARE(WindowName);
+                PackageType impl;
 	};
 }
 

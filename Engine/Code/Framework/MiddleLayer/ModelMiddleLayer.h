@@ -14,7 +14,7 @@
 
 #include <string>
 
-FRAMEWORK_EXPORT_SHARED_PTR(ModelMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(ModelMiddleLayerImpl);
 
 namespace Framework
 {
@@ -22,7 +22,7 @@ namespace Framework
     class FRAMEWORK_DEFAULT_DECLARE ModelMiddleLayer : public ModelViewControllerMiddleLayer
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ModelMiddleLayer);
+        NON_COPY_TYPE_DECLARE(ModelMiddleLayer);
         using ParentType = ModelViewControllerMiddleLayer;
 
     public:
@@ -62,7 +62,7 @@ namespace Framework
         bool MouseClick(MouseButtonsTypes button, MouseStateTypes state, const WindowPoint& point, const VirtualKeysTypes& virtualKeys) final;
 
     private:
-        IMPL_TYPE_DECLARE(ModelMiddleLayer);
+        PackageType impl;
     };
 
     using ModelMiddleLayerSharedPtr = std::shared_ptr<ModelMiddleLayer>;

@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::PolynomialFit2Powers<Real>::PolynomialFit2Powers(const Samples& xSamples, const Samples& wSamples, const Powers& powers)
-    : m_Impl{ std::make_shared<ImplType>(xSamples, wSamples, powers) }
+    : impl{ xSamples, wSamples, powers }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -25,10 +25,7 @@ Mathematics::PolynomialFit2Powers<Real>::PolynomialFit2Powers(const Samples& xSa
 template <typename Real>
 bool Mathematics::PolynomialFit2Powers<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
-        return true;
-    else
-        return false;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -37,7 +34,7 @@ bool Mathematics::PolynomialFit2Powers<Real>::IsSolveSucceed() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsSolveSucceed();
+    return impl->IsSolveSucceed();
 }
 
 template <typename Real>
@@ -45,7 +42,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::GetXMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMin();
+    return impl->GetXMin();
 }
 
 template <typename Real>
@@ -53,7 +50,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::GetXMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetXMax();
+    return impl->GetXMax();
 }
 
 template <typename Real>
@@ -61,7 +58,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::GetWMin() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMin();
+    return impl->GetWMin();
 }
 
 template <typename Real>
@@ -69,7 +66,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::GetWMax() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetWMax();
+    return impl->GetWMax();
 }
 
 template <typename Real>
@@ -77,7 +74,7 @@ Real Mathematics::PolynomialFit2Powers<Real>::operator()(Real x) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(x);
+    return (*impl)(x);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_ACHIEVE_H

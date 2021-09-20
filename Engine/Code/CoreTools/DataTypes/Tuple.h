@@ -26,7 +26,7 @@
 namespace CoreTools
 {
     template <int Dimension, typename Type>
-    class Tuple final : private boost::totally_ordered<Tuple<Dimension, Type>>
+    class Tuple : private boost::totally_ordered<Tuple<Dimension, Type>>
     {
     public:
         using TupleType = Type;
@@ -41,7 +41,7 @@ namespace CoreTools
         Tuple() noexcept;
 
         explicit Tuple(ParamType param0) noexcept;
-        Tuple(ParamType param0, ParamType param1) noexcept;
+        Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<ParamType>);
         Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept;
         Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept;
 

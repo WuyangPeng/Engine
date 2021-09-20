@@ -1,0 +1,38 @@
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%版本：%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
+#define %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H
+
+#include "Framework/Helper/UserMacro.h" 
+#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Assert/Assertion.h"
+
+#if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL 8
+#endif // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
+
+#if !defined(%ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL)
+	#define %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL 8
+#endif // %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
+
+#if !defined(%ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL)
+	#define %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL 4
+#endif // %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
+
+#if CLASS_INVARIANT_LEVEL < %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
+	#error "不变式级别定义错误。"
+#endif // CLASS_INVARIANT_LEVEL < %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_LEVEL
+
+#if CLASS_INVARIANT_CONST_LEVEL < %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
+	#error "不变式级别定义错误。"
+#endif // CLASS_INVARIANT_CONST_LEVEL < %ProjectCapital%_%ManagerCapital%_CLASS_INVARIANT_CONST_LEVEL
+
+#if ASSERT_LEVEL < %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
+	#error "断言级别定义错误。"
+#endif // ASSERT_LEVEL < %ProjectCapital%_%ManagerCapital%_ASSERT_LEVEL
+ 
+#endif // %ProjectCapital%_%ManagerCapital%_MACRO_USER_MACRO_H

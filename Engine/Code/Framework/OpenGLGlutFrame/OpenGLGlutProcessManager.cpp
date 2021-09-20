@@ -34,7 +34,7 @@ void Framework::OpenGLGlutProcessManager
 }
 
 Framework::OpenGLGlutProcessManager ::OpenGLGlutProcessManager([[maybe_unused]] OpenGLGlutProcessManagerCreate openGLGlutProcessManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{  0 }
 {
  
 
@@ -128,7 +128,7 @@ Framework::OpenGLGlutProcessManager::OpenGLGlutCallBackInterfaceSharedPtr Framew
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetOpenGLGlutCallBack();
+	return impl->GetOpenGLGlutCallBack();
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -136,9 +136,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetOpenGLGlutCallBack(openGLGlutCallBack);
+	return impl->SetOpenGLGlutCallBack(openGLGlutCallBack);
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -146,9 +146,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->ClearOpenGLGlutCallBack();
+	return impl->ClearOpenGLGlutCallBack();
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -156,9 +156,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetWindowID(window);
+	return impl->SetWindowID(window);
 }
 
 int Framework::OpenGLGlutProcessManager
@@ -168,7 +168,7 @@ int Framework::OpenGLGlutProcessManager
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetWindowID();
+	return impl->GetWindowID();
 }
 
 int Framework::OpenGLGlutProcessManager
@@ -178,7 +178,7 @@ int Framework::OpenGLGlutProcessManager
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetMillisecond();
+	return impl->GetMillisecond();
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -186,9 +186,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetMillisecond(millisecond);
+	return impl->SetMillisecond(millisecond);
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -196,9 +196,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetMainFunctionHelper(mainFunctionHelperBase);
+	return impl->SetMainFunctionHelper(mainFunctionHelperBase);
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -206,9 +206,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->ClearMainFunctionHelper();
+	return impl->ClearMainFunctionHelper();
 }
 
 Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::OpenGLGlutProcessManager
@@ -218,7 +218,7 @@ Framework::OpenGLGlutProcessManager::MainFunctionHelperBaseSharedPtr Framework::
 
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetMainFunctionHelper();
+	return impl->GetMainFunctionHelper();
 }
 
 bool Framework::OpenGLGlutProcessManager
@@ -226,9 +226,9 @@ bool Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->PreCreate();
+	return impl->PreCreate();
 }
 
 bool Framework::OpenGLGlutProcessManager
@@ -236,9 +236,9 @@ bool Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->Initialize();
+	return impl->Initialize();
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -246,9 +246,9 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->PreIdle();
+	return impl->PreIdle();
 }
 
 void Framework::OpenGLGlutProcessManager
@@ -256,7 +256,7 @@ void Framework::OpenGLGlutProcessManager
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->Terminate();
+	return impl->Terminate();
 }

@@ -17,7 +17,7 @@
 
 using std::string;
 
-Network::MessageManagerImpl::MessageManagerImpl() noexcept
+Network::MessageManagerImpl::MessageManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_Factories{}, m_FullVersion{ CoreTools::Version::GetTCREFullVersion() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;

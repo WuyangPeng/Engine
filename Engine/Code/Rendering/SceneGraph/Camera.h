@@ -17,15 +17,24 @@
 #include "CoreTools/ObjectSystems/Object.h"
 
 
-
-RENDERING_EXPORT_SHARED_PTR(CameraImpl);
+EXPORT_SHARED_PTR(Rendering, CameraImpl, RENDERING_DEFAULT_DECLARE);
+ 
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE Camera : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Camera, = default);
+        void Swap(Camera& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Camera);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~Camera() noexcept = default;
+        Camera(const Camera& rhs);
+        Camera& operator=(const Camera& rhs);
+        Camera(Camera&& rhs) noexcept;
+        Camera& operator=(Camera&& rhs) noexcept;
         using ParentType = Object;
         using CameraSharedPtr = std::shared_ptr<ClassType>;
 	    using ConstCameraSharedPtr = std::shared_ptr<ClassType>;
@@ -100,7 +109,7 @@ namespace Rendering
 		void SetDepthType(DepthType depthType);
 
     private:
-		IMPL_TYPE_DECLARE(Camera);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)  

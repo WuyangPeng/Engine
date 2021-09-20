@@ -14,23 +14,28 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ReadFileHandleImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(ReadFileHandleImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ReadFileHandle final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE ReadFileHandle final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ReadFileHandle);
+        NON_COPY_TYPE_DECLARE(ReadFileHandle);
         using String = System::String;
 
     public:
         explicit ReadFileHandle(const String& fileName);
+        ~ReadFileHandle() noexcept = default;
+        ReadFileHandle(const ReadFileHandle& rhs) noexcept = delete;
+        ReadFileHandle& operator=(const ReadFileHandle& rhs) noexcept = delete;
+        ReadFileHandle(ReadFileHandle&& rhs) noexcept = delete;
+        ReadFileHandle& operator=(ReadFileHandle&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,7 +45,7 @@ namespace CoreTools
         void Read(size_t itemSize, size_t itemsNumber, void* data);
 
     private:
-        IMPL_TYPE_DECLARE(ReadFileHandle);
+        PackageType impl;
     };
 }
 

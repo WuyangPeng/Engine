@@ -1,0 +1,15 @@
+{
+  "DefaultEnvironment": "",
+  "EngineDirectory": "Configuration/EngineDirectory.json",
+  "FrameworkEngineDirectory": "Configuration/FrameworkEngineDirectory.json",
+  "Version": "0.7.1.4",
+  "PrintRun": 1,
+  "RandomSeed": 70104,
+
+  "JSON": "JSON",
+  "TcpPort": 30000,
+  "UdpPort": 31000,
+  "Address": "127.0.0.1",
+  "ConnectTime": 20,
+  "ConnectHostname": "14.215.177.39"
+}

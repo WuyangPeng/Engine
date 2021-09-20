@@ -21,7 +21,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorCircle2Circle2<Real>::StaticFindIntersectorCircle2Circle2(const Circle2& lhsCircle, const Circle2& rhsCircle, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(lhsCircle, rhsCircle) }
+    : ParentType{ epsilon }, impl{  lhsCircle, rhsCircle  }
 {
     Find();
 
@@ -104,26 +104,26 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
 
             if (Vector2DTools::Approximate(lhsPoint, rhsPoint, epsilon))
             {
-                m_Impl->AddIntersection((lhsPoint + rhsPoint) / Math::GetValue(2));
+                impl->AddIntersection((lhsPoint + rhsPoint) / Math::GetValue(2));
             }
             else
             {
-                m_Impl->AddIntersection(lhsPoint);
-                m_Impl->AddIntersection(rhsPoint);
+                impl->AddIntersection(lhsPoint);
+                impl->AddIntersection(rhsPoint);
             }
         }
         else
         {
             // |U| = |R0 - R1|,圆是相切的。
             auto point = lhsCircle.GetCenter() + (lhsRadius / lhsAdiusMinusRhsAdius) * centerDifference;
-            m_Impl->AddIntersection(point);
+            impl->AddIntersection(point);
         }
     }
     else
     {
         // |U| = |R0 + R1|, 圆是相切的。
         auto point = lhsCircle.GetCenter() + (lhsRadius / lhsRadiusPlusRhsRadius) * centerDifference;
-        m_Impl->AddIntersection(point);
+        impl->AddIntersection(point);
     }
 
     this->SetIntersectionType(IntersectionType::Point);
@@ -133,7 +133,7 @@ void Mathematics::StaticFindIntersectorCircle2Circle2<Real>::Find()
 template <typename Real>
 bool Mathematics::StaticFindIntersectorCircle2Circle2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid() && impl != nullptr)
         return true;
     else
         return false;
@@ -145,7 +145,7 @@ const Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorCircle2Circle
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsCircle();
+    return impl->GetLhsCircle();
 }
 
 template <typename Real>
@@ -153,7 +153,7 @@ const Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorCircle2Circle
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsCircle();
+    return impl->GetRhsCircle();
 }
 
 template <typename Real>
@@ -161,7 +161,7 @@ int Mathematics::StaticFindIntersectorCircle2Circle2<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -169,7 +169,7 @@ const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorCircle2Circl
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -179,7 +179,7 @@ const Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorCircle2Circle
 
     if (this->GetIntersectionType() == IntersectionType::Other)
     {
-        return m_Impl->GetIntersectionCircle();
+        return impl->GetIntersectionCircle();
     }
     else
     {

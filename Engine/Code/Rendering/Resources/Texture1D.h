@@ -8,8 +8,8 @@
 #define RENDERING_RESOURCES_TEXTURE_1D_H
 
 #include "Texture.h"
-
-RENDERING_EXPORT_SHARED_PTR(Texture1DImpl);
+EXPORT_SHARED_PTR(Rendering, Texture1DImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -18,7 +18,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture1D : public Texture
     {
     public:
-         COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture1D, DESTRUCTOR_STATEMENT);
+        void Swap(Texture1D& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Texture1D);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~Texture1D() noexcept;
+        Texture1D(const Texture1D& rhs);
+        Texture1D& operator=(const Texture1D& rhs);
+        Texture1D(Texture1D&& rhs) noexcept;
+        Texture1D& operator=(Texture1D&& rhs) noexcept;
         using ParentType = Texture;
         using Texture1DSharedPtr = std::shared_ptr<ClassType>;
         using ConstTexture1DSharedPtr = std::shared_ptr<const ClassType>;
@@ -63,7 +72,7 @@ namespace Rendering
         TextureSharedPtr Clone() const override;
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(Texture1D);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

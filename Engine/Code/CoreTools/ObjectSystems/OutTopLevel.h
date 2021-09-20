@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 11:35)
+//	引擎版本：0.7.1.1 (2020/10/22 11:35)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_H
@@ -16,15 +16,15 @@
 
 #include "ObjectInterface.h"
 #include "ObjectType.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(OutTopLevelImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(OutTopLevel,OutTopLevelImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE OutTopLevel final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(OutTopLevel);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(OutTopLevel);
 
     public:
         explicit OutTopLevel(DisableNotThrow disableNotThrow);
@@ -41,7 +41,7 @@ namespace CoreTools
         void Insert(const ObjectInterfaceSharedPtr& object);
 
     private:
-        IMPL_TYPE_DECLARE(OutTopLevel);
+        PackageType impl;
     };
 }
 

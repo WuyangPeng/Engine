@@ -1,0 +1,29 @@
+TODO Level 7
+
+0.0.2.4 
+ 
+1.   （InterfaceSuite）完成Interface的BaseMainManagerTesting的单元测试。  
+2.   （InterfaceSuite）完成Interface的NetworkUniqueIDManagerTesting的单元测试。  
+3.   （InterfaceSuite）完成Interface的SingletonTesting的单元测试。 
+4.   （InterfaceSuite）完成Interface的SockAddressTesting的单元测试。 
+5.   （InterfaceSuite）完成Interface的SockAcceptorTesting的单元测试。 
+6.   （InterfaceSuite）完成Interface的SockConnectorTesting的单元测试。 
+7.   （InterfaceSuite）完成Interface的SockStreamTesting的单元测试。 
+8.   （InterfaceSuite）完成Interface的HandleSetIteratorTesting的单元测试。 
+9.   （InterfaceSuite）完成Interface的HandleSetTesting的单元测试。 
+10.  （InterfaceSuite）完成Interface的发送套接字的单元测试。 
+11.  （InterfaceSuite）完成Interface的CacheClientTesting的单元测试。 
+12.  （InterfaceSuite）完成Interface的ClientTesting的单元测试。 
+13.  （InterfaceSuite）完成Interface的OnlySendingClientTesting的单元测试。 
+14.  （InterfaceSuite）完成Interface的IterativeServerTesting的单元测试。 
+15.  （InterfaceSuite）完成Interface的ReactiveServerTesting的单元测试。 
+16.  （InterfaceSuite）完成Interface的ServerTesting的单元测试。 
+17.  （InterfaceSuite）完成Interface的发送套接字的单元测试。 
+18.  （ACEWrappersSuite）完成ACEWrappers的ACESockInetAddressTesting的单元测试。 
+19.  （ACEWrappersSuite）完成ACEWrappers的ACESockAcceptorTesting的单元测试。 
+20.  （ACEWrappersSuite）完成ACEWrappers的ACESockConnectorTesting的单元测试。 
+21.  （ACEWrappersSuite）完成ACEWrappers的ACEIovecSockStreamTesting的单元测试。 
+22.  （ACEWrappersSuite）完成ACEWrappers的ACESockStreamTesting的单元测试。 
+23.  （ACEWrappersSuite）完成ACEWrappers的SockACEHandleSetIteratorTesting的单元测试。 
+24.  （ACEWrappersSuite）完成ACEWrappers的SockACEHandleSetTesting的单元测试。 
+25.  （ACEWrappersSuite）完成ACEWrappers的ACEMainManagerTesting的单元测试。 

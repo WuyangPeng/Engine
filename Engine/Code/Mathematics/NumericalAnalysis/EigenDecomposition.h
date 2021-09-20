@@ -37,7 +37,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using EigenDecompositionImpl = EigenDecompositionImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(EigenDecomposition, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(EigenDecomposition& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(EigenDecomposition);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~EigenDecomposition() noexcept = default;
+        EigenDecomposition(const EigenDecomposition& rhs);
+        EigenDecomposition& operator=(const EigenDecomposition& rhs);
+        EigenDecomposition(EigenDecomposition&& rhs) noexcept;
+        EigenDecomposition& operator=(EigenDecomposition&& rhs) noexcept;
 
         using Math = Math<Real>;
         using Matrix2 = Matrix2<Real>;
@@ -83,7 +94,7 @@ namespace Mathematics
         [[nodiscard]] const VariableMatrix GetEigenvectors() const;
 
     private:
-        IMPL_TYPE_DECLARE(EigenDecomposition);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatEigenDecomposition = EigenDecomposition<float>;

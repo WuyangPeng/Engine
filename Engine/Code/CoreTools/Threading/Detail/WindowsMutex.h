@@ -14,7 +14,7 @@
 
 #include "MutexImpl.h"
 #include "System/Threading/Using/MutexUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace CoreTools
 {
@@ -23,7 +23,7 @@ namespace CoreTools
     public:
         using ClassType = WindowsMutex;
         using ParentType = MutexImpl;
-        using MutexHandle = System::WindowHandle;
+        using MutexHandle = System::WindowsHandle;
 
     public:
         WindowsMutex() noexcept;

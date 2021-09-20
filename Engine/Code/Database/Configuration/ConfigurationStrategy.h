@@ -14,19 +14,19 @@
 
 #include "Flags/ConfigurationStrategyFlags.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <map>
 #include <string>
 #include <vector>
 
-DATABASE_EXPORT_SHARED_PTR(ConfigurationStrategyImpl);
+DATABASE_PERFORMANCE_UNSHARED_EXPORT_IMPL(ConfigurationStrategyImpl);
 
 namespace Database
 {
     class DATABASE_DEFAULT_DECLARE ConfigurationStrategy final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationStrategy);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(ConfigurationStrategy);
         using FlagsOption = std::vector<std::string>;
         using StringOption = std::map<std::string, std::string>;
         using BooleanOption = std::map<std::string, bool>;
@@ -67,7 +67,7 @@ namespace Database
         [[nodiscard]] int GetPoolMaxIdleTime() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(ConfigurationStrategy);
+        PackageType impl;
     };
 }
 

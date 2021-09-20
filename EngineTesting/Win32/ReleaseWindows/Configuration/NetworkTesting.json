@@ -1,0 +1,139 @@
+{
+  "helperSuite": 
+  {
+    "StreamMacroTesting": 1,
+    "UserMacroTesting": 1
+  },
+
+  "configurationSuite": 
+  {
+    "ConfigurationStrategyTesting": 1,
+    "ConfigurationSubStrategyTesting": 1,
+    "ConfigurationParameterTesting": 1,
+    "AnalysisNetworkConfigurationTesting": 1
+  },
+
+  "networkMessageSuite":
+  {
+    "MessageInterfaceTesting": 1,
+    "DoubleMessageTesting": 1,
+    "NullMessageTesting": 1,
+    "NullDoubleMessageTesting": 1,
+    "MessageContainerTesting": 1,
+    "IntegerMessageTesting": 1,
+    "StringMessageTesting": 1,
+    "MultipleMessageCastTesting": 1,
+    "MultipleMessageElementTesting": 1,
+    "MultipleMessageSizeTesting": 1,
+    "MultipleMessageInitValueTesting": 1,
+    "MultipleMessageStreamingSizeTesting": 1,
+    "MultipleMessageStreamingSaveTesting": 1,
+    "MultipleMessageStreamingLoadTesting": 1,
+    "MultipleMessageContainerTesting": 1,
+    "MultipleMessageTesting": 1,
+    "IntegerDoubleMessageTesting": 1,
+    "StringDoubleMessageTesting": 1,
+    "MultipleDoubleMessageTesting": 1,
+    "MessageContainerGroupTesting": 1,
+    "MultipleMessageContainerGroupTesting": 1,
+    "MessageInterfaceSharedPtrLessTesting": 1,
+    "NetworkMessageEventTesting": 1,
+    "MessageTypeConditionTesting": 1,
+    "MessageTypeConditionOperatingTesting": 1,
+    "MessageManagerTesting": 1,
+    "MessageEventContainerTesting": 1,
+    "MessageEventManagerTesting": 1, 
+    "SendMessageLevelTesting": 100,
+    "ReceiveMessageLevelTesting": 100,
+    "MessageBufferTesting": 158,
+    "MessageSourceTesting": 1,
+    "MessageTargetTesting": 1,
+    "BufferReceiveStreamTesting": 152,
+    "BufferSendStreamTesting": 153,
+    "SocketManagerTesting": 1
+  },
+
+  "interfaceSuite": 
+  {
+    "BaseMainManagerTesting": 1,
+    "SockAddressTesting": 1,
+    "NetworkUniqueIDManagerTesting": 1,
+    "SockAcceptorTesting": 1,
+    "SockConnectorTesting": 1,
+    "SockStreamTesting": 1,
+    "HandleSetTesting": 1,
+    "HandleSetIteratorTesting": 1,
+    "ClientTesting": 1,
+    "CacheClientTesting": 1,
+    "OnlySendingClientTesting": 1,
+    "ServerTesting": 1,
+    "IterativeServerTesting": 1,
+    "ReactiveServerTesting": 1
+  },
+
+  "aCEWrappersSuite": 
+  {
+    "ACEMainManagerTesting": 1,
+    "ACESockInetAddressTesting": 1,
+    "ACESockAcceptorTesting": 1,
+    "ACESockConnectorTesting": 1,
+    "ACESockStreamTesting": 1,
+    "ACEIovecSockStreamTesting": 1,
+    "SockACEHandleSetTesting": 1,
+    "SockACEHandleSetIteratorTesting": 1
+  },
+
+  "boostWrappersSuite":
+  {
+    "BoostMainManagerTesting": 100,
+    "BoostMainManagerUseThreadsTesting": 100,
+    "BoostMainManagerUseMultiContextTesting": 100,
+    "BoostSockInetAddressTesting": 1,
+    "BoostSockConnectorTesting": 1 
+  },
+
+  "boostSockAcceptorSuite":
+  {
+    "BoostSockAcceptorSynchronizeTesting": 5,
+    "BoostSockAcceptorNonBlockingTesting": 5,
+    "BoostSockAcceptorAsynchronousTesting": 5,
+    "BoostSockAcceptorHandleTesting": 1
+  },
+
+  "boostSockConnectorSuite": 
+  {
+    "BoostSockConnectorSynchronizeTesting": 5,
+    "BoostSockConnectorAsynchronousTesting": 5,
+    "BoostSockConnectorHandleTesting": 1
+  },
+
+  "boostSockStreamSuite": 
+  {
+    "BoostFixedSockStreamSynchronizeTesting": 5,
+    "BoostFixedSockStreamNonBlockingTesting": 5,
+    "BoostFixedSockStreamAsynchronousTesting": 5,
+    "BoostSegmentationSockStreamSynchronizeTesting": 5,
+    "BoostSegmentationSockStreamNonBlockingTesting": 5,
+    "BoostSegmentationSockStreamAsynchronousTesting": 5,
+    "BoostSockStreamHandleTesting":1
+  },
+
+  "networkWrappersSuite":
+  {
+    "NetworkMainManagerTesting": 1,
+    "NetworkSockInetAddressTesting": 1,
+    "NetworkSockAcceptorTesting": 1,
+    "NetworkSockConnectorTesting": 1, 
+    "NetworkSockStreamTesting":1
+  },
+
+  "socketWrappersSuite":
+  {
+
+  },
+
+  "opensslSuite":
+  {
+
+  }
+}

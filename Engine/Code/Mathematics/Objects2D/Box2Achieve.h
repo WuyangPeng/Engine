@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::Box2<Real>::Box2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1, const Real extent0, const Real extent1, const Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(center, axis0, axis1, extent0, extent1, epsilon) }
+    : impl{  center, axis0, axis1, extent0, extent1, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,7 +29,7 @@ Mathematics::Box2<Real>::Box2(const Vector2D& center, const Vector2D& axis0, con
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::Box2<Real>::Box2()
-    : m_Impl{ std::make_shared<ImplType>() }
+    : impl{   }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -38,11 +38,9 @@ Mathematics::Box2<Real>::Box2()
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Box2<Real>::IsValid() const noexcept
-{
-    if (m_Impl != nullptr)
+{ 
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -51,7 +49,7 @@ const typename Mathematics::Box2<Real>::VerticesType Mathematics::Box2<Real>::Co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeVertices();
+    return impl->ComputeVertices();
 }
 
 template <typename Real>
@@ -59,7 +57,7 @@ const typename Mathematics::Box2<Real>::Vector2D Mathematics::Box2<Real>::GetCen
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCenter();
+    return impl->GetCenter();
 }
 
 template <typename Real>
@@ -67,7 +65,7 @@ const typename Mathematics::Box2<Real>::Vector2D Mathematics::Box2<Real>::GetAxi
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis0();
+    return impl->GetAxis0();
 }
 
 template <typename Real>
@@ -75,7 +73,7 @@ const typename Mathematics::Box2<Real>::Vector2D Mathematics::Box2<Real>::GetAxi
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis1();
+    return impl->GetAxis1();
 }
 
 template <typename Real>
@@ -83,7 +81,7 @@ Real Mathematics::Box2<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent0();
+    return impl->GetExtent0();
 }
 
 template <typename Real>
@@ -91,7 +89,7 @@ Real Mathematics::Box2<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent1();
+    return impl->GetExtent1();
 }
 
 template <typename Real>
@@ -99,7 +97,7 @@ Real Mathematics::Box2<Real>::GetEpsilon() const noexcept
 { 
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEpsilon();
+    return impl->GetEpsilon();
 }
 
 template <typename Real>

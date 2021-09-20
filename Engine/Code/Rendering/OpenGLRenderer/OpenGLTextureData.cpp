@@ -19,13 +19,14 @@ template <>
 void Rendering::OpenGLTextureData<Rendering::Texture1D>
 	::CreateMipmapLevelStructures(const Texture1D* texture,UInt previousBind)
 {
+    previousBind;
 	// 创建mipmap层次结构。无图像的初始化产生。
 	for (UInt level = 0; level < m_NumLevels; ++level)
 	{
-		System::GlTexImage1D(level, m_InternalFormat, m_Dimension[0][level],m_Format, m_Type);
+		//System::GLTexImage1D(level, m_InternalFormat, m_Dimension[0][level],m_Format, m_Type);
 	}
 
-	System::SetGlBindTexture(System::TextureTarget::Texture1D, previousBind);
+	//System::SetGLBindTexture(System::TextureTarget::Texture1D, previousBind);
 
 	for (UInt level = 0; level < m_NumLevels; ++level)
 	{
@@ -41,25 +42,26 @@ template <>
 void Rendering::OpenGLTextureData<Rendering::Texture2D>
 	::CreateMipmapLevelStructures(const Texture2D* texture,UInt previousBind)
 {
+    previousBind;
 	// 创建mipmap层次结构。无图像的初始化产生。
     if (m_IsCompressed)
     {
         for (UInt level = 0; level < m_NumLevels; ++level)
         {
-            System::GlCompressedTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level, 
-                                           m_InternalFormat, m_Dimension[0][level],m_Dimension[1][level], m_NumLevelBytes[level]);
+          //  System::GLCompressedTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level, 
+           //                                m_InternalFormat, m_Dimension[0][level],m_Dimension[1][level], m_NumLevelBytes[level]);
         }
     }
     else
     {
         for (UInt level = 0; level < m_NumLevels; ++level)
         {
-			System::GlTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level,m_InternalFormat, 
-								 m_Dimension[0][level],m_Dimension[1][level], m_Format,m_Type);
+			//System::GLTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level,m_InternalFormat, 
+			//					 m_Dimension[0][level],m_Dimension[1][level], m_Format,m_Type);
         }
     }
 
-	System::SetGlBindTexture(System::TextureTarget::Texture2D, previousBind);
+	//System::SetGLBindTexture(System::TextureTarget::Texture2D, previousBind);
 
     for (UInt level = 0; level < m_NumLevels; ++level)
     {
@@ -78,10 +80,10 @@ void Rendering::OpenGLTextureData<Rendering::Texture3D>
 	// 创建mipmap层次结构。无图像的初始化产生。
     for (UInt level = 0; level < m_NumLevels; ++level)
     {
-		System::GetGlTexImage3D(level, m_InternalFormat,m_Dimension[0][level], m_Dimension[1][level],m_Dimension[2][level], m_Format, m_Type);
+		//System::GetGLTexImage3D(level, m_InternalFormat,m_Dimension[0][level], m_Dimension[1][level],m_Dimension[2][level], m_Format, m_Type);
     }
-
-	System::SetGlBindTexture(System::TextureTarget::Texture3D, previousBind);
+    previousBind;
+        //	System::SetGLBindTexture(System::TextureTarget::Texture3D, previousBind);
 
     for (UInt level = 0; level < m_NumLevels; ++level)
     {
@@ -104,8 +106,8 @@ void Rendering::OpenGLTextureData<Rendering::TextureCube>
         {
             for (UInt level = 0; level < m_NumLevels; ++level)
             {
-				System::GlCompressedTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face,
-                                                level, m_InternalFormat,m_Dimension[0][level],m_Dimension[1][level], m_NumLevelBytes[level]);
+				//System::GLCompressedTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face,
+                //                                level, m_InternalFormat,m_Dimension[0][level],m_Dimension[1][level], m_NumLevelBytes[level]);
             }
         }
     }
@@ -115,13 +117,13 @@ void Rendering::OpenGLTextureData<Rendering::TextureCube>
         {
             for (UInt level = 0; level < m_NumLevels; ++level)
             {
-				System::GlTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face, level,m_InternalFormat, 
-								     m_Dimension[0][level],m_Dimension[1][level], m_Format, m_Type);
+				//System::GLTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face, level,m_InternalFormat, 
+				//				     m_Dimension[0][level],m_Dimension[1][level], m_Format, m_Type);
             }
         }
     }
-
-	System::SetGlBindTexture(System::TextureTarget::TextureCubeMap, previousBind);
+    previousBind;
+        //	System::SetGLBindTexture(System::TextureTarget::TextureCubeMap, previousBind);
 
     for (int face = 0; face < sm_Face; ++face)
     {
@@ -140,6 +142,7 @@ template <>
 void Rendering::OpenGLTextureData<Rendering::Texture1D>
 	::TextureImage(int level) noexcept
 {
+    level;
 	// TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
 	// 将下面的代码生成在AMD Radeon HD 7970
 	// （催化剂13.4和13.6的催化剂测试版）会产生一个GL_INVALID_OPERATION。
@@ -149,18 +152,19 @@ void Rendering::OpenGLTextureData<Rendering::Texture1D>
 	// System::GlTexSubImage1D(level, m_Dimension[0][level],
 	//                         m_Format, m_Type);	
 
-	System::GlTexImage1D(level, m_InternalFormat, m_Dimension[0][level], m_Format, m_Type);
+	//System::GLTexImage1D(level, m_InternalFormat, m_Dimension[0][level], m_Format, m_Type);
 }
 
 // private
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture2D>
 	::TextureImage(int level) noexcept
-{ 	 
+{
+    level;
 	if (m_IsCompressed)
 	{
-		System::GlCompressedTexSubImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level,  m_Dimension[0][level],
-										  m_Dimension[1][level], m_InternalFormat, m_NumLevelBytes[level]);
+		//System::GLCompressedTexSubImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level,  m_Dimension[0][level],
+		//								  m_Dimension[1][level], m_InternalFormat, m_NumLevelBytes[level]);
 	}
 	else
 	{
@@ -174,8 +178,8 @@ void Rendering::OpenGLTextureData<Rendering::Texture2D>
 		// 		                    m_Dimension[0][level], m_Dimension[1][level], 
 		// 						    m_Format, m_Type);
 
-		System::GlTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level, m_InternalFormat,
-			                 m_Dimension[0][level], m_Dimension[1][level],  m_Format,m_Type);
+	//	System::GLTexImage2D(static_cast<GLenum>(System::TextureTarget::Texture2D), level, m_InternalFormat,
+		//	                 m_Dimension[0][level], m_Dimension[1][level],  m_Format,m_Type);
 	}
 	
 }
@@ -184,7 +188,8 @@ void Rendering::OpenGLTextureData<Rendering::Texture2D>
 template <>
 void Rendering::OpenGLTextureData<Rendering::Texture3D>
 	::TextureImage(int level) noexcept
-{ 
+{
+    level;
 	// TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
 	// 将下面的代码生成在AMD Radeon HD 7970
 	// （催化剂13.4和13.6的催化剂测试版）会产生一个GL_INVALID_OPERATION。
@@ -194,7 +199,7 @@ void Rendering::OpenGLTextureData<Rendering::Texture3D>
 	//  System::GlTexSubImage3D(level,  m_Dimension[0][level], m_Dimension[1][level],
 	//                          m_Dimension[2][level], m_Format, m_Type);
 
-	System::GetGlTexImage3D(level, m_InternalFormat,  m_Dimension[0][level], m_Dimension[1][level], m_Dimension[2][level], m_Format, m_Type);
+	//System::GetGLTexImage3D(level, m_InternalFormat,  m_Dimension[0][level], m_Dimension[1][level], m_Dimension[2][level], m_Format, m_Type);
 		 
 }
 #include STSTEM_WARNING_POP

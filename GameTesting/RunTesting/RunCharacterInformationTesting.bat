@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %GameTestingWin32DebugLib% CharacterInformationTestingD.exe
+start /d %GameTestingWin32ReleaseLib% CharacterInformationTesting.exe
+start /d %GameTestingX64DebugLib% CharacterInformationTestingD.exe
+start /d %GameTestingX64ReleaseLib% CharacterInformationTesting.exe
+start /d %GameTestingStaticWin32DebugLib% CharacterInformationTestingStaticD.exe
+start /d %GameTestingStaticWin32ReleaseLib% CharacterInformationTestingStatic.exe
+start /d %GameTestingStaticX64DebugLib% CharacterInformationTestingStaticD.exe
+start /d %GameTestingStaticX64ReleaseLib% CharacterInformationTestingStatic.exe
+
+start /d %GameTestingEngineStaticGameDynamicWin32DebugLib% CharacterInformationTestingD.exe
+start /d %GameTestingEngineStaticGameDynamicWin32ReleaseLib% CharacterInformationTesting.exe
+start /d %GameTestingEngineStaticGameDynamicX64DebugLib% CharacterInformationTestingD.exe
+start /d %GameTestingEngineStaticGameDynamicX64ReleaseLib% CharacterInformationTesting.exe
+start /d %GameTestingEngineDynamicGameStaticWin32DebugLib% CharacterInformationTestingStaticD.exe
+start /d %GameTestingEngineDynamicGameStaticWin32ReleaseLib% CharacterInformationTestingStatic.exe
+start /d %GameTestingEngineDynamicGameStaticX64DebugLib% CharacterInformationTestingStaticD.exe
+start /d %GameTestingEngineDynamicGameStaticX64ReleaseLib% CharacterInformationTestingStatic.exe
+
+pause

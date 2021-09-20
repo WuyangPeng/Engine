@@ -23,6 +23,7 @@
 
 namespace CoreTools
 {
+    class AppenderFactory;
     class CORE_TOOLS_HIDDEN_DECLARE AppenderImpl
     {
     public:
@@ -30,6 +31,7 @@ namespace CoreTools
         using AppenderImplPtr = std::shared_ptr<ClassType>;
         using String = System::String;
         using PosType = System::OFileStream::pos_type;
+        using FactoryType = AppenderFactory;
 
     public:
         explicit AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel = LogLevel::Disabled);

@@ -12,17 +12,17 @@
  
 AssistTools::GenerateTemplateVcxproj
 	::GenerateTemplateVcxproj(const System::String& templateFileName, const System::String& solutionName, const System::String& includeName)
-	:m_Impl(std::make_shared<ImplType>(templateFileName, solutionName, includeName))
+	:impl(templateFileName, solutionName, includeName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateVcxproj)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateVcxproj)
 
 void AssistTools::GenerateTemplateVcxproj
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newIncludeName) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newSolutionName, newIncludeName);
+	return impl->GenerateTo(resourceDirectory, newSolutionName, newIncludeName);
 }

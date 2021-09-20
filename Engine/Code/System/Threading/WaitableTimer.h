@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 15:32)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/06 20:48)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H
@@ -22,26 +22,44 @@ namespace System
 {
     // 等待计时器的创建、销毁、等待和设置。
 
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes, bool manualReset, const TChar* timerName) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes, const TChar* timerName, CreateWaitableTimerReset flag,
-                                                                                MutexStandardAccess desiredAccess, WaitableTimerSpecificAccess specificAccess) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE OpenSystemWaitableTimer(MutexStandardAccess desiredAccess, WaitableTimerSpecificAccess specificAccess, bool inheritHandle, const TChar* timerName) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
+                                                                                bool manualReset,
+                                                                                const TChar* timerName) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
+                                                                                const TChar* timerName,
+                                                                                CreateWaitableTimerReset flag,
+                                                                                MutexStandardAccess desiredAccess,
+                                                                                WaitableTimerSpecificAccess specificAccess) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CancelSystemWaitableTimer(WindowHandle timer) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CloseSystemWaitableTimer(WindowHandle timer) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemWaitableTimer(MutexStandardAccess desiredAccess,
+                                                                              WaitableTimerSpecificAccess specificAccess,
+                                                                              bool inheritHandle,
+                                                                              const TChar* timerName) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowHandle timer) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowHandle timer, WindowDWord milliseconds) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowHandle timer, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowDWord count, const WindowHandle* timer, bool waitAll, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowDWord count, const WindowHandle* timer, bool waitAll, WindowDWord milliseconds) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CancelSystemWaitableTimer(WindowsHandle timer) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemWaitableTimer(WindowsHandle timer) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetSystemWaitableTimer(WindowHandle timer, const WindowLargeInteger* dueTime, WindowLong period, TimerApcRoutine completionRoutine,
-                                                                     WindowVoidPtr argToCompletionRoutine, WaitableTimerReasonContextPtr wakeContext, WindowULong tolerableDelay) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetSystemWaitableTimer(WindowHandle timer, const WindowLargeInteger* dueTime, WindowLong period,
-                                                                     TimerApcRoutine completionRoutine, WindowVoidPtr argToCompletionRoutine, bool resume) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer, WindowsDWord milliseconds) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsHandle timer, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count, const WindowsHandle* timer, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemWaitableTimer(WindowsDWord count, const WindowsHandle* timer, bool waitAll, WindowsDWord milliseconds) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE IsWaitableTimerValid(WindowHandle handle) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemWaitableTimer(WindowsHandle timer,
+                                                                 const WindowsLargeInteger* dueTime,
+                                                                 WindowsLong period,
+                                                                 TimerApcRoutine completionRoutine,
+                                                                 WindowsVoidPtr argToCompletionRoutine,
+                                                                 WaitableTimerReasonContextPtr wakeContext,
+                                                                 WindowsULong tolerableDelay) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemWaitableTimer(WindowsHandle timer,
+                                                                 const WindowsLargeInteger* dueTime,
+                                                                 WindowsLong period,
+                                                                 TimerApcRoutine completionRoutine,
+                                                                 WindowsVoidPtr argToCompletionRoutine,
+                                                                 bool resume) noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsWaitableTimerValid(WindowsHandle handle) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_WAITABLE_TIMER_H

@@ -23,24 +23,66 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26486)
+#include SYSTEM_WARNING_DISABLE(26434)
 CORE_TOOLS_RTTI_DEFINE(Rendering, ProjectorMatrixConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ProjectorMatrixConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ProjectorMatrixConstant); 
-CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ProjectorMatrixConstant);
+Rendering::ProjectorMatrixConstant::ProjectorMatrixConstant(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ProjectorMatrixConstant)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ProjectorMatrixConstant)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ProjectorMatrixConstant)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ProjectorMatrixConstant)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ProjectorMatrixConstant)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ProjectorMatrixConstant)
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ProjectorMatrixConstant);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ProjectorMatrixConstant);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ProjectorMatrixConstant);
 
 Rendering::ProjectorMatrixConstant
 	::ProjectorMatrixConstant(const ProjectorSharedPtr& projector,bool biased, int biasScaleMatrixIndex)
-	:ParentType(sm_NumRegisters),  m_Impl{ make_shared<ImplType>(projector,biased,biasScaleMatrixIndex) }
+	:ParentType(sm_NumRegisters),  impl{ make_shared<ImplType>(projector,biased,biasScaleMatrixIndex) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ProjectorMatrixConstant)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ProjectorMatrixConstant)
 
 void Rendering::ProjectorMatrixConstant
 	::SetNumRegisters(int numRegisters)
@@ -60,7 +102,7 @@ void Rendering::ProjectorMatrixConstant ::Update(const Visual* visual, [[maybe_u
 	const auto projectionViewMatrix = GetProjector()->GetProjectionViewMatrix();
 	const auto worldMatrix = visual->GetWorldTransform().GetMatrix();
 	auto projectionViewWorldMatrix = projectionViewMatrix * worldMatrix;
-	projectionViewWorldMatrix = m_Impl->GetProjectionViewWorldMatrix(projectionViewWorldMatrix);
+	projectionViewWorldMatrix = impl->GetProjectionViewWorldMatrix(projectionViewWorldMatrix);
 
 	SetRegisters(projectionViewWorldMatrix);
 

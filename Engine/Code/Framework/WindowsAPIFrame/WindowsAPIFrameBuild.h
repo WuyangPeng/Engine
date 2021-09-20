@@ -21,8 +21,8 @@ namespace Framework
 	public:
 		using ClassType = WindowsAPIFrameBuild<Process>;
 		using String = System::String;
-		using HWnd = System::WindowHWnd; 
-		using HInstance = System::WindowHInstance;
+		using HWnd = System::WindowsHWnd; 
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowsAPIFrameBuild(HInstance instance, const char* commandLine, const WindowApplicationInformation& information,

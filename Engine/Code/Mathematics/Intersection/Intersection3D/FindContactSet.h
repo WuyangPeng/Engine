@@ -16,25 +16,27 @@
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Segment3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindContactSetImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindContactSetImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindContactSetImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindContactSetImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindContactSetImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FindContactSet final
     {
     public:
         using FindContactSetImpl = FindContactSetImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(FindContactSet);
-
+       
+        TYPE_DECLARE(FindContactSet);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector3D = Vector3D<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
@@ -86,7 +88,7 @@ namespace Mathematics
         [[nodiscard]] PointType GetPoint() const;
 
     private:
-        IMPL_TYPE_DECLARE(FindContactSet);
+        PackageType impl;
     };
 
     using FloatFindContactSet = FindContactSet<float>;

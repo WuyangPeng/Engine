@@ -36,7 +36,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ConvexPolygon2Impl = ConvexPolygon2Impl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConvexPolygon2, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(ConvexPolygon2& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ConvexPolygon2);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ConvexPolygon2() noexcept = default;
+        ConvexPolygon2(const ConvexPolygon2& rhs);
+        ConvexPolygon2& operator=(const ConvexPolygon2& rhs);
+        ConvexPolygon2(ConvexPolygon2&& rhs) noexcept;
+        ConvexPolygon2& operator=(ConvexPolygon2&& rhs) noexcept;
 
         using ParentType = Polygon2<Real>;
         using Line2 = Line2<Real>;
@@ -81,7 +92,7 @@ namespace Mathematics
         void UpdateLine(int index, const Vector2D& average);
 
     private:
-        IMPL_TYPE_DECLARE(ConvexPolygon2);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatConvexPolygon2 = ConvexPolygon2<float>;

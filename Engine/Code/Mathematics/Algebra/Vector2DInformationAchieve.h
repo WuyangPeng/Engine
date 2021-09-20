@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::Vector2DInformation<Real>::Vector2DInformation(const ContainerType& points, Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(points, epsilon) }
+    : impl{  points, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,10 +26,9 @@ Mathematics::Vector2DInformation<Real>::Vector2DInformation(const ContainerType&
 template <typename Real>
 bool Mathematics::Vector2DInformation<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+     
         return true;
-    else
-        return false;
+     
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -38,7 +37,7 @@ int Mathematics::Vector2DInformation<Real>::GetDimension() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDimension();
+    return impl->GetDimension();
 }
 
 template <typename Real>
@@ -46,7 +45,7 @@ typename Mathematics::Vector2DInformation<Real>::AxesAlignBoundingBox2D Mathemat
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAABB();
+    return impl->GetAABB();
 }
 
 template <typename Real>
@@ -54,7 +53,7 @@ Real Mathematics::Vector2DInformation<Real>::GetMaxRange() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxRange();
+    return impl->GetMaxRange();
 }
 
 template <typename Real>
@@ -62,7 +61,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetOrigin();
+    return impl->GetOrigin();
 }
 
 template <typename Real>
@@ -70,7 +69,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDirectionX();
+    return impl->GetDirectionX();
 }
 
 template <typename Real>
@@ -78,7 +77,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDirectionY();
+    return impl->GetDirectionY();
 }
 
 template <typename Real>
@@ -86,7 +85,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMinExtreme();
+    return impl->GetMinExtreme();
 }
 
 template <typename Real>
@@ -94,7 +93,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxExtreme();
+    return impl->GetMaxExtreme();
 }
 
 template <typename Real>
@@ -102,7 +101,7 @@ typename const Mathematics::Vector2DInformation<Real>::Vector2D Mathematics::Vec
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPerpendicularExtreme();
+    return impl->GetPerpendicularExtreme();
 }
 
 template <typename Real>
@@ -110,7 +109,7 @@ bool Mathematics::Vector2DInformation<Real>::IsExtremeCCW() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsExtremeCCW();
+    return impl->IsExtremeCCW();
 }
 
 template <typename Real>
@@ -118,7 +117,7 @@ int Mathematics::Vector2DInformation<Real>::GetMinExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMinExtremeIndex();
+    return impl->GetMinExtremeIndex();
 }
 
 template <typename Real>
@@ -126,7 +125,7 @@ int Mathematics::Vector2DInformation<Real>::GetPerpendicularExtremeIndex() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPerpendicularExtremeIndex();
+    return impl->GetPerpendicularExtremeIndex();
 }
 
 template <typename Real>
@@ -134,7 +133,7 @@ int Mathematics::Vector2DInformation<Real>::GetMaxExtremeIndex() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMaxExtremeIndex();
+    return impl->GetMaxExtremeIndex();
 }
 
 template <typename Real>
@@ -142,7 +141,7 @@ int Mathematics::Vector2DInformation<Real>::GetIndexMin(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIndexMin(index);
+    return impl->GetIndexMin(index);
 }
 
 #endif  // MATHEMATICS_ALGEBRA_VECTOR_2D_TOOLS_INFORMATION_ACHIEVE_H

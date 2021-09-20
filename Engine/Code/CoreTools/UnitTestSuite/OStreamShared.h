@@ -5,16 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 11:32)
+//	引擎版本：0.7.1.1 (2020/10/23 11:32)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_SHARED_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/SharedExportMacro.h"
 
-CORE_TOOLS_EXPORT_SHARED_PTR(OStreamImpl);
+CORE_TOOLS_SHARED_EXPORT_IMPL(OStreamImpl);
 
 #include <iostream>
 #include <string>
@@ -26,10 +26,11 @@ namespace CoreTools
     {
     public:
         using OStreamSharedImpl = OStreamImpl;
-        SHARE_CLASSES_TYPE_DECLARE(OStreamShared);
+        SHARED_TYPE_DECLARE(OStreamShared);
 
     public:
-        explicit OStreamShared(bool isCout = true);
+        OStreamShared();
+        explicit OStreamShared(bool isCout);
         explicit OStreamShared(const std::string& fileName);
 
         CLASS_INVARIANT_DECLARE;
@@ -44,7 +45,7 @@ namespace CoreTools
         [[nodiscard]] bool IsFile() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(OStreamShared);
+        PackageType impl;
     };
 }
 

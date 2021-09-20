@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:54)
+//	引擎版本：0.7.1.1 (2020/10/26 15:54)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_EVENT_DISPATCHER_H
 #define CORE_TOOLS_STATE_MACHINE_EVENT_DISPATCHER_H
@@ -25,7 +25,7 @@ namespace CoreTools
         using EventType = typename Transition::EventType;
 
     public:
-        [[nodiscard]] static StateType Dispatch(FsmType& fsm, StateType state, const EventType& eventType);
+        [[nodiscard]] static StateType Dispatch(FsmType& fsm, StateType state, const EventType& eventType) noexcept;
     };
 }
 

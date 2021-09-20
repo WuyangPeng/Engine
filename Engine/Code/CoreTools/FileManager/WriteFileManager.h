@@ -14,12 +14,12 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(WriteFileManagerInterface);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(WriteFileManagerInterface);
+
 
 namespace CoreTools
 {
@@ -27,7 +27,7 @@ namespace CoreTools
     {
     public:
         using WriteFileManagerImpl = WriteFileManagerInterface;
-        NON_COPY_CLASSES_TYPE_DECLARE(WriteFileManager);
+        NON_COPY_TYPE_DECLARE(WriteFileManager);
         using String = System::String;
 
     public:
@@ -44,7 +44,7 @@ namespace CoreTools
         void SaveStdString(const std::string& name);
 
     private:
-        IMPL_TYPE_DECLARE(WriteFileManager);
+        PackageType impl;
     };
 }
 

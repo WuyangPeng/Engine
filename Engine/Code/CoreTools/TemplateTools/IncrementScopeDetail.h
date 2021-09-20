@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:33)
+//	引擎版本：0.7.1.1 (2020/10/23 15:33)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_INCREMENT_SCOPE_DETAIL_H
@@ -16,14 +16,14 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T, typename Aquire, typename Release>
-CoreTools::IncrementScope<T, Aquire, Release>::IncrementScope(Reference value)
+CoreTools::IncrementScope<T, Aquire, Release>::IncrementScope(Reference value) noexcept
     : m_Vaule{ value }
 {
     AquireType()(m_Vaule);
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+ 
 template <typename T, typename Aquire, typename Release>
 CoreTools::IncrementScope<T, Aquire, Release>::~IncrementScope()
 {
@@ -31,7 +31,7 @@ CoreTools::IncrementScope<T, Aquire, Release>::~IncrementScope()
 
     ReleaseType()(m_Vaule);
 }
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename T, typename Aquire, typename Release>
 bool CoreTools::IncrementScope<T, Aquire, Release>::IsValid() const noexcept

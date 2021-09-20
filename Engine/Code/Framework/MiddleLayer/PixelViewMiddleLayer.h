@@ -12,14 +12,14 @@
 #include "ViewMiddleLayer.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(PixelViewMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(PixelViewMiddleLayerImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE PixelViewMiddleLayer : public ViewMiddleLayer
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(PixelViewMiddleLayer);
+		NON_COPY_TYPE_DECLARE(PixelViewMiddleLayer);
 		using ParentType = ViewMiddleLayer;
 		using Colour = Rendering::Colour<uint8_t>;
 
@@ -64,7 +64,8 @@ namespace Framework
 		int GetScreenHeight() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(PixelViewMiddleLayer);
+                PackageType impl;
+                
 	};
 }
 

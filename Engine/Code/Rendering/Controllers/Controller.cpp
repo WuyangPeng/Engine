@@ -35,7 +35,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Controller);
 
 Rendering::Controller
     ::Controller()
-	:ParentType{}, m_Impl{ make_shared <ImplType>() }, m_Object{ nullptr }
+	:ParentType{}, impl{ make_shared <ImplType>() }, m_Object{ nullptr }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -43,7 +43,7 @@ Rendering::Controller
 
 Rendering::Controller
 	::Controller(const Controller& rhs) 
-	:ParentType(rhs), m_Impl{ make_shared <ImplType>(*rhs.m_Impl) }, m_Object{ rhs.m_Object }
+	:ParentType(rhs), impl{ make_shared <ImplType>(*rhs.impl) }, m_Object{ rhs.m_Object }
 { 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }         
@@ -51,11 +51,11 @@ Rendering::Controller
 Rendering::Controller& Rendering::Controller
 	::operator=(const Controller& rhs) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::operator=(rhs);   
 	
-	m_Impl = make_shared <ImplType>(*rhs.m_Impl);
+	impl = make_shared <ImplType>(*rhs.impl);
 
 	m_Object = rhs.m_Object;
 
@@ -63,25 +63,25 @@ Rendering::Controller& Rendering::Controller
 }
 
 Rendering::Controller ::Controller(Controller&& rhs) noexcept
-    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }, m_Object{ std::move(rhs.m_Object) }
+    : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }, m_Object{ std::move(rhs.m_Object) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::Controller& Rendering::Controller ::operator=(Controller&& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::operator=(std::move(rhs));
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     m_Object = std::move(rhs.m_Object);
 
     return *this;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Controller)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Controller)
 
 const Rendering::ControllerInterface* Rendering::Controller
     ::GetControllerObject () const noexcept
@@ -93,7 +93,7 @@ const Rendering::ControllerInterface* Rendering::Controller
 		
 Rendering::ControllerInterface* Rendering::Controller ::GetControllerObject() noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	return m_Object;
 }
@@ -102,7 +102,7 @@ Rendering::ControllerInterface* Rendering::Controller ::GetControllerObject() no
 
 void Rendering::Controller ::SetObject(ControllerInterface* object)  
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	CoreTools::DisableNoexcept();
 
@@ -130,7 +130,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, Controller, SetAct
 const CoreTools::ObjectSharedPtr Rendering::Controller
     ::GetObjectByName(const string& name)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     // m_Object不搜索对象图以避免循环。
     return ParentType::GetObjectByName(name);
@@ -139,7 +139,7 @@ const CoreTools::ObjectSharedPtr Rendering::Controller
 const vector<CoreTools::ObjectSharedPtr> Rendering::Controller
     ::GetAllObjectsByName(const string& name)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     // m_Object不搜索对象图以避免循环。
     return ParentType::GetAllObjectsByName(name);;
@@ -165,7 +165,7 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::Controller
 
 Rendering::Controller
     ::Controller(LoadConstructor value)
-    : ParentType{ value }, m_Impl{ make_shared<ImplType>() }, m_Object{nullptr}
+    : ParentType{ value }, impl{ make_shared<ImplType>() }, m_Object{nullptr}
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -177,7 +177,7 @@ int Rendering::Controller
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
 
     size += CORE_TOOLS_STREAM_SIZE(m_Object);
     
@@ -206,7 +206,7 @@ void Rendering::Controller ::Save(const CoreTools::BufferTargetSharedPtr& target
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
 
    // target.WritePointer(m_Object);
     
@@ -215,7 +215,7 @@ void Rendering::Controller ::Save(const CoreTools::BufferTargetSharedPtr& target
 
 void Rendering::Controller ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source); 
 
@@ -229,20 +229,20 @@ void Rendering::Controller ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 void Rendering::Controller
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
 
 void Rendering::Controller ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	//m_Impl->Load(source);
+	//impl->Load(source);
 
 	ControllerInterfaceSharedPtr object;
 
@@ -256,18 +256,18 @@ void Rendering::Controller ::Load(const CoreTools::BufferSourceSharedPtr& source
 void Rendering::Controller
 	::SetTime( double minTime,double maxTime ) noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetTime(minTime,maxTime);
+	return impl->SetTime(minTime,maxTime);
 }
 
 bool Rendering::Controller::Update(double applicationTime)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     CoreTools::DisableNoexcept();
 
-    return m_Impl->Update(applicationTime);
+    return impl->Update(applicationTime);
 }
 
 #include STSTEM_WARNING_POP

@@ -18,14 +18,14 @@
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(int size)
-    : m_Impl{ std::make_shared<ImplType>(size) }
+    : impl{ std::make_shared<ImplType>(size) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(const EigenDecomposition& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -45,14 +45,14 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::Swap(EigenDecomposition& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(EigenDecomposition&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -62,28 +62,28 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix2& rhs)
-    : m_Impl{ std::make_shared<ImplType>(rhs) }
+    : impl{ std::make_shared<ImplType>(rhs) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(const Matrix3& rhs)
-    : m_Impl{ std::make_shared<ImplType>(rhs) }
+    : impl{ std::make_shared<ImplType>(rhs) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::EigenDecomposition<Real>::EigenDecomposition(const VariableMatrix& rhs)
-    : m_Impl{ std::make_shared<ImplType>(rhs) }
+    : impl{ std::make_shared<ImplType>(rhs) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -128,7 +128,7 @@ Mathematics::EigenDecomposition<Real>& Mathematics::EigenDecomposition<Real>::op
 template <typename Real>
 bool Mathematics::EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -140,7 +140,7 @@ int Mathematics::EigenDecomposition<Real>::GetSize() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetSize();
+    return impl->GetSize();
 }
 
 template <typename Real>
@@ -148,13 +148,13 @@ const Real& Mathematics::EigenDecomposition<Real>::operator()(int row, int colum
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(row, column);
+    return (*impl)(row, column);
 }
 
 template <typename Real>
 Real& Mathematics::EigenDecomposition<Real>::operator()(int row, int column)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
@@ -165,9 +165,9 @@ Real& Mathematics::EigenDecomposition<Real>::operator()(int row, int column)
 template <typename Real>
 void Mathematics::EigenDecomposition<Real>::Solve(bool increasingSort)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Solve(increasingSort);
+    return impl->Solve(increasingSort);
 }
 
 template <typename Real>
@@ -175,7 +175,7 @@ Real Mathematics::EigenDecomposition<Real>::GetEigenvalue(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvalue(index);
+    return impl->GetEigenvalue(index);
 }
 
 template <typename Real>
@@ -183,7 +183,7 @@ const Mathematics::Vector2D<Real> Mathematics::EigenDecomposition<Real>::GetEige
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvector2(index);
+    return impl->GetEigenvector2(index);
 }
 
 template <typename Real>
@@ -191,7 +191,7 @@ const Mathematics::Matrix2<Real> Mathematics::EigenDecomposition<Real>::GetEigen
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvectors2();
+    return impl->GetEigenvectors2();
 }
 
 template <typename Real>
@@ -199,7 +199,7 @@ const Mathematics::Vector3D<Real> Mathematics::EigenDecomposition<Real>::GetEige
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvector3(index);
+    return impl->GetEigenvector3(index);
 }
 
 template <typename Real>
@@ -207,7 +207,7 @@ const Mathematics::Matrix3<Real> Mathematics::EigenDecomposition<Real>::GetEigen
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvectors3();
+    return impl->GetEigenvectors3();
 }
 
 template <typename Real>
@@ -215,7 +215,7 @@ const Mathematics::VariableLengthVector<Real> Mathematics::EigenDecomposition<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvector(index);
+    return impl->GetEigenvector(index);
 }
 
 template <typename Real>
@@ -223,7 +223,7 @@ const Mathematics::VariableMatrix<Real> Mathematics::EigenDecomposition<Real>::G
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEigenvectors();
+    return impl->GetEigenvectors();
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_EIGEN_DECOMPOSITION_ACHIEVE_H

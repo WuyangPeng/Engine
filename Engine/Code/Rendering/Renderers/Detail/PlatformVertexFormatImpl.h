@@ -21,7 +21,7 @@ namespace Rendering
 	public:
 		using ClassType = PlatformVertexFormatImpl;
 		using PlatformVertexFormatPtr = std::shared_ptr<ClassType>;
-
+        using FactoryType = ClassType;
     public:
         PlatformVertexFormatImpl () noexcept;
         virtual ~PlatformVertexFormatImpl ();

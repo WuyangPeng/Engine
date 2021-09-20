@@ -14,25 +14,27 @@
 
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects3D/Tetrahedron3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class StaticFindIntersectorTetrahedron3Tetrahedron3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTetrahedron3Tetrahedron3 : public StaticIntersector<Real, Vector3D>
     {
     public:
         using StaticFindIntersectorTetrahedron3Tetrahedron3Impl = StaticFindIntersectorTetrahedron3Tetrahedron3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorTetrahedron3Tetrahedron3);
-
+        
+        TYPE_DECLARE(StaticFindIntersectorTetrahedron3Tetrahedron3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = StaticIntersector<Real, Vector3D>;
         using Vector3D = Vector3D<Real>;
         using Tetrahedron3 = Tetrahedron3<Real>;
@@ -57,7 +59,7 @@ namespace Mathematics
         static IntersectionContainer SplitAndDecompose(const Tetrahedron3& tetra, const Plane3& plane, const IntersectionContainer& inside);
 
     private:
-        IMPL_TYPE_DECLARE(StaticFindIntersectorTetrahedron3Tetrahedron3);
+        PackageType impl;
     };
 
     using FloatStaticFindIntersectorTetrahedron3Tetrahedron3 = StaticFindIntersectorTetrahedron3Tetrahedron3<float>;

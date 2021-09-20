@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageUnitTestSuiteImpl.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 #include "CoreTools/Helper/LogMacro.h"

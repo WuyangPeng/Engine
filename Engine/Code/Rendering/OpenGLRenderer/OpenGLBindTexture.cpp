@@ -18,9 +18,9 @@
 Rendering::UInt Rendering
     ::BindTexture (ShaderFlags::SamplerType target, UInt texture) noexcept
 {
-    Int current = 0;
-	System::GetGlIntegerv(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]),&current);
-	System::SetGlBindTexture(System::TextureTarget(g_OpenGLTextureTarget[System::EnumCastUnderlying(target)]),texture);
+   const Int current = System::GetGLInteger(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
+    texture;
+	//System::SetGLBindTexture(System::TextureTarget(g_OpenGLTextureTarget[System::EnumCastUnderlying(target)]),texture);
 
     return static_cast<UInt>(current);
 }
@@ -28,8 +28,7 @@ Rendering::UInt Rendering
 Rendering::UInt Rendering
     ::GetBoundTexture (ShaderFlags::SamplerType target) noexcept
 {
-    Int current = 0;
-	System::GetGlIntegerv(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]),&current);
+    const Int current = System::GetGLInteger(System::OpenGLQuery(g_OpenGLTextureTargetBinding[System::EnumCastUnderlying(target)]));
 
     return static_cast<UInt>(current);
 }

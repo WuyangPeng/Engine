@@ -19,6 +19,7 @@
 
 namespace Database
 {
+    class SessionFactory;
     class DATABASE_HIDDEN_DECLARE SessionImpl
     {
     public:
@@ -28,7 +29,7 @@ namespace Database
         using SchemaPtr = std::unique_ptr<Schema>;
         using SchemaContainer = std::vector<SchemaPtr>;
         using ResultPtr = std::shared_ptr<Result>;
-
+         using FactoryType = SessionFactory;
     public:
         explicit SessionImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
         virtual ~SessionImpl() noexcept = 0;

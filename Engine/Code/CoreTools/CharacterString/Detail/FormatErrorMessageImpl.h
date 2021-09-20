@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 13:47)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/27 17:53)
 
-// 格式化Windows错误消息内部接口类
 #ifndef CORE_TOOLS_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_IMPL_H
 #define CORE_TOOLS_CHARACTER_STRING_FORMAT_ERROR_MESSAGE_IMPL_H
 
@@ -15,7 +14,7 @@
 
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/Base/BaseFwd.h"
 
 #include <memory>
@@ -33,19 +32,19 @@ namespace CoreTools
         explicit FormatErrorMessageImpl(WindowError lastError) noexcept;
         ~FormatErrorMessageImpl() noexcept;
 
-        FormatErrorMessageImpl(const FormatErrorMessageImpl&) = delete;
-        FormatErrorMessageImpl& operator=(const FormatErrorMessageImpl&) = delete;
-        FormatErrorMessageImpl(FormatErrorMessageImpl&&) noexcept = delete;
-        FormatErrorMessageImpl& operator=(FormatErrorMessageImpl&&) noexcept = delete;
+        FormatErrorMessageImpl(const FormatErrorMessageImpl& rhs) = delete;
+        FormatErrorMessageImpl& operator=(const FormatErrorMessageImpl& rhs) = delete;
+        FormatErrorMessageImpl(FormatErrorMessageImpl&& rhs) noexcept = delete;
+        FormatErrorMessageImpl& operator=(FormatErrorMessageImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const System::String GetErrorMessage() const;
+        NODISCARD const System::String GetErrorMessage() const;
 
     private:
-        using Local = System::WindowHLocal;
+        using Local = System::WindowsHLocal;
         using DynamicLinkModule = System::DynamicLinkModule;
-        using LoadingLibraryPtr = std::shared_ptr<LoadingLibrary>;
+        using LoadingLibrarySharedPtr = std::shared_ptr<LoadingLibrary>;
 
     private:
         void InitMessage() noexcept;
@@ -56,8 +55,8 @@ namespace CoreTools
         void ReleaseMemory() noexcept;
 
     private:
-        WindowError m_LastError;
-        Local m_ErrorMessage;
+        WindowError lastError;
+        Local errorMessage;
     };
 }
 

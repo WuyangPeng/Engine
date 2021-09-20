@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 10:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 1:46)
 
 #ifndef SYSTEM_HELPER_CLANG_H
 #define SYSTEM_HELPER_CLANG_H
@@ -49,7 +49,14 @@
     #endif  // __has_cpp_attribute
 
     // 自第一个版本以来，Clang一直支持“unused”属性。
-    #define SYSTEM_ATTRIBUTE_UNUSED __attribute__((__unused__))
+    #define MAYBE_UNUSED __attribute__((__unused__))
+
+    // FALLTHROUGH宏可用于注释switch标签之间的隐式的fall-through。
+    #if 201103L <= __cplusplus && defined(__has_warning)
+        #if __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")
+            #define FALLTHROUGH [[clang::fallthrough]]
+        #endif  //  __has_feature(cxx_attributes) && __has_warning("-Wimplicit-fallthrough")
+    #endif  // 201103L <= __cplusplus && defined(__has_warning)
 
 #endif  // defined(__clang__) && !defined(__CUDACC__) && !defined(__ibmxl__)
 

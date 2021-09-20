@@ -9,9 +9,9 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Flags/WindowFlags.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Flags/WindowClassStyleFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Flags/WindowsClassStyleFlags.h"
 
 namespace Framework
 {
@@ -19,8 +19,8 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowRegisterParameter;
-		using HInstance = System::WindowHInstance;
-		using WindowClassStyle = System::WindowClassStyle;
+		using HInstance = System::WindowsHInstance;
+		using WindowClassStyle = System::WindowsClassStyle;
 
 	public:
 		explicit WindowRegisterParameter(HInstance instance, WindowClassStyle styles = WindowClassStyle::CommonUse,

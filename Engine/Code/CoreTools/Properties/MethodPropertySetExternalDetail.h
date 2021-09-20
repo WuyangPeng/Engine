@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:38)
+//	引擎版本：0.7.1.1 (2020/10/26 13:38)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_DETAIL_H
@@ -13,19 +13,25 @@
 #include "MethodPropertySetExternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490)
 template <typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
-CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>& CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>::operator=(ReferenceType value)
+CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>& CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>::operator=(ReferenceType value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     auto offset = (*FO)();
     auto thisPtr = reinterpret_cast<ContainerType*>(reinterpret_cast<uint8_t*>(this) - offset);
 
-    (thisPtr->*FS)(value);
+    if (thisPtr != nullptr)
+    {
+        (thisPtr->*FS)(value);
+    }
 
     return *this;
 }
-
+#include STSTEM_WARNING_POP
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Reference, typename Container, ptrdiff_t (*FO)(), void (Container::*FS)(Reference)>
 bool CoreTools::MethodPropertySetExternal<Reference, Container, FO, FS>::IsValid() const noexcept

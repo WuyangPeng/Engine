@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/09/28 13:47)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/07/29 16:10)
 
 // 类不变式所需要的宏
 #ifndef CORE_TOOLS_HELPER_CLASS_INVARIANT_MACRO_H
@@ -25,15 +25,6 @@
             return true;                                          \
         }
 
-    #define CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(namespaceName, className) \
-        bool namespaceName::className::IsValid() const noexcept            \
-        {                                                                  \
-            if (m_Impl != nullptr)                                         \
-                return true;                                               \
-            else                                                           \
-                return false;                                              \
-        }
-
     #define CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(namespaceName, className) \
         bool namespaceName::className::IsValid() const noexcept              \
         {                                                                    \
@@ -43,21 +34,10 @@
                 return false;                                                \
         }
 
-    #define CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(namespaceName, className) \
-        bool namespaceName::className::IsValid() const noexcept                       \
-        {                                                                             \
-            if (ParentType::IsValid() && m_Impl != nullptr)                           \
-                return true;                                                          \
-            else                                                                      \
-                return false;                                                         \
-        }
-
 #else  // !OPEN_CLASS_INVARIANT
 
     #define CLASS_INVARIANT_STUB_DEFINE(namespaceName, className)
-    #define CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(namespaceName, className)
     #define CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(namespaceName, className)
-    #define CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(namespaceName, className)
 
 #endif  // OPEN_CLASS_INVARIANT
 

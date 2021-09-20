@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 10:19)
+//	引擎版本：0.7.1.1 (2020/10/26 10:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,13 +17,13 @@ using std::make_shared;
 using std::string;
 
 CoreTools::TestingInformationHelper::TestingInformationHelper(DisableNotThrow disableNotThrow)
-    : m_Impl{ make_shared<ImplType>(disableNotThrow) }
+    : impl{  disableNotThrow }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::TestingInformationHelper::TestingInformationHelper(TestingInformationHelper&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,30 +32,30 @@ CoreTools::TestingInformationHelper& CoreTools::TestingInformationHelper::operat
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, TestingInformationHelper)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, TestingInformationHelper)
 
 int CoreTools::TestingInformationHelper::GetLoopCount(const string& suiteName, const string& testingName) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLoopCount(suiteName, testingName);
+    return impl->GetLoopCount(suiteName, testingName);
 }
 
 bool CoreTools::TestingInformationHelper::IsPrintRun() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsPrintRun();
+    return impl->IsPrintRun();
 }
 
 int CoreTools::TestingInformationHelper::GetRandomSeed() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRandomSeed();
+    return impl->GetRandomSeed();
 }

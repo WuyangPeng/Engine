@@ -14,16 +14,16 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamShared.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(WindowMessageUnitTestSuiteStream);
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+FRAMEWORK_NON_COPY_EXPORT_IMPL(WindowMessageUnitTestSuiteImpl);
+ 
+EXPORT_SHARED_PTR(Framework, WindowMessageUnitTestSuiteStream, FRAMEWORK_DEFAULT_DECLARE);
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE WindowMessageUnitTestSuite : public WindowMessageInterface
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(WindowMessageUnitTestSuite);
+		NON_COPY_TYPE_DECLARE(WindowMessageUnitTestSuite);
 		using ParentType = WindowMessageInterface;
 		using StreamType = WindowMessageUnitTestSuiteStream;
 		using Suite = CoreTools::Suite;
@@ -63,7 +63,7 @@ namespace Framework
 
 	private:
 		StreamSharedPtr m_Stream;
-		IMPL_TYPE_DECLARE(WindowMessageUnitTestSuite);
+            PackageType impl;
 	};
 
 	using WindowProcessUnitTestSuite = WindowProcessHandle<WindowMessageUnitTestSuite>;

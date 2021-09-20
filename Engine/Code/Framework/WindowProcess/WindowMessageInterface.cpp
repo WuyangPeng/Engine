@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowMessageInterface.h"
-#include "System/Window/Flags/WindowMessagesFlags.h"
+#include "System/Windows/Flags/WindowsMessagesFlags.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -59,7 +59,7 @@ void Framework::WindowMessageInterface
 	CoreTools::DisableNoexcept();
 }
  
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -72,10 +72,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Create, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Create, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::SizeMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -83,10 +83,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Size, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Size, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::CloseMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -94,10 +94,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Close, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Close, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::MoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -105,10 +105,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Move, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Move, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::CharMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -116,10 +116,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Char, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Char, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::KeyDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -127,10 +127,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::KeyDown, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::KeyDown, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::KeyUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -138,10 +138,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::KeyUp, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::KeyUp, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::LeftButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -149,10 +149,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::LButtonDown, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::LButtonDown, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::LeftButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -160,10 +160,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::LButtonUp, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::LButtonUp, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::MiddleButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -171,10 +171,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MButtonDown, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MButtonDown, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::MiddleButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -182,10 +182,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MButtonUp, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MButtonUp, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::RightButtonDownMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -193,10 +193,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::RButtonDown, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::RButtonDown, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::RightButtonUpMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -204,10 +204,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::RButtonUp, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::RButtonUp, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -215,10 +215,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MouseMove, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MouseMove, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::MouseWheelMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -226,10 +226,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::MouseWheel, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::MouseWheel, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -246,11 +246,11 @@ System::WindowLResult Framework::WindowMessageInterface
 	}
 	else
 	{
-		return System::DefSystemWindowProc(hwnd, System::WindowMessages::Destroy, wParam, lParam);
+		return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Destroy, wParam, lParam);
 	}
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::PaintMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -258,10 +258,10 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::Paint, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::Paint, wParam, lParam);
 }
 
-System::WindowLResult Framework::WindowMessageInterface
+System::WindowsLResult Framework::WindowMessageInterface
 	::EraseBackgroundMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
 	FRAMEWORK_CLASS_IS_VALID_9;
@@ -269,7 +269,7 @@ System::WindowLResult Framework::WindowMessageInterface
 
 	CoreTools::DisableNoexcept();
 
-	return System::DefSystemWindowProc(hwnd, System::WindowMessages::EraseBkgnd, wParam, lParam);
+	return System::DefSystemWindowProc(hwnd, System::WindowsMessages::EraseBkgnd, wParam, lParam);
 }
 
 void Framework::WindowMessageInterface ::Display([[maybe_unused]] HWnd hwnd, [[maybe_unused]] int64_t timeDelta)
@@ -290,7 +290,7 @@ int Framework::WindowMessageInterface
 	return WindowApplicationTrait::KeyIdentifiers::sm_KeyTerminate;
 }
 
-System::WindowHWnd Framework::WindowMessageInterface
+System::WindowsHWnd Framework::WindowMessageInterface
 	::GetHwnd() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

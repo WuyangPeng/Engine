@@ -13,7 +13,7 @@
 #include "EngineMiddleLayerInterface.h"  
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -21,7 +21,7 @@ namespace Framework
 	{
 	public:
 		using CameraSystemsManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(CameraSystemsManagerInterface);
+		NON_COPY_TYPE_DECLARE(CameraSystemsManagerInterface);
 		using ParentType = EngineMiddleLayerInterface;
 
 	public:
@@ -51,7 +51,7 @@ namespace Framework
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(GUI);
 
 	private:
-		IMPL_TYPE_DECLARE(CameraSystemsManagerInterface);
+                PackageType impl;
 	};
 
 	using CameraSystemsManagerInterfaceSharedPtr = std::shared_ptr<CameraSystemsManagerInterface>;

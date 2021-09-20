@@ -37,7 +37,7 @@ CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ParticleController);
 
 Rendering::ParticleController
 	::ParticleController() 
-	:ParentType{}, m_Impl{ make_shared<ImplType>() }, m_Particles{ nullptr }
+	:ParentType{}, impl{ make_shared<ImplType>() }, m_Particles{ nullptr }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -46,7 +46,7 @@ Rendering::ParticleController
 
 Rendering::ParticleController
 	::ParticleController(const ParticleController& rhs) 
-	: ParentType(rhs), m_Impl{ make_shared<ImplType>(*rhs.m_Impl) }, m_Particles{ dynamic_cast<Particles*>(GetControllerObject()) }
+	: ParentType(rhs), impl{ make_shared<ImplType>(*rhs.impl) }, m_Particles{ dynamic_cast<Particles*>(GetControllerObject()) }
 { 
 	RENDERING_SELF_CLASS_IS_VALID_1; 
 }                                    
@@ -54,16 +54,16 @@ Rendering::ParticleController
 Rendering::ParticleController& Rendering::ParticleController
 	::operator= (const ParticleController& rhs) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::operator=(rhs);     
-	m_Impl = make_shared<ImplType>(*rhs.m_Impl);
+	impl = make_shared<ImplType>(*rhs.impl);
         m_Particles = dynamic_cast<Particles*>(GetControllerObject());
 
 	return *this;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ParticleController) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ParticleController) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ParticleController,GetNumParticles,int)
 
@@ -87,33 +87,33 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, ParticleController,GetParticleS
 void Rendering::ParticleController
 	::SetParticleLinearSpeed(int index, float particleLinearSpeed)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetParticleLinearSpeed(index, particleLinearSpeed);
+	return impl->SetParticleLinearSpeed(index, particleLinearSpeed);
 }
 
 
 void Rendering::ParticleController
 	::SetParticleLinearAxis(int index, const AVector& particleLinearAxis)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetParticleLinearAxis(index, particleLinearAxis);
+	return impl->SetParticleLinearAxis(index, particleLinearAxis);
 }
 
 
 void Rendering::ParticleController
 	::SetParticleSizeChange(int index, float particleSizeChange)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetParticleSizeChange(index, particleSizeChange);
+	return impl->SetParticleSizeChange(index, particleSizeChange);
 }
 
 bool Rendering::ParticleController
 	::Update(double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (Controller::Update(applicationTime))
 	{
@@ -131,7 +131,7 @@ bool Rendering::ParticleController
 void Rendering::ParticleController
 	::SetObject(ControllerInterface* object)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Particles::GetCurrentRttiType()), "Œﬁ–ß¿‡\n");
 
 	ParentType::SetObject(object);
@@ -151,7 +151,7 @@ void Rendering::ParticleController
 void Rendering::ParticleController
 	::SetObjectInCopy(ControllerInterface* object)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::SetObject(object);
 }
@@ -159,18 +159,18 @@ void Rendering::ParticleController
 void Rendering::ParticleController
 	::Reallocate(int numParticles)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (0 < numParticles)
-		m_Impl = std::make_shared<ImplType>(numParticles);
+		impl = std::make_shared<ImplType>(numParticles);
 	else
-		m_Impl = std::make_shared<ImplType>(); 
+		impl = std::make_shared<ImplType>(); 
 }
 
 void Rendering::ParticleController
 	::UpdateSystemMotion(float ctrlTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (m_Particles != nullptr)
 	{
@@ -199,7 +199,7 @@ void Rendering::ParticleController
 void Rendering::ParticleController
 	::UpdatePointMotion(float ctrlTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (m_Particles != nullptr)
 	{
@@ -225,7 +225,7 @@ void Rendering::ParticleController
 
 Rendering::ParticleController
 	::ParticleController(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }, m_Particles{ nullptr }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }, m_Particles{ nullptr }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -237,7 +237,7 @@ int Rendering::ParticleController
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -258,7 +258,7 @@ void Rendering::ParticleController
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -266,7 +266,7 @@ void Rendering::ParticleController
 void Rendering::ParticleController
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	 
 }
@@ -274,7 +274,7 @@ void Rendering::ParticleController
 void Rendering::ParticleController
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 
@@ -288,13 +288,13 @@ void Rendering::ParticleController
 void Rendering::ParticleController
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

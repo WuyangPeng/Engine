@@ -111,7 +111,7 @@ bool Framework::OpenGLGlutCallBackInterface
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	System::ClearAllGlBufferBit();
+	System::ClearAllGLBufferBit();
 
 	System::GlutSwapBuffers();
 
@@ -126,7 +126,7 @@ bool Framework::OpenGLGlutCallBackInterface
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	System::GlutPostWindowRedisplay(m_WindowID);
-	System::SetGlViewport(0, 0, boost::numeric_cast<System::OpenGLSize>(width), boost::numeric_cast<System::OpenGLSize>(height));
+	System::SetGLViewport(0, 0, boost::numeric_cast<System::OpenGLSize>(width), boost::numeric_cast<System::OpenGLSize>(height));
 
 	CoreTools::DisableNoexcept();
 

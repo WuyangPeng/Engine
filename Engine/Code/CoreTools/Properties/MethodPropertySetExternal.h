@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:12)
+//	引擎版本：0.7.1.1 (2020/10/26 13:12)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_EXTERNAL_H
@@ -35,7 +35,7 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         // 提供对该属性的只写访问
-        MethodPropertySetExternal& operator=(ReferenceType value);
+        MethodPropertySetExternal& operator=(ReferenceType value) noexcept;
     };
 }
 

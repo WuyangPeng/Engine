@@ -14,8 +14,8 @@
 #include <string>
 #include <vector>
 #include "CoreTools/ObjectSystems/BufferTarget.h"
-
-RENDERING_EXPORT_SHARED_PTR(ShaderConstantsDataImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(ShaderConstantsData,ShaderConstantsDataImpl);
 
 namespace CoreTools
 {
@@ -28,7 +28,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ShaderConstantsData 
 	{	
 	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderConstantsData);
+            DELAY_COPY_UNSHARED_TYPE_DECLARE(ShaderConstantsData);
 		using BufferSource = CoreTools::BufferSource;
 		using BufferTarget = CoreTools::BufferTarget;
 	
@@ -53,7 +53,7 @@ namespace Rendering
 		int GetStreamingSize () const;
 		
 	private:
-		IMPL_TYPE_DECLARE(ShaderConstantsData);
+                PackageType impl;
 	};
 }
 

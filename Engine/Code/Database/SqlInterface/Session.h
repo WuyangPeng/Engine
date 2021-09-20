@@ -18,17 +18,17 @@
 #include "Schema.h"
 #include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/SqlInterface/SqlInterfaceFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-DATABASE_EXPORT_SHARED_PTR(SessionImpl);
+DATABASE_NON_COPY_EXPORT_IMPL(SessionImpl);
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE Session final : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE Session final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Session);
+        NON_COPY_TYPE_DECLARE(Session);
         using SchemaPtr = std::unique_ptr<Schema>;
         using SchemaContainer = std::vector<SchemaPtr>;
         using ResultPtr = std::shared_ptr<Result>;
@@ -36,6 +36,11 @@ namespace Database
     public:
         explicit Session(const ConfigurationStrategy& configurationStrategy);
         explicit Session(const DatabaseObject& databaseObject);
+        ~Session() noexcept = default;
+        Session(const Session& rhs) noexcept = delete;
+        Session& operator=(const Session& rhs) noexcept = delete;
+        Session(Session&& rhs) noexcept = delete;
+        Session& operator=(Session&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -51,7 +56,7 @@ namespace Database
         void Execute(const std::string& findStatement);
 
     private:
-        IMPL_TYPE_DECLARE(Session);
+        PackageType impl;
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     public:

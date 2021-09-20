@@ -13,11 +13,10 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Base/SingletonDetail.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 RENDERING_EXPORT_UNIQUE_PTR(ShaderManager);
-RENDERING_EXPORT_SHARED_PTR(ShaderManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(ShaderManagerImpl); 
 
 namespace CoreTools
 {
@@ -29,7 +28,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderManager : public CoreTools::Singleton<ShaderManager>
     {
     public:
-		NON_COPY_CLASSES_TYPE_DECLARE(ShaderManager);
+        NON_COPY_TYPE_DECLARE(ShaderManager);
 		using ParentType = Singleton<ShaderManager>;
         using VertexShaderProfile = ShaderFlags::VertexShaderProfile;
         using PixelShaderProfile = ShaderFlags::PixelShaderProfile;
@@ -61,7 +60,7 @@ namespace Rendering
 
 	private:
 		static ShaderManagerUniquePtr sm_ShaderManager;
-		IMPL_TYPE_DECLARE(ShaderManager);
+            PackageType impl;
     };
 }
 

@@ -15,8 +15,8 @@
 
 #include "CoreTools/ObjectSystems/Object.h"
 
-RENDERING_EXPORT_SHARED_PTR(BufferImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, BufferImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class WriteFileManager;
@@ -28,7 +28,17 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Buffer : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Buffer, DESTRUCTOR_PURE_VIRTUAL);
+    public:
+        void Swap(Buffer& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Buffer);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~Buffer() noexcept =0;
+        Buffer(const Buffer& rhs);
+        Buffer& operator=(const Buffer& rhs);
+        Buffer(Buffer&& rhs) noexcept;
+        Buffer& operator=(Buffer&& rhs) noexcept;
         using ParentType = Object;
         using BufferSharedPtr = std::shared_ptr<ClassType>;
         using ConstBufferSharedPtr = std::shared_ptr<ClassType>;
@@ -75,7 +85,7 @@ namespace Rendering
         char* GetAccessWriteData(int index);
 
     private:
-        IMPL_TYPE_DECLARE(Buffer);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

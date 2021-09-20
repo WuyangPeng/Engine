@@ -14,14 +14,24 @@
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 
-RENDERING_EXPORT_SHARED_PTR(RenderTargetImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, RenderTargetImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE RenderTarget : public CoreTools::Object 
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(RenderTarget, DESTRUCTOR_STATEMENT);
+    public:
+        void Swap(RenderTarget& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(RenderTarget);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~RenderTarget() noexcept;
+        RenderTarget(const RenderTarget& rhs);
+        RenderTarget& operator=(const RenderTarget& rhs);
+        RenderTarget(RenderTarget&& rhs) noexcept;
+        RenderTarget& operator=(RenderTarget&& rhs) noexcept;
 		using ParentType = Object;
      	using Texture2DSharedPtr = std::shared_ptr<Texture2D>;
 		using ConstTexture2DSharedPtr = std::shared_ptr< const Texture2D>;
@@ -48,7 +58,7 @@ namespace Rendering
         bool HasDepthStencil () const noexcept;
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-		IMPL_TYPE_DECLARE(RenderTarget);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 

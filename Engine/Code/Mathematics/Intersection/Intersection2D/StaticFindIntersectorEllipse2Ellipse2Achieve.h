@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorEllipse2Ellipse2(const Ellipse2& ellipse0, const Ellipse2& ellipse1, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(ellipse0, ellipse1) }
+    : ParentType{ epsilon }, impl{ ellipse0, ellipse1 }
 {
     Find();
 
@@ -29,7 +29,7 @@ Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::StaticFindIntersectorE
 template <typename Real>
 bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
@@ -41,7 +41,7 @@ const Mathematics::Ellipse2<Real> Mathematics::StaticFindIntersectorEllipse2Elli
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEllipse0();
+    return impl->GetEllipse0();
 }
 
 template <typename Real>
@@ -49,7 +49,7 @@ const Mathematics::Ellipse2<Real> Mathematics::StaticFindIntersectorEllipse2Elli
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEllipse1();
+    return impl->GetEllipse1();
 }
 
 template <typename Real>
@@ -57,7 +57,7 @@ int Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::GetQuantity() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -65,7 +65,7 @@ const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorEllipse2Elli
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -73,7 +73,7 @@ const Mathematics::Ellipse2<Real> Mathematics::StaticFindIntersectorEllipse2Elli
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIntersectionEllipse();
+    return impl->GetIntersectionEllipse();
 }
 
 template <typename Real>
@@ -81,7 +81,7 @@ bool Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::IsTransverseInter
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsTransverseIntersection(index);
+    return impl->IsTransverseIntersection(index);
 }
 
 template <typename Real>
@@ -105,7 +105,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
     /// 计算四次多项式，其根导致椭圆相交的，然后计算其根。
     auto poly = GetQuartic(ellipse0, ellipse1);
     PolynomialRoots<Real> polynomialRoots{ Math::GetZeroTolerance() };
-    if (!polynomialRoots.FindBisection(poly, m_Impl->GetDigitsAccuracy()) ||
+    if (!polynomialRoots.FindBisection(poly, impl->GetDigitsAccuracy()) ||
         polynomialRoots.GetCount() == 0)
     {
         this->SetIntersectionType(IntersectionType::Empty);
@@ -152,7 +152,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
         polynomial[0] = qp0[0] + point[1] * (qp0[2] + point[1] * qp0[5]);
         polynomial[1] = qp0[1] + point[1] * qp0[4];
         polynomial[2] = qp0[3];
-        if (!roots.FindBisection(polynomial, m_Impl->GetDigitsAccuracy()))
+        if (!roots.FindBisection(polynomial, impl->GetDigitsAccuracy()))
         {
             continue;
         }
@@ -189,7 +189,7 @@ void Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Find()
             }
             if (find == quantity)
             {
-                m_Impl->AddIntersection(measure[i].m_Point, measure[i].m_Transverse);
+                impl->AddIntersection(measure[i].m_Point, measure[i].m_Transverse);
 
                 if (++quantity == 4)
                 {
@@ -336,7 +336,7 @@ typename Mathematics::StaticFindIntersectorEllipse2Ellipse2<Real>::Measurement M
     {
         // 应用二等分。 确定迭代次数以获取10位精度。
         auto value0 = Math::Log(Math::FAbs(a1 - aTan));
-        auto value1 = (static_cast<Real>(m_Impl->GetDigitsAccuracy())) * Math::Log(Math::GetValue(10));
+        auto value1 = (static_cast<Real>(impl->GetDigitsAccuracy())) * Math::Log(Math::GetValue(10));
         auto arg = (value0 + value1) / Math::Log(Math::GetValue(2));
         maxIterations = static_cast<int>(arg + Math::GetRational(1, 2));
         for (i = 0; i < maxIterations; ++i)

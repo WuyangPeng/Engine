@@ -29,22 +29,54 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486) 
 #include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26434)
 CORE_TOOLS_RTTI_DEFINE(Rendering, MorphController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, MorphController); 
 CORE_TOOLS_FACTORY_DEFINE(Rendering, MorphController);
 
 Rendering::MorphController
 	::MorphController(int numVertices, int numTargets, int numKeys) 
-	:ParentType{}, m_Impl{ make_shared<ImplType>(numVertices,numTargets,numKeys) }
+	:ParentType{}, impl{ make_shared<ImplType>(numVertices,numTargets,numKeys) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, MorphController)
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, MorphController)
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, MorphController) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, MorphController) 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, MorphController,GetNumVertices, int)
 
@@ -58,7 +90,7 @@ const Rendering::MorphController::APoint Rendering::MorphController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetVertices(target, vertices);
+	return impl->GetVertices(target, vertices);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, MorphController,GetTimes, int,float)
@@ -69,37 +101,37 @@ float Rendering::MorphController
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetWeights(key, target);
+	return impl->GetWeights(key, target);
 }
 
 void Rendering::MorphController
 	::SetVertices(int target, int vertices, const APoint& point) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetVertices(target, vertices,point);
+	return impl->SetVertices(target, vertices,point);
 }
 
 void Rendering::MorphController
 	::SetTimes(int key, float times) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetTimes(key, times);
+	return impl->SetTimes(key, times);
 }
 
 void Rendering::MorphController
 	::SetWeights(int key, int target, float weights) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetWeights(key, target,weights);
+	return impl->SetWeights(key, target,weights);
 }
 
 bool Rendering::MorphController
 	::Update(double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	// 键插值操作使用线性内插。为了获得更高级的插值，
 	// 您需要提供一个更复杂的密钥（例如贝塞尔三次或TCB样条曲线）。
@@ -110,14 +142,14 @@ bool Rendering::MorphController
         auto visual = dynamic_cast<Visual*>(GetControllerObject());
 		if (visual != nullptr)
 		{
-			RENDERING_ASSERTION_2(m_Impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "顶点数不匹配\n"); 
+			RENDERING_ASSERTION_2(impl->GetNumVertices() == visual->GetVertexBuffer()->GetNumElements(), "顶点数不匹配\n"); 
 
 			VertexBufferAccessor vba{ visual };
 
 			// 设置顶点为 target[0].			 
-			for (auto i = 0; i < m_Impl->GetNumVertices(); ++i)
+			for (auto i = 0; i < impl->GetNumVertices(); ++i)
 			{
-				visual->GetVertexBuffer()->SetPosition(vba, i, m_Impl->GetVertices(0,i));				 
+				visual->GetVertexBuffer()->SetPosition(vba, i, impl->GetVertices(0,i));				 
 			}
 
 			// 查找边界键。
@@ -126,12 +158,12 @@ bool Rendering::MorphController
 			const auto info = GetKeyInfo(ctrlTime);
  
 			// 加入剩余的组分在凸状组合
-			for (auto i = 1; i < m_Impl->GetNumTargets(); ++i)
+			for (auto i = 1; i < impl->GetNumTargets(); ++i)
 			{
 				// 添加target[i]在三角形顶点。
-				const auto coeff = (1.0f - info.GetNormTime()) * m_Impl->GetWeights(info.GetFirstIndex(),i - 1) + info.GetNormTime() * m_Impl->GetWeights(info.GetSecondIndex(), i - 1);
+				const auto coeff = (1.0f - info.GetNormTime()) * impl->GetWeights(info.GetFirstIndex(),i - 1) + info.GetNormTime() * impl->GetWeights(info.GetSecondIndex(), i - 1);
 				 
-				for (auto j = 0; j < m_Impl->GetNumVertices(); ++j)
+				for (auto j = 0; j < impl->GetNumVertices(); ++j)
 				{
 					auto position = vba.GetPosition<APoint>(j);
 					position += coeff * GetVertices(i,j);
@@ -161,7 +193,7 @@ void Rendering::MorphController
 void Rendering::MorphController
 	::SetObjectInCopy(ControllerInterface* object)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::SetObject(object);
 }
@@ -179,7 +211,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V_NOEXCEPT(Rendering, MorphController,Ge
 										  
 Rendering::MorphController
 	::MorphController(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() } 
+	:ParentType{ value }, impl{ make_shared<ImplType>() } 
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -191,7 +223,7 @@ int Rendering::MorphController
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -212,7 +244,7 @@ void Rendering::MorphController
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -220,7 +252,7 @@ void Rendering::MorphController
 void Rendering::MorphController
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	 
 }
@@ -228,7 +260,7 @@ void Rendering::MorphController
 void Rendering::MorphController
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();	 
 }
@@ -236,13 +268,13 @@ void Rendering::MorphController
 void Rendering::MorphController
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

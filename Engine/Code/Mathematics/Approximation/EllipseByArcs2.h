@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Objects2D/Arc2.h"
 #include "Mathematics/Objects2D/Circle2.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     // ÍÖÔ²Îª(x/a)^2 + (y/b)^2 = 1£¬
@@ -30,19 +30,21 @@ namespace Mathematics
     template <typename Real>
     class EllipseByArcs2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseByArcs2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseByArcs2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseByArcs2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseByArcs2 final
     {
     public:
         using EllipseByArcs2Impl = EllipseByArcs2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EllipseByArcs2);
-
+        
+        TYPE_DECLARE(EllipseByArcs2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector2D = Vector2D<Real>;
         using Arc2 = Arc2<Real>;
         using Circle2 = Circle2<Real>;
@@ -61,7 +63,7 @@ namespace Mathematics
         [[nodiscard]] int getNumArcs() const;
 
     private:
-        IMPL_TYPE_DECLARE(EllipseByArcs2);
+        PackageType impl;
     };
 
     using FloatEllipseByArcs2 = EllipseByArcs2<float>;

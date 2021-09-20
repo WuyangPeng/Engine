@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 9:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/22 11:26)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_DATA_H
 #define SYSTEM_SYSTEM_OUTPUT_MESSAGE_BOX_FLAGS_DATA_H
@@ -14,7 +14,7 @@
 
 #include "System/Helper/EnumCast.h"
 #include "System/SystemOutput/Fwd/SystemOutputFlagsFwd.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace System
 {
@@ -25,47 +25,50 @@ namespace System
 
     public:
         constexpr MessageBoxFlagsData(MessageBoxType messageBoxType, MessageBoxIcon messageBoxIcon, MessageBoxDefault messageBoxDefault, MessageBoxMode messageBoxMode, MessageBoxMisc messageBoxMisc) noexcept
-            : m_Type{ messageBoxType }, m_Icon{ messageBoxIcon }, m_Default{ messageBoxDefault }, m_Mode{ messageBoxMode }, m_Misc{ messageBoxMisc }
+            : messageBoxType{ messageBoxType }, messageBoxIcon{ messageBoxIcon }, messageBoxDefault{ messageBoxDefault }, messageBoxMode{ messageBoxMode }, messageBoxMisc{ messageBoxMisc }
         {
         }
 
-        [[nodiscard]] constexpr auto GetMessageBoxType() const noexcept
+        NODISCARD constexpr auto GetMessageBoxType() const noexcept
         {
-            return m_Type;
+            return messageBoxType;
         }
 
-        [[nodiscard]] constexpr auto GetMessageBoxIcon() const noexcept
+        NODISCARD constexpr auto GetMessageBoxIcon() const noexcept
         {
-            return m_Icon;
+            return messageBoxIcon;
         }
 
-        [[nodiscard]] constexpr auto GetMessageBoxDefault() const noexcept
+        NODISCARD constexpr auto GetMessageBoxDefault() const noexcept
         {
-            return m_Default;
+            return messageBoxDefault;
         }
 
-        [[nodiscard]] constexpr auto GetMessageBoxMode() const noexcept
+        NODISCARD constexpr auto GetMessageBoxMode() const noexcept
         {
-            return m_Mode;
+            return messageBoxMode;
         }
 
-        [[nodiscard]] constexpr auto GetMessageBoxMisc() const noexcept
+        NODISCARD constexpr auto GetMessageBoxMisc() const noexcept
         {
-            return m_Misc;
+            return messageBoxMisc;
         }
 
-        [[nodiscard]] constexpr WindowUInt GetFlag() const noexcept
+        NODISCARD constexpr WindowsUInt GetFlag() const noexcept
         {
-            return EnumCastUnderlying(m_Type) | EnumCastUnderlying(m_Icon) | EnumCastUnderlying(m_Default) |
-                   EnumCastUnderlying(m_Mode) | EnumCastUnderlying(m_Misc);
+            return EnumCastUnderlying(messageBoxType) |
+                   EnumCastUnderlying(messageBoxIcon) |
+                   EnumCastUnderlying(messageBoxDefault) |
+                   EnumCastUnderlying(messageBoxMode) |
+                   EnumCastUnderlying(messageBoxMisc);
         }
 
     private:
-        MessageBoxType m_Type;
-        MessageBoxIcon m_Icon;
-        MessageBoxDefault m_Default;
-        MessageBoxMode m_Mode;
-        MessageBoxMisc m_Misc;
+        MessageBoxType messageBoxType;
+        MessageBoxIcon messageBoxIcon;
+        MessageBoxDefault messageBoxDefault;
+        MessageBoxMode messageBoxMode;
+        MessageBoxMisc messageBoxMisc;
     };
 }
 

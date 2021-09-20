@@ -5,16 +5,17 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 16:42)
+//	引擎版本：0.7.1.1 (2020/10/23 16:42)
 
 #include "CoreTools/CoreToolsExport.h"
+
 
 #include "AnalysisCommandArgumentContainer.h"
 #include "CommandLineInformationImpl.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::string;
 
@@ -125,3 +126,4 @@ const std::string CoreTools::CommandLineInformationImpl::GetFileNameDescription(
 {
     return "fileName";
 }
+ 

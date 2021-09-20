@@ -16,25 +16,27 @@
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Segment3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindIntersectorAxisImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorAxisImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorAxisImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorAxisImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorAxisImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorAxisImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorAxisImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FindIntersectorAxis final
     {
     public:
         using FindIntersectorAxisImpl = FindIntersectorAxisImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(FindIntersectorAxis);
-
+  
+        TYPE_DECLARE(FindIntersectorAxis);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector3D = Vector3D<Real>;
         using Triangle3 = Triangle3<Real>;
         using Box3 = Box3<Real>;
@@ -63,7 +65,7 @@ namespace Mathematics
         [[nodiscard]] IntersectorConfiguration GetCfgFinal1() const;
 
     private:
-        IMPL_TYPE_DECLARE(FindIntersectorAxis);
+        PackageType impl;
     };
 
     using FloatFindIntersectorAxis = FindIntersectorAxis<float>;

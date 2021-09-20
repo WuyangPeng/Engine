@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 9:48)
+//	引擎版本：0.7.1.1 (2020/10/23 9:48)
 
 // 将信息输出至指定的ostream。UnitTestFailReportOutput为外部接口类。实现输出单元测试错误报告信息。
 #ifndef CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_FAIL_REPORT_OUTPUT_H
@@ -15,25 +15,29 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <iostream>
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(UnitTestFailReportOutputImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(UnitTestFailReportOutputImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE UnitTestFailReportOutput final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE UnitTestFailReportOutput final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(UnitTestFailReportOutput);
+        NON_COPY_TYPE_DECLARE(UnitTestFailReportOutput);
 
     public:
         UnitTestFailReportOutput(const std::string& failClassName, const std::string& fileName, int lineNumber,
                                  const std::string& errorMessage, const OStreamShared& streamShared);
-
+        ~UnitTestFailReportOutput() noexcept = default;
+        UnitTestFailReportOutput(const UnitTestFailReportOutput& rhs) noexcept = delete;
+        UnitTestFailReportOutput& operator=(const UnitTestFailReportOutput& rhs) noexcept = delete;
+        UnitTestFailReportOutput(UnitTestFailReportOutput&& rhs) noexcept = delete;
+        UnitTestFailReportOutput& operator=(UnitTestFailReportOutput&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         void PrintNewLine();
@@ -43,7 +47,7 @@ namespace CoreTools
         void PrintErrorMessage();
 
     private:
-        IMPL_TYPE_DECLARE(UnitTestFailReportOutput);
+        PackageType impl;
     };
 }
 

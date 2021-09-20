@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::LogMessagePrefix::LogMessagePrefix(AppenderPrint appenderFlags, LogLevel level, LogFilter filter)
-    : m_Impl{ make_shared<ImplType>(appenderFlags, level, filter) }
+    : impl{  appenderFlags, level, filter  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, LogMessagePrefix)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogMessagePrefix)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePrefix, GetPrefix, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePrefix, GetPrefixSize, int)

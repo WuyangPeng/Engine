@@ -14,12 +14,11 @@
 #include "CoreTools/Base/SingletonDetail.h"
 #include "Rendering/DataTypes/ColourDetail.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
-#include "System/Window/Flags/WindowFlags.h"
-
+#include "System/Windows/Flags/WindowsFlags.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 RENDERING_EXPORT_UNIQUE_PTR(RendererData);
-RENDERING_EXPORT_SHARED_PTR(RendererDataImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(RendererDataImpl); 
 
 namespace CoreTools
 {
@@ -31,11 +30,11 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE RendererData : public CoreTools::Singleton<RendererData>
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(RendererData);
+            NON_COPY_TYPE_DECLARE(RendererData);
 		using ParentType = Singleton<RendererData>;
 		using Colour = Rendering::Colour<float>;
 		using TextureFormat = Rendering::TextureFormat;
-		using WindowStyles = System::WindowStyles;
+		using WindowStyles = System::WindowsStyles;
 
 	private:
 		enum class RendererDataCreate
@@ -77,7 +76,7 @@ namespace Rendering
 
 	private:
 		static RendererDataUniquePtr sm_RendererData;
-		IMPL_TYPE_DECLARE(RendererData);
+            PackageType impl;
 	};
 }
 

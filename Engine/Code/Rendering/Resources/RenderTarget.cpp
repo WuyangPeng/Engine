@@ -26,7 +26,38 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, RenderTarget);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, RenderTarget);
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, RenderTarget);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                       
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, RenderTarget);
 
 using std::string;
 using std::vector;
@@ -34,7 +65,7 @@ using std::make_shared;
 
 Rendering::RenderTarget
     ::RenderTarget(int numTargets, TextureFormat format,int width,int height, bool hasMipmaps,bool hasDepthStencil)
-	:ParentType{ "RenderTarget" },m_Impl{ make_shared<ImplType>(numTargets,format,width,height,hasMipmaps,hasDepthStencil) }
+	:ParentType{ "RenderTarget" },impl{ make_shared<ImplType>(numTargets,format,width,height,hasMipmaps,hasDepthStencil) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -51,7 +82,7 @@ EXCEPTION_ALL_CATCH(Rendering)
     
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,RenderTarget)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,RenderTarget)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetNumTargets,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,RenderTarget,GetFormat,Rendering::TextureFormat)
@@ -64,7 +95,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,RenderTarget,HasDepthSten
 
 Rendering::RenderTarget
    ::RenderTarget (LoadConstructor value)
-	:ParentType{ value },m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value },impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -76,7 +107,7 @@ int Rendering::RenderTarget
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -89,7 +120,7 @@ uint64_t Rendering::RenderTarget
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		impl->Register(target);
 	}    
     
     return uniqueID;
@@ -104,7 +135,7 @@ void Rendering::RenderTarget
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -112,17 +143,17 @@ void Rendering::RenderTarget
 void Rendering::RenderTarget
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
     
-    m_Impl->Link(source);
+    impl->Link(source);
 }
 
 void Rendering::RenderTarget
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -130,13 +161,13 @@ void Rendering::RenderTarget
 void Rendering::RenderTarget
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

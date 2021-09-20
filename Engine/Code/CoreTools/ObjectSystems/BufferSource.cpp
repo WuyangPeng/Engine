@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 14:59)
+//	引擎版本：0.7.1.1 (2020/10/22 14:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,7 +30,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferSource)
 
 bool CoreTools::BufferSource::ReadBool()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     uint32_t value{ 0 };
 
@@ -41,14 +41,14 @@ bool CoreTools::BufferSource::ReadBool()
 
 void CoreTools::BufferSource::Read(bool& value)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     value = ReadBool();
 }
 
 string CoreTools::BufferSource::ReadString()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     int32_t length{ 0 };
     Read(length);
@@ -81,7 +81,7 @@ void CoreTools::BufferSource::Read(string& value)
 
 void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, std::set<bool>& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -91,7 +91,7 @@ void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, std::set<boo
 
 void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, std::set<std::string>& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -115,14 +115,14 @@ int CoreTools::BufferSource::GetBytesTotal() const
 
 void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     m_Source.IncrementBytesProcessed(bytesNumber);
 }
 
 void CoreTools::BufferSource::ReadUniqueID(const ObjectInterfaceSharedPtr& object)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     auto modify = object;
 

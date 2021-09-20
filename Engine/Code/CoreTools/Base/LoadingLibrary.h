@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 11:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/26 20:45)
 
 // 打开动态链接库
 #ifndef CORE_TOOLS_BASE_LOADING_LIBRARY_H
@@ -16,22 +16,21 @@
 #include "System/DynamicLink/Fwd/DynamicLinkFlagsFwd.h"
 #include "System/DynamicLink/Using/LoadLibraryUsing.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Contract/ContractFwd.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LoadingLibraryImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(LoadingLibraryImpl);
 
 namespace CoreTools
 {
     /// @brief  加载动态库
-    /// @invariant  m_Impl != nullptr。
-    class CORE_TOOLS_DEFAULT_DECLARE LoadingLibrary final : private boost::noncopyable
+    /// @invariant  impl != nullptr。
+    class CORE_TOOLS_DEFAULT_DECLARE LoadingLibrary final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(LoadingLibrary);
+        NON_COPY_TYPE_DECLARE(LoadingLibrary);
         using String = System::String;
         using LoadLibraryType = System::LoadLibraryType;
         using DynamicLinkModule = System::DynamicLinkModule;
@@ -42,11 +41,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] DynamicLinkModule GetLoadedModule() noexcept;
-        [[nodiscard]] DynamicLinkProcess GetProcessAddress(const std::string& procName);
+        NODISCARD DynamicLinkModule GetLoadedModule() noexcept;
+        NODISCARD DynamicLinkProcess GetProcessAddress(const std::string& procName);
 
     private:
-        IMPL_TYPE_DECLARE(LoadingLibrary);
+        PackageType impl;
     };
 }
 

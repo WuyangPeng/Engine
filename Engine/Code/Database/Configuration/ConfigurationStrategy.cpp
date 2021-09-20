@@ -21,7 +21,7 @@ using std::vector;
 
 Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port,
                                                        const string& hostName, const string& userName, const string& password)
-    : m_Impl{ make_shared<ImplType>(wrappersStrategy, ip, port, hostName, userName, password) }
+    : impl{ wrappersStrategy, ip, port, hostName, userName, password }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
@@ -30,12 +30,12 @@ Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappers
                                                        const string& userName, const string& password, bool pooling, int poolMaxSize,
                                                        int poolQueueTimeout, int poolMaxIdleTime, const FlagsOption& flagsOption, const StringOption& stringOption,
                                                        const BooleanOption& booleanOption, const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
-    : m_Impl{ make_shared<ImplType>(wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping) }
+    : impl{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, ConfigurationStrategy)
+CLASS_INVARIANT_STUB_DEFINE(Database, ConfigurationStrategy)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, ConfigurationStrategy, GetWrappersStrategy, Database::WrappersStrategy)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Database, ConfigurationStrategy, GetIP, string)

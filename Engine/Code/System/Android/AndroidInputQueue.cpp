@@ -1,48 +1,65 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 23:11)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/11 14:22)
 
 #include "System/SystemExport.h"
 
 #include "AndroidInputQueue.h"
 #include "Using/AndroidInputUsing.h"
+#include "System/Helper/WindowsMacro.h"
 
-void System::AndroidInputQueueAttachLooper([[maybe_unused]] AndroidInputQueue* queue, [[maybe_unused]] AndroidLooper* looper, [[maybe_unused]] LooperID ident, [[maybe_unused]] AndroidLooperCallbackFunc callback, [[maybe_unused]] void* data) noexcept
+void System::AndroidInputQueueAttachLooper(AndroidInputQueue* queue, AndroidLooper* looper, LooperID ident, AndroidLooperCallbackFunc callback, void* data) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_attachLooper(queue, looper, ident, callback, data);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
+
+    NullFunction<AndroidInputQueue*, AndroidLooper*, LooperID, AndroidLooperCallbackFunc, void*>(queue, looper, ident, callback, data);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-void System::AndroidInputQueueDetachLooper([[maybe_unused]] AndroidInputQueue* queue) noexcept
+void System::AndroidInputQueueDetachLooper(AndroidInputQueue* queue) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_detachLooper(queue);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
+
+    NullFunction<AndroidInputQueue*>(queue);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int System::AndroidInputQueueHasEvents([[maybe_unused]] AndroidInputQueue* queue) noexcept
+int32_t System::AndroidInputQueueHasEvents(AndroidInputQueue* queue) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_hasEvents(queue);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
+
+    NullFunction<AndroidInputQueue*>(queue);
+
     return 0;
+
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int System::AndroidInputQueueGetEvent(AndroidInputQueue* queue, AndroidInputEvent** outEvent) noexcept
+int32_t System::AndroidInputQueueGetEvent(AndroidInputQueue* queue, AndroidInputEvent** outEvent) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_getEvent(queue, outEvent);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
 
     if (queue != nullptr && outEvent != nullptr)
@@ -59,20 +76,30 @@ int System::AndroidInputQueueGetEvent(AndroidInputQueue* queue, AndroidInputEven
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-int System::AndroidInputQueuePreDispatchEvent([[maybe_unused]] AndroidInputQueue* queue, [[maybe_unused]] AndroidInputEvent* event) noexcept
+int32_t System::AndroidInputQueuePreDispatchEvent(AndroidInputQueue* queue, AndroidInputEvent* event) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_preDispatchEvent(queue, event);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
+
+    NullFunction<AndroidInputQueue*, AndroidInputEvent*>(queue, event);
+
     return 1;
+
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-void System::AndroidInputQueueFinishEvent([[maybe_unused]] AndroidInputQueue* queue, [[maybe_unused]] AndroidInputEvent* event, [[maybe_unused]] int handled) noexcept
+void System::AndroidInputQueueFinishEvent(AndroidInputQueue* queue, AndroidInputEvent* event, int32_t handled) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
+
     return AInputQueue_finishEvent(queue, event, handled);
+
 #else  // !SYSTEM_PLATFORM_ANDROID
+
+    NullFunction<AndroidInputQueue*, AndroidInputEvent*, int32_t>(queue, event, handled);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

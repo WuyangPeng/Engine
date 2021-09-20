@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRendererSuite 头文件">
+      <UniqueIdentifier>{a07a88be-75c2-498c-a01d-244698e987a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLRendererSuite 源文件">
+      <UniqueIdentifier>{02d54182-9d68-4d1d-b8cd-af6eed980dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderersSuite 头文件">
+      <UniqueIdentifier>{e4102498-cc2e-4ca1-955d-9ee5f9ee1150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderersSuite 源文件">
+      <UniqueIdentifier>{f9155610-7b79-4ee6-b397-703a2eed261d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{8f12036b-90f4-4ce4-aacd-f221ede8c590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\OpenGLRendererSuite">
+      <UniqueIdentifier>{994910dd-61df-42f5-ae01-8fd7ca2bc76a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\RenderersSuite">
+      <UniqueIdentifier>{ea6ec40e-57db-4281-b304-694ce16aaa70}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\RenderingOpenGLTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\OpenGLRendererSuite\Texture1D.trt">
+      <Filter>资源文件\OpenGLRendererSuite</Filter>
+    </None>
+    <None Include="Resource\OpenGLRendererSuite\Texture2D.trt">
+      <Filter>资源文件\OpenGLRendererSuite</Filter>
+    </None>
+    <None Include="Resource\OpenGLRendererSuite\Texture3D.trt">
+      <Filter>资源文件\OpenGLRendererSuite</Filter>
+    </None>
+    <None Include="Resource\OpenGLRendererSuite\TextureCube.trt">
+      <Filter>资源文件\OpenGLRendererSuite</Filter>
+    </None>
+    <None Include="Resource\RenderersSuite\TrianglesStrip.trv">
+      <Filter>资源文件\RenderersSuite</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderingOpenGLTestingOpenGLGlutCallBack.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLRenderTargetDataTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLTextureDataManageTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLTextureDataTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLVertexFormatArrayDataTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLVertexFormatDataTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLBindTextureTesting.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLRendererSuite.h">
+      <Filter>OpenGLRendererSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformIndexBufferTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformRenderTargetTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture1DTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture2DTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture3DTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTextureCubeTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexBufferTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexFormatTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderersSuite.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderTargetManagementTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureLockManageTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\VertexFormatManagementTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferLockManageTesting.h">
+      <Filter>RenderersSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderingOpenGLTestingOpenGLGlutCallBack.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLBindTextureTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLRenderTargetDataTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLTextureDataManageTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLTextureDataTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLVertexFormatArrayDataTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\OpenGLRendererSuite\OpenGLVertexFormatDataTesting.cpp">
+      <Filter>OpenGLRendererSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferLockManageTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementLockEncapsulationTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\BufferManagementTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformIndexBufferTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformRenderTargetTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture1DTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture2DTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTexture3DTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformTextureCubeTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexBufferTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\PlatformVertexFormatTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\RenderTargetManagementTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureLockManageTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementLockEncapsulationTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\TextureManagementTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Rendering\RenderingOpenGLTesting\RenderersSuite\VertexFormatManagementTesting.cpp">
+      <Filter>RenderersSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

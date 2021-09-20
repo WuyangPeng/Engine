@@ -13,8 +13,7 @@
 #include "ControllerKeyInfo.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-
-RENDERING_EXPORT_SHARED_PTR(MorphControllerImpl); 
+EXPORT_SHARED_PTR(Rendering, MorphControllerImpl, RENDERING_DEFAULT_DECLARE); 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +22,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE MorphController : public Controller
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(MorphController, = default);
+            void Swap(MorphController& rhs) noexcept;
+      
+          public:
+              TYPE_DECLARE(MorphController);
+              using ClassShareType = CoreTools::CopyUnsharedClasses;
+              ~MorphController() noexcept= default;
+              MorphController(const MorphController& rhs);
+              MorphController& operator=(const MorphController& rhs);
+              MorphController(MorphController&& rhs) noexcept;
+              MorphController& operator=(MorphController&& rhs) noexcept;
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
@@ -70,7 +78,7 @@ namespace Rendering
 		const ControllerKeyInfo GetKeyInfo(float ctrlTime) noexcept;
  
 	private:
-		IMPL_TYPE_DECLARE(MorphController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 
 #include STSTEM_WARNING_PUSH

@@ -16,7 +16,7 @@
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Arc2.h"
 #include "Mathematics/Objects2D/Objects2DFwd.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <vector>
 
 namespace Mathematics
@@ -24,19 +24,22 @@ namespace Mathematics
     template <typename Real>
     class StaticFindIntersectorArc2Arc2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorArc2Arc2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorArc2Arc2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorArc2Arc2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorArc2Arc2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorArc2Arc2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorArc2Arc2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorArc2Arc2 : public StaticIntersector<Real, Vector2D>
     {
     public:
         using StaticFindIntersectorArc2Arc2Impl = StaticFindIntersectorArc2Arc2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorArc2Arc2);
+ 
 
+        TYPE_DECLARE(StaticFindIntersectorArc2Arc2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = StaticIntersector<Real, Vector2D>;
         using Vector2D = Vector2D<Real>;
         using Circle2 = Circle2<Real>;
@@ -67,7 +70,7 @@ namespace Mathematics
         void Find();
 
     private:
-        IMPL_TYPE_DECLARE(StaticFindIntersectorArc2Arc2);
+        PackageType impl;
     };
 
     using FloatStaticFindIntersectorArc2Arc2 = StaticFindIntersectorArc2Arc2<float>;

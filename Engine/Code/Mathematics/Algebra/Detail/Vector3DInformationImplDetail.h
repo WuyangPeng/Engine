@@ -17,7 +17,7 @@
 #include "Mathematics/Algebra/AxesAlignBoundingBox3D.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::Vector3DInformationImpl<Real>::Vector3DInformationImpl(const ContainerType& points, Real epsilon)

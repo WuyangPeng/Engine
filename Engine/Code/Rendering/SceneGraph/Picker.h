@@ -12,15 +12,15 @@
 #include "Spatial.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-
-RENDERING_EXPORT_SHARED_PTR(PickerImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(Picker,PickerImpl);
 
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE Picker
 	{
 	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Picker);
+            DELAY_COPY_UNSHARED_TYPE_DECLARE(Picker);
 		using APoint = Mathematics::APoint<float>;
 		using AVector = Mathematics::AVector<float>;
 
@@ -44,7 +44,7 @@ namespace Rendering
 		const PickRecord GetClosestNonpositive() const;
 
 	private:
-		IMPL_TYPE_DECLARE(Picker);
+                PackageType impl;
 	};
 }
 

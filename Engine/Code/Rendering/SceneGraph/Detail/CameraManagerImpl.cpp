@@ -10,9 +10,8 @@
 #include "Rendering/Renderers/RendererInput.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::CameraManagerImpl
-	::CameraManagerImpl() noexcept
-	:m_DepthType{ DepthType::Quantity }
+Rendering::CameraManagerImpl ::CameraManagerImpl(MAYBE_UNUSED int count) noexcept
+    : m_DepthType{ DepthType::Quantity }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 11:06)
+//	引擎版本：0.7.1.1 (2020/10/20 11:06)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MEMORY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_MEMORY_DETAIL_H
@@ -255,11 +255,16 @@ T**** CoreTools::Memory::New4DArray(const int bound1, const int bound2, const in
     const auto innerBound = bound2 * innermostBound;
     const auto bound = bound1 * innerBound;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
     // T***没有构造函数，插入T***[]到内存映射。
     auto data = static_cast<T****>(MEMORY_MANAGER_SINGLETON.CreateBlock(bound4 * sizeof(T***), 4, m_FunctionDescribed));
+#include STSTEM_WARNING_POP
 
     try
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
         // T**没有构造函数，插入T**[]到内存映射。
         data[0] = static_cast<T***>(MEMORY_MANAGER_SINGLETON.CreateBlock(innermostBound * sizeof(T**), 3, m_FunctionDescribed));
 
@@ -310,6 +315,7 @@ T**** CoreTools::Memory::New4DArray(const int bound1, const int bound2, const in
             }
         }
     }
+#include STSTEM_WARNING_POP
 
     return data;
 }
@@ -350,7 +356,10 @@ void CoreTools::Memory::DeleteSingle(T*& data)
         CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 0, "维度不匹配！");
 
         // 调用T的析构函数。如果T是指针类型，编译器不会对析构函数的调用生成任何代码。
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26457)
         data->~T();
+#include STSTEM_WARNING_POP
 
         // 从内存映射中移除T
         MEMORY_MANAGER_SINGLETON.Delete(data);
@@ -391,6 +400,7 @@ void CoreTools::Memory::DeleteArray(T*& data, size_t constructorSuccess)
         for (auto i = 0u; i < constructorSuccess; ++i)
         {
 #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26457)
 #include SYSTEM_WARNING_DISABLE(26493)
             object->~T();
 #include STSTEM_WARNING_POP
@@ -466,7 +476,9 @@ void CoreTools::Memory::Delete4DArray(T****& data)
     {
         CORE_TOOLS_ASSERTION_2(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(data) == 4, "维度不匹配！");
 
-        auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0][0][0]) / sizeof(T);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+        const auto bytesNumber = MEMORY_MANAGER_SINGLETON.GetBytesNumber(data[0][0][0]) / sizeof(T);
 
         DeleteArray(data[0][0][0], bytesNumber);
 
@@ -478,6 +490,8 @@ void CoreTools::Memory::Delete4DArray(T****& data)
 
         // T***没有析构函数，从内存映射中移除T***[]
         MEMORY_MANAGER_SINGLETON.Delete(data);
+
+#include STSTEM_WARNING_POP
 
         data = nullptr;
     }

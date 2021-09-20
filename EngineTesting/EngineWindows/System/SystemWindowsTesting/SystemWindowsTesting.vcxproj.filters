@@ -1,0 +1,338 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{29b607fa-844e-40f6-be61-66aae0dc4872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 头文件">
+      <UniqueIdentifier>{70c8862d-bfe6-428e-aa4b-b6cbb02a8c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 源文件">
+      <UniqueIdentifier>{6ebfad6c-cf6e-4667-8c12-e262c92b7706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemOutputSuite 头文件">
+      <UniqueIdentifier>{d6d1b34e-2fa8-4ae1-b0b3-a68ed2bd12cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemOutputSuite 源文件">
+      <UniqueIdentifier>{4250cd99-d01b-4e60-ae15-54c8d29f7e2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemOutputSuite 头文件\MessageBoxSelection">
+      <UniqueIdentifier>{9f81bfc1-3e12-4e82-824d-26843743b6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SystemOutputSuite 源文件\MessageBoxSelection">
+      <UniqueIdentifier>{a6c3bc09-28e4-44a2-9fa7-37cc38fc178f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 头文件\LoadResourceTools">
+      <UniqueIdentifier>{50174991-8e3c-4b20-bec8-30b76e109654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 源文件\LoadResourceTools">
+      <UniqueIdentifier>{3b5b09ea-1224-4a97-82ef-fb9328a14635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 头文件\EnumResourceTools">
+      <UniqueIdentifier>{e979fb01-20fa-4e0f-8270-234496f959ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DynamicLinkSuite 源文件\EnumResourceTools">
+      <UniqueIdentifier>{4c36f476-216f-4554-b8db-aae04e78d2bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 头文件">
+      <UniqueIdentifier>{032fe851-9ce6-4fe6-adac-255f797a6a9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLSuite 源文件">
+      <UniqueIdentifier>{fc2425ad-3daa-443a-806a-94ac0912c0a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件">
+      <UniqueIdentifier>{e6e4a5b9-1195-4c49-a9e2-2596fc63c0a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件">
+      <UniqueIdentifier>{bfe40a81-595a-46e0-93c6-e7c401d3c75e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件\WindowsProcess">
+      <UniqueIdentifier>{9a7a0fe3-3381-47b3-b111-48876f081b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\WindowsProcess">
+      <UniqueIdentifier>{7fab29c4-a8e1-48b8-9cd9-6159e80ba155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 头文件\WindowsRegister">
+      <UniqueIdentifier>{6a191457-be2d-45f8-9d7a-e16a2888ede0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsSuite 源文件\WindowsRegister">
+      <UniqueIdentifier>{85ea9e87-49cd-4f21-9b16-58781ef3a9a4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\testCursor.cur">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Configuration\SystemWindowsTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\SystemOutputSuite.h">
+      <Filter>SystemOutputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\DynamicLinkSuite.h">
+      <Filter>DynamicLinkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.h">
+      <Filter>SystemOutputSuite 头文件\MessageBoxSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.h">
+      <Filter>SystemOutputSuite 头文件\MessageBoxSelection</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\FindResourceWindowsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\LoadResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsWindowsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.h">
+      <Filter>DynamicLinkSuite 头文件\EnumResourceTools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLSuite.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h">
+      <Filter>OpenGLSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.h">
+      <Filter>WindowsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsSuite.h">
+      <Filter>WindowsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsUserTesting.h">
+      <Filter>WindowsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.h">
+      <Filter>WindowsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\GetMessageTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\PeekMessageTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\PostQuitMessageTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\ValidateRectTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DefWindowProcTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\MessageBoxTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DestroyWindowTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\SendMessageTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\GetCommandLineTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\WindowPaintTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsProcess</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\GetStockObjectTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\LoadCursorTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\LoadIconTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterClassTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.h">
+      <Filter>WindowsSuite 头文件\WindowsRegister</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\TestingWindowsMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataWindowsTesting.cpp">
+      <Filter>SystemOutputSuite 源文件\MessageBoxSelection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataWindowsTesting.cpp">
+      <Filter>SystemOutputSuite 源文件\MessageBoxSelection</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\FindResourceWindowsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceWindowsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\LoadResourceTools\LoadStringWindowsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\LoadResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsWindowsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumWindowsTesting.cpp">
+      <Filter>DynamicLinkSuite 源文件\EnumResourceTools</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp">
+      <Filter>OpenGLSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsCreateTesting.cpp">
+      <Filter>WindowsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsFontInformationTesting.cpp">
+      <Filter>WindowsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsUserTesting.cpp">
+      <Filter>WindowsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\GetMessageTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\PeekMessageTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\PostQuitMessageTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\ValidateRectTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DefWindowProcTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\MessageBoxTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\DestroyWindowTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\SendMessageTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\GetCommandLineTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsProcess\WindowPaintTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\GetStockObjectTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\LoadCursorTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\LoadIconTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterClassTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\System\SystemWindowsTesting\WindowsSuite\WindowsRegister\RegisterWindowMessageTesting.cpp">
+      <Filter>WindowsSuite 源文件\WindowsRegister</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="SystemWindowsTesting.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\testIcon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

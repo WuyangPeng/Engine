@@ -11,8 +11,8 @@
 
 #include "ControllerInterface.h"
 #include "Flags/ControllerFlags.h"
-
-RENDERING_EXPORT_SHARED_PTR(ControllerImpl);
+EXPORT_SHARED_PTR(Rendering, ControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -25,7 +25,16 @@ namespace Rendering
     public:
         // 复制一个Controller不会将其加入ControllerObject。
         // 销毁一个Controller不会将其从ControllerObject删除。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Controller, = default);
+        void Swap(Controller& rhs) noexcept;
+   
+       public:
+           TYPE_DECLARE(Controller);
+           using ClassShareType = CoreTools::CopyUnsharedClasses;
+           ~Controller() noexcept= default;
+           Controller(const Controller& rhs);
+           Controller& operator=(const Controller& rhs);
+           Controller(Controller&& rhs) noexcept;
+           Controller& operator=(Controller&& rhs) noexcept;
         using ParentType = ControllerInterface;
     
     public:
@@ -64,7 +73,7 @@ namespace Rendering
         void SetActive(bool active) noexcept;
         
     private:
-		IMPL_TYPE_DECLARE(Controller);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
         
         // 控制对象。这是一个常规的指针,而不是一个智能指针,
         // 以避免引用循环在m_Object和'this'之间。

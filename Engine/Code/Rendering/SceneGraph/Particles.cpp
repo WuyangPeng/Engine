@@ -37,7 +37,7 @@ Rendering::Particles
 	::Particles(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,
 				int indexSize, const vector<APoint>& positions,const vector<float>& sizes, float sizeAdjust) 
 	:ParentType{ vertexformat, vertexbuffer, IndexBufferSharedPtr() },
-	 m_Impl{ make_shared<ImplType>(positions, sizes, sizeAdjust) }
+	 impl{ make_shared<ImplType>(positions, sizes, sizeAdjust) }
 {
 	InitIndexBuffer(indexSize);
 	InitTextureCoord();
@@ -57,7 +57,7 @@ void Rendering::Particles
 const	auto numParticles = numVertices / 4;
 
 	RENDERING_ASSERTION_1(numVertices % 4 == 0, "顶点数必须是4的倍数。\n");
-	RENDERING_ASSERTION_1(numParticles == m_Impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
+	RENDERING_ASSERTION_1(numParticles == impl->GetNumParticles(), "粒子数必须和位置数组大小相等。\n");
 
 	IndexBufferSharedPtr indexBuffer{ std::make_shared< IndexBuffer>(6 * numParticles, indexSize) };
 	indexBuffer->InitIndexBufferInParticles();
@@ -82,9 +82,40 @@ Rendering::Particles
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Particles)
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, Particles)
 
- CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Particles)
+ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Particles)
 
 Rendering::ControllerInterfaceSharedPtr Rendering::Particles
 	::Clone() const 
@@ -105,27 +136,27 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Particles, GetNumActive,
 void Rendering::Particles
 	::SetPosition(int index, const APoint& position)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetPosition(index, position);
+	return impl->SetPosition(index, position);
 }
 
 void Rendering::Particles
 	::SetSize(int index, float size) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetSize(index, size);
+	return impl->SetSize(index, size);
 }
 
 
 void Rendering::Particles
 	::SetNumActive(int numActive)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	m_Impl->SetNumActive(numActive);
-	numActive = m_Impl->GetNumActive();
+	impl->SetNumActive(numActive);
+	numActive = impl->GetNumActive();
 	GetIndexBuffer()->SetNumElements(6 * numActive);
 	GetVertexBuffer()->SetNumElements(4 * numActive);
 }
@@ -145,11 +176,11 @@ void Rendering::Particles
         const auto upMinusRight = transform * (camera->GetUpVector() - camera->GetRightVector());
 
 	// 生成四边形像一对三角形。
-        const auto numActive = m_Impl->GetNumActive();
+        const auto numActive = impl->GetNumActive();
 	for (auto index = 0; index < numActive; index += 4)
 	{
-            const auto position = m_Impl->GetPosition(index);
-            const auto trueSize = m_Impl->GetTrueSize(index);
+            const auto position = impl->GetPosition(index);
+            const auto trueSize = impl->GetTrueSize(index);
 		auto scaledUpPlusRight = trueSize * upPlusRight;
 		auto scaledUpMinusRight = trueSize * upMinusRight;
 
@@ -173,7 +204,7 @@ void Rendering::Particles
 
 Rendering::Particles
 	::Particles(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -185,7 +216,7 @@ int Rendering::Particles
     
     auto size = ParentType::GetStreamingSize();
     
-    size += m_Impl->GetStreamingSize();  
+    size += impl->GetStreamingSize();  
     
     return size;
 }
@@ -207,7 +238,7 @@ void Rendering::Particles
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);    
+	impl->Save(target);    
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -215,7 +246,7 @@ void Rendering::Particles
 void Rendering::Particles
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source); 
 }
@@ -223,7 +254,7 @@ void Rendering::Particles
 void Rendering::Particles
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();     
 }
@@ -231,13 +262,13 @@ void Rendering::Particles
 void Rendering::Particles
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

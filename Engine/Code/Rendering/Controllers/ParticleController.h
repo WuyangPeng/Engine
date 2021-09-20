@@ -11,8 +11,8 @@
 
 #include "Controller.h"
 #include "Mathematics/Algebra/AVector.h" 
-
-RENDERING_EXPORT_SHARED_PTR(ParticleControllerImpl);
+EXPORT_SHARED_PTR(Rendering, ParticleControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +23,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ParticleController : public Controller
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(ParticleController, = default);
+            void Swap(ParticleController& rhs) noexcept;
+            
+                public:
+                    TYPE_DECLARE(ParticleController);
+                    using ClassShareType = CoreTools::CopyUnsharedClasses;
+                    ~ParticleController() noexcept= default;
+                    ParticleController(const ParticleController& rhs);
+                    ParticleController& operator=(const ParticleController& rhs);
+                    ParticleController(ParticleController&& rhs) noexcept;
+                    ParticleController& operator=(ParticleController&& rhs) noexcept;
 		using ParentType = Controller;
 		using AVector = Mathematics::FloatAVector;
 
@@ -75,7 +84,7 @@ namespace Rendering
 		virtual void UpdatePointMotion (float ctrlTime);
 
 	private:
-		IMPL_TYPE_DECLARE(ParticleController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 
 		Particles* m_Particles;
 	};

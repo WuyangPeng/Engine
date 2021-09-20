@@ -15,21 +15,26 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/MysqlConnectorWrappers/Fwd/MysqlConnectorFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-DATABASE_EXPORT_SHARED_PTR(ResultRowImpl);
-EXPORT_NONCOPYABLE_CLASS(DATABASE);
+DATABASE_NON_COPY_EXPORT_IMPL(ResultRowImpl);
+ 
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE ResultRow final : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE ResultRow final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(ResultRow);
+        NON_COPY_TYPE_DECLARE(ResultRow);
 
     public:
         explicit ResultRow(const ConfigurationStrategy& configurationStrategy);
+        ~ResultRow() noexcept = default;
+        ResultRow(const ResultRow& rhs) noexcept = delete;
+        ResultRow& operator=(const ResultRow& rhs) noexcept = delete;
+        ResultRow(ResultRow&& rhs) noexcept = delete;
+        ResultRow& operator=(ResultRow&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -48,7 +53,7 @@ namespace Database
         [[nodiscard]] int GetColCount() const;
 
     private:
-        IMPL_TYPE_DECLARE(ResultRow);
+        PackageType impl;
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     public:

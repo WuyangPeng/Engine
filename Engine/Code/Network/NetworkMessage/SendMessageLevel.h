@@ -14,8 +14,8 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-
-NETWORK_EXPORT_SHARED_PTR(SendMessageLevelImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(SendMessageLevel,SendMessageLevelImpl);
 
 namespace Network
 {
@@ -23,7 +23,7 @@ namespace Network
     class NETWORK_DEFAULT_DECLARE SendMessageLevel final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SendMessageLevel);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(SendMessageLevel);
 
     public:
         explicit SendMessageLevel(int messageMaxSize);
@@ -43,7 +43,7 @@ namespace Network
         void Clear();
 
     private:
-        IMPL_TYPE_DECLARE(SendMessageLevel);
+        PackageType impl;
     };
 }
 

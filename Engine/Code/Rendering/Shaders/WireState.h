@@ -13,8 +13,8 @@
 
 #include "CoreTools/ObjectSystems/Object.h"
 
-RENDERING_EXPORT_SHARED_PTR(WireStateImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, WireStateImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class WriteFileManager;
@@ -26,7 +26,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE WireState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(WireState, DESTRUCTOR_DEFAULT);
+        void Swap(WireState& rhs) noexcept;
+       
+           public:
+               TYPE_DECLARE(WireState);
+               using ClassShareType = CoreTools::CopyUnsharedClasses;
+               ~WireState() noexcept= default;
+               WireState(const WireState& rhs);
+               WireState& operator=(const WireState& rhs);
+               WireState(WireState&& rhs) noexcept;
+               WireState& operator=(WireState&& rhs) noexcept;
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -45,7 +54,7 @@ namespace Rendering
         void LoadState(ReadFileManager& manager);
         ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(WireState);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

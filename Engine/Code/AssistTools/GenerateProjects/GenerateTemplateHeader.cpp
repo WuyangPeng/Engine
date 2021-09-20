@@ -12,17 +12,17 @@
  
 AssistTools::GenerateTemplateHeader
 	::GenerateTemplateHeader(const System::String& templateFileName, const Replace& replace)
-	:m_Impl(std::make_shared<ImplType>(templateFileName,replace)) 
+	:impl(templateFileName,replace) 
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateHeader)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateHeader)
 
 void AssistTools::GenerateTemplateHeader
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;	 
 
-	return m_Impl->GenerateTo(resourceDirectory, newSolutionName, copyrightData, projectCapital);
+	return impl->GenerateTo(resourceDirectory, newSolutionName, copyrightData, projectCapital);
 }

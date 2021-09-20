@@ -1,0 +1,26 @@
+TODO Level 9
+
+0.0.2.5 
+ 
+1.   （HelperSuite）完成Helper的UserMacroTesting的单元测试。  
+2.   （ConfigurationSuite）完成Configuration的AnalysisDatabaseConfigurationTesting的单元测试。  
+3.   （ConfigurationSuite）完成Configuration的ConfigurationStrategyTesting的单元测试。
+4.   （SqlInterfaceSuite）完成SqlInterface的DatabaseObjectTesting的单元测试。
+5.   （SqlInterfaceSuite）完成SqlInterface的SessionTesting的单元测试。
+6.   （SqlInterfaceSuite）完成SqlInterface的SchemaTesting的单元测试。
+7.   （SqlInterfaceSuite）完成SqlInterface的CollectionTesting的单元测试。
+8.   （SqlInterfaceSuite）完成SqlInterface的ResultRowTesting的单元测试。
+9.   （SqlInterfaceSuite）完成SqlInterface的ResultTesting的单元测试。
+10.  （SqlInterfaceSuite）完成SqlInterface的TableTesting的单元测试。
+11.  （StatementSuite）完成Statement的语句的单元测试。
+12.  （MysqlWrappersSuit）完成MysqlWrappers的数据对象的单元测试。
+13.  （MysqlWrappersSuit）完成MysqlWrappers的会话的单元测试。
+14.  （MysqlWrappersSuit）完成MysqlWrappers的架构的单元测试。
+15.  （MysqlWrappersSuit）完成MysqlWrappers的采集的单元测试。
+16.  （MysqlWrappersSuit）完成MysqlWrappers的结果的单元测试。
+17.  （MysqlWrappersSuit）完成MysqlWrappers的表的单元测试。
+18.  （SqlServerWrappersSuite）完成SqlServerWrappers的Sql Server的单元测试。
+19.  （SQLiteWrappersSuite）完成SQLiteWrappers的SQLite的单元测试。
+20.  （PostgreSQLSuite）完成PostgreSQL的PostgreSQL的单元测试。
+21.  （OracleSuite）完成Oracle的OracleSuite的单元测试。
+22.  （FlatFileWrappersSuite）完成FlatFileWrappers的平面文件的单元测试。

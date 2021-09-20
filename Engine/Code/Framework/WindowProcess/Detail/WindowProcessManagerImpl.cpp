@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowProcessManagerImpl.h"
-#include "System/Window/Flags/WindowMessagesFlags.h" 
+#include "System/Windows/Flags/WindowsMessagesFlags.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
@@ -57,24 +57,24 @@ Framework::WindowProcessManagerImpl::MessageFunctionPointerContainerSharedPtr Fr
 
 		if (!functionPointer)
 		{
-			MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowMessages::Paint, &WindowMessageInterface::PaintMessage },
-																			 { System::WindowMessages::EraseBkgnd,&WindowMessageInterface::EraseBackgroundMessage },
-																			 { System::WindowMessages::Move, &WindowMessageInterface::MoveMessage },
-																			 { System::WindowMessages::Size, &WindowMessageInterface::SizeMessage },
-																			 { System::WindowMessages::Char, &WindowMessageInterface::CharMessage },
-																			 { System::WindowMessages::KeyDown, &WindowMessageInterface::KeyDownMessage },
-																			 { System::WindowMessages::KeyUp, &WindowMessageInterface::KeyUpMessage },
-																			 { System::WindowMessages::LButtonDown, &WindowMessageInterface::LeftButtonDownMessage },
-																			 { System::WindowMessages::LButtonUp, &WindowMessageInterface::LeftButtonUpMessage },
-																			 { System::WindowMessages::MButtonDown, &WindowMessageInterface::MiddleButtonDownMessage },
-																			 { System::WindowMessages::MButtonUp, &WindowMessageInterface::MiddleButtonUpMessage },
-																			 { System::WindowMessages::RButtonDown, &WindowMessageInterface::RightButtonDownMessage },
-																			 { System::WindowMessages::RButtonUp, &WindowMessageInterface::RightButtonUpMessage },
-																			 { System::WindowMessages::MouseMove, &WindowMessageInterface::MouseMoveMessage },
-																			 { System::WindowMessages::MouseWheel, &WindowMessageInterface::MouseWheelMessage },
-																			 { System::WindowMessages::Create, &WindowMessageInterface::CreateMessage },
-																			 { System::WindowMessages::Close, &WindowMessageInterface::CloseMessage } ,
-																			 { System::WindowMessages::Destroy, &WindowMessageInterface::DestroyMessage } };
+			MessageFunctionPointerContainer messageFunctionPointerContainer{ { System::WindowsMessages::Paint, &WindowMessageInterface::PaintMessage },
+																			 { System::WindowsMessages::EraseBkgnd,&WindowMessageInterface::EraseBackgroundMessage },
+																			 { System::WindowsMessages::Move, &WindowMessageInterface::MoveMessage },
+																			 { System::WindowsMessages::Size, &WindowMessageInterface::SizeMessage },
+																			 { System::WindowsMessages::Char, &WindowMessageInterface::CharMessage },
+																			 { System::WindowsMessages::KeyDown, &WindowMessageInterface::KeyDownMessage },
+																			 { System::WindowsMessages::KeyUp, &WindowMessageInterface::KeyUpMessage },
+																			 { System::WindowsMessages::LButtonDown, &WindowMessageInterface::LeftButtonDownMessage },
+																			 { System::WindowsMessages::LButtonUp, &WindowMessageInterface::LeftButtonUpMessage },
+																			 { System::WindowsMessages::MButtonDown, &WindowMessageInterface::MiddleButtonDownMessage },
+																			 { System::WindowsMessages::MButtonUp, &WindowMessageInterface::MiddleButtonUpMessage },
+																			 { System::WindowsMessages::RButtonDown, &WindowMessageInterface::RightButtonDownMessage },
+																			 { System::WindowsMessages::RButtonUp, &WindowMessageInterface::RightButtonUpMessage },
+																			 { System::WindowsMessages::MouseMove, &WindowMessageInterface::MouseMoveMessage },
+																			 { System::WindowsMessages::MouseWheel, &WindowMessageInterface::MouseWheelMessage },
+																			 { System::WindowsMessages::Create, &WindowMessageInterface::CreateMessage },
+																			 { System::WindowsMessages::Close, &WindowMessageInterface::CloseMessage } ,
+																			 { System::WindowsMessages::Destroy, &WindowMessageInterface::DestroyMessage } };
 
 			functionPointer = make_shared<MessageFunctionPointerContainer>(messageFunctionPointerContainer);
 		}
@@ -311,7 +311,7 @@ Framework::WindowProcessManagerImpl::LResult SYSTEM_CALL_BACK Framework::WindowP
 	{
 		auto messageFunctionPointer = GetMessageFunctionPointer();	
 
-		const auto flag = System::UnderlyingCastEnum<System::WindowMessages>(message);
+		const auto flag = System::UnderlyingCastEnum<System::WindowsMessages>(message);
 
 		const auto iter = messageFunctionPointer->find(flag);
 
@@ -336,5 +336,9 @@ void Framework::WindowProcessManagerImpl
 	{
 		sm_WindowMessage->Display(hwnd, timeDelta);
 	}
+}
+
+Framework::WindowProcessManagerImpl::WindowProcessManagerImpl(MAYBE_UNUSED int count) noexcept
+{
 }
 

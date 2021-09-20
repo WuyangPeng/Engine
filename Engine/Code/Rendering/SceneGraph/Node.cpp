@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-
+#include "Rendering/DataTypes/BoundDetail.h"
 using std::make_shared;
 using std::string;
 using std::vector;
@@ -32,9 +32,9 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, Node);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, Node);
 
 Rendering::Node ::Node()
-    : ParentType{}, m_Impl{}
+    : ParentType{}, impl{}
 {
-    m_Impl = make_shared<ImplType>(this);
+    impl = make_shared<ImplType>(this);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -45,9 +45,9 @@ Rendering::Node ::~Node()
 }
 
 Rendering::Node ::Node(const Node& rhs)
-    : ParentType(rhs), m_Impl{}
+    : ParentType(rhs), impl{}
 {
-    m_Impl = make_shared<ImplType>(this);
+    impl = make_shared<ImplType>(this);
 
    const int count = rhs.GetNumChildren();
 
@@ -68,7 +68,7 @@ Rendering::Node ::Node(const Node& rhs)
 
 Rendering::Node& Rendering::Node ::operator=(const Node& rhs)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::operator=(rhs);
 
@@ -88,7 +88,7 @@ Rendering::Node& Rendering::Node ::operator=(const Node& rhs)
 }
 
 Rendering::Node ::Node(Node&& rhs) noexcept
-    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }
+    : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }
 {
     
 
@@ -97,16 +97,16 @@ Rendering::Node ::Node(Node&& rhs) noexcept
 
 Rendering::Node& Rendering::Node ::operator=(Node&& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::operator=(std::move(rhs));
 
-     m_Impl = std::move(rhs.m_Impl);
+     impl = std::move(rhs.impl);
 
     return *this;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, Node)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Node)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, Node, GetNumChildren, int)
 
@@ -119,7 +119,7 @@ bool Rendering::Node ::UpdateWorldData(double applicationTime)
 {
     auto result = ParentType::UpdateWorldData(applicationTime);
 
-    if (m_Impl->UpdateWorldData(applicationTime))
+    if (impl->UpdateWorldData(applicationTime))
     {
         result = true;
     }
@@ -131,26 +131,26 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Node, GetConstChild, int, Rende
 
 void Rendering::Node ::UpdateWorldBound()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (!GetWorldBoundIsCurrent())
     {
-       const auto bound = m_Impl->GetWorldBound();
+       const auto bound = impl->GetWorldBound();
         BoundGrowToContain(bound);
     }
 }
 
 void Rendering::Node ::GetVisibleSet(Culler& culler, bool noCull)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->GetVisibleSet(culler, noCull);
+    return impl->GetVisibleSet(culler, noCull);
 }
 
 Rendering::Node ::Node(LoadConstructor value)
-    : ParentType{ value }, m_Impl{}
+    : ParentType{ value }, impl{}
 {
-    m_Impl = std::make_shared<ImplType>(this);
+    impl = std::make_shared<ImplType>(this);
 
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -161,7 +161,7 @@ int Rendering::Node ::GetStreamingSize() const
 
     auto size = ParentType::GetStreamingSize();
 
-    size += m_Impl->GetStreamingSize();
+    size += impl->GetStreamingSize();
 
     return size;
 }
@@ -173,7 +173,7 @@ uint64_t Rendering::Node ::Register(const CoreTools::ObjectRegisterSharedPtr& ta
 const    auto uniqueID = ParentType::Register(target);
     if (uniqueID != 0)
     {
-        m_Impl->Register(target);
+        impl->Register(target);
     }
 
     return uniqueID;
@@ -187,36 +187,36 @@ void Rendering::Node ::Save(const CoreTools::BufferTargetSharedPtr& target) cons
 
     ParentType::Save(target);
 
-    m_Impl->Save(target);
+    impl->Save(target);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::Node ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::Link(source);
 
-    m_Impl->Link(source);
+    impl->Link(source);
 }
 
 void Rendering::Node ::PostLink()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::PostLink();
 }
 
 void Rendering::Node ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    m_Impl->Load(source);
+    impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -253,7 +253,7 @@ const Rendering::PickRecordContainer Rendering::Node ::ExecuteRecursive(const AP
 
 bool Rendering::Node ::UpdateImplWorldData(double applicationTime)
 {
-    return m_Impl->UpdateWorldData(applicationTime);
+    return impl->UpdateWorldData(applicationTime);
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Node::CloneObject() const

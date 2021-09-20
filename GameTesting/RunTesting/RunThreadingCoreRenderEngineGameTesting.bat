@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %GameTestingWin32DebugLib% ThreadingCoreRenderEngineGameTestingD.exe
+start /d %GameTestingWin32ReleaseLib% ThreadingCoreRenderEngineGameTesting.exe
+start /d %GameTestingX64DebugLib% ThreadingCoreRenderEngineGameTestingD.exe
+start /d %GameTestingX64ReleaseLib% ThreadingCoreRenderEngineGameTesting.exe
+start /d %GameTestingStaticWin32DebugLib% ThreadingCoreRenderEngineGameTestingStaticD.exe
+start /d %GameTestingStaticWin32ReleaseLib% ThreadingCoreRenderEngineGameTestingStatic.exe
+start /d %GameTestingStaticX64DebugLib% ThreadingCoreRenderEngineGameTestingStaticD.exe
+start /d %GameTestingStaticX64ReleaseLib% ThreadingCoreRenderEngineGameTestingStatic.exe
+
+start /d %GameTestingEngineStaticGameDynamicWin32DebugLib% ThreadingCoreRenderEngineGameTestingD.exe
+start /d %GameTestingEngineStaticGameDynamicWin32ReleaseLib% ThreadingCoreRenderEngineGameTesting.exe
+start /d %GameTestingEngineStaticGameDynamicX64DebugLib% ThreadingCoreRenderEngineGameTestingD.exe
+start /d %GameTestingEngineStaticGameDynamicX64ReleaseLib% ThreadingCoreRenderEngineGameTesting.exe
+start /d %GameTestingEngineDynamicGameStaticWin32DebugLib% ThreadingCoreRenderEngineGameTestingStaticD.exe
+start /d %GameTestingEngineDynamicGameStaticWin32ReleaseLib% ThreadingCoreRenderEngineGameTestingStatic.exe
+start /d %GameTestingEngineDynamicGameStaticX64DebugLib% ThreadingCoreRenderEngineGameTestingStaticD.exe
+start /d %GameTestingEngineDynamicGameStaticX64ReleaseLib% ThreadingCoreRenderEngineGameTestingStatic.exe
+
+pause

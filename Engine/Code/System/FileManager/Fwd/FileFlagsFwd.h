@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 12:56)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/17 20:10)
 
 #ifndef SYSTEM_FILE_FILE_FLAGS_FWD_H
 #define SYSTEM_FILE_FILE_FLAGS_FWD_H
@@ -37,10 +37,6 @@ namespace System
     enum class GetFinalPathName;
     enum class LockFile;
     enum class FileSystem;
-
-    // FindFile
-    enum class FileNotifyFilter;
-    enum class FindFirstFileAdditional;
 }
 
 #endif  // SYSTEM_FILE_FILE_FLAGS_FWD_H

@@ -14,8 +14,8 @@
 #include "Mathematics/Algebra/Matrix.h"
 #include "Mathematics/Algebra/AQuaternion.h"
 #include "Rendering/DataTypes/Transform.h"
-
-RENDERING_EXPORT_SHARED_PTR(KeyframeControllerImpl);
+EXPORT_SHARED_PTR(Rendering, KeyframeControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -24,7 +24,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE KeyframeController : public TransformController
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(KeyframeController, = default);
+            void Swap(KeyframeController& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(KeyframeController);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~KeyframeController() noexcept= default;
+        KeyframeController(const KeyframeController& rhs);
+        KeyframeController& operator=(const KeyframeController& rhs);
+        KeyframeController(KeyframeController&& rhs) noexcept;
+        KeyframeController& operator=(KeyframeController&& rhs) noexcept;
 		using ParentType = TransformController;
 		using Matrix = Mathematics::FloatMatrix;
 		using AQuaternion = Mathematics::FloatAQuaternion;
@@ -92,7 +101,7 @@ namespace Rendering
 		float GetScale(const ControllerKeyInfo& keyInfo) const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(KeyframeController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 	
 #include STSTEM_WARNING_PUSH

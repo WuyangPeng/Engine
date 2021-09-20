@@ -5,12 +5,11 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 14:45)
+//	引擎版本：0.7.1.1 (2020/10/26 14:45)
 
 #ifndef CORE_TOOLS_NETWORK_H
 #define CORE_TOOLS_NETWORK_H
 
-#include "DownloadingFiles.h"
-#include "DownloadingFilesEvent.h"
+
 
 #endif  // CORE_TOOLS_NETWORK_H

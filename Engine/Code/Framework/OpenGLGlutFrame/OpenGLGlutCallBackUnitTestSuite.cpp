@@ -9,12 +9,13 @@
 #include "OpenGLGlutCallBackUnitTestSuite.h"
 #include "Detail/OpenGLGlutCallBackUnitTestSuiteImpl.h"
 #include "System/Helper/EnumCast.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h" 
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowProcess/Detail/WindowMessageUnitTestSuiteStream.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
+#include "CoreTools/UnitTestSuite/Suite.h"
 using std::move;
 using std::string; 
 using std::make_shared;
@@ -23,7 +24,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 Framework::OpenGLGlutCallBackUnitTestSuite
 	::OpenGLGlutCallBackUnitTestSuite(int64_t delta, const string& suiteName)
-	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) }, m_Impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }, m_IsInit{ false }
+	:ParentType{ delta }, m_Stream{ make_shared<StreamType>(true) }, impl{ make_shared<ImplType>(suiteName, m_Stream->GetStreamShared()) }, m_IsInit{ false }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 } 
@@ -31,7 +32,7 @@ Framework::OpenGLGlutCallBackUnitTestSuite
 
 Framework::OpenGLGlutCallBackUnitTestSuite
 	::OpenGLGlutCallBackUnitTestSuite(OpenGLGlutCallBackUnitTestSuite&& rhs) noexcept
-	:ParentType{ move(rhs) }, m_Stream{ move(rhs.m_Stream) }, m_Impl{ move(rhs.m_Impl) }, m_IsInit{ rhs.m_IsInit }
+	:ParentType{ move(rhs) }, m_Stream{ move(rhs.m_Stream) }, impl{ move(rhs.impl) }, m_IsInit{ rhs.m_IsInit }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +45,7 @@ Framework::OpenGLGlutCallBackUnitTestSuite& Framework::OpenGLGlutCallBackUnitTes
 	ParentType::operator=(move(rhs));
 
 	m_Stream = move(rhs.m_Stream);
-	m_Impl = move(rhs.m_Impl);
+	impl = move(rhs.impl);
 	m_IsInit = rhs.m_IsInit;
 
 	return *this;
@@ -54,7 +55,7 @@ Framework::OpenGLGlutCallBackUnitTestSuite& Framework::OpenGLGlutCallBackUnitTes
 bool Framework::OpenGLGlutCallBackUnitTestSuite
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_Stream != nullptr && m_Impl != nullptr)
+	if (ParentType::IsValid() && m_Stream != nullptr && impl != nullptr)
 		return true;
 	else
 		return false;
@@ -81,7 +82,7 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite
 {
 	FRAMEWORK_CLASS_IS_VALID_1;	  
 
-	m_Impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(key));
+	impl->KeyDownMessage(System::UnderlyingCastEnum<System::WindowsKeyCodes>(key));
 
 	return ParentType::SpecialKeysDown(key, xCoordinate, yCoordinate);
 }
@@ -100,7 +101,7 @@ void Framework::OpenGLGlutCallBackUnitTestSuite
 {
 	FRAMEWORK_CLASS_IS_VALID_1; 
 
-	return m_Impl->AddSuite(suite);
+	return impl->AddSuite(suite);
 }
 
 // protected
@@ -117,7 +118,7 @@ int Framework::OpenGLGlutCallBackUnitTestSuite
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1; 
 
-	return m_Impl->GetPassedNumber();
+	return impl->GetPassedNumber();
 }
 
 // protected
@@ -126,14 +127,14 @@ bool  Framework::OpenGLGlutCallBackUnitTestSuite
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->IsPrintRun();
+	return impl->IsPrintRun();
 }
 
 // protected
 void Framework::OpenGLGlutCallBackUnitTestSuite
 	::AddTest(const string& suiteName, Suite& suite, const string& testName, const UnitTestSharedPtr& unitTest)
 {
-	m_Impl->AddTest(suiteName, suite, testName, unitTest);
+	impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
 // private
@@ -144,8 +145,13 @@ bool Framework::OpenGLGlutCallBackUnitTestSuite
 
 	AddSuite();
 
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
+	impl->RunUnitTest();
+	impl->PrintReport();
 
 	return result;
+}
+
+Framework::OpenGLGlutCallBackUnitTestSuite::Suite Framework::OpenGLGlutCallBackUnitTestSuite::GenerateSuite(const std::string& name)
+{
+    return Suite{ name, GetStreamShared(), IsPrintRun() };
 }

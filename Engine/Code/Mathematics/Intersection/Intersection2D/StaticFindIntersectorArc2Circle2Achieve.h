@@ -21,7 +21,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorArc2Circle2<Real>::StaticFindIntersectorArc2Circle2(const Arc2& arc, const Circle2& circle, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(arc, circle) }
+    : ParentType{ epsilon }, impl{ arc, circle }
 {
     Find();
 
@@ -57,18 +57,18 @@ void Mathematics::StaticFindIntersectorArc2Circle2<Real>::Find()
     {
         if (arc.Contains(intersector.GetPoint(i)))
         {
-            m_Impl->AddIntersection(intersector.GetPoint(i));
+            impl->AddIntersection(intersector.GetPoint(i));
         }
     }
 
-    this->SetIntersectionType(0 < m_Impl->GetQuantity() ? IntersectionType::Point : IntersectionType::Empty);
+    this->SetIntersectionType(0 < impl->GetQuantity() ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::StaticFindIntersectorArc2Circle2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
@@ -80,7 +80,7 @@ const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Circle2<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetArc();
+    return impl->GetArc();
 }
 
 template <typename Real>
@@ -88,7 +88,7 @@ const Mathematics::Circle2<Real> Mathematics::StaticFindIntersectorArc2Circle2<R
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCircle();
+    return impl->GetCircle();
 }
 
 template <typename Real>
@@ -96,7 +96,7 @@ int Mathematics::StaticFindIntersectorArc2Circle2<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -104,7 +104,7 @@ const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorArc2Circle2<
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -114,7 +114,7 @@ const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorArc2Circle2<Real
 
     if (this->GetIntersectionType() == IntersectionType::Other)
     {
-        return m_Impl->GetIntersectionArc();
+        return impl->GetIntersectionArc();
     }
     else
     {

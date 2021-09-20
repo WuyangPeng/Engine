@@ -8,8 +8,8 @@
 #define FRAMEWORK_APPLICATION_FONT_INFORMATION_IMPL_H
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Flags/WindowsFlags.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "Framework/Application/Flags/ApplicationTrait.h"
 
 #include <memory>
@@ -23,7 +23,8 @@ namespace Framework
 		using FontInformationImplSharedPtr = std::shared_ptr<ClassType>;
 		using TChar = System::TChar;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
+		using FactoryType = FontInformationImpl;
 
 	public:
 		FontInformationImpl() noexcept = default;
@@ -40,8 +41,8 @@ namespace Framework
 		virtual int GetCharacterWidth(const TChar character) const = 0;
 		virtual int GetFontHeight() const = 0;
 
-		static FontInformationImplSharedPtr CreateWindowFontInformation(HWnd hwnd);
-		static FontInformationImplSharedPtr CreateFontInformation(PlatformTypes type);
+		static FontInformationImplSharedPtr Create(HWnd hwnd);
+		static FontInformationImplSharedPtr Create(PlatformTypes type);
 	};
 }
 

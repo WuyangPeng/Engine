@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:13)
+//	引擎版本：0.7.1.1 (2020/10/26 13:13)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_GET_EXTERNAL_H
@@ -27,11 +27,11 @@ namespace CoreTools
         using ClassType = PropertyGetExternal<T, ConstReferenceType, PF>;
 
     public:
-        explicit PropertyGetExternal(const T& object);
+        explicit PropertyGetExternal(const T& object) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator ConstReferenceType() const;
+        [[nodiscard]] operator ConstReferenceType() const noexcept;
 
         PropertyGetExternal& operator=(const PropertyGetExternal& rhs) = delete;
 

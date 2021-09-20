@@ -1,0 +1,55 @@
+{
+  "systemOutputSuite": {
+  },
+
+  "messageBoxSelectionSuite": {
+    "MessageBoxSelectionUseFlagsDataWindowsTesting": 0,
+    "MessageBoxSelectionUseLanguageIDDataWindowsTesting": 0
+  },
+
+  "dynamicLinkSuite": {
+
+  },
+
+  "loadResourceToolsSuite": {
+    "FindResourceWindowsTesting": 1,
+    "LoadResourceWindowsTesting": 1,
+    "LoadStringWindowsTesting": 1
+  },
+
+  "enumResourceToolsSuite": {
+    "EnumResourceToolsWindowsTesting": 1,
+    "ResourceEnumWindowsTesting": 1
+  },
+
+  "openGLSuite": {
+    "OpenGLWglPrototypesTesting": 1
+  },
+
+  "windowsSuite": {
+    "WindowsCreateTesting": 1, 
+    "WindowsFontInformationTesting": 1,
+    "WindowsUserTesting": 1
+  },
+
+  "windowsProcessSuite": {
+    "GetMessageTesting": 1,
+    "PeekMessageTesting": 1,
+    "PostQuitMessageTesting": 1,
+    "ValidateRectTesting": 1,
+    "DefWindowProcTesting": 1,
+    "MessageBoxTesting": 0,
+    "DestroyWindowTesting": 1,
+    "SendMessageTesting": 1,
+    "GetCommandLineTesting": 1,
+    "WindowPaintTesting": 1
+  },
+
+  "windowsRegisterSuite": {
+    "GetStockObjectTesting": 1,
+    "LoadCursorTesting": 1,
+    "LoadIconTesting": 1,
+    "RegisterClassTesting": 1,
+    "RegisterWindowMessageTesting": 1
+  }
+}

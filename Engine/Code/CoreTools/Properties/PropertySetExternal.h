@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:14)
+//	引擎版本：0.7.1.1 (2020/10/26 13:14)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_SET_EXTERNAL_H
@@ -27,11 +27,11 @@ namespace CoreTools
         using ClassType = PropertySetExternal<T, ReferenceType, PF>;
 
     public:
-        explicit PropertySetExternal(T& object);
+        explicit PropertySetExternal(T& object) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        PropertySetExternal& operator=(ReferenceType value);
+        PropertySetExternal& operator=(ReferenceType value) noexcept;
 
     private:
         T& m_Object;

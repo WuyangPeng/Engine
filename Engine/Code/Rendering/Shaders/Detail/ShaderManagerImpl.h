@@ -21,7 +21,7 @@ namespace Rendering
         using PixelShaderProfile = ShaderFlags::PixelShaderProfile;
 
     public:
-        ShaderManagerImpl() noexcept;
+        ShaderManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 17:21)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/10 20:43)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_TYPEDEF_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_TYPEDEF_H
@@ -42,17 +42,17 @@ namespace System
     public:
         AndroidInputEvent() noexcept;
 
-        [[nodiscard]] AndroidInputEventType GetAndroidInputEventType() const noexcept;
-        [[nodiscard]] AndroidInputSource GetAndroidInputSource() const noexcept;
-        [[nodiscard]] AndroidMeta GetAndroidMeta() const noexcept;
-        [[nodiscard]] AndroidKeyEventAction GetAndroidKeyEventAction() const noexcept;
-        [[nodiscard]] AndroidKeyEvent GetAndroidKeyEventFlag() const noexcept;
-        [[nodiscard]] AndroidKeyCodes GetAndroidKeyCodes() const noexcept;
-        [[nodiscard]] AndroidMotionEventAction GetAndroidMotionEventAction() const noexcept;
-        [[nodiscard]] AndroidMotionEvent GetAndroidMotionEventFlag() const noexcept;
-        [[nodiscard]] AndroidMotionEventButton GetAndroidMotionEventButton() const noexcept;
-        [[nodiscard]] AndroidMotionEventEdge GetAndroidMotionEventEdgeFlag() const noexcept;
-        [[nodiscard]] AndroidMotionEventTool GetAndroidMotionEventToolType() const noexcept;
+        NODISCARD AndroidInputEventType GetAndroidInputEventType() const noexcept;
+        NODISCARD AndroidInputSource GetAndroidInputSource() const noexcept;
+        NODISCARD AndroidMeta GetAndroidMeta() const noexcept;
+        NODISCARD AndroidKeyEventAction GetAndroidKeyEventAction() const noexcept;
+        NODISCARD AndroidKeyEvent GetAndroidKeyEventFlag() const noexcept;
+        NODISCARD AndroidKeyCodes GetAndroidKeyCodes() const noexcept;
+        NODISCARD AndroidMotionEventAction GetAndroidMotionEventAction() const noexcept;
+        NODISCARD AndroidMotionEvent GetAndroidMotionEventFlag() const noexcept;
+        NODISCARD AndroidMotionEventButton GetAndroidMotionEventButton() const noexcept;
+        NODISCARD AndroidMotionEventEdge GetAndroidMotionEventEdgeFlag() const noexcept;
+        NODISCARD AndroidMotionEventTool GetAndroidMotionEventToolType() const noexcept;
 
         void SetAndroidInputEventType(AndroidInputEventType androidInputEventType) noexcept;
         void SetAndroidInputSource(AndroidInputSource androidInputSource) noexcept;
@@ -88,14 +88,14 @@ namespace System
     public:
         AndroidInputQueue() noexcept;
 
-        [[nodiscard]] int GetSize() const noexcept;
-        [[nodiscard]] AndroidInputEvent* GetCurrentAndroidInputEvent() noexcept;
+        NODISCARD int GetSize() const noexcept;
+        NODISCARD AndroidInputEvent* GetCurrentAndroidInputEvent() noexcept;
 
     private:
-        static constexpr auto sm_Size = 5;
+        static constexpr auto size = 5;
 
     private:
-        std::array<AndroidInputEvent, sm_Size> m_AndroidInputEvent;
+        std::array<AndroidInputEvent, size> androidInputEvent;
     };
 }
 

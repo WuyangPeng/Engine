@@ -25,7 +25,7 @@ namespace Framework
 		using ConstRendererSharedPtr = Rendering::ConstRendererSharedPtr;
 
 	public:
-		ViewMiddleLayerImpl() noexcept;
+                ViewMiddleLayerImpl(MAYBE_UNUSED int count) noexcept;
 		~ViewMiddleLayerImpl() noexcept = default;
 		ViewMiddleLayerImpl(const ViewMiddleLayerImpl& rhs) noexcept = delete;
 		ViewMiddleLayerImpl& operator=(const ViewMiddleLayerImpl& rhs) noexcept = delete;

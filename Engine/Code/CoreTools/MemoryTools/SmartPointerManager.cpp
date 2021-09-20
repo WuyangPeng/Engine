@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 10:28)
+//	引擎版本：0.7.1.1 (2020/10/20 10:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,38 +35,38 @@ void CoreTools::SmartPointerManager::Destroy() noexcept
 }
 
 CoreTools::SmartPointerManager::SmartPointerManager([[maybe_unused]] SmartPointerManagerCreate smartPointerManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, SmartPointerManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, SmartPointerManager)
 
 int CoreTools::SmartPointerManager::CopyIncreaseReference(const void* data)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->CopyIncreaseReference(data);
+    return impl->CopyIncreaseReference(data);
 }
 
 int CoreTools::SmartPointerManager::IncreaseReference(const void* data)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->IncreaseReference(data);
+    return impl->IncreaseReference(data);
 }
 
 int CoreTools::SmartPointerManager::DecreaseReference(const void* data)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->DecreaseReference(data);
+    return impl->DecreaseReference(data);
 }
 
 bool CoreTools::SmartPointerManager::IsSmartPointer(const void* data) const
@@ -75,5 +75,5 @@ bool CoreTools::SmartPointerManager::IsSmartPointer(const void* data) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsSmartPointer(data);
+    return impl->IsSmartPointer(data);
 }

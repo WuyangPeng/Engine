@@ -35,9 +35,9 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ControlledObject);
 
 Rendering::ControlledObject
     ::ControlledObject()
-	:ParentType{}, m_Impl{}, m_Object{ nullptr }
+	:ParentType{}, impl{}, m_Object{ nullptr }
 {
-    m_Impl = make_shared<ImplType>(this);
+    impl = make_shared<ImplType>(this);
     
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -45,9 +45,9 @@ Rendering::ControlledObject
  
 Rendering::ControlledObject
     ::ControlledObject(const ControlledObject& rhs)
-	:ParentType(rhs), m_Impl{}, m_Object{ rhs.m_Object }
+	:ParentType(rhs), impl{}, m_Object{ rhs.m_Object }
 {
-	m_Impl = make_shared<ImplType>(this);
+	impl = make_shared<ImplType>(this);
 	
 	AttachControllerInCopy(rhs);
     
@@ -57,11 +57,11 @@ Rendering::ControlledObject
 Rendering::ControlledObject& Rendering::ControlledObject
 	::operator=(const ControlledObject& rhs) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::operator=(rhs);   
 	
-	m_Impl = make_shared<ImplType>(this);
+	impl = make_shared<ImplType>(this);
 	
 	AttachControllerInCopy(rhs);
 
@@ -71,7 +71,7 @@ Rendering::ControlledObject& Rendering::ControlledObject
 } 
 
 Rendering::ControlledObject ::ControlledObject(ControlledObject&& rhs) noexcept
-    : ParentType(std::move(rhs)), m_Impl{ std::move(rhs.m_Impl) }, m_Object{ std::move(rhs.m_Object) }
+    : ParentType(std::move(rhs)), impl{ std::move(rhs.impl) }, m_Object{ std::move(rhs.m_Object) }
 {
    
 
@@ -84,7 +84,7 @@ Rendering::ControlledObject& Rendering::ControlledObject ::operator=(ControlledO
 
     ParentType::operator=(std::move(rhs));
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
   
 
@@ -103,11 +103,11 @@ void Rendering::ControlledObject
 	{
 		ControllerInterfaceSharedPtr controller{ rhs.GetConstController(index)->Clone() };
 		
-		m_Impl->AttachControllerInCopy(controller);
+		impl->AttachControllerInCopy(controller);
 	}
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,ControlledObject)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,ControlledObject)
 
 const Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() const noexcept
 {
@@ -118,7 +118,7 @@ const Rendering::ControllerInterface* Rendering::ControlledObject ::GetControlle
 
 Rendering::ControllerInterface* Rendering::ControlledObject ::GetControllerObject() noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     return m_Object;
 }
@@ -127,7 +127,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,  Update, d
 
 void Rendering::ControlledObject ::SetObject(ControllerInterface* object) noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     m_Object = object;
 }
@@ -144,9 +144,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ControlledObject,UpdateContr
  
 Rendering::ControlledObject
    ::ControlledObject (LoadConstructor value)
-	:ParentType{ value }, m_Impl{}
+	:ParentType{ value }, impl{}
 {
-	m_Impl = make_shared<ImplType>(this);
+	impl = make_shared<ImplType>(this);
     
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -158,7 +158,7 @@ int Rendering::ControlledObject
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
 
 	size += CORE_TOOLS_STREAM_SIZE(m_Object);  
     
@@ -172,7 +172,7 @@ uint64_t Rendering::ControlledObject ::Register(const CoreTools::ObjectRegisterS
 	const auto uniqueID = ParentType::Register(target);
 	if(uniqueID != 0)
 	{
-		//m_Impl->Register(target);
+		//impl->Register(target);
 
 		//target.Register(m_Object);   
 	}   
@@ -188,7 +188,7 @@ void Rendering::ControlledObject ::Save(const CoreTools::BufferTargetSharedPtr& 
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
 
    // target.WritePointer(m_Object); 
     
@@ -198,11 +198,11 @@ void Rendering::ControlledObject ::Save(const CoreTools::BufferTargetSharedPtr& 
 void Rendering::ControlledObject
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 
 
-    m_Impl->Link(source);
+    impl->Link(source);
 
 	/*ControllerInterfaceSharedPtr object { m_ObjectID, nullptr };
 	  
@@ -214,20 +214,20 @@ void Rendering::ControlledObject
 void Rendering::ControlledObject
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
 
 void Rendering::ControlledObject ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
 
 	ControllerInterfaceSharedPtr object;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2021
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 10:07)
+///	引擎版本：0.7.2.1 (2021/07/28 15:46)
 
 #ifndef CORE_TOOLS_HELPER_USER_MACRO_H
 #define CORE_TOOLS_HELPER_USER_MACRO_H
@@ -79,16 +79,25 @@ static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TO
     #define CORE_TOOLS_USE_SAFETY_LIMIT static_cast<void>(0)
 #endif  // !defined(COMPILE_CORE_TOOLS_CLOSE) || (COMPILE_CORE_TOOLS_CLOSE & CLOSE_USE_USE_SAFETY_LIMIT) != CLOSE_USE_USE_SAFETY_LIMIT
 
+// 是否编译为静态库
+#ifdef BUILDING_STATIC
+    #define BUILDING_CORE_TOOLS_STATIC static_cast<void>(0)
+#endif  // BUILDING_STATIC
+
 #ifdef OPEN_CLASS_INVARIANT
 
     // 无继承
-    #define CLASS_INVARIANT_DECLARE [[nodiscard]] bool IsValid() const noexcept
+    #define CLASS_INVARIANT_DECLARE NODISCARD bool IsValid() const noexcept
     // 基类
-    #define CLASS_INVARIANT_VIRTUAL_DECLARE [[nodiscard]] virtual bool IsValid() const noexcept
+    #define CLASS_INVARIANT_VIRTUAL_DECLARE NODISCARD virtual bool IsValid() const noexcept
     // 子类
-    #define CLASS_INVARIANT_OVERRIDE_DECLARE [[nodiscard]] bool IsValid() const noexcept override
+    #define CLASS_INVARIANT_OVERRIDE_DECLARE NODISCARD bool IsValid() const noexcept override
     // 最终子类
-    #define CLASS_INVARIANT_FINAL_DECLARE [[nodiscard]] bool IsValid() const noexcept final
+    #define CLASS_INVARIANT_FINAL_DECLARE NODISCARD bool IsValid() const noexcept final
+    // 虚基类
+    #define CLASS_INVARIANT_PURE_VIRTUAL_DECLARE NODISCARD virtual bool IsValid() const noexcept = 0
+
+constexpr auto g_OpenClassInvariant = true;
 
 #else  // !OPEN_CLASS_INVARIANT
 
@@ -96,13 +105,11 @@ static_assert(COMPILE_CORE_TOOLS_CLOSE <= CLOSE_CORE_TOOLS_MAX, "COMPILE_CORE_TO
     #define CLASS_INVARIANT_VIRTUAL_DECLARE
     #define CLASS_INVARIANT_OVERRIDE_DECLARE
     #define CLASS_INVARIANT_FINAL_DECLARE
+    #define CLASS_INVARIANT_PURE_VIRTUAL_DECLARE
+
+constexpr auto g_OpenClassInvariant = false;
 
 #endif  // OPEN_CLASS_INVARIANT
-
-// 是否编译为静态库
-#ifdef BUILDING_STATIC
-    #define BUILDING_CORE_TOOLS_STATIC static_cast<void>(0)
-#endif  // BUILDING_STATIC
 
 #define BOOST_LIB_DIAGNOSTIC static_cast<void>(0)
 

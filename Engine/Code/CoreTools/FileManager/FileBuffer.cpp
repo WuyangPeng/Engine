@@ -16,15 +16,42 @@
 
 using std::make_shared;
 
-COPY_CONSTRUCTION_DEFINE(CoreTools, FileBuffer);
+CoreTools::FileBuffer::FileBuffer(const FileBuffer& rhs)
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+CoreTools::FileBuffer& CoreTools::FileBuffer::operator=(const FileBuffer& rhs)
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    FileBuffer temp{ rhs };
+    Swap(temp);
+    return *this;
+}
+void CoreTools::FileBuffer::Swap(FileBuffer& rhs) noexcept
+{
+    
+    std::swap(impl, rhs.impl);
+}
+CoreTools::FileBuffer::FileBuffer(FileBuffer&& rhs) noexcept
+    : impl{ std::move(rhs.impl) }
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+}
+CoreTools::FileBuffer& CoreTools::FileBuffer::operator=(FileBuffer&& rhs) noexcept
+{
+    IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
+    impl = std::move(rhs.impl);
+    return *this;
+}
 
 CoreTools::FileBuffer::FileBuffer(size_t count)
-    : m_Impl{ make_shared<ImplType>(count) }
+    : impl{ make_shared<ImplType>(count) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, FileBuffer)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, FileBuffer)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, FileBuffer, GetBuffer, int, const char*)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, FileBuffer, GetBuffer, int, char*)

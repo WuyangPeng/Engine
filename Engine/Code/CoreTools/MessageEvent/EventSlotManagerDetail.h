@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:39)
+//	引擎版本：0.7.1.1 (2020/10/26 15:39)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_MANAGER_DETAIL_H
@@ -16,13 +16,15 @@
 
 #include <algorithm>
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 template <typename EventSlot>
 CoreTools::EventSlotManager<EventSlot>::EventSlotManager()
     : m_EventSlotRelationContainer{}, m_EventSlotOrderContainer{}, m_Index{ 0 }, m_IsChange{ false }, m_UnorderedDelayContainer{}, m_RelationDelayContainer{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 #ifdef OPEN_CLASS_INVARIANT
 template <typename EventSlot>
 bool CoreTools::EventSlotManager<EventSlot>::IsValid() const noexcept
@@ -70,7 +72,7 @@ void CoreTools::EventSlotManager<EventSlot>::CallEvent(const CallbackParameters&
     for_each(m_EventSlotOrderContainer.begin(), m_EventSlotOrderContainer.end(), [callbackParameters](auto& slot) {
         EXCEPTION_TRY
         {
-            slot(callbackParameters);
+            [[maybe_unused]] const auto result = slot(callbackParameters);
         }
         EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
     });
@@ -102,7 +104,7 @@ void CoreTools::EventSlotManager<EventSlot>::CallEventUnordered(const CallbackPa
 
     for (auto& slot : m_EventSlotRelationContainer)
     {
-        (slot.second)(callbackParameters);
+        [[maybe_unused]] const auto result = (slot.second)(callbackParameters);
     }
 }
 

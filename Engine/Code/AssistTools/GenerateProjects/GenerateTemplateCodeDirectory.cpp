@@ -15,18 +15,18 @@ using std::make_shared;
  
 AssistTools::GenerateTemplateCodeDirectory
 	::GenerateTemplateCodeDirectory(const System::String& directory, const string& configurationFileName)	 
-	:m_Impl{ make_shared<ImplType>(directory, configurationFileName) }
+	:impl{ directory, configurationFileName }
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
  
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateCodeDirectory)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateCodeDirectory)
 
 void AssistTools::GenerateTemplateCodeDirectory
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData, const System::String& projectCapital, const System::String& projectName, const System::String& newCoreName, const System::String& CoreNameCapital) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newSolutionName, copyrightData, projectCapital, projectName, newCoreName,CoreNameCapital);
+	return impl->GenerateTo(resourceDirectory, newSolutionName, copyrightData, projectCapital, projectName, newCoreName,CoreNameCapital);
 }
  

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 13:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/03/31 13:13)
 
 #ifndef SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
 #define SYSTEM_CHARACTER_STRING_STRING_CONVERSION_FLAGS_H
@@ -20,20 +20,12 @@ namespace System
     enum class MultiByte
     {
         NoFlags = 0,
-        PreComposed = MB_PRECOMPOSED,
-        Complsite = MB_COMPOSITE,
-        UseGlyphChars = MB_USEGLYPHCHARS,
         ErrInvalidChars = MB_ERR_INVALID_CHARS,
     };
 
     enum class WideChar
     {
         NoFlags = 0,
-        CompositeCheck = WC_COMPOSITECHECK,
-        DiscardNS = WC_DISCARDNS,
-        SepChars = WC_SEPCHARS,
-        DefaultChar = WC_DEFAULTCHAR,
-        ErrInvalidChars = WC_ERR_INVALID_CHARS,
         NoBestFitChars = WC_NO_BEST_FIT_CHARS,
     };
 
@@ -106,77 +98,6 @@ namespace System
         LessThan = CSTR_LESS_THAN,
         Equal = CSTR_EQUAL,
         GreaterThan = CSTR_GREATER_THAN,
-    };
-
-    enum class LocaleIndependentMapping
-    {
-        FoldCzone = MAP_FOLDCZONE,
-        PreComposed = MAP_PRECOMPOSED,
-        Composite = MAP_COMPOSITE,
-        FoldDigits = MAP_FOLDDIGITS,
-        ExpandLigatures = MAP_EXPAND_LIGATURES,
-    };
-
-    enum class CharacterType
-    {
-        CharacterType1 = CT_CTYPE1,
-        CharacterType2 = CT_CTYPE2,
-        CharacterType3 = CT_CTYPE3,
-    };
-
-    enum class CharacterTypeC1Bits
-    {
-        Upper = C1_UPPER,
-        Lower = C1_LOWER,
-        Digit = C1_DIGIT,
-        Space = C1_SPACE,
-        Punct = C1_PUNCT,
-        Cntrl = C1_CNTRL,
-        Blank = C1_BLANK,
-        Xdigit = C1_XDIGIT,
-        Alpha = C1_ALPHA,
-        Defined = C1_DEFINED,
-    };
-
-    enum class CharacterTypeC2Bits
-    {
-        LeftToRight = C2_LEFTTORIGHT,
-        RightToLeft = C2_RIGHTTOLEFT,
-
-        EuropeNumber = C2_EUROPENUMBER,
-        EuropeSeparator = C2_EUROPESEPARATOR,
-        EuropeTerminator = C2_EUROPETERMINATOR,
-        ArabicNumber = C2_ARABICNUMBER,
-        CommonSeparator = C2_COMMONSEPARATOR,
-
-        BlockSepatator = C2_BLOCKSEPARATOR,
-        SegmentSeparator = C2_SEGMENTSEPARATOR,
-        WhiteSpace = C2_WHITESPACE,
-        OtherNeutral = C2_OTHERNEUTRAL,
-
-        NotApplicable = C2_NOTAPPLICABLE,
-    };
-
-    enum class CharacterTypeC3Bits
-    {
-        NonSpacing = C3_NONSPACING,
-        Diactitic = C3_DIACRITIC,
-        VowelMark = C3_VOWELMARK,
-        Symbol = C3_SYMBOL,
-
-        Katakana = C3_KATAKANA,
-        Hiragana = C3_HIRAGANA,
-        HalfWidth = C3_HALFWIDTH,
-        FullWidth = C3_FULLWIDTH,
-        IdeoGraph = C3_IDEOGRAPH,
-        Kashida = C3_KASHIDA,
-        Lexical = C3_LEXICAL,
-        HighSurrogate = C3_HIGHSURROGATE,
-        LowSurrogate = C3_LOWSURROGATE,
-
-        Alpha = C3_ALPHA,
-
-        NotApplicable = C3_NOTAPPLICABLE,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -272,77 +193,6 @@ namespace System
         LessThan = 1,
         Equal = 2,
         GreaterThan = 3,
-    };
-
-    enum class LocaleIndependentMapping
-    {
-        FoldCzone = 0x00000010,
-        PreComposed = 0x00000020,
-        Composite = 0x00000040,
-        FoldDigits = 0x00000080,
-        ExpandLigatures = 0x00002000,
-    };
-
-    enum class CharacterType
-    {
-        CharacterType1 = 0x00000001,
-        CharacterType2 = 0x00000002,
-        CharacterType3 = 0x00000004,
-    };
-
-    enum class CharacterTypeC1Bits
-    {
-        Upper = 0x0001,
-        Lower = 0x0002,
-        Digit = 0x0004,
-        Space = 0x0008,
-        Punct = 0x0010,
-        Cntrl = 0x0020,
-        Blank = 0x0040,
-        Xdigit = 0x0080,
-        Alpha = 0x0100,
-        Defined = 0x0200,
-    };
-
-    enum class CharacterTypeC2Bits
-    {
-        LeftToRight = 0x0001,
-        RightToLeft = 0x0002,
-
-        EuropeNumber = 0x0003,
-        EuropeSeparator = 0x0004,
-        EuropeTerminator = 0x0005,
-        ArabicNumber = 0x0006,
-        CommonSeparator = 0x0007,
-
-        BlockSepatator = 0x0008,
-        SegmentSeparator = 0x0009,
-        WhiteSpace = 0x000A,
-        OtherNeutral = 0x000B,
-
-        NotApplicable = 0x0000,
-    };
-
-    enum class CharacterTypeC3Bits
-    {
-        NonSpacing = 0x0001,
-        Diactitic = 0x0002,
-        VowelMark = 0x0004,
-        Symbol = 0x0008,
-
-        Katakana = 0x0010,
-        Hiragana = 0x0020,
-        HalfWidth = 0x0040,
-        FullWidth = 0x0080,
-        IdeoGraph = 0x0100,
-        Kashida = 0x0200,
-        Lexical = 0x0400,
-        HighSurrogate = 0x0800,
-        LowSurrogate = 0x1000,
-
-        Alpha = 0x8000,
-
-        NotApplicable = 0x0000,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

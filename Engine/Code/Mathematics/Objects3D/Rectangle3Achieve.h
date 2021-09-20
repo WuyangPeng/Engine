@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::Rectangle3<Real>::Rectangle3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, Real extent0, Real extent1, const Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(center, axis0, axis1, extent0, extent1, epsilon) }
+    : impl{  center, axis0, axis1, extent0, extent1, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,10 +29,9 @@ Mathematics::Rectangle3<Real>::Rectangle3(const Vector3D& center, const Vector3D
 template <typename Real>
 bool Mathematics::Rectangle3<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+  
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -41,7 +40,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetCenter() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCenter();
+    return impl->GetCenter();
 }
 
 template <typename Real>
@@ -49,7 +48,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetAxis0() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis0();
+    return impl->GetAxis0();
 }
 
 template <typename Real>
@@ -57,7 +56,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetAxis1() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis1();
+    return impl->GetAxis1();
 }
 
 template <typename Real>
@@ -65,7 +64,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetAxis(int ind
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis(index);
+    return impl->GetAxis(index);
 }
 
 template <typename Real>
@@ -73,7 +72,7 @@ Real Mathematics::Rectangle3<Real>::GetExtent(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent(index);
+    return impl->GetExtent(index);
 }
 
 template <typename Real>
@@ -81,7 +80,7 @@ Real Mathematics::Rectangle3<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent0();
+    return impl->GetExtent0();
 }
 
 template <typename Real>
@@ -89,7 +88,7 @@ Real Mathematics::Rectangle3<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent1();
+    return impl->GetExtent1();
 }
 
 template <typename Real>
@@ -97,7 +96,7 @@ const typename Mathematics::Rectangle3<Real>::VerticesType Mathematics::Rectangl
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeVertices();
+    return impl->ComputeVertices();
 }
 
 template <typename Real>
@@ -105,7 +104,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetPPCorner() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPPCorner();
+    return impl->GetPPCorner();
 }
 
 template <typename Real>
@@ -113,7 +112,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetPMCorner() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPMCorner();
+    return impl->GetPMCorner();
 }
 
 template <typename Real>
@@ -121,7 +120,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetMPCorner() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMPCorner();
+    return impl->GetMPCorner();
 }
 
 template <typename Real>
@@ -129,7 +128,7 @@ const Mathematics::Vector3D<Real> Mathematics::Rectangle3<Real>::GetMMCorner() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMMCorner();
+    return impl->GetMMCorner();
 }
 
 template <typename Real>
@@ -137,7 +136,7 @@ const Mathematics::Rectangle3<Real> Mathematics::Rectangle3<Real>::GetMove(Real 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Rectangle3{ GetCenter() + t * velocity, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), m_Impl->GetEpsilon() };
+    return Rectangle3{ GetCenter() + t * velocity, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), impl->GetEpsilon() };
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_RECTANGLE3_ACHIEVE_H

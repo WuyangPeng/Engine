@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 11:26)
+//	引擎版本：0.7.1.1 (2020/10/23 11:26)
 
 // 单元测试套件类输出信息管理类，SuitePrintManage为内部接口类，可输出信息头、名称、测试结果和当前时间。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_PRINT_MANAGER_H

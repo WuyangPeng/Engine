@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:59)
+//	引擎版本：0.7.1.1 (2020/10/26 15:59)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
@@ -22,7 +22,7 @@ namespace CoreTools
         using ClassType = StateMachine<Derived, StateType>;
 
     public:
-        StateMachine();
+        StateMachine() noexcept;
         virtual ~StateMachine() noexcept = 0;
 
         StateMachine(const StateMachine& rhs) noexcept = default;
@@ -34,18 +34,18 @@ namespace CoreTools
 
     public:
         template <typename EventType>
-        [[nodiscard]] StateType CallNoTransition(StateType state, const EventType& eventType);
+        [[nodiscard]] StateType CallNoTransition(StateType state, const EventType& eventType) noexcept;
 
         template <typename EventType>
-        [[nodiscard]] StateType ProcessEvent(const EventType& eventType);
+        [[nodiscard]] StateType ProcessEvent(const EventType& eventType) noexcept;
 
         template <typename EventType>
-        [[nodiscard]] StateType NoTransition(StateType state, const EventType& eventType);
+        [[nodiscard]] StateType NoTransition(StateType state, const EventType& eventType) noexcept;
 
-        [[nodiscard]] StateType GetStateType() const;
+        [[nodiscard]] StateType GetStateType() const noexcept;
 
     protected:
-        void SetStateType(StateType stateType);
+        void SetStateType(StateType stateType) noexcept;
 
     private:
         StateType m_State;

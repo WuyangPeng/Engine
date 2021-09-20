@@ -11,5 +11,11 @@
 
 #include "WriteFileManagerInterface.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "FileManagerFactory.h"
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, WriteFileManagerInterface)
+
+CoreTools::WriteFileManagerInterface::WriteFileManageInterfacePtr CoreTools::WriteFileManagerInterface::Create (const String& fileName)
+{
+    return FileManagerFactory::CreateWriteFileManage(fileName);
+}

@@ -138,7 +138,7 @@ namespace Mathematics
 
         [[nodiscard]] const Vector3D GetMove(Real t, const Vector3D& velocity) const;
 
-    private:
+    public:
         using ToolsType = Vector3DTools<Real>;
 
     private:

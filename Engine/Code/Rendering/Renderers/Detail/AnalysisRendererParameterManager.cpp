@@ -14,7 +14,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 
 #include "System/Helper/PragmaWarning/PropertyTree.h"
-#include "System/Window/Flags/WindowPictorialFlags.h"
+#include "System/Windows/Flags/WindowsPictorialFlags.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26493)
@@ -158,7 +158,7 @@ void Rendering::AnalysisRendererParameterManager
 	bool isIconDefault = m_WindowParameterTree.get("IconDefault",true);
 	int cursor = m_WindowParameterTree.get("Cursor", 0);
 	bool isCursorDefault = m_WindowParameterTree.get("CursorDefault", true);
-	System::WindowBrushTypes background = System::UnderlyingCastEnum<System::WindowBrushTypes>(m_WindowParameterTree.get("Background", 0));
+	System::WindowsBrushTypes background = System::UnderlyingCastEnum<System::WindowsBrushTypes>(m_WindowParameterTree.get("Background", 0));
 
 	m_RendererParameterPtr->SetWindowPictorialParameter(icon, isIconDefault, cursor, isCursorDefault, background);
 }

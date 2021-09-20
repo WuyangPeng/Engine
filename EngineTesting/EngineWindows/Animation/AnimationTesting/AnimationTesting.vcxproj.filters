@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{21baef5f-0a3a-4dfe-a1ec-2242346f2c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimationManagerSuite 头文件">
+      <UniqueIdentifier>{cda7647c-d325-44c9-bb82-e1899fec1082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleGraphSuite 头文件">
+      <UniqueIdentifier>{2648a0b4-6fe3-49a1-bdf8-efac3cebcbed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ElfAnimationSuite 头文件">
+      <UniqueIdentifier>{d8ae345a-3684-406a-bdb6-a4c257ff08da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GradientAnimationSuite 头文件">
+      <UniqueIdentifier>{fa1fb850-6e16-4978-accc-c72b600e5750}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{2ad273ef-f38e-4dec-a077-955fe1a6c997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MorphTargetAnimationSuite 头文件">
+      <UniqueIdentifier>{b344626a-80a6-45a1-b8b2-969b4636bc75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureAnimationSuite 头文件">
+      <UniqueIdentifier>{29bb02af-a38e-43d3-aabb-0851cc55875f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SkeletonAnimationSuite 头文件">
+      <UniqueIdentifier>{d725460c-5bb6-4822-bcd5-577771dd855a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBodyHierarchyAnimationSuite 头文件">
+      <UniqueIdentifier>{43e1d2ca-3de7-4c08-9c3d-b610823f6bf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerVertexAnimationSuite 头文件">
+      <UniqueIdentifier>{91c2f7b2-5b45-483e-b3de-d123df3cc107}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\AnimationTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\AnimationManagerSuite\AnimationManagerSuite.h">
+      <Filter>AnimationManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ConsoleGraphSuite\ConsoleGraphSuite.h">
+      <Filter>ConsoleGraphSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\ElfAnimationSuite\ElfAnimationSuite.h">
+      <Filter>ElfAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\GradientAnimationSuite\GradientAnimationSuite.h">
+      <Filter>GradientAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\MorphTargetAnimationSuite\MorphTargetAnimationSuite.h">
+      <Filter>MorphTargetAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\PerVertexAnimationSuite\PerVertexAnimationSuite.h">
+      <Filter>PerVertexAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\RigidBodyHierarchyAnimationSuite\RigidBodyHierarchyAnimationSuite.h">
+      <Filter>RigidBodyHierarchyAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\SkeletonAnimationSuite\SkeletonAnimationSuite.h">
+      <Filter>SkeletonAnimationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Animation\AnimationTesting\TextureAnimationSuite\TextureAnimationSuite.h">
+      <Filter>TextureAnimationSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Animation\AnimationTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -15,24 +15,29 @@
 #include "System/FileManager/Using/CFileUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(OFStreamManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(OFStreamManagerImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE OFStreamManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE OFStreamManager final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(OFStreamManager);
+        NON_COPY_TYPE_DECLARE(OFStreamManager);
         using String = System::String;
         using PosType = System::PosType;
 
     public:
         OFStreamManager(const String& fileName, bool addition);
+        ~OFStreamManager() noexcept = default;
+        OFStreamManager(const OFStreamManager& rhs) noexcept = delete;
+        OFStreamManager& operator=(const OFStreamManager& rhs) noexcept = delete;
+        OFStreamManager(OFStreamManager&& rhs) noexcept = delete;
+        OFStreamManager& operator=(OFStreamManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -42,7 +47,7 @@ namespace CoreTools
         void SetSimplifiedChinese();
 
     private:
-        IMPL_TYPE_DECLARE(OFStreamManager);
+        PackageType impl;
     };
 }
 

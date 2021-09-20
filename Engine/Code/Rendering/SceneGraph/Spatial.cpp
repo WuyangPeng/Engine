@@ -54,7 +54,7 @@ Rendering::Spatial
 Rendering::Spatial& Rendering::Spatial
    ::operator= (const Spatial& rhs)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     ParentType::operator=(rhs);
     
@@ -79,7 +79,7 @@ bool Rendering::Spatial
 void Rendering::Spatial
 	::SetParent(Spatial* parent) noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	m_Parent = parent;
 }
@@ -87,7 +87,7 @@ void Rendering::Spatial
 bool Rendering::Spatial
    ::Update (double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return Update(applicationTime,true);
 }
@@ -95,7 +95,7 @@ bool Rendering::Spatial
 bool Rendering::Spatial
     ::Update (double applicationTime, bool initiator)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 const auto result = UpdateWorldData(applicationTime);
     UpdateWorldBound();
@@ -110,7 +110,7 @@ const auto result = UpdateWorldData(applicationTime);
 bool Rendering::Spatial
     ::UpdateWorldData (double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     // 更新世界变换。
     if (!m_SpatialDataPtr->GetWorldTransformIsCurrent())
@@ -132,7 +132,7 @@ bool Rendering::Spatial
 void Rendering::Spatial
     ::PropagateBoundToRoot ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     if (m_Parent)
     {
@@ -143,7 +143,7 @@ void Rendering::Spatial
 
 Rendering::Spatial* Rendering::Spatial ::GetParent() noexcept
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return const_cast<Spatial*>(static_cast<const ClassType*>(this)->GetParent());
 }
@@ -159,7 +159,7 @@ const Rendering::Spatial* Rendering::Spatial
 void Rendering::Spatial
     ::OnGetVisibleSet (Culler& culler, bool noCull)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
  const auto cullingMode = m_SpatialDataPtr->GetCullingMode();
     
@@ -184,7 +184,7 @@ const auto savePlaneState = culler.GetPlaneState();
 void Rendering::Spatial
     ::SetLocalTransform(const FloatTransform& transform)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->SetLocalTransform(transform);
 }
@@ -192,14 +192,14 @@ void Rendering::Spatial
 void Rendering::Spatial
     ::SetWorldTransform(const FloatTransform& transform)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->DirectSetWorldTransform(transform);
 }
 
 void Rendering::Spatial ::SetWorldBound(const FloatBound& bound)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->DirectSetWorldBound(bound);
 }
@@ -207,7 +207,7 @@ void Rendering::Spatial ::SetWorldBound(const FloatBound& bound)
 void Rendering::Spatial
     ::SetCullingMode(CullingMode culling)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->SetCullingMode(culling);
 }
@@ -215,14 +215,14 @@ void Rendering::Spatial
 void Rendering::Spatial
     ::InitWorldBound()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->InitWorldBound();
 }
 
 void Rendering::Spatial ::BoundGrowToContain(const FloatBound& worldBound)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     return m_SpatialDataPtr->SetWorldBound(worldBound);
 }
@@ -321,7 +321,7 @@ void Rendering::Spatial
 void Rendering::Spatial
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);
     
@@ -332,7 +332,7 @@ void Rendering::Spatial
 void Rendering::Spatial
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
     
@@ -342,7 +342,7 @@ void Rendering::Spatial
 void Rendering::Spatial
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
@@ -368,7 +368,7 @@ const Rendering::PickRecordContainer Rendering::Spatial ::ExecuteRecursive([[may
 void Rendering::Spatial
 	::SetLocalTransformTranslate(const APoint& translate)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	return m_SpatialDataPtr->SetLocalTransformTranslate(translate);
 }
@@ -376,7 +376,7 @@ void Rendering::Spatial
 void Rendering::Spatial
 	::SetLocalTransformRotate(const Matrix& rotate) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	return m_SpatialDataPtr->SetLocalTransformRotate(rotate);
 }
@@ -384,7 +384,7 @@ void Rendering::Spatial
 void Rendering::Spatial
 	::SetWorldTransformOnUpdate( const FloatTransform& transform )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	m_SpatialDataPtr->SetWorldTransformOnUpdate(transform);
 }

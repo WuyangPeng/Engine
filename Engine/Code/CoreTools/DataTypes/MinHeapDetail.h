@@ -107,7 +107,7 @@ bool CoreTools::MinHeap<Generator, Scalar>::IsStoredValueLessEqual(int lhsHeapIn
 }
 
 template <typename Generator, typename Scalar>
-int CoreTools::MinHeap<Generator, Scalar>::GetMaxElements() const noexcept
+int CoreTools::MinHeap<Generator, Scalar>::GetMaxElements() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
@@ -143,7 +143,7 @@ const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
+    [[maybe_unused]] const auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
 
     CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < m_ElementsNumber, "ÎÞÐ§Ë÷Òý\n");
 

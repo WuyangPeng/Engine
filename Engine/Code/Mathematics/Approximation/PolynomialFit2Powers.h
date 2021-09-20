@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <memory>
 #include <vector>
 
@@ -28,19 +28,21 @@ namespace Mathematics
     template <typename Real>
     class PolynomialFit2PowersImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit2PowersImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit2PowersImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit2PowersImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit2Powers final
     {
     public:
         using PolynomialFit2PowersImpl = PolynomialFit2PowersImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialFit2Powers);
-
+ 
+        TYPE_DECLARE(PolynomialFit2Powers);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Samples = std::vector<Real>;
         using Powers = std::vector<int>;
 
@@ -64,7 +66,7 @@ namespace Mathematics
         [[nodiscard]] Real operator()(Real x) const;
 
     private:
-        IMPL_TYPE_DECLARE(PolynomialFit2Powers);
+        PackageType impl;
     };
 
     using FloatPolynomialFit2Powers = PolynomialFit2Powers<float>;

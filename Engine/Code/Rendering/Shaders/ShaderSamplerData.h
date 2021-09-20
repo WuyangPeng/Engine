@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 #include "CoreTools/ObjectSystems/BufferTarget.h"
-
-RENDERING_EXPORT_SHARED_PTR(ShaderSamplerDataImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(ShaderSamplerData,ShaderSamplerDataImpl);
 
 namespace CoreTools
 {
@@ -30,7 +30,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE ShaderSamplerData 
 	{	
 	public:
-		DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderSamplerData);
+            DELAY_COPY_UNSHARED_TYPE_DECLARE(ShaderSamplerData);
 		using Colour = Colour<float>;
 		using BufferSource = CoreTools::BufferSource;
 		using BufferTarget = CoreTools::BufferTarget;
@@ -64,7 +64,7 @@ namespace Rendering
 		int GetStreamingSize () const;
 		
 	private:
-		IMPL_TYPE_DECLARE(ShaderConstantsData);
+                PackageType impl;
 	};
 }
 

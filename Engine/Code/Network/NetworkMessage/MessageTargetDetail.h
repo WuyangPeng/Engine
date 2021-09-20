@@ -25,7 +25,7 @@ void Network::MessageTarget::Write(T datum)
 {
 
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto typeSize = CoreTools::GetStreamSize<T>(); 
 
@@ -37,7 +37,7 @@ void Network::MessageTarget::WriteWithNumber(int32_t elementsNumber, const T* da
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(elementsNumber);
     WriteWithoutNumber(elementsNumber, data);
@@ -48,7 +48,7 @@ void Network::MessageTarget::WriteWithoutNumber(int32_t elementsNumber, const T*
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (0 < elementsNumber)
     {
@@ -63,7 +63,7 @@ void Network::MessageTarget::Write(const std::vector<T>& datum)
 {
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto elementsNumber = boost::numeric_cast<int32_t>(datum.size());
 
@@ -79,7 +79,7 @@ void Network::MessageTarget::WriteEnum(const T datum)
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto value = System::EnumCastUnderlying(datum);
     Write(value);
@@ -90,7 +90,7 @@ void Network::MessageTarget::WriteEnumWithNumber(int32_t elementsNumber, const T
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(elementsNumber);
     WriteEnumWithoutNumber(elementsNumber, data);
@@ -101,7 +101,7 @@ void Network::MessageTarget::WriteEnumWithoutNumber(int32_t elementsNumber, cons
 {
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     for (auto i = 0; i < elementsNumber; ++i)
     {

@@ -10,7 +10,7 @@
 #include "OpenGLGlutCallBack.h"
 #include "System/OpenGL/OpenGLAPI.h"
 #include "System/OpenGL/OpenGLGlut.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/WindowCreate/WindowSize.h"
 #include "Framework/WindowCreate/WindowPoint.h"
@@ -45,7 +45,7 @@ bool Framework::OpenGLGlutCallBack<MiddleLayer>
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	System::ClearAllGlBufferBit();
+	System::ClearAllGLBufferBit();
 
 	if (!m_MiddleLayer->Paint())
 	{
@@ -66,7 +66,7 @@ bool Framework::OpenGLGlutCallBack<MiddleLayer>
 	FRAMEWORK_CLASS_IS_VALID_1;
 
 	if (!(ParentType::ChangeSize(width, height) &&
-		  m_MiddleLayer->Resize(System::WindowDisplay::GLUTUnDefinition,WindowSize(width, height)) &&
+		  m_MiddleLayer->Resize(System::WindowsDisplay::GLUTUnDefinition,WindowSize(width, height)) &&
 		  m_MiddleLayer->Paint()))
 	{
 		DestroyWindow();

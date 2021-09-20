@@ -61,7 +61,7 @@ void Rendering::OpenGLTextureData<Texture>
 
 		for (auto face = 0; face < sm_Face; ++face)
 		{
-		    m_Buffer[face][level] =  System::GlPixelUnpackBufferData(m_NumLevelBytes[level], usage);
+		 //   m_Buffer[face][level] =  System::GLPixelUnpackBufferData(m_NumLevelBytes[level], usage);
 		    m_LockedMemory[face][level] = nullptr;
 		    m_WriteLock[face][level] = false;
 		}
@@ -97,7 +97,7 @@ System::OpenGLUInt Rendering::OpenGLTextureData<Texture>
 	::CreateTextureStructure() noexcept
 {
 	// 创建纹理结构。
-	m_Texture = System::GlGenTextures();
+//	m_Texture = System::GLGenTextures();
 	const auto previousBind = BindTexture(sm_SamplerType, m_Texture);
 
 	return previousBind;
@@ -127,11 +127,11 @@ Rendering::OpenGLTextureData<Texture>
 	{
 		for (auto level = 0u; level < m_NumLevels; ++level)
 		{
-			m_Buffer[i][level] = System::GlDeleteBuffers(m_Buffer[i][level]);
+		//	m_Buffer[i][level] = System::GLDeleteBuffers(m_Buffer[i][level]);
 		}
 	}
    
-    m_Texture = System::GlDeleteTextures(m_Texture);
+    //m_Texture = System::GLDeleteTextures(m_Texture);
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -154,8 +154,8 @@ void Rendering::OpenGLTextureData<Texture>
 	::Enable( int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	System::SetGlActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
+    textureUnit;
+	//System::SetGLActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
     m_PreviousTexture = BindTexture(sm_SamplerType,m_Texture);
 }
 
@@ -165,9 +165,9 @@ void Rendering::OpenGLTextureData<Texture>
 	::Disable( int textureUnit ) noexcept
 {
 	RENDERING_CLASS_IS_VALID_1;
-
-	System::SetGlActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
-	System::SetGlBindTexture(sm_TextureTargetType, m_PreviousTexture);
+    textureUnit;
+	//System::SetGLActiveTexture(static_cast<GLenum>(System::TextureNumber::Type0) + textureUnit);
+	//System::SetGLBindTexture(sm_TextureTargetType, m_PreviousTexture);
 }
 
 
@@ -181,7 +181,7 @@ void* Rendering::OpenGLTextureData<Texture>
 	
 	if (m_LockedMemory[0][level] == nullptr)
     {
-		m_LockedMemory[0][level] = System::GlMapPixelUnpackBuffer(m_Buffer[0][level], g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
+	//	m_LockedMemory[0][level] = System::GLMapPixelUnpackBuffer(m_Buffer[0][level], g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
 
         m_WriteLock[0][level] = (mode != BufferLocking::ReadOnly);
     }
@@ -200,8 +200,8 @@ void Rendering::OpenGLTextureData<Texture>
 	
 	if (m_LockedMemory[0][level] != nullptr)
     {
-        System::GlBindPixelUnpackBuffer(m_Buffer[0][level]);
-        System::GlUnmapPixelUnpackBuffer();
+     //   System::GLBindPixelUnpackBuffer(m_Buffer[0][level]);
+       // System::GLUnmapPixelUnpackBuffer();
 
         if (m_WriteLock[0][level])
         {
@@ -209,11 +209,11 @@ void Rendering::OpenGLTextureData<Texture>
 
 			TextureImage(level);			
 			
-			System::SetGlBindTexture(sm_TextureTargetType, previousBind);
+		//	System::SetGLBindTexture(sm_TextureTargetType, previousBind);
             m_WriteLock[0][level] = false;
         }
 
-        System::GlBindPixelUnpackBuffer(0);
+       // System::GLBindPixelUnpackBuffer(0);
         m_LockedMemory[0][level] = nullptr;
     }
 }
@@ -240,7 +240,7 @@ void* Rendering::OpenGLTextureData<Texture>
 
 	if (m_LockedMemory[face][level] == nullptr)
     {
-		m_LockedMemory[face][level] = System::GlMapPixelUnpackBuffer(m_Buffer[face][level],g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
+		//m_LockedMemory[face][level] = System::GLMapPixelUnpackBuffer(m_Buffer[face][level],g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
 
 		m_WriteLock[face][level] = (mode != BufferLocking::ReadOnly);     
     }
@@ -258,8 +258,8 @@ void Rendering::OpenGLTextureData<Texture>
 
 	if (m_LockedMemory[face][level] != nullptr)
     {
-		System::GlBindPixelUnpackBuffer(m_Buffer[face][level]);
-		System::GlUnmapPixelUnpackBuffer();
+	//	System::GLBindPixelUnpackBuffer(m_Buffer[face][level]);
+		//System::GLUnmapPixelUnpackBuffer();
 
         if (m_WriteLock[face][level])
         {
@@ -267,13 +267,13 @@ void Rendering::OpenGLTextureData<Texture>
 
             if (m_IsCompressed)
             {
-				System::GlCompressedTexSubImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face,level, m_Dimension[0][level], 
-                                                  m_Dimension[1][level],m_InternalFormat, m_NumLevelBytes[level]);
+			//	System::GLCompressedTexSubImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face,level, m_Dimension[0][level], 
+             //                                     m_Dimension[1][level],m_InternalFormat, m_NumLevelBytes[level]);
             }
             else
             {		
-				System::GlTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face, level,m_InternalFormat,
-			                         m_Dimension[0][level], m_Dimension[1][level], m_Format,m_Type); 
+			//	System::GLTexImage2D(static_cast<GLenum>(System::TextureCubeMap::PositiveX) + face, level,m_InternalFormat,
+			//                         m_Dimension[0][level], m_Dimension[1][level], m_Format,m_Type); 
 
 				// TODO:  当创建只有0级纹理（不是一套完整的mipmaps贴图），
 				// 将下面的代码生成在AMD Radeon HD 7970
@@ -287,12 +287,12 @@ void Rendering::OpenGLTextureData<Texture>
 				// 						   m_Type);
             }
 
-			System::SetGlBindTexture(System::TextureTarget::TextureCubeMap, previousBind);
+			//System::SetGLBindTexture(System::TextureTarget::TextureCubeMap, previousBind);
            
             m_WriteLock[face][level] = false;
         }
 
-        System::GlBindPixelUnpackBuffer(0);
+     //   System::GLBindPixelUnpackBuffer(0);
         m_LockedMemory[face][level] = 0;
     }
 }

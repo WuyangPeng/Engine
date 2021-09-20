@@ -32,7 +32,7 @@ Rendering::OpenGLIndexBuffer ::OpenGLIndexBuffer([[maybe_unused]] Renderer* rend
 void Rendering::OpenGLIndexBuffer
     ::Init(const IndexBuffer* indexBuffer)
 {
-    m_Buffer = System::GlElementBufferData(indexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(indexBuffer->GetUsage())]);
+ //   m_Buffer = System::GLElementBufferData(indexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(indexBuffer->GetUsage())]);
     
 	BufferLockManager<ClassType> manager{ *this };
 	void* data = manager.Lock(BufferLocking::WriteOnly);
@@ -45,7 +45,7 @@ Rendering::OpenGLIndexBuffer
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     
-    m_Buffer = System::GlDeleteElementBuffers(m_Buffer);
+ //   m_Buffer = System::GLDeleteElementBuffers(m_Buffer);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -63,7 +63,7 @@ void Rendering::OpenGLIndexBuffer ::Enable([[maybe_unused]] Renderer* renderer) 
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    System::GlBindElementBuffer(m_Buffer);
+ //   System::GLBindElementBuffer(m_Buffer);
     
  
 }
@@ -72,7 +72,7 @@ void Rendering::OpenGLIndexBuffer ::Disable([[maybe_unused]] Renderer* renderer)
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    System::GlBindElementBuffer(0);
+    //System::GLBindElementBuffer(0);
     
   
 }
@@ -82,9 +82,11 @@ void* Rendering::OpenGLIndexBuffer
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    auto videoMemory = System::GlMapElementBuffer(m_Buffer,g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
+  //  auto videoMemory = System::GLMapElementBuffer(m_Buffer,g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
     
-    return videoMemory;
+   // return videoMemory;
+    mode;
+    return nullptr;
 }
 
 void Rendering::OpenGLIndexBuffer
@@ -92,7 +94,7 @@ void Rendering::OpenGLIndexBuffer
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    System::GlUnmapElementBuffer(m_Buffer);
+   // System::GLUnmapElementBuffer(m_Buffer);
 }
 
 

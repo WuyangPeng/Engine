@@ -175,16 +175,16 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -213,16 +213,16 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -251,16 +251,16 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(AssistTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(GameTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -289,16 +289,16 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*D.dll" "$(TheLas
       <SubSystem>Windows</SubSystem>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y
-xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingInclude)/../$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(AssistTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(GameTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "../../../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLastOverlordTestingEngineering)/$(Platform)/GameStatic$(Configuration)Windows/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -317,10 +317,6 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="Resource\ReadMe.md" />
-    <Text Include="Resource\Schedule.txt" />
-    <Text Include="Resource\Project.txt" />
-    <Text Include="Resource\Library.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />
@@ -344,6 +340,12 @@ xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "$(TheLast
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllLib.cpp" />
     <ClCompile Include="..\..\..\Code\ThreadingCoreRenderEngine\DllMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Library.md" />
+    <None Include="Resource\Project.md" />
+    <None Include="Resource\Schedule.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,23 +11,23 @@
 
 #include "WindowPoint.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "CoreTools/Helper/ExportMacro.h" 
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-FRAMEWORK_EXPORT_SHARED_PTR(WindowCreateParameterImpl);
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(WindowCreateParameterImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE WindowCreateParameter
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(WindowCreateParameter);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(WindowCreateParameter);
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
-		using HMenu = System::WindowHMenu;
-		using WindowStyles = System::WindowStyles;
+		using HWnd = System::WindowsHWnd;
+		using HMenu = System::WindowsHMenu;
+		using WindowStyles = System::WindowsStyles;
 
 	public:
 		WindowCreateParameter(const String& windowsName, WindowStyles style, HWnd parent, HMenu menu, const WindowPoint& leftTopCorner);
@@ -43,7 +43,7 @@ namespace Framework
 		HMenu GetMenu() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(WindowCreateParameter);
+                PackageType impl;
 	};
 }
 

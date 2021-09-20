@@ -25,7 +25,7 @@ namespace CoreTools
     public:
         using ClassType = FileHandleImpl;
         using String = System::String;
-        using FileHandle = System::WindowHandle;
+        using FileHandle = System::WindowsHandle;
         using FileHandleShareMode = System::FileHandleShareMode;
         using FileHandleDesiredAccess = System::FileHandleDesiredAccess;
         using FileHandleCreationDisposition = System::FileHandleCreationDisposition;

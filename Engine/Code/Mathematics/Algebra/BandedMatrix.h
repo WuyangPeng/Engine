@@ -46,7 +46,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using BandedMatrixImpl = BandedMatrixImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(BandedMatrix, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(BandedMatrix& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(BandedMatrix);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~BandedMatrix() noexcept = default;
+        BandedMatrix(const BandedMatrix& rhs);
+        BandedMatrix& operator=(const BandedMatrix& rhs);
+        BandedMatrix(BandedMatrix&& rhs) noexcept;
+        BandedMatrix& operator=(BandedMatrix&& rhs) noexcept;
 
         using Math = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
@@ -94,7 +105,7 @@ namespace Mathematics
         [[nodiscard]] const VariableMatrix ToVariableMatrix() const;
 
     private:
-        IMPL_TYPE_DECLARE(BandedMatrix);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatBandedMatrix = BandedMatrix<float>;

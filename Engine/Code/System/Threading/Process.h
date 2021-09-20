@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 15:25)
+//	引擎版本：0.7.1.0 (2020/09/23 15:25)
 
 #ifndef SYSTEM_THREADING_PROCESS_H
 #define SYSTEM_THREADING_PROCESS_H
@@ -20,19 +20,30 @@
 namespace System
 {
     // 进程的创建和销毁
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const String& applicationName);
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const String& applicationName);
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const TChar* applicationName,
+                                                              TChar* commandLine,
+                                                              WindowSecurityAttributesPtr processAttributes,
+                                                              WindowSecurityAttributesPtr threadAttributes,
+                                                              bool inheritHandles,
+                                                              ProcessCreation creationFlags,
+                                                              WindowsVoidPtr environment,
+                                                              const TChar* currentDirectory,
+                                                              ProcessStartupinfoPtr startupInfo,
+                                                              ProcessInformationPtr processInformation) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CreateSystemProcess(const TChar* applicationName, TChar* commandLine, WindowSecurityAttributesPtr processAttributes, WindowSecurityAttributesPtr threadAttributes,
-                                                                  bool inheritHandles, ProcessCreation creationFlags, WindowVoidPtr environment,
-                                                                  const TChar* currentDirectory, ProcessStartupinfoPtr startupInfo, ProcessInformationPtr processInformation) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CloseSystemProcess(WindowHandle process) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandle() noexcept;
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandleID() noexcept;
-    void SYSTEM_DEFAULT_DECLARE ExitSystemProcess(WindowUInt exitCode) noexcept;
-    [[nodiscard]] WindowDWord SYSTEM_DEFAULT_DECLARE GetProcessHandleID(WindowHandle process) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE SetProcessPriorityClass(WindowHandle process, ProcessCreation priorityClass) noexcept;
-    [[nodiscard]] ProcessCreation SYSTEM_DEFAULT_DECLARE GetProcessPriorityClass(WindowHandle process) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE OpenSystemProcess(ProcessStandardAccess standardAccess, ProcessSpecificAccess desiredAccess, bool inheritHandle, WindowDWord processID) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemProcess(WindowsHandle process) noexcept;
+
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandle() noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetCurrentProcessHandleID() noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetProcessHandleID(WindowsHandle process) noexcept;
+
+    void SYSTEM_DEFAULT_DECLARE ExitSystemProcess(WindowsUInt exitCode) noexcept;
+  
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetProcessPriorityClass(WindowsHandle process, ProcessCreation priorityClass) noexcept;
+    NODISCARD ProcessCreation SYSTEM_DEFAULT_DECLARE GetProcessPriorityClass(WindowsHandle process) noexcept;
+
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemProcess(ProcessStandardAccess standardAccess, ProcessSpecificAccess desiredAccess, bool inheritHandle, WindowsDWord processID) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_PROCESS_H

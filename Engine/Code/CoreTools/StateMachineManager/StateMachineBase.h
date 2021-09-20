@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:00)
+//	引擎版本：0.7.1.1 (2020/10/26 16:00)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_BASE_H
@@ -32,8 +32,8 @@ namespace CoreTools
         using ConstStateSharedPtr = std::shared_ptr<const State>;
 
     public:
-        explicit StateMachineBase(StateSharedPtr currentState);
-        StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState);
+        explicit StateMachineBase(StateSharedPtr currentState) noexcept;
+        StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState) noexcept;
 
         virtual ~StateMachineBase() noexcept = default;
         StateMachineBase(const StateMachineBase& rhs) noexcept = default;
@@ -51,12 +51,12 @@ namespace CoreTools
 
         [[nodiscard]] bool IsInState(const State& state) const;
 
-        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const;
-        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const;
-        [[nodiscard]] ConstStateSharedPtr GetPreviousState() const;
-        [[nodiscard]] ConstStateSharedPtr GetPossiblePreviousState() const;
+        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const noexcept;
+        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const noexcept;
+        [[nodiscard]] ConstStateSharedPtr GetPreviousState() const noexcept;
+        [[nodiscard]] ConstStateSharedPtr GetPossiblePreviousState() const noexcept;
 
-        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
+        [[nodiscard]] StateSharedPtr GetPossiblePreviousState() noexcept;
 
     private:
         void ChangeState(StateSharedPtr newState);

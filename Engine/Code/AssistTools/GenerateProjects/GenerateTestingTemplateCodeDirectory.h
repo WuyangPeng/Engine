@@ -11,10 +11,10 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h" 
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string> 
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTestingTemplateCodeDirectoryImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTestingTemplateCodeDirectoryImpl);
 
 namespace AssistTools
 { 
@@ -23,7 +23,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTestingTemplateCodeDirectory 
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTestingTemplateCodeDirectory);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTestingTemplateCodeDirectory);
 
 	public:
 		GenerateTestingTemplateCodeDirectory(const System::String& directory, const std::string& configurationFileName); 
@@ -33,7 +33,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& exportDirectory, const System::String& newSolutionName, const CopyrightData& copyrightData,const System::String& projectCapital, const System::String& newCoreName, const System::String& CoreNameCapital) const;	 
 	
 	private:
-		IMPL_TYPE_DECLARE(GenerateTestingTemplateCodeDirectory);
+		PackageType impl;
 	};
 } 
 #endif // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TESTING_TEMPLATE_CODE_DIRECTORY_H

@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒıÇæ°æ±¾£º0.0.0.3 (2019/07/29 10:25)
 
 #include "Rendering/RenderingExport.h"
@@ -9,184 +9,163 @@
 #include "RendererData.h"
 #include "RendererInputData.h"
 #include "Detail/RendererDataImpl.h"
-#include "Rendering/SceneGraph/CameraManager.h"
-#include "CoreTools/Threading/Mutex.h"
-#include "CoreTools/Threading/ScopedMutex.h"
+#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MainFunctionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Threading/Mutex.h"
+#include "CoreTools/Threading/ScopedMutex.h"
+#include "Rendering/SceneGraph/CameraManager.h"
 
-using std::string;
 using std::make_shared;
 using std::make_unique;
+using std::string;
 
 SINGLETON_GET_PTR_DEFINE(Rendering, RendererData);
 
-Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData
-::sm_RendererData{ };
+Rendering::RendererData::RendererDataUniquePtr Rendering::RendererData ::sm_RendererData{};
 
-void Rendering::RendererData
-::Create()
+void Rendering::RendererData ::Create()
 {
-	sm_RendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
+    sm_RendererData = make_unique<Rendering::RendererData>(RendererDataCreate::Init);
 }
 
-void Rendering::RendererData
-::Destroy() noexcept
+void Rendering::RendererData ::Destroy() noexcept
 {
-	sm_RendererData.reset();
+    sm_RendererData.reset();
 }
 
 Rendering::RendererData ::RendererData([[maybe_unused]] RendererDataCreate rendererDataCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{0}
 {
- 
-
-	RENDERING_SELF_CLASS_IS_VALID_1;
+    RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, RendererData)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, RendererData)
 
-void Rendering::RendererData
-	::LoadConfiguration(const string& fileName)
+void Rendering::RendererData ::LoadConfiguration(const string& fileName)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	m_Impl->LoadConfiguration(fileName);
-    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(m_Impl->GetRendererType());
-    RENDERER_INPUT_DATA_SINGLETON.Rebuild(m_Impl->GetRendererType());
+    impl->LoadConfiguration(fileName);
+    CAMERA_MANAGE_SINGLETON.SetDefaultDepthType(impl->GetRendererType());
+    RENDERER_INPUT_DATA_SINGLETON.Rebuild(impl->GetRendererType());
 }
 
-void Rendering::RendererData
-	::ClearColor()
+void Rendering::RendererData ::ClearColor()
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return m_Impl->ClearColor();
+    return impl->ClearColor();
 }
 
-void Rendering::RendererData
-	::Resize(int width,int height)
+void Rendering::RendererData ::Resize(int width, int height)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-	return m_Impl->Resize(width,height);
+    return impl->Resize(width, height);
 }
 
-void Rendering::RendererData
-	::DrawMessage( int x,int y, const Colour& color,const std::string& message)
-{	
-	SINGLETON_MUTEX_ENTER_MEMBER;
-
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-	return m_Impl->DrawMessage(x,y,color, message);
-}
-
-Rendering::TextureFormat Rendering::RendererData
-	::GetColorFormat() const
+void Rendering::RendererData ::DrawMessage(int x, int y, const Colour& color, const std::string& message)
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    ;
 
-	return m_Impl->GetColorFormat();
+    return impl->DrawMessage(x, y, color, message);
 }
 
-Rendering::TextureFormat Rendering::RendererData
-	::GetDepthStencilFormat() const
+Rendering::TextureFormat Rendering::RendererData ::GetColorFormat() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetDepthStencilFormat();
+    return impl->GetColorFormat();
 }
 
-int Rendering::RendererData
-	::GetNumMultisamples() const
+Rendering::TextureFormat Rendering::RendererData ::GetDepthStencilFormat() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetNumMultisamples();
+    return impl->GetDepthStencilFormat();
 }
 
-Rendering::RendererData::Colour Rendering::RendererData
-	::GetClearColor() const
+int Rendering::RendererData ::GetNumMultisamples() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetClearColor();
+    return impl->GetNumMultisamples();
 }
 
-const std::string Rendering::RendererData
-	::GetWindowTitle() const
+Rendering::RendererData::Colour Rendering::RendererData ::GetClearColor() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetWindowTitle();
+    return impl->GetClearColor();
 }
 
-int Rendering::RendererData
-	::GetXPosition() const
+const std::string Rendering::RendererData ::GetWindowTitle() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetXPosition();
+    return impl->GetWindowTitle();
 }
 
-int Rendering::RendererData
-	::GetYPosition() const
+int Rendering::RendererData ::GetXPosition() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetYPosition();
+    return impl->GetXPosition();
 }
 
-int Rendering::RendererData
-	::GetWidth() const
+int Rendering::RendererData ::GetYPosition() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetWidth();
+    return impl->GetYPosition();
 }
 
-int Rendering::RendererData
-	::GetHeight() const
+int Rendering::RendererData ::GetWidth() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetHeight();
+    return impl->GetWidth();
 }
 
-bool Rendering::RendererData
-	::IsAllowResize() const
+int Rendering::RendererData ::GetHeight() const
 {
-	SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
-	RENDERING_CLASS_IS_VALID_CONST_1;
+    RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->IsAllowResize();
+    return impl->GetHeight();
 }
 
+bool Rendering::RendererData ::IsAllowResize() const
+{
+    SINGLETON_MUTEX_ENTER_MEMBER;
 
+    RENDERING_CLASS_IS_VALID_CONST_1;
+
+    return impl->IsAllowResize();
+}

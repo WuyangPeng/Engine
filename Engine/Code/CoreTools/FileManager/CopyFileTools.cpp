@@ -9,14 +9,16 @@
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "../Contract/Flags/ImplFlags.h"
 #include "CopyFileTools.h"
+#include "Detail/CopyFileToolsImpl.h"
 #include "Detail/CopyFileToolsFactory.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CopyFileTools::CopyFileTools(const String& inFileName, const String& outFileName)
-    : m_Impl{ CopyFileToolsFactory::Create(inFileName, outFileName) }
+    : impl{ ImplCreateUseFactory::Default, inFileName, outFileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CopyFileTools)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, CopyFileTools)

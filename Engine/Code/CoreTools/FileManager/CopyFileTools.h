@@ -14,28 +14,31 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CopyFileToolsImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(CopyFileToolsImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE CopyFileTools final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE CopyFileTools final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(CopyFileTools);
+        NON_COPY_TYPE_DECLARE(CopyFileTools);
         using String = System::String;
 
     public:
         CopyFileTools(const String& inFileName, const String& outFileName);
+        ~CopyFileTools() noexcept = default;
+        CopyFileTools(const CopyFileTools& rhs) noexcept = delete;
+        CopyFileTools& operator=(const CopyFileTools& rhs) noexcept = delete;
+        CopyFileTools(CopyFileTools&& rhs) noexcept = delete;
+        CopyFileTools& operator=(CopyFileTools&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        IMPL_TYPE_DECLARE(CopyFileTools);
+        PackageType impl;
     };
 }
 

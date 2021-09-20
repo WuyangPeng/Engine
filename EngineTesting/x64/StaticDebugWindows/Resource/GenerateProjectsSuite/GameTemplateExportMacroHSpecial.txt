@@ -1,0 +1,15 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYearSpecial%
+//
+// %ProjectChineseNameSpecial%∞Ê±æ£∫%VersionsSpecial% (%DateSpecial% %HourSpecial%:%MinuteSpecial%)
+
+#ifndef %ProjectCapitalSpecial%_%ManagerCapitalSpecial%_MACRO_EXPORT_MACRO_H
+#define %ProjectCapitalSpecial%_%ManagerCapitalSpecial%_MACRO_EXPORT_MACRO_H
+
+#include "CoreTools/Helper/ExportMacro.h" 
+
+#define %ProjectCapitalSpecial%_%ManagerCapitalSpecial%_EXPORT_SHARED_PTR(implClassName) \
+	    EXPORT_SHARED_PTR(%SolutionNameSpecial%%ManagerNameSpecial%,implClassName,%ProjectCapitalSpecial%_%ManagerCapitalSpecial%_DEFAULT_DECLARE) 
+
+#endif // %ProjectCapitalSpecial%_%ManagerCapitalSpecial%_MACRO_EXPORT_MACRO_H

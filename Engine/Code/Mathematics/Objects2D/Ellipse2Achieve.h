@@ -20,39 +20,26 @@
 template <typename Real>
 Mathematics::Ellipse2<Real>::Ellipse2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1,
                                       const Real extent0, const Real extent1, const Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(center, axis0, axis1, extent0, extent1, epsilon) }
+    : impl{  center, axis0, axis1, extent0, extent1, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Ellipse2<Real>::Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon)
-    : m_Impl{ std::make_shared<ImplType>(coefficients, epsilon) }
+    : impl{  coefficients, epsilon  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename Real>
-void Mathematics::Ellipse2<Real>::Copy()
-{
-    static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed.");
-
-    MATHEMATICS_CLASS_IS_VALID_1;
-
-    if (1 < m_Impl.use_count())
-    {
-        m_Impl = std::make_shared<ImplType>(*m_Impl);
-    }
-}
-
+ 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Ellipse2<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+ 
         return true;
-    else
-        return false;
+   
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -61,7 +48,7 @@ const Mathematics::Vector2D<Real> Mathematics::Ellipse2<Real>::GetCenter() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCenter();
+    return impl->GetCenter();
 }
 
 template <typename Real>
@@ -69,7 +56,7 @@ const Mathematics::Vector2D<Real> Mathematics::Ellipse2<Real>::GetAxis0() const 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis0();
+    return impl->GetAxis0();
 }
 
 template <typename Real>
@@ -77,7 +64,7 @@ const Mathematics::Vector2D<Real> Mathematics::Ellipse2<Real>::GetAxis1() const 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetAxis1();
+    return impl->GetAxis1();
 }
 
 template <typename Real>
@@ -85,7 +72,7 @@ Real Mathematics::Ellipse2<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent0();
+    return impl->GetExtent0();
 }
 
 template <typename Real>
@@ -93,7 +80,7 @@ Real Mathematics::Ellipse2<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent1();
+    return impl->GetExtent1();
 }
 
 template <typename Real>
@@ -101,7 +88,7 @@ const Mathematics::Matrix2<Real> Mathematics::Ellipse2<Real>::GetMatrix() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMatrix();
+    return impl->GetMatrix();
 }
 
 template <typename Real>
@@ -109,7 +96,7 @@ const Mathematics::Matrix2<Real> Mathematics::Ellipse2<Real>::GetMatrixInverse()
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMatrixInverse();
+    return impl->GetMatrixInverse();
 }
 
 template <typename Real>
@@ -117,15 +104,15 @@ const Mathematics::Ellipse2Coefficients<Real> Mathematics::Ellipse2<Real>::ToCoe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ToCoefficients();
+    return impl->ToCoefficients();
 }
 
 template <typename Real>
 void Mathematics::Ellipse2<Real>::FromCoefficients(const Ellipse2Coefficients& coefficients, const Real epsilon)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->FromCoefficients(coefficients, epsilon);
+    return impl->FromCoefficients(coefficients, epsilon);
 }
 
 template <typename Real>
@@ -133,7 +120,7 @@ Real Mathematics::Ellipse2<Real>::Evaluate(const Vector2D& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Evaluate(point);
+    return impl->Evaluate(point);
 }
 
 template <typename Real>
@@ -141,7 +128,7 @@ bool Mathematics::Ellipse2<Real>::Contains(const Vector2D& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Contains(point);
+    return impl->Contains(point);
 }
 
 template <typename Real>
@@ -150,7 +137,7 @@ const Mathematics::Ellipse2<Real> Mathematics::Ellipse2<Real>::GetMove(Real t, c
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     auto movedCenter = GetCenter() + t * velocity;
-    Ellipse2 movedEllipse{ movedCenter, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), m_Impl->GetEpsilon() };
+    Ellipse2 movedEllipse{ movedCenter, GetAxis0(), GetAxis1(), GetExtent0(), GetExtent1(), impl->GetEpsilon() };
 
     return movedEllipse;
 }

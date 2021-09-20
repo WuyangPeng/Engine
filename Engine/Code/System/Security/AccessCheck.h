@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 15:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/24 16:15)
 
 #ifndef SYSTEM_SECURITY_ACCESS_CHECK_H
 #define SYSTEM_SECURITY_ACCESS_CHECK_H
@@ -23,23 +23,45 @@ namespace System
 {
     // 访问检查
 
-    void SYSTEM_DEFAULT_DECLARE GetMapGenericMask(WindowDWordPtr accessMask, AccessCheckGenericMappingPtr genericMapping) noexcept;
-    [[nodiscard]] AccessGenericMask SYSTEM_DEFAULT_DECLARE GetFileMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
-    [[nodiscard]] AccessGenericMask SYSTEM_DEFAULT_DECLARE GetTransactionManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
-    [[nodiscard]] AccessGenericMask SYSTEM_DEFAULT_DECLARE GetTransactionMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
-    [[nodiscard]] AccessGenericMask SYSTEM_DEFAULT_DECLARE GetResourceManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
-    [[nodiscard]] AccessGenericMask SYSTEM_DEFAULT_DECLARE GetEnlistmentMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMappings) noexcept;
+    void SYSTEM_DEFAULT_DECLARE GetMapGenericMask(WindowsDWordPtr accessMask, AccessCheckGenericMappingPtr genericMapping) noexcept;
+    NODISCARD AccessGenericMask SYSTEM_DEFAULT_DECLARE GetFileMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
+    NODISCARD AccessGenericMask SYSTEM_DEFAULT_DECLARE GetTransactionManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
+    NODISCARD AccessGenericMask SYSTEM_DEFAULT_DECLARE GetTransactionMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
+    NODISCARD AccessGenericMask SYSTEM_DEFAULT_DECLARE GetResourceManagerMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMapping) noexcept;
+    NODISCARD AccessGenericMask SYSTEM_DEFAULT_DECLARE GetEnlistmentMapGenericMask(FileHandleDesiredAccess accessMask, AccessCheckGenericMapping& genericMappings) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE GetAccessCheck(SecurityDescriptorPtr securityDescriptor, WindowHandle clientToken, AccessGenericMask desiredAccess, AccessCheckGenericMappingPtr genericMapping,
-                                                             SecurityPrivilegeSetPtr privilegeSet, WindowDWordPtr privilegeSetLength, WindowDWordPtr grantedAccess, bool* accessStatus) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
+                                                         WindowsHandle clientToken,
+                                                         AccessGenericMask desiredAccess,
+                                                         AccessCheckGenericMappingPtr genericMapping,
+                                                         SecurityPrivilegeSetPtr privilegeSet,
+                                                         WindowsDWordPtr privilegeSetLength,
+                                                         WindowsDWordPtr grantedAccess,
+                                                         bool* accessStatus) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr principalSelfSid, WindowHandle clientToken, AccessGenericMask desiredAccess,
-                                                                   SecurityObjectTypeListPtr objectTypeList, WindowDWord objectTypeListLength, AccessCheckGenericMappingPtr genericMapping, SecurityPrivilegeSetPtr privilegeSet,
-                                                                   WindowDWordPtr privilegeSetLength, WindowDWordPtr grantedAccess, bool* accessStatus) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
+                                                               SecuritySIDPtr principalSelfSid,
+                                                               WindowsHandle clientToken,
+                                                               AccessGenericMask desiredAccess,
+                                                               SecurityObjectTypeListPtr objectTypeList,
+                                                               WindowsDWord objectTypeListLength,
+                                                               AccessCheckGenericMappingPtr genericMapping,
+                                                               SecurityPrivilegeSetPtr privilegeSet,
+                                                               WindowsDWordPtr privilegeSetLength,
+                                                               WindowsDWordPtr grantedAccess,
+                                                               bool* accessStatus) noexcept;
 
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescriptor, SecuritySIDPtr principalSelfSid, WindowHandle clientToken, AccessGenericMask desiredAccess,
-                                                                             SecurityObjectTypeListPtr objectTypeList, WindowDWord objectTypeListLength, AccessCheckGenericMappingPtr genericMapping, SecurityPrivilegeSetPtr privilegeSet,
-                                                                             WindowDWordPtr privilegeSetLength, WindowDWordPtr grantedAccessList, WindowDWordPtr accessStatusList) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescriptor,
+                                                                         SecuritySIDPtr principalSelfSid,
+                                                                         WindowsHandle clientToken,
+                                                                         AccessGenericMask desiredAccess,
+                                                                         SecurityObjectTypeListPtr objectTypeList,
+                                                                         WindowsDWord objectTypeListLength,
+                                                                         AccessCheckGenericMappingPtr genericMapping,
+                                                                         SecurityPrivilegeSetPtr privilegeSet,
+                                                                         WindowsDWordPtr privilegeSetLength,
+                                                                         WindowsDWordPtr grantedAccessList,
+                                                                         WindowsDWordPtr accessStatusList) noexcept;
 }
 
 #endif  // SYSTEM_SECURITY_ACCESS_CHECK_H

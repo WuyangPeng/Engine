@@ -31,6 +31,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26434)
 CORE_TOOLS_RTTI_DEFINE(Rendering, BlendTransformController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BlendTransformController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BlendTransformController);
@@ -39,16 +40,46 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, BlendTransformController);
 Rendering::BlendTransformController
 	::BlendTransformController(const TransformControllerSharedPtr& firstController,const TransformControllerSharedPtr& secondController, 
 							   bool rotationScaleMatrices,bool geometricRotation,bool geometricScale) 
-	: ParentType{ FloatTransform{} }, m_Impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
+	: ParentType{ FloatTransform{} }, impl{ make_shared<ImplType>(firstController, secondController, rotationScaleMatrices, geometricRotation, geometricScale) }
 {
      RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
-
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, BlendTransformController)
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, BlendTransformController)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, BlendTransformController)
 
 Rendering::ControllerInterfaceSharedPtr Rendering::BlendTransformController
 	::Clone() const 
@@ -67,7 +98,7 @@ CoreTools::ObjectInterfaceSharedPtr Rendering::BlendTransformController ::CloneO
 									  
 Rendering::BlendTransformController
 	::BlendTransformController(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>()}
+	:ParentType{ value }, impl{ make_shared<ImplType>()}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -79,7 +110,7 @@ int Rendering::BlendTransformController
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -92,7 +123,7 @@ uint64_t Rendering::BlendTransformController
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		m_Impl->Register(target);
+		impl->Register(target);
 	}
 
 	return uniqueID;
@@ -107,37 +138,37 @@ void Rendering::BlendTransformController
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::BlendTransformController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	
 
-	//m_Impl->Link(source);
+	//impl->Link(source);
 }
 
 void Rendering::BlendTransformController
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();	 
 }
 
 void Rendering::BlendTransformController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	//m_Impl->Load(source);
+	//impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -160,49 +191,49 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, BlendTransformController
 void Rendering::BlendTransformController
 	::SetObject(ControllerInterface* object) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	RENDERING_ASSERTION_0(object == nullptr || object->IsDerived(Spatial::GetCurrentRttiType()), "无效类\n");
 	
 	ParentType::SetObject(object);
-	m_Impl->SetObject(object); 
+	impl->SetObject(object); 
 }
 
 void Rendering::BlendTransformController
 	::SetObjectInCopy(ControllerInterface* object) 
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	
 	ParentType::SetObject(object);
-	m_Impl->SetObject(object); 
+	impl->SetObject(object); 
 }
 
 bool Rendering::BlendTransformController
 	::Update(double applicationTime)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Update(applicationTime))
 	{
-		m_Impl->Update(applicationTime); 
+		impl->Update(applicationTime); 
 
-		auto blendTranslate = m_Impl->GetBlendTranslate();
+		auto blendTranslate = impl->GetBlendTranslate();
 
 		SetTranslate(blendTranslate);
 
-		if (m_Impl->IsRotationScaleMatrices())
+		if (impl->IsRotationScaleMatrices())
 		{
-			const auto blendQuaternion = m_Impl->GetBlendQuaternion();
+			const auto blendQuaternion = impl->GetBlendQuaternion();
 
 			SetRotate(blendQuaternion);
 
-			auto blendScale = m_Impl->GetBlendScale();
+			auto blendScale = impl->GetBlendScale();
 
 			SetScale(blendScale);
 		}
 		else
 		{
 			// 算术混合矩阵。		
-			const auto blendMatrix = m_Impl->GetMatrix();
+			const auto blendMatrix = impl->GetMatrix();
 
 			SetMatrix(blendMatrix);
 		}

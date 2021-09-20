@@ -16,12 +16,12 @@ using std::make_shared;
 
 Framework::GLUTApplicationInformation
 	::GLUTApplicationInformation(int majorVersion, int minorVersion, FrameParameter frame)
-	: m_Impl{ make_shared< ImplType>(majorVersion, minorVersion, frame) }
+	: impl{ majorVersion, minorVersion, frame }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, GLUTApplicationInformation)
+CLASS_INVARIANT_STUB_DEFINE(Framework, GLUTApplicationInformation)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, GLUTApplicationInformation, GetOpenGLMajorVersion, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, GLUTApplicationInformation, GetOpenGLMinorVersion, int);

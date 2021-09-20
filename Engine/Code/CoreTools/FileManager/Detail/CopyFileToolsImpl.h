@@ -16,11 +16,13 @@
 
 namespace CoreTools
 {
+    class CopyFileToolsFactory;
     class CORE_TOOLS_HIDDEN_DECLARE CopyFileToolsImpl
     {
     public:
         using ClassType = CopyFileToolsImpl;
         using String = System::String;
+        using FactoryType = CopyFileToolsFactory;
 
     public:
         CopyFileToolsImpl() noexcept = default;

@@ -1,24 +1,36 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-//
-// ÒýÇæ°æ±¾£º0.0.2.0 (2020/01/02 15:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+///	ÁªÏµ×÷Õß£º94458936@qq.com
+///
+///	±ê×¼£ºstd:c++17
+///	ÒýÇæ°æ±¾£º0.7.1.4 (2021/05/25 17:12)
 
 #include "System/SystemExport.h"
 
 #include "CreateSecurity.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/WindowsSystem.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
-bool System::SystemConvertToAutoInheritPrivateObjectSecurity([[maybe_unused]] SecurityDescriptorPtr parentDescriptor, [[maybe_unused]] SecurityDescriptorPtr currentSecurityDescriptor, [[maybe_unused]] SecurityDescriptorPtr* newSecurityDescriptor,
-                                                             [[maybe_unused]] SystemGUID* objectType, [[maybe_unused]] bool isDirectoryObject, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping) noexcept
+bool System::SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
+                                                             SecurityDescriptorPtr currentSecurityDescriptor,
+                                                             SecurityDescriptorPtr* newSecurityDescriptor,
+                                                             SystemGUID* objectType,
+                                                             bool isDirectoryObject,
+                                                             AccessCheckGenericMappingPtr genericMapping) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::ConvertToAutoInheritPrivateObjectSecurity(parentDescriptor, currentSecurityDescriptor, newSecurityDescriptor, objectType,
-                                                    gsl::narrow_cast<WindowBoolean>(BoolConversion(isDirectoryObject)), genericMapping) != g_False)
+
+    if (::ConvertToAutoInheritPrivateObjectSecurity(parentDescriptor,
+                                                    currentSecurityDescriptor,
+                                                    newSecurityDescriptor,
+                                                    objectType,
+                                                    gsl::narrow_cast<WindowsBoolean>(BoolConversion(isDirectoryObject)),
+                                                    genericMapping) != g_False)
     {
         return true;
     }
@@ -26,44 +38,119 @@ bool System::SystemConvertToAutoInheritPrivateObjectSecurity([[maybe_unused]] Se
     {
         return false;
     }
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecurityDescriptorPtr,
+                 SecurityDescriptorPtr*,
+                 SystemGUID*,
+                 bool,
+                 AccessCheckGenericMappingPtr>(parentDescriptor,
+                                               currentSecurityDescriptor,
+                                               newSecurityDescriptor,
+                                               objectType,
+                                               isDirectoryObject,
+                                               genericMapping);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CreateSystemPrivateObjectSecurity([[maybe_unused]] SecurityDescriptorPtr parentDescriptor, [[maybe_unused]] SecurityDescriptorPtr creatorDescriptor, [[maybe_unused]] SecurityDescriptorPtr* newDescriptor,
-                                               [[maybe_unused]] bool isDirectoryObject, [[maybe_unused]] WindowHandle token, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping) noexcept
+bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
+                                               SecurityDescriptorPtr creatorDescriptor,
+                                               SecurityDescriptorPtr* newDescriptor,
+                                               bool isDirectoryObject,
+                                               WindowsHandle token,
+                                               AccessCheckGenericMappingPtr genericMapping) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::CreatePrivateObjectSecurity(parentDescriptor, creatorDescriptor, newDescriptor, BoolConversion(isDirectoryObject), token, genericMapping) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecurityDescriptorPtr,
+                 SecurityDescriptorPtr*,
+                 bool,
+                 WindowsHandle,
+                 AccessCheckGenericMappingPtr>(parentDescriptor,
+                                               creatorDescriptor,
+                                               newDescriptor,
+                                               isDirectoryObject,
+                                               token,
+                                               genericMapping);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CreateSystemPrivateObjectSecurity([[maybe_unused]] SecurityDescriptorPtr parentDescriptor, [[maybe_unused]] SecurityDescriptorPtr creatorDescriptor, [[maybe_unused]] SecurityDescriptorPtr* newDescriptor, [[maybe_unused]] SystemGUID* objectType,
-                                               [[maybe_unused]] bool isContainerObject, [[maybe_unused]] SecurityAutoInherit autoInheritFlags, [[maybe_unused]] WindowHandle token, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping) noexcept
+bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescriptor,
+                                               SecurityDescriptorPtr creatorDescriptor,
+                                               SecurityDescriptorPtr* newDescriptor,
+                                               SystemGUID* objectType,
+                                               bool isContainerObject,
+                                               SecurityAutoInherit autoInheritFlags,
+                                               WindowsHandle token,
+                                               AccessCheckGenericMappingPtr genericMapping) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::CreatePrivateObjectSecurityEx(parentDescriptor, creatorDescriptor, newDescriptor, objectType, isContainerObject, EnumCastUnderlying(autoInheritFlags), token, genericMapping) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecurityDescriptorPtr,
+                 SecurityDescriptorPtr*,
+                 SystemGUID*,
+                 bool,
+                 SecurityAutoInherit,
+                 WindowsHandle,
+                 AccessCheckGenericMappingPtr>(parentDescriptor,
+                                               creatorDescriptor,
+                                               *newDescriptor,
+                                               objectType,
+                                               isContainerObject,
+                                               autoInheritFlags,
+                                               token,
+                                               genericMapping);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance([[maybe_unused]] SecurityDescriptorPtr parentDescriptor, [[maybe_unused]] SecurityDescriptorPtr creatorDescriptor, [[maybe_unused]] SecurityDescriptorPtr* newDescriptor,
-                                                                      [[maybe_unused]] SystemGUID** objectTypes, [[maybe_unused]] WindowULong guidCount, [[maybe_unused]] bool isContainerObject,
-                                                                      [[maybe_unused]] SecurityAutoInherit autoInheritFlags, [[maybe_unused]] WindowHandle token, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping) noexcept
+bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance(SecurityDescriptorPtr parentDescriptor,
+                                                                      SecurityDescriptorPtr creatorDescriptor,
+                                                                      SecurityDescriptorPtr* newDescriptor,
+                                                                      SystemGUID** objectTypes,
+                                                                      WindowsULong guidCount,
+                                                                      bool isContainerObject,
+                                                                      SecurityAutoInherit autoInheritFlags,
+                                                                      WindowsHandle token,
+                                                                      AccessCheckGenericMappingPtr genericMapping) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    if (::CreatePrivateObjectSecurityWithMultipleInheritance(parentDescriptor, creatorDescriptor, newDescriptor, objectTypes, guidCount,
-                                                             BoolConversion(isContainerObject), EnumCastUnderlying(autoInheritFlags), token, genericMapping) != g_False)
+
+    if (::CreatePrivateObjectSecurityWithMultipleInheritance(parentDescriptor,
+                                                             creatorDescriptor,
+                                                             newDescriptor,
+                                                             objectTypes,
+                                                             guidCount,
+                                                             BoolConversion(isContainerObject),
+                                                             EnumCastUnderlying(autoInheritFlags),
+                                                             token,
+                                                             genericMapping) != g_False)
     {
         return true;
     }
@@ -71,118 +158,240 @@ bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance([[maybe_un
     {
         return false;
     }
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecurityDescriptorPtr,
+                 SecurityDescriptorPtr*,
+                 SystemGUID**,
+                 WindowsULong,
+                 bool,
+                 SecurityAutoInherit,
+                 WindowsHandle,
+                 AccessCheckGenericMappingPtr>(parentDescriptor,
+                                               creatorDescriptor,
+                                               newDescriptor,
+                                               *objectTypes,
+                                               guidCount,
+                                               isContainerObject,
+                                               autoInheritFlags,
+                                               token,
+                                               genericMapping);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::DestroySystemPrivateObjectSecurity([[maybe_unused]] SecurityDescriptorPtr* objectDescriptor) noexcept
+bool System::DestroySystemPrivateObjectSecurity(SecurityDescriptorPtr* objectDescriptor) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::DestroyPrivateObjectSecurity(objectDescriptor) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr*>(objectDescriptor);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemFileSecurity([[maybe_unused]] const String& fileName, [[maybe_unused]] SecurityRequestedInformation requestedInformation, [[maybe_unused]] SecurityDescriptorPtr securityDescriptor,
-                                   [[maybe_unused]] WindowDWord length, [[maybe_unused]] WindowDWordPtr lengthNeeded) noexcept
+bool System::GetSystemFileSecurity(const String& fileName,
+                                   SecurityRequestedInformation requestedInformation,
+                                   SecurityDescriptorPtr securityDescriptor,
+                                   WindowsDWord length,
+                                   WindowsDWordPtr lengthNeeded) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::GetFileSecurity(fileName.c_str(), EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<String,
+                 SecurityRequestedInformation,
+                 SecurityDescriptorPtr,
+                 WindowsDWord,
+                 WindowsDWordPtr>(fileName,
+                                 requestedInformation,
+                                 securityDescriptor,
+                                 length,
+                                 lengthNeeded);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemKernelObjectSecurity([[maybe_unused]] ThreadHandle handle, [[maybe_unused]] SecurityRequestedInformation requestedInformation, [[maybe_unused]] SecurityDescriptorPtr securityDescriptor,
-                                           [[maybe_unused]] WindowDWord length, [[maybe_unused]] WindowDWordPtr lengthNeeded) noexcept
+bool System::GetSystemKernelObjectSecurity(ThreadHandle handle,
+                                           SecurityRequestedInformation requestedInformation,
+                                           SecurityDescriptorPtr securityDescriptor,
+                                           WindowsDWord length,
+                                           WindowsDWordPtr lengthNeeded) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::GetKernelObjectSecurity(handle, EnumCastUnderlying(requestedInformation), securityDescriptor, length, lengthNeeded) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadHandle,
+                 SecurityRequestedInformation,
+                 SecurityDescriptorPtr,
+                 WindowsDWord,
+                 WindowsDWordPtr>(handle,
+                                 requestedInformation,
+                                 securityDescriptor,
+                                 length,
+                                 lengthNeeded);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemPrivateObjectSecurity([[maybe_unused]] SecurityDescriptorPtr objectDescriptor, [[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] SecurityDescriptorPtr resultantDescriptor,
-                                            [[maybe_unused]] WindowDWord descriptorLength, [[maybe_unused]] WindowDWordPtr returnLength) noexcept
+bool System::GetSystemPrivateObjectSecurity(SecurityDescriptorPtr objectDescriptor,
+                                            SecurityRequestedInformation securityInformation,
+                                            SecurityDescriptorPtr resultantDescriptor,
+                                            WindowsDWord descriptorLength,
+                                            WindowsDWordPtr returnLength) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::GetPrivateObjectSecurity(objectDescriptor, EnumCastUnderlying(securityInformation), resultantDescriptor, descriptorLength, returnLength) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecurityRequestedInformation,
+                 SecurityDescriptorPtr,
+                 WindowsDWord,
+                 WindowsDWordPtr>(objectDescriptor,
+                                 securityInformation,
+                                 resultantDescriptor,
+                                 descriptorLength,
+                                 returnLength);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemFileSecurity([[maybe_unused]] const TChar* fileName, [[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] SecurityDescriptorPtr securityDescriptor) noexcept
+bool System::SetSystemFileSecurity(const TChar* fileName, SecurityRequestedInformation securityInformation, SecurityDescriptorPtr securityDescriptor) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::SetFileSecurity(fileName, EnumCastUnderlying(securityInformation), securityDescriptor) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<const TChar*, SecurityRequestedInformation, SecurityDescriptorPtr>(fileName, securityInformation, securityDescriptor);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemKernelObjectSecurity([[maybe_unused]] ThreadHandle handle, [[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] SecurityDescriptorPtr securityDescriptor) noexcept
+bool System::SetSystemKernelObjectSecurity(ThreadHandle handle, SecurityRequestedInformation securityInformation, SecurityDescriptorPtr securityDescriptor) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::SetKernelObjectSecurity(handle, EnumCastUnderlying(securityInformation), securityDescriptor) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<ThreadHandle, SecurityRequestedInformation, SecurityDescriptorPtr>(handle, securityInformation, securityDescriptor);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemPrivateObjectSecurity([[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] SecurityDescriptorPtr modificationDescriptor, [[maybe_unused]] SecurityDescriptorPtr* objectsSecurityDescriptor,
-                                            [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping, [[maybe_unused]] WindowHandle token) noexcept
+bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securityInformation,
+                                            SecurityDescriptorPtr modificationDescriptor,
+                                            SecurityDescriptorPtr* objectsSecurityDescriptor,
+                                            AccessCheckGenericMappingPtr genericMapping,
+                                            WindowsHandle token) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::SetPrivateObjectSecurity(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, genericMapping, token) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityRequestedInformation, SecurityDescriptorPtr, SecurityDescriptorPtr*, AccessCheckGenericMappingPtr, WindowsHandle>(securityInformation, modificationDescriptor, objectsSecurityDescriptor, genericMapping, token);
 
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-void System::SetSystemSecurityAccessMask([[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] WindowDWordPtr desiredAccess) noexcept
+void System::SetSystemSecurityAccessMask(SecurityRequestedInformation securityInformation, WindowsDWordPtr desiredAccess) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::SetSecurityAccessMask(EnumCastUnderlying(securityInformation), desiredAccess);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
+    NullFunction<SecurityRequestedInformation, WindowsDWordPtr>(securityInformation, desiredAccess);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemPrivateObjectSecurity([[maybe_unused]] SecurityRequestedInformation securityInformation, [[maybe_unused]] SecurityDescriptorPtr modificationDescriptor, [[maybe_unused]] SecurityDescriptorPtr* objectsSecurityDescriptor,
-                                            [[maybe_unused]] SecurityAutoInherit autoInheritFlags, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping, [[maybe_unused]] WindowHandle token) noexcept
+bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securityInformation,
+                                            SecurityDescriptorPtr modificationDescriptor,
+                                            SecurityDescriptorPtr* objectsSecurityDescriptor,
+                                            SecurityAutoInherit autoInheritFlags,
+                                            AccessCheckGenericMappingPtr genericMapping,
+                                            WindowsHandle token) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::SetPrivateObjectSecurityEx(EnumCastUnderlying(securityInformation), modificationDescriptor, objectsSecurityDescriptor, EnumCastUnderlying(autoInheritFlags), genericMapping, token) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityRequestedInformation,
+                 SecurityDescriptorPtr,
+                 SecurityDescriptorPtr*,
+                 SecurityAutoInherit,
+                 AccessCheckGenericMappingPtr,
+                 WindowsHandle>(securityInformation,
+                               modificationDescriptor,
+                               objectsSecurityDescriptor,
+                               autoInheritFlags,
+                               genericMapping,
+                               token);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }

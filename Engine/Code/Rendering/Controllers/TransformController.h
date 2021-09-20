@@ -13,8 +13,8 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/DataTypes/Transform.h"
-
-RENDERING_EXPORT_SHARED_PTR(TransformControllerImpl);
+EXPORT_SHARED_PTR(Rendering, TransformControllerImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +23,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE TransformController : public Controller
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(TransformController, = default);
+            void Swap(TransformController& rhs) noexcept;
+      
+          public:
+              TYPE_DECLARE(TransformController);
+              using ClassShareType = CoreTools::CopyUnsharedClasses;
+              ~TransformController() noexcept= default;
+              TransformController(const TransformController& rhs);
+              TransformController& operator=(const TransformController& rhs);
+              TransformController(TransformController&& rhs) noexcept;
+              TransformController& operator=(TransformController&& rhs) noexcept;
 		using ParentType = Controller;
 		using APoint = Mathematics::FloatAPoint;
 		using Matrix = Mathematics::FloatMatrix;
@@ -55,7 +64,7 @@ namespace Rendering
 		 ControllerInterfaceSharedPtr Clone() const override;
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(TransformController);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 
 #include STSTEM_WARNING_PUSH

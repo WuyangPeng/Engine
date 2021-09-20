@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:35)
+//	引擎版本：0.7.1.1 (2020/10/23 15:35)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_DETAIL_H
@@ -15,7 +15,7 @@
 
 template <typename T>
 template <typename V>
-CoreTools::ValueScope<T>::ValueScope(Reference value, V const& set)
+CoreTools::ValueScope<T>::ValueScope(Reference value, V const& set) noexcept(std::is_arithmetic_v<T>)
     : m_Value{ value }, m_Revert{ value }
 {
     m_Value = set;
@@ -25,7 +25,7 @@ CoreTools::ValueScope<T>::ValueScope(Reference value, V const& set)
 
 template <typename T>
 template <typename V1, typename V2>
-CoreTools::ValueScope<T>::ValueScope(Reference value, V1 const& set, V2 const& revert)
+CoreTools::ValueScope<T>::ValueScope(Reference value, V1 const& set, V2 const& revert) noexcept(std::is_arithmetic_v<T>)
     : m_Value{ value }, m_Revert{ revert }
 {
     m_Value = set;
@@ -34,11 +34,19 @@ CoreTools::ValueScope<T>::ValueScope(Reference value, V1 const& set, V2 const& r
 }
 
 template <typename T>
-CoreTools::ValueScope<T>::~ValueScope()
+CoreTools::ValueScope<T>::~ValueScope() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    m_Value = m_Revert;
+    try
+    {
+        m_Value = m_Revert;
+    }
+    catch (...)
+    {
+    	
+    }
+    
 }
 
 #ifdef OPEN_CLASS_INVARIANT

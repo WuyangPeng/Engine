@@ -16,17 +16,17 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/MysqlConnectorWrappers/Fwd/MysqlConnectorFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <vector>
 
-DATABASE_EXPORT_SHARED_PTR(ResultImpl);
+DATABASE_NON_COPY_EXPORT_IMPL(ResultImpl);
 
 namespace Database
 {
     class DATABASE_DEFAULT_DECLARE Result final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Result);
+        NON_COPY_TYPE_DECLARE(Result);
         using ResultRowPtr = std::unique_ptr<ResultRow>;
         using ResultRowContainer = std::vector<ResultRowPtr>;
 
@@ -46,7 +46,7 @@ namespace Database
         [[nodiscard]] virtual ResultRowContainer FetchAll();
 
     private:
-        IMPL_TYPE_DECLARE(Result);
+        PackageType impl;
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     public:

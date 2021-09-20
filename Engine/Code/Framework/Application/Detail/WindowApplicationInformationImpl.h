@@ -8,7 +8,7 @@
 #define FRAMEWORK_APPLICATION_WINDOW_APPLICATION_INFORMATION_IMPL_H
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 #include "Framework/WindowCreate/WindowSize.h"
@@ -22,8 +22,8 @@ namespace Framework
 	public:
 		using ClassType = WindowApplicationInformationImpl;
 		using String = System::String;
-		using WindowStyles = System::WindowStyles;
-		using HInstance = System::WindowHInstance;
+		using WindowStyles = System::WindowsStyles;
+		using HInstance = System::WindowsHInstance;
 		using RendererParameter = Rendering::RendererParameter;
 
 	public:

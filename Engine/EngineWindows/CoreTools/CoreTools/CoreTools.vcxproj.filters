@@ -211,12 +211,6 @@
     <Filter Include="Network 源文件">
       <UniqueIdentifier>{28f78546-ac38-40f4-b5dd-e2e4872a0fb3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Network 头文件\Detail">
-      <UniqueIdentifier>{134534c3-e986-42b7-857d-55a10691e704}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Network 源文件\Detail">
-      <UniqueIdentifier>{cd09f0dc-c8ef-4cfe-b44c-b1f46ceda341}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ObjectSystems 头文件">
       <UniqueIdentifier>{734d7b12-2867-4b32-b72a-3920d5915ed4}</UniqueIdentifier>
     </Filter>
@@ -373,44 +367,9 @@
     <Filter Include="MainFunctionHelper 模板文件">
       <UniqueIdentifier>{6b3645e5-dbf9-46ff-9750-d8893c060458}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
+    <Filter Include="Helper 头文件\Export">
+      <UniqueIdentifier>{dfb5ad13-60eb-4d12-af91-3784f2803e64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
@@ -482,7 +441,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.h">
       <Filter>Command 头文件\Detail</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h">
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentPackage.h">
       <Filter>Command 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.h">
@@ -986,9 +945,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\StreamMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Helper\TemplateToolsMacro.h">
-      <Filter>Helper 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\CoreToolsCustomAssertMacro.h">
       <Filter>Helper 头文件\Assertion</Filter>
     </ClInclude>
@@ -1292,25 +1248,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\ModuleInitializerTerminator\ModuleInitializerTerminator.h">
       <Filter>ModuleInitializerTerminator 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.h">
-      <Filter>Network 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.h">
-      <Filter>Network 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.h">
-      <Filter>Network 头文件\Detail</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.h">
-      <Filter>Network 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Network\Network.h">
       <Filter>Network 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Network\NetworkFwd.h">
-      <Filter>Network 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.h">
       <Filter>Network 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferInStreamImpl.h">
@@ -2099,6 +2040,72 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\GetRequiredBits.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\SharedImpl.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\PerformanceUnsharedImpl.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\SharedImplDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\PerformanceUnsharedImplDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CopyUnsharedImpl.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\CopyUnsharedImplDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\DelayCopyUnsharedImpl.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\DelayCopyUnsharedImplDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImpl.h">
+      <Filter>Contract 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\NonCopyImplDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\ClassInvariant\SystemClassInvariantMacro.h">
+      <Filter>Helper 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Assertion\SystemCustomAssertMacro.h">
+      <Filter>Helper 头文件\Assertion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MaxElement.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgumentImpl.h">
+      <Filter>Command 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\ImplFlags.h">
+      <Filter>Contract 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\SharedExportMacro.h">
+      <Filter>Helper 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\PerformanceUnsharedExportMacro.h">
+      <Filter>Helper 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\CopyUnsharedMacro.h">
+      <Filter>Helper 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\DelayCopyUnsharedMacro.h">
+      <Filter>Helper 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\NonCopyMacro.h">
+      <Filter>Helper 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\TriggerAssertDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Contract\AssertionDetail.h">
+      <Filter>Contract 模板文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\DllLib.cpp">
@@ -2137,7 +2144,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.cpp">
       <Filter>Command 源文件\Detail</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.cpp">
+    <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentPackage.cpp">
       <Filter>Command 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.cpp">
@@ -2524,21 +2531,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\EventInterface.cpp">
       <Filter>MessageEvent 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\DownloadingFilesImpl.cpp">
-      <Filter>Network 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\InternetConnection.cpp">
-      <Filter>Network 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\Detail\OpenUrlInternet.cpp">
-      <Filter>Network 源文件\Detail</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFiles.cpp">
-      <Filter>Network 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Network\DownloadingFilesEvent.cpp">
-      <Filter>Network 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\ObjectSystems\Detail\BufferOutStreamImpl.cpp">
       <Filter>ObjectSystems 源文件\Detail</Filter>
     </ClCompile>
@@ -2803,9 +2795,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\Assertion.cpp">
       <Filter>Contract 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\Contract\FunctionDescribed.cpp">
-      <Filter>Contract 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\Contract\Noexcept.cpp">
       <Filter>Contract 源文件</Filter>
     </ClCompile>
@@ -2839,5 +2828,45 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\ExecuteDllMain.cpp">
       <Filter>MainFunctionHelper 源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
 </Project>

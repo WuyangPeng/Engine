@@ -1,27 +1,24 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 15:40)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/12 18:04)
 
 #ifndef SYSTEM_GL_EXTENSIONS_H
 #define SYSTEM_GL_EXTENSIONS_H
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/GLExtensionsMacro.h"
-
 namespace System
 {
-    SYSTEM_HIDDEN_DECLARE const char* GetVendorString() noexcept;
-    SYSTEM_HIDDEN_DECLARE const char* GetRendererString() noexcept;
-    SYSTEM_HIDDEN_DECLARE const char* GetVersionString() noexcept;
-    SYSTEM_HIDDEN_DECLARE const char* GetExtensionString() noexcept;
-    SYSTEM_HIDDEN_DECLARE bool InitGL(bool printInfo = true);
-    SYSTEM_HIDDEN_DECLARE void PrintOpenGLInfo();
+    SYSTEM_HIDDEN_DECLARE NODISCARD const char* GetVendorString() noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD const char* GetRendererString() noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD const char* GetVersionString() noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD const char* GetShadingLanguageVersion() noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD bool InitGL() noexcept;
 }
 
 #endif  // SYSTEM_GL_EXTENSIONS_H

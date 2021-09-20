@@ -12,14 +12,23 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Rendering/SceneGraph/Spatial.h"
 
-RENDERING_EXPORT_SHARED_PTR(IKGoalImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, IKGoalImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE IKGoal : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IKGoal, = default);
+        void Swap(IKGoal& rhs) noexcept;
+  
+      public:
+          TYPE_DECLARE(IKGoal);
+          using ClassShareType = CoreTools::CopyUnsharedClasses;
+          ~IKGoal() noexcept= default;
+          IKGoal(const IKGoal& rhs);
+          IKGoal& operator=(const IKGoal& rhs);
+          IKGoal(IKGoal&& rhs) noexcept;
+          IKGoal& operator=(IKGoal&& rhs) noexcept;
         using ParentType = Object;
         using APoint = Mathematics::FloatAPoint;
 
@@ -45,7 +54,7 @@ namespace Rendering
         ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
-        IMPL_TYPE_DECLARE(IKGoal);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

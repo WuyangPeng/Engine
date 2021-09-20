@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorBox3Box3<Real>::DynamicFindIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, m_Impl{ std::make_shared<ImplType>(box0, box1) }
+    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, impl{  box0, box1  }
 {
     Find();
 
@@ -31,7 +31,7 @@ Mathematics::DynamicFindIntersectorBox3Box3<Real>::DynamicFindIntersectorBox3Box
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorBox3Box3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -43,7 +43,7 @@ const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorBox3Box3<Real>:
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBox0();
+    return impl->GetBox0();
 }
 
 template <typename Real>
@@ -51,7 +51,7 @@ const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorBox3Box3<Real>:
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBox1();
+    return impl->GetBox1();
 }
 
 template <typename Real>
@@ -59,7 +59,7 @@ int Mathematics::DynamicFindIntersectorBox3Box3<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -67,7 +67,7 @@ const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorBox3Box3<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
@@ -84,8 +84,8 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     // box1相对于box0的相对速度。
     auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
 
-    auto box0 = m_Impl->GetBox0();
-    auto box1 = m_Impl->GetBox1();
+    auto box0 = impl->GetBox0();
+    auto box1 = impl->GetBox1();
 
     // box 0 法线。
     for (auto i = 0; i < 3; ++i)
@@ -143,7 +143,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
                 /// 目前，这些面已经过测试，没有分离，因此所有进一步的分离测试将仅显示重叠。
 
                 FindContactSet<Real> findContactSet{ box0, box1, side, box0Cfg, box1Cfg, this->GetLhsVelocity(), this->GetRhsVelocity(), contactTime };
-                m_Impl->SetPoint(findContactSet.GetPoint());
+                impl->SetPoint(findContactSet.GetPoint());
                 this->SetContactTime(contactTime);
                 this->SetIntersectionType(IntersectionType::Other);
                 return;
@@ -216,7 +216,7 @@ void Mathematics::DynamicFindIntersectorBox3Box3<Real>::Find()
     }
 
     FindContactSet<Real> findContactSet{ box0, box1, side, box0Cfg, box1Cfg, this->GetLhsVelocity(), this->GetRhsVelocity(), contactTime };
-    m_Impl->SetPoint(findContactSet.GetPoint());
+    impl->SetPoint(findContactSet.GetPoint());
 
     this->SetContactTime(contactTime);
     this->SetIntersectionType(IntersectionType::Other);

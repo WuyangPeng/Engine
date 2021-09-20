@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 14:21)
+//	引擎版本：0.7.1.1 (2020/10/26 14:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -35,19 +35,19 @@ void CoreTools::CyclicRedundancyCheckHandle::Destroy() noexcept
 }
 
 CoreTools::CyclicRedundancyCheckHandle::CyclicRedundancyCheckHandle([[maybe_unused]] CyclicRedundancyCheckHandleCreate cyclicRedundancyCheckHandleCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CyclicRedundancyCheckHandle)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckHandle)
 uint16_t CoreTools::CyclicRedundancyCheckHandle::GetCCITT(int index) const
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCCITT(index);
+    return impl->GetCCITT(index);
 }
 
 uint16_t CoreTools::CyclicRedundancyCheckHandle::Get16Table(int index) const
@@ -56,7 +56,7 @@ uint16_t CoreTools::CyclicRedundancyCheckHandle::Get16Table(int index) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Get16Table(index);
+    return impl->Get16Table(index);
 }
 
 uint32_t CoreTools::CyclicRedundancyCheckHandle::Get32Table(int index) const
@@ -65,5 +65,5 @@ uint32_t CoreTools::CyclicRedundancyCheckHandle::Get32Table(int index) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Get32Table(index);
+    return impl->Get32Table(index);
 }

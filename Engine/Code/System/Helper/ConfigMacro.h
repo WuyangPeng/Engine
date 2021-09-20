@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 0:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/03 10:58)
 
 #ifndef SYSTEM_HELPER_CONFIG_MACRO_H
 #define SYSTEM_HELPER_CONFIG_MACRO_H
@@ -22,7 +22,7 @@
 #include "SelectStdlibConfig.h"
 
 #if !defined(SYSTEM_LITTLE_ENDIAN) && !defined(SYSTEM_BIG_ENDIAN)
-    #define SYSTEM_LITTLE_ENDIAN
+    #define SYSTEM_LITTLE_ENDIAN static_cast<void>(0)
 #endif  // !defined(SYSTEM_LITTLE_ENDIAN) && !defined(SYSTEM_BIG_ENDIAN)
 
 #ifndef SYSTEM_CPP_STANDARD
@@ -33,9 +33,29 @@
     #error "使用C++17标准，不再兼容C++98、C++03编译器。"
 #endif  // SYSTEM_CPP_STANDARD < 17
 
-#ifndef SYSTEM_ATTRIBUTE_UNUSED
-    #define SYSTEM_ATTRIBUTE_UNUSED
-#endif  // SYSTEM_ATTRIBUTE_UNUSED
+#ifndef MAYBE_UNUSED
+    #define MAYBE_UNUSED [[maybe_unused]]
+#endif  // MAYBE_UNUSED
+
+#ifndef FALLTHROUGH
+    #define FALLTHROUGH [[fallthrough]]
+#endif  // FALLTHROUGH
+
+#ifndef NODISCARD
+    #define NODISCARD [[nodiscard]]
+#endif  // NODISCARD
+
+#ifndef MAYBE_NULLPTR
+    #define MAYBE_NULLPTR [[nodiscard]]
+#endif  // MAYBE_NULLPTR
+
+#ifndef SYSTEM_DEPRECATED
+    #define SYSTEM_DEPRECATED(x) [[deprecated(x)]]
+#endif  // SYSTEM_DEPRECATED
+
+#ifndef SYSTEM_NORETURN
+    #define SYSTEM_NORETURN [[noreturn]]
+#endif  // SYSTEM_NORETURN
 
 #ifndef TCRE_SYSTEM_PLATFORM
     #error "没有定义平台。"

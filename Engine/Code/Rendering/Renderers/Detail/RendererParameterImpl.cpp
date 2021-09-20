@@ -211,7 +211,7 @@ bool Rendering::RendererParameterImpl::IsCursorDefault() const noexcept
 	return m_IsCursorDefault;
 }
 
-System::WindowBrushTypes Rendering::RendererParameterImpl
+System::WindowsBrushTypes Rendering::RendererParameterImpl
 	::GetBackground() const noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
@@ -220,7 +220,7 @@ System::WindowBrushTypes Rendering::RendererParameterImpl
 }
 
 void Rendering::RendererParameterImpl
-	::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowBrushTypes background) noexcept
+	::SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowsBrushTypes background) noexcept
 {
 	RENDERING_CLASS_IS_VALID_9;
 

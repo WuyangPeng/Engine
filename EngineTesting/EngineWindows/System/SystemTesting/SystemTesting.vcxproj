@@ -1,0 +1,1092 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{31369ABF-BCE0-4A14-9F25-79AC65AAB3BC}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>SystemTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(AssistEngineering)/AssistWindows/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Resource/UnicodeMacroTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/UnicodeMacroTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StringConversionTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/StringConversionTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/ConsoleHandleTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/ConsoleHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileMappingTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileMappingTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/CFileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/FileTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering)/$(Platform)/$(Configuration)Windows/Resource/AttributesTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\SystemTesting.json" />
+    <None Include="Configuration\Testing.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\CFileTesting\CharacterTest.txt" />
+    <Text Include="Resource\FileTesting\CreateExistingFile.txt" />
+    <Text Include="Resource\FileTesting\CreateOnlyReadFile.txt" />
+    <Text Include="Resource\FileTesting\FileLength.txt" />
+    <Text Include="Resource\FileTesting\FilePointerText.txt" />
+    <Text Include="Resource\StringConversionTesting\UTF8ConversionWideChar.txt" />
+    <Text Include="Resource\StringConversionTesting\WideCharConversionUTF8.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+    <Text Include="Resource\AttributesTesting\AttributesTestFile.txt" />
+    <Text Include="Resource\CFileTesting\CFileTestingText.txt" />
+    <Text Include="Resource\CFileTesting\OperatorTest.txt" />
+    <Text Include="Resource\ConsoleHandleTesting\InputHandleTest.txt" />
+    <Text Include="Resource\ConsoleHandleTesting\OutputHandleTest.txt" />
+    <Text Include="Resource\FileMappingTesting\FileMappingTest.txt" />
+    <Text Include="Resource\FileTesting\FileTestingText.txt" />
+    <Text Include="Resource\UnicodeMacroTesting\UnicodeMacroFStreamTest.txt" />
+    <Text Include="Resource\UnicodeMacroTesting\UnicodeMacroIFStreamTest.txt" />
+    <Text Include="Resource\UnicodeMacroTesting\UnicodeMacroOFStreamTest.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CharacterStringSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\CodePageTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\CodePageValidTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseDllMoudleAndLocalAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseDllMoudleAndUseBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseLocalAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseVaListAndUseBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentArrayAndBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentArrayAndLocalAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseVaListAndLocalAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\SoftwareExceptionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrcatTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrcpyTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrstrTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\SNPrintfTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrlenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrtokTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\VsnPrintfTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CaseInsensitiveComparisonTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringOrdinalUseBinaryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleStringTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\MultiByteConversionWideCharTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\UTF8ConversionWideCharTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionMultiByteTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionUTF8Testing.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\BackgroundColourTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\DefaultTextAttributeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleCommonTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ReadAttributeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\TextColourTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\WriteAttributeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\ConsoleScreenBufferInfoTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\CreateSystemConsoleScreenBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\SetConsoleHandleScreenBufferInfoTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\SetSystemConsoleScreenBufferSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\DynamicLinkSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryDirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleFileNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\FindResourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\LoadStringTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileCharacterTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOpenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOperatorTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileReadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetvBufTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\EnvironmentVariableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileManagerSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeCompareTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeConvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTools\CreateDirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTools\DiskFreeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CopyFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateExistingFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithAttributesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithDefaultAttributesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithOtherFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithSecurityFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\DirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\FileHandlePointerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\FileLengthTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\MoveFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\OpenFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\CompilerConfigTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\ConfigMarkTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\EndianTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\FixedSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\PlatformConfigTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlPluginMacroHelper.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlUtilityMacroHelper.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\NumberEnum.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumCastTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAddableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAndableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumDecrementableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumXorableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumIncrementableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumMultiplicationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumNegateTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumOrableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumShiftableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumSubtractableTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\GlExtensionsMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\HelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\NetworkMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\NoexceptTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlPluginMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityBodyResultTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityBodyTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityGetFunctionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityMarkTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityPreviouslyBodyResultTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityPreviouslyBodyTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlxExtensionsMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\WglExtensionsMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\PlatformTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaMessageMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaWarningTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\SecuritySidMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\StringizeMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\UserMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\VariableTemplateTypeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIDTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CurrentProcessHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CompactHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CreateHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ReAllocateHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ValidateHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemoryAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemorySizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\FillMemoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\GetWindowsStructDefaultSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MallocMemoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MemoryCopyTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MemorySetTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryToolsSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\CreateFileMappingTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\OpenFileMappingTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\ViewOfFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\AllocateVirtualOneStepTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\AllocateVirtualSeparationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualProtectTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualQueryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockHostTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockProtoentTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServentTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\NetworkSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\AcceptTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\ConnectTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\GetSocketTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\HostNetConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\IoctlSocketTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\RecvFromTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SendToTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\ShutDownTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SocketNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SelectTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsExtensionPrototypesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\GetWinSocketTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketAcceptTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketConnectByNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketConnectTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketHostNetConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketRecvFromTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketSendToTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLProgramTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLShaderTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLWglPrototypesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\MapGenericMaskTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedAceUseAceFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedObjectAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessDeniedAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessDeniedObjectAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAuditAccessAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAuditAccessObjectAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateFilePrivateObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityUseAutoInheritTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityWithMultipleInheritanceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\FileSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\KernelObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\ConvertToAutoInheritPrivateObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\SecurityAccessMaskTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\SetPrivateObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilegeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\AddAccessControlEntriesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\AddMandatoryAceTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\FindFirstFreeAccessControlEntriesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\AclInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\InitializeAclTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\DuplicateTokenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\IsSystemTokenElevatedTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\QuerySecurityAccessMaskTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\RestrictedTokenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\TokenInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\TokenInformationTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\InitializeSecurityDescriptorTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorControlTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDaclTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorGroupTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorOwnerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorRMControlTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSaclTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\UserObjectSecurityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\CopySecurityIdentifierTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\InitializeSecurityIdentifierTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\GetSubAuthorityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\WellKnownSidTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputKeyEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidLooperTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeAppGlueTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCodePageTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleColoursTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\FillAttributeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCreateTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFontTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleModeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D11Testing.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\LinuxSuite\LinuxNativeWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\LinuxSuite\LinuxSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MacintoshSuite\MacintoshNativeWindowTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\MacintoshSuite\MacintoshSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLAPITesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLGlutTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLInitTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLUtilityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\LanguageIDDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxFlagsDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseYesNoCancelTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\OutputDebugStringTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\SystemOutputSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableCriticalSectionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableSlimReaderWriterLockTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\CriticalSectionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\CriticalSectionThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\SpecifyCriticalSectionAndSpinCountTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\SpecifyCriticalSectionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\AutoEventThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\CreateEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\CreateEventUseNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\ManualEventThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\OpenEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\ResetEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\WaitForEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\WaitForMultipleEventTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceSynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedBinaryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedBinaryTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedSubtractTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedSubtractTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedTestingDetail.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateDefaultMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexUseFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\OpenMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\PThreadMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\ThreadMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\WaitForMultipleMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\WaitForMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ProcessTools\ProcessTokenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\CreateDefaultProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\CreateProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\GetProcessHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\OpenProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ProcessPriorityClassTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\WaitMultipleSemaphoreTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\CreateSemaphoreThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\CreateSemaphoreThreadUseNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\OpenSemaphoreTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\ReleaseSemaphoreTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\WaitSemaphoreTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterInitializeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterReaderTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterWriterTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SyncTools\SleepTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SyncTools\SignalObjectAndWaitTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadingSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadLocalStorageTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\OpenThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\PriorityBoostTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadTimesTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadTokenTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateDefaultThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateSuspendedThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateCThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\GetCurrentThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\ThreadPriorityTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\WaitForMultipleThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\WaitForThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CancelWaitableTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerManualTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerManualUseFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerSynchronizationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerSynchronizationUseFlagsTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerUseNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\OpenWaitableTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\SetWaitableTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitForMultipleWaitableTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitForWaitableTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeValueDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\SystemPauseTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeOfDayDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\LastPlatformErrorTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreateTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsFontInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsNamedPipeTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsProcessTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsRegisterTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSuite.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\BoolConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\DebugBreakTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\ExitTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemInfoTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemInputTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemUserNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\SystemCommandTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\SystemDirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsUserTesting.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\CodePageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\CodePage\CodePageValidTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseDllMoudleAndLocalAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseDllMoudleAndUseBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatErrorMessageUseLocalAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseVaListAndUseBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentArrayAndBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseArgumentArrayAndLocalAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\FormatStringMessageUseVaListAndLocalAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatErrorMessage\SoftwareExceptionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrcatTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrcpyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrstrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\SNPrintfTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrlenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\StrtokTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\FormatString\VsnPrintfTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CaseInsensitiveComparisonTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringOrdinalUseBinaryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\CompareStringUseLocaleStringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\MultiByteConversionWideCharTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\UTF8ConversionWideCharTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionMultiByteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\CharacterStringSuite\StringConversion\WideCharConversionUTF8Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\BackgroundColourTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\DefaultTextAttributeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleCommonTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ReadAttributeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\TextColourTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\WriteAttributeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\ConsoleScreenBufferInfoTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\CreateSystemConsoleScreenBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\SetConsoleHandleScreenBufferInfoTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleScreenBuffer\SetSystemConsoleScreenBufferSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\EnumResourceToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\EnumResourceTools\ResourceEnumTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryDirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleFileNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LibraryTools\GetModuleHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\GetProcAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\FindResourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\LoadResourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadResourceTools\LoadStringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileCharacterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOpenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileOperatorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileReadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileSetvBufTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\CFile\CFileWriteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\EnvironmentVariableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeCompareTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeConvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTime\FileTimeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTools\CreateDirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\FileTools\DiskFreeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CopyFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateExistingFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithAttributesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithDefaultAttributesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithOtherFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\CreateFileWithSecurityFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\DirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\FileHandlePointerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\FileLengthTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\MoveFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\OpenFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\ReadFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\FileManagerSuite\File\WriteFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\CompilerConfigTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\ConfigMarkTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\EndianTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\FixedSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\PlatformConfigTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlPluginMacroHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\Detail\GlUtilityMacroHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumCastTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAddableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumAndableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumDecrementableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumXorableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumIncrementableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumMultiplicationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumNegateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumOrableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumShiftableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\EnumMacro\EnumSubtractableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\GlExtensionsMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\NetworkMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\NoexceptTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlPluginMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityBodyResultTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityBodyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityGetFunctionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityMarkTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityPreviouslyBodyResultTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlUtilityMacro\GlUtilityPreviouslyBodyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\GlxExtensionsMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\OpenGL\WglExtensionsMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\PlatformTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaMessageMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\PragmaWarningTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\SecuritySidMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\StringizeMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UnicodeUsingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\UserMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\VariableTemplateTypeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\VersionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\DebugTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\GetArraySizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\HResultTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeIntreSourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageIDTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CurrentProcessHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CompactHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\CreateHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ReAllocateHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\ValidateHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemoryAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\LocalTools\LocalMemorySizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\FillMemoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\GetWindowsStructDefaultSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MallocMemoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MemoryCopyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\MemoryHelper\MemorySetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\CreateFileMappingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\OpenFileMappingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\ViewOfFile\ViewOfFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\AllocateVirtualOneStepTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\AllocateVirtualSeparationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualProtectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\VirtualTools\VirtualQueryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockHostTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockProtoentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\DatabasePrototypes\WinSockServentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\AcceptTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\ConnectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\GetSocketTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\HostNetConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\IoctlSocketTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\RecvFromTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SendToTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\ShutDownTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SocketNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SelectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\SocketPrototypes\SockOptTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsExtensionPrototypesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\GetWinSocketTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketAcceptTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketConnectByNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketConnectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketHostNetConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketRecvFromTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\NetworkSuite\WindowsSockEx\WinSocketSendToTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLProgramTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLShaderTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLWglPrototypesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\AccessCheckTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AccessCheck\MapGenericMaskTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedAceUseAceFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessAllowedObjectAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessDeniedAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAccessDeniedObjectAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAuditAccessAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\AddAccess\AddAuditAccessObjectAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreateFilePrivateObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityUseAutoInheritTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\CreatePrivateObjectSecurityWithMultipleInheritanceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\FileSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\KernelObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\ConvertToAutoInheritPrivateObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\SecurityAccessMaskTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\CreateSecurity\SetPrivateObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\LookupPrivilegeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\AddAccessControlEntriesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\AddMandatoryAceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAce\FindFirstFreeAccessControlEntriesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\AclInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityAcl\InitializeAclTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AccessesGrantedTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\AdjustTokenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\DuplicateTokenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\IsSystemTokenElevatedTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\QuerySecurityAccessMaskTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\RestrictedTokenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityBase\TokenInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\InitializeSecurityDescriptorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorControlTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorDaclTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorGroupTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorOwnerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorRMControlTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\SecurityDescriptorSaclTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecurityDescriptor\UserObjectSecurityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\CopySecurityIdentifierTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\InitializeSecurityIdentifierTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\GetSubAuthorityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SecuritySuite\SecuritySid\WellKnownSidTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputKeyEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputMotionEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidInputQueueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidLooperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeAppGlueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\AndroidSuite\AndroidNativeWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCodePageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\ConsoleColoursTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleColours\FillAttributeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleCreateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleFontTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ConsoleSuite\ConsoleModeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\DirectXSuite\DirectXD3D11Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\LinuxSuite\LinuxNativeWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\MacintoshSuite\MacintoshNativeWindowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLAPITesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLGlutTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLInitTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\OpenGLSuite\OpenGLUtilityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\LanguageIDDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxFlagsDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseFlagsDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseLanguageIDDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\MessageBoxSelection\MessageBoxSelectionUseYesNoCancelTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\SystemOutputSuite\OutputDebugStringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableCriticalSectionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ConditionVariable\ConditionVariableSlimReaderWriterLockTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\CriticalSectionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\CriticalSectionThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\SpecifyCriticalSectionAndSpinCountTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\CriticalSection\SpecifyCriticalSectionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\AutoEventThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\CreateEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\CreateEventUseNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\ManualEventThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\OpenEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\ResetEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\WaitForEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Event\WaitForMultipleEventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\InitOnce\InitOnceSynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedBinaryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedSubtractTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Interlocked\InterlockedTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateDefaultMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\CreateMutexUseFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\OpenMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\PThreadMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\ThreadMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\WaitForMultipleMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Mutex\WaitForMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ProcessTools\ProcessTokenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\CreateDefaultProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\CreateProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\GetProcessHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\OpenProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Process\ProcessPriorityClassTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\WaitMultipleSemaphoreTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\CreateSemaphoreThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\CreateSemaphoreThreadUseNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\OpenSemaphoreTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\ReleaseSemaphoreTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Semaphore\WaitSemaphoreTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterInitializeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterReaderTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SlimReaderWriter\SlimReaderWriterWriterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SyncTools\SleepTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\SyncTools\SignalObjectAndWaitTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadLocalStorageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\OpenThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\PriorityBoostTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadTimesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\ThreadTools\ThreadTokenTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateDefaultThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateSuspendedThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\CreateCThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\GetCurrentThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\ThreadPriorityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\WaitForMultipleThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\Thread\WaitForThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CancelWaitableTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerManualTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerManualUseFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerSynchronizationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerSynchronizationUseFlagsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\CreateWaitableTimerUseNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\OpenWaitableTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\SetWaitableTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitForMultipleWaitableTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\ThreadingSuite\WaitableTimer\WaitForWaitableTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\DeltaTimeValueDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\SystemPauseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\TimeSuite\TimeOfDayDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\EngineeringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\LastPlatformErrorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsCreateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsFontInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsNamedPipeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsProcessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsRegisterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\BoolConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\DebugBreakTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\ExitTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemInfoTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemInputTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\GetSystemUserNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\SystemCommandTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsSystem\SystemDirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\WindowsSuite\WindowsUserTesting.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

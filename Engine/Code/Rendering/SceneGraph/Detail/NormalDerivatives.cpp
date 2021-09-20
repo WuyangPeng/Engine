@@ -14,7 +14,7 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/TriangleIndex.h"
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26496)

@@ -17,19 +17,30 @@
 
 #include <boost/noncopyable.hpp>
 #include <string>
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 template class NETWORK_DEFAULT_DECLARE std::weak_ptr<Network::SockAddress>;
 template class NETWORK_DEFAULT_DECLARE std::enable_shared_from_this<Network::SockAddress>;
 
-NETWORK_EXPORT_SHARED_PTR(SockAddressImpl);
-
+ 
+EXPORT_SHARED_PTR(Network, SockAddressImpl, NETWORK_DEFAULT_DECLARE);
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE SockAddress final : public std::enable_shared_from_this<SockAddress>
     {
     public:
         // 类会返回内部变量的引用，所以无法使用延迟复制。
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SockAddress, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(SockAddress& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(SockAddress);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~SockAddress() noexcept = default;
+        SockAddress(const SockAddress& rhs);
+        SockAddress& operator=(const SockAddress& rhs);
+        SockAddress(SockAddress&& rhs) noexcept;
+        SockAddress& operator=(SockAddress&& rhs) noexcept;
 
     public:
         explicit SockAddress(const ConfigurationStrategy& configurationStrategy);
@@ -54,7 +65,10 @@ namespace Network
         [[nodiscard]] int GetPort() const;
 
     private:
-        IMPL_TYPE_DECLARE(SockAddress);
+        using SockAddressImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        SockAddressImplPtr impl;
     };
 
     using SockAddressSharedPtr = std::shared_ptr<SockAddress>;

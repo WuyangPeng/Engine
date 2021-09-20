@@ -23,7 +23,7 @@ namespace Rendering
 	public:
 		using ClassType = PlatformVertexBufferImpl;
 		using PlatformVertexBufferPtr = std::shared_ptr<ClassType>;
-
+		 using FactoryType = ClassType;
 	public:
 		PlatformVertexBufferImpl () noexcept;
 		virtual ~PlatformVertexBufferImpl ();

@@ -1,9 +1,7 @@
 TODO Level 6
 
-0.5.1.0
+0.7.1.6
 
-1.（Helper）增加注释以清晰的了解GL宏所使用的函数，并使用枚举进行封装。
-2.（Helper）GL宏增加使用函数的注释，以标明用途。
-3.（SystemOutput）完成SystemOutput模块非Windows平台的实现：OutputDebugString、MessageBoxSelection。
-4.（SystemOutput）完成SystemOutput模块非Windows平台的实现：LanguageIDData、MessageBoxFlagsData相关的枚举定义。
-5.（Window）禁止关闭控制台窗口，但最小化时依然可以关闭。
+1.（SystemOutput）完成SystemOutput模块非Windows平台的实现：OutputDebugString、MessageBoxSelection。
+2.（SystemOutput）完成SystemOutput模块非Windows平台的实现：LanguageIDData、MessageBoxFlagsData相关的枚举定义。
+3.（Windows）禁止关闭控制台窗口，但最小化时依然可以关闭。

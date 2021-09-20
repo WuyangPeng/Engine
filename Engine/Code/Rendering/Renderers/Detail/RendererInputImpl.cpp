@@ -8,6 +8,7 @@
 
 #include "RendererInputImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "../RendererFactory.h"
 
 Rendering::RendererInputImpl
 	::RendererInputImpl() noexcept
@@ -23,4 +24,8 @@ Rendering::RendererInputImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,RendererInputImpl)
 
+Rendering::RendererInputImpl::RendererInputPtr Rendering::RendererInputImpl::Create(RendererTypes type)
+{
+    return RendererFactory::CreateInput(type);
+}
 

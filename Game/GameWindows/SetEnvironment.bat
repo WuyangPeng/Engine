@@ -4,6 +4,10 @@ echo GameInclude = %GameInclude%
 echo %cd%
 setx GameInclude "%cd%\..\Code" 
 
+echo GameEngineering = %GameEngineering%
+echo %cd%
+setx GameEngineering "%cd%\.." 
+
 echo GameWin32DebugLib = %GameWin32DebugLib%
 echo %cd%
 setx GameWin32DebugLib "%cd%\..\Win32\DebugWindows" 

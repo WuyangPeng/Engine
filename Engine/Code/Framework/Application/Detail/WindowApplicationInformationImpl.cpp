@@ -19,7 +19,7 @@ Framework::WindowApplicationInformationImpl
 	 m_Style{ allowResize ? WindowStyles::Default :
 	          // 这里删除 WS_THICKFRAME 和 WS_MAXIMIZEBOX,它们都允许调整窗口的大小
 	          WindowStyles::Overlapped | WindowStyles::Caption | WindowStyles::SysMenu | WindowStyles::MinimizeBox | WindowStyles::Visible },
-	 m_WindowName{ SYSTEM_TEXT("Window") }, m_WindowPictorial{ System::WindowBrushTypes::WhiteBrush }
+	 m_WindowName{ SYSTEM_TEXT("Window") }, m_WindowPictorial{ System::WindowsBrushTypes::WhiteBrush }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -129,7 +129,7 @@ const Framework::WindowSize Framework::WindowApplicationInformationImpl
 	return m_Size;
 }
 
-System::WindowStyles Framework::WindowApplicationInformationImpl
+System::WindowsStyles Framework::WindowApplicationInformationImpl
 	::GetStyle() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

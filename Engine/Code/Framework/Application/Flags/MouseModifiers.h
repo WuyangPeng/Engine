@@ -10,7 +10,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/EnumCast.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 
 namespace Framework

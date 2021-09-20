@@ -14,18 +14,18 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include <set>
 #include <string>
 
-NETWORK_EXPORT_SHARED_PTR(ConfigurationParameterImpl);
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(ConfigurationParameter,ConfigurationParameterImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE ConfigurationParameter final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationParameter);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(ConfigurationParameter);
         using String = System::String;
         using Parameter = std::set<System::String>;
 
@@ -39,7 +39,7 @@ namespace Network
         [[nodiscard]] const Parameter GetParameter(const String& key) const;
 
     private:
-        IMPL_TYPE_DECLARE(ConfigurationParameter);
+        PackageType impl;
     };
 }
 

@@ -9,8 +9,8 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "CoreTools/Console/ConsoleAlloc.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 #include "CoreTools/MainFunctionHelper/TestingInformationHelper.h"

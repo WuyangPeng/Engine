@@ -14,12 +14,12 @@ using std::string;
  
 AssistTools::GenerateTestingTemplateEngineDirectory
 	::GenerateTestingTemplateEngineDirectory(const System::String& directory, const string& configurationFileName)	 
-	:m_Impl(std::make_shared<ImplType>(directory, configurationFileName))
+	:impl(directory, configurationFileName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 } 
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTestingTemplateEngineDirectory)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTestingTemplateEngineDirectory)
 
 void AssistTools::GenerateTestingTemplateEngineDirectory
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, 
@@ -28,5 +28,5 @@ void AssistTools::GenerateTestingTemplateEngineDirectory
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newSolutionName, newCoreName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName);
+	return impl->GenerateTo(resourceDirectory, newSolutionName, newCoreName, newIncludeName, newTestingIncludeName, newDebugLibName, newReleaseLibName);
 }

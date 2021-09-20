@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/MemoryMacro.h"
 
 #include <fstream>
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH

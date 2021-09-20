@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorTriangle3Box3<Real>::StaticFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, const Real epsilon)
-    : ParentType{ epsilon }, m_Impl{ std::make_shared<ImplType>(triangle, box) }
+    : ParentType{ epsilon }, impl{   triangle, box  }
 {
     Find();
 
@@ -29,7 +29,7 @@ Mathematics::StaticFindIntersectorTriangle3Box3<Real>::StaticFindIntersectorTria
 template <typename Real>
 bool Mathematics::StaticFindIntersectorTriangle3Box3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -41,7 +41,7 @@ const Mathematics::Triangle3<Real> Mathematics::StaticFindIntersectorTriangle3Bo
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle();
+    return impl->GetTriangle();
 }
 
 template <typename Real>
@@ -49,7 +49,7 @@ const Mathematics::Box3<Real> Mathematics::StaticFindIntersectorTriangle3Box3<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBox();
+    return impl->GetBox();
 }
 
 template <typename Real>
@@ -74,7 +74,7 @@ void Mathematics::StaticFindIntersectorTriangle3Box3<Real>::Find()
 
     if (!container.empty())
     {
-        m_Impl->SetContainer(container);
+        impl->SetContainer(container);
         this->SetIntersectionType(IntersectionType::Point);
     }
     else
@@ -88,7 +88,7 @@ int Mathematics::StaticFindIntersectorTriangle3Box3<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -96,7 +96,7 @@ const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorTriangle3Box
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_ACHIEVE_H

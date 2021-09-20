@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:13)
+//	引擎版本：0.7.1.1 (2020/10/23 15:13)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
@@ -22,11 +22,11 @@ namespace CoreTools
         using ClassType = ExplicitCast<T>;
 
     public:
-        ExplicitCast(T value);
+        ExplicitCast(T value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator ValueType() const;
+        [[nodiscard]] operator ValueType() const noexcept;
 
     private:
         ValueType m_Value;
@@ -56,12 +56,12 @@ namespace CoreTools
         using ClassType = ExplicitCast<T const&>;
 
     public:
-        ExplicitCast(T const& value);
+        ExplicitCast(T const& value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator T const &() const;
+        [[nodiscard]] operator T const &() const noexcept;
 
         ExplicitCast& operator=(const ExplicitCast&) = delete;
 
@@ -93,12 +93,12 @@ namespace CoreTools
         using ClassType = ExplicitCast<T const*>;
 
     public:
-        ExplicitCast(T const* value);
+        ExplicitCast(T const* value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator T const *() const;
+        [[nodiscard]] operator T const *() const noexcept;
 
     private:
         T const* m_Value;

@@ -16,9 +16,9 @@
 #include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Controllers/ControlledObject.h"
 
+EXPORT_SHARED_PTR(Rendering, SpatialData, RENDERING_DEFAULT_DECLARE);
 
-
-RENDERING_EXPORT_SHARED_PTR(SpatialData);
+ 
 
 namespace CoreTools
 {

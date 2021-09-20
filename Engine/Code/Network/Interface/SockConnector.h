@@ -14,22 +14,26 @@
 
 #include "NetworkInternalFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include <boost/noncopyable.hpp>
 
-NETWORK_EXPORT_SHARED_PTR(SockConnectorImpl);
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(SockConnector,SockConnectorImpl);
+ 
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SockConnector final : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE SockConnector final  
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SockConnector);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(SockConnector);
 
     public:
         explicit SockConnector(const ConfigurationStrategy& configurationStrategy);
-
+        ~SockConnector() noexcept = default;
+        SockConnector(const SockConnector& rhs) noexcept = delete;
+        SockConnector& operator=(const SockConnector& rhs) noexcept = delete;
+        SockConnector(SockConnector&& rhs) noexcept = delete;
+        SockConnector& operator=(SockConnector&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
@@ -38,7 +42,7 @@ namespace Network
         void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
 
     private:
-        IMPL_TYPE_DECLARE(SockConnector);
+        PackageType impl;
     };
 }
 

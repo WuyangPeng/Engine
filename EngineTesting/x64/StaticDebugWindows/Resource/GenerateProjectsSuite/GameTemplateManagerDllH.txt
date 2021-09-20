@@ -1,0 +1,37 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_DLL_H
+#define %ProjectCapital%_%ManagerCapital%_DLL_H
+
+#include "System/Macro/ExportMacro.h"
+#include "Macro/UserMacro.h"
+
+#if defined(BUILDING_%ProjectCapital%_%ManagerCapital%_NO_IMPORT) || defined(BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC)
+
+  #define %ProjectCapital%_%ManagerCapital%_DEFAULT_DECLARE
+  #define %ProjectCapital%_%ManagerCapital%_HIDDEN_DECLARE 
+  #define %ProjectCapital%_%ManagerCapital%_VISIBLE
+
+#else // !defined(BUILDING_%ProjectCapital%_%ManagerCapital%_NO_IMPORT) && !defined(BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC)
+ 
+   #if defined(BUILDING_%ProjectCapital%_%ManagerCapital%_EXPORT)
+ 
+        #define %ProjectCapital%_%ManagerCapital%_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define %ProjectCapital%_%ManagerCapital%_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_%ProjectCapital%_%ManagerCapital%_EXPORT)
+
+		#define %ProjectCapital%_%ManagerCapital%_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define %ProjectCapital%_%ManagerCapital%_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_%ProjectCapital%_%ManagerCapital%_EXPORT
+
+#define %ProjectCapital%_%ManagerCapital%_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_%ProjectCapital%_%ManagerCapital%_NO_IMPORT) || defined(BUILDING_%ProjectCapital%_%ManagerCapital%_STATIC)
+ 
+#endif // %ProjectCapital%_%ManagerCapital%_DLL_H

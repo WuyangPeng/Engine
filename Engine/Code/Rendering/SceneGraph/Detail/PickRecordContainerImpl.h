@@ -7,6 +7,8 @@
 #ifndef RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H
 #define RENDERING_SCENE_GRAPH_PICK_RECORD_CONTAINER_IMPL_H
 
+#include "Rendering/RenderingDll.h"
+
 #include "Rendering/SceneGraph/PickRecord.h" 
 
 #include <vector>

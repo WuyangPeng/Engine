@@ -11,15 +11,15 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/AVector.h"
-
-RENDERING_EXPORT_SHARED_PTR(PrincipalCurvatureInfoImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(PrincipalCurvatureInfoImpl);
 
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE PrincipalCurvatureInfo
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PrincipalCurvatureInfo);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(PrincipalCurvatureInfo);
         using AVector = Mathematics::FloatAVector;
 
     public:
@@ -33,7 +33,7 @@ namespace Rendering
         const AVector GetPrincipalDirection1() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(PrincipalCurvatureInfo);
+        PackageType impl;
     };
 
 }

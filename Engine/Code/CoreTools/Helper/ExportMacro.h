@@ -1,88 +1,160 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/09/28 16:39)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.1 (2021/08/09 23:55)
 
 #ifndef CORE_TOOLS_HELPER_EXPORT_MACRO_H
 #define CORE_TOOLS_HELPER_EXPORT_MACRO_H
 
-#include "CoreTools/Contract/ImplStaticAssertHelper.h"
+#include "UserMacro.h"
 
-#include <boost/noncopyable.hpp>
 #include <memory>
 
-#define EXPORT_SHARED_PTR(namespaceName, implClassName, exportName) \
-    namespace namespaceName                                         \
-    {                                                               \
-        class implClassName;                                        \
-    }                                                               \
-    template class exportName std::shared_ptr<namespaceName::implClassName>
+#ifdef BUILDING_STATIC
 
-#define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName)                                                                    \
-    namespace namespaceName                                                                                                            \
-    {                                                                                                                                  \
-        class implClassName;                                                                                                           \
-    }                                                                                                                                  \
-    template class exportName std::_Compressed_pair<std::default_delete<namespaceName::implClassName>, namespaceName::implClassName*>; \
-    template class exportName std::unique_ptr<namespaceName::implClassName>
+    #define EXPORT_SHARED_PTR(namespaceName, implClassName, exportName) \
+        namespace namespaceName                                         \
+        {                                                               \
+            class implClassName;                                        \
+        }
 
-#define EXPORT_CLASS(exportName, className) \
-    class SYSTEM_CONCATENATOR(exportName, _DEFAULT_DECLARE) className
+    #define EXPORT_CONST_SHARED_PTR(namespaceName, implClassName, exportName) \
+        namespace namespaceName                                               \
+        {                                                                     \
+            class implClassName;                                              \
+        }
 
-#define EXPORT_NONCOPYABLE_CLASS(exportName) \
-    EXPORT_CLASS(exportName, boost::noncopyable_::noncopyable)
+    #define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName) \
+        namespace namespaceName                                         \
+        {                                                               \
+            class implClassName;                                        \
+        }
 
-#define CORE_TOOLS_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
+#else  // !BUILDING_STATIC
 
-#define NETWORK_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Network, implClassName, NETWORK_DEFAULT_DECLARE)
+    #define EXPORT_SHARED_PTR(namespaceName, implClassName, exportName) \
+        namespace namespaceName                                         \
+        {                                                               \
+            class implClassName;                                        \
+        }                                                               \
+        template class exportName std::shared_ptr<namespaceName::implClassName>
 
-#define DATABASE_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Database, implClassName, DATABASE_DEFAULT_DECLARE)
+    #define EXPORT_CONST_SHARED_PTR(namespaceName, implClassName, exportName) \
+        namespace namespaceName                                               \
+        {                                                                     \
+            class implClassName;                                              \
+        }                                                                     \
+        template class exportName std::shared_ptr<const namespaceName::implClassName>
 
-#define SCRIPT_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Script, implClassName, SCRIPT_DEFAULT_DECLARE)
+    #define EXPORT_UNIQUE_PTR(namespaceName, implClassName, exportName)                                                                    \
+        namespace namespaceName                                                                                                            \
+        {                                                                                                                                  \
+            class implClassName;                                                                                                           \
+        }                                                                                                                                  \
+        template class exportName std::_Compressed_pair<std::default_delete<namespaceName::implClassName>, namespaceName::implClassName*>; \
+        template class exportName std::unique_ptr<namespaceName::implClassName>
 
-#define MATHEMATICS_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Mathematics, implClassName, MATHEMATICS_DEFAULT_DECLARE)
+#endif  // BUILDING_STATIC
 
-#define SOUND_EFFECT_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(SoundEffect, implClassName, SOUND_EFFECT_DEFAULT_DECLARE)
+#define CORE_TOOLS_EXPORT(implClassName, type) \
+    EXPORT_##type(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
 
-#define INPUT_OUTPUT_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(InputOutput, implClassName, INPUT_OUTPUT_DEFAULT_DECLARE)
+#define NETWORK_EXPORT(implClassName, type) \
+    EXPORT_##type(Network, implClassName, NETWORK_DEFAULT_DECLARE)
 
-#define RESOURCE_MANAGER_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(ResourceManager, implClassName, RESOURCE_MANAGER_DEFAULT_DECLARE)
+#define DATABASE_EXPORT(implClassName, type) \
+    EXPORT_##type(Database, implClassName, DATABASE_DEFAULT_DECLARE)
 
-#define RENDERING_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Rendering, implClassName, RENDERING_DEFAULT_DECLARE)
+#define SCRIPT_EXPORT(implClassName, type) \
+    EXPORT_##type(Script, implClassName, SCRIPT_DEFAULT_DECLARE)
 
-#define PHYSICS_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Physics, implClassName, PHYSICS_DEFAULT_DECLARE)
+#define MATHEMATICS_EXPORT(implClassName, type) \
+    EXPORT_##type(Mathematics, implClassName, MATHEMATICS_DEFAULT_DECLARE)
 
-#define IMAGICS_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Imagics, implClassName, IMAGICS_DEFAULT_DECLARE)
+#define SOUND_EFFECT_EXPORT(implClassName, type) \
+    EXPORT_##type(SoundEffect, implClassName, SOUND_EFFECT_DEFAULT_DECLARE)
 
-#define ANIMATION_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
+#define INPUT_OUTPUT_EXPORT(implClassName, type) \
+    EXPORT_##type(InputOutput, implClassName, INPUT_OUTPUT_DEFAULT_DECLARE)
 
-#define ARTIFICIAL_INTELLEGENCE_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+#define RESOURCE_MANAGER_EXPORT(implClassName, type) \
+    EXPORT_##type(ResourceManager, implClassName, RESOURCE_MANAGER_DEFAULT_DECLARE)
 
-#define USER_INTERFACE_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
+#define RENDERING_EXPORT(implClassName, type) \
+    EXPORT_##type(Rendering, implClassName, RENDERING_DEFAULT_DECLARE)
 
-#define ASSIST_TOOLS_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(AssistTools, implClassName, ASSIST_TOOLS_DEFAULT_DECLARE)
+#define PHYSICS_EXPORT(implClassName, type) \
+    EXPORT_##type(Physics, implClassName, PHYSICS_DEFAULT_DECLARE)
 
-#define FRAMEWORK_EXPORT_SHARED_PTR(implClassName) \
-    EXPORT_SHARED_PTR(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
+#define IMAGICS_EXPORT(implClassName, type) \
+    EXPORT_##type(Imagics, implClassName, IMAGICS_DEFAULT_DECLARE)
+
+#define ANIMATION_EXPORT(implClassName, type) \
+    EXPORT_##type(Animation, implClassName, ANIMATION_DEFAULT_DECLARE)
+
+#define ARTIFICIAL_INTELLEGENCE_EXPORT(implClassName, type) \
+    EXPORT_##type(ArtificialIntellegence, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+
+#define USER_INTERFACE_EXPORT(implClassName, type) \
+    EXPORT_##type(UserInterface, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
+
+#define ASSIST_TOOLS_EXPORT(implClassName, type) \
+    EXPORT_##type(AssistTools, implClassName, ASSIST_TOOLS_DEFAULT_DECLARE)
+
+#define FRAMEWORK_EXPORT(implClassName, type) \
+    EXPORT_##type(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
+
+#define CORE_TOOLS_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(CoreTools, className, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
+
+#define NETWORK_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Network, className, implClassName, NETWORK_DEFAULT_DECLARE)
+
+#define DATABASE_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Database, className, implClassName, DATABASE_DEFAULT_DECLARE)
+
+#define SCRIPT_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Script, className, implClassName, SCRIPT_DEFAULT_DECLARE)
+
+#define MATHEMATICS_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Mathematics, className, implClassName, MATHEMATICS_DEFAULT_DECLARE)
+
+#define SOUND_EFFECT_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(SoundEffect, className, implClassName, SOUND_EFFECT_DEFAULT_DECLARE)
+
+#define INPUT_OUTPUT_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(InputOutput, className, implClassName, INPUT_OUTPUT_DEFAULT_DECLARE)
+
+#define RESOURCE_MANAGER_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(ResourceManager, className, implClassName, RESOURCE_MANAGER_DEFAULT_DECLARE)
+
+#define RENDERING_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Rendering, className, implClassName, RENDERING_DEFAULT_DECLARE)
+
+#define PHYSICS_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Physics, className, implClassName, PHYSICS_DEFAULT_DECLARE)
+
+#define IMAGICS_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Imagics, className, implClassName, IMAGICS_DEFAULT_DECLARE)
+
+#define ANIMATION_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Animation, className, implClassName, ANIMATION_DEFAULT_DECLARE)
+
+#define ARTIFICIAL_INTELLEGENCE_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(ArtificialIntellegence, className, implClassName, ARTIFICIAL_INTELLEGENCE_DEFAULT_DECLARE)
+
+#define USER_INTERFACE_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(UserInterface, className, implClassName, USER_INTERFACE_DEFAULT_DECLARE)
+
+#define ASSIST_TOOLS_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(AssistTools, className, implClassName, ASSIST_TOOLS_DEFAULT_DECLARE)
+
+#define FRAMEWORK_COPY_EXPORT(className, implClassName, type) \
+    EXPORT_##type(Framework, className, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
 #define CORE_TOOLS_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(CoreTools, implClassName, CORE_TOOLS_DEFAULT_DECLARE)
@@ -132,65 +204,35 @@
 #define FRAMEWORK_EXPORT_UNIQUE_PTR(implClassName) \
     EXPORT_UNIQUE_PTR(Framework, implClassName, FRAMEWORK_DEFAULT_DECLARE)
 
+#define EXPORT_IMPL(implClassName, namespaceName, classShareType) \
+    namespaceName##_EXPORT(implClassName, SHARED_PTR);            \
+    namespaceName##_EXPORT(implClassName, classShareType)
+
+#define EXPORT_COPY_IMPL(className, implClassName, namespaceName, classShareType) \
+    namespaceName##_EXPORT(implClassName, SHARED_PTR);                            \
+    namespaceName##_COPY_EXPORT(className, implClassName, classShareType)
+
+#define EXPORT_CONST_IMPL(implClassName, namespaceName, classShareType) \
+    namespaceName##_EXPORT(implClassName, CONST_SHARED_PTR);            \
+    namespaceName##_EXPORT(implClassName, classShareType)
+
 #define TYPE_DECLARE(className)  \
     using ClassType = className; \
     using ImplType = SYSTEM_CONCATENATOR(className, Impl)
 
-#define SHARE_CLASSES_TYPE_DECLARE(className) \
-    TYPE_DECLARE(className);                  \
-    using ClassShareType = CoreTools::ShareClasses
+#define COPY_UNSHARED_CLONE_SELF_DECLARE \
+    NODISCARD static SharedPtr Clone(const ImplType& impl)
 
-#define PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(className) \
-    TYPE_DECLARE(className);                                \
-    using ClassShareType = CoreTools::PerformanceUnsharedClasses
+#define COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(namespaceName, className)                   \
+    namespaceName::className::SharedPtr namespaceName::className::Clone(const ImplType& impl) \
+    {                                                                                         \
+        return impl.Clone();                                                                  \
+    }
 
-#define DESTRUCTOR_STATEMENT
-#define DESTRUCTOR_DEFAULT = default
-#define DESTRUCTOR_PURE_VIRTUAL = 0
-
-#define COPY_UNSHARE_CLASSES_TYPE_DECLARE(className, destructor) \
-private:                                                         \
-    void Swap(className& rhs) noexcept;                          \
-                                                                 \
-public:                                                          \
-    TYPE_DECLARE(className);                                     \
-    using ClassShareType = CoreTools::CopyUnsharedClasses;       \
-    ~className() noexcept destructor;                            \
-    className(const className& rhs);                             \
-    className& operator=(const className& rhs);                  \
-    className(className&& rhs) noexcept;                         \
-    className& operator=(className&& rhs) noexcept;
-
-#define COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(className, destructor) \
-protected:                                                            \
-    virtual void Swap(className& rhs) noexcept;                       \
-                                                                      \
-public:                                                               \
-    TYPE_DECLARE(className);                                          \
-    using ClassShareType = CoreTools::CopyUnsharedClasses;            \
-    virtual ~className() noexcept destructor;                         \
-    className(const className& rhs);                                  \
-    virtual className& operator=(const className& rhs);               \
-    className(className&& rhs) noexcept;                              \
-    virtual className& operator=(className&& rhs) noexcept;
-
-#define DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(className) \
-private:                                                   \
-    void Copy();                                           \
-                                                           \
-public:                                                    \
-    TYPE_DECLARE(className);                               \
-    using ClassShareType = CoreTools::DelayCopyUnsharedClasses;
-
-#define NON_COPY_CLASSES_TYPE_DECLARE(className) \
-    TYPE_DECLARE(className);                     \
-    using ClassShareType = CoreTools::NonCopyClasses
-
-#define IMPL_TYPE_DECLARE(className)                                           \
-    using SYSTEM_CONCATENATOR(className, ImplPtr) = std::shared_ptr<ImplType>; \
-                                                                               \
-private:                                                                       \
-    SYSTEM_CONCATENATOR(className, ImplPtr)                                    \
-    m_Impl
+#define COPY_UNSHARED_CLONE_SELF_DEFINE(namespaceName, className)                             \
+    namespaceName::className::SharedPtr namespaceName::className::Clone(const ImplType& impl) \
+    {                                                                                         \
+        return std::make_shared<ImplType>(impl);                                              \
+    }
 
 #endif  // CORE_TOOLS_HELPER_EXPORT_MACRO_H

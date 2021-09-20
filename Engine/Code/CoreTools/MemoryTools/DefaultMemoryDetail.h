@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 11:03)
+//	引擎版本：0.7.1.1 (2020/10/20 11:03)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_DEFAULT_MEMORY_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_DEFAULT_MEMORY_DETAIL_H
@@ -147,6 +147,10 @@ void CoreTools::DefaultMemory::NewArrayUseFailureDelete(T***& data, int bound, i
 template <typename T>
 T**** CoreTools::DefaultMemory::New4DArray(const int bound1, const int bound2, const int bound3, const int bound4)
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26403)
+#include SYSTEM_WARNING_DISABLE(26409)
     const auto innermostBound = bound3 * bound4;
     const auto innerBound = bound2 * innermostBound;
     const auto bound = bound1 * innerBound;
@@ -174,6 +178,7 @@ T**** CoreTools::DefaultMemory::New4DArray(const int bound1, const int bound2, c
     }
 
     return data;
+#include STSTEM_WARNING_POP
 }
 
 // private
@@ -182,13 +187,20 @@ void CoreTools::DefaultMemory::NewArrayUseFailureDelete(T****& data, int bound, 
 {
     try
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26409)
         data[0] = new T**[innermostBound];
+#include STSTEM_WARNING_POP
 
         NewArrayUseFailureDelete(data[0], bound, innerBound);
     }
     catch (...)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26401)
+#include SYSTEM_WARNING_DISABLE(26409)
         delete[] data;
+#include STSTEM_WARNING_POP
         throw;
     }
 }
@@ -197,7 +209,12 @@ void CoreTools::DefaultMemory::NewArrayUseFailureDelete(T****& data, int bound, 
 template <typename T>
 void CoreTools::DefaultMemory::DeleteSingle(T*& data) noexcept
 {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26401)
+#include SYSTEM_WARNING_DISABLE(26409)
     delete data;
+#include STSTEM_WARNING_POP
+
     data = nullptr;
 }
 

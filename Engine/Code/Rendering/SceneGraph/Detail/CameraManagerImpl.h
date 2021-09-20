@@ -20,7 +20,7 @@ namespace Rendering
 		using ClassType = CameraManagerImpl;
 
 	public:
-                CameraManagerImpl() noexcept;
+                CameraManagerImpl(MAYBE_UNUSED int count) noexcept;
 	
 		CLASS_INVARIANT_DECLARE;
  

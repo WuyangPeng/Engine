@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 11:30)
+//	引擎版本：0.7.1.1 (2020/10/23 11:30)
 
 // 单元测试类输出错误信息管理类，UnitTestFailPrintManage为内部接口类，可输出测试错误信息。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_SUITE_TEST_FAIL_PRINT_MANAGER_H

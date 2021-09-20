@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:11)
+//	引擎版本：0.7.1.1 (2020/10/26 13:11)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_EXTERNAL_H
@@ -40,7 +40,7 @@ namespace CoreTools
         [[nodiscard]] operator GetReferenceType() const;
 
         // 提供对该属性的只写访问
-        MethodPropertyGetSetExternal& operator=(SetReferenceType value);
+        MethodPropertyGetSetExternal& operator=(SetReferenceType value) noexcept;
     };
 }
 

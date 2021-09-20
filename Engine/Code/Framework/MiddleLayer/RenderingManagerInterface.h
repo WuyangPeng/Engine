@@ -14,8 +14,9 @@
 #include "Rendering/Renderers/RenderersFwd.h"
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(ViewMiddleLayerImpl);
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+ 
+EXPORT_SHARED_PTR(Framework, ViewMiddleLayerImpl, FRAMEWORK_DEFAULT_DECLARE);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -23,7 +24,7 @@ namespace Framework
 	{
 	public:
 		using RenderingManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(RenderingManagerInterface);
+		NON_COPY_TYPE_DECLARE(RenderingManagerInterface);
 		using ParentType = EngineMiddleLayerInterface;
 		using Renderer = Rendering::Renderer;
 		using RendererSharedPtr = Rendering::RendererSharedPtr;
@@ -60,7 +61,7 @@ namespace Framework
 		using ViewMiddleLayerImplPtr = std::shared_ptr<ViewMiddleLayerImpl>;
 
 	private:
-		IMPL_TYPE_DECLARE(RenderingManagerInterface);
+                PackageType impl;
 		ViewMiddleLayerImplPtr m_ViewMiddleLayer;
 	};
 

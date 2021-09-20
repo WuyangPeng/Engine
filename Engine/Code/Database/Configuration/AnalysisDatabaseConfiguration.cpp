@@ -18,12 +18,12 @@ using std::make_shared;
 using std::string;
 
 Database::AnalysisDatabaseConfiguration::AnalysisDatabaseConfiguration(const string& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{ fileName }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, AnalysisDatabaseConfiguration)
+CLASS_INVARIANT_STUB_DEFINE(Database, AnalysisDatabaseConfiguration)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, AnalysisDatabaseConfiguration, GetConfigurationStrategy, System::String, Database::ConfigurationStrategy)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, AnalysisDatabaseConfiguration, begin, Database::AnalysisDatabaseConfiguration::ContainerConstIter)

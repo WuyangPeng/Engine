@@ -15,12 +15,12 @@ using std::make_shared;
 
 Physics::BoundTreeSplitTriangles
 	::BoundTreeSplitTriangles(const Centroids& centroids, int beginIndex, int endIndex, const Split& inSplit, const APoint& origin, const AVector& direction)
-	:m_Impl{ make_shared<ImplType>(centroids,beginIndex,endIndex,inSplit,origin,direction) }
+	:impl{centroids,beginIndex,endIndex,inSplit,origin,direction }
 {
 	PHYSICS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Physics,BoundTreeSplitTriangles)
+CLASS_INVARIANT_STUB_DEFINE(Physics, BoundTreeSplitTriangles)
  
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Physics, BoundTreeSplitTriangles, GetFirstOutSplitIndex, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Physics, BoundTreeSplitTriangles, GetSecondOutSplitIndex, int)

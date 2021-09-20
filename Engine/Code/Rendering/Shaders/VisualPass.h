@@ -21,8 +21,8 @@
 #include "Rendering/Shaders/VertexShader.h"
 #include "Rendering/Shaders/WireState.h"
 
-RENDERING_EXPORT_SHARED_PTR(VisualPassImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, VisualPassImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class WriteFileManager;
@@ -34,7 +34,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VisualPass : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VisualPass, DESTRUCTOR_STATEMENT);
+        void Swap(VisualPass& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(VisualPass);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~VisualPass() noexcept;
+                VisualPass(const VisualPass& rhs);
+                VisualPass& operator=(const VisualPass& rhs);
+                VisualPass(VisualPass&& rhs) noexcept;
+                VisualPass& operator=(VisualPass&& rhs) noexcept;
         using ParentType = Object;
         using WriteFileManager = CoreTools::WriteFileManager;
         using ReadFileManager = CoreTools::ReadFileManager;
@@ -73,7 +82,7 @@ namespace Rendering
         ObjectInterfaceSharedPtr CloneObject() const override;
 
     private:
-        IMPL_TYPE_DECLARE(VisualPass);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

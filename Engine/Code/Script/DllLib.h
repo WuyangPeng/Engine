@@ -16,10 +16,6 @@
 
 #if defined(TCRE_USE_MSVC)
 
-    #ifdef SCRIPT_USE_LUA
-        #pragma comment(lib, "lua.lib")
-    #endif  // SCRIPT_USE_LUA
-
 #endif  // TCRE_USE_MSVC
 
 #endif  // SCRIPT_DLL_LIB_H

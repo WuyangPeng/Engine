@@ -26,13 +26,55 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderProfileData);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderProfileData);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderProfileData); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering,ShaderProfileData);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ShaderProfileData);
 
-CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(Rendering, ShaderProfileData);
+
+Rendering::ShaderProfileData::ShaderProfileData(LoadConstructor loadConstructor)
+        : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+    {
+        SELF_CLASS_IS_VALID_0;
+    }
+    CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ShaderProfileData)
+    CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ShaderProfileData)
+    CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ShaderProfileData)
+    CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ShaderProfileData)
+    CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ShaderProfileData)
+    CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ShaderProfileData)
 
 Rendering::ShaderProfileData
 	::ShaderProfileData(int numConstants, int numSamplers)
-	:ParentType{ "ShaderProfileData" }, m_Impl{ make_shared<ImplType>(numConstants, numSamplers) }
+	:ParentType{ "ShaderProfileData" }, impl{ make_shared<ImplType>(numConstants, numSamplers) }
 {  
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -43,30 +85,30 @@ Rendering::ShaderProfileData
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ShaderProfileData)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ShaderProfileData)
 
 void Rendering::ShaderProfileData
     ::SetBaseRegister( int profile, int index, int baseRegister )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetBaseRegister(profile,index,baseRegister);
+	return impl->SetBaseRegister(profile,index,baseRegister);
 }
 
 void Rendering::ShaderProfileData
 	::SetTextureUnit( int profile, int index, int textureUnit )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetTextureUnit(profile, index, textureUnit);
+	return impl->SetTextureUnit(profile, index, textureUnit);
 }
 
 void Rendering::ShaderProfileData
 	::SetProgram( int profile, const std::string& program )
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetProgram(profile, program);
+	return impl->SetProgram(profile, program);
 }
 
 int Rendering::ShaderProfileData
@@ -74,7 +116,7 @@ int Rendering::ShaderProfileData
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetBaseRegister(profile, index);
+	return impl->GetBaseRegister(profile, index);
 }
 
 int Rendering::ShaderProfileData
@@ -82,7 +124,7 @@ int Rendering::ShaderProfileData
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetTextureUnit(profile, index);
+	return impl->GetTextureUnit(profile, index);
 }
 
 const std::string Rendering::ShaderProfileData
@@ -90,7 +132,7 @@ const std::string Rendering::ShaderProfileData
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetProgram(profile);
+	return impl->GetProgram(profile);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderProfileData, GetBaseRegisterSize, int)

@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "Framework/WindowRegister/WindowHIcon.h"
 #include "Framework/WindowRegister/WindowHCursor.h"
 #include "Framework/WindowRegister/WindowRegisterFwd.h"
@@ -23,11 +23,11 @@ namespace Framework
 	public:
 		using ClassType = WindowPictorialImpl;
 		using TChar = System::TChar;
-		using HIcon = System::WindowHIcon;
-		using HBrush = System::WindowHBrush;
-		using HCursor = System::WindowHCursor;
-		using HInstance = System::WindowHInstance;
-		using WindowBrushTypes = System::WindowBrushTypes;
+		using HIcon = System::WindowsHIcon;
+		using HBrush = System::WindowsHBrush;
+		using HCursor = System::WindowsHCursor;
+		using HInstance = System::WindowsHInstance;
+		using WindowBrushTypes = System::WindowsBrushTypes;
 
 	public:
 		explicit WindowPictorialImpl(WindowBrushTypes background);

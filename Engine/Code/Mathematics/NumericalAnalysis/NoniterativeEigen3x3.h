@@ -11,7 +11,7 @@
 #define MATHEMATICS_NUMERICAL_ANALYSIS_NONITERATIVE_EIGEN3X3_H
 
 #include "Mathematics/MathematicsDll.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/Matrix3.h"
 #include "Mathematics/Algebra/Vector3D.h"
@@ -21,11 +21,11 @@ namespace Mathematics
     template <typename Real>
     class NoniterativeEigen3x3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<NoniterativeEigen3x3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<NoniterativeEigen3x3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<NoniterativeEigen3x3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<NoniterativeEigen3x3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<NoniterativeEigen3x3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<NoniterativeEigen3x3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE NoniterativeEigen3x3 final
@@ -34,8 +34,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using NoniterativeEigen3x3Impl = NoniterativeEigen3x3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(NoniterativeEigen3x3);
-
+   
+        TYPE_DECLARE(NoniterativeEigen3x3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Matrix3 = Matrix3<Real>;
         using Vector3D = Vector3D<Real>;
 
@@ -50,7 +52,7 @@ namespace Mathematics
         [[nodiscard]] const Vector3D GetEigenvector(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(NoniterativeEigen3x3);
+        PackageType impl;
     };
 
     using FloatNoniterativeEigen3x3 = NoniterativeEigen3x3<float>;

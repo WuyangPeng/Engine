@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:12)
+//	引擎版本：0.7.1.1 (2020/10/26 13:12)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
@@ -39,13 +39,13 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     private:
-        MethodPropertySet();
+        MethodPropertySet() noexcept;
         explicit MethodPropertySet(ReferenceType value);
 
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 
     public:
-        MethodPropertySet& operator=(ReferenceType value);
+        MethodPropertySet& operator=(ReferenceType value) noexcept;
 
     private:
         ValueType m_Value;

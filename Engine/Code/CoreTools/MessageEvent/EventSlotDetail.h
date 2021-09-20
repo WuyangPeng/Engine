@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:39)
+//	引擎版本：0.7.1.1 (2020/10/26 15:39)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_DETAIL_H
@@ -18,7 +18,7 @@
 #include <iostream>
 
 template <typename T, typename PriorityType>
-CoreTools::EventSlot<T, PriorityType>::EventSlot(const SubclassSmartPointerType& smartPointer, PriorityType priority, CallbackMemberFunction callbackMemberFunction)
+CoreTools::EventSlot<T, PriorityType>::EventSlot(const SubclassSmartPointerType& smartPointer, PriorityType priority, CallbackMemberFunction callbackMemberFunction) noexcept
     : m_SubclassWeakPointer{ smartPointer }, m_Priority{ priority }, m_CallbackMemberFunction{ callbackMemberFunction }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -53,7 +53,7 @@ bool CoreTools::EventSlot<T, PriorityType>::operator()(const CallbackParameters&
 }
 
 template <typename T, typename PriorityType>
-PriorityType CoreTools::EventSlot<T, PriorityType>::GetPriority() const
+PriorityType CoreTools::EventSlot<T, PriorityType>::GetPriority() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -69,7 +69,7 @@ const typename CoreTools::EventSlot<T, PriorityType>::ConstSubclassSmartPointerT
 }
 
 template <typename T, typename PriorityType>
-bool CoreTools::operator<(const EventSlot<T, PriorityType>& lhs, const EventSlot<T, PriorityType>& rhs)
+bool CoreTools::operator<(const EventSlot<T, PriorityType>& lhs, const EventSlot<T, PriorityType>& rhs) noexcept
 {
     return lhs.GetPriority() < rhs.GetPriority();
 }

@@ -9,7 +9,7 @@
 #include "ColourDetail.h"
 #include "ColourManager.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 Rendering::ByteColour Rendering::ColourManager::ExtractR8G8B8(uint32_t color) noexcept
 {

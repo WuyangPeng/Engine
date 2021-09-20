@@ -16,8 +16,8 @@
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/ShaderFloats/ShaderFloat.h"
 
-RENDERING_EXPORT_SHARED_PTR(ShaderParametersImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, ShaderParametersImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class Spatial;
@@ -30,7 +30,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ShaderParameters : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ShaderParameters, DESTRUCTOR_STATEMENT);
+        void Swap(ShaderParameters& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(ShaderParameters);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~ShaderParameters() noexcept;
+                ShaderParameters(const ShaderParameters& rhs);
+                ShaderParameters& operator=(const ShaderParameters& rhs);
+                ShaderParameters(ShaderParameters&& rhs) noexcept;
+                ShaderParameters& operator=(ShaderParameters&& rhs) noexcept;
         using ParentType = Object;
         using ConstShaderFloatSharedPtrGather = std::vector<ConstShaderFloatSharedPtr>;
         using ConstTextureSharedPtrGather = std::vector<ConstTextureSharedPtr>;
@@ -72,7 +81,7 @@ namespace Rendering
         void UpdateConstants(const VisualSharedPtr& visual, const CameraSharedPtr& camera);
 
     private:
-        IMPL_TYPE_DECLARE(ShaderParameters);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

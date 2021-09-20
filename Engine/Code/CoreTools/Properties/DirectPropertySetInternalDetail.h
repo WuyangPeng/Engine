@@ -5,14 +5,14 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:36)
+//	引擎版本：0.7.1.1 (2020/10/26 13:36)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_DETAIL_H
 
 #include "DirectPropertySetInternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertySetInternal<Value, Reference, Container>::DirectPropertySetInternal(ReferenceType value)
     : m_Value{ value }
@@ -28,8 +28,10 @@ bool CoreTools::DirectPropertySetInternal<Value, Reference, Container>::IsValid(
 }
 #endif  // OPEN_CLASS_INVARIANT
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename Value, typename Reference, typename Container>
-CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator=(ReferenceType value)
+CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator=(ReferenceType value)  
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -37,7 +39,7 @@ CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::Di
 
     return *this;
 }
-
+#include STSTEM_WARNING_POP
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator ReferenceType() const
 {

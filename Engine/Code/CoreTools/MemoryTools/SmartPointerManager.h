@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/19 16:49)
+//	引擎版本：0.7.1.1 (2020/10/19 16:49)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_MANAGER_H
 #define CORE_TOOLS_MEMORY_TOOLS_SMART_POINTER_MANAGER_H
@@ -23,16 +23,16 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 CORE_TOOLS_EXPORT_UNIQUE_PTR(SmartPointerManager);
-CORE_TOOLS_EXPORT_SHARED_PTR(SmartPointerManagerImpl);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(SmartPointerManagerImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE SmartPointerManager final : public CoreTools::Singleton<SmartPointerManager>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(SmartPointerManager);
+        NON_COPY_TYPE_DECLARE(SmartPointerManager);
         using ParentType = Singleton<SmartPointerManager>;
 
     private:
@@ -63,7 +63,7 @@ namespace CoreTools
 
     private:
         static SmartPointerManagerUniquePtr sm_SmartPointerManager;
-        IMPL_TYPE_DECLARE(SmartPointerManager);
+        PackageType impl;
     };
 }
 

@@ -18,36 +18,25 @@
 
 template <typename Real>
 Mathematics::Tetrahedron3<Real>::Tetrahedron3(const Vector3D& vertex0, const Vector3D& vertex1, const Vector3D& vertex2, const Vector3D& vertex3)
-    : m_Impl{ std::make_shared<ImplType>(vertex0, vertex1, vertex2, vertex3) }
+    : impl{  vertex0, vertex1, vertex2, vertex3  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Tetrahedron3<Real>::Tetrahedron3(const ContainerType& vertex)
-    : m_Impl{ std::make_shared<ImplType>(vertex) }
+    : impl{  vertex  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-template <typename Real>
-void Mathematics::Tetrahedron3<Real>::Copy()
-{
-    static_assert(std::is_same_v<ClassShareType::NonConstCopyMember, CoreTools::TrueType>, "It is not allowed to define the Copy function used for copy delayed.");
-
-    MATHEMATICS_CLASS_IS_VALID_1;
-
-    if (1 < m_Impl.use_count())
-    {
-        m_Impl = std::make_shared<ImplType>(*m_Impl);
-    }
-}
+ 
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::Tetrahedron3<Real>::IsValid() const noexcept
 {
-    return m_Impl != nullptr;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -56,15 +45,15 @@ const Mathematics::Vector3D<Real> Mathematics::Tetrahedron3<Real>::GetVertex(int
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex(index);
+    return impl->GetVertex(index);
 }
 
 template <typename Real>
 void Mathematics::Tetrahedron3<Real>::SetVertex(int index, const Vector3D& vertex)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->SetVertex(index, vertex);
+    return impl->SetVertex(index, vertex);
 }
 
 // static
@@ -79,7 +68,7 @@ const typename Mathematics::Tetrahedron3<Real>::PlaneContainerType Mathematics::
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPlanes();
+    return impl->GetPlanes();
 }
 
 template <typename Real>

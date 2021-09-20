@@ -15,12 +15,12 @@ using std::make_shared;
 
 Framework::CameraMotion
 	::CameraMotion(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
-	:m_Impl{ make_shared<ImplType>(translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor) }
+	:impl{  translationSpeed, rotationSpeed, translationSpeedFactor, rotationSpeedFactor  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, CameraMotion)
+CLASS_INVARIANT_STUB_DEFINE(Framework, CameraMotion)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, CameraMotion, GetCameraPtr, const Framework::CameraMotion::CameraSmartPointer);
 

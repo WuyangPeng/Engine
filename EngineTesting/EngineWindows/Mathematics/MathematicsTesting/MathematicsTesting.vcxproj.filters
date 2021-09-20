@@ -1,0 +1,1795 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{62371313-e302-4e42-a4dd-a55814048a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgebraSuite 头文件">
+      <UniqueIdentifier>{57a71f71-0f8f-4b68-8d39-45aefe222641}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgebraSuite 源文件">
+      <UniqueIdentifier>{29a42a32-271b-4d80-aede-d0c706bcf112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApproximationSuite 头文件">
+      <UniqueIdentifier>{a11efc2e-f736-4994-bfd6-e4eecb4f53d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApproximationSuite 源文件">
+      <UniqueIdentifier>{1c5da161-728e-47c3-946a-431925ce2884}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 头文件">
+      <UniqueIdentifier>{30edca4b-67e5-48c9-8c7e-70cf6e6d3a93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 源文件">
+      <UniqueIdentifier>{b7b9bdbf-1c1f-407d-ac56-20296ab895f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputationalGeometrySuite 头文件">
+      <UniqueIdentifier>{517902db-bc41-41ee-bbce-d30b83eddf9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputationalGeometrySuite 源文件">
+      <UniqueIdentifier>{acf30d80-211c-4ead-b1f3-4c902f47731b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContainmentSuite 头文件">
+      <UniqueIdentifier>{55b8ad79-a465-4361-8907-78a05502f4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContainmentSuite 源文件">
+      <UniqueIdentifier>{bed98695-f334-4409-bfd9-2d1d8a9ea68b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CurvesSurfacesVolumesSuite 头文件">
+      <UniqueIdentifier>{8ef49ce2-2f08-4715-8266-6bf268e35c97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CurvesSurfacesVolumesSuite 源文件">
+      <UniqueIdentifier>{84d7bdb7-1a5a-4f15-8e71-582627750d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 头文件">
+      <UniqueIdentifier>{fd9c77f3-be21-470d-a967-c41a3294b950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 源文件">
+      <UniqueIdentifier>{87d9664c-8d74-4974-9a55-f7552b5dedd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 头文件\Detail">
+      <UniqueIdentifier>{13684b8a-c402-4f43-bf96-9fdb300056e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 模板文件">
+      <UniqueIdentifier>{c53684a5-dea5-4115-bc0c-ba128efb3d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 模板文件\Detail">
+      <UniqueIdentifier>{38fc44fd-856e-4ba2-80cb-8a70b116f0d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 头文件\Distance2D">
+      <UniqueIdentifier>{2dfececb-5f59-4dbe-9700-780c8c90fe41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 源文件\Distance2D">
+      <UniqueIdentifier>{e4de742e-4292-48eb-b077-6ea011de9646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 头文件\Distance3D">
+      <UniqueIdentifier>{987c110f-5e79-4094-92d6-d2d23aa5763f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DistanceSuite 源文件\Distance3D">
+      <UniqueIdentifier>{fa0e489f-bfe1-4f67-9530-3bbef1e6c625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterpolationSuite 头文件">
+      <UniqueIdentifier>{844784a2-c322-436d-b936-20776b34047e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterpolationSuite 源文件">
+      <UniqueIdentifier>{19bfa0fd-824a-44bf-8851-1ed1372284fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件">
+      <UniqueIdentifier>{94769528-6ed4-41f4-9b41-11775cda83c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 源文件">
+      <UniqueIdentifier>{30ff496d-6057-4147-86c7-59e2db2cbabc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件\Detail">
+      <UniqueIdentifier>{c71db600-ee8f-4e26-99c2-e541ff701a41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 模板文件">
+      <UniqueIdentifier>{c93f4519-7847-4b8a-98b1-31c1d10398ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 模板文件\Detail">
+      <UniqueIdentifier>{7f48bf1c-40f6-48cc-b9c0-179c669ad333}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件\Intersection1D">
+      <UniqueIdentifier>{d95717b2-c29f-425f-b25d-37945df1d5a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 源文件\Intersection1D">
+      <UniqueIdentifier>{533a3234-0c1a-4241-ae88-eec25b846293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件\Intersection2D">
+      <UniqueIdentifier>{89c6ffa2-6bcb-4930-b689-74e955d4fb40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 源文件\Intersection2D">
+      <UniqueIdentifier>{cf3a34da-7f9d-4521-bbd9-0259c7e32bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件\Intersection3D">
+      <UniqueIdentifier>{667c72ec-461f-424b-b7ff-3ff1e305fab7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 源文件\Intersection3D">
+      <UniqueIdentifier>{2346c27b-b7d9-4764-8887-7915a16b17e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{d5215113-d279-44e5-bf02-8c63a9495ce6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 源文件">
+      <UniqueIdentifier>{c64053f5-7f17-401c-b26a-0a06bd45c892}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshesSuite 头文件">
+      <UniqueIdentifier>{7e1cfc3b-112a-4796-b718-e2f4bc5381d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MeshesSuite 源文件">
+      <UniqueIdentifier>{ef48f95d-de3b-4776-8f86-41d3a00f1da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiscellaneousSuite 头文件">
+      <UniqueIdentifier>{a72ccae9-1b5a-408b-8d40-d6b0256ca8b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiscellaneousSuite 源文件">
+      <UniqueIdentifier>{4fcd098f-32cb-4d18-a9cc-2b96fc779202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalAnalysisSuite 头文件">
+      <UniqueIdentifier>{80acfd4b-3e2d-410b-8949-5d8cc919bc62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalAnalysisSuite 源文件">
+      <UniqueIdentifier>{aef47f53-f1b2-4df8-bf20-4ab6400c0c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2DSuite 头文件">
+      <UniqueIdentifier>{72a66730-5801-44aa-a0aa-1d8353e997ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects2DSuite 源文件">
+      <UniqueIdentifier>{3f672e31-6c6d-4d68-91bd-10ec89dc6a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3DSuite 头文件">
+      <UniqueIdentifier>{acd55e50-6220-486a-8886-e681bc258c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects3DSuite 源文件">
+      <UniqueIdentifier>{7f7d5a59-aab7-4e55-a17a-662ab1026281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QuerySuite 头文件">
+      <UniqueIdentifier>{5658c35e-e886-4703-b250-568a26d51506}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QuerySuite 源文件">
+      <UniqueIdentifier>{fe6bc60b-5030-46ce-94c1-77557e24dde7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RationalSuite 头文件">
+      <UniqueIdentifier>{e58637f0-a453-4f27-aa69-160fabbc4b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RationalSuite 源文件">
+      <UniqueIdentifier>{7cd9405e-540c-4de1-8a2d-b106d9052a78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\MathematicsTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraSuite.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\APointTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AQuaternionTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalBasisTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalizeTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox2DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox3DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox4DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2Testing.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3EigenDecompositionTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3ExtractTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3Testing.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix4Testing.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\MatrixTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PlaneTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialDivideTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionConstraintsTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalBasisTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalizeTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DToolsTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DInformationTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalBasisTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalizeTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DToolsTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DToolsTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraAggregateTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraStreamSizeTesting.h">
+      <Filter>AlgebraSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CircleFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CylinderFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseByArcs2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipsoidFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatArcFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatCircleFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightLineFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightPlaneFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalPlaneFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ParaboloidFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2PowersTesting.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3PowersTesting.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4PowersTesting.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticCircleFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit2Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticSphereFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\SphereFit3Testing.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ApproximationSuite.h">
+      <Filter>ApproximationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float4Testing.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\MathTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\RandomTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BaseSuite.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BitHacksTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastNegativeExpTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastTrigonometricTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float1Testing.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float2Testing.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float3Testing.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ComputationalGeometrySuite\ComputationalGeometrySuite.h">
+      <Filter>ComputationalGeometrySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox3Testing.h">
+      <Filter>ContainmentSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2CircumscribeTesting.h">
+      <Filter>ContainmentSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2InscribeTesting.h">
+      <Filter>ContainmentSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContainmentSuite.h">
+      <Filter>ContainmentSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox2Testing.h">
+      <Filter>ContainmentSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\CurvesSurfacesVolumesSuite\CurvesSurfacesVolumesSuite.h">
+      <Filter>CurvesSurfacesVolumesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Detail\DistanceTest.h">
+      <Filter>DistanceSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Detail\DistanceTestDetail.h">
+      <Filter>DistanceSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Box2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ellipse2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Hyperbola2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Line2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ray2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Segment2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Ray2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Segment2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceSegment2Segment2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Line2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Ray2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Segment2Testing.h">
+      <Filter>DistanceSuite 头文件\Distance2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Line3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Ray3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Segment3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Box3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ellipsoid3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Line3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ray3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Segment3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Ray3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Segment3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceSegment3Segment3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceCircle3Circle3Testing.h">
+      <Filter>DistanceSuite 头文件\Distance3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceResultTesting.h">
+      <Filter>DistanceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceSuite.h">
+      <Filter>DistanceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceTesting.h">
+      <Filter>DistanceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\InterpolationSuite\InterpolationSuite.h">
+      <Filter>InterpolationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\Intersector1Test.h">
+      <Filter>IntersectionSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\IntersectorTest.h">
+      <Filter>IntersectionSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\StaticIntersectorTest.h">
+      <Filter>IntersectionSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\DynamicIntersectorTest.h">
+      <Filter>IntersectionSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\DynamicIntersectorTestDetail.h">
+      <Filter>IntersectionSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\Intersector1TestDetail.h">
+      <Filter>IntersectionSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\IntersectorTestDetail.h">
+      <Filter>IntersectionSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\StaticIntersectorTestDetail.h">
+      <Filter>IntersectionSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\IntersectionSuite.h">
+      <Filter>IntersectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicIntersectorTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicTestIntersector1Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\Intersector1Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\IntersectorTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticFindIntersector1Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticIntersectorTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticTestIntersector1Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicFindIntersector1Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection1D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorCircle2Circle2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Line2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Ray2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Ray2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorSegment2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorBox2Box2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2ClassifyTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Line2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Ray2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Ray2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorSegment2Segment2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Arc2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Circle2Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TrianglePlaneRelationsTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TriangleProjectOntoAxisTesting.h">
+      <Filter>IntersectionSuite 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\IntersectorLine3Triangle3Testing.h">
+      <Filter>IntersectionSuite 头文件\Intersection3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\MeshesSuite.h">
+      <Filter>MeshesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\TriangleKeyTesting.h">
+      <Filter>MeshesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\EdgeKeyTesting.h">
+      <Filter>MeshesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MiscellaneousSuite\MiscellaneousSuite.h">
+      <Filter>MiscellaneousSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2CalculateTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2NodeTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2RootTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2StorageTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3CalculateTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3NodeTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3RootTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3StorageTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodCalculateTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodRootTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EigenDecompositionTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationResultConstIteratorTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\GaussianQuadratureTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemInverseTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Matrix3ToolsTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1DataTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNDataTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NoniterativeEigen3x3Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NumericalAnalysisSuite.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeEulerTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeImplicitEulerTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeMidpointTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeRungeKutta4Testing.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTest.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolarDecompositionValueTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsRationalTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\QDUDecompositionValueTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\RombergIntegralTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueDecompositionTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveBandedTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveSymmetricConjugateGradientTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixIndexTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\TrapezoidRuleTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BandedMatrixInvertTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1RootTesting.h">
+      <Filter>NumericalAnalysisSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Line2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Objects2DSuite.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Polygon2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ray2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Segment2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Triangle2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Arc2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Box2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Circle2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\ConvexPolygon2Testing.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2CoefficientsTesting.h">
+      <Filter>Objects2DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Circle3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cone3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\ConvexPolyhedron3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cylinder3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipse3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3CoefficientsTesting.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Frustum3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Line3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Lozenge3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Objects3DSuite.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Plane3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Polyhedron3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ray3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Rectangle3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Segment3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Sphere3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Tetrahedron3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3ParametersTesting.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Triangle3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Box3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Capsule3Testing.h">
+      <Filter>Objects3DSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2RationalTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Testing.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3FilteredTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Int64Testing.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3IntegerTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3RationalTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Testing.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QueryDotToolsTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySortToolsTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySuite.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2FilteredTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Int64Testing.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2IntegerTesting.h">
+      <Filter>QuerySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector2Testing.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector3Testing.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64VectorTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAmendTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAnalysisTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataConversionTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataOperatorTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDivisionModuloTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerMultiplicationTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalConversionTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalSuite.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector2Testing.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector3Testing.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVectorTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionIntegerTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionRationalTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\FloatingPointAnalysisTesting.h">
+      <Filter>RationalSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraAggregateTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraStreamSizeTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\APointTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AQuaternionTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalBasisTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalizeTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox2DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox3DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox4DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2Testing.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3EigenDecompositionTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3ExtractTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3Testing.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix4Testing.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\MatrixTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PlaneTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialDivideTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionConstraintsTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalBasisTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalizeTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DToolsTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DInformationTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalBasisTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalizeTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DToolsTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DToolsTesting.cpp">
+      <Filter>AlgebraSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CircleFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CylinderFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseByArcs2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipsoidFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatArcFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatCircleFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightLineFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightPlaneFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalPlaneFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ParaboloidFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2PowersTesting.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3PowersTesting.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4PowersTesting.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticCircleFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit2Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticSphereFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\SphereFit3Testing.cpp">
+      <Filter>ApproximationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BitHacksTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastNegativeExpTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastTrigonometricTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float1Testing.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float2Testing.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float3Testing.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float4Testing.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\MathTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\RandomTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox2Testing.cpp">
+      <Filter>ContainmentSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox3Testing.cpp">
+      <Filter>ContainmentSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2CircumscribeTesting.cpp">
+      <Filter>ContainmentSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2InscribeTesting.cpp">
+      <Filter>ContainmentSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Line2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Ray2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Segment2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Box2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ellipse2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Hyperbola2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Line2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ray2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Segment2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Ray2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Segment2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceSegment2Segment2Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceCircle3Circle3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Line3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Ray3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Segment3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Box3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ellipsoid3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Line3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ray3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Segment3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Ray3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Segment3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceSegment3Segment3Testing.cpp">
+      <Filter>DistanceSuite 源文件\Distance3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceResultTesting.cpp">
+      <Filter>DistanceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceTesting.cpp">
+      <Filter>DistanceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicFindIntersector1Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicIntersectorTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicTestIntersector1Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\Intersector1Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\IntersectorTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticFindIntersector1Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticIntersectorTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticTestIntersector1Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection1D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Arc2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Circle2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorCircle2Circle2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Line2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Ray2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Ray2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorSegment2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorBox2Box2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2ClassifyTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Line2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Ray2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Ray2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorSegment2Segment2Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\IntersectorLine3Triangle3Testing.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TrianglePlaneRelationsTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TriangleProjectOntoAxisTesting.cpp">
+      <Filter>IntersectionSuite 源文件\Intersection3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\EdgeKeyTesting.cpp">
+      <Filter>MeshesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\TriangleKeyTesting.cpp">
+      <Filter>MeshesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BandedMatrixInvertTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1RootTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2CalculateTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2NodeTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2RootTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2StorageTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3CalculateTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3NodeTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3RootTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3StorageTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodCalculateTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodRootTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EigenDecompositionTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationResultConstIteratorTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\GaussianQuadratureTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemInverseTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Matrix3ToolsTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1DataTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNDataTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NoniterativeEigen3x3Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeEulerTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeImplicitEulerTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeMidpointTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeRungeKutta4Testing.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTest.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolarDecompositionValueTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsRationalTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\QDUDecompositionValueTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\RombergIntegralTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueDecompositionTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveBandedTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveSymmetricConjugateGradientTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixIndexTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\TrapezoidRuleTesting.cpp">
+      <Filter>NumericalAnalysisSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Arc2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Box2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Circle2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\ConvexPolygon2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2CoefficientsTesting.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Line2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Polygon2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ray2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Segment2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Triangle2Testing.cpp">
+      <Filter>Objects2DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Box3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Capsule3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Circle3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cone3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\ConvexPolyhedron3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cylinder3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipse3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3CoefficientsTesting.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Frustum3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Line3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Lozenge3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Plane3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Polyhedron3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ray3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Rectangle3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Segment3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Sphere3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Tetrahedron3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3ParametersTesting.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Triangle3Testing.cpp">
+      <Filter>Objects3DSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2FilteredTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Int64Testing.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2IntegerTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2RationalTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Testing.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3FilteredTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Int64Testing.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3IntegerTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3RationalTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Testing.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QueryDotToolsTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySortToolsTesting.cpp">
+      <Filter>QuerySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionIntegerTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionRationalTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\FloatingPointAnalysisTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector2Testing.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector3Testing.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64VectorTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAmendTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAnalysisTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataConversionTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataOperatorTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDivisionModuloTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerMultiplicationTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalConversionTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector2Testing.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector3Testing.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVectorTesting.cpp">
+      <Filter>RationalSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

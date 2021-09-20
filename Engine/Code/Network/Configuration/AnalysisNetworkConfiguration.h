@@ -15,18 +15,18 @@
 #include "ConfigurationStrategy.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <map>
 #include <string>
 
-NETWORK_EXPORT_SHARED_PTR(AnalysisNetworkConfigurationImpl);
+NETWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(AnalysisNetworkConfigurationImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE AnalysisNetworkConfiguration final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(AnalysisNetworkConfiguration);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(AnalysisNetworkConfiguration);
         using String = System::String;
         using Container = std::map<String, ConfigurationStrategy>;
         using ContainerConstIter = Container::const_iterator;
@@ -42,7 +42,7 @@ namespace Network
         [[nodiscard]] int GetSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(AnalysisNetworkConfiguration);
+        PackageType impl;
     };
 }
 

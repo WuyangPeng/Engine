@@ -14,15 +14,15 @@
 
 #include "ConfigurationFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-NETWORK_EXPORT_SHARED_PTR(ConfigurationSubStrategyImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(ConfigurationSubStrategy,ConfigurationSubStrategyImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE ConfigurationSubStrategy final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationSubStrategy);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(ConfigurationSubStrategy);
 
     public:
         ConfigurationSubStrategy();
@@ -35,7 +35,7 @@ namespace Network
         void Insert(WrappersSubStrategy wrappersSubStrategy, int value);
 
     private:
-        IMPL_TYPE_DECLARE(ConfigurationSubStrategy);
+        PackageType impl;
     };
 }
 

@@ -11,8 +11,8 @@
 
 #include "Camera.h"
 #include "TrianglesMesh.h"
-
-RENDERING_EXPORT_SHARED_PTR(ParticlesImpl);
+EXPORT_SHARED_PTR(Rendering, ParticlesImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -23,7 +23,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Particles : public TrianglesMesh
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Particles, DESTRUCTOR_STATEMENT);
+        void Swap(Particles& rhs) noexcept;
+       
+           public:
+               TYPE_DECLARE(Particles);
+               using ClassShareType = CoreTools::CopyUnsharedClasses;
+               ~Particles() noexcept;
+               Particles(const Particles& rhs);
+               Particles& operator=(const Particles& rhs);
+               Particles(Particles&& rhs) noexcept;
+               Particles& operator=(Particles&& rhs) noexcept;
         using ParentType = TrianglesMesh;
         using ParticlesSharedPtr = std::shared_ptr<ClassType>;
         using ConstParticlesSharedPtr = std::shared_ptr<ClassType>;
@@ -69,7 +78,7 @@ namespace Rendering
         void InitTextureCoord();
 
     private:
-        IMPL_TYPE_DECLARE(Particles);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
 #include STSTEM_WARNING_PUSH

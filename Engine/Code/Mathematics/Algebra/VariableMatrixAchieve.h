@@ -26,7 +26,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber)
-    : m_Impl{ std::make_shared<ImplType>(rowsNumber, columnsNumber) }
+    : impl{ std::make_shared<ImplType>(rowsNumber, columnsNumber) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -34,35 +34,35 @@ Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNum
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(int rowsNumber, int columnsNumber, const ContainerType& entry)
-    : m_Impl{ std::make_shared<ImplType>(rowsNumber, columnsNumber, entry) }
+    : impl{ std::make_shared<ImplType>(rowsNumber, columnsNumber, entry) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const VectorContainerType& matrix)
-    : m_Impl{ std::make_shared<ImplType>(matrix) }
+    : impl{ std::make_shared<ImplType>(matrix) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix2& rhs)
-    : m_Impl{ std::make_shared<ImplType>(rhs) }
+    : impl{ std::make_shared<ImplType>(rhs) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const Matrix3& rhs)
-    : m_Impl{ std::make_shared<ImplType>(rhs) }
+    : impl{ std::make_shared<ImplType>(rhs) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(const VariableMatrix& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -85,14 +85,14 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator=(
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::Swap(VariableMatrix& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::VariableMatrix<Real>::VariableMatrix(VariableMatrix&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -104,7 +104,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator=(
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -114,7 +114,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator=(
 template <typename Real>
 bool Mathematics::VariableMatrix<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -124,9 +124,9 @@ bool Mathematics::VariableMatrix<Real>::IsValid() const noexcept
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::ResetSize(int rowsNumber, int columnsNumber)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->ResetSize(rowsNumber, columnsNumber);
+    return impl->ResetSize(rowsNumber, columnsNumber);
 }
 
 template <typename Real>
@@ -134,7 +134,7 @@ int Mathematics::VariableMatrix<Real>::GetRowsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRowsNumber();
+    return impl->GetRowsNumber();
 }
 
 template <typename Real>
@@ -142,7 +142,7 @@ int Mathematics::VariableMatrix<Real>::GetColumnsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetColumnsNumber();
+    return impl->GetColumnsNumber();
 }
 
 template <typename Real>
@@ -162,13 +162,13 @@ const Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>
     MATHEMATICS_ASSERTION_0(0 <= row && row < GetRowsNumber(), "索引错误！");
 #endif  // MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE
 
-    return (*m_Impl)[row];
+    return (*impl)[row];
 }
 
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableMatrix<Real>::operator[](int row)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
 #ifdef MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE
     MATHEMATICS_ASSERTION_0(0 <= row && row < GetRowsNumber(), "索引错误！");
@@ -186,13 +186,13 @@ const Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column) c
     MATHEMATICS_ASSERTION_0(0 <= row && row < GetRowsNumber() && 0 <= column && column < GetColumnsNumber(), "索引错误！");
 #endif  // MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE
 
-    return (*m_Impl)(row, column);
+    return (*impl)(row, column);
 }
 
 template <typename Real>
 Real& Mathematics::VariableMatrix<Real>::operator()(int row, int column)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
 #ifdef MATHEMATICS_ASSERT_VARIABLE_MATRIX_OUT_OF_RANGE
     MATHEMATICS_ASSERTION_0(0 <= row && row < GetRowsNumber() && 0 <= column && column < GetColumnsNumber(), "索引错误！");
@@ -209,21 +209,21 @@ typename Mathematics::VariableMatrix<Real>::ContainerType Mathematics::VariableM
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetContainer();
+    return impl->GetContainer();
 }
 
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SetContainer(int rowsNumber, int columnsNumber, const ContainerType& entry)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetContainer(rowsNumber, columnsNumber, entry);
+    return impl->SetContainer(rowsNumber, columnsNumber, entry);
 }
 
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SetIdentity()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto rowsNumber = GetRowsNumber();
     const auto columnsNumber = GetColumnsNumber();
@@ -252,14 +252,14 @@ void Mathematics::VariableMatrix<Real>::SetIdentity()
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SetRow(int row, const VariableLengthVector& vector)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (vector.GetSize() == GetColumnsNumber())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("向量大小与矩阵列数不相等！"s));
     }
 
-    (*m_Impl)[row] = vector;
+    (*impl)[row] = vector;
 }
 
 template <typename Real>
@@ -267,13 +267,13 @@ typename const Mathematics::VariableMatrix<Real>::VariableLengthVector Mathemati
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)[row];
+    return (*impl)[row];
 }
 
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLengthVector& vector)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto rowsNumber = GetRowsNumber();
 
@@ -284,7 +284,7 @@ void Mathematics::VariableMatrix<Real>::SetColumn(int column, const VariableLeng
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
     {
-        (*m_Impl)(rows, column) = vector[rows];
+        (*impl)(rows, column) = vector[rows];
     }
 }
 
@@ -299,7 +299,7 @@ typename const Mathematics::VariableMatrix<Real>::VariableLengthVector Mathemati
 
     for (auto rows = 0; rows < rowsNumber; ++rows)
     {
-        vector[rows] = (*m_Impl)(rows, column);
+        vector[rows] = (*impl)(rows, column);
     }
 
     return vector;
@@ -308,7 +308,7 @@ typename const Mathematics::VariableMatrix<Real>::VariableLengthVector Mathemati
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::ResetMatrix(const VectorContainerType& matrix)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     VariableMatrix<Real> result{ matrix };
 
@@ -318,24 +318,24 @@ void Mathematics::VariableMatrix<Real>::ResetMatrix(const VectorContainerType& m
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SwapRows(int lhsRow, int rhsRow)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (lhsRow != rhsRow)
     {
-        std::swap((*m_Impl)[lhsRow], (*m_Impl)[rhsRow]);
+        std::swap((*impl)[lhsRow], (*impl)[rhsRow]);
     }
 }
 
 template <typename Real>
 void Mathematics::VariableMatrix<Real>::SwapColumns(int lhsColumns, int rhsColumns)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (lhsColumns != rhsColumns)
     {
         for (auto rows = 0; rows < GetRowsNumber(); ++rows)
         {
-            std::swap((*m_Impl)(rows, lhsColumns), (*m_Impl)(rows, rhsColumns));
+            std::swap((*impl)(rows, lhsColumns), (*impl)(rows, rhsColumns));
         }
     }
 }
@@ -343,7 +343,7 @@ void Mathematics::VariableMatrix<Real>::SwapColumns(int lhsColumns, int rhsColum
 template <typename Real>
 Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator*=(const VariableMatrix& rhs)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (GetColumnsNumber() != rhs.GetRowsNumber())
     {
@@ -393,7 +393,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator+=
     {
         for (auto columns = 0; columns < columnsNumber; ++columns)
         {
-            (*m_Impl)(rows, columns) += rhs[rows][columns];
+            (*impl)(rows, columns) += rhs[rows][columns];
         }
     }
 
@@ -417,7 +417,7 @@ Mathematics::VariableMatrix<Real>& Mathematics::VariableMatrix<Real>::operator-=
     {
         for (auto columns = 0; columns < columnsNumber; ++columns)
         {
-            (*m_Impl)(rows, columns) -= rhs[rows][columns];
+            (*impl)(rows, columns) -= rhs[rows][columns];
         }
     }
 
@@ -499,7 +499,7 @@ const Mathematics::VariableMatrix<Real> Mathematics::VariableMatrix<Real>::Trans
     {
         for (auto columns = 0; columns < columnsNumber; ++columns)
         {
-            result(columns, rows) = (*m_Impl)(rows, columns);
+            result(columns, rows) = (*impl)(rows, columns);
         }
     }
 

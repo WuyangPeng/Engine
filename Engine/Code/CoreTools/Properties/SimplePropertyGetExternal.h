@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:14)
+//	引擎版本：0.7.1.1 (2020/10/26 13:14)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
@@ -28,7 +28,7 @@ namespace CoreTools
         using ClassType = SimplePropertyGetExternal<ValueType, ConstReferenceType>;
 
     public:
-        explicit SimplePropertyGetExternal(const ValueType& value);
+        explicit SimplePropertyGetExternal(const ValueType& value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

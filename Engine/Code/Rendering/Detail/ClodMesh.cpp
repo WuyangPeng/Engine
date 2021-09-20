@@ -22,6 +22,7 @@
 #include SYSTEM_WARNING_DISABLE(26418)
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26434)
 using std::make_shared;
 
 CORE_TOOLS_RTTI_DEFINE(Rendering, ClodMesh);
@@ -29,21 +30,62 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ClodMesh);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ClodMesh);
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ClodMesh);
 
-CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ClodMesh);
+Rendering::ClodMesh::ClodMesh(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ClodMesh)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ClodMesh)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ClodMesh)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ClodMesh)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ClodMesh)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ClodMesh)
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ClodMesh);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, ClodMesh);
 
 Rendering::ClodMesh
 	::ClodMesh(const VertexFormatSharedPtr& vertexformat,const VertexBufferSharedPtr& vertexbuffer,
 			   const IndexBufferSharedPtr& indexbuffer,const CollapseRecordArraySharedPtr& recordArray)
-	:ParentType{ vertexformat, vertexbuffer,indexbuffer->Clone() }, m_Impl{ make_shared<ImplType>(recordArray) }
+	:ParentType{ vertexformat, vertexbuffer,indexbuffer->Clone() }, impl{ make_shared<ImplType>(recordArray) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ClodMesh)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ClodMesh)
 
 Rendering::ControllerInterfaceSharedPtr Rendering::ClodMesh
 	::Clone() const 
@@ -75,10 +117,10 @@ int Rendering::ClodMesh
 void Rendering::ClodMesh
 	::SelectLevelOfDetail()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	const int targetRecord = GetAutomatedTargetRecord();
 
-	m_Impl->SelectLevelOfDetail(GetVertexBuffer(), GetIndexBuffer(), targetRecord);
+	impl->SelectLevelOfDetail(GetVertexBuffer(), GetIndexBuffer(), targetRecord);
 }
  #include STSTEM_WARNING_POP

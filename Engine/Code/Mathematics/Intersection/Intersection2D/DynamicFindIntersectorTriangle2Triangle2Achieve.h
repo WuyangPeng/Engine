@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon)
-    : ParentType{ tmax, velocity0, velocity1, epsilon }, m_Impl{ std::make_shared<ImplType>(triangle0, triangle1) }
+    : ParentType{ tmax, velocity0, velocity1, epsilon }, impl{ triangle0, triangle1 }
 {
     Find();
 
@@ -29,7 +29,7 @@ Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::DynamicFindIntersec
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
@@ -41,7 +41,7 @@ const Mathematics::Triangle2<Real> Mathematics::DynamicFindIntersectorTriangle2T
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle0();
+    return impl->GetTriangle0();
 }
 
 template <typename Real>
@@ -49,7 +49,7 @@ const Mathematics::Triangle2<Real> Mathematics::DynamicFindIntersectorTriangle2T
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle1();
+    return impl->GetTriangle1();
 }
 
 template <typename Real>
@@ -57,7 +57,7 @@ int Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::GetQuantity() c
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -65,14 +65,14 @@ const Mathematics::Vector2D<Real> Mathematics::DynamicFindIntersectorTriangle2Tr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
 void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Find()
 {
-    const auto& triangle0 = m_Impl->GetTriangle0();
-    const auto& triangle1 = m_Impl->GetTriangle1();
+    const auto& triangle0 = impl->GetTriangle0();
+    const auto& triangle1 = impl->GetTriangle1();
 
     // 好像V0三角形是固定的，而V1三角形是移动的。
     auto velocityDiff = this->GetRhsVelocity() - this->GetLhsVelocity();
@@ -133,10 +133,10 @@ void Mathematics::DynamicFindIntersectorTriangle2Triangle2<Real>::Find()
                                     vertex1.at(1) + intersectInfo.m_TFirst * this->GetRhsVelocity(),
                                     vertex1.at(2) + intersectInfo.m_TFirst * this->GetRhsVelocity() };
 
-    m_Impl->SetPoint(GetIntersection(intersectInfo.m_TCfg0, intersectInfo.m_TCfg1, intersectInfo.m_Side, moveV0, moveV1));
+    impl->SetPoint(GetIntersection(intersectInfo.m_TCfg0, intersectInfo.m_TCfg1, intersectInfo.m_Side, moveV0, moveV1));
 
     this->SetContactTime(intersectInfo.m_TFirst);
-    if (0 < m_Impl->GetQuantity())
+    if (0 < impl->GetQuantity())
     {
         this->SetIntersectionType(IntersectionType::Point);
     }

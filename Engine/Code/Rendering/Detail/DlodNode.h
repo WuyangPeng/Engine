@@ -12,8 +12,8 @@
 #include "SwitchNode.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-
-RENDERING_EXPORT_SHARED_PTR(DlodNodeImpl);
+EXPORT_SHARED_PTR(Rendering, DlodNodeImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +22,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE DlodNode : public SwitchNode
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(DlodNode, = default);
+            void Swap(DlodNode& rhs) noexcept;
+
+        public:
+            TYPE_DECLARE(DlodNode);
+            using ClassShareType = CoreTools::CopyUnsharedClasses;
+            ~DlodNode() noexcept = default;
+            DlodNode(const DlodNode& rhs);
+            DlodNode& operator=(const DlodNode& rhs);
+            DlodNode(DlodNode&& rhs) noexcept;
+            DlodNode& operator=(DlodNode&& rhs) noexcept;
 		using ParentType = SwitchNode;
 
 	public:
@@ -57,7 +66,7 @@ namespace Rendering
 		void SelectLevelOfDetail (const ConstCameraSharedPtr& camera);
  
 	private:
-		IMPL_TYPE_DECLARE(DlodNode);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

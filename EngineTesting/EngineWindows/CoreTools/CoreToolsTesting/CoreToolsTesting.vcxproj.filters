@@ -1,0 +1,2473 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{f9364184-b3d3-49e8-aa31-98d2b65be82b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\CFileManagerTesting">
+      <UniqueIdentifier>{a7b20b74-1c83-40e8-b17b-aef3802e5729}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\EnvironmentTesting">
+      <UniqueIdentifier>{16e3001d-58c7-4d44-86be-f13c69b0bd91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\FileHandleTesting">
+      <UniqueIdentifier>{15b27b1c-f85d-4bc2-80a0-0c0aac09890a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\FileManagerTesting">
+      <UniqueIdentifier>{f0a6a21c-5675-4776-bcea-9bd6ecf445e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\StreamManagerTesting">
+      <UniqueIdentifier>{32ab320d-4c64-43ed-8e6e-f63cab5697bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{30dde14e-988a-4e87-9349-7343b803d29b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{6b21c922-fa24-48d3-acd3-21d85094a42a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\ClassInvariant">
+      <UniqueIdentifier>{1d834b4e-0b76-40e5-8460-208b7e43b161}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\ClassInvariant">
+      <UniqueIdentifier>{3e5037fc-6d47-48a1-be27-9af55eac2e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Detail">
+      <UniqueIdentifier>{4cb1d4d5-ffd3-4dfa-a5c4-72ac71bae1e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Detail">
+      <UniqueIdentifier>{1481ea58-0c17-4c65-8c81-8f3165b85c36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\MemberFunction">
+      <UniqueIdentifier>{411e33eb-27be-443f-9a87-c35fe83de01f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\MemberFunction">
+      <UniqueIdentifier>{6cd03150-34a4-4649-831b-38ed7ab8fd41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Rtti">
+      <UniqueIdentifier>{b07430d0-0a7c-467e-83e8-51d8077bc04c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Rtti">
+      <UniqueIdentifier>{3764312e-abcb-4ac2-8f40-7aee5dd49d84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\UnitTestSuite">
+      <UniqueIdentifier>{689b78a3-83d0-4172-a08e-10aa54d3eb6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\UnitTestSuite">
+      <UniqueIdentifier>{68816eeb-528a-4756-b438-6b14095b5ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 模板文件">
+      <UniqueIdentifier>{a8e0f853-ba2d-4261-bb77-1a2068300a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 模板文件\Detail">
+      <UniqueIdentifier>{762a8e6d-8ba8-4309-8ab6-c810db4e47c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 头文件">
+      <UniqueIdentifier>{b3673cb3-115c-4844-ae30-64526724b69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 源文件">
+      <UniqueIdentifier>{6b8c732c-8f80-4ebe-b25a-835b4397d6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 头文件\Detail">
+      <UniqueIdentifier>{497b59fc-0b07-4bf7-b5b6-b12ddaff2411}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseSuite 源文件\Detail">
+      <UniqueIdentifier>{c7bf41e3-a36b-4265-a23c-5c0eda4b1ba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterStringSuite 头文件">
+      <UniqueIdentifier>{10c47085-f3fc-41e3-bb8b-c639f1e66cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterStringSuite 源文件">
+      <UniqueIdentifier>{44ae4021-88fb-4979-ab03-8786394f2823}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExceptionSuite 头文件">
+      <UniqueIdentifier>{1ac00fad-4bc1-496d-a165-9668f5b6d5b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExceptionSuite 源文件">
+      <UniqueIdentifier>{b3dcc760-c5ba-46a1-a951-09eaebbe9ee2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleSuite 头文件">
+      <UniqueIdentifier>{66146298-38f3-4cff-8390-b155a85191d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleSuite 源文件">
+      <UniqueIdentifier>{cd03f354-e696-4dc4-96f2-cd93d2f7213b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BitArraySuite 头文件">
+      <UniqueIdentifier>{c678e84b-b9a7-4e6b-85ff-fec42495cb38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BitArraySuite 源文件">
+      <UniqueIdentifier>{db6d290f-fb04-48ce-b927-b6e6859baa59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommandSuite 头文件">
+      <UniqueIdentifier>{26d7cde0-b4c6-4895-b25e-b78505eb6be8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CommandSuite 源文件">
+      <UniqueIdentifier>{704f4869-44f1-467f-9521-2ca23b61490c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheckSuite 头文件">
+      <UniqueIdentifier>{dae41c27-ff80-45f1-bfb5-edf8d569b846}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CyclicRedundancyCheckSuite 源文件">
+      <UniqueIdentifier>{ff6b7aa3-de70-40c4-9dc3-acbb0cc1e03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypesSuite 头文件">
+      <UniqueIdentifier>{0aca4273-f08f-4ba2-9c56-bc724a8386b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataTypesSuite 源文件">
+      <UniqueIdentifier>{87ee0f1b-3a2b-43a5-a3a4-9bfec9b012ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfigurationSuite 头文件">
+      <UniqueIdentifier>{3431276d-a242-41f1-9baa-996c34042f51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EngineConfigurationSuite 源文件">
+      <UniqueIdentifier>{1b0e0e4a-7070-4b40-837f-89edcc5d2ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManagerSuite 头文件">
+      <UniqueIdentifier>{30cb761a-8520-481c-90dd-79f42410518a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FileManagerSuite 源文件">
+      <UniqueIdentifier>{7d6c8bbc-f90b-485a-8612-d0407b7c3281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystemSuite 头文件">
+      <UniqueIdentifier>{7250fb50-bf77-4e41-ad4a-b38dd7ef99b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameMemorySystemSuite 源文件">
+      <UniqueIdentifier>{97a16152-f702-41ac-8b6f-68d6219636db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManagerSuite 头文件">
+      <UniqueIdentifier>{a83bfc77-dfb3-4078-9caf-7ee65bbad44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManagerSuite 源文件">
+      <UniqueIdentifier>{720128cb-8011-43c0-90e7-f592f8645b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManagerSuite 源文件\Detail">
+      <UniqueIdentifier>{8802c5ba-9703-496b-af1b-1badb722dfc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HandleManagerSuite 头文件\Detail">
+      <UniqueIdentifier>{97b30018-abaa-4cee-b188-ae5abf6bac82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManagerSuite 头文件">
+      <UniqueIdentifier>{b67c9a55-8502-4ebd-9444-6af9503c891a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LogManagerSuite 源文件">
+      <UniqueIdentifier>{79f0a4a9-259c-4c7e-9707-c64e987b6bc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 头文件">
+      <UniqueIdentifier>{2f51d7cb-a993-4192-97b2-d05596f4c62a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 源文件">
+      <UniqueIdentifier>{bb613738-652b-4f5f-accf-570c1a57669b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryToolsSuite 头文件">
+      <UniqueIdentifier>{baf862a9-90b9-4343-a1a6-9571648f65ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryToolsSuite 源文件">
+      <UniqueIdentifier>{0abe8c94-ea26-4999-bad0-9ac13cced7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryToolsSuite 头文件\Detail">
+      <UniqueIdentifier>{c74746e3-ab12-4aab-8dde-0b0bcc4a9f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MemoryToolsSuite 源文件\Detail">
+      <UniqueIdentifier>{929ec8b7-8388-4340-b048-b5677a9092a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEventSuite 头文件">
+      <UniqueIdentifier>{319d08a9-a999-417b-8547-356646a7788b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEventSuite 源文件">
+      <UniqueIdentifier>{5f8a412d-a01f-4823-803d-7257e3b2c569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEventSuite 头文件\Detail">
+      <UniqueIdentifier>{6bcc7f61-54f9-400a-b8e5-d73c0cdeea51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEventSuite 头文件\Flags">
+      <UniqueIdentifier>{8f1513c4-3be0-4032-a4d2-f6683b7c353b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MessageEventSuite 源文件\Detail">
+      <UniqueIdentifier>{75aef2d2-08b0-428a-9a26-0d2a6ffe3061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModuleInitializerTerminatorSuite 头文件">
+      <UniqueIdentifier>{1166d1cf-daa7-4206-95b5-733340ab658f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ModuleInitializerTerminatorSuite 源文件">
+      <UniqueIdentifier>{936ca48e-646a-4fb7-93ef-11455a55a12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkSuite 头文件">
+      <UniqueIdentifier>{9bf2d42a-e76c-4c16-84c2-4c9e6e476570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkSuite 源文件">
+      <UniqueIdentifier>{60d8ba4a-25db-44ab-8c7f-24431e1a36b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystemsSuite 头文件">
+      <UniqueIdentifier>{67cc10a3-4af1-46d4-b040-85cb31cae865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystemsSuite 源文件">
+      <UniqueIdentifier>{15c64c32-971b-48e2-8b89-eddd60e32086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystemsSuite 源文件\Detail">
+      <UniqueIdentifier>{1887287d-0640-4e6d-bcad-773e322e64fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectSystemsSuite 头文件\Detail">
+      <UniqueIdentifier>{2934f73d-1e9a-4ceb-a783-f6a0fcffe448}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerformanceProfilerSuite 源文件">
+      <UniqueIdentifier>{1ed4ac38-4a40-457b-854d-91d6cf866484}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerformanceProfilerSuite 头文件">
+      <UniqueIdentifier>{1a0d59e6-6aac-403f-a6a8-4f3c041df127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PropertiesSuite 头文件">
+      <UniqueIdentifier>{11cf613f-c504-4ce1-8ca7-28b0087346dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PropertiesSuite 源文件">
+      <UniqueIdentifier>{563bdb16-c5e4-4672-8770-a9662802853f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PropertiesSuite 源文件\Detail">
+      <UniqueIdentifier>{3bf61a62-92d2-46a3-8bf9-8115db78745c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PropertiesSuite 头文件\Detail">
+      <UniqueIdentifier>{629d5337-06e4-4785-b13e-5b72e2b20f53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RegularExpressionSuite 头文件">
+      <UniqueIdentifier>{4f1f10d9-fd40-4329-8f60-c06065ee38f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RegularExpressionSuite 源文件">
+      <UniqueIdentifier>{a4134a58-22a7-434e-bf0d-cc5f008a784b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutputSuite 头文件">
+      <UniqueIdentifier>{cb7a4dd8-aacc-4f78-be13-471e03b3f69c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ReportOutputSuite 源文件">
+      <UniqueIdentifier>{bd6badfb-1b91-4939-8e5c-c58985482c9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManagerSuite 头文件">
+      <UniqueIdentifier>{47acbce1-bd33-4043-9f87-891310dd9de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ResourceManagerSuite 源文件">
+      <UniqueIdentifier>{c57b726e-b110-48dd-8839-073175633c61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 头文件">
+      <UniqueIdentifier>{f845bb19-25ab-4b5f-ac7e-17d2ee061bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 源文件">
+      <UniqueIdentifier>{07faab99-3cd0-44ce-ad6b-4dd9ea46f84e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 头文件\Detail">
+      <UniqueIdentifier>{34de46c1-4fbf-46ad-bbf9-75ae98d42980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 源文件\Detail">
+      <UniqueIdentifier>{a8fcea2e-b61f-4bb6-8d29-8fbe0fb78c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 头文件\Flags">
+      <UniqueIdentifier>{63cd274b-0065-4dc8-b238-912dd9e246df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SyntacticParserSuite 头文件">
+      <UniqueIdentifier>{0b694c85-6f67-40fb-a170-c6e4d671c18e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SyntacticParserSuite 源文件">
+      <UniqueIdentifier>{a11dad25-cafc-4e51-b952-93f3345be7d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateToolsSuite 头文件">
+      <UniqueIdentifier>{eaa1bf0e-94c3-4c08-bbf2-a017b524c00a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateToolsSuite 源文件">
+      <UniqueIdentifier>{5c15c5b5-21d3-4126-8496-9fdaf695d92a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateToolsSuite 头文件\Detail">
+      <UniqueIdentifier>{7555b6b3-9f3d-4c5f-bc52-8565afeb6ac9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TemplateToolsSuite 源文件\Detail">
+      <UniqueIdentifier>{06e06d8f-ae74-4a77-a613-de3f70f24de6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 头文件">
+      <UniqueIdentifier>{528a624d-764f-43fc-bd7a-9594297da994}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsingSuite 源文件">
+      <UniqueIdentifier>{469a42a9-9e1d-4cf6-ae05-b3b63b37bd80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadingSuite 头文件">
+      <UniqueIdentifier>{f81495e9-d2bf-4212-85a7-6e7288cc06b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadingSuite 源文件">
+      <UniqueIdentifier>{92fadacc-c299-4b65-9740-9e702d2c9ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeSuite 头文件">
+      <UniqueIdentifier>{cc63deb8-d675-478e-8325-f90d879475a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TimeSuite 源文件">
+      <UniqueIdentifier>{a5588e4e-b24c-4665-981b-5fb667a03f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuiteSuite 头文件">
+      <UniqueIdentifier>{260ec866-435a-455d-8c73-571ae4547ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuiteSuite 源文件">
+      <UniqueIdentifier>{6736fa42-a184-4f59-81d5-ef86ac7825bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UnitTestSuiteSuite 头文件\Detail">
+      <UniqueIdentifier>{03d4cfd7-c0db-42f5-bc3e-cc32485110a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZlibSuite 头文件">
+      <UniqueIdentifier>{89237dc5-f8bc-4c8c-b522-1b69432d2397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ZlibSuite 源文件">
+      <UniqueIdentifier>{40b207f4-f913-42bc-912e-3429a8c66f17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreetypeSuite 头文件">
+      <UniqueIdentifier>{6246fa5b-78da-4e91-8962-a3a697a7ab1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FreetypeSuite 源文件">
+      <UniqueIdentifier>{9118251e-6e61-4577-8dcd-26a5a54b718b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 模板文件">
+      <UniqueIdentifier>{a159183f-9a6c-468b-a1d8-5152679136f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachineSuite 模板文件\Detail">
+      <UniqueIdentifier>{18034375-677f-4585-a36b-b809e9429c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\AssertTest">
+      <UniqueIdentifier>{31981a02-2804-44a8-aa13-13e7f7ca7c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\AssertTest">
+      <UniqueIdentifier>{b1415da0-8c78-44c3-aabd-128ebeb82269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\CustomAssert">
+      <UniqueIdentifier>{fe5980a0-eeac-4042-b16d-599346b36979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\CustomAssert">
+      <UniqueIdentifier>{a97d2316-0523-4e7d-93a8-ec6255354df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Export">
+      <UniqueIdentifier>{fef08d3f-85ce-406a-9a7b-ffa7866704a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Export">
+      <UniqueIdentifier>{cdd10b93-c045-4d72-8fd9-87e184eb4a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Log">
+      <UniqueIdentifier>{1a35e7da-ead7-4722-9ceb-22d6940b9e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Log">
+      <UniqueIdentifier>{24f2ace2-aeb4-4847-b21a-5c1a88d0eb71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Stream">
+      <UniqueIdentifier>{3c205626-420a-454b-8590-09fb8f9f0a10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Stream">
+      <UniqueIdentifier>{aea24f73-ac17-4091-9613-c7b591aea979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Exception">
+      <UniqueIdentifier>{f091fe2f-f94c-4dfa-bda0-1c20bdfdb604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Exception">
+      <UniqueIdentifier>{0dc4697e-6304-41f4-bdac-9ed3e344ea4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 头文件">
+      <UniqueIdentifier>{95e0a2d9-3a09-497d-9015-b4d65d3d78f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 源文件">
+      <UniqueIdentifier>{e2169015-7826-4679-a0bf-0b33475a9099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 头文件\Impl">
+      <UniqueIdentifier>{72dc8904-e25f-4a09-a1f8-b66279aee307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 源文件\Impl">
+      <UniqueIdentifier>{62ff103c-3297-4e95-86c5-3a7fc8b9369a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 头文件\Detail">
+      <UniqueIdentifier>{3e40a751-11bf-4be8-895a-13cf5dcef05a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContractSuite 源文件\Detail">
+      <UniqueIdentifier>{e65420bb-cd42-4433-8be0-6787194e02ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterStringSuite 头文件\CaseInsensitiveString">
+      <UniqueIdentifier>{611caca9-3672-4811-b397-d9532c922ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CharacterStringSuite 源文件\CaseInsensitiveString">
+      <UniqueIdentifier>{61c783dd-f3df-4bb6-8cd9-ff80c5fb429a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExceptionSuite 头文件\Detail">
+      <UniqueIdentifier>{1a42bec8-2ec2-4668-b91d-dd8eb9fdd3f6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.h">
+      <Filter>BitArraySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArraySuite.h">
+      <Filter>BitArraySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.h">
+      <Filter>BitArraySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.h">
+      <Filter>BitArraySuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h">
+      <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.h">
+      <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.h">
+      <Filter>CharacterStringSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.h">
+      <Filter>CommandSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.h">
+      <Filter>CommandSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandSuite.h">
+      <Filter>CommandSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.h">
+      <Filter>CommandSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.h">
+      <Filter>ConsoleSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleSuite.h">
+      <Filter>ConsoleSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.h">
+      <Filter>ConsoleSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckSuite.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.h">
+      <Filter>CyclicRedundancyCheckSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\DataTypesSuite.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.h">
+      <Filter>DataTypesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\EngineConfigurationSuite.h">
+      <Filter>EngineConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.h">
+      <Filter>EngineConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.h">
+      <Filter>ExceptionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ExceptionSuite.h">
+      <Filter>ExceptionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.h">
+      <Filter>ExceptionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerSuite.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.h">
+      <Filter>FileManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.h">
+      <Filter>FrameMemorySystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.h">
+      <Filter>FrameMemorySystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemSuite.h">
+      <Filter>FrameMemorySystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.h">
+      <Filter>FrameMemorySystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerSuite.h">
+      <Filter>HandleManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.h">
+      <Filter>HandleManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.h">
+      <Filter>HandleManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFileNameTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFilterManagerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LoggerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogLevelManagerTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogManagerSuite.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePostfixTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.h">
+      <Filter>LogManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionTestingHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\DllFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\MainFunctionHelperSuite.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\TestingInformationHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ModuleInitializerTerminatorSuite\ModuleInitializerTerminatorSuite.h">
+      <Filter>ModuleInitializerTerminatorSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\NetworkSuite\NetworkSuite.h">
+      <Filter>NetworkSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PerformanceProfilerSuite\PerformanceProfilerSuite.h">
+      <Filter>PerformanceProfilerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\RegularExpressionSuite\RegularExpressionSuite.h">
+      <Filter>RegularExpressionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.h">
+      <Filter>ReportOutputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\ReportOutputSuite.h">
+      <Filter>ReportOutputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.h">
+      <Filter>ReportOutputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.h">
+      <Filter>ReportOutputSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.h">
+      <Filter>ResourceManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.h">
+      <Filter>ResourceManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.h">
+      <Filter>ResourceManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerSuite.h">
+      <Filter>ResourceManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.h">
+      <Filter>ResourceManagerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\SyntacticParserSuite\SyntacticParserSuite.h">
+      <Filter>SyntacticParserSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\TextParsingSuite.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\CriticalSectionTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\EventTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\NullMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadingSuite.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.h">
+      <Filter>ThreadingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\TimeSuite.h">
+      <Filter>TimeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestSuiteSuite.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.h">
+      <Filter>UnitTestSuiteSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.h">
+      <Filter>HelperSuite 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingNoObjectPtr.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingObjectPtr.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MacroTestEnum.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroBase.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\Properties.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriend.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriendTemplate.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\SingletonMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtr.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtrImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObject.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectPtr.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectSize.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriendTemplateDetail.h">
+      <Filter>HelperSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.h">
+      <Filter>HelperSuite 头文件\MemberFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.h">
+      <Filter>HelperSuite 头文件\MemberFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.h">
+      <Filter>HelperSuite 头文件\Rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.h">
+      <Filter>HelperSuite 头文件\Rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.h">
+      <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.h">
+      <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.h">
+      <Filter>HelperSuite 头文件\UnitTestSuite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\InitializeTerminatorMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.h">
+      <Filter>BaseSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.h">
+      <Filter>HandleManagerSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.h">
+      <Filter>HandleManagerSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.h">
+      <Filter>MemoryToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\EventSubclass.h">
+      <Filter>MessageEventSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Parameters.h">
+      <Filter>MessageEventSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Entity.h">
+      <Filter>MessageEventSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Flags\EventPriorityFlags.h">
+      <Filter>MessageEventSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramMessageManagerTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\BaseEntityTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\CallbackParametersTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EntityManagerTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventEntityTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventInterfaceTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotManagerTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageEventSuite.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageManagerTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\ParametersInterfaceTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramLessTesting.h">
+      <Filter>MessageEventSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\TypeCastingTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferInStreamTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferOutStreamTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferSourceTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferTargetTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileOutStreamTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InitTermTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InTopLevelTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectLinkTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectManagerTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectNameTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectRegisterTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectSystemsSuite.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\OutTopLevelTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTestingBase.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamSizeTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamTesting.h">
+      <Filter>ObjectSystemsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\DirectPropertyInternal.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\MethodProperty.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertiesBase.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyExternal.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyOffset.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\SimplePropertyExternal.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\StaticPropertyExternal.h">
+      <Filter>PropertiesSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\DirectPropertyInternalTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\MethodPropertyTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesBaseTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyExternalTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesSuite.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.h">
+      <Filter>PropertiesSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\GlobalStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\OpenStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PausedStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\Player.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerEntity.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayingStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\State.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\StoppedStates.h">
+      <Filter>StateMachineSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Flags\States.h">
+      <Filter>StateMachineSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineTesting.h">
+      <Filter>StateMachineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineSuite.h">
+      <Filter>StateMachineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateEntityTesting.h">
+      <Filter>StateMachineSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\ExplicitCastTest.h">
+      <Filter>TemplateToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTest.h">
+      <Filter>TemplateToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTestAddress.h">
+      <Filter>TemplateToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\TinyTest.h">
+      <Filter>TemplateToolsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TrigonometricFunctionTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ConstraintTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ExplicitCastTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FactorialTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FibonacciTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\IncrementScopeTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\LiteralCastTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ParamTypeTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Pow3Testing.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\PtrCompareTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RealAddressTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ReferenceCastTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\SqrtTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TemplateToolsSuite.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TinyTesting.h">
+      <Filter>TemplateToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\Detail\TestEnum.h">
+      <Filter>UnitTestSuiteSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTextColorsManagerTesting.h">
+      <Filter>ConsoleSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BufferSourceTestingEnum.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BufferTargetTestingEnum.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BoolObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObjectEnum.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StreamSizeTestingEnum.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.h">
+      <Filter>ObjectSystemsSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h">
+      <Filter>ZlibSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FreetypeSuite\FreetypeSuite.h">
+      <Filter>FreetypeSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerDetail.h">
+      <Filter>StateMachineSuite 模板文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryToolsSuite.h">
+      <Filter>MemoryToolsSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestOperatorTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestNullptrTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.h">
+      <Filter>HelperSuite 头文件\AssertTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.h">
+      <Filter>HelperSuite 头文件\ClassInvariant</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.h">
+      <Filter>HelperSuite 头文件\CustomAssert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.h">
+      <Filter>HelperSuite 头文件\CustomAssert</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTesting.h">
+      <Filter>HelperSuite 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileAndConsoleMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogTriggerAssertMacroTesting.h">
+      <Filter>HelperSuite 头文件\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacroImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacroImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CallConstMemberFunctionMacroTesting.h">
+      <Filter>HelperSuite 头文件\MemberFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionStaticAssertMacroTesting.h">
+      <Filter>HelperSuite 头文件\MemberFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CopyMemberFunctionStaticAssertMacroTesting.h">
+      <Filter>HelperSuite 头文件\MemberFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroFinalTesting.h">
+      <Filter>HelperSuite 头文件\Rtti</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.h">
+      <Filter>HelperSuite 头文件\Stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.h">
+      <Filter>HelperSuite 头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionMacroTesting.h">
+      <Filter>HelperSuite 头文件\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtual.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SafetyLimitMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\AssertionTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\CheckInvariantTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ContractSuite.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\FunctionDescribedTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.h">
+      <Filter>ContractSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\ImplStaticAssertHelperTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\Impl.h">
+      <Filter>ContractSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\CopyUnsharedImplTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\DelayCopyUnsharedImplTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.h">
+      <Filter>ContractSuite 头文件\Impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\DelayCopyUnshared.h">
+      <Filter>ContractSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\LoadingLibraryTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.h">
+      <Filter>BaseSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\StaticSingletonSubclass.h">
+      <Filter>BaseSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.h">
+      <Filter>CharacterStringSuite 头文件\CaseInsensitiveString</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.h">
+      <Filter>CharacterStringSuite 头文件\CaseInsensitiveString</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\Detail\GameErrorType.h">
+      <Filter>ExceptionSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.h">
+      <Filter>ExceptionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.h">
+      <Filter>ConsoleSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\ClassInvariant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingNoObjectPtr.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingObjectPtr.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroBase.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\Properties.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriend.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\SingletonMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtr.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtrImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObject.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectPtr.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectSize.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\MemberFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\MemberFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.cpp">
+      <Filter>HelperSuite 源文件\Rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.cpp">
+      <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.cpp">
+      <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\UnitTestSuite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\InitializeTerminatorMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.cpp">
+      <Filter>BaseSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.cpp">
+      <Filter>CharacterStringSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.cpp">
+      <Filter>CharacterStringSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.cpp">
+      <Filter>ExceptionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp">
+      <Filter>ExceptionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.cpp">
+      <Filter>ConsoleSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.cpp">
+      <Filter>ConsoleSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.cpp">
+      <Filter>BitArraySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.cpp">
+      <Filter>BitArraySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.cpp">
+      <Filter>BitArraySuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp">
+      <Filter>CommandSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.cpp">
+      <Filter>CommandSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.cpp">
+      <Filter>CommandSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.cpp">
+      <Filter>CyclicRedundancyCheckSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.cpp">
+      <Filter>DataTypesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.cpp">
+      <Filter>EngineConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.cpp">
+      <Filter>FileManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.cpp">
+      <Filter>FrameMemorySystemSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.cpp">
+      <Filter>FrameMemorySystemSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.cpp">
+      <Filter>FrameMemorySystemSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.cpp">
+      <Filter>HandleManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.cpp">
+      <Filter>HandleManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.cpp">
+      <Filter>HandleManagerSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.cpp">
+      <Filter>HandleManagerSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePostfixTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogLevelManagerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LoggerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFilterManagerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFileNameTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.cpp">
+      <Filter>LogManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionTestingHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\DllFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\TestingInformationHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.cpp">
+      <Filter>MemoryToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.cpp">
+      <Filter>MemoryToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Entity.cpp">
+      <Filter>MessageEventSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\EventSubclass.cpp">
+      <Filter>MessageEventSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Parameters.cpp">
+      <Filter>MessageEventSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\BaseEntityTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\CallbackParametersTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EntityManagerTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventEntityTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventInterfaceTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotManagerTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageManagerTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\ParametersInterfaceTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramLessTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramMessageManagerTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramTesting.cpp">
+      <Filter>MessageEventSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferInStreamTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferOutStreamTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferSourceTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferTargetTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileOutStreamTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InitTermTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InTopLevelTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectLinkTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectManagerTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectNameTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectRegisterTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\OutTopLevelTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTestingBase.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamSizeTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\TypeCastingTesting.cpp">
+      <Filter>ObjectSystemsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\DirectPropertyInternal.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\MethodProperty.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertiesBase.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyExternal.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyOffset.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\SimplePropertyExternal.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\StaticPropertyExternal.cpp">
+      <Filter>PropertiesSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\DirectPropertyInternalTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\MethodPropertyTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesBaseTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyExternalTesting.cpp">
+      <Filter>PropertiesSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.cpp">
+      <Filter>ReportOutputSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.cpp">
+      <Filter>ReportOutputSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.cpp">
+      <Filter>ReportOutputSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.cpp">
+      <Filter>ResourceManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.cpp">
+      <Filter>ResourceManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.cpp">
+      <Filter>ResourceManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.cpp">
+      <Filter>ResourceManagerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\GlobalStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\OpenStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PausedStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\Player.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerEntity.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayingStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\State.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\StoppedStates.cpp">
+      <Filter>StateMachineSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateEntityTesting.cpp">
+      <Filter>StateMachineSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineTesting.cpp">
+      <Filter>StateMachineSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\ExplicitCastTest.cpp">
+      <Filter>TemplateToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTest.cpp">
+      <Filter>TemplateToolsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ConstraintTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ExplicitCastTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FactorialTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FibonacciTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\IncrementScopeTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\LiteralCastTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ParamTypeTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Pow3Testing.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\PtrCompareTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RealAddressTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ReferenceCastTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\SqrtTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TinyTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TrigonometricFunctionTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.cpp">
+      <Filter>TemplateToolsSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\CriticalSectionTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\EventTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\NullMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.cpp">
+      <Filter>ThreadingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.cpp">
+      <Filter>TimeSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.cpp">
+      <Filter>UnitTestSuiteSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.cpp">
+      <Filter>UnitTestSuiteSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTextColorsManagerTesting.cpp">
+      <Filter>ConsoleSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BoolObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.cpp">
+      <Filter>ObjectSystemsSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestOperatorTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestNullptrTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.cpp">
+      <Filter>HelperSuite 源文件\AssertTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\ClassInvariant</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\CustomAssert</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\CustomAssert</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileAndConsoleMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogTriggerAssertMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacroImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacroImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CallConstMemberFunctionMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\MemberFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionStaticAssertMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\MemberFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CopyMemberFunctionStaticAssertMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\MemberFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroFinalTesting.cpp">
+      <Filter>HelperSuite 源文件\Rtti</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.cpp">
+      <Filter>HelperSuite 源文件\Stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionMacroTesting.cpp">
+      <Filter>HelperSuite 源文件\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SafetyLimitMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\AssertionTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\CheckInvariantTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\FunctionDescribedTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.cpp">
+      <Filter>ContractSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\ImplStaticAssertHelperTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\Impl.cpp">
+      <Filter>ContractSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\CopyUnsharedImplTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\DelayCopyUnsharedImplTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.cpp">
+      <Filter>ContractSuite 源文件\Impl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\DelayCopyUnshared.cpp">
+      <Filter>ContractSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\LoadingLibraryTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.cpp">
+      <Filter>BaseSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\StaticSingletonSubclass.cpp">
+      <Filter>BaseSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\CaseInsensitiveString</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.cpp">
+      <Filter>CharacterStringSuite 源文件\CaseInsensitiveString</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp">
+      <Filter>ExceptionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.cpp">
+      <Filter>ConsoleSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\CFileManagerTesting\CFileManagerTestingText.txt">
+      <Filter>资源文件\CFileManagerTesting</Filter>
+    </Text>
+    <Text Include="Resource\CFileManagerTesting\CFileManagerHelpTestingText.txt">
+      <Filter>资源文件\CFileManagerTesting</Filter>
+    </Text>
+    <Text Include="Resource\EnvironmentTesting\EnvironmentTestingText.txt">
+      <Filter>资源文件\EnvironmentTesting</Filter>
+    </Text>
+    <Text Include="Resource\FileHandleTesting\FileHandleTestingText.txt">
+      <Filter>资源文件\FileHandleTesting</Filter>
+    </Text>
+    <Text Include="Resource\FileHandleTesting\FileHandleHelpTestingText.txt">
+      <Filter>资源文件\FileHandleTesting</Filter>
+    </Text>
+    <Text Include="Resource\FileManagerTesting\FileManagerHelpTestingText.txt">
+      <Filter>资源文件\FileManagerTesting</Filter>
+    </Text>
+    <Text Include="Resource\FileManagerTesting\FileManagerTestingText.txt">
+      <Filter>资源文件\FileManagerTesting</Filter>
+    </Text>
+    <Text Include="Resource\StreamManagerTesting\IFStreamManagerTest.txt">
+      <Filter>资源文件\StreamManagerTesting</Filter>
+    </Text>
+    <Text Include="Resource\StreamManagerTesting\OFStreamManagerTest.txt">
+      <Filter>资源文件\StreamManagerTesting</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\CoreToolsTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\StringReplacing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+</Project>

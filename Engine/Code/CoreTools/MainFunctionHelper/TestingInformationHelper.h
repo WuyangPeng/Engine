@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 9:54)
+//	引擎版本：0.7.1.1 (2020/10/26 9:54)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_TESTING_INFORMATION_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_TESTING_INFORMATION_HELPER_H
@@ -14,17 +14,18 @@
 
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(TestingInformationHelperImpl);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(TestingInformationHelperImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE TestingInformationHelper final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(TestingInformationHelper);
+        NON_COPY_TYPE_DECLARE(TestingInformationHelper);
 
     public:
         explicit TestingInformationHelper(DisableNotThrow disableNotThrow);
@@ -43,7 +44,7 @@ namespace CoreTools
         [[nodiscard]] int GetRandomSeed() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(TestingInformationHelper);
+        PackageType impl;
     };
 }
 

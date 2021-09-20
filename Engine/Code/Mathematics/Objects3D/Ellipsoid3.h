@@ -13,8 +13,8 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Ellipsoid3Coefficients.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Mathematics/Algebra/Vector3D.h"
-
 #include <type_traits>
 
 namespace Mathematics
@@ -35,7 +35,9 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Ellipsoid3Impl = Ellipsoid3Impl<Real>;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Ellipsoid3);
+        TYPE_DECLARE(Ellipsoid3);
+        using PackageType = CoreTools::DelayCopyUnsharedImpl<ClassType, ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
 
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
@@ -101,7 +103,7 @@ namespace Mathematics
         [[nodiscard]] const Ellipsoid3 GetMove(Real t, const Vector3D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Ellipsoid3);
+        PackageType impl;
     };
 
     template <typename Real>

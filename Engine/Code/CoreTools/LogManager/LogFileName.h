@@ -14,17 +14,17 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogFileNameImpl);
+CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(LogFileNameImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE LogFileName final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(LogFileName);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(LogFileName);
         using String = System::String;
 
     public:
@@ -35,7 +35,7 @@ namespace CoreTools
         [[nodiscard]] String GetFileName() const;
 
     private:
-        IMPL_TYPE_DECLARE(LogFileName);
+        PackageType::ConstSharedPtr impl;
     };
 }
 

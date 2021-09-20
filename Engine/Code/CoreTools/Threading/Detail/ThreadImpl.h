@@ -14,7 +14,7 @@
 
 #include "System/Threading/Using/CriticalSectionUsing.h"
 #include "System/Threading/Using/ThreadUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace CoreTools
 {
@@ -22,9 +22,9 @@ namespace CoreTools
     {
     public:
         using ClassType = ThreadImpl;
-        using ThreadSize = System::WindowSize;
+        using ThreadSize = System::WindowsSize;
         using ThreadHandle = System::ThreadHandle;
-        using ThreadingDWord = System::WindowDWord;
+        using ThreadingDWord = System::WindowsDWord;
 
     public:
         ThreadImpl(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);

@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationSuite 头文件">
+      <UniqueIdentifier>{caf407e7-3f09-4ce1-97ce-d17b51208ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 头文件">
+      <UniqueIdentifier>{0b2a9829-0e8f-4528-a26b-801fc6243f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JavaSuite 头文件">
+      <UniqueIdentifier>{e878093e-f547-440a-92c4-3f73f7703a23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LuaSuite 头文件">
+      <UniqueIdentifier>{374f58ab-8cbd-4914-ad5c-a1179147becd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PerlSuite 头文件">
+      <UniqueIdentifier>{08a60d26-6a52-4c45-92af-3ea412573229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PythonSuite 头文件">
+      <UniqueIdentifier>{76a6d6a8-654a-4349-b2f2-d4bf37927eaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TCREScriptSuite 头文件">
+      <UniqueIdentifier>{a592bd79-3291-4d11-a0e6-4a5551a05679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{9337145a-152f-4d00-9285-088a74cdbacf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{5c912c50-6f13-4ddf-a9b9-f1ac6911d3e2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ScriptTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\TCREScriptSuite\TCREScriptSuite.h">
+      <Filter>TCREScriptSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\ConfigurationSuite\ConfigurationSuite.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\InterfaceSuite\InterfaceSuite.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\JavaSuite\JavaSuite.h">
+      <Filter>JavaSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\LuaSuite\LuaSuite.h">
+      <Filter>LuaSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\PerlSuite\PerlSuite.h">
+      <Filter>PerlSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\PythonSuite\PythonSuite.h">
+      <Filter>PythonSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Script\ScriptTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Script\ScriptTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Script\ScriptTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Script\ScriptTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

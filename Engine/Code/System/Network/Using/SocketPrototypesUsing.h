@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 17:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.4 (2021/06/04 14:46)
 
 #ifndef SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
 #define SYSTEM_NETWORK_SOCKET_PROTOTYPES_USING_H
@@ -16,7 +16,7 @@
     #include <WinSock2.h>
     #include <Ws2ipdef.h>
 #else  // !SYSTEM_PLATFORM_WIN32
-    #include "System/Window/Using/WindowUsing.h"
+    #include "System/Windows/Using/WindowsUsing.h"
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System
@@ -55,7 +55,7 @@ namespace System
             {
                 uint16_t s_w1, s_w2;
             } S_un_w;
-            WindowULong S_addr;
+            WindowsULong S_addr;
         } S_un;
     };
 
@@ -82,10 +82,10 @@ namespace System
         {
             struct
             {
-                WindowULong Zone : 28;
-                WindowULong Level : 4;
+                WindowsULong Zone : 28;
+                WindowsULong Level : 4;
             };
-            WindowULong Value;
+            WindowsULong Value;
         };
     };
 
@@ -93,11 +93,11 @@ namespace System
     {
         uint16_t sin6_family;
         uint16_t sin6_port;
-        WindowULong sin6_flowinfo;
+        WindowsULong sin6_flowinfo;
         WinSockIn6Addr sin6_addr;
         union
         {
-            WindowULong sin6_scope_id;
+            WindowsULong sin6_scope_id;
             WinSockScopeID sin6_scope_struct;
         };
     };

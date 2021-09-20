@@ -12,12 +12,12 @@
 
 AssistTools::GenerateTemplateMacro
 	::GenerateTemplateMacro(const System::String& templateFileName,  const Replace& replace)
-	:m_Impl(std::make_shared<ImplType>(templateFileName, replace))
+	:impl(templateFileName, replace)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }  
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateMacro)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateMacro)
 
 void AssistTools::GenerateTemplateMacro
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, 
@@ -26,6 +26,6 @@ void AssistTools::GenerateTemplateMacro
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
+	return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName, projectCapital, managerCapital);
 }
  

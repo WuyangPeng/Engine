@@ -62,9 +62,9 @@ namespace Rendering
         bool IsIconDefault() const noexcept;
         int GetCursor() const noexcept;
         bool IsCursorDefault() const noexcept;
-        System::WindowBrushTypes GetBackground() const noexcept;
+        System::WindowsBrushTypes GetBackground() const noexcept;
 
-        void SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowBrushTypes background) noexcept;
+        void SetWindowPictorialParameter(int icon, bool isIconDefault, int cursor, bool isCursorDefault, System::WindowsBrushTypes background) noexcept;
 
     private:
         RendererTypes m_Type;
@@ -81,7 +81,7 @@ namespace Rendering
         int m_Cursor = 0;
         bool m_IsCursorDefault = false;
         ;
-        System::WindowBrushTypes m_Background{};
+        System::WindowsBrushTypes m_Background{};
     };
 }
 

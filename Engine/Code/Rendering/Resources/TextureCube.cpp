@@ -26,13 +26,44 @@ CORE_TOOLS_RTTI_DEFINE(Rendering,TextureCube);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,TextureCube);
 CORE_TOOLS_FACTORY_DEFINE(Rendering,TextureCube); 
 
-COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, TextureCube);
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }                                                                                        
+    COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, TextureCube);
 
 using std::make_shared;
 
 Rendering::TextureCube
     ::TextureCube(TextureFormat format, int dimension,int numLevels,BufferUsage usage)
-    :ParentType{},m_Impl{ make_shared<ImplType>(format,dimension,numLevels,usage) }
+    :ParentType{},impl{ make_shared<ImplType>(format,dimension,numLevels,usage) }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -51,7 +82,7 @@ Rendering::TextureCube
     
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, TextureCube)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, TextureCube)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetFormat, Rendering::TextureFormat)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TextureCube, GetTextureType, Rendering::TextureFlags)
@@ -66,7 +97,7 @@ int Rendering::TextureCube
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    return m_Impl->GetDimension(index,level);
+    return impl->GetDimension(index,level);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,GetNumLevelBytes,int,int)
@@ -83,9 +114,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,SaveToFile,WriteFile
 void Rendering::TextureCube
     ::SetUserField (int index, int userField)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
    
-    return m_Impl->SetUserField(index,userField);
+    return impl->SetUserField(index,userField);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,GetUserField,int,int)
@@ -97,9 +128,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,TextureCube,HasMipmaps,bool)
 char* Rendering::TextureCube
     ::GetTextureData (int face,int level)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->GetTextureData(face,level);
+    return impl->GetTextureData(face,level);
 }
 
 const char* Rendering::TextureCube
@@ -107,7 +138,7 @@ const char* Rendering::TextureCube
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    return m_Impl->GetTextureData(face,level);
+    return impl->GetTextureData(face,level);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,ReadFromFile,ReadFileManager&,void)
@@ -115,15 +146,15 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,TextureCube,ReadFromFile,Rea
 void Rendering::TextureCube
     ::GenerateMipmaps ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
    
-    if(!m_Impl->HasMipmaps())
+    if(!impl->HasMipmaps())
     {
         RENDERER_MANAGE_SINGLETON.UnbindAll(this);
         
-        m_Impl->GenerateMipmaps();
+        impl->GenerateMipmaps();
         
-     const   auto numLevels = m_Impl->GetNumLevels();
+     const   auto numLevels = impl->GetNumLevels();
         
 		for (auto face = 0; face < 6; ++face)
 		{
@@ -135,13 +166,13 @@ void Rendering::TextureCube
     }
     else
     {
-        m_Impl->GenerateMipmaps();
+        impl->GenerateMipmaps();
     }
 }
 
 Rendering::TextureCube
    ::TextureCube (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -153,7 +184,7 @@ int Rendering::TextureCube
     
 	auto size = ParentType::GetStreamingSize();
     
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -175,7 +206,7 @@ void Rendering::TextureCube
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -183,7 +214,7 @@ void Rendering::TextureCube
 void Rendering::TextureCube
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source);
 }
@@ -191,7 +222,7 @@ void Rendering::TextureCube
 void Rendering::TextureCube
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();
 }
@@ -199,13 +230,13 @@ void Rendering::TextureCube
 void Rendering::TextureCube
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -12,8 +12,8 @@
 #include "ShaderFloat.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/SceneGraph/Projector.h"
-
-RENDERING_EXPORT_SHARED_PTR(ProjectorMatrixConstantImpl);
+EXPORT_SHARED_PTR(Rendering, ProjectorMatrixConstantImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -22,7 +22,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE ProjectorMatrixConstant : public ShaderFloat
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ProjectorMatrixConstant,DESTRUCTOR_DEFAULT);
+        void Swap(ProjectorMatrixConstant& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(ProjectorMatrixConstant);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~ProjectorMatrixConstant() noexcept= default;
+                ProjectorMatrixConstant(const ProjectorMatrixConstant& rhs);
+                ProjectorMatrixConstant& operator=(const ProjectorMatrixConstant& rhs);
+                ProjectorMatrixConstant(ProjectorMatrixConstant&& rhs) noexcept;
+                ProjectorMatrixConstant& operator=(ProjectorMatrixConstant&& rhs) noexcept;
         using ParentType = ShaderFloat;
 
     public:
@@ -48,7 +57,7 @@ namespace Rendering
         constexpr static auto sm_NumRegisters = 4;
 
     private:
-        IMPL_TYPE_DECLARE(ProjectorMatrixConstant);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

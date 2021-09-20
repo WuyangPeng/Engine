@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "Framework/MainFunctionHelper/MainFunctionHelperFwd.h"
 
 #include <memory>
@@ -20,10 +20,10 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowMessageInterface;
-		using HWnd = System::WindowHWnd;
-		using WParam = System::WindowWParam;
-		using LParam = System::WindowLParam;
-		using LResult = System::WindowLResult;
+		using HWnd = System::WindowsHWnd;
+		using WParam = System::WindowsWParam;
+		using LParam = System::WindowsLParam;
+		using LResult = System::WindowsLResult;
 		using FunctionPointer = LResult(ClassType::*) (HWnd hwnd, WParam wParam, LParam lParam);
 
 	public:

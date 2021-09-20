@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/21 10:22)
+//	引擎版本：0.7.1.1 (2020/10/21 10:22)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
@@ -24,7 +24,7 @@ namespace CoreTools
         using FactoryFunction = ObjectInterface::FactoryFunction;
 
     public:
-        ObjectManagerImpl() noexcept;
+        ObjectManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

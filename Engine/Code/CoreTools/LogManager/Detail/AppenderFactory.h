@@ -28,12 +28,12 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        [[nodiscard]] static AppenderImplPtr CreateAppenderConsole(AppenderPrint appenderFlags, LogLevel logLevel);
+        [[nodiscard]] static AppenderImplPtr Create(AppenderPrint appenderFlags, LogLevel logLevel);
 
-        [[nodiscard]] static AppenderImplPtr CreateAppenderFile(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
+        [[nodiscard]] static AppenderImplPtr Create(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
                                                                 int maxFileSize, bool backup, const String& extensionName);
 
-        [[nodiscard]] static AppenderImplPtr CreateAppenderFile(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
+        [[nodiscard]] static AppenderImplPtr Create(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
                                                                 int maxFileSize, bool backup, const String& extensionName);
     };
 }

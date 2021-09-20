@@ -23,7 +23,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26486)
 Framework::AndroidCallBackUnitTestSuite
 	::AndroidCallBackUnitTestSuite(int64_t delta, const string& suiteName)
-	:ParentType{ delta }, m_StreamType{ make_shared<StreamType>(true) },m_Impl{ make_shared<ImplType>(suiteName, m_StreamType->GetStreamShared())}, m_IsInit{ false }
+	:ParentType{ delta }, m_StreamType{ make_shared<StreamType>(true) },impl{ make_shared<ImplType>(suiteName, m_StreamType->GetStreamShared())}, m_IsInit{ false }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -31,7 +31,7 @@ Framework::AndroidCallBackUnitTestSuite
 
 Framework::AndroidCallBackUnitTestSuite
 	::AndroidCallBackUnitTestSuite(AndroidCallBackUnitTestSuite&& rhs) noexcept
-	:ParentType{ move(rhs) }, m_StreamType{ move(rhs.m_StreamType) },m_Impl{ move(rhs.m_Impl) }, m_IsInit{ rhs.m_IsInit }
+	:ParentType{ move(rhs) }, m_StreamType{ move(rhs.m_StreamType) },impl{ move(rhs.impl) }, m_IsInit{ rhs.m_IsInit }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -44,7 +44,7 @@ Framework::AndroidCallBackUnitTestSuite& Framework::AndroidCallBackUnitTestSuite
 	ParentType::operator=(move(rhs));
 
 	m_StreamType = move(rhs.m_StreamType);
-	m_Impl = move(rhs.m_Impl);
+	impl = move(rhs.impl);
 	m_IsInit = rhs.m_IsInit;
 
 	return *this;
@@ -54,7 +54,7 @@ Framework::AndroidCallBackUnitTestSuite& Framework::AndroidCallBackUnitTestSuite
 bool Framework::AndroidCallBackUnitTestSuite
 	::IsValid() const noexcept
 {
-	if (ParentType::IsValid() && m_StreamType != nullptr && m_Impl != nullptr)
+	if (ParentType::IsValid() && m_StreamType != nullptr && impl != nullptr)
 		return true;
 	else
 		return false;
@@ -115,11 +115,11 @@ void Framework::AndroidCallBackUnitTestSuite
 }
 
 void Framework::AndroidCallBackUnitTestSuite
-	::DoAddSuite(const Suite& suite)
+	::AddSuite(const Suite& suite)
 {
 	FRAMEWORK_CLASS_IS_VALID_1; 
 
-	return m_Impl->AddSuite(suite);
+	return impl->AddSuite(suite);
 }
 
 CoreTools::OStreamShared Framework::AndroidCallBackUnitTestSuite
@@ -135,7 +135,7 @@ int Framework::AndroidCallBackUnitTestSuite
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	return m_Impl->GetPassedNumber();
+	return impl->GetPassedNumber();
 }
 
 // private
@@ -144,10 +144,10 @@ bool Framework::AndroidCallBackUnitTestSuite
 {
 	const auto result = ParentType::Initialize();
 
-	AddSuite();
+	InitSuite();
 
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
+	impl->RunUnitTest();
+	impl->PrintReport();
 
 	return result;
 }
@@ -156,7 +156,7 @@ bool Framework::AndroidCallBackUnitTestSuite
 void Framework::AndroidCallBackUnitTestSuite
 	::ResetTestData()
 {
-	m_Impl->ResetTestData();
+	impl->ResetTestData();
 	GetStreamShared() << "测试数据已清零。\n";
 }
 
@@ -164,14 +164,14 @@ void Framework::AndroidCallBackUnitTestSuite
 void Framework::AndroidCallBackUnitTestSuite
 	::RunUnitTest()
 {
-	m_Impl->RunUnitTest();
-	m_Impl->PrintReport();
+	impl->RunUnitTest();
+	impl->PrintReport();
 }
 
 void Framework::AndroidCallBackUnitTestSuite
 	::AddTest(const std::string& suiteName, Suite& suite, const std::string& testName, const UnitTestSharedPtr& unitTest)
 {
-	m_Impl->AddTest(suiteName, suite, testName, unitTest);
+	impl->AddTest(suiteName, suite, testName, unitTest);
 }
 
 bool  Framework::AndroidCallBackUnitTestSuite
@@ -180,4 +180,11 @@ bool  Framework::AndroidCallBackUnitTestSuite
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
 
 	return true;
+}
+
+Framework::AndroidCallBackUnitTestSuite::Suite Framework::AndroidCallBackUnitTestSuite::GenerateSuite(const std::string& name)
+{
+    FRAMEWORK_CLASS_IS_VALID_CONST_1;
+
+    return Suite{ name, GetStreamShared(), IsPrintRun() };
 }

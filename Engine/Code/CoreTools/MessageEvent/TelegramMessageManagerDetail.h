@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:43)
+//	引擎版本：0.7.1.1 (2020/10/26 15:43)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H
@@ -156,7 +156,7 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeAllEvent(const Telegra
         {
             DisposeEvent(id, telegram);
         }
-        catch (CoreTools::Error& error)
+        catch (const CoreTools::Error& error)
         {
             LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
                 << error
@@ -172,7 +172,7 @@ void CoreTools::TelegramMessageManager<EventType>::DisposeEvent(uint64_t entityI
 
     auto eventEntity = boost::polymorphic_pointer_downcast<EventEntity>(entity);
 
-    eventEntity->EventFunction(telegram);
+    [[maybe_unused]] const auto result = eventEntity->EventFunction(telegram);
 }
 
 #endif  // CORE_TOOLS_MESSAGE_EVENT_MESSAGE_TELEGRAM_MANAGER_DETAIL_H

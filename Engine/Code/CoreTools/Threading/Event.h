@@ -14,21 +14,25 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 
-#include <boost/noncopyable.hpp>
+ #include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-CORE_TOOLS_EXPORT_SHARED_PTR(EventImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(EventImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Event : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE Event 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Event);
+        NON_COPY_TYPE_DECLARE(Event);
 
     public:
         Event(bool manualReset, bool initialState);
-
+        ~Event() noexcept = default;
+        Event(const Event& rhs) noexcept = delete;
+        Event& operator=(const Event& rhs) noexcept = delete;
+        Event(Event&& rhs) noexcept = delete;
+        Event& operator=(Event&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         void SetEvent();
@@ -36,7 +40,7 @@ namespace CoreTools
         void Wait();
 
     private:
-        IMPL_TYPE_DECLARE(Event);
+        PackageType impl;
     };
 }
 

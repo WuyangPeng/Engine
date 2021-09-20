@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 11:33)
+//	引擎版本：0.7.1.1 (2020/10/22 11:33)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_REGISTER_H
@@ -13,12 +13,12 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "ConstObjectAssociated.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include <array>
 #include <memory>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ObjectRegisterImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(ObjectRegister, ObjectRegisterImpl);
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::ObjectRegister>;
 template class CORE_TOOLS_DEFAULT_DECLARE std::enable_shared_from_this<CoreTools::ObjectRegister>;
@@ -28,7 +28,7 @@ namespace CoreTools
     class CORE_TOOLS_DEFAULT_DECLARE ObjectRegister final : public std::enable_shared_from_this<ObjectRegister>
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectRegister);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(ObjectRegister);
 
     public:
         explicit ObjectRegister(DisableNotThrow disableNotThrow);
@@ -44,7 +44,7 @@ namespace CoreTools
         [[nodiscard]] ConstRegisterContainerConstIter end() const noexcept;
 
         template <typename T>
-        void Register(const T& object);
+        uint64_t Register(const T& object);
 
         template <typename T>
         void RegisterContainer(const T& objects);
@@ -53,7 +53,7 @@ namespace CoreTools
         void RegisterContainer(const std::array<T, Size>& objects);
 
     private:
-        IMPL_TYPE_DECLARE(ObjectRegister);
+        PackageType impl;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ObjectRegister);

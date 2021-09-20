@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 10:18)
+//	引擎版本：0.7.1.1 (2020/10/20 10:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -37,7 +37,7 @@ void CoreTools::MemoryManager::Destroy() noexcept
 }
 
 CoreTools::MemoryManager::MemoryManager(Allocator allocator, Deallocator deallocator, [[maybe_unused]] MemoryManagerCreate memoryManagerCreate)
-    : m_Impl{ make_shared<ImplType>(allocator, deallocator) }
+    : impl{  allocator, deallocator  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -49,7 +49,7 @@ CoreTools::MemoryManager::~MemoryManager() noexcept
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, MemoryManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, MemoryManager)
 
 // static
 void* CoreTools::MemoryManager::DefaultAllocator([[maybe_unused]] size_t bytesNumber, [[maybe_unused]] const FunctionDescribed& functionDescribed) noexcept
@@ -72,7 +72,7 @@ void CoreTools::MemoryManager::PrintMemoryLeakInformation() const
 
     CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->PrintMemoryLeakInformation();
+    return impl->PrintMemoryLeakInformation();
 }
 
 int CoreTools::MemoryManager::GetMemBlockDimensions(const void* memBlock) const
@@ -81,7 +81,7 @@ int CoreTools::MemoryManager::GetMemBlockDimensions(const void* memBlock) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMemBlockDimensions(memBlock);
+    return impl->GetMemBlockDimensions(memBlock);
 }
 
 size_t CoreTools::MemoryManager::GetBytesNumber(const void* memBlock) const
@@ -90,23 +90,23 @@ size_t CoreTools::MemoryManager::GetBytesNumber(const void* memBlock) const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBytesNumber(memBlock);
+    return impl->GetBytesNumber(memBlock);
 }
 
 void* CoreTools::MemoryManager::CreateBlock(size_t bytesNumber, int dimensionsNumber, const FunctionDescribed& functionDescribed)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->CreateBlock(bytesNumber, dimensionsNumber, functionDescribed);
+    return impl->CreateBlock(bytesNumber, dimensionsNumber, functionDescribed);
 }
 
 void CoreTools::MemoryManager::Delete(const void* memBlock)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Delete(memBlock);
+    return impl->Delete(memBlock);
 }

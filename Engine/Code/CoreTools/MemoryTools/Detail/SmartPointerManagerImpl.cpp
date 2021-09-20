@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 10:04)
+//	引擎版本：0.7.1.1 (2020/10/20 10:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-CoreTools::SmartPointerManagerImpl::SmartPointerManagerImpl() noexcept
+CoreTools::SmartPointerManagerImpl::SmartPointerManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_ReferenceContainer{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_3;

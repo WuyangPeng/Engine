@@ -1,0 +1,1041 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{68D3D576-3577-45E5-B815-E38E0206567E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>CoreToolsTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticWin32ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(AssistStaticX64ReleaseLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\StaticSingletonSubclass.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\LoadingLibraryTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArraySuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CharacterStringSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTextColorsManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\AssertionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\CheckInvariantTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ContractSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\DelayCopyUnshared.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\Impl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\FunctionDescribedTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\CopyUnsharedImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\DelayCopyUnsharedImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\ImplStaticAssertHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\DataTypesSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\EngineConfigurationSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\Detail\GameErrorType.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ExceptionSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FreetypeSuite\FreetypeSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestNullptrTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestOperatorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacroImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacroImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtual.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileAndConsoleMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogTriggerAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CallConstMemberFunctionMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CopyMemberFunctionStaticAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionStaticAssertMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroFinalTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SafetyLimitMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFileNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFilterManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LoggerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogLevelManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogManagerSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePostfixTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingNoObjectPtr.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingObjectPtr.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MacroTestEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\Properties.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriend.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriendTemplate.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriendTemplateDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\SingletonMacro.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtr.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtrImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectPtr.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectSize.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\InitializeTerminatorMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\HelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionTestingHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\DllFunctionHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\MainFunctionHelperSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\TestingInformationHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryToolsSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\BaseEntityTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\CallbackParametersTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Entity.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\EventSubclass.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Parameters.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EntityManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventEntityTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Flags\EventPriorityFlags.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageEventSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\ParametersInterfaceTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramLessTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramMessageManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ModuleInitializerTerminatorSuite\ModuleInitializerTerminatorSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\NetworkSuite\NetworkSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferInStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferOutStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferSourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferTargetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BoolObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BufferSourceTestingEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BufferTargetTestingEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObjectEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StreamSizeTestingEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileOutStreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InitTermTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InTopLevelTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectLinkTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectRegisterTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectSystemsSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\OutTopLevelTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTestingBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\TypeCastingTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PerformanceProfilerSuite\PerformanceProfilerSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\DirectPropertyInternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\MethodProperty.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertiesBase.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyOffset.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\SimplePropertyExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\StaticPropertyExternal.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\DirectPropertyInternalTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\MethodPropertyTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesBaseTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyExternalTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\RegularExpressionSuite\RegularExpressionSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\ReportOutputSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\GlobalStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\OpenStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PausedStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\Player.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerEntity.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayingStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\State.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\StoppedStates.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Flags\States.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateEntityTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\SyntacticParserSuite\SyntacticParserSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ConstraintTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\ExplicitCastTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTestAddress.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\TinyTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ExplicitCastTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FactorialTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FibonacciTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\IncrementScopeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\LiteralCastTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ParamTypeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Pow3Testing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\PtrCompareTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RealAddressTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ReferenceCastTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\SqrtTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TemplateToolsSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TinyTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TrigonometricFunctionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\TextParsingSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\CriticalSectionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\EventTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\NullMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadingSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\TimeSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\Detail\TestEnum.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestSuiteSuite.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\StaticSingletonSubclass.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\LoadingLibraryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SingletonTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\SpanIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\StaticSingletonTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\UniqueIDManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\VersionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArray2DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\BitArrayTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BitArraySuite\TwoBitArrayTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringIOStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\CaseInsensitiveString\CaseInsensitiveStringTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\FormatErrorMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CharacterStringSuite\StringConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandArgumentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandLineInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CommandSuite\CommandTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleAllocTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleColorsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ConsoleSuite\ConsoleTextColorsManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\AssertionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\CheckInvariantTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\DelayCopyUnshared.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Detail\Impl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\FunctionDescribedTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\CopyUnsharedImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\DelayCopyUnsharedImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\ImplStaticAssertHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\NonCopyImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\PerformanceUnsharedImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\Impl\SharedImplTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\NoexceptTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\ScopeExitTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ContractSuite\TriggerAssertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck16Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheck32Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckCCITTUsingTableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\CyclicRedundancyCheckHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\IntelCheckSumTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SevenModElevenCheckSumTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\CyclicRedundancyCheckSuite\SpecifyCheckSumTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordIndexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordStoredTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapRecordTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\MinHeapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\DataTypesSuite\TupleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\EngineConfigurationSuite\StringReplacingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\HandleManagerTestData.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\Detail\ResourceHandleTestTag.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\HandleManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HandleManagerSuite\ResourceHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestApproximateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestConditionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestExceptionThrowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestNullptrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestOperatorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertTest\AssertTestRangeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ModuleClassInvariantMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\CustomAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\CustomAssert\ModuleCustomAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\CallConstMemberFunctionMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\InitializeTerminator.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\MemberFunctionNoexceptMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameFinalMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PureVirtualFinal.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\StreamObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteAddTestMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\UnitTestSuiteMacroCompleteUseTestingType.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionCatchMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Exception\ExceptionMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyModuleExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\CopyUnsharedExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\DelayCopyUnsharedExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\ModuleExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\NonCopyExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\PerformanceUnsharedExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Export\SharedExportMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\GetRequiredBitsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogConsoleMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogDefaultMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogEngineMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileAndConsoleMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogFileMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Log\LogTriggerAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CallConstMemberFunctionMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\CopyMemberFunctionStaticAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionStaticAssertMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroFinalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SafetyLimitMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DebugStreamMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingNoObjectPtrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\DefaultTestingObjectPtrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\StreamSizeMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingNoObjectPtrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectPtrTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Stream\TestingObjectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\AppenderTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogAppenderIOManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogConsoleTextColorsManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFileNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogFilterManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LoggerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogLevelManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePostfixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessagePrefixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogMessageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\LogManagerSuite\LogTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\AssertExceptionMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\ClassInvariant\ClassInvariantMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\AbstractObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\ClassInvariantStubMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingNoObjectPtr.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\DefaultTestingObjectPtr.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroBase.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\NameMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\Properties.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\PropertiesFriend.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\SingletonMacro.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtr.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingNoObjectPtrImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectPtr.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Detail\TestingObjectSize.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\FunctionDescribedMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\InitializeTerminatorMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MainFunctionMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionNoexceptMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemberFunction\MemberFunctionMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\MemoryMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\NameMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\PropertiesMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroBaseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\Rtti\RttiMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SingletonMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\SharedPtrMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroCompleteUseTestingTypeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UnitTestSuite\UnitTestSuiteMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\HelperSuite\UserMacroTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\CMainFunctionTestingHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\DllFunctionHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MainFunctionHelperSuite\TestingInformationHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferPoolTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\BufferTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\DefaultMemoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\EighthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FifthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FirstSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\FourthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\NinthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SecondSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SeventhSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\SixthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\TenthSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\Detail\ThirdSubclassSmartPointerTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\HeapAllocateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5ContextTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MD5Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\MemoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\PoolTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\RandomTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SmartPointerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MemoryToolsSuite\SubclassSmartPointerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\BaseEntityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\CallbackParametersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Entity.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\EventSubclass.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\Detail\Parameters.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EntityManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventEntityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\EventSlotTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\MessageManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\ParametersInterfaceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramLessTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramMessageManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\MessageEventSuite\TelegramTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferInStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferOutStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferSourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\BufferTargetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\BoolObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\EnumObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\ErrorObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\IntObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\NullObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\PointerObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\StringObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\Detail\TestObject.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileInStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\FileOutStreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InitTermTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\InTopLevelTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectLinkTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectRegisterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\ObjectTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\OutTopLevelTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\RttiTestingBase.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\StreamTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ObjectSystemsSuite\TypeCastingTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\DirectPropertyInternal.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\MethodProperty.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertiesBase.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyExternal.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\PropertyOffset.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\SimplePropertyExternal.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\Detail\StaticPropertyExternal.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\DirectPropertyInternalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\MethodPropertyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertiesBaseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyExternalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\PropertyOffsetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\SimplePropertyExternalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\PropertiesSuite\StaticPropertyExternalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\EquilongReportOutputTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestFailReportOutputTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ReportOutputSuite\UnitTestSuiteReportOutputTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\CommonDataResourceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceFactoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerLockTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ResourceManagerSuite\ResourceManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\EmptyStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\GlobalStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\OpenStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PausedStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\Player.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayerEntity.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\PlayingStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\State.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\Detail\StoppedStates.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateEntityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\StateMachineSuite\StateMachineTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ConstraintTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\ExplicitCastTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Detail\RealAddressTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ExplicitCastTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FactorialTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\FibonacciTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\IncrementScopeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\LiteralCastTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ParamTypeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\Pow3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\PtrCompareTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\RealAddressTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ReferenceCastTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\SqrtTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TinyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\TrigonometricFunctionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\CriticalSectionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\EventTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\NullMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\CustomTimeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\DeltaTimeManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\MillisecondTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\CFileManagerTesting\CFileManagerHelpTestingText.txt" />
+    <Text Include="Resource\CFileManagerTesting\CFileManagerTestingText.txt" />
+    <Text Include="Resource\EnvironmentTesting\EnvironmentTestingText.txt" />
+    <Text Include="Resource\FileHandleTesting\FileHandleHelpTestingText.txt" />
+    <Text Include="Resource\FileHandleTesting\FileHandleTestingText.txt" />
+    <Text Include="Resource\FileManagerTesting\FileManagerHelpTestingText.txt" />
+    <Text Include="Resource\FileManagerTesting\FileManagerTestingText.txt" />
+    <Text Include="Resource\StreamManagerTesting\IFStreamManagerTest.txt" />
+    <Text Include="Resource\StreamManagerTesting\OFStreamManagerTest.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+    <Text Include="Resource\ReadMe.md" />
+    <Text Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\CoreToolsTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\StringReplacing.json" />
+    <None Include="Configuration\Testing.json" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

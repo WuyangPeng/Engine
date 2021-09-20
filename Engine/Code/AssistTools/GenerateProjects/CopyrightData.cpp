@@ -15,12 +15,12 @@ using std::make_shared;
 
 AssistTools::CopyrightData
 	::CopyrightData(int endYear, const System::String& versions, const System::String& projectChineseName)
-	:m_Impl{ make_shared<ImplType>(endYear,versions,projectChineseName) }
+	:impl{ endYear,versions,projectChineseName }
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, CopyrightData)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, CopyrightData)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(AssistTools, CopyrightData, GetEndYear,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(AssistTools, CopyrightData, GetVersions, const System::String)

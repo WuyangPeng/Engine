@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTriangle3Box3(const Triangle3& triangle, const Box3& box, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, m_Impl{ std::make_shared<ImplType>(triangle, box) }
+    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, impl{  triangle, box  }
 {
     Find();
 
@@ -31,7 +31,7 @@ Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::DynamicFindIntersectorTr
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -43,7 +43,7 @@ const Mathematics::Triangle3<Real> Mathematics::DynamicFindIntersectorTriangle3B
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetTriangle();
+    return impl->GetTriangle();
 }
 
 template <typename Real>
@@ -51,7 +51,7 @@ const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorTriangle3Box3<R
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBox();
+    return impl->GetBox();
 }
 
 template <typename Real>
@@ -60,8 +60,8 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     auto tMax = this->GetTMax();
     const auto lhsVelocity = this->GetLhsVelocity();
     const auto rhsVelocity = this->GetRhsVelocity();
-    auto triangle = m_Impl->GetTriangle();
-    auto box = m_Impl->GetBox();
+    auto triangle = impl->GetTriangle();
+    auto box = impl->GetBox();
 
     // 好像三角形是静止的，盒子在移动。
     auto relVelocity = rhsVelocity - lhsVelocity;
@@ -194,7 +194,7 @@ void Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::Find()
     }
 
     FindContactSet<Real> findContactSet{ triangle, box, side, triangleContact, boxContact, lhsVelocity, rhsVelocity, contactTime };
-    m_Impl->SetPoint(findContactSet.GetPoint());
+    impl->SetPoint(findContactSet.GetPoint());
 
     this->SetContactTime(contactTime);
     this->SetIntersectionType(IntersectionType::Other);
@@ -205,7 +205,7 @@ int Mathematics::DynamicFindIntersectorTriangle3Box3<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -213,7 +213,7 @@ const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorTriangle3Bo
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE3_BOX3_ACHIEVE_H

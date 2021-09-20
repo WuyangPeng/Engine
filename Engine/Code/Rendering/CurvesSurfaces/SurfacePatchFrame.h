@@ -12,15 +12,15 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-
-RENDERING_EXPORT_SHARED_PTR(SurfacePatchFrameImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(SurfacePatchFrameImpl);
 
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE SurfacePatchFrame  
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatchFrame);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(SurfacePatchFrame);
 		using AVector = Mathematics::FloatAVector;
 		using APoint = Mathematics::FloatAPoint;
 
@@ -35,7 +35,7 @@ namespace Rendering
 		const AVector GetNormal() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(SurfacePatchFrame);
+                PackageType impl;
 	};
 
 }

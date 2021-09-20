@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHIcon.h"
-#include "System/Window/WindowRegister.h"
+#include "System/Windows/WindowsRegister.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -24,7 +24,7 @@ Framework::WindowHIcon
 
 Framework::WindowHIcon
 	::WindowHIcon(HInstance instance, int icon)
-	:m_HIcon{ System::LoadSystemIcon(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowWord>(icon))) }
+	:m_HIcon{ System::LoadSystemIcon(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowsWord>(icon))) }
 {
 	CheckUpHIcon();
 
@@ -47,7 +47,7 @@ void Framework::WindowHIcon
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHIcon) 
 
-System::WindowHIcon Framework::WindowHIcon
+System::WindowsHIcon Framework::WindowHIcon
 	::GetHIcon() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

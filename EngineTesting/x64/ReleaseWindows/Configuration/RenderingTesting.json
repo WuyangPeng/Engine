@@ -1,0 +1,336 @@
+{
+  "macroSuite":
+  {
+
+  },
+
+  "dataTypeSuite":
+  {
+    "HalfFloatTesting": 100,
+    "ColourDefaultTraitsTesting": 1,
+    "ColourTesting": 1,
+    "TextureColourTesting": 100,
+    "ColourManagerTesting": 1,
+    "ColourConvertFromTesting": 10,
+    "ColourConvertToTesting": 10,
+    "UtilityTesting": 1,
+    "TransformTesting": 100,
+    "BoundTesting": 100,
+    "SpecializedIOTesting": 100
+  },
+
+  "resourcesSuite":
+  {
+    "BufferTesting": 1,
+    "Texture1DTesting": 1,
+    "Texture2DTesting": 1,
+    "Texture3DTesting": 1,
+    "TextureCubeTesting": 1,
+    "RenderTargetTesting": 1,
+    "VertexFormatTypeTesting": 1,
+    "VertexFormatElementTesting": 1,
+    "VertexFormatTesting": 1,
+    "VertexBufferAccessorTesting": 1
+  },
+
+  "sceneGraphSuite": 
+  {
+    "CameraFrustumDataTesting": 1,
+    "CameraManageTesting": 1,
+    "CameraTesting": 100,
+    "SpatialTesting": 1,
+    "VisibleSetTesting": 1,
+    "CullerTesting": 1,
+    "NodeTesting": 1,
+    "LightTesting": 100,
+    "CameraNodeTesting": 1,
+    "MaterialTesting": 1,
+    "VisualTesting": 1,
+    "TriangleIndexTesting": 1,
+    "TrianglePositionTesting": 1,
+    "PolypointTesting": 1,
+    "PolysegmentTesting": 1,
+    "TrianglesMeshTesting": 1,
+    "TrianglesStripTesting": 1,
+    "TrianglesFanTesting": 1,
+    "ParticlesTesting": 1,
+    "ProjectorTesting": 100,
+    "PickRecordTesting": 1,
+    "PickRecordContainerTesting": 1,
+    "PickerTesting": 100,
+    "ScreenTargetTesting": 1,
+    "StandardMeshTesting": 1
+  },
+
+  "controllersSuite": 
+  {
+    "ControllerTesting": 1,
+    "ControlledObjectTesting": 1,
+    "TransformControllerTesting": 1,
+    "SkinControllerTesting": 1,
+    "PointControllerTesting": 1,
+    "ParticleControllerTesting": 1,
+    "ControllerKeyInfoTesting": 1,
+    "MorphControllerTesting": 1,
+    "KeyframeControllerTesting": 1,
+    "IKGoalTesting": 1,
+    "IKJointTesting": 1,
+    "IKControllerTesting": 1,
+    "BlendTransformControllerTesting": 1
+  },
+
+  "shaderFloatsSuite": 
+  {
+    "ShaderFloatTesting": 1,
+    "CameraModelDirectionVectorConstantTesting": 100,
+    "CameraModelPositionConstantTesting": 100,
+    "CameraWorldDirectionVectorConstantTesting": 100,
+    "CameraWorldPositionConstantTesting": 100,
+    "LightAmbientConstantTesting": 100,
+    "LightAttenuationConstantTesting": 100,
+    "LightDiffuseConstantTesting": 100,
+    "LightModelDirectionVectorConstantTesting": 100,
+    "LightModelPositionConstantTesting": 100,
+    "LightSpecularConstantTesting": 100,
+    "LightSpotConstantTesting": 100,
+    "LightWorldDirectionVectorConstantTesting": 100,
+    "LightWorldPositionConstantTesting": 100,
+    "MaterialAmbientConstantTesting": 100,
+    "MaterialDiffuseConstantTesting": 100,
+    "MaterialEmissiveConstantTesting": 100,
+    "MaterialSpecularConstantTesting": 100,
+    "ProjectionMatrixConstantTesting": 100,
+    "ProjectionViewMatrixConstantTesting": 100,
+    "ProjectionViewWorldMatrixConstantTesting": 100,
+    "ViewMatrixConstantTesting": 100,
+    "ViewWorldMatrixConstantTesting": 100,
+    "WorldMatrixConstantTesting": 100,
+    "ProjectorWorldPositionConstantTesting": 100,
+    "ProjectorMatrixConstantTesting": 100
+  },
+
+  "detailSuite": 
+  {    
+    "SwitchNodeTesting": 1,
+    "BillboardNodeTesting": 1,
+    "CollapseRecordTesting": 1,
+    "CollapseRecordArrayTesting": 1,
+    "CreateClodMeshTesting": 1,
+    "ClodMeshTesting": 1,
+    "DlodNodeTesting": 1
+  },
+
+  "shadersSuite": 
+  {
+    "SingleShaderBaseDataTesting": 1,
+    "ShaderBaseDataTesting": 1,
+    "SingleShaderConstantsDataTesting": 1,
+    "ShaderConstantsDataTesting": 1,
+    "SingleShaderSamplerDataTesting": 1,
+    "ShaderSamplerDataTesting": 1,
+    "ShaderManageTesting": 1,
+    "ShaderParametersTesting": 1,
+    "VertexShaderTesting": 1,
+    "PixelShaderTesting": 1,
+    "SingleShaderProfileDataTesting": 1,
+    "ShaderProfileDataTesting": 1,
+    "AlphaStateTesting": 1,
+    "CullStateTesting": 1,
+    "DepthStateTesting": 1,
+    "OffsetStateTesting": 1,
+    "StencilStateTesting": 1,
+    "WireStateTesting": 1,
+    "VisualPassTesting": 1,
+    "VisualTechniqueTesting": 1,
+    "VisualEffectTesting": 1,
+    "SaveVisualEffectTesting": 1,
+    "LoadVisualEffectTesting": 1,
+    "VisualEffectInstanceTesting": 1
+  },
+
+  "localEffectsSuite":
+  {
+
+  },
+
+  "globalEffectsSuite": 
+  {
+
+  },
+
+  "curvesSurfacesSuite": 
+  {
+    "FloatArrayTesting": 1,
+    "Float2ArrayTesting": 1,
+    "SurfacePatchFrameTesting": 1,
+    "PrincipalCurvatureInfoTesting": 1,
+    "SurfacePatchTesting": 1
+  },
+
+  "illuminationSuite":
+  {
+
+  },
+
+  "imageProcessingSuite": 
+  {
+
+  },
+
+  "pictureSuite":
+  {
+
+  },
+
+  "sortingSuite": 
+  {
+
+  },
+
+  "terrainSuite":
+  {
+
+  },
+
+  "vertexSuite": 
+  {
+
+  },
+
+  "textFontsSuite":
+  {
+
+  },
+
+  "consoleGraphSuite": 
+  {
+
+  },
+
+  "openGLAPISuite":
+  {
+
+  },
+
+  "directAPISuite": 
+  {
+
+  },
+
+  "renderersSuite": 
+  {
+    "RendererBasisTesting": 1,
+    "RendererParameterTesting": 1,
+    "PlatformVertexFormatTesting": 1,
+    "VertexFormatManagementTesting": 1,
+    "PlatformIndexBufferTesting": 1,
+    "PlatformVertexBufferTesting": 1,
+    "BufferLockManageTesting": 1,
+    "BufferManagementTesting": 1,
+    "BufferManagementLockEncapsulationTesting": 1,
+    "PlatformTexture1DTesting": 1,
+    "PlatformTexture2DTesting": 1,
+    "PlatformTexture3DTesting": 1,
+    "PlatformTextureCubeTesting": 1,
+    "TextureLockManageTesting": 1,
+    "TextureManagementTesting": 1,
+    "TextureManagementLockEncapsulationTesting": 1,
+    "PlatformRenderTargetTesting": 1,
+    "RenderTargetManagementTesting": 1
+  },
+
+  "openGLRendererSuite": 
+  {
+    "OpenGLBindTextureTesting": 1,
+    "OpenGLVertexFormatDataTesting": 1,
+    "OpenGLVertexFormatArrayDataTesting": 1,
+    "OpenGLTextureDataTesting": 1,
+    "OpenGLTextureDataManageTesting": 1,
+    "OpenGLRenderTargetDataTesting":1
+  },
+
+  "dx9RendererSuite":
+  {
+
+  },
+
+  "aglRendererSuite": 
+  {
+
+  },
+
+  "glutRendererSuite": 
+  {
+
+  },
+
+  "glxRendererSuite":
+  {
+
+  },
+
+  "wglRendererSuite": 
+  {
+
+  },
+
+  "lib3dsSuite": 
+  {
+
+  },
+
+  "abuseSuite":
+  {
+
+  },
+
+  "demoglSuite": 
+  {
+
+  },
+
+  "devILSuite": 
+  {
+
+  },
+
+  "fBXSuite":
+  {
+
+  },
+
+  "jPEGSuite": 
+  {
+
+  },
+
+  "tIFFSuite": 
+  {
+
+  },
+
+  "openvidiaSuite":
+  {
+
+  },
+
+  "nethackSuite": 
+  {
+
+  },
+
+  "wingSuite": 
+  {
+
+  },
+
+  "wargamerSuite":
+  {
+
+  },
+
+  "nvtoolkitSuite": 
+  {
+
+  }
+}

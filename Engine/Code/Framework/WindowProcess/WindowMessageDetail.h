@@ -13,11 +13,11 @@
 #include "System/Helper/EnumCast.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Window/Flags/WindowDisplayFlags.h"
-#include "System/Window/Flags/WindowMessagesFlags.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
-#include "System/Window/WindowCreate.h"
-#include "System/Window/WindowUser.h"
+#include "System/Windows/Flags/WindowsDisplayFlags.h"
+#include "System/Windows/Flags/WindowsMessagesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/WindowsCreate.h"
+#include "System/Windows/WindowsUser.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "Framework/MiddleLayer/Flags/MiddleLayerPlatformFlags.h"
@@ -78,7 +78,7 @@ void Framework::WindowMessage<MiddleLayer>::Terminate()
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::CreateMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -88,19 +88,19 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::CreateMessage(HWnd 
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::SizeMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::SizeMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     const WindowSize clientSize{ lParam };
 
-    m_MiddleLayer->Resize(boost::numeric_cast<System::WindowDisplay>(wParam), clientSize);
+    m_MiddleLayer->Resize(boost::numeric_cast<System::WindowsDisplay>(wParam), clientSize);
 
     return ParentType::SizeMessage(hwnd, wParam, lParam);
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::CloseMessage(HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::CloseMessage(HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -119,11 +119,11 @@ void Framework::WindowMessage<MiddleLayer>::DoCloseMessage(HWnd hwnd) const
 
     auto exitInformation = SYSTEM_TEXT("是否退出"s) + className + SYSTEM_TEXT("？"s);
 
-    System::SystemValidateRect(hwnd);
+    [[maybe_unused]] const auto value0 = System::SystemValidateRect(hwnd);
 
     if (System::MessageBox(hwnd, exitInformation, className))
     {
-        System::DestroySystemWindow(hwnd);
+        [[maybe_unused]] const auto value1 = System::DestroySystemWindow(hwnd);
     }
 }
 
@@ -140,7 +140,7 @@ System::String Framework::WindowMessage<MiddleLayer>::GetWindowsClassName(HWnd h
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -149,7 +149,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd hw
     // 当Terminate键被按下时退出应用程序。
     if (key == GetTerminateKey())
     {
-        System::SendSystemMessage(hwnd, System::WindowMessages::Close, 0, 0);
+        [[maybe_unused]] const auto value = System::SendSystemMessage(hwnd, System::WindowsMessages::Close, 0, 0);
     }
     else
     {
@@ -166,14 +166,14 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::CharMessage(HWnd hw
 template <typename MiddleLayer>
 const Framework::WindowPoint Framework::WindowMessage<MiddleLayer>::GetCursorPosition(HWnd hwnd) const noexcept
 {
-    System::WindowPoint point{};
-    System::GetCursorClientPos(hwnd, point);
+    System::WindowsPoint point{};
+    [[maybe_unused]] const auto value = System::GetCursorClientPos(hwnd, point);
 
     return WindowPoint{ point };
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::MoveMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::MoveMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -183,7 +183,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::MoveMessage([[maybe
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::KeyDownMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::KeyDownMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -224,7 +224,7 @@ bool Framework::WindowMessage<MiddleLayer>::IsSpecialKey(int virtualKey) const n
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::KeyUpMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::KeyUpMessage(HWnd hwnd, WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -246,7 +246,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::KeyUpMessage(HWnd h
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::LeftButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -259,7 +259,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonDownMessa
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::LeftButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -272,7 +272,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::LeftButtonUpMessage
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -285,7 +285,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonDownMes
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -298,7 +298,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::MiddleButtonUpMessa
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::RightButtonDownMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -311,7 +311,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonDownMess
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::RightButtonUpMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -324,7 +324,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::RightButtonUpMessag
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::MouseMoveMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::MouseMoveMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -344,20 +344,20 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::MouseMoveMessage(HW
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::MouseWheelMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::MouseWheelMessage([[maybe_unused]] HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
     const WindowPoint windowPoint{ lParam };
     const VirtualKeysTypes virtualKeys{ boost::numeric_cast<WParam>(System::GetLowWord(wParam)) };
 
-    m_MiddleLayer->MouseWheel(System::GetHighWord(wParam) / System::EnumCastUnderlying(System::WindowMessages::MouseWheel), windowPoint, virtualKeys);
+    m_MiddleLayer->MouseWheel(System::GetHighWord(wParam) / System::EnumCastUnderlying(System::WindowsMessages::MouseWheel), windowPoint, virtualKeys);
 
     return 0;
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::DestroyMessage(HWnd hwnd, WParam wParam, LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -367,7 +367,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::DestroyMessage(HWnd
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::PaintMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::PaintMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 
@@ -377,7 +377,7 @@ System::WindowLResult Framework::WindowMessage<MiddleLayer>::PaintMessage([[mayb
 }
 
 template <typename MiddleLayer>
-System::WindowLResult Framework::WindowMessage<MiddleLayer>::EraseBackgroundMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
+System::WindowsLResult Framework::WindowMessage<MiddleLayer>::EraseBackgroundMessage([[maybe_unused]] HWnd hwnd, [[maybe_unused]] WParam wParam, [[maybe_unused]] LParam lParam)
 {
     FRAMEWORK_CLASS_IS_VALID_1;
 

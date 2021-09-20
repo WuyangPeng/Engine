@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:12)
+//	引擎版本：0.7.1.1 (2020/10/26 13:12)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
@@ -24,6 +24,7 @@ namespace CoreTools
         using ClassType = PropertyBase<ID, T>;
 
     public:
+        PropertyBase() = default;
         virtual ~PropertyBase() = default;
 
         PropertyBase(const PropertyBase& rhs) noexcept = default;
@@ -34,8 +35,8 @@ namespace CoreTools
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
     protected:
-        T* Holder();
-        const T* Holder() const;
+        T* Holder() noexcept;
+        const T* Holder() const noexcept;
 
     private:
         static const ptrdiff_t m_Offset;

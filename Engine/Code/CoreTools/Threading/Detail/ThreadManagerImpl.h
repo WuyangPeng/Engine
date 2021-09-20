@@ -23,11 +23,11 @@ namespace CoreTools
     {
     public:
         using ClassType = ThreadManagerImpl;
-        using ThreadSize = System::WindowSize;
+        using ThreadSize = System::WindowsSize;
         using ThreadHandle = System::ThreadHandle;
 
     public:
-        ThreadManagerImpl() noexcept;
+        ThreadManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

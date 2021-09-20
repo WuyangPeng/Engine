@@ -14,26 +14,31 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Database/Configuration/ConfigurationFwd.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+DATABASE_NON_COPY_EXPORT_IMPL(DatabaseObjectImpl);
 
-DATABASE_EXPORT_SHARED_PTR(DatabaseObjectImpl);
-EXPORT_NONCOPYABLE_CLASS(DATABASE);
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE DatabaseObject final : private boost::noncopyable
+    class DATABASE_DEFAULT_DECLARE DatabaseObject final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(DatabaseObject);
+        NON_COPY_TYPE_DECLARE(DatabaseObject);
 
     public:
         explicit DatabaseObject(const ConfigurationStrategy& configurationStrategy);
+        ~DatabaseObject() noexcept = default;
+        DatabaseObject(const DatabaseObject& rhs) noexcept = delete;
+        DatabaseObject& operator=(const DatabaseObject& rhs) noexcept = delete;
+        DatabaseObject(DatabaseObject&& rhs) noexcept = delete;
+        DatabaseObject& operator=(DatabaseObject&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(DatabaseObject);
+        PackageType impl;
 
 #if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
     public:

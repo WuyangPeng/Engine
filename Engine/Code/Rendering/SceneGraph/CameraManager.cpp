@@ -36,23 +36,23 @@ void Rendering::CameraManager
 }
 
 Rendering::CameraManager ::CameraManager([[maybe_unused]] CameraManagerCreate cameraManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0 }
 {
  
 
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering, CameraManager)
+CLASS_INVARIANT_STUB_DEFINE(Rendering, CameraManager)
 
 void Rendering::CameraManager
 	::SetDefaultDepthType(RendererTypes type)
 {
 	SINGLETON_MUTEX_ENTER_MEMBER;
 
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	m_Impl->SetDefaultDepthType(type);
+	impl->SetDefaultDepthType(type);
 }
 
 Rendering::DepthType Rendering::CameraManager
@@ -62,5 +62,5 @@ Rendering::DepthType Rendering::CameraManager
 
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GetDepthType();
+	return impl->GetDepthType();
 }

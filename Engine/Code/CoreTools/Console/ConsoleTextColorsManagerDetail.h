@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 18:52)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_TEXT_COLOR_MANAGER_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_TEXT_COLOR_MANAGER_DETAIL_H
@@ -16,7 +16,7 @@
 
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleTextColorsManager<Handle>::ConsoleTextColorsManager(TextColour textColor, bool intensified)
-    : m_ConsoleColors{ DisableNotThrow::Disable }, m_TextColor{ textColor }, m_Intensified{ intensified }
+    : consoleColors{ DisableNotThrow::Disable }, textColor{ textColor }, intensified{ intensified }
 {
     SetTextColor();
 
@@ -32,26 +32,26 @@ CoreTools::ConsoleTextColorsManager<Handle>::~ConsoleTextColorsManager() noexcep
     {
         ResetTextColor();
     }
-    EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools)
+    EXCEPTION_ALL_CATCH(CoreTools)
 }
 
 template <CoreTools::StandardHandle Handle>
 void CoreTools::ConsoleTextColorsManager<Handle>::SetTextColor()
 {
-    if (m_Intensified)
+    if (intensified)
     {
-        m_ConsoleColors.SetTextIntensifiedColor(m_TextColor);
+        consoleColors.SetTextIntensifiedColor(textColor);
     }
     else
     {
-        m_ConsoleColors.SetTextColor(m_TextColor);
+        consoleColors.SetTextColor(textColor);
     }
 }
 
 template <CoreTools::StandardHandle Handle>
 void CoreTools::ConsoleTextColorsManager<Handle>::ResetTextColor()
 {
-    m_ConsoleColors.ResetColor();
+    consoleColors.ResetColor();
 }
 
 #ifdef OPEN_CLASS_INVARIANT

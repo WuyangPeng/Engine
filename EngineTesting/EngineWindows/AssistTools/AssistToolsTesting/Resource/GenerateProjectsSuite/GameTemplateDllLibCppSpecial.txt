@@ -1,0 +1,16 @@
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// Copyright (c) 2011-%EndYearSpecial%
+//
+// %ProjectChineseNameSpecial%版本：%VersionsSpecial% (%DateSpecial% %HourSpecial%:%MinuteSpecial%)
+
+// %ManagerChineseNameSpecial%管理器包含以下模块：
+// 1.   Macro（宏） 
+// 2.   Engine（引擎） 
+
+#include "%SolutionNameSpecial%%ManagerNameSpecial%Export.h"
+
+#include "%SolutionNameSpecial%%ManagerNameSpecial%.h"
+
+#include "CoreTools/CoreToolsLib.h"
+#include "Framework/FrameworkLib.h"

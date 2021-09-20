@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowFontInformation.h"
-#include "System/Window/WindowFontInformation.h"
+#include "System/Windows/WindowsFontInformation.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 
 Framework::WindowFontInformation

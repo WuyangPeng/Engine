@@ -14,7 +14,7 @@
 
 #include "Mathematics/Algebra/Matrix3.h"
 #include "Mathematics/Algebra/Vector3D.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -23,11 +23,11 @@ namespace Mathematics
     template <typename Real>
     class Ellipsoid3CoefficientsImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3CoefficientsImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3CoefficientsImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipsoid3CoefficientsImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipsoid3CoefficientsImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3CoefficientsImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipsoid3CoefficientsImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipsoid3Coefficients final
@@ -36,8 +36,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Ellipsoid3CoefficientsImpl = Ellipsoid3CoefficientsImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Ellipsoid3Coefficients);
-
+      
+        TYPE_DECLARE(Ellipsoid3Coefficients);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector3D = Vector3D<Real>;
         using Matrix3 = Matrix3<Real>;
         using CoefficientsType = std::vector<Real>;
@@ -57,7 +59,7 @@ namespace Mathematics
         [[nodiscard]] const CoefficientsType GetCoefficients() const;
 
     private:
-        IMPL_TYPE_DECLARE(Ellipsoid3Coefficients);
+        PackageType impl;
     };
 
     template <typename Real>

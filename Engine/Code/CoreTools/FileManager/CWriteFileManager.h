@@ -16,19 +16,17 @@
 #include "System/FileManager/Using/CFileUsing.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CWriteFileManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(CWriteFileManagerImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE CWriteFileManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE CWriteFileManager final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(CWriteFileManager);
+        NON_COPY_TYPE_DECLARE(CWriteFileManager);
         using String = System::String;
         using PosType = System::PosType;
         using FileSeek = System::FileSeek;
@@ -36,6 +34,11 @@ namespace CoreTools
 
     public:
         explicit CWriteFileManager(const String& fileName);
+        ~CWriteFileManager() noexcept = default;
+        CWriteFileManager(const CWriteFileManager& rhs) noexcept = delete;
+        CWriteFileManager& operator=(const CWriteFileManager& rhs) noexcept = delete;
+        CWriteFileManager(CWriteFileManager&& rhs) noexcept = delete;
+        CWriteFileManager& operator=(CWriteFileManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -57,7 +60,7 @@ namespace CoreTools
         [[nodiscard]] bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(CWriteFileManager);
+        PackageType impl;
     };
 }
 

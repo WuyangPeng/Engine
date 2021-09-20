@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::Thread::Thread(void* function, void* userData, int processorNumber, ThreadSize stackSize)
-    : m_Impl{ make_shared<ImplType>(function, userData, processorNumber, stackSize) }
+    : impl{  function, userData, processorNumber, stackSize  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Thread)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Thread)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, Resume, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Thread, Suspend, void)

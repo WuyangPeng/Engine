@@ -15,7 +15,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::BandedMatrixImpl<Real>::BandedMatrixImpl(int size, int lowerBandsNumber, int upperBandsNumber)

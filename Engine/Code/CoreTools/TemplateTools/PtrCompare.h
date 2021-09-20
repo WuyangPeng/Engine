@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:28)
+//	引擎版本：0.7.1.1 (2020/10/23 15:28)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_PTR_COMPARE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_PTR_COMPARE_H
@@ -19,7 +19,7 @@ namespace CoreTools
     class PtrLess
     {
     public:
-        [[nodiscard]] bool operator()(T left, T right)
+        [[nodiscard]] bool operator()(T left, T right) noexcept
         {
             return ((*left) < (*right));
         }
@@ -29,7 +29,7 @@ namespace CoreTools
     class PtrGreater
     {
     public:
-        bool operator()(T left, T right)
+        bool operator()(T left, T right) noexcept
         {
             return ((*right) < (*left));
         }

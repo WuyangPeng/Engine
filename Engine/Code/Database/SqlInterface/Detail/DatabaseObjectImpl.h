@@ -17,13 +17,14 @@
 
 namespace Database
 {
+    class DatabaseObjectFactory;
     class DATABASE_HIDDEN_DECLARE DatabaseObjectImpl
     {
     public:
         using ClassType = DatabaseObjectImpl;
         using ImplTypePtr = std::shared_ptr<ClassType>;
         using MysqlxSessionPtr = std::unique_ptr<MysqlxSession>;
-
+        using FactoryType = DatabaseObjectFactory;
     public:
         explicit DatabaseObjectImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
         virtual ~DatabaseObjectImpl() noexcept = 0;

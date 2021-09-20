@@ -22,7 +22,7 @@ namespace CoreTools
 
 namespace Rendering
 {
-	class RENDERING_DEFAULT_DECLARE SpatialData
+	class   SpatialData
     {
     public:
         using ClassType = SpatialData;

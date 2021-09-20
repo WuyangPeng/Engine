@@ -9,8 +9,8 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Flags/WindowPictorialFlags.h"
-#include "System/Window/Using/WindowPictorialUsing.h"
+#include "System/Windows/Flags/WindowsPictorialFlags.h"
+#include "System/Windows/Using/WindowsPictorialUsing.h"
 
 namespace Framework
 {
@@ -18,9 +18,9 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowHBrush;
-		using HBrush = System::WindowHBrush;
-		using HGdiObj = System::WindowHGdiObj;
-		using WindowBrushTypes = System::WindowBrushTypes;
+		using HBrush = System::WindowsHBrush;
+		using HGdiObj = System::WindowsHGdiObj;
+		using WindowBrushTypes = System::WindowsBrushTypes;
 
 	public:
 		explicit WindowHBrush(WindowBrushTypes background = WindowBrushTypes::WhiteBrush) noexcept;

@@ -1,0 +1,966 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{D4ED31F5-61D8-49C8-A294-879040149F1D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AnimationTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\EngineTesting.props" />
+    <Import Project="..\..\EngineTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <CodeAnalysisRuleSet>NativeRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <EnablePREfast>false</EnablePREfast>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\Log.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\MathematicsTesting.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraAggregateTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraStreamSizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\APointTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AQuaternionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalBasisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox2DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox3DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox4DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3EigenDecompositionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3ExtractTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix4Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\MatrixTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PlaneTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialDivideTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionConstraintsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalBasisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DInformationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalBasisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalizeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ApproximationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CircleFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CylinderFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseByArcs2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipsoidFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatArcFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatCircleFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightLineFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightPlaneFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalPlaneFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ParaboloidFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2PowersTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3PowersTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4PowersTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticCircleFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticSphereFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\SphereFit3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BaseSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BitHacksTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastNegativeExpTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastTrigonometricTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float4Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\MathTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\RandomTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ComputationalGeometrySuite\ComputationalGeometrySuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContainmentSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2CircumscribeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2InscribeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\CurvesSurfacesVolumesSuite\CurvesSurfacesVolumesSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Detail\DistanceTest.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Detail\DistanceTestDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Line2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Box2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ellipse2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Hyperbola2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Line2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceSegment2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceCircle3Circle3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Line3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Ray3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Segment3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Box3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ellipsoid3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Line3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ray3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Segment3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Ray3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Segment3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceSegment3Segment3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceResultTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\InterpolationSuite\InterpolationSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\DynamicIntersectorTest.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\DynamicIntersectorTestDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\Intersector1Test.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\Intersector1TestDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\IntersectorTest.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\IntersectorTestDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\StaticIntersectorTest.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Detail\StaticIntersectorTestDetail.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicFindIntersector1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicIntersectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicTestIntersector1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\Intersector1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\IntersectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticFindIntersector1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticIntersectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticTestIntersector1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Arc2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Circle2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorCircle2Circle2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Line2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorSegment2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorBox2Box2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2ClassifyTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Line2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorSegment2Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\IntersectorLine3Triangle3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TrianglePlaneRelationsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TriangleProjectOntoAxisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\IntersectionSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MacroSuite\MacroSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\EdgeKeyTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\MeshesSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\TriangleKeyTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\MiscellaneousSuite\MiscellaneousSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BandedMatrixInvertTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1RootTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2CalculateTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2NodeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2RootTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2StorageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3CalculateTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3NodeTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3RootTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3StorageTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodCalculateTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodRootTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EigenDecompositionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationResultConstIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\GaussianQuadratureTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemInverseTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Matrix3ToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1DataTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NoniterativeEigen3x3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NumericalAnalysisSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeEulerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeImplicitEulerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeMidpointTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeRungeKutta4Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTest.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolarDecompositionValueTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsRationalTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\QDUDecompositionValueTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\RombergIntegralTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueDecompositionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveBandedTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveSymmetricConjugateGradientTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixIndexTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\TrapezoidRuleTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Arc2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Box2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Circle2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\ConvexPolygon2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2CoefficientsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Line2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Objects2DSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Polygon2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ray2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Segment2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Triangle2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Box3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Capsule3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Circle3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cone3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\ConvexPolyhedron3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cylinder3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipse3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3CoefficientsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Frustum3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Line3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Lozenge3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Objects3DSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Plane3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Polyhedron3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ray3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Rectangle3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Segment3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Sphere3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Tetrahedron3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3ParametersTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Triangle3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2FilteredTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Int64Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2IntegerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2RationalTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3FilteredTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Int64Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3IntegerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3RationalTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QueryDotToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySortToolsTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionIntegerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionRationalTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\FloatingPointAnalysisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64VectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAmendTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAnalysisTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataOperatorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDivisionModuloTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerMultiplicationTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalSuite.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector2Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector3Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVectorTesting.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\Testing.h" />
+    <ClInclude Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraAggregateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AlgebraStreamSizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\APointTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AQuaternionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalBasisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorOrthonormalizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AVectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox2DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox3DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\AxesAlignBoundingBox4DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixSolveTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BandedMatrixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\BarycentricCoordinatesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\EulerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\HomogeneousPointTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2EigenDecompositionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3EigenDecompositionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3ExtractTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Matrix4Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\MatrixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PlaneTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialDivideTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\PolynomialTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionConstraintsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionFactorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionSwingTwistTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\QuaternionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableLengthVectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\VariableMatrixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalBasisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DOrthonormalizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector2DToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DInformationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalBasisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DOrthonormalizeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector3DToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\AlgebraSuite\Vector4DToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CircleFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\CylinderFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseByArcs2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipseFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\EllipsoidFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GaussPointsFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatArcFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\GreatCircleFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightLineFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\HeightPlaneFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalLineFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\OrthogonalPlaneFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\ParaboloidFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2PowersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3PowersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4PowersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\PolynomialFit4Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticCircleFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\QuadraticSphereFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ApproximationSuite\SphereFit3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\BitHacksTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastNegativeExpTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\FastTrigonometricTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\Float4Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\MathTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\BaseSuite\RandomTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ContBox3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2CircumscribeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\ContainmentSuite\ScribeCircle2InscribeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Line2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceLine2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Box2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ellipse2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Hyperbola2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Line2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistancePoint2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceRay2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance2D\DistanceSegment2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceCircle3Circle3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Line3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Ray3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceLine3Segment3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Box3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ellipsoid3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Line3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Ray3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistancePoint3Segment3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Ray3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceRay3Segment3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\Distance3D\DistanceSegment3Segment3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceResultTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\DistanceSuite\DistanceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicFindIntersector1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicIntersectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\DynamicTestIntersector1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\Intersector1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\IntersectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticFindIntersector1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticIntersectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection1D\StaticTestIntersector1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Arc2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorArc2Circle2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorCircle2Circle2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Line2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorLine2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorRay2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticFindIntersectorSegment2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorBox2Box2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2ClassifyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Line2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorLine2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorRay2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection2D\StaticTestIntersectorSegment2Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\IntersectorLine3Triangle3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TrianglePlaneRelationsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\IntersectionSuite\Intersection3D\TriangleProjectOntoAxisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\EdgeKeyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\MeshesSuite\TriangleKeyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BandedMatrixInvertTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1RootTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2CalculateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2NodeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2RootTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2StorageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3CalculateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3NodeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3RootTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3StorageTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Bisect3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodCalculateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodRootTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\BrentsMethodTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EigenDecompositionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationResultConstIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\EquationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\GaussianQuadratureTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemInverseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\LinearSystemTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Matrix3ToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1DataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\Minimize1Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\MinimizeNTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\NoniterativeEigen3x3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeEulerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeImplicitEulerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeMidpointTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeRungeKutta4Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTest.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\OdeSolverTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolarDecompositionValueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsRationalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\PolynomialRootsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\QDUDecompositionValueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\RombergIntegralTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueDecompositionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SingularValueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveBandedTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SolveSymmetricConjugateGradientTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixIndexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\SparseMatrixTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\NumericalAnalysisSuite\TrapezoidRuleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Arc2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Box2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Circle2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\ConvexPolygon2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2CoefficientsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ellipse2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Line2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Polygon2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Ray2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Segment2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects2DSuite\Triangle2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Box3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Capsule3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Circle3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cone3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\ConvexPolyhedron3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Cylinder3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipse3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3CoefficientsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ellipsoid3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Frustum3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Line3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Lozenge3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Plane3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Polyhedron3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Ray3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Rectangle3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Segment3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Sphere3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Tetrahedron3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3ParametersTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Torus3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\Objects3DSuite\Triangle3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2FilteredTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Int64Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2IntegerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2RationalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3FilteredTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Int64Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3IntegerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3RationalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\Query3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QueryDotToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\QuerySuite\QuerySortToolsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionIntegerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\ConversionRationalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\FloatingPointAnalysisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64Vector3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\Int64VectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAmendTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataAnalysisTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataOperatorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerDivisionModuloTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerMultiplicationTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\IntegerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector2Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVector3Testing.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\RationalSuite\RationalVectorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\Code\Mathematics\MathematicsTesting\TestingMain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

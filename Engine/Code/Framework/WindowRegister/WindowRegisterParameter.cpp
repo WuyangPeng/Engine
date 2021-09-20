@@ -35,7 +35,7 @@ bool Framework::WindowRegisterParameter
 }
 #endif // OPEN_CLASS_INVARIANT
 
-System::WindowHInstance Framework::WindowRegisterParameter
+System::WindowsHInstance Framework::WindowRegisterParameter
 	::GetHInstance() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;
@@ -43,7 +43,7 @@ System::WindowHInstance Framework::WindowRegisterParameter
 	return m_Instance;
 }
 
-System::WindowClassStyle Framework::WindowRegisterParameter
+System::WindowsClassStyle Framework::WindowRegisterParameter
 	::GetStyle() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_1;

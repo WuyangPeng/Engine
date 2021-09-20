@@ -24,21 +24,31 @@ using std::make_shared;
 CORE_TOOLS_RTTI_DEFINE(Rendering, ProjectorWorldPositionConstant);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ProjectorWorldPositionConstant);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, ProjectorWorldPositionConstant); 
-CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ProjectorWorldPositionConstant);
+Rendering::ProjectorWorldPositionConstant::ProjectorWorldPositionConstant(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ProjectorWorldPositionConstant)
 CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, ProjectorWorldPositionConstant);
 
  
 
 Rendering::ProjectorWorldPositionConstant
 	::ProjectorWorldPositionConstant(const ProjectorSharedPtr& projector)
-	:ParentType{ sm_NumRegisters }, m_Impl{ make_shared<ImplType>(projector) }
+	:ParentType{ sm_NumRegisters }, impl{ make_shared<ImplType>(projector) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ProjectorWorldPositionConstant)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ProjectorWorldPositionConstant)
 
 void Rendering::ProjectorWorldPositionConstant
 	::SetNumRegisters(int numRegisters)

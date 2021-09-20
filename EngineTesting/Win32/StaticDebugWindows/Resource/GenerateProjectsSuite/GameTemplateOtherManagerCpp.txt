@@ -1,0 +1,29 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%/%SolutionName%MiddleLayer/%SolutionName%MiddleLayerExport.h"
+
+#include "%ManagerName%.h" 
+#include "%SolutionName%/%SolutionName%MiddleLayer/Macro/%SolutionName%MiddleLayerClassInvariantMacro.h"
+
+%SolutionName%MiddleLayer::%ManagerName%
+	::%ManagerName%()
+	:ParentType()
+{
+	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+%SolutionName%MiddleLayer::%ManagerName%
+	::~%ManagerName%()
+{
+	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(%SolutionName%MiddleLayer, %ManagerName%)
+
+ 
+
+

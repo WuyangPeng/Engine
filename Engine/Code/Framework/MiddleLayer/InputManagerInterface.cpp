@@ -17,7 +17,7 @@ using std::make_shared;
 
 Framework::InputManagerInterface
 	::InputManagerInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(InputMiddleLayer::Count)) }
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(InputMiddleLayer::Count)  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -32,7 +32,7 @@ ENGINE_MIDDLE_LAYER_MANAGER_DEFINE(Framework, Input, CameraSystems)
 bool Framework::InputManagerInterface
 	::Paint()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Paint();
 }
@@ -40,7 +40,7 @@ bool Framework::InputManagerInterface
 bool Framework::InputManagerInterface
 	::Move(const WindowPoint& point)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Move(point);
 }
@@ -48,7 +48,7 @@ bool Framework::InputManagerInterface
 bool Framework::InputManagerInterface
 	::Resize(WindowDisplay windowDisplay, const WindowSize& size)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	return ParentType::Resize(windowDisplay,size);
 }

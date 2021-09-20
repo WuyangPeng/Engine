@@ -1,60 +1,60 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 12:48)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/17 14:02)
 
 #include "System/SystemExport.h"
 
 #include "DeltaTimeValueData.h"
 
 System::DeltaTimeValueData::DeltaTimeValueData() noexcept
-    : m_DeltaTimeValue{}
+    : deltaTimeValue{}
 {
 }
 
 System::DeltaTimeValueData::DeltaTimeValueData(const DeltaTimeValue& deltaTimeValue) noexcept
-    : m_DeltaTimeValue{ deltaTimeValue }
+    : deltaTimeValue{ deltaTimeValue }
 {
 }
 
 System::DeltaTimeValueData::DeltaTimeValueData(int64_t second, int32_t microsecond) noexcept
-    : m_DeltaTimeValue{}
+    : deltaTimeValue{}
 {
-    m_DeltaTimeValue.tv_sec = second;
-    m_DeltaTimeValue.tv_usec = microsecond;
+    deltaTimeValue.tv_sec = second;
+    deltaTimeValue.tv_usec = microsecond;
 }
 
 const System::DeltaTimeValue System::DeltaTimeValueData::GetDeltaTimeValue() const noexcept
 {
-    return m_DeltaTimeValue;
+    return deltaTimeValue;
 }
 
 void System::DeltaTimeValueData::SetValue(int64_t second, int32_t microsecond) noexcept
 {
-    m_DeltaTimeValue.tv_sec = second;
-    m_DeltaTimeValue.tv_usec = microsecond;
+    deltaTimeValue.tv_sec = second;
+    deltaTimeValue.tv_usec = microsecond;
 }
 
 int64_t System::DeltaTimeValueData::GetSecond() const noexcept
 {
-    return m_DeltaTimeValue.tv_sec;
+    return deltaTimeValue.tv_sec;
 }
 
 int32_t System::DeltaTimeValueData::GetMicrosecond() const noexcept
 {
-    return m_DeltaTimeValue.tv_usec;
+    return deltaTimeValue.tv_usec;
 }
 
 void System::DeltaTimeValueData::Correction() noexcept
 {
-    if (m_DeltaTimeValue.tv_usec < 0)
+    if (deltaTimeValue.tv_usec < 0)
     {
-        m_DeltaTimeValue.tv_usec += g_Microseconds;
-        --m_DeltaTimeValue.tv_sec;
+        deltaTimeValue.tv_usec += g_Microseconds;
+        --deltaTimeValue.tv_sec;
     }
 }
 
@@ -62,11 +62,11 @@ System::DeltaTimeValueData System::operator-(const DeltaTimeValueData& lhs, cons
 {
 #ifdef SYSTEM_PLATFORM_MACOS
 
-    auto copyLhs = lhs.GetDeltaTimeValue();
-    auto copyRhs = rhs.GetDeltaTimeValue();
+    auto lhsDeltaTime = lhs.GetDeltaTimeValue();
+    auto rhsDeltaTime = rhs.GetDeltaTimeValue();
     DeltaTimeValue result{};
 
-    timersub(&copyLhs, &copyRhs, &result);
+    timersub(&lhsDeltaTime, &rhsDeltaTime, &result);
 
     return DeltaTimeValueData{ result };
 

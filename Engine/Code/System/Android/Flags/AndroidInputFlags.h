@@ -1,15 +1,16 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 17:20)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/10 19:09)
 
 #ifndef SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_INPUT_FLAGS_H
 
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/EnumMacro.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
@@ -51,7 +52,8 @@ namespace System
     enum class AndroidInputEventType
     {
         Key = AINPUT_EVENT_TYPE_KEY,
-        Motion = AINPUT_EVENT_TYPE_MOTION
+        Motion = AINPUT_EVENT_TYPE_MOTION,
+        Focus = AINPUT_EVENT_TYPE_FOCUS
     };
 
     enum class AndroidKeyEventAction
@@ -92,6 +94,8 @@ namespace System
         Scroll = AMOTION_EVENT_ACTION_SCROLL,
         HoverEnter = AMOTION_EVENT_ACTION_HOVER_ENTER,
         HoverExit = AMOTION_EVENT_ACTION_HOVER_EXIT,
+        ButtonPress = AMOTION_EVENT_ACTION_BUTTON_PRESS,
+        ButtonRelease = AMOTION_EVENT_ACTION_BUTTON_RELEASE,
     };
 
     enum class AndroidMotionEvent
@@ -136,6 +140,9 @@ namespace System
         Brake = AMOTION_EVENT_AXIS_BRAKE,
         Distance = AMOTION_EVENT_AXIS_DISTANCE,
         Tilt = AMOTION_EVENT_AXIS_TILT,
+        Scroll = AMOTION_EVENT_AXIS_SCROLL,
+        RelativeX = AMOTION_EVENT_AXIS_RELATIVE_X,
+        RelativeY = AMOTION_EVENT_AXIS_RELATIVE_Y,
         Generic1 = AMOTION_EVENT_AXIS_GENERIC_1,
         Generic2 = AMOTION_EVENT_AXIS_GENERIC_2,
         Generic3 = AMOTION_EVENT_AXIS_GENERIC_3,
@@ -161,6 +168,8 @@ namespace System
         Tertiary = AMOTION_EVENT_BUTTON_TERTIARY,
         Back = AMOTION_EVENT_BUTTON_BACK,
         Forward = AMOTION_EVENT_BUTTON_FORWARD,
+        StylusPrimary = AMOTION_EVENT_BUTTON_STYLUS_PRIMARY,
+        StylusSecondary = AMOTION_EVENT_BUTTON_STYLUS_SECONDARY,
     };
 
     enum class AndroidMotionEventTool
@@ -170,6 +179,7 @@ namespace System
         Stylus = AMOTION_EVENT_TOOL_TYPE_STYLUS,
         Mouse = AMOTION_EVENT_TOOL_TYPE_MOUSE,
         Eraser = AMOTION_EVENT_TOOL_TYPE_ERASER,
+        Palm = AMOTION_EVENT_TOOL_TYPE_PALM
     };
 
     enum class AndroidInputSourceClass
@@ -194,10 +204,13 @@ namespace System
         Touchscreen = AINPUT_SOURCE_TOUCHSCREEN,
         Mouse = AINPUT_SOURCE_MOUSE,
         Stylus = AINPUT_SOURCE_STYLUS,
+        BluetoothStylus = AINPUT_SOURCE_BLUETOOTH_STYLUS,
         Trackball = AINPUT_SOURCE_TRACKBALL,
+        MouseRelative = AINPUT_SOURCE_MOUSE_RELATIVE,
         Touchpad = AINPUT_SOURCE_TOUCHPAD,
         Navigation = AINPUT_SOURCE_TOUCH_NAVIGATION,
         Joystick = AINPUT_SOURCE_JOYSTICK,
+        RotaryEncoder = AINPUT_SOURCE_ROTARY_ENCODER,
 
         Any = AINPUT_SOURCE_ANY,
     };
@@ -213,8 +226,7 @@ namespace System
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     #include "System/Android/Flags/AndroidKeyCodesFlags.h"
-    #include "System/Helper/EnumCast.h"
-    #include "System/Window/Flags/WindowMessagesFlags.h"
+    #include "System/Windows/Flags/WindowsMessagesFlags.h"
 
 namespace System
 {
@@ -251,13 +263,14 @@ namespace System
     enum class AndroidInputEventType
     {
         Key = 1,
-        Motion = 2
+        Motion = 2,
+        Focus = 3
     };
 
     enum class AndroidKeyEventAction
     {
-        Down = EnumCastUnderlying(WindowMessages::KeyDown),
-        Up = EnumCastUnderlying(WindowMessages::KeyUp),
+        Down = EnumCastUnderlying(WindowsMessages::KeyDown),
+        Up = EnumCastUnderlying(WindowsMessages::KeyUp),
         Multiple = 2
     };
 
@@ -281,9 +294,9 @@ namespace System
     {
         Mask = 0xff,
         PointerIndexMask = 0xff00,
-        Down = EnumCastUnderlying(WindowMessages::LButtonDown),
-        Up = EnumCastUnderlying(WindowMessages::LButtonUp),
-        Move = EnumCastUnderlying(WindowMessages::MouseMove),
+        Down = EnumCastUnderlying(WindowsMessages::LButtonDown),
+        Up = EnumCastUnderlying(WindowsMessages::LButtonUp),
+        Move = EnumCastUnderlying(WindowsMessages::MouseMove),
         Cancel = -3,
         Outside = -4,
         PointerDown = -5,
@@ -292,6 +305,8 @@ namespace System
         Scroll = -8,
         HoverEnter = -9,
         HoverExit = -10,
+        ButtonPress = -11,
+        ButtonRelease = -12
     };
 
     enum class AndroidMotionEvent
@@ -336,6 +351,9 @@ namespace System
         Brake = 23,
         Distance = 24,
         Tilt = 25,
+        Scroll = 26,
+        RelativeX = 27,
+        RelativeY = 28,
         Generic1 = 32,
         Generic2 = 33,
         Generic3 = 34,
@@ -361,6 +379,8 @@ namespace System
         Tertiary = 1 << 2,
         Back = 1 << 3,
         Forward = 1 << 4,
+        StylusPrimary = 1 << 5,
+        StylusSecondary = 1 << 6,
     };
 
     enum class AndroidMotionEventTool
@@ -370,6 +390,7 @@ namespace System
         Stylus = 2,
         Mouse = 3,
         Eraser = 4,
+        Palm = 5
     };
 
     enum class AndroidInputSourceClass
@@ -394,10 +415,13 @@ namespace System
         Touchscreen = 0x00001000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Mouse = 0x00002000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Stylus = 0x00004000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
+        BluetoothStylus = 0x00008000 | Stylus,
         Trackball = 0x00010000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
+        MouseRelative = 0x00020000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
         Touchpad = 0x00100000 | EnumCastUnderlying(AndroidInputSourceClass::Position),
         Navigation = 0x00200000 | EnumCastUnderlying(AndroidInputSourceClass::None),
         Joystick = 0x01000000 | EnumCastUnderlying(AndroidInputSourceClass::Joystick),
+        RotaryEncoder = 0x00400000 | EnumCastUnderlying(AndroidInputSourceClass::None),
 
         Any = 0xffffff00,
     };
@@ -411,8 +435,6 @@ namespace System
 }
 
 #else  // !SYSTEM_PLATFORM_ANDROID && !SYSTEM_PLATFORM_WIN32
-
-    #include "System/Helper/EnumCast.h"
 
 namespace System
 {
@@ -449,7 +471,8 @@ namespace System
     enum class AndroidInputEventType
     {
         Key = 1,
-        Motion = 2
+        Motion = 2,
+        Focus = 3
     };
 
     enum class AndroidKeyEventAction
@@ -490,6 +513,8 @@ namespace System
         Scroll = 8,
         HoverEnter = 9,
         HoverExit = 10,
+        ButtonPress = 11,
+        ButtonRelease = 12
     };
 
     enum class AndroidMotionEvent
@@ -534,6 +559,9 @@ namespace System
         Brake = 23,
         Distance = 24,
         Tilt = 25,
+        Scroll = 26,
+        RelativeX = 27,
+        RelativeY = 28,
         Generic1 = 32,
         Generic2 = 33,
         Generic3 = 34,
@@ -559,6 +587,8 @@ namespace System
         Tertiary = 1 << 2,
         Back = 1 << 3,
         Forward = 1 << 4,
+        StylusPrimary = 1 << 5,
+        StylusSecondary = 1 << 6,
     };
 
     enum class AndroidMotionEventTool
@@ -568,6 +598,7 @@ namespace System
         Stylus = 2,
         Mouse = 3,
         Eraser = 4,
+        Palm = 5
     };
 
     enum class AndroidInputSourceClass
@@ -592,10 +623,13 @@ namespace System
         Touchscreen = 0x00001000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Mouse = 0x00002000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
         Stylus = 0x00004000 | EnumCastUnderlying(AndroidInputSourceClass::Pointer),
+        BluetoothStylus = 0x00008000 | Stylus,
         Trackball = 0x00010000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
+        MouseRelative = 0x00020000 | EnumCastUnderlying(AndroidInputSourceClass::Navigation),
         Touchpad = 0x00100000 | EnumCastUnderlying(AndroidInputSourceClass::Position),
         Navigation = 0x00200000 | EnumCastUnderlying(AndroidInputSourceClass::None),
         Joystick = 0x01000000 | EnumCastUnderlying(AndroidInputSourceClass::Joystick),
+        RotaryEncoder = 0x00400000 | EnumCastUnderlying(AndroidInputSourceClass::None),
 
         Any = 0xffffff00,
     };

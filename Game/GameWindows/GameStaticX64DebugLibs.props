@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);$(GameStaticX64DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link> 
+      <AdditionalLibraryDirectories>$(LibsEnvironmentX64DebugLib);$(EngineStaticX64DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
     <ClCompile>
       <PreprocessorDefinitions>BUILDING_STATIC;BUILDING_GAME_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-  </ItemDefinitionGroup> 
+  </ItemDefinitionGroup>
 </Project>

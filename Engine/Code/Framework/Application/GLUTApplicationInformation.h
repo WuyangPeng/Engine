@@ -11,15 +11,15 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Framework/OpenGLGlutFrame/OpenGLGlutFrameFwd.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(GLUTApplicationInformationImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(GLUTApplicationInformationImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE GLUTApplicationInformation
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GLUTApplicationInformation);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(GLUTApplicationInformation);
 
 	public:
 		GLUTApplicationInformation(int majorVersion, int minorVersion, FrameParameter frame);
@@ -31,7 +31,7 @@ namespace Framework
 		FrameParameter GetFrame() const noexcept;
 
 	private:
-		IMPL_TYPE_DECLARE(GLUTApplicationInformation);
+                PackageType impl;
 	};
 }
 

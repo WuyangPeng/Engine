@@ -11,21 +11,21 @@
 
 #include "Flags/ApplicationTrait.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(FontInformationImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+FRAMEWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(FontInformationImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE FontInformation
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(FontInformation);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(FontInformation);
 		using TChar = System::TChar;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
+		using HWnd = System::WindowsHWnd;
 
 	public:
 		// GLUT ƽ̨
@@ -42,7 +42,7 @@ namespace Framework
 		int GetFontHeight() const;
 
 	private:
-		IMPL_TYPE_DECLARE(FontInformation);
+                PackageType impl;
 	};
 }
 

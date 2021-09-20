@@ -23,7 +23,7 @@ namespace Rendering
 	{
 	public:
 		using  ClassType = VertexFormatManagementImpl;
-	 
+	 using FactoryType = ClassType;
 		using PlatformVertexFormatSharedPtr = std::shared_ptr<PlatformVertexFormat>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 

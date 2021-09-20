@@ -12,11 +12,11 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Flags/GenerateTemplateReplaceFlags.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 #include <map>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTestingTemplateEngineImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTestingTemplateEngineImpl);
 
 namespace AssistTools
 { 
@@ -25,7 +25,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTestingTemplateEngine
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTestingTemplateEngine);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTestingTemplateEngine);
 		typedef std::map<GenerateTemplateReplace, System::String> Replace;
 
 	public:
@@ -38,7 +38,7 @@ namespace AssistTools
 						const System::String& projectCapital,const System::String& managerCapital) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTestingTemplateEngine);
+		PackageType impl;
 	};
 }
 

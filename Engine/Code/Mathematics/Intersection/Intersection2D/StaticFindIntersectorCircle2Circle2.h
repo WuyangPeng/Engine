@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/AlgebraFwd.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Circle2.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <vector>
 
 namespace Mathematics
@@ -23,19 +23,21 @@ namespace Mathematics
     template <typename Real>
     class StaticFindIntersectorCircle2Circle2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorCircle2Circle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorCircle2Circle2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorCircle2Circle2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorCircle2Circle2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<StaticFindIntersectorCircle2Circle2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorCircle2Circle2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorCircle2Circle2 : public StaticIntersector<Real, Vector2D>
     {
     public:
         using StaticFindIntersectorCircle2Circle2Impl = StaticFindIntersectorCircle2Circle2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(StaticFindIntersectorCircle2Circle2);
-
+  
+        TYPE_DECLARE(StaticFindIntersectorCircle2Circle2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = StaticIntersector<Real, Vector2D>;
         using Vector2D = Vector2D<Real>;
         using Circle2 = Circle2<Real>;
@@ -64,7 +66,7 @@ namespace Mathematics
         void Find();
 
     private:
-        IMPL_TYPE_DECLARE(StaticFindIntersectorCircle2Circle2);
+        PackageType impl;
     };
 
     using FloatStaticFindIntersectorCircle2Circle2 = StaticFindIntersectorCircle2Circle2<float>;

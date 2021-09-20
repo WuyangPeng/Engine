@@ -40,7 +40,7 @@ namespace Mathematics
     // 1 + max{|b[0]/b[n]|,...,|b[n-1]/b[n]|}¡£
 
     template <typename Real>
-    class MATHEMATICS_HIDDEN_DECLARE PolynomialRootsImpl final
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE PolynomialRootsImpl final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");

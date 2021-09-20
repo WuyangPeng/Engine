@@ -16,14 +16,14 @@
 
 template <typename Real>
 Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3& matrix, const Vector3D& vector, Real constants)
-    : m_Impl{ std::make_shared<ImplType>(matrix, vector, constants) }
+    : impl{ matrix, vector, constants }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const CoefficientsType& coefficient)
-    : m_Impl{ std::make_shared<ImplType>(coefficient) }
+    : impl{ coefficient }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,10 +32,7 @@ Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Coeffici
 template <typename Real>
 bool Mathematics::Ellipsoid3Coefficients<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
-        return true;
-    else
-        return false;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -44,7 +41,7 @@ const Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetM
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMatrix();
+    return impl->GetMatrix();
 }
 
 template <typename Real>
@@ -52,7 +49,7 @@ const Mathematics::Vector3D<Real> Mathematics::Ellipsoid3Coefficients<Real>::Get
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVector();
+    return impl->GetVector();
 }
 
 template <typename Real>
@@ -60,7 +57,7 @@ Real Mathematics::Ellipsoid3Coefficients<Real>::GetConstants() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetConstants();
+    return impl->GetConstants();
 }
 
 template <typename Real>
@@ -68,7 +65,7 @@ const typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCoefficients();
+    return impl->GetCoefficients();
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_ACHIEVE_H

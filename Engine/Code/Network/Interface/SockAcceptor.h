@@ -14,18 +14,18 @@
 
 #include "NetworkInternalFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-NETWORK_EXPORT_SHARED_PTR(SockAcceptorImpl);
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+NETWORK_NON_COPY_EXPORT_IMPL(SockAcceptorImpl);
+ 
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SockAcceptor final : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE SockAcceptor final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(SockAcceptor);
+        NON_COPY_TYPE_DECLARE(SockAcceptor);
         using ACEHandleType = ACEHandle;
         using BoostHandleType = boost::asio::ip::tcp::acceptor::native_handle_type;
         using WinSocketType = System::WinSocket;
@@ -34,6 +34,11 @@ namespace Network
         explicit SockAcceptor(const ConfigurationStrategy& configurationStrategy);
         SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy);
         SockAcceptor(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy);
+        ~SockAcceptor() noexcept = default;
+        SockAcceptor(const SockAcceptor& rhs) noexcept = delete;
+        SockAcceptor& operator=(const SockAcceptor& rhs) noexcept = delete;
+        SockAcceptor(SockAcceptor&& rhs) noexcept = delete;
+        SockAcceptor& operator=(SockAcceptor&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -59,7 +64,7 @@ namespace Network
         [[nodiscard]] int GetPort() const;
 
     private:
-        IMPL_TYPE_DECLARE(SockAcceptor);
+        PackageType impl;
     };
 }
 

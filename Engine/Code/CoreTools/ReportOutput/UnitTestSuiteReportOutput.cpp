@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 10:20)
+//	引擎版本：0.7.1.1 (2020/10/23 10:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,12 +19,12 @@ using std::ostream;
 using std::string;
 
 CoreTools::UnitTestSuiteReportOutput::UnitTestSuiteReportOutput(const string& timeDescribe, int borderLineLength, const OStreamShared& streamShared)
-    : m_Impl{ make_shared<ImplType>(timeDescribe, borderLineLength, streamShared) }
+    : impl{  timeDescribe, borderLineLength, streamShared  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, UnitTestSuiteReportOutput)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, UnitTestSuiteReportOutput)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput, PrintString, string, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, UnitTestSuiteReportOutput, PrintNewLine, void)
@@ -36,7 +36,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, UnitTestSuiteReportOutput,
 
 void CoreTools::UnitTestSuiteReportOutput::PrintTestResult(int passedNumber, int failedNumber, int errorNumber, int characterWidth)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->PrintTestResult(passedNumber, failedNumber, errorNumber, characterWidth);
+    return impl->PrintTestResult(passedNumber, failedNumber, errorNumber, characterWidth);
 }

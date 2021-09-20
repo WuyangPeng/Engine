@@ -28,7 +28,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        AppenderManagerImpl() noexcept;
+        AppenderManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

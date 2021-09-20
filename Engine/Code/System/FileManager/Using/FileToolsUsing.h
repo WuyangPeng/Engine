@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 12:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/17 20:10)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
 #define SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
@@ -39,6 +39,12 @@ namespace System
     using FileEndOfFileInfoTypePtr = PFILE_END_OF_FILE_INFO;
     using FileIOPriorityHintInfoType = FILE_IO_PRIORITY_HINT_INFO;
     using FileIOPriorityHintInfoTypePtr = PFILE_IO_PRIORITY_HINT_INFO;
+
+    using WindowOverlapped = OVERLAPPED;
+    using WindowOverlappedPtr = LPOVERLAPPED;
+    using WindowOverlappedCompletionRoutine = LPOVERLAPPED_COMPLETION_ROUTINE;
+    using WindowOverlappedEntry = OVERLAPPED_ENTRY;
+    using WindowOverlappedEntryPtr = LPOVERLAPPED_ENTRY;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
@@ -106,10 +112,10 @@ namespace System
 
     struct FileBasicInfoType
     {
-        WindowLargeInteger CreationTime;
-        WindowLargeInteger LastAccessTime;
-        WindowLargeInteger LastWriteTime;
-        WindowLargeInteger ChangeTime;
+        WindowsLargeInteger CreationTime;
+        WindowsLargeInteger LastAccessTime;
+        WindowsLargeInteger LastWriteTime;
+        WindowsLargeInteger ChangeTime;
         uint32_t FileAttributes;
     };
     using FileBasicInfoTypePtr = FileBasicInfoType*;
@@ -117,7 +123,7 @@ namespace System
     struct FileRenameInfoType
     {
         int ReplaceIfExists;
-        WindowHandle RootDirectory;
+        WindowsHandle RootDirectory;
         uint32_t FileNameLength;
         SYSTEM_TEXT FileName[1];
     };
@@ -132,13 +138,13 @@ namespace System
 
     struct FileAllocationInfoType
     {
-        WindowLargeInteger AllocationSize;
+        WindowsLargeInteger AllocationSize;
     };
 
     using FileAllocationInfoTypePtr = FileAllocationInfoType*;
     struct FileEndOfFileInfoType
     {
-        WindowLargeInteger EndOfFile;
+        WindowsLargeInteger EndOfFile;
     };
 
     using FileEndOfFileInfoTypePtr = FileEndOfFileInfoType*;
@@ -156,6 +162,35 @@ namespace System
     };
 
     using FileIOPriorityHintInfoTypePtr = FileIOPriorityHintInfoType*;
+
+    struct WindowOverlapped
+    {
+        uint64_t Internal;
+        uint64_t InternalHigh;
+        union
+        {
+            struct
+            {
+                uint32_t Offset;
+                uint32_t OffsetHigh;
+            } DUMMYSTRUCTNAME;
+            void* Pointer;
+        } DUMMYUNIONNAME;
+
+        WindowsHandle hEvent;
+    };
+    using WindowOverlappedPtr = WindowOverlapped*;
+
+    using WindowOverlappedCompletionRoutine = void (*)(uint32_t errorCode, uint32_t numberOfBytesTransfered, void* overlapped);
+
+    struct WindowOverlappedEntry
+    {
+        size_t lpCompletionKey;
+        WindowOverlappedPtr lpOverlapped;
+        size_t Internal;
+        uint32_t dwNumberOfBytesTransferred;
+    };
+    using WindowOverlappedEntryPtr = WindowOverlappedEntry*;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

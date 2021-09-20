@@ -19,12 +19,13 @@
 
 namespace Network
 {
+    class ServerFactory;
     class NETWORK_HIDDEN_DECLARE ServerImpl : public CoreTools::EventInterface
     {
     public:
         using ClassType = ServerImpl;
         using ParentType = EventInterface;
-
+        using FactoryType = ServerFactory; 
     public:
         ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept;
 

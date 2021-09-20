@@ -9,13 +9,13 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/WindowCreate.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/WindowsCreate.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include <iosfwd>
 
 namespace Framework
@@ -25,9 +25,9 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowPoint;
-		using Point = System::WindowPoint;
-		using LParam = System::WindowLParam;
-		using WindowPointUse = System::WindowPointUse;
+		using Point = System::WindowsPoint;
+		using LParam = System::WindowsLParam;
+		using WindowPointUse = System::WindowsPointUse;
 
 	public:
 		constexpr WindowPoint() noexcept

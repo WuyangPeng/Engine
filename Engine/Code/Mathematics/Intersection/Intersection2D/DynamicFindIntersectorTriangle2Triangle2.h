@@ -15,25 +15,27 @@
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Intersection/Intersector1.h"
 #include "Mathematics/Objects2D/Triangle2.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindIntersectorTriangle2Triangle2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle2Triangle2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle2Triangle2 : public DynamicIntersector<Real, Vector2D>
     {
     public:
         using DynamicFindIntersectorTriangle2Triangle2Impl = FindIntersectorTriangle2Triangle2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorTriangle2Triangle2);
-
+        
+        TYPE_DECLARE(DynamicFindIntersectorTriangle2Triangle2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = DynamicIntersector<Real, Vector2D>;
         using Math = typename ParentType::Math;
         using Vector2D = Vector2D<Real>;
@@ -110,7 +112,7 @@ namespace Mathematics
         [[nodiscard]] static Intersection GetIntersection(const Configuration& cfg0, const Configuration& cfg1, SideType side, const Vector2DContainer& moveV0, const Vector2DContainer& moveV1);
 
     private:
-        IMPL_TYPE_DECLARE(DynamicFindIntersectorTriangle2Triangle2);
+        PackageType impl;
     };
 
     using FloatDynamicFindIntersectorTriangle2Triangle2 = DynamicFindIntersectorTriangle2Triangle2<float>;

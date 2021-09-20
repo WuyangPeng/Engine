@@ -90,7 +90,7 @@ template <template<typename> class Build, typename Process>
 void Framework::OpenGLGlutMainFunctionHelper<Build, Process>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (OpenGLGlutMainFunctionSchedule::Failure < m_OpenGLGlutMainFunctionSchedule)
 	{

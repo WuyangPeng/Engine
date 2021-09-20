@@ -19,19 +19,23 @@
 #include "Flags/MessageEventFlags.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Interface/SendSocket.h"
-
-NETWORK_EXPORT_SHARED_PTR(SocketManagerImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+NETWORK_NON_COPY_EXPORT_IMPL(SocketManagerImpl);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SocketManager : public CoreTools::EventInterface, private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE SocketManager : public CoreTools::EventInterface
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(SocketManager);
+        NON_COPY_TYPE_DECLARE(SocketManager);
 
     public:
         SocketManager();
-
+        ~SocketManager() noexcept = default;
+        SocketManager(const SocketManager& rhs) noexcept = delete;
+        SocketManager& operator=(const SocketManager& rhs) noexcept = delete;
+        SocketManager(SocketManager&& rhs) noexcept = delete;
+        SocketManager& operator=(SocketManager&& rhs) noexcept = delete;
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
     public:
@@ -52,7 +56,7 @@ namespace Network
         virtual void InitEvent(uint64_t socketID) = 0;
 
     private:
-        IMPL_TYPE_DECLARE(SocketManager);
+        PackageType impl;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(SocketManager);

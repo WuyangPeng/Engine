@@ -21,7 +21,7 @@
 
 template <typename Real>
 Mathematics::ConvexPolyhedron3<Real>::ConvexPolyhedron3(const VerticesType& vertices, const IndicesType& indices, const PlaneContainerType& planes)
-    : ParentType{ vertices, indices }, m_Impl{ std::make_shared<ImplType>(planes) }
+    : ParentType{ vertices, indices }, impl{ std::make_shared<ImplType>(planes) }
 {
     InitPlanes();
 
@@ -32,10 +32,10 @@ Mathematics::ConvexPolyhedron3<Real>::ConvexPolyhedron3(const VerticesType& vert
 template <typename Real>
 void Mathematics::ConvexPolyhedron3<Real>::InitPlanes()
 {
-    if (m_Impl->GetNumPlane() == 0)
+    if (impl->GetNumPlane() == 0)
     {
         const auto numTriangles = this->GetNumTriangles();
-        m_Impl->ResetTriangles(numTriangles);
+        impl->ResetTriangles(numTriangles);
 
         UpdatePlanes();
     }
@@ -43,7 +43,7 @@ void Mathematics::ConvexPolyhedron3<Real>::InitPlanes()
 
 template <typename Real>
 Mathematics::ConvexPolyhedron3<Real>::ConvexPolyhedron3(const ConvexPolyhedron3& rhs)
-    : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -63,16 +63,16 @@ Mathematics::ConvexPolyhedron3<Real>& Mathematics::ConvexPolyhedron3<Real>::oper
 template <typename Real>
 void Mathematics::ConvexPolyhedron3<Real>::Swap(ConvexPolyhedron3& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::Swap(rhs);
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::ConvexPolyhedron3<Real>::ConvexPolyhedron3(ConvexPolyhedron3&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, m_Impl{ std::move(rhs.m_Impl) }
+    : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -84,7 +84,7 @@ Mathematics::ConvexPolyhedron3<Real>& Mathematics::ConvexPolyhedron3<Real>::oper
 
     ParentType::operator=(std::move(rhs));
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -93,7 +93,7 @@ Mathematics::ConvexPolyhedron3<Real>& Mathematics::ConvexPolyhedron3<Real>::oper
 template <typename Real>
 bool Mathematics::ConvexPolyhedron3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid() && impl != nullptr)
         return true;
     else
         return false;
@@ -110,7 +110,7 @@ typename const Mathematics::ConvexPolyhedron3<Real>::PlaneContainerType Mathemat
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面!\n"s));
     }
 
-    return m_Impl->GetPlanes();
+    return impl->GetPlanes();
 }
 
 template <typename Real>
@@ -123,13 +123,13 @@ const Mathematics::Plane3<Real>& Mathematics::ConvexPolyhedron3<Real>::GetPlane(
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面!\n"s));
     }
 
-    return m_Impl->GetPlane(index);
+    return impl->GetPlane(index);
 }
 
 template <typename Real>
 void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3D& vertex)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::SetVertex(index, vertex);
 
@@ -143,7 +143,7 @@ void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3D& 
 #include SYSTEM_WARNING_DISABLE(26446)
         if (index == indices[0] || index == indices[1] || index == indices[2])
         {
-            m_Impl->SetVertex(i);
+            impl->SetVertex(i);
         }
 #include STSTEM_WARNING_POP
     }
@@ -152,7 +152,7 @@ void Mathematics::ConvexPolyhedron3<Real>::SetVertex(int index, const Vector3D& 
 template <typename Real>
 void Mathematics::ConvexPolyhedron3<Real>::UpdatePlanes()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (IsUpdatePlanes())
     {
@@ -163,7 +163,7 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlanes()
             UpdatePlane(i, average);
         }
 
-        m_Impl->ClearSharingTriangles();
+        impl->ClearSharingTriangles();
     }
 }
 
@@ -207,7 +207,7 @@ void Mathematics::ConvexPolyhedron3<Real>::UpdatePlane(int index, const Vector3D
     }
 
     // 平面具有内指向的法线。
-    m_Impl->UpdatePlane(index, vertex0, normal);
+    impl->UpdatePlane(index, vertex0, normal);
 }
 
 template <typename Real>
@@ -215,7 +215,7 @@ bool Mathematics::ConvexPolyhedron3<Real>::IsUpdatePlanes() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsUpdatePlanes();
+    return impl->IsUpdatePlanes();
 }
 
 template <typename Real>
@@ -232,7 +232,7 @@ bool Mathematics::ConvexPolyhedron3<Real>::IsConvex(Real threshold) const
     auto maxDistance = -Math::sm_MaxReal;
     auto minDistance = Math::sm_MaxReal;
 
-    for (const auto& plane : *m_Impl)
+    for (const auto& plane : *impl)
     {
         for (auto i = 0; i < this->GetNumVertices(); ++i)
         {
@@ -268,7 +268,7 @@ bool Mathematics::ConvexPolyhedron3<Real>::Contains(const Vector3D& point, Real 
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新平面。\n"s));
     }
 
-    for (const auto& plane : *m_Impl)
+    for (const auto& plane : *impl)
     {
         auto distance = plane.DistanceTo(point);
 

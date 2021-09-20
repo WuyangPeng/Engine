@@ -35,12 +35,12 @@ void CoreTools::Environment::Destroy() noexcept
 }
 
 CoreTools::Environment::Environment([[maybe_unused]] EnvironmentCreate environmentCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Environment)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Environment)
 
 int CoreTools::Environment::GetNumDirectories() const
 {
@@ -48,34 +48,28 @@ int CoreTools::Environment::GetNumDirectories() const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumDirectories();
+    return impl->GetNumDirectories();
 }
 
 bool CoreTools::Environment::InsertDirectory(const String& directory)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->InsertDirectory(directory);
+    return impl->InsertDirectory(directory);
 }
 
 bool CoreTools::Environment::EraseDirectory(const String& directory)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->EraseDirectory(directory);
+    return impl->EraseDirectory(directory);
 }
 
 void CoreTools::Environment::EraseAllDirectories()
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->EraseAllDirectories();
+    return impl->EraseAllDirectories();
 }
 
 System::String CoreTools::Environment::GetPathReading(const String& fileName) const
@@ -84,7 +78,7 @@ System::String CoreTools::Environment::GetPathReading(const String& fileName) co
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPathReading(fileName);
+    return impl->GetPathReading(fileName);
 }
 
 System::String CoreTools::Environment::GetPathWriting(const String& fileName) const
@@ -93,7 +87,7 @@ System::String CoreTools::Environment::GetPathWriting(const String& fileName) co
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPathWriting(fileName);
+    return impl->GetPathWriting(fileName);
 }
 
 System::String CoreTools::Environment::GetPathReadingAndWriting(const String& fileName) const
@@ -102,16 +96,14 @@ System::String CoreTools::Environment::GetPathReadingAndWriting(const String& fi
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPathReadingAndWriting(fileName);
+    return impl->GetPathReadingAndWriting(fileName);
 }
 
 void CoreTools::Environment::SetConfigurationPath(const String& configurationPath)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->SetConfigurationPath(configurationPath);
+    return impl->SetConfigurationPath(configurationPath);
 }
 
 const System::String CoreTools::Environment::GetConfigurationPath() const
@@ -120,5 +112,5 @@ const System::String CoreTools::Environment::GetConfigurationPath() const
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetConfigurationPath();
+    return impl->GetConfigurationPath();
 }

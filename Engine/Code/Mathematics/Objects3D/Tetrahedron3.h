@@ -14,7 +14,7 @@
 
 #include "Plane3.h"
 #include "Mathematics/Algebra/Vector3D.h"
-
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -36,7 +36,9 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Tetrahedron3Impl = Tetrahedron3Impl<Real>;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(Tetrahedron3);
+        TYPE_DECLARE(Tetrahedron3);
+        using PackageType = CoreTools::DelayCopyUnsharedImpl<Tetrahedron3,ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
 
         using Math = Math<Real>;
         using Plane3 = Plane3<Real>;
@@ -76,7 +78,7 @@ namespace Mathematics
         [[nodiscard]] const Tetrahedron3 GetMove(Real t, const Vector3D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Tetrahedron3);
+        PackageType impl;
     };
 
     using FloatTetrahedron3 = Tetrahedron3<float>;

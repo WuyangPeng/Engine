@@ -12,7 +12,7 @@
 #include "Rendering/DataTypes/Colour.h"
 #include "Rendering/DataTypes/Flags/TextureFormat.h"
 #include "Rendering/Renderers/Flags/RendererTypes.h"
-#include "System/Window/Flags/WindowFlags.h"
+#include "System/Windows/Flags/WindowsFlags.h"
 
 #include <string>
 #include <memory>
@@ -32,7 +32,7 @@ namespace Rendering
 		using RendererTypes = Rendering::RendererTypes;
 
 	public:
-		RendererDataImpl();
+                RendererDataImpl(MAYBE_UNUSED int count);
  
 
 		CLASS_INVARIANT_DECLARE;

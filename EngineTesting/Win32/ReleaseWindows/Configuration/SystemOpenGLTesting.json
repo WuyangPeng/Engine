@@ -1,0 +1,10 @@
+{
+  "openGLSuite": {
+    "OpenGLUtilityTesting": 1,
+    "OpenGLInitTesting": 1,
+    "OpenGLAPITesting": 1,
+    "OpenGLProgramTesting": 1,
+    "OpenGLShaderTesting": 1,
+    "OpenGLGlutTesting": 1
+  }
+}

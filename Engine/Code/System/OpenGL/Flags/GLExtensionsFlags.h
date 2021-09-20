@@ -1,19 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 13:10)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/24 13:05)
 
 #ifndef SYSTEM_OPENGL_GL_EXTENSIONS_FLAGS_H
 #define SYSTEM_OPENGL_GL_EXTENSIONS_FLAGS_H
 
-#include "System/Helper/EnumMacro.h"
-
-#include "System/Helper/Detail/OpenGL/GL11ExtensionsMacro.h"
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
+#include "System/Helper/EnumMacro.h"
+#include "System/Helper/GLExtensionsMacro.h"
 
 namespace System
 {
@@ -33,11 +32,14 @@ namespace System
         StackOverflow = GL_STACK_OVERFLOW,
         StackUnderflow = GL_STACK_UNDERFLOW,
         OutOfMemory = GL_OUT_OF_MEMORY,
+        InvalidFramebufferOperation = GL_INVALID_FRAMEBUFFER_OPERATION,
+        ContextLost = GL_CONTEXT_LOST,
     };
 
     enum class OpenGLSystemVersion
     {
         VersionNone = g_SystemOpenGLVersionNone,
+        Version10 = g_SystemOpenGLVersion10,
         Version11 = g_SystemOpenGLVersion11,
         Version12 = g_SystemOpenGLVersion12,
         Version13 = g_SystemOpenGLVersion13,

@@ -20,30 +20,30 @@ using std::string;
 using std::wstring;
 
 CoreTools::LogAppenderIOManager::LogAppenderIOManager(LogLevel logLevel, const AppenderManagerPtr& appenderManager)
-    : m_Impl{ make_shared<ImplType>(logLevel, appenderManager) }, m_LogAppenderIOManagerMutex{}
+    : impl{  logLevel, appenderManager  }, m_LogAppenderIOManagerMutex{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::LogAppenderIOManager::LogAppenderIOManager([[maybe_unused]] DisableNotThrow disableNotThrow)
-    : m_Impl{ make_shared<ImplType>() }, m_LogAppenderIOManagerMutex{}
+    : impl{  0 }, m_LogAppenderIOManagerMutex{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, LogAppenderIOManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogAppenderIOManager)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(CoreTools, LogAppenderIOManager, SetAppenderManager, AppenderManagerPtr, void)
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(int32_t value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -55,13 +55,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(int
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(uint32_t value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -73,13 +73,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(uin
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(int64_t value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -91,13 +91,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(int
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(uint64_t value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -109,13 +109,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(uin
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(float value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -127,13 +127,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(flo
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(double value) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << value;
+        *impl << value;
     }
     catch (...)
     {
@@ -145,13 +145,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(dou
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const string& message) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << message;
+        *impl << message;
     }
     catch (...)
     {
@@ -162,13 +162,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const wstring& message) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << message;
+        *impl << message;
     }
     catch (...)
     {
@@ -180,13 +180,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const FunctionDescribed& functionDescribed) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << functionDescribed;
+        *impl << functionDescribed;
     }
     catch (...)
     {
@@ -198,13 +198,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const Error& error) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << error;
+        *impl << error;
     }
     catch (...)
     {
@@ -216,13 +216,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const std::exception& error) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << error;
+        *impl << error;
     }
     catch (...)
     {
@@ -234,13 +234,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(LogFilter filterType) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << filterType;
+        *impl << filterType;
     }
     catch (...)
     {
@@ -252,13 +252,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(Log
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(LogAppenderIOManageSign sign) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << sign;
+        *impl << sign;
     }
     catch (...)
     {
@@ -270,13 +270,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(Log
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const LogFileName& logFileName) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << logFileName;
+        *impl << logFileName;
     }
     catch (...)
     {
@@ -288,13 +288,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const char* message) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << message;
+        *impl << message;
     }
     catch (...)
     {
@@ -306,13 +306,13 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
 CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const wchar_t* message) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     try
     {
         ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
 
-        *m_Impl << message;
+        *impl << message;
     }
     catch (...)
     {

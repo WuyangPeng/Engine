@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:45)
+//	引擎版本：0.7.1.1 (2020/10/26 15:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,7 +18,7 @@
 
 using namespace std::literals;
 
-CoreTools::EntityManagerImpl::EntityManagerImpl() noexcept
+CoreTools::EntityManagerImpl::EntityManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_Container{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

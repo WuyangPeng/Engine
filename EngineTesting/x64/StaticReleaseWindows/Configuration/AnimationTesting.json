@@ -1,0 +1,51 @@
+{
+  "macroSuite": 
+  {
+
+  },
+
+  "consoleGraphSuite": 
+  {
+
+  },
+
+  "elfAnimationSuite":
+  {
+
+  },
+
+  "textureAnimationSuite": 
+  {
+
+  },
+
+  "rigidBodyHierarchyAnimationSuite": 
+  {
+
+  },
+
+  "skeletonAnimationSuite":
+  {
+
+  },
+
+  "perVertexAnimationSuite": 
+  {
+
+  },
+
+  "morphTargetAnimationSuite": 
+  {
+
+  },
+
+  "gradientAnimationSuite": 
+  {
+
+  },
+
+  "animationManagerSuite": 
+  {
+
+  }
+}

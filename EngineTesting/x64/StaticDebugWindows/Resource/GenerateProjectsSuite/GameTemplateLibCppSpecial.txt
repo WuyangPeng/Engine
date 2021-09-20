@@ -1,0 +1,21 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYearSpecial%
+//
+// %ProjectChineseNameSpecial%∞Ê±æ£∫%VersionsSpecial% (%DateSpecial% %HourSpecial%:%MinuteSpecial%)
+  
+#include "ThreadingCoreRenderEngine/ThreadingCoreRenderEngineLib.h" 
+
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%InputManager/%SolutionNameSpecial%InputManagerLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%NetworkManager/%SolutionNameSpecial%NetworkManagerLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%ObjectLogicManager/%SolutionNameSpecial%ObjectLogicManagerLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%ArtificialIntellegenceManager/%SolutionNameSpecial%ArtificialIntellegenceManagerLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%PhysicalModellingManagerInterface/%SolutionNameSpecial%PhysicalModellingManagerInterfaceLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%MessageManagerInterface/%SolutionNameSpecial%MessageManagerInterfaceLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%EventManagerInterface/%SolutionNameSpecial%EventManagerInterfaceLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%SystemManagerInterface/%SolutionNameSpecial%SystemManagerInterfaceLib.h"
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%ResourceManagerInterface/%SolutionNameSpecial%ResourceManagerInterfaceLib.h"	
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%AudioManagerInterface/%SolutionNameSpecial%AudioManagerInterfaceLib.h"												 
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%CameraSystemsManagerInterface/%SolutionNameSpecial%CameraSystemsManagerInterfaceLib.h"	
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%RenderingManagerInterface/%SolutionNameSpecial%RenderingManagerInterfaceLib.h"												 
+#include "%SolutionNameSpecial%/%SolutionNameSpecial%GUIManagerInterface/%SolutionNameSpecial%GUIManagerInterfaceLib.h"

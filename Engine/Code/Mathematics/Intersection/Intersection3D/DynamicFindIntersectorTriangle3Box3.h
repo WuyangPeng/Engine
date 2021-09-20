@@ -15,25 +15,27 @@
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class DynamicFindIntersectorTriangle3Box3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorTriangle3Box3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorTriangle3Box3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorTriangle3Box3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorTriangle3Box3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<DynamicFindIntersectorTriangle3Box3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorTriangle3Box3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Box3 : public DynamicIntersector<Real, Vector3D>
     {
     public:
         using DynamicFindIntersectorTriangle3Box3Impl = DynamicFindIntersectorTriangle3Box3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorTriangle3Box3);
-
+        
+        TYPE_DECLARE(DynamicFindIntersectorTriangle3Box3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = DynamicIntersector<Real, Vector3D>;
         using Vector3D = Vector3D<Real>;
         using Triangle3 = Triangle3<Real>;
@@ -57,7 +59,7 @@ namespace Mathematics
         void Find();
 
     private:
-        IMPL_TYPE_DECLARE(DynamicFindIntersectorTriangle3Box3);
+        PackageType impl;
     };
 
     using FloatDynamicFindIntersectorTriangle3Box3 = DynamicFindIntersectorTriangle3Box3<float>;

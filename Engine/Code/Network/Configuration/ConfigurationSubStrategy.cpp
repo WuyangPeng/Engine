@@ -12,32 +12,32 @@
 #include "ConfigurationSubStrategy.h"
 #include "Detail/ConfigurationSubStrategyImpl.h"
 #include "System/Helper/PragmaWarning.h"
+
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
 using std::make_shared;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 
 Network::ConfigurationSubStrategy::ConfigurationSubStrategy()
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #include STSTEM_WARNING_POP
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, ConfigurationSubStrategy)
-
-DELAY_COPY_CONSTRUCTION_DEFINE(Network, ConfigurationSubStrategy)
+CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationSubStrategy)
 
 void Network::ConfigurationSubStrategy::Insert(WrappersSubStrategy wrappersSubStrategy, int value)
 {
-    IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
+    NETWORK_CLASS_IS_VALID_1;
 
-    return m_Impl->Insert(wrappersSubStrategy, value);
+    return impl->Insert(wrappersSubStrategy, value);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationSubStrategy, IsExist, WrappersSubStrategy, bool)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Network, ConfigurationSubStrategy, GetValue, WrappersSubStrategy, int)
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, ConfigurationSubStrategy)

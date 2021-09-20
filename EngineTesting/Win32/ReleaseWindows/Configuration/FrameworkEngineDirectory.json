@@ -1,0 +1,40 @@
+{
+  "Resource": "FrameworkResource",
+  "Configuration": "FrameworkConfiguration",
+
+  "OpenGL":
+  {
+    "Directory": "FrameworkOpenGL",
+    "BigEndian": "OpenGLBigEndian",
+    "LittleEndian": "OpenGLLittleEndian",
+    "Shader": "OpenGLShader",
+    "Scene": "OpenGLScene",
+    "Texture": "OpenGLTexture",
+    "Vertex": "OpenGLVertex",
+    "Image": "OpenGLImage"
+  },
+
+  "DirectX":
+  {
+    "Directory": "FrameworkDirectX",
+    "BigEndian": "DirectXBigEndian",
+    "LittleEndian": "DirectXLittleEndian",
+    "Shader": "DirectXShader",
+    "Scene": "DirectXScene",
+    "Texture": "DirectXTexture",
+    "Vertex": "DirectXVertex",
+    "Image": "DirectXImage"
+  },
+
+  "Default": 
+  {
+    "Directory": "FrameworkDefault",
+    "BigEndian": "DefaultBigEndian",
+    "LittleEndian": "DefaultLittleEndian",
+    "Shader": "DefaultShader",
+    "Scene": "DefaultScene",
+    "Texture": "DefaultTexture",
+    "Vertex": "DefaultVertex",
+    "Image": "DefaultImage"
+  } 
+}

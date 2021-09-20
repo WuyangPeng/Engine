@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 11:01)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/26 19:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::UniqueIDManagerImpl::UniqueIDManagerImpl(int count)
-    : m_UniqueID(count)
+    : uniqueID(count)
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -22,7 +22,7 @@ CoreTools::UniqueIDManagerImpl::UniqueIDManagerImpl(int count)
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UniqueIDManagerImpl::IsValid() const noexcept
 {
-    if (0u < m_UniqueID.size())
+    if (!uniqueID.empty())
         return true;
     else
         return false;
@@ -33,9 +33,9 @@ uint64_t CoreTools::UniqueIDManagerImpl::NextUniqueID(int index)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto& uniqueID = m_UniqueID.at(index);
+    auto& currentUniqueID = uniqueID.at(index);
 
-    CORE_TOOLS_ASSERTION_3(uniqueID < uniqueID + 1, "数值溢出。");
+    CORE_TOOLS_ASSERTION_3(currentUniqueID < currentUniqueID + 1, "数值溢出。");
 
-    return ++uniqueID;
+    return ++currentUniqueID;
 }

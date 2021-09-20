@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Macro 头文件">
+      <UniqueIdentifier>{2568c3c7-748d-400d-919c-9010c41965ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine 头文件">
+      <UniqueIdentifier>{cea07251-dd36-4d76-bc1f-9fc8375048c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine 源文件">
+      <UniqueIdentifier>{a74e036c-6060-4d05-88f8-fef5d2728105}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Update.txt">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%Dll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%Export.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%Fwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%Import.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%Lib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%NoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\%DllProjectName%%ModuleName%ClassInvariantMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\%DllProjectName%%ModuleName%CustomAssertMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\Macro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\MacroFwd.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\UserMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Macro\ExportMacro.h">
+      <Filter>Macro 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Engine\Engine.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Engine\EngineFwd.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\%DllProjectName%%ModuleName%.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Engine\Placeholder.h">
+      <Filter>Engine 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\%DllProjectName%\%DllProjectName%%ModuleName%\Engine\Placeholder.cpp">
+      <Filter>Engine 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

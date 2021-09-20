@@ -1,13 +1,10 @@
 TODO Level 7
  
-0.5.2.0
-
-1.  （UnitTestSuite）单元测试增加以随机顺序运行测试。
-2.  （UnitTestSuite）单元测试增加对各个条件流程完整性运行进行判断的测试。
-3.  （UnitTestSuite）单元测试增加是否打印正在进行哪个测试的配置。
-4.  （UnitTestSuite）单元测试打印正在运行的测试，顶层信息未打出。
-5.  （UnitTestSuite）单元测试打印测试的引擎、游戏版本号。
-
-0.5.2.1
+0.7.2.2 
 
 1.  （Contract）根据loki的Checker.h对类不变式进行扩充。
+2.  （UnitTestSuite）单元测试增加以随机顺序运行测试。
+3.  （UnitTestSuite）单元测试增加对各个条件流程完整性运行进行判断的测试。
+4.  （UnitTestSuite）单元测试增加是否打印正在进行哪个测试的配置。
+5.  （UnitTestSuite）单元测试打印正在运行的测试，顶层信息未打出。
+6.  （UnitTestSuite）单元测试打印测试的引擎、游戏版本号。

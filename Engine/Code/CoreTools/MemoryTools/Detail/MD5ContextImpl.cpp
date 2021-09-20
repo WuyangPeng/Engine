@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/19 19:30)
+//	引擎版本：0.7.1.1 (2020/10/19 19:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@ constexpr auto g_Buffer1 = 0xefcdab89;
 constexpr auto g_Buffer2 = 0x98badcfe;
 constexpr auto g_Buffer3 = 0x10325476;
 
-CoreTools::MD5ContextImpl::MD5ContextImpl() noexcept
+CoreTools::MD5ContextImpl::MD5ContextImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow) noexcept
     : m_Buffer{ g_Buffer0, g_Buffer1, g_Buffer2, g_Buffer3 }, m_LowBits{ 0 }, m_HighBits{ 0 }, m_In{}, m_Source{ nullptr }, m_Length{ 0 }, m_Status{ MD5ContextStatus::Init }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

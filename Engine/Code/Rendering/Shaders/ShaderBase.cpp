@@ -26,16 +26,56 @@ using std::make_shared;
 CORE_TOOLS_RTTI_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,ShaderBase);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,ShaderBase); 
-
+#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(namespaceName, className)      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(rhs);                                                         \
+        impl = std::make_shared<ImplType>(*rhs.impl);                                       \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, ShaderBase);
 
-CORE_TOOLS_IMPL_OBJECT_PTR_DEFAULT_STREAM(Rendering, ShaderBase);
+Rendering::ShaderBase::ShaderBase(LoadConstructor loadConstructor)
+    : ParentType{ loadConstructor }, impl{ make_shared<ImplType>() }
+{
+    SELF_CLASS_IS_VALID_0;
+}
+CORE_TOOLS_WITH_IMPL_OBJECT_GET_STREAMING_SIZE_DEFINE(Rendering, ShaderBase)
+CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(Rendering, ShaderBase)
+CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(Rendering, ShaderBase)
+CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(Rendering, ShaderBase)
+CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(Rendering, ShaderBase)
+CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(Rendering, ShaderBase)
 
 Rendering::ShaderBase
     ::ShaderBase (const string& programName, int numInputs,
               int numOutputs,int numConstants,
               int numSamplers)
-	:ParentType{ programName },m_Impl{ make_shared<ImplType>(numInputs,numOutputs,numConstants,numSamplers) }
+	:ParentType{ programName },impl{ make_shared<ImplType>(numInputs,numOutputs,numConstants,numSamplers) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -46,78 +86,78 @@ Rendering::ShaderBase
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
  
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, ShaderBase)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, ShaderBase)
 
 void Rendering::ShaderBase
     ::SetInput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
-    return m_Impl->SetInput(index,name,type,semantic);
+    return impl->SetInput(index,name,type,semantic);
 }
 
 void Rendering::ShaderBase
    ::SetOutput (int index, const string& name,ShaderFlags::VariableType type,ShaderFlags::VariableSemantic semantic)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
   
-    return m_Impl->SetOutput(index,name,type,semantic);
+    return impl->SetOutput(index,name,type,semantic);
 }
 
 void Rendering::ShaderBase
     ::SetConstant (int index, const string& name,int numRegistersUsed)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-    return m_Impl->SetConstant(index,name,numRegistersUsed);
+    return impl->SetConstant(index,name,numRegistersUsed);
 }
 
 void Rendering::ShaderBase
     ::SetSampler (int index, const string& name,ShaderFlags::SamplerType type)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetSampler(index,name,type);
+    return impl->SetSampler(index,name,type);
 }
 
 void Rendering::ShaderBase
     ::SetFilter (int index, ShaderFlags::SamplerFilter filter)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 	    
-    return m_Impl->SetFilter(index,filter);
+    return impl->SetFilter(index,filter);
 }
 
 void Rendering::ShaderBase
     ::SetCoordinate (int index, int dimension,ShaderFlags::SamplerCoordinate coordinate)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-	return m_Impl->SetCoordinate(index, dimension, coordinate);
+	return impl->SetCoordinate(index, dimension, coordinate);
 }
 
 void Rendering::ShaderBase
     ::SetLodBias (int index, float lodBias)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetLodBias(index,lodBias);
+    return impl->SetLodBias(index,lodBias);
 }
 
 void Rendering::ShaderBase
     ::SetAnisotropy (int index, float anisotropy)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
        
-    return m_Impl->SetAnisotropy(index,anisotropy);
+    return impl->SetAnisotropy(index,anisotropy);
 }
 
 void Rendering::ShaderBase
     ::SetBorderColor (int index, const Colour& borderColor)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
-    return m_Impl->SetBorderColor(index,borderColor);
+    return impl->SetBorderColor(index,borderColor);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering,ShaderBase,GetNumInputs,int)
@@ -144,7 +184,7 @@ Rendering::ShaderFlags::SamplerCoordinate Rendering::ShaderBase
 {    
     RENDERING_CLASS_IS_VALID_CONST_1;
     
-    return m_Impl->GetCoordinate(index,dim);
+    return impl->GetCoordinate(index,dim);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering,ShaderBase,GetLodBias,int,float)
@@ -159,7 +199,7 @@ void Rendering::ShaderBase
 	auto programName = GetName();
 	manager.SaveStdString(programName);
 
-	return m_Impl->SaveShader(manager);
+	return impl->SaveShader(manager);
 }
 
 void Rendering::ShaderBase
@@ -167,7 +207,7 @@ void Rendering::ShaderBase
 {
     RENDERING_CLASS_IS_VALID_1;
 
-	return m_Impl->LoadShader(manager, numProfiles);
+	return impl->LoadShader(manager, numProfiles);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, ShaderBase,GetProfile,const Rendering::ConstShaderProfileDataSharedPtr)

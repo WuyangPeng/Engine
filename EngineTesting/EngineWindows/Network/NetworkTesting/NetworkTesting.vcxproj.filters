@@ -1,0 +1,847 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappersSuite 头文件">
+      <UniqueIdentifier>{3e1ae69d-9a7e-4dec-a0ae-50bc3cb21ff2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ACEWrappersSuite 源文件">
+      <UniqueIdentifier>{0d9d7c4a-9304-4c82-9ec4-9a4362be2a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 头文件">
+      <UniqueIdentifier>{7a89165c-a07f-4011-8ada-6d39295173da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 源文件">
+      <UniqueIdentifier>{1c0e1172-4a83-4ba8-a3af-e4b20a59f4f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationSuite 头文件">
+      <UniqueIdentifier>{54ac5e02-cdfb-4b86-932a-42b9c3319fd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConfigurationSuite 源文件">
+      <UniqueIdentifier>{6ffc8d0d-df4c-4cc4-b261-c39d8ed4899f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 头文件">
+      <UniqueIdentifier>{08f5502a-fe48-4566-977f-51fc9b7b6134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 源文件">
+      <UniqueIdentifier>{9fd29e15-5a74-4843-94d4-557eeaf27494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 头文件\Detail">
+      <UniqueIdentifier>{f5cf1099-1063-4af4-874c-4ad5a8786786}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 源文件\Detail">
+      <UniqueIdentifier>{f6066fea-8140-41d7-bf8d-6f10f6f6fce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="InterfaceSuite 模板文件">
+      <UniqueIdentifier>{4cbdaaf3-7676-4bdb-a1c2-16188c35456d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件">
+      <UniqueIdentifier>{5bad6668-efc4-4316-bebf-5d1e5838babd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 源文件">
+      <UniqueIdentifier>{a9cb925a-5b07-4c8f-bf2e-1a27883fb200}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件\Detail">
+      <UniqueIdentifier>{b429139c-a085-4773-bc6f-1fdc50412a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 源文件\Detail">
+      <UniqueIdentifier>{baa265bd-6026-48c8-91b1-8589dddea3cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappersSuite 头文件">
+      <UniqueIdentifier>{20f6c718-886e-4cd1-b77b-e3fc5f4e69b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkWrappersSuite 源文件">
+      <UniqueIdentifier>{37fa6d92-e409-45aa-a9be-80f941e480f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpensslSuite 头文件">
+      <UniqueIdentifier>{a9ff82c7-e054-4f2f-8cb5-08a316716dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpensslSuite 源文件">
+      <UniqueIdentifier>{b541a835-7a29-4af2-8841-0b2b33327ba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SocketWrappersSuite 头文件">
+      <UniqueIdentifier>{c2853d64-5462-4703-903a-e4b4818b995a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SocketWrappersSuite 源文件">
+      <UniqueIdentifier>{42db1ba8-506e-4f1a-8b06-b63b52f299ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{c3f54ba1-b05c-48ee-a70b-895f62856e8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 头文件\BoostSockAcceptor">
+      <UniqueIdentifier>{397cb5b0-89d3-4223-a460-5e3d54bfae13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 源文件\BoostSockAcceptor">
+      <UniqueIdentifier>{c68e2aaa-9fae-45bb-92f3-d0610fbd28eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 头文件\BoostSockConnector">
+      <UniqueIdentifier>{098f6587-636a-44c7-8d6e-8bdb55e006ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 源文件\BoostSockConnector">
+      <UniqueIdentifier>{5feb99ed-983a-4230-8dae-7ee58d6335e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 头文件\BoostSockStream">
+      <UniqueIdentifier>{54b1e75c-0059-4f9d-8763-d9ec6e938cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostWrappersSuite 源文件\BoostSockStream">
+      <UniqueIdentifier>{bf218522-1f99-4c37-ae2e-e73757a4648b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NetworkMessageSuite 头文件\Flags">
+      <UniqueIdentifier>{a6605cdc-0b48-4793-8f7e-6ca6b0a9f9f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{0e404018-3e79-4356-be06-8ff0e2bad6f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Detail">
+      <UniqueIdentifier>{7c664e1d-a267-4806-8187-e2c96557e065}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{fc9772fd-9c99-4cb1-854a-efbd16418a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Detail">
+      <UniqueIdentifier>{29216d5c-747f-4961-8122-431632c55146}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\NetworkTest.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\NetworkTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Network.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEIovecSockStreamTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEMainManagerTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockAcceptorTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEWrappersSuite.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetIteratorTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetTesting.h">
+      <Filter>ACEWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseThreadsTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptorTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostWrappersSuite.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationParameterTesting.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationStrategyTesting.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSubStrategyTesting.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSuite.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\AnalysisNetworkConfigurationTesting.h">
+      <Filter>ConfigurationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.h">
+      <Filter>InterfaceSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.h">
+      <Filter>InterfaceSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\InterfaceSuite.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockConnectorTesting.h">
+      <Filter>InterfaceSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTestingDetail.h">
+      <Filter>InterfaceSuite 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNullMessage.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventContainerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventManagerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageManagerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageSourceTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTargetTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageEventTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageSuite.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ReceiveMessageLevelTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockAcceptorTesting.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkWrappersSuite.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkMainManagerTesting.h">
+      <Filter>NetworkWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\OpensslSuite\OpensslSuite.h">
+      <Filter>OpensslSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\SocketWrappersSuite\SocketWrappersSuite.h">
+      <Filter>SocketWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorSynchronizeTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockAcceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorNonBlockingTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockAcceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorAsynchronousTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockAcceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorHandleTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockAcceptor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockTesting.h">
+      <Filter>BoostWrappersSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorAsynchronousTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockConnector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorSynchronizeTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockConnector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorHandleTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockConnector</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSockStreamHandleTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamSynchronizeTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamAsynchronousTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamNonBlockingTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamSynchronizeTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamAsynchronousTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamNonBlockingTesting.h">
+      <Filter>BoostWrappersSuite 头文件\BoostSockStream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceSharedPtrLessTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.h">
+      <Filter>NetworkMessageSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullDoubleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\IntegerMessageType.h">
+      <Filter>NetworkMessageSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\StringMessageType.h">
+      <Filter>NetworkMessageSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageCastTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageElementTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Flags\MultipleMessageType.h">
+      <Filter>NetworkMessageSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageSizeTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageInitValueTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSizeTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSaveTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingLoadTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerGroupTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionOperatingTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageBufferTesting.h">
+      <Filter>NetworkMessageSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestAbstractMessage.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEIovecSockStreamTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACEMainManagerTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockAcceptorTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockConnectorTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockInetAddressTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\ACESockStreamTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetIteratorTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ACEWrappersSuite\SockACEHandleSetTesting.cpp">
+      <Filter>ACEWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseThreadsTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptorTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnectorTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockInetAddressTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStreamTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\AnalysisNetworkConfigurationTesting.cpp">
+      <Filter>ConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationParameterTesting.cpp">
+      <Filter>ConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationStrategyTesting.cpp">
+      <Filter>ConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\ConfigurationSuite\ConfigurationSubStrategyTesting.cpp">
+      <Filter>ConfigurationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestMessageEvent.cpp">
+      <Filter>InterfaceSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\Detail\TestSocketManager.cpp">
+      <Filter>InterfaceSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\BaseMainManagerTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\CacheClientTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ClientTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetIteratorTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\HandleSetTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\IterativeServerTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\NetworkUniqueIDManagerTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\OnlySendingClientTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ReactiveServerTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\ServerTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SingletonTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAcceptorTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockAddressTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockConnectorTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\InterfaceSuite\SockStreamTesting.cpp">
+      <Filter>InterfaceSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\NullSocketManager.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNetworkMessageEvent.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestNullMessage.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferReceiveStreamTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\BufferSendStreamTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventContainerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageEventManagerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageManagerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageSourceTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTargetTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NetworkMessageEventTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\ReceiveMessageLevelTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SendMessageLevelTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\SocketManagerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkMainManagerTesting.cpp">
+      <Filter>NetworkWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockAcceptorTesting.cpp">
+      <Filter>NetworkWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockConnectorTesting.cpp">
+      <Filter>NetworkWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockInetAddressTesting.cpp">
+      <Filter>NetworkWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkWrappersSuite\NetworkSockStreamTesting.cpp">
+      <Filter>NetworkWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostMainManagerUseMultiContextTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorSynchronizeTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockAcceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorNonBlockingTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockAcceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorAsynchronousTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockAcceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockAcceptor\BoostSockAcceptorHandleTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockAcceptor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorAsynchronousTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockConnector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorSynchronizeTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockConnector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockConnector\BoostSockConnectorHandleTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockConnector</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSockStreamHandleTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamAsynchronousTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamNonBlockingTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostFixedSockStreamSynchronizeTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamAsynchronousTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamNonBlockingTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\BoostWrappersSuite\BoostSockStream\BoostSegmentationSockStreamSynchronizeTesting.cpp">
+      <Filter>BoostWrappersSuite 源文件\BoostSockStream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageInterfaceSharedPtrLessTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestIntMessage.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\DoubleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleNullMessage.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\Detail\TestDoubleIntMessage.cpp">
+      <Filter>NetworkMessageSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\NullDoubleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageCastTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageElementTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageSizeTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageInitValueTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSizeTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingSaveTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageStreamingLoadTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\IntegerDoubleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\StringDoubleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleDoubleMessageTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageContainerGroupTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MultipleMessageContainerGroupTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageTypeConditionOperatingTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\NetworkMessageSuite\MessageBufferTesting.cpp">
+      <Filter>NetworkMessageSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\StreamMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\UserMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestAbstractMessage.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\NetworkTesting\HelperSuite\Detail\TestMessage.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -18,14 +18,23 @@
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
 
-RENDERING_EXPORT_SHARED_PTR(MaterialConstantImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, MaterialConstantImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
 	class RENDERING_DEFAULT_DECLARE MaterialConstant : public ShaderFloat
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(MaterialConstant, DESTRUCTOR_DEFAULT);
+            void Swap(MaterialConstant& rhs) noexcept;
+            
+                public:
+                    TYPE_DECLARE(MaterialConstant);
+                    using ClassShareType = CoreTools::CopyUnsharedClasses;
+                    ~MaterialConstant() noexcept= default;
+                    MaterialConstant(const MaterialConstant& rhs);
+                    MaterialConstant& operator=(const MaterialConstant& rhs);
+                    MaterialConstant(MaterialConstant&& rhs) noexcept;
+                    MaterialConstant& operator=(MaterialConstant&& rhs) noexcept;
 		using ParentType = ShaderFloat;
 
 	public:
@@ -47,7 +56,7 @@ namespace Rendering
 		constexpr static auto sm_NumRegisters = 1;
 
 	private:
-		IMPL_TYPE_DECLARE(MaterialConstant);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

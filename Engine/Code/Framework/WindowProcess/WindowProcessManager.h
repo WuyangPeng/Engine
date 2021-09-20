@@ -13,21 +13,21 @@
 #include "System/Helper/UnicodeUsing.h" 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h" 
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 FRAMEWORK_EXPORT_UNIQUE_PTR(WindowProcessManager);
-FRAMEWORK_EXPORT_SHARED_PTR(WindowProcessManagerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(WindowProcessManagerImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE WindowProcessManager : public CoreTools::Singleton<WindowProcessManager>
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(WindowProcessManager);
+		NON_COPY_TYPE_DECLARE(WindowProcessManager);
 		using ParentType = Singleton<WindowProcessManager>;
 		using MessageFunctionPointer = WindowMessageInterface::FunctionPointer;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
-		using WindowProcess = System::WindowProcess;
+		using HWnd = System::WindowsHWnd;
+		using WindowProcess = System::WindowsProcess;
 		using DisplayFunction = System::DisplayFunction;
 
 	private:
@@ -70,7 +70,7 @@ namespace Framework
 
 	private:
 		static WindowProcessManagerUniquePtr sm_WindowProcessManager;
-		IMPL_TYPE_DECLARE(WindowProcessManager);
+            PackageType impl;
 	};
 }
 

@@ -10,21 +10,20 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-RENDERING_EXPORT_SHARED_PTR(PlatformVertexFormatImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(PlatformVertexFormatImpl); 
 
 namespace Rendering
 {
     class Renderer;
     class VertexFormat;
 
-	class RENDERING_DEFAULT_DECLARE PlatformVertexFormat : boost::noncopyable
+	class RENDERING_DEFAULT_DECLARE PlatformVertexFormat  
     {
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(PlatformVertexFormat);
+        NON_COPY_TYPE_DECLARE(PlatformVertexFormat);
 
     public:
         PlatformVertexFormat (Renderer* renderer, const VertexFormat* vertexFormat);
@@ -41,7 +40,7 @@ namespace Rendering
         void Disable (Renderer* renderer);
 
 	private:
-		IMPL_TYPE_DECLARE(PlatformVertexFormat);
+        PackageType impl;
     };
 }
 

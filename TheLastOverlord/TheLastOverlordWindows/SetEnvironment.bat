@@ -4,6 +4,10 @@ echo TheLastOverlordInclude = %TheLastOverlordInclude%
 echo %cd%
 setx TheLastOverlordInclude "%cd%\..\Code" 
 
+echo TheLastOverlordEngineering = %TheLastOverlordEngineering%
+echo %cd%
+setx TheLastOverlordEngineering "%cd%\.." 
+
 echo TheLastOverlordWin32DebugLib = %TheLastOverlordWin32DebugLib%
 echo %cd%
 setx TheLastOverlordWin32DebugLib "%cd%\..\Win32\DebugWindows" 

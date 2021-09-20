@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "WindowHCursor.h"
-#include "System/Window/WindowRegister.h"
+#include "System/Windows/WindowsRegister.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
@@ -24,7 +24,7 @@ Framework::WindowHCursor
 
 Framework::WindowHCursor
 	::WindowHCursor(HInstance instance, int cursor)
-	:m_HCursor{ System::LoadSystemCursor(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowWord>(cursor))) }
+	:m_HCursor{ System::LoadSystemCursor(instance, System::MakeIntreSource(boost::numeric_cast<System::WindowsWord>(cursor))) }
 {
 	CheckUpHCursor();
 
@@ -47,7 +47,7 @@ void Framework::WindowHCursor
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowHCursor)
 
-System::WindowHCursor Framework::WindowHCursor
+System::WindowsHCursor Framework::WindowHCursor
 	::GetHCursor() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

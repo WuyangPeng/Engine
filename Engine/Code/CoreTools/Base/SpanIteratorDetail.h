@@ -1,25 +1,31 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 11:04)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/26 20:40)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 
 #include "SpanIterator.h"
-
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 #include <type_traits>
 
 template <typename Iter>
+CoreTools::SpanIterator<Iter>::SpanIterator(Iter begin, Iter end) noexcept
+    : SpanIterator{ begin, end, begin }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+template <typename Iter>
 CoreTools::SpanIterator<Iter>::SpanIterator(Iter begin, Iter end, Iter current) noexcept
-    : m_Begin{ begin }, m_End{ end }, m_Current{ current }
+    : begin{ begin }, end{ end }, current{ current }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -30,7 +36,7 @@ bool CoreTools::SpanIterator<Iter>::IsValid() const noexcept
 {
     try
     {
-        if (m_Begin <= m_Current && m_Current <= m_End)
+        if (begin <= current && current <= end)
             return true;
         else
             return false;
@@ -47,9 +53,9 @@ typename CoreTools::SpanIterator<Iter>::ConstReferenceType CoreTools::SpanIterat
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (m_Begin <= m_Current && m_Current < m_End)
+    if (begin <= current && current < end)
     {
-        return *m_Current;
+        return *current;
     }
     else
     {
@@ -62,7 +68,7 @@ Iter CoreTools::SpanIterator<Iter>::operator->() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Current;
+    return current;
 }
 
 template <typename Iter>
@@ -70,12 +76,12 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator++()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (m_End <= m_Current)
+    if (end <= current)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s));
     }
 
-    ++m_Current;
+    ++current;
 
     return *this;
 }
@@ -96,12 +102,12 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator--()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (m_Current <= m_Begin)
+    if (current <= begin)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s));
     }
 
-    --m_Current;
+    --current;
 
     return *this;
 }
@@ -125,17 +131,17 @@ CoreTools::SpanIterator<Iter>& CoreTools::SpanIterator<Iter>::operator+=(const i
         return *this;
     }
 
-    if (step > 0 && m_End - m_Current < step)
+    if (step > 0 && end - current < step)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器增加时越界。"s));
     }
 
-    if (step < 0 && m_Current - m_Begin < -step)
+    if (step < 0 && current - begin < -step)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("迭代器减少时越界。"s));
     }
 
-    m_Current += step;
+    current += step;
 
     return *this;
 }
@@ -153,7 +159,7 @@ Iter CoreTools::SpanIterator<Iter>::GetBegin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Begin;
+    return begin;
 }
 
 template <typename Iter>
@@ -161,7 +167,7 @@ Iter CoreTools::SpanIterator<Iter>::GetEnd() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_End;
+    return end;
 }
 
 template <typename Iter>
@@ -169,7 +175,7 @@ Iter CoreTools::SpanIterator<Iter>::GetCurrent() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Current;
+    return current;
 }
 
 template <typename Iter>
@@ -177,7 +183,7 @@ typename CoreTools::SpanIterator<Iter>::DifferenceType CoreTools::SpanIterator<I
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_End - m_Current;
+    return end - current;
 }
 
 template <typename Iter>
@@ -197,7 +203,7 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    return reinterpret_cast<const T&>(*m_Current);
+    return reinterpret_cast<const T&>(*current);
 #include STSTEM_WARNING_POP
 }
 

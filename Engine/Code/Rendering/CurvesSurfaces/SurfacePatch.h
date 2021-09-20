@@ -17,14 +17,23 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 
-RENDERING_EXPORT_SHARED_PTR(SurfacePatchImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, SurfacePatchImpl, RENDERING_DEFAULT_DECLARE);
 namespace Rendering
 {
     class RENDERING_DEFAULT_DECLARE SurfacePatch : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(SurfacePatch, = default);
+        void Swap(SurfacePatch& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(SurfacePatch);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~SurfacePatch() noexcept = default;
+        SurfacePatch(const SurfacePatch& rhs);
+        SurfacePatch& operator=(const SurfacePatch& rhs);
+        SurfacePatch(SurfacePatch&& rhs) noexcept;
+        SurfacePatch& operator=(SurfacePatch&& rhs) noexcept;
         using ParentType = Object;
         using AVector = Mathematics::FloatAVector;
         using APoint = Mathematics::FloatAPoint;
@@ -68,7 +77,7 @@ namespace Rendering
         const PrincipalCurvatureInfo ComputePrincipalCurvatureInfo(float u, float v) const;
 
     private:
-        IMPL_TYPE_DECLARE(SurfacePatch);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

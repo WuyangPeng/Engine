@@ -8,7 +8,7 @@
 #define FRAMEWORK_APPLICATION_KEYBOARD_MODIFIERS_H
 
 #include "Framework/FrameworkDll.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "System/OpenGL/Flags/GlutKeyCodesFlags.h"
 #include "System/Android/Flags/AndroidKeyCodesFlags.h"
 

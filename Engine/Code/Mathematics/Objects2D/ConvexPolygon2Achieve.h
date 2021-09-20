@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(const VerticesType& vertices, const LineType& lines)
-    : ParentType{ vertices }, m_Impl{ std::make_shared<ImplType>(lines) }
+    : ParentType{ vertices }, impl{ std::make_shared<ImplType>(lines) }
 {
     if (vertices.size() != lines.size())
     {
@@ -32,7 +32,7 @@ Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(const VerticesType& vertices, 
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(const ConvexPolygon2& rhs)
-    : ParentType{ rhs }, m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -52,16 +52,16 @@ Mathematics::ConvexPolygon2<Real>& Mathematics::ConvexPolygon2<Real>::operator=(
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>::Swap(ConvexPolygon2& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::Swap(rhs);
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::ConvexPolygon2<Real>::ConvexPolygon2(ConvexPolygon2&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, m_Impl{ std::move(rhs.m_Impl) }
+    : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -73,7 +73,7 @@ Mathematics::ConvexPolygon2<Real>& Mathematics::ConvexPolygon2<Real>::operator=(
 
     ParentType::operator=(std::move(rhs));
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -82,7 +82,7 @@ Mathematics::ConvexPolygon2<Real>& Mathematics::ConvexPolygon2<Real>::operator=(
 template <typename Real>
 bool Mathematics::ConvexPolygon2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid() && impl != nullptr)
         return true;
     else
         return false;
@@ -99,7 +99,7 @@ typename const Mathematics::ConvexPolygon2<Real>::LineType Mathematics::ConvexPo
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
     }
 
-    return m_Impl->GetLines();
+    return impl->GetLines();
 }
 
 template <typename Real>
@@ -112,26 +112,26 @@ const Mathematics::Line2<Real>& Mathematics::ConvexPolygon2<Real>::GetLine(int i
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
     }
 
-    return m_Impl->GetLine(index);
+    return impl->GetLine(index);
 }
 
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>::SetVertex(int index, const Vector2D& vertex)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     ParentType::SetVertex(index, vertex);
 
     // 跟踪这个顶点的共享边，这些边会在稍后更新。
     // 顶点索引相关联的边i是E[i] = <V[i],V[i+1]> 和 E[i-1] = <V[i-1],V[i]>，
     // 其中i+1 和 i-1被计算为顶点数的模。
-    return m_Impl->SetVertex(index);
+    return impl->SetVertex(index);
 }
 
 template <typename Real>
 void Mathematics::ConvexPolygon2<Real>::UpdateLines()
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (IsUpdateLines())
     {
@@ -141,7 +141,7 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLines()
             UpdateLine(i, average);
         }
 
-        m_Impl->ClearSharingEdges();
+        impl->ClearSharingEdges();
     }
 }
 
@@ -174,7 +174,7 @@ void Mathematics::ConvexPolygon2<Real>::UpdateLine(int index, const Vector2D& av
     }
 
     // 此线具有内指向的法线。
-    m_Impl->UpdateLine(index, vertex0, normal);
+    impl->UpdateLine(index, vertex0, normal);
 }
 
 template <typename Real>
@@ -182,7 +182,7 @@ bool Mathematics::ConvexPolygon2<Real>::IsUpdateLines() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsUpdateLines();
+    return impl->IsUpdateLines();
 }
 
 template <typename Real>
@@ -199,7 +199,7 @@ bool Mathematics::ConvexPolygon2<Real>::IsConvex(Real threshold) const
     auto maxDistance = -Math::sm_MaxReal;
     auto minDistance = Math::sm_MaxReal;
 
-    for (const auto& line : *m_Impl)
+    for (const auto& line : *impl)
     {
         for (auto i = 0; i < this->GetNumVertices(); ++i)
         {
@@ -233,7 +233,7 @@ bool Mathematics::ConvexPolygon2<Real>::Contains(const typename Vector2D& point,
         THROW_EXCEPTION(SYSTEM_TEXT("需要更新线段。\n"s));
     }
 
-    for (const auto& line : *m_Impl)
+    for (const auto& line : *impl)
     {
         auto distance = Vector2DTools::DotProduct(line.GetOrigin(), point) - line.DotProduct();
 

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:36)
+//	引擎版本：0.7.1.1 (2020/10/26 13:36)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_DETAIL_H
@@ -46,7 +46,7 @@ CoreTools::DirectPropertyGetInternal<Value, Reference, Container>& CoreTools::Di
 }
 
 template <typename Value, typename Reference, typename Container>
-CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::operator ReferenceType() const
+CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::operator ReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

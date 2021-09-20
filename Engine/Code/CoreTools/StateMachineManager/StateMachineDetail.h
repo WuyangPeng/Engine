@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:03)
+//	引擎版本：0.7.1.1 (2020/10/26 16:03)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_DETAIL_H
@@ -15,18 +15,18 @@
 #include "GenerateDispatcher.h"
 #include "StateMachine.h"
 #include "StateMachineRowDetail.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
 template <typename Derived, typename State>
-CoreTools::StateMachine<Derived, State>::StateMachine()
+CoreTools::StateMachine<Derived, State>::StateMachine() noexcept
     : m_State{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Derived, typename State>
-CoreTools::StateMachine<Derived, State>::~StateMachine()
+CoreTools::StateMachine<Derived, State>::~StateMachine() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -38,10 +38,11 @@ bool CoreTools::StateMachine<Derived, State>::IsValid() const noexcept
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26466)
 template <typename Derived, typename State>
 template <typename EventType>
-typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::CallNoTransition(StateType state, const EventType& eventType)
+typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::CallNoTransition(StateType state, const EventType& eventType) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -50,7 +51,7 @@ typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMach
 
 template <typename Derived, typename State>
 template <typename EventType>
-typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::ProcessEvent(const EventType& eventType)
+typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::ProcessEvent(const EventType& eventType) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -60,10 +61,10 @@ typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMach
 
     return m_State;
 }
-
+#include STSTEM_WARNING_POP
 template <typename Derived, typename State>
 template <typename EventType>
-typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::NoTransition(StateType state, const EventType& eventType)
+typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::NoTransition([[maybe_unused]] StateType state, [[maybe_unused]] const EventType& eventType) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -71,7 +72,7 @@ typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMach
 }
 
 template <typename Derived, typename State>
-typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::GetStateType() const
+typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMachine<Derived, State>::GetStateType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -79,7 +80,7 @@ typename CoreTools::StateMachine<Derived, State>::StateType CoreTools::StateMach
 }
 
 template <typename Derived, typename State>
-void CoreTools::StateMachine<Derived, State>::SetStateType(StateType stateType)
+void CoreTools::StateMachine<Derived, State>::SetStateType(StateType stateType) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

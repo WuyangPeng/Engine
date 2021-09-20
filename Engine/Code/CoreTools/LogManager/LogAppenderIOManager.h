@@ -19,26 +19,31 @@
 #include "CoreTools/Exception/ExceptionFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Threading/Mutex.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/format/format_fwd.hpp>
-#include <boost/noncopyable.hpp>
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(LogAppenderIOManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogAppenderIOManagerImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE LogAppenderIOManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE LogAppenderIOManager final 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(LogAppenderIOManager);
+        NON_COPY_TYPE_DECLARE(LogAppenderIOManager);
         using AppenderManagerPtr = std::shared_ptr<AppenderManager>;
         using Format = boost::basic_format<System::TChar>;
 
     public:
         LogAppenderIOManager(LogLevel logLevel, const AppenderManagerPtr& appenderManager);
         explicit LogAppenderIOManager(DisableNotThrow disableNotThrow);
+        ~LogAppenderIOManager() noexcept = default;
+        LogAppenderIOManager(const LogAppenderIOManager& rhs) noexcept = delete;
+        LogAppenderIOManager& operator=(const LogAppenderIOManager& rhs) noexcept = delete;
+        LogAppenderIOManager(LogAppenderIOManager&& rhs) noexcept = delete;
+        LogAppenderIOManager& operator=(LogAppenderIOManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -63,7 +68,7 @@ namespace CoreTools
         void SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(LogAppenderIOManager);
+        PackageType impl;
         Mutex m_LogAppenderIOManagerMutex;
     };
 }

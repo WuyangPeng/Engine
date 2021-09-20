@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/19 16:45)
+//	引擎版本：0.7.1.1 (2020/10/19 16:45)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_MD5_CONTEXT_H
 #define CORE_TOOLS_MEMORY_TOOLS_MD5_CONTEXT_H
@@ -14,21 +14,25 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+ 
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-#include <boost/noncopyable.hpp>
-
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
-CORE_TOOLS_EXPORT_SHARED_PTR(MD5ContextImpl);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(MD5ContextImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE MD5Context final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE MD5Context final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(MD5Context);
+        NON_COPY_TYPE_DECLARE(MD5Context);
 
     public:
         explicit MD5Context(DisableNotThrow disableNotThrow);
+        ~MD5Context() noexcept = default;
+        MD5Context(const MD5Context& rhs) noexcept = delete;
+        MD5Context& operator=(const MD5Context& rhs) noexcept = delete;
+        MD5Context(MD5Context&& rhs) noexcept = delete;
+        MD5Context& operator=(MD5Context&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,7 +44,7 @@ namespace CoreTools
         void MD5Final(uint8_t* digest);
 
     private:
-        IMPL_TYPE_DECLARE(MD5Context);
+        PackageType impl;
     };
 }
 #endif  // CORE_TOOLS_MEMORY_TOOLS_MD5_CONTEXT_H

@@ -18,7 +18,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_HIDDEN_DECLARE NoniterativeEigen3x3Impl final
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE NoniterativeEigen3x3Impl final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");

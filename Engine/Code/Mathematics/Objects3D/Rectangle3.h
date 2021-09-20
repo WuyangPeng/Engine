@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Vector3D.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -22,11 +22,11 @@ namespace Mathematics
     template <typename Real>
     class Rectangle3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Rectangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Rectangle3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Rectangle3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Rectangle3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Rectangle3 final
@@ -35,8 +35,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Rectangle3Impl = Rectangle3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Rectangle3);
-
+ 
+        TYPE_DECLARE(Rectangle3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
         using VerticesType = std::vector<Vector3D>;
@@ -70,7 +72,7 @@ namespace Mathematics
         [[nodiscard]] const Rectangle3 GetMove(Real t, const Vector3D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Rectangle3);
+        PackageType impl;
     };
 
     using FloatRectangle3 = Rectangle3<float>;

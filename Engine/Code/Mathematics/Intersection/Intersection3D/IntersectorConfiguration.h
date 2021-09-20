@@ -16,6 +16,7 @@
 #include "Mathematics/Intersection/Flags/VertexProjectionMap.h"
 
 #include <memory>
+#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 namespace Mathematics
 {
@@ -33,7 +34,18 @@ namespace Mathematics
     {
     public:
         using IntersectorConfigurationImpl = IntersectorConfigurationImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(IntersectorConfiguration, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(IntersectorConfiguration& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(IntersectorConfiguration);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~IntersectorConfiguration() noexcept = default;
+        IntersectorConfiguration(const IntersectorConfiguration& rhs);
+        IntersectorConfiguration& operator=(const IntersectorConfiguration& rhs);
+        IntersectorConfiguration(IntersectorConfiguration&& rhs) noexcept;
+        IntersectorConfiguration& operator=(IntersectorConfiguration&& rhs) noexcept;
 
     public:
         IntersectorConfiguration();
@@ -51,7 +63,7 @@ namespace Mathematics
         void SetIndex(int index, int value);
 
     private:
-        IMPL_TYPE_DECLARE(IntersectorConfiguration);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatIntersectorConfiguration = IntersectorConfiguration<float>;

@@ -109,8 +109,8 @@ namespace Mathematics
         static constexpr auto sm_MaxReal = std::numeric_limits<Real>::max();
         static constexpr auto sm_MinReal = std::numeric_limits<Real>::min();
 
-        [[nodiscard]] static constexpr Real GetZeroTolerance() noexcept;
-        [[nodiscard]] static constexpr Real GetPI() noexcept;
+        [[nodiscard]] static inline constexpr Real GetZeroTolerance() noexcept;
+        [[nodiscard]] static inline constexpr Real GetPI() noexcept;
         [[nodiscard]] static constexpr Real GetTwoPI() noexcept;
         [[nodiscard]] static constexpr Real GetHalfPI() noexcept;
         [[nodiscard]] static constexpr Real GetQuarterPI() noexcept;

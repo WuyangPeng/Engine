@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 9:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/22 11:25)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
 #define SYSTEM_SYSTEM_OUTPUT_LANGUAGE_ID_DATA_H
@@ -26,33 +26,33 @@ namespace System
 
     public:
         constexpr LanguageIDData() noexcept
-            : m_PrimaryLanguage{ PrimaryLanguage::Neutral }, m_SubLanguage{ SubLanguage::Neutral }
+            : primaryLanguage{ PrimaryLanguage::Neutral }, subLanguage{ SubLanguage::Neutral }
         {
         }
 
         constexpr LanguageIDData(PrimaryLanguage primaryLanguage, SubLanguage subLanguage) noexcept
-            : m_PrimaryLanguage{ primaryLanguage }, m_SubLanguage{ subLanguage }
+            : primaryLanguage{ primaryLanguage }, subLanguage{ subLanguage }
         {
         }
 
-        [[nodiscard]] constexpr auto GetPrimaryLanguage() const noexcept
+        NODISCARD constexpr auto GetPrimaryLanguage() const noexcept
         {
-            return m_PrimaryLanguage;
+            return primaryLanguage;
         }
 
-        [[nodiscard]] constexpr auto GetSubLanguage() const noexcept
+        NODISCARD constexpr auto GetSubLanguage() const noexcept
         {
-            return m_SubLanguage;
+            return subLanguage;
         }
 
-        [[nodiscard]] constexpr auto GetLanguageID() const noexcept
+        NODISCARD constexpr auto GetLanguageID() const noexcept
         {
-            return MakeLanguageID(EnumCastUnderlying<WindowWord>(m_PrimaryLanguage), EnumCastUnderlying<WindowWord>(m_SubLanguage));
+            return MakeLanguageID(EnumCastUnderlying<WindowsWord>(primaryLanguage), EnumCastUnderlying<WindowsWord>(subLanguage));
         }
 
     private:
-        PrimaryLanguage m_PrimaryLanguage;
-        SubLanguage m_SubLanguage;
+        PrimaryLanguage primaryLanguage;
+        SubLanguage subLanguage;
     };
 }
 

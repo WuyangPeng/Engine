@@ -57,7 +57,7 @@ bool Framework::WindowsAPIFrameBuild<Process>
 #endif // OPEN_CLASS_INVARIANT
 
 template <typename Process>
-System::WindowHWnd Framework::WindowsAPIFrameBuild<Process>
+System::WindowsHWnd Framework::WindowsAPIFrameBuild<Process>
 	::GetHwnd() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
@@ -66,7 +66,7 @@ System::WindowHWnd Framework::WindowsAPIFrameBuild<Process>
 }
 
 template <typename Process>
-System::WindowHInstance Framework::WindowsAPIFrameBuild<Process>
+System::WindowsHInstance Framework::WindowsAPIFrameBuild<Process>
 	::GetHInstance() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

@@ -12,17 +12,18 @@
 #include "DatabaseObject.h"
 #include "Detail/DatabaseObjectFactory.h"
 #include "Detail/DatabaseObjectImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 Database::DatabaseObject::DatabaseObject(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ DatabaseObjectFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, DatabaseObject)
+CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseObject)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, DatabaseObject, GetConfigurationStrategy, Database::ConfigurationStrategy)
 
@@ -31,6 +32,6 @@ Database::DatabaseObject::DatabaseObjectWeakPtr Database::DatabaseObject::GetImp
 {
     DATABASE_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl;
+    return DatabaseObjectWeakPtr{};
 }
 #endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)

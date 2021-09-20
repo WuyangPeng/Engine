@@ -1,28 +1,30 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 14:18)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 17:06)
 
 #ifndef CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 #define CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 
 #include "GameError.h"
+#include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename E>
 CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, const LastError& lastError, E errorCode, const String& message)
-    : ParentType{ functionDescribed, lastError, message }, m_ErrorCode{ errorCode }
+    : ParentType{ functionDescribed, lastError, message }, errorCode{ errorCode }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename E>
 CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, WindowError lastError, E errorCode, const String& message)
-    : ParentType{ functionDescribed, lastError, message }, m_ErrorCode{ errorCode }
+    : ParentType{ functionDescribed, lastError, message }, errorCode{ errorCode }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -40,7 +42,7 @@ E CoreTools::GameError<E>::GetErrorCode() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_ErrorCode;
+    return errorCode;
 }
 
 template <typename E>
@@ -65,7 +67,7 @@ const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(m_ErrorCode));
+    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(errorCode));
 
     EXCEPTION_TRY
     {

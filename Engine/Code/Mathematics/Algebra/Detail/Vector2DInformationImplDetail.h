@@ -16,7 +16,7 @@
 #include "Mathematics/Algebra/AxesAlignBoundingBox2D.h"
 #include "Mathematics/Algebra/Vector2DTools.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::Vector2DInformationImpl<Real>::Vector2DInformationImpl(const ContainerType& points, Real epsilon)

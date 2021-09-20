@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::LogMessage::LogMessage(LogLevel level, LogFilter filter, const String& message, const FunctionDescribed& functionDescribed)
-    : m_Impl{ make_shared<ImplType>(level, filter, message, functionDescribed) }
+    : impl{ level, filter, message, functionDescribed }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, LogMessage)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogMessage)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessage, GetMessageDescribe, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, LogMessage, GetLogLevel, CoreTools::LogLevel)

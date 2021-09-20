@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 18:27)
+//	引擎版本：0.7.1.1 (2020/10/23 18:27)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_HELPER_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_C_MAIN_FUNCTION_HELPER_H
@@ -38,6 +38,7 @@ namespace CoreTools
 
         [[nodiscard]] int GetArgc() const noexcept;
         [[nodiscard]] char** GetArgv() noexcept;
+        [[nodiscard]] char* GetArgv(int index) noexcept;
 
         [[nodiscard]] int Run() noexcept;
 

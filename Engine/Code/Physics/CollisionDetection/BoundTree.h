@@ -43,13 +43,13 @@ namespace Physics
 	class BoundTree
 	{
 	public:
-		static_assert(std::is_base_of<CoreTools::ObjectInterface, typename MeshSmartPointer::SubclassType>::value);
+		//static_assert(std::is_base_of<CoreTools::ObjectInterface, typename MeshSmartPointer::SubclassType>::value);
 
 		using ClassType = BoundTree<MeshSmartPointer, Bound>;
 		using BoundTreeChild = BoundTreeChild<MeshSmartPointer, Bound>;
 		using BoundTreeChildPtr = std::shared_ptr<BoundTreeChild>;
 		using TriangleIndex = Rendering::TriangleIndex;
-		using ConstMeshSmartPointer = typename MeshSmartPointer::ConstType;
+		using ConstMeshSmartPointer =MeshSmartPointer;// typename MeshSmartPointer::ConstType;
 
 	public:
 		explicit BoundTree(const MeshSmartPointer& mesh, int maxTrianglesPerLeaf = 1,bool storeInteriorTriangles = false);

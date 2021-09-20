@@ -1,0 +1,72 @@
+{
+  "helperSuite": 
+  {
+    "UserMacroTesting": 1
+  },
+
+  "configurationSuite": 
+  {
+    "ConfigurationStrategyTesting": 1,
+    "AnalysisDatabaseConfigurationTesting": 1
+  },
+
+  "sqlInterfaceSuite": 
+  {
+    "DatabaseObjectTesting": 1,
+    "SessionTesting": 1,
+    "SchemaTesting": 1,
+    "CollectionTesting": 1,
+    "TableTesting": 1,
+    "ResultTesting": 1,
+    "ResultRowTesting": 1
+  },
+
+  "statementSuite":
+  {
+
+  },
+
+  "mysqlWrappersSuite": 
+  {
+
+  },
+
+  "mysqlConnectorWrappersSuite": 
+  {
+    "MysqlConnectorDatabaseObjectTesting": 1,
+    "MysqlConnectorSessionTesting": 1,
+    "MysqlConnectorSchemaTesting": 1,
+    "MysqlConnectorCollectionTesting": 1,
+    "MysqlConnectorDocResultTesting": 1,
+    "MysqlConnectorDocResultRowTesting": 1,
+    "MysqlConnectorTableTesting": 1,
+    "MysqlConnectorResultTesting": 1,
+    "MysqlConnectorResultRowTesting": 1
+  },
+
+  "sqlServerWrappersSuite": 
+  {
+
+
+  },
+
+  "sQLiteWrappersSuite": 
+  {
+
+  }, 
+
+  "postgreSQLSuite": 
+  {
+
+  },
+
+  "oracleSuite": 
+  {
+
+  },
+
+  "flatFileWrappersSuite": 
+  {
+
+  }
+}

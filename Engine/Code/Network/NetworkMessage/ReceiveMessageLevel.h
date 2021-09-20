@@ -12,19 +12,19 @@
 
 #include "Network/NetworkDll.h"
 
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/NetworkMessage/NetworkMessageInternalFwd.h"
-
 #include <vector>
 
-NETWORK_EXPORT_SHARED_PTR(ReceiveMessageLevelImpl);
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(ReceiveMessageLevel,ReceiveMessageLevelImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE ReceiveMessageLevel final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(ReceiveMessageLevel);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(ReceiveMessageLevel);
         using MessageContainer = std::vector<MessageInterfaceSharedPtr>;
         using MessageContainerConstIter = MessageContainer::const_iterator;
 
@@ -43,7 +43,7 @@ namespace Network
         [[nodiscard]] MessageContainerConstIter end() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(ReceiveMessageLevel);
+        PackageType impl;
     };
 }
 

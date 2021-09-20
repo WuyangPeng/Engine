@@ -14,19 +14,20 @@
 #include "Detail/LogConsoleTextColorsManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "../Contract/Flags/ImplFlags.h"
 
 using std::ostream;
 
 CoreTools::LogConsoleTextColorsManager::LogConsoleTextColorsManager(LogLevel logLevel)
-    : m_Impl{ LogConsoleTextColorsManagerFactory::Create(logLevel) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, logLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::LogConsoleTextColorsManager::LogConsoleTextColorsManager(const OStreamShared& osPtr, LogLevel logLevel)
-    : m_Impl{ LogConsoleTextColorsManagerFactory::Create(osPtr, logLevel) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, osPtr, logLevel  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, LogConsoleTextColorsManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogConsoleTextColorsManager)

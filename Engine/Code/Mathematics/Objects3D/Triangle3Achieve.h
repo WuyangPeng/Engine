@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::Triangle3<Real>::Triangle3(const Vector3D& vector0, const Vector3D& vector1, const Vector3D& vector2)
-    : m_Impl{ std::make_shared<ImplType>(vector0, vector1, vector2) }
+    : impl{  vector0, vector1, vector2  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,10 +29,9 @@ Mathematics::Triangle3<Real>::Triangle3(const Vector3D& vector0, const Vector3D&
 template <typename Real>
 bool Mathematics::Triangle3<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -41,7 +40,7 @@ const typename Mathematics::Triangle3<Real>::ContainerType Mathematics::Triangle
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex();
+    return impl->GetVertex();
 }
 
 template <typename Real>
@@ -49,7 +48,7 @@ const typename Mathematics::Triangle3<Real>::ContainerType Mathematics::Triangle
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEdgeVectors();
+    return impl->GetEdgeVectors();
 }
 
 template <typename Real>
@@ -57,7 +56,7 @@ const Mathematics::Vector3D<Real> Mathematics::Triangle3<Real>::GetNormal() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNormal();
+    return impl->GetNormal();
 }
 
 template <typename Real>
@@ -65,7 +64,7 @@ const Mathematics::Vector3D<Real> Mathematics::Triangle3<Real>::GetVertex(int in
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex(index);
+    return impl->GetVertex(index);
 }
 
 template <typename Real>
@@ -73,7 +72,7 @@ Real Mathematics::Triangle3<Real>::DistanceTo(const Vector3D& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->DistanceTo(point);
+    return impl->DistanceTo(point);
 }
 
 template <typename Real>

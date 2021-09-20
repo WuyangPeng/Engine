@@ -5,25 +5,27 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:55)
+//	引擎版本：0.7.1.1 (2020/10/23 15:55)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CommandArgumentImpl.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CommandArgumentImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(CommandArgument, CommandArgumentImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE CommandArgument final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CommandArgument);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(CommandArgument);
 
     public:
         CommandArgument(int index, const std::string& arguments, const std::string& value);
@@ -51,7 +53,7 @@ namespace CoreTools
         void AddEndArgumentValue(const std::string& value);
 
     private:
-        IMPL_TYPE_DECLARE(CommandArgument);
+        PackageType impl;
     };
 }
 

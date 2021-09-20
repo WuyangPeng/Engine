@@ -16,14 +16,14 @@ using std::make_shared;
 
 Framework::WindowCreateHandle
 	::WindowCreateHandle(const WindowInstanceParameter& windowInstanceParameter, const WindowCreateParameter& windowCreateParameter, const WindowSize& size)
-	:m_Impl{ make_shared<ImplType>(windowInstanceParameter, windowCreateParameter, size) }
+	:impl{  windowInstanceParameter, windowCreateParameter, size  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::WindowCreateHandle
 	::WindowCreateHandle(WindowCreateHandle&& rhs) noexcept
-	:m_Impl{ move(rhs.m_Impl) }
+	:impl{ move(rhs.impl) }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -33,12 +33,12 @@ Framework::WindowCreateHandle& Framework::WindowCreateHandle
 {
 	FRAMEWORK_CLASS_IS_VALID_1;
 
-	m_Impl = move(rhs.m_Impl);
+	impl = move(rhs.impl);
 
 	return *this;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, WindowCreateHandle)
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowCreateHandle)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowCreateHandle, GetHwnd, Framework::WindowCreateHandle::HWnd)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowCreateHandle, SetMainWindow, void)

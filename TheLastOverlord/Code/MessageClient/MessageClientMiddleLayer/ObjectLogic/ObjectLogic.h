@@ -1,0 +1,12 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 最后的霸王版本：0.0.0.0 (2019/10/10 16:53)
+
+#ifndef MESSAGE_CLIENT_MIDDLE_LAYER_OBJECT_LOGIC_H
+#define MESSAGE_CLIENT_MIDDLE_LAYER_OBJECT_LOGIC_H
+
+#include "ObjectLogicManager.h"
+
+#endif // MESSAGE_CLIENT_MIDDLE_LAYER_OBJECT_LOGIC_H

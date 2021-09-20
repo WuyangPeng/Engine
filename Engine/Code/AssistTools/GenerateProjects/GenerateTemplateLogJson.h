@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.4 (2019/07/31 15:29)
 
 #ifndef ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_LOG_JSON_H
@@ -11,28 +11,28 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTemplateLogJsonImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTemplateLogJsonImpl);
 
 namespace AssistTools
 {
-	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateLogJson
-	{
-	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTemplateLogJson);
+    class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateLogJson
+    {
+    public:
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTemplateLogJson);
 
-	public:
-		GenerateTemplateLogJson(const System::String& templateFileName, const System::String& projectName);
+    public:
+        GenerateTemplateLogJson(const System::String& templateFileName, const System::String& projectName);
 
-		CLASS_INVARIANT_DECLARE;
+        CLASS_INVARIANT_DECLARE;
 
-		void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const;
+        void GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newFileName) const;
 
-	private:
-		IMPL_TYPE_DECLARE(GenerateTemplateLogJson);
-	};
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_LOG_JSON_H
+#endif  // ASSIST_TOOLS_GENERATE_PROJECTS_GENERATE_TEMPLATE_LOG_JSON_H

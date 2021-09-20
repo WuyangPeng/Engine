@@ -5,15 +5,15 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 19:22)
+//	引擎版本：0.7.1.1 (2020/10/22 19:22)
 
 #ifndef CORE_TOOLS_TIME_SECOND_TIMER_H
 #define CORE_TOOLS_TIME_SECOND_TIMER_H
 
 #include "CoreTools/CoreToolsDll.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-CORE_TOOLS_EXPORT_SHARED_PTR(DeltaTimeManagerImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(SecondTimer, DeltaTimeManagerImpl);
 
 namespace CoreTools
 {
@@ -21,7 +21,7 @@ namespace CoreTools
     {
     public:
         using SecondTimerImpl = DeltaTimeManagerImpl;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(SecondTimer);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(SecondTimer);
 
     public:
         explicit SecondTimer(uint64_t second);
@@ -36,7 +36,7 @@ namespace CoreTools
         void ReTiming(uint64_t second);
 
     private:
-        IMPL_TYPE_DECLARE(SecondTimer);
+        PackageType impl;
         uint64_t m_Second;
     };
 }

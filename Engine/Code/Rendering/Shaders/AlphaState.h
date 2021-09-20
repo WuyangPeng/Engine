@@ -15,8 +15,8 @@
 #include "CoreTools/ObjectSystems/Object.h"
 #include "Rendering/DataTypes/Colour.h"
 
-RENDERING_EXPORT_SHARED_PTR(AlphaStateImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, AlphaStateImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class WriteFileManager;
@@ -28,7 +28,17 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE AlphaState : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(AlphaState, DESTRUCTOR_STATEMENT);
+    public:
+        void Swap(AlphaState& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(AlphaState);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~AlphaState() noexcept;
+        AlphaState(const AlphaState& rhs);
+        AlphaState& operator=(const AlphaState& rhs);
+        AlphaState(AlphaState&& rhs) noexcept;
+        AlphaState& operator=(AlphaState&& rhs) noexcept;
         using ParentType = Object;
         using Colour = Colour<float>;
         using SourceBlendMode = AlphaStateFlags::SourceBlendMode;
@@ -65,7 +75,7 @@ namespace Rendering
         void LoadState(ReadFileManager& manager);
           ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-        IMPL_TYPE_DECLARE(AlphaState);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real, typename UserDataType>
 Mathematics::OdeSolver<Real, UserDataType>::Data::Data(Real t, const Container& x)

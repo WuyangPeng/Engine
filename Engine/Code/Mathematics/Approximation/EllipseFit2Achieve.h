@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::EllipseFit2<Real>::EllipseFit2(const Points& points)
-    : m_Impl{ std::make_shared<ImplType>(points) }
+    : impl{ points }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -25,10 +25,7 @@ Mathematics::EllipseFit2<Real>::EllipseFit2(const Points& points)
 template <typename Real>
 bool Mathematics::EllipseFit2<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
-        return true;
-    else
-        return false;
+    return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -37,7 +34,7 @@ Real Mathematics::EllipseFit2<Real>::GetExactly() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExactly();
+    return impl->GetExactly();
 }
 
 template <typename Real>
@@ -45,7 +42,7 @@ const Mathematics::Vector2D<Real> Mathematics::EllipseFit2<Real>::GetCenter() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCenter();
+    return impl->GetCenter();
 }
 
 template <typename Real>
@@ -53,7 +50,7 @@ const Mathematics::Matrix2<Real> Mathematics::EllipseFit2<Real>::GetRotate() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRotate();
+    return impl->GetRotate();
 }
 
 template <typename Real>
@@ -61,7 +58,7 @@ Real Mathematics::EllipseFit2<Real>::GetExtent0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent0();
+    return impl->GetExtent0();
 }
 
 template <typename Real>
@@ -69,7 +66,7 @@ Real Mathematics::EllipseFit2<Real>::GetExtent1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetExtent1();
+    return impl->GetExtent1();
 }
 
 template <typename Real>
@@ -77,7 +74,7 @@ int Mathematics::EllipseFit2<Real>::GetNumPoint() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumPoint();
+    return impl->GetNumPoint();
 }
 
 template <typename Real>
@@ -85,7 +82,7 @@ const Mathematics::Vector2D<Real> Mathematics::EllipseFit2<Real>::GetPoint(int i
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_ACHIEVE_H

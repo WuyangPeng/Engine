@@ -26,6 +26,7 @@ using std::make_shared;
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
  #include SYSTEM_WARNING_DISABLE(26456)
+#include SYSTEM_WARNING_DISABLE(26434)
 CORE_TOOLS_RTTI_DEFINE(Rendering, IKController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, IKController);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, IKController);
@@ -33,16 +34,46 @@ CORE_TOOLS_DEFAULT_NAMES_USE_IMPL_DEFINE(Rendering, IKController);
 
 Rendering::IKController
 	::IKController(const IKJointSharedPtrVector& joints)
-	:ParentType{}, m_Impl{ make_shared<ImplType>(joints) }
+	:ParentType{}, impl{ make_shared<ImplType>(joints) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
  
-
+#define COPY_CONSTRUCTION_DEFINE_WITH_PARENT(namespaceName, className)                      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        className temp{ rhs };                                                              \
+        Swap(temp);                                                                         \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 COPY_CONSTRUCTION_DEFINE_WITH_PARENT(Rendering, IKController)
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering, IKController)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, IKController)
 
 Rendering::ControllerInterfaceSharedPtr Rendering::IKController
 	::Clone() const 
@@ -54,7 +85,7 @@ Rendering::ControllerInterfaceSharedPtr Rendering::IKController
 										  
 Rendering::IKController
 	::IKController(LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -66,7 +97,7 @@ int Rendering::IKController
     
 	auto size = ParentType::GetStreamingSize();	 
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
     
 	return size;
 }
@@ -78,7 +109,7 @@ uint64_t Rendering::IKController ::Register(const CoreTools::ObjectRegisterShare
 	const auto uniqueID = ParentType::Register(target);
 	if (uniqueID != 0)
 	{
-		//m_Impl->Register(target);
+		//impl->Register(target);
 	}
 
 	return uniqueID;
@@ -93,37 +124,37 @@ void Rendering::IKController
     
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::IKController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source); 	
 
-	//m_Impl->Link(source);
+	//impl->Link(source);
 }
 
 void Rendering::IKController
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();	 
 }
 
 void Rendering::IKController ::Load(const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     
     ParentType::Load(source);
 	
-	//m_Impl->Load(source);
+	//impl->Load(source);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -143,28 +174,28 @@ bool Rendering::IKController
 		// 确保效果都在当前世界空间。
 		// 假设joints形成一个链，使joints I的世界变换是joint I + 1的父变换。
 		
-		const auto mNumJoints = m_Impl->GetJointsNum();
+		const auto mNumJoints = impl->GetJointsNum();
 
 		for (auto index = 0; index < mNumJoints; ++index)
 		{
-			auto pointer = m_Impl->GetJointsSharedPtr(index);
+			auto pointer = impl->GetJointsSharedPtr(index);
 			pointer->UpdateWorldTransform();
 		}
 
 		// 更新joints一次一个，以满足目标。
 		// 由于每个关节被更新，即联合之后出现在链中的节点joint必须在世界空间。
 
-		for (auto iter = 0; iter < m_Impl->GetIterations(); ++iter)
+		for (auto iter = 0; iter < impl->GetIterations(); ++iter)
 		{
 			for (auto index = 0; index < mNumJoints; ++index)
 			{
 				auto realIndex = index;
-				if (m_Impl->IsOrderEndToRoot())
+				if (impl->IsOrderEndToRoot())
 				{
 					realIndex = mNumJoints - 1 - index;
 				}
 				
-				auto joint = m_Impl->GetJointsSharedPtr(realIndex);
+				auto joint = impl->GetJointsSharedPtr(realIndex);
 				
 				for (auto axis = Mathematics::MatrixRotationAxis::X;axis < Mathematics::MatrixRotationAxis::Count; ++axis)
 				{		
@@ -174,7 +205,7 @@ bool Rendering::IKController
 						{
 							for (auto j = realIndex; j < mNumJoints; ++j)
 							{
-								auto joint2 = m_Impl->GetJointsSharedPtr(j);
+								auto joint2 = impl->GetJointsSharedPtr(j);
 								joint2->UpdateWorldRotateAndTranslate();
 							}
 						}
@@ -189,7 +220,7 @@ bool Rendering::IKController
 						{
 							for (auto j = realIndex; j < mNumJoints; ++j)
 							{
-								auto joint2 = m_Impl->GetJointsSharedPtr(j);
+								auto joint2 = impl->GetJointsSharedPtr(j);
 								
 								joint2->UpdateWorldRotateAndTranslate();
 							}

@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::Triangle2<Real>::Triangle2(const Vector2D& vector0, const Vector2D& vector1, const Vector2D& vector2)
-    : m_Impl{ std::make_shared<ImplType>(vector0, vector1, vector2) }
+    : impl{  vector0, vector1, vector2  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,10 +26,9 @@ Mathematics::Triangle2<Real>::Triangle2(const Vector2D& vector0, const Vector2D&
 template <typename Real>
 bool Mathematics::Triangle2<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    
         return true;
-    else
-        return false;
+    
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -38,7 +37,7 @@ const typename Mathematics::Triangle2<Real>::ContainerType Mathematics::Triangle
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex();
+    return impl->GetVertex();
 }
 
 template <typename Real>
@@ -46,7 +45,7 @@ const Mathematics::Vector2D<Real> Mathematics::Triangle2<Real>::GetVertex(int in
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex(index);
+    return impl->GetVertex(index);
 }
 
 template <typename Real>
@@ -54,7 +53,7 @@ Real Mathematics::Triangle2<Real>::DistanceTo(const Vector2D& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->DistanceTo(point);
+    return impl->DistanceTo(point);
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_TRIANGLE2_ACHIEVE_H

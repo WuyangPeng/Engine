@@ -1,0 +1,826 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{d1dc4291-6428-46cd-9bcf-9a4e02047458}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{e29d1ff4-0334-4d5b-a05c-ae80e966045b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrameSuite 头文件">
+      <UniqueIdentifier>{8522d669-641f-47f9-bac9-b28bcd7c6d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrameSuite 源文件">
+      <UniqueIdentifier>{f7135912-dc7f-48bb-b8f0-3a6863acb5bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplicationSuite 头文件">
+      <UniqueIdentifier>{a7221b7d-59d4-42ef-8040-56d6b0448eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplicationSuite 源文件">
+      <UniqueIdentifier>{17f98537-ff52-4dd6-8629-2e21fb70008b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件">
+      <UniqueIdentifier>{6f2f7cb4-2759-487b-9c38-2855081f9ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件">
+      <UniqueIdentifier>{05641c7c-6e06-4aec-a427-68d89e55cfcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LinuxFrameSuite 头文件">
+      <UniqueIdentifier>{afc1a9a3-af3a-421b-acef-711dfe8105e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LinuxFrameSuite 源文件">
+      <UniqueIdentifier>{ede279c7-bfcf-4285-8c82-45ad0043c123}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacintoshFrameSuite 头文件">
+      <UniqueIdentifier>{a45b1f8f-ca91-4e0b-9063-a9feccc4b736}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacintoshFrameSuite 源文件">
+      <UniqueIdentifier>{b0f26887-7087-4710-b0d9-64fc476ec7ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 头文件">
+      <UniqueIdentifier>{8bbf3b61-e4d8-42bd-b346-e19c829858f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 源文件">
+      <UniqueIdentifier>{2281f3b4-5968-4c10-9adb-005f4ffedb7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 头文件">
+      <UniqueIdentifier>{71caa215-2482-439d-855e-a21d1189f30a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 源文件">
+      <UniqueIdentifier>{57ae551f-2bdb-4086-b4a5-fe99f0f294df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLGlutFrameSuite 头文件">
+      <UniqueIdentifier>{50bb672e-b5c1-4b6c-b642-4cc9551f1f50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLGlutFrameSuite 源文件">
+      <UniqueIdentifier>{8864cccb-b70d-4c18-94c2-e1d7adef1781}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowCreateSuite 头文件">
+      <UniqueIdentifier>{90f3defd-5a49-4071-8f8d-142203f917cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowCreateSuite 源文件">
+      <UniqueIdentifier>{53ba4903-7bc5-460a-a478-7ec03d221c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowProcessSuite 头文件">
+      <UniqueIdentifier>{08c50af9-fdf0-43ac-a8ca-10bee2811e73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowProcessSuite 源文件">
+      <UniqueIdentifier>{ee369cf0-20d2-4832-a0a6-c63c12b8e724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegisterSuite 头文件">
+      <UniqueIdentifier>{49b649c6-0f17-467a-8cd2-77c71f7df041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegisterSuite 源文件">
+      <UniqueIdentifier>{f709d78a-a828-46c2-87ca-60e5979d53c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsAPIFrameSuite 头文件">
+      <UniqueIdentifier>{0f6d81d0-07cc-409d-84fb-6e44b0ec1844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsAPIFrameSuite 源文件">
+      <UniqueIdentifier>{174747bf-b2af-4b4f-8de0-69555154fc02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleFrameSuite 头文件">
+      <UniqueIdentifier>{2857ec74-0b2c-4c67-9f36-14a96b247717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleFrameSuite 源文件">
+      <UniqueIdentifier>{303e641e-0955-446c-98c6-3c02ba11f71c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 头文件\Detail">
+      <UniqueIdentifier>{8e44205a-75d1-4c38-ad99-2cee4295c236}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HelperSuite 源文件\Detail">
+      <UniqueIdentifier>{8b272a14-dc98-4e2a-93b1-136c310f30fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelperSuite 头文件\Flags">
+      <UniqueIdentifier>{3ea149ce-e59d-4eb4-aeb1-0899487e4cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 头文件\Detail">
+      <UniqueIdentifier>{87ea04ba-06af-4702-822f-9ebd4270aba7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayerSuite 源文件\Detail">
+      <UniqueIdentifier>{06c01f6d-ea06-4481-9bc5-1102456d7d4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\FrameworkTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\FrameworkEngineDirectory.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EngineDirectory.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameBuildTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameSuite.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidMessageLoopTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\CameraMotionTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\FontInformationTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\GLUTApplicationInformationTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\MousePositionTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ObjectMotionTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PerformanceMeasurementsTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PixelScreenTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\WindowApplicationInformationTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationSuite.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationTraitTesting.h">
+      <Filter>ApplicationSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\HelperSuite.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameSuite.h">
+      <Filter>LinuxFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameSuite.h">
+      <Filter>MacintoshFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperSuite.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\AndroidMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraModelMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraSystemsManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraViewMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ControllerMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerContainerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EventManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\GUIManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerSuite.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\NetworkManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PhysicalModellingManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PixelViewMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.h">
+      <Filter>MiddleLayerSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackUnitTestSuiteTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameBuildTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameSuite.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowInstanceParameterTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowPointTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowSizeTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateSuite.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageLoopTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageUnitTestSuiteTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessSuite.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\VirtualKeysTypesTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageInterfaceTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowPictorialTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterParameterTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterSuite.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowNameTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameSuite.h">
+      <Filter>WindowsAPIFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameBuildTesting.h">
+      <Filter>WindowsAPIFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\UserMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionEntryPointTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MiddleLayerMacroTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperBaseTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MacintoshMainFunctionHelperTesting.h">
+      <Filter>MainFunctionHelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessManagerTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHIconTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHCursorTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHBrushTesting.h">
+      <Filter>WindowRegisterSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.h">
+      <Filter>OpenGLGlutFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessManagerTesting.h">
+      <Filter>AndroidFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameBuildTesting.h">
+      <Filter>LinuxFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxProcessTesting.h">
+      <Filter>LinuxFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxCallBackInterfaceTesting.h">
+      <Filter>LinuxFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameBuildTesting.h">
+      <Filter>MacintoshFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshProcessTesting.h">
+      <Filter>MacintoshFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshCallBackInterfaceTesting.h">
+      <Filter>MacintoshFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleCallBackInterfaceTesting.h">
+      <Filter>ConsoleFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameBuildTesting.h">
+      <Filter>ConsoleFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameSuite.h">
+      <Filter>ConsoleFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleProcessTesting.h">
+      <Filter>ConsoleFrameSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterface.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterfaceImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperMiddleLayerFlags.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterfaceImpl.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperMiddleLayerFlags.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterface.h">
+      <Filter>HelperSuite 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\Flags\DescriptionFlags.h">
+      <Filter>MainFunctionHelperSuite 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionTesting.h">
+      <Filter>HelperSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateHandleTesting.h">
+      <Filter>WindowCreateSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessHandleTesting.h">
+      <Filter>WindowProcessSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.h">
+      <Filter>MiddleLayerSuite 头文件\Detail</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackInterfaceTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidCallBackUnitTestSuiteTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidFrameBuildTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidMessageLoopTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ApplicationTraitTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\CameraMotionTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\FontInformationTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\GLUTApplicationInformationTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\MousePositionTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\ObjectMotionTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PerformanceMeasurementsTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\PixelScreenTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ApplicationSuite\WindowApplicationInformationTesting.cpp">
+      <Filter>ApplicationSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\AndroidMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\EnvironmentDirectoryTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MainFunctionHelperBaseTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\OpenGLGlutMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\WindowMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ArtificialIntellegenceInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\AudioManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraControllerMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraModelMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraSystemsManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\CameraViewMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ControllerMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerContainerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EngineMiddleLayerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\EventManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\GUIManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\InputManagerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MessageManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\MiddleLayerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerContainerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ModelViewControllerMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\NetworkManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ObjectLogicManagerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PhysicalModellingManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\PixelViewMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\RenderingManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ResourceManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\SystemManagerInterfaceTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\ViewMiddleLayerTesting.cpp">
+      <Filter>MiddleLayerSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackInterfaceTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutCallBackUnitTestSuiteTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutFrameBuildTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateParameterTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowInstanceParameterTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowPointTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowSizeTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\VirtualKeysTypesTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageInterfaceTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageLoopTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowMessageUnitTestSuiteTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowNameTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowPictorialTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterParameterTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowRegisterTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowsAPIFrameSuite\WindowsAPIFrameBuildTesting.cpp">
+      <Filter>WindowsAPIFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\UserMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionEntryPointTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MiddleLayerMacroTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\ConsoleMainFunctionHelperBaseTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MainFunctionHelperSuite\MacintoshMainFunctionHelperTesting.cpp">
+      <Filter>MainFunctionHelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessManagerTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHIconTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHCursorTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowRegisterSuite\WindowHBrushTesting.cpp">
+      <Filter>WindowRegisterSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\OpenGLGlutFrameSuite\OpenGLGlutProcessManagerTesting.cpp">
+      <Filter>OpenGLGlutFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\AndroidFrameSuite\AndroidProcessManagerTesting.cpp">
+      <Filter>AndroidFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxCallBackInterfaceTesting.cpp">
+      <Filter>LinuxFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxFrameBuildTesting.cpp">
+      <Filter>LinuxFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\LinuxFrameSuite\LinuxProcessTesting.cpp">
+      <Filter>LinuxFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshCallBackInterfaceTesting.cpp">
+      <Filter>MacintoshFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshFrameBuildTesting.cpp">
+      <Filter>MacintoshFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MacintoshFrameSuite\MacintoshProcessTesting.cpp">
+      <Filter>MacintoshFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleCallBackInterfaceTesting.cpp">
+      <Filter>ConsoleFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleFrameBuildTesting.cpp">
+      <Filter>ConsoleFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\ConsoleFrameSuite\ConsoleProcessTesting.cpp">
+      <Filter>ConsoleFrameSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterface.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\HelperManagerInterfaceImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterfaceImpl.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\Detail\ChildHelperInterface.cpp">
+      <Filter>HelperSuite 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\HelperSuite\MainFunctionTesting.cpp">
+      <Filter>HelperSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowCreateSuite\WindowCreateHandleTesting.cpp">
+      <Filter>WindowCreateSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\WindowProcessSuite\WindowProcessHandleTesting.cpp">
+      <Filter>WindowProcessSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Framework\FrameworkTesting\MiddleLayerSuite\Detail\ModelViewControllerMiddleLayerTest.cpp">
+      <Filter>MiddleLayerSuite 源文件\Detail</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

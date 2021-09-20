@@ -16,25 +16,29 @@
 
 #include "Database/Configuration/ConfigurationFwd.h"
 #include "Database/SqlInterface/SqlInterfaceFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <map>
 #include <string>
 
-DATABASE_EXPORT_SHARED_PTR(TableImpl);
-EXPORT_NONCOPYABLE_CLASS(DATABASE);
+DATABASE_NON_COPY_EXPORT_IMPL(TableImpl); 
 
 namespace Database
 {
-    class DATABASE_DEFAULT_DECLARE Table final : private boost::noncopyable
+    class TableFactory;
+    class DATABASE_DEFAULT_DECLARE Table final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Table);
+        NON_COPY_TYPE_DECLARE(Table);
         using ResultPtr = std::shared_ptr<Result>;
         using BindStatementType = std::map<std::string, std::string>;
-
+        
     public:
         Table(const Schema& schema, const std::string& tableName);
-
+        ~Table() noexcept = default;
+        Table(const Table& rhs) noexcept = delete;
+        Table& operator=(const Table& rhs) noexcept = delete;
+        Table(Table&& rhs) noexcept = delete;
+        Table& operator=(Table&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
@@ -43,7 +47,7 @@ namespace Database
                                        const std::string& orderByStatement, const BindStatementType& bindStatement);
 
     private:
-        IMPL_TYPE_DECLARE(Table);
+        PackageType impl;
     };
 }
 

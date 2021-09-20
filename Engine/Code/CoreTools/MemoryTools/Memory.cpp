@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/20 10:18)
+//	引擎版本：0.7.1.1 (2020/10/20 10:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::Memory::Memory(const FunctionDescribed& functionDescribe) noexcept
-    : m_FunctionDescribed{ functionDescribe }
+    : m_FunctionDescribed{  functionDescribe }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

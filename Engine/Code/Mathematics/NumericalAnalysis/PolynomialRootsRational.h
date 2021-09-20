@@ -36,7 +36,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using PolynomialRootsRationalImpl = PolynomialRootsRationalImpl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialRootsRational, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(PolynomialRootsRational& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(PolynomialRootsRational);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~PolynomialRootsRational() noexcept = default;
+        PolynomialRootsRational(const PolynomialRootsRational& rhs);
+        PolynomialRootsRational& operator=(const PolynomialRootsRational& rhs);
+        PolynomialRootsRational(PolynomialRootsRational&& rhs) noexcept;
+        PolynomialRootsRational& operator=(PolynomialRootsRational&& rhs) noexcept;
 
         using PolynomialRational = SignRational<16 * sizeof(Real)>;
         using Math = Math<Real>;
@@ -75,7 +86,7 @@ namespace Mathematics
                                    const PolynomialRational& secondary, const PolynomialRational& thrice);
 
     private:
-        IMPL_TYPE_DECLARE(PolynomialRootsRational);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatPolynomialRootsRational = PolynomialRootsRational<float>;

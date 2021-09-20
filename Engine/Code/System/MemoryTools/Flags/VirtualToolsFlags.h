@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 0:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/04/19 11:41)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H
@@ -24,9 +24,10 @@ namespace System
         Reserve = MEM_RESERVE,
         ReserveAndCommit = Reserve | Commit,
         Reset = MEM_RESET,
-        Physical = MEM_PHYSICAL | Reserve,
+        ResetUndo = MEM_RESET_UNDO,
 
-        LargePages = MEM_LARGE_PAGES,
+        Physical = MEM_PHYSICAL | Reserve,
+        LargePages = MEM_LARGE_PAGES | ReserveAndCommit,
         TopDown = MEM_TOP_DOWN,
         WriteWatch = MEM_WRITE_WATCH | Reserve,
 
@@ -42,20 +43,24 @@ namespace System
 
     enum class MemoryProtect
     {
+        Zero = 0,
         NoAccess = PAGE_NOACCESS,
-        Guard = PAGE_GUARD,
 
         ReadOnly = PAGE_READONLY,
         ReadWrite = PAGE_READWRITE,
+        WriteCopy = PAGE_WRITECOPY,  // AllocateVirtual不支持此标志
+
         Execute = PAGE_EXECUTE,
         ExecuteRead = PAGE_EXECUTE_READ,
         ExecuteReadWrite = PAGE_EXECUTE_READWRITE,
+        ExecuteWriteCopy = PAGE_EXECUTE_WRITECOPY,  // AllocateVirtual不支持此标志
 
-        WriteCopy = PAGE_WRITECOPY,
-        ExecuteWriteCopy = PAGE_EXECUTE_WRITECOPY,
-
+        Guard = PAGE_GUARD,
         Nocache = PAGE_NOCACHE,
         WriteCombine = PAGE_WRITECOMBINE,
+
+        TargetsNoUpdate = PAGE_TARGETS_NO_UPDATE,
+        TargetsInvalid = PAGE_TARGETS_INVALID,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -66,22 +71,27 @@ namespace System
         Commit = 0x1000,
         Reserve = 0x2000,
         ReserveAndCommit = Reserve | Commit,
+        Reset = 0x80000,
+        ResetUndo = 0x01000000,
+
+        Physical = 0x400000 | Reserve,
+        LargePages = 0x20000000 | ReserveAndCommit,
+        TopDown = 0x100000,
+        WriteWatch = 0x200000 | Reserve,
+
         DeCommit = 0x4000,
         Release = 0x8000,
+
         Free = 0x10000,
         Private = 0x20000,
         Mapped = 0x40000,
-        Reset = 0x80000,
-        TopDown = 0x100000,
-        WriteWatch = 0x200000 | Reserve,
-        Physical = 0x400000 | Reserve,
         Rotate = 0x800000,
-        LargePages = 0x20000000,
         Mem4mbPages = 0x80000000,
     };
 
     enum class MemoryProtect
     {
+        Zero = 0,
         NoAccess = 0x01,
         ReadOnly = 0x02,
         ReadWrite = 0x04,
@@ -93,12 +103,15 @@ namespace System
         Guard = 0x100,
         Nocache = 0x200,
         WriteCombine = 0x400,
+        TargetsNoUpdate = 0x40000000,
+        TargetsInvalid = 0x40000000,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
     ENUM_ORABLE_OPERATOR_DEFINE(MemoryAllocation);
     ENUM_ORABLE_OPERATOR_DEFINE(MemoryProtect);
+    ENUM_ANDABLE_OPERATOR_DEFINE(MemoryProtect);
 }
 
 #endif  // SYSTEM_MEMORY_TOOLS_VIRTUAL_FLAGS_H

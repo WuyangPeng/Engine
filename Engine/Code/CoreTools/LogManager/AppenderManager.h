@@ -17,23 +17,28 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(AppenderManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(AppenderManagerImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE AppenderManager final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE AppenderManager final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(AppenderManager);
+        NON_COPY_TYPE_DECLARE(AppenderManager);
         using String = System::String;
 
     public:
         explicit AppenderManager(DisableNotThrow disableNotThrow);
+        ~AppenderManager() noexcept = default;
+        AppenderManager(const AppenderManager& rhs) noexcept = delete;
+        AppenderManager& operator=(const AppenderManager& rhs) noexcept = delete;
+        AppenderManager(AppenderManager&& rhs) noexcept = delete;
+        AppenderManager& operator=(AppenderManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -56,7 +61,7 @@ namespace CoreTools
         [[nodiscard]] static const String GetDefaultAppenderName();
 
     private:
-        IMPL_TYPE_DECLARE(AppenderManager);
+        PackageType impl;
     };
 }
 

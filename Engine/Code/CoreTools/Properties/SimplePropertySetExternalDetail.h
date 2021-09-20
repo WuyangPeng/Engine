@@ -5,16 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:40)
+//	引擎版本：0.7.1.1 (2020/10/26 13:40)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_SET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_SET_EXTERNAL_DETAIL_H
 
 #include "SimplePropertySetExternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include "System/Helper/PragmaWarning.h"
 template <typename Value, typename Reference>
-CoreTools::SimplePropertySetExternal<Value, Reference>::SimplePropertySetExternal(ValueType& value)
+CoreTools::SimplePropertySetExternal<Value, Reference>::SimplePropertySetExternal(ValueType& value) noexcept
     : m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -28,6 +28,8 @@ bool CoreTools::SimplePropertySetExternal<Value, Reference>::IsValid() const noe
 }
 #endif  // OPEN_CLASS_INVARIANT
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename Value, typename Reference>
 CoreTools::SimplePropertySetExternal<Value, Reference>& CoreTools::SimplePropertySetExternal<Value, Reference>::operator=(ReferenceType value)
 {
@@ -37,5 +39,5 @@ CoreTools::SimplePropertySetExternal<Value, Reference>& CoreTools::SimplePropert
 
     return *this;
 }
-
+#include STSTEM_WARNING_POP
 #endif  // CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_SET_EXTERNAL_DETAIL_H

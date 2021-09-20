@@ -1,0 +1,31 @@
+{
+  "renderersSuite": 
+  {
+    "PlatformVertexFormatTesting": 1,
+    "VertexFormatManagementTesting": 1,
+    "PlatformIndexBufferTesting": 1,
+    "PlatformVertexBufferTesting": 1,
+    "BufferLockManageTesting": 1,
+    "BufferManagementTesting": 1,
+    "BufferManagementLockEncapsulationTesting": 1,
+    "PlatformTexture1DTesting": 1,
+    "PlatformTexture2DTesting": 1,
+    "PlatformTexture3DTesting": 1,
+    "PlatformTextureCubeTesting": 1,
+    "TextureLockManageTesting": 1,
+    "TextureManagementTesting": 1,
+    "TextureManagementLockEncapsulationTesting": 1,
+    "PlatformRenderTargetTesting": 1,
+    "RenderTargetManagementTesting": 1
+  },
+
+  "openGLRendererSuite": 
+  {
+    "OpenGLBindTextureTesting": 1,
+    "OpenGLVertexFormatDataTesting": 1,
+    "OpenGLVertexFormatArrayDataTesting": 1,
+    "OpenGLTextureDataTesting": 1,
+    "OpenGLTextureDataManageTesting": 1,
+    "OpenGLRenderTargetDataTesting":1
+  }
+}

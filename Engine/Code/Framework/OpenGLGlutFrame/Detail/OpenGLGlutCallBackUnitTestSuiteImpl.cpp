@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "OpenGLGlutCallBackUnitTestSuiteImpl.h"
-#include "System/Window/Flags/WindowsKeyCodesFlags.h"
+#include "System/Windows/Flags/WindowsKeyCodesFlags.h"
 #include "CoreTools/Helper/LogMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/UnitTestSuite/Suite.h"

@@ -21,8 +21,7 @@ Framework::OpenGLGlutProcessManagerImpl::OpenGLGlutCallBackInterfaceSharedPtr Fr
 Framework::OpenGLGlutProcessManagerImpl::MainFunctionHelperBaseWeakPtr Framework::OpenGLGlutProcessManagerImpl
 	::sm_MainFunctionHelper{ };
 
-Framework::OpenGLGlutProcessManagerImpl
-	::OpenGLGlutProcessManagerImpl() noexcept
+Framework::OpenGLGlutProcessManagerImpl ::OpenGLGlutProcessManagerImpl(MAYBE_UNUSED int count) noexcept
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

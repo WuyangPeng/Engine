@@ -68,7 +68,7 @@ Framework::WindowPictorialImpl::WindowHBrushUniquePtr Framework::WindowPictorial
 
 CLASS_INVARIANT_STUB_DEFINE(Framework, WindowPictorialImpl)
 
-System::WindowHIcon Framework::WindowPictorialImpl
+System::WindowsHIcon Framework::WindowPictorialImpl
 	::GetHIcon() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
@@ -76,7 +76,7 @@ System::WindowHIcon Framework::WindowPictorialImpl
 	return m_WindowsHIcon.GetHIcon();
 }
 
-System::WindowHCursor Framework::WindowPictorialImpl
+System::WindowsHCursor Framework::WindowPictorialImpl
 	::GetHCursor() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;
@@ -84,7 +84,7 @@ System::WindowHCursor Framework::WindowPictorialImpl
 	return m_WindowsHCursor.GetHCursor();
 }
 
-System::WindowHBrush Framework::WindowPictorialImpl
+System::WindowsHBrush Framework::WindowPictorialImpl
 	::GetHBrush() const noexcept
 {
 	FRAMEWORK_CLASS_IS_VALID_CONST_9;

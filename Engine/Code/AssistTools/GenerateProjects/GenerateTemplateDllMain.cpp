@@ -12,18 +12,18 @@
 
 AssistTools::GenerateTemplateDllMain
 	::GenerateTemplateDllMain(const System::String& templateFileName,  const Replace& replace)
-	:m_Impl(std::make_shared<ImplType>(templateFileName, replace))
+	:impl(templateFileName, replace)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }  
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateDllMain)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateDllMain)
 
 void AssistTools::GenerateTemplateDllMain
 	::GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData,  const System::String& solutionName, const System::String& managerName) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName);
+	return impl->GenerateTo(resourceDirectory, newProjectName, copyrightData, solutionName, managerName);
 }
  

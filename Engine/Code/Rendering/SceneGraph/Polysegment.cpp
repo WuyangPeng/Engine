@@ -171,7 +171,7 @@ void Rendering::Polysegment
 void Rendering::Polysegment
     ::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::Link(source);	
 }
@@ -179,7 +179,7 @@ void Rendering::Polysegment
 void Rendering::Polysegment
     ::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
 	ParentType::PostLink();     
 }
@@ -187,7 +187,7 @@ void Rendering::Polysegment
 void Rendering::Polysegment
     ::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
     
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
     

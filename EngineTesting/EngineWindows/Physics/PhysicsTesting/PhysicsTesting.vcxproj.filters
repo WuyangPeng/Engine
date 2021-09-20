@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{8aaed613-9124-46fc-981b-2f976cebbada}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{f86f0572-b8f3-4854-9f22-7a9f226c2ee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetectionSuite 头文件">
+      <UniqueIdentifier>{2a44a2d6-00f0-42ad-ab94-29a3b63a9872}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CollisionDetectionSuite 源文件">
+      <UniqueIdentifier>{4b8be314-ecee-4f9b-927d-bd97794c4ac4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FluidSuite 头文件">
+      <UniqueIdentifier>{da11603a-0b1d-4394-9a6e-422207559d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntersectionSuite 头文件">
+      <UniqueIdentifier>{4bf5fb15-19fd-42bc-ba53-b48fb32accd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LCPSolverSuite 头文件">
+      <UniqueIdentifier>{dccf62ac-3bc1-4284-a2ac-e5fbe4603dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacroSuite 头文件">
+      <UniqueIdentifier>{a46d1626-fd0b-4922-9062-46f51e20692a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiscellaneousSuite 头文件">
+      <UniqueIdentifier>{4f71983c-4b5c-462d-b948-83d188215864}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RigidBodySuite 头文件">
+      <UniqueIdentifier>{df5602ac-a6ce-4408-9568-bb1215da7724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleSystemSuite 头文件">
+      <UniqueIdentifier>{779870a9-ee44-41c3-95ad-e17f2ab94a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\CollisionDetectionSuite">
+      <UniqueIdentifier>{33679f3d-93b5-441b-910a-2b6f39fc5959}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\PhysicsTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\CollisionDetectionSuite\TrianglesMesh.trv">
+      <Filter>资源文件\CollisionDetectionSuite</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.h">
+      <Filter>CollisionDetectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.h">
+      <Filter>CollisionDetectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.h">
+      <Filter>CollisionDetectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\CollisionDetectionSuite.h">
+      <Filter>CollisionDetectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.h">
+      <Filter>CollisionDetectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\FluidSuite\FluidSuite.h">
+      <Filter>FluidSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\IntersectionSuite\IntersectionSuite.h">
+      <Filter>IntersectionSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\LCPSolverSuite\LCPSolverSuite.h">
+      <Filter>LCPSolverSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\MacroSuite\MacroSuite.h">
+      <Filter>MacroSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\MiscellaneousSuite\MiscellaneousSuite.h">
+      <Filter>MiscellaneousSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\ParticleSystemSuite\ParticleSystemSuite.h">
+      <Filter>ParticleSystemSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Physics\PhysicsTesting\RigidBodySuite\RigidBodySuite.h">
+      <Filter>RigidBodySuite 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeProjectionInfoTesting.cpp">
+      <Filter>CollisionDetectionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeChildTesting.cpp">
+      <Filter>CollisionDetectionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeSplitTrianglesTesting.cpp">
+      <Filter>CollisionDetectionSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Physics\PhysicsTesting\CollisionDetectionSuite\BoundTreeTesting.cpp">
+      <Filter>CollisionDetectionSuite 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

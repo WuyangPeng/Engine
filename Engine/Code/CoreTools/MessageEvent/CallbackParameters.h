@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:18)
+//	引擎版本：0.7.1.1 (2020/10/26 15:18)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
@@ -14,18 +14,18 @@
 
 #include "ParametersInterface.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CallbackParametersImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(CallbackParameters, CallbackParametersImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE CallbackParameters final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(CallbackParameters);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(CallbackParameters);
         using String = System::String;
 
     public:
@@ -75,7 +75,7 @@ namespace CoreTools
         [[nodiscard]] int GetContainerSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(CallbackParameters);
+        PackageType impl;
     };
 }
 

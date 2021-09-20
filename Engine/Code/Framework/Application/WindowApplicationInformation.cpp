@@ -16,28 +16,28 @@ using std::make_shared;
 
 Framework::WindowApplicationInformation
 	::WindowApplicationInformation(const String& windowTitle, const WindowSize& size, const WindowPoint& point, bool allowResize)
-	:m_Impl{ make_shared<ImplType>(windowTitle, size, point, allowResize) }
+	:impl{  windowTitle, size, point, allowResize  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
-
+COPY_UNSHARED_CLONE_SELF_DEFINE(Framework, WindowApplicationInformation)
 Framework::WindowApplicationInformation
 	::WindowApplicationInformation(const String& windowTitle, const WindowSize& size)
-	:m_Impl{ make_shared<ImplType>(windowTitle, size) }
+	:impl{  windowTitle, size  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Framework::WindowApplicationInformation
 	::WindowApplicationInformation(HInstance instance, const RendererParameter& rendererParameter)
-	:m_Impl{ make_shared<ImplType>(instance,rendererParameter) }
+	:impl{  instance,rendererParameter  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Framework, WindowApplicationInformation)
+CLASS_INVARIANT_STUB_DEFINE(Framework, WindowApplicationInformation)
 
-DELAY_COPY_CONSTRUCTION_DEFINE(Framework, WindowApplicationInformation)
+ 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowApplicationInformation, GetWindowTitle, const System::String);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Framework, WindowApplicationInformation, GetWindowTitleWithMultiByte, const string);
@@ -47,9 +47,9 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInforma
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetHeight, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetWindowSize, const Framework::WindowSize);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetAspectRatio, float);
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetStyle, System::WindowStyles);
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetStyle, System::WindowsStyles);
 
-IMPL_NON_CONST_COPY_MEMBER_FUNCTION_DEFINE_1_CR(Framework, WindowApplicationInformation, SetWindowSize, WindowSize, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Framework, WindowApplicationInformation, SetWindowSize, WindowSize, void);
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetWindowName, Framework::WindowName);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Framework, WindowApplicationInformation, GetWindowPictorial, Framework::WindowPictorial); 

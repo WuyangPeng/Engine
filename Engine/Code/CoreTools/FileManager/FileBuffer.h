@@ -12,19 +12,29 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/Helper/SharedPtrMacro.h"
 
 #include <vector>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(FileBufferImpl);
-
+ 
+EXPORT_SHARED_PTR(CoreTools, FileBufferImpl, CORE_TOOLS_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE FileBuffer final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(FileBuffer, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(FileBuffer& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(FileBuffer);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~FileBuffer() noexcept = default;
+        FileBuffer(const FileBuffer& rhs);
+        FileBuffer& operator=(const FileBuffer& rhs);
+        FileBuffer(FileBuffer&& rhs) noexcept;
+        FileBuffer& operator=(FileBuffer&& rhs) noexcept;
         using BufferType = std::vector<char>;
         using BufferTypeIter = BufferType::iterator;
         using BufferTypeConstIter = BufferType::const_iterator;
@@ -49,7 +59,10 @@ namespace CoreTools
         [[nodiscard]] BufferTypeIter end() noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(FileBuffer);
+        using FileBufferImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        FileBufferImplPtr impl;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(FileBuffer);

@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Polynomial.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <vector>
 
 namespace Mathematics
@@ -44,19 +44,21 @@ namespace Mathematics
     template <typename Real>
     class PolynomialFit4Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit4Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit4Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit4Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<Real>>;
 
     template <typename Real>
     class PolynomialFit4 final
     {
     public:
         using PolynomialFit4Impl = PolynomialFit4Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialFit4);
-
+       
+        TYPE_DECLARE(PolynomialFit4);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Samples = std::vector<Real>;
         using Polynomial = Polynomial<Real>;
 
@@ -70,7 +72,7 @@ namespace Mathematics
         [[nodiscard]] bool IsSolveSucceed() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(PolynomialFit4);
+        PackageType impl;
     };
 
     using FloatPolynomialFit4 = PolynomialFit4<float>;

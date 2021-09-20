@@ -14,24 +14,30 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(DirectoryImpl);
 
-CORE_TOOLS_EXPORT_SHARED_PTR(DirectoryImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Directory final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE Directory final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Directory);
+        NON_COPY_TYPE_DECLARE(Directory);
 
     public:
         explicit Directory(const System::String& directoryName);
+        ~Directory() noexcept = default;
+        Directory(const Directory& rhs) noexcept = delete;
+        Directory& operator=(const Directory& rhs) noexcept = delete;
+        Directory(Directory&& rhs) noexcept = delete;
+        Directory& operator=(Directory&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        IMPL_TYPE_DECLARE(FileBuffer);
+        PackageType impl;
     };
 }
 

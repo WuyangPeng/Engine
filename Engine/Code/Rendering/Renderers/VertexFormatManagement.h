@@ -10,12 +10,11 @@
 #include "Rendering/RenderingDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 #include "../Resources/VertexFormat.h"
 
-RENDERING_EXPORT_SHARED_PTR(VertexFormatManagementImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(VertexFormatManagementImpl); 
 
 namespace Rendering
 {
@@ -23,16 +22,20 @@ namespace Rendering
 	class PlatformVertexFormat;	
 	class Renderer;
 
-	class RENDERING_DEFAULT_DECLARE VertexFormatManagement : boost::noncopyable
+	class RENDERING_DEFAULT_DECLARE VertexFormatManagement 
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(VertexFormatManagement);
+            NON_COPY_TYPE_DECLARE(VertexFormatManagement);
 		using PlatformVertexFormatPtr = std::shared_ptr<PlatformVertexFormat>;
 	    using RendererPtr = std::shared_ptr<Renderer>;
 
 	public:
 		explicit VertexFormatManagement(RendererPtr ptr);
-		 
+            ~VertexFormatManagement() noexcept = default;
+                VertexFormatManagement(const VertexFormatManagement& rhs) noexcept = delete;
+            VertexFormatManagement& operator=(const VertexFormatManagement& rhs) noexcept = delete;
+                VertexFormatManagement(VertexFormatManagement&& rhs) noexcept = delete;
+            VertexFormatManagement& operator=(VertexFormatManagement&& rhs) noexcept = delete;
 		CLASS_INVARIANT_DECLARE;
 	
        // 顶点格式管理。顶点格式对象必须是已经分配，
@@ -46,7 +49,7 @@ namespace Rendering
        PlatformVertexFormatPtr GetResource (ConstVertexFormatSharedPtr vertexFormat);
 
 	private:
-		IMPL_TYPE_DECLARE(VertexFormatManagement);
+       PackageType impl;
 	};
 }
 

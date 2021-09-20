@@ -17,8 +17,7 @@
 
 #include <boost/noncopyable.hpp>
 RENDERING_EXPORT_UNIQUE_PTR(CameraManager);
-RENDERING_EXPORT_SHARED_PTR(CameraManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(CameraManagerImpl); 
 
 namespace CoreTools
 {
@@ -31,7 +30,7 @@ namespace Rendering
 	{
  
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(CameraManager);
+		NON_COPY_TYPE_DECLARE(CameraManager);
 		using ParentType = Singleton<CameraManager>;
 
 	private:
@@ -59,7 +58,7 @@ namespace Rendering
 
 	private:
 		static CameraManagerUniquePtr sm_CameraManager;
-		IMPL_TYPE_DECLARE(CameraManager);
+            PackageType impl;
 	};
 }
 

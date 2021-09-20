@@ -11,28 +11,32 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Visual.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
 #include <vector>
 
-RENDERING_EXPORT_SHARED_PTR(VisibleSetImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(VisibleSetImpl); 
 
 namespace Rendering
 {
     class Spatial;
 
-    class RENDERING_DEFAULT_DECLARE VisibleSet: private boost::noncopyable
+    class RENDERING_DEFAULT_DECLARE VisibleSet 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(VisibleSet);     
+        NON_COPY_TYPE_DECLARE(VisibleSet);     
 		using VisualContainer = std::vector<VisualSharedPtr>;
 		using VisualContainerIter = VisualContainer::iterator;
 
     public:
         VisibleSet ();
-        
+        ~VisibleSet() noexcept = default;
+        VisibleSet(const VisibleSet& rhs) noexcept = delete;
+        VisibleSet& operator=(const VisibleSet& rhs) noexcept = delete;
+        VisibleSet(VisibleSet&& rhs) noexcept = delete;
+        VisibleSet& operator=(VisibleSet&& rhs) noexcept = delete;
+
 		CLASS_INVARIANT_DECLARE;
 
         // 获得可见的元素集。
@@ -49,7 +53,7 @@ namespace Rendering
         VisualContainerIter end() noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(VisibleSet);
+        PackageType impl;
     };
 }
 

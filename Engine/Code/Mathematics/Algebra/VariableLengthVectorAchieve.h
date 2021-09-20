@@ -23,7 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(int size)
-    : m_Impl{ std::make_shared<ImplType>(size) }
+    : impl{ std::make_shared<ImplType>(size) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -33,7 +33,7 @@ Mathematics::VariableLengthVector<Real>::VariableLengthVector(int size)
 #include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(const ContainerType& container)
-    : m_Impl{ std::make_shared<ImplType>(container) }
+    : impl{ std::make_shared<ImplType>(container) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -43,7 +43,7 @@ Mathematics::VariableLengthVector<Real>::VariableLengthVector(const ContainerTyp
 #include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(const VariableLengthVector& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -67,16 +67,16 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 template <typename Real>
 void Mathematics::VariableLengthVector<Real>::Swap(VariableLengthVector& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
 template <typename Real>
 Mathematics::VariableLengthVector<Real>::VariableLengthVector(VariableLengthVector&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -89,7 +89,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -99,7 +99,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 template <typename Real>
 bool Mathematics::VariableLengthVector<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -111,7 +111,7 @@ int Mathematics::VariableLengthVector<Real>::GetSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetSize();
+    return impl->GetSize();
 }
 
 template <typename Real>
@@ -123,13 +123,13 @@ const Real& Mathematics::VariableLengthVector<Real>::operator[](int index) const
     MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "索引错误！");
 #endif  // MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
 
-    return (*m_Impl)[index];
+    return (*impl)[index];
 }
 
 template <typename Real>
 Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
 #ifdef MATHEMATICS_ASSERT_VARIABLE_VECTOR_OUT_OF_RANGE
     MATHEMATICS_ASSERTION_0(0 <= index && index < GetSize(), "索引错误！");
@@ -141,9 +141,9 @@ Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
 template <typename Real>
 void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->ResetSize(size);
+    return impl->ResetSize(size);
 }
 
 template <typename Real>
@@ -153,7 +153,7 @@ const Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<
 
     VariableLengthVector<Real> result{ *this };
 
-    result.m_Impl->Negative();
+    result.impl->Negative();
 
     return result;
 }
@@ -161,9 +161,9 @@ const Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator+=(const VariableLengthVector& rhs)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    m_Impl->Plus(*rhs.m_Impl);
+    impl->Plus(*rhs.impl);
 
     return *this;
 }
@@ -171,9 +171,9 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator-=(const VariableLengthVector& rhs)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    m_Impl->Minus(*rhs.m_Impl);
+    impl->Minus(*rhs.impl);
 
     return *this;
 }
@@ -181,9 +181,9 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator*=(Real scalar)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    for (auto& value : *m_Impl)
+    for (auto& value : *impl)
     {
         value *= scalar;
     }
@@ -194,11 +194,11 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 template <typename Real>
 Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     if (Math::sm_Epsilon < Math::FAbs(scalar))
     {
-        for (auto& value : *m_Impl)
+        for (auto& value : *impl)
         {
             value /= scalar;
         }
@@ -207,7 +207,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
     {
         MATHEMATICS_ASSERTION_1(false, "除零错误！");
 
-        for (auto& value : *m_Impl)
+        for (auto& value : *impl)
         {
             value = Math::sm_MaxReal;
         }
@@ -233,7 +233,7 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength() const
 
     auto squaredLength = Math::GetValue(0);
 
-    for (auto value : *m_Impl)
+    for (auto value : *impl)
     {
         squaredLength += value * value;
     }
@@ -246,13 +246,13 @@ Real Mathematics::VariableLengthVector<Real>::SquaredLength() const
 template <typename Real>
 void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     auto length = Length();
 
     if (epsilon < length)
     {
-        for (auto& value : *m_Impl)
+        for (auto& value : *impl)
         {
             value /= length;
         }
@@ -261,7 +261,7 @@ void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon)
     {
         MATHEMATICS_ASSERTION_2(false, "零向量不能正则化！");
 
-        for (auto& value : *m_Impl)
+        for (auto& value : *impl)
         {
             value = Math::GetValue(0);
         }
@@ -273,15 +273,15 @@ const typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematic
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetContainer();
+    return impl->GetContainer();
 }
 
 template <typename Real>
 void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& container)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetContainer(container);
+    return impl->SetContainer(container);
 }
 
 template <typename Real>
@@ -289,7 +289,7 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->begin();
+    return impl->begin();
 }
 
 template <typename Real>
@@ -297,23 +297,23 @@ typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathema
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->end();
+    return impl->end();
 }
 
 template <typename Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::begin() noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->begin();
+    return impl->begin();
 }
 
 template <typename Real>
 typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::end() noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->end();
+    return impl->end();
 }
 
 #endif  //  MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_ACHIEVE_H

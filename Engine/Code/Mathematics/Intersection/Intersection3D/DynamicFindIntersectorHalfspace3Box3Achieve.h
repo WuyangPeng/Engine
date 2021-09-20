@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon)
-    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, m_Impl{ std::make_shared<ImplType>(halfspace, box) }
+    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, impl{  halfspace, box  }
 {
     Find();
 
@@ -30,7 +30,7 @@ Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorH
 template <typename Real>
 bool Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid() )
         return true;
     else
         return false;
@@ -42,7 +42,7 @@ const Mathematics::Plane3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetHalfspace();
+    return impl->GetHalfspace();
 }
 
 template <typename Real>
@@ -50,7 +50,7 @@ const Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBox();
+    return impl->GetBox();
 }
 
 template <typename Real>
@@ -58,7 +58,7 @@ int Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::GetQuantity() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetQuantity();
+    return impl->GetQuantity();
 }
 
 template <typename Real>
@@ -66,14 +66,14 @@ const Mathematics::Vector3D<Real> Mathematics::DynamicFindIntersectorHalfspace3B
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetPoint(index);
+    return impl->GetPoint(index);
 }
 
 template <typename Real>
 void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
 {
-    const auto halfspace = m_Impl->GetHalfspace();
-    const auto box = m_Impl->GetBox();
+    const auto halfspace = impl->GetHalfspace();
+    const auto box = impl->GetBox();
 
     this->SetContactTime(Math::GetValue(0));
 
@@ -132,7 +132,7 @@ void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
     {
         value += diff;
     }
-    m_Impl->SetPoint(point);
+    impl->SetPoint(point);
     this->SetContactTime(contactTime);
     this->SetIntersectionType(IntersectionType::Other);
 }

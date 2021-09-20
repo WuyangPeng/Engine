@@ -10,7 +10,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #include <string>
 
@@ -21,7 +21,7 @@ namespace Framework
 	public:
 		using ClassType = WindowInstanceParameterImpl;
 		using String = System::String;
-		using HInstance = System::WindowHInstance;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		WindowInstanceParameterImpl(HInstance instance, const String& className);

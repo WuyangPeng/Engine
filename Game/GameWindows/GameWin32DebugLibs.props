@@ -7,10 +7,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <Link>
-      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);$(GameWin32DebugLib);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibsEnvironmentWin32DebugLib);$(EngineWin32DebugLib);../../../$(Platform)/$(Configuration)Windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(GameInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../$(Platform)/$(Configuration)Windows/$(ProjectName)D.dll" "$(GameTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
-  </ItemDefinitionGroup> 
+  </ItemDefinitionGroup>
 </Project>

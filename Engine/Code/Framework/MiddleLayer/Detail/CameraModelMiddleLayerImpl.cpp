@@ -20,9 +20,8 @@ using std::move;
 using std::make_shared;
 using namespace std::literals;
 
-Framework::CameraModelMiddleLayerImpl
-	::CameraModelMiddleLayerImpl() noexcept
-	:m_CameraMotion{ }, m_ObjectMotion{ }
+Framework::CameraModelMiddleLayerImpl ::CameraModelMiddleLayerImpl(MAYBE_UNUSED int count) noexcept
+    : m_CameraMotion{}, m_ObjectMotion{}
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

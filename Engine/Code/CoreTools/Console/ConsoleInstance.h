@@ -1,17 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 15:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/30 18:46)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_H
 
 #include "Flags/ConsoleColorsFlags.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
 
 namespace CoreTools
@@ -21,17 +21,17 @@ namespace CoreTools
     {
     public:
         using ClassType = ConsoleInstance;
-        using ConsoleHandle = System::WindowHandle;
+        using ConsoleHandle = System::WindowsHandle;
 
     public:
-        explicit ConsoleInstance(DisableNotThrow disableNotThrow);
+        explicit ConsoleInstance(MAYBE_UNUSED DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] ConsoleHandle GetHandle() noexcept;
+        NODISCARD ConsoleHandle GetHandle() noexcept;
 
     private:
-        ConsoleHandle m_Handle;
+        ConsoleHandle handle;
     };
 }
 

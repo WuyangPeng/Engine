@@ -16,17 +16,17 @@
 #include "SendSocket.h"
 #include "Network/NetworkMessage/MessageInterface.h"
 #include "Network/NetworkMessage/SocketManager.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <string>
 
-NETWORK_EXPORT_SHARED_PTR(ClientImpl);
+NETWORK_NON_COPY_EXPORT_IMPL(ClientImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE Client : public SendSocket
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Client);
+        NON_COPY_TYPE_DECLARE(Client);
         using ParentType = SendSocket;
 
     public:
@@ -54,7 +54,7 @@ namespace Network
         [[nodiscard]] uint64_t GetSocketID() const;
 
     private:
-        IMPL_TYPE_DECLARE(Client);
+        PackageType impl;
     };
 
     using ClientSharedPtr = std::shared_ptr<Client>;

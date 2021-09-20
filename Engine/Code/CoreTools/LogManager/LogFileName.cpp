@@ -18,11 +18,11 @@
 using std::make_shared;
 
 CoreTools::LogFileName::LogFileName(const System::TChar* fileName) noexcept
-    : m_Impl{}
+    : impl{}
 {
     try
     {
-        m_Impl = make_shared<ImplType>(fileName);
+        impl = make_shared<ImplType>(fileName);
     }
     catch (...)
     {
@@ -38,9 +38,9 @@ CoreTools::LogFileName::String CoreTools::LogFileName::GetFileName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
     {
-        return m_Impl->GetFileName();
+        return impl->GetFileName();
     }
     else
     {

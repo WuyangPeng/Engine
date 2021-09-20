@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:33)
+//	引擎版本：0.7.1.1 (2020/10/23 15:33)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_DETAIL_H
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T>
-CoreTools::ExplicitCast<T>::ExplicitCast(T value)
+CoreTools::ExplicitCast<T>::ExplicitCast(T value) noexcept
     : m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -29,7 +29,7 @@ bool CoreTools::ExplicitCast<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-CoreTools::ExplicitCast<T>::operator ValueType() const
+CoreTools::ExplicitCast<T>::operator ValueType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -37,7 +37,7 @@ CoreTools::ExplicitCast<T>::operator ValueType() const
 }
 
 template <typename T>
-CoreTools::ExplicitCast<T const&>::ExplicitCast(T const& value)
+CoreTools::ExplicitCast<T const&>::ExplicitCast(T const& value) noexcept
     : m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -52,7 +52,7 @@ bool CoreTools::ExplicitCast<T const&>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-CoreTools::ExplicitCast<T const&>::operator T const &() const
+CoreTools::ExplicitCast<T const&>::operator T const &() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -60,7 +60,7 @@ CoreTools::ExplicitCast<T const&>::operator T const &() const
 }
 
 template <typename T>
-CoreTools::ExplicitCast<T const*>::ExplicitCast(T const* value)
+CoreTools::ExplicitCast<T const*>::ExplicitCast(T const* value) noexcept
     : m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -75,7 +75,7 @@ bool CoreTools::ExplicitCast<T const*>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-CoreTools::ExplicitCast<T const*>::operator T const *() const
+CoreTools::ExplicitCast<T const*>::operator T const *() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

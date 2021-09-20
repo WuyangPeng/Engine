@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:30)
+//	引擎版本：0.7.1.1 (2020/10/23 15:30)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_H
@@ -24,12 +24,12 @@ namespace CoreTools
 
     public:
         template <typename V>
-        ValueScope(Reference value, V const& set);
+        ValueScope(Reference value, V const& set) noexcept(std::is_arithmetic_v<T>);
 
         template <typename V1, typename V2>
-        ValueScope(Reference value, V1 const& set, V2 const& revert);
+        ValueScope(Reference value, V1 const& set, V2 const& revert) noexcept(std::is_arithmetic_v<T>);
 
-        ~ValueScope();
+        ~ValueScope() noexcept;
 
         ValueScope(const ValueScope&) = delete;
         ValueScope& operator=(const ValueScope&) = delete;

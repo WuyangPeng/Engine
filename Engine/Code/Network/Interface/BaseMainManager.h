@@ -16,17 +16,16 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 NETWORK_EXPORT_UNIQUE_PTR(BaseMainManager);
-NETWORK_EXPORT_SHARED_PTR(BaseMainManagerImpl);
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
+NETWORK_NON_COPY_EXPORT_IMPL(BaseMainManagerImpl); 
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE BaseMainManager final : public CoreTools::Singleton<BaseMainManager>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(BaseMainManager);
+        NON_COPY_TYPE_DECLARE(BaseMainManager);
         using ParentType = Singleton<BaseMainManager>;
 
     private:
@@ -37,6 +36,11 @@ namespace Network
 
     public:
         explicit BaseMainManager(const ConfigurationStrategy& configurationStrategy, BaseMainManagerCreate baseMainManagerCreate);
+        ~BaseMainManager() noexcept = default;
+        BaseMainManager(const BaseMainManager& rhs) noexcept = delete;
+        BaseMainManager& operator=(const BaseMainManager& rhs) noexcept = delete;
+        BaseMainManager(BaseMainManager&& rhs) noexcept = delete;
+        BaseMainManager& operator=(BaseMainManager&& rhs) noexcept = delete;
 
         static void Create(const ConfigurationStrategy& configurationStrategy);
         static void Destroy() noexcept;
@@ -59,7 +63,7 @@ namespace Network
 
     private:
         static BaseMainManagerUniquePtr sm_BaseMainManager;
-        IMPL_TYPE_DECLARE(BaseMainManager);
+        PackageType impl;
     };
 }
 

@@ -12,6 +12,7 @@
 #include "Session.h"
 #include "Detail/SessionFactory.h"
 #include "Detail/SessionImpl.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -19,18 +20,18 @@
 using std::string;
 
 Database::Session::Session(const ConfigurationStrategy& configurationStrategy)
-    : m_Impl{ SessionFactory::Create(configurationStrategy) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
 Database::Session::Session(const DatabaseObject& databaseObject)
-    : m_Impl{ SessionFactory::Create(databaseObject) }
+    : impl{ CoreTools::ImplCreateUseFactory::Default, databaseObject }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Database, Session)
+CLASS_INVARIANT_STUB_DEFINE(Database, Session)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Database, Session, GetConfigurationStrategy, Database::ConfigurationStrategy)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Database, Session, GetSchemaContainer, Database::Session::SchemaContainer)
@@ -40,38 +41,38 @@ Database::Session::SessionWeakPtr Database::Session::GetImplType() const noexcep
 {
     DATABASE_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl;
+    return SessionWeakPtr{};
 }
 #endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 
 Database::Session::ResultPtr Database::Session::ExecuteResult(const string& findStatement, int bindStatement)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->ExecuteResult(findStatement, bindStatement);
+    return impl->ExecuteResult(findStatement, bindStatement);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, Session, ExecuteResult, string, Database::Session::ResultPtr)
 
 Database::Session::ResultPtr Database::Session::ExecuteResult(const string& findStatement, const string& bindStatement)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->ExecuteResult(findStatement, bindStatement);
+    return impl->ExecuteResult(findStatement, bindStatement);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Database, Session, Execute, string, void)
 
 void Database::Session::Execute(const string& findStatement, const string& bindStatement)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Execute(findStatement, bindStatement);
+    return impl->Execute(findStatement, bindStatement);
 }
 
 void Database::Session::Execute(const string& findStatement, int bindStatement)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Execute(findStatement, bindStatement);
+    return impl->Execute(findStatement, bindStatement);
 }

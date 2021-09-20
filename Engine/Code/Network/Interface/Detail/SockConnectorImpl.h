@@ -16,12 +16,13 @@
 
 namespace Network
 {
+    class SockConnectorFactory;
     class NETWORK_HIDDEN_DECLARE SockConnectorImpl
     {
     public:
         using ClassType = SockConnectorImpl;
         using SockConnectorPtr = std::shared_ptr<ClassType>;
-
+         using FactoryType = SockConnectorFactory;
     public:
         SockConnectorImpl() noexcept = default;
         virtual ~SockConnectorImpl() noexcept = default;

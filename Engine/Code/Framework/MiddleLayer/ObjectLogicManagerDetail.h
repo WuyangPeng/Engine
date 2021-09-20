@@ -35,7 +35,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::PreCreate(const EnvironmentDirectory& environmentDirectory)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::PreCreate(environmentDirectory) && 
 		m_ObjectLogic.PreCreate(environmentDirectory) &&
@@ -53,7 +53,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::Initialize()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Initialize() &&
 		m_ObjectLogic.Initialize() &&
@@ -71,7 +71,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::PreIdle()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PreIdle();
 	m_ObjectLogic.PreIdle();
@@ -82,7 +82,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::Terminate()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Terminate();
 	m_ObjectLogic.Terminate();
@@ -93,7 +93,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::Create()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Create() && m_ObjectLogic.Create() && m_ArtificialIntellegence.Create())
 	{
@@ -109,7 +109,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Destroy() && m_ObjectLogic.Destroy() && m_ArtificialIntellegence.Destroy())
 	{
@@ -125,7 +125,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 bool Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::Idle(int64_t timeDelta)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (ParentType::Idle(timeDelta) && m_ObjectLogic.Idle(timeDelta) && m_ArtificialIntellegence.Idle(timeDelta))
 	{
@@ -141,7 +141,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::SetSystemManager(const MiddleLayerInterfaceSharedPtr& systemManager)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto manager = systemManager;
 	
@@ -154,7 +154,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::SetPhysicalModellingManager(const MiddleLayerInterfaceSharedPtr& physicalModellingManager)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto manager = physicalModellingManager;
 
@@ -167,7 +167,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::SetMessageManager(const MiddleLayerInterfaceSharedPtr& messageManager)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto manager = messageManager;
 
@@ -180,7 +180,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::SetInputManager(const MiddleLayerInterfaceSharedPtr& inputManager)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto manager = inputManager;
 
@@ -193,7 +193,7 @@ template<typename ObjectLogic, typename  ArtificialIntellegence>
 void Framework::ObjectLogicManager<ObjectLogic, ArtificialIntellegence>
 	::SetNetworkManager(const MiddleLayerInterfaceSharedPtr& networkManager)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	auto manager = networkManager;
 

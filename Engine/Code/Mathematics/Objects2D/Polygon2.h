@@ -35,7 +35,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Polygon2Impl = Polygon2Impl<Real>;
-        COPY_UNSHARE_CLASSES_BASE_TYPE_DECLARE(Polygon2, DESTRUCTOR_DEFAULT);
+
+    protected:
+        virtual void Swap(Polygon2& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Polygon2);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        virtual ~Polygon2() noexcept = default;
+        Polygon2(const Polygon2& rhs);
+        virtual Polygon2& operator=(const Polygon2& rhs);
+        Polygon2(Polygon2&& rhs) noexcept;
+        virtual Polygon2& operator=(Polygon2&& rhs) noexcept;
 
         using Math = Math<Real>;
         using Vector2D = Vector2D<Real>;
@@ -62,7 +73,10 @@ namespace Mathematics
         [[nodiscard]] Real ComputeArea() const;
 
     private:
-        IMPL_TYPE_DECLARE(Polygon2);
+        using Polygon2ImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        Polygon2ImplPtr impl;
     };
 
     using FloatPolygon2 = Polygon2<float>;

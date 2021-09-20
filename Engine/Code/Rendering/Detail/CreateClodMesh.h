@@ -12,8 +12,8 @@
 #include "CollapseRecordArray.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Rendering/SceneGraph/TrianglesMesh.h"
-
-RENDERING_EXPORT_SHARED_PTR(CreateClodMeshImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+RENDERING_PERFORMANCE_UNSHARED_EXPORT_IMPL(CreateClodMeshImpl);
 
 // CreateClodMesh计算CollapseRecord的阵列，它表示在一个三角形网格边折叠。
 // 一个边<V0,V1>折叠是由V0（以下简称“keep”顶点）更换V1（“throw”顶点）。
@@ -36,7 +36,7 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE CreateClodMesh
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(CreateClodMesh);
+            PERFORMANCE_UNSHARED_TYPE_DECLARE(CreateClodMesh);
 
 	public:
 		explicit CreateClodMesh(TrianglesMeshSharedPtr mesh);
@@ -46,7 +46,7 @@ namespace Rendering
 		CollapseRecordArraySharedPtr GetCollapseRecordArray() const;
 	
 	private:		
-		IMPL_TYPE_DECLARE(CreateClodMesh);
+		PackageType impl;
 	};
 
 }

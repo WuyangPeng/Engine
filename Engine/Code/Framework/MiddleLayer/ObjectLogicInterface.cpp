@@ -16,12 +16,12 @@ using std::make_shared;
  
 Framework::ObjectLogicInterface
 	::ObjectLogicInterface(MiddleLayerPlatform middleLayerPlatform)
-	:ParentType{ middleLayerPlatform }, m_Impl{ make_shared<ImplType>(System::EnumCastUnderlying(ObjectLogicMiddleLayer::Count)) }
+	:ParentType{ middleLayerPlatform }, impl{  System::EnumCastUnderlying(ObjectLogicMiddleLayer::Count)  }
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 } 
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Framework, ObjectLogicInterface) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Framework, ObjectLogicInterface) 
 
 ENGINE_MIDDLE_LAYER_CHILD_COMPONENTS_DEFINE(Framework, ObjectLogic, ObjectLogic, Input)
 ENGINE_MIDDLE_LAYER_CHILD_COMPONENTS_DEFINE(Framework, ObjectLogic, ObjectLogic, Network)

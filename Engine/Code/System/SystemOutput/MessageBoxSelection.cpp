@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/22 9:20)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/22 11:29)
 
 #include "System/SystemExport.h"
 
@@ -17,34 +17,41 @@
 
 namespace System
 {
-    static constexpr MessageBoxFlagsData g_DefaultMessageBoxFlagsData{ MessageBoxType::YesNoCancel, MessageBoxIcon::Error, MessageBoxDefault::Button1,
-                                                                       MessageBoxMode::ApplModal, MessageBoxMisc::TopMost };
+    static constexpr MessageBoxFlagsData defaultMessageBoxFlagsData{ MessageBoxType::YesNoCancel,
+                                                                     MessageBoxIcon::Error,
+                                                                     MessageBoxDefault::Button1,
+                                                                     MessageBoxMode::ApplModal,
+                                                                     MessageBoxMisc::TopMost };
 }
 
-System::DialogBoxCommand System::MessageBoxSelectionWithChar([[maybe_unused]] const char* text, [[maybe_unused]] const char* caption) noexcept
+System::DialogBoxCommand System::MessageBoxSelectionWithChar(const char* text, const char* caption) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto selection = ::MessageBoxA(nullptr, text, caption, g_DefaultMessageBoxFlagsData.GetFlag());
+    const auto selection = ::MessageBoxA(nullptr, text, caption, defaultMessageBoxFlagsData.GetFlag());
 
     return UnderlyingCastEnum<DialogBoxCommand>(selection);
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<const char*, const char*>(text, caption);
 
     return DialogBoxCommand::PlatformUnknown;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::DialogBoxCommand System::MessageBoxSelectionWithWChar([[maybe_unused]] const wchar_t* text, [[maybe_unused]] const wchar_t* caption) noexcept
+System::DialogBoxCommand System::MessageBoxSelectionWithWChar(const wchar_t* text, const wchar_t* caption) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    const auto selection = ::MessageBoxW(nullptr, text, caption, g_DefaultMessageBoxFlagsData.GetFlag());
+    const auto selection = ::MessageBoxW(nullptr, text, caption, defaultMessageBoxFlagsData.GetFlag());
 
     return UnderlyingCastEnum<DialogBoxCommand>(selection);
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<const wchar_t*, const wchar_t*>(text, caption);
 
     return DialogBoxCommand::PlatformUnknown;
 
@@ -53,10 +60,13 @@ System::DialogBoxCommand System::MessageBoxSelectionWithWChar([[maybe_unused]] c
 
 System::DialogBoxCommand System::MessageBoxSelectionWithTChar(const TChar* text, const TChar* caption) noexcept
 {
-    return MessageBoxSelection(nullptr, text, caption, g_DefaultMessageBoxFlagsData);
+    return MessageBoxSelection(nullptr, text, caption, defaultMessageBoxFlagsData);
 }
 
-System::DialogBoxCommand System::MessageBoxSelection([[maybe_unused]] WindowHWnd hwnd, [[maybe_unused]] const TChar* text, [[maybe_unused]] const TChar* caption, [[maybe_unused]] const MessageBoxFlagsData& flagsData) noexcept
+System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
+                                                     const TChar* text,
+                                                     const TChar* caption,
+                                                     const MessageBoxFlagsData& flagsData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -66,13 +76,18 @@ System::DialogBoxCommand System::MessageBoxSelection([[maybe_unused]] WindowHWnd
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
+    NullFunction<WindowsHWnd, const TChar*, const TChar*, MessageBoxFlagsData>(hwnd, text, caption, flagsData);
+
     return DialogBoxCommand::PlatformUnknown;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::DialogBoxCommand System::MessageBoxSelection([[maybe_unused]] WindowHWnd hwnd, [[maybe_unused]] const TChar* text, [[maybe_unused]] const TChar* caption,
-                                                     [[maybe_unused]] const MessageBoxFlagsData& flagsData, [[maybe_unused]] const LanguageIDData& languageIDData) noexcept
+System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
+                                                     const TChar* text,
+                                                     const TChar* caption,
+                                                     const MessageBoxFlagsData& flagsData,
+                                                     const LanguageIDData& languageIDData) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -81,6 +96,8 @@ System::DialogBoxCommand System::MessageBoxSelection([[maybe_unused]] WindowHWnd
     return UnderlyingCastEnum<DialogBoxCommand>(selection);
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHWnd, const TChar*, const TChar*, MessageBoxFlagsData, LanguageIDData>(hwnd, text, caption, flagsData, languageIDData);
 
     return DialogBoxCommand::PlatformUnknown;
 

@@ -10,7 +10,7 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Fwd/WindowFlagsFwd.h"
+#include "System/Windows/Fwd/WindowsFlagsFwd.h"
 #include "Framework/WindowCreate/WindowPoint.h"
 
 #include <string>
@@ -22,9 +22,9 @@ namespace Framework
 	public:
 		using ClassType = WindowCreateParameterImpl;
 		using String = System::String;
-		using HWnd = System::WindowHWnd;
-		using HMenu = System::WindowHMenu;
-		using WindowStyles = System::WindowStyles;
+		using HWnd = System::WindowsHWnd;
+		using HMenu = System::WindowsHMenu;
+		using WindowStyles = System::WindowsStyles;
 
 	public:
 		WindowCreateParameterImpl(const String& windowsName, WindowStyles style, HWnd parent, HMenu menu, const WindowPoint& leftTopCorner);

@@ -38,7 +38,7 @@ using std::array;
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatHomogeneousPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatHomogeneousPoint::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::FloatHomogeneousPoint::sm_PointSize;
@@ -51,7 +51,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatHomogeneousPoint& 
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatHomogeneousPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -59,7 +59,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatHomogeneous
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleHomogeneousPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleHomogeneousPoint::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::DoubleHomogeneousPoint::sm_PointSize;
@@ -72,7 +72,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleHomogeneousPoint&
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleHomogeneousPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -80,7 +80,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleHomogeneou
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector2D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatVector2D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::FloatVector2D::sm_PointSize;
@@ -93,7 +93,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector2D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector2D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -101,7 +101,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector2D& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector2D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleVector2D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::DoubleVector2D::sm_PointSize;
@@ -114,7 +114,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector2D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector2D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -122,7 +122,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector2D& 
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector3D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatVector3D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::FloatVector3D::sm_PointSize;
@@ -135,7 +135,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector3D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector3D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -143,7 +143,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector3D& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector3D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleVector3D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::DoubleVector3D::sm_PointSize;
@@ -156,7 +156,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector3D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector3D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -164,7 +164,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector3D& 
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector4D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatVector4D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::FloatVector4D::sm_PointSize;
@@ -177,7 +177,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector4D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector4D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -185,7 +185,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector4D& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector4D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleVector4D::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::DoubleVector4D::sm_PointSize;
@@ -198,7 +198,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector4D& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector4D& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -206,7 +206,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector4D& 
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatAVector::ArrayType::value_type;
     constexpr auto vectorSize = Mathematics::FloatAVector::sm_AVectorSize;
@@ -219,7 +219,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAVector& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -227,7 +227,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAVector& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleAVector::ArrayType::value_type;
     constexpr auto vectorSize = Mathematics::DoubleAVector::sm_AVectorSize;
@@ -240,7 +240,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAVector& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -248,7 +248,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAVector& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatAPoint::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::FloatAPoint::sm_APointSize;
@@ -261,7 +261,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAPoint& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -269,7 +269,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAPoint& dat
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleAPoint::ArrayType::value_type;
     constexpr auto pointSize = Mathematics::DoubleAPoint::sm_APointSize;
@@ -282,7 +282,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAPoint& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAPoint& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -290,7 +290,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAPoint& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableLengthVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatVariableLengthVector::ContainerType::value_type;
 
@@ -302,7 +302,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableLengthVect
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableLengthVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainerWithNumber(datum.GetContainer());
 }
@@ -310,7 +310,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableLen
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableLengthVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleVariableLengthVector::ContainerType::value_type;
 
@@ -322,7 +322,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableLengthVec
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableLengthVector& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainerWithNumber(datum.GetContainer());
 }
@@ -330,7 +330,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableLe
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPlane& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ElementType = Mathematics::FloatPlane::ElementType;
     using AVector = Mathematics::FloatPlane::AVector;
@@ -349,7 +349,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPlane& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPlane& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(datum.GetEpsilon());
     WriteAggregate(datum.GetNormal());
@@ -359,7 +359,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPlane& datu
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePlane& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ElementType = Mathematics::DoublePlane::ElementType;
     using AVector = Mathematics::DoublePlane::AVector;
@@ -378,7 +378,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePlane& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePlane& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(datum.GetEpsilon());
     WriteAggregate(datum.GetNormal());
@@ -388,7 +388,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePlane& dat
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPolynomial& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatPolynomial::ContainerType::value_type;
 
@@ -400,7 +400,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPolynomial& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPolynomial& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainerWithNumber(datum.GetValue());
 }
@@ -408,7 +408,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPolynomial&
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePolynomial& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoublePolynomial::ContainerType::value_type;
 
@@ -420,7 +420,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePolynomial& datum
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePolynomial& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainerWithNumber(datum.GetValue());
 }
@@ -428,7 +428,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePolynomial
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatMatrix2::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::FloatMatrix2::sm_MatrixSize;
@@ -441,7 +441,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix2& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -449,7 +449,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix2& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleMatrix2::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::DoubleMatrix2::sm_MatrixSize;
@@ -462,7 +462,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix2& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -470,7 +470,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix2& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatMatrix3::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::FloatMatrix3::sm_MatrixSize;
@@ -483,7 +483,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix3& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -491,7 +491,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix3& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleMatrix3::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::DoubleMatrix3::sm_MatrixSize;
@@ -504,7 +504,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix3& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -512,7 +512,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix3& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatMatrix4::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::FloatMatrix4::sm_MatrixSize;
@@ -525,7 +525,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix4& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -533,7 +533,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix4& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleMatrix4::ArrayType::value_type;
     constexpr auto matrixSize = Mathematics::DoubleMatrix4::sm_MatrixSize;
@@ -546,7 +546,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix4& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -554,7 +554,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix4& d
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatMatrix::EntryType::value_type;
     constexpr auto matrixSize = Mathematics::FloatMatrix::sm_EntrySize;
@@ -567,7 +567,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetRowMajor());
 }
@@ -575,7 +575,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix& dat
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleMatrix::EntryType::value_type;
     constexpr auto matrixSize = Mathematics::DoubleMatrix::sm_EntrySize;
@@ -588,7 +588,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetRowMajor());
 }
@@ -596,7 +596,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix& da
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatVariableMatrix::ContainerType::value_type;
 
@@ -610,7 +610,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableMatrix& da
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(datum.GetRowsNumber());
     Write(datum.GetColumnsNumber());
@@ -620,7 +620,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableMat
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleVariableMatrix::ContainerType::value_type;
 
@@ -634,7 +634,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableMatrix& d
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     Write(datum.GetRowsNumber());
     Write(datum.GetColumnsNumber());
@@ -644,7 +644,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableMa
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatBandedMatrix::ContainerType::value_type;
 
@@ -675,7 +675,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrix& datu
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto size = datum.GetSize();
     const auto lowerBandsNumber = datum.GetLowerBandsNumber();
@@ -703,7 +703,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatri
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleBandedMatrix::ContainerType::value_type;
 
@@ -734,7 +734,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrix& dat
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatrix& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto size = datum.GetSize();
     const auto lowerBandsNumber = datum.GetLowerBandsNumber();
@@ -762,7 +762,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatr
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrixSolve& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatBandedMatrixSolve::ContainerType::value_type;
 
@@ -794,7 +794,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrixSolve&
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatrixSolve& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto size = datum.GetSize();
     const auto lowerBandsNumber = datum.GetLowerBandsNumber();
@@ -823,7 +823,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatri
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrixSolve& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleBandedMatrixSolve::ContainerType::value_type;
 
@@ -855,7 +855,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrixSolve
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatrixSolve& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto size = datum.GetSize();
     const auto lowerBandsNumber = datum.GetLowerBandsNumber();
@@ -884,7 +884,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatr
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatQuaternion::ArrayType::value_type;
     constexpr auto entrySize = Mathematics::FloatQuaternion::sm_EntrySize;
@@ -897,7 +897,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatQuaternion& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -905,7 +905,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatQuaternion&
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleQuaternion::ArrayType::value_type;
     constexpr auto entrySize = Mathematics::DoubleQuaternion::sm_EntrySize;
@@ -918,7 +918,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleQuaternion& datum
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -926,7 +926,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleQuaternion
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::FloatAQuaternion::ArrayType::value_type;
     constexpr auto entrySize = Mathematics::FloatAQuaternion::sm_EntrySize;
@@ -939,7 +939,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAQuaternion& datum
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -947,7 +947,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAQuaternion
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::DoubleAQuaternion::ArrayType::value_type;
     constexpr auto entrySize = Mathematics::DoubleAQuaternion::sm_EntrySize;
@@ -960,7 +960,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAQuaternion& datu
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAQuaternion& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     WriteContainer(datum.GetCoordinate());
 }
@@ -968,7 +968,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAQuaternio
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::Float1& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::Float1::TupleType;
 
@@ -980,7 +980,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float1& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float1& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     const auto value = datum[0];
 
@@ -990,7 +990,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float1& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::Float2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::Float1::TupleType;
     constexpr auto dimension = Mathematics::Float2::TupleDimension;
@@ -1006,7 +1006,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float2& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float2& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     constexpr auto dimension = Mathematics::Float2::TupleDimension;
 
@@ -1019,7 +1019,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float2& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::Float3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::Float3::TupleType;
     constexpr auto dimension = Mathematics::Float3::TupleDimension;
@@ -1035,7 +1035,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float3& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float3& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     constexpr auto dimension = Mathematics::Float3::TupleDimension;
 
@@ -1048,7 +1048,7 @@ void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float3& datum)
 template <>
 void CoreTools::BufferSource::ReadAggregate(Mathematics::Float4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     using ValueType = Mathematics::Float4::TupleType;
     constexpr auto dimension = Mathematics::Float4::TupleDimension;
@@ -1064,7 +1064,7 @@ void CoreTools::BufferSource::ReadAggregate(Mathematics::Float4& datum)
 template <>
 void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Float4& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
     constexpr auto dimension = Mathematics::Float4::TupleDimension;
 

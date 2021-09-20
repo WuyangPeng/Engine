@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 14:47)
+//	引擎版本：0.7.1.1 (2020/10/23 14:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,20 +21,26 @@ using std::string;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-CoreTools::OStreamShared::OStreamShared(bool isCout)
-    : m_Impl{ make_shared<ImplType>(isCout) }
+CoreTools::OStreamShared::OStreamShared()
+    : impl{ true }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 #include STSTEM_WARNING_POP
 
-CoreTools::OStreamShared::OStreamShared(const string& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+CoreTools::OStreamShared::OStreamShared(bool isCout)
+    : impl{ isCout }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, OStreamShared)
+CoreTools::OStreamShared::OStreamShared(const string& fileName)
+    : impl{ fileName }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, OStreamShared)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, GetStream, ostream&)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, OStreamShared, IsCout, bool)

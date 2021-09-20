@@ -69,7 +69,7 @@ template <template<typename> class Build, typename Process>
 void Framework::MacintoshMainFunctionHelper<Build, Process>
 	::Destroy()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	if (MacintoshMainFunctionSchedule::Failure < m_MacintoshMainFunctionSchedule)
 	{

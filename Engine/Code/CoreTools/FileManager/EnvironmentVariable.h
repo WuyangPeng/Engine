@@ -15,30 +15,35 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 
-#include <boost/noncopyable.hpp>
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(EnvironmentVariableImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(EnvironmentVariableImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE EnvironmentVariable final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE EnvironmentVariable final
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(EnvironmentVariable);
+        NON_COPY_TYPE_DECLARE(EnvironmentVariable);
         using String = System::String;
 
     public:
         explicit EnvironmentVariable(const String& variableName);
+        ~EnvironmentVariable() noexcept = default;
+        EnvironmentVariable(const EnvironmentVariable& rhs) noexcept = delete;
+        EnvironmentVariable& operator=(const EnvironmentVariable& rhs) noexcept = delete;
+        EnvironmentVariable(EnvironmentVariable&& rhs) noexcept = delete;
+        EnvironmentVariable& operator=(EnvironmentVariable&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] String GetVariable() const;
 
     private:
-        IMPL_TYPE_DECLARE(EnvironmentVariable);
+        PackageType impl;
     };
 }
 

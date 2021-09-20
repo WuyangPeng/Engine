@@ -16,10 +16,12 @@
 
 namespace Network
 {
+    class HandleSetIteratorFactory;
     class NETWORK_HIDDEN_DECLARE HandleSetIteratorImpl
     {
     public:
         using ClassType = HandleSetIteratorImpl;
+         using FactoryType = HandleSetIteratorFactory; 
 
     public:
         HandleSetIteratorImpl() noexcept = default;

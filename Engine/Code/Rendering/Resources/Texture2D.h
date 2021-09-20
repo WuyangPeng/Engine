@@ -9,7 +9,7 @@
 
 #include "Texture.h"
 
-RENDERING_EXPORT_SHARED_PTR(Texture2DImpl);
+EXPORT_SHARED_PTR(Rendering, Texture2DImpl, RENDERING_DEFAULT_DECLARE);
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -18,7 +18,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Texture2D : public Texture
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Texture2D, DESTRUCTOR_STATEMENT);
+        void Swap(Texture2D& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(Texture2D);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~Texture2D() noexcept;
+        Texture2D(const Texture2D& rhs);
+        Texture2D& operator=(const Texture2D& rhs);
+        Texture2D(Texture2D&& rhs) noexcept;
+        Texture2D& operator=(Texture2D&& rhs) noexcept;
 		using ParentType = Texture;
 		using Texture2DSharedPtr = std::shared_ptr<ClassType>;
 		using ConstTexture2DSharedPtr = std::shared_ptr<const ClassType>;
@@ -63,7 +72,7 @@ namespace Rendering
 		  TextureSharedPtr Clone() const override;
                 ObjectInterfaceSharedPtr CloneObject() const override;
     private:
-		IMPL_TYPE_DECLARE(Texture2D);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)   

@@ -9,7 +9,7 @@
 #include "ShaderManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 
-Rendering::ShaderManagerImpl ::ShaderManagerImpl() noexcept
+Rendering::ShaderManagerImpl ::ShaderManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_VertexShaderProfile{ ShaderFlags::VertexShaderProfile::None }, m_PixelShaderProfile{ ShaderFlags::PixelShaderProfile::None }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;

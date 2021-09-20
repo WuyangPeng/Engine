@@ -30,7 +30,7 @@ Rendering::OpenGLVertexBuffer ::OpenGLVertexBuffer([[maybe_unused]] Renderer* re
 void Rendering::OpenGLVertexBuffer
     ::Init(const VertexBuffer* vertexBuffer)
 {
-    m_Buffer = System::GlBufferData(vertexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(vertexBuffer->GetUsage())]);
+  //  m_Buffer = System::GLBufferData(vertexBuffer->GetNumBytes(),g_OpenGLBufferUsage[System::EnumCastUnderlying(vertexBuffer->GetUsage())]);
 
 	BufferLockManager<ClassType> manager(*this);
 	void* data = manager.Lock(BufferLocking::WriteOnly);
@@ -43,7 +43,7 @@ Rendering::OpenGLVertexBuffer
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
     
-    m_Buffer = System::GlDeleteBuffers(m_Buffer);
+   // m_Buffer = System::GLDeleteBuffers(m_Buffer);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -61,7 +61,7 @@ void Rendering::OpenGLVertexBuffer ::Enable([[maybe_unused]] Renderer* renderer,
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    System::GlBindBuffer(m_Buffer);
+   // System::GLBindBuffer(m_Buffer);
     
  
 }
@@ -70,7 +70,7 @@ void Rendering::OpenGLVertexBuffer ::Disable([[maybe_unused]] Renderer* renderer
 {
     RENDERING_CLASS_IS_VALID_1;
     
-    System::GlBindBuffer(0);
+   // System::GLBindBuffer(0);
     
  
 }
@@ -79,10 +79,12 @@ void* Rendering::OpenGLVertexBuffer
     ::Lock (BufferLocking mode) noexcept
 {
     RENDERING_CLASS_IS_VALID_1;
+    mode;
+ //   GLvoid* videoMemory = System::GetGLMapBuffer(m_Buffer,g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
 
-    GLvoid* videoMemory = System::GetGlMapBuffer(m_Buffer,g_OpenGLBufferLocking[System::EnumCastUnderlying(mode)]);
+  //  return videoMemory;
 
-    return videoMemory;
+    return nullptr;
 }
 
 void Rendering::OpenGLVertexBuffer
@@ -90,7 +92,7 @@ void Rendering::OpenGLVertexBuffer
 {
     RENDERING_CLASS_IS_VALID_1;
     
-	System::SetGlUnmapBuffer(m_Buffer);
+//	System::SetGLUnmapBuffer(m_Buffer);
 }
 
 #include STSTEM_WARNING_POP

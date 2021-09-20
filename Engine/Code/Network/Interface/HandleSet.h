@@ -15,15 +15,15 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/ACEWrappers/Using/ACEUsing.h"
 #include "Network/Interface/NetworkInternalFwd.h"
-
-NETWORK_EXPORT_SHARED_PTR(HandleSetImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(HandleSet,HandleSetImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE HandleSet final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(HandleSet);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(HandleSet);
 
     public:
         explicit HandleSet(const ConfigurationStrategy& configurationStrategy);
@@ -47,7 +47,7 @@ namespace Network
         [[nodiscard]] bool Select(int width);
 
     private:
-        IMPL_TYPE_DECLARE(HandleSet);
+        PackageType impl;
     };
 }
 

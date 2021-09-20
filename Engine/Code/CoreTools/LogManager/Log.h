@@ -15,19 +15,19 @@
 
 #include "LogManagerFwd.h"
 #include "System/Helper/UnicodeUsing.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(Log);
-CORE_TOOLS_EXPORT_SHARED_PTR(LogImpl);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogImpl);
 
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE Log final : public CoreTools::Singleton<Log>
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Log);
+        NON_COPY_TYPE_DECLARE(Log);
         using ParentType = Singleton<Log>;
         using String = System::String;
 
@@ -64,7 +64,7 @@ namespace CoreTools
 
     private:
         static LogUniquePtr sm_Log;
-        IMPL_TYPE_DECLARE(Log);
+        PackageType impl;
     };
 }
 

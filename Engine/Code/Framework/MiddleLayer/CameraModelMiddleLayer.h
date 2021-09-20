@@ -15,14 +15,14 @@
 #include "Mathematics/Algebra/AVector.h"
 #include "Rendering/DataTypes/Transform.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(CameraModelMiddleLayerImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(CameraModelMiddleLayerImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE CameraModelMiddleLayer : public ModelMiddleLayer
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(CameraModelMiddleLayer);
+		NON_COPY_TYPE_DECLARE(CameraModelMiddleLayer);
 		using ParentType = ModelMiddleLayer;
 		using APoint = Mathematics::FloatAPoint;
 		using AVector = Mathematics::FloatAVector;
@@ -95,7 +95,7 @@ namespace Framework
 		void InitializeObjectMotion();
 
 	private:
-		IMPL_TYPE_DECLARE(CameraModelMiddleLayer);
+                PackageType impl;
 		int64_t m_TimeDelta;
 	};
 

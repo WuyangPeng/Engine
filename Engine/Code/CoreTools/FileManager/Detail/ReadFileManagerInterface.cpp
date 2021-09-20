@@ -11,5 +11,11 @@
 
 #include "ReadFileManagerInterface.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "FileManagerFactory.h"
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadFileManagerInterface)
+
+CoreTools::ReadFileManagerInterface::ReadFileManageInterfacePtr CoreTools::ReadFileManagerInterface::Create(const String& fileName)
+{
+    return FileManagerFactory::CreateReadFileManage(fileName);
+}

@@ -5,14 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 16:02)
+//	引擎版本：0.7.1.1 (2020/10/26 16:02)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_DETAIL_H
 
 #include "StateEntity.h"
+#include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename Subclass, typename EventType>
 CoreTools::StateEntity<Subclass, EventType>::StateEntity(StateSharedPtr currentState)
     : ParentType{}, m_StateMachineBase{ currentState }
@@ -20,13 +22,14 @@ CoreTools::StateEntity<Subclass, EventType>::StateEntity(StateSharedPtr currentS
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
+
 template <typename Subclass, typename EventType>
 CoreTools::StateEntity<Subclass, EventType>::StateEntity(StateSharedPtr currentState, StateSharedPtr globalState)
     : ParentType{}, m_StateMachineBase{ currentState, globalState }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
-
+#include STSTEM_WARNING_POP
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Subclass, typename EventType>
 bool CoreTools::StateEntity<Subclass, EventType>::IsValid() const noexcept
@@ -62,7 +65,7 @@ void CoreTools::StateEntity<Subclass, EventType>::Update(int64_t timeInterval)
 }
 
 template <typename Subclass, typename EventType>
-typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetCurrentState() const
+typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetCurrentState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -70,7 +73,7 @@ typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTo
 }
 
 template <typename Subclass, typename EventType>
-typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetGlobalState() const
+typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetGlobalState() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -78,7 +81,7 @@ typename CoreTools::StateEntity<Subclass, EventType>::ConstStateSharedPtr CoreTo
 }
 
 template <typename Subclass, typename EventType>
-typename CoreTools::StateEntity<Subclass, EventType>::StateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetPossiblePreviousState()
+typename CoreTools::StateEntity<Subclass, EventType>::StateSharedPtr CoreTools::StateEntity<Subclass, EventType>::GetPossiblePreviousState() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

@@ -13,7 +13,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include <functional>
 
 using std::bind;

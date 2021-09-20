@@ -1,0 +1,21 @@
+@echo on
+ 
+start /d %TheLastOverlordTestingWin32DebugLib% RechargeServerCoreTestingD.exe
+start /d %TheLastOverlordTestingWin32ReleaseLib% RechargeServerCoreTesting.exe
+start /d %TheLastOverlordTestingX64DebugLib% RechargeServerCoreTestingD.exe
+start /d %TheLastOverlordTestingX64ReleaseLib% RechargeServerCoreTesting.exe
+start /d %TheLastOverlordTestingStaticWin32DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticWin32ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %TheLastOverlordTestingStaticX64DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %TheLastOverlordTestingStaticX64ReleaseLib% RechargeServerCoreTestingStatic.exe
+
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicWin32ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64DebugLib% RechargeServerCoreTestingStaticD.exe
+start /d %TheLastOverlordTestingEngineStaticGameDynamicX64ReleaseLib% RechargeServerCoreTestingStatic.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32DebugLib% RechargeServerCoreTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticWin32ReleaseLib% RechargeServerCoreTesting.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64DebugLib% RechargeServerCoreTestingD.exe
+start /d %TheLastOverlordTestingEngineDynamicGameStaticX64ReleaseLib% RechargeServerCoreTesting.exe
+
+pause

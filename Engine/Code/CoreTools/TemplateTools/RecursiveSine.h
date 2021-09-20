@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:28)
+//	引擎版本：0.7.1.1 (2020/10/23 15:28)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_RECURSIVE_SINE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_RECURSIVE_SINE_H
@@ -14,33 +14,28 @@
 
 namespace CoreTools
 {
-    template <double& Radian, int Index, int MaxTerms>
-    struct SineSeries
+    constexpr double GetSineSeries(double radian, int index, int maxTerms) noexcept
     {
-        enum
+        const auto isContinue = (index + 1 != maxTerms);
+        if (isContinue)
         {
-            Continue = Index + 1 != MaxTerms,
-            NextIndex = (Index + 1) * Continue,
-            NextMaxTerms = MaxTerms * Continue,
-        };
+            const auto nextIndex = (index + 1) * isContinue;
+            const auto nextMaxTerms = maxTerms * isContinue;
 
-        static double Value() noexcept
-        {
-            return 1 - Radian * Radian / (2.0 * Index + 2.0) / (2.0 * Index + 3.0) * SineSeries<Radian, NextIndex, NextMaxTerms>::Value();
+            return 1 - radian * radian / (2.0 * index + 2.0) / (2.0 * index + 3.0) * GetSineSeries(radian, nextIndex, nextMaxTerms);
         }
-    };
+        else
+        {
+            return 1.0;
+        }
+    }
 
     // Radian在0和2π之间。
-    template <double& Radian, int MaxTerms = 10>
-    struct RecursiveSine
-    {
-        static inline double Sin() noexcept
-        {
-            return Radian * SineSeries<Radian, 0, MaxTerms>::Value();
-        }
-    };
-}
 
-#define RECURSIVE_SINE(r) CoreTools::RecursiveSine<r>::Sin()
+    constexpr double RecursiveSine(double radian, int maxTerms = 10) noexcept
+    {
+        return radian * GetSineSeries(radian, 0, maxTerms);
+    }
+}
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_RECURSIVE_SINE_H

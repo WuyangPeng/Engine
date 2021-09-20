@@ -29,7 +29,7 @@
 #define CLOSE_RENDERING_MAX (((RENDERING_ClOSE_END) << 1) - 1)
 
 // 编译测试（默认为0x18，最大值为0xFF）
-#define COMPILE_RENDERING_CLOSE 0x18
+#define COMPILE_RENDERING_CLOSE 0x92
 
 static_assert(0 <= COMPILE_RENDERING_CLOSE, "COMPILE_RENDERING_CLOSE Must be greater than or equal 0.");
 static_assert(COMPILE_RENDERING_CLOSE <= CLOSE_RENDERING_MAX, "COMPILE_RENDERING_CLOSE Must be less than or equal CLOSE_RENDERING_MAX.");

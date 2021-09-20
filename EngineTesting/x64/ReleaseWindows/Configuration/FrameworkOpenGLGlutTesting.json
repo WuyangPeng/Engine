@@ -1,0 +1,11 @@
+{
+  "openGLGlutFrameSuite": 
+  {   
+    "OpenGLGlutProcessManageTesting":1,
+    "OpenGLGlutProcessTesting":1,
+    "OpenGLGlutCallBackInterfaceTesting":1,
+    "OpenGLGlutCallBackTesting":1,
+    "OpenGLGlutFrameBuildTesting":1,
+    "OpenGLGlutCallBackUnitTestSuiteTesting":1
+  }
+}

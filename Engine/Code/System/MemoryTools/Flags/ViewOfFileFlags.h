@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 0:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.2 (2021/04/19 11:41)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_FLAGS_H
 #define SYSTEM_MEMORY_TOOLS_VIEW_OF_FILE_FLAGS_H
@@ -38,6 +38,8 @@ namespace System
         Nocache = SEC_NOCACHE,
         WriteCombine = SEC_WRITECOMBINE,
         LargePages = SEC_LARGE_PAGES,
+
+        ImageNoExecute = SEC_IMAGE_NO_EXECUTE,
     };
 
 #else  // !SYSTEM_PLATFORM_WIN32
@@ -62,6 +64,8 @@ namespace System
         Nocache = 0x10000000,
         WriteCombine = 0x40000000,
         LargePages = 0x80000000,
+
+        ImageNoExecute = Image | Nocache,
     };
 
 #endif  // SYSTEM_PLATFORM_WIN32

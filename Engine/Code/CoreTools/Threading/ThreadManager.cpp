@@ -19,25 +19,25 @@ using std::make_shared;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::ThreadManager::ThreadManager()
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{ 0  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 #include STSTEM_WARNING_POP
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, ThreadManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, ThreadManager)
 
 void CoreTools::ThreadManager::AddThread(void* function, void* userData, int processorNumber, ThreadSize stackSize)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->AddThread(function, userData, processorNumber, stackSize);
+    return impl->AddThread(function, userData, processorNumber, stackSize);
 }
 
 void CoreTools::ThreadManager::AddThreadUsePriority(void* function, void* userData, int priority, int processorNumber, ThreadSize stackSize)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->AddThreadUsePriority(function, userData, priority, processorNumber, stackSize);
+    return impl->AddThreadUsePriority(function, userData, priority, processorNumber, stackSize);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Resume, void)

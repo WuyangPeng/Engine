@@ -20,7 +20,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real>::IntersectorConfiguration()
-    : m_Impl{ std::make_shared<ImplType>() }
+    : impl{ std::make_shared<ImplType>() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +28,7 @@ Mathematics::IntersectorConfiguration<Real>::IntersectorConfiguration()
 
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real>::IntersectorConfiguration(const IntersectorConfiguration& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -48,14 +48,14 @@ Mathematics::IntersectorConfiguration<Real>& Mathematics::IntersectorConfigurati
 template <typename Real>
 void Mathematics::IntersectorConfiguration<Real>::Swap(IntersectorConfiguration& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::IntersectorConfiguration<Real>::IntersectorConfiguration(IntersectorConfiguration&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -65,7 +65,7 @@ Mathematics::IntersectorConfiguration<Real>& Mathematics::IntersectorConfigurati
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -74,7 +74,7 @@ Mathematics::IntersectorConfiguration<Real>& Mathematics::IntersectorConfigurati
 template <typename Real>
 bool Mathematics::IntersectorConfiguration<Real>::IsValid() const noexcept
 {
-    return m_Impl != nullptr;
+    return impl != nullptr;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -83,7 +83,7 @@ Mathematics::VertexProjectionMap Mathematics::IntersectorConfiguration<Real>::Ge
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMap();
+    return impl->GetMap();
 }
 
 template <typename Real>
@@ -91,7 +91,7 @@ void Mathematics::IntersectorConfiguration<Real>::SetMap(VertexProjectionMap ver
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->SetMap(vertexProjectionMap);
+    return impl->SetMap(vertexProjectionMap);
 }
 
 template <typename Real>
@@ -99,7 +99,7 @@ Real Mathematics::IntersectorConfiguration<Real>::GetMin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMin();
+    return impl->GetMin();
 }
 
 template <typename Real>
@@ -107,7 +107,7 @@ void Mathematics::IntersectorConfiguration<Real>::SetMin(Real min) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->SetMin(min);
+    return impl->SetMin(min);
 }
 
 template <typename Real>
@@ -115,7 +115,7 @@ Real Mathematics::IntersectorConfiguration<Real>::GetMax() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetMax();
+    return impl->GetMax();
 }
 
 template <typename Real>
@@ -123,7 +123,7 @@ void Mathematics::IntersectorConfiguration<Real>::SetMax(Real max) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->SetMax(max);
+    return impl->SetMax(max);
 }
 
 template <typename Real>
@@ -131,7 +131,7 @@ int Mathematics::IntersectorConfiguration<Real>::GetIndex(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIndex(index);
+    return impl->GetIndex(index);
 }
 
 template <typename Real>
@@ -139,7 +139,7 @@ void Mathematics::IntersectorConfiguration<Real>::SetIndex(int index, int value)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    return m_Impl->SetIndex(index, value);
+    return impl->SetIndex(index, value);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_ACHIEVE_H

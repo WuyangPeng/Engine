@@ -13,20 +13,20 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "EquationResultConstIterator.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Base/MathDetail.h"
-
 #include <complex>
 #include <vector>
 
-MATHEMATICS_EXPORT_SHARED_PTR(EquationImpl);
+MATHEMATICS_PERFORMANCE_UNSHARED_EXPORT_IMPL(EquationImpl);
 
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE Equation final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Equation);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(Equation);
         using Imaginary = std::complex<double>;
         using ImaginaryVector = std::vector<Imaginary>;
         using RealVector = std::vector<double>;
@@ -53,7 +53,7 @@ namespace Mathematics
         [[nodiscard]] const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(Equation);
+        PackageType impl;
     };
 }
 

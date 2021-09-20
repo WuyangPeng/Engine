@@ -17,7 +17,7 @@
 
 using namespace std::literals;
 
-CoreTools::AppenderManagerImpl::AppenderManagerImpl() noexcept
+CoreTools::AppenderManagerImpl::AppenderManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_Loggers{}, m_Appenders{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;

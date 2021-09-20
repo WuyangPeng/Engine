@@ -14,7 +14,7 @@
 
 #include "CoreTools/DataTypes/Tuple.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <memory>
 #include <vector>
 
@@ -29,19 +29,21 @@ namespace Mathematics
     template <typename Real>
     class PolynomialFit3PowersImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit3PowersImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit3PowersImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3PowersImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3PowersImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialFit3PowersImpl<Real>>;
+        class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3PowersImpl<Real> > ;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit3Powers final
     {
     public:
         using PolynomialFit3PowersImpl = PolynomialFit3PowersImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(PolynomialFit3Powers);
-
+  
+        TYPE_DECLARE(PolynomialFit3Powers);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Samples = std::vector<Real>;
         using Tuple = CoreTools::Tuple<2, int>;
         using Powers = std::vector<Tuple>;
@@ -70,7 +72,7 @@ namespace Mathematics
         [[nodiscard]] Real operator()(Real x, Real y) const;
 
     private:
-        IMPL_TYPE_DECLARE(PolynomialFit3Powers);
+        PackageType impl;
     };
 
     using FloatPolynomialFit3Powers = PolynomialFit3Powers<float>;

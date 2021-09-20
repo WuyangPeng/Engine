@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 17:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.1.3 (2021/05/24 20:42)
 
 #include "System/SystemExport.h"
 
@@ -13,22 +13,33 @@
 #include "Flags/AccessCheckFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/WindowsSystem.h"
 
-void System::GetMapGenericMask([[maybe_unused]] WindowDWordPtr accessMask, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping) noexcept
+void System::GetMapGenericMask(WindowsDWordPtr accessMask, AccessCheckGenericMappingPtr genericMapping) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     ::MapGenericMask(accessMask, genericMapping);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsDWordPtr, AccessCheckGenericMappingPtr>(accessMask, genericMapping);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAccessCheck([[maybe_unused]] SecurityDescriptorPtr securityDescriptor, [[maybe_unused]] WindowHandle clientToken, [[maybe_unused]] AccessGenericMask desiredAccess, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping,
-                            [[maybe_unused]] SecurityPrivilegeSetPtr privilegeSet, [[maybe_unused]] WindowDWordPtr privilegeSetLength, [[maybe_unused]] WindowDWordPtr grantedAccess, [[maybe_unused]] bool* accessStatus) noexcept
+bool System::GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
+                            WindowsHandle clientToken,
+                            AccessGenericMask desiredAccess,
+                            AccessCheckGenericMappingPtr genericMapping,
+                            SecurityPrivilegeSetPtr privilegeSet,
+                            WindowsDWordPtr privilegeSetLength,
+                            WindowsDWordPtr grantedAccess,
+                            bool* accessStatus) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    WindowBool resultAccessStatue{ g_False };
+
+    WindowsBool resultAccessStatue{ g_False };
     if (::AccessCheck(securityDescriptor, clientToken, EnumCastUnderlying(desiredAccess), genericMapping, privilegeSet, privilegeSetLength, grantedAccess, &resultAccessStatue) != g_False)
     {
         BoolConversion(resultAccessStatue, accessStatus);
@@ -39,19 +50,56 @@ bool System::GetAccessCheck([[maybe_unused]] SecurityDescriptorPtr securityDescr
     {
         return false;
     }
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 WindowsHandle,
+                 AccessGenericMask,
+                 AccessCheckGenericMappingPtr,
+                 SecurityPrivilegeSetPtr,
+                 WindowsDWordPtr,
+                 WindowsDWordPtr,
+                 bool*>(securityDescriptor,
+                        clientToken,
+                        desiredAccess,
+                        genericMapping,
+                        privilegeSet,
+                        privilegeSetLength,
+                        grantedAccess,
+                        &resultAccessStatue);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAccessCheckByType([[maybe_unused]] SecurityDescriptorPtr securityDescriptor, [[maybe_unused]] SecuritySIDPtr principalSelfSid, [[maybe_unused]] WindowHandle clientToken, [[maybe_unused]] AccessGenericMask desiredAccess,
-                                  [[maybe_unused]] SecurityObjectTypeListPtr objectTypeList, [[maybe_unused]] WindowDWord objectTypeListLength, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping, [[maybe_unused]] SecurityPrivilegeSetPtr privilegeSet,
-                                  [[maybe_unused]] WindowDWordPtr privilegeSetLength, [[maybe_unused]] WindowDWordPtr grantedAccess, [[maybe_unused]] bool* accessStatus) noexcept
+bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
+                                  SecuritySIDPtr principalSelfSid,
+                                  WindowsHandle clientToken,
+                                  AccessGenericMask desiredAccess,
+                                  SecurityObjectTypeListPtr objectTypeList,
+                                  WindowsDWord objectTypeListLength,
+                                  AccessCheckGenericMappingPtr genericMapping,
+                                  SecurityPrivilegeSetPtr privilegeSet,
+                                  WindowsDWordPtr privilegeSetLength,
+                                  WindowsDWordPtr grantedAccess,
+                                  bool* accessStatus) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
-    WindowBool resultAccessStatue{ g_False };
-    if (::AccessCheckByType(securityDescriptor, principalSelfSid, clientToken, EnumCastUnderlying(desiredAccess), objectTypeList,
-                            objectTypeListLength, genericMapping, privilegeSet, privilegeSetLength, grantedAccess, &resultAccessStatue) != g_False)
+
+    WindowsBool resultAccessStatue{ g_False };
+    if (::AccessCheckByType(securityDescriptor,
+                            principalSelfSid,
+                            clientToken,
+                            EnumCastUnderlying(desiredAccess),
+                            objectTypeList,
+                            objectTypeListLength,
+                            genericMapping,
+                            privilegeSet,
+                            privilegeSetLength,
+                            grantedAccess,
+                            &resultAccessStatue) != g_False)
     {
         BoolConversion(resultAccessStatue, accessStatus);
 
@@ -63,18 +111,59 @@ bool System::GetAccessCheckByType([[maybe_unused]] SecurityDescriptorPtr securit
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecuritySIDPtr,
+                 WindowsHandle,
+                 AccessGenericMask,
+                 SecurityObjectTypeListPtr,
+                 WindowsDWord,
+                 AccessCheckGenericMappingPtr,
+                 SecurityPrivilegeSetPtr,
+                 WindowsDWordPtr,
+                 WindowsDWordPtr,
+                 bool*>(securityDescriptor,
+                        principalSelfSid,
+                        clientToken,
+                        desiredAccess,
+                        objectTypeList,
+                        objectTypeListLength,
+                        genericMapping,
+                        privilegeSet,
+                        privilegeSetLength,
+                        grantedAccess,
+                        &resultAccessStatue);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetAccessCheckByTypeResultList([[maybe_unused]] SecurityDescriptorPtr securityDescriptor, [[maybe_unused]] SecuritySIDPtr principalSelfSid, [[maybe_unused]] WindowHandle clientToken, [[maybe_unused]] AccessGenericMask desiredAccess,
-                                            [[maybe_unused]] SecurityObjectTypeListPtr objectTypeList, [[maybe_unused]] WindowDWord objectTypeListLength, [[maybe_unused]] AccessCheckGenericMappingPtr genericMapping, [[maybe_unused]] SecurityPrivilegeSetPtr privilegeSet,
-                                            [[maybe_unused]] WindowDWordPtr privilegeSetLength, [[maybe_unused]] WindowDWordPtr grantedAccessList, [[maybe_unused]] WindowDWordPtr accessStatusList) noexcept
+bool System::GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescriptor,
+                                            SecuritySIDPtr principalSelfSid,
+                                            WindowsHandle clientToken,
+                                            AccessGenericMask desiredAccess,
+                                            SecurityObjectTypeListPtr objectTypeList,
+                                            WindowsDWord objectTypeListLength,
+                                            AccessCheckGenericMappingPtr genericMapping,
+                                            SecurityPrivilegeSetPtr privilegeSet,
+                                            WindowsDWordPtr privilegeSetLength,
+                                            WindowsDWordPtr grantedAccessList,
+                                            WindowsDWordPtr accessStatusList) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::AccessCheckByTypeResultList(securityDescriptor, principalSelfSid, clientToken, EnumCastUnderlying(desiredAccess), objectTypeList,
-                                      objectTypeListLength, genericMapping, privilegeSet, privilegeSetLength, grantedAccessList, accessStatusList) != g_False)
+    if (::AccessCheckByTypeResultList(securityDescriptor,
+                                      principalSelfSid,
+                                      clientToken,
+                                      EnumCastUnderlying(desiredAccess),
+                                      objectTypeList,
+                                      objectTypeListLength,
+                                      genericMapping,
+                                      privilegeSet,
+                                      privilegeSetLength,
+                                      grantedAccessList,
+                                      accessStatusList) != g_False)
     {
         return true;
     }
@@ -84,7 +173,31 @@ bool System::GetAccessCheckByTypeResultList([[maybe_unused]] SecurityDescriptorP
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<SecurityDescriptorPtr,
+                 SecuritySIDPtr,
+                 WindowsHandle,
+                 AccessGenericMask,
+                 SecurityObjectTypeListPtr,
+                 WindowsDWord,
+                 AccessCheckGenericMappingPtr,
+                 SecurityPrivilegeSetPtr,
+                 WindowsDWordPtr,
+                 WindowsDWordPtr,
+                 WindowsDWordPtr>(securityDescriptor,
+                                 principalSelfSid,
+                                 clientToken,
+                                 desiredAccess,
+                                 objectTypeList,
+                                 objectTypeListLength,
+                                 genericMapping,
+                                 privilegeSet,
+                                 privilegeSetLength,
+                                 grantedAccessList,
+                                 accessStatusList);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
@@ -95,7 +208,7 @@ System::AccessGenericMask System::GetFileMapGenericMask(FileHandleDesiredAccess 
     genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::FileGenericExecute);
     genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::FileAllAccess);
 
-    auto mapGenericMask = EnumCastUnderlying<WindowDWord>(accessMask);
+    auto mapGenericMask = EnumCastUnderlying<WindowsDWord>(accessMask);
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
@@ -109,7 +222,7 @@ System::AccessGenericMask System::GetTransactionManagerMapGenericMask(FileHandle
     genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::TransactionManagerGenericExecute);
     genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::TransactionManagerAllAccess);
 
-    auto mapGenericMask = EnumCastUnderlying<WindowDWord>(accessMask);
+    auto mapGenericMask = EnumCastUnderlying<WindowsDWord>(accessMask);
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
@@ -123,7 +236,7 @@ System::AccessGenericMask System::GetTransactionMapGenericMask(FileHandleDesired
     genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::TransactionGenericExecute);
     genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::TransactionAllAccess);
 
-    auto mapGenericMask = EnumCastUnderlying<WindowDWord>(accessMask);
+    auto mapGenericMask = EnumCastUnderlying<WindowsDWord>(accessMask);
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
@@ -137,7 +250,7 @@ System::AccessGenericMask System::GetResourceManagerMapGenericMask(FileHandleDes
     genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::ResourceManagerGenericExecute);
     genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::ResourceManagerAllAccess);
 
-    auto mapGenericMask = EnumCastUnderlying<WindowDWord>(accessMask);
+    auto mapGenericMask = EnumCastUnderlying<WindowsDWord>(accessMask);
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 
@@ -151,7 +264,7 @@ System::AccessGenericMask System::GetEnlistmentMapGenericMask(FileHandleDesiredA
     genericMapping.GenericExecute = EnumCastUnderlying(AccessGenericMask::EnlistmentGenericExecute);
     genericMapping.GenericAll = EnumCastUnderlying(AccessGenericMask::EnlistmentAllAccess);
 
-    auto mapGenericMask = EnumCastUnderlying<WindowDWord>(accessMask);
+    auto mapGenericMask = EnumCastUnderlying<WindowsDWord>(accessMask);
 
     GetMapGenericMask(&mapGenericMask, &genericMapping);
 

@@ -37,7 +37,11 @@ namespace Mathematics
     {
     public:
         using DistanceResultImpl = DistanceResultImpl<Real, Vector>;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(DistanceResult);
+        void Copy();
+
+    public:
+        TYPE_DECLARE(DistanceResult);
+        using ClassShareType = CoreTools::DelayCopyUnsharedClasses;
 
         using ClosestPoints = std::vector<Vector>;
 
@@ -74,7 +78,10 @@ namespace Mathematics
         [[nodiscard]] Real GetRhsParameter() const;
 
     private:
-        IMPL_TYPE_DECLARE(DistanceResult);
+        using DistanceResultImplPtr  = std::shared_ptr<ImplType>;
+
+    private:
+        DistanceResultImplPtr impl;
     };
 
     using FloatDistanceResult2 = DistanceResult<float, FloatVector2D>;

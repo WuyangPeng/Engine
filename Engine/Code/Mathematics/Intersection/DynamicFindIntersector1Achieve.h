@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::DynamicFindIntersector1<Real>::DynamicFindIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon)
-    : ParentType{ u0, u1, v0, v1, epsilon }, m_Impl{}
+    : ParentType{ u0, u1, v0, v1, epsilon }, impl{}
 {
     Find(tMax, speedU, speedV);
 
@@ -124,14 +124,14 @@ void Mathematics::DynamicFindIntersector1<Real>::Find(Real tMax, Real speedU, Re
         }
     }
 
-    m_Impl = std::make_shared<ImplType>(firstTime, lastTime, intersections);
+    impl = std::make_shared<ImplType>(firstTime, lastTime, intersections);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::DynamicFindIntersector1<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid()  )
         return true;
     else
         return false;
@@ -143,7 +143,7 @@ bool Mathematics::DynamicFindIntersector1<Real>::IsIntersection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsIntersection();
+    return impl->IsIntersection();
 }
 
 template <typename Real>
@@ -151,7 +151,7 @@ int Mathematics::DynamicFindIntersector1<Real>::GetNumIntersections() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumIntersections();
+    return impl->GetNumIntersections();
 }
 
 template <typename Real>
@@ -159,7 +159,7 @@ Real Mathematics::DynamicFindIntersector1<Real>::GetIntersection(int index) cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIntersection(index);
+    return impl->GetIntersection(index);
 }
 
 template <typename Real>
@@ -167,7 +167,7 @@ Real Mathematics::DynamicFindIntersector1<Real>::GetFirstTime() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetFirstTime();
+    return impl->GetFirstTime();
 }
 
 template <typename Real>
@@ -175,7 +175,7 @@ Real Mathematics::DynamicFindIntersector1<Real>::GetLastTime() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLastTime();
+    return impl->GetLastTime();
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR1_ACHIEVE_H

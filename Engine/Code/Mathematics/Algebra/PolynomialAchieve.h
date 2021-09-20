@@ -24,7 +24,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 template <typename Real>
 Mathematics::Polynomial<Real>::Polynomial(int degree)
-    : m_Impl{ std::make_shared<ImplType>(degree) }
+    : impl{ std::make_shared<ImplType>(degree) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,14 +32,14 @@ Mathematics::Polynomial<Real>::Polynomial(int degree)
 
 template <typename Real>
 Mathematics::Polynomial<Real>::Polynomial(const ContainerType& coeff)
-    : m_Impl{ std::make_shared<ImplType>(coeff) }
+    : impl{ std::make_shared<ImplType>(coeff) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Polynomial<Real>::Polynomial(const Polynomial& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -62,14 +62,14 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator=(const Po
 template <typename Real>
 void Mathematics::Polynomial<Real>::Swap(Polynomial& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::Polynomial<Real>::Polynomial(Polynomial&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -81,7 +81,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator=(Polynomi
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -91,7 +91,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator=(Polynomi
 template <typename Real>
 bool Mathematics::Polynomial<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -114,7 +114,7 @@ int Mathematics::Polynomial<Real>::GetDegree() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDegree();
+    return impl->GetDegree();
 }
 
 template <typename Real>
@@ -122,7 +122,7 @@ const Real& Mathematics::Polynomial<Real>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)[index];
+    return (*impl)[index];
 }
 
 template <typename Real>
@@ -138,7 +138,7 @@ Real Mathematics::Polynomial<Real>::GetBegin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetBegin();
+    return impl->GetBegin();
 }
 
 template <typename Real>
@@ -146,7 +146,7 @@ Real Mathematics::Polynomial<Real>::GetEnd() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetEnd();
+    return impl->GetEnd();
 }
 
 template <typename Real>
@@ -154,7 +154,7 @@ Real Mathematics::Polynomial<Real>::operator()(Real value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return (*m_Impl)(value);
+    return (*impl)(value);
 }
 
 template <typename Real>
@@ -162,7 +162,7 @@ typename Mathematics::Polynomial<Real>::ContainerType Mathematics::Polynomial<Re
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetValue();
+    return impl->GetValue();
 }
 
 template <typename Real>
@@ -170,7 +170,7 @@ void Mathematics::Polynomial<Real>::SetValue(const ContainerType& coeff)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->SetValue(coeff);
+    return impl->SetValue(coeff);
 }
 
 template <typename Real>
@@ -180,7 +180,7 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::operator-() c
 
     Polynomial<Real> result{ *this };
 
-    result.m_Impl->Negative();
+    result.impl->Negative();
 
     return result;
 }
@@ -194,11 +194,11 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(const P
     {
         Polynomial temp{ rhs };
         Swap(temp);
-        m_Impl->Plus(*temp.m_Impl);
+        impl->Plus(*temp.impl);
     }
     else
     {
-        m_Impl->Plus(*rhs.m_Impl);
+        impl->Plus(*rhs.impl);
     }
 
     return *this;
@@ -213,11 +213,11 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator-=(const P
     {
         Polynomial temp{ rhs };
         Swap(temp);
-        m_Impl->Minus(*temp.m_Impl);
+        impl->Minus(*temp.impl);
     }
     else
     {
-        m_Impl->Plus(*rhs.m_Impl);
+        impl->Plus(*rhs.impl);
     }
 
     return *this;
@@ -238,7 +238,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator+=(Real sc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    (*m_Impl)[0] += scalar;
+    (*impl)[0] += scalar;
 
     return *this;
 }
@@ -248,7 +248,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator-=(Real sc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    (*m_Impl)[0] -= scalar;
+    (*impl)[0] -= scalar;
 
     return *this;
 }
@@ -258,7 +258,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator*=(Real sc
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto& coeff : *m_Impl)
+    for (auto& coeff : *impl)
     {
         coeff *= scalar;
     }
@@ -273,7 +273,7 @@ Mathematics::Polynomial<Real>& Mathematics::Polynomial<Real>::operator/=(Real sc
 
     if (Math::GetZeroTolerance() < Math::FAbs(scalar))
     {
-        for (auto& coeff : *m_Impl)
+        for (auto& coeff : *impl)
         {
             coeff /= scalar;
         }
@@ -300,7 +300,7 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetDerivative
         for (auto index = 0; index < degree; ++index)
         {
             const auto nextIndex = index + 1;
-            result[index] = nextIndex * (*m_Impl)[nextIndex];
+            result[index] = nextIndex * (*impl)[nextIndex];
         }
         return result;
     }
@@ -322,7 +322,7 @@ const Mathematics::Polynomial<Real> Mathematics::Polynomial<Real>::GetInversion(
     Polynomial result{ degree };
     for (auto i = 0; i <= degree; ++i)
     {
-        result[i] = (*m_Impl)[degree - i];
+        result[i] = (*impl)[degree - i];
     }
 
     return result;
@@ -333,7 +333,7 @@ void Mathematics::Polynomial<Real>::Compress(Real epsilon)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    const auto degree = m_Impl->GetCompressDegree(epsilon);
+    const auto degree = impl->GetCompressDegree(epsilon);
 
     if (0 <= degree)
     {
@@ -342,7 +342,7 @@ void Mathematics::Polynomial<Real>::Compress(Real epsilon)
         result[degree] = Math::GetValue(1);
         for (auto i = 0; i < degree; ++i)
         {
-            result[i] = (*m_Impl)[i] / (*m_Impl)[degree];
+            result[i] = (*impl)[i] / (*impl)[degree];
         }
 
         Swap(result);

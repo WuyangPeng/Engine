@@ -1,73 +1,122 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 13:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/18 10:24)
 
 #include "System/SystemExport.h"
 
 #include "File.h"
 #include "Flags/FileFlags.h"
-#include "System/Helper/EnumCast.h" 
+#include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-#include "System/Window/Flags/PlatformErrorFlags.h"
-#include "System/Window/LastPlatformError.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/Flags/PlatformErrorFlags.h"
+#include "System/Windows/LastPlatformError.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/WindowsSystem.h"
 
 bool System::RemoveSystemFile(const CFileString& fileName) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::DeleteFile(fileName.c_str()) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     if (::remove(fileName.c_str()) == 0)
         return true;
     else
         return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::CreateSystemFile([[maybe_unused]] const String& fileName, FileHandleDesiredAccess access, [[maybe_unused]] FileHandleShareMode shareMode, [[maybe_unused]] WindowSecurityAttributesPtr securityAttributes, FileHandleCreationDisposition creation,
-                                              [[maybe_unused]] FileHandleAttributes attributes, [[maybe_unused]] FileHandleOther other, [[maybe_unused]] FileHandleSecurity security, [[maybe_unused]] WindowHandle templateFile) noexcept
+System::WindowsHandle System::CreateSystemFile(const String& fileName,
+                                              FileHandleDesiredAccess access,
+                                              FileHandleShareMode shareMode,
+                                              WindowSecurityAttributesPtr securityAttributes,
+                                              FileHandleCreationDisposition creation,
+                                              FileHandleAttributes attributes,
+                                              FileHandleOther other,
+                                              FileHandleSecurity security,
+                                              WindowsHandle templateFile) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
-    return ::CreateFile(fileName.c_str(), EnumCastUnderlying(access), EnumCastUnderlying(shareMode), securityAttributes,
-                        EnumCastUnderlying(creation), EnumCastUnderlying(attributes) | EnumCastUnderlying(other) | EnumCastUnderlying(security), templateFile);
+
+    return ::CreateFile(fileName.c_str(),
+                        EnumCastUnderlying(access),
+                        EnumCastUnderlying(shareMode),
+                        securityAttributes,
+                        EnumCastUnderlying(creation),
+                        EnumCastUnderlying(attributes) | EnumCastUnderlying(other) | EnumCastUnderlying(security),
+                        templateFile);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<String,
+                 FileHandleDesiredAccess,
+                 FileHandleShareMode,
+                 WindowSecurityAttributesPtr,
+                 FileHandleCreationDisposition,
+                 FileHandleAttributes,
+                 FileHandleOther,
+                 FileHandleSecurity,
+                 WindowsHandle>(fileName,
+                               access,
+                               shareMode,
+                               securityAttributes,
+                               creation,
+                               attributes,
+                               other,
+                               security,
+                               templateFile);
+
     return nullptr;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-System::WindowHandle System::CreateSystemFile(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation) noexcept
+System::WindowsHandle System::CreateSystemFile(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation) noexcept
 {
     return CreateSystemFile(fileName, access, shareMode, nullptr, creation, FileHandleAttributes::Normal, FileHandleOther::SequentialScan, FileHandleSecurity::Default, nullptr);
 }
 
-System::WindowHandle System::CreateSystemFile(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation,
-                                              FileHandleAttributes attributes, FileHandleOther other, FileHandleSecurity security) noexcept
+System::WindowsHandle System::CreateSystemFile(const String& fileName,
+                                              FileHandleDesiredAccess access,
+                                              FileHandleShareMode shareMode,
+                                              FileHandleCreationDisposition creation,
+                                              FileHandleAttributes attributes,
+                                              FileHandleOther other,
+                                              FileHandleSecurity security) noexcept
 {
     return CreateSystemFile(fileName, access, shareMode, nullptr, creation, attributes, other, security, nullptr);
 }
 
-bool System::CloseSystemFile([[maybe_unused]] WindowHandle file) noexcept
+bool System::CloseSystemFile(WindowsHandle file) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::CloseHandle(file) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle>(file);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::IsFileHandleValid(WindowHandle file) noexcept
+bool System::IsFileHandleValid(WindowsHandle file) noexcept
 {
     if (file != nullptr && file != g_InvalidHandleValue)
         return true;
@@ -75,10 +124,11 @@ bool System::IsFileHandleValid(WindowHandle file) noexcept
         return false;
 }
 
-bool System::GetFileLength([[maybe_unused]] WindowHandle file, [[maybe_unused]] uint64_t& fileSize) noexcept
+bool System::GetFileLength(WindowsHandle file, uint64_t& fileSize) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
-    WindowDWord fileSizeHigh{ 0 };
+
+    WindowsDWord fileSizeHigh{ 0 };
     auto fileSizeLow = ::GetFileSize(file, &fileSizeHigh);
     const auto lastError = GetPlatformLastError();
 
@@ -96,13 +146,18 @@ bool System::GetFileLength([[maybe_unused]] WindowHandle file, [[maybe_unused]] 
     }
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, uint64_t>(file, fileSize);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetFileLength([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowLargeIntegerPtr fileSize) noexcept
+bool System::GetFileLength(WindowsHandle file, WindowsLargeIntegerPtr fileSize) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     #if defined(TCRE_USE_GCC)
 
     uint64_t size{ 0 };
@@ -123,70 +178,99 @@ bool System::GetFileLength([[maybe_unused]] WindowHandle file, [[maybe_unused]] 
         return false;
 
     #endif  // TCRE_USE_GCC
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsLargeIntegerPtr>(file, fileSize);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::ReadSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowVoidPtr buffer, [[maybe_unused]] WindowDWord numberOfBytesToRead, [[maybe_unused]] WindowDWordPtr numberOfBytesRead, [[maybe_unused]] WindowOverlappedPtr overlapped) noexcept
+bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDWord numberOfBytesToRead, WindowsDWordPtr numberOfBytesRead, WindowOverlappedPtr overlapped) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::ReadFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsDWord, WindowsDWordPtr, WindowOverlappedPtr>(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::ReadSystemFile(WindowHandle file, WindowVoidPtr buffer, WindowDWord numberOfBytesToRead, WindowDWordPtr numberOfBytesRead) noexcept
+bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDWord numberOfBytesToRead, WindowsDWordPtr numberOfBytesRead) noexcept
 {
     return ReadSystemFile(file, buffer, numberOfBytesToRead, numberOfBytesRead, nullptr);
 }
 
-bool System::ReadSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowVoidPtr buffer, [[maybe_unused]] WindowDWord numberOfBytesToRead, [[maybe_unused]] WindowOverlappedPtr overlapped, [[maybe_unused]] WindowOverlappedCompletionRoutine completionRoutine) noexcept
+bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDWord numberOfBytesToRead, WindowOverlappedPtr overlapped, WindowOverlappedCompletionRoutine completionRoutine) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::ReadFileEx(file, buffer, numberOfBytesToRead, overlapped, completionRoutine) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsDWord, WindowOverlappedPtr, WindowOverlappedCompletionRoutine>(file, buffer, numberOfBytesToRead, overlapped, completionRoutine);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WriteSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowConstVoidPtr buffer, [[maybe_unused]] WindowDWord numberOfBytesToWrite, [[maybe_unused]] WindowDWordPtr numberOfBytesWritten, [[maybe_unused]] WindowOverlappedPtr overlapped) noexcept
+bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, WindowsDWord numberOfBytesToWrite, WindowsDWordPtr numberOfBytesWritten, WindowOverlappedPtr overlapped) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::WriteFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowsDWordPtr, WindowOverlappedPtr>(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::WriteSystemFile(WindowHandle file, WindowConstVoidPtr buffer, WindowDWord numberOfBytesToWrite, WindowDWordPtr numberOfBytesWritten) noexcept
+bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, WindowsDWord numberOfBytesToWrite, WindowsDWordPtr numberOfBytesWritten) noexcept
 {
     return WriteSystemFile(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, nullptr);
 }
 
-bool System::WriteSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowConstVoidPtr buffer, [[maybe_unused]] WindowDWord numberOfBytesToWrite, [[maybe_unused]] WindowOverlappedPtr overlapped, [[maybe_unused]] WindowOverlappedCompletionRoutine completionRoutine) noexcept
+bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, WindowsDWord numberOfBytesToWrite, WindowOverlappedPtr overlapped, WindowOverlappedCompletionRoutine completionRoutine) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::WriteFileEx(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowOverlappedPtr, WindowOverlappedCompletionRoutine>(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::AppendSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowConstVoidPtr buffer, [[maybe_unused]] WindowDWord numberOfBytesToWrite, [[maybe_unused]] WindowDWordPtr numberOfBytesWritten) noexcept
+bool System::AppendSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, WindowsDWord numberOfBytesToWrite, WindowsDWordPtr numberOfBytesWritten) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -199,6 +283,8 @@ bool System::AppendSystemFile([[maybe_unused]] WindowHandle file, [[maybe_unused
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
+    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowsDWordPtr>(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
+
     return false;
 
 #endif  // SYSTEM_PLATFORM_WIN32
@@ -209,19 +295,25 @@ bool System::CopySystemFile(const String& existingFileName, const String& newFil
     return CopySystemFile(existingFileName, newFileName, false);
 }
 
-bool System::CopySystemFile([[maybe_unused]] const String& existingFileName, [[maybe_unused]] const String& newFileName, [[maybe_unused]] bool failIfExists) noexcept
+bool System::CopySystemFile(const String& existingFileName, const String& newFileName, bool failIfExists) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
+
     if (::CopyFile(existingFileName.c_str(), newFileName.c_str(), BoolConversion(failIfExists)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<String, String, bool>(existingFileName, newFileName, failIfExists);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemFilePointer([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowLong distanceToMove, [[maybe_unused]] WindowLargeIntegerPtr newFilePointer, [[maybe_unused]] FilePointer moveMethod) noexcept
+bool System::SetSystemFilePointer(WindowsHandle file, WindowsLong distanceToMove, WindowsLargeIntegerPtr newFilePointer, FilePointer moveMethod) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -241,54 +333,82 @@ bool System::SetSystemFilePointer([[maybe_unused]] WindowHandle file, [[maybe_un
     return true;
 
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsLong, WindowsLargeIntegerPtr, FilePointer>(file, distanceToMove, newFilePointer, moveMethod);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetSystemFilePointer([[maybe_unused]] WindowHandle file, [[maybe_unused]] WindowLargeInteger distanceToMove, [[maybe_unused]] WindowLargeIntegerPtr newFilePointer, [[maybe_unused]] FilePointer moveMethod) noexcept
+bool System::SetSystemFilePointer(WindowsHandle file, WindowsLargeInteger distanceToMove, WindowsLargeIntegerPtr newFilePointer, FilePointer moveMethod) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::SetFilePointerEx(file, distanceToMove, newFilePointer, EnumCastUnderlying(moveMethod)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle, WindowsLargeInteger, WindowsLargeIntegerPtr, FilePointer>(file, distanceToMove, newFilePointer, moveMethod);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::SetEndOfSystemFile([[maybe_unused]] WindowHandle file) noexcept
+bool System::SetEndOfSystemFile(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if ((::SetEndOfFile(file)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle>(file);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::FlushSystemFileBuffers([[maybe_unused]] WindowHandle file) noexcept
+bool System::FlushSystemFileBuffers(WindowsHandle file) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if ((::FlushFileBuffers(file)) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<WindowsHandle>(file);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::MoveSystemFile([[maybe_unused]] const String& oldFileName, [[maybe_unused]] const String& newFileName) noexcept
+bool System::MoveSystemFile(const String& oldFileName, const String& newFileName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if ((::MoveFile(oldFileName.c_str(), newFileName.c_str())) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
+    NullFunction<String, String>(oldFileName, newFileName);
+
     return false;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }

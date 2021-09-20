@@ -17,7 +17,7 @@
 template <typename Real>
 Mathematics::PolynomialFit4<Real>::PolynomialFit4(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
                                                   const Samples& wSamples, size_t xDegree, size_t yDegree, size_t zDegree)
-    : m_Impl{ std::make_shared<ImplType>(xSamples, ySamples, zSamples, wSamples, xDegree, yDegree, zDegree) }
+    : impl{  xSamples, ySamples, zSamples, wSamples, xDegree, yDegree, zDegree  }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -26,10 +26,9 @@ Mathematics::PolynomialFit4<Real>::PolynomialFit4(const Samples& xSamples, const
 template <typename Real>
 bool Mathematics::PolynomialFit4<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    
         return true;
-    else
-        return false;
+ 
 }
 #endif  // OPEN_CLASS_INVARIANT
 
@@ -38,7 +37,7 @@ const typename Mathematics::PolynomialFit4<Real>::Samples Mathematics::Polynomia
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetCoeff();
+    return impl->GetCoeff();
 }
 
 template <typename Real>
@@ -46,7 +45,7 @@ bool Mathematics::PolynomialFit4<Real>::IsSolveSucceed() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsSolveSucceed();
+    return impl->IsSolveSucceed();
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_ACHIEVE_H

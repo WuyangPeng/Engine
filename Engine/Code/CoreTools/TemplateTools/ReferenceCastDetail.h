@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 15:34)
+//	引擎版本：0.7.1.1 (2020/10/23 15:34)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_REFERENCE_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_REFERENCE_CAST_DETAIL_H
@@ -28,6 +28,8 @@ bool CoreTools::ReferenceCast<T>::IsValid() const noexcept
 }
 #endif  // OPEN_CLASS_INVARIANT
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26492)
 template <typename T>
 CoreTools::ReferenceCast<T>::operator T&() const noexcept
 {
@@ -35,6 +37,7 @@ CoreTools::ReferenceCast<T>::operator T&() const noexcept
 
     return const_cast<ClassType*>(this)->m_Value;
 }
+#include STSTEM_WARNING_POP
 
 CoreTools::ReferenceCast<int>::ReferenceCast(int value) noexcept
     : m_Value{ value }

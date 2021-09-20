@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #include <atomic>
 
@@ -22,7 +22,7 @@ namespace CoreTools
     {
     public:
         using ClassType = SemaphoreImpl;
-        using SemaphoreHandle = System::WindowHandle;
+        using SemaphoreHandle = System::WindowsHandle;
 
     public:
         SemaphoreImpl(int initialCount, int maximumCount);

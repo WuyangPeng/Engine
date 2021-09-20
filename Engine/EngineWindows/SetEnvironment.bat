@@ -4,6 +4,10 @@ echo EngineInclude = %EngineInclude%
 echo %cd%
 setx EngineInclude "%cd%\..\Code" 
 
+echo EngineEngineering = %EngineEngineering%
+echo %cd%
+setx EngineEngineering "%cd%\.." 
+
 echo EngineWin32DebugLib = %EngineWin32DebugLib%
 echo %cd%
 setx EngineWin32DebugLib "%cd%\..\Win32\DebugWindows" 

@@ -22,7 +22,7 @@ namespace CoreTools
         using ClassType = SmartPointerManagerImpl;
 
     public:
-        SmartPointerManagerImpl() noexcept;
+        SmartPointerManagerImpl(MAYBE_UNUSED int count) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

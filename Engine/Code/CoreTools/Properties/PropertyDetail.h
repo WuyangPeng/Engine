@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:38)
+//	引擎版本：0.7.1.1 (2020/10/26 13:38)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>::Property()
+CoreTools::Property<ID, T, V, R, FS, FG>::Property() noexcept
     : m_Value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -35,9 +35,10 @@ bool CoreTools::Property<ID, T, V, R, FS, FG>::IsValid() const noexcept
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, FG>::operator=(R value)
+CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, FG>::operator=(R value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -45,9 +46,9 @@ CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, F
 
     return *this;
 }
-
+#include STSTEM_WARNING_POP
 template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
-CoreTools::Property<ID, T, V, R, FS, FG>::operator R() const
+CoreTools::Property<ID, T, V, R, FS, FG>::operator R() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

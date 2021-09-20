@@ -15,8 +15,8 @@
 #include "CoreTools/ObjectSystems/Object.h"
 
 #include <vector>
-
-RENDERING_EXPORT_SHARED_PTR(VertexFormatImpl);
+EXPORT_SHARED_PTR(Rendering, VertexFormatImpl, RENDERING_DEFAULT_DECLARE);
+ 
 
 namespace CoreTools
 {
@@ -29,7 +29,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VertexFormat : public CoreTools::Object
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexFormat, DESTRUCTOR_STATEMENT);
+        void Swap(VertexFormat& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(VertexFormat);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~VertexFormat() noexcept;
+                VertexFormat(const VertexFormat& rhs);
+                VertexFormat& operator=(const VertexFormat& rhs);
+                VertexFormat(VertexFormat&& rhs) noexcept;
+                VertexFormat& operator=(VertexFormat&& rhs) noexcept;
         using ParentType = Object;
         using VertexFormatSharedPtr = std::shared_ptr<ClassType>;
         using ConstVertexFormatSharedPtr = std::shared_ptr<const ClassType>;
@@ -100,7 +109,7 @@ namespace Rendering
         void SetAttribute(int attribute, const VertexFormatElement& vertexFormatElement);
 
     private:
-        IMPL_TYPE_DECLARE(VertexFormat);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

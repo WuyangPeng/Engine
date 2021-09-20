@@ -12,18 +12,18 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Flags/GenerateTemplateReplaceFlags.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 #include <map>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTemplateEngineDirectoryImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTemplateEngineDirectoryImpl);
 
 namespace AssistTools
 {
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateEngineDirectory
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTemplateEngineDirectory);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTemplateEngineDirectory);
 
 	public:
 		GenerateTemplateEngineDirectory(const System::String& directory, const std::string& configurationFileName);
@@ -33,7 +33,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newSolutionName, const System::String& newCoreName, const System::String& newIncludeName) const;
 			 
 	private: 
-		IMPL_TYPE_DECLARE(GenerateTemplateEngineDirectory);
+		PackageType impl;
 	};
 }
 

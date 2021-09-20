@@ -77,8 +77,8 @@ void CoreTools::FileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备写入的数据无效！");
 
-    System::WindowDWord in{ 0 };
-    auto readNumber = boost::numeric_cast<System::WindowDWord>(itemSize * itemsNumber);
+    System::WindowsDWord in{ 0 };
+    auto readNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
     if (!System::ReadSystemFile(m_File, data, readNumber, &in) || in != readNumber)
     {
@@ -93,8 +93,8 @@ void CoreTools::FileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNumber,
     CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
-    System::WindowDWord out{ 0 };
-    auto writeNumber = boost::numeric_cast<System::WindowDWord>(itemSize * itemsNumber);
+    System::WindowsDWord out{ 0 };
+    auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
     if (!System::WriteSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
     {
@@ -109,8 +109,8 @@ void CoreTools::FileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
-    System::WindowDWord out{ 0 };
-    auto writeNumber = boost::numeric_cast<System::WindowDWord>(itemSize * itemsNumber);
+    System::WindowsDWord out{ 0 };
+    auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
     if (!System::AppendSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
     {

@@ -9,7 +9,7 @@
 
 #include "Framework/FrameworkDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 
 #include <iosfwd>
@@ -21,7 +21,7 @@ namespace Framework
 	{
 	public:
 		using ClassType = WindowSize;
-		using LParam = System::WindowLParam;
+		using LParam = System::WindowsLParam;
 
 	public:
 		WindowSize() noexcept;

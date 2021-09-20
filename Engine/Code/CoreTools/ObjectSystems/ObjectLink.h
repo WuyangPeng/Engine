@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 10:15)
+//	引擎版本：0.7.1.1 (2020/10/22 10:15)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_H
@@ -15,14 +15,24 @@
 #include "ObjectInterface.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-CORE_TOOLS_EXPORT_SHARED_PTR(ObjectLinkImpl);
-
+ 
+EXPORT_SHARED_PTR(CoreTools, ObjectLinkImpl, CORE_TOOLS_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE ObjectLink final
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ObjectLink, DESTRUCTOR_DEFAULT);
+    public:
+        void Swap(ObjectLink& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ObjectLink);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ObjectLink() noexcept = default;
+        ObjectLink(const ObjectLink& rhs);
+        ObjectLink& operator=(const ObjectLink& rhs);
+        ObjectLink(ObjectLink&& rhs) noexcept;
+        ObjectLink& operator=(ObjectLink&& rhs) noexcept;
         using LinkSequentialContainer = std::vector<ObjectInterfaceSharedPtr>;
         using LinkSequentialContainerIter = LinkSequentialContainer::iterator;
         using LinkSequentialContainerConstIter = LinkSequentialContainer::const_iterator;
@@ -50,7 +60,10 @@ namespace CoreTools
         void ResolveLinkContainer(T& object);
 
     private:
-        IMPL_TYPE_DECLARE(ObjectLink);
+        using ObjectLinkImplPtr = std::shared_ptr<ImplType>;
+
+    private:
+        ObjectLinkImplPtr impl;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ObjectLink);

@@ -15,15 +15,15 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "NetworkMessageInternalFwd.h"
-
-NETWORK_EXPORT_SHARED_PTR(BufferSendStreamImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+NETWORK_DELAY_COPY_UNSHARED_EXPORT_IMPL(BufferSendStream,BufferSendStreamImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE BufferSendStream final
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(BufferSendStream);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(BufferSendStream);
 
     public:
         BufferSendStream(int bytesTotal, ParserStrategy parserStrategy);
@@ -38,7 +38,7 @@ namespace Network
         [[nodiscard]] int GetCurrentSize() const;
 
     private:
-        IMPL_TYPE_DECLARE(BufferSendStream);
+        PackageType impl;
     };
 }
 

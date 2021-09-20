@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/25 15:41)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.5 (2021/06/12 18:23)
 
 #ifndef SYSTEM_OPENGL_GL_UTILITY_H
 #define SYSTEM_OPENGL_GL_UTILITY_H
@@ -13,21 +13,18 @@
 #include "System/SystemDll.h"
 
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
-#include "System/OpenGL/Using/GL11ExtensionsUsing.h"
 
 namespace System
 {
     // 错误检查。
-    const char* SYSTEM_HIDDEN_DECLARE GetOpenGLErrorString(OpenGLErrorCode code) noexcept;
+    SYSTEM_HIDDEN_DECLARE NODISCARD const char* GetOpenGLErrorString(OpenGLErrorCode code) noexcept;
 
-    OpenGLSystemVersion SYSTEM_HIDDEN_DECLARE GetOpenGLVersion(char major, char minor) noexcept;
-    int SYSTEM_HIDDEN_DECLARE ToIndex(char index) noexcept;
-}
+    NODISCARD OpenGLSystemVersion SYSTEM_HIDDEN_DECLARE GetOpenGLVersion(int major, int minor) noexcept;
 
-extern "C"
-{
+    SYSTEM_HIDDEN_DECLARE void PrintExtensionsInfo(const char* extensions);
+
     // 每个平台必须实现这个函数。
-    void* SYSTEM_HIDDEN_DECLARE GetOpenGLFunctionPointer(const char* glFunction) noexcept;
+    MAYBE_NULLPTR void* SYSTEM_HIDDEN_DECLARE GetOpenGLFunctionPointer(const char* glFunction) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_GL_UTILITY_H

@@ -5,16 +5,16 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 19:19)
+//	引擎版本：0.7.1.1 (2020/10/22 19:19)
 
 #ifndef CORE_TOOLS_TIME_MILLISECOND_TIMER_H
 #define CORE_TOOLS_TIME_MILLISECOND_TIMER_H
 
 #include "CoreTools/CoreToolsDll.h"
-
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-CORE_TOOLS_EXPORT_SHARED_PTR(DeltaTimeManagerImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(MillisecondTimer,DeltaTimeManagerImpl);
 
 namespace CoreTools
 {
@@ -22,7 +22,7 @@ namespace CoreTools
     {
     public:
         using MillisecondTimerImpl = DeltaTimeManagerImpl;
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(MillisecondTimer);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(MillisecondTimer);
 
     public:
         explicit MillisecondTimer(uint64_t millisecond);
@@ -37,7 +37,7 @@ namespace CoreTools
         void ReTiming(uint64_t millisecond);
 
     private:
-        IMPL_TYPE_DECLARE(MillisecondTimer);
+        PackageType impl;
         uint64_t m_Millisecond;
     };
 }

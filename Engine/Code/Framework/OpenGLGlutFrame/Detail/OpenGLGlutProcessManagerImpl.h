@@ -24,7 +24,7 @@ namespace Framework
 		using OpenGLGlutCallBackInterfaceSharedPtr = std::shared_ptr<OpenGLGlutCallBackInterface>;		
 
 	public:
-		OpenGLGlutProcessManagerImpl() noexcept;
+                OpenGLGlutProcessManagerImpl(MAYBE_UNUSED int count) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 

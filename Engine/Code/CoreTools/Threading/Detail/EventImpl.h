@@ -12,7 +12,7 @@
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 namespace CoreTools
 {
@@ -20,7 +20,7 @@ namespace CoreTools
     {
     public:
         using ClassType = EventImpl;
-        using EventHandle = System::WindowHandle;
+        using EventHandle = System::WindowsHandle;
 
     public:
         EventImpl(bool manualReset, bool initialState);

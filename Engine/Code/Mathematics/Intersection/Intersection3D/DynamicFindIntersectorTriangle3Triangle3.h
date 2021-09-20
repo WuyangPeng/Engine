@@ -17,25 +17,27 @@
 #include "Mathematics/Objects3D/Line3.h"
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class FindIntersectorTriangle3Triangle3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<FindIntersectorTriangle3Triangle3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle3Triangle3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Triangle3 : public DynamicIntersector<Real, Vector3D>
     {
     public:
         using DynamicFindIntersectorTriangle3Triangle3Impl = FindIntersectorTriangle3Triangle3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(DynamicFindIntersectorTriangle3Triangle3);
-
+     
+        TYPE_DECLARE(DynamicFindIntersectorTriangle3Triangle3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ParentType = DynamicIntersector<Real, Vector3D>;
         using Vector3D = Vector3D<Real>;
         using Triangle3 = Triangle3<Real>;
@@ -108,7 +110,7 @@ namespace Mathematics
         void GetCoplanarIntersection(const Plane3& plane, const Triangle3& triangle0, const Triangle3& triangle1);
 
     private:
-        IMPL_TYPE_DECLARE(DynamicFindIntersectorTriangle3Triangle3);
+        PackageType impl;
     };
 
     using FloatDynamicFindIntersectorTriangle3Triangle3 = DynamicFindIntersectorTriangle3Triangle3<float>;

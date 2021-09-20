@@ -36,7 +36,7 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::Co
     auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box3{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector3D::sm_UnitX, Vector3D::sm_UnitY, Vector3D::sm_UnitZ,
+                 Vector3D::GetUnitX(), Vector3D::GetUnitY(), Vector3D::GetUnitZ(),
                  halfDiagonal[0], halfDiagonal[1], halfDiagonal[2] };
 }
 
@@ -132,13 +132,13 @@ typename const Mathematics::ContBox3<Real>::Box3 Mathematics::ContBox3<Real>::Me
     Quaternion<Real> lhsQuaternion{ lhsRotationColumn };
     Quaternion<Real> rhsQuaternion{ rhsRotationColumn };
 
-    if (Dot(lhsQuaternion, rhsQuaternion) < Math<Real>::GetValue(0))
+    if (Dot(lhsQuaternion, rhsQuaternion) < Math::GetValue(0))
     {
         rhsQuaternion = -rhsQuaternion;
     }
 
     auto sumQuaternion = lhsQuaternion + rhsQuaternion;
-    auto invLength = Math<Real>::InvSqrt(Dot(sumQuaternion, sumQuaternion));
+    auto invLength = Math::InvSqrt(Dot(sumQuaternion, sumQuaternion));
     sumQuaternion = invLength * sumQuaternion;
 
     const auto sumRotationColumn = sumQuaternion.ToRotationColumnVector3D();

@@ -1,0 +1,144 @@
+{
+  "helperSuite": 
+  {
+    "UserMacroTesting": 1,
+    "MainFunctionEntryPointTesting": 0,
+    "MainFunctionTesting": 0,
+    "MiddleLayerMacroTesting": 1
+  },
+
+  "mainFunctionHelperSuite": 
+  {
+    "EnvironmentDirectoryTesting": 1,
+    "MainFunctionHelperBaseTesting": 0,
+    "ConsoleMainFunctionHelperBaseTesting": 0,
+    "ConsoleMainFunctionHelperTesting": 0,
+    "WindowMainFunctionHelperTesting": 0,
+    "OpenGLGlutMainFunctionHelperTesting": 0,
+    "AndroidMainFunctionHelperTesting": 0,
+    "MacintoshMainFunctionHelperTesting": 0
+  },
+
+  "windowCreateSuite": 
+  {
+    "WindowSizeTesting": 100,
+    "WindowPointTesting": 1000,
+    "WindowInstanceParameterTesting": 1,
+    "WindowCreateParameterTesting": 1,
+    "WindowCreateHandleTesting": 1
+  },
+
+  "windowProcessSuite":
+  {
+    "VirtualKeysTypesTesting": 1000,
+    "WindowMessageLoopTesting": 0,
+    "WindowMessageInterfaceTesting": 1,
+    "WindowMessageTesting": 1,
+    "WindowProcessManagerTesting": 1,
+    "WindowProcessHandleTesting": 1,
+    "WindowMessageUnitTestSuiteTesting": 1
+  },
+
+  "windowRegisterSuite": 
+  {
+    "WindowRegisterParameterTesting": 1,
+    "WindowHIconTesting": 1,
+    "WindowHCursorTesting": 1,
+    "WindowHBrushTesting": 1,
+    "WindowPictorialTesting": 1,
+    "WindowNameTesting": 1,
+    "WindowRegisterTesting": 1
+  },
+
+  "applicationSuite": 
+  {
+    "ApplicationTraitTesting": 1,
+    "FontInformationTesting": 1,
+    "MousePositionTesting": 1,
+    "PerformanceMeasurementsTesting": 5,
+    "WindowApplicationInformationTesting": 1,
+    "GLUTApplicationInformationTesting": 1,
+    "PixelScreenTesting": 1,
+    "CameraMotionTesting": 100,
+    "ObjectMotionTesting": 100
+  },
+
+  "middleLayerSuite": 
+  {
+    "MiddleLayerInterfaceTesting": 1,
+    "ModelViewControllerMiddleLayerTesting": 1,
+    "ModelViewControllerMiddleLayerContainerTesting": 1,
+    "ModelMiddleLayerTesting": 5,
+    "ViewMiddleLayerTesting": 1,
+    "ControllerMiddleLayerTesting": 1,
+    "PixelViewMiddleLayerTesting": 1,   
+    "CameraModelMiddleLayerTesting": 5,
+    "CameraViewMiddleLayerTesting": 100,
+    "CameraControllerMiddleLayerTesting": 40,
+    "EngineMiddleLayerInterfaceTesting": 1,
+    "NetworkManagerInterfaceTesting": 1,
+    "ObjectLogicManagerInterfaceTesting": 1,
+    "ObjectLogicManagerTesting": 1,
+    "ArtificialIntellegenceInterfaceTesting": 1,
+    "ObjectLogicInterfaceTesting": 1,
+    "InputManagerInterfaceTesting": 1,
+    "InputManagerTesting": 1,
+    "PhysicalModellingManagerInterfaceTesting": 1,
+    "MessageManagerInterfaceTesting": 1,
+    "EventManagerInterfaceTesting": 1,
+    "SystemManagerInterfaceTesting": 1,
+    "ResourceManagerInterfaceTesting": 1,
+    "AudioManagerInterfaceTesting": 1,
+    "CameraSystemsManagerInterfaceTesting": 1,
+    "RenderingManagerInterfaceTesting": 1,
+    "GUIManagerInterfaceTesting": 1,
+    "EngineMiddleLayerContainerTesting": 1
+  },
+
+  "windowsAPIFrameSuite":
+  {
+    "WindowsAPIFrameBuildTesting": 1
+  },
+
+  "openGLGlutFrameSuite": 
+  {
+    "OpenGLGlutProcessManagerTesting": 1,
+    "OpenGLGlutProcessTesting": 1,
+    "OpenGLGlutCallBackInterfaceTesting": 1,
+    "OpenGLGlutCallBackTesting": 1,
+    "OpenGLGlutCallBackUnitTestSuiteTesting": 1,
+    "OpenGLGlutFrameBuildTesting": 1    
+  },
+
+  "androidFrameSuite": 
+  {
+    "AndroidProcessManagerTesting": 1,
+    "AndroidProcessTesting": 1,
+    "AndroidCallBackInterfaceTesting": 1,
+    "AndroidCallBackTesting": 1,
+    "AndroidMessageLoopTesting": 1,
+    "AndroidFrameBuildTesting": 1,
+    "AndroidCallBackUnitTestSuiteTesting": 1
+  },
+
+  "linuxFrameSuite": 
+  {
+    "LinuxProcessTesting": 1,
+    "LinuxCallBackInterfaceTesting": 1,
+    "LinuxFrameBuildTesting": 1
+  },
+
+  "macintoshFrameSuite": 
+  {
+    "MacintoshProcessTesting": 1,
+    "MacintoshCallBackInterfaceTesting": 1,
+    "MacintoshFrameBuildTesting": 1
+  },
+
+  "consoleFrameSuite": 
+  {
+    "ConsoleProcessTesting": 1,
+    "ConsoleCallBackInterfaceTesting": 1,
+    "ConsoleFrameBuildTesting": 1
+  }
+}

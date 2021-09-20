@@ -10,9 +10,8 @@
   
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
  
-Framework::ModelViewControllerMiddleLayerImpl
-	::ModelViewControllerMiddleLayerImpl() noexcept
-	:m_ModelMiddleLayer { }, m_ViewMiddleLayer{ }, m_ControllerMiddleLayer{ }
+Framework::ModelViewControllerMiddleLayerImpl ::ModelViewControllerMiddleLayerImpl(MAYBE_UNUSED int count) noexcept
+    : m_ModelMiddleLayer{}, m_ViewMiddleLayer{}, m_ControllerMiddleLayer{}
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_9;
 }

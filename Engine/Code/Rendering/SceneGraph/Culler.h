@@ -14,18 +14,18 @@
 #include "VisibleSet.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/Plane.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-RENDERING_EXPORT_SHARED_PTR(CullerImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(CullerImpl);
+ 
 
 namespace Rendering
 {
-    class RENDERING_DEFAULT_DECLARE Culler : private boost::noncopyable
+    class RENDERING_DEFAULT_DECLARE Culler  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(Culler);
+        NON_COPY_TYPE_DECLARE(Culler);
         using Plane = Mathematics::Plane<float>;
         using APoint = Mathematics::APoint<float>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
@@ -37,10 +37,10 @@ namespace Rendering
         // 你应该在使用ComputeVisibleSet之前，调用SetCamera。
         explicit Culler(const ConstCameraSharedPtr& camera);
         virtual ~Culler() = default;
-        Culler(const Culler&) = default;
-        Culler& operator=(const Culler&) = default;
-        Culler( Culler&&) = default;
-        Culler& operator=( Culler&&) = default;
+        Culler(const Culler&) = delete;
+        Culler& operator=(const Culler&) = delete;
+        Culler( Culler&&) = delete;
+        Culler& operator=( Culler&&) = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -89,7 +89,7 @@ namespace Rendering
         VisualContainerIter end();
 
     private:
-        IMPL_TYPE_DECLARE(VisibleSet);
+        PackageType impl;
     };
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 11:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.2 (2021/08/26 20:46)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_H
@@ -28,50 +28,52 @@ namespace CoreTools
         using ConstReferenceType = typename const Iter::value_type&;
 
     public:
+        SpanIterator(Iter begin, Iter end) noexcept;
         SpanIterator(Iter begin, Iter end, Iter current) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] ConstReferenceType operator*() const;
-        [[nodiscard]] Iter operator->() const noexcept;
+        NODISCARD ConstReferenceType operator*() const;
+        NODISCARD Iter operator->() const noexcept;
 
         SpanIterator<Iter>& operator++();
-        [[nodiscard]] SpanIterator<Iter> operator++(int);
+        NODISCARD SpanIterator<Iter> operator++(int);
 
         SpanIterator<Iter>& operator--();
-        [[nodiscard]] SpanIterator<Iter> operator--(int);
+        NODISCARD SpanIterator<Iter> operator--(int);
 
         SpanIterator<Iter>& operator+=(const int step);
         SpanIterator<Iter>& operator-=(const int step);
 
-        [[nodiscard]] Iter GetBegin() const noexcept;
-        [[nodiscard]] Iter GetEnd() const noexcept;
-        [[nodiscard]] Iter GetCurrent() const noexcept;
+        NODISCARD Iter GetBegin() const noexcept;
+        NODISCARD Iter GetEnd() const noexcept;
+        NODISCARD Iter GetCurrent() const noexcept;
 
-        [[nodiscard]] DifferenceType GetRemainingCount() const noexcept;
-
-        template <typename T>
-        [[nodiscard]] T Increase();
+        NODISCARD DifferenceType GetRemainingCount() const noexcept;
 
         template <typename T>
-        [[nodiscard]] void Increase(T value);
+        NODISCARD T Increase();
+
+        template <typename T>
+        void Increase(T value);
 
     private:
         template <typename T>
-        [[nodiscard]] const T& ReinterpretCast() const;
+        NODISCARD const T& ReinterpretCast() const;
 
         template <typename T>
-        [[nodiscard]] T& ReinterpretCast();
+        NODISCARD T& ReinterpretCast();
 
     private:
-        Iter m_Begin{};
-        Iter m_End{};
-        Iter m_Current{};
+        Iter begin{};
+        Iter end{};
+        Iter current{};
     };
 
     template <typename Iter>
-    [[nodiscard]] typename Iter::difference_type operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
+    NODISCARD typename Iter::difference_type operator-(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 
+    // 交互两个迭代器的值。
     template <typename Iter>
     void IterSwap(const SpanIterator<Iter>& lhs, const SpanIterator<Iter>& rhs);
 }

@@ -12,21 +12,20 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include "Rendering/Resources/Flags/BufferFlags.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 
-RENDERING_EXPORT_SHARED_PTR(PlatformIndexBufferImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(PlatformIndexBufferImpl); 
 
 namespace Rendering
 {
 	class Renderer;
 	class IndexBuffer;
 	
-	class RENDERING_DEFAULT_DECLARE PlatformIndexBuffer : boost::noncopyable
+	class RENDERING_DEFAULT_DECLARE PlatformIndexBuffer  
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(PlatformIndexBuffer); 
+            NON_COPY_TYPE_DECLARE(PlatformIndexBuffer); 
 		using BufferType = IndexBuffer;
 
 	public:
@@ -46,7 +45,7 @@ namespace Rendering
 		void Unlock ();		
 
 	private:
-		IMPL_TYPE_DECLARE(PlatformIndexBuffer);
+                PackageType impl;
 	};
 }
 

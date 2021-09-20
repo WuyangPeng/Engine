@@ -15,10 +15,12 @@
 
 namespace CoreTools
 {
+    class LogConsoleTextColorsManagerFactory;
     class LogConsoleTextColorsManagerImpl
     {
     public:
         using ClassType = LogConsoleTextColorsManagerImpl;
+        using  FactoryType = LogConsoleTextColorsManagerFactory;
 
     public:
         explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept;

@@ -12,12 +12,18 @@
 
 #include "Network/NetworkDll.h"
 
+#include "../NetworkMessageFwd.h"
+#include <memory>
+#include <set>
+
 namespace Network
 {
     class NETWORK_HIDDEN_DECLARE MessageTypeConditionImpl
     {
     public:
         using ClassType = MessageTypeConditionImpl;
+        using FactoryType = MessageTypeConditionImpl;
+        using VersionType = std::set<int>;
 
     public:
         MessageTypeConditionImpl() noexcept;
@@ -33,6 +39,11 @@ namespace Network
         [[nodiscard]] virtual bool IsVersionsConform(int version) const = 0;
         [[nodiscard]] virtual int GetMinVersion() const = 0;
         [[nodiscard]] virtual int GetMaxVersion() const = 0;
+
+        static std::shared_ptr<MessageTypeConditionImpl> Create(const VersionType& version);
+        static std::shared_ptr<MessageTypeConditionImpl> Create(int beginVersion, int endVersion);
+        static std::shared_ptr<MessageTypeConditionImpl> Create(VersionsCondition condition, int version);
+        static std::shared_ptr<MessageTypeConditionImpl> Create();
     };
 
     bool operator<(const MessageTypeConditionImpl& lhs, const MessageTypeConditionImpl& rhs);

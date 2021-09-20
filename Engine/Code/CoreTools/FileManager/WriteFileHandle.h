@@ -16,25 +16,29 @@
 #include "System/FileManager/Flags/FileFlags.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+ 
 #include <string>
 
-CORE_TOOLS_EXPORT_SHARED_PTR(WriteFileHandleImpl);
-EXPORT_NONCOPYABLE_CLASS(CORE_TOOLS);
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(WriteFileHandleImpl);
+
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE WriteFileHandle final : private boost::noncopyable
+    class CORE_TOOLS_DEFAULT_DECLARE WriteFileHandle final  
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(WriteFileHandle);
+        NON_COPY_TYPE_DECLARE(WriteFileHandle);
         using String = System::String;
         using FileHandleCreationDisposition = System::FileHandleCreationDisposition;
 
     public:
         explicit WriteFileHandle(const String& fileName, FileHandleCreationDisposition creation = FileHandleCreationDisposition::CreateAlways);
-
+        ~WriteFileHandle() noexcept = default;
+        WriteFileHandle(const WriteFileHandle& rhs) noexcept = delete;
+        WriteFileHandle& operator=(const WriteFileHandle& rhs) noexcept = delete;
+        WriteFileHandle(WriteFileHandle&& rhs) noexcept = delete;
+        WriteFileHandle& operator=(WriteFileHandle&& rhs) noexcept = delete;
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] int GetFileByteSize() const;
@@ -43,7 +47,7 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
     private:
-        IMPL_TYPE_DECLARE(WriteFileHandle);
+        PackageType impl;
     };
 }
 

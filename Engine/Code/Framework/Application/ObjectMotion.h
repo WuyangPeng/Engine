@@ -14,15 +14,15 @@
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/Camera.h"
 #include "Rendering/SceneGraph/Spatial.h"
-
-FRAMEWORK_EXPORT_SHARED_PTR(ObjectMotionImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+FRAMEWORK_NON_COPY_EXPORT_IMPL(ObjectMotionImpl);
 
 namespace Framework
 {
 	class FRAMEWORK_DEFAULT_DECLARE ObjectMotion
 	{
 	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(ObjectMotion);
+		NON_COPY_TYPE_DECLARE(ObjectMotion);
 		using Matrix = Mathematics::FloatMatrix;
 		using AVector = Mathematics::FloatAVector;
 		using Transform = Rendering::FloatTransform;
@@ -50,7 +50,7 @@ namespace Framework
 		const Transform GetMotionObjectLocalTransform() const;
 
 	private:
-		IMPL_TYPE_DECLARE(ObjectMotion);
+                PackageType impl;
 	};
 }
 

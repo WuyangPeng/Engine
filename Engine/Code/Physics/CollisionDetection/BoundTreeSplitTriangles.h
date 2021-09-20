@@ -12,15 +12,15 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-
-PHYSICS_EXPORT_SHARED_PTR(BoundTreeSplitTrianglesImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+PHYSICS_PERFORMANCE_UNSHARED_EXPORT_IMPL(BoundTreeSplitTrianglesImpl);
 
 namespace Physics
 {
     class PHYSICS_DEFAULT_DECLARE BoundTreeSplitTriangles
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(BoundTreeSplitTriangles);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(BoundTreeSplitTriangles);
         using AVector = Mathematics::FloatAVector;
         using APoint = Mathematics::FloatAPoint;
         using Centroids = std::vector<APoint>;
@@ -37,7 +37,7 @@ namespace Physics
         const Split GetOutSplit() const;
 
     private:
-        IMPL_TYPE_DECLARE(BoundTreeSplitTriangles);
+        PackageType impl;
     };
 }
 

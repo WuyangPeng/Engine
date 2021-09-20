@@ -23,25 +23,27 @@
 // 找到最小二乘拟合组合N的点P[0]至P[N-1]。返回值是在 (U,Real,D)的最小二乘能量函数。
 
 #include "Mathematics/Algebra/Matrix2.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 namespace Mathematics
 {
     template <typename Real>
     class EllipseFit2Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<EllipseFit2Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseFit2 final
     {
     public:
         using EllipseFit2Impl = EllipseFit2Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(EllipseFit2);
-
+    
+        TYPE_DECLARE(EllipseFit2);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Vector2D = Vector2D<Real>;
         using Points = std::vector<Vector2D>;
         using Matrix2 = Matrix2<Real>;
@@ -62,7 +64,7 @@ namespace Mathematics
         [[nodiscard]] const Vector2D GetPoint(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(EllipseFit2);
+        PackageType impl;
     };
 
     using FloatEllipseFit2 = EllipseFit2<float>;

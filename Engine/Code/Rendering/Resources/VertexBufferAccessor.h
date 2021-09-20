@@ -11,8 +11,8 @@
 
 #include "VertexBuffer.h"
 #include "VertexFormat.h"
-
-RENDERING_EXPORT_SHARED_PTR(VertexBufferAccessorImpl);
+#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+RENDERING_DELAY_COPY_UNSHARED_EXPORT_IMPL(VertexBufferAccessor,VertexBufferAccessorImpl);
 
 namespace Rendering
 {
@@ -21,7 +21,7 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE VertexBufferAccessor
     {
     public:
-        DELAY_COPY_UNSHARE_CLASSES_TYPE_DECLARE(VertexBufferAccessor);
+        DELAY_COPY_UNSHARED_TYPE_DECLARE(VertexBufferAccessor);
 
     public:
         VertexBufferAccessor(const ConstVertexFormatSharedPtr& vertexformat, const ConstVertexBufferSharedPtr& vertexbuffer);
@@ -96,7 +96,7 @@ namespace Rendering
         bool HasBlendWeight() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(VertexBufferAccessor);
+        PackageType impl;
     };
 }
 

@@ -18,25 +18,21 @@ using std::make_shared;
 using std::string;
 
 CoreTools::CWriteFileManager::CWriteFileManager(const String& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{ fileName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, CWriteFileManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, CWriteFileManager)
 
 void CoreTools::CWriteFileManager::Write(size_t itemSize, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Write(itemSize, data);
+    return impl->Write(itemSize, data);
 }
 
 void CoreTools::CWriteFileManager::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Write(itemSize, itemsNumber, data);
+    return impl->Write(itemSize, itemsNumber, data);
 }
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CWriteFileManager, GetFileByteSize, uint32_t);
@@ -48,9 +44,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, F
 
 bool CoreTools::CWriteFileManager::Seek(long offset, FileSeek whence) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Seek(offset, whence);
+    return impl->Seek(offset, whence);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CWriteFileManager, GetPosition, CoreTools::CWriteFileManager::PosType);
@@ -60,7 +54,5 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, CWriteFileManager, R
 
 bool CoreTools::CWriteFileManager::Setvbuf(FileSetvBuf type, size_t size) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    return m_Impl->Setvbuf(type, size);
+    return impl->Setvbuf(type, size);
 }

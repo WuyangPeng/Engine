@@ -26,7 +26,7 @@ namespace Rendering
         using ClassType = PlatformTexture2DImpl;
         using PlatformTexture2DPtr = std::shared_ptr<ClassType>;
         using UInt = System::OpenGLUInt;
-
+          using FactoryType = ClassType;
     public:
         PlatformTexture2DImpl() noexcept;
         virtual ~PlatformTexture2DImpl();

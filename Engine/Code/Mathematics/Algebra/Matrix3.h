@@ -152,7 +152,7 @@ namespace Mathematics
         [[nodiscard]] const Matrix3 Transpose() const noexcept;
 
         // M * rhs
-        [[nodiscard]] Matrix3& operator*=(const Matrix3& rhs) noexcept;
+        Matrix3& operator*=(const Matrix3& rhs) noexcept;
 
         // ∆‰À¸‘ÀÀ„
         [[nodiscard]] const Matrix3 TimesDiagonal(const Vector3D& diagonal) const noexcept;  // M * D

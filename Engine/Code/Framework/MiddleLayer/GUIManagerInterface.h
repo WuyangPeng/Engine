@@ -13,7 +13,7 @@
 #include "EngineMiddleLayerInterface.h"  
 #include "Framework/Helper/MiddleLayerMacro.h"
 
-FRAMEWORK_EXPORT_SHARED_PTR(EngineMiddleLayerInterfaceImpl);
+FRAMEWORK_NON_COPY_EXPORT_IMPL(EngineMiddleLayerInterfaceImpl);
 
 namespace Framework
 {
@@ -21,7 +21,7 @@ namespace Framework
 	{
 	public:
 		using GUIManagerInterfaceImpl = EngineMiddleLayerInterfaceImpl;
-		NON_COPY_CLASSES_TYPE_DECLARE(GUIManagerInterface);
+		NON_COPY_TYPE_DECLARE(GUIManagerInterface);
 		using ParentType = EngineMiddleLayerInterface;
 
 	public:
@@ -49,7 +49,7 @@ namespace Framework
 		ENGINE_MIDDLE_LAYER_MANAGER_DECLARE(Rendering);
 
 	private:
-		IMPL_TYPE_DECLARE(GUIManagerInterface);
+                PackageType impl;
 	};
 
 	using GUIManagerInterfaceSharedPtr = std::shared_ptr<GUIManagerInterface>;

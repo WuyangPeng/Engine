@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/23 13:18)
+//	引擎版本：0.7.1.1 (2020/10/23 13:18)
 
 // 单元测试类。UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -37,9 +37,9 @@ namespace std
     class exception;
 }
 
-CORE_TOOLS_EXPORT_SHARED_PTR(CpuTimerData);
-CORE_TOOLS_EXPORT_SHARED_PTR(UnitTestData);
-
+ 
+EXPORT_SHARED_PTR(CoreTools, CpuTimerData, CORE_TOOLS_DEFAULT_DECLARE);
+EXPORT_SHARED_PTR(CoreTools, UnitTestData, CORE_TOOLS_DEFAULT_DECLARE);
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite

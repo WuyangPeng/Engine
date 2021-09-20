@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::Semaphore::Semaphore(int initialCount, int maximumCount)
-    : m_Impl{ make_shared<ImplType>(initialCount, maximumCount) }
+    : impl{  initialCount, maximumCount  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, Semaphore)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, Semaphore)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, Semaphore, Release, int, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Semaphore, Wait, void)

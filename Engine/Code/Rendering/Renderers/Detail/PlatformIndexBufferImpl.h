@@ -23,14 +23,15 @@ namespace Rendering
     public:
         using ClassType = PlatformIndexBufferImpl;
         using PlatformIndexBufferPtr = std::shared_ptr<ClassType>;
+        using FactoryType = PlatformIndexBufferImpl;
 
     public:
         PlatformIndexBufferImpl() noexcept;
         virtual ~PlatformIndexBufferImpl();
         PlatformIndexBufferImpl(const PlatformIndexBufferImpl&) = default;
         PlatformIndexBufferImpl& operator=(const PlatformIndexBufferImpl&) = default;
-        PlatformIndexBufferImpl( PlatformIndexBufferImpl&&) = default;
-        PlatformIndexBufferImpl& operator=( PlatformIndexBufferImpl&&) = default;
+        PlatformIndexBufferImpl(PlatformIndexBufferImpl&&) = default;
+        PlatformIndexBufferImpl& operator=(PlatformIndexBufferImpl&&) = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

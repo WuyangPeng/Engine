@@ -23,7 +23,7 @@ namespace Rendering
     public:
         using ClassType = PlatformTextureCubeImpl;
         using PlatformTextureCubePtr = std::shared_ptr<ClassType>;
-
+          using FactoryType = ClassType;
     public:
         PlatformTextureCubeImpl() noexcept;
         virtual ~PlatformTextureCubeImpl();

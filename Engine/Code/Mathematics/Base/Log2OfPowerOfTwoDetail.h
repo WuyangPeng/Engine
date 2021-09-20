@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename T>
 Mathematics::Log2OfPowerOfTwo<T>::Log2OfPowerOfTwo(T powerOfTwo) noexcept

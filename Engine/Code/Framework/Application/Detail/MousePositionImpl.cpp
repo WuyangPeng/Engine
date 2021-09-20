@@ -15,7 +15,7 @@ using std::make_shared;
 CLASS_INVARIANT_STUB_DEFINE(Framework, MousePositionImpl)
 
 Framework::MousePositionImpl::MousePositionImplSharedPtr Framework::MousePositionImpl
-	::CreateWindowMousePosition(HWnd hwnd)
+	::Create(HWnd hwnd)
 {
 	return make_shared<WindowMousePosition>(hwnd);
 }

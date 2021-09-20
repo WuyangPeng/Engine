@@ -19,14 +19,14 @@
 
 template <typename Real>
 Mathematics::Polygon2<Real>::Polygon2(const VerticesType& vertices)
-    : m_Impl{ std::make_shared<ImplType>(vertices) }
+    : impl{ std::make_shared<ImplType>(vertices) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Polygon2<Real>::Polygon2(const Polygon2& rhs)
-    : m_Impl{ std::make_shared<ImplType>(*rhs.m_Impl) }
+    : impl{ std::make_shared<ImplType>(*rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -46,14 +46,14 @@ Mathematics::Polygon2<Real>& Mathematics::Polygon2<Real>::operator=(const Polygo
 template <typename Real>
 void Mathematics::Polygon2<Real>::Swap(Polygon2& rhs) noexcept
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    std::swap(m_Impl, rhs.m_Impl);
+    std::swap(impl, rhs.impl);
 }
 
 template <typename Real>
 Mathematics::Polygon2<Real>::Polygon2(Polygon2&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 }
@@ -63,7 +63,7 @@ Mathematics::Polygon2<Real>& Mathematics::Polygon2<Real>::operator=(Polygon2&& r
 {
     IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
@@ -72,7 +72,7 @@ Mathematics::Polygon2<Real>& Mathematics::Polygon2<Real>::operator=(Polygon2&& r
 template <typename Real>
 bool Mathematics::Polygon2<Real>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -84,7 +84,7 @@ int Mathematics::Polygon2<Real>::GetNumVertices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumVertices();
+    return impl->GetNumVertices();
 }
 
 template <typename Real>
@@ -92,7 +92,7 @@ const typename Mathematics::Polygon2<Real>::VerticesType& Mathematics::Polygon2<
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertices();
+    return impl->GetVertices();
 }
 
 template <typename Real>
@@ -100,15 +100,15 @@ const Mathematics::Vector2D<Real>& Mathematics::Polygon2<Real>::GetVertex(int in
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetVertex(index);
+    return impl->GetVertex(index);
 }
 
 template <typename Real>
 void Mathematics::Polygon2<Real>::SetVertex(int index, const Vector2D& vertex)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetVertex(index, vertex);
+    return impl->SetVertex(index, vertex);
 }
 
 template <typename Real>
@@ -116,7 +116,7 @@ const typename Mathematics::Polygon2<Real>::Vector2D Mathematics::Polygon2<Real>
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeVertexAverage();
+    return impl->ComputeVertexAverage();
 }
 
 template <typename Real>
@@ -124,7 +124,7 @@ Real Mathematics::Polygon2<Real>::ComputePerimeterLength() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputePerimeterLength();
+    return impl->ComputePerimeterLength();
 }
 
 template <typename Real>
@@ -132,7 +132,7 @@ Real Mathematics::Polygon2<Real>::ComputeArea() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->ComputeArea();
+    return impl->ComputeArea();
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_POLYGON2_ACHIEVE_H

@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::LogMessagePostfix::LogMessagePostfix(AppenderPrint appenderFlags, LogLevel level, const FunctionDescribed& functionDescribed)
-    : m_Impl{ make_shared<ImplType>(appenderFlags, level, functionDescribed) }
+    : impl{  appenderFlags, level, functionDescribed  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, LogMessagePostfix)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, LogMessagePostfix)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePostfix, GetPostfix, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, LogMessagePostfix, GetPostfixSize, int)

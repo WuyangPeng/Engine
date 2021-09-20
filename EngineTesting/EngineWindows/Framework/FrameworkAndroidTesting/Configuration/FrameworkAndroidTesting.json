@@ -1,0 +1,12 @@
+{
+  "androidFrameSuite":
+  {
+    "AndroidProcessManageTesting": 1,
+    "AndroidProcessTesting": 1,
+    "AndroidCallBackInterfaceTesting": 1,
+    "AndroidCallBackTesting": 1,
+    "AndroidMessageLoopTesting": 1,
+    "AndroidFrameBuildTesting": 1,
+    "AndroidCallBackUnitTestSuiteTesting": 1
+  }
+}

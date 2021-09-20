@@ -31,3 +31,25 @@
 ----------------------------
 第七层：
 框架（Framework）。
+
+----------------------------
+关联的外部库：
+
+直接关联：
+	gsl、CppCoreGuidelines、boost、stlsoft、Visual Leak Detector（Debug）、zlib、freeType。
+	
+通过宏控制是否关联：
+	ACE、openssl、mysql、mysql connector c++、protobuf、freeglut、wxWidgets、opencv、openal、
+	lua、perl、Pantheios、Openrj、ogg、vorbis、FLTK、chipmunk2D physics。
+
+----------------------------
+相关模块：
+
+工具箱（Toolset）、编辑器（Editor）、例子（Example）、库例子（LibExample）。
+
+----------------------------
+相关模块的单元测试：
+
+引擎单元测试（EngineTesting）、编辑器单元测试（EditorTesting）、例子单元测试（ExampleTesting）、库例子单元测试（LibExampleTesting）。
+
+----------------------------

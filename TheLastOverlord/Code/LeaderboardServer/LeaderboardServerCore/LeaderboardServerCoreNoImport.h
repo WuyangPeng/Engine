@@ -1,0 +1,16 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// 作者：彭武阳，彭晔恩，彭晔泽
+// 
+// 最后的霸王版本：0.0.0.1 (2019/10/12 15:27)
+
+#ifndef LEADERBOARD_SERVER_CORE_NO_IMPORT_H
+#define LEADERBOARD_SERVER_CORE_NO_IMPORT_H
+
+#include "Macro/UserMacro.h"
+
+#ifndef BUILDING_LEADERBOARD_SERVER_CORE_NO_IMPORT
+  #define BUILDING_LEADERBOARD_SERVER_CORE_NO_IMPORT
+#endif // BUILDING_LEADERBOARD_SERVER_CORE_NO_IMPORT
+
+#endif // LEADERBOARD_SERVER_CORE_NO_IMPORT_H

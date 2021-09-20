@@ -29,7 +29,7 @@ Mathematics::MinBox2<Real>
 
         if (hullDim == 0)
         {
-			mMinBox = Box2<Real>{ points[0],Vector2D<Real>::sm_UnitX,Vector2D<Real>::sm_UnitY, Math<Real>::GetValue(0),Math<Real>::GetValue(0) };
+			mMinBox = Box2<Real>{ points[0],Vector2D<Real>::GetUnitX(),Vector2D<Real>::GetUnitY(), Math<Real>::GetValue(0),Math<Real>::GetValue(0) };
             return;
         }
 
@@ -155,13 +155,13 @@ Mathematics::MinBox2<Real>
     // height for now.
 	Vector2D<Real> center{ (Real{0.5})*(xmin + xmax), (Real{0.5})*(ymin + ymax) };
  
-	mMinBox = Box2<Real>{ center, Vector2D<Real>::sm_UnitX, Vector2D<Real>::sm_UnitY,(Real{0.5})*(xmax - xmin), (Real{0.5})*(ymax - ymin) };
+	mMinBox = Box2<Real>{ center, Vector2D<Real>::GetUnitX(), Vector2D<Real>::GetUnitY(),(Real{0.5})*(xmax - xmin), (Real{0.5})*(ymax - ymin) };
 
 	auto minAreaDiv4 = mMinBox.GetExtent0() *mMinBox.GetExtent1();
 
     // The rotating calipers algorithm.
-	auto U = Vector2D<Real>::sm_UnitX;
-	auto V = Vector2D<Real>::sm_UnitY;
+	auto U = Vector2D<Real>::GetUnitX();
+	auto V = Vector2D<Real>::GetUnitY();
 
     bool done = false;
     while (!done)

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:25)
+//	引擎版本：0.7.1.1 (2020/10/26 15:25)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_H
@@ -31,7 +31,7 @@ namespace CoreTools
         using EventSlotManagerType = EventSlotManager<EventSlot>;
 
     public:
-        MessageManager();
+        MessageManager() noexcept;
         virtual ~MessageManager() = default;
 
         MessageManager(const MessageManager& rhs) = default;

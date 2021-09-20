@@ -10,9 +10,9 @@
 #include "Framework/FrameworkDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
-#include "System/Window/Using/WindowUsing.h"
-#include "System/Window/Using/WindowRegistryUsing.h"
-#include "System/Window/Using/WindowPictorialUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
+#include "System/Windows/Using/WindowsRegistryUsing.h"
+#include "System/Windows/Using/WindowsPictorialUsing.h"
 
 namespace Framework
 {
@@ -21,8 +21,8 @@ namespace Framework
 	public:
 		using ClassType = WindowHIcon;
 		using TChar = System::TChar;
-		using HIcon = System::WindowHIcon;
-		using HInstance = System::WindowHInstance;
+		using HIcon = System::WindowsHIcon;
+		using HInstance = System::WindowsHInstance;
 
 	public:
 		explicit WindowHIcon(const TChar* icon = System::g_Application) noexcept;

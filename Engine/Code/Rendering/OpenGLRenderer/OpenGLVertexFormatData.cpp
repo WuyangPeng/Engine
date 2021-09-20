@@ -20,8 +20,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnablePositionArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+		//System::GLEnablePositionArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -33,8 +34,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnableNormalArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+		//System::GLEnableNormalArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -46,8 +48,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnableTangentArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+		//System::GLEnableTangentArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -59,8 +62,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnableBinormalArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+	//	System::GLEnableBinormalArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -72,8 +76,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnableBlendIndicesArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+		//System::GlEnableBlendIndicesArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -85,8 +90,9 @@ void Rendering
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	if (IsHas())
-	{
-		System::GlEnableBlendWeightArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+        {
+            stride;
+		//System::GlEnableBlendWeightArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -96,10 +102,10 @@ void Rendering
 	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
+    stride;
 	if (IsHas())
 	{
-		System::GlEnableFogCoordArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
+		//System::GLEnableFogCoordArray(m_Channels, m_Type, stride,reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -109,10 +115,10 @@ void Rendering
 	::Enable(int stride) noexcept
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
-
+    stride;
 	if (IsHas())
 	{
-		System::GlEnablePSizeArray(m_Channels, m_Type, stride, reinterpret_cast<char*>(0) + m_Offset);
+	//	System::GLEnablePSizeArray(m_Channels, m_Type, stride, reinterpret_cast<char*>(0) + m_Offset);
 	}
 }
 
@@ -125,7 +131,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisablePositionArray();
+	//	System::GLDisablePositionArray();
 	}
 }
 
@@ -138,7 +144,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableNormalArray();
+	//	System::GLDisableNormalArray();
 	}
 }
 
@@ -151,7 +157,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableTangentArray();
+		//System::GLDisableTangentArray();
 	}
 }
 
@@ -164,7 +170,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableBinormalArray();
+		//System::GLDisableBinormalArray();
 	}
 }
 
@@ -177,7 +183,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableBlendIndicesArray();
+		//System::GlDisableBlendIndicesArray();
 	}
 }
 
@@ -190,7 +196,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableBlendWeightArray();
+		//System::GlDisableBlendWeightArray();
 	}
 }
 
@@ -203,7 +209,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisableFogCoordArray();
+		//System::GLDisableFogCoordArray();
 	}
 }
 
@@ -216,7 +222,7 @@ void Rendering
 
 	if (IsHas())
 	{
-		System::GlDisablePSizeArray();
+		//System::GLDisablePSizeArray();
 	}
 }
 #include STSTEM_WARNING_POP

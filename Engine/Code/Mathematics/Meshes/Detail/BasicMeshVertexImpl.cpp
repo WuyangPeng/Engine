@@ -15,9 +15,8 @@
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-Mathematics::BasicMeshVertexImpl
-	::BasicMeshVertexImpl () noexcept
-	:m_Vertex{}, m_Edge{}, m_Triangle{}
+Mathematics::BasicMeshVertexImpl ::BasicMeshVertexImpl(MAYBE_UNUSED int count) noexcept
+    : m_Vertex{}, m_Edge{}, m_Triangle{}
 {
 	MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }

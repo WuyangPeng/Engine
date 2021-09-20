@@ -27,6 +27,7 @@ namespace CoreTools
         using ClassType = CReadFileManagerImpl;
         using ParentType = CFileManagerImpl;
         using InterfaceType = ReadFileManagerInterface;
+        using String = System::String;
 
     public:
         explicit CReadFileManagerImpl(const String& fileName);

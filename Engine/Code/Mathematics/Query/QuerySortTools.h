@@ -14,15 +14,15 @@
 
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
-
-MATHEMATICS_EXPORT_SHARED_PTR(QuerySortToolsImpl);
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+MATHEMATICS_PERFORMANCE_UNSHARED_EXPORT_IMPL(QuerySortToolsImpl);
 
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE QuerySortTools
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(QuerySortTools);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(QuerySortTools);
 
     public:
         QuerySortTools(int value0, int value1);
@@ -43,7 +43,7 @@ namespace Mathematics
         [[nodiscard]] int GetValue(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(QuerySortTools);
+        PackageType impl;
     };
 }
 

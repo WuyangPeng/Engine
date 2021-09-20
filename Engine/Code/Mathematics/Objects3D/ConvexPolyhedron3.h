@@ -37,7 +37,18 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ConvexPolyhedron3Impl = ConvexPolyhedron3Impl<Real>;
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(ConvexPolyhedron3, DESTRUCTOR_DEFAULT);
+
+    public:
+        void Swap(ConvexPolyhedron3& rhs) noexcept;
+
+    public:
+        TYPE_DECLARE(ConvexPolyhedron3);
+        using ClassShareType = CoreTools::CopyUnsharedClasses;
+        ~ConvexPolyhedron3() noexcept = default;
+        ConvexPolyhedron3(const ConvexPolyhedron3& rhs);
+        ConvexPolyhedron3& operator=(const ConvexPolyhedron3& rhs);
+        ConvexPolyhedron3(ConvexPolyhedron3&& rhs) noexcept;
+        ConvexPolyhedron3& operator=(ConvexPolyhedron3&& rhs) noexcept;
 
         using ParentType = Polyhedron3<Real>;
         using Math = Math<Real>;
@@ -101,7 +112,7 @@ namespace Mathematics
         void UpdatePlane(int index, const Vector3D& average);
 
     private:
-        IMPL_TYPE_DECLARE(ConvexPolyhedron3);
+        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 
     using FloatConvexPolyhedron3 = ConvexPolyhedron3<float>;

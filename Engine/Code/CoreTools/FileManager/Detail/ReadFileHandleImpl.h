@@ -22,7 +22,7 @@ namespace CoreTools
         using ClassType = ReadFileHandleImpl;
         using ParentType = FileHandleImpl;
         using InterfaceType = ReadFileManagerInterface;
-
+            using String = System::String;
     public:
         explicit ReadFileHandleImpl(const String& fileName);
 

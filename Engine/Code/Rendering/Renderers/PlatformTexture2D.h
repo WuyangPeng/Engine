@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
-// 
+//
 // ÒýÇæ°æ±¾£º0.0.0.3 (2019/07/26 15:31)
 
 #ifndef RENDERING_RENDERERS_PLATFORM_TEXTURE_2D_H
@@ -13,46 +13,45 @@
 
 #include "System/OpenGL/Flags/OpenGLFlags.h"
 #include "System/OpenGL/Using/OpenGLUsing.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "Rendering/Resources/Flags/BufferFlags.h"
-
 #include <boost/noncopyable.hpp>
 
-RENDERING_EXPORT_SHARED_PTR(PlatformTexture2DImpl);
-EXPORT_NONCOPYABLE_CLASS(RENDERING);
+RENDERING_NON_COPY_EXPORT_IMPL(PlatformTexture2DImpl);
 
 namespace Rendering
 {
-	class Renderer;
-	class Texture2D;
-	
-	class RENDERING_DEFAULT_DECLARE PlatformTexture2D : boost::noncopyable
-	{
-	public:
-		NON_COPY_CLASSES_TYPE_DECLARE(PlatformTexture2D);
-		using TextureType = Texture2D;
-		using UInt = System::OpenGLUInt;
+    class Renderer;
+    class Texture2D;
 
-	public:
-		PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D);
-		virtual ~PlatformTexture2D ();
-		PlatformTexture2D(const PlatformTexture2D&) = delete;
-		PlatformTexture2D& operator=(const PlatformTexture2D&) = delete;
-		PlatformTexture2D( PlatformTexture2D&&) = delete;
-		PlatformTexture2D& operator=( PlatformTexture2D&&) = delete;
+    class RENDERING_DEFAULT_DECLARE PlatformTexture2D
+    {
+    public:
+        NON_COPY_TYPE_DECLARE(PlatformTexture2D);
+        using TextureType = Texture2D;
+        using UInt = System::OpenGLUInt;
 
-		CLASS_INVARIANT_VIRTUAL_DECLARE;
+    public:
+        PlatformTexture2D(Renderer* renderer, const Texture2D* texture2D);
+        virtual ~PlatformTexture2D();
+        PlatformTexture2D(const PlatformTexture2D&) = delete;
+        PlatformTexture2D& operator=(const PlatformTexture2D&) = delete;
+        PlatformTexture2D(PlatformTexture2D&&) = delete;
+        PlatformTexture2D& operator=(PlatformTexture2D&&) = delete;
 
-		// ÎÆÀí²Ù×÷
-		void Enable (Renderer* renderer, int textureUnit);
-		void Disable (Renderer* renderer, int textureUnit);
-		void* Lock(int level, BufferLocking mode);
-		void Unlock (int level);	
+        CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-		UInt GetTexture () const;
-	
-	private:
-		IMPL_TYPE_DECLARE(PlatformTexture2D);
-	};
+        // ÎÆÀí²Ù×÷
+        void Enable(Renderer* renderer, int textureUnit);
+        void Disable(Renderer* renderer, int textureUnit);
+        void* Lock(int level, BufferLocking mode);
+        void Unlock(int level);
+
+        UInt GetTexture() const;
+
+    private:
+        PackageType impl;
+    };
 }
 
-#endif // RENDERING_RENDERERS_PLATFORM_TEXTURE_2D_H
+#endif  // RENDERING_RENDERERS_PLATFORM_TEXTURE_2D_H

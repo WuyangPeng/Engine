@@ -12,7 +12,7 @@
 #include "Rendering/DataTypes/Transform.h" 
 #include "CoreTools/Helper/Assertion/FrameworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h" 
-
+#include "Mathematics/Algebra/HomogeneousPointDetail.h"
 Framework::ObjectMotionMove
 	::ObjectMotionMove(const SpatialSmartPointer& motionObject, int doRoll, int doYaw, int doPitch, float rotationSpeed)
 	:m_MotionObject{ motionObject }, m_DoRoll{ doRoll }, m_DoYaw{ doYaw }, m_DoPitch{ doPitch },

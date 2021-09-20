@@ -35,12 +35,12 @@ void Network::MessageManager::Destroy() noexcept
 }
 
 Network::MessageManager::MessageManager([[maybe_unused]] MessageManagerCreate messageManagerCreate)
-    : m_Impl{ make_shared<ImplType>() }
+    : impl{  0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Network, MessageManager)
+CLASS_INVARIANT_STUB_DEFINE(Network, MessageManager)
 
 Network::MessageManager::FactoryFunction Network::MessageManager::Find(int64_t messageID, int version) const
 {
@@ -48,43 +48,43 @@ Network::MessageManager::FactoryFunction Network::MessageManager::Find(int64_t m
 
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->Find(messageID, version);
+    return impl->Find(messageID, version);
 }
 
 void Network::MessageManager::Insert(int64_t messageID, const MessageTypeCondition& messageTypeCondition, FactoryFunction function)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Insert(messageID, messageTypeCondition, function);
+    return impl->Insert(messageID, messageTypeCondition, function);
 }
 
 void Network::MessageManager::Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Remove(messageID, messageTypeCondition);
+    return impl->Remove(messageID, messageTypeCondition);
 }
 
 void Network::MessageManager::Remove(int64_t messageID)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->Remove(messageID);
+    return impl->Remove(messageID);
 }
 
 void Network::MessageManager::SetFullVersion(int fullVersion)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    ;
 
-    return m_Impl->SetFullVersion(fullVersion);
+    return impl->SetFullVersion(fullVersion);
 }
 
 int Network::MessageManager::GetFullVersion() const
@@ -93,7 +93,7 @@ int Network::MessageManager::GetFullVersion() const
 
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetFullVersion();
+    return impl->GetFullVersion();
 }
 
  

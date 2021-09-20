@@ -19,7 +19,7 @@
 
 using namespace std::literals;
 
-CoreTools::EnvironmentImpl::EnvironmentImpl() noexcept
+CoreTools::EnvironmentImpl::EnvironmentImpl(MAYBE_UNUSED int count) noexcept
     : m_Directories{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

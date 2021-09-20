@@ -20,7 +20,7 @@
 namespace Mathematics
 {
     template <typename Real, template <typename> class Matrix>
-    class MATHEMATICS_HIDDEN_DECLARE SolveSymmetricConjugateGradient final : private boost::noncopyable
+    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE SolveSymmetricConjugateGradient final : private boost::noncopyable
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");

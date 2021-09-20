@@ -16,14 +16,14 @@ using std::make_shared;
 
 Rendering::TrianglePosition
 	::TrianglePosition(const APoint& firstPosition,const APoint& secondPosition, const APoint& thirdPosition)
-	:m_Impl{ make_shared<ImplType>(firstPosition,secondPosition,thirdPosition) }
+	:impl{ firstPosition,secondPosition,thirdPosition }
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,TrianglePosition)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition,GetFirstPosition,const Rendering::TrianglePosition::APoint)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition, GetFirstPosition, const Rendering::TrianglePosition::APoint)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, TrianglePosition, GetSecondPosition, const Rendering::TrianglePosition::APoint)
 									

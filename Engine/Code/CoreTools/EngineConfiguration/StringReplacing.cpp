@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 11:19)
+//	引擎版本：0.7.1.1 (2020/10/26 11:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,7 +18,7 @@ using std::make_shared;
 using std::string;
 
 CoreTools::StringReplacing::StringReplacing(const string& configurationFileName)
-    : m_Impl{ make_shared<ImplType>(configurationFileName) }
+    : impl{  configurationFileName  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

@@ -26,7 +26,7 @@
 
 using std::make_shared;
 
-CoreTools::MutexFactory::MutexImplPtr CoreTools::MutexFactory::GenerateMutex(MutexCreate mutexCreate)
+CoreTools::MutexFactory::MutexImplPtr CoreTools::MutexFactory::Create(MutexCreate mutexCreate)
 {
     switch (mutexCreate)
     {

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 13:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/18 10:24)
 
 #include "System/SystemExport.h"
 
@@ -19,10 +19,13 @@
 bool System::GetEnvironment(const String& variableName, TChar*& environmentVariable) noexcept
 {
 #if defined(SYSTEM_PLATFORM_ANDROID)
+
     environmentVariable = nullptr;
 
     return false;
+
 #elif defined(TCRE_USE_GCC)
+
     #ifdef UNICODE
     environmentVariable = ::_wgetenv(variableName.c_str());
     #else  // !UNICODE
@@ -33,7 +36,9 @@ bool System::GetEnvironment(const String& variableName, TChar*& environmentVaria
         return false;
     else
         return true;
+
 #else  // !TCRE_USE_GCC && !SYSTEM_PLATFORM_ANDROID
+
     size_t length{ 0 };
 
     const auto error = _tdupenv_s(&environmentVariable, &length, variableName.c_str());
@@ -41,13 +46,16 @@ bool System::GetEnvironment(const String& variableName, TChar*& environmentVaria
         return false;
     else
         return true;
+
 #endif  // ANDROID
 }
 
 void System::FreeEnvironment(TChar*& environmentVariable) noexcept
 {
 #if defined(SYSTEM_PLATFORM_ANDROID)
+
     environmentVariable = nullptr;
+
 #else  // !SYSTEM_PLATFORM_ANDROID
 
     #include STSTEM_WARNING_PUSH
@@ -56,5 +64,6 @@ void System::FreeEnvironment(TChar*& environmentVariable) noexcept
     #include STSTEM_WARNING_POP
 
     environmentVariable = nullptr;
+
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

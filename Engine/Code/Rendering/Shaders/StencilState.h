@@ -14,8 +14,8 @@
 #include "CoreTools/Helper/ExportMacro.h"
 
 
-RENDERING_EXPORT_SHARED_PTR(StencilStateImpl);
-
+ 
+EXPORT_SHARED_PTR(Rendering, StencilStateImpl, RENDERING_DEFAULT_DECLARE);
 namespace CoreTools
 {
 	class WriteFileManager;
@@ -27,7 +27,16 @@ namespace Rendering
 	class RENDERING_DEFAULT_DECLARE StencilState : public CoreTools::Object
 	{
 	public:
-            COPY_UNSHARE_CLASSES_TYPE_DECLARE(StencilState, DESTRUCTOR_STATEMENT);
+            void Swap(StencilState& rhs) noexcept;
+            
+                public:
+                    TYPE_DECLARE(StencilState);
+                    using ClassShareType = CoreTools::CopyUnsharedClasses;
+                    ~StencilState() noexcept;
+                    StencilState(const StencilState& rhs);
+                    StencilState& operator=(const StencilState& rhs);
+                    StencilState(StencilState&& rhs) noexcept;
+                    StencilState& operator=(StencilState&& rhs) noexcept;
 		using ParentType = Object;
 		using CompareMode = StencilStateFlags::CompareMode;
 		using OperationType = StencilStateFlags::OperationType;
@@ -64,7 +73,7 @@ namespace Rendering
 		void LoadState(ReadFileManager& manager);
                 ObjectInterfaceSharedPtr CloneObject() const override;
 	private:
-		IMPL_TYPE_DECLARE(StencilState);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
 	};
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)

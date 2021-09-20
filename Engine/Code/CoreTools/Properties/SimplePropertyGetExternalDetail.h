@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:39)
+//	引擎版本：0.7.1.1 (2020/10/26 13:39)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_DETAIL_H
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename Value, typename ConstReference>
-CoreTools::SimplePropertyGetExternal<Value, ConstReference>::SimplePropertyGetExternal(const ValueType& value)
+CoreTools::SimplePropertyGetExternal<Value, ConstReference>::SimplePropertyGetExternal(const ValueType& value) noexcept
     : m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

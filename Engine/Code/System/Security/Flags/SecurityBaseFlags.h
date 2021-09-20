@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 14:09)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/05/24 16:12)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_FLAGS_H
 #define SYSTEM_SECURITY_SECURITY_BASE_FLAGS_H
@@ -72,8 +72,15 @@ namespace System
         LogonId = (0xC0000000L),
         Resource = (0x20000000L),
 
-        ValidAttributes = (Mandatory | EnabledByDefault | Enabled | Owner | UseForDenyOnly |
-                           LogonId | Resource | Integrity | IntegrityEnabled),
+        ValidAttributes = (Mandatory |
+                           EnabledByDefault |
+                           Enabled |
+                           Owner |
+                           UseForDenyOnly |
+                           LogonId |
+                           Resource |
+                           Integrity |
+                           IntegrityEnabled),
     };
 
     enum class SpecifiesAdditionalPrivilegeOptions

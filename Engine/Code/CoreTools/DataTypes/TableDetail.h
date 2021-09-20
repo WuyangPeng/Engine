@@ -105,7 +105,9 @@ Type& CoreTools::Table<Rows, Columns, Type>::operator()(int row, int column)
     return const_cast<Type&>(static_cast<const ClassType&>(*this)(row, column));
 #include STSTEM_WARNING_POP
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
 template <int Rows, int Columns, typename Type>
 void CoreTools::Table<Rows, Columns, Type>::SetRow(int row, const ColumnTuple& tuple)
 {
@@ -169,7 +171,7 @@ typename CoreTools::Table<Rows, Columns, Type>::RowTuple CoreTools::Table<Rows, 
 
     return result;
 }
-
+#include STSTEM_WARNING_POP
 template <int Rows, int Columns, typename Type>
 typename CoreTools::Table<Rows, Columns, Type>::ArrayTypeConstIter CoreTools::Table<Rows, Columns, Type>::begin() const noexcept
 {

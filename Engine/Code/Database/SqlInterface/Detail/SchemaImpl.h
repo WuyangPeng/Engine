@@ -17,6 +17,7 @@
 
 namespace Database
 {
+    class SchemaFactory;
     class DATABASE_HIDDEN_DECLARE SchemaImpl
     {
     public:
@@ -24,6 +25,7 @@ namespace Database
         using ImplTypePtr = std::shared_ptr<ClassType>;
         using MysqlxCollectionPtr = std::unique_ptr<MysqlxCollection>;
         using MysqlxTablePtr = std::unique_ptr<MysqlxTable>;
+        using FactoryType = SchemaFactory;
 
     public:
         explicit SchemaImpl(const ConfigurationStrategy& configurationStrategy) noexcept;

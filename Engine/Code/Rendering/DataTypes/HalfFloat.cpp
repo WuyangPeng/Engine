@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 #include <iostream>
 
 using std::ostream;

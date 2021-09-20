@@ -25,7 +25,7 @@ namespace Network
         using ClassType = SocketManagerImpl;
 
     public:
-        SocketManagerImpl();
+        SocketManagerImpl(MAYBE_UNUSED int count);
         ~SocketManagerImpl() noexcept = default;
 
         SocketManagerImpl(const SocketManagerImpl& rhs);

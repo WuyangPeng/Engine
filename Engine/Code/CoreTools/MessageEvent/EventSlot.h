@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 15:23)
+//	引擎版本：0.7.1.1 (2020/10/26 15:23)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_H
@@ -34,12 +34,12 @@ namespace CoreTools
         using ConstSubclassSmartPointerType = std::shared_ptr<const T>;
 
     public:
-        EventSlot(const SubclassSmartPointerType& smartPointer, PriorityType priority, CallbackMemberFunction callbackMemberFunction);
+        EventSlot(const SubclassSmartPointerType& smartPointer, PriorityType priority, CallbackMemberFunction callbackMemberFunction) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] bool operator()(const CallbackParameters& callbackParameters);
-        [[nodiscard]] PriorityType GetPriority() const;
+        [[nodiscard]] PriorityType GetPriority() const noexcept;
 
         [[nodiscard]] const ConstSubclassSmartPointerType GetConstSmartPointer() const;
 
@@ -50,7 +50,7 @@ namespace CoreTools
     };
 
     template <typename T, typename PriorityType>
-    [[nodiscard]] bool operator<(const EventSlot<T, PriorityType>& lhs, const EventSlot<T, PriorityType>& rhs);
+    [[nodiscard]] bool operator<(const EventSlot<T, PriorityType>& lhs, const EventSlot<T, PriorityType>& rhs) noexcept;
 
     template <typename T, typename PriorityType>
     std::ostream& operator<<(std::ostream& os, const EventSlot<T, PriorityType>& lhs);

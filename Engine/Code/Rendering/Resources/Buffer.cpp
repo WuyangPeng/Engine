@@ -25,19 +25,49 @@ using std::make_shared;
 CORE_TOOLS_RTTI_DEFINE(Rendering,Buffer);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering,Buffer);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering,Buffer); 
-
+#define COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(namespaceName, className)      \
+    namespaceName::className::className(const className& rhs)                               \
+        : ParentType{ rhs }, impl{ std::make_shared<ImplType>(*rhs.impl) }                  \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        SELF_CLASS_IS_VALID_0;                                                              \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(const className& rhs)     \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(rhs);                                                         \
+        impl = std::make_shared<ImplType>(*rhs.impl);                                       \
+        return *this;                                                                       \
+    }                                                                                       \
+    void namespaceName::className::Swap(className& rhs) noexcept                            \
+    {                                                                                       \
+        ;                                       \
+        std::swap(impl, rhs.impl);                                                          \
+    }                                                                                       \
+    namespaceName::className::className(className&& rhs) noexcept                           \
+        : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }                         \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+    }                                                                                       \
+    namespaceName::className& namespaceName::className::operator=(className&& rhs) noexcept \
+    {                                                                                       \
+        IMPL_COPY_CONSTRUCTOR_FUNCTION_STATIC_ASSERT;                                       \
+        ParentType::operator=(std::move(rhs));                                              \
+        impl = std::move(rhs.impl);                                                         \
+        return *this;                                                                       \
+    }
 COPY_CONSTRUCTION_DO_NOT_USE_SWAP_DEFINE_WITH_PARENT(Rendering, Buffer);
 
 Rendering::Buffer
     ::Buffer()
-	:ParentType{ "Buffer" }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ "Buffer" }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
 Rendering::Buffer
 	::Buffer(int numElements, int elementSize, BufferUsage usage)
-	:ParentType{ "Buffer" }, m_Impl{ make_shared<ImplType>(numElements, elementSize, usage) }
+	:ParentType{ "Buffer" }, impl{ make_shared<ImplType>(numElements, elementSize, usage) }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -48,7 +78,7 @@ Rendering::Buffer
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_PARENT_AND_IMPL_IS_VALID_DEFINE(Rendering,Buffer)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering,Buffer)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering,Buffer,GetNumElements,int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, Buffer, GetElementSize, int)
@@ -61,7 +91,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,GetReadOnlyData, int,con
 
 Rendering::Buffer
     ::Buffer (LoadConstructor value)
-	:ParentType{ value }, m_Impl{ make_shared<ImplType>() }
+	:ParentType{ value }, impl{ make_shared<ImplType>() }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -73,7 +103,7 @@ int Rendering::Buffer
 
 	auto size = ParentType::GetStreamingSize();
 
-	size += m_Impl->GetStreamingSize();
+	size += impl->GetStreamingSize();
 
 	return size;
 }
@@ -95,7 +125,7 @@ void Rendering::Buffer
 
 	ParentType::Save(target);
 	
-	m_Impl->Save(target);
+	impl->Save(target);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
@@ -103,7 +133,7 @@ void Rendering::Buffer
 void Rendering::Buffer
 	::Link (const CoreTools::ObjectLinkSharedPtr& source)
 {	
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::Link(source);
 }
@@ -111,7 +141,7 @@ void Rendering::Buffer
 void Rendering::Buffer
 	::PostLink ()
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
 	ParentType::PostLink();
 }
@@ -119,13 +149,13 @@ void Rendering::Buffer
 void Rendering::Buffer
 	::Load (const CoreTools::BufferSourceSharedPtr& source)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 	
-	m_Impl->Load(source);
+	impl->Load(source);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
@@ -141,9 +171,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,ReadHeadFromFile, Re
 void Rendering::Buffer
 	::ReadBufferDataFromFile(ReadFileManager& inFile, const ConstVertexFormatSharedPtr& vertexformat)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->ReadBufferDataFromFile(inFile, vertexformat);
+	return impl->ReadBufferDataFromFile(inFile, vertexformat);
 }
 
 
@@ -152,7 +182,7 @@ void Rendering::Buffer
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->SaveBufferDataToFile(outFile, vertexformat);
+	return impl->SaveBufferDataToFile(outFile, vertexformat);
 }
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,GetAccessWriteData, int, char*)
@@ -161,9 +191,9 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, Buffer,GetAccessWriteData, 
 void Rendering::Buffer
 	::SetNewData(const std::vector<char>& newData)
 {
-	IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+	;
 
-	return m_Impl->SetNewData(newData);
+	return impl->SetNewData(newData);
 }
 
 

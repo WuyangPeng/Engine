@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
+#include "Vector3D.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -42,7 +43,7 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         [[nodiscard]] const Vector3D GetUVector() const noexcept;
-        [[nodiscard]] const Vector3D GetVVector() const noexcept; 
+        [[nodiscard]] const Vector3D GetVVector() const noexcept;
         [[nodiscard]] const Vector3D GetWVector() const noexcept;
 
     private:

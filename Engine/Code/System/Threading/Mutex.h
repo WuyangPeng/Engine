@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/23 15:25)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.3 (2021/04/25 14:03)
 
 #ifndef SYSTEM_THREADING_MUTEX_H
 #define SYSTEM_THREADING_MUTEX_H
@@ -21,27 +21,36 @@ namespace System
 {
     // 互斥锁的创建和销毁。
 
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes, bool initialOwner, const TChar* name) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes, const TChar* name, MutexCreate flag,
-                                                                        MutexStandardAccess desiredAccess, MutexSpecificAccess specificAccess) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex() noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE CloseSystemMutex(WindowHandle handle) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE ReleaseSystemMutex(WindowHandle handle) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowHandle handle) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowHandle handle, WindowDWord milliseconds) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowHandle handle, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowDWord count, const WindowHandle* handle, bool waitAll, WindowDWord milliseconds, bool alertable) noexcept;
-    [[nodiscard]] MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowDWord count, const WindowHandle* handle, bool waitAll, WindowDWord milliseconds) noexcept;
-    [[nodiscard]] WindowHandle SYSTEM_DEFAULT_DECLARE OpenThreadingMutex(MutexStandardAccess desiredAccess, MutexSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept;
-    [[nodiscard]] bool SYSTEM_DEFAULT_DECLARE IsSystemMutexValid(WindowHandle handle) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeInit(PthreadMutexattrT* attribute) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeSetType(PthreadMutexattrT* attribute) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexInit(PthreadMutexattrT* attribute, PthreadMutexT* mutex) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexDestroy(PthreadMutexT* mutex) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeDestroy(PthreadMutexattrT* attribute) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexLock(PthreadMutexT* mutex) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexUnlock(PthreadMutexT* mutex) noexcept;
-    [[nodiscard]] PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexTrylock(PthreadMutexT* mutex) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes,
+                                                                        bool initialOwner,
+                                                                        const TChar* name) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes,
+                                                                        const TChar* name,
+                                                                        MutexCreate flag,
+                                                                        MutexStandardAccess desiredAccess,
+                                                                        MutexSpecificAccess specificAccess) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex() noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemMutex(WindowsHandle handle) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemMutex(WindowsHandle handle) noexcept;
+
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowsHandle handle) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowsHandle handle, WindowsDWord milliseconds) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowsHandle handle, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemMutex(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds) noexcept;
+
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenThreadingMutex(MutexStandardAccess desiredAccess, MutexSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE IsSystemMutexValid(WindowsHandle handle) noexcept;
+
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeInit(PthreadMutexattrT* attribute) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeSetType(PthreadMutexattrT* attribute) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexInit(PthreadMutexattrT* attribute, PthreadMutexT* mutex) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexDestroy(PthreadMutexT* mutex) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexAttributeDestroy(PthreadMutexattrT* attribute) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexLock(PthreadMutexT* mutex) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexUnlock(PthreadMutexT* mutex) noexcept;
+    NODISCARD PthreadResult SYSTEM_DEFAULT_DECLARE PthreadMutexTrylock(PthreadMutexT* mutex) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_MUTEX_H

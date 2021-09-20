@@ -1,0 +1,341 @@
+{
+  "macroSuite": 
+  {
+
+  },
+
+  "baseSuite":
+  {
+    "BitHacksTesting": 100,
+    "MathTesting": 100,
+    "FastTrigonometricTesting": 100,
+    "FastNegativeExpTesting": 100,
+    "RandomTesting": 100,
+    "Float1Testing": 1,
+    "Float2Testing": 1,
+    "Float3Testing": 1,
+    "Float4Testing": 1
+  },
+
+  "algebraSuite":
+  {
+    "HomogeneousPointTesting": 1,
+    "BarycentricCoordinatesTesting": 1,
+    "Vector2DTesting": 100,
+    "Vector3DTesting": 100,
+    "Vector4DTesting": 1,
+    "Vector2DOrthonormalizeTesting": 100,
+    "Vector2DOrthonormalBasisTesting": 100,
+    "Vector3DOrthonormalizeTesting": 100,
+    "Vector3DOrthonormalBasisTesting": 100,
+    "AxesAlignBoundingBox2DTesting": 100,
+    "AxesAlignBoundingBox3DTesting": 100,
+    "AxesAlignBoundingBox4DTesting": 1,
+    "Vector2DToolsTesting": 100,
+    "Vector3DToolsTesting": 100,
+    "Vector4DToolsTesting": 100,
+    "Vector2DInformationTesting": 100,
+    "Vector3DInformationTesting": 100,
+    "APointTesting": 100,
+    "AVectorOrthonormalizeTesting": 100,
+    "AVectorOrthonormalBasisTesting": 100,
+    "AVectorTesting": 100,
+    "VariableLengthVectorTesting": 1,
+    "PlaneTesting": 100,
+    "PolynomialTesting": 1,
+    "PolynomialDivideTesting": 1,
+    "Matrix2Testing": 100,
+    "Matrix2EigenDecompositionTesting": 100,
+    "Matrix3Testing": 100,
+    "Matrix3EigenDecompositionTesting": 100,
+    "Matrix3ExtractTesting": 100,
+    "EulerTesting": 100,
+    "Matrix4Testing": 100,
+    "MatrixTesting": 100,
+    "VariableMatrixTesting": 10,
+    "BandedMatrixTesting": 100,
+    "BandedMatrixSolveTesting": 10,
+    "QuaternionTesting": 100,
+    "QuaternionFactorTesting": 100,
+    "QuaternionConstraintsTesting": 100,
+    "QuaternionSwingTwistTesting": 100,
+    "AQuaternionTesting": 100,
+    "AlgebraStreamSizeTesting": 1,
+    "AlgebraAggregateTesting": 10
+  },
+
+  "objects2DSuite": 
+  {
+    "Arc2Testing": 100,
+    "Box2Testing": 100,
+    "Circle2Testing": 100,
+    "Line2Testing": 100,
+    "Ray2Testing": 100,
+    "Triangle2Testing": 100,
+    "Polygon2Testing": 100,
+    "Segment2Testing": 100,
+    "Ellipse2Testing": 100,
+    "Ellipse2CoefficientsTesting": 100,
+    "ConvexPolygon2Testing": 100
+  },
+
+  "objects3DSuite": 
+  {
+    "Box3Testing": 100,
+    "Circle3Testing": 100,
+    "Line3Testing": 100,
+    "Ray3Testing": 100,
+    "Triangle3Testing": 100,
+    "Segment3Testing": 100,
+    "Sphere3Testing": 100,
+    "Capsule3Testing": 100,
+    "Cone3Testing": 100,
+    "Cylinder3Testing": 100,
+    "Ellipse3Testing": 100,
+    "Ellipsoid3Testing": 100,
+    "Ellipsoid3CoefficientsTesting": 100,
+    "Frustum3Testing": 100,
+    "Plane3Testing": 100,
+    "Torus3Testing": 100,
+    "Torus3ParametersTesting": 1,
+    "Tetrahedron3Testing": 100,
+    "Rectangle3Testing": 100,
+    "Lozenge3Testing": 100,
+    "Polyhedron3Testing": 100,
+    "ConvexPolyhedron3Testing": 100
+  },
+
+  "rationalSuite":
+  {
+    "FloatingPointAnalysisTesting": 100,
+    "ConversionIntegerTesting": 100,
+    "IntegerDataTesting": 1,
+    "IntegerDataAmendTesting": 1,
+    "IntegerDataAnalysisTesting": 1,
+    "IntegerDataOperatorTesting": 100,
+    "IntegerMultiplicationTesting": 100,
+    "IntegerDivisionModuloTesting": 10,
+    "IntegerDataConversionTesting": 100,
+    "IntegerTesting": 10,
+    "ConversionRationalTesting": 100,
+    "RationalConversionTesting": 100,
+    "RationalTesting": 10,
+    "Int64VectorTesting": 1,
+    "Int64Vector2Testing": 1,
+    "Int64Vector3Testing": 1,
+    "RationalVectorTesting": 1,
+    "RationalVector2Testing": 1,
+    "RationalVector3Testing": 1
+  },
+
+  "numericalAnalysisSuite":
+  {
+    "EquationResultConstIteratorTesting": 1,
+    "EquationTesting": 100,
+    "Bisect1RootTesting": 1,
+    "Bisect1Testing": 1,
+    "Bisect2RootTesting": 1,
+    "Bisect2NodeTesting": 1,
+    "Bisect2StorageTesting": 1,
+    "Bisect2CalculateTesting": 1,
+    "Bisect2Testing": 1,
+    "Bisect3RootTesting": 1,
+    "Bisect3NodeTesting": 1,
+    "Bisect3StorageTesting": 1,
+    "Bisect3CalculateTesting": 1,
+    "Bisect3Testing": 1,
+    "BrentsMethodRootTesting": 1,
+    "BrentsMethodCalculateTesting": 1,
+    "BrentsMethodTesting": 1,
+    "EigenDecompositionTesting": 100,
+    "GaussianQuadratureTesting": 1,
+    "LinearSystemInverseTesting": 100,
+    "SolveSymmetricConjugateGradientTesting": 100,
+    "SparseMatrixIndexTesting": 1,
+    "SparseMatrixTesting": 1,
+    "SolveBandedTesting": 100,
+    "BandedMatrixInvertTesting": 100,
+    "LinearSystemTesting": 100,
+    "Minimize1DataTesting": 1,
+    "Minimize1Testing": 1,
+    "MinimizeNTesting": 100,
+    "NoniterativeEigen3x3Testing": 100,
+    "OdeSolverTesting": 1,
+    "OdeEulerTesting": 1,
+    "OdeImplicitEulerTesting": 1,
+    "OdeMidpointTesting": 1,
+    "OdeRungeKutta4Testing": 1,
+    "PolynomialRootsTesting": 100,
+    "PolynomialRootsRationalTesting": 1,
+    "RombergIntegralTesting": 1,
+    "TrapezoidRuleTesting": 1,
+    "SingularValueDecompositionTesting": 100,
+    "Matrix3ToolsTesting": 100,
+    "SingularValueTesting": 100,
+    "PolarDecompositionValueTesting": 100,
+    "QDUDecompositionValueTesting": 100
+  },
+
+  "querySuite": 
+  {
+    "QuerySortToolsTesting": 100,
+    "QueryDotToolsTesting": 100,
+    "Query2Testing": 100,
+    "Query2IntegerTesting": 1,
+    "Query2Int64Testing": 100,
+    "Query2RationalTesting": 10,
+    "Query2FilteredTesting": 10,
+    "Query3Testing": 100,
+    "Query3IntegerTesting": 100,
+    "Query3Int64Testing": 100,
+    "Query3RationalTesting": 1,
+    "Query3FilteredTesting": 1
+  },
+
+  "approximationSuite": 
+  {
+    "QuadraticCircleFit2Testing": 100,
+    "QuadraticFit2Testing": 100,
+    "CircleFit2Testing": 100,
+    "EllipseByArcs2Testing": 100,
+    "QuadraticSphereFit3Testing": 100,
+    "QuadraticFit3Testing": 100,
+    "SphereFit3Testing": 10,
+    "HeightLineFit2Testing": 100,
+    "OrthogonalLineFit2Testing": 100,
+    "OrthogonalLineFit3Testing": 100,
+    "GaussPointsFit2Testing": 100,
+    "GaussPointsFit3Testing": 100,
+    "ParaboloidFit3Testing": 100,
+    "HeightPlaneFit3Testing": 100,
+    "OrthogonalPlaneFit3Testing": 100,
+    "CylinderFit3Testing": 100,
+    "EllipseFit2Testing": 1,
+    "EllipsoidFit3Testing": 1,
+    "GreatCircleFit3Testing": 100,
+    "GreatArcFit3Testing": 100,
+    "PolynomialFit2Testing": 100,
+    "PolynomialFit3Testing": 100,
+    "PolynomialFit4Testing": 10,
+    "PolynomialFit2PowersTesting": 100,
+    "PolynomialFit3PowersTesting": 100,
+    "PolynomialFit4PowersTesting": 100
+  },
+
+  "distanceSuite": 
+  {
+    "DistanceResultTesting": 1,
+    "DistanceTesting": 100
+  },
+
+  "distance2DSuite": 
+  {
+    "DistanceLine2Line2Testing": 100,
+    "DistanceRay2Ray2Testing": 100,
+    "DistanceSegment2Segment2Testing": 100,
+    "DistanceLine2Ray2Testing": 100,
+    "DistanceLine2Segment2Testing": 100,
+    "DistanceRay2Segment2Testing": 100,
+    "DistancePoint2Line2Testing": 100,
+    "DistancePoint2Ray2Testing": 100,
+    "DistancePoint2Segment2Testing": 100,
+    "DistancePoint2Ellipse2Testing": 100,
+    "DistancePoint2Box2Testing": 100,
+    "DistancePoint2Hyperbola2Testing":100
+  },
+
+  "distance3DSuite": 
+  {
+    "DistancePoint3Ellipsoid3Testing":10,
+    "DistanceLine3Line3Testing": 100,
+    "DistanceRay3Ray3Testing": 100,
+    "DistanceSegment3Segment3Testing": 100,
+    "DistanceLine3Ray3Testing": 100,
+    "DistanceRay3Segment3Testing": 100,
+    "DistanceLine3Segment3Testing": 100,
+    "DistancePoint3Line3Testing": 100,
+    "DistancePoint3Ray3Testing": 100,
+    "DistancePoint3Segment3Testing": 100,
+    "DistancePoint3Box3Testing": 100,
+    "DistanceCircle3Circle3Testing":10
+  },
+
+  "intersectionSuite": 
+  {
+     
+  },
+
+  "intersection1DSuite":
+  {
+    "IntersectorTesting": 1,
+    "StaticIntersectorTesting": 1,
+    "DynamicIntersectorTesting": 100,
+    "Intersector1Testing": 100,
+    "StaticTestIntersector1Testing": 100,
+    "StaticFindIntersector1Testing": 100,
+    "DynamicTestIntersector1Testing": 100,
+    "DynamicFindIntersector1Testing": 100
+  },
+
+  "intersection2DSuite": 
+  {
+    "StaticFindIntersectorCircle2Circle2Testing": 100,
+    "StaticFindIntersectorArc2Arc2Testing": 100,
+    "StaticFindIntersectorArc2Circle2Testing": 100,
+    "StaticTestIntersectorBox2Box2Testing": 100,
+    "StaticTestIntersectorLine2ClassifyTesting": 100,
+    "StaticTestIntersectorLine2Line2Testing":100,
+    "StaticFindIntersectorLine2Line2Testing": 100,
+    "StaticTestIntersectorRay2Ray2Testing": 100,
+    "StaticFindIntersectorRay2Ray2Testing": 100,
+    "StaticTestIntersectorSegment2Segment2Testing": 100,
+    "StaticFindIntersectorSegment2Segment2Testing": 100,
+    "StaticTestIntersectorLine2Ray2Testing": 100,
+    "StaticFindIntersectorLine2Ray2Testing": 100,
+    "StaticTestIntersectorLine2Segment2Testing": 100,
+    "StaticFindIntersectorLine2Segment2Testing": 100,
+    "StaticTestIntersectorRay2Segment2Testing": 100,
+    "StaticFindIntersectorRay2Segment2Testing": 100
+  },
+
+  "intersection3DSuite": 
+  {
+    "IntersectorLine3Triangle3Testing": 100,
+    "TriangleProjectOntoAxisTesting": 100,
+    "TrianglePlaneRelationsTesting": 100
+  },
+
+  "computationalGeometrySuite": 
+  {
+
+  },
+
+  "containmentSuite": 
+  {
+    "ScribeCircle2CircumscribeTesting":100,
+	  "ScribeCircle2InscribeTesting":100,
+	  "ContBox2Testing":100,
+	  "ContBox3Testing":100
+  },
+
+  "curvesSurfacesVolumesSuite": 
+  {
+
+  },
+
+  "interpolationSuite": 
+  {
+
+  },
+
+  "meshesSuite": 
+  {
+    "EdgeKeyTesting": 1,
+    "TriangleKeyTesting": 1
+  },
+
+  "miscellaneousSuite": 
+  {
+
+  }
+}

@@ -1,0 +1,39 @@
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// Copyright (c) 2011-%EndYear%
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
+#define %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H
+
+#include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
+#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+
+#include <boost/shared_ptr.hpp>
+
+namespace CoreTools
+{
+	class Suite;
+}
+
+namespace %SolutionName%Testing
+{
+	class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+	{
+	public:
+		CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_DECLARE(TestingHelper);
+		
+		CLASS_INVARIANT_VIRTUAL_DECLARE;
+
+	private:
+        virtual int DoRun();
+
+		void AddSuite();
+	
+	private:
+		CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
+	};
+}
+
+#endif //  %ProjectCapital%_%ManagerCapital%TESTING_TESTING_HELPER_H

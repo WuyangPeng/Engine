@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:12)
+//	引擎版本：0.7.1.1 (2020/10/26 13:12)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_H
@@ -25,13 +25,13 @@ namespace CoreTools
         using ClassType = Property<ID, T, V, R, FS, FG>;
 
     public:
-        Property();
+        Property() noexcept;
         explicit Property(V value);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        Property& operator=(R value);
-        [[nodiscard]] operator R() const;
+        Property& operator=(R value) noexcept;
+        [[nodiscard]] operator R() const noexcept;
 
     public:
         V m_Value;

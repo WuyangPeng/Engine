@@ -18,7 +18,7 @@
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "Mathematics/Base/MathDetail.h"
 
-#include <gsl/gsl_util>
+#include <gsl/util>
 
 template <typename Real>
 Mathematics::Polyhedron3Impl<Real>::Polyhedron3Impl(const VerticesType& vertices, const IndicesType& indices)

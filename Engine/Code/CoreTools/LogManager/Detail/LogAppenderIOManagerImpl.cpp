@@ -32,7 +32,7 @@ CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(LogLevel logLevel,
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl() noexcept
+CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(MAYBE_UNUSED int count) noexcept
     : m_logLevel{ LogLevel::Disabled }, m_AppenderManager{}, m_FilterTypePtr{}, m_FunctionDescribedPtr{},
       m_LogFileNamePtr{}, m_Message{}, m_TriggerAssert{ false }, m_AlwaysConsole{ false }
 {

@@ -12,17 +12,17 @@
  
 AssistTools::GenerateTemplateMiddleLayerVcxproj
 	::GenerateTemplateMiddleLayerVcxproj(const System::String& templateFileName, const System::String& projectName, const System::String& managerName, const System::String& includeName)
-	:m_Impl(std::make_shared<ImplType>(templateFileName, projectName, managerName, includeName))
+	:impl(templateFileName, projectName, managerName, includeName)
 {
 	ASSIST_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(AssistTools, GenerateTemplateMiddleLayerVcxproj)
+CLASS_INVARIANT_STUB_DEFINE(AssistTools, GenerateTemplateMiddleLayerVcxproj)
 
 void AssistTools::GenerateTemplateMiddleLayerVcxproj
 	::GenerateTo(const System::String& resourceDirectory, const System::String& solutionName, const System::String& newManagerName, const System::String& newIncludeName) const
 {
 	ASSIST_TOOLS_CLASS_IS_VALID_CONST_1;
 
-	return m_Impl->GenerateTo(resourceDirectory, solutionName, newManagerName, newIncludeName);
+	return impl->GenerateTo(resourceDirectory, solutionName, newManagerName, newIncludeName);
 }

@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 15:04)
+//	引擎版本：0.7.1.1 (2020/10/22 15:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,16 +22,16 @@ using std::make_shared;
 using std::string;
 
 CoreTools::BufferTarget::BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister)
-    : m_Impl{ make_shared<ImplType>(bufferSize, objectRegister) }
+    : impl{  bufferSize, objectRegister  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, BufferTarget)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferTarget)
 
 void CoreTools::BufferTarget::Write(const bool datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
     Write(CORE_TOOLS_STREAM_SIZE(value), &value);
@@ -39,14 +39,14 @@ void CoreTools::BufferTarget::Write(const bool datum)
 
 void CoreTools::BufferTarget::Write(const char* datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     Write(string{ datum });
 }
 
 void CoreTools::BufferTarget::Write(const string& datum)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     auto length = boost::numeric_cast<int32_t>(datum.length());
     Write(length);
@@ -71,14 +71,14 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferTarget, GetBytesWr
 
 void CoreTools::BufferTarget::Write(size_t itemSize, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, data);
+    return impl->Write(itemSize, data);
 }
 
 void CoreTools::BufferTarget::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
-    return m_Impl->Write(itemSize, itemsNumber, data);
+    return impl->Write(itemSize, itemsNumber, data);
 }

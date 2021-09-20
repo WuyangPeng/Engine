@@ -14,7 +14,7 @@
 
 #include "AlgebraFwd.h"
 #include "Vector3D.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -23,11 +23,11 @@ namespace Mathematics
     template <typename Real>
     class Vector3DInformationImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector3DInformationImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector3DInformationImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector3DInformationImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector3DInformationImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector3DInformationImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector3DInformationImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3DInformation final
@@ -36,8 +36,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Vector3DInformationImpl = Vector3DInformationImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Vector3DInformation);
-
+      
+        TYPE_DECLARE(Vector3DInformation);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using ClassType = Vector3DInformation<Real>;
         using Vector3D = Vector3D<Real>;
         using Vector3DTools = Vector3DTools<Real>;
@@ -70,7 +72,7 @@ namespace Mathematics
         [[nodiscard]] int GetTetrahedronExtremeIndex() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(Vector3DInformation);
+        PackageType impl;
     };
 
     using FloatVector3DInformation = Vector3DInformation<float>;

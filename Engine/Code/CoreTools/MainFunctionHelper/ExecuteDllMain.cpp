@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 9:52)
+//	引擎版本：0.7.1.1 (2020/10/26 9:52)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,7 +13,7 @@
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
 #include "System/Helper/EnumCast.h"
 
-void CoreTools::ExecuteDllMain([[maybe_unused]] System::WindowHInstance instance, System::WindowDWord reason, [[maybe_unused]] System::WindowVoidPtr reserved, DllMutex& mutex)
+void CoreTools::ExecuteDllMain([[maybe_unused]] System::WindowsHInstance instance, System::WindowsDWord reason, [[maybe_unused]] System::WindowsVoidPtr reserved, DllMutex& mutex)
 {
     switch (System::UnderlyingCastEnum<System::DllMain>(reason))
     {

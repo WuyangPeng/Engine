@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/27 17:21)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.6 (2021/07/10 20:33)
 
 #ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
@@ -13,6 +13,8 @@
 #include "System/Helper/ConfigMacro.h"
 
 #ifdef SYSTEM_PLATFORM_ANDROID
+
+    #include <android_native_app_glue.h>
 
 namespace System
 {
@@ -47,7 +49,7 @@ namespace System
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
     #include "System/Helper/EnumCast.h"
-    #include "System/Window/Flags/WindowMessagesFlags.h"
+    #include "System/Windows/Flags/WindowsMessagesFlags.h"
 
 namespace System
 {
@@ -61,9 +63,9 @@ namespace System
     enum class AppCmd
     {
         InputChanged = 0,
-        InitWindow = EnumCastUnderlying(WindowMessages::Create),
-        TermWindow = EnumCastUnderlying(WindowMessages::Close),
-        WindowResized = EnumCastUnderlying(WindowMessages::Size),
+        InitWindow = EnumCastUnderlying(WindowsMessages::Create),
+        TermWindow = EnumCastUnderlying(WindowsMessages::Close),
+        WindowResized = EnumCastUnderlying(WindowsMessages::Size),
         WindowRedrawNeeded = -4,
         ContentRectChanged = -5,
         GainedFocus = -6,
@@ -75,7 +77,7 @@ namespace System
         SaveState = -12,
         Pause = -13,
         Stop = -14,
-        Destory = EnumCastUnderlying(WindowMessages::Destroy),
+        Destory = EnumCastUnderlying(WindowsMessages::Destroy),
     };
 }
 

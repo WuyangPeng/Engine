@@ -1,8 +1,7 @@
 TODO Level 7
 
-0.5.1.0
+0.7.1.6
 
-1.（Helper）使用最新版本的boost库增加Compiler、Platform和StdLib里的设置。
-2.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、ViewOfFile、MemoryHelper、GlobalTools、LocalTools。
-3.（Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、ConditionVariable、InitOnce、WaitableTimer、SyncTools、Interlocked、
-			   Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools、HandleTools、ThreadPool、OverlappedTools、FiberTools。
+1.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、ViewOfFile、MemoryHelper、LocalTools。
+2.（Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、ConditionVariable、InitOnce、WaitableTimer、
+												  SyncTools、Interlocked、Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools。

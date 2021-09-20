@@ -17,21 +17,19 @@
 using std::make_shared;
 
 CoreTools::OFStreamManager::OFStreamManager(const String& fileName, bool addition)
-    : m_Impl{ make_shared<ImplType>(fileName, addition) }
+    : impl{ fileName, addition }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, OFStreamManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, OFStreamManager)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OFStreamManager, GetOFStreamSize, CoreTools::OFStreamManager::PosType)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, OFStreamManager, SetSimplifiedChinese, void)
 
 CoreTools::OFStreamManager& CoreTools::OFStreamManager::operator<<(const String& message)
 {
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
-
-    *m_Impl << message;
+    *impl << message;
 
     return *this;
 }

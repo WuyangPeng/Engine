@@ -17,12 +17,12 @@
 using std::make_shared;
 
 CoreTools::IFStreamManager::IFStreamManager(const String& fileName)
-    : m_Impl{ make_shared<ImplType>(fileName) }
+    : impl{  fileName  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, IFStreamManager)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, IFStreamManager)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, GetFileContent, System::String)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, IFStreamManager, BackupFile, System::String)

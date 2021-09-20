@@ -19,9 +19,8 @@
 using std::make_shared;
 using boost::property_tree::ptree_error;
 
-Rendering::RendererDataImpl
-	::RendererDataImpl()
-	:m_Renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default,RendererBasis()) }
+Rendering::RendererDataImpl ::RendererDataImpl(MAYBE_UNUSED int count)
+    : m_Renderer{ make_shared<Renderer>(Rendering::RendererTypes::Default, RendererBasis()) }
 {
 	m_Renderer->Init();
 

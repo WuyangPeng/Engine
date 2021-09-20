@@ -9,7 +9,7 @@
 #include "WindowMessageUnitTestSuiteStream.h"
 #include "System/Helper/UnicodeUsing.h" 
 #include "System/Helper/PragmaWarning.h"
-#include "System/Window/WindowProcess.h"
+#include "System/Windows/WindowsProcess.h"
 #include "CoreTools/Command/CommandHandle.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"

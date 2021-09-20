@@ -1,18 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/24 18:00)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.4 (2021/06/04 14:46)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 
 #include "WindowsExtensionPrototypesUsing.h"
 #include "System/Helper/Platform.h"
-#include "System/Window/Using/WindowUsing.h"
+#include "System/Windows/Using/WindowsUsing.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
     #include <WinSock2.h>
@@ -39,10 +39,10 @@ namespace System
     using SocketAddressPtr = PSOCKET_ADDRESS;
     using SocketProtocolInfo = WSAPROTOCOL_INFO;
     using SocketProtocolInfoPtr = LPWSAPROTOCOL_INFO;
-    constexpr WindowDWord g_ProtocolLen{ WSAPROTOCOL_LEN };
+    constexpr WindowsDWord g_ProtocolLen{ WSAPROTOCOL_LEN };
     using SocketProtocolChain = WSAPROTOCOLCHAIN;
     using SocketProtocolChainPtr = LPWSAPROTOCOLCHAIN;
-    constexpr WindowDWord g_ProtocolChain{ MAX_PROTOCOL_CHAIN };
+    constexpr WindowsDWord g_ProtocolChain{ MAX_PROTOCOL_CHAIN };
     using SocketNetworkEvents = WSANETWORKEVENTS;
     using SocketNetworkEventsPtr = LPWSANETWORKEVENTS;
     using SocketOverlapped = WSAOVERLAPPED;
@@ -88,20 +88,20 @@ namespace System
 
     struct WinSockBuf
     {
-        WindowULong len;
+        WindowsULong len;
         char* buf;
     };
     using WinSockBufPtr = WinSockBuf*;
     struct WinSockFlowSpec
     {
-        WindowULong TokenRate;
-        WindowULong TokenBucketSize;
-        WindowULong PeakBandwidth;
-        WindowULong Latency;
-        WindowULong DelayVariation;
-        WindowULong ServiceType;
-        WindowULong MaxSduSize;
-        WindowULong MinimumPolicedSize;
+        WindowsULong TokenRate;
+        WindowsULong TokenBucketSize;
+        WindowsULong PeakBandwidth;
+        WindowsULong Latency;
+        WindowsULong DelayVariation;
+        WindowsULong ServiceType;
+        WindowsULong MaxSduSize;
+        WindowsULong MinimumPolicedSize;
     };
     using WinSockFlowSpecPtr = WinSockFlowSpec*;
     struct QualityOfService
@@ -113,7 +113,7 @@ namespace System
     using QualityOfServicePtr = QualityOfService*;
 
     using WinSockConditionProc = int (*)(WinSockBufPtr callerId, WinSockBufPtr callerData, QualityOfServicePtr sQOS, QualityOfServicePtr gQOS,
-                                         WinSockBufPtr calleeId, WinSockBufPtr calleeData, unsigned int* g, WindowPtrDWord callbackData);
+                                         WinSockBufPtr calleeId, WinSockBufPtr calleeData, unsigned int* g, WindowsPtrDWord callbackData);
     using WinSockEvent = void*;
 
     struct SocketAddress
@@ -130,7 +130,7 @@ namespace System
     };
     using SocketAddressListPtr = SocketAddressList*;
 
-    constexpr WindowDWord g_ProtocolChain{ 7 };
+    constexpr WindowsDWord g_ProtocolChain{ 7 };
     struct SocketProtocolChain
     {
         int ChainLen;
@@ -138,7 +138,7 @@ namespace System
     };
     using SocketProtocolChainPtr = SocketProtocolChain*;
 
-    constexpr WindowDWord g_ProtocolLen{ 255 };
+    constexpr WindowsDWord g_ProtocolLen{ 255 };
     struct SocketProtocolInfo
     {
         uint32_t dwServiceFlags1;
@@ -272,7 +272,7 @@ namespace System
         {
             struct
             {
-                WindowHWnd hWnd;
+                WindowsHWnd hWnd;
                 uint32_t uMsg;
                 uint64_t context;
             } WindowMessage;

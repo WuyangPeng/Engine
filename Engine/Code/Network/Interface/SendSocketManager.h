@@ -18,22 +18,27 @@
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
 #include "Network/Interface/InterfaceFwd.h"
 #include "Network/NetworkMessage/MessageInterface.h"
-
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include <boost/noncopyable.hpp>
 #include <map>
 
-EXPORT_NONCOPYABLE_CLASS(NETWORK);
-NETWORK_EXPORT_SHARED_PTR(SendSocketManagerImpl);
+ 
+NETWORK_NON_COPY_EXPORT_IMPL(SendSocketManagerImpl);
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SendSocketManager : private boost::noncopyable
+    class NETWORK_DEFAULT_DECLARE SendSocketManager 
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(SendSocketManager);
+        NON_COPY_TYPE_DECLARE(SendSocketManager);
 
     public:
         explicit SendSocketManager(const std::string& fileName);
+        ~SendSocketManager() noexcept = default;
+        SendSocketManager(const SendSocketManager& rhs) noexcept = delete;
+        SendSocketManager& operator=(const SendSocketManager& rhs) noexcept = delete;
+        SendSocketManager(SendSocketManager&& rhs) noexcept = delete;
+        SendSocketManager& operator=(SendSocketManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -44,7 +49,7 @@ namespace Network
         [[nodiscard]] SocketManagerSharedPtr GetSocketManager() noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(SendSocketManager);
+        PackageType impl;
     };
 }
 

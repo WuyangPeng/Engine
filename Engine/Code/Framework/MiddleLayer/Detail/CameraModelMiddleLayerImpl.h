@@ -27,7 +27,7 @@ namespace Framework
 		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;
 
 	public:
-		CameraModelMiddleLayerImpl() noexcept;
+                CameraModelMiddleLayerImpl(MAYBE_UNUSED int count) noexcept;
 		~CameraModelMiddleLayerImpl() noexcept = default;
 		CameraModelMiddleLayerImpl(const CameraModelMiddleLayerImpl& rhs) noexcept = delete;
 		CameraModelMiddleLayerImpl& operator=(const CameraModelMiddleLayerImpl& rhs) noexcept = delete;

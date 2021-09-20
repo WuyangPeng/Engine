@@ -44,7 +44,7 @@ namespace Rendering
 		using PixelShaderConstPtr = const PixelShader*;
 
 	public:
-		RendererManagerImpl() noexcept;
+                RendererManagerImpl(MAYBE_UNUSED int count) noexcept;
 
 		CLASS_INVARIANT_DECLARE;
 		

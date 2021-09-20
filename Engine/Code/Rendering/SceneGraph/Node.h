@@ -11,8 +11,8 @@
 
 #include "Spatial.h"
 #include "Culler.h"
-
-RENDERING_EXPORT_SHARED_PTR(NodeImpl);
+EXPORT_SHARED_PTR(Rendering, NodeImpl, RENDERING_DEFAULT_DECLARE);
+ 
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -21,7 +21,16 @@ namespace Rendering
     class RENDERING_DEFAULT_DECLARE Node : public Spatial
     {
     public:
-        COPY_UNSHARE_CLASSES_TYPE_DECLARE(Node, DESTRUCTOR_STATEMENT);
+        void Swap(Node& rhs) noexcept;
+        
+            public:
+                TYPE_DECLARE(Node);
+                using ClassShareType = CoreTools::CopyUnsharedClasses;
+                ~Node() noexcept;
+                Node(const Node& rhs);
+                Node& operator=(const Node& rhs);
+                Node(Node&& rhs) noexcept;
+                Node& operator=(Node&& rhs) noexcept;
         using ParentType = Spatial;
         
     public:
@@ -55,7 +64,7 @@ namespace Rendering
                 void UpdateWorldBound() override;
 
     private:
-		IMPL_TYPE_DECLARE(Node);
+		using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
     };
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426) 

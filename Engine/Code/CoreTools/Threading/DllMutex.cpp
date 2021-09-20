@@ -15,18 +15,19 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "../Contract/Flags/ImplFlags.h"
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::DllMutex::DllMutex(MutexCreate mutexCreate)
-    : m_Impl{ MutexFactory::GenerateMutex(mutexCreate) }
+    : impl{ ImplCreateUseFactory::Default,  mutexCreate  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 #include STSTEM_WARNING_POP
 
 CoreTools::DllMutex::DllMutex(DllMutex&& rhs) noexcept
-    : m_Impl{ std::move(rhs.m_Impl) }
+    : impl{ std::move(rhs.impl) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -35,12 +36,12 @@ CoreTools::DllMutex& CoreTools::DllMutex::operator=(DllMutex&& rhs) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Impl = std::move(rhs.m_Impl);
+    impl = std::move(rhs.impl);
 
     return *this;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(CoreTools, DllMutex)
+CLASS_INVARIANT_STUB_DEFINE(CoreTools, DllMutex)
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DllMutex, Initialize, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DllMutex, Delete, void)

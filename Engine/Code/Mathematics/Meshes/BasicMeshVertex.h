@@ -10,15 +10,15 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CoreTools/Helper/ExportMacro.h"
-
-MATHEMATICS_EXPORT_SHARED_PTR(BasicMeshVertexImpl);
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
+MATHEMATICS_NON_COPY_EXPORT_IMPL(BasicMeshVertexImpl);
 
 namespace Mathematics
 {
     class MATHEMATICS_DEFAULT_DECLARE BasicMeshVertex
     {
     public:
-        NON_COPY_CLASSES_TYPE_DECLARE(BasicMeshVertex);
+        NON_COPY_TYPE_DECLARE(BasicMeshVertex);
         
     public:
         BasicMeshVertex ();
@@ -33,7 +33,7 @@ namespace Mathematics
         void InsertTriangle (int triangle);
         
     private:
-		IMPL_TYPE_DECLARE(BasicMeshVertex);
+        PackageType impl;
     };	
 }
 

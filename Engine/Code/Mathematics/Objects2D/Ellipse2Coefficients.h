@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Matrix2.h"
 #include "Mathematics/Algebra/Vector2D.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -24,11 +24,11 @@ namespace Mathematics
     template <typename Real>
     class Ellipse2CoefficientsImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipse2CoefficientsImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipse2CoefficientsImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2CoefficientsImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Ellipse2CoefficientsImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse2Coefficients final
@@ -37,8 +37,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Ellipse2CoefficientsImpl = Ellipse2CoefficientsImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Ellipse2Coefficients);
-
+       
+        TYPE_DECLARE(Ellipse2Coefficients);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Math = Math<Real>;
         using Matrix2 = Matrix2<Real>;
         using Vector2D = Vector2D<Real>;
@@ -59,7 +61,7 @@ namespace Mathematics
         [[nodiscard]] const CoefficientsType GetCoefficients() const;
 
     private:
-        IMPL_TYPE_DECLARE(Ellipse2Coefficients);
+        PackageType impl;
     };
 
     template <typename Real>

@@ -22,6 +22,7 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Base/MathDetail.h"
+#include "Mathematics/Algebra/PlaneDetail.h"
 
 template <typename T>
 Rendering::Bound<T>::Bound(const APoint& center, T radius)

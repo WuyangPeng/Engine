@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Vector3D.h"
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "Mathematics/Base/MathDetail.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -24,11 +24,11 @@ namespace Mathematics
     template <typename Real>
     class Triangle3Impl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle3Impl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle3Impl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle3Impl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Triangle3Impl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Triangle3Impl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Triangle3 final
@@ -37,8 +37,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Triangle3Impl = Triangle3Impl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Triangle3);
-
+       
+        TYPE_DECLARE(Triangle3);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
         using Math = Math<Real>;
         using Vector3D = Vector3D<Real>;
         using Vector3DTools = Vector3DTools<Real>;
@@ -62,7 +64,7 @@ namespace Mathematics
         [[nodiscard]] const Triangle3 GetMove(Real t, const Vector3D& velocity) const;
 
     private:
-        IMPL_TYPE_DECLARE(Triangle3);
+        PackageType impl;
     };
 
     using FloatTriangle3 = Triangle3<float>;

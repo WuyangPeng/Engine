@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/22 13:35)
+//	引擎版本：0.7.1.1 (2020/10/22 13:35)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_LINK_DETAIL_H
@@ -22,7 +22,7 @@ void CoreTools::ObjectLink::ResolveLink(T& object)
 {
     static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     if (object.m_Associated != 0)
     {
@@ -37,7 +37,7 @@ void CoreTools::ObjectLink::ResolveLinkContainer(T& object)
 
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    IMPL_NON_CONST_MEMBER_FUNCTION_STATIC_ASSERT;
+    
 
     for (auto& value : object)
     {

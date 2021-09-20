@@ -23,8 +23,7 @@ Framework::WindowProcessHandle<WindowMessage>
 }
 
 template <typename WindowMessage>
-Framework::WindowProcessHandle<WindowMessage>
-	::~WindowProcessHandle()
+Framework::WindowProcessHandle<WindowMessage>::~WindowProcessHandle() noexcept
 {
 	FRAMEWORK_SELF_CLASS_IS_VALID_1;
 
@@ -87,7 +86,7 @@ bool Framework::WindowProcessHandle<WindowMessage>
 
 // static
 template <typename WindowMessage>
-System::WindowHWnd Framework::WindowProcessHandle<WindowMessage>
+System::WindowsHWnd Framework::WindowProcessHandle<WindowMessage>
 	::GetMainWindowHwnd()
 {
 	return WINDOW_PROCESS_MANAGER_SINGLETON.GetMainWindowHwnd();

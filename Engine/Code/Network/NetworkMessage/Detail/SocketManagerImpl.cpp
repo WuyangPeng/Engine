@@ -24,7 +24,7 @@ using std::make_unique;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
-Network::SocketManagerImpl::SocketManagerImpl()
+Network::SocketManagerImpl::SocketManagerImpl(MAYBE_UNUSED int count)
     : m_MessageEventManagerContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;

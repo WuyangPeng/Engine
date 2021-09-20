@@ -15,17 +15,17 @@
 #include "ConfigurationFwd.h"
 #include "ConfigurationSubStrategy.h"
 #include "CoreTools/Helper/ExportMacro.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 
-NETWORK_EXPORT_SHARED_PTR(ConfigurationStrategyImpl);
+NETWORK_PERFORMANCE_UNSHARED_EXPORT_IMPL(ConfigurationStrategyImpl);
 
 namespace Network
 {
     class NETWORK_DEFAULT_DECLARE ConfigurationStrategy final
     {
     public:
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(ConfigurationStrategy);
+        PERFORMANCE_UNSHARED_TYPE_DECLARE(ConfigurationStrategy);
 
     public:
         ConfigurationStrategy();
@@ -60,7 +60,7 @@ namespace Network
         [[nodiscard]] int GetPort() const noexcept;
 
     private:
-        IMPL_TYPE_DECLARE(ConfigurationStrategy);
+        PackageType impl;
     };
 }
 

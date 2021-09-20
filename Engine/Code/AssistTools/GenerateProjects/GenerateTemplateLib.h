@@ -12,11 +12,11 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Flags/GenerateTemplateReplaceFlags.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <string>
 #include <map>
 
-ASSIST_TOOLS_EXPORT_SHARED_PTR(GenerateTemplateLibImpl);
+ASSIST_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(GenerateTemplateLibImpl);
 
 namespace AssistTools
 { 
@@ -25,7 +25,7 @@ namespace AssistTools
 	class ASSIST_TOOLS_DEFAULT_DECLARE GenerateTemplateLib
 	{
 	public:
-		PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(GenerateTemplateLib);
+		PERFORMANCE_UNSHARED_TYPE_DECLARE(GenerateTemplateLib);
 		typedef std::map<GenerateTemplateReplace, System::String> Replace;
 
 	public:
@@ -36,7 +36,7 @@ namespace AssistTools
 		void GenerateTo(const System::String& resourceDirectory, const System::String& newProjectName, const CopyrightData& copyrightData, const System::String& solutionName) const;
 
 	private:
-		IMPL_TYPE_DECLARE(GenerateTemplateLib);
+		PackageType impl;
 	};
 }
 

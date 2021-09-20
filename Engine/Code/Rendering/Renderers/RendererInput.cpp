@@ -11,15 +11,16 @@
 #include "Detail/RendererInputImpl.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 Rendering::RendererInput
 	::RendererInput(RendererTypes type)
-	:m_Impl{ RendererFactory::CreateInput(type) }
+	:impl{ CoreTools::ImplCreateUseFactory::Default,type  }
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
 }
 
-CLASS_INVARIANT_IMPL_IS_VALID_DEFINE(Rendering,RendererInput)
+CLASS_INVARIANT_STUB_DEFINE(Rendering,RendererInput)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RendererInput,SetWindowID, int, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RendererInput,SetWindowHandle, HWnd, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RendererInput, SetWindowID, int, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, RendererInput, SetWindowHandle, HWnd, void)

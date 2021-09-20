@@ -17,6 +17,8 @@
 
 namespace Mathematics
 {
+    class EquationFactory;
+
     class MATHEMATICS_HIDDEN_DECLARE EquationImpl
     {
     public:
@@ -26,6 +28,7 @@ namespace Mathematics
         using Imaginary = EquationResult::Imaginary;
         using ImaginaryVector = EquationResult::ImaginaryVector;
         using RealVector = EquationResult::RealVector;
+        using FactoryType = EquationFactory;
 
     public:
         explicit EquationImpl(double epsilon = DoubleMath::GetZeroTolerance()) noexcept;

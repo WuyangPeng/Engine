@@ -25,7 +25,7 @@ namespace CoreTools
         using MutexImplPtr = std::shared_ptr<MutexImpl>;
 
     public:
-        [[nodiscard]] static MutexImplPtr GenerateMutex(MutexCreate mutexCreate);
+        [[nodiscard]] static MutexImplPtr Create(MutexCreate mutexCreate);
     };
 }
 

@@ -1,0 +1,77 @@
+{
+  "GameServerDB": 
+  {
+    "IP": "127.0.0.1",
+    "Port": 8010,
+    "Wrappers": "MysqlConnector",
+    "HostName": "DBName",
+    "UserName": "root",
+    "Password": "password",
+
+    "Pooling": true,
+    "PoolMaxSize": 10,
+    "PoolQueueTimeout": 1000,
+    "PoolMaxIdleTime": 500,
+
+    "UseDBMapping": 1,
+    "DBMapping":
+    {
+      "DBName1": 1,
+      "DBName2": 2
+    },    
+
+    "UseSSLOption": 1,
+    "SSLOption": 
+    {
+      "sslKey": "",
+      "sslCert": "",
+      "sslCA": "",
+      "sslCAPath": "",
+      "sslCipher": "",
+      "sslCRL": "",
+      "sslCRLPath": ""
+    },
+
+    "UseFlagsOption": 1,
+    "FlagsOption":
+    {
+      "CLIENT_COMPRESS": 1,
+      "CLIENT_FOUND_ROWS": 0,
+      "CLIENT_IGNORE_SIGPIPE": 1,
+      "CLIENT_IGNORE_SPACE": 0,
+      "CLIENT_INTERACTIVE": 0,
+      "CLIENT_LOCAL_FILES": 1,
+      "CLIENT_MULTI_STATEMENTS": 0,
+      "CLIENT_NO_SCHEMA": 0
+    },
+
+    "UseStringOption": 1,
+    "StringOption":
+    {
+      "characterSetResults": "utf8mb4"
+    },
+
+    "UseBooleanOption": 1,
+    "BooleanOption": 
+    {
+      "OPT_REPORT_DATA_TRUNCATION": 1
+    },
+
+    "UseIntOption": 1,
+    "IntOption": 
+    {
+      "OPT_READ_TIMEOUT": 10
+    }
+  },
+
+  "GameClientDB": 
+  {
+    "IP": "127.0.0.1",
+    "Port": 8011,
+    "Wrappers": "SQLite",
+    "HostName": "dbName",
+    "UserName": "Account",
+    "Password": "Password",
+    "UseFlagsOption": 0
+  }
+}

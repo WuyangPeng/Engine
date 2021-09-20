@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersector1<Real>::StaticFindIntersector1(Real u0, Real u1, Real v0, Real v1, const Real epsilon)
-    : ParentType{ u0, u1, v0, v1, epsilon }, m_Impl{}
+    : ParentType{ u0, u1, v0, v1, epsilon }, impl{}
 {
     Find();
 
@@ -69,14 +69,14 @@ void Mathematics::StaticFindIntersector1<Real>::Find()
         }
     }
 
-    m_Impl = std::make_shared<ImplType>(intersections);
+    impl = std::make_shared<ImplType>(intersections);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 template <typename Real>
 bool Mathematics::StaticFindIntersector1<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Impl != nullptr)
+    if (ParentType::IsValid())
         return true;
     else
         return false;
@@ -88,7 +88,7 @@ bool Mathematics::StaticFindIntersector1<Real>::IsIntersection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->IsIntersection();
+    return impl->IsIntersection();
 }
 
 template <typename Real>
@@ -96,7 +96,7 @@ int Mathematics::StaticFindIntersector1<Real>::GetNumIntersections() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetNumIntersections();
+    return impl->GetNumIntersections();
 }
 
 template <typename Real>
@@ -104,7 +104,7 @@ Real Mathematics::StaticFindIntersector1<Real>::GetIntersection(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetIntersection(index);
+    return impl->GetIntersection(index);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR1_ACHIEVE_H

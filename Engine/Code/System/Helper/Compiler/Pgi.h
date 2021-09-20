@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.0 (2020/09/21 11:09)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.1.1 (2021/03/06 17:50)
 
 #ifndef SYSTEM_HELPER_PGI_H
 #define SYSTEM_HELPER_PGI_H
@@ -29,6 +29,9 @@
     #ifndef TCRE_SYSTEM_COMPILER
         #define TCRE_SYSTEM_COMPILER "PGI 编译器版本 " SYSTEM_STRINGIZE(TCRE_COMPILER_VERSION)
     #endif  // TCRE_SYSTEM_COMPILER
+
+    // PGI主要与GNU兼容。 所以从那开始。
+    #include "Gcc.h"
 
 #endif  // defined(__PGI)
 

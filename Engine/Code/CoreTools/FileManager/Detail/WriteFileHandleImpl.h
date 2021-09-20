@@ -23,7 +23,7 @@ namespace CoreTools
         using ClassType = WriteFileHandleImpl;
         using ParentType = FileHandleImpl;
         using InterfaceType = WriteFileManagerInterface;
-
+          using String = System::String;
     public:
         explicit WriteFileHandleImpl(const String& fileName, FileHandleCreationDisposition creation = FileHandleCreationDisposition::CreateAlways);
 

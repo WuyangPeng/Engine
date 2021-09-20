@@ -18,35 +18,35 @@
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance)
-    : m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance) }
+    : impl{ DistanceResultFactory<Real, Vector>::Create(distance) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance, Real contactTime)
-    : m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime) }
+    : impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint)
-    : m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint) }
+    : impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance, Real contactTime, const ClosestPoints& lhsClosestPoints, const ClosestPoints& rhsClosestPoints)
-    : m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoints, rhsClosestPoints) }
+    : impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoints, rhsClosestPoints) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance, Real contactTime, const Vector& lhsClosestPoint, const Vector& rhsClosestPoint, Real lhsParameter, Real rhsParameter)
-    : m_Impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint, lhsParameter, rhsParameter) }
+    : impl{ DistanceResultFactory<Real, Vector>::Create(distance, contactTime, lhsClosestPoint, rhsClosestPoint, lhsParameter, rhsParameter) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -55,7 +55,7 @@ Mathematics::DistanceResult<Real, Vector>::DistanceResult(Real distance, Real co
 template <typename Real, typename Vector>
 bool Mathematics::DistanceResult<Real, Vector>::IsValid() const noexcept
 {
-    if (m_Impl != nullptr)
+    if (impl != nullptr)
         return true;
     else
         return false;
@@ -69,9 +69,9 @@ void Mathematics::DistanceResult<Real, Vector>::Copy()
 
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (1 < m_Impl.use_count())
+    if (1 < impl.use_count())
     {
-        m_Impl = m_Impl->Clone();
+        impl = impl->Clone();
     }
 }
 
@@ -80,7 +80,7 @@ Real Mathematics::DistanceResult<Real, Vector>::GetDistance() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetDistance();
+    return impl->GetDistance();
 }
 
 template <typename Real, typename Vector>
@@ -88,7 +88,7 @@ Real Mathematics::DistanceResult<Real, Vector>::GetContactTime() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetContactTime();
+    return impl->GetContactTime();
 }
 
 template <typename Real, typename Vector>
@@ -96,7 +96,7 @@ const Vector Mathematics::DistanceResult<Real, Vector>::GetLhsClosestPoint() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsClosestPoint();
+    return impl->GetLhsClosestPoint();
 }
 
 template <typename Real, typename Vector>
@@ -104,7 +104,7 @@ const Vector Mathematics::DistanceResult<Real, Vector>::GetRhsClosestPoint() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsClosestPoint();
+    return impl->GetRhsClosestPoint();
 }
 
 template <typename Real, typename Vector>
@@ -112,7 +112,7 @@ const Vector Mathematics::DistanceResult<Real, Vector>::GetLhsClosestPoint(int i
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsClosestPoint(index);
+    return impl->GetLhsClosestPoint(index);
 }
 
 template <typename Real, typename Vector>
@@ -120,7 +120,7 @@ const Vector Mathematics::DistanceResult<Real, Vector>::GetRhsClosestPoint(int i
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsClosestPoint(index);
+    return impl->GetRhsClosestPoint(index);
 }
 
 template <typename Real, typename Vector>
@@ -128,7 +128,7 @@ int Mathematics::DistanceResult<Real, Vector>::GetLhsClosestPointSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsClosestPointSize();
+    return impl->GetLhsClosestPointSize();
 }
 
 template <typename Real, typename Vector>
@@ -136,7 +136,7 @@ int Mathematics::DistanceResult<Real, Vector>::GetRhsClosestPointSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsClosestPointSize();
+    return impl->GetRhsClosestPointSize();
 }
 
 template <typename Real, typename Vector>
@@ -144,7 +144,7 @@ Real Mathematics::DistanceResult<Real, Vector>::GetLhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetLhsParameter();
+    return impl->GetLhsParameter();
 }
 
 template <typename Real, typename Vector>
@@ -152,7 +152,7 @@ Real Mathematics::DistanceResult<Real, Vector>::GetRhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Impl->GetRhsParameter();
+    return impl->GetRhsParameter();
 }
 
 template <typename Real, typename Vector>
@@ -160,7 +160,7 @@ void Mathematics::DistanceResult<Real, Vector>::SetDistance(Real distance)
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetDistance(distance);
+    return impl->SetDistance(distance);
 }
 
 template <typename Real, typename Vector>
@@ -168,7 +168,7 @@ void Mathematics::DistanceResult<Real, Vector>::SetSqrtDistance()
 {
     IMPL_NON_CONST_COPY_MEMBER_FUNCTION_STATIC_ASSERT;
 
-    return m_Impl->SetSqrtDistance();
+    return impl->SetSqrtDistance();
 }
 
 template <typename Real, typename Vector>
@@ -178,17 +178,17 @@ void Mathematics::DistanceResult<Real, Vector>::SetContactTime(Real contactTime)
 
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    if (m_Impl->isHaveContactTime())
+    if (impl->isHaveContactTime())
     {
         Copy();
 
-        m_Impl->SetContactTime(contactTime);
+        impl->SetContactTime(contactTime);
     }
     else
     {
-        auto distance = m_Impl->GetDistance();
+        auto distance = impl->GetDistance();
 
-        m_Impl = DistanceResultFactory<Real, Vector>::Create(distance, contactTime);
+        impl = DistanceResultFactory<Real, Vector>::Create(distance, contactTime);
     }
 }
 

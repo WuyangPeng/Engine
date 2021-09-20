@@ -5,7 +5,7 @@
 //	联系作者：94458936@qq.com
 //
 //	标准：std:c++17
-//	引擎版本：0.5.2.0 (2020/10/26 13:40)
+//	引擎版本：0.7.1.1 (2020/10/26 13:40)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_SET_DETAIL_H
@@ -15,7 +15,7 @@
 
 template <typename Value, typename GetReference, typename SetReference, typename Container,
           GetReference (*FG)(void), void (*FS)(SetReference)>
-CoreTools::StaticPropertyGetSet<Value, GetReference, SetReference, Container, FG, FS>::StaticPropertyGetSet()
+CoreTools::StaticPropertyGetSet<Value, GetReference, SetReference, Container, FG, FS>::StaticPropertyGetSet() noexcept
     : m_Value{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -40,7 +40,7 @@ bool CoreTools::StaticPropertyGetSet<Value, GetReference, SetReference, Containe
 
 template <typename Value, typename GetReference, typename SetReference, typename Container,
           GetReference (*FG)(void), void (*FS)(SetReference)>
-CoreTools::StaticPropertyGetSet<Value, GetReference, SetReference, Container, FG, FS>::operator GetReferenceType() const
+CoreTools::StaticPropertyGetSet<Value, GetReference, SetReference, Container, FG, FS>::operator GetReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

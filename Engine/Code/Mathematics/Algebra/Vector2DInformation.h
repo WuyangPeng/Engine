@@ -14,7 +14,7 @@
 
 #include "AlgebraFwd.h"
 #include "Vector2D.h"
-
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include <type_traits>
 #include <vector>
 
@@ -23,11 +23,11 @@ namespace Mathematics
     template <typename Real>
     class Vector2DInformationImpl;
 
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector2DInformationImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector2DInformationImpl<double>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector2DInformationImpl<float>>;
+    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector2DInformationImpl<double>>;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Vector2DInformationImpl<Real>>;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<Vector2DInformationImpl<Real>>;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2DInformation final
@@ -36,7 +36,10 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using Vector2DInformationImpl = Vector2DInformationImpl<Real>;
-        PERFORMANCE_UNSHARE_CLASSES_TYPE_DECLARE(Vector2DInformation);
+
+        TYPE_DECLARE(Vector2DInformation);
+        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
+        using ClassShareType = typename PackageType::ClassShareType;
 
         using Vector2D = Vector2D<Real>;
         using Vector2DTools = Vector2DTools<Real>;
@@ -66,7 +69,7 @@ namespace Mathematics
         [[nodiscard]] int GetIndexMin(int index) const;
 
     private:
-        IMPL_TYPE_DECLARE(Vector2DInformation);
+        PackageType impl;
     };
 
     using FloatVector2DInformation = Vector2DInformation<float>;
