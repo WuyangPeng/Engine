@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{3ab5cba9-3350-44a0-a657-bc7a9efc2526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppProgrammingLanguage">
+      <UniqueIdentifier>{f756ca6b-41b2-48ac-bede-7b870f60c3df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppProgrammingLanguage\FourthEdition">
+      <UniqueIdentifier>{8c76869f-d78f-478a-b39b-bbb49d6b10d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppProgrammingLanguage\SpecialEdition">
+      <UniqueIdentifier>{7c3d18ba-4dd3-4a5d-9a02-c9236f3b5b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppProgrammingLanguage\SpecialEditionExercise">
+      <UniqueIdentifier>{4fffe6e5-c201-4716-8428-65de9886d07c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RuminationsOnCpp">
+      <UniqueIdentifier>{58103d26-8c0c-42e9-abff-2735a912da88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EfficientCppPerformanceProgrammingTechniques">
+      <UniqueIdentifier>{97570842-9e30-4316-a9fd-5c4dabae03e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImperfectCpp">
+      <UniqueIdentifier>{33298359-cfe9-4043-b829-82c821d209b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppliedCpp">
+      <UniqueIdentifier>{a64aec77-99ed-4b40-ae35-356f544e0a7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OptimizedCpp">
+      <UniqueIdentifier>{3e216726-4e62-4dba-9249-08906f2d1f01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppFootprintAndPerformanceOptimization">
+      <UniqueIdentifier>{7bb34031-d057-4452-96f2-6cc12cc42d71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppProgrammingToday">
+      <UniqueIdentifier>{800e830a-53f7-4b92-bb60-c3da5708322a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppGotchas">
+      <UniqueIdentifier>{e9615a62-42ec-419b-8b0a-92df78c4c78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppInActionIndustrialStrengthProgrammingTechniques">
+      <UniqueIdentifier>{eacedb0a-0134-409e-ab1f-8acf2091b46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppStrategiesAndTactics">
+      <UniqueIdentifier>{f291daee-7c54-497a-8867-67f6cdc5c4a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppCookbook">
+      <UniqueIdentifier>{37da9fa2-e5cb-4941-9002-ddf5a1ec4510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AdvancedCpp">
+      <UniqueIdentifier>{926c1e71-ad37-4b60-ba6d-a2219d67ba43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProfessionalCpp">
+      <UniqueIdentifier>{90b3c05c-550a-41c4-b7bb-5383df53b346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreCppASoftwareEnginearingApproach">
+      <UniqueIdentifier>{d7da2a30-f425-40e1-9711-197ec976082e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppEffectiveObjectOrientedSoftwareConstruction">
+      <UniqueIdentifier>{cedb40fb-f3ec-41ab-aab8-c069cbb13737}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HowNotToProgramInCpp">
+      <UniqueIdentifier>{55f21648-cccb-4db4-827a-60e9ecd78fea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppliedCpp\Chapter2">
+      <UniqueIdentifier>{00607967-14c8-499b-80b3-509b9a5f8c37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookIntermediateTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\TheCppProgrammingLanguageSuite.h">
+      <Filter>TheCppProgrammingLanguage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionPlaceholderTesting.h">
+      <Filter>TheCppProgrammingLanguage\FourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionSuite.h">
+      <Filter>TheCppProgrammingLanguage\FourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionPlaceholderTesting.h">
+      <Filter>TheCppProgrammingLanguage\SpecialEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionSuite.h">
+      <Filter>TheCppProgrammingLanguage\SpecialEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExercisePlaceholderTesting.h">
+      <Filter>TheCppProgrammingLanguage\SpecialEditionExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExerciseSuite.h">
+      <Filter>TheCppProgrammingLanguage\SpecialEditionExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppPlaceholderTesting.h">
+      <Filter>RuminationsOnCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppSuite.h">
+      <Filter>RuminationsOnCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesPlaceholderTesting.h">
+      <Filter>EfficientCppPerformanceProgrammingTechniques</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesSuite.h">
+      <Filter>EfficientCppPerformanceProgrammingTechniques</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppPlaceholderTesting.h">
+      <Filter>ImperfectCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppSuite.h">
+      <Filter>ImperfectCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\AppliedCppSuite.h">
+      <Filter>AppliedCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppPlaceholderTesting.h">
+      <Filter>OptimizedCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppSuite.h">
+      <Filter>OptimizedCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationPlaceholderTesting.h">
+      <Filter>CppFootprintAndPerformanceOptimization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationSuite.h">
+      <Filter>CppFootprintAndPerformanceOptimization</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodayPlaceholderTesting.h">
+      <Filter>CppProgrammingToday</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodaySuite.h">
+      <Filter>CppProgrammingToday</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasPlaceholderTesting.h">
+      <Filter>CppGotchas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasSuite.h">
+      <Filter>CppGotchas</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesPlaceholderTesting.h">
+      <Filter>CppInActionIndustrialStrengthProgrammingTechniques</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesSuite.h">
+      <Filter>CppInActionIndustrialStrengthProgrammingTechniques</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsPlaceholderTesting.h">
+      <Filter>CppStrategiesAndTactics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsSuite.h">
+      <Filter>CppStrategiesAndTactics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookPlaceholderTesting.h">
+      <Filter>CppCookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookSuite.h">
+      <Filter>CppCookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppPlaceholderTesting.h">
+      <Filter>AdvancedCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppSuite.h">
+      <Filter>AdvancedCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppPlaceholderTesting.h">
+      <Filter>ProfessionalCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppSuite.h">
+      <Filter>ProfessionalCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachPlaceholderTesting.h">
+      <Filter>CoreCppASoftwareEnginearingApproach</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachSuite.h">
+      <Filter>CoreCppASoftwareEnginearingApproach</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionPlaceholderTesting.h">
+      <Filter>CppEffectiveObjectOrientedSoftwareConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionSuite.h">
+      <Filter>CppEffectiveObjectOrientedSoftwareConstruction</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppPlaceholderTesting.h">
+      <Filter>HowNotToProgramInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppSuite.h">
+      <Filter>HowNotToProgramInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2MainTesting.h">
+      <Filter>AppliedCpp\Chapter2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2Suite.h">
+      <Filter>AppliedCpp\Chapter2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionPlaceholderTesting.cpp">
+      <Filter>TheCppProgrammingLanguage\FourthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionPlaceholderTesting.cpp">
+      <Filter>TheCppProgrammingLanguage\SpecialEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExercisePlaceholderTesting.cpp">
+      <Filter>TheCppProgrammingLanguage\SpecialEditionExercise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppPlaceholderTesting.cpp">
+      <Filter>RuminationsOnCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesPlaceholderTesting.cpp">
+      <Filter>EfficientCppPerformanceProgrammingTechniques</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppPlaceholderTesting.cpp">
+      <Filter>ImperfectCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppPlaceholderTesting.cpp">
+      <Filter>OptimizedCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationPlaceholderTesting.cpp">
+      <Filter>CppFootprintAndPerformanceOptimization</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodayPlaceholderTesting.cpp">
+      <Filter>CppProgrammingToday</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasPlaceholderTesting.cpp">
+      <Filter>CppGotchas</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesPlaceholderTesting.cpp">
+      <Filter>CppInActionIndustrialStrengthProgrammingTechniques</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsPlaceholderTesting.cpp">
+      <Filter>CppStrategiesAndTactics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookPlaceholderTesting.cpp">
+      <Filter>CppCookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppPlaceholderTesting.cpp">
+      <Filter>AdvancedCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppPlaceholderTesting.cpp">
+      <Filter>ProfessionalCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachPlaceholderTesting.cpp">
+      <Filter>CoreCppASoftwareEnginearingApproach</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionPlaceholderTesting.cpp">
+      <Filter>CppEffectiveObjectOrientedSoftwareConstruction</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppPlaceholderTesting.cpp">
+      <Filter>HowNotToProgramInCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2MainTesting.cpp">
+      <Filter>AppliedCpp\Chapter2</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

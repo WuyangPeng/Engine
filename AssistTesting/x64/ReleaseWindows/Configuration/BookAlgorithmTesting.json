@@ -1,0 +1,141 @@
+{
+  "discreteMathematicsAndItsApplicationsSuite": {
+
+  },
+
+  "discreteMathematicsAndItsApplicationsSixthEditionSuite": {
+    "DiscreteMathematicsAndItsApplications::DiscreteMathematicsAndItsApplicationsSixthEditionPlaceholderTesting": 1
+  },
+
+  "discreteMathematicsAndItsApplicationsSeventhEditionSuite": {
+    "DiscreteMathematicsAndItsApplications::DiscreteMathematicsAndItsApplicationsSeventhEditionPlaceholderTesting": 1
+  },
+
+  "introductionToAlgorithmsSuite": {
+
+  },
+
+  "introductionToAlgorithmsSecondEditionSuite": {
+    "IntroductionToAlgorithms::IntroductionToAlgorithmsSecondEditionPlaceholderTesting": 1
+  },
+
+  "introductionToAlgorithmsThirdEditionSuite": {
+    "IntroductionToAlgorithms::IntroductionToAlgorithmsThirdEditionPlaceholderTesting": 1
+  },
+
+  "programmingPearlsSuite": {
+
+  },
+
+  "programmingPearlsOneSuite": {
+    "ProgrammingPearls::ProgrammingPearlsOnePlaceholderTesting": 1
+  },
+
+  "moreProgrammingPearlsSuite": {
+    "ProgrammingPearls::MoreProgrammingPearlsPlaceholderTesting": 1
+  },
+
+  "theArtOfComputerProgrammingSuite": {
+    "TheArtOfComputerProgramming::TheArtOfComputerProgrammingPlaceholderTesting": 1
+  },
+
+  "algorithmsUnlockedSuite": {
+    "AlgorithmsUnlocked::AlgorithmsUnlockedPlaceholderTesting": 1
+  },
+
+  "cryptographyForDevelopersSuite": {
+    "CryptographyForDevelopers::CryptographyForDevelopersPlaceholderTesting": 1
+  },
+
+  "algorithmsSuite": {
+
+  },
+
+  "algorithmsInCppParts1_4Suite": {
+    "Algorithms::AlgorithmsInCppParts1_4PlaceholderTesting": 1
+  },
+
+  "algorithmsInCppParts5Suite": {
+    "Algorithms::AlgorithmsInCppParts5PlaceholderTesting": 1
+  },
+
+  "algorithmsFourthEditionSuite": {
+    "Algorithms::AlgorithmsFourthEditionPlaceholderTesting": 1
+  },
+
+  "algorithmsSanjoyDasguptaSuite": {
+    "AlgorithmsSanjoyDasgupta::AlgorithmsSanjoyDasguptaPlaceholderTesting": 1
+  },
+
+  "writeGreatCodeSuite": {
+
+  },
+
+  "understandingTheMachineSuite": {
+    "WriteGreatCode::UnderstandingTheMachinePlaceholderTesting": 1
+  },
+
+  "thinkingLowLevelWritingHighLevelSuite": {
+    "WriteGreatCode::ThinkingLowLevelWritingHighLevelPlaceholderTesting": 1
+  },
+
+  "hackersDelightSuite": {
+    "HackersDelight::HackersDelightPrintItselfTesting": 1
+  },
+
+  "practicalAlgorithmsForProgrammersSuite": {
+    "PracticalAlgorithmsForProgrammers::PracticalAlgorithmsForProgrammersPlaceholderTesting": 1
+  },
+
+  "dataStructuresWithCppUsingSTLSuite": {
+    "DataStructuresWithCppUsingSTL::DataStructuresWithCppUsingSTLPlaceholderTesting": 1
+  },
+
+  "appliedCryptographySuite": {
+    "AppliedCryptography::AppliedCryptographyPlaceholderTesting": 1
+  },
+
+  "dataStructuresAndAlgorithmAnalysisInCppSuite": {
+    "DataStructuresAndAlgorithmAnalysisInCpp::DataStructuresAndAlgorithmAnalysisInCppPlaceholderTesting": 1
+  },
+
+  "elementaryNumberTheoryAndItsApplicationsSuite": {
+    "ElementaryNumberTheoryAndItsApplications::ElementaryNumberTheoryAndItsApplicationsPlaceholderTesting": 1
+  },
+
+  "linearAlgebraAndItsApplicationsSuite": {
+    "LinearAlgebraAndItsApplications::LinearAlgebraAndItsApplicationsPlaceholderTesting": 1
+  },
+
+  "dataStructuresAndAlgorithmsInCppSuite": {
+    "DataStructuresAndAlgorithmsInCpp::DataStructuresAndAlgorithmsInCppPlaceholderTesting": 1
+  },
+
+  "algorithmicPuzzlesSuite": {
+    "AlgorithmicPuzzles::AlgorithmicPuzzlesPlaceholderTesting": 1
+  },
+
+  "numericalRecipesInCppSuite": {
+    "NumericalRecipesInCpp::NumericalRecipesInCppPlaceholderTesting": 1
+  },
+
+  "concreteMathematicSuite": {
+    "ConcreteMathematic::ConcreteMathematicPlaceholderTesting": 1
+  },
+
+  "grokkingAlgorithmsSuite": {
+    "GrokkingAlgorithms::GrokkingAlgorithmsPlaceholderTesting": 1
+  },
+
+  "howToSolveSuite": {
+    "HowToSolve::HowToSolvePlaceholderTesting": 1
+  },
+
+  "introductionToTheDesignAndAnalysisOfAlgorithmsSuite": {
+    "IntroductionToTheDesignAndAnalysisOfAlgorithms::IntroductionToTheDesignAndAnalysisOfAlgorithmsPlaceholderTesting": 1
+  },
+
+  "dataAbstractionAndProblemSolvingWithCppSuite": {
+    "DataAbstractionAndProblemSolvingWithCpp::DataAbstractionAndProblemSolvingWithCppPlaceholderTesting": 1
+  }
+}

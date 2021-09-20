@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Catastrophe Disentanglement:Getting Software Projects Back on Track（灾难拯救：让软件项目重回轨道）">
+      <UniqueIdentifier>{994b4a37-2832-4ebd-8ee2-3bb04743f72c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fuzzing:Brute Force Vulnerability Discovery（模糊测试强制性安全漏洞发掘）">
+      <UniqueIdentifier>{8cf4103f-a191-4f57-b2ce-75e7cff62b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Code Optimization:Effective Memory Usage（代码优化：有效使用内存）">
+      <UniqueIdentifier>{0bda9f1d-c3b9-4708-9e04-c94a14047090}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Continuous Integration:Improving Software Quality and Reducing Risk（持续集成：软件质量改进和风险降低之道）">
+      <UniqueIdentifier>{383555a9-f49e-438b-8cab-3fd213aca2b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beautiful Architecture（架构之美）">
+      <UniqueIdentifier>{de9ac74a-01e4-4951-bad9-32b2c8b14b7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Applying Domain-Driven Design and Patterns（领域驱动设计和模式实战）">
+      <UniqueIdentifier>{dd5f0918-0226-422a-a1b6-dde1b400202a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Anti Patterns:Refactoring Software,Architectures,and Projects in Crisis（反模式：危机中软件、架构和项目的重构）">
+      <UniqueIdentifier>{8fe517b5-a383-4883-89f8-e61470a6264d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Writing Effective Use Cases（编写有效用例）">
+      <UniqueIdentifier>{df267e44-4a84-4842-a1a8-365fdbd08d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Software Engineering（软件工程：实践者的研究方法）">
+      <UniqueIdentifier>{6b0f7be4-7d50-4326-b434-c1ec5c87d245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Software Engineering（软件工程：实践者的研究方法）\1.Seventh Edition（第7版）">
+      <UniqueIdentifier>{9d7c31c5-665e-4225-9edb-1294689a9bd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Software Engineering（软件工程：实践者的研究方法）\2.Eighth Edition（第8版）">
+      <UniqueIdentifier>{91b1a030-7756-4bd6-8598-0a17f6221da1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Analysis Patterns:Reusable Object Models（分析模式：可复用的对象模型）">
+      <UniqueIdentifier>{d7af02bb-3e93-44be-b73f-eed70818ed60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{32356a16-ffc5-40bb-b57d-1e673e54db69}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookSoftwareEngineeringTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookSoftwareEngineeringTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookSoftwareEngineeringTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookSoftwareEngineeringTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookSoftwareEngineeringTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookSoftwareEngineeringTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

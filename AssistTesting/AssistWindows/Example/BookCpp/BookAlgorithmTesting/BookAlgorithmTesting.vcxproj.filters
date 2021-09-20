@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{15ae892b-26c8-49fe-9c83-5f9d954a9fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HackersDelight">
+      <UniqueIdentifier>{f1baea6e-32fe-45a4-b211-43098cfd0078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HackersDelight\Preface">
+      <UniqueIdentifier>{f07a2fc4-a066-42cd-9790-798d5b2bb4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DiscreteMathematicsAndItsApplications">
+      <UniqueIdentifier>{3bd79097-ac7d-4296-b9b6-1ac02ed0e8a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DiscreteMathematicsAndItsApplications\SixthEdition">
+      <UniqueIdentifier>{ce6be966-6f7f-4fe9-98da-f9cd54a34f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DiscreteMathematicsAndItsApplications\SeventhEdition">
+      <UniqueIdentifier>{b74cff29-f7f1-4fd2-96d3-6438d9704792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntroductionToAlgorithms">
+      <UniqueIdentifier>{6c48c876-bf1f-4bd4-9c13-1cf52cb2ce67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntroductionToAlgorithms\SecondEdition">
+      <UniqueIdentifier>{dea9db8c-a321-4845-8382-3614965c6138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntroductionToAlgorithms\ThirdEdition">
+      <UniqueIdentifier>{62fa8d7b-a0f5-42a1-ac70-f58dc8b2814f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPearls">
+      <UniqueIdentifier>{a98d5c77-5973-43c4-8a60-f082e509ea21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPearls\ProgrammingPearlsOne">
+      <UniqueIdentifier>{35ff4828-b1ae-4270-8a2a-12c5c5772c3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPearls\MoreProgrammingPearls">
+      <UniqueIdentifier>{a50b9660-9622-49e7-98ae-b7846c68eef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheArtOfComputerProgramming">
+      <UniqueIdentifier>{f01917b5-b3c1-4b6a-9818-d50a26d9dc51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgorithmsUnlocked">
+      <UniqueIdentifier>{5403b89a-a342-4f8b-81af-0e49b82330b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CryptographyForDevelopers">
+      <UniqueIdentifier>{c3efeea8-3eb0-4e90-befa-0d66cf05b674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms">
+      <UniqueIdentifier>{5f83bb94-9971-48a2-bd9e-2a6f243dee4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\AlgorithmsFourthEdition">
+      <UniqueIdentifier>{c3185ff1-012a-4f8e-bf7d-8006815252d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\AlgorithmsInCppParts1_4">
+      <UniqueIdentifier>{951c6f00-3877-4585-974d-8ea5ffdccabd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms\AlgorithmsInCppParts5">
+      <UniqueIdentifier>{398fe1ef-eb22-4b2c-b544-d767a20d200f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WriteGreatCode">
+      <UniqueIdentifier>{015f5a78-7e3f-4e3a-ab8a-1c977ffc2fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WriteGreatCode\UnderstandingTheMachine">
+      <UniqueIdentifier>{247fcc88-8f43-4271-a4d1-008955cefa9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WriteGreatCode\ThinkingLowLevelWritingHighLevel">
+      <UniqueIdentifier>{3c8ea5c6-17c0-4349-9397-77b03d699218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PracticalAlgorithmsForProgrammers">
+      <UniqueIdentifier>{557ddfdb-a097-49cc-baa0-f530acc52539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructuresWithCppUsingSTL">
+      <UniqueIdentifier>{d5577272-2c46-4748-834b-a3c222bb746d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructuresAndAlgorithmAnalysisInCpp">
+      <UniqueIdentifier>{99855487-090d-4edb-b089-92a87961fdae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ElementaryNumberTheoryAndItsApplications">
+      <UniqueIdentifier>{48d20c72-ac08-4143-aed9-8601323c694a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LinearAlgebraAndItsApplications">
+      <UniqueIdentifier>{46f77dfe-c321-4feb-ab6e-445a58c44ea0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataStructuresAndAlgorithmsInCpp">
+      <UniqueIdentifier>{3f778554-b79a-4a0e-8c0d-e213a69dea89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConcreteMathematic">
+      <UniqueIdentifier>{bf7d60db-b806-49bd-bffc-712341af5023}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NumericalRecipesInCpp">
+      <UniqueIdentifier>{cb74e481-66a1-4297-a356-45171cf8a81e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GrokkingAlgorithms">
+      <UniqueIdentifier>{d8c02633-fcfd-40f0-8318-e2ac3ac26d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HowToSolve">
+      <UniqueIdentifier>{09c91ee0-90a8-4c6d-afd8-9803ffeec9a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IntroductionToTheDesignAndAnalysisOfAlgorithms">
+      <UniqueIdentifier>{dcdd21a8-0039-4d31-bae6-96b91a59d542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataAbstractionAndProblemSolvingWithCpp">
+      <UniqueIdentifier>{3c990623-3463-4238-83f2-b80c4bfef074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Algorithms%28Sanjoy Dasgupta%29">
+      <UniqueIdentifier>{fc6ad081-9356-40fc-9b94-d8bf1debae6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AppliedCryptography">
+      <UniqueIdentifier>{48a5bbb6-ad21-4344-9741-efad3a60c8b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlgorithmicPuzzles">
+      <UniqueIdentifier>{7d1e712f-2ff4-4398-8ac9-f43fe7114d94}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookAlgorithmTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HackersDelight\HackersDelightSuite.h">
+      <Filter>HackersDelight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HackersDelight\Preface\HackersDelightPrefaceSuite.h">
+      <Filter>HackersDelight\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HackersDelight\Preface\HackersDelightPrintItselfTesting.h">
+      <Filter>HackersDelight\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\DiscreteMathematicsAndItsApplicationsSuite.h">
+      <Filter>DiscreteMathematicsAndItsApplications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SixthEdition\DiscreteMathematicsAndItsApplicationsSixthEditionSuite.h">
+      <Filter>DiscreteMathematicsAndItsApplications\SixthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SeventhEdition\DiscreteMathematicsAndItsApplicationsSeventhEditionSuite.h">
+      <Filter>DiscreteMathematicsAndItsApplications\SeventhEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SeventhEdition\DiscreteMathematicsAndItsApplicationsSeventhEditionPlaceholderTesting.h">
+      <Filter>DiscreteMathematicsAndItsApplications\SeventhEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SixthEdition\DiscreteMathematicsAndItsApplicationsSixthEditionPlaceholderTesting.h">
+      <Filter>DiscreteMathematicsAndItsApplications\SixthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\IntroductionToAlgorithmsSuite.h">
+      <Filter>IntroductionToAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\ThirdEdition\IntroductionToAlgorithmsThirdEditionPlaceholderTesting.h">
+      <Filter>IntroductionToAlgorithms\ThirdEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\SecondEdition\IntroductionToAlgorithmsSecondEditionPlaceholderTesting.h">
+      <Filter>IntroductionToAlgorithms\SecondEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\SecondEdition\IntroductionToAlgorithmsSecondEditionSuite.h">
+      <Filter>IntroductionToAlgorithms\SecondEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\ThirdEdition\IntroductionToAlgorithmsThirdEditionSuite.h">
+      <Filter>IntroductionToAlgorithms\ThirdEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\ProgrammingPearlsSuite.h">
+      <Filter>ProgrammingPearls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\ProgrammingPearlsOne\ProgrammingPearlsOnePlaceholderTesting.h">
+      <Filter>ProgrammingPearls\ProgrammingPearlsOne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\ProgrammingPearlsOne\ProgrammingPearlsOneSuite.h">
+      <Filter>ProgrammingPearls\ProgrammingPearlsOne</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\MoreProgrammingPearls\MoreProgrammingPearlsPlaceholderTesting.h">
+      <Filter>ProgrammingPearls\MoreProgrammingPearls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\MoreProgrammingPearls\MoreProgrammingPearlsSuite.h">
+      <Filter>ProgrammingPearls\MoreProgrammingPearls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TheArtOfComputerProgramming\TheArtOfComputerProgrammingSuite.h">
+      <Filter>TheArtOfComputerProgramming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TheArtOfComputerProgramming\TheArtOfComputerProgrammingPlaceholderTesting.h">
+      <Filter>TheArtOfComputerProgramming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsUnlocked\AlgorithmsUnlockedPlaceholderTesting.h">
+      <Filter>AlgorithmsUnlocked</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsUnlocked\AlgorithmsUnlockedSuite.h">
+      <Filter>AlgorithmsUnlocked</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\CryptographyForDevelopers\CryptographyForDevelopersPlaceholderTesting.h">
+      <Filter>CryptographyForDevelopers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\CryptographyForDevelopers\CryptographyForDevelopersSuite.h">
+      <Filter>CryptographyForDevelopers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsSuite.h">
+      <Filter>Algorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsFourthEdition\AlgorithmsFourthEditionPlaceholderTesting.h">
+      <Filter>Algorithms\AlgorithmsFourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsFourthEdition\AlgorithmsFourthEditionSuite.h">
+      <Filter>Algorithms\AlgorithmsFourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts1_4\AlgorithmsInCppParts1_4PlaceholderTesting.h">
+      <Filter>Algorithms\AlgorithmsInCppParts1_4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts1_4\AlgorithmsInCppParts1_4Suite.h">
+      <Filter>Algorithms\AlgorithmsInCppParts1_4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts5\AlgorithmsInCppParts5PlaceholderTesting.h">
+      <Filter>Algorithms\AlgorithmsInCppParts5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts5\AlgorithmsInCppParts5Suite.h">
+      <Filter>Algorithms\AlgorithmsInCppParts5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\WriteGreatCodeSuite.h">
+      <Filter>WriteGreatCode</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\UnderstandingTheMachine\UnderstandingTheMachinePlaceholderTesting.h">
+      <Filter>WriteGreatCode\UnderstandingTheMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\UnderstandingTheMachine\UnderstandingTheMachineSuite.h">
+      <Filter>WriteGreatCode\UnderstandingTheMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\ThinkingLowLevelWritingHighLevel\ThinkingLowLevelWritingHighLevelPlaceholderTesting.h">
+      <Filter>WriteGreatCode\ThinkingLowLevelWritingHighLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\ThinkingLowLevelWritingHighLevel\ThinkingLowLevelWritingHighLevelSuite.h">
+      <Filter>WriteGreatCode\ThinkingLowLevelWritingHighLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\PracticalAlgorithmsForProgrammers\PracticalAlgorithmsForProgrammersPlaceholderTesting.h">
+      <Filter>PracticalAlgorithmsForProgrammers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\PracticalAlgorithmsForProgrammers\PracticalAlgorithmsForProgrammersSuite.h">
+      <Filter>PracticalAlgorithmsForProgrammers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresWithCppUsingSTL\DataStructuresWithCppUsingSTLPlaceholderTesting.h">
+      <Filter>DataStructuresWithCppUsingSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresWithCppUsingSTL\DataStructuresWithCppUsingSTLSuite.h">
+      <Filter>DataStructuresWithCppUsingSTL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmAnalysisInCpp\DataStructuresAndAlgorithmAnalysisInCppPlaceholderTesting.h">
+      <Filter>DataStructuresAndAlgorithmAnalysisInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmAnalysisInCpp\DataStructuresAndAlgorithmAnalysisInCppSuite.h">
+      <Filter>DataStructuresAndAlgorithmAnalysisInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ElementaryNumberTheoryAndItsApplications\ElementaryNumberTheoryAndItsApplicationsPlaceholderTesting.h">
+      <Filter>ElementaryNumberTheoryAndItsApplications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ElementaryNumberTheoryAndItsApplications\ElementaryNumberTheoryAndItsApplicationsSuite.h">
+      <Filter>ElementaryNumberTheoryAndItsApplications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\LinearAlgebraAndItsApplications\LinearAlgebraAndItsApplicationsPlaceholderTesting.h">
+      <Filter>LinearAlgebraAndItsApplications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\LinearAlgebraAndItsApplications\LinearAlgebraAndItsApplicationsSuite.h">
+      <Filter>LinearAlgebraAndItsApplications</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmsInCpp\DataStructuresAndAlgorithmsInCppPlaceholderTesting.h">
+      <Filter>DataStructuresAndAlgorithmsInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmsInCpp\DataStructuresAndAlgorithmsInCppSuite.h">
+      <Filter>DataStructuresAndAlgorithmsInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ConcreteMathematic\ConcreteMathematicPlaceholderTesting.h">
+      <Filter>ConcreteMathematic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ConcreteMathematic\ConcreteMathematicSuite.h">
+      <Filter>ConcreteMathematic</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\NumericalRecipesInCpp\NumericalRecipesInCppSuite.h">
+      <Filter>NumericalRecipesInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\NumericalRecipesInCpp\NumericalRecipesInCppPlaceholderTesting.h">
+      <Filter>NumericalRecipesInCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\GrokkingAlgorithms\GrokkingAlgorithmsPlaceholderTesting.h">
+      <Filter>GrokkingAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\GrokkingAlgorithms\GrokkingAlgorithmsSuite.h">
+      <Filter>GrokkingAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HowToSolve\HowToSolvePlaceholderTesting.h">
+      <Filter>HowToSolve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HowToSolve\HowToSolveSuite.h">
+      <Filter>HowToSolve</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToTheDesignAndAnalysisOfAlgorithms\IntroductionToTheDesignAndAnalysisOfAlgorithmsPlaceholderTesting.h">
+      <Filter>IntroductionToTheDesignAndAnalysisOfAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToTheDesignAndAnalysisOfAlgorithms\IntroductionToTheDesignAndAnalysisOfAlgorithmsSuite.h">
+      <Filter>IntroductionToTheDesignAndAnalysisOfAlgorithms</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataAbstractionAndProblemSolvingWithCpp\DataAbstractionAndProblemSolvingWithCppPlaceholderTesting.h">
+      <Filter>DataAbstractionAndProblemSolvingWithCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataAbstractionAndProblemSolvingWithCpp\DataAbstractionAndProblemSolvingWithCppSuite.h">
+      <Filter>DataAbstractionAndProblemSolvingWithCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsSanjoyDasgupta\AlgorithmsSanjoyDasguptaPlaceholderTesting.h">
+      <Filter>Algorithms%28Sanjoy Dasgupta%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsSanjoyDasgupta\AlgorithmsSanjoyDasguptaSuite.h">
+      <Filter>Algorithms%28Sanjoy Dasgupta%29</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AppliedCryptography\AppliedCryptographyPlaceholderTesting.h">
+      <Filter>AppliedCryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AppliedCryptography\AppliedCryptographySuite.h">
+      <Filter>AppliedCryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmicPuzzles\AlgorithmicPuzzlesPlaceholderTesting.h">
+      <Filter>AlgorithmicPuzzles</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmicPuzzles\AlgorithmicPuzzlesSuite.h">
+      <Filter>AlgorithmicPuzzles</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HackersDelight\Preface\HackersDelightPrintItselfTesting.cpp">
+      <Filter>HackersDelight\Preface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SeventhEdition\DiscreteMathematicsAndItsApplicationsSeventhEditionPlaceholderTesting.cpp">
+      <Filter>DiscreteMathematicsAndItsApplications\SeventhEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DiscreteMathematicsAndItsApplications\SixthEdition\DiscreteMathematicsAndItsApplicationsSixthEditionPlaceholderTesting.cpp">
+      <Filter>DiscreteMathematicsAndItsApplications\SixthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\ThirdEdition\IntroductionToAlgorithmsThirdEditionPlaceholderTesting.cpp">
+      <Filter>IntroductionToAlgorithms\ThirdEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToAlgorithms\SecondEdition\IntroductionToAlgorithmsSecondEditionPlaceholderTesting.cpp">
+      <Filter>IntroductionToAlgorithms\SecondEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\ProgrammingPearlsOne\ProgrammingPearlsOnePlaceholderTesting.cpp">
+      <Filter>ProgrammingPearls\ProgrammingPearlsOne</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ProgrammingPearls\MoreProgrammingPearls\MoreProgrammingPearlsPlaceholderTesting.cpp">
+      <Filter>ProgrammingPearls\MoreProgrammingPearls</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\TheArtOfComputerProgramming\TheArtOfComputerProgrammingPlaceholderTesting.cpp">
+      <Filter>TheArtOfComputerProgramming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsUnlocked\AlgorithmsUnlockedPlaceholderTesting.cpp">
+      <Filter>AlgorithmsUnlocked</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\CryptographyForDevelopers\CryptographyForDevelopersPlaceholderTesting.cpp">
+      <Filter>CryptographyForDevelopers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsFourthEdition\AlgorithmsFourthEditionPlaceholderTesting.cpp">
+      <Filter>Algorithms\AlgorithmsFourthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts1_4\AlgorithmsInCppParts1_4PlaceholderTesting.cpp">
+      <Filter>Algorithms\AlgorithmsInCppParts1_4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\Algorithms\AlgorithmsInCppParts5\AlgorithmsInCppParts5PlaceholderTesting.cpp">
+      <Filter>Algorithms\AlgorithmsInCppParts5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\UnderstandingTheMachine\UnderstandingTheMachinePlaceholderTesting.cpp">
+      <Filter>WriteGreatCode\UnderstandingTheMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\WriteGreatCode\ThinkingLowLevelWritingHighLevel\ThinkingLowLevelWritingHighLevelPlaceholderTesting.cpp">
+      <Filter>WriteGreatCode\ThinkingLowLevelWritingHighLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\PracticalAlgorithmsForProgrammers\PracticalAlgorithmsForProgrammersPlaceholderTesting.cpp">
+      <Filter>PracticalAlgorithmsForProgrammers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresWithCppUsingSTL\DataStructuresWithCppUsingSTLPlaceholderTesting.cpp">
+      <Filter>DataStructuresWithCppUsingSTL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmAnalysisInCpp\DataStructuresAndAlgorithmAnalysisInCppPlaceholderTesting.cpp">
+      <Filter>DataStructuresAndAlgorithmAnalysisInCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ElementaryNumberTheoryAndItsApplications\ElementaryNumberTheoryAndItsApplicationsPlaceholderTesting.cpp">
+      <Filter>ElementaryNumberTheoryAndItsApplications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\LinearAlgebraAndItsApplications\LinearAlgebraAndItsApplicationsPlaceholderTesting.cpp">
+      <Filter>LinearAlgebraAndItsApplications</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataStructuresAndAlgorithmsInCpp\DataStructuresAndAlgorithmsInCppPlaceholderTesting.cpp">
+      <Filter>DataStructuresAndAlgorithmsInCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\ConcreteMathematic\ConcreteMathematicPlaceholderTesting.cpp">
+      <Filter>ConcreteMathematic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\NumericalRecipesInCpp\NumericalRecipesInCppPlaceholderTesting.cpp">
+      <Filter>NumericalRecipesInCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\GrokkingAlgorithms\GrokkingAlgorithmsPlaceholderTesting.cpp">
+      <Filter>GrokkingAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\HowToSolve\HowToSolvePlaceholderTesting.cpp">
+      <Filter>HowToSolve</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\IntroductionToTheDesignAndAnalysisOfAlgorithms\IntroductionToTheDesignAndAnalysisOfAlgorithmsPlaceholderTesting.cpp">
+      <Filter>IntroductionToTheDesignAndAnalysisOfAlgorithms</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\DataAbstractionAndProblemSolvingWithCpp\DataAbstractionAndProblemSolvingWithCppPlaceholderTesting.cpp">
+      <Filter>DataAbstractionAndProblemSolvingWithCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmsSanjoyDasgupta\AlgorithmsSanjoyDasguptaPlaceholderTesting.cpp">
+      <Filter>Algorithms%28Sanjoy Dasgupta%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AppliedCryptography\AppliedCryptographyPlaceholderTesting.cpp">
+      <Filter>AppliedCryptography</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAlgorithmTesting\AlgorithmicPuzzles\AlgorithmicPuzzlesPlaceholderTesting.cpp">
+      <Filter>AlgorithmicPuzzles</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{b528570a-ad0c-4109-ace7-95baa49a8c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 头文件">
+      <UniqueIdentifier>{ab8cef44-244e-4c08-a1a2-5825cb02a6cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 源文件">
+      <UniqueIdentifier>{98d9838f-6b1e-4fe0-80d9-a924b9d391ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 头文件\IntroductionToStandardCpp">
+      <UniqueIdentifier>{139673be-503f-49f8-a0eb-21b159d6c2f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 源文件\IntroductionToStandardCpp">
+      <UniqueIdentifier>{d60cb5de-40b6-4d9c-bd3e-c5815f10a24e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 头文件\PracticalProgramming">
+      <UniqueIdentifier>{e664134c-0a00-4253-8e5a-a49074539d63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 源文件\PracticalProgramming">
+      <UniqueIdentifier>{bc726703-91c2-4669-b226-ee1970d8a0cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 头文件\IntroductionToStandardCppExercise">
+      <UniqueIdentifier>{4556425d-3eb8-46c9-bfe1-5d088a8dd0a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThinkingInCpp 源文件\IntroductionToStandardCppExercise">
+      <UniqueIdentifier>{904e953a-71f8-48c5-a520-d148ac44ce4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 头文件">
+      <UniqueIdentifier>{3122082f-b03c-4a4b-8541-f8e73dd0162a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 源文件">
+      <UniqueIdentifier>{1b0e12f9-063f-45ef-bb0e-7eac9e97e0a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 头文件\FourthEdition">
+      <UniqueIdentifier>{35387655-e484-467c-ad9c-879149aa0a14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 源文件\FourthEdition">
+      <UniqueIdentifier>{a0fd11e8-7d33-4478-8276-40b85bca97a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 头文件\FifthEdition">
+      <UniqueIdentifier>{4edc5033-6aef-4bee-9aaf-8666f1117720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimer 源文件\FifthEdition">
+      <UniqueIdentifier>{45839bc2-f66b-4572-aeeb-7fc4b1f7e6d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 头文件">
+      <UniqueIdentifier>{ef7b34ed-069a-4b6f-aca5-1df98561748c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 源文件">
+      <UniqueIdentifier>{d9bae7d5-74b6-4327-b2a4-70266aa0645e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 头文件\SeventhEdition">
+      <UniqueIdentifier>{4c157568-9f1a-4628-ab01-461a58ccb871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 源文件\SeventhEdition">
+      <UniqueIdentifier>{0c7d8a59-df9a-4852-887e-8477709a5cdb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 头文件\NinthEdition">
+      <UniqueIdentifier>{3583bebb-c48c-4975-bb80-9373e94eefd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppHowToProgram 源文件\NinthEdition">
+      <UniqueIdentifier>{6cc3c25d-9284-4271-834c-3c614f210330}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPrinciplesAndPracticeUsingCpp 头文件">
+      <UniqueIdentifier>{b8312a21-b586-4a4a-83ab-5568928bd41a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPrinciplesAndPracticeUsingCpp 源文件">
+      <UniqueIdentifier>{c983da3f-4268-4337-90b6-154c402c2b24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPrinciplesAndPracticeUsingCpp 源文件\Preface">
+      <UniqueIdentifier>{0bd704b2-8cb6-4c49-993f-d47e99841a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProgrammingPrinciplesAndPracticeUsingCpp 头文件\Preface">
+      <UniqueIdentifier>{8caace82-74c5-4c65-8159-36cd76a0390f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ATourOfCpp 头文件">
+      <UniqueIdentifier>{a8e96228-3828-48b6-8591-c8a5adbd8fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ATourOfCpp 源文件">
+      <UniqueIdentifier>{cba405f5-0125-4ab5-836a-09f472ff1388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EssentialCpp 头文件">
+      <UniqueIdentifier>{7f99bf21-7f4c-4fdf-ab84-b1f0ad3c6f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EssentialCpp 源文件">
+      <UniqueIdentifier>{164e3089-8775-443c-8145-99051a3d3368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppADialog 头文件">
+      <UniqueIdentifier>{ec658b77-88c0-40bf-907f-b01e9eeb6e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppADialog 源文件">
+      <UniqueIdentifier>{4684c139-fc83-4fef-939e-56085338e0e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SamsTeachYourselfCppInOneHourADay 头文件">
+      <UniqueIdentifier>{2ae7900b-a3d0-4d67-a098-85e326aa0213}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SamsTeachYourselfCppInOneHourADay 源文件">
+      <UniqueIdentifier>{97f9e237-4e4f-415d-8e19-b672fed7ef12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimerPlus 头文件">
+      <UniqueIdentifier>{5a332de3-ef60-4c6c-ae48-f6e105d9dc7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimerPlus 源文件">
+      <UniqueIdentifier>{bcbd4b33-ff38-454f-980e-114c8631346d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimerPlus 头文件\Preface">
+      <UniqueIdentifier>{65660c6f-e083-4c29-ba7a-ecabda55efa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppPrimerPlus 源文件\Preface">
+      <UniqueIdentifier>{f9d1b22d-3256-456e-a73b-b317191e7727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BeginningCpp17 头文件">
+      <UniqueIdentifier>{1aa68fe3-9153-4231-b926-69e3d675027b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BeginningCpp17 源文件">
+      <UniqueIdentifier>{8889cf49-eead-4777-99a0-3849ac1b0e3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AcceleratedCpp 头文件">
+      <UniqueIdentifier>{8d19d1e3-70d3-4f33-ad64-a12e610ff18c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AcceleratedCpp 源文件">
+      <UniqueIdentifier>{7b288aea-6837-4d22-9ec2-a491b722ad13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppForTheImpatient 头文件">
+      <UniqueIdentifier>{52c02fd5-fcd2-4bf1-933a-063be0aa0ee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppForTheImpatient 源文件">
+      <UniqueIdentifier>{b7cb7958-5ec8-4952-bc24-325ec2f8e542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProblemSolvingWithCpp 头文件">
+      <UniqueIdentifier>{b14b0d76-fc3c-4c8b-b402-cd55b2692f2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProblemSolvingWithCpp 源文件">
+      <UniqueIdentifier>{b2a721d7-8e67-481f-9653-a097d1a497b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppProgramming 头文件">
+      <UniqueIdentifier>{f1e3e805-c895-4e7c-9227-356714d85ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppProgramming 源文件">
+      <UniqueIdentifier>{4c0a592f-3f56-4ac7-8c63-abc79ff40ccc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppProgramming 头文件\Preface">
+      <UniqueIdentifier>{591c9521-f56f-427e-8c28-e0db904140a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppProgramming 源文件\Preface">
+      <UniqueIdentifier>{b2c45886-8a76-475a-a22f-07755c62cd99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAndCppCodeCapsules 头文件">
+      <UniqueIdentifier>{768dd83d-11b0-4784-b986-09e005b4a077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CAndCppCodeCapsules 源文件">
+      <UniqueIdentifier>{be4d1cf3-6a54-475d-af21-7613c324327a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppDistilled 头文件">
+      <UniqueIdentifier>{fe40fa71-4ab0-45b4-a0a8-94b0277bb0d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppDistilled 源文件">
+      <UniqueIdentifier>{f1c7bfe1-eca3-4341-beaa-8d0dc083ab7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppDistilled 头文件\Preface">
+      <UniqueIdentifier>{defd0453-2041-400e-a6bd-7e1d4f958334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppDistilled 源文件\Preface">
+      <UniqueIdentifier>{b07eb6db-0a0d-4807-93ee-915af7950c50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputingConceptsWithCppEssentials 头文件">
+      <UniqueIdentifier>{6dea4928-b188-4e05-bc4a-f1be7aa78e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ComputingConceptsWithCppEssentials 源文件">
+      <UniqueIdentifier>{177707a1-a2bd-4cd3-8a8c-f318352fc335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppTheCompleteReference 头文件">
+      <UniqueIdentifier>{0c2ef573-e67c-4477-956c-2f24cf4006b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppTheCompleteReference 源文件">
+      <UniqueIdentifier>{5c3f8633-9e63-435a-84ff-e3f5962bfb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppTheCoreLanguage 头文件">
+      <UniqueIdentifier>{8c62e0a7-5caa-46d4-9691-13b084d573f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CppTheCoreLanguage 源文件">
+      <UniqueIdentifier>{330ee8ad-7739-4e29-9937-4150ce43e42a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\ThinkingInCppSuite.h">
+      <Filter>ThinkingInCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCpp\IntroductionToStandardCppSuite.h">
+      <Filter>ThinkingInCpp 头文件\IntroductionToStandardCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCppExercise\IntroductionToStandardCppExerciseSuite.h">
+      <Filter>ThinkingInCpp 头文件\IntroductionToStandardCppExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCpp\IntroductionToStandardCppPlaceholderTesting.h">
+      <Filter>ThinkingInCpp 头文件\IntroductionToStandardCpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCppExercise\IntroductionToStandardCppExercisePlaceholderTesting.h">
+      <Filter>ThinkingInCpp 头文件\IntroductionToStandardCppExercise</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\PracticalProgramming\PracticalProgrammingPlaceholderTesting.h">
+      <Filter>ThinkingInCpp 头文件\PracticalProgramming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\PracticalProgramming\PracticalProgrammingSuite.h">
+      <Filter>ThinkingInCpp 头文件\PracticalProgramming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\CppPrimerSuite.h">
+      <Filter>CppPrimer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FourthEdition\CppPrimerFourthEditionPlaceholderTesting.h">
+      <Filter>CppPrimer 头文件\FourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FifthEdition\CppPrimerFifthEditionPlaceholderTesting.h">
+      <Filter>CppPrimer 头文件\FifthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FifthEdition\CppPrimerFifthEditionSuite.h">
+      <Filter>CppPrimer 头文件\FifthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FourthEdition\CppPrimerFourthEditionSuite.h">
+      <Filter>CppPrimer 头文件\FourthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\CppHowToProgramSuite.h">
+      <Filter>CppHowToProgram 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\SeventhEdition\CppHowToProgramSeventhEditionPlaceholderTesting.h">
+      <Filter>CppHowToProgram 头文件\SeventhEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\SeventhEdition\CppHowToProgramSeventhEditionSuite.h">
+      <Filter>CppHowToProgram 头文件\SeventhEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\NinthEdition\CppHowToProgramNinthEditionPlaceholderTesting.h">
+      <Filter>CppHowToProgram 头文件\NinthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\NinthEdition\CppHowToProgramNinthEditionSuite.h">
+      <Filter>CppHowToProgram 头文件\NinthEdition</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProgrammingPrinciplesAndPracticeUsingCpp\ProgrammingPrinciplesAndPracticeUsingCppSuite.h">
+      <Filter>ProgrammingPrinciplesAndPracticeUsingCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProgrammingPrinciplesAndPracticeUsingCpp\Preface\ISOStandardCppTesting.h">
+      <Filter>ProgrammingPrinciplesAndPracticeUsingCpp 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProgrammingPrinciplesAndPracticeUsingCpp\Preface\ProgrammingPrinciplesAndPracticeUsingCppPrefaceSuite.h">
+      <Filter>ProgrammingPrinciplesAndPracticeUsingCpp 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ATourOfCpp\ATourOfCppPlaceholderTesting.h">
+      <Filter>ATourOfCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ATourOfCpp\ATourOfCppSuite.h">
+      <Filter>ATourOfCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\EssentialCpp\EssentialCppPlaceholderTesting.h">
+      <Filter>EssentialCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\EssentialCpp\EssentialCppSuite.h">
+      <Filter>EssentialCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppADialog\CppADialogPlaceholderTesting.h">
+      <Filter>CppADialog 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppADialog\CppADialogSuite.h">
+      <Filter>CppADialog 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\SamsTeachYourselfCppInOneHourADay\SamsTeachYourselfCppInOneHourADayPlaceholderTesting.h">
+      <Filter>SamsTeachYourselfCppInOneHourADay 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\SamsTeachYourselfCppInOneHourADay\SamsTeachYourselfCppInOneHourADaySuite.h">
+      <Filter>SamsTeachYourselfCppInOneHourADay 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimerPlus\CppPrimerPlusSuite.h">
+      <Filter>CppPrimerPlus 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimerPlus\Preface\BookConventionTesting.h">
+      <Filter>CppPrimerPlus 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimerPlus\Preface\CppPrimerPlusPrefaceSuite.h">
+      <Filter>CppPrimerPlus 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\BeginningCpp17\BeginningCpp17PlaceholderTesting.h">
+      <Filter>BeginningCpp17 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\BeginningCpp17\BeginningCpp17Suite.h">
+      <Filter>BeginningCpp17 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\AcceleratedCpp\AcceleratedCppPlaceholderTesting.h">
+      <Filter>AcceleratedCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\AcceleratedCpp\AcceleratedCppSuite.h">
+      <Filter>AcceleratedCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppForTheImpatient\CppForTheImpatientPlaceholderTesting.h">
+      <Filter>CppForTheImpatient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppForTheImpatient\CppForTheImpatientSuite.h">
+      <Filter>CppForTheImpatient 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProblemSolvingWithCpp\ProblemSolvingWithCppPlaceholderTesting.h">
+      <Filter>ProblemSolvingWithCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProblemSolvingWithCpp\ProblemSolvingWithCppSuite.h">
+      <Filter>ProblemSolvingWithCpp 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppProgramming\CppProgrammingSuite.h">
+      <Filter>CppProgramming 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppProgramming\Preface\CppProgrammingHelloTesting.h">
+      <Filter>CppProgramming 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppProgramming\Preface\CppProgrammingPrefaceSuite.h">
+      <Filter>CppProgramming 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CAndCppCodeCapsules\CAndCppCodeCapsulesPlaceholderTesting.h">
+      <Filter>CAndCppCodeCapsules 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CAndCppCodeCapsules\CAndCppCodeCapsulesSuite.h">
+      <Filter>CAndCppCodeCapsules 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppDistilled\CppDistilledSuite.h">
+      <Filter>CppDistilled 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppDistilled\Preface\CppDistilledHello1Testing.h">
+      <Filter>CppDistilled 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppDistilled\Preface\CppDistilledPrefaceSuite.h">
+      <Filter>CppDistilled 头文件\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ComputingConceptsWithCppEssentials\ComputingConceptsWithCppEssentialsPlaceholderTesting.h">
+      <Filter>ComputingConceptsWithCppEssentials 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ComputingConceptsWithCppEssentials\ComputingConceptsWithCppEssentialsSuite.h">
+      <Filter>ComputingConceptsWithCppEssentials 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCompleteReference\CppTheCompleteReferencePlaceholderTesting.h">
+      <Filter>CppTheCompleteReference 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCompleteReference\CppTheCompleteReferenceSuite.h">
+      <Filter>CppTheCompleteReference 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCoreLanguage\CppTheCoreLanguagePlaceholderTesting.h">
+      <Filter>CppTheCoreLanguage 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCoreLanguage\CppTheCoreLanguageSuite.h">
+      <Filter>CppTheCoreLanguage 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCpp\IntroductionToStandardCppPlaceholderTesting.cpp">
+      <Filter>ThinkingInCpp 源文件\IntroductionToStandardCpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\IntroductionToStandardCppExercise\IntroductionToStandardCppExercisePlaceholderTesting.cpp">
+      <Filter>ThinkingInCpp 源文件\IntroductionToStandardCppExercise</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ThinkingInCpp\PracticalProgramming\PracticalProgrammingPlaceholderTesting.cpp">
+      <Filter>ThinkingInCpp 源文件\PracticalProgramming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FourthEdition\CppPrimerFourthEditionPlaceholderTesting.cpp">
+      <Filter>CppPrimer 源文件\FourthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimer\FifthEdition\CppPrimerFifthEditionPlaceholderTesting.cpp">
+      <Filter>CppPrimer 源文件\FifthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\SeventhEdition\CppHowToProgramSeventhEditionPlaceholderTesting.cpp">
+      <Filter>CppHowToProgram 源文件\SeventhEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppHowToProgram\NinthEdition\CppHowToProgramNinthEditionPlaceholderTesting.cpp">
+      <Filter>CppHowToProgram 源文件\NinthEdition</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProgrammingPrinciplesAndPracticeUsingCpp\Preface\ISOStandardCppTesting.cpp">
+      <Filter>ProgrammingPrinciplesAndPracticeUsingCpp 源文件\Preface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ATourOfCpp\ATourOfCppPlaceholderTesting.cpp">
+      <Filter>ATourOfCpp 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\EssentialCpp\EssentialCppPlaceholderTesting.cpp">
+      <Filter>EssentialCpp 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppADialog\CppADialogPlaceholderTesting.cpp">
+      <Filter>CppADialog 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\SamsTeachYourselfCppInOneHourADay\SamsTeachYourselfCppInOneHourADayPlaceholderTesting.cpp">
+      <Filter>SamsTeachYourselfCppInOneHourADay 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppPrimerPlus\Preface\BookConventionTesting.cpp">
+      <Filter>CppPrimerPlus 源文件\Preface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\BeginningCpp17\BeginningCpp17PlaceholderTesting.cpp">
+      <Filter>BeginningCpp17 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\AcceleratedCpp\AcceleratedCppPlaceholderTesting.cpp">
+      <Filter>AcceleratedCpp 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppForTheImpatient\CppForTheImpatientPlaceholderTesting.cpp">
+      <Filter>CppForTheImpatient 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ProblemSolvingWithCpp\ProblemSolvingWithCppPlaceholderTesting.cpp">
+      <Filter>ProblemSolvingWithCpp 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppProgramming\Preface\CppProgrammingHelloTesting.cpp">
+      <Filter>CppProgramming 源文件\Preface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CAndCppCodeCapsules\CAndCppCodeCapsulesPlaceholderTesting.cpp">
+      <Filter>CAndCppCodeCapsules 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppDistilled\Preface\CppDistilledHello1Testing.cpp">
+      <Filter>CppDistilled 源文件\Preface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\ComputingConceptsWithCppEssentials\ComputingConceptsWithCppEssentialsPlaceholderTesting.cpp">
+      <Filter>ComputingConceptsWithCppEssentials 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCompleteReference\CppTheCompleteReferencePlaceholderTesting.cpp">
+      <Filter>CppTheCompleteReference 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookPrimaryTesting\CppTheCoreLanguage\CppTheCoreLanguagePlaceholderTesting.cpp">
+      <Filter>CppTheCoreLanguage 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookPrimaryTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+</Project>

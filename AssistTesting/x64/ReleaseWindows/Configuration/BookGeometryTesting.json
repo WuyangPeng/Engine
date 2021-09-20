@@ -1,0 +1,23 @@
+{
+  "threeDMathPrimerForGraphicsAndGameDevelopmentSuite": 
+  {
+    "ThreeDMathPrimerForGraphicsAndGameDevelopmentMainTesting": 1,
+    "ThreeDMathPrimerForGraphicsAndGameDevelopmentCodeTesting": 1
+  },
+
+  "mathematicsFor3DGameProgrammingAndComputerGraphicsSuite":
+  {
+    "MathematicsFor3DMainTesting": 1,
+    "MathematicsFor3DCodeTesting": 1
+  },
+
+  "geometricToolsForComputerGraphicsSuite": 
+  {
+    "GeometricToolsForComputerGraphicsMainTesting": 1
+  },
+
+  "proceduralElementsForComputerGraphicsSuite":
+  {
+     "ProceduralElementsForComputerGraphicsMainTesting": 1
+  }
+}

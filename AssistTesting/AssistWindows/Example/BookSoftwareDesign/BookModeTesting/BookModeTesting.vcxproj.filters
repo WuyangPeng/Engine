@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{1acfdec1-f27c-407b-b99a-5a3996f628e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book">
+      <UniqueIdentifier>{e4f3e8ca-f429-4504-943b-4f2958e43bf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Hatching Design Patterns Applied（设计模式沉思录）">
+      <UniqueIdentifier>{e654df79-cfbf-4d10-85ff-889e3e5781ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）">
+      <UniqueIdentifier>{c6776840-f341-4da8-b381-79efc6951015}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）\1">
+      <UniqueIdentifier>{b9ed68b2-bbb5-4bd1-a5bb-060d56694d12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）\2">
+      <UniqueIdentifier>{9660d8a3-6417-4c9a-b79d-973b9bf18d56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）\3">
+      <UniqueIdentifier>{3adfd226-4361-40ea-96dd-a2f24979bd67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）\4">
+      <UniqueIdentifier>{d999fbe7-99c3-4c94-8284-fd28a4b2a21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern Languages of Program Design（程序设计的模式语言）\5">
+      <UniqueIdentifier>{4692ec09-1133-4706-bfd4-0c71e1c1b45c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）">
+      <UniqueIdentifier>{ea47bf3b-0e02-4396-8e9f-0b5bede2524a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）\1.A System of Patterns（模式系统）">
+      <UniqueIdentifier>{33766512-c191-4381-ae1c-e04e623fa2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）\2.Patterns for Concurrent and Networked Objects（用于并发和网络化对象模式）">
+      <UniqueIdentifier>{7943cda9-67d8-487f-80ba-f3264a36e0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）\3.Patterns for Resource Managerment（资源管理）">
+      <UniqueIdentifier>{842a41a8-d453-4f56-a4b9-2dea70aee1cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）\4.A Pattern Language for Distributed Computing（分布式计算的模式语言）">
+      <UniqueIdentifier>{0b0e4853-ed1b-49ab-ad2b-ead51b584dc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Pattern-Oriented Software Arfhitecture（面向模式的软件体系结构）\5.On Patterns and Pattern Languages（模式与模式语言）">
+      <UniqueIdentifier>{ced8d088-e228-4949-8514-27927f64e26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Patterns of Enterprise Application Architecture（企业应用架构模式）">
+      <UniqueIdentifier>{904c981d-be94-4f00-b423-77e7d321bf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Design Patterns Explained（设计模式解析）">
+      <UniqueIdentifier>{26027a88-6905-4a6b-b8a0-4079aeb3800c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Design Patterns:Elements of Reusable Object-Oriented Software（设计模式：可复用面向对象软件的基础 ）">
+      <UniqueIdentifier>{b7f64e26-1db0-49d3-bfa1-cfdfcc8a8a71}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookModeTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookModeTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookModeTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookModeTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookModeTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookModeTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

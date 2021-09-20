@@ -1,0 +1,13 @@
+{
+  "theCppStandardLibraryExtensionsSuite": {
+    "TheCppStandardLibraryExtensions::TheCppStandardLibraryExtensionsConstructorTesting": 1
+  },
+
+  "beyondTheCppStandardLibraryAnIntroductionToBoostSuite": {
+    "BeyondTheCppStandardLibraryAnIntroductionToBoost::BeyondTheCppStandardLibraryAnIntroductionToBoostPlaceholderTesting": 1
+  },
+
+  "boostCppApplicationDevelopmentCookbookSuite": {
+    "BoostCppApplicationDevelopmentCookbook::BoostCppApplicationDevelopmentCookbookPlaceholderTesting": 1
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "cleanCppSustainableSoftwareDevelopmentSuite": {
+    "CleanCppSustainableSoftwareDevelopment::CleanCppSustainableSoftwareDevelopmentChapter1ClazzTesting": 1,
+    "CleanCppSustainableSoftwareDevelopment::CleanCppSustainableSoftwareDevelopmentChapter2TestTesting": 1,
+    "CleanCppSustainableSoftwareDevelopment::MoneyTest": 1,
+    "CleanCppSustainableSoftwareDevelopment::CleanCppSustainableSoftwareDevelopmentChapter2CustomerTesting": 1,
+    "CleanCppSustainableSoftwareDevelopment::CleanCppSustainableSoftwareDevelopmentChapter2ClazzTesting": 1,
+    "CleanCppSustainableSoftwareDevelopment::CleanCppSustainableSoftwareDevelopmentChapter2ServiceTesting": 1
+  },
+
+  "theDesignAndEvolutionOfCppSuite": {
+    "TheDesignAndEvolutionOfCpp::TheDesignAndEvolutionOfCppPlaceholderTesting": 1
+  },
+
+  "crossPlatformDevelopmentInCppSuite": {
+    "CrossPlatformDevelopmentInCpp::CrossPlatformDevelopmentInCppFibonacciTesting": 25,
+    "CrossPlatformDevelopmentInCpp::CrossPlatformDevelopmentInCppHelloWorldTesting": 1,
+    "CrossPlatformDevelopmentInCpp::CrossPlatformDevelopmentInCppOperatingSystemInterfaceTesting": 1
+  },
+
+  "apiDesignForCppSuite": {
+    "APIDesignForCpp::APIDesignForCppPlaceholderTesting": 1
+  },
+
+  "discoveringModernCppSuite": {
+    "DiscoveringModernCpp::DiscoveringModernCppGradientTesting": 1
+  },
+
+  "modernCppDesignSuite": {
+    "ModernCppDesign::ModernCppDesignPhysicalTesting": 1,
+    "ModernCppDesign::ModernCppDesignCTAssertTesting": 1
+  },
+
+  "theArtOfCppSuite": {
+    "TheArtOfCpp::TheArtOfCppPlaceholderTesting": 1
+  },
+
+  "insideTheCppObjectModelSuite": {
+    "InsideTheCppObjectModel::InsideTheCppObjectModelConstructorTesting": 1
+  },
+
+  "largeScaleCppSoftwareDesignSuite": {
+    "LargeScaleCppSoftwareDesign::LargeScaleCppSoftwareDesignPlaceholderTesting": 1
+  },
+
+  "secureCodingInCAndCppSuite": {
+    "SecureCodingInCAndCpp::SecureCodingInCAndCppPlaceholderTesting": 1
+  },
+
+  "designingAndCodingReusableCppSuite": {
+    "DesigningAndCodingReusableCpp::DesigningAndCodingReusableCppConstructorTesting": 1
+  },
+
+  "multiParadigmDesignForCppSuite": {
+    "MultiParadigmDesignForCpp::MultiParadigmDesignForCppPlaceholderTesting": 1
+  },
+
+  "cppGUIProgrammingWithQt4Suite": {
+    "CppGUIProgrammingWithQt4::CppGUIProgrammingWithQt4PlaceholderTesting": 1
+  },
+
+  "advancedQtProgrammingSuite": {
+    "AdvancedQtProgramming::AdvancedQtProgrammingPlaceholderTesting": 1
+  }
+}

@@ -1,0 +1,12 @@
+@echo on 
+
+start /d %AssistTestingWin32DebugLib% BookArtificialIntelligenceSoftwareTestingD.exe
+start /d %AssistTestingWin32ReleaseLib% BookArtificialIntelligenceSoftwareTesting.exe
+start /d %AssistTestingX64DebugLib% BookArtificialIntelligenceSoftwareTestingD.exe
+start /d %AssistTestingX64ReleaseLib% BookArtificialIntelligenceSoftwareTesting.exe
+start /d %AssistTestingStaticWin32DebugLib% BookArtificialIntelligenceSoftwareTestingStaticD.exe
+start /d %AssistTestingStaticWin32ReleaseLib% BookArtificialIntelligenceSoftwareTestingStatic.exe
+start /d %AssistTestingStaticX64DebugLib% BookArtificialIntelligenceSoftwareTestingStaticD.exe
+start /d %AssistTestingStaticX64ReleaseLib% BookArtificialIntelligenceSoftwareTestingStatic.exe
+
+pause

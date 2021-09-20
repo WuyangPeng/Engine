@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core Python Applications Programming（Python 核心编程）">
+      <UniqueIdentifier>{1fa79668-7aa0-4c46-a373-2c56f0ec808f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Expert Python Programming（Python 高级编程）">
+      <UniqueIdentifier>{ceb9617c-8250-47a9-b0d8-f2b168aa7890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Programming Collective Intelligence（集体智慧编程）">
+      <UniqueIdentifier>{9cefe39c-36fe-43fe-ad2e-e2615b1c8d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gray Hat Python（Python 灰帽子）">
+      <UniqueIdentifier>{34033217-4903-4a85-84c8-bec629af2c45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python Cookbook">
+      <UniqueIdentifier>{6f4f8594-209f-4b81-abbe-a8cc769a2997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python in a Nutsbell（Python 技术手册）">
+      <UniqueIdentifier>{95103f5f-718c-47f8-a785-ad1d446cf09f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Programming in Python 3（Python3 程序开发指南）">
+      <UniqueIdentifier>{64e36bcb-e41f-4cc1-b46c-c17c6c681fa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Python Essential Reference（Python 参考手册）">
+      <UniqueIdentifier>{a8bf8b2a-8cc7-413b-b95b-19b71cfc08fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Learning Python（Python 学习手册 ）">
+      <UniqueIdentifier>{877e8d51-13bb-4957-87cf-b75cb57b7919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beginning Python From Novice to Professional（Python 基础教程）">
+      <UniqueIdentifier>{b0eb9113-ac15-4717-84d0-666ceaa87f11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{00ef0c41-9781-4418-8331-b6c5f7f83ff5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookPythonTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookPythonTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookPythonTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookPythonTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookPythonTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookPythonTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

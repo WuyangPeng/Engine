@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Introduction to 3D Game Programming with DirectX 9.0c（DirectX 9.0 3D 游戏开发编程基础）">
+      <UniqueIdentifier>{eb087c84-93af-4caa-8adb-b30683b22d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Advanced 3D Game Programming with DirectX 10.0（DirectX 10 3D游戏编程深度探索）">
+      <UniqueIdentifier>{2b1cd21b-a5b5-4618-b707-74587733369b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Coding Complete（游戏编程全接触）">
+      <UniqueIdentifier>{34564273-0121-4409-93d1-fcfab8844755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multiplayer Game Programming（多玩家游戏程序设计）">
+      <UniqueIdentifier>{c35a8f91-3df0-4946-81f4-5984a85bcc76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beginning Game Programming（游戏编程入门）">
+      <UniqueIdentifier>{7c3380fc-2895-4991-b6b5-4ef40a5e57dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Real-Time Rendering Tricks and Techniques in DirectX（DirectX 实时渲染技术详解）">
+      <UniqueIdentifier>{4865af9f-96e7-4fc1-8c52-a774e0e47dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Advanced Animation with DirectX（DirectX 高级动画制作）">
+      <UniqueIdentifier>{f8366fc9-d117-4aac-8ad7-a2f9b0f9cedd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Programming Role Playing Games with DirectX（DirectX 角色扮演游戏编程）">
+      <UniqueIdentifier>{87baebd3-6754-4aa5-9ebc-2d7c98a8f6fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ricks of The Windows Game Programming Gurus（Windows 游戏编程大师技巧）">
+      <UniqueIdentifier>{2ee090a1-b7fe-4a89-90ae-3b2b03ad1dd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tricks Of The 3D Game Programming Gurus（3D游戏编程大师技巧）">
+      <UniqueIdentifier>{20e5a417-c14e-47eb-b8fe-11514963762b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Programming All in One（游戏编程 All In One）">
+      <UniqueIdentifier>{0d896a23-675a-4493-908a-367bcc3a5014}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{dc57f162-bf4d-4e6a-83bd-c72bda9ceb9f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookDirectXTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookDirectXTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookDirectXTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookDirectXTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookDirectXTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookDirectXTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

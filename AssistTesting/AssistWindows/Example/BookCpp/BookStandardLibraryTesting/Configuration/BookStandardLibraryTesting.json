@@ -1,0 +1,31 @@
+{
+  "theCppStandardLibrarySuite": {
+    "TheCppStandardLibrary::TheCppStandardLibraryPlaceholderTesting": 1
+  },
+
+  "cppSTLSuite": {
+    "CppSTL::CppSTLPlaceholderTesting": 1
+  },
+
+  "genericProgrammingAndTheSTLSuite": {
+    "GenericProgrammingAndTheSTL::GenericProgrammingAndTheSTLPlaceholderTesting": 1
+  },
+
+  "extendedSTLSuite": {
+    "ExtendedSTL::ExtendedSTLArrangementStyleTesting": 1,
+    "ExtendedSTL::ExtendedSTLBalanceTesting": 1,
+    "ExtendedSTL::ExtendedSTLSevenSignsOfAGoodCppLibraryTesting": 1
+  },
+
+  "standardCppIOStreamsAndLocalesSuite": {
+    "StandardCppIOStreamsAndLocales::StandardCppIOStreamsAndLocalesPrefaceTesting": 1
+  },
+
+  "usingTheCppStandardTemplateLibrariesSuite": {
+    "UsingTheCppStandardTemplateLibraries::UsingTheCppStandardTemplateLibrariesPlaceholderTesting": 1
+  },
+
+  "stlTutorialAndReferenceGuideSuite": {
+    "STLTutorialAndReferenceGuide::STLTutorialAndReferenceGuidePrefaceTesting": 1
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "programmingWindowsSuite": {
+  },
+
+  "programmingWindowsFifthEditionSuite": {
+    "ProgrammingWindowsFifthEditionCodeTesting": 1
+  },
+
+  "programmingWindowsSixthEditionSuite": {
+    "ProgrammingWindowsSixthEditionCodeTesting": 1
+  },
+
+  "programmingApplicationsForMicrosoftWindowsSuite": {
+    "ProgrammingApplicationsForMicrosoftWindowsCodeTesting": 1
+  },
+
+  "windowsSystemProgrammingSuite": {
+    "WindowsSystemProgrammingCodeTesting": 1
+  },
+
+  "microsoftWindowsInternalsSuite": {
+
+  },
+
+  "microsoftWindowsInternalFourthEditionSuite": {
+    "MicrosoftWindowsInternals::MicrosoftWindowsInternalsFourthEditionPlaceholderTesting": 1
+  },
+
+  "microsoftWindowsInternalSixthEditionSuite": {
+    "MicrosoftWindowsInternals::MicrosoftWindowsInternalsSixthEditionPlaceholderTesting": 1
+  },
+
+  "ivorHortonsBeginningVisualCppSuite": {
+
+  },
+
+  "ivorHortonsBeginningVisualCppFifthEditionSuite": {
+    "IvorHortonsBeginningVisualCpp::IvorHortonsBeginningVisualCppFifthEditionPlaceholderTesting": 1
+  },
+
+  "ivorHortonsBeginningVisualCppSeventhEditionSuite": {
+    "IvorHortonsBeginningVisualCpp::IvorHortonsBeginningVisualCppSeventhEditionTesting": 1
+  },
+
+  "theOldNewThingSuite": {
+    "TheOldNewThing::TheOldNewThingPlaceholderTesting": 1
+  }
+}

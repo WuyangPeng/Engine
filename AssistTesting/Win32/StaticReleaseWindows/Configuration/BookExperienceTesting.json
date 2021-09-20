@@ -1,0 +1,38 @@
+{
+  "effectiveCppSuite": {
+    "EffectiveCpp::EffectiveCppTerminologyTesting": 1,
+    "EffectiveCpp::EffectiveCppNamingConventionsTesting": 1
+  },
+
+  "moreEffectiveCppSuite": {
+    "MoreEffectiveCpp::MoreEffectiveCppTerminologyTesting": 1
+  },
+
+  "effectiveSTLSuite": {
+    "EffectiveSTL::EffectiveSTLCodeExampleTesting": 1
+  },
+
+  "effectiveModernCppSuite": {
+    "EffectiveModernCpp::Preface::EffectiveModernCppPrefaceExampleTesting": 1
+  },
+
+  "exceptionalCppSuite": {
+    "ExceptionalCpp::ExceptionalCppPlaceholderTesting": 1
+  },
+
+  "moreExceptionalCppSuite": {
+    "MoreExceptionalCpp::MoreExceptionalCppPlaceholderTesting": 1
+  },
+
+  "exceptionalCppStyleSuite": {
+    "ExceptionalCppStyle::ExceptionalCppStylePlaceholderTesting": 1
+  },
+
+  "cppCommonKnowledgeSuite": {
+    "CppCommonKnowledge::CppCommonKnowledgeOverloadTesting": 1
+  },
+
+  "cppCodingStandardsSuite": {
+    "CppCodingStandards::CppCodingStandardsPlaceholderTesting": 1
+  }
+}

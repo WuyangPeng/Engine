@@ -1,0 +1,31 @@
+{
+  "objectOrientedModelingAndDesignWithUMLSuite": 
+  {
+    "ObjectOrientedModelingAndDesignWithUMLMainTesting": 1
+  },
+
+  "applyingUMLAndPatternsSuite":
+  {
+    "ApplyingUMLAndPatternsMainTesting": 1
+  },
+
+  "theUnifiedModelingLanguageUserGuideSuite": 
+  {
+     "TheUnifiedModelingLanguageUserGuideMainTesting": 1
+  },
+
+  "umlDistilledSuite":
+  {
+     "UMLDistilledMainTesting": 1
+  },
+
+  "samsTeachYourselfUMLIn24HoursSuite": 
+  {
+    "SamsTeachYourselfUMLIn24HoursMainTesting": 1
+  },
+
+  "theUnifiedModelingLanguageReferenceManualSuite": 
+  {
+     "TheUnifiedModelingLanguageReferenceManualMainTesting": 1
+  }
+}

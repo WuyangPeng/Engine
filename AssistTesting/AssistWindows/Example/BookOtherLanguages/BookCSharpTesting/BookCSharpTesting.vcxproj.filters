@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Beginning C# 6 Programming with Visual Studio 2015（C# 入门经典 ）">
+      <UniqueIdentifier>{0295fe86-2f5c-4b3f-805c-e2aaf0139c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pro C# 2010 and the .NET 4 Platform（C# 与 NET4 高级程序设计）">
+      <UniqueIdentifier>{77a754a1-019a-469c-8da3-b2b56108ee2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Professional C# 6 and .NET Core 1.0（C# 高级编程）">
+      <UniqueIdentifier>{ec925301-3fc1-493b-af80-990cdd620d5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effective C#（C# 高效编程）">
+      <UniqueIdentifier>{93be4ecf-5b46-41f4-b492-fec37da610da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Microsoft Visual C# 2010 Step by Step（Visual C# 2010 从入门到精通）">
+      <UniqueIdentifier>{bf676ab1-80eb-4583-ad0c-bf1e39deea97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Essential C# 5.0（C# 本质论）">
+      <UniqueIdentifier>{9e34b18d-113b-4f9f-bc8e-d75cda34ecab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C# in Depth（深入理解 C#）">
+      <UniqueIdentifier>{98f1942a-08e6-45f8-904e-388215a7642e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Programming C#">
+      <UniqueIdentifier>{9a854db5-9df4-4a95-bd6f-468719ce1300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Illstrated C# 2012（C# 图解教程）">
+      <UniqueIdentifier>{9b8fc60b-bd24-4c2e-afea-39d0089f9ca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CLR via C#">
+      <UniqueIdentifier>{08a21738-2241-4f4d-9843-389b7d388fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{6428e9c2-084f-4e34-97d3-8ef2b1fcf8ca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookCSharpTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookCSharpTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookCSharpTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookCSharpTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookCSharpTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookCSharpTesting.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{B52AA26F-BDA5-4E05-A055-AAC939B6D42B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ThreadingCoreRenderEngineAssistTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup> 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEWin32Lib)/ACEd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorWin32DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/vld_x86.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorWin32Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutWin32DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEWin32Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorWin32ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutWin32ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLWin32Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEX64Lib)/ACEd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorX64DebugLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/vld_x64.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/dbghelp.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(VisualLeakDetectorX64Lib)/*.manifest" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutX64DebugBin)/freeglutd.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup> 
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PreLinkEvent>
+      <Command>xcopy "$(EngineInclude)/../$(Platform)/$(Configuration)Windows/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreLinkEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <PreBuildEvent>
+      <Command>xcopy "$(ACEX64Lib)/ACE.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(MysqlConnectorX64ReleaseLib)/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(FreeglutX64ReleaseBin)/freeglut.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y
+xcopy "$(OpenSSLX64Lib)/../bin/*.dll" "../../../../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/Testing.json" /F /Y
+xcopy "$(ProjectDir)/Configuration/ProjectTesting.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
+xcopy "$(ProjectDir)/Configuration/EnvironmentVariable.json" "../../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\ProjectTesting.json" />
+    <None Include="Configuration\Testing.json" />
+    <None Include="Configuration\ThreadingCoreRenderEngineAssistTesting.json" />
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\EngineSuite\EngineSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\EngineSuite\EngineTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\Testing.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\Version.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\VersionSuite\VersionSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\VersionSuite\VersionTesting.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\EngineSuite\EngineTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssistTesting\VersionSuite\VersionTesting.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

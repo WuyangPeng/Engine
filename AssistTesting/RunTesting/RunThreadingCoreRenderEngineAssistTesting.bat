@@ -1,0 +1,12 @@
+@echo on
+ 
+start /d %AssistTestingWin32DebugLib% ThreadingCoreRenderEngineAssistTestingD.exe
+start /d %AssistTestingWin32ReleaseLib% ThreadingCoreRenderEngineAssistTesting.exe
+start /d %AssistTestingX64DebugLib% ThreadingCoreRenderEngineAssistTestingD.exe
+start /d %AssistTestingX64ReleaseLib% ThreadingCoreRenderEngineAssistTesting.exe
+start /d %AssistTestingStaticWin32DebugLib% ThreadingCoreRenderEngineAssistTestingStaticD.exe
+start /d %AssistTestingStaticWin32ReleaseLib% ThreadingCoreRenderEngineAssistTestingStatic.exe
+start /d %AssistTestingStaticX64DebugLib% ThreadingCoreRenderEngineAssistTestingStaticD.exe
+start /d %AssistTestingStaticX64ReleaseLib% ThreadingCoreRenderEngineAssistTestingStatic.exe
+
+pause

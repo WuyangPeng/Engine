@@ -1,0 +1,48 @@
+@echo on
+
+call RunUserInterfaceEditorAssistTesting.bat
+call RunUserInterfaceEditorTesting.bat
+
+call RunTerrainEditorAssistTesting.bat
+call RunTerrainEditorTesting.bat
+
+call RunShaderEditorAssistTesting.bat
+call RunShaderEditorTesting.bat
+
+call RunShadowEditorAssistTesting.bat
+call RunShadowEditorTesting.bat
+
+call RunSceneEditorAssistTesting.bat
+call RunSceneEditorTesting.bat
+
+call RunEffectEditorAssistTesting.bat
+call RunEffectEditorTesting.bat
+
+call RunDataEditorAssistTesting.bat
+call RunDataEditorTesting.bat
+
+call RunAnimationEditorAssistTesting.bat
+call RunAnimationEditorTesting.bat
+
+call RunModelEditorAssistTesting.bat
+call RunModelEditorTesting.bat
+
+call RunTextureEditorAssistTesting.bat
+call RunTextureEditorTesting.bat
+
+call RunMaterialEditorAssistTesting.bat
+call RunMaterialEditorTesting.bat
+
+call RunFontEditorAssistTesting.bat
+call RunFontEditorTesting.bat
+
+call RunSkeletonEditorAssistTesting.bat
+call RunSkeletonEditorTesting.bat
+
+call RunLevelEditorAssistTesting.bat
+call RunLevelEditorTesting.bat
+
+call RunScriptEditorAssistTesting.bat
+call RunScriptEditorTesting.bat
+
+pause

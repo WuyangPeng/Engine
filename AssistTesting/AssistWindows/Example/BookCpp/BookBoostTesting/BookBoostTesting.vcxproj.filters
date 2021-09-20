@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{e1fe3e09-1219-44fa-bdf1-87fcb52e5e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{db9e55e5-02e7-4404-b0dd-328900ea7f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BeyondTheCppStandardLibraryAnIntroductionToBoost">
+      <UniqueIdentifier>{725f63e5-1dde-413c-8893-e5bcfb7d59c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BoostCppApplicationDevelopmentCookbook">
+      <UniqueIdentifier>{cc5f4127-10e2-44c8-aa6e-3f52cb12561f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppStandardLibraryExtensions">
+      <UniqueIdentifier>{a5c5d73f-07c7-44ef-a084-ded221285c21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheCppStandardLibraryExtensions\Preface">
+      <UniqueIdentifier>{b3ed68df-3c11-4748-ae4e-f15e229d6417}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\BookBoostTesting.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BeyondTheCppStandardLibraryAnIntroductionToBoost\BeyondTheCppStandardLibraryAnIntroductionToBoostPlaceholderTesting.h">
+      <Filter>BeyondTheCppStandardLibraryAnIntroductionToBoost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BeyondTheCppStandardLibraryAnIntroductionToBoost\BeyondTheCppStandardLibraryAnIntroductionToBoostSuite.h">
+      <Filter>BeyondTheCppStandardLibraryAnIntroductionToBoost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BoostCppApplicationDevelopmentCookbook\BoostCppApplicationDevelopmentCookbookPlaceholderTesting.h">
+      <Filter>BoostCppApplicationDevelopmentCookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BoostCppApplicationDevelopmentCookbook\BoostCppApplicationDevelopmentCookbookSuite.h">
+      <Filter>BoostCppApplicationDevelopmentCookbook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TheCppStandardLibraryExtensions\TheCppStandardLibraryExtensionsSuite.h">
+      <Filter>TheCppStandardLibraryExtensions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TheCppStandardLibraryExtensions\Preface\TheCppStandardLibraryExtensionsConstructorTesting.h">
+      <Filter>TheCppStandardLibraryExtensions\Preface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TheCppStandardLibraryExtensions\Preface\TheCppStandardLibraryExtensionsPrefaceSuite.h">
+      <Filter>TheCppStandardLibraryExtensions\Preface</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BeyondTheCppStandardLibraryAnIntroductionToBoost\BeyondTheCppStandardLibraryAnIntroductionToBoostPlaceholderTesting.cpp">
+      <Filter>BeyondTheCppStandardLibraryAnIntroductionToBoost</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\BoostCppApplicationDevelopmentCookbook\BoostCppApplicationDevelopmentCookbookPlaceholderTesting.cpp">
+      <Filter>BoostCppApplicationDevelopmentCookbook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookBoostTesting\TheCppStandardLibraryExtensions\Preface\TheCppStandardLibraryExtensionsConstructorTesting.cpp">
+      <Filter>TheCppStandardLibraryExtensions\Preface</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

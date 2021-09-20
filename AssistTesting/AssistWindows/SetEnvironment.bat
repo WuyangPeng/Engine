@@ -4,6 +4,10 @@ echo AssistTestingInclude = %AssistTestingInclude%
 echo %cd%
 setx AssistTestingInclude "%cd%\..\Code" 
 
+echo AssistTestingEngineering = %AssistTestingEngineering%
+echo %cd%
+setx AssistTestingEngineering "%cd%\.." 
+
 echo AssistTestingWin32DebugLib = %AssistTestingWin32DebugLib%
 echo %cd%
 setx AssistTestingWin32DebugLib "%cd%\..\Win32\DebugWindows" 

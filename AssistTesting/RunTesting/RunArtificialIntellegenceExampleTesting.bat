@@ -1,0 +1,12 @@
+@echo on 
+
+start /d %AssistTestingWin32DebugLib% ArtificialIntellegenceExampleTestingD.exe
+start /d %AssistTestingWin32ReleaseLib% ArtificialIntellegenceExampleTesting.exe
+start /d %AssistTestingX64DebugLib% ArtificialIntellegenceExampleTestingD.exe
+start /d %AssistTestingX64ReleaseLib% ArtificialIntellegenceExampleTesting.exe
+start /d %AssistTestingStaticWin32DebugLib% ArtificialIntellegenceExampleTestingStaticD.exe
+start /d %AssistTestingStaticWin32ReleaseLib% ArtificialIntellegenceExampleTestingStatic.exe
+start /d %AssistTestingStaticX64DebugLib% ArtificialIntellegenceExampleTestingStaticD.exe
+start /d %AssistTestingStaticX64ReleaseLib% ArtificialIntellegenceExampleTestingStatic.exe
+
+pause

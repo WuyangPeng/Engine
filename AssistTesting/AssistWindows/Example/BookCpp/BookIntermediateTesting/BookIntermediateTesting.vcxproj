@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{8CFFA008-0A32-4052-B172-26222C6482C0}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BookIntermediateTesting</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingX64ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\AssistTesting.props" />
+    <Import Project="..\..\..\AssistTestingStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\AppliedCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2MainTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2Suite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodayPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodaySuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\Testing.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExercisePlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExerciseSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\TheCppProgrammingLanguageSuite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AdvancedCpp\AdvancedCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\AppliedCpp\Chapter2\AppliedCppChapter2MainTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CoreCppASoftwareEnginearingApproach\CoreCppASoftwareEnginearingApproachPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppCookbook\CppCookbookPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppEffectiveObjectOrientedSoftwareConstruction\CppEffectiveObjectOrientedSoftwareConstructionPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppFootprintAndPerformanceOptimization\CppFootprintAndPerformanceOptimizationPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppGotchas\CppGotchasPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppInActionIndustrialStrengthProgrammingTechniques\CppInActionIndustrialStrengthProgrammingTechniquesPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppProgrammingToday\CppProgrammingTodayPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\CppStrategiesAndTactics\CppStrategiesAndTacticsPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\EfficientCppPerformanceProgrammingTechniques\EfficientCppPerformanceProgrammingTechniquesPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\HowNotToProgramInCpp\HowNotToProgramInCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ImperfectCpp\ImperfectCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\OptimizedCpp\OptimizedCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\ProfessionalCpp\ProfessionalCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\RuminationsOnCpp\RuminationsOnCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\FourthEdition\TheCppProgrammingLanguageFourthEditionPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEditionExercise\TheCppProgrammingLanguageSpecialEditionExercisePlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookIntermediateTesting\TheCppProgrammingLanguage\SpecialEdition\TheCppProgrammingLanguageSpecialEditionPlaceholderTesting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookIntermediateTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Testing.json" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

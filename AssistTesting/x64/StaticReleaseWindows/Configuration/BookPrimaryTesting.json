@@ -1,0 +1,105 @@
+{
+  "thinkingInCppSuite": {
+
+  },
+
+  "introductionToStandardCppSuite": {
+    "ThinkingInCpp::IntroductionToStandardCppPlaceholderTesting": 1
+  },
+
+  "introductionToStandardCppExerciseSuite": {
+    "ThinkingInCpp::IntroductionToStandardCppExercisePlaceholderTesting": 1
+  },
+
+  "practicalProgrammingSuite": {
+    "ThinkingInCpp::PracticalProgrammingPlaceholderTesting": 1
+  },
+
+  "cppPrimerSuite": {
+
+  },
+
+  "cppPrimerFourthEditionSuite": {
+    "CppPrimer::CppPrimerFourthEditionPlaceholderTesting": 1
+  },
+
+  "cppPrimerFifthEditionSuite": {
+    "CppPrimer::CppPrimerFifthEditionPlaceholderTesting": 1
+  },
+
+  "cppHowToProgramSuite": {
+
+  },
+
+  "cppHowToProgramSeventhEditionSuite": {
+    "CppHowToProgram::CppHowToProgramSeventhEditionPlaceholderTesting": 1
+  },
+
+  "cppHowToProgramNinthEditionSuite": {
+    "CppHowToProgram::CppHowToProgramNinthEditionPlaceholderTesting": 1
+  },
+
+  "programmingPrinciplesAndPracticeUsingCppSuite": {
+    "ProgrammingPrinciplesAndPracticeUsingCpp::ISOStandardCppTesting": 1
+  },
+
+  "aTourOfCppSuite": {
+    "ATourOfCpp::ATourOfCppPlaceholderTesting": 1
+  },
+
+  "essentialCppSuite": {
+    "EssentialCpp::EssentialCppPlaceholderTesting": 1
+  },
+
+  "cppADialogSuite": {
+    "CppADialog::CppADialogPlaceholderTesting": 1
+  },
+
+  "samsTeachYourselfCppInOneHourADaySuit": {
+    "SamsTeachYourselfCppInOneHourADay::SamsTeachYourselfCppInOneHourADayPlaceholderTesting": 1
+  },
+
+  "cppPrimerPlusSuite": {
+    "CppPrimerPlus::BookConventionTesting": 1
+  },
+
+  "beginningCpp17Suite": {
+    "BeginningCpp17::BeginningCpp17PlaceholderTesting": 1
+  },
+
+  "acceleratedCppSuite": {
+    "AcceleratedCpp::AcceleratedCppPlaceholderTesting": 1
+  },
+
+  "cppForTheImpatientSuite": {
+    "CppForTheImpatient::CppForTheImpatientPlaceholderTesting": 1
+  },
+
+  "problemSolvingWithCppSuite": {
+    "ProblemSolvingWithCpp::ProblemSolvingWithCppPlaceholderTesting": 1
+  },
+
+  "cppProgrammingSuite": {
+    "CppProgramming::CppProgrammingHelloTesting": 1
+  },
+
+  "cAndCppCodeCapsulesSuite": {
+    "CAndCppCodeCapsules::CAndCppCodeCapsulesPlaceholderTesting": 1
+  },
+
+  "cppDistilledSuite": {
+    "CppDistilled::CppDistilledHello1Testing": 1
+  },
+
+  "computingConceptsWithCppEssentialsSuite": {
+    "ComputingConceptsWithCppEssentials::ComputingConceptsWithCppEssentialsPlaceholderTesting": 1
+  },
+
+  "cppTheCompleteReferenceSuite": {
+    "CppTheCompleteReference::CppTheCompleteReferencePlaceholderTesting": 1
+  },
+
+  "cppTheCoreLanguageSuite": {
+    "CppTheCoreLanguage::CppTheCoreLanguagePlaceholderTesting": 1
+  }
+}
