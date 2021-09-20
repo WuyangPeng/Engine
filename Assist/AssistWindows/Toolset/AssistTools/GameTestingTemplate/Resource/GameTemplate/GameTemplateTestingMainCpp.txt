@@ -1,0 +1,14 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó
+//
+// %ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
+
+#include "TestingHelper.h"
+#include "CoreTools/Helper/MainFunctionMacro.h"
+
+#include <vld.h>
+
+MAIN_FUNCTION(%SolutionName%Testing, TestingHelper)
+	
+

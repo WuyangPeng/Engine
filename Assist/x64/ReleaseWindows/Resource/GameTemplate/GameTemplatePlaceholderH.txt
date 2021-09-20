@@ -1,0 +1,28 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_PLACEHOLDER_H
+#define %ProjectCapital%_%ManagerCapital%_ENGINE_PLACEHOLDER_H
+
+#include "%SolutionName%/%SolutionName%%ManagerName%/%SolutionName%%ManagerName%Dll.h"
+
+#include "%SolutionName%/%SolutionName%%ManagerName%/Macro/ExportMacro.h"  
+
+namespace %SolutionName%%ManagerName%
+{
+	class %ProjectCapital%_%ManagerCapital%_DEFAULT_DECLARE Placeholder
+	{
+	public:
+		typedef Placeholder ClassType;
+
+	public:
+		Placeholder();
+
+		CLASS_INVARIANT_DECLARE;
+	};
+}
+
+#endif // %ProjectCapital%_%ManagerCapital%_ENGINE_PLACEHOLDER_H

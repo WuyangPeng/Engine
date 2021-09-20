@@ -1,0 +1,12 @@
+C++ 程序设计语言·第四版
+ 
+TheCppProgrammingLanguageFourthEdition
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.6.0.1。
+
+实现内容
+	1. C++ 程序设计语言·第四版模块。

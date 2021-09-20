@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test-Driven Development By Example（测试驱动开发）">
+      <UniqueIdentifier>{1981af51-fa03-4380-a2f1-f098b723a5d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test-Driven Development: A Practical Guide（测试驱动开发——实用指南）">
+      <UniqueIdentifier>{9ca642ba-6dd7-421a-8336-05ed89b38e43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Test Driven:Practical TDD and Acceptance TDD for Jave Developers（测试驱动开发的艺术）">
+      <UniqueIdentifier>{3bdf038c-4406-4f72-8cd0-81b3d99b2ca7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Growing Object-Oriented Software,Guided by Tests（测试驱动的面向对象软件开发 ）">
+      <UniqueIdentifier>{6783fc8d-51e2-43e1-bb1f-5cc35e52782c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{23b3b337-29f9-45b9-bf43-8faa1b437875}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookTestDrive.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookTestDrive\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookTestDrive\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookTestDrive\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookTestDrive\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookTestDrive\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

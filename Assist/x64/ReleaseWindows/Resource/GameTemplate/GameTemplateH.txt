@@ -1,0 +1,10 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó 
+//
+// %ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_H
+#define %ProjectCapital%_H
+
+#endif // %ProjectCapital%_H

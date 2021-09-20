@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{b21cdd32-9e91-48ac-a106-8bab35ead2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{a6f57cdf-1ae0-49a5-b8ca-22aadc61deb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter1 头文件">
+      <UniqueIdentifier>{adb89fd4-1208-4228-bef5-ff86ed7df588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter1 源文件">
+      <UniqueIdentifier>{a27b8e19-208a-4cef-b56c-3a1fdf18e443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter2 头文件">
+      <UniqueIdentifier>{840d30ce-bb9b-490e-b646-cf91f2d784bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter2 源文件">
+      <UniqueIdentifier>{d9f668d1-5517-4604-98c3-1c6c18ba3cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exercise2 头文件">
+      <UniqueIdentifier>{c02c60e9-1ba2-4d10-916a-a20ea30cfefa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exercise2 源文件">
+      <UniqueIdentifier>{d8bd49dc-9aa0-4ea6-9ae6-4d8270c14af1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter3 头文件">
+      <UniqueIdentifier>{648951a2-a27c-4e45-ae96-16ff1486309e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter3 源文件">
+      <UniqueIdentifier>{2eb18edc-c9d2-40fe-8228-97a1228a82b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Exercise3 头文件">
+      <UniqueIdentifier>{2d0a7dd1-959b-4f36-9d03-6f2e7ecca18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter4 头文件">
+      <UniqueIdentifier>{e3f1233c-fcc1-4a24-a7f7-ded2ee2b7574}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter4 源文件">
+      <UniqueIdentifier>{0725e12d-a6e2-41f2-9af9-b08ef481b201}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogramming.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\CppTemplateMetaprogrammingNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Helper\CppTemplateMetaprogrammingClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Helper\CppTemplateMetaprogrammingCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary1.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Chapter1.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Chapter1Fwd.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Yyparse.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary3.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary4.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Spirit.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Calculator.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Chapter2.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Chapter2Fwd.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\IterSwap.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Iterator.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\ApplyFg.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Apply.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Five.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\TypeTraits.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Chapter2X.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Chapter2XInstantiate.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2Fwd.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_0.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_1.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_2.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_3.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_4.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_5.h">
+      <Filter>Exercise2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Chapter3Fwd.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Chapter3.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Dimensions.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Quantity.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\QuantityMain.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Transform.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\BadQuantity.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Quantity2.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Twice.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Lambda.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\LambdaMain.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\Arg.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3Fwd.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_0.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_1.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_2.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_3.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_4.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_5.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_6.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_7.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise3\Exercise3_8.h">
+      <Filter>Exercise3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter4\Chapter4.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter4\Chapter4Fwd.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary1.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Yyparse.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary3.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary4.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Binary.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter1\Calculator.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Iterator.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\IterSwap.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\ApplyFg.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Apply.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter2\Chapter2XInstantiate.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_2.cpp">
+      <Filter>Exercise2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Exercise2\Exercise2_3.cpp">
+      <Filter>Exercise2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\QuantityMain.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\CppTemplateMetaprogramming\Chapter3\LambdaMain.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

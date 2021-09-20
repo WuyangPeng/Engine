@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.2.1 (2020/01/15 21:42)
+
+#ifndef SCENE_EDITOR_DLL_DLL_H
+#define SCENE_EDITOR_DLL_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Macro/UserMacro.h"
+
+#if defined(BUILDING_SCENE_EDITOR_NO_IMPORT) || defined(BUILDING_SCENE_EDITOR_STATIC)
+
+  #define SCENE_EDITOR_DEFAULT_DECLARE
+  #define SCENE_EDITOR_HIDDEN_DECLARE
+  #define SCENE_EDITOR_VISIBLE
+
+#else // !defined(BUILDING_SCENE_EDITOR_NO_IMPORT) && !defined(BUILDING_SCENE_EDITOR_STATIC)
+
+   #if defined(BUILDING_SCENE_EDITOR_EXPORT)
+ 
+        #define SCENE_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define SCENE_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_SCENE_EDITOR_EXPORT)
+
+		#define SCENE_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define SCENE_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_SCENE_EDITOR_EXPORT
+
+   #define SCENE_EDITOR_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_SCENE_EDITORNO_IMPORT) || defined(BUILDING_SCENE_EDITOR_STATIC)
+
+#endif // SCENE_EDITOR_DLL_DLL_H

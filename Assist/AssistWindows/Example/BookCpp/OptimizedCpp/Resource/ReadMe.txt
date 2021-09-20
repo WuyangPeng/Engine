@@ -1,0 +1,7 @@
+C++	性能优化指南（Optimized C++）
+
+官方网站：
+http://guntheroth.com 、http://oldhandsblog.blogspot.com/ （已失效）。
+
+★★
+作者：Kurt Guntheroth

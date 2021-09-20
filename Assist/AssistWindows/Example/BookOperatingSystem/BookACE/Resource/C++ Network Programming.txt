@@ -1,0 +1,188 @@
+C++ 网络编程（C++ Network Programming）
+
+官方网站：   
+http://www.aw.com/cseng/series/indepth （已失效）、
+http://ace.ece.uci.edu/Doxygen （已失效） 、
+http://www.riverace.com/docs （已失效）、
+http://www.dre.vanderbilt.edu/~schmidt/ACE-documentation.html、 
+http://www.cs.wustl.edu/~schmidt
+
+卷1：运用ACE和模式消除复杂性（Mastering Complexity with ACE and Patterns）
+★★★
+作者：  Douglas C.Schmidt、Stephen D.Huston
+联系作者：
+ace-users@list.isis.vanderbilt.edu
+
+序
+关于本书
+	目标读者
+	结构和内容
+	相关材料
+	致谢
+第0章 设计课题、中间件方案、ACE
+	0.1 网络应用面临的挑战
+	0.2 网络应用的设计空间
+	0.3 面向对象中间件方案
+	0.4 ACE工具包概览
+	0.5 示例：一个网络日志服务程序
+	0.6 小结
+第1篇 面向对象网络编程
+	第1章 通信设计空间
+		1.1 五连接协议与面向连接协议
+		1.2 同步及异步消息交换
+		1.3 消息传递与共享内存
+		1.4 小结
+	第2章 Socket API概述
+		2.1 操作系统IPC机制概述
+		2.2 SocketAPI
+		2.3 SocketAPI的局限性
+		2.4 小结
+	第3章 ACE Socket Wrapper Facade
+		3.1 概述
+		3.2 ACE_Addr类和ACE_INET_Addr类
+		3.3 ACE_IPC_SAP类
+		3.4 ACE_SOCK类
+		3.5 ACE_SOCK_Connector类
+		3.6 ACE_SOCK_IO类和ACE_SOCK_Stream类
+		3.7 ACE_SOCK_Acceptor类
+		3.8 小结
+	第4章 网络日志服务程序的实现
+		4.1 概述
+		4.2 ACE_Message_Block类
+		4.3 ACE_InputCDR类和ACE_OutputCDR类
+		4.4 日志服务器的初始版本
+		4.5 客户程序
+		4.6 小结
+第2篇 并发式面向对象网络编程
+	第5章 并发设计空间
+		5.1 循环、并发及反应式服务器
+		5.2 进程与线程
+		5.3 进程/线程创建策略
+		5.4 用户、核心及混合线程模型
+		5.5 分时及实时调度级别
+		5.6 “基于任务”与“基于消息”的体系
+		5.7 小结
+	第6章 操作系统并发机制概述
+		6.1 同步事件多路分离
+		6.2 多进程机制
+		6.3 多线程机制
+		6.4 同步机制
+		6.5 OS并发机制的局限性
+		6.6 小结
+	第7章 ACE同步事件多路分离Wrapper Facade
+		7.1 概述
+		7.2 ACE_Handle_Set类
+		7.3 ACE_Handle_Set_Iterator类
+		7.4 ACE::select()方法
+		7.5 小结
+	第8章 ACE进程 Wrapper Facade
+		8.1 概述
+		8.2 ACE_Process类
+		8.3 ACE_Process_Options类
+		8.4 ACE_Process_Manager类
+		8.5 小结
+	第9章 ACE线程 Wrapper Facade
+		9.1 概述
+		9.2 ACE_Thread_Manager类
+		9.3 ACE_Sched_Params类
+		9.4 ACE_TSS类
+		9.5 小结
+	第10章 ACE同步 Wrapper Facade
+		10.1 概述
+		10.2 ACE_Guard类
+		10.3 ACE互斥体类
+		10.4 ACEReaders/Writer Lock类
+		10.5 ACE信号量类
+		10.6 ACE条件变量类
+		10.7 小结
+附录A ACE C++ Wrapper Facade的设计原则
+	A.1 概述
+	A.2 通过Wrapper Facade增强类型安全性
+	A.3 简化常见情形
+	A.4 通过继承结构提高设计的清晰性和可扩充性
+	A.5 尽可能地隐藏平台间的差异
+	A.6 针对效率实施优化
+	A.7 小结
+附录B ACE的过去、现在和将来
+	B.1 ACE的演变
+	B.2 未来之路
+	B.3 结束语
+
+卷2：基于ACE和框架的系统化复用（Systematic Reuse with ACE and Frameworks）
+★★★
+作者：  Douglas C.Schmidt、Stephen D.Huston
+
+前言
+关于本书
+	目标读者
+	结构和内容
+	相关材料
+	致谢
+第1章 用于网络编程的面向对象框架
+	1.1 面向对象的框架综述
+	1.2 软件开发与复用技术的比较
+		1.2.1 框架与类库之间的比较
+		1.2.2 框架与组件之间的比较
+		1.2.3 框架与模式之间的比较
+		1.2.4 框架与模型集成式计算之间的比较
+	1.3 在网络编程中应用框架
+	1.4 漫游ACE框架
+		1.4.1 ACE综述
+		1.4.2 ACE框架概要
+	1.5 示例：网络日志服务
+	1.6 小结	
+第2章 服务和配置设计维度
+	2.1 服务以及服务器设计空间
+　　	2.1.1 短持续时间服务与长持续时间服务
+　　	2.1.2 内部服务与外部服务
+　　	2.1.3 有状态服务与无状态服务
+　　	2.1.4 分层式/模块化服务与整体式服务
+　　	2.1.5 单服务服务器与多服务服务器
+　　	2.1.6 一次性服务器与持续式服务器
+	2.2 设计空间的配置
+　　	2.2.1 静态命名与动态命名
+　　	2.2.2 静态链接与动态链接
+　　	2.2.3 静态配置与动态配置
+	2.3 小结
+第3章 ACE Reactor 框架
+	3.1 综述
+	3.2 ACE_Time_Value类
+	3.3 ACE_Event_Handler类
+	3.4 ACE定时器队列类
+	3.5 ACE_Reactor类
+	3.6 小结
+第4章 C++ Network ProgrammingACE Reactor 实现
+	4.1 综述
+	4.2 ACE_Select_Reactor类
+	4.3 ACE_TP_Reactor类
+	4.4 ACE_WFMO_Reactor类
+	4.5 小结
+第5章 ACE Service Configurator 框架
+	5.1 综述
+	5.2 ACE_Service_Object类
+	5.3 ACE_Service_Repository类
+	5.4 ACE_Service_Config类
+	5.5 小结
+第6章 ACE Task框架
+	6.1 综述
+	6.2 ACE_Message_Queue类
+	6.3 ACE_Task类
+	6.4 小结
+第7章 ACE Acceptor-Connectors框架
+	7.1 综述
+	7.2 ACE_Svc_Handler类
+	7.3 ACE_Acceptor类
+	7.4 ACE_Connector类
+	7.5 小结
+第8章 ACE Proactor框架
+	8.1 综述
+	8.2 异步I/O工厂类
+	8.3 ACE_Handler类
+	8.4 前摄式Acceptor-Connector类
+	8.5 ACE_Proactor类
+	8.6 小结
+第9章 ACE Streams框架
+	9.1 综述
+	9.2 ACE_Module类
+	9.3 ACE_Stream类
+	9.4 小结

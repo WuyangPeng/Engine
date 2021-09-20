@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU Gems（GPU精粹）">
+      <UniqueIdentifier>{5470041d-974b-4a90-98b3-876022b983ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU Gems（GPU精粹）\1.Programming Techniques,Tips,and Tricks for Real-Time Graphics（实时图形编程的技术、技巧和技艺）">
+      <UniqueIdentifier>{639fc4a8-2ebb-439c-98c7-8a955d74f5d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU Gems（GPU精粹）\2.Programming Techniques for High-Performance Graphics and General-Purpose Computation（高性能图形芯片和通用计算编程技巧）">
+      <UniqueIdentifier>{ce12b701-2cf2-4266-88c4-6c1c04f8593a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GPU Gems（GPU精粹）\3.GPU Gems 3（GPU 3D和通用编程技巧）">
+      <UniqueIdentifier>{6fb69ab3-d8d2-4ab6-b03a-15ea4640942c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Shaders（图形着色器——理论与实践）">
+      <UniqueIdentifier>{21ae0dc7-d1a2-49d0-beef-2e0ce2288aaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{d45a4bb7-59ca-4a2e-a932-ba09cc240fa2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookRenderingTechnology.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookRenderingTechnology\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookRenderingTechnology\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookRenderingTechnology\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookRenderingTechnology\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookRenderingTechnology\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

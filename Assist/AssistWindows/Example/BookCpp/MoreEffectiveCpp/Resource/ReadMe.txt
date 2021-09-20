@@ -1,0 +1,8 @@
+More Effective C++
+
+官方网站：
+http://ftp.aw1.com （已失效）。
+
+★★★
+作者：Scott Meyers
+其他书籍：《Effective C++》、《Effective STL》、《Effective Modern C++》。

@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BookDatabase", "BookDatabase\BookDatabase.vcxproj", "{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{14D8ABCE-5CD3-4871-B654-20DF5486DDDA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{22A141EA-782A-442C-86EA-FC0C4FAC9D51}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BookDatabaseTesting", "..\..\..\..\AssistTesting\AssistWindows\Example\BookOtherLanguages\BookDatabaseTesting\BookDatabaseTesting.vcxproj", "{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF} = {CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		StaticDebug|x64 = StaticDebug|x64
+		StaticDebug|x86 = StaticDebug|x86
+		StaticRelease|x64 = StaticRelease|x64
+		StaticRelease|x86 = StaticRelease|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Debug|x64.ActiveCfg = Debug|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Debug|x64.Build.0 = Debug|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Debug|x86.ActiveCfg = Debug|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Debug|x86.Build.0 = Debug|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Release|x64.ActiveCfg = Release|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Release|x64.Build.0 = Release|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Release|x86.ActiveCfg = Release|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.Release|x86.Build.0 = Release|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{CA1CF89A-BF6C-49AE-AD5B-8DB6F531CABF}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Debug|x64.ActiveCfg = Debug|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Debug|x64.Build.0 = Debug|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Debug|x86.ActiveCfg = Debug|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Debug|x86.Build.0 = Debug|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Release|x64.ActiveCfg = Release|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Release|x64.Build.0 = Release|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Release|x86.ActiveCfg = Release|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.Release|x86.Build.0 = Release|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E6279A4D-8EB1-45E5-94AE-D05A01FD377C} = {22A141EA-782A-442C-86EA-FC0C4FAC9D51}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {29E87BB4-EF3E-41A5-97FC-5E2386BBDB3D}
+	EndGlobalSection
+EndGlobal

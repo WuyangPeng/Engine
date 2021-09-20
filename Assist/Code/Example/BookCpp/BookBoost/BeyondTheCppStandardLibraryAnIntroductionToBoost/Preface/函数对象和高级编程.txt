@@ -1,0 +1,25 @@
+函数对象及高级编程
+
+Boost.Bind
+Bind是对标准库的绑定器 bind1st 和 bind2nd 的泛化。这个库支持使用统一的语法将参数绑定到任何类似于函数行为的东西，如函数指针、函数对象，以及成员函数指针。它还可以通过嵌套绑定器实现函数组合。这个库不要求那些对标准库绑定器的强制约束，最显著的就是不要求你的类提供 typedefs result_type, first_argument_type, 和second_argument_type 等。这个库也使得我们不再需要用 ptr_fun, mem_fun, 和mem_fun_ref 等适配器。Bind库的说明在"Library 9: Bind 9."。它是对C++标准库的一个重要且很有用的扩充。Bind可以被标准库的算法使用，也经常用于Boost的函数，它提供了一个强大的工具，用于存放后续调用的函数和函数对象。Bind 已被即将发布的Library Technical Report所接受。
+Bind 的作者是 Peter Dimov.
+
+Boost.Function
+Function库实现了一个泛型的回调机制。它提供了函数指针、函数对象和成员函数指针的存储和后续的调用。当然，它与binder库，如Boost.Bind 和 Boost.Lambda一起工作，大大提高了回调(包括带态度的回调函数)的使用机会。这个库的详细介绍请见"Library 11: Function 11."。Function常用于需要把函数指针用于回调的地方。例如：信号/接收者的实现，GUI与业务逻辑的分离，以及在标准库容器中存储不同的类函数类型。Function已被即将发布的Library Technical Report所接受。
+Function 的作者是 Douglas Gregor.
+
+Boost.Functional
+Functional库提供C++标准库的适配器的加强版。主要的优势是它有助于解决引用到引用(这是非法的)的问题，这个问题是由对带有一个或多个引用参数的函数使用标准库的绑定器所引起的。Functional同时消除了在标准库算法中使用函数指针时必须用 ptr_fun 的问题。
+Functional 的作者是 Mark Rodgers.
+
+Boost.Lambda
+Lambda为C++提供lambda表达式及无名函数。在使用标准库算法时特别好用，Lambda允许函数在呼叫点创建，避免了创建多个小的函数对象。使用lambdas意味着更少的代码，在哪需要就在哪写，这比分散在代码各处的函数对象更清晰、更好维护。"Library 10: Lambda 10" 详细讨论了这个库。
+Lambda 的作者是 Jaakko J?rvi 和 Gary Powell.
+
+Boost.Ref
+许多函数模板，包括大量标准C++库里的函数模板，它们的参数采用传值的方式传递，有时候会有问题。复制一个对象可能很昂贵或者甚至不可能，或者状态可能取决于特写的实例，因此这时复制是不希望的。在这些情况下，可用的办法是用引用传递取代值传递。 Ref包装了一个对象的引用，并把它放入一个对象以便被复制。这就允许了通过引用去调用那些采用传值参数的函数。Ref 已被即将发布的Library Technical Report所接受。
+Ref 的作者是 Jaakko J?rvi, Peter Dimov, Douglas Gregor, 和 David Abrahams.
+
+Boost.Signals
+信号和接收系统，基于称为publisher-subscriber 和 observer的模式，它是在一个最小相关性系统中管理事件的重要工具。很少有大型应用软件不采用这种强大设计模式的某种变形，尽管他们有各自的实现方式。Signals提供了一个已验证的、高效的手段，将信号(events/subjects)的发生和这些信号要通知的接收者(subscribers/observers)进行了分离。
+Signals 的作者是 Douglas Gregor.

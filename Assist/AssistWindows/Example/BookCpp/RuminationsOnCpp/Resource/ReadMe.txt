@@ -1,0 +1,7 @@
+C++ 沉思录（Ruminations on C++）
+
+官方网站：
+http://ftp.aw.com/cseng/authors/koenig/ruminations （已失效）。
+
+★★★
+作者：Andrew Koenig、Barbara E.Moo

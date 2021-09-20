@@ -1,0 +1,12 @@
+Accelerated C++
+ 
+AcceleratedCpp
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.6.0.0。
+
+实现内容
+	1. Accelerated C++模块。

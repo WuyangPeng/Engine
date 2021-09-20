@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Foundation ActionScript 3 Animation:Making Things Move（Flash ActionScript 3.0 动画教程）">
+      <UniqueIdentifier>{ef4cd78c-de79-4487-9442-07ffa7fae06c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Advanced  ActionScript 3 Animation（Flash ActionScript 3.0 动画高级教程）">
+      <UniqueIdentifier>{a9274cb9-728c-470d-aa9d-27a9cac45870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActionScript for Multiplayer Games and Virtual Worlds（Action Script 大型网页游戏开发）">
+      <UniqueIdentifier>{951dd924-2e49-458b-8a2a-cfcf3919a16a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Advanced ActionScript 3 With Design Patterns（ActionScrip 3 设计模式）">
+      <UniqueIdentifier>{5c805341-a8e7-45b5-a989-d5d41aa6dea4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Advanced ActionScript 3.0 Visual QuickStart Guide（ActionScript 3.0 基础教程）">
+      <UniqueIdentifier>{321f9ab0-3e36-44ff-9388-ec889b805c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActionScript 3.0 Bible（ActionScript 3.0 宝典）">
+      <UniqueIdentifier>{a77c9a18-8a2b-4d53-97fc-bd29a3fecda6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ActionScript 3.0 Cookbook">
+      <UniqueIdentifier>{391a1602-4912-4899-a581-0e8558c564ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{c73efbde-454e-4461-88a0-63262109be3e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookActionScript3\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookActionScript3\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookActionScript3\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookActionScript3\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookActionScript3\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookActionScript3.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

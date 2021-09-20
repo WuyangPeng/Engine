@@ -1,0 +1,38 @@
+数学及数字处理
+
+Boost.Integer
+这个库提供了对整数类型的有用功能，如编译期的最小、最大值常数[3]， 基于给定位长的合适大小的类型，静态二进制对数计算等等。还包括从1999年C标准头文件 <stdint.h> 中的 typedef 。
+[3] std::numeric_limits 仅能以函数方式提供这些值。
+Integer 的作者是 Beman Dawes 和 Daryle Walker.
+
+Boost.Interval
+Interval库帮助你使用数学区间。它提供类模板 interval 及相关算子。区间的常见用法(除了明显的进行区间计算的情况)是提供模糊结果的计算；区间的使用可以量化舍入误差的传播情况。
+Interval 的作者是 Guillaume Melquiond, Sylvain Pion, 和 Hervé Br?nniman, 该库从 Jens Maurer的前期工作获得灵感。
+
+Boost.Math
+Math是一组数学模板： quaternions 和octonions (复数的特化)；数学函数如 acosh, asinh, 和sinhc ；计算最大公约数(GCD)和最小公倍数(LCM)的函数等等。
+Math 的作者是 Hubert Holin, Daryle Walker, 和 Eric Ford.
+
+Boost.Minmax
+Minmax可以同时计算最小和最大值，而使用 std::min 和 std::max 则要两次比较。对于 n 个元素的情况，只要 3n/2+1 次比较，而使用 std::min_element 和 std::max_element 则需要 2n 次比较。
+Minmax 的作者是 Hervé Br?nniman.
+
+Boost.Numeric Conversion
+Numeric Conversion库是一组用于在不同数字类型的值之间进行安全及可预言的转换的工具。例如，有一个名为 numeric_cast (最早来自于Boost.Conversion)的工具，提供了范围检测的转换以确定数值可被目标类型所表示，否则它会抛出异常。
+Numeric Conversion 的作者是 Fernando Cacciola.
+
+Boost.Operators
+Operators库提供了相关操作符及概念(LessThanComparable, Arithmetic,等等)的实现。定义一个类型的操作符时，保证所有操作符都有定义是一件乏味并容易出错的工作。例如，你提供了 operator< (LessThanComparable)，通常都要同时提供 operator<=, operator>, 和operator>= 。Operators可以根据给定类型的最小的用户自定义操作符集合，自动声明并定义其它所有的相关操作符。详细讨论见"Library 4: Operators 4."
+Operators 的作者是 David Abrahams, Jeremy Siek, Aleksey Gurtovoy, Beman Dawes, 和 Daryle Walker.
+
+Boost.Random
+这是一个对随机数的专业使用的库，包括大量的生成器和分配器，可适用于多个不同的领域，如仿真和加密。Random已被收入即将发布的Library Technical Report.
+Random 的作者是 Jens Maurer.
+
+Boost.Rational
+整数类型和浮点数类型都内建成于C++语言，复数类型也是C++标准库的一部分，但有理数类型呢？有理数可以避免浮点数的精度损失问题，因此它们常被用于计算金钱等。Rational提供的有理数类型可以基于任意整数类型，包括用户自定义的整数类型(具有无限精度的类型显然是很有用的).
+Rational 的作者是 Paul Moore.
+
+Boost.uBLAS
+uBLAS库使用数学符号提供对向量和矩阵的基本线性代数操作，采用操作符重载，它可以生成紧凑的代码(使用表达式模板)。
+uBLAS 的作者是 Joerg Walter 和 Mathias Koch.

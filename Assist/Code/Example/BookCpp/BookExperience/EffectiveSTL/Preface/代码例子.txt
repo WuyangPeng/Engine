@@ -1,0 +1,56 @@
+代码例子
+
+这本书充满了例子代码，当我引入每个例子时我都作了解释。不过仍然值得提前知道一些事情。
+
+你可以从上面map的例子看到我通常忽略#include，而且忽视STL组件在namespace std里的事实。当定义map m，我可以这么写，
+
+#include <map>
+#include <string>
+using std::map;
+using std::string;
+map<string, double> m;
+
+但我喜欢让我们省掉这些噪音。
+
+当我为一个模板声明一个形式类型参数时，我使用typename而不是class。即，不这么写，
+template<class T>
+class Widget { ... };
+我这么写：
+template<typename T>
+class Widget { ... };
+
+用这个场景里，class和typename表示完全相同的东西，但我发现typename能更清楚地表示我通常想要说的：T可以是任何类型；不必是一个类。如果你喜欢使用class来声明类型参数，那也可以。在这个场景里是用typename或class完全是风格
+的问题。
+
+在另一个场景里，这不再是风格问题。为了避免潜在的解析含糊（我将提供给你细节），你被要求在依赖形式类型参数的类型名字之前使用typename。这样的类型被称为依赖类型，一个例子将帮助阐明我所说的。假设你想为函数写一个模
+板，给定一个STL容器，返回容器中的最后一个元素是否大于第一个元素。这是一种方法：
+
+template<typename C>
+bool lastGreaterThanFirst(const C& container)
+{
+	if (container.empty()) return false;
+	typename C::const_iterator begin(container.begin());
+	typename C::const_iterator end(container.end());
+	return *--end > *begin;
+}
+
+在这个例子里，局部变量begin和end的类型是C::const_iterator。const_iterator是依赖形式类型参数C的一种类型。因为C::const_iterator是一种依赖类型，你被要求在它之前放上typename这个词。（一些编译器错误地接受没有typename的代
+码，但这样的代码不可移植。）
+
+我希望你注意到了在上面例子里我对颜色的使用。那是为了让你的注意力集中于特别重要的部分代码。通常，我加亮相关例子之间的差别，正如我在Widget例子里演示两种可能的声明参数T的方法。用于唤起例子中特别值得注意的部分的
+颜色也延伸到图表。例如，来自条款5的这张图使用颜色来区分当新元素被插入list时受影响的两个指针：
+
+（图：代码例子）
+
+我也为章号使用颜色，但这样的使用完全没有理由。这作为我的第一本两色的书，我希望你能原谅我的一点色彩丰富。我最喜爱的参数名中的有两个是lhs和rhs。它们分别代表“左手边”和“右手边”，而且当声明操作符时，我发现它们
+特别有用。 这是来自条款19的一个例子：
+
+class Widget { ... };
+bool operator==(const Widget& Ihs, const Widget& rhs);
+
+当这个函数在这样的场景下被调用时，
+if (x == y) ... // 假设x和y是Widget
+x，在“==”的左边，在operator==里面被称为lhs，而y被称为rhs。
+
+至于类名Widget，与GUI或者工具无关。这指示我为“做某件事的某个类”使用的名字。有时，正如第7页上的，Widget是一个类模板而不是一个类。在这样的情况里，你可能发现我仍然称Widget为一个类，即使这真的是一个模板。
+只要对讨论的东西不会产生歧义，忽略类和类模板、结构体和结构体模板、函数和函数模板之间的差别就不会伤害任何人。在可能混淆的情况下，我会分清模板和它们产生的类、结构体和函数。

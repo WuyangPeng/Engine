@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{ED6AACA7-0E67-4B84-AFB4-202CC724C570}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BookTemplate</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOKSTANDARDLIBRARY_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOKSTANDARDLIBRARY_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;BOOKSTANDARDLIBRARY_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;BOOKSTANDARDLIBRARY_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\C++ Template Metaprogramming.txt" />
+    <Text Include="Resource\C++ Templates.txt" />
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplate.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\BookTemplateNoImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Helper\BookTemplateClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Helper\BookTemplateCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Placeholder\Placeholder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\Placeholder\Placeholder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.1 起步走.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.2 元程序的概念（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.2 元程序的概念（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.3 在宿主语言中进行元编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.4 在C++中进行元编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.4.1 数值计算（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.4.1 数值计算（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.4.1 数值计算（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.4.2 类型计算.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.5 为何进行元编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.5.1 替代方案1：运行期计算.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.5.2 替代方案2：用户分析.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.5.3 为何进行C++元编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.6 何时进行元编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\1.7 为何需要元编程程序库.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter1\第1章 概述.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.1 类型关联.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.1.1 采用一种直接的方式.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.1.2 采用一种迂回方式（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.1.2 采用一种迂回方式（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.1.3 寻找一个捷径.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.10 练习（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.10 练习（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.10 练习（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.2 元函数（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.2 元函数（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.2 元函数（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.3 数值元函数.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4 在编译期作出选择.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.1 进一步讨论iter_swap（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.1 进一步讨论iter_swap（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.2 美中不足.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.3 另一个美中不足（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.3 另一个美中不足（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.4 “美中不足”之外覆器（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.4.4 “美中不足”之外覆器（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5 BoostTypeTraits程序库概览.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.1 一般知识.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.2 主类型归类.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.3 次类型归类.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.4 类型属性.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.5 类型之间的关系.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.5.6 类型转化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.6 无参元函数.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.7 元函数的定义.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.8 历史.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.9 细节.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.9.1 特化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.9.2 实例化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.9.3 多态（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\2.9.3 多态（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter2\第2章 Traits和类型操纵.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1 量纲分析（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1 量纲分析（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.1 量纲的表示（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.1 量纲的表示（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.1 量纲的表示（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.2 物理量的表示.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.3 实现加法和减法.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.4 实现乘法（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.4 实现乘法（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.4 实现乘法（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.4 实现乘法（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.5 实现除法（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.5 实现除法（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.1.5 实现除法（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.2 高阶元函数（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.2 高阶元函数（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.3 处理占位符.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.3.1 lambda元函数.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.3.2 apply元函数.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.4 lambda的其他能力.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.4.1 偏元函数应用.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.4.2 元函数复合.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5 Lambda的细节.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.1 占位符（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.1 占位符（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.1 占位符（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.2 占位符表达式的定义.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.3 Lambda和非元函数模板.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.5.4“懒惰”的重要性.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.6 细节（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.6 细节（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.6 细节（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\3.7 练习.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter3\第3章 深入探索元函数.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1 布尔外覆器和操作.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.1 类型选择（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.1 类型选择（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.1 类型选择（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.2 缓式类型选择（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.2 缓式类型选择（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.2 缓式类型选择（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.3 逻辑运算符（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.3 逻辑运算符（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.1.3 逻辑运算符（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2 整数外覆器和运算（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2 整数外覆器和运算（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2 整数外覆器和运算（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2.1 整型运算符（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2.1 整型运算符（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2.2 _c整型速记法（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.2.2 _c整型速记法（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.3 练习（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\4.3 练习（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Chapter4\第4章 整型外覆器和操作.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\Aleksey的致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\Dave的致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\序言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\补充材料.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplateMetaprogramming\Preface\试验.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplates\Preface\David的致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplates\Preface\Noco的致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplates\Preface\序.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookTemplate\CppTemplates\Preface\致谢.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

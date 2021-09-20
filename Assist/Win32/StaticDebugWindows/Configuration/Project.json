@@ -1,0 +1,21 @@
+{
+  "TcpClient": 1,
+  "UdpClient": 1,
+  "ProcessTest": 1,
+
+  "UserInterfaceEditor": 1,
+  "TerrainEditor": 1,
+  "ShaderEditor": 1,
+  "ShadowEditor": 1,
+  "SceneEditor": 1,
+  "EffectEditor": 1,
+  "DataEditor": 1,
+  "AnimationEditor": 1,
+  "ModelEditor": 1,
+  "TextureEditor": 1,
+  "MaterialEditor": 1,
+  "FontEditor": 1,
+  "SkeletonEditor": 1,
+  "LevelEditor": 1,
+  "ScriptEditor": 1
+}

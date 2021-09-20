@@ -1,0 +1,25 @@
+{
+  "name": "goblin grunt",
+  "minHealth": 20,
+  "maxHealth": 30,
+  "resists": [ "cold", "posion" ],
+  "weaknesses": [ "fire", "light" ]
+}
+
+{
+  "name": "goblin wizard",
+  "prototype": "goblin grunt", 
+  "spells":["fire ball","lightning bolt"]
+}
+
+{
+  "name": "goblin archer",
+  "prototype": "goblin grunt", 
+  "attacks":["short bow"]
+}
+
+{
+  "name": "Sword of Head Detaching",
+  "prototype": "longsword", 
+  "damageBonus":"20"
+}

@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{8C172741-A75A-4581-8608-886BAB5D6509}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BookAdvanced</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOKADVANCED_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOKADVANCED_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;BOOKADVANCED_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;BOOKADVANCED_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\Advanced Qt Programming.txt" />
+    <Text Include="Resource\API Design for C++.txt" />
+    <Text Include="Resource\C++ GUI Programming with Qt 4.txt" />
+    <Text Include="Resource\Clean C++ Sustainable Software Development.txt" />
+    <Text Include="Resource\Cross-Platform Development in C++.txt" />
+    <Text Include="Resource\Designing and Coding Reusable C++.txt" />
+    <Text Include="Resource\Discovering Modern C++.txt" />
+    <Text Include="Resource\Inside The C++ Object Model.txt" />
+    <Text Include="Resource\Large-Scale C++ Software Design.txt" />
+    <Text Include="Resource\Modern C++ Design.txt" />
+    <Text Include="Resource\Multi-Paradigm Design for C++.txt" />
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Secure Coding in C and C++.txt" />
+    <Text Include="Resource\The Art of C++.txt" />
+    <Text Include="Resource\The Design and Evolution of C++.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvanced.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\BookAdvancedNoImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Helper\BookAdvancedClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Helper\BookAdvancedCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Placeholder\Placeholder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\Placeholder\Placeholder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\序言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\序言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\AdvancedQtProgramming\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\为什么选用C++来描述API设计.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\序言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\本书的价值.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\本书的网站.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\本书的读者对象.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\术语及排版规约（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\术语及排版规约（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\APIDesignForCpp\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.1 软件熵（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.1 软件熵（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.2 整洁的代码.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.3 为什么使用C++（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.3 为什么使用C++（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.4 C++11—新时代的开始.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.5 适合本书的读者（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.5 适合本书的读者（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6 本书使用的约定.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6.1 扩展阅读.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6.2 说明、提示和警告（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6.2 说明、提示和警告（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6.3 示例代码.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.6.4 编码风格.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.7 相关网站和代码库（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.7 相关网站和代码库（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\1.8 UML图.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\第1章 简介（1）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter1\第1章 简介（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.1 测试的必要性（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.1 测试的必要性（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.1 测试的必要性（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.2 测试入门（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.2 测试入门（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.2 测试入门（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.3 单元测试（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.3 单元测试（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.3 单元测试（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.4 关于QA（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.4 关于QA（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5 良好的单元测试原则.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.1 单元测试的代码的质量.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.10 不要混淆测试代码和产品代码（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.10 不要混淆测试代码和产品代码（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.10 不要混淆测试代码和产品代码（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.11 测试必须快速执行（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.11 测试必须快速执行（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.12 测试替身（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.12 测试替身（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.12 测试替身（3）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.2 单元测试的命名（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.2 单元测试的命名（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.3 单元测试的独立性（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.3 单元测试的独立性（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.4 一个测试一个断言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.4 一个测试一个断言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.5 单元测试环境的独立初始化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.6 不对getters和setters做单元测试（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.6 不对getters和setters做单元测试（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.7 不对第三方代码做单元测试.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.8 不对外部系统做单元测试.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.9 如何处理数据库的访问（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\2.5.9 如何处理数据库的访问（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter2\第2章 构建安全体系.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.1 什么是原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.1 什么是原则（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.10 童子军原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.10 童子军原则（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.2 保持简单和直接原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.2 保持简单和直接原则（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.3 不需要原则.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.4 避免复制原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.4 避免复制原则（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.5 信息隐藏原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.5 信息隐藏原则（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.5 信息隐藏原则（3）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.5 信息隐藏原则（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.6 高内聚原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.6 高内聚原则（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.6 高内聚原则（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.7 松耦合原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.7 松耦合原则（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.7 松耦合原则（3）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.7 松耦合原则（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.8 小心优化原则（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.8 小心优化原则（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\3.9 最少惊讶原则.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Chapter3\第3章 原则.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Preface\关于作者.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Preface\关于技术审校.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CleanCppSustainableSoftwareDevelopment\Preface\致谢.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\Qt简史（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\Qt简史（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\丛书编者序.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\序言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\序言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CppGUIProgrammingWithQt4\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\关于Trixul.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\参考文献.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\序.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\引言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\引言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\影响软件可移植性的方方面面（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\影响软件可移植性的方方面面（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\影响软件可移植性的方方面面（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\影响软件可移植性的方方面面（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\影响软件可移植性的方方面面（5）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\抽象的作用（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\抽象的作用（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\抽象的作用（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\本书的组织方式.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\CrossPlatformDevelopmentInCpp\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\代码例子（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\代码例子（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\关于本书.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DesigningAndCodingReusableCpp\Preface\选择与建议.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\“美女和野兽”（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\“美女和野兽”（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\体例.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\作者简介.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\前言.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\学习C++的理由.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\科学和工程计算中的编程语言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\科学和工程计算中的编程语言（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\科学和工程计算中的编程语言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\致谢.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\DiscoveringModernCpp\Preface\阅读本书的原因.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\什么是C++对象模型（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\什么是C++对象模型（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\什么是C++对象模型（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\什么是C++对象模型（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\什么是C++对象模型（5）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\前言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\参考书目（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\参考书目（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\参考书目（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\本书组织（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\本书组织（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\程序范例及其执行（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\程序范例及其执行（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\InsideTheCppObjectModel\Preface\预定的读者.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\LargeScaleCppSoftwareDesign\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\LargeScaleCppSoftwareDesign\Preface\感谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\LargeScaleCppSoftwareDesign\Preface\正文中的例子.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\LargeScaleCppSoftwareDesign\Preface\读者对象.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\LargeScaleCppSoftwareDesign\Preface\阅读导航.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\Loki.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\内容组织.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\序言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\序言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\序言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\序言（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\序言（5）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\本书读者.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\ModernCppDesign\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\前言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\前言（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\本书的组织安排（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\本书的组织安排（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\MultiParadigmDesignForCpp\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\关于本书.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\序.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\本书的读者对象.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\本书组织和内容（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\本书组织和内容（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\SecureCodingInCAndCpp\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheArtOfCpp\Preface\0.1 本书内容.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheArtOfCpp\Preface\0.2 预备知识.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheArtOfCpp\Preface\0.3 源代码.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheArtOfCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\C++时间表（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\C++时间表（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\关注使用和用户们.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\引言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\引言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\怎样读这本书（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\怎样读这本书（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\程序设计语言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\程序设计语言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\程序设计语言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\致读者.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookAdvanced\TheDesignAndEvolutionOfCpp\Preface\致谢.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

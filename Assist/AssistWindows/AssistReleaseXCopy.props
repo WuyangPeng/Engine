@@ -4,7 +4,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemDefinitionGroup>
     <PostBuildEvent>
-      <Command>xcopy "$(AssistInclude)/../$(Platform)/$(Configuration)Windows/$(ProjectName).dll" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/" /F /Y</Command>
+      <Command>xcopy "../../../../$(Platform)/$(Configuration)Windows/$(ProjectName).dll" "$(AssistTestingEngineering)/$(Platform)/$(Configuration)Windows/" /F /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
 </Project>

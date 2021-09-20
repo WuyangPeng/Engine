@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{33f7a503-fa89-4c5c-86ea-8775279d2f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{20367b0d-3f97-4ba1-8d03-a1a3e5d7f3e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 头文件">
+      <UniqueIdentifier>{a327677e-19f9-47c1-a850-8feece8be709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 头文件">
+      <UniqueIdentifier>{0b8e3a92-ee00-42b2-afdb-bb1569c2dde9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件">
+      <UniqueIdentifier>{d53c6614-6914-4981-b8f3-d42a1f5d9a37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input 模板文件">
+      <UniqueIdentifier>{77300b37-038b-44df-85e7-f43f55064716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{38fca08c-eb5d-40ee-8751-0e47f39f7732}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 头文件">
+      <UniqueIdentifier>{53330eb8-54cc-4491-8466-36052cafd45d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI 源文件">
+      <UniqueIdentifier>{b029e26d-025f-4ca4-bba1-f70b4d6c3e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core 头文件">
+      <UniqueIdentifier>{80413947-1bd2-45d0-818b-ed8ceffa8bfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core 源文件">
+      <UniqueIdentifier>{3bc07e41-e570-40bd-b615-1eb85f41d54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 头文件">
+      <UniqueIdentifier>{0a928a1f-609a-4d85-9f09-a25d9efab64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource 源文件">
+      <UniqueIdentifier>{b352116a-bd80-4599-8830-f66ad839f8e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Renderer.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Project.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\ThreadingCoreRenderEngineAssist.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EngineDirectory.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Resource\LearningLibrary.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMiddleLayerMessage.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemMiddleLayer.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceMiddleLayer.cpp">
+      <Filter>Resource 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIMiddleLayer.cpp">
+      <Filter>GUI 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\ProjectName.cpp">
+      <Filter>Core 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Assist.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\AssistMiddleLayerMessage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemFwd.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\SystemMiddleLayer.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\System\System.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceMiddleLayer.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\Resource.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Resource\ResourceFwd.h">
+      <Filter>Resource 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputFwd.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputMiddleLayer.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\Input.h">
+      <Filter>Input 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Input\InputMiddleLayerDetail.h">
+      <Filter>Input 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\AssistCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Helper\AssistClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIFwd.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUIMiddleLayer.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\GUI\GUI.h">
+      <Filter>GUI 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\Core.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\CoreFwd.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\ThreadingCoreRenderEngineAssist\Core\ProjectName.h">
+      <Filter>Core 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,71 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsExample", "MathematicsExample\MathematicsExample.vcxproj", "{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{BE26215C-6244-486D-B087-517ED6906614}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{0C8C3C34-0167-4FE9-A7EA-268C67AD4EB4}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MathematicsExampleTesting", "..\..\..\..\AssistTesting\AssistWindows\Example\MathematicsExample\MathematicsExampleTesting\MathematicsExampleTesting.vcxproj", "{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51} = {C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+		StaticDebug|x64 = StaticDebug|x64
+		StaticDebug|x86 = StaticDebug|x86
+		StaticRelease|x64 = StaticRelease|x64
+		StaticRelease|x86 = StaticRelease|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Debug|x64.ActiveCfg = Debug|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Debug|x64.Build.0 = Debug|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Debug|x86.ActiveCfg = Debug|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Debug|x86.Build.0 = Debug|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Release|x64.ActiveCfg = Release|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Release|x64.Build.0 = Release|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Release|x86.ActiveCfg = Release|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.Release|x86.Build.0 = Release|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{C26C1434-0ACF-4C4F-A13D-A0F5FB07CC51}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Debug|x64.ActiveCfg = Debug|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Debug|x64.Build.0 = Debug|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Debug|x86.ActiveCfg = Debug|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Debug|x86.Build.0 = Debug|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Release|x64.ActiveCfg = Release|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Release|x64.Build.0 = Release|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Release|x86.ActiveCfg = Release|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.Release|x86.Build.0 = Release|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticDebug|x64.ActiveCfg = StaticDebug|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticDebug|x64.Build.0 = StaticDebug|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticDebug|x86.ActiveCfg = StaticDebug|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticDebug|x86.Build.0 = StaticDebug|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticRelease|x64.ActiveCfg = StaticRelease|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticRelease|x64.Build.0 = StaticRelease|x64
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{367E4DF5-678D-43A5-A0A2-2E4CE7C7AB37} = {BE26215C-6244-486D-B087-517ED6906614}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {946B4585-5322-4D1B-AAF0-ACFC1758DCA4}
+	EndGlobalSection
+EndGlobal

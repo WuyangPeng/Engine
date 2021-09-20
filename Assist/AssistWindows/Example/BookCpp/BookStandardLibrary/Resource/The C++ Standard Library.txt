@@ -1,0 +1,517 @@
+C++ 标准程序库（The C++ Standard Library）
+（第2版）
+
+官方网站：
+http://www.cppstdlib.com
+
+★★★
+作者：Nicolai M. Josuttis
+其他书籍：《C++ Templates》。
+
+知识点 
+1.	C++标准库基础知识。 
+
+第2版序言
+第2版致谢
+第1版序言
+第1版致谢
+第1章 关于本书
+	1.1 缘起
+	1.2 阅读前的必要基础
+	1.3 本书风格与结构
+	1.4 如何阅读本书
+	1.5 目前发展情势
+	1.6 范例代码及额外信息
+	1.7 反馈
+第2章 C++及标准库简介
+	2.1 C++Standard的历史
+		2.1.1 C++11 Standard常见疑问
+		2.1.2 C++98和C++11的兼容性
+	2.2 复杂度与Big-O标记
+第3章 语言新特性
+	3.1 C++11语言新特性
+		3.1.1 微小但重要的语法提升
+		3.1.2 以auto完成类型自动推导
+		3.1.3 一致性初始化（Uniform Initialization）与初值列（Initializer List）
+		3.1.4 Range-Based for循环
+		3.1.5 Move语义和Rvalue Reference
+		3.1.6 新式的字符串字面常量（String Literal）
+		3.1.7 关键字noexcept
+		3.1.8 关键字constexpr
+		3.1.9 崭新的Template特性
+		3.1.10 Lambda
+		3.1.11 关键字decltype
+		3.1.12 新的函数声明语法（New Function Declaration Syntax）
+		3.1.13 带领域的（Scoped） Enumeration
+		3.1.14 新的基础类型（New Fundamental Data Type）
+	3.2 虽旧犹新的语言特性
+		3.2.1 基础类型的明确初始化（Explicit Initialization for Fun-damental Type）
+		3.2.2 main()定义式
+第4章 一般概念        
+	4.1 命名空间（Namespace）std
+	4.2 头文件（Header File）
+	4.3 差错和异常（Error and Exception）的处理
+		4.3.1 标准的Exception Class（异常类）
+		4.3.2 异常类（Exception Class）的成员
+		4.3.3 以Class exception_ptr传递异常
+		4.3.4 抛出标准异常
+		4.3.5 自标准异常类派生
+	4.4 Callable Object（可被调用的对象）
+	4.5 并发与多线程
+	4.6 分配器（Allocator）
+第5章 通用工具
+	5.1 Pair和Tuple
+		5.1.1 Pair
+		5.1.2 Tuple（不定数的值组）
+		5.1.3 Tuple的输入/输出
+		5.1.4 tuple和pair转换
+	5.2 Smart Pointer（智能指针）
+		5.2.1 Class shared_ptr
+		5.2.2 Class weak_ptr
+		5.2.3 误用Shared Pointer
+		5.2.4 细究Shared Pointer和Weak Pointer
+		5.2.5 Class unique_ptr
+		5.2.6 细究Class unique_ptr
+		5.2.7 Class auto_ptr
+		5.2.8 Smart Pointer结语	
+	5.3 数值的极值（Numeric Limit）
+	5.4 Type Trait和Type Utility
+		5.4.1 Type Trait的目的
+		5.4.2 细究Type Trait
+		5.4.3 Reference Wrapper（外覆器）
+		5.4.4 Function Type Wrapper（外覆器）
+	5.5 辅助函数
+		5.5.1 挑选最小值和最大值
+		5.5.2 两值互换（Swapping）
+		5.5.3 增补的“比较操作符”（Comparison Operator）
+	5.6 Class ratio<>的编译期分数运算
+	5.7 Clock和Timer
+		5.7.1 Chrono程序库概观
+		5.7.2 Duration（时间段）
+		5.7.3 Clock（时钟）和Timepoint（时间点）
+		5.7.4 C和POSIX提供的Date/Time函数
+		5.7.5 以计时器停滞线程（Blocking with Timer）
+	5.8 头文件<cstddef>、<cstdlib>和<cstring>
+		5.8.1 <cstddef>内的各项定义
+		5.8.2 <cstdlib>内的各种定义
+		5.8.3 <cstring>中的定义式
+第6章 标准模板库
+	6.1 STL组件（Component）
+	6.2 容器（Container）
+		6.2.1 序列式容器（Sequence Container）
+		6.2.2 关联式容器（Associative Container）
+		6.2.3 无序容器（Unordered Container）
+		6.2.4 关联式数组（Associative Array）
+		6.2.5 其他容器
+		6.2.6 容器适配器（Container Adapter）
+	6.3 迭代器（Iterator）
+		6.3.1 关联式（Associative）及无序（Unordered）容器的更多实例
+		6.3.2 迭代器种类（Iterator Category）
+	6.4 算法（Algorithm）
+		6.4.1 区间（Range）
+		6.4.2 处理多重区间（Multiple Ranges）
+	6.5 迭代器之适配器（Iterator Adapter）
+		6.5.1 Insert Iterator（安插型迭代器）
+		6.5.2 Stream Iterator（串流迭代器）
+		6.5.3 Reverse Iterator（反向迭代器）
+		6.5.4 Move Iterator（搬移迭代器）
+	6.6 用户自定义的泛型函数（User-Defined GenericFunction）
+	6.7 更易型算法（Manipulating Algorithm）
+		6.7.1 移除（Removing）元素
+		6.7.2 更易Associative（关联式）和Unordered（无序）容器
+		6.7.3 算法vs.成员函数
+	6.8 以函数作为算法的实参
+		6.8.1 以函数作为算法实参的实例示范
+		6.8.2 判断式（Predicate）
+	6.9 使用Lambda
+	6.10 函数对象（Function Object）
+		6.10.1 定义一个函数对象
+		6.10.2 预定义的函数对象
+		6.10.3 Binder
+		6.10.4 函数对象vs.Lambda
+	6.11 容器内的元素
+		6.11.1 容器元素的必要条件
+		6.11.2 Value语义vs.Reference语义
+	6.12 STL内部的错误和异常
+		6.12.1 错误处理（Error Handling）
+		6.12.2 异常处理（Exception Handling）
+	6.13 扩展STL
+		6.13.1 整合更多Type
+		6.13.2 派生自STL Type
+第7章 STL容器
+	7.1 容器的共通能力和共通操作
+		7.1.1 容器的共通能力
+		7.1.2 容器的共通操作
+		7.1.3 容器提供的类型
+	7.2 Array
+		7.2.1 Array的能力
+		7.2.2 Array的操作
+		7.2.3 把array当成C-Style Array
+		7.2.4 异常处理（Exception Handling）
+		7.2.5 Tuple接口
+		7.2.6 Array运用实例
+	7.3 Vector
+		7.3.1 Vector的能力
+		7.3.2 Vector的操作
+		7.3.3 将Vector当作C-Style Array使用
+		7.3.4 异常处理（Exception Handling）
+		7.3.5 Vector使用实例
+		7.3.6 Class vector<bool>
+	7.4 Deque
+		7.4.1 Deque的能力
+		7.4.2 Deque的操作函数
+		7.4.3 Exception Handling
+		7.4.4 Deque运用实例
+	7.5 List
+		7.5.1 List的能力
+		7.5.2 List的操作
+		7.5.3 异常处理（Exception Handling）
+		7.5.4 List运用实例
+	7.6 Forward List
+		7.6.1 Forward List的能力
+		7.6.2 Forward List的操作
+		7.6.3 异常处理（Exception Handling）
+		7.6.4 Forward List运用实例
+	7.7 Set和Multiset
+		7.7.1 Set和Multiset的能力
+		7.7.2 Set和Multiset的操作函数
+		7.7.3 异常处理（Exception Handling）
+		7.7.4 Set和Multiset运用实例
+		7.7.5 运行期指定排序准则
+	7.8 Map和Multimap
+		7.8.1 Map和Multimap的能力
+		7.8.2 Map和Multimap的操作函数
+		7.8.3 将Map视为关联式数组（Associative Array）
+		7.8.4 异常处理（Exception Handling）
+		7.8.5 Map和Multimap运用实例
+		7.8.6 综合实例：运用Map、String并于运行期指定排序准则
+	7.9 无序容器（Unordered Container）
+		7.9.1 Unordered容器的能力
+		7.9.2 创建和控制Unordered容器
+		7.9.3 Unordered容器的其他操作
+		7.9.4 Bucket接口
+		7.9.5 使用Unordered Map作为Associative Array
+		7.9.6 异常处理（Exception Handling）
+		7.9.7 Unordered容器的运用实例
+	7.10 其他STL容器
+		7.10.1 String作为一种STL容器
+		7.10.2 C-Style Array作为一种STL容器
+	7.11 实现Reference语义
+	7.12 各种容器的使用时机
+第8章 细探STL容器成员
+	8.1 容器内的类型
+	8.2 创建、复制和销毁（Create，Copy，and Destroy）
+	8.3 非更易型操作（Nonmodifying Operation）
+		8.3.1 大小相关操作（Size Operation）
+		8.3.2 元素比较（Comparison Operation）
+		8.3.3 Associative和Unordered容器特有的非更易型操作
+	8.4 赋值（Assignment）
+	8.5 元素直接访问（Direct Element Access）
+	8.6 “产出迭代器”之各项操作
+	8.7 安插和移除（Inserting and Removing）元素
+		8.7.1 安插单一元素（Inserting Single Element）
+		8.7.2 安插多重元素（Inserting Multiple Elements）
+		8.7.3 移除元素（Removing Element）
+		8.7.4 重设大小（Resizing）
+	8.8 List和Forward List的特殊成员函数
+		8.8.1 特殊成员函数（针对List和Forward List）
+		8.8.2 特殊成员函数（只针对Forward List）
+	8.9 容器的策略接口（Policy Interface）
+		8.9.1 非更易型策略函数（Nonmodifying Policy Function）
+		8.9.2 更易型策略函数（Modifying Policy Function）
+		8.9.3 Unordered容器的Bucket相关接口
+	8.10 对分配器（Allocator）的支持
+		8.10.1 基本的分配器成员（Fundamental Allocator Member）
+		8.10.2 带有“可选之分配器参数”的构造函数
+第9章 STL迭代器
+	9.1 迭代器头文件（Header Files for Iterators）
+	9.2 迭代器种类（Iterator Category）
+		9.2.1 Output迭代器
+		9.2.2 Input迭代器
+		9.2.3 Forward（前向）迭代器
+		9.2.4 Bidirectional（双向）迭代器
+		9.2.5 Random-Access（随机访问）迭代器
+		9.2.6 Vector迭代器的递增（Increment）和递减（Decrement）
+	9.3 迭代器相关辅助函数
+		9.3.1 advance()
+		9.3.2 next()和prev()
+		9.3.3 distance()
+		9.3.4 iter_swap()
+	9.4 迭代器适配器（Iterator Adapter）
+		9.4.1 Reverse（反向）迭代器
+		9.4.2 Insert（安插型）迭代器
+		9.4.3 Stream（串流）迭代器
+		9.4.4 Move（搬移）迭代器
+	9.5 Iterator Trait（迭代器特性）
+		9.5.1 为迭代器编写泛型函数（Generic Function）
+	9.6 用户自定义（User-Defined）迭代器
+第10章 STL函数对象及Lambda
+	10.1 Function Object（函数对象）的概念
+		10.1.1 以Function Object为排序准则（Sorting Criterion）
+		10.1.2 Function Object拥有内部状态（Internal State）
+		10.1.3 for_each()的返回值
+		10.1.4 Predicate（判断式） vs.Function Object（函数对象）
+	10.2 预定义的Function Object和Binder
+		10.2.1 预定义的Function Object
+		10.2.2 Function Adapter和Binder
+		10.2.3 以Function Adapter搭配用户自定义的Function Object
+		10.2.4 过时的（Deprecated） Function Adapter
+	10.3 运用Lambda
+		10.3.1 Lambda vs.Binder
+		10.3.2 Lambda vs.带有状态的（Stateful） Function Object
+		10.3.3 Lambda调用全局函数和成员函数
+		10.3.4 Lambda作为Hash函数、排序准则或相等准则
+第11章 STL算法
+	11.1 算法头文件（Header File）
+	11.2 算法概观
+		11.2.1 扼要介绍
+		11.2.2 算法分门别类
+	11.3 辅助函数
+	11.4 for_each()算法
+	11.5 非更易型算法（Nonmodifying Algorithm）
+		11.5.1 元素计数
+		11.5.2 最小值和最大值
+		11.5.3 查找元素（Searching Element）
+		11.5.4 区间的比较
+		11.5.5 Predicate用以检验区间
+	11.6 更易型算法（Modifying Algorithm）
+		11.6.1 复制元素（Copying Element）
+		11.6.2 搬移元素（Moving Element）
+		11.6.3 转换和结合元素（Transforming and Combining Ele-ment）
+		11.6.4 互换元素（Swapping Elements）
+		11.6.5 赋值（Assigning New Value）
+		11.6.6 替换元素（Replacing Element）
+	11.7 移除型算法（Removing Algorithm）
+		11.7.1 移除某些元素
+		11.7.2 移除重复元素
+	11.8 变序型算法（Mutating Algorithm）
+		11.8.1 反转元素次序（Reversing the Order of Elements）
+		11.8.2 旋转元素（Rotating Elements）
+		11.8.3 排列元素（Permuting Elements）
+		11.8.4 对元素重新洗牌（Shuffling Elements）
+		11.8.5 将元素向前搬（Moving Elements to the Front）
+		11.8.6 划分为两个子区间（Partition into Two Subranges）
+	11.9 排序算法（Sorting Algorithm）
+		11.9.1 对所有元素排序
+		11.9.2 局部排序（Partial Sorting）
+		11.9.3 根据第n个元素排序
+		11.9.4 Heap算法
+	11.10 已排序区间算法（Sorted-Range Algorithm）
+		11.10.1 查找元素（Searching Element）
+		11.10.2 合并元素（Merging Elements）
+	11.11 数值算法（Numeric Algorithm）
+		11.11.1 运算后产生结果
+		11.11.2 相对数列和绝对数列之间的转换
+第12章 特殊容器
+	12.1 Stack（堆栈）
+		12.1.1 核心接口
+		12.1.2 Stack运用实例
+		12.1.3 一个用户自定义的Stack Class
+		12.1.4 细究Class stack<>
+	12.2 Queue（队列）
+		12.2.1 核心接口
+		12.2.2 Queue运用实例
+		12.2.3 一个用户自定义的Queue Class
+		12.2.4 细究Class queue<>
+	12.3 Priority Queue（带优先级的队列）
+		12.3.1 核心接口
+		12.3.2 Priority Queue运用实例
+		12.3.3 细究Class priority_queue<>
+	12.4 细究Container Adapter
+		12.4.1 类型定义
+		12.4.2 构造函数（Constructor）
+		12.4.3 Priority Queue额外提供的构造函数
+		12.4.4 各项操作（Operation）
+	12.5 Bitset
+		12.5.1 Bitset运用实例
+		12.5.2 细究Class bitset
+第13章 字符串
+	13.1 String Class的目的
+		13.1.1 例一：提炼临时文件名
+		13.1.2 例二：提炼单词并反向打印
+	13.2 String Class细节描述
+		13.2.1 String的各种相关类型
+		13.2.2 操作函数概览
+		13.2.3 构造函数和析构函数（Constructor and Destructor）
+		13.2.4 String和C-String
+		13.2.5 大小和容量（Size and Capacity）
+		13.2.6 元素访问（Element Access）
+		13.2.7 比较（Comparison）
+		13.2.8 更改内容（Modifier）
+		13.2.9 子字符串（Substring）及字符串接合（String Concate-nation）
+		13.2.10 I/O操作符
+		13.2.11 搜索和查找（Searching and Finding）
+		13.2.12 npos的意义
+		13.2.13 数值转换（Numeric Conversion）
+		13.2.14 String对迭代器的支持
+		13.2.15 国际化（Internationalization）
+		13.2.16 效率（Performance）
+		13.2.17 String和Vector
+	13.3 细究String Class
+		13.3.1 类型定义和静态值
+		13.3.2 创建、复制、销毁（Create，Copy，and Destroy）
+		13.3.3 大小和容量（Size and Capacity）
+		13.3.4 比较（Comparison）
+		13.3.5 字符访问
+		13.3.6 产生C-String和字符数组（Character Array）
+		13.3.7 “改动”之相关操作（Modifying Operation）
+		13.3.8 查找（Searching and Finding）
+		13.3.9 子字符串（Substring）及字符串接合（String Concate-nation）
+		13.3.10 I/O函数
+		13.3.11 数值转换（Numeric Conversion）
+		13.3.12 生成Iterator
+		13.3.13 对Allocator的支持
+第14章 正则表达式
+	14.1 Regex的匹配和查找接口（Match and Search Interface）
+	14.2 处理“次表达式”（Subexpression）
+	14.3 Regex Iterator
+	14.4 Regex Token Iterator
+	14.5 用于替换的正则表达式
+	14.6 Regex Flag
+	14.7 Regex的异常（Exception）
+	14.8 Regex ECMAScript文法
+	14.9 其他文法
+	14.10 细究Basic Regex签名式
+第15章 以Stream完成I/O
+	15.1 I/O Stream的共通基础
+		15.1.1 Stream对象
+		15.1.2 Stream Class
+		15.1.3 全局的Stream对象
+		15.1.4 Stream操作符
+		15.1.5 操控器（Manipulator）
+		15.1.6 一个简单例子
+	15.2 基本Stream Class和其对象
+		15.2.1 Class及其层次体系
+		15.2.2 全局性的Stream对象
+		15.2.3 头文件
+	15.3 标准的Stream操作符<<和>>
+		15.3.1 Output操作符<<
+		15.3.2 Input操作符>>
+		15.3.3 特殊类型的I/O
+	15.4 Stream的状态（State）
+		15.4.1 表示“Stream状态”的常量
+		15.4.2 用来“处理Stream状态”的成员函数
+		15.4.3 Stream状态与Boolean条件测试
+		15.4.4 Stream的状态和异常
+	15.5 标准I/O函数
+		15.5.1 Input相关函数
+		15.5.2 Output相关函数
+		15.5.3 实例
+		15.5.4 sentry对象
+	15.6 操控器（Manipulator）
+		15.6.1 操控器概览
+		15.6.2 操控器如何运作
+		15.6.3 用户自定义的操控器
+	15.7 格式化（Formatting）
+		15.7.1 Format Flag（格式标志）
+		15.7.2 Boolean的I/O格式
+		15.7.3 栏位宽度、填充字符、位置调整
+		15.7.4 正号与大写
+		15.7.5 数值基数（Numeric Base）
+		15.7.6 浮点数（Floating-Point）表示法
+		15.7.7 一般格式（General Formatting）定义
+	15.8 国际化（Internationalization）
+	15.9 文件访问（File Access）
+		15.9.1 File Stream Class
+		15.9.2 File Stream的Rvalue和Move语义
+		15.9.3 File Flag（文件标志）
+		15.9.4 随机访问（Random Access）
+		15.9.5 使用文件描述器（File Descriptor）
+	15.10 为String而设计的Stream Class
+		15.10.1 String Stream Class
+		15.10.2 String Stream的Move语义
+		15.10.3 char＊Stream Class
+	15.11 “用户自定义类型”之I/O操作符
+		15.11.1 实现一个Output操作符
+		15.11.2 实现一个Input操作符
+		15.11.3 以辅助函数完成I/O
+		15.11.4 用户自定义之Format Flag（格式标志）
+		15.11.5 用户自定义I/O操作符的规约（Convention）
+	15.12 连接Input和Output Stream
+		15.12.1 以tie()完成松耦合（Loose Coupling）
+		15.12.2 以Stream缓冲区完成紧耦合（Tight Coupling）
+		15.12.3 将标准Stream重定向（Redirecting）
+		15.12.4 可读可写的Stream
+	15.13 Stream Buffer Class
+		15.13.1 Stream缓冲区接口
+		15.13.2 Stream缓冲区的Iterator
+		15.13.3 用户自定义之Stream缓冲区
+	15.14 关于效能（Performance）
+		15.14.1 与 C 标准串流同步（Synchronization with C’s Stan-dard Streams）
+		15.14.2 Stream缓冲区内的缓冲机制
+		15.14.3 直接使用Stream缓冲区
+第16章 国际化
+	16.1 字符编码和字符集
+		16.1.1 多字节（Multibyte）和宽字符（Wide-Character）文本
+		16.1.2 不同的字符集
+		16.1.3 在C++中处理字符集
+		16.1.4 Character Trait
+		16.1.5 特殊字符的国际化
+	16.2 Locale（地域）概念
+		16.2.1 使用Locale
+		16.2.2 Locale Facet
+	16.3 细究Locale
+	16.4 细究Facet
+		16.4.1 数值格式化（Numeric Formatting）
+		16.4.2 货币符号格式化（Monetary Formatting）
+		16.4.3 时间和日期格式化（Time and Date Formatting）
+		16.4.4 字符的分类和转换
+		16.4.5 字符串校勘（String Collation）
+		16.4.6 消息国际化（Internationalized Message）
+第17章 数值
+	17.1 随机数及分布（Random Number and Distribu-tion）
+		17.1.1 第一个例子
+		17.1.2 引擎（Engine）
+		17.1.3 细说引擎（Engine）
+		17.1.4 分布（Distribution）
+		17.1.5 细说分布（Distribution）
+	17.2 复数（Complex Number）
+		17.2.1 Class complex<>一般性质
+		17.2.2 Class complex<>运用实例
+		17.2.3 复数的各项操作
+		17.2.4 细说Class complex<>
+	17.3 全局数值函数（Global Numeric Function）
+	17.4 Valarray
+第18章 并发
+	18.1 高级接口：async()和Future
+		18.1.1 async()和Future的第一个用例
+		18.1.2 实例：等待两个Task
+		18.1.3 Shared Future
+	18.2 低层接口：Thread和Promise
+		18.2.1 Class std::thread
+		18.2.2 Promise
+		18.2.3 Class packaged_task<>
+	18.3 细说启动线程（Starting a Thread）
+		18.3.1 细说async()
+		18.3.2 细说Future
+		18.3.3 细说Shared Future
+		18.3.4 细说Class std：：promise
+		18.3.5 细说Class std：：packaged_task
+		18.3.6 细说Class std：：thread
+		18.3.7 Namespace this_thread
+	18.4 线程同步化与Concurrency（并发）问题
+		18.4.1 当心Concurrency（并发）
+		18.4.2 Concurrent Data Access为什么造成问题
+		18.4.3 什么情况下可能出错
+		18.4.4 解决问题所需要的性质（Feature）
+	18.5 Mutex和Lock
+		18.5.1 使用Mutex和Lock
+		18.5.2 细说Mutex和Lock
+		18.5.3 只调用一次
+	18.6 Condition Variable（条件变量）
+		18.6.1 Condition Variable（条件变量）的意图
+		18.6.2 Condition Variable（条件变量）的第一个完整例子
+		18.6.3 使用Condition Variable（条件变量）实现多线程Queue
+		18.6.4 细说Condition Variable（条件变量）
+	18.7 Atomic
+		18.7.1 Atomic用例
+		18.7.2 细说Atomic及其高级接口
+		18.7.3 Atomic的C-Style接口
+		18.7.4 Atomic的低层接口
+第19章 分配器
+	19.1 以应用程序开发者的角度使用Allocator
+	19.2 用户自定义的Allocator
+	19.3 以程序库开发者的角度使用Allocator
+参考书目
+	新闻组及论坛
+	书籍和网站

@@ -1,0 +1,68 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ProjectCapital%_MESSAGE_H
+#define %ProjectCapital%_%ProjectCapital%_MESSAGE_H
+
+#include "CoreTools/Console/ConsoleAlloc.h" 
+#include "Framework/WindowProcess/WindowMessage.h"
+#include "Framework/Application/ApplicationTrait.h" 
+#include "Framework/MiddleLayer/ObjectLogicManager.h"
+#include "Framework/WindowProcess/WindowProcessHandle.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainer.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/GUI/GUIManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Audio/AudioManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Input/InputManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Event/EventManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/System/SystemManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Message/MessageManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Network/NetworkManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Resource/ResourceManager.h"	
+#include "%SolutionName%/%SolutionName%MiddleLayer/Rendering/RenderingManager.h"	
+#include "%SolutionName%/%SolutionName%MiddleLayer/ObjectLogic/ObjectLogicManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/CameraSystems/CameraSystemsManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/PhysicalModelling/PhysicalModellingManager.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/ArtificialIntellegence/ArtificialIntellegenceManager.h"			 
+
+namespace %SolutionName%
+{
+	using ObjectLogicManager = Framework::ObjectLogicManager<%SolutionName%MiddleLayer::ObjectLogicManager, %SolutionName%MiddleLayer::ArtificialIntellegenceManager>;
+	using MiddleLayerType = Framework::EngineMiddleLayerContainer<Framework::WindowApplicationTrait,
+										                          %SolutionName%MiddleLayer::InputManager,
+		                                                          %SolutionName%MiddleLayer::NetworkManager,
+												                  ObjectLogicManager,
+												                  %SolutionName%MiddleLayer::PhysicalModellingManager,
+												                  %SolutionName%MiddleLayer::MessageManager,		
+												                  %SolutionName%MiddleLayer::EventManager, 
+												                  %SolutionName%MiddleLayer::SystemManager,
+												                  %SolutionName%MiddleLayer::ResourceManager,
+												                  %SolutionName%MiddleLayer::AudioManager,
+												                  %SolutionName%MiddleLayer::CameraSystemsManager,
+												                  %SolutionName%MiddleLayer::RenderingManager,
+												                  %SolutionName%MiddleLayer::GUIManager>;
+
+	using MessageType = Framework::WindowMessage<MiddleLayerType> ;
+
+	class %SolutionName%Message : public MessageType
+	{
+	public:
+		using ClassType = %SolutionName%Message;
+		using ParentType = MessageType;
+
+	public:
+		%SolutionName%Message();
+		virtual ~%SolutionName%Message();
+
+		CLASS_INVARIANT_OVERRIDE_DECLARE;
+
+	private:
+		CoreTools::ConsoleAlloc m_Alloc;
+	};
+
+	using %SolutionName%MessageWindowProcessHandle = Framework::WindowProcessHandle<%SolutionName%Message>;
+}
+
+#endif // %ProjectCapital%_%ProjectCapital%_MESSAGE_H

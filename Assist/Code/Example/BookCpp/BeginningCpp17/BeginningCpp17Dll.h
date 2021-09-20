@@ -1,0 +1,40 @@
+///	Copyright (c) 2010-2020
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助版本：0.6.0.0 (2020/12/26 21:31)
+
+#ifndef BEGINNING_CPP_17_DLL_H
+#define BEGINNING_CPP_17_DLL_H
+
+#include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
+
+#if defined(BUILDING_BEGINNING_CPP_17_NO_IMPORT) || defined(BUILDING_BEGINNING_CPP_17_STATIC)
+
+    #define BEGINNING_CPP_17_DEFAULT_DECLARE
+    #define BEGINNING_CPP_17_HIDDEN_DECLARE
+    #define BEGINNING_CPP_17_VISIBLE
+
+#else  // !defined(BUILDING_BEGINNING_CPP_17_NO_IMPORT) && !defined(BUILDING_BEGINNING_CPP_17_STATIC)
+
+    #if defined(BUILDING_BEGINNING_CPP_17_EXPORT)
+
+        #define BEGINNING_CPP_17_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define BEGINNING_CPP_17_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+    #else  // !defined(BUILDING_BEGINNING_CPP_17_EXPORT)
+
+        #define BEGINNING_CPP_17_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define BEGINNING_CPP_17_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_BEGINNING_CPP_17_EXPORT
+
+    #define BEGINNING_CPP_17_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif  // defined(BUILDING_BEGINNING_CPP_17_NO_IMPORT) || defined(BUILDING_BEGINNING_CPP_17_STATIC)
+
+#endif  // BEGINNING_CPP_17_DLL_H

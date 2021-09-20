@@ -1,0 +1,12 @@
+Essential C++
+ 
+EssentialCpp
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.6.0.0。
+
+实现内容	
+	1. Essential C++模块。

@@ -1,0 +1,6 @@
+/*/*/Win32/*/*.xml
+/*/*/x64/*/*.xml
+/*/*/*/Win32/*/*.xml
+/*/*/*/x64/*/*.xml
+/Toolset/AssistTools/GameTemplate/Export/
+/Toolset/AssistTools/GameTestingTemplate/ExportTesting/

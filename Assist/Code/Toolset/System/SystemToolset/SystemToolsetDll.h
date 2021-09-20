@@ -1,0 +1,49 @@
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助版本：0.7.1.4 (2021/06/05 15:02)
+
+#ifndef SYSTEM_TOOLSET_DLL_DLL_H
+#define SYSTEM_TOOLSET_DLL_DLL_H
+
+#include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
+
+#if defined(BUILDING_SYSTEM_TOOLSET_NO_IMPORT) || defined(BUILDING_SYSTEM_STATIC)
+
+    #define SYSTEM_TOOLSET_DEFAULT_DECLARE
+    #define SYSTEM_TOOLSET_VISIBLE
+
+    #if defined(BUILDING_SYSTEM_TOOLSET_EXPORT)
+
+        #define SYSTEM_TOOLSET_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_SYSTEM_TOOLSET_EXPORT)
+
+        #define SYSTEM_TOOLSET_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_SYSTEM_TOOLSET_EXPORT
+
+#else  // !defined(BUILDING_SYSTEM_TOOLSET_NO_IMPORT) && !defined(BUILDING_SYSTEM_STATIC)
+
+    #if defined(BUILDING_SYSTEM_TOOLSET_EXPORT)
+
+        #define SYSTEM_TOOLSET_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define SYSTEM_TOOLSET_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+    #else  // !defined(BUILDING_SYSTEM_TOOLSET_EXPORT)
+
+        #define SYSTEM_TOOLSET_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define SYSTEM_TOOLSET_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_SYSTEM_TOOLSET_EXPORT
+
+    #define SYSTEM_TOOLSET_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif  // defined(BUILDING_SYSTEM_TOOLSET_NO_IMPORT) || defined(BUILDING_SYSTEM_STATIC)
+
+#endif  // SYSTEM_TOOLSET_DLL_DLL_H

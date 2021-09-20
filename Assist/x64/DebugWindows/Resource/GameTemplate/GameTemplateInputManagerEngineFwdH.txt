@@ -1,0 +1,16 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó 
+//
+// %ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H
+#define %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H
+
+namespace %SolutionName%MiddleLayer
+{
+	template <typename ApplicationTrait>
+	class %ManagerName%;
+}
+
+#endif // %ProjectCapital%_%ManagerCapital%_ENGINE_FWD_H

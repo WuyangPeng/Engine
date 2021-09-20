@@ -1,0 +1,824 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{3BB49F9B-5C8A-47B0-96AD-951485A67D1A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ExportTest</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;EXPORTTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;EXPORTTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;EXPORTTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;EXPORTTEST_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\CoreToolsTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\DatabaseTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\FrameworkTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ImagicsTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\InputOutputTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\MathematicsTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\NetworkTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\PhysicsTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\RenderingTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ResourceManagerTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ScriptTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\SoundEffectTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\UserInterfaceTestExportCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\CoreToolsCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\DatabaseCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ExportCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\FrameworkCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ImagicsCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\InputOutputCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\MathematicsCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\NetworkCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\PhysicsCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\RenderingCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ResourceManagerCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ScriptCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\SoundEffectCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\UserInterfaceCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ExportDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\NetworkDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\RenderingDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ScriptDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\CoreToolsTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\DatabaseTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\FrameworkTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ImagicsTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\InputOutputTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\MathematicsTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\NetworkTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\PhysicsTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\RenderingTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ResourceManagerTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ScriptTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\SoundEffectTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\UserInterfaceTestExportCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\CoreToolsCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\DatabaseCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ExportCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\FrameworkCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ImagicsCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\InputOutputCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\MathematicsCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\NetworkCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\PhysicsCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\RenderingCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ResourceManagerCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ScriptCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\SoundEffectCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\UserInterfaceCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ExportDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\NetworkDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\RenderingDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ScriptDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedUseCloneMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportConstImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyUnsharedImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportDelayCopyUnsharedImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportNonCopyImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportPerformanceUnsharedImplMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedImplMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedPtrMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\CoreToolsTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\DatabaseTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\FrameworkTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ImagicsTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\InputOutputTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\MathematicsTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\NetworkTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\PhysicsTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\RenderingTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ResourceManagerTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ScriptTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\SoundEffectTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\UserInterfaceTestExportMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\CoreToolsNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\DatabaseNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ExportNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\FrameworkNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ImagicsNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\InputOutputNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\MathematicsNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\NetworkNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\PhysicsNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\RenderingNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ResourceManagerNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ScriptNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\SoundEffectNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\UserInterfaceNonCopyMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\CoreToolsPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\DatabasePerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ExportPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\FrameworkPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ImagicsPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\InputOutputPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\MathematicsPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\NetworkPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\PhysicsPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\RenderingPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ScriptPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\SoundEffectPerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\UserInterfacePerformanceUnsharedMacroImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AnimationMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\CoreToolsMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\DatabaseMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ExportMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\FrameworkMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ImagicsMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\InputOutputMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\MathematicsMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\NetworkMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\PhysicsMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\RenderingMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ResourceManagerMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ScriptMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\SoundEffectMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\UserInterfaceMacroSharedImpl.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedUseCloneMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportConstImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyUnsharedImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportDelayCopyUnsharedImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportNonCopyImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportPerformanceUnsharedImplMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedImplMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedPtrMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportUniquePtrMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AnimationTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\CoreToolsTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\DatabaseTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\FrameworkTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ImagicsTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\InputOutputTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\MathematicsTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\NetworkTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\PhysicsTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\RenderingTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ResourceManagerTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ScriptTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\SoundEffectTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\UserInterfaceTestExportMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\CoreToolsNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\DatabaseNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ExportNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\FrameworkNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ImagicsNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\InputOutputNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\MathematicsNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\NetworkNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\PhysicsNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\RenderingNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ResourceManagerNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ScriptNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\SoundEffectNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\UserInterfaceNonCopyMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\CoreToolsPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\DatabasePerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ExportPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\FrameworkPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ImagicsPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\InputOutputPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\MathematicsPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\NetworkPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\PhysicsPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\RenderingPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ScriptPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\SoundEffectPerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\UserInterfacePerformanceUnsharedMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\CoreToolsMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\DatabaseMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ExportMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\FrameworkMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ImagicsMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\InputOutputMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\MathematicsMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\NetworkMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\PhysicsMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\RenderingMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ResourceManagerMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ScriptMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\SoundEffectMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\UserInterfaceMacroShared.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportFunction.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\VisibleClass.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\CoreToolsTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\DatabaseTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\FrameworkTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ImagicsTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\InputOutputTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\MathematicsTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\NetworkTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\PhysicsTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\RenderingTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ResourceManagerTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ScriptTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\SoundEffectTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\UserInterfaceTestExportCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\CoreToolsCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\DatabaseCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ExportCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\FrameworkCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ImagicsCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\InputOutputCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\MathematicsCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\NetworkCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\PhysicsCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\RenderingCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ResourceManagerCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ScriptCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\SoundEffectCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\UserInterfaceCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ExportDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\NetworkDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\RenderingDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ScriptDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\CoreToolsTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\DatabaseTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\FrameworkTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ImagicsTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\InputOutputTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\MathematicsTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\NetworkTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\PhysicsTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\RenderingTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ResourceManagerTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ScriptTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\SoundEffectTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\UserInterfaceTestExportCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\CoreToolsCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\DatabaseCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ExportCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\FrameworkCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ImagicsCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\InputOutputCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\MathematicsCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\NetworkCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\PhysicsCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\RenderingCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ResourceManagerCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ScriptCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\SoundEffectCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\UserInterfaceCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ExportDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\NetworkDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\RenderingDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ScriptDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedUseCloneMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportConstImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyUnsharedImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportDelayCopyUnsharedImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportNonCopyImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportPerformanceUnsharedImplMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedImplMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedPtrMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\CoreToolsTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\DatabaseTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\FrameworkTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ImagicsTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\InputOutputTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\MathematicsTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\NetworkTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\PhysicsTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\RenderingTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ResourceManagerTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ScriptTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\SoundEffectTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\UserInterfaceTestExportMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\CoreToolsNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\DatabaseNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ExportNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\FrameworkNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ImagicsNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\InputOutputNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\MathematicsNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\NetworkNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\PhysicsNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\RenderingNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ResourceManagerNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ScriptNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\SoundEffectNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\UserInterfaceNonCopyMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\CoreToolsPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\DatabasePerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ExportPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\FrameworkPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ImagicsPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\InputOutputPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\MathematicsPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\NetworkPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\PhysicsPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\RenderingPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ScriptPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\SoundEffectPerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\UserInterfacePerformanceUnsharedMacroImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AnimationMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\CoreToolsMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\DatabaseMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ExportMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\FrameworkMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ImagicsMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\InputOutputMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\MathematicsMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\NetworkMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\PhysicsMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\RenderingMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ResourceManagerMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ScriptMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\SoundEffectMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\UserInterfaceMacroSharedImpl.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedUseCloneMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportConstImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyUnsharedImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportDelayCopyUnsharedImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportNonCopyImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportPerformanceUnsharedImplMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedImplMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedPtrMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportUniquePtrMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AnimationTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\CoreToolsTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\DatabaseTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\FrameworkTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ImagicsTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\InputOutputTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\MathematicsTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\NetworkTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\PhysicsTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\RenderingTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ResourceManagerTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ScriptTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\SoundEffectTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\UserInterfaceTestExportMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\CoreToolsNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\DatabaseNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ExportNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\FrameworkNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ImagicsNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\InputOutputNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\MathematicsNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\NetworkNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\PhysicsNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\RenderingNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ResourceManagerNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ScriptNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\SoundEffectNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\UserInterfaceNonCopyMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\CoreToolsPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\DatabasePerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ExportPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\FrameworkPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ImagicsPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\InputOutputPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\MathematicsPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\NetworkPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\PhysicsPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\RenderingPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ScriptPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\SoundEffectPerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\UserInterfacePerformanceUnsharedMacro.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\CoreToolsMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\DatabaseMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ExportMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\FrameworkMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ImagicsMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\InputOutputMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\MathematicsMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\NetworkMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\PhysicsMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\RenderingMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ResourceManagerMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ScriptMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\SoundEffectMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\UserInterfaceMacroShared.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportFunction.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md" />
+    <None Include="Resource\Schedule.md" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

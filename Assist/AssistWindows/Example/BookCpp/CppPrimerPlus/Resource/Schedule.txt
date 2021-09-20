@@ -1,0 +1,12 @@
+C++ Primer Plus
+ 
+CppPrimerPlus
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.6.0.0。
+
+实现内容	
+	1. C++ Primer Plus模块。

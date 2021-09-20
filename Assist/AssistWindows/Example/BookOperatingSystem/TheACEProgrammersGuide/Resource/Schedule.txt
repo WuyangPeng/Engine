@@ -1,0 +1,12 @@
+ACE 程序员指南
+   
+TheACEProgrammersGuide
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.4。
+
+实现内容	
+	1. ACE 程序员指南模块。

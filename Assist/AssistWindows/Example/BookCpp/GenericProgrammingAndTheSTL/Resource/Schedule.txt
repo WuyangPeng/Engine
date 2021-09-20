@@ -1,0 +1,12 @@
+泛型编程与STL
+ 
+GenericProgrammingAndTheSTL
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.0。
+
+实现内容
+	1. 泛型编程与STL模块。

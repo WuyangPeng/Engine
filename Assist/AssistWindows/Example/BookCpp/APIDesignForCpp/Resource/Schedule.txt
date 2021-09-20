@@ -1,0 +1,12 @@
+C++ API设计
+ 
+APIDesignForCpp
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.1。
+
+实现内容
+	1. C++ API设计模块。

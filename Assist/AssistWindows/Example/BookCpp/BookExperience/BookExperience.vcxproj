@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{DA8C3E6A-BA5A-456D-B80C-1BB34C8523C6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BookExperience</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOKEXPERIENCE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOKEXPERIENCE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;BOOKEXPERIENCE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;BOOKEXPERIENCE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\STL和标准.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\string和wstring.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\与效率相关的条款.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\代码例子.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\前言.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\定义、使用和扩展STL.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\引文.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\引用计数.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\引言.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\本书的指导原则.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\术语，术语，术语.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\致谢.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreEffectiveCpp\Preface\导读.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreEffectiveCpp\Preface\惯例和术语.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreEffectiveCpp\Preface\本书所谈的C++.txt" />
+    <Text Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreEffectiveCpp\Preface\臭虫报告，意见提供，内容更新.txt" />
+    <Text Include="Resource\C++ Coding Standards.txt" />
+    <Text Include="Resource\C++ Common Knowledge.txt" />
+    <Text Include="Resource\Effective C++.txt" />
+    <Text Include="Resource\Effective Modern C++.txt" />
+    <Text Include="Resource\Effective STL.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Preface\0.3 绪论.txt" />
+    <Text Include="Resource\Exceptional C++ Style.txt" />
+    <Text Include="Resource\Exceptional C++.txt" />
+    <Text Include="Resource\More Effective C++.txt" />
+    <Text Include="Resource\More Exceptional C++.txt" />
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperience.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\BookExperienceNoImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Helper\BookExperienceClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Helper\BookExperienceCustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Placeholder\Placeholder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperience\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperience\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperience\Placeholder\Placeholder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\关于本书（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\关于本书（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\如何使用本书.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\编程规范与人的关系（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\编程规范与人的关系（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCodingStandards\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\前言（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\前言（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\CppCommonKnowledge\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\TR1和Boost.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\关于线程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\命名习惯（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\命名习惯（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\导读（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\导读（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\导读（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\序言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\序言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（5）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\术语（6）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\致谢（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveCpp\Preface\致谢（4）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\EffectiveSTL\Preface\代码例子.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\伟大的苏格拉底（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\伟大的苏格拉底（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\如何阅读本书（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\如何阅读本书（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\预备知识.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\风格还是实用（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCppStyle\Preface\风格还是实用（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\序（1）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\序（2）.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\怎么阅读本书？（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\本书的来龙去脉：GotW和PerDirect（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\本书的来龙去脉：GotW和PerDirect（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\ExceptionalCpp\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreEffectiveCpp\Preface\惯例和术语.jpg" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\何为“More”.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\你应该知道的.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\名字空间、typename、URL引用以及其它约定.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\如何阅读本书.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\序（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\序（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookCpp\BookExperience\MoreExceptionalCpp\Preface\致谢.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

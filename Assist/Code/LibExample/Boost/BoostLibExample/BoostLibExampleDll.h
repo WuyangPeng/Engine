@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+// 
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.0.1 (2019/09/24 18:39)
+
+#ifndef BOOST_LIB_EXAMPLE_DLL_H
+#define BOOST_LIB_EXAMPLE_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Macro/UserMacro.h"
+
+#if defined(BOOST_LIB_EXAMPLE_NO_IMPORT) || defined(BUILDING_BOOST_LIB_EXAMPLE_STATIC)
+
+  #define BOOST_LIB_EXAMPLE_DEFAULT_DECLARE
+  #define BOOST_LIB_EXAMPLE_HIDDEN_DECLARE
+  #define BOOST_LIB_EXAMPLE_VISIBLE
+
+#else // !defined(BOOST_LIB_EXAMPLE_NO_IMPORT) && !defined(BOOST_LIB_EXAMPLE_STATIC)
+
+   #if defined(BOOST_LIB_EXAMPLE_EXPORT)
+ 
+        #define BOOST_LIB_EXAMPLE_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define BOOST_LIB_EXAMPLE_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BOOST_LIB_EXAMPLE_EXPORT)
+
+		#define BOOST_LIB_EXAMPLE_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define BOOST_LIB_EXAMPLE_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BOOST_LIB_EXAMPLE_EXPORT
+
+   #define BOOST_LIB_EXAMPLE_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BOOST_LIB_EXAMPLE_NO_IMPORT) || defined(BOOST_LIB_EXAMPLE_STATIC)
+
+#endif // BOOST_LIB_EXAMPLE_DLL_H

@@ -1,0 +1,12 @@
+初等数论及其应用
+ 
+ElementaryNumberTheoryAndItsApplications
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.0.1。
+
+实现内容
+	1. 初等数论及其应用模块。

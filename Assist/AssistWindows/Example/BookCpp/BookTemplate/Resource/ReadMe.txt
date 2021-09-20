@@ -1,0 +1,17 @@
+书 C++ 模板 模块  
+
+1.  C++ Templates
+（第1版）
+
+★★★
+作者： David Vandevoorde、Nicolai M. Josuttis
+
+2.  C++ 模板元编程（C++ Template Metaprogramming）
+
+官方网站：
+http://www.boost-consulting.com/mplbook （已失效）。
+http://www.crystalclearsoftware.com/cgi-bin/boost_wiki/wiki.pl?CPP_Template_Metaprogramming_Book_-_Answers_Page
+
+★★★★
+作者： David Abrahams、Aleksey Gurtovoy
+

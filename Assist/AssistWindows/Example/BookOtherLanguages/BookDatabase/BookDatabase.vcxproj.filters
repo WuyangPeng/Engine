@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{cbe52768-52fd-4d73-88e9-d7250b9efcf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{a3ab75fb-c8e3-4b68-bcdb-a03dbbc5a0b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book">
+      <UniqueIdentifier>{d4562d54-802d-41c1-b834-2864ef49ff82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\A First Course in Database Systems（数据库系统基础教程）">
+      <UniqueIdentifier>{7275c312-dcb8-4ca5-8db4-c1e71afe06fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Database System Concepts（数据库系统概念）">
+      <UniqueIdentifier>{00cecc8e-9d17-429d-a91c-77725e7ed7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Database System Implementation（数据库系统实现）">
+      <UniqueIdentifier>{2e6071f8-4cf4-411c-864c-bf67ecec37fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Refactoring Databases Evolutionary Database Design（数据库重构）">
+      <UniqueIdentifier>{82b9c175-385d-49c9-a9b1-c2304f556cf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AFirstCourseInDatabaseSystems 头文件">
+      <UniqueIdentifier>{4e730d8d-a872-4460-bd1a-2eba796693b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AFirstCourseInDatabaseSystems 源文件">
+      <UniqueIdentifier>{fa14bf25-93c3-46d5-8b81-df12f46f4502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemConcepts 头文件">
+      <UniqueIdentifier>{26478616-be4c-46e5-856f-b0c68f4641d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemConcepts 源文件">
+      <UniqueIdentifier>{e559b9dd-4f12-44d3-ac36-a2f26381bdfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemImplementation 头文件">
+      <UniqueIdentifier>{ceb473ea-6d99-49bc-a4b5-291501e80591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemImplementation 源文件">
+      <UniqueIdentifier>{9d037c22-070e-45da-97e2-b1c1ebdb4353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RefactoringDatabasesEvolutionaryDatabaseDesign 头文件">
+      <UniqueIdentifier>{685c9316-5199-4ef2-8fae-f8430b0382fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RefactoringDatabasesEvolutionaryDatabaseDesign 源文件">
+      <UniqueIdentifier>{a84d63d2-b3b8-410b-8e16-7b0194c5e520}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Database Design &amp; Relational Theory（数据库设计与关系理论）">
+      <UniqueIdentifier>{ce9b78cd-689f-4dac-b6a6-9d930df8ae33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseDesignRelationalTheory 头文件">
+      <UniqueIdentifier>{1a2acf77-191e-4369-8168-663cb3432caa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseDesignRelationalTheory 源文件">
+      <UniqueIdentifier>{c71ff807-3c9c-4b1d-af96-7c663ea5f29e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Seven Databases in Seven Weeks（七周七数据库）">
+      <UniqueIdentifier>{894b6a90-b723-4a32-8a19-4d8034e08ae6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenDatabasesInSevenWeeks 头文件">
+      <UniqueIdentifier>{931b898a-29bb-4e4a-aa26-4a82f72c4c5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SevenDatabasesInSevenWeeks 源文件">
+      <UniqueIdentifier>{8f44449f-cacf-4e65-bd4b-4964e6c80121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Database Systems The Complets Book（数据库系统全书）">
+      <UniqueIdentifier>{9c454832-7c81-479a-a582-30911e1af151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemsTheCompletsBook 头文件">
+      <UniqueIdentifier>{0b2c360f-bff6-4823-892f-267af0a6782e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DatabaseSystemsTheCompletsBook 源文件">
+      <UniqueIdentifier>{4047ca30-19d3-448d-916e-27d6954e15c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Data Mining Concepts and Techniques（数据挖掘概念与技术）">
+      <UniqueIdentifier>{84731de1-e639-4aac-a10c-4cf6b996c4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataMiningConceptsAndTechniques 头文件">
+      <UniqueIdentifier>{26d9e5a7-519a-4bb4-a21a-69f8bc640b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataMiningConceptsAndTechniques 源文件">
+      <UniqueIdentifier>{cfc5c048-3c78-446e-a626-7a1372bfd817}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataMiningPracticalMachineLearningToolsAndTechniques 头文件">
+      <UniqueIdentifier>{e6f867bc-1840-452c-a567-6218afb1754a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataMiningPracticalMachineLearningToolsAndTechniques 源文件">
+      <UniqueIdentifier>{e7a4213f-075f-437f-ab11-9ab6ff08107e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Transaction Processing:Concepts and Techniques（事务处理：概念与技术）">
+      <UniqueIdentifier>{7e3dd082-a054-44cc-abf4-908f8ac320b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TransactionProcessingConceptsAndTechniques 头文件">
+      <UniqueIdentifier>{799f033c-d20e-40f4-851a-c7f1378841ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TransactionProcessingConceptsAndTechniques 源文件">
+      <UniqueIdentifier>{87762116-57f6-462d-add2-b67a5518c9ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Data Mining:Practical Machine Learning Tools and Techniques（数据挖掘：实用机器学习工具与技术）">
+      <UniqueIdentifier>{ab44b943-e556-424f-a817-c08c1532af08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Mining the Social Web（社交网站的数据挖掘与分析）">
+      <UniqueIdentifier>{b8a8d1ab-b061-4380-ae5b-95858aa3a378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiningTheSocialWeb 头文件">
+      <UniqueIdentifier>{f8862c25-50f6-442d-9625-b376b55b75ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiningTheSocialWeb 源文件">
+      <UniqueIdentifier>{cd9cbc8f-e5a4-45e3-ae0c-893a8ba2cb86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\Helper\BookDatabaseCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\Helper\BookDatabaseClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabase.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\BookDatabaseNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\AFirstCourseInDatabaseSystems\AFirstCourseInDatabaseSystemsMain.h">
+      <Filter>AFirstCourseInDatabaseSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\AFirstCourseInDatabaseSystems\AFirstCourseInDatabaseSystems.h">
+      <Filter>AFirstCourseInDatabaseSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\AFirstCourseInDatabaseSystems\AFirstCourseInDatabaseSystemsFwd.h">
+      <Filter>AFirstCourseInDatabaseSystems 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseDesignRelationalTheory\DatabaseDesignRelationalTheoryMain.h">
+      <Filter>DatabaseDesignRelationalTheory 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseDesignRelationalTheory\DatabaseDesignRelationalTheory.h">
+      <Filter>DatabaseDesignRelationalTheory 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseDesignRelationalTheory\DatabaseDesignRelationalTheoryFwd.h">
+      <Filter>DatabaseDesignRelationalTheory 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemConcepts\DatabaseSystemConceptsMain.h">
+      <Filter>DatabaseSystemConcepts 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemConcepts\DatabaseSystemConcepts.h">
+      <Filter>DatabaseSystemConcepts 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemConcepts\DatabaseSystemConceptsFwd.h">
+      <Filter>DatabaseSystemConcepts 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemImplementation\DatabaseSystemImplementationMain.h">
+      <Filter>DatabaseSystemImplementation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemImplementation\DatabaseSystemImplementation.h">
+      <Filter>DatabaseSystemImplementation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemImplementation\DatabaseSystemImplementationFwd.h">
+      <Filter>DatabaseSystemImplementation 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemsTheCompletsBook\DatabaseSystemsTheCompletsBookMain.h">
+      <Filter>DatabaseSystemsTheCompletsBook 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemsTheCompletsBook\DatabaseSystemsTheCompletsBookFwd.h">
+      <Filter>DatabaseSystemsTheCompletsBook 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemsTheCompletsBook\DatabaseSystemsTheCompletsBook.h">
+      <Filter>DatabaseSystemsTheCompletsBook 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningConceptsAndTechniques\DataMiningConceptsAndTechniquesMain.h">
+      <Filter>DataMiningConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningConceptsAndTechniques\DataMiningConceptsAndTechniques.h">
+      <Filter>DataMiningConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningConceptsAndTechniques\DataMiningConceptsAndTechniquesFwd.h">
+      <Filter>DataMiningConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningPracticalMachineLearningToolsAndTechniques\DataMiningPracticalMachineLearningToolsAndTechniquesMain.h">
+      <Filter>DataMiningPracticalMachineLearningToolsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningPracticalMachineLearningToolsAndTechniques\DataMiningPracticalMachineLearningToolsAndTechniquesFwd.h">
+      <Filter>DataMiningPracticalMachineLearningToolsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningPracticalMachineLearningToolsAndTechniques\DataMiningPracticalMachineLearningToolsAndTechniques.h">
+      <Filter>DataMiningPracticalMachineLearningToolsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\MiningTheSocialWeb\MiningTheSocialWebMain.h">
+      <Filter>MiningTheSocialWeb 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\MiningTheSocialWeb\MiningTheSocialWeb.h">
+      <Filter>MiningTheSocialWeb 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\MiningTheSocialWeb\MiningTheSocialWebFwd.h">
+      <Filter>MiningTheSocialWeb 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\RefactoringDatabasesEvolutionaryDatabaseDesign\RefactoringDatabasesEvolutionaryDatabaseDesignMain.h">
+      <Filter>RefactoringDatabasesEvolutionaryDatabaseDesign 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\RefactoringDatabasesEvolutionaryDatabaseDesign\RefactoringDatabasesEvolutionaryDatabaseDesign.h">
+      <Filter>RefactoringDatabasesEvolutionaryDatabaseDesign 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\RefactoringDatabasesEvolutionaryDatabaseDesign\RefactoringDatabasesEvolutionaryDatabaseDesignFwd.h">
+      <Filter>RefactoringDatabasesEvolutionaryDatabaseDesign 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\SevenDatabasesInSevenWeeks\SevenDatabasesInSevenWeeksMain.h">
+      <Filter>SevenDatabasesInSevenWeeks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\SevenDatabasesInSevenWeeks\SevenDatabasesInSevenWeeks.h">
+      <Filter>SevenDatabasesInSevenWeeks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\SevenDatabasesInSevenWeeks\SevenDatabasesInSevenWeeksFwd.h">
+      <Filter>SevenDatabasesInSevenWeeks 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\TransactionProcessingConceptsAndTechniques\TransactionProcessingConceptsAndTechniquesMain.h">
+      <Filter>TransactionProcessingConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\TransactionProcessingConceptsAndTechniques\TransactionProcessingConceptsAndTechniques.h">
+      <Filter>TransactionProcessingConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\TransactionProcessingConceptsAndTechniques\TransactionProcessingConceptsAndTechniquesFwd.h">
+      <Filter>TransactionProcessingConceptsAndTechniques 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\AFirstCourseInDatabaseSystems\AFirstCourseInDatabaseSystemsMain.cpp">
+      <Filter>AFirstCourseInDatabaseSystems 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseDesignRelationalTheory\DatabaseDesignRelationalTheoryMain.cpp">
+      <Filter>DatabaseDesignRelationalTheory 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemConcepts\DatabaseSystemConceptsMain.cpp">
+      <Filter>DatabaseSystemConcepts 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemImplementation\DatabaseSystemImplementationMain.cpp">
+      <Filter>DatabaseSystemImplementation 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DatabaseSystemsTheCompletsBook\DatabaseSystemsTheCompletsBookMain.cpp">
+      <Filter>DatabaseSystemsTheCompletsBook 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningConceptsAndTechniques\DataMiningConceptsAndTechniquesMain.cpp">
+      <Filter>DataMiningConceptsAndTechniques 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\DataMiningPracticalMachineLearningToolsAndTechniques\DataMiningPracticalMachineLearningToolsAndTechniquesMain.cpp">
+      <Filter>DataMiningPracticalMachineLearningToolsAndTechniques 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\MiningTheSocialWeb\MiningTheSocialWebMain.cpp">
+      <Filter>MiningTheSocialWeb 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\RefactoringDatabasesEvolutionaryDatabaseDesign\RefactoringDatabasesEvolutionaryDatabaseDesignMain.cpp">
+      <Filter>RefactoringDatabasesEvolutionaryDatabaseDesign 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\SevenDatabasesInSevenWeeks\SevenDatabasesInSevenWeeksMain.cpp">
+      <Filter>SevenDatabasesInSevenWeeks 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOtherLanguages\BookDatabase\TransactionProcessingConceptsAndTechniques\TransactionProcessingConceptsAndTechniquesMain.cpp">
+      <Filter>TransactionProcessingConceptsAndTechniques 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,16 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%/%SolutionName%%ManagerName%/%SolutionName%%ManagerName%Export.h"
+
+#include "Placeholder.h"
+#include "%SolutionName%/%SolutionName%%ManagerName%/Macro/%SolutionName%%ManagerName%ClassInvariantMacro.h"
+
+%SolutionName%%ManagerName%::Placeholder
+	::Placeholder()
+{
+	%ProjectCapital%_%ManagerCapital%_CLASS_IS_VALID_CONST_9;
+}

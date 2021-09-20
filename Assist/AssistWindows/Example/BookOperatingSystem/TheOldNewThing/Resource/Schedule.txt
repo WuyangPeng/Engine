@@ -1,0 +1,12 @@
+Windows 编程启示录
+   
+TheOldNewThing
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.3。
+
+实现内容	
+	1. Windows 编程启示录模块。

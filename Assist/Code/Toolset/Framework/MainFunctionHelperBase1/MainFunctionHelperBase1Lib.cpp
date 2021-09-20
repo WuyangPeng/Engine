@@ -1,0 +1,10 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// „ч’я£Ї≈нќд—ф£ђ≈нк ґч£ђ≈нк ‘у
+//
+// “э«ж≤в ‘∞ж±Њ£Ї0.3.0.1 (2020/05/30 15:42)
+
+#include "System/SystemLib.h"
+#include "CoreTools/CoreToolsLib.h"
+#include "Framework/FrameworkLib.h"
+

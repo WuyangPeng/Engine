@@ -1,0 +1,4 @@
+DllÖ÷º¯Êý  
+
+1.  DllMainFunction
+ 

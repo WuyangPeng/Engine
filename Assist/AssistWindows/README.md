@@ -1,5 +1,9 @@
+@ingroup group_Documentation
+
+----------------------------
 引擎辅助工程
 
+----------------------------
 Assist.props：
 引擎辅助工程属性表
 
@@ -39,5 +43,8 @@ AssistX64DebugLibs.props：
 AssistX64ReleaseLibs.props：
 引擎辅助编译成dll、X64、Release工程依赖库属性表
 
+----------------------------
 SetEnvironment.bat：
 设置引擎辅助所需要的环境变量
+
+----------------------------

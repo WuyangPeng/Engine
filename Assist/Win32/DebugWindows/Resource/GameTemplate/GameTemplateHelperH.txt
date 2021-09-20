@@ -1,0 +1,35 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ProjectCapital%_HELPER_H
+#define %ProjectCapital%_%ProjectCapital%_HELPER_H
+
+#include "%SolutionName%Message.h"
+#include "Framework/WindowProcess/WindowProcessHandle.h"
+#include "Framework/WindowsAPIFrame/WindowsAPIFrameBuild.h"
+#include "Framework/MainFunctionHelper/WindowMainFunctionHelper.h"
+
+namespace %SolutionName%
+{
+	using WindowMainFunctionHelperBase = Framework::WindowMainFunctionHelper<Framework::WindowsAPIFrameBuild,%SolutionName%MessageWindowProcessHandle>;
+
+	class %SolutionName%Helper : public WindowMainFunctionHelperBase
+	{
+	public:
+		using ClassType = %SolutionName%Helper;
+		using ParentType = WindowMainFunctionHelperBase;
+		using EnvironmentDirectory = Framework::EnvironmentDirectory;
+		using WindowApplicationInformation = Framework::WindowApplicationInformation;	 
+
+	public:
+		%SolutionName%Helper(HInstance instance,char* commandLine,const WindowApplicationInformation& information,const EnvironmentDirectory& environmentDirectory);
+		virtual ~%SolutionName%Helper();
+		
+		CLASS_INVARIANT_OVERRIDE_DECLARE;	
+	};
+}
+
+#endif // %ProjectCapital%_%ProjectCapital%_HELPER_H

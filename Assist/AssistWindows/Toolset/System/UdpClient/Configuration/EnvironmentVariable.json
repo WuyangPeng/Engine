@@ -1,0 +1,10 @@
+{
+  "DefaultEnvironment": "",
+  "Version": "0.7.1.4",
+  "PrintRun": 1,
+  "RandomSeed": 70104,
+  "RunToolset": "",
+  "UdpPort": 31000,
+  "Address": "127.0.0.1",
+  "ConnectTime": 20
+}

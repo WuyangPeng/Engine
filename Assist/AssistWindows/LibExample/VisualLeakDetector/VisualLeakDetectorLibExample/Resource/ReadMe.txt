@@ -1,0 +1,6 @@
+VisualLeakDetector¿âÀý×Ó
+
+1.   VisualLeakDetectorLibExample 
+
+VisualLeakDetector¿âÀý×Ó£¬°üÀ¨£º 
+£¨1£©VisualLeakDetector¡£

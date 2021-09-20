@@ -1,0 +1,4 @@
+提高C++性能的编程技术（Efficient C++:Performance Programming Techniques）
+
+★★
+作者：Dov Bulka、David Mayhew

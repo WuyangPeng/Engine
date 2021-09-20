@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{d015af9b-4caf-454d-9bc2-c1f1e98f0bbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book">
+      <UniqueIdentifier>{14f116a3-1fec-4f62-9cc6-f232e13b5d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Procedural Elements for Computer Graphics（计算机图形学的算法基础）">
+      <UniqueIdentifier>{5263f090-9db5-4c23-a691-3e9732130867}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Mathematics for 3D Game Programming and Computer Graphics（3D游戏与计算机图形学中的数学方法）">
+      <UniqueIdentifier>{ad245bbf-b04a-4452-883f-f2defa12a145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Geometric Tools for Computer Graphics（计算机图形学几何工具算法详解）">
+      <UniqueIdentifier>{9dec7ed1-6d55-4af9-a781-af9f702a3e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\3D Math Primer for Graphics and Game Development（3D数学基础：图形与游戏开发）">
+      <UniqueIdentifier>{70a4269a-4dff-4dee-bf04-1c5973ae6f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{d1d080f4-66a5-46c0-88cf-ea3bd19a5b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMathPrimerForGraphicsAndGameDevelopment 头文件">
+      <UniqueIdentifier>{917fd0b1-21ad-45bc-b9c4-9615cbd2e47b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMathPrimerForGraphicsAndGameDevelopment 源文件">
+      <UniqueIdentifier>{a54e71a5-48cd-470a-9d80-d993719b9120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathematicsFor3DGameProgrammingAndComputerGraphics 头文件">
+      <UniqueIdentifier>{9866add5-c770-447b-84e9-8890560cf6b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MathematicsFor3DGameProgrammingAndComputerGraphics 源文件">
+      <UniqueIdentifier>{c45b0352-2132-4e39-b441-b84eded4e3fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeometricToolsForComputerGraphics 头文件">
+      <UniqueIdentifier>{94912cc9-2880-4a9c-8bbe-d5e993b3be04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GeometricToolsForComputerGraphics 源文件">
+      <UniqueIdentifier>{6bbd0584-a234-4c16-888a-4c7942ade25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProceduralElementsForComputerGraphics 头文件">
+      <UniqueIdentifier>{3a25c64d-ef5d-4974-b23f-7c0e8817d48f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ProceduralElementsForComputerGraphics 源文件">
+      <UniqueIdentifier>{d011f470-813b-4c79-8d3f-07b364b71290}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometry.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\BookGeometryDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\Helper\BookGeometryCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\Helper\BookGeometryClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\3DMathPrimerForGraphicsAndGameDevelopment\3DMathPrimerForGraphicsAndGameDevelopment.h">
+      <Filter>3DMathPrimerForGraphicsAndGameDevelopment 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\3DMathPrimerForGraphicsAndGameDevelopment\3DMathPrimerForGraphicsAndGameDevelopmentFwd.h">
+      <Filter>3DMathPrimerForGraphicsAndGameDevelopment 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\3DMathPrimerForGraphicsAndGameDevelopment\3DMathPrimerForGraphicsAndGameDevelopmentMain.h">
+      <Filter>3DMathPrimerForGraphicsAndGameDevelopment 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\MathematicsFor3DGameProgrammingAndComputerGraphics\MathematicsFor3DGameProgrammingAndComputerGraphics.h">
+      <Filter>MathematicsFor3DGameProgrammingAndComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\MathematicsFor3DGameProgrammingAndComputerGraphics\MathematicsFor3DGameProgrammingAndComputerGraphicsFwd.h">
+      <Filter>MathematicsFor3DGameProgrammingAndComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\MathematicsFor3DGameProgrammingAndComputerGraphics\MathematicsFor3DGameProgrammingAndComputerGraphicsMain.h">
+      <Filter>MathematicsFor3DGameProgrammingAndComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\GeometricToolsForComputerGraphics\GeometricToolsForComputerGraphics.h">
+      <Filter>GeometricToolsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\GeometricToolsForComputerGraphics\GeometricToolsForComputerGraphicsFwd.h">
+      <Filter>GeometricToolsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\GeometricToolsForComputerGraphics\GeometricToolsForComputerGraphicsMain.h">
+      <Filter>GeometricToolsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\ProceduralElementsForComputerGraphics\ProceduralElementsForComputerGraphics.h">
+      <Filter>ProceduralElementsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\ProceduralElementsForComputerGraphics\ProceduralElementsForComputerGraphicsFwd.h">
+      <Filter>ProceduralElementsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\ProceduralElementsForComputerGraphics\ProceduralElementsForComputerGraphicsMain.h">
+      <Filter>ProceduralElementsForComputerGraphics 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\3DMathPrimerForGraphicsAndGameDevelopment\3DMathPrimerForGraphicsAndGameDevelopmentMain.cpp">
+      <Filter>3DMathPrimerForGraphicsAndGameDevelopment 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\MathematicsFor3DGameProgrammingAndComputerGraphics\MathematicsFor3DGameProgrammingAndComputerGraphicsMain.cpp">
+      <Filter>MathematicsFor3DGameProgrammingAndComputerGraphics 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\GeometricToolsForComputerGraphics\GeometricToolsForComputerGraphicsMain.cpp">
+      <Filter>GeometricToolsForComputerGraphics 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookGameDesign\BookGeometry\ProceduralElementsForComputerGraphics\ProceduralElementsForComputerGraphicsMain.cpp">
+      <Filter>ProceduralElementsForComputerGraphics 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

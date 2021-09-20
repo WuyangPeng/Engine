@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{8ac7cc01-ab2c-4b13-8bc0-2529b93b1773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrame 头文件">
+      <UniqueIdentifier>{8d7f0fa6-de63-4bed-b381-63f675295624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AndroidFrame 源文件">
+      <UniqueIdentifier>{2bc470e5-5a6e-40f9-a071-c69357067923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleFrame 头文件">
+      <UniqueIdentifier>{e766599b-d3df-43c2-a230-27c33fa7b744}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ConsoleFrame 源文件">
+      <UniqueIdentifier>{b97433dc-2297-49f6-92cf-f4805277ffba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LinuxFrame 头文件">
+      <UniqueIdentifier>{002e41e0-5511-42d6-9585-0e8c66b7ef57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LinuxFrame 源文件">
+      <UniqueIdentifier>{6034e06b-7b62-4cd8-9c32-ec58ac7a3571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacintoshFrame 头文件">
+      <UniqueIdentifier>{9c1c6779-bd25-4efe-a74d-efac86322891}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MacintoshFrame 源文件">
+      <UniqueIdentifier>{5962de25-1711-47d1-9836-ccc4a6d85d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 头文件">
+      <UniqueIdentifier>{10630c67-3017-4af9-8d5b-a5c08cc92e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainFunctionHelper 源文件">
+      <UniqueIdentifier>{ca52fc1f-0324-4965-a065-c8ab04c334c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayer 头文件">
+      <UniqueIdentifier>{f47c4f65-d8e1-4cbf-afc9-c0aba3ab8db7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MiddleLayer 源文件">
+      <UniqueIdentifier>{df9328ec-63bf-4351-901e-d3d99cbd53fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLGlutFrame 头文件">
+      <UniqueIdentifier>{18d2de62-f860-4522-8758-9f98b9ceb143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGLGlutFrame 源文件">
+      <UniqueIdentifier>{64890436-2ee6-4598-b127-3d0b8ecdb39e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowProcess 头文件">
+      <UniqueIdentifier>{925215b8-46fb-4c77-b778-c81f925c3464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowProcess 源文件">
+      <UniqueIdentifier>{2c37eb4c-30f5-4897-a092-5d3d86e35880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegister 头文件">
+      <UniqueIdentifier>{9e3b113f-bbf1-4422-8e63-2855f218fd45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowRegister 源文件">
+      <UniqueIdentifier>{64b5ebc5-8fb8-4b93-83e8-15ca39cb5cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsAPIFrame 头文件">
+      <UniqueIdentifier>{2f9e8f12-7067-4a70-acf4-8d1de659d66e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsAPIFrame 源文件">
+      <UniqueIdentifier>{3fcaf74e-6923-492d-83a2-0fabf7f86d26}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolset.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameBuild.h">
+      <Filter>AndroidFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameFwd.h">
+      <Filter>AndroidFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidProcess.h">
+      <Filter>AndroidFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidCallBack.h">
+      <Filter>AndroidFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrame.h">
+      <Filter>AndroidFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameBuild.h">
+      <Filter>ConsoleFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameFwd.h">
+      <Filter>ConsoleFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleProcess.h">
+      <Filter>ConsoleFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrame.h">
+      <Filter>ConsoleFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameBuild.h">
+      <Filter>LinuxFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameFwd.h">
+      <Filter>LinuxFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxProcess.h">
+      <Filter>LinuxFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrame.h">
+      <Filter>LinuxFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameBuild.h">
+      <Filter>MacintoshFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameFwd.h">
+      <Filter>MacintoshFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshProcess.h">
+      <Filter>MacintoshFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrame.h">
+      <Filter>MacintoshFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MacintoshMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MainFunctionHelperFwd.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\OpenGLGlutMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\WindowMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\AndroidMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\ConsoleMainFunctionHelper.h">
+      <Filter>MainFunctionHelper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ControllerMiddleLayer.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\EngineMiddleLayerContainer.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\InputManager.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\MiddleLayer.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\MiddleLayerFwd.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ModelViewControllerMiddleLayerContainer.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ObjectLogicManager.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\CameraControllerMiddleLayer.h">
+      <Filter>MiddleLayer 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrame.h">
+      <Filter>OpenGLGlutFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameBuild.h">
+      <Filter>OpenGLGlutFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameFwd.h">
+      <Filter>OpenGLGlutFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutProcess.h">
+      <Filter>OpenGLGlutFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutCallBack.h">
+      <Filter>OpenGLGlutFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowProcess.h">
+      <Filter>WindowProcess 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowProcessFwd.h">
+      <Filter>WindowProcess 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowMessage.h">
+      <Filter>WindowProcess 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterHandle.h">
+      <Filter>WindowRegister 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegister.h">
+      <Filter>WindowRegister 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterFwd.h">
+      <Filter>WindowRegister 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameBuild.h">
+      <Filter>WindowsAPIFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameFwd.h">
+      <Filter>WindowsAPIFrame 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrame.h">
+      <Filter>WindowsAPIFrame 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidCallBack.cpp">
+      <Filter>AndroidFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameBuild.cpp">
+      <Filter>AndroidFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidProcess.cpp">
+      <Filter>AndroidFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameBuild.cpp">
+      <Filter>ConsoleFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleProcess.cpp">
+      <Filter>ConsoleFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxProcess.cpp">
+      <Filter>LinuxFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameBuild.cpp">
+      <Filter>LinuxFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameBuild.cpp">
+      <Filter>MacintoshFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshProcess.cpp">
+      <Filter>MacintoshFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\AndroidMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\ConsoleMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MacintoshMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\OpenGLGlutMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\WindowMainFunctionHelper.cpp">
+      <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\CameraControllerMiddleLayer.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ControllerMiddleLayer.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\EngineMiddleLayerContainer.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\InputManager.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ModelViewControllerMiddleLayerContainer.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ObjectLogicManager.cpp">
+      <Filter>MiddleLayer 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutCallBack.cpp">
+      <Filter>OpenGLGlutFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameBuild.cpp">
+      <Filter>OpenGLGlutFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutProcess.cpp">
+      <Filter>OpenGLGlutFrame 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowMessage.cpp">
+      <Filter>WindowProcess 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterHandle.cpp">
+      <Filter>WindowRegister 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameBuild.cpp">
+      <Filter>WindowsAPIFrame 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

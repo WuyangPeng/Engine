@@ -1,0 +1,16 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ×÷Õß£ºÅíÎäÑô£¬ÅíêÊ¶÷£¬ÅíêÊÔó 
+//
+// %ProjectChineseName%°æ±¾£º%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_IMPORT_H
+#define %ProjectCapital%_%ManagerCapital%_IMPORT_H
+
+#include "Macro/UserMacro.h"
+
+#ifndef BUILDING_%ProjectCapital%_%ManagerCapital%_IMPORT
+  #define BUILDING_%ProjectCapital%_%ManagerCapital%_IMPORT
+#endif // BUILDING_%ProjectCapital%_%ManagerCapital%_IMPORT
+
+#endif // %ProjectCapital%_%ManagerCapital%_IMPORT_H

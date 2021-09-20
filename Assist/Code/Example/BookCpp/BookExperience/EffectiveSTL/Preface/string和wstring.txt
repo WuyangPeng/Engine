@@ -1,0 +1,4 @@
+string和wstring
+
+我关于string说的任何东西都可以相等地应用到给它的宽字符兄弟，wstring。类似地，任何时候我提及string和char或char*之间的关系，对于wstring和wchar_t或wchar_t*之间的关序也是正确的。换句话说，只是因为我在本书里不明确地提及宽
+字符字符串，不要以为STL不能支持它们。它也像基于char的字符串一样支持它们。它必须。string和wstring都是同一个模板的实例化，basic_string。

@@ -1,0 +1,12 @@
+Visual C++ 入门经典·第5版
+   
+IvorHortonsBeginningVisualCppFifthEdition
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.3。
+
+实现内容	
+	1. Visual C++ 入门经典·第5版模块。

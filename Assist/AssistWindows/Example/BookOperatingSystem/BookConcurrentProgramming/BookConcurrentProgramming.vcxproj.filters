@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="配置">
+      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Concurrent Programming On Windows（Windows 并发编程指南）">
+      <UniqueIdentifier>{9e8553fe-8288-4ac1-a83c-ca8b532de85b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Parallel and Distributed Programming Using C++（C++ 并行与分布式编程）">
+      <UniqueIdentifier>{076fdfa8-615d-4e73-a6d2-ccf5b6e8c5eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="C++ Concurrency In Action（C++ 并发编程实战）">
+      <UniqueIdentifier>{03210c41-6c1e-4357-b25e-f408b7b0c930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multithreading Applications in Win32（Win32 多线程程序设计）">
+      <UniqueIdentifier>{7ff66e67-3c36-47a4-bab9-2dc8ce7db74d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Professional Multicore Programming（C++ 多核高级编程）">
+      <UniqueIdentifier>{7428553b-f3e4-43fa-9855-600dedab0b92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object-Oriented Multithreading Using C++（C++ 面向对象多线程编程）">
+      <UniqueIdentifier>{706dbec1-5e87-421c-a9b3-0b480d8c74a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{23d1b12f-af8d-48c2-a559-f983a36983cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookConcurrentProgramming.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Log.json">
+      <Filter>配置</Filter>
+    </None>
+    <None Include="Configuration\Testing.json">
+      <Filter>配置</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookConcurrentProgramming\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookConcurrentProgramming\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookConcurrentProgramming\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookConcurrentProgramming\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookConcurrentProgramming\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,60 @@
+惯例与术语
+
+任何时候如果我谈到inheritance（继承），我的意思是public inheritance（见条款E35）。如果我不是指public inheritance，我会明白地指明。绘制继承体系图时，我对base-derived 关系的描述方式，是从derived classes 往base classes 画箭头。
+
+例如，下面是条款31 的一张继承体系图：
+
+（图：惯例和术语）
+
+这样的表现方式和我在Effective C++ 第一版（注意，不是第二版）所采用的习惯不同。现在我决定使用这种最广被接受的继承箭头画法：从derived classes 画往base classes，而且我很高兴事情终能归於一统。此类示意图中，抽象类别（abstract classes，例如上图的GameObject）被我加上阴影而具象类别（concrete classes，例如上图的SpaceShip）未加阴影。
+
+Inheritance（继承机制）会引发「pointers（或references）拥有两个不同型别」的议题，两个型别分别是静态型别（static type）和动态型别（dynamic type）。Pointer或reference 的「静态型别」是指其宣告时的型别，「动态型别」则由它们实际所指的物件来决定。下面是根据上图所写的一个例子：
+
+GameObject *pgo = // pgo 的静态型别是GameObject*，
+new SpaceShip; // 动态型别是SpaceShip*
+Asteroid *pa = new Asteroid; // pa 的静态型别是Asteroid*，
+							 // 动态型别也是Asteroid*。
+pgo = pa; // pgo 的静态型别仍然（永远）是GameObject*，
+		  // 至於其动态型别如今是Asteroid*。
+GameObject& rgo = *pa; // rgo 的静态型别是GameObject，
+					   // 动态型别是Asteroid。
+
+这些例子也示范了我喜欢的一种命名方式。pgo 是一个pointer-to-GameObject；pa是一个pointer-to-Asteroid；rgo 是一个reference-to-GameObject。我常常以此方式来为pointer 和reference 命名。
+
+我很喜欢两个参数名称：lhs 和rhs，它们分别是"left-hand side" 和"right-hand side" 的缩写。为了了解这些名称背後的基本原理，请考虑一个用来表示分数（rational numbers）的class：
+
+class Rational { ... };
+
+如果我想要一个用以比较两个Rational objects 的函式，我可能会这样声明：
+
+bool operator==(const Rational& lhs, const Rational& rhs);
+
+这使我得以写出这样的码：
+
+Rational r1, r2;
+...
+if (r1 == r2) ...
+
+在呼叫operator== 的过程中，r1 位於"==" 左侧，被系结於lhs，r2 位於"=="右侧，被绑定于rhs。
+
+我使用的其他缩写名称还包括：ctor 代表"constructor"，dtor 代表"destructor"，RTTI 代表C++ 对runtime type identification 的支援（在此性质中，dynamic_cast是最常被使用的一个零组件）。
+
+当你配置记忆体而没有释放它，你就有了memory leak（记忆体遗失）问题。Memory leaks 在C 和C++ 中都有，但是在C++ 中，memory leaks 所遗失的还不只是记忆体，因为C++ 会在物件被产生时，自动呼叫constructors，而constructors 本身可能亦配有资源（resources）。举个例子，考虑以下程式码：
+
+class Widget { ... }; // 某个class — 它是什么并不重要。
+
+Widget *pw = new Widget; // 动态配置一个Widget 物件。
+
+... // 假设pw 一直未被删除（deleted）。
+
+这段码会遗失记忆体，因为pw 所指的Widget 物件从未被删除。如果Widget constructor 配置了其他资源（例如file descriptors, semaphores, window handles,database locks），这些资源原本应该在Widget 物件被摧毁时释放，现在也像记忆体一样都遗失掉了。为了强调在C++ 中memory leaks 往往也会遗失其他资源，我在书中常以resource leaks 一词取代memory leaks。
+
+你不会在本书中看到许多inline 函式。并不是我不喜欢inlining，事实上我相信inline 函式是C++ 的一项重要性质。然而决定一个函式是否应被inlined，条件十分复杂、敏感、而且与平台有关（见条款E33）。所以我尽量避免inlining，除非其中有个关键点非使用inlining 不可。当你在本书之中看到一个non-inline 函式，并不意味我认为把它宣告为inline 是个坏主意，而只是说，它「是否为inline」与当时讨论的主题无关。
+
+有一些传统的C++ 性质已明白地被标准委员会排除。这样的性质被明列於语言的最後撤除名单，因为新性质已经加入，取代那些传统性质的原本工作，而且做得更好。这本书中我会检视被撤除的性质，并说明其取代者。你应该避免使用被撤除的性质，但是过度在意倒亦不必，因为编译器厂商为了挽留其客户，会尽力保存回溯相容性，所以那些被撤除的性质大约还会存活好多年。
+
+所谓client，是指你所写的程式码的客户。或许是某些人（程式员），或许是某些物（classes 或functions）。举个例子，如果你写了一个Date class（用来表现生日、最後期限、耶稣再次降临日等等），任何使用了这个class 的人，便是你的client。任何一段使用了Date class 的码，也是你的clients。Clients 是重要的。
+
+事实上clients 是游戏的主角。如果没有人使用你写的软体，你又何必写它呢？你会发现我很在意如何让clients 更轻松，通常这会导至你的行事更困难，因为好的软体「以客为尊」。如果你讥笑我太过滥情，不妨反躬自省一下。你曾经使用过自己写的classes 或functions 吗？如果是，你就是你自己的client，所以让clients更轻松，其实就是让自己更轻松，利人利己。
+
+当我讨论class template 或function templates 以及由它们所产生出来的classes或functions 时，请容我保留偷懒的权利，不一一写出templates 和其instantiations（具现体）之间的差异。举个例子，如果Array 是个class template，有个型别参数T，我可能会以Array 代表此template 的某个特定具现体（instantiation），虽然其实Array<T> 才是正式的class 名称。同样道理，如果swap 是个function template，有个型别参数T，我可能会以swap 而非swap<T> 表示其具现体。如果这样的简短表示法在当时情况下不够清楚，我便会在表示template 具现体时加上template 参数。

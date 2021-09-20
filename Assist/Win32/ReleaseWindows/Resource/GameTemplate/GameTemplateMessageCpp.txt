@@ -1,0 +1,31 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%Message.h"
+#include "CoreTools/Helper/ClassInvariantMacro.h" 
+#include "Framework/MiddleLayer/InputManagerDetail.h"
+#include "Framework/WindowProcess/WindowMessageDetail.h" 
+#include "Framework/MiddleLayer/ObjectLogicManagerDetail.h"
+#include "Framework/MiddleLayer/MiddleLayerInterfaceDetail.h"
+#include "Framework/MiddleLayer/EngineMiddleLayerContainerDetail.h"
+#include "%SolutionName%/%SolutionName%MiddleLayer/Input/InputManagerDetail.h" 
+
+%SolutionName%::%SolutionName%Message
+	::%SolutionName%Message()
+	:ParentType{}, m_Alloc{}
+{ 
+	SELF_CLASS_IS_VALID_1;
+}
+
+%SolutionName%::%SolutionName%Message
+	::~%SolutionName%Message()
+{
+	SELF_CLASS_IS_VALID_1;
+}
+ 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(%SolutionName%, %SolutionName%Message)
+ 
+ 

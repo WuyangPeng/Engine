@@ -1,0 +1,40 @@
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助版本：0.7.0.1 (2021/02/16 17:45)
+
+#ifndef EFFECTIVE_CPP_DLL_H
+#define EFFECTIVE_CPP_DLL_H
+
+#include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
+
+#if defined(BUILDING_EFFECTIVE_CPP_NO_IMPORT) || defined(BUILDING_EFFECTIVE_CPP_STATIC)
+
+    #define EFFECTIVE_CPP_DEFAULT_DECLARE
+    #define EFFECTIVE_CPP_HIDDEN_DECLARE
+    #define EFFECTIVE_CPP_VISIBLE
+
+#else  // !defined(BUILDING_EFFECTIVE_CPP_NO_IMPORT) && !defined(BUILDING_EFFECTIVE_CPP_STATIC)
+
+    #if defined(BUILDING_EFFECTIVE_CPP_EXPORT)
+
+        #define EFFECTIVE_CPP_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define EFFECTIVE_CPP_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+    #else  // !defined(BUILDING_EFFECTIVE_CPP_EXPORT)
+
+        #define EFFECTIVE_CPP_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define EFFECTIVE_CPP_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_EFFECTIVE_CPP_EXPORT
+
+    #define EFFECTIVE_CPP_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif  // defined(BUILDING_EFFECTIVE_CPP_NO_IMPORT) || defined(BUILDING_EFFECTIVE_CPP_STATIC)
+
+#endif  // EFFECTIVE_CPP_DLL_H

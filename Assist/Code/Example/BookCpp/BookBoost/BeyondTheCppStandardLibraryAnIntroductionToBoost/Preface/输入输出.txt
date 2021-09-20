@@ -1,0 +1,22 @@
+输入/输出
+
+Boost.Assign
+Assign帮助你把一系列的值赋给容器。它通过对 operator, (逗号操作符) and operator()() (函数调用操作符)的重载，带给用户一种数据赋值的很容易的方法。除了对原型风格的代码特别有用，这个库的功能在其它时候也很有用，使用这个库有助于提高代码的可读性。使用本库中的 list_of 还可以就地生成无名数组。
+Assign 的作者是 Thorsten Ottosen.
+
+Boost.Filesystem
+Filesystem库提供对路径、目录和文件操作的可移植性。这种高级抽象使C++程序员可以写出类似于其它编程语言脚本的代码。它提供了便于操作目录和文件的算法。编写要在不同文件系统平台间移植代码的困难工作由于这个库的帮助变得容易了。
+Filesystem 的作者是 Beman Dawes.
+
+Boost.Format
+这个library加入了按格式化串进行格式化的功能，类似于 printf, 但增加了类型安全性。相反使用具有相同便利性的 printf 的最主要问题是参数类型的危险；它不保证格式化串中指定的类型与实际的参数类型是匹配的。除了消除了这种不匹配性的危险以外，Format还可以用于格式化用户自定义的类型。[4]
+[4] 格式化函数用省略号表示可变数量的参数是不可以的。
+Format 的作者是 Samuel Krempp.
+
+Boost.Io_state_savers
+Io_state_savers库允许保存IOStream对象的状态，用于以后的恢复，以取消可能发生的任何状态的变化。许多操纵器会永久改变它们操作的流的状态，这可能是你不想要的，而手工重置状态又容易出错。这个状态保存器可以保存控制标志、精度、宽度、异常掩码、流的locale等等。
+Io_state_savers 的作者是 Daryle Walker.
+
+Boost.Serialization
+这个库允许任意的C++数据结构存进来，再取出去，以及存档。例如，存档可以是文本文件或XML文件。Boost.Serialization是高度可移植的，并提供了非常成熟的特性，如类的版本、C++标准库中的通用类的序列化、共享数据的序列化，等等。
+Serialization 的作者是 Robert Ramey.

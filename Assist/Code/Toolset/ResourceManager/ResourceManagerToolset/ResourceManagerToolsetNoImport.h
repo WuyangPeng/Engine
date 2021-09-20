@@ -1,0 +1,16 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.2.0 (2020/01/05 19:29)
+
+#ifndef RESOURCE_MANAGER_TOOLSET_NO_IMPORT_H
+#define RESOURCE_MANAGER_TOOLSET_NO_IMPORT_H
+
+#include "ResourceManager/Helper/UserMacro.h"
+
+#ifndef BUILDING_RESOURCE_MANAGER_TOOLSET_NO_IMPORT
+	#define BUILDING_RESOURCE_MANAGER_TOOLSET_NO_IMPORT
+#endif // BUILDING_RESOURCE_MANAGER_TOOLSET_NO_IMPORT
+
+#endif // RESOURCE_MANAGER_TOOLSET_NO_IMPORT_H

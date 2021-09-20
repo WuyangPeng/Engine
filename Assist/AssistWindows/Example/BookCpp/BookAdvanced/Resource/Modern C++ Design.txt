@@ -1,0 +1,175 @@
+C++ 设计新思维（Modern C++ Design）
+
+官方网站：
+http://loki-lib.sourceforge.net/ 、http://www.awl.com/cseng/titles/0-201-70431-5 （已失效）
+
+★
+作者：Andrei Alexandrescu
+其他书籍：《C++ 编程规范》
+
+知识点 
+1.	C++ 基础知识。 
+
+序言 by Scott Meyers
+序言 by John Vlissides
+前言
+	本书读者
+	Loki
+	内容组织
+致谢
+第一篇 技术
+	第1章 基于Policy的Class设计
+		1.1 软件设计的多样性
+		1.2 全功能型接口的失败
+		1.3 多重继承是救世主？
+		1.4 Templates带来曙光
+		1.5 Policies和Policy Classes
+		1.6 更丰富的Policies
+		1.7 Policy Classes的析构函数
+		1.8 通过不完全具现化而获得的选择性机能
+		1.9 结合Policy Classes
+		1.10 以Policy Classes定制结构
+		1.11 Policies的兼容性
+		1.12 将一个Class分解为一堆Policies
+		1.13 摘要
+	第2章 技术
+		2.1 编译期Assertions
+		2.2 模板偏特化
+		2.3 局部类
+		2.4 常整数映射为型别
+		2.5 型别对型别的映射
+		2.6 型别选择
+		2.7 编译期间侦测可转换性和继承性
+		2.8 type_info的一个外覆类
+		2.9 NullType和EmptyType
+		2.10 Type Traits
+		2.11 摘要
+	第3章 Typelists
+		3.1 Typelists的必要性
+		3.2 定义Typelists
+		3.3 将Typelists的生成线性化
+		3.4 计算长度
+		3.5 间奏曲
+		3.6 索引式访问
+		3.7 查找Typelists
+		3.8 附加元素至Typelists
+		3.9 移除Typelist中的某个元素
+		3.10 移除重复元素
+		3.11 取代Typelist中的某个元素
+		3.12 为Typelists局部更换次序
+		3.13 运用Typelists自动产生Classes
+		3.14 摘要
+		3.15 Typelist要点概览
+	第4章 小型对象分配技术
+		4.1 缺省的Free Store分配器
+		4.2 内存分配器的工作方式
+		4.3 小型对象分配器
+		4.4 大块内存
+		4.5 大小一致的分配器
+		4.6 SmallObjAllocator Class
+		4.7 帽子下的戏法
+		4.8 简单，复杂，终究还是简单
+		4.9 使用细节
+		4.10 摘要
+		4.11 小型对象分配器要点概览
+第二篇 组件
+	第5章 泛化仿函数
+		5.1 Command设计模式
+		5.2 真实世界中的Command
+		5.3 C++中的可调用体
+		5.4 Functor Class Template骨干
+		5.5 实现“转发式”Functor::operator()
+		5.6 处理仿函数
+		5.7 做一个，送一个
+		5.8 引数和返回型别的转换
+		5.9 处理成员函数指针
+		5.10 绑定
+		5.11 将请求串接起来
+		5.12 现实世界中的问题之1：转发函数的成本 
+		5.13 现实世界中的问题之2：Heap分配 
+		5.14 通过Functor实现Undo和Redo
+		5.15 摘要
+		5.16 Functor要点概览
+	第6章 单件实作技术
+		6.1 静态数据 + 静态函数 != Singleton
+		6.2 用以支持Singletons的一些C++基本手法
+		6.3 实施“Singleton的唯一性”
+		6.4 摧毁Singleton
+		6.5 失效的Reference问题
+		6.6 解决Dead Reference问题（Ⅰ）：Phoenix Singleton
+		6.7 解决Dead Reference问题（Ⅱ）：带寿命的Singletons
+		6.8 实现“带寿命的Singletons”
+		6.9 生活在多线程世界
+		6.10 将一切组装起来
+		6.11 使用SingletonHolder
+		6.12 摘要
+		6.13 SingletonHolder Class Template要点概览
+	第7章 智能指针
+		7.1 Smart Pointers基础
+		7.2 交易
+		7.3 Smart Pointers的存储
+		7.4 Smart Pointer的成员函数
+		7.5 拥有权管理策略
+		7.6 取址操作符
+		7.7 隐式转换至原始指针型别
+		7.8 相等性和不等性
+		7.9 次序比较
+		7.10 检测及错误报告 
+		7.11 Smart Pointers to const和const Smart Pointers
+		7.12 Arrays
+		7.13 Smart Pointers和多线程
+		7.14 将一切组装起来
+		7.15 摘要
+		7.16 SmartPtr要点概览
+	第8章 对象工厂
+		8.1 为什么需要Object Factories
+		8.2 Object Factories in C++：Classes和Objects
+		8.3 实现一个Object Factory
+		8.4 型别标识符
+		8.5 泛化
+		8.6 细节琐务
+		8.7 Clone Factories
+		8.8 通过其他泛型组件来使用Object Factories
+		8.9 摘要
+		8.10 Factory Class Template要点概览
+		8.11 Clone Factory Class Template要点概览
+	第9章 抽象工厂
+		9.1 Abstract Factory 扮演的体系结构角色
+		9.2 一个泛化的Abstract Factory接口
+		9.3 实作出Abstract Factory
+		9.4 一个Prototype-Based Abstract Factory实作品
+		9.5 摘要
+		9.6 AbstractFactory和ConcreteFactory要点概览
+	第10章 访问者、视察者
+		10.1 Visitor基本原理
+		10.2 重载：Catch-All函数
+		10.3 一份更加精练的实作品：Acyclic Visitor
+		10.4 Visitor之泛型实作
+		10.5 再论“Cyslic”Visitor
+		10.6 变化手段
+		10.7 摘要
+		10.8 Visitor泛型组件要点概览
+	第11章 Multimethods
+		11.1 什么是Multimethods？
+		11.2 何时需要Multimethods？
+		11.3 Double Switch-on-Type：暴力法
+		11.4 将暴力法自动化
+		11.5 暴力式Dispatcher的对称性
+		11.6 对数型Double Dispatcher
+		11.7 FnDispatcher和对称性
+		11.8 Double Dispatch至仿函数
+		11.9 引数的转型：static_cast或dynamic_cast？
+		11.10 常数时间的Multimethods：原始速度
+		11.11 将BasicDispatcher和BasicFastDispatcher当做Policies
+		11.12 展望
+		11.13 摘要
+		11.14 Double Dispatcher要点概览
+附录 一个超迷你的多线程程序库
+	A.1 多线程的反思
+	A.2 Loki的做法
+	A.3 整数型别上的原子操作
+	A.4 互斥体
+	A.5 面向对象编程中的锁定语义
+	A.6 可有可无的volatile饰词
+	A.7 Semaphores，Events和其他好东西
+	A.8 摘要

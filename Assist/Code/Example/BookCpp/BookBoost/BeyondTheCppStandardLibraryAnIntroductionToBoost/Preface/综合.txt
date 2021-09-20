@@ -1,0 +1,60 @@
+杂项
+
+Boost.Conversion
+Conversion库包含有一些函数，它们是现有的强制类型转换操作符(static_cast, const_cast, 和dynamic_cast)的增强。Conversion为安全的多态转换增加了polymorphic_cast 和 polymorphic_downcast ，为安全的数字类型转换增加了numeric_cast ，为文本转换(如 string 和 double 间的转换)增加lexical_cast 。你可为了你自己的类型更好地工作而定制这些类型转换，可能这些类型并不可以使用语言本身所提供的类型转换。这个库的详细讨论在"Library 2: Conversion."
+Conversion 的作者是 Dave Abrahams 和 Kevlin Henney.
+
+Boost.Crc
+Crc库提供了循环冗余码(CRC)的计算，常有于校验和类型。CRC被加到一个数据流中(它就是从这些数据中计算得来的)，用来对这些数据进行校验，例如PKZip就使用了CRC32。这个库包含了四个CRC类型： crc_16_type, crc_ccitt_type, crc_xmodem_type, 和crc_32_type5.
+Crc 的作者是 Daryle Walker.
+
+Boost.Date_time
+Date_time库提供了对日期和时间类型及对它们的操作的广泛支持。如果没有对日期和时间的支持，程序开发任务会变得复杂并容易出错。使用Date_time，你想要的所有自然概念都被支持：日、周、月、持续时间(及时间间隔)、加、减等等。这个库还提供了其它日期/时间库所忽略的东西，如闰秒处理以及高精度时间源的支持。这个库的设计是可扩展的，允许客户化定制行为或添加功能。
+Date_time 的作者是 Jeff Garland.
+
+Boost.Optional
+要求函数可以指出它的返回值无效是一个很普通的要求，但通常返回类型并不存在某个状态来表示其无效。Optional提供了类模板 optional, 它是一个在语义上有额外状态的类型，它可以有效地表明 optional 的实例是否包含被封装对象实例。
+Optional 的作者是 Fernando Cacciola.
+
+Boost.Pool
+Pool库提供了一个内存池分配器，它是一个工具，用于管理在一个独立的、大的分配空间里的动态内存。当你需要分配和回收许多不的对象或需要更高效的内存控制时，使用内存池是一个好的解决方案。Pool 的作者是 Steve Cleary.
+
+Boost.Preprocessor
+当你要表示象循环这样的结构时，很难使用预处理器，它没有容器，不提供迭代器，等等。然而预处理器仍是一个强大的可移植的工具。Preprocessor库提供了在预处理器之上的抽象。它包括lists, tuples, 和 arrays, 还有操作这些类型的algorithms。这个库有助于减少重复的代码，减轻你的负担，也使得代码更易读、更清晰、更具可维护性。
+Preprocessor 的作者是 Vesa Karvonen 和 Paul Mensonides.
+Boost.Program_options
+Program_options库提供了程序选项配置(名字/值对), 程序选项通常是通过命令行参数或配置文件提供。这个库减轻了程序员手工分析这些数据的负担。
+Program_options 的作者是 Vladimir Prus.
+
+Boost.Python
+Python库提供了C++与Python[6]的互操作性。它用于将C++类及函数提供给Python，同样把Python对象给C++。它是非插入式的，也就是说已有代码无需修改即可用于Python。
+[6] 一种你应该知道的非常流行的编程语言。
+Python 的作者是 David Abrahams, 并得到Joel de Guzman 和 Ralf W. Grosse-Kunstleve的重要贡献。
+
+Boost.Smart_ptr
+智能指针是任何一个程序员工具包中的重要部分。它们用于防止资源泄漏、共享资源、对象生存期管理。有很多好的智能指针库可用，有些是免费的，而有些是商业软件包的组成部分。Smart_ptr是其中的佼佼者，已被成千上万的用户所证实，并被该领域的专家所推荐。 Smart_ptr包括了非插入的智能指针用于限制范围(scoped_ptr 和 scoped_array)，用于共享资源(shared_ptr 和 shared_array), 一个 配合 shared_ptr 使用的智能指针(weak_ptr), 还有一个插入式的智能指针类(intrusive_ptr). Smart_ptr的 shared_ptr (包括它的助手 enable_shared_from_this) 以及weak_ptr 已被收入即将发布的Library Technical Report。关于智能指针更详细的说明请见"Library 1: Smart_ptr 1."
+Smart_ptr 的作者是 Greg Colvin, Beman Dawes, Peter Dimov, 和 Darin Adler.
+
+Boost.Test
+Test库提供了一整组用于编写测试程序的组件，可以把测试组织成简单的测试用例及测试套装，并控制它们的执行。作为这个库的一个组件，程序执行监视器在某些生产(非测试)环境下也很有用。
+Test 的作者是 Gennadiy Rozental (基于Beman Dawes早期的工作).
+
+Boost.Thread
+可移植的线程是很难处理的业务，也无法从C++本身获取帮助，因为语言本身不包括线程支持。当然，我们有POSIX, 它在许多平台上可用，但POSIX使用的是C API。Thread是一个提供可移植线程的库，它包含大量线程的原始概念和高度抽象。
+Thread 的作者是 William Kempf.
+
+Boost.Timer
+Timer库包含计时所需的特性，它的目标是尽可能做到跨平台的一致性。虽然每个平台都有特定的 API可以让程序员用于计时，但对于高精度计时还没有可移植的方案。Boost.Timer通过提供最大可能的精度并同时保留可移植性解决了这个问题，从而可以让你自由地确定精度。
+Timer 的作者是 Beman Dawes.
+
+Boost.Tribool
+这个库包含一个tribool 库，它实现了三状态布尔逻辑。三状态布尔类型除了true 和 false以外还有一个额外的状态：indeterminate (这个状态也被称为maybe; 这个名字是可配置的).
+Tribool 的作者是 Douglas Gregor.
+
+Boost.Utility
+一些本不应在一个库里出现的有用的东西，只是因为它们每个都不太复杂和广泛，不足够形成一个单独的库。但不是说它们没有什么用外；事实上小的工具通常都有最广泛的用处。在Boost, 这些小工具被集中起来，形成一个称为Utility的库。你可以在这找到 checked_delete, 一个函数，用于确认在删除点的类型是完整的；还有类 noncopyable ，用于确保类不能被复制；还有 enable_if ，用于对函数重载的完全控制。还有其它很多工具，详细请见"Library 3: Utility"。
+Utility 的作者是 David Abrahams, Daryle Walker, Douglas Gregor, 和其它人。
+
+Boost.Value_initialized
+Value_initialized库帮助你用泛型的方法构造和初始化对象。在C++里，一个新构造的对象可以是零初始化的、缺省构造的，或是不确定的，这依赖于对象的类型。有了Boost.Value_initialized, 这种不一致的问题就没有了。
+Value_initialized 的作者是 Fernando Cacciola.

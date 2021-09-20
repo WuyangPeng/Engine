@@ -1,0 +1,8 @@
+C++ 高级编程（Professional C++）
+（第4版）
+
+官方网站：
+http://becpp.org/blog/ 、http://www.nuonsoft.com/blog/ 、http://www.wrox.com/。
+
+★
+作者：Marc Gregoire

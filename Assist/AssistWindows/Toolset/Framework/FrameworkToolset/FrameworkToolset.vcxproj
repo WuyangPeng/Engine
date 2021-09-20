@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{E5CB1062-D56E-44FE-B894-BF1FD9E1843B}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>FrameworkToolset</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopyToEngineTesting.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;FRAMEWORKTOOLSET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;FRAMEWORKTOOLSET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;FRAMEWORKTOOLSET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;FRAMEWORKTOOLSET_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidCallBack.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolset.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\FrameworkToolsetNoImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\AndroidMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\ConsoleMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MacintoshMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MainFunctionHelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\OpenGLGlutMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\WindowMainFunctionHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\CameraControllerMiddleLayer.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ControllerMiddleLayer.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\EngineMiddleLayerContainer.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\InputManager.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\MiddleLayer.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\MiddleLayerFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ModelViewControllerMiddleLayerContainer.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ObjectLogicManager.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutCallBack.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowMessage.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowProcess.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowProcessFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegister.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterHandle.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrame.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameBuild.h" />
+    <ClInclude Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameFwd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidCallBack.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidFrameBuild.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\AndroidFrame\AndroidProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleFrameBuild.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\ConsoleFrame\ConsoleProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxFrameBuild.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\LinuxFrame\LinuxProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshFrameBuild.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MacintoshFrame\MacintoshProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\AndroidMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\ConsoleMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\MacintoshMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\OpenGLGlutMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MainFunctionHelper\WindowMainFunctionHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\CameraControllerMiddleLayer.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ControllerMiddleLayer.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\EngineMiddleLayerContainer.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\InputManager.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ModelViewControllerMiddleLayerContainer.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\MiddleLayer\ObjectLogicManager.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutCallBack.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutFrameBuild.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\OpenGLGlutFrame\OpenGLGlutProcess.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowProcess\WindowMessage.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowRegister\WindowRegisterHandle.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Toolset\Framework\FrameworkToolset\WindowsAPIFrame\WindowsAPIFrameBuild.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

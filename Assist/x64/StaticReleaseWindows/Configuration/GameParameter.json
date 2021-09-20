@@ -1,0 +1,13 @@
+{
+  "CoreName": "Core",
+  "CoreCapital": "CORE",
+  "GameTemplateInclude": "ToolsetGameTemplateInclude",
+  "ProjectName": "The Last Overlord",
+  "EndYear": "2020",
+  "Versions": "0.0.2.1",
+  "ProjectChineseName": "最后的霸王",
+  "ResourceDirectory": "Resource/GameTemplate",
+  "ExportDirectory": "Export",
+  "SolutionName": "GameServer",
+  "ProjectCapital": "GAME_SERVER"
+}

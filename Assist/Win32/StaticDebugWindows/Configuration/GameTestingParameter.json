@@ -1,0 +1,16 @@
+{
+  "CoreName": "Core",
+  "CoreCapital": "CORE",
+  "GameTemplateInclude": "ToolsetGameTemplateInclude",
+  "GameTestingTemplateInclude": "ToolsetGameTestingTemplateInclude",
+  "ProjectName": "The Last Overlord Testing",
+  "EndYear": "2018",
+  "Versions": "1.0.0.1",
+  "ProjectChineseName": "”Œœ∑≤‚ ‘",
+  "ResourceDirectory": "Resource/GameTemplate",
+  "ExportDirectory": "ExportTesting",
+  "SolutionName": "GameServer",
+  "ProjectCapital": "GAME_SERVER_TESTING",
+  "DebugLibName": "ToolsetGameTemplateDebugLib",
+  "ReleaseLibName": "ToolsetGameTemplateReleaseLib"
+}

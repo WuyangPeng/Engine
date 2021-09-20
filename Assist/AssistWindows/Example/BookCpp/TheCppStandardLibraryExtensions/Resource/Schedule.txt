@@ -1,0 +1,12 @@
+C++ 标准库扩展权威指南
+ 
+TheCppStandardLibraryExtensions
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.1。
+
+实现内容
+	1. C++ 标准库扩展权威指南模块。

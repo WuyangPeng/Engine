@@ -1,0 +1,13 @@
+游戏设计·几何学·3D数学基础：图形与游戏开发
+  
+3DMathPrimerForGraphicsAndGameDevelopment
+	
+工程类型
+	dll/lib。
+
+状态
+	未完成。
+
+实现内容	
+	1. 复制工程dll到辅助测试目录。 
+	2. 整理《3D数学基础：图形与游戏开发》代码。 

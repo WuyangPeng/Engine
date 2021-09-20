@@ -1,0 +1,6 @@
+代码约定和下载
+本书所有的示例代码都是使用Python 2.7编写的。书中在列出代码时使用了等宽字体。有些代码还进行了标注，旨在突出重要的概念。
+
+本书的示例代码可从出版社网站www.manning.com/books/grokking-algorithms下载，也可从https://github.com/egonschiele/grokking_algorithms下载。
+
+我认为，如果能享受学习过程，就能获得最好的学习效果。请尽情地享受学习过程，动手运行示例代码吧！

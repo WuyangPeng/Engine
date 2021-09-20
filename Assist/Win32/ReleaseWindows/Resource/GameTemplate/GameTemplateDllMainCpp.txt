@@ -1,0 +1,21 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%%ManagerName%Export.h"
+
+#include "%SolutionName%%ManagerName%Fwd.h"
+
+#include "CoreTools/Helper/MainFunctionMacro.h"
+
+#ifndef BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+
+	DLL_MAIN_FUNCTION(%SolutionName%%ManagerName%);
+
+#else // !BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+
+	CORE_TOOLS_MUTEX_INIT(%SolutionName%%ManagerName%);
+
+#endif // BUILDING_%ProjectCapital%_%CoreCapital%_STATIC

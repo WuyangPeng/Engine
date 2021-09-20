@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|Win32">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|Win32">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{F0DBB8EB-E3A3-4677-B42B-E541745FFB4D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BookWindowsAPI</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistWin32ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticWin32ReleaseLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64DebugLibs.props" />
+    <Import Project="..\..\..\AssistDebugXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64DebugLibs.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistX64ReleaseLibs.props" />
+    <Import Project="..\..\..\AssistReleaseXCopy.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\Assist.props" />
+    <Import Project="..\..\..\AssistStaticX64ReleaseLibs.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;BOOKWINDOWSAPI_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;BOOKWINDOWSAPI_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;BOOKWINDOWSAPI_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;BOOKWINDOWSAPI_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPI.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPIDll.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPIExport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPIFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPIImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPILib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\BookWindowsAPINoImport.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\DllLib.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Helper\BookWindowsAPIClassInvariantMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Helper\BookWindowsAPICustomAssertMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Helper\Helper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Helper\HelperFwd.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Helper\UserMacro.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Placeholder\Placeholder.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\DllLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\DllMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\Placeholder\Placeholder.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Ivor Horton%27s Beginning Visual C++.txt" />
+    <Text Include="Resource\Microsoft Windows Internals.txt" />
+    <Text Include="Resource\Programming Applications for Microsoft Windows.txt" />
+    <Text Include="Resource\Programming Windows.txt" />
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\The Old New Thing.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+    <Text Include="Resource\Windows System Programming.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.1 使用C++语言编程.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.10 关于p2p.wrox.com网站.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.2 开发Windows应用程序.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.3 高级库功能.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.4 本书读者对象.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.5 本书主要内容.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.6 本书结构.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.7 使用本书的前提.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.8 源代码.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\0.9 勘误表.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\FifthEdition\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.1 本书读者对象.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.2 本书主要内容.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.3 本书结构.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.4 使用本书的前提.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.5 源代码.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.6 练习.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.7 勘误表.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\0.8 关于p2p.wrox.com网站.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\作者简介.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\技术编辑简介.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\IvorHortonsBeginningVisualCpp\SeventhEdition\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\Windows NT的历史全景（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\Windows NT的历史全景（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\Windows NT的历史全景（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\序言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\序言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\引言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\提醒和告诫.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\本书没有涵盖的话题.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\本书的历史.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\本书的结构.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\来自作者的支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\来自出版商Microsoft Press的支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\第4版的变化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\练习实验.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\FourthEdition\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\保持联系.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\倾听你的声音.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\勘误和本书支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\引言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\提醒和告诫.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\本书没有涵盖的话题.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\本书的历史.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\本书的结构.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\第6版的变化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\练习实验.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\致谢（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\致谢（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\MicrosoftWindowsInternals\SixthEdition\Preface\致谢（3）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\64位Windows操作系统.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\Christophe的家人.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\Jeffrey的家人.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\Microsoft Press编辑团队.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\《Windows核心编程（第5版）》中有哪些新内容.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\互致谢意.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\技术支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\推荐序（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\推荐序（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\本书支持.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\示例代码和系统需求.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingApplicationsForMicrosoftWindows\Preface\问题和评论.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\FifthEdition\Preface\作者的话.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\FifthEdition\Preface\作者简介.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\Windows 8的版本.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\循序渐进.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\未来计划.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\本书的前世今生（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\本书的前世今生（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\本书要点.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\计算机配置.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\配套内容.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\ProgrammingWindows\SixthEdition\Preface\鸣谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\TheOldNewThing\Preface\前言（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\TheOldNewThing\Preface\前言（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\TheOldNewThing\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\UNIX和C库的注释和表.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\Web站点.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\Windows自上个版本以来的发展.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\作者简介.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\前言.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\目标和方法.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\示例.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\第4版中的变化.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\组织结构（1）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\组织结构（2）.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\致谢.png" />
+    <Image Include="..\..\..\..\Code\Example\BookOperatingSystem\BookWindowsAPI\WindowsSystemProgramming\Preface\读者对象.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

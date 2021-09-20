@@ -1,0 +1,7 @@
+C++ 编程剖析（Exceptional C++ Style）
+
+官方网站：
+http://www.gotw.ca。
+
+★★★
+作者：Herb Sutter

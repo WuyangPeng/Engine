@@ -1,0 +1,28 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#include "%SolutionName%%ManagerName%Export.h"
+
+#include "%SolutionName%%ManagerName%.h"
+
+#include "CoreTools/CoreToolsLib.h"
+#include "Framework/FrameworkLib.h"
+
+#ifndef BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+
+	#include "DllLib.h"
+
+#else // !BUILDING_%ProjectCapital%_%CoreCapital%_STATIC
+
+	namespace %SolutionName%%CoreName%
+	{
+		void StaticDllLib()
+		{
+
+		}
+	}
+
+#endif // BUILDING_%ProjectCapital%_%CoreCapital%_STATIC

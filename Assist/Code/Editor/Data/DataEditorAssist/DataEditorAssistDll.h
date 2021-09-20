@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.2.1 (2020/01/16 21:10)
+
+#ifndef DATA_EDITOR_DLL_DLL_H
+#define DATA_EDITOR_DLL_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Macro/UserMacro.h"
+
+#if defined(BUILDING_DATA_EDITOR_NO_IMPORT) || defined(BUILDING_DATA_EDITOR_STATIC)
+
+  #define DATA_EDITOR_DEFAULT_DECLARE
+  #define DATA_EDITOR_HIDDEN_DECLARE
+  #define DATA_EDITOR_VISIBLE
+
+#else // !defined(BUILDING_DATA_EDITOR_NO_IMPORT) && !defined(BUILDING_DATA_EDITOR_STATIC)
+
+   #if defined(BUILDING_DATA_EDITOR_EXPORT)
+ 
+        #define DATA_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define DATA_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_DATA_EDITOR_EXPORT)
+
+		#define DATA_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define DATA_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_DATA_EDITOR_EXPORT
+
+   #define DATA_EDITOR_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_DATA_EDITORNO_IMPORT) || defined(BUILDING_DATA_EDITOR_STATIC)
+
+#endif // DATA_EDITOR_DLL_DLL_H

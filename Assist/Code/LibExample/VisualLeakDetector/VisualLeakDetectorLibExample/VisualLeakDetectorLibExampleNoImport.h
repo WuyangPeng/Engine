@@ -1,0 +1,16 @@
+// Copyright (c) 2011-2019
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.0.3 (2019/10/02 14:28)
+
+#ifndef VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT_H
+#define VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT_H
+
+#include "Macro/UserMacro.h"
+
+#ifndef VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT
+  #define VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT
+#endif // VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT
+
+#endif // VISUAL_LEAK_DETECTOR_LIB_EXAMPLE_NO_IMPORT_H

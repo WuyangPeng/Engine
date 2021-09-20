@@ -1,0 +1,37 @@
+// Copyright (c) 2011-2020
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+//
+// “˝«Ê∏®÷˙∞Ê±æ£∫0.0.2.1 (2020/01/21 21:00)
+
+#ifndef LEVEL_EDITOR_DLL_DLL_H
+#define LEVEL_EDITOR_DLL_DLL_H
+
+#include "System/Helper/ExportMacro.h"
+#include "Macro/UserMacro.h"
+
+#if defined(BUILDING_LEVEL_EDITOR_NO_IMPORT) || defined(BUILDING_LEVEL_EDITOR_STATIC)
+
+  #define LEVEL_EDITOR_DEFAULT_DECLARE
+  #define LEVEL_EDITOR_HIDDEN_DECLARE
+  #define LEVEL_EDITOR_VISIBLE
+
+#else // !defined(BUILDING_LEVEL_EDITOR_NO_IMPORT) && !defined(BUILDING_LEVEL_EDITOR_STATIC)
+
+   #if defined(BUILDING_LEVEL_EDITOR_EXPORT)
+ 
+        #define LEVEL_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define LEVEL_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+   #else // !defined(BUILDING_LEVEL_EDITOR_EXPORT)
+
+		#define LEVEL_EDITOR_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define LEVEL_EDITOR_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+   #endif // BUILDING_LEVEL_EDITOR_EXPORT
+
+   #define LEVEL_EDITOR_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif // defined(BUILDING_LEVEL_EDITORNO_IMPORT) || defined(BUILDING_LEVEL_EDITOR_STATIC)
+
+#endif // LEVEL_EDITOR_DLL_DLL_H

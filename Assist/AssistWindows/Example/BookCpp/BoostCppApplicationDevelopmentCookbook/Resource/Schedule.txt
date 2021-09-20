@@ -1,0 +1,12 @@
+深入实践Boost
+ 
+BoostCppApplicationDevelopmentCookbook
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.1.1。
+
+实现内容
+	1. 深入实践Boost模块。

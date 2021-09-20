@@ -1,0 +1,1756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="System 头文件">
+      <UniqueIdentifier>{72ea2e09-6d55-4322-8a85-3c422a38ae0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System 源文件">
+      <UniqueIdentifier>{a7ec46f7-f718-41e5-87b3-964fe3d9718a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件">
+      <UniqueIdentifier>{2845b707-decb-4b4f-8e95-d3da7f312724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件">
+      <UniqueIdentifier>{86fc6352-3554-4b5a-97f5-48067cef7aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail">
+      <UniqueIdentifier>{4c5238ae-bcc1-4b51-a1c6-7653bbd1de75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail">
+      <UniqueIdentifier>{20f56392-494b-498a-8aac-1fb5c70d54ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{d42ca21d-b5c1-4284-b29b-e45fa0269332}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\Export">
+      <UniqueIdentifier>{43fc7abf-7f36-4b73-9f63-c92b8f65e6e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\Export">
+      <UniqueIdentifier>{43f64a35-b101-4668-a870-ac32800e78ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\Module">
+      <UniqueIdentifier>{28e4eac7-dddd-4048-bdb4-b248aa7eae51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\Module">
+      <UniqueIdentifier>{01f46bd1-1f43-4ed7-9901-841291e74192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Export">
+      <UniqueIdentifier>{49a2a218-bca1-4550-bb44-fa746772d566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Export">
+      <UniqueIdentifier>{2d6051df-891a-41ab-a6a5-6c59a166c120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Module">
+      <UniqueIdentifier>{ffdcbaa6-6c36-4278-bac0-15b88418caf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Module">
+      <UniqueIdentifier>{29fc1eea-5c80-4d33-8bcf-f04cdef57d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\CopyModule">
+      <UniqueIdentifier>{a4192940-5221-4c1c-999a-5124f71ef4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\CopyModule">
+      <UniqueIdentifier>{e13c0d65-aaa8-41c4-86cc-4813139ba31c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\CopyModule">
+      <UniqueIdentifier>{c476e9e9-9ee5-4411-bd7b-3cea916a99f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\CopyModule">
+      <UniqueIdentifier>{b5bb78e6-f104-4c7b-b643-ec2c2b8512d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\CopyUnshared">
+      <UniqueIdentifier>{28b80d1e-ca36-498c-b081-c2a88e2de96b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\CopyUnshared">
+      <UniqueIdentifier>{bdba0d3a-0781-4dff-8cb5-d65551b79645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\CopyUnshared">
+      <UniqueIdentifier>{ea3ade3b-3ec2-41c8-a0ae-e16d18639c5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\CopyUnshared">
+      <UniqueIdentifier>{c7fb50a6-3d8c-47cb-805c-77f6fbb2748e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\DelayCopyUnshared">
+      <UniqueIdentifier>{7c1e30e2-d58f-448c-a0bc-77c13c235399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\DelayCopyUnshared">
+      <UniqueIdentifier>{d8feb24c-aead-4d66-a234-5c5a52d9afe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\DelayCopyUnshared">
+      <UniqueIdentifier>{e142bf09-50d2-4014-b003-8f88448835d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\DelayCopyUnshared">
+      <UniqueIdentifier>{2033995e-20c1-47b1-9bf2-b64cc3fa63f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\NonCopy">
+      <UniqueIdentifier>{91e4a3ae-f8fc-40ef-b131-69c2e9e44533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\NonCopy">
+      <UniqueIdentifier>{ec103c0d-0524-4e15-b95d-9759fe1300b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\NonCopy">
+      <UniqueIdentifier>{e44fea0f-2c00-4c39-b215-f38ce4c89b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\NonCopy">
+      <UniqueIdentifier>{43520010-43bb-41f8-b2e5-1f6efbb2ac7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\PerformanceUnshared">
+      <UniqueIdentifier>{3bb97393-9573-47fb-9952-15a73ac815e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\PerformanceUnshared">
+      <UniqueIdentifier>{3f4613e4-51d5-4d1e-b041-76a30620396b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\PerformanceUnshared">
+      <UniqueIdentifier>{2e683893-7a5a-4396-a9fb-b3794f12b834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\PerformanceUnshared">
+      <UniqueIdentifier>{de378156-a4e3-4345-b2d2-d4c039c12833}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Detail\Shared">
+      <UniqueIdentifier>{14a57114-0dc2-45b7-829c-18f23be3508e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 源文件\Shared">
+      <UniqueIdentifier>{0fd36b36-c9f0-45c1-b550-1fc6a16dae27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Detail\Shared">
+      <UniqueIdentifier>{59e592de-3e26-4f5f-834d-7733cfe08d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreTools 头文件\Shared">
+      <UniqueIdentifier>{91dbbacf-fa5a-494b-bd8f-5b87b60f7bc0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\ExportTestLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\VisibleClass.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportFunction.h">
+      <Filter>System 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyUnsharedImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportDelayCopyUnsharedImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportNonCopyImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportPerformanceUnsharedImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedImplMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedPtrMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\CoreToolsTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\DatabaseTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\FrameworkTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ImagicsTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\InputOutputTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\MathematicsTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\NetworkTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\PhysicsTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\RenderingTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ResourceManagerTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ScriptTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\SoundEffectTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\UserInterfaceTestExportMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyUnsharedImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportDelayCopyUnsharedImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportNonCopyImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportPerformanceUnsharedImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedImplMacroShared.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedPtrMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportUniquePtrMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\CoreToolsTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\DatabaseTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\FrameworkTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ImagicsTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\InputOutputTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\MathematicsTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\NetworkTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\PhysicsTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\RenderingTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ResourceManagerTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ScriptTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\SoundEffectTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\UserInterfaceTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AnimationTestExportMacro.h">
+      <Filter>CoreTools 头文件\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\CoreToolsTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\DatabaseTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\FrameworkTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ImagicsTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\InputOutputTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\MathematicsTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\NetworkTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\PhysicsTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\RenderingTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ResourceManagerTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ScriptTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\SoundEffectTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\UserInterfaceTestExportCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\InputOutputTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\MathematicsTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\NetworkTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\PhysicsTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\RenderingTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ResourceManagerTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ScriptTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\SoundEffectTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\UserInterfaceTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\CoreToolsTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\DatabaseTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\FrameworkTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ImagicsTestExportCopyMacro.h">
+      <Filter>CoreTools 头文件\CopyModule</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportConstImplMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportConstImplMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedUseCloneMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedUseCloneMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\Export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\CoreToolsCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\DatabaseCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\FrameworkCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ImagicsCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\InputOutputCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\MathematicsCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\NetworkCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\PhysicsCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\RenderingCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ResourceManagerCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ScriptCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\SoundEffectCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\UserInterfaceCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\NetworkDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\RenderingDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ScriptDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\CoreToolsNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\DatabaseNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\FrameworkNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ImagicsNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\InputOutputNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\MathematicsNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\NetworkNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\PhysicsNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\RenderingNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ResourceManagerNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ScriptNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\SoundEffectNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\UserInterfaceNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\CoreToolsPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\DatabasePerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\FrameworkPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ImagicsPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\InputOutputPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\MathematicsPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\NetworkPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\PhysicsPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\RenderingPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ScriptPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\SoundEffectPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\UserInterfacePerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\CoreToolsMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\DatabaseMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\FrameworkMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ImagicsMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\InputOutputMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\MathematicsMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\NetworkMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\PhysicsMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\RenderingMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ResourceManagerMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ScriptMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\SoundEffectMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\UserInterfaceMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AnimationMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\DatabaseCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\FrameworkCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ImagicsCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\InputOutputCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\MathematicsCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\NetworkCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\PhysicsCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\RenderingCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ResourceManagerCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ScriptCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\SoundEffectCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\UserInterfaceCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\CoreToolsCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ExportCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ExportCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\CopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\NetworkDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\RenderingDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ScriptDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ExportDelayCopyUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ExportDelayCopyUnsharedMacro.h">
+      <Filter>CoreTools 头文件\DelayCopyUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\DatabaseNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\FrameworkNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ImagicsNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\InputOutputNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\MathematicsNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\NetworkNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\PhysicsNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\RenderingNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ResourceManagerNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ScriptNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\SoundEffectNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\UserInterfaceNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\CoreToolsNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ExportNonCopyMacro.h">
+      <Filter>CoreTools 头文件\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ExportNonCopyMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\NonCopy</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\CoreToolsPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\DatabasePerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\FrameworkPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ImagicsPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\InputOutputPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\MathematicsPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\NetworkPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\PhysicsPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\RenderingPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ScriptPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\SoundEffectPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\UserInterfacePerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ExportPerformanceUnsharedMacroImpl.h">
+      <Filter>CoreTools 头文件\Detail\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ExportPerformanceUnsharedMacro.h">
+      <Filter>CoreTools 头文件\PerformanceUnshared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\CoreToolsMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ImagicsMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\InputOutputMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\MathematicsMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\NetworkMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\PhysicsMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\RenderingMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ResourceManagerMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ScriptMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\SoundEffectMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\UserInterfaceMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\DatabaseMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\FrameworkMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ExportMacroShared.h">
+      <Filter>CoreTools 头文件\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ExportMacroSharedImpl.h">
+      <Filter>CoreTools 头文件\Detail\Shared</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportClass.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\NoExportClass.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\System\ExportFunction.cpp">
+      <Filter>System 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyUnsharedImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportDelayCopyUnsharedImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportNonCopyImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportPerformanceUnsharedImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedImplMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportSharedPtrMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AnimationTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ArtificialIntellegenceTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\AssistToolsTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\CoreToolsTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\DatabaseTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\FrameworkTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ImagicsTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\InputOutputTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\MathematicsTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\NetworkTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\PhysicsTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\RenderingTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ResourceManagerTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\ScriptTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\SoundEffectTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Module\UserInterfaceTestExportMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyUnsharedImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportDelayCopyUnsharedImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportNonCopyImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportPerformanceUnsharedImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedImplMacroShared.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportSharedPtrMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportUniquePtrMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AnimationTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ArtificialIntellegenceTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\AssistToolsTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\CoreToolsTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\DatabaseTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\FrameworkTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ImagicsTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\InputOutputTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\MathematicsTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\NetworkTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\PhysicsTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\RenderingTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ResourceManagerTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\ScriptTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\SoundEffectTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Module\UserInterfaceTestExportMacro.cpp">
+      <Filter>CoreTools 源文件\Module</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AnimationTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ArtificialIntellegenceTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\AssistToolsTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\CoreToolsTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\DatabaseTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\FrameworkTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ImagicsTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\InputOutputTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\MathematicsTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\NetworkTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\PhysicsTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\RenderingTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ResourceManagerTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\ScriptTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\SoundEffectTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyModule\UserInterfaceTestExportCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AnimationTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ArtificialIntellegenceTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\AssistToolsTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\CoreToolsTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\DatabaseTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\FrameworkTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ImagicsTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\InputOutputTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\MathematicsTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\NetworkTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\PhysicsTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\RenderingTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ResourceManagerTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\ScriptTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\SoundEffectTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyModule\UserInterfaceTestExportCopyMacro.cpp">
+      <Filter>CoreTools 源文件\CopyModule</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportCopyImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportCopyImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\ExportConstImplMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\ExportConstImplMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Export\CopyUnsharedUseCloneMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Export\CopyUnsharedUseCloneMacro.cpp">
+      <Filter>CoreTools 源文件\Export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AnimationCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\AssistToolsCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\CoreToolsCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\DatabaseCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\FrameworkCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ImagicsCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\InputOutputCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\MathematicsCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\NetworkCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\PhysicsCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\RenderingCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ResourceManagerCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ScriptCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\SoundEffectCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\UserInterfaceCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AnimationDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\NetworkDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\RenderingDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ScriptDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AnimationNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ArtificialIntellegenceNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\AssistToolsNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\CoreToolsNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\DatabaseNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\FrameworkNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ImagicsNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\InputOutputNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\MathematicsNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\NetworkNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\PhysicsNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\RenderingNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ResourceManagerNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ScriptNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\SoundEffectNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\UserInterfaceNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AnimationPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\AssistToolsPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\CoreToolsPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\DatabasePerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\FrameworkPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ImagicsPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\InputOutputPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\MathematicsPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\NetworkPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\PhysicsPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\RenderingPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ScriptPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\SoundEffectPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\UserInterfacePerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AnimationMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ArtificialIntellegenceMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\AssistToolsMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\CoreToolsMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\DatabaseMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\FrameworkMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ImagicsMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\InputOutputMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\MathematicsMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\NetworkMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\PhysicsMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\RenderingMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ResourceManagerMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ScriptMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\SoundEffectMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\UserInterfaceMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AnimationCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ArtificialIntellegenceCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\AssistToolsCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\CoreToolsCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\DatabaseCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\FrameworkCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ImagicsCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\InputOutputCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\MathematicsCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\NetworkCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\PhysicsCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\RenderingCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ResourceManagerCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ScriptCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\SoundEffectCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\UserInterfaceCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\CopyUnshared\ExportCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\CopyUnshared\ExportCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\CopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AnimationDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ArtificialIntellegenceDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\AssistToolsDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\CoreToolsDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\DatabaseDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\FrameworkDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ImagicsDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\InputOutputDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\MathematicsDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\NetworkDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\PhysicsDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\RenderingDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ResourceManagerDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ScriptDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\SoundEffectDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\UserInterfaceDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\DelayCopyUnshared\ExportDelayCopyUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\DelayCopyUnshared\ExportDelayCopyUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\DelayCopyUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AnimationNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ArtificialIntellegenceNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\AssistToolsNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\CoreToolsNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\DatabaseNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\FrameworkNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ImagicsNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\InputOutputNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\MathematicsNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\NetworkNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\PhysicsNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\RenderingNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ResourceManagerNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ScriptNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\SoundEffectNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\UserInterfaceNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\NonCopy\ExportNonCopyMacro.cpp">
+      <Filter>CoreTools 源文件\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\NonCopy\ExportNonCopyMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\NonCopy</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AnimationPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ArtificialIntellegencePerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\AssistToolsPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\CoreToolsPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\DatabasePerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\FrameworkPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ImagicsPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\InputOutputPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\MathematicsPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\NetworkPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\PhysicsPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\RenderingPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ResourceManagerPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ScriptPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\SoundEffectPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\UserInterfacePerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\PerformanceUnshared\ExportPerformanceUnsharedMacroImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\PerformanceUnshared\ExportPerformanceUnsharedMacro.cpp">
+      <Filter>CoreTools 源文件\PerformanceUnshared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AnimationMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ArtificialIntellegenceMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\AssistToolsMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\CoreToolsMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\DatabaseMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\FrameworkMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ImagicsMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\InputOutputMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\MathematicsMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\NetworkMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\PhysicsMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\RenderingMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ResourceManagerMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ScriptMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\SoundEffectMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\UserInterfaceMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Detail\Shared\ExportMacroSharedImpl.cpp">
+      <Filter>CoreTools 源文件\Detail\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\ExportTest\CoreTools\Shared\ExportMacroShared.cpp">
+      <Filter>CoreTools 源文件\Shared</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+</Project>

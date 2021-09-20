@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{22758e49-26b7-4104-a40b-6afc8842f0d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book">
+      <UniqueIdentifier>{515bb018-10b6-4e4b-8452-0f27c8df46d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Applying UML and Patterns（UML和模式应用）">
+      <UniqueIdentifier>{5c0d8393-a3f1-4c53-8fcb-b4ce1c4b7581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Object-Oriented Modeling and Design with UML（UML面向对象建模与设计）">
+      <UniqueIdentifier>{704b62f5-efaf-40fa-8deb-b3b57821b336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Sams Teach Yourself UML in 24 Hours（UML基础、案例与应用）">
+      <UniqueIdentifier>{2677da4d-6637-4e78-a455-32f814803189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Unified Modeling Language User Guide（UML用户指南）">
+      <UniqueIdentifier>{6470cc39-df31-4d1a-b256-be9405554898}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\UML Distilled:A Brief Guide to the Standard Object Modeling Language（UML精粹）">
+      <UniqueIdentifier>{f7115b15-ef0d-4ffa-91a7-76cda153d9c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{8a0f730d-e6ec-4528-87a2-23ebf388003a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectOrientedModelingAndDesignWithUML 头文件">
+      <UniqueIdentifier>{bcc10ba2-cc5b-4c98-9a29-e261d9474d3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectOrientedModelingAndDesignWithUML 源文件">
+      <UniqueIdentifier>{d36881d7-5b88-43cb-b677-a30e8865eee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Unified Modeling Language Reference Manual（UML参考手册）">
+      <UniqueIdentifier>{392b6f62-3b91-4374-9c7a-449fd3f0d405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplyingUMLAndPatterns 头文件">
+      <UniqueIdentifier>{a8f671b4-ea2c-4864-9556-d85120b089fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ApplyingUMLAndPatterns 源文件">
+      <UniqueIdentifier>{cd27140b-bfa8-4181-ad1b-da5a4156e058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheUnifiedModelingLanguageUserGuide 头文件">
+      <UniqueIdentifier>{d01484ee-58bf-47ee-9ea6-675571d8df6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheUnifiedModelingLanguageUserGuide 源文件">
+      <UniqueIdentifier>{7252eeee-8791-4216-9bd0-a30b07bd99d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UMLDistilled 头文件">
+      <UniqueIdentifier>{a5586cd8-6cf8-4e95-ae72-3d70e17737ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UMLDistilled 源文件">
+      <UniqueIdentifier>{76cbdde7-0799-4043-ba5b-7448e0f22598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SamsTeachYourselfUMLIn24Hours 头文件">
+      <UniqueIdentifier>{49263da8-4fdc-4ca8-946b-1127ca8cb00d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SamsTeachYourselfUMLIn24Hours 源文件">
+      <UniqueIdentifier>{a8c788f1-5d34-4bdb-9af3-3a1c60fd4466}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheUnifiedModelingLanguageReferenceManual 头文件">
+      <UniqueIdentifier>{e73f8680-18da-4598-8446-df6f05ac935f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TheUnifiedModelingLanguageReferenceManual 源文件">
+      <UniqueIdentifier>{244778b4-b666-4ad0-83d6-ca0563f463e8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUML.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\BookUMLNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\Helper\BookUMLCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\Helper\BookUMLClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ObjectOrientedModelingAndDesignWithUML\ObjectOrientedModelingAndDesignWithUMLFwd.h">
+      <Filter>ObjectOrientedModelingAndDesignWithUML 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ObjectOrientedModelingAndDesignWithUML\ObjectOrientedModelingAndDesignWithUMLMain.h">
+      <Filter>ObjectOrientedModelingAndDesignWithUML 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ObjectOrientedModelingAndDesignWithUML\ObjectOrientedModelingAndDesignWithUML.h">
+      <Filter>ObjectOrientedModelingAndDesignWithUML 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ApplyingUMLAndPatterns\ApplyingUMLAndPatterns.h">
+      <Filter>ApplyingUMLAndPatterns 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ApplyingUMLAndPatterns\ApplyingUMLAndPatternsFwd.h">
+      <Filter>ApplyingUMLAndPatterns 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ApplyingUMLAndPatterns\ApplyingUMLAndPatternsMain.h">
+      <Filter>ApplyingUMLAndPatterns 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageUserGuide\TheUnifiedModelingLanguageUserGuide.h">
+      <Filter>TheUnifiedModelingLanguageUserGuide 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageUserGuide\TheUnifiedModelingLanguageUserGuideFwd.h">
+      <Filter>TheUnifiedModelingLanguageUserGuide 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageUserGuide\TheUnifiedModelingLanguageUserGuideMain.h">
+      <Filter>TheUnifiedModelingLanguageUserGuide 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\UMLDistilled\UMLDistilled.h">
+      <Filter>UMLDistilled 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\UMLDistilled\UMLDistilledFwd.h">
+      <Filter>UMLDistilled 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\UMLDistilled\UMLDistilledMain.h">
+      <Filter>UMLDistilled 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\SamsTeachYourselfUMLIn24Hours\SamsTeachYourselfUMLIn24Hours.h">
+      <Filter>SamsTeachYourselfUMLIn24Hours 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\SamsTeachYourselfUMLIn24Hours\SamsTeachYourselfUMLIn24HoursFwd.h">
+      <Filter>SamsTeachYourselfUMLIn24Hours 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\SamsTeachYourselfUMLIn24Hours\SamsTeachYourselfUMLIn24HoursMain.h">
+      <Filter>SamsTeachYourselfUMLIn24Hours 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageReferenceManual\TheUnifiedModelingLanguageReferenceManual.h">
+      <Filter>TheUnifiedModelingLanguageReferenceManual 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageReferenceManual\TheUnifiedModelingLanguageReferenceManualFwd.h">
+      <Filter>TheUnifiedModelingLanguageReferenceManual 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageReferenceManual\TheUnifiedModelingLanguageReferenceManualMain.h">
+      <Filter>TheUnifiedModelingLanguageReferenceManual 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ObjectOrientedModelingAndDesignWithUML\ObjectOrientedModelingAndDesignWithUMLMain.cpp">
+      <Filter>ObjectOrientedModelingAndDesignWithUML 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\ApplyingUMLAndPatterns\ApplyingUMLAndPatternsMain.cpp">
+      <Filter>ApplyingUMLAndPatterns 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageUserGuide\TheUnifiedModelingLanguageUserGuideMain.cpp">
+      <Filter>TheUnifiedModelingLanguageUserGuide 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\UMLDistilled\UMLDistilledMain.cpp">
+      <Filter>UMLDistilled 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\SamsTeachYourselfUMLIn24Hours\SamsTeachYourselfUMLIn24HoursMain.cpp">
+      <Filter>SamsTeachYourselfUMLIn24Hours 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookSoftwareDesign\BookUML\TheUnifiedModelingLanguageReferenceManual\TheUnifiedModelingLanguageReferenceManualMain.cpp">
+      <Filter>TheUnifiedModelingLanguageReferenceManual 源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

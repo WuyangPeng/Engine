@@ -1,0 +1,42 @@
+// Copyright (c) 2011-%EndYear%
+// Threading Core Render Engine
+// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û 
+//
+// %ProjectChineseName%∞Ê±æ£∫%Versions% (%Date% %Hour%:%Minute%)
+
+#ifndef %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
+#define %ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
+
+#include "%ManagerName%.h" 
+#include "%SolutionName%/%SolutionName%MiddleLayer/Macro/%SolutionName%MiddleLayerClassInvariantMacro.h"
+#include "Framework/MiddleLayer/%ManagerName%Detail.h"
+
+template <typename ApplicationTrait>
+%SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
+	::%ManagerName%()
+	:ParentType{}
+{
+	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+template <typename ApplicationTrait>
+%SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
+	::~%ManagerName%()
+{
+	%ProjectCapital%_MIDDLE_LAYER_CLASS_IS_VALID_CONST_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+template <typename ApplicationTrait>
+bool %SolutionName%MiddleLayer::%ManagerName%<ApplicationTrait>
+	::IsValid() const
+{
+	if (ParentType::IsValid())
+		return true;
+	else
+		return false;
+}
+#endif // OPEN_CLASS_INVARIANT
+
+#endif / /%ProjectCapital%_%ManagerCapital%_ENGINE_%ManagerCapital%_DETAIL_H
+ 
