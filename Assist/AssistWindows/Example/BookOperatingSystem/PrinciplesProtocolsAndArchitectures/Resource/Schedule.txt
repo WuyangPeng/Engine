@@ -1,0 +1,12 @@
+用TCP-IP进行网际互联·第一卷：原理、协议与结构
+   
+PrinciplesProtocolsAndArchitectures
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.2.3。
+
+实现内容	
+	1. 用TCP-IP进行网际互联·第一卷：原理、协议与结构模块。

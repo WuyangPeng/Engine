@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 14:39)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,6 +13,11 @@
 #include "FileHandleHelper.h"
 #include "FileManagerHelper.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+
+#include <fstream>
+
+using std::ifstream;
+using std::string;
 
 // static
 const CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFile(const String& fileName, bool binaryFile)
@@ -69,4 +74,11 @@ const CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFileUseEnviron
 #else  // !SYSTEM_PLATFORM_WIN32
     return CFileManagerHelper::LoadFromFileUseEnvironment(fileName, binaryFile);
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+bool CoreTools::FileManagerHelper::IsFileExists(const string& fileName)
+{
+    ifstream fstream{ fileName };
+
+    return fstream.good();
 }

@@ -1788,6 +1788,33 @@
     <ClInclude Include="..\..\..\Code\System\Windows\Flags\WindowsSystemFlags.h">
       <Filter>Windows 头文件\Flags</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\TypeIndex.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable4101.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\OpenXLSX.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\PugiXml.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6326.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable26467.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable6054.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Disable28182.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\System\Helper\PragmaWarning\Miniz.h">
+      <Filter>Helper 头文件\PragmaWarning</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\System\DllLib.cpp">

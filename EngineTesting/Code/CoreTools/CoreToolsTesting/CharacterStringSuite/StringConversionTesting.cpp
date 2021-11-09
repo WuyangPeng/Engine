@@ -48,6 +48,11 @@ void CoreTools::StringConversionTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionWideCharTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionStandardTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UTF8ConversionMultiByteTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(WideCharUTF8ConversionStandardTest);
+
+    ASSERT_NOT_THROW_EXCEPTION_0(ToFirstLetterUpperTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ToFirstLetterLowerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ToUpperMacroTest);
 }
 
 void CoreTools::StringConversionTesting::MultiByteConversionWideCharTest()
@@ -197,4 +202,50 @@ void CoreTools::StringConversionTesting::UTF8ConversionMultiByteTest()
     const auto uft1 = StringConversion::MultiByteConversionUTF8(original1);
     const auto multiByte1 = StringConversion::UTF8ConversionMultiByte(uft1);
     ASSERT_EQUAL(multiByte1, original1);
+}
+
+void CoreTools::StringConversionTesting::WideCharUTF8ConversionStandardTest()
+{
+    const auto original0 = "Converted WideCharUTF8 to Standard"s;
+    const auto uft0 = StringConversion::MultiByteConversionUTF8(original0);
+    wstring wideCharuft0{};
+    for (auto c : uft0)
+    {
+        wideCharuft0 += c;
+    }
+    const auto standard0 = StringConversion::UTF8ConversionStandard(wideCharuft0);
+    ASSERT_EQUAL(standard0, SYSTEM_TEXT("Converted WideCharUTF8 to Standard"s));
+
+    const auto original1 = "WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s;
+    const auto uft1 = StringConversion::MultiByteConversionUTF8(original1);
+    wstring wideCharuft1{};
+    for (auto c : uft1)
+    {
+        wideCharuft1 += c;
+    }
+    const auto standard1 = StringConversion::UTF8ConversionStandard(wideCharuft1);
+    ASSERT_EQUAL(standard1, SYSTEM_TEXT("WideCharUTF8×Ö·û´®×ª»»Îª±ê×¼×Ö·û´®"s));
+}
+
+void CoreTools::StringConversionTesting::ToFirstLetterUpperTest()
+{
+    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("AuAu"s));
+    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("AuAu"s));
+    ASSERT_EQUAL(StringConversion::ToFirstLetterUpper(SYSTEM_TEXT(" auAu"s)), SYSTEM_TEXT(" auAu"s));
+}
+
+void CoreTools::StringConversionTesting::ToFirstLetterLowerTest()
+{
+    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("auAu"s));
+    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("auAu"s));
+    ASSERT_EQUAL(StringConversion::ToFirstLetterLower(SYSTEM_TEXT(" AuAu"s)), SYSTEM_TEXT(" AuAu"s));
+}
+
+void CoreTools::StringConversionTesting::ToUpperMacroTest()
+{
+    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("AuAu"s)), SYSTEM_TEXT("AU_AU"s));
+    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("auAu"s)), SYSTEM_TEXT("AU_AU"s));
+    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT(" AuAu"s)), SYSTEM_TEXT("AU_AU"s));
+    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT(" Au_Au"s)), SYSTEM_TEXT("AU__AU"s));
+    ASSERT_EQUAL(StringConversion::ToUpperMacro(SYSTEM_TEXT("Au_uu"s)), SYSTEM_TEXT("AU_UU"s));
 }

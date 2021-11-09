@@ -1,16 +1,17 @@
 {
-  "debuggingCppSuite": 
-  {
-
+  "safeCppSuite": {
+    "SafeCpp::SafeCppPlaceholderTesting": 1
   },
 
-  "advancedWindowsDebuggingSuite": 
-  {
-
+  "debuggingCppSuite": {
+    "DebuggingCpp::DebuggingCppPlaceholderTesting": 1
   },
 
-  "theDevelopersGuideToDebuggingSuite": 
-  {
+  "advancedWindowsDebuggingSuite": {
+    "AdvancedWindowsDebugging::AdvancedWindowsDebuggingPlaceholderTesting": 1
+  },
 
+  "theDevelopersGuideToDebuggingSuite": {
+    "TheDevelopersGuideToDebugging::TheDevelopersGuideToDebuggingPlaceholderTesting": 1
   }
 }

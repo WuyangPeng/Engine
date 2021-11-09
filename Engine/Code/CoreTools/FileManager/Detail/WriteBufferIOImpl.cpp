@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 13:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,9 +18,10 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 using namespace std::literals;
+using std::make_shared;
 
 CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
-    : ParentType{}, m_Buffer(bufferSize)
+    : ParentType{}, buffer{ make_shared<FileBuffer>(bufferSize) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +29,7 @@ CoreTools::WriteBufferIOImpl::WriteBufferIOImpl(int bufferSize)
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::WriteBufferIOImpl ::IsValid() const noexcept
 {
-    if (ParentType::IsValid())
+    if (ParentType::IsValid() && buffer != nullptr)
         return true;
     else
         return false;
@@ -68,7 +69,7 @@ uint32_t CoreTools::WriteBufferIOImpl::WriteToBuffer(size_t itemSize, size_t ite
     if (nextBytesProcessed <= GetBytesTotal())
     {
         // 获得缓冲区当前指针位置。
-        auto target = m_Buffer.GetBuffer(GetBytesProcessed());
+        auto target = buffer->GetBuffer(GetBytesProcessed());
 
         SetBytesProcessed(nextBytesProcessed);
         System::MemoryCopy(target, data, numberToCopy);
@@ -92,7 +93,7 @@ int CoreTools::WriteBufferIOImpl::GetBytesTotal() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Buffer.GetSize());
+    return boost::numeric_cast<int>(buffer->GetSize());
 }
 
 CoreTools::BufferIO CoreTools::WriteBufferIOImpl::GetBufferIOType() const noexcept
@@ -100,4 +101,11 @@ CoreTools::BufferIO CoreTools::WriteBufferIOImpl::GetBufferIOType() const noexce
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return BufferIO::Write;
+}
+
+CoreTools::ConstFileBufferSharedPtr CoreTools::WriteBufferIOImpl::GetFileBuffer() const noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_CONST_1;
+
+    return buffer;
 }

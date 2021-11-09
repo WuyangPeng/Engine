@@ -93,8 +93,6 @@ int CoreTools::UnitTest::GetErrorNumber() const noexcept
 
 void CoreTools::UnitTest::PrintReport()
 {
-    
-
     constexpr auto characterWidth = 10;
 
     UnitTestPrintManager manager{ *this, "测试"s + GetTestModeDescribe() };
@@ -112,8 +110,6 @@ string CoreTools::UnitTest::GetTestModeDescribe() const
 
 void CoreTools::UnitTest::ResetTestData()
 {
-    
-
     m_Data->ClearData();
     m_CpuTimer->Start();
 
@@ -128,8 +124,6 @@ void CoreTools::UnitTest::ResetOtherData()
 
 void CoreTools::UnitTest::RunUnitTest()
 {
-    
-
     TestTimingBegins();
     DoRunUnitTest();
     TestTimingEnd();
@@ -138,8 +132,6 @@ void CoreTools::UnitTest::RunUnitTest()
 // private
 void CoreTools::UnitTest::TestTimingBegins()
 {
-    
-
     CoreTools::DisableNoexcept();
 
     if (m_Data->IsEmpty())
@@ -151,8 +143,6 @@ void CoreTools::UnitTest::TestTimingBegins()
 // private
 void CoreTools::UnitTest::TestTimingEnd()
 {
-    
-
     CoreTools::DisableNoexcept();
 
     m_CpuTimer->Stop();
@@ -161,8 +151,6 @@ void CoreTools::UnitTest::TestTimingEnd()
 // protected
 void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    
-
     if (condition)
     {
         m_Data->AddPassedNumber();
@@ -187,8 +175,6 @@ void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& fu
 // protected
 void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     if (condition)
     {
         m_Data->AddPassedNumber();
@@ -206,8 +192,6 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
 // private
 void CoreTools::UnitTest::PrintFailReport(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     UnitTestFailPrintManager manager{ *this, functionDescribed.GetFileName(), functionDescribed.GetLine(), errorMessage };
 
     manager.PrintFailClassInformation();
@@ -226,8 +210,6 @@ const string CoreTools::UnitTest::GetName() const
 // protected
 void CoreTools::UnitTest::AssertExceptionInfoLog(const Error& error, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
         << GetCorrectThrowExceptionDescribe()
         << errorMessage
@@ -240,8 +222,6 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const Error& error, const strin
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Info, CoreTools, functionDescribed)
         << GetCorrectThrowExceptionDescribe()
         << errorMessage
@@ -254,8 +234,6 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const exception& error, const F
 
 void CoreTools::UnitTest::AssertExceptionInfoLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Warn, CoreTools, functionDescribed)
         << GetCorrectThrowExceptionDescribe()
         << errorMessage
@@ -266,8 +244,6 @@ void CoreTools::UnitTest::AssertExceptionInfoLog(const FunctionDescribed& functi
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const Error& error, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
         << GetErrorThrowExceptionDescribe()
         << errorMessage
@@ -280,8 +256,6 @@ void CoreTools::UnitTest::AssertExceptionErrorLog(const Error& error, const stri
 
 void CoreTools::UnitTest::AssertExceptionErrorLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
         << GetErrorNothrowExceptionDescribe()
         << errorMessage
@@ -292,8 +266,6 @@ void CoreTools::UnitTest::AssertExceptionErrorLog(const FunctionDescribed& funct
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const exception& error, const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Error, CoreTools, functionDescribed)
         << GetErrorThrowExceptionDescribe()
         << errorMessage
@@ -306,8 +278,6 @@ void CoreTools::UnitTest::AssertExceptionFatalLog(const exception& error, const 
 
 void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& functionDescribed, const string& errorMessage)
 {
-    
-
     LOG_SINGLETON_ENGINE_APPENDER_USE_FUNCTION_DESCRIBED(Fatal, CoreTools, functionDescribed)
         << GetErrorThrowExceptionDescribe()
         << errorMessage
@@ -318,8 +288,6 @@ void CoreTools::UnitTest::AssertExceptionFatalLog(const FunctionDescribed& funct
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(float lhs, float rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
     const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
@@ -331,8 +299,6 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(float lhs, float rhs,
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(double lhs, double rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
     const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
@@ -344,8 +310,6 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteEqual(double lhs, double rh
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(float lhs, float rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
     const auto completeLhs = *reinterpret_cast<uint32_t*>(&lhs);
@@ -357,8 +321,6 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(float lhs, float rh
 
 void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    
-
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
     const auto completeLhs = *reinterpret_cast<uint64_t*>(&lhs);
@@ -370,8 +332,6 @@ void CoreTools::UnitTest::AssertFloatingPointCompleteUnequal(double lhs, double 
 
 void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, const FunctionDescribed& functionDescribed, const string& errorMessage, bool failureThrow)
 {
-    
-
     const auto condition = (lhs == rhs);
 
     std::string described{};
@@ -395,8 +355,6 @@ void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, co
 
 void CoreTools::UnitTest::AssertEqual(const char* lhs, const char* rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)
 {
-    
-
     AssertEqual(string{ lhs }, string{ rhs }, functionDescribed, errorMessage, failureThrow);
 }
 
@@ -407,8 +365,6 @@ void CoreTools::UnitTest::AssertEqual(const wchar_t* lhs, const wchar_t* rhs, co
 
 void CoreTools::UnitTest::PrintRunUnitTest()
 {
-    
-
     auto runUnitTest = "正在运行测试 \""s + GetName() + "\"。\n"s;
 
     GetStream() << runUnitTest;

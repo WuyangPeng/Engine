@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/07/29 15:54)
+///	引擎版本：0.7.2.3 (2021/08/31 17:09)
 
 // 单例类所需要的宏
 #ifndef CORE_TOOLS_HELPER_SINGLETON_MACRO_H
@@ -13,6 +13,8 @@
 
 #include "CoreTools/Base/SingletonDetail.h"
 #include "CoreTools/Threading/ScopedMutex.h"
+
+#include <mutex>
 
 #if !defined(TCRE_USE_GCC)
 
@@ -44,6 +46,9 @@
     const CoreTools::ScopedMutex holder{ SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)() };
 
 #define SINGLETON_MUTEX_ENTER_MEMBER \
+    const std::unique_lock holder{ GetMutex() };
+
+#define SINGLETON_SCOPED_MUTEX_ENTER_MEMBER \
     const CoreTools::ScopedMutex holder{ GetMutex() };
 
 #endif  // CORE_TOOLS_HELPER_SINGLETON_MACRO_H

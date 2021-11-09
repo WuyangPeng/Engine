@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="资源文件\Todo">
+      <UniqueIdentifier>{98848240-f4ae-4728-af52-5cb428be9f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSVConfigure 模板文件">
+      <UniqueIdentifier>{67fb29e4-b3af-4fe7-adad-128736fbe13b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSVConfigure 头文件">
+      <UniqueIdentifier>{441ae8a7-55dd-429b-8821-52077d2a4a5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSVConfigure 源文件">
+      <UniqueIdentifier>{854b202f-8c5a-4ffb-8e0d-fb8db39e8dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSVConfigure 头文件\Flags">
+      <UniqueIdentifier>{683f9d5c-e465-4cfb-9945-15901071509a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CSVConfigure 源文件\Flags">
+      <UniqueIdentifier>{c513cb3d-485d-4082-b9c8-aa74621f880b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\ChapterContainerDetail.h">
+      <Filter>CSVConfigure 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\EquipContainerDetail.h">
+      <Filter>CSVConfigure 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\HeroContainerDetail.h">
+      <Filter>CSVConfigure 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SceneContainerDetail.h">
+      <Filter>CSVConfigure 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SkillContainerDetail.h">
+      <Filter>CSVConfigure 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Chapter.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\ChapterBase.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\ChapterContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\CSVConfigure.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\CSVConfigureContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\CSVConfigureFwd.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Equip.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\EquipBase.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\EquipContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Hero.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\HeroContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Scene.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SceneContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Skill.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SkillBase.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SkillContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Flags\VectorType.h">
+      <Filter>CSVConfigure 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SystemConstantContainer.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SystemConstant.h">
+      <Filter>CSVConfigure 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Flags\LineType.h">
+      <Filter>CSVConfigure 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigureLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Chapter.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\ChapterBase.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\ChapterContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\CSVConfigureContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Equip.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\EquipBase.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\EquipContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Hero.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\HeroContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Scene.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SceneContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Skill.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SkillBase.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SkillContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Flags\VectorType.cpp">
+      <Filter>CSVConfigure 源文件\Flags</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SystemConstantContainer.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\SystemConstant.cpp">
+      <Filter>CSVConfigure 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Toolset\CoreTools\CSVConfigure\CSVConfigure\Flags\LineType.cpp">
+      <Filter>CSVConfigure 源文件\Flags</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

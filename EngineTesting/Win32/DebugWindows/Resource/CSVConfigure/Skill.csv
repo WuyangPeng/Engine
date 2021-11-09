@@ -1,0 +1,10 @@
+@key = id * 100 + reward
+ID,下一关ID,过关奖励,技能名称,向量类型,位置
+int,int,int,string,enum|VectorType,intVector3
+id,nextID,reward,skillName,vectorType,position
+10001,10002,1,"skillName",Two,1|3|6
+10002,10003,2,"skillName",Three,1|3|7
+10003,10004,3,"skillName",Four,1|3|8
+10004,10005,4,"skillName",Four,1|3|9
+10005,10006,5,"skillName",Four,1|3|10
+10006,10007,6,"skillName",Four,1|3|11

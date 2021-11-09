@@ -1,71 +1,96 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/05 13:06)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.7.2.3 (2021/09/02 15:00)
 
 #include "ThreadManagerTesting.h"
-
 #include "System/Threading/Flags/ThreadFlags.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Threading/ThreadManager.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 namespace
 {
-    volatile bool g_IsContinue{ false };
+    // Ω˚÷π±‡“Î∆˜”≈ªØ
+    volatile bool isContinue{ false };
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ThreadManagerTesting)
+CoreTools::ThreadManagerTesting::ThreadManagerTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-void CoreTools::ThreadManagerTesting ::MainTest()
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ThreadManagerTesting)
+
+void CoreTools::ThreadManagerTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void CoreTools::ThreadManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateThread);
 }
 
-void CoreTools::ThreadManagerTesting ::CreateThread()
+void CoreTools::ThreadManagerTesting::CreateThread()
 {
-    g_IsContinue = false;
+    isContinue = false;
 
     auto threadParameter = 3;
     constexpr auto priority = EnumCastUnderlying(System::ThreadPriority::Normal);
 
-    ThreadManager manager;
+    ThreadManager manager{ DisableNotThrow::Disable };
 
-    manager.AddThread(Thread1, &threadParameter, priority);
-    manager.AddThread(Thread2, nullptr);
+    manager.AddThread(Thread0, &threadParameter, priority);
+    manager.AddThread(Thread1, nullptr);
 
     manager.Resume();
     manager.Suspend();
     manager.Resume();
 
-    g_IsContinue = true;
+    isContinue = true;
 
     manager.Wait();
 }
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26471)
-uint32_t CoreTools::ThreadManagerTesting ::Thread1([[maybe_unused]] void* threadParameter) noexcept
-{
-    const auto parameter = *reinterpret_cast<int*>(threadParameter);
 
-    for (;;)
+uint32_t CoreTools::ThreadManagerTesting::Thread0(void* threadParameter) noexcept
+{
+    if (threadParameter != nullptr)
     {
-        if (g_IsContinue && parameter == 3)
-            break;
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26471)
+
+        const auto parameter = *reinterpret_cast<int*>(threadParameter);
+
+#include STSTEM_WARNING_POP
+
+        for (;;)
+        {
+            if (isContinue && parameter == 3)
+            {
+                break;
+            }
+        }
     }
 
     return 0;
 }
-#include STSTEM_WARNING_POP
 
-uint32_t CoreTools::ThreadManagerTesting ::Thread2([[maybe_unused]] void* threadParameter) noexcept
+uint32_t CoreTools::ThreadManagerTesting::Thread1(MAYBE_UNUSED void* threadParameter) noexcept
 {
     for (;;)
     {
-        if (g_IsContinue)
+        if (isContinue)
+        {
             break;
+        }
     }
 
     return 0;

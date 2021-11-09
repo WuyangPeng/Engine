@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 19:02)
+///	引擎版本：0.7.2.3 (2021/08/31 17:07)
 
 /// 自动Singleton基类的声明，这个基类需要手动控制创建和销毁。
 /// 如果实例化顺序并不重要，可以通过将派生类设为全局或局部静态，也可以通过在派生类中使用new和delete来自己做，或者直接使用StaticSingleton。
@@ -15,18 +15,22 @@
 #define CORE_TOOLS_BASE_SINGLETON_H
 
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
-#include "CoreTools/Threading/Mutex.h"
+#include "CoreTools/Threading/Flags/MutexFlags.h"
+#include "CoreTools/Threading/Flags/MutexTraits.h"
+
+#include <mutex>
 
 namespace CoreTools
 {
-    template <typename T>
+    template <typename T, MutexCreate mutexCreate = MutexCreate::UseOriginalStdRecursive>
     class Singleton
     {
     public:
-        using ClassType = Singleton<T>;
+        using ClassType = Singleton<T, mutexCreate>;
         using ValueType = T;
         using PointType = ValueType*;
         using ReferenceType = ValueType&;
+        using MutexType = typename MutexTraits<mutexCreate>::MutexType;
 
     public:
         NODISCARD static ReferenceType GetSingleton() noexcept;
@@ -35,7 +39,7 @@ namespace CoreTools
     protected:
         Singleton() noexcept;
         ~Singleton() noexcept;
-        NODISCARD static Mutex& GetMutex();
+        NODISCARD static MutexType& GetMutex();
 
     public:
         Singleton(const Singleton& rhs) noexcept = delete;

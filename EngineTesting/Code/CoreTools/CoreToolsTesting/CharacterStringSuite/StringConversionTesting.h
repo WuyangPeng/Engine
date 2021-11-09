@@ -45,6 +45,11 @@ namespace CoreTools
         void UTF8ConversionWideCharTest();
         void UTF8ConversionStandardTest();
         void UTF8ConversionMultiByteTest();
+        void WideCharUTF8ConversionStandardTest();
+
+        void ToFirstLetterUpperTest();
+        void ToFirstLetterLowerTest();
+        void ToUpperMacroTest();
     };
 }
 

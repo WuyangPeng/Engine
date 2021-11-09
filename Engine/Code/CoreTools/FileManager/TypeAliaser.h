@@ -1,16 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2021
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/01 23:37)
+///	引擎版本：0.7.2.3 (2021/09/03 8:36)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_TYPE_ALIASER_H
 #define CORE_TOOLS_FILE_MANAGER_TYPE_ALIASER_H
 
 #include "CoreTools/CoreToolsDll.h"
+
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 namespace CoreTools
 {
@@ -23,20 +25,32 @@ namespace CoreTools
         using ClassType = TypeAliaser<From, To>;
 
     public:
-        constexpr TypeAliaser(From inFromValue) noexcept
-            : m_AsFromType(inFromValue)
+        explicit TypeAliaser(From inFromValue) noexcept
+            : asFromType{ inFromValue }
         {
+            CORE_TOOLS_SELF_CLASS_IS_VALID_9;
         }
 
-        constexpr To& Get() noexcept
+#ifdef OPEN_CLASS_INVARIANT
+
+        NODISCARD bool IsValid() const noexcept
         {
-            return m_AsToType;
+            return true;
+        }
+
+#endif  // OPEN_CLASS_INVARIANT
+
+        NODISCARD const To& Get() const noexcept
+        {
+            CORE_TOOLS_CLASS_IS_VALID_CONST_9;
+
+            return asToType;
         }
 
         union
         {
-            From m_AsFromType;
-            To m_AsToType;
+            From asFromType;
+            To asToType;
         };
     };
 }

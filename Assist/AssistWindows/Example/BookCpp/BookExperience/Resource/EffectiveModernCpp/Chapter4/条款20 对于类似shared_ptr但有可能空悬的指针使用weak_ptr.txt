@@ -1,0 +1,3 @@
+条款20 对于类似std::shared_ptr但有可能空悬的指针使用std::weak_ptr
+	★ 使用std::weak_ptr来代替空悬的std::shared_ptr。
+	★ std::weak_ptr可能的用武之地包括缓存，观察者列表，以及避免std::shared_ptr指针环路。

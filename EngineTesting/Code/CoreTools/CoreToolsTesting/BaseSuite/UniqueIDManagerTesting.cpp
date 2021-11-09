@@ -30,6 +30,7 @@ void CoreTools::UniqueIDManagerTesting::DoRunUnitTest()
 void CoreTools::UniqueIDManagerTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(UniqueIDManagerTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SetUniqueIDTest);
 }
 
 void CoreTools::UniqueIDManagerTesting::UniqueIDManagerTest()
@@ -53,4 +54,35 @@ void CoreTools::UniqueIDManagerTesting::UniqueIDManagerTest()
     ASSERT_LESS(0, uniqueID);
 
     ASSERT_EQUAL(UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity), uniqueID + 1);
+}
+
+void CoreTools::UniqueIDManagerTesting::SetUniqueIDTest()
+{
+    auto uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
+    ASSERT_LESS(0, uniqueID);
+
+    auto initUniqueID = uniqueID + 100;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(0, initUniqueID);
+
+    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
+    ASSERT_EQUAL(uniqueID, initUniqueID + 1);
+
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(0, 99);
+
+    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(0);
+    ASSERT_EQUAL(uniqueID, initUniqueID + 2);
+
+    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
+    ASSERT_LESS(0, uniqueID);
+
+    initUniqueID = uniqueID + 110;
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(UniqueIDSelect::Entity, initUniqueID);
+
+    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
+    ASSERT_EQUAL(uniqueID, initUniqueID + 1);
+
+    UNIQUE_ID_MANAGER_SINGLETON.SetUniqueID(UniqueIDSelect::Entity, 105);
+
+    uniqueID = UNIQUE_ID_MANAGER_SINGLETON.NextUniqueID(UniqueIDSelect::Entity);
+    ASSERT_EQUAL(uniqueID, initUniqueID + 2);
 }

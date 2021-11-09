@@ -1,16 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 20:34)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/02 18:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BufferIOImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::BufferIOImpl::BufferIOImpl() noexcept
     : m_BytesProcessed{ 0 }
@@ -35,7 +36,7 @@ int CoreTools::BufferIOImpl::GetBytesProcessed() const noexcept
     return m_BytesProcessed;
 }
 
-void CoreTools::BufferIOImpl::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::BufferIOImpl::IncrementBytesProcessed(int bytesNumber)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -43,7 +44,10 @@ void CoreTools::BufferIOImpl::IncrementBytesProcessed(int bytesNumber) noexcept(
 
     const auto nextBytesProcessed = m_BytesProcessed + bytesNumber;
 
-    CORE_TOOLS_ASSERTION_2(nextBytesProcessed <= GetBytesTotal(), "增量超过了缓冲区大小！\n");
+    if (nextBytesProcessed < 0 || GetBytesTotal() < nextBytesProcessed)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("增量超过了缓冲区大小！\n"s));
+    }
 
     m_BytesProcessed = nextBytesProcessed;
 }

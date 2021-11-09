@@ -61,6 +61,21 @@
     <Filter Include="CppCodingStandards">
       <UniqueIdentifier>{67efc01c-b8da-43d6-93f3-ab112fc11b64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter1">
+      <UniqueIdentifier>{d60fee06-f12f-4366-ac70-6315a09b33c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter2">
+      <UniqueIdentifier>{e6ee9d1a-f64a-4acd-84c2-a61cb0fd6bf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter3">
+      <UniqueIdentifier>{c1c59a3f-bc30-4bfb-bc40-4484488abda9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter4">
+      <UniqueIdentifier>{4ebb59e1-67e8-41c6-b976-0373cfd55755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter5">
+      <UniqueIdentifier>{7d707cd9-ce62-49e0-87fe-3fd270c314b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\BookExperienceTesting.json">
@@ -155,6 +170,36 @@
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\CppCodingStandards\CppCodingStandardsSuite.h">
       <Filter>CppCodingStandards</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter1\EffectiveModernCppChapter1ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter1\EffectiveModernCppChapter1Suite.h">
+      <Filter>EffectiveModernCpp\Chapter1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter2\EffectiveModernCppChapter2ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter2\EffectiveModernCppChapter2Suite.h">
+      <Filter>EffectiveModernCpp\Chapter2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter3\EffectiveModernCppChapter3ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter3\EffectiveModernCppChapter3Suite.h">
+      <Filter>EffectiveModernCpp\Chapter3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter4\EffectiveModernCppChapter4ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter4\EffectiveModernCppChapter4Suite.h">
+      <Filter>EffectiveModernCpp\Chapter4</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5Suite.h">
+      <Filter>EffectiveModernCpp\Chapter5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter5</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\TestingHelper.cpp">
@@ -195,6 +240,21 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\CppCodingStandards\CppCodingStandardsPlaceholderTesting.cpp">
       <Filter>CppCodingStandards</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter1\EffectiveModernCppChapter1ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter2\EffectiveModernCppChapter2ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter3\EffectiveModernCppChapter3ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter4\EffectiveModernCppChapter4ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter4</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter5</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

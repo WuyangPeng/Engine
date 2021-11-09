@@ -1,27 +1,36 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/05 15:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/06 16:40)
 
 #ifndef CORE_TOOLS_TESTING_DELETE_FILE_TOOLS_TESTING_H
 #define CORE_TOOLS_TESTING_DELETE_FILE_TOOLS_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-	class DeleteFileToolsTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(DeleteFileToolsTesting);
+    class DeleteFileToolsTesting final : public UnitTest
+    {
+    public:
+        using ClassType = DeleteFileToolsTesting;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
-		void DeleteFileSucceedTest();
+    public:
+        explicit DeleteFileToolsTesting(const OStreamShared& stream);
 
-		void DoRunUnitTest() override;
-	};
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        void DoRunUnitTest() final;
+        void MainTest();
+
+        void DeleteFileSucceedTest();
+    };
 }
 
-#endif // CORE_TOOLS_TESTING_DELETE_FILE_TOOLS_TESTING_H
+#endif  // CORE_TOOLS_TESTING_DELETE_FILE_TOOLS_TESTING_H

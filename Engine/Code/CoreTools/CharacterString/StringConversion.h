@@ -43,12 +43,17 @@ namespace CoreTools
 
         NODISCARD static CFileString StandardConversionCFileString(const String& character);
 
-        NODISCARD static std::wstring UTF8ConversionWideChar(const std::string& character);
+        NODISCARD static std::wstring UTF8ConversionWideChar(const std::string& character); 
         NODISCARD static std::string WideCharConversionUTF8(const std::wstring& character);
         NODISCARD static String UTF8ConversionStandard(const std::string& character);
+        NODISCARD static String UTF8ConversionStandard(const std::wstring& character);
         NODISCARD static std::string StandardConversionUTF8(const String& character);
         NODISCARD static std::string UTF8ConversionMultiByte(const std::string& character);
         NODISCARD static std::string MultiByteConversionUTF8(const std::string& character);
+
+        NODISCARD static String ToFirstLetterUpper(const String& character);
+        NODISCARD static String ToFirstLetterLower(const String& character);
+        NODISCARD static String ToUpperMacro(const String& character);
     };
 }
 

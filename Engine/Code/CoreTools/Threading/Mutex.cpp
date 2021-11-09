@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 19:20)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,6 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::Mutex::Mutex(MutexCreate mutexCreate)
     : ParentType{ mutexCreate }
 {
@@ -23,7 +21,6 @@ CoreTools::Mutex::Mutex(MutexCreate mutexCreate)
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 CoreTools::Mutex::Mutex(Mutex&& rhs) noexcept
     : ParentType{ std::move(rhs) }

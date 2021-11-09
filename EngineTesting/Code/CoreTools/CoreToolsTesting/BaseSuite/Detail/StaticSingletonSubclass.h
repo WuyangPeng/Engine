@@ -11,14 +11,15 @@
 #define CORE_TOOLS_BASE_SUITE_STATIC_SINGLETON_SUBCLASS_TESTING_H
 
 #include "CoreTools/Base/StaticSingletonDetail.h"
+#include "CoreTools/Threading/Mutex.h"
 
 namespace CoreTools
 {
-    class StaticSingletonSubclass final : public StaticSingleton<StaticSingletonSubclass>
+    class StaticSingletonSubclass final : public StaticSingleton<StaticSingletonSubclass, MutexCreate::UseCriticalSection>
     {
     public:
         using ClassType = StaticSingletonSubclass;
-        using ParentType = StaticSingleton<StaticSingletonSubclass>;
+        using ParentType = StaticSingleton<StaticSingletonSubclass, MutexCreate::UseCriticalSection>;
 
     public:
         explicit StaticSingletonSubclass(SingletonCreate singletonCreate) noexcept;

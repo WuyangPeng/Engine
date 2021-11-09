@@ -19,6 +19,7 @@
 #include "CoreTools/Base/SpanIterator.h"
 
 #include <vector>
+#include "gsl/util"
 
 namespace Rendering
 {
@@ -98,31 +99,31 @@ namespace Rendering
         template <TextureFormat Format>
         static constexpr auto GetRed(const FloatColour& colour) noexcept
         {
-            return static_cast<uint16_t>(colour.GetRed() * ColourTextureFormatTraits<Format>::sm_RedMaxValue + 0.5f);
+            return gsl::narrow_cast<uint16_t>(colour.GetRed() * ColourTextureFormatTraits<Format>::sm_RedMaxValue + 0.5f);
         }
 
         template <TextureFormat Format>
         static constexpr auto GetGreen(const FloatColour& colour) noexcept
         {
-            return static_cast<uint16_t>(colour.GetGreen() * ColourTextureFormatTraits<Format>::sm_GreenMaxValue + 0.5f);
+            return gsl::narrow_cast<uint16_t>(colour.GetGreen() * ColourTextureFormatTraits<Format>::sm_GreenMaxValue + 0.5f);
         }
 
         template <TextureFormat Format>
         static constexpr auto GetBlue(const FloatColour& colour) noexcept
         {
-            return static_cast<uint16_t>(colour.GetBlue() * ColourTextureFormatTraits<Format>::sm_BlueMaxValue + 0.5f);
+            return gsl::narrow_cast<uint16_t>(colour.GetBlue() * ColourTextureFormatTraits<Format>::sm_BlueMaxValue + 0.5f);
         }
 
         template <TextureFormat Format>
         static constexpr auto GetAlpha(const FloatColour& colour) noexcept
         {
-            return static_cast<uint16_t>(colour.GetAlpha() * ColourTextureFormatTraits<Format>::sm_AlphaMaxValue + 0.5f);
+            return gsl::narrow_cast<uint16_t>(colour.GetAlpha() * ColourTextureFormatTraits<Format>::sm_AlphaMaxValue + 0.5f);
         }
 
         template <TextureFormat Format>
         static constexpr auto GetLuminance(const FloatColour& colour) noexcept
         {
-            return static_cast<uint16_t>(colour.GetRed() * ColourTextureFormatTraits<Format>::sm_LuminanceMaxValue + 0.5f);
+            return gsl::narrow_cast<uint16_t>(colour.GetRed() * ColourTextureFormatTraits<Format>::sm_LuminanceMaxValue + 0.5f);
         }
 
         template <TextureFormat Format>

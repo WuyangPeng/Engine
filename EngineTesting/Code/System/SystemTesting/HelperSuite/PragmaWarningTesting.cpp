@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎测试版本：0.7.1.1 (2021/03/10 14:36)
+///	引擎测试版本：0.7.2.3 (2021/09/05 22:01)
 
 #include "PragmaWarningTesting.h"
 #include "System/Helper/PragmaWarning.h"
@@ -33,32 +33,38 @@
 #include "System/Helper/PragmaWarning/LimitTraits.h"
 #include "System/Helper/PragmaWarning/ListInserter.h"
 #include "System/Helper/PragmaWarning/MathConstants.h"
+#include "System/Helper/PragmaWarning/Miniz.h"
 #include "System/Helper/PragmaWarning/MultiIndex.h"
 #include "System/Helper/PragmaWarning/Mutex.h"
 #include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "System/Helper/PragmaWarning/OpenXLSX.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "System/Helper/PragmaWarning/PolymorphicCast.h"
 #include "System/Helper/PragmaWarning/PolymorphicPointerCast.h"
 #include "System/Helper/PragmaWarning/PosixTime.h"
 #include "System/Helper/PragmaWarning/PropertyTree.h"
 #include "System/Helper/PragmaWarning/PtrVector.h"
+#include "System/Helper/PragmaWarning/PugiXml.h"
 #include "System/Helper/PragmaWarning/RecursiveMutex.h"
 #include "System/Helper/PragmaWarning/Span.h"
 #include "System/Helper/PragmaWarning/Spirit.h"
 #include "System/Helper/PragmaWarning/Thread.h"
 #include "System/Helper/PragmaWarning/Timer.h"
+#include "System/Helper/PragmaWarning/TypeIndex.h"
 #include "System/Helper/PragmaWarning/TypeTraits.h"
 
 #include STSTEM_WARNING_PUSH
 
 #include SYSTEM_WARNING_DISABLE(4100)
+#include SYSTEM_WARNING_DISABLE(4101)
 #include SYSTEM_WARNING_DISABLE(4239)
 #include SYSTEM_WARNING_DISABLE(4244)
 #include SYSTEM_WARNING_DISABLE(4505)
 #include SYSTEM_WARNING_DISABLE(4996)
 
 #include SYSTEM_WARNING_DISABLE(6001)
+#include SYSTEM_WARNING_DISABLE(6054)
 #include SYSTEM_WARNING_DISABLE(6246)
 #include SYSTEM_WARNING_DISABLE(6255)
 #include SYSTEM_WARNING_DISABLE(6258)
@@ -66,7 +72,7 @@
 #include SYSTEM_WARNING_DISABLE(6285)
 #include SYSTEM_WARNING_DISABLE(6313)
 #include SYSTEM_WARNING_DISABLE(6320)
-#include SYSTEM_WARNING_DISABLE(6320)
+#include SYSTEM_WARNING_DISABLE(6326)
 #include SYSTEM_WARNING_DISABLE(6330)
 #include SYSTEM_WARNING_DISABLE(6385)
 #include SYSTEM_WARNING_DISABLE(6386)
@@ -119,6 +125,7 @@
 #include SYSTEM_WARNING_DISABLE(26462)
 #include SYSTEM_WARNING_DISABLE(26465)
 #include SYSTEM_WARNING_DISABLE(26466)
+#include SYSTEM_WARNING_DISABLE(26467)
 
 #include SYSTEM_WARNING_DISABLE(26471)
 #include SYSTEM_WARNING_DISABLE(26472)
@@ -152,6 +159,7 @@
 #include SYSTEM_WARNING_DISABLE(26818)
 #include SYSTEM_WARNING_DISABLE(26819)
 
+#include SYSTEM_WARNING_DISABLE(28182)
 #include SYSTEM_WARNING_DISABLE(28251)
 #include SYSTEM_WARNING_DISABLE(28301)
 

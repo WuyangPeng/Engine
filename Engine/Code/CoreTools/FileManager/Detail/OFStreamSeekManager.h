@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 20:17)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:18)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_OFSTREAM_SEEK_MANAGER_H
@@ -29,10 +29,10 @@ namespace CoreTools
         explicit OFStreamSeekManager(MasterTypeReference master);
         ~OFStreamSeekManager() noexcept;
 
-        OFStreamSeekManager(const OFStreamSeekManager&) = delete;
-        OFStreamSeekManager operator=(const OFStreamSeekManager&) = delete;
-        OFStreamSeekManager(OFStreamSeekManager&&) noexcept = delete;
-        OFStreamSeekManager operator=(OFStreamSeekManager&&) noexcept = delete;
+        OFStreamSeekManager(const OFStreamSeekManager& rhs) = delete;
+        OFStreamSeekManager operator=(const OFStreamSeekManager& rhs) = delete;
+        OFStreamSeekManager(OFStreamSeekManager&& rhs) noexcept = delete;
+        OFStreamSeekManager operator=(OFStreamSeekManager&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -40,14 +40,15 @@ namespace CoreTools
         using MasterPosType = MasterType::pos_type;
 
     private:
-        [[nodiscard]] static MasterPosType GetErrorPosition();
+        NODISCARD static MasterPosType GetErrorPosition();
 
     private:
+        void ResetPosition() noexcept;
         void SeekBeginPosition();
 
     private:
-        MasterTypeReference m_Master;
-        MasterPosType m_CurrentPosition;
+        MasterTypeReference master;
+        MasterPosType currentPosition;
     };
 }
 

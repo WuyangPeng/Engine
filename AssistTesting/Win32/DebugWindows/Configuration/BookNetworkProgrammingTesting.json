@@ -1,61 +1,73 @@
 {
-  "networkedGraphicsBuildingNetworkedGamesAndVirtualEnvironmentsSuite": 
-  {
+  "networkedGraphicsBuildingNetworkedGamesAndVirtualEnvironmentsSuite": {
+    "NetworkedGraphicsBuildingNetworkedGamesAndVirtualEnvironments::NetworkedGraphicsBuildingPlaceholderTesting": 1
+  },
+
+  "multiplayerGameProgrammingSuite": {
+    "MultiplayerGameProgramming::MultiplayerGameProgrammingPlaceholderTesting": 1
+  },
+
+  "networkProgrammingForMicrosoftWindowsSuite": {
+    "NetworkProgrammingForMicrosoftWindows::MicrosoftWindowsPlaceholderTesting": 1
+  },
+
+  "effectiveTCPIPProgrammingSuite": {
+    "EffectiveTCPIPProgramming::EffectiveTCPIPProgrammingPlaceholderTesting": 1
+  },
+
+  "computerNetworksSuite": {
+    "ComputerNetworks::ComputerNetworksPlaceholderTesting": 1
+  },
+
+  "internetworkingWithTCPIPSuite": {
 
   },
 
-  "multiplayerGameProgrammingSuite": 
-  {
+  "internetworkingWithTCPIPPrinciplesProtocolsAndArchitecturesSuite": {
+    "PrinciplesProtocolsAndArchitectures::PrinciplesProtocolsPlaceholderTesting": 1
+  },
+
+  "internetworkingWithTCPIPDesignImplementationAndInternalsSuite": {
+    "DesignImplementationAndInternals::DesignImplementationPlaceholderTesting": 1
+  },
+
+  "internetworkingWithTCPIPClientServerProgrammingAndApplicationsSuite": {
+    "ClientServerProgrammingAndApplications::ClientServerProgrammingPlaceholderTesting": 1
+  },
+
+  "unixNetworkProgrammingSuite": {
 
   },
 
-  "networkProgrammingForMicrosoftWindowsSuite": 
-  {
-
+  "unixNetworkProgrammingTheSocketsNetworkingAPISuite": {
+    "UnixNetworkProgramming::TheSocketsNetworkingAPIPlaceholderTesting": 1
   },
 
-  "effectiveTCPIPProgrammingSuite": 
-  {
-
+  "unixNetworkProgrammingInterprocessCommunicationSuite": {
+    "UnixNetworkProgramming::InterprocessCommunicationsPlaceholderTesting": 1
   },
 
-  "internetworkingWithTCPIPSuite": 
-  {
-
+  "configuringWindowsServer2008NetworkInfrastructureSuite": {
+    "ConfiguringWindowsServer2008NetworkInfrastructure::ConfiguringWindowsServerPlaceholderTesting": 1
   },
 
-  "internetworkingWithTCPIPPrinciplesProtocolsAndArchitecturesSuite": 
-  {
-
+  "advancedCORBAProgrammingWithCppSuite": {
+    "AdvancedCORBAProgrammingWithCpp::AdvancedCORBAProgrammingWithCppPlaceholderTesting": 1
   },
 
-  "internetworkingWithTCPIPDesignImplementationAndInternalsSuite": 
-  {
-
+  "computerNetworksASystemApproachSuite": {
+    "ComputerNetworksASystemApproach::ComputerNetworksASystemApproachPlaceholderTesting": 1
   },
 
-  "internetworkingWithTCPIPClientServerProgrammingAndApplicationsSuite": 
-  {
-
+  "computerNetworksATopDownApproachSuite": {
+    "ComputerNetworksATopDownApproach::ComputerNetworksATopDownApproachPlaceholderTesting": 1
   },
 
-  "unixNetworkProgrammingSuite": 
-  {
-
+  "tcpIPProtocolSuite": {
+    "TCPIPProtocol::TCPIPProtocolPlaceholderTesting": 1
   },
 
-  "unixNetworkProgrammingTheSocketsNetworkingAPISuite": 
-  {
-
-  },
-
-  "unixNetworkProgrammingInterprocessCommunicationSuite": 
-  {
-
-  },
-
-  "configuringWindowsServer2008NetworkInfrastructureSuite": 
-  {
-
+  "cryptographyAndNetworkSecuritySuite": {
+    "CryptographyAndNetworkSecurity::CryptographyAndNetworkSecurityPlaceholderTesting": 1
   }
 }

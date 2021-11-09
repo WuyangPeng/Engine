@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 11:38)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,7 @@
 using std::string;
 
 CoreTools::EnvironmentVariableImpl::EnvironmentVariableImpl(const String& variableName)
-    : m_EnvironmentVariable{ nullptr }, m_EnvironmentVariableFromJson{}
+    : environmentVariable{ nullptr }, environmentVariableFromJson{}
 {
     GainEnv(variableName);
 
@@ -29,14 +29,14 @@ CoreTools::EnvironmentVariableImpl::EnvironmentVariableImpl(const String& variab
 // private
 void CoreTools::EnvironmentVariableImpl::GainEnv(const String& variableName)
 {
-    if (!System::GetEnvironment(variableName, m_EnvironmentVariable) || m_EnvironmentVariable == nullptr)
+    if (!System::GetEnvironment(variableName, environmentVariable) || environmentVariable == nullptr)
     {
         // Mac OS X Lion的任何getenv的调用将返回nullptr。这个技巧解决这个问题。
         boost::property_tree::basic_ptree<String, String> mainTree{};
 
         read_json("Configuration/EnvironmentVariable.json", mainTree);
 
-        m_EnvironmentVariableFromJson = mainTree.get<String>(variableName);
+        environmentVariableFromJson = mainTree.get<String>(variableName);
     }
 }
 
@@ -44,9 +44,9 @@ CoreTools::EnvironmentVariableImpl::~EnvironmentVariableImpl() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 
-    if (m_EnvironmentVariable != nullptr)
+    if (environmentVariable != nullptr)
     {
-        System::FreeEnvironment(m_EnvironmentVariable);
+        System::FreeEnvironment(environmentVariable);
     }
 }
 
@@ -56,8 +56,8 @@ System::String CoreTools::EnvironmentVariableImpl::GetVariable() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (m_EnvironmentVariable != nullptr)
-        return m_EnvironmentVariable;
+    if (environmentVariable != nullptr)
+        return environmentVariable;
     else
-        return m_EnvironmentVariableFromJson;
+        return environmentVariableFromJson;
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 18:10)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/02 18:27)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_BUFFER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_BUFFER_IMPL_H
@@ -29,22 +29,22 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const char* GetBuffer(int index) const;
-        [[nodiscard]] char* GetBuffer(int index);
+        NODISCARD const char* GetBuffer(int index) const;
+        NODISCARD char* GetBuffer(int index);
 
-        [[nodiscard]] const char* GetBufferBegin() const noexcept;
-        [[nodiscard]] char* GetBufferBegin() noexcept;
+        NODISCARD const char* GetBufferBegin() const noexcept;
+        NODISCARD char* GetBufferBegin() noexcept;
 
-        [[nodiscard]] size_t GetSize() const noexcept;
+        NODISCARD size_t GetSize() const noexcept;
 
-        [[nodiscard]] BufferTypeConstIter begin() const noexcept;
-        [[nodiscard]] BufferTypeConstIter end() const noexcept;
+        NODISCARD BufferTypeConstIter begin() const noexcept;
+        NODISCARD BufferTypeConstIter end() const noexcept;
 
-        [[nodiscard]] BufferTypeIter begin() noexcept;
-        [[nodiscard]] BufferTypeIter end() noexcept;
+        NODISCARD BufferTypeIter begin() noexcept;
+        NODISCARD BufferTypeIter end() noexcept;
 
     private:
-        BufferType m_Buffer;
+        BufferType buffer;
     };
 }
 

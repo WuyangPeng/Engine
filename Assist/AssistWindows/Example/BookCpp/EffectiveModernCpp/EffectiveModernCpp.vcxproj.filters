@@ -25,8 +25,38 @@
     <Filter Include="Preface 源文件">
       <UniqueIdentifier>{50eeee9b-7e5b-4379-843f-302aa35ea5c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Preface 实现文件">
+    <Filter Include="Preface 模板文件">
       <UniqueIdentifier>{7fe498ea-eaa4-4bc8-ac3f-25065a90d9c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter1 头文件">
+      <UniqueIdentifier>{ff9a5619-1a26-4f6d-92f5-be203196abf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter1 源文件">
+      <UniqueIdentifier>{a60615a0-96e3-404c-ac9c-923ff8f7f09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter2 头文件">
+      <UniqueIdentifier>{950cc7e7-6118-40e2-8d7b-d61e93c5e17f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter2 源文件">
+      <UniqueIdentifier>{9007cb6e-78e9-4f8c-8e19-efb10e1a6d3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter3 头文件">
+      <UniqueIdentifier>{dbc5a61d-bf96-4ae6-ad2c-5d2fc1d87fa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter3 源文件">
+      <UniqueIdentifier>{040c0639-56ce-4d04-83ac-aa288db97e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter4 头文件">
+      <UniqueIdentifier>{f1cb4457-6ef8-486a-9b7f-199c0f53c10f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter4 源文件">
+      <UniqueIdentifier>{e87d9d7c-20b0-4df9-ba67-1cef5beed046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter5 源文件">
+      <UniqueIdentifier>{09f8a67b-7a53-4f77-98b4-4e042a73539c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Chapter5 头文件">
+      <UniqueIdentifier>{ca30a429-b13d-4ded-9f80-adc595ba0f08}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -120,13 +150,226 @@
       <Filter>Preface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Preface\ConstructorTemplateArgumentDeductionDetail.h">
-      <Filter>Preface 实现文件</Filter>
+      <Filter>Preface 模板文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Preface\PrefaceFwd.h">
       <Filter>Preface 头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Preface\Preface.h">
       <Filter>Preface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Chapter1.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Chapter1Fwd.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms1Derive.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms1Example.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms2Derive.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms2Example.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms3Derive.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms3Example.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms4Derive.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms4Example.h">
+      <Filter>Chapter1 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Chapter2.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Chapter2Fwd.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms5.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms5Example.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms6.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms6Example.h">
+      <Filter>Chapter2 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Chapter3.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Chapter3Fwd.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms7Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms7.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms17Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms8.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms8Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms9.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms9Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms10.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms10Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms11.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms11Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms12.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms12Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms13.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms13Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms14.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms14Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms15.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms15Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms16.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms16Example.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms17.h">
+      <Filter>Chapter3 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Chapter4Fwd.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms18.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms18Example.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Chapter4.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms22Example.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms19.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms19Example.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms20.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms20Example.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms21.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms21Example.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Widget.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Gadget.h">
+      <Filter>Chapter4 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Chapter5Fwd.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms23.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms23Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Chapter5.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms24.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms24Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms25.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms25Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms26.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms26Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms27Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms27.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms28.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms28Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms29.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms29Example.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms30.h">
+      <Filter>Chapter5 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms30Example.h">
+      <Filter>Chapter5 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +387,189 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Preface\PrefaceWidget.cpp">
       <Filter>Preface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms1Derive.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms1Example.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms2Derive.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms2Example.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms3Derive.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms3Example.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms4Derive.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter1\Terms4Example.cpp">
+      <Filter>Chapter1 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms5.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms5Example.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms6.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter2\Terms6Example.cpp">
+      <Filter>Chapter2 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms7.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms7Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms8.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms8Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms9.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms9Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms10.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms10Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms11.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms11Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms12.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms12Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms13.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms13Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms14.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms14Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms15.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms15Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms16.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms16Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms17.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter3\Terms17Example.cpp">
+      <Filter>Chapter3 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms18.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms18Example.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms19.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms19Example.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms20.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms20Example.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms21.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms21Example.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Widget.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Terms22Example.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter4\Gadget.cpp">
+      <Filter>Chapter4 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms23Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms23.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms24.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms24Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms25Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms25.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms26.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms26Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms27.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms27Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms28.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms28Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms29Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms29.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms30.cpp">
+      <Filter>Chapter5 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\EffectiveModernCpp\Chapter5\Terms30Example.cpp">
+      <Filter>Chapter5 源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

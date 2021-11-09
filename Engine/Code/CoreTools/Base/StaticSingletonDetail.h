@@ -5,38 +5,47 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 20:43)
+///	引擎版本：0.7.2.3 (2021/08/31 17:07)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H
 
 #include "StaticSingleton.h"
 
-template <typename T>
-CoreTools::StaticSingleton<T>::StaticSingleton(MAYBE_UNUSED SingletonCreate singletonCreate) noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+CoreTools::StaticSingleton<T, mutexCreate>::StaticSingleton(MAYBE_UNUSED SingletonCreate singletonCreate) noexcept
 {
 }
 
-template <typename T>
-typename CoreTools::StaticSingleton<T>::ReferenceType CoreTools::StaticSingleton<T>::GetSingleton() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::StaticSingleton<T, mutexCreate>::ReferenceType CoreTools::StaticSingleton<T, mutexCreate>::GetSingleton() noexcept
 {
     static T singleton{ SingletonCreate::Init };
 
     return singleton;
 }
 
-template <typename T>
-typename CoreTools::StaticSingleton<T>::PointType CoreTools::StaticSingleton<T>::GetSingletonPtr() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::StaticSingleton<T, mutexCreate>::PointType CoreTools::StaticSingleton<T, mutexCreate>::GetSingletonPtr() noexcept
 {
     return &GetSingleton();
 }
 
-template <typename T>
-CoreTools::Mutex& CoreTools::StaticSingleton<T>::GetMutex()
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::StaticSingleton<T, mutexCreate>::MutexType& CoreTools::StaticSingleton<T, mutexCreate>::GetMutex()
 {
-    static Mutex mutex{};
+    if constexpr (mutexCreate == MutexCreate::UseOriginalStd || mutexCreate == MutexCreate::UseOriginalStdRecursive)
+    {
+        static MutexType mutex{};
 
-    return mutex;
+        return mutex;
+    }
+    else
+    {
+        static MutexType mutex{ mutexCreate };
+
+        return mutex;
+    }
 }
 
 #endif  // CORE_TOOLS_BASE_STATIC_SINGLETON_DETAIL_H

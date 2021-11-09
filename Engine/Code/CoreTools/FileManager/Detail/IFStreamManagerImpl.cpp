@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 13:02)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,11 +23,11 @@ using std::locale;
 using namespace std::literals;
 
 CoreTools::IFStreamManagerImpl::IFStreamManagerImpl(const String& fileName)
-    : m_IStream{ fileName }, m_FileName{ fileName }
+    : iStream{ fileName }, fileName{ fileName }
 {
-    if (!m_IStream)
+    if (!iStream)
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("打开文件"s) + m_FileName + SYSTEM_TEXT("失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("打开文件"s) + fileName + SYSTEM_TEXT("失败！"s));
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -38,7 +38,7 @@ bool CoreTools::IFStreamManagerImpl::IsValid() const noexcept
 {
     try
     {
-        if (!m_FileName.empty() && m_IStream)
+        if (!fileName.empty() && iStream)
             return true;
         else
             return false;
@@ -72,7 +72,7 @@ System::String CoreTools::IFStreamManagerImpl::BackupFile() const
 // private
 System::String CoreTools::IFStreamManagerImpl::GetBackupName() const
 {
-    String newName{ m_FileName };
+    String newName{ fileName };
 
     const String dot{ SYSTEM_TEXT("."s) };
 
@@ -96,13 +96,13 @@ void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* osPtr) const
     auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
 #include STSTEM_WARNING_POP
 
-    IFStreamSeekManager manager{ thisImpl->m_IStream };
+    IFStreamSeekManager manager{ thisImpl->iStream };
 
-    auto loc = m_IStream.getloc();
+    auto loc = iStream.getloc();
 
     osPtr->imbue(loc);
 
-    *osPtr << m_IStream.rdbuf();
+    *osPtr << iStream.rdbuf();
 }
 
 System::String CoreTools::IFStreamManagerImpl::GetFileContent() const
@@ -114,6 +114,7 @@ System::String CoreTools::IFStreamManagerImpl::GetFileContent() const
     if (os)
     {
         CopyContentToStream(&os);
+
         return os.str();
     }
     else
@@ -129,6 +130,6 @@ void CoreTools::IFStreamManagerImpl::SetSimplifiedChinese()
 #if !defined(TCRE_USE_GCC)
     locale chs{ "chs" };
 
-    m_IStream.imbue(chs);
+    iStream.imbue(chs);
 #endif  // !defined(TCRE_USE_GCC)
 }

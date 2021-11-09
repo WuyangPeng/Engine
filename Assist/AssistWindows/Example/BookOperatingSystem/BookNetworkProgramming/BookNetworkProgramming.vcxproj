@@ -295,8 +295,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Advanced CORBA Programming with C++.txt" />
+    <Text Include="Resource\Computer Networks A System Approach.txt" />
+    <Text Include="Resource\Computer Networks A Top-Down Approach.txt" />
     <Text Include="Resource\Computer Networks.txt" />
     <Text Include="Resource\Configuring Windows Server 2008 Network Infrastructure.txt" />
+    <Text Include="Resource\Cryptography and Network Security.txt" />
     <Text Include="Resource\Effective TCP IP Programming.txt" />
     <Text Include="Resource\Internetworking With TCP IP.txt" />
     <Text Include="Resource\Multiplayer Game Programming.txt" />
@@ -304,6 +307,7 @@
     <Text Include="Resource\Networked graphics building networked games and virtual environments.txt" />
     <Text Include="Resource\ReadMe.txt" />
     <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\TCP IP Protocol Suite.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
     <Text Include="Resource\Todo\Level 1.txt" />
     <Text Include="Resource\Todo\Level 2.txt" />

@@ -1,0 +1,9 @@
+条款3 理解decltype
+	★	decltype的主要用途大概就在于声明那些返回值型别依赖于形参型别的函数模板。
+	★	C++11的返回值型别尾序语法，即该函数的返回值型别将在参数列表之后。
+		template<typename Container,typename Index>
+		auto authAndAccess(Container& c, Index i)->decltype(c[i]);
+	★	使用decltype(auto)时需要极其小心翼翼。
+	★	绝大多数情况下，decltype会得到变量或表达式的型别而不作任何修改。
+	★	对于型别为T的左值表达式，除非该表达式仅有一个名字，decltype总是得出型别T&。
+	★	C++14支持decltype(auto)，和auto一样，它会从其初始化表达式出发来推导型别，但是它的型别推导使用的是decltype的规则。

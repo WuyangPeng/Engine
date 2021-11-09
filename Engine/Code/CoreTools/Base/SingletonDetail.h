@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 20:40)
+///	引擎版本：0.7.2.3 (2021/08/31 17:07)
 
 #ifndef CORE_TOOLS_BASE_SINGLETON_DETAIL_H
 #define CORE_TOOLS_BASE_SINGLETON_DETAIL_H
@@ -16,17 +16,17 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
-template <typename T>
-typename CoreTools::Singleton<T>::PointType CoreTools::Singleton<T>::singleton{ nullptr };
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::Singleton<T, mutexCreate>::PointType CoreTools::Singleton<T, mutexCreate>::singleton{ nullptr };
 
-template <typename T>
-CoreTools::Singleton<T>::Singleton() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+CoreTools::Singleton<T, mutexCreate>::Singleton() noexcept
 {
     CoreTools::NoexceptNoReturn(*this, &ClassType::InitSingleton);
 }
 
-template <typename T>
-void CoreTools::Singleton<T>::InitSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+template <typename T, CoreTools::MutexCreate mutexCreate>
+void CoreTools::Singleton<T, mutexCreate>::InitSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton == nullptr, "单例%s重复初始化！", typeid(T).name());
 
@@ -38,46 +38,55 @@ void CoreTools::Singleton<T>::InitSingleton() noexcept(g_Assert < 2 || g_CoreToo
 #include STSTEM_WARNING_POP
 }
 
-template <typename T>
-CoreTools::Singleton<T>::~Singleton() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+CoreTools::Singleton<T, mutexCreate>::~Singleton() noexcept
 {
     CoreTools::NoexceptNoReturn(*this, &ClassType::DeleteSingleton);
 }
 
-template <typename T>
-void CoreTools::Singleton<T>::DeleteSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+template <typename T, CoreTools::MutexCreate mutexCreate>
+void CoreTools::Singleton<T, mutexCreate>::DeleteSingleton() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
 {
     CORE_TOOLS_ASSERTION_2(singleton != nullptr, "单例%s重复删除！", typeid(T).name());
 
     singleton = nullptr;
 }
 
-template <typename T>
-typename CoreTools::Singleton<T>::ReferenceType CoreTools::Singleton<T>::GetSingleton() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::Singleton<T, mutexCreate>::ReferenceType CoreTools::Singleton<T, mutexCreate>::GetSingleton() noexcept
 {
     return *GetSingletonPtr();
 }
 
-template <typename T>
-typename CoreTools::Singleton<T>::PointType CoreTools::Singleton<T>::GetSingletonPtr() noexcept
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::Singleton<T, mutexCreate>::PointType CoreTools::Singleton<T, mutexCreate>::GetSingletonPtr() noexcept
 {
     System::NoexceptNoReturn(&ClassType::CheckSingleton);
 
     return singleton;
 }
 
-template <typename T>
-void CoreTools::Singleton<T>::CheckSingleton() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
+template <typename T, CoreTools::MutexCreate mutexCreate>
+void CoreTools::Singleton<T, mutexCreate>::CheckSingleton() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0)
 {
     CORE_TOOLS_ASSERTION_0(singleton != nullptr, "单例%s指针为空！", typeid(T).name());
 }
 
-template <typename T>
-CoreTools::Mutex& CoreTools::Singleton<T>::GetMutex()
+template <typename T, CoreTools::MutexCreate mutexCreate>
+typename CoreTools::Singleton<T, mutexCreate>::MutexType& CoreTools::Singleton<T, mutexCreate>::GetMutex()
 {
-    static Mutex mutex{};
+    if constexpr (mutexCreate == MutexCreate::UseOriginalStd || mutexCreate == MutexCreate::UseOriginalStdRecursive)
+    {
+        static MutexType mutex{};
 
-    return mutex;
+        return mutex;
+    }
+    else
+    {
+        static MutexType mutex{ mutexCreate };
+
+        return mutex;
+    }
 }
 
 #endif  // CORE_TOOLS_BASE_SINGLETON_DETAIL_H

@@ -57,8 +57,8 @@ void CoreTools::CustomTimeTesting ::TimeTest()
 
     time.ResetCustomTime();
 
-    ASSERT_APPROXIMATE(time.GetThisElapsedMillisecondTime(), 0.0, 1e-10);
-    ASSERT_APPROXIMATE(time.GetNowMillisecondTime(), 0.0, 1e-10);
+    ASSERT_RANGE(time.GetThisElapsedMillisecondTime(), 0.0, 1.0);
+    ASSERT_RANGE(time.GetNowMillisecondTime(), 0.0, 1.0); 
 }
 
 void CoreTools::CustomTimeTesting ::DescribeTest()

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 13:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,9 +15,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::WindowsCopyFileTools::WindowsCopyFileTools(const String& inFileName, const String& outFileName)
-    : m_InFileName{ inFileName }, m_OutFileName{ outFileName }
+    : inFileName{ inFileName }, outFileName{ outFileName }
 {
-    if (!System::CopySystemFile(m_InFileName.c_str(), m_OutFileName.c_str()))
+    if (!System::CopySystemFile(inFileName.c_str(), outFileName.c_str()))
     {
         THROW_WINDOWS_EXCEPTION;
     }

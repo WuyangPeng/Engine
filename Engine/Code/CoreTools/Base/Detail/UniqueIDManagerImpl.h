@@ -29,6 +29,8 @@ namespace CoreTools
     public:
         NODISCARD uint64_t NextUniqueID(int index);
 
+        void SetUniqueID(int index, uint64_t latestIndex);
+
     private:
         using Containers = std::vector<uint64_t>;
 

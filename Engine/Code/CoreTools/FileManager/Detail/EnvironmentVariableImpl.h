@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 17:30)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:09)
 
-// 获取字符串对应的环境变量。
 #ifndef CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_ENVIRONMENT_VARIABLE_IMPL_H
 
@@ -19,6 +18,7 @@
 
 namespace CoreTools
 {
+    // 获取字符串对应的环境变量。
     class CORE_TOOLS_HIDDEN_DECLARE EnvironmentVariableImpl final
     {
     public:
@@ -30,21 +30,21 @@ namespace CoreTools
         explicit EnvironmentVariableImpl(const String& variableName);
         ~EnvironmentVariableImpl() noexcept;
 
-        EnvironmentVariableImpl(const EnvironmentVariableImpl&) = delete;
-        EnvironmentVariableImpl& operator=(const EnvironmentVariableImpl&) = delete;
-        EnvironmentVariableImpl(EnvironmentVariableImpl&&) noexcept = delete;
-        EnvironmentVariableImpl& operator=(EnvironmentVariableImpl&&) noexcept = delete;
+        EnvironmentVariableImpl(const EnvironmentVariableImpl& rhs) = delete;
+        EnvironmentVariableImpl& operator=(const EnvironmentVariableImpl& rhs) = delete;
+        EnvironmentVariableImpl(EnvironmentVariableImpl&& rhs) noexcept = delete;
+        EnvironmentVariableImpl& operator=(EnvironmentVariableImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] String GetVariable() const;
+        NODISCARD String GetVariable() const;
 
     private:
         void GainEnv(const String& variableName);
 
     private:
-        TChar* m_EnvironmentVariable;
-        String m_EnvironmentVariableFromJson;
+        TChar* environmentVariable;
+        String environmentVariableFromJson;
     };
 }
 

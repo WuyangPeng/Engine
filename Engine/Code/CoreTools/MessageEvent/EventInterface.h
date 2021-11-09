@@ -51,6 +51,7 @@ namespace CoreTools
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(EventInterface);
+    CORE_TOOLS_WEAK_PTR_DECLARE(EventInterface);
 }
 
 #endif  // CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H

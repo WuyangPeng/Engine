@@ -18,10 +18,11 @@ namespace CoreTools
     {
         Default = 0,
         MemoryInformation = 1,
-        Object = 2,      
+        Object = 2,
         Entity = 3,
         Network = 4,
         Renderer = 5,
+        ZipFile = 6,
         Max,
     };
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 20:25)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:39)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_H
 #define CORE_TOOLS_FILE_MANAGER_C_WRITE_FILE_MANAGER_H
@@ -15,8 +15,8 @@
 #include "System/FileManager/Fwd/FileFlagsFwd.h"
 #include "System/FileManager/Using/CFileUsing.h"
 #include "System/Helper/UnicodeUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 #include <string>
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(CWriteFileManagerImpl);
@@ -33,31 +33,26 @@ namespace CoreTools
         using FileSetvBuf = System::FileSetvBuf;
 
     public:
-        explicit CWriteFileManager(const String& fileName);
-        ~CWriteFileManager() noexcept = default;
-        CWriteFileManager(const CWriteFileManager& rhs) noexcept = delete;
-        CWriteFileManager& operator=(const CWriteFileManager& rhs) noexcept = delete;
-        CWriteFileManager(CWriteFileManager&& rhs) noexcept = delete;
-        CWriteFileManager& operator=(CWriteFileManager&& rhs) noexcept = delete;
+        explicit CWriteFileManager(const String& fileName, bool addition = false);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint32_t GetFileByteSize() const;
+        NODISCARD uint32_t GetFileByteSize() const;
 
         // 当且仅当写入的字节数等于data的大小，操作是成功的。否则抛出Error异常。
         void Write(size_t itemSize, const void* data);
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
-        [[nodiscard]] bool PutCharacter(int character);
-        [[nodiscard]] bool PutString(const std::string& str);
-        [[nodiscard]] bool IsEOF() noexcept;
-        [[nodiscard]] bool Flush() noexcept;
-        [[nodiscard]] bool Seek(long offset, FileSeek whence) noexcept;
-        [[nodiscard]] PosType GetPosition();
-        [[nodiscard]] bool SetPosition(PosType position) noexcept;
-        [[nodiscard]] long Tell() noexcept;
+        NODISCARD bool PutCharacter(int character);
+        NODISCARD bool PutString(const std::string& str);
+        NODISCARD bool IsEOF() noexcept;
+        NODISCARD bool Flush() noexcept;
+        NODISCARD bool Seek(long offset, FileSeek whence) noexcept;
+        NODISCARD PosType GetPosition();
+        NODISCARD bool SetPosition(PosType position) noexcept;
+        NODISCARD long Tell() noexcept;
         void Rewind() noexcept;
-        [[nodiscard]] bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
+        NODISCARD bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
 
     private:
         PackageType impl;

@@ -36,11 +36,11 @@
 关联的外部库：
 
 直接关联：
-	gsl、CppCoreGuidelines、boost、stlsoft、Visual Leak Detector（Debug）、zlib、freeType。
+	gsl、CppCoreGuidelines、OpenGL、EGL、boost、stlsoft、Visual Leak Detector（Debug）、zlib、freeType、pugixml、miniz。
 	
 通过宏控制是否关联：
-	ACE、openssl、mysql、mysql connector c++、protobuf、freeglut、wxWidgets、opencv、openal、
-	lua、perl、Pantheios、Openrj、ogg、vorbis、FLTK、chipmunk2D physics。
+	ACE、openssl、mysql、mysql connector c++、protobuf、freeglut、wxWidgets、opencv、OpenAL Soft、
+	lua、OpenXLSX、perl、Pantheios、Openrj、ogg、vorbis、FLTK、chipmunk2D physics。
 
 ----------------------------
 相关模块：

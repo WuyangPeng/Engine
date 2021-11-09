@@ -36,7 +36,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{E36DA184-A9E7-4122-83A2-AE60C0617FAA}</ProjectGuid>
+    <ProjectGuid>{1B2A492D-2FAC-4CA8-B031-156ED5B41622}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NetworkedGraphicsBuildingNetworkedGamesAndVirtualEnvironments</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>

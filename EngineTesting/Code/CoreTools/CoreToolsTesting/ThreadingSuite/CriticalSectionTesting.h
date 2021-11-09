@@ -1,53 +1,62 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/05 11:50)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/02 14:11)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_CRITICAL_SECTION_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_CRITICAL_SECTION_TESTING_H
 
 #include "CoreTools/Threading/Threading.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-	class CriticalSectionTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(CriticalSectionTesting); 
-	
-	private:
-		using Function = void (ClassType::*)();
+    class CriticalSectionTesting final : public UnitTest
+    {
+    public:
+        using ClassType = CriticalSectionTesting;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
+    public:
+        explicit CriticalSectionTesting(const OStreamShared& stream);
 
-		void RecursionTest();
-		void MultithreadingLockingSuccessTest();
-		void MultithreadingLockingFailureTest();
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		// 递归测试
-		void CreateRecursionTestHolder();
+    private:
+        void DoRunUnitTest() final;
+        void MainTest();
 
-		// 多线程锁成功测试
-		void CreateLockingSuccessThread();
-		void CreateFourThread(Function function);
-		void MultithreadingSuccessCallBack();
-		void StaticValueTest();	
+    private:
+        using Function = void (ClassType::*)();
 
-		// 多线程锁失败测试
-		void CreateLockingFailureThread();
-		void MultithreadingFailureCallBack();	
-		void CreateFailureCallBackHolder();
-		void TryLockFailureTest();
+    private:
+        void RecursionTest();
+        void MultithreadingLockingSuccessTest();
+        void MultithreadingLockingFailureTest();
 
-		void DoRunUnitTest() override;		
+        // 递归测试
+        void CreateRecursionTestHolder();
 
-	private:
-		DllMutex m_CriticalSection1;
-		Mutex m_CriticalSection2;	
-	};
+        // 多线程锁成功测试
+        void CreateLockingSuccessThread();
+        void CreateThread(Function function);
+        void MultithreadingSuccessCallBack();
+        void StaticValueTest();
+
+        // 多线程锁失败测试
+        void CreateLockingFailureThread();
+        void MultithreadingFailureCallBack();
+        void CreateFailureCallBackHolder();
+        void TryLockFailureTest();
+
+    private:
+        DllMutex criticalSection0;
+        Mutex criticalSection1;
+    };
 }
 
-#endif // CORE_TOOLS_THREADING_SUITE_CRITICAL_SECTION_TESTING_H
+#endif  // CORE_TOOLS_THREADING_SUITE_CRITICAL_SECTION_TESTING_H

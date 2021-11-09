@@ -1,41 +1,43 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助测试版本：0.0.0.1 (2019/09/28 0:06)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助测试版本：0.7.2.4 (2021/10/10 19:51)
 
 #ifndef BOOK_DEBUGGING_TESTING_HELPER_H
 #define BOOK_DEBUGGING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-namespace CoreTools
-{
-	class Suite;
-}
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace BookDebugging
 {
-	class TestingHelper : public CoreTools::CMainFunctionTestingHelper
-	{
-	public:
-		CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper); 
+    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
+        using Suite = CoreTools::Suite;
 
-	private:
-        virtual int DoRun() override;
+    public:
+        TestingHelper(int argc, char** argv);
 
-		void AddSuites();   
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		void AddDebuggingCppSuite();
+    private:
+        void InitSuite();
 
-		void AddAdvancedWindowsDebuggingSuite();
+        void AddSafeCppSuite();
 
-		void AddTheDevelopersGuideToDebuggingSuite();
+        void AddDebuggingCppSuite();
 
-	private:
-		CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
-	};
+        void AddAdvancedWindowsDebuggingSuite();
+
+        void AddTheDevelopersGuideToDebuggingSuite();
+    };
 }
 
-#endif // BOOK_DEBUGGING_TESTING_HELPER_H
+#endif  // BOOK_DEBUGGING_TESTING_HELPER_H

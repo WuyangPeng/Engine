@@ -13,58 +13,2671 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="配置">
-      <UniqueIdentifier>{5f7d8933-1540-4cab-a3de-096449c75b54}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Debugging C++（C++ 程序调试实用手册）">
-      <UniqueIdentifier>{0398ccb2-d286-43ad-aba0-5c01cce26caf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Advanced Windows Debugging（Windows 高级调试）">
-      <UniqueIdentifier>{baafb2e5-3229-4a44-a1f5-494c559a620d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="The Developer%27s Guide to Debugging（软件调试实战 ）">
-      <UniqueIdentifier>{95b9c558-68b4-489c-9ab0-fedf00b59945}</UniqueIdentifier>
-    </Filter>
     <Filter Include="资源文件\Todo">
       <UniqueIdentifier>{7ea6f9ef-3c62-45e1-bcab-a039fcc6a37a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Book">
+      <UniqueIdentifier>{1ee0a1a0-036b-4ba0-a787-23695fb39752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）">
+      <UniqueIdentifier>{95b9c558-68b4-489c-9ab0-fedf00b59945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）">
+      <UniqueIdentifier>{0398ccb2-d286-43ad-aba0-5c01cce26caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）">
+      <UniqueIdentifier>{baafb2e5-3229-4a44-a1f5-494c559a620d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Placeholder 头文件">
+      <UniqueIdentifier>{c5a31206-e3da-4c01-a6c1-4788dcc5f0ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Placeholder 源文件">
+      <UniqueIdentifier>{030041e0-a6f1-4328-b815-b4049867113d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helper 头文件">
+      <UniqueIdentifier>{959b954e-411a-41e9-a633-3fbf03878ba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）">
+      <UniqueIdentifier>{4cad369a-e194-489d-9ec9-bb1981eaa2b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\0. 前言">
+      <UniqueIdentifier>{7fce6a1c-289b-4d6b-8865-09db39bd0908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略">
+      <UniqueIdentifier>{0d619c15-fed0-4f96-a623-efd7c00f4325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷">
+      <UniqueIdentifier>{831a9e4d-a227-4de9-98b9-6a88abed56ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品">
+      <UniqueIdentifier>{aa7d542d-64dc-413a-a2be-816a6da2c2b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第1章 C++的缺陷来自哪里">
+      <UniqueIdentifier>{ef2869ad-3cdd-4ecb-9f5b-338a7316a2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第2章 什么时候捕捉缺陷">
+      <UniqueIdentifier>{d87243d5-a517-46c8-b0f0-917321911b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第2章 什么时候捕捉缺陷\2.1 为什么编译器是捕捉缺陷的最好场合">
+      <UniqueIdentifier>{21ab64b5-278c-4590-8b74-7212d27b1018}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第2章 什么时候捕捉缺陷\2.2 怎样用编译器捕捉缺陷">
+      <UniqueIdentifier>{1e2e0b37-fa3d-45a7-911c-95cc1473d4eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第2章 什么时候捕捉缺陷\2.3 处理类型的正确方式">
+      <UniqueIdentifier>{33b9b5f9-be6c-439f-9d71-b559190bb751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第1部分 C++的缺陷捕捉策略\第3章 在运行时遇见错误该怎么办">
+      <UniqueIdentifier>{56378c59-a11a-49d5-8a3f-631accece0cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第4章 索引越界">
+      <UniqueIdentifier>{b661df3d-95c2-48a9-b52c-28dd27b17c37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第4章 索引越界\4.1 动态数组">
+      <UniqueIdentifier>{b903120e-a61c-487a-86f2-6a707c1eebcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第4章 索引越界\4.2 静态数组">
+      <UniqueIdentifier>{6d26bd38-844c-44dd-a239-e7dfbfb84e68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第4章 索引越界\4.3 多维数组">
+      <UniqueIdentifier>{619dfb08-5aa3-411f-a072-5999735fdc3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第5章 指针运算">
+      <UniqueIdentifier>{a36275e6-c890-464f-b543-4b1b1c6dd7fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第6章 无效的指针、引用和迭代器">
+      <UniqueIdentifier>{2729a54a-c93e-4989-ab78-f866a4fa0b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第7章 未初始化的变量">
+      <UniqueIdentifier>{40f340a5-ede4-4b30-8348-5fc308639b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第7章 未初始化的变量\7.1 初始化的数值（int、double等）">
+      <UniqueIdentifier>{660bc7d3-c2aa-4f20-8860-7dd8809716d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第7章 未初始化的变量\7.2 未初始化的布尔值">
+      <UniqueIdentifier>{549f7935-ff0a-4f1c-9139-ec2e46d7b8a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第8章 内存泄漏">
+      <UniqueIdentifier>{f8fd3277-4d58-4e3d-8988-19c997c5328f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第8章 内存泄漏\8.1 引用计数指针">
+      <UniqueIdentifier>{72816974-aa76-4c35-8bf6-56ae6e894042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第8章 内存泄漏\8.2 作用域指针">
+      <UniqueIdentifier>{4f966b55-c02e-47f9-87fe-3628800f6020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第8章 内存泄漏\8.3 用智能指针实行所有权">
+      <UniqueIdentifier>{fb8ad06b-404a-42bb-8014-02ce16889300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第9章 解引用NULL指针">
+      <UniqueIdentifier>{a6b15d95-4c9c-4c62-87cf-e5d320ce1983}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第10章 拷贝构造函数和赋值操作符">
+      <UniqueIdentifier>{2e6197c9-7fe6-4e89-b5f5-4174f331237a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第11章 避免在析构函数中编写代码">
+      <UniqueIdentifier>{575c4cae-e521-4559-8604-4fad167edf13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第12章 怎样编写一致的比较操作符">
+      <UniqueIdentifier>{948a09f5-c58d-4a2b-8342-a44229da65ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第2部分 捕捉缺陷：一次处理一个缺陷\第13章 使用标准C函数库的错误">
+      <UniqueIdentifier>{5e0bb918-61c9-4e21-8167-500355672a04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\第14章 基本的测试原则">
+      <UniqueIdentifier>{fa290de2-9aec-442f-b1f3-45a52c1fa655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\第15章 调试错误的策略">
+      <UniqueIdentifier>{86ebf3be-f565-41d6-955f-eeec0d14b9e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\第16章 使代码更容易调试">
+      <UniqueIdentifier>{29607cc7-d7f1-48ac-b22c-c4212565bb1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\第17章 总结">
+      <UniqueIdentifier>{5e978596-251c-4df1-aa3e-10da5da6e19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录A 本书所使用的scpp库的源代码">
+      <UniqueIdentifier>{92e84e5a-ec94-4801-a4ae-e5574cf47603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录B scpp_assert.hpp和scpp_assert.cpp文件的源代码">
+      <UniqueIdentifier>{7535e225-5e76-4584-a380-b27bf44d7b0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录C scpp_vector.hpp文件的源代码">
+      <UniqueIdentifier>{3d0c0057-cc56-47bd-8ef1-6b5fb4885107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录D scpp_array.hpp文件的源代码">
+      <UniqueIdentifier>{8563b0f0-fe5a-413b-a6a3-fdfc920d3080}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录E scpp_matrix.hpp文件的源代码">
+      <UniqueIdentifier>{dfb50a4e-9088-4006-892f-53a17ba4f2e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录F scpp_types.hpp文件的源代码">
+      <UniqueIdentifier>{e441d1be-6a24-416b-87cc-a86856817397}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录G scpp_refcountptr.hpp文件的源代码">
+      <UniqueIdentifier>{42592ad6-283b-4892-9d69-5d3387115343}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录H scpp_scopedptr.hpp文件的源代码">
+      <UniqueIdentifier>{f40b1a51-6bc0-4a39-b12c-5ccbcc3a7638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录I scpp_ptr.hpp文件的源代码">
+      <UniqueIdentifier>{75163e31-4b11-4a8c-914c-00061bfed79a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Safe C++（C++ 编程调试秘笈）\第3部分 捕捉缺陷的乐趣：从测试到调试到产品\附录J scpp_date.hpp和scpp_date.cpp文件的源代码">
+      <UniqueIdentifier>{3fa2542a-9d47-409c-a3c5-135f5a7c0260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\0. 前言">
+      <UniqueIdentifier>{66243cd9-6ccb-4780-9775-7424561dde3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\0. 前言\0.1 本书所使用的约定">
+      <UniqueIdentifier>{da2a41e7-81a3-40bc-9e40-f45c4e28eb99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧">
+      <UniqueIdentifier>{b918af5c-edb1-4be2-b9ce-6cc7e8e43a82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码">
+      <UniqueIdentifier>{3fb0db25-7a39-45b0-9be6-10599af250d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.1 谁需要本书？">
+      <UniqueIdentifier>{d76c44fa-a23f-4cf2-b060-9511b22399b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.2 教学方法">
+      <UniqueIdentifier>{10914813-d61f-4d7f-8307-45290f3b607d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.3 从何处开始阅读？">
+      <UniqueIdentifier>{8039e7e6-d550-4312-a01f-bfe4b2c1740f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.4 警告！并非所有的C/C++编译器都完全相同">
+      <UniqueIdentifier>{e7fc42e6-e4bb-45bb-b65e-3fe8c8139910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.5 语言无关的设计工具101">
+      <UniqueIdentifier>{4c2af4bf-7569-4f98-91cb-8c7bb1b03433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.5 语言无关的设计工具101\1.5.1 准备">
+      <UniqueIdentifier>{3205b4af-5abe-4548-b8c5-6c810cbc699f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.5 语言无关的设计工具101\1.5.2 模型！">
+      <UniqueIdentifier>{16709b1d-e0ca-4cf6-82e8-fc97c1c97302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.5 语言无关的设计工具101\1.5.3 结构图、伪代码及IPO框图">
+      <UniqueIdentifier>{863659fb-05b7-49f6-ad87-390c8d0fae29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.6 好的程序设计的五点要素">
+      <UniqueIdentifier>{9c033486-6e20-4b5a-ba3a-d55e6126ff0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.7 规则意味着可以打破">
+      <UniqueIdentifier>{ab709930-56ba-4d98-a2aa-4c66f8d89440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.7 规则意味着可以打破\1.7.1 安塞尔亚当斯（Ansel Adams）或毕加索（Picasso）">
+      <UniqueIdentifier>{0ec71dfc-1276-45dd-9817-3e5a15fdfbb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.7 规则意味着可以打破\1.7.2 注释块">
+      <UniqueIdentifier>{d28e0f07-8cb5-40fa-b5a9-10fb4ba3fe92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.7 规则意味着可以打破\1.7.3 标识符：identifiers、IDENTIFIERS和Identifiers">
+      <UniqueIdentifier>{089760e2-0ff6-4eaa-a7cc-b79171936175}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.7 规则意味着可以打破\1.7.4 间隔与缩进">
+      <UniqueIdentifier>{7a04354b-b35e-4f5b-96bb-aba73e917ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.8 数据类型">
+      <UniqueIdentifier>{524df95f-abff-43ff-9d29-5d48b5dc480d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法">
+      <UniqueIdentifier>{ce126c0a-804f-4dbd-bfe4-434c8ac163bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.1 MFC、句柄、控件及结构的命名规范">
+      <UniqueIdentifier>{f439d179-7f07-450f-a657-63f5d2c0601a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.2 一般前缀命名规范">
+      <UniqueIdentifier>{7f3e269b-72f1-4e11-bfe8-2ef8c55f688b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.3 变量命名规范">
+      <UniqueIdentifier>{b1f78594-2253-4646-aa3a-0213d4c1fabd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.4 应用程序符号命名规范">
+      <UniqueIdentifier>{cae73613-78d1-4ac5-b5a3-d83c9c4057c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.5 Microsoft MFC宏命名规范">
+      <UniqueIdentifier>{dce199e0-d527-4390-999f-1f349c89c083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.6 库标识符命名规范">
+      <UniqueIdentifier>{4f5d465a-3603-4777-9449-8a82e30c20ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.7 静态库版本命名规范">
+      <UniqueIdentifier>{e3fe97ae-290f-43e6-9954-86b8446e74c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.8 动态连接库命名规范">
+      <UniqueIdentifier>{494c7c20-4f00-43a5-a51d-433f2bb49b82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.9 匈牙利表示法\1.9.9 windows.h命名规范">
+      <UniqueIdentifier>{452d9f74-0f30-4767-bd4c-9d7c9dfec28f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.10 操作符优先级">
+      <UniqueIdentifier>{4d5bb6bd-b7f1-4d17-985a-5db5d82342dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第1章 编写好的代码\1.11 小结">
+      <UniqueIdentifier>{c2eb4a7a-3bf0-49a7-9adb-279911b1e445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化">
+      <UniqueIdentifier>{e85eee4e-28bb-4096-a490-7b271fdcd24b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.1 编码的责任与编译器的优化">
+      <UniqueIdentifier>{eda6e696-cb4e-45e3-abe6-45ae9f422b81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化">
+      <UniqueIdentifier>{3d350441-cc87-4f03-85d9-5083a61335f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.1 调度指令">
+      <UniqueIdentifier>{e1f1c9cd-c317-4fe7-bcf2-87eaecd21747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.2 函数级连接">
+      <UniqueIdentifier>{f9411d72-dbdf-4aa9-a8fa-710fca3a8721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.3 字符串池">
+      <UniqueIdentifier>{a6df06bd-0ce8-4789-880c-28b19d87fa0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.4 使用register键字">
+      <UniqueIdentifier>{39c555bd-11d4-4b18-a21b-10d9b3599679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.5 常量和复制的传播">
+      <UniqueIdentifier>{08a641ba-2b45-4c75-b611-52c3e599c212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.6 消除死代码和死存储">
+      <UniqueIdentifier>{aaea0fe1-f296-451b-8202-e64e870a3031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.7 删除冗余于表达式">
+      <UniqueIdentifier>{180fbeb7-dd27-467e-8eac-b6511919e0d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.8 优化循环">
+      <UniqueIdentifier>{cbdd99a6-c8db-4193-b546-da189674db42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.9 降低强度">
+      <UniqueIdentifier>{ad21bd83-00ae-414b-acd2-f1a8999b42ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.10 inline键字的使用">
+      <UniqueIdentifier>{b66fe45c-f6ef-4be5-8287-4c1b9eac6158}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.11 省略帧指针">
+      <UniqueIdentifier>{5c8364a7-3173-48b3-900a-bcc55c20fea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.12 关闭堆栈检查">
+      <UniqueIdentifier>{307c3fd4-1f32-412c-bc00-6c96cd676ddd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.13 覆盖堆栈">
+      <UniqueIdentifier>{31c66b8d-0b4b-4c0d-9856-b51ab03abb10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.14 函数调用之间允许使用别名">
+      <UniqueIdentifier>{a6be423f-0341-41ff-8c69-073b437bac0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.15 全局优化">
+      <UniqueIdentifier>{b9e64542-2938-4873-975f-757abffb6677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.16 产生内部函数的内联">
+      <UniqueIdentifier>{929046c6-33d4-4fca-a3b7-bd84146fbb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.2 Microsoft Visual C++的优化\2.2.17 优化math.h">
+      <UniqueIdentifier>{6b5027f6-11fd-4e19-a7b2-ebc82287ba40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.3 Microsoft C++的优化开关">
+      <UniqueIdentifier>{605f9c32-1d03-4480-a995-a6f154448e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项">
+      <UniqueIdentifier>{0682cedb-f2c8-4d5f-ae81-2f5d9370ff0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项\2.4.1 Project Settings对话框中的 General类型">
+      <UniqueIdentifier>{cca8bc5e-9ac9-45bc-be7f-18802e40ef3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项\2.4.2 Project Settings对话框中的 Code Generation类型">
+      <UniqueIdentifier>{5bdb6a63-0569-40c2-8210-d642cc83aefd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项\2.4.3 选择结构对齐方式">
+      <UniqueIdentifier>{395e0702-384c-4a15-a5e9-2316d3f4a77c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项\2.4.4 Project Settings对话框中的 Customize类型">
+      <UniqueIdentifier>{ad79256e-b745-4c1e-9829-cc1a178abaad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.4 使用 Microsoft Visual Studio设置编译器选项\2.4.5 Project Settings对话框中的 Optimizations类型">
+      <UniqueIdentifier>{ce533e61-3d74-4698-9428-0ba5b0e05712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.5 建立发行版本的建议">
+      <UniqueIdentifier>{a6885618-2821-43ec-9423-96fd6cc23a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第2章 使用编译器忧化\2.6 小结">
+      <UniqueIdentifier>{2e3e8bb9-51a1-48bd-8c14-ebeb3e12e8b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误">
+      <UniqueIdentifier>{9af6c311-3bc3-4540-a629-7671357aae5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.1 好的调试策略">
+      <UniqueIdentifier>{9b491acd-cd61-49d0-8ec5-1bd0a7d9e618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.2 四种程序错误类型">
+      <UniqueIdentifier>{1f8e76bd-b51b-4a65-a6d3-c90591fc5778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.2 四种程序错误类型\3.2.1 语法错误">
+      <UniqueIdentifier>{06d7bbd3-b73e-42e1-9c00-43c1c19cd034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.2 四种程序错误类型\3.2.2 连接错误">
+      <UniqueIdentifier>{8c660fea-c0c5-45bd-a638-430d63a219b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.2 四种程序错误类型\3.2.3 运行错误">
+      <UniqueIdentifier>{4dc408f6-fa9e-4dc8-87c2-336ab13ab92c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.2 四种程序错误类型\3.2.4 逻辑错误">
+      <UniqueIdentifier>{4592695d-a1ef-4793-8181-13be9d63dcf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.3 查看错误消息">
+      <UniqueIdentifier>{e21f9b5a-7144-4fe6-9d6b-d7c60cbd5d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.4 预防性维护">
+      <UniqueIdentifier>{dfa07a36-e750-4c93-b578-35248202aede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.4 预防性维护\3.4.1 桌面检查的含义">
+      <UniqueIdentifier>{2645dc10-3020-4cc5-8ccb-4d371daf6d95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.5 异常处理设计">
+      <UniqueIdentifier>{a6b93db2-5996-4b03-94ca-368784ef6746}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.6 “请多多支持”">
+      <UniqueIdentifier>{e9aad9bc-c585-46a7-886b-d2ea73b167e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.7 Microsoft Visual C++的帮助">
+      <UniqueIdentifier>{59817c53-29b6-4ae4-9f3a-c8c10b3c240f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第3章 逻辑与语法错误\3.8 小结">
+      <UniqueIdentifier>{780237fe-a984-440c-9f43-c5020f90f08a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger">
+      <UniqueIdentifier>{89dde431-0f09-4e0f-8548-98d3ab52f7fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.1 确认Debugger可以使用">
+      <UniqueIdentifier>{a0e377dc-97be-41c7-9139-7418679a8c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.2 启动Debugger">
+      <UniqueIdentifier>{ce35c917-445a-44cc-9436-7bc318ec355e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标">
+      <UniqueIdentifier>{4391bab5-425d-4859-a0cf-0dbe6a1f9055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.2 启动Debugger\4.2.1 Step Into和Step Over的区别">
+      <UniqueIdentifier>{48943d4a-ba03-4011-8189-88f0e4dccfde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.2 启动Debugger\4.2.2 Go">
+      <UniqueIdentifier>{4520f1e4-c4f3-47e1-8a18-5abd6dc5c9ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.2 启动Debugger\4.2.3 Run to Cursor">
+      <UniqueIdentifier>{bb99d3f4-a599-4e72-95be-6464ad14a2e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.1 Restart">
+      <UniqueIdentifier>{85ff4c53-99a3-4dca-8a95-8316e4a48cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.2 Stop Debugging">
+      <UniqueIdentifier>{c117ed75-0376-4f6e-8717-60b6a2a98017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.3 Break Execution">
+      <UniqueIdentifier>{15b3f5c5-22bd-4e51-bc79-f86f9b03d254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.4 Apply Code Changes、Edit and Continue">
+      <UniqueIdentifier>{624f29b6-df15-4e23-929c-5b4e6ec7e120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.5 Show Next Statement">
+      <UniqueIdentifier>{deddc9ff-f55b-4290-bdcc-c0ccb2aab46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.6 Step Into">
+      <UniqueIdentifier>{474a4320-5e39-4b8c-a7a9-5d1d06e5b570}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.7 Step Over">
+      <UniqueIdentifier>{c9518a65-70a9-4062-ab8d-40f1c7f80a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.8 Step Out">
+      <UniqueIdentifier>{b38ce6e5-a0f2-4982-ae04-142a333fe2e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.9 Run to Cursor">
+      <UniqueIdentifier>{2905ad2e-9133-4b90-b369-538371c4987a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.10 Quick watch">
+      <UniqueIdentifier>{08c87897-830d-404f-b6c4-3df4a4172204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.11 Watch">
+      <UniqueIdentifier>{2a2e5c27-acfb-442d-bb20-51c727caef7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.12 Variables">
+      <UniqueIdentifier>{02b54b52-de51-4928-99eb-0c73ddaa3428}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.13 Regisers">
+      <UniqueIdentifier>{b0c4aefa-b83c-410d-aa9f-071e04588040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.14 Meomry">
+      <UniqueIdentifier>{3a16322b-55b0-490b-ac12-b5a8ad23d368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.15 Call Stack">
+      <UniqueIdentifier>{0add52a8-4a69-42da-bd6d-a806843e2772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.16 Disassembly">
+      <UniqueIdentifier>{f30dd68a-6aad-4551-9f8c-cb8c325f6bd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.3 理解Debugger工具栏图标\4.3.17 Debugger Toolbar Menu Equivalents">
+      <UniqueIdentifier>{e313676b-b6d8-4b52-b467-2deb60a746e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.4 其他Debug菜单选项">
+      <UniqueIdentifier>{49a0b9bc-eef4-45a9-a12b-9cf5d80916a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.4 其他Debug菜单选项\4.4.1 Step Into Specific Function">
+      <UniqueIdentifier>{5e1fc748-b7c7-4cab-9b56-ec9e3fa0eb1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.4 其他Debug菜单选项\4.4.2 Excmpions">
+      <UniqueIdentifier>{6b203131-332d-40ca-a217-ae4051992c9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.4 其他Debug菜单选项\4.4.3 Threads">
+      <UniqueIdentifier>{2f577f5d-06b7-49ae-a039-b75654c170bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.4 其他Debug菜单选项\4.4.4 Modules">
+      <UniqueIdentifier>{fbdb93dc-4d81-4d17-9ba7-f485958801e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项">
+      <UniqueIdentifier>{dd71240a-31ca-47bb-b9f1-152cf78cf52c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.1 List Members">
+      <UniqueIdentifier>{df714018-3716-4d81-82ee-1a9e33fe599c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.2 Type Info">
+      <UniqueIdentifier>{c4528240-25c9-4daa-9d95-431926418072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.3 Parameter Information">
+      <UniqueIdentifier>{ea268487-2ce3-4aa9-9dbc-e31c9ebee0ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.4 Complete Word">
+      <UniqueIdentifier>{6a800a38-3bc8-4c43-b751-e575633698f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.5 Go Definition/Refefence">
+      <UniqueIdentifier>{8cdccd2a-ac3a-46d4-a992-46a1cca00793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.6 Go To Disassembly">
+      <UniqueIdentifier>{3f16ad81-0f6f-4d49-80a2-3780be7a780b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.5 本地菜单Debugger选项\4.5.7 Insert/Remove Breakpoint">
+      <UniqueIdentifier>{a45f2074-4a4a-448c-ac4e-1bf836745680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.6 Debugger窗口">
+      <UniqueIdentifier>{091d521d-0dcb-4fba-98b8-bc4315d3fbe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.6 Debugger窗口\4.6.1 Trae窗口">
+      <UniqueIdentifier>{798bdbee-3983-4b82-b2dc-883601f8d03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.6 Debugger窗口\4.6.2 Watch窗口">
+      <UniqueIdentifier>{fa58dfef-a9af-4c22-9fa7-e2e3fc9f0be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.7 View菜单和Debugger窗口">
+      <UniqueIdentifier>{5889faae-931a-4ed2-964d-c2362364953c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.7 View菜单和Debugger窗口\4.7.1 Workspace">
+      <UniqueIdentifier>{46d3fb54-d95c-4644-877d-97a8aa4ea539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.7 View菜单和Debugger窗口\4.7.2 Output">
+      <UniqueIdentifier>{63119529-fe31-40a6-8d17-4bfb2f42a69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.8 以不同的数据类型查看观察变量">
+      <UniqueIdentifier>{223115ec-4064-415c-bc0c-02a94e5342ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.9 打开Just－in－Time调式">
+      <UniqueIdentifier>{d90657bd-a43b-47c4-8668-1aac148b5c40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签">
+      <UniqueIdentifier>{6c1a0625-accf-4d60-950a-da8a50d72d9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.1 Hexadecimal Display">
+      <UniqueIdentifier>{888ff0a6-fc90-4231-a8db-2515f31bcfb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.2 Source Annotation">
+      <UniqueIdentifier>{18ec2079-2331-4c24-afd0-eebe0b9b7fd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.3 Code Bytes">
+      <UniqueIdentifier>{1a3f5eb8-2430-427d-8d7b-7c67070572c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.4 Symbols">
+      <UniqueIdentifier>{0643419d-89d1-4e29-9b10-09535ca868a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.5 Parameter Values">
+      <UniqueIdentifier>{88cdced5-bf4e-4bd7-ae87-2526f2355b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.6 Parameter Types">
+      <UniqueIdentifier>{fe7117a8-85e4-41a1-9577-3df9d67cda14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.7 Return Value">
+      <UniqueIdentifier>{2986202c-fde1-47a9-9d07-f40f9e3bade6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.8 Load COEF&amp; Exports">
+      <UniqueIdentifier>{a2fa0ebf-f7a6-4898-95f1-45653cf9781d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.9 Address">
+      <UniqueIdentifier>{49ad7bd1-c5f6-496d-923e-f9c51de01a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.10 Format">
+      <UniqueIdentifier>{088ba7aa-36eb-41fd-a6a2-78275a2fec29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.11 Re－evaluate Expression">
+      <UniqueIdentifier>{e7580c16-1964-48d7-859e-4b8284e25526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.12 Show Data Bytes">
+      <UniqueIdentifier>{fed9ecb0-c70f-45aa-afa6-ee6fff4788be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.13 Fixed Width">
+      <UniqueIdentifier>{1b6106bc-761d-49ae-9fbe-469e3288b939}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.14 Display Unicode Strings">
+      <UniqueIdentifier>{6ebd650e-58b3-4c2c-958f-afcb81b42aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.15 View Floating Point Registers">
+      <UniqueIdentifier>{71707cd5-648b-410d-94b3-97aa0c5dd031}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.16 Just－in－Time Debugging">
+      <UniqueIdentifier>{9c2683fb-259f-4a2c-a7c7-94af9c252cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.17 OLE RPC Debugging">
+      <UniqueIdentifier>{27da6f90-c0af-4bcc-83b2-f6968377efd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.10 Options窗口中的Debug标签\4.10.18 Debug Commands Invoke Edit and Continue">
+      <UniqueIdentifier>{ec0c700d-2093-43d4-86a1-da0f6dbeee27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.11 键盘映射">
+      <UniqueIdentifier>{654397a9-2d6d-4ca4-bcc0-4b75982aa1a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.12 Debugger快捷键">
+      <UniqueIdentifier>{98401e6a-0633-4a6a-b0b3-98aae7718f29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第4章 debugger\4.13 小结">
+      <UniqueIdentifier>{358cec9e-b642-4189-aaca-c91d88157d3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本">
+      <UniqueIdentifier>{e5ea3c44-34de-4286-bd93-2668e59d4bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.1 缺省的调试版本建立与发行版本建立设置">
+      <UniqueIdentifier>{7dfb8ea3-895a-4a57-951f-38f83e879130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.2 为调试版本建立修改工程设置">
+      <UniqueIdentifier>{21a3e5a9-81b3-4fc6-bf60-ae1c6d842a3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.2 为调试版本建立修改工程设置\5.2.1 修改调试选项">
+      <UniqueIdentifier>{9a64e686-d6c7-461a-bcc0-953074dd6a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.2 为调试版本建立修改工程设置\5.2.2 修改产生调试信息的格式">
+      <UniqueIdentifier>{ecf1127c-e4e4-4abd-9015-7a03aba6b598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.2 为调试版本建立修改工程设置\5.2.3 产生一个映射文件">
+      <UniqueIdentifier>{80d7bf7a-dcb2-4480-841d-1e97f2a9c76e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.2 为调试版本建立修改工程设置\5.2.4 重定向调试输入和输出">
+      <UniqueIdentifier>{0f029377-0809-4c3f-98c8-98cfe229cddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.3 什么是.pdb文件？">
+      <UniqueIdentifier>{26d09d7e-5ea4-469a-8240-483f4bae55f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.4 什么是.dbg文件">
+      <UniqueIdentifier>{5c75f5f3-117c-4dcf-aa1d-d5e447c3e48a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.5 调试优化的代码">
+      <UniqueIdentifier>{50a6478d-b569-42c1-b58e-0d60139cbce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.6 打开Debugger的另一种方法">
+      <UniqueIdentifier>{cd6412fe-95bf-4067-b7ed-a8c6c16b3134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.7 使用基本版或调试版本">
+      <UniqueIdentifier>{3b3eed81-086b-4e99-8ec3-1adf69525fcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.8 C/C++运行调试库">
+      <UniqueIdentifier>{29624a33-8f49-4f90-87cf-45800125c47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.8 C/C++运行调试库\5.8.1 旧版iostream.h和新版iostrearn之间的混乱">
+      <UniqueIdentifier>{f5e6ba18-bf15-443e-9cd9-6c6d90c23842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.9 连接器参考资料">
+      <UniqueIdentifier>{09545a57-b36f-4206-b87d-b06068215b0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.10 在调试版本中检测发行版本错误">
+      <UniqueIdentifier>{36992c2f-663e-449a-9151-9fd3cd7f3f10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.10 在调试版本中检测发行版本错误\5.10.1 局部变量的自动初始化">
+      <UniqueIdentifier>{bdfc1f2d-44c0-4561-b882-a8c99ca76926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.10 在调试版本中检测发行版本错误\5.10.2 检查函数指针调用稚栈的合法性">
+      <UniqueIdentifier>{d5db4028-886d-45e0-b018-942a73faabf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.10 在调试版本中检测发行版本错误\5.10.3 检查调用堆栈的合法性">
+      <UniqueIdentifier>{efbda5c6-f7d6-42b5-8074-362c9dc13604}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.11 TRACEN">
+      <UniqueIdentifier>{d610b6ac-b10e-4c62-85cc-6a3053afcbbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.12 VEAIFY宏">
+      <UniqueIdentifier>{bf1d4787-b262-4fb2-ab2d-72e2c1d92763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.13 移植Visual C++旧的32位版本">
+      <UniqueIdentifier>{ffb66201-85c9-422a-9342-ee898b138c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.13 移植Visual C++旧的32位版本\5.13.1 转换早期的32位工作空间和工程">
+      <UniqueIdentifier>{0a4fc166-d8e2-49d5-9885-ed331034ad24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.13 移植Visual C++旧的32位版本\5.13.2 与Visual C++以前的版本共存">
+      <UniqueIdentifier>{abece9ad-06f0-45d5-add3-765a417dd5f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第1部分 代码开发技巧\第5章 调试版本与发行版本\5.14 小结">
+      <UniqueIdentifier>{18514372-fe42-40f2-9428-424472995cfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境">
+      <UniqueIdentifier>{c31102ce-f5e4-4de6-ae35-94ff14b0f34d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误">
+      <UniqueIdentifier>{36df9bce-acdb-440b-9ba2-00fc402f2719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试">
+      <UniqueIdentifier>{4b6b2ad6-621c-40f4-8c8f-28250abae843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.1 启动Debugger的快速方法">
+      <UniqueIdentifier>{9b6c8ccf-4634-4213-ada3-b1d75737e60b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.2 变量初始化跟踪">
+      <UniqueIdentifier>{b85497bd-5d72-42df-aa91-557ed4644af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.3 小心调试代码">
+      <UniqueIdentifier>{3af36c37-cd28-442a-a045-9e295e0d59fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.4 快速查看变量的内容">
+      <UniqueIdentifier>{91909160-1f5b-4a02-9ea9-353c5ca9b9eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.5 中途停止Debugger">
+      <UniqueIdentifier>{2f2b97d4-12b9-4a32-8149-b9dfa3a98284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.6 执行到代码的指定行">
+      <UniqueIdentifier>{33532821-dfef-48d9-b6ec-2f5ffdb208d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.7 全速执行到一个断点">
+      <UniqueIdentifier>{c20cf6c4-b73f-4cd3-a481-f9020fdce509}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.8 运行至光标处">
+      <UniqueIdentifier>{2e1569aa-83e4-4303-9645-c78c2d6a9de5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.1 快速启动调试\6.1.9 现在测试">
+      <UniqueIdentifier>{f944f93e-ff73-4c2c-8822-acd48e0871ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧">
+      <UniqueIdentifier>{55b33906-a730-480b-b906-4204e5f2d5b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧\6.2.1 使用新值运行">
+      <UniqueIdentifier>{841be9d8-3fed-4808-9e7d-d3ff2e44a53d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧\6.2.2 循环调试技巧">
+      <UniqueIdentifier>{11109356-7493-4639-a66c-c2225f2c728c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧\6.2.3 调用调试函数">
+      <UniqueIdentifier>{ecb7bf90-94f3-42e7-b663-0127b36c3ec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧\6.2.4 递归调用与调用堆栈">
+      <UniqueIdentifier>{fcb76aac-5cf6-412d-afea-a43f704b5be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.2 高级Debugger技巧\6.2.5 查看反汇编代码">
+      <UniqueIdentifier>{addc11e7-b85a-41e4-b9d7-8a6fdf7579f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.3 进一步观察变量">
+      <UniqueIdentifier>{17e1bf6b-4008-4657-a3c6-c0b5ef1c9799}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.3 进一步观察变量\6.3.1 使用QuickWatch窗口">
+      <UniqueIdentifier>{4718a574-08f8-4184-b27c-dda9055c430e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.3 进一步观察变量\6.3.2 使用Watch窗口">
+      <UniqueIdentifier>{05ba0a44-1863-4f2a-a75f-007243ade311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第6章 定位、分析和修复命令行代码错误\6.4 小结">
+      <UniqueIdentifier>{9e39ba8b-9624-475d-82d3-bea46b0235e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码">
+      <UniqueIdentifier>{3b407c0e-f959-4162-90ad-eb5349d99e99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步">
+      <UniqueIdentifier>{5db072c3-731c-4910-8f89-36a07647cef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步\7.1.1 数据类型">
+      <UniqueIdentifier>{f791d959-a044-4674-9eaa-8e4831e40e4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步\7.1.2 寄存器">
+      <UniqueIdentifier>{61ab22fe-25d9-4c42-8069-8873838f9b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步\7.1.3 寻址模式">
+      <UniqueIdentifier>{921fcd5c-b159-42fa-ba16-ef373c10befb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步\7.1.4 指针">
+      <UniqueIdentifier>{1ba4a9a9-3063-47fd-a69f-c7f34106d24b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.1 汇编语言初步\7.1.5 协处理器">
+      <UniqueIdentifier>{31588c2b-ab8a-45fa-93a9-1233f7e5d878}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试">
+      <UniqueIdentifier>{93006f50-5be1-440e-84d7-e0318a70b544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试\7.2.1 减法运算">
+      <UniqueIdentifier>{eb5017a9-5c27-459f-a1c8-ff478d14a2d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试\7.2.2 使用256位整数">
+      <UniqueIdentifier>{ed8c6d68-0f00-40b4-adb4-aae328073228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试\7.2.3 程序循环">
+      <UniqueIdentifier>{7343fdae-df65-4490-9def-edc994a0e3a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试\7.2.4 使用协处理器求和实数">
+      <UniqueIdentifier>{d2f33920-f9c3-4db2-99d0-fcc97a0744f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.2 调试\7.2.5 使用协处理器计算正切值">
+      <UniqueIdentifier>{f70cc0cb-cfc5-4d01-98b9-914e27f0ffe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第7章 调试内联汇编语言代码\7.3 小结">
+      <UniqueIdentifier>{81343629-3e2b-4414-a435-6d01b0d4113d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误">
+      <UniqueIdentifier>{1bd16daf-86e2-4000-b72b-a99608c44f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.1 使用两台计算机调试">
+      <UniqueIdentifier>{96b52046-38ea-44dc-ab20-eb1d0b6e47a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.1 使用两台计算机调试\8.1.1 准备远程目标计算机">
+      <UniqueIdentifier>{45069908-aab6-44be-abef-2adcc29eb302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.1 使用两台计算机调试\8.1.2 准备主计算机">
+      <UniqueIdentifier>{e58c406e-05e9-4364-b9a7-b11348942617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.1 使用两台计算机调试\8.1.3 启动调试会话">
+      <UniqueIdentifier>{74af849b-02e9-4079-83e9-f4ca74d85b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.2 简明Windows入门">
+      <UniqueIdentifier>{44e9a6a2-1740-4494-9bdb-0d7742f87e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.2 简明Windows入门\8.2.1 基本的Windows代码">
+      <UniqueIdentifier>{ab6a95b7-194c-4ada-b919-d57d48919bd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.2 简明Windows入门\8.2.2 调试文件详述">
+      <UniqueIdentifier>{621ae1e6-1c3c-459b-aed3-2069725ce189}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.2 简明Windows入门\8.2.3 程序执行的情况">
+      <UniqueIdentifier>{4c78c9e8-8732-47cd-bf3b-57a1d54c0fe3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.3 调试">
+      <UniqueIdentifier>{da48534b-aa23-4b9a-9360-a13e2a5cb421}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.3 调试\8.3.1 一个动画位图程序">
+      <UniqueIdentifier>{5b411918-9fe8-4b71-bcd1-a7fa3d1f414c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.3 调试\8.3.2 使用鼠标绘画">
+      <UniqueIdentifier>{e3397bc7-49d5-4d02-acb9-26ea9741ee43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第2部分 面向过程的环境\第8章 在Windows代码中定位、分析和修复错误\8.4 小结">
+      <UniqueIdentifier>{3e9107ee-e320-42d1-bdf9-d9a3687543b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境">
+      <UniqueIdentifier>{5b5a7c3f-abd9-4e05-bf56-18adf9e88209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误">
+      <UniqueIdentifier>{105769c0-a97d-42ea-bcf8-1fc970da9818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.1 高级调试工具">
+      <UniqueIdentifier>{20157b39-4617-4e2b-a11c-1a1fcad6c754}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.1 高级调试工具\9.1.1 内存卸出">
+      <UniqueIdentifier>{67678126-5de1-49f8-9c48-2eea9bbe7563}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.1 高级调试工具\9.1.2 定位错误参数从何处传递而来">
+      <UniqueIdentifier>{437ffd1d-2581-416e-a32e-f6dec07ccc2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.1 高级调试工具\9.1.3 查找何处修改了指针">
+      <UniqueIdentifier>{e8b48b16-5bd4-4a7b-8368-1a8b1fc07079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素">
+      <UniqueIdentifier>{1f3da7ab-4823-494a-823d-9931a3b04a54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.1 ClassView窗口的 Grouped by Access功能">
+      <UniqueIdentifier>{3c10a998-0190-40b5-9d18-0441bb615b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.2 ClassView窗口的 Base Classes功能">
+      <UniqueIdentifier>{8dea3ec3-38f2-4118-ac4d-ef763193c404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.3 ClassView窗口的 References功能">
+      <UniqueIdentifier>{e703db3a-dd8d-49b7-b455-c6312337c90f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.4 ClassView窗口的 Derived Classes功能">
+      <UniqueIdentifier>{da22ff98-8fdf-4cc1-b33e-c3858679668e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.5 ClassView窗口中菜单的其余项">
+      <UniqueIdentifier>{c350c0ea-2a6d-40e2-85d0-54ff7c577dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.6 ClassView窗口的Properities功能">
+      <UniqueIdentifier>{d540150b-22db-4caa-bd8f-86e246e2ea2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.7 在ClassView窗日中添加文件夹">
+      <UniqueIdentifier>{6b452f08-285a-45bd-8140-90a8b7ee24a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.8 在文件夹之间移动类">
+      <UniqueIdentifier>{90e119ff-4fd4-47ba-95bd-0e9e6bc7d124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.2 Class View窗口要素\9.2.9 隐藏或显不 ClassView窗口">
+      <UniqueIdentifier>{2752f973-5fb2-478d-ac32-04fc77d55f21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.3 调试ardc和argv[]">
+      <UniqueIdentifier>{c749df36-1af9-41e2-8d4e-279c06b2b36a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第9章 定位、分析和修复命令行中的错误\9.4 小结">
+      <UniqueIdentifier>{4a9dce07-6b6c-4da1-b901-065d19ed4061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序">
+      <UniqueIdentifier>{95803a0e-3726-4d68-b03b-bf8054647baa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.1 为什么使用类库">
+      <UniqueIdentifier>{db0733e3-9754-4175-8be1-b2be78b9b14d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.2 一个真正的基础类一一CObject">
+      <UniqueIdentifier>{21c3236d-34d4-4eb6-a30e-08c6b105b439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.3 什么是应用程序向导和类向导">
+      <UniqueIdentifier>{075a6f28-6b35-4733-ae9e-3a5ced9a954f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序">
+      <UniqueIdentifier>{74ab2d8e-b844-4034-a015-82d5555f4bec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序\10.4.1 使用AppWizard">
+      <UniqueIdentifier>{ec6935b7-5c8c-414c-949e-daca6769020c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序\10.4.2 使用 ClassWizard">
+      <UniqueIdentifier>{6bd86e84-31de-4168-b9f1-757d55d2f660}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序\10.4.3 建立AppWizard代码">
+      <UniqueIdentifier>{6ee51f03-d156-4dc7-aa29-82c39070baa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序\10.4.4 AppWizard模板代码">
+      <UniqueIdentifier>{0fab4c70-d501-42f7-8142-4b707fd26db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.4 一个图形程序\10.4.5 在客户区的图形对象">
+      <UniqueIdentifier>{c4cf8280-95ba-411d-90f4-e5a23fa142d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.5 剖面法">
+      <UniqueIdentifier>{8cc735b5-5153-4f42-b643-22a796a63cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第10章 使用MFC类库开发Windows程序\10.6 小结">
+      <UniqueIdentifier>{522254ae-bead-4364-a084-6e27d2f4a9b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误">
+      <UniqueIdentifier>{770aff95-0b3d-44fa-8696-ec227dd41b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.1 内存问题">
+      <UniqueIdentifier>{e4677305-25f7-4e58-bb32-162cf1f14686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.1 内存问题\11.1.1 有问题的代码">
+      <UniqueIdentifier>{f187e312-e961-451d-899c-93545524078c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.1 内存问题\11.1.2 定位和分析">
+      <UniqueIdentifier>{70c67d17-b367-454c-9036-9114514877e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.1 内存问题\11.1.3 修复工程">
+      <UniqueIdentifier>{58b809c2-8ed0-4cc5-aa96-19597a7c8e01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.2 绘图问题">
+      <UniqueIdentifier>{59aedb66-1bdc-4bd1-9e5c-72afbc948160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.2 绘图问题\11.2.1 有问题的代码">
+      <UniqueIdentifier>{beed0fd2-f300-4b98-a484-3584bcf47445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.2 绘图问题\11.2.2 定位和分析">
+      <UniqueIdentifier>{8e680a46-b530-447a-ac69-c271aa5e76f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.2 绘图问题\11.2.3 修改工程">
+      <UniqueIdentifier>{42fade6a-a1c8-4b89-b5a9-cfaa0ea1a051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第3部分 面向对象过程的环境\第11章 定位、分析和修复 MFC Windows代码中的错误\11.3 小结">
+      <UniqueIdentifier>{b416e1eb-eb8c-4b51-85c7-ef1ce1164d6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）">
+      <UniqueIdentifier>{365ef646-bfc3-46b6-a2c1-d85519215050}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践">
+      <UniqueIdentifier>{456fe35b-a946-4f1c-bff2-7f8ff0717da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.1 多体系结构">
+      <UniqueIdentifier>{150e36e9-ae80-4ac0-be57-e7e5dbfe7338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.2 掌握 C++">
+      <UniqueIdentifier>{09de8d47-ae70-4c43-a6bc-74a77fc3c975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.4 初识 STL">
+      <UniqueIdentifier>{7d35bdcf-92b5-4dc7-ac15-afa482c46908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.5 STL和HP公司">
+      <UniqueIdentifier>{3777330d-5bbd-436b-ba9b-fe930fc62301}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.3 STL——进退维谷的数据结构">
+      <UniqueIdentifier>{83a60d2b-d93e-4dd7-a9bc-6b6ee4d69e5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.6 大众化的 STL">
+      <UniqueIdentifier>{a9800dd1-044a-4112-80e7-19540ec169b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.7 STL总览">
+      <UniqueIdentifier>{a9c7b406-9c63-4ce0-8735-1a8d5297cd9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.8 ANSI/ISO C++接受STL的过程">
+      <UniqueIdentifier>{688d3c07-4309-456e-93e3-98d4b17e5ba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件">
+      <UniqueIdentifier>{279fdc78-f66c-4f3b-8972-53178f516bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件\12.9.1 什么是容器？">
+      <UniqueIdentifier>{d28f3499-d4f0-4155-b752-e4b61ee915a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件\12.9.2 什么是适配器？">
+      <UniqueIdentifier>{f6d84279-ff07-4c2a-a101-630c72041c64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件\12.9.3 什么是算法？">
+      <UniqueIdentifier>{696614b1-2880-4dc2-8568-668b9090e114}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件\12.9.4 什么是迭代器？">
+      <UniqueIdentifier>{23fc78e0-c42c-41ea-881d-4fa4091af710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.9 STL基本组件\12.9.5 其他的STL组件">
+      <UniqueIdentifier>{7121684d-719c-41a2-b26f-4007c06367e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.10 完整的STL程序包">
+      <UniqueIdentifier>{ffddd37f-570f-403e-bbd2-09e9b57f49fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.11 杂乱的C/C++家族">
+      <UniqueIdentifier>{98d527e9-22bc-4a80-9d58-9bf424e59bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.12 回顾数据结构">
+      <UniqueIdentifier>{d8c06c57-1e9c-4601-9c74-09aa472d80eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.12 回顾数据结构\12.12.1 静态与动态">
+      <UniqueIdentifier>{fa34465b-23ad-4f57-9f2f-9e1e29523c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.12 回顾数据结构\12.12.2 类型指针">
+      <UniqueIdentifier>{261f47ed-8da4-4a6b-bffb-dab7f05df470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.12 回顾数据结构\12.12.3 Void指针">
+      <UniqueIdentifier>{8067cf5d-1d62-425a-b4e1-e64fe72c6b2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.13 复习匈牙利命名法">
+      <UniqueIdentifier>{e3e04ff1-93c5-453b-b54e-24d3da78c4da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.14 函数重载">
+      <UniqueIdentifier>{630083b3-5b6a-4629-b094-6e70882097db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.15 函数指针">
+      <UniqueIdentifier>{9f678fe7-ab44-48bf-bd1c-bf694591985d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.16 运算符重载">
+      <UniqueIdentifier>{c2f61409-e2e5-4b56-a02a-3b24230b690d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.16 运算符重载\12.16.1 运算符和函数调用的重载">
+      <UniqueIdentifier>{22846e6f-5562-464b-88a5-00090010c162}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.16 运算符重载\12.16.2 编写自己的重载运算符">
+      <UniqueIdentifier>{aa90b30f-f62a-4238-99a3-9046702495b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.17 从结构到模板">
+      <UniqueIdentifier>{75b01385-f1ec-4799-8cca-7d0eda3633ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.17 从结构到模板\12.17.1 template关键字">
+      <UniqueIdentifier>{dce59930-9347-4bd4-aebd-057a848df607}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.17 从结构到模板\12.17.2 模板语法">
+      <UniqueIdentifier>{5650748c-f45f-413a-8d4d-52520fdba8f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.17 从结构到模板\12.17.3 模板函数">
+      <UniqueIdentifier>{325a3e78-915b-42b9-966c-e79abaa30f2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.17 从结构到模板\12.17.4 模板类">
+      <UniqueIdentifier>{4525e709-0bd5-43ff-8f0c-07759246b462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.18 为什么STL比模板好">
+      <UniqueIdentifier>{b0b2a166-df72-4c29-809b-83ec010cdc35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第12章 STL编程实践\12.19 小结">
+      <UniqueIdentifier>{c19fe27d-f18b-431b-9f9e-b419d4c571b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误">
+      <UniqueIdentifier>{6f27f938-5612-4a02-b3c7-a0934ca8bac8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题">
+      <UniqueIdentifier>{b6d7f0f5-2257-42d8-8fea-c9faa49f9896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.1 用迭代器遍历容器">
+      <UniqueIdentifier>{1073e17e-de8c-4110-8ef3-491ac1b80965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.2 仔细研究迭代器">
+      <UniqueIdentifier>{272ae4b6-36a4-4b42-a358-3b85ee429ae3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.3 流迭代器">
+      <UniqueIdentifier>{af773337-5e93-4249-8c70-6b348e88dd65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.4 为什么使用end%28%29">
+      <UniqueIdentifier>{e2c9d168-efce-4360-8035-c59372265d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.5 复制列表">
+      <UniqueIdentifier>{66b1cc1f-e746-4593-b418-b142ffdbadf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.6 列表中的列表">
+      <UniqueIdentifier>{b889e9dc-ffbf-4e6b-bb74-60ffae7e1ed9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.7 STL字符串指针的麻烦">
+      <UniqueIdentifier>{b6b32da5-c37d-4b9b-ac02-0e933232970f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.1 从标准C++转向STL语法的过程中出现的问题\13.1.8 释放 STL指针">
+      <UniqueIdentifier>{3e10c3d0-952d-4efa-880a-2238abfb6c2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子">
+      <UniqueIdentifier>{66b12179-c000-43c9-8450-35ea0f27061a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子\13.2.1 第一步——更新aSingleCard类">
+      <UniqueIdentifier>{9ac64a06-115e-45db-9191-9ea6801d068e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子\13.2.2 第二步——更新 WarDeck类">
+      <UniqueIdentifier>{8586283b-0c6b-404b-86aa-129f663af126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子\13.2.3 第三步——修复STL代码的执行错误">
+      <UniqueIdentifier>{2d66c43e-b62e-4186-ac08-756d816b496a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子\13.2.4 第四步——更新Opponent类">
+      <UniqueIdentifier>{28b0c2e6-8659-41e7-b058-d533106dafa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.2 一个C++程序转变为STL语法的例子\13.2.5 第五步——运转的STL程序">
+      <UniqueIdentifier>{7d2bd2ff-fb32-4088-9ccf-4d5c1734a6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.3 STL语法的源文件Wargame.cpp">
+      <UniqueIdentifier>{ccde4230-c7b3-489a-978a-d7d3dae0aeec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第4部分 标准模板库（STL）\第13章 定位、分析和修复STL代码中的错误\13.4 小结">
+      <UniqueIdentifier>{cb1b5c6e-176b-48ed-af7e-5c41f2d50133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题">
+      <UniqueIdentifier>{b7e6ac06-54be-477d-97ac-849b01da60ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作">
+      <UniqueIdentifier>{d113255e-1076-4452-9f7d-4a7bbf683ea1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.1 创建一个基于MFC的动态链接库">
+      <UniqueIdentifier>{f931a923-1f80-4fc3-900b-8f1ef4c67ec4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.1 创建一个基于MFC的动态链接库\14.1.1 头文件 Framer.h">
+      <UniqueIdentifier>{adbb980b-ba7b-4ccf-b03a-181ee2a3b5be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.1 创建一个基于MFC的动态链接库\14.1.2 源代码文件Framer.cpp">
+      <UniqueIdentifier>{f8344673-9f07-46f8-a84b-ae75dd28c44b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.1 创建一个基于MFC的动态链接库\14.1.3 建立Framer.dll">
+      <UniqueIdentifier>{88968fd7-5ee7-4acd-87b7-9b8faa898c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.2 创建使用DLL的主应用程序">
+      <UniqueIdentifier>{3ffaa4f1-1720-4954-9054-1390b2e8071f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.2 创建使用DLL的主应用程序\14.2.1 头文件 DLLDemoView.h">
+      <UniqueIdentifier>{8c5ac675-26b0-41d4-b5e3-679c71953595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.2 创建使用DLL的主应用程序\14.2.2 源代码文件DLLDemoView.cpp">
+      <UniqueIdentifier>{a766759b-5103-4b58-8b52-edb56a2c99f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.3 更加仔细地查看">
+      <UniqueIdentifier>{ff842646-4578-4187-a0eb-e9bf4863be70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.3 更加仔细地查看\14.3.1 远程调试">
+      <UniqueIdentifier>{072bd4da-7450-4fc0-a7c4-ea110e9e6945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.3 更加仔细地查看\14.3.2 有问题的代码">
+      <UniqueIdentifier>{9c8e92bd-b7c5-466d-8673-dd682b629133}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.3 更加仔细地查看\14.3.3 改正后的代码">
+      <UniqueIdentifier>{4a97e845-1edd-4e0c-b1d1-9a097bb91a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第14章 使用DLL工作\14.4 小结">
+      <UniqueIdentifier>{a11b5fb5-f3bc-48b4-8e7f-4a9096432391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作">
+      <UniqueIdentifier>{75b33f0b-a540-49ce-ac60-1eb19ad156d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.1 开发一个 ActiveX控件">
+      <UniqueIdentifier>{a555a727-748f-4ba2-ac18-e8a137372ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.1 开发一个 ActiveX控件\15.1.1 使用Colltrolwizard">
+      <UniqueIdentifier>{b2e5aea7-fe83-4629-bfeb-b101ca5caa8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.1 开发一个 ActiveX控件\15.1.2 Test Container">
+      <UniqueIdentifier>{8d398627-92f3-4422-a7ef-ec45bad63711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.1 开发一个 ActiveX控件\15.1.3 产生一个真实的Clock控件">
+      <UniqueIdentifier>{be01c59a-6d1e-41b0-8717-8cf06d75a363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.2 调试 Clock控件">
+      <UniqueIdentifier>{3e01571a-1f2c-436f-a3ce-89076340dd00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.2 调试 Clock控件\15.2.1 准备远程目标计算机">
+      <UniqueIdentifier>{34777079-b76c-4035-afe3-6c4b53caf9bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.2 调试 Clock控件\15.2.2 准备主计算机">
+      <UniqueIdentifier>{5566ba20-256c-4d3a-a50c-4f9883aff396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.2 调试 Clock控件\15.2.3 开始调试过程">
+      <UniqueIdentifier>{8f1bf8c4-3cff-4c50-93ba-ddd4b376a274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.2 调试 Clock控件\15.2.4 查找问题">
+      <UniqueIdentifier>{fff3debd-d602-48cd-9181-f8ce1d8d9889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第15章 使用ActiveX控件工作\15.3 小结">
+      <UniqueIdentifier>{4fd17e34-5558-40e2-9fdc-e91945c9b335}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML">
+      <UniqueIdentifier>{8a653abc-ca8b-4abf-8339-428c7f3223b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程">
+      <UniqueIdentifier>{9b891aa9-c7b2-43e0-9c8f-8e0f33e46299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.1 COM对象模型">
+      <UniqueIdentifier>{179f0739-ee27-4c30-8c9a-e9c866a85631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.2 创建一个ATL多边形工程">
+      <UniqueIdentifier>{9b7aa7f3-583e-4d76-859f-f92f9580f94e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.2 创建一个ATL多边形工程\16.2.1 优化模块代码">
+      <UniqueIdentifier>{2237e1e5-462d-4266-9b45-7ddf052d38d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.2 创建一个ATL多边形工程\16.2.2 测试控件">
+      <UniqueIdentifier>{536dc0ce-727f-4fcd-b27d-1a43d7b1d3ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.3 调试ATLCOM控件">
+      <UniqueIdentifier>{8fe46634-f99a-46a2-b91b-7596408f1b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第16章 调试 COM、ATL和DHTML\16.4 小结">
+      <UniqueIdentifier>{2020fa6a-a9c7-47a1-9feb-6e1888b225b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.1 产生一个STL和MFC应用程序">
+      <UniqueIdentifier>{0b6a70f8-9c12-4ce2-88d5-057bfaf90d4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.1 产生一个STL和MFC应用程序\17.1.1 复数">
+      <UniqueIdentifier>{4792a794-7a40-43d3-a040-7a6ccbeecfa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.1 产生一个STL和MFC应用程序\17.1.2 模板语法">
+      <UniqueIdentifier>{ddc2b5d7-9f85-4e01-98dc-8bbd7d3b34a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.1 产生一个STL和MFC应用程序\17.1.3 基本的应用程序代码">
+      <UniqueIdentifier>{25e85608-6b0a-43a5-b3c1-682050c0c488}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.2 调试">
+      <UniqueIdentifier>{5ef5bfea-cfb4-4931-abdc-51ec5b6bd992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Debugging C++（C++ 程序调试实用手册）\第5部分 特殊的调试问题\第17章 STL和 MFC编程\17.3 小结">
+      <UniqueIdentifier>{ae3ddd22-9d21-4c2e-aaff-63f6c6d5958c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.">
+      <UniqueIdentifier>{846b7899-be67-4df8-9e3a-5f7a2a3b69f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.1 序言">
+      <UniqueIdentifier>{a26a4833-5234-4157-b123-e88769914e2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言">
+      <UniqueIdentifier>{a162bf29-5101-456e-984e-39e092b13202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.3 作者简介">
+      <UniqueIdentifier>{b781ba7a-db71-4819-a7ed-d360d1af6b94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.1 本书的读者对象">
+      <UniqueIdentifier>{f1e0570e-e86b-4545-b50a-0f5f8f0aaf15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.2 软件开发人员">
+      <UniqueIdentifier>{eb31d5a0-95eb-4078-b6bf-f742ede4df42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.3 质量保证工程师">
+      <UniqueIdentifier>{9303a49e-c1f4-442d-9b1c-ff310de34b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.4 产品支持工程师">
+      <UniqueIdentifier>{c80f4b3e-43d1-452d-8608-7eebe1da987d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.5 有志者事竟成">
+      <UniqueIdentifier>{8d5e0dc9-3611-4c51-b49c-001e4bc46174}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.6 好奇心和学习的愿望">
+      <UniqueIdentifier>{4de20b06-28b1-4250-ad2d-aa58c4859312}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.7 C/C++">
+      <UniqueIdentifier>{2c2a43fa-d594-4c26-b28d-3038adbc04a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.8 Windows内核">
+      <UniqueIdentifier>{6d682133-2960-4a50-9bf9-dae187fa2b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.9 内容组织">
+      <UniqueIdentifier>{dddabc67-1ca0-496a-9678-f8987773a150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.10 所需工具">
+      <UniqueIdentifier>{777896e7-a169-48b4-9835-90965ce2f316}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.11 示例代码">
+      <UniqueIdentifier>{fb3cec4f-b499-4f3e-ac68-02b4a1230569}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.12 编写体例">
+      <UniqueIdentifier>{8d0509a5-56ec-4486-a67d-e3e52ef900fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.13 支持的Windows版本">
+      <UniqueIdentifier>{5d9cd529-7d3c-4105-a7c9-a8231d72a829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.14 技术支持">
+      <UniqueIdentifier>{d0429984-ed65-44df-97b4-3aac13c0e99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\0.\0.2 前言\0.2.15 致谢">
+      <UniqueIdentifier>{1abd71ed-54b6-45c5-a680-fde081a688a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述">
+      <UniqueIdentifier>{d6944f9f-6f7c-44b2-af38-28b1ed1c46d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践">
+      <UniqueIdentifier>{8c9d9aef-d4ce-44a5-8125-15939821ca33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题">
+      <UniqueIdentifier>{0c091f31-6214-4fba-b57c-2c268e1244fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\附录A　应用程序验证器的测试设置">
+      <UniqueIdentifier>{6e257199-3c32-4d5f-98e0-ace31633fe24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介">
+      <UniqueIdentifier>{8f2196e8-e448-4e88-9262-26384c8d6f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介">
+      <UniqueIdentifier>{86193d6f-16ac-4fbd-9809-c59f44ce6a0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密">
+      <UniqueIdentifier>{9c814126-e6db-4bab-b91d-6e1e3c624f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理">
+      <UniqueIdentifier>{50c1801a-52d4-424f-87a5-e6252e3572db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈">
+      <UniqueIdentifier>{f875918b-d227-451e-8c53-69a593737e95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆">
+      <UniqueIdentifier>{e8eedc3d-41f0-4802-bb38-f39798c501c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全">
+      <UniqueIdentifier>{0baad479-8097-4280-b6ba-c36d556a1403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信">
+      <UniqueIdentifier>{d9f9aa68-560e-4a00-bd4b-479b580a744a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏">
+      <UniqueIdentifier>{55677d10-c6b1-4ede-b070-29c548f46ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步">
+      <UniqueIdentifier>{4a9f1ebd-0ee2-494f-9c47-c9a8bebc820f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展">
+      <UniqueIdentifier>{9a7e6bb7-2f40-4e57-9892-fec97e288611}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试">
+      <UniqueIdentifier>{b4def325-a1cc-4c3f-a3c7-25eab7993c7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试">
+      <UniqueIdentifier>{dd773f72-0176-4c17-bdb2-06d582baf5a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具">
+      <UniqueIdentifier>{ac718b4c-e36b-455a-9783-a78d9b39f2b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础">
+      <UniqueIdentifier>{d9b3b085-f534-46ed-9101-4b524e0d07ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.1　泄漏诊断工具">
+      <UniqueIdentifier>{ea53336c-fe2f-43e1-afc2-9c109ee4814f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.2　Windows调试工具集">
+      <UniqueIdentifier>{8e84e380-cd2d-4755-806e-99195a9f1f5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.3　UMDH">
+      <UniqueIdentifier>{4c9738dd-4f72-40f4-b020-b0fa984ad6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.4　Microsoft　应用程序验证器">
+      <UniqueIdentifier>{1e9bf749-614a-4ce9-94d9-c0e4650e01a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.5　全局标志">
+      <UniqueIdentifier>{1f6747d8-3469-4dee-a8d7-adaaa1ea9146}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.6　进程浏览器">
+      <UniqueIdentifier>{22d4a478-9fb5-4716-84c5-cee51e387876}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.7　Windows驱动程序开发包">
+      <UniqueIdentifier>{92e4874e-d3d5-4705-b6d4-1846c597928e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.8　Wireshark">
+      <UniqueIdentifier>{55113027-2694-463f-afbb-b3f15d713675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.9　DebugDiag">
+      <UniqueIdentifier>{4bd4edbb-5410-4dd0-a5fa-a9c92a230f96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第1章 调试工具简介\1.10　小结">
+      <UniqueIdentifier>{beb2fe18-5c55-4a33-8f9a-4ca91e58fb9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识">
+      <UniqueIdentifier>{1573b9b0-523a-482f-a6c5-3931b5f408d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识\2.1.1　调试器类型">
+      <UniqueIdentifier>{f3a11cf1-b2b5-4b54-85b0-4b43b9d29d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识\2.1.2　调试器命令">
+      <UniqueIdentifier>{76fc755f-30d9-460e-a52b-10cff18f5c66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识\2.1.3　调试器的配置">
+      <UniqueIdentifier>{b81fbc95-416f-4b03-9844-801c55e6813c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识\2.1.4　通过内核态调试器重定向用户态调试器">
+      <UniqueIdentifier>{d7f46df6-79a8-4de4-8272-bb96b6edf64c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.1　调试器的基础知识\2.1.5　是否使用KD">
+      <UniqueIdentifier>{e0c78a64-4a06-45c3-935d-1ca7c9552477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务">
+      <UniqueIdentifier>{56f2bbca-bf4f-4f5e-8be7-bada517037c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.1　键入调试命令">
+      <UniqueIdentifier>{ff6ae118-894f-4b3f-a247-8877aa704cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.2　解析调试器的提示信息">
+      <UniqueIdentifier>{80daa65e-531d-4402-bbec-54d5d0c16229}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.3　配置和使用符号">
+      <UniqueIdentifier>{df455618-e5ab-409c-b1f4-4b8825699775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.4　使用源文件">
+      <UniqueIdentifier>{92f63708-622e-43cf-b8ed-75be8123f21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.5　分析命令">
+      <UniqueIdentifier>{95e11fef-0bc6-4384-9e5c-295fd7fbb143}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.6　修改上下文的命令">
+      <UniqueIdentifier>{78f56399-d52e-4e25-be62-9b6974ad7037}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.7　其他的辅助命令">
+      <UniqueIdentifier>{5150f9ef-57d3-4915-b06b-c6a528b24c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.2　基本的调试任务\2.2.8　示例">
+      <UniqueIdentifier>{27ab261d-b970-4692-a33d-e4a74a870b97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试">
+      <UniqueIdentifier>{b8048bda-0000-4226-b4ff-96ef7176799e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试\2.3.1　Remote.exe">
+      <UniqueIdentifier>{cbd22d45-cf70-4177-9fc3-85acc7733b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试\2.3.2　调试服务器">
+      <UniqueIdentifier>{5c616665-3db6-473d-b89f-0353f42f2a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试\2.3.3　进程服务器与内核服务器">
+      <UniqueIdentifier>{4065f9b5-00be-4e38-8327-e2fbfdd2a29c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试\2.3.4　远程调试中的符号解析">
+      <UniqueIdentifier>{5fd3c20a-67d3-4e23-8b61-8d14594aaf9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.3　远程调试\2.3.5　远程调试中的源代码解析">
+      <UniqueIdentifier>{646c14ba-4eeb-4c4e-b95d-134c3a156268}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.4　调试场景">
+      <UniqueIdentifier>{ab82f364-479f-4bb3-9f1f-039711cb1454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.4　调试场景\2.4.1　调试非交互式进程（服务或者COM服务器）">
+      <UniqueIdentifier>{53dbbfed-3414-4936-99d2-4193e5e915fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.4　调试场景\2.4.2　在没有内核态调试器的情况下调试非交互式进程（服务或者COM服务器）">
+      <UniqueIdentifier>{5415d31a-f72a-49e1-9c38-17b69e3cc6b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第2章　调试器简介\2.5　小结">
+      <UniqueIdentifier>{6e6ae877-f7a0-47a3-b619-a5aaa4216d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.1　用户态调试器的内幕">
+      <UniqueIdentifier>{3012079d-c041-418c-90ff-2197f56166b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.1　用户态调试器的内幕\3.1.1　操作系统对用户态调试器的支持">
+      <UniqueIdentifier>{d40d0718-48f5-4b4b-aab0-c954209d4f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.1　用户态调试器的内幕\3.1.2　调试事件的顺序">
+      <UniqueIdentifier>{6dda3daa-5305-4015-8af3-0de92366cb61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.1　用户态调试器的内幕\3.1.3　控制来自调试器的异常和事件">
+      <UniqueIdentifier>{b30bc9b9-8b2a-46e5-a5b9-cf5c293a761c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.1　用户态调试器的内幕\3.1.4　内核态调试器中的调试事件处理">
+      <UniqueIdentifier>{bbb19b23-cbc2-471b-8ffe-12c0a303d503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标">
+      <UniqueIdentifier>{3079c919-2457-40ae-b63f-507db7794362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标\3.2.1　断点的工作原理">
+      <UniqueIdentifier>{ea18a427-dcb8-4cc4-b3a1-699c6158b0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标\3.2.2　内存访问断点的工作原理">
+      <UniqueIdentifier>{e8e8c664-1c39-455c-8886-2551603aa86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标\3.2.3　处理器跟踪">
+      <UniqueIdentifier>{649d9f85-32ed-4807-b313-8f01cfbddfcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标\3.2.4　实时调试中的线程状态管理">
+      <UniqueIdentifier>{6322cbd5-de8b-4bb1-b8c1-916de40f6575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.2　控制调试目标\3.2.5　通过用户态调试器来挂起线程">
+      <UniqueIdentifier>{cd9d8d2e-7690-45a7-858b-39db6f029af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第3章　调试器揭密\3.3　小结">
+      <UniqueIdentifier>{b9311363-cd81-45fa-92ef-4a5915938b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.1　调试符号的管理">
+      <UniqueIdentifier>{92f83f56-b6a0-42f7-801d-6947e372e3f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.1　调试符号的管理\4.1.1　公有符号的生成">
+      <UniqueIdentifier>{7b934150-f438-44bc-a799-bc4ad8e3a956}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.1　调试符号的管理\4.1.2　在符号库中存储符号">
+      <UniqueIdentifier>{ccb2147e-d2ee-49f0-98c8-80b1d4e0c916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.1　调试符号的管理\4.1.3　在HTTP服务器上共享公有符号">
+      <UniqueIdentifier>{b9c3ba9b-d890-411d-b977-e7c50e11ae83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.2　源文件的管理">
+      <UniqueIdentifier>{0234147c-c3ee-4ac6-b2d8-ec67367091f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.2　源文件的管理\4.2.1　收集源文件信息">
+      <UniqueIdentifier>{67d23149-2699-4f6e-915f-8be1ac25a690}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.2　源文件的管理\4.2.2　源文件信息的使用">
+      <UniqueIdentifier>{616d3122-74b4-4ad4-9675-aa297dc59d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.2　源文件的管理\4.2.3　不带源文件修订控制的源文件服务器">
+      <UniqueIdentifier>{b910fad1-a9dd-474c-8175-f04952e2c15d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第1部分 概述\第4章　符号文件与源文件的管理\4.3　小结">
+      <UniqueIdentifier>{4269b784-4370-46ec-9f40-0422fa49cc73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程">
+      <UniqueIdentifier>{d078058f-485c-46d9-bbc4-b5be6cdaea29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.2　栈内存破坏">
+      <UniqueIdentifier>{c9a1ffa0-99c0-4e05-aa85-eb418db174ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.3　小结">
+      <UniqueIdentifier>{5ad527e9-3145-4376-9ed8-de5f63fbd057}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程\5.1.1　步骤1：状态分析">
+      <UniqueIdentifier>{cca47508-1b9e-48bf-8d96-8421babc281e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程\5.1.2　步骤2：源代码分析">
+      <UniqueIdentifier>{854c075b-d85a-4290-b638-c4a6657065d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程\5.1.3　步骤3：使用内存破坏检测工具">
+      <UniqueIdentifier>{a6f60418-3720-426b-b8a6-babbf031880f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程\5.1.4　步骤4：调整源代码">
+      <UniqueIdentifier>{acb038cb-d04e-47ae-899a-a0649404699d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.1　内存破坏的检测过程\5.1.5　步骤5：定义回避策略">
+      <UniqueIdentifier>{8d12d335-a759-4889-9161-c995eab44a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.2　栈内存破坏\5.2.1　栈溢出">
+      <UniqueIdentifier>{c9e4085e-4cfc-459f-b6ac-d213bd7a3c63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.2　栈内存破坏\5.2.2　异步操作与栈顶指针">
+      <UniqueIdentifier>{cb0b6bf5-77cb-42e3-ae66-746ba4b301de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.2　栈内存破坏\5.2.3　调用约定的不匹配">
+      <UniqueIdentifier>{e6bde416-2291-494b-8d62-3d875bd84ba3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第5章　内存破坏之一—栈\5.2　栈内存破坏\5.2.4　回避策略">
+      <UniqueIdentifier>{6d162dac-9c4b-4ef5-9a96-2effbe7ec52e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.1　堆简介">
+      <UniqueIdentifier>{6bc688ea-dcf0-4680-a0fc-7ace062f1928}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.1　堆简介\6.1.1　前端分配器">
+      <UniqueIdentifier>{3ff80341-8e74-41b9-b924-b04c3684fe48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.1　堆简介\6.1.2　后端分配器">
+      <UniqueIdentifier>{484e4da4-1f40-4ea7-b5f1-3db639a13497}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.2　堆破坏">
+      <UniqueIdentifier>{ee6b3204-dbfa-4fdc-b7b9-56d725f8d6a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.2　堆破坏\6.2.1　使用未初始化状态">
+      <UniqueIdentifier>{b6eddbbd-90cf-47d7-9856-9108248828db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.2　堆破坏\6.2.2　堆的上溢与下溢">
+      <UniqueIdentifier>{8f908f17-b338-4fd9-a64a-d679c1b848f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.2　堆破坏\6.2.3　堆句柄的不匹配">
+      <UniqueIdentifier>{0e16ca37-09c9-467d-8d3a-cf95b8af455b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.2　堆破坏\6.2.4　重用已删除的堆块">
+      <UniqueIdentifier>{a28ba06b-a86a-4963-8346-116f464d8ad7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第6章　内存破坏之二—堆\6.3　小结">
+      <UniqueIdentifier>{36630dbf-b07f-4b0b-a98c-faa48dbf851f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.1　Windows安全概述">
+      <UniqueIdentifier>{352e4cf1-fcc2-469b-8a6b-ac2ba9f15cf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.1　Windows安全概述\7.1.1　安全标识符">
+      <UniqueIdentifier>{00eedf6f-0e8c-478e-a987-b22ca804b6c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.1　Windows安全概述\7.1.2　访问控制列表">
+      <UniqueIdentifier>{f8ffe348-f0e3-4fe3-bd09-96b7feb36c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.1　Windows安全概述\7.1.3　安全描述符">
+      <UniqueIdentifier>{306a6575-0b32-41bc-903b-0d08657a0b35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.1　Windows安全概述\7.1.4　访问令牌">
+      <UniqueIdentifier>{cef75ca0-3987-459d-9c60-c8d5fe27757f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.2　安全信息的来源">
+      <UniqueIdentifier>{5bcd1d33-1c47-4748-9a95-e75590be01c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.2　安全信息的来源\7.2.1　访问令牌">
+      <UniqueIdentifier>{1a5777ef-6974-4c08-a6da-2cb17c34e1f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.2　安全信息的来源\7.2.2　安全描述符">
+      <UniqueIdentifier>{e3b4a77b-7340-41e8-88de-8936beccd2fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.3　如何执行安全检查">
+      <UniqueIdentifier>{d4aa9154-2870-4e4e-be80-cf39675ec807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.4　在客户端/服务器程序中传播标识">
+      <UniqueIdentifier>{e263dce2-51e4-43f2-8158-0f25da2dda30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.4　在客户端/服务器程序中传播标识\7.4.1　远程认证与安全支持提供者接口">
+      <UniqueIdentifier>{10d5b54c-76ac-47a8-a526-a4ddf69cd3d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.4　在客户端/服务器程序中传播标识\7.4.2　模拟级别">
+      <UniqueIdentifier>{96d83553-2fe9-43ed-a6a4-1aec8a022c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.5　系统边界上的安全检查">
+      <UniqueIdentifier>{efaa6f1d-6269-4c2d-9c3b-659bcf1a522b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析">
+      <UniqueIdentifier>{de82bbad-e8ca-442a-9d73-31618c3ebcd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.7　小结">
+      <UniqueIdentifier>{d6e41ba1-cb33-48c8-b721-6131b102fa20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.1　本地安全故障">
+      <UniqueIdentifier>{8297cc27-daa5-4400-9977-e476b7947318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.2　延迟初始化中的安全问题">
+      <UniqueIdentifier>{a04788d6-b817-4fcc-ba13-5eb98a19b0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.3　身份模拟的潜在安全问题">
+      <UniqueIdentifier>{1f9c4012-f880-4585-9e3a-e79bcd2b31a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.4　分布式COM错误">
+      <UniqueIdentifier>{8a9171a6-e546-4a43-bee5-2eedb0306bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.5　扩展命令!token的故障">
+      <UniqueIdentifier>{3e9edbe2-7b9b-4adb-81dd-faf158e9fd6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.6　在Windows XP SP2上安装了某个程序后发生DCOM激活故障">
+      <UniqueIdentifier>{9a1da57c-ac75-4dc9-859a-1a67f8310612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第7章　安全\7.6　安全故障的分析\7.6.7　通过跟踪工具来分析安全故障">
+      <UniqueIdentifier>{56d21638-e160-45ec-a48b-b62571e46664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.1　通信机制">
+      <UniqueIdentifier>{6371b1c0-fbc8-4cc3-b06e-c21aa7ef2052}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.2　本地通信分析">
+      <UniqueIdentifier>{71f0598e-876c-41e2-b1b9-53c95a648492}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.2　本地通信分析\8.2.1　LPC的背景知识">
+      <UniqueIdentifier>{d0342ef7-5450-4aa2-ad22-de40173f8407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.2　本地通信分析\8.2.2　调试LPC通信">
+      <UniqueIdentifier>{322df201-0056-43f1-8f27-529f41c4418f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.2　本地通信分析\8.2.3　调试本地DCOM以及MSRPC通信">
+      <UniqueIdentifier>{40831c31-ea26-42e1-abeb-219436d13e12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.3　远程通信分析">
+      <UniqueIdentifier>{e13d8b80-a90d-4652-8188-9a5ffa838992}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.3　远程通信分析\8.3.1　RPC故障测定状态信息的使用">
+      <UniqueIdentifier>{79adb166-d59a-4b3d-8359-4e57d9e08a3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.3　远程通信分析\8.3.2　网络流量分析">
+      <UniqueIdentifier>{0de2c332-d8e2-47b8-93fa-4079bc40af33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.3　远程通信分析\8.3.3　打破调用路径">
+      <UniqueIdentifier>{8fa6be26-e9d5-4575-b97c-7890d5d712c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.4　一些其他的技术信息">
+      <UniqueIdentifier>{a77bd310-5523-4a4a-af27-36731ab04a99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.4　一些其他的技术信息\8.4.1　远程认证">
+      <UniqueIdentifier>{245326bb-fd3d-471c-bb44-615371b70505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.4　一些其他的技术信息\8.4.2　RPC扩展错误信息">
+      <UniqueIdentifier>{76f9757c-398b-40aa-b322-5471f50ea59f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.4　一些其他的技术信息\8.4.3　其他工具">
+      <UniqueIdentifier>{d0000294-8335-4d32-9c90-f8b84ba19baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第8章　进程间通信\8.5　小结">
+      <UniqueIdentifier>{263fb466-4987-4d7b-80c9-46894d568b2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.1　什么是资源泄漏">
+      <UniqueIdentifier>{a5358c8a-e9c4-423f-8ea0-4cf4700f6d5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程">
+      <UniqueIdentifier>{3ceced07-d883-489b-874f-4e5353e22d17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程\9.2.1　步骤1：找出潜在的资源泄漏">
+      <UniqueIdentifier>{094b445e-c8d7-4612-97a0-16d97ed58f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程\9.2.2　步骤2：什么东西正在泄漏">
+      <UniqueIdentifier>{02f6c8e2-bae1-44d8-894f-1a4c4b2529ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程\9.2.3　步骤3：初步分析">
+      <UniqueIdentifier>{84937d8e-ec46-4dde-a59e-4a65b6ba607d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程\9.2.4　步骤4：资源泄漏检测工具">
+      <UniqueIdentifier>{eee91be4-2d3e-4dcd-aa30-17852e6bbd03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.2　高层流程\9.2.5　步骤5：制定回避策略">
+      <UniqueIdentifier>{f96aa299-301f-4b41-93c9-bc76df599c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.3　资源泄漏的可重现性">
+      <UniqueIdentifier>{468b3dd8-d36a-4292-b5e2-bd3e29e99bfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏">
+      <UniqueIdentifier>{90eae3dd-7b13-4477-8986-1d16e9dd09a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.1　存在泄漏的程序">
+      <UniqueIdentifier>{e3a008f2-31b5-4d71-8e07-01c44375af7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.2　步骤1和步骤2：它是不是一个句柄泄漏">
+      <UniqueIdentifier>{0e4b9fd3-1735-48f7-92a7-da6734180c84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.3　步骤3：初始分析">
+      <UniqueIdentifier>{f065c79d-b601-42c3-867b-00595511fc68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.4　更复杂的程序">
+      <UniqueIdentifier>{dee63aa6-3ea2-4cf1-ab42-f1f0dbd469b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.5　步骤4：利用泄漏检测工具">
+      <UniqueIdentifier>{013527b4-465e-4510-9086-aa8292bc7dcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.6　句柄注入与!htrace">
+      <UniqueIdentifier>{08767a56-dad8-4c91-967e-55d09b86702d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.4　句柄泄漏\9.4.7　步骤5：为句柄泄漏制定回避策略">
+      <UniqueIdentifier>{418e1cf0-90ca-4eb1-be71-28db2f5299dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.5　内存泄漏">
+      <UniqueIdentifier>{acceb045-2158-4564-837c-54022ff3b519}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.5　内存泄漏\9.5.1　一个简单的内存泄漏">
+      <UniqueIdentifier>{4bf1ef4a-1a92-46e9-9e16-748a7c3b7a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.5　内存泄漏\9.5.2　步骤1和步骤2：是否存在泄漏，以及泄漏的是什么资源">
+      <UniqueIdentifier>{41abafd3-8d41-4b4f-9e27-9d6bfd1020f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.5　内存泄漏\9.5.3　步骤3：使用内存检测工具">
+      <UniqueIdentifier>{dcdd9ab9-ed73-4de6-9892-4d83242b139c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.5　内存泄漏\9.5.4　步骤4：回避策略">
+      <UniqueIdentifier>{0ffe3338-2ee0-4546-a6f8-beef9cb2b41c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第9章　资源泄漏\9.6　小结">
+      <UniqueIdentifier>{4d6dd41e-c52f-4cea-9f24-c82dc6825d72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.1　同步的基础知识">
+      <UniqueIdentifier>{ff6ad532-75db-4648-9976-3e8c1e45156c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.1　同步的基础知识\10.1.1　事件">
+      <UniqueIdentifier>{860929d9-cb1f-4aaf-88d0-c7dd4c18be53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.1　同步的基础知识\10.1.2　临界区">
+      <UniqueIdentifier>{d9bdc02b-eef1-42e1-a1fd-6c67d1a9b0b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.1　同步的基础知识\10.1.3　互斥体">
+      <UniqueIdentifier>{35830cce-d7a7-41ab-bad7-2d4235c8818f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.1　同步的基础知识\10.1.4　信号量">
+      <UniqueIdentifier>{77d1bc1a-dfed-4dbd-a031-3dcba3c77318}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程">
+      <UniqueIdentifier>{cc6a8f07-18ed-4c6f-bc94-8aed3d31876f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程\10.2.1　步骤1：识别问题的征兆">
+      <UniqueIdentifier>{8cca8d9f-7ec4-4f59-b7af-6c0e32a9f122}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程\10.2.2　步骤2：转储所有线程">
+      <UniqueIdentifier>{0cf811fa-8ac9-40c3-bd9a-e766cb10dc18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程\10.2.3　步骤3：分析线程中的同步问题">
+      <UniqueIdentifier>{1c63d41f-97ef-40c2-8977-f47c56685cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程\10.2.4　步骤4：修复问题">
+      <UniqueIdentifier>{79937345-1a10-4e21-ba75-dca5c0cdeabd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.2　高层流程\10.2.5　步骤5：制定回避策略">
+      <UniqueIdentifier>{18812623-d0b8-434b-a46c-8e215b9f7e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况">
+      <UniqueIdentifier>{7de699a2-26a1-4115-8f78-f98616e3b81f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.4　小结">
+      <UniqueIdentifier>{9ad77f2c-7ae5-4bd5-964c-f071a0c1b8bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.1　死锁">
+      <UniqueIdentifier>{89dc653e-87ab-4e23-869d-0e88008d3c53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.2　第1种孤立临界区情况—异常">
+      <UniqueIdentifier>{bf4f56e5-e6dc-47f0-a40b-904e004ba349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.3　第2种孤立临界区情况—线程结束">
+      <UniqueIdentifier>{ecdefc89-5b8e-4b84-9aa6-6425f3795d24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.4　DllMain函数的注意事项">
+      <UniqueIdentifier>{5af82405-0c95-4e05-b1f3-bc138eda24f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.5　锁竞争">
+      <UniqueIdentifier>{d6a0eedf-ca44-4069-93a0-df011b11c017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第2部分　调试实践\第10章　同步\10.3　同步情况\10.3.6　管理临界区">
+      <UniqueIdentifier>{3c39d32d-8f66-4305-8a91-d29f44617de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.1　调试扩展简介">
+      <UniqueIdentifier>{74c9d945-a2c1-4485-8e9b-22740efb589a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例">
+      <UniqueIdentifier>{d4dcc040-f3e9-4fe9-9f2f-f38ad57b5061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.3　小结">
+      <UniqueIdentifier>{a4ead16c-9cc5-439b-b364-248744f8e76f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.1　调试扩展模型">
+      <UniqueIdentifier>{5726c739-8999-466c-9bf6-a78df3fbb965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.2　调试扩展示例的需求">
+      <UniqueIdentifier>{0d1cdeeb-ca83-4607-bdc0-dd9a382256a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.3　头文件和代码组织">
+      <UniqueIdentifier>{86edc09e-5643-482a-a7f5-8588baea9307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.4　调试扩展的初始化">
+      <UniqueIdentifier>{964cff11-ea9e-4c19-93dd-df93b2c2fbf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.5　调试会话状态的变化">
+      <UniqueIdentifier>{3bb4836e-18e0-44fb-a4ef-ccd7ccad2084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.6　KnownStructOutput">
+      <UniqueIdentifier>{30bc79cb-e438-4453-8d7e-f3b10c8b99e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.7　退出调试扩展">
+      <UniqueIdentifier>{71a9cd77-db4c-4714-ae0c-cd4d110bc203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.8　Help命令的实现">
+      <UniqueIdentifier>{be35ed2b-08b8-4437-83f0-e719b1c7e870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.9　dumptree命令的实现">
+      <UniqueIdentifier>{ea69b214-3f88-40ae-bf23-7cbea9bb9fdf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.10　KnownStructOutput函数的实现">
+      <UniqueIdentifier>{e8610da6-d8a1-4a4a-822c-eddfe2d645f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.11　取消命令的实现">
+      <UniqueIdentifier>{1b2131d2-6abd-47e2-8800-2041c3aebbc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.12　版本">
+      <UniqueIdentifier>{8a113c27-7e89-43d8-980b-b30aab47ddec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第11章　编写定制的调试扩展\11.2　调试扩展示例\11.2.13　调试扩展的构建">
+      <UniqueIdentifier>{6ce64ca0-8a77-4c16-94b3-12c31a185883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.1　Microsoft 64位系统">
+      <UniqueIdentifier>{681e58e4-40af-4063-bee8-693d6ec9226a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.1　Microsoft 64位系统\12.1.1　操作系统简介">
+      <UniqueIdentifier>{449375e9-3e1a-4f79-9a39-93665b29d124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.1　Microsoft 64位系统\12.1.2　在WOW64中运行的32位程序">
+      <UniqueIdentifier>{3f9c015d-6324-4af5-a596-c6216097ed6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化">
+      <UniqueIdentifier>{6ae9df0a-50e7-40a3-8515-0a99aeb7a2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.3　小结">
+      <UniqueIdentifier>{f2e63a72-ae55-4b28-b036-571627910423}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.1　第1章—调试工具简介">
+      <UniqueIdentifier>{bb92fb62-4aeb-45b5-b177-023975521d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.2　第2章—调试器简介">
+      <UniqueIdentifier>{b08b8553-f8a3-4ee7-a8a3-9646c1b539cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.3　第3章—调试器揭密">
+      <UniqueIdentifier>{69ed9945-5e84-4916-bbd2-4321e528f6bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.4　第5章—内存破坏之一—栈">
+      <UniqueIdentifier>{02481522-1cf8-49ea-98fb-84d8885372d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.5　第6章—内存破坏之二—堆">
+      <UniqueIdentifier>{aa13bd21-80a3-4373-ab85-26ece7e5ceaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.6　第7章—安全">
+      <UniqueIdentifier>{dda64e66-458d-4935-8595-55c7a00f5219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.7　第8章—进程间通信">
+      <UniqueIdentifier>{09fb4460-145a-4f0a-a79b-d1304e948ee5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第12章　64位调试\12.2　Windows x64带来的变化\12.2.8　第11章—编写定制的调试扩展">
+      <UniqueIdentifier>{1d9dbfd2-6c09-4977-a000-19068945df16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.1　转储文件基础">
+      <UniqueIdentifier>{0f50b158-d101-4825-9d5a-12b55abc3990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.1　转储文件基础\13.1.1　通过调试器来生成转储文件">
+      <UniqueIdentifier>{49d2e54f-fc2d-4a01-9ad4-2dd5d5da0712}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.1　转储文件基础\13.1.2　通过ADPlus来生成转储文件">
+      <UniqueIdentifier>{74bc021b-efb7-4970-bfef-56c8c124376a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.1　转储文件基础\13.1.3　内核态转储文件的创建">
+      <UniqueIdentifier>{2908f2dc-1fcb-4803-b1f4-691f500515ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.2　转储文件的使用">
+      <UniqueIdentifier>{774d7387-a5a0-448f-b9ce-64afc253635a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.2　转储文件的使用\13.2.1　转储文件的分析：访问违例">
+      <UniqueIdentifier>{6cdf8ef4-ebce-4b12-85ae-aad2177e19cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.2　转储文件的使用\13.2.2　转储文件的分析：句柄泄漏">
+      <UniqueIdentifier>{90aaa0a6-e236-44e5-b2e4-e16397ff6dd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.3　Windows错误报告">
+      <UniqueIdentifier>{bf800bb5-4ffd-48aa-b7cf-287927648d36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.3　Windows错误报告\13.3.1　Dr.Watson">
+      <UniqueIdentifier>{6fe0d4f8-2bb5-4e3d-8c3e-084d1c34d3af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.3　Windows错误报告\13.3.2　Windows错误报告的系统架构">
+      <UniqueIdentifier>{df2ce55e-f473-49ce-af37-9a5dfb9b2535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.4　企业错误报告">
+      <UniqueIdentifier>{65b7827d-b7de-48a2-bdab-92e239085a33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.4　企业错误报告\13.4.1　设置企业错误报告">
+      <UniqueIdentifier>{968a4949-1007-4769-81b8-ce0e8336cfa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.4　企业错误报告\13.4.2　通过企业错误报告来报告错误">
+      <UniqueIdentifier>{8f0f27aa-aa25-4e98-9c6e-6a6ed52b76ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第13章　事后调试\13.5　小结">
+      <UniqueIdentifier>{42b884bd-b0bb-477d-bcd2-ababb329a618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.1　调试诊断工具">
+      <UniqueIdentifier>{67fe99eb-b8b4-4407-a107-ba8b251c0469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.1　调试诊断工具\14.1.1　分析内存泄漏或者句柄泄漏">
+      <UniqueIdentifier>{74569981-203c-4553-861c-4bc52f8cf317}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.1　调试诊断工具\14.1.2　编写定制的分析脚本">
+      <UniqueIdentifier>{675a5085-20d6-4ea5-ab8e-cd903dbce89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.2　扩展命令!analyze">
+      <UniqueIdentifier>{97b02046-41e0-480a-984f-e9dff58e32d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.2　扩展命令!analyze\14.2.1　故障程序">
+      <UniqueIdentifier>{ab183472-1318-4f82-ac05-82b9e1a75764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.2　扩展命令!analyze\14.2.2　分析结果">
+      <UniqueIdentifier>{1d4bf676-262f-4a1a-bfc3-240a6069b7d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.2　扩展命令!analyze\14.2.3　故障的跟进人员">
+      <UniqueIdentifier>{94433974-c5b9-45e2-bfa7-981c9a8e75cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第14章　功能强大的工具\14.3　小结">
+      <UniqueIdentifier>{20941bf5-4b8d-4bff-b416-ede2118fcaa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.1　第1章—调试工具简介">
+      <UniqueIdentifier>{4182815f-7aef-4127-b958-50f71bf85fe4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.2　第2章—调试器简介">
+      <UniqueIdentifier>{d9f12398-e8d9-4874-8903-973c5c6758be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.2　第2章—调试器简介\15.2.1　用户访问控制的副作用">
+      <UniqueIdentifier>{3d3b4793-53b5-4659-83f8-471d0be91f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.2　第2章—调试器简介\15.2.2　启用内核态调试器">
+      <UniqueIdentifier>{22b20673-b322-4813-9e9a-65775560847f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.2　第2章—调试器简介\15.2.3　地址空间布局的随机化">
+      <UniqueIdentifier>{06c385e9-938f-4482-8acc-8ebc913f7c1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.3　第6章—内存破坏之二—堆">
+      <UniqueIdentifier>{891b324d-ff9a-4010-8270-2471a07566a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.4　第7章—安全性">
+      <UniqueIdentifier>{dc29bfd4-3d61-40a5-af7d-8bbe6ef972b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.4　第7章—安全性\15.4.1　用户访问控制">
+      <UniqueIdentifier>{1214dcda-e9fa-44ed-a387-eaa8825a1df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.4　第7章—安全性\15.4.2　调试器中的UAC">
+      <UniqueIdentifier>{cb379fdf-a32f-427d-a0d2-f5d7efde4a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.4　第7章—安全性\15.4.3　注册表和文件虚拟化">
+      <UniqueIdentifier>{e7111bcf-c26a-4d74-9540-d360605af88d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.5　第8章—进程间通信">
+      <UniqueIdentifier>{65691016-2a75-4175-8c8e-ed3a0bd18272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.6　第9章—资源泄漏">
+      <UniqueIdentifier>{f43baae9-675b-4f41-91cf-fe63d0bd82ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.7　第10章—同步">
+      <UniqueIdentifier>{258d1da1-ee94-4069-a140-5f4be11fb596}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.7　第10章—同步\15.7.1　轻量读写锁">
+      <UniqueIdentifier>{28d0adf7-9dc0-4345-bab7-fa95111b21d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.7　第10章—同步\15.7.2　条件变量">
+      <UniqueIdentifier>{c9a535cc-f89e-47a7-9a64-137773e3feba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.7　第10章—同步\15.7.3　单次初始化">
+      <UniqueIdentifier>{bf8e2851-e349-44c6-aefb-c779f3c21f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.7　第10章—同步\15.7.4　增强线程池">
+      <UniqueIdentifier>{db75761a-24e8-4f88-b688-9a5851921828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.8　第11章—编写定制的调试扩展">
+      <UniqueIdentifier>{044bf2a5-0321-4234-8504-f9c98aeb3dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.9　第13章—事后调试">
+      <UniqueIdentifier>{aea79738-e165-48f9-ba2e-7079d809b738}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Advanced Windows Debugging（Windows 高级调试）\第3部分　高级主题\第15章　Windows Vista基础\15.10　小结">
+      <UniqueIdentifier>{f19a3aa7-aaff-42ba-b4cb-59751ffb78e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\0.">
+      <UniqueIdentifier>{4f280e3d-a7a2-481e-9ad8-72d72f6cf164}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\0.\0.1 序">
+      <UniqueIdentifier>{153448ca-81aa-4845-a0de-983b92445844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\0.\0.2 前言">
+      <UniqueIdentifier>{d03a5360-805c-4303-a169-36b3db13f685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\0.\0.2 前言\0.2.1 本书的网站">
+      <UniqueIdentifier>{3333f40f-7b02-4467-b406-f53f1b19f4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\0.\0.3 致谢">
+      <UniqueIdentifier>{134f6f30-807d-4ddd-b5ba-33d81625f28d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第1章　谁编写软件，谁制造bug（为什么需要本书）">
+      <UniqueIdentifier>{b62c4a76-2cb6-4c9b-9f72-e1f348e7727d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法">
+      <UniqueIdentifier>{ae7163e2-7b29-472b-a06e-9e908fd9278f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.1　为什么要遵循结构化的过程">
+      <UniqueIdentifier>{908898c1-08aa-4f2b-a932-6804412e26f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.2　充分利用机会">
+      <UniqueIdentifier>{3dcb9336-dd59-4938-be9e-921e3faf07ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则">
+      <UniqueIdentifier>{9285254e-d462-412b-9bfc-f5ed1314f580}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.1　理解需求">
+      <UniqueIdentifier>{bbaee923-f2dc-4326-92f8-cabb0423a217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.2　制造失败">
+      <UniqueIdentifier>{26fc77d8-dfad-42bf-8fa0-fa380f542f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.3　简化测试用例">
+      <UniqueIdentifier>{5145ea8d-2bdf-4dc4-a156-563e04bb39cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.4　读取恰当的错误消息">
+      <UniqueIdentifier>{d9d62525-9f70-4750-bd09-96dd2c4a0d32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.5　检查显而易见的问题">
+      <UniqueIdentifier>{f30f58c7-ab77-4d3d-8e02-c34d7177a238}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.6　从解释中分离出事实">
+      <UniqueIdentifier>{81ab007f-7f34-4328-832a-9ce96e61f85d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.7　分而治之">
+      <UniqueIdentifier>{bbe3ea54-50f6-4d91-ac89-47c9854fc77f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.8　工具要与bug匹配">
+      <UniqueIdentifier>{b7940095-0b5c-4083-bfde-8c3f746f6cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.9　一次只做一项更改">
+      <UniqueIdentifier>{e0058415-b55c-441d-a39c-6122a20cd840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.10　保持审计跟踪">
+      <UniqueIdentifier>{6b128bdc-de95-41b9-95fb-7dd7194a8fd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.11　获得全新观点">
+      <UniqueIdentifier>{294549d2-32df-46d1-80f1-01be52efe36f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.12　bug不会自己修复">
+      <UniqueIdentifier>{e884c7e9-a9b2-4d38-843c-9040f5e3a365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.3　13条黄金规则\2.3.13　用回归测试来检查bug修复">
+      <UniqueIdentifier>{618d602c-bac3-4845-ae73-1bcb656eba3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.4　构建一个好的工具包">
+      <UniqueIdentifier>{30e049c0-6841-474b-ba69-29d234c5cf0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.4　构建一个好的工具包\2.4.1　工具箱">
+      <UniqueIdentifier>{3f763801-24e2-48cb-8bec-f7640923528a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.4　构建一个好的工具包\2.4.2　每天运行测试，防止出现bug">
+      <UniqueIdentifier>{ce78d35c-4e2b-4949-af9c-9929323b1df9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5　认清敌人——遇到bug家族">
+      <UniqueIdentifier>{bf25b8c2-0393-4000-9e36-db8e482837ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.1　常见bug">
+      <UniqueIdentifier>{d5bddac3-6b54-4d07-a551-b4e537cf6447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.2　偶发性bug">
+      <UniqueIdentifier>{5a4feed0-66a5-47f3-b895-d6a7744688c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.3　heisenbug">
+      <UniqueIdentifier>{8ca96585-c460-4bda-a91e-f49101d6f539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.4　隐藏在bug背后的bug">
+      <UniqueIdentifier>{52796bce-6ea9-4afa-adb3-fc28416e899e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.5　秘密bug——调试与机密性">
+      <UniqueIdentifier>{3b8c115e-123a-454d-8892-9963be8b569e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第2章　系统性调试方法\2.5.6　更多读物">
+      <UniqueIdentifier>{1c11a13b-fe47-4242-8447-38d35f9b14e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器">
+      <UniqueIdentifier>{4e35e2af-1b72-4ccc-88d8-c9171fbc508a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.1　可视化程序行为">
+      <UniqueIdentifier>{ad7e95ab-ad23-4554-9c62-f7fea34ac710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.2　准备简单的可预测的示例">
+      <UniqueIdentifier>{09573315-0443-48a7-b307-8cbedb7a0ba9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.3　使调试器与程序一起运行">
+      <UniqueIdentifier>{9d852f46-0e48-43c0-9c9d-188710d7be00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.4　学习在程序崩溃时执行栈跟踪">
+      <UniqueIdentifier>{dfeff70a-5b67-4f2f-b67e-148e36130618}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.5　学习使用断点">
+      <UniqueIdentifier>{20e423b0-0561-4319-9f6f-6e5cab1e8cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.6　学习在程序中导航">
+      <UniqueIdentifier>{be083cb2-8423-4c5a-9ef1-5104aa81d5cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.7　学习检查数据：变量和表达式">
+      <UniqueIdentifier>{f4430ba8-4b1e-498c-b144-1baef4c8db68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第3章　查找根源——源代码调试器\3.8　一个简单示例的调试会话">
+      <UniqueIdentifier>{ead1ff88-be3a-4dcc-adac-9a0d651f4eeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题">
+      <UniqueIdentifier>{80110aec-acd7-48bd-afd5-3efd21db6ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.1　C/C++中的内存管理——功能强大但很危险">
+      <UniqueIdentifier>{04c9fa8b-ad80-45fe-91e4-ce7079a8cf0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.1　C/C++中的内存管理——功能强大但很危险\4.1.1　内存泄漏">
+      <UniqueIdentifier>{5c33d30e-0f20-48ef-a766-7b077dd26184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.1　C/C++中的内存管理——功能强大但很危险\4.1.2　内存管理的错误使用">
+      <UniqueIdentifier>{55368e47-1102-4ecc-af2c-b37d291ca8fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.1　C/C++中的内存管理——功能强大但很危险\4.1.3　缓冲区溢出">
+      <UniqueIdentifier>{56228dc9-d803-4aa8-bc0a-86aa60724310}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.1　C/C++中的内存管理——功能强大但很危险\4.1.4　未初始化的内存bug">
+      <UniqueIdentifier>{e2eab880-1f03-4566-aadc-9cc204ab9206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.2　有效的内存调试器">
+      <UniqueIdentifier>{ef02c32f-1380-4a73-8688-89c9378da980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.3　示例1：检测内存访问错误">
+      <UniqueIdentifier>{d8fdb3e5-f751-45da-9242-889bfdb97c34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.3　示例1：检测内存访问错误\4.3.1　检测无效的写访问">
+      <UniqueIdentifier>{d153e037-6231-45d1-9ffd-530d1da34f15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.3　示例1：检测内存访问错误\4.3.2　检测对未初始化的内存的读取操作">
+      <UniqueIdentifier>{8c84ec85-91ff-4e80-ad24-565b1ac8108d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.3　示例1：检测内存访问错误\4.3.3　检测内存泄漏">
+      <UniqueIdentifier>{d4c5749c-e1bd-449c-aca2-e21d8343f3e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.4　示例2：对内存分配/释放的不完整调用">
+      <UniqueIdentifier>{c8ad225f-0a40-483b-ac93-f710f8e16629}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.5　结合使用内存调试器和源代码测试器">
+      <UniqueIdentifier>{836e1e48-291b-49bd-b456-cdbe53d39fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.6　减少干扰，排查错误">
+      <UniqueIdentifier>{f4697e4b-5226-4871-94ff-3d1f7a572a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.7　何时使用内存调试器">
+      <UniqueIdentifier>{2dc2ac77-ee0a-4d88-9de6-cf78481e50bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.8　约束">
+      <UniqueIdentifier>{03e1153b-15b0-4e3d-a244-11f6761cae9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.8　约束\4.8.1　测试用例应该有很好的代码覆盖率">
+      <UniqueIdentifier>{21e834c1-9cb9-4ef3-b920-4a3295bc8409}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.8　约束\4.8.2　提供更多计算机资源">
+      <UniqueIdentifier>{e642e011-2172-44ad-8483-45f14894db46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.8　约束\4.8.3　可能不支持多线程">
+      <UniqueIdentifier>{114a06a5-60aa-4fe0-aab3-33495dbf15fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第4章　修复内存问题\4.8　约束\4.8.4　对非标准内存处理程序的支持">
+      <UniqueIdentifier>{5a2af75b-dd67-4848-9cf0-7615be2a1f6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用">
+      <UniqueIdentifier>{00374001-5d96-4c78-a16a-27fd62f6de66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.1　基本策略——主要步骤">
+      <UniqueIdentifier>{dabca0f3-0994-4bca-8621-2eaa2cd025bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.2　示例：分配数组">
+      <UniqueIdentifier>{48397f78-41bb-4779-8077-c498609c83a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.3　第1步：查找泄漏">
+      <UniqueIdentifier>{92e5eac3-ab5e-4d91-b2ef-c0f69856072e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.4　第2步：设置期望值">
+      <UniqueIdentifier>{3a5eaa9c-832d-4a56-9a23-cf03cd76ac7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用">
+      <UniqueIdentifier>{a3ff1266-ef7c-4b0e-ba1d-2b16453ac965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.1　使用多个输入">
+      <UniqueIdentifier>{595b4d99-4088-425a-944a-8cf21ec0f8fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.2　在固定时间间隔停止程序">
+      <UniqueIdentifier>{6dba5136-2b33-4271-bdff-66c73134cc0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.3　用简单工具测量内存使用">
+      <UniqueIdentifier>{da155347-f2ef-4faa-8bf9-9443a1509edf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.4　使用top">
+      <UniqueIdentifier>{8cd04ebf-10a7-479a-bd72-c58ce73791a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.5　使用windows task manager">
+      <UniqueIdentifier>{6226edea-058f-4955-87e7-600259bd5f86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.6　为testmalloc选择相关输入值">
+      <UniqueIdentifier>{aa0a95cc-716e-4805-be92-7b9d0e23de03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.7　确定机器上的内存是如何被释放的">
+      <UniqueIdentifier>{0321fc29-ff79-44c6-93dc-ef179a1efb19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.5　第3步：测量内存使用\5.5.8　使用内存剖析工具">
+      <UniqueIdentifier>{1e988db5-1b61-42fd-b61e-eae6076a693d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.6　第4步：查明大部分内存被哪些数据结构占用了">
+      <UniqueIdentifier>{89ef43af-d8e4-4e33-a2a4-24593f6b28f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.7　综合练习——genindex示例">
+      <UniqueIdentifier>{b5b503c9-e1b9-437e-9223-94329b02a64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.7　综合练习——genindex示例\5.7.1　核实没有大的内存泄漏">
+      <UniqueIdentifier>{b0db8a55-d3ef-4f11-b61c-6fb40342cd0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.7　综合练习——genindex示例\5.7.2　估计内存使用">
+      <UniqueIdentifier>{5f6a5225-a861-4c56-9006-c9bcc2c84a64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.7　综合练习——genindex示例\5.7.3　测量内存使用">
+      <UniqueIdentifier>{9c4f39fd-a0cb-4c87-838a-a7af81d7a2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第5章　剖析内存的使用\5.7　综合练习——genindex示例\5.7.4　查找使用内存的数据结构">
+      <UniqueIdentifier>{29e7cf23-87f3-4f20-93d7-3a22cf1c63f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题">
+      <UniqueIdentifier>{f4a8fa98-5742-4952-a782-47add0f86949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug">
+      <UniqueIdentifier>{b07e7c29-8baf-46dc-ae3b-8962d00ecf8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.1　执行前期分析">
+      <UniqueIdentifier>{7b7e6fcb-e72d-4e71-8a0f-342d346101bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.2　使用简单的时间测量方法">
+      <UniqueIdentifier>{28ca5a44-cbb6-4d97-8bab-106229633102}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.3　创建测试用例">
+      <UniqueIdentifier>{52347a2d-e9e5-4d32-a367-c456a3275eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.4　使测试用例具有可再现性">
+      <UniqueIdentifier>{24e75dd3-c13a-40c1-a42d-55be10771dc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.5　检查程序的正确性">
+      <UniqueIdentifier>{c9d0a15c-1f29-4fd6-ad03-a3e56ff6a661}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.6　创建可扩展的测试用例">
+      <UniqueIdentifier>{54be5816-3783-4801-860d-ba11b254f467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.7　排除对测试用例的干扰">
+      <UniqueIdentifier>{f042a960-507c-421e-a687-cc578027d2db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.8　用time命令测量时可能会发生错误和偏差">
+      <UniqueIdentifier>{9f70131d-74ec-4656-8756-179169ccef59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.9　选择一个能够揭示运行时间瓶颈的测试用例">
+      <UniqueIdentifier>{02d961c6-81b4-4579-8d8c-d86de85d2111}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.1　分步查找性能bug\6.1.10　算法与实现之间的差异">
+      <UniqueIdentifier>{8b33a5a0-82b6-4687-b82c-412f536e99b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具">
+      <UniqueIdentifier>{2d556ff2-e523-493d-8bca-cadb5d1a56ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.1　不要编写自己的剖析工具">
+      <UniqueIdentifier>{7f321891-6044-4d30-b573-06f5c3b03cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.2　剖析工具的工作原理">
+      <UniqueIdentifier>{a3d2d0f4-4504-48b8-9567-ce1fb420c7c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.3　了解gprof">
+      <UniqueIdentifier>{cbaf9985-09e3-4c12-b51b-7d7e8f2e9e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.4　了解quantify">
+      <UniqueIdentifier>{6a8217b2-32a4-4dcd-a45b-373ce340e656}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.5　了解callgrind">
+      <UniqueIdentifier>{14792dfa-5f36-4129-a575-a987b8322f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.2　使用剖析工具\6.2.6　了解vtune">
+      <UniqueIdentifier>{cfab7325-85a6-4c13-b173-6146413cc8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第6章　解决性能问题\6.3　分析I/O性能">
+      <UniqueIdentifier>{8effd2b1-7adc-4835-977f-29fa22c4427a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序">
+      <UniqueIdentifier>{f1aa6a86-4f9d-4256-94b7-bcb5bf2decec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.1　用C/C++编写并行程序">
+      <UniqueIdentifier>{8aee893f-c7a1-4235-9bc0-97f7d8aa1462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.2　调试竞争条件">
+      <UniqueIdentifier>{da6fa885-6492-41af-a1fd-6a7674179866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.2　调试竞争条件\7.2.1　使用基本调试器功能来查找竞争条件">
+      <UniqueIdentifier>{51c5bee5-0f42-4bca-8b83-03b9e98147a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.2　调试竞争条件\7.2.2　使用日志文件来查找竞争条件">
+      <UniqueIdentifier>{6919185b-74b8-4679-988d-7955615070cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.3　调试死锁">
+      <UniqueIdentifier>{35d4138a-f87b-4864-a182-207f13a089f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.3　调试死锁\7.3.1　如何确定正在运行的是哪个线程">
+      <UniqueIdentifier>{99273c29-cf73-4f56-a11f-65a8a0f249bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.3　调试死锁\7.3.2　分析程序的线程">
+      <UniqueIdentifier>{bfd1b472-f4a1-4a31-bfbb-b38ca9c48353}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.4　了解线程分析工具">
+      <UniqueIdentifier>{c93b5804-7022-49a2-bd8e-defe83661d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第7章　调试并行程序\7.5　异步事件和中断处理程序">
+      <UniqueIdentifier>{7c45abbc-1395-4a24-847d-1dc3115f4bef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题">
+      <UniqueIdentifier>{4f764a77-fdab-43ab-b3b2-c22dc1da26f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.1　环境变更——问题的根源">
+      <UniqueIdentifier>{063625fa-e08f-417b-9501-bdc1997c5650}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.1　环境变更——问题的根源\8.1.1　环境变量">
+      <UniqueIdentifier>{3644e2e3-09e6-4d24-8836-4c277ee220ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.1　环境变更——问题的根源\8.1.2　本地安装依赖">
+      <UniqueIdentifier>{2f80d8aa-0a8d-4754-951c-20cc7629acc5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.1　环境变更——问题的根源\8.1.3　当前工作目录依赖">
+      <UniqueIdentifier>{e3b4aa26-5afa-431d-b2b6-f125996471a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.1　环境变更——问题的根源\8.1.4　进程id依赖">
+      <UniqueIdentifier>{e08619be-d812-4f1b-a817-9000fe4ff25e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.2　如何查看程序正在做什么">
+      <UniqueIdentifier>{9bd1c739-9fcb-4f7f-bdfc-dba1487fd242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.2　如何查看程序正在做什么\8.2.1　用top来查看进程">
+      <UniqueIdentifier>{cd85d985-47e6-4ebb-8bb6-cf7fccbb3042}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.2　如何查看程序正在做什么\8.2.2　用ps来查找应用程序的多个进程">
+      <UniqueIdentifier>{4136d7b5-1f04-48db-8823-a9d9a1db45df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.2　如何查看程序正在做什么\8.2.3　使用/proc/[pid]来访问进程">
+      <UniqueIdentifier>{81e0c8e1-7785-493c-b9a2-b9cb6607f0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.2　如何查看程序正在做什么\8.2.4　使用strace跟踪对操作系统的调用">
+      <UniqueIdentifier>{4c5b3e3f-f662-49ec-a0b8-e056fc65cfea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.3　编译器和调试器也有bug">
+      <UniqueIdentifier>{5341ef38-ab07-402a-ba52-66b7195934c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.3　编译器和调试器也有bug\8.3.1　编译器bug">
+      <UniqueIdentifier>{fdc810dc-b934-4728-874a-724ba87bceaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第8章　查找环境和编译器问题\8.3　编译器和调试器也有bug\8.3.2　调试器和编译器兼容性问题">
+      <UniqueIdentifier>{c5548fd0-220f-4421-b67e-e5a0e908a8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题">
+      <UniqueIdentifier>{232c42e2-3de3-48cd-a32d-5f83d8be8324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.1　链接器的工作原理">
+      <UniqueIdentifier>{430b3114-326c-4bbc-a9b5-3090a1c81cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.2　构建并链接对象">
+      <UniqueIdentifier>{b2c6d3d3-d256-4854-a727-7e10c2f7d0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号">
+      <UniqueIdentifier>{37987b0d-6873-429b-8dce-b89b7609a602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.1　丢失链接器参数">
+      <UniqueIdentifier>{f7af3e49-8d3f-48df-a074-d5490abbdb80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.2　搜索丢失的符号">
+      <UniqueIdentifier>{102ac656-707d-46e3-9f3f-81cc0cd76c97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.3　链接顺序问题">
+      <UniqueIdentifier>{af8f3fac-9444-4bfe-872a-643c0a2495cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.4　C++符号和名称改编">
+      <UniqueIdentifier>{75f18e43-0a8f-4af7-8305-178de937b4a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.5　符号的反改编">
+      <UniqueIdentifier>{99670909-1cd2-459a-b577-dbfcf9e6550f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.3　解析未定义的符号\9.3.6　链接C和C++代码">
+      <UniqueIdentifier>{03159920-0c7f-49e3-8b9e-92dc3bfd5028}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.4　具有多个定义的符号">
+      <UniqueIdentifier>{a45d5c4a-680e-4335-8bb1-c6b573c88541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.5　信号冲突">
+      <UniqueIdentifier>{05ca6924-3d92-4f00-8896-d3e09962c87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.6　识别编译器和链接器版本不匹配">
+      <UniqueIdentifier>{9cddab3e-6551-4cff-9f1b-63f24a546bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.6　识别编译器和链接器版本不匹配\9.6.1　系统库不匹配">
+      <UniqueIdentifier>{7c23f7fb-b907-45e1-8eb1-380a1bb1ac09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.6　识别编译器和链接器版本不匹配\9.6.2　对象文件不匹配">
+      <UniqueIdentifier>{d73d24e8-e925-483b-a1d5-9c30043f8b26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.6　识别编译器和链接器版本不匹配\9.6.3　运行时崩溃">
+      <UniqueIdentifier>{6e8567dd-9ee5-4c03-bbe7-08294d85ac59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.6　识别编译器和链接器版本不匹配\9.6.4　确定编译器版本">
+      <UniqueIdentifier>{20386052-a4d3-4e90-9399-75d9121a64b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题">
+      <UniqueIdentifier>{2ebdc3bd-7d30-4262-9c2d-1ff4545b2fb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题\9.7.1　链接或载入dll">
+      <UniqueIdentifier>{bcc7c0a7-128d-410c-a2a8-8ff83f73c5e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题\9.7.2　无法找到dll文件">
+      <UniqueIdentifier>{6e7ea4ee-fb79-4375-a4b9-639ad1e43328}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题\9.7.3　分析载入器问题">
+      <UniqueIdentifier>{38c75da1-a277-4a3a-bb46-9af3cc443089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题\9.7.4　在dll中设置断点">
+      <UniqueIdentifier>{5f7d2190-9950-4ca2-9773-d1109cd94625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第9章　处理链接问题\9.7　解决动态链接问题\9.7.5　提供dll问题的错误消息">
+      <UniqueIdentifier>{6b85f329-b90f-49be-8e35-8b09ceebde3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试">
+      <UniqueIdentifier>{a468ddb7-3232-42af-a4bc-d0a2133627d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.1　在C++函数、方法和操作符中设置断点">
+      <UniqueIdentifier>{6351a766-c221-4d69-bda6-d5130123f524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.2　在模板化的函数和C++类中设置断点">
+      <UniqueIdentifier>{7f50e7a7-86aa-4362-8c5a-620aaf8aeed3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.3　进入C++方法">
+      <UniqueIdentifier>{36ced273-e627-4339-becc-d33733a8e1a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.3　进入C++方法\10.3.1　用step-into命令进入到隐式函数中">
+      <UniqueIdentifier>{9d78a460-a3a5-4d44-99f3-5dc4c5b5664c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.3　进入C++方法\10.3.2　用step-out命令跳过隐式函数">
+      <UniqueIdentifier>{c098c97a-6974-4474-a5b6-8ac597e77fd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.3　进入C++方法\10.3.3　利用临时断点跳过隐式函数">
+      <UniqueIdentifier>{b909a916-8eac-4009-9829-9544be5fff9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.3　进入C++方法\10.3.4　从隐式函数调用返回">
+      <UniqueIdentifier>{5211894b-85b9-42c3-a2d3-f87b30208dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.4　条件断点和断点命令">
+      <UniqueIdentifier>{888d1bee-23c7-477e-b155-f5ecbb853e98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.5　调试静态构造/析构函数">
+      <UniqueIdentifier>{a1798eb7-eee6-4583-b154-e00d23aa695f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.5　调试静态构造/析构函数\10.5.1　由静态初始化程序的顺序依赖性引起的bug">
+      <UniqueIdentifier>{d50e334d-d589-4a39-81fc-597c893c74a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.5　调试静态构造/析构函数\10.5.2　识别静态初始化程序的栈跟踪">
+      <UniqueIdentifier>{9ef13450-362c-44b4-8bef-482b59b31669}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.5　调试静态构造/析构函数\10.5.3　在静态初始化之前连接调试器">
+      <UniqueIdentifier>{ae00d406-0143-4bc8-926a-d27d03c1794d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.6　使用观察点">
+      <UniqueIdentifier>{e0adc061-9b30-4eff-b150-8167bc72656e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.7　捕捉信号">
+      <UniqueIdentifier>{f03b12d7-c372-4450-8f0c-6b25398a2416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.8　捕获异常">
+      <UniqueIdentifier>{e41a64a9-1bee-4193-a738-958f13a8a797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪">
+      <UniqueIdentifier>{8a7de250-2e43-4c64-8c09-5a2358cdc87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.1　带调试信息编译的源代码的栈跟踪">
+      <UniqueIdentifier>{9ebae5c3-b2c7-4a12-bef8-e970a7114324}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.2　不带调试信息编译的源代码的栈跟踪">
+      <UniqueIdentifier>{121011cd-fc2b-4379-9b89-3301da4796dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.3　不带任何调试信息的帧">
+      <UniqueIdentifier>{4dd59841-6b7c-47ec-bd8a-b1ce8a670d55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.4　实际工作中的栈跟踪">
+      <UniqueIdentifier>{0893ae25-95e9-4b86-b583-742767c35094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.5　改编后的函数名称">
+      <UniqueIdentifier>{a4dd435b-a656-4a30-a84a-366954940bca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.6　被破坏的栈跟踪">
+      <UniqueIdentifier>{d1e89d52-05ac-4b75-9b5b-1a2ec52422ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.9　读取栈跟踪\10.9.7　核心转储">
+      <UniqueIdentifier>{3f2c7f25-67ec-480f-b531-8c95b4eeb1f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序">
+      <UniqueIdentifier>{8ac67b73-1575-41ca-bdd2-bc4231ef084e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.1　修改变量">
+      <UniqueIdentifier>{44cc5407-6b6b-45ab-8cbe-17575d759d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.2　调用函数">
+      <UniqueIdentifier>{5fbb5d3f-407b-48d8-8a84-afbcf46425d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.3　修改函数的返回值">
+      <UniqueIdentifier>{c4b4e814-e1b3-42c6-8439-5c16f55949ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.4　中止函数调用">
+      <UniqueIdentifier>{52416f6b-7867-4f65-9a10-d79955e8d635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.5　跳过或重复执行个别语句">
+      <UniqueIdentifier>{b9fb7494-3169-4fd1-ad7c-fede2bc854fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.10　操纵正在运行的程序\10.10.6　输出和修改内存内容">
+      <UniqueIdentifier>{ec71a2f9-82eb-4516-9d3d-dca759581b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.11　在没有调试信息时进行调试">
+      <UniqueIdentifier>{02ef36fa-99f5-4f33-b1b4-daf4cb0ebcac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.11　在没有调试信息时进行调试\10.11.1　从栈读取函数参数">
+      <UniqueIdentifier>{417c6aa1-2082-46c3-9d90-824eed9cbf32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.11　在没有调试信息时进行调试\10.11.2　读取局部/全局变量和用户定义的数据类型">
+      <UniqueIdentifier>{8e5e28a1-9b94-4002-9ee9-ac8b4b236dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.11　在没有调试信息时进行调试\10.11.3　在源代码中查找语句的大概位置">
+      <UniqueIdentifier>{f1e9316d-5d59-44c2-96d7-c5ab5215b64e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第10章　高级调试\10.11　在没有调试信息时进行调试\10.11.4　走查汇编代码">
+      <UniqueIdentifier>{99e66c1d-e48a-46ad-acbc-961bac826877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码">
+      <UniqueIdentifier>{b7a6a640-53e3-4eca-8342-b9bd5ba4dbe9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.1　注释的重要性">
+      <UniqueIdentifier>{44202d85-e911-488e-8238-0233b8f5d723}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.1　注释的重要性\11.1.1　函数签名的注释">
+      <UniqueIdentifier>{5d353c6e-909b-4650-a421-054782d058b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.1　注释的重要性\11.1.2　对折中办法的注释">
+      <UniqueIdentifier>{c05226e9-d0a4-4321-9b86-5ccbdebc8394}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.1　注释的重要性\11.1.3　为不确定的代码加注释">
+      <UniqueIdentifier>{48fbb9bd-7035-48cb-826e-e6adee1af386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.2　采用一致的编码风格">
+      <UniqueIdentifier>{1451429a-b179-489d-b400-58f4cf899279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.2　采用一致的编码风格\11.2.1　仔细选择名称">
+      <UniqueIdentifier>{4e3f79ea-0288-4ccf-b0ae-f4e8b1c79b7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.2　采用一致的编码风格\11.2.2　不要使用“聪明过头”的结构">
+      <UniqueIdentifier>{3deb97af-073c-46f9-ad7c-4d7e3f106597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.2　采用一致的编码风格\11.2.3　不要压缩代码">
+      <UniqueIdentifier>{d2a1b7a7-b0e1-410a-b493-127d8bcadf6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.2　采用一致的编码风格\11.2.4　为复杂表达式使用临时变量">
+      <UniqueIdentifier>{1e843494-48f1-48b5-9278-2b9f145e7949}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.3　避免使用预处理器宏">
+      <UniqueIdentifier>{6c48c2c3-153b-4292-9500-8123bec1d19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.3　避免使用预处理器宏\11.3.1　使用常量或枚举来替代宏">
+      <UniqueIdentifier>{22069c7b-effd-4617-ae5f-5fc55eabd39d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.3　避免使用预处理器宏\11.3.2　使用函数来替代预处理器宏">
+      <UniqueIdentifier>{f5b53df6-5ed8-4686-89eb-b977eced583f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.3　避免使用预处理器宏\11.3.3　调试预处理器输出">
+      <UniqueIdentifier>{0b5cdd2e-ee12-47f2-b391-168c7a2f40a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.3　避免使用预处理器宏\11.3.4　使用功能更强的预处理器">
+      <UniqueIdentifier>{395e5b6b-af6f-4d0c-8197-61cebb597c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.4　提供更多调试函数">
+      <UniqueIdentifier>{d46590db-0e85-4320-9537-0c72e9b6fc57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.4　提供更多调试函数\11.4.1　显示用户定义的数据类型">
+      <UniqueIdentifier>{962bfc29-6d9c-4b32-8c16-043112cb7a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.4　提供更多调试函数\11.4.2　自检查代码">
+      <UniqueIdentifier>{b59506cd-b0f7-4fa2-8ca9-e39b9a558714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.4　提供更多调试函数\11.4.3　为操作符创建一个函数，以便帮助调试">
+      <UniqueIdentifier>{dd1e469d-81fc-4b39-969b-503977489e18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第11章　编写可调试的代码\11.5　为事后调试做准备">
+      <UniqueIdentifier>{0488482d-28cf-480a-8b3e-65af6bcf1bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用">
+      <UniqueIdentifier>{d01f2fc5-e0e0-4a63-b29e-692c405b697f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.1　使用编译器作为调试工具">
+      <UniqueIdentifier>{deb8edc3-598c-4f92-ac71-a77a66821749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.1　使用编译器作为调试工具\12.1.1　不要认为警告是无害的">
+      <UniqueIdentifier>{bf5b3a9f-3094-4474-8650-6034a26d9f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.1　使用编译器作为调试工具\12.1.2　使用多个编译器来检查代码">
+      <UniqueIdentifier>{ca2e39c3-d458-4b67-b1f1-2686869a2d30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.2　使用lint">
+      <UniqueIdentifier>{cf2f195e-4706-4914-ae90-82f1e007dc07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.3　使用静态分析工具">
+      <UniqueIdentifier>{39cf2cbd-c329-4878-9bcf-9e33b126af28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.3　使用静态分析工具\12.3.1　了解静态检查器">
+      <UniqueIdentifier>{c0c2fbe4-d792-49d2-9446-445482fb4df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.3　使用静态分析工具\12.3.2　将静态检查器检测到的错误减至（接近）零">
+      <UniqueIdentifier>{9061f1b8-922e-4345-a9a3-436ed6e4ef62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.3　使用静态分析工具\12.3.3　完成代码清理后重新运行所有测试用例">
+      <UniqueIdentifier>{e3263bf1-0553-4548-b1f8-e79f166c3b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第12章　静态检查的作用\12.4　静态分析的高级应用">
+      <UniqueIdentifier>{cb40c825-2700-40bc-bcc1-a148bb11be0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\第13章　结束语">
+      <UniqueIdentifier>{5aeb7848-da3b-4c3f-b122-207dfb2c9b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\附录A　调试命令">
+      <UniqueIdentifier>{9bb1fe94-f437-48e6-97fb-464deff2ffe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\附录B　工具资源">
+      <UniqueIdentifier>{6801b9ca-43a8-4e38-be73-76a03e0c6dd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\The Developer%27s Guide to Debugging（软件调试实战 ）\附录C　源代码">
+      <UniqueIdentifier>{d6ab7336-5f19-426a-9172-49af82d3ebec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Configuration\BookDebugging.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\EnvironmentVariable.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Log.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\TestingHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Testing.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\TestingHelper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\TestingLib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\TestingMain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
+    <Text Include="Resource\Advanced Windows Debugging.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Debugging C++.txt">
+      <Filter>资源文件</Filter>
+    </Text>
     <Text Include="Resource\ReadMe.txt">
       <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Safe C++.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Schedule.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\The Developer%27s Guide to Debugging.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
@@ -78,8 +2691,72 @@
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebugging.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingDll.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingExport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingFwd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\BookDebuggingNoImport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\DllLib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Placeholder\Placeholder.h">
+      <Filter>Placeholder 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Helper\BookDebuggingCustomAssertMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Helper\Helper.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Helper\HelperFwd.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Helper\UserMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Helper\BookDebuggingClassInvariantMacro.h">
+      <Filter>Helper 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\DllLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\DllMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookDebugging\Placeholder\Placeholder.cpp">
+      <Filter>Placeholder 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

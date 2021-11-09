@@ -1,157 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="StaticDebug|Win32">
       <Configuration>StaticDebug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticDebug|x64">
-      <Configuration>StaticDebug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="StaticRelease|Win32">
       <Configuration>StaticRelease</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="StaticRelease|x64">
-      <Configuration>StaticRelease</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="StaticDebug|x64">
+      <Configuration>StaticDebug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|x64">
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Configuration\BookNetworkProgrammingTesting.json">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Configuration\EnvironmentVariable.json">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Configuration\Log.json">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </None>
-    <None Include="Configuration\Testing.json">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\Testing.h" />
-    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingHelper.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingHelper.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingLib.cpp" />
-    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resource\ReadMe.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
-    </Text>
+    <ProjectConfiguration Include="StaticRelease|x64">
+      <Configuration>StaticRelease</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{25932494-78B7-44F8-9B0C-71BD675C867D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>GameTemplate</RootNamespace>
+    <RootNamespace>BookNetworkProgrammingTesting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -259,17 +146,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -287,10 +174,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent />
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
     <ClCompile>
@@ -302,49 +185,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
-    </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Console</SubSystem>
-    </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -360,13 +200,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
     <ClCompile>
@@ -382,13 +215,28 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -404,13 +252,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
     <ClCompile>
@@ -426,20 +267,87 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
     </Link>
-    <PreBuildEvent>
-      <Command>
-      </Command>
-    </PreBuildEvent>
-    <PostBuildEvent>
-      <Command>xcopy "$(ProjectDir)/Configuration/$(ProjectName).json" "$(AssistTestingInclude)/../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\AdvancedCORBAProgrammingWithCppSuite\AdvancedCORBAProgrammingWithCppPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\AdvancedCORBAProgrammingWithCppSuite\AdvancedCORBAProgrammingWithCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksASystemApproachSuite\ComputerNetworksASystemApproachPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksASystemApproachSuite\ComputerNetworksASystemApproachSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksATopDownApproachSuite\ComputerNetworksATopDownApproachPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksATopDownApproachSuite\ComputerNetworksATopDownApproachSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksSuite\ComputerNetworksPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksSuite\ComputerNetworksSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ConfiguringWindowsServerSuite\ConfiguringWindowsServer2008NetworkInfrastructureSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ConfiguringWindowsServerSuite\ConfiguringWindowsServerPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\CryptographyAndNetworkSecuritySuite\CryptographyAndNetworkSecurityPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\CryptographyAndNetworkSecuritySuite\CryptographyAndNetworkSecuritySuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\EffectiveTCPIPProgrammingSuite\EffectiveTCPIPProgrammingPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\EffectiveTCPIPProgrammingSuite\EffectiveTCPIPProgrammingSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\InternetworkingWithTCPIPSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume1Suite\PrinciplesProtocolsPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume1Suite\PrinciplesProtocolsAndArchitecturesSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume2Suite\DesignImplementationPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume2Suite\DesignImplementationAndInternalsSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume3Suite\ClientServerProgrammingAndApplicationsSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume3Suite\ClientServerProgrammingPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\MultiplayerGameProgrammingSuite\MultiplayerGameProgrammingPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\MultiplayerGameProgrammingSuite\MultiplayerGameProgrammingSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkedGraphicsBuildingNetworkedGamesSuite\NetworkedGraphicsBuildingNetworkedGamesAndVirtualEnvironmentsSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkedGraphicsBuildingNetworkedGamesSuite\NetworkedGraphicsBuildingPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkProgrammingForMicrosoftWindowsSuite\MicrosoftWindowsPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkProgrammingForMicrosoftWindowsSuite\NetworkProgrammingForMicrosoftWindowsSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TCPIPProtocolSuite\TCPIPProtocolPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TCPIPProtocolSuite\TCPIPProtocolSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\Testing.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\UnixNetworkProgrammingSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume1Suite\TheSocketsNetworkingAPIPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume1Suite\TheSocketsNetworkingAPISuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume2Suite\InterprocessCommunicationsPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume2Suite\InterprocessCommunicationsSuite.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\AdvancedCORBAProgrammingWithCppSuite\AdvancedCORBAProgrammingWithCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksASystemApproachSuite\ComputerNetworksASystemApproachPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksATopDownApproachSuite\ComputerNetworksATopDownApproachPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ComputerNetworksSuite\ComputerNetworksPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\ConfiguringWindowsServerSuite\ConfiguringWindowsServerPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\CryptographyAndNetworkSecuritySuite\CryptographyAndNetworkSecurityPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\EffectiveTCPIPProgrammingSuite\EffectiveTCPIPProgrammingPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume1Suite\PrinciplesProtocolsPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume2Suite\DesignImplementationPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\InternetworkingWithTCPIPSuite\Volume3Suite\ClientServerProgrammingPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\MultiplayerGameProgrammingSuite\MultiplayerGameProgrammingPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkedGraphicsBuildingNetworkedGamesSuite\NetworkedGraphicsBuildingPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\NetworkProgrammingForMicrosoftWindowsSuite\MicrosoftWindowsPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TCPIPProtocolSuite\TCPIPProtocolPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingHelper.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingLib.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume1Suite\TheSocketsNetworkingAPIPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookOperatingSystem\BookNetworkProgrammingTesting\UnixNetworkProgrammingSuite\Volume2Suite\InterprocessCommunicationsPlaceholderTesting.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\BookNetworkProgrammingTesting.json" />
+    <None Include="Configuration\EnvironmentVariable.json" />
+    <None Include="Configuration\Log.json" />
+    <None Include="Configuration\Testing.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\ReadMe.txt" />
+    <Text Include="Resource\Schedule.txt" />
+    <Text Include="Resource\Todo\Level 0.txt" />
+    <Text Include="Resource\Todo\Level 1.txt" />
+    <Text Include="Resource\Todo\Level 2.txt" />
+    <Text Include="Resource\Todo\Level 3.txt" />
+    <Text Include="Resource\Todo\Level 4.txt" />
+    <Text Include="Resource\Todo\Level 5.txt" />
+    <Text Include="Resource\Todo\Level 6.txt" />
+    <Text Include="Resource\Todo\Level 7.txt" />
+    <Text Include="Resource\Todo\Level 8.txt" />
+    <Text Include="Resource\Todo\Level 9.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

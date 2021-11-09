@@ -39,4 +39,16 @@ uint64_t CoreTools::UniqueIDManager::NextUniqueID(E index)
     return NextUniqueID(System::EnumCastUnderlying<int>(index));
 }
 
+template <typename E>
+void CoreTools::UniqueIDManager::SetUniqueID(E index, uint64_t latestIndex)
+{
+    static_assert(std::is_enum_v<E>, "E must be an enum.");
+
+    SINGLETON_MUTEX_ENTER_MEMBER;
+
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return SetUniqueID(System::EnumCastUnderlying<int>(index), latestIndex);
+}
+
 #endif  // CORE_TOOLS_BASE_UNIQUEID_MANAGER_DETAIL_H

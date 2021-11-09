@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 11:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:05)
 
 #ifndef CORE_TOOLS_THREADING_DLL_MUTEX_H
 #define CORE_TOOLS_THREADING_DLL_MUTEX_H
@@ -13,8 +13,8 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "Flags/MutexFlags.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(MutexImpl);
 
 namespace CoreTools
@@ -27,16 +27,16 @@ namespace CoreTools
 
     public:
         // 参数UseCriticalSection只对Windows平台有效，非Windows平台会自动转换成UseDefault。
-        explicit DllMutex(MutexCreate mutexCreate = MutexCreate::UseCriticalSection);
+        explicit DllMutex(MutexCreate mutexCreate);
         virtual ~DllMutex() noexcept = default;
-        DllMutex(const DllMutex&) = delete;
-        virtual DllMutex& operator=(const DllMutex&) = delete;
+        DllMutex(const DllMutex& rhs) = delete;
+        virtual DllMutex& operator=(const DllMutex& rhs) = delete;
         DllMutex(DllMutex&& rhs) noexcept;
         virtual DllMutex& operator=(DllMutex&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] bool TryEnter();
+        NODISCARD bool TryEnter();
         void Enter();
         void Leave() noexcept;
 

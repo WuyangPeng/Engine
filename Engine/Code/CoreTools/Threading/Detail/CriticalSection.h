@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/08/31 22:49)
 
-// 临界区类
 #ifndef CORE_TOOLS_THREADING_CRITICAL_SECTION_H
 #define CORE_TOOLS_THREADING_CRITICAL_SECTION_H
 
@@ -18,6 +17,7 @@
 
 namespace CoreTools
 {
+    // 临界区类
     class CORE_TOOLS_HIDDEN_DECLARE CriticalSection final : public MutexImpl
     {
     public:
@@ -33,11 +33,11 @@ namespace CoreTools
         void Initialize() final;
         void Delete() noexcept final;
         void Enter() noexcept final;
-        [[nodiscard]] bool TryEnter() noexcept final;
+        NODISCARD bool TryEnter() noexcept final;
         void Leave() noexcept final;
 
     private:
-        ThreadingCriticalSection m_CriticalSection;
+        ThreadingCriticalSection criticalSection;
     };
 }
 

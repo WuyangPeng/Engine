@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 17:02)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 12:58)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_IMPL_H
 #define CORE_TOOLS_THREADING_THREAD_IMPL_H
@@ -29,15 +29,15 @@ namespace CoreTools
     public:
         ThreadImpl(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);
         ~ThreadImpl() noexcept;
-        ThreadImpl(const ThreadImpl&) = delete;
-        ThreadImpl& operator=(const ThreadImpl&) = delete;
-        ThreadImpl(ThreadImpl&&) noexcept = delete;
-        ThreadImpl& operator=(ThreadImpl&&) noexcept = delete;
+        ThreadImpl(const ThreadImpl& rhs) = delete;
+        ThreadImpl& operator=(const ThreadImpl& rhs) = delete;
+        ThreadImpl(ThreadImpl&& rhs) noexcept = delete;
+        ThreadImpl& operator=(ThreadImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] ThreadingDWord GetThreadID() const noexcept;
-        [[nodiscard]] ThreadHandle GetThreadHandle() noexcept;
+        NODISCARD ThreadingDWord GetThreadID() const noexcept;
+        NODISCARD ThreadHandle GetThreadHandle() noexcept;
 
         // 启动和停止线程。
         void Resume();
@@ -46,18 +46,18 @@ namespace CoreTools
         void Wait();
 
         void SetThreadPriority(int priority);
-        [[nodiscard]] int GetThreadPriority() const;
+        NODISCARD int GetThreadPriority() const;
 
     private:
-        static constexpr auto sm_FailResult = static_cast<ThreadingDWord>(-1);
+        static constexpr auto failResult = static_cast<ThreadingDWord>(-1);
 
     private:
-        ThreadingDWord m_ThreadID;
-        void* m_Function;
-        void* m_UserData;
-        int m_ProcessorNumber;
-        ThreadSize m_StackSize;
-        ThreadHandle m_Thread;
+        ThreadingDWord threadID;
+        void* function;
+        void* userData;
+        int processorNumber;
+        ThreadSize stackSize;
+        ThreadHandle thread;
     };
 }
 

@@ -39,3 +39,15 @@ uint64_t CoreTools::UniqueIDManagerImpl::NextUniqueID(int index)
 
     return ++currentUniqueID;
 }
+
+void CoreTools::UniqueIDManagerImpl::SetUniqueID(int index, uint64_t latestIndex)
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    auto& currentUniqueID = uniqueID.at(index);
+
+    if (currentUniqueID < latestIndex)
+    {
+        currentUniqueID = latestIndex;
+    }
+}

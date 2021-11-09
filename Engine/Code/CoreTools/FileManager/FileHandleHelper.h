@@ -1,14 +1,14 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 20:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:50)
 
-#ifndef CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELP_H
-#define CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELP_H
+#ifndef CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELPER_H
+#define CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELPER_H
 
 #include "CoreTools/CoreToolsDll.h"
 
@@ -27,9 +27,9 @@ namespace CoreTools
 
     public:
         // 装载整个文件到一个缓冲区。
-        [[nodiscard]] static const FileBuffer LoadFromFile(const String& fileName);
+        NODISCARD static const FileBuffer LoadFromFile(const String& fileName);
 
-        [[nodiscard]] static const FileBuffer LoadFromFileUseEnvironment(const String& fileName);
+        NODISCARD static const FileBuffer LoadFromFileUseEnvironment(const String& fileName);
 
         // 保存缓冲区到一个文件中。
         static void SaveIntoFile(const String& fileName, int bufferSize, const char* buffer);
@@ -39,4 +39,4 @@ namespace CoreTools
     };
 }
 
-#endif  // CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELP_H
+#endif  // CORE_TOOLS_FILE_MANAGER_FILE_HANDLE_HELPER_H

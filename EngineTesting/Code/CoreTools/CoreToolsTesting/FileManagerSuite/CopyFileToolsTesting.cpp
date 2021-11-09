@@ -1,61 +1,69 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/05 15:37)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.7.2.3 (2021/09/06 16:47)
 
 #include "CopyFileToolsTesting.h"
 #include "CoreTools/FileManager/CopyFileTools.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <vector>
 #include <string>
+#include <vector>
 
-using std::vector;
 using std::string;
+using std::vector;
 using namespace std::literals;
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26426)
-namespace CoreTools
+
+System::String CoreTools::CopyFileToolsTesting::GetCopyFileName()
 {
-	const auto g_CFileManagerHelpFileName = SYSTEM_TEXT("Resource/CFileManagerTesting/CFileManagerHelpTestingText.txt"s);
-
-	const auto g_CFileManagerHelpContent = SYSTEM_TEXT("CFileManagerHelp Testing Text"s);
-
-	const auto g_CopyFileName = SYSTEM_TEXT("Resource/CopyFile.txt"s);
-}
-#include STSTEM_WARNING_POP
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, CopyFileToolsTesting)
-
-void CoreTools::CopyFileToolsTesting
-	::MainTest()
-{
-	ASSERT_NOT_THROW_EXCEPTION_0(CopyFileTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(VerificationTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
-	ASSERT_THROW_EXCEPTION_0(VerificationTest);
+    return SYSTEM_TEXT("Resource/CopyFile.txt"s);
 }
 
-void CoreTools::CopyFileToolsTesting
-	::CopyFileTest()
+CoreTools::CopyFileToolsTesting::CopyFileToolsTesting(const OStreamShared& stream)
+    : ParentType{ stream }
 {
-	CopyFileTools tools{ g_CFileManagerHelpFileName,g_CopyFileName };
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-void CoreTools::CopyFileToolsTesting
-	::VerificationTest()
-{
-	IFStreamManager manager{ g_CopyFileName };
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, CopyFileToolsTesting)
 
-	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(manager.GetFileContent(), g_CFileManagerHelpContent);
+void CoreTools::CopyFileToolsTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::CopyFileToolsTesting
-	::DeleteFileTest()
+void CoreTools::CopyFileToolsTesting::MainTest()
 {
-	DeleteFileTools tools{ g_CopyFileName };
+    ASSERT_NOT_THROW_EXCEPTION_0(CopyFileTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(VerificationTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(DeleteFileTest);
+    ASSERT_THROW_EXCEPTION_0(VerificationTest);
 }
 
+void CoreTools::CopyFileToolsTesting::CopyFileTest()
+{
+    const auto cFileManagerHelpFileName = SYSTEM_TEXT("Resource/CFileManagerTesting/CFileManagerHelperTestingText.txt"s);
+
+    CopyFileTools tools{ cFileManagerHelpFileName, GetCopyFileName() };
+}
+
+void CoreTools::CopyFileToolsTesting::VerificationTest()
+{
+    const auto cFileManagerHelpContent = SYSTEM_TEXT("CFileManagerHelper Testing Text"s);
+    IFStreamManager manager{ GetCopyFileName() };
+
+    ASSERT_EQUAL(manager.GetFileContent(), cFileManagerHelpContent);
+}
+
+void CoreTools::CopyFileToolsTesting::DeleteFileTest()
+{
+    DeleteFileTools tools{ GetCopyFileName() };
+}

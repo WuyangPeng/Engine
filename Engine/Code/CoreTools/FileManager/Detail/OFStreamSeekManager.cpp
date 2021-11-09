@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 13:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,7 @@
 using namespace std::literals;
 
 CoreTools::OFStreamSeekManager::OFStreamSeekManager(MasterTypeReference master)
-    : m_Master{ master }, m_CurrentPosition{ m_Master.tellp() }
+    : master{ master }, currentPosition{ master.tellp() }
 {
     SeekBeginPosition();
 
@@ -27,9 +27,9 @@ CoreTools::OFStreamSeekManager::OFStreamSeekManager(MasterTypeReference master)
 // private
 void CoreTools::OFStreamSeekManager::SeekBeginPosition()
 {
-    if (m_Master && m_CurrentPosition != GetErrorPosition())
+    if (master && currentPosition != GetErrorPosition())
     {
-        m_Master.seekp(0, MasterType::beg);
+        master.seekp(0, MasterType::beg);
     }
     else
     {
@@ -41,11 +41,7 @@ CoreTools::OFStreamSeekManager::~OFStreamSeekManager() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-    EXCEPTION_TRY
-    {
-        m_Master.seekp(m_CurrentPosition, MasterType::beg);
-    }
-    EXCEPTION_ALL_CATCH(CoreTools)
+    ResetPosition();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -53,7 +49,7 @@ bool CoreTools::OFStreamSeekManager::IsValid() const noexcept
 {
     try
     {
-        if (m_Master && m_CurrentPosition != GetErrorPosition())
+        if (master && currentPosition != GetErrorPosition())
             return true;
         else
             return false;
@@ -70,4 +66,13 @@ CoreTools::OFStreamSeekManager::MasterPosType CoreTools::OFStreamSeekManager::Ge
     static MasterPosType errorPosition{ -1 };
 
     return errorPosition;
+}
+
+void CoreTools::OFStreamSeekManager::ResetPosition() noexcept
+{
+    EXCEPTION_TRY
+    {
+        master.seekp(currentPosition, MasterType::beg);
+    }
+    EXCEPTION_ALL_CATCH(CoreTools);
 }

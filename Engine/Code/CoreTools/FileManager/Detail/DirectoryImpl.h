@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 17:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:02)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_DIRECTORY_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_DIRECTORY_IMPL_H
@@ -26,10 +26,10 @@ namespace CoreTools
         explicit DirectoryImpl(const String& directoryName);
         ~DirectoryImpl() noexcept;
 
-        DirectoryImpl(const DirectoryImpl&) = delete;
-        DirectoryImpl& operator=(const DirectoryImpl&) = delete;
-        DirectoryImpl(DirectoryImpl&&) noexcept = delete;
-        DirectoryImpl& operator=(DirectoryImpl&&) noexcept = delete;
+        DirectoryImpl(const DirectoryImpl& rhs) = delete;
+        DirectoryImpl& operator=(const DirectoryImpl& rhs) = delete;
+        DirectoryImpl(DirectoryImpl&& rhs) noexcept = delete;
+        DirectoryImpl& operator=(DirectoryImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 

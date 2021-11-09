@@ -65,15 +65,17 @@ const System::String CoreTools::GameError<E>::GetError() const
 template <typename E>
 const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
+    using namespace std::literals;
+
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = ") + System::ToString(System::EnumCastUnderlying(errorCode));
+    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = "s) + System::ToString(System::EnumCastUnderlying(errorCode));
 
     EXCEPTION_TRY
     {
         auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
 
-        return SYSTEM_TEXT("异常名：") + errorName + SYSTEM_TEXT("，") + errorCodeDescribed;
+        return SYSTEM_TEXT("异常名："s) + errorName + SYSTEM_TEXT("，"s) + errorCodeDescribed + SYSTEM_TEXT("，"s);
     }
     EXCEPTION_ENGINE_EXCEPTION_CATCH(CoreTools);
 

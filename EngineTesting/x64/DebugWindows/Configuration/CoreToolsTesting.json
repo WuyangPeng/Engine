@@ -134,41 +134,153 @@
 
   "consoleSuite": {
     "ConsoleTesting": 1,
-    "ConsoleColorsTesting": 1,
+    "ConsoleColorsTesting": 0,
     "ConsoleTextColorsManagerTesting": 0,
     "ConsoleAllocTesting": 1
   },
 
   "threadingSuite": {
-    "CriticalSectionTesting": 1,
-    "WindowsMutexTesting": 1,
-    "StdMutexTesting": 1,
-    "StdRecursiveMutexTesting": 1,
-    "BoostMutexTesting": 1,
-    "BoostRecursiveMutexTesting": 1,
+    "CriticalSectionTesting": 30,
+    "WindowsMutexTesting": 30,
+    "StdMutexTesting": 30,
+    "StdRecursiveMutexTesting": 30,
+    "BoostMutexTesting": 30,
+    "BoostRecursiveMutexTesting": 30,
     "NullMutexTesting": 1,
     "EventTesting": 1,
     "SemaphoreTesting": 1,
     "ThreadTesting": 1,
-    "ThreadManagerTesting": 1
+    "ThreadManagerTesting": 1,
+    "ThreadGuardTesting": 1,
+    "ThreadGroupTesting": 1
   },
 
   "fileManagerSuite": {
-    "EndianTesting": 1,
     "FileBufferTesting": 1,
-    "CFileManagerTesting": 1,
-    "StreamManagerTesting": 1,
     "DeleteFileToolsTesting": 1,
     "CopyFileToolsTesting": 1,
-    "FileHandleTesting": 1,
-    "FileManagerTesting": 1,
-    "BufferIOTesting": 1,
+    "DirectoryTesting": 1,
+    "GenerateRandomNameTesting": 1
+  },
+
+  "endianSuite": {
+    "ByteSwapTesting": 1,
+    "ByteSwapperTesting": 1,
+    "TypeAliaserTesting": 1,
+    "EndianTesting": 1
+  },
+
+  "cFileManagerSuite": {
+    "CWriteFileManagerTesting": 1,
+    "CReadFileManagerTesting": 1,
+    "CFileManagerTesting": 1
+  },
+
+  "streamManagerSuite": {
+    "OFStreamManagerTesting": 1,
+    "IFStreamManagerTesting": 1
+  },
+
+  "fileHandleSuite": {
+    "WriteFileHandleTesting": 1,
+    "ReadFileHandleTesting": 1,
+    "ReadAndWriteFileHandleTesting": 1,
+    "FileHandleHelperTesting": 1,
+    "FileHandleTesting": 1
+  },
+
+  "fileSuite": {
+    "WriteFileManagerTesting": 1,
+    "ReadFileManagerTesting": 1,
+    "FileManagerHelperTesting": 1
+  },
+
+  "bufferIOSuite": {
+    "ReadBufferIOTesting": 1,
+    "WriteBufferIOTesting": 1
+  },
+
+  "environmentSuite": {
     "EnvironmentVariableTesting": 1,
     "EnvironmentTesting": 1
   },
 
-  "textParsingSuite": {
+  "fileAsynchronousSuite": {
+    "FileAsynchronousParameterTesting": 1,
+    "FileEventTesting": 1,
+    "FileAsynchronousTesting": 1
+  },
 
+  "textParsingSuite": {
+    "ExcelConversionCSVTesting": 1,
+    "BatchConversionCSVTesting": 1,
+    "CSVTypeConversionTesting": 1,
+    "CSVHeadTesting": 1,
+    "CSVRowTesting": 1,
+    "CSVContentTesting": 1,
+    "CSVGenerateTesting": 1,
+    "CSVTotalGenerateTesting": 1,
+    "CSVConfigureTesting": 1
+  },
+
+  "SimpleZipSuite": {
+    "ZipEntryTesting": 1,
+    "ZipArchiveTesting": 1
+  },
+
+  "simpleCSVSuite": {
+    "SimpleCSVExceptionTesting": 1,
+    "XmlDataTesting": 1,
+    "XmlFileTesting": 1,
+    "SharedStringsTesting": 1,
+    "ColorTesting": 1,
+    "CellValueProxyTesting": 1,
+    "CellValueTesting": 1,
+    "CellReferenceTesting": 1000,
+    "CellTesting": 1,
+    "CellRangeTesting": 1,
+    "CellIteratorTesting": 1,
+    "ColumnTesting": 1,
+    "RowDataIteratorTesting": 1,
+    "RowDataRangeTesting": 1,
+    "RowRangeTesting": 1,
+    "RowTesting": 1,
+    "RowDataProxyTesting": 1,
+    "SheetBaseTesting": 1,
+    "WorksheetTesting": 1,
+    "AppPropertiesTesting": 1,
+    "PropertiesTesting": 1,
+    "ContentItemTesting": 1,
+    "ContentTypesTesting": 1,
+    "RelationshipItemTesting": 1,
+    "RelationshipsTesting": 1,
+    "WorkbookTesting": 1,
+    "DocumentTesting": 1
+  },
+
+  "simpleCSVCommandSuite": {
+    "CommandSetSheetNameTesting": 1,
+    "CommandSetSheetVisibilityTesting": 1,
+    "CommandSetSheetColorTesting": 1,
+    "CommandSetSheetIndexTesting": 1,
+    "CommandResetCalcChainTesting": 1,
+    "CommandAddSharedStringsTesting": 1,
+    "CommandAddWorksheetTesting": 1,
+    "CommandAddChartsheetTesting": 1,
+    "CommandDeleteSheetTesting": 1,
+    "CommandCloneSheetTesting": 1
+  },
+
+  "querySuite": {
+    "QuerySheetNameTesting": 1,
+    "QuerySheetIndexTesting": 1,
+    "QuerySheetVisibilityTesting": 1,
+    "QuerySheetTypeTesting": 1,
+    "QuerySheetIDTesting": 1,
+    "QuerySheetRelsIDTesting": 1,
+    "QuerySheetRelsTargetTesting": 1,
+    "QuerySharedStringsTesting": 1,
+    "QueryXmlDataTesting": 1
   },
 
   "logManagerSuite": {

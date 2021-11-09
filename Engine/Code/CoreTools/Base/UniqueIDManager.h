@@ -55,6 +55,11 @@ namespace CoreTools
         template <typename E>
         NODISCARD uint64_t NextUniqueID(E index);
 
+        template <typename E>
+        void SetUniqueID(E index, uint64_t latestIndex);
+
+        void SetUniqueID(int index, uint64_t latestIndex);
+
     private:
         using UniqueIDManagerUniquePtr = std::unique_ptr<UniqueIDManager>;
 

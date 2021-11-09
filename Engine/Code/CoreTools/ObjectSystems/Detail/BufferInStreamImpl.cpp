@@ -46,7 +46,7 @@ void CoreTools::BufferInStreamImpl::AnalysisBuffer()
 }
 
 // private
-void CoreTools::BufferInStreamImpl::IncrementBytesProcessed() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::BufferInStreamImpl::IncrementBytesProcessed()  
 {
     if (0 < m_StartPoint)
     {

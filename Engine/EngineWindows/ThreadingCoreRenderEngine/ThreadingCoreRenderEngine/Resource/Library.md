@@ -203,6 +203,25 @@ lua（引擎通过宏SCRIPT_USE_LUA关联）
    输出目录改成：$(SolutionDir)$(Platform)\$(Configuration)\。
    增加附加库目录：$(SolutionDir)$(Platform)\$(Configuration)\。附加依赖项增加：lua.lib。
 
+----------------------------  
+OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
+1. 官方网站：https://github.com/troldal/OpenXLSX。
+2. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+3. 执行OpenXLSX下的批处理文件。
+
+----------------------------
+pugixml（引擎直接关联）
+1. 版本：1.11.4。
+2. 官方网站：https://github.com/zeux/pugixml。
+3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
+
+----------------------------
+
+miniz（引擎直接关联）
+1. 版本：2.2.0。
+2. 官方网站：https://github.com/richgel999/miniz。
+3. 使用releases page页的版本编译静态库，名为miniz。
+
 ----------------------------
 perl（引擎通过宏SCRIPT_USE_PERL关联）
 1. 版本：5.32.0。

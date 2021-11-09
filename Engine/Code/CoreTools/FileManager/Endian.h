@@ -1,22 +1,24 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 20:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/02 16:16)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_ENDIAN_H
 #define CORE_TOOLS_FILE_MANAGER_ENDIAN_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
+
 #include <vector>
 
-// 字节存储顺序，结果将通过参数返回，调用者必须保持迭代器的有效性。
 namespace CoreTools
 {
+    // 字节存储顺序，结果将通过参数返回，调用者必须保持迭代器的有效性。
     class CORE_TOOLS_DEFAULT_DECLARE Endian final
     {
     public:
@@ -27,25 +29,25 @@ namespace CoreTools
 
     public:
         // 测试机器的字节顺序是否是big endian。
-        [[nodiscard]] static bool IsBigEndian();
+        NODISCARD static bool IsBigEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
 
         // 测试机器的字节顺序是否是little endian。
-        [[nodiscard]] static bool IsLittleEndian();
+        NODISCARD static bool IsLittleEndian() noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
 
         // 交换字节顺序
-        static void Swap2ByteOrder(void* data) noexcept;
-        static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept;
-        static void Swap4ByteOrder(void* data) noexcept;
-        static void Swap4ByteOrder(size_t itemsNumber, void* data) noexcept;
-        static void Swap8ByteOrder(void* data) noexcept;
-        static void Swap8ByteOrder(size_t itemsNumber, void* data) noexcept;
+        static void Swap2ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap2ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap4ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap4ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap8ByteOrder(void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap8ByteOrder(size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
 
-        static void SwapByteOrder(int itemSize, void* data);
-        static void SwapByteOrder(int itemSize, int itemsNumber, void* data);
+        static void SwapByteOrder(size_t itemSize, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void SwapByteOrder(size_t itemSize, size_t itemsNumber, void* data) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
 
-        static void Swap2ByteOrderToTarget(int itemsNumber, const uint16_t* source, uint16_t* target);
-        static void Swap4ByteOrderToTarget(int itemsNumber, const uint32_t* source, uint32_t* target);
-        static void Swap8ByteOrderToTarget(int itemsNumber, const uint64_t* source, uint64_t* target);
+        static void Swap2ByteOrderToTarget(size_t itemsNumber, const uint16_t* source, uint16_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap4ByteOrderToTarget(size_t itemsNumber, const uint32_t* source, uint32_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
+        static void Swap8ByteOrderToTarget(size_t itemsNumber, const uint64_t* source, uint64_t* target) noexcept(g_Assert < 0 || g_CoreToolsAssert < 0);
     };
 }
 

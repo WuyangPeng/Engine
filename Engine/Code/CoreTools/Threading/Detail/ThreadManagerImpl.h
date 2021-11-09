@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 17:03)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:00)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_IMPL_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_IMPL_H
@@ -27,7 +27,7 @@ namespace CoreTools
         using ThreadHandle = System::ThreadHandle;
 
     public:
-        ThreadManagerImpl(MAYBE_UNUSED int count) noexcept;
+        ThreadManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -42,13 +42,13 @@ namespace CoreTools
         void Wait();
 
     private:
-        using ThreadImplPtr = std::shared_ptr<ThreadImpl>;
-        using ThreadContainer = std::vector<ThreadImplPtr>;
+        using ThreadImplSharedPtr = std::shared_ptr<ThreadImpl>;
+        using ThreadContainer = std::vector<ThreadImplSharedPtr>;
         using ThreadHandleContainer = std::vector<ThreadHandle>;
 
     private:
-        ThreadContainer m_Thread;
-        ThreadHandleContainer m_ThreadHandle;
+        ThreadContainer thread;
+        ThreadHandleContainer threadHandle;
     };
 }
 

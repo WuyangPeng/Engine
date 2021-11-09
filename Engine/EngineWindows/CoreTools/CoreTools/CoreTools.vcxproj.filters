@@ -370,6 +370,69 @@
     <Filter Include="Helper 头文件\Export">
       <UniqueIdentifier>{dfb5ad13-60eb-4d12-af91-3784f2803e64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Threading 模板文件">
+      <UniqueIdentifier>{26b0a8e4-7a13-44f7-82d9-5532dcb7323a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\Detail">
+      <UniqueIdentifier>{c2a1bc45-3183-41a8-919f-4dceaa5d7950}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\Detail">
+      <UniqueIdentifier>{1016de4d-b62e-4321-a3f0-4668186cd3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\Flags">
+      <UniqueIdentifier>{1b044909-46f3-4b26-af09-275694a3dadd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleCSV">
+      <UniqueIdentifier>{aaad0e47-65fd-4e0b-99cc-531ff27a3627}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleCSV">
+      <UniqueIdentifier>{61edf77c-62b7-45de-a98b-5469f6ee9b75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleZip">
+      <UniqueIdentifier>{fde064d9-ac44-4aec-8f3f-6ab9c79d38a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleZip\Detail">
+      <UniqueIdentifier>{b27bf1b0-0021-4bf2-be3d-d04230b25581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleZip">
+      <UniqueIdentifier>{1109c424-0dd2-46bd-a6b1-a3e461d4c64d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleZip\Detail">
+      <UniqueIdentifier>{3d6b015f-751f-49c3-9a84-0969e598bd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleCSV\Flags">
+      <UniqueIdentifier>{d138302d-9872-42e3-b741-3125a493556f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleCSV\Detail">
+      <UniqueIdentifier>{6dc8771e-d6bf-49cd-8f8e-0cbfbca91aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleCSV\Detail">
+      <UniqueIdentifier>{b7d319b5-2928-426e-80ef-a576f7670400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleCSV\Detail\CommandQuery">
+      <UniqueIdentifier>{2e630845-3343-4174-b0f5-f58691b65937}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleCSV\Detail\CommandQuery">
+      <UniqueIdentifier>{177343b4-0d3d-4272-980f-49065e376249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 模板文件">
+      <UniqueIdentifier>{328374c7-dfb7-42d8-993c-ebcf4d0d94f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 模板文件\SimpleCSV">
+      <UniqueIdentifier>{09009413-48e8-48bb-91a0-7b347c5399cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 模板文件\SimpleCSV\Detail">
+      <UniqueIdentifier>{52e25a99-f8a3-4be2-8eb2-e8a52c06ae10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\SimpleCSV\CommandQuery">
+      <UniqueIdentifier>{ef1e6374-7f23-4591-a346-ae910e915b9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 源文件\SimpleCSV\CommandQuery">
+      <UniqueIdentifier>{09ab6757-0d89-4650-8af0-473890f34e71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextParsing 头文件\Data">
+      <UniqueIdentifier>{adabffa4-467d-476e-8181-8924af9006b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsImport.h">
@@ -1878,12 +1941,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\InitializeTerminatorMacro.h">
       <Filter>Helper 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.h">
-      <Filter>TextParsing 头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.h">
-      <Filter>TextParsing 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.h">
       <Filter>UnitTestSuite 头文件\Detail</Filter>
     </ClInclude>
@@ -2105,6 +2162,546 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\AssertionDetail.h">
       <Filter>Contract 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Flags\MutexTraits.h">
+      <Filter>Threading 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadGuard.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadGuardDetail.h">
+      <Filter>Threading 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadGuardImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadGroupImpl.h">
+      <Filter>Threading 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadGroup.h">
+      <Filter>Threading 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Threading\ThreadGroupDetail.h">
+      <Filter>Threading 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousParameterImpl.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileAsynchronous.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileAsynchronous.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileEventInterface.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\FileAsynchronousParameter.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileAsynchronous.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousFactory.h">
+      <Filter>FileManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\ExcelConversionCSVImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\OpenXLSXConversion.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVFlags.h">
+      <Filter>TextParsing 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVTypeConversion.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\OpenXLSXDocument.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\SimpleCSVConversion.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\SimpleCSVDocument.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellIterator.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellRange.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellReference.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValue.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Color.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Column.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Constants.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\ContentTypes.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Document.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SimpleCSVException.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Properties.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Relationships.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Row.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SharedStrings.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Workbook.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\XmlData.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\XmlFile.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\XmlParser.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\ExcelConversionCSVFactory.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\TextParsingInternalFwd.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\ExcelConversionCSV.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipArchiveImpl.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\ZipArchive.h">
+      <Filter>TextParsing 头文件\SimpleZip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryImpl.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\ZipEntry.h">
+      <Filter>TextParsing 头文件\SimpleZip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryMetaData.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomName.h">
+      <Filter>FileManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\SimpleZipInternalFwd.h">
+      <Filter>TextParsing 头文件\SimpleZip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipWriter.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipReader.h">
+      <Filter>TextParsing 头文件\SimpleZip\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\CSVExceptionFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\XmlDataImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\ContentFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SimpleCSVInternalFwd.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\XmlFileImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\SharedStringsImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetNameImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetVisibilityImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetColorImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetIndexImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartsheetImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddWorksheetImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandCloneSheetImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandDeleteSheetImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySharedStringsImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIDImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIndexImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIDImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetVisibilityImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QueryXmlDataImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\SheetFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\ValueTypeFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueProxy.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellValueImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellValueImplDetail.h">
+      <Filter>TextParsing 模板文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueDetail.h">
+      <Filter>TextParsing 模板文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\IteratorFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellReferenceImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellValueProxyImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueProxyDetail.h">
+      <Filter>TextParsing 模板文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellRangeImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellIteratorImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\ColumnImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataIteratorImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataIterator.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataRangeImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataRange.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowIteratorImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowIterator.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowRangeImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowRange.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataProxyImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataProxy.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataProxyDetail.h">
+      <Filter>TextParsing 模板文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Worksheet.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SheetBase.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\ContentItemImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\ContentItem.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\RelationshipFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RelationshipItemImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RelationshipItem.h">
+      <Filter>TextParsing 头文件\SimpleCSV</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Flags\PropertyFlags.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\DocumentImpl.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartsheet.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddSharedStrings.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddWorksheet.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandCloneSheet.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandDeleteSheet.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandResetCalcChain.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetColor.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetIndex.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetName.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetVisibility.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySharedStrings.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetID.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsID.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetVisibility.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QueryXmlData.h">
+      <Filter>TextParsing 头文件\SimpleCSV\CommandQuery</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\Utilities.h">
+      <Filter>TextParsing 头文件\SimpleCSV\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\BatchConversionCSV.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVHeadImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVHead.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVRowImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector2.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\IntVector4.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector3.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\Vector4.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\IntVector2.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Data\IntVector3.h">
+      <Filter>TextParsing 头文件\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVRow.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVRowDetail.h">
+      <Filter>TextParsing 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVContentImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateBaseHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateChildHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDataHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateFactory.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVGenerate.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerDetailHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateBaseSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateChildSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDataSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateFactory.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVTotalGenerate.h">
+      <Filter>TextParsing 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateTotalFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumTotalFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateFwdHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateContainerHeadFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateContainerSourceFile.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Flags\CSVConstant.h">
+      <Filter>TextParsing 头文件\Flags</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\BatchConversionCSVImpl.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\FileNameParsing.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateHead.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateClassName.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDefaultFunction.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDefaultFunctionDefinition.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateHelper.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateGetFunction.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateGetFunctionDefinition.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateMember.h">
+      <Filter>TextParsing 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TextParsing\CSVContent.h">
+      <Filter>TextParsing 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2765,12 +3362,6 @@
     <ClCompile Include="..\..\..\Code\CoreTools\MessageEvent\ParametersInterface.cpp">
       <Filter>MessageEvent 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\BoostParsing.cpp">
-      <Filter>TextParsing 源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\TwoDimensionalParsing.cpp">
-      <Filter>TextParsing 源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.cpp">
       <Filter>UnitTestSuite 源文件\Detail</Filter>
     </ClCompile>
@@ -2827,6 +3418,459 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\MainFunctionHelper\ExecuteDllMain.cpp">
       <Filter>MainFunctionHelper 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ThreadGuard.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadGuardImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\Detail\ThreadGroupImpl.cpp">
+      <Filter>Threading 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Threading\ThreadGroup.cpp">
+      <Filter>Threading 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousParameterImpl.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileAsynchronous.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\ReadFileAsynchronous.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileEventInterface.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\FileAsynchronousParameter.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\WriteFileAsynchronous.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\Detail\FileAsynchronousFactory.cpp">
+      <Filter>FileManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\ExcelConversionCSVImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\OpenXLSXConversion.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVTypeConversion.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\SimpleCSVConversion.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\SimpleCSVDocument.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Cell.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellIterator.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellRange.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellReference.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValue.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Color.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Column.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\ContentTypes.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Document.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Properties.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Relationships.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Row.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SharedStrings.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Workbook.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\XmlData.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\XmlFile.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\ExcelConversionCSVFactory.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\ExcelConversionCSV.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipArchiveImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\ZipArchive.cpp">
+      <Filter>TextParsing 源文件\SimpleZip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\ZipEntry.cpp">
+      <Filter>TextParsing 源文件\SimpleZip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipEntryMetaData.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\FileManager\GenerateRandomName.cpp">
+      <Filter>FileManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipWriter.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleZip\Detail\ZipReader.cpp">
+      <Filter>TextParsing 源文件\SimpleZip\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SimpleCSVException.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\XmlDataImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\XmlFileImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\SharedStringsImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetNameImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetVisibilityImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetColorImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandSetSheetIndexImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddWorksheetImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandAddChartsheetImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandDeleteSheetImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\CommandCloneSheetImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetNameImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIndexImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetVisibilityImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetTypeImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetIDImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsIDImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySheetRelsTargetImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QuerySharedStringsImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CommandQuery\QueryXmlDataImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CellValueProxy.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellValueImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellReferenceImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellValueProxyImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellRangeImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\CellIteratorImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\ColumnImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataIteratorImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataIterator.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataRangeImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataRange.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowIteratorImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowIterator.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowRangeImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowRange.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowDataProxyImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RowDataProxy.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RowImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Worksheet.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\SheetBase.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\OpenXLSXDocument.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\AppProperties.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\ContentItemImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\ContentItem.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\RelationshipItemImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\RelationshipItem.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\DocumentImpl.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetID.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetIndex.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetName.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsID.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetRelsTarget.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetType.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySheetVisibility.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QueryXmlData.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddChartsheet.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddWorksheet.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandCloneSheet.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandDeleteSheet.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandResetCalcChain.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetColor.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetIndex.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetName.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandSetSheetVisibility.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\QuerySharedStrings.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\CommandQuery\CommandAddSharedStrings.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\CommandQuery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\SimpleCSV\Detail\Utilities.cpp">
+      <Filter>TextParsing 源文件\SimpleCSV\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\BatchConversionCSV.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVHeadImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVHead.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVRowImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVRow.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVContentImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVContent.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateBaseHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateChildHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDataHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateFactory.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVGenerate.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerDetailHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateBaseSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateChildSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDataSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateContainerSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateFactory.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\CSVTotalGenerate.cpp">
+      <Filter>TextParsing 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateTotalFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateEnumTotalFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateFwdHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateContainerHeadFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVTotalGenerateContainerSourceFile.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\BatchConversionCSVImpl.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\FileNameParsing.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateHead.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateClassName.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDefaultFunction.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateDefaultFunctionDefinition.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateGetFunction.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateGetFunctionDefinition.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\CSVGenerateMember.cpp">
+      <Filter>TextParsing 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

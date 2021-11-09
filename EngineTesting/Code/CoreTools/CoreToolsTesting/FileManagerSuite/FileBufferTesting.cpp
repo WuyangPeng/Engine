@@ -1,82 +1,132 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 15:43)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/03 21:53)
 
 #include "FileBufferTesting.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/FileManager/FileBuffer.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <vector>
 
 using std::vector;
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, FileBufferTesting)
+CoreTools::FileBufferTesting::FileBufferTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
 
-void CoreTools::FileBufferTesting ::MainTest()
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, FileBufferTesting)
+
+void CoreTools::FileBufferTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
+
+void CoreTools::FileBufferTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BufferTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ForEachTest);
 }
 
-void CoreTools::FileBufferTesting ::ValueTest()
+void CoreTools::FileBufferTesting::ValueTest()
 {
     FileBuffer buffer{ 10 };
 
     ASSERT_EQUAL(buffer.GetSize(), 10u);
 
-    auto ptr = buffer.GetBufferBegin();
+    auto beginPtr = buffer.GetBufferBegin();
 
-    ASSERT_UNEQUAL_NULL_PTR(ptr);
+    ASSERT_UNEQUAL_NULL_PTR(beginPtr);
 }
 
-void CoreTools::FileBufferTesting ::DelayCopyTest() noexcept
+void CoreTools::FileBufferTesting::DelayCopyTest()
 {
-//     FileBuffer firstBuffer{ 11 };
-// 
-//     auto firstPtr = firstBuffer.GetBufferBegin();
-// 
-//     for (auto i = 0u; i < firstBuffer.GetSize(); ++i)
-//     {
-//         firstPtr[i] = static_cast<char>(i);
-//     }
-// 
-//     const FileBuffer secondBuffer{ firstBuffer };
-// 
-//     ASSERT_EQUAL(secondBuffer.GetSize(), 11u);
-// 
-//     auto secondPtr = secondBuffer.GetBufferBegin();
-// 
-//     // firstBuffer和secondPtr依然指向同一个副本。
-// 
-//     ASSERT_EQUAL(firstPtr, secondPtr);
-// 
-//     FileBuffer thirdBuffer{ firstBuffer };
-// 
-//     auto thirdPtr = thirdBuffer.GetBufferBegin();
-// 
-//     ASSERT_UNEQUAL(firstPtr, thirdPtr);
-//     ASSERT_UNEQUAL(secondPtr, thirdPtr);
-// 
-//     // thirdBuffer指向另一个副本。
-// 
-//     for (auto i = 0u; i < thirdBuffer.GetSize(); ++i)
-//     {
-//         thirdPtr[i] = static_cast<char>(i + 100);
-//     }
-// 
-//     // firstBuffer和secondBuffer的值没有改变
-//     firstPtr = firstBuffer.GetBufferBegin();
-//     secondPtr = secondBuffer.GetBufferBegin();
-// 
-//     ASSERT_UNEQUAL(firstPtr, secondPtr);
-// 
-//     for (auto i = 0u; i < firstBuffer.GetSize(); ++i)
-//     {
-//         ASSERT_EQUAL(firstPtr[i], secondPtr[i]);
-//         ASSERT_EQUAL(firstPtr[i], static_cast<char>(i));
-//     }
+    FileBuffer buffer0{ 11 };
+    auto beginPtr0 = buffer0.GetBufferBegin();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr0, "beginPtr0指针为空。");
+
+    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    {
+        *buffer0.GetBuffer(i) = boost::numeric_cast<char>(i);
+    }
+
+    FileBuffer buffer1{ buffer0 };
+    ASSERT_EQUAL(buffer1.GetSize(), buffer0.GetSize());
+
+    auto beginPtr1 = buffer1.GetConstBufferBegin();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr1, "beginPtr1指针为空。");
+
+    // beginPtr0和beginPtr1依然指向同一个副本。
+    ASSERT_EQUAL(beginPtr0, beginPtr1);
+
+    FileBuffer buffer2{ buffer0 };
+
+    auto beginPtr2 = buffer2.GetBufferBegin();
+    ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(beginPtr2, "beginPtr2指针为空。");
+
+    // beginPtr2指向另一个副本。
+    ASSERT_UNEQUAL(beginPtr0, beginPtr2);
+    ASSERT_UNEQUAL(beginPtr1, beginPtr2);
+
+    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    {
+        *buffer2.GetBuffer(i) = boost::numeric_cast<char>(i + 100);
+    }
+
+    // beginPtr0和beginPtr1的值没有改变
+
+    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    {
+        ASSERT_EQUAL(*buffer0.GetConstBuffer(i), *buffer1.GetConstBuffer(i));
+        ASSERT_EQUAL(*buffer1.GetConstBuffer(i), boost::numeric_cast<char>(i));
+    }
 }
 
+void CoreTools::FileBufferTesting::BufferTest()
+{
+    FileBuffer buffer0{ 11 };
+
+    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    {
+        *buffer0.GetBuffer(i) = boost::numeric_cast<char>(i);
+    }
+
+    const FileBuffer buffer1{ buffer0 };
+    for (auto i = 0u; i < buffer0.GetSize(); ++i)
+    {
+        ASSERT_EQUAL(*buffer0.GetConstBuffer(i), *buffer1.GetBuffer(i));
+    }
+}
+
+void CoreTools::FileBufferTesting::ForEachTest()
+{
+    FileBuffer buffer0{ 11 };
+
+    int index = 0;
+    for (auto& value : buffer0)
+    {
+        value = boost::numeric_cast<char>(index);
+
+        ++index;
+    }
+
+    index = 0;
+    const FileBuffer buffer1{ buffer0 };
+    for (const auto& value : buffer1)
+    {
+        ASSERT_EQUAL(value, static_cast<char>(index));
+
+        ++index;
+    }
+}

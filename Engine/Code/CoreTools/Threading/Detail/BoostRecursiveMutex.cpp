@@ -1,20 +1,20 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 18:40)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/08/31 22:48)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "BoostRecursiveMutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::BoostRecursiveMutex::BoostRecursiveMutex() noexcept
-    : ParentType{}, m_Mutex{}
+    : ParentType{}, mutex{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -35,7 +35,7 @@ void CoreTools::BoostRecursiveMutex::Enter()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Mutex.lock();
+    mutex.lock();
 }
 
 void CoreTools::BoostRecursiveMutex::Leave() noexcept
@@ -44,14 +44,15 @@ void CoreTools::BoostRecursiveMutex::Leave() noexcept
 
     EXCEPTION_TRY
     {
-        m_Mutex.unlock();
+        mutex.unlock();
     }
     EXCEPTION_STD_EXCEPTION_CATCH(CoreTools)
+    EXCEPTION_UNKOWN_CATCH(CoreTools)
 }
 
 bool CoreTools::BoostRecursiveMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_Mutex.try_lock();
+    return mutex.try_lock();
 }

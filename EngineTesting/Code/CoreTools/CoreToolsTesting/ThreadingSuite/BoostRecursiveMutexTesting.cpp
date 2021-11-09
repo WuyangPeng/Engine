@@ -1,31 +1,33 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 12:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/02 14:11)
 
 #include "BoostRecursiveMutexTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/Threading/ThreadGroupDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <thread>
-
-using std::ostream;
-using std::thread;
-
-CoreTools::BoostRecursiveMutexTesting ::BoostRecursiveMutexTesting(const OStreamShared& osPtr)
-    : ParentType{ osPtr }, m_WindowsMutex1{ MutexCreate::UseBoostRecursive }, m_WindowsMutex2{ MutexCreate::UseBoostRecursive }
+CoreTools::BoostRecursiveMutexTesting::BoostRecursiveMutexTesting(const OStreamShared& stream)
+    : ParentType{ stream }, boostMutex0{ MutexCreate::UseBoostRecursive }, boostMutex1{ MutexCreate::UseBoostRecursive }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, BoostRecursiveMutexTesting)
+
 void CoreTools::BoostRecursiveMutexTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::MainTest()
+void CoreTools::BoostRecursiveMutexTesting::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(RecursionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(MultithreadingLockingSuccessTest);
@@ -33,52 +35,52 @@ void CoreTools::BoostRecursiveMutexTesting ::MainTest()
 }
 
 // 递归测试
-void CoreTools::BoostRecursiveMutexTesting ::RecursionTest()
+void CoreTools::BoostRecursiveMutexTesting::RecursionTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateRecursionTestHolder);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::CreateRecursionTestHolder()
+void CoreTools::BoostRecursiveMutexTesting::CreateRecursionTestHolder()
 {
-    ScopedMutex holder1{ m_WindowsMutex1 };
-    TryScopedMutex holder2{ m_WindowsMutex1 };
+    ScopedMutex holder1{ boostMutex0 };
+    TryScopedMutex holder2{ boostMutex0 };
 
     ASSERT_TRUE(holder2.IsSuccess());
 
-    ScopedMutex holder3{ m_WindowsMutex1 };
+    ScopedMutex holder3{ boostMutex0 };
 }
 
 // 多线程锁成功测试
-void CoreTools::BoostRecursiveMutexTesting ::MultithreadingLockingSuccessTest()
+void CoreTools::BoostRecursiveMutexTesting::MultithreadingLockingSuccessTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingSuccessThread);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::CreateLockingSuccessThread()
+void CoreTools::BoostRecursiveMutexTesting::CreateLockingSuccessThread()
 {
-    CreateFourThread(&ClassType::MultithreadingSuccessCallBack);
+    CreateThread(&ClassType::MultithreadingSuccessCallBack);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::CreateFourThread(Function function)
+void CoreTools::BoostRecursiveMutexTesting::CreateThread(Function function)
 {
-    thread thread1{ function, this };
-    thread thread2{ function, this };
-    thread thread3{ function, this };
-    thread thread4{ function, this };
-    thread1.join();
-    thread2.join();
-    thread3.join();
-    thread4.join();
+    ThreadGroup thread{ DisableNotThrow::Disable };
+
+    constexpr auto threadSize = 4;
+
+    for (auto i = 0; i < threadSize; ++i)
+    {
+        thread.AddThread(function, this);
+    }
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::MultithreadingSuccessCallBack()
+void CoreTools::BoostRecursiveMutexTesting::MultithreadingSuccessCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(StaticValueTest);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::StaticValueTest()
+void CoreTools::BoostRecursiveMutexTesting::StaticValueTest()
 {
-    ScopedMutex holderFirst{ m_WindowsMutex1 };
+    ScopedMutex holderFirst{ boostMutex0 };
 
     constexpr auto original = 0;
     static auto testValue = original;
@@ -105,35 +107,35 @@ void CoreTools::BoostRecursiveMutexTesting ::StaticValueTest()
 }
 
 // 多线程锁失败测试
-void CoreTools::BoostRecursiveMutexTesting ::MultithreadingLockingFailureTest()
+void CoreTools::BoostRecursiveMutexTesting::MultithreadingLockingFailureTest()
 {
-    m_WindowsMutex2.Initialize();
+    boostMutex1.Initialize();
 
     ASSERT_NOT_THROW_EXCEPTION_0(CreateLockingFailureThread);
 
-    m_WindowsMutex2.Delete();
+    boostMutex1.Delete();
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::CreateLockingFailureThread()
+void CoreTools::BoostRecursiveMutexTesting::CreateLockingFailureThread()
 {
-    ScopedMutex holder{ m_WindowsMutex2 };
+    ScopedMutex holder{ boostMutex1 };
 
-    CreateFourThread(&ClassType::MultithreadingFailureCallBack);
+    CreateThread(&ClassType::MultithreadingFailureCallBack);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::MultithreadingFailureCallBack()
+void CoreTools::BoostRecursiveMutexTesting::MultithreadingFailureCallBack()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateFailureCallBackHolder);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::CreateFailureCallBackHolder()
+void CoreTools::BoostRecursiveMutexTesting::CreateFailureCallBackHolder()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(TryLockFailureTest);
 }
 
-void CoreTools::BoostRecursiveMutexTesting ::TryLockFailureTest()
+void CoreTools::BoostRecursiveMutexTesting::TryLockFailureTest()
 {
-    TryScopedMutex holder{ m_WindowsMutex2 };
+    TryScopedMutex holder{ boostMutex1 };
 
     ASSERT_FALSE(holder.IsSuccess());
 }

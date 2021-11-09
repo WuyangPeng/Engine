@@ -1,13 +1,11 @@
 TODO Level 2
  
-0.7.2.2 
+0.7.2.5
 
 1.  （Contract）完成类不变式非Microsoft Visual Studio的实现。 
 2.  （Contract）完成断言类非Microsoft Visual Studio的实现。 
 3.  （FileManager）FileManager增加operator>>和operator<<接口。
-4.  （FileManager）将EnvironmentVariable.json的路径改成配置。
-5.  （TextParsing）完成TextParsing模块的相关内容：增加一个文本解析类，对配置进行读取。 
-6.  （TextParsing）完成TextParsing模块的相关内容：增加一个二维表解析类，对二维表进行读取。 
-7.  （Time）增加获取当前时间相关的信息，如月份，零点时间，周日时间等。
-8.  （Time）创建一个类型安全的秒、毫秒和微秒类。 
-9.  （Time）实现通过时间戳获取相关时间的信息，包含年、月、日，当天零点时间戳，本周日零点时间戳等相关信息。
+4.  （FileManager）将EnvironmentVariable.json的路径改成配置。 
+5.  （Time）增加获取当前时间相关的信息，如月份，零点时间，周日时间等。
+6.  （Time）创建一个类型安全的秒、毫秒和微秒类。 
+7.  （Time）实现通过时间戳获取相关时间的信息，包含年、月、日，当天零点时间戳，本周日零点时间戳等相关信息。

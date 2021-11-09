@@ -31,31 +31,48 @@ namespace CoreTools
 
         void AddHelperSuite();
 
-        Suite GetAssertTestMacroSuite();
-        Suite GetClassInvariantMacroSuite();
-        Suite GetCustomAssertMacroSuite();
-        Suite GetExportMacroSuite();
-        Suite GetLogMacroSuite();
-        Suite GetMemberFunctionMacroSuite();
-        Suite GetRttiMacroSuite();
-        Suite GetStreamMacroSuite();
-        Suite GetUnitTestSuiteMacroSuite();
-        Suite GetExceptionMacroSuite();
+        NODISCARD Suite GetAssertTestMacroSuite();
+        NODISCARD Suite GetClassInvariantMacroSuite();
+        NODISCARD Suite GetCustomAssertMacroSuite();
+        NODISCARD Suite GetExportMacroSuite();
+        NODISCARD Suite GetLogMacroSuite();
+        NODISCARD Suite GetMemberFunctionMacroSuite();
+        NODISCARD Suite GetRttiMacroSuite();
+        NODISCARD Suite GetStreamMacroSuite();
+        NODISCARD Suite GetUnitTestSuiteMacroSuite();
+        NODISCARD Suite GetExceptionMacroSuite();
 
         void AddContractSuite();
 
-        Suite GetImplSuite();
+        NODISCARD Suite GetImplSuite();
 
         void AddBaseSuite();
         void AddCharacterStringSuite();
 
-        Suite GetCaseInsensitiveStringSuite();
+        NODISCARD Suite GetCaseInsensitiveStringSuite();
 
         void AddExceptionSuite();
         void AddConsoleSuite();
         void AddThreadingSuite();
         void AddFileManagerSuite();
+
+        NODISCARD Suite GetEndianSuite();
+        NODISCARD Suite GetCFileManagerSuite();
+        NODISCARD Suite GetStreamManagerSuite();
+        NODISCARD Suite GetFileHandleSuite();
+        NODISCARD Suite GetFileSuite();
+        NODISCARD Suite GetBufferIOSuite();
+        NODISCARD Suite GetEnvironmentSuite();
+        NODISCARD Suite GetFileAsynchronousSuite();
+
         void AddTextParsingSuite();
+
+        NODISCARD Suite GetSimpleZipSuite();
+        NODISCARD Suite GetSimpleCSVSuite();
+
+        NODISCARD Suite GetCommandSuite();
+        NODISCARD Suite GetQuerySuite();
+
         void AddLogManagerSuite();
         void AddDataTypesSuite();
         void AddMemoryToolsSuite();

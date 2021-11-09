@@ -1,74 +1,104 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/05 13:07)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê≤‚ ‘∞Ê±æ£∫0.7.2.3 (2021/09/02 15:11)
 
 #include "ThreadTesting.h"
-
 #include "System/Helper/EnumCast.h"
 #include "System/Threading/Flags/ThreadFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Threading/Thread.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 namespace
 {
     // Ω˚÷π±‡“Î∆˜”≈ªØ
-    volatile bool g_IsContinue{ false };
+    volatile bool isContinue{ false };
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ThreadTesting)
+CoreTools::ThreadTesting::ThreadTesting(const OStreamShared& stream)
+    : ParentType{ stream }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, ThreadTesting)
+
+void CoreTools::ThreadTesting::DoRunUnitTest()
+{
+    ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
+}
 
 void CoreTools::ThreadTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateThread);
 }
 
-void CoreTools::ThreadTesting ::CreateThread()
+void CoreTools::ThreadTesting::CreateThread()
 {
-    g_IsContinue = false;
+    isContinue = false;
 
     auto threadParameter = 2;
 
-    Thread firstThread(Thread1, &threadParameter);
+    Thread thread0{ Thread0, &threadParameter };
 
     constexpr auto priority = EnumCastUnderlying(System::ThreadPriority::Normal);
 
-    firstThread.SetThreadPriority(priority);
+    thread0.SetThreadPriority(priority);
 
-    ASSERT_EQUAL(firstThread.GetThreadPriority(), priority);
+    ASSERT_EQUAL(thread0.GetThreadPriority(), priority);
 
-    firstThread.Resume();
-    firstThread.Suspend();
-    firstThread.Resume();
+    thread0.Resume();
+    thread0.Suspend();
+    thread0.Resume();
 
-    Thread secondThread{ Thread2, nullptr };
+    Thread thread1{ Thread1, nullptr };
 
-    secondThread.Resume();
+    thread1.Resume();
 
-    g_IsContinue = true;
+    isContinue = true;
 
-    firstThread.Wait();
-    secondThread.Wait();
+    thread0.Wait();
+    thread1.Wait();
 }
+
+uint32_t CoreTools::ThreadTesting::Thread0(void* threadParameter) noexcept
+{
+    if (threadParameter != nullptr)
+    {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26471)
-#include SYSTEM_WARNING_DISABLE(26429)
-uint32_t CoreTools::ThreadTesting ::Thread1(void* threadParameter) noexcept
-{
-    const auto parameter = *reinterpret_cast<int*>(threadParameter);
 
-    for (;;)
-    {
-        if (g_IsContinue && parameter == 2)
-            break;
+        const auto parameter = *reinterpret_cast<int*>(threadParameter);
+
+#include STSTEM_WARNING_POP
+
+        for (;;)
+        {
+            if (isContinue && parameter == 2)
+            {
+                break;
+            }
+        }
     }
 
     return 0;
 }
-#include STSTEM_WARNING_POP
-uint32_t CoreTools::ThreadTesting ::Thread2([[maybe_unused]] void* threadParameter) noexcept
+
+uint32_t CoreTools::ThreadTesting::Thread1(MAYBE_UNUSED void* threadParameter) noexcept
 {
+    for (;;)
+    {
+        if (isContinue)
+        {
+            break;
+        }
+    }
+
     return 0;
 }

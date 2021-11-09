@@ -19,21 +19,21 @@ namespace System
     // 枚举和整型之间的转换
 
     template <typename E>
-    NODISCARD constexpr auto EnumCastUnderlying(E value) noexcept
+    NODISCARD constexpr auto EnumCastUnderlying(E enumerator) noexcept
     {
         static_assert(std::is_enum_v<E>, "E must be an enum.");
 
         using UnderlyingType = std::underlying_type_t<E>;
 
-        return static_cast<UnderlyingType>(value);
+        return static_cast<UnderlyingType>(enumerator);
     }
 
     template <typename T, typename E>
-    NODISCARD constexpr T EnumCastUnderlying(E value) noexcept
+    NODISCARD constexpr T EnumCastUnderlying(E enumerator) noexcept
     {
         static_assert(std::is_enum_v<E>, "E must be an enum.");
 
-        return static_cast<T>(value);
+        return static_cast<T>(enumerator);
     }
 
     template <typename E>

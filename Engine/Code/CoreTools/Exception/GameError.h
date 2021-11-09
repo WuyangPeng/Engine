@@ -35,7 +35,7 @@ namespace CoreTools
 
         NODISCARD const String GetError() const override;
 
-    private:
+    protected:
         NODISCARD virtual const String GetErrorCodeDescribed() const;
 
     private:

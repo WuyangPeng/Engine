@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 19:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,18 +13,15 @@
 #include "Detail/MutexFactory.h"
 #include "Detail/MutexImpl.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "../Contract/Flags/ImplFlags.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::DllMutex::DllMutex(MutexCreate mutexCreate)
-    : impl{ ImplCreateUseFactory::Default,  mutexCreate  }
+    : impl{ ImplCreateUseFactory::Default, mutexCreate }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 CoreTools::DllMutex::DllMutex(DllMutex&& rhs) noexcept
     : impl{ std::move(rhs.impl) }

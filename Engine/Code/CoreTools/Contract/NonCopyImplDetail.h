@@ -62,7 +62,7 @@ CoreTools::NonCopyImpl<T>& CoreTools::NonCopyImpl<T>::operator=(NonCopyImpl&& rh
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     ClassType result{ std::move(rhs) };
-    impl.swap(rhs.impl);
+    impl.swap(result.impl);
 
     return *this;
 }

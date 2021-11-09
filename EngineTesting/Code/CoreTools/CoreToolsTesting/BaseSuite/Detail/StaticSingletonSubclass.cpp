@@ -22,7 +22,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, StaticSingletonSubclass)
 
 void CoreTools::StaticSingletonSubclass::DoNothing() const
 {
-    SINGLETON_MUTEX_ENTER_MEMBER;
+    SINGLETON_SCOPED_MUTEX_ENTER_MEMBER;
 
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 }

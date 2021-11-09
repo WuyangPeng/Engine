@@ -34,7 +34,7 @@ namespace CoreTools
 
     private:
         void AnalysisBuffer();
-        void IncrementBytesProcessed() noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
+        void IncrementBytesProcessed();
         void ReadObject();
         void CreateObject(bool isTopLevel, const std::string& name);
         void DoCreateObject(bool isTopLevel, const std::string& name);

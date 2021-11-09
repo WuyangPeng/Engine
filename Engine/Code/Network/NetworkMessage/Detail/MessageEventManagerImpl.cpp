@@ -18,13 +18,13 @@ using std::make_unique;
 #define MUTEX_ENTER_MEMBER const CoreTools::ScopedMutex holder{ *m_Mutex };
 
 Network::MessageEventManagerImpl::MessageEventManagerImpl([[maybe_unused]] CoreTools::DisableNotThrow disableNotThrow)
-    : m_EventContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
+    : m_EventContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::MessageEventManagerImpl::MessageEventManagerImpl(const MessageEventManagerImpl& rhs)
-    : m_EventContainer{ rhs.m_EventContainer }, m_Mutex{ make_unique<CoreTools::Mutex>() }
+    : m_EventContainer{ rhs.m_EventContainer }, m_Mutex{ make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -34,7 +34,7 @@ Network::MessageEventManagerImpl& Network::MessageEventManagerImpl::operator=(co
     NETWORK_CLASS_IS_VALID_9;
 
     m_EventContainer = rhs.m_EventContainer;
-    m_Mutex = make_unique<CoreTools::Mutex>();
+    m_Mutex = make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection);
 
     return *this;
 }

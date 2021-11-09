@@ -10,6 +10,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreToolsTesting", "..\..\..\EngineTesting\EngineWindows\CoreTools\CoreToolsTesting\CoreToolsTesting.vcxproj", "{68D3D576-3577-45E5-B815-E38E0206567E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{72A60213-0F4A-42CD-9091-BF266C7B2CF4} = {72A60213-0F4A-42CD-9091-BF266C7B2CF4}
+		{63D98C5E-CF05-4849-AD00-4EE15203057B} = {63D98C5E-CF05-4849-AD00-4EE15203057B}
 		{3BB49F9B-5C8A-47B0-96AD-951485A67D1A} = {3BB49F9B-5C8A-47B0-96AD-951485A67D1A}
 		{13F378A0-014D-4AAD-AA95-8372C337B569} = {13F378A0-014D-4AAD-AA95-8372C337B569}
 	EndProjectSection
@@ -58,6 +59,11 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreToolsExampleTesting", "..\..\..\AssistTesting\AssistWindows\Example\CoreToolsExample\CoreToolsExampleTesting\CoreToolsExampleTesting.vcxproj", "{CF4E062C-5E2C-4005-B818-75F1C733118D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{D07CE944-C025-4247-893D-4B1A54A4126B} = {D07CE944-C025-4247-893D-4B1A54A4126B}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CSVConfigure", "..\..\..\Assist\AssistWindows\Toolset\CoreTools\CSVConfigure\CSVConfigure.vcxproj", "{63D98C5E-CF05-4849-AD00-4EE15203057B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{72A60213-0F4A-42CD-9091-BF266C7B2CF4} = {72A60213-0F4A-42CD-9091-BF266C7B2CF4}
 	EndProjectSection
 EndProject
 Global
@@ -232,6 +238,22 @@ Global
 		{CF4E062C-5E2C-4005-B818-75F1C733118D}.StaticRelease|x64.Build.0 = StaticRelease|x64
 		{CF4E062C-5E2C-4005-B818-75F1C733118D}.StaticRelease|x86.ActiveCfg = StaticRelease|Win32
 		{CF4E062C-5E2C-4005-B818-75F1C733118D}.StaticRelease|x86.Build.0 = StaticRelease|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Debug|x64.ActiveCfg = Debug|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Debug|x64.Build.0 = Debug|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Debug|x86.ActiveCfg = Debug|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Debug|x86.Build.0 = Debug|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Release|x64.ActiveCfg = Release|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Release|x64.Build.0 = Release|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Release|x86.ActiveCfg = Release|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.Release|x86.Build.0 = Release|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticDebug|x64.ActiveCfg = Debug|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticDebug|x64.Build.0 = Debug|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticDebug|x86.ActiveCfg = Debug|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticDebug|x86.Build.0 = Debug|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticRelease|x64.ActiveCfg = Release|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticRelease|x64.Build.0 = Release|x64
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticRelease|x86.ActiveCfg = Release|Win32
+		{63D98C5E-CF05-4849-AD00-4EE15203057B}.StaticRelease|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -247,6 +269,7 @@ Global
 		{D07CE944-C025-4247-893D-4B1A54A4126B} = {5EA9B0DF-1107-4110-B23E-706B5AA114DA}
 		{FA942AE1-93EB-4B60-8CF5-A2BF69027533} = {5EA9B0DF-1107-4110-B23E-706B5AA114DA}
 		{CF4E062C-5E2C-4005-B818-75F1C733118D} = {FA942AE1-93EB-4B60-8CF5-A2BF69027533}
+		{63D98C5E-CF05-4849-AD00-4EE15203057B} = {3105930A-A963-4C4A-B6BC-EC7A52C1497A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {24A3BE37-FB31-46BC-B1D0-844712403E9C}

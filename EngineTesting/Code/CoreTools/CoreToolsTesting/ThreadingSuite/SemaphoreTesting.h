@@ -1,35 +1,44 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/05 11:52)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/02 14:37)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H
 
 #include "CoreTools/Threading/Semaphore.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-	class SemaphoreTesting : public UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(SemaphoreTesting);
+    class SemaphoreTesting final : public UnitTest
+    {
+    public:
+        using ClassType = SemaphoreTesting;
+        using ParentType = UnitTest;
 
-	private:
-		void MainTest();
+    public:
+        explicit SemaphoreTesting(const OStreamShared& stream);
 
-		void CreateFourThread();
-		void ReadThread();
-		void WirteThread();
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		void DoRunUnitTest() override;
+    private:
+        void DoRunUnitTest() final;
+        void MainTest();
 
-	private:
-		Semaphore m_Semaphore1;
-		Semaphore m_Semaphore2;
-	};
+        void CreateThread();
+        void ReadThread();
+        void WirteThread();
+
+    private:
+        static constexpr auto threadSize = 4;
+        Semaphore semaphore0;
+        Semaphore semaphore1;
+    };
 }
 
-#endif // CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H
+#endif  // CORE_TOOLS_THREADING_SUITE_SEMAPHORE_TESTING_H

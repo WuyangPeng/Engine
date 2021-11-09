@@ -1,31 +1,33 @@
 {
-  "concurrentProgrammingOnWindowsSuite": 
-  {
-
+  "concurrentProgrammingOnWindowsSuite": {
+    "ConcurrentProgrammingOnWindows::ConcurrentProgrammingOnWindowsPlaceholderTesting": 1
   },
 
-  "parallelAndDistributedProgrammingUsingCppSuite": 
-  {
-
+  "parallelAndDistributedProgrammingUsingCppSuite": {
+    "ParallelAndDistributedProgrammingUsingCpp::ParallelAndDistributedProgrammingTesting": 1
   },
 
-  "cppConcurrencyInActionSuite": 
-  {
-
+  "cppConcurrencyInActionSuite": {
+    "CppConcurrencyInAction::CppConcurrencyInActionTesting": 1
   },
 
-  "multithreadingApplicationsInWin32Suite": 
-  {
-
+  "cppMultithreadingCookbookSuite": {
+    "CppMultithreadingCookbook::CppMultithreadingCookbookTesting": 1
   },
 
-  "professionalMulticoreProgrammingSuite": 
-  {
-
+  "multithreadingApplicationsInWin32Suite": {
+    "MultithreadingApplicationsInWin32::MultithreadingApplicationsInWin32Testing": 1
   },
 
-  "objectOrientedMultithreadingUsingCppSuite": 
-  {
+  "professionalMulticoreProgrammingSuite": {
+    "ProfessionalMulticoreProgramming::ProfessionalMulticoreProgrammingTesting": 1
+  },
 
+  "objectOrientedMultithreadingUsingCppSuite": {
+    "ObjectOrientedMultithreadingUsingCpp::ObjectOrientedMultithreadingUsingCppTesting": 1
+  },
+
+  "distributedSystemsSuite": {
+    "DistributedSystems::DistributedSystemsTesting": 1
   }
 }

@@ -1,0 +1,12 @@
+系统操作·并发编程·书籍·工具箱
+ 
+BookConcurrentProgrammingToolset
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.2.5。
+
+实现内容	
+	1. 系统操作·并发编程·书籍·工具箱模块。

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 12:53)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,11 +20,11 @@
 using namespace std::literals;
 
 CoreTools::FileHandleImpl::FileHandleImpl(const String& fileName, FileHandleDesiredAccess access, FileHandleShareMode shareMode, FileHandleCreationDisposition creation)
-    : m_FileName{ fileName }, m_File{ System::CreateSystemFile(fileName, access, shareMode, creation) }
+    : fileName{ fileName }, file{ System::CreateSystemFile(fileName, access, shareMode, creation) }
 {
-    if (!System::IsFileHandleValid(m_File))
+    if (!System::IsFileHandleValid(file))
     {
-        THROW_EXCEPTION((Error::Format{ SYSTEM_TEXT("打开文件“%1%”失败！"s) } % m_FileName).str());
+        THROW_EXCEPTION((Error::Format{ SYSTEM_TEXT("打开文件“%1%”失败！"s) } % fileName).str());
     }
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -34,11 +34,11 @@ CoreTools::FileHandleImpl::~FileHandleImpl() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-    if (!System::CloseSystemFile(m_File))
+    if (!System::CloseSystemFile(file))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT("关闭文件")
-            << m_FileName
+            << fileName
             << SYSTEM_TEXT("失败！")
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
@@ -47,7 +47,7 @@ CoreTools::FileHandleImpl::~FileHandleImpl() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::FileHandleImpl::IsValid() const noexcept
 {
-    if (System::IsFileHandleValid(m_File))
+    if (System::IsFileHandleValid(file))
         return true;
     else
         return false;
@@ -60,7 +60,7 @@ uint64_t CoreTools::FileHandleImpl::GetFileLength() const
 
     uint64_t size{};
 
-    if (System::GetFileLength(m_File, size))
+    if (System::GetFileLength(file, size))
     {
         return size;
     }
@@ -80,7 +80,7 @@ void CoreTools::FileHandleImpl::ReadFromFile(size_t itemSize, size_t itemsNumber
     System::WindowsDWord in{ 0 };
     auto readNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::ReadSystemFile(m_File, data, readNumber, &in) || in != readNumber)
+    if (!System::ReadSystemFile(file, data, readNumber, &in) || in != readNumber)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("读入文件数据错误！"s));
     }
@@ -96,7 +96,7 @@ void CoreTools::FileHandleImpl::WriteToFile(size_t itemSize, size_t itemsNumber,
     System::WindowsDWord out{ 0 };
     auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::WriteSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
+    if (!System::WriteSystemFile(file, data, writeNumber, &out) || out != writeNumber)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
     }
@@ -112,7 +112,7 @@ void CoreTools::FileHandleImpl::AppendToFile(size_t itemSize, size_t itemsNumber
     System::WindowsDWord out{ 0 };
     auto writeNumber = boost::numeric_cast<System::WindowsDWord>(itemSize * itemsNumber);
 
-    if (!System::AppendSystemFile(m_File, data, writeNumber, &out) || out != writeNumber)
+    if (!System::AppendSystemFile(file, data, writeNumber, &out) || out != writeNumber)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数据写入文件错误！"s));
     }

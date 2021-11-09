@@ -21,13 +21,13 @@ using std::make_shared;
 using namespace std::literals;
 
 CoreTools::AppenderImpl::AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel)
-    : m_AppenderFlags{ appenderFlags }, m_LogLevel{ logLevel }, m_IsDefault{ true }, m_AppenderImplMutex{}
+    : m_AppenderFlags{ appenderFlags }, m_LogLevel{ logLevel }, m_IsDefault{ true }, m_AppenderImplMutex{ MutexCreate::UseCriticalSection }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::AppenderImpl::AppenderImpl(const AppenderImpl& rhs)
-    : m_AppenderFlags{ rhs.m_AppenderFlags }, m_LogLevel{ rhs.m_LogLevel }, m_IsDefault{ rhs.m_IsDefault }, m_AppenderImplMutex{}
+    : m_AppenderFlags{ rhs.m_AppenderFlags }, m_LogLevel{ rhs.m_LogLevel }, m_IsDefault{ rhs.m_IsDefault }, m_AppenderImplMutex{ MutexCreate::UseCriticalSection }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

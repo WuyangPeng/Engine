@@ -66,3 +66,12 @@ uint64_t CoreTools::UniqueIDManager::NextUniqueID(int index)
 
     return impl->NextUniqueID(index);
 }
+
+void CoreTools::UniqueIDManager::SetUniqueID(int index, uint64_t latestIndex)
+{
+    SINGLETON_MUTEX_ENTER_MEMBER;
+
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
+    return impl->SetUniqueID(index, latestIndex);
+}

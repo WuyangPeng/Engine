@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 11:25)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,8 +19,8 @@
 
 using namespace std::literals;
 
-CoreTools::EnvironmentImpl::EnvironmentImpl(MAYBE_UNUSED int count) noexcept
-    : m_Directories{}
+CoreTools::EnvironmentImpl::EnvironmentImpl() noexcept
+    : directories{}, m_ConfigurationPath{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,14 +31,14 @@ int CoreTools::EnvironmentImpl::GetNumDirectories() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Directories.size());
+    return boost::numeric_cast<int>(directories.size());
 }
 
 bool CoreTools::EnvironmentImpl::InsertDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto returnValue = m_Directories.insert(directory);
+    const auto returnValue = directories.insert(directory);
 
     return returnValue.second;
 }
@@ -47,7 +47,7 @@ bool CoreTools::EnvironmentImpl::EraseDirectory(const String& directory)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto eraseNumber = m_Directories.erase(directory);
+    const auto eraseNumber = directories.erase(directory);
 
     return (eraseNumber != 0);
 }
@@ -56,7 +56,7 @@ void CoreTools::EnvironmentImpl::EraseAllDirectories() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Directories.clear();
+    directories.clear();
 }
 
 System::String CoreTools::EnvironmentImpl::GetPathReading(const String& fileName) const
@@ -83,7 +83,7 @@ System::String CoreTools::EnvironmentImpl::GetPathReadingAndWriting(const String
 // private
 System::String CoreTools::EnvironmentImpl::GetPath(const String& fileName, const String& attributes) const
 {
-    for (const auto& path : m_Directories)
+    for (const auto& path : directories)
     {
         auto decorated = path + fileName;
         if (IsFileInPathExist(decorated, attributes))

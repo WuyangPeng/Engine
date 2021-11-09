@@ -1,19 +1,17 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.0.1 (2019/08/30 22:56)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助测试版本：0.7.2.3 (2021/09/23 21:46)
 
 #ifndef BOOK_NETWORK_PROGRAMMING_TESTING_HELPER_H
 #define BOOK_NETWORK_PROGRAMMING_TESTING_HELPER_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-
-namespace CoreTools
-{
-    class Suite;
-}
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace BookNetworkProgramming
 {
@@ -28,8 +26,6 @@ namespace BookNetworkProgramming
         TestingHelper(int argc, char** argv);
 
     private:
-
-
         void InitSuite();
 
         void AddNetworkedGraphicsBuildingNetworkedGamesAndVirtualEnvironmentsSuite();
@@ -40,23 +36,33 @@ namespace BookNetworkProgramming
 
         void AddEffectiveTCPIPProgrammingSuite();
 
+        void AddComputerNetworksSuite();
+
         void AddInternetworkingWithTCPIPSuite();
 
-        void AddInternetworkingWithTCPIPPrinciplesProtocolsAndArchitecturesSuite(Suite& internetworkingWithTCPIPSuite);
+        NODISCARD Suite GetPrinciplesProtocolsAndArchitecturesSuite();
 
-        void AddInternetworkingWithTCPIPDesignImplementationAndInternalsSuite(Suite& internetworkingWithTCPIPSuite);
+        NODISCARD Suite GetDesignImplementationAndInternalsSuite();
 
-        void AddInternetworkingWithTCPIPClientServerProgrammingAndApplicationsSuite(Suite& internetworkingWithTCPIPSuite);
+        NODISCARD Suite GetClientServerProgrammingAndApplicationsSuite();
 
         void AddUNIXNetworkProgrammingSuite();
 
-        void AddUNIXNetworkProgrammingTheSocketsNetworkingAPISuite(Suite& unixNetworkProgrammingSuite);
+        NODISCARD Suite GetUNIXNetworkProgrammingTheSocketsNetworkingAPISuite();
 
-        void AddUNIXNetworkProgrammingInterprocessCommunicationSuite(Suite& unixNetworkProgrammingSuite);
+        NODISCARD Suite GetUNIXNetworkProgrammingInterprocessCommunicationSuite();
 
         void AddConfiguringWindowsServer2008NetworkInfrastructureSuite();
 
         void AddAdvancedCORBAProgrammingWithCppSuite();
+
+        void AddComputerNetworksASystemApproachSuite();
+
+        void AddComputerNetworksATopDownApproachSuite();
+
+        void AddTCPIPProtocolSuite();
+
+        void AddCryptographyAndNetworkSecuritySuite();
     };
 }
 

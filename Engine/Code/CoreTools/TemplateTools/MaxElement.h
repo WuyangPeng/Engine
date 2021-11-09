@@ -31,7 +31,7 @@ namespace CoreTools
         }
         else
         {
-            THROW_EXCEPTION(SYSTEM_TEXT("获取元素最大值失败。"));
+            THROW_EXCEPTION(SYSTEM_TEXT("获取元素最大值失败。"s));
         }
     }
 }

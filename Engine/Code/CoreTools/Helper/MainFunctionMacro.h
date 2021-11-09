@@ -33,22 +33,22 @@
 
 #if defined(TCRE_USE_GCC) || defined(BUILDING_STATIC)
 
-    #define CORE_TOOLS_MUTEX_INIT(namespaceName)                                    \
-        CoreTools::Mutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)() \
-        {                                                                           \
-            static CoreTools::Mutex mutex{};                                        \
-            return mutex;                                                           \
+    #define CORE_TOOLS_MUTEX_INIT(namespaceName)                                         \
+        CoreTools::Mutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)()      \
+        {                                                                                \
+            static CoreTools::Mutex mutex{ CoreTools::MutexCreate::UseCriticalSection }; \
+            return mutex;                                                                \
         }
     #define CORE_TOOLS_MUTEX_EXTERN(namespaceName) \
         NODISCARD CoreTools::Mutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)()
 
 #else  // !defined(TCRE_USE_GCC) && !defined(BUILDING_STATIC)
 
-    #define CORE_TOOLS_MUTEX_INIT(namespaceName)                                       \
-        CoreTools::DllMutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)() \
-        {                                                                              \
-            static CoreTools::DllMutex dllMutex{};                                     \
-            return dllMutex;                                                           \
+    #define CORE_TOOLS_MUTEX_INIT(namespaceName)                                               \
+        CoreTools::DllMutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)()         \
+        {                                                                                      \
+            static CoreTools::DllMutex dllMutex{ CoreTools::MutexCreate::UseCriticalSection }; \
+            return dllMutex;                                                                   \
         }
     #define CORE_TOOLS_MUTEX_EXTERN(namespaceName) \
         NODISCARD CoreTools::DllMutex& SYSTEM_MULTIPLE_CONCATENATOR(Get, namespaceName, Mutex)();

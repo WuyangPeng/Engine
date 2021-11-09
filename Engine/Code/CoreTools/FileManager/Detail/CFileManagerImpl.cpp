@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 10:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 11:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,12 +16,12 @@
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 using std::string;
 
 CoreTools::CFileManagerImpl::CFileManagerImpl(const String& fileName, const String& mode)
-    : m_File{ nullptr }, m_FileName{ fileName }, m_Mode{ mode }
+    : file{ nullptr }, fileName{ fileName }, mode{ mode }
 {
     Open();
 
@@ -31,9 +31,9 @@ CoreTools::CFileManagerImpl::CFileManagerImpl(const String& fileName, const Stri
 // private
 void CoreTools::CFileManagerImpl::Open()
 {
-    if (!System::OpenCFile(m_File, StringConversion::StandardConversionCFileString(m_FileName), StringConversion::StandardConversionCFileString(m_Mode)))
+    if (!System::OpenCFile(file, StringConversion::StandardConversionCFileString(fileName), StringConversion::StandardConversionCFileString(mode)))
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("打开文件“%1%”失败！"s)) % m_FileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("打开文件“%1%”失败！"s)) % fileName).str());
     }
 }
 
@@ -47,11 +47,11 @@ CoreTools::CFileManagerImpl::~CFileManagerImpl() noexcept
 // private
 void CoreTools::CFileManagerImpl::Close() noexcept
 {
-    if (!System::CloseCFile(m_File))
+    if (!System::CloseCFile(file))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, CoreTools)
             << SYSTEM_TEXT("关闭文件")
-            << m_FileName
+            << fileName
             << SYSTEM_TEXT("失败！")
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
@@ -60,7 +60,7 @@ void CoreTools::CFileManagerImpl::Close() noexcept
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::CFileManagerImpl::IsValid() const noexcept
 {
-    if (m_File != nullptr)
+    if (file != nullptr)
         return true;
     else
         return false;
@@ -74,7 +74,7 @@ size_t CoreTools::CFileManagerImpl::ReadFromFile(size_t itemSize, size_t itemsNu
     CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
     CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "准备写入的数据无效！");
 
-    return System::ReadCFile(data, itemSize, itemsNumber, m_File);
+    return System::ReadCFile(data, itemSize, itemsNumber, file);
 }
 
 size_t CoreTools::CFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNumber, const void* data)
@@ -84,7 +84,7 @@ size_t CoreTools::CFileManagerImpl::WriteToFile(size_t itemSize, size_t itemsNum
     CORE_TOOLS_ASSERTION_2(itemSize == 1 || itemSize == 2 || itemSize == 4 || itemSize == 8, "大小必须为1，2，4或8\n");
     CORE_TOOLS_ASSERTION_0(0u < itemsNumber && data != nullptr, "准备读取的数据无效！");
 
-    return System::WriteCFile(data, itemSize, itemsNumber, m_File);
+    return System::WriteCFile(data, itemSize, itemsNumber, file);
 }
 
 CoreTools::CFileManagerImpl::OffType CoreTools::CFileManagerImpl::GetFileLength() const
@@ -92,9 +92,9 @@ CoreTools::CFileManagerImpl::OffType CoreTools::CFileManagerImpl::GetFileLength(
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     OffType length{ 0 };
-    if (!System::GetFileLength(m_FileName, &length))
+    if (!System::GetFileLength(fileName, &length))
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("文件“%1%”不存在！"s)) % m_FileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("文件“%1%”不存在！"s)) % fileName).str());
     }
 
     return length;
@@ -106,7 +106,7 @@ int CoreTools::CFileManagerImpl::GetCharacter()
 
     CoreTools::DisableNoexcept();
 
-    return System::GetCharacter(m_File);
+    return System::GetCharacter(file);
 }
 
 bool CoreTools::CFileManagerImpl::UnGetCharacter(int character)
@@ -115,7 +115,7 @@ bool CoreTools::CFileManagerImpl::UnGetCharacter(int character)
 
     CoreTools::DisableNoexcept();
 
-    return System::UnGetCharacter(m_File, character);
+    return System::UnGetCharacter(file, character);
 }
 
 bool CoreTools::CFileManagerImpl::PutCharacter(int character)
@@ -124,7 +124,7 @@ bool CoreTools::CFileManagerImpl::PutCharacter(int character)
 
     CoreTools::DisableNoexcept();
 
-    return System::PutCharacter(m_File, character);
+    return System::PutCharacter(file, character);
 }
 
 bool CoreTools::CFileManagerImpl::PutString(const string& str)
@@ -133,42 +133,42 @@ bool CoreTools::CFileManagerImpl::PutString(const string& str)
 
     CoreTools::DisableNoexcept();
 
-    return System::PutString(m_File, str.c_str());
+    return System::PutString(file, str.c_str());
 }
 
 string CoreTools::CFileManagerImpl::GetString(int count)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::GetString(m_File, count);
+    return System::GetString(file, count);
 }
 
 bool CoreTools::CFileManagerImpl::IsEOF() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::IsEOF(m_File);
+    return System::IsEOF(file);
 }
 
 bool CoreTools::CFileManagerImpl::Flush() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::Flush(m_File);
+    return System::Flush(file);
 }
 
 bool CoreTools::CFileManagerImpl::Seek(long offset, FileSeek whence) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::Seek(m_File, offset, whence);
+    return System::Seek(file, offset, whence);
 }
 
 CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto position = System::GetPosition(m_File);
+    const auto position = System::GetPosition(file);
 
     constexpr PosType errorPosition{ -1 };
 
@@ -178,7 +178,7 @@ CoreTools::CFileManagerImpl::PosType CoreTools::CFileManagerImpl::GetPosition()
     }
     else
     {
-        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % m_FileName).str());
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("获取文件“%1%”的位置失败！"s)) % fileName).str());
     }
 }
 
@@ -186,26 +186,26 @@ bool CoreTools::CFileManagerImpl::SetPosition(PosType position) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::SetPosition(m_File, position);
+    return System::SetPosition(file, position);
 }
 
 long CoreTools::CFileManagerImpl::Tell() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::Tell(m_File);
+    return System::Tell(file);
 }
 
 void CoreTools::CFileManagerImpl::Rewind() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::Rewind(m_File);
+    return System::Rewind(file);
 }
 
 bool CoreTools::CFileManagerImpl::Setvbuf(FileSetvBuf type, size_t size) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return System::SetvBuf(m_File, type, size);
+    return System::SetvBuf(file, type, size);
 }

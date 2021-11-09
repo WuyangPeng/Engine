@@ -1,0 +1,10 @@
+@vector,,,,,,,hero
+ID,下一关ID,过关奖励,装备名称,标识,位置,掩码,英雄ID
+int,int,int,string,char,vector3,bool[],int
+id,nextID,reward,equipName,logo,position,mask,heroID
+10001,10002,1,"1.1",a,1.1|1.2|1.5,false&true,1
+10002,10003,2,"1.2",b,1.1|1.2|1.6,false&true&true,2
+10003,10004,3,"1.3",a,1.1|1.2|1.7,false&true&true,3
+10004,10005,4,"1.4",b,1.1|1.2|1.8,false&true,4
+10005,10006,5,"1.5",a,1.1|1.2|1.9,false&true&true&true,5
+10006,10007,6,"1.6",b,1.1|1.2|1.10,false&true,6

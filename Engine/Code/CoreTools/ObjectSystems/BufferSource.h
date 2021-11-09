@@ -224,7 +224,7 @@ namespace CoreTools
         // °ïÖúº¯Êý
         int GetBytesRead() const noexcept;
         int GetBytesTotal() const;
-        void IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2);
+        void IncrementBytesProcessed(int bytesNumber);
         void ReadUniqueID(const ObjectInterfaceSharedPtr& object);
 
     private:

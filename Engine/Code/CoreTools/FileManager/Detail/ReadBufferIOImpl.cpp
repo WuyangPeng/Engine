@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 13:21)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,7 +20,7 @@
 using namespace std::literals;
 
 CoreTools::ReadBufferIOImpl::ReadBufferIOImpl(const ConstFileBufferSharedPtr& fileBuffer) noexcept
-    : ParentType{}, m_Buffer{ fileBuffer }
+    : ParentType{}, buffer{ fileBuffer }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -28,7 +28,7 @@ CoreTools::ReadBufferIOImpl::ReadBufferIOImpl(const ConstFileBufferSharedPtr& fi
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::ReadBufferIOImpl::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Buffer != nullptr)
+    if (ParentType::IsValid() && buffer != nullptr)
         return true;
     else
         return false;
@@ -68,7 +68,7 @@ int CoreTools::ReadBufferIOImpl::ReadFromBuffer(size_t itemSize, size_t itemsNum
     if (nextBytesProcessed <= GetBytesTotal())
     {
         // 获得缓冲区当前指针位置。
-        auto source = m_Buffer->GetBuffer(GetBytesProcessed());
+        auto source = buffer->GetBuffer(GetBytesProcessed());
 
         SetBytesProcessed(nextBytesProcessed);
 
@@ -85,7 +85,7 @@ int CoreTools::ReadBufferIOImpl::ReadFromBuffer(size_t itemSize, size_t itemsNum
     }
     else
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"s));
+        THROW_EXCEPTION((Error::Format(SYSTEM_TEXT("要读取的字节数%1%超过了缓冲区大小%2%！原字节数为：%3%")) % numberToCopy % GetBytesTotal() % GetBytesProcessed()).str());
     }
 }
 
@@ -95,9 +95,9 @@ std::string CoreTools::ReadBufferIOImpl::GetText(int length) const
 
     const auto nextProcessed = boost::numeric_cast<size_t>(GetBytesProcessed() + length);
 
-    if (nextProcessed <= m_Buffer->GetSize())
+    if (nextProcessed <= buffer->GetSize())
     {
-        auto text = m_Buffer->GetBuffer(GetBytesProcessed());
+        auto text = buffer->GetBuffer(GetBytesProcessed());
         std::string datum{ text, boost::numeric_cast<size_t>(length) };
 
         return datum;
@@ -105,14 +105,14 @@ std::string CoreTools::ReadBufferIOImpl::GetText(int length) const
     else
     {
         THROW_EXCEPTION(SYSTEM_TEXT("要读取的字节数超过了缓冲区大小！"s));
-    }  
+    }
 }
 
 int CoreTools::ReadBufferIOImpl::GetBytesTotal() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Buffer->GetSize());
+    return boost::numeric_cast<int>(buffer->GetSize());
 }
 
 CoreTools::BufferIO CoreTools::ReadBufferIOImpl::GetBufferIOType() const noexcept

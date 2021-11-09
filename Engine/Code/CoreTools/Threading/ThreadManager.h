@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 18:06)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:22)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_H
@@ -14,28 +14,26 @@
 
 #include "System/Threading/Using/ThreadUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
- 
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(ThreadManagerImpl);
 
-
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE ThreadManager final  
+    class CORE_TOOLS_DEFAULT_DECLARE ThreadManager final
     {
     public:
         NON_COPY_TYPE_DECLARE(ThreadManager);
         using ThreadSize = System::WindowsSize;
 
     public:
-        ThreadManager();
+        explicit ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow);
         ~ThreadManager() noexcept = default;
         ThreadManager(const ThreadManager& rhs) noexcept = delete;
         ThreadManager& operator=(const ThreadManager& rhs) noexcept = delete;
         ThreadManager(ThreadManager&& rhs) noexcept = delete;
         ThreadManager& operator=(ThreadManager&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
         void AddThread(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);

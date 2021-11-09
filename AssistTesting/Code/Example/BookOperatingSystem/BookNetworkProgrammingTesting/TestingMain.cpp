@@ -1,14 +1,15 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎辅助版本：0.0.0.1 (2019/08/30 22:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助测试版本：0.7.2.3 (2021/09/23 21:55)
 
-#include "Example/BookOperatingSystem/BookNetworkProgrammingTesting/TestingHelper.h" 
 #include "CoreTools/Helper/MainFunctionMacro.h"
+#include "Example/BookOperatingSystem/BookNetworkProgrammingTesting/TestingHelper.h"
 
 #include <vld.h>
 
 MAIN_FUNCTION(BookNetworkProgramming, TestingHelper)
-	
-

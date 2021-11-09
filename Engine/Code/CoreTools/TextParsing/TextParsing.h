@@ -1,16 +1,76 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 19:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.5 (2021/10/16 2:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
 
-#include "BoostParsing.h"
-#include "TwoDimensionalParsing.h"
+#include "BatchConversionCSV.h"
+#include "CSVContent.h"
+#include "CSVGenerate.h"
+#include "CSVHead.h"
+#include "CSVRow.h"
+#include "CSVTotalGenerate.h"
+#include "CSVTypeConversion.h"
+#include "ExcelConversionCSV.h"
+#include "SimpleCSV/AppProperties.h"
+#include "SimpleCSV/Cell.h"
+#include "SimpleCSV/CellIterator.h"
+#include "SimpleCSV/CellRange.h"
+#include "SimpleCSV/CellReference.h"
+#include "SimpleCSV/CellValue.h"
+#include "SimpleCSV/CellValueProxy.h"
+#include "SimpleCSV/Color.h"
+#include "SimpleCSV/Column.h"
+#include "SimpleCSV/CommandQuery/CommandAddChartsheet.h"
+#include "SimpleCSV/CommandQuery/CommandAddSharedStrings.h"
+#include "SimpleCSV/CommandQuery/CommandAddWorksheet.h"
+#include "SimpleCSV/CommandQuery/CommandCloneSheet.h"
+#include "SimpleCSV/CommandQuery/CommandDeleteSheet.h"
+#include "SimpleCSV/CommandQuery/CommandResetCalcChain.h"
+#include "SimpleCSV/CommandQuery/CommandSetSheetColor.h"
+#include "SimpleCSV/CommandQuery/CommandSetSheetIndex.h"
+#include "SimpleCSV/CommandQuery/CommandSetSheetName.h"
+#include "SimpleCSV/CommandQuery/CommandSetSheetVisibility.h"
+#include "SimpleCSV/CommandQuery/QuerySharedStrings.h"
+#include "SimpleCSV/CommandQuery/QuerySheetID.h"
+#include "SimpleCSV/CommandQuery/QuerySheetIndex.h"
+#include "SimpleCSV/CommandQuery/QuerySheetName.h"
+#include "SimpleCSV/CommandQuery/QuerySheetRelsID.h"
+#include "SimpleCSV/CommandQuery/QuerySheetRelsTarget.h"
+#include "SimpleCSV/CommandQuery/QuerySheetType.h"
+#include "SimpleCSV/CommandQuery/QuerySheetVisibility.h"
+#include "SimpleCSV/CommandQuery/QueryXmlData.h"
+#include "SimpleCSV/ContentItem.h"
+#include "SimpleCSV/ContentTypes.h"
+#include "SimpleCSV/Document.h"
+#include "SimpleCSV/Properties.h"
+#include "SimpleCSV/RelationshipItem.h"
+#include "SimpleCSV/Relationships.h"
+#include "SimpleCSV/Row.h"
+#include "SimpleCSV/RowDataIterator.h"
+#include "SimpleCSV/RowDataProxy.h"
+#include "SimpleCSV/RowDataRange.h"
+#include "SimpleCSV/RowRange.h"
+#include "SimpleCSV/SharedStrings.h"
+#include "SimpleCSV/SheetBase.h"
+#include "SimpleCSV/SimpleCSVException.h"
+#include "SimpleCSV/Workbook.h"
+#include "SimpleCSV/Worksheet.h"
+#include "SimpleCSV/XmlData.h"
+#include "SimpleCSV/XmlFile.h"
+#include "SimpleZip/ZipArchive.h"
+#include "SimpleZip/ZipEntry.h"
+#include "Data/IntVector2.h"
+#include "Data/IntVector3.h"
+#include "Data/IntVector4.h"
+#include "Data/Vector2.h"
+#include "Data/Vector3.h"
+#include "Data/Vector4.h"
 
 #endif  // CORE_TOOLS_TEXT_PARSING_H

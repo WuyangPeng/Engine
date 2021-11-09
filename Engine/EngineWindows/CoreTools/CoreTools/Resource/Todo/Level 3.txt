@@ -1,10 +1,5 @@
 TODO Level 3
  
-0.7.2.2 
+0.7.2.5
 
-1.  （Threading）依照boost库封装std::thread组。
-2.  （Threading）封装System Threading其他线程相关的锁。 
-3.  （Threading）读写锁封装使用std::shared_mutex和boost库的相关类型。
-4.  （Threading）封装条件变量类型。
-5.  （Threading）读写锁用于单例需要细致编程，很容易导致死锁。 
-6.  （Threading）目前类不变式调用无法加入读锁，又无法设为私有，目前只有考虑将类不变式类设为友元，并将IsValid函数设为私有一种解决方案。
+ 

@@ -1,0 +1,12 @@
+TCP/IP协议族
+   
+TCPIPProtocolSuite
+	
+工程类型
+	dll/lib。
+
+状态
+	目前版本：0.7.2.3。
+
+实现内容	
+	1. TCP/IP协议族模块。

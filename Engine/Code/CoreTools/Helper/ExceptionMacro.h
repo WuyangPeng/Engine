@@ -18,17 +18,23 @@
 
 #include <stdexcept>
 
-#define THROW_EXCEPTION(error)     \
-    using namespace std::literals; \
-    CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), (error))
+#define THROW_EXCEPTION(error)                                                  \
+    {                                                                           \
+        using namespace std::literals;                                          \
+        CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), (error)); \
+    }
 
-#define THROW_WINDOWS_EXCEPTION    \
-    using namespace std::literals; \
-    CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), SYSTEM_TEXT(""s))
+#define THROW_WINDOWS_EXCEPTION                                                          \
+    {                                                                                    \
+        using namespace std::literals;                                                   \
+        CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), SYSTEM_TEXT(""s)); \
+    }
 
-#define THROW_LAST_ERROR_EXCEPTION(lastError, error) \
-    using namespace std::literals;                   \
-    CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), lastError, (error))
+#define THROW_LAST_ERROR_EXCEPTION(lastError, error)                                       \
+    {                                                                                      \
+        using namespace std::literals;                                                     \
+        CoreTools::Error::ThrowError((CORE_TOOLS_FUNCTION_DESCRIBED), lastError, (error)); \
+    }
 
 #define EXCEPTION_TRY try
 

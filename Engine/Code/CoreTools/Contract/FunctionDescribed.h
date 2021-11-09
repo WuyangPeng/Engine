@@ -64,7 +64,8 @@ namespace CoreTools
 
     NODISCARD constexpr bool FUNCTION_DESCRIBED_DEFAULT_DECLARE operator==(const FunctionDescribed& lhs, const FunctionDescribed& rhs)
     {
-        return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() && rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();
+        // 这里直接比较字符串指针，而不是实际的值。
+        return lhs.GetCurrentFunction() == rhs.GetCurrentFunction() && lhs.GetFileName() == rhs.GetFileName() && lhs.GetLine() == rhs.GetLine();
     }
 }
 

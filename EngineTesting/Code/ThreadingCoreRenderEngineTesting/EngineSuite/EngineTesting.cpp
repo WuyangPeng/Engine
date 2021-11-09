@@ -9,8 +9,8 @@
 
 #include "EngineTesting.h"
 #include "System/Threading/Process.h"
-#include "System/Window/Engineering.h"
-#include "System/Window/WindowSystem.h"
+#include "System/Windows/Engineering.h"
+#include "System/Windows/WindowsSystem.h"
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/FileManager/Directory.h"
 #include "CoreTools/Helper/AssertMacro.h"

@@ -5,23 +5,27 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 20:46)
+///	引擎版本：0.7.2.3 (2021/08/31 17:07)
 
 #ifndef CORE_TOOLS_BASE_STATIC_SINGLETON_H
 #define CORE_TOOLS_BASE_STATIC_SINGLETON_H
 
-#include "CoreTools/Threading/Mutex.h"
+#include "CoreTools/Threading/Flags/MutexFlags.h"
+#include "CoreTools/Threading/Flags/MutexTraits.h"
+
+#include <mutex>
 
 namespace CoreTools
 {
-    template <typename T>
+    template <typename T, MutexCreate mutexCreate = MutexCreate::UseOriginalStdRecursive>
     class StaticSingleton
     {
     public:
-        using ClassType = StaticSingleton<T>;
+        using ClassType = StaticSingleton<T, mutexCreate>;
         using ValueType = T;
         using PointType = ValueType*;
         using ReferenceType = ValueType&;
+        using MutexType = typename MutexTraits<mutexCreate>::MutexType;
 
     public:
         NODISCARD static ReferenceType GetSingleton() noexcept;
@@ -35,7 +39,7 @@ namespace CoreTools
 
         explicit StaticSingleton(MAYBE_UNUSED SingletonCreate singletonCreate) noexcept;
         ~StaticSingleton() noexcept = default;
-        NODISCARD static Mutex& GetMutex();
+        NODISCARD static MutexType& GetMutex();
 
     public:
         StaticSingleton(const StaticSingleton& rhs) noexcept = delete;

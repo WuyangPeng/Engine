@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:55)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 12:48)
 
 #ifndef CORE_TOOLS_THREADING_MUTEX_IMPL_H
 #define CORE_TOOLS_THREADING_MUTEX_IMPL_H
@@ -24,17 +24,17 @@ namespace CoreTools
     public:
         MutexImpl() noexcept = default;
         virtual ~MutexImpl() noexcept = default;
-        MutexImpl(const MutexImpl&) = delete;
-        MutexImpl& operator=(const MutexImpl&) = delete;
-        MutexImpl(MutexImpl&&) noexcept = delete;
-        MutexImpl& operator=(MutexImpl&&) noexcept = delete;
+        MutexImpl(const MutexImpl& rhs) noexcept = delete;
+        MutexImpl& operator=(const MutexImpl& rhs) noexcept = delete;
+        MutexImpl(MutexImpl&& rhs) noexcept = delete;
+        MutexImpl& operator=(MutexImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         virtual void Initialize() = 0;
         virtual void Delete() noexcept = 0;
         virtual void Enter() = 0;
-        [[nodiscard]] virtual bool TryEnter() = 0;
+        NODISCARD virtual bool TryEnter() = 0;
         virtual void Leave() noexcept = 0;
     };
 }

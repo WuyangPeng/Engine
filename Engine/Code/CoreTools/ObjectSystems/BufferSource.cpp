@@ -113,7 +113,7 @@ int CoreTools::BufferSource::GetBytesTotal() const
     return m_Source.GetBytesTotal();
 }
 
-void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber) noexcept(g_Assert < 2 || g_CoreToolsAssert < 2)
+void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber)  
 {
     
 

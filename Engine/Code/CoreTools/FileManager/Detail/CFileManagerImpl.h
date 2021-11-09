@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 16:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 11:28)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_C_FILE_MANAGER_IMPL_H
@@ -15,6 +15,7 @@
 #include "System/FileManager/Fwd/FileFlagsFwd.h"
 #include "System/FileManager/Using/CFileUsing.h"
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 #include <string>
 
@@ -40,47 +41,47 @@ namespace CoreTools
         CFileManagerImpl(const String& fileName, const String& mode);
         virtual ~CFileManagerImpl() noexcept;
 
-        CFileManagerImpl(const CFileManagerImpl&) = delete;
-        CFileManagerImpl& operator=(const CFileManagerImpl&) = delete;
-        CFileManagerImpl(CFileManagerImpl&&) noexcept = delete;
-        CFileManagerImpl& operator=(CFileManagerImpl&&) noexcept = delete;
+        CFileManagerImpl(const CFileManagerImpl& rhs) = delete;
+        CFileManagerImpl& operator=(const CFileManagerImpl& rhs) = delete;
+        CFileManagerImpl(CFileManagerImpl&& rhs) noexcept = delete;
+        CFileManagerImpl& operator=(CFileManagerImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        OffType GetFileLength() const;
+        NODISCARD OffType GetFileLength() const;
 
         // 输入
-        [[nodiscard]] virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data);
+        NODISCARD virtual size_t ReadFromFile(size_t itemSize, size_t itemsNumber, void* data);
         // 输出
-        [[nodiscard]] virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data);
+        NODISCARD virtual size_t WriteToFile(size_t itemSize, size_t itemsNumber, const void* data);
         // 输入
-        [[nodiscard]] virtual int GetCharacter();
+        NODISCARD virtual int GetCharacter();
         // 输入
-        [[nodiscard]] virtual bool UnGetCharacter(int character);
+        NODISCARD virtual bool UnGetCharacter(int character);
         // 输出
-        [[nodiscard]] virtual bool PutCharacter(int character);
+        NODISCARD virtual bool PutCharacter(int character);
         // 输出
-        [[nodiscard]] virtual bool PutString(const std::string& str);
+        NODISCARD virtual bool PutString(const std::string& str);
         // 输入
-        [[nodiscard]] virtual std::string GetString(int count);
+        NODISCARD virtual std::string GetString(int count);
 
-        [[nodiscard]] bool IsEOF() noexcept;
-        [[nodiscard]] bool Flush() noexcept;
-        [[nodiscard]] bool Seek(long offset, FileSeek whence) noexcept;
-        [[nodiscard]] PosType GetPosition();
-        [[nodiscard]] bool SetPosition(PosType position) noexcept;
-        [[nodiscard]] long Tell() noexcept;
+        NODISCARD bool IsEOF() noexcept;
+        NODISCARD bool Flush() noexcept;
+        NODISCARD bool Seek(long offset, FileSeek whence) noexcept;
+        NODISCARD PosType GetPosition();
+        NODISCARD bool SetPosition(PosType position) noexcept;
+        NODISCARD long Tell() noexcept;
         void Rewind() noexcept;
-        [[nodiscard]] bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
+        NODISCARD bool Setvbuf(FileSetvBuf type, size_t size) noexcept;
 
     private:
         void Open();
         void Close() noexcept;
 
     private:
-        FILE* m_File;
-        System::String m_FileName;
-        System::String m_Mode;
+        FILE* file;
+        String fileName;
+        String mode;
     };
 }
 

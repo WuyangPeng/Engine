@@ -1,133 +1,124 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎测试版本：0.0.2.3 (2020/03/05 12:30)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/02 14:16)
 
 #include "EventTesting.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Threading/ThreadGroupDetail.h"
+#include "CoreTools/Threading/ThreadGuardDetail.h"
+#include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
-#include <thread>
-
-using std::ostream;
-using std::thread;
-
-CoreTools::EventTesting
-	::EventTesting(const OStreamShared& osPtr)
-	:ParentType{ osPtr }, m_ManualResetTrueEvent{ true,false }, m_ManualResetFlaseEvent{ false,true }, m_TestValue{ 0 }
+CoreTools::EventTesting::EventTesting(const OStreamShared& stream)
+    : ParentType{ stream }, manualResetTrueEvent{ true, false }, manualResetFlaseEvent{ false, true }, testValue{ 0 }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
- CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EventTesting)
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EventTesting)
+
 void CoreTools::EventTesting::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void CoreTools::EventTesting
-	::MainTest()
+void CoreTools::EventTesting::MainTest()
 {
-	// 测试两次
-	ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
+    // 测试两次
+    ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ManualResetTrueCreateThreadTest);
 
-	ASSERT_NOT_THROW_EXCEPTION_0(ManualResetFalseCreateThreadTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ManualResetFalseCreateThreadTest);
 }
 
-void CoreTools::EventTesting
-	::ManualResetTrueCreateThreadTest()
+void CoreTools::EventTesting::ManualResetTrueCreateThreadTest()
 {
-	thread thread1{ &EventTesting::Thread1,this };
-	thread thread2{ &EventTesting::Thread2,this };
-	thread thread3{ &EventTesting::Thread3,this };
-	thread1.join();
-	thread2.join();
-	thread3.join();
+    {
+        ThreadGroup thread{ DisableNotThrow::Disable };
 
-	thread thread4{ &EventTesting::Thread4,this };
-	thread4.join();
+        thread.AddThread(&ClassType::Thread0, this);
+        thread.AddThread(&ClassType::Thread1, this);
+        thread.AddThread(&ClassType::Thread2, this);
+    }
+
+    ThreadGuard threadGuard{ &ClassType::Thread3, this };
 }
 
-void CoreTools::EventTesting
-	::Thread1()
+void CoreTools::EventTesting::Thread0()
 {
-	ASSERT_EQUAL(m_TestValue, 0);
+    ASSERT_EQUAL(testValue, 0);
 
-	++m_TestValue;
+    ++testValue;
 
-	m_ManualResetTrueEvent.SetEvent();
+    manualResetTrueEvent.SetEvent();
 }
 
-void CoreTools::EventTesting
-	::Thread2()
+void CoreTools::EventTesting::Thread1()
 {
-	m_ManualResetTrueEvent.Wait();
+    manualResetTrueEvent.Wait();
 
-	ASSERT_TRUE(m_TestValue == 1 || m_TestValue == 3);
+    ASSERT_TRUE(testValue == 1 || testValue == 3);
 
-	++m_TestValue;
+    ++testValue;
 
-	m_ManualResetTrueEvent.SetEvent();
+    manualResetTrueEvent.SetEvent();
 }
 
-void CoreTools::EventTesting
-	::Thread3()
+void CoreTools::EventTesting::Thread2()
 {
-	m_ManualResetTrueEvent.Wait();
+    manualResetTrueEvent.Wait();
 
-	ASSERT_TRUE(m_TestValue == 1 || m_TestValue == 2);
+    ASSERT_TRUE(testValue == 1 || testValue == 2);
 
-	m_TestValue += 2;
+    testValue += 2;
 
-	m_ManualResetTrueEvent.SetEvent();
+    manualResetTrueEvent.SetEvent();
 }
 
-void CoreTools::EventTesting
-	::Thread4()
+void CoreTools::EventTesting::Thread3()
 {
-	ASSERT_EQUAL(m_TestValue, 4);
+    ASSERT_EQUAL(testValue, 4);
 
-	m_TestValue = 0;
+    testValue = 0;
 
-	m_ManualResetTrueEvent.ResetEvent();
+    manualResetTrueEvent.ResetEvent();
 }
 
-void CoreTools::EventTesting
-	::ManualResetFalseCreateThreadTest()
+void CoreTools::EventTesting::ManualResetFalseCreateThreadTest()
 {
-	thread thread1{ &EventTesting::Thread5,this };
-	thread thread2{ &EventTesting::Thread6,this };
-	thread thread3{ &EventTesting::Thread5,this };
-	thread1.join();
-	thread2.join();
-	thread3.join();
+    {
+        ThreadGroup thread{ DisableNotThrow::Disable };
 
-	thread thread4{ &EventTesting::Thread7,this };
-	thread4.join();
+        thread.AddThread(&ClassType::Thread4, this);
+        thread.AddThread(&ClassType::Thread5, this);
+        thread.AddThread(&ClassType::Thread4, this);
+    }
+
+    ThreadGuard threadGuard{ &ClassType::Thread6, this };
 }
 
-void CoreTools::EventTesting
-	::Thread5()
+void CoreTools::EventTesting::Thread4()
 {
-	m_ManualResetFlaseEvent.Wait();
+    manualResetFlaseEvent.Wait();
 
-	m_ManualResetFlaseEvent.SetEvent();
+    manualResetFlaseEvent.SetEvent();
 }
 
-void CoreTools::EventTesting
-	::Thread6()
+void CoreTools::EventTesting::Thread5()
 {
-	m_ManualResetFlaseEvent.Wait();
+    manualResetFlaseEvent.Wait();
 
-	m_ManualResetFlaseEvent.SetEvent();
+    manualResetFlaseEvent.SetEvent();
 }
 
-void CoreTools::EventTesting
-	::Thread7()
+void CoreTools::EventTesting::Thread6()
 {
-	m_ManualResetFlaseEvent.ResetEvent();
+    manualResetFlaseEvent.ResetEvent();
 }
-

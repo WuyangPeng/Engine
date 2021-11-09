@@ -1,0 +1,7 @@
+@enum
+ID,类型名,描述,加法运算符,减法运算符,乘法运算符,取反运算符,自增运算符,自减运算符,与运算符,或运算符,异或运算符,输入输出运算符
+int,string,string,bool,bool,bool,bool,bool,bool,bool,bool,bool,bool
+id,name,describe,addable,subtractable,multiplication,negate,incrementable,decrementable,andable,orable,xorable,iostream
+2,"Two","二维",,,,,,,
+3,"Three","三维",,,,,,,
+4,"Four","四维",,,,,,,

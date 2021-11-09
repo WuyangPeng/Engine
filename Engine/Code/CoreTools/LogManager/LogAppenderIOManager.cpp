@@ -20,13 +20,13 @@ using std::string;
 using std::wstring;
 
 CoreTools::LogAppenderIOManager::LogAppenderIOManager(LogLevel logLevel, const AppenderManagerPtr& appenderManager)
-    : impl{  logLevel, appenderManager  }, m_LogAppenderIOManagerMutex{}
+    : impl{ logLevel, appenderManager }, m_LogAppenderIOManagerMutex{ MutexCreate::UseCriticalSection }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 CoreTools::LogAppenderIOManager::LogAppenderIOManager([[maybe_unused]] DisableNotThrow disableNotThrow)
-    : impl{  0 }, m_LogAppenderIOManagerMutex{}
+    : impl{ 0 }, m_LogAppenderIOManagerMutex{ MutexCreate::UseCriticalSection }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

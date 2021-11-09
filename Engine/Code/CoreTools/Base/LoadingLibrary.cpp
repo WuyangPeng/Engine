@@ -19,7 +19,7 @@ using std::string;
 CoreTools::LoadingLibrary::LoadingLibrary(const String& fileName, LoadLibraryType flags)
     : impl{ fileName, flags }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, LoadingLibrary)

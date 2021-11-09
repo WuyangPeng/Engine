@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 19:04)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:04)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,10 +13,10 @@
 #include "System/Threading/Flags/SemaphoreFlags.h"
 #include "System/Threading/Mutex.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::WindowsMutex::WindowsMutex() noexcept
-    : ParentType{}, m_Mutex{}
+    : ParentType{}, mutex{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,9 +27,9 @@ void CoreTools::WindowsMutex::Initialize()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Mutex = System::CreateSystemMutex();
+    mutex = System::CreateSystemMutex();
 
-    if (m_Mutex == nullptr)
+    if (mutex == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("初始化Mutex失败。"s));
     }
@@ -39,7 +39,7 @@ void CoreTools::WindowsMutex::Delete() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (!System::CloseSystemMutex(m_Mutex))
+    if (!System::CloseSystemMutex(mutex))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT("销毁Mutex失败")
@@ -51,7 +51,7 @@ void CoreTools::WindowsMutex::Enter()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (!System::WaitForSystemMutex(m_Mutex))
+    if (!System::WaitForSystemMutex(mutex))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("进入Mutex失败。"s));
     }
@@ -67,7 +67,7 @@ void CoreTools::WindowsMutex::Leave() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (!System::ReleaseSystemMutex(m_Mutex))
+    if (!System::ReleaseSystemMutex(mutex))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Error, CoreTools)
             << SYSTEM_TEXT("释放互斥体失败")
@@ -79,7 +79,7 @@ bool CoreTools::WindowsMutex::TryEnter() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    const auto result = System::WaitForSystemMutex(m_Mutex, 0);
+    const auto result = System::WaitForSystemMutex(mutex, 0);
     if (result == System::MutexWaitReturn::Object0)
         return true;
     else

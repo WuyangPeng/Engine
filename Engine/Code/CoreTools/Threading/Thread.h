@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 18:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 13:21)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_H
 #define CORE_TOOLS_THREADING_THREAD_H
@@ -14,16 +14,13 @@
 
 #include "System/Threading/Using/ThreadUsing.h"
 #include "System/Windows/Using/WindowsUsing.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(ThreadImpl);
 
-
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Thread final 
+    class CORE_TOOLS_DEFAULT_DECLARE Thread final
     {
     public:
         NON_COPY_TYPE_DECLARE(Thread);
@@ -36,6 +33,7 @@ namespace CoreTools
         Thread& operator=(const Thread& rhs) noexcept = delete;
         Thread(Thread&& rhs) noexcept = delete;
         Thread& operator=(Thread&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
         // 启动和停止线程。
@@ -45,7 +43,7 @@ namespace CoreTools
         void Wait();
 
         void SetThreadPriority(int priority);
-        [[nodiscard]] int GetThreadPriority() const;
+        NODISCARD int GetThreadPriority() const;
 
     private:
         PackageType impl;

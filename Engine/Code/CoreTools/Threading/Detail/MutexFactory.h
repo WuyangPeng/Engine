@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:50)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/08/31 22:51)
 
 #ifndef CORE_TOOLS_THREADING_MUTEX_FACTORY_H
 #define CORE_TOOLS_THREADING_MUTEX_FACTORY_H
@@ -22,10 +22,10 @@ namespace CoreTools
     {
     public:
         using ClassType = MutexFactory;
-        using MutexImplPtr = std::shared_ptr<MutexImpl>;
+        using MutexImplSharedPtr = std::shared_ptr<MutexImpl>;
 
     public:
-        [[nodiscard]] static MutexImplPtr Create(MutexCreate mutexCreate);
+        NODISCARD static MutexImplSharedPtr Create(MutexCreate mutexCreate);
     };
 }
 

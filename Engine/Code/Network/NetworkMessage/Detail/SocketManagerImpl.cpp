@@ -25,14 +25,14 @@ using std::make_unique;
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 Network::SocketManagerImpl::SocketManagerImpl(MAYBE_UNUSED int count)
-    : m_MessageEventManagerContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>() }
+    : m_MessageEventManagerContainer{}, m_Mutex{ make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 #include STSTEM_WARNING_POP
 
 Network::SocketManagerImpl::SocketManagerImpl(const SocketManagerImpl& rhs)
-    : m_MessageEventManagerContainer{ rhs.m_MessageEventManagerContainer }, m_Mutex{ make_unique<CoreTools::Mutex>() }
+    : m_MessageEventManagerContainer{ rhs.m_MessageEventManagerContainer }, m_Mutex{ make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -42,7 +42,7 @@ Network::SocketManagerImpl& Network::SocketManagerImpl::operator=(const SocketMa
     NETWORK_CLASS_IS_VALID_9;
 
     m_MessageEventManagerContainer = rhs.m_MessageEventManagerContainer;
-    m_Mutex = make_unique<CoreTools::Mutex>();
+    m_Mutex = make_unique<CoreTools::Mutex>(CoreTools::MutexCreate::UseCriticalSection);
 
     return *this;
 }

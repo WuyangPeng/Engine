@@ -335,6 +335,8 @@ void CoreTools::TestingHelper::AddThreadingSuite()
     ADD_TEST(threadingSuite, SemaphoreTesting);
     ADD_TEST(threadingSuite, ThreadTesting);
     ADD_TEST(threadingSuite, ThreadManagerTesting);
+    ADD_TEST(threadingSuite, ThreadGuardTesting);
+    ADD_TEST(threadingSuite, ThreadGroupTesting);
 
     AddSuite(threadingSuite);
 }
@@ -344,26 +346,222 @@ void CoreTools::TestingHelper::AddFileManagerSuite()
 {
     auto fileManagerSuite = GenerateSuite("文件管理库");
 
-    ADD_TEST(fileManagerSuite, EndianTesting);
+    fileManagerSuite.AddSuite(GetEndianSuite());
     ADD_TEST(fileManagerSuite, FileBufferTesting);
-    ADD_TEST(fileManagerSuite, CFileManagerTesting);
-    ADD_TEST(fileManagerSuite, StreamManagerTesting);
+    fileManagerSuite.AddSuite(GetCFileManagerSuite());
+    fileManagerSuite.AddSuite(GetStreamManagerSuite());
     ADD_TEST(fileManagerSuite, DeleteFileToolsTesting);
     ADD_TEST(fileManagerSuite, CopyFileToolsTesting);
-    ADD_TEST(fileManagerSuite, FileHandleTesting);
-    ADD_TEST(fileManagerSuite, FileManagerTesting);
-    ADD_TEST(fileManagerSuite, BufferIOTesting);
-    ADD_TEST(fileManagerSuite, EnvironmentVariableTesting);
-    ADD_TEST(fileManagerSuite, EnvironmentTesting);
+    fileManagerSuite.AddSuite(GetFileHandleSuite());
+    fileManagerSuite.AddSuite(GetFileSuite());
+    ADD_TEST(fileManagerSuite, DirectoryTesting);
+    fileManagerSuite.AddSuite(GetBufferIOSuite());
+    fileManagerSuite.AddSuite(GetEnvironmentSuite());
+    fileManagerSuite.AddSuite(GetFileAsynchronousSuite());
+    ADD_TEST(fileManagerSuite, GenerateRandomNameTesting);
 
     AddSuite(fileManagerSuite);
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetEndianSuite()
+{
+    auto endianSuite = GenerateSuite("字节序");
+
+    ADD_TEST(endianSuite, ByteSwapTesting);
+    ADD_TEST(endianSuite, ByteSwapperTesting);
+    ADD_TEST(endianSuite, TypeAliaserTesting);
+    ADD_TEST(endianSuite, EndianTesting);
+
+    return endianSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetCFileManagerSuite()
+{
+    auto cFileManagerSuite = GenerateSuite("C文件管理");
+
+    ADD_TEST(cFileManagerSuite, CWriteFileManagerTesting);
+    ADD_TEST(cFileManagerSuite, CReadFileManagerTesting);
+    ADD_TEST(cFileManagerSuite, CFileManagerTesting);
+
+    return cFileManagerSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetStreamManagerSuite()
+{
+    auto streamManagerSuite = GenerateSuite("C++文件管理");
+
+    ADD_TEST(streamManagerSuite, OFStreamManagerTesting);
+    ADD_TEST(streamManagerSuite, IFStreamManagerTesting);
+
+    return streamManagerSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetFileSuite()
+{
+    auto fileSuite = GenerateSuite("文件管理");
+
+    ADD_TEST(fileSuite, WriteFileManagerTesting);
+    ADD_TEST(fileSuite, ReadFileManagerTesting);
+    ADD_TEST(fileSuite, FileManagerHelperTesting);
+
+    return fileSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetFileHandleSuite()
+{
+    auto fileHandleSuite = GenerateSuite("文件句柄管理");
+
+    ADD_TEST(fileHandleSuite, WriteFileHandleTesting);
+    ADD_TEST(fileHandleSuite, ReadFileHandleTesting);
+    ADD_TEST(fileHandleSuite, ReadAndWriteFileHandleTesting);
+    ADD_TEST(fileHandleSuite, FileHandleHelperTesting);
+    ADD_TEST(fileHandleSuite, FileHandleTesting);
+
+    return fileHandleSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetBufferIOSuite()
+{
+    auto bufferIOSuite = GenerateSuite("缓冲区IO");
+
+    ADD_TEST(bufferIOSuite, ReadBufferIOTesting);
+    ADD_TEST(bufferIOSuite, WriteBufferIOTesting);
+
+    return bufferIOSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetEnvironmentSuite()
+{
+    auto environmentSuite = GenerateSuite("缓冲区IO");
+
+    ADD_TEST(environmentSuite, EnvironmentVariableTesting);
+    ADD_TEST(environmentSuite, EnvironmentTesting);
+
+    return environmentSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetFileAsynchronousSuite()
+{
+    auto fileAsynchronousSuite = GenerateSuite("文件异步管理");
+
+    ADD_TEST(fileAsynchronousSuite, FileAsynchronousParameterTesting);
+    ADD_TEST(fileAsynchronousSuite, FileEventTesting);
+    ADD_TEST(fileAsynchronousSuite, FileAsynchronousTesting);
+
+    return fileAsynchronousSuite;
 }
 
 void CoreTools::TestingHelper::AddTextParsingSuite()
 {
     auto textParsingSuite = GenerateSuite("文本解析");
 
+    textParsingSuite.AddSuite(GetSimpleZipSuite());
+    textParsingSuite.AddSuite(GetSimpleCSVSuite());
+    ADD_TEST(textParsingSuite, ExcelConversionCSVTesting);
+    ADD_TEST(textParsingSuite, BatchConversionCSVTesting);
+    ADD_TEST(textParsingSuite, CSVTypeConversionTesting);
+    ADD_TEST(textParsingSuite, CSVHeadTesting);
+    ADD_TEST(textParsingSuite, CSVRowTesting);
+    ADD_TEST(textParsingSuite, CSVContentTesting);
+    ADD_TEST(textParsingSuite, CSVGenerateTesting);
+    ADD_TEST(textParsingSuite, CSVTotalGenerateTesting);
+    ADD_TEST(textParsingSuite, CSVConfigureTesting);
+
     AddSuite(textParsingSuite);
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetSimpleZipSuite()
+{
+    auto SimpleZipSuite = GenerateSuite("简易Zip");
+
+    ADD_TEST(SimpleZipSuite, ZipEntryTesting);
+    ADD_TEST(SimpleZipSuite, ZipArchiveTesting);
+
+    return SimpleZipSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetSimpleCSVSuite()
+{
+    auto simpleCSVSuite = GenerateSuite("简易Csv");
+
+    ADD_TEST(simpleCSVSuite, SimpleCSVExceptionTesting);
+    simpleCSVSuite.AddSuite(GetCommandSuite());
+    simpleCSVSuite.AddSuite(GetQuerySuite());
+    ADD_TEST(simpleCSVSuite, XmlDataTesting);
+    ADD_TEST(simpleCSVSuite, XmlFileTesting);
+    ADD_TEST(simpleCSVSuite, SharedStringsTesting);
+    ADD_TEST(simpleCSVSuite, ColorTesting);
+    ADD_TEST(simpleCSVSuite, CellValueProxyTesting);
+    ADD_TEST(simpleCSVSuite, CellValueTesting);
+    ADD_TEST(simpleCSVSuite, CellReferenceTesting);
+    ADD_TEST(simpleCSVSuite, CellTesting);
+    ADD_TEST(simpleCSVSuite, CellRangeTesting);
+    ADD_TEST(simpleCSVSuite, CellIteratorTesting);
+    ADD_TEST(simpleCSVSuite, ColumnTesting);
+    ADD_TEST(simpleCSVSuite, RowDataIteratorTesting);
+    ADD_TEST(simpleCSVSuite, RowDataRangeTesting);
+    ADD_TEST(simpleCSVSuite, RowRangeTesting);
+    ADD_TEST(simpleCSVSuite, RowTesting);
+    ADD_TEST(simpleCSVSuite, RowDataProxyTesting);
+    ADD_TEST(simpleCSVSuite, SheetBaseTesting);
+    ADD_TEST(simpleCSVSuite, WorksheetTesting);
+    ADD_TEST(simpleCSVSuite, AppPropertiesTesting);
+    ADD_TEST(simpleCSVSuite, PropertiesTesting);
+    ADD_TEST(simpleCSVSuite, ContentItemTesting);
+    ADD_TEST(simpleCSVSuite, ContentTypesTesting);
+    ADD_TEST(simpleCSVSuite, RelationshipItemTesting);
+    ADD_TEST(simpleCSVSuite, RelationshipsTesting);
+    ADD_TEST(simpleCSVSuite, WorkbookTesting);
+    ADD_TEST(simpleCSVSuite, DocumentTesting);
+
+    return simpleCSVSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetCommandSuite()
+{
+    auto simpleCSVCommandSuite = GenerateSuite("Csv命令");
+
+    ADD_TEST(simpleCSVCommandSuite, CommandSetSheetNameTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandSetSheetVisibilityTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandSetSheetColorTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandSetSheetIndexTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandResetCalcChainTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandAddSharedStringsTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandAddWorksheetTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandAddChartsheetTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandDeleteSheetTesting);
+    ADD_TEST(simpleCSVCommandSuite, CommandCloneSheetTesting);
+
+    return simpleCSVCommandSuite;
+}
+
+// private
+CoreTools::Suite CoreTools::TestingHelper::GetQuerySuite()
+{
+    auto querySuite = GenerateSuite("Csv查询");
+
+    ADD_TEST(querySuite, QuerySheetNameTesting);
+    ADD_TEST(querySuite, QuerySheetIndexTesting);
+    ADD_TEST(querySuite, QuerySheetVisibilityTesting);
+    ADD_TEST(querySuite, QuerySheetTypeTesting);
+    ADD_TEST(querySuite, QuerySheetIDTesting);
+    ADD_TEST(querySuite, QuerySheetRelsIDTesting);
+    ADD_TEST(querySuite, QuerySheetRelsTargetTesting);
+    ADD_TEST(querySuite, QuerySharedStringsTesting);
+    ADD_TEST(querySuite, QueryXmlDataTesting);
+
+    return querySuite;
 }
 
 // private

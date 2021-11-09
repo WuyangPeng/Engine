@@ -28,11 +28,11 @@ http://aristeia.com/BookErrata/estl1e-errata.html、 http://aristeia.com/MailingL
 4. Effective Modern C++
 
 oreilly网站：
-http://www.oreilly.com、 http://facebook.com/oreilly （无法访问）、http://twitter.com/oreillymedia （无法访问）、http://www.youtube.com/oreillymedia （无法访问）。
+http://www.oreilly.com、 http://facebook.com/oreilly （无法访问）、
+http://twitter.com/oreillymedia （无法访问）、
+http://www.youtube.com/oreillymedia （无法访问）。
 官方网站：
 http://www.aristeia.com/BookErrata/emc++-errata.html。
-引用网站：
-http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0154r1.html、 http://www.cpp-summit.org。
 
 ★★★★★
 作者：Scott Meyers

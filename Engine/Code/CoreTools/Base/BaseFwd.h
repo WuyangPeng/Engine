@@ -10,14 +10,16 @@
 #ifndef CORE_TOOLS_BASE_FWD_H
 #define CORE_TOOLS_BASE_FWD_H
 
+#include "CoreTools/Threading/ThreadingFwd.h"
+
 namespace CoreTools
 {
     enum class UniqueIDSelect;
 
-    template <typename T>
+    template <typename T, MutexCreate mutexCreate>
     class Singleton;
 
-    template <typename T>
+    template <typename T, MutexCreate mutexCreate>
     class StaticSingleton;
 
     template <typename Iter>

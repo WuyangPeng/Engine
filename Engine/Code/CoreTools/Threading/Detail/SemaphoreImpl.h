@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/12 16:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/01 12:51)
 
 #ifndef CORE_TOOLS_THREADING_SEMAPHORE_IMPL_H
 #define CORE_TOOLS_THREADING_SEMAPHORE_IMPL_H
@@ -27,26 +27,26 @@ namespace CoreTools
     public:
         SemaphoreImpl(int initialCount, int maximumCount);
         ~SemaphoreImpl() noexcept;
-        SemaphoreImpl(const SemaphoreImpl&) = delete;
-        SemaphoreImpl& operator=(const SemaphoreImpl&) = delete;
-        SemaphoreImpl(SemaphoreImpl&&) noexcept = delete;
-        SemaphoreImpl& operator=(SemaphoreImpl&&) noexcept = delete;
+        SemaphoreImpl(const SemaphoreImpl& rhs) = delete;
+        SemaphoreImpl& operator=(const SemaphoreImpl& rhs) = delete;
+        SemaphoreImpl(SemaphoreImpl&& rhs) noexcept = delete;
+        SemaphoreImpl& operator=(SemaphoreImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
         void Release(int releaseCount);
         void Wait();
 
-        [[nodiscard]] int GetCurrentCount() const noexcept;
-        [[nodiscard]] int GetMaximumCount() const noexcept;
+        NODISCARD int GetCurrentCount() const noexcept;
+        NODISCARD int GetMaximumCount() const noexcept;
 
     private:
         using IntAtomic = std::atomic<int>;
 
     private:
-        SemaphoreHandle m_Handle;
-        IntAtomic m_CurrentCount;
-        int m_MaximumCount;
+        SemaphoreHandle handle;
+        IntAtomic currentCount;
+        int maximumCount;
     };
 }
 

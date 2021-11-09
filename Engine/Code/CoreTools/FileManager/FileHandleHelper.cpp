@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 14:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:51)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,8 @@
 #include "FileHandleHelper.h"
 #include "Detail/ReadFileHandleImpl.h"
 #include "Detail/WriteFileHandleImpl.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 
 using boost::numeric_cast;
 

@@ -98,27 +98,53 @@
 （9） 信号量：SemaphoreTesting。
 （10）线程：ThreadTesting。
 （11）线程管理：ThreadManagerTesting。 
+（12）线程守卫：ThreadGuardTesting。 
+（13）线程组：ThreadGroupTesting。 
 
 ----------------------------
 8.	 FileManagerSuite 
 
 对文件管理模块的单元测试，包括：
-（1）字节序：EndianTesting。
+（1）字节序：ByteSwapperTesting、ByteSwapTesting、TypeAliaserTesting、EndianTesting。
 （2）文件缓冲区：FileBufferTesting。
-（3）C文件管理：CFileManagerTesting、FileManagerTesting。
-（4）C++文件管理：StreamManagerTesting 。
+（3）C文件管理：CWriteFileManagerTesting、CReadFileManagerTesting、CFileManagerTesting。
+（4）C++文件管理：OFStreamManagerTesting、IFStreamManagerTesting。
 （5）删除文件工具：DeleteFileToolsTesting。
 （6）复制文件工具：CopyFileToolsTesting。
-（7）Handle文件管理：FileHandleTesting。
-（8）缓冲区IO：BufferIOTesting。
-（9）环境变量：EnvironmentTesting、EnvironmentVariableTesting。
+（7）Handle文件管理：WriteFileHandleTesting、ReadFileHandleTesting、ReadAndWriteFileHandleTesting、FileHandleHelperTesting、FileHandleTesting。
+（8）文件管理：WriteFileManagerTesting、ReadFileManagerTesting、FileManagerHelperTesting。
+（9）目录管理：DirectoryTesting。
+（10）缓冲区IO：ReadBufferIOTesting、WriteBufferIOTesting。
+（11）环境变量：EnvironmentTesting、EnvironmentVariableTesting。
+（12）文件读取存入异步管理：FileAsynchronousParameterTesting、FileEventTesting、FileAsynchronousTesting。
+（13）随机文件名：GenerateRandomNameTesting。
 
 ----------------------------
 9.  TextParsingSuite 
 
 对文本解析模块的单元测试，包括：
-（1）boost文本解析类。 
-（2）二维表解析类。 
+（1）简易zip管理：ZipEntryTesting、ZipArchiveTesting。
+（2）简易csv管理：SimpleCSVExceptionTesting、XmlDataTesting、XmlFileTesting、SharedStringsTesting、
+				  ColorTesting、CellValueProxyTesting、CellValueTesting、CellReferenceTesting、
+				  CellTesting、CellRangeTesting、CellIteratorTesting、ColumnTesting、
+				  RowDataIteratorTesting、RowDataRangeTesting、RowRangeTesting、RowTesting、
+				  RowDataProxyTesting、SheetBaseTesting、WorksheetTesting、AppPropertiesTesting、
+				  PropertiesTesting、ContentItemTesting、ContentTypesTesting、RelationshipItemTesting、
+				  RelationshipsTesting、WorkbookTesting、DocumentTesting。
+（3）简易csv控制：CommandSetSheetNameTesting、CommandSetSheetVisibilityTesting、CommandSetSheetColorTesting、CommandSetSheetIndexTesting、
+						CommandResetCalcChainTesting、CommandAddSharedStringsTesting、CommandAddWorksheetTesting、
+						CommandAddChartsheetTesting、CommandDeleteSheetTesting、CommandCloneSheetTesting。
+（4）简易csv查询：QuerySheetNameTesting、QuerySheetIndexTesting、QuerySheetVisibilityTesting、
+				  QuerySheetTypeTesting、QuerySheetIDTesting、QuerySheetRelsIDTesting、
+				  QuerySheetRelsTargetTesting、QuerySharedStringsTesting、QueryXmlDataTesting。
+（5）Excel转csv功能： ExcelConversionCSVTesting、BatchConversionCSVTesting。
+（6）csv解析：CSVTypeConversionTesting、CSVHeadTesting、CSVRowTesting、CSVContentTesting、
+			  CSVGenerateTesting、CSVTotalGenerateTesting、CSVConfigureTesting。
+（7）json解析：
+（8）json转换成枚举：
+（9）xml解析：
+（10）ini解析：
+（11）info解析： 
 
 ----------------------------
 10.	 LogManagerSuite 

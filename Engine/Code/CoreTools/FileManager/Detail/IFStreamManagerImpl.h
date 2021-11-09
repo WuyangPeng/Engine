@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 18:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 14:13)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_IFSTREAM_MANAGER_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_IFSTREAM_MANAGER_IMPL_H
@@ -32,18 +32,18 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] String GetFileContent() const;
-        [[nodiscard]] String BackupFile() const;
+        NODISCARD String GetFileContent() const;
+        NODISCARD String BackupFile() const;
 
         void SetSimplifiedChinese();
 
     private:
-        [[nodiscard]] String GetBackupName() const;
+        NODISCARD String GetBackupName() const;
         void CopyContentToStream(OStream* osPtr) const;
 
     private:
-        IFileStream m_IStream;
-        String m_FileName;
+        IFileStream iStream;
+        String fileName;
     };
 }
 

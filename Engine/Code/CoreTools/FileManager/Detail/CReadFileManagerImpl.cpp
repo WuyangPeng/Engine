@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 10:11)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 13:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -73,7 +73,7 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
 #endif  // SYSTEM_BIG_ENDIAN
 }
 
-size_t CoreTools::CReadFileManagerImpl::WriteToFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+size_t CoreTools::CReadFileManagerImpl::WriteToFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED const void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -82,7 +82,7 @@ size_t CoreTools::CReadFileManagerImpl::WriteToFile([[maybe_unused]] size_t item
     return 0;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutCharacter([[maybe_unused]] int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -91,7 +91,7 @@ bool CoreTools::CReadFileManagerImpl::PutCharacter([[maybe_unused]] int characte
     return false;
 }
 
-bool CoreTools::CReadFileManagerImpl::PutString([[maybe_unused]] const string& str) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CReadFileManagerImpl::PutString(MAYBE_UNUSED const string& str) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

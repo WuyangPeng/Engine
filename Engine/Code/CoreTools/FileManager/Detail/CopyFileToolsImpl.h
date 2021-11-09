@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/13 17:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 13:36)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_COPY_FILE_TOOLS_IMPL_H
 #define CORE_TOOLS_FILE_MANAGER_COPY_FILE_TOOLS_IMPL_H
@@ -13,10 +13,10 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/FileManager/FileManagerInternalFwd.h"
 
 namespace CoreTools
 {
-    class CopyFileToolsFactory;
     class CORE_TOOLS_HIDDEN_DECLARE CopyFileToolsImpl
     {
     public:
@@ -28,10 +28,10 @@ namespace CoreTools
         CopyFileToolsImpl() noexcept = default;
         virtual ~CopyFileToolsImpl() noexcept = default;
 
-        CopyFileToolsImpl(const CopyFileToolsImpl&) = delete;
-        CopyFileToolsImpl& operator=(const CopyFileToolsImpl&) = delete;
-        CopyFileToolsImpl(CopyFileToolsImpl&&) noexcept = delete;
-        CopyFileToolsImpl& operator=(CopyFileToolsImpl&&) noexcept = delete;
+        CopyFileToolsImpl(const CopyFileToolsImpl& rhs) = delete;
+        CopyFileToolsImpl& operator=(const CopyFileToolsImpl& rhs) = delete;
+        CopyFileToolsImpl(CopyFileToolsImpl&& rhs) noexcept = delete;
+        CopyFileToolsImpl& operator=(CopyFileToolsImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
     };

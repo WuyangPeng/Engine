@@ -178,10 +178,19 @@
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -198,10 +207,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -222,10 +240,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -246,10 +273,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -266,10 +302,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -286,10 +331,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -310,10 +364,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -334,10 +397,19 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <PreBuildEvent>
       <Command>xcopy "$(ProjectDir)/Configuration/StringReplacing.json" "../../../$(Platform)/$(Configuration)Windows/Configuration/" /F /Y
 xcopy "$(ProjectDir)/Resource/CFileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CFileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileHandleTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileHandleTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/FileManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileManagerTesting/" /F /Y
-xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/StreamManagerTesting/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/EnvironmentTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/EnvironmentTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/FileAsynchronousTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/FileAsynchronousTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVTesting/CSVHead/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVTesting/CSVHead/" /F /Y
+xcopy "$(ProjectDir)/Resource/SimpleZipTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/SimpleZipTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/OutputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -407,18 +479,37 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ExceptionSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\WriteBufferIOTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\ReadBufferIOTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CReadFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CWriteFileManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Detail\FileEvent.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DirectoryTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\EndianTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentVariableTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousParameterTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileEventTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\ReadAndWriteFileHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\ReadFileHandleTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\WriteFileHandleTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerSuite.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\FileManagerHelperTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\ReadFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\WriteFileManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemSuite.h" />
@@ -673,6 +764,65 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TemplateToolsSuite\ValueScopeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\Testing.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellReferenceTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellValueProxyTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellValueTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ColorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ColumnTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartsheetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddSharedStringsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddWorksheetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandCloneSheetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandDeleteSheetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandResetCalcChainTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetColorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetIndexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetVisibilityTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ContentItemTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ContentTypesTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Detail\XmlFileTest.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\DocumentTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\PropertiesTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySharedStringsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIDTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIndexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetNameTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIDTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsTargetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetTypeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetVisibilityTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QueryXmlDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RelationshipItemTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RelationshipsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataProxyTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataRangeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowIteratorTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowRangeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SharedStringsTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SheetBaseTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SimpleCSVExceptionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\WorkbookTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\WorksheetTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\XmlDataTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\XmlFileTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleZip\ZipArchiveTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleZip\ZipEntryTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\TextParsingSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.h" />
@@ -682,6 +832,8 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadGroupTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadGuardTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadingSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.h" />
@@ -696,6 +848,256 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestSuiteSuite.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\ZlibSuite\ZlibSuite.h" />
+    <ClInclude Include="Resource\CSVGenerate\Chapter.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\ChapterBase.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\ChapterContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\ChapterContainerDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\CSVConfigure.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\CSVConfigureContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\CSVConfigureFwd.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Equip.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\EquipBase.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\EquipContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\EquipContainerDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Flags\LineType.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Flags\VectorType.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Hero.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\HeroContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\HeroContainerDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Scene.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SceneContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SceneContainerDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\Skill.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SkillBase.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SkillContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SkillContainerDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SystemConstant.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\CSVGenerate\SystemConstantContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\Detail\SingletonSubclass.cpp" />
@@ -753,17 +1155,36 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\ErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\GameErrorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ExceptionSuite\LastErrorTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIOTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\WriteBufferIOTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\BufferIO\ReadBufferIOTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CReadFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CFileManager\CWriteFileManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\CopyFileToolsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DeleteFileToolsTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EndianTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\EnvironmentVariableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Detail\FileEvent.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\DirectoryTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\ByteSwapTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\EndianTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Endian\TypeAliaserTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\Environment\EnvironmentVariableTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousParameterTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileAsynchronousTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileAsynchronous\FileEventTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileBufferTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandleTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManagerTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\FileHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\ReadAndWriteFileHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\ReadFileHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileHandle\WriteFileHandleTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\FileManagerHelperTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\ReadFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\FileManager\WriteFileManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\GenerateRandomNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\IFStreamManagerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FileManagerSuite\StreamManager\OFStreamManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemPointerShareTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\FrameMemorySystemSuite\FrameMemorySystemTesting.cpp" />
@@ -987,6 +1408,65 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingLib.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingMain.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\BatchConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVContentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVHeadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellReferenceTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellValueProxyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellValueTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ColorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ColumnTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddChartsheetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddSharedStringsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandAddWorksheetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandCloneSheetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandDeleteSheetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandResetCalcChainTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetColorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetIndexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Command\CommandSetSheetVisibilityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ContentItemTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\ContentTypesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Detail\XmlFileTest.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\DocumentTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\PropertiesTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySharedStringsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIDTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetIndexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetNameTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsIDTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetRelsTargetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetTypeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QuerySheetVisibilityTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\Query\QueryXmlDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RelationshipItemTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RelationshipsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataProxyTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowDataRangeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowIteratorTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowRangeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\RowTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SharedStringsTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SheetBaseTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\SimpleCSVExceptionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\WorkbookTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\WorksheetTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\XmlDataTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\XmlFileTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleZip\ZipArchiveTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleZip\ZipEntryTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostMutexTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\BoostRecursiveMutexTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\CriticalSectionTesting.cpp" />
@@ -995,6 +1475,8 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\SemaphoreTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdMutexTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\StdRecursiveMutexTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadGroupTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadGuardTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadManagerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\ThreadTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\ThreadingSuite\WindowsMutexTesting.cpp" />
@@ -1004,15 +1486,202 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TimeSuite\SecondTimerTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\SuiteTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\UnitTestSuiteSuite\UnitTestTesting.cpp" />
+    <ClCompile Include="Resource\CSVGenerate\Chapter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\ChapterBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\ChapterContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\CSVConfigureContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Equip.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\EquipBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\EquipContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Flags\LineType.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Flags\VectorType.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Hero.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\HeroContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Scene.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\SceneContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\Skill.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\SkillBase.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\SkillContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\SystemConstant.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\CSVGenerate\SystemConstantContainer.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Resource\CFileManagerTesting\CFileManagerHelpTestingText.txt" />
-    <Text Include="Resource\CFileManagerTesting\CFileManagerTestingText.txt" />
+    <Text Include="Resource\CFileManagerTesting\CFileManagerHelperTestingText.txt" />
+    <Text Include="Resource\CFileManagerTesting\CReadFileManagerTestingText.txt" />
+    <Text Include="Resource\CFileManagerTesting\CWriteFileManagerTestingText.txt" />
     <Text Include="Resource\EnvironmentTesting\EnvironmentTestingText.txt" />
-    <Text Include="Resource\FileHandleTesting\FileHandleHelpTestingText.txt" />
+    <Text Include="Resource\FileAsynchronousTesting\FileAsynchronousText.txt" />
+    <Text Include="Resource\FileHandleTesting\FileHandleHelperTestingText.txt" />
     <Text Include="Resource\FileHandleTesting\FileHandleTestingText.txt" />
-    <Text Include="Resource\FileManagerTesting\FileManagerHelpTestingText.txt" />
-    <Text Include="Resource\FileManagerTesting\FileManagerTestingText.txt" />
+    <Text Include="Resource\FileHandleTesting\ReadAndWriteFileHandleTestingText.txt" />
+    <Text Include="Resource\FileHandleTesting\ReadFileHandleTestingText.txt" />
+    <Text Include="Resource\FileHandleTesting\WriteFileHandleTestingText.txt" />
+    <Text Include="Resource\FileManagerTesting\FileManagerHelperTestingText.txt" />
+    <Text Include="Resource\FileManagerTesting\ReadFileManagerTestingText.txt" />
+    <Text Include="Resource\FileManagerTesting\WriteFileManagerTestingText.txt" />
+    <Text Include="Resource\SimpleZipTesting\Placeholder.txt" />
     <Text Include="Resource\StreamManagerTesting\IFStreamManagerTest.txt" />
     <Text Include="Resource\StreamManagerTesting\OFStreamManagerTest.txt" />
     <Text Include="Resource\Todo\Level 0.txt" />
@@ -1034,6 +1703,33 @@ xcopy "$(ProjectDir)/Resource/StreamManagerTesting/*.*" "$(EngineTestingInclude)
     <None Include="Configuration\Log.json" />
     <None Include="Configuration\StringReplacing.json" />
     <None Include="Configuration\Testing.json" />
+    <None Include="Resource\CSVConfigure\Chapter.csv" />
+    <None Include="Resource\CSVConfigure\Chapter.xlsx" />
+    <None Include="Resource\CSVConfigure\Equip.csv" />
+    <None Include="Resource\CSVConfigure\Equip.xlsx" />
+    <None Include="Resource\CSVConfigure\Hero.csv" />
+    <None Include="Resource\CSVConfigure\Hero.xlsx" />
+    <None Include="Resource\CSVConfigure\LineType.csv" />
+    <None Include="Resource\CSVConfigure\LineType.xlsx" />
+    <None Include="Resource\CSVConfigure\Scene.csv" />
+    <None Include="Resource\CSVConfigure\Scene.xlsx" />
+    <None Include="Resource\CSVConfigure\Skill.csv" />
+    <None Include="Resource\CSVConfigure\Skill.xlsx" />
+    <None Include="Resource\CSVConfigure\SystemConstant.csv" />
+    <None Include="Resource\CSVConfigure\SystemConstant.xlsx" />
+    <None Include="Resource\CSVConfigure\VectorType.csv" />
+    <None Include="Resource\CSVConfigure\VectorType.xlsx" />
+    <None Include="Resource\CSVTesting\CSVHeadTesting.xlsx" />
+    <None Include="Resource\CSVTesting\CSVHead\CSVHeadTesting.csv" />
+    <None Include="Resource\CSVTesting\ExcelConversionCSVTesting.csv" />
+    <None Include="Resource\CSVTesting\ExcelConversionCSVTesting.xlsx" />
+    <None Include="Resource\CSVTesting\ExcelConversionCSVTesting1.csv" />
+    <None Include="Resource\InputCSVTesting\Input1.xlsx" />
+    <None Include="Resource\InputCSVTesting\Input2.xlsx" />
+    <None Include="Resource\InputCSVTesting\Input3.xlsx" />
+    <None Include="Resource\OutputCSVTesting\Input1.csv" />
+    <None Include="Resource\OutputCSVTesting\Input2.csv" />
+    <None Include="Resource\OutputCSVTesting\Input3.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

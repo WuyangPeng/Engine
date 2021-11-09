@@ -1,0 +1,5 @@
+@unique
+ID,下一关ID,过关奖励,技能名称,向量类型,位置
+int,int,int,string,enum|VectorType,intVector3
+id,nextID,reward,skillName,vectorType,position
+10001,10002,1,"skillName",Two,1|3|6

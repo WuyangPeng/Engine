@@ -14,6 +14,9 @@
 #include "Detail/WideCharConversionMultiByte.h"
 #include "System/CharacterString/StringConversion.h"
 
+#include <gsl/util>
+#include <locale>
+
 using std::string;
 using std::wstring;
 
@@ -124,6 +127,19 @@ System::String CoreTools::StringConversion::UTF8ConversionStandard(const string&
     return WideCharConversionStandard(wideChar);
 }
 
+System::String CoreTools::StringConversion::UTF8ConversionStandard(const std::wstring& character)
+{
+    string multiByte{};
+
+    for (auto c : character)
+    {
+        // 这里溢出不抛出异常，直接截断字符。
+        multiByte += gsl::narrow_cast<char>(c);
+    }
+
+    return UTF8ConversionStandard(multiByte);
+}
+
 string CoreTools::StringConversion::StandardConversionUTF8(const String& character)
 {
     const auto wideChar = StandardConversionWideChar(character);
@@ -143,4 +159,68 @@ string CoreTools::StringConversion::MultiByteConversionUTF8(const string& charac
     const auto wideChar = MultiByteConversionWideChar(character);
 
     return WideCharConversionUTF8(wideChar);
+}
+
+System::String CoreTools::StringConversion::ToFirstLetterUpper(const String& character)
+{
+    auto result = character;
+
+    if (result.empty())
+    {
+        return result;
+    }
+
+    std::locale locale{};
+    result.at(0) = std::toupper(result.at(0), locale);
+
+    return result;
+}
+
+System::String CoreTools::StringConversion::ToFirstLetterLower(const String& character)
+{
+    auto result = character;
+
+    if (result.empty())
+    {
+        return result;
+    }
+
+    std::locale locale{};
+    result.at(0) = std::tolower(result.at(0), locale);
+
+    return result;
+}
+
+System::String CoreTools::StringConversion::ToUpperMacro(const String& character)
+{
+    String result{};
+
+    std::locale locale{};
+
+    bool firstChar = true;
+    for (auto value : character)
+    {
+        if (value == SYSTEM_TEXT(' '))
+        {
+            continue;
+        }
+
+        if (!firstChar && std::isupper(value, locale))
+        {
+            result += SYSTEM_TEXT('_');
+            result += value;
+        }
+        else if (value == SYSTEM_TEXT('.'))
+        {
+            result += SYSTEM_TEXT('_');
+        }
+        else
+        {
+            result += std::toupper(value, locale);
+        }
+
+        firstChar = false;
+    }
+
+    return result;
 }

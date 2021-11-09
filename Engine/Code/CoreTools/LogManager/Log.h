@@ -24,7 +24,7 @@ CORE_TOOLS_NON_COPY_EXPORT_IMPL(LogImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE Log final : public CoreTools::Singleton<Log>
+    class CORE_TOOLS_DEFAULT_DECLARE Log final : public CoreTools::Singleton<Log, MutexCreate::UseStdRecursive>
     {
     public:
         NON_COPY_TYPE_DECLARE(Log);

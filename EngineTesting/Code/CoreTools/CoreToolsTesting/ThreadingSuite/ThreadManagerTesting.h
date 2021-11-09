@@ -1,30 +1,39 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 11:54)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/02 14:59)
 
 #ifndef CORE_TOOLS_THREADING_SUITE_THREAD_MANAGER_TESTING_H
 #define CORE_TOOLS_THREADING_SUITE_THREAD_MANAGER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class ThreadManagerTesting : public UnitTest
+    class ThreadManagerTesting final : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(ThreadManagerTesting);
+        using ClassType = ThreadManagerTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit ThreadManagerTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        static uint32_t Thread1(void* threadParameter) noexcept;
-        static uint32_t Thread2(void* threadParameter) noexcept;
-
+        void DoRunUnitTest() final;
         void MainTest();
 
-        void CreateThread();
+    private:
+        NODISCARD static uint32_t Thread0(void* threadParameter) noexcept;
+        NODISCARD static uint32_t Thread1(MAYBE_UNUSED void* threadParameter) noexcept;
 
-        void DoRunUnitTest() override;
+        void CreateThread();
     };
 }
 

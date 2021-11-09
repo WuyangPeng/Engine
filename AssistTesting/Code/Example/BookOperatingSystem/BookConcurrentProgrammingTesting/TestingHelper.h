@@ -1,47 +1,51 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-//
-// “˝«Ê∏®÷˙≤‚ ‘∞Ê±æ£∫0.0.0.1 (2019/09/28 0:02)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
+///	¡™œµ◊˜’ﬂ£∫94458936@qq.com
+///
+///	±Í◊º£∫std:c++17
+///	“˝«Ê∏®÷˙≤‚ ‘∞Ê±æ£∫0.7.2.5 (2021/11/02 22:55)
 
 #ifndef BOOK_CONCURRENT_PROGRAMMING_TESTING_HELPER_H
 #define BOOK_CONCURRENT_PROGRAMMING_TESTING_HELPER_H
 
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelper.h"
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
-
-namespace CoreTools
-{
-	class Suite;
-}
+#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
 
 namespace BookConcurrentProgramming
 {
-	class TestingHelper : public CoreTools::CMainFunctionTestingHelper
-	{
-	public:
-		CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper); 
+    class TestingHelper : public CoreTools::CMainFunctionTestingHelper
+    {
+    public:
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
+        using Suite = CoreTools::Suite;
 
-	private:
-        virtual int DoRun() override;
+    public:
+        TestingHelper(int argc, char** argv);
 
-		void AddSuites();   
-		 
-		void AddConcurrentProgrammingOnWindowsSuite();
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-		void AddParallelAndDistributedProgrammingUsingCppSuite();
+    private:
+        void InitSuite();
 
-		void AddCppConcurrencyInActionSuite();
+        void AddConcurrentProgrammingOnWindowsSuite();
 
-		void AddMultithreadingApplicationsInWin32Suite();
+        void AddParallelAndDistributedProgrammingUsingCppSuite();
 
-		void AddProfessionalMulticoreProgrammingSuite();
+        void AddCppConcurrencyInActionSuite();
 
-		void AddObjectOrientedMultithreadingUsingCppSuite();
+        void AddCppMultithreadingCookbookSuite();
 
-	private:
-		CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
-	};
+        void AddMultithreadingApplicationsInWin32Suite();
+
+        void AddProfessionalMulticoreProgrammingSuite();
+
+        void AddObjectOrientedMultithreadingUsingCppSuite();
+
+        void AddDistributedSystemsSuite();
+    };
 }
 
-#endif // BOOK_CONCURRENT_PROGRAMMING_TESTING_HELPER_H
+#endif  // BOOK_CONCURRENT_PROGRAMMING_TESTING_HELPER_H

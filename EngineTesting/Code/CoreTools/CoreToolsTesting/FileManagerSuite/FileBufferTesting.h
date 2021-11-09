@@ -1,27 +1,38 @@
-// Copyright (c) 2011-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎测试版本：0.0.2.3 (2020/03/05 15:29)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.3 (2021/09/03 21:51)
 
 #ifndef CORE_TOOLS_TESTING_FILE_BUFFER_TESTING_H
 #define CORE_TOOLS_TESTING_FILE_BUFFER_TESTING_H
 
-#include "CoreTools/Helper/UnitTestSuiteMacro.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
 
 namespace CoreTools
 {
-    class FileBufferTesting : public UnitTest
+    class FileBufferTesting final : public UnitTest
     {
     public:
-        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(FileBufferTesting);
+        using ClassType = FileBufferTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit FileBufferTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
+        void DoRunUnitTest() final;
         void MainTest();
-        void ValueTest();
-        void DelayCopyTest() noexcept;
 
-        void DoRunUnitTest() override;
+        void ValueTest();
+        void DelayCopyTest();
+        void BufferTest();
+        void ForEachTest();
     };
 }
 

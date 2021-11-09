@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/14 10:56)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.7.2.3 (2021/09/03 13:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,8 +22,8 @@ using std::string;
 using std::vector;
 using namespace std::literals;
 
-CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName)
-    : ParentType{ fileName, SYSTEM_TEXT("wbS"s) }
+CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName, bool addition)
+    : ParentType{ fileName, addition ? SYSTEM_TEXT("abS"s) : SYSTEM_TEXT("wbS"s) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -76,7 +76,7 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
 
 #ifdef SYSTEM_BIG_ENDIAN
 // private
-size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data) noexcept
+size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data)
 {
     switch (itemSize)
     {
@@ -92,10 +92,10 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSiz
 }
 
 // private
-size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap2ByteOrder(size_t itemsNumber, const void* data) noexcept
+size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap2ByteOrder(size_t itemsNumber, const void* data)
 {
     vector<uint16_t> target(itemsNumber);
-    auto bytes = reinterpret_cast<const uint16_t*>(data);
+    auto bytes = static_cast<const uint16_t*>(data);
 
     Endian::Swap2ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
 
@@ -103,10 +103,10 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap2ByteOrder(size_t itemsN
 }
 
 // private
-size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap4ByteOrder(size_t itemsNumber, const void* data) noexcept
+size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap4ByteOrder(size_t itemsNumber, const void* data)
 {
     vector<uint32_t> target(itemsNumber);
-    auto bytes = reinterpret_cast<const uint32_t*>(data);
+    auto bytes = static_cast<const uint32_t*>(data);
 
     Endian::Swap4ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
 
@@ -114,10 +114,10 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap4ByteOrder(size_t itemsN
 }
 
 // private
-size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsNumber, const void* data) noexcept
+size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsNumber, const void* data)
 {
     vector<uint64_t> target(itemsNumber);
-    auto bytes = reinterpret_cast<const uint64_t*>(data);
+    auto bytes = static_cast<const uint64_t*>(data);
 
     Endian::Swap8ByteOrderToTarget(boost::numeric_cast<int>(itemsNumber), bytes, target.data());
 
@@ -126,7 +126,7 @@ size_t CoreTools::CWriteFileManagerImpl::WriteToFileSwap8ByteOrder(size_t itemsN
 
 #endif  // SYSTEM_BIG_ENDIAN
 
-size_t CoreTools::CWriteFileManagerImpl::ReadFromFile([[maybe_unused]] size_t itemSize, [[maybe_unused]] size_t itemsNumber, [[maybe_unused]] void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+size_t CoreTools::CWriteFileManagerImpl::ReadFromFile(MAYBE_UNUSED size_t itemSize, MAYBE_UNUSED size_t itemsNumber, MAYBE_UNUSED void* data) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -144,7 +144,7 @@ int CoreTools::CWriteFileManagerImpl::GetCharacter() noexcept(g_Assert < 4 || g_
     return System::g_CFileError;
 }
 
-bool CoreTools::CWriteFileManagerImpl::UnGetCharacter([[maybe_unused]] int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+bool CoreTools::CWriteFileManagerImpl::UnGetCharacter(MAYBE_UNUSED int character) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -153,7 +153,7 @@ bool CoreTools::CWriteFileManagerImpl::UnGetCharacter([[maybe_unused]] int chara
     return false;
 }
 
-string CoreTools::CWriteFileManagerImpl::GetString([[maybe_unused]] int count) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
+string CoreTools::CWriteFileManagerImpl::GetString(MAYBE_UNUSED int count) noexcept(g_Assert < 4 || g_CoreToolsAssert < 4)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
