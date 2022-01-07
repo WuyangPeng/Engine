@@ -42,9 +42,5 @@ void CoreTools::ObjectNameTesting
 	ASSERT_FALSE(secondName.IsExactly(firstName));
 	ASSERT_TRUE(secondName.IsExactly(secondName));
 	ASSERT_TRUE(secondName.IsExactly(thirdName));
-
-	firstName.Swap(secondName);
-
-	ASSERT_TRUE(firstName.IsExactly(thirdName));
 }
 

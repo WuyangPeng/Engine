@@ -81,24 +81,24 @@ int Rendering::ShaderConstantsDataImpl
 	return m_SingleShaderConstantsData[index].GetNumRegistersUsed();
 }
  
-void Rendering::ShaderConstantsDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ShaderConstantsDataImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	uint32_t number{ 0 };
-	source->Read(number);
+	source.Read(number);
 	m_SingleShaderConstantsData.resize(number);
 	 
 	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Load,std::placeholders::_1,std::ref(source)));	 
 }
 
 void Rendering::ShaderConstantsDataImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
 	const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderConstantsData.size());
-	target->Write(size);
+	target.Write(size);
 
 	for_each(m_SingleShaderConstantsData.begin(), m_SingleShaderConstantsData.end(),std::bind(&SingleShaderConstantsData::Save, std::placeholders::_1,std::ref(target)));
 }

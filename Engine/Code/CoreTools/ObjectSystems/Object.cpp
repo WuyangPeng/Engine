@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 15:15)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,8 +25,6 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 using std::string;
-using std::swap;
-using std::vector;
 
 CORE_TOOLS_RTTI_DEFINE(CoreTools, Object);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, Object);
@@ -68,12 +66,6 @@ void CoreTools::Object::SetName(const string& name)
     m_Name.SetName(name);
 }
 
-// private
-void CoreTools::Object::Swap(Object& rhs) noexcept
-{
-    m_Name.SwapObjectName(rhs.m_Name);
-}
-
 int CoreTools::Object::GetStreamingSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
@@ -90,42 +82,36 @@ int CoreTools::Object::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::Object::Register(const ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::Object::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto modify = target;
-
-    return modify->RegisterRoot(shared_from_this());
+    return target.RegisterRoot(shared_from_this());
 }
 
-void CoreTools::Object::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::Object::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    auto modify = target;
-
-    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(modify);
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     // 写入RTTI名用于加载期间查找工厂函数。
-    modify->Write(GetRttiType().GetName());
+    target.Write(GetRttiType().GetName());
 
     // 写入对象的唯一标识符。这是加载和链接时使用。
-    modify->WriteUniqueID(shared_from_this());
+    target.WriteUniqueID(shared_from_this());
 
     // 写入对象的名字。
-    modify->Write(m_Name.GetName());
+    target.Write(m_Name.GetName());
 
-    CORE_TOOLS_END_DEBUG_STREAM_SAVE(modify);
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::Object::Link(const ObjectLinkSharedPtr& source)
+void CoreTools::Object::Link(MAYBE_UNUSED ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     // Object没有Object*成员。
-
-    [[maybe_unused]] auto modify = source;
 
     CoreTools::DisableNoexcept();
 }
@@ -139,28 +125,26 @@ void CoreTools::Object::PostLink()
     CoreTools::DisableNoexcept();
 }
 
-void CoreTools::Object::Load(const BufferSourceSharedPtr& source)
+void CoreTools::Object::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto modify = source;
-
-    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(modify);
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     // RTTI名已经在流中读取，以查找正确的对象加载函数。
 
     // 读取的对象的唯一标识符。这提供信息在链接阶段。
-    modify->ReadUniqueID(shared_from_this());
+    source.ReadUniqueID(*this);
 
     // 读取对象名字。
-    auto name = modify->ReadString();
+    auto name = source.ReadString();
 
     SetName(name);
 
-    CORE_TOOLS_END_DEBUG_STREAM_LOAD(modify);
+    CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-const CoreTools::ObjectSharedPtr CoreTools::Object::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr CoreTools::Object::GetObjectByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -170,11 +154,11 @@ const CoreTools::ObjectSharedPtr CoreTools::Object::GetObjectByName(const string
         return ObjectSharedPtr{};
 }
 
-const vector<CoreTools::ObjectSharedPtr> CoreTools::Object::GetAllObjectsByName(const string& name)
+CoreTools::Object::ObjectSharedPtrContainer CoreTools::Object::GetAllObjectsByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    vector<ObjectSharedPtr> objects{};
+    ObjectSharedPtrContainer objects{};
 
     if (name == m_Name.GetName())
     {
@@ -184,7 +168,7 @@ const vector<CoreTools::ObjectSharedPtr> CoreTools::Object::GetAllObjectsByName(
     return objects;
 }
 
-const CoreTools::ConstObjectSharedPtr CoreTools::Object::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr CoreTools::Object::GetConstObjectByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
@@ -194,11 +178,11 @@ const CoreTools::ConstObjectSharedPtr CoreTools::Object::GetConstObjectByName(co
         return ConstObjectSharedPtr{};
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> CoreTools::Object::GetAllConstObjectsByName(const string& name) const
+CoreTools::Object::ConstObjectSharedPtrContainer CoreTools::Object::GetAllConstObjectsByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    vector<ConstObjectSharedPtr> objects{};
+    ConstObjectSharedPtrContainer objects{};
 
     if (name == m_Name.GetName())
     {

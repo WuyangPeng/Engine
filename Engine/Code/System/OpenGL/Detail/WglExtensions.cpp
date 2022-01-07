@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/22 22:10)
+///	引擎版本：0.8.0.0 (2021/12/13 14:00)
 
 #include "System/SystemExport.h"
 
@@ -53,7 +53,7 @@ int System::ChoosePixelFormat(WindowsHDC hDc, const PixelFormatDescriptor* pPfd)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, const PixelFormatDescriptor*>(hDc, pPfd);
+    UnusedFunction(hDc, pPfd);
 
     return 0;
 
@@ -68,7 +68,7 @@ int System::DescribePixelFormat(WindowsHDC hdc, int ipfd, WindowsUInt cjpfd, Pix
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, WindowsUInt, PixelFormatDescriptor*>(hdc, ipfd, cjpfd, ppfd);
+    UnusedFunction(hdc, ipfd, cjpfd, ppfd);
 
     return 0;
 
@@ -83,7 +83,7 @@ System::WindowsUInt System::GetEnhMetaFilePixelFormat(HEnhMetaFile hemf, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<HEnhMetaFile, WindowsUInt, PixelFormatDescriptor*>(hemf, cbBuffer, ppfd);
+    UnusedFunction(hemf, cbBuffer, ppfd);
 
     return 0u;
 
@@ -98,7 +98,7 @@ int System::GetPixelFormat(WindowsHDC hdc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC>(hdc);
+    UnusedFunction(hdc);
 
     return 0u;
 
@@ -113,7 +113,7 @@ System::WindowsBool System::SetPixelFormat(WindowsHDC hdc, int ipfd, const Pixel
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, const PixelFormatDescriptor*>(hdc, ipfd, ppfd);
+    UnusedFunction(hdc, ipfd, ppfd);
 
     return g_False;
 
@@ -128,7 +128,7 @@ System::WindowsBool System::SwapBuffers(WindowsHDC hdc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC>(hdc);
+    UnusedFunction(hdc);
 
     return g_False;
 
@@ -143,7 +143,7 @@ System::WindowsBool System::WglCopyContext(OpenGLHglrc hglrcSrc, OpenGLHglrc hgl
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<OpenGLHglrc, OpenGLHglrc, WindowsUInt>(hglrcSrc, hglrcDst, mask);
+    UnusedFunction(hglrcSrc, hglrcDst, mask);
 
     return g_False;
 
@@ -158,7 +158,7 @@ System::OpenGLHglrc System::WglCreateContext(WindowsHDC hDc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC>(hDc);
+    UnusedFunction(hDc);
 
     return nullptr;
 
@@ -173,7 +173,7 @@ System::OpenGLHglrc System::WglCreateLayerContext(WindowsHDC hDc, int level) noe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int>(hDc, level);
+    UnusedFunction(hDc, level);
 
     return nullptr;
 
@@ -188,7 +188,7 @@ System::WindowsBool System::WglDeleteContext(OpenGLHglrc oldContext) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<OpenGLHglrc>(oldContext);
+    UnusedFunction(oldContext);
 
     return g_False;
 
@@ -203,7 +203,7 @@ System::WindowsBool System::WglDescribeLayerPlane(WindowsHDC hDc, int pixelForma
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, int, WindowsUInt, const LayerPlaneDescriptor*>(hDc, pixelFormat, layerPlane, nBytes, plpd);
+    UnusedFunction(hDc, pixelFormat, layerPlane, nBytes, plpd);
 
     return g_False;
 
@@ -244,7 +244,7 @@ int System::WglGetLayerPaletteEntries(WindowsHDC hdc, int iLayerPlane, int iStar
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, int, int, OpenGLColorref*>(hdc, iLayerPlane, iStart, cEntries, pcr);
+    UnusedFunction(hdc, iLayerPlane, iStart, cEntries, pcr);
 
     return 0;
 
@@ -259,7 +259,7 @@ System::OpenGLProc System::WglGetProcAddress(const char* lpszProc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*>(lpszProc);
+    UnusedFunction(lpszProc);
 
     return nullptr;
 
@@ -274,7 +274,7 @@ System::WindowsBool System::WglMakeCurrent(WindowsHDC hDc, OpenGLHglrc newContex
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, OpenGLHglrc>(hDc, newContext);
+    UnusedFunction(hDc, newContext);
 
     return g_False;
 
@@ -289,7 +289,7 @@ System::WindowsBool System::WglRealizeLayerPalette(WindowsHDC hdc, int iLayerPla
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, WindowsBool>(hdc, iLayerPlane, bRealize);
+    UnusedFunction(hdc, iLayerPlane, bRealize);
 
     return g_False;
 
@@ -304,7 +304,7 @@ int System::WglSetLayerPaletteEntries(WindowsHDC hdc, int iLayerPlane, int iStar
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, int, int, int, const OpenGLColorref*>(hdc, iLayerPlane, iStart, cEntries, pcr);
+    UnusedFunction(hdc, iLayerPlane, iStart, cEntries, pcr);
 
     return 0;
 
@@ -319,7 +319,7 @@ System::WindowsBool System::WglShareLists(OpenGLHglrc hrcSrvShare, OpenGLHglrc h
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<OpenGLHglrc, OpenGLHglrc>(hrcSrvShare, hrcSrvSource);
+    UnusedFunction(hrcSrvShare, hrcSrvSource);
 
     return g_False;
 
@@ -334,7 +334,7 @@ System::WindowsBool System::WglSwapLayerBuffers(WindowsHDC hdc, WindowsUInt fuFl
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsUInt>(hdc, fuFlags);
+    UnusedFunction(hdc, fuFlags);
 
     return g_False;
 
@@ -349,7 +349,7 @@ System::WindowsBool System::WglUseFontBitmaps(WindowsHDC hDC, WindowsDWord first
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord>(hDC, first, count, listBase);
+    UnusedFunction(hDC, first, count, listBase);
 
     return g_False;
 
@@ -364,7 +364,7 @@ System::WindowsBool System::WglUseFontBitmapsA(WindowsHDC hDC, WindowsDWord firs
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord>(hDC, first, count, listBase);
+    UnusedFunction(hDC, first, count, listBase);
 
     return g_False;
 
@@ -379,7 +379,7 @@ System::WindowsBool System::WglUseFontBitmapsW(WindowsHDC hDC, WindowsDWord firs
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord>(hDC, first, count, listBase);
+    UnusedFunction(hDC, first, count, listBase);
 
     return g_False;
 
@@ -394,7 +394,7 @@ System::WindowsBool System::WglUseFontOutlines(WindowsHDC hDC, WindowsDWord firs
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord, float, float, int, GlyphMetricsFloat>(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
     return g_False;
 
@@ -409,7 +409,7 @@ System::WindowsBool System::WglUseFontOutlinesA(WindowsHDC hDC, WindowsDWord fir
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord, float, float, int, GlyphMetricsFloat>(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
     return g_False;
 
@@ -424,7 +424,7 @@ System::WindowsBool System::WglUseFontOutlinesW(WindowsHDC hDC, WindowsDWord fir
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsDWord, WindowsDWord, WindowsDWord, float, float, int, GlyphMetricsFloat>(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
+    UnusedFunction(hDC, first, count, listBase, deviation, extrusion, format, lpgmf);
 
     return g_False;
 

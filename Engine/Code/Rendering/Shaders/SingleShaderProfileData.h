@@ -52,8 +52,8 @@ namespace Rendering
         int GetBaseRegisterSize() const;
         int GetTextureUnitSize() const;
 
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
         int GetStreamingSize() const;
 
     private:

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:29)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 15:28)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_SQRT_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_SQRT_H
@@ -31,9 +31,7 @@ namespace CoreTools
         // 搜索一个不大的值在减半间隔
         enum
         {
-            Result = (N < Midpoint * Midpoint) ?
-                         SqrtFirstAlgorithm<N, Low, Midpoint - 1>::Result :
-                         SqrtFirstAlgorithm<N, Midpoint, High>::Result
+            Result = (N < Midpoint * Midpoint) ? (SqrtFirstAlgorithm<N, Low, Midpoint - 1>::Result) : (SqrtFirstAlgorithm<N, Midpoint, High>::Result)
         };
     };
 
@@ -87,7 +85,7 @@ namespace CoreTools
     public:
         enum
         {
-            Result = (I * I < N) ? SqrtThirdAlgorithm<N, I + 1>::Result : I
+            Result = (I * I < N) ? (SqrtThirdAlgorithm<N, I + 1>::Result) : I
         };
     };
 
@@ -119,6 +117,7 @@ namespace CoreTools
     {
     public:
         using SqrtFourthAlgorithmResult = typename IfThenElse<(I * I < N), SqrtFourthAlgorithm<N, I + 1>, Value<I>>::ResultType;
+
         enum
         {
             Result = SqrtFourthAlgorithmResult::Result

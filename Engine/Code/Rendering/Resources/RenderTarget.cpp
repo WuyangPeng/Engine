@@ -113,7 +113,7 @@ int Rendering::RenderTarget
 }
 
 uint64_t Rendering::RenderTarget
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -127,7 +127,7 @@ uint64_t Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -141,7 +141,7 @@ void Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -159,7 +159,7 @@ void Rendering::RenderTarget
 }
 
 void Rendering::RenderTarget
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

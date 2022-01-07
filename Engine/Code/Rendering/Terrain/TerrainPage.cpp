@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -62,7 +62,7 @@ Rendering::TerrainPage
 {
 	EXCEPTION_TRY
 {
- DELETE1(mHeights);
+ //DELETE1(mHeights);
 }
 EXCEPTION_ALL_CATCH(Rendering)  
     
@@ -143,19 +143,19 @@ Rendering::TerrainPage
 }
 
 void Rendering::TerrainPage
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
 	ParentType::Load(source);
 
-    source->Read(mSize);
+    source.Read(mSize);
     const int numVertices = mSize*mSize;
-  //  source->Read(numVertices, mHeights);
-    source->ReadAggregate(mOrigin);
-    source->Read(mMinElevation);
-    source->Read(mMaxElevation);
-    source->Read(mSpacing);
+  //  source.Read(numVertices, mHeights);
+    source.ReadAggregate(mOrigin);
+    source.Read(mMinElevation);
+    source.Read(mMaxElevation);
+    source.Read(mSpacing);
 
     mSizeM1 = mSize - 1;
     mInvSpacing = 1.0f/mSpacing;
@@ -165,7 +165,7 @@ void Rendering::TerrainPage
 }
 
 void Rendering::TerrainPage
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
 	ParentType::Link(source);
 }
@@ -177,25 +177,25 @@ void Rendering::TerrainPage
 }
 
 uint64_t Rendering::TerrainPage
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+	::Register(CoreTools::ObjectRegister& target) const
 {
 	return ParentType::Register(target);
 }
 
 void Rendering::TerrainPage
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
 	ParentType::Save(target);
 
-    target->Write(mSize);
+    target.Write(mSize);
     const int numVertices = mSize*mSize;
    // target.WriteWithNumber(numVertices, mHeights);
-    target->WriteAggregate(mOrigin);
-    target->Write(mMinElevation);
-    target->Write(mMaxElevation);
-    target->Write(mSpacing);
+    target.WriteAggregate(mOrigin);
+    target.Write(mMinElevation);
+    target.Write(mMaxElevation);
+    target.Write(mSpacing);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

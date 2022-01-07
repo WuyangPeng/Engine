@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/12 18:21)
+///	引擎版本：0.8.0.0 (2021/12/13 11:46)
 
 #include "System/SystemExport.h"
 
@@ -52,10 +52,10 @@ namespace System
 
 void System::ReportNullFunction(const char* glFunction) noexcept
 {
-    NoexceptNoReturn<const char*>(DoReportNullFunction, glFunction);
+    NoexceptNoReturn(DoReportNullFunction, glFunction);
 }
 
 void System::ReportGLError(const char* glFunction) noexcept
 {
-    NoexceptNoReturn<const char*>(DoReportGLError, glFunction);
+    NoexceptNoReturn(DoReportGLError, glFunction);
 }

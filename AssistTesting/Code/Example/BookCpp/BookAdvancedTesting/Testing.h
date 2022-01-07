@@ -19,12 +19,13 @@
 #include "InsideTheCppObjectModel/InsideTheCppObjectModelSuite.h"
 #include "LargeScaleCppSoftwareDesign/LargeScaleCppSoftwareDesignSuite.h"
 #include "ModernCppDesign/ModernCppDesignSuite.h"
-#include "SecureCodingInCAndCpp/SecureCodingInCAndCppSuite.h"
 #include "TheArtOfCpp/TheArtOfCppSuite.h"
+#include "ThrivingInACrowdedAndChangingWorld/ThrivingInACrowdedAndChangingWorldSuite.h"
 
 #include "AdvancedQtProgramming/AdvancedQtProgrammingSuite.h"
 #include "CppGUIProgrammingWithQt4/CppGUIProgrammingWithQt4Suite.h"
 #include "DesigningAndCodingReusableCpp/DesigningAndCodingReusableCppSuite.h"
 #include "MultiParadigmDesignForCpp/MultiParadigmDesignForCppSuite.h"
+#include "SecureCodingInCAndCpp/SecureCodingInCAndCppSuite.h"
 
 #endif  // BOOK_ADVANCED_TESTING_H

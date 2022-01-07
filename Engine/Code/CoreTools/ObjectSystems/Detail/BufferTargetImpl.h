@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:20)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 14:22)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_IMPL_H
@@ -37,12 +37,12 @@ namespace CoreTools
         void Write(size_t itemSize, size_t itemsNumber, const void* data);
 
         // 帮助函数
-        [[nodiscard]] int GetBytesWritten() const noexcept;
+        NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueID(const ConstObjectInterfaceSharedPtr& object);
 
     private:
-        WriteBufferIO m_Target;
-        ConstObjectRegisterSharedPtr m_ObjectRegister;
+        WriteBufferIO target;
+        ConstObjectRegisterSharedPtr objectRegister;
     };
 }
 

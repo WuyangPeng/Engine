@@ -7,7 +7,7 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "ETManifoldMesh.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <fstream>
@@ -39,16 +39,16 @@ Mathematics::ETManifoldMesh
         const EMapIterator eend = mEMap.end();
         for (/**/; eiter != eend; ++eiter)
         {
-            Edge* edge = eiter->second;
-            DELETE0(edge);
+         //   Edge* edge = eiter->second;
+            //DELETE0(edge);
         }
 
         TMapIterator titer = mTMap.begin();
         const TMapIterator tend = mTMap.end();
         for (/**/; titer != tend; ++titer)
         {
-            Triangle* tri = titer->second;
-            DELETE0(tri);
+          //  Triangle* tri = titer->second;
+          //  DELETE0(tri);
         }
 #include STSTEM_WARNING_POP
     }
@@ -61,13 +61,18 @@ Mathematics::ETManifoldMesh
 Mathematics::ETManifoldMesh::EPtr Mathematics::ETManifoldMesh
 	::CreateEdge (int v0, int v1)
 {
-    return NEW0 Edge(v0, v1);
+    v0;
+    v1;
+    return nullptr;//    NEW0 Edge(v0, v1);
 }
 
 Mathematics::ETManifoldMesh::TPtr Mathematics::ETManifoldMesh
 	::CreateTriangle (int v0, int v1, int v2)
 {
-    return NEW0 Triangle(v0, v1, v2);
+    v0;
+    v1;
+    v2;
+    return nullptr;  //   NEW0 Triangle(v0, v1, v2);
 }
 
 Mathematics::ETManifoldMesh::TPtr Mathematics::ETManifoldMesh
@@ -190,7 +195,7 @@ bool Mathematics::ETManifoldMesh
         {
             const EdgeKey ekey(edge->V[0], edge->V[1]);
             mEMap.erase(ekey);
-            DELETE0(edge);
+           // DELETE0(edge);
         }
 
         // Inform adjacent triangles you are going away.
@@ -209,7 +214,7 @@ bool Mathematics::ETManifoldMesh
     }
 
     mTMap.erase(tkey);
-    DELETE0(tri);
+ //   DELETE0(tri);
     return true;
 }
 

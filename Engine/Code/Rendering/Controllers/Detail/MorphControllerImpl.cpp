@@ -212,37 +212,37 @@ int Rendering::MorphControllerImpl
 }
 
 void Rendering::MorphControllerImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumVertices);
-	target->Write(m_NumTargets);
-	target->Write(m_NumKeys);
+	target.Write(m_NumVertices);
+	target.Write(m_NumTargets);
+	target.Write(m_NumKeys);
 
-	target->WriteAggregateContainerWithoutNumber(m_Vertices);
+	target.WriteAggregateContainerWithoutNumber(m_Vertices);
 	//target.WriteWithoutNumber(m_NumKeys, &m_Times[0]);
 	//target.WriteWithoutNumber(boost::numeric_cast<int>(m_Weights.size()), &m_Weights[0]);
 }
 
 void Rendering::MorphControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source )
+	::Load(CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumVertices);
-        source->Read(m_NumTargets);
-        source->Read(m_NumKeys);
+	source.Read(m_NumVertices);
+        source.Read(m_NumTargets);
+        source.Read(m_NumKeys);
 
 	const auto numTotalVertices = m_NumVertices * m_NumTargets;
 	m_Vertices.resize(numTotalVertices);
-        source->ReadAggregateContainer(numTotalVertices, m_Vertices);
+        source.ReadAggregateContainer(numTotalVertices, m_Vertices);
 
 	m_Times.resize(m_NumKeys);
-   //     source->Read(m_NumKeys, &m_Times[0]);
+   //     source.Read(m_NumKeys, &m_Times[0]);
 
 	const auto numTotalWeights = m_NumKeys * (m_NumTargets - 1);
 	m_Weights.resize(numTotalWeights);
-   //     source->Read(numTotalWeights, &m_Weights[0]);
+   //     source.Read(numTotalWeights, &m_Weights[0]);
 }
  #include STSTEM_WARNING_POP

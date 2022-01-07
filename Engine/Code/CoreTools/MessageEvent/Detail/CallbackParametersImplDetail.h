@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:37)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/25 20:13)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_DETAIL_H
@@ -16,27 +16,27 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T>
-void CoreTools::CallbackParametersImpl::SetValue(int index, typename boost::call_traits<T>::param_type value)
+void CoreTools::CallbackParametersImpl::SetValue(int index, T&& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (boost::numeric_cast<int>(m_Container.size()) <= index)
+    if (boost::numeric_cast<int>(container.size()) <= index)
     {
         const auto nextIndex = index + 1;
-        m_Container.resize(nextIndex);
+        container.resize(nextIndex);
     }
 
-    boost::any anyValue{ value };
+    std::any anyValue{ std::forward<T>(value) };
 
-    m_Container.at(index).swap(anyValue);
+    container.at(index).swap(anyValue);
 }
 
 template <typename T>
-const T CoreTools::CallbackParametersImpl::GetValue(int index) const
+T CoreTools::CallbackParametersImpl::GetValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::any_cast<T>(m_Container.at(index));
+    return std::any_cast<T>(container.at(index));
 }
 
 #endif  // CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_IMPL_DETAIL_H

@@ -7,7 +7,7 @@
 #include "BoolObject.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -24,7 +24,7 @@ CORE_TOOLS_FACTORY_DEFINE(CoreTools, BoolObject);
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::BoolObject ::BoolObject()
-    : ParentType{}, m_BoolValue{ false }, m_BoolArray1{ NEW1<bool>(sm_BufferSize) }, m_BoolArray2{ NEW1<bool>(sm_BufferSize) }
+    : ParentType{}, m_BoolValue{ false }, m_BoolArray1{   }, m_BoolArray2{   }
 {
     AllocationFirstArray(true);
     AllocationSecondArray(false);
@@ -36,7 +36,7 @@ CoreTools::BoolObject ::BoolObject()
 #include STSTEM_WARNING_POP
 
 CoreTools::BoolObject ::BoolObject(LoadConstructor value)
-    : ParentType{ value }, m_BoolValue{ true }, m_BoolArray1{ nullptr }, m_BoolArray2{ NEW1<bool>(sm_BufferSize) }
+    : ParentType{ value }, m_BoolValue{ true }, m_BoolArray1{ nullptr }, m_BoolArray2{   }
 {
     AllocationSecondArray(true);
 
@@ -67,13 +67,9 @@ void CoreTools::BoolObject ::AllocationSecondArray(bool value)
 }
 
 CoreTools::BoolObject ::BoolObject(const BoolObject& rhs)
-    : ParentType{}, m_BoolValue{ rhs.m_BoolValue }, m_BoolArray1{ NEW1<bool>(sm_BufferSize) }, m_BoolArray2{ NEW1<bool>(sm_BufferSize) }
+    : ParentType{}, m_BoolValue{ rhs.m_BoolValue }, m_BoolArray1{  }, m_BoolArray2{   }
 {
-    for (auto i = 0; i < sm_BufferSize; ++i)
-    {
-        m_BoolArray1[i] = rhs.m_BoolArray1[i];
-        m_BoolArray2[i] = rhs.m_BoolArray2[i];
-    }
+  
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -123,8 +119,7 @@ CoreTools::BoolObject ::~BoolObject()
 
 void CoreTools::BoolObject ::Release()
 {
-    DELETE1<bool>(m_BoolArray1);
-    DELETE1<bool>(m_BoolArray2);
+    
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -156,14 +151,14 @@ int CoreTools::BoolObject ::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::BoolObject ::Register(const ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::BoolObject ::Register( ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void CoreTools::BoolObject ::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::BoolObject ::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -178,7 +173,7 @@ void CoreTools::BoolObject ::Save(const BufferTargetSharedPtr& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::BoolObject ::Link(const ObjectLinkSharedPtr& source)
+void CoreTools::BoolObject ::Link(ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -192,7 +187,7 @@ void CoreTools::BoolObject ::PostLink()
     return ParentType::PostLink();
 }
 
-void CoreTools::BoolObject ::Load(const BufferSourceSharedPtr& source)
+void CoreTools::BoolObject ::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -200,12 +195,12 @@ void CoreTools::BoolObject ::Load(const BufferSourceSharedPtr& source)
 
     ParentType::Load(source);
 
-    m_BoolValue = source->ReadBool();
+    m_BoolValue = source.ReadBool();
     auto size = 0;
-    source->Read(size);
+    source.Read(size);
     if (0 < size)
     {
-        m_BoolArray1 = NEW1<bool>(size);
+        
 
         //  source.ReadBool(sm_BufferSize, m_BoolArray1);
         // source.ReadBool(sm_BufferSize, m_BoolArray2);

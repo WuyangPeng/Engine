@@ -10,9 +10,9 @@
 #include "Hero.h"
 #include "HeroContainerDetail.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/CSVRow.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
 
@@ -54,7 +54,8 @@ CSVConfigure::HeroContainer::ConstHeroSharedPtr CSVConfigure::HeroContainer::Get
 
     if (hero.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("hero表为空。"s));    }
+        THROW_EXCEPTION(SYSTEM_TEXT("hero表为空。"s));
+    }
     else
     {
         return hero.begin()->second;

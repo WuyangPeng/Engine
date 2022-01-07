@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/24 20:09)
+///	引擎版本：0.8.0.0 (2021/12/13 14:08)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ void System::GlutInit(int* pargc, char** argv) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int*, char**>(pargc, argv);
+    UnusedFunction(pargc, argv);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -36,7 +36,7 @@ int System::GlutCreateWindow(const string& title) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<string>(title);
+    UnusedFunction(title);
 
     return 0;
 
@@ -51,7 +51,7 @@ void System::GlutInitWindowSize(int width, int height) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int, int>(width, height);
+    UnusedFunction(width, height);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -64,7 +64,7 @@ void System::GlutInitContextVersion(int majorVersion, int minorVersion) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int, int>(majorVersion, minorVersion);
+    UnusedFunction(majorVersion, minorVersion);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -77,7 +77,7 @@ void System::GlutDestroyWindow(int window) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int>(window);
+    UnusedFunction(window);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -101,7 +101,7 @@ void System::GlutPostWindowRedisplay(int window) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int>(window);
+    UnusedFunction(window);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -114,7 +114,7 @@ void System::GlutTimerFunc(unsigned millisecond, TimerFunctionCallback callback,
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<unsigned, TimerFunctionCallback, int>(millisecond, callback, int value);
+    UnusedFunction(millisecond, callback, int value);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -149,7 +149,7 @@ void System::GlutInitDisplayMode(bool multiSample) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<bool>(multiSample);
+    UnusedFunction(multiSample);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -162,7 +162,7 @@ void System::GlutInitWindowPosition(int x, int y) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int, int>(x, y);
+    UnusedFunction(x, y);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -175,7 +175,7 @@ void System::GlutReshapeFunc(ChangeSizeCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<ChangeSizeCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -188,7 +188,7 @@ void System::GlutDisplayFunc(RenderSceneCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<RenderSceneCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -201,7 +201,7 @@ void System::GlutIdleFunc(IdleFunctionCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<IdleFunctionCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -214,7 +214,7 @@ void System::GlutKeyboardFunc(KeyboardDownCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<KeyboardDownCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -227,7 +227,7 @@ void System::GlutSpecialFunc(SpecialKeysDownCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<SpecialKeysDownCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -240,7 +240,7 @@ void System::GlutKeyboardUpFunc(KeyboardUpCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<KeyboardUpCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -253,7 +253,7 @@ void System::GlutSpecialUpFunc(SpecialKeysUpCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<SpecialKeysUpCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -266,7 +266,7 @@ void System::GlutMouseFunc(MouseFunctionCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<MouseFunctionCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -279,7 +279,7 @@ void System::GlutMotionFunc(MotionFunctionCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<MotionFunctionCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -292,7 +292,7 @@ void System::GlutPassiveMotionFunc(PassiveMotionFunctionCallback callback) noexc
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<PassiveMotionFunctionCallback>(callback);
+    UnusedFunction(callback);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -305,7 +305,7 @@ int System::GlutCreateMenu(ProcessMenuCallback callback) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<ProcessMenuCallback>(callback);
+    UnusedFunction(callback);
 
     return 0;
 
@@ -355,7 +355,7 @@ void System::GlutSetWindow(int window) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int>(window);
+    UnusedFunction(window);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }
@@ -368,7 +368,7 @@ void System::GlutSetOption(GlutOption what, int value) noexcept
 
 #else  // !defined(SYSTEM_USE_GLUT) || !defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<GLenum, int>(what, value);
+    UnusedFunction(what, value);
 
 #endif  // defined(SYSTEM_USE_GLUT) && defined(SYSTEM_PLATFORM_WIN32)
 }

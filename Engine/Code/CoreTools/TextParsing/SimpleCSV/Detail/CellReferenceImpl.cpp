@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/12 23:05)
+///	引擎版本：0.8.0.0 (2021/12/20 21:22)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,8 +16,7 @@
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-#include <array>
-#include <charconv>
+#include <array> 
 
 using std::array;
 using std::string;

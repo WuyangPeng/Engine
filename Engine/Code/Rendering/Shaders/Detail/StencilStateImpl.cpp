@@ -32,33 +32,33 @@ Rendering::StencilStateImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, StencilStateImpl)
 
-void Rendering::StencilStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::StencilStateImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source->ReadBool();
-	source->ReadEnum(m_Compare);
-	source->Read(m_Reference);
-	source->Read(m_Mask);
-	source->Read(m_WriteMask);
-	source->ReadEnum(m_OnFail);
-	source->ReadEnum(m_OnZFail);
-	source->ReadEnum(m_OnZPass);
+	m_Enabled = source.ReadBool();
+	source.ReadEnum(m_Compare);
+	source.Read(m_Reference);
+	source.Read(m_Mask);
+	source.Read(m_WriteMask);
+	source.ReadEnum(m_OnFail);
+	source.ReadEnum(m_OnZFail);
+	source.ReadEnum(m_OnZPass);
 }
 
 void Rendering::StencilStateImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(m_Enabled);
-        target->WriteEnum(m_Compare);
-	target->Write(m_Reference);
-	target->Write(m_Mask);
-	target->Write(m_WriteMask);
-        target->WriteEnum(m_OnFail);
-        target->WriteEnum(m_OnZFail);
-        target->WriteEnum(m_OnZPass);
+	target.Write(m_Enabled);
+        target.WriteEnum(m_Compare);
+	target.Write(m_Reference);
+	target.Write(m_Mask);
+	target.Write(m_WriteMask);
+        target.WriteEnum(m_OnFail);
+        target.WriteEnum(m_OnZFail);
+        target.WriteEnum(m_OnZPass);
 }
 
 int Rendering::StencilStateImpl

@@ -79,7 +79,7 @@ void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
 {
     [[maybe_unused]] const auto currentWriteIndex = Send(messageBuffer);
 
-    CoreTools::CallbackParameters callbackParameters{};
+    CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
     if (!eventInterface->EventFunction(callbackParameters))

@@ -5,22 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/05 23:31)
+///	引擎版本：0.8.0.0 (2021/12/12 13:30)
 
 #include "System/SystemExport.h"
 
 #include "WindowsSystem.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
-
-#ifdef SYSTEM_PLATFORM_WIN32
-    #include <ImageHlp.h>
-    #include <WindowsX.h>
-#endif  // SYSTEM_PLATFORM_WIN32
-
-#include <cstdlib>
-
-using std::system;
 
 void System::GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept
 {
@@ -30,7 +21,7 @@ void System::GetWindowSystemInfo(WindowsSystemInfo& systemInfo) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsSystemInfo&>(systemInfoy);
+    UnusedFunction(systemInfoy);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -60,7 +51,7 @@ bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsUChar, WindowsUCharPtr>(processor, nodeNumber);
+    UnusedFunction(processor, nodeNumber);
 
     return false;
 
@@ -69,7 +60,7 @@ bool System::GetNumaProcessorNodeNumber(WindowsUChar processor, WindowsUCharPtr 
 
 int System::SystemCommand(const char* command) noexcept
 {
-    return system(command);
+    return std::system(command);
 }
 
 bool System::SetSystemCurrentDirectory(const TChar* pathName) noexcept
@@ -83,7 +74,7 @@ bool System::SetSystemCurrentDirectory(const TChar* pathName) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*>(pathName);
+    UnusedFunction(pathName);
 
     return false;
 
@@ -101,7 +92,7 @@ bool System::GetSystemUserName(TChar* buffer, WindowsDWord* bufferCount) noexcep
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<TChar*, WindowsDWord*>(buffer, bufferCount);
+    UnusedFunction(buffer, bufferCount);
 
     return false;
 
@@ -116,7 +107,7 @@ System::WindowsDWord System::GetSystemCurrentDirectory(WindowsDWord bufferLength
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, TChar*>(bufferLength, buffer);
+    UnusedFunction(bufferLength, buffer);
 
     return 0;
 

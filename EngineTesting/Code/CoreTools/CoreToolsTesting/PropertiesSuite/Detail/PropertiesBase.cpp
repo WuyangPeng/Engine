@@ -35,5 +35,5 @@ void CoreTools::PropertiesBase ::SetFifthValue(int value) noexcept
 
 namespace CoreTools
 {
-	const ptrdiff_t CoreTools::PropertyBase<PropertiesBase::PropFifthValue, PropertiesBase>::m_Offset = offsetof(PropertiesBase, FifthValue);
+	const ptrdiff_t CoreTools::PropertyBase<PropertiesBase::PropFifthValue, PropertiesBase>::offset = offsetof(PropertiesBase, FifthValue);
 }

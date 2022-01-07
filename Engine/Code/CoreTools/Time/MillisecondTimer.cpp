@@ -1,21 +1,21 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 19:33)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:57)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "../Contract/Flags/ImplFlags.h"
 #include "MillisecondTimer.h"
 #include "Detail/DeltaTimeManagerImpl.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-using std::make_shared;
+
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, MillisecondTimer)
 
 CoreTools::MillisecondTimer::MillisecondTimer(uint64_t millisecond)
     : impl{ ImplCreateUseDefaultConstruction::Default }, m_Millisecond{ millisecond }
@@ -24,6 +24,7 @@ CoreTools::MillisecondTimer::MillisecondTimer(uint64_t millisecond)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::MillisecondTimer::IsValid() const noexcept
 {
     if (0 <= m_Millisecond)
@@ -31,6 +32,7 @@ bool CoreTools::MillisecondTimer::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 uint64_t CoreTools::MillisecondTimer::GetRemain() const noexcept
@@ -78,4 +80,3 @@ void CoreTools::MillisecondTimer::ReTiming(uint64_t millisecond)
     impl->ResetCurrentTime();
     m_Millisecond = millisecond;
 }
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, MillisecondTimer)

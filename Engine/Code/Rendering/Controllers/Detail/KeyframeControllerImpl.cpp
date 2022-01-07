@@ -136,11 +136,11 @@ int Rendering::KeyframeControllerImpl ::GetStreamingSize() const noexcept
 }
 
 void Rendering::KeyframeControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumCommonTimes);
+	target.Write(m_NumCommonTimes);
 
 	if (0 < m_NumCommonTimes)
 	{
@@ -149,17 +149,17 @@ void Rendering::KeyframeControllerImpl
 	//	if (0 < m_NumTranslations)
 	//		target.WriteAggregateWithNumber(m_NumTranslations, &m_Translations[0]);
 	//	else
-	//		target->Write(m_NumTranslations);
+	//		target.Write(m_NumTranslations);
 
 		//if (0 < m_NumRotations)
 		//	target.WriteAggregateWithNumber(m_NumRotations, &m_Rotations[0]);
 		//else
-		//	target->Write(m_NumRotations);
+		//	target.Write(m_NumRotations);
 
 		//if (0 < m_NumScales)
 		//	target.WriteWithNumber(m_NumScales, &m_Scales[0]);
 		//else
-			//target->Write(m_NumScales);
+			//target.Write(m_NumScales);
 	}
 	else
 	{
@@ -170,7 +170,7 @@ void Rendering::KeyframeControllerImpl
 		}
 		else
 		{
-			target->Write(m_NumTranslations);
+			target.Write(m_NumTranslations);
 		}
 
 		if (0 < m_NumRotations)
@@ -180,7 +180,7 @@ void Rendering::KeyframeControllerImpl
 		}
 		else
 		{
-			target->Write(m_NumRotations);
+			target.Write(m_NumRotations);
 		}
 
 		if (0 < m_NumScales)
@@ -190,70 +190,70 @@ void Rendering::KeyframeControllerImpl
 		}
 		else
 		{
-			target->Write(m_NumScales);
+			target.Write(m_NumScales);
 		}		 
 	}
 }
 
-void Rendering::KeyframeControllerImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::KeyframeControllerImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumCommonTimes);
+	source.Read(m_NumCommonTimes);
 
 	if (0 < m_NumCommonTimes)
 	{
 		m_CommonTimes.resize(m_NumCommonTimes);
-        //    source->Read(m_NumCommonTimes, &m_CommonTimes[0]);
+        //    source.Read(m_NumCommonTimes, &m_CommonTimes[0]);
 
-		source->Read(m_NumTranslations);
+		source.Read(m_NumTranslations);
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-                    source->ReadAggregateContainer(m_NumTranslations, m_Translations);
+                    source.ReadAggregateContainer(m_NumTranslations, m_Translations);
 		}
 
-		source->Read(m_NumRotations);
+		source.Read(m_NumRotations);
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-                    source->ReadAggregateContainer(m_NumRotations, m_Rotations);
+                    source.ReadAggregateContainer(m_NumRotations, m_Rotations);
 		}
 
-		source->Read(m_NumScales);
+		source.Read(m_NumScales);
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-                 //   source->Read(m_NumScales, &m_Scales[0]);
+                 //   source.Read(m_NumScales, &m_Scales[0]);
 		}		  
 	}
 	else
 	{
-            source->Read(m_NumTranslations);
+            source.Read(m_NumTranslations);
 		m_TranslationTimes.resize(m_NumTranslations);
 		m_Translations.resize(m_NumTranslations);
 		if (0 < m_NumTranslations)
 		{
-                 //   source->Read(m_NumTranslations, &m_TranslationTimes[0]);
-                    source->ReadAggregateContainer(m_NumTranslations, m_Translations);
+                 //   source.Read(m_NumTranslations, &m_TranslationTimes[0]);
+                    source.ReadAggregateContainer(m_NumTranslations, m_Translations);
 		}
 
-		source->Read(m_NumRotations);
+		source.Read(m_NumRotations);
 		m_RotationTimes.resize(m_NumRotations);
 		m_Rotations.resize(m_NumRotations);
 		if (0 < m_NumRotations)
 		{
-                 //   source->Read(m_NumRotations, &m_RotationTimes[0]);
-                    source->ReadAggregateContainer(m_NumRotations, m_Rotations);
+                 //   source.Read(m_NumRotations, &m_RotationTimes[0]);
+                    source.ReadAggregateContainer(m_NumRotations, m_Rotations);
 		}
 
-		source->Read(m_NumScales);
+		source.Read(m_NumScales);
 		m_ScaleTimes.resize(m_NumRotations);
 		m_Scales.resize(m_NumScales);
 		if (0 < m_NumScales)
 		{
-                  //  source->Read(m_NumScales, &m_Scales[0]);
-                  //  source->Read(m_NumScales, &m_Scales[0]);
+                  //  source.Read(m_NumScales, &m_Scales[0]);
+                  //  source.Read(m_NumScales, &m_Scales[0]);
 		}
  	}
 }

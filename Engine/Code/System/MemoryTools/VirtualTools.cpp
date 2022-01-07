@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 20:19)
+///	引擎版本：0.8.0.0 (2021/12/13 14:46)
 
 #include "System/SystemExport.h"
 
@@ -22,7 +22,7 @@ System::WindowsVoidPtr System::AllocateVirtual(WindowsVoidPtr address, WindowsSi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr, WindowsSize, MemoryAllocation, MemoryProtect>(address, size, allocationType, protect);
+    UnusedFunction(address, size, allocationType, protect);
 
     return nullptr;
 
@@ -37,7 +37,7 @@ System::WindowsVoidPtr System::AllocateVirtual(WindowsHandle process, WindowsVoi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsSize, MemoryAllocation, MemoryProtect>(process, address, size, allocationType, protect);
+    UnusedFunction(process, address, size, allocationType, protect);
 
     return nullptr;
 
@@ -57,7 +57,7 @@ bool System::FreeVirtual(WindowsVoidPtr address) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr>(address);
+    UnusedFunction(address);
 
     return false;
 
@@ -77,7 +77,7 @@ bool System::FreeVirtual(WindowsHandle process, WindowsVoidPtr address) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr>(process, address);
+    UnusedFunction(process, address);
 
     return false;
 
@@ -104,7 +104,7 @@ bool System::SetVirtualProtect(WindowsVoidPtr address, WindowsSize size, MemoryP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr, WindowsSize, MemoryProtect, MemoryProtect*>(address, size, newProtect, oldProtect);
+    UnusedFunction(address, size, newProtect, oldProtect);
 
     return false;
 
@@ -131,7 +131,7 @@ bool System::SetVirtualProtect(WindowsHandle process, WindowsVoidPtr address, Wi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsSize, MemoryProtect, MemoryProtect*>(process, address, size, newProtect, oldProtect);
+    UnusedFunction(process, address, size, newProtect, oldProtect);
 
     return false;
 
@@ -153,7 +153,7 @@ bool System::GetVirtualQuery(WindowsVoidPtr address, MemoryBasicInformationPtr b
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr, MemoryBasicInformationPtr>(address, buffer);
+    UnusedFunction(address, buffer);
 
     return false;
 
@@ -174,7 +174,7 @@ bool System::GetVirtualQuery(WindowsHandle process, WindowsVoidPtr address, Memo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr, MemoryBasicInformationPtr>(process, address, buffer);
+    UnusedFunction(process, address, buffer);
 
     return false;
 

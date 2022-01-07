@@ -123,7 +123,7 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
     if (result == 0)
     {
-        CoreTools::CallbackParameters callbackParameters{};
+        CoreTools::CallbackParameters callbackParameters{ 0 };
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);
@@ -149,7 +149,7 @@ void Network::ACESockAcceptor::AsyncAccept(const EventInterfaceSharedPtr& eventI
 
     if (result == 0)
     {
-        CoreTools::CallbackParameters callbackParameters{};
+        CoreTools::CallbackParameters callbackParameters{ 0 };
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncAcceptor));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), result);

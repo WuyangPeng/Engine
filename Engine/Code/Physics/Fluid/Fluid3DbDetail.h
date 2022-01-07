@@ -12,16 +12,16 @@
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_FLUID3DB_DETAIL)
 
     #include "System/Helper/PragmaWarning.h"
-    #include "CoreTools/Helper/MemoryMacro.h"
+
+    #include "CoreTools/Helper/ExceptionMacro.h"
     #include "Mathematics/Algebra/Vector3DDetail.h"
     #include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
-    #include STSTEM_WARNING_PUSH 
+    #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
     #include SYSTEM_WARNING_DISABLE(26489)
     #include SYSTEM_WARNING_DISABLE(26493)
- #include SYSTEM_WARNING_DISABLE(26486)
-#include SYSTEM_WARNING_DISABLE(26487)
+    #include SYSTEM_WARNING_DISABLE(26486)
+    #include SYSTEM_WARNING_DISABLE(26487)
 namespace Physics
 {
     template <typename Real>
@@ -76,15 +76,15 @@ namespace Physics
         mVelGammaZ = mVelLambdaZ * mVelGamma0;
         mTime = (Real)0;
 
-        mX = NEW1<Real>(mIMaxP1);
-        mY = NEW1<Real>(mJMaxP1);
-        mZ = NEW1<Real>(mKMaxP1);
-        mDensity0 = NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
-        mDensity1 = NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
-        mVelocity0 = NEW3<Vector3D>(mIMaxP1, mJMaxP1, mKMaxP1);
-        mVelocity1 = NEW3<Vector3D>(mIMaxP1, mJMaxP1, mKMaxP1);
-        mDivergence = NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
-        mPoisson = NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mX = nullptr;  //NEW1<Real>(mIMaxP1);
+        mY = nullptr;  //NEW1<Real>(mJMaxP1);
+        mZ = nullptr;  //NEW1<Real>(mKMaxP1);
+        mDensity0 = nullptr;  // NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mDensity1 = nullptr;  //NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mVelocity0 = nullptr;  //NEW3<Vector3D>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mVelocity1 = nullptr;  //NEW3<Vector3D>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mDivergence = nullptr;  //NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
+        mPoisson = nullptr;  //NEW3<Real>(mIMaxP1, mJMaxP1, mKMaxP1);
 
         for (int i = 0; i <= mIMax; ++i)
         {
@@ -115,15 +115,15 @@ namespace Physics
     {
         EXCEPTION_TRY
         {
-            DELETE1(mX);
-            DELETE1(mY);
-            DELETE1(mZ);
-            DELETE3(mDensity0);
-            DELETE3(mDensity1);
-            DELETE3(mVelocity0);
-            DELETE3(mVelocity1);
-            DELETE3(mDivergence);
-            DELETE3(mPoisson);
+//             DELETE1(mX);
+//             DELETE1(mY);
+//             DELETE1(mZ);
+//             DELETE3(mDensity0);
+//             DELETE3(mDensity1);
+//             DELETE3(mVelocity0);
+//             DELETE3(mVelocity1);
+//             DELETE3(mDivergence);
+//             DELETE3(mPoisson);
         }
         EXCEPTION_ALL_CATCH(Physics)
     }
@@ -177,7 +177,7 @@ namespace Physics
                         iPrevious = (Real)mIMax - (Real)0.5;
                     }
 
-                   const  int i0 = (int)Mathematics::Math<Real>::Floor(iPrevious);
+                    const int i0 = (int)Mathematics::Math<Real>::Floor(iPrevious);
                     const int i1 = i0 + 1;
                     Real a1 = iPrevious - i0;
                     Real a0 = (Real)1 - a1;
@@ -192,7 +192,7 @@ namespace Physics
                         jPrevious = (Real)mJMax - (Real)0.5;
                     }
 
-                  const int j0 = (int)Mathematics::Math<Real>::Floor(jPrevious);
+                    const int j0 = (int)Mathematics::Math<Real>::Floor(jPrevious);
                     const int j1 = j0 + 1;
                     Real b1 = jPrevious - j0;
                     Real b0 = (Real)1 - b1;
@@ -207,7 +207,7 @@ namespace Physics
                         kPrevious = (Real)mKMax - (Real)0.5;
                     }
 
-                 const int k0 = (int)Mathematics::Math<Real>::Floor(kPrevious);
+                    const int k0 = (int)Mathematics::Math<Real>::Floor(kPrevious);
                     const int k1 = k0 + 1;
                     Real c1 = kPrevious - k0;
                     Real c0 = (Real)1 - c1;

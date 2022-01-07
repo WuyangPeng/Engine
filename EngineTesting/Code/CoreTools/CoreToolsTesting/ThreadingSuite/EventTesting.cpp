@@ -41,7 +41,7 @@ void CoreTools::EventTesting::MainTest()
 void CoreTools::EventTesting::ManualResetTrueCreateThreadTest()
 {
     {
-        ThreadGroup thread{ DisableNotThrow::Disable };
+        auto thread = ThreadGroup::Create();
 
         thread.AddThread(&ClassType::Thread0, this);
         thread.AddThread(&ClassType::Thread1, this);
@@ -94,7 +94,7 @@ void CoreTools::EventTesting::Thread3()
 void CoreTools::EventTesting::ManualResetFalseCreateThreadTest()
 {
     {
-        ThreadGroup thread{ DisableNotThrow::Disable };
+        auto thread = ThreadGroup::Create();
 
         thread.AddThread(&ClassType::Thread4, this);
         thread.AddThread(&ClassType::Thread5, this);

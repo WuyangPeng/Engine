@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:21)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:04)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_EVENT_ENTITY_H
@@ -25,13 +25,18 @@ namespace CoreTools
         using ParentType = BaseEntity;
         using Telegram = Telegram<EventType>;
         using EntityEventType = EventType;
+        using EventEntitySharedPtr = std::shared_ptr<EventEntity>;
 
     public:
-        EventEntity();
+        NODISCARD static EventEntitySharedPtr Create();
 
+    protected:
+        explicit EventEntity(DisableNotThrow disableNotThrow);
+
+    public:
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] virtual bool EventFunction(const Telegram& telegram) = 0;
+        NODISCARD virtual bool EventFunction(const Telegram& telegram) = 0;
     };
 }
 

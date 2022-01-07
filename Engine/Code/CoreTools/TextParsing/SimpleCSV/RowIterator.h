@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/11 11:13)
+///	引擎版本：0.8.0.0 (2021/12/19 19:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_ITERATOR_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_ITERATOR_H
@@ -14,13 +14,13 @@
 
 #include "Row.h"
 #include "XmlParser.h"
-#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVInternalFwd.h"
 
 #include <memory>
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<CoreTools::SimpleCSV::RowIteratorImpl>;
-template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::DelayCopyUnsharedImpl<CoreTools::SimpleCSV::RowIterator, CoreTools::SimpleCSV::RowIteratorImpl>;
+template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::CopyUnsharedImpl<CoreTools::SimpleCSV::RowIterator, CoreTools::SimpleCSV::RowIteratorImpl>;
 
 namespace CoreTools
 {
@@ -29,7 +29,7 @@ namespace CoreTools
         class CORE_TOOLS_DEFAULT_DECLARE RowIterator final
         {
         public:
-            DELAY_COPY_UNSHARED_TYPE_DECLARE(RowIterator);
+            COPY_UNSHARED_TYPE_DECLARE(RowIterator);
             using ValueType = Row;
             using DifferenceType = int64_t;
             using PointerType = Row*;
@@ -43,8 +43,8 @@ namespace CoreTools
 
             RowIterator& operator++();
             RowIterator operator++(int);
-            NODISCARD ReferenceType operator*();
-            NODISCARD PointerType operator->();
+            NODISCARD ReferenceType operator*() noexcept;
+            NODISCARD PointerType operator->() noexcept;
 
             NODISCARD bool IsSame(const RowIterator& rhs) const;
 

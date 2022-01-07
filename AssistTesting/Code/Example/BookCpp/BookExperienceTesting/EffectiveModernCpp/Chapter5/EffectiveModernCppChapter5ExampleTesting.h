@@ -33,14 +33,14 @@ namespace BookExperience
                 void DoRunUnitTest() final;
                 void MainTest();
 
-                void Terms23ExampleTest() noexcept;
+                void Terms23ExampleTest();
                 void Terms24ExampleTest() noexcept;
-                void Terms25ExampleTest() noexcept; 
-                void Terms26ExampleTest() noexcept; 
-                void Terms27ExampleTest() noexcept;
+                void Terms25ExampleTest();
+                void Terms26ExampleTest();
+                void Terms27ExampleTest();
                 void Terms28ExampleTest() noexcept;
                 void Terms29ExampleTest() noexcept;
-                void Terms30ExampleTest() noexcept; 
+                void Terms30ExampleTest();
             };
         }
     }

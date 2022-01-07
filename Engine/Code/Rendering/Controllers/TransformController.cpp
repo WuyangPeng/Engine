@@ -151,7 +151,7 @@ int Rendering::TransformController
 	return size;
 }
 
-uint64_t Rendering::TransformController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::TransformController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -159,7 +159,7 @@ uint64_t Rendering::TransformController ::Register(const CoreTools::ObjectRegist
 }
 
 void Rendering::TransformController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -173,7 +173,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -189,7 +189,7 @@ void Rendering::TransformController
 }
 
 void Rendering::TransformController
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

@@ -7,7 +7,7 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "VEManifoldMesh.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 
 #include <fstream>
@@ -38,16 +38,16 @@ Mathematics::VEManifoldMesh
     const VMapIterator vend = mVMap.end();
     for (/**/; viter != vend; ++viter)
     {
-        Vertex* vertex = viter->second;
-        DELETE0(vertex);
+    //    Vertex* vertex = viter->second;
+      //  DELETE0(vertex);
     }
 
     EMapIterator eiter = mEMap.begin();
     const EMapIterator eend = mEMap.end();
     for (/**/; eiter != eend; ++eiter)
     {
-        Edge* edge = eiter->second;
-        DELETE0(edge);
+     //   Edge* edge = eiter->second;
+        //DELETE0(edge);
     }
 #include STSTEM_WARNING_POP
 }
@@ -58,13 +58,16 @@ Mathematics::VEManifoldMesh
 Mathematics::VEManifoldMesh::VPtr Mathematics::VEManifoldMesh
 	::CreateVertex (int v)
 {
-    return NEW0 Vertex(v);
+    v;
+    return nullptr;//    NEW0 Vertex(v);
 }
 
 Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
 	::CreateEdge (int v0, int v1) 
 {
-    return NEW0 Edge(v0, v1);
+    v0;
+    v1;
+    return nullptr;  //  NEW0 Edge(v0, v1);
 }
 
 Mathematics::VEManifoldMesh::EPtr Mathematics::VEManifoldMesh
@@ -186,7 +189,7 @@ bool Mathematics::VEManifoldMesh
         if (!vertex->E[0] && !vertex->E[1])
         {
             mVMap.erase(vertex->V);
-            DELETE0(vertex);
+         //   DELETE0(vertex);
         }
 
         // Inform adjacent edges you are going away.
@@ -205,7 +208,7 @@ bool Mathematics::VEManifoldMesh
     }
 
     mEMap.erase(ekey);
-    DELETE0(edge);
+  //  DELETE0(edge);
     return true;
 }
 

@@ -1,0 +1,40 @@
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎测试版本：0.7.2.6 (2021/11/09 20:45)
+
+#ifndef CORE_TOOLS_TEXT_PARSING_SUITE_JSON_HEAD_TESTING_H
+#define CORE_TOOLS_TEXT_PARSING_SUITE_JSON_HEAD_TESTING_H
+
+#include "CoreTools/TextParsing/TextParsingFwd.h"
+#include "CoreTools/UnitTestSuite/UnitTest.h"
+
+#include <vector>
+
+namespace CoreTools
+{
+    class JsonHeadTesting final : public UnitTest
+    {
+    public:
+        using ClassType = JsonHeadTesting;
+        using ParentType = UnitTest;
+
+    public:
+        explicit JsonHeadTesting(const OStreamShared& stream);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
+
+    private:
+        void DoRunUnitTest() final;
+        void MainTest();
+
+        void JsonHeadTest();
+        void JsonHeadNodeTest(const JsonNode& jsonNode);
+    };
+}
+
+#endif  // CORE_TOOLS_TEXT_PARSING_SUITE_JSON_HEAD_TESTING_H

@@ -100,7 +100,7 @@ int Rendering::SwitchNode
 	return size;
 }
 
-uint64_t Rendering::SwitchNode ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::SwitchNode ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -108,7 +108,7 @@ uint64_t Rendering::SwitchNode ::Register(const CoreTools::ObjectRegisterSharedP
 }
 
 void Rendering::SwitchNode
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -116,13 +116,13 @@ void Rendering::SwitchNode
     
 	ParentType::Save(target);
 	
-	target->Write(m_ActiveChild);
+	target.Write(m_ActiveChild);
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::SwitchNode
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -138,7 +138,7 @@ void Rendering::SwitchNode
 }
 
 void Rendering::SwitchNode
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     
@@ -146,7 +146,7 @@ void Rendering::SwitchNode
     
     ParentType::Load(source);
 	
-	source->Read(m_ActiveChild);
+	source.Read(m_ActiveChild);
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/09/29 23:03)
+///	引擎版本：0.8.0.0 (2021/12/20 21:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -42,13 +42,13 @@ CoreTools::SimpleCSV::QueryXmlDataImpl::XmlDataSharedPtr CoreTools::SimpleCSV::Q
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     auto xmlData = m_XmlData.lock();
-    if (!xmlData)
+    if (xmlData)
     {
-        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s));
+        return xmlData;
     }
     else
     {
-        return xmlData;
+        THROW_SIMPLE_CSV_EXCEPTION(CSVExceptionType::Internal, SYSTEM_TEXT("指针已释放！"s));
     }
 }
 

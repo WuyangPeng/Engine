@@ -25,10 +25,10 @@ TCBSpline3<Real>::TCBSpline3 (int numSegments, Real* times,Vector3D<Real>* point
     mContinuity = continuity;
     mBias = bias;
 
-    mA = NEW1<Vector3D<Real> >(mNumSegments);
-    mB = NEW1<Vector3D<Real> >(mNumSegments);
-    mC = NEW1<Vector3D<Real> >(mNumSegments);
-    mD = NEW1<Vector3D<Real> >(mNumSegments);
+    mA = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
+    mB = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
+    mC = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
+    mD = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
 
     // For now, treat the first point as if it occurred twice.
     ComputePoly(0, 0, 1, 2);

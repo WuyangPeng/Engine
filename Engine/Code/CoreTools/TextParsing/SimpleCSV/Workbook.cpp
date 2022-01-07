@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/14 15:28)
+///	引擎版本：0.8.0.0 (2021/12/20 22:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandAddWorksheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandCloneSheet.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandDeleteSheet.h"

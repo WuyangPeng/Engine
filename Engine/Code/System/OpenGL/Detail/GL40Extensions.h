@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/10 17:52)
+///	引擎版本：0.8.0.0 (2021/12/13 11:23)
 
 #ifndef SYSTEM_OPENGL_GL_40_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_40_EXTENSIONS_H
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 
 namespace System

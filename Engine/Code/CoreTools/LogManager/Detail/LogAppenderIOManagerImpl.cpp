@@ -81,6 +81,23 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
     return *this;
 }
 
+CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operator<<(const std::string_view& message) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    try
+    {
+        m_Message += StringConversion::MultiByteConversionStandard(message.data());
+    }
+    catch (...)
+    {
+        // 略过异常
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const wstring&) 抛出异常"));
+    }
+
+    return *this;
+}
+
 CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operator<<(const wstring& message) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 14:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 CoreTools::ObjectRegisterImpl::ObjectRegisterImpl() noexcept
-    : m_Registered{}
+    : registered{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,13 +27,13 @@ uint64_t CoreTools::ObjectRegisterImpl::GetUniqueID(const ConstObjectInterfaceSh
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto& container = m_Registered.get<UniqueObject>();
+    const auto& container = registered.get<UniqueObject>();
 
     const auto iter = container.find(object);
 
     if (iter != container.cend())
     {
-        return iter->m_Associated;
+        return iter->associated;
     }
     else
     {
@@ -45,28 +45,28 @@ int CoreTools::ObjectRegisterImpl::GetOrderedSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Registered.size());
+    return boost::numeric_cast<int>(registered.size());
 }
 
 CoreTools::ConstRegisterContainerConstIter CoreTools::ObjectRegisterImpl::begin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Registered.begin();
+    return registered.begin();
 }
 
 CoreTools::ConstRegisterContainerConstIter CoreTools::ObjectRegisterImpl::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Registered.end();
+    return registered.end();
 }
 
 uint64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto& container = m_Registered.get<UniqueObject>();
+    const auto& container = registered.get<UniqueObject>();
 
     if (container.find(object) == container.cend())
     {
@@ -81,9 +81,9 @@ uint64_t CoreTools::ObjectRegisterImpl::RegisterRoot(const ConstObjectInterfaceS
         // 一个解决办法是指定一个“虚拟地址”到每个对象，因为它被注册。最简单的就是使用“ordered”对象的索引。
         // 为了避免零地址和零指数之间的混淆，我们使用索引是数组的索引加一。
 
-        auto uniqueID = m_Registered.size() + 1;
+        auto uniqueID = registered.size() + 1;
 
-        m_Registered.emplace_back(object, uniqueID);
+        registered.emplace_back(object, uniqueID);
 
         return uniqueID;
     }

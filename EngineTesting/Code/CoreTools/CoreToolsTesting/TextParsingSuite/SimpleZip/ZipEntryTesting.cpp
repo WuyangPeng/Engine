@@ -19,7 +19,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipArchive.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -141,7 +141,7 @@ void CoreTools::ZipEntryTesting::ZipEntryDataTest()
 
     auto zipEntryData = zipEntry.GetEntryData();
     ASSERT_FALSE(zipEntryData.empty());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(zipEntryData, originalZipEntryData);
+    ASSERT_EQUAL(zipEntryData, originalZipEntryData);
 
     auto dataAsString = zipEntry.GetDataAsString();
     ASSERT_FALSE(dataAsString.empty());

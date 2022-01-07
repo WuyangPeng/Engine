@@ -12,15 +12,15 @@
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVRowDetail.h"
-#include "CoreTools/TextParsing/CSVTypeConversion.h"
+#include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
+#include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/Data/IntVector2.h"
 #include "CoreTools/TextParsing/Data/IntVector3.h"
 #include "CoreTools/TextParsing/Data/IntVector4.h"
 #include "CoreTools/TextParsing/Data/Vector2.h"
 #include "CoreTools/TextParsing/Data/Vector3.h"
 #include "CoreTools/TextParsing/Data/Vector4.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
@@ -178,18 +178,18 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 7);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10001, 14, 66 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true, false }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10001, 14, 66 }));
+    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true, false }));
+    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('a'), SYSTEM_TEXT('i') }));
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 2u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.1, Mathematics::DoubleMath::sm_Epsilon);
     ASSERT_APPROXIMATE(doubleArray.at(1), 1.1, Mathematics::DoubleMath::sm_Epsilon);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10001 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 7, 2 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::String, CSVDataType::Vector2 }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10001 }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 7, 2 }));
+    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::String, CSVDataType::Vector2 }));
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 2u);
@@ -266,17 +266,17 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetZ(), 4);
     ASSERT_EQUAL(csvRow.GetIntVector4(SYSTEM_TEXT("test12"s)).GetW(), 6);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10002, 55, 4 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('b') }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test13"s)), (vector<int>{ 10002, 55, 4 }));
+    ASSERT_EQUAL(csvRow.GetBoolArray(SYSTEM_TEXT("test14"s)), (deque<bool>{ true }));
+    ASSERT_EQUAL(csvRow.GetCharArray(SYSTEM_TEXT("test15"s)), (vector<System::TChar>{ SYSTEM_TEXT('b') }));
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 1u);
     ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::DoubleMath::sm_Epsilon);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10002 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 3 }));
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::Char }));
+    ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10002 }));
+    ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 3 }));
+    ASSERT_EQUAL(csvRow.GetEnumArray<CSVDataType>(SYSTEM_TEXT("test19"s)), (vector<CSVDataType>{ CSVDataType::Char }));
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 1u);

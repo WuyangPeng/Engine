@@ -17,8 +17,8 @@
 #include "SystemConstantContainer.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
 
 #include <filesystem>
 

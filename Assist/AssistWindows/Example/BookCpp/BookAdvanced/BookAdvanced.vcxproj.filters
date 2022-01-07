@@ -7984,6 +7984,378 @@
     <Filter Include="Book\Clean C++: Sustainable Software Development（C++ 代码整洁之道：C++17可持续软件开发模式实践）\第3章 原则\3.0">
       <UniqueIdentifier>{96565ef3-95d2-4427-a175-b801795f1d8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）">
+      <UniqueIdentifier>{2fc53a6b-4710-4071-9008-dc42e9bab051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\1. 前言">
+      <UniqueIdentifier>{7b04c598-4a09-44bb-90d4-3f8f762ac788}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\1. 前言\1.1 年表">
+      <UniqueIdentifier>{df5c36df-7cac-43bd-a94b-41f445a5efb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\1. 前言\1.2 概述">
+      <UniqueIdentifier>{46a8eaab-e4ba-4860-b8ee-d0abc671a79c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006">
+      <UniqueIdentifier>{94a00c83-09e6-457f-8b7c-dc454f7ca206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.1 第一个十年">
+      <UniqueIdentifier>{77fb8f37-d4ac-4016-ad33-e8ef6bc14735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.2 第二个十年">
+      <UniqueIdentifier>{3dd1db5a-4eb9-4b50-8332-cbdfa8a63572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.2 第二个十年\2.2.1 语言特性">
+      <UniqueIdentifier>{ec89bf3b-69bb-4e0e-b538-cf2ac9ad54fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.2 第二个十年\2.2.2 标准库组件">
+      <UniqueIdentifier>{c08c8fe6-b5a4-4256-a3e7-10b517af0ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.3 C++的2006">
+      <UniqueIdentifier>{b6dcc916-1088-4fa5-9803-e18e332439f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\2. 背景：C++的1979-2006\2.4 其他语言">
+      <UniqueIdentifier>{c38321ef-39b1-437a-8eed-15591326f22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\3. C++标准委员会">
+      <UniqueIdentifier>{5d68b4ac-8799-4bc1-8833-4219d782226d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\3. C++标准委员会\3.1 标准">
+      <UniqueIdentifier>{18002349-9d7c-4a80-aa88-afb646031680}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\3. C++标准委员会\3.2 组织">
+      <UniqueIdentifier>{5d3a976f-7e36-47da-81c9-00f5390083a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\3. C++标准委员会\3.3 对设计的影响">
+      <UniqueIdentifier>{7bb4dabe-4946-41a5-8209-6f41e28f5c12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\3. C++标准委员会\3.4 提案检查清单">
+      <UniqueIdentifier>{df4b671d-6afb-4e98-89af-1aad19870e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言">
+      <UniqueIdentifier>{2653904d-e628-4a06-ac70-b3f95fcf0355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.1 C++11：并发支持">
+      <UniqueIdentifier>{aad5c4e3-0972-42e4-949f-38045dd37202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.1 C++11：并发支持\4.1.1 内存模型">
+      <UniqueIdentifier>{dafc5eb1-c44c-4103-ab4c-c535e5e787ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.1 C++11：并发支持\4.1.2 线程和锁">
+      <UniqueIdentifier>{db7d6af5-1b6a-440c-a167-872e31057cb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.1 C++11：并发支持\4.1.3 期值">
+      <UniqueIdentifier>{48d3d784-90e0-4e9e-ac85-5eb977bab3bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用">
+      <UniqueIdentifier>{52f41fa8-b9cc-49ae-a313-ed494c715186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.1 auto和decltype">
+      <UniqueIdentifier>{5b4ec321-fcd3-4eda-b95b-7e0e04d04552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.2 范围for">
+      <UniqueIdentifier>{d9fe0c23-94a6-46cc-8f5c-60453ea98fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.3 移动语义">
+      <UniqueIdentifier>{6e12f124-e158-421f-91c5-0f7d415a2874}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.4 资源管理指针">
+      <UniqueIdentifier>{0cf9bce9-c550-4b92-9bd7-5723d5d1c79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.5 统一初始化">
+      <UniqueIdentifier>{97ed0951-0143-4706-91ef-cc85c2bbd584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.6 nullptr">
+      <UniqueIdentifier>{a24f9932-a335-433d-b8c4-8e314ed991d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.7 constexpr函数">
+      <UniqueIdentifier>{bcb72bcf-82af-4f1a-b62e-23d779562645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.8 用户定义字面量">
+      <UniqueIdentifier>{a3f3f163-a491-47a9-b2d0-e8297b8e7355}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.9 原始字符串字面量">
+      <UniqueIdentifier>{7762d47b-45a5-48af-b082-78f153c2f927}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.10 属性">
+      <UniqueIdentifier>{3b60de60-3bc9-49c3-861b-830273b87830}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.2 C++11：简化使用\4.2.11 垃圾收集">
+      <UniqueIdentifier>{b6e11738-6b00-49bc-bee1-6e0a04142f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.3 C++11：改进对泛型编程的支持">
+      <UniqueIdentifier>{2aa2e2ec-e04f-4f6e-830c-6952d6463b64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.3 C++11：改进对泛型编程的支持\4.3.1 lambda表达式">
+      <UniqueIdentifier>{f9585e66-8b34-4337-9bec-4eee505b939e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.3 C++11：改进对泛型编程的支持\4.3.2 变参模板">
+      <UniqueIdentifier>{ac41c342-d6f7-40bd-8ba5-6fb8a3df064f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.3 C++11：改进对泛型编程的支持\4.3.3 别名">
+      <UniqueIdentifier>{611806ad-27f1-4351-a707-333a32737076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.3 C++11：改进对泛型编程的支持\4.3.4 tuple">
+      <UniqueIdentifier>{4b45015e-b9bb-4397-8171-28dfe4196479}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.4 C++11：提高静态类型安全">
+      <UniqueIdentifier>{43dcd7a0-b14e-4b0f-b11c-34a80008dfd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.5 C++11：支持对库的开发">
+      <UniqueIdentifier>{34f10b8a-7520-4456-8c93-9152f86ddf51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.5 C++11：支持对库的开发\4.5.1 实现技巧">
+      <UniqueIdentifier>{8ded8b0b-572f-48e8-b62c-ee94510f8220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.5 C++11：支持对库的开发\4.5.2 元编程支持">
+      <UniqueIdentifier>{2ab6d2b2-e755-49ef-8ede-6ecff4f1d1ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.5 C++11：支持对库的开发\4.5.3 noexcept规约">
+      <UniqueIdentifier>{b98305c9-80dd-4e4b-984a-5da7125f96a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\4. C++11：感觉像是门新语言\4.6 C++11：标准库组件">
+      <UniqueIdentifier>{f0e8cf28-7fa3-4fc1-b799-1da20076afaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11">
+      <UniqueIdentifier>{3c765355-5d19-45dd-bebb-2607b98ba7cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11\5.1 数字分隔符">
+      <UniqueIdentifier>{b50706ea-c928-4821-ae84-45729f580524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11\5.2 变量模板">
+      <UniqueIdentifier>{f7535df4-38c3-4242-8dd7-495e97bdd386}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11\5.3 函数返回类型推导">
+      <UniqueIdentifier>{db2618ee-dd03-4022-b13c-5c8eb35204b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11\5.4 泛型lambda表达式">
+      <UniqueIdentifier>{d341db27-8abe-425c-8f4b-46ca9930687a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\5. C++14：完成C++11\5.5 constexpr函数中的局部变量">
+      <UniqueIdentifier>{1d4c256f-0d48-4160-bcdb-4dc6fff1b89f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念">
+      <UniqueIdentifier>{3ff0f249-847a-4721-8780-33e8a7a6e862}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.1 概念的早期历史">
+      <UniqueIdentifier>{6bf5d02a-b393-4dd2-969f-800943cc165a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念">
+      <UniqueIdentifier>{b0ed770c-de33-4300-872b-36f7d2ce8a2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS">
+      <UniqueIdentifier>{b3dbea87-47c6-41a4-9cea-05acc62842ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.4 C++20概念">
+      <UniqueIdentifier>{28915acf-9c20-4d7e-a2de-1b1f776346c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.5 概念的命名">
+      <UniqueIdentifier>{ec8c39d7-08d4-4760-85c0-212e5172fe47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.1 概念定义">
+      <UniqueIdentifier>{dc22115a-c52e-4836-af87-927de39844fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.2 概念使用">
+      <UniqueIdentifier>{9081fc83-89fb-4650-a4b6-bb28f19395be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.3 概念映射">
+      <UniqueIdentifier>{244cb4db-bf66-4f88-a41a-6a37ffe2bb95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.4 定义检查">
+      <UniqueIdentifier>{1bd7c210-ad3e-4e43-9325-1865411dcdee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.5 教训">
+      <UniqueIdentifier>{4dacb90c-4054-460c-8840-f25b9a475576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.2 C++0x概念\6.2.6 哪里出错了？">
+      <UniqueIdentifier>{5bfa0d91-9cbc-4794-b3c4-29f18a0d6741}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.1 定义检查">
+      <UniqueIdentifier>{1913ad03-d565-44fd-b753-a59f1a4c18c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.2 概念使用">
+      <UniqueIdentifier>{dcbd2775-b442-4f1b-9190-ff2b04a2df0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.3 概念的定义">
+      <UniqueIdentifier>{d1ad3ac6-8d53-4c75-b03a-b682224af801}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.4 概念名称引导器">
+      <UniqueIdentifier>{a3160a4a-b935-4f72-b447-5325c7e09b1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.5 概念和类型">
+      <UniqueIdentifier>{bbbbb3fb-e1ee-42df-918e-4f7ec60a71e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.6 改进">
+      <UniqueIdentifier>{c253e77c-8e68-4f25-ae42-a7995fbe1b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.7 等效语法">
+      <UniqueIdentifier>{7f055c69-98b6-4c6d-8bfe-f2e56ee54c4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\6. 概念\6.3 Concepts TS\6.3.8 为什么在C++17中没有概念？">
+      <UniqueIdentifier>{84406e65-9f55-47ba-857f-ead5de25ba4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理">
+      <UniqueIdentifier>{73d78f50-5382-4410-bd6d-20f4060bb08e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理\7.1 背景">
+      <UniqueIdentifier>{d8a6f068-de78-44c7-a86e-fac9a78e2735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理\7.2 现实中的问题">
+      <UniqueIdentifier>{e2f54bdf-a28c-4fd1-8d9b-65a4e25aa579}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理\7.3 noexcept规约">
+      <UniqueIdentifier>{9b709a86-affd-43ac-9c1c-07f56c8e7745}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理\7.4 类型系统的支持">
+      <UniqueIdentifier>{4d07bc4e-ea36-421c-b781-e60bffbc2853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\7. 错误处理\7.5 回归基础">
+      <UniqueIdentifier>{3b4c45cf-d763-4f87-a60e-40036d782230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航">
+      <UniqueIdentifier>{c4fc4ccd-0529-4aff-90e2-57c1d5f567c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.1 构造函数模板参数推导">
+      <UniqueIdentifier>{4a079889-fa81-4e8a-af20-c17a32f47593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.2 结构化绑定">
+      <UniqueIdentifier>{b760055f-855d-4dca-b697-be6ddbeef230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.3 variant、optional和any">
+      <UniqueIdentifier>{5e6f761b-d9e8-4e03-ba9a-0e8ae58552e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.4 并发">
+      <UniqueIdentifier>{c417970e-65e5-48af-bc8b-786d253448f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.5 并行STL">
+      <UniqueIdentifier>{cd497a5b-d67e-41ec-bcc2-70901eb59dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.6 文件系统">
+      <UniqueIdentifier>{8aa12ba8-1489-4202-82bd-7920c3f69d6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.7 条件的显式测试">
+      <UniqueIdentifier>{a9a36e94-4d4f-45b1-922a-bcdd659b3c09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.8 C++17中未包含的提议">
+      <UniqueIdentifier>{ec22bbe1-5386-4186-bbe7-5d1c3dbd91e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.8 C++17中未包含的提议\8.8.1 网络库">
+      <UniqueIdentifier>{f1b48cd3-1c31-430b-8681-9c57e7581b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.8 C++17中未包含的提议\8.8.2 点运算符">
+      <UniqueIdentifier>{4e391ef9-18d9-488a-b868-ad2bd062ca23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.8 C++17中未包含的提议\8.8.3 统一调用语法">
+      <UniqueIdentifier>{82a69bc3-95ce-4427-b59e-16c5a8833221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\8. C++17：大海迷航\8.8 C++17中未包含的提议\8.8.4 缺省的比较">
+      <UniqueIdentifier>{0886d7d1-09ba-4158-86b2-5a074acaff35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争">
+      <UniqueIdentifier>{73c2a285-91ed-4c89-a1b8-66aa111d2172}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.1 设计原则">
+      <UniqueIdentifier>{fed6d412-a317-43ed-bcfe-e57554a83dca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.2 我的C++17清单">
+      <UniqueIdentifier>{37ecfb68-0f88-4a77-b83c-e6e5e87216fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性">
+      <UniqueIdentifier>{bf90137b-24cb-4bcd-9b27-f76acbc4661b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.1 模块">
+      <UniqueIdentifier>{3bf27a62-b1d5-473c-b04b-1352760bcb98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.2 协程">
+      <UniqueIdentifier>{4c5ffcbf-c1ac-477e-b287-f6e514cd0807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.3 编译期计算支持">
+      <UniqueIdentifier>{5476581e-16a6-4295-a159-c192e619a5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.4 &lt;==&gt;">
+      <UniqueIdentifier>{7805851a-caeb-4c9c-8363-b7de2c333dec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.5 范围">
+      <UniqueIdentifier>{ddb30f06-e7cb-4874-8da5-a0e1a8f01edb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.6 日期和时区">
+      <UniqueIdentifier>{f6c80457-bc46-475a-8b63-8519f8cc6ac5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.7 格式化">
+      <UniqueIdentifier>{b76d2205-6c01-42e9-96d6-a2e6a1f8f404}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.3 C++20特性\9.3.8 跨度">
+      <UniqueIdentifier>{aa0e8be2-609b-4c3c-bcc9-f7d02cd354b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.4 并发">
+      <UniqueIdentifier>{4a66c7b5-96cc-4ba0-8ae6-91b7484c4d98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.5 次要特性">
+      <UniqueIdentifier>{3ac0df0d-6985-421c-9a5b-9df4ca810f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.6 进行中的工作">
+      <UniqueIdentifier>{32f441a1-4925-4b39-9690-2351ed83df6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.6 进行中的工作\9.6.1 契约">
+      <UniqueIdentifier>{95c54e10-38c6-44ae-aec9-4c5e69635e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\9. C++20：方向之争\9.6 进行中的工作\9.6.2 静态反射">
+      <UniqueIdentifier>{d6eec54f-25a6-46a1-85a9-b1887e229b3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++">
+      <UniqueIdentifier>{331d862f-cb44-4830-9dc9-e7e2c394a020}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾">
+      <UniqueIdentifier>{9d5e7d03-9271-4a72-9193-d9c4e8154d8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.1 C++用来做什么？">
+      <UniqueIdentifier>{5ac6b156-d37a-4e87-abcb-6caa1eb866a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.2 C++社区">
+      <UniqueIdentifier>{3043b732-3735-47f8-ad40-f104cc4c1ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.3 教育和研究">
+      <UniqueIdentifier>{d26bbf29-1ecb-48b6-a6ee-32a039874ff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.4 工具">
+      <UniqueIdentifier>{320d1246-5fe5-4835-a0e3-a755859ad212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.5 编程风格">
+      <UniqueIdentifier>{0e98542c-061a-4297-9e89-361c2c6cd978}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.5 编程风格\10.5.1 泛型编程">
+      <UniqueIdentifier>{8829168f-29d4-47af-9d5d-ce80fe502aa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.5 编程风格\10.5.2 元编程">
+      <UniqueIdentifier>{4778e79b-6f96-4846-8433-9ee1b38a70c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.6 编码指南">
+      <UniqueIdentifier>{d25338f2-9539-43e6-92ba-bacd108e3706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.6 编码指南\10.6.1 一般方法">
+      <UniqueIdentifier>{ce2aa5c3-06c9-4e41-b010-2ecb0b6cdfff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\10. 2020年的C++\10.6 编码指南\10.6.2 静态分析">
+      <UniqueIdentifier>{1a4f4031-28d0-49b0-9a1d-e020495c21cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾\11.1 C++模型">
+      <UniqueIdentifier>{72b82071-9857-46cb-96ab-e356a73b6db3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾\11.2 技术上的成功">
+      <UniqueIdentifier>{df692973-508e-4118-b66e-051d9c49784b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾\11.3 需要工作的领域">
+      <UniqueIdentifier>{7dae5881-dcd0-41e2-acc8-495ee9ee4ea9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾\11.4 教训">
+      <UniqueIdentifier>{d6088605-38f9-401b-b250-9c9d671dd199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\11. 回顾\11.5 未来">
+      <UniqueIdentifier>{52ea7615-afdf-4549-ba13-fc3bf2a62863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Thriving in a Crowded and Changing World（现代C++白皮书）\致谢">
+      <UniqueIdentifier>{dbe0ba29-bd78-4a10-b7a5-2acaba1af829}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -8062,6 +8434,9 @@
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Advanced Qt Programming.txt">
+      <Filter>资源文件</Filter>
+    </Text>
+    <Text Include="Resource\Thriving in a Crowded and Changing World.txt">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

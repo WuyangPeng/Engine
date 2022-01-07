@@ -48,11 +48,11 @@ namespace Rendering
 
 		CLASS_INVARIANT_VIRTUAL_DECLARE;
 	
-		virtual void Load(const CoreTools::BufferSourceSharedPtr& source);
-		virtual void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+		virtual void Load(CoreTools::BufferSource& source);
+		virtual void Save(CoreTools::BufferTarget& target) const;
 		virtual int GetStreamingSize() const;
-		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
-                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
+		void Link(CoreTools:: ObjectLink& source);
+                void Register(CoreTools::ObjectRegister& target) const;
 
 		const ObjectSharedPtr GetObjectByName(const std::string& name); 
 		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 

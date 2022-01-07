@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:32)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:22)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_MESSAGE_MANAGER_H
@@ -32,12 +32,12 @@ namespace CoreTools
 
     public:
         explicit TelegramMessageManager(int64_t difference);
-        virtual ~TelegramMessageManager() = default;
+        virtual ~TelegramMessageManager() noexcept = default;
 
         TelegramMessageManager(const TelegramMessageManager& rhs) = default;
         TelegramMessageManager& operator=(const TelegramMessageManager& rhs) = default;
-        TelegramMessageManager(TelegramMessageManager&& rhs) = default;
-        TelegramMessageManager& operator=(TelegramMessageManager&& rhs) = default;
+        TelegramMessageManager(TelegramMessageManager&& rhs) noexcept = default;
+        TelegramMessageManager& operator=(TelegramMessageManager&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -46,11 +46,11 @@ namespace CoreTools
 
         void DispatchDelayEvent(int64_t currentTime);
 
-        [[nodiscard]] bool RegisterAllEvent(uint64_t entityID);
-        [[nodiscard]] bool UnregisterAllEvent(uint64_t entityID);
+        NODISCARD bool RegisterAllEvent(uint64_t entityID);
+        NODISCARD bool UnregisterAllEvent(uint64_t entityID);
 
-        [[nodiscard]] bool Register(EventType eventType, uint64_t entityID);
-        [[nodiscard]] bool Unregister(EventType eventType, uint64_t entityID);
+        NODISCARD bool Register(EventType eventType, uint64_t entityID);
+        NODISCARD bool Unregister(EventType eventType, uint64_t entityID);
 
     private:
         using EventContainer = std::set<Telegram, TelegramLess>;
@@ -65,10 +65,10 @@ namespace CoreTools
         void DisposeEvent(uint64_t entityID, const Telegram& telegram);
 
     private:
-        TelegramLess m_TelegramLess;
-        EventContainer m_EventContainer;
-        RegisterContainer m_RegisterContainer;
-        EventRegisterContainer m_EventRegisterContainer;
+        TelegramLess telegramLess;
+        EventContainer eventContainer;
+        RegisterContainer registerContainer;
+        EventRegisterContainer eventRegisterContainer;
     };
 }
 

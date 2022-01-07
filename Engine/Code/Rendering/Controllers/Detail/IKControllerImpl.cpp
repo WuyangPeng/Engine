@@ -71,12 +71,12 @@ int Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_Iterations);
-	target->Write(m_OrderEndToRoot);
+	target.Write(m_Iterations);
+	target.Write(m_OrderEndToRoot);
 
 	if (!m_Joints.empty())
 	{
@@ -85,15 +85,15 @@ void Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_Iterations);
-        m_OrderEndToRoot = source->ReadBool();
+	source.Read(m_Iterations);
+        m_OrderEndToRoot = source.ReadBool();
 
 	auto size = 0;
-	source->Read(size);
+	source.Read(size);
 
 	if (0 < size)
 	{
@@ -103,7 +103,7 @@ void Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
@@ -117,7 +117,7 @@ void Rendering::IKControllerImpl
 }
 
 void Rendering::IKControllerImpl
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+	::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     CoreTools::DisableNoexcept();

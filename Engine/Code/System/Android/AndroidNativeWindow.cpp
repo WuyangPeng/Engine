@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:41)
+///	引擎版本：0.8.0.0 (2021/12/13 23:02)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ void System::AndroidNativeWindowAcquire(AndroidNativeWindow* window) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*>(window);
+    UnusedFunction(window);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -34,7 +34,7 @@ void System::AndroidNativeWindowRelease(AndroidNativeWindow* window) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*>(window);
+    UnusedFunction(window);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -47,7 +47,7 @@ int32_t System::AndroidNativeWindowGetWidth(AndroidNativeWindow* window) noexcep
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*>(window);
+    UnusedFunction(window);
 
     return 0;
 
@@ -62,7 +62,7 @@ int32_t System::AndroidNativeWindowGetHeight(AndroidNativeWindow* window) noexce
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*>(window);
+    UnusedFunction(window);
 
     return 0;
 
@@ -77,7 +77,7 @@ System::WindowFormat System::AndroidNativeWindowGetFormat(AndroidNativeWindow* w
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*>(window);
+    UnusedFunction(window);
 
     return WindowFormat::RGBA8888;
 
@@ -92,7 +92,7 @@ int32_t System::AndroidNativeWindowSetBuffersGeometry(AndroidNativeWindow* windo
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*, int32_t, int32_t, WindowFormat>(window, width, height, format);
+    UnusedFunction(window, width, height, format);
 
     return 0;
 
@@ -107,7 +107,7 @@ int32_t System::AndroidNativeWindowLock(AndroidNativeWindow* window, AndroidNati
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidNativeWindow*, AndroidNativeWindowBuffer*, AndroidRect*>(window, outBuffer, inOutDirtyBounds);
+    UnusedFunction(window, outBuffer, inOutDirtyBounds);
 
     return 0;
 
@@ -121,8 +121,8 @@ int32_t System::AndroidNativeWindowUnlockAndPost(AndroidNativeWindow* window) no
     return ANativeWindow_unlockAndPost(window);
 
 #else  // !SYSTEM_PLATFORM_ANDROID
-
-    NullFunction<AndroidNativeWindow*>(window);
+     
+    UnusedFunction(window);
 
     return 0;
 

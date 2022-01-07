@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 15:34)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_FWD_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_FWD_H
@@ -33,12 +33,12 @@ namespace CoreTools
     template <unsigned N>
     struct Factorial;
 
-    uint32_t RecursiveFactorial(uint32_t integer) noexcept;
+    NODISCARD uint32_t RecursiveFactorial(uint32_t integer) noexcept;
 
     template <unsigned N>
     struct Fibonacci;
 
-    uint32_t RecursiveFibonacci(uint32_t integer) noexcept;
+    NODISCARD uint32_t RecursiveFibonacci(uint32_t integer) noexcept;
 
     template <class T>
     struct ParamType;
@@ -57,9 +57,9 @@ namespace CoreTools
 
     namespace TrigonometricFunction
     {
-        double SineSeries(double radian, int index, int maxTerms) noexcept;
-        double RecursiveSine(double radian) noexcept;
-        double NonRecursiveSine(double radian) noexcept;
+        NODISCARD double SineSeries(double radian, int index, int maxTerms) noexcept;
+        NODISCARD double RecursiveSine(double radian) noexcept;
+        NODISCARD double NonRecursiveSine(double radian) noexcept;
     }
 
     template <class T>
@@ -99,7 +99,7 @@ namespace CoreTools
     class IncrementScope;
 
     template <typename T>
-    T* GetAddress(T& t) noexcept;
+    NODISCARD T* GetAddress(T& t) noexcept;
 
     template <typename T, int64_t V>
     class LiteralCast;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/13 18:30)
+///	引擎版本：0.8.0.0 (2021/12/19 19:35)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CONTENT_ITEM_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CONTENT_ITEM_IMPL_H
@@ -16,6 +16,7 @@
 #include "CoreTools/TextParsing/SimpleCSV/XmlParser.h"
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
+#include <map>
 #include <string>
 
 namespace CoreTools
@@ -37,6 +38,14 @@ namespace CoreTools
 
             NODISCARD static ContentType GetTypeFromString(const std::string& typeString);
             NODISCARD static std::string GetStringFromType(ContentType type);
+
+        private:
+            using StringFromTypeContent = std::map<ContentType, std::string>;
+            using TypeFromStringContent = std::map<std::string, ContentType>;
+
+        private:
+            NODISCARD static StringFromTypeContent GetStringFromTypeContent();
+            NODISCARD static TypeFromStringContent GetTypeFromStringContent();
 
         private:
             ConstXMLDocumentWeakPtr document;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 19:33)
+///	引擎版本：0.8.0.0 (2021/12/12 18:11)
 
 #include "System/SystemExport.h"
 
@@ -55,7 +55,7 @@ bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr critica
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord, CriticalSectionInfo>(criticalSection, spinCount, flags);
+    UnusedFunction(criticalSection, spinCount, flags);
 
     return false;
 
@@ -73,7 +73,7 @@ bool System::InitializeSystemCriticalSectionAndSpinCount(ThreadingCriticalSectio
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord>(criticalSection, spinCount);
+    UnusedFunction(criticalSection, spinCount);
 
     return false;
 
@@ -83,10 +83,14 @@ bool System::InitializeSystemCriticalSectionAndSpinCount(ThreadingCriticalSectio
 bool System::InitializeSystemCriticalSection(ThreadingCriticalSectionPtr criticalSection) noexcept
 {
 #if defined(SYSTEM_USE_SPIN_COUNT_CRITICAL_SECTION)
+
     // 在MSVS2010文档中提到，堆管理器自旋锁设定为大约4000。让我们看看如何做到4096。
     return InitializeSystemCriticalSectionAndSpinCount(criticalSection, 4096);
+
 #else  // !SYSTEM_SPIN_COUNT_CRITICAL_SECTION
+
     return InitializeSystemCriticalSection(criticalSection, 0, CriticalSectionInfo::NoDebugInfo);
+
 #endif  // SYSTEM_SPIN_COUNT_CRITICAL_SECTION
 }
 
@@ -98,7 +102,7 @@ void System::DeleteSystemCriticalSection(ThreadingCriticalSectionPtr criticalSec
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadingCriticalSectionPtr>(criticalSection);
+    UnusedFunction(criticalSection);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -155,7 +159,7 @@ System::WindowsDWord System::SetSystemCriticalSectionSpinCount(ThreadingCritical
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadingCriticalSectionPtr, WindowsDWord>(criticalSection, spinCount);
+    UnusedFunction(criticalSection, spinCount);
 
     return 0;
 

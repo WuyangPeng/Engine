@@ -57,7 +57,7 @@ int Rendering::Projector
 }
 
 uint64_t Rendering::Projector
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -65,7 +65,7 @@ uint64_t Rendering::Projector
 }
 
 void Rendering::Projector
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -73,13 +73,13 @@ void Rendering::Projector
     
 	ParentType::Save(target);
 	
-	target->WriteEnum(GetDepthType());
+	target.WriteEnum(GetDepthType());
     
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::Projector
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -95,7 +95,7 @@ void Rendering::Projector
 }
 
 void Rendering::Projector
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
   
@@ -104,7 +104,7 @@ void Rendering::Projector
     ParentType::Load(source);
 
 	auto depthType = DepthType::Quantity;	
-	source->ReadEnum(depthType);
+	source.ReadEnum(depthType);
 	SetDepthType(depthType);	
     
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);

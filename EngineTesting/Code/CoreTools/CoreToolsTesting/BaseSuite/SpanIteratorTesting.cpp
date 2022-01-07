@@ -48,9 +48,9 @@ void CoreTools::SpanIteratorTesting::BaseTest()
 
     const SpanIterator span{ test.begin(), test.end() };
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(span.GetBegin(), test.begin());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(span.GetEnd(), test.end());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(span.GetCurrent(), test.begin());
+    ASSERT_EQUAL(span.GetBegin(), test.begin());
+    ASSERT_EQUAL(span.GetEnd(), test.end());
+    ASSERT_EQUAL(span.GetCurrent(), test.begin());
 
     ASSERT_EQUAL(span.GetRemainingCount(), boost::numeric_cast<int>(test.size()));
 }

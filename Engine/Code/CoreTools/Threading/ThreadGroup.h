@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/02 11:27)
+///	引擎版本：0.8.0.0 (2021/12/18 1:21)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_GROUP_H
 #define CORE_TOOLS_THREADING_THREAD_GROUP_H
@@ -27,8 +27,12 @@ namespace CoreTools
         NON_COPY_TYPE_DECLARE(ThreadGroup);
 
     public:
+        NODISCARD static ThreadGroup Create();
+
+    private:
         explicit ThreadGroup(MAYBE_UNUSED DisableNotThrow disableNotThrow);
 
+    public:
         CLASS_INVARIANT_DECLARE;
 
         template <typename Function, typename... Args>

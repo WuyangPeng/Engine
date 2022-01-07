@@ -38,8 +38,8 @@ namespace Rendering
 
 		CLASS_INVARIANT_DECLARE;
 
-		void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+		void Load(CoreTools::BufferSource& source);
+		void Save(CoreTools::BufferTarget& target) const;
 		int GetStreamingSize() const;
 		
 		// 访问中心(LOD)细节等级。

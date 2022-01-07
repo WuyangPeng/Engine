@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 15:04)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,7 +22,7 @@ using std::make_shared;
 using std::string;
 
 CoreTools::BufferTarget::BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister)
-    : impl{  bufferSize, objectRegister  }
+    : impl{ bufferSize, objectRegister }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -31,23 +31,17 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferTarget)
 
 void CoreTools::BufferTarget::Write(const bool datum)
 {
-    
-
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
     Write(CORE_TOOLS_STREAM_SIZE(value), &value);
 }
 
 void CoreTools::BufferTarget::Write(const char* datum)
 {
-    
-
     Write(string{ datum });
 }
 
 void CoreTools::BufferTarget::Write(const string& datum)
 {
-    
-
     auto length = boost::numeric_cast<int32_t>(datum.length());
     Write(length);
 
@@ -71,14 +65,10 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferTarget, GetBytesWr
 
 void CoreTools::BufferTarget::Write(size_t itemSize, const void* data)
 {
-    
-
     return impl->Write(itemSize, data);
 }
 
 void CoreTools::BufferTarget::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
-    
-
     return impl->Write(itemSize, itemsNumber, data);
 }

@@ -316,6 +316,8 @@
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TheArtOfCpp\TheArtOfCppSuite.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TheDesignAndEvolutionOfCpp\TheDesignAndEvolutionOfCppPlaceholderTesting.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TheDesignAndEvolutionOfCpp\TheDesignAndEvolutionOfCppSuite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldPlaceholderTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldSuite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\AdvancedQtProgramming\AdvancedQtProgrammingPlaceholderTesting.cpp" />
@@ -342,6 +344,7 @@
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TestingMain.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TheArtOfCpp\TheArtOfCppPlaceholderTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TheDesignAndEvolutionOfCpp\TheDesignAndEvolutionOfCppPlaceholderTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldPlaceholderTesting.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\BookAdvancedTesting.json" />

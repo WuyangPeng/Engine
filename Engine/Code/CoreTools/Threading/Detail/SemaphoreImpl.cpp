@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/01 12:53)
+///	引擎版本：0.8.0.0 (2021/12/18 12:18)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -41,6 +41,7 @@ CoreTools::SemaphoreImpl::~SemaphoreImpl() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::SemaphoreImpl::IsValid() const noexcept
 {
     if (System::IsSystemSemaphoreValid(handle) && 0 <= currentCount && currentCount <= maximumCount)
@@ -48,6 +49,7 @@ bool CoreTools::SemaphoreImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::SemaphoreImpl::Release(int releaseCount)

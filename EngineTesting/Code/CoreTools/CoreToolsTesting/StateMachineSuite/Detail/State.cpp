@@ -6,7 +6,7 @@
 
 #include "State.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"  
+  
 
 CoreTools::CdDetected ::CdDetected(char const*, std::vector<clock_t> const&) noexcept
 {

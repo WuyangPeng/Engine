@@ -30,12 +30,13 @@ void BookAdvanced::TestingHelper::InitSuite()
     AddAPIDesignForCppSuite();
     AddDiscoveringModernCppSuite();
 
+    AddThrivingInACrowdedAndChangingWorldSuite();
     AddModernCppDesignSuite();
     AddTheArtOfCppSuite();
     AddInsideTheCppObjectModelSuite();
     AddLargeScaleCppSoftwareDesignSuite();
-    AddSecureCodingInCAndCppSuite();
 
+    AddSecureCodingInCAndCppSuite();
     AddDesigningAndCodingReusableCppSuite();
     AddMultiParadigmDesignForCppSuite();
     AddCppGUIProgrammingWithQt4Suite();
@@ -92,6 +93,15 @@ void BookAdvanced::TestingHelper::AddDiscoveringModernCppSuite()
     ADD_TEST(discoveringModernCppSuite, DiscoveringModernCpp::DiscoveringModernCppGradientTesting);
 
     AddSuite(discoveringModernCppSuite);
+}
+
+void BookAdvanced::TestingHelper::AddThrivingInACrowdedAndChangingWorldSuite()
+{
+    auto thrivingInACrowdedAndChangingWorldSuite = GenerateSuite("ÏÖ´úC++°×Æ¤Êé");
+
+    ADD_TEST(thrivingInACrowdedAndChangingWorldSuite, ThrivingInACrowdedAndChangingWorld::ThrivingInACrowdedAndChangingWorldPlaceholderTesting);
+
+    AddSuite(thrivingInACrowdedAndChangingWorldSuite);
 }
 
 void BookAdvanced::TestingHelper::AddModernCppDesignSuite()

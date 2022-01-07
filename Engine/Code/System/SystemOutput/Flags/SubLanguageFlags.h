@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/22 11:27)
+///	引擎版本：0.8.0.0 (2021/12/12 21:06)
 
 #ifndef SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H
 #define SYSTEM_SYSTEM_OUTPUT_SUB_LANGUAGE_FLAGS_H

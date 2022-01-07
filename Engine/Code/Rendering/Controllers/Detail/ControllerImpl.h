@@ -59,8 +59,8 @@ namespace Rendering
         void SetFrequency(double frequency) noexcept;
         void SetActive(bool active) noexcept;
         
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+        void Load(CoreTools::BufferSource& source);
+		void Save (CoreTools::BufferTarget& target) const;
         int GetStreamingSize() const noexcept;
         
     private:

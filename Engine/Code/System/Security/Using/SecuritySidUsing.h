@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/24 16:14)
+///	引擎版本：0.8.0.0 (2021/12/13 10:44)
 
 #ifndef SYSTEM_SECURITY_SECURITY_SID_USING_H
 #define SYSTEM_SECURITY_SECURITY_SID_USING_H
@@ -43,6 +43,7 @@ namespace System
         unsigned long SubAuthority[1];
     };
     using SecuritySIDPtr = void*;
+
     enum SecurityWellKnownSidType
     {
         WinNullSid = 0,

@@ -32,7 +32,7 @@ namespace CSVConfigure
         CLASS_INVARIANT_DECLARE;
 
         NODISCARD ConstSystemConstantSharedPtr GetSystemConstant() const noexcept;
- 
+
     private:
         void Parsing(const CoreTools::CSVContent& csvContent);
 

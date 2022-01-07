@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/14 15:46)
+///	引擎版本：0.8.0.0 (2021/12/20 22:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -60,11 +60,11 @@ void CoreTools::SimpleCSV::Document::SetProperty(Property prop, const string& va
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, Document, DeleteProperty, Property, void)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandSetSheetName, void) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandSetSheetName, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandSetSheetIndex, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandResetCalcChain, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandAddSharedStrings, void)
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandAddWorksheet, void) 
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandAddWorksheet, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandDeleteSheet, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, Document, ExecuteCommand, CommandCloneSheet, void)
 

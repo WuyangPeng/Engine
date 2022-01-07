@@ -88,8 +88,8 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageTest()
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(lhsExpression, lhsExpression);
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE(lhsExpression, rhsExpression);
+    ASSERT_EQUAL(lhsExpression, lhsExpression);
+    ASSERT_UNEQUAL(lhsExpression, rhsExpression);
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageFailureThrowTest()
@@ -97,8 +97,8 @@ void CoreTools::AssertTestOperatorTesting::AssertOperatorDoNotUseMessageFailureT
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(lhsExpression, lhsExpression);
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(lhsExpression, rhsExpression);
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, lhsExpression, "≤‚ ‘");
+    ASSERT_UNEQUAL(lhsExpression, rhsExpression);
 }
 
 void CoreTools::AssertTestOperatorTesting::AssertEnumOperatorTest()

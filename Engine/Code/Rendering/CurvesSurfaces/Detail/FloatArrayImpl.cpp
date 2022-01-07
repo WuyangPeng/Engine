@@ -35,19 +35,19 @@ Rendering::FloatArrayImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering,FloatArrayImpl)
 
-void Rendering::FloatArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::FloatArrayImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Elements = source->ReadVectorWithoutNumber<float>();
+	m_Elements = source.ReadVectorWithoutNumber<float>();
 }
 
 void Rendering::FloatArrayImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->WriteContainerWithNumber(m_Elements);
+	target.WriteContainerWithNumber(m_Elements);
 }
 
 int Rendering::FloatArrayImpl

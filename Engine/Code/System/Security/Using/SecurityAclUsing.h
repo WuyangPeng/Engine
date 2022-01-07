@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/24 16:14)
+///	引擎版本：0.8.0.0 (2021/12/13 10:42)
 
 #ifndef SYSTEM_SECURITY_SECURITY_ACL_USING_H
 #define SYSTEM_SECURITY_SECURITY_ACL_USING_H
@@ -34,8 +34,8 @@ namespace System
         uint16_t AceCount;
         uint16_t Sbz2;
     };
-
     using AccessCheckACLPtr = AccessCheckACL*;
+
     enum SecurityAclInformationClass
     {
         AclRevisionInformation = 1,
@@ -47,6 +47,7 @@ namespace System
         uint32_t AclRevision;
     };
     using SecurityAclRevisionInformationPtr = SecurityAclRevisionInformation*;
+
     struct SecurityAclSizeInformation
     {
         uint32_t AceCount;

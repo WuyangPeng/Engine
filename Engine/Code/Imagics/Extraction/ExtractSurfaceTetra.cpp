@@ -9,7 +9,7 @@
 #include "ExtractSurfaceTetra.h"
 #include "Mathematics/Algebra/Vector3DDetail.h"
 #include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
 
 #include "System/Helper/PragmaWarning.h"

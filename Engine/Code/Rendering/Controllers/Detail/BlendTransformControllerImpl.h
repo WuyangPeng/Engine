@@ -40,10 +40,10 @@ namespace Rendering
 		CLASS_INVARIANT_DECLARE;
 
 		int GetStreamingSize() const noexcept;
-		void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-		void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Link(const CoreTools::ObjectLinkSharedPtr& source);
-		void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
+		void Save(CoreTools::BufferTarget& target) const;
+		void Load(CoreTools::BufferSource& source);
+		void Link(CoreTools::ObjectLink& source);
+		void Register(CoreTools::ObjectRegister& target) const;
 
 		const ObjectSharedPtr GetObjectByName(const std::string& name); 
 		const std::vector<ObjectSharedPtr> GetAllObjectsByName(const std::string& name); 

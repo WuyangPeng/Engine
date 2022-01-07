@@ -167,6 +167,10 @@ void CoreTools::CellValueProxyTesting::CellValueSetTest()
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<string>(), "cellValueProxy"s);
 
+    cellValueProxy.Set("proxy"sv);
+    ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
+    ASSERT_EQUAL(cellValueProxy.Get<string>(), "proxy"s);
+
     cellValueProxy.Set("cellValue"s);
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
     ASSERT_EQUAL(cellValueProxy.Get<string>(), "cellValue");

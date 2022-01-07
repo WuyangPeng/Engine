@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 19:49)
+///	引擎版本：0.8.0.0 (2021/12/12 19:19)
 
 #include "System/SystemExport.h"
 
@@ -18,10 +18,12 @@
 System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes, bool manualReset, const TChar* timerName) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::CreateWaitableTimer(timerAttributes, BoolConversion(manualReset), timerName);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, bool, const TChar*>(timerAttributes, manualReset, timerName);
+    UnusedFunction(timerAttributes, manualReset, timerName);
 
     return nullptr;
 
@@ -29,10 +31,10 @@ System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributes
 }
 
 System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
-                                                       const TChar* timerName,
-                                                       CreateWaitableTimerReset flag,
-                                                       MutexStandardAccess desiredAccess,
-                                                       WaitableTimerSpecificAccess specificAccess) noexcept
+                                                        const TChar* timerName,
+                                                        CreateWaitableTimerReset flag,
+                                                        MutexStandardAccess desiredAccess,
+                                                        WaitableTimerSpecificAccess specificAccess) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -40,7 +42,7 @@ System::WindowsHandle System::CreateSystemWaitableTimer(WindowSecurityAttributes
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, const TChar*, CreateWaitableTimerReset, MutexStandardAccess, WaitableTimerSpecificAccess>(timerAttributes, timerName, flag, desiredAcces, specificAccess);
+    UnusedFunction(timerAttributes, timerName, flag, desiredAcces, specificAccess);
 
     return nullptr;
 
@@ -58,7 +60,7 @@ bool System::CancelSystemWaitableTimer(WindowsHandle timer) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(timer);
+    UnusedFunction(timer);
 
     return false;
 
@@ -76,7 +78,7 @@ bool System::CloseSystemWaitableTimer(WindowsHandle timer) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(timer);
+    UnusedFunction(timer);
 
     return false;
 
@@ -96,7 +98,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsHandle timer, 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord>(timer, milliseconds);
+    UnusedFunction(timer, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -111,7 +113,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsHandle timer, 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord, bool>(timer, milliseconds, alertable);
+    UnusedFunction(timer, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -126,7 +128,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsDWord count, c
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord, bool>(count, timer, waitAll, milliseconds, alertable);
+    UnusedFunction(count, timer, waitAll, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -141,7 +143,7 @@ System::MutexWaitReturn System::WaitForSystemWaitableTimer(WindowsDWord count, c
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord>(count, timer, waitAll, milliseconds);
+    UnusedFunction(count, timer, waitAll, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -165,7 +167,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const WindowsLargeInteger*, WindowsLong, TimerApcRoutine, WindowsVoidPtr, WaitableTimerReasonContextPtr, WindowsULong>(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay);
+    UnusedFunction(timer, dueTime, period, completionRoutine, argToCompletionRoutine, wakeContext, tolerableDelay);
 
     return false;
 
@@ -188,7 +190,7 @@ bool System::SetSystemWaitableTimer(WindowsHandle timer,
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const WindowsLargeInteger*, WindowsLong, TimerApcRoutine, WindowsVoidPtr, bool>(timer, dueTime, period, completionRoutine, argToCompletionRoutine, resume);
+    UnusedFunction(timer, dueTime, period, completionRoutine, argToCompletionRoutine, resume);
 
     return false;
 
@@ -203,7 +205,7 @@ System::WindowsHandle System::OpenSystemWaitableTimer(MutexStandardAccess desire
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<MutexStandardAccess, WaitableTimerSpecificAccess, bool, const TChar*>(desiredAccess, specificAccess, inheritHandle, timerName);
+    UnusedFunction(desiredAccess, specificAccess, inheritHandle, timerName);
 
     return nullptr;
 

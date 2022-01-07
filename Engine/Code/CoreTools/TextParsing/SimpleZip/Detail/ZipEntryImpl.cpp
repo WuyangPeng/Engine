@@ -5,8 +5,8 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/08 7:09)
-
+///	引擎版本：0.8.0.0 (2021/12/19 22:37)
+ 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ZipEntryImpl.h"
@@ -19,7 +19,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 #include <gsl/span>
 

@@ -5,19 +5,25 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/10/16 2:52)
+///	引擎版本：0.8.0.0 (2021/12/19 13:40)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_H
 #define CORE_TOOLS_TEXT_PARSING_H
 
-#include "BatchConversionCSV.h"
-#include "CSVContent.h"
-#include "CSVGenerate.h"
-#include "CSVHead.h"
-#include "CSVRow.h"
-#include "CSVTotalGenerate.h"
-#include "CSVTypeConversion.h"
-#include "ExcelConversionCSV.h"
+#include "CSV/BatchConversionCSV.h"
+#include "CSV/CSVContent.h"
+#include "CSV/CSVGenerate.h"
+#include "CSV/CSVHead.h"
+#include "CSV/CSVRow.h"
+#include "CSV/CSVTotalGenerate.h"
+#include "CSV/CSVTypeConversion.h"
+#include "CSV/DataTypeDescribe.h"
+#include "CSV/ExcelConversionCSV.h"
+#include "Json/JsonGenerate.h"
+#include "Json/JsonHead.h"
+#include "Json/JsonNode.h"
+#include "Json/JsonNodeContainer.h"
+#include "Json/JsonRow.h"
 #include "SimpleCSV/AppProperties.h"
 #include "SimpleCSV/Cell.h"
 #include "SimpleCSV/CellIterator.h"

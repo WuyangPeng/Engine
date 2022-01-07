@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/05 23:33)
+///	引擎版本：0.8.0.0 (2021/12/12 13:32)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::PostSystemThreadMessage(WindowsDWord threadID, WindowsMessages msg,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, WindowsMessages, WindowsWParam, WindowsLParam>(threadID, msg, wParam, lParam);
+    UnusedFunction(threadID, msg, wParam, lParam);
 
     return false;
 
@@ -42,7 +42,7 @@ bool System::SystemInvalidateRect(WindowsHWnd hwnd) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     return false;
 
@@ -60,7 +60,7 @@ bool System::UpdateSystemWindows(WindowsHWnd hwnd) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     return false;
 

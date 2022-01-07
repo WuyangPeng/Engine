@@ -27,19 +27,19 @@ Rendering::WireStateImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering, WireStateImpl)
 
 void Rendering::WireStateImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source->ReadBool();
+	m_Enabled = source.ReadBool();
 }
 
 void Rendering::WireStateImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(m_Enabled);
+	target.Write(m_Enabled);
 }
 
 int Rendering::WireStateImpl ::GetStreamingSize() const noexcept

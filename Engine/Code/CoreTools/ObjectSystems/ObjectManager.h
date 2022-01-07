@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 10:44)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 21:35)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_H
@@ -14,10 +14,11 @@
 
 #include "ObjectInterface.h"
 #include "CoreTools/Base/SingletonDetail.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 #include <string>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(ObjectManager);
@@ -38,7 +39,7 @@ namespace CoreTools
         };
 
     public:
-        explicit ObjectManager(ObjectManagerCreate objectManagerCreate);
+        explicit ObjectManager(MAYBE_UNUSED ObjectManagerCreate objectManagerCreate);
 
         static void Create();
         static void Destroy() noexcept;
@@ -51,7 +52,7 @@ namespace CoreTools
         using FactoryFunction = ObjectInterface::FactoryFunction;
 
     public:
-        [[nodiscard]] FactoryFunction Find(const std::string& name) const;
+        NODISCARD FactoryFunction Find(const std::string& name) const;
         void Insert(const std::string& name, FactoryFunction function);
         void Remove(const std::string& name);
 
@@ -59,7 +60,7 @@ namespace CoreTools
         using ObjectManagerUniquePtr = std::unique_ptr<ObjectManager>;
 
     private:
-        static ObjectManagerUniquePtr sm_ObjectManager;
+        static ObjectManagerUniquePtr objectManager;
         PackageType impl;
     };
 }

@@ -7,41 +7,39 @@
 #include "TestingHelper.h"
 #include "UnitTestHelper.h"
 
-#include "CoreTools/UnitTestSuite/Suite.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
+#include "CoreTools/UnitTestSuite/Suite.h"
 
 #include <iostream>
 
+using std::cerr;
 using std::cout;
 using std::endl;
-using std::cerr;
-using std::string;
 using std::make_shared;
+using std::string;
 
-CMainFunctionHelper::TestingHelper
-	::TestingHelper(int argc, char** argv)
-	:ParentType{ argc,argv }
+CMainFunctionHelper::TestingHelper ::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv }
 {
-	CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CMainFunctionHelper, TestingHelper)
 
-int CMainFunctionHelper::TestingHelper
-	::DoRun()
+int CMainFunctionHelper::TestingHelper ::DoRun()
 {
-	cout << "argc = " << GetArgc() << endl;
-	for (auto i = 0; i < GetArgc(); ++i)
-	{
-		cout << "argv = " << GetArgv(i) << endl;
-	}
+    cout << "argc = " << GetArgc() << endl;
+    for (auto i = 0; i < GetArgc(); ++i)
+    {
+        cout << "argv = " << GetArgv(i) << endl;
+    }
 
-	string suiteName{ "suiteName" };
-	CoreTools::Suite suite{ suiteName,CoreTools::OStreamShared{},false };
-	string testName{ "testName" };
-	UnitTestSharedPtr unitTest{ make_shared<UnitTestHelper>() };
+    string suiteName{ "suiteName" };
+    CoreTools::Suite suite{ suiteName, CoreTools::OStreamShared{ true }, false };
+    string testName{ "testName" };
+    UnitTestSharedPtr unitTest{ make_shared<UnitTestHelper>() };
 
-	AddTest(suiteName, suite, testName, unitTest);
+    AddTest(suiteName, suite, testName, unitTest);
 
-	return 0;
+    return 0;
 }

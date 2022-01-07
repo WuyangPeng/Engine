@@ -28,7 +28,7 @@ BSplineCurveFit<Real>::BSplineCurveFit (int dimension, int numSamples,
     mSampleData = sampleData;
     mDegree = degree;
     mNumControls = numControls;
-    mControlData = NEW1<Real>(mDimension*numControls);
+    mControlData = nullptr;  //  NEW1<Real>(mDimension*numControls);
 
     // The double-precision basis functions are used to help with the
     // numerical round-off errors.
@@ -44,13 +44,13 @@ BSplineCurveFit<Real>::BSplineCurveFit (int dimension, int numSamples,
     int i0, i1, i2, imin, imax, j;
 
     // Construct the matrix A^T*A.
-	auto ATAMat = NEW0 BandedMatrixSolve<Real>(mNumControls,mDegree + 1, mDegree + 1);
+    auto ATAMat = nullptr;  // NEW0 BandedMatrixSolve<Real>(mNumControls,mDegree + 1, mDegree + 1);
 
     for (i0 = 0; i0 < mNumControls; ++i0)
     {
         for (i1 = 0; i1 < i0; ++i1)
         {
-            (*ATAMat)(i0, i1) = (*ATAMat)(i1, i0);
+           // (*ATAMat)(i0, i1) = (*ATAMat)(i1, i0);
         }
 
 		auto i1Max = i0 + mDegree;
@@ -73,7 +73,7 @@ BSplineCurveFit<Real>::BSplineCurveFit (int dimension, int numSamples,
                     value += dB0*dB1;
                 }
             }
-            (*ATAMat)(i0, i1) = value;
+           // (*ATAMat)(i0, i1) = value;
         }
     }
 
@@ -134,13 +134,13 @@ BSplineCurveFit<Real>::BSplineCurveFit (int dimension, int numSamples,
     }
 
     //DELETE2(ATMat);
-    DELETE0(ATAMat);
+    //DELETE0(ATAMat);
 }
 
 template <typename Real>
 BSplineCurveFit<Real>::~BSplineCurveFit ()
 {
-    DELETE1(mControlData);
+    //DELETE1(mControlData);
 }
 
 template <typename Real>

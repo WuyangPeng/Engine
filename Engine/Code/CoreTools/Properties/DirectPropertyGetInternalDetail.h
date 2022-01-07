@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:36)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 18:10)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_DETAIL_H
@@ -28,11 +28,13 @@ CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::DirectPropert
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Value, typename Reference, typename Container>
 bool CoreTools::DirectPropertyGetInternal<Value, Reference, Container>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Value, typename Reference, typename Container>

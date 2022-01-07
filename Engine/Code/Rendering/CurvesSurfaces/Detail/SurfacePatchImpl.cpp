@@ -37,26 +37,26 @@ bool Rendering::SurfacePatchImpl ::IsValid() const noexcept
 }
 #endif  // OPEN_CLASS_INVARIANT
 
-void Rendering::SurfacePatchImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::SurfacePatchImpl ::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source->Read(m_UMin);
-    source->Read(m_UMax);
-    source->Read(m_VMin);
-    source->Read(m_VMax);
-    m_Rectangular = source->ReadBool();
+    source.Read(m_UMin);
+    source.Read(m_UMax);
+    source.Read(m_VMin);
+    source.Read(m_VMax);
+    m_Rectangular = source.ReadBool();
 }
 
-void Rendering::SurfacePatchImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::SurfacePatchImpl ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target->Write(m_UMin);
-    target->Write(m_UMax);
-    target->Write(m_VMin);
-    target->Write(m_VMax);
-    target->Write(m_Rectangular);
+    target.Write(m_UMin);
+    target.Write(m_UMax);
+    target.Write(m_VMin);
+    target.Write(m_VMax);
+    target.Write(m_Rectangular);
 }
 
 int Rendering::SurfacePatchImpl ::GetStreamingSize() const noexcept

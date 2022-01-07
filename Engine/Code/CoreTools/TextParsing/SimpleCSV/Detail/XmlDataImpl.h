@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/01 21:24)
+///	引擎版本：0.8.0.0 (2021/12/19 19:38)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_XML_DATA_IMPL_H

@@ -8,7 +8,7 @@
 #include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/MessageEvent/EventInterface.h"
 
 using std::make_shared;

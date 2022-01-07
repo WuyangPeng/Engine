@@ -66,7 +66,7 @@ bool CoreTools::CellReferenceTesting::RowTest()
     ASSERT_EQUAL(cellReference0.GetAddress(), "SF" + std::to_string(row));
 
     SimpleCSV::CellReference cellReference1{ cellReference0.GetAddress() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference1);
+    ASSERT_EQUAL(cellReference0, cellReference1);
 
     row = randomDistribution(randomEngine);
     cellReference0.SetRow(row);
@@ -88,10 +88,10 @@ void CoreTools::CellReferenceTesting::OneLetterColumnTest()
         ASSERT_EQUAL(cellReference0.GetAddress(), address + "100");
 
         SimpleCSV::CellReference cellReference1{ 100, cellReference0.GetColumn() };
-        ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference1);
+        ASSERT_EQUAL(cellReference0, cellReference1);
 
         SimpleCSV::CellReference cellReference2{ cellReference0.GetAddress() };
-        ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference2);
+        ASSERT_EQUAL(cellReference0, cellReference2);
 
         cellReference2.SetColumn(column + 1);
         ASSERT_EQUAL(cellReference2.GetColumn(), column + 1);
@@ -112,10 +112,10 @@ bool CoreTools::CellReferenceTesting::TwoLetterRowTest()
     ASSERT_EQUAL(cellReference0.GetAddress(), address + "105");
 
     SimpleCSV::CellReference cellReference1{ 105, cellReference0.GetColumn() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference1);
+    ASSERT_EQUAL(cellReference0, cellReference1);
 
     SimpleCSV::CellReference cellReference2{ cellReference0.GetAddress() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference2);
+    ASSERT_EQUAL(cellReference0, cellReference2);
 
     cellReference2.SetRowAndColumn(cellReference0.GetRow() + 1, cellReference0.GetColumn() + 1);
     ASSERT_EQUAL(cellReference2.GetColumn(), cellReference0.GetColumn() + 1);
@@ -139,10 +139,10 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
     ASSERT_EQUAL(cellReference0.GetAddress(), address + "1051");
 
     SimpleCSV::CellReference cellReference1{ 1051, cellReference0.GetColumn() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference1);
+    ASSERT_EQUAL(cellReference0, cellReference1);
 
     SimpleCSV::CellReference cellReference2{ cellReference0.GetAddress() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference2);
+    ASSERT_EQUAL(cellReference0, cellReference2);
 
     cellReference2.SetAddress("A1");
     ASSERT_EQUAL(cellReference2.GetColumn(), 1);
@@ -150,7 +150,7 @@ bool CoreTools::CellReferenceTesting::ThreeLetterRowTest()
     ASSERT_EQUAL(cellReference2.GetAddress(), "A1"s);
 
     cellReference2.SetAddress(cellReference0.GetAddress());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(cellReference0, cellReference2);
+    ASSERT_EQUAL(cellReference0, cellReference2);
 
     return true;
 }

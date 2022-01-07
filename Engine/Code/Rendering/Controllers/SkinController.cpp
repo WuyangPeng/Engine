@@ -235,7 +235,7 @@ int Rendering::SkinController
 	return size;
 }
 
-uint64_t Rendering::SkinController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::SkinController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -249,7 +249,7 @@ uint64_t Rendering::SkinController ::Register(const CoreTools::ObjectRegisterSha
 }
 
 void Rendering::SkinController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -263,7 +263,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -281,7 +281,7 @@ void Rendering::SkinController
 }
 
 void Rendering::SkinController
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

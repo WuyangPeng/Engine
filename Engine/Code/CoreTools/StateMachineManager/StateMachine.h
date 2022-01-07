@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 16:12)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
 #define CORE_TOOLS_STATE_MACHINE_STATE_MACHINE_H
@@ -34,15 +34,15 @@ namespace CoreTools
 
     public:
         template <typename EventType>
-        [[nodiscard]] StateType CallNoTransition(StateType state, const EventType& eventType) noexcept;
+        NODISCARD StateType CallNoTransition(StateType state, const EventType& eventType);
 
         template <typename EventType>
-        [[nodiscard]] StateType ProcessEvent(const EventType& eventType) noexcept;
+        NODISCARD StateType ProcessEvent(const EventType& eventType);
 
         template <typename EventType>
-        [[nodiscard]] StateType NoTransition(StateType state, const EventType& eventType) noexcept;
+        NODISCARD StateType NoTransition(StateType state, const EventType& eventType) noexcept;
 
-        [[nodiscard]] StateType GetStateType() const noexcept;
+        NODISCARD StateType GetStateType() const noexcept;
 
     protected:
         void SetStateType(StateType stateType) noexcept;

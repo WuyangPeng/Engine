@@ -1,14 +1,15 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:49)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "../Contract/Flags/ImplFlags.h"
 #include "EntityManager.h"
 #include "Detail/EntityManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
@@ -21,20 +22,20 @@ using std::make_unique;
 
 SINGLETON_GET_PTR_DEFINE(CoreTools, EntityManager);
 
-CoreTools::EntityManager::EntityManagerUniquePtr CoreTools::EntityManager::sm_EntityManager{};
+CoreTools::EntityManager::EntityManagerUniquePtr CoreTools::EntityManager::entityManager{};
 
 void CoreTools::EntityManager::Create()
 {
-    sm_EntityManager = make_unique<CoreTools::EntityManager>(EntityManagerCreate::Init);
+    entityManager = make_unique<CoreTools::EntityManager>(EntityManagerCreate::Init);
 }
 
 void CoreTools::EntityManager::Destroy() noexcept
 {
-    sm_EntityManager.reset();
+    entityManager.reset();
 }
 
-CoreTools::EntityManager::EntityManager([[maybe_unused]] EntityManagerCreate entityManagerCreate)
-    : impl{ 0  }
+CoreTools::EntityManager::EntityManager(MAYBE_UNUSED EntityManagerCreate entityManagerCreate)
+    : impl{ ImplCreateUseDefaultConstruction::Default }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -45,16 +46,12 @@ bool CoreTools::EntityManager::Register(const EntitySharedPtr& entity)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
 
-    
-
     return impl->Register(entity);
 }
 
 bool CoreTools::EntityManager::Unregister(uint64_t entityID)
 {
     SINGLETON_MUTEX_ENTER_MEMBER;
-
-    
 
     return impl->Unregister(entityID);
 }

@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/10 11:33)
+///	引擎版本：0.8.0.0 (2021/12/13 11:22)
 
 #ifndef SYSTEM_OPENGL_GL_31_EXTENSIONS_H
 #define SYSTEM_OPENGL_GL_31_EXTENSIONS_H
 
 #include "System/SystemDll.h"
 
-#include "System/Helper/GLExtensionsMacro.h" 
+#include "System/Helper/GLExtensionsMacro.h"
 #include "System/OpenGL/Fwd/OpenGLFlagsFwd.h"
 
 namespace System
@@ -34,7 +34,7 @@ namespace System
     SYSTEM_HIDDEN_DECLARE NODISCARD GLuint GLGetUniformBlockIndex(GLuint program, const GLchar* uniformBlockName) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformBlockiv(GLuint program, GLuint uniformBlockIndex, GLenum pname, GLint* params) noexcept;
     SYSTEM_HIDDEN_DECLARE void GLGetActiveUniformBlockName(GLuint program, GLuint uniformBlockIndex, GLsizei bufSize, GLsizei* length, GLchar* uniformBlockName) noexcept;
-    SYSTEM_HIDDEN_DECLARE void GLUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding) noexcept;   
+    SYSTEM_HIDDEN_DECLARE void GLUniformBlockBinding(GLuint program, GLuint uniformBlockIndex, GLuint uniformBlockBinding) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_GL_31_EXTENSIONS_H

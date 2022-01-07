@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:09)
+///	引擎版本：0.8.0.0 (2021/12/13 23:00)
 
 #include "System/SystemExport.h"
 
@@ -101,7 +101,7 @@ int64_t System::AndroidMotionEventGetDownTime(const AndroidInputEvent* motionEve
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0;
 
@@ -116,7 +116,7 @@ int64_t System::AndroidMotionEventGetEventTime(const AndroidInputEvent* motionEv
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0;
 
@@ -131,7 +131,7 @@ float System::AndroidMotionEventGetXOffset(const AndroidInputEvent* motionEvent)
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0.0f;
 
@@ -146,7 +146,7 @@ float System::AndroidMotionEventGetYOffset(const AndroidInputEvent* motionEvent)
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0.0f;
 
@@ -161,7 +161,7 @@ float System::AndroidMotionEventGetXPrecision(const AndroidInputEvent* motionEve
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0.0f;
 
@@ -176,7 +176,7 @@ float System::AndroidMotionEventGetYPrecision(const AndroidInputEvent* motionEve
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0.0f;
 
@@ -191,7 +191,7 @@ size_t System::AndroidMotionEventGetPointerCount(const AndroidInputEvent* motion
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 1;
 
@@ -206,7 +206,7 @@ int32_t System::AndroidMotionEventGetPointerID(const AndroidInputEvent* motionEv
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0;
 
@@ -221,7 +221,7 @@ System::AndroidMotionEventTool System::AndroidMotionEventGetToolType(const Andro
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<size_t>(pointerIndex);
+    UnusedFunction(pointerIndex);
 
     if (motionEvent != nullptr)
         return motionEvent->GetAndroidMotionEventToolType();
@@ -239,7 +239,7 @@ float System::AndroidMotionEventGetRawX(const AndroidInputEvent* motionEvent, si
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -254,7 +254,7 @@ float System::AndroidMotionEventGetRawY(const AndroidInputEvent* motionEvent, si
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -269,7 +269,7 @@ float System::AndroidMotionEventGetX(const AndroidInputEvent* motionEvent, size_
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -284,7 +284,7 @@ float System::AndroidMotionEventGetY(const AndroidInputEvent* motionEvent, size_
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -299,7 +299,7 @@ float System::AndroidMotionEventGetPressure(const AndroidInputEvent* motionEvent
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -314,7 +314,7 @@ float System::AndroidMotionEventGetSize(const AndroidInputEvent* motionEvent, si
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -329,7 +329,7 @@ float System::AndroidMotionEventGetTouchMajor(const AndroidInputEvent* motionEve
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -344,7 +344,7 @@ float System::AndroidMotionEventGetTouchMinor(const AndroidInputEvent* motionEve
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -359,7 +359,7 @@ float System::AndroidMotionEventGetToolMajor(const AndroidInputEvent* motionEven
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -374,7 +374,7 @@ float System::AndroidMotionEventGetToolMinor(const AndroidInputEvent* motionEven
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -389,7 +389,7 @@ float System::AndroidMotionEventGetOrientation(const AndroidInputEvent* motionEv
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, pointerIndex);
+    UnusedFunction(motionEvent, pointerIndex);
 
     return 0.0f;
 
@@ -404,7 +404,7 @@ float System::AndroidMotionEventGetAxisValue(const AndroidInputEvent* motionEven
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, AndroidMotionEventAxis, size_t>(motionEvent, axis, pointerIndex);
+    UnusedFunction(motionEvent, axis, pointerIndex);
 
     return 0.0f;
 
@@ -419,7 +419,7 @@ size_t System::AndroidMotionEventGetHistorySize(const AndroidInputEvent* motionE
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(motionEvent);
+    UnusedFunction(motionEvent);
 
     return 0;
 
@@ -434,7 +434,7 @@ int64_t System::AndroidMotionEventGetHistoricalEventTime(const AndroidInputEvent
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t>(motionEvent, historyIndex);
+    UnusedFunction(motionEvent, historyIndex);
 
     return 0;
 
@@ -449,7 +449,7 @@ float System::AndroidMotionEventGetHistoricalRawX(const AndroidInputEvent* motio
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -464,7 +464,7 @@ float System::AndroidMotionEventGetHistoricalRawY(const AndroidInputEvent* motio
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -479,7 +479,7 @@ float System::AndroidMotionEventGetHistoricalX(const AndroidInputEvent* motionEv
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -494,7 +494,7 @@ float System::AndroidMotionEventGetHistoricalY(const AndroidInputEvent* motionEv
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -509,7 +509,7 @@ float System::AndroidMotionEventGetHistoricalPressure(const AndroidInputEvent* m
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -524,7 +524,7 @@ float System::AndroidMotionEventGetHistoricalSize(const AndroidInputEvent* motio
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -539,7 +539,7 @@ float System::AndroidMotionEventGetHistoricalTouchMajor(const AndroidInputEvent*
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -554,7 +554,7 @@ float System::AndroidMotionEventGetHistoricalTouchMinor(const AndroidInputEvent*
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -569,7 +569,7 @@ float System::AndroidMotionEventGetHistoricalToolMajor(const AndroidInputEvent* 
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -584,7 +584,7 @@ float System::AndroidMotionEventGetHistoricalToolMinor(const AndroidInputEvent* 
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -599,7 +599,7 @@ float System::AndroidMotionEventGetHistoricalOrientation(const AndroidInputEvent
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, size_t, size_t>(motionEvent, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, pointerIndex, historyIndex);
 
     return 0.0f;
 
@@ -614,7 +614,7 @@ float System::AndroidMotionEventGetHistoricalAxisValue(const AndroidInputEvent* 
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*, AndroidMotionEventAxis, size_t, size_t>(motionEvent, axis, pointerIndex, historyIndex);
+    UnusedFunction(motionEvent, axis, pointerIndex, historyIndex);
 
     return 0.0f;
 

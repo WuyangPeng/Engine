@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 18:03)
 
 #ifndef CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_SIMPLE_PROPERTY_GET_EXTERNAL_H
@@ -30,11 +30,15 @@ namespace CoreTools
     public:
         explicit SimplePropertyGetExternal(const ValueType& value) noexcept;
 
+        ~SimplePropertyGetExternal() noexcept = default;
+        SimplePropertyGetExternal(const SimplePropertyGetExternal& rhs) noexcept = delete;
+        SimplePropertyGetExternal& operator=(const SimplePropertyGetExternal& rhs) noexcept = delete;
+        SimplePropertyGetExternal(SimplePropertyGetExternal&& rhs) noexcept = delete;
+        SimplePropertyGetExternal& operator=(SimplePropertyGetExternal&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator ConstReferenceType() const noexcept;
-
-        SimplePropertyGetExternal& operator=(const SimplePropertyGetExternal& rhs) = delete;
+        NODISCARD operator ConstReferenceType() const noexcept;
 
     private:
         const ValueType& m_Value;

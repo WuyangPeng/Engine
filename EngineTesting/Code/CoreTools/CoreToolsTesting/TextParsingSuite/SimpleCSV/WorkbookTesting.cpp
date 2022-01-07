@@ -172,7 +172,7 @@ void CoreTools::WorkbookTesting::SheetNamesTest()
         ASSERT_EQUAL(worksheet.GetName(), name);
     }
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(workbook.GetWorksheetNames(), workbook.GetSheetNames());
+    ASSERT_EQUAL(workbook.GetWorksheetNames(), workbook.GetSheetNames());
     ASSERT_TRUE(workbook.GetChartsheetNames().empty());
 }
 

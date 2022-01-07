@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/05 16:39)
+///	引擎版本：0.8.0.0 (2021/12/12 13:27)
 
 #include "System/SystemExport.h"
 
@@ -60,7 +60,7 @@ System::WindowsHDC System::GetSystemDC(WindowsHWnd hwnd) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     return nullptr;
 
@@ -78,25 +78,25 @@ bool System::ReleaseSystemDC(WindowsHWnd hwnd, WindowsHDC hdc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd, WindowsHDC>(hwnd, hdc);
+    UnusedFunction(hwnd, hdc);
 
     return 0;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int c, WindowsPointSize* pointSize) noexcept
+bool System::GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int character, WindowsPointSize* pointSize) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    if (::GetTextExtentPoint32(hdc, text, c, pointSize) != g_False)
+    if (::GetTextExtentPoint32(hdc, text, character, pointSize) != g_False)
         return true;
     else
         return false;
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, const TChar*, int, WindowsPointSize*>(hdc, text, c, pointSize);
+    UnusedFunction(hdc, text, character, pointSize);
 
     return false;
 
@@ -114,7 +114,7 @@ bool System::GetSystemTextMetrics(WindowsHDC hdc, WindowsTextMetric* metric) noe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC, WindowsTextMetric*>(hdc, metric);
+    UnusedFunction(hdc, metric);
 
     return false;
 

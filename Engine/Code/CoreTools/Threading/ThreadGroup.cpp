@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/02 11:29)
+///	引擎版本：0.8.0.0 (2021/12/18 12:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,6 +14,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 CoreTools::ThreadGroup::ThreadGroup(MAYBE_UNUSED DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
@@ -28,4 +29,9 @@ void CoreTools::ThreadGroup::AddThread(std::thread thread)
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     impl->AddThread(std::move(thread));
+}
+
+CoreTools::ThreadGroup CoreTools::ThreadGroup::Create()
+{
+    return ThreadGroup{ DisableNotThrow::Disable };
 }

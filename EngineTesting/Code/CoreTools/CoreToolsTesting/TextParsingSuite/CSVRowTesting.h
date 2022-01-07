@@ -10,7 +10,7 @@
 #ifndef CORE_TOOLS_TEXT_PARSING_SUITE_CSV_ROW_TESTING_H
 #define CORE_TOOLS_TEXT_PARSING_SUITE_CSV_ROW_TESTING_H
 
-#include "CoreTools/TextParsing/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/UnitTestSuite/UnitTest.h"
 
 #include <vector>

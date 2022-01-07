@@ -34,7 +34,7 @@ void CoreTools::SemaphoreTesting::MainTest()
 
 void CoreTools::SemaphoreTesting::CreateThread()
 {
-    ThreadGroup thread{ DisableNotThrow::Disable };
+    auto thread = ThreadGroup::Create();
 
     for (auto i = 0; i < threadSize; ++i)
     {

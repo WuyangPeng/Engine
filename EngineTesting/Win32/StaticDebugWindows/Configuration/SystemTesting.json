@@ -28,7 +28,7 @@
 
   "windowsMacroSuite": {
     "GetArraySizeTesting": 1,
-    "NullFunctionTesting": 1,
+    "UnusedFunctionTesting": 1,
     "MakeLanguageIDTesting": 1000,
     "MakeIntreSourceTesting": 1,
     "MakeLanguageCIDTesting": 1000,

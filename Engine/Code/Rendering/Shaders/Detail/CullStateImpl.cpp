@@ -53,21 +53,21 @@ void Rendering::CullStateImpl ::SetCCWOrder(bool cCWOrder) noexcept
 	m_CCWOrder = cCWOrder;
 }
 
-void Rendering::CullStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CullStateImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source->ReadBool();
-	m_CCWOrder = source->ReadBool();
+	m_Enabled = source.ReadBool();
+	m_CCWOrder = source.ReadBool();
 }
 
 void Rendering::CullStateImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(m_Enabled);
-	target->Write(m_CCWOrder);
+	target.Write(m_Enabled);
+	target.Write(m_CCWOrder);
 }
 
 int Rendering::CullStateImpl ::GetStreamingSize() const noexcept

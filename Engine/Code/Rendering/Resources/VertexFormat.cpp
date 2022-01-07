@@ -207,7 +207,7 @@ int Rendering::VertexFormat
 }
 
 uint64_t Rendering::VertexFormat
-	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+	::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -215,7 +215,7 @@ uint64_t Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Save (const CoreTools::BufferTargetSharedPtr& target) const
+	::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -229,7 +229,7 @@ void Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Link (const CoreTools::ObjectLinkSharedPtr& source)
+	::Link (CoreTools::ObjectLink& source)
 {	
 	;
 
@@ -245,7 +245,7 @@ void Rendering::VertexFormat
 }
 
 void Rendering::VertexFormat
-	::Load (const CoreTools::BufferSourceSharedPtr& source)
+	::Load (CoreTools::BufferSource& source)
 {
 	;
 

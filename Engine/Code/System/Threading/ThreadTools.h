@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 14:43)
+///	引擎版本：0.8.0.0 (2021/12/12 18:10)
 
 #ifndef SYSTEM_THREADING_THREAD_TOOLS_H
 #define SYSTEM_THREADING_THREAD_TOOLS_H
@@ -22,7 +22,10 @@ namespace System
 {
     // 线程辅助工具。
 
-    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE OpenSystemThread(ThreadStandardAccess standardDesiredAccess, ThreadSpecificAccess specificDesiredAccess, bool inheritHandle, WindowsDWord threadID) noexcept;
+    MAYBE_NULLPTR ThreadHandle SYSTEM_DEFAULT_DECLARE OpenSystemThread(ThreadStandardAccess standardDesiredAccess,
+                                                                       ThreadSpecificAccess specificDesiredAccess,
+                                                                       bool inheritHandle,
+                                                                       WindowsDWord threadID) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) noexcept;
     NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE GetSystemThreadID(ThreadHandle thread) noexcept;
@@ -30,12 +33,20 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePriorityBoost) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemThreadPriorityBoost(ThreadHandle thread, bool* disablePriorityBoost) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE OpenSystemThreadToken(ThreadHandle thread, TokenStandardAccess standardAccess, TokenSpecificAccess specificAccess, bool openAsSelf, WindowsHandlePtr tokenHandle) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE OpenSystemThreadToken(ThreadHandle thread,
+                                                                TokenStandardAccess standardAccess,
+                                                                TokenSpecificAccess specificAccess,
+                                                                bool openAsSelf,
+                                                                WindowsHandlePtr tokenHandle) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemThreadToken(ThreadHandlePtr thread, WindowsHandle tokenHandle) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseTokenHandle(WindowsHandle tokenHandle) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE ImpersonateThreadSelf(SecurityImpersonationLevel securityImpersonationLevel) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemThreadTimes(ThreadHandle thread, FileTimePtr creationTime, FileTimePtr exitTime, FileTimePtr kernelTime, FileTimePtr userTime) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemThreadTimes(ThreadHandle thread,
+                                                               FileTimePtr creationTime,
+                                                               FileTimePtr exitTime,
+                                                               FileTimePtr kernelTime,
+                                                               FileTimePtr userTime) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_THREAD_TOOLS_H

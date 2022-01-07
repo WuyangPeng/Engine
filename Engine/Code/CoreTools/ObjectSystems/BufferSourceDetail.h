@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 13:07)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 23:13)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_DETAIL_H
@@ -20,37 +20,28 @@
 template <typename T>
 T CoreTools::BufferSource::ReadBoolContainerWithNumber(int elementsNumber)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
 
-    
+    T result{};
 
-    if (0 < elementsNumber)
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            value = ReadBool();
-        }
-
-        return result;
+        result.emplace_back(ReadBool());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 T CoreTools::BufferSource::ReadBoolContainerWithoutNumber()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -60,7 +51,7 @@ T CoreTools::BufferSource::ReadBoolContainerWithoutNumber()
 template <int Size>
 std::array<bool, Size> CoreTools::BufferSource::ReadBoolContainer()
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     return ReadBoolContainerWithNumber<std::array<bool, Size>>(Size);
 }
@@ -68,11 +59,10 @@ std::array<bool, Size> CoreTools::BufferSource::ReadBoolContainer()
 template <typename T>
 void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -83,11 +73,10 @@ void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, T& container
 template <typename T>
 void CoreTools::BufferSource::ReadBoolContainer(T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_same_v<ValueType, bool>, "ValueType is not bool");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -97,7 +86,7 @@ void CoreTools::BufferSource::ReadBoolContainer(T& container)
 template <int Size>
 void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     ReadBoolContainer(Size, container);
 }
@@ -105,37 +94,28 @@ void CoreTools::BufferSource::ReadContainer(std::array<bool, Size>& container)
 template <typename T>
 T CoreTools::BufferSource::ReadStringContainerWithNumber(int elementsNumber)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    
+    T result{};
 
-    if (0 < elementsNumber)
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            value = ReadString();
-        }
-
-        return result;
+        result.emplace_back(ReadString());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 T CoreTools::BufferSource::ReadStringContainerWithoutNumber()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -145,7 +125,7 @@ T CoreTools::BufferSource::ReadStringContainerWithoutNumber()
 template <int Size>
 std::array<std::string, Size> CoreTools::BufferSource::ReadStringContainer()
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     std::array<std::string, Size> result{};
 
@@ -160,11 +140,10 @@ std::array<std::string, Size> CoreTools::BufferSource::ReadStringContainer()
 template <typename T>
 void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -179,8 +158,6 @@ void CoreTools::BufferSource::ReadStringContainer(T& container)
 
     static_assert(std::is_same_v<ValueType, std::string>, "ValueType is not string");
 
-    
-
     const auto elementsNumber = GetElementsNumber();
 
     ReadStringContainer(elementsNumber, container);
@@ -189,7 +166,7 @@ void CoreTools::BufferSource::ReadStringContainer(T& container)
 template <int Size>
 void CoreTools::BufferSource::ReadContainer(std::array<std::string, Size>& container)
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     ReadStringContainer(Size, container);
 }
@@ -197,8 +174,9 @@ void CoreTools::BufferSource::ReadContainer(std::array<std::string, Size>& conta
 template <typename T>
 T CoreTools::BufferSource::Read()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
-    
 
     T datum{};
 
@@ -210,41 +188,33 @@ T CoreTools::BufferSource::Read()
 template <typename T>
 T CoreTools::BufferSource::ReadContainerWithNumber(int elementsNumber)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
 
-    
+    T result{};
 
-    if (0 < elementsNumber)
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            value = Read<ValueType>();
-        }
-
-        return result;
+        result.emplace_back(Read<ValueType>());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 std::vector<T> CoreTools::BufferSource::ReadVectorWithNumber(int elementsNumber)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     if (0 < elementsNumber)
     {
         std::vector<T> result(elementsNumber);
 
-        m_Source.Read(CoreTools::GetStreamSize<T>(), elementsNumber, result.data());
+        source.Read(CoreTools::GetStreamSize<T>(), elementsNumber, result.data());
 
         return result;
     }
@@ -257,11 +227,10 @@ std::vector<T> CoreTools::BufferSource::ReadVectorWithNumber(int elementsNumber)
 template <typename T>
 T CoreTools::BufferSource::ReadContainerWithoutNumber()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -271,9 +240,9 @@ T CoreTools::BufferSource::ReadContainerWithoutNumber()
 template <typename T>
 std::vector<T> CoreTools::BufferSource::ReadVectorWithoutNumber()
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -283,13 +252,13 @@ std::vector<T> CoreTools::BufferSource::ReadVectorWithoutNumber()
 template <typename T, int Size>
 std::array<T, Size> CoreTools::BufferSource::ReadContainer()
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     std::array<T, Size> result{};
 
-    m_Source.Read(CoreTools::GetStreamSize<T>(), Size, result.data());
+    source.Read(CoreTools::GetStreamSize<T>(), Size, result.data());
 
     return result;
 }
@@ -297,21 +266,20 @@ std::array<T, Size> CoreTools::BufferSource::ReadContainer()
 template <typename T>
 void CoreTools::BufferSource::Read(T& datum)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
-    
-
-    m_Source.Read(CORE_TOOLS_STREAM_SIZE(datum), &datum);
+    source.Read(CORE_TOOLS_STREAM_SIZE(datum), &datum);
 }
 
 template <typename T>
 void CoreTools::BufferSource::ReadContainer(int elementsNumber, T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_arithmetic_v<ValueType>, "value_type is not arithmetic");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -322,9 +290,9 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, T& container)
 template <typename T>
 void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::set<T>& container)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -335,24 +303,23 @@ void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::set<T>& con
 template <typename T>
 void CoreTools::BufferSource::ReadContainer(int elementsNumber, std::vector<T>& container)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     if (0 < elementsNumber)
     {
-        m_Source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
+        source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
     }
 }
 
 template <typename T>
 void CoreTools::BufferSource::ReadContainer(T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_arithmetic_v<ValueType>, "ValueType is not arithmetic");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -362,9 +329,9 @@ void CoreTools::BufferSource::ReadContainer(T& container)
 template <typename T, int Size>
 void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     ReadContainer(Size, container);
 }
@@ -372,13 +339,13 @@ void CoreTools::BufferSource::ReadContainer(std::array<T, Size>& container)
 template <typename T>
 T CoreTools::BufferSource::ReadEnum()
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     T datum{};
 
-    m_Source.Read(CoreTools::GetStreamSize<T>(), &datum);
+    source.Read(CoreTools::GetStreamSize<T>(), &datum);
 
     return datum;
 }
@@ -386,41 +353,33 @@ T CoreTools::BufferSource::ReadEnum()
 template <typename T>
 T CoreTools::BufferSource::ReadEnumContainerWithNumber(int elementsNumber)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
 
-    
+    T result{};
 
-    if (0 < elementsNumber)
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            value = ReadEnum<ValueType>();
-        }
-
-        return result;
+        result.emplace_back(ReadEnum<ValueType>());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithNumber(int elementsNumber)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     if (0 < elementsNumber)
     {
         std::vector<T> result(elementsNumber);
 
-        m_Source.Read(CoreTools::GetStreamSize<T>(), elementsNumber, result.data());
+        source.Read(CoreTools::GetStreamSize<T>(), elementsNumber, result.data());
 
         return result;
     }
@@ -433,11 +392,10 @@ std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithNumber(int elementsNum
 template <typename T>
 T CoreTools::BufferSource::ReadEnumContainerWithoutNumber()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -447,9 +405,9 @@ T CoreTools::BufferSource::ReadEnumContainerWithoutNumber()
 template <typename T>
 std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithoutNumber()
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -459,13 +417,13 @@ std::vector<T> CoreTools::BufferSource::ReadEnumVectorWithoutNumber()
 template <typename T, int Size>
 std::array<T, Size> CoreTools::BufferSource::ReadEnumContainer()
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     std::array<T, Size> result{};
 
-    m_Source.Read(CoreTools::GetStreamSize<T>(), Size, result.data());
+    source.Read(CoreTools::GetStreamSize<T>(), Size, result.data());
 
     return result;
 }
@@ -473,21 +431,21 @@ std::array<T, Size> CoreTools::BufferSource::ReadEnumContainer()
 template <typename T>
 void CoreTools::BufferSource::ReadEnum(T& datum)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    
-
-    m_Source.Read(CoreTools::GetStreamSize(datum), &datum);
+    source.Read(CoreTools::GetStreamSize(datum), &datum);
 }
 
 template <typename T>
 void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
 
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -498,9 +456,9 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, T& container
 template <typename T>
 void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::set<T>& container)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -511,24 +469,23 @@ void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::set<T>&
 template <typename T>
 void CoreTools::BufferSource::ReadEnumContainer(int elementsNumber, std::vector<T>& container)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     if (0 < elementsNumber)
     {
-        m_Source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
+        source.Read(CORE_TOOLS_STREAM_SIZE(elementsNumber), elementsNumber, container.data());
     }
 }
 
 template <typename T>
 void CoreTools::BufferSource::ReadEnumContainer(T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_enum_v<ValueType>, "ValueType is not enum");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -538,9 +495,9 @@ void CoreTools::BufferSource::ReadEnumContainer(T& container)
 template <typename T, int Size>
 void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     ReadEnumContainer(Size, container);
 }
@@ -548,7 +505,7 @@ void CoreTools::BufferSource::ReadEnumContainer(std::array<T, Size>& container)
 template <typename T>
 T CoreTools::BufferSource::ReadAggregate()
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     T datum{};
 
@@ -560,29 +517,24 @@ T CoreTools::BufferSource::ReadAggregate()
 template <typename T>
 T CoreTools::BufferSource::ReadAggregateContainerWithNumber(int elementsNumber)
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if (0 < elementsNumber)
+    using ValueType = typename T::value_type;
+
+    T result{};
+
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            ReadAggregate(value);
-        }
-
-        return result;
+        result.emplace_back(ReadAggregate<ValueType>());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 T CoreTools::BufferSource::ReadAggregateContainerWithoutNumber()
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -592,7 +544,7 @@ T CoreTools::BufferSource::ReadAggregateContainerWithoutNumber()
 template <typename T, int Size>
 std::array<T, Size> CoreTools::BufferSource::ReadAggregateContainer()
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     return ReadAggregateContainerWithNumber<std::array<T, Size>>(Size);
 }
@@ -600,9 +552,9 @@ std::array<T, Size> CoreTools::BufferSource::ReadAggregateContainer()
 template <typename T>
 void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, T& container)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    using ValueType = typename T::value_type;
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -613,9 +565,9 @@ void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, T& cont
 template <typename T>
 void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, std::set<T>& container)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    using ValueType = typename T::value_type;
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -626,7 +578,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(int elementsNumber, std::se
 template <typename T>
 void CoreTools::BufferSource::ReadAggregateContainer(T& container)
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -636,7 +588,7 @@ void CoreTools::BufferSource::ReadAggregateContainer(T& container)
 template <typename T, int Size>
 void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& container)
 {
-    
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     ReadAggregateContainer(Size, container);
 }
@@ -644,9 +596,9 @@ void CoreTools::BufferSource::ReadAggregateContainer(std::array<T, Size>& contai
 template <typename T>
 T CoreTools::BufferSource::ReadObjectAssociated()
 {
-    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
-    
+    static_assert(std::is_base_of_v<ObjectInterface, T::ObjectType>, "T::ObjectType is not base of ObjectInterface");
 
     T datum{};
 
@@ -658,37 +610,28 @@ T CoreTools::BufferSource::ReadObjectAssociated()
 template <typename T>
 T CoreTools::BufferSource::ReadObjectAssociatedContainerWithNumber(int elementsNumber)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    
+    T result{};
 
-    if (0 < elementsNumber)
+    for (auto i = 0; i < elementsNumber; ++i)
     {
-        T result(elementsNumber);
-
-        for (auto& value : result)
-        {
-            ReadObjectAssociated(value);
-        }
-
-        return result;
+        result.emplace_back(ReadObjectAssociated<ValueType>());
     }
-    else
-    {
-        return T{};
-    }
+
+    return result;
 }
 
 template <typename T>
 T CoreTools::BufferSource::ReadObjectAssociatedContainerWithoutNumber()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -698,11 +641,10 @@ T CoreTools::BufferSource::ReadObjectAssociatedContainerWithoutNumber()
 template <typename T, int Size>
 std::array<T, Size> CoreTools::BufferSource::ReadObjectAssociatedContainer()
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     return ReadObjectAssociatedContainerWithNumber<std::array<T, Size>>(Size);
 }
@@ -710,24 +652,22 @@ std::array<T, Size> CoreTools::BufferSource::ReadObjectAssociatedContainer()
 template <typename T>
 void CoreTools::BufferSource::ReadObjectAssociated(T& datum)
 {
-    using ValueType = typename T::value_type;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
+    using ValueType = typename T::value_type;
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
 
-    
-
     datum.m_Object.reset();
-    m_Source.Read(CORE_TOOLS_STREAM_SIZE(datum.m_Associated), &datum.m_Associated);
+    source.Read(CORE_TOOLS_STREAM_SIZE(datum.m_Associated), &datum.m_Associated);
 }
 
 template <typename T>
 void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -738,11 +678,10 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
 template <typename T>
 void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, std::set<T>& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
@@ -753,11 +692,10 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(int elementsNumber, 
 template <typename T>
 void CoreTools::BufferSource::ReadObjectAssociatedContainer(T& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     const auto elementsNumber = GetElementsNumber();
 
@@ -767,11 +705,10 @@ void CoreTools::BufferSource::ReadObjectAssociatedContainer(T& container)
 template <typename T, int Size>
 void CoreTools::BufferSource::ReadObjectAssociatedContainer(std::array<T, Size>& container)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     using ValueType = typename T::value_type;
-
     static_assert(std::is_base_of_v<ObjectInterface, ValueType::ObjectType>, "ValueType::ObjectType is not base of ObjectInterface");
-
-    
 
     ReadObjectAssociatedContainer(Size, container);
 }

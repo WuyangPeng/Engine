@@ -20,3 +20,13 @@ BookExperience::EffectiveModernCpp::Chapter5::Terms23::Terms23Example::Terms23Ex
 }
 
 CLASS_INVARIANT_STUB_DEFINE(BookExperience::EffectiveModernCpp::Chapter5::Terms23, Terms23Example)
+
+void BookExperience::EffectiveModernCpp::Chapter5::Terms23::Terms23Example::LogExample() const
+{
+    EFFECTIVE_MODERN_CPP_CLASS_IS_VALID_CONST_9;
+
+    Example0::Widget w;
+
+    LogAndProcess(w);  // 调用时传入左值。
+    LogAndProcess(std::move(w));  // 调用时传入右值
+}

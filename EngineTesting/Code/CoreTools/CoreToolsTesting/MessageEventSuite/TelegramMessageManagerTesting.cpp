@@ -29,7 +29,7 @@ void CoreTools::TelegramMessageManagerTesting ::AllEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 1);
 
-    CallbackParameters callbackParameters{};
+    CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, 10);
 
     Telegram<> telegram{ 1, 3, 2, callbackParameters };
@@ -64,7 +64,7 @@ void CoreTools::TelegramMessageManagerTesting ::SpecifiedEventTest()
 
     ASSERT_EQUAL(entity->GetValue(), 1);
 
-    CallbackParameters callbackParameters{};
+    CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, 10);
 
     Telegram<> firstTelegram{ 1, entity->GetEntityID(), 3, 2, callbackParameters };

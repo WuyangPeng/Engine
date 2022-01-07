@@ -8,7 +8,7 @@
 #define MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_VOLUME_DETAIL_H
 
 #include "BSplineVolume.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
@@ -31,7 +31,7 @@ BSplineVolume<Real>::BSplineVolume (int numUCtrlPoints, int numVCtrlPoints, int 
     MATHEMATICS_ASSERTION_0(numWCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= wDegree && wDegree <= numWCtrlPoints - 1,  "Invalid input\n");
 
-    mCtrlPoint = NEW3<Vector3D<Real> >(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints);
+    mCtrlPoint = nullptr;  // NEW3<Vector3D<Real> >(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints);
     memset(mCtrlPoint[0][0], 0, numUCtrlPoints*numVCtrlPoints*numWCtrlPoints* sizeof(Vector3D<Real>));
 
     mBasis[0].Create(numUCtrlPoints, uDegree, true);

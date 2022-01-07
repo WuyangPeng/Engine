@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:26)
+///	引擎版本：0.8.0.0 (2021/12/13 22:56)
 
 #ifndef SYSTEM_ANDROID_ANDROID_LOOPER_H
 #define SYSTEM_ANDROID_ANDROID_LOOPER_H
@@ -26,7 +26,12 @@ namespace System
     NODISCARD AndroidLooperEvent SYSTEM_DEFAULT_DECLARE AndroidLooperPollOnce(int32_t timeoutMillis, int32_t* outFd, int32_t* outEvents, void** outData) noexcept;
     NODISCARD AndroidLooperEvent SYSTEM_DEFAULT_DECLARE AndroidLooperPollAll(int32_t timeoutMillis, int32_t* outFd, int32_t* outEvents, void** outData) noexcept;
     void SYSTEM_DEFAULT_DECLARE AndroidLooperWake(AndroidLooper* looper) noexcept;
-    NODISCARD int32_t SYSTEM_DEFAULT_DECLARE AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperID ident, AndroidLooperEvent events, AndroidLooperCallbackFunc callback, void* data) noexcept;
+    NODISCARD int32_t SYSTEM_DEFAULT_DECLARE AndroidLooperAddFd(AndroidLooper* looper,
+                                                                int32_t fd,
+                                                                LooperID ident,
+                                                                AndroidLooperEvent events,
+                                                                AndroidLooperCallbackFunc callback,
+                                                                void* data) noexcept;
     NODISCARD int32_t SYSTEM_DEFAULT_DECLARE AndroidLooperRemoveFd(AndroidLooper* looper, int32_t fd) noexcept;
 }
 

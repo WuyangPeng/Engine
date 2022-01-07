@@ -32,6 +32,8 @@ namespace BookExperience
 
                 public:
                     Terms23Example() noexcept;
+
+                    void LogExample() const;
                 };
             }
         }

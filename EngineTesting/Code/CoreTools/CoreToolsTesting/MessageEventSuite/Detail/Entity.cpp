@@ -6,19 +6,19 @@
 
 #include "Entity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::Entity ::Entity()
-    : ParentType{}, m_Value{ 0 }
+    : ParentType{ DisableNotThrow::Disable }, m_Value{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 #include STSTEM_WARNING_POP
 
 CoreTools::Entity ::Entity(int value)
-    : ParentType{}, m_Value{ value }
+    : ParentType{ DisableNotThrow::Disable }, m_Value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

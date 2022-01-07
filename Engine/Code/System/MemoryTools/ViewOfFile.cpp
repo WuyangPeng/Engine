@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 20:19)
+///	引擎版本：0.8.0.0 (2021/12/13 14:46)
 
 #include "System/SystemExport.h"
 
@@ -17,12 +17,12 @@
 #include "System/Windows/WindowsSystem.h"
 
 System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
-                                                     MemoryProtect protect,
-                                                     FileMapProtection otherProtect,
-                                                     WindowsDWord maximumSizeHigh,
-                                                     WindowsDWord maximumSizeLow,
-                                                     const wchar_t* name,
-                                                     bool* isExists) noexcept
+                                                      MemoryProtect protect,
+                                                      FileMapProtection otherProtect,
+                                                      WindowsDWord maximumSizeHigh,
+                                                      WindowsDWord maximumSizeLow,
+                                                      const wchar_t* name,
+                                                      bool* isExists) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -42,7 +42,7 @@ System::WindowsHandle System::CreateSystemFileMapping(WindowsHandle file,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, MemoryProtect, FileMapProtection, WindowsDWord, WindowsDWord, const wchar_t*, bool*>(file, protect, otherProtect, maximumSizeHigh, maximumSizeLow, name, isExists);
+    UnusedFunction(file, protect, otherProtect, maximumSizeHigh, maximumSizeLow, name, isExists);
 
     return nullptr;
 
@@ -57,7 +57,7 @@ System::WindowsHandle System::OpenSystemFileMapping(FileMapDesiredAccess desired
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<FileMapDesiredAccess, bool, const wchar_t*>(desiredAccess, inheritHandle, name);
+    UnusedFunction(desiredAccess, inheritHandle, name);
 
     return nullptr;
 
@@ -72,7 +72,7 @@ System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObje
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, FileMapDesiredAccess, WindowsDWord, WindowsDWord, WindowsSize>(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap);
+    UnusedFunction(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap);
 
     return nullptr;
 
@@ -80,11 +80,11 @@ System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObje
 }
 
 System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObject,
-                                                  FileMapDesiredAccess desiredAccess,
-                                                  WindowsDWord maximumSizeHigh,
-                                                  WindowsDWord maximumSizeLow,
-                                                  WindowsSize numberOfBytesToMap,
-                                                  WindowsVoidPtr baseAddress) noexcept
+                                                   FileMapDesiredAccess desiredAccess,
+                                                   WindowsDWord maximumSizeHigh,
+                                                   WindowsDWord maximumSizeLow,
+                                                   WindowsSize numberOfBytesToMap,
+                                                   WindowsVoidPtr baseAddress) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -92,7 +92,7 @@ System::WindowsVoidPtr System::MapSystemViewOfFile(WindowsHandle fileMappingObje
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, FileMapDesiredAccess, WindowsDWord, WindowsDWord, WindowsSize, WindowsVoidPtr>(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap, baseAddress);
+    UnusedFunction(fileMappingObject, desiredAccess, maximumSizeHigh, maximumSizeLow, numberOfBytesToMap, baseAddress);
 
     return nullptr;
 
@@ -110,7 +110,7 @@ bool System::FlushSystemViewOfFile(WindowsVoidPtr baseAddress, WindowsSize numbe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr, WindowsSize>(baseAddress, numberOfBytesToFlush);
+    UnusedFunction(baseAddress, numberOfBytesToFlush);
 
     return false;
 
@@ -128,7 +128,7 @@ bool System::UnmapSystemViewOfFile(WindowsVoidPtr baseAddress) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsVoidPtr>(baseAddress);
+    UnusedFunction(baseAddress);
 
     return false;
 
@@ -146,7 +146,7 @@ bool System::CloseFileMapping(WindowsHandle fileMappingHandle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(fileMappingHandle);
+    UnusedFunction(fileMappingHandle);
 
     return false;
 

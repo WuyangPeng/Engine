@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/25 22:56)
+///	引擎版本：0.8.0.0 (2021/12/13 11:36)
 
 #ifndef SYSTEM_WINDOWS_OPENGL_WGL_PROTOTYPES_H
 #define SYSTEM_WINDOWS_OPENGL_WGL_PROTOTYPES_H

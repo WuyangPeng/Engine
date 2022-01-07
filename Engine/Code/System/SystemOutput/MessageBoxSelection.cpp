@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/22 11:29)
+///	引擎版本：0.8.0.0 (2021/12/12 21:07)
 
 #include "System/SystemExport.h"
 
@@ -17,11 +17,11 @@
 
 namespace System
 {
-    static constexpr MessageBoxFlagsData defaultMessageBoxFlagsData{ MessageBoxType::YesNoCancel,
-                                                                     MessageBoxIcon::Error,
-                                                                     MessageBoxDefault::Button1,
-                                                                     MessageBoxMode::ApplModal,
-                                                                     MessageBoxMisc::TopMost };
+    constexpr MessageBoxFlagsData defaultMessageBoxFlagsData{ MessageBoxType::YesNoCancel,
+                                                              MessageBoxIcon::Error,
+                                                              MessageBoxDefault::Button1,
+                                                              MessageBoxMode::ApplModal,
+                                                              MessageBoxMisc::TopMost };
 }
 
 System::DialogBoxCommand System::MessageBoxSelectionWithChar(const char* text, const char* caption) noexcept
@@ -34,7 +34,7 @@ System::DialogBoxCommand System::MessageBoxSelectionWithChar(const char* text, c
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*, const char*>(text, caption);
+    UnusedFunction(text, caption);
 
     return DialogBoxCommand::PlatformUnknown;
 
@@ -51,7 +51,7 @@ System::DialogBoxCommand System::MessageBoxSelectionWithWChar(const wchar_t* tex
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const wchar_t*, const wchar_t*>(text, caption);
+    UnusedFunction(text, caption);
 
     return DialogBoxCommand::PlatformUnknown;
 
@@ -76,7 +76,7 @@ System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd, const TChar*, const TChar*, MessageBoxFlagsData>(hwnd, text, caption, flagsData);
+    UnusedFunction(hwnd, text, caption, flagsData);
 
     return DialogBoxCommand::PlatformUnknown;
 
@@ -97,7 +97,7 @@ System::DialogBoxCommand System::MessageBoxSelection(WindowsHWnd hwnd,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd, const TChar*, const TChar*, MessageBoxFlagsData, LanguageIDData>(hwnd, text, caption, flagsData, languageIDData);
+    UnusedFunction(hwnd, text, caption, flagsData, languageIDData);
 
     return DialogBoxCommand::PlatformUnknown;
 

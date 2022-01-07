@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/09 15:54)
+///	引擎版本：0.8.0.0 (2021/12/20 22:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,14 +43,14 @@ CoreTools::SimpleCSV::CellIterator CoreTools::SimpleCSV::CellIterator::operator+
     return iter;
 }
 
-CoreTools::SimpleCSV::CellIterator::ReferenceType CoreTools::SimpleCSV::CellIterator::operator*()
+CoreTools::SimpleCSV::CellIterator::ReferenceType CoreTools::SimpleCSV::CellIterator::operator*() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return **impl;
 }
 
-CoreTools::SimpleCSV::CellIterator::PointerType CoreTools::SimpleCSV::CellIterator::operator->()
+CoreTools::SimpleCSV::CellIterator::PointerType CoreTools::SimpleCSV::CellIterator::operator->() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 

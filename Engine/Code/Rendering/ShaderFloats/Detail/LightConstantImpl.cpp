@@ -48,7 +48,7 @@ const Rendering::ConstLightSharedPtr Rendering::LightConstantImpl
 }
 
 void Rendering::LightConstantImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
@@ -56,7 +56,7 @@ void Rendering::LightConstantImpl
 }
 
 void Rendering::LightConstantImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
@@ -115,14 +115,14 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::LightConstantImpl
 		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::LightConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::LightConstantImpl ::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
     //	source.ResolveObjectSharedPtrLink(m_Light);
 }
 
-void Rendering::LightConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+void Rendering::LightConstantImpl ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

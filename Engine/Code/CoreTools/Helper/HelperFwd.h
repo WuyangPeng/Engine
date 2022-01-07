@@ -21,7 +21,6 @@
 #include "LogMacro.h"
 #include "MainFunctionMacro.h"
 #include "MemberFunctionMacro.h"
-#include "MemoryMacro.h"
 #include "ModuleClassInvariantMacro.h"
 #include "ModuleCustomAssertMacro.h"
 #include "NameMacro.h"

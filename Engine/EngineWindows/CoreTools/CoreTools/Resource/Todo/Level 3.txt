@@ -1,5 +1,10 @@
 TODO Level 3
  
-0.7.2.5
+0.8.0.0
 
- 
+1.  （TextParsing）实现json配置自动化代码和解析json功能。 
+2.  （TextParsing）json解析增加map类型。
+3.  （TextParsing）json转换成枚举：实现json配置自动化代码转换成枚举的功能。
+4.  （TextParsing）xml解析：实现xml配置自动化代码和解析xml功能。
+5.  （TextParsing）ini解析：实现ini配置自动化代码和解析ini功能。
+6.  （TextParsing）info解析：实现info配置自动化代码和解析info功能。

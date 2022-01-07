@@ -31,7 +31,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     if (outNumCtrlPoints > numCtrlPoints)
     {
         outNumCtrlPoints = numCtrlPoints;
-        outCtrlPoints = NEW1<TVector>(outNumCtrlPoints);
+        outCtrlPoints = nullptr;  // NEW1<TVector>(outNumCtrlPoints);
         memcpy(outCtrlPoints, ctrlPoints, numCtrlPoints*sizeof(TVector));
         return;
     }
@@ -41,7 +41,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     }
 
     // Allocate output control points and set all to the zero vector.
-    outCtrlPoints = NEW1<TVector>(outNumCtrlPoints);
+    outCtrlPoints = nullptr;  // NEW1<TVector>(outNumCtrlPoints);
 
     // Set up basis function parameters.  Function 0 corresponds to the
     // output curve.  Function 1 corresponds to the input curve.
@@ -52,7 +52,7 @@ BSplineReduction<Real,TVector>::BSplineReduction (int numCtrlPoints,const TVecto
     for (auto j = 0; j <= 1; ++j)
     {
         mNumKnots[j] = m_Quantity[j] + mDegree + 1;
-        mKnot[j] = NEW1<Real>(mNumKnots[j]);
+        mKnot[j] = nullptr;  // NEW1<Real>(mNumKnots[j]);
 
         int i;
         for (i = 0; i <= mDegree; ++i)

@@ -13,32 +13,49 @@
 #include "MethodPropertyGetSetExternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26429)
-#include SYSTEM_WARNING_DISABLE(26481)
-#include SYSTEM_WARNING_DISABLE(26490)
-#include SYSTEM_WARNING_DISABLE(26440)
-template <typename GetReference, typename SetReference, typename Container,
-          ptrdiff_t (*FO)(), GetReference (Container::*FG)() const, void (Container::*FS)(SetReference)>
-CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, FO, FG, FS>::operator GetReferenceType() const  
+template <typename GetReference,
+          typename SetReference,
+          typename Container,
+          ptrdiff_t (*FO)(),
+          GetReference (Container::*FG)() const,
+          void (Container::*FS)(SetReference)>
+CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, FO, FG, FS>::operator GetReferenceType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     const auto offset = (*FO)();
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490) 
+
     auto thisPtr = reinterpret_cast<const ContainerType*>(reinterpret_cast<const uint8_t*>(this) - offset);
+
+#include STSTEM_WARNING_POP
 
     return (thisPtr->*FG)();
 }
- 
 
-template <typename GetReference, typename SetReference, typename Container,
-          ptrdiff_t (*FO)(), GetReference (Container::*FG)() const, void (Container::*FS)(SetReference)>
+template <typename GetReference,
+          typename SetReference,
+          typename Container,
+          ptrdiff_t (*FO)(),
+          GetReference (Container::*FG)() const,
+          void (Container::*FS)(SetReference)>
 CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, FO, FG, FS>& CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, FO, FG, FS>::operator=(SetReferenceType value) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     auto offset = (*FO)();
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26490) 
+
     auto thisPtr = reinterpret_cast<ContainerType*>(reinterpret_cast<uint8_t*>(this) - offset);
+
+#include STSTEM_WARNING_POP
 
     if (thisPtr != nullptr)
     {
@@ -47,14 +64,20 @@ CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, F
 
     return *this;
 }
-#include STSTEM_WARNING_POP
+
 #ifdef OPEN_CLASS_INVARIANT
-template <typename GetReference, typename SetReference, typename Container,
-          ptrdiff_t (*FO)(), GetReference (Container::*FG)() const, void (Container::*FS)(SetReference)>
+
+template <typename GetReference,
+          typename SetReference,
+          typename Container,
+          ptrdiff_t (*FO)(),
+          GetReference (Container::*FG)() const,
+          void (Container::*FS)(SetReference)>
 bool CoreTools::MethodPropertyGetSetExternal<GetReference, SetReference, Container, FO, FG, FS>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 #endif  // CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_SET_EXTERNAL_DETAIL_H

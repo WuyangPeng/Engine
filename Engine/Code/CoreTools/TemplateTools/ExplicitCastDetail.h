@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:33)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 11:18)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_DETAIL_H
@@ -15,17 +15,19 @@
 
 template <typename T>
 CoreTools::ExplicitCast<T>::ExplicitCast(T value) noexcept
-    : m_Value{ value }
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool CoreTools::ExplicitCast<T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
@@ -33,12 +35,26 @@ CoreTools::ExplicitCast<T>::operator ValueType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 template <typename T>
-CoreTools::ExplicitCast<T const&>::ExplicitCast(T const& value) noexcept
-    : m_Value{ value }
+CoreTools::ExplicitCast<const T&>::ExplicitCast(const T& value) noexcept
+    : value{ value }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+CoreTools::ExplicitCast<T const&>::ExplicitCast(const ExplicitCast& rhs) noexcept
+    : value{ rhs.value }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+CoreTools::ExplicitCast<T const&>::ExplicitCast(ExplicitCast&& rhs) noexcept
+    : value{ std::move(rhs.value) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -52,34 +68,36 @@ bool CoreTools::ExplicitCast<T const&>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-CoreTools::ExplicitCast<T const&>::operator T const &() const noexcept
+CoreTools::ExplicitCast<const T&>::operator const T&() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 template <typename T>
-CoreTools::ExplicitCast<T const*>::ExplicitCast(T const* value) noexcept
-    : m_Value{ value }
+CoreTools::ExplicitCast<const T*>::ExplicitCast(const T* value) noexcept
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
-bool CoreTools::ExplicitCast<T const*>::IsValid() const noexcept
+bool CoreTools::ExplicitCast<const T*>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-CoreTools::ExplicitCast<T const*>::operator T const *() const noexcept
+CoreTools::ExplicitCast<const T*>::operator const T*() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 #endif  //  CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_DETAIL_H

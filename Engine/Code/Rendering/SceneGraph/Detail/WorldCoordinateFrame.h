@@ -67,8 +67,8 @@ namespace Rendering
         // 对视图矩阵右乘向量,viewMat * vector4。
         const Matrix GetViewMatrix () const;
         
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+        void Load(CoreTools::BufferSource& source);
+		void Save (CoreTools::BufferTarget& target) const;
 		int GetStreamingSize () const;
         
     private:

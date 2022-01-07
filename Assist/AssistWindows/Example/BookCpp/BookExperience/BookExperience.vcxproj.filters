@@ -1594,6 +1594,12 @@
     <Filter Include="Book\Effective Modern C++\第4章 智能指针\第4章 智能指针">
       <UniqueIdentifier>{0e3366f7-ebf8-4e71-aac8-1641f7e86fef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Book\Effective Modern C++\第5章 右值引用、移动语义和完美转发\第5章 右值引用、移动语义和完美转发">
+      <UniqueIdentifier>{efb7692a-6999-45a4-8457-354e5499c8f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Book\Effective Modern C++\第6章 lambda表达式\第6章 lambda表达式">
+      <UniqueIdentifier>{81ddca38-9bac-4352-98ee-849cce9a9544}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\ReadMe.txt">
@@ -1802,6 +1808,24 @@
     </Text>
     <Text Include="Resource\EffectiveModernCpp\Chapter5\条款30 熟悉完美转发的失败情形.txt">
       <Filter>Book\Effective Modern C++\第5章 右值引用、移动语义和完美转发\条款30 熟悉完美转发的失败情形</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter5\第5章 右值引用、移动语义和完美转发.txt">
+      <Filter>Book\Effective Modern C++\第5章 右值引用、移动语义和完美转发\第5章 右值引用、移动语义和完美转发</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款31 避免默认捕获模式.txt">
+      <Filter>Book\Effective Modern C++\第6章 lambda表达式\条款31 避免默认捕获模式</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款32 使用初始化捕获将对象移入闭包.txt">
+      <Filter>Book\Effective Modern C++\第6章 lambda表达式\条款32 使用初始化捕获将对象移入闭包</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款34 优先选用lambda式，而非bind.txt">
+      <Filter>Book\Effective Modern C++\第6章 lambda表达式\条款34 优先选用lambda式，而非std::bind</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款33 对auto&amp;&amp;型别的形参使用decltype，以forward之.txt">
+      <Filter>Book\Effective Modern C++\第6章 lambda表达式\条款33 对auto&amp;&amp;型别的形参使用decltype，以std::forward之</Filter>
+    </Text>
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\第6章 lambda表达式.txt">
+      <Filter>Book\Effective Modern C++\第6章 lambda表达式\第6章 lambda表达式</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

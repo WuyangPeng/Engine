@@ -9,11 +9,10 @@
 #include "BasicMesh.h"
 #include "EdgeKey.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include <map>
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include <map>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26446)
@@ -48,9 +47,9 @@ Mathematics::BasicMesh ::BasicMesh(int numVertices, const void* points, int numT
     mIsValid = true;
 
     // Dynamically construct triangle mesh from input.
-    mVertices = NEW1<Vertex>(mNumVertices);
-    mEdges = NEW1<Edge>(3 * mNumTriangles);
-    mTriangles = NEW1<Triangle>(mNumTriangles);
+    mVertices = nullptr;  // NEW1<Vertex>(mNumVertices);
+    mEdges = nullptr;  //NEW1<Edge>(3 * mNumTriangles);
+    mTriangles = nullptr;  // NEW1<Triangle>(mNumTriangles);
     std::map<EdgeKey, int> edgeMap;
     for (int t = 0; t < mNumTriangles; t++)
     {
@@ -102,9 +101,9 @@ Mathematics::BasicMesh ::BasicMesh(int numVertices, const void* points, int numT
                     MATHEMATICS_ASSERTION_0(edge.T[1] == -1, "Mesh must be manifold\n");
                     if (edge.T[1] != -1)
                     {
-                        DELETE1(mVertices);
-                        DELETE1(mEdges);
-                        DELETE1(mTriangles);
+                        //                         DELETE1(mVertices);
+                        //                         DELETE1(mEdges);
+                        //                         DELETE1(mTriangles);
                         mNumVertices = 0;
                         mNumEdges = 0;
                         mNumTriangles = 0;
@@ -143,12 +142,11 @@ Mathematics::BasicMesh ::~BasicMesh(){
     EXCEPTION_TRY{
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26447)
-        DELETE1(mVertices);
-DELETE1(mEdges);
-DELETE1(mTriangles);
+//         DELETE1(mVertices);
+// DELETE1(mEdges);
+// DELETE1(mTriangles);
 #include STSTEM_WARNING_POP
-}
-EXCEPTION_ALL_CATCH(Mathematics)
+    } EXCEPTION_ALL_CATCH(Mathematics)
 }
 
 // BasicMesh::Vertex
@@ -160,16 +158,14 @@ Mathematics::BasicMesh::Vertex ::Vertex() noexcept
 
 Mathematics::BasicMesh::Vertex ::~Vertex()
 {
-    EXCEPTION_TRY
-    {
+    EXCEPTION_TRY{
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26447)
-        DELETE1(V);
-        DELETE1(E);
-        DELETE1(T);
+//         DELETE1(V);
+//         DELETE1(E);
+//         DELETE1(T);
 #include STSTEM_WARNING_POP
-    }
-    EXCEPTION_ALL_CATCH(Mathematics)
+    } EXCEPTION_ALL_CATCH(Mathematics)
 }
 
 void Mathematics::BasicMesh::Vertex ::InsertEdge(int v, int e)
@@ -186,21 +182,21 @@ void Mathematics::BasicMesh::Vertex ::InsertEdge(int v, int e)
 
     if ((NumVertices % MV_CHUNK) == 0)
     {
-        int* save = V;
-        V = NEW1<int>(NumVertices + MV_CHUNK);
-        if (save)
-        {
-            memcpy(V, save, NumVertices * sizeof(int));
-            DELETE1(save);
-        }
-
-        save = E;
-        E = NEW1<int>(NumVertices + MV_CHUNK);
-        if (save)
-        {
-            memcpy(E, save, NumVertices * sizeof(int));
-            DELETE1(save);
-        }
+        //  int* save = V;
+        //  V = NEW1<int>(NumVertices + MV_CHUNK);
+        //         if (save)
+        //         {
+        //             memcpy(V, save, NumVertices * sizeof(int));
+        //             DELETE1(save);
+        //         }
+        //
+        //         save = E;
+        //         E = NEW1<int>(NumVertices + MV_CHUNK);
+        //         if (save)
+        //         {
+        //             memcpy(E, save, NumVertices * sizeof(int));
+        //             DELETE1(save);
+        //         }
     }
 
     V[NumVertices] = v;
@@ -221,13 +217,13 @@ void Mathematics::BasicMesh::Vertex ::InsertTriangle(int t)
 
     if ((NumTriangles % MV_CHUNK) == 0)
     {
-        int* save = T;
-        T = NEW1<int>(NumTriangles + MV_CHUNK);
-        if (save)
-        {
-            memcpy(T, save, NumTriangles * sizeof(int));
-            DELETE1(save);
-        }
+        //         int* save = T;
+        //         T = NEW1<int>(NumTriangles + MV_CHUNK);
+        //         if (save)
+        //         {
+        //             memcpy(T, save, NumTriangles * sizeof(int));
+        //             DELETE1(save);
+        //         }
     }
 
     T[NumTriangles] = t;

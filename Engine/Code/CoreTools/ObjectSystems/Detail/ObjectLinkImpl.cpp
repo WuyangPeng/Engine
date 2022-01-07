@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 14:53)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,35 +14,34 @@
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/ObjectSystems/ObjectInterfaceLess.h"
 
 #include <algorithm>
 
-using std::make_pair;
-
 CoreTools::ObjectLinkImpl::ObjectLinkImpl() noexcept
-    : m_Linked{}, m_Ordered{}
+    : linked{}, ordered{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::ObjectLinkImpl::IsValid() const noexcept
 {
-    if (m_Linked.size() == m_Ordered.size())
+    if (linked.size() == ordered.size())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::ObjectInterfaceSharedPtr CoreTools::ObjectLinkImpl::GetObjectInterface(uint64_t uniqueID)
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto iter = m_Linked.find(uniqueID);
+    const auto iter = linked.find(uniqueID);
 
-    if (iter != m_Linked.cend())
+    if (iter != linked.cend())
     {
         return iter->second;
     }
@@ -56,48 +55,50 @@ int CoreTools::ObjectLinkImpl::GetOrderedSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Ordered.size());
+    return boost::numeric_cast<int>(ordered.size());
 }
 
 void CoreTools::ObjectLinkImpl::Insert(uint64_t uniqueID, const ObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_Linked.insert({ uniqueID, object });
-    m_Ordered.emplace_back(object);
+    linked.insert({ uniqueID, object });
+    ordered.emplace_back(object);
 }
 
 void CoreTools::ObjectLinkImpl::Sort()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    sort(m_Ordered.begin(), m_Ordered.end(), ObjectInterfaceSmartPointerLess{});
+    sort(ordered.begin(), ordered.end(), [](const auto& lhs, const auto& rhs) noexcept {
+        return lhs->GetUniqueID() < rhs->GetUniqueID();
+    });
 }
 
 CoreTools::ObjectLinkImpl::LinkSequentialContainerConstIter CoreTools::ObjectLinkImpl::begin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ordered.begin();
+    return ordered.begin();
 }
 
 CoreTools::ObjectLinkImpl::LinkSequentialContainerIter CoreTools::ObjectLinkImpl::begin() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return m_Ordered.begin();
+    return ordered.begin();
 }
 
 CoreTools::ObjectLinkImpl::LinkSequentialContainerConstIter CoreTools::ObjectLinkImpl::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ordered.end();
+    return ordered.end();
 }
 
 CoreTools::ObjectLinkImpl::LinkSequentialContainerIter CoreTools::ObjectLinkImpl::end() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return m_Ordered.end();
+    return ordered.end();
 }

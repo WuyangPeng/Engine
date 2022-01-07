@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:18)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 13:03)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
 #define CORE_TOOLS_MESSAGE_EVENT_CALLBACK_PARAMETERS_H
@@ -16,6 +16,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+
 #include <string>
 
 CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(CallbackParameters, CallbackParametersImpl);
@@ -29,7 +30,7 @@ namespace CoreTools
         using String = System::String;
 
     public:
-        explicit CallbackParameters(int count = 0);
+        explicit CallbackParameters(int count);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -48,31 +49,31 @@ namespace CoreTools
         void SetValue(int index, const std::string& value);
         void SetValue(int index, const std::wstring& value);
 
-        [[nodiscard]] bool GetBoolValue(int index) const;
-        [[nodiscard]] int8_t GetInt8Value(int index) const;
-        [[nodiscard]] uint8_t GetUInt8Value(int index) const;
-        [[nodiscard]] int16_t GetInt16Value(int index) const;
-        [[nodiscard]] uint16_t GetUInt16Value(int index) const;
-        [[nodiscard]] int32_t GetInt32Value(int index) const;
-        [[nodiscard]] uint32_t GetUInt32Value(int index) const;
-        [[nodiscard]] int64_t GetInt64Value(int index) const;
-        [[nodiscard]] uint64_t GetUInt64Value(int index) const;
-        [[nodiscard]] float GetFloatValue(int index) const;
-        [[nodiscard]] double GetDoubleValue(int index) const;
-        [[nodiscard]] std::string GetStringValue(int index) const;
-        [[nodiscard]] std::wstring GetWStringValue(int index) const;
-        [[nodiscard]] String GetTStringValue(int index) const;
-        [[nodiscard]] const ConstParametersInterfaceSharedPtr GetParametersInterfaceValue(int index) const;
+        NODISCARD bool GetBoolValue(int index) const;
+        NODISCARD int8_t GetInt8Value(int index) const;
+        NODISCARD uint8_t GetUInt8Value(int index) const;
+        NODISCARD int16_t GetInt16Value(int index) const;
+        NODISCARD uint16_t GetUInt16Value(int index) const;
+        NODISCARD int32_t GetInt32Value(int index) const;
+        NODISCARD uint32_t GetUInt32Value(int index) const;
+        NODISCARD int64_t GetInt64Value(int index) const;
+        NODISCARD uint64_t GetUInt64Value(int index) const;
+        NODISCARD float GetFloatValue(int index) const;
+        NODISCARD double GetDoubleValue(int index) const;
+        NODISCARD std::string GetStringValue(int index) const;
+        NODISCARD std::wstring GetWStringValue(int index) const;
+        NODISCARD String GetTStringValue(int index) const;
+        NODISCARD ConstParametersInterfaceSharedPtr GetParametersInterfaceValue(int index) const;
 
         // 向下转型，必须保证转型成功。
         template <typename ConstSubclass>
-        [[nodiscard]] std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicDowncast(int index) const;
+        NODISCARD std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicDowncast(int index) const;
 
         // 向下转型，失败抛出异常。
         template <typename ConstSubclass>
-        [[nodiscard]] std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicCast(int index) const;
+        NODISCARD std::shared_ptr<const ConstSubclass> GetParametersInterfacePolymorphicCast(int index) const;
 
-        [[nodiscard]] int GetContainerSize() const;
+        NODISCARD int GetContainerSize() const;
 
     private:
         PackageType impl;

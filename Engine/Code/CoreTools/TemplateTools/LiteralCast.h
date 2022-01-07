@@ -1,18 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:23)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 14:42)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H
 
 #include "CoreTools/CoreToolsDll.h"
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26432)
+
 namespace CoreTools
 {
     template <typename T, int64_t V>
@@ -25,11 +24,16 @@ namespace CoreTools
         static void Constranints() noexcept;
 
     public:
+        LiteralCast() noexcept = default;
         ~LiteralCast();
+        LiteralCast(const LiteralCast& rhs) noexcept = default;
+        LiteralCast& operator=(const LiteralCast& rhs) noexcept = default;
+        LiteralCast(LiteralCast&& rhs) noexcept = default;
+        LiteralCast& operator=(LiteralCast&& rhs) noexcept = default;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator T() const noexcept;
+        NODISCARD operator T() const noexcept;
     };
 
     template <int64_t V>
@@ -42,7 +46,7 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator uint64_t() const;
+        NODISCARD operator uint64_t() const;
     };
 
     template <int64_t V>
@@ -55,8 +59,8 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator int64_t() const;
+        NODISCARD operator int64_t() const;
     };
 }
-#include STSTEM_WARNING_POP
+
 #endif  //  CORE_TOOLS_TEMPLATE_TOOLS_LITERAL_CAST_H

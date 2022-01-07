@@ -9,7 +9,7 @@
 
 #include "Imagics/ImagicsDll.h"
  
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/FileManager/WriteFileManager.h"
 #include "CoreTools/FileManager/ReadFileManager.h"
 

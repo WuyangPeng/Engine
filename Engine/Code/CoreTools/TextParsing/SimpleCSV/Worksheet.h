@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/11 22:08)
+///	引擎版本：0.8.0.0 (2021/12/19 19:54)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
 #define CORE_TOOLS_TEXT_PARSING_WORKSHEET_H
@@ -58,7 +58,7 @@ namespace CoreTools
 
             static void SetTabColor(const XMLDocument& xmlDocument, const Color& color);
             NODISCARD static Color GetTabColor(const XMLDocument& xmlDocument);
-            static XMLNode CreateTabColor(const XMLDocument& xmlDocument);
+            NODISCARD static XMLNode CreateTabColor(const XMLDocument& xmlDocument);
             static void SetTabSelected(const XMLDocument& xmlDocument, bool selected);
             NODISCARD static bool TabIsSelected(const XMLDocument& xmlDocument);
 

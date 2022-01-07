@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.2.5 (2021/11/03 22:39)
+///	引擎辅助版本：0.7.2.6 (2021/11/15 20:28)
 
 #ifndef EFFECTIVE_MODERN_CPP_CHAPTER5_TERM26_EXAMPLE_H
 #define EFFECTIVE_MODERN_CPP_CHAPTER5_TERM26_EXAMPLE_H
@@ -32,6 +32,12 @@ namespace BookExperience
 
                 public:
                     Terms26Example() noexcept;
+
+                    void Log0Example() const;
+                    void Log1Example() const;
+                    void Log2Example() const;
+                    void Person0Example() const;
+                    void Person1Example() const;
                 };
             }
         }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 18:17)
+///	引擎版本：0.8.0.0 (2021/12/12 19:18)
 
 #include "System/SystemExport.h"
 
@@ -17,9 +17,13 @@
 void System::SystemSleep(WindowsDWord milliseconds) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     ::Sleep(milliseconds);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     usleep(milliseconds);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
@@ -33,7 +37,7 @@ System::SleepReturn System::SystemSleep(WindowsDWord milliseconds, bool alertabl
 
     usleep(milliseconds);
 
-    NullFunction<bool>(alertable);
+    UnusedFunction(alertable);
 
     return SleepReturn::Succeed;
 
@@ -48,7 +52,7 @@ System::MutexWaitReturn System::SystemSignalObjectAndWait(ThreadHandle objectToS
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, ThreadHandle, WindowsDWord, bool>(objectToSignal, objectToWaitOn, milliseconds, alertable);
+    UnusedFunction(objectToSignal, objectToWaitOn, milliseconds, alertable);
 
     return false;
 

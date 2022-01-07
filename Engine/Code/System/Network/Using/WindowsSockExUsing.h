@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/06/04 14:46)
+///	引擎版本：0.8.0.0 (2021/12/13 14:33)
 
 #ifndef SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
 #define SYSTEM_NETWORK_WINDOWS_SOCK_EX_USING_H
@@ -92,6 +92,7 @@ namespace System
         char* buf;
     };
     using WinSockBufPtr = WinSockBuf*;
+
     struct WinSockFlowSpec
     {
         WindowsULong TokenRate;
@@ -104,6 +105,7 @@ namespace System
         WindowsULong MinimumPolicedSize;
     };
     using WinSockFlowSpecPtr = WinSockFlowSpec*;
+
     struct QualityOfService
     {
         WinSockFlowSpec SendingFlowspec;
@@ -122,7 +124,7 @@ namespace System
         int iSockaddrLength;
     };
     using SocketAddressPtr = SocketAddress*;
-    using SocketAddressPtr = SocketAddress*;
+
     struct SocketAddressList
     {
         int iAddressCount;
@@ -162,7 +164,6 @@ namespace System
         uint32_t dwProviderReserved;
         wchar_t szProtocol[g_ProtocolLen + 1];
     };
-
     using SocketProtocolInfoPtr = SocketProtocolInfo*;
 
     struct SocketNetworkEvents
@@ -171,6 +172,7 @@ namespace System
         int iErrorCode[10];
     };
     using SocketNetworkEventsPtr = SocketNetworkEvents*;
+
     struct SocketOverlapped
     {
         uint32_t Internal;
@@ -209,7 +211,6 @@ namespace System
         uint32_t dwVersion;
         SocketEcomparator ecHow;
     };
-
     using SocketVersionPtr = SocketVersion*;
 
     struct SocketAfProtocols
@@ -323,6 +324,7 @@ namespace System
         TChar* lpszIdentifier;
     };
     using SocketNamespaceInfoPtr = SocketNamespaceInfo*;
+
     struct SocketNamespaceInfoEx
     {
         SystemGUID NSProviderId;
@@ -333,13 +335,13 @@ namespace System
         SocketBlob ProviderSpecific;
     };
     using SocketNamespaceInfoExPtr = SocketNamespaceInfoEx*;
+
     enum SocketESetServiceOp
     {
         RNRSERVICE_REGISTER = 0,
         RNRSERVICE_DEREGISTER,
         RNRSERVICE_DELETE
     };
-
     using SocketESetServiceOpPtr = SocketESetServiceOp*;
 
     struct SocketPollfd

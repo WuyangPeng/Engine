@@ -8,7 +8,7 @@
 #include "Detail/Parameters.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/MessageEvent/CallbackParametersDetail.h"
 
 using std::make_shared;
@@ -27,7 +27,7 @@ void CoreTools::CallbackParametersTesting ::MainTest()
 
 void CoreTools::CallbackParametersTesting ::BuiltInTest()
 {
-    TestingType callbackParameters;
+    TestingType callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
     constexpr int8_t secondValue{ 2 };
@@ -84,7 +84,7 @@ void CoreTools::CallbackParametersTesting ::ParametersInterfaceTest()
     auto testValue = 5;
 
     ParametersSharedPtr smartPointer{ make_shared<Parameters>(testValue) };
-    TestingType callbackParameters;
+    TestingType callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, *smartPointer);
 
@@ -105,7 +105,7 @@ void CoreTools::CallbackParametersTesting ::ParametersInterfaceTest()
 #include STSTEM_WARNING_POP
 void CoreTools::CallbackParametersTesting ::InvalidParametersTest()
 {
-    TestingType callbackParameters;
+    TestingType callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
 
@@ -116,7 +116,7 @@ void CoreTools::CallbackParametersTesting ::InvalidParametersTest()
 
 void CoreTools::CallbackParametersTesting ::InvalidTypeTest()
 {
-    TestingType callbackParameters;
+    TestingType callbackParameters{ 0 };
 
     constexpr bool firstValue{ true };
 

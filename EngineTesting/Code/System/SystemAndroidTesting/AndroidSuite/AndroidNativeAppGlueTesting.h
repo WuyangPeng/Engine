@@ -30,6 +30,9 @@ namespace System
         void MainTest();
 
         void VirtualAndroidNativeAppGlueTest();
+
+    private:
+        int index;
     };
 }
 

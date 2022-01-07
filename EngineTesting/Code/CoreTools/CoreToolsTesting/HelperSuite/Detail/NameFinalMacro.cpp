@@ -29,14 +29,14 @@ CoreTools::ObjectInterfaceSharedPtr CoreTools::NameFinalMacro::CloneObject() con
     return make_shared<ClassType>(*this);
 }
 
-const CoreTools::ObjectSharedPtr CoreTools::NameFinalMacro::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr CoreTools::NameFinalMacro::GetObjectByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return make_shared<TestingObject>(name);
 }
 
-const CoreTools::NameFinalMacro::ObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllObjectsByName(const string& name)
+CoreTools::NameFinalMacro::ObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllObjectsByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -47,14 +47,14 @@ const CoreTools::NameFinalMacro::ObjectSharedPtrContainer CoreTools::NameFinalMa
     return result;
 }
 
-const CoreTools::ConstObjectSharedPtr CoreTools::NameFinalMacro::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr CoreTools::NameFinalMacro::GetConstObjectByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return make_shared<TestingObject>(name);
 }
 
-const CoreTools::NameFinalMacro::ConstObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllConstObjectsByName(const string& name) const
+CoreTools::NameFinalMacro::ConstObjectSharedPtrContainer CoreTools::NameFinalMacro::GetAllConstObjectsByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

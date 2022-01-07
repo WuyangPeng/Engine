@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/12 0:46)
+///	引擎版本：0.8.0.0 (2021/12/14 14:28)
 
 #ifndef CORE_TOOLS_DLL_LIB_H
 #define CORE_TOOLS_DLL_LIB_H

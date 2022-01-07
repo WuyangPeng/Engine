@@ -8,7 +8,7 @@
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_DELAUNAY1_DETAIL_H
 
 #include "Delaunay1.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 
 template <typename Real>
@@ -30,14 +30,14 @@ Mathematics::Delaunay1<Real>
     {
         mDimension = 1;
         mNumSimplices = mNumVertices - 1;
-        mIndices = NEW1<int>(2*mNumSimplices);
+      /*  mIndices = NEW1<int>(2*mNumSimplices);*/
         for (i = 0; i < mNumSimplices; ++i)
         {
             mIndices[2*i] = sorted[i].Index;
             mIndices[2*i + 1] = sorted[i + 1].Index;
         }
 
-        mAdjacencies = NEW1<int>(2*mNumSimplices);
+      //  mAdjacencies = NEW1<int>(2*mNumSimplices);
         for (i = 0; i < mNumSimplices; ++i)
         {
             mAdjacencies[2*i] = i - 1;
@@ -53,7 +53,7 @@ Mathematics::Delaunay1<Real>
 {
     if (mOwner)
     {
-        DELETE1(mVertices);
+       // DELETE1(mVertices);
     }
 }
 
@@ -224,7 +224,7 @@ bool Mathematics::Delaunay1<Real>
     }
 
     mOwner = true;
-    mVertices = NEW1<Real>(mNumVertices);
+  //  mVertices = NEW1<Real>(mNumVertices);
     inFile.Read(sizeof(Real), mNumVertices, mVertices);
  
     return true;

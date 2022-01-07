@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:11)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/22 18:40)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_GET_EXTERNAL_H
@@ -31,11 +31,17 @@ namespace CoreTools
         using ContainerType = Container;
         using ClassType = MethodPropertyGetExternal<ConstReferenceType, ContainerType, FO, FG>;
 
+        ~MethodPropertyGetExternal() noexcept = default;
+        MethodPropertyGetExternal(const MethodPropertyGetExternal& rhs) noexcept = delete;
+        MethodPropertyGetExternal& operator=(const MethodPropertyGetExternal& rhs) noexcept = delete;
+        MethodPropertyGetExternal(MethodPropertyGetExternal&& rhs) noexcept = delete;
+        MethodPropertyGetExternal& operator=(MethodPropertyGetExternal&& rhs) noexcept = delete;
+
     public:
         CLASS_INVARIANT_DECLARE;
 
         // 提供对该属性的只读访问
-        [[nodiscard]] operator ConstReferenceType() const noexcept;
+        NODISCARD operator ConstReferenceType() const noexcept;
 
         // 这种方法是隐藏的，以防止熟悉这个类的用户在包含的类中对属性实例使用operator=，
         // 因为使用MethodPropertyGetSet<>会导致无限循环。

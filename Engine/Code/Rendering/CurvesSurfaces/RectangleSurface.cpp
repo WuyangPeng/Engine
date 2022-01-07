@@ -172,14 +172,14 @@ Rendering::RectangleSurface ::RectangleSurface(LoadConstructor value)
 {
 }
 
-void Rendering::RectangleSurface ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::RectangleSurface ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source->Read(mNumUSamples);
-    source->Read(mNumVSamples);
+    source.Read(mNumUSamples);
+    source.Read(mNumVSamples);
 
     // TODO.  See note in RectangleSurface::Save.
     mSurface = 0;
@@ -187,7 +187,7 @@ void Rendering::RectangleSurface ::Load(const CoreTools::BufferSourceSharedPtr& 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RectangleSurface ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::RectangleSurface ::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
@@ -197,19 +197,19 @@ void Rendering::RectangleSurface ::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RectangleSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::RectangleSurface ::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RectangleSurface ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::RectangleSurface ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target->Write(mNumUSamples);
-    target->Write(mNumVSamples);
+    target.Write(mNumUSamples);
+    target.Write(mNumVSamples);
 
     // TODO.  The class ParametricSurface3 is abstract and does not know
     // about the data representation for the derived-class object that is

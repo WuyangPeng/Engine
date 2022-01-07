@@ -66,7 +66,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetAniso
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetBorderColor, Rendering::SingleShaderSamplerDataImpl::Colour)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderSamplerData, Load, CoreTools::BufferSourceSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderSamplerData, Save, CoreTools::BufferTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Load, CoreTools::BufferSource&, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderSamplerData, Save, CoreTools::BufferTarget&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderSamplerData, GetStreamingSize, int)
 #include STSTEM_WARNING_POP

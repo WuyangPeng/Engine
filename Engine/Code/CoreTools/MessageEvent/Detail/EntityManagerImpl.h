@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 12:57)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H
 #define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_IMPL_H
@@ -27,20 +27,20 @@ namespace CoreTools
         using EntityWeakPtr = std::weak_ptr<BaseEntity>;
 
     public:
-        EntityManagerImpl(MAYBE_UNUSED int count) noexcept;
+        EntityManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool Register(const EntitySharedPtr& entity);
-        [[nodiscard]] bool Unregister(uint64_t entityID);
+        NODISCARD bool Register(const EntitySharedPtr& entity);
+        NODISCARD bool Unregister(uint64_t entityID);
 
-        [[nodiscard]] EntitySharedPtr GetEntity(uint64_t entityID) const;
+        NODISCARD EntitySharedPtr GetEntity(uint64_t entityID) const;
 
     private:
         using EntityWeakPtrContainer = std::map<uint64_t, EntityWeakPtr>;
 
     private:
-        EntityWeakPtrContainer m_Container;
+        EntityWeakPtrContainer container;
     };
 }
 

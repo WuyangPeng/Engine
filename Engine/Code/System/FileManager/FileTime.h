@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 10:13)
+///	引擎版本：0.8.0.0 (2021/12/13 18:48)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_TIME_H
 #define SYSTEM_FILE_MANAGE_FILE_TIME_H
@@ -24,8 +24,14 @@ namespace System
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FileTimeConvertLocalFileTime(const FileTime* fileTime, FileTimePtr localFileTime) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE LocalFileTimeConvertFileTime(const FileTime* localFileTime, FileTimePtr fileTime) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemFileTime(WindowsHandle file, FileTimePtr creationTime, FileTimePtr lastAccessTime, FileTimePtr lastWriteTime) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemFileTime(WindowsHandle file, const FileTime* creationTime, const FileTime* lastAccessTime, const FileTime* lastWriteTime) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemFileTime(WindowsHandle file,
+                                                            FileTimePtr creationTime,
+                                                            FileTimePtr lastAccessTime,
+                                                            FileTimePtr lastWriteTime) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemFileTime(WindowsHandle file,
+                                                            const FileTime* creationTime,
+                                                            const FileTime* lastAccessTime,
+                                                            const FileTime* lastWriteTime) noexcept;
 }
 
 #endif  // SYSTEM_FILE_MANAGE_FILE_TIME_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:19)
+///	引擎版本：0.8.0.0 (2021/12/13 18:58)
 
 #include "System/SystemExport.h"
 
@@ -29,7 +29,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, const DynamicLinkCharType*, EnumResourceLanguageProcess, WindowsPtrLong>(module, type, name, enumFunction, param);
+    UnusedFunction(module, type, name, enumFunction, param);
 
     return false;
 
@@ -53,7 +53,7 @@ bool System::EnumResourceLanguagesInLibrary(DynamicLinkModule module,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, const DynamicLinkCharType*, EnumResourceLanguageProcess, WindowsPtrLong, ResourceEnum, LanguageIDData>(module, type, name, enumFunction, param, flags, language);
+    UnusedFunction(module, type, name, enumFunction, param, flags, language);
 
     return false;
 
@@ -74,7 +74,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, EnumResourceLanguageProcess, WindowsPtrLong>(module, type, enumFunction, param);
+    UnusedFunction(module, type, enumFunction, param);
 
     return false;
 
@@ -97,7 +97,7 @@ bool System::EnumResourceNamesInLibrary(DynamicLinkModule module,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, EnumResourceLanguageProcess, WindowsPtrLong, ResourceEnum, LanguageIDData>(module, type, enumFunction, param, flags, language);
+    UnusedFunction(module, type, enumFunction, param, flags, language);
 
     return false;
 
@@ -115,7 +115,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module, EnumResourceTy
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, EnumResourceTypeProcess, WindowsPtrLong>(module, enumFunction, param);
+    UnusedFunction(module, enumFunction, param);
 
     return false;
 
@@ -137,7 +137,7 @@ bool System::EnumResourceTypesInLibrary(DynamicLinkModule module,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, EnumResourceTypeProcess, WindowsPtrLong, ResourceEnum, LanguageIDData>(module, enumFunction, param, flags, language);
+    UnusedFunction(module, enumFunction, param, flags, language);
 
     return false;
 

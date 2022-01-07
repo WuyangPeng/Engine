@@ -11,7 +11,7 @@
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -71,7 +71,7 @@ void CoreTools::SimpleCSVExceptionTesting::SimpleCSVExceptionTest()
 
     ASSERT_UNEQUAL(simpleCSVException.GetError().find(errorMessage), System::String::npos);
     ASSERT_ENUM_EQUAL(csvType, simpleCSVException.GetErrorCode());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(simpleCSVException.GetFunctionDescribed(), functionDescribed);
+    ASSERT_EQUAL(simpleCSVException.GetFunctionDescribed(), functionDescribed);
 }
 
 void CoreTools::SimpleCSVExceptionTesting::SimpleCSVLastErrorExceptionTest()
@@ -84,5 +84,5 @@ void CoreTools::SimpleCSVExceptionTesting::SimpleCSVLastErrorExceptionTest()
 
     ASSERT_UNEQUAL(simpleCSVException.GetError().find(errorMessage), System::String::npos);
     ASSERT_ENUM_EQUAL(csvType, simpleCSVException.GetErrorCode());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(simpleCSVException.GetFunctionDescribed(), functionDescribed);
+    ASSERT_EQUAL(simpleCSVException.GetFunctionDescribed(), functionDescribed);
 }

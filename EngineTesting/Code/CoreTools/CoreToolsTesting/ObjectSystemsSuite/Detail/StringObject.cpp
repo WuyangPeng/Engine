@@ -7,7 +7,7 @@
 #include "StringObject.h"
 
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -26,7 +26,7 @@ using namespace std::literals;
 #include SYSTEM_WARNING_DISABLE(26456)
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26409)
- 
+
 #include SYSTEM_WARNING_DISABLE(26426)
 namespace
 {
@@ -39,9 +39,9 @@ CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(CoreTools, StringObject);
 CORE_TOOLS_FACTORY_DEFINE(CoreTools, StringObject);
 
 CoreTools::StringObject ::StringObject()
-    : ParentType{}, m_StringValue{ NEW0 string(g_String1) },
-      m_StringArray1{ NEW1<string>(bufferSize) },
-      m_StringArray2{ NEW1<string>(bufferSize) }
+    : ParentType{}, m_StringValue{   },
+      m_StringArray1{   },
+      m_StringArray2{   }
 {
     AllocationArray1(g_String2);
     AllocationArray2(g_String1);
@@ -52,9 +52,9 @@ CoreTools::StringObject ::StringObject()
 }
 
 CoreTools::StringObject ::StringObject(LoadConstructor value)
-    : ParentType{ value }, m_StringValue{ NEW0 string },
+    : ParentType{ value }, m_StringValue{   },
       m_StringArray1{ nullptr },
-      m_StringArray2{ NEW1<string>(bufferSize) }
+      m_StringArray2{  }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -79,14 +79,10 @@ void CoreTools::StringObject ::AllocationArray2(const string& value)
 
 CoreTools::StringObject ::StringObject(const StringObject& rhs)
     : ParentType{}, m_StringValue{ rhs.m_StringValue },
-      m_StringArray1{ NEW1<string>(bufferSize) },
-      m_StringArray2{ NEW1<string>(bufferSize) }
+      m_StringArray1{   },
+      m_StringArray2{  }
 {
-    for (auto i = 0; i < bufferSize; ++i)
-    {
-        m_StringArray1[i] = rhs.m_StringArray1[i];
-        m_StringArray2[i] = rhs.m_StringArray2[i];
-    }
+
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
@@ -120,9 +116,7 @@ CoreTools::StringObject ::~StringObject()
 
 void CoreTools::StringObject ::Release()
 {
-    DELETE0<string>(m_StringValue);
-    DELETE1<string>(m_StringArray1);
-    DELETE1<string>(m_StringArray2);
+    
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -175,14 +169,14 @@ int CoreTools::StringObject ::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::StringObject ::Register(const ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::StringObject ::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void CoreTools::StringObject ::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::StringObject ::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -193,7 +187,7 @@ void CoreTools::StringObject ::Save(const BufferTargetSharedPtr& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::StringObject ::Link(const ObjectLinkSharedPtr& source)
+void CoreTools::StringObject ::Link(ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -207,7 +201,7 @@ void CoreTools::StringObject ::PostLink()
     return ParentType::PostLink();
 }
 
-void CoreTools::StringObject ::Load(const BufferSourceSharedPtr& source)
+void CoreTools::StringObject ::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -215,12 +209,12 @@ void CoreTools::StringObject ::Load(const BufferSourceSharedPtr& source)
 
     ParentType::Load(source);
 
-    *m_StringValue = source->ReadString();
+    *m_StringValue = source.ReadString();
     auto size = 0;
-    source->Read(size);
+    source.Read(size);
     if (0 < size)
     {
-        m_StringArray1 = NEW1<string>(size);
+      
 
         //         source.ReadString(bufferSize, m_StringArray1);
         //         source.ReadString(bufferSize, m_StringArray2);

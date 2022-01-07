@@ -25,10 +25,10 @@ TCBSpline2<Real>::TCBSpline2 (int numSegments, Real* times, Vector2D<Real>* poin
     mContinuity = continuity;
     mBias = bias;
 
-    mA = NEW1<Vector2D<Real> >(mNumSegments);
-    mB = NEW1<Vector2D<Real> >(mNumSegments);
-    mC = NEW1<Vector2D<Real> >(mNumSegments);
-    mD = NEW1<Vector2D<Real> >(mNumSegments);
+    mA = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+    mB = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+    mC = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+    mD = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
 
     // For now, treat the first point as if it occurred twice.
     ComputePoly(0, 0, 1, 2);
@@ -45,14 +45,14 @@ TCBSpline2<Real>::TCBSpline2 (int numSegments, Real* times, Vector2D<Real>* poin
 template <typename Real>
 TCBSpline2<Real>::~TCBSpline2 ()
 {
-    DELETE1(mPoints);
-    DELETE1(mTension);
-    DELETE1(mContinuity);
-    DELETE1(mBias);
-    DELETE1(mA);
-    DELETE1(mB);
-    DELETE1(mC);
-    DELETE1(mD);
+//     DELETE1(mPoints);
+//     DELETE1(mTension);
+//     DELETE1(mContinuity);
+//     DELETE1(mBias);
+//     DELETE1(mA);
+//     DELETE1(mB);
+//     DELETE1(mC);
+//     DELETE1(mD);
 }
 
 template <typename Real>

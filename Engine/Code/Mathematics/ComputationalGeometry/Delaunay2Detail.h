@@ -68,7 +68,7 @@ Mathematics::Delaunay2<Real>
             // Scale the vertices to the square [0,2^{16}]^2 to allow use of
             // 64-bit integers for triangulation.
             expand = (Real)(1 << 16);
-            mQuery = NEW0 Query2Int64<Real>(mSVertices);
+         //   mQuery = NEW0 Query2Int64<Real>(mSVertices);
         }
         else if (queryType == QueryType::Interger)
         {
@@ -76,13 +76,13 @@ Mathematics::Delaunay2<Real>
             // precision for TInteger than for 64-bit integers for
             // triangulation.
             expand = (Real)(1 << 20);
-            mQuery = NEW0 Query2Integer<Real>(mSVertices);
+         //   mQuery = NEW0 Query2Integer<Real>(mSVertices);
         }
         else // queryType == Query::QT_REAL
         {
             // No scaling for floating point.
             expand = Math::GetValue(1);
-            mQuery = NEW0 Query2<Real>(mSVertices);
+         //   mQuery = NEW0 Query2<Real>(mSVertices);
         }
 
         mScale *= expand;
@@ -100,11 +100,11 @@ Mathematics::Delaunay2<Real>
 
         if (queryType == QueryType::Rational)
         {
-            mQuery = NEW0 Query2Rational<Real>(mSVertices);
+          //  mQuery = NEW0 Query2Rational<Real>(mSVertices);
         }
         else // queryType == Query::QT_FILTERED
         {
-            mQuery = NEW0 Query2Filtered<Real>(mSVertices,mEpsilon);
+           // mQuery = NEW0 Query2Filtered<Real>(mSVertices,mEpsilon);
         }
     }
 
@@ -152,8 +152,8 @@ Mathematics::Delaunay2<Real>
     mNumSimplices = (int)mTriMesh.GetTriangles().size();
     if (mNumSimplices > 0)
     {
-        mIndices = NEW1<int>(3*mNumSimplices);
-        mAdjacencies = NEW1<int>(3*mNumSimplices);
+       // mIndices = NEW1<int>(3*mNumSimplices);
+       // mAdjacencies = NEW1<int>(3*mNumSimplices);
         i = 0;
         for (element = tmap.begin(); element != tmap.end(); ++element)
         {
@@ -167,7 +167,7 @@ Mathematics::Delaunay2<Real>
         MATHEMATICS_ASSERTION_0(i == 3*mNumSimplices, "Unexpected mismatch\n");
 
         mPathLast = -1;
-        mPath = NEW1<int>(mNumSimplices + 1);
+      //  mPath = NEW1<int>(mNumSimplices + 1);
         memset(mPath, 0, (mNumSimplices + 1)*sizeof(int));
     }
 }
@@ -176,8 +176,8 @@ template <typename Real>
 Mathematics::Delaunay2<Real>
 	::~Delaunay2 ()
 {
-    DELETE0(mQuery);
-    DELETE1(mPath);
+//     DELETE0(mQuery);
+//     DELETE1(mPath);
 }
 
 template <typename Real>
@@ -217,15 +217,15 @@ Mathematics::Delaunay1<Real>* Mathematics::Delaunay2<Real>
     {
         return 0;
     }
+// 
+//     Real* projection = NEW1<Real>(mNumVertices);
+//     for (int i = 0; i < mNumVertices; ++i)
+//     {
+//         Vector2D<Real> diff = mVertices[i] - m_LineOrigin;
+//         projection[i] = Vector2DTools<Real>::DotProduct(m_LineDirection,diff);
+//     }
 
-    Real* projection = NEW1<Real>(mNumVertices);
-    for (int i = 0; i < mNumVertices; ++i)
-    {
-        Vector2D<Real> diff = mVertices[i] - m_LineOrigin;
-        projection[i] = Vector2DTools<Real>::DotProduct(m_LineDirection,diff);
-    }
-
-    return NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
+    return nullptr;  //NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
 }
 
 template <typename Real>
@@ -257,7 +257,7 @@ bool Mathematics::Delaunay2<Real>
     }
 
     // Enumerate the edges.
-    indices = NEW1<int>(2*numEdges);
+   // indices = NEW1<int>(2*numEdges);
     int* currentIndex = indices;
     for (i = 0; i < numAdjacent; ++i)
     {
@@ -481,14 +481,14 @@ bool Mathematics::Delaunay2<Real>
 	CoreTools::ReadFileManager inFile{ filename };
  
 	Delaunay<Real>::Load(inFile);
-
-    DELETE0(mQuery);
-    DELETE1(mPath);
+// 
+//     DELETE0(mQuery);
+//     DELETE1(mPath);
    
     mOwner = true;
     mVertices.resize(mNumVertices);
     mSVertices.resize(mNumVertices);
-    mPath = NEW1<int>(mNumSimplices + 1);
+  //  mPath = NEW1<int>(mNumSimplices + 1);
 
     inFile.Read(sizeof(int), &mNumUniqueVertices);
     inFile.Read(sizeof(int), &mPathLast);
@@ -509,27 +509,27 @@ bool Mathematics::Delaunay2<Real>
     {
     case QueryType::Int64:
     {
-        mQuery = NEW0 Query2Int64<Real>(mSVertices);
+       // mQuery = NEW0 Query2Int64<Real>(mSVertices);
         break;
     }
     case QueryType::Interger:
     {
-        mQuery = NEW0 Query2Integer<Real>(mSVertices);
+       // mQuery = NEW0 Query2Integer<Real>(mSVertices);
         break;
     }
     case QueryType::Rational:
     {
-        mQuery = NEW0 Query2Rational<Real>(mSVertices);
+       // mQuery = NEW0 Query2Rational<Real>(mSVertices);
         break;
     }
     case QueryType::Real:
     {
-        mQuery = NEW0 Query2<Real>(mSVertices);
+       // mQuery = NEW0 Query2<Real>(mSVertices);
         break;
     }
     case QueryType::Filtered:
     {
-        mQuery = NEW0 Query2Filtered<Real>(mSVertices, mEpsilon);
+       // mQuery = NEW0 Query2Filtered<Real>(mSVertices, mEpsilon);
         break;
     }
     }

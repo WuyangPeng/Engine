@@ -11,7 +11,7 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

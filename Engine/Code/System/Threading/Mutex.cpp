@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 15:34)
+///	引擎版本：0.8.0.0 (2021/12/12 19:10)
 
 #include "System/SystemExport.h"
 
@@ -25,7 +25,7 @@ System::WindowsHandle System::CreateSystemMutex(WindowSecurityAttributesPtr mute
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, bool, const TChar*>(mutexAttributes, initialOwner, name);
+    UnusedFunction(mutexAttributes, initialOwner, name);
 
     return nullptr;
 
@@ -40,7 +40,7 @@ System::WindowsHandle System::CreateSystemMutex(WindowSecurityAttributesPtr mute
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, const TChar*, MutexCreate, MutexStandardAccess, MutexSpecificAccess>(mutexAttributes, name, flag, desiredAccess, specificAccess);
+    UnusedFunction(mutexAttributes, name, flag, desiredAccess, specificAccess);
 
     return nullptr;
 
@@ -63,7 +63,7 @@ bool System::CloseSystemMutex(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -81,7 +81,7 @@ bool System::ReleaseSystemMutex(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -101,7 +101,7 @@ System::MutexWaitReturn System::WaitForSystemMutex(WindowsHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord>(handle, milliseconds);
+    UnusedFunction(handle, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -116,7 +116,7 @@ System::MutexWaitReturn System::WaitForSystemMutex(WindowsHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord, bool>(handle, milliseconds, alertable);
+    UnusedFunction(handle, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -131,7 +131,7 @@ System::MutexWaitReturn System::WaitForSystemMutex(WindowsDWord count, const Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const WindowsHandle*, bool, WindowsDWord, bool>(count, handle, waitAll, milliseconds, alertable);
+    UnusedFunction(count, handle, waitAll, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -146,7 +146,7 @@ System::MutexWaitReturn System::WaitForSystemMutex(WindowsDWord count, const Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord>(count, handle, waitAll, milliseconds);
+    UnusedFunction(count, handle, waitAll, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -161,7 +161,7 @@ System::WindowsHandle System::OpenThreadingMutex(MutexStandardAccess desiredAcce
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<MutexStandardAccess, MutexSpecificAccess, bool, const TChar*>(desiredAccess, specificAccess, inheritHandle, name);
+    UnusedFunction(desiredAccess, specificAccess, inheritHandle, name);
 
     return nullptr;
 
@@ -176,13 +176,13 @@ System::PthreadResult System::PthreadMutexAttributeSetType(PthreadMutexattrT* at
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<PthreadMutexattrT*>(attribute);
+    UnusedFunction(attribute);
 
     return PthreadResult::Successful;
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexattrT*>(attribute);
+    UnusedFunction(attribute);
 
     return PthreadResult::ENomem;
 
@@ -206,7 +206,7 @@ System::PthreadResult System::PthreadMutexAttributeInit(PthreadMutexattrT* attri
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexattrT*>(attribute);
+    UnusedFunction(attribute);
 
     return PthreadResult::ENomem;
 
@@ -236,7 +236,7 @@ System::PthreadResult System::PthreadMutexInit(PthreadMutexattrT* attribute, Pth
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexattrT*, PthreadMutexT*>(attribute, mutex);
+    UnusedFunction(attribute, mutex);
 
     return PthreadResult::EInval;
 
@@ -258,7 +258,7 @@ System::PthreadResult System::PthreadMutexAttributeDestroy(PthreadMutexattrT* at
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexattrT*>(attribute);
+    UnusedFunction(attribute);
 
     return PthreadResult::EInval;
 
@@ -283,7 +283,7 @@ System::PthreadResult System::PthreadMutexDestroy(PthreadMutexT* mutex) noexcept
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexT*>(mutex);
+    UnusedFunction(mutex);
 
     return PthreadResult::EInval;
 
@@ -307,7 +307,7 @@ System::PthreadResult System::PthreadMutexLock(PthreadMutexT* mutex) noexcept
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexT*>(mutex);
+    UnusedFunction(mutex);
 
     return PthreadResult::EInval;
 
@@ -331,7 +331,7 @@ System::PthreadResult System::PthreadMutexUnlock(PthreadMutexT* mutex) noexcept
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexT*>(mutex);
+    UnusedFunction(mutex);
 
     return PthreadResult::EInval;
 
@@ -355,7 +355,7 @@ System::PthreadResult System::PthreadMutexTrylock(PthreadMutexT* mutex) noexcept
 
 #else  // !SYSTEM_PLATFORM_LINUX && !SYSTEM_PLATFORM_MACOS && !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<PthreadMutexT*>(mutex);
+    UnusedFunction(mutex);
 
     return PthreadResult::EInval;
 

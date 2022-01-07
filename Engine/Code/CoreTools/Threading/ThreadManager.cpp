@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/01 13:22)
+///	引擎版本：0.8.0.0 (2021/12/18 12:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,6 +14,7 @@
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 CoreTools::ThreadManager::ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow)
     : impl{ ImplCreateUseDefaultConstruction::Default }
@@ -36,3 +37,8 @@ void CoreTools::ThreadManager::AddThreadUsePriority(void* function, void* userDa
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Resume, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Suspend, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ThreadManager, Wait, void)
+
+CoreTools::ThreadManager CoreTools::ThreadManager::Create()
+{
+    return ThreadManager{ DisableNotThrow::Disable };
+}

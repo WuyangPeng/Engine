@@ -5,11 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.2.5 (2021/11/03 22:37)
+///	引擎辅助版本：0.7.2.7 (2021/11/29 21:26)
 
-#ifndef EFFECTIVE_MODERN_CPP_CHAPTER5_H
-#define EFFECTIVE_MODERN_CPP_CHAPTER5_H
+#ifndef EFFECTIVE_MODERN_CPP_CHAPTER6_H
+#define EFFECTIVE_MODERN_CPP_CHAPTER6_H
 
+#include "Chapter5Example.h"
 #include "Terms23.h"
 #include "Terms23Example.h"
 #include "Terms24.h"
@@ -27,4 +28,4 @@
 #include "Terms30.h"
 #include "Terms30Example.h"
 
-#endif  // EFFECTIVE_MODERN_CPP_CHAPTER5_H
+#endif  // EFFECTIVE_MODERN_CPP_CHAPTER6_H

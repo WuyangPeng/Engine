@@ -14,8 +14,10 @@
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
+using namespace std::literals;
+
 System::AndroidNativeAppGlueTesting::AndroidNativeAppGlueTesting(const OStreamShared& streamShared)
-    : ParentType{ streamShared }
+    : ParentType{ streamShared }, index{ 0 }
 {
     SYSTEM_SELF_CLASS_IS_VALID_9;
 }
@@ -38,8 +40,12 @@ void System::AndroidNativeAppGlueTesting::VirtualAndroidNativeAppGlueTest()
 
     AndroidApp androidApp{};
 
-    auto windowHWnd = CreateVirtualWindow(&androidApp, SYSTEM_TEXT("Android Virtual Window Test"), nullptr, nullptr);
+    const auto appName = SYSTEM_TEXT("Android Virtual Window Test"s) + ToString(index);
+
+    auto windowHWnd = CreateVirtualWindow(&androidApp, appName, nullptr, nullptr);
     ASSERT_UNEQUAL_NULL_PTR_FAILURE_THROW(windowHWnd, "´´½¨´°¿ÚÊ§°Ü¡£");
 
     ASSERT_TRUE(DestroySystemWindow(windowHWnd));
+
+    ++index;
 }

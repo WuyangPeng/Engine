@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:38)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 18:46)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_DETAIL_H
@@ -35,8 +35,7 @@ bool CoreTools::Property<ID, T, V, R, FS, FG>::IsValid() const noexcept
     return true;
 }
 #endif  // OPEN_CLASS_INVARIANT
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
 CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, FG>::operator=(R value) noexcept
 {
@@ -46,7 +45,7 @@ CoreTools::Property<ID, T, V, R, FS, FG>& CoreTools::Property<ID, T, V, R, FS, F
 
     return *this;
 }
-#include STSTEM_WARNING_POP
+
 template <typename ID, typename T, typename V, typename R, void (T::*FS)(R), R (T::*FG)() const>
 CoreTools::Property<ID, T, V, R, FS, FG>::operator R() const noexcept
 {

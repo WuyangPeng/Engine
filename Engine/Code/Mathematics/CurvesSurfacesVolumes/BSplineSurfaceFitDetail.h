@@ -27,7 +27,7 @@ BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int n
     mNumSamples[1] = numSamples1;
     mNumControls[1] = numControls1;
     mSamples = samples;
-    mControls = NEW2<Vector3D<Real> >(numControls0, numControls1);
+   // mControls = NEW2<Vector3D<Real> >(numControls0, numControls1);
 
     // The double-precision basis functions are used to help with the
     // numerical round-off errors.
@@ -36,9 +36,9 @@ BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int n
     int dim;
     for (dim = 0; dim < 2; ++dim)
     {
-        mBasis[dim] = NEW0 BSplineFitBasis<Real>(mNumControls[dim], mDegree[dim]);
+        mBasis[dim] = nullptr;  // NEW0 BSplineFitBasis<Real>(mNumControls[dim], mDegree[dim]);
 
-		dBasis[dim] = NEW0 BSplineFitBasis<Real>(mNumControls[dim],  mDegree[dim]);
+		dBasis[dim] = nullptr;  // NEW0 BSplineFitBasis<Real>(mNumControls[dim],  mDegree[dim]);
 
         tMultiplier[dim] = 1.0f/(Real)(mNumSamples[dim] - 1);
     }
@@ -55,7 +55,7 @@ BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int n
 	BandedMatrixSolve<Real>* ATAMat[2];
     for (dim = 0; dim < 2; ++dim)
     {
-		ATAMat[dim] = NEW0 BandedMatrixSolve<Real>(mNumControls[dim],  mDegree[dim] + 1, mDegree[dim] + 1);
+        ATAMat[dim] = nullptr;  //  NEW0 BandedMatrixSolve<Real>(mNumControls[dim],  mDegree[dim] + 1, mDegree[dim] + 1);
 
         for (i0 = 0; i0 < mNumControls[dim]; ++i0)
         {

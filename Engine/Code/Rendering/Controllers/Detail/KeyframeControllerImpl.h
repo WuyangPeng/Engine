@@ -49,8 +49,8 @@ namespace Rendering
         CLASS_INVARIANT_DECLARE;
 
         int GetStreamingSize() const noexcept;
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        void Load(CoreTools::BufferSource& source);
 
     public:
         // 调用构造函数后，您必须设置数据使用这些函数。

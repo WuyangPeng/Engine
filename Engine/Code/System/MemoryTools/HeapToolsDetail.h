@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 13:42)
+///	引擎版本：0.8.0.0 (2021/12/13 14:39)
 
 #ifndef SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_DETAIL_H
 #define SYSTEM_MEMORY_TOOLS_HEAP_TOOLS_DETAIL_H
@@ -18,9 +18,9 @@
 template <typename T>
 T* System::AllocateProcessHeap(size_t length) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32
-
     static_assert(std::is_pod_v<T>);
+
+#ifdef SYSTEM_PLATFORM_WIN32
 
     return static_cast<T*>(AllocateProcessHeap(GetCurrentProcessHeap(), HeapCreate::ZeroMemory, length * sizeof(T)));
 
@@ -34,9 +34,9 @@ T* System::AllocateProcessHeap(size_t length) noexcept
 template <typename T>
 bool System::FreeProcessHeap(T* memory) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32
-
     static_assert(std::is_pod_v<T>);
+
+#ifdef SYSTEM_PLATFORM_WIN32
 
     return FreeProcessHeap(GetCurrentProcessHeap(), HeapCreate::Default, memory);
 

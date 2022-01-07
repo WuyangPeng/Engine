@@ -29,23 +29,23 @@ Rendering::DepthStateImpl
 CLASS_INVARIANT_STUB_DEFINE(Rendering, DepthStateImpl)
 
 void Rendering::DepthStateImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	m_Enabled = source->ReadBool();
-	m_Writable = source->ReadBool();
-	source->ReadEnum(m_Compare);
+	m_Enabled = source.ReadBool();
+	m_Writable = source.ReadBool();
+	source.ReadEnum(m_Compare);
 }
 
 void Rendering::DepthStateImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(m_Enabled);
-	target->Write(m_Writable);
-        target->WriteEnum(m_Compare);
+	target.Write(m_Enabled);
+	target.Write(m_Writable);
+        target.WriteEnum(m_Compare);
 }
 
 int Rendering::DepthStateImpl

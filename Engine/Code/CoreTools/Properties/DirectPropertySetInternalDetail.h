@@ -1,18 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:36)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 18:10)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_DETAIL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_DETAIL_H
 
 #include "DirectPropertySetInternal.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "System/Helper/PragmaWarning.h"
+
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertySetInternal<Value, Reference, Container>::DirectPropertySetInternal(ReferenceType value)
     : m_Value{ value }
@@ -21,17 +21,17 @@ CoreTools::DirectPropertySetInternal<Value, Reference, Container>::DirectPropert
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Value, typename Reference, typename Container>
 bool CoreTools::DirectPropertySetInternal<Value, Reference, Container>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26434)
 template <typename Value, typename Reference, typename Container>
-CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator=(ReferenceType value)  
+CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator=(ReferenceType value)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -39,7 +39,7 @@ CoreTools::DirectPropertySetInternal<Value, Reference, Container>& CoreTools::Di
 
     return *this;
 }
-#include STSTEM_WARNING_POP
+
 template <typename Value, typename Reference, typename Container>
 CoreTools::DirectPropertySetInternal<Value, Reference, Container>::operator ReferenceType() const
 {

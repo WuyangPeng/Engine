@@ -53,7 +53,7 @@ void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& even
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    CoreTools::CallbackParameters callbackParameters{};
+    CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
 
     const auto result = m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());

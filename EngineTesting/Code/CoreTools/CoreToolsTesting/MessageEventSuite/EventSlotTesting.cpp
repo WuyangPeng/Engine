@@ -9,7 +9,7 @@
 #include "Detail/EventSubclass.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/MessageEvent/CallbackParameters.h"
 #include "CoreTools/MessageEvent/EventSlotDetail.h"
 
@@ -42,7 +42,7 @@ void CoreTools::EventSlotTesting ::SlotTest()
 
     TestingType eventSlot{ eventSubclass, eventPriority, &EventInterface::EventFunction };
 
-    CallbackParameters callbackParameters;
+    CallbackParameters callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, value);
 

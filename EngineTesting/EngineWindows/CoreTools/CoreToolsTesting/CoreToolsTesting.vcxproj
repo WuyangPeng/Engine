@@ -190,7 +190,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">
@@ -219,7 +222,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -252,7 +258,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">
@@ -285,7 +294,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -314,7 +326,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">
@@ -343,7 +358,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -376,7 +394,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">
@@ -409,7 +430,10 @@ xcopy "$(ProjectDir)/Resource/OutputCSVTesting/*.*" "$(EngineTestingInclude)/../
 xcopy "$(ProjectDir)/Resource/InputCSVTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/InputCSVTesting/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVConfigure/" /F /Y
 xcopy "$(ProjectDir)/Resource/CSVGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/" /F /Y
-xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y</Command>
+xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/CSVGenerate/Flags/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonTesting/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonTesting/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonConfigure/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonConfigure/" /F /Y
+xcopy "$(ProjectDir)/Resource/JsonGenerate/*.*" "$(EngineTestingInclude)/../$(Platform)/$(Configuration)Windows/Resource/JsonGenerate/" /F /Y</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -772,7 +796,14 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/..
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.h" />
@@ -1089,6 +1120,46 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/..
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Resource\CSVGenerate\SystemConstantContainer.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonMonsters.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonMonstersDetail.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonParts.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonPartsDetail.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1416,7 +1487,14 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/..
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVRowTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTotalGenerateTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVTypeConversionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\ExcelConversionCSVTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\AppPropertiesTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellIteratorTesting.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\SimpleCSV\CellRangeTesting.cpp" />
@@ -1666,6 +1744,26 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/..
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\DungonMonsters.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\DungonParts.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticDebug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='StaticRelease|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\CFileManagerTesting\CFileManagerHelperTestingText.txt" />
@@ -1727,6 +1825,12 @@ xcopy "$(ProjectDir)/Resource/CSVGenerate/Flags/*.*" "$(EngineTestingInclude)/..
     <None Include="Resource\InputCSVTesting\Input1.xlsx" />
     <None Include="Resource\InputCSVTesting\Input2.xlsx" />
     <None Include="Resource\InputCSVTesting\Input3.xlsx" />
+    <None Include="Resource\JsonConfigure\DungonMonsters.json" />
+    <None Include="Resource\JsonConfigure\DungonParts.json" />
+    <None Include="Resource\JsonConfigure\Dungons.json" />
+    <None Include="Resource\JsonConfigure\Elements.json" />
+    <None Include="Resource\JsonConfigure\RunScenes.json" />
+    <None Include="Resource\JsonTesting\Log.json" />
     <None Include="Resource\OutputCSVTesting\Input1.csv" />
     <None Include="Resource\OutputCSVTesting\Input2.csv" />
     <None Include="Resource\OutputCSVTesting\Input3.csv" />

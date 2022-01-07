@@ -9,7 +9,7 @@
 
 #include "ContMinSphere3.h"
 #include "Mathematics/Algebra/Matrix3.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 // All internal minimal sphere calculations store the squared radius in the
 // radius member of Sphere3<Real>.  Only at the end is a sqrt computed.
@@ -30,7 +30,7 @@ Mathematics::MinSphere3<Real>
     if (numPoints >= 1)
     {
         // Create identity permutation (0,1,...,numPoints-1).
-        Vector3D<Real>** permuted = NEW1<Vector3D<Real>*>(numPoints);
+        Vector3D<Real>** permuted = nullptr;  // NEW1<Vector3D<Real>*>(numPoints);
         int i;
         for (i = 0; i < numPoints; ++i)
         {

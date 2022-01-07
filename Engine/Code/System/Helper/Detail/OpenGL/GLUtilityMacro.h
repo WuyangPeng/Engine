@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/15 15:59)
+///	引擎版本：0.8.0.0 (2021/12/13 18:39)
 
 #ifndef SYSTEM_HELPER_GL_UTILITY_MACRO_H
 #define SYSTEM_HELPER_GL_UTILITY_MACRO_H
@@ -14,13 +14,17 @@
 #include "System/OpenGL/Detail/GetOpenGLFunction.h"
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     // Microsoft Windows
     #define OPENGL_STDCALL __stdcall
     #define OPENGL_EXTERN __declspec(dllimport)
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     // Macintosh, Linux
     #define OPENGL_STDCALL
     #define OPENGL_EXTERN extern
+
 #endif  // SYSTEM_PLATFORM_WIN32
 
 namespace System

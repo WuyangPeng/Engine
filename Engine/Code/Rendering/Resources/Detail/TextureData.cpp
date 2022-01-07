@@ -91,14 +91,14 @@ void Rendering::TextureData
 }
 
 void Rendering::TextureData
-    ::Load( const CoreTools::BufferSourceSharedPtr& source )
+    ::Load( CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
     
-	source->ReadEnum(m_Format);
-	source->ReadEnum(m_Type);
-	source->ReadEnum(m_Usage);
-    source->Read(m_NumLevels);    
+	source.ReadEnum(m_Format);
+	source.ReadEnum(m_Type);
+	source.ReadEnum(m_Usage);
+    source.Read(m_NumLevels);    
 
 	if (m_Format < TextureFormat::First && TextureFormat::Max <= m_Format && m_Type < TextureFlags::Texture1D &&
 		TextureFlags::Quantity <= m_Type && m_Usage < BufferUsage::Static && BufferUsage::Quantity <= m_Usage && m_NumLevels < 0)
@@ -108,14 +108,14 @@ void Rendering::TextureData
 }
 
 void Rendering::TextureData
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
    
-    target->WriteEnum(m_Format);
-        target->WriteEnum(m_Type);
-    target->WriteEnum(m_Usage);
-    target->Write(m_NumLevels);    
+    target.WriteEnum(m_Format);
+        target.WriteEnum(m_Type);
+    target.WriteEnum(m_Usage);
+    target.Write(m_NumLevels);    
 }
 
 int Rendering::TextureData ::GetStreamingSize() const noexcept

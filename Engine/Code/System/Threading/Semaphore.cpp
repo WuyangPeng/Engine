@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 17:27)
+///	引擎版本：0.8.0.0 (2021/12/12 19:17)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ System::WindowsHandle System::CreateSystemSemaphore(WindowSecurityAttributesPtr 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, WindowsLong, WindowsLong, const TChar*>(semaphoreAttributes, initialCount, maximumCount, name);
+    UnusedFunction(semaphoreAttributes, initialCount, maximumCount, name);
 
     return nullptr;
 
@@ -48,7 +48,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord>(handle, milliseconds);
+    UnusedFunction(handle, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -63,7 +63,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsHandle handle, Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord, bool>(handle, milliseconds, alertable);
+    UnusedFunction(handle, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -78,7 +78,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord, bool>(count, handle, waitAll, milliseconds, alertable);
+    UnusedFunction(count, handle, waitAll, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -93,7 +93,7 @@ System::MutexWaitReturn System::WaitForSystemSemaphore(WindowsDWord count, const
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord>(count, handle, waitAll, milliseconds);
+    UnusedFunction(count, handle, waitAll, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -111,7 +111,7 @@ bool System::ReleaseSystemSemaphore(WindowsHandle handle, WindowsLong releaseCou
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsLong, WindowsLongPtr>(handle, releaseCount, previousCount);
+    UnusedFunction(handle, releaseCount, previousCount);
 
     return false;
 
@@ -129,7 +129,7 @@ bool System::CloseSystemSemaphore(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -144,7 +144,7 @@ System::WindowsHandle System::OpenSystemSemaphore(MutexStandardAccess desiredAcc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<MutexStandardAccess, SemaphoreSpecificAccess, bool, const TChar*>(desiredAccess, specificAccess, inheritHandle, name);
+    UnusedFunction(desiredAccess, specificAccess, inheritHandle, name);
 
     return nullptr;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/05 23:21)
+///	引擎版本：0.8.0.0 (2021/12/12 13:28)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ bool System::CreateSystemPipe(WindowsHandlePtr readPipe, WindowsHandlePtr writeP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandlePtr, WindowsHandlePtr, WindowSecurityAttributesPtr, WindowsDWord>(readPipe, writePipe, pipeAttributes, size);
+    UnusedFunction(readPipe, writePipe, pipeAttributes, size);
 
     return false;
 
@@ -41,7 +41,7 @@ bool System::CloseSystemPipe(WindowsHandle pipeHandle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(pipeHandle);
+    UnusedFunction(pipeHandle);
 
     return false;
 

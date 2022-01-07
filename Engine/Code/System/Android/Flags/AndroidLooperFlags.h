@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/10 20:32)
+///	引擎版本：0.8.0.0 (2021/12/13 22:53)
 
 #ifndef SYSTEM_ANDROID_ANDROID_LOOPER_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_LOOPER_FLAGS_H

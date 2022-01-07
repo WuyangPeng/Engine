@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/08/31 16:29)
+///	引擎版本：0.8.0.0 (2021/12/18 1:22)
 
 #ifndef CORE_TOOLS_THREADING_FWD_H
 #define CORE_TOOLS_THREADING_FWD_H

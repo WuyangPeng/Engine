@@ -6,7 +6,7 @@
 
 #include "PlayerEntity.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/MessageEvent/EventEntityDetail.h"
 #include "CoreTools/StateMachineManager/StateDetail.h"
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"

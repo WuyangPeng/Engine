@@ -11,16 +11,16 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectLinkDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
-#include "CoreTools/Contract/Noexcept.h"
 
 using std::string;
 using std::vector;
-#include STSTEM_WARNING_PUSH 
+#include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::CameraNodeImpl ::CameraNodeImpl(const CameraSharedPtr& camera) noexcept
@@ -69,7 +69,7 @@ void Rendering::CameraNodeImpl ::SetFrame(const APoint& position, const AVector&
     m_Camera->SetFrame(position, directionVector, upVector, rightVector);
 }
 
-const CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl ::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl ::GetObjectByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -77,7 +77,7 @@ const CoreTools::ObjectSharedPtr Rendering::CameraNodeImpl ::GetObjectByName(con
     return m_Camera->GetObjectByName(name);
 }
 
-const vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllObjectsByName(const string& name)
+vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllObjectsByName(const string& name)
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -85,7 +85,7 @@ const vector<CoreTools::ObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllObjec
     return m_Camera->GetAllObjectsByName(name);
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl ::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl ::GetConstObjectByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -93,7 +93,7 @@ const CoreTools::ConstObjectSharedPtr Rendering::CameraNodeImpl ::GetConstObject
     return m_Camera->GetConstObjectByName(name);
 }
 
-const vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllConstObjectsByName(const string& name) const
+vector<CoreTools::ConstObjectSharedPtr> Rendering::CameraNodeImpl ::GetAllConstObjectsByName(const string& name) const
 {
     RENDERING_CLASS_IS_VALID_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -105,12 +105,12 @@ int Rendering::CameraNodeImpl ::GetStreamingSize() const noexcept
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
-const    auto size = CORE_TOOLS_STREAM_SIZE(m_Camera);
+    const auto size = CORE_TOOLS_STREAM_SIZE(m_Camera);
 
     return size;
 }
 
-uint64_t Rendering::CameraNodeImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::CameraNodeImpl ::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -118,7 +118,7 @@ uint64_t Rendering::CameraNodeImpl ::Register(const CoreTools::ObjectRegisterSha
     return m_Camera->Register(target);
 }
 
-void Rendering::CameraNodeImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::CameraNodeImpl ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
     RENDERING_ASSERTION_1(!IsNullPtr(), "m_Camera为空指针！");
@@ -127,7 +127,7 @@ void Rendering::CameraNodeImpl ::Save(const CoreTools::BufferTargetSharedPtr& ta
     //target.WriteSharedPtr(m_Camera);
 }
 
-void Rendering::CameraNodeImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::CameraNodeImpl ::Link(CoreTools::ObjectLink& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -135,7 +135,7 @@ void Rendering::CameraNodeImpl ::Link(const CoreTools::ObjectLinkSharedPtr& sour
     // source.ResolveObjectSharedPtrLink(m_Camera);
 }
 
-void Rendering::CameraNodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CameraNodeImpl ::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
     source;
@@ -149,4 +149,4 @@ bool Rendering::CameraNodeImpl ::IsNullPtr() const noexcept
 
     return !m_Camera;
 }
-#include STSTEM_WARNING_POP 
+#include STSTEM_WARNING_POP

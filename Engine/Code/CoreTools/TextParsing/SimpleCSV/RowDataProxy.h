@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/11 11:58)
+///	引擎版本：0.8.0.0 (2021/12/19 19:51)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_DATA_PROXY_H
@@ -61,28 +61,27 @@ namespace CoreTools
             NODISCARD operator std::list<CellValue>() const;
 
             template <typename T,
-                      typename std::enable_if<!std::is_same_v<T, RowDataProxy> &&
-                                                  std::is_base_of_v<typename std::bidirectional_iterator_tag,
-                                                                    typename std::iterator_traits<typename T::iterator>::iterator_category>,
-                                              T>::type* = nullptr>
-            RowDataProxy& operator=(const T& values);
+                      typename std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+            RowDataProxy& operator=(const T& rhs);
 
             template <typename Container,
-                      typename std::enable_if<!std::is_same_v<Container, RowDataProxy> &&
-                                                  std::is_base_of_v<typename std::bidirectional_iterator_tag,
-                                                                    typename std::iterator_traits<typename Container::iterator>::iterator_category>,
-                                              Container>::type* = nullptr>
+                      typename std::enable_if_t<!std::is_same_v<Container, RowDataProxy> && TextParsing::RowDataProxyConditionType<Container>::value, Container>* = nullptr>
             NODISCARD explicit operator Container() const;
 
         private:
             template <typename Container,
-                      typename std::enable_if<!std::is_same_v<Container, RowDataProxy> &&
-                                                  std::is_base_of_v<typename std::bidirectional_iterator_tag,
-                                                                    typename std::iterator_traits<typename Container::iterator>::iterator_category>,
-                                              Container>::type* = nullptr>
+                      typename std::enable_if_t<!std::is_same_v<Container, RowDataProxy> && TextParsing::RowDataProxyConditionType<Container>::value, Container>* = nullptr>
             NODISCARD Container ConvertContainer() const;
 
             NODISCARD ConstXMLDocumentSharedPtr GetDocument();
+
+            template <typename T,
+                      typename std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+            void SetCellValue(const T& rhs);
+
+            template <typename T,
+                      typename std::enable_if_t<!std::is_same_v<T, RowDataProxy> && TextParsing::RowDataProxyConditionType<T>::value, T>* = nullptr>
+            void SetContainer(const T& rhs);
 
         private:
             PackageType impl;

@@ -524,7 +524,7 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.h" />
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.h" />
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.h" />
     <ClInclude Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.h" />
@@ -874,7 +874,7 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeLanguageCIDTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MakeWordTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\MarkTesting.cpp" />
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.cpp" />
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\PtrToIntTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateGenerateExceptionsTesting.cpp" />
     <ClCompile Include="..\..\..\Code\System\SystemTesting\MemoryToolsSuite\HeapTools\AllocateHeapTesting.cpp" />

@@ -11,7 +11,7 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE2_DETAIL)
 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "Mathematics/Algebra/Vector2DDetail.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

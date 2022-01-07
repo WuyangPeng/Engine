@@ -53,7 +53,7 @@ const Rendering::ConstProjectorSharedPtr Rendering::ProjectorConstantImpl
 		return ConstProjectorSharedPtr{};
 }
 
-void Rendering::ProjectorConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ProjectorConstantImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
@@ -61,7 +61,7 @@ void Rendering::ProjectorConstantImpl ::Load(const CoreTools::BufferSourceShared
 }
 
 void Rendering::ProjectorConstantImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;
@@ -120,14 +120,14 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::ProjectorConstantImpl
 		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::ProjectorConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::ProjectorConstantImpl ::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
 	//source.ResolveObjectSharedPtrLink(m_Projector);
 }
 
-void Rendering::ProjectorConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+void Rendering::ProjectorConstantImpl ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

@@ -11,7 +11,7 @@
 
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -114,7 +114,7 @@ namespace Mathematics
     {
         EXCEPTION_TRY
         {
-            DELETE2(mCtrlPoint);
+            //DELETE2(mCtrlPoint);
         }
         EXCEPTION_ALL_CATCH(Mathematics)
     }
@@ -124,7 +124,7 @@ namespace Mathematics
     {
         const auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
         const auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
-        mCtrlPoint = NEW2<Vector3D<Real>>(newNumVCtrlPoints, newNumUCtrlPoints);
+        mCtrlPoint = nullptr;  // NEW2<Vector3D<Real>>(newNumVCtrlPoints, newNumUCtrlPoints);
 
         for (auto u = 0; u < newNumUCtrlPoints; ++u)
         {

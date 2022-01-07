@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/27 22:55)
+///	引擎版本：0.8.0.0 (2021/12/13 11:09)
 
 #include "System/SystemExport.h"
 
 #include "SecurityBase.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/SystemOutput/OutputDebugString.h"
 #include "System/Threading/Flags/ThreadToolsFlags.h"
 #include "System/Threading/Process.h"
 #include "System/Threading/ProcessTools.h"
@@ -34,7 +35,10 @@ bool System::IsSystemTokenElevated() noexcept
         return false;
     }
 
-    MAYBE_UNUSED const auto result = CloseTokenHandle(tokenHandle);
+    if (!CloseTokenHandle(tokenHandle))
+    {
+        OutputDebugStringWithTChar(SYSTEM_TEXT("IsSystemTokenElevated句柄释放失败。\n"));
+    }
 
     return tokenInformation.TokenIsElevated != g_False;
 }
@@ -55,17 +59,12 @@ bool System::GetAdjustTokenGroups(WindowsHandle tokenHandle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle,
-                 bool,
-                 SecurityTokenGroupsPtr,
-                 WindowsDWord,
-                 SecurityTokenGroupsPtr,
-                 WindowsDWordPtr>(tokenHandle,
-                                 resetToDefault,
-                                 newState,
-                                 bufferLength,
-                                 previousState,
-                                 returnLength);
+    UnusedFunction(tokenHandle,
+                   resetToDefault,
+                   newState,
+                   bufferLength,
+                   previousState,
+                   returnLength);
 
     return false;
 
@@ -88,17 +87,12 @@ bool System::GetAdjustTokenPrivileges(WindowsHandle tokenHandle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle,
-                 bool,
-                 SecurityTokenPrivilegesPtr,
-                 WindowsDWord,
-                 SecurityTokenPrivilegesPtr,
-                 WindowsDWordPtr>(tokenHandle,
-                                 disableAllPrivileges,
-                                 newState,
-                                 bufferLength,
-                                 previousState,
-                                 returnLength);
+    UnusedFunction(tokenHandle,
+                   disableAllPrivileges,
+                   newState,
+                   bufferLength,
+                   previousState,
+                   returnLength);
 
     return false;
 
@@ -116,7 +110,7 @@ bool System::IsAreAllAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessGenericMask, AccessGenericMask>(grantedAccess, desiredAccess);
+    UnusedFunction(grantedAccess, desiredAccess);
 
     return false;
 
@@ -134,7 +128,7 @@ bool System::IsAreAnyAccessesGranted(AccessGenericMask grantedAccess, AccessGene
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessGenericMask, AccessGenericMask>(grantedAccess, desiredAccess);
+    UnusedFunction(grantedAccess, desiredAccess);
 
     return false;
 
@@ -172,23 +166,15 @@ bool System::CreateSystemRestrictedToken(WindowsHandle existingTokenHandle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle,
-                 SpecifiesAdditionalPrivilegeOptions,
-                 WindowsDWord,
-                 SecuritySidAndAttributesPtr,
-                 WindowsDWord,
-                 LUIDAndAttributesPtr,
-                 WindowsDWord,
-                 SecuritySidAndAttributesPtr,
-                 WindowsHandlePtr>(existingTokenHandle,
-                                  flags,
-                                  disableSidCount,
-                                  sidsToDisable,
-                                  deletePrivilegeCount,
-                                  privilegesToDelete,
-                                  restrictedSidCount,
-                                  sidsToRestrict,
-                                  newTokenHandle);
+    UnusedFunction(existingTokenHandle,
+                   flags,
+                   disableSidCount,
+                   sidsToDisable,
+                   deletePrivilegeCount,
+                   privilegesToDelete,
+                   restrictedSidCount,
+                   sidsToRestrict,
+                   newTokenHandle);
 
     return false;
 
@@ -206,7 +192,7 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle, SecurityImp
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, SecurityImpersonationLevel, WindowsHandlePtr>(existingTokenHandle, impersonationLevel, duplicateTokenHandle);
+    UnusedFunction(existingTokenHandle, impersonationLevel, duplicateTokenHandle);
 
     return false;
 
@@ -230,19 +216,13 @@ bool System::DuplicateSystemToken(WindowsHandle existingTokenHandle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle,
-                 TokenStandardAccess,
-                 TokenSpecificAccess,
-                 WindowSecurityAttributesPtr,
-                 SecurityImpersonationLevel,
-                 SecurityTokenType,
-                 WindowsHandlePtr>(existingTokenHandle,
-                                  standardAccess,
-                                  specificAccess,
-                                  tokenAttributes,
-                                  impersonationLevel,
-                                  tokenType,
-                                  newToken);
+    UnusedFunction(existingTokenHandle,
+                   standardAccess,
+                   specificAccess,
+                   tokenAttributes,
+                   impersonationLevel,
+                   tokenType,
+                   newToken);
 
     return false;
 
@@ -264,7 +244,7 @@ bool System::GetSystemTokenInformation(WindowsHandle handle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, TokenInformationClass, WindowsVoidPtr, WindowsDWord, WindowsDWordPtr>(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength);
+    UnusedFunction(handle, tokenInformationClass, tokenInformation, tokenInformationLength, returnLength);
 
     return false;
 
@@ -282,7 +262,7 @@ bool System::IsSystemTokenRestricted(WindowsHandle tokenHandle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(tokenHandle);
+    UnusedFunction(tokenHandle);
 
     return false;
 
@@ -297,7 +277,7 @@ void System::QuerySystemSecurityAccessMask(SecurityRequestedInformation security
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityRequestedInformation, WindowsDWordPtr>(securityInformation, desiredAccess);
+    UnusedFunction(securityInformation, desiredAccess);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

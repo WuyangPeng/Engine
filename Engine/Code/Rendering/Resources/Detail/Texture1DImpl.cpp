@@ -253,13 +253,13 @@ void Rendering::Texture1DImpl
     }
 }
 
-void Rendering::Texture1DImpl ::LoadLevelData(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::Texture1DImpl ::LoadLevelData(CoreTools::BufferSource& source)
 {
     m_TextureLevelData.Load(source);
 }
 
 void Rendering::Texture1DImpl
-    ::SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const
+    ::SaveLevelData (CoreTools::BufferTarget& target) const
 {
     m_TextureLevelData.Save(target);
 }

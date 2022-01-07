@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 18:44)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:40)
 
 #ifndef CORE_TOOLS_TIME_CUSTOM_TIME_H
 #define CORE_TOOLS_TIME_CUSTOM_TIME_H
@@ -30,22 +30,22 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
         void ResetCustomTime() noexcept;
-        [[nodiscard]] int64_t GetThisElapsedTime() noexcept;
-        [[nodiscard]] int64_t GetNowTime() noexcept;
+        NODISCARD int64_t GetThisElapsedTime() noexcept;
+        NODISCARD int64_t GetNowTime() noexcept;
 
-        [[nodiscard]] int64_t GetThisElapsedMillisecondTime() noexcept;
-        [[nodiscard]] int64_t GetNowMillisecondTime() noexcept;
+        NODISCARD int64_t GetThisElapsedMillisecondTime() noexcept;
+        NODISCARD int64_t GetNowMillisecondTime() noexcept;
 
-        [[nodiscard]] static String GetSystemTimeDescribe();
-        [[nodiscard]] static String GetSystemTimeDescribe(const String& dateFormat);
+        NODISCARD static String GetSystemTimeDescribe();
+        NODISCARD static String GetSystemTimeDescribe(const String& dateFormat);
 
     private:
         void MarkTimeThisTick() noexcept;
 
     private:
-        int64_t m_StartTime;
-        int64_t m_CurrentTime;
-        int64_t m_TimeLastTick;
+        int64_t startTime;
+        int64_t currentTime;
+        int64_t timeLastTick;
     };
 }
 

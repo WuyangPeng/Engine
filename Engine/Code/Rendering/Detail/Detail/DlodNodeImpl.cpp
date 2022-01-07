@@ -54,31 +54,31 @@ bool Rendering::DlodNodeImpl
 }
 #endif // OPEN_CLASS_INVARIANT
 
-void Rendering::DlodNodeImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::DlodNodeImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->ReadAggregate(m_ModelLodCenter);
-	source->ReadAggregate(m_WorldLodCenter);
-	source->Read(m_NumLevelsOfDetail);
-//	source->Read(m_ModelMinDistance);
-//	source->Read(m_ModelMaxDistance);
-//	source->Read(m_WorldMinDistance);
-//	source->Read(m_WorldMaxDistance);
+	source.ReadAggregate(m_ModelLodCenter);
+	source.ReadAggregate(m_WorldLodCenter);
+	source.Read(m_NumLevelsOfDetail);
+//	source.Read(m_ModelMinDistance);
+//	source.Read(m_ModelMaxDistance);
+//	source.Read(m_WorldMinDistance);
+//	source.Read(m_WorldMaxDistance);
 }
 
 void Rendering::DlodNodeImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->WriteAggregate(m_ModelLodCenter);
-        target->WriteAggregate(m_WorldLodCenter);
-	target->Write(m_NumLevelsOfDetail);
-        target->WriteContainerWithNumber(m_ModelMinDistance);
-        target->WriteContainerWithNumber(m_ModelMaxDistance);
-        target->WriteContainerWithNumber(m_WorldMinDistance);
-        target->WriteContainerWithNumber(m_WorldMaxDistance);
+	target.WriteAggregate(m_ModelLodCenter);
+        target.WriteAggregate(m_WorldLodCenter);
+	target.Write(m_NumLevelsOfDetail);
+        target.WriteContainerWithNumber(m_ModelMinDistance);
+        target.WriteContainerWithNumber(m_ModelMaxDistance);
+        target.WriteContainerWithNumber(m_WorldMinDistance);
+        target.WriteContainerWithNumber(m_WorldMaxDistance);
 }
 
 int Rendering::DlodNodeImpl

@@ -1,0 +1,7182 @@
+{
+  "datas": [
+    {
+      "nID": 1,
+      "strFile": "1",
+      "strName": "新手引导1-1",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 500,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 10,
+      "strFile": "10",
+      "strName": "测试怪物",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 2010,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 11,
+      "strFile": "11",
+      "strName": "测试关卡",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 12,
+      "strFile": "12",
+      "strName": "测试关卡(移除下滑2.0)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 450,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 13,
+      "strFile": "13",
+      "strName": "站立攻击",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 14,
+      "strFile": "14",
+      "strName": "测试boss",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 2010,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 15,
+      "strFile": "15",
+      "strName": "测试场景",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 16,
+      "strFile": "16",
+      "strName": "章-1[1]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 17,
+      "strFile": "17",
+      "strName": "新手引导1-4",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3005,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 18,
+      "strFile": "18",
+      "strName": "章-1[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 19,
+      "strFile": "19",
+      "strName": "章-1[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 2,
+      "strFile": "2",
+      "strName": "新手引导1-2",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 600,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 20,
+      "strFile": "20",
+      "strName": "章-1[5]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 21,
+      "strFile": "21",
+      "strName": "章-1[6]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 22,
+      "strFile": "22",
+      "strName": "章-1[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 23,
+      "strFile": "23",
+      "strName": "章-1[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 24,
+      "strFile": "24",
+      "strName": "章-1[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 25,
+      "strFile": "25",
+      "strName": "章-1[10]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 26,
+      "strFile": "26",
+      "strName": "章-1[11]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 27,
+      "strFile": "27",
+      "strName": "章-1[12]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 28,
+      "strFile": "28",
+      "strName": "森林跑酷",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 2014,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 29,
+      "strFile": "29",
+      "strName": "章节-树精[1]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 3,
+      "strFile": "3",
+      "strName": "新手引导1-3",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 450,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 30,
+      "strFile": "30",
+      "strName": "章节-树精[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 31,
+      "strFile": "31",
+      "strName": "章节-树精[3]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3003,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 32,
+      "strFile": "32",
+      "strName": "章节-树精[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 33,
+      "strFile": "33",
+      "strName": "章节-树精[5]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 34,
+      "strFile": "34",
+      "strName": "章节-树精[6]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 35,
+      "strFile": "35",
+      "strName": "章节-树精[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 36,
+      "strFile": "36",
+      "strName": "章节-树精[8]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 37,
+      "strFile": "37",
+      "strName": "章节-树精[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 38,
+      "strFile": "38",
+      "strName": "章节-树精[10]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 39,
+      "strFile": "39",
+      "strName": "章节-精灵龙[1]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 40,
+      "strFile": "40",
+      "strName": "章节-精灵龙[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 41,
+      "strFile": "41",
+      "strName": "章节-精灵龙[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 42,
+      "strFile": "42",
+      "strName": "章节-精灵龙[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 43,
+      "strFile": "43",
+      "strName": "章节-精灵龙[5]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 44,
+      "strFile": "44",
+      "strName": "章节-精灵龙[6]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 45,
+      "strFile": "45",
+      "strName": "章节-精灵龙[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 46,
+      "strFile": "46",
+      "strName": "章节-精灵龙[8]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001002,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 47,
+      "strFile": "47",
+      "strName": "章节-精灵龙[9]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001002,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 48,
+      "strFile": "48",
+      "strName": "章节-精灵龙[10]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001002,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 5,
+      "strFile": "5",
+      "strName": "纯跑酷关卡1",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 650,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 6,
+      "strFile": "6",
+      "strName": "纯跑酷关卡2",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 650,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 7,
+      "strFile": "7",
+      "strName": "小怪战斗关卡",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 2004,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 8,
+      "strFile": "8",
+      "strName": "BOSS",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 2009,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 9,
+      "strFile": "9",
+      "strName": "测试动作",
+      "nPassFlag": 4,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 300,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 49,
+      "strFile": "49",
+      "strName": "章节-野猪王[1]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001003,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 50,
+      "strFile": "50",
+      "strName": "章节-野猪王[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 51,
+      "strFile": "51",
+      "strName": "章节-野猪王[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 52,
+      "strFile": "52",
+      "strName": "章节-野猪王[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 53,
+      "strFile": "53",
+      "strName": "章节-野猪王[5]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 54,
+      "strFile": "54",
+      "strName": "章节-野猪王[6]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 55,
+      "strFile": "55",
+      "strName": "章节-野猪王[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 56,
+      "strFile": "56",
+      "strName": "章节-野猪王[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 57,
+      "strFile": "57",
+      "strName": "章节-野猪王[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 58,
+      "strFile": "58",
+      "strName": "章节-野猪王[10]",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001003,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 59,
+      "strFile": "59",
+      "strName": "视频素材关卡(无垠草原)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 60,
+      "strFile": "60",
+      "strName": "测试1-1",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 900,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 61,
+      "strFile": "61",
+      "strName": "测试1-2",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 900,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 62,
+      "strFile": "62",
+      "strName": "测试1-1(调整)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 900,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 63,
+      "strFile": "63",
+      "strName": "测试1-2(调整)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 64,
+      "strFile": "64",
+      "strName": "第一章[1]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 900,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 65,
+      "strFile": "65",
+      "strName": "第一章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 66,
+      "strFile": "66",
+      "strName": "第一章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 67,
+      "strFile": "67",
+      "strName": "",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 68,
+      "strFile": "68",
+      "strName": "",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 69,
+      "strFile": "69",
+      "strName": "第一章[4]",
+      "nPassFlag": 9,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 700,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3004,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 70,
+      "strFile": "70",
+      "strName": "第一章[5](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001003,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 71,
+      "strFile": "71",
+      "strName": "第二章[5](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001002,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 72,
+      "strFile": "72",
+      "strName": "视频素材关卡(精灵之森)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 73,
+      "strFile": "73",
+      "strName": "视频素材关卡(猛毒雨林)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 74,
+      "strFile": "74",
+      "strName": "视频素材关卡(技能释放)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 75,
+      "strFile": "75",
+      "strName": "视频素材关卡(技能释放)-带攻击",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 76,
+      "strFile": "76",
+      "strName": "第二章[1]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 77,
+      "strFile": "77",
+      "strName": "第二章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 78,
+      "strFile": "78",
+      "strName": "第二章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 79,
+      "strFile": "79",
+      "strName": "第二章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 80,
+      "strFile": "80",
+      "strName": "第二章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 81,
+      "strFile": "81",
+      "strName": "第二章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 82,
+      "strFile": "82",
+      "strName": "第二章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 83,
+      "strFile": "83",
+      "strName": "第二章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 84,
+      "strFile": "84",
+      "strName": "第二章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 94,
+      "strFile": "94",
+      "strName": "第三章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 93,
+      "strFile": "93",
+      "strName": "第三章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 92,
+      "strFile": "92",
+      "strName": "第三章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 91,
+      "strFile": "91",
+      "strName": "第三章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 90,
+      "strFile": "90",
+      "strName": "第三章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 89,
+      "strFile": "89",
+      "strName": "第三章[5](精英)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 200020,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 88,
+      "strFile": "88",
+      "strName": "第三章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 86,
+      "strFile": "86",
+      "strName": "第三章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 87,
+      "strFile": "87",
+      "strName": "第三章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 85,
+      "strFile": "85",
+      "strName": "第三章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 95,
+      "strFile": "95",
+      "strName": "第四章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 500,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 96,
+      "strFile": "96",
+      "strName": "第四章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 97,
+      "strFile": "97",
+      "strName": "第四章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 98,
+      "strFile": "98",
+      "strName": "第四章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 99,
+      "strFile": "99",
+      "strName": "第四章[5](精英)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 200030,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 100,
+      "strFile": "100",
+      "strName": "第四章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 500,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 101,
+      "strFile": "101",
+      "strName": "第四章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 102,
+      "strFile": "102",
+      "strName": "第四章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 103,
+      "strFile": "103",
+      "strName": "第四章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 104,
+      "strFile": "104",
+      "strName": "第四章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 105,
+      "strFile": "105",
+      "strName": "第五章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 800,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 106,
+      "strFile": "106",
+      "strName": "第五章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 107,
+      "strFile": "107",
+      "strName": "第五章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 108,
+      "strFile": "108",
+      "strName": "第五章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 109,
+      "strFile": "109",
+      "strName": "第五章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 114,
+      "strFile": "114",
+      "strName": "第五章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 113,
+      "strFile": "113",
+      "strName": "第五章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 112,
+      "strFile": "112",
+      "strName": "第五章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 111,
+      "strFile": "111",
+      "strName": "第五章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 110,
+      "strFile": "110",
+      "strName": "第五章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 800,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 115,
+      "strFile": "115",
+      "strName": "第六章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 800,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 116,
+      "strFile": "116",
+      "strName": "第六章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 117,
+      "strFile": "117",
+      "strName": "第六章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 118,
+      "strFile": "118",
+      "strName": "第六章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 119,
+      "strFile": "119",
+      "strName": "第六章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 120,
+      "strFile": "120",
+      "strName": "第六章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 800,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 121,
+      "strFile": "121",
+      "strName": "第六章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 122,
+      "strFile": "122",
+      "strName": "第六章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 123,
+      "strFile": "123",
+      "strName": "第六章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 124,
+      "strFile": "124",
+      "strName": "第六章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 400060,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 125,
+      "strFile": "125",
+      "strName": "第八章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 126,
+      "strFile": "126",
+      "strName": "第八章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 127,
+      "strFile": "127",
+      "strName": "第八章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 128,
+      "strFile": "128",
+      "strName": "第八章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 129,
+      "strFile": "129",
+      "strName": "第八章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 130,
+      "strFile": "130",
+      "strName": "第八章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 131,
+      "strFile": "131",
+      "strName": "第八章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 132,
+      "strFile": "132",
+      "strName": "第八章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 133,
+      "strFile": "133",
+      "strName": "第八章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 134,
+      "strFile": "134",
+      "strName": "第八章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 135,
+      "strFile": "135",
+      "strName": "第十章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 136,
+      "strFile": "136",
+      "strName": "第十章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 137,
+      "strFile": "137",
+      "strName": "第十章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 138,
+      "strFile": "138",
+      "strName": "第十章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 139,
+      "strFile": "139",
+      "strName": "第十章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 140,
+      "strFile": "140",
+      "strName": "第十章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 141,
+      "strFile": "141",
+      "strName": "第十章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 142,
+      "strFile": "142",
+      "strName": "第十章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 143,
+      "strFile": "143",
+      "strName": "第十章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 144,
+      "strFile": "144",
+      "strName": "第十章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 145,
+      "strFile": "145",
+      "strName": "第十三章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 146,
+      "strFile": "146",
+      "strName": "第十三章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 147,
+      "strFile": "147",
+      "strName": "第十三章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 148,
+      "strFile": "148",
+      "strName": "第十三章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 149,
+      "strFile": "149",
+      "strName": "第十三章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 150,
+      "strFile": "150",
+      "strName": "第十三章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 151,
+      "strFile": "151",
+      "strName": "第十三章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 152,
+      "strFile": "152",
+      "strName": "第十三章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 153,
+      "strFile": "153",
+      "strName": "第十三章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 154,
+      "strFile": "154",
+      "strName": "第十三章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 155,
+      "strFile": "155",
+      "strName": "第七章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 156,
+      "strFile": "156",
+      "strName": "第七章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 157,
+      "strFile": "157",
+      "strName": "第七章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 158,
+      "strFile": "158",
+      "strName": "第七章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 159,
+      "strFile": "159",
+      "strName": "第七章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 160,
+      "strFile": "160",
+      "strName": "第七章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 161,
+      "strFile": "161",
+      "strName": "第七章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 162,
+      "strFile": "162",
+      "strName": "第七章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 163,
+      "strFile": "163",
+      "strName": "第七章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 164,
+      "strFile": "164",
+      "strName": "第七章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 400060,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 165,
+      "strFile": "165",
+      "strName": "第九章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 166,
+      "strFile": "166",
+      "strName": "第九章[2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 167,
+      "strFile": "167",
+      "strName": "第九章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 168,
+      "strFile": "168",
+      "strName": "第九章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 169,
+      "strFile": "169",
+      "strName": "第九章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 170,
+      "strFile": "170",
+      "strName": "第九章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 171,
+      "strFile": "171",
+      "strName": "第九章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 172,
+      "strFile": "172",
+      "strName": "第九章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 173,
+      "strFile": "173",
+      "strName": "第九章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 174,
+      "strFile": "174",
+      "strName": "第九章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 175,
+      "strFile": "175",
+      "strName": "第十二章[1](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 176,
+      "strFile": "176",
+      "strName": "第十二章2]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 177,
+      "strFile": "177",
+      "strName": "第十二章[3]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 178,
+      "strFile": "178",
+      "strName": "第十二章[4]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 179,
+      "strFile": "179",
+      "strName": "第十二章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 180,
+      "strFile": "180",
+      "strName": "第十二章[6](金币)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 181,
+      "strFile": "181",
+      "strName": "第十二章[7]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 182,
+      "strFile": "182",
+      "strName": "第十二章[8]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 183,
+      "strFile": "183",
+      "strName": "第十二章[9]",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 184,
+      "strFile": "184",
+      "strName": "第十二章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 185,
+      "strFile": "185",
+      "strName": "第十一章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 186,
+      "strFile": "186",
+      "strName": "第十一章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 187,
+      "strFile": "187",
+      "strName": "第十一章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 188,
+      "strFile": "188",
+      "strName": "第十一章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 189,
+      "strFile": "189",
+      "strName": "第十一章[5](精英)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 190,
+      "strFile": "190",
+      "strName": "第十一章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 191,
+      "strFile": "191",
+      "strName": "第十一章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 192,
+      "strFile": "192",
+      "strName": "第十一章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 193,
+      "strFile": "193",
+      "strName": "第十一章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 194,
+      "strFile": "194",
+      "strName": "第十一章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 195,
+      "strFile": "195",
+      "strName": "第十四章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 196,
+      "strFile": "196",
+      "strName": "第十四章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 197,
+      "strFile": "197",
+      "strName": "第十四章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 198,
+      "strFile": "198",
+      "strName": "第十四章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 199,
+      "strFile": "199",
+      "strName": "第十四章[5](精英)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 200,
+      "strFile": "200",
+      "strName": "第十四章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 201,
+      "strFile": "201",
+      "strName": "第十四章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 202,
+      "strFile": "202",
+      "strName": "第十四章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 203,
+      "strFile": "203",
+      "strName": "第十四章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 204,
+      "strFile": "204",
+      "strName": "第十四章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 400060,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 205,
+      "strFile": "205",
+      "strName": "第十五章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 206,
+      "strFile": "206",
+      "strName": "第十五章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 207,
+      "strFile": "207",
+      "strName": "第十五章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 208,
+      "strFile": "208",
+      "strName": "第十五章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 209,
+      "strFile": "209",
+      "strName": "第十五章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 210,
+      "strFile": "210",
+      "strName": "第十五章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 211,
+      "strFile": "211",
+      "strName": "第十五章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 212,
+      "strFile": "212",
+      "strName": "第十五章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 213,
+      "strFile": "213",
+      "strName": "第十五章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 214,
+      "strFile": "214",
+      "strName": "第十五章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 400060,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 215,
+      "strFile": "215",
+      "strName": "第十六章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 216,
+      "strFile": "216",
+      "strName": "第十六章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 217,
+      "strFile": "217",
+      "strName": "第十六章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 218,
+      "strFile": "218",
+      "strName": "第十六章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 219,
+      "strFile": "219",
+      "strName": "第十六章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 220,
+      "strFile": "220",
+      "strName": "第十六章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 221,
+      "strFile": "221",
+      "strName": "第十六章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 222,
+      "strFile": "222",
+      "strName": "第十六章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 223,
+      "strFile": "223",
+      "strName": "第十六章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 224,
+      "strFile": "224",
+      "strName": "第十六章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 225,
+      "strFile": "225",
+      "strName": "第十七章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 226,
+      "strFile": "226",
+      "strName": "第十七章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 227,
+      "strFile": "227",
+      "strName": "第十七章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 228,
+      "strFile": "228",
+      "strName": "第十七章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 229,
+      "strFile": "229",
+      "strName": "第十七章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 230,
+      "strFile": "230",
+      "strName": "第十七章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 231,
+      "strFile": "231",
+      "strName": "第十七章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 232,
+      "strFile": "232",
+      "strName": "第十七章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 233,
+      "strFile": "233",
+      "strName": "第十七章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 234,
+      "strFile": "234",
+      "strName": "第十七章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 235,
+      "strFile": "235",
+      "strName": "第十八章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 236,
+      "strFile": "236",
+      "strName": "第十八章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 237,
+      "strFile": "237",
+      "strName": "第十八章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 238,
+      "strFile": "238",
+      "strName": "第十八章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 239,
+      "strFile": "239",
+      "strName": "第十八章[5](精英)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 240,
+      "strFile": "240",
+      "strName": "第十八章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 241,
+      "strFile": "241",
+      "strName": "第十八章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 242,
+      "strFile": "242",
+      "strName": "第十八章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 243,
+      "strFile": "243",
+      "strName": "第十八章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 244,
+      "strFile": "244",
+      "strName": "第十八章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 245,
+      "strFile": "245",
+      "strName": "第十九章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 246,
+      "strFile": "246",
+      "strName": "第十九章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 247,
+      "strFile": "247",
+      "strName": "第十九章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 248,
+      "strFile": "248",
+      "strName": "第十九章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 249,
+      "strFile": "249",
+      "strName": "第十九章[5](精英)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001002,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 250,
+      "strFile": "250",
+      "strName": "第十九章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 251,
+      "strFile": "251",
+      "strName": "第十九章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 252,
+      "strFile": "252",
+      "strName": "第十九章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 253,
+      "strFile": "253",
+      "strName": "第十九章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 254,
+      "strFile": "254",
+      "strName": "第十九章[10](boss)",
+      "nPassFlag": 8,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": [
+            {
+              "value1": 3001001,
+              "value2": 1
+            }
+          ]
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 255,
+      "strFile": "255",
+      "strName": "第二十章[1](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 256,
+      "strFile": "256",
+      "strName": "第二十章[2]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 257,
+      "strFile": "257",
+      "strName": "第二十章[3]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 258,
+      "strFile": "258",
+      "strName": "第二十章[4]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 259,
+      "strFile": "259",
+      "strName": "第二十章[5](精英)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 260,
+      "strFile": "260",
+      "strName": "第二十章[6](金币)",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 261,
+      "strFile": "261",
+      "strName": "第二十章[7]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 262,
+      "strFile": "262",
+      "strName": "第二十章[8]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 263,
+      "strFile": "263",
+      "strName": "第二十章[9]",
+      "nPassFlag": 0,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    },
+    {
+      "nID": 264,
+      "strFile": "264",
+      "strName": "第二十章[10](boss)",
+      "nPassFlag": 1,
+      "nPassRelation": 0,
+      "PassParams": [
+        {
+          "values": [
+            {
+              "value1": 1000,
+              "value2": 0
+            }
+          ]
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        },
+        {
+          "values": []
+        }
+      ]
+    }
+  ]
+}

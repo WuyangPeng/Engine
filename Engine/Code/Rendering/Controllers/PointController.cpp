@@ -232,14 +232,14 @@ int Rendering::PointController ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::PointController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::PointController ::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void Rendering::PointController ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::PointController ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -252,7 +252,7 @@ void Rendering::PointController ::Save(const CoreTools::BufferTargetSharedPtr& t
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::PointController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::PointController ::Link(CoreTools::ObjectLink& source)
 {
     ;
 
@@ -272,7 +272,7 @@ void Rendering::PointController ::PostLink()
     m_Points = dynamic_cast<Polypoint*>(object);
 }
 
-void Rendering::PointController ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::PointController ::Load(CoreTools::BufferSource& source)
 {
     ;
 

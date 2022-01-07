@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/06/04 14:55)
+///	引擎版本：0.8.0.0 (2021/12/13 14:36)
 
 #include "System/SystemExport.h"
 
@@ -32,7 +32,7 @@ System::WinSocket System::GetSocket(ProtocolFamilies addressFamilies, SocketType
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ProtocolFamilies, SocketTypes, SocketProtocols>(addressFamilies, type, protocol);
+    UnusedFunction(addressFamilies, type, protocol);
 
     return nullptr;
 
@@ -47,7 +47,7 @@ uint16_t System::GetHostToNetShort(uint16_t hostShort) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<uint16_t>(hostShort);
+    UnusedFunction(hostShort);
 
     return 0;
 
@@ -60,15 +60,17 @@ bool System::Bind(WinSocket winSocket, const WinSockAddrIn* address) noexcept
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
     if (::bind(winSocket, reinterpret_cast<const WinSockAddr*>(address), sizeof(WinSockAddrIn)) != g_SocketError)
         return true;
     else
         return false;
+
     #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, const WinSockAddrIn*>(winSocket, address);
+    UnusedFunction(winSocket, address);
 
     return false;
 
@@ -81,12 +83,14 @@ System::WinSocket System::Accept(WinSocket winSocket, WinSockAddrIn* address, in
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
     return ::accept(winSocket, reinterpret_cast<WinSockAddr*>(address), namelen);
+
     #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, WinSockAddrIn*, int*>(winSocket, address, namelen);
+    UnusedFunction(winSocket, address, namelen);
 
     return nullptr;
 
@@ -104,7 +108,7 @@ bool System::Listen(WinSocket winSocket, int backlog) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, int>(winSocket, backlog);
+    UnusedFunction(winSocket, backlog);
 
     return false;
 
@@ -122,7 +126,7 @@ bool System::CloseSocket(WinSocket winSocket) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket>(winSocket);
+    UnusedFunction(winSocket);
 
     return false;
 
@@ -137,7 +141,7 @@ int System::Recv(WinSocket winSocket, char* buf, int len, SocketRecv flags) noex
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, char*, int, SocketRecv>(winSocket, buf, len, flags);
+    UnusedFunction(winSocket, buf, len, flags);
 
     return 0;
 
@@ -160,7 +164,7 @@ unsigned long System::GetHostToNetLong(unsigned long hostlong) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<unsigned long>(hostlong);
+    UnusedFunction(hostlong);
 
     return 0;
 
@@ -183,7 +187,7 @@ bool System::Connect(WinSocket winSocket, const WinSockAddrIn* address) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, const WinSockAddrIn*>(winSocket, address);
+    UnusedFunction(winSocket, address);
 
     return false;
 
@@ -198,7 +202,7 @@ int System::Send(WinSocket winSocket, const char* buf, int len, SocketSend flags
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, const char*, int, SocketSend>(winSocket, buf, len, flags);
+    UnusedFunction(winSocket, buf, len, flags);
 
     return 0;
 
@@ -218,7 +222,7 @@ unsigned long System::GetInetAddr(const char* cp) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*>(cp);
+    UnusedFunction(cp);
 
     return 0;
 
@@ -236,7 +240,7 @@ bool System::IoctlSocket(WinSocket winSocket, IoctlSocketCmd cmd, unsigned long*
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, IoctlSocketCmd, unsigned long*>(winSocket, cmd, argp);
+    UnusedFunction(winSocket, cmd, argp);
 
     return false;
 
@@ -259,7 +263,7 @@ bool System::GetPeerName(WinSocket winSocket, WinSockAddrIn* name, int* namelen)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, WinSockAddrIn*, int*>(winSocket, name, namelen);
+    UnusedFunction(winSocket, name, namelen);
 
     return false;
 
@@ -282,7 +286,7 @@ bool System::GetSockName(WinSocket winSocket, WinSockAddrIn* name, int* namelen)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, WinSockAddrIn*, int*>(winSocket, name, namelen);
+    UnusedFunction(winSocket, name, namelen);
 
     return false;
 
@@ -300,7 +304,7 @@ bool System::GetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, SocketLevelOption, SocketRetrievedOption, char*, int*>(winSocket, level, optName, optVal, optLen);
+    UnusedFunction(winSocket, level, optName, optVal, optLen);
 
     return false;
 
@@ -322,7 +326,7 @@ string System::InetNtoa(const WinSockInAddr& in)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSockInAddr>(in);
+    UnusedFunction(in);
 
     return nullptr;
 
@@ -340,7 +344,7 @@ bool System::SetSockOpt(WinSocket winSocket, SocketLevelOption level, SocketRetr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, SocketLevelOption, SocketRetrievedOption, const char*, int*>(winSocket, level, optName, optVal, optLen);
+    UnusedFunction(winSocket, level, optName, optVal, optLen);
 
     return false;
 
@@ -355,7 +359,7 @@ uint16_t System::GetNetToHostShort(uint16_t netShort) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<uint16_t>(netShort);
+    UnusedFunction(netShort);
 
     return 0;
 
@@ -370,7 +374,7 @@ unsigned long System::GetNetToHostLong(unsigned long netlong) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<unsigned long>(netlong);
+    UnusedFunction(netlong);
 
     return 0;
 
@@ -388,7 +392,7 @@ bool System::ShutDown(WinSocket winSocket, ShutdownHow how) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, ShutdownHow>(winSocket, how);
+    UnusedFunction(winSocket, how);
 
     return false;
 
@@ -408,7 +412,7 @@ int System::RecvFrom(WinSocket winSocket, char* buf, int len, SocketRecv flags, 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, char*, int, SocketRecv, WinSockAddrIn*, int*>(winSocket, buf, len, flags, from, fromlen);
+    UnusedFunction(winSocket, buf, len, flags, from, fromlen);
 
     return 0;
 
@@ -428,7 +432,7 @@ int System::SendTo(WinSocket winSocket, const char* buf, int len, SocketSend fla
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, const char*, int, SocketSend, const WinSockAddrIn*>(winSocket, buf, len, flags, to);
+    UnusedFunction(winSocket, buf, len, flags, to);
 
     return 0;
 
@@ -443,7 +447,7 @@ int System::Select(int width, WinSockFdSet* readfds, WinSockFdSet* writefds, Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<int, WinSockFdSet*, WinSockFdSet*, WinSockFdSet*, const WinSockTimeval*>(width, readfds, writefds, exceptfds, timeout);
+    UnusedFunction(width, readfds, writefds, exceptfds, timeout);
 
     return 0;
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:39)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 0:02)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_SLOT_DETAIL_H
@@ -18,21 +18,23 @@
 #include <iostream>
 
 template <typename T, typename PriorityType>
-CoreTools::EventSlot<T, PriorityType>::EventSlot(const SubclassSmartPointerType& smartPointer, PriorityType priority, CallbackMemberFunction callbackMemberFunction) noexcept
-    : m_SubclassWeakPointer{ smartPointer }, m_Priority{ priority }, m_CallbackMemberFunction{ callbackMemberFunction }
+CoreTools::EventSlot<T, PriorityType>::EventSlot(const SubclassSharedPtr& subclass, PriorityType priority, CallbackMemberFunction callbackMemberFunction) noexcept
+    : subclass{ subclass }, priority{ priority }, callbackMemberFunction{ callbackMemberFunction }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T, typename PriorityType>
 bool CoreTools::EventSlot<T, PriorityType>::IsValid() const noexcept
 {
-    if (m_CallbackMemberFunction != nullptr)
+    if (callbackMemberFunction != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T, typename PriorityType>
@@ -40,11 +42,11 @@ bool CoreTools::EventSlot<T, PriorityType>::operator()(const CallbackParameters&
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto subclassSmartPointer = m_SubclassWeakPointer.lock();
+    auto subclassSharedPtr = subclass.lock();
 
-    if (subclassSmartPointer)
+    if (subclassSharedPtr)
     {
-        return ((*subclassSmartPointer).*m_CallbackMemberFunction)(callbackParameters);
+        return ((*subclassSharedPtr).*callbackMemberFunction)(callbackParameters);
     }
     else
     {
@@ -57,15 +59,15 @@ PriorityType CoreTools::EventSlot<T, PriorityType>::GetPriority() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Priority;
+    return priority;
 }
 
 template <typename T, typename PriorityType>
-const typename CoreTools::EventSlot<T, PriorityType>::ConstSubclassSmartPointerType CoreTools::EventSlot<T, PriorityType>::GetConstSmartPointer() const
+const typename CoreTools::EventSlot<T, PriorityType>::ConstSubclassSharedPtr CoreTools::EventSlot<T, PriorityType>::GetConstSharedPtr() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_SubclassWeakPointer.lock();
+    return subclass.lock();
 }
 
 template <typename T, typename PriorityType>

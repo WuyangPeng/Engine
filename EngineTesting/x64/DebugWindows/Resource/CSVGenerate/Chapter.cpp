@@ -10,7 +10,7 @@
 #include "Chapter.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/CSVRowDetail.h"
+#include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
 using namespace std::literals;
 

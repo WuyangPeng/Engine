@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 10:24)
+///	引擎版本：0.8.0.0 (2021/12/13 18:51)
 
 #include "System/SystemExport.h"
 
@@ -27,9 +27,13 @@ bool System::GetEnvironment(const String& variableName, TChar*& environmentVaria
 #elif defined(TCRE_USE_GCC)
 
     #ifdef UNICODE
+
     environmentVariable = ::_wgetenv(variableName.c_str());
+
     #else  // !UNICODE
+
     environmentVariable = ::getenv(variableName.c_str());
+
     #endif  // UNICODE
 
     if (environmentVariable == nullptr)
@@ -60,7 +64,9 @@ void System::FreeEnvironment(TChar*& environmentVariable) noexcept
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26408)
+
     ::free(environmentVariable);
+
     #include STSTEM_WARNING_POP
 
     environmentVariable = nullptr;

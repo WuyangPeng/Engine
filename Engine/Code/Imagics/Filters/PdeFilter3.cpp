@@ -1,61 +1,60 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/30 15:59)
 
 #include "Imagics/ImagicsExport.h"
 
 #include "PdeFilter3.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
-#include <memory>
+
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+#include <memory>
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26489)
 #include SYSTEM_WARNING_DISABLE(26429)
-Imagics::PdeFilter3
-	::PdeFilter3 (int xBound, int yBound, int zBound,float xSpacing, float ySpacing, float zSpacing, const float* data,const bool* mask, float borderValue, ScaleType scaleType)
-    :PdeFilter(xBound*yBound*zBound, data, borderValue, scaleType),
-     mXBound(xBound),
-	 mYBound(yBound),
-	 mZBound(zBound),
-	 mXSpacing(xSpacing),
-	 mYSpacing(ySpacing),
-	 mZSpacing(zSpacing),
-	 mInvDx(1.0f/xSpacing),
-	 mInvDy(1.0f/ySpacing),
-	 mInvDz(1.0f/zSpacing),
-	 mHalfInvDx(0.5f*mInvDx),
-	 mHalfInvDy(0.5f*mInvDy),
-	 mHalfInvDz(0.5f*mInvDz),
-	 mInvDxDx(mInvDx*mInvDx),
-	 mFourthInvDxDy(mHalfInvDx*mHalfInvDy),
-	 mFourthInvDxDz(mHalfInvDx*mHalfInvDz),
-	 mInvDyDy(mInvDy*mInvDy),
-	 mFourthInvDyDz(mHalfInvDy*mHalfInvDz),
-	 mInvDzDz(mInvDz*mInvDz)
+Imagics::PdeFilter3 ::PdeFilter3(int xBound, int yBound, int zBound, float xSpacing, float ySpacing, float zSpacing, const float* data, const bool* mask, float borderValue, ScaleType scaleType)
+    : PdeFilter(xBound * yBound * zBound, data, borderValue, scaleType),
+      mXBound(xBound),
+      mYBound(yBound),
+      mZBound(zBound),
+      mXSpacing(xSpacing),
+      mYSpacing(ySpacing),
+      mZSpacing(zSpacing),
+      mInvDx(1.0f / xSpacing),
+      mInvDy(1.0f / ySpacing),
+      mInvDz(1.0f / zSpacing),
+      mHalfInvDx(0.5f * mInvDx),
+      mHalfInvDy(0.5f * mInvDy),
+      mHalfInvDz(0.5f * mInvDz),
+      mInvDxDx(mInvDx * mInvDx),
+      mFourthInvDxDy(mHalfInvDx * mHalfInvDy),
+      mFourthInvDxDz(mHalfInvDx * mHalfInvDz),
+      mInvDyDy(mInvDy * mInvDy),
+      mFourthInvDyDz(mHalfInvDy * mHalfInvDz),
+      mInvDzDz(mInvDz * mInvDz)
 {
     // Create two buffers for filtering, one a source buffer and one a
     // destination buffer.  Their roles are reversed on each iteration of
     // the filter.
     const int xBp2 = mXBound + 2;
-	const int yBp2 = mYBound + 2;
-	const int zBp2 = mZBound + 2;
-    mSrc = NEW3<float>(xBp2, yBp2, zBp2);
-    mDst = NEW3<float>(xBp2, yBp2, zBp2);
+    const int yBp2 = mYBound + 2;
+    const int zBp2 = mZBound + 2;
+    mSrc = nullptr;  //NEW3<float>(xBp2, yBp2, zBp2);
+    mDst = nullptr;  //NEW3<float>(xBp2, yBp2, zBp2);
     if (mask)
     {
-        mMask = NEW3<bool>(xBp2, yBp2, zBp2);
+        mMask = nullptr;  // NEW3<bool>(xBp2, yBp2, zBp2);
 
         // This sets all mask values to 'false' initially.  The interior mask
         // values will be filled in later using the input mask.  The
         // boundary mask values will remain 'false'.
-        memset(mMask[0][0], 0, xBp2*yBp2*zBp2*sizeof(bool));
+        memset(mMask[0][0], 0, xBp2 * yBp2 * zBp2 * sizeof(bool));
     }
     else
     {
@@ -64,14 +63,14 @@ Imagics::PdeFilter3
 
     // Copy the inputs data and mask to the interior elements of
     // mSrc and mMask.
-    int x = 0, y= 0, z= 0, xp= 0, yp= 0, zp= 0, i= 0;
+    int x = 0, y = 0, z = 0, xp = 0, yp = 0, zp = 0, i = 0;
     for (z = 0, zp = 1, i = 0; z < mZBound; ++z, ++zp)
     {
         for (y = 0, yp = 1; y < mYBound; ++y, ++yp)
         {
             for (x = 0, xp = 1; x < mXBound; ++x, ++xp, ++i)
             {
-                mSrc[zp][yp][xp] = mOffset + (data[i] - mMin)*mScale;
+                mSrc[zp][yp][xp] = mOffset + (data[i] - mMin) * mScale;
 
                 if (mMask)
                 {
@@ -106,23 +105,21 @@ Imagics::PdeFilter3
     }
 }
 
-Imagics::PdeFilter3
-	::~PdeFilter3 ()
-{EXCEPTION_TRY
+Imagics::PdeFilter3 ::~PdeFilter3()
 {
- DELETE3(mSrc);
-    DELETE3(mDst);
-    DELETE3(mMask);
-}
-EXCEPTION_ALL_CATCH(Mathematics) 
-    
+    EXCEPTION_TRY
+    {
+//         DELETE3(mSrc);
+//         DELETE3(mDst);
+//         DELETE3(mMask);
+    }
+    EXCEPTION_ALL_CATCH(Mathematics)
 }
 
-void Imagics::PdeFilter3
-	::AssignDirichletImageBorder () noexcept
+void Imagics::PdeFilter3 ::AssignDirichletImageBorder() noexcept
 {
     int xBp1 = mXBound + 1, yBp1 = mYBound + 1, zBp1 = mZBound + 1;
-    int x = 0, y= 0, z= 0;
+    int x = 0, y = 0, z = 0;
 
     // vertex (0,0,0)
     mSrc[0][0][0] = mBorderValue;
@@ -360,8 +357,7 @@ void Imagics::PdeFilter3
     }
 }
 
-void Imagics::PdeFilter3
-	::AssignNeumannImageBorder () noexcept
+void Imagics::PdeFilter3 ::AssignNeumannImageBorder() noexcept
 {
     int xBp1 = mXBound + 1, yBp1 = mYBound + 1, zBp1 = mZBound + 1;
     int x = 0, y = 0, z = 0;
@@ -629,8 +625,7 @@ void Imagics::PdeFilter3
     }
 }
 
-void Imagics::PdeFilter3
-	::AssignDirichletMaskBorder ()
+void Imagics::PdeFilter3 ::AssignDirichletMaskBorder()
 {
     if (mMask)
     {
@@ -647,11 +642,11 @@ void Imagics::PdeFilter3
 
                     bool found = false;
                     int i0 = 0, i1 = 0, i2 = 0, j0 = 0, j1 = 0, j2 = 0;
-                    for (i2 = 0, j2 = z-1; i2 < 3 && !found; ++i2, ++j2)
+                    for (i2 = 0, j2 = z - 1; i2 < 3 && !found; ++i2, ++j2)
                     {
-                        for (i1 = 0, j1 = y-1; i1 < 3 && !found; ++i1, ++j1)
+                        for (i1 = 0, j1 = y - 1; i1 < 3 && !found; ++i1, ++j1)
                         {
-                            for (i0 = 0, j0 = x-1; i0 < 3; ++i0, ++j0)
+                            for (i0 = 0, j0 = x - 1; i0 < 3; ++i0, ++j0)
                             {
                                 if (mMask[j2][j1][j0])
                                 {
@@ -673,8 +668,7 @@ void Imagics::PdeFilter3
     }
 }
 
-void Imagics::PdeFilter3
-	::AssignNeumannMaskBorder () noexcept
+void Imagics::PdeFilter3 ::AssignNeumannMaskBorder() noexcept
 {
     // Recompute the values just outside the masked region.  This guarantees
     // that derivative estimations use the current values around the boundary.
@@ -692,11 +686,11 @@ void Imagics::PdeFilter3
                 int count = 0;
                 float average = 0.0f;
                 int i0 = 0, i1 = 0, i2 = 0, j0 = 0, j1 = 0, j2 = 0;
-                for (i2 = 0, j2 = z-1; i2 < 3; ++i2, ++j2)
+                for (i2 = 0, j2 = z - 1; i2 < 3; ++i2, ++j2)
                 {
-                    for (i1 = 0, j1 = y-1; i1 < 3; ++i1, ++j1)
+                    for (i1 = 0, j1 = y - 1; i1 < 3; ++i1, ++j1)
                     {
-                        for (i0 = 0, j0 = x-1; i0 < 3; ++i0, ++j0)
+                        for (i0 = 0, j0 = x - 1; i0 < 3; ++i0, ++j0)
                         {
                             if (mMask[j2][j1][j0])
                             {
@@ -718,8 +712,7 @@ void Imagics::PdeFilter3
     }
 }
 
-void Imagics::PdeFilter3
-	::OnPreUpdate () noexcept
+void Imagics::PdeFilter3 ::OnPreUpdate() noexcept
 {
     if (mMask && mBorderValue == Mathematics::FloatMath::sm_MaxReal)
     {
@@ -731,8 +724,7 @@ void Imagics::PdeFilter3
     // in use.  Nothing to do.
 }
 
-void Imagics::PdeFilter3
-	::OnUpdate ()
+void Imagics::PdeFilter3 ::OnUpdate()
 {
     for (int z = 1; z <= mZBound; ++z)
     {
@@ -742,7 +734,7 @@ void Imagics::PdeFilter3
             {
                 if (!mMask || mMask[z][y][x])
                 {
-                    OnUpdate(x,y,z);
+                    OnUpdate(x, y, z);
                 }
             }
         }
@@ -757,174 +749,154 @@ void Imagics::PdeFilter3 ::OnPostUpdate() noexcept
     mDst = save;
 }
 
-void Imagics::PdeFilter3
-	::LookUp7 (int x, int y, int z) noexcept
+void Imagics::PdeFilter3 ::LookUp7(int x, int y, int z) noexcept
 {
     const int xm = x - 1, xp = x + 1;
     const int ym = y - 1, yp = y + 1;
     const int zm = z - 1, zp = z + 1;
-    mUzzm = mSrc[zm][y ][x ];
-    mUzmz = mSrc[z ][ym][x ];
-    mUmzz = mSrc[z ][y ][xm];
-    mUzzz = mSrc[z ][y ][x ];
-    mUpzz = mSrc[z ][y ][xp];
-    mUzpz = mSrc[z ][yp][x ];
-    mUzzp = mSrc[zp][y ][x ];
+    mUzzm = mSrc[zm][y][x];
+    mUzmz = mSrc[z][ym][x];
+    mUmzz = mSrc[z][y][xm];
+    mUzzz = mSrc[z][y][x];
+    mUpzz = mSrc[z][y][xp];
+    mUzpz = mSrc[z][yp][x];
+    mUzzp = mSrc[zp][y][x];
 }
 
-void Imagics::PdeFilter3
-	::LookUp27 (int x, int y, int z) noexcept
+void Imagics::PdeFilter3 ::LookUp27(int x, int y, int z) noexcept
 {
     const int xm = x - 1, xp = x + 1;
     const int ym = y - 1, yp = y + 1;
-   const  int zm = z - 1, zp = z + 1;
+    const int zm = z - 1, zp = z + 1;
     mUmmm = mSrc[zm][ym][xm];
-    mUzmm = mSrc[zm][ym][x ];
+    mUzmm = mSrc[zm][ym][x];
     mUpmm = mSrc[zm][ym][xp];
-    mUmzm = mSrc[zm][y ][xm];
-    mUzzm = mSrc[zm][y ][x ];
-    mUpzm = mSrc[zm][y ][xp];
+    mUmzm = mSrc[zm][y][xm];
+    mUzzm = mSrc[zm][y][x];
+    mUpzm = mSrc[zm][y][xp];
     mUmpm = mSrc[zm][yp][xm];
-    mUzpm = mSrc[zm][yp][x ];
+    mUzpm = mSrc[zm][yp][x];
     mUppm = mSrc[zm][yp][xp];
-    mUmmz = mSrc[z ][ym][xm];
-    mUzmz = mSrc[z ][ym][x ];
-    mUpmz = mSrc[z ][ym][xp];
-    mUmzz = mSrc[z ][y ][xm];
-    mUzzz = mSrc[z ][y ][x ];
-    mUpzz = mSrc[z ][y ][xp];
-    mUmpz = mSrc[z ][yp][xm];
-    mUzpz = mSrc[z ][yp][x ];
-    mUppz = mSrc[z ][yp][xp];
+    mUmmz = mSrc[z][ym][xm];
+    mUzmz = mSrc[z][ym][x];
+    mUpmz = mSrc[z][ym][xp];
+    mUmzz = mSrc[z][y][xm];
+    mUzzz = mSrc[z][y][x];
+    mUpzz = mSrc[z][y][xp];
+    mUmpz = mSrc[z][yp][xm];
+    mUzpz = mSrc[z][yp][x];
+    mUppz = mSrc[z][yp][xp];
     mUmmp = mSrc[zp][ym][xm];
-    mUzmp = mSrc[zp][ym][x ];
+    mUzmp = mSrc[zp][ym][x];
     mUpmp = mSrc[zp][ym][xp];
-    mUmzp = mSrc[zp][y ][xm];
-    mUzzp = mSrc[zp][y ][x ];
-    mUpzp = mSrc[zp][y ][xp];
+    mUmzp = mSrc[zp][y][xm];
+    mUzzp = mSrc[zp][y][x];
+    mUpzp = mSrc[zp][y][xp];
     mUmpp = mSrc[zp][yp][xm];
-    mUzpp = mSrc[zp][yp][x ];
+    mUzpp = mSrc[zp][yp][x];
     mUppp = mSrc[zp][yp][xp];
 }
 
-
-int Imagics::PdeFilter3
-	::GetXBound () const noexcept
+int Imagics::PdeFilter3 ::GetXBound() const noexcept
 {
-	return mXBound;
+    return mXBound;
 }
 
-int Imagics::PdeFilter3
-	::GetYBound () const noexcept
+int Imagics::PdeFilter3 ::GetYBound() const noexcept
 {
-	return mYBound;
+    return mYBound;
 }
 
-int Imagics::PdeFilter3
-	::GetZBound () const noexcept
+int Imagics::PdeFilter3 ::GetZBound() const noexcept
 {
-	return mZBound;
+    return mZBound;
 }
 
-float Imagics::PdeFilter3
-	::GetXSpacing () const noexcept
+float Imagics::PdeFilter3 ::GetXSpacing() const noexcept
 {
-	return mXSpacing;
+    return mXSpacing;
 }
 
-float Imagics::PdeFilter3
-	::GetYSpacing () const noexcept
+float Imagics::PdeFilter3 ::GetYSpacing() const noexcept
 {
-	return mYSpacing;
+    return mYSpacing;
 }
 
-float Imagics::PdeFilter3
-	::GetZSpacing () const noexcept
+float Imagics::PdeFilter3 ::GetZSpacing() const noexcept
 {
-	return mZSpacing;
+    return mZSpacing;
 }
 
-float Imagics::PdeFilter3
-	::GetU (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetU(int x, int y, int z) const noexcept
 {
-	return mSrc[z+1][y+1][x+1];
+    return mSrc[z + 1][y + 1][x + 1];
 }
 
-float Imagics::PdeFilter3
-	::GetUx (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUx(int x, int y, int z) const noexcept
 {
-	const int iYp1 = y + 1;
-	const int iZp1 = z + 1;
-	return mHalfInvDx*(mSrc[iZp1][iYp1][x+2] - mSrc[iZp1][iYp1][x]);
+    const int iYp1 = y + 1;
+    const int iZp1 = z + 1;
+    return mHalfInvDx * (mSrc[iZp1][iYp1][x + 2] - mSrc[iZp1][iYp1][x]);
 }
 
-float Imagics::PdeFilter3
-	::GetUy (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUy(int x, int y, int z) const noexcept
 {
-	const int iXp1 = x + 1;
-	const int iZp1 = z + 1;
-	return mHalfInvDy*(mSrc[iZp1][y+2][iXp1] - mSrc[iZp1][y][iXp1]);
+    const int iXp1 = x + 1;
+    const int iZp1 = z + 1;
+    return mHalfInvDy * (mSrc[iZp1][y + 2][iXp1] - mSrc[iZp1][y][iXp1]);
 }
 
-float Imagics::PdeFilter3
-	::GetUz (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUz(int x, int y, int z) const noexcept
 {
-	const int iXp1 = x + 1;
-	const int iYp1 = y + 1;
-	return mHalfInvDz*(mSrc[z+2][iYp1][iXp1] - mSrc[z][iYp1][iXp1]);
+    const int iXp1 = x + 1;
+    const int iYp1 = y + 1;
+    return mHalfInvDz * (mSrc[z + 2][iYp1][iXp1] - mSrc[z][iYp1][iXp1]);
 }
 
-float Imagics::PdeFilter3
-	::GetUxx (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUxx(int x, int y, int z) const noexcept
 {
-	const int iYp1 = y + 1;
-const int	iZp1 = z + 1;
-	return mInvDxDx*(mSrc[iZp1][iYp1][x+2] - 2.0f*mSrc[iZp1][iYp1][x+1] + mSrc[iZp1][iYp1][x]);
+    const int iYp1 = y + 1;
+    const int iZp1 = z + 1;
+    return mInvDxDx * (mSrc[iZp1][iYp1][x + 2] - 2.0f * mSrc[iZp1][iYp1][x + 1] + mSrc[iZp1][iYp1][x]);
 }
 
-float Imagics::PdeFilter3
-	::GetUxy (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUxy(int x, int y, int z) const noexcept
 {
-	const int iXp2 = x + 2;
-const int	iYp2 = y + 2;
-const int iZp1 = z + 1;
-	return mFourthInvDxDy*(mSrc[iZp1][y][x] - mSrc[iZp1][y][iXp2] + mSrc[iZp1][iYp2][iXp2] - mSrc[iZp1][iYp2][x]);
+    const int iXp2 = x + 2;
+    const int iYp2 = y + 2;
+    const int iZp1 = z + 1;
+    return mFourthInvDxDy * (mSrc[iZp1][y][x] - mSrc[iZp1][y][iXp2] + mSrc[iZp1][iYp2][iXp2] - mSrc[iZp1][iYp2][x]);
 }
 
-float Imagics::PdeFilter3
-	::GetUxz (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUxz(int x, int y, int z) const noexcept
 {
-	const int iXp2 = x + 2;
-	const int iYp1 = y + 1;
-const int	iZp2 = z + 2;
-	return mFourthInvDxDz*(mSrc[z][iYp1][x] - mSrc[z][iYp1][iXp2] + mSrc[iZp2][iYp1][iXp2] - mSrc[iZp2][iYp1][x]);
+    const int iXp2 = x + 2;
+    const int iYp1 = y + 1;
+    const int iZp2 = z + 2;
+    return mFourthInvDxDz * (mSrc[z][iYp1][x] - mSrc[z][iYp1][iXp2] + mSrc[iZp2][iYp1][iXp2] - mSrc[iZp2][iYp1][x]);
 }
 
-float Imagics::PdeFilter3
-	::GetUyy (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUyy(int x, int y, int z) const noexcept
 {
-	const int iXp1 = x + 1, iZp1 = z + 1;
-	return mInvDyDy*(mSrc[iZp1][y+2][iXp1] - 2.0f*mSrc[iZp1][y+1][iXp1] + mSrc[iZp1][y][iXp1]);
+    const int iXp1 = x + 1, iZp1 = z + 1;
+    return mInvDyDy * (mSrc[iZp1][y + 2][iXp1] - 2.0f * mSrc[iZp1][y + 1][iXp1] + mSrc[iZp1][y][iXp1]);
 }
 
-float Imagics::PdeFilter3
-	::GetUyz (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUyz(int x, int y, int z) const noexcept
 {
-	const int iXp1 = x + 1, iYp2 = y + 2, iZp2 = z + 2;
-	return mFourthInvDyDz*(mSrc[z][y][iXp1] - mSrc[z][iYp2][iXp1] + mSrc[iZp2][iYp2][iXp1] - mSrc[iZp2][y][iXp1]);
+    const int iXp1 = x + 1, iYp2 = y + 2, iZp2 = z + 2;
+    return mFourthInvDyDz * (mSrc[z][y][iXp1] - mSrc[z][iYp2][iXp1] + mSrc[iZp2][iYp2][iXp1] - mSrc[iZp2][y][iXp1]);
 }
 
-float Imagics::PdeFilter3
-	::GetUzz (int x, int y, int z) const noexcept
+float Imagics::PdeFilter3 ::GetUzz(int x, int y, int z) const noexcept
 {
-	const int iXp1 = x + 1, iYp1 = y + 1;
-	return mInvDzDz*(mSrc[z+2][iYp1][iXp1] - 2.0f*mSrc[z+1][iYp1][iXp1] + mSrc[z][iYp1][iXp1]);
+    const int iXp1 = x + 1, iYp1 = y + 1;
+    return mInvDzDz * (mSrc[z + 2][iYp1][iXp1] - 2.0f * mSrc[z + 1][iYp1][iXp1] + mSrc[z][iYp1][iXp1]);
 }
 
-bool Imagics::PdeFilter3
-	::GetMask (int x, int y, int z) const noexcept
+bool Imagics::PdeFilter3 ::GetMask(int x, int y, int z) const noexcept
 {
-	return (mMask ? mMask[z+1][y+1][x+1] : true);
+    return (mMask ? mMask[z + 1][y + 1][x + 1] : true);
 }
 
 #include STSTEM_WARNING_POP

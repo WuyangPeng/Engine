@@ -61,8 +61,8 @@ namespace Rendering
                                  int widthNext, int heightNext, int thicknessNext,char* texelsNext);
         int CalculateNumLevelBytes(int dimension0,int dimension1,int dimension2);
         
-          void LoadLevelData(const CoreTools::BufferSourceSharedPtr& source) override;
-		  void SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const override;
+          void LoadLevelData(CoreTools::BufferSource& source) override;
+		  void SaveLevelData (CoreTools::BufferTarget& target) const override;
           int GetLevelDataStreamingSize() const noexcept override;
 
 		  void SaveLevelDataToFile (WriteFileManager& outFile) const override;

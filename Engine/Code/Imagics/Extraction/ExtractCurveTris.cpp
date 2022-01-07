@@ -9,7 +9,7 @@
 #include "ExtractCurveTris.h"
 
 #include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
 
 #include "System/Helper/PragmaWarning.h"
@@ -124,7 +124,7 @@ void Imagics::ExtractCurveTris
     int numEdges = (int)edges.size();
     if (numEdges)
     {
-        edgeMap = CoreTools::New0 < EMap>();
+        edgeMap = new EMap;
         int nextEdge = 0;
         for (e = 0; e < numEdges; ++e)
         {
@@ -164,7 +164,7 @@ void Imagics::ExtractCurveTris
         {
             edges[eIter->second] = eIter->first;
         }
-        DELETE0(edgeMap);
+       // DELETE0(edgeMap);
     }
     else
     {

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:48)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -31,64 +31,75 @@ using std::ostream;
 using std::right;
 using std::setw;
 using std::string;
+using std::stringstream;
 using std::wstring;
 using namespace std::literals;
 
-const string CoreTools::UnitTest::GetCorrectThrowExceptionDescribe()
-{
-    return "正确的抛出异常："s;
-}
-
-const string CoreTools::UnitTest::GetErrorThrowExceptionDescribe()
-{
-    return "错误的抛出异常："s;
-}
-
-const string CoreTools::UnitTest::GetCorrectNothrowExceptionDescribe()
-{
-    return "正确的未抛出异常："s;
-}
-
-const string CoreTools::UnitTest::GetErrorNothrowExceptionDescribe()
-{
-    return "错误的未抛出异常："s;
-}
-
 CoreTools::UnitTest::UnitTest(const OStreamShared& streamShared)
-    : ParentType{ streamShared }, m_Data{ make_shared<UnitTestData>() }, m_CpuTimer{ make_shared<CpuTimerData>() }
+    : ParentType{ streamShared }, unitTestData{ make_shared<UnitTestData>() }, cpuTimer{ CpuTimerData::CreateSharedPtr() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::UnitTest::UnitTest(UnitTest&& rhs) noexcept
+    : ParentType{ std::move(rhs) }, unitTestData{ std::move(rhs.unitTestData) }, cpuTimer{ std::move(rhs.cpuTimer) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::UnitTest& CoreTools::UnitTest::operator=(UnitTest&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    ParentType::operator=(std::move(rhs));
+    unitTestData = std::move(rhs.unitTestData);
+    cpuTimer = std::move(rhs.cpuTimer);
+
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::UnitTest::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_Data != nullptr && m_CpuTimer != nullptr)
+    if (ParentType::IsValid() && unitTestData != nullptr && cpuTimer != nullptr)
         return true;
     else
         return false;
 }
 #endif  // OPEN_CLASS_INVARIANT
 
+string CoreTools::UnitTest::GetAssertDescribed(const string& assertMessage, const string& errorMessage)
+{
+    string result{ assertMessage };
+
+    if (!errorMessage.empty())
+    {
+        result += " ";
+        result += errorMessage;
+    }
+
+    return result;
+}
+
 int CoreTools::UnitTest::GetPassedNumber() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Data->GetPassedNumber();
+    return unitTestData->GetPassedNumber();
 }
 
 int CoreTools::UnitTest::GetFailedNumber() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Data->GetFailedNumber();
+    return unitTestData->GetFailedNumber();
 }
 
 int CoreTools::UnitTest::GetErrorNumber() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Data->GetErrorNumber();
+    return unitTestData->GetErrorNumber();
 }
 
 void CoreTools::UnitTest::PrintReport()
@@ -99,7 +110,7 @@ void CoreTools::UnitTest::PrintReport()
 
     manager.PrintTestName();
     manager.PrintTestResult(characterWidth);
-    manager.PrintCostTime(*m_CpuTimer->GetCpuTimer());
+    manager.PrintCostTime(*cpuTimer->GetCpuTimer());
 }
 
 // private
@@ -110,8 +121,8 @@ string CoreTools::UnitTest::GetTestModeDescribe() const
 
 void CoreTools::UnitTest::ResetTestData()
 {
-    m_Data->ClearData();
-    m_CpuTimer->Start();
+    unitTestData->ClearData();
+    cpuTimer->Start();
 
     ResetOtherData();
 }
@@ -134,10 +145,10 @@ void CoreTools::UnitTest::TestTimingBegins()
 {
     CoreTools::DisableNoexcept();
 
-    if (m_Data->IsEmpty())
-        m_CpuTimer->Start();
+    if (unitTestData->IsEmpty())
+        cpuTimer->Start();
     else
-        m_CpuTimer->Resume();
+        cpuTimer->Resume();
 }
 
 // private
@@ -145,7 +156,7 @@ void CoreTools::UnitTest::TestTimingEnd()
 {
     CoreTools::DisableNoexcept();
 
-    m_CpuTimer->Stop();
+    cpuTimer->Stop();
 }
 
 // protected
@@ -153,7 +164,7 @@ void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& fu
 {
     if (condition)
     {
-        m_Data->AddPassedNumber();
+        unitTestData->AddPassedNumber();
     }
     else
     {
@@ -161,15 +172,20 @@ void CoreTools::UnitTest::AssertTest(bool condition, const FunctionDescribed& fu
 
         PrintFailReport(functionDescribed, errorMessage);
 
-        m_Data->AddFailedNumber();
+        unitTestData->AddFailedNumber();
 
         if (failureThrow)
         {
-            auto exceptionMessage = StringConversion::MultiByteConversionStandard(errorMessage);
+            const auto exceptionMessage = StringConversion::MultiByteConversionStandard(errorMessage);
 
             THROW_EXCEPTION(exceptionMessage);
         }
     }
+}
+
+void CoreTools::UnitTest::AssertTrue() noexcept
+{
+    unitTestData->AddPassedNumber();
 }
 
 // protected
@@ -177,7 +193,7 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
 {
     if (condition)
     {
-        m_Data->AddPassedNumber();
+        unitTestData->AddPassedNumber();
     }
     else
     {
@@ -185,7 +201,23 @@ void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& fun
 
         PrintFailReport(functionDescribed, errorMessage);
 
-        m_Data->AddErrorNumber();
+        unitTestData->AddErrorNumber();
+    }
+}
+
+void CoreTools::UnitTest::ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const std::string_view& errorMessage)
+{
+    if (condition)
+    {
+        unitTestData->AddPassedNumber();
+    }
+    else
+    {
+        LogConsoleTextColorsManager manager{ GetStream(), LogLevel::Fatal };
+
+        PrintFailReport(functionDescribed, errorMessage.data());
+
+        unitTestData->AddErrorNumber();
     }
 }
 
@@ -200,7 +232,7 @@ void CoreTools::UnitTest::PrintFailReport(const FunctionDescribed& functionDescr
     manager.PrintErrorMessage();
 }
 
-const string CoreTools::UnitTest::GetName() const
+string CoreTools::UnitTest::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -334,23 +366,20 @@ void CoreTools::UnitTest::AssertEqual(const wstring& lhs, const wstring& rhs, co
 {
     const auto condition = (lhs == rhs);
 
-    std::string described{};
-
-    if (!condition)
+    if (condition)
     {
-        std::stringstream stream{};
+        AssertTrue();
+    }
+    else
+    {
+        stringstream stream{};
 
         stream << StringConversion::WideCharConversionMultiByte(lhs) << "不等于" << StringConversion::WideCharConversionMultiByte(rhs);
 
-        if (!errorMessage.empty())
-        {
-            stream << " " << errorMessage;
-        }
+        const auto described = GetAssertDescribed(stream.str(), errorMessage);
 
-        described = stream.str();
+        AssertTest(condition, functionDescribed, described, failureThrow);
     }
-
-    AssertTest(condition, functionDescribed, described, failureThrow);
 }
 
 void CoreTools::UnitTest::AssertEqual(const char* lhs, const char* rhs, const FunctionDescribed& functionDescribed, const std::string& errorMessage, bool failureThrow)

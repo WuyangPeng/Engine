@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 18:26)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/29 22:10)
 
 #ifndef CORE_TOOLS_MAIN_FUNCTION_HELPER_TESTING_INFORMATION_HELPER_IMPL_H
 #define CORE_TOOLS_MAIN_FUNCTION_HELPER_TESTING_INFORMATION_HELPER_IMPL_H
@@ -24,15 +24,15 @@ namespace CoreTools
         using ClassType = TestingInformationHelperImpl;
 
     public:
-        explicit TestingInformationHelperImpl(DisableNotThrow disableNotThrow);
+        explicit TestingInformationHelperImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetLoopCount(const std::string& suiteName, const std::string& testingName) const;
+        NODISCARD int GetLoopCount(const std::string& suiteName, const std::string& testingName) const;
 
-        [[nodiscard]] bool IsPrintRun() const noexcept;
+        NODISCARD bool IsPrintRun() const noexcept;
 
-        [[nodiscard]] int GetRandomSeed() const noexcept;
+        NODISCARD int GetRandomSeed() const noexcept;
 
     private:
         using FileContainer = std::vector<std::string>;
@@ -46,10 +46,10 @@ namespace CoreTools
         void AnalysisTestingInformation();
 
     private:
-        TestingInformation m_TestingInformation;
-        FileContainer m_File;
-        bool m_IsPrintRun;
-        int m_RandomSeed;
+        TestingInformation testingInformation;
+        FileContainer file;
+        bool isPrintRun;
+        int randomSeed;
     };
 }
 

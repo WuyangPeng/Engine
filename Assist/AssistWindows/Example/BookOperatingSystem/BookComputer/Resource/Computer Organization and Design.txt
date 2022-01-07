@@ -1,0 +1,5 @@
+计算机组成与设计：硬件/软件接口（Computer Organization and Design）
+（第5版）
+
+★
+作者： David A. Patterson、John L.Hennessy

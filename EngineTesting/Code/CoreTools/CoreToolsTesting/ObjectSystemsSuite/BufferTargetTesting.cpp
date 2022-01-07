@@ -8,11 +8,11 @@
 #include "Detail/NullObject.h"
 #include "Detail/BufferTargetTestingEnum.h"
 #include "CoreTools/Helper/StreamMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/FileManager/FileBuffer.h"
-#include "CoreTools/MemoryTools/SmartPointer1DArrayDetail.h" 
+
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"

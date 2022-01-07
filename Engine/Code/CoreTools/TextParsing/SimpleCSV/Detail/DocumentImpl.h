@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/14 15:47)
+///	引擎版本：0.8.0.0 (2021/12/19 19:35)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DOCUMENT_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_DOCUMENT_IMPL_H
@@ -53,7 +53,7 @@ namespace CoreTools
 
             void Save();
             void SaveAs(const std::string& fileName);
-            NODISCARD std::string GetName() const; 
+            NODISCARD std::string GetName() const;
             NODISCARD Workbook GetWorkbook() const;
             void ResetCalcChain();
             NODISCARD std::string GetProperty(Property prop) const;

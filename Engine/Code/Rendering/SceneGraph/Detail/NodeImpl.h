@@ -117,11 +117,11 @@ namespace Rendering
         // 对分级裁剪的支持。
         void GetVisibleSet(Culler& culler, bool noCull);
 
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
         int GetStreamingSize() const;
-        void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link(const CoreTools:: ObjectLinkSharedPtr& source);
+        void Register(CoreTools::ObjectRegister& target) const;
+        void Link(CoreTools:: ObjectLink& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 

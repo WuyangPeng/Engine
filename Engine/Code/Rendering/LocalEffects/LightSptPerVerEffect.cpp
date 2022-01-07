@@ -25,7 +25,7 @@
 #include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
 #include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "Rendering/ShaderFloats/WorldMatrixConstant.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -44,7 +44,7 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSptPerVerEffect);
 
 Rendering::LightSptPerVerEffect ::LightSptPerVerEffect()
 {
-    VertexShaderSharedPtr vshader{ std::make_shared< VertexShader>( "Wm5.LightSptPerVer", 2, 2, 14, 0 ) };
+    VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightSptPerVer", 2, 2, 14, 0) };
     vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
     vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
     vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
@@ -84,24 +84,24 @@ Rendering::LightSptPerVerEffect ::LightSptPerVerEffect()
         profile->SetProgram(i, msPPrograms[i]);
     }
 
-    VisualPassSharedPtr pass{  };
+    VisualPassSharedPtr pass{};
     pass->SetVertexShader(vshader);
     pass->SetPixelShader(pshader);
-    pass->SetAlphaState(AlphaStateSharedPtr{   });
-    pass->SetCullState(CullStateSharedPtr{  });
-    pass->SetDepthState(DepthStateSharedPtr{  });
-    pass->SetOffsetState(OffsetStateSharedPtr{  });
-    pass->SetStencilState(StencilStateSharedPtr{  });
-    pass->SetWireState(WireStateSharedPtr{  });
+    pass->SetAlphaState(AlphaStateSharedPtr{});
+    pass->SetCullState(CullStateSharedPtr{});
+    pass->SetDepthState(DepthStateSharedPtr{});
+    pass->SetOffsetState(OffsetStateSharedPtr{});
+    pass->SetStencilState(StencilStateSharedPtr{});
+    pass->SetWireState(WireStateSharedPtr{});
 
-    VisualTechniqueSharedPtr technique{  };
+    VisualTechniqueSharedPtr technique{};
     technique->InsertPass(pass);
     InsertTechnique(technique);
 }
 
 Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateInstance(Light* light, Material* material) const
 {
-    VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    VisualEffectInstance* instance = nullptr;  // CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
     instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
     instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared<WorldMatrixConstant>()));
     instance->SetVertexConstant(0, 2, ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
@@ -122,7 +122,7 @@ Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateInstanc
 
 Rendering::VisualEffectInstance* Rendering::LightSptPerVerEffect ::CreateUniqueInstance(Light* light, Material* material)
 {
-    const LightSptPerVerEffect* effect = CoreTools::New0<LightSptPerVerEffect>();
+    const LightSptPerVerEffect* effect = nullptr;  //  CoreTools::New0<LightSptPerVerEffect>();
     return effect->CreateInstance(light, material);
 }
 
@@ -133,7 +133,7 @@ Rendering::LightSptPerVerEffect ::LightSptPerVerEffect(LoadConstructor value)
 {
 }
 
-void Rendering::LightSptPerVerEffect ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::LightSptPerVerEffect ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -142,7 +142,7 @@ void Rendering::LightSptPerVerEffect ::Load(const CoreTools::BufferSourceSharedP
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightSptPerVerEffect ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::LightSptPerVerEffect ::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
@@ -174,12 +174,12 @@ void Rendering::LightSptPerVerEffect ::PostLink()
     }
 }
 
-uint64_t Rendering::LightSptPerVerEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::LightSptPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightSptPerVerEffect ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::LightSptPerVerEffect ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

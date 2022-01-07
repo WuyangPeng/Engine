@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 12:45)
+///	引擎版本：0.8.0.0 (2021/12/12 12:49)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_USING_H
 #define SYSTEM_WINDOWS_WINDOWS_USING_H
@@ -32,12 +32,15 @@ namespace System
     using WindowsBoolPtr = LPBOOL;
     using WindowsBoolean = BOOLEAN;
     using WindowsUShort = USHORT;
+    using WindowsUShortPtr = PUSHORT;
     using WindowsSize = SIZE_T;
     using WindowsSizePtr = PSIZE_T;
     using WindowsUChar = UCHAR;
     using WindowsUCharPtr = PUCHAR;
     using WindowsLongLong = LONGLONG;
+    using WindowsLongLongPtr = PLONGLONG;
     using WindowsByte = BYTE;
+    using WindowsBytePtr = PBYTE;
 
     using WindowsInt32 = INT32;
     using WindowsInt64 = INT64;
@@ -113,6 +116,8 @@ namespace System
     constexpr SystemHResult g_ResultClassNoaggregation{ CLASS_E_NOAGGREGATION };
     constexpr SystemHResult g_NoError{ NOERROR };
 
+    using GetWindowsInformationFunction = decltype(::GetClassName);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
     using WindowsInt = int;
@@ -127,12 +132,15 @@ namespace System
     using WindowsBoolPtr = WindowsBool*;
     using WindowsBoolean = uint8_t;
     using WindowsUShort = uint16_t;
+    using WindowsUShortPtr = WindowsUShort*;
+    using WindowsSize = uint64_t;
+    using WindowsSizePtr = WindowsSize*;
     using WindowsUChar = uint8_t;
     using WindowsUCharPtr = WindowsUChar*;
     using WindowsLongLong = int64_t;
+    using WindowsLongLongPtr = WindowsLongLong*;
     using WindowsByte = unsigned char;
-    using WindowsSize = uint64_t;
-    using WindowsSizePtr = WindowsSize*;
+    using WindowsBytePtr = WindowsByte*;
 
     using WindowsInt32 = int32_t;
     using WindowsInt64 = int64_t;
@@ -159,20 +167,20 @@ namespace System
         struct
         {
             uint32_t LowPart;
-            int HighPart;
+            int32_t HighPart;
         } DUMMYSTRUCTNAME;
         struct
         {
             uint32_t LowPart;
-            int HighPart;
+            int32_t HighPart;
         } u;
 
         int64_t QuadPart;
     };
     using WindowsLargeIntegerPtr = WindowsLargeInteger*;
 
-    using WindowsConstVoidPtr = const void*;
     using WindowsConstGuidPtr = const SystemGUID*;
+    using WindowsConstVoidPtr = const void*;
     using WindowsVoidPtr = void*;
 
     using WindowsWord = uint16_t;
@@ -184,7 +192,7 @@ namespace System
     using WindowsPtrULongPtr = uint64_t*;
     using WindowsPtrLong = int64_t;
     using WindowsPtrInt = int64_t;
-    using WindowsPtrDWord = unsigned long;
+    using WindowsPtrDWord = uint64_t;
 
     struct WindowsPointSize
     {
@@ -246,7 +254,6 @@ namespace System
     {
         int unused;
     };
-
     using WindowsHDC = WindowsHDCDeclare*;
 
     struct WindowsPaintStruct
@@ -324,7 +331,6 @@ namespace System
         uint32_t NumberParameters;
         uint64_t ExceptionInformation[g_WindowExceptionMaximumParameters];
     };
-
     using WindowsExceptionRecordPtr = WindowsExceptionRecord*;
 
     constexpr auto g_WindowMaximumSupportedExtension = 512;
@@ -377,7 +383,8 @@ namespace System
     {
         WindowsExceptionRecordPtr ExceptionRecord;
         WindowsContextPtr ContextRecord;
-    } using WindowsExceptionPointersPtr = WindowsExceptionPointers*;
+    };
+    using WindowsExceptionPointersPtr = WindowsExceptionPointers*;
 
     struct WindowsImageImportDescriptor
     {
@@ -437,6 +444,8 @@ namespace System
     constexpr SystemHResult g_ResultNoInterface{ 0x80004002L };
     constexpr SystemHResult g_ResultClassNoaggregation{ 0x80040110L };
     constexpr SystemHResult g_NoError{ 0 };
+
+    using GetWindowsInformationFunction = int (*)(WindowsHWnd, const TChar*, int);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 

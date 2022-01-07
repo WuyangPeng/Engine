@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/24 23:25)
+///	引擎版本：0.8.0.0 (2021/12/13 11:33)
 
 #ifndef SYSTEM_OPENGL_OPENGL_API_H
 #define SYSTEM_OPENGL_OPENGL_API_H
@@ -26,7 +26,7 @@ namespace System
     NODISCARD OpenGLInt SYSTEM_DEFAULT_DECLARE GetGLInteger(OpenGLQuery name) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetGLBoolean(OpenGLQuery name) noexcept;
     NODISCARD OpenGLFloat SYSTEM_DEFAULT_DECLARE GetGLFloat(OpenGLQuery name) noexcept;
-    NODISCARD OpenGLDouble SYSTEM_DEFAULT_DECLARE GetGLDouble(OpenGLQuery name) noexcept; 
+    NODISCARD OpenGLDouble SYSTEM_DEFAULT_DECLARE GetGLDouble(OpenGLQuery name) noexcept;
 }
 
 #endif  // SYSTEM_OPENGL_OPENGL_API_H

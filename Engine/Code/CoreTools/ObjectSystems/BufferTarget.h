@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 14:27)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 15:17)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_TARGET_H
@@ -15,31 +15,52 @@
 #include "ObjectSystemsFwd.h"
 #include "CoreTools/FileManager/WriteBufferIO.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <array>
 
+#include <array>
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(BufferTargetImpl);
 
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget final 
+    class CORE_TOOLS_DEFAULT_DECLARE BufferTarget final
     {
     public:
         NON_COPY_TYPE_DECLARE(BufferTarget);
 
     public:
         BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister);
-        ~BufferTarget() noexcept = default;
-        BufferTarget(const BufferTarget& rhs) noexcept = delete;
-        BufferTarget& operator=(const BufferTarget& rhs) noexcept = delete;
-        BufferTarget(BufferTarget&& rhs) noexcept = delete;
-        BufferTarget& operator=(BufferTarget&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
         // 函数写入数组有两种形式：WithNumber和WithoutNumber。
         // 假设数组数量为elementsNumber，WithNumber表明写elementsNumber到缓冲区，WithoutNumber表示不写elementsNumber到缓冲区。
         // array容器不写入数组的数量。
+
+        // 这些模板函数是集合类型。该函数必须被特化，因为它没有提供一个默认的实现。
+        template <typename T>
+        void WriteAggregate(const T& datum);
+
+        template <typename T>
+        void WriteAggregateContainerWithNumber(const T& objects);
+
+        template <typename T>
+        void WriteAggregateContainerWithoutNumber(const T& objects);
+
+        template <typename T, int Size>
+        void WriteAggregateContainer(const std::array<T, Size>& objects);
+
+        // 写入对象指针（uniqueID在磁盘上为[无效]内存指针）。
+        template <typename T>
+        void WriteObjectAssociated(const T& object);
+
+        template <typename T>
+        void WriteObjectAssociatedContainerWithNumber(const T& objects);
+
+        template <typename T>
+        void WriteObjectAssociatedContainerWithoutNumber(const T& objects);
+
+        template <typename T, int Size>
+        void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
 
         // 写入bool值为4字节。
         void Write(const bool datum);
@@ -92,34 +113,8 @@ namespace CoreTools
         template <typename T, int Size>
         void WriteEnumContainer(const std::array<T, Size>& objects);
 
-        // 这些模板函数是集合类型。该函数必须被特化，因为它没有提供一个默认的实现。
-        template <typename T>
-        void WriteAggregate(const T& datum);
-
-        template <typename T>
-        void WriteAggregateContainerWithNumber(const T& objects);
-
-        template <typename T>
-        void WriteAggregateContainerWithoutNumber(const T& objects);
-
-        template <typename T, int Size>
-        void WriteAggregateContainer(const std::array<T, Size>& objects);
-
-        // 写入对象指针（uniqueID在磁盘上为[无效]内存指针）。
-        template <typename T>
-        void WriteObjectAssociated(const T& object);
-
-        template <typename T>
-        void WriteObjectAssociatedContainerWithNumber(const T& objects);
-
-        template <typename T>
-        void WriteObjectAssociatedContainerWithoutNumber(const T& objects);
-
-        template <typename T, int Size>
-        void WriteObjectAssociatedContainer(const std::array<T, Size>& objects);
-
         // 帮助函数
-        [[nodiscard]] int GetBytesWritten() const noexcept;
+        NODISCARD int GetBytesWritten() const noexcept;
         void WriteUniqueID(const ConstObjectInterfaceSharedPtr& object);
 
     private:

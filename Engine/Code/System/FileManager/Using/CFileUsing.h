@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/17 20:10)
+///	引擎版本：0.8.0.0 (2021/12/13 18:46)
 
 #ifndef SYSTEM_FILE_MANAGE_C_FILE_USING_H
 #define SYSTEM_FILE_MANAGE_C_FILE_USING_H
@@ -18,9 +18,13 @@
 namespace System
 {
 #ifdef SYSTEM_PLATFORM_LINUX
+
     using OffType = off_t;
+
 #else  // !SYSTEM_PLATFORM_LINUX
+
     using OffType = _off_t;
+
 #endif  // SYSTEM_PLATFORM_LINUX
 
     using PosType = fpos_t;

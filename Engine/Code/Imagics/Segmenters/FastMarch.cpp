@@ -7,7 +7,7 @@
 #include "Imagics/ImagicsExport.h"
  
 #include "FastMarch.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/Assertion/ImagicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -36,9 +36,9 @@ Imagics::FastMarch
 {
 	EXCEPTION_TRY
 {
-DELETE1(mTrials);
-	DELETE1(mInvSpeeds);
-	DELETE1(mTimes);
+// DELETE1(mTrials);
+// 	DELETE1(mInvSpeeds);
+// 	DELETE1(mTimes);
 }
 EXCEPTION_ALL_CATCH(Imagics)  
     
@@ -56,7 +56,7 @@ void Imagics::FastMarch
     // the speed value at a pixel is 0, the pixel is marked with a time of
     // -MAX_REAL.  Such pixels can never be visited; the minus sign
     // distinguishes these from pixels not yet reached during iteration.
-    mTimes = NEW1<float>(mQuantity);
+    mTimes = nullptr;  //NEW1<float>(mQuantity);
    
     for (int i = 0; i < mQuantity; ++i)
     {
@@ -70,7 +70,7 @@ void Imagics::FastMarch
 
     // Trial pixels are identified by having min-heap record associated with
     // them.  Known or Far pixels have no associated record.
-	mTrials = NEW1<int>(mQuantity);
+    mTrials = nullptr;  //NEW1<int>(mQuantity);
 	const size_t numBytes = mQuantity*sizeof(const CoreTools::MinHeapRecord<int, float>*);
     memset(mTrials, 0, numBytes);
 }
@@ -80,7 +80,7 @@ void Imagics::FastMarch
 {
     // Invert the speeds since the reciprocals are all that are needed in the
     // numerical method.  Mark all zero-speed interior pixels.
-	mInvSpeeds = NEW1<float>(mQuantity);
+    mInvSpeeds = nullptr;  //NEW1<float>(mQuantity);
     for (int i = 0; i < mQuantity; ++i)
     {
         IMAGICS_ASSERTION_0(speeds[i] >= 0.0f, "Invalid speed\n");
@@ -100,7 +100,7 @@ void Imagics::FastMarch
 	::InitializeSpeed(const float speed)
 {
     const float invSpeed = 1.0f/speed;
-    mInvSpeeds = NEW1<float>(mQuantity);
+    mInvSpeeds = nullptr;  // NEW1<float>(mQuantity);
     for (int i = 0; i < mQuantity; ++i)
     {
         mInvSpeeds[i] = invSpeed;

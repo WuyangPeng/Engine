@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:20)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 13:04)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
 #define CORE_TOOLS_MESSAGE_EVENT_ENTITY_MANAGER_H
@@ -14,10 +14,11 @@
 
 #include "MessageEventFwd.h"
 #include "CoreTools/Base/SingletonDetail.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
 #include "CoreTools/Threading/ThreadingFwd.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 #include <string>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(EntityManager);
@@ -39,7 +40,7 @@ namespace CoreTools
         };
 
     public:
-        explicit EntityManager(EntityManagerCreate entityManagerCreate);
+        explicit EntityManager(MAYBE_UNUSED EntityManagerCreate entityManagerCreate);
 
         static void Create();
         static void Destroy() noexcept;
@@ -49,18 +50,18 @@ namespace CoreTools
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] bool Register(const EntitySharedPtr& entity);
-        [[nodiscard]] bool Unregister(uint64_t entityID);
-        [[nodiscard]] EntitySharedPtr GetEntity(uint64_t entityID) const;
+        NODISCARD bool Register(const EntitySharedPtr& entity);
+        NODISCARD bool Unregister(uint64_t entityID);
+        NODISCARD EntitySharedPtr GetEntity(uint64_t entityID) const;
 
         template <typename EntityType, typename ResultType = EntityType, typename... Args>
-        [[nodiscard]] std::shared_ptr<ResultType> MakeEntity(Args&&... args);
+        NODISCARD std::shared_ptr<ResultType> MakeEntity(Args&&... args);
 
     private:
         using EntityManagerUniquePtr = std::unique_ptr<EntityManager>;
 
     private:
-        static EntityManagerUniquePtr sm_EntityManager;
+        static EntityManagerUniquePtr entityManager;
         PackageType impl;
     };
 }

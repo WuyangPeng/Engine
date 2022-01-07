@@ -288,6 +288,8 @@
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter4\EffectiveModernCppChapter4Suite.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5Suite.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6ExampleTesting.h" />
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6Suite.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\EffectiveModernCppSuite.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Preface\EffectiveModernCppPrefaceExampleTesting.h" />
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Preface\EffectiveModernCppPrefaceSuite.h" />
@@ -316,6 +318,7 @@
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter3\EffectiveModernCppChapter3ExampleTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter4\EffectiveModernCppChapter4ExampleTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.cpp" />
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6ExampleTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Preface\EffectiveModernCppPrefaceExampleTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveSTL\Preface\EffectiveSTLCodeExampleTesting.cpp" />
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\ExceptionalCppStyle\ExceptionalCppStylePlaceholderTesting.cpp" />

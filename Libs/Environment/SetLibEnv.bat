@@ -54,35 +54,35 @@ setx  MysqlConnectorX64ReleaseLib "%cd%\..\mysql-connector-c++\BuildX64\Release"
 
 echo FreeglutWin32DebugLib = %FreeglutWin32DebugLib%
 echo  %cd%
-setx  FreeglutWin32DebugLib "%cd%\..\freeglut\BuildWin32\lib\Debug"
+setx  FreeglutWin32DebugLib "%cd%\..\FreeGLUT\freeglut\freeglut\BuildWin32\lib\Debug"
 
 echo FreeglutWin32ReleaseLib = %FreeglutWin32ReleaseLib%
 echo  %cd%
-setx  FreeglutWin32ReleaseLib "%cd%\..\freeglut\BuildWin32\lib\Release"
+setx  FreeglutWin32ReleaseLib "%cd%\..\FreeGLUT\freeglut\freeglut\BuildWin32\lib\Release"
 
 echo FreeglutX64DebugLib = %FreeglutX64DebugLib%
 echo  %cd%
-setx  FreeglutX64DebugLib "%cd%\..\freeglut\BuildX64\lib\Debug"
+setx  FreeglutX64DebugLib "%cd%\..\FreeGLUT\freeglut\freeglut\BuildX64\lib\Debug"
 
 echo FreeglutX64ReleaseLib = %FreeglutX64ReleaseLib%
 echo  %cd%
-setx  FreeglutX64ReleaseLib "%cd%\..\freeglut\BuildX64\lib\Release"
+setx  FreeglutX64ReleaseLib "%cd%\..\FreeGLUT\freeglut\freeglut\BuildX64\lib\Release"
 
 echo FreeglutWin32DebugBin = %FreeglutWin32DebugBin%
 echo  %cd%
-setx  FreeglutWin32DebugBin "%cd%\..\freeglut\BuildWin32\bin\Debug"
+setx  FreeglutWin32DebugBin "%cd%\..\FreeGLUT\freeglut\freeglut\BuildWin32\bin\Debug"
 
 echo FreeglutWin32ReleaseBin = %FreeglutWin32ReleaseBin%
 echo  %cd%
-setx  FreeglutWin32ReleaseBin "%cd%\..\freeglut\BuildWin32\bin\Release"
+setx  FreeglutWin32ReleaseBin "%cd%\..\FreeGLUT\freeglut\freeglut\BuildWin32\bin\Release"
 
 echo FreeglutX64DebugBin = %FreeglutX64DebugBin%
 echo  %cd%
-setx  FreeglutX64DebugBin "%cd%\..\freeglut\BuildX64\bin\Debug"
+setx  FreeglutX64DebugBin "%cd%\..\FreeGLUT\freeglut\freeglut\BuildX64\bin\Debug"
 
 echo FreeglutX64ReleaseBin = %FreeglutX64ReleaseBin%
 echo  %cd%
-setx  FreeglutX64ReleaseBin "%cd%\..\freeglut\BuildX64\bin\Release"
+setx  FreeglutX64ReleaseBin "%cd%\..\FreeGLUT\freeglut\freeglut\BuildX64\bin\Release"
 
 echo VisualLeakDetectorWin32Lib = %VisualLeakDetectorWin32Lib%
 echo  %cd%

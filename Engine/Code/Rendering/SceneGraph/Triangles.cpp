@@ -3,9 +3,8 @@
 // 作者：彭武阳，彭晔恩，彭晔泽
 //
 // 引擎版本：0.0.0.3 (2019/07/22 18:28)
-
 #include "Rendering/RenderingExport.h"
-#include "Mathematics/Algebra/AVectorDetail.h"
+
 #include "PickRecord.h"
 #include "PickRecordContainer.h"
 #include "Triangles.h"
@@ -13,7 +12,8 @@
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
- 
+#include "Mathematics/Algebra/AVectorDetail.h"
+
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"
@@ -34,7 +34,7 @@
 
 using std::vector;
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26451)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -46,9 +46,9 @@ using std::vector;
 #include SYSTEM_WARNING_DISABLE(26490)
 #if defined(TCRE_USE_MSVC)
     #pragma warning(disable : 6305)
-#endif  // TCRE_USE_MSVC  
+#endif  // TCRE_USE_MSVC
 #include SYSTEM_WARNING_DISABLE(26490)
- CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
+CORE_TOOLS_RTTI_DEFINE(Rendering, Triangles);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, Triangles);
 CORE_TOOLS_DEFAULT_OBJECT_LOAD_CONSTRUCTOR_DEFINE(Rendering, Triangles);
@@ -64,8 +64,6 @@ Rendering::Triangles ::Triangles(VisualPrimitiveType type, const VertexFormatSha
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
-
-  
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Rendering, Triangles)
 
@@ -93,7 +91,7 @@ const Rendering::TrianglePosition Rendering::Triangles ::GetWorldTriangle(int in
 
     auto trianglePosition = GetModelTriangle(index);
 
-const auto firstPosition = GetWorldTransform() * trianglePosition.GetFirstPosition();
+    const auto firstPosition = GetWorldTransform() * trianglePosition.GetFirstPosition();
     const auto secondPosition = GetWorldTransform() * trianglePosition.GetSecondPosition();
     const auto thirdPosition = GetWorldTransform() * trianglePosition.GetThirdPosition();
 
@@ -220,7 +218,7 @@ void Rendering::Triangles ::UpdateModelTangentsUseGeometry(const VertexBufferAcc
     {
         if (vertexBufferAccessor.HasTangent())
         {
-              const auto tangent = normalDerivatives.GetTangent(index);
+            const auto tangent = normalDerivatives.GetTangent(index);
             GetVertexBuffer()->SetTriangleTangent(vertexBufferAccessor, index, tangent);
         }
 
@@ -252,10 +250,10 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
     for (auto index = 0; index < numTriangles; ++index)
     {
         // 得到三角形顶点的位置,法线,切线和纹理坐标。
-const        auto triangleIndex = GetTriangle(index);
+        const auto triangleIndex = GetTriangle(index);
 
         vector<APoint> localPosition(3);
-vector<AVector> localNormal(3, Mathematics::FloatAVector::GetZero());
+        vector<AVector> localNormal(3, Mathematics::FloatAVector::GetZero());
         vector<AVector> localTangent(3, Mathematics::FloatAVector::GetZero());
         vector<Vector2D> localTextureCoord(3);
 
@@ -278,7 +276,7 @@ vector<AVector> localNormal(3, Mathematics::FloatAVector::GetZero());
             }
 
             // 计算顶点的切线空间。
-         const   auto& normalVector = localNormal[current];
+            const auto& normalVector = localNormal[current];
             const auto prev = ((current + 2) % 3);
             const auto next = ((current + 1) % 3);
 
@@ -370,7 +368,7 @@ const Rendering::PickRecordContainer Rendering::Triangles ::ExecuteRecursive(con
         const auto modelOriginPoint = worldInverseTransform * origin;
         const auto modelOrigin = modelOriginPoint.GetVector3D();
 
-const auto modelDirectionVector = worldInverseTransform * direction;
+        const auto modelDirectionVector = worldInverseTransform * direction;
         const auto modelDirection = modelDirectionVector.GetVector3D();
 
         const Line3 line{ modelOrigin, modelDirection };
@@ -394,7 +392,7 @@ const auto modelDirectionVector = worldInverseTransform * direction;
                 Mathematics::FloatStaticFindIntersectorLine3Triangle3 intersector{ line, triangle };
 
                 if (intersector.IsIntersection() && tMin <= intersector.GetLineParameter() &&
-                    intersector.GetLineParameter() <= tMax && SMART_POINTER_SINGLETON.IsSmartPointer(this))
+                    intersector.GetLineParameter() <= tMax)  //&& SMART_POINTER_SINGLETON.IsSmartPointer(this))
                 {
                     PickRecord record;
 

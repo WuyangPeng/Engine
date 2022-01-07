@@ -57,7 +57,7 @@
 #include "WindowsMacro/MakeLanguageIDTesting.h"
 #include "WindowsMacro/MakeWordTesting.h"
 #include "WindowsMacro/MarkTesting.h"
-#include "WindowsMacro/NullFunctionTesting.h"
+#include "WindowsMacro/UnusedFunctionTesting.h"
 #include "WindowsMacro/PtrToIntTesting.h"
 
 #endif  // SYSTEM_TESTING_HELPER_SUITE_H

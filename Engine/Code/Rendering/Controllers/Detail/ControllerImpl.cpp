@@ -193,31 +193,31 @@ void Rendering::ControllerImpl ::SetActive(bool active) noexcept
     m_Active = active;
 }
 
-void Rendering::ControllerImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ControllerImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     
-    source->ReadEnum(m_Repeat);
-    source->Read(m_MinTime);
-    source->Read(m_MaxTime);
-    source->Read(m_Phase);
-    source->Read(m_Frequency);
-    m_Active = source->ReadBool();
+    source.ReadEnum(m_Repeat);
+    source.Read(m_MinTime);
+    source.Read(m_MaxTime);
+    source.Read(m_Phase);
+    source.Read(m_Frequency);
+    m_Active = source.ReadBool();
     
     m_ApplicationTime = -Mathematics::DoubleMath::sm_MaxReal;
 }
 
 void Rendering::ControllerImpl
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	target->WriteEnum(m_Repeat);
-        target->Write(m_MinTime);
-        target->Write(m_MaxTime);
-        target->Write(m_Phase);
-        target->Write(m_Frequency);
-        target->Write(m_Active);
+	target.WriteEnum(m_Repeat);
+        target.Write(m_MinTime);
+        target.Write(m_MaxTime);
+        target.Write(m_Phase);
+        target.Write(m_Frequency);
+        target.Write(m_Active);
 }
 
 int Rendering::ControllerImpl ::GetStreamingSize() const noexcept

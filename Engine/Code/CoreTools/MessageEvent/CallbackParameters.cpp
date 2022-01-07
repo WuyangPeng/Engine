@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:47)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,16 +19,14 @@ using std::make_shared;
 using std::string;
 using std::wstring;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
 CoreTools::CallbackParameters::CallbackParameters(int count)
-    : impl( count )
+    : impl{ count }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
+
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, CallbackParameters)
- 
+
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CallbackParameters)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, CallbackParameters, GetContainerSize, int)
@@ -110,7 +108,7 @@ double CoreTools::CallbackParameters::GetDoubleValue(int index) const
     return impl->GetValue<double>(index);
 }
 
-const CoreTools::ConstParametersInterfaceSharedPtr CoreTools::CallbackParameters::GetParametersInterfaceValue(int index) const
+CoreTools::ConstParametersInterfaceSharedPtr CoreTools::CallbackParameters::GetParametersInterfaceValue(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -121,7 +119,7 @@ void CoreTools::CallbackParameters::SetValue(int index, bool value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<bool>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, const ParametersInterface& parameters)
@@ -136,84 +134,84 @@ void CoreTools::CallbackParameters::SetValue(int index, double value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<double>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, float value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<float>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, uint64_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<uint64_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, int64_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<int64_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, uint32_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<uint32_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, int32_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<int32_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, uint16_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<uint16_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, int16_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<int16_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, uint8_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<uint8_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, int8_t value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<int8_t>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, const string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<string>(index, value);
+    return impl->SetValue(index, value);
 }
 
 void CoreTools::CallbackParameters::SetValue(int index, const wstring& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    return impl->SetValue<wstring>(index, value);
+    return impl->SetValue(index, value);
 }
 
 string CoreTools::CallbackParameters::GetStringValue(int index) const

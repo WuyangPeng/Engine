@@ -1,21 +1,19 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 19:34)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:59)
 
 #include "CoreTools/CoreToolsExport.h"
 
-#include "../Contract/Flags/ImplFlags.h"
 #include "SecondTimer.h"
 #include "Detail/DeltaTimeManagerImpl.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-using std::make_shared;
 
 CoreTools::SecondTimer::SecondTimer(uint64_t second)
     : impl{ ImplCreateUseDefaultConstruction::Default }, m_Second{ second }
@@ -24,6 +22,7 @@ CoreTools::SecondTimer::SecondTimer(uint64_t second)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::SecondTimer::IsValid() const noexcept
 {
     if (0 <= m_Second)
@@ -31,6 +30,7 @@ bool CoreTools::SecondTimer::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, SecondTimer)

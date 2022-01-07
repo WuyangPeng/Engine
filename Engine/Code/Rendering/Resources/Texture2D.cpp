@@ -172,7 +172,7 @@ int Rendering::Texture2D
 }
 
 uint64_t Rendering::Texture2D
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -180,7 +180,7 @@ uint64_t Rendering::Texture2D
 }
 
 void Rendering::Texture2D
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -194,7 +194,7 @@ void Rendering::Texture2D
 }
 
 void Rendering::Texture2D
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 	    
@@ -210,7 +210,7 @@ void Rendering::Texture2D
 }
 
 void Rendering::Texture2D
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

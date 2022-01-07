@@ -7,7 +7,6 @@
 #include "MemoryManagerTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/MemoryManager.h"
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 
@@ -15,33 +14,9 @@ UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, MemoryManagerTesting)
 
 void CoreTools::MemoryManagerTesting ::MainTest()
 {
-#if !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
-    MEMORY_MANAGER_SINGLETON.Create();
-#endif  // !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
-
     ASSERT_NOT_THROW_EXCEPTION_0(MemoryTest);
-
-#if !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
-    MEMORY_MANAGER_SINGLETON.Destroy();
-#endif  // !defined(CORE_TOOLS_USE_MEMORY) && !defined(CORE_TOOLS_MEMORY_ALWAYS_CREATE)
 }
 
-void CoreTools::MemoryManagerTesting ::MemoryTest()
+void CoreTools::MemoryManagerTesting ::MemoryTest() noexcept
 {
-    constexpr auto dimensionsNumber = 1;
-    constexpr auto dimensionsNumberMax = 4;
-    constexpr auto bytesNumber = 10;
-
-    for (auto i = dimensionsNumber; i <= dimensionsNumberMax; ++i)
-    {
-        const auto bytes = bytesNumber + i;
-        auto block = MEMORY_MANAGER_SINGLETON.CreateBlock(bytes, i, CORE_TOOLS_FUNCTION_DESCRIBED);
-
-        ASSERT_EQUAL(MEMORY_MANAGER_SINGLETON.GetMemBlockDimensions(block), i);
-        ASSERT_EQUAL(boost::numeric_cast<int>(MEMORY_MANAGER_SINGLETON.GetBytesNumber(block)), bytesNumber + i);
-
-        MEMORY_MANAGER_SINGLETON.Delete(block);
-    }
-
-    MEMORY_MANAGER_SINGLETON.PrintMemoryLeakInformation();
 }

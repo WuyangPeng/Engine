@@ -69,29 +69,29 @@ int Rendering::BlendTransformControllerImpl
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	//target.WriteSharedPtr(m_FirstController);
 	//target.WriteSharedPtr(m_SecondController);
-	target->Write(m_Weight);
-	target->Write(m_RotationScaleMatrices);
-	target->Write(m_GeometricRotation);
-	target->Write(m_GeometricScale);
+	target.Write(m_Weight);
+	target.Write(m_RotationScaleMatrices);
+	target.Write(m_GeometricRotation);
+	target.Write(m_GeometricScale);
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;	 
 
 //	source.ReadSharedPtr(m_FirstController);
 //	source.ReadSharedPtr(m_SecondController);
-        source->Read(m_Weight);
-        m_RotationScaleMatrices = source->ReadBool();
-        m_GeometricRotation = source->ReadBool();
-        m_GeometricScale = source->ReadBool();
+        source.Read(m_Weight);
+        m_RotationScaleMatrices = source.ReadBool();
+        m_GeometricRotation = source.ReadBool();
+        m_GeometricScale = source.ReadBool();
 }
 
 bool Rendering::BlendTransformControllerImpl ::IsGeometricRotation() const noexcept
@@ -109,7 +109,7 @@ bool Rendering::BlendTransformControllerImpl ::IsGeometricScale() const noexcept
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     CoreTools::DisableNoexcept();
@@ -119,7 +119,7 @@ void Rendering::BlendTransformControllerImpl
 }
 
 void Rendering::BlendTransformControllerImpl
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
+	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

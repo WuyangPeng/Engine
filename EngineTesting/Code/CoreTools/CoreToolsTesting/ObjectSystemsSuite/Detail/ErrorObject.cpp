@@ -6,7 +6,7 @@
 
 #include "ErrorObject.h" 
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/ObjectManager.h"

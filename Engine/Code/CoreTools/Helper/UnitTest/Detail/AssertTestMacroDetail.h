@@ -25,7 +25,7 @@
     ASSERT_COMPARE_DETAIL((AssertEqual), (lhs), (rhs), (message), (isFailureThrow))
 
 #define ASSERT_EQUAL_DO_NOT_USE_MESSAGE_DETAIL(lhs, rhs, isFailureThrow) \
-    ASSERT_COMPARE_DO_NOT_USE_MESSAGE_DETAIL((AssertEqualDoNotUseMessage), (lhs), (rhs), (isFailureThrow))
+    ASSERT_COMPARE_DO_NOT_USE_MESSAGE_DETAIL((AssertEqual), (lhs), (rhs), (isFailureThrow))
 
 #define ASSERT_ENUM_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertEnumEqual), (lhs), (rhs), (message), (isFailureThrow))

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/15 16:00)
+///	引擎版本：0.8.0.0 (2021/12/13 18:40)
 
 #ifndef SYSTEM_HELPER_WGL_EXTENSIONS_MACRO_H
 #define SYSTEM_HELPER_WGL_EXTENSIONS_MACRO_H
@@ -14,7 +14,7 @@
 
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    #include <GL/wgl.h> 
+    #include <GL/wgl.h>
 
 #endif  // SYSTEM_PLATFORM_WIN32
 

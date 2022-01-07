@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/10 14:43)
+///	引擎版本：0.8.0.0 (2021/12/19 13:41)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_SIMPLE_ZIP_INTERNAL_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_SIMPLE_ZIP_INTERNAL_FWD_H

@@ -9,12 +9,12 @@
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "../Contract/Flags/ImplFlags.h"
 #include "LogConsoleTextColorsManager.h"
 #include "Detail/LogConsoleTextColorsManagerFactory.h"
 #include "Detail/LogConsoleTextColorsManagerImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "../Contract/Flags/ImplFlags.h"
 
 using std::ostream;
 
@@ -24,8 +24,8 @@ CoreTools::LogConsoleTextColorsManager::LogConsoleTextColorsManager(LogLevel log
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::LogConsoleTextColorsManager::LogConsoleTextColorsManager(const OStreamShared& osPtr, LogLevel logLevel)
-    : impl{ CoreTools::ImplCreateUseFactory::Default, osPtr, logLevel  }
+CoreTools::LogConsoleTextColorsManager::LogConsoleTextColorsManager(const OStreamShared& streamShared, LogLevel logLevel)
+    : impl{ CoreTools::ImplCreateUseFactory::Default, streamShared, logLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

@@ -1,11 +1,11 @@
 TODO Level 6
  
-0.7.2.5
+0.8.0.0
 
 1.  （MemoryTools）重构类Memory的实现。
 2.  （MemoryTools）内存库使用地址做键值，可能会导致错误。
 3.  （MemoryTools）修改MD5类，使其更加安全。  
-4.  （MemoryTools）使用atomic增加引用计数，而不是锁。
+4.  （MemoryTools）内存模块使用atomic增加引用计数，而不是锁。
 5.  （ModuleInitializerTerminator）增加一个需要加载模块配置类，对配置进行读取。 
 6.  （ModuleInitializerTerminator）增加一个模块自动加载及终止类。
 7.  （ModuleInitializerTerminator）终止已加载的模块，并加载新的模块。	

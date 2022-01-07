@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:23)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 14:39)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OUT_TOP_LEVEL_IMPL_H
@@ -27,18 +27,18 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsTopLevel(const ConstObjectInterfaceSharedPtr& object) const;
-        [[nodiscard]] int GetTopLevelSize() const;
+        NODISCARD bool IsTopLevel(const ConstObjectInterfaceSharedPtr& object) const;
+        NODISCARD int GetTopLevelSize() const;
 
-        [[nodiscard]] ConstObjectContainerConstIter begin() const noexcept;
-        [[nodiscard]] ConstObjectContainerConstIter end() const noexcept;
+        NODISCARD ConstObjectContainerConstIter begin() const noexcept;
+        NODISCARD ConstObjectContainerConstIter end() const noexcept;
 
         // 对顶层的对象进行保存。
         void Insert(const ObjectInterfaceSharedPtr& object);
 
     private:
         // 顶层对象的流。
-        ConstObjectContainer m_TopLevel;
+        ConstObjectContainer topLevel;
     };
 }
 

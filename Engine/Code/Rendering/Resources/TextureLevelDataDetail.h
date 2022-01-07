@@ -164,29 +164,29 @@ void Rendering::TextureLevelData<WindowSize>::RecountLevelOffsets(int numLevels)
 
 template <int WindowSize>
 void Rendering::TextureLevelData<WindowSize>
-    ::Load( const CoreTools::BufferSourceSharedPtr& source )
+    ::Load( CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumDimensions);
+	source.Read(m_NumDimensions);
 
 	for(auto i = 0;i < WindowSize;++i)
 	{
-		//source->Read(TextureMaximumMipmapLevels, m_Dimension[i]);
+		//source.Read(TextureMaximumMipmapLevels, m_Dimension[i]);
 	}   
 
-	//source->Read(TextureMaximumMipmapLevels, m_NumLevelBytes);
-	source->Read(m_NumTotalBytes);
-//	source->Read(TextureMaximumMipmapLevels, m_LevelOffsets);
+	//source.Read(TextureMaximumMipmapLevels, m_NumLevelBytes);
+	source.Read(m_NumTotalBytes);
+//	source.Read(TextureMaximumMipmapLevels, m_LevelOffsets);
 }
 
 template <int WindowSize>
 void Rendering::TextureLevelData<WindowSize>
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumDimensions);
+	target.Write(m_NumDimensions);
 
 	for(auto i = 0;i < WindowSize;++i)
 	{
@@ -194,7 +194,7 @@ void Rendering::TextureLevelData<WindowSize>
 	}   
 
    // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_NumLevelBytes);
-    target->Write(m_NumTotalBytes);
+    target.Write(m_NumTotalBytes);
    // target.WriteWithoutNumber(TextureMaximumMipmapLevels,m_LevelOffsets);
 }
 

@@ -81,23 +81,23 @@ Rendering::ShaderFlags::VariableSemantic Rendering::ShaderBaseDataImpl ::GetSema
     return m_SingleShaderBaseData[index].GetSemantic();
 }
 
-void Rendering::ShaderBaseDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ShaderBaseDataImpl ::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_9;
 
     uint32_t number{ 0 };
-    source->Read(number);
+    source.Read(number);
     m_SingleShaderBaseData.resize(number);
 
     for_each(m_SingleShaderBaseData.begin(), m_SingleShaderBaseData.end(), std::bind(&SingleShaderBaseData::Load, std::placeholders::_1, std::ref(source)));
 }
 
-void Rendering::ShaderBaseDataImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::ShaderBaseDataImpl ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_9;
 
     const uint32_t size = boost::numeric_cast<uint32_t>(m_SingleShaderBaseData.size());
-    target->Write(size);
+    target.Write(size);
 
     for_each(m_SingleShaderBaseData.begin(), m_SingleShaderBaseData.end(), std::bind(&SingleShaderBaseData::Save, std::placeholders::_1, std::ref(target)));
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:41)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 0:14)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_MESSAGE_MANAGER_DETAIL_H
@@ -18,25 +18,27 @@
 
 template <typename EventSlot, typename EventType>
 CoreTools::MessageManager<EventSlot, EventType>::MessageManager() noexcept
-    : m_EventContainer{}
+    : eventContainer{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename EventSlot, typename EventType>
 bool CoreTools::MessageManager<EventSlot, EventType>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EventSlot, typename EventType>
-uint64_t CoreTools::MessageManager<EventSlot, EventType>::Registered(MessageManagerEventType eventType, const SubclassSmartPointerType& smartPointer, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
+uint64_t CoreTools::MessageManager<EventSlot, EventType>::Registered(MessageManagerEventType eventType, const SubclassSharedPtr& subclass, EventSlotPriorityType priority, CallbackMemberFunction callbackMemberFunction)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].Registered(smartPointer, priority, callbackMemberFunction);
+    return eventContainer[eventType].Registered(subclass, priority, callbackMemberFunction);
 }
 
 template <typename EventSlot, typename EventType>
@@ -44,7 +46,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::Unregistered(MessageManage
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].Unregistered(index);
+    return eventContainer[eventType].Unregistered(index);
 }
 
 template <typename EventSlot, typename EventType>
@@ -52,7 +54,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::CallEvent(MessageManagerEv
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].CallEvent(callbackParameters);
+    return eventContainer[eventType].CallEvent(callbackParameters);
 }
 
 template <typename EventSlot, typename EventType>
@@ -60,7 +62,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::CallEventUnordered(Message
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].CallEventUnordered(callbackParameters);
+    return eventContainer[eventType].CallEventUnordered(callbackParameters);
 }
 
 template <typename EventSlot, typename EventType>
@@ -68,7 +70,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEvent(MessageMana
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].DelayCallEvent(callbackParameters, delayTime);
+    return eventContainer[eventType].DelayCallEvent(callbackParameters, delayTime);
 }
 
 template <typename EventSlot, typename EventType>
@@ -76,7 +78,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::DelayCallEventUnordered(Me
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_EventContainer[eventType].DelayCallEventUnordered(callbackParameters, delayTime);
+    return eventContainer[eventType].DelayCallEventUnordered(callbackParameters, delayTime);
 }
 
 template <typename EventSlot, typename EventType>
@@ -84,7 +86,7 @@ void CoreTools::MessageManager<EventSlot, EventType>::DispatchDelayEvent(uint64_
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    for (auto& event : m_EventContainer)
+    for (auto& event : eventContainer)
     {
         event.second.DispatchDelayEvent(currentTime);
     }

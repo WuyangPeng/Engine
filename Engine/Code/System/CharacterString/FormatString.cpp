@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/03/31 18:39)
+///	引擎版本：0.8.0.0 (2021/12/13 22:47)
 
 #include "System/SystemExport.h"
 
@@ -19,31 +19,24 @@
 int System::VsnPrintf(char* buffer, size_t size, const char* format, va_list argList) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     // 返回存储在buffer中的字符，不包括终止null字符。错误返回 -1。
     return ::_vsnprintf_s(buffer, size, _TRUNCATE, format, argList);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return ::vsnprintf(buffer, size, format, argList);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::Strcat(char* destination, MAYBE_UNUSED size_t sizeInBytes, const char* source) noexcept
+bool System::Strcat(char* destination, size_t sizeInBytes, const char* source) noexcept
 {
-#ifdef SYSTEM_PLATFORM_WIN32
-
     // 如果成功，则为零；如果失败，则为错误代码。
     if (::strcat_s(destination, sizeInBytes, source) == 0)
         return true;
     else
         return false;
-
-#else  // !SYSTEM_PLATFORM_WIN32
-
-    // 返回一个目标字符串。
-    ::strcat(destination, source);
-
-    return true;
-
-#endif  // SYSTEM_PLATFORM_WIN32
 }
 
 size_t System::Strlen(const char* str) noexcept

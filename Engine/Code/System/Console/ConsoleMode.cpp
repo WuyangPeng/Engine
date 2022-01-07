@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 20:01)
+///	引擎版本：0.8.0.0 (2021/12/13 22:26)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::GetSystemConsoleMode(WindowsHandle consoleHandle, WindowsDWordPtr m
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWordPtr>(consoleHandle, mode);
+    UnusedFunction(consoleHandle, mode);
 
     return false;
 
@@ -42,7 +42,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleInputMode 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleInputMode>(consoleHandle, mode);
+    UnusedFunction(consoleHandle, mode);
 
     return false;
 
@@ -60,7 +60,7 @@ bool System::SetSystemConsoleMode(WindowsHandle consoleHandle, ConsoleOutputMode
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleOutputMode>(consoleHandle, mode);
+    UnusedFunction(consoleHandle, mode);
 
     return false;
 

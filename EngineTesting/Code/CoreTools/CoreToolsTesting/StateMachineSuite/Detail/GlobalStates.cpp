@@ -7,8 +7,7 @@
 #include "EmptyStates.h"
 #include "GlobalStates.h"
 
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"
 
 using std::make_pair;

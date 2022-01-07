@@ -56,7 +56,7 @@ void CubicPolynomialCurve2<Real>::Tessellate (int level)
 	auto twoPowL = (1 << level);
     mNumVertices = twoPowL + 1;
     DELETE1(mVertices);
-    mVertices = NEW1<Vector2D<Real> >(mNumVertices);
+    mVertices = nullptr;  // NEW1<Vector2D<Real> >(mNumVertices);
 
     // Indices of endpoints, I[t].
     IntervalParameters IP;

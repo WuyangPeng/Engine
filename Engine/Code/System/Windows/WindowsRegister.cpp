@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/05 23:26)
+///	引擎版本：0.8.0.0 (2021/12/12 13:30)
 
 #include "System/SystemExport.h"
 
@@ -20,7 +20,7 @@ System::WindowsHGdiObj System::GetSystemStockObject(WindowsBrushTypes background
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsBrushTypes>(background);
+    UnusedFunction(background);
 
     return nullptr;
 
@@ -35,7 +35,7 @@ System::WindowsHCursor System::LoadSystemCursor(WindowsHInstance instance, const
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHInstance, const TChar>(instance, background);
+    UnusedFunction(instance, background);
 
     return nullptr;
 
@@ -50,7 +50,7 @@ System::WindowsHIcon System::LoadSystemIcon(WindowsHInstance instance, const TCh
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHInstance, const TChar>(instance, icon);
+    UnusedFunction(instance, icon);
 
     return nullptr;
 
@@ -65,7 +65,7 @@ System::WindowsAtom System::RegisterSystemClass(const WindowsClassEx* wndClassEx
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const WindowsClassEx*>(wndClassEx);
+    UnusedFunction(wndClassEx);
 
     return 0;
 
@@ -80,7 +80,7 @@ System::WindowsUInt System::RegisterSystemWindowMessage(const TChar* string) noe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*>(string);
+    UnusedFunction(string);
 
     return 0;
 

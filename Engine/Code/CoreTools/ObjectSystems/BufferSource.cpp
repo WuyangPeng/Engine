@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 14:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@
 using std::string;
 
 CoreTools::BufferSource::BufferSource(const ConstFileBufferSharedPtr& fileBuffer)
-    : m_Source{ fileBuffer }
+    : source{ fileBuffer }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,8 +30,6 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferSource)
 
 bool CoreTools::BufferSource::ReadBool()
 {
-    
-
     uint32_t value{ 0 };
 
     Read(value);
@@ -41,15 +39,11 @@ bool CoreTools::BufferSource::ReadBool()
 
 void CoreTools::BufferSource::Read(bool& value)
 {
-    
-
     value = ReadBool();
 }
 
 string CoreTools::BufferSource::ReadString()
 {
-    
-
     int32_t length{ 0 };
     Read(length);
 
@@ -62,9 +56,9 @@ string CoreTools::BufferSource::ReadString()
             padding = g_DefaultSize - padding;
         }
 
-        string datum = m_Source.GetText(length);
+        string datum = source.GetText(length);
 
-        m_Source.IncrementBytesProcessed(length + padding);
+        source.IncrementBytesProcessed(length + padding);
 
         return datum;
     }
@@ -81,8 +75,6 @@ void CoreTools::BufferSource::Read(string& value)
 
 void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, std::set<bool>& container)
 {
-    
-
     for (auto i = 0; i < elementsNumber; ++i)
     {
         container.emplace(ReadBool());
@@ -91,8 +83,6 @@ void CoreTools::BufferSource::ReadBoolContainer(int elementsNumber, std::set<boo
 
 void CoreTools::BufferSource::ReadStringContainer(int elementsNumber, std::set<std::string>& container)
 {
-    
-
     for (auto i = 0; i < elementsNumber; ++i)
     {
         container.emplace(ReadString());
@@ -103,31 +93,25 @@ int CoreTools::BufferSource::GetBytesRead() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Source.GetBytesProcessed();
+    return source.GetBytesProcessed();
 }
 
 int CoreTools::BufferSource::GetBytesTotal() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Source.GetBytesTotal();
+    return source.GetBytesTotal();
 }
 
-void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber)  
+void CoreTools::BufferSource::IncrementBytesProcessed(int bytesNumber)
 {
-    
-
-    m_Source.IncrementBytesProcessed(bytesNumber);
+    source.IncrementBytesProcessed(bytesNumber);
 }
 
-void CoreTools::BufferSource::ReadUniqueID(const ObjectInterfaceSharedPtr& object)
+void CoreTools::BufferSource::ReadUniqueID(ObjectInterface& object)
 {
-    
-
-    auto modify = object;
-
     auto uniqueID = Read<uint64_t>();
-    modify->SetUniqueID(uniqueID);
+    object.SetUniqueID(uniqueID);
 }
 
 int32_t CoreTools::BufferSource::GetElementsNumber()

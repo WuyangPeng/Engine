@@ -228,7 +228,7 @@ int Rendering::MorphController
 	return size;
 }
 
-uint64_t Rendering::MorphController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::MorphController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -236,7 +236,7 @@ uint64_t Rendering::MorphController ::Register(const CoreTools::ObjectRegisterSh
 }
 
 void Rendering::MorphController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -250,7 +250,7 @@ void Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -266,7 +266,7 @@ void Rendering::MorphController
 }
 
 void Rendering::MorphController
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

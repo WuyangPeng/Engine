@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 13:59)
+///	引擎版本：0.8.0.0 (2021/12/12 18:07)
 
 #ifndef SYSTEM_THREADING_EVENT_H
 #define SYSTEM_THREADING_EVENT_H
@@ -22,14 +22,14 @@ namespace System
     // 事件对象
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemEvent(WindowSecurityAttributesPtr securityAttributes,
-                                                                        const TChar* name,
-                                                                        CreateEventType flag,
-                                                                        MutexStandardAccess desiredAccess,
-                                                                        EventSpecificAccess specificAccess) noexcept;
+                                                                         const TChar* name,
+                                                                         CreateEventType flag,
+                                                                         MutexStandardAccess desiredAccess,
+                                                                         EventSpecificAccess specificAccess) noexcept;
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemEvent(WindowSecurityAttributesPtr securityAttributes,
-                                                                        bool manualReset,
-                                                                        bool initialState,
-                                                                        const TChar* name) noexcept;
+                                                                         bool manualReset,
+                                                                         bool initialState,
+                                                                         const TChar* name) noexcept;
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemEvent(bool manualReset, bool initialState) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemEvent(WindowsHandle handle) noexcept;
@@ -41,7 +41,7 @@ namespace System
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemEvent(WindowsHandle handle, WindowsDWord milliseconds, bool alertable) noexcept;
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemEvent(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemEvent(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds) noexcept;
-   
+
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemEvent(MutexStandardAccess desiredAccess, EventSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsSystemEventValid(WindowsHandle eventHandle) noexcept;
 }

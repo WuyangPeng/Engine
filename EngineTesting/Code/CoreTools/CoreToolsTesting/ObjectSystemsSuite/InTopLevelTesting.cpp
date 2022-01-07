@@ -8,7 +8,7 @@
 #include "Detail/NullObject.h"
 #include "CoreTools/ObjectSystems/InTopLevel.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <vector>

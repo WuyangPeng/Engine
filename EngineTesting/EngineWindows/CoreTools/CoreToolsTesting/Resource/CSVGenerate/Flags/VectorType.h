@@ -14,7 +14,7 @@
 
 #include "System/Helper/EnumMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVRow.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <iostream>
 

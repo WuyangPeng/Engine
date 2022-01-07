@@ -161,29 +161,29 @@ void Rendering::WorldCoordinateFrame ::OnFrameChange()
     m_ViewMatrix(3,3) = 1.0f;
 }
 
-void Rendering::WorldCoordinateFrame ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::WorldCoordinateFrame ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     
-	source->ReadAggregate(m_Position);
-    source->ReadAggregate(m_DirectionVector);
-    source->ReadAggregate(m_UpVector);
-    source->ReadAggregate(m_RightVector);
-    source->Read(m_Epsilon);
+	source.ReadAggregate(m_Position);
+    source.ReadAggregate(m_DirectionVector);
+    source.ReadAggregate(m_UpVector);
+    source.ReadAggregate(m_RightVector);
+    source.Read(m_Epsilon);
     
     OnFrameChange ();
 }
 
 void Rendering::WorldCoordinateFrame
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
-	target->WriteAggregate(m_Position);
-        target->WriteAggregate(m_DirectionVector);
-        target->WriteAggregate(m_UpVector);
-        target->WriteAggregate(m_RightVector);
-    target->Write(m_Epsilon);
+	target.WriteAggregate(m_Position);
+        target.WriteAggregate(m_DirectionVector);
+        target.WriteAggregate(m_UpVector);
+        target.WriteAggregate(m_RightVector);
+    target.Write(m_Epsilon);
 }
 
 int Rendering::WorldCoordinateFrame

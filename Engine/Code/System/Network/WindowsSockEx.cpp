@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/06/04 21:14)
+///	引擎版本：0.8.0.0 (2021/12/13 14:37)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ System::WinSocket System::WinSocketAccept(WinSocket winSocket, WinSockAddr* addr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, WinSockAddr*, WindowsIntPtr, WinSockConditionProc, WindowsPtrDWord>(winSocket, addr, addrlen, condition, callbackData);
+    UnusedFunction(winSocket, addr, addrlen, condition, callbackData);
 
     return nullptr;
 
@@ -48,13 +48,7 @@ bool System::WinSocketConnect(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 const WinSockAddr*,
-                 int,
-                 WinSockBufPtr,
-                 WinSockBufPtr,
-                 QualityOfServicePtr,
-                 QualityOfServicePtr>(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService);
+    UnusedFunction(winSocket, name, namelen, callerData, calleeData, sQualityOfService, gQualityOfService);
 
     return false;
 
@@ -79,14 +73,7 @@ bool System::WinSocketConnectByName(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 TChar*,
-                 TChar*,
-                 WindowsDWordPtr,
-                 WinSockAddr*,
-                 WindowsDWordPtr,
-                 WinSockAddr*,
-                 const WinSockTimeval*>(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout);
+    UnusedFunction(winSocket, nodename, servicename, localAddressLength, localAddress, remoteAddressLength, remoteAddress, timeout);
 
     return false;
 
@@ -104,7 +91,7 @@ bool System::WinSocketHtonl(WinSocket winSocket, unsigned long hostlong, unsigne
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, unsigned long, unsigned long*>(winSocket, hostlong, netlong);
+    UnusedFunction(winSocket, hostlong, netlong);
 
     return false;
 
@@ -122,7 +109,7 @@ bool System::WinSocketHtons(WinSocket winSocket, unsigned short hostshort, unsig
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, unsigned short, unsigned short*>(winSocket, hostshort, netshort);
+    UnusedFunction(winSocket, hostshort, netshort);
 
     return false;
 
@@ -140,7 +127,7 @@ bool System::WinSocketNtohl(WinSocket winSocket, unsigned long netlong, unsigned
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, unsigned long, unsigned long*>(winSocket, netlong, hostlong);
+    UnusedFunction(winSocket, netlong, hostlong);
 
     return false;
 
@@ -158,7 +145,7 @@ bool System::WinSocketNtohs(WinSocket winSocket, unsigned short netshort, unsign
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket, unsigned short, short long*>(winSocket, netshort, hostshort);
+    UnusedFunction(winSocket, netshort, hostshort);
 
     return false;
 
@@ -179,13 +166,7 @@ int System::WinSocketRecv(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 WinSockBufPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr,
-                 SocketOverlappedPtr,
-                 SocketOverlappedCompletionRoutine>(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, overlapped, completionRoutine);
 
     return 0;
 
@@ -208,15 +189,7 @@ int System::WinSocketRecvFrom(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 WinSockBufPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr,
-                 WinSockAddr*,
-                 WindowsIntPtr,
-                 SocketOverlappedPtr,
-                 SocketOverlappedCompletionRoutine>(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesRecvd, flags, from, fromlen, overlapped, completionRoutine);
 
     return 0;
 
@@ -237,13 +210,7 @@ int System::WinSocketSend(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 WinSockBufPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr,
-                 WindowsDWord,
-                 SocketOverlappedPtr,
-                 SocketOverlappedCompletionRoutine>(winSocket, buffers, bufferCount, numberOfBytesSent, flags, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesSent, flags, overlapped, completionRoutine);
 
     return 0;
 
@@ -266,15 +233,7 @@ int System::WinSocketSendTo(WinSocket winSocket,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WinSocket,
-                 WinSockBufPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr,
-                 WindowsDWord,
-                 const WinSockAddr*,
-                 int,
-                 SocketOverlappedPtr,
-                 SocketOverlappedCompletionRoutine>(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
+    UnusedFunction(winSocket, buffers, bufferCount, numberOfBytesSent, flags, to, tolen, overlapped, completionRoutine);
 
     return 0;
 
@@ -289,7 +248,7 @@ System::WinSocket System::GetWinSocket(ProtocolFamilies addressFamilies, SocketT
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ProtocolFamilies, SocketTypes, SocketProtocols, SocketProtocolInfoPtr, SocketGroup, WindowsDWord>(addressFamilies, type, protocol, protocolInfo, group, flags);
+    UnusedFunction(addressFamilies, type, protocol, protocolInfo, group, flags);
 
     return nullptr;
 

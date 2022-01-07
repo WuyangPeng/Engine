@@ -89,23 +89,23 @@ int Rendering::VertexFormatType ::GetStreamingSize() const noexcept
 }
 
 void Rendering::VertexFormatType
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const 
+	::Save( CoreTools::BufferTarget& target ) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->WriteEnum(m_Type);
-        target->WriteEnum(m_Usage);
-	target->Write(m_UsageIndex);
+	target.WriteEnum(m_Type);
+        target.WriteEnum(m_Usage);
+	target.Write(m_UsageIndex);
 }
 
 void Rendering::VertexFormatType
-	::Load( const CoreTools::BufferSourceSharedPtr& source )
+	::Load( CoreTools::BufferSource& source )
 {	
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->ReadEnum(m_Type);
-	source->ReadEnum(m_Usage);
-	source->Read(m_UsageIndex);
+	source.ReadEnum(m_Type);
+	source.ReadEnum(m_Usage);
+	source.Read(m_UsageIndex);
 }
 
 void Rendering::VertexFormatType

@@ -8,7 +8,7 @@
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL1_DETAIL_H
 
 #include "ConvexHull1.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 
 template <typename Real>
@@ -32,7 +32,7 @@ Mathematics::ConvexHull1<Real>
     {
         mDimension = 1;
         mNumSimplices = 2;
-        mIndices = NEW1<int>(2);
+     //   mIndices = NEW1<int>(2);
         mIndices[0] = sortedArray[0].Index;
         mIndices[1] = sortedArray[mNumVertices-1].Index;
     }
@@ -79,7 +79,7 @@ bool Mathematics::ConvexHull1<Real>
     }
 
     mOwner = true;
-    mVertices = NEW1<Real>(mNumVertices);
+   // mVertices = NEW1<Real>(mNumVertices);
     inFile.Read(sizeof(Real), mNumVertices, mVertices);
  
     return true;

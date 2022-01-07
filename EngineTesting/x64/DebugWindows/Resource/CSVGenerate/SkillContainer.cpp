@@ -10,9 +10,9 @@
 #include "Skill.h"
 #include "SkillContainerDetail.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/CSVRow.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
 
@@ -64,7 +64,7 @@ CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContain
 }
 
 CSVConfigure::SkillContainer::ConstSkillBaseSharedPtr CSVConfigure::SkillContainer::GetSkill(int id, int reward) const
- {
+{
     USER_CLASS_IS_VALID_CONST_9;
 
     return GetSkill(Skill::GenerateKey(id, reward));

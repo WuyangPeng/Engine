@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 22:00)
+///	引擎版本：0.8.0.0 (2021/12/12 13:10)
 
 #include "System/SystemExport.h"
 
@@ -34,7 +34,7 @@ void System::SetPlatformLastError(WindowError error) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowError>(error);
+    UnusedFunction(error);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

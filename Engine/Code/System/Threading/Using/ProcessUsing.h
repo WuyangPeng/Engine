@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 13:56)
+///	引擎版本：0.8.0.0 (2021/12/12 16:53)
 
 #ifndef SYSTEM_THREADING_PROCESS_USING_H
 #define SYSTEM_THREADING_PROCESS_USING_H
@@ -46,7 +46,6 @@ namespace System
         void* hStdOutput;
         void* hStdError;
     };
-
     using ProcessStartupinfoPtr = ProcessStartupinfo*;
 
     struct ProcessInformation
@@ -56,7 +55,6 @@ namespace System
         uint32_t dwProcessId;
         uint32_t dwThreadId;
     };
-
     using ProcessInformationPtr = ProcessInformation*;
 
     struct ProcessStartupinfoEx

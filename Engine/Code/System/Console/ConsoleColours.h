@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:19)
+///	引擎版本：0.8.0.0 (2021/12/13 22:24)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_COLORS_H
 #define SYSTEM_CONSOLE_CONSOLE_COLORS_H
@@ -20,7 +20,10 @@ namespace System
 {
     // 控制台颜色的设置。
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleTextAttribute(WindowsHandle handle, TextColour textColour, BackgroundColour backgroundColour, ConsoleCommon consoleCommon) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleTextAttribute(WindowsHandle handle,
+                                                                        TextColour textColour,
+                                                                        BackgroundColour backgroundColour,
+                                                                        ConsoleCommon consoleCommon) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemConsoleDefaultTextAttribute(WindowsHandle handle) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE ReadSystemConsoleOutputAttribute(WindowsHandle consolehandle,
                                                                            WindowsWordPtr attribute,

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/24 16:58)
+///	引擎版本：0.8.0.0 (2021/12/13 10:48)
 
 #ifndef SYSTEM_SECURITY_SECURITY_DESCRIPTOR_H
 #define SYSTEM_SECURITY_SECURITY_DESCRIPTOR_H
@@ -62,8 +62,10 @@ namespace System
                                                                            SecuritySIDPtr* owner,
                                                                            bool* ownerDefaulted) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr securityDescriptor, WindowsUCharPtr rmControl) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr securityDescriptor, WindowsUCharPtr rmControl) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr securityDescriptor,
+                                                                                      WindowsUCharPtr rmControl) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr securityDescriptor,
+                                                                                      WindowsUCharPtr rmControl) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr securityDescriptor,
                                                                                        bool saclPresent,

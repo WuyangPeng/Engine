@@ -10,8 +10,8 @@
 #include "CoreTools/CoreToolsTesting/ObjectSystemsSuite/Detail/PointerObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
+
 
 using std::string;
 

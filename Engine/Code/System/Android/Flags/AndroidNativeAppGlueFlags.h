@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/10 20:33)
+///	引擎版本：0.8.0.0 (2021/12/13 22:53)
 
 #ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
 #define SYSTEM_ANDROID_ANDROID_NATIVE_APP_GLUE_FLAGS_H
@@ -25,7 +25,7 @@ namespace System
         User = LOOPER_ID_USER,
     };
 
-    enum class AppCmd
+    enum class AppCmdType
     {
         InputChanged = APP_CMD_INPUT_CHANGED,
         InitWindow = APP_CMD_INIT_WINDOW,
@@ -60,7 +60,7 @@ namespace System
         User = 3,
     };
 
-    enum class AppCmd
+    enum class AppCmdType
     {
         InputChanged = 0,
         InitWindow = EnumCastUnderlying(WindowsMessages::Create),
@@ -92,7 +92,7 @@ namespace System
         User = 3,
     };
 
-    enum class AppCmd
+    enum class AppCmdType
     {
         InputChanged = 0,
         InitWindow = 1,

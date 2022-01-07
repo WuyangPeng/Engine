@@ -13,8 +13,7 @@
 #include "PolynomialSamplesPower.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
 
 template <typename Real>
 Mathematics::PolynomialSamplesPower<Real>::PolynomialSamplesPower(const Samples& samples, int degree)

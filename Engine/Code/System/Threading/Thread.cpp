@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 18:21)
+///	引擎版本：0.8.0.0 (2021/12/12 19:18)
 
 #include "System/SystemExport.h"
 
@@ -30,7 +30,7 @@ System::ThreadHandle System::CreateSystemThread(WindowSecurityAttributesPtr thre
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, WindowsSize, ThreadStartRoutine, WindowsVoidPtr, ThreadCreation, WindowsDWordPtr>(threadAttributes, stackSize, startAddress, parameter, creationFlags, threadID);
+    UnusedFunction(threadAttributes, stackSize, startAddress, parameter, creationFlags, threadID);
 
     return nullptr;
 
@@ -53,7 +53,7 @@ bool System::CloseSystemThread(ThreadHandle thread) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(thread);
+    UnusedFunction(thread);
 
     return false;
 
@@ -68,7 +68,7 @@ System::WindowsDWord System::ResumeSystemThread(ThreadHandle thread) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(thread);
+    UnusedFunction(thread);
 
     return 0;
 
@@ -83,7 +83,7 @@ System::WindowsDWord System::SuspendSystemThread(ThreadHandle thread) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(thread);
+    UnusedFunction(thread);
 
     return 0;
 
@@ -127,7 +127,7 @@ bool System::SetSystemThreadPriority(ThreadHandle thread, int priority) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, int>(thread, priority);
+    UnusedFunction(thread, priority);
 
     return false;
 
@@ -142,7 +142,7 @@ int System::GetSystemThreadPriority(ThreadHandle thread) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(thread);
+    UnusedFunction(thread);
 
     return 0;
 
@@ -162,7 +162,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, WindowsDWord>(thread, milliseconds);
+    UnusedFunction(thread, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -177,7 +177,7 @@ System::MutexWaitReturn System::WaitForSystemThread(ThreadHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, WindowsDWord, bool>(thread, milliseconds, alertable);
+    UnusedFunction(thread, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -192,7 +192,7 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const ThreadHandle*, bool, WindowsDWord, bool>(count, handle, waitAll, milliseconds, alertable);
+    UnusedFunction(count, handle, waitAll, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -207,7 +207,7 @@ System::MutexWaitReturn System::WaitForSystemThread(WindowsDWord count, const Th
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const ThreadHandle*, bool, WindowsDWord>(count, handle, waitAll, milliseconds);
+    UnusedFunction(count, handle, waitAll, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -220,12 +220,14 @@ System::ThreadHandle System::BeginSystemThread(void* security, unsigned stacksiz
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
     return reinterpret_cast<ThreadHandle>(::_beginthreadex(security, stacksize, startAddress, argument, createFlag, threadAddress));
+
     #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<void*, unsigned, StartAddress, void*, unsigned, unsigned*>(security, stacksize, startAddress, argument, createFlag, threadAddress);
+    UnusedFunction(security, stacksize, startAddress, argument, createFlag, threadAddress);
 
     return nullptr;
 
@@ -240,7 +242,7 @@ void System::EndSystemThread(unsigned retCode) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<unsigned>(retCode);
+    UnusedFunction(retCode);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -261,7 +263,7 @@ System::WindowsDWord System::ExitSystemThread(WindowsDWord exitCode) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord>(exitCode);
+    UnusedFunction(exitCode);
 
     return exitCode;
 

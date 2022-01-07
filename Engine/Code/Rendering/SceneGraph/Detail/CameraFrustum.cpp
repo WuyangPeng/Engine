@@ -147,21 +147,21 @@ float Rendering::CameraFrustum ::GetRightMax() const noexcept
     return m_Frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)];
 }
 
-void Rendering::CameraFrustum ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CameraFrustum ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
  
-   // source->Read(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
-    m_IsPerspective = source->ReadBool();
+   // source.Read(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
+    m_IsPerspective = source.ReadBool();
 }
 
 void Rendering::CameraFrustum
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
    // target.WriteWithoutNumber(System::EnumCastUnderlying(ViewFrustum::Quantity), m_Frustum);
-    target->Write(m_IsPerspective);
+    target.Write(m_IsPerspective);
 }
 
 int Rendering::CameraFrustum ::GetStreamingSize() const noexcept

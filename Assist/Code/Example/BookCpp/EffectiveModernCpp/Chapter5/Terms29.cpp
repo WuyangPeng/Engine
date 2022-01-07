@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.2.5 (2021/11/04 21:06)
+///	引擎辅助版本：0.7.2.6 (2021/11/18 21:32)
 
 #include "Example/BookCpp/EffectiveModernCpp/EffectiveModernCppExport.h"
 

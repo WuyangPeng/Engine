@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 16:25)
+///	引擎版本：0.8.0.0 (2021/12/12 19:11)
 
 #include "System/SystemExport.h"
 
@@ -14,6 +14,7 @@
 #include "Flags/ProcessFlags.h"
 #include "System/Helper/EnumCast.h"
 #include "System/Helper/WindowsMacro.h"
+#include "System/SystemOutput/OutputDebugString.h"
 #include "System/Windows/Engineering.h"
 #include "System/Windows/WindowsSystem.h"
 
@@ -37,8 +38,10 @@ bool System::CreateSystemProcess(const String& applicationName)
 
     if (result)
     {
-        MAYBE_UNUSED const auto closeThread = CloseSystemThread(processInformation.hThread);
-        MAYBE_UNUSED const auto closeProcess = CloseSystemProcess(processInformation.hProcess);
+        if (!CloseSystemThread(processInformation.hThread) || !CloseSystemProcess(processInformation.hProcess))
+        {
+            OutputDebugStringWithTChar(SYSTEM_TEXT("CreateSystemProcess句柄释放失败。\n"));
+        }
     }
 
     return result;
@@ -77,25 +80,16 @@ bool System::CreateSystemProcess(const TChar* applicationName,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*,
-                 TChar*,
-                 WindowSecurityAttributesPtr,
-                 WindowSecurityAttributesPtr,
-                 bool,
-                 ProcessCreation,
-                 WindowsVoidPtr,
-                 const TChar*,
-                 ProcessStartupinfoPtr,
-                 ProcessInformationPtr>(applicationName,
-                                        commandLine,
-                                        processAttributes,
-                                        threadAttributes,
-                                        inheritHandles,
-                                        creationFlags,
-                                        environment,
-                                        currentDirectory,
-                                        startupInfo,
-                                        processInformation);
+    UnusedFunction(applicationName,
+                   commandLine,
+                   processAttributes,
+                   threadAttributes,
+                   inheritHandles,
+                   creationFlags,
+                   environment,
+                   currentDirectory,
+                   startupInfo,
+                   processInformation);
 
     return false;
 
@@ -136,7 +130,7 @@ void System::ExitSystemProcess(WindowsUInt exitCode) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsUInt>(exitCode);
+    UnusedFunction(exitCode);
 
     return false;
 
@@ -151,7 +145,7 @@ System::WindowsDWord System::GetProcessHandleID(WindowsHandle process) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(process);
+    UnusedFunction(process);
 
     return 0;
 
@@ -169,7 +163,7 @@ bool System::SetProcessPriorityClass(WindowsHandle process, ProcessCreation prio
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ProcessCreation>(process, priorityClass);
+    UnusedFunction(process, priorityClass);
 
     return 0;
 
@@ -184,7 +178,7 @@ System::ProcessCreation System::GetProcessPriorityClass(WindowsHandle process) n
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(process);
+    UnusedFunction(process);
 
     return ProcessCreation::ProcessModeBackgroundBegin;
 
@@ -199,7 +193,7 @@ System::WindowsHandle System::OpenSystemProcess(ProcessStandardAccess standardAc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ProcessStandardAccess, ProcessSpecificAccess, bool, WindowsDWord>(standardAccess, desiredAccess, inheritHandle, processID);
+    UnusedFunction(standardAccess, desiredAccess, inheritHandle, processID);
 
     return nullptr;
 
@@ -217,7 +211,7 @@ bool System::CloseSystemProcess(WindowsHandle process) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(process);
+    UnusedFunction(process);
 
     return false;
 

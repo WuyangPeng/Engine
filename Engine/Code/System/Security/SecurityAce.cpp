@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 18:46)
+///	引擎版本：0.8.0.0 (2021/12/13 11:09)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::AddAccessControlEntries(AccessCheckACLPtr acl, AccessControlListRev
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, WindowsDWord, WindowsVoidPtr, WindowsDWord>(acl, aceRevision, startingAceIndex, aceList, aceListLength);
+    UnusedFunction(acl, aceRevision, startingAceIndex, aceList, aceListLength);
 
     return false;
 
@@ -42,7 +42,7 @@ bool System::AddMandatoryAccessControlEntries(AccessCheckACLPtr acl, AccessContr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, ControlACEInheritance, MandatoryPolicy, SecuritySIDPtr>(acl, aceRevision, aceFlags, mandatoryPolicy, labelSid);
+    UnusedFunction(acl, aceRevision, aceFlags, mandatoryPolicy, labelSid);
 
     return false;
 
@@ -60,7 +60,7 @@ bool System::DeleteAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceI
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, WindowsDWord>(acl, aceIndex);
+    UnusedFunction(acl, aceIndex);
 
     return false;
 
@@ -78,7 +78,7 @@ bool System::FindFirstFreeAccessControlEntries(AccessCheckACLPtr acl, WindowsVoi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, WindowsVoidPtr*>(acl, ace);
+    UnusedFunction(acl, ace);
 
     return false;
 
@@ -96,7 +96,7 @@ bool System::GetAccessControlEntries(AccessCheckACLPtr acl, WindowsDWord aceInde
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, WindowsDWord, WindowsVoidPtr*>(acl, aceIndex, ace);
+    UnusedFunction(acl, aceIndex, ace);
 
     return false;
 

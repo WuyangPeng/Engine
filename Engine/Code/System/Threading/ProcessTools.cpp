@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 16:58)
+///	引擎版本：0.8.0.0 (2021/12/12 19:16)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::OpenSysemProcessToken(WindowsHandle process, TokenStandardAccess st
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, TokenStandardAccess, TokenSpecificAccess, WindowsHandlePtr>(process, standardAccess, specificAccess, tokenHandle);
+    UnusedFunction(process, standardAccess, specificAccess, tokenHandle);
 
     return false;
 

@@ -5,20 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/11 22:03)
+///	引擎版本：0.8.0.0 (2021/12/20 22:28)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "CommandQuery/CommandSetSheetName.h"
 #include "SheetBase.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandCloneSheet.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandSetSheetIndex.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandSetSheetName.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/CommandSetSheetVisibility.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetIndex.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetName.h"
-#include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySheetVisibility.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/SheetFlags.h"
 
@@ -49,5 +42,3 @@ void CoreTools::SimpleCSV::SheetBase::SetName(const string& sheetName)
 
     GetParentDocument()->ExecuteCommand(commandSetSheetName);
 }
-
- 

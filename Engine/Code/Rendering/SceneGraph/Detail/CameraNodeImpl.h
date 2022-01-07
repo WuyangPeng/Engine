@@ -67,11 +67,11 @@ namespace Rendering
 
         void SetFrame(const APoint& position, const AVector& directionVector, const AVector& upVector, const AVector& rightVector);
 
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
+        void Load(CoreTools::BufferSource& source);
+        void Save(CoreTools::BufferTarget& target) const;
         int GetStreamingSize() const noexcept;
-        uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
-        void Link(const CoreTools::ObjectLinkSharedPtr& source);
+        uint64_t Register(CoreTools::ObjectRegister& target) const;
+        void Link(CoreTools::ObjectLink& source);
 
         CORE_TOOLS_NAMES_IMPL_DECLARE;
 

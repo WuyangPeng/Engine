@@ -5,6 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/06 18:41)
 
 #include "DirectPropertyInternal.h"
+#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 

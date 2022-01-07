@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 20:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 15:58)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_FILE_IN_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_FILE_IN_STREAM_H
@@ -32,13 +32,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] InTopLevel GetInTopLevel() const noexcept;
+        NODISCARD InTopLevel GetInTopLevel() const noexcept;
 
     private:
         void Load(const String& fileName);
 
     private:
-        InTopLevel m_InTopLevel;
+        InTopLevel inTopLevel;
     };
 }
 

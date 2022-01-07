@@ -82,6 +82,9 @@
     <Filter Include="CleanCppSustainableSoftwareDevelopment\Chapter2">
       <UniqueIdentifier>{637696bf-22bc-4bea-b71b-664966b6045b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThrivingInACrowdedAndChangingWorld">
+      <UniqueIdentifier>{602b830d-3ab2-421c-b720-c3fd35456b7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TestingHelper.h">
@@ -216,6 +219,12 @@
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\CleanCppSustainableSoftwareDevelopment\Chapter2\CleanCppSustainableSoftwareDevelopmentChapter2ServiceTesting.h">
       <Filter>CleanCppSustainableSoftwareDevelopment\Chapter2</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldPlaceholderTesting.h">
+      <Filter>ThrivingInACrowdedAndChangingWorld</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldSuite.h">
+      <Filter>ThrivingInACrowdedAndChangingWorld</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\TestingHelper.cpp">
@@ -289,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\CleanCppSustainableSoftwareDevelopment\Chapter2\CleanCppSustainableSoftwareDevelopmentChapter2ServiceTesting.cpp">
       <Filter>CleanCppSustainableSoftwareDevelopment\Chapter2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookAdvancedTesting\ThrivingInACrowdedAndChangingWorld\ThrivingInACrowdedAndChangingWorldPlaceholderTesting.cpp">
+      <Filter>ThrivingInACrowdedAndChangingWorld</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -10,16 +10,16 @@
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/Vector2DDetail.h"
+#include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
+#include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessorDetail.h"
 #include "Rendering/SceneGraph/StandardMesh.h"
-#include "Rendering/DataTypes/TransformDetail.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26486)
@@ -44,23 +44,23 @@ Rendering::RevolutionSurface ::RevolutionSurface(Mathematics::Curve2f* curve, fl
     TrianglesMeshSharedPtr mesh;
     switch (mTopology)
     {
-    case TopologyType::REV_DISK_TOPOLOGY:
-        mesh = stdmesh.Disk(mNumCurveSamples, mNumRadialSamples, 1.0f);
-        break;
-    case TopologyType::REV_CYLINDER_TOPOLOGY:
-        mesh = stdmesh.CylinderIncludedEndDisks(mNumCurveSamples, mNumRadialSamples, 1.0f,
-                                                1.0f);
-        break;
-    case TopologyType::REV_SPHERE_TOPOLOGY:
-        mesh = stdmesh.Sphere(mNumCurveSamples, mNumRadialSamples, 1.0f);
-        break;
-    case TopologyType::REV_TORUS_TOPOLOGY:
-        mesh = stdmesh.Torus(mNumCurveSamples, mNumRadialSamples, 1.0f,
-                             0.25f);
-        break;
-    default:
-        RENDERING_ASSERTION_0(false, "Unexpected condition\n");
-        break;
+        case TopologyType::REV_DISK_TOPOLOGY:
+            mesh = stdmesh.Disk(mNumCurveSamples, mNumRadialSamples, 1.0f);
+            break;
+        case TopologyType::REV_CYLINDER_TOPOLOGY:
+            mesh = stdmesh.CylinderIncludedEndDisks(mNumCurveSamples, mNumRadialSamples, 1.0f,
+                                                    1.0f);
+            break;
+        case TopologyType::REV_SPHERE_TOPOLOGY:
+            mesh = stdmesh.Sphere(mNumCurveSamples, mNumRadialSamples, 1.0f);
+            break;
+        case TopologyType::REV_TORUS_TOPOLOGY:
+            mesh = stdmesh.Torus(mNumCurveSamples, mNumRadialSamples, 1.0f,
+                                 0.25f);
+            break;
+        default:
+            RENDERING_ASSERTION_0(false, "Unexpected condition\n");
+            break;
     }
     RENDERING_ASSERTION_0(mesh != 0, "Failed to construct mesh\n");
 
@@ -82,7 +82,7 @@ Rendering::RevolutionSurface ::~RevolutionSurface()
     EXCEPTION_TRY
     {
         //DELETE1(mSin);
-       // DELETE1(mCos);
+        // DELETE1(mCos);
         //DELETE1(mSamples);
     }
     EXCEPTION_ALL_CATCH(Rendering)
@@ -93,8 +93,8 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     // Compute slice vertex coefficients.  The first and last coefficients
     // are duplicated to allow a closed cross section that has two different
     // pairs of texture coordinates at the shared vertex.
-    mSin = NEW1<float>(mNumRadialSamples + 1);
-    mCos = NEW1<float>(mNumRadialSamples + 1);
+    mSin = nullptr;  // NEW1<float>(mNumRadialSamples + 1);
+    mCos = nullptr;  // NEW1<float>(mNumRadialSamples + 1);
     const float invNumRadialSamples = 1.0f / (float)mNumRadialSamples;
     for (int i = 0; i < mNumRadialSamples; ++i)
     {
@@ -106,7 +106,7 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     mCos[mNumRadialSamples] = mCos[0];
 
     // Allocate storage for curve samples.
-    mSamples = NEW1<Mathematics::FloatVector3D>(mNumCurveSamples);
+    mSamples = nullptr;  // NEW1<Mathematics::FloatVector3D>(mNumCurveSamples);
 }
 
 void Rendering::RevolutionSurface ::UpdateSurface()
@@ -141,7 +141,7 @@ void Rendering::RevolutionSurface ::UpdateSurface()
         }
 
         const Mathematics::FloatVector2D position = mCurve->GetPosition(t);
-        mSamples[i][0] =(position.GetX());
+        mSamples[i][0] = (position.GetX());
         mSamples[i][1] = (0.0f);
         mSamples[i][2] = (position.GetY());
     }
@@ -150,21 +150,21 @@ void Rendering::RevolutionSurface ::UpdateSurface()
     // is dependent on the topology of the mesh.
     switch (mTopology)
     {
-    case TopologyType::REV_DISK_TOPOLOGY:
-        UpdateDisk();
-        break;
-    case TopologyType::REV_CYLINDER_TOPOLOGY:
-        UpdateCylinder();
-        break;
-    case TopologyType::REV_SPHERE_TOPOLOGY:
-        UpdateSphere();
-        break;
-    case TopologyType::REV_TORUS_TOPOLOGY:
-        UpdateTorus();
-        break;
-    default:
-        RENDERING_ASSERTION_0(false, "Unexpected condition\n");
-        break;
+        case TopologyType::REV_DISK_TOPOLOGY:
+            UpdateDisk();
+            break;
+        case TopologyType::REV_CYLINDER_TOPOLOGY:
+            UpdateCylinder();
+            break;
+        case TopologyType::REV_SPHERE_TOPOLOGY:
+            UpdateSphere();
+            break;
+        case TopologyType::REV_TORUS_TOPOLOGY:
+            UpdateTorus();
+            break;
+        default:
+            RENDERING_ASSERTION_0(false, "Unexpected condition\n");
+            break;
     }
 
     UpdateModelSpace(VisualUpdateType::Normals);
@@ -208,7 +208,7 @@ void Rendering::RevolutionSurface::UpdateDisk()
             }
             const int i = c + numCurveSamplesM1 * r;
 
-         const   Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
+            const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
             GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
         }
     }
@@ -251,7 +251,7 @@ void Rendering::RevolutionSurface::UpdateSphere()
             }
             i = (c - 1) * (mNumRadialSamples + 1) + r;
 
-const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
+            const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
             GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
         }
@@ -287,7 +287,7 @@ void Rendering::RevolutionSurface ::UpdateCylinder()
             }
             i = c * (mNumRadialSamples + 1) + r;
 
-const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
+            const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
             GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
         }
@@ -325,7 +325,7 @@ void Rendering::RevolutionSurface ::UpdateTorus()
             }
             i = c * (mNumRadialSamples + 1) + r;
 
-const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
+            const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
             GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
         }
@@ -346,19 +346,19 @@ Rendering::RevolutionSurface ::RevolutionSurface(LoadConstructor value)
 {
 }
 
-void Rendering::RevolutionSurface ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::RevolutionSurface ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     ParentType::Load(source);
 
-    source->Read(mXCenter);
-    source->ReadEnum(mTopology);
-    source->Read(mNumCurveSamples);
-    source->Read(mNumRadialSamples);
- //   source->Read(mNumRadialSamples + 1, mSin);
- //   source->Read(mNumRadialSamples + 1, mCos);
-    mSampleByArcLength = source->ReadBool();
+    source.Read(mXCenter);
+    source.ReadEnum(mTopology);
+    source.Read(mNumCurveSamples);
+    source.Read(mNumRadialSamples);
+    //   source.Read(mNumRadialSamples + 1, mSin);
+    //   source.Read(mNumRadialSamples + 1, mCos);
+    mSampleByArcLength = source.ReadBool();
 
     // TODO.  See note in RevolutionSurface::Save.
     mCurve = 0;
@@ -366,7 +366,7 @@ void Rendering::RevolutionSurface ::Load(const CoreTools::BufferSourceSharedPtr&
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::RevolutionSurface ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::RevolutionSurface ::Link(CoreTools::ObjectLink& source)
 {
     ParentType::Link(source);
 }
@@ -376,24 +376,24 @@ void Rendering::RevolutionSurface ::PostLink()
     ParentType::PostLink();
 }
 
-uint64_t Rendering::RevolutionSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::RevolutionSurface ::Register(CoreTools::ObjectRegister& target) const
 {
     return ParentType::Register(target);
 }
 
-void Rendering::RevolutionSurface ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::RevolutionSurface ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     ParentType::Save(target);
 
-    target->Write(mXCenter);
-    target->WriteEnum(mTopology);
-    target->Write(mNumCurveSamples);
-    target->Write(mNumRadialSamples);
-  //  target.WriteWithNumber(mNumRadialSamples + 1, mSin);
-  //  target.WriteWithNumber(mNumRadialSamples + 1, mCos);
-    target->Write(mSampleByArcLength);
+    target.Write(mXCenter);
+    target.WriteEnum(mTopology);
+    target.Write(mNumCurveSamples);
+    target.Write(mNumRadialSamples);
+    //  target.WriteWithNumber(mNumRadialSamples + 1, mSin);
+    //  target.WriteWithNumber(mNumRadialSamples + 1, mCos);
+    target.Write(mSampleByArcLength);
 
     // TODO.  The class Curve2 is abstract and does not know about the data
     // representation for the derived-class object that is passed to the

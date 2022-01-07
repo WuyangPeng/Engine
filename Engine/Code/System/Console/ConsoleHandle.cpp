@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:17)
+///	引擎版本：0.8.0.0 (2021/12/13 22:26)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ System::WindowsHandle System::GetStandardHandle(StandardHandle standardhandle) n
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<StandardHandle>(standardhandle);
+    UnusedFunction(standardhandle);
 
     return g_InvalidHandleValue;
 
@@ -47,7 +47,7 @@ bool System::SetStandardHandle(StandardHandle standardhandle, WindowsHandle hand
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<StandardHandle, WindowsHandle>(standardhandle, handle);
+    UnusedFunction(standardhandle, handle);
 
     return false;
 
@@ -65,7 +65,7 @@ bool System::SetStandardHandle(StandardHandle standardhandle, WindowsHandle hand
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<StandardHandle, WindowsHandle, WindowsHandlePtr>(standardhandle, handle, previousHandle);
+    UnusedFunction(standardhandle, handle, previousHandle);
 
     return false;
 

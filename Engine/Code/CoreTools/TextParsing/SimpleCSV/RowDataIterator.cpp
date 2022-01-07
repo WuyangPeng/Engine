@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/09 18:18)
+///	引擎版本：0.8.0.0 (2021/12/20 22:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -43,14 +43,14 @@ CoreTools::SimpleCSV::RowDataIterator CoreTools::SimpleCSV::RowDataIterator::ope
     return iter;
 }
 
-CoreTools::SimpleCSV::RowDataIterator::ReferenceType CoreTools::SimpleCSV::RowDataIterator::operator*()
+CoreTools::SimpleCSV::RowDataIterator::ReferenceType CoreTools::SimpleCSV::RowDataIterator::operator*() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return **impl;
 }
 
-CoreTools::SimpleCSV::RowDataIterator::PointerType CoreTools::SimpleCSV::RowDataIterator::operator->()
+CoreTools::SimpleCSV::RowDataIterator::PointerType CoreTools::SimpleCSV::RowDataIterator::operator->() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -64,12 +64,12 @@ bool CoreTools::SimpleCSV::RowDataIterator::IsSame(const RowDataIterator& rhs) c
     return impl->IsSame(*rhs.impl);
 }
 
-bool CoreTools::SimpleCSV::operator==(const RowDataIterator& lhs, const RowDataIterator& rhs)  
+bool CoreTools::SimpleCSV::operator==(const RowDataIterator& lhs, const RowDataIterator& rhs)
 {
     return lhs.IsSame(rhs);
 }
 
-bool CoreTools::SimpleCSV::operator!=(const RowDataIterator& lhs, const RowDataIterator& rhs)  
+bool CoreTools::SimpleCSV::operator!=(const RowDataIterator& lhs, const RowDataIterator& rhs)
 {
     return !lhs.IsSame(rhs);
 }

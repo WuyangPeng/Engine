@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 19:32)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:53)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,7 +18,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CustomTime::CustomTime() noexcept
-    : m_StartTime{ System::GetTimeInMicroseconds() }, m_CurrentTime{ 0 }, m_TimeLastTick{ 0 }
+    : startTime{ System::GetTimeInMicroseconds() }, currentTime{ 0 }, timeLastTick{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -44,22 +44,24 @@ System::String CoreTools::CustomTime::GetSystemTimeDescribe(const String& dateFo
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::CustomTime::IsValid() const noexcept
 {
-    if (0 <= m_StartTime && 0 <= m_CurrentTime && 0 <= m_TimeLastTick)
+    if (0 <= startTime && 0 <= currentTime && 0 <= timeLastTick)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::CustomTime::ResetCustomTime() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_StartTime = System::GetTimeInMicroseconds();
-    m_CurrentTime = 0;
-    m_TimeLastTick = 0;
+    startTime = System::GetTimeInMicroseconds();
+    currentTime = 0;
+    timeLastTick = 0;
 }
 
 int64_t CoreTools::CustomTime::GetThisElapsedTime() noexcept
@@ -68,7 +70,7 @@ int64_t CoreTools::CustomTime::GetThisElapsedTime() noexcept
 
     MarkTimeThisTick();
 
-    return m_TimeLastTick / System::g_Microseconds;
+    return timeLastTick / System::g_Microseconds;
 }
 
 int64_t CoreTools::CustomTime::GetNowTime() noexcept
@@ -77,7 +79,7 @@ int64_t CoreTools::CustomTime::GetNowTime() noexcept
 
     MarkTimeThisTick();
 
-    return m_CurrentTime / System::g_Microseconds;
+    return currentTime / System::g_Microseconds;
 }
 
 int64_t CoreTools::CustomTime::GetThisElapsedMillisecondTime() noexcept
@@ -86,7 +88,7 @@ int64_t CoreTools::CustomTime::GetThisElapsedMillisecondTime() noexcept
 
     MarkTimeThisTick();
 
-    return m_TimeLastTick / System::g_Millisecond;
+    return timeLastTick / System::g_Millisecond;
 }
 
 int64_t CoreTools::CustomTime::GetNowMillisecondTime() noexcept
@@ -95,19 +97,19 @@ int64_t CoreTools::CustomTime::GetNowMillisecondTime() noexcept
 
     MarkTimeThisTick();
 
-    return m_CurrentTime / System::g_Millisecond;
+    return currentTime / System::g_Millisecond;
 }
 
 // private
 void CoreTools::CustomTime::MarkTimeThisTick() noexcept
 {
-    const auto newTime = System::GetTimeInMicroseconds() - m_StartTime;
+    const auto newTime = System::GetTimeInMicroseconds() - startTime;
 
-    m_TimeLastTick = newTime - m_CurrentTime;
-    m_CurrentTime = newTime;
+    timeLastTick = newTime - currentTime;
+    currentTime = newTime;
 
-    if (m_TimeLastTick <= 0)
+    if (timeLastTick <= 0)
     {
-        m_TimeLastTick = 0;
+        timeLastTick = 0;
     }
 }

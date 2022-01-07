@@ -63,7 +63,7 @@
     CoreTools::Property<SYSTEM_CONCATENATOR(Prop, name), className, type, reference, &className::set, &className::get> name
 
 #define TCRE_DEFINE_PROPERTY(className, name) \
-    const ptrdiff_t CoreTools::PropertyBase<className::SYSTEM_CONCATENATOR(Prop, name), className>::m_Offset = offsetof(className, name)
+    const ptrdiff_t CoreTools::PropertyBase<className::SYSTEM_CONCATENATOR(Prop, name), className>::offset = offsetof(className, name)
 
 #ifdef TCRE_USE_BORLANDC
 

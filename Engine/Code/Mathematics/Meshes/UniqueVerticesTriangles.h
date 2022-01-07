@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
  
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/DataTypes/Tuple.h"
 
 namespace Mathematics

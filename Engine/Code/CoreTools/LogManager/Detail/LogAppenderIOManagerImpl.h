@@ -49,6 +49,7 @@ namespace CoreTools
         LogAppenderIOManagerImpl& operator<<(const char* message) noexcept;
         LogAppenderIOManagerImpl& operator<<(const wchar_t* message) noexcept;
         LogAppenderIOManagerImpl& operator<<(const std::string& message) noexcept;
+        LogAppenderIOManagerImpl& operator<<(const std::string_view& message) noexcept;
         LogAppenderIOManagerImpl& operator<<(const std::wstring& message) noexcept;
         LogAppenderIOManagerImpl& operator<<(const FunctionDescribed& functionDescribed) noexcept;
         LogAppenderIOManagerImpl& operator<<(const Error& error) noexcept;

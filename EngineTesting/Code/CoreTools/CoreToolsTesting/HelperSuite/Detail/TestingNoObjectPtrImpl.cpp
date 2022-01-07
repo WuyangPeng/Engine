@@ -21,15 +21,15 @@ CoreTools::TestingNoObjectPtrImpl::TestingNoObjectPtrImpl() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, TestingNoObjectPtrImpl);
 
-void CoreTools::TestingNoObjectPtrImpl::Load(MAYBE_UNUSED const BufferSourceSharedPtr& source) noexcept
+void CoreTools::TestingNoObjectPtrImpl::Load(MAYBE_UNUSED BufferSource& source) noexcept
 {
 }
 
-void CoreTools::TestingNoObjectPtrImpl::Register(MAYBE_UNUSED const CoreTools::ObjectRegisterSharedPtr& target) const noexcept
+void CoreTools::TestingNoObjectPtrImpl::Register(MAYBE_UNUSED CoreTools::ObjectRegister& target) const noexcept
 {
 }
 
-void CoreTools::TestingNoObjectPtrImpl::Save(MAYBE_UNUSED const CoreTools::BufferTargetSharedPtr& target) const noexcept
+void CoreTools::TestingNoObjectPtrImpl::Save(MAYBE_UNUSED CoreTools::BufferTarget& target) const noexcept
 {
 }
 
@@ -38,6 +38,6 @@ int CoreTools::TestingNoObjectPtrImpl::GetStreamingSize() const noexcept
     return 0;
 }
 
-void CoreTools::TestingNoObjectPtrImpl::Link(MAYBE_UNUSED const CoreTools::ObjectLinkSharedPtr source) noexcept
+void CoreTools::TestingNoObjectPtrImpl::Link(MAYBE_UNUSED CoreTools::ObjectLink& source) noexcept
 {
 }

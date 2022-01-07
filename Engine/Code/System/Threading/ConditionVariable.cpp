@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 18:52)
+///	引擎版本：0.8.0.0 (2021/12/12 18:11)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ void System::InitializeSystemConditionVariable(ConditionVariablePtr conditionVar
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ConditionVariablePtr>(conditionVariable);
+    UnusedFunction(conditionVariable);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -37,7 +37,7 @@ bool System::SleepConditionVariableSlimReaderWriter(ConditionVariablePtr conditi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ConditionVariablePtr, SlimReaderWriterLockPtr, WindowsDWord, ConditionVariableLockMode>(conditionVariable slimReaderWriterLock, milliseconds, flags);
+    UnusedFunction(conditionVariable slimReaderWriterLock, milliseconds, flags);
 
     return false;
 
@@ -55,7 +55,7 @@ bool System::SleepConditionVariableCriticalSection(ConditionVariablePtr conditio
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ConditionVariablePtr, ThreadingCriticalSectionPtr, WindowsDWord>(conditionVariable criticalSection, milliseconds);
+    UnusedFunction(conditionVariable criticalSection, milliseconds);
 
     return false;
 
@@ -70,7 +70,7 @@ void System::WakeSystemConditionVariable(ConditionVariablePtr conditionVariable)
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ConditionVariablePtr>(conditionVariable);
+    UnusedFunction(conditionVariable);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -83,7 +83,7 @@ void System::WakeAllSystemConditionVariable(ConditionVariablePtr conditionVariab
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ConditionVariablePtr>(conditionVariable);
+    UnusedFunction(conditionVariable);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }

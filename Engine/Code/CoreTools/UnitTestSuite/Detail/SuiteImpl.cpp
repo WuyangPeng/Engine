@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:42)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,13 +25,14 @@ using std::string;
 using std::vector;
 using namespace std::literals;
 
-CoreTools::SuiteImpl::SuiteImpl(const string& name, const OStreamShared& osPtr, bool printRunUnitTest)
-    : ParentType{ osPtr }, m_SuiteName{ name }, m_UnitTestCollection{}, m_PrintRunUnitTest{ printRunUnitTest }
+CoreTools::SuiteImpl::SuiteImpl(const string& name, const OStreamShared& streamShared, bool printRunUnitTest)
+    : ParentType{ streamShared }, suiteName{ name }, unitTestCollection{}, printRunUnitTest{ printRunUnitTest }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_3;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::SuiteImpl::IsValid() const noexcept
 {
     if (ParentType::IsValid() && IsUnitTestValid())
@@ -42,14 +43,17 @@ bool CoreTools::SuiteImpl::IsValid() const noexcept
 
 bool CoreTools::SuiteImpl::IsUnitTestValid() const noexcept
 {
-    for (auto unitTest : m_UnitTestCollection)
+    for (const auto& unitTest : unitTestCollection)
     {
         if (unitTest == nullptr)
+        {
             return false;
+        }
     }
 
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int CoreTools::SuiteImpl::GetPassedNumber() const noexcept
@@ -58,7 +62,7 @@ int CoreTools::SuiteImpl::GetPassedNumber() const noexcept
 
     auto totalPass = 0;
 
-    for (const auto& unitTest : m_UnitTestCollection)
+    for (const auto& unitTest : unitTestCollection)
     {
         totalPass += unitTest->GetPassedNumber();
     }
@@ -72,7 +76,7 @@ int CoreTools::SuiteImpl::GetFailedNumber() const noexcept
 
     auto totalFail = 0;
 
-    for (const auto& unitTest : m_UnitTestCollection)
+    for (const auto& unitTest : unitTestCollection)
     {
         totalFail += unitTest->GetFailedNumber();
     }
@@ -86,7 +90,7 @@ int CoreTools::SuiteImpl::GetErrorNumber() const noexcept
 
     auto totalError = 0;
 
-    for (const auto& unitTest : m_UnitTestCollection)
+    for (const auto& unitTest : unitTestCollection)
     {
         totalError += unitTest->GetErrorNumber();
     }
@@ -102,7 +106,7 @@ void CoreTools::SuiteImpl::PrintReport()
 
     manager.PrintCoreToolsHeader();
 
-    for_each(m_UnitTestCollection.begin(), m_UnitTestCollection.end(), std::mem_fn(&UnitTestComposite::PrintReport));
+    for_each(unitTestCollection.begin(), unitTestCollection.end(), std::mem_fn(&UnitTestComposite::PrintReport));
 
     manager.PrintSuiteName();
     manager.PrintSuiteResult();
@@ -113,14 +117,14 @@ void CoreTools::SuiteImpl::ClearUnitTestCollection() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    m_UnitTestCollection.clear();
+    unitTestCollection.clear();
 }
 
 void CoreTools::SuiteImpl::ResetTestData()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    for_each(m_UnitTestCollection.begin(), m_UnitTestCollection.end(), std::mem_fn(&UnitTestComposite::ResetTestData));
+    for_each(unitTestCollection.begin(), unitTestCollection.end(), std::mem_fn(&UnitTestComposite::ResetTestData));
 }
 
 void CoreTools::SuiteImpl::AddUnitTest(const UnitTestCompositeSharedPtr& unitTest)
@@ -128,28 +132,28 @@ void CoreTools::SuiteImpl::AddUnitTest(const UnitTestCompositeSharedPtr& unitTes
     CORE_TOOLS_CLASS_IS_VALID_3;
     CORE_TOOLS_ASSERTION_0(unitTest != nullptr, "指针无效");
 
-    m_UnitTestCollection.push_back(unitTest);
+    unitTestCollection.emplace_back(unitTest);
     unitTest->ResetTestData();
 }
 
-const string CoreTools::SuiteImpl::GetName() const
+string CoreTools::SuiteImpl::GetName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    return m_SuiteName;
+    return suiteName;
 }
 
 void CoreTools::SuiteImpl::RunUnitTest()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    for_each(m_UnitTestCollection.begin(), m_UnitTestCollection.end(), [this](auto& value) {
-        if (m_PrintRunUnitTest)
+    for_each(unitTestCollection.begin(), unitTestCollection.end(), [printRunUnitTest = printRunUnitTest](auto& unitTest) {
+        if (printRunUnitTest)
         {
-            value->PrintRunUnitTest();
+            unitTest->PrintRunUnitTest();
         }
 
-        value->RunUnitTest();
+        unitTest->RunUnitTest();
     });
 }
 
@@ -157,7 +161,7 @@ void CoreTools::SuiteImpl::PrintRunUnitTest()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
-    auto runSuite = "正在运行测试套件 \""s + GetName() + "\"。\n"s;
+    const auto runSuite = "正在运行测试套件 \""s + GetName() + "\"。\n"s;
 
-    GetStream().GetStream() << runSuite;
+    GetStream() << runSuite;
 }

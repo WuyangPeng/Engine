@@ -34,16 +34,16 @@ void System::NoexceptTesting::MainTest()
 void System::NoexceptTesting::NoexceptTest()
 {
     NoexceptNoReturn(ClassType::Function0);
-    NoexceptNoReturn<int>(ClassType::Function1, 1);
-    NoexceptNoReturn<int, int>(ClassType::Function2, 1, 1);
-    NoexceptNoReturn<int, int, int>(ClassType::Function3, 1, 1, 1);
-    NoexceptNoReturn<int, int, int, int>(ClassType::Function4, 1, 1, 1, 1);
+    NoexceptNoReturn(ClassType::Function1, 1);
+    NoexceptNoReturn(ClassType::Function2, 1, 1);
+    NoexceptNoReturn(ClassType::Function3, 1, 1, 1);
+    NoexceptNoReturn(ClassType::Function4, 1, 1, 1, 1);
 
     ASSERT_EQUAL((Noexcept<int>(ClassType::Function5, 0)), 0);
-    ASSERT_EQUAL((Noexcept<int, int>(ClassType::Function6, 1, 0)), 0);
-    ASSERT_EQUAL((Noexcept<int, int, int>(ClassType::Function7, 1, 1, 0)), 0);
-    ASSERT_EQUAL((Noexcept<int, int, int, int>(ClassType::Function8, 1, 1, 1, 0)), 0);
-    ASSERT_EQUAL((Noexcept<int, int, int, int, int>(ClassType::Function9, 1, 1, 1, 1, 0)), 0);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function6, 1, 0)), 1);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function7, 1, 1, 0)), 1);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function8, 1, 1, 1, 0)), 1);
+    ASSERT_EQUAL((Noexcept<int>(ClassType::Function9, 1, 1, 1, 1, 0)), 1);
 }
 
 void System::NoexceptTesting::Function0()

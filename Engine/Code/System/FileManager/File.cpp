@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 10:24)
+///	引擎版本：0.8.0.0 (2021/12/13 18:51)
 
 #include "System/SystemExport.h"
 
@@ -38,14 +38,14 @@ bool System::RemoveSystemFile(const CFileString& fileName) noexcept
 }
 
 System::WindowsHandle System::CreateSystemFile(const String& fileName,
-                                              FileHandleDesiredAccess access,
-                                              FileHandleShareMode shareMode,
-                                              WindowSecurityAttributesPtr securityAttributes,
-                                              FileHandleCreationDisposition creation,
-                                              FileHandleAttributes attributes,
-                                              FileHandleOther other,
-                                              FileHandleSecurity security,
-                                              WindowsHandle templateFile) noexcept
+                                               FileHandleDesiredAccess access,
+                                               FileHandleShareMode shareMode,
+                                               WindowSecurityAttributesPtr securityAttributes,
+                                               FileHandleCreationDisposition creation,
+                                               FileHandleAttributes attributes,
+                                               FileHandleOther other,
+                                               FileHandleSecurity security,
+                                               WindowsHandle templateFile) noexcept
 {
 #if defined(SYSTEM_PLATFORM_WIN32)
 
@@ -59,23 +59,15 @@ System::WindowsHandle System::CreateSystemFile(const String& fileName,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String,
-                 FileHandleDesiredAccess,
-                 FileHandleShareMode,
-                 WindowSecurityAttributesPtr,
-                 FileHandleCreationDisposition,
-                 FileHandleAttributes,
-                 FileHandleOther,
-                 FileHandleSecurity,
-                 WindowsHandle>(fileName,
-                               access,
-                               shareMode,
-                               securityAttributes,
-                               creation,
-                               attributes,
-                               other,
-                               security,
-                               templateFile);
+    UnusedFunction(fileName,
+                   access,
+                   shareMode,
+                   securityAttributes,
+                   creation,
+                   attributes,
+                   other,
+                   security,
+                   templateFile);
 
     return nullptr;
 
@@ -88,12 +80,12 @@ System::WindowsHandle System::CreateSystemFile(const String& fileName, FileHandl
 }
 
 System::WindowsHandle System::CreateSystemFile(const String& fileName,
-                                              FileHandleDesiredAccess access,
-                                              FileHandleShareMode shareMode,
-                                              FileHandleCreationDisposition creation,
-                                              FileHandleAttributes attributes,
-                                              FileHandleOther other,
-                                              FileHandleSecurity security) noexcept
+                                               FileHandleDesiredAccess access,
+                                               FileHandleShareMode shareMode,
+                                               FileHandleCreationDisposition creation,
+                                               FileHandleAttributes attributes,
+                                               FileHandleOther other,
+                                               FileHandleSecurity security) noexcept
 {
     return CreateSystemFile(fileName, access, shareMode, nullptr, creation, attributes, other, security, nullptr);
 }
@@ -109,7 +101,7 @@ bool System::CloseSystemFile(WindowsHandle file) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(file);
+    UnusedFunction(file);
 
     return false;
 
@@ -147,7 +139,7 @@ bool System::GetFileLength(WindowsHandle file, uint64_t& fileSize) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, uint64_t>(file, fileSize);
+    UnusedFunction(file, fileSize);
 
     return false;
 
@@ -181,7 +173,7 @@ bool System::GetFileLength(WindowsHandle file, WindowsLargeIntegerPtr fileSize) 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsLargeIntegerPtr>(file, fileSize);
+    UnusedFunction(file, fileSize);
 
     return false;
 
@@ -199,7 +191,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsDWord, WindowsDWordPtr, WindowOverlappedPtr>(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped);
+    UnusedFunction(file, buffer, numberOfBytesToRead, numberOfBytesRead, overlapped);
 
     return false;
 
@@ -222,7 +214,7 @@ bool System::ReadSystemFile(WindowsHandle file, WindowsVoidPtr buffer, WindowsDW
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsVoidPtr, WindowsDWord, WindowOverlappedPtr, WindowOverlappedCompletionRoutine>(file, buffer, numberOfBytesToRead, overlapped, completionRoutine);
+    UnusedFunction(file, buffer, numberOfBytesToRead, overlapped, completionRoutine);
 
     return false;
 
@@ -240,7 +232,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowsDWordPtr, WindowOverlappedPtr>(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
+    UnusedFunction(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
 
     return false;
 
@@ -263,7 +255,7 @@ bool System::WriteSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowOverlappedPtr, WindowOverlappedCompletionRoutine>(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine);
+    UnusedFunction(file, buffer, numberOfBytesToWrite, overlapped, completionRoutine);
 
     return false;
 
@@ -283,7 +275,7 @@ bool System::AppendSystemFile(WindowsHandle file, WindowsConstVoidPtr buffer, Wi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsConstVoidPtr, WindowsDWord, WindowsDWordPtr>(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
+    UnusedFunction(file, buffer, numberOfBytesToWrite, numberOfBytesWritten, overlapped);
 
     return false;
 
@@ -306,7 +298,7 @@ bool System::CopySystemFile(const String& existingFileName, const String& newFil
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String, String, bool>(existingFileName, newFileName, failIfExists);
+    UnusedFunction(existingFileName, newFileName, failIfExists);
 
     return false;
 
@@ -318,7 +310,6 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLong distanceToMove
 #ifdef SYSTEM_PLATFORM_WIN32
 
     newFilePointer->QuadPart = distanceToMove;
-
     newFilePointer->LowPart = ::SetFilePointer(file, newFilePointer->LowPart, &newFilePointer->HighPart, EnumCastUnderlying(moveMethod));
 
     const auto lastError = GetPlatformLastError();
@@ -327,6 +318,7 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLong distanceToMove
     {
         SetPlatformLastError(lastError);
         newFilePointer->QuadPart = -1;
+
         return false;
     }
 
@@ -334,7 +326,7 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLong distanceToMove
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsLong, WindowsLargeIntegerPtr, FilePointer>(file, distanceToMove, newFilePointer, moveMethod);
+    UnusedFunction(file, distanceToMove, newFilePointer, moveMethod);
 
     return false;
 
@@ -352,7 +344,7 @@ bool System::SetSystemFilePointer(WindowsHandle file, WindowsLargeInteger distan
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsLargeInteger, WindowsLargeIntegerPtr, FilePointer>(file, distanceToMove, newFilePointer, moveMethod);
+    UnusedFunction(file, distanceToMove, newFilePointer, moveMethod);
 
     return false;
 
@@ -370,7 +362,7 @@ bool System::SetEndOfSystemFile(WindowsHandle file) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(file);
+    UnusedFunction(file);
 
     return false;
 
@@ -388,7 +380,7 @@ bool System::FlushSystemFileBuffers(WindowsHandle file) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(file);
+    UnusedFunction(file);
 
     return false;
 
@@ -406,7 +398,7 @@ bool System::MoveSystemFile(const String& oldFileName, const String& newFileName
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String, String>(oldFileName, newFileName);
+    UnusedFunction(oldFileName, newFileName);
 
     return false;
 

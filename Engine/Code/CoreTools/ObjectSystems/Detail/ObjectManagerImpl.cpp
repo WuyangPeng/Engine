@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 14:56)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:01)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,11 +16,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-using std::make_pair;
 using std::string;
 
-CoreTools::ObjectManagerImpl::ObjectManagerImpl(MAYBE_UNUSED int count) noexcept
-    : m_Factories{}
+CoreTools::ObjectManagerImpl::ObjectManagerImpl() noexcept
+    : factories{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,8 +30,8 @@ CoreTools::ObjectManagerImpl::FactoryFunction CoreTools::ObjectManagerImpl::Find
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Factories.find(name);
-    if (iter != m_Factories.cend())
+    const auto iter = factories.find(name);
+    if (iter != factories.cend())
     {
         return iter->second;
     }
@@ -46,12 +45,12 @@ void CoreTools::ObjectManagerImpl::Insert(const string& name, FactoryFunction fu
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Factories.insert({ name, function });
+    factories.insert({ name, function });
 }
 
 void CoreTools::ObjectManagerImpl::Remove(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Factories.erase(name);
+    factories.erase(name);
 }

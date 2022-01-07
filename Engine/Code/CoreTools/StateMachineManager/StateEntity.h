@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 16:06)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_ENTITY_H
@@ -30,24 +30,24 @@ namespace CoreTools
         using Telegram = Telegram<EventType>;
 
     public:
-        explicit StateEntity(StateSharedPtr currentState);
-        explicit StateEntity(StateSharedPtr currentState, StateSharedPtr globalState);
+        explicit StateEntity(const StateSharedPtr& currentState);
+        explicit StateEntity(const StateSharedPtr& currentState, const StateSharedPtr& globalState);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool EventFunction(const Telegram& telegram) override;
+        NODISCARD bool EventFunction(const Telegram& telegram) override;
 
         void Update(int64_t timeInterval);
 
-        [[nodiscard]] ConstStateSharedPtr GetCurrentState() const noexcept;
-        [[nodiscard]] ConstStateSharedPtr GetGlobalState() const noexcept;
-        [[nodiscard]] StateSharedPtr GetPossiblePreviousState() noexcept;
+        NODISCARD ConstStateSharedPtr GetCurrentState() const noexcept;
+        NODISCARD ConstStateSharedPtr GetGlobalState() const noexcept;
+        NODISCARD StateSharedPtr GetPossiblePreviousState() noexcept;
 
     private:
         void DoRegister() override;
 
     private:
-        StateMachineBase m_StateMachineBase;
+        StateMachineBase stateMachineBase;
     };
 }
 

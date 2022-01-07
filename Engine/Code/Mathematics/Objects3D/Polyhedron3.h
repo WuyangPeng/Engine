@@ -12,7 +12,6 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "CoreTools/MemoryTools/SmartPointer1DArrayDetail.h"
 #include "Mathematics/Algebra/Vector3D.h"
 
 #include <type_traits>

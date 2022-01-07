@@ -186,37 +186,37 @@ void Rendering::PointControllerImpl ::SetSystemAngularAxis(const AVector& system
 }
  
 void Rendering::PointControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source) 
+	::Load(CoreTools::BufferSource& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_SystemLinearSpeed);
-        source->Read(m_SystemAngularSpeed);
-        source->ReadAggregate(m_SystemLinearAxis);
-        source->ReadAggregate(m_SystemAngularAxis);
-        source->Read(m_NumPoints);
+	source.Read(m_SystemLinearSpeed);
+        source.Read(m_SystemAngularSpeed);
+        source.ReadAggregate(m_SystemLinearAxis);
+        source.ReadAggregate(m_SystemAngularAxis);
+        source.Read(m_NumPoints);
 
 	m_PointLinearSpeed.resize(m_NumPoints);
 	m_PointAngularSpeed.resize(m_NumPoints);
 	m_PointLinearAxis.resize(m_NumPoints);
 	m_PointAngularAxis.resize(m_NumPoints);
 
-	//source->Read(m_NumPoints, &m_PointLinearSpeed[0]);
- //       source->Read(m_NumPoints, &m_PointAngularSpeed[0]);
-        source->ReadAggregateContainer(m_NumPoints, m_PointLinearAxis);
-        source->ReadAggregateContainer(m_NumPoints, m_PointAngularAxis);
+	//source.Read(m_NumPoints, &m_PointLinearSpeed[0]);
+ //       source.Read(m_NumPoints, &m_PointAngularSpeed[0]);
+        source.ReadAggregateContainer(m_NumPoints, m_PointLinearAxis);
+        source.ReadAggregateContainer(m_NumPoints, m_PointAngularAxis);
 } 
 
 void Rendering::PointControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target->Write(m_SystemLinearSpeed);
-	target->Write(m_SystemAngularSpeed);
-    target->WriteAggregate(m_SystemLinearAxis);
-        target->WriteAggregate(m_SystemAngularAxis);
-	target->Write(m_NumPoints);
+    target.Write(m_SystemLinearSpeed);
+	target.Write(m_SystemAngularSpeed);
+    target.WriteAggregate(m_SystemLinearAxis);
+        target.WriteAggregate(m_SystemAngularAxis);
+	target.Write(m_NumPoints);
 	//target.WriteWithoutNumber(m_NumPoints, &m_PointLinearSpeed[0]);
 	//target.WriteWithoutNumber(m_NumPoints, &m_PointAngularSpeed[0]);
 	//target.WriteAggregateWithoutNumber(m_NumPoints, &m_PointLinearAxis[0]);

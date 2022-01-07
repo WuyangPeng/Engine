@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 14:07)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_IN_STREAM_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_IN_STREAM_IMPL_H
@@ -20,7 +20,7 @@
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE BufferInStreamImpl final : private boost::noncopyable
+    class CORE_TOOLS_HIDDEN_DECLARE BufferInStreamImpl final
     {
     public:
         using ClassType = BufferInStreamImpl;
@@ -28,9 +28,15 @@ namespace CoreTools
     public:
         explicit BufferInStreamImpl(const ConstFileBufferSharedPtr& fileBuffer, int startPoint = 0);
 
+        ~BufferInStreamImpl() noexcept = default;
+        BufferInStreamImpl(const BufferInStreamImpl& rhs) = delete;
+        BufferInStreamImpl& operator=(const BufferInStreamImpl& rhs) = delete;
+        BufferInStreamImpl(BufferInStreamImpl&& rhs) noexcept = delete;
+        BufferInStreamImpl& operator=(BufferInStreamImpl&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const InTopLevel GetTopLevel() const noexcept;
+        NODISCARD const InTopLevel GetTopLevel() const noexcept;
 
     private:
         void AnalysisBuffer();
@@ -42,10 +48,10 @@ namespace CoreTools
         void PostLink();
 
     private:
-        int m_StartPoint;
-        InTopLevel m_TopLevel;
-        BufferSourceSharedPtr m_Source;
-        ObjectLinkSharedPtr m_ObjectLink;
+        int startPoint;
+        InTopLevel topLevel;
+        BufferSourceSharedPtr source;
+        ObjectLinkSharedPtr objectLink;
     };
 }
 

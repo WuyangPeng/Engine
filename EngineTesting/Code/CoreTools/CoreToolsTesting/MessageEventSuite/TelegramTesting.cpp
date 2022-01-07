@@ -23,28 +23,6 @@ void CoreTools::TelegramTesting ::MainTest()
 
 void CoreTools::TelegramTesting ::TelegramTest()
 {
-    TestingType telegram1{};
-
-    const auto sender1 = telegram1.GetSender();
-    auto receiverInfo1 = telegram1.GetReceiver();
-    auto eventType1 = telegram1.GetMessageType();
-    const auto dispatchMillisecondTime1 = telegram1.GetDispatchMillisecondTime();
-    auto callbackParameters1 = telegram1.GetCallbackParameters();
-
-    ASSERT_EQUAL(sender1, 0);
-    ASSERT_TRUE(receiverInfo1.empty());
-    ASSERT_EQUAL(eventType1, 0);
-    ASSERT_EQUAL(dispatchMillisecondTime1, 0);
-    ASSERT_EQUAL(callbackParameters1.GetContainerSize(), 0);
-
-    constexpr int receiver{ 5 };
-    telegram1.AddReceiver(receiver);
-
-    receiverInfo1 = telegram1.GetReceiver();
-
-    ASSERT_EQUAL_FAILURE_THROW(receiverInfo1.size(), 1u, "接收者数量应该不为空。");
-    ASSERT_EQUAL(receiverInfo1.at(0), receiver);
-
     TestingType telegram2{ 1, 5, 3, 2 };
 
     const auto sender2 = telegram2.GetSender();
@@ -60,7 +38,7 @@ void CoreTools::TelegramTesting ::TelegramTest()
     ASSERT_EQUAL(dispatchMillisecondTime2, 2);
     ASSERT_EQUAL(callbackParameters2.GetContainerSize(), 0);
 
-    CallbackParameters callbackParameters{};
+    CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, 10);
 
     TestingType telegram3{ 1, 5, 3, 2, callbackParameters };

@@ -60,7 +60,7 @@ namespace CSVConfigure
 
         NODISCARD virtual int GetHeroID() const noexcept;
         NODISCARD virtual std::shared_ptr<const Hero> GetHeroID(MAYBE_UNUSED const CSVConfigureContainer& csvContainer) const;
- 
+
     private:
         int key{};
     };

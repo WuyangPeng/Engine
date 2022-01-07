@@ -26,6 +26,10 @@
     "DiscoveringModernCpp::DiscoveringModernCppGradientTesting": 1
   },
 
+  "thrivingInACrowdedAndChangingWorldSuite": {
+    "ThrivingInACrowdedAndChangingWorld::ThrivingInACrowdedAndChangingWorldPlaceholderTesting": 1
+  },
+
   "modernCppDesignSuite": {
     "ModernCppDesign::ModernCppDesignPhysicalTesting": 1,
     "ModernCppDesign::ModernCppDesignCTAssertTesting": 1

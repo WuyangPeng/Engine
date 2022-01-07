@@ -10,7 +10,7 @@
 #include "PointerObject.h"
 #include "StringObject.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
@@ -91,7 +91,7 @@ int CoreTools::PointerObject ::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::PointerObject ::Register(const ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::PointerObject ::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -100,7 +100,7 @@ uint64_t CoreTools::PointerObject ::Register(const ObjectRegisterSharedPtr& targ
     return uniqueID;
 }
 
-void CoreTools::PointerObject ::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::PointerObject ::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -111,7 +111,7 @@ void CoreTools::PointerObject ::Save(const BufferTargetSharedPtr& target) const
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::PointerObject ::Link([[maybe_unused]] const ObjectLinkSharedPtr& source)
+void CoreTools::PointerObject ::Link([[maybe_unused]] ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 }
@@ -123,7 +123,7 @@ void CoreTools::PointerObject ::PostLink()
     CORE_TOOLS_ASSERTION_1(IsLoadValidity(), "载入的数据出现错误！");
 }
 
-void CoreTools::PointerObject ::Load(const BufferSourceSharedPtr& source)
+void CoreTools::PointerObject ::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 

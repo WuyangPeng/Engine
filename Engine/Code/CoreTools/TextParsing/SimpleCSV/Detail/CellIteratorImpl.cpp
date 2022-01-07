@@ -5,21 +5,24 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/09 15:54)
+///	引擎版本：0.8.0.0 (2021/12/20 21:21)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CellIteratorImpl.h"
 #include "Utilities.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/IteratorFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
-CoreTools::SimpleCSV::CellIteratorImpl::CellIteratorImpl(const ConstXMLDocumentSharedPtr& document, const SharedStringsSharedPtr& sharedStrings, const CellRange& cellRange, IteratorLocation location)
+CoreTools::SimpleCSV::CellIteratorImpl::CellIteratorImpl(const ConstXMLDocumentSharedPtr& document,
+                                                         const SharedStringsSharedPtr& sharedStrings,
+                                                         const CellRange& cellRange,
+                                                         IteratorLocation location)
     : document{ document },
       topLeft{ cellRange.GetTopLeft() },
       bottomRight{ cellRange.GetBottomRight() },
@@ -29,12 +32,11 @@ CoreTools::SimpleCSV::CellIteratorImpl::CellIteratorImpl(const ConstXMLDocumentS
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::SimpleCSV::CellIteratorImpl::CellSharedPtr
-    CoreTools::SimpleCSV::CellIteratorImpl::GetCurrentCell(const ConstXMLDocumentSharedPtr& document,
-                                                           const SharedStringsSharedPtr& sharedStrings,
-                                                           const XMLNode& dataNode,
-                                                           const CellReference& topLeft,
-                                                           IteratorLocation location)
+CoreTools::SimpleCSV::CellIteratorImpl::CellSharedPtr CoreTools::SimpleCSV::CellIteratorImpl::GetCurrentCell(const ConstXMLDocumentSharedPtr& document,
+                                                                                                             const SharedStringsSharedPtr& sharedStrings,
+                                                                                                             const XMLNode& dataNode,
+                                                                                                             const CellReference& topLeft,
+                                                                                                             IteratorLocation location)
 {
     if (location == IteratorLocation::End)
     {

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/09 14:09)
+///	引擎版本：0.8.0.0 (2021/12/20 21:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,13 +13,12 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellRange.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 
 using std::string;
-using namespace std::literals;
 
 CoreTools::SimpleCSV::CellImpl::CellImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow)
     : m_Document{}, m_CellNode{}, m_SharedStrings{}, m_ValueProxy{ CellValueProxy::CreateEmpty() }, isNull{ true }
@@ -95,7 +94,7 @@ string CoreTools::SimpleCSV::CellImpl::GetFormula() const
     }
     else
     {
-        return ""s;
+        return string{};
     }
 }
 

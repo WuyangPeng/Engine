@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:12)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 11:56)
 
 #ifndef CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
 #define CORE_TOOLS_PROPERTIES_METHOD_PROPERTY_SET_H
@@ -13,8 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Helper/PropertiesMacro.h"
-
-#include <boost/noncopyable.hpp>
 
 // 使用宏TCRE_METHOD_PROPERTY_SET定义属性
 namespace CoreTools
@@ -28,7 +26,7 @@ namespace CoreTools
               typename Container,  // 封闭类
               ptrdiff_t (*FO)(),  // 指针函数提供容器内偏移属性
               void (Container::*FS)(Reference)>  // 指向返回R的成员函数的指针
-    class MethodPropertySet final : private boost::noncopyable
+    class MethodPropertySet final
     {
     public:
         using ValueType = Value;
@@ -41,6 +39,12 @@ namespace CoreTools
     private:
         MethodPropertySet() noexcept;
         explicit MethodPropertySet(ReferenceType value);
+
+        ~MethodPropertySet() noexcept = default;
+        MethodPropertySet(const MethodPropertySet& rhs) noexcept = delete;
+        MethodPropertySet& operator=(const MethodPropertySet& rhs) noexcept = delete;
+        MethodPropertySet(MethodPropertySet&& rhs) noexcept = delete;
+        MethodPropertySet& operator=(MethodPropertySet&& rhs) noexcept = delete;
 
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 

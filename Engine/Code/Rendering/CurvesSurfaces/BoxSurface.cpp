@@ -95,7 +95,7 @@ Rendering::BoxSurface ::BoxSurface(Mathematics::BSplineVolumef* volume, int numU
 Rendering::BoxSurface ::~BoxSurface(){
 
     EXCEPTION_TRY{
-        DELETE0(mVolume);
+        //DELETE0(mVolume);
 }
 EXCEPTION_ALL_CATCH(Rendering)
 }
@@ -439,7 +439,7 @@ Rendering::BoxSurface ::BoxSurface(LoadConstructor value)
 {
 }
 
-void Rendering::BoxSurface ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::BoxSurface ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -447,13 +447,13 @@ void Rendering::BoxSurface ::Load(const CoreTools::BufferSourceSharedPtr& source
 
     int numUCtrlPoints, numVCtrlPoints, numWCtrlPoints;
     int uDegree, vDegree, wDegree;
-    source->Read(numUCtrlPoints);
-    source->Read(numVCtrlPoints);
-    source->Read(numWCtrlPoints);
-    source->Read(uDegree);
-    source->Read(vDegree);
-    source->Read(wDegree);
-    mVolume = NEW0 Mathematics::BSplineVolumef(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
+    source.Read(numUCtrlPoints);
+    source.Read(numVCtrlPoints);
+    source.Read(numWCtrlPoints);
+    source.Read(uDegree);
+    source.Read(vDegree);
+    source.Read(wDegree);
+    mVolume = new Mathematics::BSplineVolumef(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints, uDegree, vDegree, wDegree);
     for (int u = 0; u < numUCtrlPoints; ++u)
     {
         for (int v = 0; v < numVCtrlPoints; ++v)
@@ -461,21 +461,21 @@ void Rendering::BoxSurface ::Load(const CoreTools::BufferSourceSharedPtr& source
             for (int w = 0; w < numWCtrlPoints; ++w)
             {
                 Mathematics::FloatVector3D ctrl;
-                source->ReadAggregate(ctrl);
+                source.ReadAggregate(ctrl);
                 mVolume->SetControlPoint(u, v, w, ctrl);
             }
         }
     }
 
-    source->Read(mNumUSamples);
-    source->Read(mNumVSamples);
-    source->Read(mNumWSamples);
-    mDoSort = source->ReadBool();
+    source.Read(mNumUSamples);
+    source.Read(mNumVSamples);
+    source.Read(mNumWSamples);
+    mDoSort = source.ReadBool();
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::BoxSurface ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::BoxSurface ::Link(CoreTools::ObjectLink& source)
 {
     Node::Link(source);
 }
@@ -485,12 +485,12 @@ void Rendering::BoxSurface::PostLink()
     Node::PostLink();
 }
 
-uint64_t Rendering::BoxSurface ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::BoxSurface ::Register(CoreTools::ObjectRegister& target) const
 {
     return Node::Register(target);
 }
 
-void Rendering::BoxSurface ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::BoxSurface ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -502,12 +502,12 @@ void Rendering::BoxSurface ::Save(const CoreTools::BufferTargetSharedPtr& target
     const int uDegree = mVolume->GetDegree(0);
     const int vDegree = mVolume->GetDegree(1);
     const int wDegree = mVolume->GetDegree(2);
-    target->Write(numUCtrlPoints);
-    target->Write(numVCtrlPoints);
-    target->Write(numWCtrlPoints);
-    target->Write(uDegree);
-    target->Write(vDegree);
-    target->Write(wDegree);
+    target.Write(numUCtrlPoints);
+    target.Write(numVCtrlPoints);
+    target.Write(numWCtrlPoints);
+    target.Write(uDegree);
+    target.Write(vDegree);
+    target.Write(wDegree);
     for (int u = 0; u < numUCtrlPoints; ++u)
     {
         for (int v = 0; v < numVCtrlPoints; ++v)
@@ -515,15 +515,15 @@ void Rendering::BoxSurface ::Save(const CoreTools::BufferTargetSharedPtr& target
             for (int w = 0; w < numWCtrlPoints; ++w)
             {
                 const Mathematics::FloatVector3D ctrl = mVolume->GetControlPoint(u, v, w);
-                target->WriteAggregate(ctrl);
+                target.WriteAggregate(ctrl);
             }
         }
     }
 
-    target->Write(mNumUSamples);
-    target->Write(mNumVSamples);
-    target->Write(mNumWSamples);
-    target->Write(mDoSort);
+    target.Write(mNumUSamples);
+    target.Write(mNumVSamples);
+    target.Write(mNumWSamples);
+    target.Write(mDoSort);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

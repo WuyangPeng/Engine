@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 16:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,7 +24,7 @@ CoreTools::ObjectInterface::ObjectInterface() noexcept
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
-CoreTools::ObjectInterface::ObjectInterface([[maybe_unused]] LoadConstructor value) noexcept
+CoreTools::ObjectInterface::ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept
     : m_UniqueID{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;

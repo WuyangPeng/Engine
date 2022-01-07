@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 template <typename Real, typename UserDataType>
 Mathematics::RombergIntegral<Real, UserDataType>::RombergIntegral(int order, Real begin, Real end, Function function, const UserDataType* userData)

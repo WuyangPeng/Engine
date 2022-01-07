@@ -232,21 +232,21 @@ bool Rendering::ShaderFloatImpl
 	return m_AllowUpdater;
 }
 
-void Rendering::ShaderFloatImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ShaderFloatImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	 
-//	source->Read(m_Data);
-	m_AllowUpdater = source->ReadBool();
+//	source.Read(m_Data);
+	m_AllowUpdater = source.ReadBool();
 }
 
 void Rendering::ShaderFloatImpl
-	::Save (const CoreTools::BufferTargetSharedPtr& target) const
+	::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 	
-	target->WriteContainerWithNumber(m_Data);
-	target->Write(m_AllowUpdater);
+	target.WriteContainerWithNumber(m_Data);
+	target.Write(m_AllowUpdater);
 }
 
 int Rendering::ShaderFloatImpl

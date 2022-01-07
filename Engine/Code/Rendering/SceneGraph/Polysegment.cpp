@@ -146,7 +146,7 @@ int Rendering::Polysegment
 }
 
 uint64_t Rendering::Polysegment
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -154,7 +154,7 @@ uint64_t Rendering::Polysegment
 }
 
 void Rendering::Polysegment
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -162,14 +162,14 @@ void Rendering::Polysegment
     
 	ParentType::Save(target);
 	
-	target->Write(m_NumSegments);
-	target->Write(m_Contiguous);
+	target.Write(m_NumSegments);
+	target.Write(m_Contiguous);
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::Polysegment
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -185,7 +185,7 @@ void Rendering::Polysegment
 }
 
 void Rendering::Polysegment
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     
@@ -193,8 +193,8 @@ void Rendering::Polysegment
     
     ParentType::Load(source);
 	
-	source->Read(m_NumSegments);
-	m_Contiguous = source->ReadBool();
+	source.Read(m_NumSegments);
+	m_Contiguous = source.ReadBool();
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

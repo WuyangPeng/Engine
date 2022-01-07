@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:45)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,10 +16,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/BaseEntity.h"
 
-using namespace std::literals;
-
-CoreTools::EntityManagerImpl::EntityManagerImpl(MAYBE_UNUSED int count) noexcept
-    : m_Container{}
+CoreTools::EntityManagerImpl::EntityManagerImpl() noexcept
+    : container{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,22 +28,22 @@ bool CoreTools::EntityManagerImpl::Register(const EntitySharedPtr& entity)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_Container.insert({ entity->GetEntityID(), entity }).second;
+    return container.insert({ entity->GetEntityID(), entity }).second;
 }
 
 bool CoreTools::EntityManagerImpl::Unregister(uint64_t entityID)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_Container.erase(entityID) != 0;
+    return container.erase(entityID) != 0;
 }
 
 CoreTools::EntityManagerImpl::EntitySharedPtr CoreTools::EntityManagerImpl::GetEntity(uint64_t entityID) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto entity = m_Container.find(entityID);
-    if (entity != m_Container.cend())
+    const auto entity = container.find(entityID);
+    if (entity != container.cend())
     {
         auto ptr = entity->second.lock();
 

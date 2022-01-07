@@ -12,7 +12,7 @@
 
 #include SYSTEM_WARNING_DISABLE(26455)
 CMainFunctionHelper::UnitTestHelper ::UnitTestHelper()
-    : ParentType{ OStreamShared{} }
+    : ParentType{ OStreamShared{ true } }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

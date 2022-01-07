@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 9:57)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 17:20)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_H
@@ -53,15 +53,12 @@ namespace CoreTools
 
     public:
         // 对象名字
-        [[nodiscard]] std::string GetName() const;
+        NODISCARD std::string GetName() const;
         void SetName(const std::string& name);
 
-    protected:
-        virtual void Swap(Object& rhs) noexcept;
-
     private:
-        ObjectSharedPtr ObjectSharedFromThis();
-        ConstObjectSharedPtr ObjectSharedFromThis() const;
+        NODISCARD ObjectSharedPtr ObjectSharedFromThis();
+        NODISCARD ConstObjectSharedPtr ObjectSharedFromThis() const;
 
     private:
         ObjectName m_Name;

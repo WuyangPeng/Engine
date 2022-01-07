@@ -1,28 +1,28 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/25 10:36)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightDirPerVerEffect.h"
-#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
-#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
-#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
-#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
-#include "Rendering/ShaderFloats/LightAmbientConstant.h"
-#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
-#include "Rendering/ShaderFloats/LightSpecularConstant.h"
-#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
-#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
-#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
-#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
+#include "Rendering/ShaderFloats/LightAmbientConstant.h"
+#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
+#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
+#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
+#include "Rendering/ShaderFloats/LightSpecularConstant.h"
+#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
+#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
+#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
+#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
+#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 
- #include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -41,11 +41,11 @@ CORE_TOOLS_FACTORY_DEFINE(Rendering, LightDirPerVerEffect);
 
 Rendering::LightDirPerVerEffect::LightDirPerVerEffect()
 {
-    VertexShaderSharedPtr vshader{ std::make_shared < VertexShader>("Wm5.LightDirPerVer", 2, 2, 11, 0 ) };
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
+    VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightDirPerVer", 2, 2, 11, 0) };
+    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
+    vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
+    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
+    vshader->SetOutput(1, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     vshader->SetConstant(0, "PVWMatrix", 4);
     vshader->SetConstant(1, "CameraModelPosition", 1);
     vshader->SetConstant(2, "MaterialEmissive", 1);
@@ -58,82 +58,76 @@ Rendering::LightDirPerVerEffect::LightDirPerVerEffect()
     vshader->SetConstant(9, "LightSpecular", 1);
     vshader->SetConstant(10, "LightAttenuation", 1);
 
-	auto profile = vshader->GetProfile();
+    auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 11; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 11; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>( "Wm5.LightDirPerVer",1, 1, 0, 0 ) };
-    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
-	profile = pshader->GetProfile();
+    PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.LightDirPerVer", 1, 1, 0, 0) };
+    pshader->SetInput(0, "vertexColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
+    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
+    profile = pshader->GetProfile();
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 
-	VisualPassSharedPtr pass{ std::make_shared < VisualPass>() };
-	pass->SetVertexShader(vshader);
-	pass->SetPixelShader(pshader);
-        pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
-        pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
-        pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
-        pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
-        pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>() });
-        pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
+    VisualPassSharedPtr pass{ std::make_shared<VisualPass>() };
+    pass->SetVertexShader(vshader);
+    pass->SetPixelShader(pshader);
+    pass->SetAlphaState(AlphaStateSharedPtr{ std::make_shared<AlphaState>() });
+    pass->SetCullState(CullStateSharedPtr{ std::make_shared<CullState>() });
+    pass->SetDepthState(DepthStateSharedPtr{ std::make_shared<DepthState>() });
+    pass->SetOffsetState(OffsetStateSharedPtr{ std::make_shared<OffsetState>() });
+    pass->SetStencilState(StencilStateSharedPtr{ std::make_shared<StencilState>() });
+    pass->SetWireState(WireStateSharedPtr{ std::make_shared<WireState>() });
 
-	VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
-	technique->InsertPass(pass);
-	InsertTechnique(technique);
+    VisualTechniqueSharedPtr technique{ std::make_shared<VisualTechnique>() };
+    technique->InsertPass(pass);
+    InsertTechnique(technique);
 }
-
- 
 
 Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateInstance(
     Light* light, Material* material) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < ProjectionViewMatrixConstant>()));
-    instance->SetVertexConstant(0, 1,ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
-    instance->SetVertexConstant(0, 2, ShaderFloatSharedPtr(std::make_shared < MaterialEmissiveConstant>(MaterialSharedPtr(material))));
-    instance->SetVertexConstant(0, 3, ShaderFloatSharedPtr(std::make_shared < MaterialAmbientConstant>(MaterialSharedPtr(material))));
-    instance->SetVertexConstant(0, 4, ShaderFloatSharedPtr(std::make_shared < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
-    instance->SetVertexConstant(0, 5, ShaderFloatSharedPtr(std::make_shared < MaterialSpecularConstant>(MaterialSharedPtr(material))));
-    instance->SetVertexConstant(0, 6, ShaderFloatSharedPtr(std::make_shared < LightModelDirectionVectorConstant>(LightSharedPtr(light))));
-    instance->SetVertexConstant(0, 7, ShaderFloatSharedPtr(std::make_shared < LightAmbientConstant>(LightSharedPtr(light))));
-    instance->SetVertexConstant(0, 8, ShaderFloatSharedPtr(std::make_shared < LightDiffuseConstant>(LightSharedPtr(light))));
-    instance->SetVertexConstant(0, 9, ShaderFloatSharedPtr(std::make_shared < LightSpecularConstant>(LightSharedPtr(light))));
-    instance->SetVertexConstant(0, 10, ShaderFloatSharedPtr(std::make_shared < LightAttenuationConstant>(LightSharedPtr(light))));
+    VisualEffectInstance* instance = nullptr;  //  CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
+    instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
+    instance->SetVertexConstant(0, 2, ShaderFloatSharedPtr(std::make_shared<MaterialEmissiveConstant>(MaterialSharedPtr(material))));
+    instance->SetVertexConstant(0, 3, ShaderFloatSharedPtr(std::make_shared<MaterialAmbientConstant>(MaterialSharedPtr(material))));
+    instance->SetVertexConstant(0, 4, ShaderFloatSharedPtr(std::make_shared<MaterialDiffuseConstant>(MaterialSharedPtr(material))));
+    instance->SetVertexConstant(0, 5, ShaderFloatSharedPtr(std::make_shared<MaterialSpecularConstant>(MaterialSharedPtr(material))));
+    instance->SetVertexConstant(0, 6, ShaderFloatSharedPtr(std::make_shared<LightModelDirectionVectorConstant>(LightSharedPtr(light))));
+    instance->SetVertexConstant(0, 7, ShaderFloatSharedPtr(std::make_shared<LightAmbientConstant>(LightSharedPtr(light))));
+    instance->SetVertexConstant(0, 8, ShaderFloatSharedPtr(std::make_shared<LightDiffuseConstant>(LightSharedPtr(light))));
+    instance->SetVertexConstant(0, 9, ShaderFloatSharedPtr(std::make_shared<LightSpecularConstant>(LightSharedPtr(light))));
+    instance->SetVertexConstant(0, 10, ShaderFloatSharedPtr(std::make_shared<LightAttenuationConstant>(LightSharedPtr(light))));
     return instance;
 }
 
 Rendering::VisualEffectInstance* Rendering::LightDirPerVerEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-    const LightDirPerVerEffect* effect = CoreTools::New0 < LightDirPerVerEffect>();
+    const LightDirPerVerEffect* effect = nullptr;  //   CoreTools::New0<LightDirPerVerEffect>();
     return effect->CreateInstance(light, material);
 }
 
-
-
 // Streaming support.
 
-Rendering::LightDirPerVerEffect
-	::LightDirPerVerEffect(LoadConstructor value)
-	: VisualEffect{ value }
+Rendering::LightDirPerVerEffect ::LightDirPerVerEffect(LoadConstructor value)
+    : VisualEffect{ value }
 {
 }
 
-void Rendering::LightDirPerVerEffect
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::LightDirPerVerEffect ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -142,47 +136,44 @@ void Rendering::LightDirPerVerEffect
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightDirPerVerEffect
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::LightDirPerVerEffect ::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightDirPerVerEffect
-	::PostLink()
+void Rendering::LightDirPerVerEffect ::PostLink()
 {
-	VisualEffect::PostLink();
+    VisualEffect::PostLink();
 
-	auto pass = GetTechnique(0)->GetPass(0);
-	auto vshader = pass->GetVertexShader();
-	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
+    auto pass = GetTechnique(0)->GetPass(0);
+    auto vshader = pass->GetVertexShader();
+    auto pshader = pass->GetPixelShader();
+    auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 11; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 11; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
+    profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 }
 
-uint64_t Rendering::LightDirPerVerEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::LightDirPerVerEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightDirPerVerEffect
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::LightDirPerVerEffect ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -191,24 +182,18 @@ void Rendering::LightDirPerVerEffect
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightDirPerVerEffect
-	::GetStreamingSize() const
+int Rendering::LightDirPerVerEffect ::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }
 
-
-
 // Profiles.
 
-int Rendering::LightDirPerVerEffect::msDx9VRegisters[11] 
-    { 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+int Rendering::LightDirPerVerEffect::msDx9VRegisters[11]{ 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 
-int Rendering::LightDirPerVerEffect::msOglVRegisters[11] 
-    { 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+int Rendering::LightDirPerVerEffect::msOglVRegisters[11]{ 1, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
-int* Rendering::LightDirPerVerEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+int* Rendering::LightDirPerVerEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,
     msDx9VRegisters,
     msDx9VRegisters,
@@ -216,8 +201,7 @@ int* Rendering::LightDirPerVerEffect::msVRegisters[System::EnumCastUnderlying(Sh
     msOglVRegisters
 };
 
-std::string Rendering::LightDirPerVerEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+std::string Rendering::LightDirPerVerEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // VP_NONE
     "",
 
@@ -357,8 +341,7 @@ std::string Rendering::LightDirPerVerEffect::msVPrograms[System::EnumCastUnderly
     "END\n"
 };
 
-std::string Rendering::LightDirPerVerEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+std::string Rendering::LightDirPerVerEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // PP_NONE
     "",
 

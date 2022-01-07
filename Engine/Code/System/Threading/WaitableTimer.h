@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/06 20:48)
+///	引擎版本：0.8.0.0 (2021/12/12 18:11)
 
 #ifndef SYSTEM_THREADING_WAITABLE_TIMER_H
 #define SYSTEM_THREADING_WAITABLE_TIMER_H
@@ -23,18 +23,18 @@ namespace System
     // 等待计时器的创建、销毁、等待和设置。
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
-                                                                                bool manualReset,
-                                                                                const TChar* timerName) noexcept;
+                                                                                 bool manualReset,
+                                                                                 const TChar* timerName) noexcept;
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemWaitableTimer(WindowSecurityAttributesPtr timerAttributes,
-                                                                                const TChar* timerName,
-                                                                                CreateWaitableTimerReset flag,
-                                                                                MutexStandardAccess desiredAccess,
-                                                                                WaitableTimerSpecificAccess specificAccess) noexcept;
+                                                                                 const TChar* timerName,
+                                                                                 CreateWaitableTimerReset flag,
+                                                                                 MutexStandardAccess desiredAccess,
+                                                                                 WaitableTimerSpecificAccess specificAccess) noexcept;
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemWaitableTimer(MutexStandardAccess desiredAccess,
-                                                                              WaitableTimerSpecificAccess specificAccess,
-                                                                              bool inheritHandle,
-                                                                              const TChar* timerName) noexcept;
+                                                                               WaitableTimerSpecificAccess specificAccess,
+                                                                               bool inheritHandle,
+                                                                               const TChar* timerName) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CancelSystemWaitableTimer(WindowsHandle timer) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemWaitableTimer(WindowsHandle timer) noexcept;

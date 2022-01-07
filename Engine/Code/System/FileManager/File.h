@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 10:11)
+///	引擎版本：0.8.0.0 (2021/12/13 18:48)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_H
 #define SYSTEM_FILE_MANAGE_FILE_H
@@ -23,27 +23,27 @@ namespace System
     // 文件的打开、关闭、创建、读写和删除。
 
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,
-                                                                   FileHandleDesiredAccess access,
-                                                                   FileHandleShareMode shareMode,
-                                                                   WindowSecurityAttributesPtr securityAttributes,
-                                                                   FileHandleCreationDisposition creation,
-                                                                   FileHandleAttributes attributes,
-                                                                   FileHandleOther other,
-                                                                   FileHandleSecurity security,
-                                                                   WindowsHandle templateFile) noexcept;
+                                                                    FileHandleDesiredAccess access,
+                                                                    FileHandleShareMode shareMode,
+                                                                    WindowSecurityAttributesPtr securityAttributes,
+                                                                    FileHandleCreationDisposition creation,
+                                                                    FileHandleAttributes attributes,
+                                                                    FileHandleOther other,
+                                                                    FileHandleSecurity security,
+                                                                    WindowsHandle templateFile) noexcept;
 
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,
-                                                                   FileHandleDesiredAccess access,
-                                                                   FileHandleShareMode shareMode,
-                                                                   FileHandleCreationDisposition creation) noexcept;
+                                                                    FileHandleDesiredAccess access,
+                                                                    FileHandleShareMode shareMode,
+                                                                    FileHandleCreationDisposition creation) noexcept;
 
     NODISCARD WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemFile(const String& fileName,
-                                                                   FileHandleDesiredAccess access,
-                                                                   FileHandleShareMode shareMode,
-                                                                   FileHandleCreationDisposition creation,
-                                                                   FileHandleAttributes attributes,
-                                                                   FileHandleOther other,
-                                                                   FileHandleSecurity security) noexcept;
+                                                                    FileHandleDesiredAccess access,
+                                                                    FileHandleShareMode shareMode,
+                                                                    FileHandleCreationDisposition creation,
+                                                                    FileHandleAttributes attributes,
+                                                                    FileHandleOther other,
+                                                                    FileHandleSecurity security) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemFile(const CFileString& fileName) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE MoveSystemFile(const String& existingFileName, const String& newFileName) noexcept;

@@ -199,12 +199,12 @@ int Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumVertices);
-	target->Write(m_NumBones);
+	target.Write(m_NumVertices);
+	target.Write(m_NumBones);
 
 //	target.WriteSharedPtrWithoutNumber(m_NumBones, &m_Bones[0]);
 	//target.WriteWithoutNumber(m_Size, &m_Weights[0]);
@@ -212,24 +212,24 @@ void Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source) 
+	::Load(CoreTools::BufferSource& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumVertices);
-        source->Read(m_NumBones);
+	source.Read(m_NumVertices);
+        source.Read(m_NumBones);
 	m_Size = m_NumVertices * m_NumBones;
 	m_Bones.resize(m_NumBones);
 	m_Weights.resize(m_Size);
 	m_Offsets.resize(m_Size);
 	 
 //	source.ReadSharedPtr(m_NumBones, &m_Bones[0]);
-        m_Weights = source->ReadVectorWithNumber<float>(m_Size);
-        source->ReadAggregateContainer(m_Size, m_Offsets);
+        m_Weights = source.ReadVectorWithNumber<float>(m_Size);
+        source.ReadAggregateContainer(m_Size, m_Offsets);
 }
 
 void Rendering::SkinControllerImpl
-	::Link(const CoreTools::ObjectLinkSharedPtr& source) 
+	::Link(CoreTools::ObjectLink& source) 
 {
 	RENDERING_CLASS_IS_VALID_1;
     CoreTools::DisableNoexcept();
@@ -238,7 +238,7 @@ void Rendering::SkinControllerImpl
 }
 
 void Rendering::SkinControllerImpl
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
+	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

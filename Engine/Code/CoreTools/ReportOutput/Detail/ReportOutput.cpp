@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 10:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 18:19)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,11 +13,10 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/OStreamSharedDetail.h"
 
-using std::ostream;
 using std::string;
 
 CoreTools::ReportOutput::ReportOutput(const OStreamShared& streamShared) noexcept
-    : m_StreamShared{ streamShared }
+    : streamShared{ streamShared }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -28,21 +27,21 @@ void CoreTools::ReportOutput::PrintString(const string& characterString)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_StreamShared << characterString;
+    streamShared << characterString;
 }
 
 void CoreTools::ReportOutput::PrintNewLine()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_StreamShared << '\n';
+    streamShared << '\n';
 }
 
 void CoreTools::ReportOutput::PrintNumber(int number)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_StreamShared << number;
+    streamShared << number;
 }
 
 // protected
@@ -50,5 +49,5 @@ CoreTools::OStreamShared CoreTools::ReportOutput::GetStream() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_StreamShared;
+    return streamShared;
 }

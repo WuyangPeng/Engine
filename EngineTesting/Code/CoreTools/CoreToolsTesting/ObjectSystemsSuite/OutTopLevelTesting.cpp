@@ -9,9 +9,9 @@
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, OutTopLevelTesting)
 

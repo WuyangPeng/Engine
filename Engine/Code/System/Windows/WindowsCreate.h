@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 21:44)
+///	引擎版本：0.8.0.0 (2021/12/12 13:11)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_CREATE_H
 #define SYSTEM_WINDOWS_WINDOWS_CREATE_H
@@ -63,6 +63,8 @@ namespace System
     NODISCARD WindowsHMenu SYSTEM_DEFAULT_DECLARE GetWindowSystemMenu(WindowsHWnd hwnd) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, MenuItem flags) noexcept;
+
+    bool SYSTEM_DEFAULT_DECLARE GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction);
 }
 
 #endif  // SYSTEM_WINDOWS_WINDOWS_CREATE_H

@@ -52,8 +52,8 @@ namespace Rendering
         const char* GetReadOnlyData () const;
 		char* GetWriteData();
         
-		void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+		void Load(CoreTools::BufferSource& source);
+		void Save (CoreTools::BufferTarget& target) const;
 		int GetStreamingSize () const;              
       
 		void SaveToFile (WriteFileManager& outFile) const;

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/23 10:13)
+///	引擎版本：0.8.0.0 (2021/12/21 14:43)
 
 #ifndef CORE_TOOLS_TEMPLATE_MAX_ELEMENT_H
 #define CORE_TOOLS_TEMPLATE_MAX_ELEMENT_H
@@ -13,8 +13,8 @@
 #include "CoreTools/CoreToolsDll.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 namespace CoreTools
 {
@@ -23,7 +23,7 @@ namespace CoreTools
     {
         std::vector<T> maxSize{ element };
 
-        auto maxElement = std::max_element(maxSize.begin(), maxSize.end());
+        auto maxElement = std::max_element(maxSize.cbegin(), maxSize.cend());
 
         if (maxElement != maxSize.cend())
         {

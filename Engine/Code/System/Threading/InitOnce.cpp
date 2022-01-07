@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 11:31)
+///	引擎版本：0.8.0.0 (2021/12/12 19:10)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ void System::SystemInitOnceInitialize(InitOncePtr initOnce) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<InitOncePtr>(initOnce);
+    UnusedFunction(initOnce);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -37,7 +37,7 @@ bool System::SystemInitOnceExecuteOnce(InitOncePtr initOnce, InitOnceFunction in
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<InitOncePtr, InitOnceFunction, WindowsVoidPtr, WindowsVoidPtr*>(initOnce, initFunction, parameter, context);
+    UnusedFunction(initOnce, initFunction, parameter, context);
 
     return false;
 
@@ -55,7 +55,7 @@ bool System::SystemInitOnceBeginInitialize(InitOncePtr initOnce, InitOnceBeginIn
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<InitOncePtr, InitOnceBeginInitialize, WindowsBoolPtr, WindowsVoidPtr*>(initOnce, flags, pending, context);
+    UnusedFunction(initOnce, flags, pending, context);
 
     return false;
 
@@ -73,7 +73,7 @@ bool System::SystemInitOnceComplete(InitOncePtr initOnce, InitOnceBeginInitializ
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<InitOncePtr, InitOnceBeginInitialize, WindowsVoidPtr>(initOnce, flags, context);
+    UnusedFunction(initOnce, flags, context);
 
     return false;
 

@@ -36,6 +36,7 @@ CSVConfigure::SceneContainer::Container CSVConfigure::SceneContainer::GetScene(F
     USER_CLASS_IS_VALID_CONST_9;
 
     Container result{};
+
     for (const auto& value : scene)
     {
         if (function(value.second))

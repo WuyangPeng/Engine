@@ -34,7 +34,7 @@ CoreTools::DefaultTestingNoObjectPtr::DefaultTestingNoObjectPtr(const string& na
 
 CoreTools::DefaultTestingNoObjectPtr::ObjectSharedPtr CoreTools::DefaultTestingNoObjectPtr::Create(const string& name)
 {
-    return make_shared<ClassType>(name);
+    return make_shared<ClassType>(name); 
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, DefaultTestingNoObjectPtr);

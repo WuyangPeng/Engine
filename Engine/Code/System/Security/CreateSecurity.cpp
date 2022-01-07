@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 17:12)
+///	引擎版本：0.8.0.0 (2021/12/13 10:50)
 
 #include "System/SystemExport.h"
 
@@ -41,17 +41,12 @@ bool System::SystemConvertToAutoInheritPrivateObjectSecurity(SecurityDescriptorP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecurityDescriptorPtr,
-                 SecurityDescriptorPtr*,
-                 SystemGUID*,
-                 bool,
-                 AccessCheckGenericMappingPtr>(parentDescriptor,
-                                               currentSecurityDescriptor,
-                                               newSecurityDescriptor,
-                                               objectType,
-                                               isDirectoryObject,
-                                               genericMapping);
+    UnusedFunction(parentDescriptor,
+                   currentSecurityDescriptor,
+                   newSecurityDescriptor,
+                   objectType,
+                   isDirectoryObject,
+                   genericMapping);
 
     return false;
 
@@ -74,17 +69,12 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecurityDescriptorPtr,
-                 SecurityDescriptorPtr*,
-                 bool,
-                 WindowsHandle,
-                 AccessCheckGenericMappingPtr>(parentDescriptor,
-                                               creatorDescriptor,
-                                               newDescriptor,
-                                               isDirectoryObject,
-                                               token,
-                                               genericMapping);
+    UnusedFunction(parentDescriptor,
+                   creatorDescriptor,
+                   newDescriptor,
+                   isDirectoryObject,
+                   token,
+                   genericMapping);
 
     return false;
 
@@ -109,21 +99,14 @@ bool System::CreateSystemPrivateObjectSecurity(SecurityDescriptorPtr parentDescr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecurityDescriptorPtr,
-                 SecurityDescriptorPtr*,
-                 SystemGUID*,
-                 bool,
-                 SecurityAutoInherit,
-                 WindowsHandle,
-                 AccessCheckGenericMappingPtr>(parentDescriptor,
-                                               creatorDescriptor,
-                                               *newDescriptor,
-                                               objectType,
-                                               isContainerObject,
-                                               autoInheritFlags,
-                                               token,
-                                               genericMapping);
+    UnusedFunction(parentDescriptor,
+                   creatorDescriptor,
+                   newDescriptor,
+                   objectType,
+                   isContainerObject,
+                   autoInheritFlags,
+                   token,
+                   genericMapping);
 
     return false;
 
@@ -161,23 +144,15 @@ bool System::CreateSystemPrivateObjectSecurityWithMultipleInheritance(SecurityDe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecurityDescriptorPtr,
-                 SecurityDescriptorPtr*,
-                 SystemGUID**,
-                 WindowsULong,
-                 bool,
-                 SecurityAutoInherit,
-                 WindowsHandle,
-                 AccessCheckGenericMappingPtr>(parentDescriptor,
-                                               creatorDescriptor,
-                                               newDescriptor,
-                                               *objectTypes,
-                                               guidCount,
-                                               isContainerObject,
-                                               autoInheritFlags,
-                                               token,
-                                               genericMapping);
+    UnusedFunction(parentDescriptor,
+                   creatorDescriptor,
+                   newDescriptor,
+                   objectTypes,
+                   guidCount,
+                   isContainerObject,
+                   autoInheritFlags,
+                   token,
+                   genericMapping);
 
     return false;
 
@@ -195,7 +170,7 @@ bool System::DestroySystemPrivateObjectSecurity(SecurityDescriptorPtr* objectDes
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr*>(objectDescriptor);
+    UnusedFunction(objectDescriptor);
 
     return false;
 
@@ -217,15 +192,11 @@ bool System::GetSystemFileSecurity(const String& fileName,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String,
-                 SecurityRequestedInformation,
-                 SecurityDescriptorPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr>(fileName,
-                                 requestedInformation,
-                                 securityDescriptor,
-                                 length,
-                                 lengthNeeded);
+    UnusedFunction(fileName,
+                   requestedInformation,
+                   securityDescriptor,
+                   length,
+                   lengthNeeded);
 
     return false;
 
@@ -247,15 +218,11 @@ bool System::GetSystemKernelObjectSecurity(ThreadHandle handle,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle,
-                 SecurityRequestedInformation,
-                 SecurityDescriptorPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr>(handle,
-                                 requestedInformation,
-                                 securityDescriptor,
-                                 length,
-                                 lengthNeeded);
+    UnusedFunction(handle,
+                   requestedInformation,
+                   securityDescriptor,
+                   length,
+                   lengthNeeded);
 
     return false;
 
@@ -277,15 +244,11 @@ bool System::GetSystemPrivateObjectSecurity(SecurityDescriptorPtr objectDescript
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecurityRequestedInformation,
-                 SecurityDescriptorPtr,
-                 WindowsDWord,
-                 WindowsDWordPtr>(objectDescriptor,
-                                 securityInformation,
-                                 resultantDescriptor,
-                                 descriptorLength,
-                                 returnLength);
+    UnusedFunction(objectDescriptor,
+                   securityInformation,
+                   resultantDescriptor,
+                   descriptorLength,
+                   returnLength);
 
     return false;
 
@@ -303,7 +266,7 @@ bool System::SetSystemFileSecurity(const TChar* fileName, SecurityRequestedInfor
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*, SecurityRequestedInformation, SecurityDescriptorPtr>(fileName, securityInformation, securityDescriptor);
+    UnusedFunction(fileName, securityInformation, securityDescriptor);
 
     return false;
 
@@ -321,7 +284,7 @@ bool System::SetSystemKernelObjectSecurity(ThreadHandle handle, SecurityRequeste
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, SecurityRequestedInformation, SecurityDescriptorPtr>(handle, securityInformation, securityDescriptor);
+    UnusedFunction(handle, securityInformation, securityDescriptor);
 
     return false;
 
@@ -343,7 +306,7 @@ bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securit
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityRequestedInformation, SecurityDescriptorPtr, SecurityDescriptorPtr*, AccessCheckGenericMappingPtr, WindowsHandle>(securityInformation, modificationDescriptor, objectsSecurityDescriptor, genericMapping, token);
+    UnusedFunction(securityInformation, modificationDescriptor, objectsSecurityDescriptor, genericMapping, token);
 
     return false;
 
@@ -358,7 +321,7 @@ void System::SetSystemSecurityAccessMask(SecurityRequestedInformation securityIn
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityRequestedInformation, WindowsDWordPtr>(securityInformation, desiredAccess);
+    UnusedFunction(securityInformation, desiredAccess);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -379,17 +342,12 @@ bool System::SetSystemPrivateObjectSecurity(SecurityRequestedInformation securit
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityRequestedInformation,
-                 SecurityDescriptorPtr,
-                 SecurityDescriptorPtr*,
-                 SecurityAutoInherit,
-                 AccessCheckGenericMappingPtr,
-                 WindowsHandle>(securityInformation,
-                               modificationDescriptor,
-                               objectsSecurityDescriptor,
-                               autoInheritFlags,
-                               genericMapping,
-                               token);
+    UnusedFunction(securityInformation,
+                   modificationDescriptor,
+                   objectsSecurityDescriptor,
+                   autoInheritFlags,
+                   genericMapping,
+                   token);
 
     return false;
 

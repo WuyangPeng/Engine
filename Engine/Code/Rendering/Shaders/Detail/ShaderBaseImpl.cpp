@@ -270,7 +270,7 @@ Rendering::ShaderSamplerData::Colour Rendering::ShaderBaseImpl
 	return m_Sampler.GetBorderColor(index);
 }
 
-void Rendering::ShaderBaseImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ShaderBaseImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
@@ -282,7 +282,7 @@ void Rendering::ShaderBaseImpl ::Load(const CoreTools::BufferSourceSharedPtr& so
 }
 
 void Rendering::ShaderBaseImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
@@ -329,14 +329,14 @@ Rendering::ShaderProfileDataSharedPtr Rendering::ShaderBaseImpl ::GetProfile() n
 	return m_Profile;
 }
 
-void Rendering::ShaderBaseImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::ShaderBaseImpl ::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     source;
 	//source.ResolveObjectSharedPtrLink(m_Profile);
 }
 
-void Rendering::ShaderBaseImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+void Rendering::ShaderBaseImpl ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

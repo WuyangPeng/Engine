@@ -76,6 +76,9 @@
     <Filter Include="EffectiveModernCpp\Chapter5">
       <UniqueIdentifier>{7d707cd9-ce62-49e0-87fe-3fd270c314b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EffectiveModernCpp\Chapter6">
+      <UniqueIdentifier>{a1163533-76da-465e-a0b3-be2b7c9173cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Configuration\BookExperienceTesting.json">
@@ -200,6 +203,12 @@
     <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.h">
       <Filter>EffectiveModernCpp\Chapter5</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6ExampleTesting.h">
+      <Filter>EffectiveModernCpp\Chapter6</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6Suite.h">
+      <Filter>EffectiveModernCpp\Chapter6</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\TestingHelper.cpp">
@@ -255,6 +264,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter5\EffectiveModernCppChapter5ExampleTesting.cpp">
       <Filter>EffectiveModernCpp\Chapter5</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\BookCpp\BookExperienceTesting\EffectiveModernCpp\Chapter6\EffectiveModernCppChapter6ExampleTesting.cpp">
+      <Filter>EffectiveModernCpp\Chapter6</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

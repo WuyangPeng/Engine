@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 13:27)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 19:17)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H
@@ -16,10 +16,7 @@
 
 #include "OStreamShared.h"
 
-#include <boost/noncopyable.hpp>
 #include <iosfwd>
-
-
 
 namespace CoreTools
 {
@@ -32,18 +29,18 @@ namespace CoreTools
         explicit UnitTestStream(const OStreamShared& streamShared) noexcept;
         virtual ~UnitTestStream() = default;
 
-        UnitTestStream(const UnitTestStream& rhs) = default;
-        UnitTestStream& operator=(const UnitTestStream& rhs) = default;
-        UnitTestStream(UnitTestStream&& rhs) noexcept = default;
-        UnitTestStream& operator=(UnitTestStream&& rhs) noexcept = default;
+        UnitTestStream(const UnitTestStream& rhs) = delete;
+        virtual UnitTestStream& operator=(const UnitTestStream& rhs) = delete;
+        UnitTestStream(UnitTestStream&& rhs) noexcept;
+        virtual UnitTestStream& operator=(UnitTestStream&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] OStreamShared& GetStream() noexcept;
-        [[nodiscard]] bool IsStreamSharedFile() const noexcept;
+        NODISCARD OStreamShared& GetStream() noexcept;
+        NODISCARD bool IsStreamSharedFile() const noexcept;
 
     private:
-        OStreamShared m_StreamShared;
+        OStreamShared streamShared;
     };
 }
 #endif  // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_STREAM_H

@@ -5,14 +5,13 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.2.5 (2021/11/04 21:05)
+///	引擎辅助版本：0.7.2.6 (2021/11/18 21:32)
 
 #ifndef EFFECTIVE_MODERN_CPP_CHAPTER5_TERM29_H
 #define EFFECTIVE_MODERN_CPP_CHAPTER5_TERM29_H
 
 #include "Example/BookCpp/EffectiveModernCpp/EffectiveModernCppDll.h"
 
-#include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 #include <memory>
@@ -25,6 +24,9 @@ namespace BookExperience
         {
             namespace Terms29
             {
+                class Widget
+                {
+                };
             }
         }
     }

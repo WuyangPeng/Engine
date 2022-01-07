@@ -291,7 +291,7 @@ int Rendering::Spatial
 }
 
 uint64_t Rendering::Spatial
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -302,7 +302,7 @@ const auto uniqueID = ParentType::Register(target);
 }
 
 void Rendering::Spatial
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -319,7 +319,7 @@ void Rendering::Spatial
 }
 
 void Rendering::Spatial
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -340,7 +340,7 @@ void Rendering::Spatial
 }
 
 void Rendering::Spatial
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

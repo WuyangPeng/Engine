@@ -12,7 +12,7 @@
 #include "HeroContainer.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVRowDetail.h"
+#include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
 using namespace std::literals;
 
@@ -124,7 +124,7 @@ int CSVConfigure::Equip::GetHeroID() const noexcept
 }
 
 std::shared_ptr<const CSVConfigure::Hero> CSVConfigure::Equip::GetHeroID(const CSVConfigureContainer& csvContainer) const
- {
+{
     USER_CLASS_IS_VALID_CONST_9;
 
     return csvContainer.GetHeroContainer()->GetHero(heroID);

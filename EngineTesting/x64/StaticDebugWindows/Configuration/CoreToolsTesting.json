@@ -220,7 +220,14 @@
     "CSVContentTesting": 1,
     "CSVGenerateTesting": 1,
     "CSVTotalGenerateTesting": 1,
-    "CSVConfigureTesting": 1
+    "CSVConfigureTesting": 1,
+    "DataTypeDescribeTesting": 1,
+    "JsonHeadTesting": 1,
+    "JsonNodeContainerTesting": 1,
+    "JsonNodeTesting": 1,
+    "JsonGenerateTesting": 1,
+    "JsonRowTesting": 1,
+    "JsonConfigureTesting": 1
   },
 
   "SimpleZipSuite": {

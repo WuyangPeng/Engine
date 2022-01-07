@@ -110,13 +110,13 @@ int Rendering::ShaderProfileDataImpl ::GetTextureUnitSize() const noexcept
 	return m_NumSamplers;
 }
 
-void Rendering::ShaderProfileDataImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ShaderProfileDataImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	// 测试是否修改MaxProfiles。
 	int maxProfiles{ 0 };
-	source->Read(maxProfiles);
+	source.Read(maxProfiles);
 
 	RENDERING_ASSERTION_2(maxProfiles == System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles),"你改变了MaxProfiles的值，并加载了旧的数据集。");
 
@@ -125,24 +125,24 @@ void Rendering::ShaderProfileDataImpl ::Load(const CoreTools::BufferSourceShared
 		m_ShaderProfileData[i].Load(source);
 	}	 
 
-	source->Read(m_NumConstants);
-	source->Read(m_NumSamplers);
+	source.Read(m_NumConstants);
+	source.Read(m_NumSamplers);
 }
 
 void Rendering::ShaderProfileDataImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
+	target.Write(System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles));
 
 	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
 	{
 		m_ShaderProfileData[i].Save(target);
 	}
 
-	target->Write(m_NumConstants);
-	target->Write(m_NumSamplers);
+	target.Write(m_NumConstants);
+	target.Write(m_NumSamplers);
 }
 
 int Rendering::ShaderProfileDataImpl

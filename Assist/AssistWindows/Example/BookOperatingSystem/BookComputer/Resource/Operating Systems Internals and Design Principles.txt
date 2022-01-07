@@ -1,0 +1,5 @@
+操作系统——精髓与设计原理（Operating Systems:Internals and Design Principles）
+（第8版）
+
+★
+作者： William Stallings

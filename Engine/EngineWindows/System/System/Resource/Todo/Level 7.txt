@@ -1,7 +1,8 @@
 TODO Level 7
 
-0.7.1.6
+0.8.0.0
 
 1.（MemoryTools）完成MemoryTools非Windows平台的实现：VirtualTools、ViewOfFile、MemoryHelper、LocalTools。
-2.（Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、ConditionVariable、InitOnce、WaitableTimer、
-												  SyncTools、Interlocked、Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools。
+2.（Threading）完成Threading非Windows平台的实现： CriticalSection、Semaphore、Event、Mutex、SlimReaderWriter、
+												  ConditionVariable、InitOnce、WaitableTimer、SyncTools、Interlocked、
+												  Thread、ThreadTools、ThreadLocalStorage、Process、ProcessTools。

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:55)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 15:56)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_H
@@ -33,8 +33,6 @@ namespace CoreTools
         using MessageResult = std::pair<StateSharedPtr, bool>;
 
     public:
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
         State() noexcept;
         virtual ~State() noexcept = default;
 
@@ -43,29 +41,27 @@ namespace CoreTools
         State(State&& rhs) noexcept = default;
         State& operator=(State&& rhs) noexcept = default;
 
-#include STSTEM_WARNING_POP
-
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         void Enter(EntityTypeSharedPtr entity);
 
-        [[nodiscard]] virtual StateSharedPtr Execute(int64_t timeInterval) = 0;
+        NODISCARD virtual StateSharedPtr Execute(int64_t timeInterval) = 0;
 
         virtual void Exit() = 0;
 
-        [[nodiscard]] virtual MessageResult OnMessage(const Telegram& telegram) = 0;
+        NODISCARD virtual MessageResult OnMessage(const Telegram& telegram) = 0;
 
         template <typename StateType, typename ResultType = StateType, typename... Args>
-        [[nodiscard]] static std::shared_ptr<ResultType> MakeState(Args&&... args);
+        NODISCARD static std::shared_ptr<ResultType> MakeState(Args&&... args);
 
-        [[nodiscard]] EntityTypeSharedPtr GetOwner();
+        NODISCARD EntityTypeSharedPtr GetOwner();
 
-        [[nodiscard]] bool IsExactly(const Rtti& rtti) const noexcept;
+        NODISCARD bool IsExactly(const Rtti& rtti) const noexcept;
 
         CORE_TOOLS_RTTI_DECLARE;
 
     protected:
-        [[nodiscard]] StateSharedPtr GetPossiblePreviousState();
+        NODISCARD StateSharedPtr GetPossiblePreviousState();
 
     private:
         virtual void DoEnter() = 0;

@@ -104,7 +104,7 @@ int Rendering::IKGoal
 }
 
 uint64_t Rendering::IKGoal
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -118,7 +118,7 @@ uint64_t Rendering::IKGoal
 }
 
 void Rendering::IKGoal
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -131,7 +131,7 @@ void Rendering::IKGoal
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKGoal ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::IKGoal ::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -148,7 +148,7 @@ void Rendering::IKGoal
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKGoal ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::IKGoal ::Load(CoreTools::BufferSource& source)
 {
 	;
     

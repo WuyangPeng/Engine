@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/11 16:05)
+///	引擎版本：0.8.0.0 (2021/12/13 11:44)
 
 #include "System/SystemExport.h"
 
@@ -131,7 +131,6 @@ namespace System
     PFNGLGETNUNIFORMUIVPROC glGetnUniformuiv{ nullptr };
     PFNGLREADNPIXELSPROC glReadnPixels{ nullptr };
     PFNGLTEXTUREBARRIERPROC glTextureBarrier{ nullptr };
-
 }
 
 System::ExistsOpenGLExtensions System::IsExistsOpenGL45() noexcept

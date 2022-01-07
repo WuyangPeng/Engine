@@ -36,6 +36,7 @@ CSVConfigure::HeroContainer::Container CSVConfigure::HeroContainer::GetHero(Func
     USER_CLASS_IS_VALID_CONST_9;
 
     Container result{};
+
     for (const auto& value : hero)
     {
         if (function(value.second))

@@ -201,40 +201,40 @@ int Rendering::ParticleControllerImpl
 }
 
 void Rendering::ParticleControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target->Write(m_SystemLinearSpeed);
-	target->Write(m_SystemAngularSpeed);
-    target->WriteAggregate(m_SystemLinearAxis);
-        target->WriteAggregate(m_SystemAngularAxis);
-	target->Write(m_SystemSizeChange);
-	target->Write(m_NumParticles);
-        target->WriteContainerWithoutNumber(m_ParticleLinearSpeed); 
+    target.Write(m_SystemLinearSpeed);
+	target.Write(m_SystemAngularSpeed);
+    target.WriteAggregate(m_SystemLinearAxis);
+        target.WriteAggregate(m_SystemAngularAxis);
+	target.Write(m_SystemSizeChange);
+	target.Write(m_NumParticles);
+        target.WriteContainerWithoutNumber(m_ParticleLinearSpeed); 
 	//target.WriteAggregateWithoutNumber(m_NumParticles, &m_ParticleLinearAxis[0]);
 //	target.WriteWithoutNumber(m_NumParticles, &m_ParticleSizeChange[0]);
 }
 
 void Rendering::ParticleControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 	
-	source->Read(m_SystemLinearSpeed);
-        source->Read(m_SystemAngularSpeed);
-        source->ReadAggregate(m_SystemLinearAxis);
-        source->ReadAggregate(m_SystemAngularAxis);
-        source->Read(m_SystemSizeChange);
-        source->Read(m_NumParticles);
+	source.Read(m_SystemLinearSpeed);
+        source.Read(m_SystemAngularSpeed);
+        source.ReadAggregate(m_SystemLinearAxis);
+        source.ReadAggregate(m_SystemAngularAxis);
+        source.Read(m_SystemSizeChange);
+        source.Read(m_NumParticles);
 
 	m_ParticleLinearSpeed.resize(m_NumParticles);
 	m_ParticleLinearAxis.resize(m_NumParticles);
 	m_ParticleSizeChange.resize(m_NumParticles); 
 
-//	source->Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
-        source->ReadAggregateContainer(m_NumParticles, m_ParticleLinearAxis);
-   //     source->Read(m_NumParticles, &m_ParticleSizeChange[0]);
+//	source.Read(m_NumParticles, &m_ParticleLinearSpeed[0]);
+        source.ReadAggregateContainer(m_NumParticles, m_ParticleLinearAxis);
+   //     source.Read(m_NumParticles, &m_ParticleSizeChange[0]);
 }
 
 

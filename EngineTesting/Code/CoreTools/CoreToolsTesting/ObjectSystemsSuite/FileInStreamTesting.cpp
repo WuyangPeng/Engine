@@ -12,13 +12,13 @@
 #include "Detail/StringObject.h"
 #include "Detail/PointerObject.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/ObjectSystems/OutTopLevel.h"
 #include "CoreTools/ObjectSystems/FileOutStream.h"
 #include "CoreTools/ObjectSystems/FileInStream.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 
 #include <algorithm>
 

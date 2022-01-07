@@ -36,7 +36,7 @@ void System::OpenGLShaderTesting::DoRunUnitTest()
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void System::OpenGLShaderTesting::MainTest() noexcept
+void System::OpenGLShaderTesting::MainTest()  
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateShaderTest);
     ASSERT_NOT_THROW_EXCEPTION_0(AttachShaderTest);

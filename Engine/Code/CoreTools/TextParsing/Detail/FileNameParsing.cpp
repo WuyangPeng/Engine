@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/01 11:07)
+///	引擎版本：0.8.0.0 (2021/12/19 22:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,9 +13,7 @@
 #include "CoreTools/CharacterString/StringConversion.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
-
-using namespace CoreTools::TextParsing;
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 
 CoreTools::FileNameParsing::FileNameParsing(const String& fullFileName)
     : fullFileName{ fullFileName }, slashPostition{ GetPostition(fullFileName) }
@@ -30,8 +28,8 @@ size_t CoreTools::FileNameParsing::GetPostition(const String& fullFileName)
         THROW_EXCEPTION(SYSTEM_TEXT("文件名为空！\n"s));
     }
 
-    const auto backSlashPosition = fullFileName.find_last_of(g_BackSlash);
-    const auto forwardSlashPosition = fullFileName.find_last_of(g_ForwardSlash);
+    const auto backSlashPosition = fullFileName.find_last_of(TextParsing::g_BackSlash);
+    const auto forwardSlashPosition = fullFileName.find_last_of(TextParsing::g_ForwardSlash);
 
     if (backSlashPosition == String::npos && forwardSlashPosition == String::npos)
     {
@@ -73,7 +71,7 @@ System::String CoreTools::FileNameParsing::GetWithSlashFileName() const
 
     if (slashPostition == String::npos)
     {
-        return g_ForwardSlash + fullFileName;
+        return TextParsing::g_ForwardSlash + fullFileName;
     }
     else
     {
@@ -101,7 +99,7 @@ System::String CoreTools::FileNameParsing::GetCSVClassName() const
 
     const auto fileName = GetFileName();
 
-    const auto dotPosition = fileName.find_first_of(g_Dot);
+    const auto dotPosition = fileName.find_first_of(TextParsing::g_Dot);
 
     if (dotPosition == String::npos)
     {

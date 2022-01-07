@@ -43,7 +43,7 @@ void CoreTools::ReadFileManagerTesting::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(ReadFileManagerTest);
     ASSERT_NOT_THROW_EXCEPTION_0(GetFileByteSizeTest);
 }
-
+ 
 void CoreTools::ReadFileManagerTesting::WriteFileManagerTest()
 {
     WriteFileManager manager{ GetFileName() };

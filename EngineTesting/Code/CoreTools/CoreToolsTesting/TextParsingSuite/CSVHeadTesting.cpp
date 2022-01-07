@@ -12,9 +12,9 @@
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/CSVTypeConversion.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVTypeConversion.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
@@ -115,6 +115,7 @@ void CoreTools::CSVHeadTesting::CSVHeadTest()
         {
             ASSERT_TRUE(enumTypeName.empty());
             ASSERT_EQUAL(CSVTypeConversion::GetActualType(csvDataType), csvHead.GetActualType(i));
+            ASSERT_EQUAL(CSVTypeConversion::GetValueType(csvDataType), csvHead.GetValueType(i));
             ASSERT_EQUAL(CSVTypeConversion::GetActualType(csvDataType), csvHead.GetActualTypeByNameSpace(i));
         }
 
@@ -126,6 +127,9 @@ void CoreTools::CSVHeadTesting::CSVHeadTest()
 
         auto functionVariableName = csvHead.GetFunctionVariableName(i);
         ASSERT_FALSE(functionVariableName.empty());
+
+        auto functionName = csvHead.GetFunctionName(i);
+        ASSERT_FALSE(functionName.empty());
 
         ASSERT_TRUE(csvHead.HasDataType(csvDataType));
 

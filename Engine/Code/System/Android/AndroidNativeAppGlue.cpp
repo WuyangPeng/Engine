@@ -5,12 +5,12 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:29)
+///	引擎版本：0.8.0.0 (2021/12/13 23:24)
 
 #include "System/SystemExport.h"
 
 #include "Using/AndroidInputUsing.h"
-#include "Using/AndroidNativeAppGlueUsing.h" 
+#include "Using/AndroidNativeAppGlueUsing.h"
 #include "System/Windows/Flags/WindowsFlags.h"
 #include "System/Windows/Flags/WindowsPictorialFlags.h"
 #include "System/Windows/Using/WindowsRegistryUsing.h"
@@ -27,7 +27,7 @@ System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp,
                                                 AndroidApp::AppCmd appCmd,
                                                 AndroidApp::InputEvent inputEvent)
 {
-    NullFunction<AndroidApp*, String, AndroidApp::AppCmd, AndroidApp::InputEvent>(androidApp, appName, appCmd, inputEvent);
+    UnusedFunction(androidApp, appName, appCmd, inputEvent);
 
     return nullptr;
 }
@@ -140,31 +140,32 @@ System::WindowsLResult SYSTEM_CALL_BACK System::AndroidProcess(WindowsHWnd hwnd,
 {
     switch (message)
     {
-        case EnumCastUnderlying(AppCmd::InitWindow):
-        case EnumCastUnderlying(AppCmd::TermWindow):
-        case EnumCastUnderlying(AppCmd::WindowResized):
+        case EnumCastUnderlying(AppCmdType::InitWindow):
+            FALLTHROUGH;
+        case EnumCastUnderlying(AppCmdType::TermWindow):
+            FALLTHROUGH;
+        case EnumCastUnderlying(AppCmdType::WindowResized):
         {
             return AppCmd(hwnd, message, wParam, lParam);
         }
-
         case EnumCastUnderlying(AndroidKeyEventAction::Down):
+            FALLTHROUGH;
         case EnumCastUnderlying(AndroidKeyEventAction::Up):
         {
             return KeyInputEvent(hwnd, message, wParam, lParam);
         }
-
         case EnumCastUnderlying(AndroidMotionEventAction::Down):
+            FALLTHROUGH;
         case EnumCastUnderlying(AndroidMotionEventAction::Up):
+            FALLTHROUGH;
         case EnumCastUnderlying(AndroidMotionEventAction::Move):
         {
             return MotionInputEvent(hwnd, message, wParam, lParam);
         }
-
-        case EnumCastUnderlying(AppCmd::Destory):
+        case EnumCastUnderlying(AppCmdType::Destory):
         {
             return Destory(hwnd, message, wParam, lParam);
         }
-
         default:
         {
             return DefSystemWindowProc(hwnd, UnderlyingCastEnum<WindowsMessages>(message), wParam, lParam);
@@ -189,7 +190,7 @@ System::WindowsLResult System::KeyInputEvent(WindowsHWnd hwnd, WindowsUInt messa
 
     systemInputEvent(mainAndroidApp, &event);
 
-    NullFunction<WindowsHWnd, WindowsLParam>(hwnd, lParam);
+    UnusedFunction(hwnd, lParam);
 
     return 0;
 }
@@ -203,7 +204,7 @@ System::WindowsLResult System::MotionInputEvent(WindowsHWnd hwnd, WindowsUInt me
 
     systemInputEvent(mainAndroidApp, &event);
 
-    NullFunction<WindowsHWnd, WindowsWParam, WindowsLParam>(hwnd, wParam, lParam);
+    UnusedFunction(hwnd, wParam, lParam);
 
     return 0;
 }
@@ -218,7 +219,7 @@ System::WindowsLResult System::Destory(WindowsHWnd hwnd, WindowsUInt message, Wi
         }
     }
 
-    NullFunction<WindowsHWnd, WindowsUInt, WindowsWParam, WindowsLParam>(hwnd, message, wParam, lParam);
+    UnusedFunction(hwnd, message, wParam, lParam);
 
     return 0;
 }
@@ -231,7 +232,7 @@ void System::AppDummy() noexcept
 
 System::WindowsHWnd System::CreateVirtualWindow(AndroidApp* androidApp, const String& appName, AndroidApp::AppCmd appCmd, AndroidApp::InputEvent inputEvent)
 {
-    NullFunction<AndroidApp*, String, AndroidApp::AppCmd, AndroidApp::InputEvent>(androidApp, appName, appCmd, inputEvent);
+    UnusedFunction(androidApp, appName, appCmd, inputEvent);
 
     return nullptr;
 }

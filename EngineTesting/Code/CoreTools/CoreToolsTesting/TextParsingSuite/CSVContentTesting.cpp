@@ -10,9 +10,9 @@
 #include "CSVContentTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 

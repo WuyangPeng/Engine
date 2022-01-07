@@ -19,8 +19,7 @@
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 #include "CoreTools/ObjectSystems/InitTerm.h"
 
 using std::make_shared;
@@ -121,10 +120,8 @@ void Framework::MainFunctionHelperBase ::DoMainFunctionHelperInit(const Environm
 {
     InitUniqueIDManager();
     InitLog(environmentDirectory);
-    InitMemory();
     InitInitTerm();
-    InitEnvironment();
-    InitSmartPointer();
+    InitEnvironment(); 
     InitImpl(environmentDirectory);
 }
 
@@ -143,12 +140,6 @@ void Framework::MainFunctionHelperBase ::InitLog(const EnvironmentDirectory& env
     m_MainFunctionSchedule = MainFunctionSchedule::Log;
 }
 
-void Framework::MainFunctionHelperBase ::InitMemory() noexcept(CoreTools::g_MemoryNoexcept)
-{
-    MemoryCreate();
-    m_MainFunctionSchedule = MainFunctionSchedule::Memory;
-}
-
 void Framework::MainFunctionHelperBase ::InitInitTerm()
 {
     CoreTools::InitTerm::ExecuteInitializers();
@@ -159,12 +150,6 @@ void Framework::MainFunctionHelperBase ::InitEnvironment()
 {
     CoreTools::Environment::Create();
     m_MainFunctionSchedule = MainFunctionSchedule::Environment;
-}
-
-void Framework::MainFunctionHelperBase ::InitSmartPointer()
-{
-    CoreTools::SmartPointerManager::Create();
-    m_MainFunctionSchedule = MainFunctionSchedule::SmartPointer;
 }
 
 void Framework::MainFunctionHelperBase ::InitImpl(const EnvironmentDirectory& environmentDirectory)
@@ -180,7 +165,6 @@ void Framework::MainFunctionHelperBase ::MainFunctionHelperDestroy()
     DestroySmartPointer();
     DestroyEnvironment();
     DestroyInitTerm();
-    DestroyMemory();
     DestroyLog();
     DestroyUniqueIDManager();
 }
@@ -198,7 +182,6 @@ void Framework::MainFunctionHelperBase ::DestroySmartPointer() noexcept
 {
     if (MainFunctionSchedule::SmartPointer <= m_MainFunctionSchedule)
     {
-        CoreTools::SmartPointerManager::Destroy();
         m_MainFunctionSchedule = MainFunctionSchedule::Environment;
     }
 }
@@ -221,15 +204,6 @@ void Framework::MainFunctionHelperBase ::DestroyInitTerm()
     }
 }
 
-void Framework::MainFunctionHelperBase ::DestroyMemory() noexcept(CoreTools::g_MemoryNoexcept)
-{
-    if (MainFunctionSchedule::Memory <= m_MainFunctionSchedule)
-    {
-        MEMORY_DESTROY;
-        m_MainFunctionSchedule = MainFunctionSchedule::Log;
-    }
-}
-
 void Framework::MainFunctionHelperBase ::DestroyLog() noexcept
 {
     if (MainFunctionSchedule::Log <= m_MainFunctionSchedule)
@@ -246,14 +220,6 @@ void Framework::MainFunctionHelperBase ::DestroyUniqueIDManager() noexcept
         CoreTools::UniqueIDManager::Destroy();
         m_MainFunctionSchedule = MainFunctionSchedule::Failure;
     }
-}
-
-// private
-void Framework::MainFunctionHelperBase ::MemoryCreate() noexcept(CoreTools::g_MemoryNoexcept)
-{
-    // 要指定自己的分配器和释放器，
-    // 使用宏MEMORY_CREATE_WITH_ALLOCATOR_AND_DEALLOCATOR(allocator,deallocator)
-    MEMORY_CREATE;
 }
 
 // protected

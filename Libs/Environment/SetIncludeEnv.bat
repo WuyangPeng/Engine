@@ -30,7 +30,7 @@ setx  MysqlConnectorInclude "%cd%\..\mysql-connector-c++\include"
 
 echo FreeglutInclude = %FreeglutInclude%
 echo  %cd%
-setx  FreeglutInclude "%cd%\..\freeglut\include"
+setx  FreeglutInclude "%cd%\..\FreeGLUT\freeglut\freeglut\include"
 
 echo VisualLeakDetectorInclude = %VisualLeakDetectorInclude%
 echo  %cd%

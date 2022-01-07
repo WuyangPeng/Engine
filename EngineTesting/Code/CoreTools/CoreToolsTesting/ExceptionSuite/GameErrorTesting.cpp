@@ -48,7 +48,7 @@ void CoreTools::GameErrorTesting::LastErrorTest()
     ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());
     ASSERT_EQUAL(functionDescribed.GetLine(), gameError.GetLine());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(functionDescribed, gameError.GetFunctionDescribed());
+    ASSERT_EQUAL(functionDescribed, gameError.GetFunctionDescribed());
 
     ASSERT_ENUM_EQUAL(gameErrorType, gameError.GetErrorCode());
 
@@ -66,7 +66,7 @@ void CoreTools::GameErrorTesting::ComErrorTest()
     ASSERT_EQUAL(functionDescribed.GetFileName(), gameError.GetFileName());
     ASSERT_EQUAL(functionDescribed.GetLine(), gameError.GetLine());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(functionDescribed, gameError.GetFunctionDescribed());
+    ASSERT_EQUAL(functionDescribed, gameError.GetFunctionDescribed());
 
     ASSERT_ENUM_EQUAL(gameErrorType, gameError.GetErrorCode());
 

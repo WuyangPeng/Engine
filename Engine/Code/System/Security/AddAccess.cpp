@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 10:42)
+///	引擎版本：0.8.0.0 (2021/12/13 10:49)
 
 #include "System/SystemExport.h"
 
@@ -25,7 +25,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, SpecificAccess, SecuritySIDPtr>(acl, aceRevision, accessMask, sid);
+    UnusedFunction(acl, aceRevision, accessMask, sid);
 
     return false;
 
@@ -43,7 +43,7 @@ bool System::AddAccessAllowedAccessControlEntries(AccessCheckACLPtr acl, AccessC
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, ControlACEInheritance, SpecificAccess, SecuritySIDPtr>(acl, aceRevision, aceFlags, accessMask, sid);
+    UnusedFunction(acl, aceRevision, aceFlags, accessMask, sid);
 
     return false;
 
@@ -71,19 +71,13 @@ bool System::AddAccessAllowedObjectAccessControlEntries(AccessCheckACLPtr acl,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr,
-                 AccessControlListRevision,
-                 ControlACEInheritance,
-                 SpecificAccess,
-                 SystemGUID*,
-                 SystemGUID*,
-                 SecuritySIDPtr>(acl,
-                                 aceRevision,
-                                 aceFlags,
-                                 accessMask,
-                                 objectTypeGuid,
-                                 inheritedObjectTypeGuid,
-                                 sid);
+    UnusedFunction(acl,
+                   aceRevision,
+                   aceFlags,
+                   accessMask,
+                   objectTypeGuid,
+                   inheritedObjectTypeGuid,
+                   sid);
 
     return false;
 
@@ -101,7 +95,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, SpecificAccess, SecuritySIDPtr>(acl, aceRevision, accessMask, sid);
+    UnusedFunction(acl, aceRevision, accessMask, sid);
 
     return false;
 
@@ -117,7 +111,7 @@ bool System::AddAccessDeniedAccessControlEntries(AccessCheckACLPtr acl, AccessCo
         return false;
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, ControlACEInheritance, SpecificAccess, SecuritySIDPtr>(acl, aceRevision, aceFlags, accessMask, sid);
+    UnusedFunction(acl, aceRevision, aceFlags, accessMask, sid);
 
     return false;
 
@@ -145,19 +139,13 @@ bool System::AddAccessDeniedObjectAccessControlEntries(AccessCheckACLPtr acl,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr,
-                 AccessControlListRevision,
-                 ControlACEInheritance,
-                 SpecificAccess,
-                 SystemGUID*,
-                 SystemGUID*,
-                 SecuritySIDPtr>(acl,
-                                 aceRevision,
-                                 aceFlags,
-                                 accessMask,
-                                 objectTypeGuid,
-                                 inheritedObjectTypeGuid,
-                                 sid);
+    UnusedFunction(acl,
+                   aceRevision,
+                   aceFlags,
+                   accessMask,
+                   objectTypeGuid,
+                   inheritedObjectTypeGuid,
+                   sid);
 
     return false;
 
@@ -175,7 +163,7 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl, AccessCon
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, AccessControlListRevision, SpecificAccess, SecuritySIDPtr, bool, bool>(acl, aceRevision, accessMask, sid, auditSuccess, auditFailure);
+    UnusedFunction(acl, aceRevision, accessMask, sid, auditSuccess, auditFailure);
 
     return false;
 
@@ -209,19 +197,13 @@ bool System::AddAuditAccessAccessControlEntries(AccessCheckACLPtr acl,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr,
-                 AccessControlListRevision,
-                 ControlACEInheritance,
-                 SpecificAccess,
-                 SecuritySIDPtr,
-                 bool,
-                 bool>(acl,
-                       aceRevision,
-                       aceFlags,
-                       accessMask,
-                       sid,
-                       auditSuccess,
-                       auditFailure);
+    UnusedFunction(acl,
+                   aceRevision,
+                   aceFlags,
+                   accessMask,
+                   sid,
+                   auditSuccess,
+                   auditFailure);
 
     return false;
 
@@ -259,23 +241,15 @@ bool System::AddAuditAccessObjectAccessControlEntries(AccessCheckACLPtr acl,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr,
-                 AccessControlListRevision,
-                 ControlACEInheritance,
-                 SpecificAccess,
-                 SystemGUID*,
-                 SystemGUID*,
-                 SecuritySIDPtr,
-                 bool,
-                 bool>(acl,
-                       aceRevision,
-                       aceFlags,
-                       accessMask,
-                       objectTypeGuid,
-                       inheritedObjectTypeGuid,
-                       sid,
-                       auditSuccess,
-                       auditFailure);
+    UnusedFunction(acl,
+                   aceRevision,
+                   aceFlags,
+                   accessMask,
+                   objectTypeGuid,
+                   inheritedObjectTypeGuid,
+                   sid,
+                   auditSuccess,
+                   auditFailure);
 
     return false;
 

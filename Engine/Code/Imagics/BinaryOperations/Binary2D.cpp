@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/30 14:51)
 
 #include "Imagics/ImagicsExport.h"
@@ -43,8 +43,7 @@
 // One-pixel thick structures are treated as having more thickness in the
 // sense that they are traversed twice, once per "side".
 
-void Imagics::Binary2D
-	::GetBoundaries(const ImageInt2D& image, std::vector<IndexArray>& boundaries)
+void Imagics::Binary2D ::GetBoundaries(const ImageInt2D& image, std::vector<IndexArray>& boundaries)
 {
     // Background pixels are 0 and foreground pixels are 1.  Set the interior
     // foreground pixels to 2 and the boundary pixels to 3.  A 3 indicates
@@ -60,8 +59,7 @@ void Imagics::Binary2D
         {
             if (image(x, y) != 0)
             {
-                if (image(x-1, y) != 0 && image(x+1, y) != 0
-                &&  image(x, y-1) != 0 && image(x, y+1) != 0)
+                if (image(x - 1, y) != 0 && image(x + 1, y) != 0 && image(x, y - 1) != 0 && image(x, y + 1) != 0)
                 {
                     image(x, y) = 2;
                 }
@@ -87,12 +85,11 @@ void Imagics::Binary2D
     }
 }
 
-void Imagics::Binary2D
-	::ExtractBoundary(int x0, int y0,const ImageInt2D& image,  IndexArray& boundary)
+void Imagics::Binary2D ::ExtractBoundary(int x0, int y0, const ImageInt2D& image, IndexArray& boundary)
 {
     // Incremental 2D offsets for 8-connected neighborhood of (x,y).
-    const int dx[8] = { -1,  0, +1, +1, +1,  0, -1, -1 };
-    const int dy[8] = { -1, -1, -1,  0, +1, +1, +1,  0 };
+    const int dx[8] = { -1, 0, +1, +1, +1, 0, -1, -1 };
+    const int dy[8] = { -1, -1, -1, 0, +1, +1, +1, 0 };
 
     // Insert the initial boundary point.
     boundary.push_back(image.GetIndex(x0, y0));
@@ -155,40 +152,34 @@ void Imagics::Binary2D
     }
 }
 
-
-
 // Connected component labeling.  The algorithm is simply a nonrecursive
 // depth-first search of the graph.
 
-void Imagics::Binary2D
-	::GetComponents8(const ImageInt2D& image, bool storeZeros,std::vector<IndexArray>& components)
+void Imagics::Binary2D ::GetComponents8(const ImageInt2D& image, bool storeZeros, std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 8-connected neighbors.  Store +1 and -1
     // first to be cache friendly during the depth-first search.
     const int bound0 = image.GetBound(0);
-    const int delta[8] =
-    {
+    const int delta[8] = {
         +1,
         -1,
         -1 - bound0,
-           - bound0,
+        -bound0,
         +1 - bound0,
         -1 + bound0,
-           + bound0,
+        +bound0,
         +1 + bound0
     };
 
     GetComponents(8, delta, storeZeros, image, components);
 }
 
-void Imagics::Binary2D
-	::GetComponents4(const ImageInt2D& image, bool storeZeros,  std::vector<IndexArray>& components)
+void Imagics::Binary2D ::GetComponents4(const ImageInt2D& image, bool storeZeros, std::vector<IndexArray>& components)
 {
     // Incremental 1D offsets for 8-connected neighbors.  Store +1 and -1
     // first to be cache friendly during the depth-first search.
     const int bound0 = image.GetBound(0);
-    const int delta[4] =
-    {
+    const int delta[4] = {
         +1,
         -1,
         -bound0,
@@ -198,63 +189,65 @@ void Imagics::Binary2D
     GetComponents(4, delta, storeZeros, image, components);
 }
 
-void Imagics::Binary2D
-	::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, const ImageInt2D& image, std::vector<IndexArray>& components)
+void Imagics::Binary2D ::GetComponents(const int numNeighbors, const int delta[], bool storeZeros, const ImageInt2D& image, std::vector<IndexArray>& components)
 {
+    delta;
+    numNeighbors;
     const int numPixels = image.GetQuantity();
-    int* numElements = NEW1<int>(numPixels);
-    int i = 0, numComponents = 0, label = 2;
-	int* vstack = NEW1<int>(numPixels);
+    //  int* numElements = NEW1<int>(numPixels);
+    int i = 0;
+    const auto numComponents = 0, label = 2;
+    //int* vstack = NEW1<int>(numPixels);
     for (i = 0; i < numPixels; ++i)
     {
         if (image[i] == 1)
         {
-            int top = -1;
-            vstack[++top] = i;
+            //   int top = -1;
+            //   vstack[++top] = i;
 
-            int& count = numElements[numComponents + 1];
-            count = 0;
-            while (top >= 0)
-            {
-                const int v = vstack[top];
-                image[v] = -1;
-                int j;
-                for (j = 0; j < numNeighbors; ++j)
-                {
-                    const int adj = v + delta[j];
-                    if (image[adj] == 1)
-                    {
-                        vstack[++top] = adj;
-                        break;
-                    }
-                }
-                if (j == numNeighbors)
-                {
-                    image[v] = label;
-                    ++count;
-                    --top;
-                }
-            }
-
-            ++numComponents;
-            ++label;
+            //             int& count = numElements[numComponents + 1];
+            //             count = 0;
+            //             while (top >= 0)
+            //             {
+            //                 const int v = vstack[top];
+            //                 image[v] = -1;
+            //                 int j;
+            //                 for (j = 0; j < numNeighbors; ++j)
+            //                 {
+            //                     const int adj = v + delta[j];
+            //                     if (image[adj] == 1)
+            //                     {
+            //                         vstack[++top] = adj;
+            //                         break;
+            //                     }
+            //                 }
+            //                 if (j == numNeighbors)
+            //                 {
+            //                     image[v] = label;
+            //                     ++count;
+            //                     --top;
+            //                 }
+            //             }
+            //
+            //             ++numComponents;
+            //             ++label;
         }
     }
-    DELETE1(vstack);
+    //  DELETE1(vstack);
 
     if (storeZeros)
     {
-        if (numComponents > 0)
+        if constexpr (numComponents > 0)
         {
             int numZeros = numPixels;
             components.resize(numComponents + 1);
-            for (i = 1; i <= numComponents; ++i)
-            {
-                const int count = numElements[i];
-                components[i].resize(count);
-                numZeros -= count;
-                numElements[i] = 0;
-            }
+            //             for (i = 1; i <= numComponents; ++i)
+            //             {
+            //                 const int count = numElements[i];
+            //                 components[i].resize(count);
+            //                 numZeros -= count;
+            //                 numElements[i] = 0;
+            //             }
             components[0].resize(numZeros);
             numZeros = 0;
             int* zeros = &components[0][0];
@@ -266,9 +259,9 @@ void Imagics::Binary2D
                 {
                     // Labels started at 2 to support the depth-first search,
                     // so they need to be decremented for the correct labels.
-                    image[i] = --value;
-                    components[value][numElements[value]] = i;
-                    ++numElements[value];
+                    //                     image[i] = --value;
+                    //                     components[value][numElements[value]] = i;
+                    //                     ++numElements[value];
                 }
                 else
                 {
@@ -289,13 +282,13 @@ void Imagics::Binary2D
     }
     else
     {
-        if (numComponents > 0)
+        if constexpr (numComponents > 0)
         {
             components.resize(numComponents + 1);
             for (i = 1; i <= numComponents; ++i)
             {
-                components[i].resize(numElements[i]);
-                numElements[i] = 0;
+                //                 components[i].resize(numElements[i]);
+                //                 numElements[i] = 0;
             }
 
             for (i = 0; i < numPixels; ++i)
@@ -306,16 +299,14 @@ void Imagics::Binary2D
                     // Labels started at 2 to support the depth-first search,
                     // so they need to be decremented for the correct labels.
                     image[i] = --value;
-                    components[value][numElements[value]] = i;
-                    ++numElements[value];
+                    //                     components[value][numElements[value]] = i;
+                    //                     ++numElements[value];
                 }
             }
         }
     }
-	DELETE1(numElements);
+    //	DELETE1(numElements);
 }
-
-
 
 // L1 Distance Transform.
 //
@@ -323,8 +314,7 @@ void Imagics::Binary2D
 // North, South, East, and West neighbors are 1 unit away.  NorthWest,
 // NorthEast, SouthWest, and SouthEast neighbors are 2 units away.
 
-void Imagics::Binary2D
-	::GetL1Distance(const ImageInt2D& image, int& maxDistance) noexcept
+void Imagics::Binary2D ::GetL1Distance(const ImageInt2D& image, int& maxDistance) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -345,7 +335,7 @@ void Imagics::Binary2D
             {
                 if (image(x, y) == distance)
                 {
-                    if (image(x-1, y) >= distance  &&  image(x+1, y) >= distance  &&  image(x, y-1) >= distance &&  image(x, y+1) >= distance)
+                    if (image(x - 1, y) >= distance && image(x + 1, y) >= distance && image(x, y - 1) >= distance && image(x, y + 1) >= distance)
                     {
                         image(x, y) = distanceP1;
                         changeMade = true;
@@ -356,8 +346,6 @@ void Imagics::Binary2D
     }
     maxDistance = distance;
 }
-
-
 
 // L2 Distance Transform (Euclidean Distance Transform)
 //
@@ -377,10 +365,9 @@ void Imagics::Binary2D
 // extend the search region.  Since our algorithm for L2Checking the exactness
 // of each neighborhood is on the order N^4, we have only gone to N=100.  In
 // theory, you could make this large enough to get all distances exact.  We
-// have implemented the algorithm to get all distances < 100 to be exact. 
+// have implemented the algorithm to get all distances < 100 to be exact.
 
-void Imagics::Binary2D
-	::GetL2Distance(const ImageInt2D& image, double& maxDistance, const  ImageDouble2D& transform)
+void Imagics::Binary2D ::GetL2Distance(const ImageInt2D& image, double& maxDistance, const ImageDouble2D& transform)
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -412,8 +399,8 @@ void Imagics::Binary2D
     }
 
     constexpr int K1 = 1;
-    constexpr int K2 = 169;   // 13^2
-    constexpr int K3 = 961;   // 31^2
+    constexpr int K2 = 169;  // 13^2
+    constexpr int K3 = 961;  // 31^2
     constexpr int K4 = 2401;  // 49^2
     constexpr int K5 = 5184;  // 72^2
 
@@ -424,40 +411,40 @@ void Imagics::Binary2D
         {
             distance = dist(x, y);
             if (distance > K1)
-            { 
-                L2Check(x, y, -1,  0, xNear, yNear, dist); 
-                L2Check(x, y, -1, -1, xNear, yNear, dist); 
-                L2Check(x, y,  0, -1, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -1, 0, xNear, yNear, dist);
+                L2Check(x, y, -1, -1, xNear, yNear, dist);
+                L2Check(x, y, 0, -1, xNear, yNear, dist);
             }
             if (distance > K2)
-            { 
-                L2Check(x, y, -2, -1, xNear, yNear, dist); 
-                L2Check(x, y, -1, -2, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -2, -1, xNear, yNear, dist);
+                L2Check(x, y, -1, -2, xNear, yNear, dist);
             }
             if (distance > K3)
-            { 
-                L2Check(x, y, -3, -1, xNear, yNear, dist); 
-                L2Check(x, y, -3, -2, xNear, yNear, dist); 
-                L2Check(x, y, -2, -3, xNear, yNear, dist); 
-                L2Check(x, y, -1, -3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -3, -1, xNear, yNear, dist);
+                L2Check(x, y, -3, -2, xNear, yNear, dist);
+                L2Check(x, y, -2, -3, xNear, yNear, dist);
+                L2Check(x, y, -1, -3, xNear, yNear, dist);
             }
             if (distance > K4)
-            { 
-                L2Check(x, y, -4, -1, xNear, yNear, dist); 
-                L2Check(x, y, -4, -3, xNear, yNear, dist); 
-                L2Check(x, y, -3, -4, xNear, yNear, dist); 
-                L2Check(x, y, -1, -4, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -4, -1, xNear, yNear, dist);
+                L2Check(x, y, -4, -3, xNear, yNear, dist);
+                L2Check(x, y, -3, -4, xNear, yNear, dist);
+                L2Check(x, y, -1, -4, xNear, yNear, dist);
             }
             if (distance > K5)
-            { 
-                L2Check(x, y, -5, -1, xNear, yNear, dist); 
-                L2Check(x, y, -5, -2, xNear, yNear, dist); 
-                L2Check(x, y, -5, -3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -5, -1, xNear, yNear, dist);
+                L2Check(x, y, -5, -2, xNear, yNear, dist);
+                L2Check(x, y, -5, -3, xNear, yNear, dist);
                 L2Check(x, y, -5, -4, xNear, yNear, dist);
-                L2Check(x, y, -4, -5, xNear, yNear, dist); 
-                L2Check(x, y, -2, -5, xNear, yNear, dist); 
-                L2Check(x, y, -3, -5, xNear, yNear, dist); 
-                L2Check(x, y, -1, -5, xNear, yNear, dist); 
+                L2Check(x, y, -4, -5, xNear, yNear, dist);
+                L2Check(x, y, -2, -5, xNear, yNear, dist);
+                L2Check(x, y, -3, -5, xNear, yNear, dist);
+                L2Check(x, y, -1, -5, xNear, yNear, dist);
             }
         }
     }
@@ -469,40 +456,40 @@ void Imagics::Binary2D
         {
             distance = dist(x, y);
             if (distance > K1)
-            { 
-                L2Check(x, y, 1, 0, xNear, yNear, dist); 
-                L2Check(x, y, 1, 1, xNear, yNear, dist); 
-                L2Check(x, y, 0, 1, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 1, 0, xNear, yNear, dist);
+                L2Check(x, y, 1, 1, xNear, yNear, dist);
+                L2Check(x, y, 0, 1, xNear, yNear, dist);
             }
             if (distance > K2)
-            { 
-                L2Check(x, y, 2, 1, xNear, yNear, dist); 
-                L2Check(x, y, 1, 2, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 2, 1, xNear, yNear, dist);
+                L2Check(x, y, 1, 2, xNear, yNear, dist);
             }
             if (distance > K3)
-            { 
-                L2Check(x, y, 3, 1, xNear, yNear, dist); 
-                L2Check(x, y, 3, 2, xNear, yNear, dist); 
-                L2Check(x, y, 2, 3, xNear, yNear, dist); 
-                L2Check(x, y, 1, 3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 3, 1, xNear, yNear, dist);
+                L2Check(x, y, 3, 2, xNear, yNear, dist);
+                L2Check(x, y, 2, 3, xNear, yNear, dist);
+                L2Check(x, y, 1, 3, xNear, yNear, dist);
             }
             if (distance > K4)
-            { 
-                L2Check(x, y, 4, 1, xNear, yNear, dist); 
-                L2Check(x, y, 4, 3, xNear, yNear, dist); 
-                L2Check(x, y, 3, 4, xNear, yNear, dist); 
-                L2Check(x, y, 1, 4, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 4, 1, xNear, yNear, dist);
+                L2Check(x, y, 4, 3, xNear, yNear, dist);
+                L2Check(x, y, 3, 4, xNear, yNear, dist);
+                L2Check(x, y, 1, 4, xNear, yNear, dist);
             }
             if (distance > K5)
-            { 
-                L2Check(x, y, 5, 1, xNear, yNear, dist); 
-                L2Check(x, y, 5, 2, xNear, yNear, dist); 
-                L2Check(x, y, 5, 3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 5, 1, xNear, yNear, dist);
+                L2Check(x, y, 5, 2, xNear, yNear, dist);
+                L2Check(x, y, 5, 3, xNear, yNear, dist);
                 L2Check(x, y, 5, 4, xNear, yNear, dist);
-                L2Check(x, y, 4, 5, xNear, yNear, dist); 
-                L2Check(x, y, 2, 5, xNear, yNear, dist); 
-                L2Check(x, y, 3, 5, xNear, yNear, dist); 
-                L2Check(x, y, 1, 5, xNear, yNear, dist); 
+                L2Check(x, y, 4, 5, xNear, yNear, dist);
+                L2Check(x, y, 2, 5, xNear, yNear, dist);
+                L2Check(x, y, 3, 5, xNear, yNear, dist);
+                L2Check(x, y, 1, 5, xNear, yNear, dist);
             }
         }
     }
@@ -514,40 +501,40 @@ void Imagics::Binary2D
         {
             distance = dist(x, y);
             if (distance > K1)
-            { 
-                L2Check(x, y, -1, 0, xNear, yNear, dist); 
-                L2Check(x, y, -1, 1, xNear, yNear, dist); 
-                L2Check(x, y,  0, 1, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -1, 0, xNear, yNear, dist);
+                L2Check(x, y, -1, 1, xNear, yNear, dist);
+                L2Check(x, y, 0, 1, xNear, yNear, dist);
             }
             if (distance > K2)
-            { 
-                L2Check(x, y, -2, 1, xNear, yNear, dist); 
-                L2Check(x, y, -1, 2, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -2, 1, xNear, yNear, dist);
+                L2Check(x, y, -1, 2, xNear, yNear, dist);
             }
             if (distance > K3)
-            { 
-                L2Check(x, y, -3, 1, xNear, yNear, dist); 
-                L2Check(x, y, -3, 2, xNear, yNear, dist); 
-                L2Check(x, y, -2, 3, xNear, yNear, dist); 
-                L2Check(x, y, -1, 3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -3, 1, xNear, yNear, dist);
+                L2Check(x, y, -3, 2, xNear, yNear, dist);
+                L2Check(x, y, -2, 3, xNear, yNear, dist);
+                L2Check(x, y, -1, 3, xNear, yNear, dist);
             }
             if (distance > K4)
-            { 
-                L2Check(x, y, -4, 1, xNear, yNear, dist); 
-                L2Check(x, y, -4, 3, xNear, yNear, dist); 
-                L2Check(x, y, -3, 4, xNear, yNear, dist); 
-                L2Check(x, y, -1, 4, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -4, 1, xNear, yNear, dist);
+                L2Check(x, y, -4, 3, xNear, yNear, dist);
+                L2Check(x, y, -3, 4, xNear, yNear, dist);
+                L2Check(x, y, -1, 4, xNear, yNear, dist);
             }
             if (distance > K5)
-            { 
-                L2Check(x, y, -5, 1, xNear, yNear, dist); 
-                L2Check(x, y, -5, 2, xNear, yNear, dist); 
-                L2Check(x, y, -5, 3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, -5, 1, xNear, yNear, dist);
+                L2Check(x, y, -5, 2, xNear, yNear, dist);
+                L2Check(x, y, -5, 3, xNear, yNear, dist);
                 L2Check(x, y, -5, 4, xNear, yNear, dist);
-                L2Check(x, y, -4, 5, xNear, yNear, dist); 
-                L2Check(x, y, -2, 5, xNear, yNear, dist); 
-                L2Check(x, y, -3, 5, xNear, yNear, dist); 
-                L2Check(x, y, -1, 5, xNear, yNear, dist); 
+                L2Check(x, y, -4, 5, xNear, yNear, dist);
+                L2Check(x, y, -2, 5, xNear, yNear, dist);
+                L2Check(x, y, -3, 5, xNear, yNear, dist);
+                L2Check(x, y, -1, 5, xNear, yNear, dist);
             }
         }
     }
@@ -559,40 +546,40 @@ void Imagics::Binary2D
         {
             distance = dist(x, y);
             if (distance > K1)
-            { 
-                L2Check(x, y, 1,  0, xNear, yNear, dist); 
-                L2Check(x, y, 1, -1, xNear, yNear, dist); 
-                L2Check(x, y, 0, -1, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 1, 0, xNear, yNear, dist);
+                L2Check(x, y, 1, -1, xNear, yNear, dist);
+                L2Check(x, y, 0, -1, xNear, yNear, dist);
             }
             if (distance > K2)
-            { 
-                L2Check(x, y, 2, -1, xNear, yNear, dist); 
-                L2Check(x, y, 1, -2, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 2, -1, xNear, yNear, dist);
+                L2Check(x, y, 1, -2, xNear, yNear, dist);
             }
             if (distance > K3)
-            { 
-                L2Check(x, y, 3, -1, xNear, yNear, dist); 
-                L2Check(x, y, 3, -2, xNear, yNear, dist); 
-                L2Check(x, y, 2, -3, xNear, yNear, dist); 
-                L2Check(x, y, 1, -3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 3, -1, xNear, yNear, dist);
+                L2Check(x, y, 3, -2, xNear, yNear, dist);
+                L2Check(x, y, 2, -3, xNear, yNear, dist);
+                L2Check(x, y, 1, -3, xNear, yNear, dist);
             }
             if (distance > K4)
-            { 
-                L2Check(x, y, 4, -1, xNear, yNear, dist); 
-                L2Check(x, y, 4, -3, xNear, yNear, dist); 
-                L2Check(x, y, 3, -4, xNear, yNear, dist); 
-                L2Check(x, y, 1, -4, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 4, -1, xNear, yNear, dist);
+                L2Check(x, y, 4, -3, xNear, yNear, dist);
+                L2Check(x, y, 3, -4, xNear, yNear, dist);
+                L2Check(x, y, 1, -4, xNear, yNear, dist);
             }
             if (distance > K5)
-            { 
-                L2Check(x, y, 5, -1, xNear, yNear, dist); 
-                L2Check(x, y, 5, -2, xNear, yNear, dist); 
-                L2Check(x, y, 5, -3, xNear, yNear, dist); 
+            {
+                L2Check(x, y, 5, -1, xNear, yNear, dist);
+                L2Check(x, y, 5, -2, xNear, yNear, dist);
+                L2Check(x, y, 5, -3, xNear, yNear, dist);
                 L2Check(x, y, 5, -4, xNear, yNear, dist);
-                L2Check(x, y, 4, -5, xNear, yNear, dist); 
-                L2Check(x, y, 2, -5, xNear, yNear, dist); 
-                L2Check(x, y, 3, -5, xNear, yNear, dist); 
-                L2Check(x, y, 1, -5, xNear, yNear, dist); 
+                L2Check(x, y, 4, -5, xNear, yNear, dist);
+                L2Check(x, y, 2, -5, xNear, yNear, dist);
+                L2Check(x, y, 3, -5, xNear, yNear, dist);
+                L2Check(x, y, 1, -5, xNear, yNear, dist);
             }
         }
     }
@@ -617,14 +604,14 @@ void Imagics::Binary2D ::L2Check(int x, int y, int dx, int dy, const ImageInt2D&
     const int bound0 = dist.GetBound(0);
     const int bound1 = dist.GetBound(1);
     const int xp = x + dx;
-        const int yp = y + dy;
+    const int yp = y + dy;
     if (0 <= xp && xp < bound0 && 0 <= yp && yp < bound1)
     {
         if (dist(xp, yp) < dist(x, y))
         {
             const int dx0 = xNear(xp, yp) - x;
             const int dy0 = yNear(xp, yp) - y;
-            const int newDist = dx0*dx0 + dy0*dy0;
+            const int newDist = dx0 * dx0 + dy0 * dy0;
             if (newDist < dist(x, y))
             {
                 xNear(x, y) = xNear(xp, yp);
@@ -635,16 +622,13 @@ void Imagics::Binary2D ::L2Check(int x, int y, int dx, int dy, const ImageInt2D&
     }
 }
 
-
-
 // Skeletonization.
 //
 // Boundary pixels are trimmed from the object one layer at a time based on
 // their adjacency to interior pixels.  At each step the connectivity and
 // cycles of the object are preserved.
 
-void Imagics::Binary2D
-	::GetSkeleton(const ImageInt2D& image) noexcept
+void Imagics::Binary2D ::GetSkeleton(const ImageInt2D& image) noexcept
 {
     const int bound0 = image.GetBound(0);
     const int bound1 = image.GetBound(1);
@@ -762,25 +746,25 @@ void Imagics::Binary2D
 
 bool Imagics::Binary2D ::Interior4(const ImageInt2D& image, int x, int y) noexcept
 {
-    return image(x-1, y) != 0  && image(x+1, y) != 0  && image(x, y-1) != 0 && image(x, y+1) != 0;
+    return image(x - 1, y) != 0 && image(x + 1, y) != 0 && image(x, y - 1) != 0 && image(x, y + 1) != 0;
 }
 
 bool Imagics::Binary2D ::Interior3(const ImageInt2D& image, int x, int y) noexcept
 {
     int numNeighbors = 0;
-    if (image(x-1, y) != 0)
+    if (image(x - 1, y) != 0)
     {
         ++numNeighbors;
     }
-    if (image(x+1, y) != 0)
+    if (image(x + 1, y) != 0)
     {
         ++numNeighbors;
     }
-    if (image(x, y-1) != 0)
+    if (image(x, y - 1) != 0)
     {
         ++numNeighbors;
     }
-    if (image(x, y+1) != 0)
+    if (image(x, y + 1) != 0)
     {
         ++numNeighbors;
     }
@@ -789,10 +773,10 @@ bool Imagics::Binary2D ::Interior3(const ImageInt2D& image, int x, int y) noexce
 
 bool Imagics::Binary2D ::Interior2(const ImageInt2D& image, int x, int y) noexcept
 {
-    const bool b1 = (image(x, y-1) != 0);
-    const bool b3 = (image(x+1, y) != 0);
-    const bool b5 = (image(x, y+1) != 0);
-    const bool b7 = (image(x-1, y) != 0);
+    const bool b1 = (image(x, y - 1) != 0);
+    const bool b3 = (image(x + 1, y) != 0);
+    const bool b5 = (image(x, y + 1) != 0);
+    const bool b7 = (image(x - 1, y) != 0);
     return (b1 && b3) || (b3 && b5) || (b5 && b7) || (b7 && b1);
 }
 
@@ -827,35 +811,35 @@ bool Imagics::Binary2D ::IsArticulation(const ImageInt2D& image, int x, int y) n
     // Converts 8 neighbors of pixel (x,y) to an 8-bit value, bit = 1 iff
     // pixel is set.
     int byteMask = 0;
-    if (image(x-1, y-1) != 0)
+    if (image(x - 1, y - 1) != 0)
     {
         byteMask |= 0x01;
     }
-    if (image(x, y-1) != 0)
+    if (image(x, y - 1) != 0)
     {
         byteMask |= 0x02;
     }
-    if (image(x+1, y-1) != 0)
+    if (image(x + 1, y - 1) != 0)
     {
         byteMask |= 0x04;
     }
-    if (image(x+1, y) != 0)
+    if (image(x + 1, y) != 0)
     {
         byteMask |= 0x08;
     }
-    if (image(x+1, y+1) != 0)
+    if (image(x + 1, y + 1) != 0)
     {
         byteMask |= 0x10;
     }
-    if (image(x, y+1) != 0)
+    if (image(x, y + 1) != 0)
     {
         byteMask |= 0x20;
     }
-    if (image(x-1, y+1) != 0)
+    if (image(x - 1, y + 1) != 0)
     {
         byteMask |= 0x40;
     }
-    if (image(x-1, y) != 0)
+    if (image(x - 1, y) != 0)
     {
         byteMask |= 0x80;
     }
@@ -872,11 +856,11 @@ bool Imagics::Binary2D ::ClearInteriorAdjacent(const ImageInt2D& image, int valu
     {
         for (int x = 0; x < bound0; x++)
         {
-            if (image(x,y) == 1)
+            if (image(x, y) == 1)
             {
-                const bool interiorAdjacent =  image(x-1, y-1) == value || image(x  , y-1) == value || image(x+1, y-1) == value ||
-										 image(x+1, y  ) == value || image(x+1, y+1) == value || image(x  , y+1) == value ||
-										 image(x-1, y+1) == value || image(x-1, y  ) == value;
+                const bool interiorAdjacent = image(x - 1, y - 1) == value || image(x, y - 1) == value || image(x + 1, y - 1) == value ||
+                                              image(x + 1, y) == value || image(x + 1, y + 1) == value || image(x, y + 1) == value ||
+                                              image(x - 1, y + 1) == value || image(x - 1, y) == value;
 
                 if (interiorAdjacent && !IsArticulation(image, x, y))
                 {
@@ -889,25 +873,23 @@ bool Imagics::Binary2D ::ClearInteriorAdjacent(const ImageInt2D& image, int valu
     return noRemoval;
 }
 
-const int Imagics::Binary2D
-	::msArticulation[256] =
-{
-    0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,
-    0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,
-    0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,
-    0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,
-    0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-    0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,
-    0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,0,
-    0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,
-    1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,
-    0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,1,1,0,0,1,1,0,0,1,1,0,0,
-    1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,
-    0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0
+const int Imagics::Binary2D ::msArticulation[256] = {
+    0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
 #include STSTEM_WARNING_POP

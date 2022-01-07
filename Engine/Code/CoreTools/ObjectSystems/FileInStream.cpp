@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 15:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,7 +26,7 @@ using std::make_shared;
 using std::string;
 
 CoreTools::FileInStream::FileInStream(const String& fileName)
-    : m_InTopLevel{ DisableNotThrow::Disable }
+    : inTopLevel{ InTopLevel::Create() }
 {
     Load(fileName);
 
@@ -49,7 +49,7 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
         THROW_EXCEPTION(fileName + SYSTEM_TEXT("版本字符串不存在或者存储的版本字符串不够大"s));
     }
 
-    FileBufferSharedPtr bufferInformation{ std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize)) };
+    auto bufferInformation = std::make_shared<FileBuffer>(boost::numeric_cast<size_t>(readSize));
 
     manager.Read(CoreTools::GetStreamSize<char>(), bufferInformation->GetSize(), bufferInformation->GetBufferBegin());
 
@@ -64,7 +64,7 @@ void CoreTools::FileInStream::Load(const System::String& fileName)
     // 从缓冲区重构场景图。
     BufferInStream stream{ bufferInformation, boost::numeric_cast<int>(length) };
 
-    m_InTopLevel = stream.GetTopLevel();
+    inTopLevel = stream.GetTopLevel();
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FileInStream)
@@ -73,5 +73,5 @@ CoreTools::InTopLevel CoreTools::FileInStream::GetInTopLevel() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_InTopLevel;
+    return inTopLevel;
 }

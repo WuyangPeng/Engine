@@ -50,10 +50,10 @@ void NURBSCurve3<Real>::CreateControl (const Vector3D<Real>* ctrlPoint,const Rea
 {
 	auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
 
-    mCtrlPoint = NEW1<Vector3D<Real> >(newNumCtrlPoints);
+    mCtrlPoint = nullptr;  // NEW1<Vector3D<Real> >(newNumCtrlPoints);
     memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector3D<Real>));
 
-    mCtrlWeight = NEW1<Real>(newNumCtrlPoints);
+    mCtrlWeight = nullptr;  //  NEW1<Real>(newNumCtrlPoints);
     memcpy(mCtrlWeight, ctrlWeight, mNumCtrlPoints*sizeof(Real));
 
     for (auto i = 0; i < mReplicate; ++i)

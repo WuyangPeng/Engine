@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:48)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,7 +17,6 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 using std::make_shared;
-using std::ostream;
 using std::string;
 
 CoreTools::Suite::Suite(const string& name, const OStreamShared& streamShared, bool printRunUnitTest)
@@ -43,7 +42,7 @@ CoreTools::Suite& CoreTools::Suite::operator=(Suite&& rhs) noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Suite)
 
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetName, const string)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, GetName, string)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetPassedNumber, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetFailedNumber, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Suite, GetErrorNumber, int)
@@ -54,7 +53,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ClearUnitTestCollectio
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, RunUnitTest, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, Suite, ResetTestData, void)
 
-void CoreTools::Suite::AddTest(const UnitTestPtr& unitTest)
+void CoreTools::Suite::AddTest(const UnitTestSharedPtr& unitTest)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
     CORE_TOOLS_ASSERTION_0(unitTest != nullptr, "指针无效");

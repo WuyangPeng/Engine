@@ -36,25 +36,25 @@ Rendering::MaterialImpl
 
 CLASS_INVARIANT_STUB_DEFINE(Rendering, MaterialImpl)
 
-void Rendering::MaterialImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::MaterialImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->ReadAggregate(m_Emissive);
-	source->ReadAggregate(m_Ambient);
-	source->ReadAggregate(m_Diffuse);
-	source->ReadAggregate(m_Specular);
+	source.ReadAggregate(m_Emissive);
+	source.ReadAggregate(m_Ambient);
+	source.ReadAggregate(m_Diffuse);
+	source.ReadAggregate(m_Specular);
 }
 
 void Rendering::MaterialImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->WriteAggregate(m_Emissive);
-        target->WriteAggregate(m_Ambient);
-        target->WriteAggregate(m_Diffuse);
-        target->WriteAggregate(m_Specular);
+	target.WriteAggregate(m_Emissive);
+        target.WriteAggregate(m_Ambient);
+        target.WriteAggregate(m_Diffuse);
+        target.WriteAggregate(m_Specular);
 }
 
 int Rendering::MaterialImpl

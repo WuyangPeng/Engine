@@ -16,17 +16,60 @@ namespace BookExperience
     {
         namespace Chapter3
         {
-            class Terms7Example;
-            class Terms8Example;
-            class Terms9Example;
-            class Terms10Example;
-            class Terms11Example;
-            class Terms12Example;
-            class Terms13Example;
-            class Terms14Example;
-            class Terms15Example;
-            class Terms16Example;
-            class Terms17Example;
+            namespace Terms7
+            {
+                class Terms7Example;
+            }
+
+            namespace Terms8
+            {
+                class Terms8Example;
+            }
+
+            namespace Terms9
+            {
+                class Terms9Example;
+            }
+
+            namespace Terms10
+            {
+                class Terms10Example;
+            }
+
+            namespace Terms11
+            {
+                class Terms11Example;
+            }
+
+            namespace Terms12
+            {
+                class Terms12Example;
+            }
+
+            namespace Terms13
+            {
+                class Terms13Example;
+            }
+
+            namespace Terms14
+            {
+                class Terms14Example;
+            }
+
+            namespace Terms15
+            {
+                class Terms15Example;
+            }
+
+            namespace Terms16
+            {
+                class Terms16Example;
+            }
+
+            namespace Terms17
+            {
+                class Terms17Example;
+            }
         }
     }
 }

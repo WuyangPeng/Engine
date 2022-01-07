@@ -17,7 +17,9 @@
     "EffectiveModernCpp::Chapter1::EffectiveModernCppChapter1ExampleTesting": 1,
     "EffectiveModernCpp::Chapter2::EffectiveModernCppChapter2ExampleTesting": 1,
     "EffectiveModernCpp::Chapter3::EffectiveModernCppChapter3ExampleTesting": 1,
-    "EffectiveModernCpp::Chapter4::EffectiveModernCppChapter4ExampleTesting": 1
+    "EffectiveModernCpp::Chapter4::EffectiveModernCppChapter4ExampleTesting": 1,
+    "EffectiveModernCpp::Chapter5::EffectiveModernCppChapter5ExampleTesting": 1,
+    "EffectiveModernCpp::Chapter6::EffectiveModernCppChapter6ExampleTesting": 1
   },
 
   "exceptionalCppSuite": {

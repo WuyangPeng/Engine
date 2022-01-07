@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 16:02)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 16:16)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_MANAGER_STATE_DETAIL_H
@@ -22,11 +22,13 @@ CoreTools::State<EventType>::State() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename EventType>
 bool CoreTools::State<EventType>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EntityType>
@@ -44,11 +46,11 @@ typename CoreTools::State<EntityType>::EntityTypeSharedPtr CoreTools::State<Enti
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    auto lockPtr = m_Entity.lock();
+    auto entity = m_Entity.lock();
 
-    if (lockPtr)
+    if (entity)
     {
-        return lockPtr;
+        return entity;
     }
     else
     {
@@ -69,9 +71,7 @@ template <typename EventType>
 template <typename StateType, typename ResultType, typename... Args>
 static std::shared_ptr<ResultType> CoreTools::State<EventType>::MakeState(Args&&... args)
 {
-    auto result = std::make_shared<StateType>(args...);
-
-    return result;
+    return std::make_shared<StateType>(args...);
 }
 
 template <typename EntityType>
@@ -84,6 +84,7 @@ template <typename EntityType>
 const CoreTools::Rtti& CoreTools::State<EntityType>::GetCurrentRttiType() noexcept
 {
     static const CoreTools::Rtti rtti{ "CoreTools.State<EntityType>", nullptr };
+
     return rtti;
 }
 

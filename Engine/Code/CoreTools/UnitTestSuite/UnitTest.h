@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 13:18)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 19:08)
 
 // 单元测试类。UnitTest为外部接口基类，子类要运行的测试在DoRunUnitTest函数中运行。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H
@@ -24,22 +24,9 @@
 #include <string>
 #include <type_traits>
 
-namespace boost
-{
-    namespace timer
-    {
-        class cpu_timer;
-    }
-}
-
-namespace std
-{
-    class exception;
-}
-
- 
 EXPORT_SHARED_PTR(CoreTools, CpuTimerData, CORE_TOOLS_DEFAULT_DECLARE);
 EXPORT_SHARED_PTR(CoreTools, UnitTestData, CORE_TOOLS_DEFAULT_DECLARE);
+
 namespace CoreTools
 {
     class CORE_TOOLS_DEFAULT_DECLARE UnitTest : public UnitTestComposite
@@ -52,13 +39,18 @@ namespace CoreTools
 
     public:
         explicit UnitTest(const OStreamShared& streamShared);
+        ~UnitTest() = default;
+        UnitTest(const UnitTest& rhs) = delete;
+        UnitTest& operator=(const UnitTest& rhs) = delete;
+        UnitTest(UnitTest&& rhs) noexcept;
+        UnitTest& operator=(UnitTest&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const std::string GetName() const override;
-        [[nodiscard]] int GetPassedNumber() const noexcept final;
-        [[nodiscard]] int GetFailedNumber() const noexcept final;
-        [[nodiscard]] int GetErrorNumber() const noexcept final;
+        NODISCARD std::string GetName() const override;
+        NODISCARD int GetPassedNumber() const noexcept final;
+        NODISCARD int GetFailedNumber() const noexcept final;
+        NODISCARD int GetErrorNumber() const noexcept final;
 
         void PrintReport() final;
         void ResetTestData() final;
@@ -72,7 +64,10 @@ namespace CoreTools
         void AssertTest(bool condition, const FunctionDescribed& functionDescribed,
                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
 
+        void AssertTrue() noexcept;
+
         void ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
+        void ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const std::string_view& errorMessage);
 
         template <typename LhsType, typename RhsType>
         void AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
@@ -82,9 +77,6 @@ namespace CoreTools
         void AssertEnumEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
                              const std::string& errorMessage = std::string{}, bool failureThrow = false);
 
-        template <typename LhsType, typename RhsType>
-        void AssertEqualDoNotUseMessage(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, bool failureThrow = false);
-
         template <typename LhsType, typename MhsType, typename RhsType>
         void AssertEqual(const LhsType& lhs, const MhsType& mhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
                          const std::string& errorMessage = std::string{}, bool failureThrow = false);
@@ -92,9 +84,6 @@ namespace CoreTools
         template <typename LhsType, typename RhsType>
         void AssertUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
                            const std::string& errorMessage = std::string{}, bool failureThrow = false);
-
-        template <typename LhsType, typename RhsType>
-        void AssertUnequalDoNotUseMessage(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed, bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
         void AssertEnumUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
@@ -151,27 +140,11 @@ namespace CoreTools
         template <typename PtrType>
         void AssertUnequalNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
 
-        template <typename TestClass, typename Function>
-        void AssertNotThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
+        template <typename TestClass, typename Function, typename... Types>
+        void AssertNotThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args);
 
-        template <typename TestClass, typename Function, typename Parameter>
-        void AssertNotThrowException(TestClass* test, Function function, const Parameter& parameter,
-                                     const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
-
-        template <typename TestClass, typename Function, typename FirstParameter, typename SecondParameter>
-        void AssertNotThrowException(TestClass* test, Function function, const FirstParameter& firstParameter,
-                                     const SecondParameter& secondParameter, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
-
-        template <typename TestClass, typename Function>
-        void AssertThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
-
-        template <typename TestClass, typename Function, typename Parameter>
-        void AssertThrowException(TestClass* test, Function function, const Parameter& parameter,
-                                  const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
-
-        template <typename TestClass, typename Function, typename FirstParameter, typename SecondParameter>
-        void AssertThrowException(TestClass* test, Function function, const FirstParameter& firstParameter,
-                                  const SecondParameter& secondParameter, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{});
+        template <typename TestClass, typename Function, typename... Types>
+        void AssertThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args);
 
         void AssertFloatingPointCompleteEqual(float lhs, float rhs, const FunctionDescribed& functionDescribed,
                                               const std::string& errorMessage = std::string{}, bool failureThrow = false);
@@ -206,7 +179,7 @@ namespace CoreTools
         void AssertExceptionFatalLog(const std::exception& error, const FunctionDescribed& functionDescribed, const std::string& errorMessage);
         void AssertExceptionFatalLog(const FunctionDescribed& functionDescribed, const std::string& errorMessage);
 
-        [[nodiscard]] virtual std::string GetTestModeDescribe() const;
+        NODISCARD virtual std::string GetTestModeDescribe() const;
         virtual void ResetOtherData();
         virtual void TestTimingBegins();
         virtual void TestTimingEnd();
@@ -218,14 +191,40 @@ namespace CoreTools
         using UnitTestDataSharedPtr = std::shared_ptr<UnitTestData>;
 
     private:
-        [[nodiscard]] static const std::string GetCorrectThrowExceptionDescribe();
-        [[nodiscard]] static const std::string GetErrorThrowExceptionDescribe();
-        [[nodiscard]] static const std::string GetCorrectNothrowExceptionDescribe();
-        [[nodiscard]] static const std::string GetErrorNothrowExceptionDescribe();
+        NODISCARD static constexpr std::string_view GetCorrectThrowExceptionDescribe()
+        {
+            using namespace std::literals;
+
+            return "正确的抛出异常："sv;
+        }
+
+        NODISCARD static constexpr std::string_view GetErrorThrowExceptionDescribe()
+        {
+            using namespace std::literals;
+
+            return "错误的抛出异常："sv;
+        }
+
+        NODISCARD static constexpr std::string_view GetCorrectNothrowExceptionDescribe()
+        {
+            using namespace std::literals;
+
+            return "正确的未抛出异常："sv;
+        }
+
+        NODISCARD static constexpr std::string_view GetErrorNothrowExceptionDescribe()
+        {
+            using namespace std::literals;
+
+            return "错误的未抛出异常："sv;
+        }
+
+        NODISCARD static std::string GetAssertDescribed(const std::string& assertMessage, const std::string& errorMessage);
 
     private:
-        UnitTestDataSharedPtr m_Data;
-        CpuTimerDataSharedPtr m_CpuTimer;
+        UnitTestDataSharedPtr unitTestData;
+        CpuTimerDataSharedPtr cpuTimer;
     };
 }
+
 #endif  // CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_H

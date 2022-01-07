@@ -19,6 +19,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 #include <gsl/util>
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real>
 Mathematics::Polyhedron3Impl<Real>::Polyhedron3Impl(const VerticesType& vertices, const IndicesType& indices)

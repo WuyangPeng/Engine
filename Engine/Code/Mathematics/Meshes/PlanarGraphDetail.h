@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.2 (2019/07/16 11:18)
 
 #ifndef MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H
@@ -10,14 +10,12 @@
 #include "PlanarGraph.h"
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>
-	::PlanarGraph()
+Mathematics::PlanarGraph<Point2>::PlanarGraph()
 {
 }
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>
-	::~PlanarGraph()
+Mathematics::PlanarGraph<Point2>::~PlanarGraph()
 {
     typename Vertices::iterator iter = mVertices.begin();
     typename Vertices::iterator end = mVertices.end();
@@ -29,23 +27,20 @@ Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Vertices& Mathematics::PlanarGraph<Point2>
-	::GetVertices() const
+const typename Mathematics::PlanarGraph<Point2>::Vertices& Mathematics::PlanarGraph<Point2>::GetVertices() const
 {
     return mVertices;
 }
 
 template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>
-	::GetVertex(int index) const
+const typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetVertex(int index) const
 {
     typename Vertices::const_iterator iter = mVertices.find(index);
     return (iter != mVertices.end() ? iter->second : 0);
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::InsertVertex(const Point2& position, int index)
+bool Mathematics::PlanarGraph<Point2>::InsertVertex(const Point2& position, int index)
 {
     typename Vertices::iterator iter = mVertices.find(index);
     if (iter != mVertices.end())
@@ -55,14 +50,13 @@ bool Mathematics::PlanarGraph<Point2>
 
     // Insert the vertex into the vertex set.  The adjacency array has already
     // been initialized to empty.
-    Vertex* vertex = NEW0 Vertex(position, index);
+    Vertex* vertex = nullptr;  // NEW0 Vertex(position, index);
     mVertices[index] = vertex;
     return true;
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::RemoveVertex(int index)
+bool Mathematics::PlanarGraph<Point2>::RemoveVertex(int index)
 {
     typename Vertices::iterator iter = mVertices.find(index);
     if (iter != mVertices.end())
@@ -80,15 +74,13 @@ bool Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-const typename Mathematics::PlanarGraph<Point2>::Edges& Mathematics::PlanarGraph<Point2>
-	::GetEdges() const
+const typename Mathematics::PlanarGraph<Point2>::Edges& Mathematics::PlanarGraph<Point2>::GetEdges() const
 {
     return mEdges;
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::InsertEdge(int index0, int index1)
+bool Mathematics::PlanarGraph<Point2>::InsertEdge(int index0, int index1)
 {
     // Look up the vertices.  If one or the other does not exist, there is
     // nothing to do.  The typecast supports conceptual constness from the
@@ -106,7 +98,7 @@ bool Mathematics::PlanarGraph<Point2>
     }
 
     EdgeKey eKey(index0, index1);
-    std::map<EdgeKey,bool>::iterator iter = mEdges.find(eKey);
+    std::map<EdgeKey, bool>::iterator iter = mEdges.find(eKey);
     if (iter == mEdges.end())
     {
         // The edge does not exist, insert it into the set.  The edge is
@@ -124,8 +116,7 @@ bool Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::RemoveEdge(int index0, int index1)
+bool Mathematics::PlanarGraph<Point2>::RemoveEdge(int index0, int index1)
 {
     // Look up the vertices.  If one or the other does not exist, there is
     // nothing to do.  The typecast supports conceptual constness from the
@@ -143,7 +134,7 @@ bool Mathematics::PlanarGraph<Point2>
     }
 
     EdgeKey eKey(index0, index1);
-    std::map<EdgeKey,bool>::iterator iter = mEdges.find(eKey);
+    std::map<EdgeKey, bool>::iterator iter = mEdges.find(eKey);
     if (iter != mEdges.end())
     {
         // The edge exists, remove it from the set.
@@ -160,8 +151,7 @@ bool Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>
-	::ExtractPrimitives(std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractPrimitives(std::vector<Primitive*>& primitives)
 {
     // Create a heap of vertices sorted lexicographically.
     std::set<VertexPtr> heap;
@@ -195,8 +185,7 @@ void Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>
-	::SetCycleEdge(int index0, int index1, bool cycleEdge)
+void Mathematics::PlanarGraph<Point2>::SetCycleEdge(int index0, int index1, bool cycleEdge)
 {
     EdgeKey eKey(index0, index1);
     typename Edges::iterator iter = mEdges.find(eKey);
@@ -207,8 +196,7 @@ void Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::GetCycleEdge(int index0, int index1) const
+bool Mathematics::PlanarGraph<Point2>::GetCycleEdge(int index0, int index1) const
 {
     EdgeKey eKey(index0, index1);
     typename Edges::const_iterator iter = mEdges.find(eKey);
@@ -221,10 +209,9 @@ bool Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>
-	::ExtractIsolatedVertex(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractIsolatedVertex(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
 {
-    Primitive* primitive = NEW0 Primitive(PT_ISOLATED_VERTEX);
+    Primitive* primitive = nullptr;  // NEW0 Primitive(PT_ISOLATED_VERTEX);
 
     primitive->Sequence.push_back(std::make_pair(V0->Position, V0->Index));
     heap.erase(V0);
@@ -234,8 +221,7 @@ void Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>
-	::ExtractFilament(Vertex* V0, Vertex* V1, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractFilament(Vertex* V0, Vertex* V1, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
 {
     // (V0,V1) is the first edge of the purported filament.
     MATHEMATICS_ASSERTION_0(V0->Adjacent.size() != 2, "Unexpected condition\n");
@@ -279,7 +265,7 @@ void Mathematics::PlanarGraph<Point2>
     else
     {
         // A real filament has been found.
-        Primitive* primitive = NEW0 Primitive(PT_FILAMENT);
+        Primitive* primitive = nullptr;  // NEW0 Primitive(PT_FILAMENT);
 
         if (V0->Adjacent.size() >= 3)
         {
@@ -319,18 +305,16 @@ void Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>
-	::ExtractPrimitive(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
+void Mathematics::PlanarGraph<Point2>::ExtractPrimitive(Vertex* V0, std::set<VertexPtr>& heap, std::vector<Primitive*>& primitives)
 {
     std::set<Vertex*> visited;
-    std::vector<std::pair<Point2,int> > sequence;
+    std::vector<std::pair<Point2, int>> sequence;
     sequence.push_back(std::make_pair(V0->Position, V0->Index));
-    Vertex* V1 = GetClockwiseMost(0,V0);
+    Vertex* V1 = GetClockwiseMost(0, V0);
     Vertex* VPrev = V0;
     Vertex* VCurr = V1;
 
-    while (VCurr && VCurr != V0
-        && visited.find(VCurr) == visited.end())
+    while (VCurr && VCurr != V0 && visited.find(VCurr) == visited.end())
     {
         sequence.push_back(std::make_pair(VCurr->Position, VCurr->Index));
         visited.insert(VCurr);
@@ -348,13 +332,13 @@ void Mathematics::PlanarGraph<Point2>
     else if (VCurr == V0)
     {
         // A minimal cycle has been found.
-        Primitive* primitive = NEW0 Primitive(PT_MINIMAL_CYCLE);
+        Primitive* primitive = nullptr;  // NEW0 Primitive(PT_MINIMAL_CYCLE);
         primitive->Sequence = sequence;
         primitives.push_back(primitive);
 
         // Mark the edges to indicate they are part of a cycle.
         int sQuantity = (int)sequence.size();
-        for (int i0 = sQuantity-1, i1 = 0; i1 < sQuantity; i0 = i1++)
+        for (int i0 = sQuantity - 1, i1 = 0; i1 < sQuantity; i0 = i1++)
         {
             int iV0 = sequence[i0].second;
             int iV1 = sequence[i1].second;
@@ -380,7 +364,7 @@ void Mathematics::PlanarGraph<Point2>
     {
         // A cycle has been found, but it is not guaranteed to be a minimal
         // cycle.  V0 is therefore part of a filament.
-        
+
         // Find a filament starting vertex.
         while (V0->Adjacent.size() == 2)
         {
@@ -402,12 +386,11 @@ void Mathematics::PlanarGraph<Point2>
 }
 
 template <typename Point2>
-typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>
-	::GetClockwiseMost(Vertex* VPrev, Vertex* VCurr)
+typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetClockwiseMost(Vertex* VPrev, Vertex* VCurr)
 {
     Vertex* VNext = 0;
     Point2 DCurr =
-        (VPrev ? (VCurr->Position - VPrev->Position) : Point2(0,-1));
+        (VPrev ? (VCurr->Position - VPrev->Position) : Point2(0, -1));
     Point2 DNext;
     bool VCurrConvex = false;
 
@@ -430,7 +413,7 @@ typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Poin
         {
             VNext = VAdj;
             DNext = DAdj;
-            VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+            VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             continue;
         }
 
@@ -438,22 +421,20 @@ typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Poin
         // clockwise-most vertex.
         if (VCurrConvex)
         {
-            if (DCurr[0]*DAdj[1]-DCurr[1]*DAdj[0] < 0
-            ||  DNext[0]*DAdj[1]-DNext[1]*DAdj[0] < 0)
+            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] < 0 || DNext[0] * DAdj[1] - DNext[1] * DAdj[0] < 0)
             {
                 VNext = VAdj;
                 DNext = DAdj;
-                VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             }
         }
         else
         {
-            if (DCurr[0]*DAdj[1]-DCurr[1]*DAdj[0] < 0
-            &&  DNext[0]*DAdj[1]-DNext[1]*DAdj[0] < 0)
+            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] < 0 && DNext[0] * DAdj[1] - DNext[1] * DAdj[0] < 0)
             {
                 VNext = VAdj;
                 DNext = DAdj;
-                VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             }
         }
     }
@@ -462,12 +443,11 @@ typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Poin
 }
 
 template <typename Point2>
-typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>
-	::GetCounterclockwiseMost(Vertex* VPrev, Vertex* VCurr)
+typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Point2>::GetCounterclockwiseMost(Vertex* VPrev, Vertex* VCurr)
 {
     Vertex* VNext = 0;
     Point2 DCurr =
-        (VPrev ? VCurr->Position - VPrev->Position : Point2(0,-1));
+        (VPrev ? VCurr->Position - VPrev->Position : Point2(0, -1));
     Point2 DNext;
     bool VCurrConvex = false;
 
@@ -490,7 +470,7 @@ typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Poin
         {
             VNext = VAdj;
             DNext = DAdj;
-            VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+            VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             continue;
         }
 
@@ -498,56 +478,48 @@ typename Mathematics::PlanarGraph<Point2>::Vertex* Mathematics::PlanarGraph<Poin
         // clockwise-most vertex.
         if (VCurrConvex)
         {
-            if (DCurr[0]*DAdj[1]-DCurr[1]*DAdj[0] > 0
-            &&  DNext[0]*DAdj[1]-DNext[1]*DAdj[0] > 0)
+            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] > 0 && DNext[0] * DAdj[1] - DNext[1] * DAdj[0] > 0)
             {
                 VNext = VAdj;
                 DNext = DAdj;
-                VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             }
         }
         else
         {
-            if (DCurr[0]*DAdj[1]-DCurr[1]*DAdj[0] > 0
-            ||  DNext[0]*DAdj[1]-DNext[1]*DAdj[0] > 0)
+            if (DCurr[0] * DAdj[1] - DCurr[1] * DAdj[0] > 0 || DNext[0] * DAdj[1] - DNext[1] * DAdj[0] > 0)
             {
                 VNext = VAdj;
                 DNext = DAdj;
-                VCurrConvex = (DNext[0]*DCurr[1] - DNext[1]*DCurr[0] <= 0);
+                VCurrConvex = (DNext[0] * DCurr[1] - DNext[1] * DCurr[0] <= 0);
             }
         }
     }
 
     return VNext;
 }
-
-
 
 // PlanarGraph::Vertex
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Vertex
-	::Vertex(const Point2& position, int index)
-    :Position(position), Index(index)
+Mathematics::PlanarGraph<Point2>::Vertex ::Vertex(const Point2& position, int index)
+    : Position(position), Index(index)
 {
 }
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Vertex
-	::~Vertex()
+Mathematics::PlanarGraph<Point2>::Vertex ::~Vertex()
 {
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::Vertex
-	::Insert(Vertex* adjacent)
+void Mathematics::PlanarGraph<Point2>::Vertex ::Insert(Vertex* adjacent)
 {
     Adjacent.push_back(adjacent);
 }
 
 template <typename Point2>
-void Mathematics::PlanarGraph<Point2>::Vertex
-	::Remove(Vertex* adjacent)
+void Mathematics::PlanarGraph<Point2>::Vertex ::Remove(Vertex* adjacent)
 {
     // Maintain a compact array.
     int numAdjacents = (int)Adjacent.size();
@@ -567,31 +539,24 @@ void Mathematics::PlanarGraph<Point2>::Vertex
     }
 }
 
-
-
 // PlanarGraph::Primitive
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::Primitive
-	::Primitive(PrimitiveType type)
-    :Type(type)
+Mathematics::PlanarGraph<Point2>::Primitive ::Primitive(PrimitiveType type)
+    : Type(type)
 {
 }
-
-
 
 // PlanarGraph::VertexPtr
 
 template <typename Point2>
-Mathematics::PlanarGraph<Point2>::VertexPtr
-	::VertexPtr(Vertex* vertex)
-    :mVertex(vertex)
+Mathematics::PlanarGraph<Point2>::VertexPtr ::VertexPtr(Vertex* vertex)
+    : mVertex(vertex)
 {
 }
 
 template <typename Point2>
-bool Mathematics::PlanarGraph<Point2>
-	::VertexPtr::operator< (const VertexPtr& vertexPtr) const
+bool Mathematics::PlanarGraph<Point2>::VertexPtr::operator<(const VertexPtr& vertexPtr) const
 {
     if (mVertex->Position[0] < vertexPtr.mVertex->Position[0])
     {
@@ -606,4 +571,4 @@ bool Mathematics::PlanarGraph<Point2>
     return mVertex->Position[1] < vertexPtr.mVertex->Position[1];
 }
 
-#endif // MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H
+#endif  // MATHEMATICS_MESHES_PLANAR_GRAPH_DETAIL_H

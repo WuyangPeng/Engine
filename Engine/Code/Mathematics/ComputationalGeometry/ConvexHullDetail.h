@@ -8,7 +8,7 @@
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_CONVEX_HULL_DETAIL_H
 
 #include "ConvexHull.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 template <typename Real>
 Mathematics::ConvexHull<Real>
@@ -22,7 +22,7 @@ template <typename Real>
 Mathematics::ConvexHull<Real>
 	::~ConvexHull()
 {
-    DELETE1(mIndices);
+    //DELETE1(mIndices);
 }
 
 template <typename Real>
@@ -78,7 +78,7 @@ template <typename Real>
 bool Mathematics::ConvexHull<Real>
 	::Load(CoreTools::ReadFileManager& inFile)
 {
-    DELETE1(mIndices);
+    //DELETE1(mIndices);
 
     // Fixed-size members.
     int type;
@@ -96,7 +96,7 @@ bool Mathematics::ConvexHull<Real>
     if (1 <= mDimension && mDimension <= 3)
     {
         MATHEMATICS_ASSERTION_0(numIndices == (mDimension+1)*mNumSimplices,"Inconsistent index count\n");
-        mIndices = NEW1<int>(numIndices);
+       // mIndices = NEW1<int>(numIndices);
         inFile.Read(sizeof(int), numIndices, mIndices);
         return true;
     }

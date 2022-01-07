@@ -32,6 +32,13 @@ namespace BookExperience
 
                 public:
                     Terms24Example() noexcept;
+
+                    void UniversalReference0Example() const noexcept;
+                    void UniversalReference1Example() const noexcept;
+                    void Universa1Reference2Example() const noexcept;
+                    void Vector0Example() const noexcept;
+                    void Vector1Example() const noexcept;
+                    void TimeFuncInvocationExample() const noexcept;
                 };
             }
         }

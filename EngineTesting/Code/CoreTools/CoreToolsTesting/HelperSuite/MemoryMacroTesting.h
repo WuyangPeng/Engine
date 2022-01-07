@@ -27,13 +27,7 @@ namespace CoreTools
 
     private:
         void DoRunUnitTest() final;
-        void MainTest();
-
-        void SingleTest();
-        void Array1DTest();
-        void Array2DTest();
-        void Array3DTest();
-        void Array4DTest();
+        void MainTest() noexcept; 
 
         NODISCARD static void* Allocator(size_t bytesNumber, MAYBE_UNUSED const FunctionDescribed& functionDescribed);
         static void Deallocator(const void* memBlock, MAYBE_UNUSED const FunctionDescribed& functionDescribed) noexcept;

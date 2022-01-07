@@ -38,7 +38,7 @@ int CoreTools::TestingObjectSize::GetStreamingSize() const
 
 CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(CoreTools, TestingObjectSize)
 
-void CoreTools::TestingObjectSize::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void CoreTools::TestingObjectSize::Link(CoreTools::ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -52,7 +52,7 @@ void CoreTools::TestingObjectSize::PostLink()
     ParentType::PostLink();
 }
 
-void CoreTools::TestingObjectSize::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::TestingObjectSize::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -60,12 +60,12 @@ void CoreTools::TestingObjectSize::Save(const BufferTargetSharedPtr& target) con
 
     ParentType::Save(target);
 
-    target->Write(testValue);
+    target.Write(testValue);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::TestingObjectSize::Load(const BufferSourceSharedPtr& source)
+void CoreTools::TestingObjectSize::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -73,7 +73,7 @@ void CoreTools::TestingObjectSize::Load(const BufferSourceSharedPtr& source)
 
     ParentType::Load(source);
 
-    source->Read(testValue);
+    source.Read(testValue);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/25 20:28)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
 #define CORE_TOOLS_MESSAGE_EVENT_BASE_GAME_ENTITY_H
@@ -14,6 +14,7 @@
 
 #include "MessageEventFwd.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/ContractFwd.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::weak_ptr<CoreTools::BaseEntity>;
@@ -26,22 +27,25 @@ namespace CoreTools
     public:
         using ClassType = BaseEntity;
 
+    protected:
+        explicit BaseEntity(MAYBE_UNUSED DisableNotThrow dDisableNotThrow);
+
     public:
+        virtual ~BaseEntity() noexcept = 0;
+        BaseEntity(const BaseEntity& rhs) = default;
+        BaseEntity(BaseEntity&& rhs) noexcept = default;
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
 
-        BaseEntity();
-        virtual ~BaseEntity() noexcept = 0;
-        BaseEntity(const BaseEntity& rhs) = default;
         BaseEntity& operator=(const BaseEntity& rhs) = default;
-        BaseEntity(BaseEntity&& rhs) noexcept = default;
         BaseEntity& operator=(BaseEntity&& rhs) noexcept = default;
 
 #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] uint64_t GetEntityID() const noexcept;
+        NODISCARD uint64_t GetEntityID() const noexcept;
 
         void Register();
 
@@ -49,7 +53,7 @@ namespace CoreTools
         virtual void DoRegister();
 
     private:
-        uint64_t m_EntityID;
+        uint64_t entityID;
     };
 }
 

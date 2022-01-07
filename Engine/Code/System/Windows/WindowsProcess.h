@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 21:53)
+///	引擎版本：0.8.0.0 (2021/12/12 13:16)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_PROCESS_H
 #define SYSTEM_WINDOWS_WINDOWS_PROCESS_H
@@ -43,8 +43,8 @@ namespace System
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetCursorClientPos(WindowsHWnd hwnd, WindowsPoint& point) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetCursorClientPos(WindowsHWnd hwnd, const WindowsPoint& point) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemBeginPaint(WindowsHWnd hwnd, WindowsPaintStruct* ps) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemEndPaint(WindowsHWnd hwnd, const WindowsPaintStruct* ps) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemBeginPaint(WindowsHWnd hwnd, WindowsPaintStruct* paintStruct) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE SystemEndPaint(WindowsHWnd hwnd, const WindowsPaintStruct* paintStruct) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemCursorPos(WindowsPoint& point) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE SetSystemCursorPos(const WindowsPoint& point) noexcept;

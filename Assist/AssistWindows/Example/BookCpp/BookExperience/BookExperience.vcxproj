@@ -325,6 +325,12 @@
     <Text Include="Resource\EffectiveModernCpp\Chapter5\条款28 理解引用折叠.txt" />
     <Text Include="Resource\EffectiveModernCpp\Chapter5\条款29 假定移动操作不存在、成本高、未使用.txt" />
     <Text Include="Resource\EffectiveModernCpp\Chapter5\条款30 熟悉完美转发的失败情形.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter5\第5章 右值引用、移动语义和完美转发.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款31 避免默认捕获模式.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款32 使用初始化捕获将对象移入闭包.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款33 对auto&amp;&amp;型别的形参使用decltype，以forward之.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\条款34 优先选用lambda式，而非bind.txt" />
+    <Text Include="Resource\EffectiveModernCpp\Chapter6\第6章 lambda表达式.txt" />
     <Text Include="Resource\EffectiveModernCpp\Preface\0.3 绪论.txt" />
     <Text Include="Resource\Exceptional C++ Style.txt" />
     <Text Include="Resource\Exceptional C++.txt" />

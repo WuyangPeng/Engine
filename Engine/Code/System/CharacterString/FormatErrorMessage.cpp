@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/03/31 18:17)
+///	引擎版本：0.8.0.0 (2021/12/13 22:47)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,9 @@ namespace System
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
         return reinterpret_cast<TChar*>(&errorMessage);
+
 #include STSTEM_WARNING_POP
     }
 
@@ -29,7 +31,9 @@ namespace System
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
         return reinterpret_cast<va_list*>(arguments);
+
 #include STSTEM_WARNING_POP
     }
 }
@@ -44,12 +48,15 @@ System::WindowsDWord System::FormatErrorMessage(FormatMessageOption flag,
                                                va_list* arguments) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return ::FormatMessage(EnumCastUnderlying(flag) | EnumCastUnderlying(widthFlag), source, EnumCastUnderlying(messageID), languageID.GetLanguageID(), buffer, size, arguments);
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<FormatMessageOption, FormatMessageWidth, WindowsConstVoidPtr, WindowError, LanguageIDData, TChar*, WindowsDWord, va_list*>(flag, widthFlag, source, messageID, languageID, buffer, size, arguments);
+    UnusedFunction(flag, widthFlag, source, messageID, languageID, buffer, size, arguments);
 
     return 0;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 

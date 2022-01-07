@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/07 20:06)
+///	引擎版本：0.8.0.0 (2021/12/19 19:48)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_H
@@ -48,15 +48,16 @@ namespace CoreTools
             CLASS_INVARIANT_DECLARE;
 
             template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, const char*> || std::is_same_v<T, std::string> || std::is_same_v<T, CellValue>>::type* = nullptr>
-            CellValueProxy& operator=(T value);
+                      typename std::enable_if_t<TextParsing::cellValueProxyCondition<T> ||
+                                                std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>* = nullptr>
+            CellValueProxy& operator=(T&& rhs);
 
             template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, const char*> || std::is_same_v<T, std::string> || std::is_same_v<T, CellValue>>::type* = nullptr>
-            void Set(T value);
+                      typename std::enable_if_t<TextParsing::cellValueProxyCondition<T> ||
+                                                std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>* = nullptr>
+            void Set(T&& rhs);
 
-            template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type* = nullptr>
+            template <typename T, typename std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
             T Get() const;
 
             void Clear();
@@ -68,6 +69,8 @@ namespace CoreTools
             void SetBoolean(bool numberValue);
             void SetFloat(double numberValue);
             void SetString(const std::string& stringValue);
+
+            void SetCellValue(const CellValue& cellValue);
 
             NODISCARD CellValue GetValue() const;
 

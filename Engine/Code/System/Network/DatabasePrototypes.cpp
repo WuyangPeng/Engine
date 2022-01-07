@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/06/04 14:51)
+///	引擎版本：0.8.0.0 (2021/12/13 14:35)
 
 #include "System/SystemExport.h"
 
@@ -28,7 +28,7 @@ System::WinSockHostent* System::GetHostByAddr(const WinSockInAddr* addr, Protoco
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const WinSockInAddr*, ProtocolFamilies>(addr, type);
+    UnusedFunction(addr, type);
 
     return nullptr;
 
@@ -48,7 +48,7 @@ System::WinSockHostent* System::GetHostByName(const char* name) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*>(name);
+    UnusedFunction(name);
 
     return nullptr;
 
@@ -66,7 +66,7 @@ bool System::GetHostName(char* name, int namelen) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<char*>(name, namelen);
+    UnusedFunction(name, namelen);
 
     return false;
 
@@ -81,7 +81,7 @@ System::WinSockServent* System::GetServentByPort(int port, const char* proto) no
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<int, const char*>(port, proto);
+    UnusedFunction(port, proto);
 
     return nullptr;
 
@@ -96,7 +96,7 @@ System::WinSockServent* System::GetServentByName(const char* name, const char* p
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*, const char*>(name, proto);
+    UnusedFunction(name, proto);
 
     return nullptr;
 
@@ -111,7 +111,7 @@ System::WinSockProtoent* System::GetProtoentByNumber(int proto) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<int>(proto);
+    UnusedFunction(proto);
 
     return nullptr;
 
@@ -126,7 +126,7 @@ System::WinSockProtoent* System::GetProtoentByName(const char* name) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const char*>(name);
+    UnusedFunction(name);
 
     return nullptr;
 

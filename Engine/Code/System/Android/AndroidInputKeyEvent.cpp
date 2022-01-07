@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:00)
+///	引擎版本：0.8.0.0 (2021/12/13 22:59)
 
 #include "System/SystemExport.h"
 
@@ -37,7 +37,7 @@ int32_t System::AndroidInputEventGetDeviceID(const AndroidInputEvent* event) noe
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(event);
+    UnusedFunction(event);
 
     return 0;
 
@@ -116,7 +116,7 @@ int32_t System::AndroidKeyEventGetScanCode(const AndroidInputEvent* keyEvent) no
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(keyEvent);
+    UnusedFunction(keyEvent);
 
     return 0;
 
@@ -147,7 +147,7 @@ int32_t System::AndroidKeyEventGetRepeatCount(const AndroidInputEvent* keyEvent)
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(keyEvent);
+    UnusedFunction(keyEvent);
 
     return 1;
 
@@ -162,7 +162,7 @@ int64_t System::AndroidKeyEventGetDownTime(const AndroidInputEvent* keyEvent) no
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(keyEvent);
+    UnusedFunction(keyEvent);
 
     return 0;
 
@@ -177,7 +177,7 @@ int64_t System::AndroidKeyEventGetEventTime(const AndroidInputEvent* keyEvent) n
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<const AndroidInputEvent*>(keyEvent);
+    UnusedFunction(keyEvent);
 
     return 0;
 

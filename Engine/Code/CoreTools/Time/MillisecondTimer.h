@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 19:19)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:50)
 
 #ifndef CORE_TOOLS_TIME_MILLISECOND_TIMER_H
 #define CORE_TOOLS_TIME_MILLISECOND_TIMER_H
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
-CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(MillisecondTimer,DeltaTimeManagerImpl);
+CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(MillisecondTimer, DeltaTimeManagerImpl);
 
 namespace CoreTools
 {
@@ -29,10 +29,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint64_t GetRemain() const noexcept;
-        [[nodiscard]] uint64_t GetElapsedTime() const noexcept;
-        [[nodiscard]] bool IsElapsed() const noexcept;
-        [[nodiscard]] uint64_t GetNowTime() const noexcept;
+        NODISCARD uint64_t GetRemain() const noexcept;
+        NODISCARD uint64_t GetElapsedTime() const noexcept;
+        NODISCARD bool IsElapsed() const noexcept;
+        NODISCARD uint64_t GetNowTime() const noexcept;
 
         void ReTiming(uint64_t millisecond);
 

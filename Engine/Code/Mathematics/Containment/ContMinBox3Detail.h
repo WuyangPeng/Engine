@@ -9,7 +9,7 @@
 
 #include "ContMinBox3.h"
 #include "ContMinBox2.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "Mathematics/Meshes/EdgeKey.h"
 #include "Mathematics/ComputationalGeometry/ConvexHull3.h"
 

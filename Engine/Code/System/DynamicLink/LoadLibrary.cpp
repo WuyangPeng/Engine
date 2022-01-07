@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:42)
+///	引擎版本：0.8.0.0 (2021/12/13 22:22)
 
 #include "System/SystemExport.h"
 
@@ -75,7 +75,7 @@ bool System::DisableThreadDynamicLibraryCalls(DynamicLinkModule module) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule>(module);
+    UnusedFunction(module);
 
     return false;
 

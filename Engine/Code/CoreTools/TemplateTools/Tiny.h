@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:29)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 15:35)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_TINY_H
@@ -242,9 +242,8 @@ namespace CoreTools
     };
 
     template <typename Tiny, typename Pos>
-    struct TinyHasItem : boost::mpl::eval_if<boost::mpl::and_<
-                                                 boost::mpl::greater<typename boost::mpl::size<Tiny>::type, Pos>,
-                                                 boost::mpl::greater<Pos, boost::mpl::prior<TinyZero>::type>>,
+    struct TinyHasItem : boost::mpl::eval_if<boost::mpl::and_<boost::mpl::greater<typename boost::mpl::size<Tiny>::type, Pos>,
+                                                              boost::mpl::greater<Pos, boost::mpl::prior<TinyZero>::type>>,
                                              boost::mpl::true_, boost::mpl::false_>
     {
         using ClassType = TinyHasItem<Tiny, Pos>;

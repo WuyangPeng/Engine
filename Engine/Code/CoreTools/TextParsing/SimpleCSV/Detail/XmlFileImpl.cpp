@@ -5,14 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/02 23:33)
+///	引擎版本：0.8.0.0 (2021/12/20 22:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "XmlFileImpl.h"
 #include "System/Helper/PragmaWarning/PugiXml.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/CSVExceptionFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVException.h"
 #include "CoreTools/TextParsing/SimpleCSV/XmlData.h"

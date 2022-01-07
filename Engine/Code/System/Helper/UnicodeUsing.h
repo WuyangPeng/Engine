@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/16 14:58)
+///	引擎版本：0.8.0.0 (2021/12/13 17:49)
 
 #ifndef SYSTEM_HELPER_UNICODE_MACRO_H
 #define SYSTEM_HELPER_UNICODE_MACRO_H
@@ -15,6 +15,7 @@
 #include "ConfigMacro.h"
 
 #include <iosfwd>
+#include <regex>
 #include <string>
 
 namespace System
@@ -33,6 +34,7 @@ namespace System
     using Stream = std::wiostream;
     using OStream = std::wostream;
     using IStream = std::wistream;
+    using Regex = std::wregex;
 
 #else  // !UNICODE
 
@@ -48,6 +50,7 @@ namespace System
     using Stream = std::iostream;
     using OStream = std::ostream;
     using IStream = std::istream;
+    using Regex = std::regex;
 
 #endif  // UNICODE
 

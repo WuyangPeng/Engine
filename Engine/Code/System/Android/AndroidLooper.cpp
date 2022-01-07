@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:26)
+///	引擎版本：0.8.0.0 (2021/12/13 23:01)
 
 #include "System/SystemExport.h"
 
@@ -36,7 +36,7 @@ System::AndroidLooper* System::AndroidLooperPrepare(int32_t opts) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<int32_t>(opts);
+    UnusedFunction(opts);
 
     return nullptr;
 
@@ -51,7 +51,7 @@ void System::AndroidLooperAcquire(AndroidLooper* looper) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidLooper*>(looper);
+    UnusedFunction(looper);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -64,7 +64,7 @@ void System::AndroidLooperRelease(AndroidLooper* looper) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidLooper*>(looper);
+    UnusedFunction(looper);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -77,7 +77,7 @@ System::AndroidLooperEvent System::AndroidLooperPollOnce(int32_t timeoutMillis, 
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<int32_t, int32_t*, int32_t*, void**>(timeoutMillis, outFd, outEvents, outData);
+    UnusedFunction(timeoutMillis, outFd, outEvents, outData);
 
     return AndroidLooperEvent::Input;
 
@@ -92,7 +92,7 @@ System::AndroidLooperEvent System::AndroidLooperPollAll(int32_t timeoutMillis, i
 
 #elif defined(SYSTEM_PLATFORM_WIN32)
 
-    NullFunction<int32_t, int32_t*, int32_t*, void**>(timeoutMillis, outFd, outEvents, outData);
+    UnusedFunction(timeoutMillis, outFd, outEvents, outData);
 
     WindowsMsg msg{};
 
@@ -123,7 +123,7 @@ void System::AndroidLooperWake(AndroidLooper* looper) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidLooper*>(looper);
+    UnusedFunction(looper);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -136,7 +136,7 @@ int32_t System::AndroidLooperAddFd(AndroidLooper* looper, int32_t fd, LooperID i
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidLooper*, int32_t, LooperID, AndroidLooperEvent, AndroidLooperCallbackFunc, void*>(looper, fd, ident, events, callback, data);
+    UnusedFunction(looper, fd, ident, events, callback, data);
 
     return 1;
 
@@ -151,7 +151,7 @@ int32_t System::AndroidLooperRemoveFd(AndroidLooper* looper, int32_t fd) noexcep
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidLooper*, int32_t>(looper, fd);
+    UnusedFunction(looper, fd);
 
     return 1;
 

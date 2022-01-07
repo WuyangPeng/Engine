@@ -20,7 +20,7 @@
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ObjectManagerTesting)

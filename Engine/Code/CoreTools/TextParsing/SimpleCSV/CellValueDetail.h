@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/07 12:29)
+///	引擎版本：0.8.0.0 (2021/12/18 21:27)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_DETAIL_H
@@ -17,13 +17,12 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
-template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type*>
-CoreTools::SimpleCSV::CellValue& CoreTools::SimpleCSV::CellValue::operator=(T value)
+template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
+CoreTools::SimpleCSV::CellValue& CoreTools::SimpleCSV::CellValue::operator=(T rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ClassType result{ value };
+    ClassType result{ rhs };
 
     std::swap(*this, result);
 
@@ -31,27 +30,26 @@ CoreTools::SimpleCSV::CellValue& CoreTools::SimpleCSV::CellValue::operator=(T va
 }
 
 template <typename T,
-          typename std::enable_if<std::is_same_v<T, CoreTools::SimpleCSV::CellValue> || std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type*>
-void CoreTools::SimpleCSV::CellValue::Set(T numberValue) noexcept(std::is_same_v<T, CellValue>)
+          typename std::enable_if_t<std::is_same_v<T, CoreTools::SimpleCSV::CellValue> || CoreTools::TextParsing::cellValueCondition<T>>*>
+void CoreTools::SimpleCSV::CellValue::Set(T rhs) noexcept(std::is_same_v<T, CellValue>)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    *this = numberValue;
+    *this = rhs;
 }
 
-template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type*>
+template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 T CoreTools::SimpleCSV::CellValue::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     try
     {
-        if constexpr (std::is_integral_v<T> && std::is_same_v<T, bool>)
+        if constexpr (std::is_same_v<T, bool>)
         {
             return GetBool();
         }
-        else if constexpr (std::is_integral_v<T> && !std::is_same_v<T, bool>)
+        else if constexpr (std::is_integral_v<T>)
         {
             return boost::numeric_cast<T>(GetIntegral());
         }
@@ -59,11 +57,11 @@ T CoreTools::SimpleCSV::CellValue::Get() const
         {
             return boost::numeric_cast<T>(GetDouble());
         }
-        else if constexpr (std::is_same_v<T, std::string> && !std::is_same_v<T, bool>)
+        else if constexpr (std::is_same_v<T, std::string>)
         {
             return GetString();
         }
-        else if constexpr (std::is_constructible_v<T, char*> && !std::is_same_v<T, bool>)
+        else if constexpr (std::is_constructible_v<T, char*>)
         {
             return GetString().c_str();
         }
@@ -74,8 +72,7 @@ T CoreTools::SimpleCSV::CellValue::Get() const
     }
 }
 
-template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type*>
+template <typename T, typename std::enable_if<CoreTools::TextParsing::cellValueCondition<T>>::type*>
 CoreTools::SimpleCSV::CellValue::operator T() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

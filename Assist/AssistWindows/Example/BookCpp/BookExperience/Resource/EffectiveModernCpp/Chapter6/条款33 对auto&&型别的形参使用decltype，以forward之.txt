@@ -1,0 +1,3 @@
+条款33 对auto&&型别的形参使用decltype，以std::forward之
+	★	 如果传入的是个左值，decltype(x)将会产生左值引用型别。如果传入的是右值，decltype(x)将会产生右值引用型别。
+	★	 对auto&&型别的形参使用decltype，以std::forward之。

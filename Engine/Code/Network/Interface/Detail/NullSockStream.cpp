@@ -52,7 +52,7 @@ void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInte
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::CallbackParameters callbackParameters{};
+    CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
     if (!eventInterface->EventFunction(callbackParameters))

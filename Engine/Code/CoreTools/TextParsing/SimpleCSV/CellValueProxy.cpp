@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/07 20:07)
+///	引擎版本：0.8.0.0 (2021/12/20 22:26)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -50,3 +50,34 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools::SimpleCSV, CellValueProxy, 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools::SimpleCSV, CellValueProxy, SetString, string, void)
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools::SimpleCSV, CellValueProxy, GetValue, CoreTools::SimpleCSV::CellValue)
+
+void CoreTools::SimpleCSV::CellValueProxy::SetCellValue(const CellValue& cellValue)
+{
+    switch (cellValue.GetType())
+    {
+        case ValueType::Boolean:
+        {
+            SetBoolean(cellValue.template Get<bool>());
+            break;
+        }
+        case ValueType::Integer:
+        {
+            SetInteger(cellValue.template Get<int64_t>());
+            break;
+        }
+        case ValueType::Float:
+        {
+            SetFloat(cellValue.template Get<double>());
+            break;
+        }
+        case ValueType::String:
+        {
+            SetString(cellValue.template Get<std::string>());
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
+}

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 14:19)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 15:06)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_SOURCE_H
@@ -39,17 +39,61 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
+        // 该函数必须被特化，因为它没有提供一个默认的实现。
+        template <typename T>
+        void ReadAggregate(T& datum);
+
+        template <typename T>
+        void ReadAggregateContainer(int elementsNumber, T& container);
+
+        template <typename T>
+        void ReadAggregateContainer(int elementsNumber, std::set<T>& container);
+
+        template <typename T>
+        void ReadAggregateContainer(T& container);
+
+        template <typename T, int Size>
+        void ReadAggregateContainer(std::array<T, Size>& container);
+
+        //  读取对象指针（uniqueID在磁盘上为[无效]内存指针）。
+        template <typename T>
+        NODISCARD T ReadObjectAssociated();
+
+        template <typename T>
+        NODISCARD T ReadObjectAssociatedContainerWithNumber(int elementsNumber);
+
+        template <typename T>
+        NODISCARD T ReadObjectAssociatedContainerWithoutNumber();
+
+        template <typename T, int Size>
+        NODISCARD std::array<T, Size> ReadObjectAssociatedContainer();
+
+        template <typename T>
+        void ReadObjectAssociated(T& datum);
+
+        template <typename T>
+        void ReadObjectAssociatedContainer(int elementsNumber, T& container);
+
+        template <typename T>
+        void ReadObjectAssociatedContainer(int elementsNumber, std::set<T>& container);
+
+        template <typename T>
+        void ReadObjectAssociatedContainer(T& container);
+
+        template <typename T, int Size>
+        void ReadObjectAssociatedContainer(std::array<T, Size>& container);
+
         // 读取bool值为4字节
-        [[nodiscard]] bool ReadBool();
+        NODISCARD bool ReadBool();
 
         template <typename T>
-        [[nodiscard]] T ReadBoolContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadBoolContainerWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] T ReadBoolContainerWithoutNumber();
+        NODISCARD T ReadBoolContainerWithoutNumber();
 
         template <int Size>
-        [[nodiscard]] std::array<bool, Size> ReadBoolContainer();
+        NODISCARD std::array<bool, Size> ReadBoolContainer();
 
         void Read(bool& value);
 
@@ -65,16 +109,16 @@ namespace CoreTools
         void ReadContainer(std::array<bool, Size>& container);
 
         // 读取字符串，在字符串之前读取4个字节代表长度。没有空终止符。
-        [[nodiscard]] std::string ReadString();
+        NODISCARD std::string ReadString();
 
         template <typename T>
-        [[nodiscard]] T ReadStringContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadStringContainerWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] T ReadStringContainerWithoutNumber();
+        NODISCARD T ReadStringContainerWithoutNumber();
 
         template <int Size>
-        [[nodiscard]] std::array<std::string, Size> ReadStringContainer();
+        NODISCARD std::array<std::string, Size> ReadStringContainer();
 
         void Read(std::string& value);
 
@@ -91,22 +135,22 @@ namespace CoreTools
 
         // 原生数据读取函数
         template <typename T>
-        [[nodiscard]] T Read();
+        NODISCARD T Read();
 
         template <typename T>
-        [[nodiscard]] T ReadContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadContainerWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] std::vector<T> ReadVectorWithNumber(int elementsNumber);
+        NODISCARD std::vector<T> ReadVectorWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] T ReadContainerWithoutNumber();
+        NODISCARD T ReadContainerWithoutNumber();
 
         template <typename T>
-        [[nodiscard]] std::vector<T> ReadVectorWithoutNumber();
+        NODISCARD std::vector<T> ReadVectorWithoutNumber();
 
         template <typename T, int Size>
-        [[nodiscard]] std::array<T, Size> ReadContainer();
+        NODISCARD std::array<T, Size> ReadContainer();
 
         template <typename T>
         void Read(T& datum);
@@ -128,22 +172,22 @@ namespace CoreTools
 
         // 读取枚举值为4字节。
         template <typename T>
-        [[nodiscard]] T ReadEnum();
+        NODISCARD T ReadEnum();
 
         template <typename T>
-        [[nodiscard]] T ReadEnumContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadEnumContainerWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] std::vector<T> ReadEnumVectorWithNumber(int elementsNumber);
+        NODISCARD std::vector<T> ReadEnumVectorWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] T ReadEnumContainerWithoutNumber();
+        NODISCARD T ReadEnumContainerWithoutNumber();
 
         template <typename T>
-        [[nodiscard]] std::vector<T> ReadEnumVectorWithoutNumber();
+        NODISCARD std::vector<T> ReadEnumVectorWithoutNumber();
 
         template <typename T, int Size>
-        [[nodiscard]] std::array<T, Size> ReadEnumContainer();
+        NODISCARD std::array<T, Size> ReadEnumContainer();
 
         template <typename T>
         void ReadEnum(T& datum);
@@ -166,72 +210,28 @@ namespace CoreTools
         // 这些模板函数是集合类型。
 
         template <typename T>
-        [[nodiscard]] T ReadAggregate();
+        NODISCARD T ReadAggregate();
 
         template <typename T>
-        [[nodiscard]] T ReadAggregateContainerWithNumber(int elementsNumber);
+        NODISCARD T ReadAggregateContainerWithNumber(int elementsNumber);
 
         template <typename T>
-        [[nodiscard]] T ReadAggregateContainerWithoutNumber();
+        NODISCARD T ReadAggregateContainerWithoutNumber();
 
         template <typename T, int Size>
-        [[nodiscard]] std::array<T, Size> ReadAggregateContainer();
-
-        // 该函数必须被特化，因为它没有提供一个默认的实现。
-        template <typename T>
-        void ReadAggregate(T& datum);
-
-        template <typename T>
-        void ReadAggregateContainer(int elementsNumber, T& container);
-
-        template <typename T>
-        void ReadAggregateContainer(int elementsNumber, std::set<T>& container);
-
-        template <typename T>
-        void ReadAggregateContainer(T& container);
-
-        template <typename T, int Size>
-        void ReadAggregateContainer(std::array<T, Size>& container);
-
-        //  读取对象指针（uniqueID在磁盘上为[无效]内存指针）。
-        template <typename T>
-        [[nodiscard]] T ReadObjectAssociated();
-
-        template <typename T>
-        [[nodiscard]] T ReadObjectAssociatedContainerWithNumber(int elementsNumber);
-
-        template <typename T>
-        [[nodiscard]] T ReadObjectAssociatedContainerWithoutNumber();
-
-        template <typename T, int Size>
-        [[nodiscard]] std::array<T, Size> ReadObjectAssociatedContainer();
-
-        template <typename T>
-        void ReadObjectAssociated(T& datum);
-
-        template <typename T>
-        void ReadObjectAssociatedContainer(int elementsNumber, T& container);
-
-        template <typename T>
-        void ReadObjectAssociatedContainer(int elementsNumber, std::set<T>& container);
-
-        template <typename T>
-        void ReadObjectAssociatedContainer(T& container);
-
-        template <typename T, int Size>
-        void ReadObjectAssociatedContainer(std::array<T, Size>& container);
+        NODISCARD std::array<T, Size> ReadAggregateContainer();
 
         // 帮助函数
-        int GetBytesRead() const noexcept;
-        int GetBytesTotal() const;
+        NODISCARD int GetBytesRead() const noexcept;
+        NODISCARD int GetBytesTotal() const;
         void IncrementBytesProcessed(int bytesNumber);
-        void ReadUniqueID(const ObjectInterfaceSharedPtr& object);
+        void ReadUniqueID(ObjectInterface& object);
 
     private:
-        int32_t GetElementsNumber();
+        NODISCARD int32_t GetElementsNumber();
 
     private:
-        ReadBufferIO m_Source;
+        ReadBufferIO source;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(BufferSource);

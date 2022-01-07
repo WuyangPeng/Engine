@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 18:14)
+///	引擎版本：0.8.0.0 (2021/12/12 19:17)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ void System::InitializeSlimReaderWriterLock(SlimReaderWriterLockPtr slimReaderWr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -32,12 +32,14 @@ void System::ReleaseSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr slimRe
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26110)
+
     ::ReleaseSRWLockExclusive(slimReaderWriterLock);
+
     #include STSTEM_WARNING_POP
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -50,7 +52,7 @@ void System::ReleaseSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimReade
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -63,7 +65,7 @@ void System::AcquireSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr slimRe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -76,7 +78,7 @@ void System::AcquireSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimReade
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -92,7 +94,7 @@ bool System::TryAcquireSlimReaderWriterLockExclusive(SlimReaderWriterLockPtr sli
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
     return false;
 
@@ -110,7 +112,7 @@ bool System::TryAcquireSlimReaderWriterLockShared(SlimReaderWriterLockPtr slimRe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SlimReaderWriterLockPtr>(slimReaderWriterLock);
+    UnusedFunction(slimReaderWriterLock);
 
     return false;
 

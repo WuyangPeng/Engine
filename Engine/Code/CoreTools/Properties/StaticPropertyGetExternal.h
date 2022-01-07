@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:14)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 18:05)
 
 #ifndef CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_H
 #define CORE_TOOLS_PROPERTIES_STATIC_PROPERTY_GET_EXTERNAL_H
@@ -27,11 +27,16 @@ namespace CoreTools
         using ClassType = StaticPropertyGetExternal<ConstReferenceType, PF>;
 
     public:
+        StaticPropertyGetExternal() noexcept = default;
+        ~StaticPropertyGetExternal() noexcept = default;
+        StaticPropertyGetExternal(const StaticPropertyGetExternal& rhs) noexcept = delete;
+        StaticPropertyGetExternal& operator=(const StaticPropertyGetExternal& rhs) noexcept = delete;
+        StaticPropertyGetExternal(StaticPropertyGetExternal&& rhs) noexcept = delete;
+        StaticPropertyGetExternal& operator=(StaticPropertyGetExternal&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator ConstReferenceType() const;
-
-        StaticPropertyGetExternal& operator=(const StaticPropertyGetExternal& rhs) = delete;
+        NODISCARD operator ConstReferenceType() const noexcept;
     };
 }
 

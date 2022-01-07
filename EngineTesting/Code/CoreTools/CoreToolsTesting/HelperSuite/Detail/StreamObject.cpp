@@ -10,7 +10,7 @@
 #include "StreamObject.h"
 #include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
@@ -51,14 +51,14 @@ int CoreTools::StreamObject::GetStreamingSize() const
     return size;
 }
 
-uint64_t CoreTools::StreamObject::Register(const ObjectRegisterSharedPtr& target) const
+uint64_t CoreTools::StreamObject::Register(ObjectRegister& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
     return ParentType::Register(target);
 }
 
-void CoreTools::StreamObject::Save(const BufferTargetSharedPtr& target) const
+void CoreTools::StreamObject::Save(BufferTarget& target) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -66,12 +66,12 @@ void CoreTools::StreamObject::Save(const BufferTargetSharedPtr& target) const
 
     ParentType::Save(target);
 
-    target->Write(boolValue);
+    target.Write(boolValue);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void CoreTools::StreamObject::Link(const ObjectLinkSharedPtr& source)
+void CoreTools::StreamObject::Link(ObjectLink& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -85,7 +85,7 @@ void CoreTools::StreamObject::PostLink()
     return ParentType::PostLink();
 }
 
-void CoreTools::StreamObject::Load(const BufferSourceSharedPtr& source)
+void CoreTools::StreamObject::Load(BufferSource& source)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -93,7 +93,7 @@ void CoreTools::StreamObject::Load(const BufferSourceSharedPtr& source)
 
     ParentType::Load(source);
 
-    boolValue = source->ReadBool();
+    boolValue = source.ReadBool();
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

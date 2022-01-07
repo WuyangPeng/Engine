@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/29 12:44)
+///	引擎版本：0.8.0.0 (2021/12/13 22:27)
 
 #ifndef SYSTEM_CHARACTER_STRING_FORMAT_STRING_DETAIL_H
 #define SYSTEM_CHARACTER_STRING_FORMAT_STRING_DETAIL_H

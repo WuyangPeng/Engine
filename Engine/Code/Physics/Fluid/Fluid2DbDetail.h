@@ -12,14 +12,14 @@
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_FLUID2DB_DETAIL)
 
     #include "System/Helper/PragmaWarning.h"
-    #include "CoreTools/Helper/MemoryMacro.h"
+
     #include "Mathematics/Algebra/Vector2DDetail.h"
     #include "Mathematics/Base/MathDetail.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
     #include SYSTEM_WARNING_DISABLE(26489)
     #include SYSTEM_WARNING_DISABLE(26493)
- #include SYSTEM_WARNING_DISABLE(26487)
+    #include SYSTEM_WARNING_DISABLE(26487)
 namespace Physics
 {
     template <typename Real>
@@ -59,14 +59,14 @@ namespace Physics
         mVelGammaY = mVelLambdaY * mVelGamma0;
         mTime = (Real)0;
 
-        mX = NEW1<Real>(mIMaxP1);
-        mY = NEW1<Real>(mJMaxP1);
-        mDensity0 = NEW2<Real>(mIMaxP1, mJMaxP1);
-        mDensity1 = NEW2<Real>(mIMaxP1, mJMaxP1);
-        mVelocity0 = NEW2<Vector2D>(mIMaxP1, mJMaxP1);
-        mVelocity1 = NEW2<Vector2D>(mIMaxP1, mJMaxP1);
-        mDivergence = NEW2<Real>(mIMaxP1, mJMaxP1);
-        mPoisson = NEW2<Real>(mIMaxP1, mJMaxP1);
+        mX = nullptr;  //NEW1<Real>(mIMaxP1);
+        mY = nullptr;  //NEW1<Real>(mJMaxP1);
+        mDensity0 = nullptr;  //NEW2<Real>(mIMaxP1, mJMaxP1);
+        mDensity1 = nullptr;  //NEW2<Real>(mIMaxP1, mJMaxP1);
+        mVelocity0 = nullptr;  // NEW2<Vector2D>(mIMaxP1, mJMaxP1);
+        mVelocity1 = nullptr;  //NEW2<Vector2D>(mIMaxP1, mJMaxP1);
+        mDivergence = nullptr;  //NEW2<Real>(mIMaxP1, mJMaxP1);
+        mPoisson = nullptr;  //NEW2<Real>(mIMaxP1, mJMaxP1);
 
         for (int i = 0; i <= mIMax; ++i)
         {
@@ -93,14 +93,14 @@ namespace Physics
     {
         EXCEPTION_TRY
         {
-            DELETE1(mX);
-            DELETE1(mY);
-            DELETE2(mDensity0);
-            DELETE2(mDensity1);
-            DELETE2(mVelocity0);
-            DELETE2(mVelocity1);
-            DELETE2(mDivergence);
-            DELETE2(mPoisson);
+//             DELETE1(mX);
+//             DELETE1(mY);
+//             DELETE2(mDensity0);
+//             DELETE2(mDensity1);
+//             DELETE2(mVelocity0);
+//             DELETE2(mVelocity1);
+//             DELETE2(mDivergence);
+//             DELETE2(mPoisson);
         }
         EXCEPTION_ALL_CATCH(Physics)
     }
@@ -453,7 +453,7 @@ namespace Physics
 
     template <typename Real>
     int Fluid2Db<Real>::GetJMax() const noexcept
-    { 
+    {
         return mJMax;
     }
 

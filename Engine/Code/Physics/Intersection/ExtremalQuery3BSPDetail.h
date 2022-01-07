@@ -12,9 +12,8 @@
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_EXTREMAL_QUERY3BSP_DETAIL)
 
     #include "CoreTools/Helper/Assertion/PhysicsCustomAssertMacro.h"
+    #include "Mathematics/Algebra/Vector3DToolsDetail.h"
     #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-
 
     #include <queue>
     #include <stack>
@@ -52,7 +51,7 @@ namespace Physics
 
         // Copy the nodes into a single, nonresizeable array.
         mNumNodes = static_cast<int>(nodes.size());
-        mNodes = NEW1<SphericalArc>(mNumNodes);
+        mNodes = nullptr;  //NEW1<SphericalArc>(mNumNodes);
         memcpy(mNodes, &nodes.front(), mNumNodes * sizeof(SphericalArc));
     }
 
@@ -61,7 +60,7 @@ namespace Physics
     {
         EXCEPTION_TRY
         {
-            DELETE1(mNodes);
+            //DELETE1(mNodes);
         }
         EXCEPTION_ALL_CATCH(Physics)
     }

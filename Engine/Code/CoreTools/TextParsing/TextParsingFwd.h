@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/09 13:52)
+///	引擎版本：0.8.0.0 (2021/12/19 13:40)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_FWD_H
 #define CORE_TOOLS_TEXT_PARSING_FWD_H
@@ -101,9 +101,21 @@ namespace CoreTools
     class CSVHead;
     class CSVRow;
     class CSVContent;
+    class DataTypeDescribe;
 
     class CSVGenerate;
     class CSVTotalGenerate;
+
+    enum class JsonDataType;
+    enum class JsonGenerateType;
+    enum class JsonTotalGenerateType;
+
+    class JsonHead;
+    class JsonNode;
+    class JsonNodeContainer;
+
+    class JsonGenerate;
+    class JsonRow;
 }
 
 #endif  // CORE_TOOLS_TEXT_PARSING_FWD_H

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/24 19:59)
+///	引擎版本：0.8.0.0 (2021/12/13 11:34)
 
 #ifndef SYSTEM_OPENGL_OPENGL_INIT_H
 #define SYSTEM_OPENGL_OPENGL_INIT_H

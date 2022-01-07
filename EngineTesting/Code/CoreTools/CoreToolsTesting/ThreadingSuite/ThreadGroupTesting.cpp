@@ -39,7 +39,7 @@ void CoreTools::ThreadGroupTesting::ThreadGroupTest()
 
 void CoreTools::ThreadGroupTesting::CreateThread(Function function)
 {
-    ThreadGroup thread{ DisableNotThrow::Disable };
+    auto thread = ThreadGroup::Create();
 
     constexpr auto threadSize = 4;
 

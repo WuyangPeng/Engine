@@ -92,7 +92,7 @@ int Rendering::Polypoint
 }
 
 uint64_t Rendering::Polypoint
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -100,7 +100,7 @@ uint64_t Rendering::Polypoint
 }
 
 void Rendering::Polypoint
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -108,13 +108,13 @@ void Rendering::Polypoint
     
 	ParentType::Save(target);
 	
-	target->Write(m_NumPoints);
+	target.Write(m_NumPoints);
      
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::Polypoint
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -130,7 +130,7 @@ void Rendering::Polypoint
 }
 
 void Rendering::Polypoint
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     
@@ -138,7 +138,7 @@ void Rendering::Polypoint
     
     ParentType::Load(source);
 	
-	source->Read(m_NumPoints);
+	source.Read(m_NumPoints);
         
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

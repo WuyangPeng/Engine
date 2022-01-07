@@ -16,11 +16,30 @@ namespace BookExperience
     {
         namespace Chapter3
         {
-            class Terms18Example;
-            class Terms19Example;
-            class Terms20Example;
-            class Terms21Example;
-            class Terms22Example;
+            namespace Terms18
+            {
+                class Terms18Example;
+            }
+
+            namespace Terms19
+            {
+                class Terms19Example;
+            }
+
+            namespace Terms20
+            {
+                class Terms20Example;
+            }
+
+            namespace Terms21
+            {
+                class Terms21Example;
+            }
+
+            namespace Terms22
+            {
+                class Terms22Example;
+            }
         }
     }
 }

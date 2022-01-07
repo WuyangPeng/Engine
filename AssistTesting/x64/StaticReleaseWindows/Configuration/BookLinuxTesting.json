@@ -1,0 +1,13 @@
+{
+  "beginningLinuxProgrammingSuite": {
+    "BeginningLinuxProgramming::BeginningLinuxProgrammingPlaceholderTesting": 1
+  },
+
+  "linuxCommandLineAndShellScriptingBibleSuite": {
+    "LinuxCommandLineAndShellScriptingBible::LinuxCommandLineAndShellScriptingBiblePlaceholderTesting": 1
+  },
+
+  "professionalLinuxKernelArchitectureSuite": {
+    "ProfessionalLinuxKernelArchitecture::ProfessionalLinuxKernelArchitecturePlaceholderTesting": 1
+  }
+}

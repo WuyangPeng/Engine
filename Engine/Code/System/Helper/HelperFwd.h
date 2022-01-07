@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/03 0:28)
+///	引擎版本：0.8.0.0 (2021/12/13 17:52)
 
 #ifndef SYSTEM_HELPER_FWD_H
 #define SYSTEM_HELPER_FWD_H
@@ -24,8 +24,8 @@
 #include "StringizeMacro.h"
 #include "UnicodeUsing.h"
 #include "UserMacro.h"
+#include "VariableTemplateType.h"
 #include "Version.h"
 #include "WindowsMacro.h"
-#include "VariableTemplateType.h"
 
 #endif  // SYSTEM_HELPER_FWD_H

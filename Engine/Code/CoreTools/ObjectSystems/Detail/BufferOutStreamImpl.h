@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:17)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 14:14)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_IMPL_H
@@ -19,8 +19,7 @@
 
 namespace CoreTools
 {
-    // 写objects到内存块。当操作失败时，抛出Error异常。
-    class CORE_TOOLS_HIDDEN_DECLARE BufferOutStreamImpl final : private boost::noncopyable
+    class CORE_TOOLS_HIDDEN_DECLARE BufferOutStreamImpl final
     {
     public:
         using ClassType = BufferOutStreamImpl;
@@ -28,26 +27,32 @@ namespace CoreTools
     public:
         explicit BufferOutStreamImpl(const OutTopLevel& topLevel);
 
+        ~BufferOutStreamImpl() noexcept = default;
+        BufferOutStreamImpl(const BufferOutStreamImpl& rhs) = delete;
+        BufferOutStreamImpl& operator=(const BufferOutStreamImpl& rhs) = delete;
+        BufferOutStreamImpl(BufferOutStreamImpl&& rhs) noexcept = delete;
+        BufferOutStreamImpl& operator=(BufferOutStreamImpl&& rhs) noexcept = delete;
+
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
+        NODISCARD FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
 
     private:
         void GenerateBuffer();
         void Register();
-        [[nodiscard]] int GetBufferSize();
+        NODISCARD int GetBufferSize();
         void ResetBufferSize(int bufferSize);
         void SaveToBuffer();
 
     private:
         // 顶层对象的流。
-        OutTopLevel m_TopLevel;
+        OutTopLevel topLevel;
 
         // 存储objects，对顶层对象使用图的深度优先遍历。
-        ObjectRegisterSharedPtr m_ObjectRegister;
+        ObjectRegisterSharedPtr objectRegister;
 
-        FileBufferSharedPtr m_Buffer;
-        BufferTargetSharedPtr m_Target;
+        FileBufferSharedPtr buffer;
+        BufferTargetSharedPtr target;
     };
 }
 

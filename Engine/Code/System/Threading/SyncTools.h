@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 14:41)
+///	引擎版本：0.8.0.0 (2021/12/12 18:09)
 
 #ifndef SYSTEM_THREADING_SYNC_TOOLS_H
 #define SYSTEM_THREADING_SYNC_TOOLS_H
@@ -22,7 +22,10 @@ namespace System
 
     void SYSTEM_DEFAULT_DECLARE SystemSleep(WindowsDWord milliseconds) noexcept;
     NODISCARD SleepReturn SYSTEM_DEFAULT_DECLARE SystemSleep(WindowsDWord milliseconds, bool alertable) noexcept;
-    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE SystemSignalObjectAndWait(ThreadHandle objectToSignal, ThreadHandle objectToWaitOn, WindowsDWord milliseconds, bool alertable) noexcept;
+    NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE SystemSignalObjectAndWait(ThreadHandle objectToSignal,
+                                                                               ThreadHandle objectToWaitOn,
+                                                                               WindowsDWord milliseconds,
+                                                                               bool alertable) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_SYNC_TOOLS_H

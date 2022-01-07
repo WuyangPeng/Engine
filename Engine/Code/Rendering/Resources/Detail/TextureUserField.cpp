@@ -56,16 +56,16 @@ int Rendering::TextureUserField
 }
 
 void Rendering::TextureUserField
-    ::Load( const CoreTools::BufferSourceSharedPtr& source )
+    ::Load( CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_9;
     CoreTools::DisableNoexcept();
     source;
-    //	source->Read(TextureMaxUserFields, m_UserField);   
+    //	source.Read(TextureMaxUserFields, m_UserField);   
 }
 
 void Rendering::TextureUserField
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     CoreTools::DisableNoexcept();

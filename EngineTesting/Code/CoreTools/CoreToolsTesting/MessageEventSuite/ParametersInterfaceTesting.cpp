@@ -7,7 +7,7 @@
 #include "ParametersInterfaceTesting.h"
 #include "Detail/Parameters.h"
 #include "CoreTools/Helper/AssertMacro.h"  
-#include "CoreTools/Helper/MemoryMacro.h" 
+ 
 #include "CoreTools/Helper/ClassInvariantMacro.h" 
 #include "CoreTools/MessageEvent/ParametersInterface.h"
 

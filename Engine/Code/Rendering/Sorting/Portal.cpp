@@ -1,21 +1,21 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/26 10:43)
 
 #include "Rendering/RenderingExport.h"
 
-#include "Portal.h"
 #include "ConvexRegion.h"
+#include "Portal.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
 #include "System/Helper/PragmaWarning.h"
-#include "CoreTools/Helper/ExceptionMacro.h" 
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -29,23 +29,18 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Portal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
 
-Rendering::Portal
-	::Portal(int numVertices, Mathematics::FloatAPoint* modelVertices,const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open)
-	:ParentType("Portal"),AdjacentRegion(adjacentRegion),Open(open),mNumVertices(numVertices),
-     mModelVertices(modelVertices),mModelPlane(modelPlane),mWorldPlane(modelPlane)
+Rendering::Portal ::Portal(int numVertices, Mathematics::FloatAPoint* modelVertices, const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open)
+    : ParentType("Portal"), AdjacentRegion(adjacentRegion), Open(open), mNumVertices(numVertices),
+      mModelVertices(modelVertices), mModelPlane(modelPlane), mWorldPlane(modelPlane)
 {
-	mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
+    mWorldVertices = nullptr;  //NEW1<Mathematics::FloatAPoint>(mNumVertices);
 }
 
-Rendering::Portal::~Portal ()
-{
-	EXCEPTION_TRY
-{
-  DELETE1(mModelVertices);
-    DELETE1(mWorldVertices);
-}
-EXCEPTION_ALL_CATCH(Rendering)  
-  
+Rendering::Portal::~Portal(){
+    EXCEPTION_TRY{
+        //         DELETE1(mModelVertices);
+        // DELETE1(mWorldVertices);
+    } EXCEPTION_ALL_CATCH(Rendering)
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::Portal::CloneObject() const
@@ -59,15 +54,14 @@ void Rendering::Portal ::UpdateWorldData(const FloatTransform& worldTransform) n
 {
     for (int i = 0; i < mNumVertices; ++i)
     {
-        mWorldVertices[i] = worldTransform*mModelVertices[i];
+        mWorldVertices[i] = worldTransform * mModelVertices[i];
     }
-	// 先通过编译
-   // mWorldPlane = mModelPlane*worldTransform.GetInverseMatrix();
-   // mWorldPlane.Normalize();
+    // 先通过编译
+    // mWorldPlane = mModelPlane*worldTransform.GetInverseMatrix();
+    // mWorldPlane.Normalize();
 }
 
-bool Rendering::Portal
-	::ReducedFrustum (const Culler& culler, float reducedFrustum[6])
+bool Rendering::Portal ::ReducedFrustum(const Culler& culler, float reducedFrustum[6])
 {
     // The portal polygon is transformed into the camera coordinate system
     // and projected onto the near plane.  An axis-aligned bounding rectangle
@@ -116,8 +110,8 @@ bool Rendering::Portal
     float umin = +Mathematics::FloatMath::sm_MaxReal;  // bottom
     float umax = -Mathematics::FloatMath::sm_MaxReal;  // top
 
-    Mathematics::FloatAVector diff{  };
-	Mathematics::FloatAPoint vertexCam;
+    Mathematics::FloatAVector diff{};
+    Mathematics::FloatAPoint vertexCam;
     int i = 0;
 
     if (camera->IsPerspective())
@@ -127,14 +121,14 @@ bool Rendering::Portal
         bool signChange = false;
         Mathematics::FloatAPoint firstVertex = Mathematics::FloatAPoint::GetOrigin();
         Mathematics::FloatAPoint lastVertex = Mathematics::FloatAPoint::GetOrigin();
-        float NdD = 0.0f, UdD= 0.0f, RdD= 0.0f, t= 0.0f;
+        float NdD = 0.0f, UdD = 0.0f, RdD = 0.0f, t = 0.0f;
 
         for (i = 0; i < mNumVertices; i++)
         {
             diff = mWorldVertices[i] - camera->GetPosition();
-			vertexCam[0] = Dot(diff,camera->GetDirectionVector());
-			vertexCam[1] = Dot(diff,camera->GetUpVector());
-			vertexCam[2] = Dot(diff,camera->GetRightVector());
+            vertexCam[0] = Dot(diff, camera->GetDirectionVector());
+            vertexCam[1] = Dot(diff, camera->GetUpVector());
+            vertexCam[2] = Dot(diff, camera->GetRightVector());
             vertexCam[3] = 1.0f;
 
             if (vertexCam[0] > epsilon)
@@ -144,10 +138,10 @@ bool Rendering::Portal
                     firstSign = 1;
                     firstVertex = vertexCam;
                 }
-				
-				NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
-                UdD = vertexCam[1]*NdD;
-                RdD = vertexCam[2]*NdD;
+
+                NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] / vertexCam[0];
+                UdD = vertexCam[1] * NdD;
+                RdD = vertexCam[2] * NdD;
 
                 if (UdD < umin)
                 {
@@ -193,10 +187,10 @@ bool Rendering::Portal
             if (signChange)
             {
                 diff = vertexCam - lastVertex;
-                t = (epsilon - lastVertex[0])/diff[0];
-				NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
-                UdD = (lastVertex[1] + t*diff[1])*NdD;
-                RdD = (lastVertex[2] + t*diff[2])*NdD;
+                t = (epsilon - lastVertex[0]) / diff[0];
+                NdD = frustum[System::EnumCastUnderlying(ViewFrustum::DirectionMin)] * invEpsilon;
+                UdD = (lastVertex[1] + t * diff[1]) * NdD;
+                RdD = (lastVertex[2] + t * diff[2]) * NdD;
 
                 if (UdD < umin)
                 {
@@ -222,13 +216,13 @@ bool Rendering::Portal
             lastVertex = vertexCam;
         }
 
-        if (firstSign*lastSign < 0)
+        if (firstSign * lastSign < 0)
         {
             // Process the last polygon edge.
             diff = firstVertex - lastVertex;
-            t = (epsilon - lastVertex[0])/diff[0];
-            UdD = (lastVertex[1] + t*diff[1])*invEpsilon;
-            RdD = (lastVertex[2] + t*diff[2])*invEpsilon;
+            t = (epsilon - lastVertex[0]) / diff[0];
+            UdD = (lastVertex[1] + t * diff[1]) * invEpsilon;
+            RdD = (lastVertex[2] + t * diff[2]) * invEpsilon;
 
             if (UdD < umin)
             {
@@ -254,8 +248,8 @@ bool Rendering::Portal
         for (i = 0; i < mNumVertices; i++)
         {
             diff = mWorldVertices[i] - camera->GetPosition();
-			vertexCam[1] = Dot(diff,camera->GetUpVector());
-			vertexCam[2] = Dot(diff,camera->GetRightVector());
+            vertexCam[1] = Dot(diff, camera->GetUpVector());
+            vertexCam[2] = Dot(diff, camera->GetRightVector());
 
             if (vertexCam[1] < umin)
             {
@@ -279,10 +273,10 @@ bool Rendering::Portal
 
     // Test whether the axis-aligned bounding rectangle is outside the current
     // frustum.  If it is, the adjoining room need not be visited.
-	if (frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] >= rmax ||
-		frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] <= rmin ||
-		frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] >= umax ||
-		frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] <= umin)
+    if (frustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] >= rmax ||
+        frustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] <= rmin ||
+        frustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] >= umax ||
+        frustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] <= umin)
     {
         return false;
     }
@@ -294,31 +288,30 @@ bool Rendering::Portal
         reducedFrustum[j] = frustum[j];
     }
 
-	if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] < rmin)
+    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] < rmin)
     {
-		reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] = rmin;
+        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMin)] = rmin;
     }
 
-	if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] > rmax)
+    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] > rmax)
     {
-		reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = rmax;
+        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::RightMax)] = rmax;
     }
 
-	if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] < umin)
+    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] < umin)
     {
-		reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] = umin;
+        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMin)] = umin;
     }
 
-	if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] > umax)
+    if (reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] > umax)
     {
-		reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = umax;
+        reducedFrustum[System::EnumCastUnderlying(ViewFrustum::UpMax)] = umax;
     }
 
     return true;
 }
 
-void Rendering::Portal
-	::GetVisibleSet (Culler& culler, bool noCull)
+void Rendering::Portal ::GetVisibleSet(Culler& culler, bool noCull)
 {
     // Visit only the adjacent region if the portal is open.
     if (!Open)
@@ -366,137 +359,118 @@ void Rendering::Portal
     }
 }
 
-
-
 // Name support.
 
-const CoreTools::ObjectSharedPtr Rendering::Portal
-	::GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::Portal ::GetObjectByName(const std::string& name)
 {
-	CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
+    CoreTools::ObjectSharedPtr found = ParentType::GetObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
 
-	found = AdjacentRegion->GetObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
+    found = AdjacentRegion->GetObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
 
-	 
-
-	return CoreTools::ObjectSharedPtr();
+    return CoreTools::ObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal
-	::GetAllObjectsByName(const std::string& name)
+std::vector<CoreTools::ObjectSharedPtr> Rendering::Portal ::GetAllObjectsByName(const std::string& name)
 {
-	std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
+    std::vector<CoreTools::ObjectSharedPtr> objects = ParentType::GetAllObjectsByName(name);
 
-	std::vector<CoreTools::ObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllObjectsByName(name);
-	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
- 
+    std::vector<CoreTools::ObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllObjectsByName(name);
+    objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
-	return objects;
+    return objects;
 }
 
-const CoreTools::ConstObjectSharedPtr Rendering::Portal
-	::GetConstObjectByName(const std::string& name) const
+CoreTools::ConstObjectSharedPtr Rendering::Portal ::GetConstObjectByName(const std::string& name) const
 {
-	CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
+    CoreTools::ConstObjectSharedPtr found = ParentType::GetConstObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
 
-	found = AdjacentRegion->GetConstObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
-	 
+    found = AdjacentRegion->GetConstObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
 
-	return CoreTools::ConstObjectSharedPtr();
+    return CoreTools::ConstObjectSharedPtr();
 }
 
-const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal
-	::GetAllConstObjectsByName(const std::string& name) const
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::Portal ::GetAllConstObjectsByName(const std::string& name) const
 {
-	std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
+    std::vector<CoreTools::ConstObjectSharedPtr> objects = ParentType::GetAllConstObjectsByName(name);
 
-	std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllConstObjectsByName(name);
-	objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
+    std::vector<CoreTools::ConstObjectSharedPtr> pointerObjects = AdjacentRegion->GetAllConstObjectsByName(name);
+    objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
 
-	 
-
-	return objects;
+    return objects;
 }
- 
 
 // Streaming support.
 
-Rendering::Portal
-	::Portal (LoadConstructor value)
+Rendering::Portal ::Portal(LoadConstructor value)
     : Object(value), AdjacentRegion(0), Open(false), mNumVertices(0),
-    mModelVertices(0), mWorldVertices(0), mModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
+      mModelVertices(0), mWorldVertices(0), mModelPlane(0.0f, 0.0f, 0.0f, 0.0f), mWorldPlane(0.0f, 0.0f, 0.0f, 0.0f)
 {
 }
 
-void Rendering::Portal
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::Portal ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Object::Load(source);
 
-	//source->ReadAggregate(mNumVertices, mModelVertices);
-    source->ReadAggregate(mModelPlane);
-	Open = source->ReadBool();
-//    source.ReadSharedPtr(AdjacentRegion);
+    //source.ReadAggregate(mNumVertices, mModelVertices);
+    source.ReadAggregate(mModelPlane);
+    Open = source.ReadBool();
+    //    source.ReadSharedPtr(AdjacentRegion);
 
-    mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
+    //    mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::Portal
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::Portal ::Link(CoreTools::ObjectLink& source)
 {
     Object::Link(source);
 
-	//source.ResolveObjectLink(AdjacentRegion);
+    //source.ResolveObjectLink(AdjacentRegion);
 }
 
-void Rendering::Portal
-	::PostLink ()
+void Rendering::Portal ::PostLink()
 {
     Object::PostLink();
 }
 
-uint64_t Rendering::Portal
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::Portal ::Register(CoreTools::ObjectRegister& target) const
 {
     if (Object::Register(target))
     {
-       // target.Register(AdjacentRegion);
+        // target.Register(AdjacentRegion);
         return true;
     }
     return false;
 }
 
-void Rendering::Portal
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::Portal ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
-    
+
     Object::Save(target);
 
-//	target.WriteAggregateWithNumber(mNumVertices, mModelVertices);
-    target->WriteAggregate(mModelPlane);
-    target->Write(Open);
-  //  target.WritePointer(AdjacentRegion);
+    //	target.WriteAggregateWithNumber(mNumVertices, mModelVertices);
+    target.WriteAggregate(mModelPlane);
+    target.Write(Open);
+    //  target.WritePointer(AdjacentRegion);
 
     // World vertices are computed form model vertices in the update call,
     // so no need to save them.  The world plane is also computed in the
@@ -505,15 +479,14 @@ void Rendering::Portal
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::Portal
-	::GetStreamingSize () const
+int Rendering::Portal ::GetStreamingSize() const
 {
     int size = Object::GetStreamingSize();
     size += sizeof(mNumVertices);
-    size += mNumVertices*sizeof(mModelVertices[0]);
+    size += mNumVertices * sizeof(mModelVertices[0]);
     size += sizeof(mModelPlane);
-	size += CORE_TOOLS_STREAM_SIZE(Open);
-	size += CORE_TOOLS_STREAM_SIZE(AdjacentRegion);
+    size += CORE_TOOLS_STREAM_SIZE(Open);
+    size += CORE_TOOLS_STREAM_SIZE(AdjacentRegion);
     return size;
 }
 

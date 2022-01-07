@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎测试版本：0.7.1.3 (2021/05/24 20:42)
+///	引擎版本：0.8.0.0 (2021/12/13 10:48)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ void System::GetMapGenericMask(WindowsDWordPtr accessMask, AccessCheckGenericMap
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWordPtr, AccessCheckGenericMappingPtr>(accessMask, genericMapping);
+    UnusedFunction(accessMask, genericMapping);
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
@@ -53,21 +53,14 @@ bool System::GetAccessCheck(SecurityDescriptorPtr securityDescriptor,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 WindowsHandle,
-                 AccessGenericMask,
-                 AccessCheckGenericMappingPtr,
-                 SecurityPrivilegeSetPtr,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr,
-                 bool*>(securityDescriptor,
-                        clientToken,
-                        desiredAccess,
-                        genericMapping,
-                        privilegeSet,
-                        privilegeSetLength,
-                        grantedAccess,
-                        &resultAccessStatue);
+    UnusedFunction(securityDescriptor,
+                   clientToken,
+                   desiredAccess,
+                   genericMapping,
+                   privilegeSet,
+                   privilegeSetLength,
+                   grantedAccess,
+                   &resultAccessStatue);
 
     return false;
 
@@ -112,27 +105,17 @@ bool System::GetAccessCheckByType(SecurityDescriptorPtr securityDescriptor,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecuritySIDPtr,
-                 WindowsHandle,
-                 AccessGenericMask,
-                 SecurityObjectTypeListPtr,
-                 WindowsDWord,
-                 AccessCheckGenericMappingPtr,
-                 SecurityPrivilegeSetPtr,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr,
-                 bool*>(securityDescriptor,
-                        principalSelfSid,
-                        clientToken,
-                        desiredAccess,
-                        objectTypeList,
-                        objectTypeListLength,
-                        genericMapping,
-                        privilegeSet,
-                        privilegeSetLength,
-                        grantedAccess,
-                        &resultAccessStatue);
+    UnusedFunction(securityDescriptor,
+                   principalSelfSid,
+                   clientToken,
+                   desiredAccess,
+                   objectTypeList,
+                   objectTypeListLength,
+                   genericMapping,
+                   privilegeSet,
+                   privilegeSetLength,
+                   grantedAccess,
+                   &resultAccessStatue);
 
     return false;
 
@@ -174,27 +157,17 @@ bool System::GetAccessCheckByTypeResultList(SecurityDescriptorPtr securityDescri
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr,
-                 SecuritySIDPtr,
-                 WindowsHandle,
-                 AccessGenericMask,
-                 SecurityObjectTypeListPtr,
-                 WindowsDWord,
-                 AccessCheckGenericMappingPtr,
-                 SecurityPrivilegeSetPtr,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr,
-                 WindowsDWordPtr>(securityDescriptor,
-                                 principalSelfSid,
-                                 clientToken,
-                                 desiredAccess,
-                                 objectTypeList,
-                                 objectTypeListLength,
-                                 genericMapping,
-                                 privilegeSet,
-                                 privilegeSetLength,
-                                 grantedAccessList,
-                                 accessStatusList);
+    UnusedFunction(securityDescriptor,
+                   principalSelfSid,
+                   clientToken,
+                   desiredAccess,
+                   objectTypeList,
+                   objectTypeListLength,
+                   genericMapping,
+                   privilegeSet,
+                   privilegeSetLength,
+                   grantedAccessList,
+                   accessStatusList);
 
     return false;
 

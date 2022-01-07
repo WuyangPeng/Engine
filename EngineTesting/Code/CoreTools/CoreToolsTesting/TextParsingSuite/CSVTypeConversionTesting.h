@@ -33,6 +33,8 @@ namespace CoreTools
         void CSVFormatTypeTest();
         void ActualTypeTest();
         void GetFunctionNameTest();
+        void ValueTypeTest();
+        void BaseReturnDescribeTest();
     };
 }
 

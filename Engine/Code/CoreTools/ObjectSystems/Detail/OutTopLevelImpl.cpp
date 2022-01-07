@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 14:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:03)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -15,7 +15,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::OutTopLevelImpl::OutTopLevelImpl() noexcept
-    : m_TopLevel{}
+    : topLevel{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -26,7 +26,7 @@ bool CoreTools::OutTopLevelImpl::IsTopLevel(const ConstObjectInterfaceSharedPtr&
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto& container = m_TopLevel.get<UniqueObject>();
+    const auto& container = topLevel.get<UniqueObject>();
 
     return container.find(object) != container.cend();
 }
@@ -35,26 +35,26 @@ int CoreTools::OutTopLevelImpl::GetTopLevelSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_TopLevel.size());
+    return boost::numeric_cast<int>(topLevel.size());
 }
 
 CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevelImpl::begin() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_TopLevel.begin();
+    return topLevel.begin();
 }
 
 CoreTools::ConstObjectContainerConstIter CoreTools::OutTopLevelImpl::end() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_TopLevel.end();
+    return topLevel.end();
 }
 
 void CoreTools::OutTopLevelImpl::Insert(const ObjectInterfaceSharedPtr& object)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_TopLevel.emplace_back(object);
+    topLevel.emplace_back(object);
 }

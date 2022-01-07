@@ -9,9 +9,9 @@
 #include "CoreTools/ObjectSystems/Object.h"
 #include "CoreTools/ObjectSystems/ObjectRegister.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include <vector>

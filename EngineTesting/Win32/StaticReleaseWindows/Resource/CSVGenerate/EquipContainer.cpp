@@ -10,9 +10,9 @@
 #include "Equip.h"
 #include "EquipContainerDetail.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/CSVRow.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
 
@@ -36,12 +36,9 @@ void CSVConfigure::EquipContainer::Parsing(const CoreTools::CSVContent& csvConte
         equip.emplace_back(make_shared<Equip>(csvRow));
     }
 
-    const auto function = [](const auto& lhs, const auto& rhs) noexcept {
+    std::sort(equip.begin(), equip.end(), [](const auto& lhs, const auto& rhs) noexcept {
         return (*lhs).GetKey() < (*rhs).GetKey();
-    };
-
-    std::sort(equip.begin(), equip.end(), function);
-
+    });
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CSVConfigure, EquipContainer)

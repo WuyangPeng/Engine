@@ -101,7 +101,7 @@ int Rendering::IndexBuffer
 }
 
 uint64_t Rendering::IndexBuffer
-	::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+	::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -109,7 +109,7 @@ uint64_t Rendering::IndexBuffer
 }
 
 void Rendering::IndexBuffer
-	::Save (const CoreTools::BufferTargetSharedPtr& target) const
+	::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -117,13 +117,13 @@ void Rendering::IndexBuffer
 
 	ParentType::Save(target);
 	
-	target->Write(m_Offset);
+	target.Write(m_Offset);
 
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
 void Rendering::IndexBuffer
-	::Link (const CoreTools::ObjectLinkSharedPtr& source)
+	::Link (CoreTools::ObjectLink& source)
 {	
 	;
 
@@ -139,7 +139,7 @@ void Rendering::IndexBuffer
 }
 
 void Rendering::IndexBuffer
-	::Load (const CoreTools::BufferSourceSharedPtr& source)
+	::Load (CoreTools::BufferSource& source)
 {
 	;
 
@@ -147,7 +147,7 @@ void Rendering::IndexBuffer
 
     ParentType::Load(source);
 	
-	source->Read(m_Offset);
+	source.Read(m_Offset);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

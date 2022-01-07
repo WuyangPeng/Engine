@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/08 21:06)
+///	引擎版本：0.8.0.0 (2021/12/20 22:29)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@
 #include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleCSV/CommandQuery/QuerySharedStrings.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVInternalFwd.h"
 

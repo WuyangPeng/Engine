@@ -25,19 +25,19 @@
 #if defined(CORE_TOOLS_USE_ASSERT) && 2 <= ASSERT_LEVEL
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source) \
-        const auto beginLoad = source->GetBytesRead()
+        const auto beginLoad = source.GetBytesRead()
 
     #define CORE_TOOLS_END_DEBUG_STREAM_LOAD(source)                                                 \
-        const auto endLoad = source->GetBytesRead();                                                 \
+        const auto endLoad = source.GetBytesRead();                                                  \
         const auto usedLoad = endLoad - beginLoad + CORE_TOOLS_STREAM_SIZE(GetRttiType().GetName()); \
         const auto usedReported = ClassType::GetStreamingSize();                                     \
         ASSERTION_2(usedLoad == usedReported, "读取不匹配的字节数：读取 = %d，所需 = %d\n", usedLoad, usedReported)
 
     #define CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target) \
-        const auto beginSave = target->GetBytesWritten()
+        const auto beginSave = target.GetBytesWritten()
 
     #define CORE_TOOLS_END_DEBUG_STREAM_SAVE(target)             \
-        const auto endSave = target->GetBytesWritten();          \
+        const auto endSave = target.GetBytesWritten();           \
         const auto usedSave = endSave - beginSave;               \
         const auto usedReported = ClassType::GetStreamingSize(); \
         ASSERTION_2(usedSave == usedReported, "保存不匹配的字节数：保存 = %d，所需 = %d\n", usedSave, usedReported)
@@ -57,14 +57,14 @@ public:                                              \
                                                      \
 public:                                              \
     CORE_TOOLS_INITIALIZE_TERMINATE_DECLARE(false);  \
-    NODISCARD static CoreTools::ObjectInterfaceSharedPtr Factory(const CoreTools::BufferSourceSharedPtr& source)
+    NODISCARD static CoreTools::ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source)
 
-#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                                 \
-    void Load(const CoreTools::BufferSourceSharedPtr& source) override;                           \
-    void Link(const CoreTools::ObjectLinkSharedPtr& source) override;                             \
-    void PostLink() override;                                                                     \
-    NODISCARD uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const override; \
-    void Save(const CoreTools::BufferTargetSharedPtr& target) const override;                     \
+#define CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE                                  \
+    void Load(CoreTools::BufferSource& source) override;                           \
+    void Link(CoreTools::ObjectLink& source) override;                             \
+    void PostLink() override;                                                      \
+    NODISCARD uint64_t Register(CoreTools::ObjectRegister& target) const override; \
+    void Save(CoreTools::BufferTarget& target) const override;                     \
     NODISCARD int GetStreamingSize() const override;
 
 #define CORE_TOOLS_DEFAULT_OBJECT_STREAM_OVERRIDE_DECLARE(className) \
@@ -72,18 +72,18 @@ public:                                              \
     CORE_TOOLS_OBJECT_STREAM_OVERRIDE_DECLARE;                       \
     CORE_TOOLS_RTTI_OVERRIDE_DECLARE
 
-#define CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(namespaceName, className)                                               \
-    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(const CoreTools::BufferSourceSharedPtr&) \
-    {                                                                                                              \
-        THROW_EXCEPTION(SYSTEM_TEXT("抽象类没有工厂！\n"s));                                                       \
+#define CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(namespaceName, className)                                \
+    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource&) \
+    {                                                                                               \
+        THROW_EXCEPTION(SYSTEM_TEXT("抽象类没有工厂！\n"s));                                        \
     }
 
-#define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                               \
-    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(const CoreTools::BufferSourceSharedPtr& source) \
-    {                                                                                                                     \
-        CoreTools::ObjectInterfaceSharedPtr object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) };    \
-        object->Load(source);                                                                                             \
-        return object;                                                                                                    \
+#define CORE_TOOLS_FACTORY_DEFINE(namespaceName, className)                                                            \
+    CoreTools::ObjectInterfaceSharedPtr namespaceName::className::Factory(CoreTools::BufferSource& source)             \
+    {                                                                                                                  \
+        CoreTools::ObjectInterfaceSharedPtr object{ std::make_shared<className>(LoadConstructor::ConstructorLoader) }; \
+        object->Load(source);                                                                                          \
+        return object;                                                                                                 \
     }
 
 #define CORE_TOOLS_STREAM_REGISTER(className) \
@@ -123,48 +123,48 @@ public:                                              \
         return size;                                                                    \
     }
 
-#define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName, className)                             \
-    uint64_t namespaceName::className::Register(const CoreTools::ObjectRegisterSharedPtr& target) const \
-    {                                                                                                   \
-        CLASS_IS_VALID_CONST_0;                                                                         \
-        return ParentType::Register(target);                                                            \
+#define CORE_TOOLS_DEFAULT_OBJECT_REGISTER_DEFINE(namespaceName, className)              \
+    uint64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
+    {                                                                                    \
+        CLASS_IS_VALID_CONST_0;                                                          \
+        return ParentType::Register(target);                                             \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName, className)                           \
-    uint64_t namespaceName::className::Register(const CoreTools::ObjectRegisterSharedPtr& target) const \
-    {                                                                                                   \
-        CLASS_IS_VALID_CONST_0;                                                                         \
-        const auto uniqueID = ParentType::Register(target);                                             \
-        if (uniqueID != 0)                                                                              \
-        {                                                                                               \
-            impl->Register(target);                                                                     \
-        }                                                                                               \
-        return uniqueID;                                                                                \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_REGISTER_DEFINE(namespaceName, className)            \
+    uint64_t namespaceName::className::Register(CoreTools::ObjectRegister& target) const \
+    {                                                                                    \
+        CLASS_IS_VALID_CONST_0;                                                          \
+        const auto uniqueID = ParentType::Register(target);                              \
+        if (uniqueID != 0)                                                               \
+        {                                                                                \
+            impl->Register(target);                                                      \
+        }                                                                                \
+        return uniqueID;                                                                 \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName, className)                     \
-    void namespaceName::className::Save(const CoreTools::BufferTargetSharedPtr& target) const \
-    {                                                                                         \
-        CLASS_IS_VALID_CONST_0;                                                               \
-        CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);                                           \
-        ParentType::Save(target);                                                             \
-        impl->Save(target);                                                                   \
-        CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);                                             \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_SAVE_DEFINE(namespaceName, className)      \
+    void namespaceName::className::Save(CoreTools::BufferTarget& target) const \
+    {                                                                          \
+        CLASS_IS_VALID_CONST_0;                                                \
+        CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);                            \
+        ParentType::Save(target);                                              \
+        impl->Save(target);                                                    \
+        CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);                              \
     }
 
-#define CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(namespaceName, className)               \
-    void namespaceName::className::Link(const CoreTools::ObjectLinkSharedPtr& source) \
-    {                                                                                 \
-        CLASS_IS_VALID_0;                                                             \
-        ParentType::Link(source);                                                     \
+#define CORE_TOOLS_DEFAULT_OBJECT_LINK_DEFINE(namespaceName, className) \
+    void namespaceName::className::Link(CoreTools::ObjectLink& source)  \
+    {                                                                   \
+        CLASS_IS_VALID_0;                                               \
+        ParentType::Link(source);                                       \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(namespaceName, className)             \
-    void namespaceName::className::Link(const CoreTools::ObjectLinkSharedPtr& source) \
-    {                                                                                 \
-        CLASS_IS_VALID_0;                                                             \
-        ParentType::Link(source);                                                     \
-        impl->Link(source);                                                           \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_LINK_DEFINE(namespaceName, className) \
+    void namespaceName::className::Link(CoreTools::ObjectLink& source)    \
+    {                                                                     \
+        CLASS_IS_VALID_0;                                                 \
+        ParentType::Link(source);                                         \
+        impl->Link(source);                                               \
     }
 
 #define CORE_TOOLS_DEFAULT_OBJECT_POST_LINK_DEFINE(namespaceName, className) \
@@ -174,14 +174,14 @@ public:                                              \
         ParentType::PostLink();                                              \
     }
 
-#define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(namespaceName, className)               \
-    void namespaceName::className::Load(const CoreTools::BufferSourceSharedPtr& source) \
-    {                                                                                   \
-        CLASS_IS_VALID_0;                                                               \
-        CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);                                     \
-        ParentType::Load(source);                                                       \
-        impl->Load(source);                                                             \
-        CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);                                       \
+#define CORE_TOOLS_WITH_IMPL_OBJECT_LOAD_DEFINE(namespaceName, className) \
+    void namespaceName::className::Load(CoreTools::BufferSource& source)  \
+    {                                                                     \
+        CLASS_IS_VALID_0;                                                 \
+        CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);                       \
+        ParentType::Load(source);                                         \
+        impl->Load(source);                                               \
+        CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);                         \
     }
 
 #define CORE_TOOLS_IMPL_NON_OBJECT_PTR_DEFAULT_STREAM(namespaceName, className)     \

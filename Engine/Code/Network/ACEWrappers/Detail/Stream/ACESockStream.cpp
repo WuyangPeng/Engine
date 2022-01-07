@@ -174,7 +174,7 @@ void Network::ACESockStream::AsyncSend(const EventInterfaceSharedPtr& eventInter
         THROW_EXCEPTION(SYSTEM_TEXT("·¢ËÍÊý¾ÝÊ§°Ü£¡"s));
     }
 
-    CoreTools::CallbackParameters callbackParameters{};
+    CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
     if (!eventInterface->EventFunction(callbackParameters))
@@ -237,7 +237,7 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
 
         messageBuffer->AddCurrentWriteIndex(remainLength);
 
-        CoreTools::CallbackParameters callbackParameters{};
+        CoreTools::CallbackParameters callbackParameters{ 0 };
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncReceive));
         callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::ACE));
         if (!eventInterface->EventFunction(callbackParameters))

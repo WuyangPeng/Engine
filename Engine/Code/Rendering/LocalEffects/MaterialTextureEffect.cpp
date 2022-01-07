@@ -13,7 +13,7 @@
 #include "CoreTools/ObjectSystems/StreamSize.h"
 
  #include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -103,7 +103,7 @@ Rendering::PixelShader* Rendering::MaterialTextureEffect
 Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateInstance ( Material* material, Texture2D* texture) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    VisualEffectInstance* instance =  nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
         instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
 	instance->SetPixelTexture(0, 0, TextureSharedPtr(texture));
@@ -120,7 +120,7 @@ Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 Rendering::VisualEffectInstance* Rendering::MaterialTextureEffect
 	::CreateUniqueInstance (Material* material, Texture2D* texture, ShaderFlags::SamplerFilter filter,ShaderFlags::SamplerCoordinate coordinate0,ShaderFlags::SamplerCoordinate coordinate1)
 {
-    const MaterialTextureEffect* effect = CoreTools::New0 < MaterialTextureEffect>();
+    const MaterialTextureEffect* effect = nullptr;  // CoreTools::New0 < MaterialTextureEffect>();
     PixelShader* pshader = effect->GetPixelShader();
     pshader->SetFilter(0, filter);
     pshader->SetCoordinate(0, 0, coordinate0);
@@ -139,7 +139,7 @@ Rendering::MaterialTextureEffect
 }
 
 void Rendering::MaterialTextureEffect
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -149,7 +149,7 @@ void Rendering::MaterialTextureEffect
 }
 
 void Rendering::MaterialTextureEffect
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
@@ -187,13 +187,13 @@ void Rendering::MaterialTextureEffect
 	}
 }
 
-uint64_t Rendering::MaterialTextureEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::MaterialTextureEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::MaterialTextureEffect
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

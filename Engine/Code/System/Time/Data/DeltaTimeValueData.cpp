@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/17 14:02)
+///	引擎版本：0.8.0.0 (2021/12/12 16:37)
 
 #include "System/SystemExport.h"
 
@@ -64,8 +64,8 @@ System::DeltaTimeValueData System::operator-(const DeltaTimeValueData& lhs, cons
 
     auto lhsDeltaTime = lhs.GetDeltaTimeValue();
     auto rhsDeltaTime = rhs.GetDeltaTimeValue();
-    DeltaTimeValue result{};
 
+    DeltaTimeValue result{};
     timersub(&lhsDeltaTime, &rhsDeltaTime, &result);
 
     return DeltaTimeValueData{ result };

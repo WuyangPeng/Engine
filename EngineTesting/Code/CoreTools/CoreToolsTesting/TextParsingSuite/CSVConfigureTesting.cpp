@@ -7,14 +7,13 @@
 ///	标准：std:c++17
 ///	引擎测试版本：0.7.2.5 (2021/10/17 12:49)
 
-#include "../EngineWindows/CoreTools/CoreToolsTesting/Resource/CSVGenerate/CSVConfigureContainer.h"
 #include "CSVConfigureTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/BatchConversionCSV.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVGenerate.h"
-#include "CoreTools/TextParsing/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVGenerate.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
 #include "CoreTools/TextParsing/Flags/CSVFlags.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Toolset/CoreTools/CSVConfigure/CSVConfigure/CSVConfigureContainer.h"

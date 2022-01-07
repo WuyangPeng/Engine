@@ -116,7 +116,7 @@ int Rendering::BlendTransformController
 }
 
 uint64_t Rendering::BlendTransformController
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
@@ -130,7 +130,7 @@ uint64_t Rendering::BlendTransformController
 }
 
 void Rendering::BlendTransformController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -143,7 +143,7 @@ void Rendering::BlendTransformController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::BlendTransformController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::BlendTransformController ::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -160,7 +160,7 @@ void Rendering::BlendTransformController
 	ParentType::PostLink();	 
 }
 
-void Rendering::BlendTransformController ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::BlendTransformController ::Load(CoreTools::BufferSource& source)
 {
 	;
     

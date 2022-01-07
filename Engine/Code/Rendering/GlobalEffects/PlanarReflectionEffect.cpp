@@ -1,23 +1,23 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.3 (2019/07/25 15:30)
 
 #include "Rendering/RenderingExport.h"
 
 #include "PlanarReflectionEffect.h"
+#include "CoreTools/ObjectSystems/StreamDetail.h"
+#include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/PlaneDetail.h"
+#include "Rendering/DataTypes/SpecializedIO.h"
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/SceneGraph/VisibleSet.h"
-#include "Rendering/DataTypes/SpecializedIO.h"
-#include "Mathematics/Algebra/MatrixDetail.h"
-#include "CoreTools/ObjectSystems/StreamSize.h"
-#include "CoreTools/ObjectSystems/StreamDetail.h"
 
 #include "System/Helper/PragmaWarning.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26426)
@@ -29,32 +29,28 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, PlanarReflectionEffect);
 
-Rendering::PlanarReflectionEffect
-	::PlanarReflectionEffect(int numPlanes)
-    : mNumPlanes{ numPlanes }, mAlphaState{ std::make_shared<AlphaState>() }, mDepthState{ std::make_shared<DepthState>() }, mStencilState{ std::make_shared < StencilState>() }
+Rendering::PlanarReflectionEffect ::PlanarReflectionEffect(int numPlanes)
+    : mNumPlanes{ numPlanes }, mAlphaState{ std::make_shared<AlphaState>() }, mDepthState{ std::make_shared<DepthState>() }, mStencilState{ std::make_shared<StencilState>() }
 {
-	mPlanes = NEW1<TrianglesMeshSharedPtr>(mNumPlanes);
-    mReflectances = NEW1<float>(mNumPlanes);  
+    mPlanes = nullptr;  // NEW1<TrianglesMeshSharedPtr>(mNumPlanes);
+    mReflectances = nullptr;  // NEW1<float>(mNumPlanes);
 }
 
-Rendering::PlanarReflectionEffect
-	::~PlanarReflectionEffect()
+Rendering::PlanarReflectionEffect ::~PlanarReflectionEffect()
 {
-	EXCEPTION_TRY
-	{
-            DELETE1(mPlanes);
-            DELETE1(mReflectances);
-	}
-	EXCEPTION_ALL_CATCH(Rendering)
-   
+    EXCEPTION_TRY
+    {
+//         DELETE1(mPlanes);
+//         DELETE1(mReflectances);
+    }
+    EXCEPTION_ALL_CATCH(Rendering)
 }
 
-void Rendering::PlanarReflectionEffect
-	::Draw(std::shared_ptr<Renderer> renderer,    VisibleSet& visibleSet)
+void Rendering::PlanarReflectionEffect ::Draw(std::shared_ptr<Renderer> renderer, VisibleSet& visibleSet)
 {
     // Save the current global state overrides for restoration later.
     const auto saveDState = renderer->GetOverrideDepthState();
-	const auto saveSState = renderer->GetOverrideStencilState();
+    const auto saveSState = renderer->GetOverrideStencilState();
 
     // Override the global state to support this effect.
     renderer->SetOverrideDepthState(mDepthState);
@@ -62,8 +58,8 @@ void Rendering::PlanarReflectionEffect
 
     // The depth range will be modified during drawing, so save the current
     // depth range for restoration later.
- 
-  const  auto depthRange =  renderer->GetDepthRange();
+
+    const auto depthRange = renderer->GetDepthRange();
 
     // Get the camera to store post-world transformations.
     ConstCameraSharedPtr camera = renderer->GetCamera();
@@ -78,16 +74,16 @@ void Rendering::PlanarReflectionEffect
         // depth buffer testing so that the stencil will not be written where
         // the plane is behind something already in the depth buffer.
         mStencilState->SetEnabled(true);
-		mStencilState->SetCompare(StencilStateFlags::CompareMode::Always);
-		mStencilState->SetReference ( boost::numeric_cast<uint32_t>(i + 1));
-		mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);     // irrelevant
-		mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);    // invisible to 0
-		mStencilState->SetOnZPass(StencilStateFlags::OperationType::Replace); // visible to i+1
+        mStencilState->SetCompare(StencilStateFlags::CompareMode::Always);
+        mStencilState->SetReference(boost::numeric_cast<uint32_t>(i + 1));
+        mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);  // irrelevant
+        mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);  // invisible to 0
+        mStencilState->SetOnZPass(StencilStateFlags::OperationType::Replace);  // visible to i+1
 
         // Enable depth reads but disable depth writes.
-        mDepthState->SetEnabled ( true);
-		mDepthState->SetWritable(false);
-		mDepthState->SetCompare(DepthStateFlags::CompareMode::LessEqual);
+        mDepthState->SetEnabled(true);
+        mDepthState->SetWritable(false);
+        mDepthState->SetCompare(DepthStateFlags::CompareMode::LessEqual);
 
         // Disable color writes.
         renderer->SetColorMask(false, false, false, false);
@@ -116,30 +112,30 @@ void Rendering::PlanarReflectionEffect
         // colors.  In that case, the blending result will have the reflecting
         // plane appear to be opaque when in reality it was blended with
         // blending coefficients adding to one.
-        mStencilState->SetEnabled ( true);
-		mStencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
-		mStencilState->SetReference ( (unsigned int)(i + 1));
-		mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
-		mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
-		mStencilState->SetOnZPass(StencilStateFlags::OperationType::Keep);
+        mStencilState->SetEnabled(true);
+        mStencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
+        mStencilState->SetReference((unsigned int)(i + 1));
+        mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
+        mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
+        mStencilState->SetOnZPass(StencilStateFlags::OperationType::Keep);
 
         // Set the depth buffer to "infinity" at those pixels for which the
         // stencil buffer is the reference value i+1.
-		renderer->SetDepthRange(DepthRange{ 1.0f, 1.0f });
-        mDepthState->SetEnabled ( true);
-		mDepthState->SetWritable ( true);
-		mDepthState->SetCompare(DepthStateFlags::CompareMode::Always);
+        renderer->SetDepthRange(DepthRange{ 1.0f, 1.0f });
+        mDepthState->SetEnabled(true);
+        mDepthState->SetWritable(true);
+        mDepthState->SetCompare(DepthStateFlags::CompareMode::Always);
 
-		renderer->Draw(mPlanes[i]);
+        renderer->Draw(mPlanes[i]);
 
         // Restore the depth range and depth testing function.
-		mDepthState->SetCompare ( DepthStateFlags::CompareMode::LessEqual);
-		renderer->SetDepthRange(depthRange);
+        mDepthState->SetCompare(DepthStateFlags::CompareMode::LessEqual);
+        renderer->SetDepthRange(depthRange);
 
         // Compute the equation for the mirror plane in model coordinates
         // and get the reflection matrix in world coordinates.
         Mathematics::FloatMatrix reflection;
-		Mathematics::FloatPlane modelPlane;
+        Mathematics::FloatPlane modelPlane;
         GetReflectionMatrixAndModelPlane(i, reflection, modelPlane);
 
         // TODO:  Add clip plane support to the renderer.
@@ -151,7 +147,7 @@ void Rendering::PlanarReflectionEffect
 
         // This temporarily modifies the world matrix to apply the reflection
         // after the model-to-world transformation.
-		// 先通过编译
+        // 先通过编译
         //camera->SetPreViewMatrix(reflection);
 
         // Reverse the cull direction.  Allow for models that are not
@@ -160,15 +156,15 @@ void Rendering::PlanarReflectionEffect
 
         // Render the reflected object.  Only render where the stencil buffer
         // contains the reference value.
-        for (auto& value: visibleSet)
+        for (auto& value : visibleSet)
         {
-			renderer->Draw(value);
-        }                       
+            renderer->Draw(value);
+        }
 
         renderer->SetReverseCullOrder(false);
 
-		// 先通过编译
-       //  camera->SetPreViewMatrix(Mathematics::Matrixf::sm_Identity);
+        // 先通过编译
+        //  camera->SetPreViewMatrix(Mathematics::Matrixf::sm_Identity);
         // TODO:  Add clip plane support to the renderer.
         //pkRenderer->DisableUserClipPlane(0);
 
@@ -190,18 +186,18 @@ void Rendering::PlanarReflectionEffect
         // dest=alpha background (reflecting plane or reflected object).
         const auto saveAState = renderer->GetOverrideAlphaState();
         renderer->SetOverrideAlphaState(mAlphaState);
-		mAlphaState->SetBlendEnabled(true);
-		mAlphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::OneMinusConstantAlpha);
-		mAlphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::ConstantAlpha);
-		mAlphaState->SetConstantColor(Colour<float>(0.0f, 0.0f, 0.0f, mReflectances[i]));
+        mAlphaState->SetBlendEnabled(true);
+        mAlphaState->SetSourceBlend(AlphaStateFlags::SourceBlendMode::OneMinusConstantAlpha);
+        mAlphaState->SetDestinationBlend(AlphaStateFlags::DestinationBlendMode::ConstantAlpha);
+        mAlphaState->SetConstantColor(Colour<float>(0.0f, 0.0f, 0.0f, mReflectances[i]));
 
-		mStencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
-		mStencilState->SetReference ( (unsigned int)(i + 1));
-		mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
-		mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
-		mStencilState->SetOnZPass(StencilStateFlags::OperationType::Invert);
+        mStencilState->SetCompare(StencilStateFlags::CompareMode::Equal);
+        mStencilState->SetReference((unsigned int)(i + 1));
+        mStencilState->SetOnFail(StencilStateFlags::OperationType::Keep);
+        mStencilState->SetOnZFail(StencilStateFlags::OperationType::Keep);
+        mStencilState->SetOnZPass(StencilStateFlags::OperationType::Invert);
 
-		renderer->Draw(mPlanes[i]);
+        renderer->Draw(mPlanes[i]);
 
         renderer->SetOverrideAlphaState(saveAState);
     }
@@ -212,205 +208,189 @@ void Rendering::PlanarReflectionEffect
 
     // Render the objects as usual, this time drawing only the potentially
     // visible objects.
-    for (auto& value:visibleSet)
+    for (auto& value : visibleSet)
     {
-		renderer->Draw(value);
+        renderer->Draw(value);
     }
 }
 
-void Rendering::PlanarReflectionEffect
-	::GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane)
+void Rendering::PlanarReflectionEffect ::GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane)
 {
     // Compute the equation for the mirror plane in world coordinates.
-	auto vertex =  mPlanes[i]->GetWorldTriangle(0);
-	Mathematics::FloatPlane worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+    auto vertex = mPlanes[i]->GetWorldTriangle(0);
+    Mathematics::FloatPlane worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 
     // Compute the reflection matrix.
-	reflection.MakeReflection(Mathematics::FloatAPoint(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
+    reflection.MakeReflection(Mathematics::FloatAPoint(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
 
-	vertex =  mPlanes[i]->GetModelTriangle(0);
-	modelPlane = Mathematics::FloatPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+    vertex = mPlanes[i]->GetModelTriangle(0);
+    modelPlane = Mathematics::FloatPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 }
 
 // Name support.
-const CoreTools::ObjectSharedPtr Rendering::PlanarReflectionEffect::
-	GetObjectByName(const std::string& name)
+CoreTools::ObjectSharedPtr Rendering::PlanarReflectionEffect::
+    GetObjectByName(const std::string& name)
 {
-	auto found = ParentType::GetObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
+    auto found = ParentType::GetObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
 
-	for (auto i = 0; i < mNumPlanes; ++i)
-	{
-		auto found2 = mPlanes[i]->GetObjectByName(name);
-		if (found2 )
-		{
-			return found2;
-		}			
-	}
-	
-	return CoreTools::ObjectSharedPtr();
-}     
+    for (auto i = 0; i < mNumPlanes; ++i)
+    {
+        auto found2 = mPlanes[i]->GetObjectByName(name);
+        if (found2)
+        {
+            return found2;
+        }
+    }
 
-const std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarReflectionEffect
-	::GetAllObjectsByName(const std::string& name)
-{
-	std::vector<CoreTools::ObjectSharedPtr> objects;
-	auto found = ParentType::GetObjectByName(name);
-	if (found )
-	{
-		objects.push_back(found);
-	}
-
-	for (auto i = 0; i < mNumPlanes; ++i)
-	{
-		auto pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
-
-		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
-	}
-
-	return objects;	
-}   
-
-const CoreTools::ConstObjectSharedPtr Rendering::PlanarReflectionEffect
-	::GetConstObjectByName(const std::string& name) const
-{	
-	auto found = ParentType::GetConstObjectByName(name);
-	if (found )
-	{
-		return found;
-	}
-
-	for (int i = 0; i < mNumPlanes; ++i)
-	{
-		auto found2 = mPlanes[i]->GetConstObjectByName(name);
-		if (found2 )
-		{
-			return found2;
-		}			
-	}
-
-	return CoreTools::ConstObjectSharedPtr();
-} 
-
-const std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarReflectionEffect
-	::GetAllConstObjectsByName(const std::string& name) const 
-{
-	auto objects = ParentType::GetAllConstObjectsByName(name);
-
-	for (auto i = 0; i < mNumPlanes; ++i)
-	{
-		auto pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
-
-		objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
-	}
-
-	return objects;
+    return CoreTools::ObjectSharedPtr();
 }
 
+std::vector<CoreTools::ObjectSharedPtr> Rendering::PlanarReflectionEffect ::GetAllObjectsByName(const std::string& name)
+{
+    std::vector<CoreTools::ObjectSharedPtr> objects;
+    auto found = ParentType::GetObjectByName(name);
+    if (found)
+    {
+        objects.push_back(found);
+    }
+
+    for (auto i = 0; i < mNumPlanes; ++i)
+    {
+        auto pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
+
+        objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
+    }
+
+    return objects;
+}
+
+CoreTools::ConstObjectSharedPtr Rendering::PlanarReflectionEffect ::GetConstObjectByName(const std::string& name) const
+{
+    auto found = ParentType::GetConstObjectByName(name);
+    if (found)
+    {
+        return found;
+    }
+
+    for (int i = 0; i < mNumPlanes; ++i)
+    {
+        auto found2 = mPlanes[i]->GetConstObjectByName(name);
+        if (found2)
+        {
+            return found2;
+        }
+    }
+
+    return CoreTools::ConstObjectSharedPtr();
+}
+
+std::vector<CoreTools::ConstObjectSharedPtr> Rendering::PlanarReflectionEffect ::GetAllConstObjectsByName(const std::string& name) const
+{
+    auto objects = ParentType::GetAllConstObjectsByName(name);
+
+    for (auto i = 0; i < mNumPlanes; ++i)
+    {
+        auto pointerObjects = mPlanes[i]->GetAllObjectsByName(name);
+
+        objects.insert(objects.end(), pointerObjects.begin(), pointerObjects.end());
+    }
+
+    return objects;
+}
 
 // Streaming support.
 
-Rendering::PlanarReflectionEffect
-	::PlanarReflectionEffect(LoadConstructor value)
-	:ParentType{ value }, mNumPlanes{ 0 }, mPlanes{ 0 }, mReflectances{ 0 }
+Rendering::PlanarReflectionEffect ::PlanarReflectionEffect(LoadConstructor value)
+    : ParentType{ value }, mNumPlanes{ 0 }, mPlanes{ 0 }, mReflectances{ 0 }
 {
 }
 
-int Rendering::PlanarReflectionEffect
-	::GetStreamingSize() const
+int Rendering::PlanarReflectionEffect ::GetStreamingSize() const
 {
-	auto size = ParentType::GetStreamingSize();
-	size += CORE_TOOLS_STREAM_SIZE(mNumPlanes);
-	size += mNumPlanes * CORE_TOOLS_STREAM_SIZE(mReflectances[0]);
-	size += mNumPlanes * RENDERING_STREAM_SIZE(mPlanes[0]);
-	return size;	 
+    auto size = ParentType::GetStreamingSize();
+    size += CORE_TOOLS_STREAM_SIZE(mNumPlanes);
+    size += mNumPlanes * CORE_TOOLS_STREAM_SIZE(mReflectances[0]);
+    size += mNumPlanes * RENDERING_STREAM_SIZE(mPlanes[0]);
+    return size;
 }
 
-uint64_t Rendering::PlanarReflectionEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::PlanarReflectionEffect ::Register(CoreTools::ObjectRegister& target) const
 {
-	const auto id = ParentType::Register(target);
-	if (0 < id)
-	{
-	//	target.RegisterSharedPtr(mNumPlanes, mPlanes);
-		return id;
-	}
+    const auto id = ParentType::Register(target);
+    if (0 < id)
+    {
+        //	target.RegisterSharedPtr(mNumPlanes, mPlanes);
+        return id;
+    }
 
-	return id;	
+    return id;
 }
 
-void Rendering::PlanarReflectionEffect
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::PlanarReflectionEffect ::Save(CoreTools::BufferTarget& target) const
 {
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
-	ParentType::Save(target);
+    ParentType::Save(target);
 
-	//target.WriteWithNumber(mNumPlanes, mReflectances);
-	//target.WriteSharedPtrWithNumber(mNumPlanes, mPlanes);
+    //target.WriteWithNumber(mNumPlanes, mReflectances);
+    //target.WriteSharedPtrWithNumber(mNumPlanes, mPlanes);
 
-	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);	
+    CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::PlanarReflectionEffect ::Link([[maybe_unused]]const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::PlanarReflectionEffect ::Link([[maybe_unused]] CoreTools::ObjectLink& source)
 {
- 
-	CoreTools::DisableNoexcept();
+    CoreTools::DisableNoexcept();
 }
 
-void Rendering::PlanarReflectionEffect
-	::PostLink()
-{	
-	CoreTools::DisableNoexcept();
+void Rendering::PlanarReflectionEffect ::PostLink()
+{
+    CoreTools::DisableNoexcept();
 }
 
-void Rendering::PlanarReflectionEffect
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::PlanarReflectionEffect ::Load(CoreTools::BufferSource& source)
 {
+    CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
-	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
+    GlobalEffect::Load(source);
 
-	GlobalEffect::Load(source);
+    //source.Read(mNumPlanes, mReflectances);
+    //	source.ReadSharedPtr(mNumPlanes, mPlanes);
 
-	//source->Read(mNumPlanes, mReflectances);
-//	source.ReadSharedPtr(mNumPlanes, mPlanes);
-
-	CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
+    CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
- 
-
-int Rendering::PlanarReflectionEffect
-	::GetNumPlanes() const noexcept
+int Rendering::PlanarReflectionEffect ::GetNumPlanes() const noexcept
 {
-	return mNumPlanes;
+    return mNumPlanes;
 }
 
-void Rendering::PlanarReflectionEffect
-	::SetPlane(int i, TrianglesMeshSharedPtr plane)
+void Rendering::PlanarReflectionEffect ::SetPlane(int i, TrianglesMeshSharedPtr plane)
 {
-	// The culling flag is set to "always" because this effect is responsible
-	// for drawing the TriMesh.  This prevents drawing attempts by another
-	// scene graph for which 'plane' is a leaf node.
-	mPlanes[i] = plane;
-	mPlanes[i]->SetCullingMode(CullingMode::Always);
+    // The culling flag is set to "always" because this effect is responsible
+    // for drawing the TriMesh.  This prevents drawing attempts by another
+    // scene graph for which 'plane' is a leaf node.
+    mPlanes[i] = plane;
+    mPlanes[i]->SetCullingMode(CullingMode::Always);
 }
 
 Rendering::ConstTrianglesMeshSharedPtr Rendering::PlanarReflectionEffect ::GetPlane(int i) const noexcept
 {
-	return mPlanes[i];
+    return mPlanes[i];
 }
 
 void Rendering::PlanarReflectionEffect ::SetReflectance(int i, float reflectance) noexcept
 {
-	mReflectances[i] = reflectance;
+    mReflectances[i] = reflectance;
 }
 
 float Rendering::PlanarReflectionEffect ::GetReflectance(int i) const noexcept
 {
-	return mReflectances[i];
+    return mReflectances[i];
 }
 
 CoreTools::ObjectInterfaceSharedPtr Rendering::PlanarReflectionEffect::CloneObject() const

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎辅助版本：0.7.2.5 (2021/11/03 22:39)
+///	引擎辅助版本：0.7.2.6 (2021/11/20 21:47)
 
 #ifndef EFFECTIVE_MODERN_CPP_CHAPTER5_TERM30_EXAMPLE_H
 #define EFFECTIVE_MODERN_CPP_CHAPTER5_TERM30_EXAMPLE_H
@@ -32,6 +32,11 @@ namespace BookExperience
 
                 public:
                     Terms30Example() noexcept;
+
+                    void BracesExample() const;
+                    void StaticExample() const;
+                    void ProcessValExample() const noexcept;
+                    void IPv4Example() const noexcept;
                 };
             }
         }

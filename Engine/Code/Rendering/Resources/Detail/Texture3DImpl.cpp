@@ -348,13 +348,13 @@ auto toFunction = ColourConvertTo::GetConvertToFunction(format);
     }
 }
 
-void Rendering::Texture3DImpl ::LoadLevelData(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::Texture3DImpl ::LoadLevelData(CoreTools::BufferSource& source)
 {
     m_TextureLevelData.Load(source);
 }
 
 void Rendering::Texture3DImpl
-    ::SaveLevelData (const CoreTools::BufferTargetSharedPtr& target) const
+    ::SaveLevelData (CoreTools::BufferTarget& target) const
 {
     m_TextureLevelData.Save(target);
 }

@@ -7,7 +7,7 @@
 #include "Framework/FrameworkExport.h"
 
 #include "CameraMotionImpl.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/FrameworkClassInvariantMacro.h"
  
 #include "Mathematics/Algebra/AVectorDetail.h"
@@ -17,7 +17,7 @@
 
 Framework::CameraMotionImpl
 	::CameraMotionImpl(float translationSpeed, float rotationSpeed, float translationSpeedFactor, float rotationSpeedFactor)
-	:m_Camera{ CoreTools::New0<Camera>() }, m_WorldDirection{ m_Camera->GetDirectionVector() }, m_WorldUp{ m_Camera->GetUpVector() }, m_WorldRight{ m_Camera->GetRightVector() },
+	:m_Camera{ std::make_shared<Camera>() }, m_WorldDirection{ m_Camera->GetDirectionVector() }, m_WorldUp{ m_Camera->GetUpVector() }, m_WorldRight{ m_Camera->GetRightVector() },
 	 m_TranslationSpeed{ translationSpeed }, m_TranslationSpeedFactor{ translationSpeedFactor }, m_RotationSpeed{ rotationSpeed }, m_RotationSpeedFactor{ rotationSpeedFactor },
 	 m_MoveForwardPressed{ false }, m_MoveBackwardPressed{ false }, m_TurnLeftPressed{ false }, m_TurnRightPressed{ false }, m_LookUpPressed{ false },
 	 m_LookDownPressed{ false }, m_MoveUpPressed{ false }, m_MoveDownPressed{ false }, m_MoveRightPressed{ false }, m_MoveLeftPressed{ false }

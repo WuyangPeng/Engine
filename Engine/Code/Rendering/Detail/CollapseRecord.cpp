@@ -36,8 +36,8 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CollapseRecord, GetVKeep
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CollapseRecord, GetVThrow, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CollapseRecord, GetNumVertices, int);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(Rendering, CollapseRecord, GetNumTriangles, int);
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, CollapseRecord, Load, CoreTools::BufferSourceSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, CollapseRecord, Save, CoreTools::BufferTargetSharedPtr, void);
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, CollapseRecord, Load, CoreTools::BufferSource&, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, CollapseRecord, Save, CoreTools::BufferTarget&, void);
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecord, GetStreamingSize, int);
 
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, CollapseRecord, ClearIndices, void)

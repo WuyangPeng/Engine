@@ -139,12 +139,9 @@
 				  QuerySheetRelsTargetTesting、QuerySharedStringsTesting、QueryXmlDataTesting。
 （5）Excel转csv功能： ExcelConversionCSVTesting、BatchConversionCSVTesting。
 （6）csv解析：CSVTypeConversionTesting、CSVHeadTesting、CSVRowTesting、CSVContentTesting、
-			  CSVGenerateTesting、CSVTotalGenerateTesting、CSVConfigureTesting。
-（7）json解析：
-（8）json转换成枚举：
-（9）xml解析：
-（10）ini解析：
-（11）info解析： 
+			  CSVGenerateTesting、CSVTotalGenerateTesting、CSVConfigureTesting、DataTypeDescribeTesting。
+（7）json解析： JsonHeadTesting、JsonNodeContainerTesting、JsonNodeTesting、
+				JsonGenerateTesting、JsonRowTesting、JsonConfigureTesting。 
 
 ----------------------------
 10.	 LogManagerSuite 

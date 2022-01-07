@@ -57,9 +57,9 @@ void CoreTools::TestingObjectTesting::SaveStreamTest()
 
     constexpr auto bufferSize = 256;
 
-    auto objectRegister = make_shared<ObjectRegister>(DisableNotThrow::Disable);
+    auto objectRegister = ObjectRegister::Create();
 
-    auto target = make_shared<BufferTarget>(bufferSize, objectRegister);
+    BufferTarget target{ bufferSize, objectRegister };
 
     ConstObjectAssociated<TestingObject> constObjectAssociated{ streamObject, 1 };
     ASSERT_LESS(0, objectRegister->Register(constObjectAssociated));
@@ -70,12 +70,12 @@ void CoreTools::TestingObjectTesting::SaveStreamTest()
 void CoreTools::TestingObjectTesting::LoadStreamTest()
 {
     auto streamObject = TestingObject::Create("name"s);
-
+    
     constexpr auto bufferSize = 256;
 
     auto fileBuffer = make_shared<FileBuffer>(bufferSize);
 
-    auto source = make_shared<BufferSource>(fileBuffer);
+    BufferSource source{ fileBuffer };
 
     streamObject->Load(source);
 }
@@ -84,10 +84,10 @@ void CoreTools::TestingObjectTesting::LinkStreamTest()
 {
     auto streamObject = TestingObject::Create("name"s);
 
-    auto link = make_shared<ObjectLink>(DisableNotThrow::Disable);
+    auto link = ObjectLink::Create();
 
     streamObject->PostLink();
-    streamObject->Link(link);
+    streamObject->Link(*link);
 }
 
 void CoreTools::TestingObjectTesting::GetStreamingSizeTest()

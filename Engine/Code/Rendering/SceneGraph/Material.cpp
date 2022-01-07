@@ -104,7 +104,7 @@ Rendering::Material
 
 
 void Rendering::Material
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
   
@@ -118,7 +118,7 @@ void Rendering::Material
 }
 
 void Rendering::Material
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -134,7 +134,7 @@ void Rendering::Material
 }
 
 uint64_t Rendering::Material
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -142,7 +142,7 @@ uint64_t Rendering::Material
 }
 
 void Rendering::Material
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     

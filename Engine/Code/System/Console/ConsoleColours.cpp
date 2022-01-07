@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:20)
+///	引擎版本：0.8.0.0 (2021/12/13 22:25)
 
 #include "System/SystemExport.h"
 
@@ -20,7 +20,7 @@ bool System::SetSystemConsoleTextAttribute(WindowsHandle handle, TextColour text
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    auto attribute = gsl::narrow_cast<WindowsWord>(EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon));
+    const auto attribute = gsl::narrow_cast<WindowsWord>(EnumCastUnderlying(textColour) | EnumCastUnderlying(backgroundColour) | EnumCastUnderlying(consoleCommon));
 
     if (::SetConsoleTextAttribute(handle, attribute) != g_False)
         return true;
@@ -29,7 +29,7 @@ bool System::SetSystemConsoleTextAttribute(WindowsHandle handle, TextColour text
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, TextColour, BackgroundColour, ConsoleCommon>(handle, textColour, backgroundColour, consoleCommon);
+    UnusedFunction(handle, textColour, backgroundColour, consoleCommon);
 
     return false;
 
@@ -52,7 +52,7 @@ bool System::ReadSystemConsoleOutputAttribute(WindowsHandle consolehandle, Windo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsWordPtr, WindowsDWord, ConsoleCoord, WindowsDWordPtr>(consolehandle, attribute, length, readCoord, numberOfAttributesRead);
+    UnusedFunction(consolehandle, attribute, length, readCoord, numberOfAttributesRead);
 
     return false;
 
@@ -70,7 +70,7 @@ bool System::WriteSystemConsoleOutputAttribute(WindowsHandle consolehandle, cons
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const WindowsWord*, WindowsDWord, ConsoleCoord, WindowsDWordPtr>(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten);
+    UnusedFunction(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten);
 
     return false;
 
@@ -88,7 +88,7 @@ bool System::FillSystemConsoleOutputAttribute(WindowsHandle consolehandle, Windo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsWord, WindowsDWord, ConsoleCoord, WindowsDWordPtr>(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten);
+    UnusedFunction(consolehandle, attribute, length, writeCoord, numberOfAttributesWritten);
 
     return false;
 

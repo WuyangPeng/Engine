@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:43)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 0:15)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
 #define CORE_TOOLS_MESSAGE_EVENT_TELEGRAM_LESS_DETAIL_H
@@ -24,6 +24,7 @@ CoreTools::TelegramLess<EventType>::TelegramLess(int64_t difference) noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename EventType>
 bool CoreTools::TelegramLess<EventType>::IsValid() const noexcept
 {
@@ -32,6 +33,7 @@ bool CoreTools::TelegramLess<EventType>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // #ifdef OPEN_CLASS_INVARIANT
 
 template <typename EventType>

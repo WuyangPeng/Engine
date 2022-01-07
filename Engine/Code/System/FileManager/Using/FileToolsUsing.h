@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/17 20:10)
+///	引擎版本：0.8.0.0 (2021/12/13 18:47)
 
 #ifndef SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
 #define SYSTEM_FILE_MANAGE_FILE_TOOLS_USING_H
@@ -67,7 +67,6 @@ namespace System
         uint32_t nFileIndexHigh;
         uint32_t nFileIndexLow;
     };
-
     using ByHandleFileInformationPtr = ByHandleFileInformation*;
 
     union FileSegmentElement
@@ -127,27 +126,26 @@ namespace System
         uint32_t FileNameLength;
         SYSTEM_TEXT FileName[1];
     };
-
     using FileRenameInfoTypePtr = FileRenameInfoType*;
+
     struct FileDispositionInfoType
     {
         int DeleteFile;
     };
-
     using FileDispositionInfoTypePtr = FileDispositionInfoType*;
 
     struct FileAllocationInfoType
     {
         WindowsLargeInteger AllocationSize;
     };
-
     using FileAllocationInfoTypePtr = FileAllocationInfoType*;
+
     struct FileEndOfFileInfoType
     {
         WindowsLargeInteger EndOfFile;
     };
-
     using FileEndOfFileInfoTypePtr = FileEndOfFileInfoType*;
+
     enum FilePriorityHint
     {
         IoPriorityHintVeryLow = 0,
@@ -160,7 +158,6 @@ namespace System
     {
         FilePriorityHint PriorityHint;
     };
-
     using FileIOPriorityHintInfoTypePtr = FileIOPriorityHintInfoType*;
 
     struct WindowOverlapped

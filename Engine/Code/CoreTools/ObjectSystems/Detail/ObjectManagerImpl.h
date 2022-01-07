@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 14:38)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_MANAGER_IMPL_H
@@ -24,12 +24,12 @@ namespace CoreTools
         using FactoryFunction = ObjectInterface::FactoryFunction;
 
     public:
-        ObjectManagerImpl(MAYBE_UNUSED int count) noexcept;
+        ObjectManagerImpl() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] FactoryFunction Find(const std::string& name) const;
+        NODISCARD FactoryFunction Find(const std::string& name) const;
         void Insert(const std::string& name, FactoryFunction function);
         void Remove(const std::string& name);
 
@@ -37,7 +37,7 @@ namespace CoreTools
         using FactoryContainer = std::map<std::string, FactoryFunction>;
 
     private:
-        FactoryContainer m_Factories;
+        FactoryContainer factories;
     };
 }
 

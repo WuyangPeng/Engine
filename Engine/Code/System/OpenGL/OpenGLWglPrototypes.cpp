@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/25 22:56)
+///	引擎版本：0.8.0.0 (2021/12/13 14:10)
 
 #include "System/SystemExport.h"
 
@@ -81,7 +81,7 @@ bool System::SwapDeviceBuffers(WindowsHDC hdc) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHDC>(hdc);
+    UnusedFunction(hdc);
 
     return false;
 

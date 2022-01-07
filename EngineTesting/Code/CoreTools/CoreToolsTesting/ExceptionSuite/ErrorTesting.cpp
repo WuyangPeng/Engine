@@ -55,7 +55,7 @@ void CoreTools::ErrorTesting::NormalErrorTest()
     ASSERT_EQUAL(functionDescribed.GetFileName(), normalError.GetFileName());
     ASSERT_EQUAL(functionDescribed.GetLine(), normalError.GetLine());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(functionDescribed, normalError.GetFunctionDescribed());
+    ASSERT_EQUAL(functionDescribed, normalError.GetFunctionDescribed());
 
     ASSERT_EQUAL(normalError.GetError(), errorDescription);
 }
@@ -75,7 +75,7 @@ void CoreTools::ErrorTesting::WindowsErrorTest()
     ASSERT_EQUAL(functionDescribed.GetFileName(), windowsError.GetFileName());
     ASSERT_EQUAL(functionDescribed.GetLine(), windowsError.GetLine());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(functionDescribed, windowsError.GetFunctionDescribed());
+    ASSERT_EQUAL(functionDescribed, windowsError.GetFunctionDescribed());
 
     ASSERT_UNEQUAL(windowsErrorString.find(errorDescription), System::String::npos);
 }

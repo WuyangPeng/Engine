@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 10:41)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 15:06)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_BUFFER_OUT_STREAM_H
@@ -14,8 +14,9 @@
 
 #include "ObjectSystemsFwd.h"
 #include "CoreTools/FileManager/FileManagerFwd.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
+#include "CoreTools/Helper/ExportMacro.h"
+
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(BufferOutStreamImpl);
 
 namespace CoreTools
@@ -28,15 +29,10 @@ namespace CoreTools
 
     public:
         explicit BufferOutStream(const OutTopLevel& topLevel);
-        ~BufferOutStream() noexcept = default;
-        BufferOutStream(const BufferOutStream& rhs) noexcept = delete;
-        BufferOutStream& operator=(const BufferOutStream& rhs) noexcept = delete;
-        BufferOutStream(BufferOutStream&& rhs) noexcept = delete;
-        BufferOutStream& operator=(BufferOutStream&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
+        NODISCARD FileBufferSharedPtr GetBufferOutStreamInformation() const noexcept;
 
     private:
         PackageType impl;

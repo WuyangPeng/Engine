@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 15:06)
+///	引擎版本：0.8.0.0 (2021/12/13 14:44)
 
 #ifndef SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_H
 #define SYSTEM_MEMORY_TOOLS_VIRTUAL_TOOLS_H
@@ -22,14 +22,14 @@ namespace System
     // 虚拟内存工具。
 
     MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE AllocateVirtual(WindowsVoidPtr address,
-                                                                       WindowsSize size,
-                                                                       MemoryAllocation allocationType,
-                                                                       MemoryProtect protect) noexcept;
+                                                                        WindowsSize size,
+                                                                        MemoryAllocation allocationType,
+                                                                        MemoryProtect protect) noexcept;
     MAYBE_NULLPTR WindowsVoidPtr SYSTEM_DEFAULT_DECLARE AllocateVirtual(WindowsHandle process,
-                                                                       WindowsVoidPtr address,
-                                                                       WindowsSize size,
-                                                                       MemoryAllocation allocationType,
-                                                                       MemoryProtect protect) noexcept;
+                                                                        WindowsVoidPtr address,
+                                                                        WindowsSize size,
+                                                                        MemoryAllocation allocationType,
+                                                                        MemoryProtect protect) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FreeVirtual(WindowsVoidPtr address) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE FreeVirtual(WindowsHandle process, WindowsVoidPtr address) noexcept;
 

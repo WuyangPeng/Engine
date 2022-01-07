@@ -16,7 +16,7 @@
 #include "Rendering/Renderers/Renderer.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
 #include "Rendering/Shaders/ShaderManager.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26482)
@@ -97,7 +97,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc3[0], tc3[1]), 3);
 
     // Create the index buffer for the square.
-    IndexBufferSharedPtr ibuffer(std::make_shared < IndexBuffer>(6,static_cast<int>( sizeof(int))));
+    IndexBufferSharedPtr ibuffer(std::make_shared<IndexBuffer>(6, static_cast<int>(sizeof(int))));
 
     int* indices = (int*)ibuffer->GetReadOnlyData();
     indices[0] = 0;
@@ -108,13 +108,13 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     indices[5] = 3;
 
     // Create the square.
-    mRectangle =std::make_shared < TrianglesMesh>(vformat, vbuffer, ibuffer);
+    mRectangle = std::make_shared<TrianglesMesh>(vformat, vbuffer, ibuffer);
 
     CreateVertexShader();
-    mTargets = NEW1<RenderTargetSharedPtr>(mNumTargets);
+    mTargets = nullptr;  //    NEW1<RenderTargetSharedPtr>(mNumTargets);
     for (int i = 0; i < mNumTargets; ++i)
     {
-        mTargets[i].reset(NEW0 RenderTarget(1, TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, false, false));
+        //mTargets[i].reset(new RenderTarget(1, TextureFormat(System::TextureInternalFormat::A32B32G32R32F), mNumCols, mNumRows, false, false));
     }
 }
 
@@ -122,7 +122,7 @@ Rendering::ImageProcessingBase ::~ImageProcessingBase()
 {
     EXCEPTION_TRY
     {
-        DELETE1(mTargets);
+        //DELETE1(mTargets);
     }
     EXCEPTION_ALL_CATCH(Rendering)
 }

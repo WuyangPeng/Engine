@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/03/31 18:27)
+///	引擎版本：0.8.0.0 (2021/12/13 22:48)
 
 #include "System/SystemExport.h"
 
@@ -27,8 +27,6 @@
     #endif  // SYSTEM_PLATFORM_ANDROID
 
 #endif  // SYSTEM_PLATFORM_WIN32
-
-using std::min;
 
 #ifndef SYSTEM_PLATFORM_WIN32
 
@@ -160,7 +158,7 @@ int System::WideCharConversionMultiByte(CodePage codePage,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WideChar, const char*, bool*>(flag, defaultChar, usedDefaultChar);
+    UnusedFunction(flag, defaultChar, usedDefaultChar);
 
     // 返回值包括空终止符
     if (multiByte != nullptr)
@@ -184,9 +182,9 @@ System::ComparesStringReturn System::CompareStringUseLocale(LanguageLocale local
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<LanguageLocale, Compares>(locale, comparesFlag);
+    UnusedFunction(locale, comparesFlag);
 
-    const auto minCount = min(lhsCount, rhsCount);
+    const auto minCount = std::min(lhsCount, rhsCount);
     for (auto i = 0; i < minCount; ++i)
     {
         if (lhsString[i] < rhsString[i])
@@ -218,9 +216,9 @@ System::ComparesStringReturn System::CompareStringUseLocale(const wchar_t* local
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const wchar_t*, Compares>(localeName, comparesFlag);
+    UnusedFunction(localeName, comparesFlag);
 
-    const auto minCount = min(lhsCount, rhsCount);
+    const auto minCount = std::min(lhsCount, rhsCount);
     for (auto i = 0; i < minCount; ++i)
     {
         if (lhsString[i] < rhsString[i])
@@ -251,9 +249,9 @@ System::ComparesStringReturn System::CompareStringOrdinalUseBinary(const wchar_t
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<bool>(ignoreCase);
+    UnusedFunction(ignoreCase);
 
-    const auto minCount = min(lhsCount, rhsCount);
+    const auto minCount = std::min(lhsCount, rhsCount);
     for (auto i = 0; i < minCount; ++i)
     {
         if (lhsString[i] < rhsString[i])

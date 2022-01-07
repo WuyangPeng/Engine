@@ -46,7 +46,7 @@ void CoreTools::ThreadManagerTesting::CreateThread()
     auto threadParameter = 3;
     constexpr auto priority = EnumCastUnderlying(System::ThreadPriority::Normal);
 
-    ThreadManager manager{ DisableNotThrow::Disable };
+    auto manager = ThreadManager::Create();
 
     manager.AddThread(Thread0, &threadParameter, priority);
     manager.AddThread(Thread1, nullptr);

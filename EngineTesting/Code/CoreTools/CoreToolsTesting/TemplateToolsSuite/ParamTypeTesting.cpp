@@ -10,13 +10,14 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 using std::string;
+using namespace std::literals;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, ParamTypeTesting)
 
 void CoreTools::ParamTypeTesting
 	::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_2(ParamTypeTest, 0, "");
+	ASSERT_NOT_THROW_EXCEPTION_2(ParamTypeTest, 0, ""s);
 }
 
 void CoreTools::ParamTypeTesting ::ParamTypeTest([[maybe_unused]] ParamType<int>::type integer, [[maybe_unused]] ParamType<string>::type characterString) noexcept

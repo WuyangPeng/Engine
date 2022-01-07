@@ -45,7 +45,7 @@ void CoreTools::WriteFileManagerTesting::MainTest()
 }
 
 void CoreTools::WriteFileManagerTesting::WriteFileHandleTest()
-{
+{ 
     WriteFileManager manager{ GetFileName() };
 
     const auto content = GetFileContent();

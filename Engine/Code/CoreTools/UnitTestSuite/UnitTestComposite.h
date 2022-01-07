@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 13:25)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 19:34)
 
 // 使用组合模式封装UnitTest类和SuiteImpl类。
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_COMPOSITE_H
@@ -34,21 +34,25 @@ namespace CoreTools
     public:
         explicit UnitTestComposite(const OStreamShared& streamShared) noexcept;
 
+        ~UnitTestComposite() = default;
+        UnitTestComposite(const UnitTestComposite& rhs) = delete;
+        virtual UnitTestComposite& operator=(const UnitTestComposite& rhs) = delete;
+        UnitTestComposite(UnitTestComposite&& rhs) noexcept;
+        virtual UnitTestComposite& operator=(UnitTestComposite&& rhs) noexcept;
+
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         virtual void ClearUnitTestCollection();
         virtual void AddUnitTest(const UnitTestCompositeSharedPtr& unitTest);
 
-        void SetTestLoopCount(int TestLoopCount) noexcept;
+        void SetTestLoopCount(int testLoopCount) noexcept;
         void SetRandomSeed(int randomSeed) noexcept;
 
-        [[nodiscard]] int GetEngineeringOffsetValue() const noexcept;  // 待删除
-        [[nodiscard]] int GetRandomSeed() const noexcept;
-        [[nodiscard]] uint32_t GetEngineRandomSeed() const;
-        [[nodiscard]] System::DynamicLinkString GetEngineeringDynamicLinkSuffix() const;  // 待删除
+        NODISCARD int GetRandomSeed() const noexcept;
+        NODISCARD uint32_t GetEngineRandomSeed() const;
 
     protected:
-        [[nodiscard]] int GetTestLoopCount() const noexcept;
+        NODISCARD int GetTestLoopCount() const noexcept;
 
     private:
         int m_TestLoopCount;

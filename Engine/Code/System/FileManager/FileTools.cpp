@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 11:05)
+///	引擎版本：0.8.0.0 (2021/12/13 18:52)
 
 #include "System/SystemExport.h"
 
@@ -27,7 +27,7 @@ bool System::CreateFileDirectory(const String& pathName, WindowSecurityAttribute
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String, WindowSecurityAttributesPtr>(pathName, securityAttributes);
+    UnusedFunction(pathName, securityAttributes);
 
     return false;
 
@@ -49,7 +49,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* rootPathName,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*, WindowsDWordPtr, WindowsDWordPtr, WindowsDWordPtr, WindowsDWordPtr>(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters);
+    UnusedFunction(rootPathName, sectorsPerCluster, bytesPerSector, numberOfFreeClusters, totalNumberOfClusters);
 
     return false;
 
@@ -70,7 +70,7 @@ bool System::GetDiskFreeSpaceWithRoot(const TChar* directoryName,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*, WindowsULargeIntegerPtr, WindowsULargeIntegerPtr, WindowsULargeIntegerPtr>(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes);
+    UnusedFunction(directoryName, freeBytesAvailableToCaller, totalNumberOfBytes, totalNumberOfFreeBytes);
 
     return false;
 
@@ -88,7 +88,7 @@ bool System::RemoveSystemDirectory(const TChar* pathName) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const TChar*>(pathName);
+    UnusedFunction(pathName);
 
     return false;
 

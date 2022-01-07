@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:46)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,7 +19,7 @@ using std::string;
 using namespace std::literals;
 
 CoreTools::SuitePrintManager::SuitePrintManager(MasterType& suite, int borderLineLength)
-    : m_Suite{ suite }, m_UnitTestSuiteReportOutputPtr{ make_shared<UnitTestSuiteReportOutput>("测试"s, borderLineLength, m_Suite.GetStream()) }
+    : suite{ suite }, unitTestSuiteReportOutput{ make_shared<UnitTestSuiteReportOutput>("测试"s, borderLineLength, suite.GetStream()) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -30,36 +30,36 @@ void CoreTools::SuitePrintManager::PrintCoreToolsHeader()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_UnitTestSuiteReportOutputPtr->PrintBorderLine('=');
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
+    unitTestSuiteReportOutput->PrintBorderLine('=');
+    unitTestSuiteReportOutput->PrintNewLine();
 }
 
 void CoreTools::SuitePrintManager::PrintSuiteName()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
-    m_UnitTestSuiteReportOutputPtr->PrintSuiteName(m_Suite.GetName());
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
+    unitTestSuiteReportOutput->PrintNewLine();
+    unitTestSuiteReportOutput->PrintSuiteName(suite.GetName());
+    unitTestSuiteReportOutput->PrintNewLine();
 }
 
 void CoreTools::SuitePrintManager::PrintSuiteResult()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_UnitTestSuiteReportOutputPtr->PrintTestResult(m_Suite.GetPassedNumber(), m_Suite.GetFailedNumber(), m_Suite.GetErrorNumber(), sm_CharacterWidth);
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
-    m_UnitTestSuiteReportOutputPtr->PrintBorderLine('=');
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
+    unitTestSuiteReportOutput->PrintTestResult(suite.GetPassedNumber(), suite.GetFailedNumber(), suite.GetErrorNumber(), characterWidth);
+    unitTestSuiteReportOutput->PrintNewLine();
+    unitTestSuiteReportOutput->PrintNewLine();
+    unitTestSuiteReportOutput->PrintBorderLine('=');
+    unitTestSuiteReportOutput->PrintNewLine();
 }
 
 void CoreTools::SuitePrintManager::PrintCurrentTime()
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_UnitTestSuiteReportOutputPtr->PrintCurrentTime();
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
-    m_UnitTestSuiteReportOutputPtr->PrintBorderLine('=');
-    m_UnitTestSuiteReportOutputPtr->PrintNewLine();
+    unitTestSuiteReportOutput->PrintCurrentTime();
+    unitTestSuiteReportOutput->PrintNewLine();
+    unitTestSuiteReportOutput->PrintBorderLine('=');
+    unitTestSuiteReportOutput->PrintNewLine();
 }

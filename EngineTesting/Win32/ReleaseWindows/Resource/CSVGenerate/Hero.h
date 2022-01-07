@@ -46,7 +46,7 @@ namespace CSVConfigure
 
         NODISCARD std::vector<System::TChar> GetDescribe() const;
         NODISCARD int GetDescribeCount() const;
-        NODISCARD bool GetDescribe(int index) const;
+        NODISCARD System::TChar GetDescribe(int index) const;
         NODISCARD std::vector<System::TChar>::const_iterator GetDescribeBegin() const noexcept;
         NODISCARD std::vector<System::TChar>::const_iterator GetDescribeEnd() const noexcept;
 

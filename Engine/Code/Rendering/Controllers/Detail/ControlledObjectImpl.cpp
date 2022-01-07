@@ -274,7 +274,7 @@ int Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     CoreTools::DisableNoexcept();
@@ -286,7 +286,7 @@ void Rendering::ControlledObjectImpl
 }
 
 void Rendering::ControlledObjectImpl
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1; 
 
@@ -297,11 +297,11 @@ void Rendering::ControlledObjectImpl
 	else
 	{
             constexpr int zero = 0;
-                target->Write(zero);
+                target.Write(zero);
 	}
 }
 
-void Rendering::ControlledObjectImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::ControlledObjectImpl ::Link(CoreTools::ObjectLink& source)
 { 
 	RENDERING_CLASS_IS_VALID_1;    
     CoreTools::DisableNoexcept();
@@ -313,12 +313,12 @@ void Rendering::ControlledObjectImpl ::Link(const CoreTools::ObjectLinkSharedPtr
 }
 
 void Rendering:: ControlledObjectImpl
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {   
 	RENDERING_CLASS_IS_VALID_1;  
 	    
 	uint32_t size{ 0 };
-    source->Read(size);
+    source.Read(size);
     
     m_Controllers.resize(size);
 	

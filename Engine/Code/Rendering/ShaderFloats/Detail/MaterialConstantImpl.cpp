@@ -45,7 +45,7 @@ const Rendering::ConstMaterialSharedPtr Rendering::MaterialConstantImpl
 		return ConstMaterialSharedPtr{};
 }
 
-void Rendering::MaterialConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::MaterialConstantImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
@@ -53,7 +53,7 @@ void Rendering::MaterialConstantImpl ::Load(const CoreTools::BufferSourceSharedP
 }
 
 void Rendering::MaterialConstantImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;
@@ -112,14 +112,14 @@ const vector<CoreTools::ConstObjectSharedPtr> Rendering::MaterialConstantImpl
 		return vector<CoreTools::ConstObjectSharedPtr>{};
 }
 
-void Rendering::MaterialConstantImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::MaterialConstantImpl ::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
     source;
 	//source.ResolveObjectSharedPtrLink(m_Material);
 }
 
-void Rendering::MaterialConstantImpl ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+void Rendering::MaterialConstantImpl ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     target;

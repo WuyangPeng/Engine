@@ -51,26 +51,26 @@ int Rendering::IKGoalImpl ::GetStreamingSize() const noexcept
 }
 
 void Rendering::IKGoalImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(m_Weight);
+	target.Write(m_Weight);
 	//target.WriteSharedPtr(m_Target);
 	//target.WriteSharedPtr(m_Effector);
 }
 
 void Rendering::IKGoalImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->Read(m_Weight);
+	source.Read(m_Weight);
 	//source.ReadSharedPtr(m_Target);
 	//source.ReadSharedPtr(m_Effector);
 }
 
-void Rendering::IKGoalImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::IKGoalImpl ::Link(CoreTools::ObjectLink& source)
 {
 	RENDERING_CLASS_IS_VALID_9;	
 	CoreTools::DisableNoexcept();
@@ -80,7 +80,7 @@ void Rendering::IKGoalImpl ::Link(const CoreTools::ObjectLinkSharedPtr& source)
 }
 
 void Rendering::IKGoalImpl
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const 
+	::Register(CoreTools::ObjectRegister& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     target;

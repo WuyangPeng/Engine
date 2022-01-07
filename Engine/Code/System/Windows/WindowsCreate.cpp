@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 22:01)
+///	引擎版本：0.8.0.0 (2021/12/12 13:18)
 
 #include "System/SystemExport.h"
 
@@ -28,7 +28,7 @@ bool System::AdjustSystemWindowRect(WindowsRect* rect, WindowsStyles styles) noe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsRect, WindowsStyles>(rect, styles);
+    UnusedFunction(rect, styles);
 
     return false;
 
@@ -51,50 +51,47 @@ System::WindowsHWnd System::CreateSystemWindow(const String& className,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<String,
-                 String,
-                 WindowsStyles,
-                 int,
-                 int,
-                 WindowsRect,
-                 WindowsHWnd,
-                 WindowsHMenu,
-                 WindowsHInstance>(className,
-                                   windowsName,
-                                   styles,
-                                   x,
-                                   y,
-                                   rect,
-                                   parent,
-                                   menu,
-                                   instance);
+    UnusedFunction(className,
+                   windowsName,
+                   styles,
+                   x,
+                   y,
+                   rect,
+                   parent,
+                   menu,
+                   instance);
 
     return nullptr;
 
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
-bool System::GetSystemClassName(WindowsHWnd hwnd, String& className)
+bool System::GetWindowsInformation(WindowsHWnd hwnd, String& result, GetWindowsInformationFunction getWindowsInformationFunction)
 {
-#ifdef SYSTEM_PLATFORM_WIN32
-
     constexpr auto maxCount = 256;
     array<TChar, maxCount> name{};
 
-    if (::GetClassName(hwnd, name.data(), maxCount) == 0)
+    if (getWindowsInformationFunction != nullptr && getWindowsInformationFunction(hwnd, name.data(), maxCount) == 0)
     {
-        className.clear();
+        result.clear();
         return false;
     }
     else
     {
-        className = name.data();
+        result = name.data();
         return true;
     }
+}
+
+bool System::GetSystemClassName(WindowsHWnd hwnd, String& className)
+{
+#ifdef SYSTEM_PLATFORM_WIN32
+
+    return GetWindowsInformation(hwnd, className, ::GetClassName);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     className.clear();
 
@@ -107,23 +104,11 @@ bool System::GetWindowTextString(WindowsHWnd hwnd, String& windowText)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
-    constexpr auto maxCount = 256;
-    array<TChar, maxCount> name{};
-
-    if (::GetWindowText(hwnd, name.data(), maxCount) == 0)
-    {
-        windowText.clear();
-        return false;
-    }
-    else
-    {
-        windowText = name.data();
-        return true;
-    }
+    return GetWindowsInformation(hwnd, windowText, ::GetWindowText);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     windowText.clear();
 
@@ -157,7 +142,7 @@ bool System::RemoveMenuCloseButton(WindowsHWnd hwnd) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     return false;
 
@@ -172,7 +157,7 @@ System::WindowsHMenu System::GetWindowSystemMenu(WindowsHWnd hwnd) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHWnd>(hwnd);
+    UnusedFunction(hwnd);
 
     return nullptr;
 
@@ -190,7 +175,7 @@ bool System::RemoveSystemMenu(WindowsHMenu menu, SystemMenuCommand position, Men
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHMenu, SystemMenuCommand, MenuItem>(menu, position, flags);
+    UnusedFunction(menu, position, flags);
 
     return false;
 

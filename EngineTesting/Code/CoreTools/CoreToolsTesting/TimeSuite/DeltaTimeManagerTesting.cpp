@@ -20,7 +20,7 @@ void CoreTools::DeltaTimeManagerTesting ::MainTest()
 
 void CoreTools::DeltaTimeManagerTesting ::TimeTest()
 {
-    DeltaTimeManager time{};
+    auto time = DeltaTimeManager::Create();
 
     ASSERT_APPROXIMATE(time.GetElapsedTimeInSeconds(), 0.0, 1e-10);
     ASSERT_LESS(0, time.GetNowTimeInSeconds());

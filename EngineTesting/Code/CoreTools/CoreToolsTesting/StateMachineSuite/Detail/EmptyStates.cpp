@@ -7,8 +7,7 @@
 #include "EmptyStates.h"
 #include "OpenStates.h"
 
-#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h" 
 #include "CoreTools/StateMachineManager/StateMachineBaseDetail.h"
 
 using std::make_pair;
@@ -20,8 +19,6 @@ CoreTools::EmptyStates ::EmptyStates() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
-
-
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(CoreTools, EmptyStates)
 

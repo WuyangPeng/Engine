@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/18 11:00)
+///	引擎版本：0.8.0.0 (2021/12/13 18:52)
 
 #include "System/SystemExport.h"
 
@@ -46,7 +46,7 @@ bool System::FileTimeConvertLocalFileTime(const FileTime* fileTime, FileTimePtr 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const FileTime*, FileTimePtr>(fileTime, localFileTime);
+    UnusedFunction(fileTime, localFileTime);
 
     return false;
 
@@ -64,7 +64,7 @@ bool System::GetSystemFileTime(WindowsHandle file, FileTimePtr creationTime, Fil
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, FileTimePtr, FileTimePtr, FileTimePtr>(file, creationTime, lastAccessTime, lastWriteTime);
+    UnusedFunction(file, creationTime, lastAccessTime, lastWriteTime);
 
     return false;
 
@@ -82,7 +82,7 @@ bool System::LocalFileTimeConvertFileTime(const FileTime* localFileTime, FileTim
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const FileTime*, FileTimePtr>(localFileTime, fileTime);
+    UnusedFunction(localFileTime, fileTime);
 
     return false;
 
@@ -100,7 +100,7 @@ bool System::SetSystemFileTime(WindowsHandle file, const FileTime* creationTime,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const FileTime*, const FileTime*, const FileTime*>(file, creationTime, lastAccessTime, lastWriteTime);
+    UnusedFunction(file, creationTime, lastAccessTime, lastWriteTime);
 
     return false;
 

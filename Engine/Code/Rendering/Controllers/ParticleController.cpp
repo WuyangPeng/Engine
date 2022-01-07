@@ -242,7 +242,7 @@ int Rendering::ParticleController
 	return size;
 }
 
-uint64_t Rendering::ParticleController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::ParticleController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -250,7 +250,7 @@ uint64_t Rendering::ParticleController ::Register(const CoreTools::ObjectRegiste
 }
 
 void Rendering::ParticleController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -264,7 +264,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -286,7 +286,7 @@ void Rendering::ParticleController
 }
 
 void Rendering::ParticleController
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 18:43)
+///	引擎版本：0.8.0.0 (2021/12/13 14:45)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ System::WindowsHandle System::CreateProcessHeap(HeapCreate options, WindowsSize 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<HeapCreate, WindowsSize, WindowsSize>(options, initialSize, maximumSize);
+    UnusedFunction(options, initialSize, maximumSize);
 
     return nullptr;
 
@@ -41,7 +41,7 @@ bool System::DestroyProcessHeap(WindowsHandle heap) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(heap);
+    UnusedFunction(heap);
 
     return false;
 
@@ -63,7 +63,7 @@ System::WindowsVoidPtr System::AllocateProcessHeap(WindowsHandle heap, HeapCreat
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate, WindowsSize>(heap, flags, bytes);
+    UnusedFunction(heap, flags, bytes);
 
     return nullptr;
 
@@ -85,7 +85,7 @@ System::WindowsVoidPtr System::ReAllocateProcessHeap(WindowsHandle heap, HeapCre
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate, WindowsVoidPtr, WindowsSize>(heap, flags, memory, bytes);
+    UnusedFunction(heap, flags, memory, bytes);
 
     return nullptr;
 
@@ -103,7 +103,7 @@ bool System::FreeProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVoidPt
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate, WindowsVoidPtr>(heap, flags, memory);
+    UnusedFunction(heap, flags, memory);
 
     return false;
 
@@ -118,7 +118,7 @@ System::WindowsSize System::GetProcessHeapSize(WindowsHandle heap, HeapCreate fl
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate, WindowsVoidPtr>(heap, flags, memory);
+    UnusedFunction(heap, flags, memory);
 
     return 0;
 
@@ -136,7 +136,7 @@ bool System::ValidateProcessHeap(WindowsHandle heap, HeapCreate flags, WindowsVo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate, WindowsVoidPtr>(heap, flags, memory);
+    UnusedFunction(heap, flags, memory);
 
     return false;
 
@@ -151,7 +151,7 @@ System::WindowsSize System::GetProcessHeapCompact(WindowsHandle heap, HeapCreate
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, HeapCreate>(heap, flags);
+    UnusedFunction(heap, flags);
 
     return 0;
 
@@ -179,7 +179,7 @@ System::WindowsDWord System::GetCurrentProcessHeaps(WindowsDWord numberOfHeaps, 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, WindowsHandlePtr>(numberOfHeaps, processHeaps);
+    UnusedFunction(numberOfHeaps, processHeaps);
 
     return 0;
 

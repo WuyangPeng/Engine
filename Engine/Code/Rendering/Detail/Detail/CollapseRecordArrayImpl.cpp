@@ -59,12 +59,12 @@ const Rendering::CollapseRecord Rendering::CollapseRecordArrayImpl
 	return m_CollapseRecord.at(index);
 }
 
-void Rendering::CollapseRecordArrayImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CollapseRecordArrayImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
 
 	int numRecords{ 0 };
-	source->Read(numRecords);
+	source.Read(numRecords);
 
 	m_CollapseRecord.resize(numRecords);
 
@@ -72,11 +72,11 @@ void Rendering::CollapseRecordArrayImpl ::Load(const CoreTools::BufferSourceShar
 }
 
 void Rendering::CollapseRecordArrayImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->Write(GetNumRecords());
+	target.Write(GetNumRecords());
 
 	for_each(m_CollapseRecord.begin(),m_CollapseRecord.end(),std::bind(&CollapseRecord::Save, std::placeholders::_1, std::ref(target)));
 }

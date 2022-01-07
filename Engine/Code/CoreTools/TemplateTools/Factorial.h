@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 14:39)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_FACTORIAL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_FACTORIAL_H
@@ -41,8 +41,9 @@ namespace CoreTools
         };
     };
 
-    [[nodiscard]] uint32_t CORE_TOOLS_DEFAULT_DECLARE RecursiveFactorial(uint32_t integer) noexcept;
-    [[nodiscard]] constexpr uint32_t NonRecursiveFactorial(uint32_t integer) noexcept
+    NODISCARD uint32_t CORE_TOOLS_DEFAULT_DECLARE RecursiveFactorial(uint32_t integer) noexcept;
+
+    NODISCARD constexpr uint32_t NonRecursiveFactorial(uint32_t integer) noexcept
     {
         auto result = 1u;
 

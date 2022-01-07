@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:54)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,6 +20,24 @@ CoreTools::UnitTestComposite::UnitTestComposite(const OStreamShared& streamShare
     : ParentType{ streamShared }, InterfaceType{}, m_TestLoopCount{ 0 }, m_RandomSeed{ 0 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::UnitTestComposite::UnitTestComposite(UnitTestComposite&& rhs) noexcept
+    : ParentType{ std::move(rhs) }, InterfaceType{ std::move(rhs) }, m_TestLoopCount{ rhs.m_TestLoopCount }, m_RandomSeed{ rhs.m_RandomSeed }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::UnitTestComposite& CoreTools::UnitTestComposite::operator=(UnitTestComposite&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    ParentType::operator=(std::move(rhs));
+    InterfaceType::operator=(std::move(rhs));
+    m_TestLoopCount = rhs.m_TestLoopCount;
+    m_RandomSeed = rhs.m_RandomSeed;
+
+    return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -41,7 +59,7 @@ void CoreTools::UnitTestComposite::ClearUnitTestCollection()
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26418)
-void CoreTools::UnitTestComposite::AddUnitTest([[maybe_unused]] const UnitTestCompositeSharedPtr& unitTest)
+void CoreTools::UnitTestComposite::AddUnitTest(MAYBE_UNUSED const UnitTestCompositeSharedPtr& unitTest)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
@@ -56,11 +74,11 @@ int CoreTools::UnitTestComposite::GetTestLoopCount() const noexcept
     return m_TestLoopCount;
 }
 
-void CoreTools::UnitTestComposite::SetTestLoopCount(int TestLoopCount) noexcept
+void CoreTools::UnitTestComposite::SetTestLoopCount(int testLoopCount) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_TestLoopCount = TestLoopCount;
+    m_TestLoopCount = testLoopCount;
 }
 
 void CoreTools::UnitTestComposite::SetRandomSeed(int randomSeed) noexcept
@@ -70,34 +88,12 @@ void CoreTools::UnitTestComposite::SetRandomSeed(int randomSeed) noexcept
     m_RandomSeed = randomSeed;
 }
 
-int CoreTools::UnitTestComposite::GetEngineeringOffsetValue() const noexcept
-{
-    return System::GetEngineeringOffsetValue();
-}
-
 int CoreTools::UnitTestComposite::GetRandomSeed() const noexcept
 {
-    return m_RandomSeed + GetEngineeringOffsetValue();
+    return m_RandomSeed + System::GetEngineeringOffsetValue();
 }
 
 uint32_t CoreTools::UnitTestComposite::GetEngineRandomSeed() const
 {
     return boost::numeric_cast<uint32_t>(GetRandomSeed());
-}
-
-System::DynamicLinkString CoreTools::UnitTestComposite::GetEngineeringDynamicLinkSuffix() const
-{
-    System::DynamicLinkString result{};
-
-    result += DYNAMIC_LINK_TEXT("");
-
-#ifdef BUILDING_CORE_TOOLS_STATIC
-    result += DYNAMIC_LINK_TEXT("Static");
-#endif  // BUILDING_CORE_TOOLS_STATIC
-
-#ifdef _DEBUG
-    result += DYNAMIC_LINK_TEXT("D");
-#endif  // _DEBUG
-
-    return result;
 }

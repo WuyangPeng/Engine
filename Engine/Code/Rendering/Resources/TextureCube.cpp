@@ -190,7 +190,7 @@ int Rendering::TextureCube
 }
 
 uint64_t Rendering::TextureCube
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -198,7 +198,7 @@ uint64_t Rendering::TextureCube
 }
 
 void Rendering::TextureCube
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -212,7 +212,7 @@ void Rendering::TextureCube
 }
 
 void Rendering::TextureCube
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
 
@@ -228,7 +228,7 @@ void Rendering::TextureCube
 }
 
 void Rendering::TextureCube
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

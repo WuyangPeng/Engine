@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:12)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/23 17:27)
 
 #ifndef CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
 #define CORE_TOOLS_PROPERTIES_PROPERTY_BASE_H
@@ -28,9 +28,9 @@ namespace CoreTools
         virtual ~PropertyBase() = default;
 
         PropertyBase(const PropertyBase& rhs) noexcept = default;
-        PropertyBase& operator=(const PropertyBase& rhs) noexcept = default;
+        virtual PropertyBase& operator=(const PropertyBase& rhs) noexcept = default;
         PropertyBase(PropertyBase&& rhs) noexcept = default;
-        PropertyBase& operator=(PropertyBase&& rhs) noexcept = default;
+        virtual PropertyBase& operator=(PropertyBase&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -39,7 +39,7 @@ namespace CoreTools
         const T* Holder() const noexcept;
 
     private:
-        static const ptrdiff_t m_Offset;
+        static const ptrdiff_t offset;
     };
 }
 

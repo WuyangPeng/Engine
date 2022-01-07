@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 19:57)
+///	引擎版本：0.8.0.0 (2021/12/13 11:14)
 
 #include "System/SystemExport.h"
 
@@ -26,7 +26,7 @@ bool System::InitializeSystemSecurityDescriptor(SecurityDescriptorPtr securityDe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr>(securityDescriptor);
+    UnusedFunction(securityDescriptor);
 
     return false;
 
@@ -44,7 +44,7 @@ bool System::SetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecurityDescriptorControlBits, SecurityDescriptorControlBits>(securityDescriptor, controlBitsOfInterest, controlBitsToSet);
+    UnusedFunction(securityDescriptor, controlBitsOfInterest, controlBitsToSet);
 
     return false;
 
@@ -62,7 +62,7 @@ bool System::SetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescrip
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, bool, AccessCheckACLPtr, bool>(securityDescriptor, daclPresent, dacl, daclDefaulted);
+    UnusedFunction(securityDescriptor, daclPresent, dacl, daclDefaulted);
 
     return false;
 
@@ -80,7 +80,7 @@ bool System::SetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDesc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecuritySIDPtr, bool>(securityDescriptor, group, groupDefaulted);
+    UnusedFunction(securityDescriptor, group, groupDefaulted);
 
     return false;
 
@@ -98,7 +98,7 @@ bool System::SetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDesc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecuritySIDPtr, bool>(securityDescriptor, group, ownerDefaulted);
+    UnusedFunction(securityDescriptor, group, ownerDefaulted);
 
     return false;
 
@@ -116,7 +116,7 @@ bool System::SetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, WindowsUCharPtr>(securityDescriptor, rmControl);
+    UnusedFunction(securityDescriptor, rmControl);
 
     return false;
 
@@ -134,7 +134,7 @@ bool System::SetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, bool, AccessCheckACLPtr, bool>(securityDescriptor, saclPresent, sacl, saclDefaulted);
+    UnusedFunction(securityDescriptor, saclPresent, sacl, saclDefaulted);
 
     return false;
 
@@ -159,7 +159,7 @@ bool System::GetSystemSecurityDescriptorControl(SecurityDescriptorPtr securityDe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecurityDescriptorControlBits*, WindowsDWordPtr>(securityDescriptor, control, revision);
+    UnusedFunction(securityDescriptor, control, revision);
 
     return false;
 
@@ -184,7 +184,7 @@ bool System::GetSecurityDescriptorDiscretionaryAccessControlList(SecurityDescrip
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, WindowsBoolPtr, AccessCheckACLPtr*, bool*>(securityDescriptor, daclPresent, dacl, daclDefaulted);
+    UnusedFunction(securityDescriptor, daclPresent, dacl, daclDefaulted);
 
     return false;
 
@@ -209,7 +209,7 @@ bool System::GetSystemSecurityDescriptorGroup(SecurityDescriptorPtr securityDesc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecuritySIDPtr*, bool*>(securityDescriptor, group, groupDefaulted);
+    UnusedFunction(securityDescriptor, group, groupDefaulted);
 
     return false;
 
@@ -224,7 +224,7 @@ System::WindowsDWord System::GetSystemSecurityDescriptorLength(SecurityDescripto
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr>(securityDescriptor);
+    UnusedFunction(securityDescriptor);
 
     return false;
 
@@ -249,7 +249,7 @@ bool System::GetSystemSecurityDescriptorOwner(SecurityDescriptorPtr securityDesc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, SecuritySIDPtr*, bool*>(securityDescriptor, owner, ownerDefaulted);
+    UnusedFunction(securityDescriptor, owner, ownerDefaulted);
 
     return false;
 
@@ -267,7 +267,7 @@ bool System::GetSecurityDescriptorResourceManagerControl(SecurityDescriptorPtr s
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, WindowsUCharPtr>(securityDescriptor, rmControl);
+    UnusedFunction(securityDescriptor, rmControl);
 
     return false;
 
@@ -292,7 +292,7 @@ bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr 
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr, WindowsBoolPtr, AccessCheckACLPtr*, bool*>(securityDescriptor, saclPresent, sacl, saclDefaulted);
+    UnusedFunction(securityDescriptor, saclPresent, sacl, saclDefaulted);
 
     return false;
 
@@ -302,13 +302,15 @@ bool System::GetSecurityDescriptorSystemAccessControlList(SecurityDescriptorPtr 
 bool System::IsSecurityDescriptorValid(SecurityDescriptorPtr securityDescriptor) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::IsValidSecurityDescriptor(securityDescriptor) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityDescriptorPtr>(securityDescriptor);
+    UnusedFunction(securityDescriptor);
 
     return false;
 
@@ -327,7 +329,7 @@ bool System::GetUserObjectSystemSecurity(ThreadHandle obj, SecurityRequestedInfo
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, SecurityRequestedInformation, SecurityDescriptorPtr, WindowsDWord, WindowsDWordPtr>(obj, requested, securityDescriptor, length, lengthNeeded);
+    UnusedFunction(obj, requested, securityDescriptor, length, lengthNeeded);
 
     return false;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:32)
+///	引擎版本：0.8.0.0 (2021/12/13 22:24)
 
 #ifndef SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
 #define SYSTEM_CONSOLE_CONSOLE_SCREEN_BUFFER_H
@@ -21,7 +21,9 @@ namespace System
 {
     // 控制台缓冲区的设置和获取。
 
-    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess, ConsoleScreenBufferShareMode shareMode, const WindowSecurityAttributes* securityAttributes) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess,
+                                                                                       ConsoleScreenBufferShareMode shareMode,
+                                                                                       const WindowSecurityAttributes* securityAttributes) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemConsole(WindowsHandle consoleHandle) noexcept;
     NODISCARD void SYSTEM_DEFAULT_DECLARE SetDefaultConsoleSecurityAttributes(WindowSecurityAttributes& securityAttributes, bool inheritHandle) noexcept;
 

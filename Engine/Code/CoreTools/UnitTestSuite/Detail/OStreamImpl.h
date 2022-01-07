@@ -1,24 +1,23 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 11:21)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 18:40)
 
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_OSTREAM_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include <boost/noncopyable.hpp>
 #include <iostream>
 #include <string>
 
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE OStreamImpl final : private boost::noncopyable
+    class CORE_TOOLS_HIDDEN_DECLARE OStreamImpl final
     {
     public:
         using ClassType = OStreamImpl;
@@ -27,20 +26,26 @@ namespace CoreTools
         explicit OStreamImpl(bool isCout) noexcept;
         explicit OStreamImpl(const std::string& fileName);
 
+        ~OStreamImpl() noexcept = default;
+        OStreamImpl(const OStreamImpl& rhs) = delete;
+        OStreamImpl& operator=(const OStreamImpl& rhs) = delete;
+        OStreamImpl(OStreamImpl&& rhs) noexcept;
+        OStreamImpl& operator=(OStreamImpl&& rhs) noexcept;
+
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] std::ostream& GetStream() noexcept;
+        NODISCARD std::ostream& GetStream() noexcept;
 
-        [[nodiscard]] bool IsCout() const noexcept;
-        [[nodiscard]] bool IsCerr() const noexcept;
-        [[nodiscard]] bool IsFile() const noexcept;
-
-    private:
-        using OstreamSharedPtr = std::shared_ptr<std::ostream>;
+        NODISCARD bool IsCout() const noexcept;
+        NODISCARD bool IsCerr() const noexcept;
+        NODISCARD bool IsFile() const noexcept;
 
     private:
-        OstreamSharedPtr m_OStream;
-        bool m_IsCout;
+        using OStreamSharedPtr = std::shared_ptr<std::ostream>;
+
+    private:
+        OStreamSharedPtr stream;
+        bool isCout;
     };
 }
 

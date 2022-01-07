@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:33)
+///	引擎版本：0.8.0.0 (2021/12/13 22:27)
 
 #include "System/SystemExport.h"
 
@@ -17,8 +17,8 @@
 #include "System/Windows/WindowsSystem.h"
 
 System::WindowsHandle System::CreateSystemConsoleScreenBuffer(DesiredAccessGeneric desiredAccess,
-                                                             ConsoleScreenBufferShareMode shareMode,
-                                                             const WindowSecurityAttributes* securityAttributes) noexcept
+                                                              ConsoleScreenBufferShareMode shareMode,
+                                                              const WindowSecurityAttributes* securityAttributes) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
 
@@ -26,7 +26,7 @@ System::WindowsHandle System::CreateSystemConsoleScreenBuffer(DesiredAccessGener
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DesiredAccessGeneric, ConsoleScreenBufferShareMode, const WindowSecurityAttributes*>(desiredAccess, shareMode, securityAttributes);
+    UnusedFunction(desiredAccess, shareMode, securityAttributes);
 
     return nullptr;
 
@@ -44,7 +44,7 @@ bool System::CloseSystemConsole(WindowsHandle consoleHandle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(consoleHandle);
+    UnusedFunction(consoleHandle);
 
     return false;
 
@@ -69,7 +69,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleScreenBufferInfoPtr>(consoleOutput, consoleScreenBufferInfo);
+    UnusedFunction(consoleOutput, consoleScreenBufferInfo);
 
     return false;
 
@@ -87,7 +87,7 @@ bool System::GetSystemConsoleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleScreenBufferInfoExPtr>(consoleOutput, consoleScreenBufferInfoEx);
+    UnusedFunction(consoleOutput, consoleScreenBufferInfoEx);
 
     return false;
 
@@ -105,7 +105,7 @@ bool System::SetConsoleHandleScreenBufferInfo(WindowsHandle consoleOutput, Conso
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleScreenBufferInfoExPtr>(consoleOutput, consoleScreenBufferInfoEx);
+    UnusedFunction(consoleOutput, consoleScreenBufferInfoEx);
 
     return false;
 
@@ -123,7 +123,7 @@ bool System::SetSystemConsoleScreenBufferSize(WindowsHandle consoleOutput, Conso
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, ConsoleCoord>(consoleOutput, size);
+    UnusedFunction(consoleOutput, size);
 
     return false;
 

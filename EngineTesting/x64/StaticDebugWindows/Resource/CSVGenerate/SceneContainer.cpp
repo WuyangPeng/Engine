@@ -10,9 +10,9 @@
 #include "Scene.h"
 #include "SceneContainerDetail.h"
 #include "CoreTools/Helper/LogMacro.h"
-#include "CoreTools/TextParsing/CSVContent.h"
-#include "CoreTools/TextParsing/CSVHead.h"
-#include "CoreTools/TextParsing/CSVRow.h"
+#include "CoreTools/TextParsing/CSV/CSVContent.h"
+#include "CoreTools/TextParsing/CSV/CSVHead.h"
+#include "CoreTools/TextParsing/CSV/CSVRow.h"
 
 #include <algorithm>
 
@@ -54,7 +54,8 @@ CSVConfigure::SceneContainer::ConstSceneSharedPtr CSVConfigure::SceneContainer::
 
     if (scene.empty())
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("scene表为空。"s));    }
+        THROW_EXCEPTION(SYSTEM_TEXT("scene表为空。"s));
+    }
     else
     {
         return scene.begin()->second;

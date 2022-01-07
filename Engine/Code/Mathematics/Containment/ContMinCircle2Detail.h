@@ -8,7 +8,7 @@
 #define MATHEMATICS_CONTAINMENT_CONT_MIN_CIRCLE2_DETAIL_H
 
 #include "ContMinCircle2.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 // All internal minimal circle calculations store the squared radius in the
 // radius member of Circle2.  Only at the end is a sqrt computed.
@@ -29,7 +29,7 @@ Mathematics::MinCircle2<Real>
     if (numPoints >= 1)
     {
         // Create identity permutation (0,1,...,numPoints-1).
-        Vector2D<Real>** permuted = NEW1<Vector2D<Real>*>(numPoints);
+        Vector2D<Real>** permuted = nullptr;  //  NEW1<Vector2D<Real>*>(numPoints);
         int i;
         for (i = 0; i < numPoints; ++i)
         {

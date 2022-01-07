@@ -113,9 +113,9 @@ void NURBSRectangle<Real>::CreateControl (Vector3D<Real>** ctrlPoint, Real** ctr
 	auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
 	auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
 
-    mCtrlPoint = NEW2<Vector3D<Real> >(newNumUCtrlPoints, newNumVCtrlPoints);
+    mCtrlPoint = nullptr;  // NEW2<Vector3D<Real> >(newNumUCtrlPoints, newNumVCtrlPoints);
 
-    mCtrlWeight = NEW2<Real>(newNumUCtrlPoints, newNumVCtrlPoints);
+    mCtrlWeight = nullptr;  // NEW2<Real>(newNumUCtrlPoints, newNumVCtrlPoints);
 
     for (auto i = 1; i < newNumUCtrlPoints; ++i)
     {

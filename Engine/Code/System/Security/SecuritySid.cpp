@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 20:32)
+///	引擎版本：0.8.0.0 (2021/12/13 11:16)
 
 #include "System/SystemExport.h"
 
@@ -34,27 +34,17 @@ bool System::AllocateAndInitializeSecurityIdentifier(SecuritySIDIndentifierAutho
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDIndentifierAuthorityPtr,
-                 WindowsByte,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 WindowsDWord,
-                 SecuritySIDPtr*>(identifierAuthority,
-                                  subAuthorityCount,
-                                  subAuthority0,
-                                  subAuthority1,
-                                  subAuthority2,
-                                  subAuthority3,
-                                  subAuthority4,
-                                  subAuthority5,
-                                  subAuthority6,
-                                  subAuthority7,
-                                  sid);
+    UnusedFunction(identifierAuthority,
+                   subAuthorityCount,
+                   subAuthority0,
+                   subAuthority1,
+                   subAuthority2,
+                   subAuthority3,
+                   subAuthority4,
+                   subAuthority5,
+                   subAuthority6,
+                   subAuthority7,
+                   sid);
 
     return false;
 
@@ -72,7 +62,7 @@ bool System::CopySecurityIdentifier(WindowsDWord destinationSidLength, SecurityS
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, SecuritySIDPtr, SecuritySIDPtr>(destinationSidLength, destinationSid, sourceSid);
+    UnusedFunction(destinationSidLength, destinationSid, sourceSid);
 
     return false;
 
@@ -90,7 +80,7 @@ bool System::CreateWellKnownSecurityIdentifier(SecurityWellKnownSidType wellKnow
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityWellKnownSidType, SecuritySIDPtr, SecuritySIDPtr, WindowsDWord*>(wellKnownSidType, domainSid, sid, sidCount);
+    UnusedFunction(wellKnownSidType, domainSid, sid, sidCount);
 
     return false;
 
@@ -105,7 +95,7 @@ System::WindowsVoidPtr System::FreeSecurityIdentifier(SecuritySIDPtr sid) noexce
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr>(sid);
+    UnusedFunction(sid);
 
     return nullptr;
 
@@ -120,7 +110,7 @@ System::WindowsDWord System::GetLengthSecurityIdentifier(SecuritySIDPtr sid) noe
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr>(sid);
+    UnusedFunction(sid);
 
     return 0;
 
@@ -135,7 +125,7 @@ System::WindowsDWordPtr System::GetSecurityIdentifierSubAuthority(SecuritySIDPtr
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr, WindowsDWord>(sid, subAuthority);
+    UnusedFunction(sid, subAuthority);
 
     return nullptr;
 
@@ -150,7 +140,7 @@ System::WindowsUCharPtr System::GetSecurityIdentifierSubAuthorityCount(SecurityS
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr>(sid);
+    UnusedFunction(sid);
 
     return nullptr;
 
@@ -168,7 +158,7 @@ bool System::InitializeSecurityIdentifier(SecuritySIDPtr sid, SecuritySIDIndenti
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr, SecuritySIDIndentifierAuthorityPtr, WindowsByte>(sid, identifierAuthority, subAuthorityCount);
+    UnusedFunction(sid, identifierAuthority, subAuthorityCount);
 
     return false;
 
@@ -186,7 +176,7 @@ bool System::IsSecurityIdentifierValid(SecuritySIDPtr sid) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr>(sid);
+    UnusedFunction(sid);
 
     return false;
 
@@ -204,7 +194,7 @@ bool System::IsWellKnownSecurityIdentifier(SecuritySIDPtr sid, SecurityWellKnown
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecuritySIDPtr, SecurityWellKnownSidType>(sid, wellKnownSidType);
+    UnusedFunction(sid, wellKnownSidType);
 
     return false;
 

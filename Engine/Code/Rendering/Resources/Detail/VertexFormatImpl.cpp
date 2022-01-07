@@ -250,33 +250,33 @@ int Rendering::VertexFormatImpl ::GetStreamingSize() const noexcept
 }
 
 void Rendering::VertexFormatImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save(CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumAttributes);
+	target.Write(m_NumAttributes);
 
 	for (auto i = 0; i < System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes); ++i)
 	{
 		m_Elements[i].Save(target);
 	}
 
-	target->Write(m_Stride);
+	target.Write(m_Stride);
 }
 
 void Rendering::VertexFormatImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source )
+	::Load(CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumAttributes);
+	source.Read(m_NumAttributes);
 
 	for (auto i = 0; i < System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::Attributes); ++i)
 	{
 		m_Elements[i].Load(source);
 	}
 
-	source->Read(m_Stride);
+	source.Read(m_Stride);
 }
 
 void Rendering::VertexFormatImpl

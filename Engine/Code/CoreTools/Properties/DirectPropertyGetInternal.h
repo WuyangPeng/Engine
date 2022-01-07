@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 19:19)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_GET_INTERNAL_H
@@ -13,8 +13,6 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/Helper/PropertiesMacro.h"
-
-#include <boost/noncopyable.hpp>
 
 // 使用方式：
 // 类通过友元实现对属性的只读访问。
@@ -37,7 +35,7 @@ namespace CoreTools
     template <typename Value,  // 实际属性值类型
               typename Reference,  // 引用类型
               typename Container>  // 封闭类
-    class DirectPropertyGetInternal final : private boost::noncopyable
+    class DirectPropertyGetInternal final
     {
     public:
         using ValueType = Value;
@@ -46,6 +44,12 @@ namespace CoreTools
         using ClassType = DirectPropertyGetInternal<ValueType, ReferenceType, ContainerType>;
 
         CLASS_INVARIANT_DECLARE;
+
+        ~DirectPropertyGetInternal() noexcept = default;
+        DirectPropertyGetInternal(const DirectPropertyGetInternal& rhs) noexcept = delete;
+        DirectPropertyGetInternal& operator=(const DirectPropertyGetInternal& rhs) noexcept = delete;
+        DirectPropertyGetInternal(DirectPropertyGetInternal&& rhs) noexcept = delete;
+        DirectPropertyGetInternal& operator=(DirectPropertyGetInternal&& rhs) noexcept = delete;
 
 #if defined(TCRE_USE_DIGITAL_MARS)
     public:
@@ -62,7 +66,7 @@ namespace CoreTools
 
     public:
         // 提供对该属性的只读访问
-        [[nodiscard]] operator ReferenceType() const noexcept;
+        NODISCARD operator ReferenceType() const noexcept;
 
     private:
         ValueType m_Value;

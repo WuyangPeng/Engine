@@ -7,7 +7,7 @@
 #include "AssistTools/AssistToolsExport.h"
 
 #include "SaveWmtf.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "Rendering/Resources/Texture2D.h"
 #include "System/Helper/PragmaWarning/Disable4996.h"
 
@@ -24,7 +24,7 @@
 AssistTools::SaveWmtf
 	::SaveWmtf(const char* name, int width, int height, const unsigned char* texels)
 {
-	Rendering::Texture2D* texture = CoreTools::New0< Rendering::Texture2D>(Rendering::TextureFormat::A8R8G8B8, width,	height, 1);
+	Rendering::Texture2D* texture = new  Rendering::Texture2D(Rendering::TextureFormat::A8R8G8B8, width,	height, 1);
 
 const	int format = System::EnumCastUnderlying(texture->GetFormat());
 const int type = System::EnumCastUnderlying(texture->GetTextureType());
@@ -56,7 +56,7 @@ int dimension[3][Rendering::TextureMaximumMipmapLevels]{ };
 	{
 		assert(outFile);
 		//DELETE1(texels);
-		DELETE0(texture);
+		//DELETE0(texture);
 		return;
 	}
 	fwrite(&format, sizeof(int), 1, outFile);
@@ -75,6 +75,6 @@ int dimension[3][Rendering::TextureMaximumMipmapLevels]{ };
 	fclose(outFile);
 
 //	DELETE1(texels);
-	DELETE0(texture);
+	//DELETE0(texture);
 }
  #include STSTEM_WARNING_POP

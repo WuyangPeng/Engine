@@ -113,9 +113,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertEqualDoNotUseMessageFailu
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 6;
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(lhsExpression, rhsExpression);
-
-    GetStream() << "测试ASSERT_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！";
+    ASSERT_EQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_EQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertEnumEqualFailureThrowExceptionTest()
@@ -176,7 +174,7 @@ void CoreTools::AssertTestExceptionThrowTesting::AssertUnequalDoNotUseMessageFai
     constexpr auto lhsExpression = 5;
     constexpr auto rhsExpression = 5;
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(lhsExpression, rhsExpression);
+    ASSERT_UNEQUAL_FAILURE_THROW(lhsExpression, rhsExpression, "测试ASSERT_UNEQUAL未通过的情况抛出异常。存在一个正常的测试失败！");
 
     GetStream() << "测试ASSERT_UNEQUAL未通过的情况抛出异常。存在一个正常的测试失败！";
 }

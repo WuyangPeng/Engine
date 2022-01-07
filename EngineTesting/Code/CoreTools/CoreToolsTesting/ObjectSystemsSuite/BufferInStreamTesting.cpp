@@ -15,9 +15,9 @@
 #include "CoreTools/ObjectSystems/ObjectManager.h"
 #include "CoreTools/ObjectSystems/BufferInStream.h"
 #include "CoreTools/ObjectSystems/BufferOutStream.h"
-#include "CoreTools/MemoryTools/SmartPointerManager.h"
+
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(CoreTools, BufferInStreamTesting)

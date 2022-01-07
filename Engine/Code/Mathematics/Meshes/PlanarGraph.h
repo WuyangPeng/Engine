@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "EdgeKey.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 
 // The Point2 template class must represent a 2-tuple, each component of some
 // scalar type Numeric.  Point2 must define the following member functions.

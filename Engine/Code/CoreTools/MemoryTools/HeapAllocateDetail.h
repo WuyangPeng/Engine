@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/20 11:05)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/28 20:52)
 
 #ifndef CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
 #define CORE_TOOLS_MEMORY_TOOLS_HEAP_ALLOCATE_DETAIL_H
@@ -19,9 +19,9 @@
 
 template <typename T>
 CoreTools::HeapAllocate<T>::HeapAllocate(int length)
-    : m_Length{ length }, m_Point{ System::AllocateProcessHeap<T>(length) }
+    : length{ length }, point{ System::AllocateProcessHeap<T>(length) }
 {
-    if (m_Point == nullptr)
+    if (point == nullptr)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("分配Heap失败。"s));
     }
@@ -30,22 +30,24 @@ CoreTools::HeapAllocate<T>::HeapAllocate(int length)
 }
 
 template <typename T>
-CoreTools::HeapAllocate<T>::~HeapAllocate()
+CoreTools::HeapAllocate<T>::~HeapAllocate() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 
-    System::FreeProcessHeap(m_Point);
+    System::FreeProcessHeap(point);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool CoreTools::HeapAllocate<T>::IsValid() const noexcept
 {
-    if (m_Point != nullptr)
+    if (point != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
@@ -53,7 +55,7 @@ int CoreTools::HeapAllocate<T>::GetLength() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Length;
+    return length;
 }
 
 template <typename T>
@@ -61,7 +63,7 @@ int CoreTools::HeapAllocate<T>::GetByteLength() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Length * sizeof(T));
+    return boost::numeric_cast<int>(length * sizeof(T));
 }
 
 template <typename T>
@@ -69,7 +71,7 @@ const typename CoreTools::HeapAllocate<T>::Point CoreTools::HeapAllocate<T>::Get
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Point;
+    return point;
 }
 
 template <typename T>

@@ -119,30 +119,30 @@ const char* Rendering::BufferImpl
 }
 
 void Rendering::BufferImpl
-	::Load( const CoreTools::BufferSourceSharedPtr& source )
+	::Load( CoreTools::BufferSource& source )
 {
 	RENDERING_CLASS_IS_VALID_1;
 
-	source->Read(m_NumElements);
-	source->Read(m_ElementSize);
-	source->ReadEnum(m_Usage);
+	source.Read(m_NumElements);
+	source.Read(m_ElementSize);
+	source.ReadEnum(m_Usage);
 
 	auto size = 0;
-	source->Read(size);
+	source.Read(size);
 	m_Data.resize(size);
 
-//	source->Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
+//	source.Read(boost::numeric_cast<int>(m_Data.size()), &m_Data[0]);
 }
 
 void Rendering::BufferImpl
-	::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+	::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
-	target->Write(m_NumElements);
-	target->Write(m_ElementSize);
-        target->WriteEnum(m_Usage);
-        target->WriteContainerWithNumber(m_Data);
+	target.Write(m_NumElements);
+	target.Write(m_ElementSize);
+        target.WriteEnum(m_Usage);
+        target.WriteContainerWithNumber(m_Data);
 }
 
 int Rendering::BufferImpl

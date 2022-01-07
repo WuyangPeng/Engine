@@ -56,10 +56,10 @@ namespace Rendering
         void SetOffsets(int bonesIndex, const std::vector<APoint>& offsets);
 
         int GetStreamingSize() const noexcept;
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
-        void Link(const CoreTools::ObjectLinkSharedPtr& source);
-        void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
+        void Save(CoreTools::BufferTarget& target) const;
+        void Load(CoreTools::BufferSource& source);
+        void Link(CoreTools::ObjectLink& source);
+        void Register(CoreTools::ObjectRegister& target) const;
 
     private:
         int m_NumVertices;  // nv

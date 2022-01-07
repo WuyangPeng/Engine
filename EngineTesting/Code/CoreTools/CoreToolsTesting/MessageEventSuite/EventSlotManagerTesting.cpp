@@ -45,7 +45,7 @@ void CoreTools::EventSlotManagerTesting ::SuccessTest()
 
     ASSERT_LESS(0, index);
 
-    CallbackParameters callbackParameters;
+    CallbackParameters callbackParameters{ 0 };
 
     callbackParameters.SetValue(0, value);
 

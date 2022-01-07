@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 21:52)
+///	引擎版本：0.8.0.0 (2021/12/12 13:13)
 
 #ifndef SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
 #define SYSTEM_WINDOWS_WINDOWS_FONT_INFORMATION_H
@@ -27,7 +27,10 @@ namespace System
 
     NODISCARD WindowsHDC SYSTEM_DEFAULT_DECLARE GetSystemDC(WindowsHWnd hwnd) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemDC(WindowsHWnd hwnd, WindowsHDC hdc) noexcept;
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextExtentPoint32(WindowsHDC hdc, const TChar* text, int c, WindowsPointSize* pointSize) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextExtentPoint32(WindowsHDC hdc,
+                                                                     const TChar* text,
+                                                                     int character,
+                                                                     WindowsPointSize* pointSize) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE GetSystemTextMetrics(WindowsHDC hdc, WindowsTextMetric* metric) noexcept;
 }
 

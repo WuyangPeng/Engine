@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/03/31 18:23)
+///	引擎版本：0.8.0.0 (2021/12/13 22:47)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::IsCodePageValid(CodePage codePage) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<CodePage>(codePage);
+    UnusedFunction(codePage);
 
     return false;
 
@@ -34,19 +34,25 @@ bool System::IsCodePageValid(CodePage codePage) noexcept
 System::CodePage System::GetANSICodePage() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<CodePage>(::GetACP());
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CodePage::UTF8;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 System::CodePage System::GetOEMCodePage() noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return UnderlyingCastEnum<CodePage>(::GetOEMCP());
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CodePage::UTF8;
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
-
-

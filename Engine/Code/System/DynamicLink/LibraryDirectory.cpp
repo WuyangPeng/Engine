@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:33)
+///	引擎版本：0.8.0.0 (2021/12/13 18:58)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ bool System::SetLibraryDirectory(const DynamicLinkCharType* pathName) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const DynamicLinkCharType*>(pathName);
+    UnusedFunction(pathName);
 
     return false;
 
@@ -38,7 +38,7 @@ System::WindowsDWord System::GetLibraryDirectory(WindowsDWord bufferLength, Dyna
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, DynamicLinkCharType*>(bufferLength, buffer);
+    UnusedFunction(bufferLength, buffer);
 
     return false;
 

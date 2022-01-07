@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/20 20:13)
+///	引擎版本：0.8.0.0 (2021/12/13 11:31)
 
 #ifndef SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
 #define SYSTEM_OPENGL_WGL_EXTENSIONS_USING_H
@@ -125,7 +125,6 @@ namespace System
         float gmfCellIncX;
         float gmfCellIncY;
     };
-
     using GlyphMetricsFloatPtr = GlyphMetricsFloat*;
 
     using OpenGLProc = int (*)();
@@ -134,7 +133,6 @@ namespace System
     {
         int unused;
     };
-
     using WglHPBufferARB = WglHPBufferARBDeclare*;
     using WglHPBufferEXT = WglHPBufferARB;
 
@@ -142,7 +140,6 @@ namespace System
     {
         int unused;
     };
-
     using WglHGpuNV = WglHGPUNVDeclare*;
 
     struct WglGpuDevice
@@ -159,21 +156,18 @@ namespace System
     {
         int unused;
     };
-
     using WglHVideoOutputDeviceNV = WglHVideoOutputDeviceNVDeclare*;
 
     struct WglHVideoInputDeviceNVDeclare
     {
         int unused;
     };
-
     using WglHVideoInputDeviceNV = WglHVideoInputDeviceNVDeclare*;
 
     struct WglHPVideoDEVDeclare
     {
         int unused;
     };
-
     using WglHPVideoDEV = WglHPVideoDEVDeclare*;
 
 #endif  // SYSTEM_PLATFORM_WIN32

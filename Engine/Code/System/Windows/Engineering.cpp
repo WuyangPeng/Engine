@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/03 21:59)
+///	引擎版本：0.8.0.0 (2021/12/12 13:05)
 
 #include "System/SystemExport.h"
 
@@ -67,7 +67,7 @@ System::String System::GetEngineeringDirectory()
 
     if (maxFileNameLength == 0)
     {
-        return SYSTEM_TEXT(""s);
+        return String{};
     }
 
     String name{ moduleFileName.data() };
@@ -75,7 +75,7 @@ System::String System::GetEngineeringDirectory()
     const auto pos = name.find_last_of(SYSTEM_TEXT("\\"s));
     if (pos == String::npos)
     {
-        return SYSTEM_TEXT(""s);
+        return String{};
     }
 
     return name.substr(0, pos + 1);

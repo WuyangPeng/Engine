@@ -1,0 +1,49 @@
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎辅助版本：0.7.2.7 (2021/12/05 10:35)
+
+#ifndef BOOK_COMPUTER_DLL_H
+#define BOOK_COMPUTER_DLL_H
+
+#include "Helper/UserMacro.h"
+#include "System/Helper/ExportMacro.h"
+
+#if defined(BUILDING_BOOK_COMPUTER_NO_IMPORT) || defined(BUILDING_BOOK_COMPUTER_STATIC)
+
+    #define BOOK_COMPUTER_DEFAULT_DECLARE
+    #define BOOK_COMPUTER_VISIBLE
+
+    #if defined(BUILDING_BOOK_COMPUTER_EXPORT)
+
+        #define BOOK_COMPUTER_HIDDEN_DECLARE
+
+    #else  // !defined(BUILDING_BOOK_COMPUTER_EXPORT)
+
+        #define BOOK_COMPUTER_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_BOOK_COMPUTER_EXPORT
+
+#else  // !defined(BUILDING_BOOK_COMPUTER_NO_IMPORT) && !defined(BUILDING_BOOK_COMPUTER_STATIC)
+
+    #if defined(BUILDING_BOOK_COMPUTER_EXPORT)
+
+        #define BOOK_COMPUTER_DEFAULT_DECLARE TCRE_SYMBOL_EXPORT
+        #define BOOK_COMPUTER_HIDDEN_DECLARE TCRE_SYMBOL_NO_EXPORT
+
+    #else  // !defined(BUILDING_BOOK_COMPUTER_EXPORT)
+
+        #define BOOK_COMPUTER_DEFAULT_DECLARE TCRE_SYMBOL_IMPORT
+        #define BOOK_COMPUTER_HIDDEN_DECLARE TCRE_SYMBOL_NO_IMPORT
+
+    #endif  // BUILDING_BOOK_COMPUTER_EXPORT
+
+    #define BOOK_COMPUTER_VISIBLE TCRE_SYMBOL_VISIBLE
+
+#endif  // defined(BUILDING_BOOK_COMPUTER_NO_IMPORT) || defined(BUILDING_BOOK_COMPUTER_STATIC)
+
+#endif  // BOOK_COMPUTER_DLL_H

@@ -10,7 +10,7 @@
 #include "Hero.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/ClassInvariant/UserClassInvariantMacro.h"
-#include "CoreTools/TextParsing/CSVRowDetail.h"
+#include "CoreTools/TextParsing/CSV/CSVRowDetail.h"
 
 using namespace std::literals;
 
@@ -91,7 +91,7 @@ int CSVConfigure::Hero::GetDescribeCount() const
     return boost::numeric_cast<int>(describe.size());
 }
 
-bool CSVConfigure::Hero::GetDescribe(int index) const
+System::TChar CSVConfigure::Hero::GetDescribe(int index) const
 {
     USER_CLASS_IS_VALID_CONST_9;
 

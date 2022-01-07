@@ -5,16 +5,17 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/01 12:48)
+///	引擎版本：0.8.0.0 (2021/12/18 1:16)
 
 #ifndef CORE_TOOLS_THREADING_MUTEX_IMPL_H
 #define CORE_TOOLS_THREADING_MUTEX_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/Threading/ThreadingInternalFwd.h"
+
 namespace CoreTools
 {
-    class MutexFactory;
     class CORE_TOOLS_HIDDEN_DECLARE MutexImpl
     {
     public:

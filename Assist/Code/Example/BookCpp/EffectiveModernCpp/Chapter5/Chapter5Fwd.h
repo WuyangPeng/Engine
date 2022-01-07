@@ -14,16 +14,47 @@ namespace BookExperience
 {
     namespace EffectiveModernCpp
     {
-        namespace Chapter4
+        namespace Chapter5
         {
-            class Terms23Example;
-            class Terms24Example;
-            class Terms25Example;
-            class Terms26Example;
-            class Terms27Example;
-            class Terms28Example;
-            class Terms29Example;
-            class Terms30Example;
+            namespace Terms23
+            {
+                class Terms23Example;
+            }
+
+            namespace Terms24
+            {
+                class Terms24Example;
+            }
+
+            namespace Terms25
+            {
+                class Terms25Example;
+            }
+
+            namespace Terms26
+            {
+                class Terms26Example;
+            }
+
+            namespace Terms27
+            {
+                class Terms27Example;
+            }
+
+            namespace Terms28
+            {
+                class Terms28Example;
+            }
+
+            namespace Terms29
+            {
+                class Terms29Example;
+            }
+
+            namespace Terms30
+            {
+                class Terms30Example;
+            }
         }
     }
 }

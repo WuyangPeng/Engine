@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 11:36)
+///	引擎版本：0.8.0.0 (2021/12/13 22:26)
 
 #include "System/SystemExport.h"
 
@@ -17,13 +17,15 @@
 bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maximumWindow, ConsoleFontInfoPtr consoleCurrentFont) noexcept
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (::GetCurrentConsoleFont(consoleOutput, BoolConversion(maximumWindow), consoleCurrentFont) != g_False)
         return true;
     else
         return false;
+
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, bool, ConsoleFontInfoPtr>(consoleOutput, maximumWindow, consoleCurrentFont);
+    UnusedFunction(consoleOutput, maximumWindow, consoleCurrentFont);
 
     return false;
 
@@ -41,7 +43,7 @@ bool System::GetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, bool, ConsoleFontInfoExPtr>(consoleOutput, maximumWindow, consoleCurrentFontEx);
+    UnusedFunction(consoleOutput, maximumWindow, consoleCurrentFontEx);
 
     return false;
 
@@ -59,7 +61,7 @@ bool System::SetCurrentSystemConsoleFont(WindowsHandle consoleOutput, bool maxim
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, bool, ConsoleFontInfoExPtr>(consoleOutput, maximumWindow, consoleCurrentFontEx);
+    UnusedFunction(consoleOutput, maximumWindow, consoleCurrentFontEx);
 
     return false;
 
@@ -74,7 +76,7 @@ System::ConsoleCoord System::GetSystemConsoleFontSize(WindowsHandle consoleOutpu
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord>(consoleOutput, font);
+    UnusedFunction(consoleOutput, font);
 
     return false;
 

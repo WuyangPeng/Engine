@@ -71,7 +71,7 @@ void CoreTools::CriticalSectionTesting::CreateLockingSuccessThread()
 
 void CoreTools::CriticalSectionTesting::CreateThread(Function function)
 {
-    ThreadGroup thread{ DisableNotThrow::Disable };
+    auto thread = ThreadGroup::Create();
 
     constexpr auto threadSize = 4;
 

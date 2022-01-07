@@ -137,30 +137,30 @@ void Rendering::AlphaStateImpl ::SetConstantColor(const Colour& color)
     m_ConstantColor = color;
 }
 
-void Rendering::AlphaStateImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::AlphaStateImpl ::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    m_BlendEnabled = source->ReadBool();
-    source->ReadEnum(m_SourceBlend);
-    source->ReadEnum(m_DestinationBlend);
-    m_CompareEnabled = source->ReadBool();
-    source->ReadEnum(m_Compare);
-    source->Read(m_Reference);
-    source->ReadAggregate(m_ConstantColor);
+    m_BlendEnabled = source.ReadBool();
+    source.ReadEnum(m_SourceBlend);
+    source.ReadEnum(m_DestinationBlend);
+    m_CompareEnabled = source.ReadBool();
+    source.ReadEnum(m_Compare);
+    source.Read(m_Reference);
+    source.ReadAggregate(m_ConstantColor);
 }
 
-void Rendering::AlphaStateImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::AlphaStateImpl ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target->Write(m_BlendEnabled);
-    target->WriteEnum(m_SourceBlend);
-    target->WriteEnum(m_DestinationBlend);
-    target->Write(m_CompareEnabled);
-    target->WriteEnum(m_Compare);
-    target->Write(m_Reference);
-    target->WriteAggregate(m_ConstantColor);
+    target.Write(m_BlendEnabled);
+    target.WriteEnum(m_SourceBlend);
+    target.WriteEnum(m_DestinationBlend);
+    target.Write(m_CompareEnabled);
+    target.WriteEnum(m_Compare);
+    target.Write(m_Reference);
+    target.WriteAggregate(m_ConstantColor);
 }
 
 int Rendering::AlphaStateImpl ::GetStreamingSize() const

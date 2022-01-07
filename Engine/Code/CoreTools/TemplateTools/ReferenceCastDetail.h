@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:34)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 11:27)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_REFERENCE_CAST_DETAIL_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_REFERENCE_CAST_DETAIL_H
@@ -15,47 +15,63 @@
 
 template <typename T>
 CoreTools::ReferenceCast<T>::ReferenceCast(T& value) noexcept
-    : m_Value{ value }
+    : value{ value }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+CoreTools::ReferenceCast<T>::ReferenceCast(const ReferenceCast& rhs) noexcept
+    : value{ rhs.value }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
+}
+
+template <typename T>
+CoreTools::ReferenceCast<T>::ReferenceCast(ReferenceCast&& rhs) noexcept
+    : value{ std::move(rhs.value) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool CoreTools::ReferenceCast<T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26492)
 template <typename T>
-CoreTools::ReferenceCast<T>::operator T&() const noexcept
+CoreTools::ReferenceCast<T>::operator T&() noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return const_cast<ClassType*>(this)->m_Value;
+    return value;
 }
-#include STSTEM_WARNING_POP
 
 CoreTools::ReferenceCast<int>::ReferenceCast(int value) noexcept
-    : m_Value{ value }
+    : value{ value }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::ReferenceCast<int>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::ReferenceCast<int>::operator int() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_Value;
+    return value;
 }
+
 #endif  //  CORE_TOOLS_TEMPLATE_TOOLS_REFERENCE_CAST_DETAIL_H

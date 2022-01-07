@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/08/31 22:50)
+///	引擎版本：0.8.0.0 (2021/12/18 1:15)
 
 #ifndef CORE_TOOLS_THREADING_EVENT_IMPL_H
 #define CORE_TOOLS_THREADING_EVENT_IMPL_H
@@ -27,8 +27,8 @@ namespace CoreTools
         ~EventImpl() noexcept;
         EventImpl(const EventImpl& rhs) = delete;
         EventImpl& operator=(const EventImpl& rhs) = delete;
-        EventImpl(EventImpl&& rhs) noexcept = delete;
-        EventImpl& operator=(EventImpl&& rhs) noexcept = delete;
+        EventImpl(EventImpl&& rhs) noexcept;
+        EventImpl& operator=(EventImpl&& rhs) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 

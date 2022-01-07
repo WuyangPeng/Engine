@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:10)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/22 18:19)
 
 #ifndef CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
 #define CORE_TOOLS_PROPERTIES_DIRECT_PROPERTY_SET_INTERNAL_H
@@ -14,14 +14,12 @@
 
 #include "CoreTools/Helper/PropertiesMacro.h"
 
-#include <boost/noncopyable.hpp>
-
 namespace CoreTools
 {
     template <typename Value,  // 实际属性值类型
               typename Reference,  // 引用类型
               typename Container>  // 封闭类
-    class DirectPropertySetInternal final : private boost::noncopyable
+    class DirectPropertySetInternal final
     {
     public:
         using ValueType = Value;
@@ -33,7 +31,14 @@ namespace CoreTools
 
     private:
         explicit DirectPropertySetInternal(ReferenceType value);
-        [[nodiscard]] operator ReferenceType() const;
+
+        ~DirectPropertySetInternal() noexcept = default;
+        DirectPropertySetInternal(const DirectPropertySetInternal& rhs) noexcept = delete;
+        DirectPropertySetInternal& operator=(const DirectPropertySetInternal& rhs) noexcept = delete;
+        DirectPropertySetInternal(DirectPropertySetInternal&& rhs) noexcept = delete;
+        DirectPropertySetInternal& operator=(DirectPropertySetInternal&& rhs) noexcept = delete;
+
+        NODISCARD operator ReferenceType() const;
 
         TCRE_DECLARE_TEMPLATE_PARAM_AS_FRIEND(ContainerType);
 

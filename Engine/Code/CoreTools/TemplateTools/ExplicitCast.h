@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:13)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 11:37)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_EXPLICIT_CAST_H
@@ -26,10 +26,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] operator ValueType() const noexcept;
+        NODISCARD operator ValueType() const noexcept;
 
     private:
-        ValueType m_Value;
+        ValueType value;
     };
 
     // 转换成非const引用不可用
@@ -49,24 +49,27 @@ namespace CoreTools
     };
 
     template <typename T>
-    class ExplicitCast<T const&> final
+    class ExplicitCast<const T&> final
     {
     public:
         using ValueType = T;
-        using ClassType = ExplicitCast<T const&>;
+        using ClassType = ExplicitCast<const T&>;
 
     public:
-        ExplicitCast(T const& value) noexcept;
+        ExplicitCast(const T& value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator T const &() const noexcept;
+        NODISCARD operator const T&() const noexcept;
 
+        ExplicitCast(const ExplicitCast& rhs) noexcept;
         ExplicitCast& operator=(const ExplicitCast&) = delete;
+        ExplicitCast(ExplicitCast&& rhs) noexcept;
+        ExplicitCast& operator=(ExplicitCast&&) noexcept = delete;
 
     private:
-        T const& m_Value;
+        T const& value;
     };
 
     // 转换成非const指针不可用
@@ -86,22 +89,22 @@ namespace CoreTools
     };
 
     template <typename T>
-    class ExplicitCast<T const*> final
+    class ExplicitCast<const T*> final
     {
     public:
         using ValueType = T;
-        using ClassType = ExplicitCast<T const*>;
+        using ClassType = ExplicitCast<const T*>;
 
     public:
-        ExplicitCast(T const* value) noexcept;
+        ExplicitCast(const T* value) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] operator T const *() const noexcept;
+        NODISCARD operator const T*() const noexcept;
 
     private:
-        T const* m_Value;
+        const T* value;
     };
 }
 

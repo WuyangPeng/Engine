@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 18:57)
+///	引擎版本：0.8.0.0 (2021/12/12 19:18)
 
 #include "System/SystemExport.h"
 
@@ -35,7 +35,7 @@ System::WindowsVoidPtr System::GetThreadLocalStorageValue(WindowsDWord threadLoc
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord>(threadLocalStorageIndex);
+    UnusedFunction(threadLocalStorageIndex);
 
     return nullptr;
 
@@ -53,7 +53,7 @@ bool System::SetThreadLocalStorageValue(WindowsDWord threadLocalStorageIndex, Wi
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, WindowsVoidPtr>(threadLocalStorageIndex, threadLocalStorageValue);
+    UnusedFunction(threadLocalStorageIndex, threadLocalStorageValue);
 
     return false;
 
@@ -71,7 +71,7 @@ bool System::ThreadLocalStorageFree(WindowsDWord threadLocalStorageIndex) noexce
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord>(threadLocalStorageIndex);
+    UnusedFunction(threadLocalStorageIndex);
 
     return false;
 

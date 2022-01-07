@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/17 14:01)
+///	引擎版本：0.8.0.0 (2021/12/13 17:56)
 
 #ifndef SYSTEM_HELPER_PRAGMA_WARNING_TYPE_TRAITS_H
 #define SYSTEM_HELPER_PRAGMA_WARNING_TYPE_TRAITS_H
@@ -21,6 +21,7 @@
 #include <boost/type_traits/has_equal_to.hpp>
 #include <boost/type_traits/has_greater.hpp>
 #include <boost/type_traits/has_greater_equal.hpp>
+#include <boost/type_traits/has_left_shift.hpp>
 #include <boost/type_traits/has_less.hpp>
 #include <boost/type_traits/has_less_equal.hpp>
 #include <boost/type_traits/has_minus.hpp>

@@ -40,6 +40,8 @@ namespace BookAdvanced
 
         void AddDiscoveringModernCppSuite();
 
+        void AddThrivingInACrowdedAndChangingWorldSuite();
+
         void AddModernCppDesignSuite();
 
         void AddTheArtOfCppSuite();

@@ -43,8 +43,8 @@ namespace Rendering
         void SetMatrix(const Matrix& matrix);
 
         int GetStreamingSize() const noexcept;
-        void Save(const CoreTools::BufferTargetSharedPtr& target) const;
-        void Load(const CoreTools::BufferSourceSharedPtr& source);
+        void Save(CoreTools::BufferTarget& target) const;
+        void Load(CoreTools::BufferSource& source);
 
     private:
         FloatTransform m_LocalTransform;

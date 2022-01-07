@@ -20,3 +20,26 @@ BookExperience::EffectiveModernCpp::Chapter5::Terms25::Terms25Example::Terms25Ex
 }
 
 CLASS_INVARIANT_STUB_DEFINE(BookExperience::EffectiveModernCpp::Chapter5::Terms25, Terms25Example)
+
+void BookExperience::EffectiveModernCpp::Chapter5::Terms25::Terms25Example::MoveExample() const
+{
+    EFFECTIVE_MODERN_CPP_CLASS_IS_VALID_CONST_9;
+
+    Example3::Widget w;
+
+    auto n = Example3::GetWidgetName();  // n是个局部变量
+
+    w.SetName(n);  // 将n移入了w!
+
+    // ...
+    // n的值变得未知
+}
+
+void BookExperience::EffectiveModernCpp::Chapter5::Terms25::Terms25Example::SetNameExample() const
+{
+    EFFECTIVE_MODERN_CPP_CLASS_IS_VALID_CONST_9;
+
+    Example4::Widget w;
+
+    w.SetName("Adela Novak");
+}

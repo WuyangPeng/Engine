@@ -48,23 +48,23 @@ bool Rendering::ProjectorMatrixConstantImpl
 }
 #endif // OPEN_CLASS_INVARIANT 
 
-void Rendering::ProjectorMatrixConstantImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::ProjectorMatrixConstantImpl ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_1;
 
 	ParentType::Load(source);
-	m_Biased = source->ReadBool();
-	source->Read(m_BiasScaleMatrixIndex);
+	m_Biased = source.ReadBool();
+	source.Read(m_BiasScaleMatrixIndex);
 }
 
 void Rendering::ProjectorMatrixConstantImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
 
 	ParentType::Save(target);
-	target->Write(m_Biased);
-	target->Write(m_BiasScaleMatrixIndex);
+	target.Write(m_Biased);
+	target.Write(m_BiasScaleMatrixIndex);
 }
 
 int Rendering::ProjectorMatrixConstantImpl

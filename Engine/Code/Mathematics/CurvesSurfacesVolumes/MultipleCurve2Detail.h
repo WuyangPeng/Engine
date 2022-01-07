@@ -80,8 +80,8 @@ Real MultipleCurve2<Real>::GetSpeedWithData (Real t, void* data)
 template <typename Real>
 void MultipleCurve2<Real>::InitializeLength () const
 {
-    mLengths = NEW1<Real>(mNumSegments);
-    mAccumLengths = NEW1<Real>(mNumSegments);
+    mLengths = nullptr;  // NEW1<Real>(mNumSegments);
+    mAccumLengths = nullptr;  // NEW1<Real>(mNumSegments);
 
     // Arc lengths of the segments.
     int key;

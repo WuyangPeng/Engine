@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.3 (2020/03/06 19:00)
 
 #include "EventSubclass.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/MessageEvent/Telegram.h"
 #include "CoreTools/MessageEvent/CallbackParameters.h"

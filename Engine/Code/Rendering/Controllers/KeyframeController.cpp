@@ -270,7 +270,7 @@ int Rendering::KeyframeController
 	return size;
 }
 
-uint64_t Rendering::KeyframeController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::KeyframeController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -278,7 +278,7 @@ uint64_t Rendering::KeyframeController ::Register(const CoreTools::ObjectRegiste
 }
 
 void Rendering::KeyframeController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -291,7 +291,7 @@ void Rendering::KeyframeController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::KeyframeController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::KeyframeController ::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -306,7 +306,7 @@ void Rendering::KeyframeController
 	ParentType::PostLink();	 
 }
 
-void Rendering::KeyframeController ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::KeyframeController ::Load(CoreTools::BufferSource& source)
 {
 	;
     

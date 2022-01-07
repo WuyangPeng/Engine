@@ -5,13 +5,14 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/08 15:51)
+///	引擎版本：0.8.0.0 (2021/12/19 19:34)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_IMPL_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "CoreTools/TextParsing/Flags/CSVCondition.h"
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
 #include <string>
@@ -36,16 +37,13 @@ namespace CoreTools
 
             CLASS_INVARIANT_DECLARE;
 
-            template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type* = nullptr>
-            CellValueImpl& operator=(T value);
+            template <typename T, typename std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+            CellValueImpl& operator=(T rhs);
 
-            template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type* = nullptr>
-            void Set(T numberValue);
+            template <typename T, typename std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
+            void Set(T rhs);
 
-            template <typename T,
-                      typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type* = nullptr>
+            template <typename T, typename std::enable_if_t<TextParsing::cellValueCondition<T>>* = nullptr>
             NODISCARD T Get() const;
 
             void Clear() noexcept;

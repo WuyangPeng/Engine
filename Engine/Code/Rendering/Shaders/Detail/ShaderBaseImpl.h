@@ -89,11 +89,11 @@ namespace Rendering
 		float GetAnisotropy (int index) const;
 		Colour GetBorderColor (int index) const;
 
-		void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+		void Load(CoreTools::BufferSource& source);
+		void Save (CoreTools::BufferTarget& target) const;
 		int GetStreamingSize () const;
-		void Link(const CoreTools:: ObjectLinkSharedPtr& source);
-                void Register(const CoreTools::ObjectRegisterSharedPtr& target) const;
+		void Link(CoreTools:: ObjectLink& source);
+                void Register(CoreTools::ObjectRegister& target) const;
 
 		void SaveShader(WriteFileManager& manager) const;
 		void LoadShader(ReadFileManager& manager, int numProfiles);

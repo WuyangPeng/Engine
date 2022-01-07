@@ -32,6 +32,9 @@ namespace BookExperience
 
                 public:
                     Terms25Example() noexcept;
+
+                    void MoveExample() const;
+                    void SetNameExample() const;
                 };
             }
         }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 14:40)
+///	引擎版本：0.8.0.0 (2021/12/12 18:08)
 
 #ifndef SYSTEM_THREADING_SEMAPHORE_H
 #define SYSTEM_THREADING_SEMAPHORE_H
@@ -22,7 +22,10 @@ namespace System
     // 信号量的创建和释放
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemSemaphore(WindowsLong initialCount, WindowsLong maximumCount) noexcept;
-    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes, WindowsLong initialCount, WindowsLong maximumCount, const TChar* name) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemSemaphore(WindowSecurityAttributesPtr semaphoreAttributes,
+                                                                             WindowsLong initialCount,
+                                                                             WindowsLong maximumCount,
+                                                                             const TChar* name) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE WaitForSystemSemaphore(WindowsHandle handle) noexcept;
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemSemaphore(WindowsHandle handle, WindowsDWord milliseconds) noexcept;
@@ -30,11 +33,16 @@ namespace System
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemSemaphore(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds, bool alertable) noexcept;
     NODISCARD MutexWaitReturn SYSTEM_DEFAULT_DECLARE WaitForSystemSemaphore(WindowsDWord count, const WindowsHandle* handle, bool waitAll, WindowsDWord milliseconds) noexcept;
 
-    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemSemaphore(WindowsHandle handle, WindowsLong releaseCount, WindowsLongPtr previousCount) noexcept;
+    NODISCARD bool SYSTEM_DEFAULT_DECLARE ReleaseSystemSemaphore(WindowsHandle handle,
+                                                                 WindowsLong releaseCount,
+                                                                 WindowsLongPtr previousCount) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemSemaphore(WindowsHandle handle) noexcept;
 
-    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemSemaphore(MutexStandardAccess desiredAccess, SemaphoreSpecificAccess specificAccess, bool inheritHandle, const TChar* name) noexcept;
+    MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE OpenSystemSemaphore(MutexStandardAccess desiredAccess,
+                                                                           SemaphoreSpecificAccess specificAccess,
+                                                                           bool inheritHandle,
+                                                                           const TChar* name) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsSystemSemaphoreValid(WindowsHandle handle) noexcept;
 }
 

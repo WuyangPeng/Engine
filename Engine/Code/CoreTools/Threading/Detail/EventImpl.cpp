@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/08/31 22:50)
+///	引擎版本：0.8.0.0 (2021/12/18 1:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,6 +25,21 @@ CoreTools::EventImpl::EventImpl(bool manualReset, bool initialState)
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
+CoreTools::EventImpl::EventImpl(EventImpl&& rhs) noexcept
+    : handle{ std::move(rhs.handle) }
+{
+    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+}
+
+CoreTools::EventImpl& CoreTools::EventImpl::operator=(EventImpl&& rhs) noexcept
+{
+    CORE_TOOLS_CLASS_IS_VALID_1;
+
+    handle = std::move(rhs.handle);
+
+    return *this;
+}
+
 CoreTools::EventImpl::~EventImpl() noexcept
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -38,6 +53,7 @@ CoreTools::EventImpl::~EventImpl() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::EventImpl::IsValid() const noexcept
 {
     if (System::IsSystemEventValid(handle))
@@ -45,6 +61,7 @@ bool CoreTools::EventImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::EventImpl::SetEvent()

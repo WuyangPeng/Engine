@@ -21,12 +21,13 @@
 #include "Example/BookCpp/InsideTheCppObjectModel/InsideTheCppObjectModelLib.h"
 #include "Example/BookCpp/LargeScaleCppSoftwareDesign/LargeScaleCppSoftwareDesignLib.h"
 #include "Example/BookCpp/ModernCppDesign/ModernCppDesignLib.h"
-#include "Example/BookCpp/SecureCodingInCAndCpp/SecureCodingInCAndCppLib.h"
 #include "Example/BookCpp/TheArtOfCpp/TheArtOfCppLib.h"
+#include "Example/BookCpp/ThrivingInACrowdedAndChangingWorld/ThrivingInACrowdedAndChangingWorldLib.h"
 
 #include "Example/BookCpp/AdvancedQtProgramming/AdvancedQtProgrammingLib.h"
 #include "Example/BookCpp/CppGUIProgrammingWithQt4/CppGUIProgrammingWithQt4Lib.h"
 #include "Example/BookCpp/DesigningAndCodingReusableCpp/DesigningAndCodingReusableCppLib.h"
 #include "Example/BookCpp/MultiParadigmDesignForCpp/MultiParadigmDesignForCppLib.h"
+#include "Example/BookCpp/SecureCodingInCAndCpp/SecureCodingInCAndCppLib.h"
 
 #include "Toolset/Example/BookAdvancedToolset/BookAdvancedToolsetLib.h"

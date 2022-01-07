@@ -45,19 +45,19 @@ int Rendering::TransformControllerImpl
 }
 
 void Rendering::TransformControllerImpl
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const 
+	::Save(CoreTools::BufferTarget& target) const 
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
 
-	target->WriteAggregate(m_LocalTransform);
+	target.WriteAggregate(m_LocalTransform);
 }
 
 void Rendering::TransformControllerImpl
-	::Load(const CoreTools::BufferSourceSharedPtr& source) 
+	::Load(CoreTools::BufferSource& source) 
 {
 	RENDERING_CLASS_IS_VALID_9;
 
-	source->ReadAggregate(m_LocalTransform);
+	source.ReadAggregate(m_LocalTransform);
 }
 
 void Rendering::TransformControllerImpl

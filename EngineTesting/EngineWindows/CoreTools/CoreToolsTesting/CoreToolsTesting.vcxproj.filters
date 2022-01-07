@@ -511,6 +511,15 @@
     <Filter Include="资源文件\CSVGenerate\Flags">
       <UniqueIdentifier>{a3987ac5-5773-4925-86ca-34fc879d508b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\JsonTesting">
+      <UniqueIdentifier>{283b8c17-be97-484a-a0db-35c72af94d1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\JsonConfigure">
+      <UniqueIdentifier>{c612ad7e-0243-4d64-a0bf-169bee2a6e04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\JsonGenerate">
+      <UniqueIdentifier>{9a1e5203-d1f8-4841-a07f-a6c5c32aba8e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\BaseSuite\BaseSuite.h">
@@ -1893,6 +1902,39 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.h">
       <Filter>TextParsingSuite 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonMonsters.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonMonstersDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonParts.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource\JsonGenerate\DungonPartsDetail.h">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.h">
+      <Filter>TextParsingSuite 头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TestingHelper.cpp">
@@ -3107,6 +3149,33 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\CSVConfigureTesting.cpp">
       <Filter>TextParsingSuite 源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonHeadTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeContainerTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonNodeTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonGenerateTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\DungonMonsters.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource\JsonGenerate\DungonParts.cpp">
+      <Filter>资源文件\JsonGenerate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonRowTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\JsonConfigureTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CoreToolsTesting\TextParsingSuite\DataTypeDescribeTesting.cpp">
+      <Filter>TextParsingSuite 源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -3290,6 +3359,24 @@
     </None>
     <None Include="Resource\CSVConfigure\LineType.csv">
       <Filter>资源文件\CSVConfigure</Filter>
+    </None>
+    <None Include="Resource\JsonTesting\Log.json">
+      <Filter>资源文件\JsonTesting</Filter>
+    </None>
+    <None Include="Resource\JsonConfigure\Dungons.json">
+      <Filter>资源文件\JsonConfigure</Filter>
+    </None>
+    <None Include="Resource\JsonConfigure\Elements.json">
+      <Filter>资源文件\JsonConfigure</Filter>
+    </None>
+    <None Include="Resource\JsonConfigure\RunScenes.json">
+      <Filter>资源文件\JsonConfigure</Filter>
+    </None>
+    <None Include="Resource\JsonConfigure\DungonMonsters.json">
+      <Filter>资源文件\JsonConfigure</Filter>
+    </None>
+    <None Include="Resource\JsonConfigure\DungonParts.json">
+      <Filter>资源文件\JsonConfigure</Filter>
     </None>
   </ItemGroup>
 </Project>

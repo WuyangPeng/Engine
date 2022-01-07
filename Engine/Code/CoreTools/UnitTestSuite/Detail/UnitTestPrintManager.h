@@ -1,46 +1,40 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 11:31)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 18:57)
 
 // 单元测试类输出测试结果管理类，UnitTestPrintManage为内部接口类，可输出测试结果。
-
 #ifndef CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_PRINT_MANAGER_H
 #define CORE_TOOLS_UNIT_TEST_SUITE_UNIT_TEST_PRINT_MANAGER_H
 
 #include "CoreTools/CoreToolsDll.h"
 
 #include "CoreTools/ReportOutput/ReportOutputFwd.h"
-#include "CoreTools/UnitTestSuite/UnitTestSuiteFwd.h"
+#include "CoreTools/UnitTestSuite/UnitTestSuiteInternalFwd.h"
 
-#include <boost/noncopyable.hpp>
 #include <memory>
 #include <string>
 
-namespace boost
-{
-    namespace timer
-    {
-        class cpu_timer;
-    }
-}
-
 namespace CoreTools
 {
-    class CORE_TOOLS_HIDDEN_DECLARE UnitTestPrintManager final : private boost::noncopyable
+    class CORE_TOOLS_HIDDEN_DECLARE UnitTestPrintManager final
     {
     public:
         using ClassType = UnitTestPrintManager;
         using MasterType = UnitTest;
-        using CpuTimer = boost::timer::cpu_timer;
-        using CpuTimerPtr = std::shared_ptr<CpuTimer>;
+        using CpuTimer = boost::timer::cpu_timer; 
 
     public:
         UnitTestPrintManager(MasterType& unitTest, const std::string& timeDescribe, int borderLineLength = 75);
+        ~UnitTestPrintManager() noexcept = default;
+        UnitTestPrintManager(const UnitTestPrintManager& rhs) = delete;
+        UnitTestPrintManager& operator=(const UnitTestPrintManager& rhs) = delete;
+        UnitTestPrintManager(UnitTestPrintManager&& rhs) = delete;
+        UnitTestPrintManager& operator=(UnitTestPrintManager&& rhs) = delete;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -52,8 +46,8 @@ namespace CoreTools
         using UnitTestSuiteReportOutputSharedPtr = std::shared_ptr<UnitTestSuiteReportOutput>;
 
     private:
-        MasterType& m_UnitTest;
-        UnitTestSuiteReportOutputSharedPtr m_ReportOutputPtr;
+        MasterType& unitTest;
+        UnitTestSuiteReportOutputSharedPtr reportOutput;
     };
 }
 

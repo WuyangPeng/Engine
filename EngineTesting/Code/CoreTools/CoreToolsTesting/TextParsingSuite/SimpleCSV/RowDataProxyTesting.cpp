@@ -12,6 +12,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/Cell.h"
 #include "CoreTools/TextParsing/SimpleCSV/CellReference.h"
+#include "CoreTools/TextParsing/SimpleCSV/CellValueProxyDetail.h"
 #include "CoreTools/TextParsing/SimpleCSV/Document.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 #include "CoreTools/TextParsing/SimpleCSV/RowDataIterator.h"
@@ -85,7 +86,7 @@ void CoreTools::RowDataProxyTesting::CellValueContainerTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -97,7 +98,7 @@ void CoreTools::RowDataProxyTesting::CellValueContainerTest()
 
     rowDataProxy = cellValueContainer;
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(rowDataProxy.GetValues(), cellValueContainer);
+    ASSERT_EQUAL(rowDataProxy.GetValues(), cellValueContainer);
 }
 
 void CoreTools::RowDataProxyTesting::BoolContainerTest()
@@ -113,7 +114,7 @@ void CoreTools::RowDataProxyTesting::BoolContainerTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -152,7 +153,7 @@ void CoreTools::RowDataProxyTesting::DeleteCellValuesTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -173,7 +174,7 @@ void CoreTools::RowDataProxyTesting::DeleteCellValuesTest()
                                                                  SimpleCSV::CellValue::CreateDefault(),
                                                                  SimpleCSV::CellValue{ 1.2 },
                                                                  SimpleCSV::CellValue{ 1.7 } };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(rowDataProxy.GetValues(), resultContainer);
+    ASSERT_EQUAL(rowDataProxy.GetValues(), resultContainer);
 }
 
 void CoreTools::RowDataProxyTesting::PrependCellValueTest()
@@ -189,7 +190,7 @@ void CoreTools::RowDataProxyTesting::PrependCellValueTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -214,7 +215,7 @@ void CoreTools::RowDataProxyTesting::PrependCellValueTest()
                                                                  SimpleCSV::CellValue{ 1.2 },
                                                                  SimpleCSV::CellValue{ 1.7 } };
     const auto values = rowDataProxy.GetValues();
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(values, resultContainer);
+    ASSERT_EQUAL(values, resultContainer);
 }
 
 void CoreTools::RowDataProxyTesting::ClearTest()
@@ -230,7 +231,7 @@ void CoreTools::RowDataProxyTesting::ClearTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -252,7 +253,7 @@ void CoreTools::RowDataProxyTesting::DequeTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -273,7 +274,7 @@ void CoreTools::RowDataProxyTesting::DequeTest()
         ASSERT_EQUAL(values.at(index), cellValueContainer.at(index));
     }
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(static_cast<deque<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
+    ASSERT_EQUAL(static_cast<deque<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
 }
 
 void CoreTools::RowDataProxyTesting::ListTest()
@@ -289,7 +290,7 @@ void CoreTools::RowDataProxyTesting::ListTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -304,7 +305,7 @@ void CoreTools::RowDataProxyTesting::ListTest()
     const auto values = rowDataProxy.GetValues();
 
     ASSERT_EQUAL(values.size(), cellValueContainer.size());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(static_cast<list<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
+    ASSERT_EQUAL(static_cast<list<SimpleCSV::CellValue>>(rowDataProxy), cellValueContainer);
 }
 
 void CoreTools::RowDataProxyTesting::StringListTest()
@@ -320,7 +321,7 @@ void CoreTools::RowDataProxyTesting::StringListTest()
 
     auto row = rows.begin();
 
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(row, rows.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(row, rows.end(), "");
 
     auto& rowDataProxy = row->GetValues();
 
@@ -331,5 +332,5 @@ void CoreTools::RowDataProxyTesting::StringListTest()
     const auto values = rowDataProxy.GetValues();
 
     ASSERT_EQUAL(values.size(), stringContainer.size());
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(static_cast<list<string>>(rowDataProxy), stringContainer);
+    ASSERT_EQUAL(static_cast<list<string>>(rowDataProxy), stringContainer);
 }

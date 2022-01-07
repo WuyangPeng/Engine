@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/10 20:51)
+///	引擎版本：0.8.0.0 (2021/12/13 22:54)
 
 #ifndef SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H
 #define SYSTEM_ANDROID_ANDROID_NATIVE_APPGLUE_TYPEDEF_H
@@ -28,8 +28,6 @@ namespace System
 
     #include "AndroidNativeWindowUsing.h"
     #include "System/Windows/Using/WindowsUsing.h"
-
-    #include <memory>
 
 namespace System
 {

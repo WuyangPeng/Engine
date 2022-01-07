@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 16:02)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 16:18)
 
 #ifndef CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
 #define CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H
@@ -15,14 +15,14 @@
 
 template <typename EntityType, typename EventType>
 CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState) noexcept
-    : m_CurrentState{ currentState }, m_PreviousState{}, m_GlobalState{}
+    : currentState{ currentState }, previousState{}, globalState{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename EntityType, typename EventType>
 CoreTools::StateMachineBase<EntityType, EventType>::StateMachineBase(StateSharedPtr currentState, StateSharedPtr globalState) noexcept
-    : m_CurrentState{ currentState }, m_PreviousState{}, m_GlobalState{ globalState }
+    : currentState{ currentState }, previousState{}, globalState{ globalState }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -32,23 +32,25 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Register(EntityTypePtr 
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_CurrentState->Enter(owner);
+    currentState->Enter(owner);
 
-    if (m_GlobalState)
+    if (globalState)
     {
-        m_GlobalState->Enter(owner);
+        globalState->Enter(owner);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename EntityType, typename EventType>
 bool CoreTools::StateMachineBase<EntityType, EventType>::IsValid() const noexcept
 {
-    if (m_CurrentState)
+    if (currentState)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename EntityType, typename EventType>
@@ -56,7 +58,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_PreviousState;
+    return previousState;
 }
 
 template <typename EntityType, typename EventType>
@@ -75,10 +77,10 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (m_PreviousState)
-        return m_PreviousState;
+    if (previousState)
+        return previousState;
     else
-        return m_CurrentState;
+        return currentState;
 }
 
 template <typename EntityType, typename EventType>
@@ -86,7 +88,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_GlobalState;
+    return globalState;
 }
 
 template <typename EntityType, typename EventType>
@@ -94,7 +96,7 @@ typename CoreTools::StateMachineBase<EntityType, EventType>::ConstStateSharedPtr
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_CurrentState;
+    return currentState;
 }
 
 template <typename EntityType, typename EventType>
@@ -102,7 +104,7 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::IsInState(const State& 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    if (typeid(*m_CurrentState) == typeid(state))
+    if (typeid(*currentState) == typeid(state))
         return true;
     else
         return false;
@@ -113,11 +115,11 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const Tel
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto result = m_CurrentState->OnMessage(msg);
+    auto result = currentState->OnMessage(msg);
 
     if (result.second)
     {
-        if (result.first != m_CurrentState)
+        if (result.first != currentState)
         {
             ChangeState(result.first);
         }
@@ -125,13 +127,13 @@ bool CoreTools::StateMachineBase<EntityType, EventType>::HandleMessage(const Tel
         return true;
     }
 
-    if (m_GlobalState)
+    if (globalState)
     {
-        auto globalResult = m_GlobalState->OnMessage(msg);
+        auto globalResult = globalState->OnMessage(msg);
 
         if (globalResult.second)
         {
-            if (globalResult.first != m_CurrentState)
+            if (globalResult.first != currentState)
             {
                 ChangeState(globalResult.first);
             }
@@ -148,14 +150,14 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Update(int64_t timeInte
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (m_GlobalState)
+    if (globalState)
     {
-        m_GlobalState->Execute(timeInterval);
+        globalState->Execute(timeInterval);
     }
 
-    auto state = m_CurrentState->Execute(timeInterval);
+    auto state = currentState->Execute(timeInterval);
 
-    if (state != m_CurrentState)
+    if (state != currentState)
     {
         ChangeState(state);
     }
@@ -163,17 +165,17 @@ void CoreTools::StateMachineBase<EntityType, EventType>::Update(int64_t timeInte
 
 // private
 template <typename EntityType, typename EventType>
-void CoreTools::StateMachineBase<EntityType, EventType>::ChangeState(StateSharedPtr newState)
+void CoreTools::StateMachineBase<EntityType, EventType>::ChangeState(const StateSharedPtr& newState)
 {
-    auto owner = m_CurrentState->GetOwner();
+    auto owner = currentState->GetOwner();
 
-    m_PreviousState = m_CurrentState;
+    previousState = currentState;
 
-    m_CurrentState->Exit();
+    currentState->Exit();
 
-    m_CurrentState = newState;
+    currentState = newState;
 
-    m_CurrentState->Enter(owner);
+    currentState->Enter(owner);
 }
 
 #endif  //  CORE_TOOLS_STATE_MACHINE_DEFAULT_STATE_MACHINE_BASE_DETAIL_H

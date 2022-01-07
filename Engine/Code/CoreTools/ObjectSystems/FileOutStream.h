@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 20:58)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 16:05)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_FILE_OUT_STREAM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_FILE_OUT_STREAM_H
@@ -18,14 +18,12 @@
 
 #include <string>
 
-
-
 namespace CoreTools
 {
     // 写objects到硬盘文件。版本号字符串在顶层对象之前，被首先写入。
     // 当操作失败时，抛出Error异常。
 
-    class CORE_TOOLS_DEFAULT_DECLARE FileOutStream final   
+    class CORE_TOOLS_DEFAULT_DECLARE FileOutStream final
     {
     public:
         using ClassType = FileOutStream;
@@ -46,7 +44,7 @@ namespace CoreTools
 
     private:
         // 将场景图写入到缓冲器中。
-        BufferOutStream m_BufferOutStream;
+        BufferOutStream bufferOutStream;
     };
 }
 

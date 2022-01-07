@@ -102,7 +102,7 @@ int Rendering::IKController
 	return size;
 }
 
-uint64_t Rendering::IKController ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::IKController ::Register(CoreTools::ObjectRegister& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;    
 
@@ -116,7 +116,7 @@ uint64_t Rendering::IKController ::Register(const CoreTools::ObjectRegisterShare
 }
 
 void Rendering::IKController
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -129,7 +129,7 @@ void Rendering::IKController
 	CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::IKController ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::IKController ::Link(CoreTools::ObjectLink& source)
 {
 	;
 
@@ -146,7 +146,7 @@ void Rendering::IKController
 	ParentType::PostLink();	 
 }
 
-void Rendering::IKController ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::IKController ::Load(CoreTools::BufferSource& source)
 {
 	;
     

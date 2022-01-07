@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 20:15)
+///	引擎版本：0.8.0.0 (2021/12/12 18:12)
 
 #include "System/SystemExport.h"
 
@@ -23,7 +23,7 @@ System::WindowsHandle System::CreateSystemEvent(WindowSecurityAttributesPtr secu
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, bool, bool, const TChar*>(securityAttributes, manualReset, initialState, name);
+    UnusedFunction(securityAttributes, manualReset, initialState, name);
 
     return nullptr;
 
@@ -43,7 +43,7 @@ System::WindowsHandle System::CreateSystemEvent(WindowSecurityAttributesPtr secu
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowSecurityAttributesPtr, const TChar*, CreateEventType, MutexStandardAccess, EventSpecificAccess>(securityAttributes, name, flag, desiredAccess, specificAccess);
+    UnusedFunction(securityAttributes, name, flag, desiredAccess, specificAccess);
 
     return nullptr;
 
@@ -61,7 +61,7 @@ bool System::CloseSystemEvent(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -79,7 +79,7 @@ bool System::SetSystemEvent(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -97,7 +97,7 @@ bool System::ResetSystemEvent(WindowsHandle handle) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(handle);
+    UnusedFunction(handle);
 
     return false;
 
@@ -117,7 +117,7 @@ System::MutexWaitReturn System::WaitForSystemEvent(WindowsHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord>(handle, milliseconds);
+    UnusedFunction(handle, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -132,7 +132,7 @@ System::MutexWaitReturn System::WaitForSystemEvent(WindowsHandle handle, Windows
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, WindowsDWord, bool>(handle, milliseconds, alertable);
+    UnusedFunction(handle, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -147,7 +147,7 @@ System::MutexWaitReturn System::WaitForSystemEvent(WindowsDWord count, const Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle, const WindowsHandle*, bool, WindowsDWord, bool>(count, handle, waitAll, milliseconds, alertable);
+    UnusedFunction(count, handle, waitAll, milliseconds, alertable);
 
     return MutexWaitReturn::Failed;
 
@@ -162,7 +162,7 @@ System::MutexWaitReturn System::WaitForSystemEvent(WindowsDWord count, const Win
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsDWord, const WindowsHandle*, bool, WindowsDWord>(count, handle, waitAll, milliseconds);
+    UnusedFunction(count, handle, waitAll, milliseconds);
 
     return MutexWaitReturn::Failed;
 
@@ -177,7 +177,7 @@ System::WindowsHandle System::OpenSystemEvent(MutexStandardAccess desiredAccess,
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<MutexStandardAccess, EventSpecificAccess, bool, const TChar*>(desiredAccess, specificAccess, inheritHandle, name);
+    UnusedFunction(desiredAccess, specificAccess, inheritHandle, name);
 
     return nullptr;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/24 16:57)
+///	引擎版本：0.8.0.0 (2021/12/13 10:47)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_H
 #define SYSTEM_SECURITY_SECURITY_BASE_H
@@ -68,7 +68,8 @@ namespace System
                                                                       WindowsDWord deletePrivilegeCount,
                                                                       LUIDAndAttributesPtr privilegesToDelete,
                                                                       WindowsDWord restrictedSidCount,
-                                                                      SecuritySidAndAttributesPtr sidsToRestrict, WindowsHandlePtr newTokenHandle) noexcept;
+                                                                      SecuritySidAndAttributesPtr sidsToRestrict,
+                                                                      WindowsHandlePtr newTokenHandle) noexcept;
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsSystemTokenRestricted(WindowsHandle tokenHandle) noexcept;
 
     void SYSTEM_DEFAULT_DECLARE QuerySystemSecurityAccessMask(SecurityRequestedInformation securityInformation, WindowsDWordPtr desiredAccess) noexcept;

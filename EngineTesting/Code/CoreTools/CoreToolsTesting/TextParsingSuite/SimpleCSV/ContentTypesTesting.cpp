@@ -24,10 +24,10 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 
-using namespace std::literals;
 using std::make_shared;
 using std::string;
 using std::vector;
+using namespace std::literals;
 
 CoreTools::ContentTypesTesting::ContentTypesTesting(const OStreamShared& stream)
     : ParentType{ stream }

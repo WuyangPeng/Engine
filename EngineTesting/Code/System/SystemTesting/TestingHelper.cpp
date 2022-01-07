@@ -90,7 +90,7 @@ CoreTools::Suite System::TestingHelper::GetWindowsMacroSuite()
     auto windowsMacroSuite = GenerateSuite("Windowsºê"s);
 
     ADD_TEST(windowsMacroSuite, GetArraySizeTesting);
-    ADD_TEST(windowsMacroSuite, NullFunctionTesting);
+    ADD_TEST(windowsMacroSuite, UnusedFunctionTesting);
     ADD_TEST(windowsMacroSuite, MakeLanguageIDTesting);
     ADD_TEST(windowsMacroSuite, MakeIntreSourceTesting);
     ADD_TEST(windowsMacroSuite, MakeLanguageCIDTesting);

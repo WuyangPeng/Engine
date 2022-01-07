@@ -173,7 +173,7 @@ int Rendering::Texture1D
 }
 
 uint64_t Rendering::Texture1D
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -181,7 +181,7 @@ uint64_t Rendering::Texture1D
 }
 
 void Rendering::Texture1D
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -195,7 +195,7 @@ void Rendering::Texture1D
 }
 
 void Rendering::Texture1D
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -211,7 +211,7 @@ void Rendering::Texture1D
 }
 
 void Rendering::Texture1D
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
     

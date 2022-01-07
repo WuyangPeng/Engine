@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 14:03)
+///	引擎版本：0.8.0.0 (2021/12/12 18:08)
 
 #ifndef SYSTEM_THREADING_MUTEX_H
 #define SYSTEM_THREADING_MUTEX_H
@@ -22,13 +22,13 @@ namespace System
     // 互斥锁的创建和销毁。
 
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes,
-                                                                        bool initialOwner,
-                                                                        const TChar* name) noexcept;
+                                                                         bool initialOwner,
+                                                                         const TChar* name) noexcept;
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex(WindowSecurityAttributesPtr mutexAttributes,
-                                                                        const TChar* name,
-                                                                        MutexCreate flag,
-                                                                        MutexStandardAccess desiredAccess,
-                                                                        MutexSpecificAccess specificAccess) noexcept;
+                                                                         const TChar* name,
+                                                                         MutexCreate flag,
+                                                                         MutexStandardAccess desiredAccess,
+                                                                         MutexSpecificAccess specificAccess) noexcept;
     MAYBE_NULLPTR WindowsHandle SYSTEM_DEFAULT_DECLARE CreateSystemMutex() noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE CloseSystemMutex(WindowsHandle handle) noexcept;

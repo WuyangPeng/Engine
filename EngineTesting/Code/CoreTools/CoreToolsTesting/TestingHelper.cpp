@@ -474,6 +474,13 @@ void CoreTools::TestingHelper::AddTextParsingSuite()
     ADD_TEST(textParsingSuite, CSVGenerateTesting);
     ADD_TEST(textParsingSuite, CSVTotalGenerateTesting);
     ADD_TEST(textParsingSuite, CSVConfigureTesting);
+    ADD_TEST(textParsingSuite, DataTypeDescribeTesting);
+    ADD_TEST(textParsingSuite, JsonHeadTesting);
+    ADD_TEST(textParsingSuite, JsonNodeContainerTesting);
+    ADD_TEST(textParsingSuite, JsonNodeTesting);
+    ADD_TEST(textParsingSuite, JsonGenerateTesting);
+    ADD_TEST(textParsingSuite, JsonRowTesting);
+    ADD_TEST(textParsingSuite, JsonConfigureTesting);
 
     AddSuite(textParsingSuite);
 }

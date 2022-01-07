@@ -208,7 +208,7 @@ void Mathematics::TriangulateEC<Real>
             mSPositions[i] = (positions[i] - minValue)*scale;
         }
 
-        mQuery = NEW0 Query2Int64<Real>(mSPositions);
+      //  mQuery = NEW0 Query2Int64<Real>(mSPositions);
         return;
     }
 
@@ -226,7 +226,7 @@ void Mathematics::TriangulateEC<Real>
             mSPositions[i] = (positions[i] - minValue)*scale;
         }
 
-        mQuery = NEW0 Query2Integer<Real>(mSPositions);
+     //   mQuery = NEW0 Query2Integer<Real>(mSPositions);
         return;
     }
 
@@ -239,7 +239,7 @@ void Mathematics::TriangulateEC<Real>
             mSPositions[i] = positions[i];
         }
 
-        mQuery = NEW0 Query2<Real>(mSPositions);
+     //   mQuery = NEW0 Query2<Real>(mSPositions);
         return;
     }
 
@@ -252,7 +252,7 @@ void Mathematics::TriangulateEC<Real>
             mSPositions[i] = positions[i];
         }
 
-        mQuery = NEW0 Query2Rational<Real>(mSPositions);
+     //   mQuery = NEW0 Query2Rational<Real>(mSPositions);
         return;
     }
 
@@ -265,7 +265,7 @@ void Mathematics::TriangulateEC<Real>
             mSPositions[i] = positions[i];
         }
 
-        mQuery = NEW0 Query2Filtered<Real>(mSPositions, epsilon);
+      //  mQuery = NEW0 Query2Filtered<Real>(mSPositions, epsilon);
         return;
     }
     }

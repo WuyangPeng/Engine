@@ -63,7 +63,7 @@ void CoreTools::NullMutexTesting::CreateLockingSuccessThread()
 
 void CoreTools::NullMutexTesting::CreateThread(Function function)
 {
-    ThreadGroup thread{ DisableNotThrow::Disable };
+    auto thread = ThreadGroup::Create();
 
     constexpr auto threadSize = 4;
 

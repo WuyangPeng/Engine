@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:39)
+///	引擎版本：0.8.0.0 (2021/12/13 19:27)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ System::DynamicLinkModule System::GetDynamicLinkHandle(const DynamicLinkCharType
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<const DynamicLinkCharType*>(moduleName);
+    UnusedFunction(moduleName);
 
     return false;
 
@@ -36,7 +36,7 @@ System::WindowsDWord System::GetDynamicLinkFileName(DynamicLinkModule module, Dy
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, DynamicLinkCharType*, WindowsDWord>(moduleName, filename, size);
+    UnusedFunction(moduleName, filename, size);
 
     return false;
 
@@ -54,7 +54,7 @@ bool System::GetDynamicLinkHandle(GetModuleHandleType flags, const DynamicLinkCh
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<GetModuleHandleType, const DynamicLinkCharType*, DynamicLinkModule*>(flags, moduleName, module);
+    UnusedFunction(flags, moduleName, module);
 
     return false;
 

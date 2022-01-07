@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/06 1:53)
+///	引擎版本：0.8.0.0 (2021/12/13 18:41)
 
 #ifndef SYSTEM_HELPER_CODE_GEAR_H
 #define SYSTEM_HELPER_CODE_GEAR_H
@@ -26,9 +26,7 @@
 
         // Embarcadero驱动程序的特定设置
         #define TCRE_EMBTC __CODEGEARC__
-        #define TCRE_EMBTC_FULL_VER ((__clang_major__ << 16) | \
-                                     (__clang_minor__ << 8) |  \
-                                     __clang_patchlevel__)
+        #define TCRE_EMBTC_FULL_VER ((__clang_major__ << 16) | (__clang_minor__ << 8) | __clang_patchlevel__)
 
         // 检测正在使用哪个Embarcadero驱动程序
         #if defined(TCRE_EMBTC)
@@ -56,13 +54,13 @@
 
             #if !defined(_chdir)
                 #define _chdir(x) chdir(x)
-            #endif // !defined(_chdir)
+            #endif  // !defined(_chdir)
 
             #if !defined(_dup2)
                 #define _dup2(x, y) dup2(x, y)
-            #endif // !defined(_dup2)
+            #endif  // !defined(_dup2)
 
-        #endif // TCRE_EMBTC_WINDOWS
+        #endif  // TCRE_EMBTC_WINDOWS
 
         #undef TCRE_SYSTEM_COMPILER
         #define TCRE_SYSTEM_COMPILER "Embarcadero-Clang C++ 版本 " SYSTEM_STRINGIZE(TCRE_EMBTC) " clang: " SYSTEM_STRINGIZE(__clang_version__)

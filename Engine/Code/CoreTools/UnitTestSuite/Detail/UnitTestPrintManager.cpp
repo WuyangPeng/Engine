@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 14:47)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/14 21:36)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,45 +19,47 @@ using std::make_shared;
 using std::string;
 
 CoreTools::UnitTestPrintManager::UnitTestPrintManager(MasterType& unitTest, const string& timeDescribe, int borderLineLength)
-    : m_UnitTest{ unitTest }, m_ReportOutputPtr{ make_shared<UnitTestSuiteReportOutput>(timeDescribe, borderLineLength, m_UnitTest.GetStream()) }
+    : unitTest{ unitTest }, reportOutput{ make_shared<UnitTestSuiteReportOutput>(timeDescribe, borderLineLength, unitTest.GetStream()) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::UnitTestPrintManager::IsValid() const noexcept
 {
-    if (m_ReportOutputPtr != nullptr)
+    if (reportOutput != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::UnitTestPrintManager::PrintTestName()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_ReportOutputPtr->PrintNewLine();
-    m_ReportOutputPtr->PrintTestName(typeid(m_UnitTest).name());
-    m_ReportOutputPtr->PrintNewLine();
+    reportOutput->PrintNewLine();
+    reportOutput->PrintTestName(typeid(unitTest).name());
+    reportOutput->PrintNewLine();
 }
 
 void CoreTools::UnitTestPrintManager::PrintTestResult(int characterWidth)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_ReportOutputPtr->PrintTestResult(m_UnitTest.GetPassedNumber(), m_UnitTest.GetFailedNumber(), m_UnitTest.GetErrorNumber(), characterWidth);
-    m_ReportOutputPtr->PrintNewLine();
-    m_ReportOutputPtr->PrintNewLine();
+    reportOutput->PrintTestResult(unitTest.GetPassedNumber(), unitTest.GetFailedNumber(), unitTest.GetErrorNumber(), characterWidth);
+    reportOutput->PrintNewLine();
+    reportOutput->PrintNewLine();
 }
 
 void CoreTools::UnitTestPrintManager::PrintCostTime(const CpuTimer& timePtr)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_ReportOutputPtr->PrintCostTime(timePtr);
-    m_ReportOutputPtr->PrintNewLine();
-    m_ReportOutputPtr->PrintBorderLine('=');
-    m_ReportOutputPtr->PrintNewLine();
+    reportOutput->PrintCostTime(timePtr);
+    reportOutput->PrintNewLine();
+    reportOutput->PrintBorderLine('=');
+    reportOutput->PrintNewLine();
 }

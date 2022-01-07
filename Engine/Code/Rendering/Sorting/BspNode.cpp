@@ -242,20 +242,20 @@ Rendering::BspNode
 }
 
 void Rendering::BspNode
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Node::Load(source);
 
-    source->ReadAggregate(ModelPlane);
-    source->ReadAggregate(mWorldPlane);
+    source.ReadAggregate(ModelPlane);
+    source.ReadAggregate(mWorldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
 void Rendering::BspNode
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
     Node::Link(source);
 }
@@ -267,20 +267,20 @@ void Rendering::BspNode
 }
 
 uint64_t Rendering::BspNode
-	::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+	::Register(CoreTools::ObjectRegister& target) const
 {
     return Node::Register(target);
 }
 
 void Rendering::BspNode
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Node::Save(target);
 
-	target->WriteAggregate(ModelPlane);
-    target->WriteAggregate(mWorldPlane);
+	target.WriteAggregate(ModelPlane);
+    target.WriteAggregate(mWorldPlane);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

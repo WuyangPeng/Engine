@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/14 15:46)
+///	引擎版本：0.8.0.0 (2021/12/19 19:50)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_DOCUMENT_H
 #define CORE_TOOLS_TEXT_PARSING_DOCUMENT_H
@@ -77,7 +77,7 @@ namespace CoreTools
 
             NODISCARD std::string ExtractXmlFromArchive(const std::string& path);
 
-            void ExecuteCommand(const CommandSetSheetName& command);   
+            void ExecuteCommand(const CommandSetSheetName& command);
             void ExecuteCommand(const CommandSetSheetIndex& command);
             void ExecuteCommand(MAYBE_UNUSED const CommandResetCalcChain& command);
             void ExecuteCommand(MAYBE_UNUSED const CommandAddSharedStrings& command);
@@ -85,7 +85,7 @@ namespace CoreTools
             void ExecuteCommand(const CommandDeleteSheet& command);
             void ExecuteCommand(const CommandCloneSheet& command);
 
-            NODISCARD QuerySheetName ExecuteQuery(const QuerySheetName& query) const; 
+            NODISCARD QuerySheetName ExecuteQuery(const QuerySheetName& query) const;
             NODISCARD QuerySheetVisibility ExecuteQuery(const QuerySheetVisibility& query) const;
             NODISCARD QuerySheetType ExecuteQuery(const QuerySheetType& query) const;
             NODISCARD QuerySheetID ExecuteQuery(const QuerySheetID& query) const;

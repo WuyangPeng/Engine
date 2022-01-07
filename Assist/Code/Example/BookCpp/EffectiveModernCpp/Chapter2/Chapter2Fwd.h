@@ -16,8 +16,15 @@ namespace BookExperience
     {
         namespace Chapter2
         {
-            class Terms5Example;
-            class Terms6Example;
+            namespace Terms5
+            {
+                class Terms5Example;
+            }
+
+            namespace Terms6
+            {
+                class Terms6Example;
+            }
         }
     }
 }

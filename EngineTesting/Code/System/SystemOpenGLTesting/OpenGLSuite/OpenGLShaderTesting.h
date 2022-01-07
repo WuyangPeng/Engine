@@ -27,7 +27,7 @@ namespace System
 
     private:
         void DoRunUnitTest() final;
-        void MainTest() noexcept;
+        void MainTest();
 
         void CreateShaderTest();
         void AttachShaderTest();

@@ -1,14 +1,13 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 9:42)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 18:17)
 
 // 将信息输出至指定的ostream。UnitTestFailReportOutputImpl为内部接口子类。实现输出单元测试错误报告信息。
-
 #ifndef CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_FAIL_REPORT_OUTPUT_IMPL_H
 #define CORE_TOOLS_REPORT_OUTPUT_CORE_TOOLS_FAIL_REPORT_OUTPUT_IMPL_H
 
@@ -25,8 +24,11 @@ namespace CoreTools
         using ParentType = ReportOutput;
 
     public:
-        UnitTestFailReportOutputImpl(const std::string& failClassName, const std::string& fileName, int lineNumber,
-                                     const std::string& errorMessage, const OStreamShared& streamShared);
+        UnitTestFailReportOutputImpl(const std::string& failClassName,
+                                     const std::string& fileName,
+                                     int lineNumber,
+                                     const std::string& errorMessage,
+                                     const OStreamShared& streamShared);
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
@@ -36,10 +38,10 @@ namespace CoreTools
         void PrintErrorMessage();
 
     private:
-        std::string m_FailClassName;
-        std::string m_FileName;
-        int m_LineNumber;
-        std::string m_ErrorMessage;
+        std::string failClassName;
+        std::string fileName;
+        int lineNumber;
+        std::string errorMessage;
     };
 }
 

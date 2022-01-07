@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 9:50)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 17:22)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_OBJECT_INTERFACE_H
@@ -30,7 +30,7 @@ namespace CoreTools
     public:
         using ClassType = ObjectInterface;
         CORE_TOOLS_SHARED_PTR_DECLARE(ObjectInterface);
-        using FactoryFunction = ObjectInterfaceSharedPtr (*)(const BufferSourceSharedPtr& stream);
+        using FactoryFunction = ObjectInterfaceSharedPtr (*)(BufferSource& stream);
 
     public:
 #include STSTEM_WARNING_PUSH
@@ -51,30 +51,30 @@ namespace CoreTools
 
     public:
         // 运行时类型信息。
-        [[nodiscard]] bool IsExactly(const Rtti& type) const noexcept;
-        [[nodiscard]] bool IsDerived(const Rtti& type) const noexcept;
-        [[nodiscard]] bool IsExactlyTypeOf(const ObjectInterface* object) const noexcept;
-        [[nodiscard]] bool IsDerivedTypeOf(const ObjectInterface* object) const noexcept;
+        NODISCARD bool IsExactly(const Rtti& type) const noexcept;
+        NODISCARD bool IsDerived(const Rtti& type) const noexcept;
+        NODISCARD bool IsExactlyTypeOf(const ObjectInterface* object) const noexcept;
+        NODISCARD bool IsDerivedTypeOf(const ObjectInterface* object) const noexcept;
 
     public:
         // 流
-        [[nodiscard]] static bool RegisterFactory();
+        NODISCARD static bool RegisterFactory();
         static void InitializeFactory();
         static void TerminateFactory();
-        [[nodiscard]] static ObjectInterfaceSharedPtr Factory(const CoreTools::BufferSourceSharedPtr& source);
+        NODISCARD static ObjectInterfaceSharedPtr Factory(CoreTools::BufferSource& source);
 
-        [[nodiscard]] uint64_t GetUniqueID() const noexcept;
+        NODISCARD uint64_t GetUniqueID() const noexcept;
         void SetUniqueID(uint64_t uniqueID) noexcept;
 
-        [[nodiscard]] virtual uint64_t Register(const CoreTools::ObjectRegisterSharedPtr& target) const = 0;
-        [[nodiscard]] virtual int GetStreamingSize() const = 0;
-        virtual void Save(const CoreTools::BufferTargetSharedPtr& target) const = 0;
+        NODISCARD virtual uint64_t Register(CoreTools::ObjectRegister& target) const = 0;
+        NODISCARD virtual int GetStreamingSize() const = 0;
+        virtual void Save(CoreTools::BufferTarget& target) const = 0;
 
-        virtual void Link(const CoreTools::ObjectLinkSharedPtr& source) = 0;
+        virtual void Link(CoreTools::ObjectLink& source) = 0;
         virtual void PostLink() = 0;
-        virtual void Load(const CoreTools::BufferSourceSharedPtr& source) = 0;
+        virtual void Load(CoreTools::BufferSource& source) = 0;
 
-        [[nodiscard]] virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
+        NODISCARD virtual ObjectInterfaceSharedPtr CloneObject() const = 0;
 
     protected:
         // 加载系统所使用的构造函数。
@@ -83,7 +83,7 @@ namespace CoreTools
             ConstructorLoader
         };
 
-        explicit ObjectInterface(LoadConstructor value) noexcept;
+        explicit ObjectInterface(MAYBE_UNUSED LoadConstructor value) noexcept;
 
     private:
         uint64_t m_UniqueID;

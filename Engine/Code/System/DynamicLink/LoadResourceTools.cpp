@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:43)
+///	引擎版本：0.8.0.0 (2021/12/13 22:21)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule modu
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, const DynamicLinkCharType*>(module, type, name);
+    UnusedFunction(module, type, name);
 
     return false;
 
@@ -36,7 +36,7 @@ System::DynamicLinkResource System::FindResourceInLibrary(DynamicLinkModule modu
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, const DynamicLinkCharType*, const DynamicLinkCharType*, LanguageIDData>(module, type, name, language);
+    UnusedFunction(module, type, name, language);
 
     return false;
 
@@ -51,7 +51,7 @@ System::DynamicLinkGlobal System::LoadResourceInLibrary(DynamicLinkModule module
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, DynamicLinkResource>(module, resourceInfo);
+    UnusedFunction(module, resourceInfo);
 
     return false;
 
@@ -66,7 +66,7 @@ System::WindowsVoidPtr System::LockResourceInLibrary(DynamicLinkGlobal resourceD
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkGlobal>(resourceInfo);
+    UnusedFunction(resourceInfo);
 
     return false;
 
@@ -81,7 +81,7 @@ System::WindowsDWord System::SizeofResourceInLibrary(DynamicLinkModule module, D
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<DynamicLinkModule, DynamicLinkResource>(module, resourceInfo);
+    UnusedFunction(module, resourceInfo);
 
     return false;
 
@@ -96,7 +96,7 @@ int System::LoadStringInLibrary(WindowsHInstance instance, WindowsUInt id, Dynam
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHInstance, WindowsUInt, DynamicLinkCharType*, int>(instance, id, buffer, size);
+    UnusedFunction(instance, id, buffer, size);
 
     return false;
 

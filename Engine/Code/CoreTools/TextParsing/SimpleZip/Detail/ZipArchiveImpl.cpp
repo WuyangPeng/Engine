@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/08 7:09)
+///	引擎版本：0.8.0.0 (2021/12/19 22:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@
 #include "CoreTools/FileManager/GenerateRandomName.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "CoreTools/TextParsing/Flags/CSVConstant.h"
+#include "CoreTools/TextParsing/Flags/TextParsingConstant.h"
 #include "CoreTools/TextParsing/SimpleZip/ZipEntry.h"
 
 #include <fstream>
@@ -126,6 +126,7 @@ void CoreTools::SimpleZip::ZipArchiveImpl::DeleteSameEntries()
     const auto isEqual = [](const auto& lhs, const auto& rhs) {
         return lhs.GetFileName() == rhs.GetFileName();
     };
+
     std::reverse(zipEntries.begin(), zipEntries.end());
     zipEntries.erase(std::unique(zipEntries.begin(), zipEntries.end(), isEqual), zipEntries.end());
     std::reverse(zipEntries.begin(), zipEntries.end());
@@ -399,7 +400,7 @@ CoreTools::SimpleZip::ZipEntry CoreTools::SimpleZip::ZipArchiveImpl::GetEntry(co
         THROW_EXCEPTION(SYSTEM_TEXT("具有指定名称的条目！"s));
     }
 
-    /// 如果尚未从存档中提取数据（即m_EntryData为空），则将数据从存档中提取到ZipEntry对象。
+    // 如果尚未从存档中提取数据（即m_EntryData为空），则将数据从存档中提取到ZipEntry对象。
     if (result->IsEntryDataEmpty())
     {
         result->ResizeZipEntryData(boost::numeric_cast<int>(result->GetUncompressedSize()));

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:22)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:04)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H
 #define CORE_TOOLS_MESSAGE_EVENT_EVENT_INTERFACE_H
@@ -33,21 +33,22 @@ namespace CoreTools
         using CallbackMemberFunction = bool (ClassType::*)(const CallbackParameters& callbackParameters);
 
     public:
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         EventInterface() noexcept = default;
         virtual ~EventInterface() noexcept = default;
         EventInterface(const EventInterface& rhs) noexcept = default;
-        EventInterface& operator=(const EventInterface& rhs) noexcept = default;
         EventInterface(EventInterface&& rhs) noexcept = default;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
+
+        EventInterface& operator=(const EventInterface& rhs) noexcept = default;
         EventInterface& operator=(EventInterface&& rhs) noexcept = default;
 
 #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] virtual bool EventFunction(const CallbackParameters& callbackParameters) = 0;
+        NODISCARD virtual bool EventFunction(const CallbackParameters& callbackParameters) = 0;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(EventInterface);

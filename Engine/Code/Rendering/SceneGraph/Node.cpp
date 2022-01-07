@@ -166,7 +166,7 @@ int Rendering::Node ::GetStreamingSize() const
     return size;
 }
 
-uint64_t Rendering::Node ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::Node ::Register(CoreTools::ObjectRegister& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -179,7 +179,7 @@ const    auto uniqueID = ParentType::Register(target);
     return uniqueID;
 }
 
-void Rendering::Node ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::Node ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
@@ -192,7 +192,7 @@ void Rendering::Node ::Save(const CoreTools::BufferTargetSharedPtr& target) cons
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-void Rendering::Node ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::Node ::Link(CoreTools::ObjectLink& source)
 {
     ;
 
@@ -208,7 +208,7 @@ void Rendering::Node ::PostLink()
     ParentType::PostLink();
 }
 
-void Rendering::Node ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::Node ::Load(CoreTools::BufferSource& source)
 {
     ;
 

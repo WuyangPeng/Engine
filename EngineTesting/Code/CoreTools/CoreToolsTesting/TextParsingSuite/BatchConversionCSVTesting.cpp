@@ -11,8 +11,8 @@
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/TextParsing/BatchConversionCSV.h"
-#include "CoreTools/TextParsing/ExcelConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/BatchConversionCSV.h"
+#include "CoreTools/TextParsing/CSV/ExcelConversionCSV.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 #include <filesystem>

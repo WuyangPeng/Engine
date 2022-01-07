@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/24 20:08)
+///	引擎版本：0.8.0.0 (2021/12/13 14:10)
 
 #include "System/SystemExport.h"
 
@@ -36,9 +36,9 @@ bool System::IsOpenGLSupportsExtension(const string& extension)
 {
     const auto numExtensions = GetGLInteger(OpenGLQuery::NumExtensions);
 
-    for (auto i = 0; i < numExtensions; i++)
+    for (auto index = 0; index < numExtensions; ++index)
     {
-        const auto openglExtension = GLGetStringi(GL_EXTENSIONS, i);
+        const auto openglExtension = GLGetStringi(GL_EXTENSIONS, index);
 
         if (openglExtension != nullptr)
         {

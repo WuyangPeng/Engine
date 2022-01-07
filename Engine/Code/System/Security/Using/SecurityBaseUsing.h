@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/05/24 16:14)
+///	引擎版本：0.8.0.0 (2021/12/13 10:43)
 
 #ifndef SYSTEM_SECURITY_SECURITY_BASE_USING_H
 #define SYSTEM_SECURITY_SECURITY_BASE_USING_H
@@ -78,6 +78,7 @@ namespace System
         WindowsBool bInheritHandle;
     };
     using WindowSecurityAttributesPtr = WindowSecurityAttributes*;
+
     struct SecuritySidAndAttributes
     {
         SecuritySIDPtr Sid;
@@ -222,7 +223,6 @@ namespace System
         SecuritySidAndAttributesPtr SidAttr;
         SecuritySidHashEntry Hash[32];
     };
-
     using SecuritySidAndAttributesHashPtr = SecuritySidAndAttributesHash*;
 
     struct SecurityTokenAccessInformation
@@ -294,6 +294,7 @@ namespace System
         TokenElevationTypeLimited,
     };
     using SecurityTokenElevationTypePtr = SecurityTokenElevationType*;
+
     enum SecurityImpersonationLevel
     {
         SecurityAnonymous,

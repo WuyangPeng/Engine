@@ -59,8 +59,8 @@ namespace Rendering
 		float GetAnisotropy (int index) const;
 		Colour GetBorderColor (int index) const;
 
-		void Load(const CoreTools::BufferSourceSharedPtr& source);
-		void Save (const CoreTools::BufferTargetSharedPtr& target) const;
+		void Load(CoreTools::BufferSource& source);
+		void Save (CoreTools::BufferTarget& target) const;
 		int GetStreamingSize () const;
 		
 	private:

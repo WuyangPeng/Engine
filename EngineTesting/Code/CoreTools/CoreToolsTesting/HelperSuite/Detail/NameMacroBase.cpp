@@ -21,14 +21,14 @@ CoreTools::NameMacroBase::NameMacroBase() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, NameMacroBase)
 
-const CoreTools::ObjectSharedPtr CoreTools::NameMacroBase::GetObjectByName(const string& name)
+CoreTools::ObjectSharedPtr CoreTools::NameMacroBase::GetObjectByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     return make_shared<TestingObject>(name);
 }
 
-const CoreTools::NameMacroBase::ObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllObjectsByName(const string& name)
+CoreTools::NameMacroBase::ObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllObjectsByName(const string& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
@@ -39,14 +39,14 @@ const CoreTools::NameMacroBase::ObjectSharedPtrContainer CoreTools::NameMacroBas
     return result;
 }
 
-const CoreTools::ConstObjectSharedPtr CoreTools::NameMacroBase::GetConstObjectByName(const string& name) const
+CoreTools::ConstObjectSharedPtr CoreTools::NameMacroBase::GetConstObjectByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
     return make_shared<TestingObject>(name);
 }
 
-const CoreTools::NameMacroBase::ConstObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllConstObjectsByName(const string& name) const
+CoreTools::NameMacroBase::ConstObjectSharedPtrContainer CoreTools::NameMacroBase::GetAllConstObjectsByName(const string& name) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

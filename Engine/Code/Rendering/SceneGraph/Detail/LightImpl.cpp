@@ -262,48 +262,48 @@ const auto orthonormalBasis = GenerateOrthonormalBasis(direction, m_Epsilon);
     m_DirectionVector = orthonormalBasis.GetWVector();
 }
 
-void Rendering::LightImpl ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::LightImpl ::Load(CoreTools::BufferSource& source)
 {
     RENDERING_CLASS_IS_VALID_1;
 
-    source->ReadEnum(m_LightType);
-    source->ReadAggregate(m_Ambient);
-    source->ReadAggregate(m_Diffuse);
-    source->ReadAggregate(m_Specular);
-    source->Read(m_Constant);
-    source->Read(m_Linear);
-    source->Read(m_Quadratic);
-    source->Read(m_Intensity);
-    source->Read(m_Angle);
-    source->Read(m_CosAngle);
-    source->Read(m_SinAngle);
-    source->Read(m_Exponent);
-    source->ReadAggregate(m_Position);
-    source->ReadAggregate(m_DirectionVector);
-    source->ReadAggregate(m_UpVector);
-    source->ReadAggregate(m_RightVector);
+    source.ReadEnum(m_LightType);
+    source.ReadAggregate(m_Ambient);
+    source.ReadAggregate(m_Diffuse);
+    source.ReadAggregate(m_Specular);
+    source.Read(m_Constant);
+    source.Read(m_Linear);
+    source.Read(m_Quadratic);
+    source.Read(m_Intensity);
+    source.Read(m_Angle);
+    source.Read(m_CosAngle);
+    source.Read(m_SinAngle);
+    source.Read(m_Exponent);
+    source.ReadAggregate(m_Position);
+    source.ReadAggregate(m_DirectionVector);
+    source.ReadAggregate(m_UpVector);
+    source.ReadAggregate(m_RightVector);
 }
 
-void Rendering::LightImpl ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::LightImpl ::Save(CoreTools::BufferTarget& target) const
 {
     RENDERING_CLASS_IS_VALID_CONST_1;
 
-    target->WriteEnum(m_LightType);
-    target->WriteAggregate(m_Ambient);
-    target->WriteAggregate(m_Diffuse);
-    target->WriteAggregate(m_Specular);
-    target->Write(m_Constant);
-    target->Write(m_Linear);
-    target->Write(m_Quadratic);
-    target->Write(m_Intensity);
-    target->Write(m_Angle);
-    target->Write(m_CosAngle);
-    target->Write(m_SinAngle);
-    target->Write(m_Exponent);
-    target->WriteAggregate(m_Position);
-    target->WriteAggregate(m_DirectionVector);
-    target->WriteAggregate(m_UpVector);
-    target->WriteAggregate(m_RightVector);
+    target.WriteEnum(m_LightType);
+    target.WriteAggregate(m_Ambient);
+    target.WriteAggregate(m_Diffuse);
+    target.WriteAggregate(m_Specular);
+    target.Write(m_Constant);
+    target.Write(m_Linear);
+    target.Write(m_Quadratic);
+    target.Write(m_Intensity);
+    target.Write(m_Angle);
+    target.Write(m_CosAngle);
+    target.Write(m_SinAngle);
+    target.Write(m_Exponent);
+    target.WriteAggregate(m_Position);
+    target.WriteAggregate(m_DirectionVector);
+    target.WriteAggregate(m_UpVector);
+    target.WriteAggregate(m_RightVector);
 }
 
 int Rendering::LightImpl ::GetStreamingSize() const

@@ -11,7 +11,7 @@
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "Mathematics/Algebra/Vector3DTools.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -170,7 +170,7 @@ void Mathematics::Curve3<Real>
 	::SubdivideByTime(int numPoints, Vector3D<Real>*& points) const
 {
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
-    points = NEW1<Vector3D<Real> >(numPoints);
+    points = nullptr;  // NEW1<Vector3D<Real> >(numPoints);
 
 	const auto temp1 = mTMax - mTMin;
 	const auto temp2 = numPoints - 1;
@@ -188,7 +188,7 @@ void Mathematics::Curve3<Real>
 	::SubdivideByLength(int numPoints, Vector3D<Real>*& points) const
 {
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
-    points = NEW1<Vector3D<Real> >(numPoints);
+    points = nullptr;  // NEW1<Vector3D<Real> >(numPoints);
 
 	const auto temp = numPoints - 1;
 	auto delta = GetTotalLength()/(temp);

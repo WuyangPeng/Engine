@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 19:28)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/16 21:52)
 
 #ifndef CORE_TOOLS_TIME_TEAR_H
 #define CORE_TOOLS_TIME_TEAR_H
@@ -24,10 +24,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        int GetYear() const noexcept;
+        NODISCARD int GetYear() const noexcept;
 
     private:
-        int m_Year;
+        int year;
     };
 }
 

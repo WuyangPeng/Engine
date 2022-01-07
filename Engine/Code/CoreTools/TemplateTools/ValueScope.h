@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:30)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 15:35)
 
 #ifndef CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_H
 #define CORE_TOOLS_TEMPLATE_TOOLS_VALUE_SCOPE_H
@@ -31,16 +31,16 @@ namespace CoreTools
 
         ~ValueScope() noexcept;
 
-        ValueScope(const ValueScope&) = delete;
-        ValueScope& operator=(const ValueScope&) = delete;
-        ValueScope(ValueScope&&) = delete;
-        ValueScope& operator=(ValueScope&&) = delete;
+        ValueScope(const ValueScope&) noexcept = delete;
+        ValueScope& operator=(const ValueScope&) noexcept = delete;
+        ValueScope(ValueScope&&) noexcept = delete;
+        ValueScope& operator=(ValueScope&&) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
     private:
-        Reference m_Value;
-        ValueType m_Revert;
+        Reference value;
+        ValueType revert;
     };
 }
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.1 (2021/03/24 15:01)
+///	引擎版本：0.8.0.0 (2021/12/13 18:57)
 
 #ifndef SYSTEM_DYNAMIC_LINK_LIBRARY_TOOLS_H
 #define SYSTEM_DYNAMIC_LINK_LIBRARY_TOOLS_H

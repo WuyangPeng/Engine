@@ -59,7 +59,7 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetProgr
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetBaseRegisterSize, int)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetTextureUnitSize, int)
 
-IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, Load, CoreTools::BufferSourceSharedPtr, void)
-IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(Rendering, SingleShaderProfileData, Save, CoreTools::BufferTargetSharedPtr, void)
+IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData, Load, CoreTools::BufferSource&, void)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(Rendering, SingleShaderProfileData, Save, CoreTools::BufferTarget&, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Rendering, SingleShaderProfileData, GetStreamingSize, int)
 #include STSTEM_WARNING_POP

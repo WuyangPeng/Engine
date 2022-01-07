@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/13 19:17)
+///	引擎版本：0.8.0.0 (2021/12/19 19:35)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_RELATIONSHIP_ITEM_IMPL_H
 #define CORE_TOOLS_TEXT_PARSING_RELATIONSHIP_ITEM_IMPL_H
@@ -18,6 +18,7 @@
 #include "CoreTools/TextParsing/SimpleCSV/XmlParser.h"
 #include "CoreTools/TextParsing/TextParsingFwd.h"
 
+#include <map>
 #include <string>
 
 namespace CoreTools
@@ -40,6 +41,14 @@ namespace CoreTools
 
             NODISCARD static RelationshipType GetTypeFromString(const std::string& typeString);
             NODISCARD static std::string GetStringFromType(RelationshipType type);
+
+        private:
+            using TypeFromStringRelationship = std::map<std::string, RelationshipType>;
+            using StringFromTypeRelationship = std::map<RelationshipType, std::string>;
+
+        private:
+            NODISCARD static TypeFromStringRelationship GetTypeFromStringRelationship();
+            NODISCARD static StringFromTypeRelationship GetStringFromTypeRelationship();
 
         private:
             ConstXMLDocumentWeakPtr document;

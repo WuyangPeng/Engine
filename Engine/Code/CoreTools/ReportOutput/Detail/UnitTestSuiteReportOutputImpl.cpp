@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 10:16)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/21 18:20)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -36,7 +36,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestName(const string& testN
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto characterString = "测试 \""s + testName + "\"："s;
+    const auto characterString = "测试 \""s + testName + "\"："s;
     PrintString(characterString);
 }
 
@@ -44,7 +44,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintSuiteName(const string& suit
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto characterString = "测试套件 \""s + suiteName + "\"："s;
+    const auto characterString = "测试套件 \""s + suiteName + "\"："s;
     PrintString(characterString);
 }
 
@@ -52,7 +52,7 @@ void CoreTools::UnitTestSuiteReportOutputImpl::PrintTestResult(int passedNumber,
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    auto manager = GetLogConsoleTextColorsManager(failedNumber, errorNumber);
+    const auto manager = GetLogConsoleTextColorsManager(failedNumber, errorNumber);
 
     GetStream() << setw(characterWidth) << right << "通过："
                 << setw(characterWidth) << left << passedNumber

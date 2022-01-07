@@ -14,7 +14,7 @@
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 FRAMEWORK_NON_COPY_EXPORT_IMPL(MainFunctionHelperBaseImpl);
 template class FRAMEWORK_DEFAULT_DECLARE std::weak_ptr<Framework::MainFunctionHelperBase>;
 template class FRAMEWORK_DEFAULT_DECLARE std::enable_shared_from_this<Framework::MainFunctionHelperBase>;
@@ -54,22 +54,18 @@ namespace Framework
 
         void InitUniqueIDManager();
         void InitLog(const EnvironmentDirectory& environmentDirectory);
-        void InitMemory() noexcept(CoreTools::g_MemoryNoexcept);
         void InitInitTerm();
         void InitEnvironment();
-        void InitSmartPointer();
         void InitImpl(const EnvironmentDirectory& environmentDirectory);
 
         void DestroyImpl() noexcept;
         void DestroySmartPointer() noexcept;
         void DestroyEnvironment() noexcept;
         void DestroyInitTerm();
-        void DestroyMemory() noexcept(CoreTools::g_MemoryNoexcept);
         void DestroyLog() noexcept;
         void DestroyUniqueIDManager() noexcept;
 
         virtual int DoRun() = 0;
-        virtual void MemoryCreate() noexcept(CoreTools::g_MemoryNoexcept);
 
     private:
         using MainFunctionHelperBaseImplPtr = std::shared_ptr<ImplType>;

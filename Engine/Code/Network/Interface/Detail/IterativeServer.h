@@ -20,6 +20,8 @@
 #include "Network/NetworkMessage/BufferSendStream.h"
 #include "Network/NetworkMessage/NetworkMessageFwd.h"
 
+#include <map>
+
 namespace Network
 {
     class NETWORK_HIDDEN_DECLARE IterativeServer : public ServerImpl

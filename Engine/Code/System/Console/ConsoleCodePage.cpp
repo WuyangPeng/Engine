@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/07 19:56)
+///	引擎版本：0.8.0.0 (2021/12/13 22:25)
 
 #include "System/SystemExport.h"
 
@@ -37,7 +37,7 @@ bool System::SetConsoleCodePage(CodePage codePage) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<CodePage>(codePage);
+    UnusedFunction(codePage);
 
     return false;
 
@@ -68,7 +68,7 @@ bool System::SetConsoleOutputCodePage(CodePage codePage) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<CodePage>(codePage);
+    UnusedFunction(codePage);
 
     return false;
 

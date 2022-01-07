@@ -28,14 +28,14 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Year GetYear() const noexcept;
-        [[nodiscard]] Month GetMonth() const noexcept;
-        [[nodiscard]] Day GetDay() const noexcept;
+        NODISCARD Year GetYear() const noexcept;
+        NODISCARD Month GetMonth() const noexcept;
+        NODISCARD Day GetDay() const noexcept;
 
     private:
-        Year m_Year;
-        Month m_Month;
-        Day m_Day;
+        Year year;
+        Month month;
+        Day day;
     };
 }
 

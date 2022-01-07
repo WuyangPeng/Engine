@@ -1,31 +1,31 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê∞Ê±æ£∫0.0.0.3 (2019/07/25 11:33)
 
 #include "Rendering/RenderingExport.h"
 
 #include "LightSptPerPixEffect.h"
-#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
-#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
-#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
-#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
-#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
-#include "Rendering/ShaderFloats/LightSpotConstant.h"
-#include "Rendering/ShaderFloats/LightAmbientConstant.h"
-#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
-#include "Rendering/ShaderFloats/LightSpecularConstant.h"
-#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
-#include "Rendering/ShaderFloats/LightModelPositionConstant.h"
-#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
-#include "Rendering/ShaderFloats/WorldMatrixConstant.h" 
-#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
+#include "Rendering/ShaderFloats/CameraModelPositionConstant.h"
+#include "Rendering/ShaderFloats/LightAmbientConstant.h"
+#include "Rendering/ShaderFloats/LightAttenuationConstant.h"
+#include "Rendering/ShaderFloats/LightDiffuseConstant.h"
+#include "Rendering/ShaderFloats/LightModelDirectionVectorConstant.h"
+#include "Rendering/ShaderFloats/LightModelPositionConstant.h"
+#include "Rendering/ShaderFloats/LightSpecularConstant.h"
+#include "Rendering/ShaderFloats/LightSpotConstant.h"
+#include "Rendering/ShaderFloats/MaterialAmbientConstant.h"
+#include "Rendering/ShaderFloats/MaterialDiffuseConstant.h"
+#include "Rendering/ShaderFloats/MaterialEmissiveConstant.h"
+#include "Rendering/ShaderFloats/MaterialSpecularConstant.h"
+#include "Rendering/ShaderFloats/ProjectionViewMatrixConstant.h"
+#include "Rendering/ShaderFloats/WorldMatrixConstant.h"
 
- #include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "System/Helper/PragmaWarning.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -42,32 +42,31 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, LightSptPerPixEffect);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, LightSptPerPixEffect);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, LightSptPerPixEffect);
 
-Rendering::LightSptPerPixEffect
-	::LightSptPerPixEffect ()
+Rendering::LightSptPerPixEffect ::LightSptPerPixEffect()
 {
-	VertexShaderSharedPtr vshader{ std::make_shared< VertexShader>( "Wm5.LightSptPerPix",2, 3, 1, 0 ) };
-    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::Position);
-    vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
-    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Position);
-    vshader->SetOutput(1, "vertexPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord0);
-    vshader->SetOutput(2, "vertexNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
+    VertexShaderSharedPtr vshader{ std::make_shared<VertexShader>("Wm5.LightSptPerPix", 2, 3, 1, 0) };
+    vshader->SetInput(0, "modelPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::Position);
+    vshader->SetInput(1, "modelNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
+    vshader->SetOutput(0, "clipPosition", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Position);
+    vshader->SetOutput(1, "vertexPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
+    vshader->SetOutput(2, "vertexNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
     vshader->SetConstant(0, "PVWMatrix", 4);
-	auto profile = vshader->GetProfile();
+    auto profile = vshader->GetProfile();
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 1; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 1; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>( "Wm5.LightSptPerPix",2, 1, 13, 0 ) };
-    pshader->SetInput(0, "vertexPosition", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord0);
-    pshader->SetInput(1, "vertexNormal", ShaderFlags::VariableType::Float3,ShaderFlags::VariableSemantic::TextureCoord1);
-    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4,ShaderFlags::VariableSemantic::Color0);
+    PixelShaderSharedPtr pshader{ std::make_shared<PixelShader>("Wm5.LightSptPerPix", 2, 1, 13, 0) };
+    pshader->SetInput(0, "vertexPosition", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord0);
+    pshader->SetInput(1, "vertexNormal", ShaderFlags::VariableType::Float3, ShaderFlags::VariableSemantic::TextureCoord1);
+    pshader->SetOutput(0, "pixelColor", ShaderFlags::VariableType::Float4, ShaderFlags::VariableSemantic::Color0);
     pshader->SetConstant(0, "WMatrix", 4);
     pshader->SetConstant(1, "CameraModelPosition", 1);
     pshader->SetConstant(2, "MaterialEmissive", 1);
@@ -82,74 +81,68 @@ Rendering::LightSptPerPixEffect
     pshader->SetConstant(11, "LightSpotCutoff", 1);
     pshader->SetConstant(12, "LightAttenuation", 1);
 
-	profile = pshader->GetProfile();
+    profile = pshader->GetProfile();
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 13; ++j)
-		{
-			profile->SetBaseRegister(i, j, msPRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 13; ++j)
+        {
+            profile->SetBaseRegister(i, j, msPRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 
-	VisualPassSharedPtr pass{ NEW0 VisualPass{} };
-	pass->SetVertexShader(vshader);
-	pass->SetPixelShader(pshader);
-	pass->SetAlphaState(AlphaStateSharedPtr{ NEW0 AlphaState{} });
-	pass->SetCullState(CullStateSharedPtr{ NEW0 CullState{} });
-	pass->SetDepthState(DepthStateSharedPtr{ NEW0 DepthState{} });
-	pass->SetOffsetState(OffsetStateSharedPtr{ NEW0 OffsetState{} });
-	pass->SetStencilState(StencilStateSharedPtr{ NEW0 StencilState{} });
-	pass->SetWireState(WireStateSharedPtr{ NEW0 WireState{} });
+    VisualPassSharedPtr pass{ new VisualPass{} };
+    pass->SetVertexShader(vshader);
+    pass->SetPixelShader(pshader);
+    pass->SetAlphaState(AlphaStateSharedPtr{ new AlphaState{} });
+    pass->SetCullState(CullStateSharedPtr{ new CullState{} });
+    pass->SetDepthState(DepthStateSharedPtr{ new DepthState{} });
+    pass->SetOffsetState(OffsetStateSharedPtr{ new OffsetState{} });
+    pass->SetStencilState(StencilStateSharedPtr{ new StencilState{} });
+    pass->SetWireState(WireStateSharedPtr{ new WireState{} });
 
-	VisualTechniqueSharedPtr technique{ NEW0 VisualTechnique{} };
-	technique->InsertPass(pass);
-	InsertTechnique(technique); 
+    VisualTechniqueSharedPtr technique{ new VisualTechnique{} };
+    technique->InsertPass(pass);
+    InsertTechnique(technique);
 }
 
- 
-
-Rendering::VisualEffectInstance* Rendering::LightSptPerPixEffect
-	::CreateInstance (Light* light,Material* material) const
+Rendering::VisualEffectInstance* Rendering::LightSptPerPixEffect ::CreateInstance(Light* light, Material* material) const
 {
-	VisualEffectInstance* instance = CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
-    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < ProjectionViewMatrixConstant>()));
-        instance->SetPixelConstant(0, 0, ShaderFloatSharedPtr(std::make_shared < WorldMatrixConstant>()));
-    instance->SetPixelConstant(0, 1,ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
-        instance->SetPixelConstant(0, 2, ShaderFloatSharedPtr(std::make_shared < MaterialEmissiveConstant>(MaterialSharedPtr(material))));
-    instance->SetPixelConstant(0, 3, ShaderFloatSharedPtr(std::make_shared < MaterialAmbientConstant>(MaterialSharedPtr(material))));
-        instance->SetPixelConstant(0, 4, ShaderFloatSharedPtr(std::make_shared < MaterialDiffuseConstant>(MaterialSharedPtr(material))));
-    instance->SetPixelConstant(0, 5, ShaderFloatSharedPtr(std::make_shared < MaterialSpecularConstant>(MaterialSharedPtr(material))));
-        instance->SetPixelConstant(0, 6, ShaderFloatSharedPtr(std::make_shared < LightModelPositionConstant>(LightSharedPtr(light))));
-    instance->SetPixelConstant(0, 7, ShaderFloatSharedPtr(std::make_shared < LightModelDirectionVectorConstant>(LightSharedPtr(light))));
-        instance->SetPixelConstant(0, 8, ShaderFloatSharedPtr(std::make_shared < LightAmbientConstant>(LightSharedPtr(light))));
-    instance->SetPixelConstant(0, 9, ShaderFloatSharedPtr(std::make_shared < LightDiffuseConstant>(LightSharedPtr(light))));
-        instance->SetPixelConstant(0, 10, ShaderFloatSharedPtr(std::make_shared < LightSpecularConstant>(LightSharedPtr(light))));
-    instance->SetPixelConstant(0, 11, ShaderFloatSharedPtr(std::make_shared < LightSpotConstant>(LightSharedPtr(light))));
-        instance->SetPixelConstant(0, 12, ShaderFloatSharedPtr(std::make_shared < LightAttenuationConstant>(LightSharedPtr(light))));
+    VisualEffectInstance* instance = nullptr;  // CoreTools::New0 < VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<ProjectionViewMatrixConstant>()));
+    instance->SetPixelConstant(0, 0, ShaderFloatSharedPtr(std::make_shared<WorldMatrixConstant>()));
+    instance->SetPixelConstant(0, 1, ShaderFloatSharedPtr(std::make_shared<CameraModelPositionConstant>()));
+    instance->SetPixelConstant(0, 2, ShaderFloatSharedPtr(std::make_shared<MaterialEmissiveConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 3, ShaderFloatSharedPtr(std::make_shared<MaterialAmbientConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 4, ShaderFloatSharedPtr(std::make_shared<MaterialDiffuseConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 5, ShaderFloatSharedPtr(std::make_shared<MaterialSpecularConstant>(MaterialSharedPtr(material))));
+    instance->SetPixelConstant(0, 6, ShaderFloatSharedPtr(std::make_shared<LightModelPositionConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 7, ShaderFloatSharedPtr(std::make_shared<LightModelDirectionVectorConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 8, ShaderFloatSharedPtr(std::make_shared<LightAmbientConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 9, ShaderFloatSharedPtr(std::make_shared<LightDiffuseConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 10, ShaderFloatSharedPtr(std::make_shared<LightSpecularConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 11, ShaderFloatSharedPtr(std::make_shared<LightSpotConstant>(LightSharedPtr(light))));
+    instance->SetPixelConstant(0, 12, ShaderFloatSharedPtr(std::make_shared<LightAttenuationConstant>(LightSharedPtr(light))));
     return instance;
 }
 
-Rendering::VisualEffectInstance* Rendering::LightSptPerPixEffect::CreateUniqueInstance (
+Rendering::VisualEffectInstance* Rendering::LightSptPerPixEffect::CreateUniqueInstance(
     Light* light, Material* material)
 {
-   const LightSptPerPixEffect* effect = CoreTools::New0 < LightSptPerPixEffect>();
+    const LightSptPerPixEffect* effect = nullptr;  //  CoreTools::New0<LightSptPerPixEffect>();
     return effect->CreateInstance(light, material);
 }
 
-
-
 // Streaming support.
 
-Rendering::LightSptPerPixEffect::LightSptPerPixEffect (LoadConstructor value)
-	: VisualEffect{ value }
+Rendering::LightSptPerPixEffect::LightSptPerPixEffect(LoadConstructor value)
+    : VisualEffect{ value }
 {
 }
 
-void Rendering::LightSptPerPixEffect
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::LightSptPerPixEffect ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -158,51 +151,49 @@ void Rendering::LightSptPerPixEffect
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::LightSptPerPixEffect
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::LightSptPerPixEffect ::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
 
-void Rendering::LightSptPerPixEffect::PostLink ()
+void Rendering::LightSptPerPixEffect::PostLink()
 {
-	VisualEffect::PostLink();
+    VisualEffect::PostLink();
 
-	auto pass = GetTechnique(0)->GetPass(0);
-	auto vshader = pass->GetVertexShader();
-	auto pshader = pass->GetPixelShader();
-	auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
+    auto pass = GetTechnique(0)->GetPass(0);
+    auto vshader = pass->GetVertexShader();
+    auto pshader = pass->GetPixelShader();
+    auto profile = const_cast<ShaderProfileData*>(vshader->GetProfile().get());
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 1; ++j)
-		{
-			profile->SetBaseRegister(i, j, msVRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 1; ++j)
+        {
+            profile->SetBaseRegister(i, j, msVRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msVPrograms[i]);
-	}
+        profile->SetProgram(i, msVPrograms[i]);
+    }
 
-	profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
+    profile = const_cast<ShaderProfileData*>(pshader->GetProfile().get());
 
-	for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
-	{
-		for (auto j = 0; j < 13; ++j)
-		{
-			profile->SetBaseRegister(i, j, msPRegisters[i][j]);
-		}
+    for (auto i = 0; i < System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles); ++i)
+    {
+        for (auto j = 0; j < 13; ++j)
+        {
+            profile->SetBaseRegister(i, j, msPRegisters[i][j]);
+        }
 
-		profile->SetProgram(i, msPPrograms[i]);
-	}
+        profile->SetProgram(i, msPPrograms[i]);
+    }
 }
 
-uint64_t Rendering::LightSptPerPixEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::LightSptPerPixEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
-void Rendering::LightSptPerPixEffect
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::LightSptPerPixEffect ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
@@ -211,20 +202,16 @@ void Rendering::LightSptPerPixEffect
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }
 
-int Rendering::LightSptPerPixEffect
-	::GetStreamingSize () const
+int Rendering::LightSptPerPixEffect ::GetStreamingSize() const
 {
     return VisualEffect::GetStreamingSize();
 }
 
-
-
 // Profiles.
 
-int Rendering::LightSptPerPixEffect::msDx9VRegisters[1]  { 0 };
-int Rendering::LightSptPerPixEffect::msOglVRegisters[1]  { 1 };
-int* Rendering::LightSptPerPixEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+int Rendering::LightSptPerPixEffect::msDx9VRegisters[1]{ 0 };
+int Rendering::LightSptPerPixEffect::msOglVRegisters[1]{ 1 };
+int* Rendering::LightSptPerPixEffect::msVRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,
     msDx9VRegisters,
     msDx9VRegisters,
@@ -232,8 +219,7 @@ int* Rendering::LightSptPerPixEffect::msVRegisters[System::EnumCastUnderlying(Sh
     msOglVRegisters
 };
 
-std::string Rendering::LightSptPerPixEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+std::string Rendering::LightSptPerPixEffect::msVPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // VP_NONE
     "",
 
@@ -286,11 +272,9 @@ std::string Rendering::LightSptPerPixEffect::msVPrograms[System::EnumCastUnderly
     "END\n"
 };
 
-int Rendering::LightSptPerPixEffect::msAllPRegisters[13] 
-    { 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+int Rendering::LightSptPerPixEffect::msAllPRegisters[13]{ 0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
 
-int* Rendering::LightSptPerPixEffect::msPRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+int* Rendering::LightSptPerPixEffect::msPRegisters[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     0,
     msAllPRegisters,
     msAllPRegisters,
@@ -298,8 +282,7 @@ int* Rendering::LightSptPerPixEffect::msPRegisters[System::EnumCastUnderlying(Sh
     msAllPRegisters
 };
 
-std::string Rendering::LightSptPerPixEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)] 
-{
+std::string Rendering::LightSptPerPixEffect::msPPrograms[System::EnumCastUnderlying(ShaderFlags::Profiles::MaxProfiles)]{
     // PP_NONE
     "",
 

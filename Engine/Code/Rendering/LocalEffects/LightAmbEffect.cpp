@@ -16,7 +16,7 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 
 #include "System/Helper/PragmaWarning.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26481)
@@ -88,7 +88,7 @@ Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateInstance(Light* light,  Material* material) const
 {
-    VisualEffectInstance* instance = CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
+    VisualEffectInstance* instance = nullptr;  // CoreTools::New0<VisualEffectInstance>(VisualEffectSharedPtr((VisualEffect*)this), 0);
 	instance->SetVertexConstant(0, 0, ShaderFloatSharedPtr(std::make_shared< ProjectionViewMatrixConstant>()));
         instance->SetVertexConstant(0, 1, ShaderFloatSharedPtr(std::make_shared < MaterialEmissiveConstant>(MaterialSharedPtr(material))));
         instance->SetVertexConstant(0, 2, ShaderFloatSharedPtr(std::make_shared < MaterialAmbientConstant>(MaterialSharedPtr(material))));
@@ -101,7 +101,7 @@ Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 Rendering::VisualEffectInstance* Rendering::LightAmbEffect
 	::CreateUniqueInstance(Light* light, Material* material)
 {
-   const LightAmbEffect* effect = CoreTools::New0 < LightAmbEffect>();
+    const LightAmbEffect* effect = nullptr;  // CoreTools::New0 < LightAmbEffect>();
     return effect->CreateInstance(light, material);
 }
 
@@ -115,7 +115,7 @@ Rendering::LightAmbEffect
 }
 
 void Rendering::LightAmbEffect
-	::Load(const CoreTools::BufferSourceSharedPtr& source)
+	::Load(CoreTools::BufferSource& source)
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
@@ -125,7 +125,7 @@ void Rendering::LightAmbEffect
 }
 
 void Rendering::LightAmbEffect
-	::Link(const CoreTools::ObjectLinkSharedPtr& source)
+	::Link(CoreTools::ObjectLink& source)
 {
     VisualEffect::Link(source);
 }
@@ -158,13 +158,13 @@ void Rendering::LightAmbEffect
 	}
 }
 
-uint64_t Rendering::LightAmbEffect ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::LightAmbEffect ::Register(CoreTools::ObjectRegister& target) const
 {
     return VisualEffect::Register(target);
 }
 
 void Rendering::LightAmbEffect
-	::Save(const CoreTools::BufferTargetSharedPtr& target) const
+	::Save(CoreTools::BufferTarget& target) const
 {
 	CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 

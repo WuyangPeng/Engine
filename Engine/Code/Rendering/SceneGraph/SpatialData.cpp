@@ -147,27 +147,27 @@ Rendering::CullingMode Rendering::SpatialData
     return m_Culling;
 }
 
-void Rendering::SpatialData ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::SpatialData ::Load(CoreTools::BufferSource& source)
 {
-    source->ReadAggregate(m_LocalTransform);
-    source->ReadAggregate(m_WorldTransform);
-    m_WorldTransformIsCurrent = source->ReadBool();
-    source->ReadAggregate(m_WorldBound);
-    m_WorldBoundIsCurrent = source->ReadBool();
-    source->ReadEnum(m_Culling);
+    source.ReadAggregate(m_LocalTransform);
+    source.ReadAggregate(m_WorldTransform);
+    m_WorldTransformIsCurrent = source.ReadBool();
+    source.ReadAggregate(m_WorldBound);
+    m_WorldBoundIsCurrent = source.ReadBool();
+    source.ReadEnum(m_Culling);
 }
 
 void Rendering::SpatialData
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
-    target->WriteAggregate(m_LocalTransform);
-        target->WriteAggregate(m_WorldTransform);
-    target->Write(m_WorldTransformIsCurrent);
-        target->WriteAggregate(m_WorldBound);
-    target->Write(m_WorldBoundIsCurrent);
-        target->WriteEnum(m_Culling);
+    target.WriteAggregate(m_LocalTransform);
+        target.WriteAggregate(m_WorldTransform);
+    target.Write(m_WorldTransformIsCurrent);
+        target.WriteAggregate(m_WorldBound);
+    target.Write(m_WorldBoundIsCurrent);
+        target.WriteEnum(m_Culling);
 }
 
 int Rendering::SpatialData

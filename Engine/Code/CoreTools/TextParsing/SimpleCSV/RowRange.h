@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/10 20:28)
+///	引擎版本：0.8.0.0 (2021/12/19 19:52)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_ROW_RANGE_H
 #define CORE_TOOLS_TEXT_PARSING_ROW_RANGE_H
@@ -14,13 +14,13 @@
 
 #include "RowIterator.h"
 #include "XmlParser.h"
-#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "CoreTools/Helper/Export/CopyUnsharedMacro.h"
 #include "CoreTools/TextParsing/SimpleCSV/SimpleCSVInternalFwd.h"
 
 #include <memory>
 
 template class CORE_TOOLS_DEFAULT_DECLARE std::shared_ptr<CoreTools::SimpleCSV::RowRangeImpl>;
-template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::DelayCopyUnsharedImpl<CoreTools::SimpleCSV::RowRange, CoreTools::SimpleCSV::RowRangeImpl>;
+template class CORE_TOOLS_DEFAULT_DECLARE CoreTools::CopyUnsharedImpl<CoreTools::SimpleCSV::RowRange, CoreTools::SimpleCSV::RowRangeImpl>;
 
 namespace CoreTools
 {
@@ -29,7 +29,7 @@ namespace CoreTools
         class CORE_TOOLS_DEFAULT_DECLARE RowRange final
         {
         public:
-            DELAY_COPY_UNSHARED_TYPE_DECLARE(RowRange);
+            COPY_UNSHARED_TYPE_DECLARE(RowRange);
             using SharedStringsSharedPtr = std::shared_ptr<SharedStrings>;
 
         public:

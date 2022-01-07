@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.4 (2021/05/25 18:52)
+///	引擎版本：0.8.0.0 (2021/12/13 11:09)
 
 #include "System/SystemExport.h"
 
@@ -24,7 +24,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclR
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, SecurityAclRevisionInformationPtr>(acl, aclInformation);
+    UnusedFunction(acl, aclInformation);
 
     return false;
 
@@ -42,7 +42,7 @@ bool System::GetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclS
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, SecurityAclSizeInformationPtr>(acl, aclInformation);
+    UnusedFunction(acl, aclInformation);
 
     return false;
 
@@ -60,7 +60,7 @@ bool System::InitializeAccessControlList(AccessCheckACLPtr acl, WindowsDWord acl
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, WindowsDWord, AccessControlListRevision>(acl, aclLength, aclRevision);
+    UnusedFunction(acl, aclLength, aclRevision);
 
     return false;
 
@@ -78,7 +78,7 @@ bool System::IsAccessControlListValid(AccessCheckACLPtr acl) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr>(acl);
+    UnusedFunction(acl);
 
     return false;
 
@@ -96,7 +96,7 @@ bool System::SetAccessControlListInformation(AccessCheckACLPtr acl, SecurityAclR
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<AccessCheckACLPtr, SecurityAclRevisionInformationPtr>(acl, aclInformation);
+    UnusedFunction(acl, aclInformation);
 
     return false;
 

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 13:57)
+///	引擎版本：0.8.0.0 (2021/12/12 16:53)
 
 #ifndef SYSTEM_THREADING_THREAD_USING_H
 #define SYSTEM_THREADING_THREAD_USING_H
@@ -20,13 +20,14 @@ namespace System
     using ThreadHandle = HANDLE;
     using ThreadHandlePtr = PHANDLE;
     using ThreadStartRoutine = PTHREAD_START_ROUTINE;
+
     using StartAddress = unsigned(__stdcall*)(void*);
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
     using ThreadHandle = pthread_t;
     using ThreadHandlePtr = ThreadHandle*;
-    using ThreadStartRoutine = WindowsDWord(SYSTEM_WINAPI*)(void* threadParameter);
+    using ThreadStartRoutine = WindowsDWord(*)(void* threadParameter);
 
     using StartAddress = unsigned(__stdcall*)(void*);
 

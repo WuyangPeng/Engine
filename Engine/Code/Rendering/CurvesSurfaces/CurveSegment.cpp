@@ -128,19 +128,19 @@ Rendering::CurveSegment ::CurveSegment(LoadConstructor value)
 {
 }
 
-void Rendering::CurveSegment ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CurveSegment ::Load(CoreTools::BufferSource& source)
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_LOAD(source);
 
     Object::Load(source);
 
-    source->Read(mUMin);
-    source->Read(mUMax);
+    source.Read(mUMin);
+    source.Read(mUMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }
 
-void Rendering::CurveSegment ::Link(const CoreTools::ObjectLinkSharedPtr& source)
+void Rendering::CurveSegment ::Link(CoreTools::ObjectLink& source)
 {
     Object::Link(source);
 }
@@ -150,19 +150,19 @@ void Rendering::CurveSegment ::PostLink()
     Object::PostLink();
 }
 
-uint64_t Rendering::CurveSegment ::Register(const CoreTools::ObjectRegisterSharedPtr& target) const
+uint64_t Rendering::CurveSegment ::Register(CoreTools::ObjectRegister& target) const
 {
     return Object::Register(target);
 }
 
-void Rendering::CurveSegment ::Save(const CoreTools::BufferTargetSharedPtr& target) const
+void Rendering::CurveSegment ::Save(CoreTools::BufferTarget& target) const
 {
     CORE_TOOLS_BEGIN_DEBUG_STREAM_SAVE(target);
 
     Object::Save(target);
 
-    target->Write(mUMin);
-    target->Write(mUMax);
+    target.Write(mUMin);
+    target.Write(mUMax);
 
     CORE_TOOLS_END_DEBUG_STREAM_SAVE(target);
 }

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/14 15:47)
+///	引擎版本：0.8.0.0 (2021/12/20 22:11)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -816,7 +816,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(MAYBE_UNUSED const Comma
     CORE_TOOLS_CLASS_IS_VALID_9;
 
     archive.DeleteEntry("xl/calcChain.xml");
-    auto item = std::find_if(data.begin(), data.end(), [&](const auto& item) {
+    auto item = std::find_if(data.begin(), data.end(), [](const auto& item) {
         return item->GetXmlPath() == "xl/calcChain.xml";
     });
 
@@ -895,7 +895,7 @@ void CoreTools::SimpleCSV::DocumentImpl::ExecuteCommand(const CommandDeleteSheet
     archive.DeleteEntry(sheetPath.substr(1));
     contentTypes->DeleteOverride(sheetPath);
     wbkRelationships->DeleteRelationship(command.GetSheetID());
-    auto iter = std::find_if(data.begin(), data.end(), [&](const auto& item) {
+    auto iter = std::find_if(data.begin(), data.end(), [sheetPath = std::move(sheetPath)](const auto& item) {
         return item->GetXmlPath() == sheetPath.substr(1);
     });
 

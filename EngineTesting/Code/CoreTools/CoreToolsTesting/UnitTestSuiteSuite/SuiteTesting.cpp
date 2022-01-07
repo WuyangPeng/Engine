@@ -30,7 +30,7 @@ void CoreTools::SuiteTesting ::NameTest()
 {
     string suiteName{ "SuiteName"s };
 
-    Suite suite{ suiteName, OStreamShared{}, true };
+    Suite suite{ suiteName, OStreamShared{ true }, true };
 
     ASSERT_EQUAL(suite.GetName(), suiteName);
 }
@@ -39,7 +39,7 @@ void CoreTools::SuiteTesting ::StreamTest()
 {
     string suiteName{ "SuiteName"s };
 
-    Suite suite{ suiteName, OStreamShared{}, true };
+    Suite suite{ suiteName, OStreamShared{ true }, true };
 }
 
 void CoreTools::SuiteTesting ::AddTestTest()

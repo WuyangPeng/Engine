@@ -19,9 +19,9 @@ RiemannianGeodesic<Real>::RiemannianGeodesic (int dimension)
     MATHEMATICS_ASSERTION_0(dimension >= 2, "Dimension must be at least 2\n");
     mDimension = 2;
 
-    mChristoffel1 = NEW1<VariableMatrix<Real> >(mDimension);
-    mChristoffel2 = NEW1<VariableMatrix<Real> >(mDimension);
-    mMetricDerivative = NEW1<VariableMatrix<Real> >(mDimension);
+    mChristoffel1 = nullptr;  // NEW1<VariableMatrix<Real> >(mDimension);
+    mChristoffel2 = nullptr;  //  NEW1<VariableMatrix<Real> >(mDimension);
+    mMetricDerivative = nullptr;  //  NEW1<VariableMatrix<Real> >(mDimension);
     for (int i = 0; i < mDimension; ++i)
     {
         mChristoffel1[i].ResetSize(mDimension, mDimension);
@@ -117,7 +117,7 @@ void RiemannianGeodesic<Real>::ComputeGeodesic (const VariableLengthVector<Real>
     MATHEMATICS_ASSERTION_0(Subdivisions < 32, "Exceeds maximum iterations\n");
     quantity = (1 << Subdivisions) + 1;
 
-    path = NEW1<VariableLengthVector<Real> >(quantity);
+    path = nullptr;  // NEW1<VariableLengthVector<Real> >(quantity);
     int i;
     for (i = 0; i < quantity; ++i)
     {

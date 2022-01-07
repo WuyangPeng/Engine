@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.5 (2021/11/07 12:29)
+///	引擎版本：0.8.0.0 (2021/12/18 21:27)
 
 #ifndef CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_DETAIL_H
 #define CORE_TOOLS_TEXT_PARSING_CELL_VALUE_PROXY_DETAIL_H
@@ -17,87 +17,57 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, const char*> || std::is_same_v<T, std::string> || std::is_same_v<T, CoreTools::SimpleCSV::CellValue>>::type*>
-CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::CellValueProxy::operator=(T value)
+          typename std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> ||
+                                    std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
+CoreTools::SimpleCSV::CellValueProxy& CoreTools::SimpleCSV::CellValueProxy::operator=(T&& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    if constexpr (std::is_integral_v<T> && std::is_same_v<T, bool>)
+    using DecayType = std::decay_t<T>;
+
+    if constexpr (std::is_same_v<DecayType, bool>)
     {
-        SetBoolean(value);
+        SetBoolean(std::forward<T>(rhs));
     }
-    else if constexpr (std::is_integral_v<T> && !std::is_same_v<T, bool>)
+    else if constexpr (std::is_integral_v<DecayType>)
     {
-        SetInteger(value);
+        SetInteger(std::forward<T>(rhs));
     }
-    else if constexpr (std::is_floating_point_v<T>)
+    else if constexpr (std::is_floating_point_v<DecayType>)
     {
-        SetFloat(value);
+        SetFloat(std::forward<T>(rhs));
     }
-    else if constexpr (std::is_same_v<T, std::string> && !std::is_same_v<T, bool> && !std::is_same_v<T, CellValue>)
+    else if constexpr (std::is_same_v<DecayType, CellValue>)
     {
-        SetString(value);
+        SetCellValue(std::forward<T>(rhs));
     }
-    else if constexpr (std::is_constructible_v<T, const char*> && !std::is_same_v<T, bool> && !std::is_same_v<T, CellValue>)
+    else if constexpr (std::is_same_v<DecayType, std::string>)
     {
-        if constexpr (std::is_same<const char*, typename std::remove_reference<typename std::remove_cv<T>::type>::type>::value)
-        {
-            SetString(value);
-        }
-        else if constexpr (std::is_same<std::string_view, T>::value)
-        {
-            SetString(std::string{ value });
-        }
-        else
-        {
-            SetString(value);
-        }
+        SetString(std::forward<T>(rhs));
     }
-    else if constexpr (std::is_same_v<T, CellValue>)
+    else if constexpr (std::is_same_v<DecayType, std::string_view>)
     {
-        switch (value.GetType())
-        {
-            case ValueType::Boolean:
-            {
-                SetBoolean(value.template Get<bool>());
-                break;
-            }
-            case ValueType::Integer:
-            {
-                SetInteger(value.template Get<int64_t>());
-                break;
-            }
-            case ValueType::Float:
-            {
-                SetFloat(value.template Get<double>());
-                break;
-            }
-            case ValueType::String:
-            {
-                SetString(value.template Get<std::string>());
-                break;
-            }
-            default:
-            {
-                break;
-            }
-        }
+        SetString(std::string{ std::forward<T>(rhs) });
+    }
+    else if constexpr (std::is_constructible_v<DecayType, char*>)
+    {
+        SetString(rhs);
     }
 
     return *this;
 }
 
 template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, const char*> || std::is_same_v<T, std::string> || std::is_same_v<T, CoreTools::SimpleCSV::CellValue>>::type*>
-void CoreTools::SimpleCSV::CellValueProxy::Set(T value)
+          typename std::enable_if_t<CoreTools::TextParsing::cellValueProxyCondition<T> ||
+                                    std::is_same_v<std::decay_t<T>, CoreTools::SimpleCSV::CellValue>>*>
+void CoreTools::SimpleCSV::CellValueProxy::Set(T&& rhs)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    *this = value;
+    *this = std::forward<T>(rhs);
 }
 
-template <typename T,
-          typename std::enable_if<std::is_integral_v<T> || std::is_floating_point_v<T> || std::is_constructible_v<T, char*> || std::is_same_v<T, std::string>>::type*>
+template <typename T, typename std::enable_if_t<CoreTools::TextParsing::cellValueCondition<T>>*>
 T CoreTools::SimpleCSV::CellValueProxy::Get() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;

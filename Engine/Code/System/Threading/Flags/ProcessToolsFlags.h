@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 11:22)
+///	引擎版本：0.8.0.0 (2021/12/12 16:51)
 
 #ifndef SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H
 #define SYSTEM_THREADING_PROCESS_TOOLS_FLAGS_H

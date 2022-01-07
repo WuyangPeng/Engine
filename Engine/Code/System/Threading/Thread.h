@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/25 14:42)
+///	引擎版本：0.8.0.0 (2021/12/12 18:09)
 
 #ifndef SYSTEM_THREADING_THREAD_H
 #define SYSTEM_THREADING_THREAD_H
@@ -55,7 +55,7 @@ namespace System
     void SYSTEM_DEFAULT_DECLARE EndSystemThread(unsigned retCode) noexcept;
 
     NODISCARD bool SYSTEM_DEFAULT_DECLARE IsThreadHandleValid(ThreadHandle threadHandle) noexcept;
-    WindowsDWord SYSTEM_DEFAULT_DECLARE ExitSystemThread(WindowsDWord exitCode) noexcept;
+    NODISCARD WindowsDWord SYSTEM_DEFAULT_DECLARE ExitSystemThread(WindowsDWord exitCode) noexcept;
 }
 
 #endif  // SYSTEM_THREADING_THREAD_H

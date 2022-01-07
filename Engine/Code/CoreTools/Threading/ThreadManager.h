@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/01 13:22)
+///	引擎版本：0.8.0.0 (2021/12/18 1:22)
 
 #ifndef CORE_TOOLS_THREADING_THREAD_MANAGER_H
 #define CORE_TOOLS_THREADING_THREAD_MANAGER_H
@@ -27,13 +27,12 @@ namespace CoreTools
         using ThreadSize = System::WindowsSize;
 
     public:
-        explicit ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow);
-        ~ThreadManager() noexcept = default;
-        ThreadManager(const ThreadManager& rhs) noexcept = delete;
-        ThreadManager& operator=(const ThreadManager& rhs) noexcept = delete;
-        ThreadManager(ThreadManager&& rhs) noexcept = delete;
-        ThreadManager& operator=(ThreadManager&& rhs) noexcept = delete;
+        NODISCARD static ThreadManager Create();
 
+    private:
+        explicit ThreadManager(MAYBE_UNUSED DisableNotThrow disableNotThrow);
+
+    public:
         CLASS_INVARIANT_DECLARE;
 
         void AddThread(void* function, void* userData, int processorNumber = 0, ThreadSize stackSize = 0);

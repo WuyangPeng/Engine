@@ -75,6 +75,8 @@ void BookExperience::TestingHelper::AddEffectiveModernCppSuite()
     ADD_TEST(effectiveModernCppSuite, EffectiveModernCpp::Chapter2::EffectiveModernCppChapter2ExampleTesting);
     ADD_TEST(effectiveModernCppSuite, EffectiveModernCpp::Chapter3::EffectiveModernCppChapter3ExampleTesting);
     ADD_TEST(effectiveModernCppSuite, EffectiveModernCpp::Chapter4::EffectiveModernCppChapter4ExampleTesting);
+    ADD_TEST(effectiveModernCppSuite, EffectiveModernCpp::Chapter5::EffectiveModernCppChapter5ExampleTesting);
+    ADD_TEST(effectiveModernCppSuite, EffectiveModernCpp::Chapter6::EffectiveModernCppChapter6ExampleTesting);
 
     AddSuite(effectiveModernCppSuite);
 }

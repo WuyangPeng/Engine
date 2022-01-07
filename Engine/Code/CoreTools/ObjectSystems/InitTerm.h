@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/21 20:59)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 16:06)
 
 #ifndef CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_H
 #define CORE_TOOLS_OBJECT_SYSTEMS_INIT_TERM_H
@@ -30,8 +30,8 @@ namespace CoreTools
         static void ExecuteTerminators();
 
     private:
-        [[nodiscard]] static InitTermContainer& GetInitializer() noexcept;
-        [[nodiscard]] static InitTermContainer& GetTerminator() noexcept;
+        NODISCARD static InitTermContainer& GetInitializer() noexcept;
+        NODISCARD static InitTermContainer& GetTerminator() noexcept;
     };
 }
 

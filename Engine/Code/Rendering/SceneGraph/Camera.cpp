@@ -185,7 +185,7 @@ int Rendering::Camera
 }
 
 uint64_t Rendering::Camera
-    ::Register( const CoreTools::ObjectRegisterSharedPtr& target ) const
+    ::Register( CoreTools::ObjectRegister& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -193,7 +193,7 @@ uint64_t Rendering::Camera
 }
 
 void Rendering::Camera
-    ::Save (const CoreTools::BufferTargetSharedPtr& target) const
+    ::Save (CoreTools::BufferTarget& target) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_1;
     
@@ -207,7 +207,7 @@ void Rendering::Camera
 }
 
 void Rendering::Camera
-    ::Link (const CoreTools::ObjectLinkSharedPtr& source)
+    ::Link (CoreTools::ObjectLink& source)
 {
 	;
     
@@ -223,7 +223,7 @@ void Rendering::Camera
 }
 
 void Rendering::Camera
-    ::Load (const CoreTools::BufferSourceSharedPtr& source)
+    ::Load (CoreTools::BufferSource& source)
 {
 	;
   

@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/07/11 14:22)
+///	引擎版本：0.8.0.0 (2021/12/13 23:00)
 
 #include "System/SystemExport.h"
 
@@ -21,7 +21,7 @@ void System::AndroidInputQueueAttachLooper(AndroidInputQueue* queue, AndroidLoop
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidInputQueue*, AndroidLooper*, LooperID, AndroidLooperCallbackFunc, void*>(queue, looper, ident, callback, data);
+    UnusedFunction(queue, looper, ident, callback, data);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -34,7 +34,7 @@ void System::AndroidInputQueueDetachLooper(AndroidInputQueue* queue) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidInputQueue*>(queue);
+    UnusedFunction(queue);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
@@ -47,7 +47,7 @@ int32_t System::AndroidInputQueueHasEvents(AndroidInputQueue* queue) noexcept
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidInputQueue*>(queue);
+    UnusedFunction(queue);
 
     return 0;
 
@@ -84,7 +84,7 @@ int32_t System::AndroidInputQueuePreDispatchEvent(AndroidInputQueue* queue, Andr
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidInputQueue*, AndroidInputEvent*>(queue, event);
+    UnusedFunction(queue, event);
 
     return 1;
 
@@ -99,7 +99,7 @@ void System::AndroidInputQueueFinishEvent(AndroidInputQueue* queue, AndroidInput
 
 #else  // !SYSTEM_PLATFORM_ANDROID
 
-    NullFunction<AndroidInputQueue*, AndroidInputEvent*, int32_t>(queue, event, handled);
+    UnusedFunction(queue, event, handled);
 
 #endif  // SYSTEM_PLATFORM_ANDROID
 }

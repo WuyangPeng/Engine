@@ -1150,7 +1150,7 @@
     <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.h">
       <Filter>HelperSuite 头文件\ConfigMacro</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.h">
+    <ClInclude Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.h">
       <Filter>HelperSuite 头文件\WindowsMacro</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\FreeLibraryTesting.h">
@@ -2154,7 +2154,7 @@
     <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\ConfigMacro\StdLibConfigTesting.cpp">
       <Filter>HelperSuite 源文件\ConfigMacro</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\NullFunctionTesting.cpp">
+    <ClCompile Include="..\..\..\Code\System\SystemTesting\HelperSuite\WindowsMacro\UnusedFunctionTesting.cpp">
       <Filter>HelperSuite 源文件\WindowsMacro</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\System\SystemTesting\DynamicLinkSuite\LoadLibrary\LoadLibraryTesting.cpp">

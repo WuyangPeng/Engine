@@ -60,20 +60,20 @@ NaturalSpline2<Real>::~NaturalSpline2 ()
 template <typename Real>
 void NaturalSpline2<Real>::CreateFreeSpline ()
 {
-    Real* dt = NEW1<Real>(mNumSegments);
+    Real* dt = nullptr;  // NEW1<Real>(mNumSegments);
     int i;
     for (i = 0; i < mNumSegments; ++i)
     {
         dt[i] = mTimes[i+1] - mTimes[i];
     }
 
-    Real* d2t = NEW1<Real>(mNumSegments);
+    Real* d2t = nullptr;  // NEW1<Real>(mNumSegments);
     for (i = 1; i < mNumSegments; ++i)
     {
         d2t[i] = mTimes[i+1] - mTimes[i-1];
     }
 
-    Vector2D<Real>* alpha = NEW1<Vector2D<Real> >(mNumSegments);
+    Vector2D<Real>* alpha = nullptr;  //  NEW1<Vector2D<Real> >(mNumSegments);
     for (i = 1; i < mNumSegments; ++i)
     {
 		auto numer = (static_cast<Real>(3))*(mA[i+1]*dt[i-1] - mA[i]*d2t[i] +mA[i-1]*dt[i]);
@@ -81,9 +81,9 @@ void NaturalSpline2<Real>::CreateFreeSpline ()
         alpha[i] = invDenom*numer;
     }
 
-    Real* ell = NEW1<Real>(mNumSegments + 1);
-    Real* mu = NEW1<Real>(mNumSegments);
-    Vector2D<Real>* z = NEW1<Vector2D<Real> >(mNumSegments + 1);
+    Real* ell = nullptr;  // NEW1<Real>(mNumSegments + 1);
+    Real* mu = nullptr;  // NEW1<Real>(mNumSegments);
+    Vector2D<Real>* z = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments + 1);
     Real inv;
 
     ell[0] = Math::GetValue(1);
@@ -99,9 +99,9 @@ void NaturalSpline2<Real>::CreateFreeSpline ()
     ell[mNumSegments] = Math::GetValue(1);
     z[mNumSegments] = Vector2D<Real>::sm_Zero;
 
-    mB = NEW1<Vector2D<Real> >(mNumSegments);
-    mC = NEW1<Vector2D<Real> >(mNumSegments + 1);
-    mD = NEW1<Vector2D<Real> >(mNumSegments);
+    mB = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+    mC = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments + 1);
+    mD = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
 
     mC[mNumSegments] = Vector2D<Real>::sm_Zero;
 
@@ -114,83 +114,83 @@ void NaturalSpline2<Real>::CreateFreeSpline ()
         mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
     }
 
-    DELETE1(dt);
-    DELETE1(d2t);
-    DELETE1(alpha);
-    DELETE1(ell);
-    DELETE1(mu);
-    DELETE1(z);
+//     DELETE1(dt);
+//     DELETE1(d2t);
+//     DELETE1(alpha);
+//     DELETE1(ell);
+//     DELETE1(mu);
+//     DELETE1(z);
 }
 
 template <typename Real>
 void NaturalSpline2<Real>::CreateClampedSpline ( const Vector2D<Real>& derivativeStart, const Vector2D<Real>& derivativeFinal)
 {
-	auto dt = NEW1<Real>(mNumSegments);
-    int i;
-    for (i = 0; i < mNumSegments; ++i)
-    {
-        dt[i] = mTimes[i+1] - mTimes[i];
-    }
+//     auto dt = nullptr;  //  NEW1<Real>(mNumSegments);
+//     int i;
+//     for (i = 0; i < mNumSegments; ++i)
+//     {
+//         dt[i] = mTimes[i+1] - mTimes[i];
+//     }
+// 
+//     Real* d2t = nullptr;  // NEW1<Real>(mNumSegments);
+//     for (i = 1; i < mNumSegments; ++i)
+//     {
+//         d2t[i] = mTimes[i+1] - mTimes[i-1];
+//     }
+// 
+// 	auto alpha = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments + 1);
+// 	auto inv = (Math::GetValue(1))/dt[0];
+//     alpha[0] = (static_cast<Real>(3))*(inv*(mA[1] - mA[0]) - derivativeStart);
+//     inv = (Math::GetValue(1))/dt[mNumSegments-1];
+//     alpha[mNumSegments] = (static_cast<Real>(3))*(derivativeFinal -  inv*(mA[mNumSegments] - mA[mNumSegments-1]));
+//     for (i = 1; i < mNumSegments; ++i)
+//     {
+// 		auto numer = (static_cast<Real>(3))*(mA[i+1]*dt[i-1] - mA[i]*d2t[i] + mA[i-1]*dt[i]);
+// 		auto invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
+//         alpha[i] = invDenom*numer;
+//     }
+// 
+//     Real* ell = nullptr;  // NEW1<Real>(mNumSegments + 1);
+//     Real* mu = nullptr;  // NEW1<Real>(mNumSegments);
+//     Vector2D<Real>* z = nullptr;  //  NEW1<Vector2D<Real> >(mNumSegments + 1);
+// 
+//     ell[0] = (Math::GetValue(2))*dt[0];
+//     mu[0] = Real{0.5};
+//     inv = (Math::GetValue(1))/ell[0];
+//     z[0] = inv*alpha[0];
+// 
+//     for (i = 1; i < mNumSegments; ++i)
+//     {
+//         ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
+//         inv = (Math::GetValue(1))/ell[i];
+//         mu[i] = inv*dt[i];
+//         z[i] = inv*(alpha[i] - z[i-1]*dt[i-1]);
+//     }
+//     ell[mNumSegments] = dt[mNumSegments-1]*(Math::GetValue(2) - mu[mNumSegments-1]);
+//     inv = (Math::GetValue(1))/ell[mNumSegments];
+//     z[mNumSegments] = inv*(alpha[mNumSegments] -  z[mNumSegments-1]*dt[mNumSegments-1]);
+// 
+//     mB = nullptr;  //  NEW1<Vector2D<Real> >(mNumSegments);
+//     mC = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments + 1);
+//     mD = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+// 
+//     mC[mNumSegments] = z[mNumSegments];
+// 
+//     const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
+//     for (i = mNumSegments-1; i >= 0; --i)
+//     {
+//         mC[i] = z[i] - mu[i]*mC[i+1];
+//         inv = (Math::GetValue(1))/dt[i];
+//         mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
+//         mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
+//     }
 
-    Real* d2t = NEW1<Real>(mNumSegments);
-    for (i = 1; i < mNumSegments; ++i)
-    {
-        d2t[i] = mTimes[i+1] - mTimes[i-1];
-    }
-
-	auto alpha = NEW1<Vector2D<Real> >(mNumSegments + 1);
-	auto inv = (Math::GetValue(1))/dt[0];
-    alpha[0] = (static_cast<Real>(3))*(inv*(mA[1] - mA[0]) - derivativeStart);
-    inv = (Math::GetValue(1))/dt[mNumSegments-1];
-    alpha[mNumSegments] = (static_cast<Real>(3))*(derivativeFinal -  inv*(mA[mNumSegments] - mA[mNumSegments-1]));
-    for (i = 1; i < mNumSegments; ++i)
-    {
-		auto numer = (static_cast<Real>(3))*(mA[i+1]*dt[i-1] - mA[i]*d2t[i] + mA[i-1]*dt[i]);
-		auto invDenom = (Math::GetValue(1))/(dt[i-1]*dt[i]);
-        alpha[i] = invDenom*numer;
-    }
-
-    Real* ell = NEW1<Real>(mNumSegments + 1);
-    Real* mu = NEW1<Real>(mNumSegments);
-    Vector2D<Real>* z = NEW1<Vector2D<Real> >(mNumSegments + 1);
-
-    ell[0] = (Math::GetValue(2))*dt[0];
-    mu[0] = Real{0.5};
-    inv = (Math::GetValue(1))/ell[0];
-    z[0] = inv*alpha[0];
-
-    for (i = 1; i < mNumSegments; ++i)
-    {
-        ell[i] = (Math::GetValue(2))*d2t[i] - dt[i-1]*mu[i-1];
-        inv = (Math::GetValue(1))/ell[i];
-        mu[i] = inv*dt[i];
-        z[i] = inv*(alpha[i] - z[i-1]*dt[i-1]);
-    }
-    ell[mNumSegments] = dt[mNumSegments-1]*(Math::GetValue(2) - mu[mNumSegments-1]);
-    inv = (Math::GetValue(1))/ell[mNumSegments];
-    z[mNumSegments] = inv*(alpha[mNumSegments] -  z[mNumSegments-1]*dt[mNumSegments-1]);
-
-    mB = NEW1<Vector2D<Real> >(mNumSegments);
-    mC = NEW1<Vector2D<Real> >(mNumSegments + 1);
-    mD = NEW1<Vector2D<Real> >(mNumSegments);
-
-    mC[mNumSegments] = z[mNumSegments];
-
-    const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
-    for (i = mNumSegments-1; i >= 0; --i)
-    {
-        mC[i] = z[i] - mu[i]*mC[i+1];
-        inv = (Math::GetValue(1))/dt[i];
-        mB[i] = inv*(mA[i+1] - mA[i]) - oneThird*dt[i]*(mC[i+1] + (Math::GetValue(2))*mC[i]);
-        mD[i] = oneThird*inv*(mC[i+1] - mC[i]);
-    }
-
-    DELETE1(dt);
-    DELETE1(d2t);
-    DELETE1(alpha);
-    DELETE1(ell);
-    DELETE1(mu);
-    DELETE1(z);
+//     DELETE1(dt);
+//     DELETE1(d2t);
+//     DELETE1(alpha);
+//     DELETE1(ell);
+//     DELETE1(mu);
+//     DELETE1(z);
 }
 
 template <typename Real>
@@ -201,7 +201,7 @@ void NaturalSpline2<Real>::CreateClosedSpline ()
     // linear solver can be used.  The current linear system code does not
     // have such a solver.
 
-    Real* dt = NEW1<Real>(mNumSegments);
+    Real* dt = nullptr;  // NEW1<Real>(mNumSegments);
     int i;
     for (i = 0; i < mNumSegments; ++i)
     {
@@ -223,7 +223,7 @@ void NaturalSpline2<Real>::CreateClosedSpline ()
     mat[mNumSegments][1] = dt[0];
 
     // Construct right-hand side of system.
-    mC = NEW1<Vector2D<Real> >(mNumSegments + 1);
+    mC = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments + 1);
     mC[0] = Vector2D<Real>::sm_Zero;
     Real inv0, inv1;
     for (i = 1; i <= mNumSegments-1; ++i)
@@ -237,8 +237,8 @@ void NaturalSpline2<Real>::CreateClosedSpline ()
     mC[mNumSegments] = (static_cast<Real>(3))*(inv0*(mA[1] - mA[0]) - inv1*(mA[0] - mA[mNumSegments-1]));
 
     // Solve the linear systems.
-    Real* input = NEW1<Real>(mNumSegments + 1);
-    Real* output = NEW1<Real>(mNumSegments + 1);
+    Real* input = nullptr;  // NEW1<Real>(mNumSegments + 1);
+    Real* output = nullptr;  //  NEW1<Real>(mNumSegments + 1);
 
     for (i = 0; i <= mNumSegments; ++i)
     {
@@ -265,8 +265,8 @@ void NaturalSpline2<Real>::CreateClosedSpline ()
     // End linear system solving.
 
     const Real oneThird = (Math::GetValue(1))/static_cast<Real>(3);
-    mB = NEW1<Vector2D<Real> >(mNumSegments);
-    mD = NEW1<Vector2D<Real> >(mNumSegments);
+    mB = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
+    mD = nullptr;  // NEW1<Vector2D<Real> >(mNumSegments);
     for (i = 0; i < mNumSegments; ++i)
     {
         inv0 = (Math::GetValue(1))/dt[i];

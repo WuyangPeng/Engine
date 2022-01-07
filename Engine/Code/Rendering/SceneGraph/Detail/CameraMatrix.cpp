@@ -425,37 +425,37 @@ void Rendering::CameraMatrix
     UpdateProjectionViewMatrix();
 }
 
-void Rendering::CameraMatrix ::Load(const CoreTools::BufferSourceSharedPtr& source)
+void Rendering::CameraMatrix ::Load(CoreTools::BufferSource& source)
 {
 	RENDERING_CLASS_IS_VALID_9;
     
     m_WorldCoordinateFrame.Load(source);
     m_CameraFrustum.Load(source);
  
-    source->ReadAggregate(m_PreViewMatrix);
-    m_PreViewIsIdentity = source->ReadBool();
-    source->ReadAggregate(m_PostProjectionMatrix);
-    m_PostProjectionIsIdentity = source->ReadBool();
-    source->Read(m_Epsilon);
+    source.ReadAggregate(m_PreViewMatrix);
+    m_PreViewIsIdentity = source.ReadBool();
+    source.ReadAggregate(m_PostProjectionMatrix);
+    m_PostProjectionIsIdentity = source.ReadBool();
+    source.Read(m_Epsilon);
     
     // 计算m_ProjectionMatrix[].
     OnFrustumChange();
 }
 
 void Rendering::CameraMatrix
-    ::Save( const CoreTools::BufferTargetSharedPtr& target ) const
+    ::Save( CoreTools::BufferTarget& target ) const
 {
 	RENDERING_CLASS_IS_VALID_CONST_9;
     
     m_WorldCoordinateFrame.Save(target);
     m_CameraFrustum.Save(target);
  
-    target->WriteAggregate(m_PreViewMatrix);
-    target->Write(m_PreViewIsIdentity);
-    target->WriteAggregate(m_PostProjectionMatrix);
-    target->Write(m_PostProjectionIsIdentity);
+    target.WriteAggregate(m_PreViewMatrix);
+    target.Write(m_PreViewIsIdentity);
+    target.WriteAggregate(m_PostProjectionMatrix);
+    target.Write(m_PostProjectionIsIdentity);
     
-    target->Write(m_Epsilon);
+    target.Write(m_Epsilon);
     
     // 这里不保存m_ProjectionMatrix[]和m_ProjectionViewMatrix[]。
 }

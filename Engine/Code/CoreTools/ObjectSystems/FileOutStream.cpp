@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/22 15:07)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/24 23:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,7 +21,7 @@
 using std::string;
 
 CoreTools::FileOutStream::FileOutStream(const OutTopLevel& topLevel)
-    : m_BufferOutStream{ topLevel }
+    : bufferOutStream{ topLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -37,7 +37,7 @@ void CoreTools::FileOutStream::Save(const String& fileName)
     // 保存该文件的版本号到磁盘。
     CFileManagerHelper::SaveIntoFile(fileName, true, boost::numeric_cast<int>(version.size()), version.c_str());
 
-    auto fileBufferPtr = m_BufferOutStream.GetBufferOutStreamInformation();
+    auto fileBufferPtr = bufferOutStream.GetBufferOutStreamInformation();
 
     // 保存场景图从内存到磁盘。
     CFileManagerHelper::AppendToFile(fileName, true, boost::numeric_cast<int>(fileBufferPtr->GetSize()), fileBufferPtr->GetBufferBegin());

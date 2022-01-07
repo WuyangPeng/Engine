@@ -321,3 +321,19 @@ CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(con
 
     return *this;
 }
+
+CoreTools::LogAppenderIOManager& CoreTools::LogAppenderIOManager::operator<<(const std::string_view& message) noexcept
+{
+    try
+    {
+        ScopedMutex scopedMutex{ m_LogAppenderIOManagerMutex };
+
+        *impl << message;
+    }
+    catch (...)
+    {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManager operator<<Å×³öÒì³£"));
+    }
+
+    return *this;
+}

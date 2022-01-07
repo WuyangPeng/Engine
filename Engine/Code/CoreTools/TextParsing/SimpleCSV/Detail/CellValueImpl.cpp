@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.4 (2021/10/08 15:52)
+///	引擎版本：0.8.0.0 (2021/12/20 21:23)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,8 @@
 #include "CoreTools/TextParsing/SimpleCSV/CellValueProxy.h"
 #include "CoreTools/TextParsing/SimpleCSV/Flags/ValueTypeFlags.h"
 
-using namespace std::literals;
 using std::string;
+using namespace std::literals;
 
 CoreTools::SimpleCSV::CellValueImpl::CellValueImpl() noexcept
     : m_Value{ string{} }, m_Type{ ValueType::Empty }

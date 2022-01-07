@@ -18,7 +18,7 @@ namespace CoreTools
 
 	private:
 		void MainTest();
-		void MemoryTest();
+            void MemoryTest() noexcept;
 
 		void DoRunUnitTest() override;
 	};

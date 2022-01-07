@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/08/31 22:51)
+///	引擎版本：0.8.0.0 (2021/12/18 1:24)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,28 +34,35 @@ CoreTools::MutexFactory::MutexImplSharedPtr CoreTools::MutexFactory::Create(Mute
 
         case MutexCreate::UseDefault:
             return make_shared<WindowsMutex>();
+
         case MutexCreate::UseCriticalSection:
             return make_shared<CriticalSection>();
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
         case MutexCreate::UseDefault:
+            FALLTHROUGH;
         case MutexCreate::UseCriticalSection:
             return make_shared<ThreadMutex>();
 
 #endif  // SYSTEM_PLATFORM_WIN32
 
         case MutexCreate::UseStd:
+            FALLTHROUGH;
         case MutexCreate::UseOriginalStd:
             return make_shared<StdMutex>();
+
         case MutexCreate::UseStdRecursive:
+            FALLTHROUGH;
         case MutexCreate::UseOriginalStdRecursive:
             return make_shared<StdRecursiveMutex>();
+
         case MutexCreate::UseBoost:
             return make_shared<BoostMutex>();
+
         case MutexCreate::UseBoostRecursive:
             return make_shared<BoostRecursiveMutex>();
-        case MutexCreate::UseNull:
+
         default:
             return make_shared<NullMutex>();
     }

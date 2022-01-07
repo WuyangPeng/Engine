@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.6 (2021/06/28 19:19)
+///	引擎版本：0.8.0.0 (2021/12/13 13:36)
 
 #include "System/SystemExport.h"
 
@@ -15,6 +15,7 @@
 #include "System/Helper/Detail/OpenGL/GLUtilityMacro.h"
 #include "System/Helper/Noexcept.h"
 #include "System/Helper/Platform.h"
+#include "System/Helper/PragmaWarning/Algorithm.h"
 #include "System/OpenGL/Flags/GLExtensionsFlags.h"
 #include "System/OpenGL/OpenGLWglPrototypes.h"
 
@@ -24,6 +25,7 @@
 
 using std::array;
 using std::cout;
+using std::string;
 using std::vector;
 using namespace std::literals;
 
@@ -134,17 +136,11 @@ const char* System::GetOpenGLErrorString(OpenGLErrorCode code) noexcept
 
 void System::PrintExtensionsInfo(const char* extensions)
 {
-    const auto length = Strlen(extensions) + 1;
-    vector<char> ext(length);
-    if (Strcpy(ext.data(), length, extensions))
+    vector<string> token{};
+    boost::algorithm::split(token, extensions, boost::is_any_of(" \t\n"), boost::token_compress_on);
+    for (const auto& value : token)
     {
-        char* next{ nullptr };
-        auto token = Strtok(ext.data(), " \t\n", &next);
-        while (token != nullptr)
-        {
-            cout << "    " << token << "\n";
-            token = Strtok(nullptr, " \t\n", &next);
-        }
+        cout << "    " << value << "\n";
     }
 }
 
@@ -173,7 +169,7 @@ namespace System
 
 void* System::GetOpenGLFunctionPointer(const char* glFunction) noexcept
 {
-    return System::Noexcept<void*, const char*>(DoGetOpenGLFunctionPointer, glFunction, nullptr);
+    return System::Noexcept<void*>(DoGetOpenGLFunctionPointer, glFunction, nullptr);
 }
 
 #elif defined(SYSTEM_PLATFORM_LINUX)

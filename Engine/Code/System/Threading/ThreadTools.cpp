@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.3 (2021/04/26 19:39)
+///	引擎版本：0.8.0.0 (2021/12/12 19:18)
 
 #include "System/SystemExport.h"
 
@@ -22,7 +22,7 @@ System::ThreadHandle System::OpenSystemThread(ThreadStandardAccess standardDesir
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadStandardAccess, ThreadSpecificAccess, bool, WindowsDWord>(standardDesiredAccess, specificDesiredAccess, inheritHandle, threadID);
+    UnusedFunction(standardDesiredAccess, specificDesiredAccess, inheritHandle, threadID);
 
     return nullptr;
 
@@ -40,7 +40,7 @@ bool System::GetThreadExitCode(ThreadHandle thread, WindowsDWordPtr exitCode) no
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, WindowsDWordPtr>(thread, exitCode);
+    UnusedFunction(thread, exitCode);
 
     return false;
 
@@ -55,7 +55,7 @@ System::WindowsDWord System::GetSystemThreadID(ThreadHandle thread) noexcept
 
 #else  // !SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle>(thread);
+    UnusedFunction(thread);
 
     return 0;
 
@@ -73,7 +73,7 @@ bool System::SetSystemThreadPriorityBoost(ThreadHandle thread, bool disablePrior
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, bool>(thread, disablePriorityBoost);
+    UnusedFunction(thread, disablePriorityBoost);
 
     return false;
 
@@ -98,7 +98,7 @@ bool System::GetSystemThreadPriorityBoost(ThreadHandle thread, bool* disablePrio
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, WindowsBoolPtr>(thread, disablePriorityBoost);
+    UnusedFunction(thread, disablePriorityBoost);
 
     return false;
 
@@ -116,7 +116,7 @@ bool System::OpenSystemThreadToken(ThreadHandle thread, TokenStandardAccess stan
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, TokenStandardAccess, TokenSpecificAccess, bool, WindowsHandlePtr>(thread, standardAccess, specificAccess, openAsSelf, tokenHandle);
+    UnusedFunction(thread, standardAccess, specificAccess, openAsSelf, tokenHandle);
 
     return false;
 
@@ -134,7 +134,7 @@ bool System::SetSystemThreadToken(ThreadHandlePtr thread, WindowsHandle tokenHan
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandlePtr, WindowsHandle>(thread, tokenHandle);
+    UnusedFunction(thread, tokenHandle);
 
     return false;
 
@@ -152,7 +152,7 @@ bool System::GetSystemThreadTimes(ThreadHandle thread, FileTimePtr creationTime,
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<ThreadHandle, FileTimePtr, FileTimePtr, FileTimePtr, FileTimePtr>(thread, creationTime, exitTime, kernelTime, userTime);
+    UnusedFunction(thread, creationTime, exitTime, kernelTime, userTime);
 
     return false;
 
@@ -170,7 +170,7 @@ bool System::CloseTokenHandle(WindowsHandle tokenHandle) noexcept
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<WindowsHandle>(tokenHandle);
+    UnusedFunction(tokenHandle);
 
     return false;
 
@@ -187,7 +187,7 @@ bool System::ImpersonateThreadSelf(SecurityImpersonationLevel securityImpersonat
 
 #else  // SYSTEM_PLATFORM_WIN32
 
-    NullFunction<SecurityImpersonationLevel>(securityImpersonationLevel);
+    UnusedFunction(securityImpersonationLevel);
 
     return false;
 

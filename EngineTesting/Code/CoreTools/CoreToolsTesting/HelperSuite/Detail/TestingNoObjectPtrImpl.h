@@ -25,11 +25,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        void Load(const BufferSourceSharedPtr& source) noexcept;
-        void Link(const ObjectLinkSharedPtr source) noexcept;
+        void Load(BufferSource& source) noexcept;
+        void Link(ObjectLink& source) noexcept;
 
-        void Register(const ObjectRegisterSharedPtr& target) const noexcept;
-        void Save(const BufferTargetSharedPtr& target) const noexcept;
+        void Register(ObjectRegister& target) const noexcept;
+        void Save(BufferTarget& target) const noexcept;
         NODISCARD int GetStreamingSize() const noexcept;
     };
 }

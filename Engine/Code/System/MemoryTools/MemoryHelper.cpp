@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.2 (2021/04/19 19:28)
+///	引擎版本：0.8.0.0 (2021/12/13 14:46)
 
 #include "System/SystemExport.h"
 
@@ -31,7 +31,9 @@ void* System::MallocMemory(size_t size) noexcept
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26408)
+
     return ::malloc(size);
+
 #include STSTEM_WARNING_POP
 }
 
@@ -39,6 +41,8 @@ void System::FreeMemory(void* memory) noexcept
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26408)
+
     ::free(memory);
+
 #include STSTEM_WARNING_POP
 }

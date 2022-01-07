@@ -5,7 +5,7 @@
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.1.5 (2021/06/24 20:00)
+///	引擎版本：0.8.0.0 (2021/12/13 14:08)
 
 #include "System/SystemExport.h"
 
@@ -25,66 +25,59 @@ using std::cout;
 bool System::OpenGLInit()
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     return InitWGL();
+
 #elif defined(SYSTEM_PLATFORM_LINUX)
+
     return InitGLX();
+
 #else  // !SYSTEM_PLATFORM_WIN32 && !SYSTEM_PLATFORM_LINUX
+
     return InitGL();
+
 #endif  // SYSTEM_PLATFORM_WIN32
+}
+
+namespace System
+{
+    using FunctiorType = decltype(GetVersionString);
+    void PrintOpenGLInfo(FunctiorType function, const char* describe)
+    {
+        if (function != nullptr)
+        {
+            auto result = function();
+            if (result != nullptr)
+            {
+                cout << describe << " = " << result << "\n";
+            }
+            else
+            {
+                cout << describe << " = <null>\n";
+            }
+        }
+    }
 }
 
 void System::PrintOpenGLInfo()
 {
-    auto version = GetVersionString();
-    if (version != nullptr)
-    {
-        cout << "OpenGL version = " << version << "\n";
-    }
-    else
-    {
-        cout << " OpenGL version = <null>\n";
-    }
-
-    auto shadingLanguageVersion = GetShadingLanguageVersion();
-    if (shadingLanguageVersion != nullptr)
-    {
-        cout << "GLSL version = " << shadingLanguageVersion << "\n";
-    }
-    else
-    {
-        cout << "GLSL version = <null>\n";
-    }
-
-    auto vendor = GetVendorString();
-    if (vendor != nullptr)
-    {
-        cout << "vendor = " << vendor << "\n";
-    }
-    else
-    {
-        cout << "vendor = <null>\n";
-    }
-
-    auto renderer = GetRendererString();
-    if (renderer != nullptr)
-    {
-        cout << "renderer = " << renderer << "\n";
-    }
-    else
-    {
-        cout << "renderer = <null>\n";
-    }
+    PrintOpenGLInfo(GetVersionString, "OpenGL version");
+    PrintOpenGLInfo(GetShadingLanguageVersion, "GLSL version");
+    PrintOpenGLInfo(GetVendorString, "vendor");
+    PrintOpenGLInfo(GetRendererString, "renderer");
 
     const auto numExtensions = GetGLInteger(OpenGLQuery::NumExtensions);
 
-    cout << "extensions = ";
+    cout << "extensions =\n";
     for (auto i = 0; i < numExtensions; i++)
     {
-        cout << GLGetStringi(GL_EXTENSIONS, i) << "\n";
+        cout << "    " << GLGetStringi(GL_EXTENSIONS, i) << "\n";
     }
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     PrintWglExtensionsInfo();
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 

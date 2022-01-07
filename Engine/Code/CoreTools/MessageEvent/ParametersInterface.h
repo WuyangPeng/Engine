@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 15:30)
+///	Copyright (c) 2010-2021
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.0 (2021/12/26 18:19)
 
 #ifndef CORE_TOOLS_MESSAGE_EVENT_PARAMETERS_INTERFACE_H
 #define CORE_TOOLS_MESSAGE_EVENT_PARAMETERS_INTERFACE_H
@@ -30,21 +30,22 @@ namespace CoreTools
         using BaseSharedPtr = std::shared_ptr<ClassType>;
 
     public:
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         ParametersInterface() noexcept = default;
         virtual ~ParametersInterface() noexcept = default;
         ParametersInterface(const ParametersInterface& rhs) noexcept = default;
-        ParametersInterface& operator=(const ParametersInterface& rhs) noexcept = default;
         ParametersInterface(ParametersInterface&& rhs) noexcept = default;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26456)
+
+        ParametersInterface& operator=(const ParametersInterface& rhs) noexcept = default;
         ParametersInterface& operator=(ParametersInterface&& rhs) noexcept = default;
 
 #include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] virtual const BaseSharedPtr Clone() const;
+        NODISCARD virtual const BaseSharedPtr Clone() const;
     };
 
     CORE_TOOLS_SHARED_PTR_DECLARE(ParametersInterface);
