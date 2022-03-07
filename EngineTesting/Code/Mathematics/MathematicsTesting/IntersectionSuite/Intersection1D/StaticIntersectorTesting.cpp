@@ -6,17 +6,17 @@
 
 #include "StaticIntersectorTesting.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/StaticIntersectorTestDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 namespace Mathematics
 {
-	template class StaticIntersectorTest<float, Vector2D>;
-	template class StaticIntersectorTest<double, Vector2D>;
-	template class StaticIntersectorTest<float, Vector3D>;
-	template class StaticIntersectorTest<double, Vector3D>;
+	template class StaticIntersectorTest<float, Vector2>;
+	template class StaticIntersectorTest<double, Vector2>;
+	template class StaticIntersectorTest<float, Vector3>;
+	template class StaticIntersectorTest<double, Vector3>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticIntersectorTesting)
@@ -32,7 +32,7 @@ void Mathematics::StaticIntersectorTesting
 {
 	for (auto i = IntersectionType::Empty; i <= IntersectionType::Other; ++i)
 	{
-		StaticIntersectorTest<double, Vector3D> intersectorTest(IntersectionType(i), 1e-10);
+		StaticIntersectorTest<double, Vector3> intersectorTest(IntersectionType(i), 1e-10);
 
 		ASSERT_ENUM_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
 		ASSERT_APPROXIMATE(intersectorTest.GetEpsilon(), 1e-10, 1e-10);

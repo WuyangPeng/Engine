@@ -24,14 +24,23 @@ void Mathematics::Bisect2RootTesting ::MainTest()
     ASSERT_THROW_EXCEPTION_0(NoSolutionYTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnknownTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 void Mathematics::Bisect2RootTesting ::HaveSolutionTest()
 {
     double rootX = 9.0;
     double rootY = 19.0;
     BisectRootType type = BisectRootType::HaveSolution;
 
-    DoubleBisect2Root bisect2Root(rootX, rootY, type);
+    Bisect2RootD bisect2Root(rootX, rootY, type);
 
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-10);
     ASSERT_APPROXIMATE(bisect2Root.GetYRoot(), rootY, 1e-10);
@@ -42,7 +51,7 @@ void Mathematics::Bisect2RootTesting ::NoSolutionXTest()
 {
     BisectRootType type = BisectRootType::NoSolution;
 
-    DoubleBisect2Root bisect2Root;
+    Bisect2RootD bisect2Root;
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
 
@@ -53,7 +62,7 @@ void Mathematics::Bisect2RootTesting ::NoSolutionYTest()
 {
     BisectRootType type = BisectRootType::NoSolution;
 
-    DoubleBisect2Root bisect2Root;
+    Bisect2RootD bisect2Root;
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
 
@@ -66,7 +75,7 @@ void Mathematics::Bisect2RootTesting ::UnknownTest()
     float rootY = 29.0f;
     BisectRootType type = BisectRootType::Unknown;
 
-    FloatBisect2Root bisect2Root(rootX, rootY, type);
+    Bisect2RootF bisect2Root(rootX, rootY, type);
 
     ASSERT_ENUM_EQUAL(bisect2Root.GetBisectRootType(), type);
     ASSERT_APPROXIMATE(bisect2Root.GetXRoot(), rootX, 1e-8f);

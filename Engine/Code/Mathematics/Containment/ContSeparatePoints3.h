@@ -29,16 +29,16 @@ namespace Mathematics
 	class SeparatePoints3
 	{
 	public:
-		SeparatePoints3 (const std::vector<Vector3D<Real> >& points0, const std::vector<Vector3D<Real> >& points1, Plane3<Real>& separatingPlane);
+		SeparatePoints3 (const std::vector<Vector3<Real> >& points0, const std::vector<Vector3<Real> >& points1, Plane3<Real>& separatingPlane);
 		
 		// Return the result of the constructor call.  If 'true', the output
 		// plane 'separatingPlane' is valid.
 		operator bool ();
 		
 	private:
-		static int OnSameSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3D<Real> >& points);
+		static int OnSameSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points);
 		
-		static int WhichSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3D<Real> >& points);
+		static int WhichSide(const Plane3<Real>& plane, int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points);
 		
 		bool mSeparated;
 	};

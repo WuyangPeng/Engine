@@ -5,13 +5,16 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 09:38)
 
 #include "QuaternionConstraintsTesting.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Algebra/QuaternionConstraintsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Base/MathDetail.h"
 
 #include <random> 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::uniform_real;
 using std::default_random_engine;
 
@@ -37,7 +40,7 @@ void Mathematics::QuaternionConstraintsTesting
 	::ConstraintsTest()
 {
 	default_random_engine generator{};
-	uniform_real<float> firstRandomDistribution{ -FloatMath::GetHalfPI(),FloatMath::GetHalfPI() };
+	uniform_real<float> firstRandomDistribution{ -MathF::GetHalfPI(),MathF::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -45,31 +48,31 @@ void Mathematics::QuaternionConstraintsTesting
 	{
 		float firstAngle = firstRandomDistribution(generator);
 
-		uniform_real<float> secondRandomDistribution(firstAngle,FloatMath::GetHalfPI());
+		uniform_real<float> secondRandomDistribution(firstAngle,MathF::GetHalfPI());
 
 		float secondAngle = secondRandomDistribution(generator);
 
-		FloatQuaternionConstraints firstQuaternionConstraints(firstAngle,secondAngle);
+		QuaternionConstraintsF firstQuaternionConstraints(firstAngle,secondAngle);
 
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosMinAngle(),FloatMath::Cos(firstAngle),1e-8f);
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinMinAngle(), FloatMath::Sin(firstAngle),1e-8f);
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosMaxAngle(),FloatMath::Cos(secondAngle),1e-8f);
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinMaxAngle(),FloatMath::Sin(secondAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosMinAngle(),MathF::Cos(firstAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinMinAngle(), MathF::Sin(firstAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosMaxAngle(),MathF::Cos(secondAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinMaxAngle(),MathF::Sin(secondAngle),1e-8f);
 		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetMinAngle(),firstAngle,1e-8f);
 		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetMaxAngle(),secondAngle,1e-8f);
 
 		float avrAngle(0.5f * (firstAngle + secondAngle));
 
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosAvrAngle(),FloatMath::Cos(avrAngle),1e-8f);
-		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinAvrAngle(),FloatMath::Sin(avrAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetCosAvrAngle(),MathF::Cos(avrAngle),1e-8f);
+		ASSERT_APPROXIMATE(firstQuaternionConstraints.GetSinAvrAngle(),MathF::Sin(avrAngle),1e-8f);
 
 		uniform_real<float> thirdRandomDistribution(-100.0f,100.0f);
 
-		FloatVector2D firstVector(thirdRandomDistribution(generator),thirdRandomDistribution(generator));
+		Vector2F firstVector(thirdRandomDistribution(generator),thirdRandomDistribution(generator));
 
 		firstVector.Normalize();
 
-		float angle = FloatMath::ATan(firstVector[1] / firstVector[0]);		
+		float angle = MathF::ATan(firstVector[1] / firstVector[0]);		
 
 		if(firstAngle <= angle && angle <= secondAngle)
 		{

@@ -1,34 +1,35 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 16:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 13:50)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "CommandArgument.h"
 #include "Detail/CommandArgumentFactory.h"
 #include "Detail/CommandArgumentPackage.h"
-
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "../Contract/Flags/ImplFlags.h"
 
 using std::string;
+
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, CommandArgument)
+
 CoreTools::CommandArgument::CommandArgument(int index, const string& arguments, const string& value)
     : impl{ ImplCreateUseFactory::Default, index, arguments, value }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CoreTools::CommandArgument::CommandArgument(int index, const string& arguments)
     : impl{ ImplCreateUseFactory::Default, index, arguments }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CommandArgument)
@@ -54,11 +55,13 @@ void CoreTools::CommandArgument::AddEndArgumentValue(const string& value)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (impl.GetConstImpl()->IsNoValue())
+    // 由于重设了impl，不进行Copy调用。
+    const auto iter = impl.GetConstImpl();
+
+    if (iter->IsNoValue())
     {
-        // 由于重设了impl，不进行Copy调用。
-        const auto index = impl.GetConstImpl()->GetIndex();
-        auto arguments = impl.GetConstImpl()->GetName();
+        const auto index = iter->GetIndex();
+        auto arguments = iter->GetName();
 
         impl = PackageType{ ImplCreateUseFactory::Default, index, arguments, value };
     }

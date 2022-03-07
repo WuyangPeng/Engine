@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/09 15:13)
+///	引擎版本：0.8.0.1 (2022/01/08 0:48)
 
 #ifndef CORE_TOOLS_HELPER_USER_MACRO_H
 #define CORE_TOOLS_HELPER_USER_MACRO_H
@@ -110,5 +110,6 @@ constexpr auto g_OpenClassInvariant = false;
 #define BOOST_LIB_DIAGNOSTIC static_cast<void>(0)
 
 #include "System/Helper/PragmaWarning/Disable26444.h"
+#include "System/Helper/PragmaWarning/Disable26456.h"
 
 #endif  // CORE_TOOLS_HELPER_USER_MACRO_H

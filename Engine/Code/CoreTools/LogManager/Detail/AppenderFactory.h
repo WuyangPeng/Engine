@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 9:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/05 0:13)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FACTORY_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FACTORY_H
@@ -24,17 +24,26 @@ namespace CoreTools
     {
     public:
         using ClassType = AppenderFactory;
-        using AppenderImplPtr = std::shared_ptr<AppenderImpl>;
+        using AppenderImplSharedPtr = std::shared_ptr<AppenderImpl>;
         using String = System::String;
 
     public:
-        [[nodiscard]] static AppenderImplPtr Create(AppenderPrint appenderFlags, LogLevel logLevel);
+        NODISCARD static AppenderImplSharedPtr Create(AppenderPrint appenderFlags, LogLevel logLevel);
 
-        [[nodiscard]] static AppenderImplPtr Create(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
-                                                                int maxFileSize, bool backup, const String& extensionName);
+        NODISCARD static AppenderImplSharedPtr Create(const String& directory,
+                                                      const String& fileName,
+                                                      AppenderPrint appenderFlags,
+                                                      LogLevel logLevel,
+                                                      int maxFileSize,
+                                                      bool backup,
+                                                      const String& extensionName);
 
-        [[nodiscard]] static AppenderImplPtr Create(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
-                                                                int maxFileSize, bool backup, const String& extensionName);
+        NODISCARD static AppenderImplSharedPtr Create(const String& directory,
+                                                      AppenderPrint appenderFlags,
+                                                      LogLevel logLevel,
+                                                      int maxFileSize,
+                                                      bool backup,
+                                                      const String& extensionName);
     };
 }
 

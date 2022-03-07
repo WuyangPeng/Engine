@@ -13,7 +13,7 @@ namespace Mathematics
 {
 
 template <typename Real>
-NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
+NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, bool open)
 	: SingleCurve2<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
@@ -26,7 +26,7 @@ NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoin
 }
 
 template <typename Real>
-NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
+NURBSCurve2<Real>::NURBSCurve2 (int numCtrlPoints, const Vector2<Real>* ctrlPoint, const Real* ctrlWeight, int degree,bool loop, const Real* knot)
 	: SingleCurve2<Real>{ Math<Real>::GetValue(0), Math::GetValue(1) }, mLoop{ loop }
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
@@ -46,12 +46,12 @@ NURBSCurve2<Real>::~NURBSCurve2 ()
 }
 
 template <typename Real>
-void NURBSCurve2<Real>::CreateControl (const Vector2D<Real>* ctrlPoint, const Real* ctrlWeight)
+void NURBSCurve2<Real>::CreateControl (const Vector2<Real>* ctrlPoint, const Real* ctrlWeight)
 {
 	auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
 
-    mCtrlPoint = nullptr;  // NEW1<Vector2D<Real> >(newNumCtrlPoints);
-    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2D<Real>));
+    mCtrlPoint = nullptr;  // NEW1<Vector2<Real> >(newNumCtrlPoints);
+    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2<Real>));
 
     mCtrlWeight = nullptr;  // NEW1<Real>(newNumCtrlPoints);
     memcpy(mCtrlWeight, ctrlWeight, mNumCtrlPoints*sizeof(Real));
@@ -94,7 +94,7 @@ bool NURBSCurve2<Real>::IsLoop () const
 }
 
 template <typename Real>
-void NURBSCurve2<Real>::SetControlPoint (int i, const Vector2D<Real>& ctrl)
+void NURBSCurve2<Real>::SetControlPoint (int i, const Vector2<Real>& ctrl)
 {
     if (0 <= i && i < mNumCtrlPoints)
     {
@@ -110,14 +110,14 @@ void NURBSCurve2<Real>::SetControlPoint (int i, const Vector2D<Real>& ctrl)
 }
 
 template <typename Real>
-Vector2D<Real> NURBSCurve2<Real>::GetControlPoint (int i) const
+Vector2<Real> NURBSCurve2<Real>::GetControlPoint (int i) const
 {
     if (0 <= i && i < mNumCtrlPoints)
     {
         return mCtrlPoint[i];
     }
 
-	return Vector2D<Real>{ Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal };
+	return Vector2<Real>{ Math<Real>::maxReal, Math<Real>::maxReal };
 }
 
 template <typename Real>
@@ -144,7 +144,7 @@ Real NURBSCurve2<Real>::GetControlWeight (int i) const
         return mCtrlWeight[i];
     }
 
-    return Math<Real>::sm_MaxReal;
+    return Math<Real>::maxReal;
 }
 
 template <typename Real>
@@ -160,7 +160,7 @@ Real NURBSCurve2<Real>::GetKnot (int i) const
 }
 
 template <typename Real>
-void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, Vector2D<Real>* der2, Vector2D<Real>* der3) const
+void NURBSCurve2<Real>::Get (Real t, Vector2<Real>* pos, Vector2<Real>* der1, Vector2<Real>* der2, Vector2<Real>* der3) const
 {
     int i, imin, imax;
     if (der3)
@@ -189,7 +189,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
     Real tmp;
 
     // Compute position.
-	auto X = Vector2D<Real>::sm_Zero;
+	auto X = Vector2<Real>::sm_Zero;
 	auto w = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
@@ -210,7 +210,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
     }
 
     // Compute first derivative.
-	auto XDer1 = Vector2D<Real>::sm_Zero;
+	auto XDer1 = Vector2<Real>::sm_Zero;
 	auto wDer1 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
@@ -230,7 +230,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
     }
 
     // Compute second derivative.
-	auto XDer2 = Vector2D<Real>::sm_Zero;
+	auto XDer2 = Vector2<Real>::sm_Zero;
 	auto wDer2 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; ++i)
     {
@@ -250,7 +250,7 @@ void NURBSCurve2<Real>::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, 
     }
 
     // Compute third derivative.
-	auto XDer3 = Vector2D<Real>::sm_Zero;
+	auto XDer3 = Vector2<Real>::sm_Zero;
 	auto wDer3 = Math<Real>::GetValue(0);
     for (i = imin; i <= imax; i++)
     {
@@ -271,33 +271,33 @@ BSplineBasis<Real>& NURBSCurve2<Real>::GetBasis ()
 }
 
 template <typename Real>
-Vector2D<Real> NURBSCurve2<Real>::GetPosition (Real t) const
+Vector2<Real> NURBSCurve2<Real>::GetPosition (Real t) const
 {
-    Vector2D<Real> pos;
+    Vector2<Real> pos;
     Get(t, &pos, 0, 0, 0);
     return pos;
 }
 
 template <typename Real>
-Vector2D<Real> NURBSCurve2<Real>::GetFirstDerivative (Real t) const
+Vector2<Real> NURBSCurve2<Real>::GetFirstDerivative (Real t) const
 {
-    Vector2D<Real> der1;
+    Vector2<Real> der1;
     Get(t, 0, &der1, 0, 0);
     return der1;
 }
 
 template <typename Real>
-Vector2D<Real> NURBSCurve2<Real>::GetSecondDerivative (Real t) const
+Vector2<Real> NURBSCurve2<Real>::GetSecondDerivative (Real t) const
 {
-    Vector2D<Real> der2;
+    Vector2<Real> der2;
     Get(t, 0, 0, &der2, 0);
     return der2;
 }
 
 template <typename Real>
-Vector2D<Real> NURBSCurve2<Real>::GetThirdDerivative (Real t) const
+Vector2<Real> NURBSCurve2<Real>::GetThirdDerivative (Real t) const
 {
-    Vector2D<Real> der3;
+    Vector2<Real> der3;
     Get(t, 0, 0, 0, &der3);
     return der3;
 }

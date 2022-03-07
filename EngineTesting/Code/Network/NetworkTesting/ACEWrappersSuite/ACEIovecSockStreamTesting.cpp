@@ -65,11 +65,11 @@ void Network::ACEIovecSockStreamTesting ::MainTest()
 void Network::ACEIovecSockStreamTesting ::StreamTest()
 {
     thread firstTread{ &ClassType::ACEServerThread, this };
-    ConfigurationSubStrategy configurationSubStrategy;
+    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
 
     ConfigurationStrategy clientConfigurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ClientStrategy::OnlySending,
-                                                       MessageStrategy::Iovec, ParserStrategy::LittleEndian, OpenSSLStrategy::Default,
-                                                       configurationSubStrategy, ConfigurationParameter{}, SocketSendMessage::Default, "127.0.0.1", m_Port };
+                                                       MessageStrategy::Iovec, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default, "127.0.0.1", m_Port };
 
     SockStreamSharedPtr sockStream{ make_shared<TestingType>(clientConfigurationStrategy) };
 
@@ -78,15 +78,15 @@ void Network::ACEIovecSockStreamTesting ::StreamTest()
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        [[maybe_unused]] auto value0 = sockStream->EnableNonBlock();
+        [[maybe_unused]] const auto value0 = sockStream->EnableNonBlock();
 
         MessageBufferSharedPtr buffer{ std::make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, clientConfigurationStrategy.GetParserStrategy()) };
         buffer->AddCurrentWriteIndex(50);
 
-        [[maybe_unused]] auto value1 = sockStream->Send(buffer);
+        [[maybe_unused]] const auto value1 = sockStream->Send(buffer);
         buffer->ClearCurrentWriteIndex();
 
-        [[maybe_unused]] auto value2 = sockStream->Receive(buffer);
+        [[maybe_unused]] const auto value2 = sockStream->Receive(buffer);
     }
 
     firstTread.join();
@@ -97,7 +97,7 @@ void Network::ACEIovecSockStreamTesting ::StreamTest()
 
     if (sockConnector.Connect(sockStream, sockAddress))
     {
-        [[maybe_unused]] auto value = sockStream->EnableNonBlock();
+        [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
 
         MessageBufferSharedPtr buffer{ std::make_shared<MessageBuffer>(BuffBlockSize::Size512, 0, clientConfigurationStrategy.GetParserStrategy()) };
 
@@ -118,10 +118,10 @@ void Network::ACEIovecSockStreamTesting ::ACEServerThread()
 
 void Network::ACEIovecSockStreamTesting ::DoACEServerThread()
 {
-    ConfigurationSubStrategy configurationSubStrategy;
+    ConfigurationSubStrategy configurationSubStrategy = ConfigurationSubStrategy::Create();
     ConfigurationStrategy serverConfigurationStrategy{ WrappersStrategy::ACE, ConnectStrategy::TCP, ServerStrategy::Iterative,
-                                                       MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default,
-                                                       configurationSubStrategy, ConfigurationParameter{}, SocketSendMessage::Default, "127.0.0.1", m_Port };
+                                                       MessageStrategy::Default, ParserStrategy::LittleEndian, OpenSSLStrategy::Default, EncryptedCompressionStrategy::Default,
+                                                       configurationSubStrategy, ConfigurationParameter::Create(), SocketSendMessage::Default, "127.0.0.1", m_Port };
 
     constexpr auto messageID = 5;
     ConfigurationStrategy configurationStrategy{ serverConfigurationStrategy };
@@ -131,12 +131,12 @@ void Network::ACEIovecSockStreamTesting ::DoACEServerThread()
 
     testSocketManager->SetServerWeakPtr(server);
 
-    auto loopCount = 1;
+    constexpr auto loopCount = 1;
     for (;;)
     {
         ASSERT_TRUE(server->RunServer());
 
-        auto volatile asyncAcceptorCount = testSocketManager->GetAsyncAcceptorCount();
+        const auto volatile asyncAcceptorCount = testSocketManager->GetAsyncAcceptorCount();
 
         if (asyncAcceptorCount == loopCount)
         {

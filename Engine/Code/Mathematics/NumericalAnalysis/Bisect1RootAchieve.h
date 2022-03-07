@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:43)
+///	引擎版本：0.8.0.2 (2022/02/14 10:25)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_ACHIEVE_H
@@ -17,24 +17,26 @@
 
 template <typename Real>
 Mathematics::Bisect1Root<Real>::Bisect1Root() noexcept
-    : m_Root{}, m_Bisect1RootType{ BisectRootType::NoSolution }
+    : root{}, bisect1RootType{ BisectRootType::NoSolution }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Bisect1Root<Real>::Bisect1Root(Real root, BisectRootType type) noexcept
-    : m_Root{ root }, m_Bisect1RootType{ type }
+    : root{ root }, bisect1RootType{ type }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Bisect1Root<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -42,9 +44,9 @@ Real Mathematics::Bisect1Root<Real>::GetRoot() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_Bisect1RootType != BisectRootType::NoSolution)
+    if (bisect1RootType != BisectRootType::NoSolution)
     {
-        return m_Root;
+        return root;
     }
     else
     {
@@ -57,7 +59,7 @@ Mathematics::BisectRootType Mathematics::Bisect1Root<Real>::GetBisect1RootType()
 {
     CLASS_IS_VALID_CONST;
 
-    return m_Bisect1RootType;
+    return bisect1RootType;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ROOT_ACHIEVE_H

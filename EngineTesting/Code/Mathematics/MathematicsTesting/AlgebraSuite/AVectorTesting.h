@@ -24,7 +24,7 @@ namespace Mathematics
 		void VectorCalculateTest();
 		void OtherCalculateTest();	
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

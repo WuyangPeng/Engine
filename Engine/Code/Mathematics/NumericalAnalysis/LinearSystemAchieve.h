@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/25 12:51)
+///	引擎版本：0.8.0.2 (2022/02/15 11:30)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_ACHIEVE_H
 
 #include "BandedMatrixInvertDetail.h"
 #include "LinearSystem.h"
+#include "SparseMatrixDetail.h"
 #include "Detail/LinearSystemInverseDetail.h"
 #include "Detail/SolveBandedDetail.h"
 #include "Detail/SolveSymmetricConjugateGradientDetail.h"
-#include "SparseMatrixDetail.h" 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
@@ -24,28 +24,30 @@
 
 template <typename Real>
 Mathematics::LinearSystem<Real>::LinearSystem(Real zeroTolerance) noexcept
-    : m_ZeroTolerance{ zeroTolerance }
+    : zeroTolerance{ zeroTolerance }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::LinearSystem<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= m_ZeroTolerance)
+    if (Math::GetValue(0) <= zeroTolerance)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-void Mathematics::LinearSystem<Real>::SetZeroTolerance(Real zeroTolerance) noexcept
+void Mathematics::LinearSystem<Real>::SetZeroTolerance(Real newZeroTolerance) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_ZeroTolerance = zeroTolerance;
+    zeroTolerance = newZeroTolerance;
 }
 
 template <typename Real>
@@ -55,9 +57,10 @@ typename Mathematics::LinearSystem<Real>::Vector2 Mathematics::LinearSystem<Real
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     auto det = matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
 
-    if (Math::FAbs(det) <= m_ZeroTolerance)
+    if (Math::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve2 失败！det为0。"s));
     }
@@ -73,6 +76,9 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
     Matrix3 invMatrix{ Vector3{ matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1],
                                 matrix[0][2] * matrix[2][1] - matrix[0][1] * matrix[2][2],
                                 matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1] },
@@ -85,12 +91,11 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
                                 matrix[0][1] * matrix[2][0] - matrix[0][0] * matrix[2][1],
                                 matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0] } };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
     auto det = matrix[0][0] * invMatrix[0][0] + matrix[0][1] * invMatrix[1][0] + matrix[0][2] * invMatrix[2][0];
 
-    if (Math::FAbs(det) <= m_ZeroTolerance)
+#include STSTEM_WARNING_POP
+
+    if (Math::FAbs(det) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Solve3 失败！det为0。"s));
     }
@@ -103,6 +108,9 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
         }
     }
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
     return Vector3{ invMatrix[0][0] * vector[0] + invMatrix[0][1] * vector[1] + invMatrix[0][2] * vector[2],
                     invMatrix[1][0] * vector[0] + invMatrix[1][1] * vector[1] + invMatrix[1][2] * vector[2],
                     invMatrix[2][0] * vector[0] + invMatrix[2][1] * vector[1] + invMatrix[2][2] * vector[2] };
@@ -111,12 +119,12 @@ typename Mathematics::LinearSystem<Real>::Vector3 Mathematics::LinearSystem<Real
 }
 
 template <typename Real>
-const Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrix& matrix) const
+Mathematics::VariableMatrix<Real> Mathematics::LinearSystem<Real>::Inverse(const VariableMatrix& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "矩阵必须是方阵\n");
 
-    LinearSystemInverse<Real> inverse{ matrix, m_ZeroTolerance };
+    LinearSystemInverse<Real> inverse{ matrix, zeroTolerance };
 
     return inverse.GetInverse();
 }
@@ -126,7 +134,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    LinearSystemInverse<Real> inverse{ matrix, vector, m_ZeroTolerance };
+    LinearSystemInverse<Real> inverse{ matrix, vector, zeroTolerance };
 
     return inverse.GetResult();
 }
@@ -147,10 +155,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    if (Math::FAbs(mainDdiagonal[0]) <= m_ZeroTolerance)
+    if (Math::FAbs(mainDdiagonal.at(0)) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -159,30 +164,28 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 
     RealContainer upperAmend(upperAmendSize);
 
-    auto mainAmend = mainDdiagonal[0];
+    auto mainAmend = mainDdiagonal.at(0);
 
-    output[0] = right[0] / mainAmend;
+    output.at(0) = right.at(0) / mainAmend;
 
     for (auto i = 0; i < size - 1; ++i)
     {
-        upperAmend[i] = upper[i] / mainAmend;
+        upperAmend.at(i) = upper.at(i) / mainAmend;
         const auto next = i + 1;
-        mainAmend = mainDdiagonal[next] - lower[i] * upperAmend[i];
-        if (Math::FAbs(mainAmend) <= m_ZeroTolerance)
+        mainAmend = mainDdiagonal.at(next) - lower.at(i) * upperAmend.at(i);
+        if (Math::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
 
-        output[next] = (right[next] - lower[i] * output[i]) / mainAmend;
+        output.at(next) = (right.at(next) - lower.at(i) * output.at(i)) / mainAmend;
     }
 
     for (auto i = size - 1; 1 <= i; --i)
     {
         const auto next = i - 1;
-        output[next] -= upperAmend[next] * output[i];
+        output.at(next) -= upperAmend.at(next) * output.at(i);
     }
-
-#include STSTEM_WARNING_POP
 
     return output;
 }
@@ -197,7 +200,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
         THROW_EXCEPTION(SYSTEM_TEXT("数组大小错误！"s));
     }
 
-    if (Math::FAbs(mainDdiagonal) <= m_ZeroTolerance)
+    if (Math::FAbs(mainDdiagonal) <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
     }
@@ -208,32 +211,27 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
     RealContainer upperAmend(upperAmendSize);
     auto mainAmend = mainDdiagonal;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-    output[0] = right[0] / mainAmend;
+    output.at(0) = right.at(0) / mainAmend;
 
     for (auto i = 0; i < size - 1; ++i)
     {
-        upperAmend[i] = upper / mainAmend;
-        mainAmend = mainDdiagonal - lower * upperAmend[i];
-        if (Math::FAbs(mainAmend) <= m_ZeroTolerance)
+        upperAmend.at(i) = upper / mainAmend;
+        mainAmend = mainDdiagonal - lower * upperAmend.at(i);
+        if (Math::FAbs(mainAmend) <= zeroTolerance)
         {
             THROW_EXCEPTION(SYSTEM_TEXT("求解失败！"s));
         }
 
         const auto next = i + 1;
 
-        output[next] = (right[next] - lower * output[i]) / mainAmend;
+        output.at(next) = (right.at(next) - lower * output.at(i)) / mainAmend;
     }
 
     for (auto i = size - 1; 1 <= i; --i)
     {
         const auto next = i - 1;
-        output[next] -= upperAmend[next] * output[i];
+        output.at(next) -= upperAmend.at(next) * output.at(i);
     }
-
-#include STSTEM_WARNING_POP
 
     return output;
 }
@@ -246,7 +244,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
     // 基于由Golum和Van Loan的“矩阵计算”算法。
     MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "矩阵必须是方阵\n");
 
-    Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::VariableMatrix> solve{ matrix, vector, m_ZeroTolerance };
+    Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::VariableMatrix> solve{ matrix, vector, zeroTolerance };
 
     return solve.GetResult();
 }
@@ -259,7 +257,7 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
     // 基于由Golum和Van Loan的“矩阵计算”算法。
     MATHEMATICS_ASSERTION_1(matrix.GetRowsNumber() == matrix.GetColumnsNumber(), "矩阵必须是方阵\n");
 
-    Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::SparseMatrix> solve{ matrix, vector, m_ZeroTolerance };
+    Mathematics::SolveSymmetricConjugateGradient<Real, Mathematics::SparseMatrix> solve{ matrix, vector, zeroTolerance };
 
     return solve.GetResult();
 }
@@ -269,17 +267,17 @@ typename Mathematics::LinearSystem<Real>::RealContainer Mathematics::LinearSyste
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Mathematics::SolveBanded<Real> solve{ matrix, vector, m_ZeroTolerance };
+    Mathematics::SolveBanded<Real> solve{ matrix, vector, zeroTolerance };
 
     return solve.GetResult();
 }
 
 template <typename Real>
-typename const Mathematics::LinearSystem<Real>::VariableMatrix Mathematics::LinearSystem<Real>::Invert(const BandedMatrix& matrix) const
+typename Mathematics::LinearSystem<Real>::VariableMatrix Mathematics::LinearSystem<Real>::Invert(const BandedMatrix& matrix) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    Mathematics::BandedMatrixInvert<Real> invert{ matrix, m_ZeroTolerance };
+    Mathematics::BandedMatrixInvert<Real> invert{ matrix, zeroTolerance };
 
     return invert.GetInvert();
 }

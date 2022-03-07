@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 18:18)
+///	引擎版本：0.8.0.2 (2022/02/11 16:31)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DETAIL_H
@@ -22,27 +22,52 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+template <int N>
+Mathematics::Integer<N> Mathematics::Integer<N>::CreateOne() noexcept
+{
+    return Integer{ Special::One };
+}
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <int N>
-Mathematics::Integer<N>::Integer() noexcept
-    : m_IntegerData{}
+Mathematics::Integer<N>::Integer(MAYBE_UNUSED Special special) noexcept
+    : integerData{ IntegerData::Special::One }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+
 #include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <int N>
+Mathematics::Integer<N>::Integer() noexcept
+    : integerData{}
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 
 template <int N>
 Mathematics::Integer<N>::Integer(const DataType& data)
-    : m_IntegerData{ data }
+    : integerData{ data }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+
+#include STSTEM_WARNING_POP
 
 template <int N>
 template <typename T>
 Mathematics::Integer<N>::Integer(T value)
-    : m_IntegerData{ value }
+    : integerData{ value }
 {
     static_assert(std::is_arithmetic_v<T>);
 
@@ -51,21 +76,15 @@ Mathematics::Integer<N>::Integer(T value)
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
-template <int N>
-Mathematics::Integer<N>::Integer(const IntegerData& data) noexcept
-    : m_IntegerData{ data }
-{
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-#include STSTEM_WARNING_POP
 
 template <int N>
-template <int Other>
-Mathematics::Integer<N>::Integer(const Integer<Other>& rhs)
-    : m_IntegerData{ rhs.m_IntegerData }
+Mathematics::Integer<N>::Integer(const IntegerData& data) noexcept
+    : integerData{ data }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
+
+#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
 template <int N>
@@ -80,7 +99,7 @@ bool Mathematics::Integer<N>::IsZero() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData.IsZero();
+    return integerData.IsZero();
 }
 
 template <int N>
@@ -88,16 +107,15 @@ void Mathematics::Integer<N>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData.SetZero();
+    return integerData.SetZero();
 }
 
 template <int N>
-Mathematics::NumericalValueSymbol
-    Mathematics::Integer<N>::GetSign() const noexcept
+Mathematics::NumericalValueSymbol Mathematics::Integer<N>::GetSign() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData.GetSign();
+    return integerData.GetSign();
 }
 
 template <int N>
@@ -113,26 +131,26 @@ const uint16_t& Mathematics::Integer<N>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData[index];
+    return integerData[index];
 }
 
 template <int N>
-const Mathematics::Integer<N> Mathematics::Integer<N>::operator-() const
+Mathematics::Integer<N> Mathematics::Integer<N>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
     Integer integer{ -analysis };
 
     return integer;
 }
 
 template <int N>
-const Mathematics::Integer<N> Mathematics::Integer<N>::GetAbsoluteValue() const
+Mathematics::Integer<N> Mathematics::Integer<N>::GetAbsoluteValue() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
     Integer integer{ analysis.GetAbsoluteValue() };
 
     return integer;
@@ -143,9 +161,9 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator+=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDataOperator<N> integerDataOperator{ m_IntegerData };
+    IntegerDataOperator<N> integerDataOperator{ integerData };
 
-    integerDataOperator += rhs.m_IntegerData;
+    integerDataOperator += rhs.integerData;
 
     return *this;
 }
@@ -165,9 +183,9 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator*=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerMultiplication<N> multiplication{ m_IntegerData, rhs.m_IntegerData };
+    IntegerMultiplication<N> multiplication{ integerData, rhs.integerData };
 
-    m_IntegerData = multiplication.GetMultiplication();
+    integerData = multiplication.GetMultiplication();
 
     return *this;
 }
@@ -177,9 +195,9 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator/=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const IntegerDivisionModulo divisionModulo{ m_IntegerData, rhs.m_IntegerData };
+    const IntegerDivisionModulo divisionModulo{ integerData, rhs.integerData };
 
-    m_IntegerData = divisionModulo.GetQuotient();
+    integerData = divisionModulo.GetQuotient();
 
     return *this;
 }
@@ -189,19 +207,19 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator%=(const Integer& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const IntegerDivisionModulo divisionModulo(m_IntegerData, rhs.m_IntegerData);
+    const IntegerDivisionModulo divisionModulo(integerData, rhs.integerData);
 
-    m_IntegerData = divisionModulo.GetRemainder();
+    integerData = divisionModulo.GetRemainder();
 
     return *this;
 }
 
 template <int N>
-const Mathematics::IntegerDivisionModulo<N> Mathematics::Integer<N>::GetDivisionModulo(const Integer& rhs) const
+Mathematics::IntegerDivisionModulo<N> Mathematics::Integer<N>::GetDivisionModulo(const Integer& rhs) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDivisionModulo divisionModulo{ m_IntegerData, rhs.m_IntegerData };
+    IntegerDivisionModulo divisionModulo{ integerData, rhs.integerData };
 
     return divisionModulo;
 }
@@ -212,7 +230,7 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator<<=(int shift)
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
 
-    IntegerDataOperator<N> integerDataOperator{ m_IntegerData };
+    IntegerDataOperator<N> integerDataOperator{ integerData };
 
     integerDataOperator <<= shift;
 
@@ -225,7 +243,7 @@ Mathematics::Integer<N>& Mathematics::Integer<N>::operator>>=(int shift)
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(0 <= shift, "shift必须大于或等于零");
 
-    IntegerDataOperator<N> integerDataOperator{ m_IntegerData };
+    IntegerDataOperator<N> integerDataOperator{ integerData };
 
     integerDataOperator >>= shift;
 
@@ -237,7 +255,7 @@ int Mathematics::Integer<N>::GetLeadingBit() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetLeadingBit();
 }
@@ -247,7 +265,7 @@ int Mathematics::Integer<N>::GetTrailingBit() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetTrailingBit();
 }
@@ -257,7 +275,7 @@ int Mathematics::Integer<N>::GetLeadingBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetLeadingBit(index);
 }
@@ -267,7 +285,7 @@ int Mathematics::Integer<N>::GetTrailingBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetTrailingBit(index);
 }
@@ -277,7 +295,7 @@ int Mathematics::Integer<N>::GetLeadingBlock() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetLeadingBlock();
 }
@@ -287,7 +305,7 @@ int Mathematics::Integer<N>::GetTrailingBlock() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const IntegerDataAnalysis<N> analysis{ m_IntegerData };
+    const IntegerDataAnalysis<N> analysis{ integerData };
 
     return analysis.GetTrailingBlock();
 }
@@ -297,7 +315,7 @@ void Mathematics::Integer<N>::SetBit(int index, bool on)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_IntegerData.SetBit(index, on);
+    integerData.SetBit(index, on);
 }
 
 template <int N>
@@ -305,7 +323,7 @@ bool Mathematics::Integer<N>::GetBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData.GetBit(index);
+    return integerData.GetBit(index);
 }
 
 template <int N>
@@ -313,7 +331,7 @@ bool Mathematics::Integer<N>::operator==(const Integer& rhs) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData == rhs.m_IntegerData;
+    return integerData == rhs.integerData;
 }
 
 template <int N>
@@ -321,7 +339,7 @@ bool Mathematics::Integer<N>::operator<(const Integer& rhs) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntegerData < rhs.m_IntegerData;
+    return integerData < rhs.integerData;
 }
 
 template <int N>
@@ -330,7 +348,7 @@ T Mathematics::Integer<N>::GetValue() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    IntegerDataConversion<N, T> conversion{ m_IntegerData };
+    const IntegerDataConversion<N, T> conversion{ integerData };
 
     return conversion.GetValue();
 }
@@ -340,7 +358,7 @@ void Mathematics::Integer<N>::Print(std::ostream& os) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    os << m_IntegerData;
+    os << integerData;
 }
 
 template <int N>

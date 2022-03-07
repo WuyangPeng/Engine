@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 14:37)
+///	引擎版本：0.8.0.2 (2022/02/17 16:45)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H
@@ -18,20 +18,22 @@
 
 template <typename Real>
 Mathematics::Query2Filtered<Real>::Query2Filtered(const VerticesType& vertices, Real uncertainty)
-    : ParentType{ vertices }, m_RationalQuery{ vertices }, m_Uncertainty{ uncertainty }
+    : ParentType{ vertices }, rationalQuery{ vertices }, uncertainty{ uncertainty }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query2Filtered<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= m_Uncertainty && m_Uncertainty <= Math::GetValue(1))
+    if (ParentType::IsValid() && Math::GetValue(0) <= uncertainty && uncertainty <= Math::GetValue(1))
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -51,7 +53,7 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(int index, 
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
@@ -60,16 +62,16 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vecto
     const auto vector0 = this->GetVertice(lhsVerticesIndex);
     const auto vector1 = this->GetVertice(rhsVerticesIndex);
 
-    auto x0 = testVector.GetX() - vector0.GetX();
-    auto y0 = testVector.GetY() - vector0.GetY();
-    auto x1 = vector1.GetX() - vector0.GetX();
-    auto y1 = vector1.GetY() - vector0.GetY();
+    const auto x0 = testVector.GetX() - vector0.GetX();
+    const auto y0 = testVector.GetY() - vector0.GetY();
+    const auto x1 = vector1.GetX() - vector0.GetX();
+    const auto y1 = vector1.GetY() - vector0.GetY();
 
-    auto len0 = Math::Sqrt(x0 * x0 + y0 * y0);
-    auto len1 = Math::Sqrt(x1 * x1 + y1 * y1);
-    auto scaledUncertainty = m_Uncertainty * len0 * len1;
+    const auto len0 = Math::Sqrt(x0 * x0 + y0 * y0);
+    const auto len1 = Math::Sqrt(x1 * x1 + y1 * y1);
+    const auto scaledUncertainty = uncertainty * len0 * len1;
 
-    auto det = QueryDotTools<Real>::Det2(x0, y0, x1, y1);
+    const auto det = QueryDotTools<Real>::Det2(x0, y0, x1, y1);
 
     if (scaledUncertainty <= Math::FAbs(det))
     {
@@ -81,7 +83,7 @@ Mathematics::LineQueryType Mathematics::Query2Filtered<Real>::ToLine(const Vecto
             return LineQueryType::OnLine;
     }
 
-    return m_RationalQuery.ToLine(testVector, lhsVerticesIndex, rhsVerticesIndex);
+    return rationalQuery.ToLine(testVector, lhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
@@ -93,39 +95,39 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumci
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "索引错误！");
 
-    const Vector2D lhsVector{ this->GetVertice(lhsVerticesIndex) };
-    const Vector2D mhsVector{ this->GetVertice(mhsVerticesIndex) };
-    const Vector2D rhsVector{ this->GetVertice(rhsVerticesIndex) };
+    const Vector2 lhsVector{ this->GetVertice(lhsVerticesIndex) };
+    const Vector2 mhsVector{ this->GetVertice(mhsVerticesIndex) };
+    const Vector2 rhsVector{ this->GetVertice(rhsVerticesIndex) };
 
-    auto lhsPlusTestX = lhsVector.GetX() + testVector.GetX();
-    auto lhsMinusTestX = lhsVector.GetX() - testVector.GetX();
-    auto lhsPlusTestY = lhsVector.GetY() + testVector.GetY();
-    auto lhsMinusTestY = lhsVector.GetY() - testVector.GetY();
-    auto mhsPlusTestX = mhsVector.GetX() + testVector.GetX();
-    auto mhsMinusTestX = mhsVector.GetX() - testVector.GetX();
-    auto mhsPlusTestY = mhsVector.GetY() + testVector.GetY();
-    auto mhsMinusTestY = mhsVector.GetY() - testVector.GetY();
-    auto rhsPlusTestX = rhsVector.GetX() + testVector.GetX();
-    auto rhsMinusTestX = rhsVector.GetX() - testVector.GetX();
-    auto rhsPlusTestY = rhsVector.GetY() + testVector.GetY();
-    auto rhsMinusTestY = rhsVector.GetY() - testVector.GetY();
-    auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
-    auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
-    auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
+    const auto lhsPlusTestX = lhsVector.GetX() + testVector.GetX();
+    const auto lhsMinusTestX = lhsVector.GetX() - testVector.GetX();
+    const auto lhsPlusTestY = lhsVector.GetY() + testVector.GetY();
+    const auto lhsMinusTestY = lhsVector.GetY() - testVector.GetY();
+    const auto mhsPlusTestX = mhsVector.GetX() + testVector.GetX();
+    const auto mhsMinusTestX = mhsVector.GetX() - testVector.GetX();
+    const auto mhsPlusTestY = mhsVector.GetY() + testVector.GetY();
+    const auto mhsMinusTestY = mhsVector.GetY() - testVector.GetY();
+    const auto rhsPlusTestX = rhsVector.GetX() + testVector.GetX();
+    const auto rhsMinusTestX = rhsVector.GetX() - testVector.GetX();
+    const auto rhsPlusTestY = rhsVector.GetY() + testVector.GetY();
+    const auto rhsMinusTestY = rhsVector.GetY() - testVector.GetY();
+    const auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
+    const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
+    const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    auto len0 = Math::Sqrt(lhsMinusTestX * lhsMinusTestX + lhsMinusTestY * lhsMinusTestY + z0 * z0);
-    auto len1 = Math::Sqrt(mhsMinusTestX * mhsMinusTestX + mhsMinusTestY * mhsMinusTestY + z1 * z1);
-    auto len2 = Math::Sqrt(rhsMinusTestX * rhsMinusTestX + rhsMinusTestY * rhsMinusTestY + z2 * z2);
-    auto scaledUncertainty = m_Uncertainty * len0 * len1 * len2;
+    const auto len0 = Math::Sqrt(lhsMinusTestX * lhsMinusTestX + lhsMinusTestY * lhsMinusTestY + z0 * z0);
+    const auto len1 = Math::Sqrt(mhsMinusTestX * mhsMinusTestX + mhsMinusTestY * mhsMinusTestY + z1 * z1);
+    const auto len2 = Math::Sqrt(rhsMinusTestX * rhsMinusTestX + rhsMinusTestY * rhsMinusTestY + z2 * z2);
+    const auto scaledUncertainty = uncertainty * len0 * len1 * len2;
 
-    auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+    const auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
     if (scaledUncertainty <= Math::FAbs(det))
     {
         if (0 < det)
@@ -136,7 +138,7 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Filtered<Real>::ToCircumci
             return CircumcircleQueryType::OnCircumcircle;
     }
 
-    return m_RationalQuery.ToCircumcircle(testVector, lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
+    return rationalQuery.ToCircumcircle(testVector, lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY2_FILTERED_DETAIL_H

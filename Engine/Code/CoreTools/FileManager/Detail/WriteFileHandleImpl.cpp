@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:26)
+///	引擎版本：0.8.0.1 (2022/01/09 1:44)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -24,6 +24,7 @@ CoreTools::WriteFileHandleImpl::WriteFileHandleImpl(const String& fileName, File
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::WriteFileHandleImpl::IsValid() const noexcept
 {
     if (ParentType::IsValid() && InterfaceType::IsValid())
@@ -31,6 +32,7 @@ bool CoreTools::WriteFileHandleImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int CoreTools::WriteFileHandleImpl::GetFileByteSize() const

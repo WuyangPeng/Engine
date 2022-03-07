@@ -38,25 +38,28 @@ void Mathematics::AQuaternionTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(ArithmeticCalculateTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
 
 void Mathematics::AQuaternionTesting
 	::ConstructionTest()
 {
-	FloatAQuaternion firstQuaternion;
+	AQuaternionF firstQuaternion;
 
 	ASSERT_APPROXIMATE(firstQuaternion[0],0.0f,1e-10f);
 	ASSERT_APPROXIMATE(firstQuaternion[1],0.0f,1e-10f);
 	ASSERT_APPROXIMATE(firstQuaternion[2],0.0f,1e-10f);
 	ASSERT_APPROXIMATE(firstQuaternion[3],0.0f,1e-10f);
 
-	FloatAQuaternion secondQuaternion{ 3.0,5.0,6.0,7.0 };
+	AQuaternionF secondQuaternion{ 3.0,5.0,6.0,7.0 };
 
 	ASSERT_APPROXIMATE(secondQuaternion[0],3.0,1e-10f);
 	ASSERT_APPROXIMATE(secondQuaternion[1],5.0,1e-10f);
 	ASSERT_APPROXIMATE(secondQuaternion[2],6.0,1e-10f);
 	ASSERT_APPROXIMATE(secondQuaternion[3],7.0,1e-10f);
 
-	FloatAQuaternion thirdQuaternion{ secondQuaternion };
+	AQuaternionF thirdQuaternion{ secondQuaternion };
 
 	ASSERT_APPROXIMATE(thirdQuaternion[0],3.0,1e-10f);
 	ASSERT_APPROXIMATE(thirdQuaternion[1],5.0,1e-10f);
@@ -82,27 +85,27 @@ void Mathematics::AQuaternionTesting
 
 	default_random_engine randomEngine{};
 	uniform_real<float> firstRandomDistribution{ -100.0f,100.0f };
-	uniform_real<float> secondRandomDistribution{ 0.0f,FloatMath::GetTwoPI() }; 
+	uniform_real<float> secondRandomDistribution{ 0.0f,MathF::GetTwoPI() }; 
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatAVector firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorF firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		firstVector.Normalize();
 
 		float firstFloat{ secondRandomDistribution(randomEngine) };
 
-		FloatMatrix firstMatrix{ firstVector,firstFloat };
+		MatrixF firstMatrix{ firstVector,firstFloat };
 
-		FloatAQuaternion fourthQuaternion{ firstMatrix };
+		AQuaternionF fourthQuaternion{ firstMatrix };
 
 		auto secondMatrix = fourthQuaternion.ToRotationMatrix();
 
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-6f));	
 
-		FloatAQuaternion fifthQuaternion{ firstVector,firstFloat };
+		AQuaternionF fifthQuaternion{ firstVector,firstFloat };
 
 		auto secondVector = fifthQuaternion.ToAxis();
 		auto secondFloat = fifthQuaternion.ToAngle();
@@ -129,14 +132,14 @@ void Mathematics::AQuaternionTesting
 void Mathematics::AQuaternionTesting
 	::AccessTest()
 {
-	const FloatAQuaternion firstQuaternion{ 3.0f,5.0f,6.0f,7.0f };
+	const AQuaternionF firstQuaternion{ 3.0f,5.0f,6.0f,7.0f };
 
 	ASSERT_APPROXIMATE(firstQuaternion[0],3.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstQuaternion[1],5.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstQuaternion[2],6.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstQuaternion[3],7.0f,1e-8f);
 
-	DoubleAQuaternion secondQuaternion(23.0,25.0,62.0,27.0);
+	AQuaternionD secondQuaternion(23.0,25.0,62.0,27.0);
 
 	ASSERT_APPROXIMATE(secondQuaternion[0],23.0,1e-10);
 	ASSERT_APPROXIMATE(secondQuaternion[1],25.0,1e-10);
@@ -182,31 +185,31 @@ void Mathematics::AQuaternionTesting
 {
 	default_random_engine randomEngine{};
 	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
-	uniform_real<double> secondRandomDistribution{ 0.0,DoubleMath::GetTwoPI() };
+	uniform_real<double> secondRandomDistribution{ 0.0,MathD::GetTwoPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleAVector firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorD firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		firstVector.Normalize();
 
 		double firstDouble{ secondRandomDistribution(randomEngine) };
 
-		DoubleAQuaternion firstQuaternion{ firstVector,firstDouble };
+		AQuaternionD firstQuaternion{ firstVector,firstDouble };
 
-		DoubleAVector secondVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorD secondVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		secondVector.Normalize();
 
 		double secondDouble{ secondRandomDistribution(randomEngine) };
 
-		DoubleAQuaternion secondQuaternion{ secondVector,secondDouble };
+		AQuaternionD secondQuaternion{ secondVector,secondDouble };
 
 		auto thirdQuaternion = firstQuaternion * secondQuaternion;
 
-		DoubleAQuaternion fourthQuaternion{ DoubleMatrix(firstVector,firstDouble) *DoubleMatrix(secondVector,secondDouble) };
+		AQuaternionD fourthQuaternion{ MatrixD(firstVector,firstDouble) *MatrixD(secondVector,secondDouble) };
 
 		ASSERT_TRUE(Approximate(thirdQuaternion, fourthQuaternion,1e-10) || Approximate(thirdQuaternion, -fourthQuaternion,1e-10) ); 
 
@@ -215,7 +218,7 @@ void Mathematics::AQuaternionTesting
 
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10));	
 
-		DoubleAQuaternion fifthQuaternion{ firstQuaternion };
+		AQuaternionD fifthQuaternion{ firstQuaternion };
 
 		fifthQuaternion *= secondQuaternion;
 
@@ -224,7 +227,7 @@ void Mathematics::AQuaternionTesting
 
 		ASSERT_TRUE(Approximate(firstMatrix, fourthMatrix,1e-10));
  
-		DoubleAQuaternion sixthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
+		AQuaternionD sixthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine), firstRandomDistribution(randomEngine) };
 
 		auto seventhQuaternion = -sixthQuaternion;
 
@@ -234,8 +237,8 @@ void Mathematics::AQuaternionTesting
 		ASSERT_APPROXIMATE(sixthQuaternion[3],-seventhQuaternion[3],1e-10);
 	}
 
-	DoubleAQuaternion eighthQuaternion{ 3.0,5.1,6.7,8.71 };
-	DoubleAQuaternion ninthQuaternion{ 13.1,15.0,16.71,18.7 };
+	AQuaternionD eighthQuaternion{ 3.0,5.1,6.7,8.71 };
+	AQuaternionD ninthQuaternion{ 13.1,15.0,16.71,18.7 };
 
 	auto tenthQuaternion = eighthQuaternion + ninthQuaternion;
 
@@ -314,7 +317,7 @@ void Mathematics::AQuaternionTesting
 {
 	default_random_engine randomEngine{};
 	uniform_real<float> firstRandomDistribution{ -100.0f,100.0f };
-	uniform_real<float> secondRandomDistribution{ 0.0,FloatMath::GetTwoPI() };
+	uniform_real<float> secondRandomDistribution{ 0.0,MathF::GetTwoPI() };
 	uniform_real<float> thirdRandomDistribution{ 0.0f, 1.0f };
 	uniform_int<> fourthRandomDistribution{ 0, 20 };
 
@@ -322,17 +325,17 @@ void Mathematics::AQuaternionTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatAQuaternion firstQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AQuaternionF firstQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		auto length = firstQuaternion[0] * firstQuaternion[0] + firstQuaternion[1] * firstQuaternion[1] + firstQuaternion[2] * firstQuaternion[2] + firstQuaternion[3] * firstQuaternion[3];
 
 		ASSERT_APPROXIMATE(length,firstQuaternion.SquaredLength(),1e-8f);
 
-		length = FloatMath::Sqrt(length);
+		length = MathF::Sqrt(length);
 
 		ASSERT_APPROXIMATE(length,firstQuaternion.Length(),1e-8f);
 
-		FloatAQuaternion secondQuaternion{ firstQuaternion };
+		AQuaternionF secondQuaternion{ firstQuaternion };
 
 		secondQuaternion.Normalize();
 
@@ -343,7 +346,7 @@ void Mathematics::AQuaternionTesting
 
 		secondQuaternion = firstQuaternion.Inverse();
 
-		FloatAQuaternion thirdQuaternion = secondQuaternion * firstQuaternion;
+		AQuaternionF thirdQuaternion = secondQuaternion * firstQuaternion;
 
 		ASSERT_APPROXIMATE(thirdQuaternion[0],1.0f,1e-6f);
 		ASSERT_APPROXIMATE(thirdQuaternion[1],0.0f,1e-7f);
@@ -379,30 +382,30 @@ void Mathematics::AQuaternionTesting
 
 		ASSERT_TRUE(Approximate(thirdQuaternion, firstQuaternion,1e-2f)); 
 
-		FloatAVector firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorF firstVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		auto secondVector = firstQuaternion.Rotate(firstVector);
 		auto thirdVector = firstQuaternion.ToRotationMatrix() * firstVector;
 
 		ASSERT_TRUE(Approximate(secondVector, thirdVector,1e-8f)); 
 
-		DoubleAVector fourthVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorD fourthVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		fourthVector.Normalize();
 
 		double firstDouble{ secondRandomDistribution(randomEngine) };
 
-		DoubleAQuaternion fourthQuaternion{ fourthVector,firstDouble };
+		AQuaternionD fourthQuaternion{ fourthVector,firstDouble };
 
-		DoubleAVector fifthVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AVectorD fifthVector{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		fifthVector.Normalize();
 
 		double secondDouble{ secondRandomDistribution(randomEngine) };
 
-		DoubleAQuaternion fifthQuaternion{ fifthVector,secondDouble };
+		AQuaternionD fifthQuaternion{ fifthVector,secondDouble };
 
-		DoubleAQuaternion sixthQuaternion;
+		AQuaternionD sixthQuaternion;
 
 		sixthQuaternion.Slerp(0.0,fourthQuaternion,fifthQuaternion);
 
@@ -417,24 +420,24 @@ void Mathematics::AQuaternionTesting
 		sixthQuaternion.Slerp(firstT,fourthQuaternion,fifthQuaternion);		
 
 		auto cosValue = Dot(fourthQuaternion,fifthQuaternion);
-		auto angle = DoubleMath::ACos(cosValue);
+		auto angle = MathD::ACos(cosValue);
 
-		auto passAngle = DoubleMath::ACos(Dot(fourthQuaternion,sixthQuaternion));
-		auto remainAngle = DoubleMath::ACos(Dot(sixthQuaternion,fifthQuaternion));
+		auto passAngle = MathD::ACos(Dot(fourthQuaternion,sixthQuaternion));
+		auto remainAngle = MathD::ACos(Dot(sixthQuaternion,fifthQuaternion));
 
 		ASSERT_APPROXIMATE(passAngle + remainAngle,angle,0.00001);
 		ASSERT_APPROXIMATE(passAngle / angle,firstT,0.00001);
 		ASSERT_APPROXIMATE(remainAngle / angle, 1.0 - firstT,0.0001);		
 
-		DoubleAQuaternion eighthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AQuaternionD eighthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		eighthQuaternion.Normalize();
 
-		DoubleAQuaternion ninthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AQuaternionD ninthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		ninthQuaternion.Normalize();
 
-		DoubleAQuaternion tenthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AQuaternionD tenthQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		tenthQuaternion.Normalize();
 
@@ -455,7 +458,7 @@ void Mathematics::AQuaternionTesting
 
 		ASSERT_TRUE(Approximate(fifthQuaternion, sixthQuaternion,1e-10));  
 
-		DoubleAQuaternion eleventhQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+		AQuaternionD eleventhQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 		eleventhQuaternion.Normalize();
 
@@ -482,9 +485,9 @@ void Mathematics::AQuaternionTesting
 	default_random_engine randomEngine{};
 	uniform_real<float> firstRandomDistribution{ -100.0f,100.0f }; 
 
-	FloatAQuaternion firstQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+	AQuaternionF firstQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
-	FloatAQuaternion secondQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
+	AQuaternionF secondQuaternion{ firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine) };
 
 	ASSERT_TRUE(firstQuaternion == firstQuaternion);
 	ASSERT_FALSE(firstQuaternion == secondQuaternion);

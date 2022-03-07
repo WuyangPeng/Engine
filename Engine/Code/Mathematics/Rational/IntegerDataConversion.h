@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:13)
+///	引擎版本：0.8.0.2 (2022/02/11 16:25)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_H
@@ -36,7 +36,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] T GetValue() const;
+        NODISCARD T GetValue() const noexcept;
 
     private:
         void Init(const SignedIntegerType&);
@@ -46,15 +46,15 @@ namespace Mathematics
         void InitToFloatingPoint();
         void CalculateMantissa();
         void CalculateConversionValue();
-        void Negative();
+        void Negative() noexcept;
         void SignedIntegerNegative();
 
     private:
-        IntegerData m_AbsData;
-        int m_Shifting;
-        uint64_t m_Mantissa;
-        NumericalValueSymbol m_Symbol;
-        T m_Value;
+        IntegerData absData;
+        int shifting;
+        uint64_t mantissa;
+        NumericalValueSymbol symbol;
+        T value;
     };
 }
 

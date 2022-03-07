@@ -18,7 +18,7 @@
 
 	namespace MathematicsExample
 	{
-		void StaticDllLib()
+		void StaticDllLib() noexcept
 		{
 
 		}

@@ -34,7 +34,7 @@ Rendering::BspNode
 }
 
 Rendering::BspNode
-	::BspNode(const Mathematics::FloatPlane& modelPlane)
+	::BspNode(const Mathematics::PlaneF& modelPlane)
     :ModelPlane(modelPlane),mWorldPlane(modelPlane)
 {
 	SpatialSharedPtr spatialSharedPtr;
@@ -46,7 +46,7 @@ Rendering::BspNode
  
 
 Rendering::SpatialSharedPtr Rendering::BspNode
-	::GetContainingNode(const Mathematics::FloatAPoint& point)
+	::GetContainingNode(const Mathematics::APointF& point)
 {
     SpatialSharedPtr posChild = GetPositiveChild();
 	SpatialSharedPtr negChild = GetNegativeChild();
@@ -358,7 +358,7 @@ Rendering::SpatialSharedPtr Rendering::BspNode
 	return GetChild(2);
 }
 
- const Mathematics::FloatPlane& Rendering::BspNode
+ const Mathematics::PlaneF& Rendering::BspNode
 	 ::GetWorldPlane() const noexcept
 {
 	return mWorldPlane;

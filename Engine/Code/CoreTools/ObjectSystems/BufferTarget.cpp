@@ -24,24 +24,30 @@ using std::string;
 CoreTools::BufferTarget::BufferTarget(int bufferSize, const ConstObjectRegisterSharedPtr& objectRegister)
     : impl{ bufferSize, objectRegister }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, BufferTarget)
 
 void CoreTools::BufferTarget::Write(const bool datum)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     const uint32_t value{ datum ? 0xFFFFFFFFu : 0u };
     Write(CORE_TOOLS_STREAM_SIZE(value), &value);
 }
 
 void CoreTools::BufferTarget::Write(const char* datum)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     Write(string{ datum });
 }
 
 void CoreTools::BufferTarget::Write(const string& datum)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     auto length = boost::numeric_cast<int32_t>(datum.length());
     Write(length);
 
@@ -65,10 +71,14 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, BufferTarget, GetBytesWr
 
 void CoreTools::BufferTarget::Write(size_t itemSize, const void* data)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     return impl->Write(itemSize, data);
 }
 
 void CoreTools::BufferTarget::Write(size_t itemSize, size_t itemsNumber, const void* data)
 {
+    CORE_TOOLS_CLASS_IS_VALID_9;
+
     return impl->Write(itemSize, itemsNumber, data);
 }

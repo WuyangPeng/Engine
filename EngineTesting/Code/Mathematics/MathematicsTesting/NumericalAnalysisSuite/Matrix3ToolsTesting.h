@@ -22,7 +22,7 @@ namespace Mathematics
 		void PolarDecompositionValueTest();
 		void QDUDecompositionValueTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

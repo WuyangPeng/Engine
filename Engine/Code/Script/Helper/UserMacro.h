@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 10:08)
+///	引擎版本：0.8.0.1 (2022/01/26 14:33)
 
 #ifndef SCRIPT_MACRO_USER_MACRO_H
 #define SCRIPT_MACRO_USER_MACRO_H
@@ -15,12 +15,15 @@
 #define SCRIPT_ClOSE_BEGIN (0x01)
 
 #define CLOSE_USE_LUA (SCRIPT_ClOSE_BEGIN)
+#define CLOSE_USE_JAVA (SCRIPT_ClOSE_BEGIN << 1)
+#define CLOSE_USE_PERL (SCRIPT_ClOSE_BEGIN << 2)
+#define CLOSE_USE_PYTHON (SCRIPT_ClOSE_BEGIN << 3)
 
-#define SCRIPT_ClOSE_END CLOSE_USE_LUA
+#define SCRIPT_ClOSE_END CLOSE_USE_PYTHON
 
 #define CLOSE_SCRIPT_MAX (((SCRIPT_ClOSE_END) << 1) - 1)
 
-// 编译测试（默认为0，最大值为0x01）
+// 编译测试（默认为0，最大值为0x0F）
 #define COMPILE_SCRIPT_CLOSE 0x00
 
 static_assert(0 <= COMPILE_SCRIPT_CLOSE, "COMPILE_SCRIPT_CLOSE Must be greater than or equal 0.");
@@ -29,6 +32,18 @@ static_assert(COMPILE_SCRIPT_CLOSE <= CLOSE_SCRIPT_MAX, "COMPILE_SCRIPT_CLOSE Mu
 #if !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_LUA) != CLOSE_USE_LUA
     #define SCRIPT_USE_LUA static_cast<void>(0)
 #endif  // !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_LUA) != CLOSE_USE_LUA
+
+#if !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_JAVA) != CLOSE_USE_JAVA
+    #define SCRIPT_USE_JAVA static_cast<void>(0)
+#endif  // !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_JAVA) != CLOSE_USE_JAVA
+
+#if !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_PERL) != CLOSE_USE_PERL
+    #define SCRIPT_USE_PERL static_cast<void>(0)
+#endif  // !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_PERL) != CLOSE_USE_PERL
+
+#if !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_PYTHON) != CLOSE_USE_PYTHON
+    #define SCRIPT_USE_PYTHON static_cast<void>(0)
+#endif  // !defined(COMPILE_SCRIPT_CLOSE) || (COMPILE_SCRIPT_CLOSE & CLOSE_USE_PYTHON) != CLOSE_USE_PYTHON
 
 // 是否编译为静态库
 #ifdef BUILDING_STATIC

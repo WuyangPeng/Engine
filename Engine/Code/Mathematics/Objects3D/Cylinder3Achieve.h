@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:20)
+///	引擎版本：0.8.0.2 (2022/02/10 15:06)
 
 #ifndef MATHEMATICS_OBJECTS3D_CYLINDER3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_CYLINDER3_ACHIEVE_H
@@ -17,28 +17,30 @@
 
 template <typename Real>
 Mathematics::Cylinder3<Real>::Cylinder3(const Line3& axis, Real radius, Real height) noexcept
-    : m_Axis{ axis }, m_Radius{ radius }, m_Height{ height }
+    : axis{ axis }, radius{ radius }, height{ height }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Cylinder3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= m_Radius && Math::GetValue(0) <= m_Height)
+    if (Math::GetValue(0) <= radius && Math::GetValue(0) <= height)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::Cylinder3<Real>::GetAxis() const noexcept
+Mathematics::Line3<Real> Mathematics::Cylinder3<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Axis;
+    return axis;
 }
 
 template <typename Real>
@@ -46,7 +48,7 @@ Real Mathematics::Cylinder3<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Radius;
+    return radius;
 }
 
 template <typename Real>
@@ -54,7 +56,7 @@ Real Mathematics::Cylinder3<Real>::GetHeight() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Height;
+    return height;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CYLINDER3_ACHIEVE_H

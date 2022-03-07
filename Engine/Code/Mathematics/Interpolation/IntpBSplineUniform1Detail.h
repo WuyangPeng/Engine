@@ -95,7 +95,7 @@ namespace Mathematics
 	{
 		for (int k = mGridMin[0]; k <= mGridMax[0]; ++k)
 		{
-			if (mData[k] == Math<Real>::sm_MaxReal)
+			if (mData[k] == Math<Real>::maxReal)
 			{
 				mData[k] = mEvaluateCallback(k);
 			}

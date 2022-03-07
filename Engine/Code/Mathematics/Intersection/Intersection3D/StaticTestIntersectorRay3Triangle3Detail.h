@@ -1,131 +1,105 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 21:45)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H
 
 #include "StaticTestIntersectorRay3Triangle3.h"
 #include "Detail/IntersectorLine3Triangle3DataDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 #include "Mathematics/Intersection/IntersectorDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon) 
-	:ParentType{ epsilon }, m_Ray{ ray }, m_Triangle{ triangle }
+Mathematics::StaticTestIntersectorRay3Triangle3<Real>::StaticTestIntersectorRay3Triangle3(const Ray3& ray, const Triangle3& triangle, const Real epsilon)
+    : ParentType{ epsilon }, ray{ ray }, triangle{ triangle }
 {
-	Test();
+    Test();
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename Real>
-Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::~StaticTestIntersectorRay3Triangle3() 
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
-bool Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::IsValid() const noexcept
+bool Mathematics::StaticTestIntersectorRay3Triangle3<Real>::IsValid() const noexcept
 {
-	if (ParentType::IsValid())
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
-#endif // OPEN_CLASS_INVARIANT	
+
+#endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::GetRay() const
+Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Triangle3<Real>::GetRay() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ray;
+    return ray;
 }
 
 template <typename Real>
-const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::GetTriangle() const
+Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorRay3Triangle3<Real>::GetTriangle() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_Triangle;
+    return triangle;
 }
 
 // private
 template <typename Real>
-void Mathematics::StaticTestIntersectorRay3Triangle3<Real>
-	::Test() 
+void Mathematics::StaticTestIntersectorRay3Triangle3<Real>::Test()
 {
-	// Compute the offset origin, edges, and normal.
-	auto diff = m_Ray.GetOrigin() - m_Triangle.GetVertex(0);
-	auto edge1 = m_Triangle.GetVertex(1) - m_Triangle.GetVertex(0);
-	auto edge2 = m_Triangle.GetVertex(2)- m_Triangle.GetVertex(0);
-	auto normal = Vector3DTools::CrossProduct(edge1,edge2);
+    const auto diff = ray.GetOrigin() - triangle.GetVertex(0);
+    const auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
+    const auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
+    const auto normal = Vector3Tools::CrossProduct(edge1, edge2);
 
-	// Solve Q + t*D = b1*E1 + b2*E2 (Q = kDiff, D = ray direction,
-	// E1 = kEdge1, E2 = kEdge2, N = Cross(E1,E2)) by
-	//   |Dot(D,N)|*b1 = sign(Dot(D,N))*Dot(D,Cross(Q,E2))
-	//   |Dot(D,N)|*b2 = sign(Dot(D,N))*Dot(D,Cross(E1,Q))
-	//   |Dot(D,N)|*t = -sign(Dot(D,N))*Dot(Q,N)
-	auto DdN = Vector3DTools::DotProduct(m_Ray.GetDirection(),normal);
-	Real sign;
-	if (DdN > Math::GetZeroTolerance())
-	{
-		sign = Math::GetValue(1);
-	}
-	else if (DdN < -Math::GetZeroTolerance())
-	{
-		sign = (Real)-1;
-		DdN = -DdN;
-	}
-	else
-	{
-		// Ray and triangle are parallel, call it a "no intersection"
-		// even if the ray does intersect.
-		this->SetIntersectionType(IntersectionType::Empty);
-		return;
-	}
+    auto ddn = Vector3Tools::DotProduct(ray.GetDirection(), normal);
+    Real sign{};
+    if (Math::GetZeroTolerance() < ddn)
+    {
+        sign = Math::GetValue(1);
+    }
+    else if (ddn < -Math::GetZeroTolerance())
+    {
+        sign = Math::GetValue(-1);
+        ddn = -ddn;
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+        return;
+    }
 
-	auto DdQxE2 = sign*  Vector3DTools::DotProduct(m_Ray.GetDirection(), Vector3DTools::CrossProduct( diff,edge2));
-	if (DdQxE2 >= Math<Real>::GetValue(0))
-	{
-		auto DdE1xQ = sign*Vector3DTools::DotProduct(m_Ray.GetDirection(), Vector3DTools::CrossProduct( edge1,diff));
-		if (DdE1xQ >= Math<Real>::GetValue(0))
-		{
-			if (DdQxE2 + DdE1xQ <= DdN)
-			{
-				// Line intersects triangle, check if ray does.
-				auto QdN = -sign*Vector3DTools::DotProduct(diff,normal);
-				if (QdN >= Math<Real>::GetValue(0))
-				{
-					// Ray intersects triangle.
-		
-					this->SetIntersectionType(IntersectionType::Point);
-					return;
-				}
-				// else: t < 0, no intersection
-			}
-			// else: b1+b2 > 1, no intersection
-		}
-		// else: b2 < 0, no intersection
-	}
-	// else: b1 < 0, no intersection
-	
-	this->SetIntersectionType(IntersectionType::Empty);
+    auto ddqxe2 = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(diff, edge2));
+    if (Math::GetValue(0) <= ddqxe2)
+    {
+        auto dde1xq = sign * Vector3Tools::DotProduct(ray.GetDirection(), Vector3Tools::CrossProduct(edge1, diff));
+        if (Math::GetValue(0) <= dde1xq)
+        {
+            if (ddqxe2 + dde1xq <= ddn)
+            {
+                auto qdn = -sign * Vector3Tools::DotProduct(diff, normal);
+                if (Math::GetValue(0) <= qdn)
+                {
+                    this->SetIntersectionType(IntersectionType::Point);
+                    return;
+                }
+            }
+        }
+    }
+
+    this->SetIntersectionType(IntersectionType::Empty);
 }
- 
-#endif // MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H
+
+#endif  // MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_RAY3_TRIANGLE3_DETAIL_H

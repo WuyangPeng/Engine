@@ -24,7 +24,7 @@ namespace Mathematics
 		void ArithmeticCalculateTest();
 		void ProjectionTest();
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

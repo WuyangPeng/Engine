@@ -30,7 +30,7 @@ namespace Network
 
 		void RunTest(); 
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.4 (2020/03/11 16:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 17:31)
 
 #include "Network/NetworkExport.h"
 
@@ -10,6 +13,7 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/Network/Flags/SocketPrototypesFlags.h"
 #include "System/Network/SocketPrototypes.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
@@ -21,21 +25,21 @@
 using std::string;
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
-    : ParentType{}, m_SocketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
-    if (!System::IsSocketValid(m_SocketHandle))
+    if (!System::IsSocketValid(socketHandle))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
     }
 
     NetworkSockInetAddress sockAddress{ port };
 
-    if (!System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress()))
+    if (!System::Bind(socketHandle, &sockAddress.GetWinSockInetAddress()))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s));
     }
 
-    if (!System::Listen(m_SocketHandle, System::g_SoMaxConn))
+    if (!System::Listen(socketHandle, System::g_SoMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s));
     }
@@ -44,21 +48,21 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(int port)
 }
 
 Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int port)
-    : ParentType{}, m_SocketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
+    : ParentType{}, socketHandle{ System::GetSocket(System::ProtocolFamilies::Inet, System::SocketTypes::Stream, System::SocketProtocols::Tcp) }
 {
-    if (!System::IsSocketValid(m_SocketHandle))
+    if (!System::IsSocketValid(socketHandle))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("创建本地端口失败！"s));
     }
 
     NetworkSockInetAddress sockAddress{ hostName, port };
 
-    if (!System::Bind(m_SocketHandle, &sockAddress.GetWinSockInetAddress()))
+    if (!System::Bind(socketHandle, &sockAddress.GetWinSockInetAddress()))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("绑定失败！"s));
     }
 
-    if (!System::Listen(m_SocketHandle, System::g_SoMaxConn))
+    if (!System::Listen(socketHandle, System::g_SoMaxConn))
     {
         THROW_EXCEPTION(SYSTEM_TEXT("监听失败！"s));
     }
@@ -68,42 +72,17 @@ Network::NetworkSockAcceptor::NetworkSockAcceptor(const string& hostName, int po
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NetworkSockAcceptor)
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26415)
-#include SYSTEM_WARNING_DISABLE(26418)
-bool Network::NetworkSockAcceptor::Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+bool Network::NetworkSockAcceptor::Accept(SockStream& sockStream, SockAddress& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
-
-    auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress->GetWinSockInetAddress()));
-
-    const auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress->GetWinSockInetAddress(), &addrLen);
-
-    if (System::IsSocketValid(acceptHandle))
-    {
-        sockStream->SetNetworkHandle(acceptHandle);
-
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-bool Network::NetworkSockAcceptor::Accept(const SockStreamSharedPtr& sockStream)
-{
-    NETWORK_CLASS_IS_VALID_9;
-
-    NetworkSockInetAddress sockAddress;
 
     auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInetAddress()));
 
-    const auto acceptHandle = System::Accept(m_SocketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
+    const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
 
     if (System::IsSocketValid(acceptHandle))
     {
-        sockStream->SetNetworkHandle(acceptHandle);
+        sockStream.SetNetworkHandle(acceptHandle);
 
         return true;
     }
@@ -112,41 +91,63 @@ bool Network::NetworkSockAcceptor::Accept(const SockStreamSharedPtr& sockStream)
         return false;
     }
 }
-#include STSTEM_WARNING_POP
+
+bool Network::NetworkSockAcceptor::Accept(SockStream& sockStream)
+{
+    NETWORK_CLASS_IS_VALID_9;
+
+    NetworkSockInetAddress sockAddress{ CoreTools::DisableNotThrow::Disable };
+
+    auto addrLen = boost::numeric_cast<int>(sizeof(sockAddress.GetWinSockInetAddress()));
+
+    const auto acceptHandle = System::Accept(socketHandle, &sockAddress.GetWinSockInetAddress(), &addrLen);
+
+    if (System::IsSocketValid(acceptHandle))
+    {
+        sockStream.SetNetworkHandle(acceptHandle);
+
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 bool Network::NetworkSockAcceptor::EnableNonBlock() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     unsigned long nonblock{ 1 };
-    return System::IoctlSocket(m_SocketHandle, System::IoctlSocketCmd::FionBio, &nonblock);
+    return System::IoctlSocket(socketHandle, System::IoctlSocketCmd::FionBio, &nonblock);
 }
 
 System::WinSocket Network::NetworkSockAcceptor::GetWinSocket() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_SocketHandle;
+    return socketHandle;
 }
 
 #include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-void Network::NetworkSockAcceptor::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
+void Network::NetworkSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    [[maybe_unused]] const auto result = Accept(sockStream);
+    MAYBE_UNUSED const auto result = Accept(*sockStream);
 }
 
-void Network::NetworkSockAcceptor::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+void Network::NetworkSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    [[maybe_unused]] const auto result = Accept(sockStream, sockAddress);
+    MAYBE_UNUSED const auto result = Accept(*sockStream, *sockAddress);
 }
 #include STSTEM_WARNING_POP
 
-const string Network::NetworkSockAcceptor::GetAddress() const noexcept
+string Network::NetworkSockAcceptor::GetAddress() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

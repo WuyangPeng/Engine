@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 14:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 16:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CYLINDER3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CYLINDER3_H
@@ -19,41 +22,34 @@
 namespace Mathematics
 {
     template <typename Real>
-    class StaticTestIntersectorPlane3Cylinder3 : public StaticIntersector<Real, Vector3D>
+    class StaticTestIntersectorPlane3Cylinder3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticTestIntersectorPlane3Cylinder3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Cylinder3 = Cylinder3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
-        StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance());
+        StaticTestIntersectorPlane3Cylinder3(const Plane3& plane, const Cylinder3& cylinder, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Plane3 GetPlane() const;
-        [[nodiscard]] const Cylinder3 GetCylinder() const;
+        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Cylinder3 GetCylinder() const noexcept;
 
-        // Culling support.  The view frustum is assumed to be on the positive
-        // side of the plane.  The cylinder is culled if it is on the negative
-        // side of the plane.
-        [[nodiscard]] bool CylinderIsCulled() const;
+        NODISCARD bool CylinderIsCulled() const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
-        // Static intersection query for a *finite* cylinder.
-        void Test();
+        void Test() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        // The objects to intersect.
-        Plane3 m_Plane;
-        Cylinder3 m_Cylinder;
+    private:
+        Plane3 plane;
+        Cylinder3 cylinder;
     };
-
-    using FloatStaticTestIntersectorPlane3Cylinder3 = StaticTestIntersectorPlane3Cylinder3<float>;
-    using DoubleStaticTestIntersectorPlane3Cylinder3 = StaticTestIntersectorPlane3Cylinder3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CYLINDER3_H

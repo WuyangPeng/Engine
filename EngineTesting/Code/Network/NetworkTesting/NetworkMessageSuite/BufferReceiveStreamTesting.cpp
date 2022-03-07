@@ -22,7 +22,10 @@
 
 using std::make_shared;
 using std::ostream;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26414)
 Network::BufferReceiveStreamTesting ::BufferReceiveStreamTesting(const OStreamShared& osPtr)
     : ParentType{ osPtr }, m_TestMessage{ make_shared<TestNullMessage>(sm_MessageID) }, m_SocketID{ 1 }
 {
@@ -42,7 +45,7 @@ namespace Network
 
 void Network::BufferReceiveStreamTesting ::MainTest()
 {
-    MESSAGE_MANAGER_SINGLETON.Insert(sm_MessageID, MessageTypeCondition{}, TestNullMessage::Factory);
+    MESSAGE_MANAGER_SINGLETON.Insert(sm_MessageID, MessageTypeCondition::CreateNullCondition(), TestNullMessage::Factory);
 
     constexpr auto segment = 100;
 
@@ -79,7 +82,7 @@ void Network::BufferReceiveStreamTesting ::FinishReceiveTest(int testLoopCount, 
     socketManager->InsertSocket(m_SocketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy };
+    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
@@ -92,13 +95,13 @@ void Network::BufferReceiveStreamTesting ::UnFinishReceiveTest(int testLoopCount
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
-    AddBufferLength(buffer);
+    AddBufferLength(*buffer);
 
     NullSocketManagerSharedPtr socketManager{ make_shared<NullSocketManager>(sm_MessageID) };
     socketManager->InsertSocket(m_SocketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy };
+    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
 
@@ -108,7 +111,7 @@ void Network::BufferReceiveStreamTesting ::UnFinishReceiveTest(int testLoopCount
 
     bufferReceiveStream.OnEvent(m_SocketID, socketManager);
 
-    auto receiveCount = testLoopCount + 1;
+    const auto receiveCount = testLoopCount + 1;
     ASSERT_EQUAL(socketManager->GetValue(), sm_MessageID * receiveCount);
 }
 
@@ -121,7 +124,7 @@ void Network::BufferReceiveStreamTesting ::CopyFinishReceiveTest(int testLoopCou
     socketManager->InsertSocket(m_SocketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy };
+    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_TRUE(bufferReceiveStream.IsFinish());
 
@@ -138,20 +141,20 @@ void Network::BufferReceiveStreamTesting ::CopyUnFinishReceiveTest(int testLoopC
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
-    AddBufferLength(buffer);
+    AddBufferLength(*buffer);
 
     NullSocketManagerSharedPtr socketManager{ make_shared<NullSocketManager>(sm_MessageID) };
 
     socketManager->InsertSocket(m_SocketID);
     ASSERT_EQUAL(socketManager->GetValue(), 0);
 
-    TestingType bufferReceiveStream{ buffer, parserStrategy };
+    TestingType bufferReceiveStream{ buffer, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_FALSE(bufferReceiveStream.IsFinish());
 
     auto noUseBuffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
-    TestingType copyBufferReceiveStream{ noUseBuffer, parserStrategy };
+    TestingType copyBufferReceiveStream{ noUseBuffer, parserStrategy, EncryptedCompressionStrategy::Default };
     copyBufferReceiveStream = bufferReceiveStream;
 
     ASSERT_FALSE(copyBufferReceiveStream.IsFinish());
@@ -163,10 +166,12 @@ void Network::BufferReceiveStreamTesting ::CopyUnFinishReceiveTest(int testLoopC
 
     copyBufferReceiveStream.OnEvent(m_SocketID, socketManager);
 
-    auto receiveCount = testLoopCount + 1;
+    const auto receiveCount = testLoopCount + 1;
     ASSERT_EQUAL(socketManager->GetValue(), sm_MessageID * receiveCount);
 }
+#include STSTEM_WARNING_PUSH
 
+#include SYSTEM_WARNING_DISABLE(26490)
 Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting ::CreateAddMessageBuffer(ParserStrategy parserStrategy) const
 {
     MessageBufferSharedPtr messageBuffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256, parserStrategy) };
@@ -174,9 +179,12 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting ::CreateAddM
     auto initialBuffered = messageBuffer->GetInitialBufferedPtr();
 
     auto messageNumber = reinterpret_cast<int64_t*>(initialBuffered);
+    if (messageNumber == nullptr)
+        return messageBuffer;
+
     *messageNumber = sm_MessageID;
 
-    auto streamSize = CORE_TOOLS_STREAM_SIZE(sm_MessageID);
+    const auto streamSize = CORE_TOOLS_STREAM_SIZE(sm_MessageID);
 
     if (parserStrategy == ParserStrategy::BigEndian)
     {
@@ -190,7 +198,7 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting ::CreateAddM
 
 Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting ::CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
 {
-    BufferSendStream bufferSendStream{ sm_BufferSize, parserStrategy };
+    BufferSendStream bufferSendStream{ sm_BufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
     for (auto i = 0; i < testLoopCount; ++i)
     {
@@ -204,20 +212,20 @@ Network::MessageBufferSharedPtr Network::BufferReceiveStreamTesting ::CreateSend
     return buffer;
 }
 
-void Network::BufferReceiveStreamTesting ::AddBufferLength(MessageBufferSharedPtr& messageBuffer)
+void Network::BufferReceiveStreamTesting ::AddBufferLength(MessageBuffer& messageBuffer)
 {
-    auto& length = *reinterpret_cast<int32_t*>(messageBuffer->GetInitialBufferedPtr());
+    auto& length = *reinterpret_cast<int32_t*>(messageBuffer.GetInitialBufferedPtr());
 
-    auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
+    const auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
 
-    if (messageBuffer->GetParserStrategy() == ParserStrategy::BigEndian)
+    if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {
         CoreTools::Endian::SwapByteOrder(streamSize, &length);
     }
 
     length += m_TestMessage->GetStreamingSize();
 
-    if (messageBuffer->GetParserStrategy() == ParserStrategy::BigEndian)
+    if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {
         CoreTools::Endian::SwapByteOrder(streamSize, &length);
     }

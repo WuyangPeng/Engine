@@ -20,7 +20,7 @@ namespace Network
 		void MainTest();
 		void EventTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

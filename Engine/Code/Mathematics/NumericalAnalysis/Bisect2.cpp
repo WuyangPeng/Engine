@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:33)
+///	引擎版本：0.8.0.2 (2022/02/14 10:40)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -18,9 +18,6 @@
 #endif  // MATHEMATICS_EXPORT_TEMPLATE
 
 #include "Bisect2Detail.h"
-#include "Bisect2RootDetail.h"
-#include "Detail/Bisect2NodeDetail.h"
-#include "Detail/Bisect2StorageDetail.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 14:29)
+///	引擎版本：0.8.0.2 (2022/01/28 16:19)
 
 #ifndef MATHEMATICS_BASE_SCALED_FLOAT_TO_INT_H
 #define MATHEMATICS_BASE_SCALED_FLOAT_TO_INT_H
@@ -24,7 +24,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int32_t GetScaledResult() const noexcept;
+        NODISCARD int32_t GetScaledResult() const noexcept;
 
     private:
         void Scaled() noexcept;
@@ -32,11 +32,11 @@ namespace Mathematics
         void CorrectResult() noexcept;
 
     private:
-        float m_FloatValue;
-        int32_t m_IntegerValue;
-        int m_Power;
-        int m_Shift;
-        int32_t m_Result;
+        float floatValue;
+        int32_t integerValue;
+        int power;
+        int shift;
+        int32_t result;
     };
 }
 

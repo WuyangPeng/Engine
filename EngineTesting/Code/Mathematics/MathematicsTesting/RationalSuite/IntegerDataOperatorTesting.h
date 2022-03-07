@@ -25,7 +25,7 @@ namespace Mathematics
 		void RightShiftTest();
 		void DivisionModuloTest();
 	
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

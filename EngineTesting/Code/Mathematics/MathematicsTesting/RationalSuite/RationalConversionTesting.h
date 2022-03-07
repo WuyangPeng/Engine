@@ -26,7 +26,7 @@ namespace Mathematics
 		void IntegerOverflowTest();
 		void UnsignedIntegerOverflowTest();
 	
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 	};
 }
 

@@ -17,6 +17,8 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
+COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, DeltaTimeManager)
+
 CoreTools::DeltaTimeManager CoreTools::DeltaTimeManager::Create()
 {
     return DeltaTimeManager{ DisableNotThrow::Disable };
@@ -35,4 +37,3 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetEla
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, DeltaTimeManager, ResetCurrentTime, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetNowTimeInMicroseconds, uint64_t)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, DeltaTimeManager, GetNowTimeInSeconds, uint64_t)
-COPY_UNSHARED_CLONE_SELF_DEFINE(CoreTools, DeltaTimeManager)

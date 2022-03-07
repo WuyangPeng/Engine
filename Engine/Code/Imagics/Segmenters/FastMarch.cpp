@@ -17,7 +17,7 @@
 #include SYSTEM_WARNING_DISABLE(26481)
 Imagics::FastMarch
 	::FastMarch(int quantity, const float* speeds,const std::vector<int>& seeds)
-    : mHeap(quantity, 1, Mathematics::FloatMath::sm_MaxReal)
+    : mHeap(quantity, 1, Mathematics::MathF::maxReal)
 {
     Initialize(quantity,seeds);
     InitializeSpeed(speeds);
@@ -25,7 +25,7 @@ Imagics::FastMarch
 
 Imagics::FastMarch
 	::FastMarch(int quantity, const float speed,const std::vector<int>& seeds)
-    :mHeap(quantity, 1, Mathematics::FloatMath::sm_MaxReal)
+    :mHeap(quantity, 1, Mathematics::MathF::maxReal)
 {
     Initialize(quantity, seeds);
     InitializeSpeed(speed);
@@ -60,7 +60,7 @@ void Imagics::FastMarch
    
     for (int i = 0; i < mQuantity; ++i)
     {
-		mTimes[i] = Mathematics::FloatMath::sm_MaxReal;
+		mTimes[i] = Mathematics::MathF::maxReal;
     }
 
     for (auto i = 0u; i <  seeds.size(); ++i)
@@ -90,8 +90,8 @@ void Imagics::FastMarch
         }
         else
         {
-			mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-			mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+			mInvSpeeds[i] = Mathematics::MathF::maxReal;
+			mTimes[i] = -Mathematics::MathF::maxReal;
         }
     }
 }
@@ -110,8 +110,8 @@ void Imagics::FastMarch
 void Imagics::FastMarch
 	::GetTimeExtremes(float& minValue, float& maxValue) const
 {
-	minValue = Mathematics::FloatMath::sm_MaxReal;
-	maxValue = -Mathematics::FloatMath::sm_MaxReal;
+	minValue = Mathematics::MathF::maxReal;
+	maxValue = -Mathematics::MathF::maxReal;
     int i;
     for (i = 0; i < mQuantity; ++i)
     {
@@ -173,7 +173,7 @@ int Imagics::FastMarch
 bool Imagics::FastMarch
 	::IsValid(int i) const noexcept
 {
-	return 0.0f <= mTimes[i] && mTimes[i] < Mathematics::FloatMath::sm_MaxReal;
+	return 0.0f <= mTimes[i] && mTimes[i] < Mathematics::MathF::maxReal;
 }
 
 bool Imagics::FastMarch
@@ -185,13 +185,13 @@ bool Imagics::FastMarch
 bool Imagics::FastMarch
 	::IsFar(int i) const noexcept
 {
-	return mTimes[i] == Mathematics::FloatMath::sm_MaxReal;
+	return mTimes[i] == Mathematics::MathF::maxReal;
 }
 
 bool Imagics::FastMarch
 	::IsZeroSpeed(int i) const noexcept
 {
-	return mTimes[i] == -Mathematics::FloatMath::sm_MaxReal;
+	return mTimes[i] == -Mathematics::MathF::maxReal;
 }
 
 bool Imagics::FastMarch ::IsInterior(int i) const noexcept

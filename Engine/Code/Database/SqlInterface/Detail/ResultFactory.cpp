@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:06)
 
 #include "Database/DatabaseExport.h"
 
@@ -26,7 +26,7 @@ Database::ResultFactory::ResultFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, ResultFactory)
 
-Database::ResultFactory::ImplTypePtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Database::ResultFactory::ImplTypeSharedPtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
     switch (wrappersStrategy)
@@ -38,17 +38,12 @@ Database::ResultFactory::ImplTypePtr Database::ResultFactory::Create(const Confi
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullResult>(configurationStrategy);
     }
 }
 
-Database::ResultFactory::ImplTypePtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult)
+Database::ResultFactory::ImplTypeSharedPtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
@@ -63,7 +58,7 @@ Database::ResultFactory::ImplTypePtr Database::ResultFactory::Create(const Confi
     THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建Result。"s));
 }
 
-Database::ResultFactory::ImplTypePtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
+Database::ResultFactory::ImplTypeSharedPtr Database::ResultFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 14:16)
+///	引擎版本：0.8.0.2 (2022/02/15 14:35)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H
@@ -36,23 +36,23 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const ConstIter GetMinLocationBegin() const noexcept;
-        [[nodiscard]] const ConstIter GetMinLocationEnd() const noexcept;
-        [[nodiscard]] Real GetMinLocation(int index) const;
-        [[nodiscard]] Real GetMinValue() const noexcept;
-        [[nodiscard]] int GetDimensions() const;
+        NODISCARD ConstIter GetMinLocationBegin() const noexcept;
+        NODISCARD ConstIter GetMinLocationEnd() const noexcept;
+        NODISCARD Real GetMinLocation(int index) const;
+        NODISCARD Real GetMinValue() const noexcept;
+        NODISCARD int GetDimensions() const;
 
-        void Set(Real minValue, Real minLocation, const Container& direction, int directionCurrent);
+        void Set(Real newMinValue, Real newMinLocation, const Container& direction, int directionCurrent);
 
-        [[nodiscard]] const Container& GetMinLocation() const noexcept;
+        NODISCARD const Container& GetMinLocation() const noexcept;
 
     private:
-        Container m_MinLocation;
-        Real m_MinValue;
+        Container minLocation;
+        Real minValue;
     };
 
-    using FloatMinimizeNData = MinimizeNData<float>;
-    using DoubleMinimizeNData = MinimizeNData<double>;
+    using MinimizeNDataF = MinimizeNData<float>;
+    using MinimizeNDataD = MinimizeNData<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_H

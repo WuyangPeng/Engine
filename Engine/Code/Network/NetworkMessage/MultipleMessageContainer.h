@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:04)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_H
@@ -35,21 +35,21 @@ namespace Network
         using MessageType = std::array<std::any, sm_Size>;
 
     public:
-        MultipleMessageContainer();
+        MultipleMessageContainer() noexcept;
 
         template <typename T, typename... OtherTypes>
-        MultipleMessageContainer(T value, OtherTypes... otherValue);
+        MultipleMessageContainer(T value, OtherTypes&&... otherValue);
 
         CLASS_INVARIANT_DECLARE;
 
-        void Load(const MessageSourceSharedPtr& source);
-        void Save(const MessageTargetSharedPtr& target) const;
-        [[nodiscard]] int GetStreamingSize() const;
+        void Load(MessageSource& source);
+        void Save(MessageTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
 
-        [[nodiscard]] int GetSize() const;
+        NODISCARD int GetSize() const;
 
         template <E index>
-        [[nodiscard]] auto GetValue() const
+        NODISCARD auto GetValue() const
         {
             NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -57,14 +57,18 @@ namespace Network
 
             using ValueType = typename MultipleMessageCast<MultipleMessageElement<System::EnumCastUnderlying(index), ClassType>::sm_ByteType>::ValueType;
 
-            return std::any_cast<ValueType>(m_Message[System::EnumCastUnderlying(index)]);
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26482)
+            return std::any_cast<ValueType>(message[System::EnumCastUnderlying(index)]);
+#include STSTEM_WARNING_POP
         }
 
         template <int index>
         void SetValue(typename MultipleMessageParameterCast<MultipleMessageElement<index, ClassType>::sm_ByteType>::ValueType value);
 
     private:
-        MessageType m_Message;
+        MessageType message;
     };
 }
 

@@ -33,7 +33,7 @@ namespace Rendering
 		// may be attached such as the triangles that are coplanar with the
 		// separating plane.
 		BspNode();
-		BspNode(const Mathematics::FloatPlane& modelPlane);
+		BspNode(const Mathematics::PlaneF& modelPlane);
 		 
 
 		// These methods should be used instead of the attach/detach methods in
@@ -49,11 +49,11 @@ namespace Rendering
 		 SpatialSharedPtr GetNegativeChild();
 
 		// Member access.
-		 Mathematics::FloatPlane ModelPlane;
-                 const Mathematics::FloatPlane& GetWorldPlane() const noexcept;
+		 Mathematics::PlaneF ModelPlane;
+                 const Mathematics::PlaneF& GetWorldPlane() const noexcept;
 
 		// Determine the portion of the scene that contains the point.
-		 SpatialSharedPtr GetContainingNode(const Mathematics::FloatAPoint& point);
+		 SpatialSharedPtr GetContainingNode(const Mathematics::APointF& point);
                  ObjectInterfaceSharedPtr CloneObject() const override;
 	protected:
 		// Support for the geometric update. 
@@ -62,7 +62,7 @@ namespace Rendering
 		// Support for hierarchical culling.
 		  void GetVisibleSet(Culler& culler, bool noCull) override;
 
-		Mathematics::FloatPlane mWorldPlane;
+		Mathematics::PlaneF mWorldPlane;
 	};
  #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

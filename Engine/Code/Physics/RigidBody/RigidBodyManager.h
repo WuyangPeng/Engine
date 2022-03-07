@@ -20,7 +20,7 @@ namespace Physics
 	public:
 		using Matrix3 = Mathematics::Matrix3<Real>;
 		using Quaternion = Mathematics::Quaternion<Real>;
-		using Vector3D = Mathematics::Vector3D<Real>;
+		using Vector3D = Mathematics::Vector3<Real>;
 
 	public:
 		// Construction and destruction.  The rigid body state is uninitialized.

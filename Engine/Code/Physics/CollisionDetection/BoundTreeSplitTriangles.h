@@ -21,8 +21,8 @@ namespace Physics
     {
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(BoundTreeSplitTriangles);
-        using AVector = Mathematics::FloatAVector;
-        using APoint = Mathematics::FloatAPoint;
+        using AVector = Mathematics::AVectorF;
+        using APoint = Mathematics::APointF;
         using Centroids = std::vector<APoint>;
         using Split = std::vector<int>;
 

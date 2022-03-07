@@ -35,19 +35,19 @@ namespace Mathematics
 		//        derivativeFinal = points[N] - points[N-1]
 		//      To specify the derivatives for BT_CLAMPED, use the second
 		//      constructor listed below.
-		NaturalSpline2(BoundaryType type, int numSegments, Real* times, Vector2D<Real>* points);
+		NaturalSpline2(BoundaryType type, int numSegments, Real* times, Vector2<Real>* points);
 
 		// Specify the derivative vectors for clamped splines.
-		NaturalSpline2(int numSegments, Real* times, Vector2D<Real>* points, const Vector2D<Real>& derivativeStart, const Vector2D<Real>& derivativeFinal);
+		NaturalSpline2(int numSegments, Real* times, Vector2<Real>* points, const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal);
 
 		virtual ~NaturalSpline2();
 
-		const Vector2D<Real>* GetPoints() const;
+		const Vector2<Real>* GetPoints() const;
 
-		virtual Vector2D<Real> GetPosition(Real t) const;
-		virtual Vector2D<Real> GetFirstDerivative(Real t) const;
-		virtual Vector2D<Real> GetSecondDerivative(Real t) const;
-		virtual Vector2D<Real> GetThirdDerivative(Real t) const;
+		virtual Vector2<Real> GetPosition(Real t) const;
+		virtual Vector2<Real> GetFirstDerivative(Real t) const;
+		virtual Vector2<Real> GetSecondDerivative(Real t) const;
+		virtual Vector2<Real> GetThirdDerivative(Real t) const;
 
 	protected:
 		using MultipleCurve2<Real>::mNumSegments;
@@ -57,17 +57,17 @@ namespace Mathematics
 
 		void CreateFreeSpline();
 
-		void CreateClampedSpline(const Vector2D<Real>& derivativeStart, const Vector2D<Real>& derivativeFinal);
+		void CreateClampedSpline(const Vector2<Real>& derivativeStart, const Vector2<Real>& derivativeFinal);
 
 		void CreateClosedSpline();
 
 		virtual Real GetSpeedKey(int key, Real t) const;
 		virtual Real GetLengthKey(int key, Real t0, Real t1) const;
 
-		Vector2D<Real>* mA;
-		Vector2D<Real>* mB;
-		Vector2D<Real>* mC;
-		Vector2D<Real>* mD;
+		Vector2<Real>* mA;
+		Vector2<Real>* mB;
+		Vector2<Real>* mC;
+		Vector2<Real>* mD;
 
 		class  SplineKey
 		{

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:40)
 
 #include "Network/NetworkExport.h"
 
@@ -31,7 +31,7 @@ Network::NullSockConnector::NullSockConnector() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockConnector)
 
-bool Network::NullSockConnector::Connect([[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
+bool Network::NullSockConnector::Connect(MAYBE_UNUSED const SockStreamSharedPtr& sockStream, MAYBE_UNUSED const SockAddressSharedPtr& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -41,11 +41,12 @@ bool Network::NullSockConnector::Connect([[maybe_unused]] const SockStreamShared
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress)
+
+void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const SockStreamSharedPtr& sockStream, MAYBE_UNUSED const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::CallbackParameters callbackParameters{ 0 };
+    CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPoisition::Error) };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Error), 0);
@@ -57,9 +58,10 @@ void Network::NullSockConnector::AsyncConnect(const EventInterfaceSharedPtr& eve
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }
+
 #include STSTEM_WARNING_POP
 
-const Network::NullSockConnector::SockConnectorPtr Network::NullSockConnector::Clone() const
+Network::NullSockConnector::SockConnectorSharedPtr Network::NullSockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

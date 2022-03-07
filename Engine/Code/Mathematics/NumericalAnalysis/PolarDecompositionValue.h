@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 11:34)
+///	引擎版本：0.8.0.2 (2022/02/17 11:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLAR_DECOMPOSITION_VALUE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLAR_DECOMPOSITION_VALUE_H
@@ -30,19 +30,19 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] const Matrix3 GeOrthogonalMatrix() const noexcept;
-        [[nodiscard]] const Matrix3 GetSymmetryMatrix() const noexcept;
+        NODISCARD Matrix3 GeOrthogonalMatrix() const noexcept;
+        NODISCARD Matrix3 GetSymmetryMatrix() const noexcept;
 
     private:
         void Calculate(const Matrix3& matrix);
 
     private:
-        Matrix3 m_Orthogonal;
-        Matrix3 m_Symmetry;
+        Matrix3 orthogonal;
+        Matrix3 symmetry;
     };
 
-    using FloatPolarDecompositionValue = PolarDecompositionValue<float>;
-    using DoublePolarDecompositionValue = PolarDecompositionValue<double>;
+    using PolarDecompositionValueF = PolarDecompositionValue<float>;
+    using PolarDecompositionValueD = PolarDecompositionValue<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_POLAR_DECOMPOSITION_VALUE_H

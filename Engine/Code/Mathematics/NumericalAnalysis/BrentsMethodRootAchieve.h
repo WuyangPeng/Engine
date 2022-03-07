@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/23 16:55)
+///	引擎版本：0.8.0.2 (2022/02/14 14:54)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_ACHIEVE_H
@@ -18,24 +18,26 @@
 
 template <typename Real>
 Mathematics::BrentsMethodRoot<Real>::BrentsMethodRoot() noexcept
-    : m_Root{}, m_Function{}, m_BrentsMethodRootType{ BrentsMethodRootType::NoSolution }
+    : root{}, function{}, brentsMethodRootType{ BrentsMethodRootType::NoSolution }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::BrentsMethodRoot<Real>::BrentsMethodRoot(Real root, Real function, BrentsMethodRootType type) noexcept
-    : m_Root{ root }, m_Function{ function }, m_BrentsMethodRootType{ type }
+    : root{ root }, function{ function }, brentsMethodRootType{ type }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::BrentsMethodRoot<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -43,9 +45,9 @@ Real Mathematics::BrentsMethodRoot<Real>::GetRoot() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_BrentsMethodRootType != BrentsMethodRootType::NoSolution)
+    if (brentsMethodRootType != BrentsMethodRootType::NoSolution)
     {
-        return m_Root;
+        return root;
     }
     else
     {
@@ -58,9 +60,9 @@ Real Mathematics::BrentsMethodRoot<Real>::GetFunction() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_BrentsMethodRootType != BrentsMethodRootType::NoSolution)
+    if (brentsMethodRootType != BrentsMethodRootType::NoSolution)
     {
-        return m_Function;
+        return function;
     }
     else
     {
@@ -73,7 +75,7 @@ Mathematics::BrentsMethodRootType Mathematics::BrentsMethodRoot<Real>::GetBrents
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_BrentsMethodRootType;
+    return brentsMethodRootType;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_ACHIEVE_H

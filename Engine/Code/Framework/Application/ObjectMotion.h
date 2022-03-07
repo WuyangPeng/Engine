@@ -23,8 +23,8 @@ namespace Framework
 	{
 	public:
 		NON_COPY_TYPE_DECLARE(ObjectMotion);
-		using Matrix = Mathematics::FloatMatrix;
-		using AVector = Mathematics::FloatAVector;
+		using Matrix = Mathematics::MatrixF;
+		using AVector = Mathematics::AVectorF;
 		using Transform = Rendering::FloatTransform;
 		using SpatialSmartPointer = Rendering::SpatialSharedPtr;
 		using ConstCameraSmartPointer = Rendering::ConstCameraSharedPtr;

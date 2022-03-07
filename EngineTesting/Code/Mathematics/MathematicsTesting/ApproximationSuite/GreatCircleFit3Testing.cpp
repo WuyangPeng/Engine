@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 10:42)
 
 #include "GreatCircleFit3Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/GreatCircleFit3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -31,7 +31,10 @@ void Mathematics::GreatCircleFit3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::GreatCircleFit3Testing
 	::FitTest()
 {
@@ -43,12 +46,12 @@ void Mathematics::GreatCircleFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
 		double sumXX = 0.0;
@@ -60,7 +63,7 @@ void Mathematics::GreatCircleFit3Testing
 	 
 		for (int i = 0; i < size; ++i)
 		{
-			DoubleVector3D diff = vertices[i];
+			Vector3D diff = vertices[i];
 
 			sumXX += diff[0] * diff[0];
 			sumXY += diff[0] * diff[1];
@@ -77,7 +80,7 @@ void Mathematics::GreatCircleFit3Testing
 		sumYZ /= size;
 		sumZZ /= size;
 		 
-		DoubleEigenDecomposition eigenSystem(3);
+		EigenDecompositionD eigenSystem(3);
 		eigenSystem(0, 0) = sumXX;
 		eigenSystem(0, 1) = sumXY;
 		eigenSystem(0, 2) = sumXZ;
@@ -91,9 +94,9 @@ void Mathematics::GreatCircleFit3Testing
  
 		eigenSystem.Solve(false);
 
-		DoubleGreatCircleFit3 greatCircleFit3(vertices);
+		GreatCircleFit3D greatCircleFit3(vertices);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, eigenSystem.GetEigenvector3(2), greatCircleFit3.GetNormal(), 1e-10);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, eigenSystem.GetEigenvector3(2), greatCircleFit3.GetNormal(), 1e-10);
 	 
 	}
 }

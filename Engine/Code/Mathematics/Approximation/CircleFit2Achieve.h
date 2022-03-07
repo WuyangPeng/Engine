@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 17:51)
+///	引擎版本：0.8.0.2 (2022/02/17 18:13)
 
 #ifndef MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H
@@ -15,11 +15,11 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
 Mathematics::CircleFit2<Real>::CircleFit2(const PointType& points, int maxIterations, bool initialCenterIsAverage)
-    : m_Circle{}
+    : circle{}
 {
     Calculate(points, maxIterations, initialCenterIsAverage);
 
@@ -36,23 +36,23 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
     // 猜测初始中心。
     if (initialCenterIsAverage)
     {
-        m_Circle.SetCircle(average, Math::GetValue(0));
+        circle.SetCircle(average, Math::GetValue(0));
     }
     else
     {
         const QuadraticCircleFit2<Real> fit2{ points };
 
-        m_Circle.SetCircle(fit2.GetCenter(), fit2.GetRadius());
+        circle.SetCircle(fit2.GetCenter(), fit2.GetRadius());
     }
 
     for (auto loop = 0; loop < maxIterations; ++loop)
     {
-        const auto current = m_Circle.GetCenter();
+        const auto current = circle.GetCenter();
 
         // 更新迭代
         Iteration(points, average);
 
-        auto circleDifference = m_Circle.GetCenter() - current;
+        const auto circleDifference = circle.GetCenter() - current;
 
         if (Math::FAbs(circleDifference[0]) <= Math::GetZeroTolerance() &&
             Math::FAbs(circleDifference[1]) <= Math::GetZeroTolerance())
@@ -65,11 +65,11 @@ void Mathematics::CircleFit2<Real>::Calculate(const PointType& points, int maxIt
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const PointType& points)
+const Mathematics::Vector2<Real> Mathematics::CircleFit2<Real>::GetAveragePoint(const PointType& points)
 {
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
-    Vector2D average{};
+    Vector2 average{};
 
     for (const auto& value : points)
     {
@@ -82,17 +82,17 @@ const Mathematics::Vector2D<Real> Mathematics::CircleFit2<Real>::GetAveragePoint
 }
 
 template <typename Real>
-void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2D& average)
+void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vector2& average)
 {
     // 计算平均值L, dL/da, dL/db。
     auto lengthAverage = Math::GetValue(0);
-    Vector2D derLenghtAverage{};
+    Vector2 derLenghtAverage{};
 
     for (const auto& value : points)
     {
-        auto difference = value - m_Circle.GetCenter();
+        auto difference = value - circle.GetCenter();
 
-        auto length = Vector2DTools<Real>::VectorMagnitude(difference);
+        auto length = Vector2Tools<Real>::GetLength(difference);
         if (Math::GetZeroTolerance() < length)
         {
             lengthAverage += length;
@@ -103,23 +103,25 @@ void Mathematics::CircleFit2<Real>::Iteration(const PointType& points, const Vec
     lengthAverage /= boost::numeric_cast<Real>(points.size());
     derLenghtAverage /= boost::numeric_cast<Real>(points.size());
 
-    m_Circle.SetCircle(average + lengthAverage * derLenghtAverage, lengthAverage);
+    circle.SetCircle(average + lengthAverage * derLenghtAverage, lengthAverage);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::CircleFit2<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::CircleFit2<Real>::Circle2 Mathematics::CircleFit2<Real>::GetCircle() const noexcept
+typename Mathematics::CircleFit2<Real>::Circle2 Mathematics::CircleFit2<Real>::GetCircle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Circle;
+    return circle;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_ACHIEVE_H

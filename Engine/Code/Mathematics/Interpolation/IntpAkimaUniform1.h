@@ -28,7 +28,7 @@ namespace Mathematics
 		Real GetXSpacing() const;
 
 	protected:
-		using IntpAkima1<Real>::m_Quantity;
+		using IntpAkima1<Real>::quantity;
 		using IntpAkima1<Real>::mPoly;
 		using IntpAkima1<Real>::ComputeDerivative;
 

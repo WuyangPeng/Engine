@@ -24,8 +24,8 @@ namespace Framework
 	public:
 		NON_COPY_TYPE_DECLARE(CameraModelMiddleLayer);
 		using ParentType = ModelMiddleLayer;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
 		using Transform = Rendering::FloatTransform;
 

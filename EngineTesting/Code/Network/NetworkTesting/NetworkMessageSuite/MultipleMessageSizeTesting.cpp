@@ -27,8 +27,7 @@ void Network::MultipleMessageSizeTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(TwoSizeTest);
 }
 
-void Network::MultipleMessageSizeTesting
-	::NineSizeTest()
+void Network::MultipleMessageSizeTesting ::NineSizeTest() noexcept
 {
 	using MultipleMessageContainer = MultipleMessageContainer<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8,
 															  MultipleMessageByteType::Int16, MultipleMessageByteType::Uint16, MultipleMessageByteType::Int32,
@@ -38,8 +37,7 @@ void Network::MultipleMessageSizeTesting
 	static_assert(MultipleMessageSize<MultipleMessageContainer>::value == 9, "MultipleMessageSize error");
 }
 
-void Network::MultipleMessageSizeTesting
-	::FiveSizeTest()
+void Network::MultipleMessageSizeTesting ::FiveSizeTest() noexcept
 {
 	using MultipleMessageContainer = MultipleMessageContainer<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8,
 															  MultipleMessageByteType::Int16, MultipleMessageByteType::Uint16, MultipleMessageByteType::Int32>;
@@ -47,8 +45,7 @@ void Network::MultipleMessageSizeTesting
 	static_assert(MultipleMessageSize<MultipleMessageContainer>::value == 5, "MultipleMessageSize error");
 }
 
-void Network::MultipleMessageSizeTesting
-	::TwoSizeTest()
+void Network::MultipleMessageSizeTesting ::TwoSizeTest() noexcept
 {
 	using MultipleMessageContainer = MultipleMessageContainer<MultipleMessageField, MultipleMessageByteType::Int8, MultipleMessageByteType::Uint8>;
 

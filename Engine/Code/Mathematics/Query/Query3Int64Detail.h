@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:28)
+///	引擎版本：0.8.0.2 (2022/02/17 16:49)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INT64_DETAIL_H
@@ -24,6 +24,7 @@ Mathematics::Query3Int64<Real>::Query3Int64(const VerticesType& vertices)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query3Int64<Real>::IsValid() const noexcept
 {
@@ -32,6 +33,7 @@ bool Mathematics::Query3Int64<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -51,7 +53,7 @@ Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(int index, i
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
+Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(const Vector3& testVector, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "索引错误！");
@@ -72,7 +74,7 @@ Mathematics::PlaneQueryType Mathematics::Query3Int64<Real>::ToPlane(const Vector
     const int64_t y2{ boost::numeric_cast<int64_t>(vector2.GetY()) - boost::numeric_cast<int64_t>(vector0.GetY()) };
     const int64_t z2{ boost::numeric_cast<int64_t>(vector2.GetZ()) - boost::numeric_cast<int64_t>(vector0.GetZ()) };
 
-    auto det = QueryDotTools<int64_t>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+    const auto det = QueryDotTools<int64_t>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 
     if (0 < det)
         return PlaneQueryType::PositiveSide;
@@ -91,7 +93,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Int64<Real>::ToCircumspher
 }
 
 template <typename Real>
-Mathematics::CircumsphereQueryType Mathematics::Query3Int64<Real>::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::CircumsphereQueryType Mathematics::Query3Int64<Real>::ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "索引错误！");
@@ -103,36 +105,36 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Int64<Real>::ToCircumspher
     const auto vector2 = this->GetVertice(v2);
     const auto vector3 = this->GetVertice(v3);
 
-    auto s0x = boost::numeric_cast<int64_t>(vector0.GetX() + testVector.GetX());
-    auto d0x = boost::numeric_cast<int64_t>(vector0.GetX() - testVector.GetX());
-    auto s0y = boost::numeric_cast<int64_t>(vector0.GetY() + testVector.GetY());
-    auto d0y = boost::numeric_cast<int64_t>(vector0.GetY() - testVector.GetY());
-    auto s0z = boost::numeric_cast<int64_t>(vector0.GetZ() + testVector.GetZ());
-    auto d0z = boost::numeric_cast<int64_t>(vector0.GetZ() - testVector.GetZ());
-    auto s1x = boost::numeric_cast<int64_t>(vector1.GetX() + testVector.GetX());
-    auto d1x = boost::numeric_cast<int64_t>(vector1.GetX() - testVector.GetX());
-    auto s1y = boost::numeric_cast<int64_t>(vector1.GetY() + testVector.GetY());
-    auto d1y = boost::numeric_cast<int64_t>(vector1.GetY() - testVector.GetY());
-    auto s1z = boost::numeric_cast<int64_t>(vector1.GetZ() + testVector.GetZ());
-    auto d1z = boost::numeric_cast<int64_t>(vector1.GetZ() - testVector.GetZ());
-    auto s2x = boost::numeric_cast<int64_t>(vector2.GetX() + testVector.GetX());
-    auto d2x = boost::numeric_cast<int64_t>(vector2.GetX() - testVector.GetX());
-    auto s2y = boost::numeric_cast<int64_t>(vector2.GetY() + testVector.GetY());
-    auto d2y = boost::numeric_cast<int64_t>(vector2.GetY() - testVector.GetY());
-    auto s2z = boost::numeric_cast<int64_t>(vector2.GetZ() + testVector.GetZ());
-    auto d2z = boost::numeric_cast<int64_t>(vector2.GetZ() - testVector.GetZ());
-    auto s3x = boost::numeric_cast<int64_t>(vector3.GetX() + testVector.GetX());
-    auto d3x = boost::numeric_cast<int64_t>(vector3.GetX() - testVector.GetX());
-    auto s3y = boost::numeric_cast<int64_t>(vector3.GetY() + testVector.GetY());
-    auto d3y = boost::numeric_cast<int64_t>(vector3.GetY() - testVector.GetY());
-    auto s3z = boost::numeric_cast<int64_t>(vector3.GetZ() + testVector.GetZ());
-    auto d3z = boost::numeric_cast<int64_t>(vector3.GetZ() - testVector.GetZ());
-    auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
-    auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
-    auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
-    auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
+    const auto s0x = boost::numeric_cast<int64_t>(vector0.GetX() + testVector.GetX());
+    const auto d0x = boost::numeric_cast<int64_t>(vector0.GetX() - testVector.GetX());
+    const auto s0y = boost::numeric_cast<int64_t>(vector0.GetY() + testVector.GetY());
+    const auto d0y = boost::numeric_cast<int64_t>(vector0.GetY() - testVector.GetY());
+    const auto s0z = boost::numeric_cast<int64_t>(vector0.GetZ() + testVector.GetZ());
+    const auto d0z = boost::numeric_cast<int64_t>(vector0.GetZ() - testVector.GetZ());
+    const auto s1x = boost::numeric_cast<int64_t>(vector1.GetX() + testVector.GetX());
+    const auto d1x = boost::numeric_cast<int64_t>(vector1.GetX() - testVector.GetX());
+    const auto s1y = boost::numeric_cast<int64_t>(vector1.GetY() + testVector.GetY());
+    const auto d1y = boost::numeric_cast<int64_t>(vector1.GetY() - testVector.GetY());
+    const auto s1z = boost::numeric_cast<int64_t>(vector1.GetZ() + testVector.GetZ());
+    const auto d1z = boost::numeric_cast<int64_t>(vector1.GetZ() - testVector.GetZ());
+    const auto s2x = boost::numeric_cast<int64_t>(vector2.GetX() + testVector.GetX());
+    const auto d2x = boost::numeric_cast<int64_t>(vector2.GetX() - testVector.GetX());
+    const auto s2y = boost::numeric_cast<int64_t>(vector2.GetY() + testVector.GetY());
+    const auto d2y = boost::numeric_cast<int64_t>(vector2.GetY() - testVector.GetY());
+    const auto s2z = boost::numeric_cast<int64_t>(vector2.GetZ() + testVector.GetZ());
+    const auto d2z = boost::numeric_cast<int64_t>(vector2.GetZ() - testVector.GetZ());
+    const auto s3x = boost::numeric_cast<int64_t>(vector3.GetX() + testVector.GetX());
+    const auto d3x = boost::numeric_cast<int64_t>(vector3.GetX() - testVector.GetX());
+    const auto s3y = boost::numeric_cast<int64_t>(vector3.GetY() + testVector.GetY());
+    const auto d3y = boost::numeric_cast<int64_t>(vector3.GetY() - testVector.GetY());
+    const auto s3z = boost::numeric_cast<int64_t>(vector3.GetZ() + testVector.GetZ());
+    const auto d3z = boost::numeric_cast<int64_t>(vector3.GetZ() - testVector.GetZ());
+    const auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
+    const auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
+    const auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
+    const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-    auto det = QueryDotTools<int64_t>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
+    const auto det = QueryDotTools<int64_t>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
 
     if (0 < det)
         return CircumsphereQueryType::Outside;

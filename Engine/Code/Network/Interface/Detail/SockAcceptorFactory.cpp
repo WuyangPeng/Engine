@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 12:51)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 16:55)
 
 #include "Network/NetworkExport.h"
 
@@ -30,7 +30,7 @@ Network::SockAcceptorFactory::SockAcceptorFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, SockAcceptorFactory)
 
 // static
-const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory::Create(int port, const ConfigurationStrategy& configurationStrategy)
+Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(int port, const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
@@ -58,7 +58,7 @@ const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory::Cr
 }
 
 // static
-const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory::Create(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
+Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(const string& hostName, int port, const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
@@ -85,7 +85,7 @@ const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory::Cr
     }
 }
 
-const Network::SockAcceptorFactory::ImplTypePtr Network::SockAcceptorFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Network::SockAcceptorFactory::ImplTypeSharedPtr Network::SockAcceptorFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 

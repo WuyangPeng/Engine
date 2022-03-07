@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/19 9:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 14:42)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_DETAIL_H
@@ -35,14 +35,13 @@ CoreTools::MinHeapRecord<Generator, Scalar>::MinHeapRecord(int uniqueIndex, Gene
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Generator, typename Scalar>
 bool CoreTools::MinHeapRecord<Generator, Scalar>::IsValid() const noexcept
 {
-    if (-1 <= m_UniqueIndex)
-        return true;
-    else
-        return false;
+    return -1 <= m_UniqueIndex;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Generator, typename Scalar>

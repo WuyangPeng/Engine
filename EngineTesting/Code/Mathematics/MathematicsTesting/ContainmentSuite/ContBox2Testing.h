@@ -22,7 +22,7 @@ namespace Mathematics
 		void ContOrientedBoxTest();
 		void MergeBoxesTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 12:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:46)
 
 #include "Network/NetworkExport.h"
 
@@ -17,8 +17,8 @@
 using std::make_shared;
 using std::string;
 
-Network::SendSocketManagerImpl::SendSocketManagerImpl([[maybe_unused]] const string& fileName)
-    : m_SendSocket{}, m_SocketManager{}
+Network::SendSocketManagerImpl::SendSocketManagerImpl(MAYBE_UNUSED const string& fileName)
+    : sendSocket{}, socketManager{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,8 +29,8 @@ void Network::SendSocketManagerImpl::Send(const SocketData& socketData, uint64_t
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    const auto iter = m_SendSocket.find(socketData);
-    if (iter != m_SendSocket.cend())
+    const auto iter = sendSocket.find(socketData);
+    if (iter != sendSocket.cend())
     {
         iter->second->Send(socketID, message);
     }
@@ -40,8 +40,8 @@ Network::SendSocketSharedPtr Network::SendSocketManagerImpl::GetSendSocket(const
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    const auto iter = m_SendSocket.find(socketData);
-    if (iter != m_SendSocket.cend())
+    const auto iter = sendSocket.find(socketData);
+    if (iter != sendSocket.cend())
     {
         return iter->second;
     }
@@ -55,5 +55,5 @@ Network::SocketManagerSharedPtr Network::SendSocketManagerImpl::GetSocketManager
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_SocketManager;
+    return socketManager;
 }

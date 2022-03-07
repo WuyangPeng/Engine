@@ -485,8 +485,8 @@ void Imagics ::Ellipse2D(int xc, int yc, int A, int B, void (*callback)(int, int
 
 static void SelectEllipsePoint(int A2, int B2, float fx, float fy, int& x, int& y) noexcept
 {
-    int xFloor = static_cast<int>(Mathematics::FloatMath::Floor(fx));
-    int yFloor = static_cast<int>(Mathematics::FloatMath::Floor(fy));
+    int xFloor = static_cast<int>(Mathematics::MathF::Floor(fx));
+    int yFloor = static_cast<int>(Mathematics::MathF::Floor(fy));
     const int xIncr = B2 * (2 * xFloor + 1);
     const int yIncr = A2 * (2 * yFloor + 1);
     const int base = B2 * xFloor * xFloor + A2 * yFloor * yFloor - A2 * B2;

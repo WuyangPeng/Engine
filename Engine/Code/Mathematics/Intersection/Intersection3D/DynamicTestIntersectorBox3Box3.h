@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/24 17:50)
+///	引擎版本：0.8.0.3 (2022/03/01 10:55)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H
@@ -18,23 +18,23 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3D>
+    class DynamicTestIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3>
     {
     public:
         using ClassType = DynamicTestIntersectorBox3Box3<Real>;
-        using ParentType = DynamicIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
-        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+        DynamicTestIntersectorBox3Box3(const Box3& box0, const Box3& box1, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Box3 GetBox0() const noexcept;
-        [[nodiscard]] const Box3 GetBox1() const noexcept;
+        NODISCARD Box3 GetBox0() const noexcept;
+        NODISCARD Box3 GetBox1() const noexcept;
 
     private:
         using Separated = std::pair<bool, Real>;
@@ -50,15 +50,12 @@ namespace Mathematics
         ///
         /// 注意：可以使用BoxBoxAxisTest函数，但是box-box代码可以优化box在各个轴上的投影。
         /// 该函数有效地是BoxBoxAxisTest，但是没有轴方向和速度的点积以获得速度。 优化是通过较少的操作来计算速度。
-        [[nodiscard]] Separated IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept;
+        NODISCARD Separated IsSeparated(Real min0, Real max0, Real min1, Real max1, Real speed, Real tmax, Real tlast) noexcept;
 
     private:
-        Box3 m_Box0;
-        Box3 m_Box1;
+        Box3 box0;
+        Box3 box1;
     };
-
-    using FloatDynamicTestIntersectorBox3Box3 = DynamicTestIntersectorBox3Box3<float>;
-    using DoubleDynamicTestIntersectorBox3Box3 = DynamicTestIntersectorBox3Box3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_BOX3_BOX3_H

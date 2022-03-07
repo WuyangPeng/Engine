@@ -1,83 +1,75 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 21:38)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_RAY3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_RAY3_PLANE3_DETAIL_H
 
 #include "StaticTestIntersectorRay3Plane3.h"
 #include "Detail/IntersectorLine3Triangle3DataDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
+#include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorLine3Plane3Detail.h"
 #include "Mathematics/Intersection/IntersectorDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::StaticTestIntersectorRay3Plane3(const Ray3& ray,const Plane3& plane,const Real epsilon) 
-	:ParentType{ epsilon }, m_Ray{ ray }, m_Plane{ plane }
+Mathematics::StaticTestIntersectorRay3Plane3<Real>::StaticTestIntersectorRay3Plane3(const Ray3& ray, const Plane3& plane, const Real epsilon) noexcept
+    : ParentType{ epsilon }, ray{ ray }, plane{ plane }
 {
-	Test();
+    Test();
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-template <typename Real>
-Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::~StaticTestIntersectorRay3Plane3() 
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else		
-		return false;		
-}
-#endif // OPEN_CLASS_INVARIANT	
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::GetRay() const
+bool Mathematics::StaticTestIntersectorRay3Plane3<Real>::IsValid() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-    return m_Ray;
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::GetPlane() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_Plane;
-} 
+template <typename Real>
+Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Plane3<Real>::GetRay() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ray;
+}
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorRay3Plane3<Real>::GetPlane() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return plane;
+}
 
 // private
 template <typename Real>
-void Mathematics::StaticTestIntersectorRay3Plane3<Real>
-	::Test() 
+void Mathematics::StaticTestIntersectorRay3Plane3<Real>::Test() noexcept
 {
-	Line3<Real> line{ m_Ray.GetOrigin(), m_Ray.GetDirection() };
-	StaticFindIntersectorLine3Plane3<Real> intr{ line, m_Plane };
-	if (intr.IsIntersection() && intr.GetLineParameter() >= Math<Real>::GetValue(0))
-	{
-		// The line intersects the plane, but possibly at a point that is
-		// not on the ray.
-		this->SetIntersectionType(intr.GetIntersectionType());
-		
-		return;
-	}
+    const Line3<Real> line{ ray.GetOrigin(), ray.GetDirection() };
+    StaticFindIntersectorLine3Plane3<Real> intr{ line, plane };
+    if (intr.IsIntersection() && Math::GetValue(0) <= intr.GetLineParameter())
+    {
+        this->SetIntersectionType(intr.GetIntersectionType());
 
-	this->SetIntersectionType(IntersectionType::Empty);
+        return;
+    }
+
+    this->SetIntersectionType(IntersectionType::Empty);
 }
 
-#endif // MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_RAY3_PLANE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_TEST_TEST_INTERSECTOR_RAY3_PLANE3_DETAIL_H

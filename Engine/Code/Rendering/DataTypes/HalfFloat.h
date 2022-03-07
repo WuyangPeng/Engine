@@ -100,9 +100,9 @@ namespace Rendering
         using FloatTraitsType = typename Mathematics::IntegerTraits<float>::TraitsType;
         using FloatIntegerType = typename FloatTraitsType::IntegerType;
 
-        static constexpr auto g_SymbolShiftingDifference = FloatTraitsType::g_SymbolShifting - g_SymbolShifting;
-        static constexpr auto g_ExponentShiftingDifference = FloatTraitsType::g_ExponentShifting - g_ExponentShifting;
-        static constexpr auto g_ExponentDifference = ((1 << FloatTraitsType::g_ExponentDigits) - (1 << g_ExponentDigits)) / 2;
+        static constexpr auto g_SymbolShiftingDifference = FloatTraitsType::symbolShifting - g_SymbolShifting;
+        static constexpr auto g_ExponentShiftingDifference = FloatTraitsType::exponentShifting - g_ExponentShifting;
+        static constexpr auto g_ExponentDifference = ((1 << FloatTraitsType::exponentDigits) - (1 << g_ExponentDigits)) / 2;
 
     private:
         OriginalType m_HalfFloat;
@@ -111,7 +111,7 @@ namespace Rendering
     bool RENDERING_DEFAULT_DECLARE operator==(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
     bool RENDERING_DEFAULT_DECLARE operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept;
 
-    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::FloatMath::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+    bool RENDERING_DEFAULT_DECLARE Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon = Mathematics::MathF::GetZeroTolerance()) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     RENDERING_DEFAULT_DECLARE std::ostream& operator<<(std::ostream& outFile, const HalfFloat& halfFloat);
 

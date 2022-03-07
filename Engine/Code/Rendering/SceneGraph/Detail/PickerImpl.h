@@ -28,8 +28,8 @@ namespace Rendering
 		// P是一个点的成分(P是原点),D是一个单位长度方向,
 		// t是一个在区间[tmin,tmax]的标量，其中 tmin < tmax。
 		// P和D值必须在世界坐标。tmin和tmax的选择如下
-		// 直线:  tmin = -Mathf::sm_MaxReal, tmax = Mathf::sm_MaxReal
-		// 射线:  tmin = 0, tmax = Mathematics::Mathf::sm_MaxReal
+		// 直线:  tmin = -Mathf::maxReal, tmax = Mathf::maxReal
+		// 射线:  tmin = 0, tmax = Mathematics::Mathf::maxReal
 		// 线段:  tmin = 0, tmax > 0;
 		PickerImpl(const ConstSpatialSharedPtr& scene, const APoint& origin,const AVector& direction, float tMin, float tMax);
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/07/29 16:12)
+///	引擎版本：0.8.0.1 (2022/01/08 1:03)
 
 #ifndef CORE_TOOLS_HELPER_SYSTEM_CUSTOM_ASSERT_MACRO_H
 #define CORE_TOOLS_HELPER_SYSTEM_CUSTOM_ASSERT_MACRO_H

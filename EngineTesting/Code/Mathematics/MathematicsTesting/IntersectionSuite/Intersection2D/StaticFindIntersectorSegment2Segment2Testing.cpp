@@ -17,7 +17,7 @@ namespace Mathematics
     template class StaticFindIntersectorSegment2Segment2<float>;
     template class StaticFindIntersectorSegment2Segment2<double>;
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorSegment2Segment2Testing)
 
 void Mathematics::StaticFindIntersectorSegment2Segment2Testing ::MainTest()
@@ -34,20 +34,20 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing ::SegmentTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector2D lhsOrigin(randomDistribution(generator),
-                                randomDistribution(generator));
-        FloatVector2D lhsDirection(randomDistribution(generator),
-                                   randomDistribution(generator));
-        FloatVector2D rhsOrigin(randomDistribution(generator),
-                                randomDistribution(generator));
-        FloatVector2D rhsDirection(randomDistribution(generator),
-                                   randomDistribution(generator));
+        Vector2F lhsOrigin(randomDistribution(generator),
+                           randomDistribution(generator));
+        Vector2F lhsDirection(randomDistribution(generator),
+                              randomDistribution(generator));
+        Vector2F rhsOrigin(randomDistribution(generator),
+                           randomDistribution(generator));
+        Vector2F rhsDirection(randomDistribution(generator),
+                              randomDistribution(generator));
 
         lhsDirection.Normalize();
         rhsDirection.Normalize();
 
-        float firstExtent = FloatMath::FAbs(randomDistribution(generator));
-        float secondExtent = FloatMath::FAbs(randomDistribution(generator));
+        float firstExtent = MathF::FAbs(randomDistribution(generator));
+        float secondExtent = MathF::FAbs(randomDistribution(generator));
 
         if (firstExtent < 1.0f)
         {
@@ -59,41 +59,41 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing ::SegmentTest()
             secondExtent = 1.1f;
         }
 
-        FloatStaticFindIntersectorSegment2Segment2 firstClassify(FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection));
+        StaticFindIntersectorSegment2Segment2<float> firstClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection));
 
         ASSERT_ENUM_EQUAL(firstClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(firstClassify.GetQuantity(), 2);
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin, firstClassify.GetPoint(0), 1e-6f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin + firstExtent * lhsDirection, firstClassify.GetPoint(1), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, firstClassify.GetPoint(0), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + firstExtent * lhsDirection, firstClassify.GetPoint(1), 1e-6f);
 
-        FloatStaticFindIntersectorSegment2Segment2 secondClassify(FloatSegment2(firstExtent, lhsOrigin, lhsDirection), FloatSegment2(firstExtent, rhsOrigin, lhsDirection));
+        StaticFindIntersectorSegment2Segment2<float> secondClassify(Segment2F(firstExtent, lhsOrigin, lhsDirection), Segment2F(firstExtent, rhsOrigin, lhsDirection));
 
         ASSERT_ENUM_EQUAL(secondClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(secondClassify.GetQuantity(), 0);
 
-        FloatStaticFindIntersectorSegment2Segment2 thirdClassify(FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), FloatSegment2(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
+        StaticFindIntersectorSegment2Segment2<float> thirdClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
 
         ASSERT_ENUM_EQUAL(thirdClassify.GetIntersectionType(), IntersectionType::Point);
         ASSERT_EQUAL(thirdClassify.GetQuantity(), 1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin, thirdClassify.GetPoint(0), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, thirdClassify.GetPoint(0), 1e-6f);
 
-        FloatStaticFindIntersectorSegment2Segment2 fourthClassify(FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), FloatSegment2(lhsOrigin + lhsDirection, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
+        StaticFindIntersectorSegment2Segment2<float> fourthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin + lhsDirection, lhsOrigin - secondExtent * lhsDirection), 1e-5f);
 
         ASSERT_ENUM_EQUAL(fourthClassify.GetIntersectionType(), IntersectionType::Segment);
         ASSERT_EQUAL(fourthClassify.GetQuantity(), 2);
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin, fourthClassify.GetPoint(0), 1e-6f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin + lhsDirection, fourthClassify.GetPoint(1), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin, fourthClassify.GetPoint(0), 1e-6f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + lhsDirection, fourthClassify.GetPoint(1), 1e-6f);
 
-        FloatStaticFindIntersectorSegment2Segment2 fifthClassify(FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), FloatSegment2(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
+        StaticFindIntersectorSegment2Segment2<float> fifthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection), Segment2F(lhsOrigin - lhsDirection, lhsOrigin - secondExtent * lhsDirection));
 
         ASSERT_ENUM_EQUAL(fifthClassify.GetIntersectionType(), IntersectionType::Empty);
         ASSERT_EQUAL(fifthClassify.GetQuantity(), 0);
 
-        FloatStaticFindIntersectorSegment2Segment2 sixthClassify(FloatSegment2(lhsOrigin, lhsOrigin + firstExtent * lhsDirection),
-                                                                 FloatSegment2(rhsOrigin, rhsOrigin + secondExtent * rhsDirection));
+        StaticFindIntersectorSegment2Segment2<float> sixthClassify(Segment2F(lhsOrigin, lhsOrigin + firstExtent * lhsDirection),
+                                                                   Segment2F(rhsOrigin, rhsOrigin + secondExtent * rhsDirection));
 
-        FloatStaticTestIntersectorLine2Classify seventhClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection,
-                                                                true);
+        StaticTestIntersectorLine2Classify<float> seventhClassify(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection,
+                                                                  true);
 
         if (0.0f <= seventhClassify.GetParameter0() && 0.0f <= seventhClassify.GetParameter1() &&
             seventhClassify.GetParameter0() <= firstExtent &&
@@ -101,7 +101,7 @@ void Mathematics::StaticFindIntersectorSegment2Segment2Testing ::SegmentTest()
         {
             ASSERT_ENUM_EQUAL(sixthClassify.GetIntersectionType(), IntersectionType::Point);
             ASSERT_EQUAL(sixthClassify.GetQuantity(), 1);
-            ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, lhsOrigin + seventhClassify.GetParameter0() * lhsDirection, sixthClassify.GetPoint(0), 1e-6f);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, lhsOrigin + seventhClassify.GetParameter0() * lhsDirection, sixthClassify.GetPoint(0), 1e-6f);
         }
         else
         {

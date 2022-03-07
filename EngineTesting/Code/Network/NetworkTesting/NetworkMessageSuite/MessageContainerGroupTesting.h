@@ -22,7 +22,7 @@ namespace Network
 		void BaseTest();
 		void StreamingTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

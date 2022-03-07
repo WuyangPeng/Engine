@@ -1,29 +1,30 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/08 17:34)
+///	引擎版本：0.8.0.2 (2022/02/21 11:52)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_SEGMENT2_ACHIEVE_H
 
 #include "DistancePoint2Segment2.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 #include "Mathematics/Objects2D/Segment2Detail.h"
 
 template <typename Real>
-Mathematics::DistancePoint2Segment2<Real>::DistancePoint2Segment2(const Vector2D& point, const Segment2& segment) noexcept
-    : ParentType{}, m_Point{ point }, m_Segment{ segment }
+Mathematics::DistancePoint2Segment2<Real>::DistancePoint2Segment2(const Vector2& point, const Segment2& segment) noexcept
+    : ParentType{}, point{ point }, segment{ segment }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DistancePoint2Segment2<Real>::IsValid() const noexcept
 {
@@ -32,61 +33,62 @@ bool Mathematics::DistancePoint2Segment2<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::DistancePoint2Segment2<Real>::GetPoint() const noexcept
+Mathematics::Vector2<Real> Mathematics::DistancePoint2Segment2<Real>::GetPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Point;
+    return point;
 }
 
 template <typename Real>
-const Mathematics::Segment2<Real> Mathematics::DistancePoint2Segment2<Real>::GetSegment() const noexcept
+Mathematics::Segment2<Real> Mathematics::DistancePoint2Segment2<Real>::GetSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Segment;
+    return segment;
 }
 
 template <typename Real>
-const typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared() const
+typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto difference = m_Point - m_Segment.GetCenterPoint();
-    auto param = Vector2DTools::DotProduct(m_Segment.GetDirection(), difference);
+    auto difference = point - segment.GetCenterPoint();
+    auto param = Vector2Tools::DotProduct(segment.GetDirection(), difference);
 
-    Vector2D rhsClosestPoint{};
-    if (-m_Segment.GetExtent() < param)
+    Vector2 rhsClosestPoint{};
+    if (-segment.GetExtent() < param)
     {
-        if (param < m_Segment.GetExtent())
+        if (param < segment.GetExtent())
         {
-            rhsClosestPoint = m_Segment.GetCenterPoint() + param * m_Segment.GetDirection();
+            rhsClosestPoint = segment.GetCenterPoint() + param * segment.GetDirection();
         }
         else
         {
-            rhsClosestPoint = m_Segment.GetEndPoint();
+            rhsClosestPoint = segment.GetEndPoint();
         }
     }
     else
     {
-        rhsClosestPoint = m_Segment.GetBeginPoint();
+        rhsClosestPoint = segment.GetBeginPoint();
     }
 
-    difference = rhsClosestPoint - m_Point;
+    difference = rhsClosestPoint - point;
 
-    return DistanceResult{ Vector2DTools::VectorMagnitudeSquared(difference), Math::GetValue(0), m_Point, rhsClosestPoint };
+    return DistanceResult{ Vector2Tools::GetLengthSquared(difference), Math::GetValue(0), point, rhsClosestPoint };
 }
 
 template <typename Real>
-const typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const
+typename Mathematics::DistancePoint2Segment2<Real>::DistanceResult Mathematics::DistancePoint2Segment2<Real>::GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto movePoint = m_Point.GetMove(t, lhsVelocity);
-    const auto movedSegment = m_Segment.GetMove(t, rhsVelocity);
+    const auto movePoint = point.GetMove(t, lhsVelocity);
+    const auto movedSegment = segment.GetMove(t, rhsVelocity);
 
     ClassType distance{ movePoint, movedSegment };
     distance.SetZeroThreshold(this->GetZeroThreshold());

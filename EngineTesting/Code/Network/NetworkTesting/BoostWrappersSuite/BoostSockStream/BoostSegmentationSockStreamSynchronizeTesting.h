@@ -6,7 +6,7 @@
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SEGMENTATION_SOCK_STREAM_SYNCHRONIZE_TESTING_H
 #define NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SEGMENTATION_SOCK_STREAM_SYNCHRONIZE_TESTING_H
-
+#include "System/Helper/Platform.h"
 #include "Network/NetworkTesting/BoostWrappersSuite/BoostSockStreamTesting.h"
 
 namespace Network
@@ -23,7 +23,7 @@ namespace Network
 		using TestFunction = void(ClassType::*)();
 
 	private:
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 		void MainTest();
 

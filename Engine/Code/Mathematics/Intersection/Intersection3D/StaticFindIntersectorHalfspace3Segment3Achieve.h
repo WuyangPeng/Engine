@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/18 11:24)
+///	引擎版本：0.8.0.3 (2022/03/01 18:36)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_HALFSPACE3_SEGMENT3_ACHIEVE_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::StaticFindIntersectorHalfspace3Segment3(const Plane3& halfspace, const Segment3& segment, const Real epsilon)
-    : ParentType{ epsilon }, m_Halfspace{ halfspace }, m_Segment{ segment }, m_Quantity{}, m_Point0{}, m_Point1{}
+    : ParentType{ epsilon }, halfspace{ halfspace }, segment{ segment }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::StaticFindIntersecto
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::IsValid() const noexcept
 {
@@ -32,22 +33,23 @@ bool Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::IsValid() const
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
-template <typename Real> 
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetHalfspace() const noexcept
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetHalfspace() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Halfspace;
+    return halfspace;
 }
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetSegment() const noexcept
+Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Segment;
+    return segment;
 }
 
 template <typename Real>
@@ -55,25 +57,24 @@ void Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::Find()
 {
     // 从线段开始，将其裁剪在平面上。
 
-    typename IntersectorUtility3<Real>::Container container{ m_Segment.GetBeginPoint(), m_Point1 = m_Segment.GetEndPoint() };
+    typename IntersectorUtility3<Real>::Container container{ segment.GetBeginPoint(), point1 = segment.GetEndPoint() };
 
-    container = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(-m_Halfspace.GetNormal(), -m_Halfspace.GetConstant(), container);
-    m_Quantity = boost::numeric_cast<int>(container.size());
+    container = IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(-halfspace.GetNormal(), -halfspace.GetConstant(), container);
+    quantity = boost::numeric_cast<int>(container.size());
 
-    if (m_Quantity == 0)
+    if (quantity == 0)
     {
         this->SetIntersectionType(IntersectionType::Empty);
-        
     }
-    else if (m_Quantity == 1)
+    else if (quantity == 1)
     {
-        m_Point0 = container.at(0);
+        point0 = container.at(0);
         this->SetIntersectionType(IntersectionType::Point);
     }
-    else if(1 < m_Quantity)
+    else if (1 < quantity)
     {
-        m_Point0 = container.at(0);
-        m_Point1 = container.at(1);
+        point0 = container.at(0);
+        point1 = container.at(1);
         this->SetIntersectionType(IntersectionType::Point);
     }
 }
@@ -83,20 +84,20 @@ int Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetQuantity() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorHalfspace3Segment3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else if (index == 1)
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));

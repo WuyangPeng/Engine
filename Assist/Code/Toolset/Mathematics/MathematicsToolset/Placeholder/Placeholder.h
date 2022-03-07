@@ -7,23 +7,23 @@
 #ifndef MATHEMATICS_TOOLSET_PLACEHOLDER_H
 #define MATHEMATICS_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Mathematics/MathematicsToolset/MathematicsToolsetDll.h" 
+#include "Toolset/Mathematics/MathematicsToolset/MathematicsToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace MathematicsToolset
 {
-	 class MATHEMATICS_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class MATHEMATICS_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // MATHEMATICS_TOOLSET_PLACEHOLDER_H
+#endif  // MATHEMATICS_TOOLSET_PLACEHOLDER_H

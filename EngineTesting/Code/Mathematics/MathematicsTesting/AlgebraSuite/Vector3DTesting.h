@@ -11,10 +11,10 @@
 
 namespace Mathematics
 {
-	class Vector3DTesting : public CoreTools::UnitTest
+	class Vector3Testing : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3DTesting);  
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3Testing);  
 
 	private:
 		void MainTest();	
@@ -23,7 +23,7 @@ namespace Mathematics
 		void CalculateTest(); 
 		void BarycentricsTest();
 
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

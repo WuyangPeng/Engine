@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 16:48)
+///	引擎版本：0.8.0.2 (2022/01/31 3:39)
 
 #ifndef MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_H
 #define MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_H
@@ -38,12 +38,12 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问
-        [[nodiscard]] Real operator[](int index) const;
-        [[nodiscard]] bool IsBarycentricCoordinatesValid() const noexcept;
+        NODISCARD Real operator[](int index) const;
+        NODISCARD bool IsBarycentricCoordinatesValid() const noexcept;
 
     private:
-        bool m_IsValid;
-        Tuple m_Tuple;
+        bool isValid;
+        Tuple tuple;
     };
 }
 

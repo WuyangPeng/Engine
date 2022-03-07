@@ -90,7 +90,7 @@ namespace Rendering
         int mNumCurveSamples, mNumRadialSamples;
         float* mSin;
         float* mCos;
-        Mathematics::FloatVector3D* mSamples;
+        Mathematics::Vector3F* mSamples;
         bool mSampleByArcLength;
     };
 #include "System/Helper/PragmaWarning.h"

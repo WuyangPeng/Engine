@@ -10,11 +10,11 @@
 #include "ContEllipse2MinCR.h"
 
 template <typename Real>
-Mathematics::ContEllipse2MinCR<Real>::ContEllipse2MinCR(int numPoints, const Vector2D<Real>* points, const Vector2D<Real>& C, const Matrix2<Real>& R, Real D[2])
+Mathematics::ContEllipse2MinCR<Real>::ContEllipse2MinCR(int numPoints, const Vector2<Real>* points, const Vector2<Real>& C, const Matrix2<Real>& R, Real D[2])
 {
     // Compute the constraint coefficients, of the form (A[0],A[1]) for
     // each i.
-    std::vector<Vector2D<Real>> A(numPoints);
+    std::vector<Vector2<Real>> A(numPoints);
     for (auto i = 0; i < numPoints; ++i)
     {
         auto diff = points[i] - C;  // P[i] - C
@@ -45,7 +45,7 @@ Mathematics::ContEllipse2MinCR<Real>::ContEllipse2MinCR(int numPoints, const Vec
 }
 
 template <typename Real>
-bool Mathematics::ContEllipse2MinCR<Real>::XGreater(const Vector2D<Real>& P0, const Vector2D<Real>& P1)
+bool Mathematics::ContEllipse2MinCR<Real>::XGreater(const Vector2<Real>& P0, const Vector2<Real>& P1)
 {
     if (P0.GetX() > P1.GetX())
     {
@@ -61,13 +61,13 @@ bool Mathematics::ContEllipse2MinCR<Real>::XGreater(const Vector2D<Real>& P0, co
 }
 
 template <typename Real>
-bool Mathematics::ContEllipse2MinCR<Real>::XEqual(const Vector2D<Real>& P0, const Vector2D<Real>& P1)
+bool Mathematics::ContEllipse2MinCR<Real>::XEqual(const Vector2<Real>& P0, const Vector2<Real>& P1)
 {
     return P0.GetX() == P1.GetX();
 }
 
 template <typename Real>
-bool Mathematics::ContEllipse2MinCR<Real>::YGreater(const Vector2D<Real>& P0, const Vector2D<Real>& P1)
+bool Mathematics::ContEllipse2MinCR<Real>::YGreater(const Vector2<Real>& P0, const Vector2<Real>& P1)
 {
     if (P0.GetY() > P1.GetY())
     {
@@ -83,13 +83,13 @@ bool Mathematics::ContEllipse2MinCR<Real>::YGreater(const Vector2D<Real>& P0, co
 }
 
 template <typename Real>
-bool Mathematics::ContEllipse2MinCR<Real>::YEqual(const Vector2D<Real>& P0, const Vector2D<Real>& P1)
+bool Mathematics::ContEllipse2MinCR<Real>::YEqual(const Vector2<Real>& P0, const Vector2<Real>& P1)
 {
     return P0.GetY() == P1.GetY();
 }
 
 template <typename Real>
-void Mathematics::ContEllipse2MinCR<Real>::MaxProduct(std::vector<Vector2D<Real>>& A, Real D[2])
+void Mathematics::ContEllipse2MinCR<Real>::MaxProduct(std::vector<Vector2<Real>>& A, Real D[2])
 {
     // Keep track of which constraint lines have already been used in the
     // search.
@@ -152,7 +152,7 @@ void Mathematics::ContEllipse2MinCR<Real>::MaxProduct(std::vector<Vector2D<Real>
                 // care about lines that have more negative slope than the
                 // previous one, that is, -a1/b1 < -a0/b0, in which case we
                 // process only lines for which d < 0.
-                auto det = Vector2DTools<Real>::DotPerp(A[iYMin], A[i]);
+                auto det = Vector2Tools<Real>::DotPerp(A[iYMin], A[i]);
                 if (det < Math<Real>::GetValue(0))  // TO DO.  Need epsilon test here?
                 {
                     // Compute the x-value for the point of intersection,

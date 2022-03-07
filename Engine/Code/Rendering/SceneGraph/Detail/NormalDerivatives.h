@@ -24,9 +24,9 @@ namespace Rendering
 	{
 	public:
 		using ClassType = NormalDerivatives;
-		using Matrix = Mathematics::FloatMatrix;
-		using AVector = Mathematics::FloatAVector;
-		using APoint = Mathematics::FloatAPoint;
+		using Matrix = Mathematics::MatrixF;
+		using AVector = Mathematics::AVectorF;
+		using APoint = Mathematics::APointF;
 			
 	public:		
 		NormalDerivatives(const VertexBufferAccessor& vertexBufferAccessor);

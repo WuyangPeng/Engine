@@ -51,7 +51,7 @@ Mathematics::BasicMesh ::BasicMesh(int numVertices, const void* points, int numT
     mEdges = nullptr;  //NEW1<Edge>(3 * mNumTriangles);
     mTriangles = nullptr;  // NEW1<Triangle>(mNumTriangles);
     std::map<EdgeKey, int> edgeMap;
-    for (int t = 0; t < mNumTriangles; t++)
+    /* for (int t = 0; t < mNumTriangles; t++)
     {
         // Update triangle.
         Triangle& tri = mTriangles[t];
@@ -136,6 +136,7 @@ Mathematics::BasicMesh ::BasicMesh(int numVertices, const void* points, int numT
             }
         }
     }
+    */
 }
 
 Mathematics::BasicMesh ::~BasicMesh(){
@@ -168,7 +169,7 @@ Mathematics::BasicMesh::Vertex ::~Vertex()
     } EXCEPTION_ALL_CATCH(Mathematics)
 }
 
-void Mathematics::BasicMesh::Vertex ::InsertEdge(int v, int e)
+void Mathematics::BasicMesh::Vertex ::InsertEdge(int v, int e) noexcept
 {
     // Check whether vertex/edge in adjacency array (nothing to do if in
     // array).
@@ -204,7 +205,7 @@ void Mathematics::BasicMesh::Vertex ::InsertEdge(int v, int e)
     ++NumVertices;
 }
 
-void Mathematics::BasicMesh::Vertex ::InsertTriangle(int t)
+void Mathematics::BasicMesh::Vertex ::InsertTriangle(int t) noexcept
 {
     // Check whether triangle in adjacency array (nothing to do if in array).
     for (int i = 0; i < NumTriangles; ++i)

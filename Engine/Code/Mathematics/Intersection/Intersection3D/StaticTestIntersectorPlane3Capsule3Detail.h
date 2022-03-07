@@ -1,77 +1,95 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 16:46)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_DETAIL_H
 
 #include "StaticTestIntersectorPlane3Capsule3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon)
-    : m_Plane{ plane }, m_Capsule{ capsule }
+Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon) noexcept
+    : ParentType{ epsilon }, plane{ plane }, capsule{ capsule }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::GetPlane() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return plane;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
-	::GetPlane() const
+Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::GetCapsule() const noexcept
 {
-    return m_Plane;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return capsule;
 }
 
 template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
-	::GetCapsule() const
+void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::Test() noexcept
 {
-    return m_Capsule;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
-	::Test()
-{
-	auto pDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetEndPoint());
-	auto nDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetBeginPoint());
-    if (pDist*nDist <= Math<Real>::GetValue(0))
+    auto pDist = plane.DistanceTo(capsule.GetSegment().GetEndPoint());
+    auto nDist = plane.DistanceTo(capsule.GetSegment().GetBeginPoint());
+    if (pDist * nDist <= Math::GetValue(0))
     {
-        // Capsule segment endpoints on opposite sides of the plane.
-		this->SetIntersectionType(IntersectionType::Other);
+        this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    // Endpoints on same side of plane, but the endpoint spheres (with
-    // radius of the capsule) might intersect the plane.
-	if (Math::FAbs(pDist) <= m_Capsule.GetRadius()|| Math::FAbs(nDist) <= m_Capsule.GetRadius())
-	{
-		this->SetIntersectionType(IntersectionType::Other);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
+    if (Math::FAbs(pDist) <= capsule.GetRadius() || Math::FAbs(nDist) <= capsule.GetRadius())
+    {
+        this->SetIntersectionType(IntersectionType::Other);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
-	::CapsuleIsCulled() const
+bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>::CapsuleIsCulled() const noexcept
 {
-	auto pDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetEndPoint());
-    if (pDist < Math<Real>::GetValue(0))
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto pDist = plane.DistanceTo(capsule.GetSegment().GetEndPoint());
+    if (pDist < Math::GetValue(0))
     {
-		auto nDist = m_Plane.DistanceTo(m_Capsule.GetSegment().GetBeginPoint());
-        if (nDist < Math<Real>::GetValue(0))
+        auto nDist = plane.DistanceTo(capsule.GetSegment().GetBeginPoint());
+        if (nDist < Math::GetValue(0))
         {
             if (pDist <= nDist)
             {
-				return (pDist <= -m_Capsule.GetRadius());				
+                return (pDist <= -capsule.GetRadius());
             }
             else
             {
-				return (nDist <= -m_Capsule.GetRadius());
+                return (nDist <= -capsule.GetRadius());
             }
         }
     }
@@ -79,4 +97,4 @@ bool Mathematics::StaticTestIntersectorPlane3Capsule3<Real>
     return false;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_DETAIL_H

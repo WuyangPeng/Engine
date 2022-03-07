@@ -33,7 +33,10 @@ CoreTools::CpuTimerData& CoreTools::CpuTimerData::operator=(CpuTimerData&& rhs) 
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    cpuTimer = std::move(rhs.cpuTimer);
+    if (this != &rhs)
+    {
+        cpuTimer = std::move(rhs.cpuTimer);
+    }
 
     return *this;
 }

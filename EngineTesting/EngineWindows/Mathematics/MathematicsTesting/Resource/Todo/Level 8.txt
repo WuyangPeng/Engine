@@ -1,0 +1,54 @@
+TODO Level 8
+
+0.0.2.4 
+
+1.   （HelperSuite）完成Helper的StreamMacroTesting的单元测试。  
+2.   （HelperSuite）完成Helper的UserMacroTesting的单元测试。
+3.   （ConfigurationSuite）完成Configuration的ConfigurationStrategyTesting的单元测试。
+4.   （ConfigurationSuite）完成Configuration的ConfigurationSubStrategyTesting的单元测试。
+5.   （ConfigurationSuite）完成Configuration的ConfigurationParameterTesting的单元测试。
+6.   （ConfigurationSuite）完成Configuration的AnalysisNetworkConfigurationTesting的单元测试。
+7.   （NetworkMessageSuite）完成NetworkMessage的MessageContainerGroupTesting的单元测试。
+8.   （NetworkMessageSuite）完成NetworkMessage的MessageContainerTesting的单元测试。
+9.   （NetworkMessageSuite）完成NetworkMessage的MessageInterfaceSharedPtrLessTesting的单元测试。
+10.  （NetworkMessageSuite）完成NetworkMessage的MessageInterfaceTesting的单元测试。
+11.  （NetworkMessageSuite）完成NetworkMessage的MessageManagerTesting的单元测试。
+12.  （NetworkMessageSuite）完成NetworkMessage的DoubleMessageTesting的单元测试。
+13.  （NetworkMessageSuite）完成NetworkMessage的IntegerDoubleMessageTesting的单元测试。
+14.  （NetworkMessageSuite）完成NetworkMessage的IntegerMessageTesting的单元测试。
+15.  （NetworkMessageSuite）完成NetworkMessage的MultipleDoubleMessageTesting的单元测试。
+16.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageCastTesting的单元测试。
+17.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageContainerGroupTesting的单元测试。
+18.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageContainerTesting的单元测试。
+19.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageElementTesting的单元测试。
+20.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageInitValueTesting的单元测试。
+21.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageSizeTesting的单元测试。
+22.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageStreamingLoadTesting的单元测试。
+23.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageStreamingSaveTesting的单元测试。
+24.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageStreamingSizeTesting的单元测试。
+25.  （NetworkMessageSuite）完成NetworkMessage的MultipleMessageTesting的单元测试。
+26.  （NetworkMessageSuite）完成NetworkMessage的NullDoubleMessageTesting的单元测试。
+27.  （NetworkMessageSuite）完成NetworkMessage的NullMessageTesting的单元测试。
+28.  （NetworkMessageSuite）完成NetworkMessage的StringDoubleMessageTesting的单元测试。
+29.  （NetworkMessageSuite）完成NetworkMessage的StringMessageTesting的单元测试。
+30.  （NetworkMessageSuite）完成NetworkMessage的MessageEventContainerTesting的单元测试。
+31.  （NetworkMessageSuite）完成NetworkMessage的MessageEventManagerTesting的单元测试。
+32.  （NetworkMessageSuite）完成NetworkMessage的NetworkMessageEventTesting的单元测试。
+33.  （NetworkMessageSuite）完成NetworkMessage的MessageTypeConditionOperatingTesting的单元测试。
+34.  （NetworkMessageSuite）完成NetworkMessage的MessageTypeConditionTesting的单元测试。
+35.  （NetworkMessageSuite）完成NetworkMessage的BufferReceiveStreamTesting的单元测试。
+36.  （NetworkMessageSuite）完成NetworkMessage的BufferSendStreamTesting的单元测试。
+37.  （NetworkMessageSuite）完成NetworkMessage的MessageBufferTesting的单元测试。
+38.  （NetworkMessageSuite）完成NetworkMessage的MessageSourceTesting的单元测试。
+39.  （NetworkMessageSuite）完成NetworkMessage的MessageTargetTesting的单元测试。
+40.  （NetworkMessageSuite）完成NetworkMessage的ReceiveMessageLevelTesting的单元测试。
+41.  （NetworkMessageSuite）完成NetworkMessage的SendMessageLevelTesting的单元测试。
+42.  （NetworkMessageSuite）完成NetworkMessage的SocketManagerTesting的单元测试。 
+43.  （NetworkWrappersSuite）完成NetworkWrappers的NetworkMainManagerTesting的单元测试。
+44.  （NetworkWrappersSuite）完成NetworkWrappers的NetworkSockInetAddressTesting的单元测试。
+45.  （NetworkWrappersSuite）完成NetworkWrappers的NetworkSockAcceptorTesting的单元测试。
+46.  （NetworkWrappersSuite）完成NetworkWrappers的NetworkSockConnectorTesting的单元测试。
+47.  （NetworkWrappersSuite）完成NetworkWrappers的NetworkSockStreamTesting的单元测试。
+48.  （SocketWrappersSuite）完成SocketWrappers的socket的单元测试。
+49.  （OpensslSuite）完成Openssl的openssl的单元测试。
+ 

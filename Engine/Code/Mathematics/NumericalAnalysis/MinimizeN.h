@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 14:28)
+///	引擎版本：0.8.0.2 (2022/02/15 14:42)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_H
@@ -28,9 +28,9 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = MinimizeN<Real, UserDataType>;
+        using Math = Math<Real>;
         using MinimizeNData = MinimizeNData<Real>;
         using Container = std::vector<Real>;
-        using Math = Math<Real>;
 
         // 被最小化的函数类型：result = f(t,userData)，其中t是d元组（d的尺寸在构造函数）。
         // userData是由构造函数或SetUserData(*)的指针提供。
@@ -51,18 +51,18 @@ namespace Mathematics
 
         // 查找笛卡尔乘积域其最小值存储在t0[0..d-1] 和最大值存储在t1[0..d-1]，其中d是“尺寸”。
         // 最初的猜测是在ttInitial[0..d-1]中存储。最小值的位置是tMin[0..d-1] 和最小的值是fMin。
-        [[nodiscard]] const MinimizeNData GetMinimum(const Container& begin, const Container& end, const Container& initial) const;
+        NODISCARD MinimizeNData GetMinimum(const Container& begin, const Container& end, const Container& initial) const;
 
     private:
         using MinimizeNGetMinimum = MinimizeNGetMinimum<Real, UserDataType>;
 
     private:
-        int m_Dimensions;
-        Function m_Function;
-        int m_MaxLevel;
-        int m_MaxBracket;
-        int m_MaxIterations;
-        const UserDataType* m_UserData;
+        int dimensions;
+        Function function;
+        int maxLevel;
+        int maxBracket;
+        int maxIterations;
+        const UserDataType* userData;
     };
 }
 

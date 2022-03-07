@@ -50,5 +50,5 @@ void System::MemoryCopyTesting::MemoryCopyTest()
     array<char, buffSize> result{};
     result.fill(fillValue);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(copyBuff, result);
+    ASSERT_EQUAL(copyBuff, result);
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 16:04)
+///	引擎版本：0.8.0.2 (2022/02/18 14:52)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_PLANE_FIT3_ACHIEVE_H
@@ -17,17 +17,19 @@
 
 template <typename Real>
 Mathematics::OrthogonalPlaneFit3<Real>::OrthogonalPlaneFit3(const Points& points)
-    : m_Plane3{ Calculate(points) }
+    : plane3{ Calculate(points) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::OrthogonalPlaneFit3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -35,20 +37,20 @@ Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::GetPlane3() co
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Plane3;
+    return plane3;
 }
 
 template <typename Real>
 Mathematics::Plane3<Real> Mathematics::OrthogonalPlaneFit3<Real>::Calculate(const Points& points)
 {
     // 计算点的平均值。
-    Vector3D origin{};
+    Vector3 origin{};
     for (const auto& point : points)
     {
         origin += point;
     }
 
-    auto numPoints = boost::numeric_cast<Real>(points.size());
+    const auto numPoints = boost::numeric_cast<Real>(points.size());
     origin /= numPoints;
 
     // 计算产品总和

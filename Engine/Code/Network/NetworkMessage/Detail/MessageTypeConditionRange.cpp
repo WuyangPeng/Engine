@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:34)
 
 #include "Network/NetworkExport.h"
 
@@ -14,9 +14,9 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Network::MessageTypeConditionRange::MessageTypeConditionRange(int beginVersion, int endVersion)
-    : ParentType{}, m_BeginVersion{ beginVersion }, m_EndVersion{ endVersion }
+    : ParentType{}, beginVersion{ beginVersion }, endVersion{ endVersion }
 {
-    if (m_EndVersion < m_BeginVersion)
+    if (endVersion < beginVersion)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("起始版本号大于结束版本号。"s));
     }
@@ -25,32 +25,34 @@ Network::MessageTypeConditionRange::MessageTypeConditionRange(int beginVersion, 
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Network::MessageTypeConditionRange::IsValid() const noexcept
 {
-    if (m_BeginVersion <= m_EndVersion)
+    if (beginVersion <= endVersion)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 bool Network::MessageTypeConditionRange::IsVersionsConform(int version) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_BeginVersion <= version && version <= m_EndVersion;
+    return beginVersion <= version && version <= endVersion;
 }
 
 int Network::MessageTypeConditionRange::GetMinVersion() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_BeginVersion;
+    return beginVersion;
 }
 
 int Network::MessageTypeConditionRange::GetMaxVersion() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_EndVersion;
+    return endVersion;
 }

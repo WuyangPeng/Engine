@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 13:18)
+///	引擎版本：0.8.0.2 (2022/01/28 13:39)
 
 #ifndef MATHEMATICS_FWD_H
 #define MATHEMATICS_FWD_H
@@ -25,6 +25,7 @@
 #include "NumericalAnalysis/NumericalAnalysisFwd.h"
 #include "Objects2D/Objects2DFwd.h"
 #include "Objects3D/Objects3DFwd.h"
+#include "Primitives/PrimitivesFwd.h"
 #include "Query/QueryFwd.h"
 #include "Rational/RationalFwd.h"
 

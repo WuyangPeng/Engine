@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/27 11:42)
+///	引擎版本：0.8.0.2 (2022/02/16 15:57)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H
@@ -15,7 +15,7 @@
 #include "Mathematics/Algebra/Polynomial.h"
 #include "Mathematics/Algebra/VariableLengthVector.h"
 #include "Mathematics/Algebra/VariableMatrix.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -40,39 +40,17 @@ namespace Mathematics
     // 1 + max{|b[0]/b[n]|,...,|b[n-1]/b[n]|}。
 
     template <typename Real>
-    class PolynomialRootsImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialRootsImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRoots final
+    class PolynomialRoots final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using PolynomialRootsImpl = PolynomialRootsImpl<Real>;
-
-    public:
-        void Swap(PolynomialRoots& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(PolynomialRoots);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~PolynomialRoots() noexcept = default;
-        PolynomialRoots(const PolynomialRoots& rhs);
-        PolynomialRoots& operator=(const PolynomialRoots& rhs);
-        PolynomialRoots(PolynomialRoots&& rhs) noexcept;
-        PolynomialRoots& operator=(PolynomialRoots&& rhs) noexcept;
-
-        using Vector3D = Vector3D<Real>;
+        using ClassType = PolynomialRoots<Real>;
+        using Math = Math<Real>;
+        using Vector3 = Vector3<Real>;
         using Polynomial = Polynomial<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
-
         using Container = std::vector<Real>;
         using ContainerConstIter = typename Container::const_iterator;
 
@@ -81,57 +59,127 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetMaxIterations(int maxIterations) noexcept;
+        void SetMaxIterations(int newMaxIterations) noexcept;
 
-        [[nodiscard]] int GetCount() const noexcept;
-        [[nodiscard]] Real GetRoot(int index) const;
-        [[nodiscard]] const ContainerConstIter GetBegin() const noexcept;
-        [[nodiscard]] const ContainerConstIter GetEnd() const noexcept;
+        NODISCARD int GetCount() const noexcept;
+        NODISCARD Real GetRoot(int index) const;
+        NODISCARD ContainerConstIter GetBegin() const noexcept;
+        NODISCARD ContainerConstIter GetEnd() const;
 
         // 一次方程:  once * x + constant = 0
-        [[nodiscard]] bool FindAlgebraic(Real constant, Real once);
-        [[nodiscard]] Real GetBound(Real constant, Real once);
+        NODISCARD bool FindAlgebraic(Real constant, Real once);
+        NODISCARD Real GetBound(Real constant, Real once);
 
         // 二次方程:  secondary * x^2 + once * x + constant = 0
-        [[nodiscard]] bool FindAlgebraic(Real constant, Real once, Real secondary);
-        [[nodiscard]] Real GetBound(Real constant, Real once, Real secondary);
+        NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary);
+        NODISCARD Real GetBound(Real constant, Real once, Real secondary);
 
         // 三次方程: thrice * x^3 + secondary * x^2+ once * x + constant = 0
-        [[nodiscard]] bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice);
-        [[nodiscard]] bool FindEigenvalues(Real constant, Real once, Real secondary, Real thrice,
-                                           bool doBalancing, Real tolerance = static_cast<Real>(0.001), bool isUseCompanion = true);
-        [[nodiscard]] Real GetBound(Real constant, Real once, Real secondary, Real thrice);
+        NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice);
+        NODISCARD bool FindEigenvalues(Real constant,
+                                       Real once,
+                                       Real secondary,
+                                       Real thrice,
+                                       bool doBalancing,
+                                       Real tolerance = static_cast<Real>(0.001),
+                                       bool isUseCompanion = true);
+        NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice);
 
         // 解 thrice * r^3 + once * r = constant ，其中thrice > 0和once > 0，这个方程永远都只有一个实数根。
-        [[nodiscard]] Real SpecialCubic(Real thrice, Real once, Real constant) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Real SpecialCubic(Real thrice, Real once, Real constant) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
         // 四次方程: quartic * x^4 + thrice * x^3 + secondary * x^2 + once * x + constant = 0
-        [[nodiscard]] bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
-        [[nodiscard]] bool FindEigenvalues(Real constant, Real once, Real secondary, Real thrice, Real quartic, bool doBalancing, Real tolerance = static_cast<Real>(0.001));
-        [[nodiscard]] Real GetBound(Real constant, Real once, Real secondary, Real thrice, Real quartic);
+        NODISCARD bool FindAlgebraic(Real constant, Real once, Real secondary, Real thrice, Real quartic);
+        NODISCARD bool FindEigenvalues(Real constant, Real once, Real secondary, Real thrice, Real quartic, bool doBalancing, Real tolerance = static_cast<Real>(0.001));
+        NODISCARD Real GetBound(Real constant, Real once, Real secondary, Real thrice, Real quartic);
 
         // 一般方程: sum_{i=0}^{degree} c(i) * x^i = 0
-        [[nodiscard]] bool FindBisection(const Polynomial& polynomial, int digits);
-        [[nodiscard]] Real GetBound(const Polynomial& polynomial);
+        NODISCARD bool FindBisection(const Polynomial& polynomial, int digits);
+        NODISCARD Real GetBound(const Polynomial& polynomial);
 
         // 查找要在指定的间隔。
-        [[nodiscard]] bool FindBisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits);
+        NODISCARD bool FindBisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits);
 
-        [[nodiscard]] bool AllRealPartsNegative(const Polynomial& polynomial);
-        [[nodiscard]] bool AllRealPartsPositive(const Polynomial& polynomial);
+        NODISCARD bool AllRealPartsNegative(const Polynomial& polynomial);
+        NODISCARD bool AllRealPartsPositive(const Polynomial& polynomial);
 
         // 计算[begin,end]中根的数目。
         // 利用Sturm序列做计数。它允许通过在 -Math<Real>::sm_MaxReal或 end = Math<Real>::sm_MaxReal。
         // m_Epsilon的值被用作在终点上的Sturm多项式的值的阈值。
         // 如果更小，则该值被假设为零。返回值是根数。如果有无穷多个，则返回-1。
-        [[nodiscard]] int GetRootCount(const Polynomial& polynomial, Real begin, Real end);
+        NODISCARD int GetRootCount(const Polynomial& polynomial, Real begin, Real end);
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        void BalanceCompanion3(VariableMatrix& matrix, Real tolerance);
+
+        NODISCARD bool IsBalancedCompanion3(Real a10, Real a21, Real a02, Real a12, Real a22, Real tolerance) noexcept;
+
+        NODISCARD bool QRIteration3(VariableMatrix& matrix);
+
+        void FrancisQRStep(VariableMatrix& hessenbergMatrix, VariableLengthVector& vector);
+
+        // 支持FindE.
+        NODISCARD Vector3 GetHouseholderVector(int size, const Vector3& uVector);
+
+        void PremultiplyHouseholder(VariableMatrix& mat,
+                                    VariableLengthVector& variableLengthVector,
+                                    int rowMin,
+                                    int rowMax,
+                                    int colunmMin,
+                                    int colunmMax,
+                                    int vSize,
+                                    const Vector3& vVector);
+
+        void PostmultiplyHouseholder(VariableMatrix& mat,
+                                     VariableLengthVector& variableLengthVector,
+                                     int rowMin,
+                                     int rowMax,
+                                     int colunmMin,
+                                     int colunmMax,
+                                     int vSize,
+                                     const Vector3& vVector);
+
+        void BalanceCompanion4(VariableMatrix& matrix, Real tolerance);
+        NODISCARD bool IsBalancedCompanion4(Real a10,
+                                            Real a21,
+                                            Real a32,
+                                            Real a03,
+                                            Real a13,
+                                            Real a23,
+                                            Real a33,
+                                            Real tolerance) noexcept;
+        NODISCARD bool QRIteration4(VariableMatrix& matrix);
+
+        // 支持 FindB.
+        NODISCARD bool Bisection(const Polynomial& polynomial, Real xMin, Real xMax, int digits, Real& root);
+
+        // 支持测试，如果所有根具有负实部。
+        NODISCARD bool AllRealPartsNegative(int degree, Container& coeff);
+
+        void Balance3(VariableMatrix& matrix, Real tolerance);
+        NODISCARD bool IsBalanced3(VariableMatrix& matrix, Real tolerance);
+        NODISCARD Real GetRowNorm(int row, VariableMatrix& matrix);
+        NODISCARD Real GetColomnNorm(int colomn, VariableMatrix& matrix);
+        void ScaleRow(int row, Real scale, VariableMatrix& matrix);
+        void ScaleColomn(int colomn, Real scale, VariableMatrix& matrix);
+
+        void SetRoot(int index, Real value);
+
+    private:
+        static constexpr auto balanceCompanionIterationMax = 16;
+        static constexpr auto balanceIterationMax = 16;
+
+        int count;
+        int maxRoot;
+        Container root;
+        Real epsilon;
+
+        // 对FindEigenvalues函数，默认是128.
+        int maxIterations;
     };
 
-    using FloatPolynomialRoots = PolynomialRoots<float>;
-    using DoublePolynomialRoots = PolynomialRoots<double>;
+    using PolynomialRootsF = PolynomialRoots<float>;
+    using PolynomialRootsD = PolynomialRoots<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_POLYNOMIAL_ROOTS_H

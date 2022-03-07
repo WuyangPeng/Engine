@@ -10,7 +10,7 @@
 #include "ConformalMap.h"
 
 template <typename Real>
-Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real>* points, int numTriangles, const int* indices, int punctureTriangle)
+Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3<Real>* points, int numTriangles, const int* indices, int punctureTriangle)
 {
     // Construct a vertex-triangle-edge representation of mesh.
     BasicMesh mesh(numPoints, points, numTriangles, indices);
@@ -18,8 +18,8 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
     const BasicMesh::Edge* edges = mesh.GetEdges();
     const BasicMesh::Triangle* triangles = mesh.GetTriangles();
 
-    mPlanes = nullptr;  // NEW1<Vector2D<Real> >(numPoints);
-    mSpheres = nullptr;  // NEW1<Vector3D<Real> >(numPoints);
+    mPlanes = nullptr;  // NEW1<Vector2<Real> >(numPoints);
+    mSpheres = nullptr;  // NEW1<Vector3<Real> >(numPoints);
 
     // Construct sparse matrix A nondiagonal entries.
     typename LinearSystem<Real>::SparseMatrix AMat(numEdges, numEdges);
@@ -31,7 +31,7 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
         v0 = edge.V[0];
         v1 = edge.V[1];
 
-        Vector3D<Real> E0, E1;
+        Vector3<Real> E0, E1;
 
         const BasicMesh::Triangle& T0 = triangles[edge.T[0]];
         for (i = 0; i < 3; ++i)
@@ -41,8 +41,8 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
             {
                 E0 = points[v0] - points[v2];
                 E1 = points[v1] - points[v2];
-                value = Vector3DTools<Real>::DotProduct(E0, E1) /
-                        Vector3DTools<Real>::VectorMagnitude(Vector3DTools<Real>::CrossProduct(E0, E1));
+                value = Vector3Tools<Real>::DotProduct(E0, E1) /
+                        Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
             }
         }
 
@@ -54,7 +54,7 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
             {
                 E0 = points[v0] - points[v2];
                 E1 = points[v1] - points[v2];
-                value += Vector3DTools<Real>::DotProduct(E0, E1) / Vector3DTools<Real>::VectorMagnitude(Vector3DTools<Real>::CrossProduct(E0, E1));
+                value += Vector3Tools<Real>::DotProduct(E0, E1) / Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
             }
         }
 
@@ -89,22 +89,22 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
     v0 = tri.V[0];
     v1 = tri.V[1];
     v2 = tri.V[2];
-    Vector3D<Real> V0 = points[v0];
-    Vector3D<Real> V1 = points[v1];
-    Vector3D<Real> V2 = points[v2];
-    Vector3D<Real> E10 = V1 - V0;
-    Vector3D<Real> E20 = V2 - V0;
-    Vector3D<Real> E12 = V1 - V2;
-    Vector3D<Real> cross = Vector3DTools<Real>::CrossProduct(E20, E10);
-    Real len10 = Vector3DTools<Real>::VectorMagnitude(E10);
+    Vector3<Real> V0 = points[v0];
+    Vector3<Real> V1 = points[v1];
+    Vector3<Real> V2 = points[v2];
+    Vector3<Real> E10 = V1 - V0;
+    Vector3<Real> E20 = V2 - V0;
+    Vector3<Real> E12 = V1 - V2;
+    Vector3<Real> cross = Vector3Tools<Real>::CrossProduct(E20, E10);
+    Real len10 = Vector3Tools<Real>::GetLength(E10);
     Real invLen10 = (Math::GetValue(1)) / len10;
-    Real twoArea = Vector3DTools<Real>::VectorMagnitude(cross);
+    Real twoArea = Vector3Tools<Real>::GetLength(cross);
     Real invLenCross = (Math::GetValue(1)) / twoArea;
     Real invProd = invLen10 * invLenCross;
     Real re0 = -invLen10;
-    Real im0 = invProd * Vector3DTools<Real>::DotProduct(E12, E10);
+    Real im0 = invProd * Vector3Tools<Real>::DotProduct(E12, E10);
     Real re1 = invLen10;
-    Real im1 = invProd * Vector3DTools<Real>::DotProduct(E20, E10);
+    Real im1 = invProd * Vector3Tools<Real>::DotProduct(E20, E10);
     Real re2 = Math<Real>::GetValue(0);
     Real im2 = -len10 * invLenCross;
 
@@ -184,7 +184,7 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
     // Use the average as the south pole.  The points tend to be clustered
     // approximately in the middle of the conformally mapped punctured
     // triangle, so the average is a good choice to place the pole.
-    Vector2D<Real> origin(Math<Real>::GetValue(0), Math<Real>::GetValue(0));
+    Vector2<Real> origin(Math<Real>::GetValue(0), Math<Real>::GetValue(0));
     for (i = 0; i < numPoints; ++i)
     {
         origin += mPlanes[i];
@@ -226,11 +226,11 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
     for (t = 0; t < numTriangles; ++t)
     {
         const BasicMesh::Triangle& T0 = triangles[t];
-        const Vector3D<Real>& V0 = points[T0.V[0]];
-        const Vector3D<Real>& V1 = points[T0.V[1]];
-        const Vector3D<Real>& V2 = points[T0.V[2]];
-        Vector3D<Real> E0 = V1 - V0, E1 = V2 - V0;
-        twoTotalArea += Vector3DTools<Real>::VectorMagnitude(Vector3DTools<Real>::CrossProduct(E0, E1));
+        const Vector3<Real>& V0 = points[T0.V[0]];
+        const Vector3<Real>& V1 = points[T0.V[1]];
+        const Vector3<Real>& V2 = points[T0.V[2]];
+        Vector3<Real> E0 = V1 - V0, E1 = V2 - V0;
+        twoTotalArea += Vector3Tools<Real>::GetLength(Vector3Tools<Real>::CrossProduct(E0, E1));
     }
     mRadius = ComputeRadius(mPlanes[v0], mPlanes[v1], mPlanes[v2], twoArea / twoTotalArea);
     Real radiusSqr = mRadius * mRadius;
@@ -239,12 +239,12 @@ Mathematics::ConformalMap<Real>::ConformalMap(int numPoints, const Vector3D<Real
     // sphere is centered at the origin and has radius 1.
     for (i = 0; i < numPoints; i++)
     {
-        Real rSqr = Vector3DTools<Real>::VectorMagnitudeSquared(mPlanes[i]);
+        Real rSqr = Vector3Tools<Real>::GetLengthSquared(mPlanes[i]);
         Real mult = (Math::GetValue(1)) / (rSqr + radiusSqr);
         Real x = (Math::GetValue(2)) * mult * radiusSqr * mPlanes[i].GetX();
         Real y = (Math::GetValue(2)) * mult * radiusSqr * mPlanes[i].GetY();
         Real z = mult * mRadius * (rSqr - radiusSqr);
-        mSpheres[i] = Vector3D<Real>(x, y, z) / mRadius;
+        mSpheres[i] = Vector3<Real>(x, y, z) / mRadius;
     }
 }
 
@@ -256,25 +256,25 @@ Mathematics::ConformalMap<Real>::~ConformalMap()
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>* Mathematics::ConformalMap<Real>::GetPlaneCoordinates() const
+const Mathematics::Vector2<Real>* Mathematics::ConformalMap<Real>::GetPlaneCoordinates() const
 {
     return mPlanes;
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::ConformalMap<Real>::GetPlaneMin() const
+const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMin() const
 {
     return mPlaneMin;
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::ConformalMap<Real>::GetPlaneMax() const
+const Mathematics::Vector2<Real>& Mathematics::ConformalMap<Real>::GetPlaneMax() const
 {
     return mPlaneMax;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::ConformalMap<Real>::GetSphereCoordinates() const
+const Mathematics::Vector3<Real>* Mathematics::ConformalMap<Real>::GetSphereCoordinates() const
 {
     return mSpheres;
 }
@@ -286,11 +286,11 @@ Real Mathematics::ConformalMap<Real>::GetSphereRadius() const
 }
 
 template <typename Real>
-Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2D<Real>& V0, const Vector2D<Real>& V1, const Vector2D<Real>& V2, Real areaFraction) const
+Real Mathematics::ConformalMap<Real>::ComputeRadius(const Vector2<Real>& V0, const Vector2<Real>& V1, const Vector2<Real>& V2, Real areaFraction) const
 {
-    Real r0Sqr = Vector3DTools<Real>::VectorMagnitudeSquared(V0);
-    Real r1Sqr = Vector3DTools<Real>::VectorMagnitudeSquared(V1);
-    Real r2Sqr = Vector3DTools<Real>::VectorMagnitudeSquared(V2);
+    Real r0Sqr = Vector3Tools<Real>::GetLengthSquared(V0);
+    Real r1Sqr = Vector3Tools<Real>::GetLengthSquared(V1);
+    Real r2Sqr = Vector3Tools<Real>::GetLengthSquared(V2);
     Real diffR10 = r1Sqr - r0Sqr;
     Real diffR20 = r2Sqr - r0Sqr;
     Real diffX10 = V1.GetX() - V0.GetX();

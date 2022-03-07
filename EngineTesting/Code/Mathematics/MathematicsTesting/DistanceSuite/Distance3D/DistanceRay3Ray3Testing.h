@@ -24,7 +24,7 @@ namespace Mathematics
 		void DerivativeTest();
 		void IntervalTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

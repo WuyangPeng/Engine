@@ -269,7 +269,7 @@ namespace Rendering
         colour8 = colour1 - colour2;
         colour8 = colour1 * colour2;
 
-        auto result = Approximate(colour6, colour6, Mathematics::FloatMath::GetZeroTolerance());
+        auto result = Approximate(colour6, colour6, Mathematics::MathF::GetZeroTolerance());
         result = (colour1 == colour2);
         result = (colour1 != colour2);
 

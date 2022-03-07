@@ -18,7 +18,7 @@
 #include SYSTEM_WARNING_DISABLE(26415)
 Rendering::ControllerImpl
     ::ControllerImpl () noexcept
-	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::DoubleMath::sm_MaxReal }
+	:m_Repeat{ ControllerRepeatType::Clamp }, m_MinTime{ 0.0 }, m_MaxTime{ 0.0 }, m_Phase{ 0.0 }, m_Frequency{ 1.0 }, m_Active{ true }, m_ApplicationTime{ -Mathematics::MathD::maxReal }
 {
     RENDERING_SELF_CLASS_IS_VALID_1;
 }
@@ -204,7 +204,7 @@ void Rendering::ControllerImpl ::Load(CoreTools::BufferSource& source)
     source.Read(m_Frequency);
     m_Active = source.ReadBool();
     
-    m_ApplicationTime = -Mathematics::DoubleMath::sm_MaxReal;
+    m_ApplicationTime = -Mathematics::MathD::maxReal;
 }
 
 void Rendering::ControllerImpl

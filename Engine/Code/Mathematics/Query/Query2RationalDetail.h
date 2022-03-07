@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 15:21)
+///	引擎版本：0.8.0.2 (2022/02/17 16:46)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_RATIONAL_DETAIL_H
@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::Query2Rational<Real>::Query2Rational(const VerticesType& vertices)
-    : ParentType{ vertices }, m_RationalVertices{}
+    : ParentType{ vertices }, rationalVertices{}
 {
     Convert();
 
@@ -39,11 +39,12 @@ void Mathematics::Query2Rational<Real>::Convert()
         QueryRational rational0{ vertice.GetX() };
         QueryRational rational1{ vertice.GetY() };
 
-        m_RationalVertices.emplace_back(rational0, rational1);
+        rationalVertices.emplace_back(rational0, rational1);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query2Rational<Real>::IsValid() const noexcept
 {
@@ -52,6 +53,7 @@ bool Mathematics::Query2Rational<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -67,11 +69,11 @@ Mathematics::LineQueryType Mathematics::Query2Rational<Real>::ToLine(int index, 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToLine(m_RationalVertices.at(index), lhsVerticesIndex, rhsVerticesIndex);
+    return ToLine(rationalVertices.at(index), lhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2Rational<Real>::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2Rational<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -88,12 +90,12 @@ Mathematics::LineQueryType Mathematics::Query2Rational<Real>::ToLine(const Query
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto x0 = rationalTest.GetX() - m_RationalVertices.at(lhsVerticesIndex).GetX();
-    auto y0 = rationalTest.GetY() - m_RationalVertices.at(lhsVerticesIndex).GetY();
-    auto x1 = m_RationalVertices.at(rhsVerticesIndex).GetX() - m_RationalVertices.at(lhsVerticesIndex).GetX();
-    auto y1 = m_RationalVertices.at(rhsVerticesIndex).GetY() - m_RationalVertices.at(lhsVerticesIndex).GetY();
+    const auto x0 = rationalTest.GetX() - rationalVertices.at(lhsVerticesIndex).GetX();
+    const auto y0 = rationalTest.GetY() - rationalVertices.at(lhsVerticesIndex).GetY();
+    const auto x1 = rationalVertices.at(rhsVerticesIndex).GetX() - rationalVertices.at(lhsVerticesIndex).GetX();
+    const auto y1 = rationalVertices.at(rhsVerticesIndex).GetY() - rationalVertices.at(lhsVerticesIndex).GetY();
 
-    auto det = QueryDotTools<QueryRational>::Det2(x0, y0, x1, y1);
+    const auto det = QueryDotTools<QueryRational>::Det2(x0, y0, x1, y1);
 
     if (QueryRational{ 0 } < det)
         return LineQueryType::Right;
@@ -108,11 +110,11 @@ Mathematics::TriangleQueryType Mathematics::Query2Rational<Real>::ToTriangle(int
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToTriangle(m_RationalVertices.at(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
+    return ToTriangle(rationalVertices.at(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
-Mathematics::TriangleQueryType Mathematics::Query2Rational<Real>::ToTriangle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::TriangleQueryType Mathematics::Query2Rational<Real>::ToTriangle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -166,11 +168,11 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Rational<Real>::ToCircumci
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToCircumcircle(m_RationalVertices.at(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
+    return ToCircumcircle(rationalVertices.at(index), lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex);
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2Rational<Real>::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2Rational<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -187,27 +189,27 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Rational<Real>::ToCircumci
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto& lhsVector = m_RationalVertices.at(lhsVerticesIndex);
-    const auto& mhsVector = m_RationalVertices.at(mhsVerticesIndex);
-    const auto& rhsVector = m_RationalVertices.at(rhsVerticesIndex);
+    const auto& lhsVector = rationalVertices.at(lhsVerticesIndex);
+    const auto& mhsVector = rationalVertices.at(mhsVerticesIndex);
+    const auto& rhsVector = rationalVertices.at(rhsVerticesIndex);
 
-    auto lhsPlusTestX = lhsVector.GetX() + rationalTest.GetX();
-    auto lhsMinusTestX = lhsVector.GetX() - rationalTest.GetX();
-    auto lhsPlusTestY = lhsVector.GetY() + rationalTest.GetY();
-    auto lhsMinusTestY = lhsVector.GetY() - rationalTest.GetY();
-    auto mhsPlusTestX = mhsVector.GetX() + rationalTest.GetX();
-    auto mhsMinusTestX = mhsVector.GetX() - rationalTest.GetX();
-    auto mhsPlusTestY = mhsVector.GetY() + rationalTest.GetY();
-    auto mhsMinusTestY = mhsVector.GetY() - rationalTest.GetY();
-    auto rhsPlusTestX = rhsVector.GetX() + rationalTest.GetX();
-    auto rhsMinusTestX = rhsVector.GetX() - rationalTest.GetX();
-    auto rhsPlusTestY = rhsVector.GetY() + rationalTest.GetY();
-    auto rhsMinusTestY = rhsVector.GetY() - rationalTest.GetY();
-    auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
-    auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
-    auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
+    const auto lhsPlusTestX = lhsVector.GetX() + rationalTest.GetX();
+    const auto lhsMinusTestX = lhsVector.GetX() - rationalTest.GetX();
+    const auto lhsPlusTestY = lhsVector.GetY() + rationalTest.GetY();
+    const auto lhsMinusTestY = lhsVector.GetY() - rationalTest.GetY();
+    const auto mhsPlusTestX = mhsVector.GetX() + rationalTest.GetX();
+    const auto mhsMinusTestX = mhsVector.GetX() - rationalTest.GetX();
+    const auto mhsPlusTestY = mhsVector.GetY() + rationalTest.GetY();
+    const auto mhsMinusTestY = mhsVector.GetY() - rationalTest.GetY();
+    const auto rhsPlusTestX = rhsVector.GetX() + rationalTest.GetX();
+    const auto rhsMinusTestX = rhsVector.GetX() - rationalTest.GetX();
+    const auto rhsPlusTestY = rhsVector.GetY() + rationalTest.GetY();
+    const auto rhsMinusTestY = rhsVector.GetY() - rationalTest.GetY();
+    const auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
+    const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
+    const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    auto det = QueryDotTools<QueryRational>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+    const auto det = QueryDotTools<QueryRational>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 
     if (QueryRational{ 0 } < det)
         return CircumcircleQueryType::Inside;

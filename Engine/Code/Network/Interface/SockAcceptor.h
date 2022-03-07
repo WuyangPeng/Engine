@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:45)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_H
@@ -13,55 +13,49 @@
 #include "Network/NetworkDll.h"
 
 #include "NetworkInternalFwd.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
+#include "CoreTools/Helper/ExportMacro.h"
 
 NETWORK_NON_COPY_EXPORT_IMPL(SockAcceptorImpl);
- 
 
 namespace Network
 {
-    class NETWORK_DEFAULT_DECLARE SockAcceptor final  
+    class NETWORK_DEFAULT_DECLARE SockAcceptor final
     {
     public:
         NON_COPY_TYPE_DECLARE(SockAcceptor);
         using ACEHandleType = ACEHandle;
         using BoostHandleType = boost::asio::ip::tcp::acceptor::native_handle_type;
         using WinSocketType = System::WinSocket;
+        using EventInterface = CoreTools::EventInterface;
 
     public:
         explicit SockAcceptor(const ConfigurationStrategy& configurationStrategy);
         SockAcceptor(int port, const ConfigurationStrategy& configurationStrategy);
         SockAcceptor(const std::string& hostName, int port, const ConfigurationStrategy& configurationStrategy);
-        ~SockAcceptor() noexcept = default;
-        SockAcceptor(const SockAcceptor& rhs) noexcept = delete;
-        SockAcceptor& operator=(const SockAcceptor& rhs) noexcept = delete;
-        SockAcceptor(SockAcceptor&& rhs) noexcept = delete;
-        SockAcceptor& operator=(SockAcceptor&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream);
+        NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress);
+        NODISCARD bool Accept(SockStream& sockStream);
 
         // 异步回调，必须保证this、EventInterface、SockStream和SockAddress的生命周期和线程安全。
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream);
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress);
 
-        [[nodiscard]] bool EnableNonBlock();
+        NODISCARD bool EnableNonBlock();
 
         // ACE 专用，其他类调用抛出异常。
-        [[nodiscard]] ACEHandle GetACEHandle();
+        NODISCARD ACEHandle GetACEHandle();
 
         // boost 专用，其他类调用抛出异常。
-        [[nodiscard]] BoostHandleType GetBoostHandle();
+        NODISCARD BoostHandleType GetBoostHandle();
 
         // Network 专用，其他类调用抛出异常。
-        [[nodiscard]] WinSocketType GetWinSocket();
+        NODISCARD WinSocketType GetWinSocket();
 
-        [[nodiscard]] const std::string GetAddress() const;
-        [[nodiscard]] int GetPort() const;
+        NODISCARD std::string GetAddress() const;
+        NODISCARD int GetPort() const;
 
     private:
         PackageType impl;

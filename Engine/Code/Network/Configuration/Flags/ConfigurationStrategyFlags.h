@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 18:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 13:34)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FLAGS_H
@@ -82,6 +82,16 @@ namespace Network
         End,
     };
 
+    enum class EncryptedCompressionStrategy
+    {
+        Default = 0,
+        Encrypted = (1 << 0),
+        Compression = (1 << 1),
+        CompressionPriority = (1 << 2),
+
+        End,
+    };
+
     enum class OpenSSLStrategy
     {
         Default = 0,
@@ -119,6 +129,7 @@ namespace Network
         GameMasterServer,
         ServerManager,
         UpdateServer,
+        DatabaseServer,
         BackgroundServer,
     };
 
@@ -136,6 +147,9 @@ namespace Network
 
     ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(OpenSSLStrategy);
     ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(OpenSSLStrategy);
+
+    ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(EncryptedCompressionStrategy);
+    ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(EncryptedCompressionStrategy);
 
     ENUM_RIGHT_SHIFTABLE_OPERATOR_DEFINE(SocketSendMessage);
     ENUM_RIGHT_SHIFTABLE_OPERATOR_WCHAR_DEFINE(SocketSendMessage);

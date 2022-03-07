@@ -12,7 +12,9 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random> 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 using std::uniform_real;
 using std::default_random_engine;
 
@@ -36,44 +38,44 @@ void Mathematics::PlaneTesting
 void Mathematics::PlaneTesting
 	::ConstructionTest()
 {
-	FloatPlane firstPlane;
+	PlaneF firstPlane;
 
 	ASSERT_APPROXIMATE(firstPlane.GetConstant(),0.0f,1e-8f);
-	ASSERT_TRUE(Approximate(firstPlane.GetNormal(),FloatAVector::GetUnitX(),1e-8f));	
+	ASSERT_TRUE(Approximate(firstPlane.GetNormal(),AVectorF::GetUnitX(),1e-8f));	
 
-	DoubleAVector firstNormal(6.0,1.0,3.0);
+	AVectorD firstNormal(6.0,1.0,3.0);
 	firstNormal.Normalize();
 
-	DoublePlane secondPlane(firstNormal[0],firstNormal[1],firstNormal[2],5.0);
-	DoubleAVector secondNormal = secondPlane.GetNormal();
+	PlaneD secondPlane(firstNormal[0],firstNormal[1],firstNormal[2],5.0);
+	AVectorD secondNormal = secondPlane.GetNormal();
 
 	ASSERT_APPROXIMATE(secondPlane.GetConstant(),5.0,1e-10);
 	ASSERT_TRUE(Approximate(secondNormal,firstNormal,1e-10));
 
-	DoublePlane thirdPlane(firstNormal,6.0);
-	DoubleAVector thirdNormal = thirdPlane.GetNormal();
+	PlaneD thirdPlane(firstNormal,6.0);
+	AVectorD thirdNormal = thirdPlane.GetNormal();
 
 	ASSERT_APPROXIMATE(thirdPlane.GetConstant(),6.0,1e-10);
 	ASSERT_TRUE(Approximate(thirdNormal,firstNormal,1e-10));
 
-	DoubleAPoint firstPoint(9.0,2.0,3.0);
+	APointD firstPoint(9.0,2.0,3.0);
 
-	DoublePlane fourthPlane(firstNormal,firstPoint);
+	PlaneD fourthPlane(firstNormal,firstPoint);
 	ASSERT_APPROXIMATE(fourthPlane.DistanceTo(firstPoint),0.0,1e-10);
 
-	DoubleAPoint secondPoint(19.0,22.0,13.0);
-	DoubleAPoint thirdPoint(-19.0,-22.0,3.0);
+	APointD secondPoint(19.0,22.0,13.0);
+	APointD thirdPoint(-19.0,-22.0,3.0);
 
-	DoublePlane fifthPlane(firstPoint,secondPoint,thirdPoint);
+	PlaneD fifthPlane(firstPoint,secondPoint,thirdPoint);
 	ASSERT_APPROXIMATE(fifthPlane.DistanceTo(firstPoint),0.0,1e-10);
 	ASSERT_APPROXIMATE(fifthPlane.DistanceTo(secondPoint),0.0,1e-10);
 	ASSERT_APPROXIMATE(fifthPlane.DistanceTo(thirdPoint),0.0,1e-10);
 
-	DoubleHomogeneousPoint homogeneousPoint(3.0,5.0,6.0,1.0);
+	HomogeneousPointD homogeneousPoint(3.0,5.0,6.0,1.0);
 
-	DoublePlane sixthPlane(homogeneousPoint);
+	PlaneD sixthPlane(homogeneousPoint);
 
-	double length =  DoubleMath::Sqrt(homogeneousPoint[0] * homogeneousPoint[0] + 
+	double length =  MathD::Sqrt(homogeneousPoint[0] * homogeneousPoint[0] + 
 		                         homogeneousPoint[1] * homogeneousPoint[1] +
 					             homogeneousPoint[2] * homogeneousPoint[2]);
 
@@ -86,12 +88,12 @@ void Mathematics::PlaneTesting
 void Mathematics::PlaneTesting
 	::AccessTest()
 {
-	DoubleAVector firstNormal(6.0,1.0,3.0);
+	AVectorD firstNormal(6.0,1.0,3.0);
 	firstNormal.Normalize();
 
-	DoublePlane firstPlane(firstNormal,3.0);
+	PlaneD firstPlane(firstNormal,3.0);
 
-	DoubleHomogeneousPoint secondHomogeneousPoint = firstPlane.GetHomogeneousPoint();
+	HomogeneousPointD secondHomogeneousPoint = firstPlane.GetHomogeneousPoint();
 
 	ASSERT_APPROXIMATE(secondHomogeneousPoint[0],firstNormal[0],1e-10);
 	ASSERT_APPROXIMATE(secondHomogeneousPoint[1],firstNormal[1],1e-10);
@@ -139,11 +141,11 @@ void Mathematics::PlaneTesting
 void Mathematics::PlaneTesting
 	::CompareTest()
 {
-	DoubleAVector firstNormal(6.0,1.0,3.0);
+	AVectorD firstNormal(6.0,1.0,3.0);
 	firstNormal.Normalize();
 
-	DoublePlane firstPlane(firstNormal,-3.0);
-	DoublePlane secondPlane(firstNormal,-13.0);
+	PlaneD firstPlane(firstNormal,-3.0);
+	PlaneD secondPlane(firstNormal,-13.0);
 
 	ASSERT_TRUE(firstPlane == firstPlane);
 	ASSERT_TRUE(secondPlane == secondPlane);
@@ -169,19 +171,19 @@ void Mathematics::PlaneTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
- 		DoubleAPoint firstPoint(randomDistribution(generator),
+ 		APointD firstPoint(randomDistribution(generator),
 			               randomDistribution(generator),
 						   randomDistribution(generator));
 
-		DoubleAPoint secondPoint(randomDistribution(generator),
+		APointD secondPoint(randomDistribution(generator),
 			                randomDistribution(generator),
 							randomDistribution(generator) );
 
-		DoubleAPoint thirdPoint(randomDistribution(generator),
+		APointD thirdPoint(randomDistribution(generator),
 			               randomDistribution(generator),
 						   randomDistribution(generator) );
 
-		DoublePlane plane(firstPoint,secondPoint,thirdPoint);
+		PlaneD plane(firstPoint,secondPoint,thirdPoint);
 
 		ASSERT_APPROXIMATE(plane.DistanceTo(firstPoint),0.0,1e-10);
 		ASSERT_APPROXIMATE(plane.DistanceTo(secondPoint),0.0,1e-10);
@@ -191,7 +193,7 @@ void Mathematics::PlaneTesting
 		ASSERT_ENUM_EQUAL(plane.WhichSide(secondPoint),NumericalValueSymbol::Zero);
 		ASSERT_ENUM_EQUAL(plane.WhichSide(thirdPoint),NumericalValueSymbol::Zero);
 
-		DoubleAPoint fourthPoint(randomDistribution(generator),
+		APointD fourthPoint(randomDistribution(generator),
 			                randomDistribution(generator),
 						    randomDistribution(generator) );
 

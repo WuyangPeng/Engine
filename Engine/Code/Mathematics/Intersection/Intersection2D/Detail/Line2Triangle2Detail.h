@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/22 10:53)
+///	引擎版本：0.8.0.3 (2022/02/25 11:57)
 
 #ifndef MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_DETAIL_H
 #define MATHEMATICS_INTERSECTION_LINE2_TRIANGLE2_DETAIL_H
 
 #include "Line2Triangle2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::Line2Triangle2<Real>::Line2Triangle2(const Vector2D& origin, const Vector2D& direction, const Triangle2& triangle)
-    : m_Distance{}, m_Sign{}, m_Positive{}, m_Negative{}, m_Zero{}, m_Origin{ origin }, m_Direction{ direction }, m_Triangle{ triangle }
+Mathematics::Line2Triangle2<Real>::Line2Triangle2(const Vector2& origin, const Vector2& direction, const Triangle2& triangle)
+    : distance{}, sign{}, positive{}, negative{}, zero{}, origin{ origin }, direction{ direction }, triangle{ triangle }
 {
     TriangleLineRelations();
 
@@ -24,11 +24,13 @@ Mathematics::Line2Triangle2<Real>::Line2Triangle2(const Vector2D& origin, const 
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Line2Triangle2<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -36,7 +38,7 @@ int Mathematics::Line2Triangle2<Real>::GetPositive() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Positive;
+    return positive;
 }
 
 template <typename Real>
@@ -44,92 +46,80 @@ int Mathematics::Line2Triangle2<Real>::GetNegative() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Negative;
+    return negative;
 }
 
 template <typename Real>
 void Mathematics::Line2Triangle2<Real>::TriangleLineRelations()
 {
-    auto vertex = m_Triangle.GetVertex();
+    auto vertex = triangle.GetVertex();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    for (int i = 0; i < sm_Size; ++i)
+    for (int i = 0; i < size; ++i)
     {
-        auto diff = vertex.at(i) - m_Origin;
-        m_Distance[i] = Vector2DTools::DotPerp(diff, m_Direction);
-        if (Math::GetZeroTolerance() < m_Distance[i])
+        auto diff = vertex.at(i) - origin;
+        distance.at(i) = Vector2Tools::DotPerp(diff, direction);
+        if (Math::GetZeroTolerance() < distance.at(i))
         {
-            m_Sign[i] = NumericalValueSymbol::Positive;
-            ++m_Positive;
+            sign.at(i) = NumericalValueSymbol::Positive;
+            ++positive;
         }
-        else if (m_Distance[i] < -Math::GetZeroTolerance())
+        else if (distance.at(i) < -Math::GetZeroTolerance())
         {
-            m_Sign[i] = NumericalValueSymbol::Negative;
-            ++m_Negative;
+            sign.at(i) = NumericalValueSymbol::Negative;
+            ++negative;
         }
         else
         {
-            m_Distance[i] = Math::GetValue(0);
-            m_Sign[i] = NumericalValueSymbol::Zero;
-            ++m_Zero;
+            distance.at(i) = Math::GetValue(0);
+            sign.at(i) = NumericalValueSymbol::Zero;
+            ++zero;
         }
     }
-
-#include STSTEM_WARNING_POP
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::Line2Triangle2<Real>::GetInterval() const
+Mathematics::Vector2<Real> Mathematics::Line2Triangle2<Real>::GetInterval() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto vertex = m_Triangle.GetVertex();
+    auto vertex = triangle.GetVertex();
 
     // 将三角形投影到线上。
     DistanceType proj{};
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
-    for (auto i = 0; i < sm_Size; ++i)
+    for (auto i = 0; i < size; ++i)
     {
-        auto diff = vertex[i] - m_Origin;
-        proj[i] = Vector2DTools::DotProduct(m_Direction, diff);
+        auto diff = vertex.at(i) - origin;
+        proj.at(i) = Vector2Tools::DotProduct(direction, diff);
     }
 
     // 用线计算三角形边缘的横向交点。
 
     auto quantity = 0;
-    Vector2D param{};
-    for (auto i0 = 2, i1 = 0; i1 < sm_Size; i0 = i1++)
+    Vector2 param{};
+    for (auto i0 = 2, i1 = 0; i1 < size; i0 = i1++)
     {
-        if (m_Sign[i0] * System::EnumCastUnderlying(m_Sign[i1]) < 0)
+        if (sign.at(i0) * System::EnumCastUnderlying(sign.at(i1)) < 0)
         {
             MATHEMATICS_ASSERTION_0(quantity < 2, "交叉点太多\n");
 
-            auto numer = m_Distance[i0] * proj[i1] - m_Distance[i1] * proj[i0];
-            auto denom = m_Distance[i0] - m_Distance[i1];
+            auto numer = distance.at(i0) * proj.at(i1) - distance.at(i1) * proj.at(i0);
+            auto denom = distance.at(i0) - distance.at(i1);
             param[quantity++] = numer / denom;
         }
     }
 
     if (quantity < 2)
     {
-        for (auto i0 = 1, i1 = 2, i2 = 0; i2 < sm_Size; i0 = i1, i1 = i2++)
+        for (auto i0 = 1, i1 = 2, i2 = 0; i2 < size; i0 = i1, i1 = i2++)
         {
-            if (m_Sign[i2] == NumericalValueSymbol::Zero)
+            if (sign.at(i2) == NumericalValueSymbol::Zero)
             {
                 MATHEMATICS_ASSERTION_0(quantity < 2, "交叉点太多\n");
-                param[quantity++] = proj[i2];
+                param[quantity++] = proj.at(i2);
             }
         }
     }
-
-#include STSTEM_WARNING_POP
 
     // 排序
     MATHEMATICS_ASSERTION_0(1 <= quantity, "需要至少一个相交点\n");

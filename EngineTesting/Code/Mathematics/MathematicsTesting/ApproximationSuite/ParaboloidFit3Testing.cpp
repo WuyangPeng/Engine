@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:19)
 
 #include "ParaboloidFit3Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/ParaboloidFit3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -29,7 +29,12 @@ void Mathematics::ParaboloidFit3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::ParaboloidFit3Testing
 	::FitTest()
 {
@@ -41,19 +46,19 @@ void Mathematics::ParaboloidFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleParaboloidFit3 paraboloidFit3(vertices);
+		ParaboloidFit3D paraboloidFit3(vertices);
 
 		ASSERT_TRUE(paraboloidFit3.GetIsFitSuccess());
 
-		DoubleVariableLengthVector variableLengthVector = paraboloidFit3.GetCoeff();
+		VariableLengthVectorD variableLengthVector = paraboloidFit3.GetCoeff();
 
 		for (int i = 0; i < size; ++i)		
 		{ 
@@ -63,7 +68,7 @@ void Mathematics::ParaboloidFit3Testing
 						   variableLengthVector[3] * vertices[i].GetX() +
 						   variableLengthVector[4] * vertices[i].GetY() + variableLengthVector[5];
 
-			ASSERT_TRUE(DoubleMath::FAbs(value - vertices[i].GetZ()) <= 200.0f);
+			ASSERT_TRUE(MathD::FAbs(value - vertices[i].GetZ()) <= 200.0f);
 		}
  
 	}

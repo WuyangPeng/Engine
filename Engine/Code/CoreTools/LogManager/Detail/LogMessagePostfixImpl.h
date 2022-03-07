@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 16:59)
 
-// 日志消息后缀类内部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_POSTFIX_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_POSTFIX_IMPL_H
 
@@ -32,18 +31,18 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] String GetPostfix() const;
-        [[nodiscard]] int GetPostfixSize() const;
+        NODISCARD String GetPostfix() const;
+        NODISCARD int GetPostfixSize() const;
 
     private:
         void GeneratePostfix();
         void GenerateFunctionDescribedPostfix();
 
     private:
-        String m_Postfix;
-        AppenderPrint m_AppenderFlags;
-        LogLevel m_Level;
-        FunctionDescribed m_FunctionDescribed;
+        String postfix;
+        AppenderPrint appenderFlags;
+        LogLevel level;
+        FunctionDescribed functionDescribed;
     };
 }
 

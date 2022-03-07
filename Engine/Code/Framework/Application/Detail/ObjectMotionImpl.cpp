@@ -15,7 +15,7 @@
 #include "Rendering/DataTypes/Transform.h" 
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 
-using Mathematics::FloatMath;
+using Mathematics::MathF;
 using Rendering::Spatial;
 using Rendering::FloatTransform;
 

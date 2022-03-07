@@ -95,7 +95,7 @@ namespace Mathematics
         {
             if (x <= mXMax)
             {
-                for (index = 0; index + 1 < m_Quantity; ++index)
+                for (index = 0; index + 1 < quantity; ++index)
                 {
                     if (x < mXMin + mXSpacing * (index + 1))
                     {

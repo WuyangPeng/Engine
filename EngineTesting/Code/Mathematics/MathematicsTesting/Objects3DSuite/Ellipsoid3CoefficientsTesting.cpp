@@ -1,104 +1,101 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 17:00)
 
 #include "Ellipsoid3CoefficientsTesting.h"
-#include "Mathematics/Objects3D/Ellipsoid3CoefficientsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Objects3D/Ellipsoid3CoefficientsDetail.h"
 
-#include <random> 
+#include <random>
 
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
 
 namespace Mathematics
 {
-	template class Ellipsoid3Coefficients<float>;
-	template class Ellipsoid3Coefficients<double>;
+    template class Ellipsoid3Coefficients<float>;
+    template class Ellipsoid3Coefficients<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Ellipsoid3CoefficientsTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Ellipsoid3CoefficientsTesting)
 
-void Mathematics::Ellipsoid3CoefficientsTesting
-	::MainTest()
+void Mathematics::Ellipsoid3CoefficientsTesting ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(EllipsoidTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(EllipsoidTest);
 }
 
-void Mathematics::Ellipsoid3CoefficientsTesting
-	::EllipsoidTest()
+void Mathematics::Ellipsoid3CoefficientsTesting ::EllipsoidTest()
 {
-	default_random_engine generator{};
-	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
+    default_random_engine generator{};
+    const uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{	
-		DoubleVector3D firstVector(firstRandomDistribution(generator),
-			                  firstRandomDistribution(generator),
-							  firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector3D firstVector(firstRandomDistribution(generator),
+                                   firstRandomDistribution(generator),
+                                   firstRandomDistribution(generator));
 
-		DoubleMatrix3 firstMatrix(firstRandomDistribution(generator),
-			                 firstRandomDistribution(generator),
-							 firstRandomDistribution(generator));
+        Matrix3D firstMatrix(firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator),
+                                  firstRandomDistribution(generator));
 
-		firstMatrix(0,1) = firstRandomDistribution(generator);
-		firstMatrix(0,2) = firstRandomDistribution(generator);
-		firstMatrix(1,2) = firstRandomDistribution(generator);
-		firstMatrix(1,0) = firstMatrix(0,1);
-		firstMatrix(2,0) = firstMatrix(0,2);
-		firstMatrix(2,1) = firstMatrix(1,2);
+        firstMatrix(0, 1) = firstRandomDistribution(generator);
+        firstMatrix(0, 2) = firstRandomDistribution(generator);
+        firstMatrix(1, 2) = firstRandomDistribution(generator);
+        firstMatrix(1, 0) = firstMatrix(0, 1);
+        firstMatrix(2, 0) = firstMatrix(0, 2);
+        firstMatrix(2, 1) = firstMatrix(1, 2);
 
-		double constants(firstRandomDistribution(generator));
-		
-		DoubleEllipsoid3Coefficients ellipsoid3Coefficients(firstMatrix,firstVector,constants);
+        double constants(firstRandomDistribution(generator));
 
-		DoubleMatrix3 secondMatrix = ellipsoid3Coefficients.GetMatrix();
+        Ellipsoid3CoefficientsD ellipsoid3Coefficients(firstMatrix, firstVector, constants);
 
-		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10)); 	
+        Matrix3D secondMatrix = ellipsoid3Coefficients.GetMatrix();
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(ellipsoid3Coefficients.GetVector(), firstVector));
+        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
 
-		ASSERT_APPROXIMATE(constants,ellipsoid3Coefficients.GetConstants(),1e-10);
+        ASSERT_TRUE(Vector3ToolsD::Approximate(ellipsoid3Coefficients.GetVector(), firstVector));
 
-		std::vector<double> coefficient = ellipsoid3Coefficients.GetCoefficients();
+        ASSERT_APPROXIMATE(constants, ellipsoid3Coefficients.GetConstants(), 1e-10);
 
-		DoubleEllipsoid3Coefficients secondEllipse2Coefficients(coefficient);
+        std::vector<double> coefficient = ellipsoid3Coefficients.GetCoefficients();
 
-		std::vector<double> secondCoefficient =  secondEllipse2Coefficients.GetCoefficients();
+        Ellipsoid3CoefficientsD secondEllipse2Coefficients(coefficient);
 
-// 		for(int m = 0;m < secondEllipse2Coefficients.GetCoefficientsSize();++m)
-// 		{
-// 			ASSERT_APPROXIMATE(coefficient[m],secondCoefficient[m],1e-10);
-// 		}
+        std::vector<double> secondCoefficient = secondEllipse2Coefficients.GetCoefficients();
 
-		firstVector = secondEllipse2Coefficients.GetVector();
-		firstMatrix = secondEllipse2Coefficients.GetMatrix();
-		constants = secondEllipse2Coefficients.GetConstants();
+        // 		for(int m = 0;m < secondEllipse2Coefficients.GetCoefficientsSize();++m)
+        // 		{
+        // 			ASSERT_APPROXIMATE(coefficient[m],secondCoefficient[m],1e-10);
+        // 		}
 
-		DoubleEllipsoid3Coefficients  thirdEllipse2Coefficients(firstMatrix,firstVector,constants);
+        firstVector = secondEllipse2Coefficients.GetVector();
+        firstMatrix = secondEllipse2Coefficients.GetMatrix();
+        constants = secondEllipse2Coefficients.GetConstants();
 
-		secondMatrix = thirdEllipse2Coefficients.GetMatrix();
-		
-		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10)); 	
+        Ellipsoid3CoefficientsD thirdEllipse2Coefficients(firstMatrix, firstVector, constants);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(thirdEllipse2Coefficients.GetVector(), firstVector));
+        secondMatrix = thirdEllipse2Coefficients.GetMatrix();
 
-		ASSERT_APPROXIMATE(constants,thirdEllipse2Coefficients.GetConstants(),1e-10);
+        ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
 
-		coefficient = thirdEllipse2Coefficients.GetCoefficients();
+        ASSERT_TRUE(Vector3ToolsD::Approximate(thirdEllipse2Coefficients.GetVector(), firstVector));
 
-// 		for(int m = 0;m < secondEllipse2Coefficients.GetCoefficientsSize();++m)
-// 		{
-// 			ASSERT_APPROXIMATE(coefficient[m],secondCoefficient[m],1e-10);
-// 		}
+        ASSERT_APPROXIMATE(constants, thirdEllipse2Coefficients.GetConstants(), 1e-10);
 
-		ASSERT_TRUE(Approximate(secondEllipse2Coefficients, thirdEllipse2Coefficients, 1e-10));
-	}
+        coefficient = thirdEllipse2Coefficients.GetCoefficients();
+
+        // 		for(int m = 0;m < secondEllipse2Coefficients.GetCoefficientsSize();++m)
+        // 		{
+        // 			ASSERT_APPROXIMATE(coefficient[m],secondCoefficient[m],1e-10);
+        // 		}
+
+        ASSERT_TRUE(Approximate(secondEllipse2Coefficients, thirdEllipse2Coefficients, 1e-10));
+    }
 }
-

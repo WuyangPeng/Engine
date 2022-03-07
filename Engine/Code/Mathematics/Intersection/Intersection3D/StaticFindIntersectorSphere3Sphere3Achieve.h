@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 11:22)
+///	引擎版本：0.8.0.3 (2022/03/02 22:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_ACHIEVE_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::StaticFindIntersectorSphere3Sphere3(const Sphere3& sphere0, const Sphere3& sphere1, const Real epsilon)
-    : ParentType{ epsilon }, m_Sphere0{ sphere0 }, m_Sphere1{ sphere1 }, m_Circle{ Vector3D::GetZero(), Vector3D::GetZero(), Vector3D::GetZero(), Vector3D::GetZero(), Math::GetValue(0) }, m_ContactPoint{}
+    : ParentType{ epsilon }, sphere0{ sphere0 }, sphere1{ sphere1 }, circle{ Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Vector3::GetZero(), Math::GetValue(0) }, contactPoint{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::StaticFindIntersectorSph
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::IsValid() const noexcept
 {
@@ -32,32 +33,33 @@ bool Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::IsValid() const noe
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetSphere0() const noexcept
+Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetSphere0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Sphere0;
+    return sphere0;
 }
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetSphere1() const noexcept
+Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetSphere1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Sphere1;
+    return sphere1;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
 {
     // 相交平面必须以N为法线。
-    auto center1MinusCenter0 = m_Sphere1.GetCenter() - m_Sphere0.GetCenter();
-    auto sqrLen = Vector3DTools::VectorMagnitudeSquared(center1MinusCenter0);
-    auto radius0 = m_Sphere0.GetRadius();
-    auto radius1 = m_Sphere1.GetRadius();
+    auto center1MinusCenter0 = sphere1.GetCenter() - sphere0.GetCenter();
+    auto sqrLen = Vector3Tools::GetLengthSquared(center1MinusCenter0);
+    auto radius0 = sphere0.GetRadius();
+    auto radius1 = sphere1.GetRadius();
 
     auto radiusSum = radius0 + radius1;
     auto radiusSumSqr = radiusSum * radiusSum;
@@ -73,8 +75,8 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         // 球体刚刚接触。 调用者必须调用GetIntersectionType() 以确定发生了哪种类型的相交。
         // 在这种情况下，应该调用 GetContactPoint()，而不是GetCircle()。 仅在调用者不测试交叉点类型的情况下设置圆形参数。
         center1MinusCenter0.Normalize();
-        m_ContactPoint = m_Sphere0.GetCenter() + radius0 * center1MinusCenter0;
-        m_Circle = Circle3{ m_ContactPoint, Vector3D::GetZero(), Vector3D::GetZero(), center1MinusCenter0, Math::GetValue(0) };
+        contactPoint = sphere0.GetCenter() + radius0 * center1MinusCenter0;
+        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0) };
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
@@ -87,8 +89,8 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
         /// 在这种情况下，不应调用GetCircle()和GetContactPoint()。
         ///  仅在调用者不测试交叉点类型的情况下设置圆形和接触参数，但选择是任意的。
         center1MinusCenter0.Normalize();
-        m_ContactPoint = Math::GetRational(1, 2) * (m_Sphere0.GetCenter() + m_Sphere1.GetCenter());
-        m_Circle = Circle3{ m_ContactPoint, Vector3D::GetZero(), Vector3D::GetZero(), center1MinusCenter0, Math::GetValue(0) };
+        contactPoint = Math::GetRational(1, 2) * (sphere0.GetCenter() + sphere1.GetCenter());
+        circle = Circle3{ contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0) };
 
         this->SetIntersectionType(radiusDiff <= Math::GetValue(0) ? IntersectionType::Sphere0 : IntersectionType::Sphere1);
         return;
@@ -104,16 +106,16 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
 
         if (radiusDiff <= Math::GetValue(0))
         {
-            m_ContactPoint = m_Sphere1.GetCenter() + radius1 * center1MinusCenter0;
+            contactPoint = sphere1.GetCenter() + radius1 * center1MinusCenter0;
             this->SetIntersectionType(IntersectionType::Sphere0Point);
         }
         else
         {
-            m_ContactPoint = m_Sphere0.GetCenter() + radius0 * center1MinusCenter0;
+            contactPoint = sphere0.GetCenter() + radius0 * center1MinusCenter0;
             this->SetIntersectionType(IntersectionType::Sphere1Point);
         }
 
-        m_Circle = Circle3(m_ContactPoint, Vector3D::GetZero(), Vector3D::GetZero(), center1MinusCenter0, Math::GetValue(0));
+        circle = Circle3(contactPoint, Vector3::GetZero(), Vector3::GetZero(), center1MinusCenter0, Math::GetValue(0));
 
         return;
     }
@@ -126,29 +128,30 @@ void Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::Find()
     // 计算圆平面的N，U和V。
     center1MinusCenter0.Normalize();
 
-    const auto vector3DOrthonormalBasis = Vector3DTools::GenerateComplementBasis(center1MinusCenter0);
-    m_Circle = Circle3{ m_Sphere0.GetCenter() + t * center1MinusCenter0, vector3DOrthonormalBasis.GetUVector(),
-                        vector3DOrthonormalBasis.GetVVector(), center1MinusCenter0,
-                        Math::Sqrt(Math::FAbs(radius0 * radius0 - t * t * sqrLen)) };
+    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(center1MinusCenter0);
+    circle = Circle3{ sphere0.GetCenter() + t * center1MinusCenter0, Vector3OrthonormalBasis.GetUVector(),
+                      Vector3OrthonormalBasis.GetVVector(),
+                      center1MinusCenter0,
+                      Math::Sqrt(Math::FAbs(radius0 * radius0 - t * t * sqrLen)) };
 
     // 相交是一个圆。
     this->SetIntersectionType(IntersectionType::Circle);
 }
 
 template <typename Real>
-const Mathematics::Circle3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetCircle() const noexcept
+Mathematics::Circle3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetCircle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Circle;
+    return circle;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetContactPoint() const noexcept
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorSphere3Sphere3<Real>::GetContactPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_ContactPoint;
+    return contactPoint;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_SPHERE3_ACHIEVE_H

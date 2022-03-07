@@ -151,6 +151,9 @@ namespace CoreTools
 
     template <typename Tiny, int F, int L>
     struct TinyEraseRange;
+
+    template <typename Iterator>
+    class ReversalObject;
 }
 
 #endif  // CORE_TOOLS_TEMPLATE_TOOLS_FWD_H

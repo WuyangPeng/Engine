@@ -435,17 +435,20 @@ CoreTools::SimpleCSV::DocumentImpl& CoreTools::SimpleCSV::DocumentImpl::operator
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_Document = std::move(rhs.m_Document);
-    filePath = std::move(rhs.filePath);
-    data = std::move(rhs.data);
-    docRelationships = std::move(rhs.docRelationships);
-    wbkRelationships = std::move(rhs.wbkRelationships);
-    contentTypes = std::move(rhs.contentTypes);
-    appProperties = std::move(rhs.appProperties);
-    coreProperties = std::move(rhs.coreProperties);
-    sharedStrings = std::move(rhs.sharedStrings);
-    workbook = std::move(rhs.workbook);
-    archive = std::move(rhs.archive);
+    if (this != &rhs)
+    {
+        m_Document = std::move(rhs.m_Document);
+        filePath = std::move(rhs.filePath);
+        data = std::move(rhs.data);
+        docRelationships = std::move(rhs.docRelationships);
+        wbkRelationships = std::move(rhs.wbkRelationships);
+        contentTypes = std::move(rhs.contentTypes);
+        appProperties = std::move(rhs.appProperties);
+        coreProperties = std::move(rhs.coreProperties);
+        sharedStrings = std::move(rhs.sharedStrings);
+        workbook = std::move(rhs.workbook);
+        archive = std::move(rhs.archive);
+    }
 
     return *this;
 }

@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Surface.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
@@ -33,21 +33,21 @@ namespace Mathematics
             bool IsRectangular() const noexcept;
 
 		// position and derivatives up to second order
-		virtual Vector3D<Real> P(Real u, Real v) const = 0;
-		virtual Vector3D<Real> PU(Real u, Real v) const = 0;
-		virtual Vector3D<Real> PV(Real u, Real v) const = 0;
-		virtual Vector3D<Real> PUU(Real u, Real v) const = 0;
-		virtual Vector3D<Real> PUV(Real u, Real v) const = 0;
-		virtual Vector3D<Real> PVV(Real u, Real v) const = 0;
+		virtual Vector3<Real> P(Real u, Real v) const = 0;
+		virtual Vector3<Real> PU(Real u, Real v) const = 0;
+		virtual Vector3<Real> PV(Real u, Real v) const = 0;
+		virtual Vector3<Real> PUU(Real u, Real v) const = 0;
+		virtual Vector3<Real> PUV(Real u, Real v) const = 0;
+		virtual Vector3<Real> PVV(Real u, Real v) const = 0;
 
 		// Compute a coordinate frame.  The set {T0,T1,N} is a right-handed
 		// orthonormal set.
-		void GetFrame(Real u, Real v, Vector3D<Real>& position,Vector3D<Real>& tangent0, Vector3D<Real>& tangent1,Vector3D<Real>& normal) const;
+		void GetFrame(Real u, Real v, Vector3<Real>& position,Vector3<Real>& tangent0, Vector3<Real>& tangent1,Vector3<Real>& normal) const;
 
 		// Differential geometric quantities.  The returned scalars are the
 		// principal curvatures and the returned vectors are the corresponding
 		// principal directions.
-		void ComputePrincipalCurvatureInfo(Real u, Real v, Real& curv0,Real& curv1, Vector3D<Real>& dir0, Vector3D<Real>& dir1);
+		void ComputePrincipalCurvatureInfo(Real u, Real v, Real& curv0,Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1);
 
 	protected:
 		ParametricSurface(Real umin, Real umax, Real vmin, Real vmax,bool rectangular);

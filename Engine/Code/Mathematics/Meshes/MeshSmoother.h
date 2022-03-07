@@ -8,7 +8,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
@@ -17,25 +17,25 @@ namespace Mathematics
 	{
 	public:
 		// The caller is responsible for deleting the input arrays.
-		MeshSmoother (int numVertices, Vector3D<Real>* vertices, int numTriangles,const int* indices);
+		MeshSmoother (int numVertices, Vector3<Real>* vertices, int numTriangles,const int* indices);
 		
 		virtual ~MeshSmoother ();
 		
 		// For deferred construction and destruction.  The caller is responsible
 		// for deleting the input arrays.
 		MeshSmoother ();
-		void Create (int numVertices, Vector3D<Real>* vertices, int numTriangles, const int* indices);
+		void Create (int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices);
 		void Destroy ();
 		
 		// Input values from the constructor.
 		int GetNumVertices () const;
-		const Vector3D<Real>* GetVertices () const;
+		const Vector3<Real>* GetVertices () const;
 		int GetNumTriangles () const;
 		const int* GetIndices () const;
 		
 		// Derived quantites from the input mesh.
-		const Vector3D<Real>* GetNormals () const;
-		const Vector3D<Real>* GetMeans () const;
+		const Vector3<Real>* GetNormals () const;
+		const Vector3<Real>* GetMeans () const;
 		
 		// Apply one iteration of the smoother.  The input time is supported for
 		// applications where the surface evolution is time-dependent.
@@ -47,12 +47,12 @@ namespace Mathematics
 		virtual Real GetNormalWeight (int i, Real t);
 		
 		int mNumVertices;
-		Vector3D<Real>* mVertices;
+		Vector3<Real>* mVertices;
 		int mNumTriangles;
 		const int* mIndices;
 		
-		Vector3D<Real>* mNormals;
-		Vector3D<Real>* mMeans;
+		Vector3<Real>* mNormals;
+		Vector3<Real>* mMeans;
 		int* mNeighborCounts;
 	};
 	

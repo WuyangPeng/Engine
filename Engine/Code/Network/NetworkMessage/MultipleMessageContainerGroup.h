@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:12)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_GROUP_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_CONTAINER_GROUP_H
@@ -34,19 +34,19 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        void Load(const MessageSourceSharedPtr& source);
-        void Save(const MessageTargetSharedPtr& target) const;
-        [[nodiscard]] int GetStreamingSize() const;
+        void Load(MessageSource& source);
+        void Save(MessageTarget& target) const;
+        NODISCARD int GetStreamingSize() const;
 
-        [[nodiscard]] int GetSize() const;
+        NODISCARD int GetSize() const;
 
-        [[nodiscard]] const MessageType GetValue(int index) const;
+        NODISCARD const MessageType GetValue(int index) const;
 
-        [[nodiscard]] GroupConstIter begin() const;
-        [[nodiscard]] GroupConstIter end() const;
+        NODISCARD GroupConstIter begin() const;
+        NODISCARD GroupConstIter end() const;
 
     private:
-        GroupType m_Group;
+        GroupType group;
     };
 }
 

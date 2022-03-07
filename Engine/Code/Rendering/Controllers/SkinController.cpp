@@ -174,11 +174,11 @@ bool Rendering::SkinController
 				// 计算的皮肤顶点位置。
 				for (auto vertex = 0; vertex < impl->GetNumVertices(); ++vertex)
 				{
-                                    auto position = Mathematics::FloatAPoint{};
+                                    auto position = Mathematics::APointF{};
 					for (auto bone = 0; bone < impl->GetNumBones(); ++bone)
 					{
 						const auto weight = impl->GetWeights(bone, vertex);
-						if (Mathematics::FloatMath::GetZeroTolerance() < Mathematics::FloatMath::FAbs(weight))
+						if (Mathematics::MathF::GetZeroTolerance() < Mathematics::MathF::FAbs(weight))
 						{
                                                     const auto offset = impl->GetOffsets(bone, vertex);
                                                     const auto worldOffset = impl->GetBones(bone)->GetWorldTransform() * offset;

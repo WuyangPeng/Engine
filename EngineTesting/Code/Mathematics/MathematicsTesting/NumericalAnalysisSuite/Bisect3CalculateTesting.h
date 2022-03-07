@@ -22,7 +22,7 @@ namespace Mathematics
         void NoSolutionTest();
         void UnknownTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
         
         static float FirstEquation(float x,float y,float z);
         static float SecondEquation(float x,float y,float z);

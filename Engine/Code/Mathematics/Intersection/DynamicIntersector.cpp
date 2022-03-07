@@ -1,32 +1,24 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 11:33)
+///	引擎版本：0.8.0.3 (2022/02/23 11:06)
 
 #include "Mathematics/MathematicsExport.h"
 
-#ifdef MATHEMATICS_EXPORT_TEMPLATE
+#include "DynamicIntersectorDetail.h"
 
-    #ifndef MATHEMATICS_INCLUDED_DYNAMIC_INTERSECTOR_ACHIEVE
-        #define MATHEMATICS_INCLUDED_DYNAMIC_INTERSECTOR_ACHIEVE
-    #endif  // MATHEMATICS_INCLUDED_DYNAMIC_INTERSECTOR_ACHIEVE
-
-#endif  // MATHEMATICS_EXPORT_TEMPLATE
-
-#include "DynamicIntersectorDetail.h" 
-
-#ifdef MATHEMATICS_EXPORT_TEMPLATE
+#ifdef MATHEMATICS_TEMPLATE_TEST
 
 namespace Mathematics
 {
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class DynamicIntersector<float, Vector2D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class DynamicIntersector<double, Vector2D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class DynamicIntersector<float, Vector3D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class DynamicIntersector<double, Vector3D>;
+    template class DynamicIntersector<float, Vector2>;
+    template class DynamicIntersector<double, Vector2>;
+    template class DynamicIntersector<float, Vector3>;
+    template class DynamicIntersector<double, Vector3>;
 }
 
-#endif  // MATHEMATICS_EXPORT_TEMPLATE
+#endif  // MATHEMATICS_TEMPLATE_TEST

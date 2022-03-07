@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 17:14)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SEVEN_MOD_ELEVEN_CHECK_SUM_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_SEVEN_MOD_ELEVEN_CHECK_SUM_H
@@ -24,17 +24,17 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetCheckSum() const noexcept;
+        NODISCARD int GetCheckSum() const noexcept;
 
     private:
         void Calculation(const char* data, int length);
 
     private:
-        static constexpr auto sm_PowersSize = 10;
-        static const int GetPowers(int index);
+        static constexpr auto powersSize = 10;
+        NODISCARD static int GetPowers(int index);
 
     private:
-        int m_CheckSum;
+        int checkSum;
     };
 }
 

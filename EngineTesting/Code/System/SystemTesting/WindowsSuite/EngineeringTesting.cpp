@@ -49,7 +49,7 @@ void System::EngineeringTesting::SuffixTest()
 
 void System::EngineeringTesting::OffsetTest() noexcept
 {
-    MAYBE_UNUSED const auto offset = GetEngineeringOffsetValue();
+    MAYBE_UNUSED constexpr auto offset = GetEngineeringOffsetValue();
 }
 
 void System::EngineeringTesting::NumDigitsTest()

@@ -30,7 +30,7 @@ namespace Rendering
           IKGoal(IKGoal&& rhs) noexcept;
           IKGoal& operator=(IKGoal&& rhs) noexcept;
         using ParentType = Object;
-        using APoint = Mathematics::FloatAPoint;
+        using APoint = Mathematics::APointF;
 
     public:
         IKGoal(const SpatialSharedPtr& target, const SpatialSharedPtr& effector, float weight = 1.0f);

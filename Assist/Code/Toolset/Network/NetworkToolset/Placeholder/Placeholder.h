@@ -7,23 +7,23 @@
 #ifndef NETWORK_TOOLSET_PLACEHOLDER_H
 #define NETWORK_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Network/NetworkToolset/NetworkToolsetDll.h" 
+#include "Toolset/Network/NetworkToolset/NetworkToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace NetworkToolset
 {
-	 class NETWORK_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class NETWORK_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // NETWORK_TOOLSET_PLACEHOLDER_H
+#endif  // NETWORK_TOOLSET_PLACEHOLDER_H

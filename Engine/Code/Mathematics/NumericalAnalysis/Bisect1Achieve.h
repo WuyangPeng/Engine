@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:34)
+///	引擎版本：0.8.0.2 (2022/02/14 10:27)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_ACHIEVE_H
 
 #include "Bisect1.h"
+#include "Bisect1RootDetail.h"
 #include "Math.h"
 #include "CoreTools/Contract/Noexcept.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -18,16 +19,17 @@
 
 template <typename Real>
 Mathematics::Bisect1<Real>::Bisect1(Function function, int maxLevel, Real tolerance) noexcept
-    : m_Function{ function }, m_MaxLevel{ maxLevel }, m_Tolerance{ tolerance }
+    : function{ function }, maxLevel{ maxLevel }, tolerance{ tolerance }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Bisect1<Real>::IsValid() const noexcept
 {
-    if (m_Function != nullptr && 0 < m_MaxLevel && Math::GetValue(0) <= m_Tolerance)
+    if (function != nullptr && 0 < maxLevel && Math::GetValue(0) <= tolerance)
     {
         return true;
     }
@@ -36,25 +38,26 @@ bool Mathematics::Bisect1<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
+typename Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real>::Bisect(Real beginPoint, Real endPoint)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    // m_Function调用可能抛出异常。
+    // function调用可能抛出异常。
     CoreTools::DisableNoexcept();
 
     // 测试两个端点。
-    auto beginPointFunctionValue = m_Function(beginPoint);
-    if (Math::FAbs(beginPointFunctionValue) <= m_Tolerance)
+    auto beginPointFunctionValue = function(beginPoint);
+    if (Math::FAbs(beginPointFunctionValue) <= tolerance)
     {
         return Bisect1Root{ beginPoint, BisectRootType::HaveSolution };
     }
 
-    auto endPointFunctionValue = m_Function(endPoint);
-    if (Math::FAbs(endPointFunctionValue) <= m_Tolerance)
+    auto endPointFunctionValue = function(endPoint);
+    if (Math::FAbs(endPointFunctionValue) <= tolerance)
     {
         return Bisect1Root{ endPoint, BisectRootType::HaveSolution };
     }
@@ -67,10 +70,10 @@ typename const Mathematics::Bisect1<Real>::Bisect1Root Mathematics::Bisect1<Real
 
     auto middlePoints = Math::GetRational(1, 2) * (beginPoint + endPoint);
 
-    for (auto level = 0; level < m_MaxLevel; ++level)
+    for (auto level = 0; level < maxLevel; ++level)
     {
-        auto middlePointFunctionValue = m_Function(middlePoints);
-        if (Math::FAbs(middlePointFunctionValue) <= m_Tolerance)
+        auto middlePointFunctionValue = function(middlePoints);
+        if (Math::FAbs(middlePointFunctionValue) <= tolerance)
         {
             return Bisect1Root{ middlePoints, BisectRootType::HaveSolution };
         }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 10:10)
+///	引擎版本：0.8.0.3 (2022/02/23 10:43)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_H
@@ -13,8 +13,8 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Flags/IntersectionType.h"
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -41,23 +41,23 @@ namespace Mathematics
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] Real GetEpsilon() const noexcept;
-        [[nodiscard]] IntersectionType GetIntersectionType() const noexcept;
-        [[nodiscard]] bool IsIntersection() const noexcept;
+        NODISCARD Real GetEpsilon() const noexcept;
+        NODISCARD IntersectionType GetIntersectionType() const noexcept;
+        NODISCARD bool IsIntersection() const noexcept;
 
     protected:
-        void SetIntersectionType(IntersectionType intersectionType) noexcept;
+        void SetIntersectionType(IntersectionType newIntersectionType) noexcept;
         virtual void Swap(Intersector& rhs) noexcept;
 
     private:
-        IntersectionType m_IntersectionType;
-        Real m_Epsilon;
+        IntersectionType intersectionType;
+        Real epsilon;
     };
 
-    using FloatIntersector2D = Intersector<float, Vector2D>;
-    using FloatIntersector3D = Intersector<float, Vector3D>;
-    using DoubleIntersector2D = Intersector<double, Vector2D>;
-    using DoubleIntersector3D = Intersector<double, Vector3D>;
+    using Intersector2F = Intersector<float, Vector2>;
+    using Intersector3F = Intersector<float, Vector3>;
+    using Intersector2D = Intersector<double, Vector2>;
+    using Intersector3D = Intersector<double, Vector3>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_H

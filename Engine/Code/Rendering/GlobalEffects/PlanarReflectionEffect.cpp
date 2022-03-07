@@ -134,8 +134,8 @@ void Rendering::PlanarReflectionEffect ::Draw(std::shared_ptr<Renderer> renderer
 
         // Compute the equation for the mirror plane in model coordinates
         // and get the reflection matrix in world coordinates.
-        Mathematics::FloatMatrix reflection;
-        Mathematics::FloatPlane modelPlane;
+        Mathematics::MatrixF reflection;
+        Mathematics::PlaneF modelPlane;
         GetReflectionMatrixAndModelPlane(i, reflection, modelPlane);
 
         // TODO:  Add clip plane support to the renderer.
@@ -214,17 +214,17 @@ void Rendering::PlanarReflectionEffect ::Draw(std::shared_ptr<Renderer> renderer
     }
 }
 
-void Rendering::PlanarReflectionEffect ::GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane)
+void Rendering::PlanarReflectionEffect ::GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane)
 {
     // Compute the equation for the mirror plane in world coordinates.
     auto vertex = mPlanes[i]->GetWorldTriangle(0);
-    Mathematics::FloatPlane worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+    Mathematics::PlaneF worldPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 
     // Compute the reflection matrix.
-    reflection.MakeReflection(Mathematics::FloatAPoint(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
+    reflection.MakeReflection(Mathematics::APointF(vertex.GetFirstPosition()[0], vertex.GetFirstPosition()[1], vertex.GetFirstPosition()[2]), worldPlane.GetNormal());
 
     vertex = mPlanes[i]->GetModelTriangle(0);
-    modelPlane = Mathematics::FloatPlane{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
+    modelPlane = Mathematics::PlaneF{ vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition() };
 }
 
 // Name support.

@@ -1,21 +1,24 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 15:54)
+///	引擎版本：0.8.0.2 (2022/02/14 11:31)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_STORAGE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_STORAGE_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Bisect2Node.h"
+#include "Mathematics/Base/BaseFwd.h"
 #include "Mathematics/NumericalAnalysis/Flags/BisectStorageType.h"
 #include "Mathematics/NumericalAnalysis/NumericalAnalysisFwd.h"
 
 #include <boost/noncopyable.hpp>
+#include <memory>
 #include <type_traits>
 
 namespace Mathematics
@@ -39,86 +42,83 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool TestFourCornerValues(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY);
+        NODISCARD bool TestFourCornerValues(Real beginPointX, Real beginPointY, Real endPointX, Real endPointY);
 
-        [[nodiscard]] bool TestEdgeValues();
+        NODISCARD bool TestEdgeValues();
 
-        [[nodiscard]] const Bisect2RootSharedPtr GetBisect2Root() const noexcept;
+        NODISCARD Bisect2RootSharedPtr GetBisect2Root() const noexcept;
 
         void SetStorageValue(Real value0, Real value1, Bisect2StorageType type) noexcept;
 
         void SetStorageValue(const Bisect2NodeSharedPtr& node) noexcept;
 
-        [[nodiscard]] Real GetBeginPointX() const noexcept;
-        [[nodiscard]] Real GetBeginPointY() const noexcept;
-        [[nodiscard]] Real GetEndPointX() const noexcept;
-        [[nodiscard]] Real GetEndPointY() const noexcept;
-        [[nodiscard]] Real GetMidpointX() const noexcept;
-        [[nodiscard]] Real GetMidpointY() const noexcept;
+        NODISCARD Real GetBeginPointX() const noexcept;
+        NODISCARD Real GetBeginPointY() const noexcept;
+        NODISCARD Real GetEndPointX() const noexcept;
+        NODISCARD Real GetEndPointY() const noexcept;
+        NODISCARD Real GetMidpointX() const noexcept;
+        NODISCARD Real GetMidpointY() const noexcept;
 
-        [[nodiscard]] Real GetBeginXAndBeginYValue0() const noexcept;
-        [[nodiscard]] Real GetEndXAndBeginYValue0() const noexcept;
-        [[nodiscard]] Real GetBeginXAndEndYValue0() const noexcept;
-        [[nodiscard]] Real GetEndXAndEndYValue0() const noexcept;
+        NODISCARD Real GetBeginXAndBeginYValue0() const noexcept;
+        NODISCARD Real GetEndXAndBeginYValue0() const noexcept;
+        NODISCARD Real GetBeginXAndEndYValue0() const noexcept;
+        NODISCARD Real GetEndXAndEndYValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXAndMidYValue0() const noexcept;
-        [[nodiscard]] Real GetEndXAndMidYValue0() const noexcept;
-        [[nodiscard]] Real GetMidXAndBeginYValue0() const noexcept;
-        [[nodiscard]] Real GetMidXAndEndYValue0() const noexcept;
-        [[nodiscard]] Real GetMidXAndMidYValue0() const noexcept;
+        NODISCARD Real GetBeginXAndMidYValue0() const noexcept;
+        NODISCARD Real GetEndXAndMidYValue0() const noexcept;
+        NODISCARD Real GetMidXAndBeginYValue0() const noexcept;
+        NODISCARD Real GetMidXAndEndYValue0() const noexcept;
+        NODISCARD Real GetMidXAndMidYValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXAndBeginYValue1() const noexcept;
-        [[nodiscard]] Real GetEndXAndBeginYValue1() const noexcept;
-        [[nodiscard]] Real GetBeginXAndEndYValue1() const noexcept;
-        [[nodiscard]] Real GetEndXAndEndYValue1() const noexcept;
+        NODISCARD Real GetBeginXAndBeginYValue1() const noexcept;
+        NODISCARD Real GetEndXAndBeginYValue1() const noexcept;
+        NODISCARD Real GetBeginXAndEndYValue1() const noexcept;
+        NODISCARD Real GetEndXAndEndYValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXAndMidYValue1() const noexcept;
-        [[nodiscard]] Real GetEndXAndMidYValue1() const noexcept;
-        [[nodiscard]] Real GetMidXAndBeginYValue1() const noexcept;
-        [[nodiscard]] Real GetMidXAndEndYValue1() const noexcept;
-        [[nodiscard]] Real GetMidXAndMidYValue1() const noexcept;
+        NODISCARD Real GetBeginXAndMidYValue1() const noexcept;
+        NODISCARD Real GetEndXAndMidYValue1() const noexcept;
+        NODISCARD Real GetMidXAndBeginYValue1() const noexcept;
+        NODISCARD Real GetMidXAndEndYValue1() const noexcept;
+        NODISCARD Real GetMidXAndMidYValue1() const noexcept;
 
     private:
         bool ZeroTest(Real x, Real y, Bisect2StorageType type);
 
     private:
-        const Bisect2& m_Bisect;
+        const Bisect2& bisect;
 
         // 固定存储,以避免在递归中的堆栈损耗。
-        Real m_BeginPointX;
-        Real m_BeginPointY;
-        Real m_EndPointX;
-        Real m_EndPointY;
-        Real m_MidpointX;
-        Real m_MidpointY;
+        Real beginPointX;
+        Real beginPointY;
+        Real endPointX;
+        Real endPointY;
+        Real midpointX;
+        Real midpointY;
 
-        Real m_BeginXAndBeginY0;
-        Real m_EndXAndBeginY0;
-        Real m_BeginXAndEndY0;
-        Real m_EndXAndEndY0;
+        Real beginXAndBeginY0;
+        Real endXAndBeginY0;
+        Real beginXAndEndY0;
+        Real endXAndEndY0;
 
-        Real m_BeginXAndMidY0;
-        Real m_EndXAndMidY0;
-        Real m_MidXAndBeginY0;
-        Real m_MidXAndEndY0;
-        Real m_MidXAndMidY0;
+        Real beginXAndMidY0;
+        Real endXAndMidY0;
+        Real midXAndBeginY0;
+        Real midXAndEndY0;
+        Real midXAndMidY0;
 
-        Real m_BeginXAndBeginY1;
-        Real m_EndXAndBeginY1;
-        Real m_BeginXAndEndY1;
-        Real m_EndXAndEndY1;
+        Real beginXAndBeginY1;
+        Real endXAndBeginY1;
+        Real beginXAndEndY1;
+        Real endXAndEndY1;
 
-        Real m_BeginXAndMidY1;
-        Real m_EndXAndMidY1;
-        Real m_MidXAndBeginY1;
-        Real m_MidXAndEndY1;
-        Real m_MidXAndMidY1;
+        Real beginXAndMidY1;
+        Real endXAndMidY1;
+        Real midXAndBeginY1;
+        Real midXAndEndY1;
+        Real midXAndMidY1;
 
-        Bisect2RootSharedPtr m_Bisect2Root;
+        Bisect2RootSharedPtr bisect2Root;
     };
-
-    using FloatBisect2Storage = Bisect2Storage<float>;
-    using DoubleBisect2Storage = Bisect2Storage<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_STORAGE_H

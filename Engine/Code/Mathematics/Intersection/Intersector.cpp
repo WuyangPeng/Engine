@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 10:14)
+///	引擎版本：0.8.0.3 (2022/02/23 10:46)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -17,16 +17,16 @@
 
 #endif  // MATHEMATICS_EXPORT_TEMPLATE
 
-#include "IntersectorDetail.h" 
+#include "IntersectorDetail.h"
 
 #ifdef MATHEMATICS_EXPORT_TEMPLATE
 
 namespace Mathematics
 {
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<float, Vector2D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<double, Vector2D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<float, Vector3D>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<double, Vector3D>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<float, Vector2>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<double, Vector2>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<float, Vector3>;
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Intersector<double, Vector3>;
 }
 
 #endif  // MATHEMATICS_EXPORT_TEMPLATE

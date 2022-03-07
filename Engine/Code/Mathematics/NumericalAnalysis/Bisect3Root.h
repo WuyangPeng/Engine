@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 17:00)
+///	引擎版本：0.8.0.2 (2022/02/14 13:26)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_ROOT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_ROOT_H
@@ -41,20 +41,20 @@ namespace Mathematics
         // m_XRoot、m_YRoot、m_ZRoot是近似值，不保证结果是正确的。
         // 当m_BisectRootType == BisectRootType::NoSolution时，
         // GetXRoot()、GetYRoot()、GetZRoot()抛出异常。
-        [[nodiscard]] Real GetXRoot() const;
-        [[nodiscard]] Real GetYRoot() const;
-        [[nodiscard]] Real GetZRoot() const;
-        [[nodiscard]] BisectRootType GetBisectRootType() const noexcept;
+        NODISCARD Real GetXRoot() const;
+        NODISCARD Real GetYRoot() const;
+        NODISCARD Real GetZRoot() const;
+        NODISCARD BisectRootType GetBisectRootType() const noexcept;
 
     private:
-        Real m_XRoot;
-        Real m_YRoot;
-        Real m_ZRoot;
-        BisectRootType m_BisectRootType;
+        Real xRoot;
+        Real yRoot;
+        Real zRoot;
+        BisectRootType bisectRootType;
     };
 
-    using FloatBisect3Root = Bisect3Root<float>;
-    using DoubleBisect3Root = Bisect3Root<double>;
+    using Bisect3RootF = Bisect3Root<float>;
+    using Bisect3RootD = Bisect3Root<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_ROOT_H

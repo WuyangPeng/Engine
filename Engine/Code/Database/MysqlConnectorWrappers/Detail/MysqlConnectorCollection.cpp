@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:49)
 
 #include "Database/DatabaseExport.h"
 
@@ -21,42 +21,28 @@ using std::string;
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 Database::MysqlConnectorCollection::MysqlConnectorCollection(const Schema& schema, const string& collectionName)
-    : ParentType{ schema.GetConfigurationStrategy() }, m_MysqlxCollection{ GetMysqlxCollectionPtr(schema, collectionName) }
+    : ParentType{ schema.GetConfigurationStrategy() }, mysqlxCollection{ schema.GetCollection(collectionName) }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
     #ifdef OPEN_CLASS_INVARIANT
+
 bool Database::MysqlConnectorCollection::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_MysqlxCollection)
+    if (ParentType::IsValid() && mysqlxCollection)
         return true;
     else
         return false;
 }
+
     #endif  // OPEN_CLASS_INVARIANT
 
-Database::MysqlConnectorCollection::MysqlxCollectionPtr Database::MysqlConnectorCollection::GetMysqlxCollectionPtr(const Schema& schema, const string& collectionName)
-{
-    auto implPtr = schema.GetImplType().lock();
-
-    if (implPtr)
-    {
-        return implPtr->GetCollection(collectionName);
-    }
-    else
-    {
-        THROW_EXCEPTION(SYSTEM_TEXT("获取schema失败。"s));
-    }
-}
-
-Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
+Database::MysqlConnectorCollection::ResultSharedPtr Database::MysqlConnectorCollection::ExecuteDoc(const string& findStatement, const BindStatementType& bindStatement, int limitStatement)
 {
     DATABASE_CLASS_IS_VALID_1;
 
-    using MysqlxDocResultPtr = std::shared_ptr<MysqlxDocResult>;
-
-    auto statement = m_MysqlxCollection->find(findStatement);
+    auto statement = mysqlxCollection->find(findStatement);
 
     if (0 < limitStatement)
     {
@@ -68,7 +54,7 @@ Database::MysqlConnectorCollection::ResultPtr Database::MysqlConnectorCollection
         statement = statement.bind(value.first, value.second);
     }
 
-    MysqlxDocResultPtr mysqlxDocResult{ make_shared<MysqlxDocResult>(statement.execute()) };
+    auto mysqlxDocResult = make_shared<MysqlxDocResult>(statement.execute());
 
     return make_shared<Result>(GetConfigurationStrategy(), mysqlxDocResult);
 }

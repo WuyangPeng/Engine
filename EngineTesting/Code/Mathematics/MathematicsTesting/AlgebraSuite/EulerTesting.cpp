@@ -26,7 +26,9 @@ namespace Mathematics
 #endif // BUILDING_MATHEMATICS_STATIC
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,EulerTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::EulerTesting
 	::MainTest()
 {
@@ -48,8 +50,8 @@ void Mathematics::EulerTesting
 	::EulerXYZTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() }; 
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() }; 
     
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -59,11 +61,11 @@ void Mathematics::EulerTesting
         double yAngle = secondAngleDistribution(generator);
         double zAngle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerXYZ(xAngle, yAngle, zAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerXYZ();
+        EulerD firstEuler = firstMatrix.ExtractEulerXYZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -71,22 +73,22 @@ void Mathematics::EulerTesting
         ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XYZ);
         
-        firstMatrix.MakeEulerXYZ(xAngle - zAngle, DoubleMath::GetHalfPI(), zAngle);
+        firstMatrix.MakeEulerXYZ(xAngle - zAngle, MathD::GetHalfPI(), zAngle);
         
         firstEuler = firstMatrix.ExtractEulerXYZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XYZ);
         
-        firstMatrix.MakeEulerXYZ(xAngle + zAngle, -DoubleMath::GetHalfPI(), zAngle);
+        firstMatrix.MakeEulerXYZ(xAngle + zAngle, -MathD::GetHalfPI(), zAngle);
         
         firstEuler = firstMatrix.ExtractEulerXYZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), -MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XYZ);
@@ -97,8 +99,8 @@ void Mathematics::EulerTesting
     ::EulerXZYTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -108,11 +110,11 @@ void Mathematics::EulerTesting
         double yAngle = firstAngleDistribution(generator);
         double zAngle = secondAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerXZY(xAngle, zAngle,yAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerXZY();
+        EulerD firstEuler = firstMatrix.ExtractEulerXZY();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -120,23 +122,23 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XZY);
         
-        firstMatrix.MakeEulerXZY(xAngle + yAngle, DoubleMath::GetHalfPI(), yAngle);
+        firstMatrix.MakeEulerXZY(xAngle + yAngle, MathD::GetHalfPI(), yAngle);
         
         firstEuler = firstMatrix.ExtractEulerXZY();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), 0.0,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), MathD::GetHalfPI(),1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XZY);
         
-        firstMatrix.MakeEulerXZY(xAngle - yAngle, -DoubleMath::GetHalfPI(), yAngle);
+        firstMatrix.MakeEulerXZY(xAngle - yAngle, -MathD::GetHalfPI(), yAngle);
         
         firstEuler = firstMatrix.ExtractEulerXZY();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), 0.0,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), -MathD::GetHalfPI(),1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XZY);
     }
@@ -146,8 +148,8 @@ void Mathematics::EulerTesting
     ::EulerYXZTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -157,11 +159,11 @@ void Mathematics::EulerTesting
         double yAngle = firstAngleDistribution(generator);
         double zAngle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerYXZ(yAngle,xAngle,zAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerYXZ();
+        EulerD firstEuler = firstMatrix.ExtractEulerYXZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -169,21 +171,21 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YXZ);
         
-        firstMatrix.MakeEulerYXZ(yAngle + zAngle, DoubleMath::GetHalfPI(), zAngle);
+        firstMatrix.MakeEulerYXZ(yAngle + zAngle, MathD::GetHalfPI(), zAngle);
         
         firstEuler = firstMatrix.ExtractEulerYXZ();
         
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YXZ);
         
-        firstMatrix.MakeEulerYXZ(yAngle - zAngle, -DoubleMath::GetHalfPI(), zAngle);
+        firstMatrix.MakeEulerYXZ(yAngle - zAngle, -MathD::GetHalfPI(), zAngle);
         
         firstEuler = firstMatrix.ExtractEulerYXZ();
         
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), -MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
@@ -195,8 +197,8 @@ void Mathematics::EulerTesting
     ::EulerYZXTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -206,11 +208,11 @@ void Mathematics::EulerTesting
         double yAngle = firstAngleDistribution(generator);
         double zAngle = secondAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerYZX(yAngle, zAngle, xAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerYZX();
+        EulerD firstEuler = firstMatrix.ExtractEulerYZX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -218,23 +220,23 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YZX);
         
-        firstMatrix.MakeEulerYZX(yAngle + xAngle, -DoubleMath::GetHalfPI(), xAngle);
+        firstMatrix.MakeEulerYZX(yAngle + xAngle, -MathD::GetHalfPI(), xAngle);
         
         firstEuler = firstMatrix.ExtractEulerYZX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), 0.0,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), -MathD::GetHalfPI(),1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YZX);
         
-        firstMatrix.MakeEulerYZX(yAngle - xAngle, DoubleMath::GetHalfPI(), xAngle);
+        firstMatrix.MakeEulerYZX(yAngle - xAngle, MathD::GetHalfPI(), xAngle);
         
         firstEuler = firstMatrix.ExtractEulerYZX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), 0.0,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), MathD::GetHalfPI(),1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YZX);
     }
@@ -243,8 +245,8 @@ void Mathematics::EulerTesting
     ::EulerZXYTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -254,11 +256,11 @@ void Mathematics::EulerTesting
         double yAngle = firstAngleDistribution(generator);
         double zAngle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerZXY(zAngle, xAngle, yAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerZXY();
+        EulerD firstEuler = firstMatrix.ExtractEulerZXY();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -266,21 +268,21 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZXY);
         
-        firstMatrix.MakeEulerZXY(zAngle + yAngle, -DoubleMath::GetHalfPI(), yAngle);
+        firstMatrix.MakeEulerZXY(zAngle + yAngle, -MathD::GetHalfPI(), yAngle);
         
         firstEuler = firstMatrix.ExtractEulerZXY();
         
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), -MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), 0.0,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZXY);
         
-        firstMatrix.MakeEulerZXY(zAngle - yAngle, DoubleMath::GetHalfPI(), yAngle);
+        firstMatrix.MakeEulerZXY(zAngle - yAngle, MathD::GetHalfPI(), yAngle);
         
         firstEuler = firstMatrix.ExtractEulerZXY();
         
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), 0.0,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
@@ -292,8 +294,8 @@ void Mathematics::EulerTesting
     ::EulerZYXTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ -DoubleMath::GetHalfPI(),DoubleMath::GetHalfPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ -MathD::GetHalfPI(),MathD::GetHalfPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -303,11 +305,11 @@ void Mathematics::EulerTesting
         double yAngle = secondAngleDistribution(generator);
         double zAngle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerZYX(zAngle, yAngle, xAngle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerZYX();
+        EulerD firstEuler = firstMatrix.ExtractEulerZYX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -315,22 +317,22 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZYX);
         
-        firstMatrix.MakeEulerZYX(zAngle + xAngle, DoubleMath::GetHalfPI(), xAngle);
+        firstMatrix.MakeEulerZYX(zAngle + xAngle, MathD::GetHalfPI(), xAngle);
         
         firstEuler = firstMatrix.ExtractEulerZYX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), 0.0,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZYX);
         
-        firstMatrix.MakeEulerZYX(zAngle - xAngle, -DoubleMath::GetHalfPI(), xAngle);
+        firstMatrix.MakeEulerZYX(zAngle - xAngle, -MathD::GetHalfPI(), xAngle);
         
         firstEuler = firstMatrix.ExtractEulerZYX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), 0.0,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), -DoubleMath::GetHalfPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), -MathD::GetHalfPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZYX);
@@ -341,8 +343,8 @@ void Mathematics::EulerTesting
     ::EulerXYXTest()
 { 
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -352,11 +354,11 @@ void Mathematics::EulerTesting
         double yAngle = secondAngleDistribution(generator);
         double x1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerXYX(x0Angle, yAngle, x1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerXYX();
+        EulerD firstEuler = firstMatrix.ExtractEulerXYX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), x0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -374,12 +376,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Sum);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XYX);
         
-        firstMatrix.MakeEulerXYX(x0Angle + x1Angle, DoubleMath::GetPI(), x1Angle);
+        firstMatrix.MakeEulerXYX(x0Angle + x1Angle, MathD::GetPI(), x1Angle);
         
         firstEuler = firstMatrix.ExtractEulerXYX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), x0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetX1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XYX);
@@ -390,8 +392,8 @@ void Mathematics::EulerTesting
     ::EulerXZXTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -401,11 +403,11 @@ void Mathematics::EulerTesting
         double zAngle = secondAngleDistribution(generator);
         double x1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerXZX(x0Angle, zAngle, x1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerXZX();
+        EulerD firstEuler = firstMatrix.ExtractEulerXZX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), x0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
@@ -413,12 +415,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XZX);
         
-        firstMatrix.MakeEulerXZX(x0Angle + x1Angle, DoubleMath::GetPI(), x1Angle);
+        firstMatrix.MakeEulerXZX(x0Angle + x1Angle, MathD::GetPI(), x1Angle);
         
         firstEuler = firstMatrix.ExtractEulerXZX();
         
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), x0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetX1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::XZX);
@@ -439,8 +441,8 @@ void Mathematics::EulerTesting
     ::EulerYXYTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -450,11 +452,11 @@ void Mathematics::EulerTesting
         double xAngle = secondAngleDistribution(generator);
         double y1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerYXY(y0Angle, xAngle, y1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerYXY();
+        EulerD firstEuler = firstMatrix.ExtractEulerYXY();
         
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), y0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
@@ -462,12 +464,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YXY);
         
-        firstMatrix.MakeEulerYXY(y0Angle + y1Angle, DoubleMath::GetPI(), y1Angle);
+        firstMatrix.MakeEulerYXY(y0Angle + y1Angle, MathD::GetPI(), y1Angle);
         
         firstEuler = firstMatrix.ExtractEulerYXY();
         
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), y0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YXY);
@@ -488,8 +490,8 @@ void Mathematics::EulerTesting
     ::EulerYZYTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -499,11 +501,11 @@ void Mathematics::EulerTesting
         double zAngle = secondAngleDistribution(generator);
         double y1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerYZY(y0Angle, zAngle, y1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerYZY();
+        EulerD firstEuler = firstMatrix.ExtractEulerYZY();
         
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), y0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), zAngle,1e-10);
@@ -511,12 +513,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YZY);
         
-        firstMatrix.MakeEulerYZY(y0Angle + y1Angle, DoubleMath::GetPI(), y1Angle);
+        firstMatrix.MakeEulerYZY(y0Angle + y1Angle, MathD::GetPI(), y1Angle);
         
         firstEuler = firstMatrix.ExtractEulerYZY();
         
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), y0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::YZY);
@@ -537,8 +539,8 @@ void Mathematics::EulerTesting
     ::EulerZXZTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -548,11 +550,11 @@ void Mathematics::EulerTesting
         double xAngle = secondAngleDistribution(generator);
         double z1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerZXZ(z0Angle, xAngle, z1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerZXZ();
+        EulerD firstEuler = firstMatrix.ExtractEulerZXZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), z0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), xAngle,1e-10);
@@ -560,12 +562,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZXZ);
         
-        firstMatrix.MakeEulerZXZ(z0Angle + z1Angle, DoubleMath::GetPI(), z1Angle);
+        firstMatrix.MakeEulerZXZ(z0Angle + z1Angle, MathD::GetPI(), z1Angle);
         
         firstEuler = firstMatrix.ExtractEulerZXZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), z0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetX0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZXZ);
@@ -586,8 +588,8 @@ void Mathematics::EulerTesting
     ::EulerZYZTest()
 {
 	default_random_engine generator{};
-	uniform_real<double> firstAngleDistribution{ -DoubleMath::GetPI(),DoubleMath::GetPI() };
-	uniform_real<double> secondAngleDistribution{ 0,DoubleMath::GetPI() };
+	uniform_real<double> firstAngleDistribution{ -MathD::GetPI(),MathD::GetPI() };
+	uniform_real<double> secondAngleDistribution{ 0,MathD::GetPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
@@ -597,11 +599,11 @@ void Mathematics::EulerTesting
         double yAngle = secondAngleDistribution(generator);
         double z1Angle = firstAngleDistribution(generator);
         
-        DoubleMatrix3 firstMatrix;
+        Matrix3D firstMatrix;
         
         firstMatrix.MakeEulerZYZ(z0Angle, yAngle, z1Angle);
         
-        DoubleEuler firstEuler = firstMatrix.ExtractEulerZYZ();
+        EulerD firstEuler = firstMatrix.ExtractEulerZYZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), z0Angle,1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), yAngle,1e-10);
@@ -609,12 +611,12 @@ void Mathematics::EulerTesting
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Unique);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZYZ);
         
-        firstMatrix.MakeEulerZYZ(z0Angle + z1Angle, DoubleMath::GetPI(), z1Angle);
+        firstMatrix.MakeEulerZYZ(z0Angle + z1Angle, MathD::GetPI(), z1Angle);
         
         firstEuler = firstMatrix.ExtractEulerZYZ();
         
         ASSERT_APPROXIMATE(firstEuler.GetZ0Angle(), z0Angle,1e-10);
-        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), DoubleMath::GetPI(),1e-10);
+        ASSERT_APPROXIMATE(firstEuler.GetY0Angle(), MathD::GetPI(),1e-10);
         ASSERT_APPROXIMATE(firstEuler.GetZ1Angle(), 0.0,1e-10);
 		ASSERT_ENUM_EQUAL(firstEuler.GetType(),ExtractEulerResultType::Difference);
 		ASSERT_ENUM_EQUAL(firstEuler.GetOrder(),ExtractEulerResultOrder::ZYZ);

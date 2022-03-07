@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/24 22:18)
+///	引擎版本：0.8.0.1 (2022/01/10 18:33)
 
 #ifndef CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
 #define CORE_TOOLS_CONTRACT_TRIGGER_ASSERT_H
@@ -17,7 +17,6 @@
 #include "CoreTools/Helper/CustomAssertMacro.h"
 
 #include <boost/format/format_fwd.hpp>
-#include <array>
 
 namespace CoreTools
 {
@@ -48,13 +47,17 @@ namespace CoreTools
         NODISCARD std::string GenerateMessagePrefix(const FunctionDescribed& functionDescribed, const std::string& triggerAssertCheckMessage);
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
+
         void WriteToOutputDebug(const std::string& message) noexcept;
+
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
+
         void JudgeUserSelection(const std::string& message);
         void JudgeSelection(DialogBoxCommand selection, const std::string& message);
         NODISCARD static std::string GetMessageBoxTitle();
+
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_MESSAGE_BOX
 
         NODISCARD static std::string GetDebugPrompt();

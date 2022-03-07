@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 18:14)
+///	引擎版本：0.8.0.2 (2022/02/11 16:29)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_H
 #define MATHEMATICS_RATIONAL_INTEGER_H
@@ -42,6 +42,14 @@ namespace Mathematics
         using IntegerData = IntegerData<N>;
 
     public:
+        NODISCARD static Integer<N> CreateOne() noexcept;
+
+        enum class Special
+        {
+            One = 1,
+        };
+
+        explicit Integer(MAYBE_UNUSED Special special) noexcept;
         Integer() noexcept;
         explicit Integer(const DataType& data);
         explicit Integer(const IntegerData& data) noexcept;
@@ -49,21 +57,18 @@ namespace Mathematics
         template <typename T>
         explicit Integer(T value);
 
-        template <int Other>
-        explicit Integer(const Integer<Other>& rhs);
-
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsZero() const noexcept;
-        [[nodiscard]] void SetZero();
-        [[nodiscard]] NumericalValueSymbol GetSign() const noexcept;
+        NODISCARD bool IsZero() const noexcept;
+        NODISCARD void SetZero();
+        NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
-        [[nodiscard]] uint16_t& operator[](int index);
-        [[nodiscard]] const uint16_t& operator[](int index) const;
+        NODISCARD uint16_t& operator[](int index);
+        NODISCARD const uint16_t& operator[](int index) const;
 
         // 算术运算。
-        [[nodiscard]] const Integer operator-() const;
-        [[nodiscard]] const Integer GetAbsoluteValue() const;
+        NODISCARD Integer operator-() const;
+        NODISCARD Integer GetAbsoluteValue() const;
 
         // 算术更新。
         Integer& operator+=(const Integer& rhs);
@@ -71,7 +76,7 @@ namespace Mathematics
         Integer& operator*=(const Integer& rhs);
 
         // 如果要同时求出商和余数，直接调用GetDivisionModulo
-        [[nodiscard]] const IntegerDivisionModulo GetDivisionModulo(const Integer& rhs) const;
+        NODISCARD IntegerDivisionModulo GetDivisionModulo(const Integer& rhs) const;
         Integer& operator/=(const Integer& rhs);
         Integer& operator%=(const Integer& rhs);
 
@@ -79,28 +84,28 @@ namespace Mathematics
         Integer& operator<<=(int shift);
         Integer& operator>>=(int shift);
 
-        [[nodiscard]] int GetLeadingBlock() const;
-        [[nodiscard]] int GetTrailingBlock() const;
-        [[nodiscard]] int GetLeadingBit(int index) const;
-        [[nodiscard]] int GetTrailingBit(int index) const;
-        [[nodiscard]] int GetLeadingBit() const;
-        [[nodiscard]] int GetTrailingBit() const;
+        NODISCARD int GetLeadingBlock() const;
+        NODISCARD int GetTrailingBlock() const;
+        NODISCARD int GetLeadingBit(int index) const;
+        NODISCARD int GetTrailingBit(int index) const;
+        NODISCARD int GetLeadingBit() const;
+        NODISCARD int GetTrailingBit() const;
 
         void SetBit(int index, bool on);
-        [[nodiscard]] bool GetBit(int index) const;
+        NODISCARD bool GetBit(int index) const;
 
         // 比较
-        [[nodiscard]] bool operator==(const Integer& rhs) const;
-        [[nodiscard]] bool operator<(const Integer& rhs) const;
+        NODISCARD bool operator==(const Integer& rhs) const;
+        NODISCARD bool operator<(const Integer& rhs) const;
 
         // 返回值若被截断，抛出异常
         template <typename T>
-        [[nodiscard]] T GetValue() const;
+        NODISCARD T GetValue() const;
 
         void Print(std::ostream& os) const;
 
     private:
-        IntegerData m_IntegerData;
+        IntegerData integerData;
     };
 
     template <int N>

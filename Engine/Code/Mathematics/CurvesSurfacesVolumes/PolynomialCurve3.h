@@ -29,10 +29,10 @@ namespace Mathematics
 		const Polynomial<Real>* GetYPolynomial() const;
 		const Polynomial<Real>* GetZPolynomial() const;
 
-		virtual Vector3D<Real> GetPosition(Real t) const;
-		virtual Vector3D<Real> GetFirstDerivative(Real t) const;
-		virtual Vector3D<Real> GetSecondDerivative(Real t) const;
-		virtual Vector3D<Real> GetThirdDerivative(Real t) const;
+		virtual Vector3<Real> GetPosition(Real t) const;
+		virtual Vector3<Real> GetFirstDerivative(Real t) const;
+		virtual Vector3<Real> GetSecondDerivative(Real t) const;
+		virtual Vector3<Real> GetThirdDerivative(Real t) const;
 
 	protected:
 		Polynomial<Real>* mXPoly;

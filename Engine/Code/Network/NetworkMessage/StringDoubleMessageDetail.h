@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 19:27)
 
 #ifndef NETWORK_NETWORK_MESSAGE_STRING_DOUBLE_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_STRING_DOUBLE_MESSAGE_DETAIL_H
@@ -25,6 +25,7 @@ Network::StringDoubleMessage<E>::StringDoubleMessage(int64_t messageID, const St
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename E>
 bool Network::StringDoubleMessage<E>::IsValid() const noexcept
 {
@@ -33,6 +34,7 @@ bool Network::StringDoubleMessage<E>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E>
@@ -50,9 +52,9 @@ const CoreTools::Rtti& Network::StringDoubleMessage<E>::GetCurrentRttiType() noe
 }
 
 template <typename E>
-Network::MessageInterfaceSharedPtr Network::StringDoubleMessage<E>::Factory(const MessageSourceSharedPtr& source, int64_t messageID)
+Network::MessageInterfaceSharedPtr Network::StringDoubleMessage<E>::Factory(MessageSource& source, int64_t messageID)
 {
-    MessageInterfaceSharedPtr object{ std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID) };
+    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID);
 
     object->Load(source);
 
@@ -67,7 +69,7 @@ Network::StringDoubleMessage<E>::StringDoubleMessage(LoadConstructor value, int6
 }
 
 template <typename E>
-void Network::StringDoubleMessage<E>::Load(const MessageSourceSharedPtr& source)
+void Network::StringDoubleMessage<E>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -81,7 +83,7 @@ void Network::StringDoubleMessage<E>::Load(const MessageSourceSharedPtr& source)
 }
 
 template <typename E>
-void Network::StringDoubleMessage<E>::Save(const MessageTargetSharedPtr& target) const
+void Network::StringDoubleMessage<E>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

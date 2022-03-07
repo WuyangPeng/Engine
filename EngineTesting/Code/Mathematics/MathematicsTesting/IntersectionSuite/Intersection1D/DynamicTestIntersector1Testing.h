@@ -25,7 +25,7 @@ namespace Mathematics
 		void GetFirstTimeException(const DynamicTestIntersector1<double>& intersector1);
 		void GetLastTimeException(const DynamicTestIntersector1<double>& intersector1);
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

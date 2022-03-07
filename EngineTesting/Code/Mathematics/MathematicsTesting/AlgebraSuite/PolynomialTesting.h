@@ -24,7 +24,7 @@ namespace Mathematics
 		void OperationTest();
 		void CalculateTest();
 
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 10:45)
+///	引擎版本：0.8.0.3 (2022/03/01 19:13)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H
@@ -18,15 +18,15 @@ namespace Mathematics
 {
     // 查找交叉点查询。 相交点为P = origin + t*direction。
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Plane3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Plane3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorLine3Plane3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -34,25 +34,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const noexcept;
-        [[nodiscard]] const Plane3 GetPlane() const noexcept;
+        NODISCARD Line3 GetLine() const noexcept;
+        NODISCARD Plane3 GetPlane() const noexcept;
 
-        [[nodiscard]] Real GetLineParameter() const noexcept;
+        NODISCARD Real GetLineParameter() const noexcept;
 
     private:
         void Find() noexcept;
 
     private:
         // 相交对象
-        Line3 m_Line;
-        Plane3 m_Plane;
+        Line3 line;
+        Plane3 plane;
 
         // 相交对象集信息
-        Real m_LineParameter;
+        Real lineParameter;
     };
-
-    using FloatStaticFindIntersectorLine3Plane3 = StaticFindIntersectorLine3Plane3<float>;
-    using DoubleStaticFindIntersectorLine3Plane3 = StaticFindIntersectorLine3Plane3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_H

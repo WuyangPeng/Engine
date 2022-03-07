@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 16:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 14:21)
 
 #ifndef NETWORK_INTERFACE_BASE_MAIN_MANAGER_IMPL_H
 #define NETWORK_INTERFACE_BASE_MAIN_MANAGER_IMPL_H
@@ -16,18 +16,17 @@
 
 namespace Network
 {
-    class BaseMainManagerFactory;
     class NETWORK_HIDDEN_DECLARE BaseMainManagerImpl
     {
     public:
         using ClassType = BaseMainManagerImpl;
-        using FactoryType =BaseMainManagerFactory;
+        using FactoryType = BaseMainManagerFactory;
 
     public:
         BaseMainManagerImpl() noexcept;
         virtual ~BaseMainManagerImpl() noexcept = default;
-        BaseMainManagerImpl(const BaseMainManagerImpl& rhs) = default;
-        BaseMainManagerImpl& operator=(const BaseMainManagerImpl& rhs) = default;
+        BaseMainManagerImpl(const BaseMainManagerImpl& rhs) noexcept = default;
+        BaseMainManagerImpl& operator=(const BaseMainManagerImpl& rhs) noexcept = default;
         BaseMainManagerImpl(BaseMainManagerImpl&& rhs) noexcept = default;
         BaseMainManagerImpl& operator=(BaseMainManagerImpl&& rhs) noexcept = default;
 
@@ -37,9 +36,9 @@ namespace Network
         virtual void Run() = 0;
 
         // 非boost主管理类默认抛出异常。
-        [[nodiscard]] virtual IOContextType& GetIOContext();
+        NODISCARD virtual IOContextType& GetIOContext();
         virtual void StopContext();
-        [[nodiscard]] virtual bool IsContextStop() const;
+        NODISCARD virtual bool IsContextStop() const;
         virtual void RestartContext();
     };
 }

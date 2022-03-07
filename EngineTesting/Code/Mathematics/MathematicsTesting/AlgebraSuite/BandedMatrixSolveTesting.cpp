@@ -23,7 +23,9 @@ namespace Mathematics
 	template class BandedMatrixSolve<float>;
 	template class BandedMatrixSolve<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,BandedMatrixSolveTesting) 
 
 void Mathematics::BandedMatrixSolveTesting
@@ -46,7 +48,7 @@ void Mathematics::BandedMatrixSolveTesting
 	int lowerBoundNumber = secondIntegerRandomDistribution(generator);
 	int upperBoundNumber = secondIntegerRandomDistribution(generator);
 
-	DoubleBandedMatrixSolve firstBandedMatrix(size,lowerBoundNumber,upperBoundNumber);
+	BandedMatrixSolveD firstBandedMatrix(size,lowerBoundNumber,upperBoundNumber);
 
 	ASSERT_EQUAL(firstBandedMatrix.GetSize (),size);
 	ASSERT_EQUAL(firstBandedMatrix.GetLowerBandsNumber () ,lowerBoundNumber);
@@ -133,7 +135,7 @@ void Mathematics::BandedMatrixSolveTesting
 		}
 	}
 
-	const DoubleBandedMatrixSolve secondBandedMatrix(firstBandedMatrix);
+	const BandedMatrixSolveD secondBandedMatrix(firstBandedMatrix);
 
 	ASSERT_EQUAL(secondBandedMatrix.GetSize (),firstBandedMatrix.GetSize());
 	ASSERT_EQUAL(secondBandedMatrix.GetLowerBandsNumber () ,firstBandedMatrix.GetLowerBandsNumber());
@@ -201,7 +203,7 @@ void Mathematics::BandedMatrixSolveTesting
 		}
 	}
 
-	DoubleBandedMatrixSolve thirdBandedMatrix(5,1,1);
+	BandedMatrixSolveD thirdBandedMatrix(5,1,1);
 
 	for(int i = 0;i < thirdBandedMatrix.GetSize();++i)
 	{
@@ -246,7 +248,7 @@ void Mathematics::BandedMatrixSolveTesting
 		}
 	}
 
-	DoubleBandedMatrixSolve fourthBandedMatrix(secondBandedMatrix);
+	BandedMatrixSolveD fourthBandedMatrix(secondBandedMatrix);
 
 	fourthBandedMatrix.SetZero();
 
@@ -297,7 +299,7 @@ void Mathematics::BandedMatrixSolveTesting
 
 		int boundNumber = secondIntegerRandomDistribution(generator);
 
-		DoubleBandedMatrixSolve firstBandedMatrix(size,boundNumber,boundNumber,1e-5);		
+		BandedMatrixSolveD firstBandedMatrix(size,boundNumber,boundNumber,1e-5);		
 
 		// ÏÂÈý½Ç
 		for(int row = 0;row < firstBandedMatrix.GetSize();++row)
@@ -343,18 +345,18 @@ void Mathematics::BandedMatrixSolveTesting
 
 		ASSERT_ENUM_EQUAL(firstBandedMatrix.GetSolve(), BandedMatrixSolveFlags::Succeed);
 
-		DoubleVariableLengthVector firstVector(firstBandedMatrix.GetSize());
+		VariableLengthVectorD firstVector(firstBandedMatrix.GetSize());
 
 		for(int index = 0;index < firstVector.GetSize();++index)
 		{
 			firstVector[index] = doubleRandomDistribution(generator);
 		}
 
-		DoubleVariableLengthVector secondVector =  firstBandedMatrix.SolveSystem(firstVector);
+		VariableLengthVectorD secondVector =  firstBandedMatrix.SolveSystem(firstVector);
 
 		ASSERT_TRUE(Approximate(firstBandedMatrix.ToInputVariableMatrix() * secondVector, firstVector,1e-10));
  
-		DoubleVariableMatrix firstVariableMatrix(firstBandedMatrix.GetSize(), firstBandedMatrix.GetSize());
+		VariableMatrixD firstVariableMatrix(firstBandedMatrix.GetSize(), firstBandedMatrix.GetSize());
 
 		for(int row = 0;row < firstBandedMatrix.GetSize();++row)
 		{
@@ -364,12 +366,12 @@ void Mathematics::BandedMatrixSolveTesting
 			}
 		}
 
-		DoubleVariableMatrix secondVariableMatrix = firstBandedMatrix.SolveSystem(firstVariableMatrix);
+		VariableMatrixD secondVariableMatrix = firstBandedMatrix.SolveSystem(firstVariableMatrix);
 
 		ASSERT_TRUE(Approximate(firstBandedMatrix.ToInputVariableMatrix() * secondVariableMatrix,firstVariableMatrix,1e-10));		 
 	}	
 
-	DoubleBandedMatrixSolve fifthBandedMatrix(3,2,2);
+	BandedMatrixSolveD fifthBandedMatrix(3,2,2);
 
 	fifthBandedMatrix(0,0) = 6;
 	fifthBandedMatrix(0,1) = 7;

@@ -23,9 +23,9 @@ namespace Network
 		using TestFunction = void(ClassType::*)();
 
 	private:
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
-		void MainTest();
+		void MainTest() noexcept;
 
 		void StreamTest();
 
@@ -34,7 +34,7 @@ namespace Network
 		void ClientTest();
 		void ServerTest();
 
-		void ClientConnect(const TestingTypeSharedPtr& sockStream);
+		void ClientConnect1(const TestingTypeSharedPtr& sockStream);
 		void ServerAcceptor(const TestingTypeSharedPtr& sockStream);
 
 		void ACESockStreamExceptionTest();

@@ -73,7 +73,7 @@ void System::CFileReadTesting::ReadTest()
     ASSERT_EQUAL(count, buffer.size());
 
     vector<char> originalBuffer{ cFileContent.begin(), cFileContent.end() };
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buffer, originalBuffer);
+    ASSERT_EQUAL(buffer, originalBuffer);
 
     ASSERT_TRUE(CloseCFile(file));
 }

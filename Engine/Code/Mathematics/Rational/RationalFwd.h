@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 13:56)
+///	引擎版本：0.8.0.2 (2022/02/10 18:47)
 
 #ifndef MATHEMATICS_RATIONAL_FWD_H
 #define MATHEMATICS_RATIONAL_FWD_H
@@ -13,10 +13,13 @@
 namespace Mathematics
 {
     template <typename T>
-    class FloatingPointAnalysis;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FloatingPointAnalysis;
 
     template <typename T>
     class ConversionInteger;
+
+    template <typename T>
+    class ConversionRational;
 
     template <int N>
     class IntegerData;
@@ -33,14 +36,17 @@ namespace Mathematics
     template <int N>
     class IntegerMultiplication;
 
+    template <int N>
+    class IntegerDivisionMultiple;
+
+    template <int N>
+    class IntegerDataAmend;
+
     template <int N, typename T>
     class IntegerDataConversion;
 
     template <int N>
     class Integer;
-
-    template <int N, typename T>
-    class RationalConversion;
 
     template <int N, typename T>
     class RationalConversion;

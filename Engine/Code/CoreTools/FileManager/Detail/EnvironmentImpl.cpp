@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:06)
+///	引擎版本：0.8.0.1 (2022/01/09 1:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -100,8 +100,8 @@ bool CoreTools::EnvironmentImpl::IsFileInPathExist(const String& decorated, cons
 {
     FILE* file{ nullptr };
 
-    auto decoratedConversion = StringConversion::StandardConversionCFileString(decorated);
-    auto attributesConversion = StringConversion::StandardConversionCFileString(attributes);
+    const auto decoratedConversion = StringConversion::StandardConversionCFileString(decorated);
+    const auto attributesConversion = StringConversion::StandardConversionCFileString(attributes);
 
     if (System::OpenCFile(file, decoratedConversion, attributesConversion))
     {

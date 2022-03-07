@@ -18,7 +18,16 @@ namespace Mathematics
 	template class BrentsMethod<float,BrentsMethodCalculateTesting>;
 	template class BrentsMethod<double,BrentsMethodCalculateTesting>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,BrentsMethodCalculateTesting) 
 
 void Mathematics::BrentsMethodCalculateTesting
@@ -77,6 +86,6 @@ double Mathematics::BrentsMethodCalculateTesting
 double Mathematics::BrentsMethodCalculateTesting
 	::GetUserData() const
 {
-	return DoubleMath::GetValue(2);
+	return MathD::GetValue(2);
 }
 

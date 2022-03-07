@@ -31,7 +31,7 @@ namespace Network
 		void ACEServerThread();
 		void DoACEServerThread();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		int m_Port;

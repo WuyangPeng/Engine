@@ -305,9 +305,9 @@
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringUtility.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Command.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgument.h" />
-    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgumentImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandFwd.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandHandle.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandInternalFwd.h" />
@@ -316,6 +316,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentContainerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentFactory.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentPackage.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandLineInformationImpl.h" />
@@ -394,6 +395,10 @@
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\MinHeapRecordStoredManagerDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Table.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TableDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeMap.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeMapDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeQueue.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeQueueDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\Tuple.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\TupleLess.h" />
@@ -487,6 +492,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\PerformanceUnsharedExportMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\Export\SharedExportMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\GetRequiredBits.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\HashCombine.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Helper\SafetyLimitMacro.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Appender.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\AppenderManager.h" />
@@ -501,6 +507,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImplDetail.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousParameter.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.h" />
@@ -513,6 +521,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Flags\LogManagerFlags.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Log.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogAsynchronous.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFileName.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.h" />
@@ -603,6 +612,8 @@
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\HeapAllocateDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryTools.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\MemoryToolsFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SharedPtrCompare.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\WeakPtrCompare.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\BaseEntity.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParameters.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\MessageEvent\CallbackParametersDetail.h" />
@@ -772,6 +783,7 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\ParamType.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\Pow3.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\PtrCompare.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RangeIteration.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddress.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RealAddressDetail.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RecursiveSine.h" />
@@ -1073,11 +1085,13 @@
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Day.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Detail\TimerImpl.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Month.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\SecondTimer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Time.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\TimeFwd.h" />
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Timer.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\Time\Year.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.h" />
     <ClInclude Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.h" />
@@ -1112,6 +1126,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\Detail\WideCharConversionMultiByte.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\FormatErrorMessage.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringConversion.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringUtility.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandArgument.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandHandle.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Command\CommandLineInformation.cpp" />
@@ -1220,6 +1235,8 @@
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\AppenderPrintFlagsExist.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\ErrorConsoleTextColorsManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAppenderIOManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousParameter.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerFactory.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogConsoleTextColorsManagerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogFileNameImpl.cpp" />
@@ -1231,6 +1248,7 @@
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\OutputConsoleTextColorsManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Log.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogAppenderIOManager.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogAsynchronous.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogConsoleTextColorsManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFileName.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogFilterManager.cpp" />
@@ -1538,9 +1556,11 @@
     <ClCompile Include="..\..\..\Code\CoreTools\Time\Day.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\DeltaTimeManager.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\Detail\DeltaTimeManagerImpl.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Detail\TimerImpl.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\MillisecondTimer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\Month.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\SecondTimer.cpp" />
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Timer.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\Time\Year.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\CpuTimerData.cpp" />
     <ClCompile Include="..\..\..\Code\CoreTools\UnitTestSuite\Detail\OStreamImpl.cpp" />

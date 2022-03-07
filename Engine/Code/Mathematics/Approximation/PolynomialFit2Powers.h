@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 14:40)
+///	引擎版本：0.8.0.2 (2022/02/18 16:57)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+#include "PolynomialFitPowersData.h"
+
 #include <memory>
 #include <vector>
 
@@ -26,25 +26,13 @@ namespace Mathematics
     // 但输入数据(x,w) 首先被映射到[-1,1]^2 对数值鲁棒性。
 
     template <typename Real>
-    class PolynomialFit2PowersImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit2PowersImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit2Powers final
+    class PolynomialFit2Powers final
     {
     public:
-        using PolynomialFit2PowersImpl = PolynomialFit2PowersImpl<Real>;
- 
-        TYPE_DECLARE(PolynomialFit2Powers);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
+        using ClassType = PolynomialFit2Powers<Real>;
         using Samples = std::vector<Real>;
         using Powers = std::vector<int>;
+        using Math = Math<Real>;
 
     public:
         // 构造函数是数据(x[i],w[i])，分别为0 <= i < numSamples。
@@ -54,23 +42,34 @@ namespace Mathematics
 
         // 这是一个功能类，如果解线性方程组成功则返回“true”。
         // 如果不成功，则多项式求值是无效的，总是返回false。
-        [[nodiscard]] bool IsSolveSucceed() const noexcept;
+        NODISCARD bool IsSolveSucceed() const noexcept;
 
-        [[nodiscard]] Real GetXMin() const;
-        [[nodiscard]] Real GetXMax() const;
-        [[nodiscard]] Real GetWMin() const;
-        [[nodiscard]] Real GetWMax() const;
+        NODISCARD Real GetXMin() const;
+        NODISCARD Real GetXMax() const;
+        NODISCARD Real GetWMin() const;
+        NODISCARD Real GetWMax() const;
 
         // 拟合多项式的的评估。
         // 派生类可以重写此实现，有效方法基于有关传递给构造函数的具体幂的知识。
-        [[nodiscard]] Real operator()(Real x) const;
+        NODISCARD Real operator()(Real x) const;
 
     private:
-        PackageType impl;
+        // 支持构造
+        void Init(const Samples& xSamples, const Samples& wSamples);
+        void InitializePowers();
+        void TransformToUnit(const Samples& xSourceSamples, const Samples& wSourceSamples, Samples& xTargetSamples, Samples& wTargetSamples);
+        void TransformToUnit(const Samples& sourceSamples, Samples& targetSamples, int index);
+        void DoLeastSquaresFit(const Samples& xTargetSamples, const Samples& wTargetSamples);
+
+    private:
+        // 复制的幂在拟合的多项式的评估使用。
+        Powers powers;
+
+        PolynomialFitPowersData<Real, 2> powersData;
     };
 
-    using FloatPolynomialFit2Powers = PolynomialFit2Powers<float>;
-    using DoublePolynomialFit2Powers = PolynomialFit2Powers<double>;
+    using PolynomialFit2PowersF = PolynomialFit2Powers<float>;
+    using PolynomialFit2PowersD = PolynomialFit2Powers<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_POWERS_H

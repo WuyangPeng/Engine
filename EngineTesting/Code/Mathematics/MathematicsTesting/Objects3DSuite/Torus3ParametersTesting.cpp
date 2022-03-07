@@ -28,7 +28,7 @@ void Mathematics::Torus3ParametersTesting ::MainTest()
 
 void Mathematics::Torus3ParametersTesting ::ParametersTest()
 {
-    FloatTorus3Parameters parameters(0.5f, 0.2f);
+    const Torus3ParametersF parameters(0.5f, 0.2f);
 
     ASSERT_APPROXIMATE(parameters.GetS(), 0.5f, 1e-8f);
     ASSERT_APPROXIMATE(parameters.GetT(), 0.2f, 1e-8f);

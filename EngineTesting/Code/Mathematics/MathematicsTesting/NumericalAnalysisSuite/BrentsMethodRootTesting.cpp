@@ -12,7 +12,16 @@
 #include "Mathematics/NumericalAnalysis/BrentsMethodRootDetail.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, BrentsMethodRootTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 void Mathematics::BrentsMethodRootTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(HaveSolutionTest);
@@ -27,7 +36,7 @@ void Mathematics::BrentsMethodRootTesting ::HaveSolutionTest()
     double function = 19.0;
     BrentsMethodRootType type = BrentsMethodRootType::HaveSolution;
 
-    DoubleBrentsMethodRoot brentsMethodRoot(root, function, type);
+    BrentsMethodRootD brentsMethodRoot(root, function, type);
 
     ASSERT_APPROXIMATE(brentsMethodRoot.GetRoot(), root, 1e-10);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetFunction(), function, 1e-10);
@@ -38,7 +47,7 @@ void Mathematics::BrentsMethodRootTesting ::NoSolutionRootTest()
 {
     BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
 
-    DoubleBrentsMethodRoot brentsMethodRoot;
+    BrentsMethodRootD brentsMethodRoot;
 
     ASSERT_EQUAL(System::EnumCastUnderlying(brentsMethodRoot.GetBrentsMethodRootType()), System::EnumCastUnderlying(type));
 
@@ -51,7 +60,7 @@ void Mathematics::BrentsMethodRootTesting ::UnknownTest()
     float function = 29.0f;
     BrentsMethodRootType type = BrentsMethodRootType::Unknown;
 
-    DoubleBrentsMethodRoot brentsMethodRoot(root, function, type);
+    BrentsMethodRootD brentsMethodRoot(root, function, type);
 
     ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
     ASSERT_APPROXIMATE(brentsMethodRoot.GetRoot(), root, 1e-8f);
@@ -62,7 +71,7 @@ void Mathematics::BrentsMethodRootTesting ::NoSolutionFunctionTest()
 {
     BrentsMethodRootType type = BrentsMethodRootType::NoSolution;
 
-    DoubleBrentsMethodRoot brentsMethodRoot;
+    BrentsMethodRootD brentsMethodRoot;
 
     ASSERT_ENUM_EQUAL(brentsMethodRoot.GetBrentsMethodRootType(), type);
 

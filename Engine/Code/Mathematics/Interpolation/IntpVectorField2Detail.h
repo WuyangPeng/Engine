@@ -12,7 +12,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    IntpVectorField2<Real>::IntpVectorField2(const std::vector<Vector2D<Real>>& domain, Vector2D<Real>* range, bool owner, QueryType queryType)
+    IntpVectorField2<Real>::IntpVectorField2(const std::vector<Vector2<Real>>& domain, Vector2<Real>* range, bool owner, QueryType queryType)
     {
         int quantity = domain.size();
         // Repackage the output vectors into individual components.  This is
@@ -51,8 +51,8 @@ namespace Mathematics
     }
 
     template <typename Real>
-    bool IntpVectorField2<Real>::Evaluate(const Vector2D<Real>& input,
-                                          Vector2D<Real>& output)
+    bool IntpVectorField2<Real>::Evaluate(const Vector2<Real>& input,
+                                          Vector2<Real>& output)
     {
         Real xDeriv, yDeriv;
         return mXInterp->Evaluate(input, output[0], xDeriv, yDeriv) && mYInterp->Evaluate(input, output[1], xDeriv, yDeriv);

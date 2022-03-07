@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 15:57)
+///	引擎版本：0.8.0.2 (2022/02/18 13:53)
 
 #ifndef MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_ORTHOGONAL_LINT_FIT3_ACHIEVE_H
@@ -18,17 +18,19 @@
 
 template <typename Real>
 Mathematics::OrthogonalLineFit3<Real>::OrthogonalLineFit3(const Points& points)
-    : m_Line{ Calculate(points) }
+    : line{ Calculate(points) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::OrthogonalLineFit3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -36,7 +38,7 @@ Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::GetLine3() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Line;
+    return line;
 }
 
 // static
@@ -44,7 +46,7 @@ template <typename Real>
 Mathematics::Line3<Real> Mathematics::OrthogonalLineFit3<Real>::Calculate(const Points& points)
 {
     // 计算点的平均值。
-    Vector3D origin{};
+    Vector3 origin{};
     for (const auto& point : points)
     {
         origin += point;

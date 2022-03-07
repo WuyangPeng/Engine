@@ -9,7 +9,16 @@
 #include "Mathematics/NumericalAnalysis/OdeSolverDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 Mathematics::OdeSolverTest
 	::OdeSolverTest(int dimension, double step,Function function, const OdeSolverTesting* userData)
 	:ParentType{ dimension, step, function, userData }
@@ -32,9 +41,9 @@ void Mathematics::OdeSolverTest
 
 	tOut = tIn;
 
-	int dimension = GetDimension();
+	int dimension0 = GetDimension();
 
-	for (int i = 0; i < dimension; i++)
+	for (int i = 0; i < dimension0; i++)
 	{
 		xOut[i] = xIn[i];	
 	}

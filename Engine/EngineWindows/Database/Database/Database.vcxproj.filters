@@ -25,9 +25,6 @@
     <Filter Include="FlatFileWrappers 头文件">
       <UniqueIdentifier>{747376bb-9a95-40cf-8e82-a5e705531867}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FlatFileWrappers 源文件">
-      <UniqueIdentifier>{15efd295-3555-4084-b098-32aa91d29d99}</UniqueIdentifier>
-    </Filter>
     <Filter Include="MysqlConnectorWrappers 头文件">
       <UniqueIdentifier>{8c15987a-0013-4ba1-803c-bc50842330ff}</UniqueIdentifier>
     </Filter>
@@ -37,20 +34,11 @@
     <Filter Include="SQLiteWrappers 头文件">
       <UniqueIdentifier>{b4fe7e8b-7eed-4dad-a5b8-6a8c428b917a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SQLiteWrappers 源文件">
-      <UniqueIdentifier>{a2d8316e-19e0-4f6b-9a0c-fca458f7e3b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SqlServerWrappers 头文件">
       <UniqueIdentifier>{9a6722f9-e441-4fc3-b7a5-4c1c60c3ed6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SqlServerWrappers 源文件">
-      <UniqueIdentifier>{811637fc-8116-4b2a-bf18-27fcee04467b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Statement 头文件">
       <UniqueIdentifier>{e7e06ed4-d8a4-4fe6-8fc7-613cbe3c0251}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Statement 源文件">
-      <UniqueIdentifier>{009d844a-962d-4aab-b4cb-70991995fce5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Configuration 头文件\Detail">
       <UniqueIdentifier>{24f90dc3-3066-4c8e-9da8-fc0c88216584}</UniqueIdentifier>
@@ -97,44 +85,15 @@
     <Filter Include="MysqlWrappers 头文件">
       <UniqueIdentifier>{5a12f0ed-cfe6-47d1-b32e-96317298bc8a}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resource\Todo\Level 2.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 3.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 4.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 5.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
-      <Filter>资源文件</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 7.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 8.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 9.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
+    <Filter Include="MariaDBWrappers 头文件">
+      <UniqueIdentifier>{f504be43-c9bd-44be-a25d-3b1a0f13c7b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MongoWrappers 头文件">
+      <UniqueIdentifier>{bb931813-9758-48ec-952c-bd007d31f35c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RedisWrappers 头文件">
+      <UniqueIdentifier>{b39ddb2b-08b8-4b97-b2f6-c107adfc6dbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Code\Database\DllLib.cpp">
@@ -496,5 +455,63 @@
     <ClInclude Include="..\..\..\Code\Database\MysqlWrappers\MysqlWrappers.h">
       <Filter>MysqlWrappers 头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MariaDBWrappers\MariaDBWrappers.h">
+      <Filter>MariaDBWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MariaDBWrappers\MariaDBWrappersFwd.h">
+      <Filter>MariaDBWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MongoWrappers\MongoWrappers.h">
+      <Filter>MongoWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\MongoWrappers\MongoWrappersFwd.h">
+      <Filter>MongoWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\RedisWrappers.h">
+      <Filter>RedisWrappers 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Database\RedisWrappers\RedisWrappersFwd.h">
+      <Filter>RedisWrappers 头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\ReadMe.md">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 2.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 3.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 4.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 5.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 6.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 7.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 8.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 9.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
   </ItemGroup>
 </Project>

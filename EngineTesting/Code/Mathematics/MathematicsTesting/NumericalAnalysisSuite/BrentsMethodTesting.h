@@ -23,7 +23,7 @@ namespace Mathematics
         void NoSolutionTest();
         void UnknownTest();
 		
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 
 		static double FirstSolution(double input, const BrentsMethodTesting* userData);
 		static double SecondSolution(double input, const BrentsMethodTesting* userData);

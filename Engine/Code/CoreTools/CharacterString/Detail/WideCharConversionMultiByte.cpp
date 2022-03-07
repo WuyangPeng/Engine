@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/29 20:20)
+///	引擎版本：0.8.0.1 (2022/01/12 14:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -49,9 +49,9 @@ void CoreTools::WideCharConversionMultiByte::FillNullWChar()
 // private
 int CoreTools::WideCharConversionMultiByte::GetConversionLength()
 {
-    auto destSize = boost::numeric_cast<int>(source.size());
-    auto targetSize = boost::numeric_cast<int>(target.size());
-    auto multiByte = target.empty() ? nullptr : target.data();
+    const auto destSize = boost::numeric_cast<int>(source.size());
+    const auto targetSize = boost::numeric_cast<int>(target.size());
+    const auto multiByte = target.empty() ? nullptr : target.data();
 
     if (isUTF8)
     {
@@ -90,6 +90,7 @@ void CoreTools::WideCharConversionMultiByte::FinishConversion()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::WideCharConversionMultiByte::IsValid() const noexcept
 {
     if (0 < lengthOfMultiByteString && lengthOfMultiByteString <= gsl::narrow_cast<int>(target.size()))
@@ -101,6 +102,7 @@ bool CoreTools::WideCharConversionMultiByte::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 const string CoreTools::WideCharConversionMultiByte::GetMultiByteRepresentation() const
@@ -109,6 +111,8 @@ const string CoreTools::WideCharConversionMultiByte::GetMultiByteRepresentation(
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
     return string{ target.data(), target.data() + lengthOfMultiByteString - 1 };
+
 #include STSTEM_WARNING_POP
 }

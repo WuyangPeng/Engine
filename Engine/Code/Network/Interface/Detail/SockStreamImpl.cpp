@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 12:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 16:57)
 
 #include "Network/NetworkExport.h"
 
@@ -29,14 +29,14 @@ Network::ACEHandleType Network::SockStreamImpl::GetACEHandle() const
     THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
-void Network::SockStreamImpl::SetACEHandle([[maybe_unused]] ACEHandleType handle)
+void Network::SockStreamImpl::SetACEHandle(MAYBE_UNUSED ACEHandleType handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("不是ACE Stream类！"s));
 }
 
-void Network::SockStreamImpl::SetNetworkHandle([[maybe_unused]] WinSocketStreamType winSocket)
+void Network::SockStreamImpl::SetNetworkHandle(MAYBE_UNUSED WinSocketStreamType winSocket)
 {
     NETWORK_CLASS_IS_VALID_9;
 

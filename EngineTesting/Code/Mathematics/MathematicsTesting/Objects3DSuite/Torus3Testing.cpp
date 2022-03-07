@@ -6,12 +6,17 @@
 
 #include "Torus3Testing.h"
 #include "Mathematics/Objects3D/Torus3Detail.h"
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random> 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 using std::uniform_real;
 using std::default_random_engine;
 
@@ -51,7 +56,7 @@ void Mathematics::Torus3Testing
 
 		double outerRadius = thirdRandomDistribution(generator);
 
-		DoubleTorus3 torus(outerRadius,innerRadius);
+		Torus3D torus(outerRadius,innerRadius);
 
 		ASSERT_APPROXIMATE(outerRadius,torus.GetOuterRadius(),1e-10);
 		ASSERT_APPROXIMATE(innerRadius,torus.GetInnerRadius(),1e-10);
@@ -59,20 +64,20 @@ void Mathematics::Torus3Testing
 		double t = secondRandomDistribution(generator);
 		double s = secondRandomDistribution(generator);
 	
-		double radius = torus.GetOuterRadius() + torus.GetInnerRadius() * cos(DoubleMath::GetTwoPI() * t);
+		double radius = torus.GetOuterRadius() + torus.GetInnerRadius() * cos(MathD::GetTwoPI() * t);
 
-		double x = radius * cos(DoubleMath::GetTwoPI() * s);
-		double y = radius * sin(DoubleMath::GetTwoPI() * s);
-		double z = torus.GetInnerRadius() * sin(DoubleMath::GetTwoPI() * t);
+		double x = radius * cos(MathD::GetTwoPI() * s);
+		double y = radius * sin(MathD::GetTwoPI() * s);
+		double z = torus.GetInnerRadius() * sin(MathD::GetTwoPI() * t);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(DoubleVector3D(x,y,z),torus.GetPosition(s,t)));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(Vector3D(x,y,z),torus.GetPosition(s,t)));
 
-		DoubleVector3D normal(x - torus.GetOuterRadius() * cos(DoubleMath::GetTwoPI() * s),y - torus.GetOuterRadius() * sin(DoubleMath::GetTwoPI() * s),z);
+		Vector3D normal(x - torus.GetOuterRadius() * cos(MathD::GetTwoPI() * s),y - torus.GetOuterRadius() * sin(MathD::GetTwoPI() * s),z);
 		normal.Normalize();
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(normal,torus.GetNormal(s,t)));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(normal,torus.GetNormal(s,t)));
 
-		DoubleTorus3::Torus3Parameters parameters = torus.GetParameters(DoubleVector3D(x,y,z));
+		Torus3D::Torus3Parameters parameters = torus.GetParameters(Vector3D(x,y,z));
 
 		ASSERT_APPROXIMATE(parameters.GetS(),s,1e-10);
 		ASSERT_APPROXIMATE(parameters.GetT(),t,1e-10);

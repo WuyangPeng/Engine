@@ -23,7 +23,7 @@ namespace Mathematics
 	class MinBox3
 	{
 	public:
-		MinBox3(const std::vector<Vector3D<Real> >& points, Real epsilon, QueryType queryType);
+		MinBox3(const std::vector<Vector3<Real> >& points, Real epsilon, QueryType queryType);
 		
 		operator Box3<Real> () const;
 

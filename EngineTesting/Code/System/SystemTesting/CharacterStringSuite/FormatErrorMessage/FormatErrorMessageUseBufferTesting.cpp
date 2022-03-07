@@ -767,7 +767,7 @@ void System::FormatErrorMessageUseBufferTesting::FormatLastErrorUseBufferTest()
             {
                 constexpr array<TChar, bufferSize> nullBuffer{};
 
-                ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buffer, nullBuffer);
+                ASSERT_EQUAL(buffer, nullBuffer);
             }
         }
     }

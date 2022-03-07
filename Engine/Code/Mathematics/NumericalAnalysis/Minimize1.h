@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 13:39)
+///	引擎版本：0.8.0.2 (2022/02/15 11:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_H
@@ -54,14 +54,14 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetUserData(const UserDataType* userData) noexcept;
-        [[nodiscard]] const UserDataType* GetUserData() const noexcept;
+        void SetUserData(const UserDataType* newUserData) noexcept;
+        NODISCARD const UserDataType* GetUserData() const noexcept;
 
         // 搜索'function'的最小的区间[t0,t1]使用
         // “tInitial”为初始猜测在'function'值。
         // 最小的位置为'tMin'和最小的值是'fMin'。
         // 返回的第一部分为tMin和第二部分为fMin
-        [[nodiscard]] const Minimize1Data GetMinimum(Real begin, Real end, Real initial) const;
+        NODISCARD Minimize1Data GetMinimum(Real begin, Real end, Real initial) const;
 
     private:
         // 这是调用的开始搜索相关的[t0,tInitial]和[tInitial,t1]。
@@ -72,14 +72,20 @@ namespace Mathematics
         void CompareMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const;
 
         // 这是调用当{f0,f1,f2}括号是最小值时。
-        void CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction,
-                                     Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const;
+        void CompareBracketedMinimum(Real begin,
+                                     Real beginFunction,
+                                     Real middle,
+                                     Real middleFunction,
+                                     Real end,
+                                     Real endFunction,
+                                     int level,
+                                     Minimize1Data& minimize1Data) const;
 
     private:
-        Function m_Function;
-        int m_MaxLevel;
-        int m_MaxBracket;
-        const UserDataType* m_UserData;
+        Function function;
+        int maxLevel;
+        int maxBracket;
+        const UserDataType* userData;
     };
 }
 

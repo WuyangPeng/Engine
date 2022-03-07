@@ -86,7 +86,7 @@ void Rendering::SpatialData
 {
     RENDERING_CLASS_IS_VALID_9;
     
-	m_WorldBound = Bound{ Mathematics::FloatAPoint::GetOrigin(), 0.0f };
+	m_WorldBound = Bound{ Mathematics::APointF::GetOrigin(), 0.0f };
     m_WorldBoundIsCurrent = false;
 }
 

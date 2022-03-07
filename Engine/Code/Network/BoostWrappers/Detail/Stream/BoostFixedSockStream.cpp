@@ -1,16 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 18:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 0:07)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostFixedSockStream.h"
 #include "BoostSockStreamHelper.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Interface/Data/AddressData.h"
@@ -18,8 +19,8 @@
 
 using std::string;
 
-Network::BoostFixedSockStream::BoostFixedSockStream() noexcept
-    : ParentType{}
+Network::BoostFixedSockStream::BoostFixedSockStream(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -54,8 +55,10 @@ void Network::BoostFixedSockStream::AsyncReceive(const EventInterfaceSharedPtr& 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::BoostFixedSockStream::SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }
+
 #include STSTEM_WARNING_POP

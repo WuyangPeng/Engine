@@ -1,10 +1,10 @@
 TODO Level 4
  
-0.5.2.1 
+0.8.0.1
 
 1.	（NetworkMessage）MessageEventContainer增加一个监听某个消息段和所有消息的接口。
 2.	（NetworkMessage）加密策略：整数，加密策略，次数。根据整数计算可预测随机数。运行次数。
-3.  （Interface）完成基础主管理。
+3.	（NetworkMessage）压缩加密策略实现。
 4.  （Interface）完成网络地址。
 5.  （Interface）完成接受器。
 6.  （Interface）完成连接器。
@@ -18,3 +18,4 @@ TODO Level 4
 14. （Interface）完成前摄者服务器。
 15. （Interface）完成一进程一连接服务器。
 16. （Interface）完成一线程一连接服务器。 
+17. （Interface）完成基础主管理。

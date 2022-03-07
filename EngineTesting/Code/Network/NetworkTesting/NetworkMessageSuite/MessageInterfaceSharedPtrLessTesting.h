@@ -22,7 +22,7 @@ namespace Network
 		void LessTest();
 		void DoubleMessageTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

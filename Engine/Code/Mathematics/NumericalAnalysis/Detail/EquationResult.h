@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:01)
+///	引擎版本：0.8.0.2 (2022/02/13 14:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_H
@@ -25,10 +25,10 @@ namespace Mathematics
     public:
         using ClassType = EquationResult;
         using Imaginary = std::complex<double>;
-        using ImaginaryVector = std::vector<Imaginary>;
-        using RealVector = std::vector<double>;
-        using ImaginaryResultConstIter = ImaginaryVector::const_iterator;
-        using RealResultConstIter = RealVector::const_iterator;
+        using ImaginaryContainer = std::vector<Imaginary>;
+        using RealContainer = std::vector<double>;
+        using ImaginaryResultConstIter = ImaginaryContainer::const_iterator;
+        using RealResultConstIter = RealContainer::const_iterator;
         using RealConstIterator = EquationResultConstIterator<RealResultConstIter>;
         using ImaginaryConstIterator = EquationResultConstIterator<ImaginaryResultConstIter>;
 
@@ -37,24 +37,24 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsRealResult() const noexcept;
-        [[nodiscard]] int GetRealResultCount() const;
-        [[nodiscard]] int GetImaginaryResultCount() const;
+        NODISCARD bool IsRealResult() const noexcept;
+        NODISCARD int GetRealResultCount() const;
+        NODISCARD int GetImaginaryResultCount() const;
 
-        void AddRealResult(double solution, double epsilon = DoubleMath::GetZeroTolerance());
-        void AddImaginaryResult(const Imaginary& solution, double epsilon = DoubleMath::GetZeroTolerance());
+        void AddRealResult(double solution, double epsilon = MathD::GetZeroTolerance());
+        void AddImaginaryResult(const Imaginary& solution, double epsilon = MathD::GetZeroTolerance());
         void CleanSolution() noexcept;
 
-        [[nodiscard]] const RealConstIterator GetRealBegin() const noexcept;
-        [[nodiscard]] const RealConstIterator GetRealEnd() const noexcept;
-        [[nodiscard]] const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
-        [[nodiscard]] const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
+        NODISCARD RealConstIterator GetRealBegin() const noexcept;
+        NODISCARD RealConstIterator GetRealEnd() const noexcept;
+        NODISCARD ImaginaryConstIterator GetImaginaryBegin() const noexcept;
+        NODISCARD ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
         void SortResult();
 
     private:
-        [[nodiscard]] bool FindSolution(double solution, double epsilon) const noexcept;
-        [[nodiscard]] bool FindSolution(const Imaginary& solution, double epsilon) const;
+        NODISCARD bool FindSolution(double solution, double epsilon) const noexcept;
+        NODISCARD bool FindSolution(const Imaginary& solution, double epsilon) const;
 
         class ImaginaryLess
         {
@@ -62,14 +62,14 @@ namespace Mathematics
             using ClassType = ImaginaryLess;
 
         public:
-            [[nodiscard]] bool operator()(const Imaginary& lhs, const Imaginary& rhs) const;
+            NODISCARD bool operator()(const Imaginary& lhs, const Imaginary& rhs) const;
 
             CLASS_INVARIANT_DECLARE;
         };
 
     private:
-        RealVector m_RealResult;
-        ImaginaryVector m_ImaginaryResult;
+        RealContainer realResult;
+        ImaginaryContainer imaginaryResult;
     };
 }
 

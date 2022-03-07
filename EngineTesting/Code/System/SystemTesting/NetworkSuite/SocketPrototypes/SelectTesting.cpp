@@ -26,6 +26,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "System/Windows/Engineering.h"
 
 #include <array>
 #include <thread>

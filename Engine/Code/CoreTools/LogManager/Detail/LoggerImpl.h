@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 16:22)
 
-// 记录器类内部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOGGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOGGER_IMPL_H
 
@@ -27,13 +26,13 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] LogFilter GetLogFilterType() const noexcept;
-        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
+        NODISCARD LogFilter GetLogFilterType() const noexcept;
+        NODISCARD LogLevel GetLogLevel() const noexcept;
         void SetLogLevel(LogLevel level) noexcept;
 
     private:
-        LogFilter m_LogFilter;
-        LogLevel m_Level;
+        LogFilter logFilter;
+        LogLevel logLevel;
     };
 }
 

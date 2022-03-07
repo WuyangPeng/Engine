@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 21:42)
 
-// 记录器类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOGGER_H
 #define CORE_TOOLS_LOG_MANAGER_LOGGER_H
 
@@ -16,6 +15,7 @@
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
+
 CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(Logger, LoggerImpl);
 
 namespace CoreTools
@@ -30,8 +30,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] LogFilter GetLogFilterType() const noexcept;
-        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
+        NODISCARD LogFilter GetLogFilterType() const noexcept;
+        NODISCARD LogLevel GetLogLevel() const noexcept;
 
         void SetLogLevel(LogLevel level);
 

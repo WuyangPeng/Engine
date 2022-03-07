@@ -22,7 +22,7 @@ namespace Mathematics
 		void AccessTest();
 		void IntersectionTest();
 
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

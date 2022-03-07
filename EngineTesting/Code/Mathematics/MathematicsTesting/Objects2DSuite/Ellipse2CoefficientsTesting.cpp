@@ -6,7 +6,7 @@
 
 #include "Ellipse2CoefficientsTesting.h"
 #include "Mathematics/Objects2D/Ellipse2CoefficientsDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 
@@ -22,7 +22,12 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Ellipse2CoefficientsTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Ellipse2CoefficientsTesting
 	::MainTest()
 {
@@ -39,10 +44,10 @@ void Mathematics::Ellipse2CoefficientsTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D firstVector(firstRandomDistribution(generator),
+		Vector2 firstVector(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator));
 
-		DoubleMatrix2 firstMatrix(firstRandomDistribution(generator),
+		Matrix2D firstMatrix(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 0.0,firstRandomDistribution(generator));
 
@@ -50,19 +55,19 @@ void Mathematics::Ellipse2CoefficientsTesting
 
 		double constants(firstRandomDistribution(generator));
 		
-		DoubleEllipse2Coefficients ellipse2Coefficients(firstMatrix,firstVector,constants);
+		Ellipse2CoefficientsD ellipse2Coefficients(firstMatrix,firstVector,constants);
 
-		DoubleMatrix2 secondMatrix = ellipse2Coefficients.GetMatrix();
+		Matrix2D secondMatrix = ellipse2Coefficients.GetMatrix();
 		
 		ASSERT_TRUE(Approximate(firstMatrix,secondMatrix,1e-10));		
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(ellipse2Coefficients.GetVector(), firstVector));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(ellipse2Coefficients.GetVector(), firstVector));
 
 		ASSERT_APPROXIMATE(constants,ellipse2Coefficients.GetConstants(),1e-10);
 
 		std::vector<double> coefficient = ellipse2Coefficients.GetCoefficients();
 
-		DoubleEllipse2Coefficients secondEllipse2Coefficients(coefficient);
+		Ellipse2CoefficientsD secondEllipse2Coefficients(coefficient);
 
 		std::vector<double> secondCoefficient =  secondEllipse2Coefficients.GetCoefficients();
 
@@ -75,13 +80,13 @@ void Mathematics::Ellipse2CoefficientsTesting
 		firstMatrix = secondEllipse2Coefficients.GetMatrix();
 		constants = secondEllipse2Coefficients.GetConstants();
 
-		DoubleEllipse2Coefficients  thirdEllipse2Coefficients(firstMatrix,firstVector,constants);
+		Ellipse2CoefficientsD  thirdEllipse2Coefficients(firstMatrix,firstVector,constants);
 
 		secondMatrix = thirdEllipse2Coefficients.GetMatrix();
 		
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10));
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(thirdEllipse2Coefficients.GetVector(),  firstVector,1e-10));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(thirdEllipse2Coefficients.GetVector(),  firstVector,1e-10));
 
 		ASSERT_APPROXIMATE(constants,thirdEllipse2Coefficients.GetConstants(),1e-10);
 

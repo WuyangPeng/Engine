@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 11:38)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_ANALYSIS_NETWORK_CONFIGURATION_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_ANALYSIS_NETWORK_CONFIGURATION_IMPL_H
@@ -34,10 +34,10 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy(const String& name) const;
-        [[nodiscard]] ContainerConstIter begin() const noexcept;
-        [[nodiscard]] ContainerConstIter end() const noexcept;
-        [[nodiscard]] int GetSize() const;
+        NODISCARD ConfigurationStrategy GetConfigurationStrategy(const String& name) const;
+        NODISCARD ContainerConstIter begin() const noexcept;
+        NODISCARD ContainerConstIter end() const noexcept;
+        NODISCARD int GetSize() const;
 
     private:
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
@@ -47,15 +47,15 @@ namespace Network
         void AnalysisJson();
         void AnalysisMain();
         void InsertStrategy(const String& name, const BasicTree& basicTree);
-        static WrappersStrategy GetWrappersStrategy(const String& wrappers);
-        static ConnectStrategy GetConnectStrategy(const String& connect);
-        static ConfigurationSubStrategy GetConfigurationSubStrategy(const BasicTree& basicTree);
-        static ConfigurationParameter GetConfigurationParameter(const BasicTree& basicTree);
+        NODISCARD static WrappersStrategy GetWrappersStrategy(const String& wrappers);
+        NODISCARD static ConnectStrategy GetConnectStrategy(const String& connect);
+        NODISCARD static ConfigurationSubStrategy GetConfigurationSubStrategy(const BasicTree& basicTree);
+        NODISCARD static ConfigurationParameter GetConfigurationParameter(const BasicTree& basicTree);
 
     private:
-        Container m_Container;
-        std::string m_FileName;
-        BasicTree m_MainTree;
+        Container container;
+        std::string fileName;
+        BasicTree mainTree;
     };
 }
 

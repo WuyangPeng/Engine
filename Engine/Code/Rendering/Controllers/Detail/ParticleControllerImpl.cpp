@@ -24,7 +24,7 @@
 #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl(int numParticles)
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::FloatAVector::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::FloatAVector::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
+    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
 	 m_NumParticles{ numParticles }, m_ParticleLinearSpeed(numParticles), m_ParticleLinearAxis(numParticles), m_ParticleSizeChange(numParticles)
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;
@@ -32,7 +32,7 @@ Rendering::ParticleControllerImpl
 
 Rendering::ParticleControllerImpl
 	::ParticleControllerImpl() noexcept
-    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::FloatAVector::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::FloatAVector::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
+    : m_SystemLinearSpeed{ 0.0f }, m_SystemAngularSpeed{ 0.0f }, m_SystemLinearAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemAngularAxis{ Mathematics::AVectorF::GetUnitZ() }, m_SystemSizeChange{ 0.0f },
 	 m_NumParticles{ 0 },m_ParticleLinearSpeed{},m_ParticleLinearAxis{},m_ParticleSizeChange{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_1;

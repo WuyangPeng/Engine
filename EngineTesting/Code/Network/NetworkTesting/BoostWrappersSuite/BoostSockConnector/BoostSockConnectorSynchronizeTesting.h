@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:20)
 
 #ifndef NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_CONNECTOR_SYNCHRONIZE_TESTING_H
@@ -11,26 +11,26 @@
 
 namespace Network
 {
-	class BoostSockConnectorSynchronizeTesting : public BoostSockConnectorTesting
-	{
-	public:
-            using ClassType = BoostSockConnectorSynchronizeTesting;
-            using ParentType = BoostSockConnectorTesting;
+    class BoostSockConnectorSynchronizeTesting : public BoostSockConnectorTesting
+    {
+    public:
+        using ClassType = BoostSockConnectorSynchronizeTesting;
+        using ParentType = BoostSockConnectorTesting;
 
-        public:
-            explicit BoostSockConnectorSynchronizeTesting(const OStreamShared& stream);
-            CLASS_INVARIANT_OVERRIDE_DECLARE;
-		using TestFunction = void(ClassType::*)();
+    public:
+        explicit BoostSockConnectorSynchronizeTesting(const OStreamShared& stream);
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        using TestFunction = void (ClassType::*)();
 
-	private:
-		virtual void DoRunUnitTest() override;
+    private:
+        void DoRunUnitTest() override;
 
-		void MainTest();
+        void MainTest() noexcept;
 
-		void ConnectorTest();
+        void ConnectorTest();
 
-		void SynchronizeConnectorTest();
-	};
+        void SynchronizeConnectorTest();
+    };
 }
 
-#endif // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_CONNECTOR_SYNCHRONIZE_TESTING_H
+#endif  // NETWORK_TESTING_BOOST_WRAPPERS_SUITE_BOOST_SOCK_CONNECTOR_SYNCHRONIZE_TESTING_H

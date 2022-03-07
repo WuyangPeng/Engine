@@ -38,7 +38,7 @@ namespace Mathematics
 		void ScaledFloatToIntMaxTest();
 		void ScaledFloatToIntRandomTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

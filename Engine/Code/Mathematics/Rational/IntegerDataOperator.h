@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:16)
+///	引擎版本：0.8.0.2 (2022/02/11 15:17)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H
@@ -50,24 +50,24 @@ namespace Mathematics
         IntegerDataOperator& operator>>=(int shift);
 
     private:
-        static constexpr auto sm_IntSize = 2 * N;
-        static constexpr auto sm_IntLast = sm_IntSize - 1;
-        static constexpr auto sm_Carry = 0x00010000u;
-        static constexpr auto sm_Low = 0x0000FFFFu;
-        static constexpr auto sm_High = 0xFFFF0000u;
-        static constexpr uint16_t sm_Symbol{ 0x8000 };
-        static constexpr auto sm_Positive = 0xFFFFFFFFu;
+        static constexpr auto intSize = 2 * N;
+        static constexpr auto intLast = intSize - 1;
+        static constexpr auto carry = 0x00010000u;
+        static constexpr auto low = 0x0000FFFFu;
+        static constexpr auto high = 0xFFFF0000u;
+        static constexpr uint16_t symbol{ 0x8000 };
+        static constexpr auto positive = 0xFFFFFFFFu;
 
-        IntegerData& m_Master;
-        IntegerDataAmend m_Amend;
-        IntegerDataAnalysis m_Analysis;
+        IntegerData& master;
+        IntegerDataAmend amend;
+        IntegerDataAnalysis analysis;
     };
 
     template <int N>
-    [[nodiscard]] IntegerData<N> operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
+    NODISCARD IntegerData<N> operator+(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 
     template <int N>
-    [[nodiscard]] IntegerData<N> operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
+    NODISCARD IntegerData<N> operator-(const IntegerData<N>& lhs, const IntegerData<N>& rhs);
 }
 
 #endif  // MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_H

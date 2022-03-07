@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 11:44)
 
 #ifndef CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_NO_VALUE_COMMAND_ARGUMENT_H
@@ -27,20 +27,20 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] int GetInteger() const final;
-        [[nodiscard]] float GetFloat() const final;
-        [[nodiscard]] double GetDouble() const final;
-        [[nodiscard]] const std::string GetString() const final;
+        NODISCARD int GetInteger() const final;
+        NODISCARD float GetFloat() const final;
+        NODISCARD double GetDouble() const final;
+        NODISCARD const std::string GetString() const final;
 
-        [[nodiscard]] bool IsInteger() const noexcept final;
-        [[nodiscard]] bool IsFloat() const noexcept final;
-        [[nodiscard]] bool IsDouble() const noexcept final;
-        [[nodiscard]] bool IsString() const noexcept final;
-        [[nodiscard]] bool IsNoValue() const noexcept final;
+        NODISCARD bool IsInteger() const noexcept final;
+        NODISCARD bool IsFloat() const noexcept final;
+        NODISCARD bool IsDouble() const noexcept final;
+        NODISCARD bool IsString() const noexcept final;
+        NODISCARD bool IsNoValue() const noexcept final;
 
-        [[nodiscard]] CommandArgumentSharedPtr Clone() const final;
+        NODISCARD CommandArgumentSharedPtr Clone() const final;
 
-        void AddArgumentValue(const std::string& value) final;
+        void AddArgumentValue(MAYBE_UNUSED const std::string& value) final;
     };
 }
 

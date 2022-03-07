@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:22)
 
 #include "Database/DatabaseExport.h"
 
@@ -20,23 +20,20 @@
 Database::Result::Result(const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-#if defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
-Database::Result::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult)
+Database::Result::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultSharedPtr& mysqlxDocResult)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy, mysqlxDocResult }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::Result::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult)
+Database::Result::Result(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultSharedPtr& mysqlxRowResult)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy, mysqlxRowResult }
 {
-    DATABASE_SELF_CLASS_IS_VALID_1;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
-
-#endif  // defined(BUILDING_DATABASE_EXPORT) || defined(BUILDING_DATABASE_NO_IMPORT) || defined(BUILDING_DATABASE_STATIC)
 
 CLASS_INVARIANT_STUB_DEFINE(Database, Result)
 

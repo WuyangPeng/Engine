@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::Cylinder3<Real> Mathematics
-	::ContCylinder (const std::vector<Vector3D<Real> >& points)
+	::ContCylinder (const std::vector<Vector3<Real> >& points)
 {
 	auto line = OrthogonalLineFit3<Real>(points).GetLine3();
 
@@ -29,12 +29,12 @@ Mathematics::Cylinder3<Real> Mathematics
     }
 
 	auto diff = points[0] - line.GetOrigin();
-	auto wMin = Vector3DTools<Real>::DotProduct(line.GetDirection(),diff);
+	auto wMin = Vector3Tools<Real>::DotProduct(line.GetDirection(),diff);
 	auto wMax = wMin;
     for (auto i = 1u; i < points.size(); ++i)
     {
         diff = points[i] - line.GetOrigin();
-		auto w = Vector3DTools<Real>::DotProduct(line.GetDirection(),diff);
+		auto w = Vector3Tools<Real>::DotProduct(line.GetDirection(),diff);
         if (w < wMin)
         {
             wMin = w;

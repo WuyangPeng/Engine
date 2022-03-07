@@ -24,7 +24,7 @@
 Rendering::ClodMeshVertexEdgeTriangleGraph
 	::ClodMeshVertexEdgeTriangleGraph(int numVertices, int numIndices)
 	: m_Vertices{ numVertices }, m_Edges{}, m_Triangles{},
-	  m_Heap{ numIndices, 0, Mathematics::FloatMath::sm_MaxReal }, m_VerticesRemaining{}, m_TrianglesRemaining{}
+      m_Heap{ numIndices, 0, Mathematics::MathF::maxReal }, m_VerticesRemaining{}, m_TrianglesRemaining{}
 {
 	RENDERING_SELF_CLASS_IS_VALID_9;
 }
@@ -74,7 +74,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 		// 边是第一次遇到。将其插入图形并加入堆。将三角形插入到其链接表。
 		auto& edge = m_Edges[edgeKey];
 		edge.InsertTriangleKey(triangleKey);
-		edge.SetMinHeapRecordIndex(m_Heap.Insert(edgeKey, Mathematics::FloatMath::sm_MaxReal));
+		edge.SetMinHeapRecordIndex(m_Heap.Insert(edgeKey, Mathematics::MathF::maxReal));
 	}
 	else
 	{		
@@ -131,7 +131,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 
 			 
 
-			RENDERING_ASSERTION_2(Mathematics::FloatMath::Approximate(metric, -1.0f, 1e-8f), "该试题应该为-1。\n");
+			RENDERING_ASSERTION_2(Mathematics::MathF::Approximate(metric, -1.0f, 1e-8f), "该试题应该为-1。\n");
 
 			// 删除边的端点的连接表。
 			m_Vertices[edgeKey.GetKey(0)].EraseEdgeKey(edgeKey);
@@ -182,7 +182,7 @@ void Rendering::ClodMeshVertexEdgeTriangleGraph
 	const auto edge = m_Edges.find(edgeKey);
 	RENDERING_ASSERTION_2(m_Heap.IsUniqueIndexValid(edge->second.GetMinHeapRecordIndex()), "意外情况\n");
 
-	m_Heap.Update(edge->second.GetMinHeapRecordIndex(), Mathematics::FloatMath::sm_MaxReal);
+	m_Heap.Update(edge->second.GetMinHeapRecordIndex(), Mathematics::MathF::maxReal);
 }
 
 bool Rendering::ClodMeshVertexEdgeTriangleGraph

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 9:35)
+///	引擎版本：0.8.0.2 (2022/02/10 13:40)
 
 #ifndef MATHEMATICS_OBJECTS3D_FWD_H
 #define MATHEMATICS_OBJECTS3D_FWD_H
@@ -13,7 +13,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Box3;
+    class Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Circle3;
@@ -25,7 +25,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ray3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Triangle3;
+    class Triangle3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Sphere3;
@@ -46,10 +46,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipsoid3;
+    class Ellipsoid3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipsoid3Coefficients;
+    class Ellipsoid3Coefficients;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Frustum3;
@@ -64,19 +64,19 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Torus3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Tetrahedron3;
+    class Tetrahedron3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Rectangle3;
+    class Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Lozenge3;
+    class Lozenge3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polyhedron3;
+    class Polyhedron3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE ConvexPolyhedron3;
+    class ConvexPolyhedron3;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_FWD_H

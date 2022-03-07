@@ -1,34 +1,39 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 17:33)
+///	引擎版本：0.8.0.2 (2022/02/11 17:02)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "Int64Vector3.h"
 #include "Detail/Int64Vector3Impl.h"
-
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
 #include <iostream>
-#include "CoreTools/Contract/Flags/ImplFlags.h"
 
 using std::make_shared;
 using std::ostream;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Mathematics::Int64Vector3::Int64Vector3()
+COPY_UNSHARED_CLONE_SELF_DEFINE(Mathematics, Int64Vector3)
+
+Mathematics::Int64Vector3 Mathematics::Int64Vector3::CreateDefault()
+{
+    return Int64Vector3{ CoreTools::DisableNotThrow::Disable };
+}
+
+Mathematics::Int64Vector3::Int64Vector3(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 Mathematics::Int64Vector3::Int64Vector3(const Int64Vector<3>& rhs)
     : impl{ rhs }
@@ -41,9 +46,10 @@ Mathematics::Int64Vector3::Int64Vector3(int64_t x, int64_t y, int64_t z)
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-COPY_UNSHARED_CLONE_SELF_DEFINE(Mathematics, Int64Vector3)
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator=(const Int64Vector<3>& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
@@ -52,6 +58,7 @@ Mathematics::Int64Vector3& Mathematics::Int64Vector3::operator=(const Int64Vecto
 
     return *this;
 }
+
 #include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Mathematics, Int64Vector3)
@@ -64,7 +71,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetX, int64
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetY, int64_t, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_V(Mathematics, Int64Vector3, SetZ, int64_t, void)
 
-const Mathematics::Int64Vector3 Mathematics::Int64Vector3::operator-() const
+Mathematics::Int64Vector3 Mathematics::Int64Vector3::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

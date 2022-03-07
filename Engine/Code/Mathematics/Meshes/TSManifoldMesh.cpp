@@ -56,7 +56,7 @@ const Mathematics::TSManifoldMesh::SMap& Mathematics::TSManifoldMesh ::GetTetrah
     return mSMap;
 }
 
-Mathematics::TSManifoldMesh::Triangle* Mathematics::TSManifoldMesh ::CreateTriangle(int v0, int v1, int v2)
+Mathematics::TSManifoldMesh::Triangle* Mathematics::TSManifoldMesh ::CreateTriangle(int v0, int v1, int v2) noexcept
 {
     v0;
     v1;
@@ -64,7 +64,7 @@ Mathematics::TSManifoldMesh::Triangle* Mathematics::TSManifoldMesh ::CreateTrian
     return nullptr;  //    NEW0 Triangle(v0, v1, v2);
 }
 
-Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh ::CreateTetrahedron(int v0, int v1, int v2, int v3)
+Mathematics::TSManifoldMesh::Tetrahedron* Mathematics::TSManifoldMesh ::CreateTetrahedron(int v0, int v1, int v2, int v3) noexcept
 {
     v0;
     v1;

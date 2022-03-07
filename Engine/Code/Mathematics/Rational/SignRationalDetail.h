@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:52)
+///	引擎版本：0.8.0.2 (2022/02/11 16:40)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_DETAIL_H
@@ -22,26 +22,23 @@
 
 #include <iostream>
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
 template <int N>
-Mathematics::SignRational<N>::SignRational()
-    : m_Numerator{}, m_Denominator{ 1 }
+Mathematics::SignRational<N>::SignRational() noexcept
+    : numerator{}, denominator{ Integer::CreateOne() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 template <int N>
-Mathematics::SignRational<N>::SignRational(const Integer& numerator)
-    : m_Numerator{ numerator }, m_Denominator{ 1 }
+Mathematics::SignRational<N>::SignRational(const Integer& numerator) noexcept
+    : numerator{ numerator }, denominator{ Integer::CreateOne() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <int N>
 Mathematics::SignRational<N>::SignRational(const Integer& numerator, const Integer& denominator)
-    : m_Numerator{ numerator }, m_Denominator{ denominator }
+    : numerator{ numerator }, denominator{ denominator }
 {
     EliminatePowersOfTwo();
 
@@ -51,7 +48,7 @@ Mathematics::SignRational<N>::SignRational(const Integer& numerator, const Integ
 template <int N>
 template <typename T>
 Mathematics::SignRational<N>::SignRational(T numerator)
-    : m_Numerator{ 0 }, m_Denominator{ 1 }
+    : numerator{ 0 }, denominator{ 1 }
 {
     ConvertToRational(numerator);
 
@@ -68,8 +65,8 @@ void Mathematics::SignRational<N>::ConvertToRational(T value)
 
     if (convert.IsCanConversion<N>())
     {
-        m_Numerator = convert.GetNumerator<N>();
-        m_Denominator = convert.GetDenominator<N>();
+        numerator = convert.GetNumerator<N>();
+        denominator = convert.GetDenominator<N>();
     }
     else
     {
@@ -80,7 +77,7 @@ void Mathematics::SignRational<N>::ConvertToRational(T value)
 template <int N>
 template <typename T>
 Mathematics::SignRational<N>::SignRational(T numerator, T denominator)
-    : m_Numerator{ numerator }, m_Denominator{ denominator }
+    : numerator{ numerator }, denominator{ denominator }
 {
     static_assert(std::is_integral_v<T>, "T isn't integral.");
 
@@ -90,24 +87,26 @@ Mathematics::SignRational<N>::SignRational(T numerator, T denominator)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N>
 bool Mathematics::SignRational<N>::IsValid() const noexcept
 {
-    if (m_Denominator.IsZero())
+    if (denominator.IsZero())
         return false;
     else
         return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // private
 template <int N>
 void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 {
-    if (m_Numerator == Integer{ 0 })
+    if (numerator == Integer{ 0 })
     {
         // 分子是零。
-        m_Denominator = Integer{ 1 };
+        denominator = Integer{ 1 };
 
         return;
     }
@@ -116,8 +115,8 @@ void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 
     if (0 < shift)
     {
-        m_Numerator >>= shift;
-        m_Denominator >>= shift;
+        numerator >>= shift;
+        denominator >>= shift;
     }
 }
 
@@ -125,24 +124,24 @@ void Mathematics::SignRational<N>::EliminatePowersOfTwo()
 template <int N>
 int Mathematics::SignRational<N>::GetPowers() const
 {
-    auto numerator = m_Numerator.GetAbsoluteValue();
-    auto denominator = m_Denominator.GetAbsoluteValue();
+    auto numeratorAbsoluteValue = numerator.GetAbsoluteValue();
+    auto denominatorAbsoluteValue = denominator.GetAbsoluteValue();
 
-    if (0 < (numerator[0] & 1) || 0 < (denominator[0] & 1))
+    if (0 < (numeratorAbsoluteValue[0] & 1) || 0 < (denominatorAbsoluteValue[0] & 1))
     {
         // 没有一个项能被2整除（快速退出）
         return 0;
     }
 
-    const auto blockNumerator = numerator.GetTrailingBlock();
-    const auto blockDenominator = denominator.GetTrailingBlock();
+    const auto blockNumerator = numeratorAbsoluteValue.GetTrailingBlock();
+    const auto blockDenominator = denominatorAbsoluteValue.GetTrailingBlock();
 
     MATHEMATICS_ASSERTION_0(0 <= blockDenominator, "分母必须不为零！\n");
 
     const auto minBlock = (blockNumerator < blockDenominator ? blockNumerator : blockDenominator);
 
-    const auto bitNumerator = numerator.GetTrailingBit(blockNumerator);
-    const auto bitDenominator = denominator.GetTrailingBit(blockDenominator);
+    const auto bitNumerator = numeratorAbsoluteValue.GetTrailingBit(blockNumerator);
+    const auto bitDenominator = denominatorAbsoluteValue.GetTrailingBit(blockDenominator);
 
     const auto minBit = (bitNumerator < bitDenominator ? bitNumerator : bitDenominator);
     const auto shift = 16 * minBlock + minBit;
@@ -151,38 +150,38 @@ int Mathematics::SignRational<N>::GetPowers() const
 }
 
 template <int N>
-typename const Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetNumerator() const noexcept
+typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetNumerator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Numerator;
+    return numerator;
 }
 
 template <int N>
-typename const Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetDenominator() const noexcept
+typename Mathematics::SignRational<N>::Integer Mathematics::SignRational<N>::GetDenominator() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Denominator;
+    return denominator;
 }
 
 template <int N>
-void Mathematics::SignRational<N>::Set(const Integer& numerator, const Integer& denominator)
+void Mathematics::SignRational<N>::Set(const Integer& newNumerator, const Integer& newDenominator)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator = numerator;
-    m_Denominator = denominator;
+    numerator = newNumerator;
+    denominator = newDenominator;
 
     EliminatePowersOfTwo();
 }
 
 template <int N>
-const Mathematics::SignRational<N> Mathematics::SignRational<N>::operator-() const
+Mathematics::SignRational<N> Mathematics::SignRational<N>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return SignRational{ -m_Numerator, m_Denominator };
+    return SignRational{ -numerator, denominator };
 }
 
 template <int N>
@@ -190,8 +189,8 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator+=(const Sig
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator = m_Numerator * rhs.m_Denominator + m_Denominator * rhs.m_Numerator;
-    m_Denominator *= rhs.m_Denominator;
+    numerator = numerator * rhs.denominator + denominator * rhs.numerator;
+    denominator *= rhs.denominator;
 
     EliminatePowersOfTwo();
 
@@ -203,8 +202,8 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator-=(const Sig
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator = m_Numerator * rhs.m_Denominator - m_Denominator * rhs.m_Numerator;
-    m_Denominator *= rhs.m_Denominator;
+    numerator = numerator * rhs.denominator - denominator * rhs.numerator;
+    denominator *= rhs.denominator;
 
     EliminatePowersOfTwo();
 
@@ -216,8 +215,8 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator*=(const Sig
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator *= rhs.m_Numerator;
-    m_Denominator *= rhs.m_Denominator;
+    numerator *= rhs.numerator;
+    denominator *= rhs.denominator;
 
     EliminatePowersOfTwo();
 
@@ -229,8 +228,8 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator/=(const Sig
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator *= rhs.m_Denominator;
-    m_Denominator *= rhs.m_Numerator;
+    numerator *= rhs.denominator;
+    denominator *= rhs.numerator;
 
     EliminatePowersOfTwo();
 
@@ -242,7 +241,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator+=(const Int
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator += rhs * m_Denominator;
+    numerator += rhs * denominator;
 
     return *this;
 }
@@ -252,7 +251,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator-=(const Int
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator -= rhs * m_Denominator;
+    numerator -= rhs * denominator;
 
     return *this;
 }
@@ -262,7 +261,7 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator*=(const Int
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Numerator *= rhs;
+    numerator *= rhs;
 
     return *this;
 }
@@ -272,13 +271,13 @@ Mathematics::SignRational<N>& Mathematics::SignRational<N>::operator/=(const Int
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Denominator *= rhs;
+    denominator *= rhs;
 
     return *this;
 }
 
 template <int N>
-const Mathematics::SignRational<N> Mathematics::SignRational<N>::Abs() const
+Mathematics::SignRational<N> Mathematics::SignRational<N>::Abs() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -293,7 +292,7 @@ Mathematics::NumericalValueSymbol Mathematics::SignRational<N>::GetSign() const 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (m_Denominator.GetSign() == m_Numerator.GetSign())
+    if (denominator.GetSign() == numerator.GetSign())
         return NumericalValueSymbol::Positive;
     else
         return NumericalValueSymbol::Negative;
@@ -311,13 +310,13 @@ T Mathematics::SignRational<N>::ConvertTo() const
 }
 
 template <int N>
-const Mathematics::SignRational<N> Mathematics::operator-(const Integer<N>& integer, const SignRational<N>& rational)
+Mathematics::SignRational<N> Mathematics::operator-(const Integer<N>& integer, const SignRational<N>& rational)
 {
     return SignRational<N>{ integer } - rational;
 }
 
 template <int N>
-const Mathematics::SignRational<N> Mathematics::operator/(const Integer<N>& integer, const SignRational<N>& rational)
+Mathematics::SignRational<N> Mathematics::operator/(const Integer<N>& integer, const SignRational<N>& rational)
 {
     return SignRational<N>{ integer } / rational;
 }
@@ -331,8 +330,8 @@ bool Mathematics::operator==(const SignRational<N>& lhs, const SignRational<N>& 
 template <int N>
 bool Mathematics::operator<(const SignRational<N>& lhs, const SignRational<N>& rhs)
 {
-    auto product0 = lhs.GetNumerator() * rhs.GetDenominator();
-    auto product1 = lhs.GetDenominator() * rhs.GetNumerator();
+    const auto product0 = lhs.GetNumerator() * rhs.GetDenominator();
+    const auto product1 = lhs.GetDenominator() * rhs.GetNumerator();
     if (Integer<N>{ 0 } < lhs.GetDenominator())
     {
         return (Integer<N>{ 0 } < rhs.GetDenominator() ? product0 < product1 : product1 < product0);

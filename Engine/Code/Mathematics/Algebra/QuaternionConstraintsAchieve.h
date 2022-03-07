@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 18:37)
+///	引擎版本：0.8.0.2 (2022/02/08 14:00)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H
@@ -17,30 +17,32 @@
 
 template <typename Real>
 Mathematics::QuaternionConstraints<Real>::QuaternionConstraints(Real minAngle, Real maxAngle) noexcept
-    : m_MinAngle{ minAngle },
-      m_MaxAngle{ maxAngle },
-      m_CosMinAngle{ Math::Cos(m_MinAngle) },
-      m_SinMinAngle{ Math::Sin(m_MinAngle) },
-      m_CosMaxAngle{ Math::Cos(m_MaxAngle) },
-      m_SinMaxAngle{ Math::Sin(m_MaxAngle) },
-      m_DiffCosMaxMin{ m_CosMaxAngle - m_CosMinAngle },
-      m_DiffSinMaxMin{ m_SinMaxAngle - m_SinMinAngle },
-      m_AvrAngle{ Math::GetRational(1, 2) * (m_MinAngle + m_MaxAngle) },
-      m_CosAvrAngle{ Math::Cos(m_AvrAngle) },
-      m_SinAvrAngle{ Math::Sin(m_AvrAngle) }
+    : minAngle{ minAngle },
+      maxAngle{ maxAngle },
+      cosMinAngle{ Math::Cos(minAngle) },
+      sinMinAngle{ Math::Sin(minAngle) },
+      cosMaxAngle{ Math::Cos(maxAngle) },
+      sinMaxAngle{ Math::Sin(maxAngle) },
+      diffCosMaxMin{ cosMaxAngle - cosMinAngle },
+      diffSinMaxMin{ sinMaxAngle - sinMinAngle },
+      avrAngle{ Math::GetRational(1, 2) * (minAngle + maxAngle) },
+      cosAvrAngle{ Math::Cos(avrAngle) },
+      sinAvrAngle{ Math::Sin(avrAngle) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::QuaternionConstraints<Real>::IsValid() const noexcept
 {
-    if (-Math::GetHalfPI() <= m_MinAngle && m_MinAngle <= Math::GetHalfPI() && m_MinAngle <= m_MaxAngle && m_MaxAngle <= Math::GetHalfPI())
+    if (-Math::GetHalfPI() <= minAngle && minAngle <= Math::GetHalfPI() && minAngle <= maxAngle && maxAngle <= Math::GetHalfPI())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -50,17 +52,17 @@ bool Mathematics::QuaternionConstraints<Real>::IsValid(Real x, Real y) const noe
     MATHEMATICS_ASSERTION_1(Math::Approximate(Math::Sqrt(x * x + y * y), Math::GetValue(1)), "(x,y)必须是单位长度！");
 
     // 测试(x,y)是否满足约束条件。
-    auto xm = x - m_CosMinAngle;
-    auto ym = y - m_SinMinAngle;
-    if (ym * m_DiffCosMaxMin <= xm * m_DiffSinMaxMin)
+    auto xm = x - cosMinAngle;
+    auto ym = y - sinMinAngle;
+    if (ym * diffCosMaxMin <= xm * diffSinMaxMin)
     {
         return true;
     }
 
     // 测试(-x,-y)是否满足约束条件。
-    auto xp = x + m_CosMinAngle;
-    auto yp = y + m_SinMinAngle;
-    if (xp * m_DiffSinMaxMin <= yp * m_DiffCosMaxMin)
+    auto xp = x + cosMinAngle;
+    auto yp = y + sinMinAngle;
+    if (xp * diffSinMaxMin <= yp * diffCosMaxMin)
     {
         return true;
     }
@@ -73,7 +75,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_CosMinAngle;
+    return cosMinAngle;
 }
 
 template <typename Real>
@@ -81,7 +83,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_SinMinAngle;
+    return sinMinAngle;
 }
 
 template <typename Real>
@@ -89,7 +91,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_CosMaxAngle;
+    return cosMaxAngle;
 }
 
 template <typename Real>
@@ -97,7 +99,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_SinMaxAngle;
+    return sinMaxAngle;
 }
 
 template <typename Real>
@@ -105,7 +107,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetCosAvrAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_CosAvrAngle;
+    return cosAvrAngle;
 }
 
 template <typename Real>
@@ -113,7 +115,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetSinAvrAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_SinAvrAngle;
+    return sinAvrAngle;
 }
 
 template <typename Real>
@@ -121,7 +123,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetMinAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MinAngle;
+    return minAngle;
 }
 
 template <typename Real>
@@ -129,7 +131,7 @@ Real Mathematics::QuaternionConstraints<Real>::GetMaxAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MaxAngle;
+    return maxAngle;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_CONSTRAINTS_ACHIEVE_H

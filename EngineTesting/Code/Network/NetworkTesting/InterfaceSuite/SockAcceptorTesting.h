@@ -52,7 +52,7 @@ namespace Network
 		void NullGetBoostHandleExceptionTest();
 		void NullGetNetworkHandleExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		int m_Port;

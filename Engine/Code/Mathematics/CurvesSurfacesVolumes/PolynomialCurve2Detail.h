@@ -56,27 +56,27 @@ const Polynomial<Real>* PolynomialCurve2<Real>::GetYPolynomial() const
 }
 
 template <typename Real>
-Vector2D<Real> PolynomialCurve2<Real>::GetPosition (Real t) const
+Vector2<Real> PolynomialCurve2<Real>::GetPosition (Real t) const
 {
-    return Vector2D<Real>((*mXPoly)(t), (*mYPoly)(t));
+    return Vector2<Real>((*mXPoly)(t), (*mYPoly)(t));
 }
 
 template <typename Real>
-Vector2D<Real> PolynomialCurve2<Real>::GetFirstDerivative (Real t) const
+Vector2<Real> PolynomialCurve2<Real>::GetFirstDerivative (Real t) const
 {
-    return Vector2D<Real>(mXDer1(t), mYDer1(t));
+    return Vector2<Real>(mXDer1(t), mYDer1(t));
 }
 
 template <typename Real>
-Vector2D<Real> PolynomialCurve2<Real>::GetSecondDerivative (Real t) const
+Vector2<Real> PolynomialCurve2<Real>::GetSecondDerivative (Real t) const
 {
-    return Vector2D<Real>(mXDer2(t) ,mYDer2(t));
+    return Vector2<Real>(mXDer2(t) ,mYDer2(t));
 }
 
 template <typename Real>
-Vector2D<Real> PolynomialCurve2<Real>::GetThirdDerivative (Real t) const
+Vector2<Real> PolynomialCurve2<Real>::GetThirdDerivative (Real t) const
 {
-    return Vector2D<Real>(mXDer3(t), mYDer3(t));
+    return Vector2<Real>(mXDer3(t), mYDer3(t));
 }
 
  

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 10:02)
+///	引擎版本：0.8.0.2 (2022/02/18 18:14)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_SAMPLES_POWER_H
@@ -20,7 +20,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialSamplesPower final
+    class PolynomialSamplesPower final
     {
     public:
         using ClassType = PolynomialSamplesPower<Real>;
@@ -33,17 +33,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real operator()(int samplesIndex, int degreeIndex) const;
-        [[nodiscard]] int GetNumSamples() const noexcept;
-        [[nodiscard]] int GetNumDegree() const noexcept;
+        NODISCARD Real operator()(int samplesIndex, int degreeIndex) const;
+        NODISCARD int GetNumSamples() const noexcept;
+        NODISCARD int GetNumDegree() const noexcept;
 
     private:
         void Calculate(const Samples& samples);
 
     private:
-        int m_NumDegree;
-        int m_NumSamples;
-        VariableMatrix m_Power;
+        int numDegree;
+        int numSamples;
+        VariableMatrix power;
     };
 }
 

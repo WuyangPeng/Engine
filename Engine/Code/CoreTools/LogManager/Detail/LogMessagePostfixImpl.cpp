@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,7 +20,7 @@
 using namespace std::literals;
 
 CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderFlags, LogLevel level, const FunctionDescribed& functionDescribed)
-    : m_Postfix{}, m_AppenderFlags{ appenderFlags }, m_Level{ level }, m_FunctionDescribed{ functionDescribed }
+    : postfix{}, appenderFlags{ appenderFlags }, level{ level }, functionDescribed{ functionDescribed }
 {
     GeneratePostfix();
 
@@ -30,7 +30,7 @@ CoreTools::LogMessagePostfixImpl::LogMessagePostfixImpl(AppenderPrint appenderFl
 // private
 void CoreTools::LogMessagePostfixImpl::GeneratePostfix()
 {
-    if (m_Level != LogLevel::Disabled)
+    if (level != LogLevel::Disabled)
     {
         GenerateFunctionDescribedPostfix();
     }
@@ -39,19 +39,19 @@ void CoreTools::LogMessagePostfixImpl::GeneratePostfix()
 // private
 void CoreTools::LogMessagePostfixImpl::GenerateFunctionDescribedPostfix()
 {
-    if (AppenderPrintFlagsExist::IsExist(m_AppenderFlags, AppenderPrint::PostfixFunctionDescribed))
+    if (AppenderPrintFlagsExist::IsExist(appenderFlags, AppenderPrint::PostfixFunctionDescribed))
     {
-        boost::format functionDescribed{ "【文件：%1%，函数：%2%（第%3%行）。】\n"s };
+        boost::format format{ "【文件：%1%，函数：%2%（第%3%行）。】\n"s };
 
-        functionDescribed % m_FunctionDescribed.GetFileName();
-        functionDescribed % m_FunctionDescribed.GetCurrentFunction();
-        functionDescribed % m_FunctionDescribed.GetLine();
+        format % functionDescribed.GetFileName();
+        format % functionDescribed.GetCurrentFunction();
+        format % functionDescribed.GetLine();
 
-        m_Postfix += StringConversion::MultiByteConversionStandard(functionDescribed.str());
+        postfix += StringConversion::MultiByteConversionStandard(format.str());
     }
     else
     {
-        m_Postfix += SYSTEM_TEXT("\n"s);
+        postfix += SYSTEM_TEXT("\n"s);
     }
 }
 
@@ -61,12 +61,12 @@ System::String CoreTools::LogMessagePostfixImpl::GetPostfix() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Postfix;
+    return postfix;
 }
 
 int CoreTools::LogMessagePostfixImpl::GetPostfixSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Postfix.size());
+    return boost::numeric_cast<int>(postfix.size());
 }

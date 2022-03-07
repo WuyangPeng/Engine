@@ -19,8 +19,8 @@ namespace Framework
 	{
 	public:
 		using ClassType = CameraModelMiddleLayerImpl;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
 		using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
 		using Transform = Rendering::FloatTransform;
 		using CameraSmartPointer = Rendering::CameraSharedPtr;

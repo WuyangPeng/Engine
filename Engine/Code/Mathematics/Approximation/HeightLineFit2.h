@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 15:08)
+///	引擎版本：0.8.0.2 (2022/02/18 13:41)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_H
@@ -25,10 +25,10 @@ namespace Mathematics
     {
     public:
         using ClassType = HeightLineFit2<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Line2 = Line2<Real>;
         using Math = Math<Real>;
-        using Points = std::vector<Vector2D>;
+        using Points = std::vector<Vector2>;
 
     public:
         explicit HeightLineFit2(const Points& points);
@@ -38,22 +38,22 @@ namespace Mathematics
         // 如果在定义A和B是（几乎）奇异线性方程组2x2的系数矩阵。
         // 返回值是false。
         // 在这种情况下，访问A和B会抛出异常。
-        [[nodiscard]] bool IsFit2Success() const noexcept;
+        NODISCARD bool IsFit2Success() const noexcept;
 
-        [[nodiscard]] Real GetCoeffA() const;
-        [[nodiscard]] Real GetCoeffB() const;
+        NODISCARD Real GetCoeffA() const;
+        NODISCARD Real GetCoeffB() const;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Real m_CoeffA;
-        Real m_CoeffB;
-        bool m_IsFit2Success;
+        Real coeffA;
+        Real coeffB;
+        bool isFit2Success;
     };
 
-    using FloatHeightLineFit2 = HeightLineFit2<float>;
-    using DoubleHeightLineFit2 = HeightLineFit2<double>;
+    using HeightLineFit2F = HeightLineFit2<float>;
+    using HeightLineFit2D = HeightLineFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_HEIGHT_LINT_FIT2_H

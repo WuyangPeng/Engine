@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 11:35)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_TYPE_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_TYPE_H
@@ -22,16 +22,16 @@ namespace CoreTools
         using ClassType = CommandArgumentType;
 
     public:
-        explicit CommandArgumentType(const std::string& argument);
+        explicit CommandArgumentType(std::string argument) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsArgumentsName() const;
-        [[nodiscard]] bool IsDigit() const;
-        [[nodiscard]] bool IsString() const;
+        NODISCARD bool IsArgumentsName() const;
+        NODISCARD bool IsDigit() const;
+        NODISCARD bool IsString() const;
 
     private:
-        std::string m_Argument;
+        std::string argument;
     };
 }
 

@@ -58,6 +58,7 @@ ZThread（C++编程思想）
 
 ----------------------------	
 OIS（C++大学教程）
+
 1. 版本：1.3。
 2. 官方网站：http://wiki.ogre3d.org/OIS。
 3. Debug和OIS_DebugDll版本设置目标文件名$(ProjectName)_d。
@@ -71,6 +72,7 @@ OIS（C++大学教程）
 
 ----------------------------
 freealut（OgreAL相关联） 
+
 1. 版本：1.1.0。
 2. 官方网站：https://github.com/vancegroup/freealut。
 3. git地址：https://github.com/vancegroup/freealut.git。
@@ -80,6 +82,7 @@ freealut（OgreAL相关联）
 
 ----------------------------
 OgreAL（C++大学教程） 
+
 1. 版本：0.2。
 2. 官方网站：http://wiki.ogre3d.org/tiki-index.php?page=OgreAL。
              https://sourceforge.net/projects/ogreal/。
@@ -112,6 +115,7 @@ OgreAL（C++大学教程）
  
 ----------------------------
 DirectX（引擎不关联）
+
 1. 版本：9.29.1962。
 
 ----------------------------
@@ -146,6 +150,7 @@ glew（引擎不关联）
 
 ----------------------------
 loki（引擎不关联）
+
 1. 版本：0.1.7。
 2. 官方网站：http://loki-lib.sourceforge.net/。 
 3. SmallObj.cpp第1132行改成throw std::bad_alloc();。
@@ -162,12 +167,14 @@ loki（引擎不关联）
 
 ----------------------------
 TIFF（引擎不关联）
+
 1. 版本：4.1.0。
 2. 官方网站：http://www.libtiff.org/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 shwild（引擎不关联）
+
 1. 版本：0.9.20。
 2. 官方网站：http://www.shwild.org/。
 3. 修改build\vc9和build\vc9_x64下makefile文件，
@@ -181,26 +188,31 @@ shwild（引擎不关联）
 
 ----------------------------
 cppunit（引擎不关联）
+
 1. 版本：1.12.1。
 2. 官方网站：https://sourceforge.net/projects/cppunit/。
 
 ----------------------------
 libpng（引擎不关联）
+
 1. 版本：1.6.37。
 2. 官方网站：http://www.libpng.org/pub/png/libpng.html。
 
 ----------------------------
 libxml++（引擎不关联）
+
 1. 版本：4.9.1。
 2. 官方网站：http://libxmlplusplus.sourceforge.net/。
 
 ----------------------------
 mysql++（引擎不关联）
+
 1. 版本：3.2.5。
 2. 官方网站：https://tangentsoft.com/mysqlpp/home。
 
 ----------------------------
 SDL2（引擎不关联）
+
 1. 版本：2.0.12。
 2. 官方网站：http://www.libsdl.org/。
 

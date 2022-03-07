@@ -24,7 +24,7 @@ namespace Mathematics
 		void MainTest();  
 		void SolverTest();
 		
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 
 		static const std::vector<double> OdeMidpointFunction(double tIn, const std::vector<double>& xIn,const OdeMidpointTesting* odeEulerTesting);
 

@@ -14,7 +14,7 @@
 
 using std::swap;
 
- 
+ #include SYSTEM_WARNING_DISABLE(26496)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DynamicFindIntersector1Testing)
 
@@ -47,7 +47,7 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
             swap(v0, v1);
         }
 
-        double tMax = DoubleMath::FAbs(randomDistribution(generator));
+        double tMax = MathD::FAbs(randomDistribution(generator));
         double speedU = randomDistribution(generator);
         double speedV = randomDistribution(generator);
 
@@ -67,10 +67,10 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
 
             for (int i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
-                ASSERT_TRUE(DoubleMath::Approximate(u0, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
+                ASSERT_TRUE(MathD::Approximate(u0, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(u1, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(v0, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(v1, intersector1.GetIntersection(i), 1e-10));
 
                 ASSERT_TRUE(u0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= u1);
                 ASSERT_TRUE(v0 <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= v1);
@@ -122,13 +122,13 @@ void Mathematics::DynamicFindIntersector1Testing ::IntersectorTest()
 
             for (int i = 0; i < intersector1.GetNumIntersections(); ++i)
             {
-                ASSERT_TRUE(DoubleMath::Approximate(firstU0, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
-                            DoubleMath::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
+                ASSERT_TRUE(MathD::Approximate(firstU0, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(firstU1, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(firstV0, intersector1.GetIntersection(i), 1e-10) ||
+                            MathD::Approximate(firstV1, intersector1.GetIntersection(i), 1e-10));
 
-                ASSERT_TRUE(firstU0 - DoubleMath::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstU1 + DoubleMath::GetZeroTolerance());
-                ASSERT_TRUE(firstV0 - DoubleMath::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstV1 + DoubleMath::GetZeroTolerance());
+                ASSERT_TRUE(firstU0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstU1 + MathD::GetZeroTolerance());
+                ASSERT_TRUE(firstV0 - MathD::GetZeroTolerance() <= intersector1.GetIntersection(i) && intersector1.GetIntersection(i) <= firstV1 + MathD::GetZeroTolerance());
             }
 
             firstU0 -= (0.01 * speedU);

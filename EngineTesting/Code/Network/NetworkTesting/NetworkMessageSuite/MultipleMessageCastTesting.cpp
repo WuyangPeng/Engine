@@ -24,8 +24,7 @@ void Network::MultipleMessageCastTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(ParameterCastTest);
 }
 
-void Network::MultipleMessageCastTesting
-	::CastTest()
+void Network::MultipleMessageCastTesting ::CastTest() noexcept
 {
 	static_assert(is_same_v<MultipleMessageCast<MultipleMessageByteType::String>::ValueType, string>, "MultipleMessageCast string error.");
 	static_assert(is_same_v<MultipleMessageCast<MultipleMessageByteType::Int8>::ValueType, int8_t>, "MultipleMessageCast int8_t error.");
@@ -39,7 +38,7 @@ void Network::MultipleMessageCastTesting
 }
 
 void Network::MultipleMessageCastTesting
-	::ParameterCastTest()
+	::ParameterCastTest() noexcept
 {
 	static_assert(is_same_v<MultipleMessageParameterCast<MultipleMessageByteType::String>::ValueType, const string&>, "MultipleMessageParameterCast string error.");
 	static_assert(is_same_v<MultipleMessageParameterCast<MultipleMessageByteType::Int8>::ValueType, int8_t>, "MultipleMessageParameterCast int8_t error.");

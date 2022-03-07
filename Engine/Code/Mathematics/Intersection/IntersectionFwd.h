@@ -1,16 +1,15 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/15 17:39)
+///	引擎版本：0.8.0.3 (2022/02/23 10:34)
 
 #ifndef MATHEMATICS_INTERSECTION_FWD_H
 #define MATHEMATICS_INTERSECTION_FWD_H
 
-// 目录对象间的相交计算，包括静态和动态查询、相交测试查询以及相交信息查询。
 namespace Mathematics
 {
     enum class IntersectionType;
@@ -24,7 +23,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticIntersector;
 
     template <typename Real, template <typename> class Vector>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicIntersector;
+    class DynamicIntersector;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Intersector1;
@@ -33,44 +32,44 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersector1;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersector1;
+    class StaticFindIntersector1;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersector1;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersector1;
+    class DynamicFindIntersector1;
 
     // 2D
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox2Circle2;
+    class DynamicFindIntersectorBox2Circle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle2Triangle2;
+    class DynamicFindIntersectorTriangle2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorTriangle2Triangle2;
+    class DynamicTestIntersectorTriangle2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle2Triangle2;
+    class StaticFindIntersectorTriangle2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorArc2Arc2;
+    class StaticFindIntersectorArc2Arc2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorArc2Circle2;
+    class StaticFindIntersectorArc2Circle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorCircle2Circle2;
+    class StaticFindIntersectorCircle2Circle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorEllipse2Ellipse2;
+    class StaticFindIntersectorEllipse2Ellipse2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Arc2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Box2;
+    class StaticFindIntersectorLine2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Circle2;
@@ -85,13 +84,13 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine2Triangle2;
+    class StaticFindIntersectorLine2Triangle2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Arc2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Box2;
+    class StaticFindIntersectorRay2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Circle2;
@@ -103,13 +102,13 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Triangle2;
+    class StaticFindIntersectorRay2Triangle2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Arc2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Box2;
+    class StaticFindIntersectorSegment2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Circle2;
@@ -118,16 +117,16 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Triangle2;
+    class StaticFindIntersectorSegment2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox2Box2;
+    class StaticTestIntersectorBox2Box2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox2Circle2;
+    class StaticTestIntersectorBox2Circle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorLine2Box2;
+    class StaticTestIntersectorLine2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorLine2Classify;
@@ -142,10 +141,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorLine2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorLine2Triangle2;
+    class StaticTestIntersectorLine2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorRay2Box2;
+    class StaticTestIntersectorRay2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorRay2Ray2;
@@ -154,116 +153,116 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorRay2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorRay2Triangle2;
+    class StaticTestIntersectorRay2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorSegment2Box2;
+    class StaticTestIntersectorSegment2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorSegment2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorSegment2Triangle2;
+    class StaticTestIntersectorSegment2Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorTriangle2Triangle2;
+    class StaticTestIntersectorTriangle2Triangle2;
 
     // 3D
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE IntersectorUtility3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE IntersectorConfiguration;
+    class IntersectorConfiguration;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FindContactSet;
+    class FindContactSet;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE TestIntersectorAxis;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE FindIntersectorAxis;
+    class FindIntersectorAxis;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicAngularTestIntersectorBox3Box3;
+    class DynamicAngularTestIntersectorBox3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox3Box3;
+    class DynamicFindIntersectorBox3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox3Sphere3;
+    class DynamicFindIntersectorBox3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Box3;
+    class DynamicFindIntersectorHalfspace3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Segment3;
+    class DynamicFindIntersectorHalfspace3Segment3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Sphere3;
+    class DynamicFindIntersectorHalfspace3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Triangle3;
+    class DynamicFindIntersectorHalfspace3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorPlane3Plane3;
+    class DynamicFindIntersectorPlane3Plane3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorSegment3Box3;
+    class DynamicFindIntersectorSegment3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorSegment3Sphere3;
+    class DynamicFindIntersectorSegment3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorSegment3Triangle3;
+    class DynamicFindIntersectorSegment3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorSphere3Sphere3;
+    class DynamicFindIntersectorSphere3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Box3;
+    class DynamicFindIntersectorTriangle3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Sphere3;
+    class DynamicFindIntersectorTriangle3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle3Triangle3;
+    class DynamicFindIntersectorTriangle3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorBox3Box3;
+    class DynamicTestIntersectorBox3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorHalfspace3Box3;
+    class DynamicTestIntersectorHalfspace3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorHalfspace3Segment3;
+    class DynamicTestIntersectorHalfspace3Segment3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorHalfspace3Sphere3;
+    class DynamicTestIntersectorHalfspace3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorHalfspace3Triangle3;
+    class DynamicTestIntersectorHalfspace3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorPlane3Plane3;
+    class DynamicTestIntersectorPlane3Plane3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorSegment3Box3;
+    class DynamicTestIntersectorSegment3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorSegment3Sphere3;
+    class DynamicTestIntersectorSegment3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorSegment3Triangle3;
+    class DynamicTestIntersectorSegment3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorSphere3Sphere3;
+    class DynamicTestIntersectorSphere3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorTriangle3Box3;
+    class DynamicTestIntersectorTriangle3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorTriangle3Triangle3;
+    class DynamicTestIntersectorTriangle3Triangle3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorCircle3Plane3;
@@ -272,10 +271,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorHalfspace3Segment3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorHalfspace3Triangle3;
+    class StaticFindIntersectorHalfspace3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Box3;
+    class StaticFindIntersectorLine3Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Capsule3;
@@ -287,7 +286,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Cylinder3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Ellipsoid3;
+    class StaticFindIntersectorLine3Ellipsoid3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Plane3;
@@ -299,10 +298,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Torus3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Triangle3;
+    class StaticFindIntersectorLine3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorPlane3Cylinder3;
+    class StaticFindIntersectorPlane3Cylinder3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorPlane3Plane3;
@@ -311,10 +310,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorPlane3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorPlane3Triangle3;
+    class StaticFindIntersectorPlane3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Box3;
+    class StaticFindIntersectorRay3Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Capsule3;
@@ -323,7 +322,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Cylinder3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Ellipsoid3;
+    class StaticFindIntersectorRay3Ellipsoid3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Plane3;
@@ -332,10 +331,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay3Triangle3;
+    class StaticFindIntersectorRay3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Box3;
+    class StaticFindIntersectorSegment3Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Capsule3;
@@ -344,7 +343,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Cylinder3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Ellipsoid3;
+    class StaticFindIntersectorSegment3Ellipsoid3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Plane3;
@@ -353,7 +352,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Triangle3;
+    class StaticFindIntersectorSegment3Triangle3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSphere3Cone3;
@@ -362,22 +361,22 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSphere3Sphere3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTetrahedron3Tetrahedron3;
+    class StaticFindIntersectorTetrahedron3Tetrahedron3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle3Box3;
+    class StaticFindIntersectorTriangle3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle3Triangle3;
+    class StaticFindIntersectorTriangle3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox3Box3;
+    class StaticTestIntersectorBox3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox3Frustum3;
+    class StaticTestIntersectorBox3Frustum3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox3Sphere3;
+    class StaticTestIntersectorBox3Sphere3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorCapsule3Capsule3;
@@ -386,7 +385,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorCircle3Plane3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorEllipsoid3Ellipsoid3;
+    class StaticTestIntersectorEllipsoid3Ellipsoid3;
 
     template <typename Real>
     class StaticTestIntersectorHalfspace3Box3;

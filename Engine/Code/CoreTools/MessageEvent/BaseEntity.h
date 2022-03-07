@@ -33,15 +33,9 @@ namespace CoreTools
     public:
         virtual ~BaseEntity() noexcept = 0;
         BaseEntity(const BaseEntity& rhs) = default;
-        BaseEntity(BaseEntity&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         BaseEntity& operator=(const BaseEntity& rhs) = default;
+        BaseEntity(BaseEntity&& rhs) noexcept = default;
         BaseEntity& operator=(BaseEntity&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

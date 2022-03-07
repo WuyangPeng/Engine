@@ -1,23 +1,23 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 14:53)
+///	引擎版本：0.8.0.2 (2022/02/18 15:46)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_ACHIEVE_H
 
 #include "GreatCircleFit3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 
 template <typename Real>
 Mathematics::GreatCircleFit3<Real>::GreatCircleFit3(const Points& points)
-    : m_Normal{}
+    : normal{}
 {
     Calculate(points);
 
@@ -25,19 +25,21 @@ Mathematics::GreatCircleFit3<Real>::GreatCircleFit3(const Points& points)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::GreatCircleFit3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::GreatCircleFit3<Real>::GetNormal() noexcept
+Mathematics::Vector3<Real> Mathematics::GreatCircleFit3<Real>::GetNormal() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Normal;
+    return normal;
 }
 
 template <typename Real>
@@ -85,7 +87,7 @@ void Mathematics::GreatCircleFit3<Real>::Calculate(const Points& points)
     eigenSystem.Solve(false);
 
     // 最佳拟合大圆单位长度方向。
-    m_Normal = eigenSystem.GetEigenvector3(2);
+    normal = eigenSystem.GetEigenvector3(2);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_ACHIEVE_H

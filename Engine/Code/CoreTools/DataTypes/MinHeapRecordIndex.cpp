@@ -1,20 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 11:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 15:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "MinHeapRecordIndex.h"
 #include "Detail/MinHeapRecordIndexImpl.h"
-
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-using std::make_shared;
 
 CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int maxElements)
     : impl{ maxElements }
@@ -31,10 +29,12 @@ CoreTools::MinHeapRecordIndex::MinHeapRecordIndex(int newMaxElements, const MinH
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, MinHeapRecordIndex)
 
 #ifdef OPEN_CLASS_INVARIANT
+
 void CoreTools::MinHeapRecordIndex::PrintIndexInLog() const noexcept
 {
     impl->PrintIndexInLog();
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, MinHeapRecordIndex, GetMaxElements, int)

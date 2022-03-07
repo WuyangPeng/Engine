@@ -26,38 +26,38 @@ namespace Mathematics
 		virtual ~ImplicitSurface();
 
 		// The implicit function.
-		virtual Real F(const Vector3D<Real>& pos) const = 0;
+		virtual Real F(const Vector3<Real>& pos) const = 0;
 
 		// First-order partial derivatives.
-		virtual Real FX(const Vector3D<Real>& pos) const = 0;
-		virtual Real FY(const Vector3D<Real>& pos) const = 0;
-		virtual Real FZ(const Vector3D<Real>& pos) const = 0;
+		virtual Real FX(const Vector3<Real>& pos) const = 0;
+		virtual Real FY(const Vector3<Real>& pos) const = 0;
+		virtual Real FZ(const Vector3<Real>& pos) const = 0;
 
 		// Second-order partial derivatives.
-		virtual Real FXX(const Vector3D<Real>& pos) const = 0;
-		virtual Real FXY(const Vector3D<Real>& pos) const = 0;
-		virtual Real FXZ(const Vector3D<Real>& pos) const = 0;
-		virtual Real FYY(const Vector3D<Real>& pos) const = 0;
-		virtual Real FYZ(const Vector3D<Real>& pos) const = 0;
-		virtual Real FZZ(const Vector3D<Real>& pos) const = 0;
+		virtual Real FXX(const Vector3<Real>& pos) const = 0;
+		virtual Real FXY(const Vector3<Real>& pos) const = 0;
+		virtual Real FXZ(const Vector3<Real>& pos) const = 0;
+		virtual Real FYY(const Vector3<Real>& pos) const = 0;
+		virtual Real FYZ(const Vector3<Real>& pos) const = 0;
+		virtual Real FZZ(const Vector3<Real>& pos) const = 0;
 
 		// Verify point is on surface (within the tolerance specified by epsilon).
-		bool IsOnSurface(const Vector3D<Real>& pos, Real epsilon) const;
+		bool IsOnSurface(const Vector3<Real>& pos, Real epsilon) const;
 
 		// First-order derivatives.
-		Vector3D<Real> GetGradient(const Vector3D<Real>& pos) const;
+		Vector3<Real> GetGradient(const Vector3<Real>& pos) const;
 
 		// Second-order derivatives.
-		Matrix3<Real> GetHessian(const Vector3D<Real>& pos) const;
+		Matrix3<Real> GetHessian(const Vector3<Real>& pos) const;
 
 		// Compute a coordinate frame.  The set {T0,T1,N} is a right-handed
 		// orthonormal set.
-		void GetFrame(const Vector3D<Real>& pos, Vector3D<Real>& tangent0, Vector3D<Real>& tangent1, Vector3D<Real>& normal) const;
+		void GetFrame(const Vector3<Real>& pos, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const;
 
 		// Differential geometric quantities.  The returned scalars are the
 		// principal curvatures and the returned vectors are the corresponding
 		// principal directions.
-		bool ComputePrincipalCurvatureInfo(const Vector3D<Real>& pos, Real& curv0, Real& curv1, Vector3D<Real>& dir0, Vector3D<Real>& dir1);
+		bool ComputePrincipalCurvatureInfo(const Vector3<Real>& pos, Real& curv0, Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1);
 
 	protected:
 		ImplicitSurface();

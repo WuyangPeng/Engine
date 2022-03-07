@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 11:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/09 12:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 using std::string;
 
 CoreTools::StringReplacingImpl::StringReplacingImpl(const string& configurationFileName)
-    : m_Replacing{}
+    : replacing{}
 {
     InitReplacing(configurationFileName);
 
@@ -31,7 +31,7 @@ void CoreTools::StringReplacingImpl::InitReplacing(const string& configurationFi
 
     for (const auto& value : mainTree)
     {
-        m_Replacing.insert({ value.first, value.second.get_value<System::String>() });
+        replacing.insert({ value.first, value.second.get_value<System::String>() });
     }
 }
 
@@ -41,9 +41,9 @@ const System::String CoreTools::StringReplacingImpl::GetReplacing(const String& 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Replacing.find(original);
+    const auto iter = replacing.find(original);
 
-    if (iter != m_Replacing.cend())
+    if (iter != replacing.cend())
         return iter->second;
     else
         return String{};

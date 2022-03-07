@@ -21,7 +21,7 @@ namespace Network
 
 		void ReceiveMessageTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

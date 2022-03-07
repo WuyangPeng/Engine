@@ -18,8 +18,8 @@ namespace Rendering
     {
     public:
         using ClassType = SurfacePatchFrameImpl;
-        using AVector = Mathematics::FloatAVector;
-        using APoint = Mathematics::FloatAPoint;
+        using AVector = Mathematics::AVectorF;
+        using APoint = Mathematics::APointF;
 
     public:
         SurfacePatchFrameImpl(const APoint& position, const AVector& tangent0, const AVector& tangent1, const AVector& normal) noexcept;

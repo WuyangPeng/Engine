@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:43)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DOC_RESULT_ROW_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DOC_RESULT_ROW_H
@@ -24,17 +24,19 @@ namespace Database
     public:
         using ClassType = MysqlConnectorDocResultRow;
         using ParentType = ResultRowImpl;
-        using MysqlxDbDocPtr = std::shared_ptr<MysqlxDbDoc>;
+        using MysqlxDbDocSharedPtr = std::shared_ptr<MysqlxDbDoc>;
 
     public:
-        MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc) noexcept;
+        MysqlConnectorDocResultRow(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocSharedPtr& mysqlxDbDoc) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Print(std::ostream& os) const override;
 
+        NODISCARD int GetColCount() const noexcept override;
+
     private:
-        MysqlxDbDocPtr m_MysqlxDbDoc;
+        MysqlxDbDocSharedPtr mysqlxDbDoc;
     };
 }
 

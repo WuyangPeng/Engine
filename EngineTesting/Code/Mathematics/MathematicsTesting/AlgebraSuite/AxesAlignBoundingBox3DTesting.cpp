@@ -5,9 +5,9 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/21 13:59)
 
 #include "AxesAlignBoundingBox3DTesting.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -18,9 +18,12 @@ using std::default_random_engine;
 
 namespace Mathematics
 {
-	template class AxesAlignBoundingBox3D<float>;
-	template class AxesAlignBoundingBox3D<double>;
+	template class AxesAlignBoundingBox3<float>;
+	template class AxesAlignBoundingBox3<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,AxesAlignBoundingBox3DTesting) 
 
@@ -35,23 +38,23 @@ void Mathematics::AxesAlignBoundingBox3DTesting
 void Mathematics::AxesAlignBoundingBox3DTesting
 	::ConstructionTest()
 {	
-	FloatVector3D firstVector(3.0f,7.0f,6.0f);
-	FloatVector3D secondVector(5.0f,11.0f,17.0f);
+	Vector3F firstVector(3.0f,7.0f,6.0f);
+	Vector3F secondVector(5.0f,11.0f,17.0f);
 
-	FloatAxesAlignBoundingBox3D firstAABB(firstVector,secondVector);
+	AxesAlignBoundingBox3F firstAABB(firstVector,secondVector);
 
-	ASSERT_TRUE(FloatVector3DTools::Approximate(firstAABB.GetMaxPoint(),FloatVector3D(5.0f,11.0f,17.0f)));
-	ASSERT_TRUE(FloatVector3DTools::Approximate(firstAABB.GetMinPoint(),FloatVector3D(3.0f,7.0f,6.0f)));
+	ASSERT_TRUE(Vector3ToolsF::Approximate(firstAABB.GetMaxPoint(),Vector3F(5.0f,11.0f,17.0f)));
+	ASSERT_TRUE(Vector3ToolsF::Approximate(firstAABB.GetMinPoint(),Vector3F(3.0f,7.0f,6.0f)));
 
-	DoubleAxesAlignBoundingBox3D secondAABB(firstAABB);
+	AxesAlignBoundingBox3D secondAABB(firstAABB);
 
-	ASSERT_TRUE(DoubleVector3DTools::Approximate(secondAABB.GetMaxPoint(),DoubleVector3D(5.0,11.0,17.0)));
-	ASSERT_TRUE(DoubleVector3DTools::Approximate(secondAABB.GetMinPoint(),DoubleVector3D(3.0,7.0,6.0)));
+	ASSERT_TRUE(Vector3ToolsD::Approximate(secondAABB.GetMaxPoint(),Vector3D(5.0,11.0,17.0)));
+	ASSERT_TRUE(Vector3ToolsD::Approximate(secondAABB.GetMinPoint(),Vector3D(3.0,7.0,6.0)));
 
-	FloatAxesAlignBoundingBox3D thirdAABB(3.0f,5.0f,1.0f,7.0f,4.0f,16.0f);
+	AxesAlignBoundingBox3F thirdAABB(3.0f,5.0f,1.0f,7.0f,4.0f,16.0f);
 
-	ASSERT_TRUE(FloatVector3DTools::Approximate(thirdAABB.GetMaxPoint(),FloatVector3D(5.0f,7.0f,16.0f)));
-	ASSERT_TRUE(FloatVector3DTools::Approximate(thirdAABB.GetMinPoint(),FloatVector3D(3.0f,1.0f,4.0f)));
+	ASSERT_TRUE(Vector3ToolsF::Approximate(thirdAABB.GetMaxPoint(),Vector3F(5.0f,7.0f,16.0f)));
+	ASSERT_TRUE(Vector3ToolsF::Approximate(thirdAABB.GetMinPoint(),Vector3F(3.0f,1.0f,4.0f)));
 												  
 }
 
@@ -65,19 +68,19 @@ void Mathematics::AxesAlignBoundingBox3DTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatVector3D firstVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
+		Vector3F firstVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
 
 		uniform_real<float> secondRandomDistribution(firstVector[0],100.0f);
 		uniform_real<float> thirdRandomDistribution(firstVector[1],100.0f);
 		uniform_real<float> fourthRandomDistribution(firstVector[2],100.0f);
 
-		FloatVector3D secondVector(secondRandomDistribution(randomEngine),thirdRandomDistribution(randomEngine), fourthRandomDistribution(randomEngine));
+		Vector3F secondVector(secondRandomDistribution(randomEngine),thirdRandomDistribution(randomEngine), fourthRandomDistribution(randomEngine));
 
-		FloatAxesAlignBoundingBox3D firstAABB(firstVector,secondVector);
+		AxesAlignBoundingBox3F firstAABB(firstVector,secondVector);
 		
-		ASSERT_TRUE(FloatVector3DTools::Approximate(firstAABB.GetMaxPoint(),secondVector));
-	    ASSERT_TRUE(FloatVector3DTools::Approximate(firstAABB.GetMinPoint(), firstVector));
-		ASSERT_TRUE(FloatVector3DTools::Approximate(firstAABB.GetCenter(),(firstVector + secondVector) / 2.0f));
+		ASSERT_TRUE(Vector3ToolsF::Approximate(firstAABB.GetMaxPoint(),secondVector));
+	    ASSERT_TRUE(Vector3ToolsF::Approximate(firstAABB.GetMinPoint(), firstVector));
+		ASSERT_TRUE(Vector3ToolsF::Approximate(firstAABB.GetCenter(),(firstVector + secondVector) / 2.0f));
 
 		ASSERT_APPROXIMATE(firstAABB.GetExtentX(),(secondVector[0] - firstVector[0]) / 2.0f,1e-8f);
 
@@ -97,24 +100,24 @@ void Mathematics::AxesAlignBoundingBox3DTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatVector3D firstVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
+		Vector3F firstVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
 
 		uniform_real<float> secondRandomDistribution(firstVector[0],100.0f);
 		uniform_real<float> thirdRandomDistribution(firstVector[1],100.0f);
 		uniform_real<float> fourthRandomDistribution(firstVector[2],100.0f);
 
-		FloatVector3D secondVector(secondRandomDistribution(randomEngine),thirdRandomDistribution(randomEngine),fourthRandomDistribution(randomEngine));
+		Vector3F secondVector(secondRandomDistribution(randomEngine),thirdRandomDistribution(randomEngine),fourthRandomDistribution(randomEngine));
 
-		FloatVector3D thirdVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
+		Vector3F thirdVector(firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine),firstRandomDistribution(randomEngine));
 
 		uniform_real<float> fifthRandomDistribution(thirdVector[0],100.0f);
 		uniform_real<float> sixthRandomDistribution(thirdVector[1],100.0f);
 		uniform_real<float> seventhRandomDistribution(thirdVector[2],100.0f);
 
-		FloatVector3D fourthVector(fifthRandomDistribution(randomEngine),sixthRandomDistribution(randomEngine),seventhRandomDistribution(randomEngine));
+		Vector3F fourthVector(fifthRandomDistribution(randomEngine),sixthRandomDistribution(randomEngine),seventhRandomDistribution(randomEngine));
 		
-		FloatAxesAlignBoundingBox3D firstAABB(firstVector,secondVector);
-		FloatAxesAlignBoundingBox3D secondAABB(thirdVector,fourthVector);
+		AxesAlignBoundingBox3F firstAABB(firstVector,secondVector);
+		AxesAlignBoundingBox3F secondAABB(thirdVector,fourthVector);
 
 		if((firstVector[0] <= thirdVector[0] && thirdVector[0] <= secondVector[0]) || (thirdVector[0] <= firstVector[0] && firstVector[0] <= fourthVector[0]))
 		{
@@ -154,7 +157,7 @@ void Mathematics::AxesAlignBoundingBox3DTesting
 
 		if(IsIntersection(firstAABB,secondAABB))
 		{
-			FloatAxesAlignBoundingBox3D thirdAABB = FindIntersection(firstAABB,secondAABB);
+			AxesAlignBoundingBox3F thirdAABB = FindIntersection(firstAABB,secondAABB);
 
 			ASSERT_TRUE(firstAABB.GetMinPoint()[0] <= thirdAABB.GetMinPoint()[0]);
 			ASSERT_TRUE(thirdAABB.GetMaxPoint()[0] <= firstAABB.GetMaxPoint()[0]);

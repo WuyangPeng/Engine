@@ -161,7 +161,7 @@ void CoreTools::CellValueProxyTesting::CellValueSetTest()
 
     cellValueProxy.Set(5.1);
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
-    ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::MathD::epsilon);
 
     cellValueProxy.Set("cellValueProxy");
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);
@@ -201,7 +201,7 @@ void CoreTools::CellValueProxyTesting::CellValueEqualTest()
 
     cellValueProxy = 5.1;
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::Float);
-    ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cellValueProxy.Get<double>(), 5.1, Mathematics::MathD::epsilon);
 
     cellValueProxy = "cellValueProxy";
     ASSERT_ENUM_EQUAL(cellValueProxy.GetType(), SimpleCSV::ValueType::String);

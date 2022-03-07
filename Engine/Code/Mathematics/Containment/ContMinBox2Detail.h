@@ -11,10 +11,10 @@
 #include "Mathematics/ComputationalGeometry/ConvexHull2.h"
 
 template <typename Real>
-Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, Real epsilon, QueryType queryType, bool isConvexPolygon)
+Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2<Real>>& points, Real epsilon, QueryType queryType, bool isConvexPolygon)
 {
     // Get the convex hull of the points.
-    std::vector<Vector2D<Real>> hullPoints;
+    std::vector<Vector2<Real>> hullPoints;
     if (isConvexPolygon)
     {
         hullPoints = points;
@@ -28,7 +28,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
 
         if (hullDim == 0)
         {
-            mMinBox = Box2<Real>{ points[0], Vector2D<Real>::GetUnitX(), Vector2D<Real>::GetUnitY(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
+            mMinBox = Box2<Real>{ points[0], Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), Math<Real>::GetValue(0), Math<Real>::GetValue(0) };
             return;
         }
 
@@ -40,10 +40,10 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
             auto center = (Real{ 0.5 }) * (points[hullIndices[0]] + points[hullIndices[1]]);
             auto diff = points[hullIndices[1]] - points[hullIndices[0]];
 
-            auto length = Vector2DTools<Real>::VectorMagnitude(diff);
+            auto length = Vector2Tools<Real>::GetLength(diff);
             diff.Normalize();
 
-            mMinBox = Box2<Real>{ center, diff, Vector2DTools<Real>::GetPerp(mMinBox.GetAxis0()), (Real{ 0.5 }) * length, Math<Real>::GetValue(0) };
+            mMinBox = Box2<Real>{ center, diff, Vector2Tools<Real>::GetPerp(mMinBox.GetAxis0()), (Real{ 0.5 }) * length, Math<Real>::GetValue(0) };
 
             DELETE0(hull1);
             return;
@@ -63,7 +63,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
     // Unit-length edge directions of convex polygon.  These could be
     // precomputed and passed to this routine if the application requires it.
     auto numPointsM1 = hullPoints.size() - 1;
-    Vector2D<Real>* edges = nullptr;  // NEW1<Vector2D<Real>>(numPoints);
+    Vector2<Real>* edges = nullptr;  // NEW1<Vector2<Real>>(numPoints);
     bool* visited = nullptr;  //  NEW1<bool>(numPoints);
     int i;
     for (i = 0; i < numPointsM1; ++i)
@@ -151,15 +151,15 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
 
     // The dimensions of the axis-aligned box.  The extents store width and
     // height for now.
-    Vector2D<Real> center{ (Real{ 0.5 }) * (xmin + xmax), (Real{ 0.5 }) * (ymin + ymax) };
+    Vector2<Real> center{ (Real{ 0.5 }) * (xmin + xmax), (Real{ 0.5 }) * (ymin + ymax) };
 
-    mMinBox = Box2<Real>{ center, Vector2D<Real>::GetUnitX(), Vector2D<Real>::GetUnitY(), (Real{ 0.5 }) * (xmax - xmin), (Real{ 0.5 }) * (ymax - ymin) };
+    mMinBox = Box2<Real>{ center, Vector2<Real>::GetUnitX(), Vector2<Real>::GetUnitY(), (Real{ 0.5 }) * (xmax - xmin), (Real{ 0.5 }) * (ymax - ymin) };
 
     auto minAreaDiv4 = mMinBox.GetExtent0() * mMinBox.GetExtent1();
 
     // The rotating calipers algorithm.
-    auto U = Vector2D<Real>::GetUnitX();
-    auto V = Vector2D<Real>::GetUnitY();
+    auto U = Vector2<Real>::GetUnitX();
+    auto V = Vector2<Real>::GetUnitY();
 
     bool done = false;
     while (!done)
@@ -169,28 +169,28 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
         int flag = F_NONE;
         auto maxDot = Math<Real>::GetValue(0);
 
-        auto dot = Vector2DTools<Real>::DotProduct(U, edges[BIndex]);
+        auto dot = Vector2Tools<Real>::DotProduct(U, edges[BIndex]);
         if (dot > maxDot)
         {
             maxDot = dot;
             flag = F_BOTTOM;
         }
 
-        dot = Vector2DTools<Real>::DotProduct(V, edges[RIndex]);
+        dot = Vector2Tools<Real>::DotProduct(V, edges[RIndex]);
         if (dot > maxDot)
         {
             maxDot = dot;
             flag = F_RIGHT;
         }
 
-        dot = -Vector2DTools<Real>::DotProduct(U, edges[TIndex]);
+        dot = -Vector2Tools<Real>::DotProduct(U, edges[TIndex]);
         if (dot > maxDot)
         {
             maxDot = dot;
             flag = F_TOP;
         }
 
-        dot = -Vector2DTools<Real>::DotProduct(V, edges[LIndex]);
+        dot = -Vector2Tools<Real>::DotProduct(V, edges[LIndex]);
         if (dot > maxDot)
         {
             maxDot = dot;
@@ -208,7 +208,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
                 {
                     // Compute box axes with E[B] as an edge.
                     U = edges[BIndex];
-                    V = -Vector2DTools<Real>::GetPerp(U);
+                    V = -Vector2Tools<Real>::GetPerp(U);
                     UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
 
                     // Mark edge visited and rotate the calipers.
@@ -228,7 +228,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
                 {
                     // Compute box axes with E[Real] as an edge.
                     V = edges[RIndex];
-                    U = Vector2DTools<Real>::GetPerp(V);
+                    U = Vector2Tools<Real>::GetPerp(V);
                     UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
 
                     // Mark edge visited and rotate the calipers.
@@ -248,7 +248,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
                 {
                     // Compute box axes with E[T] as an edge.
                     U = -edges[TIndex];
-                    V = -Vector2DTools<Real>::GetPerp(U);
+                    V = -Vector2Tools<Real>::GetPerp(U);
                     UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
 
                     // Mark edge visited and rotate the calipers.
@@ -268,7 +268,7 @@ Mathematics::MinBox2<Real>::MinBox2(const std::vector<Vector2D<Real>>& points, R
                 {
                     // Compute box axes with E[L] as an edge.
                     V = -edges[LIndex];
-                    U = Vector2DTools<Real>::GetPerp(V);
+                    U = Vector2Tools<Real>::GetPerp(V);
                     UpdateBox(hullPoints[LIndex], hullPoints[RIndex], hullPoints[BIndex], hullPoints[TIndex], U, V, minAreaDiv4);
 
                     // Mark edge visited and rotate the calipers.
@@ -297,12 +297,12 @@ Mathematics::MinBox2<Real>::operator Mathematics::Box2<Real>() const
 }
 
 template <typename Real>
-void Mathematics::MinBox2<Real>::UpdateBox(const Vector2D<Real>& LPoint, const Vector2D<Real>& RPoint, const Vector2D<Real>& BPoint, const Vector2D<Real>& TPoint, const Vector2D<Real>& U, const Vector2D<Real>& V, Real& minAreaDiv4)
+void Mathematics::MinBox2<Real>::UpdateBox(const Vector2<Real>& LPoint, const Vector2<Real>& RPoint, const Vector2<Real>& BPoint, const Vector2<Real>& TPoint, const Vector2<Real>& U, const Vector2<Real>& V, Real& minAreaDiv4)
 {
     auto RLDiff = RPoint - LPoint;
     auto TBDiff = TPoint - BPoint;
-    auto extent0 = (Real{ 0.5 }) * (Vector2DTools<Real>::DotProduct(U, RLDiff));
-    auto extent1 = (Real{ 0.5 }) * (Vector2DTools<Real>::DotProduct(V, TBDiff));
+    auto extent0 = (Real{ 0.5 }) * (Vector2Tools<Real>::DotProduct(U, RLDiff));
+    auto extent1 = (Real{ 0.5 }) * (Vector2Tools<Real>::DotProduct(V, TBDiff));
     auto areaDiv4 = extent0 * extent1;
     if (areaDiv4 < minAreaDiv4)
     {
@@ -310,7 +310,7 @@ void Mathematics::MinBox2<Real>::UpdateBox(const Vector2D<Real>& LPoint, const V
 
         auto LBDiff = LPoint - BPoint;
 
-        mMinBox = Box2<Real>{ LPoint + U * extent0 + V * (extent1 - Vector2DTools<Real>::DotProduct(V, LBDiff)), U, V, extent0, extent1 };
+        mMinBox = Box2<Real>{ LPoint + U * extent0 + V * (extent1 - Vector2Tools<Real>::DotProduct(V, LBDiff)), U, V, extent0, extent1 };
     }
 }
 

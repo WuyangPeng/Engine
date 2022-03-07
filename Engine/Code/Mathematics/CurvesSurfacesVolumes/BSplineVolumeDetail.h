@@ -31,8 +31,8 @@ BSplineVolume<Real>::BSplineVolume (int numUCtrlPoints, int numVCtrlPoints, int 
     MATHEMATICS_ASSERTION_0(numWCtrlPoints >= 2, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(1 <= wDegree && wDegree <= numWCtrlPoints - 1,  "Invalid input\n");
 
-    mCtrlPoint = nullptr;  // NEW3<Vector3D<Real> >(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints);
-    memset(mCtrlPoint[0][0], 0, numUCtrlPoints*numVCtrlPoints*numWCtrlPoints* sizeof(Vector3D<Real>));
+    mCtrlPoint = nullptr;  // NEW3<Vector3<Real> >(numUCtrlPoints, numVCtrlPoints, numWCtrlPoints);
+    memset(mCtrlPoint[0][0], 0, numUCtrlPoints*numVCtrlPoints*numWCtrlPoints* sizeof(Vector3<Real>));
 
     mBasis[0].Create(numUCtrlPoints, uDegree, true);
     mBasis[1].Create(numVCtrlPoints, vDegree, true);
@@ -64,7 +64,7 @@ int BSplineVolume<Real>::GetDegree (int dim) const noexcept
 
 template <typename Real>
 void BSplineVolume<Real>::SetControlPoint (int uIndex, int vIndex,
-    int wIndex, const Vector3D<Real>& ctrlPoint) noexcept
+    int wIndex, const Vector3<Real>& ctrlPoint) noexcept
 {
     if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints()  &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints() &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
     {
@@ -73,7 +73,7 @@ void BSplineVolume<Real>::SetControlPoint (int uIndex, int vIndex,
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetControlPoint (int uIndex, int vIndex,
+Vector3<Real> BSplineVolume<Real>::GetControlPoint (int uIndex, int vIndex,
     int wIndex) const noexcept
 {
     if (0 <= uIndex && uIndex < mBasis[0].GetNumCtrlPoints() &&  0 <= vIndex && vIndex < mBasis[1].GetNumCtrlPoints()  &&  0 <= wIndex && wIndex < mBasis[2].GetNumCtrlPoints())
@@ -81,18 +81,18 @@ Vector3D<Real> BSplineVolume<Real>::GetControlPoint (int uIndex, int vIndex,
         return mCtrlPoint[uIndex][vIndex][wIndex];
     }
 
-	return Vector3D<Real>{ Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal };
+	return Vector3<Real>{ Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal };
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
+Vector3<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
 {
     int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
     mBasis[0].Compute(u, 0, iumin, iumax);
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto pos = Vector3D<Real>::GetZero();
+	auto pos = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -112,14 +112,14 @@ Vector3D<Real> BSplineVolume<Real>::GetPosition (Real u, Real v, Real w) const
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  const
+Vector3<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  const
 {
     int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
     mBasis[0].Compute(u, 1, iumin, iumax);
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto derU = Vector3D<Real>::GetZero();
+	auto derU = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD1(iu);
@@ -139,14 +139,14 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeU (Real u, Real v, Real w)  con
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) const
+Vector3<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) const
 {
     int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
     mBasis[0].Compute(u, 0, iumin, iumax);
     mBasis[1].Compute(v, 1, ivmin, ivmax);
     mBasis[2].Compute(w, 0, iwmin, iwmax);
 
-	auto derV = Vector3D<Real>::GetZero();
+	auto derV = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -166,14 +166,14 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeV (Real u, Real v, Real w) cons
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  const
+Vector3<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  const
 {
     int iumin, iumax, ivmin, ivmax, iwmin, iwmax;
     mBasis[0].Compute(u, 0, iumin, iumax);
     mBasis[1].Compute(v, 0, ivmin, ivmax);
     mBasis[2].Compute(w, 1, iwmin, iwmax);
 
-	auto derW = Vector3D<Real>::GetZero();
+	auto derW = Vector3<Real>::GetZero();
     for (auto iu = iumin; iu <= iumax; ++iu)
     {
 		auto tmp0 = mBasis[0].GetD0(iu);
@@ -193,13 +193,13 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivativeW (Real u, Real v, Real w)  con
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetPosition (Real pos[3]) const
+Vector3<Real> BSplineVolume<Real>::GetPosition (Real pos[3]) const
 {
     return GetPosition(pos[0], pos[1], pos[2]);
 }
 
 template <typename Real>
-Vector3D<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
+Vector3<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
 {
     switch (i)
     {
@@ -212,7 +212,7 @@ Vector3D<Real> BSplineVolume<Real>::GetDerivative (int i, Real pos[3]) const
     }
 
     MATHEMATICS_ASSERTION_0(false, "Derivatives larger than order 3 not supported\n");
-    return Vector3D<Real>::GetZero();
+    return Vector3<Real>::GetZero();
 }
 
 }

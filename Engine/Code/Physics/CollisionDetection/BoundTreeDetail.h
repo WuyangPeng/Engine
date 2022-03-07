@@ -85,11 +85,11 @@ void Physics::BoundTree<MeshSmartPointer, Bound>
 	// 将三个质心投影到分割轴上并进行排序。 
 	// 分割基于投影的中值。
     int numTriangles = m_Mesh->GetNumTriangles();
-	std::vector<Mathematics::FloatAPoint> centroids;
+	std::vector<Mathematics::APointF> centroids;
     const float oneThird = 1.0f / 3.0f;  
 	for (int index = 0; index < numTriangles; ++index)
     {
-		Mathematics::FloatAPoint vertex[3];
+		Mathematics::APointF vertex[3];
 		Rendering::TrianglePosition  trianglePosition = m_Mesh->GetModelTriangle(index);
         
 		centroids.push_back(oneThird * (trianglePosition.GetFirstPosition() + trianglePosition.GetSecondPosition() + trianglePosition.GetThirdPosition()));

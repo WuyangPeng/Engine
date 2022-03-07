@@ -1,424 +1,427 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.2 (2019/08/27 16:20)
 
 #include "PolynomialRootsRationalTesting.h"
-#include "Mathematics/Rational/IntegerDetail.h"
-#include "Mathematics/Rational/SignRationalDetail.h"
-#include "Mathematics/NumericalAnalysis/PolynomialRootsRationalDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/PolynomialRootsRationalDetail.h"
+#include "Mathematics/Rational/IntegerDetail.h"
+#include "Mathematics/Rational/SignRationalDetail.h"
 
-#include <random> 
+#include <random>
 
+using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
 namespace Mathematics
 {
-	template class PolynomialRootsRational<float>;
-	template class PolynomialRootsRational<double>;	
+    template class PolynomialRootsRational<float>;
+    template class PolynomialRootsRational<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialRootsRationalTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialRootsRationalTesting)
 
-void Mathematics::PolynomialRootsRationalTesting
-	::MainTest()
+void Mathematics::PolynomialRootsRationalTesting ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(OnceTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(SecondaryTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ThriceTest);	
-	ASSERT_NOT_THROW_EXCEPTION_0(QuarticTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OnceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SecondaryTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ThriceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(QuarticTest);
 }
 
-void Mathematics::PolynomialRootsRationalTesting
-	::BaseTest()
+void Mathematics::PolynomialRootsRationalTesting ::BaseTest()
 {
-	DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+    PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
-	ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+    ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
 }
 
-void Mathematics::PolynomialRootsRationalTesting
-	::OnceTest() 
+void Mathematics::PolynomialRootsRationalTesting ::OnceTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10); 
-	uniform_int<> secondRandomDistribution(0,100000000);
-	
-	const auto testLoopCount = GetTestLoopCount();
+    default_random_engine generator;
+    uniform_real<double> firstRandomDistribution(-1.0e10, 1.0e10);
+    uniform_int<> secondRandomDistribution(0, 100000000);
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+    const auto testLoopCount = GetTestLoopCount();
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
-		double constant = firstRandomDistribution(generator);
-		double once = firstRandomDistribution(generator);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
 
-		if (DoubleMath::FAbs(once) < 1e-10)
-		{
-			once = 1.0;
-		}
+        double constant = firstRandomDistribution(generator);
+        double once = firstRandomDistribution(generator);
 
-		ASSERT_TRUE(firstPolynomialRootsRational.Linear(constant, once));
- 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
+        if (MathD::FAbs(once) < 1e-10)
+        {
+            once = 1.0;
+        }
 
-		for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
+        ASSERT_TRUE(firstPolynomialRootsRational.Linear(constant, once));
 
-			ASSERT_APPROXIMATE(root * once + constant,0.0,1e-5);
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-		}
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRational(constant);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRational(once);
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
 
-		ASSERT_TRUE(firstPolynomialRootsRational.Linear(constantPolynomialRational, oncePolynomialRational));
+            ASSERT_APPROXIMATE(root * once + constant, 0.0, 1e-5);
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+        }
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRational(constant);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRational(once);
 
-		for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
+        ASSERT_TRUE(firstPolynomialRootsRational.Linear(constantPolynomialRational, oncePolynomialRational));
 
-			ASSERT_APPROXIMATE(root * oncePolynomialRational.ConvertTo<double>() + constantPolynomialRational.ConvertTo<double>(), 0.0, 1e-5);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
 
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-		}
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
 
-		int constantDenominator = secondRandomDistribution(generator);
-		int onceDenominator = secondRandomDistribution(generator);
+            ASSERT_APPROXIMATE(root * oncePolynomialRational.ConvertTo<double>() + constantPolynomialRational.ConvertTo<double>(), 0.0, 1e-5);
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+        }
 
-		ASSERT_TRUE(firstPolynomialRootsRational.Linear(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator));
+        int constantDenominator = secondRandomDistribution(generator);
+        int onceDenominator = secondRandomDistribution(generator);
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
 
-		for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
+        ASSERT_TRUE(firstPolynomialRootsRational.Linear(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator));
 
-			ASSERT_APPROXIMATE(root * oncePolynomialRationalDenominator.ConvertTo<double>() + constantPolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-2);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 1);
 
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-		}
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
 
-		once = 0.0;
-		ASSERT_FALSE(firstPolynomialRootsRational.Linear(constant, once));
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
-		
-		ASSERT_FALSE(firstPolynomialRootsRational.Linear(constantPolynomialRational, DoublePolynomialRootsRational::PolynomialRational()));
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
-	}
+            ASSERT_APPROXIMATE(root * oncePolynomialRationalDenominator.ConvertTo<double>() + constantPolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-2);
+
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+        }
+
+        once = 0.0;
+        ASSERT_FALSE(firstPolynomialRootsRational.Linear(constant, once));
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+
+        ASSERT_FALSE(firstPolynomialRootsRational.Linear(constantPolynomialRational, PolynomialRootsRationalD::PolynomialRational()));
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+    }
 }
 
-void Mathematics::PolynomialRootsRationalTesting
-	::SecondaryTest()
+void Mathematics::PolynomialRootsRationalTesting ::SecondaryTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8); 
-	uniform_int<> secondRandomDistribution(0, 1000000);
+    default_random_engine generator;
+    uniform_real<double> firstRandomDistribution(-1.0e8, 1.0e8);
+    uniform_int<> secondRandomDistribution(0, 1000000);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
 
-		double constant = firstRandomDistribution(generator);
-		double once = firstRandomDistribution(generator);
-		double secondary = firstRandomDistribution(generator);
+        double constant = firstRandomDistribution(generator);
+        double once = firstRandomDistribution(generator);
+        double secondary = firstRandomDistribution(generator);
 
-		bool result = firstPolynomialRootsRational.Quadratic(constant, once, secondary);
+        bool result = firstPolynomialRootsRational.Quadratic(constant, once, secondary);
 
-		if(result)
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2);
+        if (result)
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2);
 
-			for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-			{
-				double root = firstPolynomialRootsRational.GetRoot(k);
-				
-				ASSERT_APPROXIMATE(root * root * secondary + root * once + constant,0.0,1e-6);
+            for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+            {
+                double root = firstPolynomialRootsRational.GetRoot(k);
 
-				if (firstPolynomialRootsRational.GetQuantity() == 2)
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-				else
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
-			}		
-			 
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
-		}	
+                ASSERT_APPROXIMATE(root * root * secondary + root * once + constant, 0.0, 1e-6);
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRational(constant);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRational(once);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRational(secondary);
+                if (firstPolynomialRootsRational.GetQuantity() == 2)
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+                else
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
+            }
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
 
-		result = firstPolynomialRootsRational.Quadratic(constantPolynomialRational, oncePolynomialRational, secondaryPolynomialRational);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRational(constant);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRational(once);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRational(secondary);
 
-		if(result)
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2);
+        result = firstPolynomialRootsRational.Quadratic(constantPolynomialRational, oncePolynomialRational, secondaryPolynomialRational);
 
-			for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-			{
-				double root = firstPolynomialRootsRational.GetRoot(k);
-				
-				ASSERT_APPROXIMATE(root * root * secondaryPolynomialRational.ConvertTo<double>() + root * oncePolynomialRational.ConvertTo<double>() + constantPolynomialRational.ConvertTo<double>(), 0.0, 1e-6);
+        if (result)
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2);
 
-				if (firstPolynomialRootsRational.GetQuantity() == 2)
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-				else
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
-			}		
-			 
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
-		}
+            for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+            {
+                double root = firstPolynomialRootsRational.GetRoot(k);
 
-		int constantDenominator = secondRandomDistribution(generator);
-		int onceDenominator = secondRandomDistribution(generator);
-		int secondaryDenominator = secondRandomDistribution(generator);
+                ASSERT_APPROXIMATE(root * root * secondaryPolynomialRational.ConvertTo<double>() + root * oncePolynomialRational.ConvertTo<double>() + constantPolynomialRational.ConvertTo<double>(), 0.0, 1e-6);
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
+                if (firstPolynomialRootsRational.GetQuantity() == 2)
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+                else
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
+            }
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
 
-		result = firstPolynomialRootsRational.Quadratic(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator, secondaryPolynomialRationalDenominator);
+        int constantDenominator = secondRandomDistribution(generator);
+        int onceDenominator = secondRandomDistribution(generator);
+        int secondaryDenominator = secondRandomDistribution(generator);
 
-		if(result)
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 ||  firstPolynomialRootsRational.GetQuantity() == 2);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
 
-			for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
-			{
-				double root = firstPolynomialRootsRational.GetRoot(k);
-				
-				ASSERT_APPROXIMATE(root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() + root * oncePolynomialRationalDenominator.ConvertTo<double>() + constantPolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-6);
+        result = firstPolynomialRootsRational.Quadratic(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator, secondaryPolynomialRationalDenominator);
 
-				if (firstPolynomialRootsRational.GetQuantity() == 2)
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
-				else
-					ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
-			}		
-			 
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
-		}
-	}
+        if (result)
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2);
+
+            for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+            {
+                double root = firstPolynomialRootsRational.GetRoot(k);
+
+                ASSERT_APPROXIMATE(root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() + root * oncePolynomialRationalDenominator.ConvertTo<double>() + constantPolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-6);
+
+                if (firstPolynomialRootsRational.GetQuantity() == 2)
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 1);
+                else
+                    ASSERT_EQUAL(firstPolynomialRootsRational.GetMultiplicity(k), 2);
+            }
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
+    }
 }
 
-void Mathematics::PolynomialRootsRationalTesting
-	::ThriceTest() 
+void Mathematics::PolynomialRootsRationalTesting ::ThriceTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7); 
-	uniform_int<> secondRandomDistribution(0, 1000000);
+    default_random_engine generator;
+    uniform_real<double> firstRandomDistribution(-1.0e7, 1.0e7);
+    uniform_int<> secondRandomDistribution(0, 1000000);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{ 
-		DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
 
-		double constant = firstRandomDistribution(generator);
-		double once = firstRandomDistribution(generator);
-		double secondary = firstRandomDistribution(generator);
-		double thrice = firstRandomDistribution(generator);
-		
-		ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constant,once,secondary,thrice));
+        double constant = firstRandomDistribution(generator);
+        double once = firstRandomDistribution(generator);
+        double secondary = firstRandomDistribution(generator);
+        double thrice = firstRandomDistribution(generator);
 
-		ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2 || firstPolynomialRootsRational.GetQuantity() == 3);
-		
-		for (int k = 0;k < firstPolynomialRootsRational.GetQuantity();++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
-			
-			ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
-		}
-			
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRational(constant);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRational(once);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRational(secondary);
-		DoublePolynomialRootsRational::PolynomialRational thricePolynomialRational(thrice);
+        ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constant, once, secondary, thrice));
 
-		ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constantPolynomialRational,oncePolynomialRational,secondaryPolynomialRational,thricePolynomialRational));
+        ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2 || firstPolynomialRootsRational.GetQuantity() == 3);
 
-		ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2 || firstPolynomialRootsRational.GetQuantity() == 3);
-		
-		for (int k = 0;k < firstPolynomialRootsRational.GetQuantity();++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
-			
-			ASSERT_APPROXIMATE(constantPolynomialRational.ConvertTo<double>() + 
-				               root * oncePolynomialRational.ConvertTo<double>() +
-				               root * root * secondaryPolynomialRational.ConvertTo<double>() + 
-							   root * root * root * thricePolynomialRational.ConvertTo<double>(), 0.0, 1e-3);
-		}
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
 
-		int constantDenominator = secondRandomDistribution(generator);
-		int onceDenominator = secondRandomDistribution(generator);
-		int secondaryDenominator = secondRandomDistribution(generator);
-		int thriceDenominator = secondRandomDistribution(generator);
+            ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
+        }
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
-		DoublePolynomialRootsRational::PolynomialRational thricePolynomialRationalDenominator(static_cast<int>(thrice), thriceDenominator);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRational(constant);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRational(once);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRational(secondary);
+        PolynomialRootsRationalD::PolynomialRational thricePolynomialRational(thrice);
 
-		ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constantPolynomialRationalDenominator,oncePolynomialRationalDenominator,secondaryPolynomialRationalDenominator,thricePolynomialRationalDenominator));
+        ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constantPolynomialRational, oncePolynomialRational, secondaryPolynomialRational, thricePolynomialRational));
 
-		ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 ||
-				    firstPolynomialRootsRational.GetQuantity() == 2 ||
-				    firstPolynomialRootsRational.GetQuantity() == 3);
-		
-		for (int k = 0;k < firstPolynomialRootsRational.GetQuantity();++k)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(k);
-			
-			ASSERT_APPROXIMATE(constantPolynomialRationalDenominator.ConvertTo<double>() + 
-				               root * oncePolynomialRationalDenominator.ConvertTo<double>() +
-				               root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() + 
-							   root * root * root * thricePolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-3);
-		}
-	}
+        ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 || firstPolynomialRootsRational.GetQuantity() == 2 || firstPolynomialRootsRational.GetQuantity() == 3);
 
-	// 构造判别式为零
-	double constant = 1.0;
-	double once = 3.0;
-	double secondary = 3.0001;
-	double thrice = 1.0; 
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
 
-	DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+            ASSERT_APPROXIMATE(constantPolynomialRational.ConvertTo<double>() +
+                                   root * oncePolynomialRational.ConvertTo<double>() +
+                                   root * root * secondaryPolynomialRational.ConvertTo<double>() +
+                                   root * root * root * thricePolynomialRational.ConvertTo<double>(),
+                               0.0, 1e-3);
+        }
 
-	ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constant,once,secondary,thrice));
+        int constantDenominator = secondRandomDistribution(generator);
+        int onceDenominator = secondRandomDistribution(generator);
+        int secondaryDenominator = secondRandomDistribution(generator);
+        int thriceDenominator = secondRandomDistribution(generator);
 
-	for (int i = 0; i < firstPolynomialRootsRational.GetQuantity(); ++i)
-	{
-		double root = firstPolynomialRootsRational.GetRoot(i);
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
+        PolynomialRootsRationalD::PolynomialRational thricePolynomialRationalDenominator(static_cast<int>(thrice), thriceDenominator);
 
-		ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
-	}	 
+        ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator, secondaryPolynomialRationalDenominator, thricePolynomialRationalDenominator));
+
+        ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 1 ||
+                    firstPolynomialRootsRational.GetQuantity() == 2 ||
+                    firstPolynomialRootsRational.GetQuantity() == 3);
+
+        for (int k = 0; k < firstPolynomialRootsRational.GetQuantity(); ++k)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(k);
+
+            ASSERT_APPROXIMATE(constantPolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * oncePolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * root * root * thricePolynomialRationalDenominator.ConvertTo<double>(),
+                               0.0, 1e-3);
+        }
+    }
+
+    // 构造判别式为零
+    double constant = 1.0;
+    double once = 3.0;
+    double secondary = 3.0001;
+    double thrice = 1.0;
+
+    PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
+
+    ASSERT_TRUE(firstPolynomialRootsRational.Cubic(constant, once, secondary, thrice));
+
+    for (int i = 0; i < firstPolynomialRootsRational.GetQuantity(); ++i)
+    {
+        double root = firstPolynomialRootsRational.GetRoot(i);
+
+        ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice, 0.0, 1e-3);
+    }
 }
 
-void Mathematics::PolynomialRootsRationalTesting
-	::QuarticTest() 
+void Mathematics::PolynomialRootsRationalTesting ::QuarticTest()
 {
-	default_random_engine generator;
-	uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6); 
-	uniform_int<> secondRandomDistribution(0, 1000000);
+    default_random_engine generator;
+    uniform_real<double> firstRandomDistribution(-1.0e6, 1.0e6);
+    uniform_int<> secondRandomDistribution(0, 1000000);
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoublePolynomialRootsRational firstPolynomialRootsRational(1e-10);
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        PolynomialRootsRationalD firstPolynomialRootsRational(1e-10);
 
-		ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
 
-		double constant = firstRandomDistribution(generator);
-		double once = firstRandomDistribution(generator);
-		double secondary = firstRandomDistribution(generator);
-		double thrice = firstRandomDistribution(generator);
-		double quartic = firstRandomDistribution(generator);
+        double constant = firstRandomDistribution(generator);
+        double once = firstRandomDistribution(generator);
+        double secondary = firstRandomDistribution(generator);
+        double thrice = firstRandomDistribution(generator);
+        double quartic = firstRandomDistribution(generator);
 
-		if (firstPolynomialRootsRational.Quartic(constant, once, secondary, thrice, quartic))
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
-				        firstPolynomialRootsRational.GetQuantity() == 4);
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(),0);
-		}
-			
-		for (int m = 0;m < firstPolynomialRootsRational.GetQuantity();++m)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(m);
-			
-			ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-2);
-		}
-			
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRational(constant);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRational(once);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRational(secondary);
-		DoublePolynomialRootsRational::PolynomialRational thricePolynomialRational(thrice);
-		DoublePolynomialRootsRational::PolynomialRational quarticPolynomialRational(quartic);
+        if (firstPolynomialRootsRational.Quartic(constant, once, secondary, thrice, quartic))
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
+                        firstPolynomialRootsRational.GetQuantity() == 4);
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
 
-		if (firstPolynomialRootsRational.Quartic(constantPolynomialRational,oncePolynomialRational,secondaryPolynomialRational,thricePolynomialRational,quarticPolynomialRational))
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
-				        firstPolynomialRootsRational.GetQuantity() == 4);
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(),0);
-		}
+        for (int m = 0; m < firstPolynomialRootsRational.GetQuantity(); ++m)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(m);
 
-		for (int m = 0;m < firstPolynomialRootsRational.GetQuantity();++m)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(m);
+            ASSERT_APPROXIMATE(constant + root * once + root * root * secondary + root * root * root * thrice + root * root * root * root * quartic, 0.0, 1e-2);
+        }
 
-			ASSERT_APPROXIMATE(constantPolynomialRational.ConvertTo<double>() + 
-				               root * oncePolynomialRational.ConvertTo<double>() +
-				               root * root * secondaryPolynomialRational.ConvertTo<double>() + 
-							   root * root * root * thricePolynomialRational.ConvertTo<double>() +
-							   root * root * root * root * quarticPolynomialRational.ConvertTo<double>(), 0.0, 1e-3);;
-		}
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRational(constant);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRational(once);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRational(secondary);
+        PolynomialRootsRationalD::PolynomialRational thricePolynomialRational(thrice);
+        PolynomialRootsRationalD::PolynomialRational quarticPolynomialRational(quartic);
 
-		int constantDenominator = secondRandomDistribution(generator);
-		int onceDenominator = secondRandomDistribution(generator);
-		int secondaryDenominator = secondRandomDistribution(generator);
-		int thriceDenominator = secondRandomDistribution(generator);
-		int quarticDenominator = secondRandomDistribution(generator);
+        if (firstPolynomialRootsRational.Quartic(constantPolynomialRational, oncePolynomialRational, secondaryPolynomialRational, thricePolynomialRational, quarticPolynomialRational))
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
+                        firstPolynomialRootsRational.GetQuantity() == 4);
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
 
-		DoublePolynomialRootsRational::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
-		DoublePolynomialRootsRational::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
-		DoublePolynomialRootsRational::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
-		DoublePolynomialRootsRational::PolynomialRational thricePolynomialRationalDenominator(static_cast<int>(thrice), thriceDenominator);
-		DoublePolynomialRootsRational::PolynomialRational quarticPolynomialRationalDenominator(static_cast<int>(thrice), quarticDenominator);
+        for (int m = 0; m < firstPolynomialRootsRational.GetQuantity(); ++m)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(m);
 
-		if (firstPolynomialRootsRational.Quartic(constantPolynomialRationalDenominator,oncePolynomialRationalDenominator,secondaryPolynomialRationalDenominator,thricePolynomialRationalDenominator,quarticPolynomialRationalDenominator))
-		{
-			ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
-				        firstPolynomialRootsRational.GetQuantity() == 4);
-		}
-		else
-		{
-			ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(),0);
-		}
+            ASSERT_APPROXIMATE(constantPolynomialRational.ConvertTo<double>() +
+                                   root * oncePolynomialRational.ConvertTo<double>() +
+                                   root * root * secondaryPolynomialRational.ConvertTo<double>() +
+                                   root * root * root * thricePolynomialRational.ConvertTo<double>() +
+                                   root * root * root * root * quarticPolynomialRational.ConvertTo<double>(),
+                               0.0, 1e-3);
+            ;
+        }
 
-		for (int m = 0;m < firstPolynomialRootsRational.GetQuantity();++m)
-		{
-			double root = firstPolynomialRootsRational.GetRoot(m);
+        int constantDenominator = secondRandomDistribution(generator);
+        int onceDenominator = secondRandomDistribution(generator);
+        int secondaryDenominator = secondRandomDistribution(generator);
+        int thriceDenominator = secondRandomDistribution(generator);
+        int quarticDenominator = secondRandomDistribution(generator);
 
-			ASSERT_APPROXIMATE(constantPolynomialRationalDenominator.ConvertTo<double>() + 
-				               root * oncePolynomialRationalDenominator.ConvertTo<double>() +
-				               root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() + 
-							   root * root * root * thricePolynomialRationalDenominator.ConvertTo<double>() +
-							   root * root * root * root * quarticPolynomialRationalDenominator.ConvertTo<double>(), 0.0, 1e-3);;
-		}
-	}
+        PolynomialRootsRationalD::PolynomialRational constantPolynomialRationalDenominator(static_cast<int>(constant), constantDenominator);
+        PolynomialRootsRationalD::PolynomialRational oncePolynomialRationalDenominator(static_cast<int>(once), onceDenominator);
+        PolynomialRootsRationalD::PolynomialRational secondaryPolynomialRationalDenominator(static_cast<int>(secondary), secondaryDenominator);
+        PolynomialRootsRationalD::PolynomialRational thricePolynomialRationalDenominator(static_cast<int>(thrice), thriceDenominator);
+        PolynomialRootsRationalD::PolynomialRational quarticPolynomialRationalDenominator(static_cast<int>(thrice), quarticDenominator);
+
+        if (firstPolynomialRootsRational.Quartic(constantPolynomialRationalDenominator, oncePolynomialRationalDenominator, secondaryPolynomialRationalDenominator, thricePolynomialRationalDenominator, quarticPolynomialRationalDenominator))
+        {
+            ASSERT_TRUE(firstPolynomialRootsRational.GetQuantity() == 2 ||
+                        firstPolynomialRootsRational.GetQuantity() == 4);
+        }
+        else
+        {
+            ASSERT_EQUAL(firstPolynomialRootsRational.GetQuantity(), 0);
+        }
+
+        for (int m = 0; m < firstPolynomialRootsRational.GetQuantity(); ++m)
+        {
+            double root = firstPolynomialRootsRational.GetRoot(m);
+
+            ASSERT_APPROXIMATE(constantPolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * oncePolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * root * secondaryPolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * root * root * thricePolynomialRationalDenominator.ConvertTo<double>() +
+                                   root * root * root * root * quarticPolynomialRationalDenominator.ConvertTo<double>(),
+                               0.0, 1e-3);
+            ;
+        }
+    }
 }
-

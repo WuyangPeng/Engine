@@ -38,7 +38,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{CF4E062C-5E2C-4005-B818-75F1C733118D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CoreToolsTesting</RootNamespace>
+    <RootNamespace>CoreToolsExampleTesting</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 16:24)
+///	引擎版本：0.8.0.2 (2022/02/10 14:08)
 
 #ifndef MATHEMATICS_OBJECTS3D_RAY3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_RAY3_ACHIEVE_H
@@ -16,19 +16,20 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
-Mathematics::Ray3<Real>::Ray3(const Vector3D& origin, const Vector3D& direction, const Real epsilon) noexcept
-    : m_Origin{ origin }, m_Direction{ direction }, m_Epsilon{ epsilon }
+Mathematics::Ray3<Real>::Ray3(const Vector3& origin, const Vector3& direction, const Real epsilon) noexcept
+    : origin{ origin }, direction{ direction }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Ray3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (m_Direction.IsNormalize(m_Epsilon))
+        if (direction.IsNormalize(epsilon))
             return true;
         else
             return false;
@@ -38,30 +39,31 @@ bool Mathematics::Ray3<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ray3<Real>::GetOrigin() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ray3<Real>::GetOrigin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Origin;
+    return origin;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ray3<Real>::GetDirection() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ray3<Real>::GetDirection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Direction;
+    return direction;
 }
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::Ray3<Real>::GetMove(Real t, const Vector3D& velocity) const
+Mathematics::Ray3<Real> Mathematics::Ray3<Real>::GetMove(Real t, const Vector3& velocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Ray3{ m_Origin + t * velocity, m_Direction, m_Epsilon };
+    return Ray3{ origin + t * velocity, direction, epsilon };
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_RAY3_ACHIEVE_H

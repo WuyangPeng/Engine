@@ -23,9 +23,9 @@ namespace Network
 		using TestFunction = void(ClassType::*)();
 
 	private:
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
-		void MainTest();
+		void MainTest() noexcept;
 
 		void ConnectorTest();
 

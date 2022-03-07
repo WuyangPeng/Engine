@@ -12,8 +12,8 @@
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_EXTREMAL_QUERY3_DETAIL)
 
     #include "System/Helper/PragmaWarning.h"
-    #include "Mathematics/Algebra/Vector3DDetail.h"
-    #include "Mathematics/Algebra/Vector3DToolsDetail.h"
+    #include "Mathematics/Algebra/Vector3Detail.h"
+    #include "Mathematics/Algebra/Vector3ToolsDetail.h"
     #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26429)
@@ -41,7 +41,7 @@ namespace Physics
             const Vector3D& v2 = vertices[indices[2]];
             const Vector3D edge1 = v1 - v0;
             const Vector3D edge2 = v2 - v0;
-            mFaceNormals[i] = Mathematics::Vector3DTools<Real>::UnitCrossProduct(edge1, edge2);
+            mFaceNormals[i] = Mathematics::Vector3Tools<Real>::UnitCrossProduct(edge1, edge2);
         }
     }
 
@@ -62,7 +62,7 @@ namespace Physics
     }
 
     template <typename Real>
-    const Mathematics::Vector3D<Real>* ExtremalQuery3<Real>::GetFaceNormals() const noexcept
+    const Mathematics::Vector3<Real>* ExtremalQuery3<Real>::GetFaceNormals() const noexcept
     {
         return mFaceNormals;
     }

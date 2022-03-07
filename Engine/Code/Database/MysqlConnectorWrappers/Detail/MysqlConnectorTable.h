@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:47)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_TABLE_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_TABLE_H
@@ -34,17 +34,16 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] ResultPtr Select(std::initializer_list<std::string> selectStatement, const std::string& whereStatement,
-                                       const std::string& orderByStatement, const BindStatementType& bindStatement) override;
+        NODISCARD ResultSharedPtr Select(StatementType selectStatement,
+                                         const std::string& whereStatement,
+                                         const std::string& orderByStatement,
+                                         const BindStatementType& bindStatement) override;
 
     private:
-        using MysqlxTablePtr = std::unique_ptr<MysqlxTable>;
+        using MysqlxTableUniquePtr = std::unique_ptr<MysqlxTable>;
 
     private:
-        [[nodiscard]] static MysqlxTablePtr GetMysqlxTablePtr(const Schema& schema, const std::string& tableName);
-
-    private:
-        MysqlxTablePtr m_MysqlxTable;
+        MysqlxTableUniquePtr mysqlxTable;
     };
 }
 

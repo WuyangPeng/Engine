@@ -23,7 +23,7 @@ namespace Mathematics
 		void CompareTest();
 		void DistanceTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

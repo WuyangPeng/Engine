@@ -22,7 +22,7 @@ Mathematics::MeshSmoother<Real>::MeshSmoother()
 }
 
 template <typename Real>
-Mathematics::MeshSmoother<Real>::MeshSmoother(int numVertices, Vector3D<Real>* vertices, int numTriangles, const int* indices)
+Mathematics::MeshSmoother<Real>::MeshSmoother(int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices)
 {
     mVertices = 0;
     mNormals = 0;
@@ -40,7 +40,7 @@ Mathematics::MeshSmoother<Real>::~MeshSmoother()
 }
 
 template <typename Real>
-void Mathematics::MeshSmoother<Real>::Create(int numVertices, Vector3D<Real>* vertices, int numTriangles, const int* indices)
+void Mathematics::MeshSmoother<Real>::Create(int numVertices, Vector3<Real>* vertices, int numTriangles, const int* indices)
 {
     // Remove previously allocated smoother data.
     Destroy();
@@ -50,8 +50,8 @@ void Mathematics::MeshSmoother<Real>::Create(int numVertices, Vector3D<Real>* ve
     mNumTriangles = numTriangles;
     mIndices = indices;
 
-    mNormals = nullptr;  //  NEW1<Vector3D<Real> >(mNumVertices);
-    mMeans = nullptr;  // NEW1<Vector3D<Real> >(mNumVertices);
+    mNormals = nullptr;  //  NEW1<Vector3<Real> >(mNumVertices);
+    mMeans = nullptr;  // NEW1<Vector3<Real> >(mNumVertices);
     mNeighborCounts = nullptr;  // NEW1<int>(mNumVertices);
 
     // Count the number of vertex neighbors.
@@ -76,8 +76,8 @@ void Mathematics::MeshSmoother<Real>::Destroy()
 template <typename Real>
 void Mathematics::MeshSmoother<Real>::Update(Real t)
 {
-    memset(mNormals, 0, mNumVertices * sizeof(Vector3D<Real>));
-    memset(mMeans, 0, mNumVertices * sizeof(Vector3D<Real>));
+    memset(mNormals, 0, mNumVertices * sizeof(Vector3<Real>));
+    memset(mMeans, 0, mNumVertices * sizeof(Vector3<Real>));
 
     const int* current = mIndices;
     int i;
@@ -87,13 +87,13 @@ void Mathematics::MeshSmoother<Real>::Update(Real t)
         int v1 = *current++;
         int v2 = *current++;
 
-        Vector3D<Real>& V0 = mVertices[v0];
-        Vector3D<Real>& V1 = mVertices[v1];
-        Vector3D<Real>& V2 = mVertices[v2];
+        Vector3<Real>& V0 = mVertices[v0];
+        Vector3<Real>& V1 = mVertices[v1];
+        Vector3<Real>& V2 = mVertices[v2];
 
-        Vector3D<Real> edge1 = V1 - V0;
-        Vector3D<Real> edge2 = V2 - V0;
-        Vector3D<Real> normal = Vector3DTools<Real>::CrossProduct(edge1, edge2);
+        Vector3<Real> edge1 = V1 - V0;
+        Vector3<Real> edge2 = V2 - V0;
+        Vector3<Real> normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
 
         mNormals[v0] += normal;
         mNormals[v1] += normal;
@@ -114,9 +114,9 @@ void Mathematics::MeshSmoother<Real>::Update(Real t)
     {
         if (VertexInfluenced(i, t))
         {
-            Vector3D<Real> localDiff = mMeans[i] - mVertices[i];
-            Vector3D<Real> surfaceNormal = Vector3DTools<Real>::DotProduct(localDiff, mNormals[i]) * mNormals[i];
-            Vector3D<Real> tangent = localDiff - surfaceNormal;
+            Vector3<Real> localDiff = mMeans[i] - mVertices[i];
+            Vector3<Real> surfaceNormal = Vector3Tools<Real>::DotProduct(localDiff, mNormals[i]) * mNormals[i];
+            Vector3<Real> tangent = localDiff - surfaceNormal;
 
             Real tanWeight = GetTangentWeight(i, t);
             Real norWeight = GetNormalWeight(i, t);
@@ -150,7 +150,7 @@ int Mathematics::MeshSmoother<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshSmoother<Real>::GetVertices() const
+const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetVertices() const
 {
     return mVertices;
 }
@@ -168,13 +168,13 @@ const int* Mathematics::MeshSmoother<Real>::GetIndices() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshSmoother<Real>::GetNormals() const
+const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetNormals() const
 {
     return mNormals;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshSmoother<Real>::GetMeans() const
+const Mathematics::Vector3<Real>* Mathematics::MeshSmoother<Real>::GetMeans() const
 {
     return mMeans;
 }

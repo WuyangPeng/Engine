@@ -21,7 +21,7 @@ namespace Network
 
 		void SubStrategyTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

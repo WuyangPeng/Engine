@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 18:42)
+///	引擎版本：0.8.0.2 (2022/02/14 13:54)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_NODE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_NODE_H
@@ -13,6 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include <boost/noncopyable.hpp>
+#include <memory>
 #include <type_traits>
 
 namespace Mathematics
@@ -32,19 +33,19 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetX() const noexcept;
-        [[nodiscard]] Real GetY() const noexcept;
-        [[nodiscard]] Real GetZ() const noexcept;
-        [[nodiscard]] Real GetFunctionResult0() const noexcept;
-        [[nodiscard]] Real GetFunctionResult1() const noexcept;
-        [[nodiscard]] Real GetFunctionResult2() const noexcept;
+        NODISCARD Real GetX() const noexcept;
+        NODISCARD Real GetY() const noexcept;
+        NODISCARD Real GetZ() const noexcept;
+        NODISCARD Real GetFunctionResult0() const noexcept;
+        NODISCARD Real GetFunctionResult1() const noexcept;
+        NODISCARD Real GetFunctionResult2() const noexcept;
 
-        [[nodiscard]] Bisect3NodeSharedPtr GetXNext() noexcept;
-        [[nodiscard]] Bisect3NodeSharedPtr GetYNext() noexcept;
-        [[nodiscard]] Bisect3NodeSharedPtr GetZNext() noexcept;
-        [[nodiscard]] ConstBisect3NodeSharedPtr GetXNext() const noexcept;
-        [[nodiscard]] ConstBisect3NodeSharedPtr GetYNext() const noexcept;
-        [[nodiscard]] ConstBisect3NodeSharedPtr GetZNext() const noexcept;
+        NODISCARD Bisect3NodeSharedPtr GetXNext() noexcept;
+        NODISCARD Bisect3NodeSharedPtr GetYNext() noexcept;
+        NODISCARD Bisect3NodeSharedPtr GetZNext() noexcept;
+        NODISCARD ConstBisect3NodeSharedPtr GetXNext() const noexcept;
+        NODISCARD ConstBisect3NodeSharedPtr GetYNext() const noexcept;
+        NODISCARD ConstBisect3NodeSharedPtr GetZNext() const noexcept;
 
         void AddXNextNode(Real x, Real y, Real z, Real functionResult0, Real functionResult1, Real functionResult2);
         void AddYNextNode(Real x, Real y, Real z, Real functionResult0, Real functionResult1, Real functionResult2);
@@ -53,24 +54,21 @@ namespace Mathematics
         void AddYNextNode(const Bisect3NodeSharedPtr& node) noexcept;
         void AddZNextNode(const Bisect3NodeSharedPtr& node) noexcept;
 
-        [[nodiscard]] bool IsFunctionResult0SameSign() const noexcept;
-        [[nodiscard]] bool IsFunctionResult1SameSign() const noexcept;
-        [[nodiscard]] bool IsFunctionResult2SameSign() const noexcept;
+        NODISCARD bool IsFunctionResult0SameSign() const noexcept;
+        NODISCARD bool IsFunctionResult1SameSign() const noexcept;
+        NODISCARD bool IsFunctionResult2SameSign() const noexcept;
 
     private:
-        Real m_X;
-        Real m_Y;
-        Real m_Z;
-        Real m_FunctionResult0;
-        Real m_FunctionResult1;
-        Real m_FunctionResult2;
-        Bisect3NodeSharedPtr m_XNext;
-        Bisect3NodeSharedPtr m_YNext;
-        Bisect3NodeSharedPtr m_ZNext;
+        Real nodeX;
+        Real nodeY;
+        Real nodeZ;
+        Real nodeFunctionResult0;
+        Real nodeFunctionResult1;
+        Real nodeFunctionResult2;
+        Bisect3NodeSharedPtr xNext;
+        Bisect3NodeSharedPtr yNext;
+        Bisect3NodeSharedPtr zNext;
     };
-
-    using FloatBisect3Node = Bisect3Node<float>;
-    using DoubleBisect3Node = Bisect3Node<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_NODE_H

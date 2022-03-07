@@ -14,7 +14,7 @@
     #include "System/Helper/PragmaWarning.h"
 
     #include "CoreTools/Helper/ExceptionMacro.h"
-    #include "Mathematics/Algebra/Vector3DDetail.h"
+    #include "Mathematics/Algebra/Vector3Detail.h"
     #include "Mathematics/Base/MathDetail.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
@@ -826,7 +826,7 @@ namespace Physics
     }
 
     template <typename Real>
-    Mathematics::Vector3D<Real>*** Fluid3Db<Real>::GetVelocity() const noexcept
+    Mathematics::Vector3<Real>*** Fluid3Db<Real>::GetVelocity() const noexcept
     {
         return mVelocity0;
     }

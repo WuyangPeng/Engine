@@ -20,8 +20,8 @@ namespace Physics
 	{
 	public:
 		using ClassType = BoundTreeSplitTrianglesImpl;
-		using AVector = Mathematics::FloatAVector;
-		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::AVectorF;
+		using APoint = Mathematics::APointF;
 		using Centroids = std::vector<APoint>;
 		using Split = std::vector<int>;
 		 

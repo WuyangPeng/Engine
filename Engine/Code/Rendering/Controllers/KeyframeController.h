@@ -35,9 +35,9 @@ namespace Rendering
         KeyframeController(KeyframeController&& rhs) noexcept;
         KeyframeController& operator=(KeyframeController&& rhs) noexcept;
 		using ParentType = TransformController;
-		using Matrix = Mathematics::FloatMatrix;
-		using AQuaternion = Mathematics::FloatAQuaternion;
-		using APoint = Mathematics::FloatAPoint;
+		using Matrix = Mathematics::MatrixF;
+		using AQuaternion = Mathematics::AQuaternionF;
+		using APoint = Mathematics::APointF;
 
 	public:
 		// 如果平移，旋转和缩放都有着相同的关键帧时间，则numCommonTimes被设置为正数。

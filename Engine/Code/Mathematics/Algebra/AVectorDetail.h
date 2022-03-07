@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/03 17:35)
+///	引擎版本：0.8.0.2 (2022/02/07 11:20)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_DETAIL_H
@@ -20,7 +20,7 @@
 
 #include "AVectorOrthonormalBasisDetail.h"
 #include "AVectorOrthonormalizeDetail.h"
-#include "Vector3D.h"
+#include "Vector3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename T>
@@ -54,16 +54,16 @@ const Mathematics::AVector<T> Mathematics::UnitCross(const AVector<T>& lhs, cons
 }
 
 template <typename T>
-const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& lhs, const AVector<T>& mhs, const AVector<T>& rhs, const T epsilon)
+const Mathematics::AVectorOrthonormalize<T> Mathematics::Orthonormalize(const AVector<T>& uVector, const AVector<T>& vVector, const AVector<T>& wVector, const T epsilon)
 {
-    // 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
-    //   u0 = v0 / |v0|
-    //   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
-    //   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / |v2 - (u0 * v2)u0 - (u1 * v2)u1|
-    //
-    // 其中|A|表示向量A的长度和A * B表示向量A和B的点积
+    /// 如果输入向量v0、v1和v2，则Gram-Schmidt正交向量产生矢量u0、u1和u2如下，
+    ///   u0 = v0 / |v0|
+    ///   u1 = (v1 - (u0 * v1)u0) / |v1 - (u0 * v1)u0|
+    ///   u2 = (v2 - (u0 * v2)u0 - (u1 * v2)u1) / |v2 - (u0 * v2)u0 - (u1 * v2)u1|
+    ///
+    /// 其中|A|表示向量A的长度和A * B表示向量A和B的点积
 
-    return AVectorOrthonormalize<T>{ lhs, mhs, rhs, epsilon };
+    return AVectorOrthonormalize<T>{ uVector, vVector, wVector, epsilon };
 }
 
 template <typename T>

@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/25 13:14)
+///	引擎版本：0.8.0.3 (2022/02/25 13:45)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_UTILITY3_ACHIEVE_H
 
 #include "IntersectorUtility3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3D& normal, Real constant, const Container& point)
+typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::IntersectorUtility3<Real>::ClipConvexPolygonAgainstPlane(const Vector3& normal, Real constant, const Container& point)
 {
     /// 假定输入顶点为逆时针顺序。 顺序是此函数的不变式。
 
@@ -30,19 +30,15 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
 
     DotType dotProduct{};
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
     for (auto i = 0; i < quantity; ++i)
     {
         /// 这里使用epsilon是因为点积和“常数”可能彼此完全相等（理论上），但由于浮点问题而略有不同。
         /// 因此，在测试数上加一点，以将实际上相等的数推向正数。
 
         // 可能是一个相对的容忍度。 乘以常数可能不是做到这一点的最佳方法。
-        dotProduct[i] = Vector3DTools<Real>::DotProduct(normal, result[i]) - constant + Math<Real>::FAbs(constant) * Math<Real>::GetZeroTolerance();
+        dotProduct.at(i) = Vector3Tools<Real>::DotProduct(normal, result.at(i)) - constant + Math<Real>::FAbs(constant) * Math<Real>::GetZeroTolerance();
 
-        if (Math<Real>::GetValue(0) <= dotProduct[i])
+        if (Math<Real>::GetValue(0) <= dotProduct.at(i))
         {
             ++positive;
             if (index < 0)
@@ -76,10 +72,10 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                     clip = 0;
                 }
 
-                auto t = dotProduct[index] / (dotProduct[index] - dotProduct[clip]);
-                auto value = result[clip];
-                value -= result[index];
-                result[clip] = result[index] + t * (value);
+                auto t = dotProduct.at(index) / (dotProduct.at(index) - dotProduct.at(clip));
+                auto value = result.at(clip);
+                value -= result.at(index);
+                result.at(clip) = result.at(index) + t * (value);
             }
             // 否则两者都是正的，没有裁剪
         }
@@ -103,13 +99,13 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                     // 在线的第一个剪辑顶点
                     auto curIndex = index;
                     auto prvIndex = curIndex - 1;
-                    auto t = dotProduct[curIndex] / (dotProduct[curIndex] - dotProduct[prvIndex]);
-                    container.emplace_back(result[curIndex] + t * (result[prvIndex] - result[curIndex]));
+                    auto t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
+                    container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
                     // 线正侧的顶点
-                    while (curIndex < quantity && dotProduct[curIndex] >= Math<Real>::GetValue(0))
+                    while (curIndex < quantity && dotProduct.at(curIndex) >= Math<Real>::GetValue(0))
                     {
-                        container.emplace_back(result[curIndex++]);
+                        container.emplace_back(result.at(curIndex++));
                     }
 
                     // 在线上的最后一个剪辑顶点
@@ -122,25 +118,25 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                         curIndex = 0;
                         prvIndex = quantity - 1;
                     }
-                    t = dotProduct[curIndex] / (dotProduct[curIndex] - dotProduct[prvIndex]);
-                    container.emplace_back(result[curIndex] + t * (result[prvIndex] - result[curIndex]));
+                    t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
+                    container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
                 }
                 else  // index is 0
                 {
                     // 线正侧的顶点
                     auto curIndex = 0;
-                    while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct[curIndex])
+                    while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct.at(curIndex))
                     {
-                        container.emplace_back(result[curIndex++]);
+                        container.emplace_back(result.at(curIndex++));
                     }
 
                     // 在线上的最后一个剪辑顶点
                     auto prvIndex = curIndex - 1;
-                    auto t = dotProduct[curIndex] / (dotProduct[curIndex] - dotProduct[prvIndex]);
-                    container.emplace_back(result[curIndex] + t * (result[prvIndex] - result[curIndex]));
+                    auto t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
+                    container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
                     // 在负侧跳过顶点
-                    while (curIndex < quantity && Math<Real>::GetValue(0) < dotProduct[curIndex])
+                    while (curIndex < quantity && Math<Real>::GetValue(0) < dotProduct.at(curIndex))
                     {
                         curIndex++;
                     }
@@ -149,21 +145,21 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
                     if (curIndex < quantity)
                     {
                         prvIndex = curIndex - 1;
-                        t = dotProduct[curIndex] / (dotProduct[curIndex] - dotProduct[prvIndex]);
-                        container.emplace_back(result[curIndex] + t * (result[prvIndex] - result[curIndex]));
+                        t = dotProduct.at(curIndex) / (dotProduct.at(curIndex) - dotProduct.at(prvIndex));
+                        container.emplace_back(result.at(curIndex) + t * (result.at(prvIndex) - result.at(curIndex)));
 
                         // 线正侧的顶点
-                        while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct[curIndex])
+                        while (curIndex < quantity && Math<Real>::GetValue(0) <= dotProduct.at(curIndex))
                         {
-                            container.emplace_back(result[curIndex++]);
+                            container.emplace_back(result.at(curIndex++));
                         }
                     }
                     else
                     {
                         // curIndex = 0
                         prvIndex = quantity - 1;
-                        t = dotProduct[0] / (dotProduct[0] - dotProduct[prvIndex]);
-                        container.emplace_back(result[0] + t * (result[prvIndex] - result[0]));
+                        t = dotProduct.at(0) / (dotProduct.at(0) - dotProduct.at(prvIndex));
+                        container.emplace_back(result.at(0) + t * (result.at(prvIndex) - result.at(0)));
                     }
                 }
                 result = container;
@@ -178,13 +174,11 @@ typename Mathematics::IntersectorUtility3<Real>::Container Mathematics::Intersec
         }
     }
 
-#include STSTEM_WARNING_POP
-
     return result;
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3& box)
+Mathematics::Vector3<Real> Mathematics::IntersectorUtility3<Real>::GetPointFromIndex(int index, const Box3& box)
 {
     auto point = box.GetCenter();
 

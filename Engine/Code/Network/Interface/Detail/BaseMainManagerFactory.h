@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 16:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 14:20)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BASE_MAIN_MANAGER_FACTORY_H
 #define NETWORK_NETWORK_INTERFACE_BASE_MAIN_MANAGER_FACTORY_H
@@ -30,7 +30,7 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] static const ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy);
+        NODISCARD static ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy);
     };
 }
 

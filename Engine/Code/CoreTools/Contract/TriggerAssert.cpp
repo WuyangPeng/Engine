@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/25 12:35)
+///	引擎版本：0.8.0.1 (2022/01/10 18:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,12 +22,14 @@ using namespace std::literals;
 
 void CoreTools::TriggerAssert::Process(const FunctionDescribed& functionDescribed, const Format& format)
 {
-    auto messagePrefix = GenerateMessagePrefix(functionDescribed);
+    const auto messagePrefix = GenerateMessagePrefix(functionDescribed);
 
-    auto message = messagePrefix + format.str();
+    const auto message = messagePrefix + format.str();
 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
+
     WriteToOutputDebug(message);
+
 #endif  // CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 #ifdef OPEN_IMPORTANT_EXCPTION_ASSERT
@@ -75,7 +77,7 @@ string CoreTools::TriggerAssert::GenerateMessagePrefix(const FunctionDescribed& 
 #ifdef CORE_TOOLS_USE_ASSERT_WRITE_TO_OUTPUT_WINDOW
 
 // private
-void CoreTools::TriggerAssert::WriteToOutputDebug(const std::string& message) noexcept
+void CoreTools::TriggerAssert::WriteToOutputDebug(const string& message) noexcept
 {
     // 消息输出到调试窗口。
     System::OutputDebugStringWithChar(message.c_str());

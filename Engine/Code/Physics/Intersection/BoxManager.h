@@ -10,7 +10,7 @@
 #include "Physics/PhysicsDll.h"
 
 #include "Mathematics/Meshes/EdgeKey.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox3D.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox3.h"
 
 #include <set>
 #include <vector>
@@ -21,7 +21,7 @@ namespace Physics
 	class BoxManager
 	{
 	public:
-		using AxesAlignBoundingBox3D = Mathematics::AxesAlignBoundingBox3D<Real>;
+		using AxesAlignBoundingBox3D = Mathematics::AxesAlignBoundingBox3<Real>;
 		using EdgeKey = Mathematics::EdgeKey;
 
 	public:

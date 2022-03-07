@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:26)
+///	引擎版本：0.8.0.2 (2022/02/10 15:09)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSE3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSE3_ACHIEVE_H
@@ -16,22 +16,36 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
-Mathematics::Ellipse3<Real>::Ellipse3(const Vector3D& center, const Vector3D& normal, const Vector3D& major, const Vector3D& minor,
-                                      Real majorLength, Real minorLength, const Real epsilon) noexcept
-    : m_Center{ center }, m_Normal{ normal }, m_Major{ major }, m_Minor{ minor },
-      m_MajorLength{ majorLength }, m_MinorLength{ minorLength }, m_Epsilon{ epsilon }
+Mathematics::Ellipse3<Real>::Ellipse3(const Vector3& center,
+                                      const Vector3& normal,
+                                      const Vector3& major,
+                                      const Vector3& minor,
+                                      Real majorLength,
+                                      Real minorLength,
+                                      const Real epsilon) noexcept
+    : center{ center },
+      normal{ normal },
+      major{ major },
+      m_Minor{ minor },
+      majorLength{ majorLength },
+      minorLength{ minorLength },
+      epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Ellipse3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (m_Normal.IsNormalize(m_Epsilon) && m_Major.IsNormalize(m_Epsilon) && m_Minor.IsNormalize(m_Epsilon) &&
-            Math::GetValue(0) <= m_MajorLength && Math::GetValue(0) <= m_MinorLength)
+        if (normal.IsNormalize(epsilon) &&
+            major.IsNormalize(epsilon) &&
+            m_Minor.IsNormalize(epsilon) &&
+            Math::GetValue(0) <= majorLength &&
+            Math::GetValue(0) <= minorLength)
         {
             return true;
         }
@@ -45,34 +59,35 @@ bool Mathematics::Ellipse3<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ellipse3<Real>::GetCenter() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ellipse3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Center;
+    return center;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ellipse3<Real>::GetNormal() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ellipse3<Real>::GetNormal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Normal;
+    return normal;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ellipse3<Real>::GetMajor() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ellipse3<Real>::GetMajor() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Major;
+    return major;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Ellipse3<Real>::GetMinor() const noexcept
+Mathematics::Vector3<Real> Mathematics::Ellipse3<Real>::GetMinor() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -84,7 +99,7 @@ Real Mathematics::Ellipse3<Real>::GetMajorLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MajorLength;
+    return majorLength;
 }
 
 template <typename Real>
@@ -92,7 +107,7 @@ Real Mathematics::Ellipse3<Real>::GetMinorLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MinorLength;
+    return minorLength;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_ELLIPSE3_ACHIEVE_H

@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::MinBox3<Real>
-	::MinBox3(const std::vector<Vector3D<Real> >& points,Real epsilon, QueryType queryType)
+	::MinBox3(const std::vector<Vector3<Real> >& points,Real epsilon, QueryType queryType)
 {
     // Get the convex hull of the points.
 	ConvexHull3<Real> kHull{ points, epsilon, false, queryType };
@@ -23,7 +23,7 @@ Mathematics::MinBox3<Real>
 
     if (hullDim == 0)
     {
-		mMinBox.Set(points[0], Vector3D<Real>::GetUnitX(), Vector3D<Real>::GetUnitY(), Vector3D<Real>::GetUnitZ(), Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0));
+		mMinBox.Set(points[0], Vector3<Real>::GetUnitX(), Vector3<Real>::GetUnitY(), Vector3<Real>::GetUnitZ(), Math<Real>::GetValue(0), Math<Real>::GetValue(0), Math<Real>::GetValue(0));
        
         return;
     }
@@ -35,17 +35,17 @@ Mathematics::MinBox3<Real>
 
 		auto center = (Real{0.5})*(points[hullIndices[0]] + points[hullIndices[1]]);
 		auto diff = points[hullIndices[1]] - points[hullIndices[0]];
-		auto extent0 = (Real{0.5})*Vector3DTools<Real>::VectorMagnitude(diff);
+		auto extent0 = (Real{0.5})*Vector3Tools<Real>::GetLength(diff);
 		auto extent1 = Math<Real>::GetValue(0);
 		auto extent2 = Math<Real>::GetValue(0);
 
 		diff.Normalize();
 	 
-		auto vector3DOrthonormalBasis = Vector3DTools<Real>::GenerateComplementBasis(diff);
+		auto Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(diff);
 
-		mMinBox.Set(center, vector3DOrthonormalBasis.GetUVector(),
-					vector3DOrthonormalBasis.GetVVector(),
-					vector3DOrthonormalBasis.GetWVector(),
+		mMinBox.Set(center, Vector3OrthonormalBasis.GetUVector(),
+					Vector3OrthonormalBasis.GetVVector(),
+					Vector3OrthonormalBasis.GetWVector(),
 					extent0, extent1, extent2);     
 
         DELETE0(pkHull1);
@@ -53,8 +53,8 @@ Mathematics::MinBox3<Real>
     }
 
     int i, j;
-    Vector3D<Real> origin, diff, U, V, W;
-	std::vector<Vector2D<Real> > points2;
+    Vector3<Real> origin, diff, U, V, W;
+	std::vector<Vector2<Real> > points2;
     Box2<Real> box2;
 
     if (hullDim == 2)
@@ -68,11 +68,11 @@ Mathematics::MinBox3<Real>
 
         // Get a coordinate system relative to the plane of the points.
         origin = kHull.GetPlaneOrigin();
-		W = Vector3DTools<Real>::CrossProduct(kHull.GetPlaneDirection(0),kHull.GetPlaneDirection(1));
+		W = Vector3Tools<Real>::CrossProduct(kHull.GetPlaneDirection(0),kHull.GetPlaneDirection(1));
        
-		auto vector3DOrthonormalBasis = Vector3DTools<Real>::GenerateComplementBasis(W);
-		U = vector3DOrthonormalBasis.GetUVector();
-		V = vector3DOrthonormalBasis.GetVVector(); 
+		auto Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(W);
+		U = Vector3OrthonormalBasis.GetUVector();
+		V = Vector3OrthonormalBasis.GetVVector(); 
 
 		auto numPoints = points.size();
         // Project the input points onto the plane.
@@ -80,8 +80,8 @@ Mathematics::MinBox3<Real>
         for (i = 0; i < numPoints; ++i)
         {
             diff = points[i] - origin;
-			points2[i].SetX(Vector2DTools<Real>::DotProduct(U, diff));
-			points2[i].SetY(Vector2DTools<Real>::DotProduct(V, diff));
+			points2[i].SetX(Vector2Tools<Real>::DotProduct(U, diff));
+			points2[i].SetY(Vector2Tools<Real>::DotProduct(V, diff));
         }
 
         // Compute the minimum area box in 2D.
@@ -102,7 +102,7 @@ Mathematics::MinBox3<Real>
 
 	auto hullQuantity = kHull.GetNumSimplices();
     const int* hullIndices = kHull.GetIndices();
-    Real volume, minVolume = Math<Real>::sm_MaxReal;
+    Real volume, minVolume = Math<Real>::maxReal;
 
     // Create the unique set of hull vertices to minimize the time spent
     // projecting vertices onto planes of the hull faces.
@@ -139,15 +139,15 @@ Mathematics::MinBox3<Real>
         origin = (points[v0] + points[v1] + points[v2])/static_cast<Real>(3.0);
 		auto edge1 = points[v1] - points[v0];
 		auto edge2 = points[v2] - points[v0];
-		W = Vector3DTools<Real>::UnitCrossProduct(edge2,edge1);  // inner-pointing normal
-        if (W == Vector3D<Real>::sm_Zero)
+		W = Vector3Tools<Real>::UnitCrossProduct(edge2,edge1);  // inner-pointing normal
+        if (W == Vector3<Real>::sm_Zero)
         {
             // The triangle is needle-like, so skip it.
             continue;
         }
-		auto vector3DOrthonormalBasis =	Vector3DTools<Real>::GenerateComplementBasis(W);
-		U = vector3DOrthonormalBasis.GetUVector();
-		V = vector3DOrthonormalBasis.GetVVector(); 
+		auto Vector3OrthonormalBasis =	Vector3Tools<Real>::GenerateComplementBasis(W);
+		U = Vector3OrthonormalBasis.GetUVector();
+		V = Vector3OrthonormalBasis.GetVVector(); 
 
         // Project points onto plane of triangle, onto normal line of plane.
         // TO DO.  In theory, minHeight should be zero since W points to the
@@ -165,9 +165,9 @@ Mathematics::MinBox3<Real>
         {
 			auto index = *iter++;
             diff = points[index] - origin;
-			points2[j].SetX(Vector3DTools<Real>::DotProduct(U,diff));
-			points2[j].SetY(Vector3DTools<Real>::DotProduct(V,diff));
-			height = Vector3DTools<Real>::DotProduct(W,diff);
+			points2[j].SetX(Vector3Tools<Real>::DotProduct(U,diff));
+			points2[j].SetY(Vector3Tools<Real>::DotProduct(V,diff));
+			height = Vector3Tools<Real>::DotProduct(W,diff);
             if (height > maxHeight)
             {
                 maxHeight = height;
@@ -221,7 +221,7 @@ Mathematics::MinBox3<Real>
         {
 			V = points[e1iter->GetKey(1)] - points[e1iter->GetKey(0)];
             V.Normalize();
-            Real dot = Vector3DTools<Real>::DotProduct(V,W);
+            Real dot = Vector3Tools<Real>::DotProduct(V,W);
             if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
             {
                 continue;
@@ -232,12 +232,12 @@ Mathematics::MinBox3<Real>
             {
 				U = points[e0iter->GetKey(1)] - points[e0iter->GetKey(0)];
                 U.Normalize();
-				dot = Vector3DTools<Real>::DotProduct(U, V);
+				dot = Vector3Tools<Real>::DotProduct(U, V);
                 if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
                 {
                     continue;
                 }
-				dot = Vector3DTools<Real>::DotProduct(U,W);
+				dot = Vector3Tools<Real>::DotProduct(U,W);
 				if (Math<Real>::FAbs(dot) > Math<Real>::GetZeroTolerance())
                 {
                     continue;
@@ -257,7 +257,7 @@ Mathematics::MinBox3<Real>
 					auto index = *iter++;
                     diff = points[index] - origin;
 
-					auto fU = Vector3DTools<Real>::DotProduct(U,diff);
+					auto fU = Vector3Tools<Real>::DotProduct(U,diff);
                     if (fU < umin)
                     {
                         umin = fU;
@@ -267,7 +267,7 @@ Mathematics::MinBox3<Real>
                         umax = fU;
                     }
 
-					auto fV = Vector3DTools<Real>::DotProduct(V,diff);
+					auto fV = Vector3Tools<Real>::DotProduct(V,diff);
                     if (fV < vmin)
                     {
                         vmin = fV;
@@ -277,7 +277,7 @@ Mathematics::MinBox3<Real>
                         vmax = fV;
                     }
 
-					auto fW = Vector3DTools<Real>::DotProduct(W,diff);
+					auto fW = Vector3Tools<Real>::DotProduct(W,diff);
                     if (fW < wmin)
                     {
                         wmin = fW;

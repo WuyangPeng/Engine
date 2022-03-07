@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 20:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 10:41)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_H
@@ -31,18 +31,18 @@ namespace Network
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] const char* GetInitialBufferedPtr() const noexcept final;
-        [[nodiscard]] char* GetInitialBufferedPtr() noexcept final;
+        NODISCARD const char* GetInitialBufferedPtr() const noexcept final;
+        NODISCARD char* GetInitialBufferedPtr() noexcept final;
 
-        [[nodiscard]] ImplPtr Clone() const final;
+        NODISCARD ImplPtr Clone() const final;
 
-        [[nodiscard]] BuffBlockSize GetBuffBlockSize() const noexcept final;
-        [[nodiscard]] int GetSize() const noexcept final;
+        NODISCARD BuffBlockSize GetBuffBlockSize() const noexcept final;
+        NODISCARD int GetSize() const noexcept final;
 
-        [[nodiscard]] ImplPtr Expansion(int count) const final;
+        NODISCARD ImplPtr Expansion(int count) const final;
 
     private:
-        std::array<char, System::EnumCastUnderlying(buffBlockSize)> m_Buffer;
+        std::array<char, System::EnumCastUnderlying(buffBlockSize)> buffer;
     };
 }
 

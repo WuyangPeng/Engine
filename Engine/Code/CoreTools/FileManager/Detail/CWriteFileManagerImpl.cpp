@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 13:42)
+///	引擎版本：0.8.0.1 (2022/01/09 1:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -29,6 +29,7 @@ CoreTools::CWriteFileManagerImpl::CWriteFileManagerImpl(const String& fileName, 
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::CWriteFileManagerImpl::IsValid() const noexcept
 {
     if (ParentType::IsValid() && InterfaceType::IsValid())
@@ -36,6 +37,7 @@ bool CoreTools::CWriteFileManagerImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int CoreTools::CWriteFileManagerImpl::GetFileByteSize() const
@@ -63,9 +65,13 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
     CORE_TOOLS_ASSERTION_0(0 < itemsNumber && data != nullptr, "数据无效");
 
 #ifdef SYSTEM_BIG_ENDIAN
+
     const auto writeNumber = WriteToFileWithBigEndian(itemSize, itemsNumber, data);
+
 #else  // !SYSTEM_BIG_ENDIAN
+
     const auto writeNumber = WriteToFile(itemSize, itemsNumber, data);
+
 #endif  // SYSTEM_BIG_ENDIAN
 
     if (writeNumber != itemsNumber)
@@ -75,6 +81,7 @@ void CoreTools::CWriteFileManagerImpl::Write(size_t itemSize, size_t itemsNumber
 }
 
 #ifdef SYSTEM_BIG_ENDIAN
+
 // private
 size_t CoreTools::CWriteFileManagerImpl::WriteToFileWithBigEndian(size_t itemSize, size_t itemsNumber, const void* data)
 {

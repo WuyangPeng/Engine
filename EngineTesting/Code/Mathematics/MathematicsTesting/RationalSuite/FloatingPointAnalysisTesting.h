@@ -24,7 +24,7 @@ namespace Mathematics
 		void FloatTypeTest();
 		void DoubleTypeTest();
 	
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

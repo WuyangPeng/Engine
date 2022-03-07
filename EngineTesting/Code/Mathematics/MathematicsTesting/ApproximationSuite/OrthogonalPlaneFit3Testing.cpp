@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:14)
 
 #include "OrthogonalPlaneFit3Testing.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/OrthogonalPlaneFit3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -22,7 +22,10 @@ namespace Mathematics
 	template class OrthogonalPlaneFit3<float>;
 	template class OrthogonalPlaneFit3<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, OrthogonalPlaneFit3Testing) 
 
 void Mathematics::OrthogonalPlaneFit3Testing
@@ -42,17 +45,17 @@ void Mathematics::OrthogonalPlaneFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleOrthogonalPlaneFit3 orthogonalPlaneFit(vertices);
+		OrthogonalPlaneFit3D orthogonalPlaneFit(vertices);
 		 
-		DoubleVector3D origin;
+		Vector3D origin;
 		 
 		for (int i = 0; i < size; i++)
 		{
@@ -70,7 +73,7 @@ void Mathematics::OrthogonalPlaneFit3Testing
 
 		for (int i = 0; i < size; ++i)
 		{
-			DoubleVector3D diff = vertices[i] - origin;
+			Vector3D diff = vertices[i] - origin;
 			sumXX += diff[0] * diff[0];
 			sumXY += diff[0] * diff[1];
 			sumXZ += diff[0] * diff[2];
@@ -86,7 +89,7 @@ void Mathematics::OrthogonalPlaneFit3Testing
 		sumYZ /= static_cast<double>(size);
 		sumZZ /= static_cast<double>(size);
 
-		DoubleEigenDecomposition esystem(3);
+		EigenDecompositionD esystem(3);
 		esystem(0, 0) = sumXX;
 		esystem(0, 1) = sumXY;
 		esystem(0, 2) = sumXZ;
@@ -99,12 +102,12 @@ void Mathematics::OrthogonalPlaneFit3Testing
 	
 		esystem.Solve(false);
 
-		DoubleVector3D normal = esystem.GetEigenvector3(2);
+		Vector3D normal = esystem.GetEigenvector3(2);
 
-		DoublePlane3 plane(normal, origin);
+		Plane3D plane(normal, origin);
 
 		ASSERT_APPROXIMATE(plane.GetConstant(), orthogonalPlaneFit.GetPlane3().GetConstant(), 1e-10);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, plane.GetNormal(), orthogonalPlaneFit.GetPlane3().GetNormal(), 1e-10);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, plane.GetNormal(), orthogonalPlaneFit.GetPlane3().GetNormal(), 1e-10);
 	}
 }
 

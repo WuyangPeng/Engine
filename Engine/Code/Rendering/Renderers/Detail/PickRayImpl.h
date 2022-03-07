@@ -28,18 +28,18 @@ namespace Rendering
 
     public:
         PickRayImpl() noexcept; 
-        PickRayImpl(bool result, const Mathematics::FloatAPoint& origin, const Mathematics::FloatAVector& direction) noexcept;
+        PickRayImpl(bool result, const Mathematics::APointF& origin, const Mathematics::AVectorF& direction) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         bool IsResult() const noexcept;
-        Mathematics::FloatAPoint GetOrigin() const noexcept;
-        Mathematics::FloatAVector GetDirection() const noexcept;
+        Mathematics::APointF GetOrigin() const noexcept;
+        Mathematics::AVectorF GetDirection() const noexcept;
 
     private:
         bool m_Result;
-        Mathematics::FloatAPoint m_Origin;
-        Mathematics::FloatAVector m_Direction; 
+        Mathematics::APointF m_Origin;
+        Mathematics::AVectorF m_Direction; 
     };
 }
 

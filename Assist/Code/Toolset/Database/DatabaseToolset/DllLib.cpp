@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_DATABASE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_DATABASE_STATIC
+#else  // BUILDING_DATABASE_STATIC
 
-	namespace DatabaseToolset
-	{
-		void StaticDllLib()
-		{
+namespace DatabaseToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_DATABASE_STATIC
+#endif  // !BUILDING_DATABASE_STATIC

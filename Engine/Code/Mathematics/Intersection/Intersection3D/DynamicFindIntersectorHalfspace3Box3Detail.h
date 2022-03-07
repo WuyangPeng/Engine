@@ -1,21 +1,137 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/31 16:39)
+///	引擎版本：0.8.0.3 (2022/02/28 11:18)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H
 
 #include "DynamicFindIntersectorHalfspace3Box3.h"
+#include "FindIntersectorAxisDetail.h"
+#include "TestIntersectorAxisDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Intersection/Intersection3D/IntersectorUtility3Detail.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_ACHIEVE)
+template <typename Real>
+Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box, Real tmax, const Vector3& lhsVelocity, const Vector3& rhsVelocity, const Real epsilon)
+    : ParentType{ tmax, lhsVelocity, rhsVelocity, epsilon }, halfspace{ halfspace }, box{ box }, point{}
+{
+    Find();
 
-    #include "DynamicFindIntersectorHalfspace3Box3Achieve.h"
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
 
-#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_ACHIEVE)
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::GetHalfspace() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return halfspace;
+}
+
+template <typename Real>
+Mathematics::Box3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::GetBox() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return box;
+}
+
+template <typename Real>
+int Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::GetQuantity() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return boost::numeric_cast<int>(point.size());
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::GetPoint(int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    return point.at(index);
+}
+
+template <typename Real>
+void Mathematics::DynamicFindIntersectorHalfspace3Box3<Real>::Find()
+{
+    this->SetContactTime(Math::GetValue(0));
+
+    auto relVelocity = this->GetRhsVelocity() - this->GetLhsVelocity();
+
+    const auto cfg = FindIntersectorAxis<Real>::GetConfiguration(halfspace.GetNormal(), box);
+    const TestIntersectorAxis<Real> testIntersectorAxis{ halfspace.GetNormal(), relVelocity, -Math::maxReal, halfspace.GetConstant(), cfg.GetMin(), cfg.GetMax(), this->GetTMax() };
+
+    auto contactTime = testIntersectorAxis.GetTFirst();
+
+    if (!testIntersectorAxis.GetResult())
+    {
+        // 永不相交。
+        this->SetContactTime(contactTime);
+        this->SetIntersectionType(IntersectionType::Empty);
+        return;
+    }
+
+    if (Math::Approximate(contactTime, Math::GetValue(0)))
+    {
+        // 现在相交。
+        this->SetContactTime(contactTime);
+        this->SetIntersectionType(IntersectionType::Empty);
+        return;
+    }
+
+    Container container{};
+
+    // 正面上的方框（右）。
+    if (cfg.GetMap() == VertexProjectionMap::M1_1)
+    {
+        // 点相交。
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
+    }
+    else if (cfg.GetMap() == VertexProjectionMap::M2_2)
+    {
+        // 线段相交。
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(1), box));
+    }
+    else  // cfg.mMap == VertexProjectionMap::M44
+    {
+        // 面相交
+
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(0), box));
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(1), box));
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(2), box));
+        container.emplace_back(IntersectorUtility3<Real>::GetPointFromIndex(cfg.GetIndex(3), box));
+    }
+
+    // 将点也及时调整到正确的位置。
+    auto diff = contactTime * this->GetRhsVelocity();
+    for (auto& value : container)
+    {
+        value += diff;
+    }
+
+    point = container;
+    this->SetContactTime(contactTime);
+    this->SetIntersectionType(IntersectionType::Other);
+}
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_DETAIL_H

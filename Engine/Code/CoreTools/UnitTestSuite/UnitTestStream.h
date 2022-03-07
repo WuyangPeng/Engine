@@ -30,9 +30,9 @@ namespace CoreTools
         virtual ~UnitTestStream() = default;
 
         UnitTestStream(const UnitTestStream& rhs) = delete;
-        virtual UnitTestStream& operator=(const UnitTestStream& rhs) = delete;
+        UnitTestStream& operator=(const UnitTestStream& rhs) = delete;
         UnitTestStream(UnitTestStream&& rhs) noexcept;
-        virtual UnitTestStream& operator=(UnitTestStream&& rhs) noexcept;
+        UnitTestStream& operator=(UnitTestStream&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

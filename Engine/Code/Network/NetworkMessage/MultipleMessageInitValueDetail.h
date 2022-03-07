@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 19:12)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_INIT_VALUE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_INIT_VALUE_DETAIL_H
@@ -15,8 +15,8 @@
 
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 template <typename T, typename... OtherT>
-Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainer& container, T value, OtherT... otherValues)
-    : ParentType{ container, otherValues... }
+Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::MultipleMessageInitValue(MultipleMessageContainer& container, T value, OtherT&&... otherValues)
+    : ParentType{ container, std::forward<OtherT>(otherValues)... }
 {
     container.SetValue<MultipleMessageSize<MultipleMessageContainer>::value - Index>(value);
 
@@ -24,11 +24,13 @@ Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, By
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int Index, typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>
 bool Network::MultipleMessageInitValue<Index, Network::MultipleMessageContainer<E, ByteType, Types...>>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, Network::MultipleMessageByteType ByteType, Network::MultipleMessageByteType... Types>

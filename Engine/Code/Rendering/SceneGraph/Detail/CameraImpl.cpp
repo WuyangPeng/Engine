@@ -11,9 +11,9 @@
 #include "Mathematics/Algebra/MatrixDetail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox2DDetail.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
 #include "CoreTools/ObjectSystems/BufferSourceDetail.h"
 #include "CoreTools/ObjectSystems/BufferTargetDetail.h"
 #include "CoreTools/Helper/Assertion/RenderingCustomAssertMacro.h"
@@ -300,10 +300,10 @@ const Rendering::CameraImpl::AxesAlignBoundingBox2D Rendering::CameraImpl
 const	auto worldViewProjectionMatrix = viewProjectionMatrix * worldMatrix;
 
     // 计算正则化的包围盒矩形显示坐标。
-	auto xmin = Mathematics::FloatMath::sm_MaxReal;
-	auto xmax = -Mathematics::FloatMath::sm_MaxReal;
-	auto ymin = Mathematics::FloatMath::sm_MaxReal;
-	auto ymax = -Mathematics::FloatMath::sm_MaxReal;
+	auto xmin = Mathematics::MathF::maxReal;
+	auto xmax = -Mathematics::MathF::maxReal;
+	auto ymin = Mathematics::MathF::maxReal;
+	auto ymax = -Mathematics::MathF::maxReal;
     for (auto i = 0; i < numVertices; ++i)
     {
 		auto vertex = reinterpret_cast<const float*>(vertices);

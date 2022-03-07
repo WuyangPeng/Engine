@@ -13,14 +13,8 @@
 #include "Mathematics/Intersection/Intersector1Detail.h"
 
 template <typename Real>
-Mathematics::Intersector1Test<Real>::Intersector1Test(Real u0, Real u1, Real v0, Real v1)
+Mathematics::Intersector1Test<Real>::Intersector1Test(Real u0, Real u1, Real v0, Real v1) noexcept
     : ParentType{ u0, u1, v0, v1 }
-{
-    MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}
-
-template <typename Real>
-Mathematics::Intersector1Test<Real>::~Intersector1Test()
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -37,7 +31,7 @@ bool Mathematics::Intersector1Test<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Intersector1Test<Real>::IsIntersection() const
+bool Mathematics::Intersector1Test<Real>::IsIntersection() const noexcept
 {
     return false;
 }

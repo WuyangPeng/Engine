@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 10:17)
+///	引擎版本：0.8.0.2 (2022/02/15 11:27)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H
@@ -17,24 +17,26 @@
 
 template <typename Real>
 Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixConstIterator() noexcept
-    : m_Iter{}
+    : iter{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixConstIterator(const SparseMatrixConstIter& iter) noexcept
-    : m_Iter{ iter }
+    : iter{ iter }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::SparseMatrixConstIterator<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -42,15 +44,15 @@ void Mathematics::SparseMatrixConstIterator<Real>::increment() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    ++m_Iter;
+    ++iter;
 }
 
 template <typename Real>
-bool Mathematics::SparseMatrixConstIterator<Real>::equal(const SparseMatrixConstIterator& other) const noexcept
+bool Mathematics::SparseMatrixConstIterator<Real>::equal(const SparseMatrixConstIterator& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter == other.m_Iter;
+    return iter == rhs.iter;
 }
 
 template <typename Real>
@@ -59,23 +61,23 @@ typename const Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixConstIt
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter;
+    return iter;
 }
 
 template <typename Real>
-const typename Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixKey Mathematics::SparseMatrixConstIterator<Real>::GetKey() const noexcept
+typename Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixKey Mathematics::SparseMatrixConstIterator<Real>::GetKey() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter->first;
+    return iter->first;
 }
 
 template <typename Real>
-const typename Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixMapped Mathematics::SparseMatrixConstIterator<Real>::GetMapped() const noexcept
+typename Mathematics::SparseMatrixConstIterator<Real>::SparseMatrixMapped Mathematics::SparseMatrixConstIterator<Real>::GetMapped() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter->second;
+    return iter->second;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_DETAIL_H

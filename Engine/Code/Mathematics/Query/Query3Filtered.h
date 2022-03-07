@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:23)
+///	引擎版本：0.8.0.2 (2022/02/17 16:38)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_FILTERED_H
 #define MATHEMATICS_QUERY_QUERY3_FILTERED_H
@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = Query3Filtered<Real>;
         using ParentType = Query3<Real>;
         using Math = typename ParentType::Math;
-        using Vector3D = typename ParentType::Vector3D;
+        using Vector3 = typename ParentType::Vector3;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -38,26 +38,26 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] QueryType GetType() const noexcept override;
+        NODISCARD QueryType GetType() const noexcept override;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
-        [[nodiscard]] PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
-        [[nodiscard]] PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
+        NODISCARD PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
+        NODISCARD PlaneQueryType ToPlane(const Vector3& testVector, int v0, int v1, int v2) const override;
 
-        [[nodiscard]] CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
-        [[nodiscard]] CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
+        NODISCARD CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
+        NODISCARD CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const override;
 
     private:
         using Query3Rational = Query3Rational<Real>;
 
     private:
-        Query3Rational m_RationalQuery;
-        Real m_Uncertainty;
+        Query3Rational rationalQuery;
+        Real uncertainty;
     };
 
-    using FloatQuery3Filtered = Query3Filtered<float>;
-    using DoubleQuery3Filtered = Query3Filtered<double>;
+    using Query3FilteredF = Query3Filtered<float>;
+    using Query3FilteredD = Query3Filtered<double>;
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY3_FILTERED_H

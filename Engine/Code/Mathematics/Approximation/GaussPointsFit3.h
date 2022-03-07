@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 14:03)
+///	引擎版本：0.8.0.2 (2022/02/18 14:04)
 
 #ifndef MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_H
 #define MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_H
@@ -22,13 +22,13 @@ namespace Mathematics
     // 而扩展是协方差矩阵的特征值和并以递增的顺序返回。
     // 数量存储在Box3<Real>仅仅有一个单一的容器中。
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GaussPointsFit3 final
+    class GaussPointsFit3 final
     {
     public:
         using ClassType = GaussPointsFit3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
-        using PointsType = std::vector<Vector3D>;
+        using PointsType = std::vector<Vector3>;
         using Math = Math<Real>;
 
     public:
@@ -36,17 +36,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Box3 GetBox3() const noexcept;
+        NODISCARD Box3 GetBox3() const noexcept;
 
     private:
-        [[nodiscard]] static Box3 Calculate(const PointsType& points);
+        NODISCARD static Box3 Calculate(const PointsType& points);
 
     private:
-        Box3 m_Box;
+        Box3 box;
     };
 
-    using FloatGaussPointsFit3 = GaussPointsFit3<float>;
-    using DoubleGaussPointsFit3d = GaussPointsFit3<double>;
+    using GaussPointsFit3F = GaussPointsFit3<float>;
+    using GaussPointsFit3D = GaussPointsFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GAUSS_POINTS_FIT3_H

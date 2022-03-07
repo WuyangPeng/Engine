@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 14:29)
+///	引擎版本：0.8.0.2 (2022/02/18 15:47)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -27,8 +27,8 @@ namespace Mathematics
     {
     public:
         using ClassType = GreatArcFit3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using Points = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using Points = std::vector<Vector3>;
         using Math = Math<Real>;
 
     public:
@@ -36,21 +36,21 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetNormal() const noexcept;
-        [[nodiscard]] const Vector3D GetArcEnd0() const noexcept;
-        [[nodiscard]] const Vector3D GetArcEnd1() const noexcept;
+        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3 GetArcEnd0() const noexcept;
+        NODISCARD Vector3 GetArcEnd1() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Vector3D m_Normal;
-        Vector3D m_ArcEnd0;
-        Vector3D m_ArcEnd1;
+        Vector3 normal;
+        Vector3 arcEnd0;
+        Vector3 arcEnd1;
     };
 
-    using FloatGreatArcFit3 = GreatArcFit3<float>;
-    using DoubleGreatArcFit3 = GreatArcFit3<double>;
+    using GreatArcFit3F = GreatArcFit3<float>;
+    using GreatArcFit3D = GreatArcFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_H

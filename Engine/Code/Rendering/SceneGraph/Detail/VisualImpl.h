@@ -43,7 +43,7 @@ namespace Rendering
         using ObjectRegister = CoreTools::ObjectRegister;
         using ObjectLink = CoreTools::ObjectLink;
         using Object = CoreTools::Object;
-        using APoint = Mathematics::FloatAPoint;
+        using APoint = Mathematics::APointF;
 
     public:
         explicit VisualImpl(VisualPrimitiveType type = VisualPrimitiveType::None);

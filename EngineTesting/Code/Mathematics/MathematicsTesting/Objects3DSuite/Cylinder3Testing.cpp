@@ -6,7 +6,7 @@
 
 #include "Cylinder3Testing.h"
 #include "Mathematics/Objects3D/Cylinder3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -28,34 +28,40 @@ void Mathematics::Cylinder3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(CylinderTest);
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 
 void Mathematics::Cylinder3Testing
 	::CylinderTest()
 {
 	default_random_engine generator{};
 	uniform_real<double> firstRandomDistribution{ 0.0,100.0 };
-	uniform_real<double> secondRandomDistribution(0.0, DoubleMath::GetHalfPI()); 
+	uniform_real<double> secondRandomDistribution(0.0, MathD::GetHalfPI()); 
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D origin(firstRandomDistribution(generator), firstRandomDistribution(generator),  firstRandomDistribution(generator));
+		Vector3D origin(firstRandomDistribution(generator), firstRandomDistribution(generator),  firstRandomDistribution(generator));
 
-		DoubleVector3D direction(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector3D direction(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		direction.Normalize();
 
-		DoubleLine3 line(origin,direction);
+		Line3D line(origin,direction);
 
-		double radius(DoubleMath::FAbs(secondRandomDistribution(generator)));
+		double radius(MathD::FAbs(secondRandomDistribution(generator)));
 
-		double height(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double height(MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleCylinder3 cylinder3(line,radius,height);
+		Cylinder3D cylinder3(line,radius,height);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(cylinder3.GetAxis().GetOrigin(),origin));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(cylinder3.GetAxis().GetDirection(),direction));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(cylinder3.GetAxis().GetOrigin(),origin));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(cylinder3.GetAxis().GetDirection(),direction));
 		ASSERT_APPROXIMATE(cylinder3.GetRadius(),radius,1e-10);
 		ASSERT_APPROXIMATE(cylinder3.GetHeight(),height,1e-10);		
 	}

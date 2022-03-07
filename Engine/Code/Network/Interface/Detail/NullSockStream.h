@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 15:07)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_NULL_SOCK_STREAM_H
@@ -27,18 +27,18 @@ namespace Network
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) noexcept final;
-        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) noexcept final;
+        NODISCARD int Send(const MessageBufferSharedPtr& messageBuffer) noexcept final;
+        NODISCARD int Receive(const MessageBufferSharedPtr& messageBuffer) noexcept final;
 
         void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) final;
         void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) noexcept final;
 
-        [[nodiscard]] bool CloseHandle() noexcept final;
+        NODISCARD bool CloseHandle() noexcept final;
 
-        [[nodiscard]] bool EnableNonBlock() noexcept final;
+        NODISCARD bool EnableNonBlock() noexcept final;
 
-        [[nodiscard]] const std::string GetRemoteAddress() const noexcept final;
-        [[nodiscard]] int GetRemotePort() const noexcept final;
+        NODISCARD std::string GetRemoteAddress() const noexcept final;
+        NODISCARD int GetRemotePort() const noexcept final;
     };
 }
 

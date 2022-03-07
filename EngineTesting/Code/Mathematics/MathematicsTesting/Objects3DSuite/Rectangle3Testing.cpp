@@ -7,7 +7,7 @@
 #include "Rectangle3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Rectangle3Detail.h"
 
 #include <random>
@@ -21,7 +21,12 @@ namespace Mathematics
     template class Rectangle3<float>;
     template class Rectangle3<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Rectangle3Testing)
 
 void Mathematics::Rectangle3Testing ::MainTest()
@@ -39,47 +44,47 @@ void Mathematics::Rectangle3Testing ::RectangleTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D center(firstRandomDistribution(generator),
+        Vector3D center(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
-        DoubleVector3D axis0(firstRandomDistribution(generator),
+        Vector3D axis0(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
 
-        DoubleVector3D axis1(firstRandomDistribution(generator),
+        Vector3D axis1(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
 
-        double extent0 = DoubleVector3DTools::VectorMagnitude(axis0);
-        double extent1 = DoubleVector3DTools::VectorMagnitude(axis1);
+        double extent0 = Vector3ToolsD::GetLength(axis0);
+        double extent1 = Vector3ToolsD::GetLength(axis1);
 
         axis0.Normalize();
         axis1.Normalize();
 
-        DoubleRectangle3 rectangle(center, axis0, axis1, extent0, extent1);
+        Rectangle3D rectangle(center, axis0, axis1, extent0, extent1);
 
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(center, rectangle.GetCenter()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(axis0, rectangle.GetAxis0()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(axis1, rectangle.GetAxis1()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(center, rectangle.GetCenter()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(axis0, rectangle.GetAxis0()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(axis1, rectangle.GetAxis1()));
         ASSERT_APPROXIMATE(extent0, rectangle.GetExtent0(), 1e-10);
         ASSERT_APPROXIMATE(extent1, rectangle.GetExtent1(), 1e-10);
 
-        vector<DoubleVector3D> vertices = rectangle.ComputeVertices();
+        vector<Vector3D> vertices = rectangle.ComputeVertices();
 
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(vertices[0], rectangle.GetMMCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(vertices[1], rectangle.GetPMCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(vertices[2], rectangle.GetPPCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(vertices[3], rectangle.GetMPCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertices[0], rectangle.GetMMCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertices[1], rectangle.GetPMCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertices[2], rectangle.GetPPCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(vertices[3], rectangle.GetMPCorner()));
 
-        DoubleVector3D ppCorner = center + extent0 * axis0 + extent1 * axis1;
-        DoubleVector3D pmCorner = center + extent0 * axis0 - extent1 * axis1;
-        DoubleVector3D mpCorner = center - extent0 * axis0 + extent1 * axis1;
-        DoubleVector3D mmCorner = center - extent0 * axis0 - extent1 * axis1;
+        Vector3D ppCorner = center + extent0 * axis0 + extent1 * axis1;
+        Vector3D pmCorner = center + extent0 * axis0 - extent1 * axis1;
+        Vector3D mpCorner = center - extent0 * axis0 + extent1 * axis1;
+        Vector3D mmCorner = center - extent0 * axis0 - extent1 * axis1;
 
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(mmCorner, rectangle.GetMMCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(pmCorner, rectangle.GetPMCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(ppCorner, rectangle.GetPPCorner()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(mpCorner, rectangle.GetMPCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(mmCorner, rectangle.GetMMCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(pmCorner, rectangle.GetPMCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(ppCorner, rectangle.GetPPCorner()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(mpCorner, rectangle.GetMPCorner()));
     }
 }

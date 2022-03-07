@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 20:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 10:47)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_CONTAINER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_EVENT_CONTAINER_IMPL_H
@@ -26,10 +26,10 @@ namespace Network
     public:
         MessageEventContainerImpl() noexcept;
         virtual ~MessageEventContainerImpl() noexcept = default;
-        MessageEventContainerImpl(const MessageEventContainerImpl&) = default;
-        virtual MessageEventContainerImpl& operator=(const MessageEventContainerImpl&) = default;
-        MessageEventContainerImpl(MessageEventContainerImpl&&) noexcept = default;
-        virtual MessageEventContainerImpl& operator=(MessageEventContainerImpl&&) noexcept = default;
+        MessageEventContainerImpl(const MessageEventContainerImpl& rhs) = default;
+        MessageEventContainerImpl& operator=(const MessageEventContainerImpl& rhs) = default;
+        MessageEventContainerImpl(MessageEventContainerImpl&& rhs) noexcept = default;
+        MessageEventContainerImpl& operator=(MessageEventContainerImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
@@ -39,14 +39,14 @@ namespace Network
 
         virtual void OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message) = 0;
 
-        [[nodiscard]] virtual ImplPtr Clone() const = 0;
-        [[nodiscard]] virtual ImplPtr CloneToMultiMessage() const = 0;
-        [[nodiscard]] virtual ImplPtr CloneToPriorityMessage() const = 0;
+        NODISCARD virtual ImplPtr Clone() const = 0;
+        NODISCARD virtual ImplPtr CloneToMultiMessage() const = 0;
+        NODISCARD virtual ImplPtr CloneToPriorityMessage() const = 0;
 
-        [[nodiscard]] virtual bool IsCanInsert() const = 0;
-        [[nodiscard]] virtual bool IsPrioritySame(MessageEventPriority priority) const = 0;
+        NODISCARD virtual bool IsCanInsert() const = 0;
+        NODISCARD virtual bool IsPrioritySame(MessageEventPriority priority) const = 0;
 
-        static ImplPtr Create();
+        NODISCARD static ImplPtr Create();
     };
 }
 

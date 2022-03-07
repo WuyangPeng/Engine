@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/23 18:13)
+///	引擎版本：0.8.0.2 (2022/02/14 14:56)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_H
@@ -36,45 +36,45 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const BrentsMethodRoot GetRoot() noexcept;
+        NODISCARD BrentsMethodRoot GetRoot() noexcept;
 
     private:
         void Calculate();
-        [[nodiscard]] bool IsBeginSatisfyConditions() const noexcept;
-        [[nodiscard]] bool IsEndSatisfyConditions() const noexcept;
+        NODISCARD bool IsBeginSatisfyConditions() const noexcept;
+        NODISCARD bool IsEndSatisfyConditions() const noexcept;
         void Search();
         void SwapBeginEnd() noexcept;
         void InitSearchValue() noexcept;
-        [[nodiscard]] bool RootSearch();
-        [[nodiscard]] bool IsConvXTolerance() const noexcept;
+        NODISCARD bool RootSearch();
+        NODISCARD bool IsConvXTolerance() const noexcept;
         void UpdateFunctionDifference() noexcept;
         void InverseQuadratic() noexcept;
         void InverseLinear() noexcept;
         void AcceptOrRejectTests() noexcept;
-        [[nodiscard]] bool IsSolutionSatisfyConditions() const noexcept;
+        NODISCARD bool IsSolutionSatisfyConditions() const noexcept;
         void UpdateSubinterval() noexcept;
 
     private:
-        const BrentsMethod& m_BrentsMethod;
-        Real m_Begin;
-        Real m_End;
-        Real m_BeginFunction;
-        Real m_EndFunction;
+        const BrentsMethod& brentsMethod;
+        Real begin;
+        Real end;
+        Real beginFunction;
+        Real endFunction;
 
-        BrentsMethodRoot m_Bisect2Root;
+        BrentsMethodRoot bisect2Root;
 
         // 根搜索的值。
-        Real m_SearchBegin;
-        Real m_SearchEnd;
-        Real m_SearchFunction;
-        bool m_PreviousBisected;
+        Real searchBegin;
+        Real searchEnd;
+        Real searchFunction;
+        bool previousBisected;
 
-        Real m_BeginEndFunctionDifference;
-        Real m_BeginSearchFunctionDifference;
-        Real m_EndSearchFunctionDifference;
+        Real beginEndFunctionDifference;
+        Real beginSearchFunctionDifference;
+        Real endSearchFunctionDifference;
 
-        Real m_Solution;
-        Real m_SolutionFunction;
+        Real solution;
+        Real solutionFunction;
     };
 }
 

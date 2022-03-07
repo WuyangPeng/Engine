@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/24 17:51)
+///	引擎版本：0.8.0.2 (2022/02/13 14:26)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_H
@@ -16,6 +16,7 @@
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Base/MathDetail.h"
+
 #include <complex>
 #include <vector>
 
@@ -28,29 +29,33 @@ namespace Mathematics
     public:
         PERFORMANCE_UNSHARED_TYPE_DECLARE(Equation);
         using Imaginary = std::complex<double>;
-        using ImaginaryVector = std::vector<Imaginary>;
-        using RealVector = std::vector<double>;
-        using ImaginaryResultConstIter = ImaginaryVector::const_iterator;
-        using RealResultConstIter = RealVector::const_iterator;
+        using ImaginaryContainer = std::vector<Imaginary>;
+        using RealContainer = std::vector<double>;
+        using ImaginaryResultConstIter = ImaginaryContainer::const_iterator;
+        using RealResultConstIter = RealContainer::const_iterator;
         using RealConstIterator = EquationResultConstIterator<RealResultConstIter>;
         using ImaginaryConstIterator = EquationResultConstIterator<ImaginaryResultConstIter>;
 
     public:
-        explicit Equation(double constant, double once, double secondary = 0.0,
-                          double thrice = 0.0, double quartic = 0.0, double epsilon = DoubleMath::GetZeroTolerance());
+        explicit Equation(double constant,
+                          double once,
+                          double secondary = 0.0,
+                          double thrice = 0.0,
+                          double quartic = 0.0,
+                          double epsilon = MathD::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsRealResult() const noexcept;
-        [[nodiscard]] double Substitution(double value) const;
-        [[nodiscard]] const Imaginary Substitution(const Imaginary& value) const;
-        [[nodiscard]] int GetRealResultCount() const;
-        [[nodiscard]] int GetImaginaryResultCount() const;
+        NODISCARD bool IsRealResult() const noexcept;
+        NODISCARD double Substitution(double value) const;
+        NODISCARD Imaginary Substitution(const Imaginary& value) const;
+        NODISCARD int GetRealResultCount() const;
+        NODISCARD int GetImaginaryResultCount() const;
 
-        [[nodiscard]] const RealConstIterator GetRealBegin() const noexcept;
-        [[nodiscard]] const RealConstIterator GetRealEnd() const noexcept;
-        [[nodiscard]] const ImaginaryConstIterator GetImaginaryBegin() const noexcept;
-        [[nodiscard]] const ImaginaryConstIterator GetImaginaryEnd() const noexcept;
+        NODISCARD RealConstIterator GetRealBegin() const noexcept;
+        NODISCARD RealConstIterator GetRealEnd() const noexcept;
+        NODISCARD ImaginaryConstIterator GetImaginaryBegin() const noexcept;
+        NODISCARD ImaginaryConstIterator GetImaginaryEnd() const noexcept;
 
     private:
         PackageType impl;

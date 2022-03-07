@@ -28,7 +28,7 @@ namespace Physics
 	void ExtremalQuery3PRJ<Real>::GetExtremeVertices(const ExtremalQuery3<Real>::Vector3D& direction, int& positiveDirection,int& negativeDirection)
 	{
 		typename ExtremalQuery3<Real>::Vector3D diff = mPolytope->GetVertex(0) - ExtremalQuery3<Real>::mCentroid;
-		Real minValue = Mathematics::Vector3DTools<Real>::DotProduct(direction, diff);
+		Real minValue = Mathematics::Vector3Tools<Real>::DotProduct(direction, diff);
 		Real maxValue = minValue;
 		negativeDirection = 0;
 		positiveDirection = 0;
@@ -37,7 +37,7 @@ namespace Physics
 		for (int i = 1; i < numVertices; ++i)
 		{
 			diff = mPolytope->GetVertex(i) - mCentroid;
-			Real dot = Mathematics::Vector3DTools<Real>::DotProduct(direction, diff);
+			Real dot = Mathematics::Vector3Tools<Real>::DotProduct(direction, diff);
 			if (dot < minValue)
 			{
 				negativeDirection = i;

@@ -1,16 +1,16 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/10 10:11)
+///	引擎版本：0.8.0.3 (2022/02/21 15:58)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_LINE3_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_LINE3_DETAIL_H
 
-#include "DistancePoint3Line3.h" 
+#include "DistancePoint3Line3.h"
 
 #if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_LINE3_ACHIEVE)
 
@@ -18,4 +18,4 @@
 
 #endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_DISTANCE_POINT3_LINE3_ACHIEVE)
 
-#endif // MATHEMATICS_DISTANCE_DISTANCE_POINT3_LINE3_DETAIL_H
+#endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_LINE3_DETAIL_H

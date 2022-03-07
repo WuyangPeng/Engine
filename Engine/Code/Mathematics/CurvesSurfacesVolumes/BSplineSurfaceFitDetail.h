@@ -13,7 +13,7 @@ namespace Mathematics
 {
 
 template <typename Real>
-BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int numSamples0, int degree1, int numControls1, int numSamples1, Vector3D<Real>** samples)
+BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int numSamples0, int degree1, int numControls1, int numSamples1, Vector3<Real>** samples)
 {
     MATHEMATICS_ASSERTION_0(1 <= degree0 && degree0 + 1 < numControls0, "Invalid input\n");
     MATHEMATICS_ASSERTION_0(numControls0 <= numSamples0, "Invalid input\n");
@@ -27,7 +27,7 @@ BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int n
     mNumSamples[1] = numSamples1;
     mNumControls[1] = numControls1;
     mSamples = samples;
-   // mControls = NEW2<Vector3D<Real> >(numControls0, numControls1);
+   // mControls = NEW2<Vector3<Real> >(numControls0, numControls1);
 
     // The double-precision basis functions are used to help with the
     // numerical round-off errors.
@@ -127,7 +127,7 @@ BSplineSurfaceFit<Real>::BSplineSurfaceFit (int degree0, int numControls0, int n
     {
         for (i0 = 0; i0 < mNumControls[0]; ++i0)
         {
-            Vector3D<Real> sum = Vector3D<Real>::sm_Zero;
+            Vector3<Real> sum = Vector3<Real>::sm_Zero;
             for (auto j1 = 0; j1 < mNumSamples[1]; ++j1)
             {
 				auto x1Value = (Real)ATMat[1][i1][j1];
@@ -164,7 +164,7 @@ int BSplineSurfaceFit<Real>::GetSampleQuantity (int i) const
 }
 
 template <typename Real>
-Vector3D<Real>** BSplineSurfaceFit<Real>::GetSamplePoints () const
+Vector3<Real>** BSplineSurfaceFit<Real>::GetSamplePoints () const
 {
     return mSamples;
 }
@@ -182,7 +182,7 @@ int BSplineSurfaceFit<Real>::GetControlQuantity (int i) const
 }
 
 template <typename Real>
-Vector3D<Real>** BSplineSurfaceFit<Real>::GetControlPoints () const
+Vector3<Real>** BSplineSurfaceFit<Real>::GetControlPoints () const
 {
     return mControls;
 }
@@ -194,13 +194,13 @@ const BSplineFitBasis<Real>& BSplineSurfaceFit<Real>::GetBasis (int i) const
 }
 
 template <typename Real>
-Vector3D<Real> BSplineSurfaceFit<Real>::GetPosition (Real u, Real v) const
+Vector3<Real> BSplineSurfaceFit<Real>::GetPosition (Real u, Real v) const
 {
     int iumin, iumax, ivmin, ivmax;
     mBasis[0]->Compute(u, iumin, iumax);
     mBasis[1]->Compute(v, ivmin, ivmax);
 
-	auto pos = Vector3D<Real>::sm_Zero;
+	auto pos = Vector3<Real>::sm_Zero;
     for (int iv = ivmin, j = 0; iv <= ivmax; ++iv, ++j)
     {
 		auto value1 = mBasis[1]->GetValue(j);

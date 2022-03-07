@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 13:31)
+///	引擎版本：0.8.0.3 (2022/03/02 23:45)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_H
@@ -14,32 +14,19 @@
 
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects3D/Tetrahedron3.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class StaticFindIntersectorTetrahedron3Tetrahedron3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<StaticFindIntersectorTetrahedron3Tetrahedron3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTetrahedron3Tetrahedron3 : public StaticIntersector<Real, Vector3D>
+    class StaticFindIntersectorTetrahedron3Tetrahedron3 : public StaticIntersector<Real, Vector3>
     {
     public:
-        using StaticFindIntersectorTetrahedron3Tetrahedron3Impl = StaticFindIntersectorTetrahedron3Tetrahedron3Impl<Real>;
-        
-        TYPE_DECLARE(StaticFindIntersectorTetrahedron3Tetrahedron3);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ClassType = StaticFindIntersectorTetrahedron3Tetrahedron3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Tetrahedron3 = Tetrahedron3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using IntersectionContainer = std::vector<Tetrahedron3>;
 
@@ -48,22 +35,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Tetrahedron3 GetTetrahedron0() const noexcept;
-        [[nodiscard]] const Tetrahedron3 GetTetrahedron1() const noexcept;
+        NODISCARD Tetrahedron3 GetTetrahedron0() const noexcept;
+        NODISCARD Tetrahedron3 GetTetrahedron1() const noexcept;
 
-        [[nodiscard]] const IntersectionContainer GetIntersection() const;
+        NODISCARD IntersectionContainer GetIntersection() const;
 
     private:
         void Find();
 
-        static IntersectionContainer SplitAndDecompose(const Tetrahedron3& tetra, const Plane3& plane, const IntersectionContainer& inside);
+        NODISCARD static IntersectionContainer SplitAndDecompose(const Tetrahedron3& tetra, const Plane3& plane, const IntersectionContainer& inside);
 
     private:
-        PackageType impl;
-    };
+        Tetrahedron3 tetrahedron0;
+        Tetrahedron3 tetrahedron1;
 
-    using FloatStaticFindIntersectorTetrahedron3Tetrahedron3 = StaticFindIntersectorTetrahedron3Tetrahedron3<float>;
-    using DoubleStaticFindIntersectorTetrahedron3Tetrahedron3 = StaticFindIntersectorTetrahedron3Tetrahedron3<double>;
+        IntersectionContainer intersectionContainer;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRAHEDRON3_TETRAHEDRON3_H

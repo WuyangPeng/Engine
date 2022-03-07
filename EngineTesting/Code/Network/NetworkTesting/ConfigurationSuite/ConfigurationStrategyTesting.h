@@ -23,7 +23,7 @@ namespace Network
 		void ServerTest();
 		void ClientTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

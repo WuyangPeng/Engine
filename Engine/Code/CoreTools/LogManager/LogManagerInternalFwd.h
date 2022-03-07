@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 9:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 21:43)
 
 #ifndef CORE_TOOLS_LOG_LOG_MANAGER_INTERNAL_FWD_H
 #define CORE_TOOLS_LOG_LOG_MANAGER_INTERNAL_FWD_H
@@ -14,8 +14,11 @@
 
 namespace CoreTools
 {
+    class AppenderFactory;
+    class LogConsoleTextColorsManagerFactory;
+
     class AppenderImpl;
-    class LogConsoleTextColorsManagerImpl; 
+    class LogConsoleTextColorsManagerImpl;
 }
 
 #endif  // CORE_TOOLS_LOG_LOG_MANAGER_INTERNAL_FWD_H

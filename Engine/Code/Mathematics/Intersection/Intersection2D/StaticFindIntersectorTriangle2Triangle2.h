@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/18 10:39)
+///	引擎版本：0.8.0.3 (2022/02/23 15:24)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
@@ -15,58 +15,47 @@
 #include "Mathematics/Intersection/Intersector1.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Triangle2.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class FindIntersectorTriangle2Triangle2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorTriangle2Triangle2 : public StaticIntersector<Real, Vector2D>
+    class StaticFindIntersectorTriangle2Triangle2 : public StaticIntersector<Real, Vector2>
     {
     public:
-        using StaticFindIntersectorTriangle2Triangle2Impl = FindIntersectorTriangle2Triangle2Impl<Real>;
-       
-        TYPE_DECLARE(StaticFindIntersectorTriangle2Triangle2);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using ParentType = StaticIntersector<Real, Vector2D>;
+        using ClassType = StaticFindIntersectorTriangle2Triangle2<Real>;
+        using ParentType = StaticIntersector<Real, Vector2>;
         using Math = typename ParentType::Math;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
 
     public:
         StaticFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Triangle2 GetTriangle0() const noexcept;
-        [[nodiscard]] const Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2 GetTriangle0() const noexcept;
+        NODISCARD Triangle2 GetTriangle1() const noexcept;
 
-        [[nodiscard]] int GetQuantity() const;
-        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const;
+        NODISCARD Vector2 GetPoint(int index) const;
 
     private:
-        using Intersection = std::vector<Vector2D>;
+        using Intersection = std::vector<Vector2>;
 
     private:
         void Find();
 
-        static Intersection ClipConvexPolygonAgainstLine(const Vector2D& axis, Real dot, const Intersection& intersection);
+        static Intersection ClipConvexPolygonAgainstLine(const Vector2& axis, Real dot, const Intersection& intersection);
 
     private:
-        PackageType impl;
-    };
+        // 要相交的对象。
+        Triangle2 triangle0;
+        Triangle2 triangle1;
 
-    using FloatStaticFindIntersectorTriangle2Triangle2 = StaticFindIntersectorTriangle2Triangle2<float>;
-    using DoubleStaticFindIntersectorTriangle2Triangle2 = StaticFindIntersectorTriangle2Triangle2<double>;
+        // 有关交集的信息。
+        Intersection point;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H

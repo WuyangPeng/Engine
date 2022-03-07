@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 11:32)
+///	引擎版本：0.8.0.1 (2022/01/08 23:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -58,6 +58,7 @@ void CoreTools::CFileManagerImpl::Close() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::CFileManagerImpl::IsValid() const noexcept
 {
     if (file != nullptr)
@@ -65,6 +66,7 @@ bool CoreTools::CFileManagerImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 size_t CoreTools::CFileManagerImpl::ReadFromFile(size_t itemSize, size_t itemsNumber, void* data)

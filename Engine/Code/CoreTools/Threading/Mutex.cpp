@@ -32,7 +32,10 @@ CoreTools::Mutex& CoreTools::Mutex::operator=(Mutex&& rhs) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    ParentType::operator=(std::move(rhs));
+    if (this != &rhs)
+    {
+        ParentType::operator=(std::move(rhs));
+    }
 
     return *this;
 }

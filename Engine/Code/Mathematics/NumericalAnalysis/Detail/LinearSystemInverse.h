@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/25 15:44)
+///	引擎版本：0.8.0.2 (2022/02/17 12:00)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_H
@@ -40,9 +40,9 @@ namespace Mathematics
         //     matrix[iSize][iSize], 项是 matrix[row][col]
         // 输出:
         //     求逆矩阵失败抛出异常，否则返回逆矩阵。
-        [[nodiscard]] const VariableMatrix GetInverse() const;
+        NODISCARD VariableMatrix GetInverse() const;
 
-        [[nodiscard]] const RealContainer GetResult() const;
+        NODISCARD RealContainer GetResult() const;
 
     private:
         using IndexContainer = std::vector<int>;
@@ -61,16 +61,16 @@ namespace Mathematics
 
     private:
         // 线性系统求解容差。
-        Real m_ZeroTolerance;  // 默认 = Math::GetZeroTolerance()
-        VariableMatrix m_Inverse;
-        int m_Size;
-        IndexContainer m_ColumnsIndex;
-        IndexContainer m_RowIndex;
-        PivotedType m_Pivoted;
-        int m_CurrentRow;
-        int m_CurrentColumn;
-        Real m_CurrentMaxValue;
-        RealContainer m_Output;
+        Real zeroTolerance;  // 默认 = Math::GetZeroTolerance()
+        VariableMatrix inverse;
+        int size;
+        IndexContainer columnsIndex;
+        IndexContainer rowIndex;
+        PivotedType pivoted;
+        int currentRow;
+        int currentColumn;
+        Real currentMaxValue;
+        RealContainer output;
     };
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 13:53)
 
 #include "Network/NetworkExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 Network::ConfigurationSubStrategyImpl::ConfigurationSubStrategyImpl() noexcept
-    : m_Container{}
+    : container{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -25,18 +25,18 @@ bool Network::ConfigurationSubStrategyImpl::IsExist(WrappersSubStrategy wrappers
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Container.find(wrappersSubStrategy);
+    const auto iter = container.find(wrappersSubStrategy);
 
-    return iter != m_Container.cend();
+    return iter != container.cend();
 }
 
 int Network::ConfigurationSubStrategyImpl::GetValue(WrappersSubStrategy wrappersSubStrategy) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Container.find(wrappersSubStrategy);
+    const auto iter = container.find(wrappersSubStrategy);
 
-    if (iter != m_Container.cend())
+    if (iter != container.cend())
     {
         return iter->second;
     }
@@ -50,5 +50,5 @@ void Network::ConfigurationSubStrategyImpl::Insert(WrappersSubStrategy wrappersS
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_Container.insert({ wrappersSubStrategy, value });
+    container.insert({ wrappersSubStrategy, value });
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 13:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 17:03)
 
 #include "Network/NetworkExport.h"
 
@@ -39,28 +39,28 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(Network, SockStream, GetRemotePort, int)
 
 int Network::SockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     return impl->Send(messageBuffer);
 }
 
 int Network::SockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     return impl->Receive(messageBuffer);
 }
 
 void Network::SockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     return impl->AsyncSend(eventInterface, messageBuffer);
 }
 
 void Network::SockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     return impl->AsyncReceive(eventInterface, messageBuffer);
 }

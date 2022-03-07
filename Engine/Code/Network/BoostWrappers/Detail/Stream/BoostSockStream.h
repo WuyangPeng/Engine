@@ -1,17 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 16:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 19:22)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_STREAM_H
 
 #include "Network/NetworkDll.h"
 
+#include "CoreTools/Contract/ContractFwd.h"
 #include "Network/Interface/Detail/SockStreamImpl.h"
 
 namespace Network
@@ -23,7 +24,7 @@ namespace Network
         using ParentType = SockStreamImpl;
 
     public:
-        BoostSockStream();
+        explicit BoostSockStream(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
         ~BoostSockStream() noexcept = 0;
         BoostSockStream(const BoostSockStream& rhs) = default;
         BoostSockStream& operator=(const BoostSockStream& rhs) = default;
@@ -32,20 +33,20 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] BoostSockStreamType& GetBoostSockStream() noexcept override;
+        NODISCARD BoostSockStreamType& GetBoostSockStream() noexcept override;
 
-        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) override;
+        NODISCARD int Send(const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-        [[nodiscard]] bool CloseHandle() override;
+        NODISCARD bool CloseHandle() override;
 
-        [[nodiscard]] bool EnableNonBlock() override;
+        NODISCARD bool EnableNonBlock() override;
 
-        [[nodiscard]] const std::string GetRemoteAddress() const override;
-        [[nodiscard]] int GetRemotePort() const override;
+        NODISCARD std::string GetRemoteAddress() const override;
+        NODISCARD int GetRemotePort() const override;
 
     protected:
-        [[nodiscard]] int HandleReceive(const MessageBufferSharedPtr& messageBuffer);
+        NODISCARD int HandleReceive(const MessageBufferSharedPtr& messageBuffer);
         void HandleAsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex);
 
     private:
@@ -55,7 +56,7 @@ namespace Network
         virtual void SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex) = 0;
 
     private:
-        BoostSockStreamType m_Socket;
+        BoostSockStreamType socket;
     };
 }
 

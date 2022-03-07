@@ -92,7 +92,7 @@ void System::LookupPrivilegeTesting::GetLookupPrivilegeTest()
         String resultLookupPrivilegeName{ buffer.data() };
 
         ASSERT_EQUAL(size, resultLookupPrivilegeName.size());
-        ASSERT_EQUAL_DO_NOT_USE_MESSAGE(resultLookupPrivilegeName, lookupPrivilegeName);
+        ASSERT_EQUAL(resultLookupPrivilegeName, lookupPrivilegeName);
 
         buffer.fill(TChar{ '\0' });
 

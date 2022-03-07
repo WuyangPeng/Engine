@@ -6,7 +6,7 @@
 
 #include "Tetrahedron3Testing.h"
 #include "Mathematics/Objects3D/Tetrahedron3Detail.h"
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -21,7 +21,12 @@ namespace Mathematics
 	template class Tetrahedron3<float>;
 	template class Tetrahedron3<double>;
 }
- 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Tetrahedron3Testing) 
 
 void Mathematics::Tetrahedron3Testing
@@ -41,43 +46,43 @@ void Mathematics::Tetrahedron3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D firstPoint(firstRandomDistribution(generator),
+		Vector3D firstPoint(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
-							 -DoubleMath::FAbs(firstRandomDistribution(generator)));
+							 -MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleVector3D secondPoint(DoubleMath::FAbs(firstRandomDistribution(generator)),
-			                  -DoubleMath::FAbs(firstRandomDistribution(generator)),
+		Vector3D secondPoint(MathD::FAbs(firstRandomDistribution(generator)),
+			                  -MathD::FAbs(firstRandomDistribution(generator)),
 							  0.0);
 
-		DoubleVector3D thirdPoint(firstRandomDistribution(generator),
-			                 DoubleMath::FAbs(firstRandomDistribution(generator)),
+		Vector3D thirdPoint(firstRandomDistribution(generator),
+			                 MathD::FAbs(firstRandomDistribution(generator)),
 							 0.0);
 
-		DoubleVector3D fourthPoint(-DoubleMath::FAbs(firstRandomDistribution(generator)),
-			                  -DoubleMath::FAbs(firstRandomDistribution(generator)),
+		Vector3D fourthPoint(-MathD::FAbs(firstRandomDistribution(generator)),
+			                  -MathD::FAbs(firstRandomDistribution(generator)),
 							  0.0);
 
-		DoubleTetrahedron3 tetrahedron(firstPoint,secondPoint,thirdPoint,fourthPoint);
+		Tetrahedron3D tetrahedron(firstPoint,secondPoint,thirdPoint,fourthPoint);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(tetrahedron.GetVertex(0),firstPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(tetrahedron.GetVertex(1),secondPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(tetrahedron.GetVertex(2),thirdPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(tetrahedron.GetVertex(3),fourthPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(0),firstPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(1),secondPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(2),thirdPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(tetrahedron.GetVertex(3),fourthPoint));
 
-		vector<DoubleVector3D> vector3DdVector;
-		vector3DdVector.push_back(firstPoint);
-		vector3DdVector.push_back(secondPoint);
-		vector3DdVector.push_back(thirdPoint);
-		vector3DdVector.push_back(fourthPoint);
+		vector<Vector3D> Vector3dVector;
+		Vector3dVector.push_back(firstPoint);
+		Vector3dVector.push_back(secondPoint);
+		Vector3dVector.push_back(thirdPoint);
+		Vector3dVector.push_back(fourthPoint);
 
-		DoubleTetrahedron3 secondTetrahedron(vector3DdVector);
+		Tetrahedron3D secondTetrahedron(Vector3dVector);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondTetrahedron.GetVertex(0),firstPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondTetrahedron.GetVertex(1),secondPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondTetrahedron.GetVertex(2),thirdPoint));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondTetrahedron.GetVertex(3),fourthPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(0),firstPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(1),secondPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(2),thirdPoint));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondTetrahedron.GetVertex(3),fourthPoint));
 	
-	    vector<int> faceIndices = DoubleTetrahedron3::GetFaceIndices(0);
+	    vector<int> faceIndices = Tetrahedron3D::GetFaceIndices(0);
 
 		ASSERT_EQUAL(faceIndices.size(),3u);
 
@@ -85,7 +90,7 @@ void Mathematics::Tetrahedron3Testing
 		ASSERT_EQUAL(faceIndices[1],2);
 		ASSERT_EQUAL(faceIndices[2],1);
 
-		faceIndices = DoubleTetrahedron3::GetFaceIndices(1);
+		faceIndices = Tetrahedron3D::GetFaceIndices(1);
 
 		ASSERT_EQUAL(faceIndices.size(),3u);
 
@@ -93,7 +98,7 @@ void Mathematics::Tetrahedron3Testing
 		ASSERT_EQUAL(faceIndices[1],1);
 		ASSERT_EQUAL(faceIndices[2],3);
 
-		faceIndices = DoubleTetrahedron3::GetFaceIndices(2);
+		faceIndices = Tetrahedron3D::GetFaceIndices(2);
 
 		ASSERT_EQUAL(faceIndices.size(),3u);
 
@@ -101,7 +106,7 @@ void Mathematics::Tetrahedron3Testing
 		ASSERT_EQUAL(faceIndices[1],3);
 		ASSERT_EQUAL(faceIndices[2],2);
 
-		faceIndices = DoubleTetrahedron3::GetFaceIndices(3);
+		faceIndices = Tetrahedron3D::GetFaceIndices(3);
 
 		ASSERT_EQUAL(faceIndices.size(),3u);
 
@@ -109,8 +114,8 @@ void Mathematics::Tetrahedron3Testing
 		ASSERT_EQUAL(faceIndices[1],2);
 		ASSERT_EQUAL(faceIndices[2],3);
 
-		vector<DoublePlane3> firstPlaneVector = secondTetrahedron.GetPlanes();
-		vector<DoublePlane3> secondPlaneVector = tetrahedron.GetPlanes();
+		vector<Plane3D> firstPlaneVector = secondTetrahedron.GetPlanes();
+		vector<Plane3D> secondPlaneVector = tetrahedron.GetPlanes();
 
 		ASSERT_EQUAL(firstPlaneVector.size(),4u);
 		ASSERT_EQUAL(secondPlaneVector.size(),4u);
@@ -118,10 +123,10 @@ void Mathematics::Tetrahedron3Testing
 		for(int m = 0; m < 4;++m)
 		{
 			ASSERT_APPROXIMATE(firstPlaneVector[m].GetConstant(), secondPlaneVector[m].GetConstant(), 1e-10);
-			ASSERT_TRUE(DoubleVector3DTools::Approximate(firstPlaneVector[m].GetNormal(), secondPlaneVector[m].GetNormal()));
+			ASSERT_TRUE(Vector3ToolsD::Approximate(firstPlaneVector[m].GetNormal(), secondPlaneVector[m].GetNormal()));
 
 
-			faceIndices = DoubleTetrahedron3::GetFaceIndices(m);
+			faceIndices = Tetrahedron3D::GetFaceIndices(m);
 
 			ASSERT_ENUM_EQUAL(firstPlaneVector[m].WhichSide  (tetrahedron.GetVertex(faceIndices[0])), NumericalValueSymbol::Zero);
 

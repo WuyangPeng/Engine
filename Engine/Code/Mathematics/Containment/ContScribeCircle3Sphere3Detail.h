@@ -12,13 +12,13 @@
 
 template <typename Real>
 bool Mathematics
-	::Circumscribe(const Vector3D<Real>& v0, const Vector3D<Real>& v1, const Vector3D<Real>& v2, Circle3<Real>& circle)
+	::Circumscribe(const Vector3<Real>& v0, const Vector3<Real>& v1, const Vector3<Real>& v2, Circle3<Real>& circle)
 {
     auto E02 = v0 - v2;
 	auto E12 = v1 - v2;
-	auto e02e02 = Vector3DTools<Real>::DotProduct(E02,E02);
-	auto e02e12 = Vector3DTools<Real>::DotProduct(E02,E12);
-	auto e12e12 = Vector3DTools<Real>::DotProduct(E12,E12);
+	auto e02e02 = Vector3Tools<Real>::DotProduct(E02,E02);
+	auto e02e12 = Vector3Tools<Real>::DotProduct(E02,E12);
+	auto e12e12 = Vector3Tools<Real>::DotProduct(E12,E12);
 	auto det = e02e02*e12e12 - e02e12*e02e12;
     if (Math<Real>::FAbs(det) < Math<Real>::GetZeroTolerance())
     {
@@ -31,10 +31,10 @@ bool Mathematics
 	auto tmp = u0*E02 + u1*E12;
 
 	auto center = v2 + tmp;
-	auto radius = Vector3DTools<Real>::VectorMagnitude(tmp);
+	auto radius = Vector3Tools<Real>::GetLength(tmp);
 
-	auto normal = Vector3DTools<Real>::UnitCrossProduct(E02, E12);
-	Vector3D<Real> direction0;
+	auto normal = Vector3Tools<Real>::UnitCrossProduct(E02, E12);
+	Vector3<Real> direction0;
 
 	if (Math<Real>::FAbs(normal.GetX()) >= Math<Real>::FAbs(normal.GetY())&& Math<Real>::FAbs(normal.GetX()) >= Math<Real>::FAbs(normal.GetZ()))
     {
@@ -51,7 +51,7 @@ bool Mathematics
     }
 
 	direction0.Normalize();
-	auto direction1 = Vector3DTools<Real>::CrossProduct(normal, direction0);
+	auto direction1 = Vector3Tools<Real>::CrossProduct(normal, direction0);
 
 	circle = Circle3<Real>{ center, direction0, direction1, normal, radius };
 
@@ -60,7 +60,7 @@ bool Mathematics
 
 template <typename Real>
 bool Mathematics
-	::Circumscribe(const Vector3D<Real>& v0, const Vector3D<Real>& v1,const Vector3D<Real>& v2, const Vector3D<Real>& v3,Sphere3<Real>& sphere)
+	::Circumscribe(const Vector3<Real>& v0, const Vector3<Real>& v1,const Vector3<Real>& v2, const Vector3<Real>& v3,Sphere3<Real>& sphere)
 {
 	auto E10 = v1 - v0;
 	auto E20 = v2 - v0;
@@ -75,17 +75,17 @@ bool Mathematics
 
     Real B[3] 
     {
-		(Real{0.5})*Vector3DTools<Real>::VectorMagnitudeSquared(E10),
-		(Real{0.5})*Vector3DTools<Real>::VectorMagnitudeSquared(E20),
-		(Real{0.5})*Vector3DTools<Real>::VectorMagnitudeSquared(E30)
+		(Real{0.5})*Vector3Tools<Real>::GetLengthSquared(E10),
+		(Real{0.5})*Vector3Tools<Real>::GetLengthSquared(E20),
+		(Real{0.5})*Vector3Tools<Real>::GetLengthSquared(E30)
     };
 
-    Vector3D<Real> solution;
+    Vector3<Real> solution;
 	try
 	{
 		LinearSystem<Real>().Solve3(A, B, (Real*)&solution);
 	
-		sphere.SetSphere(v0 + solution, Vector3DTools<Real>::VectorMagnitude(solution));
+		sphere.SetSphere(v0 + solution, Vector3Tools<Real>::GetLength(solution));
 
 		return true;
 	}
@@ -97,7 +97,7 @@ bool Mathematics
 
 template <typename Real>
 bool Mathematics
-	::Inscribe(const Vector3D<Real>& v0, const Vector3D<Real>& v1, const Vector3D<Real>& v2, Circle3<Real>& circle)
+	::Inscribe(const Vector3<Real>& v0, const Vector3<Real>& v1, const Vector3<Real>& v2, Circle3<Real>& circle)
 {
     // Edges.
 	auto E0 = v1 - v0;
@@ -105,26 +105,26 @@ bool Mathematics
 	auto E2 = v0 - v2;
 
     // Plane normal.
-	auto normal = Vector3DTools<Real>::CrossProduct(E1, E0);
+	auto normal = Vector3Tools<Real>::CrossProduct(E1, E0);
 
     // Edge normals within the plane.
-	auto N0 = Vector3DTools<Real>::UnitCrossProduct(normal,E0);
-	auto N1 = Vector3DTools<Real>::UnitCrossProduct(normal, E1);
-	auto N2 = Vector3DTools<Real>::UnitCrossProduct(normal, E2);
+	auto N0 = Vector3Tools<Real>::UnitCrossProduct(normal,E0);
+	auto N1 = Vector3Tools<Real>::UnitCrossProduct(normal, E1);
+	auto N2 = Vector3Tools<Real>::UnitCrossProduct(normal, E2);
 
-	auto a0 = Vector3DTools<Real>::DotProduct(N1,E0);
+	auto a0 = Vector3Tools<Real>::DotProduct(N1,E0);
     if (Math<Real>::FAbs(a0) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 
-	auto a1 = Vector3DTools<Real>::DotProduct(N2,E1);
+	auto a1 = Vector3Tools<Real>::DotProduct(N2,E1);
 	if (Math<Real>::FAbs(a1) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 
-	auto a2 = Vector3DTools<Real>::DotProduct(N0,E2);
+	auto a2 = Vector3Tools<Real>::DotProduct(N0,E2);
 	if (Math<Real>::FAbs(a2) < Math<Real>::GetZeroTolerance())
     {
         return false;
@@ -139,7 +139,7 @@ bool Mathematics
 
 	normal.Normalize();
 	auto direction0 = N0;
-	auto direction1 = Vector3DTools<Real>::CrossProduct(normal, direction0);
+	auto direction1 = Vector3Tools<Real>::CrossProduct(normal, direction0);
 
 	circle = Circle3<Real>{ center, direction0, direction1, normal, radius };
 
@@ -148,7 +148,7 @@ bool Mathematics
 
 template <typename Real>
 bool Mathematics
-	::Inscribe(const Vector3D<Real>& v0, const Vector3D<Real>& v1,  const Vector3D<Real>& v2, const Vector3D<Real>& v3, Sphere3<Real>& sphere)
+	::Inscribe(const Vector3<Real>& v0, const Vector3<Real>& v1,  const Vector3<Real>& v2, const Vector3<Real>& v3, Sphere3<Real>& sphere)
 {
     // Edges.
 	auto E10 = v1 - v0;
@@ -158,28 +158,28 @@ bool Mathematics
 	auto E31 = v3 - v1;
 
     // Normals.
-	auto N0 = Vector3DTools<Real>::CrossProduct(E31,E21);
-	auto N1 = Vector3DTools<Real>::CrossProduct(E20,E30);
-	auto N2 = Vector3DTools<Real>::CrossProduct(E30,E10);
-	auto N3 = Vector3DTools<Real>::CrossProduct(E10,E20);
+	auto N0 = Vector3Tools<Real>::CrossProduct(E31,E21);
+	auto N1 = Vector3Tools<Real>::CrossProduct(E20,E30);
+	auto N2 = Vector3Tools<Real>::CrossProduct(E30,E10);
+	auto N3 = Vector3Tools<Real>::CrossProduct(E10,E20);
 
     // Normalize the normals.
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N0)) < Math<Real>::GetZeroTolerance())
+	if (Math<Real>::FAbs(Vector3Tools<Real>::GetLength(N0)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N0.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N1)) < Math<Real>::GetZeroTolerance())
+	if (Math<Real>::FAbs(Vector3Tools<Real>::GetLength(N1)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N1.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N2)) < Math<Real>::GetZeroTolerance())
+	if (Math<Real>::FAbs(Vector3Tools<Real>::GetLength(N2)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
 	N2.Normalize();
-	if (Math<Real>::FAbs(Vector3DTools<Real>::VectorMagnitude(N3)) < Math<Real>::GetZeroTolerance())
+	if (Math<Real>::FAbs(Vector3Tools<Real>::GetLength(N3)) < Math<Real>::GetZeroTolerance())
     {
         return false;
     }
@@ -196,15 +196,15 @@ bool Mathematics
     {
         Math<Real>::GetValue(0),
         Math<Real>::GetValue(0),
-		-Vector3DTools<Real>::DotProduct(N3,E30)
+		-Vector3Tools<Real>::DotProduct(N3,E30)
     };
 
-    Vector3D<Real> solution;
+    Vector3<Real> solution;
 
 	try
 	{
 		LinearSystem<Real>().Solve3(A, B, (Real*)&solution);
-		sphere.SetSphere(v3 + solution, Math<Real>::FAbs(Vector3DTools<Real>::DotProduct(N0, solution)));
+		sphere.SetSphere(v3 + solution, Math<Real>::FAbs(Vector3Tools<Real>::DotProduct(N0, solution)));
 
 		return true;
 	}

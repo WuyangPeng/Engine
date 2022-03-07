@@ -1,17 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 17:15)
 
 #include "Network/NetworkExport.h"
 
 #include "BaseMainManagerFactory.h"
 #include "BaseMainManagerImpl.h"
 #include "NullMainManager.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/ACEWrappers/Detail/BaseMainManager/ACEMainManager.h"
 #include "Network/BoostWrappers/Detail/BaseMainManager/BoostMainManager.h"
@@ -31,7 +32,7 @@ Network::BaseMainManagerFactory::BaseMainManagerFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, BaseMainManagerFactory)
 
 // static
-const Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
@@ -54,21 +55,21 @@ const Network::BaseMainManagerFactory::ImplTypePtr Network::BaseMainManagerFacto
             }
             else
             {
-                return make_shared<BoostMainManager>();
+                return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
             }
         }
 
         case WrappersStrategy::Network:
-            return make_shared<NetworkMainManager>();
+            return make_shared<NetworkMainManager>(CoreTools::DisableNotThrow::Disable);
 
         case WrappersStrategy::Socket:
-            return make_shared<BoostMainManager>();
+            return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
 
         case WrappersStrategy::Null:
             return make_shared<NullMainManager>();
 
         case WrappersStrategy::Default:
         default:
-            return make_shared<BoostMainManager>();
+            return make_shared<BoostMainManager>(CoreTools::DisableNotThrow::Disable);
     }
 }

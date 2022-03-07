@@ -71,7 +71,7 @@ void CoreTools::CommandLineInformationTesting ::MainCommandLineInformationSuccee
     ASSERT_EQUAL(excessArguments, "fileName");
     ASSERT_EQUAL(commandLineInformation.GetFileName(), "filename");
 
-    commandLineInformation.SetFileNmaeUsed();
+    commandLineInformation.SetFileNameUsed();
 
     count = commandLineInformation.GetExcessArgumentsCount();
 
@@ -142,7 +142,7 @@ void CoreTools::CommandLineInformationTesting ::WinMainCommandLineInformationSuc
     ASSERT_EQUAL(excessArguments, "fileName");
     ASSERT_EQUAL(commandLineInformation.GetFileName(), "filename");
 
-    commandLineInformation.SetFileNmaeUsed();
+    commandLineInformation.SetFileNameUsed();
 
     count = commandLineInformation.GetExcessArgumentsCount();
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 19:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 17:43)
 
 #include "Network/NetworkExport.h"
 
@@ -40,16 +40,20 @@ bool Network::NetworkSockConnector::Connect(const SockStreamSharedPtr& sockStrea
     else
         return false;
 }
+#include STSTEM_WARNING_POP
 
-void Network::NetworkSockConnector::AsyncConnect([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+void Network::NetworkSockConnector::AsyncConnect(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress)
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    [[maybe_unused]] const auto result = System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInetAddress());
+    MAYBE_UNUSED const auto result = System::Connect(sockStream->GetNetworkSockStream(), &sockAddress->GetWinSockInetAddress());
 }
 #include STSTEM_WARNING_POP
 
-const Network::NetworkSockConnector::SockConnectorPtr Network::NetworkSockConnector::Clone() const
+Network::NetworkSockConnector::SockConnectorSharedPtr Network::NetworkSockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

@@ -14,7 +14,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BSplineBasis
+    class  BSplineBasis
     {
     public:
         using Math = Math<Real>;

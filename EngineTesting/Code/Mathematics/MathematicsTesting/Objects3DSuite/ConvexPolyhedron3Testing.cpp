@@ -25,13 +25,18 @@ UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConvexPolyhedron3Testing)
 void Mathematics::ConvexPolyhedron3Testing
 	::MainTest()
 {
-	CoreTools::SmartPointerManager::Create();
+	//CoreTools::SmartPointerManager::Create();
 
 	ASSERT_NOT_THROW_EXCEPTION_0(ConvexPolyhedronTest);
 
-	CoreTools::SmartPointerManager::Destroy();
+	//CoreTools::SmartPointerManager::Destroy();
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::ConvexPolyhedron3Testing
 	::ConvexPolyhedronTest()
 {
@@ -47,34 +52,34 @@ void Mathematics::ConvexPolyhedron3Testing
 // 		double positive = firstRandomDistribution(generator);
 // 		double negative = secondRandomDistribution(generator);
 // 
-// 		DoubleVector3D firstVector(positive,negative,positive);
+// 		DoubleVector3 firstVector(positive,negative,positive);
 // 
-// 		DoubleVector3D secondVector(positive,negative,negative);
+// 		DoubleVector3 secondVector(positive,negative,negative);
 // 
-// 		DoubleVector3D thirdVector(positive,positive,negative);
+// 		DoubleVector3 thirdVector(positive,positive,negative);
 // 
-// 		DoubleVector3D fourthVector(positive,positive, positive);
+// 		DoubleVector3 fourthVector(positive,positive, positive);
 // 
-// 		DoubleVector3D fifthVector(negative,negative,positive);
+// 		DoubleVector3 fifthVector(negative,negative,positive);
 // 
-// 		DoubleVector3D sixthVector(negative,negative,negative);
+// 		DoubleVector3 sixthVector(negative,negative,negative);
 // 
-// 		DoubleVector3D seventhVector(negative,positive,negative);
+// 		DoubleVector3 seventhVector(negative,positive,negative);
 // 
-// 		DoubleVector3D eighthVector(negative,positive,positive);
+// 		DoubleVector3 eighthVector(negative,positive,positive);
 // 
 // 		constexpr int numVertices = 8;
 
-// 		Polyhedron3d::Vector3DPtr vector3DPtr(NEW1<DoubleVector3D>(numVertices));
+// 		Polyhedron3d::Vector3Ptr Vector3Ptr(NEW1<DoubleVector3>(numVertices));
 // 
-// 		vector3DPtr[0] = firstVector;
-// 		vector3DPtr[1] = secondVector;
-// 		vector3DPtr[2] = thirdVector;
-// 		vector3DPtr[3] = fourthVector;
-// 		vector3DPtr[4] = fifthVector;
-// 		vector3DPtr[5] = sixthVector;
-// 		vector3DPtr[6] = seventhVector;
-// 		vector3DPtr[7] = eighthVector;
+// 		Vector3Ptr[0] = firstVector;
+// 		Vector3Ptr[1] = secondVector;
+// 		Vector3Ptr[2] = thirdVector;
+// 		Vector3Ptr[3] = fourthVector;
+// 		Vector3Ptr[4] = fifthVector;
+// 		Vector3Ptr[5] = sixthVector;
+// 		Vector3Ptr[6] = seventhVector;
+// 		Vector3Ptr[7] = eighthVector;
 // 
 // 		const int numTriangles = 12;
 // 
@@ -128,15 +133,15 @@ void Mathematics::ConvexPolyhedron3Testing
 // 		intPtr[34] = 0;
 // 		intPtr[35] = 4;
 // 		
-// 		ConvexPolyhedron3d polyhedron(numVertices,vector3DPtr,numTriangles,intPtr,nullptr);
+// 		ConvexPolyhedron3d polyhedron(numVertices,Vector3Ptr,numTriangles,intPtr,nullptr);
 // 
 // 		ASSERT_EQUAL(numVertices,polyhedron.GetNumVertices());
-// 		ASSERT_EQUAL(vector3DPtr,polyhedron.GetVertices());
+// 		ASSERT_EQUAL(Vector3Ptr,polyhedron.GetVertices());
 // 		
 // 		for(int k = 0;k < numVertices;++k)
 // 		{
 // 			// 比较地址相同
-// 			ASSERT_EQUAL(&(vector3DPtr[k]),&(polyhedron.GetVertex(k)));
+// 			ASSERT_EQUAL(&(Vector3Ptr[k]),&(polyhedron.GetVertex(k)));
 // 		}
 // 
 // 		ASSERT_EQUAL(numTriangles,polyhedron.GetNumTriangles());
@@ -150,7 +155,7 @@ void Mathematics::ConvexPolyhedron3Testing
 // 			ASSERT_EQUAL(&(intPtr[k * 3]),polyhedron.GetTriangle(k));
 // 		}
 //  
-// 		DoubleVector3D ninthVector(negative,negative,negative);
+// 		DoubleVector3 ninthVector(negative,negative,negative);
 // 
 // 		ASSERT_FALSE(polyhedron.IsUpdatePlanes());
 // 		polyhedron.SetVertex(5,ninthVector);
@@ -158,18 +163,18 @@ void Mathematics::ConvexPolyhedron3Testing
 // 		polyhedron.UpdatePlanes();	
 // 		ASSERT_FALSE(polyhedron.IsUpdatePlanes());
 // 
-// 		ASSERT_TRUE(DoubleVector3DTools::Approximate(ninthVector,polyhedron.GetVertex(5)));
+// 		ASSERT_TRUE(DoubleVector3Tools::Approximate(ninthVector,polyhedron.GetVertex(5)));
 // 
-// 		// vector3DPtr的值也被SetVertex修改了
-// 		DoubleVector3D average = vector3DPtr[0];
+// 		// Vector3Ptr的值也被SetVertex修改了
+// 		DoubleVector3 average = Vector3Ptr[0];
 // 		for (int m = 1; m < numVertices; ++m)
 // 		{
-// 			average += vector3DPtr[m];
+// 			average += Vector3Ptr[m];
 // 		}		
 // 
 // 		average /= static_cast<double>(numVertices);
 // 
-// 		ASSERT_TRUE(DoubleVector3DTools::Approximate(average,polyhedron.ComputeVertexAverage()));
+// 		ASSERT_TRUE(DoubleVector3Tools::Approximate(average,polyhedron.ComputeVertexAverage()));
 // 
 // 		double surfaceArea = 0.0;
 // 		double volume = 0.0;
@@ -179,11 +184,11 @@ void Mathematics::ConvexPolyhedron3Testing
 // 			int v0 = intPtr[k * 3];
 // 			int v1 = intPtr[k * 3 + 1];
 // 			int v2 = intPtr[k * 3 + 2];
-// 			DoubleVector3D edge0 = vector3DPtr[v1] - vector3DPtr[v0];
-// 			DoubleVector3D edge1 = vector3DPtr[v2] - vector3DPtr[v0];
-// 			DoubleVector3D cross = DoubleVector3DTools::CrossProduct(edge0,edge1);
-// 			surfaceArea += DoubleVector3DTools::VectorMagnitude(cross);
-// 			volume += DoubleVector3DTools::DotProduct(vector3DPtr[v0],cross);
+// 			DoubleVector3 edge0 = Vector3Ptr[v1] - Vector3Ptr[v0];
+// 			DoubleVector3 edge1 = Vector3Ptr[v2] - Vector3Ptr[v0];
+// 			DoubleVector3 cross = DoubleVector3Tools::CrossProduct(edge0,edge1);
+// 			surfaceArea += DoubleVector3Tools::VectorMagnitude(cross);
+// 			volume += DoubleVector3Tools::DotProduct(Vector3Ptr[v0],cross);
 // 		}
 // 
 // 		surfaceArea *= 0.5;
@@ -198,7 +203,7 @@ void Mathematics::ConvexPolyhedron3Testing
 // 
 // 		for(int k = 0;k < 2;++k)
 // 		{
-// 			DoubleVector3D point(thirdRandomDistribution(generator),
+// 			DoubleVector3 point(thirdRandomDistribution(generator),
 // 				            thirdRandomDistribution(generator),
 // 							thirdRandomDistribution(generator));
 // 

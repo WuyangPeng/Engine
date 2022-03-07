@@ -12,11 +12,11 @@
 
 template <typename Real>
 Mathematics::ContEllipsoid3MinCR<Real>
-	::ContEllipsoid3MinCR (int numPoints,const Vector3D<Real>* points, const Vector3D<Real>& C,const Matrix3<Real>& R, Real D[3])
+	::ContEllipsoid3MinCR (int numPoints,const Vector3<Real>* points, const Vector3<Real>& C,const Matrix3<Real>& R, Real D[3])
 {
     // Compute the constraint coefficients, of the form (A[0],A[1]) for
     // each i.
-    std::vector<Vector3D<Real> > A(numPoints);
+    std::vector<Vector3<Real> > A(numPoints);
     for (auto i = 0; i < numPoints; ++i)
     {
 		auto diff = points[i] - C;  // P[i] - C
@@ -35,7 +35,7 @@ Mathematics::ContEllipsoid3MinCR<Real>
 
 template <typename Real>
 void Mathematics::ContEllipsoid3MinCR<Real>
-	::FindEdgeMax (std::vector<Vector3D<Real> >& A,int& plane0, int& plane1, Real D[3])
+	::FindEdgeMax (std::vector<Vector3<Real> >& A,int& plane0, int& plane1, Real D[3])
 {
     // Compute direction to local maximum point on line of intersection.
 	auto xDir = A[plane0][1]*A[plane1][2] - A[plane1][1]*A[plane0][2];
@@ -66,7 +66,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     }
     else if (a0 != Math<Real>::GetValue(0))
     {
-        tFinal = (a0 >= Math<Real>::GetValue(0) ? Math<Real>::sm_MaxReal : -Math<Real>::sm_MaxReal);
+        tFinal = (a0 >= Math<Real>::GetValue(0) ? Math<Real>::maxReal : -Math<Real>::maxReal);
     }
     else
     {
@@ -143,7 +143,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
 template <typename Real>
 void Mathematics::ContEllipsoid3MinCR<Real>
-	::FindFacetMax (std::vector<Vector3D<Real> >& A,int& plane0, Real D[3])
+	::FindFacetMax (std::vector<Vector3<Real> >& A,int& plane0, Real D[3])
 {
     Real tFinal, xDir, yDir, zDir;
 
@@ -163,7 +163,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
     }
     else
     {
-        tFinal = Math<Real>::sm_MaxReal;
+        tFinal = Math<Real>::maxReal;
 
 		if (A[plane0][0] > Math<Real>::GetZeroTolerance())
         {
@@ -254,7 +254,7 @@ void Mathematics::ContEllipsoid3MinCR<Real>
 
 template <typename Real>
 void Mathematics::ContEllipsoid3MinCR<Real>
-	::MaxProduct (std::vector<Vector3D<Real> >& A, Real D[3])
+	::MaxProduct (std::vector<Vector3<Real> >& A, Real D[3])
 {
     // Maximize x*y*z subject to x >= 0, y >= 0, z >= 0, and
     // A[i]*x+B[i]*y+C[i]*z <= 1 for 0 <= i < N where A[i] >= 0,

@@ -12,8 +12,8 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve3Detail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
@@ -29,7 +29,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, TubeSurface);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, TubeSurface);
 
-Rendering::TubeSurface ::TubeSurface(Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::FloatVector3D& upVector, int numMedialSamples, int numSliceSamples,
+Rendering::TubeSurface ::TubeSurface(Mathematics::Curve3f* medial, RadialFunction radial, bool closed, const Mathematics::Vector3F& upVector, int numMedialSamples, int numSliceSamples,
                                      bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin, const Mathematics::Float2* tcoordMax, VertexFormatSharedPtr vformat)
     : ParentType(vformat, VertexBufferSharedPtr(), IndexBufferSharedPtr()), mMedial(medial), mRadial(radial), mNumMedialSamples(numMedialSamples),
       mNumSliceSamples(numSliceSamples), mUpVector(upVector), mSin(0), mCos(0), mClosed(closed), mSampleByArcLength(sampleByArcLength)
@@ -93,9 +93,9 @@ void Rendering::TubeSurface ::ComputeSinCos()
     const float invSliceSamples = 1.0f / (float)mNumSliceSamples;
     for (int i = 0; i < mNumSliceSamples; ++i)
     {
-        const float angle = Mathematics::FloatMath::GetTwoPI() * invSliceSamples * i;
-        mCos[i] = Mathematics::FloatMath::Cos(angle);
-        mSin[i] = Mathematics::FloatMath::Sin(angle);
+        const float angle = Mathematics::MathF::GetTwoPI() * invSliceSamples * i;
+        mCos[i] = Mathematics::MathF::Cos(angle);
+        mSin[i] = Mathematics::MathF::Sin(angle);
     }
     mSin[mNumSliceSamples] = mSin[0];
     mCos[mNumSliceSamples] = mCos[0];
@@ -145,8 +145,8 @@ void Rendering::TubeSurface ::ComputeVertices()
         //  float radius = mRadial(t);
 
         // Compute frame.
-        Mathematics::FloatVector3D position, tangent, normal, binormal;
-        if (mUpVector != Mathematics::FloatVector3D::GetZero())
+        Mathematics::Vector3F position, tangent, normal, binormal;
+        if (mUpVector != Mathematics::Vector3F::GetZero())
         {
             // Always use 'up' vector N rather than curve normal.  You must
             // constrain the curve so that T and N are never parallel.  To
@@ -156,8 +156,8 @@ void Rendering::TubeSurface ::ComputeVertices()
             //     N = Cross(B,T)/Length(Cross(B,T)).
             position = mMedial->GetPosition(t);
             tangent = mMedial->GetTangent(t);
-            binormal = Mathematics::FloatVector3DTools::UnitCrossProduct(tangent, mUpVector);
-            normal = Mathematics::FloatVector3DTools::UnitCrossProduct(binormal, tangent);
+            binormal = Mathematics::Vector3ToolsF::UnitCrossProduct(tangent, mUpVector);
+            normal = Mathematics::Vector3ToolsF::UnitCrossProduct(binormal, tangent);
         }
         else
         {
@@ -190,7 +190,7 @@ void Rendering::TubeSurface ::ComputeVertices()
 void Rendering::TubeSurface ::ComputeNormals()
 {
     int s = 0, sM1 = 0, sP1 = 0, m = 0, mM1 = 0, mP1 = 0;
-    const Mathematics::FloatVector3D dir0, dir1;
+    const Mathematics::Vector3F dir0, dir1;
 
     VertexBufferAccessor vba(this);
 
@@ -395,22 +395,22 @@ void Rendering::TubeSurface ::ComputeIndices(bool insideView)
     }*/
 }
 
-void Rendering::TubeSurface ::GetTMinSlice(Mathematics::FloatVector3D* slice)
+void Rendering::TubeSurface ::GetTMinSlice(Mathematics::Vector3F* slice)
 {
     VertexBufferAccessor vba(this);
     for (int i = 0; i <= mNumSliceSamples; ++i)
     {
-        slice[i] = vba.GetPosition<Mathematics::FloatVector3D>(i);
+        slice[i] = vba.GetPosition<Mathematics::Vector3F>(i);
     }
 }
 
-void Rendering::TubeSurface ::GetTMaxSlice(Mathematics::FloatVector3D* slice)
+void Rendering::TubeSurface ::GetTMaxSlice(Mathematics::Vector3F* slice)
 {
     VertexBufferAccessor vba(this);
     int j = GetVertexBuffer()->GetNumElements() - mNumSliceSamples - 1;
     for (int i = 0; i <= mNumSliceSamples; ++i, ++j)
     {
-        slice[i] = vba.GetPosition<Mathematics::FloatVector3D>(j);
+        slice[i] = vba.GetPosition<Mathematics::Vector3F>(j);
     }
 }
 
@@ -530,12 +530,12 @@ Rendering::TubeSurface::RadialFunction Rendering::TubeSurface ::GetRadial() cons
     return mRadial;
 }
 
-void Rendering::TubeSurface ::SetUpVector(const Mathematics::FloatVector3D& upVector) noexcept
+void Rendering::TubeSurface ::SetUpVector(const Mathematics::Vector3F& upVector) noexcept
 {
     mUpVector = upVector;
 }
 
-const Mathematics::FloatVector3D& Rendering::TubeSurface ::GetUpVector() const noexcept
+const Mathematics::Vector3F& Rendering::TubeSurface ::GetUpVector() const noexcept
 {
     return mUpVector;
 }

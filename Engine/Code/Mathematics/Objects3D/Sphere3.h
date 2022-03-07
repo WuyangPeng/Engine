@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 17:45)
+///	引擎版本：0.8.0.2 (2022/02/10 14:27)
 
 #ifndef MATHEMATICS_OBJECTS3D_SPHERE3_H
 #define MATHEMATICS_OBJECTS3D_SPHERE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <type_traits>
 
@@ -26,27 +26,27 @@ namespace Mathematics
 
         using ClassType = Sphere3<Real>;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
 
     public:
         // 球体被表示为|X-C| = Real，其中C为中心，Real为半径。
-        Sphere3(const Vector3D& center, Real radius) noexcept;
+        Sphere3(const Vector3& center, Real radius) noexcept;
         Sphere3() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
 
-        void SetSphere(const Vector3D& center, Real radius) noexcept;
+        void SetSphere(const Vector3& newCenter, Real newRadius) noexcept;
 
     private:
-        Vector3D m_Center;
-        Real m_Radius;
+        Vector3 center;
+        Real radius;
     };
 
-    using FloatSphere3 = Sphere3<float>;
-    using DoubleSphere3 = Sphere3<double>;
+    using Sphere3F = Sphere3<float>;
+    using Sphere3D = Sphere3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_SPHERE3_H

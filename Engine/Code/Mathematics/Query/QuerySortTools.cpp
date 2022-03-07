@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 15:30)
+///	引擎版本：0.8.0.2 (2022/02/17 15:55)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -14,22 +14,20 @@
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
-
 Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1)
-    : impl{  value0, value1  }
+    : impl{ value0, value1 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1, int value2)
-    : impl{  value0, value1, value2  }
+    : impl{ value0, value1, value2 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 Mathematics::QuerySortTools ::QuerySortTools(int value0, int value1, int value2, int value3)
-    : impl{  value0, value1, value2, value3  }
+    : impl{ value0, value1, value2, value3 }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }

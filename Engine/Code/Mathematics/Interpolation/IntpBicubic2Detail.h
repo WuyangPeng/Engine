@@ -22,7 +22,7 @@ IntpBicubic2<Real>::IntpBicubic2 (int xBound, int yBound, Real xMin, Real xSpaci
 
     mXBound = xBound;
     mYBound = yBound;
-    m_Quantity = xBound*yBound;
+    quantity = xBound*yBound;
 
     mXMin = xMin;
     mXSpacing = xSpacing;
@@ -53,7 +53,7 @@ int IntpBicubic2<Real>::GetYBound () const
 template <typename Real>
 int IntpBicubic2<Real>::GetQuantity () const
 {
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
@@ -106,7 +106,7 @@ Real IntpBicubic2<Real>::operator() (Real x, Real y) const
     int ix = (int)xIndex;
     if (ix < 0 || ix > mXBound - 1)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     // Compute y-index and clamp to image.
@@ -114,7 +114,7 @@ Real IntpBicubic2<Real>::operator() (Real x, Real y) const
     int iy = (int)yIndex;
     if (iy < 0 || iy > mYBound - 1)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     Real U[4];
@@ -186,7 +186,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     int ix = (int)xIndex;
     if (ix < 0 || ix > mXBound - 1)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     // Compute y-index and clamp to image.
@@ -194,7 +194,7 @@ Real IntpBicubic2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)   c
     int iy = (int)yIndex;
     if (iy < 0 || iy > mYBound - 1)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     Real U[4], dx, xMult;

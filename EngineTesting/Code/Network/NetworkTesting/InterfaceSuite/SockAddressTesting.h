@@ -53,7 +53,7 @@ namespace Network
 		void NullGetBoostInetAddressExceptionTest();
 		void NullGetNetworkInetAddressExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

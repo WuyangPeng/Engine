@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/17 16:22)
+///	引擎版本：0.8.0.3 (2022/02/23 14:46)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
@@ -15,49 +15,36 @@
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Intersection/Intersector1.h"
 #include "Mathematics/Objects2D/Triangle2.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class FindIntersectorTriangle2Triangle2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<FindIntersectorTriangle2Triangle2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorTriangle2Triangle2 : public DynamicIntersector<Real, Vector2D>
+    class DynamicFindIntersectorTriangle2Triangle2 : public DynamicIntersector<Real, Vector2>
     {
     public:
-        using DynamicFindIntersectorTriangle2Triangle2Impl = FindIntersectorTriangle2Triangle2Impl<Real>;
-        
-        TYPE_DECLARE(DynamicFindIntersectorTriangle2Triangle2);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using ParentType = DynamicIntersector<Real, Vector2D>;
+        using ClassType = DynamicFindIntersectorTriangle2Triangle2<Real>;
+        using ParentType = DynamicIntersector<Real, Vector2>;
         using Math = typename ParentType::Math;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
 
     public:
-        DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2D& velocity0, const Vector2D& velocity1, const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersectorTriangle2Triangle2(const Triangle2& triangle0, const Triangle2& triangle1, Real tmax, const Vector2& velocity0, const Vector2& velocity1, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Triangle2 GetTriangle0() const noexcept;
-        [[nodiscard]] const Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2 GetTriangle0() const noexcept;
+        NODISCARD Triangle2 GetTriangle1() const noexcept;
 
         // 有关交集的信息。
-        [[nodiscard]] int GetQuantity() const;
-        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const;
+        NODISCARD Vector2 GetPoint(int index) const;
 
     private:
-        using Intersection = std::vector<Vector2D>;
-        static constexpr auto sm_Size = 3;
-        using Vector2DContainer = std::array<Vector2D, sm_Size>;
+        using Intersection = std::vector<Vector2>;
+        static constexpr auto size = 3;
+        using Vector2Container = std::array<Vector2, size>;
 
     private:
         enum class SideType
@@ -80,43 +67,45 @@ namespace Mathematics
         class Configuration final
         {
         public:
-            using IndexContainer = std::array<int, sm_Size>;
+            using IndexContainer = std::array<int, size>;
 
-            ProjectionMap m_Map;  // 顶点如何映射到投影间隔
-            IndexContainer m_Index;  // 顶点的排序索引
+            ProjectionMap projectionMap;  // 顶点如何映射到投影间隔
+            IndexContainer index;  // 顶点的排序索引
 
             // 间隔是 [min,max]
-            Real m_Min;
-            Real m_Max;
+            Real min;
+            Real max;
         };
 
         struct IntersectInfo final
         {
-            bool m_Result;
-            SideType m_Side;
-            Configuration m_TCfg0;
-            Configuration m_TCfg1;
-            Real m_TFirst;
-            Real m_TLast;
+            bool result;
+            SideType side;
+            Configuration tCfg0;
+            Configuration tCfg1;
+            Real tFirst;
+            Real tLast;
 
             IntersectInfo() noexcept;
             IntersectInfo(bool result, SideType side, const Configuration& tCfg0, const Configuration& tCfg1, Real tFirst, Real tLast) noexcept;
         };
 
-        [[nodiscard]] Configuration ComputeTwo(const Intersection& vertex, const Vector2D& axis, int i0, int i1, int i2);
+        NODISCARD Configuration ComputeTwo(const Intersection& vertex, const Vector2& axis, int i0, int i1, int i2);
 
-        [[nodiscard]] Configuration ComputeThree(const Intersection& vertex, const Vector2D& axis, const Vector2D& point);
+        NODISCARD Configuration ComputeThree(const Intersection& vertex, const Vector2& axis, const Vector2& vector);
 
-        [[nodiscard]] static IntersectInfo NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed) noexcept;
+        NODISCARD static IntersectInfo NoIntersect(const Configuration& cfg0, const Configuration& cfg1, Real tmax, Real speed) noexcept;
 
-        [[nodiscard]] static Intersection GetIntersection(const Configuration& cfg0, const Configuration& cfg1, SideType side, const Vector2DContainer& moveV0, const Vector2DContainer& moveV1);
+        NODISCARD static Intersection GetIntersection(const Configuration& cfg0, const Configuration& cfg1, SideType side, const Vector2Container& moveV0, const Vector2Container& moveV1);
 
     private:
-        PackageType impl;
-    };
+        // 要相交的对象。
+        Triangle2 triangle0;
+        Triangle2 triangle1;
 
-    using FloatDynamicFindIntersectorTriangle2Triangle2 = DynamicFindIntersectorTriangle2Triangle2<float>;
-    using DoubleDynamicFindIntersectorTriangle2Triangle2 = DynamicFindIntersectorTriangle2Triangle2<double>;
+        // 有关交集的信息。
+        Intersection point;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_TRIANGLE2_TRIANGLE2_H

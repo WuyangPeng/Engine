@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 14:27)
+///	引擎版本：0.8.0.2 (2022/02/08 13:18)
 
 /// 所谓的带状矩阵即：在矩阵A中，
 /// 所有的非零元素都集中在以主对角线为中心的带状区域中。
@@ -21,6 +21,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
+#include "Detail/BandedMatrixData.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "Mathematics/Base/MathDetail.h"
 
@@ -31,37 +32,16 @@
 namespace Mathematics
 {
     template <typename Real>
-    class BandedMatrixImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<BandedMatrixImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<BandedMatrixImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<BandedMatrixImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrix final
+    class BandedMatrix final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using BandedMatrixImpl = BandedMatrixImpl<Real>;
-
-    public:
-        void Swap(BandedMatrix& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(BandedMatrix);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~BandedMatrix() noexcept = default;
-        BandedMatrix(const BandedMatrix& rhs);
-        BandedMatrix& operator=(const BandedMatrix& rhs);
-        BandedMatrix(BandedMatrix&& rhs) noexcept;
-        BandedMatrix& operator=(BandedMatrix&& rhs) noexcept;
-
+        using ClassType = BandedMatrix<Real>;
         using Math = Math<Real>;
         using VariableMatrix = VariableMatrix<Real>;
         using ContainerType = std::vector<Real>;
+        using BandedMatrixData = BandedMatrixData<Real>;
 
     public:
         BandedMatrix(int size, int lowerBandsNumber, int upperBandsNumber);
@@ -69,47 +49,49 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 成员访问
-        [[nodiscard]] int GetSize() const;
-        [[nodiscard]] int GetLowerBandsNumber() const;
-        [[nodiscard]] int GetUpperBandsNumber() const;
-        [[nodiscard]] int GetStreamSize() const;
+        NODISCARD int GetSize() const;
+        NODISCARD int GetLowerBandsNumber() const;
+        NODISCARD int GetUpperBandsNumber() const;
+        NODISCARD int GetStreamSize() const;
 
         // 重设大小会清空原有数据。
         void ResetSize(int size, int lowerBandsNumber, int upperBandsNumber);
 
         // 对角线
-        [[nodiscard]] ContainerType GetDiagonalBand() const;
+        NODISCARD ContainerType GetDiagonalBand() const;
         void SetDiagonalBand(const ContainerType& diagonalBand);
 
         // 下三角
         // GetLowerBand(index):  0 <= index < LowerBandMax
-        [[nodiscard]] int GetLowerBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        [[nodiscard]] ContainerType GetLowerBand(int index) const;
+        NODISCARD int GetLowerBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD ContainerType GetLowerBand(int index) const;
         void SetLowerBand(int index, const ContainerType& lowerBand);
         void SetLowerBandZero();
 
         // 上三角
         // GetUupperBand(index):  0 <= index < UpperBandMax
-        [[nodiscard]] int GetUpperBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        [[nodiscard]] ContainerType GetUpperBand(int index) const;
+        NODISCARD int GetUpperBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD ContainerType GetUpperBand(int index) const;
         void SetUpperBand(int index, const ContainerType& upperBand);
         void SetUpperBandZero();
 
-        [[nodiscard]] Real& operator()(int row, int column);
-        [[nodiscard]] const Real& operator()(int row, int column) const;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
         // 便利函数用于初始化矩阵
         void SetZero();
         void SetIdentity();
 
-        [[nodiscard]] const VariableMatrix ToVariableMatrix() const;
+        NODISCARD VariableMatrix ToVariableMatrix() const;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        ContainerType diagonalBandContainer;  // 对角线
+        BandedMatrixData lowerBandData;  // 下三角
+        BandedMatrixData upperBandData;  // 上三角
     };
 
-    using FloatBandedMatrix = BandedMatrix<float>;
-    using DoubleBandedMatrix = BandedMatrix<double>;
+    using BandedMatrixF = BandedMatrix<float>;
+    using BandedMatrixD = BandedMatrix<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BANDED_MATRIX_H

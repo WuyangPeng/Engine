@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 14:18)
+///	引擎版本：0.8.0.2 (2022/02/15 14:36)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_DETAIL_H
@@ -18,40 +18,42 @@
 
 template <typename Real>
 Mathematics::MinimizeNData<Real>::MinimizeNData() noexcept
-    : m_MinLocation{}, m_MinValue{ Math::sm_MaxReal }
+    : minLocation{}, minValue{ Math::maxReal }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::MinimizeNData<Real>::MinimizeNData(const Container& minLocation, Real minValue)
-    : m_MinLocation{ minLocation }, m_MinValue{ minValue }
+    : minLocation{ minLocation }, minValue{ minValue }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::MinimizeNData<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::MinimizeNData<Real>::ConstIter Mathematics::MinimizeNData<Real>::GetMinLocationBegin() const noexcept
+typename Mathematics::MinimizeNData<Real>::ConstIter Mathematics::MinimizeNData<Real>::GetMinLocationBegin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MinLocation.begin();
+    return minLocation.begin();
 }
 
 template <typename Real>
-typename const Mathematics::MinimizeNData<Real>::ConstIter Mathematics::MinimizeNData<Real>::GetMinLocationEnd() const noexcept
+typename Mathematics::MinimizeNData<Real>::ConstIter Mathematics::MinimizeNData<Real>::GetMinLocationEnd() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MinLocation.end();
+    return minLocation.end();
 }
 
 template <typename Real>
@@ -59,7 +61,7 @@ Real Mathematics::MinimizeNData<Real>::GetMinValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MinValue;
+    return minValue;
 }
 
 template <typename Real>
@@ -67,7 +69,7 @@ Real Mathematics::MinimizeNData<Real>::GetMinLocation(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    return m_MinLocation.at(index);
+    return minLocation.at(index);
 }
 
 template <typename Real>
@@ -75,21 +77,21 @@ int Mathematics::MinimizeNData<Real>::GetDimensions() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_MinLocation.size());
+    return boost::numeric_cast<int>(minLocation.size());
 }
 
 template <typename Real>
-void Mathematics::MinimizeNData<Real>::Set(Real minValue, Real minLocation, const Container& direction, int directionCurrent)
+void Mathematics::MinimizeNData<Real>::Set(Real newMinValue, Real newMinLocation, const Container& direction, int directionCurrent)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_MinValue = minValue;
+    minValue = newMinValue;
 
     auto index = 0;
-    for (auto& value : m_MinLocation)
+    for (auto& value : minLocation)
     {
         const auto directionIndex = directionCurrent + index;
-        value += minLocation * direction.at(directionIndex);
+        value += newMinLocation * direction.at(directionIndex);
         ++index;
     }
 }
@@ -99,7 +101,7 @@ typename const Mathematics::MinimizeNData<Real>::Container& Mathematics::Minimiz
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MinLocation;
+    return minLocation;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_DATA_DETAIL_H

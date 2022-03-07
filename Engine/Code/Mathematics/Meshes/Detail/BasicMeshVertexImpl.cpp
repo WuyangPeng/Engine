@@ -1,60 +1,55 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎版本：0.0.0.2 (2019/07/16 11:19)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "BasicMeshVertexImpl.h"
-#include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
+#include "System/Helper/PragmaWarning.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-#include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 Mathematics::BasicMeshVertexImpl ::BasicMeshVertexImpl(MAYBE_UNUSED int count) noexcept
-    : m_Vertex{}, m_Edge{}, m_Triangle{}
+    : m_Vertex{}, m_Edge{}, triangle{}
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
-CLASS_INVARIANT_STUB_DEFINE(Mathematics,BasicMeshVertexImpl)
+CLASS_INVARIANT_STUB_DEFINE(Mathematics, BasicMeshVertexImpl)
 
-int Mathematics::BasicMeshVertexImpl
-	::GetVertex(int index) const
+int Mathematics::BasicMeshVertexImpl ::GetVertex(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index &&index < boost::numeric_cast<int>(m_Vertex.size()),"索引错误！");
-    
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Vertex.size()), "索引错误！");
+
     return m_Vertex[index];
-    
 }
 
-int Mathematics::BasicMeshVertexImpl
-	::GetEdge(int index) const
+int Mathematics::BasicMeshVertexImpl ::GetEdge(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Edge.size()),"索引错误！");
-    
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_Edge.size()), "索引错误！");
+
     return m_Edge[index];
 }
 
-int Mathematics::BasicMeshVertexImpl
-	::GetTriangle(int index) const
+int Mathematics::BasicMeshVertexImpl ::GetTriangle(int index) const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-	MATHEMATICS_ASSERTION_0(0 <= index &&index < boost::numeric_cast<int>(m_Triangle.size()),"索引错误！");
-    
-    return m_Triangle[index];
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(triangle.size()), "索引错误！");
+
+    return triangle[index];
 }
 
-void Mathematics::BasicMeshVertexImpl
-	::InsertEdge (int vertex, int edge)
+void Mathematics::BasicMeshVertexImpl ::InsertEdge(int vertex, int edge)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_CLASS_IS_VALID_9;
 
     // 检查顶点/边是否在相邻数组（如果在则什么都不做）。
     for (uint32_t i = 0; i < m_Vertex.size(); ++i)
@@ -64,28 +59,25 @@ void Mathematics::BasicMeshVertexImpl
             return;
         }
     }
-    
+
     m_Vertex.push_back(vertex);
     m_Edge.push_back(edge);
 }
 
-void Mathematics::BasicMeshVertexImpl
-	::InsertTriangle (int triangle)
+void Mathematics::BasicMeshVertexImpl ::InsertTriangle(int triangle0)
 {
-	MATHEMATICS_CLASS_IS_VALID_9;
-    
+    MATHEMATICS_CLASS_IS_VALID_9;
+
     // 检查三角形是否在相邻数组（如果在则什么都不做）。
-    for (uint32_t i = 0; i < m_Triangle.size(); ++i)
+    for (uint32_t i = 0; i < triangle.size(); ++i)
     {
-        if (triangle == m_Triangle[i])
+        if (triangle0 == triangle[i])
         {
             return;
         }
     }
-    
-    m_Triangle.push_back(triangle);
+
+    triangle.push_back(triangle0);
 }
 
-
 #include STSTEM_WARNING_POP
-

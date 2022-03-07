@@ -22,7 +22,7 @@ namespace Mathematics
 		void SortThreeValueTest();
 		void SortFourValueTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

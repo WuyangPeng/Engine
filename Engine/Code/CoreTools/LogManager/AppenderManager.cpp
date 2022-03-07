@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,13 +13,18 @@
 #include "AppenderManager.h"
 #include "Logger.h"
 #include "Detail/AppenderManagerImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
+CoreTools::AppenderManager::AppenderManagerSharedPtr CoreTools::AppenderManager::Create()
+{
+    return std::make_shared<AppenderManager>(AppenderManagerCreate::Init);
+}
 
-CoreTools::AppenderManager::AppenderManager([[maybe_unused]] DisableNotThrow disableNotThrow)
-    : impl{  0 }
+CoreTools::AppenderManager::AppenderManager(MAYBE_UNUSED AppenderManagerCreate appenderManagerCreate)
+    : impl{ ImplCreateUseDefaultConstruction::Default }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -35,27 +40,24 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, WriteToCo
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, AppenderManager, Clear, void)
 IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, AppenderManager, ReloadAppenderFile, void)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_CR(CoreTools, AppenderManager, IsAppenderExist, String, bool)
+IMPL_CONST_MEMBER_FUNCTION_DEFINE_1_V(CoreTools, AppenderManager, GetMinLogLevelType, LogFilter, CoreTools::LogLevel)
 
 bool CoreTools::AppenderManager::InsertAppender(const String& name, const Appender& appender)
 {
-    
-
     return impl->InsertAppender(name, appender);
 }
 
 void CoreTools::AppenderManager::Write(const String& name, const LogMessage& message)
 {
-    
-
     return impl->Write(name, message);
 }
 
-const System::String CoreTools::AppenderManager::GetConsoleAppenderName()
+System::String CoreTools::AppenderManager::GetConsoleAppenderName()
 {
     return ImplType::GetConsoleAppenderName();
 }
 
-const System::String CoreTools::AppenderManager ::GetDefaultAppenderName()
+System::String CoreTools::AppenderManager ::GetDefaultAppenderName()
 {
     return ImplType::GetDefaultAppenderName();
 }

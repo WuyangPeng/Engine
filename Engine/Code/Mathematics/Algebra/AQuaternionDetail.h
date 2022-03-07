@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/03 14:45)
+///	引擎版本：0.8.0.2 (2022/02/08 14:34)
 
 #ifndef MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_HQUATERNION_DETAIL_H
@@ -44,7 +44,7 @@ bool Mathematics::operator<(const AQuaternion<Real>& lhs, const AQuaternion<Real
 }
 
 template <typename Real>
-const Mathematics::AQuaternion<Real> Mathematics::operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept
+Mathematics::AQuaternion<Real> Mathematics::operator*(const AQuaternion<Real>& lhs, const AQuaternion<Real>& rhs) noexcept
 {
     // 注意:  乘法一般不是可交换的，所以在大多数情况下，
     // p * q != q * p

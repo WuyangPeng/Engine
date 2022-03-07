@@ -33,17 +33,12 @@ namespace CoreTools
         using FactoryFunction = ObjectInterfaceSharedPtr (*)(BufferSource& stream);
 
     public:
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         ObjectInterface() noexcept;
         virtual ~ObjectInterface() noexcept = default;
         ObjectInterface(const ObjectInterface& rhs) noexcept = default;
-        virtual ObjectInterface& operator=(const ObjectInterface& rhs) noexcept = default;
+        ObjectInterface& operator=(const ObjectInterface& rhs) noexcept = default;
         ObjectInterface(ObjectInterface&& rhs) noexcept = default;
-        virtual ObjectInterface& operator=(ObjectInterface&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_POP
+        ObjectInterface& operator=(ObjectInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

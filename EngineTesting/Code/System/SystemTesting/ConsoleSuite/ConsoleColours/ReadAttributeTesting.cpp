@@ -109,9 +109,9 @@ void System::ReadAttributeTesting::ReadAttributeTest()
         for (auto word : attribute)
         {
             // 根据TextColour、BackgroundColour和ConsoleCommon枚举的实际值所占的位得出0x000F、0x00F0和0xFF00的值。
-            ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE(textColourFlags.find(UnderlyingCastEnum<TextColour>(word & 0x000F)), textColourFlags.end());
-            ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE(backgroundColourFlags.find(UnderlyingCastEnum<BackgroundColour>(word & 0x00F0)), backgroundColourFlags.end());
-            ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE(consoleCommonFlags.find(UnderlyingCastEnum<ConsoleCommon>(word & 0xFF00)), consoleCommonFlags.end());
+            ASSERT_UNEQUAL(textColourFlags.find(UnderlyingCastEnum<TextColour>(word & 0x000F)), textColourFlags.end());
+            ASSERT_UNEQUAL(backgroundColourFlags.find(UnderlyingCastEnum<BackgroundColour>(word & 0x00F0)), backgroundColourFlags.end());
+            ASSERT_UNEQUAL(consoleCommonFlags.find(UnderlyingCastEnum<ConsoleCommon>(word & 0xFF00)), consoleCommonFlags.end());
         }
     }
 }

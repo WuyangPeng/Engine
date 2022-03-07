@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:09)
+///	引擎版本：0.8.0.2 (2022/02/17 16:37)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_H
 #define MATHEMATICS_QUERY_QUERY3_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "QueryBase.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -26,8 +26,8 @@ namespace Mathematics
         using ClassType = Query3<Real>;
         using ParentType = QueryBase;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
-        using VerticesType = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using VerticesType = std::vector<Vector3>;
 
     public:
         // 基类处理浮点查询。
@@ -35,10 +35,10 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] QueryType GetType() const noexcept override;
+        NODISCARD QueryType GetType() const noexcept override;
 
-        [[nodiscard]] int GetNumVertices() const;
-        [[nodiscard]] const Vector3D GetVertice(int index) const;
+        NODISCARD int GetNumVertices() const;
+        NODISCARD const Vector3 GetVertice(int index) const;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
@@ -46,31 +46,31 @@ namespace Mathematics
         // PlaneQueryType::PositiveSide, 在平面的正面
         // PlaneQueryType::NegativeSide, 在平面的负面
         // PlaneQueryType::OnPlane, 在平面上
-        [[nodiscard]] virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const;
-        [[nodiscard]] virtual PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const;
+        NODISCARD virtual PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const;
+        NODISCARD virtual PlaneQueryType ToPlane(const Vector3& testVector, int v0, int v1, int v2) const;
 
         // 返回:
         // TetrahedronQueryType::Outside, 四面体外
         // TetrahedronQueryType::Inside, 四面体内
         // TetrahedronQueryType::OnTetrahedron,在四面体上
-        [[nodiscard]] virtual TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const;
-        [[nodiscard]] virtual TetrahedronQueryType ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual TetrahedronQueryType ToTetrahedron(const Vector3& testVector, int v0, int v1, int v2, int v3) const;
 
         // 返回:
         // Returns:
         // CircumsphereQueryType::Outside, 在四面体的外切球外
         // CircumsphereQueryType::Inside,在四面体的外切球内
         // CircumsphereQueryType::OnCircumsphere, 在四面体的外切球上
-        [[nodiscard]] virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const;
-        [[nodiscard]] virtual CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const;
+        NODISCARD virtual CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const;
 
     private:
         // 输入点
-        VerticesType m_Vertices;
+        VerticesType vertices;
     };
 
-    using FloatQuery3 = Query3<float>;
-    using DoubleQuery3 = Query3<double>;
+    using Query3F = Query3<float>;
+    using Query3D = Query3<double>;
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY3_H

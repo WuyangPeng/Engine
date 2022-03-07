@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 NetworkToolset::Placeholder
-	::Placeholder() 
+	::Placeholder() noexcept
 {
 	NETWORK_SELF_CLASS_IS_VALID_9;
 }

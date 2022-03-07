@@ -51,7 +51,7 @@ namespace Network
 		void NullIsContextStopExceptionTest();
 		void NullRestartContextExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

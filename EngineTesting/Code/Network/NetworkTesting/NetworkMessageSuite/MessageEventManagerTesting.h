@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 11:47)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_EVENT_MANAGER_TESTING_H
@@ -11,20 +11,20 @@
 
 namespace Network
 {
-	class MessageEventManagerTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageEventManagerTesting);
+    class MessageEventManagerTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MessageEventManagerTesting);
 
-	private:
-		void MainTest();
+    private:
+        void MainTest() noexcept;
 
-		void SingleContainerTest();
-		void PriorityContainerTest();
-		void MultiContainerTest();
+        void SingleContainerTest();
+        void PriorityContainerTest();
+        void MultiContainerTest();
 
-		virtual void DoRunUnitTest() override;
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_EVENT_MANAGER_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MESSAGE_EVENT_MANAGER_TESTING_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 9:50)
+///	引擎版本：0.8.0.3 (2022/03/02 17:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CYLINDER3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CYLINDER3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Cylinder3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Cylinder3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorSegment3Cylinder3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Cylinder3 = Cylinder3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,25 +35,23 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Segment3 GetSegment() const noexcept;
-        [[nodiscard]] const Cylinder3 GetCylinder() const noexcept;
+        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Cylinder3 GetCylinder() const noexcept;
 
-        [[nodiscard]] int GetQuantity() const noexcept;
-        [[nodiscard]] const Vector3D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD Vector3 GetPoint(int index) const;
 
     private:
         void Find();
 
-        Segment3 m_Segment;
-        Cylinder3 m_Cylinder;
+    private:
+        Segment3 segment;
+        Cylinder3 cylinder;
 
-        int m_Quantity;
-        Vector3D m_Point0;
-        Vector3D m_Point1;
+        int quantity;
+        Vector3 point0;
+        Vector3 point1;
     };
-
-    using FloatStaticFindIntersectorSegment3Cylinder3 = StaticFindIntersectorSegment3Cylinder3<float>;
-    using DoubleStaticFindIntersectorSegment3Cylinder3 = StaticFindIntersectorSegment3Cylinder3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CYLINDER3_H

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 17:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:27)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,11 +23,21 @@
 using std::make_shared;
 using namespace std::literals;
 
-CoreTools::AppenderFile::AppenderFile(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
-                                      int maxFileSize, bool backup, const String& extensionName)
-    : ParentType{ appenderFlags, logLevel }, m_Directory{ directory }, m_PrefixName{ GetPrefixName(m_Directory, fileName) },
-      m_ExtensionName{ extensionName }, m_FullName{ GetFullName(m_PrefixName, extensionName) }, m_MaxFileSize{ maxFileSize },
-      m_Backup{ backup }, m_OStreamManager{}
+CoreTools::AppenderFile::AppenderFile(const String& directory,
+                                      const String& fileName,
+                                      AppenderPrint appenderFlags,
+                                      LogLevel logLevel,
+                                      int maxFileSize,
+                                      bool backup,
+                                      const String& extensionName)
+    : ParentType{ appenderFlags, logLevel },
+      directory{ directory },
+      prefixName{ GetPrefixName(directory, fileName) },
+      extensionName{ extensionName },
+      fullName{ GetFullName(prefixName, extensionName) },
+      maxFileSize{ maxFileSize },
+      backup{ backup },
+      streamManager{}
 {
     Init(directory);
 
@@ -35,12 +45,12 @@ CoreTools::AppenderFile::AppenderFile(const String& directory, const String& fil
 }
 
 // private
-void CoreTools::AppenderFile::Init(const String& directory)
+void CoreTools::AppenderFile::Init(const String& newDirectory)
 {
-    NewDirectory(directory);
+    NewDirectory(newDirectory);
 
-    m_OStreamManager = make_shared<OFStreamManager>(m_FullName, true);
-    m_OStreamManager->SetSimplifiedChinese();
+    streamManager = make_shared<OFStreamManager>(fullName, true);
+    streamManager->SetSimplifiedChinese();
 
     if (IsExceedMaxSize(0))
     {
@@ -49,13 +59,15 @@ void CoreTools::AppenderFile::Init(const String& directory)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::AppenderFile::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < m_MaxFileSize && m_OStreamManager != nullptr)
+    if (ParentType::IsValid() && 0 < maxFileSize && streamManager != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::AppenderType CoreTools::AppenderFile::GetAppenderType() const noexcept
@@ -68,40 +80,40 @@ CoreTools::AppenderType CoreTools::AppenderFile::GetAppenderType() const noexcep
 // private
 void CoreTools::AppenderFile::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix)
 {
-    auto messageDescribe = message.GetMessageDescribe();
+    const auto messageDescribe = message.GetMessageDescribe();
 
-    auto fullMessage = prefix.GetPrefix() + messageDescribe + postfix.GetPostfix();
+    const auto fullMessage = prefix.GetPrefix() + messageDescribe + postfix.GetPostfix();
 
     if (IsExceedMaxSize(fullMessage.size()))
     {
         BackupFile();
     }
 
-    *m_OStreamManager << fullMessage;
+    *streamManager << fullMessage;
 }
 
 // private
 bool CoreTools::AppenderFile::IsExceedMaxSize(PosType increaseSize)
 {
-    const auto fileSize = m_OStreamManager->GetOFStreamSize();
+    const auto fileSize = streamManager->GetOFStreamSize();
 
-    return (m_MaxFileSize < fileSize + increaseSize);
+    return (maxFileSize < fileSize + increaseSize);
 }
 
 // private
 void CoreTools::AppenderFile::BackupFile()
 {
-    if (m_Backup)
+    if (backup)
     {
-        CoreTools::IFStreamManager manager{ m_FullName };
-        [[maybe_unused]] const auto name = manager.BackupFile();
+        const CoreTools::IFStreamManager manager{ fullName };
+        MAYBE_UNUSED const auto name = manager.BackupFile();
     }
 
-    m_OStreamManager = make_shared<OFStreamManager>(m_FullName, false);
-    m_OStreamManager->SetSimplifiedChinese();
+    streamManager = make_shared<OFStreamManager>(fullName, false);
+    streamManager->SetSimplifiedChinese();
 }
 
-const CoreTools::AppenderFile::AppenderImplPtr CoreTools::AppenderFile::Clone() const
+const CoreTools::AppenderFile::AppenderImplSharedPtr CoreTools::AppenderFile::Clone() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -112,9 +124,9 @@ void CoreTools::AppenderFile::Reload()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_FullName = GetFullName(m_PrefixName, m_ExtensionName);
+    fullName = GetFullName(prefixName, extensionName);
 
-    m_OStreamManager = make_shared<OFStreamManager>(m_FullName, true);
+    streamManager = make_shared<OFStreamManager>(fullName, true);
 }
 
 System::String CoreTools::AppenderFile::GetFullName(const String& prefixName, const String& extensionName)
@@ -129,37 +141,33 @@ System::String CoreTools::AppenderFile::GetPrefixName(const String& directory, c
 
 void CoreTools::AppenderFile::NewDirectory(const String& directory) noexcept
 {
-    const auto result = System::CreateFileDirectory(directory, nullptr);
-    if (!result)
-    {
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("创建文件目录失败。\n"));
-    }
+    MAYBE_UNUSED const auto result = System::CreateFileDirectory(directory, nullptr);
 }
 
 System::String CoreTools::AppenderFile::GetDirectory() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Directory;
+    return directory;
 }
 
 System::String CoreTools::AppenderFile::GetExtensionName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_ExtensionName;
+    return extensionName;
 }
 
 int CoreTools::AppenderFile::GetMaxFileSize() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_MaxFileSize;
+    return maxFileSize;
 }
 
 bool CoreTools::AppenderFile::IsBackup() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Backup;
+    return backup;
 }

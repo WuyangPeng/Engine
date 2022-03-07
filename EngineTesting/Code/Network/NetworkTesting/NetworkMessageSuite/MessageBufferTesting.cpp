@@ -16,7 +16,12 @@
 
 using std::make_shared;
 using std::ostream;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26481)
 Network::MessageBufferTesting ::MessageBufferTesting(const OStreamShared& osPtr)
     : ParentType{ osPtr }, m_TestMessage{ make_shared<TestNullMessage>(sm_MessageID) }
 {
@@ -145,11 +150,11 @@ void Network::MessageBufferTesting ::PushBackTest(int testLoopCount, ParserStrat
 {
     auto buffer = CreateSendMessageBuffer(testLoopCount, parserStrategy);
 
-    AddBufferLength(testLoopCount, buffer);
-    auto currentWriteIndex = buffer->GetCurrentWriteIndex();
+    AddBufferLength(testLoopCount, *buffer);
+    const auto currentWriteIndex = buffer->GetCurrentWriteIndex();
 
     auto addBuffer = CreateAddMessageBuffer(testLoopCount, parserStrategy);
-    auto addBufferCurrentWriteIndex = addBuffer->GetCurrentWriteIndex();
+    const auto addBufferCurrentWriteIndex = addBuffer->GetCurrentWriteIndex();
 
     buffer->PushBack(*addBuffer);
 
@@ -247,8 +252,8 @@ void Network::MessageBufferTesting ::WriteTest(ParserStrategy parserStrategy)
     ASSERT_EQUAL(buffer->GetCurrentWriteIndex(), 0);
     ASSERT_EQUAL(buffer->GetRemainingWriteCount(), buffer->GetSize());
 
-    int32_t messageLength = boost::numeric_cast<int32_t>(m_TestMessage->GetStreamingSize());
-    auto streamLength = CORE_TOOLS_STREAM_SIZE(messageLength);
+    const int32_t messageLength = boost::numeric_cast<int32_t>(m_TestMessage->GetStreamingSize());
+    const auto streamLength = CORE_TOOLS_STREAM_SIZE(messageLength);
 
     buffer->Write(streamLength, &messageLength);
     ASSERT_EQUAL(streamLength, buffer->GetCurrentWriteIndex());
@@ -297,7 +302,7 @@ void Network::MessageBufferTesting ::LengthTest(int testLoopCount, ParserStrateg
 
     ASSERT_TRUE(buffer->IsMessageReceiveEnd());
 
-    AddBufferLength(testLoopCount, buffer);
+    AddBufferLength(testLoopCount, *buffer);
 
     ASSERT_FALSE(buffer->IsMessageReceiveEnd());
 
@@ -316,7 +321,7 @@ void Network::MessageBufferTesting ::CheckingMessageContentSizeExceptionTest(Par
 {
     constexpr auto testLoopCount = 100;
     TestingTypeSharedPtr buffer{ make_shared<TestingType>(BuffBlockSize::Automatic, MessageInterface::GetMessageHeadSize(), parserStrategy) };
-    AddBufferLength(testLoopCount, buffer);
+    AddBufferLength(testLoopCount, *buffer);
 
     buffer->CheckingMessageContentSize();
 }
@@ -329,7 +334,7 @@ Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateAddMessage
 
     for (auto i = 0; i < testLoopCount; ++i)
     {
-        auto streamSize = CORE_TOOLS_STREAM_SIZE(sm_MessageID);
+        const auto streamSize = CORE_TOOLS_STREAM_SIZE(sm_MessageID);
         messageBuffer->AddCurrentWriteIndex(streamSize);
 
         auto messageNumber = reinterpret_cast<int64_t*>(initialBuffered);
@@ -346,20 +351,20 @@ Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateAddMessage
     return messageBuffer;
 }
 
-void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageBufferSharedPtr& messageBuffer)
+void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageBuffer& messageBuffer)
 {
-    auto& length = *reinterpret_cast<int32_t*>(messageBuffer->GetInitialBufferedPtr());
+    auto& length = *reinterpret_cast<int32_t*>(messageBuffer.GetInitialBufferedPtr());
 
-    auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
+    const auto streamSize = CORE_TOOLS_STREAM_SIZE(length);
 
-    if (messageBuffer->GetParserStrategy() == ParserStrategy::BigEndian)
+    if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {
         CoreTools::Endian::SwapByteOrder(streamSize, &length);
     }
 
     length += m_TestMessage->GetStreamingSize() * testLoopCount;
 
-    if (messageBuffer->GetParserStrategy() == ParserStrategy::BigEndian)
+    if (messageBuffer.GetParserStrategy() == ParserStrategy::BigEndian)
     {
         CoreTools::Endian::SwapByteOrder(streamSize, &length);
     }
@@ -367,7 +372,7 @@ void Network::MessageBufferTesting ::AddBufferLength(int testLoopCount, MessageB
 
 Network::MessageBufferSharedPtr Network::MessageBufferTesting ::CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const
 {
-    BufferSendStream bufferSendStream{ sm_BufferSize, parserStrategy };
+    BufferSendStream bufferSendStream{ sm_BufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
     for (auto i = 0; i < testLoopCount; ++i)
     {

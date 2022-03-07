@@ -22,7 +22,7 @@ namespace Mathematics
 		void Det2Test();
 		void Det3Test();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

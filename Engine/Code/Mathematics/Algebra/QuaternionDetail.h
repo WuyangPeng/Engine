@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 15:59)
+///	引擎版本：0.8.0.2 (2022/02/08 13:59)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_DETAIL_H
@@ -44,7 +44,7 @@ bool Mathematics::operator<(const Quaternion<Real>& lhs, const Quaternion<Real>&
 }
 
 template <typename Real>
-const Mathematics::Quaternion<Real> Mathematics::operator*(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept
+Mathematics::Quaternion<Real> Mathematics::operator*(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) noexcept
 {
     // 注意:  乘法一般不是可交换的，所以在大多数情况下，
     // p * q != q * p
@@ -62,7 +62,7 @@ Real Mathematics::Dot(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs) 
 }
 
 template <typename Real>
-bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Quaternion<Real>& lhs, const Quaternion<Real>& rhs, const Real epsilon) noexcept
 {
     return Math<Real>::FAbs(lhs.GetW() - rhs.GetW()) <= epsilon &&
            Math<Real>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&

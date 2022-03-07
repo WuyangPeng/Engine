@@ -19,12 +19,12 @@ namespace Mathematics
 	class   HmQuadToSqr
 	{
 	public:
-		HmQuadToSqr(const Vector2D<Real>& P00, const Vector2D<Real>& P10,const Vector2D<Real>& P11, const Vector2D<Real>& P01);
+		HmQuadToSqr(const Vector2<Real>& P00, const Vector2<Real>& P10,const Vector2<Real>& P11, const Vector2<Real>& P01);
 
-		Vector2D<Real> Transform(const Vector2D<Real>& P);
+		Vector2<Real> Transform(const Vector2<Real>& P);
 
 	protected:
-		Vector2D<Real> mT, mG, mD;
+		Vector2<Real> mT, mG, mD;
 		Matrix2<Real> mM;
 	};
 
@@ -37,12 +37,12 @@ namespace Mathematics
 	class   HmSqrToQuad
 	{
 	public:
-		HmSqrToQuad(const Vector2D<Real>& P00, const Vector2D<Real>& P10,const Vector2D<Real>& P11, const Vector2D<Real>& P01);
+		HmSqrToQuad(const Vector2<Real>& P00, const Vector2<Real>& P10,const Vector2<Real>& P11, const Vector2<Real>& P01);
 
-		Vector2D<Real> Transform(const Vector2D<Real>& P);
+		Vector2<Real> Transform(const Vector2<Real>& P);
 
 	protected:
-		Vector2D<Real> mT, mG, mD;
+		Vector2<Real> mT, mG, mD;
 		Matrix2<Real> mM;
 	};
 
@@ -77,14 +77,14 @@ namespace Mathematics
 	class   BiQuadToSqr
 	{
 	public:
-		BiQuadToSqr(const Vector2D<Real>& P00, const Vector2D<Real>& P10,const Vector2D<Real>& P11, const Vector2D<Real>& P01);
+		BiQuadToSqr(const Vector2<Real>& P00, const Vector2<Real>& P10,const Vector2<Real>& P11, const Vector2<Real>& P01);
 
-		Vector2D<Real> Transform(const Vector2D<Real>& P);
+		Vector2<Real> Transform(const Vector2<Real>& P);
 
 	protected:
-		static Real Deviation(const Vector2D<Real>& SPoint);
+		static Real Deviation(const Vector2<Real>& SPoint);
 
-		Vector2D<Real> mP00, mB, mC, mD;
+		Vector2<Real> mP00, mB, mC, mD;
 		Real mBC, mBD, mCD;
 	};
 
@@ -100,12 +100,12 @@ namespace Mathematics
 	class   BiSqrToQuad
 	{
 	public:
-		BiSqrToQuad(const Vector2D<Real>& P00, const Vector2D<Real>& P10,const Vector2D<Real>& P11, const Vector2D<Real>& P01);
+		BiSqrToQuad(const Vector2<Real>& P00, const Vector2<Real>& P10,const Vector2<Real>& P11, const Vector2<Real>& P01);
 
-		Vector2D<Real> Transform(const Vector2D<Real>& P);
+		Vector2<Real> Transform(const Vector2<Real>& P);
 
 	protected:
-		Vector2D<Real> mS00, mS01, mS10, mS11;
+		Vector2<Real> mS00, mS01, mS10, mS11;
 	};
 
 	using HmQuadToSqrf = HmQuadToSqr<float>;

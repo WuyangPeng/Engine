@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EdgeKeyTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26496)
 void Mathematics::EdgeKeyTesting
 	::MainTest()
 {

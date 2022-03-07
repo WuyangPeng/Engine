@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 15:38)
+///	引擎版本：0.8.0.3 (2022/03/03 17:03)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_H
@@ -18,14 +18,14 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorCapsule3Capsule3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorCapsule3Capsule3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticTestIntersectorCapsule3Capsule3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Capsule3 = Capsule3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -33,19 +33,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Capsule3 GetCapsule0() const noexcept;
-        [[nodiscard]] const Capsule3 GetCapsule1() const noexcept;
+        NODISCARD Capsule3 GetCapsule0() const noexcept;
+        NODISCARD Capsule3 GetCapsule1() const noexcept;
 
     private:
         void Test();
 
     private:
-        Capsule3 m_Capsule0;
-        Capsule3 m_Capsule1;
+        Capsule3 capsule0;
+        Capsule3 capsule1;
     };
-
-    using FloatStaticTestIntersectorCapsule3Capsule3 = StaticTestIntersectorCapsule3Capsule3<float>;
-    using DoubleStaticTestIntersectorCapsule3Capsule3 = StaticTestIntersectorCapsule3Capsule3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_CAPSULE3_CAPSULE3_H

@@ -1,18 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 14:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:43)
 
 #ifndef NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
 #define NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H
 
-#include "Network/NetworkDll.h"
-
 #include "InterfaceFwd.h"
+#include "System/Helper/Platform.h"
 #include "System/Helper/PragmaWarning/AsioIpTcp.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/MessageEvent/MessageEventFwd.h"
@@ -33,6 +32,16 @@ namespace Network
     class BoostSockAcceptor;
     class BaseMainManagerImpl;
     class HandleSetIteratorImpl;
+
+    class BaseMainManagerFactory;
+    class ClientFactory;
+    class HandleSetFactory;
+    class HandleSetIteratorFactory;
+    class ServerFactory;
+    class SockAcceptorFactory;
+    class SockConnectorFactory;
+    class SockStreamFactory;
+    class SockAddressFactory;
 
     class AddressData;
     class MessageBuffer;
@@ -66,8 +75,8 @@ namespace Network
     using IOContextType = boost::asio::io_context;
     using ErrorCodeType = boost::system::error_code;
 
-    const System::String GetACELogName();
-    const System::String GetBoostLogName();
+    static constexpr System::StringView g_ACELogName{ SYSTEM_TEXT("ACENetwork") };
+    static constexpr System::StringView g_BoostLogName{ SYSTEM_TEXT("BoostNetwork") };
 }
 
 #endif  // NETWORK_INTERFACE_NETWORK_INTERNAL_FWD_H

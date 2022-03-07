@@ -28,43 +28,48 @@ void Mathematics::Arc2Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(Arc2Test);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Arc2Testing
 	::Arc2Test()
 {
 	default_random_engine generator{};
 	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
-	uniform_real<double> secondRandomDistribution{ 0.0,DoubleMath::GetTwoPI() };
+	uniform_real<double> secondRandomDistribution{ 0.0,MathD::GetTwoPI() };
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D center(firstRandomDistribution(generator),firstRandomDistribution(generator));
+		Vector2 center(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
-		double radius(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
 		double firstAngle(secondRandomDistribution(generator));
 
-		DoubleVector2D end0(center[0] + radius * DoubleMath::Cos(firstAngle),
-			           center[1] + radius * DoubleMath::Sin(firstAngle));
+		Vector2 end0(center[0] + radius * MathD::Cos(firstAngle),
+			           center[1] + radius * MathD::Sin(firstAngle));
 
-		uniform_real<double> thirdRandomDistribution(firstAngle,DoubleMath::GetTwoPI());
+		uniform_real<double> thirdRandomDistribution(firstAngle,MathD::GetTwoPI());
 
 		double secondAngle(thirdRandomDistribution(generator));
 
-		DoubleVector2D end1(center[0] + radius * DoubleMath::Cos(secondAngle),center[1] + radius * DoubleMath::Sin(secondAngle));
+		Vector2 end1(center[0] + radius * MathD::Cos(secondAngle),center[1] + radius * MathD::Sin(secondAngle));
 
-		DoubleArc2 arc2(center,radius,end0,end1);
+		Arc2D arc2(center,radius,end0,end1);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(center,arc2.GetCenter()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(end0,arc2.GetEnd0()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(end1,arc2.GetEnd1()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(center,arc2.GetCenter()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(end0,arc2.GetEnd0()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(end1,arc2.GetEnd1()));
 		ASSERT_APPROXIMATE(arc2.GetRadius(),radius,1e-10);
 
 		double thirdAngle(secondRandomDistribution(generator));
 
-		DoubleVector2D point(center[0] + radius * DoubleMath::Cos(thirdAngle),center[1] + radius * DoubleMath::Sin(thirdAngle));
+		Vector2 point(center[0] + radius * MathD::Cos(thirdAngle),center[1] + radius * MathD::Sin(thirdAngle));
 
 		if(firstAngle <= thirdAngle && thirdAngle <= secondAngle)
 		{

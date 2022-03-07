@@ -1,17 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 17:19)
 
 #include "Network/NetworkExport.h"
 
 #include "CacheClient.h"
 #include "ClientFactory.h"
 #include "ClientImpl.h"
+#include "NullClient.h"
 #include "OnlySendingClient.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
@@ -26,7 +27,7 @@ Network::ClientFactory::ClientFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, ClientFactory)
 
 // static
-const Network::ClientFactory::ImplTypePtr Network::ClientFactory::Create(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
+Network::ClientFactory::ImplTypeSharedPtr Network::ClientFactory::Create(const ConfigurationStrategy& configurationStrategy, const SocketManagerSharedPtr& socketManager)
 {
     const auto clientStrategyFlag = configurationStrategy.GetClientStrategy();
 
@@ -37,6 +38,6 @@ const Network::ClientFactory::ImplTypePtr Network::ClientFactory::Create(const C
         case ClientStrategy::OnlySending:
             return make_shared<OnlySendingClient>(configurationStrategy, socketManager);
         default:
-            return make_shared<ImplType>(configurationStrategy, socketManager);
+            return make_shared<NullClient>(configurationStrategy, socketManager);
     }
 }

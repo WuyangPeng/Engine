@@ -24,7 +24,7 @@ namespace Network
 		void SendTest(int testLoopCount);
 		void FinishSendTest(int testLoopCount, ParserStrategy parserStrategy);
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		static constexpr int64_t sm_MessageID{ 6 };

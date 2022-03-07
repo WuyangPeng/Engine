@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 11:16)
+///	引擎版本：0.8.0.2 (2022/02/18 15:20)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H
@@ -25,57 +25,61 @@
 // EllipseFit3<Real> fit(points);
 // Real exactly = fit.GetExactly();
 
-#include "Mathematics/Algebra/Matrix3.h"
 #include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+#include "Mathematics/Algebra/Matrix3.h"
 #include <vector>
 
 namespace Mathematics
 {
     template <typename Real>
-    class EllipsoidFit3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipsoidFit3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipsoidFit3 final
+    class EllipsoidFit3 final
     {
     public:
-        using EllipsoidFit3Impl = EllipsoidFit3Impl<Real>;
-         
-        TYPE_DECLARE(EllipsoidFit3);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using Vector3D = Vector3D<Real>;
-        using Points = std::vector<Vector3D>;
+        using ClassType = EllipsoidFit3<Real>;
+
+        using Vector3 = Vector3<Real>;
+        using Points = std::vector<Vector3>;
         using Matrix3 = Matrix3<Real>;
         using Angle = std::vector<Real>;
+        using Math = Math<Real>;
 
     public:
         explicit EllipsoidFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetExactly() const noexcept;
+        NODISCARD Real GetExactly() const noexcept;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] const Matrix3 GetRotate() const noexcept;
-        [[nodiscard]] Real GetExtent0() const noexcept;
-        [[nodiscard]] Real GetExtent1() const noexcept;
-        [[nodiscard]] Real GetExtent2() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Matrix3 GetRotate() const noexcept;
+        NODISCARD Real GetExtent0() const noexcept;
+        NODISCARD Real GetExtent1() const noexcept;
+        NODISCARD Real GetExtent2() const noexcept;
 
-        [[nodiscard]] int GetNumPoint() const;
-        [[nodiscard]] const Vector3D GetPoint(int index) const;
+        NODISCARD int GetNumPoint() const;
+        NODISCARD Vector3 GetPoint(int index) const;
 
     private:
-        PackageType impl;
+        void Fit3();
+        void InitialGuess();
+
+        static Real Energy(const Angle& input, const EllipsoidFit3* userData);
+
+        static Angle MatrixToAngles(const Matrix3& rotate);
+        static Matrix3 AnglesToMatrix(const Angle& angle) noexcept;
+
+    private:
+        Points points;
+        Vector3 center;
+        Matrix3 rotate;
+        Real extent0;
+        Real extent1;
+        Real extent2;
+        Real exactly;
     };
 
-    using FloatEllipsoidFit3 = EllipsoidFit3<float>;
-    using DoubleEllipsoidFit3 = EllipsoidFit3<double>;
+    using EllipsoidFit3F = EllipsoidFit3<float>;
+    using EllipsoidFit3D = EllipsoidFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSOID_FIT3_H

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/09 17:36)
+///	引擎版本：0.8.0.3 (2022/02/21 15:43)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_ACHIEVE_H
@@ -13,19 +13,20 @@
 #include "DistanceLine3Ray3.h"
 #include "Detail/DistanceLine3Line3ToolDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Mathematics/Objects3D/Ray3Detail.h"
 
 template <typename Real>
 Mathematics::DistanceLine3Ray3<Real>::DistanceLine3Ray3(const Line3& line, const Ray3& ray) noexcept
-    : ParentType{}, m_Line{ line }, m_Ray{ ray }
+    : ParentType{}, line{ line }, ray{ ray }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DistanceLine3Ray3<Real>::IsValid() const noexcept
 {
@@ -34,32 +35,33 @@ bool Mathematics::DistanceLine3Ray3<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::DistanceLine3Ray3<Real>::GetLine() const noexcept
+Mathematics::Line3<Real> Mathematics::DistanceLine3Ray3<Real>::GetLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::DistanceLine3Ray3<Real>::GetRay() const noexcept
+Mathematics::Ray3<Real> Mathematics::DistanceLine3Ray3<Real>::GetRay() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ray;
+    return ray;
 }
 
 template <typename Real>
-const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared() const
+typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const DistanceLine3Line3Tool tool{ m_Line.GetOrigin(), m_Line.GetDirection(), m_Ray.GetOrigin(), m_Ray.GetDirection() };
+    const DistanceLine3Line3Tool tool{ line.GetOrigin(), line.GetDirection(), ray.GetOrigin(), ray.GetDirection() };
 
-    auto det = tool.GetDet();
+    const auto det = tool.GetDet();
 
     if (this->GetZeroThreshold() <= det)
     {
@@ -74,8 +76,12 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
                                    rhsT * (tool.GetDirectionDot() * lhsT + rhsT + Math::GetValue(2) * tool.GetOriginDifferenceDotRhsDirection()) +
                                    tool.GetOriginDifferenceSquaredLength();
 
-            return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance), Math::GetValue(0), m_Line.GetOrigin() + lhsT * m_Line.GetDirection(),
-                                   m_Ray.GetOrigin() + rhsT * m_Ray.GetDirection(), lhsT, rhsT };
+            return DistanceResult{ Math::GetNumericalRoundOffNonnegative(squaredDistance),
+                                   Math::GetValue(0),
+                                   line.GetOrigin() + lhsT * line.GetDirection(),
+                                   ray.GetOrigin() + rhsT * ray.GetDirection(),
+                                   lhsT,
+                                   rhsT };
         }
         else
         {
@@ -91,22 +97,25 @@ const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics:
 }
 
 template <typename Real>
-const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const
+typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const
 {
     auto squaredDistance = tool.GetSquaredDistanceWithLhs();
 
-    return DistanceResult{ squaredDistance, Math::GetValue(0),
-                           m_Line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * m_Line.GetDirection(), m_Ray.GetOrigin(),
-                           -tool.GetOriginDifferenceDotLhsDirection(), Math::GetValue(0) };
+    return DistanceResult{ squaredDistance,
+                           Math::GetValue(0),
+                           line.GetOrigin() - tool.GetOriginDifferenceDotLhsDirection() * line.GetDirection(),
+                           ray.GetOrigin(),
+                           -tool.GetOriginDifferenceDotLhsDirection(),
+                           Math::GetValue(0) };
 }
 
 template <typename Real>
-const typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
+typename Mathematics::DistanceLine3Ray3<Real>::DistanceResult Mathematics::DistanceLine3Ray3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto movedLine = m_Line.GetMove(t, lhsVelocity);
-    const auto movedRay = m_Ray.GetMove(t, rhsVelocity);
+    const auto movedLine = line.GetMove(t, lhsVelocity);
+    const auto movedRay = ray.GetMove(t, rhsVelocity);
 
     ClassType distance{ movedLine, movedRay };
     distance.SetZeroThreshold(this->GetZeroThreshold());

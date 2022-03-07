@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 11:17)
+///	引擎版本：0.8.0.3 (2022/03/02 22:39)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_ACHIEVE_H
 
 #include "StaticFindIntersectorSphere3Cone3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSphere3Cone3<Real>::StaticFindIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone, const Real epsilon)
-    : ParentType{ epsilon }, m_Sphere{ sphere }, m_Cone{ cone }, m_Point{}
+    : ParentType{ epsilon }, sphere{ sphere }, cone{ cone }, point{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorSphere3Cone3<Real>::StaticFindIntersectorSpher
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorSphere3Cone3<Real>::IsValid() const noexcept
 {
@@ -32,31 +33,32 @@ bool Mathematics::StaticFindIntersectorSphere3Cone3<Real>::IsValid() const noexc
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetSphere() const noexcept
+Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetSphere() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Sphere;
+    return sphere;
 }
 
 template <typename Real>
-const Mathematics::Cone3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetCone() const noexcept
+Mathematics::Cone3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetCone() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Cone;
+    return cone;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
 {
     // 测试圆锥顶点是否在球体中。
-    auto diff = m_Sphere.GetCenter() - m_Cone.GetVertex();
-    auto radiusSqr = m_Sphere.GetRadius() * m_Sphere.GetRadius();
-    auto lengthSqr = Vector3DTools::VectorMagnitudeSquared(diff);
+    auto diff = sphere.GetCenter() - cone.GetVertex();
+    auto radiusSqr = sphere.GetRadius() * sphere.GetRadius();
+    auto lengthSqr = Vector3Tools::GetLengthSquared(diff);
     if (lengthSqr <= radiusSqr)
     {
         this->SetIntersectionType(IntersectionType::Other);
@@ -64,9 +66,9 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     }
 
     // 测试球心是否在圆锥中
-    auto dot = Vector3DTools::DotProduct(diff, m_Cone.GetAxis());
+    auto dot = Vector3Tools::DotProduct(diff, cone.GetAxis());
     auto dotSqr = dot * dot;
-    auto cosSqr = m_Cone.GetCosAngle() * m_Cone.GetCosAngle();
+    auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
     if (lengthSqr * cosSqr <= dotSqr && Math::GetValue(0) < dot)
     {
         // 球体中心在圆锥体内部，因此球体和圆锥体相交。
@@ -83,15 +85,15 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
     /// dot(D,C - V)^2 >= dot(C - V,C - V) - Real^2
     /// 注意，如果右侧为非正，则不等式为true（球体包含V）。 我已经在此函数的第一段代码中排除了这一点
 
-    auto uLength = Math::Sqrt(Math::FAbs(lengthSqr - dotSqr));
-    auto test = m_Cone.GetCosAngle() * dot + m_Cone.GetSinAngle() * uLength;
+    auto length = Math::Sqrt(Math::FAbs(lengthSqr - dotSqr));
+    auto test = cone.GetCosAngle() * dot + cone.GetSinAngle() * length;
     auto discr = test * test - lengthSqr + radiusSqr;
 
     // 计算最接近顶点V的交点
     auto t = test - Math::Sqrt(discr);
-    auto value0 = diff - dot * m_Cone.GetAxis();
-    auto value1 = m_Cone.GetSinAngle() / uLength;
-    m_Point = t * (m_Cone.GetCosAngle() * m_Cone.GetAxis() + value1 * value0);
+    auto value0 = diff - dot * cone.GetAxis();
+    auto value1 = cone.GetSinAngle() / length;
+    point = t * (cone.GetCosAngle() * cone.GetAxis() + value1 * value0);
 
     if (Math::GetValue(0) <= discr && Math::GetValue(0) <= test)
     {
@@ -104,11 +106,11 @@ void Mathematics::StaticFindIntersectorSphere3Cone3<Real>::Find()
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetPoint() const noexcept
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorSphere3Cone3<Real>::GetPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Point;
+    return point;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_ACHIEVE_H

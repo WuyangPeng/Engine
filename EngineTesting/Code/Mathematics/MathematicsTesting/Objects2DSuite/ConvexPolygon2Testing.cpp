@@ -7,7 +7,7 @@
 #include "ConvexPolygon2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Objects2D/ConvexPolygon2Detail.h"
 
 #include <random>
@@ -39,10 +39,10 @@ void Mathematics::ConvexPolygon2Testing ::ConvexPolygonTest()
     {
         /*		constexpr int size = 8;*/
 
-        // 		Polygon2d::Vector2DPtr vector2DPtr(NEW1<Polygon2d::Vector2D>(size));
+        // 		Polygon2d::Vector2Ptr Vector2Ptr(NEW1<Polygon2d::Vector2>(size));
         //
         // 		// x、y值为正
-        // 		DoubleVector2D firstVertex(firstRandomDistribution(generator),firstRandomDistribution(generator));
+        // 		DoubleVector2 firstVertex(firstRandomDistribution(generator),firstRandomDistribution(generator));
         //
         // 		uniform_real<double> secondRandomDistribution(0.0,firstVertex[0]);
         //
@@ -50,31 +50,31 @@ void Mathematics::ConvexPolygon2Testing ::ConvexPolygonTest()
         // 		double secondRandom = firstRandomDistribution(generator);
         //
         // 		// x、y值为正
-        // 		DoubleVector2D secondVertex(firstVertex[0] - firstRandom,firstVertex[1] + secondRandom);
+        // 		DoubleVector2 secondVertex(firstVertex[0] - firstRandom,firstVertex[1] + secondRandom);
         //
         // 		// x值为负、y值为正
-        // 		DoubleVector2D thirdVertex(-secondVertex[0],secondVertex[1]);
+        // 		DoubleVector2 thirdVertex(-secondVertex[0],secondVertex[1]);
         //
         // 		// x值为负、y值为正
-        // 		DoubleVector2D fourthVertex(thirdVertex[0] - firstRandom,thirdVertex[1] - secondRandom);
+        // 		DoubleVector2 fourthVertex(thirdVertex[0] - firstRandom,thirdVertex[1] - secondRandom);
         //
         // 		// x值为负、y值为负
-        // 		DoubleVector2D fifthVertex(fourthVertex[0],-fourthVertex[1]);
+        // 		DoubleVector2 fifthVertex(fourthVertex[0],-fourthVertex[1]);
         //
         // 		// x值为负、y值为负
-        // 		DoubleVector2D sixthVertex(fifthVertex[0] + firstRandom,fifthVertex[1] - secondRandom);
+        // 		DoubleVector2 sixthVertex(fifthVertex[0] + firstRandom,fifthVertex[1] - secondRandom);
         //
         // 		// x值为正、y值为负
-        // 		DoubleVector2D seventhVertex(-sixthVertex[0],sixthVertex[1]);
+        // 		DoubleVector2 seventhVertex(-sixthVertex[0],sixthVertex[1]);
         //
         // 		// x值为正、y值为负
-        // 		DoubleVector2D eighthVertex(seventhVertex[0] + firstRandom,seventhVertex[1] + secondRandom);
+        // 		DoubleVector2 eighthVertex(seventhVertex[0] + firstRandom,seventhVertex[1] + secondRandom);
         //
-        // 		// 由于是测试，没有对vector2DPtr和linePtr进行初始化，
+        // 		// 由于是测试，没有对Vector2Ptr和linePtr进行初始化，
         // 		// 使用SetVertex和UpdateLines进行计算。
         // 		ConvexPolygon2d::LinePtr linePtr(NEW1<ConvexPolygon2d::Line>(size));
         //
-        // 		ConvexPolygon2d firstPolygon(size,vector2DPtr,linePtr);
+        // 		ConvexPolygon2d firstPolygon(size,Vector2Ptr,linePtr);
         // 		firstPolygon.SetVertex(0,firstVertex);
         // 		firstPolygon.SetVertex(1,secondVertex);
         // 		firstPolygon.SetVertex(2,thirdVertex);
@@ -98,21 +98,21 @@ void Mathematics::ConvexPolygon2Testing ::ConvexPolygonTest()
         //
         // 		for(int k = 0;k < size;++k)
         // 		{
-        // 			ASSERT_TRUE(DoubleVector2DTools::Approximate(secondPtr[k].first,thirdPtr[k].first));
+        // 			ASSERT_TRUE(DoubleVector2Tools::Approximate(secondPtr[k].first,thirdPtr[k].first));
         // 			ASSERT_APPROXIMATE(secondPtr[k].second,thirdPtr[k].second,1e-10);
-        // 			ASSERT_TRUE(DoubleVector2DTools::Approximate(secondPolygon.GetLine(k).first, firstPolygon.GetLine(k).first));
+        // 			ASSERT_TRUE(DoubleVector2Tools::Approximate(secondPolygon.GetLine(k).first, firstPolygon.GetLine(k).first));
         // 			ASSERT_APPROXIMATE(secondPolygon.GetLine(k).second, firstPolygon.GetLine(k).second,1e-10);
         // 		}
         //
         // 		for(int k = 0;k < 10;++k)
         // 		{
-        // 			DoubleVector2D point(firstRandomDistribution(generator), firstRandomDistribution(generator));
+        // 			DoubleVector2 point(firstRandomDistribution(generator), firstRandomDistribution(generator));
         //
         // 			bool contains = true;
         //
         // 			for (int j = 0; j < firstPolygon.GetNumVertices(); ++j)
         // 			{
-        // 				double distance = DoubleVector2DTools::DotProduct(firstPolygon.GetLine(j).first,point) - firstPolygon.GetLine(j).second;
+        // 				double distance = DoubleVector2Tools::DotProduct(firstPolygon.GetLine(j).first,point) - firstPolygon.GetLine(j).second;
         //
         // 				if (distance < 0.0)
         // 				{

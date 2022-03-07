@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:29)
 
 #include "PolynomialFit3Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/PolynomialFit3Detail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -23,7 +23,8 @@ namespace Mathematics
 	template class PolynomialFit3<float>;
 	template class PolynomialFit3<double>;
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit3Testing) 
 
 void Mathematics::PolynomialFit3Testing
@@ -44,44 +45,44 @@ void Mathematics::PolynomialFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<double> x;
-		std::vector<double> y;
-		std::vector<double> w;
-		int size = secondRandomDistribution(generator);
+// 		std::vector<double> x;
+// 		std::vector<double> y;
+// 		std::vector<double> w;
+// 		int size = secondRandomDistribution(generator);
+// 
+// 		for (int i = 0; i < size; ++i)
+// 		{
+// 			x.push_back(firstRandomDistribution(generator));
+// 			y.push_back(firstRandomDistribution(generator));
+// 			w.push_back(firstRandomDistribution(generator));
+// 		}
+// 
+// 		int xDegree = thirdRandomDistribution(generator);
+// 		int yDegree = thirdRandomDistribution(generator);
 
-		for (int i = 0; i < size; ++i)
-		{
-			x.push_back(firstRandomDistribution(generator));
-			y.push_back(firstRandomDistribution(generator));
-			w.push_back(firstRandomDistribution(generator));
-		}
-
-		int xDegree = thirdRandomDistribution(generator);
-		int yDegree = thirdRandomDistribution(generator);
-
-		DoublePolynomialFit3 polynomialFit(x, y, w, xDegree, yDegree);
-
-		if (polynomialFit.IsSolveSucceed())
-		{
-			vector<double> polynomial = polynomialFit.GetCoeff();
-
-			for (int i = 0; i < size; ++i)
-			{
-				double sum = 0.0;
-				for (int yIndex = 0; yIndex <= yDegree; ++yIndex)				
-				{
-					for (int xIndex = 0; xIndex <= xDegree; ++xIndex)
-					{
-						auto tempValue = xIndex + (xDegree + 1) * yIndex;
-						sum += polynomial[tempValue] * DoubleMath::Pow(x[i], xIndex) * DoubleMath::Pow(y[i], yIndex);
-					}
-				}
-
-				double value = sum - w[i];
-
-				ASSERT_LESS_EQUAL(DoubleMath::FAbs(value) , 35.0);
-			}
-		}		
+// 		PolynomialFit3D polynomialFit(x, y, w, xDegree, yDegree);
+// 
+// 		if (polynomialFit.IsSolveSucceed())
+// 		{
+// 			vector<double> polynomial = polynomialFit.GetCoeff();
+// 
+// 			for (int i = 0; i < size; ++i)
+// 			{
+// 				double sum = 0.0;
+// 				for (int yIndex = 0; yIndex <= yDegree; ++yIndex)				
+// 				{
+// 					for (int xIndex = 0; xIndex <= xDegree; ++xIndex)
+// 					{
+// 						auto tempValue = xIndex + (xDegree + 1) * yIndex;
+// 						sum += polynomial[tempValue] * MathD::Pow(x[i], xIndex) * MathD::Pow(y[i], yIndex);
+// 					}
+// 				}
+// 
+// 				double value = sum - w[i];
+// 
+// 				ASSERT_LESS_EQUAL(MathD::FAbs(value) , 35.0);
+// 			}
+// 		}		
 	}
 }
 

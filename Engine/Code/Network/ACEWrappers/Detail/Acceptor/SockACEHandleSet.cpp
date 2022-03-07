@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 14:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 17:55)
 
 #include "Network/NetworkExport.h"
 
@@ -17,7 +17,7 @@ using std::make_shared;
 #ifdef NETWORK_USE_ACE
 
 Network::SockACEHandleSet::SockACEHandleSet() noexcept
-    : ParentType{}, m_ACEHandleSet{}
+    : ParentType{}, aceHandleSet{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -28,7 +28,7 @@ void Network::SockACEHandleSet::SetBit(ACEHandle handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ACEHandleSet.set_bit(handle);
+    aceHandleSet.set_bit(handle);
 }
 
 int64_t Network::SockACEHandleSet::GetMaxSet() const
@@ -37,7 +37,7 @@ int64_t Network::SockACEHandleSet::GetMaxSet() const
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
-    return reinterpret_cast<int64_t>(m_ACEHandleSet.max_set());
+    return reinterpret_cast<int64_t>(aceHandleSet.max_set());
     #include STSTEM_WARNING_POP
 }
 
@@ -45,31 +45,31 @@ Network::SockFdSet* Network::SockACEHandleSet::GetFdSet()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_ACEHandleSet.fdset();
+    return aceHandleSet.fdset();
 }
 
 void Network::SockACEHandleSet::Sync(ACEHandle maxHandle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ACEHandleSet.sync(maxHandle);
+    aceHandleSet.sync(maxHandle);
 }
 
 bool Network::SockACEHandleSet::IsSet(ACEHandle handle) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ACEHandleSet.is_set(handle) != 0;
+    return aceHandleSet.is_set(handle) != 0;
 }
 
 void Network::SockACEHandleSet::ClearBit(ACEHandle handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ACEHandleSet.clr_bit(handle);
+    aceHandleSet.clr_bit(handle);
 }
 
-Network::SockACEHandleSet::ImplTypePtr Network::SockACEHandleSet::Clone() const
+Network::SockACEHandleSet::ImplTypeSharedPtr Network::SockACEHandleSet::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -80,14 +80,14 @@ const Network::ACEHandleSet& Network::SockACEHandleSet::GetACEHandleSet() const 
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ACEHandleSet;
+    return aceHandleSet;
 }
 
 bool Network::SockACEHandleSet::IsFdSetFull() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (FD_SETSIZE <= m_ACEHandleSet.num_set())
+    if (FD_SETSIZE <= aceHandleSet.num_set())
         return true;
     else
         return false;
@@ -97,14 +97,14 @@ int Network::SockACEHandleSet::IsFdSetCount() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ACEHandleSet.num_set();
+    return aceHandleSet.num_set();
 }
 
 bool Network::SockACEHandleSet::Select(int width)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (0 < ACE::select(width, m_ACEHandleSet))
+    if (0 < ACE::select(width, aceHandleSet))
         return true;
     else
         return false;

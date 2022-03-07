@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:31)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,45 +20,10 @@
 using std::make_shared;
 using namespace std::literals;
 
-CoreTools::AppenderImpl::AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel)
-    : m_AppenderFlags{ appenderFlags }, m_LogLevel{ logLevel }, m_IsDefault{ true }, m_AppenderImplMutex{ MutexCreate::UseCriticalSection }
+CoreTools::AppenderImpl::AppenderImpl(AppenderPrint appenderFlags, LogLevel logLevel) noexcept
+    : appenderFlags{ appenderFlags }, logLevel{ logLevel }, isDefaultAppender{ true }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::AppenderImpl::AppenderImpl(const AppenderImpl& rhs)
-    : m_AppenderFlags{ rhs.m_AppenderFlags }, m_LogLevel{ rhs.m_LogLevel }, m_IsDefault{ rhs.m_IsDefault }, m_AppenderImplMutex{ MutexCreate::UseCriticalSection }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::AppenderImpl& CoreTools::AppenderImpl::operator=(const AppenderImpl& rhs) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    m_AppenderFlags = rhs.m_AppenderFlags;
-    m_LogLevel = rhs.m_LogLevel;
-    m_IsDefault = rhs.m_IsDefault;
-
-    return *this;
-}
-
-CoreTools::AppenderImpl::AppenderImpl(AppenderImpl&& rhs) noexcept
-    : m_AppenderFlags{ rhs.m_AppenderFlags }, m_LogLevel{ rhs.m_LogLevel }, m_IsDefault{ rhs.m_IsDefault }, m_AppenderImplMutex{ std::move(rhs.m_AppenderImplMutex) }
-{
-    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
-}
-
-CoreTools::AppenderImpl& CoreTools::AppenderImpl::operator=(AppenderImpl&& rhs) noexcept
-{
-    CORE_TOOLS_CLASS_IS_VALID_9;
-
-    m_AppenderFlags = rhs.m_AppenderFlags;
-    m_LogLevel = rhs.m_LogLevel;
-    m_IsDefault = rhs.m_IsDefault;
-    m_AppenderImplMutex = std::move(rhs.m_AppenderImplMutex);
-
-    return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, AppenderImpl)
@@ -67,33 +32,31 @@ CoreTools::LogLevel CoreTools::AppenderImpl::GetLogLevel() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_LogLevel;
+    return logLevel;
 }
 
 CoreTools::AppenderPrint CoreTools::AppenderImpl::GetFlags() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_AppenderFlags;
+    return appenderFlags;
 }
 
 void CoreTools::AppenderImpl::SetLogLevel(LogLevel level) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_LogLevel = level;
+    logLevel = level;
 }
 
 void CoreTools::AppenderImpl::Write(const LogMessage& message)
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    ScopedMutex scopedMutex{ m_AppenderImplMutex };
-
-    if (m_LogLevel != LogLevel::Disabled && m_LogLevel <= message.GetLogLevel())
+    if (logLevel != LogLevel::Disabled && logLevel <= message.GetLogLevel())
     {
-        LogMessagePrefix prefix{ m_AppenderFlags, message.GetLogLevel(), message.GetLogFilterType() };
-        LogMessagePostfix postfix{ m_AppenderFlags, message.GetLogLevel(), message.GetFunctionDescribed() };
+        const LogMessagePrefix prefix{ appenderFlags, message.GetLogLevel(), message.GetLogFilterType() };
+        const LogMessagePostfix postfix{ appenderFlags, message.GetLogLevel(), message.GetFunctionDescribed() };
 
         DoWrite(message, prefix, postfix);
     }
@@ -138,12 +101,12 @@ bool CoreTools::AppenderImpl::IsDefault() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_IsDefault;
+    return isDefaultAppender;
 }
 
 void CoreTools::AppenderImpl::SetIsDefault(bool isDefault) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    m_IsDefault = isDefault;
+    isDefaultAppender = isDefault;
 }

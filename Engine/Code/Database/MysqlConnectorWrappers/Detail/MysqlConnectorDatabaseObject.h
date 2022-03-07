@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:21)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DATABASE_OBJECT_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DATABASE_OBJECT_H
@@ -36,13 +36,13 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] MysqlxSessionPtr GetMysqlxSessionPtr() override;
+        NODISCARD MysqlxSessionUniquePtr GetMysqlxSession() const override;
 
     private:
-        using MysqlxClientPtr = std::unique_ptr<MysqlxClient>;
+        using MysqlxClientUniquePtr = std::unique_ptr<MysqlxClient>;
 
     private:
-        MysqlxClientPtr m_MysqlxClient;
+        MysqlxClientUniquePtr mysqlxClient;
     };
 }
 

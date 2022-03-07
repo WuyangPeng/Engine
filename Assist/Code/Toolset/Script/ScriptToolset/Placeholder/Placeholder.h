@@ -7,23 +7,23 @@
 #ifndef SCRIPT_TOOLSET_PLACEHOLDER_H
 #define SCRIPT_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Script/ScriptToolset/ScriptToolsetDll.h" 
+#include "Toolset/Script/ScriptToolset/ScriptToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ScriptToolset
 {
-	 class SCRIPT_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class SCRIPT_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // SCRIPT_TOOLSET_PLACEHOLDER_H
+#endif  // SCRIPT_TOOLSET_PLACEHOLDER_H

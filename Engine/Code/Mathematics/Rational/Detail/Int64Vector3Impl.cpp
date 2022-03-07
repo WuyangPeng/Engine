@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 14:08)
+///	引擎版本：0.8.0.2 (2022/02/11 17:01)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -16,21 +16,20 @@
 #include "Mathematics/Rational/Int64VectorDetail.h"
 
 Mathematics::Int64Vector3Impl::Int64Vector3Impl() noexcept
-    : m_Tuple{}
+    : tuple{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Int64Vector3Impl::Int64Vector3Impl(const Int64Vector<3>& rhs) noexcept
-    : m_Tuple{ rhs }
+    : tuple{ rhs }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 Mathematics::Int64Vector3Impl::Int64Vector3Impl(int64_t x, int64_t y, int64_t z) noexcept
-    : m_Tuple{ x, y, z }
+    : tuple{ x, y, z }
 {
-    
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
@@ -38,7 +37,7 @@ Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl::operator=(const In
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple = rhs;
+    tuple = rhs;
 
     return *this;
 }
@@ -49,56 +48,56 @@ int64_t Mathematics::Int64Vector3Impl::GetX() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple[0];
+    return tuple[0];
 }
 
 int64_t Mathematics::Int64Vector3Impl::GetY() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple[1];
+    return tuple[1];
 }
 
 int64_t Mathematics::Int64Vector3Impl::GetZ() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple[2];
+    return tuple[2];
 }
 
 void Mathematics::Int64Vector3Impl::SetX(int64_t x)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple[0] = x;
+    tuple[0] = x;
 }
 
 void Mathematics::Int64Vector3Impl::SetY(int64_t y)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple[1] = y;
+    tuple[1] = y;
 }
 
 void Mathematics::Int64Vector3Impl::SetZ(int64_t z)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple[2] = z;
+    tuple[2] = z;
 }
 
-const Mathematics::Int64Vector3Impl Mathematics::Int64Vector3Impl::operator-() const noexcept
+Mathematics::Int64Vector3Impl Mathematics::Int64Vector3Impl::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Int64Vector3Impl{ -m_Tuple };
+    return Int64Vector3Impl{ -tuple };
 }
 
 Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl::operator+=(const Int64Vector3Impl& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple += rhs.m_Tuple;
+    tuple += rhs.tuple;
 
     return *this;
 }
@@ -107,7 +106,7 @@ Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl::operator-=(const I
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple -= rhs.m_Tuple;
+    tuple -= rhs.tuple;
 
     return *this;
 }
@@ -116,7 +115,7 @@ Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl::operator*=(int64_t
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple *= scalar;
+    tuple *= scalar;
 
     return *this;
 }
@@ -125,7 +124,7 @@ Mathematics::Int64Vector3Impl& Mathematics::Int64Vector3Impl::operator/=(int64_t
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple /= scalar;
+    tuple /= scalar;
 
     return *this;
 }
@@ -134,7 +133,7 @@ int64_t Mathematics::Int64Vector3Impl ::SquaredLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple.SquaredLength();
+    return tuple.SquaredLength();
 }
 
 int64_t Mathematics::Dot(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs)

@@ -13,7 +13,7 @@
 #include "VertexFormat.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "System/Helper/PragmaWarning.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26456)
@@ -29,9 +29,9 @@ namespace Rendering
 		using VertexBufferSharedPtr = std::shared_ptr<ClassType>;
 		using ConstVertexBufferSharedPtr = std::shared_ptr<const ClassType>;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using AVector = Mathematics::FloatAVector;
-		using APoint = Mathematics::FloatAPoint;
-		using Vector2D = Mathematics::FloatVector2D;
+		using AVector = Mathematics::AVectorF;
+		using APoint = Mathematics::APointF;
+		using Vector2D = Mathematics::Vector2F;
 
 	public:
                 VertexBuffer() noexcept;

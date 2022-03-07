@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 14:59)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_IMPL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_IMPL_H
@@ -27,19 +27,25 @@ namespace CoreTools
 
 #ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_DECLARE;
-        [[nodiscard]] bool IndexIsValid() const noexcept;
+        NODISCARD bool IndexIsValid() const noexcept;
         void PrintIndexInLog() const noexcept;
 #endif  // OPEN_CLASS_INVARIANT
 
-        [[nodiscard]] int GetMaxElements() const;
-        [[nodiscard]] int GetHeapIndex(int uniqueIndex) const;
+        NODISCARD int GetMaxElements() const;
+        NODISCARD int GetHeapIndex(int uniqueIndex) const;
 
         void ChangeIndex(int lhsIndex, int rhsIndex);
 
         void GrowBy(int newMaxElements);
 
     private:
-        std::vector<int> m_RecordIndexs;
+        using RecordIndex = std::vector<int>;
+
+    private:
+        NODISCARD static RecordIndex CreateDefaultRecordIndex(int maxElements);
+
+    private:
+        RecordIndex recordIndexs;
     };
 }
 

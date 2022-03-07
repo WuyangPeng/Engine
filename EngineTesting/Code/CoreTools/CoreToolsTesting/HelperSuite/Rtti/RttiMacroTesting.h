@@ -24,14 +24,13 @@ namespace CoreTools
         explicit RttiMacroTesting(const OStreamShared& stream);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 
     private:
         void DoRunUnitTest() override;
         void MainTest();
 
         void RttiTest();
-
-        CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
     };
 }
 

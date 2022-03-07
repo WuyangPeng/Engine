@@ -19,7 +19,9 @@ using std::default_random_engine;
  
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,RationalVectorTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
 void Mathematics::RationalVectorTesting
 	::MainTest()
 {

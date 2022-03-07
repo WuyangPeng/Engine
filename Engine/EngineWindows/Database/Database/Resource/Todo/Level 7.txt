@@ -1,3 +1,7 @@
 TODO Level 7
  
-0.5.2.1
+0.8.0.1
+
+1.（mariaDB） 完成封装mariaDB的实现。
+2.（mongo）完成封装mongo的实现。
+3.（Redis）完成封装Redis的实现。

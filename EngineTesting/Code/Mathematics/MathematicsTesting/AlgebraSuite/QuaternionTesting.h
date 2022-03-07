@@ -27,7 +27,7 @@ namespace Mathematics
 		void ConstraintsClosestCalculateTest();
 		void CompareTest();
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

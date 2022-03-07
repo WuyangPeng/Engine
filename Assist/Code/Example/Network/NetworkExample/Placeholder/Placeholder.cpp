@@ -6,13 +6,12 @@
 
 #include "Example/Network/NetworkExample/NetworkExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-NetworkExample::Placeholder
-	::Placeholder() 
+NetworkExample::Placeholder::Placeholder() noexcept
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(NetworkExample, Placeholder)

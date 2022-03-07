@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/30 19:03)
 
 #include "ContBox3Testing.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Containment/ContBox3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -27,7 +27,12 @@ void Mathematics::ContBox3Testing
 	ASSERT_NOT_THROW_EXCEPTION_0(ContOrientedBoxTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(MergeBoxesTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::ContBox3Testing
 	::ContAlignedBoxTest()
 {
@@ -39,15 +44,15 @@ void Mathematics::ContBox3Testing
 	
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleBox3 box = ContBox3d::ContAlignedBox(vertices);
+		Box3D box = ContBox3d::ContAlignedBox(vertices);
 		
 		for (int i = 0; i < size; ++i)
 		{
@@ -67,15 +72,15 @@ void Mathematics::ContBox3Testing
 	
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleBox3 box = ContBox3d::ContOrientedBox(vertices);
+		Box3D box = ContBox3d::ContOrientedBox(vertices);
 
 		for (int i = 0; i < size; ++i)
 		{
@@ -95,27 +100,27 @@ void Mathematics::ContBox3Testing
 	
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> firstVertices;
+		std::vector<Vector3D> firstVertices;
 		int firstSize = secondRandomDistribution(generator);
 
 		for (int i = 0; i < firstSize; ++i)
 		{
-			firstVertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			firstVertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleBox3 firstBox = ContBox3d::ContAlignedBox(firstVertices);
+		Box3D firstBox = ContBox3d::ContAlignedBox(firstVertices);
 
-		std::vector<DoubleVector3D> secondVertices;
+		std::vector<Vector3D> secondVertices;
 		int secondSize = secondRandomDistribution(generator);
 
 		for (int i = 0; i < secondSize; ++i)
 		{
-			secondVertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			secondVertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleBox3 secondBox = ContBox3d::ContOrientedBox(secondVertices);
+		Box3D secondBox = ContBox3d::ContOrientedBox(secondVertices);
 
-		DoubleBox3 thirdBox = ContBox3d::MergeBoxes(firstBox,secondBox);
+		Box3D thirdBox = ContBox3d::MergeBoxes(firstBox,secondBox);
 
 		for (int i = 0; i < firstSize; ++i)
 		{

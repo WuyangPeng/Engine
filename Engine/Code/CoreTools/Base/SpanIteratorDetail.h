@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 20:40)
+///	引擎版本：0.8.0.1 (2022/01/12 14:21)
 
 #ifndef CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
 #define CORE_TOOLS_BASE_SPAN_ITERATOR_DETAIL_H
@@ -31,6 +31,7 @@ CoreTools::SpanIterator<Iter>::SpanIterator(Iter begin, Iter end, Iter current) 
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Iter>
 bool CoreTools::SpanIterator<Iter>::IsValid() const noexcept
 {
@@ -46,6 +47,7 @@ bool CoreTools::SpanIterator<Iter>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Iter>
@@ -203,7 +205,9 @@ const T& CoreTools::SpanIterator<Iter>::ReinterpretCast() const
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     return reinterpret_cast<const T&>(*current);
+
 #include STSTEM_WARNING_POP
 }
 
@@ -215,7 +219,9 @@ T& CoreTools::SpanIterator<Iter>::ReinterpretCast()
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
+
     return const_cast<T&>(static_cast<const ClassType&>(*this).ReinterpretCast<T>());
+
 #include STSTEM_WARNING_POP
 }
 

@@ -996,8 +996,8 @@ Rendering::PickRay Rendering::RendererImpl
 	const auto rightBlend = (1.0f - r) * m_Camera->GetRightMin() + r * m_Camera->GetRightMax();
 	const auto upBlend = (1.0f - u) * m_Camera->GetUpMin() + u * m_Camera->GetUpMax();
 
-	Mathematics::FloatAPoint origin{ };
-        Mathematics::FloatAVector direction{   };
+	Mathematics::APointF origin{ };
+        Mathematics::AVectorF direction{   };
 
 	if (m_Camera->IsPerspective())
 	{

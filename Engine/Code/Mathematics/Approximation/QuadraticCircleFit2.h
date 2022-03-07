@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 10:20)
+///	引擎版本：0.8.0.2 (2022/02/17 18:08)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 #include <vector>
 
@@ -30,33 +30,33 @@ namespace Mathematics
     {
     public:
         using ClassType = QuadraticCircleFit2<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Math = Math<Real>;
-        using Points = std::vector<Vector2D>;
+        using Points = std::vector<Vector2>;
 
     public:
         explicit QuadraticCircleFit2(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector2D GetCenter() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
-        [[nodiscard]] Real GetEigenValue() const noexcept;
+        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
+        NODISCARD Real GetEigenValue() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        constexpr static auto sm_EigenSystemSize = 4;
+        constexpr static auto eigenSystemSize = 4;
 
     private:
-        Vector2D m_Center;
-        Real m_Radius;
-        Real m_EigenValue;
+        Vector2 center;
+        Real radius;
+        Real eigenValue;
     };
 
-    using FloatQuadraticCircleFit2 = QuadraticCircleFit2<float>;
-    using DoubleQuadraticCircleFit2 = QuadraticCircleFit2<double>;
+    using QuadraticCircleFit2F = QuadraticCircleFit2<float>;
+    using QuadraticCircleFit2D = QuadraticCircleFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H

@@ -51,9 +51,12 @@ CoreTools::UnitTest& CoreTools::UnitTest::operator=(UnitTest&& rhs) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    ParentType::operator=(std::move(rhs));
-    unitTestData = std::move(rhs.unitTestData);
-    cpuTimer = std::move(rhs.cpuTimer);
+    if (this != &rhs)
+    {
+        ParentType::operator=(std::move(rhs));
+        unitTestData = std::move(rhs.unitTestData);
+        cpuTimer = std::move(rhs.cpuTimer);
+    }
 
     return *this;
 }

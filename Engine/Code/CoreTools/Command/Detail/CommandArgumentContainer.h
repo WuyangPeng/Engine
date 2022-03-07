@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 11:11)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_CONTAINER_H
@@ -33,38 +33,38 @@ namespace CoreTools
         void AddArgument(int index, const std::string& argumentsName, const std::string& argumentsValue);
         void AddEndArgumentValue(const std::string& argumentsValue);
 
-        [[nodiscard]] int GetArgumentsNumber() const noexcept;
+        NODISCARD int GetArgumentsNumber() const noexcept;
 
-        [[nodiscard]] bool IsUsed(const std::string& argumentsName) const;
+        NODISCARD bool IsUsed(const std::string& argumentsName) const;
         void SetUsed(const std::string& argumentsName);
 
-        [[nodiscard]] int GetIndex(const std::string& argumentsName) const;
+        NODISCARD int GetIndex(const std::string& argumentsName) const;
 
-        [[nodiscard]] int GetInteger(const std::string& argumentsName) const;
-        [[nodiscard]] float GetFloat(const std::string& argumentsName) const;
-        [[nodiscard]] double GetDouble(const std::string& argumentsName) const;
-        [[nodiscard]] const std::string GetString(const std::string& argumentsName) const;
+        NODISCARD int GetInteger(const std::string& argumentsName) const;
+        NODISCARD float GetFloat(const std::string& argumentsName) const;
+        NODISCARD double GetDouble(const std::string& argumentsName) const;
+        NODISCARD const std::string GetString(const std::string& argumentsName) const;
 
-        [[nodiscard]] bool IsInteger(const std::string& argumentsName) const;
-        [[nodiscard]] bool IsFloat(const std::string& argumentsName) const;
-        [[nodiscard]] bool IsDouble(const std::string& argumentsName) const;
-        [[nodiscard]] bool IsString(const std::string& argumentsName) const;
-        [[nodiscard]] bool IsExist(const std::string& argumentsName) const;
+        NODISCARD bool IsInteger(const std::string& argumentsName) const;
+        NODISCARD bool IsFloat(const std::string& argumentsName) const;
+        NODISCARD bool IsDouble(const std::string& argumentsName) const;
+        NODISCARD bool IsString(const std::string& argumentsName) const;
+        NODISCARD bool IsExist(const std::string& argumentsName) const;
 
         // 返回第一个未处理参数的名字。
-        [[nodiscard]] const std::string ExcessArguments() const;
-        [[nodiscard]] int GetExcessArgumentsCount() const noexcept;
+        NODISCARD const std::string ExcessArguments() const;
+        NODISCARD int GetExcessArgumentsCount() const noexcept;
 
     private:
         using CommandArgumentUsedContainer = std::map<std::string, CommandArgument>;
 
     private:
         template <typename R>
-        R Find(const std::string& argumentsName, R (CommandArgument::*function)() const) const;
+        NODISCARD R Find(const std::string& argumentsName, R (CommandArgument::*function)() const) const;
 
     private:
-        int m_ArgumentsNumber;
-        CommandArgumentUsedContainer m_CommandArgument;
+        int argumentsNumber;
+        CommandArgumentUsedContainer commandArgument;
     };
 }
 

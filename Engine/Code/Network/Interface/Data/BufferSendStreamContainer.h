@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 15:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 13:58)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_CONTAINER_H
@@ -23,27 +23,27 @@ namespace Network
         using ClassType = BufferSendStreamContainer;
 
     public:
-        BufferSendStreamContainer(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
+        BufferSendStreamContainer(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool Insert(const MessageInterfaceSharedPtr& message);
+        NODISCARD bool Insert(const MessageInterfaceSharedPtr& message);
 
         void Save(const MessageBufferSharedPtr& messageBuffer);
 
         void Clear();
 
-        [[nodiscard]] bool IsEmpty() const noexcept;
+        NODISCARD bool IsEmpty() const noexcept;
 
-        [[nodiscard]] uint32_t GetCurrentSize() const;
+        NODISCARD int GetCurrentSize() const;
 
-        [[nodiscard]] ACEHandle GetACEHandle() const noexcept;
-        [[nodiscard]] uint64_t GetSocketID() const noexcept;
+        NODISCARD ACEHandle GetACEHandle() const noexcept;
+        NODISCARD uint64_t GetSocketID() const noexcept;
 
     private:
-        uint64_t m_SocketID;
-        ACEHandle m_Handle;
-        BufferSendStream m_BufferSendStream;
+        uint64_t socketID;
+        ACEHandle handle;
+        BufferSendStream bufferSendStream;
     };
 }
 

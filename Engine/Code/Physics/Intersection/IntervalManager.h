@@ -25,7 +25,7 @@ namespace Physics
 		// Vector2D.
 
 		// Construction and destruction.
-		IntervalManager (std::vector<Mathematics::Vector2D<Real> >& interval);
+		IntervalManager (std::vector<Mathematics::Vector2<Real> >& interval);
 		~IntervalManager ();
 
 		// This function is called by the constructor and does the sort-and-sweep
@@ -64,7 +64,7 @@ namespace Physics
 			bool operator< (const Endpoint& endpoint) const;
 		};
 
-		std::vector<Mathematics::Vector2D<Real> >* mInterval;
+		std::vector<Mathematics::Vector2<Real> >* mInterval;
 		std::vector<Endpoint> mEndpoint;
 		std::set<Mathematics::EdgeKey> mOverlap;
 

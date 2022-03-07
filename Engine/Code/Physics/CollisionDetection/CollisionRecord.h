@@ -47,10 +47,10 @@ namespace Physics
 		
 		using ClassType = CollisionRecord<MeshSmartPointer, Bound>;
 		using BoundTreeChild = BoundTreeChild<MeshSmartPointer, Bound>;
-		using Intersector = Mathematics::Intersector<float,Mathematics::Vector3D>;
+		using Intersector = Mathematics::Intersector<float,Mathematics::Vector3>;
 		using IntersectorSharedPtr = std::shared_ptr<Intersector>;
 		using BoundTreeChildSharedPtr = std::shared_ptr<BoundTreeChild> ;
-		using AVector = Mathematics::FloatAVector;
+		using AVector = Mathematics::AVectorF;
 		using ConstMeshSmartPointer = typename MeshSmartPointer::ConstType;
 		using Callback = void (*) (const CollisionRecord& lhsRecord, int t0,
 			                       const CollisionRecord& rhsRecord, int t1,

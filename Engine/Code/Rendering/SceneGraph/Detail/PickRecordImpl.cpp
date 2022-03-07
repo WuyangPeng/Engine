@@ -67,7 +67,7 @@ bool Rendering::PickRecordImpl ::IsValid() const noexcept
     {
         if (-1 <= m_Triangle && 0.0f <= m_Bary[0] && m_Bary[0] <= 1.0f &&
             0.0f <= m_Bary[1] && m_Bary[1] <= 1.0f && 0.0f <= m_Bary[2] && m_Bary[2] <= 1.0f &&
-            Mathematics::FloatMath::Approximate(1.0f, m_Bary[0] + m_Bary[1] + m_Bary[2]))
+            Mathematics::MathF::Approximate(1.0f, m_Bary[0] + m_Bary[1] + m_Bary[2]))
         {
             return true;
         }

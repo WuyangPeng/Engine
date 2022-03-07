@@ -192,19 +192,19 @@ namespace Physics
             double maxAbsValue = 0.0;
             for (j = 0; j < numEquationsP1; ++j)
             {
-                double absValue = Mathematics::DoubleMath::FAbs(mEquations[i].C[j]);
+                double absValue = Mathematics::MathD::FAbs(mEquations[i].C[j]);
                 if (absValue > maxAbsValue)
                 {
                     maxAbsValue = absValue;
                 }
 
-                absValue = Mathematics::DoubleMath::FAbs(mEquations[i].W[j]);
+                absValue = Mathematics::MathD::FAbs(mEquations[i].W[j]);
                 if (absValue > maxAbsValue)
                 {
                     maxAbsValue = absValue;
                 }
 
-                absValue = Mathematics::DoubleMath::FAbs(mEquations[i].Z[j]);
+                absValue = Mathematics::MathD::FAbs(mEquations[i].Z[j]);
                 if (absValue > maxAbsValue)
                 {
                     maxAbsValue = absValue;
@@ -501,19 +501,19 @@ namespace Physics
                     for (j = 0; j < numEquationsP1; ++j)
                     {
                         mEquations[i].C[j] += coeff * replacement.C[j];
-                        if (Mathematics::DoubleMath::FAbs(mEquations[i].C[j]) < mRatioError * Mathematics::DoubleMath::FAbs(replacement.C[j]))
+                        if (Mathematics::MathD::FAbs(mEquations[i].C[j]) < mRatioError * Mathematics::MathD::FAbs(replacement.C[j]))
                         {
                             mEquations[i].C[j] = 0.0;
                         }
 
                         mEquations[i].W[j] += coeff * replacement.W[j];
-                        if (Mathematics::DoubleMath::FAbs(mEquations[i].W[j]) < mRatioError * Mathematics::DoubleMath::FAbs(replacement.W[j]))
+                        if (Mathematics::MathD::FAbs(mEquations[i].W[j]) < mRatioError * Mathematics::MathD::FAbs(replacement.W[j]))
                         {
                             mEquations[i].W[j] = 0.0;
                         }
 
                         mEquations[i].Z[j] += coeff * replacement.Z[j];
-                        if (Mathematics::DoubleMath::FAbs(mEquations[i].Z[j]) < mRatioError * Mathematics::DoubleMath::FAbs(replacement.Z[j]))
+                        if (Mathematics::MathD::FAbs(mEquations[i].Z[j]) < mRatioError * Mathematics::MathD::FAbs(replacement.Z[j]))
                         {
                             mEquations[i].Z[j] = 0.0;
                         }

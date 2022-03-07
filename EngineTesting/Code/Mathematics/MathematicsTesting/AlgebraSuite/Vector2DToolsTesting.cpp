@@ -1,194 +1,190 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // 作者：彭武阳，彭晔恩，彭晔泽
-// 
+//
 // 引擎测试版本：0.0.0.2 (2019/08/22 11:36)
 
 #include "Vector2DToolsTesting.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox2DDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox2Detail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
-#include <random>  
+#include <random>
 
-using std::vector;
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
+using std::vector;
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
 namespace Mathematics
 {
-	template class Vector2DTools<float>;
-	template class Vector2DTools<double>;	
+    template class Vector2Tools<float>;
+    template class Vector2Tools<double>;
 }
 
-#endif // BUILDING_MATHEMATICS_STATIC
+#endif  // BUILDING_MATHEMATICS_STATIC
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Vector2ToolsTesting)
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Vector2DToolsTesting) 
-
-void Mathematics::Vector2DToolsTesting
-	::MainTest()
+void Mathematics::Vector2ToolsTesting ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(DistanceTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ProductTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(ProjectionTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(PerpTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(OtherCalculateTest);	
+    ASSERT_NOT_THROW_EXCEPTION_0(DistanceTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ProductTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(ProjectionTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(PerpTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(CompareTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(OtherCalculateTest);
 }
 
-void Mathematics::Vector2DToolsTesting
-	::DistanceTest()
+void Mathematics::Vector2ToolsTesting ::DistanceTest()
 {
-	FloatVector2D firstVector(3.0f,4.0f);
+    Vector2F firstVector(3.0f, 4.0f);
 
-	ASSERT_APPROXIMATE(FloatVector2DTools::VectorMagnitude(firstVector),5.0f,1e-8f);
-	ASSERT_APPROXIMATE(FloatVector2DTools::VectorMagnitudeSquared(firstVector),  25.0f,1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::GetLength(firstVector), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::GetLengthSquared(firstVector), 25.0f, 1e-8f);
 
-	FloatVector2D secondVector(6.0f,8.0f);
+    Vector2F secondVector(6.0f, 8.0f);
 
-	ASSERT_APPROXIMATE(FloatVector2DTools::Distance(firstVector,secondVector),  5.0f,1e-8f);
-	ASSERT_APPROXIMATE(FloatVector2DTools::DistanceSquared(firstVector,secondVector), 25.0f,1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::Distance(firstVector, secondVector), 5.0f, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsF::DistanceSquared(firstVector, secondVector), 25.0f, 1e-8f);
 }
 
-void Mathematics::Vector2DToolsTesting
-	::ProductTest()
+void Mathematics::Vector2ToolsTesting ::ProductTest()
 {
-	DoubleVector2D firstVector(-4.0,3.0);
-	DoubleVector2D secondVector(8.0,6.0);
+    Vector2 firstVector(-4.0, 3.0);
+    Vector2 secondVector(8.0, 6.0);
 
-	ASSERT_APPROXIMATE(DoubleVector2DTools::DotProduct(firstVector,secondVector), -14.0,1e-8f);
-	ASSERT_APPROXIMATE(DoubleVector2DTools::PseudoCrossProduct(firstVector,secondVector), -48.0,1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsD::DotProduct(firstVector, secondVector), -14.0, 1e-8f);
+    ASSERT_APPROXIMATE(Vector2ToolsD::PseudoCrossProduct(firstVector, secondVector), -48.0, 1e-8f);
 }
 
-void Mathematics::Vector2DToolsTesting
-	::ProjectionTest()
+void Mathematics::Vector2ToolsTesting ::ProjectionTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> randomDistribution{ -10.0f,10.0f };
+    uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop) 
-	{
-		DoubleVector2D firstVector(randomDistribution(generator),
-			                  randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector2 firstVector(randomDistribution(generator),
+                            randomDistribution(generator));
 
-		DoubleVector2D secondVector(randomDistribution(generator),
-			                   randomDistribution(generator));
-	
-		double moduleSquare = DoubleVector2DTools::VectorMagnitudeSquared(secondVector);
-		DoubleVector2D parallelVector =  secondVector * (DoubleVector2DTools::DotProduct(firstVector, secondVector) / moduleSquare);
+        Vector2 secondVector(randomDistribution(generator),
+                             randomDistribution(generator));
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(DoubleVector2DTools::ParallelVectorLhsToRhs(firstVector,secondVector),parallelVector));
+        double moduleSquare = Vector2ToolsD::GetLengthSquared(secondVector);
+        Vector2 parallelVector = secondVector * (Vector2ToolsD::DotProduct(firstVector, secondVector) / moduleSquare);
 
-		DoubleVector2D apeakVector = firstVector - parallelVector;
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ParallelVectorLhsToRhs(firstVector, secondVector), parallelVector));
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(DoubleVector2DTools::ApeakVectorLhsToRhs(firstVector,secondVector),apeakVector));
+        Vector2 apeakVector = firstVector - parallelVector;
 
-		double angle = DoubleMath::ACos(DoubleVector2DTools::DotProduct(firstVector,secondVector) / (DoubleVector2DTools::VectorMagnitude(firstVector) * DoubleVector2DTools::VectorMagnitude(secondVector)));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::ApeakVectorLhsToRhs(firstVector, secondVector), apeakVector));
 
-		ASSERT_APPROXIMATE(angle,DoubleVector2DTools::GetVectorIncludedAngle(firstVector,secondVector),1e-10);
-	}
+        double angle = MathD::ACos(Vector2ToolsD::DotProduct(firstVector, secondVector) / (Vector2ToolsD::GetLength(firstVector) * Vector2ToolsD::GetLength(secondVector)));
+
+        ASSERT_APPROXIMATE(angle, Vector2ToolsD::GetVectorIncludedAngle(firstVector, secondVector), 1e-10);
+    }
 }
 
-void Mathematics::Vector2DToolsTesting
-	::PerpTest()
+void Mathematics::Vector2ToolsTesting ::PerpTest()
 {
-	FloatVector2D firstVector(3.0f,4.0f);
-	FloatVector2D perpVector(4.0f,-3.0f);
+    Vector2F firstVector(3.0f, 4.0f);
+    Vector2F perpVector(4.0f, -3.0f);
 
-	ASSERT_TRUE(FloatVector2DTools::Approximate(FloatVector2DTools::GetPerp(firstVector),perpVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetPerp(firstVector), perpVector));
 
-	perpVector.Normalize();
+    perpVector.Normalize();
 
-	ASSERT_TRUE(FloatVector2DTools::Approximate(FloatVector2DTools::GetUnitPerp(firstVector),perpVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(Vector2ToolsF::GetUnitPerp(firstVector), perpVector));
 
-	float dotPerp = firstVector.GetX() * perpVector.GetY() - firstVector.GetY() * perpVector.GetX();
+    float dotPerp = firstVector.GetX() * perpVector.GetY() - firstVector.GetY() * perpVector.GetX();
 
-	ASSERT_APPROXIMATE(FloatVector2DTools::DotPerp(firstVector,perpVector), dotPerp,1e-8f);	
+    ASSERT_APPROXIMATE(Vector2ToolsF::DotPerp(firstVector, perpVector), dotPerp, 1e-8f);
 }
 
-void Mathematics::Vector2DToolsTesting
-	::CompareTest()
+void Mathematics::Vector2ToolsTesting ::CompareTest()
 {
-	FloatVector2D firstVector(6.0f,8.0f);
-	FloatVector2D secondVector(7.0f,5.0f);
+    Vector2F firstVector(6.0f, 8.0f);
+    Vector2F secondVector(7.0f, 5.0f);
 
-	ASSERT_TRUE(FloatVector2DTools::Approximate(firstVector,firstVector));
-	ASSERT_TRUE(FloatVector2DTools::Approximate(secondVector,secondVector));
-	ASSERT_FALSE(FloatVector2DTools::Approximate(firstVector,secondVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(firstVector, firstVector));
+    ASSERT_TRUE(Vector2ToolsF::Approximate(secondVector, secondVector));
+    ASSERT_FALSE(Vector2ToolsF::Approximate(firstVector, secondVector));
 
-	ASSERT_TRUE(firstVector == firstVector);
-	ASSERT_FALSE(firstVector == secondVector);
-	ASSERT_TRUE(firstVector != secondVector);
-	ASSERT_TRUE(firstVector < secondVector);
-	ASSERT_TRUE(firstVector <= secondVector);
-	ASSERT_FALSE(firstVector > secondVector);
-	ASSERT_FALSE(firstVector >= secondVector);
+    ASSERT_TRUE(firstVector == firstVector);
+    ASSERT_FALSE(firstVector == secondVector);
+    ASSERT_TRUE(firstVector != secondVector);
+    ASSERT_TRUE(firstVector < secondVector);
+    ASSERT_TRUE(firstVector <= secondVector);
+    ASSERT_FALSE(firstVector > secondVector);
+    ASSERT_FALSE(firstVector >= secondVector);
 
-	GetStream() << "以下是调试信息：\n";
-	GetStream() << firstVector << '\n';
-	GetStream() << secondVector << '\n';
+    GetStream() << "以下是调试信息：\n";
+    GetStream() << firstVector << '\n';
+    GetStream() << secondVector << '\n';
 }
 
-void Mathematics::Vector2DToolsTesting
-	::OtherCalculateTest()
+void Mathematics::Vector2ToolsTesting ::OtherCalculateTest()
 {
-	default_random_engine generator{};
+    default_random_engine generator{};
 
-	uniform_real<double> randomDistribution{ -10.0f,10.0f };
+    uniform_real<double> randomDistribution{ -10.0f, 10.0f };
 
-	const auto testLoopCount = GetTestLoopCount();	
+    const auto testLoopCount = GetTestLoopCount();
 
-	vector<DoubleVector2D> vectors;
+    vector<Vector2D> vectors;
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoubleVector2D eachVector(randomDistribution(generator),randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector2 eachVector(randomDistribution(generator), randomDistribution(generator));
 
-		vectors.push_back(eachVector);
-	}
-	
-	DoubleAxesAlignBoundingBox2D aabb = DoubleVector2DTools::ComputeExtremes(vectors);
-	DoubleVector2D minVector = aabb.GetMinPoint();
-	DoubleVector2D maxVector = aabb.GetMaxPoint();
+        vectors.push_back(eachVector);
+    }
 
-	for(const auto& eachVector:vectors)
-	{
-		ASSERT_TRUE(minVector.GetX() <= eachVector.GetX());
-		ASSERT_TRUE(minVector.GetY() <= eachVector.GetY());
-		ASSERT_TRUE(eachVector.GetX() <= maxVector.GetX());
-		ASSERT_TRUE(eachVector.GetY() <= maxVector.GetY());
-	}	
+    AxesAlignBoundingBox2D aabb = Vector2ToolsD::ComputeExtremes(vectors);
+    Vector2 minVector = aabb.GetMinPoint();
+    Vector2 maxVector = aabb.GetMaxPoint();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoubleVector2D firstVector(randomDistribution(generator), randomDistribution(generator));
-		DoubleVector2D secondVector(randomDistribution(generator), randomDistribution(generator));
-		
-		DoubleVector2DTools::Vector2DOrthonormalize orthonormalize =  DoubleVector2DTools::Orthonormalize(firstVector,secondVector);
-		
-		firstVector.Normalize();
-		
-		double dot = DoubleVector2DTools::DotProduct(firstVector,secondVector); 
-		secondVector -= firstVector * dot;
-		secondVector.Normalize();
-		
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(firstVector,orthonormalize.GetUVector()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(secondVector, orthonormalize.GetVVector()));
-		
-		DoubleVector2D thirdVector(randomDistribution(generator), randomDistribution(generator));
-		
-		DoubleVector2DOrthonormalBasis orthonormalBasis =  DoubleVector2DTools::GenerateOrthonormalBasis(thirdVector);
-		
-		thirdVector.Normalize();
-		
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(thirdVector,  orthonormalBasis.GetUVector()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(DoubleVector2DTools::GetPerp(thirdVector),  orthonormalBasis.GetVVector()));
-	}
+    for (const auto& eachVector : vectors)
+    {
+        ASSERT_TRUE(minVector.GetX() <= eachVector.GetX());
+        ASSERT_TRUE(minVector.GetY() <= eachVector.GetY());
+        ASSERT_TRUE(eachVector.GetX() <= maxVector.GetX());
+        ASSERT_TRUE(eachVector.GetY() <= maxVector.GetY());
+    }
+
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector2 firstVector(randomDistribution(generator), randomDistribution(generator));
+        Vector2 secondVector(randomDistribution(generator), randomDistribution(generator));
+
+        Vector2ToolsD::Vector2Orthonormalize orthonormalize = Vector2ToolsD::Orthonormalize(firstVector, secondVector);
+
+        firstVector.Normalize();
+
+        double dot = Vector2ToolsD::DotProduct(firstVector, secondVector);
+        secondVector -= firstVector * dot;
+        secondVector.Normalize();
+
+        ASSERT_TRUE(Vector2ToolsD::Approximate(firstVector, orthonormalize.GetUVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(secondVector, orthonormalize.GetVVector()));
+
+        Vector2 thirdVector(randomDistribution(generator), randomDistribution(generator));
+
+        Vector2OrthonormalBasisD orthonormalBasis = Vector2ToolsD::GenerateOrthonormalBasis(thirdVector);
+
+        thirdVector.Normalize();
+
+        ASSERT_TRUE(Vector2ToolsD::Approximate(thirdVector, orthonormalBasis.GetUVector()));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(Vector2ToolsD::GetPerp(thirdVector), orthonormalBasis.GetVVector()));
+    }
 }
-

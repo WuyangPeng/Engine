@@ -1,23 +1,23 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/03 17:35)
+///	引擎版本：0.8.0.2 (2022/02/07 11:20)
 
 #ifndef MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_A_VECTOR_ACHIEVE_H
 
 #include "AVector.h"
-#include "Vector3D.h"
+#include "Vector3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename T>
-Mathematics::AVector<T>::AVector(const Vector3D& rhs) noexcept
+Mathematics::AVector<T>::AVector(const Vector3& rhs) noexcept
     : AVector{ rhs.GetX(), rhs.GetY(), rhs.GetZ() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
@@ -26,6 +26,7 @@ Mathematics::AVector<T>::AVector(const Vector3D& rhs) noexcept
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
 template <typename T>
 Mathematics::AVector<T>::AVector(const ArrayType& rhs) noexcept
     : AVector{ rhs[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)],
@@ -34,50 +35,49 @@ Mathematics::AVector<T>::AVector(const ArrayType& rhs) noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
 #include STSTEM_WARNING_POP
 
 template <typename T>
 Mathematics::AVector<T>::AVector(const HomogeneousPoint& homogeneousPoint) noexcept
-    : m_HomogeneousPoint{ homogeneousPoint }
+    : homogeneousPoint{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ(), Math::GetValue(0) }
 {
-    m_HomogeneousPoint.SetW(Math::GetValue(0));
-
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool Mathematics::AVector<T>::IsValid() const noexcept
 {
-    if (Math::FAbs(m_HomogeneousPoint.GetW()) <= Math::GetZeroTolerance())
+    if (Math::FAbs(homogeneousPoint.GetW()) <= Math::GetZeroTolerance())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-const Mathematics::Vector3D<T> Mathematics::AVector<T>::GetVector3D() const noexcept
+Mathematics::Vector3<T> Mathematics::AVector<T>::GetVector3() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3D{ m_HomogeneousPoint.GetX(), m_HomogeneousPoint.GetY(), m_HomogeneousPoint.GetZ() };
+    return Vector3{ homogeneousPoint.GetX(), homogeneousPoint.GetY(), homogeneousPoint.GetZ() };
 }
 
 template <typename T>
 const T& Mathematics::AVector<T>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < sm_AVectorSize, "索引错误！");
 
-    return m_HomogeneousPoint[index];
+    return homogeneousPoint[index];
 }
 
 template <typename T>
 T& Mathematics::AVector<T>::operator[](int index)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < sm_AVectorSize, "索引错误！");
 
     return OPERATOR_SQUARE_BRACKETS(T, index);
 }
@@ -87,7 +87,7 @@ T Mathematics::AVector<T>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_HomogeneousPoint.GetX();
+    return homogeneousPoint.GetX();
 }
 
 template <typename T>
@@ -95,7 +95,7 @@ void Mathematics::AVector<T>::SetX(T x) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_HomogeneousPoint.SetX(x);
+    homogeneousPoint.SetX(x);
 }
 
 template <typename T>
@@ -103,7 +103,7 @@ T Mathematics::AVector<T>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_HomogeneousPoint.GetY();
+    return homogeneousPoint.GetY();
 }
 
 template <typename T>
@@ -111,7 +111,7 @@ void Mathematics::AVector<T>::SetY(T y) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_HomogeneousPoint.SetY(y);
+    homogeneousPoint.SetY(y);
 }
 
 template <typename T>
@@ -119,7 +119,7 @@ T Mathematics::AVector<T>::GetZ() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_HomogeneousPoint.GetZ();
+    return homogeneousPoint.GetZ();
 }
 
 template <typename T>
@@ -127,15 +127,15 @@ void Mathematics::AVector<T>::SetZ(T z) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_HomogeneousPoint.SetZ(z);
+    homogeneousPoint.SetZ(z);
 }
 
 template <typename T>
-const Mathematics::AVector<T> Mathematics::AVector<T>::operator-() const noexcept
+Mathematics::AVector<T> Mathematics::AVector<T>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return AVector{ -m_HomogeneousPoint.GetX(), -m_HomogeneousPoint.GetY(), -m_HomogeneousPoint.GetX() };
+    return AVector{ -homogeneousPoint.GetX(), -homogeneousPoint.GetY(), -homogeneousPoint.GetZ() };
 }
 
 template <typename T>
@@ -143,9 +143,9 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator+=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < sm_AVectorSize; ++i)
+    for (auto i = 0; i < aVectorSize; ++i)
     {
-        m_HomogeneousPoint[i] += rhs[i];
+        homogeneousPoint[i] += rhs[i];
     }
 
     return *this;
@@ -156,9 +156,9 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator-=(const AVector& rhs)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < sm_AVectorSize; ++i)
+    for (auto i = 0; i < aVectorSize; ++i)
     {
-        m_HomogeneousPoint[i] -= rhs[i];
+        homogeneousPoint[i] -= rhs[i];
     }
 
     return *this;
@@ -169,9 +169,9 @@ Mathematics::AVector<T>& Mathematics::AVector<T>::operator*=(T scalar)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    for (auto i = 0; i < sm_AVectorSize; ++i)
+    for (auto i = 0; i < aVectorSize; ++i)
     {
-        m_HomogeneousPoint[i] *= scalar;
+        homogeneousPoint[i] *= scalar;
     }
 
     return *this;
@@ -209,7 +209,7 @@ T Mathematics::AVector<T>::SquaredLength() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_HomogeneousPoint.GetX() * m_HomogeneousPoint.GetX() + m_HomogeneousPoint.GetY() * m_HomogeneousPoint.GetY() + m_HomogeneousPoint.GetZ() * m_HomogeneousPoint.GetZ();
+    return homogeneousPoint.GetX() * homogeneousPoint.GetX() + homogeneousPoint.GetY() * homogeneousPoint.GetY() + homogeneousPoint.GetZ() * homogeneousPoint.GetZ();
 }
 
 template <typename T>
@@ -266,7 +266,7 @@ bool Mathematics::AVector<T>::IsNormalize(const T epsilon) const noexcept(g_Asse
 }
 
 template <typename T>
-const typename Mathematics::AVector<T>::ArrayType Mathematics::AVector<T>::GetCoordinate() const noexcept
+typename Mathematics::AVector<T>::ArrayType Mathematics::AVector<T>::GetCoordinate() const noexcept
 {
     return ArrayType{ GetX(), GetY(), GetZ() };
 }
@@ -277,9 +277,11 @@ void Mathematics::AVector<T>::Set(const ArrayType& coordinate) noexcept
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
     SetX(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::X)]);
     SetY(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Y)]);
     SetZ(coordinate[System::EnumCastUnderlying(HomogeneousPoint::PointIndex::Z)]);
+
 #include STSTEM_WARNING_POP
 }
 

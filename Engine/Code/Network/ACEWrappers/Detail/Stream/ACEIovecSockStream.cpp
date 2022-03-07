@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 15:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 18:23)
 
 #include "Network/NetworkExport.h"
 
@@ -39,6 +39,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, ACEIovecSockStream)
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -70,14 +71,16 @@ int Network::ACEIovecSockStream::Send(const MessageBufferSharedPtr& messageBuffe
 
     return messageBuffer->GetCurrentWriteIndex();
 }
+
     #include STSTEM_WARNING_POP
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
-    [[maybe_unused]] const auto currentWriteIndex = Send(messageBuffer);
+    MAYBE_UNUSED const auto currentWriteIndex = Send(messageBuffer);
 
     CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
@@ -89,6 +92,7 @@ void Network::ACEIovecSockStream::AsyncSend(const EventInterfaceSharedPtr& event
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }
+
     #include STSTEM_WARNING_POP
 
 #endif  // NETWORK_USE_ACE

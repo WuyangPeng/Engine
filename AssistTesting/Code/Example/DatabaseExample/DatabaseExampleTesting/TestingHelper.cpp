@@ -4,17 +4,24 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/24 0:19)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(DatabaseExample, TestingHelper, "数据库例子")
+using namespace std::literals;
+
+DatabaseExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "数据库例子"s }
+{
+    InitSuite();
+
+    DATABASE_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(DatabaseExample, TestingHelper)
 
 // private
-void DatabaseExample::TestingHelper
-	::AddSuites()
+void DatabaseExample::TestingHelper ::InitSuite() noexcept
 {
-	 
 }
- 

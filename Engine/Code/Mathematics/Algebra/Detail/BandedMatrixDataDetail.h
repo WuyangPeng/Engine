@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 11:11)
+///	引擎版本：0.8.0.2 (2022/02/08 11:58)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_DETAIL_H
@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::BandedMatrixData<Real>::BandedMatrixData(int size, int bandsNumber)
-    : m_Size{ size }, m_Bands{}
+    : size{ size }, bands{}
 {
     Allocate(bandsNumber);
 
@@ -32,26 +32,27 @@ void Mathematics::BandedMatrixData<Real>::Allocate(int bandsNumber)
 {
     for (auto i = 0; i < bandsNumber; ++i)
     {
-        const auto bandsSize = m_Size - 1 - i;
+        const auto bandsSize = size - 1 - i;
 
-        m_Bands.emplace_back(ContainerType(bandsSize));
+        bands.emplace_back(bandsSize);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::BandedMatrixData<Real>::IsValid() const noexcept
 {
-    if (m_Size <= 0 || m_Size <= gsl::narrow_cast<int>(m_Bands.size()))
+    if (size <= 0 || size <= gsl::narrow_cast<int>(bands.size()))
     {
         return false;
     }
     else
     {
         auto index = 0;
-        for (const auto& value : m_Bands)
+        for (const auto& value : bands)
         {
-            const auto bandsSize = m_Size - 1 - index;
+            const auto bandsSize = size - 1 - index;
 
             if (bandsSize != gsl::narrow_cast<int>(value.size()))
                 return false;
@@ -62,14 +63,15 @@ bool Mathematics::BandedMatrixData<Real>::IsValid() const noexcept
 
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
 int Mathematics::BandedMatrixData<Real>::GetSize() const noexcept
 {
-    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    return m_Size;
+    return size;
 }
 
 template <typename Real>
@@ -77,7 +79,7 @@ int Mathematics::BandedMatrixData<Real>::GetBandsNumber() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    return boost::numeric_cast<int>(m_Bands.size());
+    return boost::numeric_cast<int>(bands.size());
 }
 
 template <typename Real>
@@ -85,28 +87,28 @@ int Mathematics::BandedMatrixData<Real>::GetStreamSize() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    auto size = CoreTools::GetStreamSize<int32_t>();
+    auto streamSize = CoreTools::GetStreamSize<int32_t>();
 
     const auto bandsNumber = GetBandsNumber();
     for (auto i = 0; i < bandsNumber; ++i)
     {
-        const auto bandsSize = m_Size - 1 - i;
-        size += CoreTools::GetStreamSize<Real>() * bandsSize;
+        const auto bandsSize = size - 1 - i;
+        streamSize += CoreTools::GetStreamSize<Real>() * bandsSize;
     }
 
-    return size;
+    return streamSize;
 }
 
 template <typename Real>
-void Mathematics::BandedMatrixData<Real>::ResetSize(int size, int bandsNumber)
+void Mathematics::BandedMatrixData<Real>::ResetSize(int newSize, int bandsNumber)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    m_Size = size;
-    m_Bands.clear();
+    size = newSize;
+    bands.clear();
     Allocate(bandsNumber);
 
-    m_Bands.shrink_to_fit();
+    bands.shrink_to_fit();
 }
 
 template <typename Real>
@@ -115,7 +117,7 @@ int Mathematics::BandedMatrixData<Real>::GetBandMax(int index) const noexcept(g_
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
     MATHEMATICS_ASSERTION_1(0 <= index && index < GetBandsNumber(), "无效索引在 GetBandMax\n");
 
-    return m_Size - 1 - index;
+    return size - 1 - index;
 }
 
 template <typename Real>
@@ -123,7 +125,7 @@ typename Mathematics::BandedMatrixData<Real>::ContainerType Mathematics::BandedM
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    return m_Bands.at(index);
+    return bands.at(index);
 }
 
 template <typename Real>
@@ -131,21 +133,20 @@ void Mathematics::BandedMatrixData<Real>::SetBand(int index, const ContainerType
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    auto& bands = m_Bands.at(index);
+    auto& value = bands.at(index);
 
-    if (bands.size() != band.size())
+    if (value.size() != band.size())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("元素大小不相等。"s));
     }
 
-    bands = band;
+    value = band;
 }
 
 template <typename Real>
 Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_3;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size, "无效 row 或 column 在 BandedMatrixData::operator\n");
 
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
 }
@@ -154,44 +155,44 @@ template <typename Real>
 const Real& Mathematics::BandedMatrixData<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < m_Size && 0 <= column && column < m_Size, "无效 row 或 column 在 BandedMatrixData::operator\n");
+    MATHEMATICS_ASSERTION_0(0 <= row && row < size && 0 <= column && column < size, "无效 row 或 column 在 BandedMatrixData::operator\n");
 
     auto band = column - row;
     if (0 < band)
     {
         --band;
-        if (band < GetBandsNumber() && row < m_Size - 1 - band)
+        if (band < GetBandsNumber() && row < size - 1 - band)
         {
-            return m_Bands.at(band).at(row);
+            return bands.at(band).at(row);
         }
     }
     else if (band < 0)
     {
         band = -band - 1;
 
-        if (band < GetBandsNumber() && column < m_Size - 1 - band)
+        if (band < GetBandsNumber() && column < size - 1 - band)
         {
-            return m_Bands.at(band).at(column);
+            return bands.at(band).at(column);
         }
     }
 
-    static auto s_Dummy = Math::GetValue(0);
+    static auto dummy = Math::GetValue(0);
 
-    MATHEMATICS_ASSERTION_1(Math::FAbs(s_Dummy) <= Math::GetZeroTolerance(), "静态变量s_Dummy值被修改！s_Dummy值必须为零！");
+    MATHEMATICS_ASSERTION_1(Math::FAbs(dummy) <= Math::GetZeroTolerance(), "静态变量dummy值被修改！dummy值必须为零！");
 
-    s_Dummy = Math::GetValue(0);
+    dummy = Math::GetValue(0);
 
-    return s_Dummy;
+    return dummy;
 }
 
 template <typename Real>
-void Mathematics::BandedMatrixData<Real>::SetZero()  
+void Mathematics::BandedMatrixData<Real>::SetZero()
 {
     MATHEMATICS_CLASS_IS_VALID_3;
 
-    for (auto& bands : m_Bands)
+    for (auto& value : bands)
     {
-        fill(bands.begin(), bands.end(), Math::GetValue(0));
+        fill(value.begin(), value.end(), Math::GetValue(0));
     }
 }
 

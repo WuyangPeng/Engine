@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:29)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_CONTAINER_GROUP_DETAIL_H
@@ -19,7 +19,7 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename E, typename T>
-Network::MessageContainerGroup<E, T>::MessageContainerGroup()
+Network::MessageContainerGroup<E, T>::MessageContainerGroup() noexcept
     : m_Group{}
 {
     NETWORK_SELF_CLASS_IS_VALID_3;
@@ -43,26 +43,35 @@ Network::MessageContainerGroup<E, T>::MessageContainerGroup(const StructureType&
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename E, typename T>
 bool Network::MessageContainerGroup<E, T>::IsValid() const noexcept
 {
-    for (const auto& value : m_Group)
+    try
     {
-        if (value.GetSize() != System::EnumCastUnderlying(E::Count))
-            return false;
-    }
+        for (const auto& value : m_Group)
+        {
+            if (value.GetSize() != System::EnumCastUnderlying(E::Count))
+                return false;
+        }
 
-    return true;
+        return true;
+    }
+    catch (...)
+    {
+        return false;
+    }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E, typename T>
-void Network::MessageContainerGroup<E, T>::Load(const MessageSourceSharedPtr& source)
+void Network::MessageContainerGroup<E, T>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_3;
 
     int32_t size{ 0 };
-    source->Read(size);
+    source.Read(size);
 
     m_Group.resize(size);
     for (auto& value : m_Group)
@@ -72,12 +81,12 @@ void Network::MessageContainerGroup<E, T>::Load(const MessageSourceSharedPtr& so
 }
 
 template <typename E, typename T>
-void Network::MessageContainerGroup<E, T>::Save(const MessageTargetSharedPtr& target) const
+void Network::MessageContainerGroup<E, T>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_3;
 
     auto size = boost::numeric_cast<int32_t>(m_Group.size());
-    target->Write(size);
+    target.Write(size);
 
     for (const auto& value : m_Group)
     {
@@ -117,7 +126,7 @@ int Network::MessageContainerGroup<E, T>::GetSize() const
 }
 
 template <typename E, typename T>
-typename Network::MessageContainerGroup<E, T>::GroupConstIter Network::MessageContainerGroup<E, T>::begin() const
+typename Network::MessageContainerGroup<E, T>::GroupConstIter Network::MessageContainerGroup<E, T>::begin() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_3;
 
@@ -125,7 +134,7 @@ typename Network::MessageContainerGroup<E, T>::GroupConstIter Network::MessageCo
 }
 
 template <typename E, typename T>
-typename Network::MessageContainerGroup<E, T>::GroupConstIter Network::MessageContainerGroup<E, T>::end() const
+typename Network::MessageContainerGroup<E, T>::GroupConstIter Network::MessageContainerGroup<E, T>::end() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_3;
 

@@ -6,7 +6,7 @@
 
 #include "Capsule3Testing.h"
 #include "Mathematics/Objects3D/Capsule3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -28,7 +28,12 @@ void Mathematics::Capsule3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(CapsuleTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Capsule3Testing
 	::CapsuleTest()
 {
@@ -39,22 +44,22 @@ void Mathematics::Capsule3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D firstPoint(firstRandomDistribution(generator),
+		Vector3D firstPoint(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		DoubleVector3D secondPoint(firstRandomDistribution(generator),
+		Vector3D secondPoint(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		DoubleSegment3 firstSegment(firstPoint,secondPoint);
+		Segment3D firstSegment(firstPoint,secondPoint);
 		
-		double radius(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleCapsule3 capsule(firstSegment,radius);
+		Capsule3D capsule(firstSegment,radius);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(capsule.GetSegment().GetBeginPoint(),firstSegment.GetBeginPoint()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(capsule.GetSegment().GetEndPoint(),firstSegment.GetEndPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(capsule.GetSegment().GetBeginPoint(),firstSegment.GetBeginPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(capsule.GetSegment().GetEndPoint(),firstSegment.GetEndPoint()));
 		ASSERT_APPROXIMATE(radius,capsule.GetRadius(),1e-10);
 	}
 }

@@ -42,12 +42,17 @@ void Mathematics::FastTrigonometricTesting ::FastSinTest()
     ASSERT_NOT_THROW_EXCEPTION_0(FloatFastSinTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DoubleFastSinTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::FastTrigonometricTesting ::FloatFastSinTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(0), FloatMath::GetHalfPI() };
+    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -55,11 +60,11 @@ void Mathematics::FastTrigonometricTesting ::FloatFastSinTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastSinRoughCalculation(value), sin(value), 1.0e-3f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastSinRoughCalculation(value), sin(value), 1.0e-3f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastSinPreciseCalculation(value), sin(value), 1.0e-6f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastSinPreciseCalculation(value), sin(value), 1.0e-6f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastSinMorePreciseCalculation(value), sin(value), 1.0e-7f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastSinMorePreciseCalculation(value), sin(value), 1.0e-7f);
     }
 }
 
@@ -67,7 +72,7 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastSinTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(0), DoubleMath::GetHalfPI() };
+    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -75,11 +80,11 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastSinTest()
     {
         double value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastSinRoughCalculation(value), sin(value), 1.0e-3);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastSinRoughCalculation(value), sin(value), 1.0e-3);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastSinPreciseCalculation(value), sin(value), 1.0e-8);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastSinPreciseCalculation(value), sin(value), 1.0e-8);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastSinMorePreciseCalculation(value), sin(value), 1.0e-10);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastSinMorePreciseCalculation(value), sin(value), 1.0e-10);
     }
 }
 
@@ -93,7 +98,7 @@ void Mathematics::FastTrigonometricTesting ::FloatFastCosTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(0), FloatMath::GetHalfPI() };
+    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetHalfPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -101,11 +106,11 @@ void Mathematics::FastTrigonometricTesting ::FloatFastCosTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastCosRoughCalculation(value), cos(value), 1.0e-2f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastCosRoughCalculation(value), cos(value), 1.0e-2f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastCosPreciseCalculation(value), cos(value), 1.0e-7f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastCosPreciseCalculation(value), cos(value), 1.0e-7f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastCosMorePreciseCalculation(value), cos(value), 1.0e-7f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastCosMorePreciseCalculation(value), cos(value), 1.0e-7f);
     }
 }
 
@@ -113,7 +118,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastCosTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(0), DoubleMath::GetHalfPI() };
+    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetHalfPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -121,11 +126,11 @@ void Mathematics::FastTrigonometricTesting::DoubleFastCosTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastCosRoughCalculation(value), cos(value), 1.0e-2);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastCosRoughCalculation(value), cos(value), 1.0e-2);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastCosPreciseCalculation(value), cos(value), 1.0e-8);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastCosPreciseCalculation(value), cos(value), 1.0e-8);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastCosMorePreciseCalculation(value), cos(value), 1.0e-10);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastCosMorePreciseCalculation(value), cos(value), 1.0e-10);
     }
 }
 
@@ -139,7 +144,7 @@ void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(0), FloatMath::GetQuarterPI() };
+    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetQuarterPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -147,11 +152,11 @@ void Mathematics::FastTrigonometricTesting::FloatFastTanTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastTanRoughCalculation(value), tan(value), 1.0e-3f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastTanRoughCalculation(value), tan(value), 1.0e-3f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastTanPreciseCalculation(value), tan(value), 1.0e-7f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastTanPreciseCalculation(value), tan(value), 1.0e-7f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastTanMorePreciseCalculation(value), tan(value), 1.0e-6f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastTanMorePreciseCalculation(value), tan(value), 1.0e-6f);
     }
 }
 
@@ -159,7 +164,7 @@ void Mathematics::FastTrigonometricTesting::DoubleFastTanTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(0), DoubleMath::GetQuarterPI() };
+    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetQuarterPI() };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -167,11 +172,11 @@ void Mathematics::FastTrigonometricTesting::DoubleFastTanTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastTanRoughCalculation(value), tan(value), 1.0e-3);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastTanRoughCalculation(value), tan(value), 1.0e-3);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastTanPreciseCalculation(value), tan(value), 1.0e-7);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastTanPreciseCalculation(value), tan(value), 1.0e-7);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastTanMorePreciseCalculation(value), tan(value), 1.0e-10);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastTanMorePreciseCalculation(value), tan(value), 1.0e-10);
     }
 }
 
@@ -185,7 +190,7 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvSinTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(0), FloatMath::GetValue(1) };
+    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -193,9 +198,9 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvSinTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvSinRoughCalculation(value), asin(value), 1.0e-4f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvSinRoughCalculation(value), asin(value), 1.0e-4f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvSinPreciseCalculation(value), asin(value), 1.0e-6f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvSinPreciseCalculation(value), asin(value), 1.0e-6f);
     }
 }
 
@@ -203,7 +208,7 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvSinTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(0), DoubleMath::GetValue(1) };
+    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -211,9 +216,9 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvSinTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvSinRoughCalculation(value), asin(value), 1.0e-4);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvSinRoughCalculation(value), asin(value), 1.0e-4);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvSinPreciseCalculation(value), asin(value), 1.0e-7);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvSinPreciseCalculation(value), asin(value), 1.0e-7);
     }
 }
 
@@ -227,7 +232,7 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvCosTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(0), FloatMath::GetValue(1) };
+    uniform_real<float> randomDistribution{ MathF::GetValue(0), MathF::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -235,9 +240,9 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvCosTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvCosRoughCalculation(value), acos(value), 1.0e-4f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvCosRoughCalculation(value), acos(value), 1.0e-4f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvCosPreciseCalculation(value), acos(value), 1.0e-6f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvCosPreciseCalculation(value), acos(value), 1.0e-6f);
     }
 }
 
@@ -245,7 +250,7 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvCosTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(0), DoubleMath::GetValue(1) };
+    uniform_real<double> randomDistribution{ MathD::GetValue(0), MathD::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -253,9 +258,9 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvCosTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvCosRoughCalculation(value), acos(value), 1.0e-4);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvCosRoughCalculation(value), acos(value), 1.0e-4);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvCosPreciseCalculation(value), acos(value), 1.0e-7);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvCosPreciseCalculation(value), acos(value), 1.0e-7);
     }
 }
 
@@ -269,7 +274,7 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvTanTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<float> randomDistribution{ FloatMath::GetValue(-1), FloatMath::GetValue(1) };
+    uniform_real<float> randomDistribution{ MathF::GetValue(-1), MathF::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -277,9 +282,9 @@ void Mathematics::FastTrigonometricTesting ::FloatFastInvTanTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvTanRoughCalculation(value), atan(value), 1.0e-4f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvTanRoughCalculation(value), atan(value), 1.0e-4f);
 
-        ASSERT_APPROXIMATE(FloatFastTrigonometric::FastInvTanPreciseCalculation(value), atan(value), 1.0e-7f);
+        ASSERT_APPROXIMATE(FastTrigonometricF::FastInvTanPreciseCalculation(value), atan(value), 1.0e-7f);
     }
 }
 
@@ -287,7 +292,7 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvTanTest()
 {
     // 随机值测试
     default_random_engine randomEngine{};
-    uniform_real<double> randomDistribution{ DoubleMath::GetValue(-1), DoubleMath::GetValue(1) };
+    uniform_real<double> randomDistribution{ MathD::GetValue(-1), MathD::GetValue(1) };
 
     const auto testLoopCount = GetTestLoopCount();
 
@@ -295,8 +300,8 @@ void Mathematics::FastTrigonometricTesting ::DoubleFastInvTanTest()
     {
         auto value = randomDistribution(randomEngine);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvTanRoughCalculation(value), atan(value), 1.0e-4);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvTanRoughCalculation(value), atan(value), 1.0e-4);
 
-        ASSERT_APPROXIMATE(DoubleFastTrigonometric::FastInvTanPreciseCalculation(value), atan(value), 1.0e-7);
+        ASSERT_APPROXIMATE(FastTrigonometricD::FastInvTanPreciseCalculation(value), atan(value), 1.0e-7);
     }
 }

@@ -14,7 +14,14 @@ namespace Mathematics
 	template class TrapezoidRule<float,TrapezoidRuleTesting>;
 	template class TrapezoidRule<double,TrapezoidRuleTesting>;	
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,TrapezoidRuleTesting) 
 
 void Mathematics::TrapezoidRuleTesting
@@ -23,14 +30,12 @@ void Mathematics::TrapezoidRuleTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(ValueTest);
 }
 
-double Mathematics::TrapezoidRuleTesting
-	::Solution(double input, const TrapezoidRuleTesting* userData)
+double Mathematics::TrapezoidRuleTesting ::Solution(double input, const TrapezoidRuleTesting* userData) noexcept
 {
 	return input * userData->GetUserData() - 3;
 }
 
-double Mathematics::TrapezoidRuleTesting
-	::GetUserData() const 
+double Mathematics::TrapezoidRuleTesting ::GetUserData() const noexcept
 {
 	return 5;
 }

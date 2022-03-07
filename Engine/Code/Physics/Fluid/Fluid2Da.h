@@ -9,7 +9,7 @@
 
 #include "Physics/PhysicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 // This class is an implementation of the algorithm in "Real-Time Fluid
 // Dynamics for Games", by Jos Stam (GDC 2003 Proceedings).  There are
@@ -21,7 +21,7 @@ namespace Physics
     class PHYSICS_TEMPLATE_DEFAULT_DECLARE Fluid2Da
     {
     public:
-        using Vector2D = Mathematics::Vector2D<Real>;
+        using Vector2D = Mathematics::Vector2<Real>;
 
     public:
         // Construction and destruction.

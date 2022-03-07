@@ -7,23 +7,23 @@
 #ifndef DATABASE_EXAMPLE_PLACEHOLDER_H
 #define DATABASE_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Database/DatabaseExample/DatabaseExampleDll.h" 
+#include "Example/Database/DatabaseExample/DatabaseExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace DatabaseExample
 {
-	 class DATABASE_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class DATABASE_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // DATABASE_EXAMPLE_PLACEHOLDER_H
+#endif  // DATABASE_EXAMPLE_PLACEHOLDER_H

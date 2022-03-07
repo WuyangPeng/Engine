@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 11:18)
+///	引擎版本：0.8.0.2 (2022/02/10 17:54)
 
 #ifndef MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H
 #define MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H
@@ -22,34 +22,12 @@
 namespace Mathematics
 {
     template <typename Real>
-    class ConvexPolyhedron3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<ConvexPolyhedron3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<ConvexPolyhedron3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<ConvexPolyhedron3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE ConvexPolyhedron3 : public Polyhedron3<Real>
+    class ConvexPolyhedron3 final : public Polyhedron3<Real>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using ConvexPolyhedron3Impl = ConvexPolyhedron3Impl<Real>;
-
-    public:
-        void Swap(ConvexPolyhedron3& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(ConvexPolyhedron3);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~ConvexPolyhedron3() noexcept = default;
-        ConvexPolyhedron3(const ConvexPolyhedron3& rhs);
-        ConvexPolyhedron3& operator=(const ConvexPolyhedron3& rhs);
-        ConvexPolyhedron3(ConvexPolyhedron3&& rhs) noexcept;
-        ConvexPolyhedron3& operator=(ConvexPolyhedron3&& rhs) noexcept;
-
+        using ClassType = ConvexPolyhedron3<Real>;
         using ParentType = Polyhedron3<Real>;
         using Math = Math<Real>;
         using Plane3 = Plane3<Real>;
@@ -61,8 +39,8 @@ namespace Mathematics
         using PlaneContainerType = std::vector<Plane3>;
         using TrianglesType = std::set<int>;
 
-        using Vector3D = ParentType::Vector3D;
-        using Vector3DTools = ParentType::Vector3DTools;
+        using Vector3 = ParentType::Vector3;
+        using Vector3Tools = ParentType::Vector3Tools;
         using VerticesType = ParentType::VerticesType;
         using IndicesType = ParentType::IndicesType;
 
@@ -81,16 +59,16 @@ namespace Mathematics
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 只读成员访问。
-        [[nodiscard]] const PlaneContainerType GetPlanes() const;
-        [[nodiscard]] const Plane3& GetPlane(int index) const;
+        NODISCARD PlaneContainerType GetPlanes() const;
+        NODISCARD const Plane3& GetPlane(int index) const;
 
         // 允许顶点修改。调用者必须确保多面体仍是凸多面体。
         // 只要你修改尽可能多的顶点后，调用UpdatePlanes()。
         // 所有经由SetVertex的修改，
         // UpdatePlanes中面的更新，只在修改的共享的顶点的三角形进行。
-        void SetVertex(int index, const Vector3D& vertex) override;
+        void SetVertex(int index, const Vector3& vertex) override;
         void UpdatePlanes();
-        [[nodiscard]] bool IsUpdatePlanes() const noexcept;
+        NODISCARD bool IsUpdatePlanes() const noexcept;
 
         // 测试凸性。
         // 这个函数将遍历该多面体的面和验证每个面的多面体的顶点都在平面的非负侧。
@@ -98,25 +76,29 @@ namespace Mathematics
         // 其有符号的距离满足d < 0，数值舍入误差会产生不正确凸性测试，
         // 所以一个小的负阈值t可能通过该函数，
         // 在这种情况下，距离测试会变成d < t < 0。
-        [[nodiscard]] bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool IsConvex(Real threshold = -Math::GetZeroTolerance()) const;
 
         // 点在多面体的测试，在点和平面的面，在n个顶点之间查询执行，为O(n)算法。
         // 这不是最优算法。可将基本BSP算法用于这个类。这是一个O(log n)的算法。
-        [[nodiscard]] bool Contains(const Vector3D& point, Real threshold = -Math::GetZeroTolerance()) const;
+        NODISCARD bool Contains(const Vector3& point, Real threshold = -Math::GetZeroTolerance()) const;
 
     private:
         void InitPlanes();
 
         // 支持的平面的高效更新。
         // set存储那些修改共享顶点三角形的索引。
-        void UpdatePlane(int index, const Vector3D& average);
+        void UpdatePlane(int index, const Vector3& average);
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        // 	面的数量是三角形的数量。
+        PlaneContainerType planes;
+
+        // 要在UpdatePlane处理的共享三角形
+        TrianglesType sharingTriangles;
     };
 
-    using FloatConvexPolyhedron3 = ConvexPolyhedron3<float>;
-    using DoubleConvexPolyhedron3 = ConvexPolyhedron3<double>;
+    using ConvexPolyhedron3F = ConvexPolyhedron3<float>;
+    using ConvexPolyhedron3D = ConvexPolyhedron3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CONVEX_POLYHEDRON3_H

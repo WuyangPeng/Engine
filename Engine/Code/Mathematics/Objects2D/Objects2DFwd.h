@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/13 11:00)
+///	引擎版本：0.8.0.2 (2022/02/09 18:53)
 
 #ifndef MATHEMATICS_OBJECTS2D_FWD_H
 #define MATHEMATICS_OBJECTS2D_FWD_H
@@ -16,7 +16,7 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Arc2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Box2;
+    class Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Circle2;
@@ -28,22 +28,22 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ray2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Triangle2;
+    class Triangle2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polygon2;
+    class Polygon2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse2;
+    class Ellipse2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse2Coefficients;
+    class Ellipse2Coefficients;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE ConvexPolygon2;
+    class ConvexPolygon2;
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_FWD_H

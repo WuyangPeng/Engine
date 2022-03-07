@@ -11,10 +11,10 @@
 
 namespace Mathematics
 {
-	class Vector2DToolsTesting : public CoreTools::UnitTest
+	class Vector2ToolsTesting : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2DToolsTesting); 
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2ToolsTesting); 
 
 	private:
 		void MainTest();
@@ -25,7 +25,7 @@ namespace Mathematics
 		void CompareTest();
 		void OtherCalculateTest();		
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

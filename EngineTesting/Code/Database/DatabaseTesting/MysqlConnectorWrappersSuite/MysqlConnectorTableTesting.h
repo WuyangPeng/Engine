@@ -22,7 +22,7 @@ namespace Database
 		void TableTest();
 		void SelectTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

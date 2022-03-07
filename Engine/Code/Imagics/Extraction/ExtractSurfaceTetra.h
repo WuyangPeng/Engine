@@ -9,7 +9,7 @@
 
 #include "Imagics/ImagicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Meshes/EdgeKey.h" 
 #include "Mathematics/Meshes/TriangleKey.h" 
 
@@ -33,11 +33,11 @@ namespace Imagics
 		// the triangle is counterclockwise with respect to the triangle normal
 		// chosen to form an acute angle with the negative gradient of the
 		// image at the centroid of the triangle.
-		void ExtractContour(int level, std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
+		void ExtractContour(int level, std::vector<Mathematics::Vector3F>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
 		
 		// The extraction has duplicate vertices on edges shared by voxels.  This
 		// function will eliminate the duplication.
-		void MakeUnique(std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
+		void MakeUnique(std::vector<Mathematics::Vector3F>& vertices, std::vector<Mathematics::TriangleKey>& triangles);
 		
 		// The extraction does not use any topological information about the level
 		// surface.  The triangles can be a mixture of clockwise-ordered and
@@ -49,10 +49,10 @@ namespace Imagics
 		// fast.  A consistent order can be computed if you build a table of
 		// vertex, edge, and face adjacencies, but the resulting data structure
 		// is very expensive to process to reorient triangles.
-		void OrientTriangles(std::vector<Mathematics::FloatVector3D>& vertices, std::vector<Mathematics::TriangleKey>& triangles, bool sameDir);
+		void OrientTriangles(std::vector<Mathematics::Vector3F>& vertices, std::vector<Mathematics::TriangleKey>& triangles, bool sameDir);
 		
 		// In case you want vertex normals for dynamic lighting of the mesh.
-		void ComputeNormals(const std::vector<Mathematics::FloatVector3D>& vertices, const std::vector<Mathematics::TriangleKey>& triangles, std::vector<Mathematics::FloatVector3D>& normals);
+		void ComputeNormals(const std::vector<Mathematics::Vector3F>& vertices, const std::vector<Mathematics::TriangleKey>& triangles, std::vector<Mathematics::Vector3F>& normals);
 		
 	protected:
 		class Vertex
@@ -63,7 +63,7 @@ namespace Imagics
 			// For STL maps.
 			bool operator< (const Vertex& vertex) const noexcept;
 			
-			void GetTriple(Mathematics::FloatVector3D& meshVertex) const noexcept;
+			void GetTriple(Mathematics::Vector3F& meshVertex) const noexcept;
 			
 			// Vertices stored as rational numbers:
 			//   (xnumer/xdenom, ynumer/ydenom, znumer/zdenom)
@@ -91,8 +91,8 @@ namespace Imagics
                                  int z1, int f1, int x2, int y2, int z2, int f2, int x3, int y3, int z3, int f3);
 		
 		// Function and gradient evaluated using trilinear interpolation.
-                float GetFunction(const Mathematics::FloatVector3D& P) const noexcept;
-                Mathematics::FloatVector3D GetGradient(const Mathematics::FloatVector3D& P) const noexcept;
+                float GetFunction(const Mathematics::Vector3F& P) const noexcept;
+                Mathematics::Vector3F GetGradient(const Mathematics::Vector3F& P) const noexcept;
 		
 		// For unique indexing of vertices.
 		int mNextIndex = 0;

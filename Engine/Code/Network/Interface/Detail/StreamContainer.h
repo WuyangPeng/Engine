@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:30)
 
 #ifndef NETWORK_NETWORK_STREAM_CONTAINER_H
 #define NETWORK_NETWORK_STREAM_CONTAINER_H
@@ -29,11 +29,11 @@ namespace Network
 
         void SetSockStream(const SockStreamSharedPtr& sockStream) noexcept;
 
-        [[nodiscard]] SockStreamSharedPtr GetSockStream() noexcept;
-        [[nodiscard]] BufferSendStream& GetBufferSendStream() noexcept;
+        NODISCARD SockStreamSharedPtr GetSockStream() noexcept;
+        NODISCARD BufferSendStream& GetBufferSendStream() noexcept;
 
     private:
-        BufferSendStream m_BufferSendStream;
+        BufferSendStream bufferSendStream;
         SockStreamSharedPtr m_SockStream;
     };
 }

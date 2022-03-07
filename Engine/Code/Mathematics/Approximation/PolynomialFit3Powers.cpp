@@ -1,30 +1,22 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 15:19)
+///	引擎版本：0.8.0.2 (2022/02/18 17:47)
 
 #include "Mathematics/MathematicsExport.h"
 
-#ifdef MATHEMATICS_EXPORT_TEMPLATE
-
-    #ifndef MATHEMATICS_INCLUDED_POLYNOMIAL_FIT3_POWERS_ACHIEVE
-        #define MATHEMATICS_INCLUDED_POLYNOMIAL_FIT3_POWERS_ACHIEVE
-    #endif  // MATHEMATICS_INCLUDED_POLYNOMIAL_FIT3_POWERS_ACHIEVE
-
-#endif  // MATHEMATICS_EXPORT_TEMPLATE
-
 #include "PolynomialFit3PowersDetail.h"
 
-#ifdef MATHEMATICS_EXPORT_TEMPLATE
+#ifdef MATHEMATICS_TEMPLATE_TEST
 
 namespace Mathematics
 {
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class PolynomialFit3Powers<float>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class PolynomialFit3Powers<double>;
+    template class PolynomialFit3Powers<float>;
+    template class PolynomialFit3Powers<double>;
 }
 
-#endif  // MATHEMATICS_EXPORT_TEMPLATE
+#endif  // MATHEMATICS_TEMPLATE_TEST

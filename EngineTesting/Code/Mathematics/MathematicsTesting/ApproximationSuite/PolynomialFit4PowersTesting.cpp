@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:43)
 
 #include "PolynomialFit4PowersTesting.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/PolynomialFit4PowersDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,6 +23,10 @@ namespace Mathematics
 	template class PolynomialFit4Powers<float>;
 	template class PolynomialFit4Powers<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit4PowersTesting) 
 
@@ -84,7 +88,7 @@ void Mathematics::PolynomialFit4PowersTesting
 			power.push_back(tuple);
 		}
 
-		DoublePolynomialFit4Powers polynomialFit(x, y,z,w, power,true);
+		PolynomialFit4PowersD polynomialFit(x, y,z,w, power,true);
 
 		if (polynomialFit.IsSolveSucceed())
 		{
@@ -97,7 +101,7 @@ void Mathematics::PolynomialFit4PowersTesting
 						auto temp = xIndex + (yIndex + zIndex * ySize) * xSize;
 						double value = polynomialFit(x[xIndex], y[yIndex],z[zIndex]) - w[temp];
 
-						ASSERT_LESS_EQUAL(DoubleMath::FAbs(value) , 40000.0);
+						ASSERT_LESS_EQUAL(MathD::FAbs(value) , 40000.0);
 					}
 				}
 			}

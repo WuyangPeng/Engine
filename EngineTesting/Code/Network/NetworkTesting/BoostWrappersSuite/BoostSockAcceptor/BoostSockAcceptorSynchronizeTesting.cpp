@@ -19,7 +19,11 @@ using std::thread;
 using std::make_shared;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockAcceptorSynchronizeTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Network::BoostSockAcceptorSynchronizeTesting
 	::MainTest()
 {
@@ -138,7 +142,7 @@ bool Network::BoostSockAcceptorSynchronizeTesting
 
 	SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
 
-	return sockAcceptor->Accept(sockStream);
+	return sockAcceptor->Accept(*sockStream);
 }
 
 bool Network::BoostSockAcceptorSynchronizeTesting
@@ -149,7 +153,7 @@ bool Network::BoostSockAcceptorSynchronizeTesting
 	SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
 	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy) };
 
-	return sockAcceptor->Accept(sockStream, sockAddress);
+	return sockAcceptor->Accept(*sockStream, *sockAddress);
 }
 
 

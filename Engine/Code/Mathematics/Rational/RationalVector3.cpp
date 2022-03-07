@@ -1,17 +1,15 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:51)
+///	引擎版本：0.8.0.2 (2022/02/11 17:15)
 
 #include "Mathematics/MathematicsExport.h"
 
 #include "RationalVector3Detail.h"
-#include "RationalVectorDetail.h"
-#include "SignRationalDetail.h"
 
 #ifdef MATHEMATICS_TEMPLATE_TEST
 

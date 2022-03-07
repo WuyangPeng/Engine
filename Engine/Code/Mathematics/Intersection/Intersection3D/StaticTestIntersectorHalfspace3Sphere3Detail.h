@@ -1,47 +1,69 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 11:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/03 21:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_DETAIL_H
 
+#include "IntersectorUtility3.h"
 #include "StaticTestIntersectorHalfspace3Sphere3.h"
-#include "IntersectorUtility3.h" 
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::StaticTestIntersectorHalfspace3Sphere3(const Plane3& rkHalfspace, const Sphere3& rkSphere, const Real epsilon)
-    : m_Halfspace{ rkHalfspace }, m_Sphere{ rkSphere }
+Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::StaticTestIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, const Real epsilon) noexcept
+    : ParentType{ epsilon }, halfspace{ halfspace }, sphere{ sphere }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::GetHalfspace() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return halfspace;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::GetHalfspace() const noexcept
+Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::GetSphere() const noexcept
 {
-    return m_Halfspace;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return sphere;
 }
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::GetSphere() const noexcept
+void Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>::Test() noexcept
 {
-    return m_Sphere;
+    const auto distance = Vector3Tools::DotProduct(halfspace.GetNormal(), sphere.GetCenter());
+    if (distance <= halfspace.GetConstant() + sphere.GetRadius())
+    {
+        this->SetIntersectionType(IntersectionType::Point);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorHalfspace3Sphere3<Real>
-	::Test()
-{
-	auto distance = Vector3DTools::DotProduct(m_Halfspace.GetNormal(),m_Sphere.GetCenter());
-	if (distance <= m_Halfspace.GetConstant() + m_Sphere.GetRadius())
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-} 
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_DETAIL_H

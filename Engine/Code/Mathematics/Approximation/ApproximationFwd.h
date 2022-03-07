@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:50)
+///	引擎版本：0.8.0.2 (2022/02/17 18:00)
 
 #ifndef MATHEMATICS_APPROXIMATION_FWD_H
 #define MATHEMATICS_APPROXIMATION_FWD_H
@@ -13,7 +13,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticFit2;
+    class QuadraticFit2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticCircleFit2;
@@ -22,13 +22,13 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CircleFit2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseByArcs2;
+    class EllipseByArcs2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticSphereFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticFit3;
+    class QuadraticFit3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SphereFit3;
@@ -43,13 +43,13 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE OrthogonalLineFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GaussPointsFit2;
+    class GaussPointsFit2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GaussPointsFit3;
+    class GaussPointsFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE ParaboloidFit3;
+    class ParaboloidFit3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE HeightPlaneFit3;
@@ -61,10 +61,10 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CylinderFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseFit2;
+    class EllipseFit2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipsoidFit3;
+    class EllipsoidFit3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GreatCircleFit3;
@@ -73,25 +73,28 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE GreatArcFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit2;
+    class PolynomialFit2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit3;
+    class PolynomialFit3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit4;
+    class PolynomialFit4;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit2Powers;
+    class PolynomialFit2Powers;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit3Powers;
+    class PolynomialFit3Powers;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit4Powers;
+    class PolynomialFit4Powers;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialSamplesPower;
+    class PolynomialSamplesPower;
+
+    template <typename Real, int S>
+    class PolynomialFitPowersData;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_FWD_H

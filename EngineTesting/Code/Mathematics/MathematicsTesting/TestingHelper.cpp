@@ -6,14 +6,23 @@
 
 #include "Testing.h"
 #include "TestingHelper.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/MainFunctionHelper/CMainFunctionTestingHelperDetail.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(Mathematics, TestingHelper, "数学库")
+using namespace std::literals; 
 
-// private
-void Mathematics::TestingHelper ::AddSuites()
+Mathematics::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "数学库"s }
+{
+    InitSuite();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, TestingHelper)
+
+void Mathematics::TestingHelper::InitSuite()
 {
     AddMacroSuite();
     AddBaseSuite();
@@ -36,15 +45,15 @@ void Mathematics::TestingHelper ::AddSuites()
 
 void Mathematics::TestingHelper ::AddMacroSuite()
 {
-    ADD_TEST_BEGIN(macroSuite, "宏");
+    auto macroSuite = GenerateSuite("宏");
 
-    ADD_TEST_END(macroSuite);
+    AddSuite(macroSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddBaseSuite()
 {
-    ADD_TEST_BEGIN(baseSuite, "基本");
+    auto baseSuite = GenerateSuite("基本");
 
     ADD_TEST(baseSuite, BitHacksTesting);
     ADD_TEST(baseSuite, MathTesting);
@@ -56,31 +65,31 @@ void Mathematics::TestingHelper ::AddBaseSuite()
     ADD_TEST(baseSuite, Float3Testing);
     ADD_TEST(baseSuite, Float4Testing);
 
-    ADD_TEST_END(baseSuite);
+    AddSuite(baseSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddAlgebraSuite()
 {
-    ADD_TEST_BEGIN(algebraSuite, "代数");
+    auto algebraSuite = GenerateSuite("代数");
 
     ADD_TEST(algebraSuite, HomogeneousPointTesting);
     ADD_TEST(algebraSuite, BarycentricCoordinatesTesting);
-    ADD_TEST(algebraSuite, Vector2DTesting);
-    ADD_TEST(algebraSuite, Vector3DTesting);
-    ADD_TEST(algebraSuite, Vector4DTesting);
-    ADD_TEST(algebraSuite, Vector2DOrthonormalizeTesting);
-    ADD_TEST(algebraSuite, Vector2DOrthonormalBasisTesting);
-    ADD_TEST(algebraSuite, Vector3DOrthonormalizeTesting);
-    ADD_TEST(algebraSuite, Vector3DOrthonormalBasisTesting);
+    ADD_TEST(algebraSuite, Vector2Testing);
+    ADD_TEST(algebraSuite, Vector3Testing);
+    ADD_TEST(algebraSuite, Vector4Testing);
+    ADD_TEST(algebraSuite, Vector2OrthonormalizeTesting);
+    ADD_TEST(algebraSuite, Vector2OrthonormalBasisTesting);
+    ADD_TEST(algebraSuite, Vector3OrthonormalizeTesting);
+    ADD_TEST(algebraSuite, Vector3OrthonormalBasisTesting);
     ADD_TEST(algebraSuite, AxesAlignBoundingBox2DTesting);
     ADD_TEST(algebraSuite, AxesAlignBoundingBox3DTesting);
     ADD_TEST(algebraSuite, AxesAlignBoundingBox4DTesting);
-    ADD_TEST(algebraSuite, Vector2DToolsTesting);
-    ADD_TEST(algebraSuite, Vector3DToolsTesting);
-    ADD_TEST(algebraSuite, Vector4DToolsTesting);
-    ADD_TEST(algebraSuite, Vector2DInformationTesting);
-    ADD_TEST(algebraSuite, Vector3DInformationTesting);
+    ADD_TEST(algebraSuite, Vector2ToolsTesting);
+    ADD_TEST(algebraSuite, Vector3ToolsTesting);
+    ADD_TEST(algebraSuite, Vector4ToolsTesting);
+    ADD_TEST(algebraSuite, Vector2InformationTesting);
+    ADD_TEST(algebraSuite, Vector3InformationTesting);
     ADD_TEST(algebraSuite, APointTesting);
     ADD_TEST(algebraSuite, AVectorOrthonormalizeTesting);
     ADD_TEST(algebraSuite, AVectorOrthonormalBasisTesting);
@@ -108,13 +117,13 @@ void Mathematics::TestingHelper ::AddAlgebraSuite()
     ADD_TEST(algebraSuite, AlgebraStreamSizeTesting);
     ADD_TEST(algebraSuite, AlgebraAggregateTesting);
 
-    ADD_TEST_END(algebraSuite);
+    AddSuite(algebraSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddObjects2DSuite()
 {
-    ADD_TEST_BEGIN(objects2DSuite, "对象2D");
+    auto objects2DSuite = GenerateSuite("对象2D");
 
     ADD_TEST(objects2DSuite, Arc2Testing);
     ADD_TEST(objects2DSuite, Box2Testing);
@@ -128,13 +137,13 @@ void Mathematics::TestingHelper ::AddObjects2DSuite()
     ADD_TEST(objects2DSuite, Ellipse2CoefficientsTesting);
     ADD_TEST(objects2DSuite, ConvexPolygon2Testing);
 
-    ADD_TEST_END(objects2DSuite);
+    AddSuite(objects2DSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddObjects3DSuite()
 {
-    ADD_TEST_BEGIN(objects3DSuite, "对象3D");
+    auto objects3DSuite = GenerateSuite("对象3D");
 
     ADD_TEST(objects3DSuite, Box3Testing);
     ADD_TEST(objects3DSuite, Circle3Testing);
@@ -159,13 +168,13 @@ void Mathematics::TestingHelper ::AddObjects3DSuite()
     ADD_TEST(objects3DSuite, Polyhedron3Testing);
     ADD_TEST(objects3DSuite, ConvexPolyhedron3Testing);
 
-    ADD_TEST_END(objects3DSuite);
+    AddSuite(objects3DSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddRationalSuite()
 {
-    ADD_TEST_BEGIN(rationalSuite, "有理数");
+    auto rationalSuite = GenerateSuite("有理数");
 
     ADD_TEST(rationalSuite, FloatingPointAnalysisTesting);
     ADD_TEST(rationalSuite, ConversionIntegerTesting);
@@ -187,13 +196,13 @@ void Mathematics::TestingHelper ::AddRationalSuite()
     ADD_TEST(rationalSuite, RationalVector2Testing);
     ADD_TEST(rationalSuite, RationalVector3Testing);
 
-    ADD_TEST_END(rationalSuite);
+    AddSuite(rationalSuite);
 }
 
 // private
 void Mathematics::TestingHelper ::AddNumericalAnalysisSuite()
 {
-    ADD_TEST_BEGIN(numericalAnalysisSuite, "数值分析");
+    auto numericalAnalysisSuite = GenerateSuite("数值分析");
 
     ADD_TEST(numericalAnalysisSuite, EquationResultConstIteratorTesting);
     ADD_TEST(numericalAnalysisSuite, EquationTesting);
@@ -223,6 +232,7 @@ void Mathematics::TestingHelper ::AddNumericalAnalysisSuite()
     ADD_TEST(numericalAnalysisSuite, LinearSystemTesting);
     ADD_TEST(numericalAnalysisSuite, Minimize1DataTesting);
     ADD_TEST(numericalAnalysisSuite, Minimize1Testing);
+    ADD_TEST(numericalAnalysisSuite, MinimizeNDataTesting);
     ADD_TEST(numericalAnalysisSuite, MinimizeNTesting);
     ADD_TEST(numericalAnalysisSuite, NoniterativeEigen3x3Testing);
     ADD_TEST(numericalAnalysisSuite, OdeSolverTesting);
@@ -240,12 +250,12 @@ void Mathematics::TestingHelper ::AddNumericalAnalysisSuite()
     ADD_TEST(numericalAnalysisSuite, PolarDecompositionValueTesting);
     ADD_TEST(numericalAnalysisSuite, QDUDecompositionValueTesting);
 
-    ADD_TEST_END(numericalAnalysisSuite);
+    AddSuite(numericalAnalysisSuite);
 }
 
 void Mathematics::TestingHelper ::AddQuerySuite()
 {
-    ADD_TEST_BEGIN(querySuite, "查询");
+    auto querySuite = GenerateSuite("查询");
 
     ADD_TEST(querySuite, QuerySortToolsTesting);
     ADD_TEST(querySuite, QueryDotToolsTesting);
@@ -260,12 +270,12 @@ void Mathematics::TestingHelper ::AddQuerySuite()
     ADD_TEST(querySuite, Query3RationalTesting);
     ADD_TEST(querySuite, Query3FilteredTesting);
 
-    ADD_TEST_END(querySuite);
+    AddSuite(querySuite);
 }
 
 void Mathematics::TestingHelper ::AddApproximationSuite()
 {
-    ADD_TEST_BEGIN(approximationSuite, "近似");
+    auto approximationSuite = GenerateSuite("近似");
 
     ADD_TEST(approximationSuite, QuadraticCircleFit2Testing);
     ADD_TEST(approximationSuite, QuadraticFit2Testing);
@@ -294,24 +304,24 @@ void Mathematics::TestingHelper ::AddApproximationSuite()
     ADD_TEST(approximationSuite, PolynomialFit3PowersTesting);
     ADD_TEST(approximationSuite, PolynomialFit4PowersTesting);
 
-    ADD_TEST_END(approximationSuite);
+    AddSuite(approximationSuite);
 }
 
 void Mathematics::TestingHelper ::AddDistanceSuite()
 {
-    ADD_TEST_BEGIN(distanceSuite, "距离测试");
+    auto distanceSuite = GenerateSuite("距离测试");
 
     ADD_TEST(distanceSuite, DistanceResultTesting);
     ADD_TEST(distanceSuite, DistanceTesting);
-    AddDistance2DSuite(distanceSuite);
-    AddDistance3DSuite(distanceSuite);
+    distanceSuite.AddSuite(GetDistance2DSuite());
+    distanceSuite.AddSuite(GetDistance3DSuite());
 
-    ADD_TEST_END(distanceSuite);
+    AddSuite(distanceSuite);
 }
 
-void Mathematics::TestingHelper ::AddDistance2DSuite(Suite& suite)
+CoreTools::Suite Mathematics::TestingHelper::GetDistance2DSuite()
 {
-    ADD_TEST_BEGIN(distance2DSuite, "2D距离测试");
+    auto distance2DSuite = GenerateSuite("2D距离测试");
 
     ADD_TEST(distance2DSuite, DistanceLine2Line2Testing);
     ADD_TEST(distance2DSuite, DistanceRay2Ray2Testing);
@@ -326,12 +336,12 @@ void Mathematics::TestingHelper ::AddDistance2DSuite(Suite& suite)
     ADD_TEST(distance2DSuite, DistancePoint2Box2Testing);
     ADD_TEST(distance2DSuite, DistancePoint2Hyperbola2Testing);
 
-    suite.AddSuite(distance2DSuite);
+    return distance2DSuite;
 }
 
-void Mathematics::TestingHelper ::AddDistance3DSuite(Suite& suite)
+CoreTools::Suite Mathematics::TestingHelper::GetDistance3DSuite()
 {
-    ADD_TEST_BEGIN(distance3DSuite, "3D距离测试");
+    auto distance3DSuite = GenerateSuite("3D距离测试");
 
     ADD_TEST(distance3DSuite, DistancePoint3Ellipsoid3Testing);
     ADD_TEST(distance3DSuite, DistanceLine3Line3Testing);
@@ -346,23 +356,23 @@ void Mathematics::TestingHelper ::AddDistance3DSuite(Suite& suite)
     ADD_TEST(distance3DSuite, DistancePoint3Box3Testing);
     ADD_TEST(distance3DSuite, DistanceCircle3Circle3Testing);
 
-    suite.AddSuite(distance3DSuite);
+    return distance3DSuite;
 }
 
 void Mathematics::TestingHelper ::AddIntersectionSuite()
 {
-    ADD_TEST_BEGIN(intersectionSuite, "相交测试");
+    auto intersectionSuite = GenerateSuite("相交测试");
 
-    AddIntersection1DSuite(intersectionSuite);
-    AddIntersection2DSuite(intersectionSuite);
-    AddIntersection3DSuite(intersectionSuite);
+    intersectionSuite.AddSuite(GetIntersection1DSuite());
+    intersectionSuite.AddSuite(GetIntersection2DSuite());
+    intersectionSuite.AddSuite(GetIntersection3DSuite());
 
-    ADD_TEST_END(intersectionSuite);
+    AddSuite(intersectionSuite);
 }
 
-void Mathematics::TestingHelper ::AddIntersection1DSuite(Suite& suite)
+CoreTools::Suite Mathematics::TestingHelper ::GetIntersection1DSuite()
 {
-    ADD_TEST_BEGIN(intersection1DSuite, "1D相交测试");
+    auto intersection1DSuite = GenerateSuite("1D相交测试");
 
     ADD_TEST(intersection1DSuite, IntersectorTesting);
     ADD_TEST(intersection1DSuite, StaticIntersectorTesting);
@@ -373,12 +383,12 @@ void Mathematics::TestingHelper ::AddIntersection1DSuite(Suite& suite)
     ADD_TEST(intersection1DSuite, DynamicTestIntersector1Testing);
     ADD_TEST(intersection1DSuite, DynamicFindIntersector1Testing);
 
-    suite.AddSuite(intersection1DSuite);
+    return intersection1DSuite;
 }
 
-void Mathematics::TestingHelper ::AddIntersection2DSuite(Suite& suite)
+CoreTools::Suite Mathematics::TestingHelper ::GetIntersection2DSuite()
 {
-    ADD_TEST_BEGIN(intersection2DSuite, "2D相交测试");
+    auto intersection2DSuite = GenerateSuite("2D相交测试");
 
     ADD_TEST(intersection2DSuite, StaticFindIntersectorCircle2Circle2Testing);
     ADD_TEST(intersection2DSuite, StaticFindIntersectorArc2Arc2Testing);
@@ -398,66 +408,66 @@ void Mathematics::TestingHelper ::AddIntersection2DSuite(Suite& suite)
     ADD_TEST(intersection2DSuite, StaticTestIntersectorRay2Segment2Testing);
     ADD_TEST(intersection2DSuite, StaticFindIntersectorRay2Segment2Testing);
 
-    suite.AddSuite(intersection2DSuite);
+    return intersection2DSuite;
 }
 
-void Mathematics::TestingHelper ::AddIntersection3DSuite(Suite& suite)
+CoreTools::Suite Mathematics::TestingHelper ::GetIntersection3DSuite()
 {
-    ADD_TEST_BEGIN(intersection3DSuite, "3D相交测试");
+    auto intersection3DSuite = GenerateSuite("3D相交测试");
 
     ADD_TEST(intersection3DSuite, IntersectorLine3Triangle3Testing);
     ADD_TEST(intersection3DSuite, TriangleProjectOntoAxisTesting);
     ADD_TEST(intersection3DSuite, TrianglePlaneRelationsTesting);
 
-    suite.AddSuite(intersection3DSuite);
+    return intersection3DSuite;
 }
 
 void Mathematics::TestingHelper ::AddComputationalGeometrySuite()
 {
-    ADD_TEST_BEGIN(computationalGeometrySuite, "计算几何");
+    auto computationalGeometrySuite = GenerateSuite("计算几何");
 
-    ADD_TEST_END(computationalGeometrySuite);
+    AddSuite(computationalGeometrySuite);
 }
 
 void Mathematics::TestingHelper ::AddContainmentSuite()
 {
-    ADD_TEST_BEGIN(containmentSuite, "包含");
+    auto containmentSuite = GenerateSuite("包含");
 
     ADD_TEST(containmentSuite, ScribeCircle2CircumscribeTesting);
     ADD_TEST(containmentSuite, ScribeCircle2InscribeTesting);
     ADD_TEST(containmentSuite, ContBox2Testing);
     ADD_TEST(containmentSuite, ContBox3Testing);
 
-    ADD_TEST_END(containmentSuite);
+    AddSuite(containmentSuite);
 }
 
 void Mathematics::TestingHelper ::AddCurvesSurfacesVolumesSuite()
 {
-    ADD_TEST_BEGIN(curvesSurfacesVolumesSuite, "曲线曲面体积");
+    auto curvesSurfacesVolumesSuite = GenerateSuite("曲线曲面体积");
 
-    ADD_TEST_END(curvesSurfacesVolumesSuite);
+    AddSuite(curvesSurfacesVolumesSuite);
 }
 
 void Mathematics::TestingHelper ::AddInterpolationSuite()
 {
-    ADD_TEST_BEGIN(interpolationSuite, "插值");
+    auto interpolationSuite = GenerateSuite("插值");
 
-    ADD_TEST_END(interpolationSuite);
+    AddSuite(interpolationSuite);
 }
 
 void Mathematics::TestingHelper ::AddMeshesSuite()
 {
-    ADD_TEST_BEGIN(meshesSuite, "网格测试");
+    auto meshesSuite = GenerateSuite("网格测试");
 
     ADD_TEST(meshesSuite, EdgeKeyTesting);
     ADD_TEST(meshesSuite, TriangleKeyTesting);
 
-    ADD_TEST_END(meshesSuite);
+    AddSuite(meshesSuite);
 }
 
 void Mathematics::TestingHelper ::AddMiscellaneousSuite()
 {
-    ADD_TEST_BEGIN(miscellaneousSuite, "杂项");
+    auto miscellaneousSuite = GenerateSuite("杂项");
 
-    ADD_TEST_END(miscellaneousSuite);
+    AddSuite(miscellaneousSuite);
 }

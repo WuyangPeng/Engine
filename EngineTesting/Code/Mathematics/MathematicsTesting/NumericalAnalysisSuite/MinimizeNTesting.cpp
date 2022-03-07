@@ -22,7 +22,16 @@ namespace Mathematics
 	template class MinimizeN<float,MinimizeNTesting>;
 	template class MinimizeN<double,MinimizeNTesting>;	
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,MinimizeNTesting) 
 
 void Mathematics::MinimizeNTesting
@@ -42,7 +51,7 @@ void Mathematics::MinimizeNTesting
 
 	vector<double> initial{ 0.0,0.0,0.0,0.0,0.0 };
 
-	DoubleMinimizeNData result = minimizeN.GetMinimum(begin, end, initial);
+	MinimizeNDataD result = minimizeN.GetMinimum(begin, end, initial);
 
 	ASSERT_APPROXIMATE(result.GetMinValue(), Function(result.GetMinLocation(), this), 1e-10);
 

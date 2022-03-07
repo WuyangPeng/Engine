@@ -6,7 +6,7 @@
 
 #include "Line2Testing.h"
 #include "Mathematics/Objects2D/Line2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -28,7 +28,12 @@ void Mathematics::Line2Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Line2Testing
 	::LineTest()
 {
@@ -39,16 +44,16 @@ void Mathematics::Line2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D origin(firstRandomDistribution(generator),firstRandomDistribution(generator));
+		Vector2 origin(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
-		DoubleVector2D direction(firstRandomDistribution(generator),firstRandomDistribution(generator));
+		Vector2 direction(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
 		direction.Normalize();
 
-		DoubleLine2 line(origin,direction);
+		Line2D line(origin,direction);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(origin,line.GetOrigin()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(direction,line.GetDirection()));		
+		ASSERT_TRUE(Vector2ToolsD::Approximate(origin,line.GetOrigin()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(direction,line.GetDirection()));		
 	}
 }
 

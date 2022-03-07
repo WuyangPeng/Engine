@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 15:38)
+///	引擎版本：0.8.0.2 (2022/02/10 14:58)
 
 #ifndef MATHEMATICS_OBJECTS3D_CAPSULE3_H
 #define MATHEMATICS_OBJECTS3D_CAPSULE3_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Segment3.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <type_traits>
 
@@ -34,16 +34,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Segment3 GetSegment() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
+        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
 
     private:
-        Segment3 m_Segment;
-        Real m_Radius;
+        Segment3 segment;
+        Real radius;
     };
 
-    using FloatCapsule3 = Capsule3<float>;
-    using DoubleCapsule3 = Capsule3<double>;
+    using Capsule3F = Capsule3<float>;
+    using Capsule3D = Capsule3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CAPSULE3_H

@@ -33,26 +33,26 @@ namespace Mathematics
 		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
 		// uses floating-point arithmetic, but is not robust in all cases.
 
-		Delaunay3 (const std::vector<Vector3D<Real> >& vertices, Real epsilon,bool owner, QueryType queryType);
+		Delaunay3 (const std::vector<Vector3<Real> >& vertices, Real epsilon,bool owner, QueryType queryType);
 		virtual ~Delaunay3 ();
 		
 		// The input vertex array.
-		const Vector3D<Real>* GetVertices () const;
+		const Vector3<Real>* GetVertices () const;
 		
 		// The number of unique vertices processed.
 		int GetNumUniqueVertices () const;
 		
 		// If GetDimension() returns 1, then the points lie on a line.  You must
 		// create a Delaunay1 object using the function provided.
-		const Vector3D<Real>& GetLineOrigin () const;
-		const Vector3D<Real>& GetLineDirection () const;
+		const Vector3<Real>& GetLineOrigin () const;
+		const Vector3<Real>& GetLineDirection () const;
 		Delaunay1<Real>* GetDelaunay1 () const;
 
 		// If GetDimension() returns 2, then the points lie on a plane.  The plane
 		// has two direction vectors (inputs 0 or 1).  You must create a Delaunay2
 		// object using the function provided.
-		const Vector3D<Real>& GetPlaneOrigin () const;
-		const Vector3D<Real>& GetPlaneDirection (int i) const;
+		const Vector3<Real>& GetPlaneOrigin () const;
+		const Vector3<Real>& GetPlaneDirection (int i) const;
 		Delaunay2<Real>* GetDelaunay2 () const;
 
 		// Locate those tetrahedra faces that do not share other tetrahedra.
@@ -67,7 +67,7 @@ namespace Mathematics
 		// contains a point.  If there is a containing tetrahedron, the returned
 		// value is a tetrahedron index i with 0 <= i < numTriangles.  If there is
 		// not a containing tetrahedron, -1 is returned.
-		int GetContainingTetrahedron (const Vector3D<Real>& p) const;
+		int GetContainingTetrahedron (const Vector3<Real>& p) const;
 
 		// If GetContainingTetrahedron returns a nonnegative value, the path of
 		// tetrahedra searched for the containing tetrahedra is stored in an
@@ -90,7 +90,7 @@ namespace Mathematics
 		// Get the vertices for tetrahedron i.  The function returns 'true' if i
 		// is a valid tetrahedron index, in which case the vertices are valid.
 		// Otherwise, the function returns 'false' and the vertices are invalid.
-		bool GetVertexSet (int i, Vector3D<Real> vertices[4]) const;
+		bool GetVertexSet (int i, Vector3<Real> vertices[4]) const;
 
 		// Get the vertex indices for tetrahedron i.  The function returns 'true'
 		// if i is a valid tetrahedron index, in which case the vertices are
@@ -108,7 +108,7 @@ namespace Mathematics
 		// The function returns 'true' if i is a valid tetrahedron index, in which
 		// case the coordinates are valid.  Otherwise, the function returns
 		// 'false' and the coordinate array is invalid.
-		bool GetBarycentricSet (int i, const Vector3D<Real>& p, Real bary[4]) const;
+		bool GetBarycentricSet (int i, const Vector3<Real>& p, Real bary[4]) const;
 
 		// Support for streaming to/from disk.
 		Delaunay3 (const System::TChar* filename);
@@ -134,26 +134,26 @@ namespace Mathematics
 		void Update (int i);
 
 		// The input vertices.
-		std::vector<Vector3D<Real> > mVertices;
+		std::vector<Vector3<Real> > mVertices;
 
 		// The number of unique vertices processed.
 		int mNumUniqueVertices;
 
 		// The scaled input vertices.  This array and supporting data structures
 		// are for robust calculations.
-		std::vector<Vector3D<Real> > mSVertices;
+		std::vector<Vector3<Real> > mSVertices;
 		Query3<Real>* mQuery;
-		Vector3D<Real> mMin;
+		Vector3<Real> mMin;
 		Real mScale;
 		
 		// The current tetrahedralization.
 		TSManifoldMesh mTetraMesh;
 		
 		// The line of containment if the dimension is 1.
-		Vector3D<Real> m_LineOrigin, m_LineDirection;
+		Vector3<Real> m_LineOrigin, m_LineDirection;
 		
 		// The plane of containment if the dimension is 2.
-		Vector3D<Real> mPlaneOrigin, mPlaneDirection[2];
+		Vector3<Real> mPlaneOrigin, mPlaneDirection[2];
 		
 		// Store the path of tetrahedra visited in a GetContainingTetrahedron
 		// function call.

@@ -30,8 +30,8 @@ namespace Rendering
                BlendTransformController(BlendTransformController&& rhs) noexcept;
                BlendTransformController& operator=(BlendTransformController&& rhs) noexcept;
         using ParentType = TransformController;
-        using APoint = Mathematics::FloatAPoint;
-        using Matrix = Mathematics::FloatMatrix;
+        using APoint = Mathematics::APointF;
+        using Matrix = Mathematics::MatrixF;
 
     public:
         // 设定'rotationScaleMatrices'为“真”时,输入控制器管理的形式为：

@@ -26,7 +26,7 @@ namespace Mathematics
 		void PointTest();
 		void ExceptionTest(const StaticFindIntersectorArc2Circle2<float>& intersector);
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

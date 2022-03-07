@@ -1,119 +1,119 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 16:14)
 
 #include "OdeEulerTesting.h"
-#include "Mathematics/NumericalAnalysis/OdeEulerDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/NumericalAnalysis/OdeEulerDetail.h"
 
-using std::vector;
 using std::ostream;
+using std::vector;
 
 namespace Mathematics
 {
-	template class OdeEuler<float,OdeEulerTesting>;
-	template class OdeEuler<double,OdeEulerTesting>;	
+    template class OdeEuler<float, OdeEulerTesting>;
+    template class OdeEuler<double, OdeEulerTesting>;
+}
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
+Mathematics::OdeEulerTesting ::OdeEulerTesting(const OStreamShared& osPtr)
+    : ParentType{ osPtr }, m_Dimension{ 10 }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
-Mathematics::OdeEulerTesting
-	::OdeEulerTesting(const OStreamShared& osPtr) 
-	:ParentType{ osPtr }, m_Dimension{ 10 }
-{	
-	MATHEMATICS_SELF_CLASS_IS_VALID_1;
-}                                 
-
- 
- 
-CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, OdeEulerTesting) 
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Mathematics, OdeEulerTesting)
 
 void Mathematics::OdeEulerTesting ::DoRunUnitTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(MainTest);
 }
 
-void Mathematics::OdeEulerTesting
-	::MainTest()
+void Mathematics::OdeEulerTesting ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(SolverTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(SolverTest);
 }
 
-void Mathematics::OdeEulerTesting
-	::SolverTest()
+void Mathematics::OdeEulerTesting ::SolverTest()
 {
-	OdeEuler<double,OdeEulerTesting> odeSolverTest(m_Dimension, 5,OdeEulerTesting::OdeEulerFunction, nullptr);
+    OdeEuler<double, OdeEulerTesting> odeSolverTest(m_Dimension, 5, OdeEulerTesting::OdeEulerFunction, nullptr);
 
-	ASSERT_EQUAL(odeSolverTest.GetDimension(),m_Dimension);
+    ASSERT_EQUAL(odeSolverTest.GetDimension(), m_Dimension);
 
-	ASSERT_EQUAL(odeSolverTest.GetStepSize(), 5);
-	ASSERT_EQUAL_NULL_PTR(odeSolverTest.GetUserData());
+    ASSERT_EQUAL(odeSolverTest.GetStepSize(), 5);
+    ASSERT_EQUAL_NULL_PTR(odeSolverTest.GetUserData());
 
-	odeSolverTest.SetStepSize(6);
-	ASSERT_EQUAL(odeSolverTest.GetStepSize(), 6);
+    odeSolverTest.SetStepSize(6);
+    ASSERT_EQUAL(odeSolverTest.GetStepSize(), 6);
 
-	odeSolverTest.SetUserData(this);
-	ASSERT_EQUAL(odeSolverTest.GetUserData(), this);
-// 
-// 	double tIn = 100;
-// 
-// 	vector<double> xIn;
-// 
-// 	for (int i = 0; i < m_Dimension; ++i)
-// 	{
-// 		xIn.push_back(i);
-// 	}
+    odeSolverTest.SetUserData(this);
+    ASSERT_EQUAL(odeSolverTest.GetUserData(), this);
+    //
+    // 	double tIn = 100;
+    //
+    // 	vector<double> xIn;
+    //
+    // 	for (int i = 0; i < m_Dimension; ++i)
+    // 	{
+    // 		xIn.push_back(i);
+    // 	}
 
-// 	double tOut = 0;
-// 
-// 	vector<double> xOut(m_Dimension);
+    // 	double tOut = 0;
+    //
+    // 	vector<double> xOut(m_Dimension);
 
-// 	odeSolverTest.Update(tIn, xIn, tOut, &xOut[0]);
-// 
-// 	vector<double> testXOut(m_Dimension);
-// 	
-// 
-// 	vector<double> functionValue = OdeEulerFunction(tIn, xIn, this);
-// 	 
-// 	int dimension = GetDimension();
-// 
-// 	for (int i = 0; i < dimension; ++i)
-// 	{
-// 		testXOut[i] = xIn[i] + functionValue[i] * odeSolverTest.GetStepSize();
-// 	}
-// 
-// 	double testTOut = tIn + odeSolverTest.GetStepSize();
-// 
-// 	ASSERT_APPROXIMATE(testTOut,tOut,1e-10);
-// 
-// 	for(int i = 0;i < m_Dimension;++i)
-// 	{
-// 		ASSERT_APPROXIMATE(testXOut[i],xOut[i],1e-10);
-// 	}
+    // 	odeSolverTest.Update(tIn, xIn, tOut, &xOut[0]);
+    //
+    // 	vector<double> testXOut(m_Dimension);
+    //
+    //
+    // 	vector<double> functionValue = OdeEulerFunction(tIn, xIn, this);
+    //
+    // 	int dimension = GetDimension();
+    //
+    // 	for (int i = 0; i < dimension; ++i)
+    // 	{
+    // 		testXOut[i] = xIn[i] + functionValue[i] * odeSolverTest.GetStepSize();
+    // 	}
+    //
+    // 	double testTOut = tIn + odeSolverTest.GetStepSize();
+    //
+    // 	ASSERT_APPROXIMATE(testTOut,tOut,1e-10);
+    //
+    // 	for(int i = 0;i < m_Dimension;++i)
+    // 	{
+    // 		ASSERT_APPROXIMATE(testXOut[i],xOut[i],1e-10);
+    // 	}
 }
 
-const vector<double> Mathematics::OdeEulerTesting
-	::OdeEulerFunction( double tIn, const vector<double>& xIn,const OdeEulerTesting* odeEulerTesting )
+const vector<double> Mathematics::OdeEulerTesting ::OdeEulerFunction(double tIn, const vector<double>& xIn, const OdeEulerTesting* odeEulerTesting)
 {
-	int dimension =  odeEulerTesting->GetDimension();
+    int dimension = odeEulerTesting->GetDimension();
 
-	vector<double> out(dimension);
+    vector<double> out(dimension);
 
-	for (int i = 0; i < dimension; i++)
-	{
-		out[i] = tIn * xIn[i] + dimension;
-	}
+    for (int i = 0; i < dimension; i++)
+    {
+        out[i] = tIn * xIn[i] + dimension;
+    }
 
-	return out;
+    return out;
 }
 
-int Mathematics::OdeEulerTesting
-	::GetDimension() const
+int Mathematics::OdeEulerTesting ::GetDimension() const
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_1;
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-	return m_Dimension;
+    return m_Dimension;
 }
-
-

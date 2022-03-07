@@ -44,14 +44,14 @@ namespace Mathematics
 		// Quadratic interpolation.  The return value is 'true' if and only if the
 		// input point is in the convex hull of the input vertices, in which case
 		// the interpolation is valid.
-		bool Evaluate(const Vector2D<Real>& P, Real& F, Real& FX, Real& FY);
+		bool Evaluate(const Vector2<Real>& P, Real& F, Real& FX, Real& FY);
 
 	private:
 		class TriangleData
 		{
 		public:
-			Vector2D<Real> Center;
-			Vector2D<Real> Intersect[3];
+			Vector2<Real> Center;
+			Vector2<Real> Intersect[3];
 			Real Coeff[19];
 		};
 

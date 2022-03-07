@@ -21,7 +21,7 @@ namespace Mathematics
 		void BarycentricCoordinates3DTest();
 		void BarycentricCoordinates4DTest();
 
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

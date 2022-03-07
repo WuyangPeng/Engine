@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/29 10:53)
+///	引擎版本：0.8.0.3 (2022/02/28 10:21)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H
@@ -14,60 +14,50 @@
 
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Objects3D/Box3.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class DynamicFindIntersectorBox3Box3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorBox3Box3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorBox3Box3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorBox3Box3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3D>
+    class DynamicFindIntersectorBox3Box3 : public DynamicIntersector<Real, Vector3>
     {
     public:
-        using DynamicFindIntersectorBox3Box3Impl = DynamicFindIntersectorBox3Box3Impl<Real>;
-  
-        TYPE_DECLARE(DynamicFindIntersectorBox3Box3);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using ParentType = DynamicIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ClassType = DynamicFindIntersectorBox3Box3<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
-        DynamicFindIntersectorBox3Box3(
-            const Box3& box0,
-            const Box3& box1,
-            Real tmax,
-            const Vector3D& lhsVelocity,
-            const Vector3D& rhsVelocity,
-            const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersectorBox3Box3(const Box3& box0,
+                                       const Box3& box1,
+                                       Real tmax,
+                                       const Vector3& lhsVelocity,
+                                       const Vector3& rhsVelocity,
+                                       const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Box3 GetBox0() const noexcept;
-        [[nodiscard]] const Box3 GetBox1() const noexcept;
+        NODISCARD Box3 GetBox0() const noexcept;
+        NODISCARD Box3 GetBox1() const noexcept;
 
-        [[nodiscard]] int GetQuantity() const;
-        [[nodiscard]] const Vector3D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const;
+        NODISCARD Vector3 GetPoint(int index) const;
+
+    private:
+        using Container = std::vector<Vector3>;
 
     private:
         // 动态查找交叉点查询。 该触点组被计算出来。
         void Find();
 
     private:
-        PackageType impl;
-    };
+        Box3 box0;
+        Box3 box1;
 
-    using FloatDynamicFindIntersectorBox3Box3 = DynamicFindIntersectorBox3Box3<float>;
-    using DoubleDynamicFindIntersectorBox3Box3 = DynamicFindIntersectorBox3Box3<double>;
+        // 动态查找相交的相交集。 最坏的情况是具有8个顶点的多边形。
+        Container point;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_BOX3_H

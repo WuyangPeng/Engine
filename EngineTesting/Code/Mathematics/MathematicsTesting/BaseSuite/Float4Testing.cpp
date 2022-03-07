@@ -17,6 +17,7 @@ void Mathematics::Float4Testing
 	ASSERT_NOT_THROW_EXCEPTION_0(ConstructorTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(DelayCopyTest);
 }
+#include SYSTEM_WARNING_DISABLE(26440)
 
 void Mathematics::Float4Testing
 	::ConstructorTest()

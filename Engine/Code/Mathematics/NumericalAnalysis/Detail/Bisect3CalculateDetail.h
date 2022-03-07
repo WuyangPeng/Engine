@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/20 16:15)
+///	引擎版本：0.8.0.2 (2022/02/14 13:51)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_DETAIL_H
@@ -18,13 +18,18 @@
 #include "Mathematics/NumericalAnalysis/Bisect3.h"
 
 template <typename Real>
-Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect, Real beginPointX, Real beginPointY, Real beginPointZ,
-                                                      Real endPointX, Real endPointY, Real endPointZ)
-    : m_Bisect3{ bisect },
-      m_Level{ 0 },
-      m_Bisect3Root(std::make_shared<Bisect3Root>()),
-      m_Bisect3Storage{ bisect },
-      m_Graph{}
+Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect,
+                                                      Real beginPointX,
+                                                      Real beginPointY,
+                                                      Real beginPointZ,
+                                                      Real endPointX,
+                                                      Real endPointY,
+                                                      Real endPointZ)
+    : bisect3{ bisect },
+      level{ 0 },
+      bisect3Root(std::make_shared<Bisect3Root>()),
+      bisect3Storage{ bisect },
+      graph{}
 {
     Calculate(beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ);
 
@@ -33,17 +38,21 @@ Mathematics::Bisect3Calculate<Real>::Bisect3Calculate(const Bisect3& bisect, Rea
 
 // private
 template <typename Real>
-void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX, Real beginPointY, Real beginPointZ,
-                                                    Real endPointX, Real endPointY, Real endPointZ)
+void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX,
+                                                    Real beginPointY,
+                                                    Real beginPointZ,
+                                                    Real endPointX,
+                                                    Real endPointY,
+                                                    Real endPointZ)
 {
     MATHEMATICS_ASSERTION_2(beginPointX <= endPointX, "起点的X值比终点的X值大。");
     MATHEMATICS_ASSERTION_2(beginPointY <= endPointY, "起点的Y值比终点的Y值大。");
     MATHEMATICS_ASSERTION_2(beginPointZ <= endPointZ, "起点的Z值比终点的Z值大。");
 
     // 测试的八个角的值。
-    if (m_Bisect3Storage.TestEightCornerValues(beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ))
+    if (bisect3Storage.TestEightCornerValues(beginPointX, beginPointY, beginPointZ, endPointX, endPointY, endPointZ))
     {
-        m_Bisect3Root = m_Bisect3Storage.GetBisect3Root();
+        bisect3Root = bisect3Storage.GetBisect3Root();
 
         return;
     }
@@ -51,90 +60,108 @@ void Mathematics::Bisect3Calculate<Real>::Calculate(Real beginPointX, Real begin
     // 构建初始八边形
 
     // 增加 N000。
-    m_Graph = std::make_shared<Bisect3Node>(beginPointX, beginPointY, beginPointZ,
-                                            m_Bisect3Storage.GetBeginXBeginYBeginZValue0(),
-                                            m_Bisect3Storage.GetBeginXBeginYBeginZValue1(),
-                                            m_Bisect3Storage.GetBeginXBeginYBeginZValue2());
+    graph = std::make_shared<Bisect3Node>(beginPointX,
+                                          beginPointY,
+                                          beginPointZ,
+                                          bisect3Storage.GetBeginXBeginYBeginZValue0(),
+                                          bisect3Storage.GetBeginXBeginYBeginZValue1(),
+                                          bisect3Storage.GetBeginXBeginYBeginZValue2());
 
     // 增加 N100。
-    m_Graph->AddXNextNode(endPointX, beginPointY, beginPointZ,
-                          m_Bisect3Storage.GetEndXBeginYBeginZValue0(),
-                          m_Bisect3Storage.GetEndXBeginYBeginZValue1(),
-                          m_Bisect3Storage.GetEndXBeginYBeginZValue2());
+    graph->AddXNextNode(endPointX,
+                        beginPointY,
+                        beginPointZ,
+                        bisect3Storage.GetEndXBeginYBeginZValue0(),
+                        bisect3Storage.GetEndXBeginYBeginZValue1(),
+                        bisect3Storage.GetEndXBeginYBeginZValue2());
 
     // 增加 N010。
-    m_Graph->AddYNextNode(beginPointX, endPointY, beginPointZ,
-                          m_Bisect3Storage.GetBeginXEndYBeginZValue0(),
-                          m_Bisect3Storage.GetBeginXEndYBeginZValue1(),
-                          m_Bisect3Storage.GetBeginXEndYBeginZValue2());
+    graph->AddYNextNode(beginPointX,
+                        endPointY,
+                        beginPointZ,
+                        bisect3Storage.GetBeginXEndYBeginZValue0(),
+                        bisect3Storage.GetBeginXEndYBeginZValue1(),
+                        bisect3Storage.GetBeginXEndYBeginZValue2());
 
     // 增加 N110。
-    m_Graph->GetXNext()->AddYNextNode(endPointX, endPointY, beginPointZ,
-                                      m_Bisect3Storage.GetEndXEndYBeginZValue0(),
-                                      m_Bisect3Storage.GetEndXEndYBeginZValue1(),
-                                      m_Bisect3Storage.GetEndXEndYBeginZValue2());
+    graph->GetXNext()->AddYNextNode(endPointX,
+                                    endPointY,
+                                    beginPointZ,
+                                    bisect3Storage.GetEndXEndYBeginZValue0(),
+                                    bisect3Storage.GetEndXEndYBeginZValue1(),
+                                    bisect3Storage.GetEndXEndYBeginZValue2());
 
-    m_Graph->GetYNext()->AddXNextNode(m_Graph->GetXNext()->GetYNext());
+    graph->GetYNext()->AddXNextNode(graph->GetXNext()->GetYNext());
 
     // 增加 N001。
-    m_Graph->AddZNextNode(beginPointX, beginPointY, endPointZ,
-                          m_Bisect3Storage.GetBeginXBeginYEndZValue0(),
-                          m_Bisect3Storage.GetBeginXBeginYEndZValue1(),
-                          m_Bisect3Storage.GetBeginXBeginYEndZValue2());
+    graph->AddZNextNode(beginPointX,
+                        beginPointY,
+                        endPointZ,
+                        bisect3Storage.GetBeginXBeginYEndZValue0(),
+                        bisect3Storage.GetBeginXBeginYEndZValue1(),
+                        bisect3Storage.GetBeginXBeginYEndZValue2());
 
     // 增加 N101。
-    m_Graph->GetXNext()->AddZNextNode(endPointX, beginPointY, endPointZ,
-                                      m_Bisect3Storage.GetEndXBeginYEndZValue0(),
-                                      m_Bisect3Storage.GetEndXBeginYEndZValue1(),
-                                      m_Bisect3Storage.GetEndXBeginYEndZValue2());
+    graph->GetXNext()->AddZNextNode(endPointX,
+                                    beginPointY,
+                                    endPointZ,
+                                    bisect3Storage.GetEndXBeginYEndZValue0(),
+                                    bisect3Storage.GetEndXBeginYEndZValue1(),
+                                    bisect3Storage.GetEndXBeginYEndZValue2());
 
-    m_Graph->GetZNext()->AddXNextNode(m_Graph->GetXNext()->GetZNext());
+    graph->GetZNext()->AddXNextNode(graph->GetXNext()->GetZNext());
 
     // 增加 N011。
-    m_Graph->GetYNext()->AddZNextNode(beginPointX, endPointY, endPointZ,
-                                      m_Bisect3Storage.GetBeginXEndYEndZValue0(),
-                                      m_Bisect3Storage.GetBeginXEndYEndZValue1(),
-                                      m_Bisect3Storage.GetBeginXEndYEndZValue2());
+    graph->GetYNext()->AddZNextNode(beginPointX,
+                                    endPointY,
+                                    endPointZ,
+                                    bisect3Storage.GetBeginXEndYEndZValue0(),
+                                    bisect3Storage.GetBeginXEndYEndZValue1(),
+                                    bisect3Storage.GetBeginXEndYEndZValue2());
 
-    m_Graph->GetZNext()->AddYNextNode(m_Graph->GetYNext()->GetZNext());
+    graph->GetZNext()->AddYNextNode(graph->GetYNext()->GetZNext());
 
     // 增加 N111。
-    m_Graph->GetXNext()->GetYNext()->AddZNextNode(endPointX, endPointY, endPointZ,
-                                                  m_Bisect3Storage.GetEndXEndYEndZValue0(),
-                                                  m_Bisect3Storage.GetEndXEndYEndZValue1(),
-                                                  m_Bisect3Storage.GetEndXEndYEndZValue2());
+    graph->GetXNext()->GetYNext()->AddZNextNode(endPointX,
+                                                endPointY,
+                                                endPointZ,
+                                                bisect3Storage.GetEndXEndYEndZValue0(),
+                                                bisect3Storage.GetEndXEndYEndZValue1(),
+                                                bisect3Storage.GetEndXEndYEndZValue2());
 
-    m_Graph->GetYNext()->GetXNext()->AddZNextNode(m_Graph->GetXNext()->GetYNext()->GetZNext());
-    m_Graph->GetXNext()->GetZNext()->AddYNextNode(m_Graph->GetXNext()->GetYNext()->GetZNext());
+    graph->GetYNext()->GetXNext()->AddZNextNode(graph->GetXNext()->GetYNext()->GetZNext());
+    graph->GetXNext()->GetZNext()->AddYNextNode(graph->GetXNext()->GetYNext()->GetZNext());
 
-    const auto result = BisectRecurse(m_Graph);
+    const auto result = BisectRecurse(graph);
 
     if (result)
     {
-        m_Bisect3Root = m_Bisect3Storage.GetBisect3Root();
+        bisect3Root = bisect3Storage.GetBisect3Root();
     }
 
     // 将剩下的四边形从m_Graph中移除。
-    m_Graph.reset();
+    graph.reset();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Bisect3Calculate<Real>::IsValid() const noexcept
 {
-    if (m_Bisect3Root != nullptr && m_Graph == nullptr)
+    if (bisect3Root != nullptr && graph == nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::Bisect3Calculate<Real>::Bisect3Root Mathematics::Bisect3Calculate<Real>::GetRoot() const noexcept
+typename Mathematics::Bisect3Calculate<Real>::Bisect3Root Mathematics::Bisect3Calculate<Real>::GetRoot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return *m_Bisect3Root;
+    return *bisect3Root;
 }
 
 // private
@@ -146,11 +173,11 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
         return false;
     }
 
-    if (++m_Level == m_Bisect3.GetMaxLevel())
+    if (++level == bisect3.GetMaxLevel())
     {
         // 递归超出了次数，返回一个中间值。
-        --m_Level;
-        m_Bisect3Root = std::make_shared<Bisect3Root>(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetMidpointZ(), BisectRootType::Unknown);
+        --level;
+        bisect3Root = std::make_shared<Bisect3Root>(bisect3Storage.GetMidpointX(), bisect3Storage.GetMidpointY(), bisect3Storage.GetMidpointZ(), BisectRootType::Unknown);
 
         return false;
     }
@@ -162,15 +189,15 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
         // 或者ThirdFunction具有相同的符号在边界点。
 
         // 方程在这个区间无解
-        --m_Level;
+        --level;
 
         return false;
     }
 
     // 二等分八边形。
-    m_Bisect3Storage.SetStorageValue(node);
+    bisect3Storage.SetStorageValue(node);
 
-    if (m_Bisect3Storage.TestEdgeValues())
+    if (bisect3Storage.TestEdgeValues())
     {
         return true;
     }
@@ -180,76 +207,112 @@ bool Mathematics::Bisect3Calculate<Real>::BisectRecurse(const Bisect3NodeSharedP
     // 构建左下内的立方体
 
     // 原左下内点
-    auto leftLowerInside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetBeginPointX(), m_Bisect3Storage.GetBeginPointY(), m_Bisect3Storage.GetBeginPointZ(),
-                                                         m_Bisect3Storage.GetBeginXBeginYBeginZValue0(), m_Bisect3Storage.GetBeginXBeginYBeginZValue1(), m_Bisect3Storage.GetBeginXBeginYBeginZValue2());
+    auto leftLowerInside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+                                                         bisect3Storage.GetBeginPointY(),
+                                                         bisect3Storage.GetBeginPointZ(),
+                                                         bisect3Storage.GetBeginXBeginYBeginZValue0(),
+                                                         bisect3Storage.GetBeginXBeginYBeginZValue1(),
+                                                         bisect3Storage.GetBeginXBeginYBeginZValue2());
 
     BuildLeftLowerInside(leftLowerInside);
 
     // 构建右下内的立方体
 
     // 边 000, 100
-    auto rightLowerInside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetBeginPointY(), m_Bisect3Storage.GetBeginPointZ(),
-                                                          m_Bisect3Storage.GetMidXBeginYBeginZValue0(), m_Bisect3Storage.GetMidXBeginYBeginZValue1(), m_Bisect3Storage.GetMidXBeginYBeginZValue2());
+    auto rightLowerInside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+                                                          bisect3Storage.GetBeginPointY(),
+                                                          bisect3Storage.GetBeginPointZ(),
+                                                          bisect3Storage.GetMidXBeginYBeginZValue0(),
+                                                          bisect3Storage.GetMidXBeginYBeginZValue1(),
+                                                          bisect3Storage.GetMidXBeginYBeginZValue2());
 
     BuildRightLowerInside(rightLowerInside);
 
     // 构建左上内的立方体
 
     // 边 000, 010
-    auto leftUpperInside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetBeginPointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetBeginPointZ(),
-                                                         m_Bisect3Storage.GetBeginXMidYBeginZValue0(), m_Bisect3Storage.GetBeginXMidYBeginZValue1(), m_Bisect3Storage.GetBeginXMidYBeginZValue2());
+    auto leftUpperInside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+                                                         bisect3Storage.GetMidpointY(),
+                                                         bisect3Storage.GetBeginPointZ(),
+                                                         bisect3Storage.GetBeginXMidYBeginZValue0(),
+                                                         bisect3Storage.GetBeginXMidYBeginZValue1(),
+                                                         bisect3Storage.GetBeginXMidYBeginZValue2());
 
     BuildLeftUpperInside(leftUpperInside);
 
     // 构建右上内的立方体
 
     // 面 000, 100, 110, 010
-    auto rightUpperInside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetBeginPointZ(),
-                                                          m_Bisect3Storage.GetMidXMidYBeginZValue0(), m_Bisect3Storage.GetMidXMidYBeginZValue1(), m_Bisect3Storage.GetMidXMidYBeginZValue2());
+    auto rightUpperInside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+                                                          bisect3Storage.GetMidpointY(),
+                                                          bisect3Storage.GetBeginPointZ(),
+                                                          bisect3Storage.GetMidXMidYBeginZValue0(),
+                                                          bisect3Storage.GetMidXMidYBeginZValue1(),
+                                                          bisect3Storage.GetMidXMidYBeginZValue2());
 
     BuildRightUpperInside(rightUpperInside);
 
     // 构建左下外的立方体
 
     // 边 000, 001
-    auto leftLowerOutside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetBeginPointX(), m_Bisect3Storage.GetBeginPointY(), m_Bisect3Storage.GetMidpointZ(),
-                                                          m_Bisect3Storage.GetBeginXBeginYMidZValue0(), m_Bisect3Storage.GetBeginXBeginYMidZValue1(), m_Bisect3Storage.GetBeginXBeginYMidZValue2());
+    auto leftLowerOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+                                                          bisect3Storage.GetBeginPointY(),
+                                                          bisect3Storage.GetMidpointZ(),
+                                                          bisect3Storage.GetBeginXBeginYMidZValue0(),
+                                                          bisect3Storage.GetBeginXBeginYMidZValue1(),
+                                                          bisect3Storage.GetBeginXBeginYMidZValue2());
 
     BuildLeftLowerOutside(leftLowerOutside);
 
     // 构建右下外的立方体
 
     // 面 000, 100, 001, 101
-    auto rightLowerOutside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetBeginPointY(), m_Bisect3Storage.GetMidpointZ(),
-                                                           m_Bisect3Storage.GetMidXBeginYMidZValue0(), m_Bisect3Storage.GetMidXBeginYMidZValue1(), m_Bisect3Storage.GetMidXBeginYMidZValue2());
+    auto rightLowerOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+                                                           bisect3Storage.GetBeginPointY(),
+                                                           bisect3Storage.GetMidpointZ(),
+                                                           bisect3Storage.GetMidXBeginYMidZValue0(),
+                                                           bisect3Storage.GetMidXBeginYMidZValue1(),
+                                                           bisect3Storage.GetMidXBeginYMidZValue2());
 
     BuildRightLowerOutside(rightLowerOutside);
 
     // 构建左上外的立方体
 
     // 面 000, 010, 011, 001
-    auto leftUpperOutside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetBeginPointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetMidpointZ(),
-                                                          m_Bisect3Storage.GetBeginXMidYMidZValue0(), m_Bisect3Storage.GetBeginXMidYMidZValue1(), m_Bisect3Storage.GetBeginXMidYMidZValue2());
+    auto leftUpperOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetBeginPointX(),
+                                                          bisect3Storage.GetMidpointY(),
+                                                          bisect3Storage.GetMidpointZ(),
+                                                          bisect3Storage.GetBeginXMidYMidZValue0(),
+                                                          bisect3Storage.GetBeginXMidYMidZValue1(),
+                                                          bisect3Storage.GetBeginXMidYMidZValue2());
 
     BuildLeftUpperOutside(leftUpperOutside);
 
     // 构建右上外的立方体
 
     // 中心
-    auto rightUpperOutside = std::make_shared<Bisect3Node>(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetMidpointZ(),
-                                                           m_Bisect3Storage.GetMidXMidYMidZValue0(), m_Bisect3Storage.GetMidXMidYMidZValue1(), m_Bisect3Storage.GetMidXMidYMidZValue2());
+    auto rightUpperOutside = std::make_shared<Bisect3Node>(bisect3Storage.GetMidpointX(),
+                                                           bisect3Storage.GetMidpointY(),
+                                                           bisect3Storage.GetMidpointZ(),
+                                                           bisect3Storage.GetMidXMidYMidZValue0(),
+                                                           bisect3Storage.GetMidXMidYMidZValue1(),
+                                                           bisect3Storage.GetMidXMidYMidZValue2());
 
     BuildRightUpperOutside(rightUpperOutside);
 
     // 搜索子立方体的根。
-    const auto result = BisectRecurse(leftLowerInside) || BisectRecurse(rightLowerInside) ||
-                        BisectRecurse(leftUpperInside) || BisectRecurse(rightUpperInside) ||
-                        BisectRecurse(leftLowerOutside) || BisectRecurse(rightLowerOutside) ||
-                        BisectRecurse(leftUpperOutside) || BisectRecurse(rightUpperOutside);
+    const auto result = BisectRecurse(leftLowerInside) ||
+                        BisectRecurse(rightLowerInside) ||
+                        BisectRecurse(leftUpperInside) ||
+                        BisectRecurse(rightUpperInside) ||
+                        BisectRecurse(leftLowerOutside) ||
+                        BisectRecurse(rightLowerOutside) ||
+                        BisectRecurse(leftUpperOutside) ||
+                        BisectRecurse(rightUpperOutside);
 
     // 整个子八边形检查失败，删除添加的节点。
 
-    --m_Level;
+    --level;
 
     return result;
 }
@@ -263,66 +326,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerInside(const Bisect3Node
     }
 
     // 边 000, 100
-    node->AddXNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetMidXBeginYBeginZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYBeginZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYBeginZValue2());
+    node->AddXNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetMidXBeginYBeginZValue0(),
+                       bisect3Storage.GetMidXBeginYBeginZValue1(),
+                       bisect3Storage.GetMidXBeginYBeginZValue2());
 
     // 边 000, 010
-    node->AddYNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetBeginXMidYBeginZValue0(),
-                       m_Bisect3Storage.GetBeginXMidYBeginZValue1(),
-                       m_Bisect3Storage.GetBeginXMidYBeginZValue2());
+    node->AddYNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetBeginXMidYBeginZValue0(),
+                       bisect3Storage.GetBeginXMidYBeginZValue1(),
+                       bisect3Storage.GetBeginXMidYBeginZValue2());
 
     // 面 000, 100, 110, 010。
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetBeginPointZ(),
-                                   m_Bisect3Storage.GetMidXMidYBeginZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYBeginZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYBeginZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetBeginPointZ(),
+                                   bisect3Storage.GetMidXMidYBeginZValue0(),
+                                   bisect3Storage.GetMidXMidYBeginZValue1(),
+                                   bisect3Storage.GetMidXMidYBeginZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 边 000, 001。
-    node->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetBeginXBeginYMidZValue0(),
-                       m_Bisect3Storage.GetBeginXBeginYMidZValue1(),
-                       m_Bisect3Storage.GetBeginXBeginYMidZValue2());
+    node->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetBeginXBeginYMidZValue0(),
+                       bisect3Storage.GetBeginXBeginYMidZValue1(),
+                       bisect3Storage.GetBeginXBeginYMidZValue2());
 
     // 面 000, 100, 001, 101。
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetBeginPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXBeginYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXBeginYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXBeginYMidZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetBeginPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXBeginYMidZValue0(),
+                                   bisect3Storage.GetMidXBeginYMidZValue1(),
+                                   bisect3Storage.GetMidXBeginYMidZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 面 000, 010, 011, 001。
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetBeginXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetBeginXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetBeginXMidYMidZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetBeginXMidYMidZValue0(),
+                                   bisect3Storage.GetBeginXMidYMidZValue1(),
+                                   bisect3Storage.GetBeginXMidYMidZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 中心。
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                               m_Bisect3Storage.GetMidpointY(),
-                                               m_Bisect3Storage.GetMidpointZ(),
-                                               m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                                               m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                                               m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                               bisect3Storage.GetMidpointY(),
+                                               bisect3Storage.GetMidpointZ(),
+                                               bisect3Storage.GetMidXMidYMidZValue0(),
+                                               bisect3Storage.GetMidXMidYMidZValue1(),
+                                               bisect3Storage.GetMidXMidYMidZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -337,66 +400,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerInside(const Bisect3Nod
     }
 
     // 原右下内点
-    node->AddXNextNode(m_Bisect3Storage.GetEndPointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetEndXBeginYBeginZValue0(),
-                       m_Bisect3Storage.GetEndXBeginYBeginZValue1(),
-                       m_Bisect3Storage.GetEndXBeginYBeginZValue2());
+    node->AddXNextNode(bisect3Storage.GetEndPointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetEndXBeginYBeginZValue0(),
+                       bisect3Storage.GetEndXBeginYBeginZValue1(),
+                       bisect3Storage.GetEndXBeginYBeginZValue2());
 
     // 面 000, 100, 110, 010
-    node->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue0(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue1(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue2());
+    node->AddYNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetMidXMidYBeginZValue0(),
+                       bisect3Storage.GetMidXMidYBeginZValue1(),
+                       bisect3Storage.GetMidXMidYBeginZValue2());
 
     // 边 100, 110
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetBeginPointZ(),
-                                   m_Bisect3Storage.GetEndXMidYBeginZValue0(),
-                                   m_Bisect3Storage.GetEndXMidYBeginZValue1(),
-                                   m_Bisect3Storage.GetEndXMidYBeginZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetBeginPointZ(),
+                                   bisect3Storage.GetEndXMidYBeginZValue0(),
+                                   bisect3Storage.GetEndXMidYBeginZValue1(),
+                                   bisect3Storage.GetEndXMidYBeginZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 面 000, 100, 001, 101
-    node->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue2());
+    node->AddZNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXBeginYMidZValue0(),
+                       bisect3Storage.GetMidXBeginYMidZValue1(),
+                       bisect3Storage.GetMidXBeginYMidZValue2());
 
     // 边 100, 101
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetBeginPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetEndXBeginYMidZValue0(),
-                                   m_Bisect3Storage.GetEndXBeginYMidZValue1(),
-                                   m_Bisect3Storage.GetEndXBeginYMidZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetBeginPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetEndXBeginYMidZValue0(),
+                                   bisect3Storage.GetEndXBeginYMidZValue1(),
+                                   bisect3Storage.GetEndXBeginYMidZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 中心。
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXMidYMidZValue0(),
+                                   bisect3Storage.GetMidXMidYMidZValue1(),
+                                   bisect3Storage.GetMidXMidYMidZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 面 110, 100, 101, 111
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                               m_Bisect3Storage.GetMidpointY(),
-                                               m_Bisect3Storage.GetMidpointZ(),
-                                               m_Bisect3Storage.GetEndXMidYMidZValue0(),
-                                               m_Bisect3Storage.GetEndXMidYMidZValue1(),
-                                               m_Bisect3Storage.GetEndXMidYMidZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                               bisect3Storage.GetMidpointY(),
+                                               bisect3Storage.GetMidpointZ(),
+                                               bisect3Storage.GetEndXMidYMidZValue0(),
+                                               bisect3Storage.GetEndXMidYMidZValue1(),
+                                               bisect3Storage.GetEndXMidYMidZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -411,66 +474,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperInside(const Bisect3Node
     }
 
     // 面 000, 100，110，010
-    node->AddXNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue0(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue1(),
-                       m_Bisect3Storage.GetMidXMidYBeginZValue2());
+    node->AddXNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetMidXMidYBeginZValue0(),
+                       bisect3Storage.GetMidXMidYBeginZValue1(),
+                       bisect3Storage.GetMidXMidYBeginZValue2());
 
     // 原左上内点
-    node->AddYNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetEndPointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetBeginXEndYBeginZValue0(),
-                       m_Bisect3Storage.GetBeginXEndYBeginZValue1(),
-                       m_Bisect3Storage.GetBeginXEndYBeginZValue2());
+    node->AddYNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetEndPointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetBeginXEndYBeginZValue0(),
+                       bisect3Storage.GetBeginXEndYBeginZValue1(),
+                       bisect3Storage.GetBeginXEndYBeginZValue2());
 
     // 边 110, 010。
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetBeginPointZ(),
-                                   m_Bisect3Storage.GetMidXEndYBeginZValue0(),
-                                   m_Bisect3Storage.GetMidXEndYBeginZValue1(),
-                                   m_Bisect3Storage.GetMidXEndYBeginZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetBeginPointZ(),
+                                   bisect3Storage.GetMidXEndYBeginZValue0(),
+                                   bisect3Storage.GetMidXEndYBeginZValue1(),
+                                   bisect3Storage.GetMidXEndYBeginZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 面  000，001，011，010
-    node->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue0(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue1(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue2());
+    node->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetBeginXMidYMidZValue0(),
+                       bisect3Storage.GetBeginXMidYMidZValue1(),
+                       bisect3Storage.GetBeginXMidYMidZValue2());
 
     // 中心
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXMidYMidZValue0(),
+                                   bisect3Storage.GetMidXMidYMidZValue1(),
+                                   bisect3Storage.GetMidXMidYMidZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 边 011,010
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetBeginXEndYMidZValue0(),
-                                   m_Bisect3Storage.GetBeginXEndYMidZValue1(),
-                                   m_Bisect3Storage.GetBeginXEndYMidZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetBeginXEndYMidZValue0(),
+                                   bisect3Storage.GetBeginXEndYMidZValue1(),
+                                   bisect3Storage.GetBeginXEndYMidZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 面 010,110,111,011
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                               m_Bisect3Storage.GetEndPointY(),
-                                               m_Bisect3Storage.GetMidpointZ(),
-                                               m_Bisect3Storage.GetMidXEndYMidZValue0(),
-                                               m_Bisect3Storage.GetMidXEndYMidZValue1(),
-                                               m_Bisect3Storage.GetMidXEndYMidZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                               bisect3Storage.GetEndPointY(),
+                                               bisect3Storage.GetMidpointZ(),
+                                               bisect3Storage.GetMidXEndYMidZValue0(),
+                                               bisect3Storage.GetMidXEndYMidZValue1(),
+                                               bisect3Storage.GetMidXEndYMidZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -485,66 +548,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperInside(const Bisect3Nod
     }
 
     // 边 100 110
-    node->AddXNextNode(m_Bisect3Storage.GetEndPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetEndXMidYBeginZValue0(),
-                       m_Bisect3Storage.GetEndXMidYBeginZValue1(),
-                       m_Bisect3Storage.GetEndXMidYBeginZValue2());
+    node->AddXNextNode(bisect3Storage.GetEndPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetEndXMidYBeginZValue0(),
+                       bisect3Storage.GetEndXMidYBeginZValue1(),
+                       bisect3Storage.GetEndXMidYBeginZValue2());
 
     // 边 110, 010
-    node->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetEndPointY(),
-                       m_Bisect3Storage.GetBeginPointZ(),
-                       m_Bisect3Storage.GetMidXEndYBeginZValue0(),
-                       m_Bisect3Storage.GetMidXEndYBeginZValue1(),
-                       m_Bisect3Storage.GetMidXEndYBeginZValue2());
+    node->AddYNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetEndPointY(),
+                       bisect3Storage.GetBeginPointZ(),
+                       bisect3Storage.GetMidXEndYBeginZValue0(),
+                       bisect3Storage.GetMidXEndYBeginZValue1(),
+                       bisect3Storage.GetMidXEndYBeginZValue2());
 
     // 原右上内点
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetBeginPointZ(),
-                                   m_Bisect3Storage.GetEndXEndYBeginZValue0(),
-                                   m_Bisect3Storage.GetEndXEndYBeginZValue1(),
-                                   m_Bisect3Storage.GetEndXEndYBeginZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetBeginPointZ(),
+                                   bisect3Storage.GetEndXEndYBeginZValue0(),
+                                   bisect3Storage.GetEndXEndYBeginZValue1(),
+                                   bisect3Storage.GetEndXEndYBeginZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 中心
-    node->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue2());
+    node->AddZNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXBeginYMidZValue0(),
+                       bisect3Storage.GetMidXBeginYMidZValue1(),
+                       bisect3Storage.GetMidXBeginYMidZValue2());
 
     // 面 100, 110, 111, 101。
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetEndXMidYMidZValue0(),
+                                   bisect3Storage.GetEndXMidYMidZValue1(),
+                                   bisect3Storage.GetEndXMidYMidZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 面 011,111,110,010
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXEndYMidZValue0(),
+                                   bisect3Storage.GetMidXEndYMidZValue1(),
+                                   bisect3Storage.GetMidXEndYMidZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 边110，111
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                               m_Bisect3Storage.GetEndPointY(),
-                                               m_Bisect3Storage.GetMidpointZ(),
-                                               m_Bisect3Storage.GetEndXEndYMidZValue0(),
-                                               m_Bisect3Storage.GetEndXEndYMidZValue1(),
-                                               m_Bisect3Storage.GetEndXEndYMidZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                               bisect3Storage.GetEndPointY(),
+                                               bisect3Storage.GetMidpointZ(),
+                                               bisect3Storage.GetEndXEndYMidZValue0(),
+                                               bisect3Storage.GetEndXEndYMidZValue1(),
+                                               bisect3Storage.GetEndXEndYMidZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -559,63 +622,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftLowerOutside(const Bisect3Nod
     }
 
     // 面 000, 100，101，001
-    node->AddXNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYMidZValue2());
+    node->AddXNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXBeginYMidZValue0(),
+                       bisect3Storage.GetMidXBeginYMidZValue1(),
+                       bisect3Storage.GetMidXBeginYMidZValue2());
 
     // 面 000, 001，011，010
-    node->AddYNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue0(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue1(),
-                       m_Bisect3Storage.GetBeginXMidYMidZValue2());
+    node->AddYNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetBeginXMidYMidZValue0(),
+                       bisect3Storage.GetBeginXMidYMidZValue1(),
+                       bisect3Storage.GetBeginXMidYMidZValue2());
 
     // 中心
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXMidYMidZValue0(),
+                                   bisect3Storage.GetMidXMidYMidZValue1(),
+                                   bisect3Storage.GetMidXMidYMidZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 原左下外点
-    node->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetEndPointZ(),
-                       m_Bisect3Storage.GetBeginXBeginYEndZValue0(),
-                       m_Bisect3Storage.GetBeginXBeginYEndZValue1(),
-                       m_Bisect3Storage.GetBeginXBeginYEndZValue2());
+    node->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetEndPointZ(),
+                       bisect3Storage.GetBeginXBeginYEndZValue0(),
+                       bisect3Storage.GetBeginXBeginYEndZValue1(),
+                       bisect3Storage.GetBeginXBeginYEndZValue2());
 
     // 边001,101
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetBeginPointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetMidXBeginYEndZValue0(),
-                                   m_Bisect3Storage.GetMidXBeginYEndZValue1(),
-                                   m_Bisect3Storage.GetMidXBeginYEndZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetBeginPointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetMidXBeginYEndZValue0(),
+                                   bisect3Storage.GetMidXBeginYEndZValue1(),
+                                   bisect3Storage.GetMidXBeginYEndZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 边001,011
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetBeginXMidYEndZValue0(),
-                                   m_Bisect3Storage.GetBeginXMidYEndZValue1(),
-                                   m_Bisect3Storage.GetBeginXMidYEndZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetBeginXMidYEndZValue0(),
+                                   bisect3Storage.GetBeginXMidYEndZValue1(),
+                                   bisect3Storage.GetBeginXMidYEndZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 面 001,101,111,011
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetMidpointY(),
-                                               m_Bisect3Storage.GetEndPointZ(), m_Bisect3Storage.GetMidXMidYEndZValue0(),
-                                               m_Bisect3Storage.GetMidXMidYEndZValue1(), m_Bisect3Storage.GetMidXMidYEndZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                               bisect3Storage.GetMidpointY(),
+                                               bisect3Storage.GetEndPointZ(),
+                                               bisect3Storage.GetMidXMidYEndZValue0(),
+                                               bisect3Storage.GetMidXMidYEndZValue1(),
+                                               bisect3Storage.GetMidXMidYEndZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -630,62 +696,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightLowerOutside(const Bisect3No
     }
 
     // 边100,101
-    node->AddXNextNode(m_Bisect3Storage.GetEndPointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetEndXBeginYMidZValue0(),
-                       m_Bisect3Storage.GetEndXBeginYMidZValue1(),
-                       m_Bisect3Storage.GetEndXBeginYMidZValue2());
+    node->AddXNextNode(bisect3Storage.GetEndPointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetEndXBeginYMidZValue0(),
+                       bisect3Storage.GetEndXBeginYMidZValue1(),
+                       bisect3Storage.GetEndXBeginYMidZValue2());
 
     // 中心
-    node->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->AddYNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXMidYMidZValue0(),
+                       bisect3Storage.GetMidXMidYMidZValue1(),
+                       bisect3Storage.GetMidXMidYMidZValue2());
 
     // 面100，101，111，110
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue0(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue1(),
-                                   m_Bisect3Storage.GetEndXMidYMidZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetEndXMidYMidZValue0(),
+                                   bisect3Storage.GetEndXMidYMidZValue1(),
+                                   bisect3Storage.GetEndXMidYMidZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 边001,101
-    node->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetBeginPointY(),
-                       m_Bisect3Storage.GetEndPointZ(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue2());
+    node->AddZNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetBeginPointY(),
+                       bisect3Storage.GetEndPointZ(),
+                       bisect3Storage.GetMidXBeginYEndZValue0(),
+                       bisect3Storage.GetMidXBeginYEndZValue1(),
+                       bisect3Storage.GetMidXBeginYEndZValue2());
 
     // 面001,101,111,011
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetBeginPointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetEndXBeginYEndZValue0(),
-                                   m_Bisect3Storage.GetEndXBeginYEndZValue1(),
-                                   m_Bisect3Storage.GetEndXBeginYEndZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetBeginPointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetEndXBeginYEndZValue0(),
+                                   bisect3Storage.GetEndXBeginYEndZValue1(),
+                                   bisect3Storage.GetEndXBeginYEndZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 面001，101，111，011
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetMidXMidYEndZValue0(),
+                                   bisect3Storage.GetMidXMidYEndZValue1(),
+                                   bisect3Storage.GetMidXMidYEndZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 边101,111
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(), m_Bisect3Storage.GetMidpointY(), m_Bisect3Storage.GetEndPointZ(),
-                                               m_Bisect3Storage.GetEndXMidYEndZValue0(), m_Bisect3Storage.GetEndXMidYEndZValue1(), m_Bisect3Storage.GetEndXMidYEndZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                               bisect3Storage.GetMidpointY(),
+                                               bisect3Storage.GetEndPointZ(),
+                                               bisect3Storage.GetEndXMidYEndZValue0(),
+                                               bisect3Storage.GetEndXMidYEndZValue1(),
+                                               bisect3Storage.GetEndXMidYEndZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -699,62 +769,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildLeftUpperOutside(const Bisect3Nod
         return;
     }
     // 中心
-    node->AddXNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue0(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue1(),
-                       m_Bisect3Storage.GetMidXMidYMidZValue2());
+    node->AddXNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXMidYMidZValue0(),
+                       bisect3Storage.GetMidXMidYMidZValue1(),
+                       bisect3Storage.GetMidXMidYMidZValue2());
 
     // 边011,010
-    node->AddYNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetEndPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetBeginXEndYMidZValue0(),
-                       m_Bisect3Storage.GetBeginXEndYMidZValue1(),
-                       m_Bisect3Storage.GetBeginXEndYMidZValue2());
+    node->AddYNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetEndPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetBeginXEndYMidZValue0(),
+                       bisect3Storage.GetBeginXEndYMidZValue1(),
+                       bisect3Storage.GetBeginXEndYMidZValue2());
 
     // 面011，010，110，111
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue0(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue1(),
-                                   m_Bisect3Storage.GetMidXEndYMidZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetMidXEndYMidZValue0(),
+                                   bisect3Storage.GetMidXEndYMidZValue1(),
+                                   bisect3Storage.GetMidXEndYMidZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 边 001,011
-    node->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetEndPointZ(),
-                       m_Bisect3Storage.GetBeginXMidYEndZValue0(),
-                       m_Bisect3Storage.GetBeginXMidYEndZValue1(),
-                       m_Bisect3Storage.GetBeginXMidYEndZValue2());
+    node->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetEndPointZ(),
+                       bisect3Storage.GetBeginXMidYEndZValue0(),
+                       bisect3Storage.GetBeginXMidYEndZValue1(),
+                       bisect3Storage.GetBeginXMidYEndZValue2());
 
     // 面001，101，111，011
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue0(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue1(),
-                                   m_Bisect3Storage.GetMidXMidYEndZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetMidXMidYEndZValue0(),
+                                   bisect3Storage.GetMidXMidYEndZValue1(),
+                                   bisect3Storage.GetMidXMidYEndZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 原左上外点
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetBeginPointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetBeginXEndYEndZValue0(),
-                                   m_Bisect3Storage.GetBeginXEndYEndZValue1(),
-                                   m_Bisect3Storage.GetBeginXEndYEndZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetBeginPointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetBeginXEndYEndZValue0(),
+                                   bisect3Storage.GetBeginXEndYEndZValue1(),
+                                   bisect3Storage.GetBeginXEndYEndZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 边011，111
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(), m_Bisect3Storage.GetEndPointY(), m_Bisect3Storage.GetEndPointZ(),
-                                               m_Bisect3Storage.GetMidXEndYEndZValue0(), m_Bisect3Storage.GetMidXEndYEndZValue1(), m_Bisect3Storage.GetMidXEndYEndZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                               bisect3Storage.GetEndPointY(),
+                                               bisect3Storage.GetEndPointZ(),
+                                               bisect3Storage.GetMidXEndYEndZValue0(),
+                                               bisect3Storage.GetMidXEndYEndZValue1(),
+                                               bisect3Storage.GetMidXEndYEndZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());
@@ -769,62 +843,66 @@ void Mathematics::Bisect3Calculate<Real>::BuildRightUpperOutside(const Bisect3No
     }
 
     // 面110,100,101,111
-    node->AddXNextNode(m_Bisect3Storage.GetEndPointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetEndXMidYMidZValue0(),
-                       m_Bisect3Storage.GetEndXMidYMidZValue1(),
-                       m_Bisect3Storage.GetEndXMidYMidZValue2());
+    node->AddXNextNode(bisect3Storage.GetEndPointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetEndXMidYMidZValue0(),
+                       bisect3Storage.GetEndXMidYMidZValue1(),
+                       bisect3Storage.GetEndXMidYMidZValue2());
 
     // 面010，110，111，011
-    node->AddYNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetEndPointY(),
-                       m_Bisect3Storage.GetMidpointZ(),
-                       m_Bisect3Storage.GetMidXEndYMidZValue0(),
-                       m_Bisect3Storage.GetMidXEndYMidZValue1(),
-                       m_Bisect3Storage.GetMidXEndYMidZValue2());
+    node->AddYNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetEndPointY(),
+                       bisect3Storage.GetMidpointZ(),
+                       bisect3Storage.GetMidXEndYMidZValue0(),
+                       bisect3Storage.GetMidXEndYMidZValue1(),
+                       bisect3Storage.GetMidXEndYMidZValue2());
 
     // 边110,111
-    node->GetXNext()->AddYNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetMidpointZ(),
-                                   m_Bisect3Storage.GetEndXEndYMidZValue0(),
-                                   m_Bisect3Storage.GetEndXEndYMidZValue1(),
-                                   m_Bisect3Storage.GetEndXEndYMidZValue2());
+    node->GetXNext()->AddYNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetMidpointZ(),
+                                   bisect3Storage.GetEndXEndYMidZValue0(),
+                                   bisect3Storage.GetEndXEndYMidZValue1(),
+                                   bisect3Storage.GetEndXEndYMidZValue2());
 
     node->GetYNext()->AddXNextNode(node->GetXNext()->GetYNext());
 
     // 面011，111，101，001
-    node->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                       m_Bisect3Storage.GetMidpointY(),
-                       m_Bisect3Storage.GetEndPointZ(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue0(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue1(),
-                       m_Bisect3Storage.GetMidXBeginYEndZValue2());
+    node->AddZNextNode(bisect3Storage.GetMidpointX(),
+                       bisect3Storage.GetMidpointY(),
+                       bisect3Storage.GetEndPointZ(),
+                       bisect3Storage.GetMidXBeginYEndZValue0(),
+                       bisect3Storage.GetMidXBeginYEndZValue1(),
+                       bisect3Storage.GetMidXBeginYEndZValue2());
 
     // 面 100, 110, 100, 101。
-    node->GetXNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(),
-                                   m_Bisect3Storage.GetMidpointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetEndXMidYEndZValue0(),
-                                   m_Bisect3Storage.GetEndXMidYEndZValue1(),
-                                   m_Bisect3Storage.GetEndXMidYEndZValue2());
+    node->GetXNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                   bisect3Storage.GetMidpointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetEndXMidYEndZValue0(),
+                                   bisect3Storage.GetEndXMidYEndZValue1(),
+                                   bisect3Storage.GetEndXMidYEndZValue2());
 
     node->GetZNext()->AddXNextNode(node->GetXNext()->GetZNext());
 
     // 边011，111
-    node->GetYNext()->AddZNextNode(m_Bisect3Storage.GetMidpointX(),
-                                   m_Bisect3Storage.GetEndPointY(),
-                                   m_Bisect3Storage.GetEndPointZ(),
-                                   m_Bisect3Storage.GetMidXEndYEndZValue0(),
-                                   m_Bisect3Storage.GetMidXEndYEndZValue1(),
-                                   m_Bisect3Storage.GetMidXEndYEndZValue2());
+    node->GetYNext()->AddZNextNode(bisect3Storage.GetMidpointX(),
+                                   bisect3Storage.GetEndPointY(),
+                                   bisect3Storage.GetEndPointZ(),
+                                   bisect3Storage.GetMidXEndYEndZValue0(),
+                                   bisect3Storage.GetMidXEndYEndZValue1(),
+                                   bisect3Storage.GetMidXEndYEndZValue2());
 
     node->GetZNext()->AddYNextNode(node->GetYNext()->GetZNext());
 
     // 原右上外点
-    node->GetXNext()->GetYNext()->AddZNextNode(m_Bisect3Storage.GetEndPointX(), m_Bisect3Storage.GetEndPointY(), m_Bisect3Storage.GetEndPointZ(),
-                                               m_Bisect3Storage.GetEndXEndYEndZValue0(), m_Bisect3Storage.GetEndXEndYEndZValue1(), m_Bisect3Storage.GetEndXEndYEndZValue2());
+    node->GetXNext()->GetYNext()->AddZNextNode(bisect3Storage.GetEndPointX(),
+                                               bisect3Storage.GetEndPointY(),
+                                               bisect3Storage.GetEndPointZ(),
+                                               bisect3Storage.GetEndXEndYEndZValue0(),
+                                               bisect3Storage.GetEndXEndYEndZValue1(),
+                                               bisect3Storage.GetEndXEndYEndZValue2());
 
     node->GetYNext()->GetXNext()->AddZNextNode(node->GetXNext()->GetYNext()->GetZNext());
     node->GetXNext()->GetZNext()->AddYNextNode(node->GetXNext()->GetYNext()->GetZNext());

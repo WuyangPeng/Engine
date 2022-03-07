@@ -41,9 +41,9 @@ namespace Rendering
 
         using ParentType = Object;
         using FloatVector = std::vector<float>;
-        using AVector = Mathematics::FloatAVector;
-        using APoint = Mathematics::FloatAPoint;
-        using Matrix = Mathematics::FloatMatrix;
+        using AVector = Mathematics::AVectorF;
+        using APoint = Mathematics::APointF;
+        using Matrix = Mathematics::MatrixF;
         using Colour = Colour<float>;
         using ShaderFloatSharedPtr = std::shared_ptr<ClassType>;
         using ConstShaderFloatSharedPtr = std::shared_ptr<const ClassType>;

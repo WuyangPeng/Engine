@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:20)
 
 #include "Database/DatabaseExport.h"
 
@@ -16,15 +16,12 @@
 using std::string;
 
 Database::SessionImpl::SessionImpl(const ConfigurationStrategy& configurationStrategy) noexcept
-    : m_ConfigurationStrategy{ configurationStrategy }
+    : configurationStrategy{ configurationStrategy }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::SessionImpl::~SessionImpl() noexcept
-{
-    DATABASE_SELF_CLASS_IS_VALID_9;
-}
+Database::SessionImpl::~SessionImpl() noexcept = default;
 
 CLASS_INVARIANT_STUB_DEFINE(Database, SessionImpl)
 
@@ -32,17 +29,17 @@ Database::ConfigurationStrategy Database::SessionImpl::GetConfigurationStrategy(
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return m_ConfigurationStrategy;
+    return configurationStrategy;
 }
 
-Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl::GetMysqlxSchemaPtr()
+Database::SessionImpl::MysqlxSchemaUniquePtr Database::SessionImpl::GetMysqlxSchema() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetMysqlxSchemaPtr未实现。"s));
 }
 
-Database::SessionImpl::MysqlxSchemaPtr Database::SessionImpl::GetMysqlxSchemaPtr([[maybe_unused]] int dbIndex)
+Database::SessionImpl::MysqlxSchemaUniquePtr Database::SessionImpl::GetMysqlxSchema(MAYBE_UNUSED int dbIndex) const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
@@ -56,42 +53,42 @@ Database::SessionImpl::SchemaContainer Database::SessionImpl::GetSchemaContainer
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的GetSchemaContainer未实现。"s));
 }
 
-Database::SessionImpl::ResultPtr Database::SessionImpl::ExecuteResult([[maybe_unused]] const string& findStatement, [[maybe_unused]] int bindStatement)
+Database::SessionImpl::ResultUniquePtr Database::SessionImpl::ExecuteResult(MAYBE_UNUSED const string& findStatement, MAYBE_UNUSED int bindStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
-Database::SessionImpl::ResultPtr Database::SessionImpl::ExecuteResult([[maybe_unused]] const string& findStatement)
+Database::SessionImpl::ResultUniquePtr Database::SessionImpl::ExecuteResult(MAYBE_UNUSED const string& findStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
-Database::SessionImpl::ResultPtr Database::SessionImpl::ExecuteResult([[maybe_unused]] const string& findStatement, [[maybe_unused]] const string& bindStatement)
+Database::SessionImpl::ResultUniquePtr Database::SessionImpl::ExecuteResult(MAYBE_UNUSED const string& findStatement, MAYBE_UNUSED const string& bindStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的ExecuteResult未实现。"s));
 }
 
-void Database::SessionImpl::Execute([[maybe_unused]] const string& findStatement, [[maybe_unused]] const string& bindStatement)
+void Database::SessionImpl::Execute(MAYBE_UNUSED const string& findStatement, MAYBE_UNUSED const string& bindStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"s));
 }
 
-void Database::SessionImpl::Execute([[maybe_unused]] const string& findStatement, [[maybe_unused]] int bindStatement)
+void Database::SessionImpl::Execute(MAYBE_UNUSED const string& findStatement, MAYBE_UNUSED int bindStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
     THROW_EXCEPTION(SYSTEM_TEXT("SessionImpl的Execute未实现。"s));
 }
 
-void Database::SessionImpl::Execute([[maybe_unused]] const string& findStatement)
+void Database::SessionImpl::Execute(MAYBE_UNUSED const string& findStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/30 10:10)
+///	引擎版本：0.8.0.2 (2022/02/17 11:02)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ROMBERG_INTEGRAL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ROMBERG_INTEGRAL_H
@@ -27,7 +27,7 @@ namespace Mathematics
         using ClassType = RombergIntegral<Real, UserDataType>;
 
         // 最后一个参数是用户定义的数据。
-        using Function = Real (*)(Real, const UserDataType*);
+        using Function = Real (*)(Real, const UserDataType*) noexcept;
         using Math = Math<Real>;
 
     public:
@@ -35,7 +35,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetValue() const noexcept;
+        NODISCARD Real GetValue() const noexcept;
 
     private:
         using Container = std::vector<Real>;
@@ -45,13 +45,13 @@ namespace Mathematics
         void Calculate() noexcept;
 
     private:
-        int m_Order;
-        Real m_Begin;
-        Real m_End;
-        Function m_Function;
-        const UserDataType* m_UserData;
-        Real m_Value;
-        RomType m_Rom;
+        int order;
+        Real begin;
+        Real end;
+        Function function;
+        const UserDataType* userData;
+        Real value;
+        RomType rom;
     };
 }
 

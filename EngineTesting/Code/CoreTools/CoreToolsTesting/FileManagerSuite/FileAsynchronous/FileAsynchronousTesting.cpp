@@ -60,7 +60,7 @@ void CoreTools::FileAsynchronousTesting::ClearFile()
 
 void CoreTools::FileAsynchronousTesting::RegisteredWriteFileTest()
 {
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Run();
+    FILE_ASYNCHRONOUS_SINGLETON.Run();
 
     const auto content = GetContent();
     const auto size = content.size();
@@ -73,14 +73,14 @@ void CoreTools::FileAsynchronousTesting::RegisteredWriteFileTest()
 
     const auto fileBuffer = writeBuffer.GetFileBuffer();
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.RegisteredWriteFile(GetFileName(), true, fileBuffer, false);
+    FILE_ASYNCHRONOUS_SINGLETON.RegisteredWriteFile(GetFileName(), true, fileBuffer, false);
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Stop();
+    FILE_ASYNCHRONOUS_SINGLETON.Stop();
 }
 
 void CoreTools::FileAsynchronousTesting::RegisteredWriteFileByEventTest()
 {
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Run();
+    FILE_ASYNCHRONOUS_SINGLETON.Run();
 
     const auto content = GetContent();
     const auto size = content.size();
@@ -93,20 +93,20 @@ void CoreTools::FileAsynchronousTesting::RegisteredWriteFileByEventTest()
 
     const auto fileBuffer = writeBuffer.GetFileBuffer();
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.RegisteredWriteFile(GetFileName(), false, shared_from_this(), fileBuffer, true);
+    FILE_ASYNCHRONOUS_SINGLETON.RegisteredWriteFile(GetFileName(), false, shared_from_this(), fileBuffer, true);
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Stop();
+    FILE_ASYNCHRONOUS_SINGLETON.Stop();
 
     ASSERT_EQUAL(callBackCount, 1);
 }
 
 void CoreTools::FileAsynchronousTesting::RegisteredReadFileTest()
 {
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Run();
+    FILE_ASYNCHRONOUS_SINGLETON.Run();
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.RegisteredReadFile(GetFileName(), true, shared_from_this());
+    FILE_ASYNCHRONOUS_SINGLETON.RegisteredReadFile(GetFileName(), true, shared_from_this());
 
-    FILE_ASYNCHRONOUS_MANAGER_SINGLETON.Stop();
+    FILE_ASYNCHRONOUS_SINGLETON.Stop();
 
     ASSERT_EQUAL(callBackCount, 2);
 }

@@ -1,19 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 13:53)
+///	引擎版本：0.8.0.2 (2022/02/12 21:29)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_FWD_H
 
+#include "Mathematics/MathematicsDll.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrixInvert;
+    class BandedMatrixInvert;
 
     template <typename ResultConstIter>
     class EquationResultConstIterator;
@@ -48,7 +50,7 @@ namespace Mathematics
     class BrentsMethod;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EigenDecomposition;
+    class EigenDecomposition;
 
     template <typename Real, typename UserDataType>
     class GaussianQuadrature;
@@ -73,8 +75,11 @@ namespace Mathematics
     template <typename Real, typename UserDataType>
     class MinimizeN;
 
+    template <typename Real, typename UserDataType>
+    class MinimizeNGetMinimum;
+
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE NoniterativeEigen3x3;
+    class NoniterativeEigen3x3;
 
     template <typename Real, typename UserDataType>
     class OdeSolver;
@@ -92,10 +97,10 @@ namespace Mathematics
     class OdeRungeKutta4;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRoots;
+    class PolynomialRoots;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialRootsRational;
+    class PolynomialRootsRational;
 
     template <typename Real, typename UserDataType>
     class RombergIntegral;
@@ -104,7 +109,7 @@ namespace Mathematics
     class TrapezoidRule;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SingularValueDecomposition;
+    class SingularValueDecomposition;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix3Tools;

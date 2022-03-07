@@ -14,7 +14,9 @@
 
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 namespace Mathematics
 {
 	template class Matrix2EigenDecomposition<float>;
@@ -39,7 +41,7 @@ void Mathematics::Matrix2EigenDecompositionTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleMatrix2 firstMatrix(randomDistribution(generator),randomDistribution(generator), 0.0, randomDistribution(generator)); 
+		Matrix2D firstMatrix(randomDistribution(generator),randomDistribution(generator), 0.0, randomDistribution(generator)); 
 
 		firstMatrix(1,0) = firstMatrix(0,1);
 

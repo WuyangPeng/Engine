@@ -46,5 +46,5 @@ void System::MemorySetTesting::MemorySetTest()
     array<char, buffSize> result{};
     result.fill(fillValue);
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buff, result);
+    ASSERT_EQUAL(buff, result);
 }

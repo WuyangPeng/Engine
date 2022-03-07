@@ -17,7 +17,7 @@ namespace Rendering
     {
     public:
         typedef PrincipalCurvatureInfoImpl ClassType;
-        typedef Mathematics::FloatAVector AVector;
+        typedef Mathematics::AVectorF AVector;
 
     public:
         PrincipalCurvatureInfoImpl(float principalCurvature0, float principalCurvature1, const AVector& principalDirection0, const AVector& principalDirection1) noexcept;

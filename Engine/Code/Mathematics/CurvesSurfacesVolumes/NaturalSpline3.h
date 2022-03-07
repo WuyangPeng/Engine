@@ -35,19 +35,19 @@ namespace Mathematics
 		//        derivativeFinal = points[N] - points[N-1]
 		//      To specify the derivatives for BT_CLAMPED, use the second
 		//      constructor listed below.
-		NaturalSpline3(BoundaryType type, int numSegments, Real* times, Vector3D<Real>* points);
+		NaturalSpline3(BoundaryType type, int numSegments, Real* times, Vector3<Real>* points);
 
 		// Specify the derivative vectors for clamped splines.
-		NaturalSpline3(int numSegments, Real* times, Vector3D<Real>* points, const Vector3D<Real>& derivativeStart, const Vector3D<Real>& derivativeFinal);
+		NaturalSpline3(int numSegments, Real* times, Vector3<Real>* points, const Vector3<Real>& derivativeStart, const Vector3<Real>& derivativeFinal);
 
 		virtual ~NaturalSpline3();
 
-		const Vector3D<Real>* GetPoints() const;
+		const Vector3<Real>* GetPoints() const;
 
-		virtual Vector3D<Real> GetPosition(Real t) const;
-		virtual Vector3D<Real> GetFirstDerivative(Real t) const;
-		virtual Vector3D<Real> GetSecondDerivative(Real t) const;
-		virtual Vector3D<Real> GetThirdDerivative(Real t) const;
+		virtual Vector3<Real> GetPosition(Real t) const;
+		virtual Vector3<Real> GetFirstDerivative(Real t) const;
+		virtual Vector3<Real> GetSecondDerivative(Real t) const;
+		virtual Vector3<Real> GetThirdDerivative(Real t) const;
 
 	protected:
 		using MultipleCurve3<Real>::mNumSegments;
@@ -57,17 +57,17 @@ namespace Mathematics
 
 		void CreateFreeSpline();
 
-		void CreateClampedSpline(const Vector3D<Real>& derivativeStart, const Vector3D<Real>& derivativeFinal);
+		void CreateClampedSpline(const Vector3<Real>& derivativeStart, const Vector3<Real>& derivativeFinal);
 
 		void CreateClosedSpline();
 
 		virtual Real GetSpeedKey(int key, Real t) const;
 		virtual Real GetLengthKey(int key, Real t0, Real t1) const;
 
-		Vector3D<Real>* mA;
-		Vector3D<Real>* mB;
-		Vector3D<Real>* mC;
-		Vector3D<Real>* mD;
+		Vector3<Real>* mA;
+		Vector3<Real>* mB;
+		Vector3<Real>* mC;
+		Vector3<Real>* mD;
 
 		class  SplineKey
 		{

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 11:09)
+///	引擎版本：0.8.0.3 (2022/02/23 10:51)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_H
 #define MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_H
@@ -30,19 +30,22 @@ namespace Mathematics
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
-        StaticIntersector(const StaticIntersector& rhs) noexcept = default;        
-        StaticIntersector& operator=(const StaticIntersector& rhs) noexcept = default;
+
+        StaticIntersector(const StaticIntersector& rhs) noexcept = default;
         StaticIntersector(StaticIntersector&& rhs) noexcept = default;
-        StaticIntersector& operator=(StaticIntersector&& rhs) noexcept = default;
+
 #include STSTEM_WARNING_POP
+
+        StaticIntersector& operator=(const StaticIntersector& rhs) noexcept = default;
+        StaticIntersector& operator=(StaticIntersector&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
     };
 
-    using FloatStaticIntersector2D = StaticIntersector<float, Vector2D>;
-    using FloatStaticIntersector3D = StaticIntersector<float, Vector3D>;
-    using DoubleStaticIntersector2D = StaticIntersector<double, Vector2D>;
-    using DoubleStaticIntersector3D = StaticIntersector<double, Vector3D>;
+    using StaticIntersector2F = StaticIntersector<float, Vector2>;
+    using StaticIntersector3F = StaticIntersector<float, Vector3>;
+    using StaticIntersector2D = StaticIntersector<double, Vector2>;
+    using StaticIntersector3D = StaticIntersector<double, Vector3>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_H

@@ -32,10 +32,13 @@ CoreTools::UnitTestComposite& CoreTools::UnitTestComposite::operator=(UnitTestCo
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    ParentType::operator=(std::move(rhs));
-    InterfaceType::operator=(std::move(rhs));
-    m_TestLoopCount = rhs.m_TestLoopCount;
-    m_RandomSeed = rhs.m_RandomSeed;
+    if (this != &rhs)
+    {
+        ParentType::operator=(std::move(rhs));
+        InterfaceType::operator=(std::move(rhs));
+        m_TestLoopCount = rhs.m_TestLoopCount;
+        m_RandomSeed = rhs.m_RandomSeed;
+    }
 
     return *this;
 }

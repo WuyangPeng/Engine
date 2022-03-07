@@ -7,7 +7,7 @@
 #include "PolynomialFit3PowersTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/PolynomialFit3PowersDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 
@@ -31,7 +31,10 @@ void Mathematics::PolynomialFit3PowersTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::PolynomialFit3PowersTesting ::FitTest()
 {
     default_random_engine generator;
@@ -74,7 +77,7 @@ void Mathematics::PolynomialFit3PowersTesting ::FitTest()
             power.push_back(tuple);
         }
 
-        DoublePolynomialFit3Powers polynomialFit(x, y, w, power, true);
+        PolynomialFit3PowersD polynomialFit(x, y, w, power, true);
 
         if (polynomialFit.IsSolveSucceed())
         {
@@ -85,7 +88,7 @@ void Mathematics::PolynomialFit3PowersTesting ::FitTest()
                     auto temp = xIndex + yIndex * xSize;
                     double value = polynomialFit(x[xIndex], y[yIndex]) - w[temp];
 
-                    ASSERT_LESS_EQUAL(DoubleMath::FAbs(value), 2600.0);
+                    ASSERT_LESS_EQUAL(MathD::FAbs(value), 2600.0);
                 }
             }
         }

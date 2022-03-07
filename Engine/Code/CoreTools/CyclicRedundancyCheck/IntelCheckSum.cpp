@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 14:21)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:12)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::IntelCheckSum::IntelCheckSum(const char* data, int length) noexcept
-    : m_IntelCheckSum{ 0 }
+    : intelCheckSum{ 0 }
 {
     Calculation(data, length);
 
@@ -27,7 +27,7 @@ int CoreTools::IntelCheckSum::GetIntelCheckSum() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_IntelCheckSum;
+    return intelCheckSum;
 }
 
 // private
@@ -40,10 +40,12 @@ void CoreTools::IntelCheckSum::Calculation(const char* data, int length) noexcep
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
             sum += data[i];
+
 #include STSTEM_WARNING_POP
         }
 
-        m_IntelCheckSum = -sum;
+        intelCheckSum = -sum;
     }
 }

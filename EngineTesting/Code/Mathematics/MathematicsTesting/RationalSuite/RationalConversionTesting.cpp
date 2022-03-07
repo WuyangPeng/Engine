@@ -18,7 +18,11 @@ using std::default_random_engine;
 using std::numeric_limits;
 using std::uniform_int;
 using std::uniform_real;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26490)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, RationalConversionTesting)
 
 void Mathematics::RationalConversionTesting ::MainTest()

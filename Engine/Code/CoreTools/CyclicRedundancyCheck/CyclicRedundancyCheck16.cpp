@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 14:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:08)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CyclicRedundancyCheck16::CyclicRedundancyCheck16(const char* data, int length)
-    : m_CyclicRedundancyCheck{ 0 }
+    : cyclicRedundancyCheck{ 0 }
 {
     Calculation(data, length);
 
@@ -34,14 +34,14 @@ void CoreTools::CyclicRedundancyCheck16::Calculation(const char* data, int lengt
 #include STSTEM_WARNING_POP
 
             // 低4位
-            const auto lower = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(m_CyclicRedundancyCheck & 0xF);
-            m_CyclicRedundancyCheck = (m_CyclicRedundancyCheck >> 4) & 0x0FFF;
-            m_CyclicRedundancyCheck = m_CyclicRedundancyCheck ^ lower ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(value & 0xF);
+            const auto lower = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);
+            cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
+            cyclicRedundancyCheck = cyclicRedundancyCheck ^ lower ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(value & 0xF);
 
             // 高四位
-            const auto upper = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(m_CyclicRedundancyCheck & 0xF);
-            m_CyclicRedundancyCheck = (m_CyclicRedundancyCheck >> 4) & 0x0FFF;
-            m_CyclicRedundancyCheck = m_CyclicRedundancyCheck ^ upper ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table((value >> 4) & 0xF);
+            const auto upper = CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table(cyclicRedundancyCheck & 0xF);
+            cyclicRedundancyCheck = (cyclicRedundancyCheck >> 4) & 0x0FFF;
+            cyclicRedundancyCheck = cyclicRedundancyCheck ^ upper ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.Get16Table((value >> 4) & 0xF);
         }
     }
 }
@@ -52,5 +52,5 @@ uint16_t CoreTools::CyclicRedundancyCheck16::GetCyclicRedundancyCheck16() const 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CyclicRedundancyCheck;
+    return cyclicRedundancyCheck;
 }

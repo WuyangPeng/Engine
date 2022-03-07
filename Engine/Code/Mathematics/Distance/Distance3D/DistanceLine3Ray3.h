@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/09 17:19)
+///	引擎版本：0.8.0.3 (2022/02/21 15:42)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H
@@ -21,15 +21,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Ray3 : public DistanceBase<Real, Vector3D<Real>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Ray3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistanceLine3Ray3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Line3 = Line3<Real>;
         using Ray3 = Ray3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
@@ -39,25 +39,25 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const noexcept;
-        [[nodiscard]] const Ray3 GetRay() const noexcept;
+        NODISCARD Line3 GetLine() const noexcept;
+        NODISCARD Ray3 GetRay() const noexcept;
 
         // 静态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
         // 函数计算动态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
     private:
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPoints(const DistanceLine3Line3Tool& tool) const;
 
     private:
-        Line3 m_Line;
-        Ray3 m_Ray;
+        Line3 line;
+        Ray3 ray;
     };
 
-    using FloatDistanceLine3Ray3 = DistanceLine3Ray3<float>;
-    using DoubleDistanceLine3Ray3 = DistanceLine3Ray3<double>;
+    using DistanceLine3Ray3F = DistanceLine3Ray3<float>;
+    using DistanceLine3Ray3D = DistanceLine3Ray3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_LINE3_RAY3_H

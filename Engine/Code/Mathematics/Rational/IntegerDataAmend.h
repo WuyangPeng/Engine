@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 9:59)
+///	引擎版本：0.8.0.2 (2022/02/11 16:12)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_AMEND_H
@@ -38,11 +38,11 @@ namespace Mathematics
         void SetValue(int beginIndex, int endIndex, uint32_t value);
 
     private:
-        static constexpr auto sm_IntSize = 2 * N;
-        static constexpr auto sm_Carry = 0x00010000u;
-        static constexpr auto sm_Low = 0x0000FFFFu;
+        static constexpr auto intSize = 2 * N;
+        static constexpr auto integerCarry = 0x00010000u;
+        static constexpr auto low = 0x0000FFFFu;
 
-        IntegerData& m_Master;
+        IntegerData& master;
     };
 }
 

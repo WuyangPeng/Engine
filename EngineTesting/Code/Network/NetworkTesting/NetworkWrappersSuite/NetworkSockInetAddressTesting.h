@@ -28,7 +28,7 @@ namespace Network
 
 		void AddressTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

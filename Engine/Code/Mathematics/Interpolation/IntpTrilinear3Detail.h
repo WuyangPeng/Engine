@@ -22,7 +22,7 @@ namespace Mathematics
 		mXBound = xBound;
 		mYBound = yBound;
 		mZBound = zBound;
-		m_Quantity = xBound * yBound*zBound;
+		quantity = xBound * yBound*zBound;
 
 		mXMin = xMin;
 		mXSpacing = xSpacing;
@@ -63,7 +63,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpTrilinear3<Real>::GetQuantity() const
 	{
-		return m_Quantity;
+		return quantity;
 	}
 
 	template <typename Real>
@@ -134,7 +134,7 @@ namespace Mathematics
 			|| y < mYMin || y > mYMax
 			|| z < mZMin || y > mZMax)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute x-index and clamp to image.
@@ -244,7 +244,7 @@ namespace Mathematics
 			|| y < mYMin || y > mYMax
 			|| z < mZMin || y > mZMax)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute x-index and clamp to image.

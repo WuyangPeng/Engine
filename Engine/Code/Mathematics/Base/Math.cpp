@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 15:29)
+///	引擎版本：0.8.0.2 (2022/01/29 11:24)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -24,7 +24,7 @@
 namespace Mathematics
 {
     template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Math<float>;
-    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Math<double>; 
+    template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE class Math<double>;
 }
 
 #endif  // MATHEMATICS_EXPORT_TEMPLATE

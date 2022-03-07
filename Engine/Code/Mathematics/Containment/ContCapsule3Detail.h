@@ -14,7 +14,7 @@
 
 template <typename Real>
 Mathematics::Capsule3<Real> Mathematics
-	::ContCapsule(const std::vector<Vector3D<Real> >& points)
+	::ContCapsule(const std::vector<Vector3<Real> >& points)
 {
 	auto line = OrthogonalLineFit3<Real>(points).GetLine3();
 
@@ -29,20 +29,20 @@ Mathematics::Capsule3<Real> Mathematics
         }
     }
 
-	auto vector3DOrthonormalBasis =	Vector3DTools<Real>::GenerateComplementBasis(line.GetDirection());
+	auto Vector3OrthonormalBasis =	Vector3Tools<Real>::GenerateComplementBasis(line.GetDirection());
 
-	auto U = vector3DOrthonormalBasis.GetUVector();
-	auto V = vector3DOrthonormalBasis.GetVVector();
+	auto U = Vector3OrthonormalBasis.GetUVector();
+	auto V = Vector3OrthonormalBasis.GetVVector();
 	auto W = line.GetDirection();
  
-	auto minValue = Math<Real>::sm_MaxReal;
-	auto maxValue = -Math<Real>::sm_MaxReal;
+	auto minValue = Math<Real>::maxReal;
+	auto maxValue = -Math<Real>::maxReal;
 	for (auto i = 0u; i < points.size(); ++i)
     {
 		auto diff = points[i] - line.GetOrigin();
-		auto uDotDiff = Vector3DTools<Real>::DotProduct(U,diff);
-		auto vDotDiff = Vector3DTools<Real>::DotProduct(V,diff);
-		auto wDotDiff = Vector3DTools<Real>::DotProduct(W,diff);
+		auto uDotDiff = Vector3Tools<Real>::DotProduct(U,diff);
+		auto vDotDiff = Vector3Tools<Real>::DotProduct(V,diff);
+		auto wDotDiff = Vector3Tools<Real>::DotProduct(W,diff);
 		auto discr = maxRadiusSqr - (uDotDiff*uDotDiff + vDotDiff*vDotDiff);
 		auto radical = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
@@ -85,7 +85,7 @@ Mathematics::Capsule3<Real> Mathematics
 
 template <typename Real>
 bool Mathematics
-	::InCapsule(const Vector3D<Real>& point, const Capsule3<Real>& capsule)
+	::InCapsule(const Vector3<Real>& point, const Capsule3<Real>& capsule)
 {
 	auto distance = DistancePoint3Segment3<Real>(point, capsule.GetSegment()).Get();
     return distance.GetDistance() <= capsule.GetRadius();
@@ -135,10 +135,10 @@ Mathematics::Capsule3<Real> Mathematics
 
 	// Axis center is average of input axis centers.
 	auto origin = (Real{0.5})*(P0 + P1);
-	Vector3D<Real> direction;
+	Vector3<Real> direction;
 
 	// Axis unit direction is average of input axis unit directions.
-	if (Vector3DTools<Real>::DotProduct(D0,D1) >= Math<Real>::GetValue(0))
+	if (Vector3Tools<Real>::DotProduct(D0,D1) >= Math<Real>::GetValue(0))
 	{
 		direction = D0 + D1;
 	}
@@ -181,8 +181,8 @@ Mathematics::Capsule3<Real> Mathematics
 	auto rDiff = radius - capsule0.GetRadius();
 	auto rDiffSqr = rDiff*rDiff;
 	auto diff = line.GetOrigin() - posEnd0;
-	auto k0 = Vector3DTools<Real>::VectorMagnitudeSquared(diff)  - rDiffSqr;
-	auto k1 = Vector3DTools<Real>::DotProduct(diff,line.GetDirection());
+	auto k0 = Vector3Tools<Real>::GetLengthSquared(diff)  - rDiffSqr;
+	auto k1 = Vector3Tools<Real>::DotProduct(diff,line.GetDirection());
 	auto discr = k1*k1 - k0;  // assert:  k1*k1-k0 >= 0
 	auto root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 	auto tPos = -k1 - root;
@@ -190,8 +190,8 @@ Mathematics::Capsule3<Real> Mathematics
 
     // Process sphere <negEnd0,r0>.
     diff = line.GetOrigin() - negEnd0;
-	k0 = Vector3DTools<Real>::VectorMagnitudeSquared(diff) - rDiffSqr;
-	k1 = Vector3DTools<Real>::DotProduct(diff,line.GetDirection());
+	k0 = Vector3Tools<Real>::GetLengthSquared(diff) - rDiffSqr;
+	k1 = Vector3Tools<Real>::DotProduct(diff,line.GetDirection());
     discr = k1*k1 - k0;  // assert:  k1*k1-k0 >= 0
     root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
     tmp = -k1 - root;
@@ -209,8 +209,8 @@ Mathematics::Capsule3<Real> Mathematics
     rDiff = radius - capsule1.GetRadius();
     rDiffSqr = rDiff*rDiff;
 	diff = line.GetOrigin() - posEnd1;
-	k0 = Vector3DTools<Real>::VectorMagnitudeSquared(diff) - rDiffSqr;
-	k1 = Vector3DTools<Real>::DotProduct(diff,line.GetDirection());
+	k0 = Vector3Tools<Real>::GetLengthSquared(diff) - rDiffSqr;
+	k1 = Vector3Tools<Real>::DotProduct(diff,line.GetDirection());
     discr = k1*k1 - k0;  // assert:  k1*k1-k0 >= 0
     root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
     tmp = -k1 - root;
@@ -226,8 +226,8 @@ Mathematics::Capsule3<Real> Mathematics
 
     // Process sphere <negEnd1,r1>.
     diff = line.GetOrigin() - negEnd1;
-	k0 = Vector3DTools<Real>::VectorMagnitudeSquared(diff) - rDiffSqr;
-	k1 = Vector3DTools<Real>::DotProduct(diff,line.GetDirection());
+	k0 = Vector3Tools<Real>::GetLengthSquared(diff) - rDiffSqr;
+	k1 = Vector3Tools<Real>::DotProduct(diff,line.GetDirection());
     discr = k1*k1 - k0;  // assert:  K1*K1-K0 >= 0
     root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
     tmp = -k1 - root;

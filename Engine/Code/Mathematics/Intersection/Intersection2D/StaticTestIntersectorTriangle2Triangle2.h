@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/23 22:02)
+///	引擎版本：0.8.0.3 (2022/02/25 11:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H
@@ -19,14 +19,14 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorTriangle2Triangle2 : public StaticIntersector<Real, Vector2D>
+    class StaticTestIntersectorTriangle2Triangle2 : public StaticIntersector<Real, Vector2>
     {
     public:
         using ClassType = StaticTestIntersectorTriangle2Triangle2<Real>;
-        using ParentType = StaticIntersector<Real, Vector2D>;
-        using Vector2D = Vector2D<Real>;
+        using ParentType = StaticIntersector<Real, Vector2>;
+        using Vector2 = Vector2<Real>;
         using Triangle2 = Triangle2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -34,24 +34,21 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Triangle2 GetTriangle0() const noexcept;
-        [[nodiscard]] const Triangle2 GetTriangle1() const noexcept;
+        NODISCARD Triangle2 GetTriangle0() const noexcept;
+        NODISCARD Triangle2 GetTriangle1() const noexcept;
 
     private:
-        using Container = std::vector<Vector2D>;
+        using Container = std::vector<Vector2>;
 
     private:
         void Test();
 
-        [[nodiscard]] static NumericalValueSymbol WhichSide(const Container& vertex, const Vector2D& point, const Vector2D& direction);
+        NODISCARD static NumericalValueSymbol WhichSide(const Container& vertex, const Vector2& point, const Vector2& direction);
 
     private:
-        Triangle2 m_Triangle0;
-        Triangle2 m_Triangle1;
+        Triangle2 triangle0;
+        Triangle2 triangle1;
     };
-
-    using FloatStaticTestIntersectorTriangle2Triangle2 = StaticTestIntersectorTriangle2Triangle2<float>;
-    using DoubleStaticTestIntersectorTriangle2Triangle2 = StaticTestIntersectorTriangle2Triangle2<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_TRIANGLE2_TRIANGLE2_H

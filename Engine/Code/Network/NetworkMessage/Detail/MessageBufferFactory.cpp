@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 19:29)
 
 #include "Network/NetworkExport.h"
 
@@ -26,7 +26,7 @@ Network::MessageBufferFactory::MessageBufferFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageBufferFactory)
 
 // static
-const Network::MessageBufferFactory::ImplTypePtr Network::MessageBufferFactory::Create(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
+Network::MessageBufferFactory::ImplTypePtr Network::MessageBufferFactory::Create(BuffBlockSize buffBlockSize, int count, ParserStrategy parserStrategy)
 {
     constexpr auto maxCount = (System::EnumCastUnderlying(BuffBlockSize::Size512K) << 2);
     if (maxCount < count)

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 19:01)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 23:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -13,8 +13,6 @@
 #include "Detail/LogMessageImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-
-using std::make_shared;
 
 CoreTools::LogMessage::LogMessage(LogLevel level, LogFilter filter, const String& message, const FunctionDescribed& functionDescribed)
     : impl{ level, filter, message, functionDescribed }

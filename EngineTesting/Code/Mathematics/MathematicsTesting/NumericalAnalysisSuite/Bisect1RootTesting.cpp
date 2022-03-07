@@ -14,7 +14,7 @@ namespace Mathematics
     template class Bisect1Root<float>;
     template class Bisect1Root<double>;
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Bisect1RootTesting)
 
 void Mathematics::Bisect1RootTesting ::MainTest()
@@ -29,7 +29,7 @@ void Mathematics::Bisect1RootTesting ::HaveSolutionTest()
     double root = 9.0;
     BisectRootType type = BisectRootType::HaveSolution;
 
-    DoubleBisect1Root bisect1Root(root, type);
+    Bisect1RootD bisect1Root(root, type);
 
     ASSERT_APPROXIMATE(bisect1Root.GetRoot(), root, 1e-10);
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
@@ -39,7 +39,7 @@ void Mathematics::Bisect1RootTesting ::NoSolutionTest()
 {
     BisectRootType type = BisectRootType::NoSolution;
 
-    DoubleBisect1Root bisect1Root;
+    Bisect1RootD bisect1Root;
 
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
 
@@ -51,7 +51,7 @@ void Mathematics::Bisect1RootTesting ::UnknownTest()
     float root = 19.0f;
     BisectRootType type = BisectRootType::Unknown;
 
-    FloatBisect1Root bisect1Root(root, type);
+    Bisect1RootF bisect1Root(root, type);
 
     ASSERT_ENUM_EQUAL(bisect1Root.GetBisect1RootType(), type);
     ASSERT_APPROXIMATE(bisect1Root.GetRoot(), root, 1e-8f);

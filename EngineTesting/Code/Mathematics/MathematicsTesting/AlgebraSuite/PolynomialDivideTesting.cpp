@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
-#include <vector>
+#include <vector> 
 #include <random> 
 
 using std::vector;
@@ -22,6 +22,10 @@ namespace Mathematics
 	template class PolynomialDivide<float>;
 	template class PolynomialDivide<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,PolynomialDivideTesting) 
 
@@ -41,13 +45,13 @@ void Mathematics::PolynomialDivideTesting
 									  randomDistribution(generator),randomDistribution(generator) };
 
     
-    DoublePolynomial firstPolynomial(firstDoubleVector);
+    PolynomialD firstPolynomial(firstDoubleVector);
     
 	vector<double> secondDoubleVector{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
     
-    DoublePolynomial secondPolynomial(secondDoubleVector);
+    PolynomialD secondPolynomial(secondDoubleVector);
     
-    PolynomialDivided polynomialDivide(firstPolynomial,secondPolynomial);
+    PolynomialDivideD polynomialDivide(firstPolynomial,secondPolynomial);
     
     ASSERT_TRUE(Approximate(polynomialDivide.GetQuotient(),firstPolynomial));
     ASSERT_TRUE(Approximate(polynomialDivide.GetRemainder(),secondPolynomial));

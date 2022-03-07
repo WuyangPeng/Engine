@@ -32,13 +32,13 @@ namespace Mathematics
 		// scaling the points to [0,2^{24}]^3.  The choice Query::QT_RATIONAL uses
 		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
 		// uses floating-point arithmetic, but is not robust in all cases.
-		ConvexHull2(const std::vector<Vector2D<Real> >& vertices, Real epsilon, bool owner, QueryType queryType);
+		ConvexHull2(const std::vector<Vector2<Real> >& vertices, Real epsilon, bool owner, QueryType queryType);
 		virtual ~ConvexHull2 ();
 		
 		// If GetDimension() returns 1, then the points lie on a line.  You must
 		// create a ConvexHull1 object using the function provided.
-		const Vector2D<Real>& GetLineOrigin () const;
-		const Vector2D<Real>& GetLineDirection () const;
+		const Vector2<Real>& GetLineOrigin () const;
+		const Vector2<Real>& GetLineDirection () const;
 		ConvexHull1<Real>* GetConvexHull1 () const;
 		
 		// Support for streaming to/from disk.
@@ -75,14 +75,14 @@ namespace Mathematics
 		bool Update (Edge*& hull, int i);
 		
 		// The input points.
-		std::vector<Vector2D<Real> > mVertices;
+		std::vector<Vector2<Real> > mVertices;
 		
 		// Support for robust queries.
-		std::vector<Vector2D<Real> > mSVertices;
+		std::vector<Vector2<Real> > mSVertices;
 		Query2<Real>* mQuery;
 		
 		// The line of containment if the dimension is 1.
-		Vector2D<Real> m_LineOrigin, m_LineDirection;
+		Vector2<Real> m_LineOrigin, m_LineDirection;
 	};
 	
 	using ConvexHull2f = ConvexHull2<float>;

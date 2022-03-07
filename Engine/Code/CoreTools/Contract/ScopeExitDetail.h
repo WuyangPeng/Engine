@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/21 10:07)
+///	引擎版本：0.8.0.1 (2022/01/10 18:25)
 
 #ifndef CORE_TOOLS_CONTRACT_SCOPE_EXIT_DETAIL_H
 #define CORE_TOOLS_CONTRACT_SCOPE_EXIT_DETAIL_H
@@ -17,7 +17,7 @@
 
 template <typename T>
 CoreTools::ScopeExit<T>::ScopeExit(T function) noexcept(noexcept(T()))
-    : Function{ function }
+    : function{ function }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -29,7 +29,7 @@ CoreTools::ScopeExit<T>::~ScopeExit() noexcept
 
     try
     {
-        Function();
+        function();
     }
     catch (...)
     {
@@ -39,11 +39,13 @@ CoreTools::ScopeExit<T>::~ScopeExit() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool CoreTools::ScopeExit<T>::IsValid() const noexcept
 {
-    return Function != nullptr;
+    return function != nullptr;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 #endif  // CORE_TOOLS_CONTRACT_SCOPE_EXIT_DETAIL_H

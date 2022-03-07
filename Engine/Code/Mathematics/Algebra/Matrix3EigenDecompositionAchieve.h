@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 18:48)
+///	引擎版本：0.8.0.2 (2022/02/07 17:02)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_ACHIEVE_H
@@ -19,21 +19,22 @@
 
 template <typename Real>
 Mathematics::Matrix3EigenDecomposition<Real>::Matrix3EigenDecomposition(const Matrix3& rotation, const Matrix3& diagonal, const Real epsilon) noexcept
-    : m_Rotation{ rotation }, m_Diagonal{ diagonal }, m_Epsilon{ epsilon }
+    : rotation{ rotation }, diagonal{ diagonal }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Matrix3EigenDecomposition<Real>::IsValid() const noexcept
 {
-    if (Math::FAbs(m_Diagonal.GetValue<0, 1>()) <= m_Epsilon &&
-        Math::FAbs(m_Diagonal.GetValue<0, 2>()) <= m_Epsilon &&
-        Math::FAbs(m_Diagonal.GetValue<1, 0>()) <= m_Epsilon &&
-        Math::FAbs(m_Diagonal.GetValue<1, 2>()) <= m_Epsilon &&
-        Math::FAbs(m_Diagonal.GetValue<2, 0>()) <= m_Epsilon &&
-        Math::FAbs(m_Diagonal.GetValue<2, 1>()) <= m_Epsilon)
+    if (Math::FAbs(diagonal.GetValue<0, 1>()) <= epsilon &&
+        Math::FAbs(diagonal.GetValue<0, 2>()) <= epsilon &&
+        Math::FAbs(diagonal.GetValue<1, 0>()) <= epsilon &&
+        Math::FAbs(diagonal.GetValue<1, 2>()) <= epsilon &&
+        Math::FAbs(diagonal.GetValue<2, 0>()) <= epsilon &&
+        Math::FAbs(diagonal.GetValue<2, 1>()) <= epsilon)
     {
         return true;
     }
@@ -42,22 +43,23 @@ bool Mathematics::Matrix3EigenDecomposition<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::Matrix3EigenDecomposition<Real>::Matrix3 Mathematics::Matrix3EigenDecomposition<Real>::GetRotation() const noexcept
+typename Mathematics::Matrix3EigenDecomposition<Real>::Matrix3 Mathematics::Matrix3EigenDecomposition<Real>::GetRotation() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Rotation;
+    return rotation;
 }
 
 template <typename Real>
-typename const Mathematics::Matrix3EigenDecomposition<Real>::Matrix3 Mathematics::Matrix3EigenDecomposition<Real>::GetDiagonal() const noexcept
+typename Mathematics::Matrix3EigenDecomposition<Real>::Matrix3 Mathematics::Matrix3EigenDecomposition<Real>::GetDiagonal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Diagonal;
+    return diagonal;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_ACHIEVE_H

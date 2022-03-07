@@ -23,7 +23,12 @@ namespace Mathematics
 	template class QDUDecompositionValue<float>;
 	template class QDUDecompositionValue<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, QDUDecompositionValueTesting) 
 
 void Mathematics::QDUDecompositionValueTesting
@@ -42,7 +47,7 @@ void Mathematics::QDUDecompositionValueTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleMatrix3 matrix;
+		Matrix3D matrix;
 
 		for (int m = 0; m < 3;++m)
 		{
@@ -52,16 +57,16 @@ void Mathematics::QDUDecompositionValueTesting
 			}
 		}
 
-		DoubleQDUDecompositionValue qDUDecompositionValue(matrix);
+		QDUDecompositionValueD qDUDecompositionValue(matrix);
 
-		DoubleMatrix3 orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
-		DoubleMatrix3 diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
-		DoubleMatrix3 upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
+		Matrix3D orthogonalMatrix = qDUDecompositionValue.GeOrthogonalMatrix();
+		Matrix3D diagonalMatrix = qDUDecompositionValue.GetDiagonalMatrix();
+		Matrix3D upperTriangularMatrix = qDUDecompositionValue.GetUpperTriangularMatrix();
 
-		DoubleMatrix3 result = orthogonalMatrix * diagonalMatrix;
+		Matrix3D result = orthogonalMatrix * diagonalMatrix;
 		result *= upperTriangularMatrix;
 
-		typedef bool(*VariableMatrixdApproximate)(const DoubleMatrix3& lhs,const DoubleMatrix3& rhs,const double epsilon);
+		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs,const double epsilon);
 
 		VariableMatrixdApproximate function = Approximate<double>;
 

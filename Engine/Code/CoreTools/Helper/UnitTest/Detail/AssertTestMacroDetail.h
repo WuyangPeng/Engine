@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/07/29 16:10)
+///	引擎版本：0.8.0.1 (2022/01/08 1:00)
 
 #ifndef CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_DETAIL_H
 #define CORE_TOOLS_HELPER_ASSERT_TEST_MACRO_DETAIL_H
@@ -18,14 +18,8 @@
 #define ASSERT_COMPARE_DETAIL(function, lhs, rhs, message, isFailureThrow) \
     function((lhs), (rhs), (CORE_TOOLS_FUNCTION_DESCRIBED), (message), (isFailureThrow))
 
-#define ASSERT_COMPARE_DO_NOT_USE_MESSAGE_DETAIL(function, lhs, rhs, isFailureThrow) \
-    function((lhs), (rhs), (CORE_TOOLS_FUNCTION_DESCRIBED), (isFailureThrow))
-
 #define ASSERT_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertEqual), (lhs), (rhs), (message), (isFailureThrow))
-
-#define ASSERT_EQUAL_DO_NOT_USE_MESSAGE_DETAIL(lhs, rhs, isFailureThrow) \
-    ASSERT_COMPARE_DO_NOT_USE_MESSAGE_DETAIL((AssertEqual), (lhs), (rhs), (isFailureThrow))
 
 #define ASSERT_ENUM_EQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertEnumEqual), (lhs), (rhs), (message), (isFailureThrow))
@@ -41,9 +35,6 @@
 
 #define ASSERT_ENUM_UNEQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertEnumUnequal), (lhs), (rhs), (message), (isFailureThrow))
-
-#define ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_DETAIL(lhs, rhs, isFailureThrow) \
-    ASSERT_COMPARE_DO_NOT_USE_MESSAGE_DETAIL((AssertUnequalDoNotUseMessage), (lhs), (rhs), (isFailureThrow))
 
 #define ASSERT_FLOATING_POINT_COMPLETE_UNEQUAL_DETAIL(lhs, rhs, message, isFailureThrow) \
     ASSERT_COMPARE_DETAIL((AssertFloatingPointCompleteUnequal), (lhs), (rhs), (message), (isFailureThrow))

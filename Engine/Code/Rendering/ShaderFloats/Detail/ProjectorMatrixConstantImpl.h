@@ -19,7 +19,7 @@ namespace Rendering
 	public:
 		using ClassType = ProjectorMatrixConstantImpl;
 		using ParentType = ProjectorConstantImpl;
-		using Matrix = Mathematics::FloatMatrix;
+		using Matrix = Mathematics::MatrixF;
  
 	public: 
 		ProjectorMatrixConstantImpl(const ProjectorSharedPtr& projector,bool biased, int biasScaleMatrixIndex);

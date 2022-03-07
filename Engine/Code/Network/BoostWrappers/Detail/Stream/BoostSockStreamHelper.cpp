@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 18:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 0:11)
 
 #include "Network/NetworkExport.h"
 
@@ -23,38 +23,19 @@ using namespace std::literals;
 
 namespace
 {
-    const auto GetPortDescription()
-    {
-        static const auto port = SYSTEM_TEXT("，端口："s);
+    constexpr auto port = SYSTEM_TEXT("，端口："sv);
 
-        return port;
-    }
+    constexpr auto g_BytesTransferred = SYSTEM_TEXT("，字节数："sv);
 
-    const auto GetBytesTransferredDescription()
-    {
-        static const auto bytesTransferred = SYSTEM_TEXT("，字节数："s);
+    constexpr auto asynchronousSendSuccess = SYSTEM_TEXT("异步发送消息成功，地址："sv);
 
-        return bytesTransferred;
-    }
-
-    const auto GetAsynchronousSendSuccessDescription()
-    {
-        static const auto asynchronousSendSuccess = SYSTEM_TEXT("异步发送消息成功，地址："s);
-
-        return asynchronousSendSuccess;
-    }
-
-    const auto GetAsynchronousReceiveSuccessDescription()
-    {
-        static const auto asynchronousReceiveSuccess = SYSTEM_TEXT("异步接收消息成功，地址："s);
-
-        return asynchronousReceiveSuccess;
-    }
+    constexpr auto asynchronousReceiveSuccess = SYSTEM_TEXT("异步接收消息成功，地址："sv);
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData, int bytesTransferred)
 {
     CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPoisition::Count) };
@@ -73,8 +54,14 @@ void Network::BoostSockStreamHelper::EventSendFunction(const ErrorCodeType& erro
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 
-    PrintSuccessLog(GetAsynchronousSendSuccessDescription(), addressData, bytesTransferred);
+    PrintSuccessLog(asynchronousSendSuccess.data(), addressData, bytesTransferred);
 }
+
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 
 void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const AddressData& addressData, int bytesTransferred)
 {
@@ -94,16 +81,22 @@ void Network::BoostSockStreamHelper::EventReceiveFunction(const ErrorCodeType& e
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 
-    PrintSuccessLog(GetAsynchronousReceiveSuccessDescription(), addressData, bytesTransferred);
+    PrintSuccessLog(asynchronousReceiveSuccess.data(), addressData, bytesTransferred);
 }
+
 #include STSTEM_WARNING_POP
 
 void Network::BoostSockStreamHelper::PrintSuccessLog(const String& prefix, const AddressData& addressData, int bytesTransferred)
 {
     if (0 < bytesTransferred)
     {
-        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, GetBoostLogName().c_str())
-            << prefix << addressData.GetAddress() << GetPortDescription() << addressData.GetPort() << GetBytesTransferredDescription() << bytesTransferred
+        LOG_SINGLETON_FILE_AND_CONSOLE_APPENDER(Trace, Network, g_BoostLogName.data())
+            << prefix
+            << addressData.GetAddress()
+            << port.data()
+            << addressData.GetPort()
+            << g_BytesTransferred.data()
+            << bytesTransferred
             << CoreTools::LogAppenderIOManageSign::Refresh;
     }
 }

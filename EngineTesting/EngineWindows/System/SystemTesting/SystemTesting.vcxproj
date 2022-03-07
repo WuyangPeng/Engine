@@ -1083,10 +1083,5 @@ xcopy "$(ProjectDir)/Resource/AttributesTesting/*.*" "$(EngineTestingEngineering
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties />
-    </VisualStudio>
-  </ProjectExtensions>
+  </ImportGroup> 
 </Project>

@@ -21,7 +21,7 @@ IntpBilinear2<Real>::IntpBilinear2 (int xBound, int yBound, Real xMin,  Real xSp
 
     mXBound = xBound;
     mYBound = yBound;
-    m_Quantity = xBound*yBound;
+    quantity = xBound*yBound;
 
     mXMin = xMin;
     mXSpacing = xSpacing;
@@ -50,7 +50,7 @@ int IntpBilinear2<Real>::GetYBound () const
 template <typename Real>
 int IntpBilinear2<Real>::GetQuantity () const
 {
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
@@ -101,7 +101,7 @@ Real IntpBilinear2<Real>::operator() (Real x, Real y) const
     // Check for inputs not in the domain of the function.
     if (x < mXMin || x > mXMax || y < mYMin || y > mYMax)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     // Compute x-index and clamp to image.
@@ -182,7 +182,7 @@ Real IntpBilinear2<Real>::operator() (int xOrder, int yOrder, Real x, Real y)
     // Check for inputs not in the domain of the function.
     if (x < mXMin || x > mXMax || y < mYMin || y > mYMax)
     {
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     // Compute x-index and clamp to image.

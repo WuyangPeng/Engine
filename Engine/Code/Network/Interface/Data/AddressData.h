@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 15:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 13:47)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ADDRESS_DATA_H
 #define NETWORK_NETWORK_INTERFACE_ADDRESS_DATA_H
@@ -32,12 +32,12 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] std::string GetAddress() const;
-        [[nodiscard]] int GetPort() const noexcept;
+        NODISCARD std::string GetAddress() const;
+        NODISCARD int GetPort() const noexcept;
 
     private:
-        std::string m_Address;
-        int m_Port;
+        std::string address;
+        int port;
     };
 }
 

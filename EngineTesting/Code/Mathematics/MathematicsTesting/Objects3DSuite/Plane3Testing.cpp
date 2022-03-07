@@ -6,7 +6,7 @@
 
 #include "Plane3Testing.h"
 #include "Mathematics/Objects3D/Plane3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -22,7 +22,12 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Plane3Testing) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Plane3Testing
 	::MainTest()
 {
@@ -41,7 +46,7 @@ void Mathematics::Plane3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D normal(firstRandomDistribution(generator),
+		Vector3D normal(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
@@ -49,38 +54,38 @@ void Mathematics::Plane3Testing
 
 		double constant(firstRandomDistribution(generator));
 
-		DoublePlane3 plane(normal,constant);
+		Plane3D plane(normal,constant);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(normal,plane.GetNormal()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(normal,plane.GetNormal()));
 		ASSERT_APPROXIMATE(constant,plane.GetConstant(),1e-10);
 
-		DoubleVector3D firstPoint(firstRandomDistribution(generator),
+		Vector3D firstPoint(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		DoublePlane3 secondPlane(normal,firstPoint);
+		Plane3D secondPlane(normal,firstPoint);
 
-		constant = DoubleVector3DTools::DotProduct(normal,firstPoint);
+		constant = Vector3ToolsD::DotProduct(normal,firstPoint);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(normal,secondPlane.GetNormal()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(normal,secondPlane.GetNormal()));
 		ASSERT_APPROXIMATE(constant,secondPlane.GetConstant(),1e-10);
 
-		DoubleVector3D secondPoint(firstRandomDistribution(generator),
+		Vector3D secondPoint(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		DoubleVector3D thirdPoint(firstRandomDistribution(generator),
+		Vector3D thirdPoint(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		DoubleVector3D edge1 = secondPoint - firstPoint;
-		DoubleVector3D edge2 = thirdPoint - firstPoint;
-		normal = DoubleVector3DTools::UnitCrossProduct(edge1,edge2);
-		constant = DoubleVector3DTools::DotProduct(normal,firstPoint);
+		Vector3D edge1 = secondPoint - firstPoint;
+		Vector3D edge2 = thirdPoint - firstPoint;
+		normal = Vector3ToolsD::UnitCrossProduct(edge1,edge2);
+		constant = Vector3ToolsD::DotProduct(normal,firstPoint);
 
-		DoublePlane3 thirdPlane(firstPoint,secondPoint,thirdPoint);
+		Plane3D thirdPlane(firstPoint,secondPoint,thirdPoint);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(normal,thirdPlane.GetNormal()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(normal,thirdPlane.GetNormal()));
 		ASSERT_APPROXIMATE(constant,thirdPlane.GetConstant(),1e-10);
 	}		
 }
@@ -96,19 +101,19 @@ void Mathematics::Plane3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
- 		DoubleVector3D firstPoint(randomDistribution(generator),
+ 		Vector3D firstPoint(randomDistribution(generator),
 			                 randomDistribution(generator),
 						     randomDistribution(generator));
 
-		DoubleVector3D secondPoint(randomDistribution(generator),
+		Vector3D secondPoint(randomDistribution(generator),
 			                  randomDistribution(generator),
 							  randomDistribution(generator) );
 
-		DoubleVector3D thirdPoint(randomDistribution(generator),
+		Vector3D thirdPoint(randomDistribution(generator),
 			                 randomDistribution(generator),
 						     randomDistribution(generator) );
 
-		DoublePlane3 plane(firstPoint,secondPoint,thirdPoint);
+		Plane3D plane(firstPoint,secondPoint,thirdPoint);
 
 		ASSERT_APPROXIMATE(plane.DistanceTo(firstPoint),0.0,1e-10);
 		ASSERT_APPROXIMATE(plane.DistanceTo(secondPoint),0.0,1e-10);
@@ -118,13 +123,13 @@ void Mathematics::Plane3Testing
 		ASSERT_ENUM_EQUAL(plane.WhichSide(secondPoint),NumericalValueSymbol::Zero);
 		ASSERT_ENUM_EQUAL(plane.WhichSide(thirdPoint),NumericalValueSymbol::Zero);
 
-		DoubleVector3D fourthPoint(randomDistribution(generator),randomDistribution(generator),randomDistribution(generator));
+		Vector3D fourthPoint(randomDistribution(generator),randomDistribution(generator),randomDistribution(generator));
 
 		double distance = plane.DistanceTo(fourthPoint);
 
-		if(DoubleMath::GetZeroTolerance() < distance)
+		if(MathD::GetZeroTolerance() < distance)
 			ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint),NumericalValueSymbol::Positive);
-		else if(distance < DoubleMath::GetZeroTolerance())
+		else if(distance < MathD::GetZeroTolerance())
 			ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint),NumericalValueSymbol::Negative);
 		else
 			ASSERT_ENUM_EQUAL(plane.WhichSide(fourthPoint),NumericalValueSymbol::Zero);

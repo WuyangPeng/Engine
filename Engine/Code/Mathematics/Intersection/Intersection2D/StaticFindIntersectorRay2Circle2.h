@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/22 15:45)
+///	引擎版本：0.8.0.3 (2022/02/24 16:53)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Circle2 : public StaticIntersector<Real, Vector2D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorRay2Circle2 : public StaticIntersector<Real, Vector2>
     {
     public:
         using ClassType = StaticFindIntersectorRay2Circle2<Real>;
-        using ParentType = StaticIntersector<Real, Vector2D>;
-        using Vector2D = Vector2D<Real>;
+        using ParentType = StaticIntersector<Real, Vector2>;
+        using Vector2 = Vector2<Real>;
         using Ray2 = Ray2<Real>;
         using Circle2 = Circle2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,25 +35,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ray2 GetRay() const noexcept;
-        [[nodiscard]] const Circle2 GetCircle() const noexcept;
+        NODISCARD Ray2 GetRay() const noexcept;
+        NODISCARD Circle2 GetCircle() const noexcept;
 
-        [[nodiscard]] int GetQuantity() const noexcept;
-        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD Vector2 GetPoint(int index) const;
 
     private:
         void Find();
 
-        Ray2 m_Ray;
-        Circle2 m_Circle;
+        Ray2 ray;
+        Circle2 circle;
 
-        int m_Quantity;
-        Vector2D m_Point0;
-        Vector2D m_Point1;
+        int quantity;
+        Vector2 point0;
+        Vector2 point1;
     };
-
-    using FloatStaticFindIntersectorRay2Circle2 = StaticFindIntersectorRay2Circle2<float>;
-    using DoubleStaticFindIntersectorRay2Circle2 = StaticFindIntersectorRay2Circle2<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY2_CIRCLE2_H

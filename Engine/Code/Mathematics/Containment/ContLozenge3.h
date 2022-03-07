@@ -19,11 +19,11 @@ namespace Mathematics
 	// The half-cylinder and quarter-cylinder side pieces are chosen using a
 	// method similar to that used for fitting by capsules.
 	template <typename Real>
-	Lozenge3<Real> ContLozenge(const std::vector<Vector3D<Real> >& points);
+	Lozenge3<Real> ContLozenge(const std::vector<Vector3<Real> >& points);
 	
 	// Test for containment of a point x by a lozenge.
 	template <typename Real>
-	bool InLozenge (const Vector3D<Real>& point, const Lozenge3<Real>& lozenge);
+	bool InLozenge (const Vector3<Real>& point, const Lozenge3<Real>& lozenge);
 }
 
 #endif // MATHEMATICS_CONTAINMENT_CONT_LOZENGE3_H

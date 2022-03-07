@@ -6,7 +6,7 @@
 
 #include "Ellipse3Testing.h"
 #include "Mathematics/Objects3D/Ellipse3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -20,7 +20,12 @@ namespace Mathematics
 	template class Ellipse3<float>;
 	template class Ellipse3<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Ellipse3Testing) 
 
 void Mathematics::Ellipse3Testing
@@ -39,37 +44,37 @@ void Mathematics::Ellipse3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D center(firstRandomDistribution(generator),
+		Vector3D center(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D normal(firstRandomDistribution(generator),
+		Vector3D normal(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D major(firstRandomDistribution(generator),
+		Vector3D major(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D minor(firstRandomDistribution(generator),
+		Vector3D minor(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 		
-		double majorLength = DoubleVector3DTools::VectorMagnitude(major);
-		double minorLength = DoubleVector3DTools::VectorMagnitude(minor);
+		double majorLength = Vector3ToolsD::GetLength(major);
+		double minorLength = Vector3ToolsD::GetLength(minor);
 
 		normal.Normalize();
 		major.Normalize();
 		minor.Normalize();
 
-		DoubleVector3DTools::Vector3DOrthonormalize orthonormalize = DoubleVector3DTools::Orthonormalize(major,minor,normal);
+		Vector3ToolsD::Vector3Orthonormalize orthonormalize = Vector3ToolsD::Orthonormalize(major,minor,normal);
 
-		DoubleEllipse3 ellipse(center, orthonormalize.GetUVector(), orthonormalize.GetVVector(), orthonormalize.GetWVector(), majorLength, minorLength);
+		Ellipse3D ellipse(center, orthonormalize.GetUVector(), orthonormalize.GetVVector(), orthonormalize.GetWVector(), majorLength, minorLength);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(center,ellipse.GetCenter()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetUVector(),ellipse.GetNormal()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetVVector(),ellipse.GetMajor()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetWVector(),ellipse.GetMinor()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(center,ellipse.GetCenter()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetUVector(),ellipse.GetNormal()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetVVector(),ellipse.GetMajor()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetWVector(),ellipse.GetMinor()));
 		ASSERT_APPROXIMATE(majorLength,ellipse.GetMajorLength(),1e-10);
 		ASSERT_APPROXIMATE(minorLength,ellipse.GetMinorLength(),1e-10);
 	}

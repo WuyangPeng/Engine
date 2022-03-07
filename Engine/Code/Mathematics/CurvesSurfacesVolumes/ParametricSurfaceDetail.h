@@ -57,7 +57,7 @@ bool ParametricSurface<Real>::IsRectangular() const noexcept
 }
 
 template <typename Real>
-void ParametricSurface<Real>::GetFrame (Real u, Real v,Vector3D<Real>& position, Vector3D<Real>& tangent0, Vector3D<Real>& tangent1, Vector3D<Real>& normal) const
+void ParametricSurface<Real>::GetFrame (Real u, Real v,Vector3<Real>& position, Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const
 {
     position = P(u, v);
 
@@ -65,15 +65,15 @@ void ParametricSurface<Real>::GetFrame (Real u, Real v,Vector3D<Real>& position,
     tangent1 = PV(u, v);
     tangent0.Normalize();  // T0
     tangent1.Normalize();  // temporary T1 just to compute N
-	normal = Vector3DTools<Real>::CrossProduct(tangent0,tangent1);  // N
+	normal = Vector3Tools<Real>::CrossProduct(tangent0,tangent1);  // N
 
     // The normalized first derivatives are not necessarily orthogonal.
     // Recompute T1 so that {T0,T1,N} is an orthonormal set.
-	tangent1 = Vector3DTools<Real>::CrossProduct(normal,tangent0);
+	tangent1 = Vector3Tools<Real>::CrossProduct(normal,tangent0);
 }
 
 template <typename Real>
-void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real& curv0, Real& curv1, Vector3D<Real>& dir0, Vector3D<Real>& dir1)
+void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real& curv0, Real& curv1, Vector3<Real>& dir0, Vector3<Real>& dir1)
 {
     // Tangents:  T0 = (x_u,y_u,z_u), T1 = (x_v,y_v,z_v)
     // Normal:    N = Cross(T0,T1)/Length(Cross(T0,T1))
@@ -106,18 +106,18 @@ void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real
 
     // Compute the metric tensor.
     Matrix2<Real> metricTensor;
-	metricTensor[0][0] = Vector3DTools<Real>::DotProduct(derU,derU);
-	metricTensor[0][1] = Vector3DTools<Real>::DotProduct(derU,derV);
+	metricTensor[0][0] = Vector3Tools<Real>::DotProduct(derU,derU);
+	metricTensor[0][1] = Vector3Tools<Real>::DotProduct(derU,derV);
     metricTensor[1][0] = metricTensor[0][1];
-	metricTensor[1][1] = Vector3DTools<Real>::DotProduct(derV,derV);
+	metricTensor[1][1] = Vector3Tools<Real>::DotProduct(derV,derV);
 
     // Compute the curvature tensor.
-	auto normal = Vector3DTools<Real>::CrossProduct(derU,derV);
+	auto normal = Vector3Tools<Real>::CrossProduct(derU,derV);
     Matrix2<Real> curvatureTensor;
-	curvatureTensor[0][0] = -Vector3DTools<Real>::DotProduct(normal,derUU);
-	curvatureTensor[0][1] = -Vector3DTools<Real>::DotProduct(normal,derUV);
+	curvatureTensor[0][0] = -Vector3Tools<Real>::DotProduct(normal,derUU);
+	curvatureTensor[0][1] = -Vector3Tools<Real>::DotProduct(normal,derUV);
     curvatureTensor[1][0] = curvatureTensor[0][1];
-	curvatureTensor[1][1] = -Vector3DTools<Real>::DotProduct(normal,derVV);
+	curvatureTensor[1][1] = -Vector3Tools<Real>::DotProduct(normal,derVV);
 
     // Characteristic polynomial is 0 = det(B-kG) = c2*k^2+c1*k+c0.
 	auto c0 = curvatureTensor.Determinant();
@@ -157,7 +157,7 @@ void ParametricSurface<Real>::ComputePrincipalCurvatureInfo (Real u, Real v,Real
     dir0.Normalize();
 
     // Second tangent is cross product of first tangent and normal.
-	dir1 = Vector3DTools<Real>::CrossProduct(dir0,normal);
+	dir1 = Vector3Tools<Real>::CrossProduct(dir0,normal);
 }
 
 

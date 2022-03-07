@@ -13,7 +13,7 @@
 
 template <typename Real>
 Mathematics::Ellipsoid3<Real> Mathematics
-	::ContEllipsoid (const std::vector<Vector3D<Real> >& points)
+	::ContEllipsoid (const std::vector<Vector3<Real> >& points)
 {
     // Fit the points with a Gaussian distribution.  The covariance matrix
     // is M = D[0]*U[0]*U[0]^T+D[1]*U[1]*U[1]^T+D[2]*U[2]*U[2]^T where D[0],
@@ -21,7 +21,7 @@ Mathematics::Ellipsoid3<Real> Mathematics
     // corresponding unit-length eigenvectors.
     auto box = GaussPointsFit3<Real>(points).GetBox3();
 	Real diag[3]{ box.GetExtent(0),box.GetExtent(1),box.GetExtent(2) };
-    Vector3D<Real> axis[3]{ box.GetAxis(0),box.GetAxis(1),box.GetAxis(2) };
+    Vector3<Real> axis[3]{ box.GetAxis(0),box.GetAxis(1),box.GetAxis(2) };
 
     // If either eigenvalue is nonpositive, adjust the D[] values so that
     // we actually build an ellipse.
@@ -52,9 +52,9 @@ Mathematics::Ellipsoid3<Real> Mathematics
     for (auto i = 0u; i < points.size(); ++i)
     {
 		auto diff = points[i] - box.GetCenter();
-        Real dot[3] { Vector3DTools<Real>::DotProduct(axis[0],diff),
-					  Vector3DTools<Real>::DotProduct(axis[1],diff),
-					  Vector3DTools<Real>::DotProduct(axis[2],diff) };
+        Real dot[3] { Vector3Tools<Real>::DotProduct(axis[0],diff),
+					  Vector3Tools<Real>::DotProduct(axis[1],diff),
+					  Vector3Tools<Real>::DotProduct(axis[2],diff) };
 
 		auto value = dot[0]*dot[0]/diag[0] + dot[1]*dot[1]/diag[1] + dot[2]*dot[2]/diag[2];
 
@@ -82,12 +82,12 @@ void Mathematics
 	::ProjectEllipsoid (const Ellipsoid3<Real>& ellipsoid, const Line3<Real>& line, Real& smin, Real& smax)
 {
     // Center of projection interval.
-	auto center = Vector3DTools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetCenter() - line.GetOrigin());
+	auto center = Vector3Tools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetCenter() - line.GetOrigin());
 
     // Radius of projection interval.
-    Real tmp[3] { ellipsoid.GetExtent0()*(Vector3DTools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis0())),
-				  ellipsoid.GetExtent1()*(Vector3DTools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis1())),
-				  ellipsoid.GetExtent2()*(Vector3DTools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis2())) };
+    Real tmp[3] { ellipsoid.GetExtent0()*(Vector3Tools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis0())),
+				  ellipsoid.GetExtent1()*(Vector3Tools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis1())),
+				  ellipsoid.GetExtent2()*(Vector3Tools<Real>::DotProduct(line.GetDirection(),ellipsoid.GetAxis2())) };
 	auto rSqr = tmp[0]*tmp[0] + tmp[1]*tmp[1] + tmp[2]*tmp[2];
 	auto radius = Math<Real>::Sqrt(rSqr);
 
@@ -103,12 +103,12 @@ const Mathematics::Ellipsoid3<Real>  Mathematics
 	auto center = (Real{0.5})*(ellipsoid0.GetCenter() + ellipsoid1.GetCenter());
 
     // bounding ellipsoid orientation is average of input orientations
-	std::vector<Vector3D<Real> > rotationColumn0;
+	std::vector<Vector3<Real> > rotationColumn0;
 	rotationColumn0.push_back(ellipsoid0.GetAxis0());
 	rotationColumn0.push_back(ellipsoid0.GetAxis1());
 	rotationColumn0.push_back(ellipsoid0.GetAxis2());
 
-	std::vector<Vector3D<Real> > rotationColumn1;
+	std::vector<Vector3<Real> > rotationColumn1;
 	rotationColumn1.push_back(ellipsoid1.GetAxis0());
 	rotationColumn1.push_back(ellipsoid1.GetAxis1());
 	rotationColumn1.push_back(ellipsoid1.GetAxis2());
@@ -123,9 +123,9 @@ const Mathematics::Ellipsoid3<Real>  Mathematics
     q = Math<Real>::InvSqrt(Dot(q,q))*q;
 	auto matrix = q.ToRotationMatrix();
 
-	Vector3D<Real> axis[3]{ Vector3D<Real>{matrix[0][0],matrix[0][1],matrix[0][2]},
-							Vector3D<Real>{matrix[1][0],matrix[1][1],matrix[1][2]},
-							Vector3D<Real>{matrix[2][0],matrix[2][1],matrix[2][2]} };
+	Vector3<Real> axis[3]{ Vector3<Real>{matrix[0][0],matrix[0][1],matrix[0][2]},
+							Vector3<Real>{matrix[1][0],matrix[1][1],matrix[1][2]},
+							Vector3<Real>{matrix[2][0],matrix[2][1],matrix[2][2]} };
 
 	Real extent[3];
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 13:50)
 
 #include "Network/NetworkExport.h"
 
@@ -15,14 +15,14 @@
 
 using std::string;
 
-Network::ConfigurationIPPort::ConfigurationIPPort(const string& ip, int port)
-    : m_IP{ ip }, m_Port{ port }
+Network::ConfigurationIPPort::ConfigurationIPPort(string ip, int port) noexcept
+    : ip{ std::move(ip) }, port{ port }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::ConfigurationIPPort::ConfigurationIPPort() noexcept
-    : m_IP{}, m_Port{ 0 }
+    : ip{}, port{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -33,12 +33,12 @@ string Network::ConfigurationIPPort::GetIP() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_IP;
+    return ip;
 }
 
 int Network::ConfigurationIPPort::GetPort() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Port;
+    return port;
 }

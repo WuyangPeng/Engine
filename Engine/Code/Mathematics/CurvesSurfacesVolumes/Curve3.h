@@ -9,12 +9,12 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Curve3
+	class  Curve3
 	{
 	public:
 		// Abstract base class.
@@ -33,19 +33,19 @@ namespace Mathematics
 		void SetTimeInterval (Real tmin, Real tmax);
 		
 		// Position and derivatives.
-		virtual Vector3D<Real> GetPosition (Real t) const = 0;
-		virtual Vector3D<Real> GetFirstDerivative (Real t) const = 0;
-		virtual Vector3D<Real> GetSecondDerivative (Real t) const = 0;
-		virtual Vector3D<Real> GetThirdDerivative (Real t) const = 0;
+		virtual Vector3<Real> GetPosition (Real t) const = 0;
+		virtual Vector3<Real> GetFirstDerivative (Real t) const = 0;
+		virtual Vector3<Real> GetSecondDerivative (Real t) const = 0;
+		virtual Vector3<Real> GetThirdDerivative (Real t) const = 0;
 		
 		// Differential geometric quantities.
 		Real GetSpeed (Real t) const;
 		virtual Real GetLength (Real t0, Real t1) const = 0;
 		Real GetTotalLength () const;
-		Vector3D<Real> GetTangent (Real t) const;
-		Vector3D<Real> GetNormal (Real t) const;
-		Vector3D<Real> GetBinormal (Real t) const;
-		void GetFrame (Real t, Vector3D<Real>& position, Vector3D<Real>& tangent, Vector3D<Real>& normal, Vector3D<Real>& binormal) const;
+		Vector3<Real> GetTangent (Real t) const;
+		Vector3<Real> GetNormal (Real t) const;
+		Vector3<Real> GetBinormal (Real t) const;
+		void GetFrame (Real t, Vector3<Real>& position, Vector3<Real>& tangent, Vector3<Real>& normal, Vector3<Real>& binormal) const;
 		Real GetCurvature (Real t) const;
 		Real GetTorsion (Real t) const;
 		
@@ -53,8 +53,8 @@ namespace Mathematics
 		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const = 0;
 		
 		// Subdivision.
-		void SubdivideByTime (int numPoints, Vector3D<Real>*& points) const;
-		void SubdivideByLength (int numPoints, Vector3D<Real>*& points) const;
+		void SubdivideByTime (int numPoints, Vector3<Real>*& points) const;
+		void SubdivideByLength (int numPoints, Vector3<Real>*& points) const;
 		
 	protected:
 		// Curve parameter is t where tmin <= t <= tmax.

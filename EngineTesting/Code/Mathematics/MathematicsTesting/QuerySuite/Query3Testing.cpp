@@ -6,12 +6,12 @@
 
 #include "Query3Testing.h"
 #include "Mathematics/Query/Query3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Algebra/Matrix3Detail.h"
-#include "Mathematics/Algebra/Vector4DToolsDetail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Algebra/Matrix4Detail.h"
-#include "Mathematics/Algebra/Vector4DDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
+#include "Mathematics/Algebra/Vector4Detail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
 #include "Mathematics/Algebra/APointDetail.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -24,7 +24,12 @@ using std::vector;
 using std::uniform_real;
 using std::uniform_int;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 namespace Mathematics
 {
 	template class Query3<double>;
@@ -53,22 +58,22 @@ void Mathematics::Query3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int k = 0; k < size; ++k)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleQuery3 query(vertices);
+		Query3D query(vertices);
 
 		ASSERT_ENUM_EQUAL(query.GetType(), QueryType::Real);
 		ASSERT_EQUAL(query.GetNumVertices(), size);
 
 		for (int k = 0; k < size; ++k)
 		{
- 			ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, query.GetVertice(k), vertices[k], 1e-10);
+ 			ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, query.GetVertice(k), vertices[k], 1e-10);
 		}	  
 	}
 }
@@ -84,12 +89,12 @@ void Mathematics::Query3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int k = 0; k < size; ++k)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}		
 
 		uniform_int<> thirdRandomDistribution(0, size - 1);
@@ -99,7 +104,7 @@ void Mathematics::Query3Testing
 		int thirdIndex = thirdRandomDistribution(generator);	
 		int fourthIndex = thirdRandomDistribution(generator);
 
-		DoubleQuery3 query(vertices);
+		Query3D query(vertices);
 
 		ASSERT_ENUM_EQUAL(query.ToPlane(secondIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
 		ASSERT_ENUM_EQUAL(query.ToPlane(thirdIndex, secondIndex, thirdIndex, fourthIndex), PlaneQueryType::OnPlane);
@@ -109,12 +114,12 @@ void Mathematics::Query3Testing
 		{
 			QuerySortTools querySortTools(secondIndex, thirdIndex,fourthIndex);	
 
-			DoubleVector3D firstVector = vertices[firstIndex];
-			DoubleVector3D secondVector = vertices[querySortTools.GetValue(0)];
-			DoubleVector3D thirdVector = vertices[querySortTools.GetValue(1)];
-			DoubleVector3D fourthVector = vertices[querySortTools.GetValue(2)];
+			Vector3D firstVector = vertices[firstIndex];
+			Vector3D secondVector = vertices[querySortTools.GetValue(0)];
+			Vector3D thirdVector = vertices[querySortTools.GetValue(1)];
+			Vector3D fourthVector = vertices[querySortTools.GetValue(2)];
 
-			DoubleMatrix3 matrix(firstVector - secondVector, thirdVector - secondVector, fourthVector - secondVector, MatrixMajorFlags::Column);
+			Matrix3D matrix(firstVector - secondVector, thirdVector - secondVector, fourthVector - secondVector, MatrixMajorFlags::Column);
 
 			double det = matrix.Determinant();
 
@@ -148,12 +153,12 @@ void Mathematics::Query3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int k = 0; k < size; ++k)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
 		uniform_int<> thirdRandomDistribution(0, size - 1);
@@ -164,7 +169,7 @@ void Mathematics::Query3Testing
 		int fourthIndex = thirdRandomDistribution(generator);
 		int fifthIndex = thirdRandomDistribution(generator);
 
-		DoubleQuery3 query(vertices);
+		Query3D query(vertices);
 
 		if (query.ToPlane(secondIndex, thirdIndex, fourthIndex, fifthIndex) == PlaneQueryType::PositiveSide)
 		{
@@ -210,12 +215,12 @@ void Mathematics::Query3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int k = 0; k < size; ++k)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
 		uniform_int<> thirdRandomDistribution(0, size - 1);
@@ -226,7 +231,7 @@ void Mathematics::Query3Testing
 		int fourthIndex = thirdRandomDistribution(generator);
 		int fifthIndex = thirdRandomDistribution(generator);
 
-		DoubleQuery3 query(vertices);
+		Query3D query(vertices);
 
 		ASSERT_ENUM_EQUAL(query.ToCircumsphere(secondIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
 		ASSERT_ENUM_EQUAL(query.ToCircumsphere(thirdIndex, secondIndex, thirdIndex, fourthIndex, fifthIndex), CircumsphereQueryType::OnCircumsphere);
@@ -241,28 +246,28 @@ void Mathematics::Query3Testing
 		{
 			QuerySortTools querySortTools(secondIndex, thirdIndex, fourthIndex, fifthIndex);
 
-			DoubleVector3D firstVector = vertices[firstIndex];
-			DoubleVector3D secondVector = vertices[querySortTools.GetValue(0)];
-			DoubleVector3D thirdVector = vertices[querySortTools.GetValue(1)];
-			DoubleVector3D fourthVector = vertices[querySortTools.GetValue(2)];
-			DoubleVector3D fifthVector = vertices[querySortTools.GetValue(3)];
+			Vector3D firstVector = vertices[firstIndex];
+			Vector3D secondVector = vertices[querySortTools.GetValue(0)];
+			Vector3D thirdVector = vertices[querySortTools.GetValue(1)];
+			Vector3D fourthVector = vertices[querySortTools.GetValue(2)];
+			Vector3D fifthVector = vertices[querySortTools.GetValue(3)];
 
-			DoubleVector4D s0(firstVector - secondVector);
-			DoubleVector4D s1(thirdVector - secondVector);
-			DoubleVector4D s2(fourthVector - secondVector);
-			DoubleVector4D s3(fifthVector - secondVector);
+			Vector4D s0(firstVector - secondVector);
+			Vector4D s1(thirdVector - secondVector);
+			Vector4D s2(fourthVector - secondVector);
+			Vector4D s3(fifthVector - secondVector);
 
-			DoubleVector4D s4(firstVector + secondVector);
-			DoubleVector4D s5(thirdVector + secondVector);
-			DoubleVector4D s6(fourthVector + secondVector);
-			DoubleVector4D s7(fifthVector + secondVector);
+			Vector4D s4(firstVector + secondVector);
+			Vector4D s5(thirdVector + secondVector);
+			Vector4D s6(fourthVector + secondVector);
+			Vector4D s7(fifthVector + secondVector);
 
-			s0[3] = DoubleVector4DTools::DotProduct(s0, s4);
-			s1[3] = DoubleVector4DTools::DotProduct(s1, s5);
-			s2[3] = DoubleVector4DTools::DotProduct(s2, s6);
-			s3[3] = DoubleVector4DTools::DotProduct(s3, s7);
+			s0[3] = Vector4ToolsD::DotProduct(s0, s4);
+			s1[3] = Vector4ToolsD::DotProduct(s1, s5);
+			s2[3] = Vector4ToolsD::DotProduct(s2, s6);
+			s3[3] = Vector4ToolsD::DotProduct(s3, s7);
 
-			DoubleMatrix4 matrix(s0[0], s0[1], s0[2], s0[3], s1[0], s1[1], s1[2], s1[3], s2[0], s2[1], s2[2], s2[3], s3[0], s3[1], s3[2], s3[3]);
+			Matrix4D matrix(s0[0], s0[1], s0[2], s0[3], s1[0], s1[1], s1[2], s1[3], s2[0], s2[1], s2[2], s2[3], s3[0], s3[1], s3[2], s3[3]);
 
 			double det = matrix.Determinant();
 

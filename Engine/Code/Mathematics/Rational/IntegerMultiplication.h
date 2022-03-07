@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:24)
+///	引擎版本：0.8.0.2 (2022/02/11 15:53)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_H
 #define MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_H
@@ -31,13 +31,13 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const IntegerData GetMultiplication() const noexcept;
+        NODISCARD IntegerData GetMultiplication() const noexcept;
 
     private:
         void Calculate();
         void Product();
         void CalculateProduct(uint32_t lhsBit, uint32_t lhsIndex);
-        [[nodiscard]] uint32_t CalculateResult(uint32_t lhsIndex);
+        NODISCARD uint32_t CalculateResult(uint32_t lhsIndex);
         void DetermineCarry(uint32_t carry, uint32_t resultBufferIndex);
         void OverflowTest();
         void Negative();
@@ -45,21 +45,21 @@ namespace Mathematics
     private:
         using DataType = std::vector<uint16_t>;
 
-        static constexpr auto sm_IntSize = 2 * N;
-        static constexpr auto sm_IntLast = sm_IntSize - 1;
-        static constexpr uint16_t sm_Symbol{ 0x8000 };
-        static constexpr auto sm_Low = 0x0000FFFFu;
-        static constexpr auto sm_High = 0xFFFF0000u;
-        static constexpr auto sm_Carry = 0x00010000u;
+        static constexpr auto intSize = 2 * N;
+        static constexpr auto intLast = intSize - 1;
+        static constexpr uint16_t symbol{ 0x8000 };
+        static constexpr auto low = 0x0000FFFFu;
+        static constexpr auto high = 0xFFFF0000u;
+        static constexpr auto integerCarry = 0x00010000u;
 
-        const IntegerData& m_LhsData;
-        const IntegerData& m_RhsData;
-        NumericalValueSymbol m_ProductSign;
-        IntegerData m_AbsLhsData;
-        IntegerData m_AbsRhsData;
-        DataType m_Product;
-        DataType m_Result;
-        IntegerData m_Multiplication;
+        const IntegerData& lhsData;
+        const IntegerData& rhsData;
+        NumericalValueSymbol productSign;
+        IntegerData absLhsData;
+        IntegerData absRhsData;
+        DataType product;
+        DataType result;
+        IntegerData multiplication;
     };
 }
 

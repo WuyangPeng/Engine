@@ -51,7 +51,7 @@ Rendering::TerrainPage
          const int x = i % mSize;
          const int y = i / mSize;
 
-		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::FloatAPoint(GetX(x), GetY(y), GetHeight(i)));       
+		 GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF(GetX(x), GetY(y), GetHeight(i)));       
     }
 
 	UpdateModelSpace(VisualUpdateType::Normals);
@@ -75,19 +75,19 @@ float Rendering::TerrainPage
     if (xGrid < 0.0f || xGrid >= (float)mSizeM1)
     {
         // Location not in page.
-        return Mathematics::FloatMath::sm_MaxReal;
+        return Mathematics::MathF::maxReal;
     }
 
     const float yGrid = (y - mOrigin[1])*mInvSpacing;
     if (yGrid < 0.0f || yGrid >= (float)mSizeM1)
     {
         // Location not in page.
-        return Mathematics::FloatMath::sm_MaxReal;
+        return Mathematics::MathF::maxReal;
     }
 
-	const float fCol = Mathematics::FloatMath::Floor(xGrid);
+	const float fCol = Mathematics::MathF::Floor(xGrid);
     const int iCol = (int)fCol;
-	const float fRow = Mathematics::FloatMath::Floor(yGrid);
+	const float fRow = Mathematics::MathF::Floor(yGrid);
     const int iRow = (int)fRow;
 
    const int index = iCol + mSize*iRow;

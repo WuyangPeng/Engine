@@ -26,7 +26,7 @@ namespace Rendering
     {
     public:
         using ClassType = PointControllerImpl;
-        using AVector = Mathematics::FloatAVector;
+        using AVector = Mathematics::AVectorF;
 
     public:
         explicit PointControllerImpl(int numPoints);

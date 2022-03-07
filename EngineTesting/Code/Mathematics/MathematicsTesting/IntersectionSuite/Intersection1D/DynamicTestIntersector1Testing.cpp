@@ -23,7 +23,7 @@ void Mathematics::DynamicTestIntersector1Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(IntersectorTest);
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
 void Mathematics::DynamicTestIntersector1Testing
 	::IntersectorTest()
 {
@@ -49,7 +49,7 @@ void Mathematics::DynamicTestIntersector1Testing
 			swap(v0, v1);
 		}
 
-		double tMax = DoubleMath::FAbs(randomDistribution(generator));
+		double tMax = MathD::FAbs(randomDistribution(generator));
 		double speedU = randomDistribution(generator);
 		double speedV = randomDistribution(generator);
 

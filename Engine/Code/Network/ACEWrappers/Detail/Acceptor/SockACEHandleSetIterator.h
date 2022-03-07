@@ -1,20 +1,20 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 14:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 13:46)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
 #define NETWORK_NETWORK_INTERFACE_ACE_HANDLE_SET_ITERATOR_H
 
 #include "Network/NetworkDll.h"
 
-#ifdef NETWORK_USE_ACE
+#include "Network/Interface/Detail/HandleSetIteratorImpl.h"
 
-    #include "Network/Interface/Detail/HandleSetIteratorImpl.h"
+#ifdef NETWORK_USE_ACE
 
 namespace Network
 {
@@ -29,10 +29,10 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] ACEHandle operator()() override;
+        NODISCARD ACEHandle operator()() override;
 
     private:
-        ACE_Handle_Set_Iterator m_ACEHandleSetIter;
+        ACE_Handle_Set_Iterator aceHandleSetIter;
     };
 }
 

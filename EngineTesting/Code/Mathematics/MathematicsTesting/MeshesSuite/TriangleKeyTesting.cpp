@@ -8,7 +8,7 @@
 #include "Mathematics/Meshes/TriangleKey.h" 
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, TriangleKeyTesting)
 
 void Mathematics::TriangleKeyTesting

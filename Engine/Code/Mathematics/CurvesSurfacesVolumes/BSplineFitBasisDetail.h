@@ -9,7 +9,7 @@
 
 #include "BSplineFitBasis.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
 
 
 #include "CoreTools/Contract/Assertion.h"
@@ -24,7 +24,7 @@ Mathematics::BSplineFitBasis<Real>
 	::BSplineFitBasis (int quantity, int degree)
 {
     MATHEMATICS_ASSERTION_0(1 <= degree && degree < quantity, "Invalid inputs.\n");
-    m_Quantity = quantity;
+    quantity = quantity;
     mDegree = degree;
 
     mValue = NEW1<Real>(degree + 1);
@@ -51,7 +51,7 @@ template <typename Real>
 int Mathematics::BSplineFitBasis<Real>
 	::GetQuantity () const noexcept
 {
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
@@ -70,7 +70,7 @@ void Mathematics::BSplineFitBasis<Real>
     // Use scaled time and scaled knots so that 1/(Q-D) does not need to
     // be explicitly stored by the class object.  Determine the extreme
     // indices affected by local control.
-	const auto temp = m_Quantity - mDegree;
+	const auto temp = quantity - mDegree;
 	auto QmD = static_cast<Real>(temp);
     Real tValue { };
     if (t <= Math::GetValue(0))
@@ -82,7 +82,7 @@ void Mathematics::BSplineFitBasis<Real>
     else if (t >= Math::GetValue(1))
     {
         tValue = QmD;
-        imax = m_Quantity - 1;
+        imax = quantity - 1;
         imin = imax - mDegree;
     }
     else
@@ -99,7 +99,7 @@ void Mathematics::BSplineFitBasis<Real>
         {
             mKnot[i0] = Math::GetValue(0);
         }
-        else if (i1 >= m_Quantity)
+        else if (i1 >= quantity)
         {
             mKnot[i0] = QmD;
         }
@@ -150,6 +150,6 @@ Real Mathematics::BSplineFitBasis<Real>
     return mValue[i];
 }
 #include STSTEM_WARNING_POP
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
+#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_FIT_BASIS_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_FIT_BASIS_DETAIL_H

@@ -31,8 +31,8 @@ namespace Rendering
                     IKJoint(IKJoint&& rhs) noexcept;
                     IKJoint& operator=(IKJoint&& rhs) noexcept;
 		using ParentType = Object;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
 		using IKGoalSharedPtrVector = std::vector<IKGoalSharedPtr>;
 		using MatrixRotationAxis = Mathematics::MatrixRotationAxis;
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:19)
 
 #include "Database/DatabaseExport.h"
 
@@ -26,7 +26,7 @@ Database::SchemaFactory::SchemaFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, SchemaFactory)
 
-Database::SchemaFactory::ImplTypePtr Database::SchemaFactory::Create(const Session& session)
+Database::SchemaFactory::ImplTypeSharedPtr Database::SchemaFactory::Create(const Session& session)
 {
     const auto configurationStrategy = session.GetConfigurationStrategy();
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
@@ -36,21 +36,16 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory::Create(const Sessi
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
         case Database::WrappersStrategy::MysqlConnector:
-            return make_shared<MysqlConnectorSchema>(session.GetImplType());
+            return make_shared<MysqlConnectorSchema>(session);
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullSchema>(configurationStrategy);
     }
 }
 
-Database::SchemaFactory::ImplTypePtr Database::SchemaFactory::Create(const Session& session, int dbIndex)
+Database::SchemaFactory::ImplTypeSharedPtr Database::SchemaFactory::Create(const Session& session, int dbIndex)
 {
     const auto configurationStrategy = session.GetConfigurationStrategy();
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
@@ -60,21 +55,16 @@ Database::SchemaFactory::ImplTypePtr Database::SchemaFactory::Create(const Sessi
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
         case Database::WrappersStrategy::MysqlConnector:
-            return make_shared<MysqlConnectorSchema>(session.GetImplType(), dbIndex);
+            return make_shared<MysqlConnectorSchema>(session, dbIndex);
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullSchema>(configurationStrategy);
     }
 }
 
-Database::SchemaFactory::ImplTypePtr Database::SchemaFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema)
+Database::SchemaFactory::ImplTypeSharedPtr Database::SchemaFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 

@@ -48,7 +48,7 @@ namespace Mathematics
     void IntpQdrNonuniform2<Real>::EstimateDerivatives()
     {
         int numVertices = mDT->GetNumVertices();
-        const Vector2D<Real>* vertices = mDT->GetVertices();
+        const Vector2<Real>* vertices = mDT->GetVertices();
         int numTriangles = mDT->GetNumSimplices();
         const int* indices = mDT->GetIndices();
 
@@ -123,7 +123,7 @@ namespace Mathematics
         // the interior.
 
         // Compute centers of inscribed circles for triangles.
-        const Vector2D<Real>* vertices = mDT->GetVertices();
+        const Vector2<Real>* vertices = mDT->GetVertices();
         int numTriangles = mDT->GetNumSimplices();
         const int* indices = mDT->GetIndices();
         mTData = nullptr;  //  NEW1<TriangleData>(numTriangles);
@@ -155,13 +155,13 @@ namespace Mathematics
     void IntpQdrNonuniform2<Real>::ComputeCrossEdgeIntersections(int i)
     {
         // Get the vertices of triangle i.
-        Vector2D<Real> V[3];
+        Vector2<Real> V[3];
         mDT->GetVertexSet(i, V);
 
         // Fet centers of adjacent triangles.
         int adjacent[3];
         mDT->GetAdjacentSet(i, adjacent);
-        Vector2D<Real> U[3];
+        Vector2<Real> U[3];
         for (int j = 0; j < 3; ++j)
         {
             int a = adjacent[j];
@@ -217,7 +217,7 @@ namespace Mathematics
     void IntpQdrNonuniform2<Real>::ComputeCoefficients(int i)
     {
         // Get the vertices of triangle i.
-        Vector2D<Real> V[3];
+        Vector2<Real> V[3];
         mDT->GetVertexSet(i, V);
 
         // Get the vertex indices of triangle i.
@@ -241,7 +241,7 @@ namespace Mathematics
         // Get centers of adjacent triangles.
         int adjacent[3];
         mDT->GetAdjacentSet(i, adjacent);
-        Vector2D<Real> U[3];
+        Vector2<Real> U[3];
         for (j = 0; j < 3; ++j)
         {
             int a = adjacent[j];
@@ -320,7 +320,7 @@ namespace Mathematics
     }
 
     template <typename Real>
-    bool IntpQdrNonuniform2<Real>::Evaluate(const Vector2D<Real>& P, Real& F, Real& FX, Real& FY)
+    bool IntpQdrNonuniform2<Real>::Evaluate(const Vector2<Real>& P, Real& F, Real& FX, Real& FY)
     {
         int i = mDT->GetContainingTriangle(P);
         if (i == -1)
@@ -329,16 +329,16 @@ namespace Mathematics
         }
 
         // Get triangle information.
-        Vector2D<Real> V[3];
+        Vector2<Real> V[3];
         mDT->GetVertexSet(i, V);
         int invDet[3];
         mDT->GetIndexSet(i, invDet);
         TriangleData& tData = mTData[i];
 
         // Determine which of the six subtriangles contains the target point.
-        Vector2D<Real> sub0 = tData.Center;
-        Vector2D<Real> sub1;
-        Vector2D<Real> sub2 = tData.Intersect[2];
+        Vector2<Real> sub0 = tData.Center;
+        Vector2<Real> sub1;
+        Vector2<Real> sub2 = tData.Intersect[2];
         Real bary[3];
         int index;
         for (index = 1; index <= 6; ++index)

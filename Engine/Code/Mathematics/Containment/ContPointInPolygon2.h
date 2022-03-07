@@ -14,7 +14,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 namespace Mathematics
 {	
@@ -22,32 +22,32 @@ namespace Mathematics
 	class PointInPolygon2
 	{
 	public:
-		PointInPolygon2 (int numPoints, const Vector2D<Real>* points);
+		PointInPolygon2 (int numPoints, const Vector2<Real>* points);
 		
 		// Simple polygons (ray-intersection counting).
-		bool Contains (const Vector2D<Real>& p) const;
+		bool Contains (const Vector2<Real>& p) const;
 		
 		// Algorithms for convex polygons.  The input polygons must have vertices
 		// in counterclockwise order.
 		
 		// O(N) algorithm (which-side-of-edge tests)
-		bool ContainsConvexOrderN (const Vector2D<Real>& p) const;
+		bool ContainsConvexOrderN (const Vector2<Real>& p) const;
 		
 		// O(log N) algorithm (bisection and recursion, like BSP tree)
-		bool ContainsConvexOrderLogN (const Vector2D<Real>& p) const;
+		bool ContainsConvexOrderLogN (const Vector2<Real>& p) const;
 		
 		// The polygon must have exactly four vertices.  This method is like the
 		// O(log N) and uses three which-side-of-segment test instead of four
 		// which-side-of-edge tests.  If the polygon does not have four vertices,
 		// the function returns false.
-		bool ContainsQuadrilateral (const Vector2D<Real>& p) const;
+		bool ContainsQuadrilateral (const Vector2<Real>& p) const;
 		
 	private:
 		// For recursion in ContainsConvexOrderLogN.
-		bool SubContainsPoint (const Vector2D<Real>& p, int i0, int i1) const;
+		bool SubContainsPoint (const Vector2<Real>& p, int i0, int i1) const;
 		
 		int mNumPoints;
-		const Vector2D<Real>* mPoints;
+		const Vector2<Real>* mPoints;
 	};
 	
 	using PointInPolygon2f = PointInPolygon2<float>;

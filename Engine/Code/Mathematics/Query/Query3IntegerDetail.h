@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:29)
+///	引擎版本：0.8.0.2 (2022/02/17 16:50)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_INTEGER_DETAIL_H
@@ -23,6 +23,7 @@ Mathematics::Query3Integer<Real>::Query3Integer(const VerticesType& vertices)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query3Integer<Real>::IsValid() const noexcept
 {
@@ -31,6 +32,7 @@ bool Mathematics::Query3Integer<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -49,7 +51,7 @@ Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(int index,
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
+Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(const Vector3& testVector, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "索引错误！");
@@ -70,7 +72,7 @@ Mathematics::PlaneQueryType Mathematics::Query3Integer<Real>::ToPlane(const Vect
     const Integer<4> y2{ vector2.GetY() - vector0.GetY() };
     const Integer<4> z2{ vector2.GetZ() - vector0.GetZ() };
 
-    auto det = QueryDotTools<Integer<4>>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+    const auto det = QueryDotTools<Integer<4>>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 
     if (Integer<4>{} < det)
         return PlaneQueryType::PositiveSide;
@@ -89,7 +91,7 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsph
 }
 
 template <typename Real>
-Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= v0 && v0 < this->GetNumVertices(), "索引错误！");
@@ -125,12 +127,12 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Integer<Real>::ToCircumsph
     const Integer<6> d3y{ vector3.GetY() - testVector.GetY() };
     const Integer<6> s3z{ vector3.GetZ() + testVector.GetZ() };
     const Integer<6> d3z{ vector3.GetZ() - testVector.GetZ() };
-    auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
-    auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
-    auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
-    auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
+    const auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
+    const auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
+    const auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
+    const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-    auto det = QueryDotTools<Integer<6>>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
+    const auto det = QueryDotTools<Integer<6>>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
 
     if (Integer<6>{} < det)
         return CircumsphereQueryType::Outside;

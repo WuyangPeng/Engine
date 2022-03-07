@@ -14,7 +14,7 @@
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
 
 CoreTools::ConsoleColorsTesting::ConsoleColorsTesting(const OStreamShared& stream)
-    : ParentType{ stream }, console{ DisableNotThrow::Disable }
+    : ParentType{ stream }, console{ OutputConsoleColors::Create() }
 {
 #if !defined(TCRE_USE_GCC)
     COUT.imbue(std::locale("chs"));
@@ -75,7 +75,7 @@ void CoreTools::ConsoleColorsTesting::BlackBackgroundColorTest()
     GetStream() << "这条信息在控制台中文本显示为紫色，背景为黑色。\n";
 }
 
-void CoreTools::ConsoleColorsTesting::ColorsTest() 
+void CoreTools::ConsoleColorsTesting::ColorsTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(SetColorsTest, TextColour::Green, BackgroundColour::Magenta);
     GetStream() << "这条信息在控制台中文本显示为绿色，背景为紫色。\n";

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:24)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_ARRAY_BUFFER_DETAIL_H
@@ -20,12 +20,13 @@
 
 template <Network::BuffBlockSize buffBlockSize>
 Network::MessageArrayBuffer<buffBlockSize>::MessageArrayBuffer(ParserStrategy parserStrategy) noexcept
-    : ParentType{ parserStrategy }, m_Buffer{}
+    : ParentType{ parserStrategy }, buffer{}
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <Network::BuffBlockSize buffBlockSize>
 bool Network::MessageArrayBuffer<buffBlockSize>::IsValid() const noexcept
 {
@@ -34,6 +35,7 @@ bool Network::MessageArrayBuffer<buffBlockSize>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <Network::BuffBlockSize buffBlockSize>
@@ -49,7 +51,7 @@ const char* Network::MessageArrayBuffer<buffBlockSize>::GetInitialBufferedPtr() 
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Buffer.data();
+    return buffer.data();
 }
 
 template <Network::BuffBlockSize buffBlockSize>
@@ -86,7 +88,7 @@ typename Network::MessageArrayBuffer<buffBlockSize>::ImplPtr Network::MessageArr
 
     auto messageVectorBuffer = std::make_shared<MessageVectorBuffer>(count, GetParserStrategy());
 
-    messageVectorBuffer->PushBack(shared_from_this());
+    messageVectorBuffer->PushBack(*this);
     messageVectorBuffer->AddCurrentReadIndex(GetCurrentReadIndex());
     messageVectorBuffer->SetReceiveCount(GetReceiveCount());
 

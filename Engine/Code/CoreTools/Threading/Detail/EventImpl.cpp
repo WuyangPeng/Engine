@@ -35,7 +35,10 @@ CoreTools::EventImpl& CoreTools::EventImpl::operator=(EventImpl&& rhs) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    handle = std::move(rhs.handle);
+    if (this != &rhs)
+    {
+        handle = std::move(rhs.handle);
+    }
 
     return *this;
 }

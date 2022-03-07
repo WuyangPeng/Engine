@@ -8,7 +8,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/EllipseFit2Detail.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
 
@@ -17,7 +17,12 @@
 using std::default_random_engine;
 using std::uniform_int;
 using std::uniform_real;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, EllipseFit2Testing)
 
 void Mathematics::EllipseFit2Testing ::MainTest()
@@ -35,22 +40,22 @@ void Mathematics::EllipseFit2Testing ::FitTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        std::vector<DoubleVector2D> vertices;
+        std::vector<Vector2D> vertices;
         int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(DoubleVector2D(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        DoubleEllipseFit2 ellipseFit(vertices);
+        EllipseFit2D ellipseFit(vertices);
 
-        DoubleVector2D center = ellipseFit.GetCenter();
-        DoubleMatrix2 matrix = ellipseFit.GetRotate();
+        Vector2 center = ellipseFit.GetCenter();
+        Matrix2D matrix = ellipseFit.GetRotate();
         double firstExtent = ellipseFit.GetExtent0();
         double secondExtent = ellipseFit.GetExtent1();
 
-        DoubleEllipse2 ellipse(center, matrix * DoubleVector2D::GetUnitX(), matrix * DoubleVector2D::GetUnitY(), firstExtent, secondExtent);
+        Ellipse2D ellipse(center, matrix * Vector2D::GetUnitX(), matrix * Vector2D::GetUnitY(), firstExtent, secondExtent);
 
         for (int i = 0; i < size; ++i)
         {

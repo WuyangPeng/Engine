@@ -12,6 +12,7 @@
 #include "System/DynamicLink/Flags/LoadLibraryFlags.h"
 #include "System/DynamicLink/LibraryTools.h"
 #include "System/DynamicLink/LoadLibrary.h"
+#include "System/Windows/Engineering.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
@@ -137,7 +138,7 @@ void System::GetModuleHandleTesting::GetModuleHandleFailureTest()
 
 System::DynamicLinkString System::GetModuleHandleTesting::GetResourcesLibraryName()
 {
-    return DYNAMIC_LINK_TEXT("Resource/ResourcesLibrary"s) + GetEngineeringDynamicLinkSuffix();
+    return DYNAMIC_LINK_TEXT("Resource/ResourcesLibrary"s) + GetEngineeringSuffix();
 }
 
 System::DynamicLinkModule System::GetModuleHandleTesting::GetDynamicLibrary()

@@ -11,10 +11,10 @@
 
 namespace Mathematics
 {
-	class Vector3DToolsTesting : public CoreTools::UnitTest
+	class Vector3ToolsTesting : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3DToolsTesting); 
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector3ToolsTesting); 
 
 	private:
 		void MainTest();	
@@ -25,7 +25,7 @@ namespace Mathematics
 		void CompareTest();
 		void OtherCalculateTest();	
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 		static double Half(double value); 
 	};

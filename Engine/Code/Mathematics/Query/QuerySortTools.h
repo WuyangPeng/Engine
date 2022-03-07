@@ -1,20 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 15:30)
+///	引擎版本：0.8.0.2 (2022/02/17 15:55)
 
 #ifndef MATHEMATICS_QUERY_QUERY_SORT_TOOLS_H
 #define MATHEMATICS_QUERY_QUERY_SORT_TOOLS_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 MATHEMATICS_PERFORMANCE_UNSHARED_EXPORT_IMPL(QuerySortToolsImpl);
 
 namespace Mathematics
@@ -39,8 +40,8 @@ namespace Mathematics
         // 输出索引要么带正排序（排序期间发生偶数换位）
         // 或带负排序（排序期间发生奇数换位）。
         // 该函数返回排序的符号，“正”表示一个正的排序和“负”为负的排序。
-        [[nodiscard]] NumericalValueSymbol GetSymbol() const noexcept;
-        [[nodiscard]] int GetValue(int index) const;
+        NODISCARD NumericalValueSymbol GetSymbol() const noexcept;
+        NODISCARD int GetValue(int index) const;
 
     private:
         PackageType impl;

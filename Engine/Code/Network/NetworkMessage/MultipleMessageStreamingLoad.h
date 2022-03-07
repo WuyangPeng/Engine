@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:15)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_LOAD_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_LOAD_H
@@ -30,11 +30,11 @@ namespace Network
         using ClassType = MultipleMessageStreamingLoad<Index, MultipleMessageContainer>;
         using ParentType = MultipleMessageStreamingLoad<Index - 1, MultipleMessageContainer>;
 
-        MultipleMessageStreamingLoad();
+        MultipleMessageStreamingLoad() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Load(MultipleMessageContainer& container, const MessageSourceSharedPtr& source) const override;
+        void Load(MultipleMessageContainer& container, MessageSource& source) const override;
     };
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
@@ -44,17 +44,17 @@ namespace Network
         using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
         using ClassType = MultipleMessageStreamingLoad<0, MultipleMessageContainer>;
 
-        MultipleMessageStreamingLoad();
+        MultipleMessageStreamingLoad() noexcept;
         virtual ~MultipleMessageStreamingLoad() noexcept = default;
 
-        MultipleMessageStreamingLoad(const MultipleMessageStreamingLoad& rhs) = default;
-        MultipleMessageStreamingLoad& operator=(const MultipleMessageStreamingLoad& rhs) = default;
+        MultipleMessageStreamingLoad(const MultipleMessageStreamingLoad& rhs) noexcept = default;
+        MultipleMessageStreamingLoad& operator=(const MultipleMessageStreamingLoad& rhs) noexcept = default;
         MultipleMessageStreamingLoad(MultipleMessageStreamingLoad&& rhs) noexcept = default;
         MultipleMessageStreamingLoad& operator=(MultipleMessageStreamingLoad&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void Load(MultipleMessageContainer& container, const MessageSourceSharedPtr& source) const;
+        virtual void Load(MultipleMessageContainer& container, MessageSource& source) const;
     };
 }
 

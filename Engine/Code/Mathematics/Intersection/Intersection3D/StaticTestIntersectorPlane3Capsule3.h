@@ -1,57 +1,52 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 16:45)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Plane3.h" 
-#include "Mathematics/Objects3D/Capsule3.h"  
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Capsule3.h"
+#include "Mathematics/Objects3D/Plane3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticTestIntersectorPlane3Capsule3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticTestIntersectorPlane3Capsule3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Plane3 = Plane3<Real>;
-		using Capsule3 = Capsule3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class StaticTestIntersectorPlane3Capsule3 : public StaticIntersector<Real, Vector3>
+    {
+    public:
+        using ClassType = StaticTestIntersectorPlane3Capsule3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
+        using Plane3 = Plane3<Real>;
+        using Capsule3 = Capsule3<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-                StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance());
+    public:
+        StaticTestIntersectorPlane3Capsule3(const Plane3& plane, const Capsule3& capsule, const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
-	CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Plane3 GetPlane() const;
-        [[nodiscard]] const Capsule3 GetCapsule() const;
+        NODISCARD Plane3 GetPlane() const noexcept;
+        NODISCARD Capsule3 GetCapsule() const noexcept;
 
-		// Culling support.  The view frustum is assumed to be on the positive
-		// side of the plane.  The capsule is culled if it is on the negative
-		// side of the plane.
-        [[nodiscard]] bool CapsuleIsCulled() const;
+        NODISCARD bool CapsuleIsCulled() const noexcept;
 
-	private:
-		// Static intersection query.
-		void Test();
+    private:
+        void Test() noexcept;
 
-	private:
-		// The objects to intersect.
-		Plane3 m_Plane;
-		Capsule3 m_Capsule;
-	};
-
-	using FloatStaticTestIntersectorPlane3Capsule3 = StaticTestIntersectorPlane3Capsule3<float>;
-	using DoubleStaticTestIntersectorPlane3Capsule3 = StaticTestIntersectorPlane3Capsule3<double>;
+    private:
+        Plane3 plane;
+        Capsule3 capsule;
+    };
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_CAPSULE3_H

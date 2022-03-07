@@ -39,16 +39,16 @@ namespace Mathematics
 		// constructors below represent these choices.
 
 		// (OU,OU), (OU,PU), (PU,OU), or (PU,PU)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
+		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen);
 
 		// (OU,ON) or (PU,ON)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot);
+		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot);
 
 		// (ON,OU) or (ON,PU)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen);
+		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen);
 
 		// (ON,ON)
-		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot);
+		NURBSRectangle(int numUCtrlPoints, int numVCtrlPoints,Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree,int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot);
 
 		virtual ~NURBSRectangle();
 
@@ -61,8 +61,8 @@ namespace Mathematics
 		// Control points and weights may be changed at any time.  If either input
 		// index is invalid, GetControlPoint returns a vector whose components
 		// are all MAX_REAL, and GetControlWeight returns MAX_REAL.
-		void SetControlPoint(int uIndex, int vIndex, const Vector3D<Real>& ctrl);
-		Vector3D<Real> GetControlPoint(int uIndex, int vIndex) const;
+		void SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl);
+		Vector3<Real> GetControlPoint(int uIndex, int vIndex) const;
 		void SetControlWeight(int uIndex, int vIndex, Real weight);
 		Real GetControlWeight(int uIndex, int vIndex) const;
 
@@ -75,27 +75,27 @@ namespace Mathematics
 		// The spline is defined for 0 <= u <= 1 and 0 <= v <= 1.  The input
 		// values should be in this domain.  Any inputs smaller than 0 are clamped
 		// to 0.  Any inputs larger than 1 are clamped to 1.
-		virtual Vector3D<Real> P(Real u, Real v) const;
-		virtual Vector3D<Real> PU(Real u, Real v) const;
-		virtual Vector3D<Real> PV(Real u, Real v) const;
-		virtual Vector3D<Real> PUU(Real u, Real v) const;
-		virtual Vector3D<Real> PUV(Real u, Real v) const;
-		virtual Vector3D<Real> PVV(Real u, Real v) const;
+		virtual Vector3<Real> P(Real u, Real v) const;
+		virtual Vector3<Real> PU(Real u, Real v) const;
+		virtual Vector3<Real> PV(Real u, Real v) const;
+		virtual Vector3<Real> PUU(Real u, Real v) const;
+		virtual Vector3<Real> PUV(Real u, Real v) const;
+		virtual Vector3<Real> PVV(Real u, Real v) const;
 
 		// If you need position and derivatives at the same time, it is more
 		// efficient to call these functions.  Pass the addresses of those
 		// quantities whose values you want.  You may pass 0 in any argument
 		// whose value you do not want.
-		void Get(Real u, Real v, Vector3D<Real>* pos, Vector3D<Real>* derU,Vector3D<Real>* derV, Vector3D<Real>* derUU, Vector3D<Real>* derUV,Vector3D<Real>* derVV) const;
+		void Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU,Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV,Vector3<Real>* derVV) const;
 
 	protected:
 		// Replicate the necessary number of control points when the Create
 		// function has bLoop equal to true, in which case the spline surface
 		// must be a closed surface in the corresponding dimension.
-		void CreateControl(Vector3D<Real>** ctrlPoint, Real** ctrlWeight);
+		void CreateControl(Vector3<Real>** ctrlPoint, Real** ctrlWeight);
 
 		int mNumUCtrlPoints, mNumVCtrlPoints;
-		Vector3D<Real>** mCtrlPoint;  // ctrl[unum][vnum]
+		Vector3<Real>** mCtrlPoint;  // ctrl[unum][vnum]
 		Real** mCtrlWeight;    // weight[unum][vnum]
 		bool mLoop[2];
 		BSplineBasis<Real> mBasis[2];

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 16:48)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_32_TABLE_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_32_TABLE_H
@@ -80,7 +80,7 @@ namespace CoreTools
     // 244 --   0xBAD03605, 0xCDD70693, 0x54DE5729, 0x23D967BF,
     // 248 --   0xB3667A2E, 0xC4614AB8, 0x5D681B02, 0x2A6F2B94,
     // 252 --   0xB40BBE37, 0xC30C8EA1, 0x5A05DF1B, 0x2D02EF8D
-    class CORE_TOOLS_DEFAULT_DECLARE CyclicRedundancyCheck32Table final
+    class CORE_TOOLS_HIDDEN_DECLARE CyclicRedundancyCheck32Table final
     {
     public:
         using ClassType = CyclicRedundancyCheck32Table;
@@ -90,17 +90,32 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint32_t Get32Table(int index) const;
-
-    private:
-        static constexpr auto sm_TableSize = 256;
+        NODISCARD uint32_t Get32Table(int index) const;
 
     private:
         void Calculate() noexcept;
-        uint32_t Calculate32(uint32_t index) noexcept;
+
+        NODISCARD constexpr static uint32_t Calculate32(uint32_t index) noexcept
+        {
+            auto value = index;
+            constexpr auto bitSize = 8;
+
+            for (auto i = bitSize; i > 0; i--)
+            {
+                if ((value & 1) != 0)
+                    value = (value >> 1) ^ 0xEDB88320L;
+                else
+                    value >>= 1;
+            }
+
+            return value;
+        }
 
     private:
-        std::array<uint32_t, sm_TableSize> m_Table;
+        static constexpr auto tableSize = 256;
+
+    private:
+        std::array<uint32_t, tableSize> table;
     };
 }
 

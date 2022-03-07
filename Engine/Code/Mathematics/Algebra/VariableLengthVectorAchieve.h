@@ -147,7 +147,7 @@ void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
 }
 
 template <typename Real>
-const Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::operator-() const
+Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -179,7 +179,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
-Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator*=(Real scalar)
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator*=(Real scalar) noexcept
 {
     ;
 
@@ -192,11 +192,11 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 }
 
 template <typename Real>
-Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar)
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar) noexcept(g_MathematicsAssert < 1)
 {
     ;
 
-    if (Math::sm_Epsilon < Math::FAbs(scalar))
+    if (Math::epsilon < Math::FAbs(scalar))
     {
         for (auto& value : *impl)
         {
@@ -209,7 +209,7 @@ Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>
 
         for (auto& value : *impl)
         {
-            value = Math::sm_MaxReal;
+            value = Math::maxReal;
         }
     }
 
@@ -269,7 +269,7 @@ void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon)
 }
 
 template <typename Real>
-const typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::VariableLengthVector<Real>::GetContainer() const
+typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::VariableLengthVector<Real>::GetContainer() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

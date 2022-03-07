@@ -17,16 +17,16 @@ namespace Mathematics
 	// Compute the smallest axis-aligned bounding box of the points, then
 	// compute a sphere containing the box.
 	template <typename Real>
-	Sphere3<Real> ContSphereOfAABB(const std::vector<Vector3D<Real> >& points);
+	Sphere3<Real> ContSphereOfAABB(const std::vector<Vector3<Real> >& points);
 	
 	// Compute the smallest sphere whose center is the average of the input
 	// points.
 	template <typename Real>
-	Sphere3<Real> ContSphereAverage (int numPoints, const Vector3D<Real>* points);
+	Sphere3<Real> ContSphereAverage (int numPoints, const Vector3<Real>* points);
 	
 	// Test for containment of a point inside a sphere.
 	template <typename Real>
-	bool InSphere (const Vector3D<Real>& point, const Sphere3<Real>& sphere);
+	bool InSphere (const Vector3<Real>& point, const Sphere3<Real>& sphere);
 	
 	// Compute the smallest sphere that contains the input spheres.
 	template <typename Real>

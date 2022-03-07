@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 13:41)
+///	引擎版本：0.8.0.2 (2022/02/15 11:45)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DETAIL_H
@@ -17,28 +17,30 @@
 
 template <typename Real, typename UserDataType>
 Mathematics::Minimize1<Real, UserDataType>::Minimize1(Function function, int maxLevel, int maxBracket, const UserDataType* userData) noexcept
-    : m_Function{ function }, m_MaxLevel{ maxLevel }, m_MaxBracket{ maxBracket }, m_UserData{ userData }
+    : function{ function }, maxLevel{ maxLevel }, maxBracket{ maxBracket }, userData{ userData }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename UserDataType>
 bool Mathematics::Minimize1<Real, UserDataType>::IsValid() const noexcept
 {
-    if (m_Function != nullptr)
+    if (function != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-void Mathematics::Minimize1<Real, UserDataType>::SetUserData(const UserDataType* userData) noexcept
+void Mathematics::Minimize1<Real, UserDataType>::SetUserData(const UserDataType* newUserData) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_UserData = userData;
+    userData = newUserData;
 }
 
 template <typename Real, typename UserDataType>
@@ -46,11 +48,11 @@ typename const UserDataType* Mathematics::Minimize1<Real, UserDataType>::GetUser
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_UserData;
+    return userData;
 }
 
 template <typename Real, typename UserDataType>
-typename const Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
+typename Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathematics::Minimize1<Real, UserDataType>::GetMinimum(Real begin, Real end, Real initial) const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -58,16 +60,16 @@ typename const Mathematics::Minimize1<Real, UserDataType>::Minimize1Data Mathema
 
     Minimize1Data minimize1Data;
 
-    auto beginFunction = m_Function(begin, m_UserData);
+    const auto beginFunction = function(begin, userData);
     minimize1Data.CompareData(begin, beginFunction);
 
-    auto initialFunction = m_Function(initial, m_UserData);
+    const auto initialFunction = function(initial, userData);
     minimize1Data.CompareData(initial, initialFunction);
 
-    auto endFunction = m_Function(end, m_UserData);
+    const auto endFunction = function(end, userData);
     minimize1Data.CompareData(end, endFunction);
 
-    CompareMinimum(begin, beginFunction, initial, initialFunction, end, endFunction, m_MaxLevel, minimize1Data);
+    CompareMinimum(begin, beginFunction, initial, initialFunction, end, endFunction, maxLevel, minimize1Data);
 
     return minimize1Data;
 }
@@ -80,8 +82,8 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
         return;
     }
 
-    auto middle = Math::GetRational(1, 2) * (begin + end);
-    auto middleFunction = m_Function(middle, m_UserData);
+    const auto middle = Math::GetRational(1, 2) * (begin + end);
+    const auto middleFunction = function(middle, userData);
     minimize1Data.CompareData(middle, middleFunction);
 
     if (Math::GetValue(0) < beginFunction - (Math::GetValue(2) * middleFunction + endFunction))
@@ -213,14 +215,14 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareMinimum(Real begin, Real
 template <typename Real, typename UserDataType>
 void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real begin, Real beginFunction, Real middle, Real middleFunction, Real end, Real endFunction, int level, Minimize1Data& minimize1Data) const
 {
-    for (auto i = 0; i < m_MaxBracket; ++i)
+    for (auto i = 0; i < maxBracket; ++i)
     {
         // 更新最小值。
         minimize1Data.CompareData(middle, middleFunction);
 
         // 测试收敛。
 
-        if (Math::FAbs(end - begin) <= Math::GetValue(2) * Math::GetZeroTolerance() * Math::FAbs(middle) + Math::sm_Epsilon)
+        if (Math::FAbs(end - begin) <= Math::GetValue(2) * Math::GetZeroTolerance() * Math::FAbs(middle) + Math::epsilon)
         {
             break;
         }
@@ -233,7 +235,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
         auto product0 = beginMinusMiddle * endFunctionMinusMiddleFunction;
         auto product1 = endMinusMiddle * beginFunctionMinusMiddleFunction;
         auto denom = product1 - product0;
-        if (Math::FAbs(denom) < Math::sm_Epsilon)
+        if (Math::FAbs(denom) < Math::epsilon)
         {
             return;
         }
@@ -242,7 +244,7 @@ void Mathematics::Minimize1<Real, UserDataType>::CompareBracketedMinimum(Real be
 
         MATHEMATICS_ASSERTION_1(begin <= vertex && vertex <= end, "顶点不在区间\n");
 
-        auto vertexFunction = m_Function(vertex, m_UserData);
+        auto vertexFunction = function(vertex, userData);
         minimize1Data.CompareData(vertex, vertexFunction);
 
         if (vertex < middle)

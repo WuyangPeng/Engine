@@ -9,18 +9,18 @@
 
 #include "BezierCurve3.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
 
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "System/Helper/PragmaWarning.h" 
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
 template <typename Real>
 Mathematics::BezierCurve3<Real>
-	::BezierCurve3 (int degree, Vector3D<Real>* ctrlPoint)
+	::BezierCurve3 (int degree, Vector3<Real>* ctrlPoint)
 	:SingleCurve3<Real>{ Math ::GetValue(0), Math::GetValue(1) }
 {
     MATHEMATICS_ASSERTION_0(degree >= 2, "The degree must be three or larger\n");
@@ -33,7 +33,7 @@ Mathematics::BezierCurve3<Real>
     mCtrlPoint = ctrlPoint;
 
     // Compute first-order differences.
-    mDer1CtrlPoint = NEW1<Vector3D<Real> >(mNumCtrlPoints - 1);
+    mDer1CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 1);
     for (i = 0; i < mNumCtrlPoints - 1; ++i)
     {
         mDer1CtrlPoint[i] = mCtrlPoint[i + 1];
@@ -41,7 +41,7 @@ Mathematics::BezierCurve3<Real>
     }
 
     // Compute second-order differences.
-    mDer2CtrlPoint = NEW1<Vector3D<Real> >(mNumCtrlPoints - 2);
+    mDer2CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 2);
     for (i = 0; i < mNumCtrlPoints - 2; ++i)
     {
         mDer2CtrlPoint[i] = mDer1CtrlPoint[i + 1] - mDer1CtrlPoint[i];
@@ -50,7 +50,7 @@ Mathematics::BezierCurve3<Real>
     // Compute third-order differences.
     if (degree >= 3)
     {
-        mDer3CtrlPoint = NEW1<Vector3D<Real> >(mNumCtrlPoints - 3);
+        mDer3CtrlPoint = NEW1<Vector3<Real> >(mNumCtrlPoints - 3);
         for (i = 0; i < mNumCtrlPoints - 3; ++i)
         {
             mDer3CtrlPoint[i] = mDer2CtrlPoint[i + 1] - mDer2CtrlPoint[i];
@@ -107,14 +107,14 @@ int Mathematics::BezierCurve3<Real>
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::BezierCurve3<Real>
+const Mathematics::Vector3<Real>* Mathematics::BezierCurve3<Real>
 	::GetControlPoints () const noexcept
 {
     return mCtrlPoint;
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
 	::GetPosition (Real t) const
 {
 	auto oneMinusT = Math::GetValue(1) - t;
@@ -134,7 +134,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
 	::GetFirstDerivative (Real t) const
 {
 	auto oneMinusT = Math::GetValue(1) - t;
@@ -156,7 +156,7 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
 	::GetSecondDerivative (Real t) const
 {
 	auto oneMinusT = Math::GetValue(1) - t;
@@ -180,12 +180,12 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
+Mathematics::Vector3<Real> Mathematics::BezierCurve3<Real>
 	::GetThirdDerivative (Real t) const
 {
     if (mDegree < 3)
     {
-        return Vector3D<Real>::GetZero();
+        return Vector3<Real>::GetZero();
     }
 
 	auto oneMinusT = Math::GetValue(1) - t;
@@ -210,6 +210,6 @@ Mathematics::Vector3D<Real> Mathematics::BezierCurve3<Real>
 }
 #include STSTEM_WARNING_POP
 
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
+#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BEZIER_CURVE3_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BEZIER_CURVE2_DETAIL_H

@@ -1,65 +1,83 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 21:42)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_SPHERE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_SPHERE3_DETAIL_H
 
 #include "StaticTestIntersectorRay3Sphere3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorRay3Sphere3<Real>::StaticTestIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere, const Real epsilon)
-    : m_Ray{ ray }, m_Sphere{ sphere }
+    : ParentType{ epsilon }, ray{ ray }, sphere{ sphere }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorRay3Sphere3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>::GetRay() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ray;
 }
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>
-	::GetRay() const
+Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>::GetSphere() const noexcept
 {
-    return m_Ray;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return sphere;
 }
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorRay3Sphere3<Real>
-	::GetSphere() const
+void Mathematics::StaticTestIntersectorRay3Sphere3<Real>::Test()
 {
-    return m_Sphere;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorRay3Sphere3<Real>
-	::Test()
-{
-    auto diff = m_Ray.GetOrigin() - m_Sphere.GetCenter();
-	auto a0 = Vector3DTools::DotProduct(diff,diff) - m_Sphere.GetRadius()*m_Sphere.GetRadius();
-    if (a0 <= Math<Real>::GetValue(0))
+    const auto diff = ray.GetOrigin() - sphere.GetCenter();
+    const auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
+    if (a0 <= Math ::GetValue(0))
     {
-        // P is inside the sphere
-		this->SetIntersectionType(IntersectionType::Other);
+        this->SetIntersectionType(IntersectionType::Other);
         return;
     }
-    // else: P is outside the sphere
 
-	auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(),diff);
-    if (a1 >= Math<Real>::GetValue(0))
+    const auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
+    if (Math ::GetValue(0) <= a1)
     {
-		this->SetIntersectionType(IntersectionType::Empty);
+        this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    // Quadratic has a real root if discriminant is nonnegative.
-	if (a1*a1 >= a0)
-	{
-		this->SetIntersectionType(IntersectionType::Other);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
+    if (a0 <= a1 * a1)
+    {
+        this->SetIntersectionType(IntersectionType::Other);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_SPHERE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_SPHERE3_DETAIL_H

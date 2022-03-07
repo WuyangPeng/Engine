@@ -15,7 +15,11 @@ using std::make_shared;
 using std::string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockInetAddressTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Network::BoostSockInetAddressTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AddressTest);
@@ -109,5 +113,5 @@ void Network::BoostSockInetAddressTesting ::WinSocketAddressExceptionTest()
 {
     TestingType sockAddress{ GetHostName(), GetPort(), GetBoostServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress.GetWinSockInetAddress();
 }

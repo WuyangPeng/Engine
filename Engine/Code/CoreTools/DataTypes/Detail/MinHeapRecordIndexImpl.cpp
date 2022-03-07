@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 11:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 15:00)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,18 +18,24 @@ using std::swap;
 using std::vector;
 
 CoreTools::MinHeapRecordIndexImpl::MinHeapRecordIndexImpl(int maxElements)
-    : m_RecordIndexs{}
+    : recordIndexs{ CreateDefaultRecordIndex(maxElements) }
 {
-    for (auto index = 0; index < maxElements; ++index)
-    {
-        m_RecordIndexs.emplace_back(index);
-    }
-
     CORE_TOOLS_SELF_CLASS_IS_VALID_8;
 }
 
+CoreTools::MinHeapRecordIndexImpl::RecordIndex CoreTools::MinHeapRecordIndexImpl::CreateDefaultRecordIndex(int maxElements)
+{
+    RecordIndex recordIndexs{};
+    recordIndexs.reserve(maxElements);
+    for (auto index = 0; index < maxElements; ++index)
+    {
+        recordIndexs.emplace_back(index);
+    }
+    return recordIndexs;
+}
+
 CoreTools::MinHeapRecordIndexImpl::MinHeapRecordIndexImpl(int newMaxElements, const MinHeapRecordIndexImpl& oldIndex)
-    : m_RecordIndexs{ oldIndex.m_RecordIndexs }
+    : recordIndexs{ oldIndex.recordIndexs }
 {
     GrowBy(newMaxElements);
 
@@ -39,7 +45,7 @@ CoreTools::MinHeapRecordIndexImpl::MinHeapRecordIndexImpl(int newMaxElements, co
 #ifdef OPEN_CLASS_INVARIANT
 bool CoreTools::MinHeapRecordIndexImpl::IsValid() const noexcept
 {
-    if (!m_RecordIndexs.empty() && IndexIsValid())
+    if (!recordIndexs.empty() && IndexIsValid())
     {
         return true;
     }
@@ -55,10 +61,10 @@ bool CoreTools::MinHeapRecordIndexImpl::IndexIsValid() const noexcept
 {
     try
     {
-        vector<int> indexVector(m_RecordIndexs.size(), -1);
+        vector<int> indexVector(recordIndexs.size(), -1);
 
         auto index = 0;
-        for (auto value : m_RecordIndexs)
+        for (auto value : recordIndexs)
         {
             auto& record = indexVector.at(value);
             if (record != -1)
@@ -81,8 +87,8 @@ void CoreTools::MinHeapRecordIndexImpl::PrintIndexInLog() const noexcept
     LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
         << SYSTEM_TEXT("索引信息\n");
 
-    int index = 0;
-    for (auto value : m_RecordIndexs)
+    auto index = 0;
+    for (auto value : recordIndexs)
     {
         LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
             << index
@@ -99,29 +105,29 @@ int CoreTools::MinHeapRecordIndexImpl::GetMaxElements() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return boost::numeric_cast<int>(m_RecordIndexs.size());
+    return boost::numeric_cast<int>(recordIndexs.size());
 }
 
 int CoreTools::MinHeapRecordIndexImpl::GetHeapIndex(int uniqueIndex) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_8;
 
-    return m_RecordIndexs.at(uniqueIndex);
+    return recordIndexs.at(uniqueIndex);
 }
 
 void CoreTools::MinHeapRecordIndexImpl::ChangeIndex(int lhsIndex, int rhsIndex)
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    swap(m_RecordIndexs.at(lhsIndex), m_RecordIndexs.at(rhsIndex));
+    swap(recordIndexs.at(lhsIndex), recordIndexs.at(rhsIndex));
 }
 
 void CoreTools::MinHeapRecordIndexImpl::GrowBy(int newMaxElements)
 {
     CORE_TOOLS_CLASS_IS_VALID_8;
 
-    for (auto index = boost::numeric_cast<int>(m_RecordIndexs.size()); index < newMaxElements; ++index)
+    for (auto index = boost::numeric_cast<int>(recordIndexs.size()); index < newMaxElements; ++index)
     {
-        m_RecordIndexs.emplace_back(index);
+        recordIndexs.emplace_back(index);
     }
 }

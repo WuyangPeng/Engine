@@ -20,7 +20,7 @@ namespace Mathematics
 		void MainTest();	
 		void Arcs2Test();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,3 +1,7 @@
 TODO Level 3
 
-0.6.0.0
+0.8.0.2
+
+1.  （Algebra）Matrix类实现一个迭代器遍历数据。  
+2.  （Algebra）增加一个使用行矩阵或列矩阵的用户宏。 
+3.  （Algebra）增加一个template <int32_t NumRows, int32_t NumCols, typename Real> class Matrix。 

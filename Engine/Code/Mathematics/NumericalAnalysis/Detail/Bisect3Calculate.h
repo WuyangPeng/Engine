@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/20 16:14)
+///	引擎版本：0.8.0.2 (2022/02/14 13:49)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_H
@@ -33,18 +33,27 @@ namespace Mathematics
         using Bisect3 = Bisect3<Real>;
 
     public:
-        Bisect3Calculate(const Bisect3& bisect, Real beginPointX, Real beginPointY, Real beginPointZ,
-                         Real endPointX, Real endPointY, Real endPointZ);
+        Bisect3Calculate(const Bisect3& bisect,
+                         Real beginPointX,
+                         Real beginPointY,
+                         Real beginPointZ,
+                         Real endPointX,
+                         Real endPointY,
+                         Real endPointZ);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Bisect3Root GetRoot() const noexcept;
+        NODISCARD Bisect3Root GetRoot() const noexcept;
 
     private:
-        void Calculate(Real beginPointX, Real beginPointY, Real beginPointZ,
-                       Real endPointX, Real endPointY, Real endPointZ);
+        void Calculate(Real beginPointX,
+                       Real beginPointY,
+                       Real beginPointZ,
+                       Real endPointX,
+                       Real endPointY,
+                       Real endPointZ);
 
-        [[nodiscard]] bool BisectRecurse(const Bisect3NodeSharedPtr& node);
+        NODISCARD bool BisectRecurse(const Bisect3NodeSharedPtr& node);
 
         void BuildLeftLowerInside(const Bisect3NodeSharedPtr& node);
         void BuildRightLowerInside(const Bisect3NodeSharedPtr& node);
@@ -56,19 +65,16 @@ namespace Mathematics
         void BuildRightUpperOutside(const Bisect3NodeSharedPtr& node);
 
     private:
-        const Bisect3& m_Bisect3;
-        int m_Level;
-        Bisect3RootSharedPtr m_Bisect3Root;
+        const Bisect3& bisect3;
+        int level;
+        Bisect3RootSharedPtr bisect3Root;
 
         // 固定存储,以避免在递归堆栈损耗。
-        Bisect3Storage m_Bisect3Storage;
+        Bisect3Storage bisect3Storage;
 
         // 图，由递归程序来构建。
-        Bisect3NodeSharedPtr m_Graph;
+        Bisect3NodeSharedPtr graph;
     };
-
-    using FloatBisect3Calculate = Bisect3Calculate<float>;
-    using DoubleBisect3Calculate = Bisect3Calculate<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_CALCULATE_H

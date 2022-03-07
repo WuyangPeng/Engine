@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 16:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 19:20)
 
 #ifndef NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_THREAD_H
 #define NETWORK_BOOST_WRAPPERS_EXECUTOR_WORK_GUARD_CONTEXT_THREAD_H
@@ -13,6 +13,7 @@
 #include "Network/NetworkDll.h"
 
 #include "ExecutorWorkGuardContext.h"
+#include "CoreTools/Contract/ContractFwd.h"
 
 #include <thread>
 
@@ -24,7 +25,7 @@ namespace Network
         using ClassType = ExecutorWorkGuardContextThread;
 
     public:
-        ExecutorWorkGuardContextThread();
+        explicit ExecutorWorkGuardContextThread(CoreTools::DisableNotThrow disableNotThrow);
         ~ExecutorWorkGuardContextThread() noexcept;
         ExecutorWorkGuardContextThread(const ExecutorWorkGuardContextThread&) = delete;
         ExecutorWorkGuardContextThread& operator=(const ExecutorWorkGuardContextThread&) = delete;
@@ -34,22 +35,22 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] IOContextType& GetIOContext() noexcept;
+        NODISCARD IOContextType& GetIOContext() noexcept;
         void StopContext();
-        [[nodiscard]] bool IsContextStop() const;
+        NODISCARD bool IsContextStop() const;
         void RestartContext();
 
     private:
         using ThreadType = std::thread;
-        using ThreadTypePtr = std::unique_ptr<ThreadType>;
+        using ThreadTypeUniquePtr = std::unique_ptr<ThreadType>;
 
     private:
         void InitThread();
         void JoinThreads();
 
     private:
-        ExecutorWorkGuardContext m_ExecutorWorkGuardContext;
-        ThreadTypePtr m_Thread;
+        ExecutorWorkGuardContext executorWorkGuardContext;
+        ThreadTypeUniquePtr thread;
     };
 }
 

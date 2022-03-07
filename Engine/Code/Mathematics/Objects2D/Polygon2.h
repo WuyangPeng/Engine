@@ -1,86 +1,71 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/13 14:09)
+///	引擎版本：0.8.0.2 (2022/02/10 11:00)
 
 #ifndef MATHEMATICS_OBJECTS2D_POLYGON2_H
 #define MATHEMATICS_OBJECTS2D_POLYGON2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector2DTools.h"
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 
 #include <type_traits>
 
 namespace Mathematics
 {
     template <typename Real>
-    class Polygon2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polygon2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polygon2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Polygon2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polygon2
+    class Polygon2
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using Polygon2Impl = Polygon2Impl<Real>;
-
-    protected:
-        virtual void Swap(Polygon2& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(Polygon2);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        virtual ~Polygon2() noexcept = default;
-        Polygon2(const Polygon2& rhs);
-        virtual Polygon2& operator=(const Polygon2& rhs);
-        Polygon2(Polygon2&& rhs) noexcept;
-        virtual Polygon2& operator=(Polygon2&& rhs) noexcept;
+        using ClassType = Polygon2;
 
         using Math = Math<Real>;
-        using Vector2D = Vector2D<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
-        using VerticesType = std::vector<Vector2D>;
+        using Vector2 = Vector2<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
+        using VerticesType = std::vector<Vector2>;
 
     public:
         // 调用方负责确保顶点数组逆时针，代表一个简单的多边形。
         explicit Polygon2(const VerticesType& vertices);
 
+        virtual ~Polygon2() noexcept = default;
+        Polygon2(const Polygon2& rhs) = default;
+        Polygon2& operator=(const Polygon2& rhs) = default;
+        Polygon2(Polygon2&& rhs) noexcept = default;
+        Polygon2& operator=(Polygon2&& rhs) noexcept = default;
+
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
         // 只读成员访问。
-        [[nodiscard]] int GetNumVertices() const;
-        [[nodiscard]] const VerticesType& GetVertices() const noexcept;
-        [[nodiscard]] const Vector2D& GetVertex(int index) const;
+        NODISCARD int GetNumVertices() const;
+        NODISCARD const VerticesType& GetVertices() const noexcept;
+        NODISCARD const Vector2& GetVertex(int index) const;
 
         // 允许顶点修改。调用者必须确保多边形仍然是简单多边形。
-        virtual void SetVertex(int index, const Vector2D& vertex);
+        virtual void SetVertex(int index, const Vector2& vertex);
 
         // 计算关于所述多边形的各种信息。
-        [[nodiscard]] const Vector2D ComputeVertexAverage() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        [[nodiscard]] Real ComputePerimeterLength() const;
-        [[nodiscard]] Real ComputeArea() const;
+        NODISCARD Vector2 ComputeVertexAverage() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Real ComputePerimeterLength() const;
+        NODISCARD Real ComputeArea() const;
 
     private:
-        using Polygon2ImplPtr = std::shared_ptr<ImplType>;
+        static constexpr auto minSize = 4;
 
     private:
-        Polygon2ImplPtr impl;
+        VerticesType vertices;
     };
 
-    using FloatPolygon2 = Polygon2<float>;
-    using DoublePolygon2 = Polygon2<double>;
+    using Polygon2F = Polygon2<float>;
+    using Polygon2D = Polygon2<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_POLYGON2_H

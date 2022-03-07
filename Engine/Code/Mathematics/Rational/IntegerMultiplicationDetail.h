@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:25)
+///	引擎版本：0.8.0.2 (2022/02/11 15:55)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H
@@ -20,14 +20,14 @@
 
 template <int N>
 Mathematics::IntegerMultiplication<N>::IntegerMultiplication(const IntegerData& lhs, const IntegerData& rhs)
-    : m_LhsData{ lhs },
-      m_RhsData{ rhs },
-      m_ProductSign{ (m_LhsData.GetSign() == m_RhsData.GetSign() ? NumericalValueSymbol::Positive : NumericalValueSymbol::Negative) },
-      m_AbsLhsData{ IntegerDataAnalysis{ m_LhsData }.GetAbsoluteValue() },
-      m_AbsRhsData{ IntegerDataAnalysis{ m_RhsData }.GetAbsoluteValue() },
-      m_Product(2 * sm_IntSize),
-      m_Result(2 * sm_IntSize),
-      m_Multiplication{}
+    : lhsData{ lhs },
+      rhsData{ rhs },
+      productSign{ (lhsData.GetSign() == rhsData.GetSign() ? NumericalValueSymbol::Positive : NumericalValueSymbol::Negative) },
+      absLhsData{ IntegerDataAnalysis{ lhsData }.GetAbsoluteValue() },
+      absRhsData{ IntegerDataAnalysis{ rhsData }.GetAbsoluteValue() },
+      product(2 * intSize),
+      result(2 * intSize),
+      multiplication{}
 {
     Calculate();
 
@@ -47,14 +47,14 @@ void Mathematics::IntegerMultiplication<N>::Calculate()
 template <int N>
 void Mathematics::IntegerMultiplication<N>::Product()
 {
-    for (auto lhsIndex = 0; lhsIndex < sm_IntSize; ++lhsIndex)
+    for (auto lhsIndex = 0; lhsIndex < intSize; ++lhsIndex)
     {
-        const auto lhsBit = m_AbsLhsData[lhsIndex];
+        const auto lhsBit = absLhsData[lhsIndex];
         if (0 < lhsBit)
         {
             CalculateProduct(lhsBit, lhsIndex);
             const auto carry = CalculateResult(lhsIndex);
-            DetermineCarry(carry, lhsIndex + sm_IntSize + 1);
+            DetermineCarry(carry, lhsIndex + intSize + 1);
         }
     }
 }
@@ -67,23 +67,27 @@ void Mathematics::IntegerMultiplication<N>::CalculateProduct(uint32_t lhsBit, ui
     // 结果保存在product中。
     auto productBufferIndex = lhsIndex;
     auto carry = 0;
-    for (auto rhsIndex = 0; rhsIndex < sm_IntSize; ++rhsIndex)
+    for (auto rhsIndex = 0; rhsIndex < intSize; ++rhsIndex)
     {
-        const auto rhsBit = m_AbsRhsData[rhsIndex];
+        const auto rhsBit = absRhsData[rhsIndex];
         const auto productBit = lhsBit * rhsBit + carry;
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-        m_Product[productBufferIndex] = boost::numeric_cast<uint16_t>(productBit & sm_Low);
+
+        product[productBufferIndex] = boost::numeric_cast<uint16_t>(productBit & low);
+
 #include STSTEM_WARNING_POP
 
-        carry = (productBit & sm_High) >> 16;
+        carry = (productBit & high) >> 16;
         ++productBufferIndex;
     }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    m_Product[productBufferIndex] = boost::numeric_cast<uint16_t>(carry);
+
+    product[productBufferIndex] = boost::numeric_cast<uint16_t>(carry);
+
 #include STSTEM_WARNING_POP
 }
 
@@ -96,17 +100,19 @@ uint32_t Mathematics::IntegerMultiplication<N>::CalculateResult(uint32_t lhsInde
     // 确保result的初始值已清零。
     auto bufferIndex = lhsIndex;
     auto carry = 0u;
-    for (auto rhsIndex = 0u; rhsIndex <= sm_IntSize; ++rhsIndex)
+    for (auto rhsIndex = 0u; rhsIndex <= intSize; ++rhsIndex)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-        auto originalProduct = boost::numeric_cast<uint32_t>(m_Product[bufferIndex]);
-        auto originalResult = boost::numeric_cast<uint32_t>(m_Result[bufferIndex]);
+
+        auto originalProduct = boost::numeric_cast<uint32_t>(product[bufferIndex]);
+        auto originalResult = boost::numeric_cast<uint32_t>(result[bufferIndex]);
         auto sum = originalProduct + originalResult + carry;
-        m_Result[bufferIndex] = boost::numeric_cast<uint16_t>(sum & sm_Low);
+        result[bufferIndex] = boost::numeric_cast<uint16_t>(sum & low);
+
 #include STSTEM_WARNING_POP
 
-        carry = (sum & sm_Carry) ? 1 : 0;
+        carry = (sum & integerCarry) ? 1 : 0;
 
         ++bufferIndex;
     }
@@ -119,16 +125,18 @@ template <int N>
 void Mathematics::IntegerMultiplication<N>::DetermineCarry(uint32_t carry, uint32_t resultBufferIndex)
 {
     // 判断是否要进位，下面条件如果成立，则表示计算已溢出。
-    for (auto rhsIndex = resultBufferIndex; 0 < carry && rhsIndex < m_Result.size(); ++rhsIndex)
+    for (auto rhsIndex = resultBufferIndex; 0 < carry && rhsIndex < result.size(); ++rhsIndex)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-        auto originalResult = boost::numeric_cast<uint32_t>(m_Result[rhsIndex]);
+
+        auto originalResult = boost::numeric_cast<uint32_t>(result[rhsIndex]);
         auto sum = originalResult + carry;
-        m_Result[rhsIndex] = boost::numeric_cast<uint16_t>(sum & sm_Low);
+        result[rhsIndex] = boost::numeric_cast<uint16_t>(sum & low);
+
 #include STSTEM_WARNING_POP
 
-        carry = (sum & sm_Carry) ? 1 : 0;
+        carry = (sum & integerCarry) ? 1 : 0;
     }
 }
 
@@ -142,48 +150,52 @@ void Mathematics::IntegerMultiplication<N>::OverflowTest()
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    for (auto i = 2 * sm_IntSize - 1; sm_IntSize <= i; --i)
+
+    for (auto i = 2 * intSize - 1; intSize <= i; --i)
     {
-        if (m_Result[i] != 0)
+        if (result[i] != 0)
         {
             THROW_EXCEPTION((CoreTools::Error::Format(SYSTEM_TEXT("Integer溢出在i = %1\n")) % i).str());
         }
     }
 
-    if ((m_Result[sm_IntLast] & sm_Symbol) != 0)
+    if ((result[intLast] & symbol) != 0)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("Integer溢出\n"s));
     }
+
 #include STSTEM_WARNING_POP
 
-    m_Multiplication = IntegerData{ m_Result };
+    multiplication = IntegerData{ result };
 }
 
 // private
 template <int N>
 void Mathematics::IntegerMultiplication<N>::Negative()
 {
-    if (m_ProductSign == NumericalValueSymbol::Negative)
+    if (productSign == NumericalValueSymbol::Negative)
     {
-        IntegerDataAmend<N> integerDataAmend{ m_Multiplication };
+        IntegerDataAmend<N> integerDataAmend{ multiplication };
         integerDataAmend.Negative();
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N>
 bool Mathematics::IntegerMultiplication<N>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-const Mathematics::IntegerData<N> Mathematics::IntegerMultiplication<N>::GetMultiplication() const noexcept
+Mathematics::IntegerData<N> Mathematics::IntegerMultiplication<N>::GetMultiplication() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Multiplication;
+    return multiplication;
 }
 
 #endif  // MATHEMATICS_RATIONAL_INTEGER_MULTIPLICATION_DETAIL_H

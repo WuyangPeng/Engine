@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 21:43)
 
-// 日志消息类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_H
 
@@ -15,9 +14,10 @@
 
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/FunctionDescribed.h"
+#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/LogManager/LogManagerFwd.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 #include <string>
 
 CORE_TOOLS_PERFORMANCE_UNSHARED_EXPORT_IMPL(LogMessageImpl);
@@ -35,11 +35,11 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] String GetMessageDescribe() const;
-        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
-        [[nodiscard]] LogFilter GetLogFilterType() const noexcept;
-        [[nodiscard]] int GetMessageSize() const;
-        [[nodiscard]] FunctionDescribed GetFunctionDescribed() const noexcept;
+        NODISCARD String GetMessageDescribe() const;
+        NODISCARD LogLevel GetLogLevel() const noexcept;
+        NODISCARD LogFilter GetLogFilterType() const noexcept;
+        NODISCARD int GetMessageSize() const;
+        NODISCARD FunctionDescribed GetFunctionDescribed() const noexcept;
 
     private:
         PackageType impl;

@@ -12,19 +12,19 @@
 namespace Mathematics
 {
 	template <typename Real>
-	HmQuadToSqr<Real>::HmQuadToSqr(const Vector2D<Real>& P00,const Vector2D<Real>& P10, const Vector2D<Real>& P11,const Vector2D<Real>& P01)
+	HmQuadToSqr<Real>::HmQuadToSqr(const Vector2<Real>& P00,const Vector2<Real>& P10, const Vector2<Real>& P11,const Vector2<Real>& P01)
 	{
 		// Translate to origin.
 		mT = P00;
-		Vector2D<Real> Q10 = P10 - P00;
-		Vector2D<Real> Q11 = P11 - P00;
-		Vector2D<Real> Q01 = P01 - P00;
+		Vector2<Real> Q10 = P10 - P00;
+		Vector2<Real> Q11 = P11 - P00;
+		Vector2<Real> Q01 = P01 - P00;
 
 		Matrix2<Real> invM(Q10.GetX(), Q01.GetX(), Q10.GetY(), Q01.GetY());
 		mM = invM.Inverse();
 
 		// Compute where p11 is mapped to.
-		Vector2D<Real> corner = mM * Q11;  // = (a,b)
+		Vector2<Real> corner = mM * Q11;  // = (a,b)
 
 		// Compute homogeneous transform of quadrilateral
 		// {(0,0),(1,0),(a,b),(0,1)} to square {(0,0),(1,0),(1,1),(0,1)}.
@@ -35,18 +35,18 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	Vector2D<Real> HmQuadToSqr<Real>::Transform(const Vector2D<Real>& P)
+	Vector2<Real> HmQuadToSqr<Real>::Transform(const Vector2<Real>& P)
 	{
-		Vector2D<Real> prod = mM * (P - mT);
-		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2DTools<Real>::DotProduct(mG, prod));
-		Vector2D<Real> result = invDenom * prod;
+		Vector2<Real> prod = mM * (P - mT);
+		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2Tools<Real>::DotProduct(mG, prod));
+		Vector2<Real> result = invDenom * prod;
 		result[0] *= mD[0];
 		result[1] *= mD[1];
 		return result;
 	}
 
 	template <typename Real>
-	HmSqrToQuad<Real>::HmSqrToQuad(const Vector2D<Real>& P00,const Vector2D<Real>& P10, const Vector2D<Real>& P11,const Vector2D<Real>& P01)
+	HmSqrToQuad<Real>::HmSqrToQuad(const Vector2<Real>& P00,const Vector2<Real>& P10, const Vector2<Real>& P11,const Vector2<Real>& P01)
 	{
 		// Translate to origin.
 		mT = P00;
@@ -58,7 +58,7 @@ namespace Mathematics
 		Matrix2<Real> invM = mM.Inverse();
 
 		// Find point which is mapped to p11.
-		Vector2D<Real> corner = invM * (P11 - P00);  // = (a,b)
+		Vector2<Real> corner = invM * (P11 - P00);  // = (a,b)
 
 		// Compute homogeneous transform of square {(0,0),(1,0),(1,1),(0,1)} to
 		// quadrilateral {(0,0),(1,0),(a,b),(0,1)}.
@@ -70,34 +70,34 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	Vector2D<Real> HmSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
+	Vector2<Real> HmSqrToQuad<Real>::Transform(const Vector2<Real>& P)
 	{
-		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2DTools<Real>::DotProduct(mG, P));
-		Vector2D<Real> result(mD.GetX()*P.GetX(), mD.GetY()*P.GetY());
-		Vector2D<Real> prod = mM * result;
+		Real invDenom = (Math::GetValue(1)) / (Math::GetValue(1) + Vector2Tools<Real>::DotProduct(mG, P));
+		Vector2<Real> result(mD.GetX()*P.GetX(), mD.GetY()*P.GetY());
+		Vector2<Real> prod = mM * result;
 		result[0] = invDenom * prod.GetX() + mT.GetX();
 		result[1] = invDenom * prod.GetY() + mT.GetY();
 		return result;
 	}
 
 	template <typename Real>
-	BiQuadToSqr<Real>::BiQuadToSqr(const Vector2D<Real>& P00,const Vector2D<Real>& P10, const Vector2D<Real>& P11,const Vector2D<Real>& P01)
+	BiQuadToSqr<Real>::BiQuadToSqr(const Vector2<Real>& P00,const Vector2<Real>& P10, const Vector2<Real>& P11,const Vector2<Real>& P01)
 		:mP00(P00)
 	{
 		mB = P10 - P00;
 		mC = P01 - P00;
 		mD = P11 + P00 - P10 - P01;
-		mBC = Vector2DTools<Real>::DotPerp(mB, mC);
-		mBD = Vector2DTools<Real>::DotPerp(mB, mD);
-		mCD = Vector2DTools<Real>::DotPerp(mC, mD);
+		mBC = Vector2Tools<Real>::DotPerp(mB, mC);
+		mBD = Vector2Tools<Real>::DotPerp(mB, mD);
+		mCD = Vector2Tools<Real>::DotPerp(mC, mD);
 	}
 
 	template <typename Real>
-	Vector2D<Real> BiQuadToSqr<Real>::Transform(const Vector2D<Real>& P)
+	Vector2<Real> BiQuadToSqr<Real>::Transform(const Vector2<Real>& P)
 	{
-		Vector2D<Real> A = mP00 - P;
-		Real AB = Vector2DTools<Real>::DotPerp(A, mB);
-		Real AC = Vector2DTools<Real>::DotPerp(A, mC);
+		Vector2<Real> A = mP00 - P;
+		Real AB = Vector2Tools<Real>::DotPerp(A, mB);
+		Real AC = Vector2Tools<Real>::DotPerp(A, mC);
 
 		// 0 = ac*bc+(bc^2+ac*bd-ab*cd)*s+bc*bd*s^2 = k0 + k1*s + k2*s^2
 		Real k0 = AC * mBC;
@@ -111,7 +111,7 @@ namespace Mathematics
 			Real discr = k1 * k1 - ((Real)4)*k0*k2;
 			Real root = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
-			Vector2D<Real> result0;
+			Vector2<Real> result0;
 			result0[0] = (-k1 - root)*inv;
 			result0[1] = AB / (mBC + mBD * result0[0]);
 			Real deviation0 = Deviation(result0);
@@ -120,7 +120,7 @@ namespace Mathematics
 				return result0;
 			}
 
-			Vector2D<Real> result1;
+			Vector2<Real> result1;
 			result1[0] = (-k1 + root)*inv;
 			result1[1] = AB / (mBC + mBD * result1.GetX());
 			Real deviation1 = Deviation(result1);
@@ -147,7 +147,7 @@ namespace Mathematics
 		else
 		{
 			// The s-equation is linear.
-			Vector2D<Real> result;
+			Vector2<Real> result;
 
 			result[0] = -k0 / k1;
 			result[1] = AB / (mBC + mBD * result.GetX());
@@ -159,11 +159,11 @@ namespace Mathematics
 		}
 
 		// Point is outside the quadrilateral, return invalid.
-		return Vector2D<Real>(Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal);
+		return Vector2<Real>(Math<Real>::maxReal, Math<Real>::maxReal);
 	}
 
 	template <typename Real>
-	Real BiQuadToSqr<Real>::Deviation(const Vector2D<Real>& SPoint)
+	Real BiQuadToSqr<Real>::Deviation(const Vector2<Real>& SPoint)
 	{
 		// Deviation is the squared distance of the point from the unit square.
 		Real deviation = Math<Real>::GetValue(0);
@@ -193,7 +193,7 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	BiSqrToQuad<Real>::BiSqrToQuad(const Vector2D<Real>& P00,const Vector2D<Real>& P10, const Vector2D<Real>& P11,const Vector2D<Real>& P01)
+	BiSqrToQuad<Real>::BiSqrToQuad(const Vector2<Real>& P00,const Vector2<Real>& P10, const Vector2<Real>& P11,const Vector2<Real>& P01)
 	{
 		mS00 = P00;
 		mS10 = P10;
@@ -202,10 +202,10 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	Vector2D<Real> BiSqrToQuad<Real>::Transform(const Vector2D<Real>& P)
+	Vector2<Real> BiSqrToQuad<Real>::Transform(const Vector2<Real>& P)
 	{
-		Vector2D<Real> oneMinusP(Math::GetValue(1) - P.GetX(), Math::GetValue(1) - P.GetY());
-		Vector2D<Real> result;
+		Vector2<Real> oneMinusP(Math::GetValue(1) - P.GetX(), Math::GetValue(1) - P.GetY());
+		Vector2<Real> result;
 		result[0] = oneMinusP.GetY()*(oneMinusP.GetX()*mS00.GetX() + P.GetX()*mS10.GetX()) +
 					P.GetY()*(oneMinusP.GetX()*mS01.GetX() + P.GetX()*mS11.GetX());
 		result[1] = oneMinusP.GetY()*(oneMinusP.GetX()*mS00.GetY() + P.GetX()*mS10.GetY()) +

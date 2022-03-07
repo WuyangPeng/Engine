@@ -6,7 +6,7 @@
 
 #include "Segment3Testing.h"
 #include "Mathematics/Objects3D/Segment3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -22,7 +22,12 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Segment3Testing) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Segment3Testing
 	::MainTest()
 {
@@ -40,29 +45,29 @@ void Mathematics::Segment3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D firstPoint(firstRandomDistribution(generator),
+		Vector3D firstPoint(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		DoubleVector3D secondPoint(firstRandomDistribution(generator),
+		Vector3D secondPoint(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		DoubleSegment3 firstSegment(firstPoint,secondPoint);
+		Segment3D firstSegment(firstPoint,secondPoint);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(firstPoint,  firstSegment.GetBeginPoint()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondPoint, firstSegment.GetEndPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint,  firstSegment.GetBeginPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint, firstSegment.GetEndPoint()));
 		
-		DoubleVector3D center = firstSegment.GetCenterPoint();
-		DoubleVector3D direction = firstSegment.GetDirection();
+		Vector3D center = firstSegment.GetCenterPoint();
+		Vector3D direction = firstSegment.GetDirection();
 		double extent = firstSegment.GetExtent();
 
-		DoubleSegment3 secondSegment(extent,center,direction);
+		Segment3D secondSegment(extent,center,direction);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(firstPoint,secondSegment.GetBeginPoint()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondPoint,secondSegment.GetEndPoint()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(center,secondSegment.GetCenterPoint()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(direction,secondSegment.GetDirection()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(firstPoint,secondSegment.GetBeginPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondPoint,secondSegment.GetEndPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(center,secondSegment.GetCenterPoint()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(direction,secondSegment.GetDirection()));
 		ASSERT_APPROXIMATE(extent,secondSegment.GetExtent(),1e-10);
 
 	}

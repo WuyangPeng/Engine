@@ -14,7 +14,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE SingleCurve2 : public Curve2<Real>
+    class  SingleCurve2 : public Curve2<Real>
     {
     public:
         using Math = Math<Real>;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 14:25)
+///	引擎版本：0.8.0.2 (2022/02/10 15:31)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSOID3_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSOID3_H
@@ -13,37 +13,24 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Ellipsoid3Coefficients.h"
-#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
+
 #include <type_traits>
 
 namespace Mathematics
 {
     template <typename Real>
-    class Ellipsoid3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipsoid3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipsoid3 final
+    class Ellipsoid3 final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using Ellipsoid3Impl = Ellipsoid3Impl<Real>;
-        TYPE_DECLARE(Ellipsoid3);
-        using PackageType = CoreTools::DelayCopyUnsharedImpl<ClassType, ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-
+        using ClassType = Ellipsoid3<Real>;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Matrix3 = Matrix3<Real>;
         using Ellipsoid3Coefficients = Ellipsoid3Coefficients<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
 
     public:
         // 椭圆体有中心K，轴方向U[0], U[1], 和 U[2]（所有单位长度向量），
@@ -65,56 +52,71 @@ namespace Mathematics
         // 其中X = (x[0],x[1],x[2])。这个等式可以被分解到(X-K)^T * M * (X - K) = 1，
         // 其中K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)。
         // 为椭圆体时，M必须具有所有特征值为正。
-        Ellipsoid3(const Vector3D& center, const Vector3D& axis0, const Vector3D& axis1, const Vector3D& axis2,
-                   const Real extent0, const Real extent1, const Real extent2, const Real epsilon = Math::GetZeroTolerance());
+        Ellipsoid3(const Vector3& center,
+                   const Vector3& axis0,
+                   const Vector3& axis1,
+                   const Vector3& axis2,
+                   const Real extent0,
+                   const Real extent1,
+                   const Real extent2,
+                   const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         explicit Ellipsoid3(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] const Vector3D GetAxis0() const noexcept;
-        [[nodiscard]] const Vector3D GetAxis1() const noexcept;
-        [[nodiscard]] const Vector3D GetAxis2() const noexcept;
-        [[nodiscard]] Real GetExtent0() const noexcept;
-        [[nodiscard]] Real GetExtent1() const noexcept;
-        [[nodiscard]] Real GetExtent2() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3 GetAxis0() const noexcept;
+        NODISCARD Vector3 GetAxis1() const noexcept;
+        NODISCARD Vector3 GetAxis2() const noexcept;
+        NODISCARD Real GetExtent0() const noexcept;
+        NODISCARD Real GetExtent1() const noexcept;
+        NODISCARD Real GetExtent2() const noexcept;
 
         // 计算 M = sum_{i = 0}^2 U[i] * U[i]^T/e[i]^2.
-        [[nodiscard]] const Matrix3 GetMatrix() const;
+        NODISCARD Matrix3 GetMatrix() const;
 
         // 计算 M^{-1} = sum_{i = 0}^2 U[i] * U[i]^T * e[i]^2.
-        [[nodiscard]] const Matrix3 GetMatrixInverse() const;
+        NODISCARD Matrix3 GetMatrixInverse() const;
 
         // 构建二次方程式，表示椭圆体的系数。
-        [[nodiscard]] const Ellipsoid3Coefficients ToCoefficients() const;
+        NODISCARD Ellipsoid3Coefficients ToCoefficients() const;
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆体，则抛出异常。
-        void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
+        void FromCoefficients(const Ellipsoid3Coefficients& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
-        [[nodiscard]] Real Evaluate(const Vector3D& point) const;
+        NODISCARD Real Evaluate(const Vector3& point) const;
 
         // 测试输入点是否在椭圆体内部或边上。
         // 该点被包含当Q(X) <= 0，其中Q(X)为函数Evaluate()。
-        [[nodiscard]] bool Contains(const Vector3D& point) const;
+        NODISCARD bool Contains(const Vector3& point) const;
 
-        [[nodiscard]] const Ellipsoid3 GetMove(Real t, const Vector3D& velocity) const;
+        NODISCARD Ellipsoid3 GetMove(Real t, const Vector3& velocity) const;
 
     private:
-        PackageType impl;
+        static constexpr auto axisSize = 3;
+        using AxisType = std::array<Vector3, axisSize>;
+        using ExtentType = std::array<Real, axisSize>;
+
+    private:
+        Vector3 center;
+        AxisType axis;
+        ExtentType extent;
+
+        Real epsilon;
     };
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Ellipsoid3<Real>& lhs, const Ellipsoid3<Real>& rhs, const Real epsilon);
+    NODISCARD bool Approximate(const Ellipsoid3<Real>& lhs, const Ellipsoid3<Real>& rhs, const Real epsilon);
 
     // 调试输出
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Ellipsoid3<Real>& ellipsoid);
 
-    using FloatEllipsoid3 = Ellipsoid3<float>;
-    using DoubleEllipsoid3 = Ellipsoid3<double>;
+    using Ellipsoid3F = Ellipsoid3<float>;
+    using Ellipsoid3D = Ellipsoid3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_ELLIPSOID3_H

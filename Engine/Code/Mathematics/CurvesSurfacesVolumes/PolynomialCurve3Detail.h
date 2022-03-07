@@ -67,27 +67,27 @@ const Polynomial<Real>* PolynomialCurve3<Real>::GetZPolynomial () const
 }
 
 template <typename Real>
-Vector3D<Real> PolynomialCurve3<Real>::GetPosition (Real t) const
+Vector3<Real> PolynomialCurve3<Real>::GetPosition (Real t) const
 {
-    return Vector3D<Real>((*mXPoly)(t), (*mYPoly)(t), (*mZPoly)(t));
+    return Vector3<Real>((*mXPoly)(t), (*mYPoly)(t), (*mZPoly)(t));
 }
 
 template <typename Real>
-Vector3D<Real> PolynomialCurve3<Real>::GetFirstDerivative (Real t) const
+Vector3<Real> PolynomialCurve3<Real>::GetFirstDerivative (Real t) const
 {
-    return Vector3D<Real>(mXDer1(t), mYDer1(t), mZDer1(t));
+    return Vector3<Real>(mXDer1(t), mYDer1(t), mZDer1(t));
 }
 
 template <typename Real>
-Vector3D<Real> PolynomialCurve3<Real>::GetSecondDerivative (Real t) const
+Vector3<Real> PolynomialCurve3<Real>::GetSecondDerivative (Real t) const
 {
-    return Vector3D<Real>(mXDer2(t), mYDer2(t), mZDer2(t));
+    return Vector3<Real>(mXDer2(t), mYDer2(t), mZDer2(t));
 }
 
 template <typename Real>
-Vector3D<Real> PolynomialCurve3<Real>::GetThirdDerivative (Real t) const
+Vector3<Real> PolynomialCurve3<Real>::GetThirdDerivative (Real t) const
 {
-    return Vector3D<Real>(mXDer3(t), mYDer3(t), mZDer3(t));
+    return Vector3<Real>(mXDer3(t), mYDer3(t), mZDer3(t));
 }
 
 }

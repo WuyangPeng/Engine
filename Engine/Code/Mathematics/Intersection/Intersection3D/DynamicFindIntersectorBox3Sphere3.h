@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/29 17:07)
+///	引擎版本：0.8.0.3 (2022/02/28 10:57)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H
@@ -19,63 +19,59 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorBox3Sphere3 : public DynamicIntersector<Real, Vector3D>
+    class DynamicFindIntersectorBox3Sphere3 : public DynamicIntersector<Real, Vector3>
     {
     public:
         using ClassType = DynamicFindIntersectorBox3Sphere3<Real>;
-        using ParentType = DynamicIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Sphere3 = Sphere3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
-        DynamicFindIntersectorBox3Sphere3(
-            const Box3& box,
-            const Sphere3& sphere,
-            Real tmax,
-            const Vector3D& lhsVelocity,
-            const Vector3D& rhsVelocity,
-            const Real epsilon = Math::GetZeroTolerance());
+        DynamicFindIntersectorBox3Sphere3(const Box3& box,
+                                          const Sphere3& sphere,
+                                          Real tmax,
+                                          const Vector3& lhsVelocity,
+                                          const Vector3& rhsVelocity,
+                                          const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Box3 GetBox() const noexcept;
-        [[nodiscard]] const Sphere3 GetSphere() const noexcept;
+        NODISCARD Box3 GetBox() const noexcept;
+        NODISCARD Sphere3 GetSphere() const noexcept;
 
         // 用于动态查找相交查询的相交集。
-        [[nodiscard]] const Vector3D GetContactPoint() const noexcept;
+        NODISCARD Vector3 GetContactPoint() const noexcept;
 
     private:
         void Find();
 
         // 动态查找功能的支持函数。
-        [[nodiscard]] static Real GetVertexIntersection(Real diffX, Real diffY, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetVertexIntersection(Real diffX, Real diffY, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        [[nodiscard]] static Real GetEdgeIntersection(Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotZ, Real velocitySqr, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real GetEdgeIntersection(Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotZ, Real velocitySqr, Real radiusSqr) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        [[nodiscard]] int FindFaceRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveFace) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindFaceRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveFace) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        [[nodiscard]] int FindJustEdgeIntersection(Real centerDiffDotY, Real extentX, Real extentY, Real extentZ, Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindJustEdgeIntersection(Real centerDiffDotY, Real extentX, Real extentY, Real extentZ, Real diffX, Real diffZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        [[nodiscard]] int FindEdgeRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveEdge) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindEdgeRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ, bool aboveEdge) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
-        [[nodiscard]] int FindVertexRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD int FindVertexRegionIntersection(Real extentX, Real extentY, Real extentZ, Real centerDiffDotX, Real centerDiffDotY, Real centerDiffDotZ, Real relativeVelocityDotX, Real relativeVelocityDotY, Real relativeVelocityDotZ) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
-        Box3 m_Box;
-        Sphere3 m_Sphere;
+        Box3 box;
+        Sphere3 sphere;
 
-        Vector3D m_ContactPoint;
+        Vector3 contactPoint;
 
-        Real m_X;
-        Real m_Y;
-        Real m_Z;
+        Real x;
+        Real y;
+        Real z;
     };
-
-    using FloatDynamicFindIntersectorBox3Sphere3 = DynamicFindIntersectorBox3Sphere3<float>;
-    using DoubleDynamicFindIntersectorBox3Sphere3 = DynamicFindIntersectorBox3Sphere3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_BOX3_SPHERE3_H

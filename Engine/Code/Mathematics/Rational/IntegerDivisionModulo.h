@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:19)
+///	引擎版本：0.8.0.2 (2022/02/11 15:32)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_H
@@ -28,13 +28,14 @@ namespace Mathematics
     public:
         IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo);
 
-#ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_DECLARE;
-        [[nodiscard]] bool IsCorrect() const;
+
+#ifdef OPEN_CLASS_INVARIANT
+        NODISCARD bool IsCorrect() const;
 #endif  // OPEN_CLASS_INVARIANT
 
-        [[nodiscard]] const IntegerData GetQuotient() const noexcept;
-        [[nodiscard]] const IntegerData GetRemainder() const noexcept;
+        NODISCARD IntegerData GetQuotient() const noexcept;
+        NODISCARD IntegerData GetRemainder() const noexcept;
 
     private:
         void Calculate();
@@ -43,16 +44,16 @@ namespace Mathematics
         void CalculateRemainder();
 
     private:
-        static constexpr auto sm_Low = 0x0000FFFFu;
-        static constexpr auto sm_High = 0xFFFF0000u;
-        static constexpr auto sm_Carry = 0x00010000u;
+        static constexpr auto low = 0x0000FFFFu;
+        static constexpr auto high = 0xFFFF0000u;
+        static constexpr auto carry = 0x00010000u;
 
-        IntegerData m_Numerator;
-        IntegerData m_Denominator;
-        IntegerData m_AbsNumerator;
-        IntegerData m_AbsDenominator;
-        IntegerData m_Quotient;
-        IntegerData m_Remainder;
+        IntegerData numerator;
+        IntegerData denominator;
+        IntegerData absNumerator;
+        IntegerData absDenominator;
+        IntegerData quotient;
+        IntegerData remainder;
     };
 }
 

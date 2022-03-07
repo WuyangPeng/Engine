@@ -20,7 +20,7 @@ namespace Mathematics
 		void MainTest();
 		void StreamSizeTest();
 
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

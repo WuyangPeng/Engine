@@ -17,6 +17,7 @@
 #include "MillisecondTimer.h"
 #include "Month.h"
 #include "SecondTimer.h"
+#include "Timer.h"
 #include "Year.h"
 
 #endif  // CORE_TOOLS_TIME_H

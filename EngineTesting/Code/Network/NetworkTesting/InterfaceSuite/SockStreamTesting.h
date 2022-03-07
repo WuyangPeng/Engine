@@ -68,7 +68,7 @@ namespace Network
 		void NullSetACEHandleExceptionTest();
 		void NullSetNetworkHandleExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

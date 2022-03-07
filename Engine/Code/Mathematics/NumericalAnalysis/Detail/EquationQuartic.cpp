@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:09)
+///	引擎版本：0.8.0.2 (2022/02/13 14:44)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -22,7 +22,7 @@ using std::complex;
 using std::vector;
 
 Mathematics::EquationQuartic::EquationQuartic(double constant, double once, double secondary, double thrice, double quartic, double epsilon)
-    : ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }, m_Secondary{ secondary }, m_Thrice{ thrice }, m_Quartic{ quartic }
+    : ParentType{ epsilon }, constant{ constant }, once{ once }, secondary{ secondary }, thrice{ thrice }, quartic{ quartic }
 {
     Calculate();
 
@@ -35,38 +35,38 @@ double Mathematics::EquationQuartic::Substitution(double value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Constant +
-           m_Once * value +
-           m_Secondary * DoubleMath::Square(value) +
-           m_Thrice * value * value * value +
-           m_Quartic * DoubleMath::Square(value) * DoubleMath::Square(value);
+    return constant +
+           once * value +
+           secondary * MathD::Square(value) +
+           thrice * value * value * value +
+           quartic * MathD::Square(value) * MathD::Square(value);
 }
 
-const Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::Substitution(const Imaginary& value) const
+Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::Substitution(const Imaginary& value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Constant +
-           m_Once * value +
-           m_Secondary * value * value +
-           m_Thrice * value * value * value +
-           m_Quartic * value * value * value * value;
+    return constant +
+           once * value +
+           secondary * value * value +
+           thrice * value * value * value +
+           quartic * value * value * value * value;
 }
 
 double Mathematics::EquationQuartic::SubstitutionTangent(double solution) const noexcept
 {
-    return m_Once +
-           solution * m_Secondary * 2.0 +
-           DoubleMath::Square(solution) * m_Thrice * 3.0 +
-           solution * solution * solution * m_Quartic * 4.0;
+    return once +
+           solution * secondary * 2.0 +
+           MathD::Square(solution) * thrice * 3.0 +
+           solution * solution * solution * quartic * 4.0;
 }
 
-const Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::SubstitutionTangent(const Imaginary& solution) const
+Mathematics::EquationQuartic::Imaginary Mathematics::EquationQuartic::SubstitutionTangent(const Imaginary& solution) const
 {
-    return m_Once +
-           solution * m_Secondary * 2.0 +
-           solution * solution * m_Thrice * 3.0 +
-           solution * solution * solution * m_Quartic * 4.0;
+    return once +
+           solution * secondary * 2.0 +
+           solution * solution * thrice * 3.0 +
+           solution * solution * solution * quartic * 4.0;
 }
 
 void Mathematics::EquationQuartic::Solving()
@@ -85,19 +85,19 @@ void Mathematics::EquationQuartic::Solving()
 bool Mathematics::EquationQuartic::Predigest()
 {
     // 常数项为零时，化解方程。
-    if (DoubleMath::FAbs(m_Constant) <= GetEpsilon())
+    if (MathD::FAbs(constant) <= GetEpsilon())
     {
         SetRealResult(0.0);
-        EquationThrice equation{ m_Once, m_Secondary, m_Thrice, m_Quartic };
+        EquationThrice equation{ once, secondary, thrice, quartic };
         AddResult(equation);
 
         return true;
     }
 
     // 四次项为零时，化解方程。
-    if (DoubleMath::FAbs(m_Quartic) <= GetEpsilon())
+    if (MathD::FAbs(quartic) <= GetEpsilon())
     {
-        EquationThrice equation{ m_Constant, m_Once, m_Secondary, m_Thrice };
+        EquationThrice equation{ constant, once, secondary, thrice };
         AddResult(equation);
 
         return true;
@@ -108,8 +108,8 @@ bool Mathematics::EquationQuartic::Predigest()
 
 double Mathematics::EquationQuartic::CalculateP() const noexcept
 {
-    const auto three = m_Thrice / m_Quartic;
-    const auto two = m_Secondary / m_Quartic;
+    const auto three = thrice / quartic;
+    const auto two = secondary / quartic;
 
     const auto p = two - 3.0 * three * three / 8.0;
 
@@ -118,20 +118,21 @@ double Mathematics::EquationQuartic::CalculateP() const noexcept
 
 double Mathematics::EquationQuartic::CalculateQ() const noexcept
 {
-    const auto three = m_Thrice / m_Quartic;
-    const auto two = m_Secondary / m_Quartic;
-    const auto one = m_Once / m_Quartic;
+    const auto three = thrice / quartic;
+    const auto two = secondary / quartic;
+    const auto one = once / quartic;
 
     const auto q = one - three * two / 2.0 + three * three * three / 8.0;
+
     return q;
 }
 
 double Mathematics::EquationQuartic::CalculateR() const noexcept
 {
-    const auto three = m_Thrice / m_Quartic;
-    const auto two = m_Secondary / m_Quartic;
-    const auto one = m_Once / m_Quartic;
-    const auto zero = m_Constant / m_Quartic;
+    const auto three = thrice / quartic;
+    const auto two = secondary / quartic;
+    const auto one = once / quartic;
+    const auto zero = constant / quartic;
 
     const auto r = zero - three * one / 4.0 +
                    three * three * two / 16.0 -
@@ -146,11 +147,11 @@ void Mathematics::EquationQuartic::CalculateThriceEquation(double p, double q, d
     const auto zero = (4.0 * r * p - q * q) / 8.0;
 
     // 先求解一个三次方程。
-    EquationThrice thrice{ zero, one, two, 1.0 };
+    EquationThrice equationThrice{ zero, one, two, 1.0 };
 
-    MATHEMATICS_ASSERTION_1(thrice.IsRealResult(), "四次方程分解的三次方程无解！");
-     
-    for (auto iter = thrice.GetRealBegin(); iter != thrice.GetRealEnd(); ++iter)
+    MATHEMATICS_ASSERTION_1(equationThrice.IsRealResult(), "四次方程分解的三次方程无解！");
+
+    for (auto iter = equationThrice.GetRealBegin(); iter != equationThrice.GetRealEnd(); ++iter)
     {
         CalculateResult(*iter, p, q, r);
     }
@@ -163,8 +164,8 @@ void Mathematics::EquationQuartic::CalculateResult(double solution, double p, do
 
     if (0.0 <= x1 && 0.0 <= x0)
     {
-        const auto x1sqrt = DoubleMath::Sqrt(x1);
-        const auto x0sqrt = DoubleMath::Sqrt(x0);
+        const auto x1sqrt = MathD::Sqrt(x1);
+        const auto x0sqrt = MathD::Sqrt(x0);
 
         if (0 <= q)
         {
@@ -177,16 +178,16 @@ void Mathematics::EquationQuartic::CalculateResult(double solution, double p, do
     }
 }
 
-void Mathematics::EquationQuartic::CalculateSecondaryEquation(double thriceSolution, double constant, double once)
+void Mathematics::EquationQuartic::CalculateSecondaryEquation(double thriceSolution, double secondaryConstant, double secondaryOnce)
 {
     // 将四次方程分解为两个二次方程。
-    const auto minConstant = thriceSolution - constant;
-    const auto maxConstant = thriceSolution + constant;
+    const auto minConstant = thriceSolution - secondaryConstant;
+    const auto maxConstant = thriceSolution + secondaryConstant;
 
-    EquationSecondary firstEquation{ minConstant, once, 1.0 };
-    EquationSecondary secondEquation{ maxConstant, -once, 1.0 };
+    EquationSecondary firstEquation{ minConstant, secondaryOnce, 1.0 };
+    EquationSecondary secondEquation{ maxConstant, -secondaryOnce, 1.0 };
 
-    const auto three = m_Thrice / m_Quartic;
+    const auto three = thrice / quartic;
 
     AddResult(firstEquation, -three / 4.0);
     AddResult(secondEquation, -three / 4.0);

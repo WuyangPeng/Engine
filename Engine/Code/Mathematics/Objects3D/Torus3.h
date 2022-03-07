@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/19 17:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.2 (2022/02/10 16:46)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_H
@@ -11,7 +14,7 @@
 
 #include "Torus3Parameters.h"
 #include "CoreTools/DataTypes/TupleDetail.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -25,7 +28,7 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Torus3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
         using Torus3Parameters = Torus3Parameters<Real>;
 
@@ -49,22 +52,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetOuterRadius() const noexcept;
-        [[nodiscard]] Real GetInnerRadius() const noexcept;
+        NODISCARD Real GetOuterRadius() const noexcept;
+        NODISCARD Real GetInnerRadius() const noexcept;
 
-        [[nodiscard]] const Vector3D GetPosition(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        [[nodiscard]] const Vector3D GetNormal(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Vector3 GetPosition(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Vector3 GetNormal(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 返回值第一部分为s，第二部分为t
-        [[nodiscard]] const Torus3Parameters GetParameters(const Vector3D& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD Torus3Parameters GetParameters(const Vector3& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
-        Real m_OuterRadius;
-        Real m_InnerRadius;
+        Real outerRadius;
+        Real innerRadius;
     };
 
-    using FloatTorus3 = Torus3<float>;
-    using DoubleTorus3 = Torus3<double>;
+    using Torus3F = Torus3<float>;
+    using Torus3D = Torus3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_TORUS3_H

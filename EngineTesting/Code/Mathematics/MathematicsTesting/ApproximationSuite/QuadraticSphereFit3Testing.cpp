@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 14:35)
 
 #include "QuadraticSphereFit3Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/QuadraticSphereFit3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -29,7 +29,10 @@ void Mathematics::QuadraticSphereFit3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::QuadraticSphereFit3Testing
 	::FitTest()
 {
@@ -41,17 +44,17 @@ void Mathematics::QuadraticSphereFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleQuadraticSphereFit3 quadraticCircleFit2(vertices);
+		QuadraticSphereFit3D quadraticCircleFit2(vertices);
 
-		DoubleVector3D center = quadraticCircleFit2.GetCenter();
+		Vector3D center = quadraticCircleFit2.GetCenter();
 		double radius = quadraticCircleFit2.GetRadius();
 		double eigenValue = quadraticCircleFit2.GetEigenValue();
 
@@ -60,11 +63,11 @@ void Mathematics::QuadraticSphereFit3Testing
 
 		for (int i = 0; i < size; ++i)
 		{
-			double distance = DoubleVector3DTools::Distance(vertices[i], center);
+			double distance = Vector3ToolsD::Distance(vertices[i], center);
 
-			if (eigenValue <= DoubleMath::GetZeroTolerance())
+			if (eigenValue <= MathD::GetZeroTolerance())
 			{
-				ASSERT_TRUE(distance <= radius + DoubleMath::GetZeroTolerance());
+				ASSERT_TRUE(distance <= radius + MathD::GetZeroTolerance());
 			}
 			else if (eigenValue <= 0.5)
 			{

@@ -25,8 +25,8 @@ namespace Rendering
     {
     public:
         using ClassType = TransformControllerImpl;
-        using APoint = Mathematics::FloatAPoint;
-        using Matrix = Mathematics::FloatMatrix;
+        using APoint = Mathematics::APointF;
+        using Matrix = Mathematics::MatrixF;
 
     public:
         explicit TransformControllerImpl(const FloatTransform& localTransform) noexcept;

@@ -39,7 +39,7 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     // [-1,1]^2 x [0,1].
     mCamera = std::make_shared<Camera>(false);
     mCamera->SetFrustum(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f);
-    mCamera->SetFrame(Mathematics::FloatAPoint{}, Mathematics::FloatAVector::GetUnitZ(), Mathematics::FloatAVector::GetUnitY(), Mathematics::FloatAVector::GetUnitX());
+    mCamera->SetFrame(Mathematics::APointF{}, Mathematics::AVectorF::GetUnitZ(), Mathematics::AVectorF::GetUnitY(), Mathematics::AVectorF::GetUnitX());
 
     // Create the vertex format for the square.
     std::vector<VertexFormatType> triple;
@@ -91,10 +91,10 @@ Rendering::ImageProcessingBase ::ImageProcessingBase(int numCols, int numRows, i
     vbuffer->SetPosition(vba, 2, Mathematics::APoint(xmax, ymax, 0.0f));
     vbuffer->SetPosition(vba, 3, Mathematics::APoint(xmin, ymax, 0.0f));
 
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc0[0], tc0[1]), 0);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc1[0], tc1[1]), 1);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc2[0], tc2[1]), 2);
-    vbuffer->SetTextureCoord(vba, 0, Mathematics::FloatVector2D(tc3[0], tc3[1]), 3);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc0[0], tc0[1]), 0);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc1[0], tc1[1]), 1);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc2[0], tc2[1]), 2);
+    vbuffer->SetTextureCoord(vba, 0, Mathematics::Vector2F(tc3[0], tc3[1]), 3);
 
     // Create the index buffer for the square.
     IndexBufferSharedPtr ibuffer(std::make_shared<IndexBuffer>(6, static_cast<int>(sizeof(int))));
@@ -172,7 +172,7 @@ void Rendering::ImageProcessingBase ::PreDraw()
     {
         // Reflect the image in y to account for OpenGL textures having
         // origin in the upper-left corner.
-        mCamera->SetPostProjectionMatrix(Mathematics::FloatMatrix(1.0f, -1.0f, 1.0f));
+        mCamera->SetPostProjectionMatrix(Mathematics::MatrixF(1.0f, -1.0f, 1.0f));
     }
 }
 
@@ -182,7 +182,7 @@ void Rendering::ImageProcessingBase ::PostDraw()
 
     {
         // Remove the y-reflection.
-        mCamera->SetPostProjectionMatrix(Mathematics::FloatMatrix::GetIdentityMatrix());
+        mCamera->SetPostProjectionMatrix(Mathematics::MatrixF::GetIdentityMatrix());
     }
 }
 

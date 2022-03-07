@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/02 19:03)
+///	引擎版本：0.8.0.2 (2022/02/18 15:06)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H
@@ -23,52 +23,55 @@
 // 找到最小二乘拟合组合N的点P[0]至P[N-1]。返回值是在 (U,Real,D)的最小二乘能量函数。
 
 #include "Mathematics/Algebra/Matrix2.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     template <typename Real>
-    class EllipseFit2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseFit2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseFit2 final
+    class EllipseFit2 final
     {
     public:
-        using EllipseFit2Impl = EllipseFit2Impl<Real>;
-    
-        TYPE_DECLARE(EllipseFit2);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using Vector2D = Vector2D<Real>;
-        using Points = std::vector<Vector2D>;
+        using ClassType = EllipseFit2<Real>;
+
+        using Vector2 = Vector2<Real>;
+        using Points = std::vector<Vector2>;
         using Matrix2 = Matrix2<Real>;
+        using Math = Math<Real>;
 
     public:
         explicit EllipseFit2(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetExactly() const noexcept;
+        NODISCARD Real GetExactly() const noexcept;
 
-        [[nodiscard]] const Vector2D GetCenter() const noexcept;
-        [[nodiscard]] const Matrix2 GetRotate() const noexcept;
-        [[nodiscard]] Real GetExtent0() const noexcept;
-        [[nodiscard]] Real GetExtent1() const noexcept;
+        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Matrix2 GetRotate() const noexcept;
+        NODISCARD Real GetExtent0() const noexcept;
+        NODISCARD Real GetExtent1() const noexcept;
 
-        [[nodiscard]] int GetNumPoint() const;
-        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        NODISCARD int GetNumPoint() const;
+        NODISCARD Vector2 GetPoint(int index) const;
 
     private:
-        PackageType impl;
+        using Container = std::vector<Real>;
+
+    private:
+        void Fit2();
+        void InitialGuess();
+
+        NODISCARD static Real Energy(const Container& input, const EllipseFit2* userData);
+
+    private:
+        Points points;
+        Vector2 center;
+        Matrix2 rotate;
+        Real extent0;
+        Real extent1;
+        Real exactly;
     };
 
-    using FloatEllipseFit2 = EllipseFit2<float>;
-    using DoubleEllipseFit2 = EllipseFit2<double>;
+    using EllipseFit2F = EllipseFit2<float>;
+    using EllipseFit2D = EllipseFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSE_FIT2_H

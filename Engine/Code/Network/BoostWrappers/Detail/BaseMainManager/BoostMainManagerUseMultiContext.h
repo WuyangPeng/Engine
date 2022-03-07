@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 16:26)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 19:13)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_MULTI_CONTEX_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_MAIN_MANAGER_USE_MULTI_CONTEX_H
@@ -33,9 +33,9 @@ namespace Network
     public:
         void Run() noexcept override;
 
-        [[nodiscard]] IOContextType& GetIOContext() override;
+        NODISCARD IOContextType& GetIOContext() override;
         void StopContext() override;
-        [[nodiscard]] bool IsContextStop() const override;
+        NODISCARD bool IsContextStop() const override;
         void RestartContext() override;
 
     private:
@@ -45,8 +45,8 @@ namespace Network
         void InitContainer(int containerNumber);
 
     private:
-        Container m_Container;
-        int m_CurrentIndex;
+        Container container;
+        int currentIndex;
     };
 }
 

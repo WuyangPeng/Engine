@@ -53,7 +53,7 @@ namespace Mathematics
 		void FloatTruncationTest();
 		void DoubleTruncationTest();		
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

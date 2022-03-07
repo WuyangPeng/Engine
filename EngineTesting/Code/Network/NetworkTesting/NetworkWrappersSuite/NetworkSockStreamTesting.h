@@ -28,7 +28,7 @@ namespace Network
 
 		void StreamTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

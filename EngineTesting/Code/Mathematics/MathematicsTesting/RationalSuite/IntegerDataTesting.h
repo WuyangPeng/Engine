@@ -26,7 +26,7 @@ namespace Mathematics
 		void ConversionExceptionTest();	
 		void CompareTest();
 	
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 	};
 }
 

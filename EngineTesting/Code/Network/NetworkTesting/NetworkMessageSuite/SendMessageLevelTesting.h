@@ -21,7 +21,7 @@ namespace Network
 
 		void SendMessageTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

@@ -28,7 +28,7 @@ namespace Mathematics
 		void SolveBandedTest();
 		void InvertTest();
 		
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 11:50)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_H
@@ -31,15 +31,31 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] static const ImplTypePtr Create();
-        [[nodiscard]] static const ImplTypePtr Create(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ServerStrategy serverStrategy,
-                                                      MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy,
-                                                      const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter,
-                                                      SocketSendMessage socketSendMessage, const std::string& ip, int port);
-        [[nodiscard]] static const ImplTypePtr Create(WrappersStrategy wrappersStrategy, ConnectStrategy connectStrategy, ClientStrategy clientStrategy,
-                                                      MessageStrategy messageStrategy, ParserStrategy parserStrategy, OpenSSLStrategy openSSLStrategy,
-                                                      const ConfigurationSubStrategy& subStrategy, const ConfigurationParameter& configurationParameter,
-                                                      SocketSendMessage socketSendMessage, const std::string& ip, int port);
+        NODISCARD static const ImplTypePtr Create();
+        NODISCARD static const ImplTypePtr Create(WrappersStrategy wrappersStrategy,
+                                                  ConnectStrategy connectStrategy,
+                                                  ServerStrategy serverStrategy,
+                                                  MessageStrategy messageStrategy,
+                                                  ParserStrategy parserStrategy,
+                                                  OpenSSLStrategy openSSLStrategy,
+                                                  EncryptedCompressionStrategy encryptedCompressionStrategy,
+                                                  const ConfigurationSubStrategy& subStrategy,
+                                                  const ConfigurationParameter& configurationParameter,
+                                                  SocketSendMessage socketSendMessage,
+                                                  const std::string& ip,
+                                                  int port);
+        NODISCARD static const ImplTypePtr Create(WrappersStrategy wrappersStrategy,
+                                                  ConnectStrategy connectStrategy,
+                                                  ClientStrategy clientStrategy,
+                                                  MessageStrategy messageStrategy,
+                                                  ParserStrategy parserStrategy,
+                                                  OpenSSLStrategy openSSLStrategy,
+                                                  EncryptedCompressionStrategy encryptedCompressionStrategy,
+                                                  const ConfigurationSubStrategy& subStrategy,
+                                                  const ConfigurationParameter& configurationParameter,
+                                                  SocketSendMessage socketSendMessage,
+                                                  const std::string& ip,
+                                                  int port);
     };
 }
 

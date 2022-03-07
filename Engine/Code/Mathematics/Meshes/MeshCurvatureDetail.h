@@ -10,7 +10,7 @@
 #include "MeshCurvature.h"
 
 template <typename Real>
-Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<Real>* vertices, int numTriangles, const int* indices)
+Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3<Real>* vertices, int numTriangles, const int* indices)
 {
     mNumVertices = numVertices;
     mVertices = vertices;
@@ -18,8 +18,8 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
     mIndices = indices;
 
     // Compute normal vectors.
-    mNormals = nullptr;  // NEW1<Vector3D<Real>>(mNumVertices);
-    memset(mNormals, 0, mNumVertices * sizeof(Vector3D<Real>));
+    mNormals = nullptr;  // NEW1<Vector3<Real>>(mNumVertices);
+    memset(mNormals, 0, mNumVertices * sizeof(Vector3<Real>));
     int i, v0, v1, v2;
     for (i = 0; i < mNumTriangles; ++i)
     {
@@ -29,9 +29,9 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
         v2 = *indices++;
 
         // Compute the normal (length provides a weighted sum).
-        Vector3D<Real> edge1 = mVertices[v1] - mVertices[v0];
-        Vector3D<Real> edge2 = mVertices[v2] - mVertices[v0];
-        Vector3D<Real> normal = Vector3DTools<Real>::CrossProduct(edge1, edge2);
+        Vector3<Real> edge1 = mVertices[v1] - mVertices[v0];
+        Vector3<Real> edge2 = mVertices[v2] - mVertices[v0];
+        Vector3<Real> normal = Vector3Tools<Real>::CrossProduct(edge1, edge2);
 
         mNormals[v0] += normal;
         mNormals[v1] += normal;
@@ -69,9 +69,9 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
 
             // Compute edge from V0 to V1, project to tangent plane of vertex,
             // and compute difference of adjacent normals.
-            Vector3D<Real> E = mVertices[v1] - mVertices[v0];
-            Vector3D<Real> W = E - (Vector3DTools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
-            Vector3D<Real> D = mNormals[v1] - mNormals[v0];
+            Vector3<Real> E = mVertices[v1] - mVertices[v0];
+            Vector3<Real> W = E - (Vector3Tools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
+            Vector3<Real> D = mNormals[v1] - mNormals[v0];
             for (row = 0; row < 3; ++row)
             {
                 for (col = 0; col < 3; ++col)
@@ -84,7 +84,7 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
             // Compute edge from V0 to V2, project to tangent plane of vertex,
             // and compute difference of adjacent normals.
             E = mVertices[v2] - mVertices[v0];
-            W = E - (Vector3DTools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
+            W = E - (Vector3Tools<Real>::DotProduct(E, mNormals[v0])) * mNormals[v0];
             D = mNormals[v2] - mNormals[v0];
             for (row = 0; row < 3; ++row)
             {
@@ -152,16 +152,16 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
     // the vertex is called the principal direction for k, and is J*W.
     mMinCurvatures = nullptr;  // NEW1<Real>(mNumVertices);
     mMaxCurvatures = nullptr;  //  NEW1<Real>(mNumVertices);
-    mMinDirections = nullptr;  //  NEW1<Vector3D<Real>>(mNumVertices);
-    mMaxDirections = nullptr;  // NEW1<Vector3D<Real>>(mNumVertices);
+    mMinDirections = nullptr;  //  NEW1<Vector3<Real>>(mNumVertices);
+    mMaxDirections = nullptr;  // NEW1<Vector3<Real>>(mNumVertices);
     for (i = 0; i < mNumVertices; ++i)
     {
         // Compute U and V given N.
-        Vector3D<Real> U, V;
-        Vector3DOrthonormalBasis<Real> vector3DOrthonormalBasis =
-            Vector3DTools<Real>::GenerateComplementBasis(mNormals[i]);
-        U = vector3DOrthonormalBasis.GetUVector();
-        V = vector3DOrthonormalBasis.GetVVector();
+        Vector3<Real> U, V;
+        Vector3OrthonormalBasis<Real> Vector3OrthonormalBasis =
+            Vector3Tools<Real>::GenerateComplementBasis(mNormals[i]);
+        U = Vector3OrthonormalBasis.GetUVector();
+        V = Vector3OrthonormalBasis.GetVVector();
 
         if (DWTrnZero[i])
         {
@@ -176,12 +176,12 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
         // Compute S = J^T * dN/dX * J.  In theory S is symmetric, but
         // because we have estimated dN/dX, we must slightly adjust our
         // calculations to make sure S is symmetric.
-        Real s01 = Vector3DTools<Real>::DotProduct(U, DNormal[i] * V);
-        Real s10 = Vector3DTools<Real>::DotProduct(V, DNormal[i] * U);
+        Real s01 = Vector3Tools<Real>::DotProduct(U, DNormal[i] * V);
+        Real s10 = Vector3Tools<Real>::DotProduct(V, DNormal[i] * U);
         Real sAvr = (Real{ 0.5 }) * (s01 + s10);
         Matrix2<Real> S(
-            Vector3DTools<Real>::DotProduct(U, DNormal[i] * U), sAvr,
-            sAvr, Vector3DTools<Real>::DotProduct(V, DNormal[i] * V));
+            Vector3Tools<Real>::DotProduct(U, DNormal[i] * U), sAvr,
+            sAvr, Vector3Tools<Real>::DotProduct(V, DNormal[i] * V));
 
         // Compute the eigenvalues of S (min and max curvatures).
         Real trace = S[0][0] + S[1][1];
@@ -192,9 +192,9 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
         mMaxCurvatures[i] = (Real{ 0.5 }) * (trace + rootDiscr);
 
         // Compute the eigenvectors of S.
-        Vector2D<Real> W0(S[0][1], mMinCurvatures[i] - S[0][0]);
-        Vector2D<Real> W1(mMinCurvatures[i] - S[1][1], S[1][0]);
-        if (Vector2DTools<Real>::VectorMagnitudeSquared(W0) >= Vector2DTools<Real>::VectorMagnitudeSquared(W1))
+        Vector2<Real> W0(S[0][1], mMinCurvatures[i] - S[0][0]);
+        Vector2<Real> W1(mMinCurvatures[i] - S[1][1], S[1][0]);
+        if (Vector2Tools<Real>::GetLengthSquared(W0) >= Vector2Tools<Real>::GetLengthSquared(W1))
         {
             W0.Normalize();
             mMinDirections[i] = W0.GetX() * U + W0.GetY() * V;
@@ -205,9 +205,9 @@ Mathematics::MeshCurvature<Real>::MeshCurvature(int numVertices, const Vector3D<
             mMinDirections[i] = W1.GetX() * U + W1.GetY() * V;
         }
 
-        W0 = Vector2D<Real>(S[0][1], mMaxCurvatures[i] - S[0][0]);
-        W1 = Vector2D<Real>(mMaxCurvatures[i] - S[1][1], S[1][0]);
-        if (Vector2DTools<Real>::VectorMagnitudeSquared(W0) >= Vector2DTools<Real>::VectorMagnitudeSquared(W1))
+        W0 = Vector2<Real>(S[0][1], mMaxCurvatures[i] - S[0][0]);
+        W1 = Vector2<Real>(mMaxCurvatures[i] - S[1][1], S[1][0]);
+        if (Vector2Tools<Real>::GetLengthSquared(W0) >= Vector2Tools<Real>::GetLengthSquared(W1))
         {
             W0.Normalize();
             mMaxDirections[i] = W0.GetX() * U + W0.GetY() * V;
@@ -240,7 +240,7 @@ int Mathematics::MeshCurvature<Real>::GetNumVertices() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshCurvature<Real>::GetVertices() const
+const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetVertices() const
 {
     return mVertices;
 }
@@ -258,7 +258,7 @@ const int* Mathematics::MeshCurvature<Real>::GetIndices() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshCurvature<Real>::GetNormals() const
+const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetNormals() const
 {
     return mNormals;
 }
@@ -276,13 +276,13 @@ const Real* Mathematics::MeshCurvature<Real>::GetMaxCurvatures() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshCurvature<Real>::GetMinDirections() const
+const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetMinDirections() const
 {
     return mMinDirections;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::MeshCurvature<Real>::GetMaxDirections() const
+const Mathematics::Vector3<Real>* Mathematics::MeshCurvature<Real>::GetMaxDirections() const
 {
     return mMaxDirections;
 }

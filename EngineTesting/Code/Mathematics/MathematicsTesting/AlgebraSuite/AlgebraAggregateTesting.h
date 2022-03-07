@@ -19,9 +19,9 @@ namespace Mathematics
 	private:
 		void MainTest();
 		void HomogeneousPointTest();
-		void Vector2DTest();
-		void Vector3DTest();
-		void Vector4DTest();
+		void Vector2Test();
+		void Vector3Test();
+		void Vector4Test();
 		void AVectorTest();
 		void APointTest();
 		void VariableLengthVectorTest();
@@ -41,7 +41,7 @@ namespace Mathematics
 		void Float3Test();
 		void Float4Test();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

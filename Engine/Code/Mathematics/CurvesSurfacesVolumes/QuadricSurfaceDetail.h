@@ -55,7 +55,7 @@ const Matrix3<Real>& QuadricSurface<Real>::GetA () const
 }
 
 template <typename Real>
-const Vector3D<Real>& QuadricSurface<Real>::GetB () const
+const Vector3<Real>& QuadricSurface<Real>::GetB () const
 {
     return mB;
 }
@@ -67,14 +67,14 @@ Real QuadricSurface<Real>::GetC () const
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::F (const Vector3D<Real>& pos) const
+Real QuadricSurface<Real>::F (const Vector3<Real>& pos) const
 {
-	Real f = Vector3DTools<Real>::DotProduct(pos,(mA*pos + mB)) + mC;
+	Real f = Vector3Tools<Real>::DotProduct(pos,(mA*pos + mB)) + mC;
     return f;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FX (const Vector3D<Real>& pos) const
+Real QuadricSurface<Real>::FX (const Vector3<Real>& pos) const
 {
     Real sum = mA[0][0]*pos[0] + mA[0][1]*pos[1] + mA[0][2]*pos[2];
     Real fx = (Math::GetValue(2))*sum + mB[0];
@@ -82,7 +82,7 @@ Real QuadricSurface<Real>::FX (const Vector3D<Real>& pos) const
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FY (const Vector3D<Real>& pos) const
+Real QuadricSurface<Real>::FY (const Vector3<Real>& pos) const
 {
     Real sum = mA[1][0]*pos[0] + mA[1][1]*pos[1] + mA[1][2]*pos[2];
     Real fy = (Math::GetValue(2))*sum + mB[1];
@@ -90,7 +90,7 @@ Real QuadricSurface<Real>::FY (const Vector3D<Real>& pos) const
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FZ (const Vector3D<Real>& pos) const
+Real QuadricSurface<Real>::FZ (const Vector3<Real>& pos) const
 {
     Real sum = mA[2][0]*pos[0] + mA[2][1]*pos[1] + mA[2][2]*pos[2];
     Real fz = (Math::GetValue(2))*sum + mB[2];
@@ -98,42 +98,42 @@ Real QuadricSurface<Real>::FZ (const Vector3D<Real>& pos) const
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXX (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FXX (const Vector3<Real>&) const
 {
     Real fxx = (Math::GetValue(2))*mA[0][0];
     return fxx;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXY (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FXY (const Vector3<Real>&) const
 {
     Real fxy = (Math::GetValue(2))*mA[0][1];
     return fxy;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FXZ (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FXZ (const Vector3<Real>&) const
 {
     Real fxz = (Math::GetValue(2))*mA[0][2];
     return fxz;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FYY (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FYY (const Vector3<Real>&) const
 {
     Real fyy = (Math::GetValue(2))*mA[1][1];
     return fyy;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FYZ (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FYZ (const Vector3<Real>&) const
 {
     Real fyz = (Math::GetValue(2))*mA[1][2];
     return fyz;
 }
 
 template <typename Real>
-Real QuadricSurface<Real>::FZZ (const Vector3D<Real>&) const
+Real QuadricSurface<Real>::FZZ (const Vector3<Real>&) const
 {
     Real fzz = (Math::GetValue(2))*mA[2][2];
     return fzz;

@@ -23,6 +23,7 @@
 #include SYSTEM_WARNING_DISABLE(26455)
 #include SYSTEM_WARNING_DISABLE(26481)
 #include SYSTEM_WARNING_DISABLE(26487)
+#include SYSTEM_WARNING_DISABLE(26492)
 
 #include <boost/ptr_container/ptr_vector.hpp>
 

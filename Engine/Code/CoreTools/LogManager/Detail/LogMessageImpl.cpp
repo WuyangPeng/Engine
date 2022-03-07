@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -16,7 +16,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::LogMessageImpl::LogMessageImpl(LogLevel level, LogFilter filter, const String& message, const FunctionDescribed& functionDescribed)
-    : m_Level{ level }, m_Filter{ filter }, m_Message{ message }, m_FunctionDescribed{ functionDescribed }
+    : logLevel{ level }, filter{ filter }, message{ message }, functionDescribed{ functionDescribed }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -27,33 +27,33 @@ System::String CoreTools::LogMessageImpl::GetMessageDescribe() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Message;
+    return message;
 }
 
 CoreTools::LogLevel CoreTools::LogMessageImpl::GetLogLevel() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Level;
+    return logLevel;
 }
 
 CoreTools::LogFilter CoreTools::LogMessageImpl::GetLogFilterType() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Filter;
+    return filter;
 }
 
 int CoreTools::LogMessageImpl::GetMessageSize() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Message.size());
+    return boost::numeric_cast<int>(message.size());
 }
 
 CoreTools::FunctionDescribed CoreTools::LogMessageImpl::GetFunctionDescribed() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_FunctionDescribed;
+    return functionDescribed;
 }

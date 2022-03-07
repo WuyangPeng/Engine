@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 15:40)
+///	引擎版本：0.8.0.2 (2022/02/10 14:59)
 
 #ifndef MATHEMATICS_OBJECTS3D_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_CAPSULE3_ACHIEVE_H
@@ -18,25 +18,27 @@
 
 template <typename Real>
 Mathematics::Capsule3<Real>::Capsule3(const Segment3& segment, Real radius) noexcept
-    : m_Segment{ segment }, m_Radius{ radius }
+    : segment{ segment }, radius{ radius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Capsule3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::Capsule3<Real>::GetSegment() const noexcept
+Mathematics::Segment3<Real> Mathematics::Capsule3<Real>::GetSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Segment;
+    return segment;
 }
 
 template <typename Real>
@@ -44,7 +46,7 @@ Real Mathematics::Capsule3<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Radius;
+    return radius;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CAPSULE3_ACHIEVE_H

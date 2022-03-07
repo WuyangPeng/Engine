@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:17)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:18)
 
 #ifndef NETWORK_NETWORK_MESSAGE_SOCKET_MANAGER_H
 #define NETWORK_NETWORK_MESSAGE_SOCKET_MANAGER_H
@@ -17,9 +17,10 @@
 #include "MessageInterface.h"
 #include "NetworkMessageEvent.h"
 #include "Flags/MessageEventFlags.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/MessageEvent/EventInterface.h"
 #include "Network/Interface/SendSocket.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 NETWORK_NON_COPY_EXPORT_IMPL(SocketManagerImpl);
 
 namespace Network
@@ -29,22 +30,18 @@ namespace Network
     public:
         NON_COPY_TYPE_DECLARE(SocketManager);
 
-    public:
-        SocketManager();
-        ~SocketManager() noexcept = default;
-        SocketManager(const SocketManager& rhs) noexcept = delete;
-        SocketManager& operator=(const SocketManager& rhs) noexcept = delete;
-        SocketManager(SocketManager&& rhs) noexcept = delete;
-        SocketManager& operator=(SocketManager&& rhs) noexcept = delete;
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+    protected:
+        explicit SocketManager(CoreTools::DisableNotThrow disableNotThrow);
 
     public:
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
+
         void InsertSocket(uint64_t socketID);
         void RemoveSocket(uint64_t socketID);
 
         void OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message);
 
-        [[nodiscard]] int GetSocketSize() const;
+        NODISCARD int GetSocketSize() const;
 
     protected:
         void InsertEvent(uint64_t socketID, int64_t messageID, const NetworkMessageEventSharedPtr& messageEvent);

@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_SCRIPT_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_SCRIPT_STATIC
+#else  // BUILDING_SCRIPT_STATIC
 
-	namespace ScriptToolset
-	{
-		void StaticDllLib()
-		{
+namespace ScriptToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_SCRIPT_STATIC
+#endif  // !BUILDING_SCRIPT_STATIC

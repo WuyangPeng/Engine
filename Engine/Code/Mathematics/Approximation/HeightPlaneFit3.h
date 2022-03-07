@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 15:33)
+///	引擎版本：0.8.0.2 (2022/02/18 14:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -25,9 +25,9 @@ namespace Mathematics
     {
     public:
         using ClassType = HeightPlaneFit3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
-        using Points = std::vector<Vector3D>;
+        using Points = std::vector<Vector3>;
 
     public:
         explicit HeightPlaneFit3(const Points& points);
@@ -36,24 +36,24 @@ namespace Mathematics
 
         // 如果在线性系统中的3×3系数矩阵的定义A，B，C是（几乎）单数的这个情况下，
         // 返回值是“假”。
-        [[nodiscard]] bool IsFit3Success() const noexcept;
+        NODISCARD bool IsFit3Success() const noexcept;
 
-        [[nodiscard]] Real GetCoeffA() const;
-        [[nodiscard]] Real GetCoeffB() const;
-        [[nodiscard]] Real GetCoeffC() const;
+        NODISCARD Real GetCoeffA() const;
+        NODISCARD Real GetCoeffB() const;
+        NODISCARD Real GetCoeffC() const;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Real m_CoeffA;
-        Real m_CoeffB;
-        Real m_CoeffC;
-        bool m_IsFit3Success;
+        Real coeffA;
+        Real coeffB;
+        Real coeffC;
+        bool isFit3Success;
     };
 
-    using FloatHeightPlaneFit3 = HeightPlaneFit3<float>;
-    using DoubleHeightPlaneFit3 = HeightPlaneFit3<double>;
+    using HeightPlaneFit3F = HeightPlaneFit3<float>;
+    using HeightPlaneFit3D = HeightPlaneFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_H

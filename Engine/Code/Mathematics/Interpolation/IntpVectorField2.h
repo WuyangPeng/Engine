@@ -26,14 +26,14 @@ namespace Mathematics
 		//
 		// The computation type is for the Delaunay triangulation and should be
 		// one of Query::{QT_INT64,QT_INTEGER,QT_RATIONAL,QT_REAL}.
-		IntpVectorField2(const std::vector<Vector2D<Real> >& domain,Vector2D<Real>* range, bool owner, QueryType queryType);
+		IntpVectorField2(const std::vector<Vector2<Real> >& domain,Vector2<Real>* range, bool owner, QueryType queryType);
 
 		~IntpVectorField2();
 
 		// Return 'true' if and only if (xIn,yIn) is in the convex hull of the
 		// input points.  In this case, (xOut,yOut) is valid.  If the return
 		// value is 'false', (xOut,yOut) is invalid and should not be used.
-		bool Evaluate(const Vector2D<Real>& input, Vector2D<Real>& output);
+		bool Evaluate(const Vector2<Real>& input, Vector2<Real>& output);
 
 	protected:
 		Delaunay2<Real>* mDT;

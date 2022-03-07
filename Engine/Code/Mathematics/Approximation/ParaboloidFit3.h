@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 16:54)
+///	引擎版本：0.8.0.2 (2022/02/18 14:07)
 
 #ifndef MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_H
 #define MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/VariableLengthVector.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -47,35 +47,35 @@ namespace Mathematics
     // |                                                s(1)   ||p5|   |s(z)    |
     // +-                                                     -++  +   +-      -+
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE ParaboloidFit3 final
+    class ParaboloidFit3 final
     {
     public:
         using ClassType = ParaboloidFit3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
-        using Points = std::vector<Vector3D>;
+        using Points = std::vector<Vector3>;
 
     public:
         explicit ParaboloidFit3(const Points& points);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] VariableLengthVector GetCoeff() const;
-        [[nodiscard]] bool GetIsFitSuccess() const noexcept;
+        NODISCARD VariableLengthVector GetCoeff() const;
+        NODISCARD bool GetIsFitSuccess() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        constexpr static int sm_VariableMatrixSize = 6;
+        constexpr static int variableMatrixSize = 6;
 
     private:
-        VariableLengthVector m_Coeff;
-        bool m_IsFitSuccess;
+        VariableLengthVector coeff;
+        bool isFitSuccess;
     };
 
-    using FloatParaboloidFit3 = ParaboloidFit3<float>;
-    using DoubleParaboloidFit3 = ParaboloidFit3<double>;
+    using ParaboloidFit3F = ParaboloidFit3<float>;
+    using ParaboloidFit3D = ParaboloidFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_PARABOLOID_FIT3_H

@@ -2076,9 +2076,6 @@
     <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\MaxElement.h">
       <Filter>TemplateTools 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\CoreTools\Command\CommandArgumentImpl.h">
-      <Filter>Command 头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\Contract\Flags\ImplFlags.h">
       <Filter>Contract 头文件\Flags</Filter>
     </ClInclude>
@@ -2906,6 +2903,51 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\Array2Detail.h">
       <Filter>MemoryTools 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousImpl.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousParameter.h">
+      <Filter>LogManager 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\LogManager\LogAsynchronous.h">
+      <Filter>LogManager 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Command\Detail\CommandArgumentImpl.h">
+      <Filter>Command 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeMap.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeQueue.h">
+      <Filter>DataTypes 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeMapDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\DataTypes\ThreadSafeQueueDetail.h">
+      <Filter>DataTypes 模板文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\SharedPtrCompare.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\MemoryTools\WeakPtrCompare.h">
+      <Filter>MemoryTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Timer.h">
+      <Filter>Time 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Time\Detail\TimerImpl.h">
+      <Filter>Time 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\CharacterString\StringUtility.h">
+      <Filter>CharacterString 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\TemplateTools\RangeIteration.h">
+      <Filter>TemplateTools 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\CoreTools\Helper\HashCombine.h">
+      <Filter>Helper 头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -4270,6 +4312,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Code\CoreTools\TextParsing\Detail\ScopeExpressionParsing.cpp">
       <Filter>TextParsing 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousImpl.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\Detail\LogAsynchronousParameter.cpp">
+      <Filter>LogManager 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\LogManager\LogAsynchronous.cpp">
+      <Filter>LogManager 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Detail\TimerImpl.cpp">
+      <Filter>Time 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\Time\Timer.cpp">
+      <Filter>Time 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\CoreTools\CharacterString\StringUtility.cpp">
+      <Filter>CharacterString 源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

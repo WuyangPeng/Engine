@@ -7,7 +7,7 @@
 #include "SendMessageLevelTesting.h" 
 #include "Detail/TestNullMessage.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "CoreTools/Helper/MemoryMacro.h"
+
 #include "CoreTools/Helper/ClassInvariantMacro.h" 
 #include "Network/NetworkMessage/SendMessageLevel.h"
 

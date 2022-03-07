@@ -12,7 +12,7 @@
  
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Bisect3NodeTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
 void Mathematics::Bisect3NodeTesting
 	::MainTest()
 {

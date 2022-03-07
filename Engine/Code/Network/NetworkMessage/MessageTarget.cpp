@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 14:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 10:28)
 
 #include "Network/NetworkExport.h"
 
@@ -21,13 +21,13 @@ using std::string;
 using std::vector;
 
 Network::MessageTarget::MessageTarget(const MessageBufferSharedPtr& messageBuffer) noexcept
-    : m_Target{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }
+    : target{ messageBuffer }, parserStrategy{ messageBuffer->GetParserStrategy() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::MessageTarget::MessageTarget(MessageTarget&& rhs) noexcept
-    : m_Target{ std::move(rhs.m_Target) }, m_ParserStrategy{ rhs.m_ParserStrategy }
+    : target{ std::move(rhs.target) }, parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -36,8 +36,11 @@ Network::MessageTarget& Network::MessageTarget::operator=(MessageTarget&& rhs) n
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_Target = std::move(rhs.m_Target);
-    m_ParserStrategy = rhs.m_ParserStrategy;
+    if (this != &rhs)
+    {
+        target = std::move(rhs.target);
+        parserStrategy = rhs.parserStrategy;
+    }
 
     return *this;
 }
@@ -46,7 +49,7 @@ CLASS_INVARIANT_STUB_DEFINE(Network, MessageTarget)
 
 void Network::MessageTarget::WriteBool(const bool datum)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     const uint8_t value{ datum ? 1u : 0u };
     Write(value);
@@ -54,7 +57,7 @@ void Network::MessageTarget::WriteBool(const bool datum)
 
 void Network::MessageTarget::WriteBoolWithNumber(int32_t elementsNumber, const bool* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     Write(elementsNumber);
     WriteBoolWithoutNumber(elementsNumber, data);
@@ -62,7 +65,7 @@ void Network::MessageTarget::WriteBoolWithNumber(int32_t elementsNumber, const b
 
 void Network::MessageTarget::WriteBoolWithoutNumber(int32_t elementsNumber, const bool* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     if (data != nullptr)
     {
@@ -78,7 +81,7 @@ void Network::MessageTarget::WriteBoolWithoutNumber(int32_t elementsNumber, cons
 
 void Network::MessageTarget::WriteString(const string& datum)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     auto length = boost::numeric_cast<int>(datum.size());
     Write(length);
@@ -101,7 +104,7 @@ void Network::MessageTarget::WriteString(const string& datum)
 
 void Network::MessageTarget::WriteStringWithNumber(int32_t elementsNumber, const string* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     Write(elementsNumber);
     WriteStringWithoutNumber(elementsNumber, data);
@@ -109,7 +112,7 @@ void Network::MessageTarget::WriteStringWithNumber(int32_t elementsNumber, const
 
 void Network::MessageTarget::WriteStringWithoutNumber(int32_t elementsNumber, const string* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     if (data != nullptr)
     {
@@ -125,14 +128,14 @@ void Network::MessageTarget::WriteStringWithoutNumber(int32_t elementsNumber, co
 
 int Network::MessageTarget::GetBytesWritten() const noexcept
 {
-    NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Target->GetCurrentWriteIndex();
+    return target->GetCurrentWriteIndex();
 }
 
 void Network::MessageTarget::Write(const vector<string>& datum)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     auto elementsNumber = boost::numeric_cast<int>(datum.size());
 
@@ -145,5 +148,7 @@ void Network::MessageTarget::Write(const vector<string>& datum)
 
 void Network::MessageTarget::Write(const string& datum)
 {
+    NETWORK_CLASS_IS_VALID_1;
+
     return WriteString(datum);
 }

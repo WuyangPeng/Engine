@@ -18,10 +18,10 @@ namespace Mathematics
         MATHEMATICS_ASSERTION_0(quantity >= 3 && X && Y && F && smooth >= Math<Real>::GetValue(0), "Invalid input\n");
 
         mInitialized = false;
-        m_Quantity = quantity;
-        mX = nullptr;  // NEW1<Real>(m_Quantity);
-        mY = nullptr;  // NEW1<Real>(m_Quantity);
-        mA = nullptr;  // NEW1<Real>(m_Quantity);
+        quantity = quantity;
+        mX = nullptr;  // NEW1<Real>(quantity);
+        mY = nullptr;  // NEW1<Real>(quantity);
+        mA = nullptr;  // NEW1<Real>(quantity);
 
         int i, row, col;
 
@@ -32,7 +32,7 @@ namespace Mathematics
             // invariant to scalings.
             mXMin = X[0];
             mXMax = mXMin;
-            for (i = 1; i < m_Quantity; ++i)
+            for (i = 1; i < quantity; ++i)
             {
                 if (X[i] < mXMin)
                 {
@@ -44,14 +44,14 @@ namespace Mathematics
                 }
             }
             mXInvRange = (Math::GetValue(1)) / (mXMax - mXMin);
-            for (i = 0; i < m_Quantity; ++i)
+            for (i = 0; i < quantity; ++i)
             {
                 mX[i] = (X[i] - mXMin) * mXInvRange;
             }
 
             mYMin = Y[0];
             mYMax = mYMin;
-            for (i = 1; i < m_Quantity; ++i)
+            for (i = 1; i < quantity; ++i)
             {
                 if (Y[i] < mYMin)
                 {
@@ -63,7 +63,7 @@ namespace Mathematics
                 }
             }
             mYInvRange = (Math::GetValue(1)) / (mYMax - mYMin);
-            for (i = 0; i < m_Quantity; ++i)
+            for (i = 0; i < quantity; ++i)
             {
                 mY[i] = (Y[i] - mYMin) * mYInvRange;
             }
@@ -79,15 +79,15 @@ namespace Mathematics
             mYMin = Math<Real>::GetValue(0);
             mYMax = Math::GetValue(1);
             mYInvRange = Math::GetValue(1);
-            memcpy(mX, X, m_Quantity * sizeof(Real));
-            memcpy(mY, Y, m_Quantity * sizeof(Real));
+            memcpy(mX, X, quantity * sizeof(Real));
+            memcpy(mY, Y, quantity * sizeof(Real));
         }
 
         // Compute matrix A = M + lambda*I [NxN matrix].
-        VariableMatrix<Real> AMat(m_Quantity, m_Quantity);
-        for (row = 0; row < m_Quantity; ++row)
+        VariableMatrix<Real> AMat(quantity, quantity);
+        for (row = 0; row < quantity; ++row)
         {
-            for (col = 0; col < m_Quantity; ++col)
+            for (col = 0; col < quantity; ++col)
             {
                 if (row == col)
                 {
@@ -104,8 +104,8 @@ namespace Mathematics
         }
 
         // Compute matrix B [Nx3 matrix].
-        VariableMatrix<Real> BMat(m_Quantity, 3);
-        for (row = 0; row < m_Quantity; ++row)
+        VariableMatrix<Real> BMat(quantity, 3);
+        for (row = 0; row < quantity; ++row)
         {
             BMat[row][0] = Math::GetValue(1);
             BMat[row][1] = mX[row];
@@ -113,7 +113,7 @@ namespace Mathematics
         }
 
         // Compute A^{-1}.
-        VariableMatrix<Real> invAMat(m_Quantity, m_Quantity);
+        VariableMatrix<Real> invAMat(quantity, quantity);
         try
         {
             invAMat = LinearSystem<Real>().Inverse(AMat);
@@ -145,7 +145,7 @@ namespace Mathematics
         for (row = 0; row < 3; ++row)
         {
             prod[row] = Math<Real>::GetValue(0);
-            for (i = 0; i < m_Quantity; ++i)
+            for (i = 0; i < quantity; ++i)
             {
                 prod[row] += PMat[row][i] * F[i];
             }
@@ -162,8 +162,8 @@ namespace Mathematics
         }
 
         // Compute z-B*b.
-        Real* tmp = nullptr;  // NEW1<Real>(m_Quantity);
-        for (row = 0; row < m_Quantity; ++row)
+        Real* tmp = nullptr;  // NEW1<Real>(quantity);
+        for (row = 0; row < quantity; ++row)
         {
             tmp[row] = F[row];
             for (i = 0; i < 3; ++i)
@@ -173,10 +173,10 @@ namespace Mathematics
         }
 
         // Compute 'a' vector for smooth thin plate spline.
-        for (row = 0; row < m_Quantity; ++row)
+        for (row = 0; row < quantity; ++row)
         {
             mA[row] = Math<Real>::GetValue(0);
-            for (i = 0; i < m_Quantity; ++i)
+            for (i = 0; i < quantity; ++i)
             {
                 mA[row] += invAMat[row][i] * tmp[i];
             }
@@ -229,9 +229,9 @@ namespace Mathematics
     Real IntpThinPlateSpline2<Real>::ComputeFunctional() const
     {
         Real functional = Math<Real>::GetValue(0);
-        for (int row = 0; row < m_Quantity; ++row)
+        for (int row = 0; row < quantity; ++row)
         {
-            for (int col = 0; col < m_Quantity; ++col)
+            for (int col = 0; col < quantity; ++col)
             {
                 if (row == col)
                 {
@@ -266,7 +266,7 @@ namespace Mathematics
             y = (y - mYMin) * mYInvRange;
 
             Real result = mB[0] + mB[1] * x + mB[2] * y;
-            for (int i = 0; i < m_Quantity; ++i)
+            for (int i = 0; i < quantity; ++i)
             {
                 Real dx = x - mX[i];
                 Real dy = y - mY[i];
@@ -276,7 +276,7 @@ namespace Mathematics
             return result;
         }
 
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     template <typename Real>

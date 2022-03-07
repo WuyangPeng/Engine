@@ -116,7 +116,7 @@ void Rendering::NormalDerivatives ::ComputeNormalDerivativesMatrix()
             }
         }
 
-        m_ProjectMatrix[index].SetColumn(3, Mathematics::FloatAPoint::GetOrigin().GetHomogeneousPoint());
+        m_ProjectMatrix[index].SetColumn(3, Mathematics::APointF::GetOrigin().GetHomogeneousPoint());
         m_DerivativestNormal[index] = m_DifferentMatrix[index] * m_ProjectMatrix[index].Inverse();
     }
 }
@@ -165,7 +165,7 @@ void Rendering::NormalDerivatives ::ComputeTangentAndBinormal()
         const auto trace = symmetricMat[0][0] + symmetricMat[1][1];
         const auto det = symmetricMat[0][0] * symmetricMat[1][1] - symmetricMat[0][1] * symmetricMat[1][0];
         const auto discr = trace * trace - 4.0f * det;
-        auto rootDiscr = Mathematics::FloatMath::Sqrt(Mathematics::FloatMath::FAbs(discr));
+        auto rootDiscr = Mathematics::MathF::Sqrt(Mathematics::MathF::FAbs(discr));
         const auto minCurvature = 0.5f * (trace - rootDiscr);
         // float maxCurvature = 0.5f * (trace + rootDiscr);
 

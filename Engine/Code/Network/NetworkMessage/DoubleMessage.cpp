@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 23:01)
 
 #include "Network/NetworkExport.h"
 
@@ -29,16 +29,16 @@ CORE_TOOLS_RTTI_DEFINE(Network, DoubleMessage);
 NETWORK_ABSTRACT_FACTORY_DEFINE(Network, DoubleMessage);
 NETWORK_DEFAULT_STREAM_DEFINE(Network, DoubleMessage);
 
-int Network::DoubleMessage::GetMessageID() const
+int32_t Network::DoubleMessage::GetMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(GetFullMessageID() >> sm_MessageBytes);
+    return boost::numeric_cast<int32_t>(GetFullMessageID() >> sm_MessageBytes);
 }
 
-int Network::DoubleMessage::GetSubMessageID() const
+int32_t Network::DoubleMessage::GetSubMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(GetFullMessageID() & sm_MaxMessageID);
+    return boost::numeric_cast<int32_t>(GetFullMessageID() & sm_MaxMessageID);
 }

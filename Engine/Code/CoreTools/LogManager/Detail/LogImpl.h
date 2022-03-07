@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 16:23)
 
-// 日志类内部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_IMPL_H
 
@@ -48,9 +47,9 @@ namespace CoreTools
         LogAppenderIOManager& OutFatal() noexcept;
 
     private:
-        using LogAppenderIOManagerPtr = std::shared_ptr<LogAppenderIOManager>;
-        using AppenderManagerPtr = std::shared_ptr<AppenderManager>;
-        using LogAppenderIOManagerContainer = std::map<LogLevel, LogAppenderIOManagerPtr>;
+        using LogAppenderIOManagerSharedPtr = std::shared_ptr<LogAppenderIOManager>;
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
+        using LogAppenderIOManagerContainer = std::map<LogLevel, LogAppenderIOManagerSharedPtr>;
 
     private:
         void InitIOManager();
@@ -58,9 +57,9 @@ namespace CoreTools
         LogAppenderIOManager& Find(LogLevel type) noexcept;
 
     private:
-        AppenderManagerPtr m_AppenderManager;
-        LogAppenderIOManagerContainer m_LogAppenderIOManagerContainer;
-        LogAppenderIOManager m_ErrorLogAppenderIOManager;
+        AppenderManagerSharedPtr appenderManager;
+        LogAppenderIOManagerContainer logAppenderIOManagerContainer;
+        LogAppenderIOManager errorLogAppenderIOManager;
     };
 }
 

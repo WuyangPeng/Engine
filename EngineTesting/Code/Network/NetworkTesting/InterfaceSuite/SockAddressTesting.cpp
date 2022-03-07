@@ -103,60 +103,60 @@ void Network::SockAddressTesting ::ACEGetBoostInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
 
-     [[maybe_unused]] auto value = sockAddress1.GetBoostInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting ::ACEGetNetworkInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetACEServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetWinSockInetAddress();
 }
 
 void Network::SockAddressTesting ::BoostGetACEInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
 
-   [[maybe_unused]] auto value = sockAddress1.GetACEInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting ::BoostGetBoostInetAddressTest()
 {
     const TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
-    [[maybe_unused]] auto value0 = sockAddress1.GetBoostInetAddress();
+    [[maybe_unused]] const auto& value0 = sockAddress1.GetBoostInetAddress();
 
     TestingType sockAddress2{ GetBoostServerConfigurationStrategy() };
-    [[maybe_unused]] auto value1 = sockAddress2.GetBoostInetAddress();
+    [[maybe_unused]] const auto& value1 = sockAddress2.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting ::BoostGetNetworkInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetBoostServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetWinSockInetAddress();
 }
 
 void Network::SockAddressTesting ::NetworkGetACEInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetACEInetAddress();
+    [[maybe_unused]] const auto value = sockAddress1.GetACEInetAddress();
 }
 
 void Network::SockAddressTesting ::NetworkGetBoostInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetBoostInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting ::NetworkGetNetworkInetAddressTest()
 {
     const TestingType sockAddress1{ GetNetworkServerConfigurationStrategy() };
-    [[maybe_unused]] auto value0 = sockAddress1.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value0 = sockAddress1.GetWinSockInetAddress();
 
     TestingType sockAddress2{ GetNetworkServerConfigurationStrategy() };
-    [[maybe_unused]] auto value1 = sockAddress2.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value1 = sockAddress2.GetWinSockInetAddress();
 }
 
 void Network::SockAddressTesting ::NullTest()
@@ -193,12 +193,12 @@ void Network::SockAddressTesting ::NullGetBoostInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetBoostInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetBoostInetAddress();
 }
 
 void Network::SockAddressTesting ::NullGetNetworkInetAddressExceptionTest()
 {
     TestingType sockAddress1{ GetNullServerConfigurationStrategy() };
 
-    [[maybe_unused]] auto value = sockAddress1.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& value = sockAddress1.GetWinSockInetAddress();
 }

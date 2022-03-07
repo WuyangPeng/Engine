@@ -23,7 +23,7 @@ namespace Network
 		void ManagerTest();
 		void ExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

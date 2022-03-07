@@ -23,7 +23,7 @@ namespace Mathematics
 		void TriangleTest();
 		void CircumcircleTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -30,7 +30,7 @@ namespace Rendering
 		using ClassType = DlodNodeImpl;
 		using BufferSource = CoreTools::BufferSource;
 		using BufferTarget = CoreTools::BufferTarget;
-		using APoint = Mathematics::FloatAPoint;
+		using APoint = Mathematics::APointF;
 
 	public:
 		DlodNodeImpl();

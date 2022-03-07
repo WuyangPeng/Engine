@@ -28,12 +28,12 @@ namespace Mathematics
         int GetTriangle(int index) const;    
         
         void InsertEdge (int vertex, int edge);
-        void InsertTriangle (int triangle);
+        void InsertTriangle (int triangle0);
         
     private:        
         std::vector<int> m_Vertex;
         std::vector<int> m_Edge;
-        std::vector<int> m_Triangle;
+        std::vector<int> triangle;
     };
 }
 

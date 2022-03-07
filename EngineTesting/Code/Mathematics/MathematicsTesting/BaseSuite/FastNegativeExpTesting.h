@@ -24,7 +24,7 @@ namespace Mathematics
 		void FloatFastExpBoundaryTest();
 		void DoubleFastExpBoundaryTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

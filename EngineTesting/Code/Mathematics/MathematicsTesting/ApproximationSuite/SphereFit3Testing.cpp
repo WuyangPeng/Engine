@@ -7,11 +7,11 @@
 #include "SphereFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/SphereFit3Detail.h"
 
 #include <random>
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 using std::default_random_engine;
 using std::uniform_int;
@@ -22,6 +22,10 @@ namespace Mathematics
     template class SphereFit3<float>;
     template class SphereFit3<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SphereFit3Testing)
 
@@ -40,23 +44,23 @@ void Mathematics::SphereFit3Testing ::FitTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        std::vector<DoubleVector3D> vertices;
+        std::vector<Vector3D> vertices;
         int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        DoubleSphereFit3 firstSphereFit3(vertices, 2000, true);
-        DoubleSphereFit3 secondSphereFit3(vertices, 2000, false);
+        SphereFit3D firstSphereFit3(vertices, 2000, true);
+        SphereFit3D secondSphereFit3(vertices, 2000, false);
 
-        DoubleSphere3 firstCircle = firstSphereFit3.GetSphere();
-        DoubleSphere3 secondCircle = secondSphereFit3.GetSphere();
+        Sphere3D firstCircle = firstSphereFit3.GetSphere();
+        Sphere3D secondCircle = secondSphereFit3.GetSphere();
 
         for (int i = 0; i < size; ++i)
         {
-            double distance = DoubleVector3DTools::Distance(vertices[i], firstCircle.GetCenter());
+            double distance = Vector3ToolsD::Distance(vertices[i], firstCircle.GetCenter());
 
             ASSERT_TRUE(distance <= firstCircle.GetRadius() * 2.1);
             ASSERT_TRUE(distance <= secondCircle.GetRadius() * 2.1);

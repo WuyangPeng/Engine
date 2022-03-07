@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 9:35)
+///	引擎版本：0.8.0.2 (2022/02/10 16:45)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_PARAMETERS_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_PARAMETERS_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CoreTools/DataTypes/TupleDetail.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -34,16 +34,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetS() const noexcept;
-        [[nodiscard]] Real GetT() const noexcept;
+        NODISCARD Real GetS() const noexcept;
+        NODISCARD Real GetT() const noexcept;
 
     private:
-        Real m_S;
-        Real m_T;
+        Real s;
+        Real t;
     };
 
-    using FloatTorus3Parameters = Torus3Parameters<float>;
-    using DoubleTorus3Parameters = Torus3Parameters<double>;
+    using Torus3ParametersF = Torus3Parameters<float>;
+    using Torus3ParametersD = Torus3Parameters<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_TORUS3_PARAMETERS_H

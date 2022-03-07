@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:27)
+///	引擎版本：0.8.0.1 (2022/01/08 23:33)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_WRITE_FILE_MANAGER_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_WRITE_FILE_MANAGER_INTERFACE_H
@@ -31,10 +31,10 @@ namespace CoreTools
         WriteFileManagerInterface() = default;
         virtual ~WriteFileManagerInterface() noexcept = default;
 
-        WriteFileManagerInterface(const WriteFileManagerInterface& rhs) = default;
-        WriteFileManagerInterface& operator=(const WriteFileManagerInterface& rhs) = default;
-        WriteFileManagerInterface(WriteFileManagerInterface&& rhs) = default;
-        WriteFileManagerInterface& operator=(WriteFileManagerInterface&& rhs) = default;
+        WriteFileManagerInterface(const WriteFileManagerInterface& rhs) noexcept = default;
+        WriteFileManagerInterface& operator=(const WriteFileManagerInterface& rhs) noexcept = default;
+        WriteFileManagerInterface(WriteFileManagerInterface&& rhs) noexcept = default;
+        WriteFileManagerInterface& operator=(WriteFileManagerInterface&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

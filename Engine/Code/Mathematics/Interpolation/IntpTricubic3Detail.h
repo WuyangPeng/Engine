@@ -22,7 +22,7 @@ namespace Mathematics
 		mXBound = xBound;
 		mYBound = yBound;
 		mZBound = zBound;
-		m_Quantity = xBound * yBound*zBound;
+		quantity = xBound * yBound*zBound;
 
 		mXMin = xMin;
 		mXSpacing = xSpacing;
@@ -65,7 +65,7 @@ namespace Mathematics
 	template <typename Real>
 	int IntpTricubic3<Real>::GetQuantity() const
 	{
-		return m_Quantity;
+		return quantity;
 	}
 
 	template <typename Real>
@@ -136,7 +136,7 @@ namespace Mathematics
 		int ix = (int)xIndex;
 		if (ix < 0 || ix > mXBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute y-index and clamp to image.
@@ -144,7 +144,7 @@ namespace Mathematics
 		int iy = (int)yIndex;
 		if (iy < 0 || iy > mYBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute z-index and clamp to image.
@@ -152,7 +152,7 @@ namespace Mathematics
 		int iz = (int)zIndex;
 		if (iz < 0 || iz > mZBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		Real U[4];
@@ -247,7 +247,7 @@ namespace Mathematics
 		int ix = (int)xIndex;
 		if (ix < 0 || ix > mXBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute y-index and clamp to image.
@@ -255,7 +255,7 @@ namespace Mathematics
 		int iy = (int)yIndex;
 		if (iy < 0 || iy > mYBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		// Compute z-index and clamp to image.
@@ -263,7 +263,7 @@ namespace Mathematics
 		int iz = (int)zIndex;
 		if (iz < 0 || iz > mZBound - 1)
 		{
-			return Math<Real>::sm_MaxReal;
+			return Math<Real>::maxReal;
 		}
 
 		Real U[4], dx, xMult;

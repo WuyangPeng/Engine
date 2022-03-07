@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 14:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/01 19:21)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H
@@ -18,15 +21,15 @@ namespace Mathematics
     // 查找相交查询。这个相交点是
     // P = origin + t * direction = b0 * V0 + b1 * V1 + b2 * V2
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Triangle3 : public StaticIntersector<Real, Vector3D>
+    class StaticFindIntersectorLine3Triangle3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorLine3Triangle3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -34,31 +37,28 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const noexcept;
-        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+        NODISCARD Line3 GetLine() const noexcept;
+        NODISCARD Triangle3 GetTriangle() const noexcept;
 
-        [[nodiscard]] Real GetLineParameter() const noexcept;
-        [[nodiscard]] Real GetTriangleBary0() const noexcept;
-        [[nodiscard]] Real GetTriangleBary1() const noexcept;
-        [[nodiscard]] Real GetTriangleBary2() const noexcept;
+        NODISCARD Real GetLineParameter() const noexcept;
+        NODISCARD Real GetTriangleBary0() const noexcept;
+        NODISCARD Real GetTriangleBary1() const noexcept;
+        NODISCARD Real GetTriangleBary2() const noexcept;
 
     private:
         void Find();
 
     private:
         // 相交对象
-        Line3 m_Line;
-        Triangle3 m_Triangle;
+        Line3 line;
+        Triangle3 triangle;
 
         // 相交对象集信息
-        Real m_LineParameter;
-        Real m_TriangleBary0;
-        Real m_TriangleBary1;
-        Real m_TriangleBary2;
+        Real lineParameter;
+        Real triangleBary0;
+        Real triangleBary1;
+        Real triangleBary2;
     };
-
-    using FloatStaticFindIntersectorLine3Triangle3 = StaticFindIntersectorLine3Triangle3<float>;
-    using DoubleStaticFindIntersectorLine3Triangle3 = StaticFindIntersectorLine3Triangle3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_TRIANGLE3_H

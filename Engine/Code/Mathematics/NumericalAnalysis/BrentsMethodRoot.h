@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/23 16:48)
+///	引擎版本：0.8.0.2 (2022/02/14 14:57)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H
@@ -34,18 +34,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetRoot() const;
-        [[nodiscard]] Real GetFunction() const;
-        [[nodiscard]] BrentsMethodRootType GetBrentsMethodRootType() const noexcept;
+        NODISCARD Real GetRoot() const;
+        NODISCARD Real GetFunction() const;
+        NODISCARD BrentsMethodRootType GetBrentsMethodRootType() const noexcept;
 
     private:
-        Real m_Root;
-        Real m_Function;
-        BrentsMethodRootType m_BrentsMethodRootType;
+        Real root;
+        Real function;
+        BrentsMethodRootType brentsMethodRootType;
     };
 
-    using FloatBrentsMethodRoot = BrentsMethodRoot<float>;
-    using DoubleBrentsMethodRoot = BrentsMethodRoot<double>;
+    using BrentsMethodRootF = BrentsMethodRoot<float>;
+    using BrentsMethodRootD = BrentsMethodRoot<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_ROOT_H

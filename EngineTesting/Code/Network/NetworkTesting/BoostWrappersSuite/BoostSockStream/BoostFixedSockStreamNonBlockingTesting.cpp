@@ -23,11 +23,14 @@ using std::make_shared;
 using std::thread;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostFixedSockStreamNonBlockingTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26414)
 void Network::BoostFixedSockStreamNonBlockingTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
-    ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
+  //  ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
     ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
@@ -82,7 +85,7 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::ClientNonBlockingConnect(
 
         if (sockConnector.Connect(sockStream, sockAddress))
         {
-            [[maybe_unused]] auto value = sockStream->EnableNonBlock();
+            [[maybe_unused]] const auto value = sockStream->EnableNonBlock();
 
             break;
         }
@@ -145,14 +148,14 @@ void Network::BoostFixedSockStreamNonBlockingTesting ::ServerNonBlockingAcceptor
     auto configurationStrategy = GetBoostFixedServerConfigurationStrategy(GetRealOffset());
 
     SockAcceptorSharedPtr sockAcceptor{ make_shared<SockAcceptor>(configurationStrategy) };
-    [[maybe_unused]] auto value = sockAcceptor->EnableNonBlock();
+    [[maybe_unused]] const auto value = sockAcceptor->EnableNonBlock();
 
     constexpr auto acceptTime = GetAsynchronousAcceptTime();
     for (auto i = 0; i < acceptTime; ++i)
     {
-        if (sockAcceptor->Accept(sockStream))
+        if (sockAcceptor->Accept(*sockStream))
         {
-            [[maybe_unused]] auto value1 = sockStream->EnableNonBlock();
+            [[maybe_unused]] const auto value1 = sockStream->EnableNonBlock();
             break;
         }
 

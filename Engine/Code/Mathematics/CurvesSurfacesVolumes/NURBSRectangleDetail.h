@@ -13,7 +13,7 @@ namespace Mathematics
 {
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
 	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -35,7 +35,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Ve
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
+NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
     :  ParametricSurface<Real>(Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true)
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -57,7 +57,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,  int numVCtrlPoints, V
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
+NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
 	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -79,7 +79,7 @@ NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints, int numVCtrlPoints, Ve
 }
 
 template <typename Real>
-NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3D<Real>** ctrlPoint, Real** ctrlWeight,int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot,Real* vKnot)
+NURBSRectangle<Real>::NURBSRectangle (int numUCtrlPoints,int numVCtrlPoints, Vector3<Real>** ctrlPoint, Real** ctrlWeight,int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot,Real* vKnot)
 	: ParametricSurface<Real>{ Math<Real>::GetValue(0), Math::GetValue(1), Math<Real>::GetValue(0), Math::GetValue(1), true }
 {
     MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -108,12 +108,12 @@ NURBSRectangle<Real>::~NURBSRectangle ()
 }
 
 template <typename Real>
-void NURBSRectangle<Real>::CreateControl (Vector3D<Real>** ctrlPoint, Real** ctrlWeight)
+void NURBSRectangle<Real>::CreateControl (Vector3<Real>** ctrlPoint, Real** ctrlWeight)
 {
 	auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
 	auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
 
-    mCtrlPoint = nullptr;  // NEW2<Vector3D<Real> >(newNumUCtrlPoints, newNumVCtrlPoints);
+    mCtrlPoint = nullptr;  // NEW2<Vector3<Real> >(newNumUCtrlPoints, newNumVCtrlPoints);
 
     mCtrlWeight = nullptr;  // NEW2<Real>(newNumUCtrlPoints, newNumVCtrlPoints);
 
@@ -166,7 +166,7 @@ bool NURBSRectangle<Real>::IsLoop (int dim) const
 }
 
 template <typename Real>
-void NURBSRectangle<Real>::SetControlPoint (int uIndex, int vIndex, const Vector3D<Real>& ctrl)
+void NURBSRectangle<Real>::SetControlPoint (int uIndex, int vIndex, const Vector3<Real>& ctrl)
 {
     if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
     {
@@ -196,14 +196,14 @@ void NURBSRectangle<Real>::SetControlPoint (int uIndex, int vIndex, const Vector
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::GetControlPoint (int uIndex, int vIndex) const
+Vector3<Real> NURBSRectangle<Real>::GetControlPoint (int uIndex, int vIndex) const
 {
     if (0 <= uIndex && uIndex < mNumUCtrlPoints  &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
     {
         return mCtrlPoint[uIndex][vIndex];
     }
 
-    return Vector3D<Real>(Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal, Math<Real>::sm_MaxReal);
+    return Vector3<Real>(Math<Real>::maxReal, Math<Real>::maxReal, Math<Real>::maxReal);
 }
 
 template <typename Real>
@@ -244,7 +244,7 @@ Real NURBSRectangle<Real>::GetControlWeight (int uIndex, int vIndex) const
         return mCtrlWeight[uIndex][vIndex];
     }
 
-    return Math<Real>::sm_MaxReal;
+    return Math<Real>::maxReal;
 }
 
 template <typename Real>
@@ -264,11 +264,11 @@ Real NURBSRectangle<Real>::GetKnot (int dim, int i) const
         return mBasis[dim].GetKnot(i);
     }
 
-    return Math<Real>::sm_MaxReal;
+    return Math<Real>::maxReal;
 }
 
 template <typename Real>
-void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Real>* derU, Vector3D<Real>* derV, Vector3D<Real>* derUU, Vector3D<Real>* derUV, Vector3D<Real>* derVV) const
+void NURBSRectangle<Real>::Get (Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
 {
     int iu, iumin, iumax;
     if (derUU)
@@ -306,7 +306,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     Real tmp;
 
-	auto X = Vector3D<Real>::sm_Zero;
+	auto X = Vector3<Real>::sm_Zero;
     Real w = Math<Real>::GetValue(0);
     for (iu = iumin; iu <= iumax; ++iu)
     {
@@ -318,7 +318,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
         }
     }
     Real invW = (Math::GetValue(1))/w;
-    Vector3D<Real> P = invW*X;
+    Vector3<Real> P = invW*X;
     if (pos)
     {
         *pos = P;
@@ -331,12 +331,12 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     Real wDerU = Math<Real>::GetValue(0);
     Real wDerV = Math<Real>::GetValue(0);
-    Vector3D<Real> PDerU = Vector3D<Real>::sm_Zero;
-    Vector3D<Real> PDerV = Vector3D<Real>::sm_Zero;
+    Vector3<Real> PDerU = Vector3<Real>::sm_Zero;
+    Vector3<Real> PDerV = Vector3<Real>::sm_Zero;
 
     if (derU || derUU || derUV)
     {
-        Vector3D<Real> XDerU = Vector3D<Real>::sm_Zero;
+        Vector3<Real> XDerU = Vector3<Real>::sm_Zero;
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -355,7 +355,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     if (derV || derVV || derUV)
     {
-        Vector3D<Real> XDerV = Vector3D<Real>::sm_Zero;
+        Vector3<Real> XDerV = Vector3<Real>::sm_Zero;
         for (iu = iumin; iu <= iumax; ++iu)
         {
             for (iv = ivmin; iv <= ivmax; ++iv)
@@ -379,7 +379,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     if (derUU)
     {
-        Vector3D<Real> XDerUU = Vector3D<Real>::sm_Zero;
+        Vector3<Real> XDerUU = Vector3<Real>::sm_Zero;
         Real wDerUU = Math<Real>::GetValue(0);
         for (iu = iumin; iu <= iumax; ++iu)
         {
@@ -395,7 +395,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     if (derUV)
     {
-        Vector3D<Real> XDerUV = Vector3D<Real>::sm_Zero;
+        Vector3<Real> XDerUV = Vector3<Real>::sm_Zero;
         Real wDerUV = Math<Real>::GetValue(0);
         for (iu = iumin; iu <= iumax; ++iu)
         {
@@ -411,7 +411,7 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 
     if (derVV)
     {
-        Vector3D<Real> XDerVV = Vector3D<Real>::sm_Zero;
+        Vector3<Real> XDerVV = Vector3<Real>::sm_Zero;
         Real wDerVV = Math<Real>::GetValue(0);
         for (iu = iumin; iu <= iumax; ++iu)
         {
@@ -427,49 +427,49 @@ void NURBSRectangle<Real>::Get (Real u, Real v, Vector3D<Real>* pos, Vector3D<Re
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::P (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::P (Real u, Real v) const
 {
-    Vector3D<Real> pos;
+    Vector3<Real> pos;
     Get(u, v, &pos, 0, 0, 0, 0, 0);
     return pos;
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::PU (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::PU (Real u, Real v) const
 {
-    Vector3D<Real> derU;
+    Vector3<Real> derU;
     Get(u, v, 0, &derU, 0, 0, 0, 0);
     return derU;
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::PV (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::PV (Real u, Real v) const
 {
-    Vector3D<Real> derV;
+    Vector3<Real> derV;
     Get(u, v, 0, 0, &derV, 0, 0, 0);
     return derV;
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::PUU (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::PUU (Real u, Real v) const
 {
-    Vector3D<Real> derUU;
+    Vector3<Real> derUU;
     Get(u, v, 0, 0, 0, &derUU, 0, 0);
     return derUU;
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::PUV (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::PUV (Real u, Real v) const
 {
-    Vector3D<Real> derUV;
+    Vector3<Real> derUV;
     Get(u, v, 0, 0, 0, 0, &derUV, 0);
     return derUV;
 }
 
 template <typename Real>
-Vector3D<Real> NURBSRectangle<Real>::PVV (Real u, Real v) const
+Vector3<Real> NURBSRectangle<Real>::PVV (Real u, Real v) const
 {
-    Vector3D<Real> derVV;
+    Vector3<Real> derVV;
     Get(u, v, 0, 0, 0, 0, 0, &derVV);
     return derVV;
 }

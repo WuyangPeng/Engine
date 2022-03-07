@@ -37,7 +37,7 @@ void Network::BufferSendStreamTesting ::MainTest()
     constexpr auto segment = 100;
 
     const auto testLoopCount = GetTestLoopCount();
-    auto actualTestLoopCount = testLoopCount / segment;
+    const auto actualTestLoopCount = testLoopCount / segment;
     auto remainder = testLoopCount % segment;
 
     ASSERT_NOT_THROW_EXCEPTION_1(SendTest, remainder);
@@ -56,7 +56,7 @@ void Network::BufferSendStreamTesting ::SendTest(int testLoopCount)
 
 void Network::BufferSendStreamTesting ::FinishSendTest(int testLoopCount, ParserStrategy parserStrategy)
 {
-    TestingType bufferSendStream{ sm_BufferSize, parserStrategy };
+    TestingType bufferSendStream{ sm_BufferSize, parserStrategy, EncryptedCompressionStrategy::Default };
 
     ASSERT_EQUAL(bufferSendStream.GetCurrentSize(), MessageInterface::GetMessageHeadSize());
     ASSERT_TRUE(bufferSendStream.IsEmpty());

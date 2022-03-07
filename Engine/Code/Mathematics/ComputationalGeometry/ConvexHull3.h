@@ -30,20 +30,20 @@ namespace Mathematics
 		// scaling the points to [0,2^{24}]^3.  The choice Query::QT_RATIONAL uses
 		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
 		// uses floating-point arithmetic, but is not robust in all cases.
-		ConvexHull3 (const std::vector<Vector3D<Real> >& vertices, Real epsilon, bool bOwner, QueryType eQueryType);
+		ConvexHull3 (const std::vector<Vector3<Real> >& vertices, Real epsilon, bool bOwner, QueryType eQueryType);
 		virtual ~ConvexHull3 ();
 		
 		// If GetDimension() returns 1, then the points lie on a line.  You must
 		// create a ConvexHull1 object using the function provided.
-		const Vector3D<Real>& GetLineOrigin () const;
-		const Vector3D<Real>& GetLineDirection () const;
+		const Vector3<Real>& GetLineOrigin () const;
+		const Vector3<Real>& GetLineDirection () const;
 		ConvexHull1<Real>* GetConvexHull1 () const;
 		
 		// If GetDimension() returns 2, then the points lie on a plane.  The plane
 		// has two direction vectors (inputs 0 or 1).  You must create a
 		// ConvexHull2 object using the function provided.
-		const Vector3D<Real>& GetPlaneOrigin () const;
-		const Vector3D<Real>& GetPlaneDirection (int i) const;
+		const Vector3<Real>& GetPlaneOrigin () const;
+		const Vector3<Real>& GetPlaneDirection (int i) const;
 		ConvexHull2<Real>* GetConvexHull2 () const;
 		
 		// Support for streaming to/from disk.
@@ -81,17 +81,17 @@ namespace Mathematics
 		void DeleteHull ();
 		
 		// The input points.
-		std::vector<Vector3D<Real> > mVertices;
+		std::vector<Vector3<Real> > mVertices;
 		
 		// Support for robust queries.
-		std::vector<Vector3D<Real> > mSVertices;
+		std::vector<Vector3<Real> > mSVertices;
 		Query3<Real>* mQuery;
 		
 		// The line of containment if the dimension is 1.
-		Vector3D<Real> m_LineOrigin, m_LineDirection;
+		Vector3<Real> m_LineOrigin, m_LineDirection;
 		
 		// The plane of containment if the dimension is 2.
-		Vector3D<Real> mPlaneOrigin, mPlaneDirection[2];
+		Vector3<Real> mPlaneOrigin, mPlaneDirection[2];
 		
 		// The current hull.
 		std::set<Triangle*> mHull;

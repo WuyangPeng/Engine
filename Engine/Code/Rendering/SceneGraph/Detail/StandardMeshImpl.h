@@ -21,10 +21,10 @@ namespace Rendering
     {
     public:
         using ClassType = StandardMeshImpl;
-        using APoint = Mathematics::FloatAPoint;
-        using AVector = Mathematics::FloatAVector;
-        using Vector2D = Mathematics::FloatVector2D;
-        using Math = Mathematics::FloatMath;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using Vector2D = Mathematics::Vector2F;
+        using Math = Mathematics::MathF;
 
     public:
         StandardMeshImpl(const VertexFormatSharedPtr& vertexFormat, bool isStatic = true, bool inside = false, const FloatTransform* transform = nullptr);

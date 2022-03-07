@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/02 9:49)
+///	引擎版本：0.8.0.2 (2022/01/29 13:53)
 
 #ifndef MATHEMATICS_ALGEBRA_H
 #define MATHEMATICS_ALGEBRA_H
@@ -17,9 +17,9 @@
 #include "AVectorOrthonormalizeDetail.h"
 #include "AlgebraAggregate.h"
 #include "AlgebraStreamSize.h"
-#include "AxesAlignBoundingBox2DDetail.h"
-#include "AxesAlignBoundingBox3DDetail.h"
-#include "AxesAlignBoundingBox4DDetail.h"
+#include "AxesAlignBoundingBox2Detail.h"
+#include "AxesAlignBoundingBox3Detail.h"
+#include "AxesAlignBoundingBox4Detail.h"
 #include "BandedMatrixDetail.h"
 #include "BandedMatrixSolveDetail.h"
 #include "BarycentricCoordinates.h"
@@ -41,17 +41,17 @@
 #include "QuaternionSwingTwistDetail.h"
 #include "VariableLengthVectorDetail.h"
 #include "VariableMatrixDetail.h"
-#include "Vector2DDetail.h"
-#include "Vector2DInformationDetail.h"
-#include "Vector2DOrthonormalBasisDetail.h"
-#include "Vector2DOrthonormalizeDetail.h"
-#include "Vector2DToolsDetail.h"
-#include "Vector3DDetail.h"
-#include "Vector3DInformationDetail.h"
-#include "Vector3DOrthonormalBasisDetail.h"
-#include "Vector3DOrthonormalizeDetail.h"
-#include "Vector3DToolsDetail.h"
-#include "Vector4DDetail.h"
-#include "Vector4DToolsDetail.h"
+#include "Vector2Detail.h"
+#include "Vector2InformationDetail.h"
+#include "Vector2OrthonormalBasisDetail.h"
+#include "Vector2OrthonormalizeDetail.h"
+#include "Vector2ToolsDetail.h"
+#include "Vector3Detail.h"
+#include "Vector3InformationDetail.h"
+#include "Vector3OrthonormalBasisDetail.h"
+#include "Vector3OrthonormalizeDetail.h"
+#include "Vector3ToolsDetail.h"
+#include "Vector4Detail.h"
+#include "Vector4ToolsDetail.h"
 
 #endif  // MATHEMATICS_ALGEBRA_H

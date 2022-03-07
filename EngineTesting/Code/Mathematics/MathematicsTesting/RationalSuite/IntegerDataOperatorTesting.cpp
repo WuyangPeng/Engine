@@ -20,7 +20,10 @@
 using std::vector;
 using std::uniform_int; 
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 namespace Mathematics
 {
 	template class IntegerData<21>;

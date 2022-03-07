@@ -35,16 +35,11 @@ namespace CoreTools
     public:
         explicit Object(const std::string& name);
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         ~Object() noexcept = 0;
         Object(const Object& rhs) = default;
-        virtual Object& operator=(const Object& rhs) = default;
+        Object& operator=(const Object& rhs) = default;
         Object(Object&& rhs) noexcept = default;
-        virtual Object& operator=(Object&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_POP
+        Object& operator=(Object&& rhs) noexcept = default;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

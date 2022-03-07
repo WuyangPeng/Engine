@@ -1,15 +1,16 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/23 18:37)
+///	引擎版本：0.8.0.2 (2022/02/14 15:14)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BRENTS_METHOD_CALCULATE_DETAIL_H
 
+#include "BrentsMethod.h"
 #include "BrentsMethodCalculate.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
@@ -17,21 +18,21 @@
 
 template <typename Real, typename UserDataType>
 Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodCalculate(const BrentsMethod& brentsMethod, Real begin, Real end)
-    : m_BrentsMethod{ brentsMethod },
-      m_Begin{ begin },
-      m_End{ end },
-      m_BeginFunction{ m_BrentsMethod.GetFunctionValue(m_Begin) },
-      m_EndFunction{ m_BrentsMethod.GetFunctionValue(m_End) },
-      m_Bisect2Root{},
-      m_SearchBegin{},
-      m_SearchEnd{},
-      m_SearchFunction{},
-      m_PreviousBisected{ true },
-      m_BeginEndFunctionDifference{},
-      m_BeginSearchFunctionDifference{},
-      m_EndSearchFunctionDifference{},
-      m_Solution{},
-      m_SolutionFunction{}
+    : brentsMethod{ brentsMethod },
+      begin{ begin },
+      end{ end },
+      beginFunction{ brentsMethod.GetFunctionValue(begin) },
+      endFunction{ brentsMethod.GetFunctionValue(end) },
+      bisect2Root{},
+      searchBegin{},
+      searchEnd{},
+      searchFunction{},
+      previousBisected{ true },
+      beginEndFunctionDifference{},
+      beginSearchFunctionDifference{},
+      endSearchFunctionDifference{},
+      solution{},
+      solutionFunction{}
 {
     Calculate();
 
@@ -39,19 +40,21 @@ Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodCalculate(co
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
-typename const Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodRoot Mathematics::BrentsMethodCalculate<Real, UserDataType>::GetRoot() noexcept
+typename Mathematics::BrentsMethodCalculate<Real, UserDataType>::BrentsMethodRoot Mathematics::BrentsMethodCalculate<Real, UserDataType>::GetRoot() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Bisect2Root;
+    return bisect2Root;
 }
 
 // private
@@ -61,14 +64,14 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
     if (IsBeginSatisfyConditions())
     {
         // 该端点是满足函数公差的近似根。
-        m_Bisect2Root = BrentsMethodRoot{ m_Begin, m_BeginFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRoot{ begin, beginFunction, BrentsMethodRootType::HaveSolution };
     }
     else if (IsEndSatisfyConditions())
     {
         // 该端点是满足函数公差的近似根。
-        m_Bisect2Root = BrentsMethodRoot{ m_End, m_EndFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::HaveSolution };
     }
-    else if (m_BeginFunction * m_EndFunction < Math::GetValue(0))
+    else if (beginFunction * endFunction < Math::GetValue(0))
     {
         Search();
     }
@@ -78,7 +81,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Calculate()
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsBeginSatisfyConditions() const noexcept
 {
-    if (m_BrentsMethod.GetNegativeFTolerance() <= m_BeginFunction && m_BeginFunction <= m_BrentsMethod.GetPositiveFTolerance())
+    if (brentsMethod.GetNegativeFTolerance() <= beginFunction && beginFunction <= brentsMethod.GetPositiveFTolerance())
     {
         return true;
     }
@@ -92,7 +95,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsBeginSatisfyCondi
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsEndSatisfyConditions() const noexcept
 {
-    if (m_BrentsMethod.GetNegativeFTolerance() <= m_EndFunction && m_EndFunction <= m_BrentsMethod.GetPositiveFTolerance())
+    if (brentsMethod.GetNegativeFTolerance() <= endFunction && endFunction <= brentsMethod.GetPositiveFTolerance())
     {
         return true;
     }
@@ -111,7 +114,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
     InitSearchValue();
 
     // 根搜索
-    const auto maxIterations = m_BrentsMethod.GetMaxIterations();
+    const auto maxIterations = brentsMethod.GetMaxIterations();
     for (auto i = 0; i < maxIterations; ++i)
     {
         if (RootSearch())
@@ -120,19 +123,19 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::Search()
         }
     }
 
-    m_Bisect2Root = BrentsMethodRoot{ m_End, m_EndFunction, BrentsMethodRootType::Unknown };
+    bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::Unknown };
 }
 
 // private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noexcept
 {
-    if (Math::FAbs(m_BeginFunction) < Math::FAbs(m_EndFunction))
+    if (Math::FAbs(beginFunction) < Math::FAbs(endFunction))
     {
-        // 交换m_Begin和m_End，使得|f(m_End)| <= |f(m_Begin)|。
+        // 交换m_Begin和m_End，使得|f(end)| <= |f(begin)|。
         // 数值m_End被认为是根的最佳估计。
-        std::swap(m_Begin, m_End);
-        std::swap(m_BeginFunction, m_EndFunction);
+        std::swap(begin, end);
+        std::swap(beginFunction, endFunction);
     }
 }
 
@@ -140,10 +143,10 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::SwapBeginEnd() noex
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InitSearchValue() noexcept
 {
-    m_SearchBegin = m_Begin;
-    m_SearchEnd = m_Begin;
-    m_SearchFunction = m_BeginFunction;
-    m_PreviousBisected = true;
+    searchBegin = begin;
+    searchEnd = begin;
+    searchFunction = beginFunction;
+    previousBisected = true;
 }
 
 // private
@@ -152,8 +155,8 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
 {
     UpdateFunctionDifference();
 
-    if (Math::GetZeroTolerance() < Math::FAbs(m_BeginSearchFunctionDifference) &&
-        Math::GetZeroTolerance() < Math::FAbs(m_EndSearchFunctionDifference))
+    if (Math::GetZeroTolerance() < Math::FAbs(beginSearchFunctionDifference) &&
+        Math::GetZeroTolerance() < Math::FAbs(endSearchFunctionDifference))
     {
         // 使用逆二次插值。
         InverseQuadratic();
@@ -167,12 +170,12 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     // 计算值需要进行接受或拒绝测试。
     AcceptOrRejectTests();
 
-    m_SolutionFunction = m_BrentsMethod.GetFunctionValue(m_Solution);
+    solutionFunction = brentsMethod.GetFunctionValue(solution);
 
     // 评估函数在新的估计和收敛测试。
     if (IsSolutionSatisfyConditions())
     {
-        m_Bisect2Root = BrentsMethodRoot{ m_Solution, m_SolutionFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRoot{ solution, solutionFunction, BrentsMethodRootType::HaveSolution };
         return true;
     }
 
@@ -182,13 +185,13 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
     // 允许该算法子间隔足够小时终止。
     if (IsConvXTolerance())
     {
-        m_Bisect2Root = BrentsMethodRoot{ m_End, m_EndFunction, BrentsMethodRootType::HaveSolution };
+        bisect2Root = BrentsMethodRoot{ end, endFunction, BrentsMethodRootType::HaveSolution };
 
         return true;
     }
 
     // 一个循环不变式是，x1是根估计，
-    // f(m_Begin) * f(m_End) < 0，|f(m_End)| <= |f(m_Begin)|。
+    // f(begin) * f(end) < 0，|f(end)| <= |f(begin)|。
     SwapBeginEnd();
 
     return false;
@@ -198,40 +201,40 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::RootSearch()
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateFunctionDifference() noexcept
 {
-    m_BeginEndFunctionDifference = m_BeginFunction - m_EndFunction;
-    m_BeginSearchFunctionDifference = m_BeginFunction - m_SearchFunction;
-    m_EndSearchFunctionDifference = m_EndFunction - m_SearchFunction;
+    beginEndFunctionDifference = beginFunction - endFunction;
+    beginSearchFunctionDifference = beginFunction - searchFunction;
+    endSearchFunctionDifference = endFunction - searchFunction;
 }
 
 // private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseQuadratic() noexcept
 {
-    m_Solution = m_Begin * m_EndFunction * m_SearchFunction / m_BeginEndFunctionDifference / m_BeginSearchFunctionDifference -
-                 m_End * m_BeginFunction * m_SearchFunction / m_BeginEndFunctionDifference / m_EndSearchFunctionDifference +
-                 m_SearchBegin * m_BeginFunction * m_SearchFunction / m_BeginSearchFunctionDifference / m_EndSearchFunctionDifference;
+    solution = begin * endFunction * searchFunction / beginEndFunctionDifference / beginSearchFunctionDifference -
+               end * beginFunction * searchFunction / beginEndFunctionDifference / endSearchFunctionDifference +
+               searchBegin * beginFunction * searchFunction / beginSearchFunctionDifference / endSearchFunctionDifference;
 }
 
 // private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::InverseLinear() noexcept
 {
-    m_Solution = (m_End * m_BeginFunction - m_Begin * m_EndFunction) / m_BeginEndFunctionDifference;
+    solution = (end * beginFunction - begin * endFunction) / beginEndFunctionDifference;
 }
 
 // private
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests() noexcept
 {
-    auto solutionAvrDiff = m_Solution - Math::GetRational(3, 4) * m_Begin - Math::GetRational(1, 4) * m_End;
+    auto solutionAvrDiff = solution - Math::GetRational(3, 4) * begin - Math::GetRational(1, 4) * end;
 
-    auto solutionEndDiff = m_Solution - m_End;
+    auto solutionEndDiff = solution - end;
 
     auto absSolutionEndDiff = Math::FAbs(solutionEndDiff);
 
-    auto absEndSearchBeginDiff = Math::FAbs(m_End - m_SearchBegin);
+    auto absEndSearchBeginDiff = Math::FAbs(end - searchBegin);
 
-    auto absSearchBeginSearchEndDiff = Math::FAbs(m_SearchBegin - m_SearchEnd);
+    auto absSearchBeginSearchEndDiff = Math::FAbs(searchBegin - searchEnd);
 
     auto currentBisected = false;
     if (Math::GetZeroTolerance() < solutionAvrDiff * solutionEndDiff)
@@ -241,27 +244,27 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests
         // 所以测试并没有使用简单的比较。
         currentBisected = true;
     }
-    else if (m_PreviousBisected)
+    else if (previousBisected)
     {
         // Brent的第一测试，以确定是否接受该插值 。
-        currentBisected = (Math::GetRational(1, 2) * absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= m_BrentsMethod.GetStepXTolerance());
+        currentBisected = (Math::GetRational(1, 2) * absEndSearchBeginDiff) <= absSolutionEndDiff || (absEndSearchBeginDiff <= brentsMethod.GetStepXTolerance());
     }
     else
     {
         // Brent的第二测试，以确定是否接受该插值 。
-        currentBisected = ((Math::GetRational(1, 2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= m_BrentsMethod.GetStepXTolerance()));
+        currentBisected = ((Math::GetRational(1, 2) * absSearchBeginSearchEndDiff) <= absSolutionEndDiff || (absSearchBeginSearchEndDiff <= brentsMethod.GetStepXTolerance()));
     }
 
     if (currentBisected)
     {
         // 其中一个额外的测试失败，
         // 所以拒绝插值，并用二分法来代替。
-        m_Solution = Math::GetRational(1, 2) * (m_Begin + m_End);
-        m_PreviousBisected = true;
+        solution = Math::GetRational(1, 2) * (begin + end);
+        previousBisected = true;
     }
     else
     {
-        m_PreviousBisected = false;
+        previousBisected = false;
     }
 }
 
@@ -269,18 +272,18 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::AcceptOrRejectTests
 template <typename Real, typename UserDataType>
 void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateSubinterval() noexcept
 {
-    m_SearchEnd = m_SearchBegin;
-    m_SearchBegin = m_End;
-    m_SearchFunction = m_EndFunction;
-    if (m_BeginFunction * m_SolutionFunction < Math::GetValue(0))
+    searchEnd = searchBegin;
+    searchBegin = end;
+    searchFunction = endFunction;
+    if (beginFunction * solutionFunction < Math::GetValue(0))
     {
-        m_End = m_Solution;
-        m_EndFunction = m_SolutionFunction;
+        end = solution;
+        endFunction = solutionFunction;
     }
     else
     {
-        m_Begin = m_Solution;
-        m_BeginFunction = m_SolutionFunction;
+        begin = solution;
+        beginFunction = solutionFunction;
     }
 }
 
@@ -288,7 +291,7 @@ void Mathematics::BrentsMethodCalculate<Real, UserDataType>::UpdateSubinterval()
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsSolutionSatisfyConditions() const noexcept
 {
-    if (m_BrentsMethod.GetNegativeFTolerance() <= m_SolutionFunction && m_SolutionFunction <= m_BrentsMethod.GetPositiveFTolerance())
+    if (brentsMethod.GetNegativeFTolerance() <= solutionFunction && solutionFunction <= brentsMethod.GetPositiveFTolerance())
     {
         return true;
     }
@@ -302,7 +305,7 @@ bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsSolutionSatisfyCo
 template <typename Real, typename UserDataType>
 bool Mathematics::BrentsMethodCalculate<Real, UserDataType>::IsConvXTolerance() const noexcept
 {
-    if (Math::FAbs(m_End - m_Begin) <= m_BrentsMethod.GetConvXTolerance())
+    if (Math::FAbs(end - begin) <= brentsMethod.GetConvXTolerance())
     {
         return true;
     }

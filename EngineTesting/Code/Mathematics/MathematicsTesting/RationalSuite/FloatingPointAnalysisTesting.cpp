@@ -21,7 +21,12 @@ namespace Mathematics
     template class FloatingPointAnalysis<float>;
     template class FloatingPointAnalysis<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, FloatingPointAnalysisTesting)
 
 void Mathematics::FloatingPointAnalysisTesting ::MainTest()
@@ -121,7 +126,7 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
         ASSERT_ENUM_EQUAL(firstFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         int firstRealExponent = firstFloatingPointAnalysis.GetRealExponent();
-        float secondValue = FloatMath::Pow(2, static_cast<float>(firstRealExponent));
+        float secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
         FloatingPointAnalysis<float> secondFloatingPointAnalysis(secondValue);
 
         ASSERT_EQUAL(firstFloatingPointAnalysis.GetExponent(), secondFloatingPointAnalysis.GetExponent());
@@ -136,7 +141,7 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
         ASSERT_ENUM_EQUAL(thirdFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         int secondRealExponent = thirdFloatingPointAnalysis.GetRealExponent();
-        double fourthValue = DoubleMath::Pow(2, static_cast<double>(secondRealExponent));
+        double fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
         FloatingPointAnalysis<double> fourthFloatingPointAnalysis(fourthValue);
 
         ASSERT_EQUAL(thirdFloatingPointAnalysis.GetExponent(), fourthFloatingPointAnalysis.GetExponent());
@@ -151,7 +156,7 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
         ASSERT_ENUM_EQUAL(fifthFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         int thirdRealExponent = fifthFloatingPointAnalysis.GetRealExponent();
-        float sixthValue = FloatMath::Pow(2, static_cast<float>(thirdRealExponent));
+        float sixthValue = MathF::Pow(2, static_cast<float>(thirdRealExponent));
         FloatingPointAnalysis<float> sixthFloatingPointAnalysis(sixthValue);
 
         ASSERT_EQUAL(fifthFloatingPointAnalysis.GetExponent(), sixthFloatingPointAnalysis.GetExponent());
@@ -166,7 +171,7 @@ void Mathematics::FloatingPointAnalysisTesting ::ExponentTest()
         ASSERT_ENUM_EQUAL(seventhFloatingPointAnalysis.GetType(), FloatingPointAnalysisType::Valid);
 
         int eighthRealExponent = seventhFloatingPointAnalysis.GetRealExponent();
-        double eighthValue = DoubleMath::Pow(2, static_cast<double>(eighthRealExponent));
+        double eighthValue = MathD::Pow(2, static_cast<double>(eighthRealExponent));
         FloatingPointAnalysis<double> eighthFloatingPointAnalysis(eighthValue);
 
         ASSERT_EQUAL(seventhFloatingPointAnalysis.GetExponent(), eighthFloatingPointAnalysis.GetExponent());
@@ -198,8 +203,8 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
         uint32_t firstMantissa = firstFloatingPointAnalysis.GetRealMantissa();
         NumericalValueSymbol firstSign = firstFloatingPointAnalysis.GetSymbol();
 
-        float secondValue = static_cast<float>(firstMantissa) / FloatMath::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::g_ExponentShifting)) *
-                            FloatMath::Pow(2.0f, static_cast<float>(firstExponent));
+        float secondValue = static_cast<float>(firstMantissa) / MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) *
+                            MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             secondValue = -secondValue;
@@ -221,8 +226,8 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
         uint64_t secondMantissa = thirdFloatingPointAnalysis.GetRealMantissa();
         NumericalValueSymbol secondSign = thirdFloatingPointAnalysis.GetSymbol();
 
-        double fourthValue = static_cast<double>(secondMantissa) / DoubleMath::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::g_ExponentShifting)) *
-                             DoubleMath::Pow(2.0, static_cast<double>(secondExponent));
+        double fourthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) *
+                             MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             fourthValue = -fourthValue;
@@ -244,8 +249,8 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
         firstMantissa = fifthFloatingPointAnalysis.GetRealMantissa();
         firstSign = fifthFloatingPointAnalysis.GetSymbol();
 
-        float sixthValue = static_cast<float>(firstMantissa) / FloatMath::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::g_ExponentShifting)) /
-                           FloatMath::Pow(2.0f, static_cast<float>(firstExponent));
+        float sixthValue = static_cast<float>(firstMantissa) / MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) /
+                           MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
         if (firstSign == NumericalValueSymbol::Negative)
             sixthValue = -sixthValue;
@@ -267,8 +272,8 @@ void Mathematics::FloatingPointAnalysisTesting ::MantissaTest()
         secondMantissa = seventhFloatingPointAnalysis.GetRealMantissa();
         secondSign = seventhFloatingPointAnalysis.GetSymbol();
 
-        double eighthValue = static_cast<double>(secondMantissa) / DoubleMath::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::g_ExponentShifting)) /
-                             DoubleMath::Pow(2.0, static_cast<double>(secondExponent));
+        double eighthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) /
+                             MathD::Pow(2.0, static_cast<double>(secondExponent));
 
         if (secondSign == NumericalValueSymbol::Negative)
             eighthValue = -eighthValue;

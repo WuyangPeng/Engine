@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/23 15:10)
+///	引擎版本：0.8.0.3 (2022/02/24 18:58)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_ACHIEVE_H
@@ -14,13 +14,19 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine2Classify(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin,
-                                                                                          const Vector2D& rhsDirection, bool isCalculateParameter, const Real epsilon)
-    : ParentType{ epsilon }, m_Parameter0{ Math::GetValue(0) }, m_Parameter1{ Math::GetValue(0) }
+Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine2Classify(const Vector2& lhsOrigin,
+                                                                                          const Vector2& lhsDirection,
+                                                                                          const Vector2& rhsOrigin,
+                                                                                          const Vector2& rhsDirection,
+                                                                                          bool isCalculateParameter,
+                                                                                          const Real epsilon)
+    : ParentType{ epsilon },
+      parameter0{ Math::GetValue(0) },
+      parameter1{ Math::GetValue(0) }
 {
     Test(lhsOrigin, lhsDirection, rhsOrigin, rhsDirection, isCalculateParameter);
 
@@ -29,7 +35,7 @@ Mathematics::StaticTestIntersectorLine2Classify<Real>::StaticTestIntersectorLine
 
 // private
 template <typename Real>
-void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin, const Vector2D& rhsDirection, bool isCalculateParameter)
+void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection, bool isCalculateParameter)
 {
     auto dotThreshold = this->GetEpsilon();
 
@@ -40,16 +46,16 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2D&
     /// 如果D0.Dot(Perp(D1))不为零，则s0 = Q.Dot(Perp(D1)) / D0.Dot(Perp(D1))产生交点。
     /// 同样，s1 = Q.Dot(Perp(D0)) / D0.Dot(Perp(D1))
     auto difference = rhsOrigin - lhsOrigin;
-    auto lhsDirectionDotPerpRhsDirection = Vector2DTools::DotPerp(lhsDirection, rhsDirection);
+    auto lhsDirectionDotPerpRhsDirection = Vector2Tools::DotPerp(lhsDirection, rhsDirection);
     if (dotThreshold < Math::FAbs(lhsDirectionDotPerpRhsDirection))
     {
         // 线在单个点相交。
         if (isCalculateParameter)
         {
-            auto differenceDotPerpLhsDirection = Vector2DTools::DotPerp(difference, lhsDirection);
-            auto differenceDotPerpRhsDirection = Vector2DTools::DotPerp(difference, rhsDirection);
-            m_Parameter0 = differenceDotPerpRhsDirection / lhsDirectionDotPerpRhsDirection;
-            m_Parameter1 = differenceDotPerpLhsDirection / lhsDirectionDotPerpRhsDirection;
+            auto differenceDotPerpLhsDirection = Vector2Tools::DotPerp(difference, lhsDirection);
+            auto differenceDotPerpRhsDirection = Vector2Tools::DotPerp(difference, rhsDirection);
+            parameter0 = differenceDotPerpRhsDirection / lhsDirectionDotPerpRhsDirection;
+            parameter1 = differenceDotPerpLhsDirection / lhsDirectionDotPerpRhsDirection;
         }
 
         this->SetIntersectionType(IntersectionType::Point);
@@ -65,7 +71,7 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2D&
     }
 
     difference.Normalize(dotThreshold);
-    auto differenceDotPerpRhsDirection = Vector2DTools::DotPerp(difference, rhsDirection);
+    auto differenceDotPerpRhsDirection = Vector2Tools::DotPerp(difference, rhsDirection);
     if (Math::FAbs(differenceDotPerpRhsDirection) <= dotThreshold)
     {
         // 线是共线的.
@@ -79,6 +85,7 @@ void Mathematics::StaticTestIntersectorLine2Classify<Real>::Test(const Vector2D&
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticTestIntersectorLine2Classify<Real>::IsValid() const noexcept
 {
@@ -87,6 +94,7 @@ bool Mathematics::StaticTestIntersectorLine2Classify<Real>::IsValid() const noex
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -94,7 +102,7 @@ Real Mathematics::StaticTestIntersectorLine2Classify<Real>::GetParameter0() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Parameter0;
+    return parameter0;
 }
 
 template <typename Real>
@@ -102,7 +110,7 @@ Real Mathematics::StaticTestIntersectorLine2Classify<Real>::GetParameter1() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Parameter1;
+    return parameter1;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE2_CLASSIFY_ACHIEVE_H

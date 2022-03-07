@@ -6,7 +6,7 @@
 
 #include "Ellipse2Testing.h"
 #include "Mathematics/Objects2D/Ellipse2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -29,7 +29,12 @@ void Mathematics::Ellipse2Testing
 	ASSERT_NOT_THROW_EXCEPTION_0(ConstructionTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(CalculateTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Ellipse2Testing
 	::ConstructionTest()
 {
@@ -41,36 +46,36 @@ void Mathematics::Ellipse2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D center(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		axis0.Normalize();
 
-		DoubleVector2D axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		axis1.Normalize();
 
-		double extent0(DoubleMath::FAbs(secondRandomDistribution(generator)));
-		double extent1(DoubleMath::FAbs(secondRandomDistribution(generator)));
+		double extent0(MathD::FAbs(secondRandomDistribution(generator)));
+		double extent1(MathD::FAbs(secondRandomDistribution(generator)));
 
-		DoubleEllipse2 firstEllipse2(center, axis0, axis1, extent0, extent1);
+		Ellipse2D firstEllipse2(center, axis0, axis1, extent0, extent1);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(firstEllipse2.GetCenter(), center));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(firstEllipse2.GetCenter(), center));
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(firstEllipse2.GetAxis0(), axis0));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(firstEllipse2.GetAxis1(), axis1));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(firstEllipse2.GetAxis0(), axis0));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(firstEllipse2.GetAxis1(), axis1));
 		ASSERT_APPROXIMATE(firstEllipse2.GetExtent0(), extent0, 1e-10);
 		ASSERT_APPROXIMATE(firstEllipse2.GetExtent1(), extent1, 1e-10);		
 
 		auto matrix = firstEllipse2.GetMatrix();
 
-		if(DoubleMath::FAbs(matrix.Determinant()) <= 1e-8)
+		if(MathD::FAbs(matrix.Determinant()) <= 1e-8)
 			continue;
 
-		DoubleEllipse2Coefficients firstEllipse2Coefficients = firstEllipse2.ToCoefficients();
+		Ellipse2CoefficientsD firstEllipse2Coefficients = firstEllipse2.ToCoefficients();
 
-		DoubleEllipse2 secondEllipse2(firstEllipse2Coefficients);
+		Ellipse2D secondEllipse2(firstEllipse2Coefficients);
 
 		center = secondEllipse2.GetCenter();
 		axis0 = secondEllipse2.GetAxis0();
@@ -78,16 +83,16 @@ void Mathematics::Ellipse2Testing
 		extent0 = secondEllipse2.GetExtent0();
 		extent1 = secondEllipse2.GetExtent1();
 
-		DoubleEllipse2 thirdEllipse2(center, axis0, axis1, extent0, extent1);
+		Ellipse2D thirdEllipse2(center, axis0, axis1, extent0, extent1);
 
 		ASSERT_TRUE(Approximate(secondEllipse2.ToCoefficients(), thirdEllipse2.ToCoefficients(), 1e-10));
 
 		secondEllipse2.FromCoefficients(thirdEllipse2.ToCoefficients());
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(secondEllipse2.GetCenter(), thirdEllipse2.GetCenter()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(secondEllipse2.GetCenter(), thirdEllipse2.GetCenter()));
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(secondEllipse2.GetAxis0(), thirdEllipse2.GetAxis0()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(secondEllipse2.GetAxis1(), thirdEllipse2.GetAxis1()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(secondEllipse2.GetAxis0(), thirdEllipse2.GetAxis0()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(secondEllipse2.GetAxis1(), thirdEllipse2.GetAxis1()));
 		ASSERT_APPROXIMATE(secondEllipse2.GetExtent0(), thirdEllipse2.GetExtent0(), 1e-4f);
 		ASSERT_APPROXIMATE(secondEllipse2.GetExtent1(), thirdEllipse2.GetExtent1(), 1e-7f);
 	}
@@ -104,54 +109,54 @@ void Mathematics::Ellipse2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D center(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 axis0(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		axis0.Normalize();
 
-		DoubleVector2D axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 axis1(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		axis1.Normalize();
 
-		double extent0(DoubleMath::FAbs(secondRandomDistribution(generator)));
-		double extent1(DoubleMath::FAbs(secondRandomDistribution(generator)));
+		double extent0(MathD::FAbs(secondRandomDistribution(generator)));
+		double extent1(MathD::FAbs(secondRandomDistribution(generator)));
 
-		DoubleEllipse2 firstEllipse2(center, axis0, axis1, extent0, extent1);
+		Ellipse2D firstEllipse2(center, axis0, axis1, extent0, extent1);
 
 		auto matrix = firstEllipse2.GetMatrix();
 
-		if (DoubleMath::FAbs(matrix.Determinant()) <= 1e-8)
+		if (MathD::FAbs(matrix.Determinant()) <= 1e-8)
 			continue;
 
-		DoubleEllipse2Coefficients firstEllipse2Coefficients = firstEllipse2.ToCoefficients();
+		Ellipse2CoefficientsD firstEllipse2Coefficients = firstEllipse2.ToCoefficients();
 
-		DoubleEllipse2 secondEllipse2(firstEllipse2Coefficients);
+		Ellipse2D secondEllipse2(firstEllipse2Coefficients);
 
 		firstEllipse2.FromCoefficients(secondEllipse2.ToCoefficients());
 
 		// 测试firstEllipse2和secondEllipse2计算相等性
-		DoubleMatrix2 firstMatrix = firstEllipse2.GetMatrix();
-		DoubleMatrix2 secondMatrix = secondEllipse2.GetMatrix();
-		DoubleMatrix2 thirdMatrix = DoubleMatrix2(firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0()) +
-						       DoubleMatrix2(firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1());
+		Matrix2D firstMatrix = firstEllipse2.GetMatrix();
+		Matrix2D secondMatrix = secondEllipse2.GetMatrix();
+		Matrix2D thirdMatrix = Matrix2D(firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() / firstEllipse2.GetExtent0()) +
+						       Matrix2D(firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() / firstEllipse2.GetExtent1());
 
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-9));
 		ASSERT_TRUE(Approximate(firstMatrix, thirdMatrix, 1e-10));
 
 		firstMatrix = firstEllipse2.GetMatrixInverse();
 		secondMatrix = secondEllipse2.GetMatrixInverse();
-		thirdMatrix = DoubleMatrix2(firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0()) +
-					  DoubleMatrix2(firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1());
+		thirdMatrix = Matrix2D(firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0(), firstEllipse2.GetAxis0() * firstEllipse2.GetExtent0()) +
+					  Matrix2D(firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1(), firstEllipse2.GetAxis1() * firstEllipse2.GetExtent1());
 
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-3));
 		ASSERT_TRUE(Approximate(firstMatrix, thirdMatrix, 1e-10));
 
-		DoubleVector2D point(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 point(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D diff = point - firstEllipse2.GetCenter();
-		double ratio0 = DoubleVector2DTools::DotProduct(firstEllipse2.GetAxis0(), diff) / firstEllipse2.GetExtent0();
-		double ratio1 = DoubleVector2DTools::DotProduct(firstEllipse2.GetAxis1(), diff) / firstEllipse2.GetExtent1();
+		Vector2 diff = point - firstEllipse2.GetCenter();
+		double ratio0 = Vector2ToolsD::DotProduct(firstEllipse2.GetAxis0(), diff) / firstEllipse2.GetExtent0();
+		double ratio1 = Vector2ToolsD::DotProduct(firstEllipse2.GetAxis1(), diff) / firstEllipse2.GetExtent1();
 		double evaluate = ratio0 * ratio0 + ratio1 * ratio1 - 1.0;
 
 		ASSERT_APPROXIMATE(firstEllipse2.Evaluate(point), secondEllipse2.Evaluate(point), 1e-5);

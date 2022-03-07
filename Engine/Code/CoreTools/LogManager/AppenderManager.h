@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 21:33)
 
-// 输出位置管理器类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_MANAGER_H
 
@@ -16,39 +15,43 @@
 #include "LogManagerFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Contract/ContractFwd.h"
-#include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
- 
+#include "CoreTools/Helper/ExportMacro.h"
+
 #include <string>
 
 CORE_TOOLS_NON_COPY_EXPORT_IMPL(AppenderManagerImpl);
 
-
 namespace CoreTools
 {
-    class CORE_TOOLS_DEFAULT_DECLARE AppenderManager final  
+    class CORE_TOOLS_DEFAULT_DECLARE AppenderManager final
     {
     public:
         NON_COPY_TYPE_DECLARE(AppenderManager);
         using String = System::String;
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
 
     public:
-        explicit AppenderManager(DisableNotThrow disableNotThrow);
-        ~AppenderManager() noexcept = default;
-        AppenderManager(const AppenderManager& rhs) noexcept = delete;
-        AppenderManager& operator=(const AppenderManager& rhs) noexcept = delete;
-        AppenderManager(AppenderManager&& rhs) noexcept = delete;
-        AppenderManager& operator=(AppenderManager&& rhs) noexcept = delete;
+        NODISCARD static AppenderManagerSharedPtr Create();
+
+    private:
+        enum class AppenderManagerCreate
+        {
+            Init,
+        };
+
+    public:
+        explicit AppenderManager(MAYBE_UNUSED AppenderManagerCreate appenderManagerCreate);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsAppenderExist(const String& name) const;
+        NODISCARD bool IsAppenderExist(const String& name) const;
 
-        [[nodiscard]] bool InsertLogger(const Logger& logger);
-        [[nodiscard]] bool RemoveLogger(LogFilter logFilter);
-        [[nodiscard]] bool InsertAppender(const String& name, const Appender& appender);
-        [[nodiscard]] bool InsertConsoleAppender(const Appender& appender);
-        [[nodiscard]] bool RemoveAppender(const String& name);
+        NODISCARD bool InsertLogger(const Logger& logger);
+        NODISCARD bool RemoveLogger(LogFilter logFilter);
+        NODISCARD bool InsertAppender(const String& name, const Appender& appender);
+        NODISCARD bool InsertConsoleAppender(const Appender& appender);
+        NODISCARD bool RemoveAppender(const String& name);
         void Clear() noexcept;
 
         void Write(const LogMessage& message);
@@ -57,8 +60,10 @@ namespace CoreTools
 
         void ReloadAppenderFile();
 
-        [[nodiscard]] static const String GetConsoleAppenderName();
-        [[nodiscard]] static const String GetDefaultAppenderName();
+        NODISCARD static String GetConsoleAppenderName();
+        NODISCARD static String GetDefaultAppenderName();
+
+        NODISCARD LogLevel GetMinLogLevelType(LogFilter logFilter) const;
 
     private:
         PackageType impl;

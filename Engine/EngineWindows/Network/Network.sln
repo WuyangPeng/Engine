@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.438
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Network", "Network\Network.vcxproj", "{28204556-DDB8-4B4D-9F1F-BAC3D313A277}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{71DC1C2A-38BA-4795-99A5-0BB41EC88555}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkTesting", "..\..\..\EngineTesting\EngineWindows\Network\NetworkTesting\NetworkTesting.vcxproj", "{754D982D-A813-40B1-88AB-83EBD535E607}"
 	ProjectSection(ProjectDependencies) = postProject
 		{28204556-DDB8-4B4D-9F1F-BAC3D313A277} = {28204556-DDB8-4B4D-9F1F-BAC3D313A277}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolset", "Toolset", "{EF3D1EDA-7B76-45DF-A95D-5F148093099B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkToolset", "..\..\..\Assist\AssistWindows\Toolset\Network\NetworkToolset\NetworkToolset.vcxproj", "{FE279A31-4A56-4067-B039-4CAE6803C41F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -21,12 +21,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkToolset", "..\..\..\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{070686CD-A338-49F7-817A-E25226B208AF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{7A32335D-E853-4796-832F-206068969442}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkExample", "..\..\..\Assist\AssistWindows\Example\NetworkExample\NetworkExample\NetworkExample.vcxproj", "{6E5F6CBB-A059-4540-A793-3B0899DAF79C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{28204556-DDB8-4B4D-9F1F-BAC3D313A277} = {28204556-DDB8-4B4D-9F1F-BAC3D313A277}
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{7A32335D-E853-4796-832F-206068969442}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetworkExampleTesting", "..\..\..\AssistTesting\AssistWindows\Example\NetworkExample\NetworkExampleTesting\NetworkExampleTesting.vcxproj", "{7855BBE3-55DF-4D2F-9AD7-235AB42277E6}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -132,8 +132,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{754D982D-A813-40B1-88AB-83EBD535E607} = {71DC1C2A-38BA-4795-99A5-0BB41EC88555}
 		{FE279A31-4A56-4067-B039-4CAE6803C41F} = {EF3D1EDA-7B76-45DF-A95D-5F148093099B}
-		{7A32335D-E853-4796-832F-206068969442} = {070686CD-A338-49F7-817A-E25226B208AF}
 		{6E5F6CBB-A059-4540-A793-3B0899DAF79C} = {070686CD-A338-49F7-817A-E25226B208AF}
+		{7A32335D-E853-4796-832F-206068969442} = {070686CD-A338-49F7-817A-E25226B208AF}
 		{7855BBE3-55DF-4D2F-9AD7-235AB42277E6} = {7A32335D-E853-4796-832F-206068969442}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

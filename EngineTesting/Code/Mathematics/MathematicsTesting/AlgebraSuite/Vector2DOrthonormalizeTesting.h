@@ -4,24 +4,24 @@
 // 
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/19 17:09)
 
-#ifndef MATHEMATICS_ALGEBRA_SUITE_VECTOR2D_ORTHONORMALIZE_TESTING_H
-#define MATHEMATICS_ALGEBRA_SUITE_VECTOR2D_ORTHONORMALIZE_TESTING_H
+#ifndef MATHEMATICS_ALGEBRA_SUITE_Vector2_ORTHONORMALIZE_TESTING_H
+#define MATHEMATICS_ALGEBRA_SUITE_Vector2_ORTHONORMALIZE_TESTING_H
 
 #include "CoreTools/Helper/UnitTestSuiteMacro.h"
 
 namespace Mathematics
 {
-	class Vector2DOrthonormalizeTesting : public CoreTools::UnitTest
+	class Vector2OrthonormalizeTesting : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2DOrthonormalizeTesting); 
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2OrthonormalizeTesting); 
 
 	private:
 		void MainTest();
 		void OrthonormalizeTest();
 
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 
-#endif // MATHEMATICS_ALGEBRA_SUITE_VECTOR2D_ORTHONORMALIZE_TESTING_H
+#endif // MATHEMATICS_ALGEBRA_SUITE_Vector2_ORTHONORMALIZE_TESTING_H

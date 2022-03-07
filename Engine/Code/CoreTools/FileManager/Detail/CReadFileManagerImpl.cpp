@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 13:38)
+///	引擎版本：0.8.0.1 (2022/01/09 1:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,6 +25,7 @@ CoreTools::CReadFileManagerImpl::CReadFileManagerImpl(const String& fileName)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::CReadFileManagerImpl::IsValid() const noexcept
 {
     if (ParentType::IsValid() && InterfaceType::IsValid())
@@ -32,6 +33,7 @@ bool CoreTools::CReadFileManagerImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int CoreTools::CReadFileManagerImpl::GetFileByteSize() const
@@ -66,10 +68,12 @@ void CoreTools::CReadFileManagerImpl::Read(size_t itemSize, size_t itemsNumber, 
     }
 
 #ifdef SYSTEM_BIG_ENDIAN
+
     if (1 < itemSize)
     {
         Endian::SwapByteOrder(itemSize, itemsNumber, data);
     }
+
 #endif  // SYSTEM_BIG_ENDIAN
 }
 

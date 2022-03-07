@@ -35,8 +35,8 @@ namespace Rendering
         SurfacePatch(SurfacePatch&& rhs) noexcept;
         SurfacePatch& operator=(SurfacePatch&& rhs) noexcept;
         using ParentType = Object;
-        using AVector = Mathematics::FloatAVector;
-        using APoint = Mathematics::FloatAPoint;
+        using AVector = Mathematics::AVectorF;
+        using APoint = Mathematics::APointF;
 
     public:
         SurfacePatch(float uMin, float uMax, float vMin, float vMax, bool rectangular);

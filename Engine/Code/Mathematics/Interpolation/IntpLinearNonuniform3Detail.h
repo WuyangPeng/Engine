@@ -27,7 +27,7 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	bool IntpLinearNonuniform3<Real>::Evaluate(const Vector3D<Real>& P, Real& F)
+	bool IntpLinearNonuniform3<Real>::Evaluate(const Vector3<Real>& P, Real& F)
 	{
 		int i = mDT->GetContainingTetrahedron(P);
 		if (i == -1)

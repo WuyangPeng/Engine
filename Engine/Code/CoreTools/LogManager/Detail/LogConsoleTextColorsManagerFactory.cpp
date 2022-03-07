@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:37)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -30,11 +30,11 @@ CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr Co
         return make_shared<OutputConsoleTextColorsManager>(logLevel);
 }
 
-CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr CoreTools::LogConsoleTextColorsManagerFactory::Create(const OStreamShared& osPtr, LogLevel logLevel)
+CoreTools::LogConsoleTextColorsManagerFactory::LogConsoleTextColorsManagerPtr CoreTools::LogConsoleTextColorsManagerFactory::Create(const OStreamShared& streamShared, LogLevel logLevel)
 {
-    if (osPtr.IsCout())
+    if (streamShared.IsCout())
         return make_shared<OutputConsoleTextColorsManager>(logLevel);
-    else if (osPtr.IsCerr())
+    else if (streamShared.IsCerr())
         return make_shared<ErrorConsoleTextColorsManager>(logLevel);
     else
         return make_shared<LogConsoleTextColorsManagerImpl>(logLevel);

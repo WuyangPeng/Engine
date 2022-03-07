@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:47)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SESSION_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SESSION_H
@@ -38,25 +38,22 @@ namespace Database
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] MysqlxSchemaPtr GetMysqlxSchemaPtr() override;
-        [[nodiscard]] MysqlxSchemaPtr GetMysqlxSchemaPtr(int dbIndex) override;
-        [[nodiscard]] SchemaContainer GetSchemaContainer() override;
+        NODISCARD MysqlxSchemaUniquePtr GetMysqlxSchema() const override;
+        NODISCARD MysqlxSchemaUniquePtr GetMysqlxSchema(int dbIndex) const override;
+        NODISCARD SchemaContainer GetSchemaContainer() override;
 
-        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, int bindStatement) override;
-        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement) override;
-        [[nodiscard]] ResultPtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement) override;
+        NODISCARD ResultUniquePtr ExecuteResult(const std::string& findStatement, int bindStatement) override;
+        NODISCARD ResultUniquePtr ExecuteResult(const std::string& findStatement) override;
+        NODISCARD ResultUniquePtr ExecuteResult(const std::string& findStatement, const std::string& bindStatement) override;
         void Execute(const std::string& findStatement, int bindStatement) override;
         void Execute(const std::string& findStatement) override;
         void Execute(const std::string& findStatement, const std::string& bindStatement) override;
 
     private:
-        using MysqlxSessionPtr = std::unique_ptr<MysqlxSession>;
+        using MysqlxSessionUniquePtr = std::unique_ptr<MysqlxSession>;
 
     private:
-        [[nodiscard]] static MysqlxSessionPtr GetMysqlxSessionPtr(const DatabaseObject& databaseObject);
-
-    private:
-        MysqlxSessionPtr m_MysqlxSession;
+        MysqlxSessionUniquePtr mysqlxSession;
     };
 }
 

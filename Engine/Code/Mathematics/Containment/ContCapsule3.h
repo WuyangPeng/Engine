@@ -18,11 +18,11 @@ namespace Mathematics
 	// maximum distance from points to axis.  Hemispherical caps are chosen
 	// as close together as possible.
 	template <typename Real>
-	Capsule3<Real> ContCapsule(const std::vector<Vector3D<Real> >& points);
+	Capsule3<Real> ContCapsule(const std::vector<Vector3<Real> >& points);
 	
 	// Test for containment of a point by a capsule.
 	template <typename Real>
-	bool InCapsule (const Vector3D<Real>& point, const Capsule3<Real>& capsule);
+	bool InCapsule (const Vector3<Real>& point, const Capsule3<Real>& capsule);
 	
 	// Test for containment of a sphere by a capsule.
 	template <typename Real>

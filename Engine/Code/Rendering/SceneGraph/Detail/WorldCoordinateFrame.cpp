@@ -23,8 +23,8 @@
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
 Rendering::WorldCoordinateFrame ::WorldCoordinateFrame(float epsilon)  
-    : m_Position{ Mathematics::FloatAPoint::GetOrigin() }, m_DirectionVector{ -Mathematics::FloatAVector::GetUnitZ() }, m_UpVector{ Mathematics::FloatAVector::GetUnitY() },
-      m_RightVector{ Mathematics::FloatAVector::GetUnitX() }, m_ViewMatrix{ Mathematics::FloatMatrix::GetZeroMatrix() }, m_Epsilon{ epsilon }
+    : m_Position{ Mathematics::APointF::GetOrigin() }, m_DirectionVector{ -Mathematics::AVectorF::GetUnitZ() }, m_UpVector{ Mathematics::AVectorF::GetUnitY() },
+      m_RightVector{ Mathematics::AVectorF::GetUnitX() }, m_ViewMatrix{ Mathematics::MatrixF::GetZeroMatrix() }, m_Epsilon{ epsilon }
 {
     OnFrameChange ();
     
@@ -87,7 +87,7 @@ void Rendering::WorldCoordinateFrame
     m_RightVector = rightVector;
     
     auto det = Dot(m_DirectionVector,Cross(m_UpVector,m_RightVector));
-    if (m_Epsilon < Mathematics::FloatMath::FAbs(1.0f - det))
+    if (m_Epsilon < Mathematics::MathF::FAbs(1.0f - det))
     {
         // 输入向量并没有形成一个标准正交集合。这里重新正交化
         const auto orthonormalize = Orthonormalize(m_DirectionVector, m_UpVector, m_RightVector, m_Epsilon);

@@ -1,50 +1,70 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 22:34)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_LOZENGE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_LOZENGE3_DETAIL_H
 
 #include "StaticTestIntersectorSegment3Lozenge3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Distance/Distance3D/DistanceSegment3Rectangle3Detail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::StaticTestIntersectorSegment3Lozenge3(const Segment3& rkSegment, const Lozenge3& rkLozenge, const Real epsilon)
-    : m_Segment{ rkSegment }, mLozenge{ rkLozenge }
+Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::StaticTestIntersectorSegment3Lozenge3(const Segment3& segment, const Lozenge3& lozenge, const Real epsilon)
+    : ParentType{ epsilon }, segment{ segment }, lozenge{ lozenge }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::GetSegment() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return segment;
 }
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
-	::GetSegment() const
+Mathematics::Lozenge3<Real> Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::GetLozenge() const noexcept
 {
-    return m_Segment;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return lozenge;
 }
 
 template <typename Real>
-const Mathematics::Lozenge3<Real> Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
-	::GetLozenge() const
+void Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>::Test()
 {
-    return mLozenge;
+    const auto distance = DistanceSegment3Rectangle3<Real>(segment, lozenge.GetRectangle()).Get().GetDistance();
+
+    if (distance <= lozenge.GetRadius())
+    {
+        this->SetIntersectionType(IntersectionType::Other);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorSegment3Lozenge3<Real>
-	::Test()
-{
-	auto distance = DistanceSegment3Rectangle3<Real>(m_Segment, mLozenge.GetRectangle()).Get().GetDistance();
-
-	if (distance <= mLozenge.GetRadius())
-	{
-		this->SetIntersectionType(IntersectionType::Other);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-}
- 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_LOZENGE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_LOZENGE3_DETAIL_H

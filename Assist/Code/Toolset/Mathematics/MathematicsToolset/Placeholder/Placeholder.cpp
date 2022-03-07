@@ -6,13 +6,12 @@
 
 #include "Toolset/Mathematics/MathematicsToolset/MathematicsToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-MathematicsToolset::Placeholder
-	::Placeholder() 
+MathematicsToolset::Placeholder ::Placeholder() noexcept
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(MathematicsToolset, Placeholder)

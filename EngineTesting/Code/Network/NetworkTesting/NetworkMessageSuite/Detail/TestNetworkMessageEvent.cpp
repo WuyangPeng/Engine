@@ -11,17 +11,14 @@
 #include "System/Time/DeltaTime.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::TestNetworkMessageEvent ::TestNetworkMessageEvent()
+Network::TestNetworkMessageEvent ::TestNetworkMessageEvent() noexcept
     : ParentType{}, m_Value{ 0 }, m_NowTime{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
-
-Network::TestNetworkMessageEvent ::~TestNetworkMessageEvent()
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 CLASS_INVARIANT_STUB_DEFINE(Network, TestNetworkMessageEvent);
 
 void Network::TestNetworkMessageEvent ::CallBackEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
@@ -31,6 +28,8 @@ void Network::TestNetworkMessageEvent ::CallBackEvent(uint64_t socketID, const C
     if (0 < socketID)
     {
         auto testNullMessage = boost::polymorphic_cast<const TestNullMessage*>(message.get());
+        if (testNullMessage == nullptr)
+            return;
 
         m_Value += testNullMessage->GetValue();
 
@@ -40,14 +39,14 @@ void Network::TestNetworkMessageEvent ::CallBackEvent(uint64_t socketID, const C
     }
 }
 
-int Network::TestNetworkMessageEvent ::GetValue() const
+int Network::TestNetworkMessageEvent ::GetValue() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return m_Value;
 }
 
-int64_t Network::TestNetworkMessageEvent ::GetNowTime() const
+int64_t Network::TestNetworkMessageEvent ::GetNowTime() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

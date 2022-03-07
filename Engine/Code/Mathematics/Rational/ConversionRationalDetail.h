@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 16:47)
+///	引擎版本：0.8.0.2 (2022/02/11 17:18)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_DETAIL_H
@@ -23,13 +23,13 @@
 
 template <typename T>
 Mathematics::ConversionRational<T>::ConversionRational(T value)
-    : m_NumeratorShifting{ 0 },
-      m_DenominatorShifting{ 0 },
-      m_NumeratorMantissa{ 0 },
-      m_DenominatorMantissa{ 0 },
-      m_Symbol{ NumericalValueSymbol::Zero },
-      m_MaxShifting{ 0 },
-      m_ReducibilityShifting{ 0 }
+    : numeratorShifting{ 0 },
+      denominatorShifting{ 0 },
+      numeratorMantissa{ 0 },
+      denominatorMantissa{ 0 },
+      symbol{ NumericalValueSymbol::Zero },
+      maxShifting{ 0 },
+      reducibilityShifting{ 0 }
 {
     Init(value, TraitsType{});
 
@@ -44,28 +44,28 @@ void Mathematics::ConversionRational<T>::Init(T value, const SignedIntegerType&)
 
     if (0 <= value)
     {
-        m_NumeratorMantissa = value;
-        m_DenominatorMantissa = 1;
-        m_Symbol = NumericalValueSymbol::Positive;
-        m_NumeratorShifting = 0;
-        m_DenominatorShifting = 0;
+        numeratorMantissa = value;
+        denominatorMantissa = 1;
+        symbol = NumericalValueSymbol::Positive;
+        numeratorShifting = 0;
+        denominatorShifting = 0;
     }
     else
     {
-        m_NumeratorMantissa = -value;
-        m_DenominatorMantissa = 1;
-        m_Symbol = NumericalValueSymbol::Negative;
-        m_NumeratorShifting = 0;
-        m_DenominatorShifting = 0;
+        numeratorMantissa = -value;
+        denominatorMantissa = 1;
+        symbol = NumericalValueSymbol::Negative;
+        numeratorShifting = 0;
+        denominatorShifting = 0;
     }
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_NumeratorMantissa) };
-    m_MaxShifting = floatingPointAnalysis.GetRealExponent();
-    if (m_MaxShifting < 0)
+    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
+    maxShifting = floatingPointAnalysis.GetRealExponent();
+    if (maxShifting < 0)
     {
-        m_MaxShifting = 0;
+        maxShifting = 0;
     }
-    m_ReducibilityShifting = 0;
+    reducibilityShifting = 0;
 }
 
 // private
@@ -74,19 +74,19 @@ void Mathematics::ConversionRational<T>::Init(T value, const UnsignedIntegerType
 {
     static_assert(std::is_integral_v<T>, "T isn't integral.");
 
-    m_NumeratorMantissa = value;
-    m_DenominatorMantissa = 1;
-    m_Symbol = NumericalValueSymbol::Positive;
-    m_NumeratorShifting = 0;
-    m_DenominatorShifting = 0;
+    numeratorMantissa = value;
+    denominatorMantissa = 1;
+    symbol = NumericalValueSymbol::Positive;
+    numeratorShifting = 0;
+    denominatorShifting = 0;
 
-    FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_NumeratorMantissa) };
-    m_MaxShifting = floatingPointAnalysis.GetRealExponent();
-    if (m_MaxShifting < 0)
+    FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(numeratorMantissa) };
+    maxShifting = floatingPointAnalysis.GetRealExponent();
+    if (maxShifting < 0)
     {
-        m_MaxShifting = 0;
+        maxShifting = 0;
     }
-    m_ReducibilityShifting = 0;
+    reducibilityShifting = 0;
 }
 
 // private
@@ -116,40 +116,40 @@ void Mathematics::ConversionRational<T>::InitFloatingPoint(T value)
 
     if (floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Valid || floatingPointAnalysis.GetType() == FloatingPointAnalysisType::Zero)
     {
-        m_NumeratorMantissa = floatingPointAnalysis.GetRealMantissa();
-        m_DenominatorMantissa = uint64_t{ 1 } << TraitsType::g_ExponentShifting;
-        m_Symbol = floatingPointAnalysis.GetSymbol();
+        numeratorMantissa = floatingPointAnalysis.GetRealMantissa();
+        denominatorMantissa = uint64_t{ 1 } << TraitsType::exponentShifting;
+        symbol = floatingPointAnalysis.GetSymbol();
 
         auto shifting = floatingPointAnalysis.GetRealExponent();
 
         if (0 < shifting)
         {
-            m_ReducibilityShifting = TraitsType::g_ExponentShifting - shifting;
+            reducibilityShifting = TraitsType::exponentShifting - shifting;
 
-            if (0 < m_ReducibilityShifting)
+            if (0 < reducibilityShifting)
             {
-                m_DenominatorMantissa >>= shifting;
+                denominatorMantissa >>= shifting;
                 shifting = 0;
             }
             else
             {
-                m_ReducibilityShifting = 0;
+                reducibilityShifting = 0;
             }
 
-            m_NumeratorShifting = shifting;
-            m_MaxShifting = TraitsType::g_ExponentShifting + m_NumeratorShifting;
+            numeratorShifting = shifting;
+            maxShifting = TraitsType::exponentShifting + numeratorShifting;
         }
         else if (shifting < 0)
         {
-            m_DenominatorShifting = -shifting;
-            m_MaxShifting = TraitsType::g_ExponentShifting - shifting;
-            m_ReducibilityShifting = -static_cast<int>(TraitsType::g_ExponentShifting);
+            denominatorShifting = -shifting;
+            maxShifting = TraitsType::exponentShifting - shifting;
+            reducibilityShifting = -static_cast<int>(TraitsType::exponentShifting);
         }
 
         if (floatingPointAnalysis.GetExponent() == 0)
         {
-            --m_DenominatorShifting;
-            --m_MaxShifting;
+            --denominatorShifting;
+            --maxShifting;
         }
     }
     else
@@ -159,11 +159,13 @@ void Mathematics::ConversionRational<T>::InitFloatingPoint(T value)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool Mathematics::ConversionRational<T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
@@ -171,7 +173,7 @@ uint64_t Mathematics::ConversionRational<T>::GetNumeratorMantissa() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_NumeratorMantissa;
+    return numeratorMantissa;
 }
 
 template <typename T>
@@ -179,7 +181,7 @@ uint64_t Mathematics::ConversionRational<T>::GetDenominatorMantissa() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_DenominatorMantissa;
+    return denominatorMantissa;
 }
 
 template <typename T>
@@ -187,7 +189,7 @@ Mathematics::NumericalValueSymbol Mathematics::ConversionRational<T>::GetSymbol(
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Symbol;
+    return symbol;
 }
 
 template <typename T>
@@ -195,7 +197,7 @@ int Mathematics::ConversionRational<T>::GetNumeratorShifting() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_NumeratorShifting;
+    return numeratorShifting;
 }
 
 template <typename T>
@@ -203,7 +205,7 @@ int Mathematics::ConversionRational<T>::GetDenominatorShifting() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_DenominatorShifting;
+    return denominatorShifting;
 }
 
 template <typename T>
@@ -211,7 +213,7 @@ int Mathematics::ConversionRational<T>::GetMaxShifting() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MaxShifting;
+    return maxShifting;
 }
 
 template <typename T>
@@ -219,7 +221,7 @@ int Mathematics::ConversionRational<T>::GetReducibilityShifting() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_ReducibilityShifting;
+    return reducibilityShifting;
 }
 
 template <typename T>
@@ -228,9 +230,9 @@ bool Mathematics::ConversionRational<T>::IsCanConversion() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto bit = m_MaxShifting - N * 32 - 1;
+    const auto bit = maxShifting - N * 32 - 1;
 
-    if (0 < bit && 0 <= m_ReducibilityShifting && m_ReducibilityShifting < bit)
+    if (0 < bit && 0 <= reducibilityShifting && reducibilityShifting < bit)
     {
         return false;
     }
@@ -242,24 +244,24 @@ bool Mathematics::ConversionRational<T>::IsCanConversion() const noexcept
 
 template <typename T>
 template <int N>
-const Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetNumerator() const
+Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetNumerator() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto bit = m_MaxShifting - N * 32 - 1;
-    auto numeratorShifting = m_NumeratorShifting;
-    auto numeratorMantissa = m_NumeratorMantissa;
+    const auto bit = maxShifting - N * 32 - 1;
+    auto numeratorShiftingCopy = numeratorShifting;
+    auto numeratorMantissaCopy = numeratorMantissa;
 
     if (0 < bit)
     {
-        numeratorShifting = GetAssignmentNumeratorShifting(bit);
-        numeratorMantissa = GetAssignmentNumeratorMantissa(bit);
+        numeratorShiftingCopy = GetAssignmentNumeratorShifting(bit);
+        numeratorMantissaCopy = GetAssignmentNumeratorMantissa(bit);
     }
 
-    auto numerator = Integer<N>{ numeratorMantissa };
-    numerator <<= numeratorShifting;
+    auto numerator = Integer<N>{ numeratorMantissaCopy };
+    numerator <<= numeratorShiftingCopy;
 
-    if (m_Symbol == NumericalValueSymbol::Negative)
+    if (symbol == NumericalValueSymbol::Negative)
     {
         numerator = -numerator;
     }
@@ -269,22 +271,22 @@ const Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetNumerator()
 
 template <typename T>
 template <int N>
-const Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetDenominator() const
+Mathematics::Integer<N> Mathematics::ConversionRational<T>::GetDenominator() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto bit = m_MaxShifting - N * 32 - 1;
-    auto denominatorShifting = m_DenominatorShifting;
-    auto denominatorMantissa = m_DenominatorMantissa;
+    const auto bit = maxShifting - N * 32 - 1;
+    auto denominatorShiftingCopy = denominatorShifting;
+    auto denominatorMantissaCopy = denominatorMantissa;
 
     if (0 < bit)
     {
-        denominatorShifting = GetAssignmentDenominatorShifting(bit);
-        denominatorMantissa = GetAssignmentDenominatorMantissa(bit);
+        denominatorShiftingCopy = GetAssignmentDenominatorShifting(bit);
+        denominatorMantissaCopy = GetAssignmentDenominatorMantissa(bit);
     }
 
-    auto denominator = Integer<N>{ denominatorMantissa };
-    denominator <<= denominatorShifting;
+    auto denominator = Integer<N>{ denominatorMantissaCopy };
+    denominator <<= denominatorShiftingCopy;
 
     return denominator;
 }
@@ -295,28 +297,28 @@ int Mathematics::ConversionRational<T>::GetAssignmentNumeratorShifting(int bit) 
 {
     MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
-    if (bit <= m_ReducibilityShifting)
+    if (bit <= reducibilityShifting)
     {
-        const auto shifting = m_NumeratorShifting - m_ReducibilityShifting;
+        const auto shifting = numeratorShifting - reducibilityShifting;
 
         if (0 <= shifting)
         {
-            return m_NumeratorShifting >> m_ReducibilityShifting;
+            return numeratorShifting >> reducibilityShifting;
         }
         else
         {
-            return m_NumeratorShifting >> (-shifting);
+            return numeratorShifting >> (-shifting);
         }
     }
-    else if (m_ReducibilityShifting < 0)
+    else if (reducibilityShifting < 0)
     {
-        if (-m_ReducibilityShifting <= bit)
+        if (-reducibilityShifting <= bit)
         {
             return 0;
         }
         else
         {
-            return m_NumeratorShifting;
+            return numeratorShifting;
         }
     }
     else
@@ -331,27 +333,27 @@ int Mathematics::ConversionRational<T>::GetAssignmentDenominatorShifting(int bit
 {
     MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
-    if (bit <= m_ReducibilityShifting)
+    if (bit <= reducibilityShifting)
     {
-        return m_DenominatorShifting;
+        return denominatorShifting;
     }
-    else if (m_ReducibilityShifting < 0)
+    else if (reducibilityShifting < 0)
     {
-        if (-m_ReducibilityShifting <= bit)
+        if (-reducibilityShifting <= bit)
         {
             return 0;
         }
         else
         {
-            const auto shifting = m_DenominatorShifting + m_ReducibilityShifting;
+            const auto shifting = denominatorShifting + reducibilityShifting;
 
             if (0 <= shifting)
             {
-                return m_DenominatorShifting >> m_ReducibilityShifting;
+                return denominatorShifting >> reducibilityShifting;
             }
             else
             {
-                return m_DenominatorShifting >> (-shifting);
+                return denominatorShifting >> (-shifting);
             }
         }
     }
@@ -367,28 +369,28 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentNumeratorMantissa(int 
 {
     MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
-    if (bit <= m_ReducibilityShifting)
+    if (bit <= reducibilityShifting)
     {
-        const auto shifting = m_NumeratorShifting - m_ReducibilityShifting;
+        const auto shifting = numeratorShifting - reducibilityShifting;
 
         if (0 <= shifting)
         {
-            return m_NumeratorMantissa;
+            return numeratorMantissa;
         }
         else
         {
-            return m_NumeratorMantissa >> (m_ReducibilityShifting + shifting);
+            return numeratorMantissa >> (reducibilityShifting + shifting);
         }
     }
-    else if (m_ReducibilityShifting < 0)
+    else if (reducibilityShifting < 0)
     {
-        if (-m_ReducibilityShifting <= bit)
+        if (-reducibilityShifting <= bit)
         {
             return 0;
         }
         else
         {
-            return m_NumeratorMantissa >> (-m_ReducibilityShifting);
+            return numeratorMantissa >> (-reducibilityShifting);
         }
     }
     else
@@ -403,27 +405,27 @@ uint64_t Mathematics::ConversionRational<T>::GetAssignmentDenominatorMantissa(in
 {
     MATHEMATICS_ASSERTION_0(0 < bit, "需要移位的字节数应该为正数");
 
-    if (bit <= m_ReducibilityShifting)
+    if (bit <= reducibilityShifting)
     {
-        return m_DenominatorMantissa >> m_ReducibilityShifting;
+        return denominatorMantissa >> reducibilityShifting;
     }
-    else if (m_ReducibilityShifting < 0)
+    else if (reducibilityShifting < 0)
     {
-        if (-m_ReducibilityShifting <= bit)
+        if (-reducibilityShifting <= bit)
         {
             return 1;
         }
         else
         {
-            const auto shifting = m_DenominatorShifting + m_ReducibilityShifting;
+            const auto shifting = denominatorShifting + reducibilityShifting;
 
             if (0 <= shifting)
             {
-                return m_DenominatorMantissa;
+                return denominatorMantissa;
             }
             else
             {
-                return m_DenominatorMantissa >> (-m_ReducibilityShifting + shifting);
+                return denominatorMantissa >> (-reducibilityShifting + shifting);
             }
         }
     }

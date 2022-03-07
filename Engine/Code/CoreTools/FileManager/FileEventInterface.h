@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/04 16:23)
+///	引擎版本：0.8.0.1 (2022/01/08 23:36)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_EVENT_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_EVENT_INTERFACE_H
@@ -33,15 +33,9 @@ namespace CoreTools
         FileEventInterface() noexcept = default;
         virtual ~FileEventInterface() noexcept = default;
         FileEventInterface(const FileEventInterface& rhs) noexcept = default;
-        FileEventInterface(FileEventInterface&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         FileEventInterface& operator=(const FileEventInterface& rhs) noexcept = default;
+        FileEventInterface(FileEventInterface&& rhs) noexcept = default;
         FileEventInterface& operator=(FileEventInterface&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

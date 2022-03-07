@@ -1,81 +1,90 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:35)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 21:33)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_ELLIPSOID3_DETAIL_H
 
 #include "StaticTestIntersectorRay3Ellipsoid3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::StaticTestIntersectorRay3Ellipsoid3(const Ray3& rkRay, const Ellipsoid3& rkEllipsoid, const Real epsilon)
-    : m_Ray{ rkRay }, m_Ellipsoid{ rkEllipsoid }
+Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::StaticTestIntersectorRay3Ellipsoid3(const Ray3& ray, const Ellipsoid3& ellipsoid, const Real epsilon)
+    : ParentType{ epsilon }, ray{ ray }, ellipsoid{ ellipsoid }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::GetRay() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ray;
 }
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
-	::GetRay() const
+Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::GetEllipsoid() const noexcept
 {
-    return m_Ray;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ellipsoid;
 }
 
 template <typename Real>
-const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
-	::GetEllipsoid() const
+void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>::Test()
 {
-    return m_Ellipsoid;
-}
+    const auto matrix = ellipsoid.GetMatrix();
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorRay3Ellipsoid3<Real>
-	::Test()
-{
-    // The ellipsoid is (X-K)^T*M*(X-K)-1 = 0 and the ray is X = P+t*D.
-    // Substitute the ray equation into the ellipsoid equation to obtain
-    // a quadratic equation
-    //   Q(t) = a2*t^2 + 2*a1*t + a0 = 0
-    // where a2 = D^T*M*D, a1 = D^T*M*(P-K), and a0 = (P-K)^T*M*(P-K)-1.
+    const auto diff = ray.GetOrigin() - ellipsoid.GetCenter();
+    const auto matDir = matrix * ray.GetDirection();
+    const auto matDiff = matrix * diff;
+    const auto a2 = Vector3Tools::DotProduct(ray.GetDirection(), matDir);
+    const auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), matDiff);
+    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - Math::GetValue(1);
 
-	auto M = m_Ellipsoid.GetMatrix();
-
-	auto diff = m_Ray.GetOrigin() - m_Ellipsoid.GetCenter();
-	auto matDir = M*m_Ray.GetDirection();
-	auto matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(m_Ray.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
-
-    // No intersection if Q(t) has no real roots.
-	auto discr = a1*a1 - a0*a2;
-    if (discr < Math<Real>::GetValue(0))
+    const auto discr = a1 * a1 - a0 * a2;
+    if (discr < Math::GetValue(0))
     {
-		this->SetIntersectionType(IntersectionType::Empty);
+        this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    // Test whether ray origin is inside ellipsoid.
-    if (a0 <= Math<Real>::GetValue(0))
+    if (a0 <= Math::GetValue(0))
     {
-		this->SetIntersectionType(IntersectionType::Point);
+        this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    // At this point, Q(0) = a0 > 0 and Q(t) has real roots.  It is also
-    // the case that a2 > 0, since M is positive definite, implying that
-    // D^T*M*D > 0 for any nonzero vector D.  Thus, an intersection occurs
-    // only when Q'(0) < 0.
-	if (a1 < Math<Real>::GetValue(0))
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-} 
+    if (a1 < Math::GetValue(0))
+    {
+        this->SetIntersectionType(IntersectionType::Point);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
+}
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_ELLIPSOID3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_RAY3_ELLIPSOID3_DETAIL_H

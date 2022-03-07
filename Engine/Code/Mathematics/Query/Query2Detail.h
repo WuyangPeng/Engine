@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 13:19)
+///	引擎版本：0.8.0.2 (2022/02/17 16:29)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_DETAIL_H
@@ -19,20 +19,22 @@
 
 template <typename Real>
 Mathematics::Query2<Real>::Query2(const VerticesType& vertices)
-    : ParentType{}, m_Vertices{ vertices }
+    : ParentType{}, vertices{ vertices }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query2<Real>::IsValid() const noexcept
 {
-    if (!m_Vertices.empty())
+    if (!vertices.empty())
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -48,15 +50,15 @@ int Mathematics::Query2<Real>::GetNumVertices() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Vertices.size());
+    return boost::numeric_cast<int>(vertices.size());
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::Query2<Real>::GetVertice(int index) const
+Mathematics::Vector2<Real> Mathematics::Query2<Real>::GetVertice(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Vertices.at(index);
+    return vertices.at(index);
 }
 
 template <typename Real>
@@ -68,19 +70,19 @@ Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(int index, int lhsV
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     QuerySortTools querySortTools{ lhsVerticesIndex, rhsVerticesIndex };
 
-    const auto& vector0 = m_Vertices.at(querySortTools.GetValue(0));
-    const auto& vector1 = m_Vertices.at(querySortTools.GetValue(1));
+    const auto& vector0 = vertices.at(querySortTools.GetValue(0));
+    const auto& vector1 = vertices.at(querySortTools.GetValue(1));
 
-    auto x0 = testVector.GetX() - vector0.GetX();
-    auto y0 = testVector.GetY() - vector0.GetY();
-    auto x1 = vector1.GetX() - vector0.GetX();
-    auto y1 = vector1.GetY() - vector0.GetY();
+    const auto x0 = testVector.GetX() - vector0.GetX();
+    const auto y0 = testVector.GetY() - vector0.GetY();
+    const auto x1 = vector1.GetX() - vector0.GetX();
+    const auto y1 = vector1.GetY() - vector0.GetY();
 
     auto det = QueryDotTools<Real>::Det2(x0, y0, x1, y1);
 
@@ -107,7 +109,7 @@ Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(int index, 
 }
 
 template <typename Real>
-Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::TriangleQueryType Mathematics::Query2<Real>::ToTriangle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_3(ToLine(lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex) != LineQueryType::Right, "三角形顶点不是逆时针顺序！");
@@ -149,31 +151,31 @@ Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(int
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     QuerySortTools querySortTools{ lhsVerticesIndex, mhsVerticesIndex, rhsVerticesIndex };
 
-    const auto& lhsVector = m_Vertices.at(querySortTools.GetValue(0));
-    const auto& mhsVector = m_Vertices.at(querySortTools.GetValue(1));
-    const auto& rhsVector = m_Vertices.at(querySortTools.GetValue(2));
+    const auto& lhsVector = vertices.at(querySortTools.GetValue(0));
+    const auto& mhsVector = vertices.at(querySortTools.GetValue(1));
+    const auto& rhsVector = vertices.at(querySortTools.GetValue(2));
 
-    auto lhsPlusTestX = lhsVector.GetX() + testVector.GetX();
-    auto lhsMinusTestX = lhsVector.GetX() - testVector.GetX();
-    auto lhsPlusTestY = lhsVector.GetY() + testVector.GetY();
-    auto lhsMinusTestY = lhsVector.GetY() - testVector.GetY();
-    auto mhsPlusTestX = mhsVector.GetX() + testVector.GetX();
-    auto mhsMinusTestX = mhsVector.GetX() - testVector.GetX();
-    auto mhsPlusTestY = mhsVector.GetY() + testVector.GetY();
-    auto mhsMinusTestY = mhsVector.GetY() - testVector.GetY();
-    auto rhsPlusTestX = rhsVector.GetX() + testVector.GetX();
-    auto rhsMinusTestX = rhsVector.GetX() - testVector.GetX();
-    auto rhsPlusTestY = rhsVector.GetY() + testVector.GetY();
-    auto rhsMinusTestY = rhsVector.GetY() - testVector.GetY();
-    auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
-    auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
-    auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
+    const auto lhsPlusTestX = lhsVector.GetX() + testVector.GetX();
+    const auto lhsMinusTestX = lhsVector.GetX() - testVector.GetX();
+    const auto lhsPlusTestY = lhsVector.GetY() + testVector.GetY();
+    const auto lhsMinusTestY = lhsVector.GetY() - testVector.GetY();
+    const auto mhsPlusTestX = mhsVector.GetX() + testVector.GetX();
+    const auto mhsMinusTestX = mhsVector.GetX() - testVector.GetX();
+    const auto mhsPlusTestY = mhsVector.GetY() + testVector.GetY();
+    const auto mhsMinusTestY = mhsVector.GetY() - testVector.GetY();
+    const auto rhsPlusTestX = rhsVector.GetX() + testVector.GetX();
+    const auto rhsMinusTestX = rhsVector.GetX() - testVector.GetX();
+    const auto rhsPlusTestY = rhsVector.GetY() + testVector.GetY();
+    const auto rhsMinusTestY = rhsVector.GetY() - testVector.GetY();
+    const auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
+    const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
+    const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
     auto det = QueryDotTools<Real>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 

@@ -9,9 +9,9 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Intersection/Intersection2D/StaticFindIntersectorCircle2Circle2Detail.h"
 
-#include "Mathematics/Algebra/Vector2DTools.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include <random>
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticFindIntersectorCircle2Circle2Testing)
 
 void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::MainTest()
@@ -31,14 +31,14 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::SameTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector2D center(randomDistribution(generator),
-                             randomDistribution(generator));
+        Vector2F center(randomDistribution(generator),
+                        randomDistribution(generator));
 
-        float radius = FloatMath::FAbs(randomDistribution(generator));
+        float radius = MathF::FAbs(randomDistribution(generator));
 
-        FloatCircle2 circle2(center, radius);
+        Circle2F circle2(center, radius);
 
-        FloatStaticFindIntersectorCircle2Circle2 intersector(circle2, circle2);
+        StaticFindIntersectorCircle2Circle2<float> intersector(circle2, circle2);
 
         ASSERT_ENUM_EQUAL(IntersectionType::Other, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
@@ -59,25 +59,25 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::EmptyTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector2D lhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F lhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float lhsRadius = FloatMath::FAbs(randomDistribution(generator));
+        float lhsRadius = MathF::FAbs(randomDistribution(generator));
 
-        FloatVector2D rhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F rhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float distance = FloatVector2DTools::Distance(lhsCenter, rhsCenter);
+        float distance = Vector2ToolsF::Distance(lhsCenter, rhsCenter);
 
         // 第二个圆心在第一个圆上，必相交，修改半径值。
-        if (FloatMath::Approximate(distance, lhsRadius, 1e-8f))
+        if (MathF::Approximate(distance, lhsRadius, 1e-8f))
         {
             lhsRadius = distance / 2.0f;
         }
 
-        FloatCircle2 lhsCircle2(lhsCenter, lhsRadius);
+        Circle2F lhsCircle2(lhsCenter, lhsRadius);
 
-        float rhsRadius = FloatMath::FAbs(randomDistribution(generator));
+        float rhsRadius = MathF::FAbs(randomDistribution(generator));
 
         // 第二个圆心在第一个圆内
         if (distance < lhsRadius && lhsRadius - rhsRadius <= distance)
@@ -91,9 +91,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::EmptyTest()
             rhsRadius = distance - lhsRadius - 0.01f;
         }
 
-        FloatCircle2 rhsCircle2(rhsCenter, rhsRadius);
+        Circle2F rhsCircle2(rhsCenter, rhsRadius);
 
-        FloatStaticFindIntersectorCircle2Circle2 intersector(lhsCircle2, rhsCircle2);
+        StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2);
 
         ASSERT_ENUM_EQUAL(IntersectionType::Empty, intersector.GetIntersectionType());
         ASSERT_FALSE(intersector.IsIntersection());
@@ -115,21 +115,21 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::TangentTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector2D lhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F lhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float lhsRadius = FloatMath::FAbs(randomDistribution(generator));
+        float lhsRadius = MathF::FAbs(randomDistribution(generator));
 
-        FloatCircle2 lhsCircle2(lhsCenter, lhsRadius);
+        Circle2F lhsCircle2(lhsCenter, lhsRadius);
 
-        FloatVector2D rhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F rhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float distance = FloatVector2DTools::Distance(lhsCenter, rhsCenter);
+        float distance = Vector2ToolsF::Distance(lhsCenter, rhsCenter);
 
-        FloatCircle2 rhsCircle2(rhsCenter, FloatMath::FAbs(distance - lhsRadius));
+        Circle2F rhsCircle2(rhsCenter, MathF::FAbs(distance - lhsRadius));
 
-        FloatStaticFindIntersectorCircle2Circle2 intersector(lhsCircle2, rhsCircle2, 1e-3f);
+        StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2, 1e-3f);
 
         ASSERT_ENUM_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
@@ -142,8 +142,8 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::TangentTest()
 
         for (int i = 0; i < intersector.GetQuantity(); ++i)
         {
-            ASSERT_APPROXIMATE(FloatVector2DTools::Distance(intersector.GetPoint(i), lhsCircle2.GetCenter()), lhsCircle2.GetRadius(), 1e-5f);
-            ASSERT_APPROXIMATE(FloatVector2DTools::Distance(intersector.GetPoint(i), rhsCircle2.GetCenter()), rhsCircle2.GetRadius(), 1e-5f);
+            ASSERT_APPROXIMATE(Vector2ToolsF::Distance(intersector.GetPoint(i), lhsCircle2.GetCenter()), lhsCircle2.GetRadius(), 1e-5f);
+            ASSERT_APPROXIMATE(Vector2ToolsF::Distance(intersector.GetPoint(i), rhsCircle2.GetCenter()), rhsCircle2.GetRadius(), 1e-5f);
         }
     }
 }
@@ -157,22 +157,22 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::PointTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector2D lhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F lhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float lhsRadius = FloatMath::FAbs(randomDistribution(generator));
+        float lhsRadius = MathF::FAbs(randomDistribution(generator));
 
-        FloatCircle2 lhsCircle2(lhsCenter, lhsRadius);
+        Circle2F lhsCircle2(lhsCenter, lhsRadius);
 
-        FloatVector2D rhsCenter(randomDistribution(generator),
-                                randomDistribution(generator));
+        Vector2F rhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-        float distance = FloatVector2DTools::Distance(lhsCenter, rhsCenter);
+        float distance = Vector2ToolsF::Distance(lhsCenter, rhsCenter);
 
-        float rhsRadius = FloatMath::FAbs(randomDistribution(generator));
+        float rhsRadius = MathF::FAbs(randomDistribution(generator));
 
         // 第二个圆心在第一个圆内
-        if (distance < lhsRadius && distance < FloatMath::FAbs(lhsRadius - rhsRadius))
+        if (distance < lhsRadius && distance < MathF::FAbs(lhsRadius - rhsRadius))
         {
             rhsRadius = lhsRadius - distance + 0.01f;
         }
@@ -188,9 +188,9 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::PointTest()
             rhsRadius = distance + lhsRadius - 0.01f;
         }
 
-        FloatCircle2 rhsCircle2(rhsCenter, rhsRadius);
+        Circle2F rhsCircle2(rhsCenter, rhsRadius);
 
-        FloatStaticFindIntersectorCircle2Circle2 intersector(lhsCircle2, rhsCircle2);
+        StaticFindIntersectorCircle2Circle2<float> intersector(lhsCircle2, rhsCircle2);
 
         ASSERT_ENUM_EQUAL(IntersectionType::Point, intersector.GetIntersectionType());
         ASSERT_TRUE(intersector.IsIntersection());
@@ -203,8 +203,8 @@ void Mathematics::StaticFindIntersectorCircle2Circle2Testing ::PointTest()
 
         for (int i = 0; i < intersector.GetQuantity(); ++i)
         {
-            ASSERT_APPROXIMATE(FloatVector2DTools::Distance(intersector.GetPoint(i), lhsCircle2.GetCenter()), lhsCircle2.GetRadius(), 1e-4f);
-            ASSERT_APPROXIMATE(FloatVector2DTools::Distance(intersector.GetPoint(i), rhsCircle2.GetCenter()), rhsCircle2.GetRadius(), 1e-4f);
+            ASSERT_APPROXIMATE(Vector2ToolsF::Distance(intersector.GetPoint(i), lhsCircle2.GetCenter()), lhsCircle2.GetRadius(), 1e-4f);
+            ASSERT_APPROXIMATE(Vector2ToolsF::Distance(intersector.GetPoint(i), rhsCircle2.GetCenter()), rhsCircle2.GetRadius(), 1e-4f);
         }
     }
 }

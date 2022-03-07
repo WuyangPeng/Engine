@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/30 17:06)
+///	引擎版本：0.8.0.1 (2022/01/09 12:29)
 
 #ifndef CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
 #define CORE_TOOLS_EXCEPTION_GAME_ERROR_DETAIL_H
@@ -30,11 +30,13 @@ CoreTools::GameError<E>::GameError(const FunctionDescribed& functionDescribed, W
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename E>
 bool CoreTools::GameError<E>::IsValid() const noexcept
 {
     return ParentType::IsValid();
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E>
@@ -65,15 +67,15 @@ const System::String CoreTools::GameError<E>::GetError() const
 template <typename E>
 const System::String CoreTools::GameError<E>::GetErrorCodeDescribed() const
 {
-    using namespace std::literals;
-
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    auto errorCodeDescribed = SYSTEM_TEXT("错误码 = "s) + System::ToString(System::EnumCastUnderlying(errorCode));
+    using namespace std::literals;
+
+    const auto errorCodeDescribed = SYSTEM_TEXT("错误码 = "s) + System::ToString(System::EnumCastUnderlying(errorCode));
 
     EXCEPTION_TRY
     {
-        auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
+        const auto errorName = StringConversion::MultiByteConversionStandard(typeid(ClassType).name());
 
         return SYSTEM_TEXT("异常名："s) + errorName + SYSTEM_TEXT("，"s) + errorCodeDescribed + SYSTEM_TEXT("，"s);
     }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:19)
 
 #include "Database/DatabaseExport.h"
 
@@ -26,7 +26,7 @@ Database::SessionFactory::SessionFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, SessionFactory)
 
-Database::SessionFactory::ImplTypePtr Database::SessionFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Database::SessionFactory::ImplTypeSharedPtr Database::SessionFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
     switch (wrappersStrategy)
@@ -38,17 +38,12 @@ Database::SessionFactory::ImplTypePtr Database::SessionFactory::Create(const Con
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullSession>(configurationStrategy);
     }
 }
 
-Database::SessionFactory::ImplTypePtr Database::SessionFactory::Create(const DatabaseObject& databaseObject)
+Database::SessionFactory::ImplTypeSharedPtr Database::SessionFactory::Create(const DatabaseObject& databaseObject)
 {
     const auto configurationStrategy = databaseObject.GetConfigurationStrategy();
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
@@ -61,11 +56,6 @@ Database::SessionFactory::ImplTypePtr Database::SessionFactory::Create(const Dat
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullSession>(configurationStrategy);
     }

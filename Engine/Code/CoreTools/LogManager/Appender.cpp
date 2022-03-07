@@ -1,29 +1,36 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:43)
 
 #include "CoreTools/CoreToolsExport.h"
 
+#include "../Contract/Flags/ImplFlags.h"
 #include "Appender.h"
 #include "Detail/AppenderFactory.h"
 #include "Detail/AppenderImpl.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
-#include "../Contract/Flags/ImplFlags.h"
+
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(CoreTools, Appender)
+
 CoreTools::Appender::Appender(AppenderPrint appenderFlags, LogLevel logLevel)
     : impl{ ImplCreateUseFactory::Default, appenderFlags, logLevel }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::Appender::Appender(const String& directory, const String& fileName, AppenderPrint appenderFlags, LogLevel logLevel,
-                              int maxFileSize, bool backup, const String& extensionName)
+CoreTools::Appender::Appender(const String& directory,
+                              const String& fileName,
+                              AppenderPrint appenderFlags,
+                              LogLevel logLevel,
+                              int maxFileSize,
+                              bool backup,
+                              const String& extensionName)
     : impl{ ImplCreateUseFactory::Default, directory, fileName, appenderFlags, logLevel, maxFileSize, backup, extensionName }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
@@ -36,8 +43,6 @@ CoreTools::Appender::Appender(const String& directory, AppenderPrint appenderFla
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, Appender)
-
- 
 
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetLogLevel, CoreTools::LogLevel)
 IMPL_CONST_MEMBER_FUNCTION_DEFINE_0_NOEXCEPT(CoreTools, Appender, GetFlags, CoreTools::AppenderPrint)

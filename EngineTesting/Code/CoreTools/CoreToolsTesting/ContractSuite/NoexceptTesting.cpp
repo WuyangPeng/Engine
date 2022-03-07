@@ -40,14 +40,14 @@ void CoreTools::NoexceptTesting::DisableNoexceptTest()
 void CoreTools::NoexceptTesting::NoexceptTest()
 {
     NoexceptNoReturn(*this, &ClassType::Function0);
-    NoexceptNoReturn<int>(*this, &ClassType::Function1, 0);
+    NoexceptNoReturn(*this, &ClassType::Function1, 0);
     ASSERT_EQUAL(Noexcept<int>(*this, &ClassType::Function2, 0), 0);
-    ASSERT_EQUAL((Noexcept<int, int>(*this, &ClassType::Function3, 0, 1)), 1);
+    ASSERT_EQUAL((Noexcept<int>(*this, &ClassType::Function3, 0, 1)), 1);
 
     NoexceptNoReturn(*this, &ClassType::ConstFunction0);
-    NoexceptNoReturn<int>(*this, &ClassType::ConstFunction1, 0);
+    NoexceptNoReturn(*this, &ClassType::ConstFunction1, 0);
     ASSERT_EQUAL(Noexcept<int>(*this, &ClassType::ConstFunction2, 0), 0);
-    ASSERT_EQUAL((Noexcept<int, int>(*this, &ClassType::ConstFunction3, 0, 1)), 1);
+    ASSERT_EQUAL((Noexcept<int>(*this, &ClassType::ConstFunction3, 0, 1)), 1);
 }
 
 void CoreTools::NoexceptTesting::Function0()

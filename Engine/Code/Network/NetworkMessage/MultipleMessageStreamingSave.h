@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:15)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_SAVE_H
 #define NETWORK_NETWORK_MESSAGE_MULTIPLE_MESSAGE_STREAMING_SAVE_H
@@ -30,12 +30,11 @@ namespace Network
         using ClassType = MultipleMessageStreamingSave<Index, MultipleMessageContainer>;
         using ParentType = MultipleMessageStreamingSave<Index - 1, MultipleMessageContainer>;
 
-        MultipleMessageStreamingSave();
-      
+        MultipleMessageStreamingSave() noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        void Save(const MultipleMessageContainer& container, const MessageTargetSharedPtr& target) const override;
+        void Save(const MultipleMessageContainer& container, MessageTarget& target) const override;
     };
 
     template <typename E, MultipleMessageByteType ByteType, MultipleMessageByteType... Types>
@@ -45,17 +44,17 @@ namespace Network
         using MultipleMessageContainer = MultipleMessageContainer<E, ByteType, Types...>;
         using ClassType = MultipleMessageStreamingSave<0, MultipleMessageContainer>;
 
-        MultipleMessageStreamingSave();
+        MultipleMessageStreamingSave() noexcept;
         virtual ~MultipleMessageStreamingSave() noexcept = default;
 
-        MultipleMessageStreamingSave(const MultipleMessageStreamingSave& rhs) = default;
-        MultipleMessageStreamingSave& operator=(const MultipleMessageStreamingSave& rhs) = default;
+        MultipleMessageStreamingSave(const MultipleMessageStreamingSave& rhs) noexcept = default;
+        MultipleMessageStreamingSave& operator=(const MultipleMessageStreamingSave& rhs) noexcept = default;
         MultipleMessageStreamingSave(MultipleMessageStreamingSave&& rhs) noexcept = default;
         MultipleMessageStreamingSave& operator=(MultipleMessageStreamingSave&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void Save(const MultipleMessageContainer& container, const MessageTargetSharedPtr& target) const;
+        virtual void Save(const MultipleMessageContainer& container, MessageTarget& target) const;
     };
 }
 

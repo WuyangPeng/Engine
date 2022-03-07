@@ -28,8 +28,8 @@ namespace Mathematics
 	//                       points X = P + y0*U + y1*V.
 
 	template <typename Real>
-	void PerspectiveProjectEllipsoid(const Ellipsoid3<Real>& ellipsoid,const Vector3D<Real>& eye, const Plane3<Real>& plane,
-									 const Vector3D<Real>& U, const Vector3D<Real>& V, Vector3D<Real>& P,Ellipse2<Real>& ellipse);
+	void PerspectiveProjectEllipsoid(const Ellipsoid3<Real>& ellipsoid,const Vector3<Real>& eye, const Plane3<Real>& plane,
+									 const Vector3<Real>& U, const Vector3<Real>& V, Vector3<Real>& P,Ellipse2<Real>& ellipse);
 
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/21 15:25)
+///	引擎版本：0.8.0.3 (2022/02/24 14:45)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE2_ARC2_ACHIEVE_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine2Arc2<Real>::StaticFindIntersectorLine2Arc2(const Line2& line, const Arc2& arc, const Real epsilon)
-    : ParentType{ epsilon }, m_Line{ line }, m_Arc{ arc }, m_Quantity{}, m_Point0{}, m_Point1{}
+    : ParentType{ epsilon }, line{ line }, arc{ arc }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorLine2Arc2<Real>::StaticFindIntersectorLine2Arc
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorLine2Arc2<Real>::IsValid() const noexcept
 {
@@ -32,52 +33,53 @@ bool Mathematics::StaticFindIntersectorLine2Arc2<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line2<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetLine() const noexcept
+Mathematics::Line2<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetArc() const noexcept
+Mathematics::Arc2<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetArc() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Arc;
+    return arc;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine2Arc2<Real>::Find()
 {
-    const Line2Circle2<Real> line2Circle2{ m_Line.GetOrigin(), m_Line.GetDirection(), m_Arc.GetCenter(), m_Arc.GetRadius() };
+    const Line2Circle2<Real> line2Circle2{ line.GetOrigin(), line.GetDirection(), arc.GetCenter(), arc.GetRadius() };
 
-    m_Quantity = 0;
+    quantity = 0;
     if (line2Circle2.IsIntersects())
     {
         for (auto i = 0; i < line2Circle2.GetRootCount(); ++i)
         {
-            auto point = m_Line.GetOrigin() + m_Line.GetDirection() * line2Circle2.GetParameter(i);
-            if (m_Arc.Contains(point))
+            const auto point = line.GetOrigin() + line.GetDirection() * line2Circle2.GetParameter(i);
+            if (arc.Contains(point))
             {
-                if (m_Quantity == 0)
+                if (quantity == 0)
                 {
-                    m_Point0 = point;
+                    point0 = point;
                 }
-                else if (m_Quantity == 1)
+                else if (quantity == 1)
                 {
-                    m_Point1 = point;
+                    point1 = point;
                 }
 
-                ++m_Quantity;
+                ++quantity;
             }
         }
     }
 
-    this->SetIntersectionType(0 < m_Quantity ? IntersectionType::Point : IntersectionType::Empty);
+    this->SetIntersectionType(0 < quantity ? IntersectionType::Point : IntersectionType::Empty);
 }
 
 template <typename Real>
@@ -85,21 +87,21 @@ int Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetQuantity() const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetPoint(int index) const
+Mathematics::Vector2<Real> Mathematics::StaticFindIntersectorLine2Arc2<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     if (index == 0)
     {
-        return m_Point0;
+        return point0;
     }
     else if (index == 1)
     {
-        return m_Point1;
+        return point1;
     }
     else
     {

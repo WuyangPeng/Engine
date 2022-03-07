@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/27 17:54)
+///	引擎版本：0.8.0.1 (2022/01/12 14:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -41,7 +41,7 @@ void CoreTools::FormatErrorMessageImpl::InitMessage() noexcept
 // private
 void CoreTools::FormatErrorMessageImpl::AgainInitMessage() noexcept
 {
-    auto dynamicLinkModule = System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DontResolveDllReferences);
+    const auto dynamicLinkModule = System::LoadDynamicLibrary(DYNAMIC_LINK_TEXT("netmsg.dll"), System::LoadLibraryType::DontResolveDllReferences);
 
     InitNetworkMessage(dynamicLinkModule);
 }
@@ -100,7 +100,7 @@ void CoreTools::FormatErrorMessageImpl::ReleaseMemory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, FormatErrorMessageImpl)
 
-const System::String CoreTools::FormatErrorMessageImpl::GetErrorMessage() const
+System::String CoreTools::FormatErrorMessageImpl::GetErrorMessage() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

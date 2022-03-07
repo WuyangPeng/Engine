@@ -10,7 +10,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random> 
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 using std::uniform_real;
 using std::default_random_engine;
@@ -28,7 +28,12 @@ void Mathematics::Line3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(LineTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Line3Testing
 	::LineTest()
 {
@@ -40,20 +45,20 @@ void Mathematics::Line3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D origin(firstRandomDistribution(generator),
+		Vector3D origin(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D direction(firstRandomDistribution(generator),
+		Vector3D direction(firstRandomDistribution(generator),
 			                firstRandomDistribution(generator),
 							firstRandomDistribution(generator));
 
 		direction.Normalize();
 
-		DoubleLine3 line(origin,direction);
+		Line3D line(origin,direction);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(origin,line.GetOrigin()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(direction,line.GetDirection()));	
+		ASSERT_TRUE(Vector3ToolsD::Approximate(origin,line.GetOrigin()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(direction,line.GetDirection()));	
 	}
 }
 

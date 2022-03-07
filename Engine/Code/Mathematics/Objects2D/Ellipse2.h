@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 12:50)
+///	引擎版本：0.8.0.2 (2022/02/10 11:36)
 
 #ifndef MATHEMATICS_OBJECTS2D_ELLIPSE2_H
 #define MATHEMATICS_OBJECTS2D_ELLIPSE2_H
@@ -15,39 +15,27 @@
 #include "Ellipse2Coefficients.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "Mathematics/Algebra/Matrix2.h"
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector2DTools.h"
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Base/MathDetail.h"
+
 #include <type_traits>
 #include <vector>
 
 namespace Mathematics
 {
     template <typename Real>
-    class Ellipse2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Ellipse2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Ellipse2 final
+    class Ellipse2 final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using Ellipse2Impl = Ellipse2Impl<Real>;
-        TYPE_DECLARE(Ellipse2);
-        using PackageType = CoreTools::DelayCopyUnsharedImpl<Ellipse2, ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-
+        using ClassType = Ellipse2<Real>;
         using Math = Math<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Matrix2 = Matrix2<Real>;
         using Ellipse2Coefficients = Ellipse2Coefficients<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
 
     public:
         // 椭圆具有中心K，轴方向U[0]和U[1]（两个都是单位长度向量），
@@ -68,54 +56,66 @@ namespace Mathematics
         // 其中K = -A^{-1} * B / 2, M = A / (B^T * A^{-1} * B / 4 - C)。
         // 为椭圆形时，M必须具有所有特征值为正。
 
-        Ellipse2(const Vector2D& center, const Vector2D& axis0, const Vector2D& axis1,
-                 const Real extent0, const Real extent1, const Real epsilon = Math::GetZeroTolerance());
+        Ellipse2(const Vector2& center,
+                 const Vector2& axis0,
+                 const Vector2& axis1,
+                 const Real extent0,
+                 const Real extent1,
+                 const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         explicit Ellipse2(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector2D GetCenter() const noexcept;
-        [[nodiscard]] const Vector2D GetAxis0() const noexcept;
-        [[nodiscard]] const Vector2D GetAxis1() const noexcept;
-        [[nodiscard]] Real GetExtent0() const noexcept;
-        [[nodiscard]] Real GetExtent1() const noexcept;
+        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Vector2 GetAxis0() const noexcept;
+        NODISCARD Vector2 GetAxis1() const noexcept;
+        NODISCARD Real GetExtent0() const noexcept;
+        NODISCARD Real GetExtent1() const noexcept;
 
         // 计算 M = sum_{i=0}^1 U[i]*U[i]^T/e[i]^2.
-        [[nodiscard]] const Matrix2 GetMatrix() const;
+        NODISCARD Matrix2 GetMatrix() const;
 
         // 计算 M^{-1} = sum_{i=0}^1 U[i]*U[i]^T*e[i]^2.
-        [[nodiscard]] const Matrix2 GetMatrixInverse() const;
+        NODISCARD Matrix2 GetMatrixInverse() const;
 
         // 构建二次方程式，表示椭圆的系数。
-        [[nodiscard]] const Ellipse2Coefficients ToCoefficients() const;
+        NODISCARD Ellipse2Coefficients ToCoefficients() const;
 
         // 构建m_Center，m_Axis和m_Extent从二次方程。
         // 如果输入系数不能表示一个椭圆，则抛出异常。
-        void FromCoefficients(const Ellipse2Coefficients& coefficients, const Real epsilon = Math::GetZeroTolerance());
+        void FromCoefficients(const Ellipse2Coefficients& coefficients, const Real newEpsilon = Math::GetZeroTolerance());
 
         // 计算的二次函数 Q(X) = (X-K)^T * M * (X-K) - 1.
-        [[nodiscard]] Real Evaluate(const Vector2D& point) const;
+        NODISCARD Real Evaluate(const Vector2& point) const;
 
         // 测试输入点是否在椭圆形内部或边上。
         // 该点被包含当Q(X) <= 0，其中Q(X)函数Evaluate()。
-        [[nodiscard]] bool Contains(const Vector2D& point) const;
+        NODISCARD bool Contains(const Vector2& point) const;
 
-        [[nodiscard]] const Ellipse2 GetMove(Real t, const Vector2D& velocity) const;
+        NODISCARD Ellipse2 GetMove(Real t, const Vector2& velocity) const;
 
     private:
-        PackageType impl;
+        static constexpr auto axisSize = 2;
+        using AxisType = std::array<Vector2, axisSize>;
+        using ExtentType = std::array<Real, axisSize>;
+
+    private:
+        Vector2 center;
+        AxisType axis;
+        ExtentType extent;
+        Real epsilon;
     };
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, const Real epsilon);
+    NODISCARD bool Approximate(const Ellipse2<Real>& lhs, const Ellipse2<Real>& rhs, const Real epsilon);
 
     // 调试输出
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Ellipse2<Real>& line);
 
-    using FloatEllipse2 = Ellipse2<float>;
-    using DoubleEllipse2 = Ellipse2<double>;
+    using Ellipse2F = Ellipse2<float>;
+    using Ellipse2D = Ellipse2<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_ELLIPSE2_H

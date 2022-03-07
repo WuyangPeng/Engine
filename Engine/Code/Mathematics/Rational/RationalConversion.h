@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:41)
+///	引擎版本：0.8.0.2 (2022/02/11 16:35)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_H
@@ -37,7 +37,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] T GetValue() const noexcept;
+        NODISCARD T GetValue() const noexcept;
 
     private:
         void Init(const SignedIntegerType&);
@@ -52,13 +52,13 @@ namespace Mathematics
         void Negative() noexcept;
 
     private:
-        Integer m_AbsNumerator;
-        Integer m_AbsDenominator;
+        Integer absNumerator;
+        Integer absDenominator;
         // 得到分子和分母的起始位的差。
-        int m_Shifting;
-        NumericalValueSymbol m_Symbol;
-        uint64_t m_Mantissa;
-        T m_Value;
+        int shifting;
+        NumericalValueSymbol symbol;
+        uint64_t mantissa;
+        T value;
     };
 }
 

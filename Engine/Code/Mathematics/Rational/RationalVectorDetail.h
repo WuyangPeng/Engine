@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:57)
+///	引擎版本：0.8.0.2 (2022/02/11 17:12)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR_DETAIL_H
@@ -17,14 +17,14 @@
 
 template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>::RationalVector() noexcept
-    : m_Tuple{}
+    : tuple{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>::RationalVector(Rational x, Rational y) noexcept
-    : m_Tuple{ x, y }
+    : tuple{ x, y }
 {
     static_assert(VectorSize == 2);
 
@@ -33,7 +33,7 @@ Mathematics::RationalVector<VectorSize, IntSize>::RationalVector(Rational x, Rat
 
 template <int VectorSize, int IntSize>
 Mathematics::RationalVector<VectorSize, IntSize>::RationalVector(Rational x, Rational y, Rational z) noexcept
-    : m_Tuple{ x, y, z }
+    : tuple{ x, y, z }
 {
     static_assert(VectorSize == 3);
 
@@ -41,11 +41,13 @@ Mathematics::RationalVector<VectorSize, IntSize>::RationalVector(Rational x, Rat
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int VectorSize, int IntSize>
 bool Mathematics::RationalVector<VectorSize, IntSize>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int VectorSize, int IntSize>
@@ -53,7 +55,7 @@ typename const Mathematics::RationalVector<VectorSize, IntSize>::Rational& Mathe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple.at(index);
+    return tuple.at(index);
 }
 
 template <int VectorSize, int IntSize>
@@ -65,7 +67,7 @@ typename Mathematics::RationalVector<VectorSize, IntSize>::Rational& Mathematics
 }
 
 template <int VectorSize, int IntSize>
-const Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVector<VectorSize, IntSize>::operator-() const
+Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVector<VectorSize, IntSize>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -75,7 +77,9 @@ const Mathematics::RationalVector<VectorSize, IntSize> Mathematics::RationalVect
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        negative.m_Tuple[i] = -m_Tuple[i];
+
+        negative.tuple[i] = -tuple[i];
+
 #include STSTEM_WARNING_POP
     }
     return negative;
@@ -91,7 +95,9 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        m_Tuple[i] += rhs.m_Tuple[i];
+
+        tuple[i] += rhs.tuple[i];
+
 #include STSTEM_WARNING_POP
     }
 
@@ -108,7 +114,9 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        m_Tuple[i] -= rhs.m_Tuple[i];
+
+        tuple[i] -= rhs.tuple[i];
+
 #include STSTEM_WARNING_POP
     }
 
@@ -120,7 +128,7 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (auto& value : m_Tuple)
+    for (auto& value : tuple)
     {
         value *= scalar;
     }
@@ -133,7 +141,7 @@ Mathematics::RationalVector<VectorSize, IntSize>& Mathematics::RationalVector<Ve
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    for (auto& value : m_Tuple)
+    for (auto& value : tuple)
     {
         value /= scalar;
     }
@@ -147,7 +155,7 @@ typename Mathematics::RationalVector<VectorSize, IntSize>::Rational Mathematics:
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
     Rational squaredLength{ 0 };
-    for (const auto& value : m_Tuple)
+    for (const auto& value : tuple)
     {
         squaredLength += value * value;
     }

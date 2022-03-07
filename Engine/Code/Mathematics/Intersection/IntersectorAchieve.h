@@ -1,12 +1,12 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 10:17)
-///
+///	引擎版本：0.8.0.3 (2022/02/23 10:47)
+
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_ACHIEVE_H
 
@@ -15,7 +15,7 @@
 
 template <typename Real, template <typename> class Vector>
 Mathematics::Intersector<Real, Vector>::Intersector(const Real epsilon) noexcept
-    : m_IntersectionType{ IntersectionType::Empty }, m_Epsilon{ epsilon }
+    : intersectionType{ IntersectionType::Empty }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,14 +27,16 @@ Mathematics::Intersector<Real, Vector>::~Intersector() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, template <typename> class Vector>
 bool Mathematics::Intersector<Real, Vector>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= m_Epsilon)
+    if (Math::GetValue(0) <= epsilon)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, template <typename> class Vector>
@@ -42,7 +44,7 @@ Mathematics::IntersectionType Mathematics::Intersector<Real, Vector>::GetInterse
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntersectionType;
+    return intersectionType;
 }
 
 template <typename Real, template <typename> class Vector>
@@ -50,7 +52,7 @@ Real Mathematics::Intersector<Real, Vector>::GetEpsilon() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Epsilon;
+    return epsilon;
 }
 
 template <typename Real, template <typename> class Vector>
@@ -58,22 +60,22 @@ bool Mathematics::Intersector<Real, Vector>::IsIntersection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntersectionType != IntersectionType::Empty;
+    return intersectionType != IntersectionType::Empty;
 }
 
 template <typename Real, template <typename> class Vector>
-void Mathematics::Intersector<Real, Vector>::SetIntersectionType(IntersectionType intersectionType) noexcept
+void Mathematics::Intersector<Real, Vector>::SetIntersectionType(IntersectionType newIntersectionType) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_IntersectionType = intersectionType;
+    intersectionType = newIntersectionType;
 }
 
 template <typename Real, template <typename> class Vector>
 void Mathematics::Intersector<Real, Vector>::Swap(Intersector& rhs) noexcept
 {
-    std::swap(m_IntersectionType, rhs.m_IntersectionType);
-    std::swap(m_Epsilon, rhs.m_Epsilon);
+    std::swap(intersectionType, rhs.intersectionType);
+    std::swap(epsilon, rhs.epsilon);
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_ACHIEVE_H

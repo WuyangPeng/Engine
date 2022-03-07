@@ -8,20 +8,19 @@
 
 #include "Example/Script/ScriptExample/ScriptExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_SCRIPT_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_SCRIPT_EXAMPLE_STATIC
+#else  // BUILDING_SCRIPT_EXAMPLE_STATIC
 
-	namespace ScriptExample
-	{
-		void StaticDllLib()
-		{
+namespace ScriptExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_SCRIPT_EXAMPLE_STATIC
+#endif  // !BUILDING_SCRIPT_EXAMPLE_STATIC

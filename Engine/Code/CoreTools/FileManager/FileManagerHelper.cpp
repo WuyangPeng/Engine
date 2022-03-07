@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:51)
+///	引擎版本：0.8.0.1 (2022/01/09 1:47)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,12 +23,16 @@ using std::string;
 const CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFile(const String& fileName, bool binaryFile)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (binaryFile)
         return FileHandleHelper::LoadFromFile(fileName);
     else
         return CFileManagerHelper::LoadFromFile(fileName, binaryFile);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CFileManagerHelper::LoadFromFile(fileName, binaryFile);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
@@ -39,12 +43,16 @@ void CoreTools::FileManagerHelper::SaveIntoFile(const String& fileName, bool bin
     CORE_TOOLS_ASSERTION_2(0 < bufferSize, "传入的缓冲区大小小于或等于零！");
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (binaryFile)
         return FileHandleHelper::SaveIntoFile(fileName, bufferSize, buffer);
     else
         return CFileManagerHelper::SaveIntoFile(fileName, binaryFile, bufferSize, buffer);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CFileManagerHelper::SaveIntoFile(fileName, binaryFile, bufferSize, buffer);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
@@ -55,24 +63,32 @@ void CoreTools::FileManagerHelper::AppendToFile(const String& fileName, bool bin
     CORE_TOOLS_ASSERTION_2(0 < bufferSize, "传入的缓冲区大小小于或等于零！");
 
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (binaryFile)
         return FileHandleHelper::AppendToFile(fileName, bufferSize, buffer);
     else
         return CFileManagerHelper::AppendToFile(fileName, binaryFile, bufferSize, buffer);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CFileManagerHelper::AppendToFile(fileName, binaryFile, bufferSize, buffer);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 
 const CoreTools::FileBuffer CoreTools::FileManagerHelper::LoadFromFileUseEnvironment(const String& fileName, bool binaryFile)
 {
 #ifdef SYSTEM_PLATFORM_WIN32
+
     if (binaryFile)
         return FileHandleHelper::LoadFromFileUseEnvironment(fileName);
     else
         return CFileManagerHelper::LoadFromFileUseEnvironment(fileName, binaryFile);
+
 #else  // !SYSTEM_PLATFORM_WIN32
+
     return CFileManagerHelper::LoadFromFileUseEnvironment(fileName, binaryFile);
+
 #endif  // SYSTEM_PLATFORM_WIN32
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:34)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,24 +17,38 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/LogManager/AppenderManager.h"
+#include "CoreTools/LogManager/LogAsynchronous.h"
 #include "CoreTools/LogManager/LogFileName.h"
 #include "CoreTools/LogManager/LogMessage.h"
 
 using std::make_shared;
 using std::string;
+using std::string_view;
 using std::wstring;
 using namespace std::literals;
 
-CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager) noexcept
-    : m_logLevel{ logLevel }, m_AppenderManager{ appenderManager }, m_FilterTypePtr{}, m_FunctionDescribedPtr{},
-      m_LogFileNamePtr{}, m_Message{}, m_TriggerAssert{ false }, m_AlwaysConsole{ false }
+CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerSharedPtr& appenderManager) noexcept
+    : logLevel{ logLevel },
+      currentAppenderManager{ appenderManager },
+      currentFilterType{},
+      currentFunctionDescribed{},
+      currentLogFileName{},
+      logMessage{},
+      triggerAssert{ false },
+      alwaysConsole{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
-CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl(MAYBE_UNUSED int count) noexcept
-    : m_logLevel{ LogLevel::Disabled }, m_AppenderManager{}, m_FilterTypePtr{}, m_FunctionDescribedPtr{},
-      m_LogFileNamePtr{}, m_Message{}, m_TriggerAssert{ false }, m_AlwaysConsole{ false }
+CoreTools::LogAppenderIOManagerImpl::LogAppenderIOManagerImpl() noexcept
+    : logLevel{ LogLevel::Disabled },
+      currentAppenderManager{},
+      currentFilterType{},
+      currentFunctionDescribed{},
+      currentLogFileName{},
+      logMessage{},
+      triggerAssert{ false },
+      alwaysConsole{ false }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
@@ -55,13 +69,15 @@ CoreTools::LogAppenderIOManagerImpl::~LogAppenderIOManagerImpl() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::LogAppenderIOManagerImpl::IsValid() const noexcept
 {
-    if (m_logLevel != LogLevel::MaxLogLevels)
+    if (logLevel != LogLevel::MaxLogLevels)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operator<<(const string& message) noexcept
@@ -70,7 +86,10 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += StringConversion::MultiByteConversionStandard(message);
+        if (!IsDisabled())
+        {
+            logMessage += StringConversion::MultiByteConversionStandard(message);
+        }
     }
     catch (...)
     {
@@ -81,18 +100,21 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
     return *this;
 }
 
-CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operator<<(const std::string_view& message) noexcept
+CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operator<<(const string_view& message) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
     try
     {
-        m_Message += StringConversion::MultiByteConversionStandard(message.data());
+        if (!IsDisabled())
+        {
+            logMessage += StringConversion::MultiByteConversionStandard(message.data());
+        }
     }
     catch (...)
     {
         // 略过异常
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const wstring&) 抛出异常"));
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const string_view&) 抛出异常"));
     }
 
     return *this;
@@ -104,7 +126,10 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += StringConversion::WideCharConversionStandard(message);
+        if (!IsDisabled())
+        {
+            logMessage += StringConversion::WideCharConversionStandard(message);
+        }
     }
     catch (...)
     {
@@ -121,8 +146,11 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += SYSTEM_TEXT("异常："s) + error.GetError();
-        m_FunctionDescribedPtr = make_shared<FunctionDescribed>(error.GetFunctionDescribed());
+        if (!IsDisabled())
+        {
+            logMessage += SYSTEM_TEXT("异常："s) + error.GetError();
+            currentFunctionDescribed = make_shared<FunctionDescribed>(error.GetFunctionDescribed());
+        }
     }
     catch (...)
     {
@@ -139,12 +167,15 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += SYSTEM_TEXT("异常："s) + StringConversion::MultiByteConversionStandard(error.what());
+        if (!IsDisabled())
+        {
+            logMessage += SYSTEM_TEXT("异常："s) + StringConversion::MultiByteConversionStandard(error.what());
+        }
     }
     catch (...)
     {
         // 略过异常
-        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const Error&) 抛出异常"));
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("LogAppenderIOManagerImpl operator<<(const exception&) 抛出异常"));
     }
 
     return *this;
@@ -156,12 +187,12 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        if (m_FilterTypePtr != nullptr)
+        if (currentFilterType != nullptr)
         {
             Refresh();
         }
 
-        m_FilterTypePtr = make_shared<LogFilter>(filterType);
+        currentFilterType = make_shared<LogFilter>(filterType);
     }
     catch (...)
     {
@@ -178,12 +209,12 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        if (m_FunctionDescribedPtr != nullptr)
+        if (currentFunctionDescribed != nullptr)
         {
             Refresh();
         }
 
-        m_FunctionDescribedPtr = make_shared<FunctionDescribed>(functionDescribed);
+        currentFunctionDescribed = make_shared<FunctionDescribed>(functionDescribed);
     }
     catch (...)
     {
@@ -204,12 +235,12 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
         {
             case LogAppenderIOManageSign::BlankSpace:
             {
-                m_Message += SYSTEM_TEXT(' ');
+                logMessage += SYSTEM_TEXT(' ');
                 break;
             }
             case LogAppenderIOManageSign::Newline:
             {
-                m_Message += SYSTEM_TEXT('\n');
+                logMessage += SYSTEM_TEXT('\n');
                 break;
             }
             case LogAppenderIOManageSign::Refresh:
@@ -219,12 +250,12 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
             }
             case LogAppenderIOManageSign::TriggerAssert:
             {
-                m_TriggerAssert = true;
+                triggerAssert = true;
                 break;
             }
             case LogAppenderIOManageSign::AlwaysConsole:
             {
-                m_AlwaysConsole = true;
+                alwaysConsole = true;
                 break;
             }
             default:
@@ -249,12 +280,12 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        if (m_LogFileNamePtr != nullptr)
+        if (currentLogFileName != nullptr)
         {
             Refresh();
         }
 
-        m_LogFileNamePtr = make_shared<LogFileName>(logFileName);
+        currentLogFileName = make_shared<LogFileName>(logFileName);
     }
     catch (...)
     {
@@ -271,7 +302,10 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += StringConversion::MultiByteConversionStandard(message);
+        if (!IsDisabled())
+        {
+            logMessage += StringConversion::MultiByteConversionStandard(message);
+        }
     }
     catch (...)
     {
@@ -288,7 +322,10 @@ CoreTools::LogAppenderIOManagerImpl& CoreTools::LogAppenderIOManagerImpl::operat
 
     try
     {
-        m_Message += StringConversion::WideCharConversionStandard(message);
+        if (!IsDisabled())
+        {
+            logMessage += StringConversion::WideCharConversionStandard(message);
+        }
     }
     catch (...)
     {
@@ -312,21 +349,25 @@ void CoreTools::LogAppenderIOManagerImpl::Refresh()
 // private
 bool CoreTools::LogAppenderIOManagerImpl::Write()
 {
-    if (m_logLevel != LogLevel::Disabled && m_FilterTypePtr != nullptr && m_AppenderManager != nullptr && m_FunctionDescribedPtr != nullptr)
+    if (logLevel != LogLevel::Disabled && currentFilterType != nullptr && currentAppenderManager != nullptr && currentFunctionDescribed != nullptr)
     {
-        LogMessage message{ m_logLevel, *m_FilterTypePtr, m_Message, *m_FunctionDescribedPtr };
+        if (!logMessage.empty())
+        {
+            const LogMessage message{ logLevel, *currentFilterType, logMessage, *currentFunctionDescribed };
 
-        if (m_LogFileNamePtr != nullptr)
-        {
-            m_AppenderManager->Write(m_LogFileNamePtr->GetFileName(), message);
-            if (m_AlwaysConsole && m_LogFileNamePtr->GetFileName() != m_AppenderManager->GetConsoleAppenderName())
+            if (currentLogFileName != nullptr)
             {
-                m_AppenderManager->WriteToConsole(message);
+                LOG_ASYNCHRONOUS_SINGLETON.Registered(currentLogFileName->GetFileName(), message, currentAppenderManager);
+
+                if (alwaysConsole && currentLogFileName->GetFileName() != currentAppenderManager->GetConsoleAppenderName())
+                {
+                    LOG_ASYNCHRONOUS_SINGLETON.Registered(currentAppenderManager->GetConsoleAppenderName(), message, currentAppenderManager);
+                }
             }
-        }
-        else
-        {
-            m_AppenderManager->Write(message);
+            else
+            {
+                LOG_ASYNCHRONOUS_SINGLETON.Registered(message, currentAppenderManager);
+            }
         }
 
         return true;
@@ -338,13 +379,13 @@ bool CoreTools::LogAppenderIOManagerImpl::Write()
 // private
 void CoreTools::LogAppenderIOManagerImpl::TriggerAssert()
 {
-    if (m_TriggerAssert)
+    if (triggerAssert)
     {
-        auto assertMessage = StringConversion::StandardConversionMultiByte(m_Message);
+        const auto assertMessage = StringConversion::StandardConversionMultiByte(logMessage);
 
-        if (m_FunctionDescribedPtr != nullptr)
+        if (currentFunctionDescribed != nullptr)
         {
-            CORE_TOOLS_ASSERTION_USE_FUNCTION_DESCRIBED_2(false, *m_FunctionDescribedPtr, assertMessage.c_str());
+            CORE_TOOLS_ASSERTION_USE_FUNCTION_DESCRIBED_2(false, *currentFunctionDescribed, assertMessage.c_str());
         }
         else
         {
@@ -356,17 +397,37 @@ void CoreTools::LogAppenderIOManagerImpl::TriggerAssert()
 // private
 void CoreTools::LogAppenderIOManagerImpl::Reset() noexcept
 {
-    m_Message.clear();
-    m_FilterTypePtr.reset();
-    m_FunctionDescribedPtr.reset();
-    m_LogFileNamePtr.reset();
-    m_TriggerAssert = false;
-    m_AlwaysConsole = false;
+    logMessage.clear();
+    currentFilterType.reset();
+    currentFunctionDescribed.reset();
+    currentLogFileName.reset();
+    triggerAssert = false;
+    alwaysConsole = false;
 }
 
-void CoreTools::LogAppenderIOManagerImpl::SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept
+bool CoreTools::LogAppenderIOManagerImpl::IsDisabled() const
+{
+    if (logLevel == LogLevel::Disabled)
+    {
+        return true;
+    }
+
+    if (currentFilterType != nullptr)
+    {
+        const auto minLogLevel = currentAppenderManager->GetMinLogLevelType(*currentFilterType);
+
+        if (minLogLevel == LogLevel::Disabled || logLevel < minLogLevel)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void CoreTools::LogAppenderIOManagerImpl::SetAppenderManager(const AppenderManagerSharedPtr& appenderManager) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_AppenderManager = appenderManager;
+    currentAppenderManager = appenderManager;
 }

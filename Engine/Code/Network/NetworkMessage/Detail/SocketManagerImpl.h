@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 20:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 11:56)
 
 #ifndef NETWORK_NETWORK_MESSAGE_SOCKET_MANAGER_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_SOCKET_MANAGER_IMPL_H
@@ -25,7 +25,7 @@ namespace Network
         using ClassType = SocketManagerImpl;
 
     public:
-        SocketManagerImpl(MAYBE_UNUSED int count);
+        SocketManagerImpl(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
         ~SocketManagerImpl() noexcept = default;
 
         SocketManagerImpl(const SocketManagerImpl& rhs);
@@ -46,15 +46,15 @@ namespace Network
 
         void OnEvent(uint64_t socketID, int64_t messageID, const ConstMessageInterfaceSharedPtr& message);
 
-        [[nodiscard]] int GetSocketSize() const;
+        NODISCARD int GetSocketSize() const;
 
     private:
         using MessageEventManagerContainer = std::map<uint64_t, MessageEventManager>;
         using MutexUniquePtr = std::unique_ptr<CoreTools::Mutex>;
 
     private:
-        MessageEventManagerContainer m_MessageEventManagerContainer;
-        MutexUniquePtr m_Mutex;
+        MessageEventManagerContainer messageEventManagerContainer;
+        MutexUniquePtr mutex;
     };
 }
 

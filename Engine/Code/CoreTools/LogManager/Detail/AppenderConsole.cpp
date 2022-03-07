@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 17:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:25)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,8 +25,10 @@ CoreTools::AppenderConsole::AppenderConsole(AppenderPrint appenderFlags, LogLeve
     : ParentType{ appenderFlags, logLevel }
 {
 #ifndef TCRE_USE_GCC
-    locale chs{ "chs" };
+
+    const locale chs{ "chs" };
     COUT.imbue(chs);
+
 #endif  // TCRE_USE_GCC
 
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
@@ -43,9 +45,9 @@ CoreTools::AppenderType CoreTools::AppenderConsole::GetAppenderType() const noex
 
 void CoreTools::AppenderConsole::DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix)
 {
-    LogConsoleTextColorsManager manager{ message.GetLogLevel() };
+    const LogConsoleTextColorsManager manager{ message.GetLogLevel() };
 
-    auto messageDescribe = message.GetMessageDescribe();
+    const auto messageDescribe = message.GetMessageDescribe();
 
     // 错误消息打印到错误控制台
     if (message.GetLogLevel() == LogLevel::Error || message.GetLogLevel() == LogLevel::Fatal)
@@ -58,7 +60,7 @@ void CoreTools::AppenderConsole::DoWrite(const LogMessage& message, const LogMes
     }
 }
 
-const CoreTools::AppenderConsole::AppenderImplPtr CoreTools::AppenderConsole::Clone() const
+const CoreTools::AppenderConsole::AppenderImplSharedPtr CoreTools::AppenderConsole::Clone() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 

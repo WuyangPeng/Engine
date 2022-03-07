@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/02 14:56)
+///	引擎版本：0.8.0.2 (2022/02/18 14:56)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_H
@@ -21,7 +21,7 @@
 // 如果Dot(U,X - C) = -h/2和(X - C)^T * (I - U * U^T) * (X - C) <= r^2，
 // 点X在底盘C - (h / 2) * U 上。
 
-// 输入是点Vector3D的数组。
+// 输入是点Vector3的数组。
 // 输出为中心C，单位长度轴方向U，半径Real和高度H。
 // 可以提供初始猜测的C和U。在这种情况下，m_InputsAreInitialGuess被设置为“真”。
 // 否则其被设置为“假”，函数将首先用线的最小二乘法拟合数据来选择C和U。
@@ -33,8 +33,8 @@
 
 // CylinderFit3<Real> fit0{ points };
 // Real exactly0 = fit0.GetExactly();
-// Vector3D<Real> center = fit0.GetCenter();
-// Vector3D<Real> axis = fit0.GetAxis();
+// Vector3<Real> center = fit0.GetCenter();
+// Vector3<Real> axis = fit0.GetAxis();
 // for (int i = 0; i <= max; ++i)
 // {
 //     CylinderFit3<Real> fit1{ points,center,axis };
@@ -45,7 +45,7 @@
 //     axis = fit1.GetAxis();
 //  }
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <vector>
@@ -57,43 +57,43 @@ namespace Mathematics
     {
     public:
         using ClassType = CylinderFit3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using Points = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using Points = std::vector<Vector3>;
         using Math = Math<Real>;
 
     public:
         explicit CylinderFit3(const Points& points, const Real epsilon = Math::GetZeroTolerance());
-        CylinderFit3(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon = Math::GetZeroTolerance());
+        CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_DECLARE;
 
         // 返回准确度
-        [[nodiscard]] Real GetExactly() const noexcept;
+        NODISCARD Real GetExactly() const noexcept;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] const Vector3D GetAxis() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
-        [[nodiscard]] Real GetHeight() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3 GetAxis() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
+        NODISCARD Real GetHeight() const noexcept;
 
     private:
         void Fit3(const Points& points);
         void InitialGuess(const Points& points);
         void Update(const Points& points);
-        [[nodiscard]] Real ComputeHeight(const Points& points);
+        NODISCARD Real ComputeHeight(const Points& points);
         void ComputeCenter(Real average);
 
     private:
-        Vector3D m_Center;
-        Vector3D m_Axis;
-        Real m_Radius;
-        Real m_Height;
-        Real m_Exactly;
-        bool m_InputsAreInitialGuess;
-        Real m_Epsilon;
+        Vector3 center;
+        Vector3 axis;
+        Real radius;
+        Real height;
+        Real exactly;
+        bool inputsAreInitialGuess;
+        Real epsilon;
     };
 
-    using FloatCylinderFit3 = CylinderFit3<float>;
-    using DoubleCylinderFit3 = CylinderFit3<double>;
+    using CylinderFit3F = CylinderFit3<float>;
+    using CylinderFit3D = CylinderFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_H

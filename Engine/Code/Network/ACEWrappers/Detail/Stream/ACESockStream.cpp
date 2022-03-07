@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 15:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 18:24)
 
 #include "Network/NetworkExport.h"
 
@@ -28,7 +28,7 @@ using std::array;
 using std::string;
 
 Network::ACESockStream::ACESockStream() noexcept
-    : ParentType{}, m_ACESockStream{}
+    : ParentType{}, aceSockStream{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -37,7 +37,7 @@ Network::ACESockStream::~ACESockStream()
 {
     EXCEPTION_TRY
     {
-        m_ACESockStream.close();
+        aceSockStream.close();
     }
     EXCEPTION_ALL_CATCH(Network)
 
@@ -50,12 +50,13 @@ Network::ACESockStreamNativeType& Network::ACESockStream::GetACESockStream() noe
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_ACESockStream;
+    return aceSockStream;
 }
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -76,7 +77,7 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
         THROW_EXCEPTION(SYSTEM_TEXT("当前写指针为空！"s));
     }
 
-    const auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
+    const auto recvSize = aceSockStream.recv_n(buffer, headSize);
 
     if (recvSize == headSize)
     {
@@ -84,7 +85,9 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
         const auto totalLength = *reinterpret_cast<int*>(buffer);
+
     #include STSTEM_WARNING_POP
 
         if (bytesTotal < totalLength)
@@ -96,7 +99,9 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
-        if (m_ACESockStream.recv_n(buffer + headSize, remainLength) != remainLength)
+
+        if (aceSockStream.recv_n(buffer + headSize, remainLength) != remainLength)
+
     #include STSTEM_WARNING_POP
         {
             THROW_EXCEPTION(SYSTEM_TEXT("接收数据长度错误！"s));
@@ -111,47 +116,52 @@ int Network::ACESockStream::Receive(const MessageBufferSharedPtr& messageBuffer)
         return 0;
     }
 }
+
     #include STSTEM_WARNING_POP
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 int Network::ACESockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_ACESockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
+    if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"s));
     }
 
     return messageBuffer->GetSize();
 }
+
     #include STSTEM_WARNING_POP
 
 Network::ACEHandle Network::ACESockStream::GetACEHandle() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ACESockStream.get_handle();
+    return aceSockStream.get_handle();
 }
 
 void Network::ACESockStream::SetACEHandle(ACEHandle handle)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ACESockStream.set_handle(handle);
+    aceSockStream.set_handle(handle);
 }
 
 bool Network::ACESockStream::CloseHandle()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_ACESockStream.close() == 0)
+    if (aceSockStream.close() == 0)
     {
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
-        m_ACESockStream.set_handle(reinterpret_cast<ACEHandle>(System::g_InvalidSocket));
+
+        aceSockStream.set_handle(reinterpret_cast<ACEHandle>(System::g_InvalidSocket));
+
     #include STSTEM_WARNING_POP
 
         return true;
@@ -165,11 +175,12 @@ bool Network::ACESockStream::CloseHandle()
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::ACESockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_ACESockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
+    if (aceSockStream.send_n(messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetCurrentWriteIndex()) != messageBuffer->GetCurrentWriteIndex())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("发送数据失败！"s));
     }
@@ -184,11 +195,13 @@ void Network::ACESockStream::AsyncSend(const EventInterfaceSharedPtr& eventInter
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }
+
     #include STSTEM_WARNING_POP
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26415)
     #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -209,7 +222,7 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
         return;
     }
 
-    const auto recvSize = m_ACESockStream.recv_n(buffer, headSize);
+    const auto recvSize = aceSockStream.recv_n(buffer, headSize);
 
     if (recvSize == headSize)
     {
@@ -217,7 +230,9 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26490)
+
         const auto totalLength = *reinterpret_cast<int*>(buffer);
+
     #include STSTEM_WARNING_POP
 
         if (bytesTotal < totalLength)
@@ -229,7 +244,9 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
 
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
-        if (m_ACESockStream.recv_n(buffer + headSize, remainLength) != remainLength)
+
+        if (aceSockStream.recv_n(buffer + headSize, remainLength) != remainLength)
+
     #include STSTEM_WARNING_POP
         {
             return;
@@ -252,15 +269,16 @@ void Network::ACESockStream::AsyncReceive(const EventInterfaceSharedPtr& eventIn
         return;
     }
 }
+
     #include STSTEM_WARNING_POP
 
-const string Network::ACESockStream::GetRemoteAddress() const
+string Network::ACESockStream::GetRemoteAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    ACESockInetAddress address;
+    ACESockInetAddress address{};
 
-    if (m_ACESockStream.get_remote_addr(address.GetACEInetAddress()) == 0)
+    if (aceSockStream.get_remote_addr(address.GetACEInetAddress()) == 0)
     {
         return address.GetAddress();
     }
@@ -274,9 +292,9 @@ int Network::ACESockStream::GetRemotePort() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    ACESockInetAddress address;
+    ACESockInetAddress address{};
 
-    if (m_ACESockStream.get_remote_addr(address.GetACEInetAddress()) == 0)
+    if (aceSockStream.get_remote_addr(address.GetACEInetAddress()) == 0)
     {
         return address.GetPort();
     }
@@ -290,7 +308,7 @@ bool Network::ACESockStream::EnableNonBlock()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    if (m_ACESockStream.enable(g_NonBlock) == 0)
+    if (aceSockStream.enable(g_NonBlock) == 0)
         return true;
     else
         return false;

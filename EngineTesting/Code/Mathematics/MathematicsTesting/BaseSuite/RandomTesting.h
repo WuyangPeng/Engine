@@ -23,7 +23,7 @@ namespace Mathematics
 		void FloatRandomTest();
 		void DoubleRandomTest();		
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

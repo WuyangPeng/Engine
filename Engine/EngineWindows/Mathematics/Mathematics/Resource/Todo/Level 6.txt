@@ -1,6 +1,6 @@
 TODO Level 6
  
-0.6.0.0
+0.8.0.2
 
 1.  （Objects3D）将基本BSP算法用于ConvexPolyhedron3的Contains函数。这是一个O(log n)的算法。
 2.  （Objects3D）Rectangle3类的类不变式判断m_Axis[0]和m_Axis[1]是互相垂直的。

@@ -24,7 +24,7 @@ namespace Mathematics
 		void ArithmeticCalculateTest();	
 		void EulerTest();
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

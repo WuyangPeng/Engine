@@ -23,7 +23,7 @@ namespace Mathematics
 		void OperatorCalculateTest();
 		void ArithmeticCalculateTest();		
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/08 18:23)
+///	引擎版本：0.8.0.2 (2022/02/21 11:15)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY2_RAY2_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY2_RAY2_H
@@ -20,14 +20,14 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay2Ray2 : public DistanceBase<Real, Vector2D<Real>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay2Ray2 : public DistanceBase<Real, Vector2<Real>>
     {
     public:
         using ClassType = DistanceRay2Ray2<Real>;
-        using Vector2D = Vector2D<Real>;
-        using ParentType = DistanceBase<Real, Vector2D>;
+        using Vector2 = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2>;
         using Ray2 = Ray2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
         using DistanceLine2Line2Tool = DistanceLine2Line2Tool<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
@@ -37,27 +37,27 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ray2 GetLhsRay() const noexcept;
-        [[nodiscard]] const Ray2 GetRhsRay() const noexcept;
+        NODISCARD Ray2 GetLhsRay() const noexcept;
+        NODISCARD Ray2 GetRhsRay() const noexcept;
 
         // 静态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
         // 函数计算动态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
 
     private:
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2Tool& tool) const;
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsLhs(const DistanceLine2Line2Tool& tool) const;
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsRhs(const DistanceLine2Line2Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsOrigin(const DistanceLine2Line2Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsLhs(const DistanceLine2Line2Tool& tool) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRhs(const DistanceLine2Line2Tool& tool) const;
 
     private:
-        Ray2 m_LhsRay;
-        Ray2 m_RhsRay;
+        Ray2 lhsRay;
+        Ray2 rhsRay;
     };
 
-    using FloatDistanceRay2Ray2 = DistanceRay2Ray2<float>;
-    using DoubleDistanceRay2Ray2 = DistanceRay2Ray2<double>;
+    using DistanceRay2Ray2F = DistanceRay2Ray2<float>;
+    using DistanceRay2Ray2D = DistanceRay2Ray2<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY2_RAY2_H

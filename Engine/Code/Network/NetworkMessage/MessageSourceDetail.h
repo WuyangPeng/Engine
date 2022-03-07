@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:29)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_DETAIL_H
@@ -21,36 +21,36 @@
 template <typename T>
 void Network::MessageSource::Read(T& datum)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     const auto typeSize = CoreTools::GetStreamSize<T>();
 
-    m_Source->Read(typeSize, &datum);
+    source->Read(typeSize, &datum);
 }
 
 template <typename T>
 void Network::MessageSource::Read(int elementsNumber, T* data)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     if (0 < elementsNumber)
     {
         const auto typeSize = CoreTools::GetStreamSize<T>();
 
-        m_Source->Read(typeSize, elementsNumber, data);
+        source->Read(typeSize, elementsNumber, data);
     }
 }
 
 template <typename T>
 void Network::MessageSource::Read(std::vector<T>& datum)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     int32_t elementsNumber{ 0 };
 
@@ -66,9 +66,9 @@ void Network::MessageSource::Read(std::vector<T>& datum)
 template <typename T>
 void Network::MessageSource::ReadEnum(T& datum)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     using UnderlyingType = std::underlying_type_t<T>;
 
@@ -82,13 +82,16 @@ void Network::MessageSource::ReadEnum(T& datum)
 template <typename T>
 void Network::MessageSource::ReadEnum(int elementsNumber, T* data)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
         ReadEnum(data[i]);
+#include STSTEM_WARNING_POP
     }
 }
 

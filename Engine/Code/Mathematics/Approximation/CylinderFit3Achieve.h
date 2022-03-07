@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/02 14:59)
+///	引擎版本：0.8.0.2 (2022/02/18 14:59)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H
 
 #include "CylinderFit3.h"
-#include "Detail/CylinderFit3UpdateDetail.h"
 #include "OrthogonalLineFit3Detail.h"
+#include "Detail/CylinderFit3UpdateDetail.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Objects2D/Line2Detail.h"
 
@@ -23,7 +23,7 @@
 
 template <typename Real>
 Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Real epsilon)
-    : m_Center{}, m_Axis{}, m_Radius{}, m_Height{}, m_Exactly{ Math::sm_MaxReal }, m_InputsAreInitialGuess{ false }, m_Epsilon{ epsilon }
+    : center{}, axis{}, radius{}, height{}, exactly{ Math::maxReal }, inputsAreInitialGuess{ false }, epsilon{ epsilon }
 {
     Fit3(points);
 
@@ -31,8 +31,8 @@ Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Real e
 }
 
 template <typename Real>
-Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector3D& guessCenter, const Vector3D& guessAxis, const Real epsilon)
-    : m_Center{ guessCenter }, m_Axis{ guessAxis }, m_Radius{}, m_Height{}, m_Exactly{ Math::sm_MaxReal }, m_InputsAreInitialGuess{ true }, m_Epsilon{ epsilon }
+Mathematics::CylinderFit3<Real>::CylinderFit3(const Points& points, const Vector3& guessCenter, const Vector3& guessAxis, const Real epsilon)
+    : center{ guessCenter }, axis{ guessAxis }, radius{}, height{}, exactly{ Math::maxReal }, inputsAreInitialGuess{ true }, epsilon{ epsilon }
 {
     Fit3(points);
 
@@ -53,14 +53,14 @@ void Mathematics::CylinderFit3<Real>::Fit3(const Points& points)
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::InitialGuess(const Points& points)
 {
-    if (!m_InputsAreInitialGuess)
+    if (!inputsAreInitialGuess)
     {
         // 找到适合该数据的最小二乘线，并用它作为圆柱体轴的初始猜测。
         const OrthogonalLineFit3<Real> orthogonalLineFit3{ points };
 
         const auto line = orthogonalLineFit3.GetLine3();
-        m_Center = line.GetOrigin();
-        m_Axis = line.GetDirection();
+        center = line.GetOrigin();
+        axis = line.GetDirection();
     }
 }
 
@@ -70,14 +70,14 @@ void Mathematics::CylinderFit3<Real>::Update(const Points& points)
 {
     constexpr auto maxLoopTime = 8;
 
-    CylinderFit3Update<Real> update{ points, m_Center, m_Axis, m_Epsilon };
+    CylinderFit3Update<Real> update{ points, center, axis, epsilon };
     update.Update(maxLoopTime);
 
-    m_Radius = Math::InvSqrt(update.GetInverseRadiusSqrare());
-    m_Center = update.GetCenter();
-    m_Axis = update.GetAxis();
+    radius = Math::InvSqrt(update.GetInverseRadiusSqrare());
+    center = update.GetCenter();
+    axis = update.GetAxis();
 
-    m_Exactly = update.GetExactly();
+    exactly = update.GetExactly();
 }
 
 // private
@@ -88,14 +88,14 @@ Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
     std::vector<Real> dotCollection{};
     for (const auto& point : points)
     {
-        auto dot = Vector3DTools<Real>::DotProduct(m_Axis, point - m_Center);
+        auto dot = Vector3Tools<Real>::DotProduct(axis, point - center);
         dotCollection.emplace_back(dot);
     }
 
     const auto boundary = std::minmax_element(dotCollection.begin(), dotCollection.end());
 
     // 计算高度。调整中心点到项目幅度中点
-    m_Height = *boundary.second - *boundary.first;
+    height = *boundary.second - *boundary.first;
 
     return *boundary.first + *boundary.second;
 }
@@ -104,16 +104,17 @@ Real Mathematics::CylinderFit3<Real>::ComputeHeight(const Points& points)
 template <typename Real>
 void Mathematics::CylinderFit3<Real>::ComputeCenter(Real average)
 {
-    m_Center += Math::GetRational(1, 2) * average * m_Axis;
+    center += Math::GetRational(1, 2) * average * axis;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::CylinderFit3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= m_Radius && Math::GetValue(0) <= m_Height && Math::GetValue(0) <= m_Exactly && Math::GetValue(0) <= m_Epsilon && m_Axis.IsNormalize(m_Epsilon))
+        if (Math::GetValue(0) <= radius && Math::GetValue(0) <= height && Math::GetValue(0) <= exactly && Math::GetValue(0) <= epsilon && axis.IsNormalize(epsilon))
         {
             return true;
         }
@@ -127,6 +128,7 @@ bool Mathematics::CylinderFit3<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -134,23 +136,23 @@ Real Mathematics::CylinderFit3<Real>::GetExactly() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Exactly;
+    return exactly;
 }
 
 template <typename Real>
-typename const Mathematics::CylinderFit3<Real>::Vector3D Mathematics::CylinderFit3<Real>::GetCenter() const noexcept
+typename Mathematics::CylinderFit3<Real>::Vector3 Mathematics::CylinderFit3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Center;
+    return center;
 }
 
 template <typename Real>
-typename const Mathematics::CylinderFit3<Real>::Vector3D Mathematics::CylinderFit3<Real>::GetAxis() const noexcept
+typename Mathematics::CylinderFit3<Real>::Vector3 Mathematics::CylinderFit3<Real>::GetAxis() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Axis;
+    return axis;
 }
 
 template <typename Real>
@@ -158,7 +160,7 @@ Real Mathematics::CylinderFit3<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Radius;
+    return radius;
 }
 
 template <typename Real>
@@ -166,7 +168,7 @@ Real Mathematics::CylinderFit3<Real>::GetHeight() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Height;
+    return height;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_ACHIEVE_H

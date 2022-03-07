@@ -1,14 +1,16 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/30 10:19)
+///	引擎版本：0.8.0.2 (2022/02/17 11:38)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_H
+
+#include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Matrix3.h"
 
@@ -29,21 +31,21 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] const Matrix3 GetLeftMatrix() const noexcept;
-        [[nodiscard]] const Matrix3 GetDiagonalMatrix() const noexcept;
-        [[nodiscard]] const Matrix3 GetRightTransposeMatrix() const noexcept;
+        NODISCARD Matrix3 GetLeftMatrix() const noexcept;
+        NODISCARD Matrix3 GetDiagonalMatrix() const noexcept;
+        NODISCARD Matrix3 GetRightTransposeMatrix() const noexcept;
 
     private:
         void Calculate(const Matrix3& matrix);
 
     private:
-        Matrix3 m_Left;
-        Matrix3 m_Diagonal;
-        Matrix3 m_RightTranspose;
+        Matrix3 left;
+        Matrix3 diagonal;
+        Matrix3 rightTranspose;
     };
 
-    using FloatSingularValue = SingularValue<float>;
-    using DoubleSingularValue = SingularValue<double>;
+    using SingularValueF = SingularValue<float>;
+    using SingularValueD = SingularValue<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX3_TOOLS_H

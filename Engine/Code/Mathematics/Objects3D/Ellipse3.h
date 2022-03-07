@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:24)
+///	引擎版本：0.8.0.2 (2022/02/10 15:07)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSE3_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Ellipse3<Real>;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
 
     public:
         // 含椭圆的面是Dot(N,X-C) = 0 ，
@@ -38,31 +38,36 @@ namespace Mathematics
         // 在此讨论的符号均与类成员如下。
         // 成员'Center'为C，“Normal”是N，'Major'是U，'Minor'是V，
         // 'MajorLength“是a和”MinorLength'为b。
-        Ellipse3(const Vector3D& center, const Vector3D& normal, const Vector3D& major, const Vector3D& minor,
-                 Real majorLength, Real minorLength, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Ellipse3(const Vector3& center,
+                 const Vector3& normal,
+                 const Vector3& major,
+                 const Vector3& minor,
+                 Real majorLength,
+                 Real minorLength,
+                 const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] const Vector3D GetNormal() const noexcept;
-        [[nodiscard]] const Vector3D GetMajor() const noexcept;
-        [[nodiscard]] const Vector3D GetMinor() const noexcept;
-        [[nodiscard]] Real GetMajorLength() const noexcept;
-        [[nodiscard]] Real GetMinorLength() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Vector3 GetMajor() const noexcept;
+        NODISCARD Vector3 GetMinor() const noexcept;
+        NODISCARD Real GetMajorLength() const noexcept;
+        NODISCARD Real GetMinorLength() const noexcept;
 
     private:
-        Vector3D m_Center;
-        Vector3D m_Normal;
-        Vector3D m_Major;
-        Vector3D m_Minor;
-        Real m_MajorLength;
-        Real m_MinorLength;
+        Vector3 center;
+        Vector3 normal;
+        Vector3 major;
+        Vector3 m_Minor;
+        Real majorLength;
+        Real minorLength;
 
-        Real m_Epsilon;
+        Real epsilon;
     };
 
-    using FloatEllipse3 = Ellipse3<float>;
-    using DoubleEllipse3 = Ellipse3<double>;
+    using Ellipse3F = Ellipse3<float>;
+    using Ellipse3D = Ellipse3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_ELLIPSE3_H

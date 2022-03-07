@@ -13,7 +13,8 @@
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/APointDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/Curve2Detail.h"
 #include "Rendering/DataTypes/TransformDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
@@ -98,15 +99,15 @@ void Rendering::RevolutionSurface ::ComputeSampleData()
     const float invNumRadialSamples = 1.0f / (float)mNumRadialSamples;
     for (int i = 0; i < mNumRadialSamples; ++i)
     {
-        const float angle = Mathematics::FloatMath::GetTwoPI() * invNumRadialSamples * i;
-        mCos[i] = Mathematics::FloatMath::Cos(angle);
-        mSin[i] = Mathematics::FloatMath::Sin(angle);
+        const float angle = Mathematics::MathF::GetTwoPI() * invNumRadialSamples * i;
+        mCos[i] = Mathematics::MathF::Cos(angle);
+        mSin[i] = Mathematics::MathF::Sin(angle);
     }
     mSin[mNumRadialSamples] = mSin[0];
     mCos[mNumRadialSamples] = mCos[0];
 
     // Allocate storage for curve samples.
-    mSamples = nullptr;  // NEW1<Mathematics::FloatVector3D>(mNumCurveSamples);
+    mSamples = nullptr;  // NEW1<Mathematics::Vector3F>(mNumCurveSamples);
 }
 
 void Rendering::RevolutionSurface ::UpdateSurface()
@@ -140,7 +141,7 @@ void Rendering::RevolutionSurface ::UpdateSurface()
             t = tMin + i * tRange * invNumCurveSamplesM1;
         }
 
-        const Mathematics::FloatVector2D position = mCurve->GetPosition(t);
+        const Mathematics::Vector2F position = mCurve->GetPosition(t);
         mSamples[i][0] = (position.GetX());
         mSamples[i][1] = (0.0f);
         mSamples[i][2] = (position.GetY());
@@ -209,7 +210,7 @@ void Rendering::RevolutionSurface::UpdateDisk()
             const int i = c + numCurveSamplesM1 * r;
 
             const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -253,7 +254,7 @@ void Rendering::RevolutionSurface::UpdateSphere()
 
             const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -289,7 +290,7 @@ void Rendering::RevolutionSurface ::UpdateCylinder()
 
             const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 }
@@ -327,14 +328,14 @@ void Rendering::RevolutionSurface ::UpdateTorus()
 
             const Mathematics::Vector3D position{ mXCenter + radius * mCos[r], radius * mSin[r], mSamples[c][2] };
 
-            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APoint{ position });
+            GetVertexBuffer()->SetPosition(vba, i, Mathematics::APointF{ position });
         }
     }
 
     i = numVertices - (mNumRadialSamples + 1);
     for (r = 0; r <= mNumRadialSamples; ++r, ++i)
     {
-        GetVertexBuffer()->SetPosition(vba, i, vba.GetPosition<Mathematics::FloatAPoint>(r));
+        GetVertexBuffer()->SetPosition(vba, i, vba.GetPosition<Mathematics::APointF>(r));
     }
 }
 

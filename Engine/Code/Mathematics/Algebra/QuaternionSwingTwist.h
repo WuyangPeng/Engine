@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 19:00)
+///	引擎版本：0.8.0.2 (2022/02/08 13:58)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H
@@ -32,16 +32,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Quaternion GetTwist() const noexcept;
-        [[nodiscard]] const Quaternion GetSwing() const noexcept;
+        NODISCARD Quaternion GetTwist() const noexcept;
+        NODISCARD Quaternion GetSwing() const noexcept;
 
     private:
-        Quaternion m_Swing;
-        Quaternion m_Twist;
+        Quaternion swing;
+        Quaternion twist;
     };
 
-    using FloatQuaternionSwingTwist = QuaternionSwingTwist<float>;
-    using DoubleQuaternionSwingTwist = QuaternionSwingTwist<double>;
+    using QuaternionSwingTwistF = QuaternionSwingTwist<float>;
+    using QuaternionSwingTwistD = QuaternionSwingTwist<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_SWING_TWIST_H

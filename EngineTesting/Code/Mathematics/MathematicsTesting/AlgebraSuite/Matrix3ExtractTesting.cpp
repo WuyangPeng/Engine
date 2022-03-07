@@ -11,7 +11,7 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random> 
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 using std::uniform_real;
 using std::default_random_engine;
@@ -29,30 +29,32 @@ void Mathematics::Matrix3ExtractTesting
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(ExtractTest); 
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::Matrix3ExtractTesting
 	::ExtractTest()
 {
 	default_random_engine generator{};
 	uniform_real<double> randomDistribution{ -10.0,10.0 };
-	uniform_real<double> angleDistribution(0.0, DoubleMath::GetPI());
+	uniform_real<double> angleDistribution(0.0, MathD::GetPI());
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D firstVector{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
+		Vector3D firstVector{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
 		firstVector.Normalize();
 
 		double angle = angleDistribution(generator);
 
-		DoubleMatrix3 firstMatrix(firstVector,angle);
+		Matrix3D firstMatrix(firstVector,angle);
 
-		DoubleMatrix3Extract matrix3Extract = firstMatrix.ExtractAngleAxis();
+		Matrix3ExtractD matrix3Extract = firstMatrix.ExtractAngleAxis();
 
 		ASSERT_APPROXIMATE(matrix3Extract.GetAngle(),angle,1e-10); 
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(matrix3Extract.GetAxis(), firstVector)); 
+		ASSERT_TRUE(Vector3ToolsD::Approximate(matrix3Extract.GetAxis(), firstVector)); 
 	}	
 
 }

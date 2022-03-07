@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 11:15)
+///	引擎版本：0.8.0.2 (2022/02/18 11:48)
 
 #ifndef MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H
@@ -15,11 +15,11 @@
 #include "System/Helper/PragmaWarning/NumericCast.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::SphereFit3<Real>::SphereFit3(const Points& points, int maxIterations, bool initialCenterIsAverage)
-    : m_Sphere{}
+    : sphere{}
 {
     Calculate(points, maxIterations, initialCenterIsAverage);
 
@@ -27,19 +27,21 @@ Mathematics::SphereFit3<Real>::SphereFit3(const Points& points, int maxIteration
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::SphereFit3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::SphereFit3<Real>::GetSphere() const noexcept
+Mathematics::Sphere3<Real> Mathematics::SphereFit3<Real>::GetSphere() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Sphere;
+    return sphere;
 }
 
 template <typename Real>
@@ -50,23 +52,23 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
     // 猜测初始中心。
     if (initialCenterIsAverage)
     {
-        m_Sphere.SetSphere(average, Math::GetValue(0));
+        sphere.SetSphere(average, Math::GetValue(0));
     }
     else
     {
         const QuadraticSphereFit3<Real> fit3{ points };
 
-        m_Sphere.SetSphere(fit3.GetCenter(), fit3.GetRadius());
+        sphere.SetSphere(fit3.GetCenter(), fit3.GetRadius());
     }
 
     for (auto loop = 0; loop < maxIterations; ++loop)
     {
-        const auto current = m_Sphere.GetCenter();
+        const auto current = sphere.GetCenter();
 
         // 更新迭代
         Iteration(points, average);
 
-        auto circleDifference = m_Sphere.GetCenter() - current;
+        const auto circleDifference = sphere.GetCenter() - current;
 
         if (Math::FAbs(circleDifference[0]) <= Math::GetZeroTolerance() &&
             Math::FAbs(circleDifference[1]) <= Math::GetZeroTolerance())
@@ -79,14 +81,14 @@ void Mathematics::SphereFit3<Real>::Calculate(const Points& points, int maxItera
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const Points& points)
+const Mathematics::Vector3<Real> Mathematics::SphereFit3<Real>::GetAveragePoint(const Points& points)
 {
     MATHEMATICS_ASSERTION_0(!points.empty(), "输入的数组大小为零！");
 
     // 计算数据点的平均值。
-    Vector3D average{};
+    Vector3 average{};
 
-    auto numPoints = boost::numeric_cast<Real>(points.size());
+    const auto numPoints = boost::numeric_cast<Real>(points.size());
 
     for (const auto& point : points)
     {
@@ -99,19 +101,19 @@ const Mathematics::Vector3D<Real> Mathematics::SphereFit3<Real>::GetAveragePoint
 }
 
 template <typename Real>
-void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector3D& average)
+void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector3& average)
 {
     auto numPoints = boost::numeric_cast<Real>(points.size());
 
     // 计算平均值L, dL/da, dL/db, dL/dc。
     auto lengthAverage = Math::GetValue(0);
-    Vector3D derLenghtAverage{};
+    Vector3 derLenghtAverage{};
 
     for (const auto& point : points)
     {
-        auto difference = point - m_Sphere.GetCenter();
+        auto difference = point - sphere.GetCenter();
 
-        auto length = Vector3DTools<Real>::VectorMagnitude(difference);
+        auto length = Vector3Tools<Real>::GetLength(difference);
         if (Math::GetZeroTolerance() < length)
         {
             lengthAverage += length;
@@ -122,7 +124,7 @@ void Mathematics::SphereFit3<Real>::Iteration(const Points& points, const Vector
     lengthAverage /= numPoints;
     derLenghtAverage /= numPoints;
 
-    m_Sphere.SetSphere(average + lengthAverage * derLenghtAverage, lengthAverage);
+    sphere.SetSphere(average + lengthAverage * derLenghtAverage, lengthAverage);
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_SPHERE_FIT3_ACHIEVE_H

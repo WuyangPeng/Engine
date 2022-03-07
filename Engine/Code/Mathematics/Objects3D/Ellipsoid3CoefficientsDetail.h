@@ -1,23 +1,147 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 13:06)
+///	引擎版本：0.8.0.2 (2022/02/10 15:46)
 
 #ifndef MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 #define MATHEMATICS_OBJECTS3D_ELLIPSOID3_COEFFICIENTS_DETAIL_H
 
 #include "Ellipsoid3Coefficients.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_ELLIPSOID3_COEFFICIENTS_ACHIEVE)
+#include <gsl/util>
 
-    #include "Ellipsoid3CoefficientsAchieve.h"
+template <typename Real>
+Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const Matrix3& matrix, const Vector3& vector, Real constants)
+    : coefficients{ constants,
+                    vector.GetX(),
+                    vector.GetY(),
+                    vector.GetZ(),
+                    matrix.GetValue<0, 0>(),
+                    matrix.GetValue<0, 1>() * Math::GetValue(2),
+                    matrix.GetValue<0, 2>() * Math::GetValue(2),
+                    matrix.GetValue<1, 1>(),
+                    matrix.GetValue<1, 2>() * Math::GetValue(2),
+                    matrix.GetValue<2, 2>() }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
 
-#endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_ELLIPSOID3_COEFFICIENTS_ACHIEVE)
+template <typename Real>
+Mathematics::Ellipsoid3Coefficients<Real>::Ellipsoid3Coefficients(const CoefficientsType& coefficient)
+    : coefficients{ coefficient }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::Ellipsoid3Coefficients<Real>::IsValid() const noexcept
+{
+    if (coefficients.size() == gsl::narrow_cast<size_t>(GetCoefficientsSize()))
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Matrix3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetMatrix() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+    return Matrix3{ coefficients[4],
+                    Math::GetRational(1, 2) * coefficients[5],
+                    Math::GetRational(1, 2) * coefficients[6],
+                    Math::GetRational(1, 2) * coefficients[5],
+                    coefficients[7],
+                    Math::GetRational(1, 2) * coefficients[8],
+                    Math::GetRational(1, 2) * coefficients[6],
+                    Math::GetRational(1, 2) * coefficients[8],
+                    coefficients[9] };
+
+#include STSTEM_WARNING_POP
+}
+
+template <typename Real>
+Mathematics::Vector3<Real> Mathematics::Ellipsoid3Coefficients<Real>::GetVector() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+    return Vector3{ coefficients[1], coefficients[2], coefficients[3] };
+
+#include STSTEM_WARNING_POP
+}
+
+template <typename Real>
+Real Mathematics::Ellipsoid3Coefficients<Real>::GetConstants() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+    return coefficients[0];
+
+#include STSTEM_WARNING_POP
+}
+
+template <typename Real>
+typename Mathematics::Ellipsoid3Coefficients<Real>::CoefficientsType Mathematics::Ellipsoid3Coefficients<Real>::GetCoefficients() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_1;
+
+    CoefficientsType result{ coefficients };
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+    // 安排x0^2或x1^2或x2^2系数之一是1。
+    auto maxValue = Math::FAbs(result[4]);
+    int maxIndex{ 4 };
+    auto absValue = Math::FAbs(result[7]);
+    if (maxValue < absValue)
+    {
+        maxValue = absValue;
+        maxIndex = 7;
+    }
+    absValue = Math::FAbs(result[9]);
+    if (maxValue < absValue)
+    {
+        maxValue = absValue;
+        maxIndex = 9;
+    }
+
+    auto invMaxValue = Math::GetValue(1) / maxValue;
+    for (auto i = 0; i < GetCoefficientsSize(); ++i)
+    {
+        if (i != maxIndex)
+        {
+            result[i] *= invMaxValue;
+        }
+        else
+        {
+            result[i] = Math::GetValue(1);
+        }
+    }
+
+#include STSTEM_WARNING_POP
+
+    return result;
+}
 
 template <typename Real>
 bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ellipsoid3Coefficients<Real>& rhs, const Real epsilon)
@@ -25,7 +149,7 @@ bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ell
     auto lhsCoefficients = lhs.GetCoefficients();
     auto rhsCoefficients = rhs.GetCoefficients();
 
-    constexpr auto coefficientsSize = Ellipsoid3Coefficients<Real>::sm_CoefficientsSize;
+    constexpr auto coefficientsSize = Ellipsoid3Coefficients<Real>::GetCoefficientsSize();
 
     if (lhsCoefficients.size() != coefficientsSize || rhsCoefficients.size() != coefficientsSize)
     {
@@ -34,7 +158,12 @@ bool Mathematics::Approximate(const Ellipsoid3Coefficients<Real>& lhs, const Ell
 
     for (auto i = 0; i < coefficientsSize; ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
         if (!Math<Real>::Approximate(lhsCoefficients[i], rhsCoefficients[i], epsilon))
+
+#include STSTEM_WARNING_POP
         {
             return false;
         }

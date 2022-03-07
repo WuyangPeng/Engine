@@ -24,7 +24,7 @@ namespace Network
 		void StreamingTest();
 		void MessageTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		static constexpr int64_t sm_MessageID{ 6 };

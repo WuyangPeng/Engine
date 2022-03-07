@@ -18,12 +18,11 @@ namespace Network
 		using ParentType = TestAbstractMessage;
 
 	public:
-		TestMessage();
-		virtual ~TestMessage();
+		TestMessage() noexcept; 
 
 		CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		CORE_TOOLS_RTTI_DECLARE;
+		CORE_TOOLS_RTTI_OVERRIDE_DECLARE;
 		NETWORK_STREAM_DECLARE(TestMessage);
 	};
 

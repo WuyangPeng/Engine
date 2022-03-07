@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::MinCircle2<Real>
-	::MinCircle2(int numPoints, const Vector2D<Real>* points, Circle2<Real>& minimal, Real epsilon)
+	::MinCircle2(int numPoints, const Vector2<Real>* points, Circle2<Real>& minimal, Real epsilon)
 	:mEpsilon{ epsilon }
 {
     mUpdate[0] = 0;
@@ -29,11 +29,11 @@ Mathematics::MinCircle2<Real>
     if (numPoints >= 1)
     {
         // Create identity permutation (0,1,...,numPoints-1).
-        Vector2D<Real>** permuted = nullptr;  //  NEW1<Vector2D<Real>*>(numPoints);
+        Vector2<Real>** permuted = nullptr;  //  NEW1<Vector2<Real>*>(numPoints);
         int i;
         for (i = 0; i < numPoints; ++i)
         {
-            permuted[i] = (Vector2D<Real>*)&points[i];
+            permuted[i] = (Vector2<Real>*)&points[i];
         }
         
         // Generate random permutation.
@@ -42,7 +42,7 @@ Mathematics::MinCircle2<Real>
             int j = rand() % (i+1);
             if (j != i)
             {
-                Vector2D<Real>* save = permuted[i];
+                Vector2<Real>* save = permuted[i];
                 permuted[i] = permuted[j];
                 permuted[j] = save;
             }
@@ -111,10 +111,10 @@ Mathematics::MinCircle2<Real>
 
 template <typename Real>
 bool Mathematics::MinCircle2<Real>
-	::Contains(const Vector2D<Real>& point,  const Circle2<Real>& circle, Real& distDiff)
+	::Contains(const Vector2<Real>& point,  const Circle2<Real>& circle, Real& distDiff)
 {
     auto diff = point - circle.GetCenter();
-	auto test = Vector2DTools<Real>::VectorMagnitudeSquared(diff);
+	auto test = Vector2Tools<Real>::GetLengthSquared(diff);
 
     // NOTE:  In this algorithm, Circle2 is storing the *squared radius*,
     // so the next line of code is not in error.
@@ -125,7 +125,7 @@ bool Mathematics::MinCircle2<Real>
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle1(const Vector2D<Real>& P)
+	::ExactCircle1(const Vector2<Real>& P)
 {
 	Circle2<Real> minimal{ P, Math<Real>::GetValue(0) };
     return minimal;
@@ -133,17 +133,17 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle2(const Vector2D<Real>& P0, const Vector2D<Real>& P1)
+	::ExactCircle2(const Vector2<Real>& P0, const Vector2<Real>& P1)
 {
 	auto diff = P1 - P0;
-	Circle2<Real> minimal{ (Real{0.5})*(P0 + P1), (Real{0.25})*Vector2DTools<Real>::VectorMagnitudeSquared(diff) };
+	Circle2<Real> minimal{ (Real{0.5})*(P0 + P1), (Real{0.25})*Vector2Tools<Real>::GetLengthSquared(diff) };
   
     return minimal;
 }
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::ExactCircle3(const Vector2D<Real>& P0, const Vector2D<Real>& P1, const Vector2D<Real>& P2)
+	::ExactCircle3(const Vector2<Real>& P0, const Vector2<Real>& P1, const Vector2<Real>& P2)
 {
 	auto E10 = P1 - P0;
 	auto E20 = P2 - P0;
@@ -151,27 +151,27 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
     Real A[2][2] { { E10.GetX(), E10.GetY() },
 				   { E20.GetX(), E20.GetY() } };
 
-    Real B[2] { (Real{0.5})*Vector2DTools<Real>::VectorMagnitudeSquared(E10),
-				(Real{0.5})*Vector2DTools<Real>::VectorMagnitudeSquared(E20)  };
+    Real B[2] { (Real{0.5})*Vector2Tools<Real>::GetLengthSquared(E10),
+				(Real{0.5})*Vector2Tools<Real>::GetLengthSquared(E20)  };
 
   
 	auto det = A[0][0]*A[1][1] - A[0][1]*A[1][0];
 
-	Vector2D<Real> center;
+	Vector2<Real> center;
 	Real radius;
     if (Math<Real>::FAbs(det) > mEpsilon)
     {
 		auto invDet = (Math::GetValue(1))/det;
-        Vector2D<Real> Q;
+        Vector2<Real> Q;
 		Q.SetX((A[1][1] * B[0] - A[0][1] * B[1])*invDet);
 		Q.SetY((A[0][0] * B[1] - A[1][0] * B[0])*invDet);
 		center = P0 + Q;
-		radius = Vector2DTools<Real>::VectorMagnitudeSquared(Q);
+		radius = Vector2Tools<Real>::GetLengthSquared(Q);
     }
     else
     {
-		center = Vector2D<Real>::sm_Zero;
-		radius = Math<Real>::sm_MaxReal;
+		center = Vector2<Real>::sm_Zero;
+		radius = Math<Real>::maxReal;
     }
 
 	Circle2<Real> minimal{ center,radius };
@@ -180,7 +180,7 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport1(int i, Vector2D<Real>** permuted, Support& support)
+	::UpdateSupport1(int i, Vector2<Real>** permuted, Support& support)
 {
     const auto& P0 = *permuted[support.Index[0]];
     const auto& P1 = *permuted[i];
@@ -194,9 +194,9 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport2(int i,Vector2D<Real>** permuted, Support& support)
+	::UpdateSupport2(int i,Vector2<Real>** permuted, Support& support)
 {
-    const Vector2D<Real>* point[2]
+    const Vector2<Real>* point[2]
     {
         permuted[support.Index[0]],  // P0
         permuted[support.Index[1]]   // P1
@@ -216,9 +216,9 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
     Circle2<Real> circle[numType2 + numType3];
     int indexCircle = 0;
-	auto minRSqr = Math<Real>::sm_MaxReal;
+	auto minRSqr = Math<Real>::maxReal;
     int indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::sm_MaxReal;
+	Real distDiff, minDistDiff = Math<Real>::maxReal;
     int indexMinDistDiff = -1;
 
     // Permutations of type 2.
@@ -278,9 +278,9 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
 template <typename Real>
 Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
-	::UpdateSupport3(int i, Vector2D<Real>** permuted, Support& support)
+	::UpdateSupport3(int i, Vector2<Real>** permuted, Support& support)
 {
-    const Vector2D<Real>* point[3]
+    const Vector2<Real>* point[3]
     {
         permuted[support.Index[0]],  // P0
         permuted[support.Index[1]],  // P1
@@ -308,9 +308,9 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
     Circle2<Real> circle[numType2 + numType3];
     int indexCircle = 0;
-	auto minRSqr = Math<Real>::sm_MaxReal;
+	auto minRSqr = Math<Real>::maxReal;
 	auto indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::sm_MaxReal;
+	Real distDiff, minDistDiff = Math<Real>::maxReal;
 	auto indexMinDistDiff = -1;
 
     // Permutations of type 2.
@@ -393,12 +393,12 @@ Mathematics::Circle2<Real> Mathematics::MinCircle2<Real>
 
 template <typename Real>
 bool Mathematics::MinCircle2<Real>::Support
-	::Contains(int index, Vector2D<Real>** points, Real epsilon)
+	::Contains(int index, Vector2<Real>** points, Real epsilon)
 {
     for (auto i = 0; i < Quantity; ++i)
     {
 		auto diff = *points[index] - *points[Index[i]];
-		if (Vector2DTools<Real>::VectorMagnitudeSquared(diff) < epsilon)
+		if (Vector2Tools<Real>::GetLengthSquared(diff) < epsilon)
         {
             return true;
         }

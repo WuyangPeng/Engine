@@ -68,7 +68,7 @@ void System::ReadFileTesting::ReadTest()
     vector<char> originalBuffer{ fileContent.begin(), fileContent.end() };
     originalBuffer.insert(originalBuffer.end(), fileContent.begin(), fileContent.end());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buffer, originalBuffer);
+    ASSERT_EQUAL(buffer, originalBuffer);
 }
 
 void System::ReadFileTesting::ReadFileUseOverlappedTest()
@@ -100,7 +100,7 @@ void System::ReadFileTesting::ReadFileUseOverlappedTest()
     vector<char> originalBuffer{ fileContentCut.begin(), fileContentCut.end() };
     originalBuffer.insert(originalBuffer.end(), fileContent.begin(), fileContent.end());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buffer, originalBuffer);
+    ASSERT_EQUAL(buffer, originalBuffer);
 }
 
 void System::ReadFileTesting::ReadFileUseCompletionRoutineTest()

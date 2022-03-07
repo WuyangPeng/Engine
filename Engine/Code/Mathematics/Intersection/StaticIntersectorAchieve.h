@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 11:12)
+///	引擎版本：0.8.0.3 (2022/02/23 10:54)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_ACHIEVE_H
@@ -23,7 +23,7 @@ Mathematics::StaticIntersector<Real, Vector>::StaticIntersector(const Real epsil
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
- 
+
 #include STSTEM_WARNING_POP
 
 template <typename Real, template <typename> class Vector>
@@ -33,6 +33,7 @@ Mathematics::StaticIntersector<Real, Vector>::~StaticIntersector() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, template <typename> class Vector>
 bool Mathematics::StaticIntersector<Real, Vector>::IsValid() const noexcept
 {
@@ -41,6 +42,7 @@ bool Mathematics::StaticIntersector<Real, Vector>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_INTERSECTOR_ACHIEVE_H

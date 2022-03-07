@@ -174,7 +174,7 @@ void Rendering::PointController ::UpdateSystemMotion(float ctrlTime)
         localTransform.SetTranslate(translate);
 
         const auto angle = ctrlTime * GetSystemAngularSpeed();
-        const Mathematics::FloatMatrix deltaRot{ GetSystemAngularAxis(), angle };
+        const Mathematics::MatrixF deltaRot{ GetSystemAngularAxis(), angle };
         const auto rotate = deltaRot * localTransform.GetRotate();
         localTransform.SetRotate(rotate);
 
@@ -194,7 +194,7 @@ void Rendering::PointController ::UpdatePointMotion(float ctrlTime)
         for (auto i = 0; i < numPoints; ++i)
         {
             const auto distance = ctrlTime * GetPointLinearSpeed(i);
-            auto position = vba.GetPosition<Mathematics::FloatAPoint>(i);
+            auto position = vba.GetPosition<Mathematics::APointF>(i);
             auto deltaTrn = distance * GetPointLinearAxis(i);
             m_Points->GetVertexBuffer()->SetPosition(vba, i, position + deltaTrn);
         }
@@ -206,7 +206,7 @@ void Rendering::PointController ::UpdatePointMotion(float ctrlTime)
                 const auto angle = ctrlTime * GetPointAngularSpeed(i);
                 auto normal = vba.GetNormal<AVector>(i);
                 normal.Normalize();
-                const Mathematics::FloatMatrix deltaRot{ GetPointAngularAxis(i), angle };
+                const Mathematics::MatrixF deltaRot{ GetPointAngularAxis(i), angle };
                 m_Points->GetVertexBuffer()->SetTriangleNormal(vba, i, deltaRot * normal);
             }
         }

@@ -80,7 +80,7 @@ namespace Rendering
         colour1 *= 5;
         colour2 /= 4;
 
-        auto result = Approximate(colour4, colour4, Mathematics::FloatMath::GetZeroTolerance());
+        auto result = Approximate(colour4, colour4, Mathematics::MathF::GetZeroTolerance());
         result = (colour1 == colour2);
         result = (colour1 != colour2);
 

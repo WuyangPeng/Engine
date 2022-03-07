@@ -10,7 +10,16 @@
 #include "CoreTools/Helper/AssertMacro.h"
 
 using std::vector;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 namespace Mathematics
 {
 	template class MinimizeNData<float>;
@@ -30,12 +39,12 @@ void Mathematics::MinimizeNDataTesting
 {
 	vector<double> minLocation{ 6.0,5.0,4.0,3.0,2.0 };
 
-	DoubleMinimizeNData firstMinimize1Data(minLocation,50.0);
+	MinimizeNDataD firstMinimize1Data(minLocation,50.0);
 
 	ASSERT_APPROXIMATE(firstMinimize1Data.GetMinValue(), 50.0, 1e-10);
 
 	int index = 0;
-	for (DoubleMinimizeNData::ConstIter iter = firstMinimize1Data.GetMinLocationBegin(),
+	for (MinimizeNDataD::ConstIter iter = firstMinimize1Data.GetMinLocationBegin(),
 		 end = firstMinimize1Data.GetMinLocationEnd();iter != end;++iter)
 	{
 		ASSERT_APPROXIMATE(minLocation[index], *iter, 1e-10);

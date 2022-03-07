@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:20)
+///	引擎版本：0.8.0.2 (2022/02/11 15:36)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H
@@ -24,14 +24,14 @@
 
 template <int N>
 Mathematics::IntegerDivisionModulo<N>::IntegerDivisionModulo(const IntegerData& division, const IntegerData& modulo)
-    : m_Numerator{ division },
-      m_Denominator{ modulo },
-      m_AbsNumerator{ IntegerDataAnalysis(m_Numerator).GetAbsoluteValue() },
-      m_AbsDenominator{ IntegerDataAnalysis(m_Denominator).GetAbsoluteValue() },
-      m_Quotient{},
-      m_Remainder{}
+    : numerator{ division },
+      denominator{ modulo },
+      absNumerator{ IntegerDataAnalysis(numerator).GetAbsoluteValue() },
+      absDenominator{ IntegerDataAnalysis(denominator).GetAbsoluteValue() },
+      quotient{},
+      remainder{}
 {
-    if (!m_Numerator.IsZero() && !m_Denominator.IsZero())
+    if (!numerator.IsZero() && !denominator.IsZero())
     {
         Calculate();
     }
@@ -44,23 +44,23 @@ template <int N>
 void Mathematics::IntegerDivisionModulo<N>::Calculate()
 {
     // 计算中使用绝对值的分子值和分母值。
-    const auto compare = IntegerData::UnsignedDataCompare(m_AbsNumerator, m_AbsDenominator);
+    const auto compare = IntegerData::UnsignedDataCompare(absNumerator, absDenominator);
     if (compare == NumericalValueSymbol::Negative)
     {
         // 分子 < 分母:  numerator = 0 * denominator + numerator
-        m_Quotient.SetZero();
-        m_Remainder = m_Numerator;
+        quotient.SetZero();
+        remainder = numerator;
     }
     else if (compare == NumericalValueSymbol::Zero)
     {
         // 分子 == 分母:  numerator = 1 * denominator + 0
-        m_Quotient = IntegerData{ 1 };
-        m_Remainder.SetZero();
+        quotient = IntegerData{ 1 };
+        remainder.SetZero();
     }
     else
     {
         // 分子 > 分母, 使用除法计算商和余数
-        if (IntegerData{ sm_Low } < m_AbsDenominator)
+        if (IntegerData{ low } < absDenominator)
         {
             DivisionMultiple();
         }
@@ -70,15 +70,15 @@ void Mathematics::IntegerDivisionModulo<N>::Calculate()
         }
 
         // 应用分子和分母的原始符号。
-        if (m_Numerator.GetSign() != m_Denominator.GetSign())
+        if (numerator.GetSign() != denominator.GetSign())
         {
-            IntegerDataAmend<N> integerDataAmend{ m_Quotient };
+            IntegerDataAmend<N> integerDataAmend{ quotient };
             integerDataAmend.Negative();
         }
 
-        if (m_Numerator.GetSign() == NumericalValueSymbol::Negative)
+        if (numerator.GetSign() == NumericalValueSymbol::Negative)
         {
-            IntegerDataAmend<N> integerDataAmend{ m_Remainder };
+            IntegerDataAmend<N> integerDataAmend{ remainder };
             integerDataAmend.Negative();
         }
     }
@@ -89,10 +89,10 @@ template <int N>
 void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
 {
     // 分母是单个的“位”。
-    const auto denominator = sm_Low & boost::numeric_cast<uint32_t>(m_AbsDenominator[0]);
+    const auto lowDenominator = low & boost::numeric_cast<uint32_t>(absDenominator[0]);
 
     // 获取分子。
-    const IntegerDataAnalysis numeratorAnalysis{ m_AbsNumerator };
+    const IntegerDataAnalysis numeratorAnalysis{ absNumerator };
     const auto start = numeratorAnalysis.GetLeadingBlock();
 
     auto remainderDigit = 0u;
@@ -102,13 +102,13 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
     for (auto index = start; 0 <= index; --index)
     {
         const auto highDigit = remainderDigit;
-        remainderDigit = sm_Low & boost::numeric_cast<uint32_t>(m_AbsNumerator[index]);
-        const auto numerator = (highDigit << 16) | remainderDigit;
-        const auto quotient = numerator / denominator;
-        remainderDigit = numerator - quotient * denominator;
-        m_Quotient[index] = boost::numeric_cast<uint16_t>(quotient & sm_Low);
+        remainderDigit = low & boost::numeric_cast<uint32_t>(absNumerator[index]);
+        const auto numeratorValue = (highDigit << 16) | remainderDigit;
+        const auto quotientValue = numeratorValue / lowDenominator;
+        remainderDigit = numeratorValue - quotientValue * lowDenominator;
+        quotient[index] = boost::numeric_cast<uint16_t>(quotientValue & low);
 
-        if (lastNonZero == -1 && 0 < quotient)
+        if (lastNonZero == -1 && 0 < quotientValue)
         {
             lastNonZero = index;
         }
@@ -117,13 +117,13 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
     MATHEMATICS_ASSERTION_1(0 <= lastNonZero, "异常的结果\n");
 
     // 得到余数
-    if (remainderDigit & sm_High)
+    if (remainderDigit & high)
     {
-        m_Remainder = IntegerData{ remainderDigit };
+        remainder = IntegerData{ remainderDigit };
     }
     else
     {
-        m_Remainder = IntegerData{ boost::numeric_cast<uint16_t>(remainderDigit) };
+        remainder = IntegerData{ boost::numeric_cast<uint16_t>(remainderDigit) };
     }
 }
 
@@ -131,10 +131,10 @@ void Mathematics::IntegerDivisionModulo<N>::DivisionSingle()
 template <int N>
 void Mathematics::IntegerDivisionModulo<N>::DivisionMultiple()
 {
-    const IntegerDivisionMultiple<N> divisionMultiple{ m_AbsNumerator, m_AbsDenominator };
+    const IntegerDivisionMultiple<N> divisionMultiple{ absNumerator, absDenominator };
 
-    m_Quotient = divisionMultiple.GetQuotient();
-    m_Remainder = divisionMultiple.GetRemainder();
+    quotient = divisionMultiple.GetQuotient();
+    remainder = divisionMultiple.GetRemainder();
 
     CalculateRemainder();
 }
@@ -147,25 +147,25 @@ void Mathematics::IntegerDivisionModulo<N>::CalculateRemainder()
     constexpr auto maxLoop = 20;
 
     auto loop = 0;
-    while (m_AbsDenominator <= m_Remainder)
+    while (absDenominator <= remainder)
     {
         MATHEMATICS_ASSERTION_1(loop < maxLoop, "计算量过大！");
 
-        if (m_AbsDenominator == m_Remainder)
+        if (absDenominator == remainder)
         {
-            IntegerDataOperator<N> quotientOperator{ m_Quotient };
+            IntegerDataOperator<N> quotientOperator{ quotient };
 
             quotientOperator += IntegerData{ 1 };
-            m_Remainder.SetZero();
+            remainder.SetZero();
         }
-        else if (m_AbsDenominator < m_Remainder)
+        else if (absDenominator < remainder)
         {
-            const IntegerDivisionMultiple<N> divisionMultiple{ m_Remainder, m_AbsDenominator };
+            const IntegerDivisionMultiple<N> divisionMultiple{ remainder, absDenominator };
 
-            IntegerDataOperator<N> quotientOperator{ m_Quotient };
+            IntegerDataOperator<N> quotientOperator{ quotient };
 
             quotientOperator += divisionMultiple.GetQuotient();
-            m_Remainder = divisionMultiple.GetRemainder();
+            remainder = divisionMultiple.GetRemainder();
         }
 
         ++loop;
@@ -178,10 +178,10 @@ bool Mathematics::IntegerDivisionModulo<N>::IsValid() const noexcept
 {
     try
     {
-        if (!m_Denominator.IsZero() &&
-            m_AbsNumerator == IntegerDataAnalysis(m_Numerator).GetAbsoluteValue() &&
-            m_AbsDenominator == IntegerDataAnalysis(m_Denominator).GetAbsoluteValue() &&
-            IntegerDataAnalysis{ m_Remainder }.GetAbsoluteValue() < IntegerDataAnalysis{ m_Denominator }.GetAbsoluteValue() &&
+        if (!denominator.IsZero() &&
+            absNumerator == IntegerDataAnalysis(numerator).GetAbsoluteValue() &&
+            absDenominator == IntegerDataAnalysis(denominator).GetAbsoluteValue() &&
+            IntegerDataAnalysis{ remainder }.GetAbsoluteValue() < IntegerDataAnalysis{ denominator }.GetAbsoluteValue() &&
             IsCorrect())
         {
             return true;
@@ -200,8 +200,8 @@ bool Mathematics::IntegerDivisionModulo<N>::IsValid() const noexcept
 template <int N>
 bool Mathematics::IntegerDivisionModulo<N>::IsCorrect() const
 {
-    IntegerMultiplication<N> multiplication{ m_Denominator, m_Quotient };
-    const auto correct = m_Numerator - multiplication.GetMultiplication() - m_Remainder;
+    IntegerMultiplication<N> multiplication{ denominator, quotient };
+    const auto correct = numerator - multiplication.GetMultiplication() - remainder;
 
     if (correct.IsZero())
         return true;
@@ -212,19 +212,19 @@ bool Mathematics::IntegerDivisionModulo<N>::IsCorrect() const
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-typename const Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetQuotient() const noexcept
+typename Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetQuotient() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quotient;
+    return quotient;
 }
 
 template <int N>
-typename const Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetRemainder() const noexcept
+typename Mathematics::IntegerDivisionModulo<N>::IntegerData Mathematics::IntegerDivisionModulo<N>::GetRemainder() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Remainder;
+    return remainder;
 }
 
 #endif  // MATHEMATICS_RATIONAL_INTEGER_DIVISION_MODULO_DETAIL_H

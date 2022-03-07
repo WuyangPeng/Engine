@@ -43,7 +43,7 @@ namespace Rendering
 		// deleting the input array.  The model vertices must be counterclockwise
 		// oriented in the model plane when viewed from the side of the plane to
 		// which the plane normal points.
-		Portal(int numVertices, Mathematics::FloatAPoint* modelVertices, const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open);
+		Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open);
 
 		  ~Portal();
 		  Portal(const Portal&) = default;
@@ -67,10 +67,10 @@ namespace Rendering
 
 		// Portal vertices and their planes.
 		int mNumVertices;
-		Mathematics::FloatAPoint* mModelVertices;
-		Mathematics:: FloatAPoint* mWorldVertices;
-		Mathematics::FloatPlane mModelPlane;
-		Mathematics::FloatPlane mWorldPlane;
+		Mathematics::APointF* mModelVertices;
+		Mathematics:: APointF* mWorldVertices;
+		Mathematics::PlaneF mModelPlane;
+		Mathematics::PlaneF mWorldPlane;
 	};
  #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH

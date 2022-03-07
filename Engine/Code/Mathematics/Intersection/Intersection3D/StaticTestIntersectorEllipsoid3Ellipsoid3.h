@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 15:52)
+///	引擎版本：0.8.0.3 (2022/03/03 17:47)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H
@@ -18,14 +18,14 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorEllipsoid3Ellipsoid3 : public StaticIntersector<Real, Vector3D>
+    class StaticTestIntersectorEllipsoid3Ellipsoid3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticTestIntersectorEllipsoid3Ellipsoid3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -33,8 +33,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ellipsoid3 GetEllipsoid0() const noexcept;
-        [[nodiscard]] const Ellipsoid3 GetEllipsoid1() const noexcept;
+        NODISCARD Ellipsoid3 GetEllipsoid0() const noexcept;
+        NODISCARD Ellipsoid3 GetEllipsoid1() const noexcept;
 
         // 测试查询的一种形式。 椭球是分开的，相交的（在点或曲线上），椭球0严格包含在椭球1中，或椭球1严格包含在椭球0中。
         enum class Classification
@@ -45,7 +45,7 @@ namespace Mathematics
             Ellipsoid1ContainsEllipsoid0
         };
 
-        [[nodiscard]] Classification GetClassification() const;
+        NODISCARD Classification GetClassification() const noexcept;
 
     private:
         using RootsType = std::vector<Real>;
@@ -54,35 +54,31 @@ namespace Mathematics
         void Test();
 
         // GetClassification()的支持函数。
-        static RootsType GetRoots(Real d0, Real d1, Real c0, Real c1);
+        NODISCARD static RootsType GetRoots(Real d0, Real d1, Real c0, Real c1);
 
-        static RootsType GetRoots(Real d0, Real c0);
+        NODISCARD static RootsType GetRoots(Real d0, Real c0);
 
-        static RootsType GetRoots(Real d0, Real d1, Real d2, Real c0, Real c1, Real c2);
+        NODISCARD static RootsType GetRoots(Real d0, Real d1, Real d2, Real c0, Real c1, Real c2);
 
         struct ResultType
         {
-            Real m_S;
-            Real m_F;
+            Real s;
+            Real f;
         };
 
-        static ResultType BisectF(Real d0, Real d1, Real d2, Real d0c0, Real d1c1, Real d2c2, Real smin, Real fmin, Real smax, Real fmax);
+        NODISCARD static ResultType BisectF(Real d0, Real d1, Real d2, Real d0c0, Real d1c1, Real d2c2, Real smin, Real fmin, Real smax, Real fmax) noexcept;
 
-        static ResultType BisectDF(Real d0, Real d1, Real d2, Real d0c0, Real d1c1, Real d2c2, Real smin, Real dfmin, Real smax, Real dfmax);
+        NODISCARD static ResultType BisectDF(Real d0, Real d1, Real d2, Real d0c0, Real d1c1, Real d2c2, Real smin, Real dfmin, Real smax, Real dfmax) noexcept;
 
-        static ResultType BisectF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real fmin, Real smax, Real fmax);
+        NODISCARD static ResultType BisectF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real fmin, Real smax, Real fmax) noexcept;
 
-        static ResultType BisectDF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real dfmin, Real smax, Real dfmax);
+        NODISCARD static ResultType BisectDF(Real d0, Real d1, Real d0c0, Real d1c1, Real smin, Real dfmin, Real smax, Real dfmax) noexcept;
 
     private:
-        Ellipsoid3 m_Ellipsoid0;
-        Ellipsoid3 m_Ellipsoid1;
-        Classification m_Classification;
+        Ellipsoid3 ellipsoid0;
+        Ellipsoid3 ellipsoid1;
+        Classification classification;
     };
-
-    using FloatStaticTestIntersectorEllipsoid3Ellipsoid3 = StaticTestIntersectorEllipsoid3Ellipsoid3<float>;
-    using DoubleStaticTestIntersectorEllipsoid3Ellipsoid3 = StaticTestIntersectorEllipsoid3Ellipsoid3<double>;
-
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_ELLIPSOID3_ELLIPSOID3_H

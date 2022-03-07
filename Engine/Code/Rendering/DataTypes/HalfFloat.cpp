@@ -40,7 +40,7 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
     const auto bits = reinterpret_cast<IntegerType&>(value);
 #include STSTEM_WARNING_POP
 
-    auto exponent = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::g_Exponent) >> FloatTraitsType::g_ExponentShifting);
+    auto exponent = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::exponent) >> FloatTraitsType::exponentShifting);
     if (g_ExponentDifference < exponent)
     {
         constexpr auto maxExponent = g_ExponentDifference + ((1 << g_ExponentDigits) - 1);
@@ -49,8 +49,8 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
             if (exponent != 0)
             {
                 // 截断23位小数到10位。
-                const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::g_Symbol) >> g_SymbolShiftingDifference);
-                const auto mantissa = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::g_Mantissa) >> g_ExponentShiftingDifference);
+                const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
+                const auto mantissa = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::mantissa) >> g_ExponentShiftingDifference);
                 exponent = (exponent - g_ExponentDifference) << g_ExponentShifting;
                 return sign | exponent | mantissa;
             }
@@ -63,14 +63,14 @@ Rendering::HalfFloat::OriginalType Rendering::HalfFloat::ConvertHalfFloat(float 
         else
         {
             // E = 30, M = 1023 (半浮点数的最大量级)
-            const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::g_Symbol) >> g_SymbolShiftingDifference);
+            const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
             return sign | gsl::narrow_cast<OriginalType>(g_Exponent - 1);
         }
     }
     else
     {
         // E = 1, M = 0 (半浮点数的最小量级)
-        const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::g_Symbol) >> g_SymbolShiftingDifference);
+        const auto sign = gsl::narrow_cast<OriginalType>((bits & FloatTraitsType::symbol) >> g_SymbolShiftingDifference);
         return sign | gsl::narrow_cast<OriginalType>(1 << g_ExponentShifting);
     }
 }
@@ -86,7 +86,7 @@ float Rendering::HalfFloat::ToFloat() const noexcept
     {
         const auto sign = gsl::narrow_cast<FloatIntegerType>(m_HalfFloat & g_Symbol) << g_SymbolShiftingDifference;
         const auto mantissa = gsl::narrow_cast<FloatIntegerType>(m_HalfFloat & g_Mantissa) << g_ExponentShiftingDifference;
-        exponent = (exponent + g_ExponentDifference) << FloatTraitsType::g_ExponentShifting;
+        exponent = (exponent + g_ExponentDifference) << FloatTraitsType::exponentShifting;
         const auto result = sign | exponent | mantissa;
 
 #include STSTEM_WARNING_PUSH
@@ -194,7 +194,7 @@ bool Rendering::operator<(const HalfFloat& lhs, const HalfFloat& rhs) noexcept
 
 bool Rendering::Approximate(const HalfFloat& lhs, const HalfFloat& rhs, const float epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    if (Mathematics::FloatMath::Approximate(lhs.ToFloat(), rhs.ToFloat(), epsilon))
+    if (Mathematics::MathF::Approximate(lhs.ToFloat(), rhs.ToFloat(), epsilon))
         return true;
     else
         return false;
@@ -231,5 +231,5 @@ float Rendering::operator/(float lhs, const HalfFloat& rhs)
 
 Rendering::HalfFloat Rendering::FAbs(const HalfFloat& value) noexcept
 {
-    return Rendering::HalfFloat{ Mathematics::FloatMath::FAbs(value.ToFloat()) };
+    return Rendering::HalfFloat{ Mathematics::MathF::FAbs(value.ToFloat()) };
 }

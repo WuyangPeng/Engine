@@ -6,7 +6,7 @@
 
 #include "Circle2Testing.h"
 #include "Mathematics/Objects2D/Circle2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -20,7 +20,12 @@ namespace Mathematics
 	template class Circle2<float>;
 	template class Circle2<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Circle2Testing) 
 
 void Mathematics::Circle2Testing
@@ -39,14 +44,14 @@ void Mathematics::Circle2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D center(firstRandomDistribution(generator),firstRandomDistribution(generator));
+		Vector2 center(firstRandomDistribution(generator),firstRandomDistribution(generator));
 
 		
-		double radius(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleCircle2 circle(center,radius);
+		Circle2D circle(center,radius);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(center,circle.GetCenter()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(center,circle.GetCenter()));
 		ASSERT_APPROXIMATE(radius,circle.GetRadius(),1e-10);
 	}
 }

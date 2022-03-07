@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 17:08)
+///	引擎版本：0.8.0.2 (2022/02/11 13:27)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_ACHIEVE_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_ACHIEVE_H
@@ -17,17 +17,19 @@
 
 template <typename T>
 Mathematics::FloatingPointAnalysis<T>::FloatingPointAnalysis(T value) noexcept
-    : m_Value{ value }
+    : value{ value }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename T>
 bool Mathematics::FloatingPointAnalysis<T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
@@ -37,10 +39,12 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    const auto bits = (reinterpret_cast<const IntegerType&>(m_Value));
+
+    const auto bits = (reinterpret_cast<const IntegerType&>(value));
+
 #include STSTEM_WARNING_POP
 
-    const auto sign = ((sm_Symbol & bits) >> sm_SymbolShifting);
+    const auto sign = ((symbol & bits) >> symbolShifting);
 
     return sign;
 }
@@ -52,12 +56,14 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    const auto bits = (reinterpret_cast<const IntegerType&>(m_Value));
+
+    const auto bits = (reinterpret_cast<const IntegerType&>(value));
+
 #include STSTEM_WARNING_POP
 
-    const auto exponent = ((sm_Exponent & bits) >> sm_ExponentShifting);
+    const auto result = ((exponent & bits) >> exponentShifting);
 
-    return exponent;
+    return result;
 }
 
 template <typename T>
@@ -67,12 +73,12 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    const auto bits = (reinterpret_cast<const IntegerType&>(m_Value));
+
+    const auto bits = (reinterpret_cast<const IntegerType&>(value));
+
 #include STSTEM_WARNING_POP
 
-    const auto mantissa = (sm_Mantissa & bits);
-
-    return mantissa;
+    return (mantissa & bits);
 }
 
 template <typename T>
@@ -93,25 +99,25 @@ Mathematics::FloatingPointAnalysisType Mathematics::FloatingPointAnalysis<T>::Ge
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto exponent = GetExponent();
+    const auto exponentAnalysis = GetExponent();
 
-    if (1 <= exponent && exponent < sm_MaxExponent)
+    if (1 <= exponentAnalysis && exponentAnalysis < maxExponent)
     {
         // 数字是规格化的(double)：  (-1)^s * 2^{e-1023} * 1.m
         return FloatingPointAnalysisType::Valid;
     }
-    else if (exponent == 0)
+    else if (exponentAnalysis == 0)
     {
         // 数字是次标准的（非规格化double)：  (-1)^s * 2^{-1022} * 0.m
         return FloatingPointAnalysisType::Zero;
     }
-    else  // exponent == sm_MaxExponent
+    else  // exponent == maxExponent
     {
-        const auto mantissa = GetMantissa();
+        const auto mantissaAnalysis = GetMantissa();
 
-        if (0 < mantissa)
+        if (0 < mantissaAnalysis)
         {
-            if (mantissa & sm_QuietNaN)
+            if (mantissaAnalysis & quietNaN)
             {
                 return FloatingPointAnalysisType::QuietNaN;
             }
@@ -133,9 +139,7 @@ int Mathematics::FloatingPointAnalysis<T>::GetRealExponent() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto exponent = GetExponent();
-
-    return boost::numeric_cast<int>(exponent) - sm_RealExponentDifference;
+    return boost::numeric_cast<int>(GetExponent()) - realExponentDifference;
 }
 
 template <typename T>
@@ -143,16 +147,16 @@ typename Mathematics::FloatingPointAnalysis<T>::IntegerType Mathematics::Floatin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto exponent = GetExponent();
-    const auto mantissa = GetMantissa();
+    const auto exponentAnalysis = GetExponent();
+    const auto mantissaAnalysis = GetMantissa();
 
-    if (1 <= exponent && exponent <= sm_MaxExponent)
+    if (1 <= exponentAnalysis && exponentAnalysis <= maxExponent)
     {
-        return mantissa + (IntegerType{ 1 } << sm_ExponentShifting);
+        return mantissaAnalysis + (IntegerType{ 1 } << exponentShifting);
     }
     else
     {
-        return mantissa;
+        return mantissaAnalysis;
     }
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:46)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SCHEMA_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_SCHEMA_H
@@ -25,28 +25,22 @@ namespace Database
     public:
         using ClassType = MysqlConnectorSchema;
         using ParentType = SchemaImpl;
-        using SessionWeakPtr = std::weak_ptr<SessionImpl>;
 
     public:
-        explicit MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr);
-        MysqlConnectorSchema(const SessionWeakPtr& sessionWeakPtr, int dbIndex);
+        explicit MysqlConnectorSchema(const Session& session);
+        MysqlConnectorSchema(const Session& session, int dbIndex);
         MysqlConnectorSchema(const ConfigurationStrategy& configurationStrategy, const MysqlxSchema& mysqlxSchema);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] MysqlxCollectionPtr GetCollection(const std::string& collectionName) override;
-        [[nodiscard]] MysqlxTablePtr GetTable(const std::string& tableonName) override;
+        NODISCARD MysqlxCollectionUniquePtr GetCollection(const std::string& collectionName) const override;
+        NODISCARD MysqlxTableUniquePtr GetTable(const std::string& tableonName) const override;
 
     private:
-        using MysqlxSchemaPtr = std::unique_ptr<MysqlxSchema>;
+        using MysqlxSchemaUniquePtr = std::unique_ptr<MysqlxSchema>;
 
     private:
-        [[nodiscard]] static ConfigurationStrategy GetConfigurationStrategy(const SessionWeakPtr& sessionWeakPtr);
-        [[nodiscard]] static MysqlxSchemaPtr GetMysqlxSchemaPtr(const SessionWeakPtr& sessionWeakPtr);
-        [[nodiscard]] static MysqlxSchemaPtr GetMysqlxSchemaPtr(const SessionWeakPtr& sessionWeakPtr, int dbIndex);
-
-    private:
-        MysqlxSchemaPtr m_MysqlxSchema;
+        MysqlxSchemaUniquePtr mysqlxSchema;
     };
 }
 

@@ -29,7 +29,7 @@ namespace Mathematics
 		void AllRealPartsPositiveTest();
 		void GetRootCountTest();
 		
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

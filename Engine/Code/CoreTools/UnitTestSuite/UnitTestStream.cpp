@@ -29,7 +29,10 @@ CoreTools::UnitTestStream& CoreTools::UnitTestStream::operator=(UnitTestStream&&
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    streamShared = std::move(rhs.streamShared);
+    if (this != &rhs)
+    {
+        streamShared = std::move(rhs.streamShared);
+    }
 
     return *this;
 }

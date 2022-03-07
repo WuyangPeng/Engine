@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 17:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 22:31)
 
 #include "Network/NetworkExport.h"
 
@@ -20,14 +20,11 @@ using CoreTools::Error;
 using std::bind;
 using std::exception;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Network::ExecutorWorkGuardContext::ExecutorWorkGuardContext()
-    : m_IOContext{}, m_Work{ make_work_guard(m_IOContext) }
+Network::ExecutorWorkGuardContext::ExecutorWorkGuardContext(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ioContext{}, work{ make_work_guard(ioContext) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ExecutorWorkGuardContext)
 
@@ -39,7 +36,7 @@ void Network::ExecutorWorkGuardContext::Run()
     {
         try
         {
-            m_IOContext.run();
+            ioContext.run();
             break;
         }
         catch (const Error& error)
@@ -73,31 +70,31 @@ Network::IOContextType& Network::ExecutorWorkGuardContext::GetIOContext() noexce
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_IOContext;
+    return ioContext;
 }
 
 void Network::ExecutorWorkGuardContext::PostStopContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    post(m_IOContext, bind(&IOContextType::stop, &m_IOContext));
+    post(ioContext, bind(&IOContextType::stop, &ioContext));
 }
 
 bool Network::ExecutorWorkGuardContext::IsContextStop() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_IOContext.stopped();
+    return ioContext.stopped();
 }
 
 void Network::ExecutorWorkGuardContext::RestartContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_IOContext.restart();
+    ioContext.restart();
 }
 
 void Network::ExecutorWorkGuardContext::DispatchStopContext()
 {
-    m_IOContext.stop();
+    ioContext.stop();
 }

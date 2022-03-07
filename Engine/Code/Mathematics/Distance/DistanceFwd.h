@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/15 16:12)
+///	引擎版本：0.8.0.2 (2022/02/19 21:38)
 
 #ifndef MATHEMATICS_DISTANCE_FWD_H
 #define MATHEMATICS_DISTANCE_FWD_H
@@ -15,7 +15,7 @@
 namespace Mathematics
 {
     template <typename Real, typename Vector>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceResult;
+    class DistanceResult;
 
     template <typename Real, typename Vector>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceBase;
@@ -49,17 +49,17 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Segment2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Ellipse2;
+    class DistancePoint2Ellipse2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Box2;
+    class DistancePoint2Box2;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Hyperbola2;
 
     // 3D
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Ellipsoid3;
+    class DistancePoint3Ellipsoid3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Line3;
@@ -86,22 +86,22 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Ray3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Box3;
+    class DistancePoint3Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceCircle3Circle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Box3;
+    class DistanceLine3Box3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Circle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Rectangle3;
+    class DistanceLine3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Triangle3;
+    class DistanceLine3Triangle3;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Circle3;
@@ -113,40 +113,43 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Plane3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Rectangle3;
+    class DistancePoint3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Tetrahedron3;
+    class DistancePoint3Tetrahedron3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Triangle3;
+    class DistancePoint3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Box3;
+    class DistanceRay3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Rectangle3;
+    class DistanceRay3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Triangle3;
+    class DistanceRay3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRectangle3Rectangle3;
+    class DistanceRectangle3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceSegment3Box3;
+    class DistanceSegment3Box3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceSegment3Rectangle3;
+    class DistanceSegment3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceSegment3Triangle3;
+    class DistanceSegment3Triangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceTriangle3Rectangle3;
+    class DistanceTriangle3Rectangle3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceTriangle3Triangle3;
+    class DistanceTriangle3Triangle3;
+
+    template <typename Real>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Segment3;
 }
 
 #endif  // MATHEMATICS_DISTANCE_FWD_H

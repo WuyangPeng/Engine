@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:40)
 
 #include "Network/NetworkExport.h"
 
@@ -19,28 +19,21 @@ using std::string;
 using std::to_string;
 
 Network::NullSockAddress::NullSockAddress(const string& address, int ip)
-    : ParentType{}, m_Address{ address }, m_IP{ ip }
+    : ParentType{}, address{ address.empty() ? "0.0.0.0" : address }, ip{ ip }
 {
-    if (m_Address.empty())
-    {
-        m_Address = "0.0.0.0";
-    }
-
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
- 
-
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockAddress)
 
-const string Network::NullSockAddress::GetAddress() const
+string Network::NullSockAddress::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Address + ":" + to_string(GetPort());
+    return address + ":" + to_string(GetPort());
 }
 
-const Network::SockAddressImpl::SockAddressPtr Network::NullSockAddress::Clone() const
+Network::SockAddressImpl::SockAddressSharedPtr Network::NullSockAddress::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
@@ -51,5 +44,5 @@ int Network::NullSockAddress::GetPort() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_IP;
+    return ip;
 }

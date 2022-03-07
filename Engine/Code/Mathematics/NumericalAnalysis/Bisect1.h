@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:32)
+///	引擎版本：0.8.0.2 (2022/02/14 10:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_H
@@ -35,17 +35,17 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 通过根的求解区间端点来解方程
-        [[nodiscard]] const Bisect1Root Bisect(Real beginPoint, Real endPoint);
+        NODISCARD Bisect1Root Bisect(Real beginPoint, Real endPoint);
 
     private:
         // 输入数据和函数。
-        Function m_Function;
-        int m_MaxLevel;
-        Real m_Tolerance;
+        Function function;
+        int maxLevel;
+        Real tolerance;
     };
 
-    using FloatBisect1 = Bisect1<float>;
-    using DoubleBisect1 = Bisect1<double>;
+    using Bisect1F = Bisect1<float>;
+    using Bisect1D = Bisect1<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT1_H

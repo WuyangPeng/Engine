@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 11:06)
+///	引擎版本：0.8.0.3 (2022/03/02 22:38)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSphere3Cone3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSphere3Cone3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorSphere3Cone3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Cone3 = Cone3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,25 +35,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Sphere3 GetSphere() const noexcept;
-        [[nodiscard]] const Cone3 GetCone() const noexcept;
+        NODISCARD Sphere3 GetSphere() const noexcept;
+        NODISCARD Cone3 GetCone() const noexcept;
 
         /// 在静态查找相交查询中，如果球体和圆锥体之间发生相交，则可能是无限集。 此函数返回最接近圆锥顶点的交点。
-        [[nodiscard]] const Vector3D GetPoint() const noexcept;
+        NODISCARD Vector3 GetPoint() const noexcept;
 
     private:
         void Find();
 
     private:
-        Sphere3 m_Sphere;
-        Cone3 m_Cone;
+        Sphere3 sphere;
+        Cone3 cone;
 
         // 与圆锥顶点最近的相交点。
-        Vector3D m_Point;
+        Vector3 point;
     };
-
-    using FloatStaticFindIntersectorSphere3Cone3 = StaticFindIntersectorSphere3Cone3<float>;
-    using DoubleStaticFindIntersectorSphere3Cone3 = StaticFindIntersectorSphere3Cone3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SPHERE3_CONE3_H

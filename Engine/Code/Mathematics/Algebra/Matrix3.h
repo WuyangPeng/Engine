@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 14:38)
+///	引擎版本：0.8.0.2 (2022/02/07 16:49)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_H
@@ -30,7 +30,7 @@
 #include "Euler.h"
 #include "Matrix3EigenDecomposition.h"
 #include "Matrix3Extract.h"
-#include "Vector3D.h"
+#include "Vector3.h"
 #include "Flags/ExtractEulerResultType.h"
 #include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
@@ -47,29 +47,24 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Matrix3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
+        using VectorIndex = typename Vector3::PointIndex;
+        static constexpr auto xIndex = Vector3::xIndex;
+        static constexpr auto yIndex = Vector3::yIndex;
+        static constexpr auto zIndex = Vector3::zIndex;
+        static constexpr auto vectorSize = Vector3::pointSize;
+        static constexpr auto matrixSize = vectorSize * Vector3::pointSize;
+
         using Math = Math<Real>;
         using Euler = Euler<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Matrix2 = Matrix2<Real>;
+        using Matrix4 = Matrix4<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Matrix3Extract = Matrix3Extract<Real>;
         using Matrix3EigenDecomposition = Matrix3EigenDecomposition<Real>;
-
-        enum class VectorIndex
-        {
-            X = 0,
-            Y,
-            Z,
-            Size
-        };
-
-        static constexpr auto sm_X = System::EnumCastUnderlying(VectorIndex::X);
-        static constexpr auto sm_Y = System::EnumCastUnderlying(VectorIndex::Y);
-        static constexpr auto sm_Z = System::EnumCastUnderlying(VectorIndex::Z);
-        static constexpr auto sm_VectorSize = System::EnumCastUnderlying(VectorIndex::Size);
-        static constexpr auto sm_MatrixSize = sm_VectorSize * Vector3D::sm_PointSize;
-        using ArrayType = std::array<Real, sm_MatrixSize>;
+        using ArrayType = std::array<Real, matrixSize>;
         using ContainerType = std::vector<Real>;
-        using Vector3DContainerType = std::vector<Vector3D>;
+        using Vector3ContainerType = std::vector<Vector3>;
 
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，
@@ -80,9 +75,15 @@ namespace Mathematics
         }
 
         // 输入矩阵在行r和列c
-        constexpr Matrix3(Real member00, Real member01, Real member02,
-                          Real member10, Real member11, Real member12,
-                          Real member20, Real member21, Real member22) noexcept
+        constexpr Matrix3(Real member00,
+                          Real member01,
+                          Real member02,
+                          Real member10,
+                          Real member11,
+                          Real member12,
+                          Real member20,
+                          Real member21,
+                          Real member22) noexcept
             : m_X{ member00, member01, member02 }, m_Y{ member10, member11, member12 }, m_Z{ member20, member21, member22 }
         {
         }
@@ -98,8 +99,8 @@ namespace Mathematics
         // 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
         // MatrixTypeFlagsRow：向量是矩阵的行
         // MatrixTypeFlagsColumn：向量是矩阵的列
-        Matrix3(const Vector3D& vector0, const Vector3D& vector1, const Vector3D& vector2, MatrixMajorFlags majorFlag);
-        Matrix3(const Vector3DContainerType& vectors, MatrixMajorFlags majorFlag);
+        Matrix3(const Vector3& vector0, const Vector3& vector1, const Vector3& vector2, MatrixMajorFlags majorFlag);
+        Matrix3(const Vector3ContainerType& vectors, MatrixMajorFlags majorFlag);
 
         // 创建一个对角矩阵,
         // member01 = member10 = member02 = member20 = member12 = member21 = 0
@@ -112,11 +113,11 @@ namespace Mathematics
 
         // 创建一个旋转矩阵（角度为正->逆时针方向）
         // angle必须为弧度，不是角度。
-        Matrix3(const Vector3D& axis, Real angle) noexcept;
+        Matrix3(const Vector3& axis, Real angle) noexcept;
         Matrix3(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 创建一个张量积 U * V^T
-        Matrix3(const Vector3D& vector0, const Vector3D& vector1) noexcept;
+        Matrix3(const Vector3& vector0, const Vector3& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -124,49 +125,52 @@ namespace Mathematics
         void MakeZero() noexcept;
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11, Real member22) noexcept;
-        void MakeRotation(const Vector3D& axis, Real angle) noexcept;
+        void MakeRotation(const Vector3& axis, Real angle) noexcept;
         void MakeRotation(MatrixRotationAxis axis, Real angle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
-        void MakeTensorProduct(const Vector3D& vector0, const Vector3D& vector1) noexcept;
+        void MakeTensorProduct(const Vector3& vector0, const Vector3& vector1) noexcept;
 
-        [[nodiscard]] const Vector3D& operator[](int row) const;
-        [[nodiscard]] Vector3D& operator[](int row);
-        [[nodiscard]] const Real& operator()(int row, int column) const;
-        [[nodiscard]] Real& operator()(int row, int column);
+        NODISCARD const Vector3& operator[](int row) const;
+        NODISCARD Vector3& operator[](int row);
+        NODISCARD const Real& operator()(int row, int column) const;
+        NODISCARD Real& operator()(int row, int column);
 
         template <int Row, int Column>
-        [[nodiscard]] Real GetValue() const noexcept;
+        NODISCARD Real GetValue() const noexcept;
 
         template <int Row, int Column>
         void SetValue(Real value) noexcept;
 
-        [[nodiscard]] const Matrix3 operator-() const noexcept;
+        NODISCARD Matrix3 operator-() const noexcept;
         Matrix3& operator+=(const Matrix3& rhs) noexcept;
         Matrix3& operator-=(const Matrix3& rhs) noexcept;
         Matrix3& operator*=(Real scalar) noexcept;
         Matrix3& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // lhs^T * M * rhs
-        [[nodiscard]] Real QuadraticForm(const Vector3D& lhs, const Vector3D& rhs) const noexcept;
+        NODISCARD Real QuadraticForm(const Vector3& lhs, const Vector3& rhs) const noexcept;
 
         // M^T
-        [[nodiscard]] const Matrix3 Transpose() const noexcept;
+        NODISCARD Matrix3 Transpose() const noexcept;
 
         // M * rhs
         Matrix3& operator*=(const Matrix3& rhs) noexcept;
 
         // 其它运算
-        [[nodiscard]] const Matrix3 TimesDiagonal(const Vector3D& diagonal) const noexcept;  // M * D
-        [[nodiscard]] const Matrix3 DiagonalTimes(const Vector3D& diagonal) const noexcept;  // D * M
-        [[nodiscard]] const Matrix3 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
-        [[nodiscard]] const Matrix3 Adjoint() const noexcept;
-        [[nodiscard]] Real Determinant() const noexcept;
+        NODISCARD Matrix3 TimesDiagonal(const Vector3& diagonal) const noexcept;  // M * D
+        NODISCARD Matrix3 DiagonalTimes(const Vector3& diagonal) const noexcept;  // D * M
+        NODISCARD Matrix3 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3 Adjoint() const noexcept;
+        NODISCARD Real Determinant() const noexcept;
+
+        NODISCARD Matrix3 GaussianEliminationInverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(const Real epsilon = Math::GetZeroTolerance()) const;
 
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
         // 角度必须为弧度，而不是度数。
-        [[nodiscard]] Real ExtractAngle() const noexcept;
-        [[nodiscard]] const Vector3D ExtractAxis() const;
-        [[nodiscard]] const Matrix3Extract ExtractAngleAxis() const;
+        NODISCARD Real ExtractAngle() const noexcept;
+        NODISCARD Vector3 ExtractAxis() const;
+        NODISCARD Matrix3Extract ExtractAngleAxis() const;
         void Orthonormalize();
 
         // 矩阵必须是对称矩阵。
@@ -175,7 +179,7 @@ namespace Mathematics
         // D = diag(d0,d1,d2)是一个对角矩阵，这里对角线项为d0、d1和d2。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1 <= d2。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        [[nodiscard]] const Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix3EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const;
 
         // 从欧拉角创建旋转矩阵
         void MakeEulerXYZ(Real xAngle, Real yAngle, Real zAngle) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
@@ -201,7 +205,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：zAngle + xAngle= c
         /// ExtractEulerResultType::Difference：zAngle - xAngle= c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerXYZ() const noexcept;
+        NODISCARD Euler ExtractEulerXYZ() const noexcept;
 
         /// 返回值顺序为xAngle、zAngle、yAngle
         /// 且在指定的范围内：
@@ -211,7 +215,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：yAngle + xAngle = c
         /// ExtractEulerResultType::Difference：yAngle - xAngle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerXZY() const noexcept;
+        NODISCARD Euler ExtractEulerXZY() const noexcept;
 
         /// 返回值顺序为yAngle、xAngle、zAngle
         /// 且在指定的范围内：
@@ -221,7 +225,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：zAngle + yAngle = c
         /// ExtractEulerResultType::Difference：zAngle - yAngle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerYXZ() const noexcept;
+        NODISCARD Euler ExtractEulerYXZ() const noexcept;
 
         /// 返回值顺序为yAngle、zAngle、xAngle
         /// 且在指定的范围内：
@@ -231,7 +235,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：xAngle + yAngle = c
         /// ExtractEulerResultType::Difference：xAngle - yAngle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerYZX() const noexcept;
+        NODISCARD Euler ExtractEulerYZX() const noexcept;
 
         /// 返回值顺序为zAngle、xAngle、yAngle
         /// 且在指定的范围内：
@@ -241,7 +245,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：yAngle + zAngle = c
         /// ExtractEulerResultType::Difference：yAngle - zAngle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerZXY() const noexcept;
+        NODISCARD Euler ExtractEulerZXY() const noexcept;
 
         /// 返回值顺序为zAngle、yAngle、xAngle
         /// 且在指定的范围内：
@@ -251,7 +255,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：xAngle + zAngle = c
         /// ExtractEulerResultType::Difference：xAngle - zAngle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerZYX() const noexcept;
+        NODISCARD Euler ExtractEulerZYX() const noexcept;
 
         /// 返回值顺序为x0Angle、yAngle、x1Angle
         /// 且在指定的范围内：
@@ -261,7 +265,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：x1Angle + x0Angle = c
         /// ExtractEulerResultType::Difference： x1Angle - x0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerXYX() const noexcept;
+        NODISCARD Euler ExtractEulerXYX() const noexcept;
 
         /// 返回值顺序为x0Angle、zAngle、x1Angle
         /// 且在指定的范围内：
@@ -271,7 +275,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：x1Angle + x0Angle = c
         /// ExtractEulerResultType::Difference： x1Angle - x0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerXZX() const noexcept;
+        NODISCARD Euler ExtractEulerXZX() const noexcept;
 
         /// 返回值顺序为y0Angle、xAngle、y1Angle
         /// 且在指定的范围内：
@@ -281,7 +285,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：y1Angle + y0Angle = c
         /// ExtractEulerResultType::Difference： y1Angle - y0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerYXY() const noexcept;
+        NODISCARD Euler ExtractEulerYXY() const noexcept;
 
         /// 返回值顺序为y0Angle、zAngle、y1Angle
         /// 且在指定的范围内：
@@ -291,7 +295,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：y1Angle + y0Angle = c
         /// ExtractEulerResultType::Difference： y1Angle - y0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerYZY() const noexcept;
+        NODISCARD Euler ExtractEulerYZY() const noexcept;
 
         /// 返回值顺序为z0Angle、xAngle、z1Angle
         /// 且在指定的范围内：
@@ -301,7 +305,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：z1Angle + z0Angle = c
         /// ExtractEulerResultType::Difference： z1Angle - z0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerZXZ() const noexcept;
+        NODISCARD Euler ExtractEulerZXZ() const noexcept;
 
         /// 返回值顺序为z0Angle、yAngle、z1Angle
         /// 且在指定的范围内：
@@ -311,7 +315,7 @@ namespace Mathematics
         /// ExtractEulerResultType::Sum：z1Angle + z0Angle = c
         /// ExtractEulerResultType::Difference： z1Angle - z0Angle = c
         /// 对一些角度c。
-        [[nodiscard]] const Euler ExtractEulerZYZ() const noexcept;
+        NODISCARD Euler ExtractEulerZYZ() const noexcept;
 
         /// SLERP（球面线性插值）而不使用四元数。
         /// 计算 Real(t) = R0*(Transpose(R0)*R1)^t
@@ -319,93 +323,100 @@ namespace Mathematics
         /// 则Q^ t是一个旋转矩阵使用单位长度轴U和旋转角度t*A。
         void Slerp(Real t, const Matrix3& rot0, const Matrix3& rot1);
 
-        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate);
 
+        NODISCARD ContainerType GetContainer() const;
+
         // 特殊矩阵。
-        [[nodiscard]] static constexpr Matrix3 GetZero()
+        NODISCARD static constexpr Matrix3 GetZero()
         {
             return Matrix3{ MatrixInitType::Zero };
         }
 
-        [[nodiscard]] static constexpr Matrix3 GetIdentity()
+        NODISCARD static constexpr Matrix3 GetIdentity()
         {
             return Matrix3{ MatrixInitType::Identity };
         }
 
+        NODISCARD Matrix4 Lift() const;
+        NODISCARD Matrix2 Project() const;
+
+        NODISCARD Real Trace() const noexcept;
+
     private:
-        [[nodiscard]] static constexpr Vector3D Create(MatrixInitType flag, VectorIndex vectorIndex)
+        NODISCARD static constexpr Vector3 Create(MatrixInitType flag, VectorIndex vectorIndex)
         {
             if (flag == MatrixInitType::Zero)
             {
-                return Vector3D{};
+                return Vector3{};
             }
             else if (vectorIndex == VectorIndex::X)
             {
-                return Vector3D::GetUnitX();
+                return Vector3::GetUnitX();
             }
             else if (vectorIndex == VectorIndex::Y)
             {
-                return Vector3D::GetUnitY();
+                return Vector3::GetUnitY();
             }
             else
             {
-                return Vector3D::GetUnitZ();
+                return Vector3::GetUnitZ();
             }
         }
 
         template <int Row>
-        [[nodiscard]] const Vector3D& GetVector() const noexcept;
+        NODISCARD const Vector3& GetVector() const noexcept;
 
         template <int Row>
-        [[nodiscard]] Vector3D& GetVector() noexcept;
+        NODISCARD Vector3& GetVector() noexcept;
 
         template <int Column>
-        [[nodiscard]] typename Vector3D::GetCoordinateFunction GetVectorGetFunction() const noexcept;
+        NODISCARD typename Vector3::GetCoordinateFunction GetVectorGetFunction() const noexcept;
 
         template <int Column>
-        [[nodiscard]] typename Vector3D::SetCoordinateFunction GetVectorSetFunction() const noexcept;
+        NODISCARD typename Vector3::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
         // 存储为行主序。
-        Vector3D m_X;
-        Vector3D m_Y;
-        Vector3D m_Z;
+        Vector3 m_X;
+        Vector3 m_Y;
+        Vector3 m_Z;
     };
 
     // vec^T * M
     template <typename Real>
-    [[nodiscard]] const Vector3D<Real> operator*(const Vector3D<Real>& vector, const Matrix3<Real>& matrix) noexcept;
+    NODISCARD Vector3<Real> operator*(const Vector3<Real>& vector, const Matrix3<Real>& matrix) noexcept;
 
     // M * vec
     template <typename Real>
-    [[nodiscard]] const Vector3D<Real> operator*(const Matrix3<Real>& matrix, const Vector3D<Real>& vector) noexcept;
+    NODISCARD Vector3<Real> operator*(const Matrix3<Real>& matrix, const Vector3<Real>& vector) noexcept;
 
     // M * mat
     template <typename Real>
-    [[nodiscard]] const Matrix3<Real> operator*(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
+    NODISCARD Matrix3<Real> operator*(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
 
     // lhs^T * rhs
     template <typename Real>
-    [[nodiscard]] const Matrix3<Real> TransposeTimes(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
+    NODISCARD Matrix3<Real> TransposeTimes(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
 
     // lhs * rhs^T
     template <typename Real>
-    [[nodiscard]] const Matrix3<Real> TimesTranspose(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
+    NODISCARD Matrix3<Real> TimesTranspose(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
 
     // lhs^T * rhs^T
     template <typename Real>
-    [[nodiscard]] const Matrix3<Real> TransposeTimesTranspose(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
+    NODISCARD Matrix3<Real> TransposeTimesTranspose(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs) noexcept;
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Matrix3<Real>& lhs, const Matrix3<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance());
 
     // 调试输出。
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const Matrix3<Real>& matrix);
 
-    using FloatMatrix3 = Matrix3<float>;
-    using DoubleMatrix3 = Matrix3<double>;
+    using Matrix3F = Matrix3<float>;
+    using Matrix3D = Matrix3<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX3_H

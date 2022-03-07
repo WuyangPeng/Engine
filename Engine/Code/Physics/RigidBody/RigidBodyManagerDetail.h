@@ -36,7 +36,7 @@ namespace Physics
 	}
 
 	template <typename Real>
-	Mathematics::Vector3D<Real>& RigidBodyManager<Real>::Position()
+	Mathematics::Vector3<Real>& RigidBodyManager<Real>::Position()
 	{
 		return mPosition;
 	}
@@ -158,7 +158,7 @@ namespace Physics
 	}
 
 	template <typename Real>
-	const Mathematics::Vector3D<Real>& RigidBodyManager<Real>::GetPosition() const
+	const Mathematics::Vector3<Real>& RigidBodyManager<Real>::GetPosition() const
 	{
 		return mPosition;
 	}
@@ -170,13 +170,13 @@ namespace Physics
 	}
 
 	template <typename Real>
-	const Mathematics::Vector3D<Real>& RigidBodyManager<Real>::GetLinearMomentum() const
+	const Mathematics::Vector3<Real>& RigidBodyManager<Real>::GetLinearMomentum() const
 	{
 		return mLinearMomentum;
 	}
 
 	template <typename Real>
-	const Mathematics::Vector3D<Real>& RigidBodyManager<Real>::GetAngularMomentum() const
+	const Mathematics::Vector3<Real>& RigidBodyManager<Real>::GetAngularMomentum() const
 	{
 		return mAngularMomentum;
 	}
@@ -188,13 +188,13 @@ namespace Physics
 	}
 
 	template <typename Real>
-	const Mathematics::Vector3D<Real>& RigidBodyManager<Real>::GetLinearVelocity() const
+	const Mathematics::Vector3<Real>& RigidBodyManager<Real>::GetLinearVelocity() const
 	{
 		return mLinearVelocity;
 	}
 
 	template <typename Real>
-	const Mathematics::Vector3D<Real>& RigidBodyManager<Real>::GetAngularVelocity() const
+	const Mathematics::Vector3<Real>& RigidBodyManager<Real>::GetAngularVelocity() const
 	{
 		return mAngularVelocity;
 	}

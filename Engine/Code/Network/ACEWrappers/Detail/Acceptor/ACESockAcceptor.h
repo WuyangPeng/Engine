@@ -1,21 +1,21 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 14:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 17:05)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_ACCEPTOR_H
 
 #include "Network/NetworkDll.h"
 
-#ifdef NETWORK_USE_ACE
+#include "System/Helper/PragmaWarning/ACE.h"
+#include "Network/Interface/Detail/SockAcceptorImpl.h"
 
-    #include "System/Helper/PragmaWarning/ACE.h"
-    #include "Network/Interface/Detail/SockAcceptorImpl.h"
+#ifdef NETWORK_USE_ACE
 
 namespace Network
 {
@@ -36,21 +36,21 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream) override;
+        NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress) override;
+        NODISCARD bool Accept(SockStream& sockStream) override;
 
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        [[nodiscard]] bool EnableNonBlock() override;
+        NODISCARD bool EnableNonBlock() override;
 
-        [[nodiscard]] ACEHandle GetACEHandle() override;
+        NODISCARD ACEHandle GetACEHandle() override;
 
-        [[nodiscard]] const std::string GetAddress() const override;
-        [[nodiscard]] int GetPort() const override;
+        NODISCARD std::string GetAddress() const override;
+        NODISCARD int GetPort() const override;
 
     private:
-        ACE_SOCK_Acceptor m_ACESockAcceptor;
+        ACE_SOCK_Acceptor aceSockAcceptor;
     };
 }
 

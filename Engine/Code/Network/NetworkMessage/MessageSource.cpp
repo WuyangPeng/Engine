@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 14:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 10:26)
 
 #include "Network/NetworkExport.h"
 
@@ -18,13 +18,13 @@ using std::string;
 using std::vector;
 
 Network::MessageSource::MessageSource(const MessageBufferSharedPtr& messageBuffer) noexcept
-    : m_Source{ messageBuffer }, m_ParserStrategy{ messageBuffer->GetParserStrategy() }
+    : source{ messageBuffer }, parserStrategy{ messageBuffer->GetParserStrategy() }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageSource::MessageSource(MessageSource&& rhs) noexcept
-    : m_Source{ std::move(rhs.m_Source) }, m_ParserStrategy{ rhs.m_ParserStrategy }
+    : source{ std::move(rhs.source) }, parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -33,27 +33,32 @@ Network::MessageSource& Network::MessageSource::operator=(MessageSource&& rhs) n
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_Source = std::move(rhs.m_Source);
-    m_ParserStrategy = rhs.m_ParserStrategy;
+    if (this != &rhs)
+    {
+        source = std::move(rhs.source);
+        parserStrategy = rhs.parserStrategy;
+    }
 
     return *this;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Network::MessageSource::IsValid() const noexcept
 {
-    if (m_Source != nullptr)
+    if (source != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 bool Network::MessageSource::ReadBool()
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
-    uint8_t value{ 0 };
+    uint32_t value{ 0 };
 
     Read(value);
 
@@ -62,7 +67,7 @@ bool Network::MessageSource::ReadBool()
 
 void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     if (data != nullptr)
     {
@@ -78,7 +83,7 @@ void Network::MessageSource::ReadBool(int elementsNumber, bool* data)
 
 string Network::MessageSource::ReadString()
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     int32_t length{ 0 };
     Read(length);
@@ -91,10 +96,10 @@ string Network::MessageSource::ReadString()
             padding = 4 - padding;
         }
 
-        const auto* const text = m_Source->GetCurrentReadBufferedPtr();
+        const auto* const text = source->GetCurrentReadBufferedPtr();
         string datum(text, length);
 
-        m_Source->AddCurrentReadIndex(length + padding);
+        source->AddCurrentReadIndex(length + padding);
 
         return datum;
     }
@@ -106,7 +111,7 @@ string Network::MessageSource::ReadString()
 
 void Network::MessageSource::ReadString(int elementsNumber, string* data)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     if (data != nullptr)
     {
@@ -122,31 +127,30 @@ void Network::MessageSource::ReadString(int elementsNumber, string* data)
 
 int Network::MessageSource::GetBytesRead() const noexcept
 {
-    NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Source->GetCurrentReadIndex();
+    return source->GetCurrentReadIndex();
 }
 
 int Network::MessageSource::GetBytesTotal() const noexcept
 {
-    NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Source->GetCurrentWriteIndex();
+    return source->GetCurrentWriteIndex();
 }
 
 void Network::MessageSource::IncrementBytesProcessed(int bytesNumber)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
-    m_Source->AddCurrentReadIndex(bytesNumber);
+    source->AddCurrentReadIndex(bytesNumber);
 }
 
 void Network::MessageSource::Read(vector<string>& datum)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     int32_t elementsNumber{ 0 };
-
     Read(elementsNumber);
 
     if (0 < elementsNumber)
@@ -158,7 +162,7 @@ void Network::MessageSource::Read(vector<string>& datum)
 
 void Network::MessageSource::Read(string& datum)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     datum = ReadString();
 }

@@ -22,7 +22,7 @@ namespace Mathematics
         void NextNodeTest();
         void SameSignTest();
 		
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

@@ -37,9 +37,9 @@ Mathematics::IncrementalDelaunay2<Real>::IncrementalDelaunay2(Real xmin, Real ym
     auto y1 = y0;
     auto x2 = x0;
     auto y2 = (Math::GetValue(2)) * ymax - ymin + (static_cast<Real>(3)) * (xmax - xmin);
-    Vector2D<Real> superVertex0{ x0, y0 };
-    Vector2D<Real> superVertex1{ x1, y1 };
-    Vector2D<Real> superVertex2{ x2, y2 };
+    Vector2<Real> superVertex0{ x0, y0 };
+    Vector2<Real> superVertex1{ x1, y1 };
+    Vector2<Real> superVertex2{ x2, y2 };
 
     // Insert the supertriangle vertices into the vertex storage.
     mVMap[superVertex0] = 0;
@@ -50,7 +50,7 @@ Mathematics::IncrementalDelaunay2<Real>::IncrementalDelaunay2(Real xmin, Real ym
     mVertexPool.push_back(superVertex2);
 
     // Inert the supertriangle into the mesh.
-   // m_Triangle.insert(NEW0 Triangle(0, 1, 2));
+   // triangle.insert(NEW0 Triangle(0, 1, 2));
 }
 
 template <typename Real>
@@ -62,8 +62,8 @@ Mathematics::IncrementalDelaunay2<Real>::~IncrementalDelaunay2()
     //     DELETE1(mAdjacencies);
     //     DELETE1(mPath);
 
-    auto iter = m_Triangle.begin();
-    auto end = m_Triangle.end();
+    auto iter = triangle.begin();
+    auto end = triangle.end();
     for (/**/; iter != end; ++iter)
     {
         //  Triangle* tri = *iter;
@@ -72,7 +72,7 @@ Mathematics::IncrementalDelaunay2<Real>::~IncrementalDelaunay2()
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2D<Real>& position)
+int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2<Real>& position)
 {
     if (position[0] < mXMin || position[0] > mXMax || position[1] < mYMin || position[1] > mYMax)
     {
@@ -170,7 +170,7 @@ int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2D<Real>& positi
                 }
             }
         }
-        m_Triangle.erase(tri);
+        triangle.erase(tri);
         DELETE0(tri);
     }
 
@@ -186,7 +186,7 @@ int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2D<Real>& positi
 
         // Create and insert the new triangle.
         // tri = NEW0 Triangle(posIndex, edge->V[0], edge->V[1]);
-        m_Triangle.insert(tri);
+        triangle.insert(tri);
 
         // Establish the adjacency links across the polygon edge.
         tri->Adj[1] = edge->Tri;
@@ -218,7 +218,7 @@ int Mathematics::IncrementalDelaunay2<Real>::Insert(const Vector2D<Real>& positi
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::Remove(const Vector2D<Real>& position)
+int Mathematics::IncrementalDelaunay2<Real>::Remove(const Vector2<Real>& position)
 {
     auto iter = mVMap.find(position);
     if (iter == mVMap.end())
@@ -276,12 +276,12 @@ int Mathematics::IncrementalDelaunay2<Real>::Remove(const Vector2D<Real>& positi
 template <typename Real>
 void Mathematics::IncrementalDelaunay2<Real>::GetAllTriangles(int& numTriangles, int*& indices)
 {
-    numTriangles = (int)m_Triangle.size();
+    numTriangles = (int)triangle.size();
     // indices = NEW1<int>(3*numTriangles);
 
     int* currIndex = indices;
-    auto iter = m_Triangle.begin();
-    auto end = m_Triangle.end();
+    auto iter = triangle.begin();
+    auto end = triangle.end();
     for (/**/; iter != end; ++iter)
     {
         Triangle* tri = *iter;
@@ -304,9 +304,9 @@ void Mathematics::IncrementalDelaunay2<Real>::GenerateRepresentation()
 
     // Assign integer values to the triangles for use by the caller.
     std::map<Triangle*, int> permute;
-    auto iter = m_Triangle.begin();
-    auto end = m_Triangle.end();
-    mNumTriangles = (int)m_Triangle.size();
+    auto iter = triangle.begin();
+    auto end = triangle.end();
+    mNumTriangles = (int)triangle.size();
     Triangle* tri;
     int i;
     for (i = 0; iter != end; ++iter)
@@ -331,8 +331,8 @@ void Mathematics::IncrementalDelaunay2<Real>::GenerateRepresentation()
         //         mIndices = NEW1<int>(3*mNumTriangles);
         //         mAdjacencies = NEW1<int>(3*mNumTriangles);
         i = 0;
-        iter = m_Triangle.begin();
-        end = m_Triangle.end();
+        iter = triangle.begin();
+        end = triangle.end();
         for (/**/; iter != end; ++iter)
         {
             tri = *iter;
@@ -399,13 +399,13 @@ const int* Mathematics::IncrementalDelaunay2<Real>::GetAdjacencies() const
 }
 
 template <typename Real>
-const std::vector<Mathematics::Vector2D<Real>>& Mathematics::IncrementalDelaunay2<Real>::GetVertices() const
+const std::vector<Mathematics::Vector2<Real>>& Mathematics::IncrementalDelaunay2<Real>::GetVertices() const
 {
     return mVertexPool;
 }
 
 template <typename Real>
-const std::map<Mathematics::Vector2D<Real>, int>& Mathematics::IncrementalDelaunay2<Real>::GetUniqueVertices() const
+const std::map<Mathematics::Vector2<Real>, int>& Mathematics::IncrementalDelaunay2<Real>::GetUniqueVertices() const
 {
     return mVMap;
 }
@@ -449,7 +449,7 @@ bool Mathematics::IncrementalDelaunay2<Real>::GetHull(int& numEdges, int*& indic
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangle(const Vector2D<Real>& test) const
+int Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangle(const Vector2<Real>& test) const
 {
     // The mesh might not have any triangles (only collinear points were
     // inserted).
@@ -547,7 +547,7 @@ int Mathematics::IncrementalDelaunay2<Real>::GetLastEdge(int& riV0, int& riV1, i
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetVertexSet(int i, Vector2D<Real> akV[3]) const
+bool Mathematics::IncrementalDelaunay2<Real>::GetVertexSet(int i, Vector2<Real> akV[3]) const
 {
     if (0 <= i && i < mNumTriangles)
     {
@@ -589,7 +589,7 @@ bool Mathematics::IncrementalDelaunay2<Real>::GetAdjacentSet(int i, int aiAdjace
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::GetBarycentricSet(int i, const Vector2D<Real>& test, Real afBary[3]) const
+bool Mathematics::IncrementalDelaunay2<Real>::GetBarycentricSet(int i, const Vector2<Real>& test, Real afBary[3]) const
 {
     if (0 <= i && i < mNumTriangles)
     {
@@ -609,7 +609,7 @@ bool Mathematics::IncrementalDelaunay2<Real>::GetBarycentricSet(int i, const Vec
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2D<Real>& test, int v0, int v1) const
+int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2<Real>& test, int v0, int v1) const
 {
     if (mUncertainty < Math::GetValue(1))
     {
@@ -685,7 +685,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToLine(const Vector2D<Real>& test, 
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToTriangle(const Vector2D<Real>& test, int v0, int v1, int v2) const
+int Mathematics::IncrementalDelaunay2<Real>::ToTriangle(const Vector2<Real>& test, int v0, int v1, int v2) const
 {
     auto sign0 = ToLine(test, v1, v2);
     if (sign0 > 0)
@@ -709,7 +709,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToTriangle(const Vector2D<Real>& te
 }
 
 template <typename Real>
-int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2D<Real>& test, int v0, int v1, int v2) const
+int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2<Real>& test, int v0, int v1, int v2) const
 {
     if (mUncertainty < Math::GetValue(1))
     {
@@ -719,7 +719,7 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2D<Real>
         auto vertex0 = mVertexPool[v0];
         auto vertex1 = mVertexPool[v1];
         auto vertex2 = mVertexPool[v2];
-        Vector2D<Real> save;
+        Vector2<Real> save;
         bool positive;
         if (vertex0 < vertex1)
         {
@@ -858,14 +858,14 @@ int Mathematics::IncrementalDelaunay2<Real>::ToCircumcircle(const Vector2D<Real>
 }
 
 template <typename Real>
-typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangleInternal(const Vector2D<Real>& position) const
+typename Mathematics::IncrementalDelaunay2<Real>::Triangle* Mathematics::IncrementalDelaunay2<Real>::GetContainingTriangleInternal(const Vector2<Real>& position) const
 {
     // Locate which triangle in the current mesh contains vertex i.  By
     // construction, there must be such a triangle (the vertex cannot be
     // outside the supertriangle).
 
-    auto tri = *m_Triangle.begin();
-    auto numTriangles = boost::numeric_cast<int>(m_Triangle.size());
+    auto tri = *triangle.begin();
+    auto numTriangles = boost::numeric_cast<int>(triangle.size());
     for (int t = 0; t < numTriangles; ++t)
     {
         auto vertices = tri->V;
@@ -1017,7 +1017,7 @@ Mathematics::IncrementalDelaunay2<Real>::Triangle ::Triangle(int v0, int v1, int
 }
 
 template <typename Real>
-bool Mathematics::IncrementalDelaunay2<Real>::Triangle ::IsInsertionComponent(int posIndex, const Vector2D<Real>& test, Triangle* adj, const IncrementalDelaunay2* delaunay)
+bool Mathematics::IncrementalDelaunay2<Real>::Triangle ::IsInsertionComponent(int posIndex, const Vector2<Real>& test, Triangle* adj, const IncrementalDelaunay2* delaunay)
 {
     if (posIndex != Time)
     {
@@ -1121,7 +1121,7 @@ Mathematics::VEManifoldMesh::EPtr Mathematics::IncrementalDelaunay2<Real>::Edge 
 template <typename Real>
 Mathematics::IncrementalDelaunay2<Real>::RPVertex ::RPVertex(int index, Triangle* tri, Triangle* adj)
     : Index{ index }, Tri{ tri }, Adj{ adj }, IsConvex{ false }, IsEarTip{ false }, IsSuperVertex{ false },
-      Weight{ Math<Real>::sm_MaxReal }, VPrev{ -1 }, VNext{ -1 }, SPrev{ -1 }, SNext{ -1 }, EarRecord{ 0 }
+      Weight{ Math<Real>::maxReal }, VPrev{ -1 }, VNext{ -1 }, SPrev{ -1 }, SNext{ -1 }, EarRecord{ 0 }
 {
 }
 
@@ -1131,7 +1131,7 @@ template <typename Real>
 Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<RPVertex>& polygon, int removal, IncrementalDelaunay2* delaunay)
     : mPolygon{ polygon }, mNumVertices{ boost::numeric_cast<int>(polygon.size()) },
       mDelaunay{ delaunay }, mCFirst{ -1 }, mCLast{ -1 }, mRFirst{ -1 }, mRLast{ -1 },
-      mEHeap{ boost::numeric_cast<int>(polygon.size()), 1, Math<Real>::sm_MaxReal }
+      mEHeap{ boost::numeric_cast<int>(polygon.size()), 1, Math<Real>::maxReal }
 {
     // Create a circular list of the polygon vertices for dynamic removal of
     // vertices.
@@ -1281,8 +1281,8 @@ Mathematics::IncrementalDelaunay2<Real>::Triangulate ::Triangulate(std::vector<R
                 }
             }
 
-            mDelaunay->m_Triangle.erase(triP);
-            mDelaunay->m_Triangle.erase(triN);
+            mDelaunay->triangle.erase(triP);
+            mDelaunay->triangle.erase(triN);
             DELETE0(triP);
             DELETE0(triN);
             break;
@@ -1504,7 +1504,7 @@ Real Mathematics::IncrementalDelaunay2<Real>::Triangulate ::ComputeWeight(int v0
         // The vertex is a supervertex.  Return infinite weight so that the
         // supervertices are processed last.
         vertex0.IsSuperVertex = true;
-        vertex0.Weight = Math<Real>::sm_MaxReal;
+        vertex0.Weight = Math<Real>::maxReal;
         return vertex0.Weight;
     }
 

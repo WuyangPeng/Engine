@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 14:15)
+///	引擎版本：0.8.0.2 (2022/01/28 16:07)
 
 #ifndef MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_H
 #define MATHEMATICS_BASE_LOG2_OF_POWER_OF_TWO_H
@@ -26,15 +26,16 @@ namespace Mathematics
     public:
         explicit Log2OfPowerOfTwo(T powerOfTwo) noexcept;
 
-#ifdef OPEN_CLASS_INVARIANT
         CLASS_INVARIANT_DECLARE;
-        [[nodiscard]] bool IsPowerOfTwoValid() const noexcept;
-        [[nodiscard]] bool IsLog2Valid() const noexcept;
-        [[nodiscard]] bool IsConvertValid() const noexcept;
-        [[nodiscard]] uint32_t GetPowerOfTwoLow() const noexcept;
+
+#ifdef OPEN_CLASS_INVARIANT
+        NODISCARD bool IsPowerOfTwoValid() const noexcept;
+        NODISCARD bool IsLog2Valid() const noexcept;
+        NODISCARD bool IsConvertValid() const noexcept;
+        NODISCARD uint32_t GetPowerOfTwoLow() const noexcept;
 #endif  // OPEN_CLASS_INVARIANT
 
-        [[nodiscard]] T GetLog2() const;
+        NODISCARD T GetLog2() const;
 
     private:
         void Convert() noexcept;
@@ -47,12 +48,12 @@ namespace Mathematics
         // 1111 0000 1111 0000 1111 0000 1111 0000
         // 1100 1100 1100 1100 1100 1100 1100 1100
         // 1010 1010 1010 1010 1010 1010 1010 1010
-        static constexpr auto sm_MaskSize = 5;
-        static constexpr std::array<uint32_t, sm_MaskSize> sm_Mask{ 0xFFFF0000, 0xFF00FF00, 0xF0F0F0F0, 0xCCCCCCCC, 0xAAAAAAAA };
+        static constexpr auto maskSize = 5;
+        static constexpr std::array<uint32_t, maskSize> maskContainer{ 0xFFFF0000, 0xFF00FF00, 0xF0F0F0F0, 0xCCCCCCCC, 0xAAAAAAAA };
 
-        T m_PowerOfTwo;
-        T m_PowerOfTwoCopy;
-        uint32_t m_Log2;
+        T powerOfTwo;
+        T powerOfTwoCopy;
+        uint32_t log2;
     };
 }
 

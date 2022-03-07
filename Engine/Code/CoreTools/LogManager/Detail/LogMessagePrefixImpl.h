@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 17:05)
 
-// 日志消息前缀类内部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_PREFIX_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_MESSAGE_PREFIX_IMPL_H
 
@@ -31,8 +30,8 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] String GetPrefix() const;
-        [[nodiscard]] int GetPrefixSize() const;
+        NODISCARD String GetPrefix() const;
+        NODISCARD int GetPrefixSize() const;
 
     private:
         void GeneratePrefix();
@@ -41,10 +40,10 @@ namespace CoreTools
         void GenerateLogFilterPrefix();
 
     private:
-        String m_Prefix;
-        AppenderPrint m_AppenderPrint;
-        LogLevel m_Level;
-        LogFilter m_Filter;
+        String prefix;
+        AppenderPrint appenderPrint;
+        LogLevel level;
+        LogFilter filter;
     };
 }
 

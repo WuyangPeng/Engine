@@ -10,8 +10,8 @@
 #include "Physics/PhysicsDll.h"
 
 #include "LCPSolverManager.h"
-#include "Mathematics/Algebra/Vector3D.h" 
-#include "Mathematics/Algebra/Vector2D.h" 
+#include "Mathematics/Algebra/Vector3.h" 
+#include "Mathematics/Algebra/Vector2.h" 
 #include "CoreTools/DataTypes/Tuple.h"
 
 namespace Physics
@@ -161,8 +161,8 @@ namespace Physics
 #endif // PHYSICS_LCPPOLYDIST_LOG
 	};
 
-	using LCPPolyDist2 = LCPPolyDist<2, Mathematics::Vector2D<float>, Mathematics::Vector2D<double> >;
-	using LCPPolyDist3 = LCPPolyDist<3, Mathematics::Vector3D<float>, Mathematics::Vector3D<double> >;
+	using LCPPolyDist2 = LCPPolyDist<2, Mathematics::Vector2<float>, Mathematics::Vector2<double> >;
+	using LCPPolyDist3 = LCPPolyDist<3, Mathematics::Vector3<float>, Mathematics::Vector3<double> >;
 }
 
 #endif // PHYSICS_LCP_SOLVER_LCP_POLY_DIST_H

@@ -64,7 +64,7 @@ void Framework::ObjectMotionMove
 		}
 		else
 		{
-                    m_Axis = Mathematics::FloatAVector::GetUnitX();
+                    m_Axis = Mathematics::AVectorF::GetUnitX();
 		}
 	}
 	else if (m_DoYaw != 0)
@@ -80,7 +80,7 @@ void Framework::ObjectMotionMove
 		}
 		else
 		{
-                    Mathematics::FloatAVector::GetUnitY();
+                    Mathematics::AVectorF::GetUnitY();
 		}
 	}
 	else if (m_DoPitch != 0)
@@ -96,7 +96,7 @@ void Framework::ObjectMotionMove
 		}
 		else
 		{
-                    m_Axis = Mathematics::FloatAVector::GetUnitZ();
+                    m_Axis = Mathematics::AVectorF::GetUnitZ();
 		}
 	}
 }

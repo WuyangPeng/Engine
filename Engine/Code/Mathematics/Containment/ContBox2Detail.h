@@ -9,12 +9,12 @@
 
 #include "ContBox2.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/GaussPointsFit2Detail.h"
 
 template <typename Real>
-Mathematics::ContBox2<Real>::ContBox2()
+Mathematics::ContBox2<Real>::ContBox2() noexcept
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,11 +31,11 @@ bool Mathematics::ContBox2<Real>::IsValid() const noexcept
 template <typename Real>
 typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContAlignedBox(const Points& points)
 {
-    auto aabb = Vector2DTools<Real>::ComputeExtremes(points);
+    const auto aabb = Vector2Tools<Real>::ComputeExtremes(points);
     auto halfDiagonal = Math::GetRational(1, 2) * (aabb.GetMaxPoint() - aabb.GetMinPoint());
 
     return Box2{ Math::GetRational(1, 2) * (aabb.GetMinPoint() + aabb.GetMaxPoint()),
-                 Vector2D::GetUnitX(), Vector2D::GetUnitY(),
+                 Vector2::GetUnitX(), Vector2::GetUnitY(),
                  halfDiagonal[0], halfDiagonal[1] };
 }
 
@@ -43,8 +43,8 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
 template <typename Real>
 typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::ContOrientedBox(const Points& points)
 {
-    GaussPointsFit2<Real> gaussPointsFit2{ points };
-    auto box = gaussPointsFit2.GetBox2();
+    const GaussPointsFit2<Real> gaussPointsFit2{ points };
+    const auto box = gaussPointsFit2.GetBox2();
 
     // 令C是包围盒中心，让U0和U1是包围盒的轴。
     // 每一个输入点的形式为X = C + y0 * U0 + y1 * U1。
@@ -61,10 +61,10 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
     {
         auto diff = point - box.GetCenter();
 
-        auto firstDot = Vector2DTools<Real>::DotProduct(diff, box.GetAxis0());
+        auto firstDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
         firstDotCollection.push_back(firstDot);
 
-        auto secondDot = Vector2DTools<Real>::DotProduct(diff, box.GetAxis1());
+        auto secondDot = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
         secondDotCollection.push_back(secondDot);
     }
 
@@ -83,15 +83,15 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Co
 
 // static
 template <typename Real>
-bool Mathematics::ContBox2<Real>::InBox(const Vector2D& point, const Box2& box)
+bool Mathematics::ContBox2<Real>::InBox(const Vector2& point, const Box2& box)
 {
     auto diff = point - box.GetCenter();
-    auto firstCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetAxis0());
+    auto firstCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis0());
 
     if (box.GetExtent0() + box.GetEpsilon() < firstCoeff)
         return false;
 
-    auto secondCoeff = Vector2DTools<Real>::DotProduct(diff, box.GetAxis1());
+    auto secondCoeff = Vector2Tools<Real>::DotProduct(diff, box.GetAxis1());
 
     if (box.GetExtent1() + box.GetEpsilon() < secondCoeff)
         return false;
@@ -109,8 +109,8 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
 
     // 合并的包围盒的轴是输入包围盒轴的平均值。
     // 如果需要的话，第二个包围盒的轴被取负，这样它们形成与第一个包围盒的轴线为锐角。
-    Vector2D firstAxis;
-    if (Math::GetValue(0) <= Vector2DTools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
+    Vector2 firstAxis;
+    if (Math::GetValue(0) <= Vector2Tools<Real>::DotProduct(lhs.GetAxis0(), rhs.GetAxis0()))
     {
         firstAxis = Math::GetRational(1, 2) * (lhs.GetAxis0() + rhs.GetAxis0());
         firstAxis.Normalize();
@@ -120,7 +120,7 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
         firstAxis = Math::GetRational(1, 2) * (lhs.GetAxis0() - rhs.GetAxis0());
         firstAxis.Normalize();
     }
-    auto secondAxis = -Vector2DTools<Real>::GetPerp(firstAxis);
+    const auto secondAxis = -Vector2Tools<Real>::GetPerp(firstAxis);
 
     // 项目的输入包围盒顶点到合并后的包围盒的轴。
     // 各个轴线D[i]包含当前中心C具有最小投影值min[i]和最大投影值max[i]。
@@ -145,16 +145,16 @@ typename const Mathematics::ContBox2<Real>::Box2 Mathematics::ContBox2<Real>::Me
     {
         auto diff = point - center;
 
-        auto firstDot = Vector2DTools<Real>::DotProduct(diff, firstAxis);
+        auto firstDot = Vector2Tools<Real>::DotProduct(diff, firstAxis);
         firstDotCollection.push_back(firstDot);
 
-        auto secondDot = Vector2DTools<Real>::DotProduct(diff, secondAxis);
+        auto secondDot = Vector2Tools<Real>::DotProduct(diff, secondAxis);
         secondDotCollection.push_back(secondDot);
     }
 
-    auto firstBoundary = std::minmax_element(firstDotCollection.begin(), firstDotCollection.end());
+    const auto firstBoundary = std::minmax_element(firstDotCollection.begin(), firstDotCollection.end());
 
-    auto secondBoundary = std::minmax_element(secondDotCollection.begin(), secondDotCollection.end());
+    const auto secondBoundary = std::minmax_element(secondDotCollection.begin(), secondDotCollection.end());
 
     // [min,max] 为合并后的包围盒的轴在坐标系中为轴对齐包围盒。
     // 更新当前包围盒中心成为新包围盒的中心。计算基于新的中心的范围。

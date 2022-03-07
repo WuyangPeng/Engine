@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:20)
+///	引擎版本：0.8.0.2 (2022/02/10 15:04)
 
 #ifndef MATHEMATICS_OBJECTS3D_CYLINDER3_H
 #define MATHEMATICS_OBJECTS3D_CYLINDER3_H
@@ -37,18 +37,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Line3 GetAxis() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
-        [[nodiscard]] Real GetHeight() const noexcept;
+        NODISCARD Line3 GetAxis() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
+        NODISCARD Real GetHeight() const noexcept;
 
     private:
-        Line3 m_Axis;
-        Real m_Radius;
-        Real m_Height;
+        Line3 axis;
+        Real radius;
+        Real height;
     };
 
-    using FloatCylinder3 = Cylinder3<float>;
-    using DoubleCylinder3 = Cylinder3<double>;
+    using Cylinder3F = Cylinder3<float>;
+    using Cylinder3D = Cylinder3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CYLINDER3_H

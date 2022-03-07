@@ -8,7 +8,7 @@
 #define MATHEMATICS_COMPUTATIONAL_GEOMETRY_TRIANGULATE_EC_H
 
 #include "Mathematics/Query/QueryBase.h"
-#include "Mathematics/Algebra/Vector2D.h" 
+#include "Mathematics/Algebra/Vector2.h" 
 
 namespace Mathematics
 {
@@ -103,7 +103,7 @@ namespace Mathematics
 		// occurs when |d| < epsilon*M.
 
 		// Convenient typedefs.
-		typedef std::vector<Vector2D<Real> > Positions;
+		typedef std::vector<Vector2<Real> > Positions;
 		typedef std::vector<int> Indices;
 		typedef std::vector<Indices*> IndicesArray;
 		typedef std::map<int,int> IndexMap;
@@ -187,7 +187,7 @@ namespace Mathematics
 		// for the purpose of triangulating polygons with holes.  The query is
 		// point-in-triangle, but is encapsulated here to use the same type of
 		// query object that the user specified in the constructors.
-		int TriangleQuery (const Vector2D<Real>& position, QueryType queryType,Real epsilon, const Vector2D<Real> triangle[3]) const;
+		int TriangleQuery (const Vector2<Real>& position, QueryType queryType,Real epsilon, const Vector2<Real> triangle[3]) const;
 
 		// Given an outer polygon that contains an inner polygon, this function
 		// determines a pair of visible vertices and inserts two coincident edges
@@ -246,7 +246,7 @@ namespace Mathematics
 
 		// For robust determinant calculation.
 		Query2<Real>* mQuery;
-		std::vector<Vector2D<Real> >mSPositions;
+		std::vector<Vector2<Real> >mSPositions;
 	};
 }
 

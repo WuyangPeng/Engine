@@ -10,12 +10,14 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h" 
 
 #include <random> 
-#include "Mathematics/Algebra/Vector2DTools.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 
 using std::vector;
 using std::uniform_real;
 using std::default_random_engine; 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 namespace Mathematics
 {
 	template class Matrix2<float>;
@@ -36,21 +38,21 @@ void Mathematics::Matrix2Testing
 void Mathematics::Matrix2Testing
 	::ConstructionTest()
 {
-	FloatMatrix2 firstMatrix(MatrixInitType::Zero);
+	Matrix2F firstMatrix(MatrixInitType::Zero);
 
 	ASSERT_APPROXIMATE(firstMatrix(0,0),0.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(0,1),0.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(1,0),0.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(1,1),0.0f,1e-8f);
 
-	FloatMatrix2 secondMatrix(MatrixInitType::Identity);
+	Matrix2F secondMatrix(MatrixInitType::Identity);
 
 	ASSERT_APPROXIMATE(secondMatrix(0,0),1.0f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(0,1),0.0f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(1,0),0.0f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(1,1),1.0f,1e-8f);
 
-	DoubleMatrix2 thirdMatrix(3.0,6.0,1.0,2.0);
+	Matrix2D thirdMatrix(3.0,6.0,1.0,2.0);
 
 	ASSERT_APPROXIMATE(thirdMatrix(0,0),3.0,1e-10);
 	ASSERT_APPROXIMATE(thirdMatrix(0,1),6.0,1e-10);
@@ -59,68 +61,68 @@ void Mathematics::Matrix2Testing
 
 	vector<double> doubleVector{ 6.0,6.2,9.0,2.0 }; 
 
-	DoubleMatrix2 fourthMatrix(doubleVector,MatrixMajorFlags::Row);
+	Matrix2D fourthMatrix(doubleVector,MatrixMajorFlags::Row);
 
 	ASSERT_APPROXIMATE(fourthMatrix(0,0),6.0,1e-10);
 	ASSERT_APPROXIMATE(fourthMatrix(0,1),6.2,1e-10);
 	ASSERT_APPROXIMATE(fourthMatrix(1,0),9.0,1e-10);
 	ASSERT_APPROXIMATE(fourthMatrix(1,1),2.0,1e-10);
 
-	DoubleMatrix2 fifthMatrix(doubleVector,MatrixMajorFlags::Column);
+	Matrix2D fifthMatrix(doubleVector,MatrixMajorFlags::Column);
 
 	ASSERT_APPROXIMATE(fifthMatrix(0,0),6.0,1e-10);
 	ASSERT_APPROXIMATE(fifthMatrix(0,1),9.0,1e-10);
 	ASSERT_APPROXIMATE(fifthMatrix(1,0),6.2,1e-10);
 	ASSERT_APPROXIMATE(fifthMatrix(1,1),2.0,1e-10);
 
-	FloatVector2D firstVector(6.0f,3.0f);
-	FloatVector2D secondVector(8.0f,3.1f);
+	Vector2F firstVector(6.0f,3.0f);
+	Vector2F secondVector(8.0f,3.1f);
 
-	FloatMatrix2 sixthMatrix(firstVector,secondVector,MatrixMajorFlags::Row);
+	Matrix2F sixthMatrix(firstVector,secondVector,MatrixMajorFlags::Row);
 
 	ASSERT_APPROXIMATE(sixthMatrix(0,0),6.0f,1e-8f);
 	ASSERT_APPROXIMATE(sixthMatrix(0,1),3.0f,1e-8f);
 	ASSERT_APPROXIMATE(sixthMatrix(1,0),8.0f,1e-8f);
 	ASSERT_APPROXIMATE(sixthMatrix(1,1),3.1f,1e-8f);
 
-	FloatMatrix2 seventhMatrix(firstVector,secondVector,MatrixMajorFlags::Column);
+	Matrix2F seventhMatrix(firstVector,secondVector,MatrixMajorFlags::Column);
 
 	ASSERT_APPROXIMATE(seventhMatrix(0,0),6.0f,1e-8f);
 	ASSERT_APPROXIMATE(seventhMatrix(0,1),8.0f,1e-8f);
 	ASSERT_APPROXIMATE(seventhMatrix(1,0),3.0f,1e-8f);
 	ASSERT_APPROXIMATE(seventhMatrix(1,1),3.1f,1e-8f);
 
-	vector<FloatVector2D> vector2DVector{ firstVector,secondVector }; 
+	vector<Vector2F> Vector2Vector{ firstVector,secondVector }; 
 
-	FloatMatrix2 eighthMatrix(vector2DVector,MatrixMajorFlags::Row);
+	Matrix2F eighthMatrix(Vector2Vector,MatrixMajorFlags::Row);
 
 	ASSERT_APPROXIMATE(eighthMatrix(0,0),6.0f,1e-8f);
 	ASSERT_APPROXIMATE(eighthMatrix(0,1),3.0f,1e-8f);
 	ASSERT_APPROXIMATE(eighthMatrix(1,0),8.0f,1e-8f);
 	ASSERT_APPROXIMATE(eighthMatrix(1,1),3.1f,1e-8f);
 
-	FloatMatrix2 ninthMatrix(vector2DVector,MatrixMajorFlags::Column);
+	Matrix2F ninthMatrix(Vector2Vector,MatrixMajorFlags::Column);
 
 	ASSERT_APPROXIMATE(ninthMatrix(0,0),6.0f,1e-8f);
 	ASSERT_APPROXIMATE(ninthMatrix(0,1),8.0f,1e-8f);
 	ASSERT_APPROXIMATE(ninthMatrix(1,0),3.0f,1e-8f);
 	ASSERT_APPROXIMATE(ninthMatrix(1,1),3.1f,1e-8f);
 
-	DoubleMatrix2 tenthMatrix(6.0,89.0);
+	Matrix2D tenthMatrix(6.0,89.0);
 
 	ASSERT_APPROXIMATE(tenthMatrix(0,0),6.0,1e-10);
 	ASSERT_APPROXIMATE(tenthMatrix(0,1),0.0,1e-10);
 	ASSERT_APPROXIMATE(tenthMatrix(1,0),0.0,1e-10);
 	ASSERT_APPROXIMATE(tenthMatrix(1,1),89.0,1e-10);
 
-	DoubleMatrix2 eleventhMatrix(DoubleMath::GetHalfPI() / 3.0);
+	Matrix2D eleventhMatrix(MathD::GetHalfPI() / 3.0);
 
-	ASSERT_APPROXIMATE(eleventhMatrix(0,0),cos(DoubleMath::GetHalfPI() / 3.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(0,1),-sin(DoubleMath::GetHalfPI() / 3.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(1,0),sin(DoubleMath::GetHalfPI() / 3.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(1,1),cos(DoubleMath::GetHalfPI() / 3.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(0,0),cos(MathD::GetHalfPI() / 3.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(0,1),-sin(MathD::GetHalfPI() / 3.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(1,0),sin(MathD::GetHalfPI() / 3.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(1,1),cos(MathD::GetHalfPI() / 3.0),1e-10);
 
-	FloatMatrix2 twelfthMatrix(firstVector,secondVector);
+	Matrix2F twelfthMatrix(firstVector,secondVector);
 
 	ASSERT_APPROXIMATE(firstVector.GetX() * secondVector.GetX(),twelfthMatrix(0,0),1e-8f);
 	ASSERT_APPROXIMATE(firstVector.GetX() * secondVector.GetY(),twelfthMatrix(0,1),1e-8f);
@@ -148,12 +150,12 @@ void Mathematics::Matrix2Testing
 	ASSERT_APPROXIMATE(eleventhMatrix(1,0),0.0,1e-10);
 	ASSERT_APPROXIMATE(eleventhMatrix(1,1),9.0,1e-10);
 
-	eleventhMatrix.MakeRotation(DoubleMath::GetHalfPI() / 6.0);
+	eleventhMatrix.MakeRotation(MathD::GetHalfPI() / 6.0);
 
-	ASSERT_APPROXIMATE(eleventhMatrix(0,0),cos(DoubleMath::GetHalfPI() / 6.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(0,1),-sin(DoubleMath::GetHalfPI() / 6.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(1,0),sin(DoubleMath::GetHalfPI() / 6.0),1e-10);
-	ASSERT_APPROXIMATE(eleventhMatrix(1,1),cos(DoubleMath::GetHalfPI() / 6.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(0,0),cos(MathD::GetHalfPI() / 6.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(0,1),-sin(MathD::GetHalfPI() / 6.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(1,0),sin(MathD::GetHalfPI() / 6.0),1e-10);
+	ASSERT_APPROXIMATE(eleventhMatrix(1,1),cos(MathD::GetHalfPI() / 6.0),1e-10);
 
 	ninthMatrix.MakeTensorProduct(firstVector,secondVector);
 
@@ -169,7 +171,7 @@ void Mathematics::Matrix2Testing
 	ASSERT_APPROXIMATE(eleventhMatrix(1,0),0.0,1e-10);
 	ASSERT_APPROXIMATE(eleventhMatrix(1,1),89.0,1e-10);
 
-	DoubleMatrix2 thirteenthMatrix(eleventhMatrix);
+	Matrix2D thirteenthMatrix(eleventhMatrix);
 
 	ASSERT_APPROXIMATE(thirteenthMatrix(0,0),6.0,1e-10);
 	ASSERT_APPROXIMATE(thirteenthMatrix(0,1),0.0,1e-10);
@@ -180,14 +182,14 @@ void Mathematics::Matrix2Testing
 void Mathematics::Matrix2Testing
 	::AccessTest()
 {
-	const FloatMatrix2 firstMatrix(3.0f,4.0f,8.1f,3.2f);
+	const Matrix2F firstMatrix(3.0f,4.0f,8.1f,3.2f);
 
 	ASSERT_APPROXIMATE(firstMatrix(0,0),3.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(0,1),4.0f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(1,0),8.1f,1e-8f);
 	ASSERT_APPROXIMATE(firstMatrix(1,1),3.2f,1e-8f);
 
-	DoubleMatrix2 secondMatrix(9.2,1.0,4.2,5.2);
+	Matrix2D secondMatrix(9.2,1.0,4.2,5.2);
 
 	ASSERT_APPROXIMATE(secondMatrix(0,0),9.2,1e-10);
 	ASSERT_APPROXIMATE(secondMatrix(0,1),1.0,1e-10);
@@ -198,16 +200,16 @@ void Mathematics::Matrix2Testing
 void Mathematics::Matrix2Testing
 	::OperatorCalculateTest()
 {
-	FloatMatrix2 firstMatrix(3.0f,4.0f,8.1f,3.2f);
+	Matrix2F firstMatrix(3.0f,4.0f,8.1f,3.2f);
 
-	FloatMatrix2 secondMatrix = -firstMatrix;
+	Matrix2F secondMatrix = -firstMatrix;
 
 	ASSERT_APPROXIMATE(secondMatrix(0,0),-3.0f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(0,1),-4.0f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(1,0),-8.1f,1e-8f);
 	ASSERT_APPROXIMATE(secondMatrix(1,1),-3.2f,1e-8f);
 
-	FloatMatrix2 thirdMatrix(9.2f,3.0f,2.0f,9.0f);
+	Matrix2F thirdMatrix(9.2f,3.0f,2.0f,9.0f);
 
 	thirdMatrix += secondMatrix;
 
@@ -237,7 +239,7 @@ void Mathematics::Matrix2Testing
 	ASSERT_APPROXIMATE(thirdMatrix(1,0),-42.6f,1e-5f);
 	ASSERT_APPROXIMATE(thirdMatrix(1,1),7.8f,1e-8f);
 
-	FloatMatrix2 fourthMatrix1 = firstMatrix + thirdMatrix;
+	Matrix2F fourthMatrix1 = firstMatrix + thirdMatrix;
 
 	ASSERT_APPROXIMATE(fourthMatrix1(0,0),12.6f,1e-6f);
 	ASSERT_APPROXIMATE(fourthMatrix1(0,1),-11.0f,1e-8f);
@@ -279,15 +281,15 @@ void Mathematics::Matrix2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatMatrix2 fifthMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
+		Matrix2F fifthMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
 
-		FloatMatrix2 sixthMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
+		Matrix2F sixthMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),randomDistribution(generator) };
 
-		FloatMatrix2 seventhMatrix(sixthMatrix);
+		Matrix2F seventhMatrix(sixthMatrix);
 
 		seventhMatrix *= fifthMatrix;
 
-		FloatMatrix2 fourthMatrix(sixthMatrix(0,0) * fifthMatrix(0,0) +
+		Matrix2F fourthMatrix(sixthMatrix(0,0) * fifthMatrix(0,0) +
 			                  sixthMatrix(0,1) * fifthMatrix(1,0),
 							  sixthMatrix(0,0) * fifthMatrix(0,1) +
 							  sixthMatrix(0,1) * fifthMatrix(1,1),
@@ -302,27 +304,27 @@ void Mathematics::Matrix2Testing
 
 		ASSERT_TRUE(Approximate(fourthMatrix,seventhMatrix,1e-8f)); 
 
-		FloatMatrix2::Vector2D firstVector(randomDistribution(generator),
+		Matrix2F::Vector2 firstVector(randomDistribution(generator),
 			                           randomDistribution(generator));
 
-		FloatMatrix2::Vector2D secondVector = seventhMatrix * firstVector;
-		FloatMatrix2::Vector2D thirdVector = firstVector * seventhMatrix;
+		Matrix2F::Vector2 secondVector = seventhMatrix * firstVector;
+		Matrix2F::Vector2 thirdVector = firstVector * seventhMatrix;
 
-		FloatMatrix2::Vector2D fourthVector(seventhMatrix(0,0) * firstVector[0] + 
+		Matrix2F::Vector2 fourthVector(seventhMatrix(0,0) * firstVector[0] + 
 			                            seventhMatrix(0,1) * firstVector[1],
 										seventhMatrix(1,0) * firstVector[0] + 
 										seventhMatrix(1,1) * firstVector[1]);
 
-		ASSERT_TRUE(FloatVector2DTools::Approximate(secondVector, fourthVector,1e-8f));  
+		ASSERT_TRUE(Vector2ToolsF::Approximate(secondVector, fourthVector,1e-8f));  
 
 		fourthVector[0] = seventhMatrix(0,0) * firstVector[0] + seventhMatrix(1,0) * firstVector[1];
 
 		fourthVector[1] = seventhMatrix(0,1) * firstVector[0] + seventhMatrix(1,1) * firstVector[1];
 
-		ASSERT_TRUE(FloatVector2DTools::Approximate(thirdVector, fourthVector,1e-8f));
+		ASSERT_TRUE(Vector2ToolsF::Approximate(thirdVector, fourthVector,1e-8f));
 
-		FloatMatrix2 eighthMatrix = TransposeTimes(fifthMatrix,sixthMatrix);
-		FloatMatrix2 ninthMatrix = fifthMatrix.Transpose() * sixthMatrix;
+		Matrix2F eighthMatrix = TransposeTimes(fifthMatrix,sixthMatrix);
+		Matrix2F ninthMatrix = fifthMatrix.Transpose() * sixthMatrix;
 
 		ASSERT_TRUE(Approximate(eighthMatrix, ninthMatrix,1e-8f));  
 
@@ -343,30 +345,30 @@ void Mathematics::Matrix2Testing
 {
 	default_random_engine generator{};
 	uniform_real<float> randomDistribution{ -100.0f,100.0f };
-	uniform_real<float> angleRandomDistribution(0.0f, FloatMath::GetHalfPI());
+	uniform_real<float> angleRandomDistribution(0.0f, MathF::GetHalfPI());
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatMatrix2::Vector2D firstVector(randomDistribution(generator),
+		Matrix2F::Vector2 firstVector(randomDistribution(generator),
 			                           randomDistribution(generator));
 
-		FloatMatrix2::Vector2D secondVector(randomDistribution(generator),
+		Matrix2F::Vector2 secondVector(randomDistribution(generator),
 			                            randomDistribution(generator));
 
-		FloatMatrix2 firstMatrix(randomDistribution(generator),
+		Matrix2F firstMatrix(randomDistribution(generator),
 			                 randomDistribution(generator),
 							 randomDistribution(generator),
 							 randomDistribution(generator));
 
 		float qForm = firstMatrix.QuadraticForm(firstVector,secondVector);
 
-		float testQFormValue = FloatVector2DTools::DotProduct(firstVector,firstMatrix * secondVector);
+		float testQFormValue = Vector2ToolsF::DotProduct(firstVector,firstMatrix * secondVector);
 
 		ASSERT_APPROXIMATE(qForm,testQFormValue,1e-8f);
 
-		FloatMatrix2 secondMatrix = firstMatrix.Transpose();
+		Matrix2F secondMatrix = firstMatrix.Transpose();
 
 		ASSERT_APPROXIMATE(firstMatrix(0,0),secondMatrix(0,0),1e-8f);
 		ASSERT_APPROXIMATE(firstMatrix(0,1),secondMatrix(1,0),1e-8f);
@@ -377,59 +379,59 @@ void Mathematics::Matrix2Testing
 
 		ASSERT_APPROXIMATE(determinant,secondMatrix.Determinant(),1e-8f);
 
-		if(FloatMath::GetZeroTolerance() < FloatMath::FAbs(determinant))
+		if(MathF::GetZeroTolerance() < MathF::FAbs(determinant))
 		{
-			FloatMatrix2 thirdMatrix = secondMatrix.Inverse();
+			Matrix2F thirdMatrix = secondMatrix.Inverse();
 
-			FloatMatrix2 fourthMatrix = secondMatrix * thirdMatrix;
+			Matrix2F fourthMatrix = secondMatrix * thirdMatrix;
 
 			ASSERT_APPROXIMATE(fourthMatrix(0,0),1.0f,1e-5f);
 			ASSERT_APPROXIMATE(fourthMatrix(0,1),0.0f,1e-5f);
 			ASSERT_APPROXIMATE(fourthMatrix(1,0),0.0f,1e-5f);
 			ASSERT_APPROXIMATE(fourthMatrix(1,1),1.0f,1e-5f);
 
-			FloatMatrix2 fifthMatrix = secondMatrix.Adjoint();
+			Matrix2F fifthMatrix = secondMatrix.Adjoint();
 			fifthMatrix /= determinant;
 
 			fourthMatrix = fifthMatrix * secondMatrix;
 
-			ASSERT_TRUE(Approximate(fourthMatrix, FloatMatrix2::GetIdentity(),1e-5f));
+			ASSERT_TRUE(Approximate(fourthMatrix, Matrix2F::GetIdentity(),1e-5f));
 		}
 		
 		float angle = angleRandomDistribution(generator);
 		
-		FloatMatrix2 sixthMatrix(angle);
+		Matrix2F sixthMatrix(angle);
 		
 		ASSERT_APPROXIMATE(angle,sixthMatrix.ExtractAngle(),1e-7f);
 		
-		FloatMatrix2 seventhMatrix(sixthMatrix);
+		Matrix2F seventhMatrix(sixthMatrix);
 		
 		seventhMatrix.Orthonormalize();
 
-		FloatVector2D thirdVector(sixthMatrix(0,0),sixthMatrix(1,0));
-		FloatVector2D fourthVector(seventhMatrix(0,0),seventhMatrix(1,0));
+		Vector2F thirdVector(sixthMatrix(0,0),sixthMatrix(1,0));
+		Vector2F fourthVector(seventhMatrix(0,0),seventhMatrix(1,0));
 
 		thirdVector.Normalize();
 
-		ASSERT_TRUE(FloatVector2DTools::Approximate(thirdVector, fourthVector,1e-7f)); 
+		ASSERT_TRUE(Vector2ToolsF::Approximate(thirdVector, fourthVector,1e-7f)); 
 
-		FloatVector2D fifthVector(sixthMatrix(0,1),sixthMatrix(1,1));
-		FloatVector2D sixthVector(seventhMatrix(0,1),seventhMatrix(1,1));
+		Vector2F fifthVector(sixthMatrix(0,1),sixthMatrix(1,1));
+		Vector2F sixthVector(seventhMatrix(0,1),seventhMatrix(1,1));
 
-		fifthVector -= (FloatVector2DTools::DotProduct(fourthVector , fifthVector)) * fourthVector;
+		fifthVector -= (Vector2ToolsF::DotProduct(fourthVector , fifthVector)) * fourthVector;
 
 		fifthVector.Normalize();
 
-		ASSERT_TRUE(FloatVector2DTools::Approximate(fifthVector, sixthVector,1e-7f)); 
+		ASSERT_TRUE(Vector2ToolsF::Approximate(fifthVector, sixthVector,1e-7f)); 
 
-		DoubleMatrix2 eighthMatrix(randomDistribution(generator),angle,angle,randomDistribution(generator));
+		Matrix2D eighthMatrix(randomDistribution(generator),angle,angle,randomDistribution(generator));
 		
-		DoubleMatrix2::Matrix2EigenDecomposition eigenDecomposition = eighthMatrix.EigenDecomposition(1e-10);
+		Matrix2D::Matrix2EigenDecomposition eigenDecomposition = eighthMatrix.EigenDecomposition(1e-10);
 
-		DoubleMatrix2 rotation = eigenDecomposition.GetRotation();
-		DoubleMatrix2 diagonal = eigenDecomposition.GetDiagonal();
+		Matrix2D rotation = eigenDecomposition.GetRotation();
+		Matrix2D diagonal = eigenDecomposition.GetDiagonal();
 
-		DoubleMatrix2 ninthMatrix = rotation * diagonal * rotation.Transpose();
+		Matrix2D ninthMatrix = rotation * diagonal * rotation.Transpose();
 
 		ASSERT_TRUE(Approximate(ninthMatrix, eighthMatrix,1e-10)); 	
 	}

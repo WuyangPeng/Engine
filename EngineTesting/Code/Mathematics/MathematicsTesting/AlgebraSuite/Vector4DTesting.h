@@ -11,10 +11,10 @@
 
 namespace Mathematics
 {
-	class Vector4DTesting : public CoreTools::UnitTest
+	class Vector4Testing : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector4DTesting); 
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector4Testing); 
 
 	private:
 		void MainTest();	
@@ -22,7 +22,7 @@ namespace Mathematics
 		void AccessTest();
 		void CalculateTest(); 
 
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

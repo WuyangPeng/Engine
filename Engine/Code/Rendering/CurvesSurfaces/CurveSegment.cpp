@@ -34,14 +34,14 @@ float Rendering::CurveSegment ::GetUMax() const noexcept
     return mUMax;
 }
 
-Mathematics::FloatAVector Rendering::CurveSegment ::Tangent(float u) const
+Mathematics::AVectorF Rendering::CurveSegment ::Tangent(float u) const
 {
     AVector velocity = PU(u);
     velocity.Normalize();
     return velocity;
 }
 
-Mathematics::FloatAVector Rendering::CurveSegment ::Normal(float u) const
+Mathematics::AVectorF Rendering::CurveSegment ::Normal(float u) const
 {
     AVector velocity = PU(u);
     AVector acceleration = PUU(u);
@@ -52,7 +52,7 @@ Mathematics::FloatAVector Rendering::CurveSegment ::Normal(float u) const
     return normal;
 }
 
-Mathematics::FloatAVector Rendering::CurveSegment ::Binormal(float u) const
+Mathematics::AVectorF Rendering::CurveSegment ::Binormal(float u) const
 {
     AVector velocity = PU(u);
     AVector acceleration = PUU(u);
@@ -84,12 +84,12 @@ float Rendering::CurveSegment ::Curvature(float u) const
     AVector velocity = PU(u);
     const float speedSqr = velocity.SquaredLength();
 
-    if (speedSqr >= Mathematics::FloatMath::GetZeroTolerance())
+    if (speedSqr >= Mathematics::MathF::GetZeroTolerance())
     {
         AVector acceleration = PUU(u);
         AVector cross = Cross(velocity, acceleration);
         const float numer = cross.Length();
-        const float denom = Mathematics::FloatMath::Pow(speedSqr, 1.5f);
+        const float denom = Mathematics::MathF::Pow(speedSqr, 1.5f);
         return numer / denom;
     }
     else
@@ -106,7 +106,7 @@ float Rendering::CurveSegment ::Torsion(float u) const
     AVector cross = Cross(velocity, acceleration);
     const float denom = cross.SquaredLength();
 
-    if (denom >= Mathematics::FloatMath::GetZeroTolerance())
+    if (denom >= Mathematics::MathF::GetZeroTolerance())
     {
         AVector jerk = PUUU(u);
         const float numer = Dot(cross, jerk);

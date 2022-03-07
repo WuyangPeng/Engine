@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/13 11:23)
+///	引擎版本：0.8.0.2 (2022/02/09 18:57)
 
 #ifndef MATHEMATICS_OBJECTS2D_ARC2_ACHIEVE_H
 #define MATHEMATICS_OBJECTS2D_ARC2_ACHIEVE_H
@@ -16,20 +16,21 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <typename Real>
-Mathematics::Arc2<Real>::Arc2(const Vector2D& center, Real radius, const Vector2D& end0, const Vector2D& end1, const Real epsilon) noexcept
-    : m_Center{ center }, m_Radius{ radius }, m_End0{ end0 }, m_End1{ end1 }, m_Epsilon{ epsilon }
+Mathematics::Arc2<Real>::Arc2(const Vector2& center, Real radius, const Vector2& end0, const Vector2& end1, const Real epsilon) noexcept
+    : center{ center }, radius{ radius }, end0{ end0 }, end1{ end1 }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Arc2<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::Approximate(Vector2DTools::DistanceSquared(m_Center, m_End0), m_Radius * m_Radius, m_Epsilon) &&
-            Math::Approximate(Vector2DTools::DistanceSquared(m_Center, m_End1), m_Radius * m_Radius, m_Epsilon))
+        if (Math::Approximate(Vector2Tools::DistanceSquared(center, end0), radius * radius, epsilon) &&
+            Math::Approximate(Vector2Tools::DistanceSquared(center, end1), radius * radius, epsilon))
         {
             return true;
         }
@@ -41,34 +42,34 @@ bool Mathematics::Arc2<Real>::IsValid() const noexcept
     catch (...)
     {
         return false;
-    }    
+    }
 }
 
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::Arc2<Real>::Contains(const Vector2D& point) const
+bool Mathematics::Arc2<Real>::Contains(const Vector2& point) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_2(Math::Approximate(Vector2DTools::Distance(m_Center, point), m_Radius, m_Epsilon), "point不在圆上。");
+    MATHEMATICS_ASSERTION_2(Math::Approximate(Vector2Tools::Distance(center, point), radius, epsilon), "point不在圆上。");
 
     // 断言：|P-C| = Real其中P为输入点，C为圆心，Real为圆弧半径。
     // 对于P是在圆弧A至B，它必须是在包含A的平面，法线N = Perp(B-A)
     // 这里Perp(u,v) = (v,-u)。
 
-    auto diffPointEnd0 = point - m_End0;
-    auto diffEnd1End0 = m_End1 - m_End0;
-    auto dotPerp = Vector2DTools::DotPerp(diffPointEnd0, diffEnd1End0);
+    const auto diffPointEnd0 = point - end0;
+    const auto diffEnd1End0 = end1 - end0;
+    const auto dotPerp = Vector2Tools::DotPerp(diffPointEnd0, diffEnd1End0);
 
-    return -m_Epsilon <= dotPerp;
+    return -epsilon <= dotPerp;
 }
 
 template <typename Real>
-typename const Mathematics::Arc2<Real>::Vector2D Mathematics::Arc2<Real>::GetCenter() const noexcept
+typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Center;
+    return center;
 }
 
 template <typename Real>
@@ -76,23 +77,23 @@ Real Mathematics::Arc2<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Radius;
+    return radius;
 }
 
 template <typename Real>
-typename const Mathematics::Arc2<Real>::Vector2D Mathematics::Arc2<Real>::GetEnd0() const noexcept
+typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetEnd0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_End0;
+    return end0;
 }
 
 template <typename Real>
-typename const Mathematics::Arc2<Real>::Vector2D Mathematics::Arc2<Real>::GetEnd1() const noexcept
+typename Mathematics::Arc2<Real>::Vector2 Mathematics::Arc2<Real>::GetEnd1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_End1;
+    return end1;
 }
 
 #endif  // MATHEMATICS_OBJECTS2D_ARC2_ACHIEVE_H

@@ -15,7 +15,10 @@ using std::make_shared;
 using std::to_string;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockAcceptorHandleTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
 void Network::BoostSockAcceptorHandleTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AcceptorTest);
@@ -38,7 +41,7 @@ void Network::BoostSockAcceptorHandleTesting ::AcceptorInformationTest()
     ASSERT_EQUAL(sockAcceptor->GetAddress(), hostName + ":" + to_string(port));
     ASSERT_EQUAL(sockAcceptor->GetPort(), port);
 
-    auto nativeHandle = sockAcceptor->GetBoostHandle();
+    const auto nativeHandle = sockAcceptor->GetBoostHandle();
 
     ASSERT_TRUE(nativeHandle);
 }
@@ -60,5 +63,5 @@ void Network::BoostSockAcceptorHandleTesting ::WinSocketExceptionTest()
 
     TestingTypeSharedPtr sockAcceptor{ make_shared<TestingType>(GetBoostServerConfigurationStrategy()) };
 
-    [[maybe_unused]] auto value = sockAcceptor->GetWinSocket();
+    [[maybe_unused]] const auto value = sockAcceptor->GetWinSocket();
 }

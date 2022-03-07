@@ -38,13 +38,13 @@ int CubicPolynomialCurve3<Real>::GetNumVertices () const
 }
 
 template <typename Real>
-const Vector3D<Real>* CubicPolynomialCurve3<Real>::GetVertices () const
+const Vector3<Real>* CubicPolynomialCurve3<Real>::GetVertices () const
 {
     return mVertices;
 }
 
 template <typename Real>
-Vector3D<Real>* CubicPolynomialCurve3<Real>::GetVertices ()
+Vector3<Real>* CubicPolynomialCurve3<Real>::GetVertices ()
 {
     return mVertices;
 }
@@ -56,7 +56,7 @@ void CubicPolynomialCurve3<Real>::Tessellate (int level)
 	auto twoPowL = (1 << level);
     mNumVertices = twoPowL + 1;
     DELETE1(mVertices);
-    mVertices = nullptr;  // NEW1<Vector3D<Real> >(mNumVertices);
+    mVertices = nullptr;  // NEW1<Vector3<Real> >(mNumVertices);
 
     // Indices of endpoints, I[t].
     IntervalParameters IP;
@@ -64,7 +64,7 @@ void CubicPolynomialCurve3<Real>::Tessellate (int level)
     IP.I1 = twoPowL;
 
     // Vertices for subdivision.
-    Vector3D<Real>* X = mVertices;
+    Vector3<Real>* X = mVertices;
     X[IP.I0] = GetPosition(mTMin);
     X[IP.I1] = GetPosition(mTMax);
 
@@ -78,7 +78,7 @@ void CubicPolynomialCurve3<Real>::Tessellate (int level)
 }
 
 template <typename Real>
-void CubicPolynomialCurve3<Real>::Subdivide (int level, Real dsqr, Vector3D<Real>* X, IntervalParameters& IP)
+void CubicPolynomialCurve3<Real>::Subdivide (int level, Real dsqr, Vector3<Real>* X, IntervalParameters& IP)
 {
     // Subdivision index.
 	auto IMid = (IP.I0 + IP.I1) >> 1;

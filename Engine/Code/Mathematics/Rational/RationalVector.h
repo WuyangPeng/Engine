@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:44)
+///	引擎版本：0.8.0.2 (2022/02/11 17:11)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR_H
@@ -33,32 +33,32 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Rational& operator[](int index) const;
-        [[nodiscard]] Rational& operator[](int index);
+        NODISCARD const Rational& operator[](int index) const;
+        NODISCARD Rational& operator[](int index);
 
-        [[nodiscard]] const RationalVector operator-() const;
+        NODISCARD RationalVector operator-() const;
         RationalVector& operator+=(const RationalVector& rhs);
         RationalVector& operator-=(const RationalVector& rhs);
         RationalVector& operator*=(const Rational& scalar);
         RationalVector& operator/=(const Rational& scalar);
 
-        [[nodiscard]] Rational SquaredLength() const;
+        NODISCARD Rational SquaredLength() const;
 
     private:
         using ArrayType = std::array<Rational, VectorSize>;
 
     private:
-        ArrayType m_Tuple;
+        ArrayType tuple;
     };
 
     template <int VectorSize, int IntSize>
-    [[nodiscard]] SignRational<IntSize> Dot(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
+    NODISCARD SignRational<IntSize> Dot(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
 
     template <int VectorSize, int IntSize>
-    [[nodiscard]] bool operator==(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
+    NODISCARD bool operator==(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
 
     template <int VectorSize, int IntSize>
-    [[nodiscard]] bool operator<(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
+    NODISCARD bool operator<(const RationalVector<VectorSize, IntSize>& lhs, const RationalVector<VectorSize, IntSize>& rhs);
 
     template <int VectorSize, int IntSize>
     std::ostream& operator<<(std::ostream& os, const RationalVector<VectorSize, IntSize>& rhs);

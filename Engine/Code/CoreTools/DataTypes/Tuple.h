@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/03 10:20)
+///	引擎版本：0.8.0.1 (2022/01/10 13:29)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_H
@@ -40,34 +40,34 @@ namespace CoreTools
     public:
         Tuple() noexcept;
 
-        explicit Tuple(ParamType param0) noexcept;
-        Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<ParamType>);
-        Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept;
-        Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept;
+        explicit Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>);
+        Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>);
+        Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>);
+        Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Type& operator[](int index) const;
-        [[nodiscard]] Type& operator[](int index);
+        NODISCARD const Type& operator[](int index) const;
+        NODISCARD Type& operator[](int index);
 
-        [[nodiscard]] ArrayTypeConstIter begin() const noexcept;
-        [[nodiscard]] ArrayTypeConstIter end() const noexcept;
+        NODISCARD ArrayTypeConstIter begin() const noexcept;
+        NODISCARD ArrayTypeConstIter end() const noexcept;
 
-        [[nodiscard]] Type GetSum() const noexcept;
+        NODISCARD Type GetSum() const noexcept;
 
     private:
-        ArrayType m_Tuple;
-    };    
+        ArrayType tuple;
+    };
 
     // 类T可以是原生数据或数据类有下面的成员函数：
     // bool operator== (const T&,const T&);
     // bool operator< (const T&,const T&);
 
     template <int32_t Dimension, typename Type>
-    bool operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
+    NODISCARD bool operator==(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
 
     template <int32_t Dimension, typename Type>
-    bool operator<(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
+    NODISCARD bool operator<(const Tuple<Dimension, Type>& lhs, const Tuple<Dimension, Type>& rhs);
 
     template <int32_t Dimension, typename Type>
     std::ostream& operator<<(std::ostream& os, const Tuple<Dimension, Type>& tuple);

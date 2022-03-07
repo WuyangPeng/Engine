@@ -21,7 +21,7 @@ namespace Database
 
 		void NullCollectionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

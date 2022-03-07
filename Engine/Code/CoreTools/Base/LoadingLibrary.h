@@ -1,13 +1,12 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/26 20:45)
+///	引擎版本：0.8.0.1 (2022/01/12 14:27)
 
-// 打开动态链接库
 #ifndef CORE_TOOLS_BASE_LOADING_LIBRARY_H
 #define CORE_TOOLS_BASE_LOADING_LIBRARY_H
 

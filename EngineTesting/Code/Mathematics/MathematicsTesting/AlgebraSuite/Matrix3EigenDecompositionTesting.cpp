@@ -20,7 +20,9 @@ namespace Mathematics
 	template class Matrix3EigenDecomposition<float>;
 	template class Matrix3EigenDecomposition<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Matrix3EigenDecompositionTesting) 
 
 void Mathematics::Matrix3EigenDecompositionTesting
@@ -39,7 +41,7 @@ void Mathematics::Matrix3EigenDecompositionTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)	
 	{
-		DoubleMatrix3 firstMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),
+		Matrix3D firstMatrix{ randomDistribution(generator),randomDistribution(generator),randomDistribution(generator),
 							  0.0,randomDistribution(generator),randomDistribution(generator),
 							  0.0,0.0,randomDistribution(generator) };
 
@@ -49,10 +51,10 @@ void Mathematics::Matrix3EigenDecompositionTesting
 
 		auto eigenDecomposition = firstMatrix.EigenDecomposition(1e-10);
 
-		DoubleMatrix3 rotation = eigenDecomposition.GetRotation();
-		DoubleMatrix3 diagonal = eigenDecomposition.GetDiagonal();
+		Matrix3D rotation = eigenDecomposition.GetRotation();
+		Matrix3D diagonal = eigenDecomposition.GetDiagonal();
 
-		DoubleMatrix3 secondMatrix = rotation * diagonal * rotation.Transpose();
+		Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
 
 		ASSERT_TRUE(Approximate(firstMatrix, secondMatrix,1e-10));	
 	}	

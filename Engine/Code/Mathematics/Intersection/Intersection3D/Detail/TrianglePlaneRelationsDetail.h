@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/24 17:13)
+///	引擎版本：0.8.0.3 (2022/03/05 13:29)
 
 #ifndef MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H
@@ -13,11 +13,11 @@
 #include "TrianglePlaneRelations.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
-    : m_Distance{}, m_Sign{}, m_Positive{ 0 }, m_Negative{ 0 }, m_Zero{ 0 }
+    : distance{}, sign{}, positive{ 0 }, negative{ 0 }, zero{ 0 }
 {
     Relations(triangle, plane, epsilon);
 
@@ -28,46 +28,42 @@ Mathematics::TrianglePlaneRelations<Real>::TrianglePlaneRelations(const Triangle
 template <typename Real>
 void Mathematics::TrianglePlaneRelations<Real>::Relations(const Triangle3& triangle, const Plane3& plane, const Real epsilon)
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-
     // 计算三角形顶点到平面的带符号距离。 使用epsilon平面测试。
 
-    for (auto i = 0; i < sm_Size; ++i)
+    for (auto i = 0; i < size; ++i)
     {
-        m_Distance[i] = plane.DistanceTo(triangle.GetVertex(i));
+        distance.at(i) = plane.DistanceTo(triangle.GetVertex(i));
 
-        if (epsilon < m_Distance[i])
+        if (epsilon < distance.at(i))
         {
-            m_Sign[i] = NumericalValueSymbol::Positive;
-            ++m_Positive;
+            sign.at(i) = NumericalValueSymbol::Positive;
+            ++positive;
         }
-        else if (m_Distance[i] < -epsilon)
+        else if (distance.at(i) < -epsilon)
         {
-            m_Sign[i] = NumericalValueSymbol::Negative;
-            ++m_Negative;
+            sign.at(i) = NumericalValueSymbol::Negative;
+            ++negative;
         }
         else
         {
-            m_Distance[i] = Math::GetValue(0);
-            m_Sign[i] = NumericalValueSymbol::Zero;
-            ++m_Zero;
+            distance.at(i) = Math::GetValue(0);
+            sign.at(i) = NumericalValueSymbol::Zero;
+            ++zero;
         }
     }
-
-#include STSTEM_WARNING_POP
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::TrianglePlaneRelations<Real>::IsValid() const noexcept
 {
-    if (0 <= m_Positive && 0 <= m_Negative && 0 <= m_Zero)
+    if (0 <= positive && 0 <= negative && 0 <= zero)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -75,7 +71,7 @@ Real Mathematics::TrianglePlaneRelations<Real>::GetDistance(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Distance.at(index);
+    return distance.at(index);
 }
 
 template <typename Real>
@@ -83,7 +79,7 @@ Mathematics::NumericalValueSymbol Mathematics::TrianglePlaneRelations<Real>::Get
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Sign.at(index);
+    return sign.at(index);
 }
 
 template <typename Real>
@@ -91,7 +87,7 @@ int Mathematics::TrianglePlaneRelations<Real>::GetPositive() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Positive;
+    return positive;
 }
 
 template <typename Real>
@@ -99,7 +95,7 @@ int Mathematics::TrianglePlaneRelations<Real>::GetNegative() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Negative;
+    return negative;
 }
 
 template <typename Real>
@@ -107,7 +103,7 @@ int Mathematics::TrianglePlaneRelations<Real>::GetZero() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Zero;
+    return zero;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_TRIANGLE_PLANE_RELATIONS_DETAIL_H

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 18:04)
 
 #include "Network/NetworkExport.h"
 
@@ -20,8 +20,10 @@ using std::bind;
 using std::placeholders::_1;
 
 Network::HandleSetContainer::HandleSetContainer(const ConfigurationStrategy& configurationStrategy, ACEHandle acceptorHandle)
-    : m_ConfigurationStrategy{ configurationStrategy }, m_AcceptorHandle{ acceptorHandle },
-      m_HandleSetGroup{ HandleSet(configurationStrategy) }, m_CurrentIndex{ 0 }
+    : configurationStrategy{ configurationStrategy },
+      acceptorHandle{ acceptorHandle },
+      handleSetGroup{ HandleSet(configurationStrategy) },
+      currentIndex{ 0 }
 {
     Init();
 
@@ -30,16 +32,14 @@ Network::HandleSetContainer::HandleSetContainer(const ConfigurationStrategy& con
 
 void Network::HandleSetContainer::Init()
 {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    m_HandleSetGroup[m_CurrentIndex].SetBit(m_AcceptorHandle);
-#include STSTEM_WARNING_POP
+    handleSetGroup.at(currentIndex).SetBit(acceptorHandle);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Network::HandleSetContainer::IsValid() const noexcept
 {
-    if (0 <= m_CurrentIndex && m_CurrentIndex < gsl::narrow_cast<int>(m_HandleSetGroup.size()))
+    if (0 <= currentIndex && currentIndex < gsl::narrow_cast<int>(handleSetGroup.size()))
         return true;
     else
         return false;
@@ -47,57 +47,48 @@ bool Network::HandleSetContainer::IsValid() const noexcept
 
 #endif  // OPEN_CLASS_INVARIANT
 
-const Network::HandleSet Network::HandleSetContainer::GetCurrentHandleSet() const noexcept
+Network::HandleSet Network::HandleSetContainer::GetCurrentHandleSet() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    return m_HandleSetGroup[m_CurrentIndex];
-#include STSTEM_WARNING_POP
+    return handleSetGroup.at(currentIndex);
 }
 
 void Network::HandleSetContainer::SetBit(ACEHandle sockStreamHandle)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    auto setIndex = m_CurrentIndex;
+    auto setIndex = currentIndex;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    if (m_HandleSetGroup[setIndex].IsFdSetFull())
+    if (handleSetGroup.at(setIndex).IsFdSetFull())
     {
         Expansion();
-        setIndex = boost::numeric_cast<int>(m_HandleSetGroup.size() - 1);
+        setIndex = boost::numeric_cast<int>(handleSetGroup.size() - 1);
     }
 
-    m_HandleSetGroup[setIndex].SetBit(sockStreamHandle);
-#include STSTEM_WARNING_POP
+    handleSetGroup.at(setIndex).SetBit(sockStreamHandle);
 }
 
 void Network::HandleSetContainer::ClearBit(ACEHandle sockStreamHandle)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    m_HandleSetGroup[m_CurrentIndex].ClearBit(sockStreamHandle);
-#include STSTEM_WARNING_POP
+    handleSetGroup.at(currentIndex).ClearBit(sockStreamHandle);
 }
 
 void Network::HandleSetContainer::ToNextIndex()
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    if (1 < m_HandleSetGroup.size())
+    if (1 < handleSetGroup.size())
     {
-        ++m_CurrentIndex;
+        ++currentIndex;
 
-        if (boost::numeric_cast<int>(m_HandleSetGroup.size()) <= m_CurrentIndex)
+        if (boost::numeric_cast<int>(handleSetGroup.size()) <= currentIndex)
         {
-            m_CurrentIndex = 0;
+            currentIndex = 0;
 
-            m_HandleSetGroup.erase(remove_if(m_HandleSetGroup.begin() + 1, m_HandleSetGroup.end(), bind(&HandleSet::IsFdSetCountIsOne, _1)), m_HandleSetGroup.end());
+            handleSetGroup.erase(remove_if(handleSetGroup.begin() + 1, handleSetGroup.end(), bind(&HandleSet::IsFdSetCountIsOne, _1)), handleSetGroup.end());
         }
     }
 }
@@ -105,15 +96,13 @@ void Network::HandleSetContainer::ToNextIndex()
 // private
 void Network::HandleSetContainer::Expansion()
 {
-    auto endIndex = m_HandleSetGroup.size() - 1;
+    auto endIndex = handleSetGroup.size() - 1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    if (m_HandleSetGroup[endIndex].IsFdSetFull())
+    if (handleSetGroup.at(endIndex).IsFdSetFull())
     {
-        m_HandleSetGroup.emplace_back(m_ConfigurationStrategy);
-        endIndex = m_HandleSetGroup.size() - 1;
-        m_HandleSetGroup[endIndex].SetBit(m_AcceptorHandle);
+        handleSetGroup.emplace_back(configurationStrategy);
+
+        endIndex = handleSetGroup.size() - 1;
+        handleSetGroup.at(endIndex).SetBit(acceptorHandle);
     }
-#include STSTEM_WARNING_POP
 }

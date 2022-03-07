@@ -283,14 +283,14 @@ const Rendering::BlendTransformControllerImpl::Matrix Rendering::BlendTransformC
 	const auto firstRotate = firstTransform.GetRotate();
 	const auto secondRotate = secondTransform.GetRotate();
 
-	const Mathematics::FloatAQuaternion firstQuaternion{ firstRotate };
-        const Mathematics::FloatAQuaternion secondQuaternion{ secondRotate };
+	const Mathematics::AQuaternionF firstQuaternion{ firstRotate };
+        const Mathematics::AQuaternionF secondQuaternion{ secondRotate };
 	if (Dot(firstQuaternion,secondQuaternion) < 0.0f)
 	{
 		//secondQuaternion = -secondQuaternion;
 	}
 
-	Mathematics::FloatAQuaternion blendQuaternion;
+	Mathematics::AQuaternionF blendQuaternion;
 
 	if (m_GeometricRotation)
 	{
@@ -327,16 +327,16 @@ const Rendering::BlendTransformControllerImpl::APoint Rendering::BlendTransformC
 		{
 			auto s0 = firstScale[i];
 			auto s1 = secondScale[i];
-			auto absS0 = Mathematics::FloatMath::FAbs(s0);
-			auto absS1 = Mathematics::FloatMath::FAbs(s1);
+			auto absS0 = Mathematics::MathF::FAbs(s0);
+			auto absS1 = Mathematics::MathF::FAbs(s1);
 
-			if (Mathematics::FloatMath::GetZeroTolerance() < absS0 && Mathematics::FloatMath::GetZeroTolerance() < absS1)
+			if (Mathematics::MathF::GetZeroTolerance() < absS0 && Mathematics::MathF::GetZeroTolerance() < absS1)
 			{
-                            const auto sign0 = Mathematics::FloatMath::Sign(s0);
-                            const auto sign1 = Mathematics::FloatMath::Sign(s1);
+                            const auto sign0 = Mathematics::MathF::Sign(s0);
+                            const auto sign1 = Mathematics::MathF::Sign(s1);
 			 
-				auto pow0 = Mathematics::FloatMath::Pow(absS0, oneMinusWeight);
-				auto pow1 = Mathematics::FloatMath::Pow(absS1, m_Weight);
+				auto pow0 = Mathematics::MathF::Pow(absS0, oneMinusWeight);
+				auto pow1 = Mathematics::MathF::Pow(absS1, m_Weight);
 
 				blendScale[i] = sign0 * (sign1 * pow0) * pow1;
 			}

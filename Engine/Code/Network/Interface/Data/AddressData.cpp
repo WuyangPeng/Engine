@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 10:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 17:13)
 
 #include "Network/NetworkExport.h"
 
@@ -19,31 +19,31 @@
 using std::string;
 
 Network::AddressData::AddressData(const string& address, int port)
-    : m_Address{ address }, m_Port{ port }
+    : address{ address }, port{ port }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::AddressData::AddressData(const SockStream& sockStream)
-    : m_Address{ sockStream.GetRemoteAddress() }, m_Port{ sockStream.GetRemotePort() }
+    : address{ sockStream.GetRemoteAddress() }, port{ sockStream.GetRemotePort() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::AddressData::AddressData(const BoostSockAcceptor& boostSockAcceptor)
-    : m_Address{ boostSockAcceptor.GetAddress() }, m_Port{ boostSockAcceptor.GetPort() }
+    : address{ boostSockAcceptor.GetAddress() }, port{ boostSockAcceptor.GetPort() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::AddressData::AddressData(const BoostSockStream& boostSockStream)
-    : m_Address{ boostSockStream.GetRemoteAddress() }, m_Port{ boostSockStream.GetRemotePort() }
+    : address{ boostSockStream.GetRemoteAddress() }, port{ boostSockStream.GetRemotePort() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::AddressData::AddressData(const SockAddress& sockAddress)
-    : m_Address{ sockAddress.GetAddress() }, m_Port{ sockAddress.GetPort() }
+    : address{ sockAddress.GetAddress() }, port{ sockAddress.GetPort() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -54,12 +54,12 @@ string Network::AddressData::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Address;
+    return address;
 }
 
 int Network::AddressData::GetPort() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Port;
+    return port;
 }

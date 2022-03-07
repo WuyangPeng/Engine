@@ -23,7 +23,14 @@ namespace Mathematics
 	template class PolarDecompositionValue<float>;
 	template class PolarDecompositionValue<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolarDecompositionValueTesting) 
 
 void Mathematics::PolarDecompositionValueTesting
@@ -42,7 +49,7 @@ void Mathematics::PolarDecompositionValueTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleMatrix3 matrix;
+		Matrix3D matrix;
 
 		for (int m = 0; m < 3;++m)
 		{
@@ -52,14 +59,14 @@ void Mathematics::PolarDecompositionValueTesting
 			}
 		}
 
-		DoublePolarDecompositionValue polarDecompositionValue(matrix);
+		PolarDecompositionValueD polarDecompositionValue(matrix);
 
-		DoubleMatrix3 orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
-		DoubleMatrix3 symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
+		Matrix3D orthogonalMatrix = polarDecompositionValue.GeOrthogonalMatrix();
+		Matrix3D symmetryMatrix = polarDecompositionValue.GetSymmetryMatrix();
 	 
-		DoubleMatrix3 result = orthogonalMatrix * symmetryMatrix;	 
+		Matrix3D result = orthogonalMatrix * symmetryMatrix;	 
 
-		typedef bool(*VariableMatrixdApproximate)(const DoubleMatrix3& lhs,const DoubleMatrix3& rhs,const double epsilon);
+		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs,const double epsilon);
 
 		VariableMatrixdApproximate function = Approximate<double>;
 

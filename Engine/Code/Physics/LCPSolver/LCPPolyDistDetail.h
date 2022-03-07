@@ -143,7 +143,7 @@ namespace Physics
         PHYSICS_LCPPOLYDIST_FUNCTION(PrintMatrices(M, Q));
 
         int tryNumber = 0;
-        double distance = -Mathematics::DoubleMath::sm_MaxReal;
+        double distance = -Mathematics::MathD::maxReal;
         while (processing)
         {
             double* zResult = nullptr;  // NEW1<double>(mNumEquations);
@@ -707,10 +707,10 @@ namespace Physics
         }
         mLog << std::endl
              << " Solution points are separated by "
-             << Mathematics::FloatMath::Sqrt(distance);
+             << Mathematics::MathF::Sqrt(distance);
         mLog << " units." << std::endl;
         mLog << "The smallest distance between test points is "
-             << Mathematics::FloatMath::Sqrt((float)minValue);
+             << Mathematics::MathF::Sqrt((float)minValue);
         mLog << std::endl
              << "and occurs for (" << testPoints1[iLine][0];
         for (i = 1; i < mDimension; ++i)
@@ -736,7 +736,7 @@ namespace Physics
         {
             for (int k = 0; k < mDimension; ++k)
             {
-                points[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
+                points[j][k] *= 1.0 + mRandomWidth * Mathematics::RandomD::SymmetricRandom();
             }
         }
     }
@@ -748,18 +748,18 @@ namespace Physics
         int j, k;
         for (j = 0; j < mNumFaces1; ++j)
         {
-            mB1[j] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
+            mB1[j] *= 1.0 + mRandomWidth * Mathematics::RandomD::SymmetricRandom();
             for (k = 0; k < mDimension; ++k)
             {
-                mA1[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
+                mA1[j][k] *= 1.0 + mRandomWidth * Mathematics::RandomD::SymmetricRandom();
             }
         }
         for (j = 0; j < mNumFaces2; ++j)
         {
-            mB2[j] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
+            mB2[j] *= 1.0 + mRandomWidth * Mathematics::RandomD::SymmetricRandom();
             for (k = 0; k < mDimension; ++k)
             {
-                mA2[j][k] *= 1.0 + mRandomWidth * Mathematics::DoubleRandom::SymmetricRandom();
+                mA2[j][k] *= 1.0 + mRandomWidth * Mathematics::RandomD::SymmetricRandom();
             }
         }
     }

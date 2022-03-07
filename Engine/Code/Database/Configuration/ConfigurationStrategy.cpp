@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 20:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 11:24)
 
 #include "Database/DatabaseExport.h"
 
@@ -19,17 +19,33 @@ using std::map;
 using std::string;
 using std::vector;
 
-Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port,
-                                                       const string& hostName, const string& userName, const string& password)
+Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy,
+                                                       const string& ip,
+                                                       int port,
+                                                       const string& hostName,
+                                                       const string& userName,
+                                                       const string& password)
     : impl{ wrappersStrategy, ip, port, hostName, userName, password }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
-Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy, const string& ip, int port, const string& hostName,
-                                                       const string& userName, const string& password, bool pooling, int poolMaxSize,
-                                                       int poolQueueTimeout, int poolMaxIdleTime, const FlagsOption& flagsOption, const StringOption& stringOption,
-                                                       const BooleanOption& booleanOption, const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping)
+Database::ConfigurationStrategy::ConfigurationStrategy(WrappersStrategy wrappersStrategy,
+                                                       const string& ip,
+                                                       int port,
+                                                       const string& hostName,
+                                                       const string& userName,
+                                                       const string& password,
+                                                       bool pooling,
+                                                       int poolMaxSize,
+                                                       int poolQueueTimeout,
+                                                       int poolMaxIdleTime,
+                                                       const FlagsOption& flagsOption,
+                                                       const StringOption& stringOption,
+                                                       const BooleanOption& booleanOption,
+                                                       const IntOption& intOption,
+                                                       const SSLOption& sslOption,
+                                                       const DBMapping& dbMapping)
     : impl{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize, poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOption, booleanOption, intOption, sslOption, dbMapping }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;

@@ -23,7 +23,7 @@ namespace Mathematics
 		void MultipleTest();
 		void Int32Test();
 	
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

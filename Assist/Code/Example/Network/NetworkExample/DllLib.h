@@ -7,7 +7,7 @@
 #ifndef NETWORK_EXAMPLE_DLL_LIB_H
 #define NETWORK_EXAMPLE_DLL_LIB_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(TCRE_USE_MSVC)
 

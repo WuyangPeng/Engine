@@ -24,7 +24,7 @@ namespace Mathematics
 		void MainTest();  
 		void SolverTest();
 		
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 
 		static const std::vector<double> OdeRungeKutta4Function(double tIn, const std::vector<double>& xIn,const OdeRungeKutta4Testing* odeEulerTesting);
 

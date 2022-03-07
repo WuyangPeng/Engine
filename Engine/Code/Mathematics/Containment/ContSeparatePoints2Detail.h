@@ -12,7 +12,7 @@
 
 template <typename Real>
 Mathematics::SeparatePoints2<Real>
-	::SeparatePoints2(const std::vector<Vector2D<Real> >& points0, const std::vector<Vector2D<Real> >& points1, Line2<Real>& separatingLine)
+	::SeparatePoints2(const std::vector<Vector2<Real> >& points0, const std::vector<Vector2<Real> >& points1, Line2<Real>& separatingLine)
 {
     // Construct convex hull of point set 0.
 	ConvexHull2<Real> hull0{ points0, 0.001f, false, QueryType::Int64 };
@@ -28,7 +28,7 @@ Mathematics::SeparatePoints2<Real>
 
     // Test edges of hull 0 for possible separation of points.
     int j0, j1, i0, i1, side0, side1;
-    Vector2D<Real> lineNormal;
+    Vector2<Real> lineNormal;
     Real lineConstant;
     for (j1 = 0, j0 = numEdges0-1; j1 < numEdges0; j0 = j1++)
     {
@@ -42,8 +42,8 @@ Mathematics::SeparatePoints2<Real>
 		direction.Normalize();
 
 		separatingLine = Line2<Real>(origin, direction);
-		lineNormal = Vector2DTools<Real>::GetPerp(direction);
-		lineConstant = Vector2DTools<Real>::DotProduct(lineNormal,separatingLine.GetOrigin());
+		lineNormal = Vector2Tools<Real>::GetPerp(direction);
+		lineConstant = Vector2Tools<Real>::DotProduct(lineNormal,separatingLine.GetOrigin());
 
         // Determine if hull 1 is on same side of line.
         side1 = OnSameSide(lineNormal, lineConstant, numEdges1, edges1,  points1);
@@ -75,8 +75,8 @@ Mathematics::SeparatePoints2<Real>
 
 		separatingLine = Line2<Real>(origin, direction);
 
-		lineNormal = Vector2DTools<Real>::GetPerp(direction);
-		lineConstant = Vector2DTools<Real>::DotProduct(lineNormal,separatingLine.GetOrigin());
+		lineNormal = Vector2Tools<Real>::GetPerp(direction);
+		lineConstant = Vector2Tools<Real>::DotProduct(lineNormal,separatingLine.GetOrigin());
 
         // Determine if hull 0 is on same side of line.
         side0 = OnSameSide(lineNormal, lineConstant, numEdges0, edges0, points0);
@@ -106,7 +106,7 @@ Mathematics::SeparatePoints2<Real>
 
 template <typename Real>
 int Mathematics::SeparatePoints2<Real>
-	::OnSameSide(const Vector2D<Real>& lineNormal,Real lineConstant, int numEdges, const int* edges,const std::vector<Vector2D<Real> >& points)
+	::OnSameSide(const Vector2<Real>& lineNormal,Real lineConstant, int numEdges, const int* edges,const std::vector<Vector2<Real> >& points)
 {
     // Test whether all points on same side of line Dot(N,X) = c.
     Real c0;
@@ -114,7 +114,7 @@ int Mathematics::SeparatePoints2<Real>
 
     for (int i1 = 0, i0 = numEdges-1; i1 < numEdges; i0 = i1++)
     {
-        c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i0]]);
+        c0 = Vector2Tools<Real>::DotProduct(lineNormal,points[edges[i0]]);
         if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             ++posSide;
@@ -130,7 +130,7 @@ int Mathematics::SeparatePoints2<Real>
             return 0;
         }
 
-		c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i1]]);
+		c0 = Vector2Tools<Real>::DotProduct(lineNormal,points[edges[i1]]);
 		if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             ++posSide;
@@ -152,13 +152,13 @@ int Mathematics::SeparatePoints2<Real>
 
 template <typename Real>
 int Mathematics::SeparatePoints2<Real>
-	::WhichSide(const Vector2D<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges,const std::vector<Vector2D<Real> >& points)
+	::WhichSide(const Vector2<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges,const std::vector<Vector2<Real> >& points)
 {
     // Establish which side of line hull is on.
     Real c0;
     for (auto i1 = 0, i0 = numEdges-1; i1 < numEdges; i0 = i1++)
     {
-		c0 = Vector2DTools<Real>::DotProduct(lineNormal,points[edges[i0]]);
+		c0 = Vector2Tools<Real>::DotProduct(lineNormal,points[edges[i0]]);
         if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             // Hull on positive side.
@@ -170,7 +170,7 @@ int Mathematics::SeparatePoints2<Real>
             return -1;
         }
 
-		c0 = Vector2DTools<Real>::DotProduct( lineNormal,points[edges[i1]]);
+		c0 = Vector2Tools<Real>::DotProduct( lineNormal,points[edges[i1]]);
 		if (c0 > lineConstant + Math<Real>::GetZeroTolerance())
         {
             // Hull on positive side.

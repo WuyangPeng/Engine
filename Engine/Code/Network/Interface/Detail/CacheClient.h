@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 19:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 14:23)
 
 #ifndef NETWORK_NETWORK_INTERFACE_CACHE_CLIENT_H
 #define NETWORK_NETWORK_INTERFACE_CACHE_CLIENT_H
@@ -33,7 +33,7 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] uint64_t Connect() override;
+        NODISCARD uint64_t Connect() override;
         void AsyncConnect() override;
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
@@ -44,22 +44,22 @@ namespace Network
         void ImmediatelySend(uint64_t socketID) override;
         void ImmediatelyAsyncSend(uint64_t socketID) override;
 
-        [[nodiscard]] uint64_t GetSocketID() const noexcept override;
+        NODISCARD uint64_t GetSocketID() const noexcept override;
 
     private:
         using BufferType = std::vector<char>;
 
     private:
-        [[nodiscard]] bool EventFunction(const CallbackParameters& callbackParameters) override;
+        NODISCARD bool EventFunction(const CallbackParameters& callbackParameters) override;
 
     private:
-        SockConnector m_SockConnector;
-        SockStreamSharedPtr m_SockStream;
-        BufferSendStream m_BufferSendStream;
-        SockAddressSharedPtr m_SockAddress;
+        SockConnector sockConnector;
+        SockStreamSharedPtr sockStream;
+        BufferSendStream bufferSendStream;
+        SockAddressSharedPtr sockAddress;
         uint64_t m_SocketID;
-        MessageBufferSharedPtr m_SendBuffer;
-        MessageBufferSharedPtr m_ReceiveBuffer;
+        MessageBufferSharedPtr sendBuffer;
+        MessageBufferSharedPtr receiveBuffer;
     };
 }
 

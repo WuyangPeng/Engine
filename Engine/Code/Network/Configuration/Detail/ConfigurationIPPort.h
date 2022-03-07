@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 11:40)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_PARAMETER_IMPL_H
@@ -22,17 +22,17 @@ namespace Network
         using ClassType = ConfigurationIPPort;
 
     public:
-        ConfigurationIPPort(const std::string& ip, int port);
+        ConfigurationIPPort(std::string ip, int port) noexcept;
         ConfigurationIPPort() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] std::string GetIP() const;
-        [[nodiscard]] int GetPort() const noexcept;
+        NODISCARD std::string GetIP() const;
+        NODISCARD int GetPort() const noexcept;
 
     private:
-        std::string m_IP;
-        int m_Port;
+        std::string ip;
+        int port;
     };
 }
 

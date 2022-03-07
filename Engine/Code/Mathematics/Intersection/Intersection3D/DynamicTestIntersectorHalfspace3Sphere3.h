@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/14 14:34)
+///	引擎版本：0.8.0.3 (2022/03/01 11:27)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_H
@@ -23,36 +23,37 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicTestIntersectorHalfspace3Sphere3 : public DynamicIntersector<Real, Vector3D>
+    class DynamicTestIntersectorHalfspace3Sphere3 : public DynamicIntersector<Real, Vector3>
     {
     public:
         using ClassType = DynamicTestIntersectorHalfspace3Sphere3<Real>;
-        using ParentType = DynamicIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Sphere3 = Sphere3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
-        DynamicTestIntersectorHalfspace3Sphere3(const Plane3& halfspace, const Sphere3& sphere, Real tmax,
-                                                const Vector3D& lhsVelocity, const Vector3D& rhsVelocity, const Real epsilon = Math::GetZeroTolerance());
+        DynamicTestIntersectorHalfspace3Sphere3(const Plane3& halfspace,
+                                                const Sphere3& sphere,
+                                                Real tmax,
+                                                const Vector3& lhsVelocity,
+                                                const Vector3& rhsVelocity,
+                                                const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Plane3 GetHalfspace() const noexcept;
-        [[nodiscard]] const Sphere3 GetSphere() const noexcept;
+        NODISCARD Plane3 GetHalfspace() const noexcept;
+        NODISCARD Sphere3 GetSphere() const noexcept;
 
     private:
         void Test();
 
     private:
-        Plane3 m_Halfspace;
-        Sphere3 m_Sphere;
+        Plane3 halfspace;
+        Sphere3 sphere;
     };
-
-    using FloatDynamicTestIntersectorHalfspace3Sphere3 = DynamicTestIntersectorHalfspace3Sphere3<float>;
-    using DoubleDynamicTestIntersectorHalfspace3Sphere3 = DynamicTestIntersectorHalfspace3Sphere3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR_HALFSPACE3_SPHERE3_H

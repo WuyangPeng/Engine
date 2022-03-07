@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 10:13)
+///	引擎版本：0.8.0.2 (2022/02/07 16:06)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_H
@@ -19,7 +19,7 @@
 
 #include "AlgebraFwd.h"
 #include "Matrix2EigenDecomposition.h"
-#include "Vector2D.h"
+#include "Vector2.h"
 #include "Flags/MatrixFlags.h"
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -36,25 +36,21 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Matrix2<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
+        using VectorIndex = typename Vector2::PointIndex;
+
+        static constexpr auto xIndex = Vector2::xIndex;
+        static constexpr auto yIndex = Vector2::yIndex;
+        static constexpr auto vectorSize = Vector2::pointSize;
+        static constexpr auto matrixSize = vectorSize * Vector2::pointSize;
+
         using Math = Math<Real>;
+        using Matrix3 = Matrix3<Real>;
         using Matrix2EigenDecomposition = Matrix2EigenDecomposition<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
-
-        enum class VectorIndex
-        {
-            X = 0,
-            Y,
-            Size
-        };
-
-        static constexpr auto sm_X = System::EnumCastUnderlying(VectorIndex::X);
-        static constexpr auto sm_Y = System::EnumCastUnderlying(VectorIndex::Y);
-        static constexpr auto sm_VectorSize = System::EnumCastUnderlying(VectorIndex::Size);
-        static constexpr auto sm_MatrixSize = sm_VectorSize * Vector2D::sm_PointSize;
-        using ArrayType = std::array<Real, sm_MatrixSize>;
+        using Vector2Tools = Vector2Tools<Real>;
         using ContainerType = std::vector<Real>;
-        using Vector2DContainerType = std::vector<Vector2D>;
+        using ArrayType = std::array<Real, matrixSize>;
+        using Vector2ContainerType = std::vector<Vector2>;
 
     public:
         // 如果标志为MatrixFlagsZero，创建零矩阵，否则创建单位矩阵。
@@ -69,17 +65,17 @@ namespace Mathematics
         {
         }
 
-        // 创建矩阵来自数组数字。
-        // 输入数组是基于MatrixTypeFlags的输入的解释
-        // MatrixTypeFlagsRow:  entry[0..3] = { m00,m01,m10,m11 }  [row major]
-        // MatrixTypeFlagsColumn: entry[0..3] = { m00,m10,m01,m11 }  [column major]
+        /// 创建矩阵来自数组数字。
+        /// 输入数组是基于MatrixTypeFlags的输入的解释
+        /// MatrixTypeFlagsRow:  entry[0..3] = { m00,m01,m10,m11 }  [row major]
+        /// MatrixTypeFlagsColumn: entry[0..3] = { m00,m10,m01,m11 }  [column major]
         Matrix2(const ContainerType& entry, MatrixMajorFlags majorFlag);
 
-        // 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
-        // MatrixTypeFlagsRow：向量是矩阵的行
-        // MatrixTypeFlagsColumn：向量是矩阵的列
-        Matrix2(const Vector2D& vector0, const Vector2D& vector1, MatrixMajorFlags majorFlag);
-        explicit Matrix2(const Vector2DContainerType& vectors, MatrixMajorFlags majorFlag = MatrixMajorFlags::Column);
+        /// 创建基于输入矢量的矩阵。MatrixMajorFlags解释为
+        /// MatrixTypeFlagsRow：向量是矩阵的行
+        /// MatrixTypeFlagsColumn：向量是矩阵的列
+        Matrix2(const Vector2& vector0, const Vector2& vector1, MatrixMajorFlags majorFlag);
+        explicit Matrix2(const Vector2ContainerType& vectors, MatrixMajorFlags majorFlag = MatrixMajorFlags::Column);
 
         // 创建一个对角矩阵, member01 = member10 = 0.
         constexpr Matrix2(Real member00, Real member11) noexcept
@@ -91,7 +87,7 @@ namespace Mathematics
         explicit Matrix2(Real angle) noexcept;
 
         // 创建一个张量积 U * V^T
-        Matrix2(const Vector2D& vector0, const Vector2D& vector1) noexcept;
+        Matrix2(const Vector2& vector0, const Vector2& vector1) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
@@ -100,43 +96,46 @@ namespace Mathematics
         void MakeIdentity() noexcept;
         void MakeDiagonal(Real member00, Real member11) noexcept;
         void MakeRotation(Real angle) noexcept;
-        void MakeTensorProduct(const Vector2D& lhs, const Vector2D& rhs) noexcept;
+        void MakeTensorProduct(const Vector2& lhs, const Vector2& rhs) noexcept;
 
-        [[nodiscard]] const Vector2D& operator[](int row) const;
-        [[nodiscard]] Vector2D& operator[](int row);
-        [[nodiscard]] const Real& operator()(int row, int column) const;
-        [[nodiscard]] Real& operator()(int row, int column);
+        NODISCARD const Vector2& operator[](int row) const;
+        NODISCARD Vector2& operator[](int row);
+        NODISCARD const Real& operator()(int row, int column) const;
+        NODISCARD Real& operator()(int row, int column);
 
         template <int Row, int Column>
-        [[nodiscard]] Real GetValue() const noexcept;
+        NODISCARD Real GetValue() const noexcept;
 
         template <int Row, int Column>
         void SetValue(Real value) noexcept;
 
-        [[nodiscard]] const Matrix2 operator-() const noexcept;
+        NODISCARD Matrix2 operator-() const noexcept;
         Matrix2& operator+=(const Matrix2& rhs) noexcept;
         Matrix2& operator-=(const Matrix2& rhs) noexcept;
         Matrix2& operator*=(Real scalar) noexcept;
         Matrix2& operator/=(Real scalar) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // lhs^T * M * rhs
-        [[nodiscard]] Real QuadraticForm(const Vector2D& lhs, const Vector2D& rhs) const noexcept;
+        NODISCARD Real QuadraticForm(const Vector2& lhs, const Vector2& rhs) const noexcept;
 
         // M^T
-        [[nodiscard]] const Matrix2 Transpose() const noexcept;
+        NODISCARD Matrix2 Transpose() const noexcept;
 
         // M * rhs
         Matrix2& operator*=(const Matrix2& rhs) noexcept;
 
         // 其它运算
-        [[nodiscard]] const Matrix2 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
-        [[nodiscard]] const Matrix2 Adjoint() const noexcept;
-        [[nodiscard]] Real Determinant() const noexcept;
+        NODISCARD Matrix2 Inverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Matrix2 Adjoint() const noexcept;
+        NODISCARD Real Determinant() const noexcept;
+
+        NODISCARD Matrix2 GaussianEliminationInverse(const Real epsilon = Math::GetZeroTolerance()) const;
+        NODISCARD Real GaussianEliminationDeterminant(const Real epsilon = Math::GetZeroTolerance()) const;
 
         // 矩阵必须是一个旋转矩阵，下面函数才有效。
         // Orthonormalize函数使用Gram-Schmidt正交化施加到所述旋转矩阵。
         // 角度必须为弧度，而不是度数。
-        [[nodiscard]] Real ExtractAngle() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Real ExtractAngle() const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
         void Orthonormalize();
 
         // 矩阵必须是对称矩阵。
@@ -144,86 +143,91 @@ namespace Mathematics
         // D = diag(d0,d1)是一个对角矩阵，这里对角线项为d0和d1。
         // 特征向量u[i]对应的特征向量d[i]。特征值排序为d0 <= d1。
         // 返回值的第一部分为rotation，第二部分为diagonal。
-        [[nodiscard]] const Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD Matrix2EigenDecomposition EigenDecomposition(const Real epsilon = Math::GetZeroTolerance()) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // 特殊矩阵。
-        [[nodiscard]] static constexpr Matrix2 GetZero()
+        NODISCARD static constexpr Matrix2 GetZero()
         {
             return Matrix2{ MatrixInitType::Zero };
         }
 
-        [[nodiscard]] static constexpr Matrix2 GetIdentity()
+        NODISCARD static constexpr Matrix2 GetIdentity()
         {
             return Matrix2{ MatrixInitType::Identity };
         }
 
-        [[nodiscard]] const ArrayType GetCoordinate() const noexcept;
+        NODISCARD ArrayType GetCoordinate() const noexcept;
         void Set(const ArrayType& coordinate);
 
+        NODISCARD ContainerType GetContainer() const;
+
+        NODISCARD Matrix3 Lift() const;
+        NODISCARD Real Trace() const noexcept;
+
     private:
-        [[nodiscard]] static constexpr Vector2D Create(MatrixInitType flag, VectorIndex vectorIndex)
+        NODISCARD static constexpr Vector2 Create(MatrixInitType flag, VectorIndex vectorIndex)
         {
             if (flag == MatrixInitType::Zero)
             {
-                return Vector2D{};
+                return Vector2{};
             }
             else if (vectorIndex == VectorIndex::X)
             {
-                return Vector2D::GetUnitX();
+                return Vector2::GetUnitX();
             }
             else
             {
-                return Vector2D::GetUnitY();
+                return Vector2::GetUnitY();
             }
         }
 
         template <int Row>
-        [[nodiscard]] const Vector2D& GetVector() const noexcept;
+        NODISCARD const Vector2& GetVector() const noexcept;
 
         template <int Row>
-        [[nodiscard]] Vector2D& GetVector() noexcept;
+        NODISCARD Vector2& GetVector() noexcept;
 
         template <int Column>
-        [[nodiscard]] typename Vector2D::GetCoordinateFunction GetVectorGetFunction() const noexcept;
+        NODISCARD typename Vector2::GetCoordinateFunction GetVectorGetFunction() const noexcept;
 
         template <int Column>
-        [[nodiscard]] typename Vector2D::SetCoordinateFunction GetVectorSetFunction() const noexcept;
+        NODISCARD typename Vector2::SetCoordinateFunction GetVectorSetFunction() const noexcept;
 
     private:
         // 存储为行主序。
-        Vector2D m_X;
-        Vector2D m_Y;
+        Vector2 m_X;
+        Vector2 m_Y;
     };
 
     // mat * mat
     template <typename Real>
-    [[nodiscard]] const Matrix2<Real> operator*(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
+    NODISCARD Matrix2<Real> operator*(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
 
     // mat * vec
     template <typename Real>
-    [[nodiscard]] const Vector2D<Real> operator*(const Matrix2<Real>& matrix, const Vector2D<Real>& vector) noexcept;
+    NODISCARD Vector2<Real> operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector) noexcept;
 
     // vec^T * mat
     template <typename Real>
-    [[nodiscard]] const Vector2D<Real> operator*(const Vector2D<Real>& vector, const Matrix2<Real>& matrix) noexcept;
+    NODISCARD Vector2<Real> operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix) noexcept;
 
     // lhs^T * rhs
     template <typename Real>
-    [[nodiscard]] const Matrix2<Real> TransposeTimes(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
+    NODISCARD Matrix2<Real> TransposeTimes(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
 
     // lhs * rhs^T
     template <typename Real>
-    [[nodiscard]] const Matrix2<Real> TimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
+    NODISCARD Matrix2<Real> TimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
 
     // lhs^T * rhs^T
     template <typename Real>
-    [[nodiscard]] const Matrix2<Real> TransposeTimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
+    NODISCARD Matrix2<Real> TransposeTimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept;
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
+    NODISCARD bool Approximate(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs, const Real epsilon = Math<Real>::GetZeroTolerance()) noexcept;
 
-    using FloatMatrix2 = Matrix2<float>;
-    using DoubleMatrix2 = Matrix2<double>;
+    using Matrix2F = Matrix2<float>;
+    using Matrix2D = Matrix2<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX2_H

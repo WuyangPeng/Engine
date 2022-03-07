@@ -12,7 +12,7 @@
 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
 #include "Rendering/Resources/VertexBufferAccessor.h"
@@ -68,7 +68,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
 
             if (vba.HasNormal())
             {
-                Mathematics::FloatVector3D pos, tan0, tan1, normal;
+                Mathematics::Vector3F pos, tan0, tan1, normal;
                 mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
 
                 //vba.Normal<Mathematics::Vector3Df>(i) = normal;
@@ -80,7 +80,7 @@ Rendering::RectangleSurface ::RectangleSurface(Mathematics::ParametricSurfacef* 
             }
 
             constexpr int numTCoords = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
-            const Mathematics::FloatVector2D tcoord((*tcoordMin)[0] + tuDelta * uIncr, (*tcoordMin)[1] + tvDelta * vIncr);
+            const Mathematics::Vector2F tcoord((*tcoordMin)[0] + tuDelta * uIncr, (*tcoordMin)[1] + tvDelta * vIncr);
             for (int unit = 0; unit < numTCoords; ++unit)
             {
                 if (vba.HasTextureCoord(unit))
@@ -153,7 +153,7 @@ void Rendering::RectangleSurface ::UpdateSurface()
 
             if (vba.HasNormal())
             {
-                Mathematics::FloatVector3D pos, tan0, tan1, normal;
+                Mathematics::Vector3F pos, tan0, tan1, normal;
                 mSurface->GetFrame(u, v, pos, tan0, tan1, normal);
 
                 // vba.Normal<Mathematics::Vector3Df>(i) = normal;

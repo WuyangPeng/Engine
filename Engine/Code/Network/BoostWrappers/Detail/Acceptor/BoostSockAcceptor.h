@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 16:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 18:27)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SOCK_ACCEPTOR_H
@@ -30,31 +30,30 @@ namespace Network
 
         BoostSockAcceptor(const BoostSockAcceptor& rhs) = delete;
         BoostSockAcceptor& operator=(const BoostSockAcceptor& rhs) = delete;
-
         BoostSockAcceptor(BoostSockAcceptor&& rhs) noexcept;
         BoostSockAcceptor& operator=(BoostSockAcceptor&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream) override;
-        [[nodiscard]] bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        NODISCARD bool Accept(SockStream& sockStream) override;
+        NODISCARD bool Accept(SockStream& sockStream, SockAddress& sockAddress) override;
 
         // 异步回调来自另一个线程，需要对事件管理进行加锁处理。
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) override;
         void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        [[nodiscard]] BoostHandleType GetBoostHandle() override;
+        NODISCARD BoostHandleType GetBoostHandle() override;
 
-        [[nodiscard]] bool EnableNonBlock() override;
+        NODISCARD bool EnableNonBlock() override;
 
-        [[nodiscard]] const std::string GetAddress() const override;
-        [[nodiscard]] int GetPort() const override;
+        NODISCARD std::string GetAddress() const override;
+        NODISCARD int GetPort() const override;
 
     private:
         using AcceptorType = boost::asio::ip::tcp::acceptor;
 
     private:
-        AcceptorType m_Acceptor;
+        AcceptorType acceptor;
     };
 }
 

@@ -4,17 +4,23 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/25 19:37)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(MathematicsExample, TestingHelper, "数学例子")
+using namespace std::literals;
 
-// private
-void MathematicsExample::TestingHelper
-	::AddSuites()
+MathematicsExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "数学例子"s }
 {
-	 
+    InitSuite();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
- 
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(MathematicsExample, TestingHelper)
+
+void MathematicsExample::TestingHelper::InitSuite() noexcept 
+{
+}

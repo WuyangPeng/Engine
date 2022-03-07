@@ -1,91 +1,90 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.5 (2020/03/17 11:14)
 
-#include "TestingHelper.h"
 #include "Testing.h"
-#include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ScriptClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(Script, TestingHelper, "Ω≈±æ")
+using namespace std::literals;
 
-// private
-void Script::TestingHelper
-	::AddSuites()
+Script::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "Ω≈±æ"s }
 {
-	AddHelperSuite();
-	AddConfigurationSuite();
-	AddInterfaceSuite();
-	AddJavaSuite();
-	AddLuaSuite();
-	AddPerlSuite();
-	AddPythonSuite();
-	AddTCREScriptSuite();
+    InitSuite();
+
+    SCRIPT_SELF_CLASS_IS_VALID_1;
 }
 
-void Script::TestingHelper
-	::AddHelperSuite()
-{
-	ADD_TEST_BEGIN(helperSuite, "∞Ô÷˙");
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Script, TestingHelper)
 
-	ADD_TEST_END(helperSuite);
+void Script::TestingHelper::InitSuite()
+{
+    AddHelperSuite();
+    AddConfigurationSuite();
+    AddInterfaceSuite();
+    AddJavaSuite();
+    AddLuaSuite();
+    AddPerlSuite();
+    AddPythonSuite();
+    AddTCREScriptSuite();
 }
 
-void Script::TestingHelper
-	::AddConfigurationSuite()
+void Script::TestingHelper ::AddHelperSuite()
 {
-	ADD_TEST_BEGIN(configurationSuite, "≈‰÷√");
+    auto helperSuite = GenerateSuite("∞Ô÷˙");
 
-	ADD_TEST_END(configurationSuite);
+    AddSuite(helperSuite);
 }
 
-void Script::TestingHelper
-	::AddInterfaceSuite()
+void Script::TestingHelper ::AddConfigurationSuite()
 {
-	ADD_TEST_BEGIN(interfaceSuite, "Ω”ø⁄");
+    auto configurationSuite = GenerateSuite("≈‰÷√");
 
-	ADD_TEST_END(interfaceSuite);
+    AddSuite(configurationSuite);
 }
 
-void Script::TestingHelper
-	::AddJavaSuite()
+void Script::TestingHelper ::AddInterfaceSuite()
 {
-	ADD_TEST_BEGIN(javaSuite, "Java");
+    auto interfaceSuite = GenerateSuite("Ω”ø⁄");
 
-	ADD_TEST_END(javaSuite);
+    AddSuite(interfaceSuite);
 }
 
-void Script::TestingHelper
-	::AddLuaSuite()
+void Script::TestingHelper ::AddJavaSuite()
 {
-	ADD_TEST_BEGIN(luaSuite, "lua");
+    auto javaSuite = GenerateSuite("Java");
 
-	ADD_TEST_END(luaSuite);
+    AddSuite(javaSuite);
 }
 
-void Script::TestingHelper
-	::AddPerlSuite()
+void Script::TestingHelper ::AddLuaSuite()
 {
-	ADD_TEST_BEGIN(perlSuite, "perl");
+    auto luaSuite = GenerateSuite("lua");
 
-	ADD_TEST_END(perlSuite);
+    AddSuite(luaSuite);
 }
 
-void Script::TestingHelper
-	::AddPythonSuite()
+void Script::TestingHelper ::AddPerlSuite()
 {
-	ADD_TEST_BEGIN(pythonSuite, "python");
+    auto perlSuite = GenerateSuite("perl");
 
-	ADD_TEST_END(pythonSuite);
+    AddSuite(perlSuite);
 }
 
-void Script::TestingHelper
-	::AddTCREScriptSuite()
+void Script::TestingHelper ::AddPythonSuite()
 {
-	ADD_TEST_BEGIN(tcreScriptSuite, "tcreScript");
+    auto pythonSuite = GenerateSuite("python"); 
 
-	ADD_TEST_END(tcreScriptSuite);
+    AddSuite(pythonSuite);
 }
 
+void Script::TestingHelper ::AddTCREScriptSuite()
+{
+    auto tcreScriptSuite = GenerateSuite("tcreScript");  
+
+    AddSuite(tcreScriptSuite);
+}

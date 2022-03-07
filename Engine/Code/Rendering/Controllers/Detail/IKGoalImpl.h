@@ -28,7 +28,7 @@ namespace Rendering
 	{
 	public:
 		using ClassType = IKGoalImpl;
-		using APoint = Mathematics::FloatAPoint;
+		using APoint = Mathematics::APointF;
 		using Object = CoreTools::Object;
 		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
 		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;

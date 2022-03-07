@@ -1,11 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 15:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 17:56)
+
 #include "Network/NetworkExport.h"
 
 #ifdef NETWORK_USE_ACE
@@ -26,7 +27,7 @@ void Network::ACEMainManager::Run() noexcept
     NETWORK_CLASS_IS_VALID_9;
 }
 
-int Network::ACEMainManager::run_i([[maybe_unused]] int argc, [[maybe_unused]] ACE_TCHAR** argv) noexcept
+int Network::ACEMainManager::run_i(MAYBE_UNUSED int argc, MAYBE_UNUSED ACE_TCHAR** argv) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 

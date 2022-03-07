@@ -31,19 +31,19 @@ namespace Mathematics
 		// scaling the points to [0,2^{20}]^3.  The choice Query::QT_RATIONAL uses
 		// exact arithmetic, but is the slowest choice.  The choice Query::QT_REAL
 		// uses floating-point arithmetic, but is not robust in all cases.
-		Delaunay2 (const std::vector<Vector2D<Real> >& vertices, Real epsilon,bool owner, QueryType queryType);
+		Delaunay2 (const std::vector<Vector2<Real> >& vertices, Real epsilon,bool owner, QueryType queryType);
 		virtual ~Delaunay2 ();
 		
 		// The input vertex array.
-		const Vector2D<Real>* GetVertices () const;
+		const Vector2<Real>* GetVertices () const;
 		
 		// The number of unique vertices processed.
 		int GetNumUniqueVertices () const;
 		
 		// If GetDimension() returns 1, then the points lie on a line.  You must
 		// create a Delaunay1 object using the function provided.
-		const Vector2D<Real>& GetLineOrigin () const;
-		const Vector2D<Real>& GetLineDirection () const;
+		const Vector2<Real>& GetLineOrigin () const;
+		const Vector2<Real>& GetLineDirection () const;
 		Delaunay1<Real>* GetDelaunay1 () const;
 		
 		// Locate those triangle edges that do not share other triangles.  The
@@ -58,7 +58,7 @@ namespace Mathematics
 		// a point.  If there is a containing triangle, the returned value is a
 		// triangle index i with 0 <= i < riTQuantity.  If there is not a
 		// containing triangle, -1 is returned.
-		int GetContainingTriangle (const Vector2D<Real>& p) const;
+		int GetContainingTriangle (const Vector2<Real>& p) const;
 		
 		// If GetContainingTriangle returns a nonnegative value, the path of
 		// triangles searched for the containing triangles is stored in an array.
@@ -81,7 +81,7 @@ namespace Mathematics
 		// Get the vertices for triangle i.  The function returns 'true' if i is
 		// a valid triangle index, in which case the vertices are valid.
 		// Otherwise, the function returns 'false' and the vertices are invalid.
-		bool GetVertexSet (int i, Vector2D<Real> vertices[3]) const;
+		bool GetVertexSet (int i, Vector2<Real> vertices[3]) const;
 		
 		// Get the vertex indices for triangle i.  The function returns 'true' if
 		// i is a valid triangle index, in which case the vertices are valid.
@@ -98,7 +98,7 @@ namespace Mathematics
 		// The function returns 'true' if i is a valid triangle index, in which
 		// case the coordinates are valid.  Otherwise, the function returns
 		// 'false' and the coordinate array is invalid.
-		bool GetBarycentricSet (int i, const Vector2D<Real>& p, Real bary[3])  const;
+		bool GetBarycentricSet (int i, const Vector2<Real>& p, Real bary[3])  const;
 		
 		// Support for streaming to/from disk.
 		Delaunay2 (const System::TChar* filename);
@@ -124,23 +124,23 @@ namespace Mathematics
 		void Update (int i);
 		
 		// The input vertices.
-		std::vector<Vector2D<Real> > mVertices;
+		std::vector<Vector2<Real> > mVertices;
 		
 		// The number of unique vertices processed.
 		int mNumUniqueVertices;
 		
 		// The scaled input vertices.  This array and supporting data structures
 		// are for robust calculations.
-		std::vector<Vector2D<Real> > mSVertices;
+		std::vector<Vector2<Real> > mSVertices;
 		Query2<Real>* mQuery;
-		Vector2D<Real> mMin;
+		Vector2<Real> mMin;
 		Real mScale;
 		
 		// The current triangulation.
 		ETManifoldMesh mTriMesh;
 		
 		// The line of containment if the dimension is 1.
-		Vector2D<Real> m_LineOrigin, m_LineDirection;
+		Vector2<Real> m_LineOrigin, m_LineDirection;
 		
 		// Store the path of tetrahedra visited in a GetContainingTetrahedron
 		// function call.

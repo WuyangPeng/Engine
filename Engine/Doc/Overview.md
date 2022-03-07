@@ -1,15 +1,15 @@
 /// @mainpage Threading Core Render Engine API 文档
 
-@copyright Copyright (c) 2011-2021
+@copyright Copyright (c) 2011-2022
 Threading Core Render Engine
 
 @author 彭武阳，彭晔恩，彭晔泽
 联系作者：94458936@qq.com
 
-@version 0.8.0.0
+@version 0.8.0.4
 标准：std:c++17
 
-@date 2021/12/10 21:32
+@date 2022/03/05 14:03
 
 @section sec_Contents 内容
 

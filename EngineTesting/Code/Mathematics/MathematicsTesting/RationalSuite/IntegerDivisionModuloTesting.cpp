@@ -21,7 +21,10 @@ namespace Mathematics
 	template class IntegerDivisionModulo<5>;
 	template class IntegerDivisionModulo<7>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntegerDivisionModuloTesting) 
 
 void Mathematics::IntegerDivisionModuloTesting

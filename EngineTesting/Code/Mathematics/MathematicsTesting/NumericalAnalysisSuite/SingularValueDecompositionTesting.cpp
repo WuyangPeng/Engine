@@ -23,7 +23,12 @@ namespace Mathematics
 	template class SingularValueDecomposition<float>;
 	template class SingularValueDecomposition<double>;	
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SingularValueDecompositionTesting) 
 
 void Mathematics::SingularValueDecompositionTesting
@@ -51,7 +56,7 @@ void Mathematics::SingularValueDecompositionTesting
 			swap(row, colomn);
 		}
 
-		DoubleVariableMatrix matrix(row, colomn);
+		VariableMatrixD matrix(row, colomn);
 
 		for (int m = 0; m < row;++m)
 		{
@@ -61,16 +66,16 @@ void Mathematics::SingularValueDecompositionTesting
 			}
 		}
 
-		DoubleSingularValueDecomposition singularValueDecomposition(matrix);
+		SingularValueDecompositionD singularValueDecomposition(matrix);
 
-		DoubleVariableMatrix leftMatrix = singularValueDecomposition.GetLeftMatrix();
-		DoubleVariableMatrix diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
-		DoubleVariableMatrix rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
+		VariableMatrixD leftMatrix = singularValueDecomposition.GetLeftMatrix();
+		VariableMatrixD diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
+		VariableMatrixD rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
 
-		DoubleVariableMatrix result = leftMatrix * diagonalMatrix;
+		VariableMatrixD result = leftMatrix * diagonalMatrix;
 		result *= rightTransposeMatrix;
 
-		typedef bool(*VariableMatrixdApproximate)(const DoubleVariableMatrix& lhs,const DoubleVariableMatrix& rhs, const double epsilon);
+		typedef bool(*VariableMatrixdApproximate)(const VariableMatrixD& lhs,const VariableMatrixD& rhs, const double epsilon);
 
 		VariableMatrixdApproximate function = Approximate<double>;
 

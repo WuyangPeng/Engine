@@ -100,7 +100,12 @@ void Mathematics::BitHacksTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(SignIntLog2OfPowerOfTwoTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(UnsignIntLog2OfPowerOfTwoTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::BitHacksTesting
 	::FixedValueLog2OfPowerOfTwoTest()
 {

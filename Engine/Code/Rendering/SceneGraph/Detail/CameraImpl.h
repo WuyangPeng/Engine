@@ -13,7 +13,7 @@
 #include "WorldCoordinateFrame.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox2D.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox2.h"
 #include "Mathematics/Algebra/Matrix.h"
 #include "Rendering/SceneGraph/CameraFrustumData.h"
 #include "Rendering/SceneGraph/Flags/CameraFlags.h"
@@ -35,7 +35,7 @@ namespace Rendering
         using APoint = Mathematics::APoint<float>;
         using AVector = Mathematics::AVector<float>;
         using Matrix = Mathematics::Matrix<float>;
-        using AxesAlignBoundingBox2D = Mathematics::AxesAlignBoundingBox2D<float>;
+        using AxesAlignBoundingBox2D = Mathematics::AxesAlignBoundingBox2<float>;
         using HomogeneousPoint = Mathematics::HomogeneousPoint<float>;
         using Math = Mathematics::Math<float>;
 

@@ -22,7 +22,7 @@ namespace Database
 		void ConfigurationTest();
 		void FlagsOptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

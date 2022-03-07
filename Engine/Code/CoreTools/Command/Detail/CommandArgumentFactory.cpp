@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 16:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 13:35)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -23,7 +23,7 @@ using namespace std::literals;
 
 CoreTools::CommandArgumentFactory::CommandArgumentSharedPtr CoreTools::CommandArgumentFactory::Create(int index, const string& arguments, const string& value)
 {
-    CommandArgumentType valueType{ value };
+    const CommandArgumentType valueType{ value };
 
     if (valueType.IsDigit())
     {

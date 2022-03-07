@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:06)
 
 #include "Database/DatabaseExport.h"
 
@@ -26,7 +26,7 @@ Database::ResultRowFactory::ResultRowFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, ResultRowFactory)
 
-Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Database::ResultRowFactory::ImplTypeSharedPtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
     switch (wrappersStrategy)
@@ -48,7 +48,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory::Create(const
     }
 }
 
-Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
+Database::ResultRowFactory::ImplTypeSharedPtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxDbDocPtr& mysqlxDbDoc)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
@@ -62,7 +62,7 @@ Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory::Create(const
     THROW_EXCEPTION(SYSTEM_TEXT("无法在非MysqlConnector环境下创建ResultRow。"s));
 }
 
-Database::ResultRowFactory::ImplTypePtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
+Database::ResultRowFactory::ImplTypeSharedPtr Database::ResultRowFactory::Create(const ConfigurationStrategy& configurationStrategy, const MysqlxRowPtr& mysqlxRow)
 {
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 

@@ -1,114 +1,128 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 17:04)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_LOZENGE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_LOZENGE3_DETAIL_H
 
 #include "StaticTestIntersectorPlane3Lozenge3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::StaticTestIntersectorPlane3Lozenge3(const Plane3& plane, const Lozenge3& lozenge, const Real epsilon)
-    : m_Plane{ plane }, mLozenge{ lozenge }
+    : ParentType{ epsilon }, plane{ plane }, lozenge{ lozenge }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::GetPlane() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return plane;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
-	::GetPlane() const
+Mathematics::Lozenge3<Real> Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::GetLozenge() const noexcept
 {
-    return m_Plane;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return lozenge;
 }
 
 template <typename Real>
-const Mathematics::Lozenge3<Real> Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
-	::GetLozenge() const
+void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::Test()
 {
-    return mLozenge;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
-	::Test()
-{
-	auto sDistMM = m_Plane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
-	auto sDistPM = m_Plane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-    if (sDistMM*sDistPM <= Math<Real>::GetValue(0))
+    const auto sDistMM = plane.DistanceTo(lozenge.GetRectangle().GetMMCorner());
+    const auto sDistPM = plane.DistanceTo(lozenge.GetRectangle().GetPMCorner());
+    if (sDistMM * sDistPM <= Math::GetValue(0))
     {
-        // Two lozenge ends on opposite sides of the plane.
-		this->SetIntersectionType(IntersectionType::Other);
+        this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-	Real sDistMP = m_Plane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-    if (sDistMM*sDistMP <= Math<Real>::GetValue(0))
+    const auto sDistMP = plane.DistanceTo(lozenge.GetRectangle().GetMPCorner());
+    if (sDistMM * sDistMP <= Math::GetValue(0))
     {
-        // Two lozenge ends on opposite sides of the plane.
-		this->SetIntersectionType(IntersectionType::Other);
+        this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-	auto sDistPP = m_Plane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-    if (sDistPM*sDistPP <= Math<Real>::GetValue(0))
+    const auto sDistPP = plane.DistanceTo(lozenge.GetRectangle().GetPPCorner());
+    if (sDistPM * sDistPP <= Math::GetValue(0))
     {
-        // Two lozenge ends on opposite sides of the plane.
-		this->SetIntersectionType(IntersectionType::Other);
+        this->SetIntersectionType(IntersectionType::Other);
         return;
     }
 
-    // The lozenge rectangle corners are all on one side of the plane.
-    // The spheres centered at the corners, with radius that of the lozenge,
-    // might intersect the plane.
-	if (Math::FAbs(sDistMM) <= mLozenge.GetRadius()|| Math::FAbs(sDistPM) <= mLozenge.GetRadius() || Math::FAbs(sDistMP) <= mLozenge.GetRadius() || Math::FAbs(sDistPP) <= mLozenge.GetRadius())
-	{
-		this->SetIntersectionType(IntersectionType::Other);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
+    if (Math::FAbs(sDistMM) <= lozenge.GetRadius() || Math::FAbs(sDistPM) <= lozenge.GetRadius() || Math::FAbs(sDistMP) <= lozenge.GetRadius() || Math::FAbs(sDistPP) <= lozenge.GetRadius())
+    {
+        this->SetIntersectionType(IntersectionType::Other);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
 template <typename Real>
-bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
-	::LozengeIsCulled() const
+bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>::LozengeIsCulled() const
 {
-	auto sDistMM = m_Plane.DistanceTo(mLozenge.GetRectangle().GetMMCorner());
-    if (sDistMM < Math<Real>::GetValue(0))
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    const auto sDistMM = plane.DistanceTo(lozenge.GetRectangle().GetMMCorner());
+    if (sDistMM < Math::GetValue(0))
     {
-		auto sDistPM = m_Plane.DistanceTo(mLozenge.GetRectangle().GetPMCorner());
-        if (sDistPM < Math<Real>::GetValue(0))
+        auto sDistPM = plane.DistanceTo(lozenge.GetRectangle().GetPMCorner());
+        if (sDistPM < Math::GetValue(0))
         {
-			auto sDistMP = m_Plane.DistanceTo(mLozenge.GetRectangle().GetMPCorner());
-            if (sDistMP < Math<Real>::GetValue(0))
+            auto sDistMP = plane.DistanceTo(lozenge.GetRectangle().GetMPCorner());
+            if (sDistMP < Math::GetValue(0))
             {
-				auto sDistPP = m_Plane.DistanceTo(mLozenge.GetRectangle().GetPPCorner());
-                if (sDistPP < Math<Real>::GetValue(0))
+                auto sDistPP = plane.DistanceTo(lozenge.GetRectangle().GetPPCorner());
+                if (sDistPP < Math::GetValue(0))
                 {
-                    // All four lozenge corners on negative side of plane.
                     if (sDistMM <= sDistPM)
                     {
                         if (sDistMM <= sDistMP)
                         {
-                            return sDistMM <= -mLozenge.GetRadius();
+                            return sDistMM <= -lozenge.GetRadius();
                         }
                         else
                         {
-							return sDistMP <= -mLozenge.GetRadius();
+                            return sDistMP <= -lozenge.GetRadius();
                         }
                     }
                     else
                     {
                         if (sDistPM <= sDistPP)
                         {
-							return sDistPM <= -mLozenge.GetRadius();
+                            return sDistPM <= -lozenge.GetRadius();
                         }
                         else
                         {
-							return sDistPP <= -mLozenge.GetRadius();
+                            return sDistPP <= -lozenge.GetRadius();
                         }
                     }
                 }
@@ -119,5 +133,4 @@ bool Mathematics::StaticTestIntersectorPlane3Lozenge3<Real>
     return false;
 }
 
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_LOZENGE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_PLANE3_LOZENGE3_DETAIL_H

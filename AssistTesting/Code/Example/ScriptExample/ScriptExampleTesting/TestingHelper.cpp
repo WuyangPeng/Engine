@@ -4,16 +4,24 @@
 //
 // 引擎辅助测试版本：0.0.2.2 (2020/01/24 19:31)
 
-#include "TestingHelper.h"
 #include "Testing.h"
+#include "TestingHelper.h"
+#include "CoreTools/Helper/ClassInvariant/ScriptClassInvariantMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestSuite.h"
 
-CMAIN_FUNCTION_HELPER_SUBCLASS_COMPLETE_DEFINE(ScriptExample, TestingHelper, "脚本例子")
+using namespace std::literals;
 
-// private
-void ScriptExample::TestingHelper ::AddSuites()
+ScriptExample::TestingHelper::TestingHelper(int argc, char** argv)
+    : ParentType{ argc, argv, "脚本例子"s }
 {
-	 
+    InitSuite();
+
+    SCRIPT_SELF_CLASS_IS_VALID_1;
 }
- 
+
+CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(ScriptExample, TestingHelper)
+
+void ScriptExample::TestingHelper::InitSuite() noexcept
+{
+}

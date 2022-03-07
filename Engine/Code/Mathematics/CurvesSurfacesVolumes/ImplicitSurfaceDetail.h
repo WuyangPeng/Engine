@@ -23,22 +23,22 @@ ImplicitSurface<Real>::~ImplicitSurface ()
 }
 
 template <typename Real>
-bool ImplicitSurface<Real>::IsOnSurface (const Vector3D<Real>& pos, Real epsilon) const
+bool ImplicitSurface<Real>::IsOnSurface (const Vector3<Real>& pos, Real epsilon) const
 {
     return Math<Real>::FAbs(F(pos)) <= epsilon;
 }
 
 template <typename Real>
-Vector3D<Real> ImplicitSurface<Real>::GetGradient (const Vector3D<Real>& pos)  const
+Vector3<Real> ImplicitSurface<Real>::GetGradient (const Vector3<Real>& pos)  const
 {
     Real fx = FX(pos);
     Real fy = FY(pos);
     Real fz = FZ(pos);
-    return Vector3D<Real>(fx, fy, fz);
+    return Vector3<Real>(fx, fy, fz);
 }
 
 template <typename Real>
-Matrix3<Real> ImplicitSurface<Real>::GetHessian (const Vector3D<Real>& pos)  const
+Matrix3<Real> ImplicitSurface<Real>::GetHessian (const Vector3<Real>& pos)  const
 {
 	auto fxx = FXX(pos);
 	auto fxy = FXY(pos);
@@ -50,16 +50,16 @@ Matrix3<Real> ImplicitSurface<Real>::GetHessian (const Vector3D<Real>& pos)  con
 }
 
 template <typename Real>
-void ImplicitSurface<Real>::GetFrame (const Vector3D<Real>& pos,Vector3D<Real>& tangent0, Vector3D<Real>& tangent1, Vector3D<Real>& normal) const
+void ImplicitSurface<Real>::GetFrame (const Vector3<Real>& pos,Vector3<Real>& tangent0, Vector3<Real>& tangent1, Vector3<Real>& normal) const
 {
     normal = GetGradient(pos);
-	auto vector3DOrthonormalBasis = Vector3DTools<Real>::GenerateOrthonormalBasis(normal);
-	tangent0 = vector3DOrthonormalBasis.GetUVector();
-	tangent1 = vector3DOrthonormalBasis.GetVVector();
+	auto Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateOrthonormalBasis(normal);
+	tangent0 = Vector3OrthonormalBasis.GetUVector();
+	tangent1 = Vector3OrthonormalBasis.GetVVector();
 }
 
 template <typename Real>
-bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>& pos, Real& curv0, Real& curv1, Vector3D<Real>& dir0,Vector3D<Real>& dir1)
+bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3<Real>& pos, Real& curv0, Real& curv1, Vector3<Real>& dir0,Vector3<Real>& dir1)
 {
     // Principal curvatures and directions for implicitly defined surfaces
     // F(x,y,z) = 0.
@@ -138,23 +138,23 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
 	auto tmp2 = m11 + curv0;
 	auto tmp3 = m22 + curv0;
 
-    Vector3D<Real> U[3];
+    Vector3<Real> U[3];
     Real lengths[3];
 
     U[0][0] = m01*m12-m02*tmp2;
     U[0][1] = m02*m10-m12*tmp1;
     U[0][2] = tmp1*tmp2-m01*m10;
-    lengths[0] = Vector3DTools<Real>::VectorMagnitude(U[0]);
+    lengths[0] = Vector3Tools<Real>::GetLength(U[0]);
 
 	U[1][0] = m01*tmp3 - m02*m21;
 	U[1][1] = m02*m20 - tmp1*tmp3;
 	U[1][2] = tmp1*m21 - m01*m20;
-	lengths[1] = Vector3DTools<Real>::VectorMagnitude(U[1]);
+	lengths[1] = Vector3Tools<Real>::GetLength(U[1]);
 
 	U[2][0] = tmp2*tmp3 - m12*m21;
 	U[2][1] = m12*m20 - m10*tmp3;
 	U[2][2] = m10*m21 - m20*tmp2;
-	lengths[2] = Vector3DTools<Real>::VectorMagnitude(U[2]);
+	lengths[2] = Vector3Tools<Real>::GetLength(U[2]);
 
 	auto maxIndex = 0;
 	auto maxValue = lengths[0];
@@ -172,7 +172,7 @@ bool ImplicitSurface<Real>::ComputePrincipalCurvatureInfo (const Vector3D<Real>&
     U[maxIndex] *= invLength;
 
     dir1 = U[maxIndex];
-	dir0 = Vector3DTools<Real>::UnitCrossProduct(dir1, (Vector3D<Real>(fx, fy, fz)));
+	dir0 = Vector3Tools<Real>::UnitCrossProduct(dir1, (Vector3<Real>(fx, fy, fz)));
 
     return true;
 }

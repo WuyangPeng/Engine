@@ -131,7 +131,7 @@ void Rendering::PlanarShadowEffect ::Draw(std::shared_ptr<Renderer> renderer, Vi
         mStencilState->SetOnZPass(StencilStateFlags::OperationType::Zero);  // visible set to 0
 
         // Get the projection matrix relative to the projector (light).
-        Mathematics::FloatMatrix projection;
+        Mathematics::MatrixF projection;
         if (!GetProjectionMatrix(i, projection))
         {
             continue;
@@ -163,12 +163,12 @@ void Rendering::PlanarShadowEffect ::Draw(std::shared_ptr<Renderer> renderer, Vi
     renderer->SetOverrideDepthState(saveDState);
 }
 
-bool Rendering::PlanarShadowEffect ::GetProjectionMatrix(int i, Mathematics::FloatMatrix& projection)
+bool Rendering::PlanarShadowEffect ::GetProjectionMatrix(int i, Mathematics::MatrixF& projection)
 {
     // Compute the equation for the shadow plane in world coordinates.
     //Mathematics::APointf vertex[3];
     TrianglePosition vertex = mPlanes[i]->GetWorldTriangle(0);
-    Mathematics::FloatPlane worldPlane(vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition());
+    Mathematics::PlaneF worldPlane(vertex.GetFirstPosition(), vertex.GetSecondPosition(), vertex.GetThirdPosition());
 
     // This is a conservative test to see whether a shadow should be cast.
     // This can cause incorrect results if the caster is large and intersects
@@ -183,7 +183,7 @@ bool Rendering::PlanarShadowEffect ::GetProjectionMatrix(int i, Mathematics::Flo
 
     // Compute the projection matrix for the light source.
     LightSharedPtr projector = mProjectors[i];
-    Mathematics::FloatAVector normal = worldPlane.GetNormal();
+    Mathematics::AVectorF normal = worldPlane.GetNormal();
     if (projector->GetType() == LightType::Directional)
     {
         float NdD = Dot(normal, projector->GetDirectionVector());

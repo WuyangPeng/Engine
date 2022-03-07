@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/25 18:47)
+///	引擎版本：0.8.0.2 (2022/02/17 14:05)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -16,22 +16,19 @@
 template <>
 void Mathematics::SolveSymmetricConjugateGradient<float, Mathematics::SparseMatrix>::Multiply()
 {
-    m_Product.assign(m_Size, 0.0f);
+    product.assign(size, 0.0f);
 
-    for (auto iter = m_Matrix.GetBegin(); iter != m_Matrix.GetEnd(); ++iter)
+    for (auto iter = matrix.GetBegin(); iter != matrix.GetEnd(); ++iter)
     {
         const auto row = iter.GetKey().GetRow();
         const auto column = iter.GetKey().GetColumn();
         auto value = iter.GetMapped();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_Product[row] += value * m_InputAmend2[column];
+        product.at(row) += value * inputAmend2.at(column);
         if (row != column)
         {
-            m_Product[column] += value * m_InputAmend2[row];
+            product.at(column) += value * inputAmend2.at(row);
         }
-#include STSTEM_WARNING_POP
     }
 }
 
@@ -39,21 +36,28 @@ void Mathematics::SolveSymmetricConjugateGradient<float, Mathematics::SparseMatr
 template <>
 void Mathematics::SolveSymmetricConjugateGradient<double, Mathematics::SparseMatrix>::Multiply()
 {
-    m_Product.assign(m_Size, 0.0);
+    product.assign(size, 0.0);
 
-    for (auto iter = m_Matrix.GetBegin(); iter != m_Matrix.GetEnd(); ++iter)
+    for (auto iter = matrix.GetBegin(); iter != matrix.GetEnd(); ++iter)
     {
         const auto row = iter.GetKey().GetRow();
         const auto column = iter.GetKey().GetColumn();
         auto value = iter.GetMapped();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_Product[row] += value * m_InputAmend2[column];
+        product.at(row) += value * inputAmend2.at(column);
         if (row != column)
         {
-            m_Product[column] += value * m_InputAmend2[row];
+            product.at(column) += value * inputAmend2.at(row);
         }
-#include STSTEM_WARNING_POP
     }
 }
+
+#ifdef MATHEMATICS_TEMPLATE_TEST
+
+namespace Mathematics
+{
+    template class SolveSymmetricConjugateGradient<float, Mathematics::SparseMatrix>;
+    template class SolveSymmetricConjugateGradient<double, Mathematics::SparseMatrix>;
+}
+
+#endif  // MATHEMATICS_TEMPLATE_TEST

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 14:32)
+///	引擎版本：0.8.0.2 (2022/02/17 14:49)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H
@@ -17,28 +17,32 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real, typename UserDataType>
-Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNGetMinimum(int dimensions, const Container& initial, Function function,
-                                                                          const UserDataType* userData, const Container& begin, const Container& end)
-    : m_Dimensions{ dimensions },
+Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNGetMinimum(int dimensions,
+                                                                          const Container& initial,
+                                                                          Function function,
+                                                                          const UserDataType* userData,
+                                                                          const Container& begin,
+                                                                          const Container& end)
+    : dimensions{ dimensions },
       // 初始化设置为标准欧几里得基础方向。
-      m_DirectionStorage(GetStorageSize(dimensions)),
-      m_DirectionIndex{},
-      m_DirectionConjugateIndex{ dimensions },
-      m_DirectionCurrentIndex{ -1 },
-      m_Save(initial),
-      m_Function{ function },
-      m_UserData{ userData },
-      m_MinimizeNData{ initial, m_Function(initial, m_UserData) },
-      m_Begin(begin),
-      m_End(end)
+      directionStorage(GetStorageSize(dimensions)),
+      directionIndex{},
+      directionConjugateIndex{ dimensions },
+      directionCurrentIndex{ -1 },
+      save(initial),
+      function{ function },
+      userData{ userData },
+      minimizeNData{ initial, this->function(initial, userData) },
+      beginContainer(begin),
+      endContainer(end)
 {
     for (auto i = 0; i <= dimensions; ++i)
     {
         const auto index = i * dimensions;
-        m_DirectionIndex.emplace_back(index);
+        directionIndex.emplace_back(index);
         if (i != dimensions)
         {
-            m_DirectionStorage.at(index) = Math::GetValue(1);
+            directionStorage.at(index) = Math::GetValue(1);
         }
     }
 
@@ -46,14 +50,16 @@ Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNGetMinimum(int di
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename UserDataType>
 bool Mathematics::MinimizeNGetMinimum<Real, UserDataType>::IsValid() const noexcept
 {
-    if (0 < m_Dimensions)
+    if (0 < dimensions)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
@@ -61,24 +67,31 @@ int Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetDimensions() const 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Dimensions;
+    return dimensions;
 }
 
 template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::CalculateLineArg(int index, Real value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < m_Dimensions, "索引错误！");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < dimensions, "索引错误！");
 
-    return m_MinimizeNData.GetMinLocation(index) + value * GetDirectionCurrent(index);
+    return minimizeNData.GetMinLocation(index) + value * GetDirectionCurrent(index);
 }
 
 template <typename Real, typename UserDataType>
-Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetFunctionResult(const Container& lineArg) const noexcept
+Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetFunctionResult(const Container& lineArg) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Function(lineArg, m_UserData);
+    if (function != nullptr)
+    {
+        return function(lineArg, userData);
+    }
+    else
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("function 指针为空。"s));
+    }
 }
 
 template <typename Real, typename UserDataType>
@@ -86,7 +99,7 @@ typename const Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeNDa
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_MinimizeNData;
+    return minimizeNData;
 }
 
 template <typename Real, typename UserDataType>
@@ -94,33 +107,28 @@ void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::FindEachDirection(int
 {
     SetDirectionCurrent(index);
 
-    const auto domainResult = ComputeDomain(m_Begin, m_End);
+    const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
     // 对 1D 函数回调
     const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
 
-    const auto minimizerData = minimizer.GetMinimum(domainResult.m_BeginResult, domainResult.m_EndResult, Math::GetValue(0));
+    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, Math::GetValue(0));
 
     auto minLocation = minimizerData.GetMinLocation();
 
-    m_MinimizeNData.Set(minimizerData.GetMinValue(), minLocation, m_DirectionStorage, m_DirectionCurrentIndex);
+    minimizeNData.Set(minimizerData.GetMinValue(), minLocation, directionStorage, directionCurrentIndex);
 }
 
 template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::EstimateUnitLengthConjugateDirection()
 {
     auto length = Math::GetValue(0);
-    for (auto i = 0; i < m_Dimensions; ++i)
+    for (auto i = 0; i < dimensions; ++i)
     {
-        const auto storageIndex = m_DirectionConjugateIndex + i;
+        const auto storageIndex = directionConjugateIndex + i;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        m_DirectionStorage[storageIndex] = m_MinimizeNData.GetMinLocation(i) - m_Save[i];
-        length += m_DirectionStorage[storageIndex] * m_DirectionStorage[storageIndex];
-
-#include STSTEM_WARNING_POP
+        directionStorage.at(storageIndex) = minimizeNData.GetMinLocation(i) - save.at(i);
+        length += directionStorage.at(storageIndex) * directionStorage.at(storageIndex);
     }
 
     return Math::Sqrt(length);
@@ -129,100 +137,89 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::EstimateUnitLengthCon
 template <typename Real, typename UserDataType>
 void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::MinimizeConjugateDirection(Real length, int maxLevel, int maxBracket)
 {
-    for (auto i = 0; i < m_Dimensions; ++i)
+    for (auto i = 0; i < dimensions; ++i)
     {
-        const auto index = m_DirectionConjugateIndex + i;
+        const auto index = directionConjugateIndex + i;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_DirectionStorage[index] /= length;
-#include STSTEM_WARNING_POP
+        directionStorage.at(index) /= length;
     }
 
     // 最小化共轭方向。
-    m_DirectionCurrentIndex = m_DirectionConjugateIndex;
-    const auto domainResult = ComputeDomain(m_Begin, m_End);
+    directionCurrentIndex = directionConjugateIndex;
+    const auto domainResult = ComputeDomain(beginContainer, endContainer);
 
     const Minimize1 minimizer{ LineFunction, maxLevel, maxBracket, this };
-    const auto minimizerData = minimizer.GetMinimum(domainResult.m_BeginResult, domainResult.m_EndResult, Math::GetValue(0));
+    const auto minimizerData = minimizer.GetMinimum(domainResult.beginResult, domainResult.endResult, Math::GetValue(0));
 
-    m_MinimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), m_DirectionStorage, m_DirectionCurrentIndex);
+    minimizeNData.Set(minimizerData.GetMinValue(), minimizerData.GetMinLocation(), directionStorage, directionCurrentIndex);
 
     // 循环方向，并添加共轭方向到集合
-    m_DirectionConjugateIndex = 0;
-    for (auto i = 0; i < m_Dimensions; ++i)
+    directionConjugateIndex = 0;
+    for (auto i = 0; i < dimensions; ++i)
     {
         const auto next = i + 1;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_DirectionStorage[m_DirectionIndex[i]] = m_DirectionStorage[m_DirectionIndex[next]];
-#include STSTEM_WARNING_POP
+        directionStorage.at(directionIndex.at(i)) = directionStorage.at(directionIndex.at(next));
     }
 
     // 设置下次的参数。
-    m_Save = m_MinimizeNData.GetMinLocation();
+    save = minimizeNData.GetMinLocation();
 }
 
 template <typename Real, typename UserDataType>
 Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult::DomainResult(Real beginResult, Real endResult) noexcept
-    : m_BeginResult{ beginResult }, m_EndResult{ endResult }
+    : beginResult{ beginResult }, endResult{ endResult }
 {
 }
 
 template <typename Real, typename UserDataType>
 typename Mathematics::MinimizeNGetMinimum<Real, UserDataType>::DomainResult Mathematics::MinimizeNGetMinimum<Real, UserDataType>::ComputeDomain(const Container& begin, const Container& end)
 {
-    DomainResult result{ -Math::sm_MaxReal, +Math::sm_MaxReal };
+    DomainResult result{ -Math::maxReal, +Math::maxReal };
 
-    for (auto i = 0; i < m_Dimensions; ++i)
+    for (auto i = 0; i < dimensions; ++i)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        auto beginMinus = begin[i] - m_MinimizeNData.GetMinLocation(i);
-        auto endMinus = end[i] - m_MinimizeNData.GetMinLocation(i);
-
-#include STSTEM_WARNING_POP
+        auto beginMinus = begin.at(i) - minimizeNData.GetMinLocation(i);
+        auto endMinus = end.at(i) - minimizeNData.GetMinLocation(i);
 
         if (Math::GetValue(0) < GetDirectionCurrent(i))
         {
             // 有效的间隔是[b0,b1]。
             beginMinus /= GetDirectionCurrent(i);
-            if (result.m_BeginResult < beginMinus)
+            if (result.beginResult < beginMinus)
             {
-                result.m_BeginResult = beginMinus;
+                result.beginResult = beginMinus;
             }
             endMinus /= GetDirectionCurrent(i);
-            if (endMinus < result.m_EndResult)
+            if (endMinus < result.endResult)
             {
-                result.m_EndResult = endMinus;
+                result.endResult = endMinus;
             }
         }
         else if (GetDirectionCurrent(i) < Math::GetValue(0))
         {
             // 有效的间隔是[b1,b0]。
             beginMinus /= GetDirectionCurrent(i);
-            if (beginMinus < result.m_EndResult)
+            if (beginMinus < result.endResult)
             {
-                result.m_EndResult = beginMinus;
+                result.endResult = beginMinus;
             }
             endMinus /= GetDirectionCurrent(i);
-            if (result.m_BeginResult < endMinus)
+            if (result.beginResult < endMinus)
             {
-                result.m_BeginResult = endMinus;
+                result.beginResult = endMinus;
             }
         }
     }
 
     // 数字差错更正导致值几乎为零。
-    if (Math::GetValue(0) < result.m_BeginResult)
+    if (Math::GetValue(0) < result.beginResult)
     {
-        result.m_BeginResult = Math::GetValue(0);
+        result.beginResult = Math::GetValue(0);
     }
-    if (result.m_EndResult < Math::GetValue(0))
+    if (result.endResult < Math::GetValue(0))
     {
-        result.m_EndResult = Math::GetValue(0);
+        result.endResult = Math::GetValue(0);
     }
 
     return result;
@@ -252,15 +249,15 @@ Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::LineFunction(Real val
 template <typename Real, typename UserDataType>
 Real Mathematics::MinimizeNGetMinimum<Real, UserDataType>::GetDirectionCurrent(int index) const
 {
-    const auto storageIndex = m_DirectionCurrentIndex + index;
+    const auto storageIndex = directionCurrentIndex + index;
 
-    return m_DirectionStorage.at(storageIndex);
+    return directionStorage.at(storageIndex);
 }
 
 template <typename Real, typename UserDataType>
 void Mathematics::MinimizeNGetMinimum<Real, UserDataType>::SetDirectionCurrent(int index) noexcept
 {
-    m_DirectionCurrentIndex = index;
+    directionCurrentIndex = index;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZEN_GET_MINIMUM_DETAIL_H

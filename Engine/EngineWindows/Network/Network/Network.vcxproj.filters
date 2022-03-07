@@ -225,10 +225,10 @@
     <Text Include="Resource\Todo\Level 1.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\ReadMe.txt">
+    <Text Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="Resource\Schedule.txt">
+    <Text Include="Resource\Schedule.md">
       <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 0.txt">
@@ -617,14 +617,20 @@
     <ClCompile Include="..\..\..\Code\Network\Interface\SendSocketManager.cpp">
       <Filter>Interface 源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.cpp">
-      <Filter>Interface 源文件\Detail</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.cpp">
       <Filter>Interface 源文件\Detail</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Code\Network\Interface\SocketData.cpp">
       <Filter>Interface 源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullClient.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullHandleSet.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Code\Network\Interface\Detail\NullServer.cpp">
+      <Filter>Interface 源文件\Detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1201,14 +1207,20 @@
     <ClInclude Include="..\..\..\Code\Network\Configuration\ConfigurationInternalFwd.h">
       <Filter>Configuration 头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NetworkInternal.h">
-      <Filter>Interface 头文件\Detail</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\Interface\Detail\SendSocketManagerImpl.h">
       <Filter>Interface 头文件\Detail</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Code\Network\Interface\SocketData.h">
       <Filter>Interface 头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullClient.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullHandleSet.h">
+      <Filter>Interface 头文件\Detail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Code\Network\Interface\Detail\NullServer.h">
+      <Filter>Interface 头文件\Detail</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

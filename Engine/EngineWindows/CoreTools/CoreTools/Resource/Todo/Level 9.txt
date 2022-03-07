@@ -1,7 +1,8 @@
 TODO Level 9
  
-0.8.0.0
+0.8.0.1
 
 1. （Network）完成Network模块。 
 2. （MessageEvent）优化消息事件类。
 3. （StateMachineManager）优化状态机类。
+4. （CyclicRedundancyCheck）优化CRC类。

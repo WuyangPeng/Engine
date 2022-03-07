@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 14:44)
+///	引擎版本：0.8.0.2 (2022/01/29 10:47)
 
 #ifndef MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
 #define MATHEMATICS_BASE_FAST_NEGATIVE_EXP_ACHIEVE_H
@@ -26,10 +26,10 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMoreRoughCalculation(Rea
     result *= value;
     result += static_cast<Real>(0.2507213);
     result *= value;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= result;
     result *= result;
-    result = Math::GetValue(1) / result;
+    result = static_cast<Real>(1.0) / result;
 
     return result;
 }
@@ -48,10 +48,10 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpRoughCalculation(Real va
     result *= value;
     result += static_cast<Real>(0.24991035);
     result *= value;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= result;
     result *= result;
-    result = Math::GetValue(1) / result;
+    result = static_cast<Real>(1.0) / result;
 
     return result;
 }
@@ -72,11 +72,11 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpPreciseCalculation(Real 
     result *= value;
     result += static_cast<Real>(0.250010936);
     result *= value;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= result;
     result *= result;
 
-    result = Math::GetValue(1) / result;
+    result = static_cast<Real>(1.0) / result;
 
     return result;
 }
@@ -99,10 +99,10 @@ Real Mathematics::FastNegativeExp<Real>::FastNegativeExpMorePreciseCalculation(R
     result *= value;
     result += static_cast<Real>(0.2499986842);
     result *= value;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= result;
     result *= result;
-    result = Math::GetValue(1) / result;
+    result = static_cast<Real>(1.0) / result;
 
     return result;
 }

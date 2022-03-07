@@ -24,7 +24,7 @@ namespace Mathematics
 		void MatrixCalculateTest();
 		void CompareTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

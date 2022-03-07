@@ -1,19 +1,20 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 17:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 22:26)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostMainManager.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
-Network::BoostMainManager::BoostMainManager() noexcept
-    : ParentType{}, m_ExecutorWorkGuardContext{}
+Network::BoostMainManager::BoostMainManager(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, executorWorkGuardContext{ disableNotThrow }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -24,38 +25,38 @@ void Network::BoostMainManager::Run()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ExecutorWorkGuardContext.Run();
+    executorWorkGuardContext.Run();
 }
 
 Network::IOContextType& Network::BoostMainManager::GetIOContext() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_ExecutorWorkGuardContext.GetIOContext();
+    return executorWorkGuardContext.GetIOContext();
 }
 
 void Network::BoostMainManager::StopContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ExecutorWorkGuardContext.PostStopContext();
+    executorWorkGuardContext.PostStopContext();
 }
 
 bool Network::BoostMainManager::IsContextStop() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ExecutorWorkGuardContext.IsContextStop();
+    return executorWorkGuardContext.IsContextStop();
 }
 
 void Network::BoostMainManager::RestartContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ExecutorWorkGuardContext.RestartContext();
+    executorWorkGuardContext.RestartContext();
 }
 
 void Network::BoostMainManager::DispatchStopContext()
 {
-    m_ExecutorWorkGuardContext.DispatchStopContext();
+    executorWorkGuardContext.DispatchStopContext();
 }

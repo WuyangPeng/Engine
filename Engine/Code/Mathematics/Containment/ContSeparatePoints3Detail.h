@@ -12,7 +12,7 @@
 
 template <typename Real>
 Mathematics::SeparatePoints3<Real>
-	::SeparatePoints3(const std::vector<Vector3D<Real> >& points0,  const std::vector<Vector3D<Real> >& points1, Plane3<Real>& separatingPlane)
+	::SeparatePoints3(const std::vector<Vector3<Real> >& points0,  const std::vector<Vector3<Real> >& points1, Plane3<Real>& separatingPlane)
 {
     // Construct convex hull of point set 0.
 	ConvexHull3<Real> hull0{ points0, 0.001f, false, QueryType::Int64 };
@@ -42,7 +42,7 @@ Mathematics::SeparatePoints3<Real>
 
     // Test faces of hull 0 for possible separation of points.
     int i, i0, i1, i2, side0, side1;
-    Vector3D<Real> diff0, diff1;
+    Vector3<Real> diff0, diff1;
     for (i = 0; i < numTriangles0; ++i)
     {
         // Look up face (assert: i0 != i1 && i0 != i2 && i1 != i2).
@@ -135,7 +135,7 @@ Mathematics::SeparatePoints3<Real>
             diff1 = points1[e1iter->second] - points1[e1iter->first];
 
             // Compute potential separating plane.
-            separatingPlane = Plane3<Real>(Vector3DTools<Real>::UnitCrossProduct(diff0,diff1),points0[e0iter->first]);
+            separatingPlane = Plane3<Real>(Vector3Tools<Real>::UnitCrossProduct(diff0,diff1),points0[e0iter->first]);
 
             // Determine if hull 0 is on same side of plane.
             side0 = OnSameSide(separatingPlane, numTriangles0, indices0,points0);
@@ -161,7 +161,7 @@ Mathematics::SeparatePoints3<Real>
 
 template <typename Real>
 int Mathematics::SeparatePoints3<Real>
-	::OnSameSide(const Plane3<Real>& plane,int numTriangles, const int* indices,const std::vector<Vector3D<Real> >& points)
+	::OnSameSide(const Plane3<Real>& plane,int numTriangles, const int* indices,const std::vector<Vector3<Real> >& points)
 {
     // test if all points on same side of plane (nx,ny,nz)*(x,y,z) = c
     int posSide = 0, negSide = 0;
@@ -171,7 +171,7 @@ int Mathematics::SeparatePoints3<Real>
         for (auto i = 0; i < 3; ++i)
         {
 			auto v = indices[3*t + i];
-			auto c0 = Vector3DTools<Real>::DotProduct(plane.GetNormal(),points[v]);
+			auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(),points[v]);
 			if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
                 ++posSide;
@@ -194,7 +194,7 @@ int Mathematics::SeparatePoints3<Real>
 
 template <typename Real>
 int Mathematics::SeparatePoints3<Real>
-	::WhichSide(const Plane3<Real>& plane,int numTriangles, const int* indices, const std::vector<Vector3D<Real> >& points)
+	::WhichSide(const Plane3<Real>& plane,int numTriangles, const int* indices, const std::vector<Vector3<Real> >& points)
 {
     // Establish which side of plane hull is on.
     for (auto t = 0; t < numTriangles; ++t)
@@ -202,7 +202,7 @@ int Mathematics::SeparatePoints3<Real>
         for (auto i = 0; i < 3; ++i)
         {
 			auto v = indices[3*t + i];
-			auto c0 = Vector3DTools<Real>::DotProduct(plane.GetNormal(),points[v]);
+			auto c0 = Vector3Tools<Real>::DotProduct(plane.GetNormal(),points[v]);
             if (c0 > plane.GetConstant() + Math<Real>::GetZeroTolerance())
             {
                 // Positive side.

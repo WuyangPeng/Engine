@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 17:48)
+///	引擎版本：0.8.0.2 (2022/01/31 3:35)
 
 #ifndef MATHEMATICS_ALGEBRA_POINT_DETAIL_H
 #define MATHEMATICS_ALGEBRA_POINT_DETAIL_H
@@ -44,7 +44,7 @@ bool Mathematics::operator<(const HomogeneousPoint<T>& lhs, const HomogeneousPoi
 }
 
 template <typename T>
-bool Mathematics::Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon)
+bool Mathematics::Approximate(const HomogeneousPoint<T>& lhs, const HomogeneousPoint<T>& rhs, const T epsilon) noexcept
 {
     if (Math<T>::FAbs(lhs.GetX() - rhs.GetX()) <= epsilon &&
         Math<T>::FAbs(lhs.GetY() - rhs.GetY()) <= epsilon &&

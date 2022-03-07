@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:25)
 
 #include "PolynomialFit2PowersTesting.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/PolynomialFit2PowersDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,7 +23,10 @@ namespace Mathematics
 	template class PolynomialFit2Powers<float>;
 	template class PolynomialFit2Powers<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit2PowersTesting) 
 
 void Mathematics::PolynomialFit2PowersTesting
@@ -63,7 +66,7 @@ void Mathematics::PolynomialFit2PowersTesting
 			power.push_back(fourthRandomDistribution(generator));
 		}
 
-		DoublePolynomialFit2Powers polynomialFit(x, w, power);
+		PolynomialFit2PowersD polynomialFit(x, w, power);
 
 		if (polynomialFit.IsSolveSucceed())
 		{			 
@@ -71,7 +74,7 @@ void Mathematics::PolynomialFit2PowersTesting
 			{
 				double value = polynomialFit(x[i]) - w[i];
 
-				ASSERT_LESS_EQUAL(DoubleMath::FAbs(value) , 75.0);
+				ASSERT_LESS_EQUAL(MathD::FAbs(value) , 75.0);
 			}
 		}
 	}

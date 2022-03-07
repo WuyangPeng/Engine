@@ -1,17 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 12:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 16:57)
 
 #include "Network/NetworkExport.h"
 
 #include "NullSockStream.h"
 #include "SockStreamFactory.h"
 #include "SockStreamImpl.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/ACEWrappers/Detail/Stream/ACEIovecSockStream.h"
 #include "Network/ACEWrappers/Detail/Stream/ACESockStream.h"
@@ -32,7 +33,7 @@ Network::SockStreamFactory::SockStreamFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, SockStreamFactory)
 
 // static
-const Network::SockStreamFactory::ImplTypePtr Network::SockStreamFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Network::SockStreamFactory::ImplTypeSharedPtr Network::SockStreamFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategyFlag = configurationStrategy.GetWrappersStrategy();
 
@@ -51,9 +52,9 @@ const Network::SockStreamFactory::ImplTypePtr Network::SockStreamFactory::Create
         case WrappersStrategy::Boost:
         {
             if (configurationStrategy.GetMessageStrategy() == MessageStrategy::Fixed)
-                return make_shared<BoostFixedSockStream>();
+                return make_shared<BoostFixedSockStream>(CoreTools::DisableNotThrow::Disable);
             else
-                return make_shared<BoostSegmentationSockStream>();
+                return make_shared<BoostSegmentationSockStream>(CoreTools::DisableNotThrow::Disable);
         }
 
         case WrappersStrategy::Network:
@@ -65,6 +66,6 @@ const Network::SockStreamFactory::ImplTypePtr Network::SockStreamFactory::Create
         case WrappersStrategy::Socket:
         case WrappersStrategy::Default:
         default:
-            return make_shared<BoostSegmentationSockStream>();
+            return make_shared<BoostSegmentationSockStream>(CoreTools::DisableNotThrow::Disable);
     }
 }

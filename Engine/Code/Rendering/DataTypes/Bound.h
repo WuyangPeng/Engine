@@ -20,7 +20,7 @@
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
 #include "Mathematics/Algebra/Plane.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <type_traits>
 
@@ -38,7 +38,7 @@ namespace Rendering
         using Plane = Mathematics::Plane<T>;
         using APoint = Mathematics::APoint<T>;
         using AVector = Mathematics::AVector<T>;
-        using Vector3D = Mathematics::Vector3D<T>;
+        using Vector3D = Mathematics::Vector3<T>;
         using NumericalValueSymbol = Mathematics::NumericalValueSymbol;
 
         using PixelType = std::vector<char>;
@@ -77,8 +77,8 @@ namespace Rendering
 
         // 测试线性分量和边界是否相交（不计算交战）。线性分量通过P + t * D进行参数化，
         // 这里P是一个分量上的点（原点），D是一个单位长度向量。间隔[tmin,tmax]是
-        // line: tmin = -Mathf::sm_MaxReal, tmax = Mathf::sm_MaxReal
-        // ray: tmin = 0.0f, tmax = Mathf::sm_MaxReal
+        // line: tmin = -Mathf::maxReal, tmax = Mathf::maxReal
+        // ray: tmin = 0.0f, tmax = Mathf::maxReal
         // segment: tmin >= 0.0f, tmax > tmin
         [[nodiscard]] bool TestIntersection(const APoint& origin, const AVector& direction, T tMin, T tMax) const;
 

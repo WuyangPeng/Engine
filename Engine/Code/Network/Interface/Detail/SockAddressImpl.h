@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:15)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:22)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ADDRESS_IMPL_H
@@ -20,30 +20,31 @@ namespace Network
     {
     public:
         using ClassType = SockAddressImpl;
-        using SockAddressPtr = std::shared_ptr<ClassType>;
+        using SockAddressSharedPtr = std::shared_ptr<ClassType>;
+        using FactoryType = SockAddressFactory;
 
     public:
         SockAddressImpl() noexcept = default;
         virtual ~SockAddressImpl() noexcept = default;
         SockAddressImpl(const SockAddressImpl& rhs) = default;
-        virtual SockAddressImpl& operator=(const SockAddressImpl& rhs) = default;
+        SockAddressImpl& operator=(const SockAddressImpl& rhs) = default;
         SockAddressImpl(SockAddressImpl&& rhs) noexcept = default;
-        virtual SockAddressImpl& operator=(SockAddressImpl&& rhs) noexcept = default;
+        SockAddressImpl& operator=(SockAddressImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] virtual const ACEInetAddressType& GetACEInetAddress() const;
-        [[nodiscard]] virtual const BoostInetAddressType& GetBoostInetAddress() const;
-        [[nodiscard]] virtual const WinSockInetAddressType& GetWinSockInetAddress() const;
+        NODISCARD virtual const ACEInetAddressType& GetACEInetAddress() const;
+        NODISCARD virtual const BoostInetAddressType& GetBoostInetAddress() const;
+        NODISCARD virtual const WinSockInetAddressType& GetWinSockInetAddress() const;
 
-        [[nodiscard]] virtual ACEInetAddressType& GetACEInetAddress();
-        [[nodiscard]] virtual BoostInetAddressType& GetBoostInetAddress();
-        [[nodiscard]] virtual WinSockInetAddressType& GetWinSockInetAddress();
+        NODISCARD virtual ACEInetAddressType& GetACEInetAddress();
+        NODISCARD virtual BoostInetAddressType& GetBoostInetAddress();
+        NODISCARD virtual WinSockInetAddressType& GetWinSockInetAddress();
 
-        [[nodiscard]] virtual const SockAddressPtr Clone() const = 0;
+        NODISCARD virtual SockAddressSharedPtr Clone() const = 0;
 
-        [[nodiscard]] virtual const std::string GetAddress() const = 0;
-        [[nodiscard]] virtual int GetPort() const = 0;
+        NODISCARD virtual std::string GetAddress() const = 0;
+        NODISCARD virtual int GetPort() const = 0;
     };
 }
 

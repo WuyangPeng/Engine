@@ -16,14 +16,14 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BezierCurve2 : public SingleCurve2<Real>
+	class  BezierCurve2 : public SingleCurve2<Real>
     {
     public:
         using Math = Math<Real>;
 	public:	
 		// Construction and destruction.  BezierCurve2 accepts responsibility for
 		// deleting the input array.
-		BezierCurve2 (int degree, Vector2D<Real>* ctrlPoint);
+		BezierCurve2 (int degree, Vector2<Real>* ctrlPoint);
 		  ~BezierCurve2 ();
 		  
 		  BezierCurve2(const BezierCurve2&) = default;
@@ -32,20 +32,20 @@ namespace Mathematics
 		  BezierCurve2& operator=(BezierCurve2&&) = default;
 		
 		int GetDegree () const noexcept;
-		const Vector2D<Real>* GetControlPoints () const noexcept;
+		const Vector2<Real>* GetControlPoints () const noexcept;
 		
-		 Vector2D<Real> GetPosition (Real t) const override;
-		 Vector2D<Real> GetFirstDerivative (Real t) const override;
-		 Vector2D<Real> GetSecondDerivative (Real t) const override;
-		 Vector2D<Real> GetThirdDerivative (Real t) const override;
+		 Vector2<Real> GetPosition (Real t) const override;
+		 Vector2<Real> GetFirstDerivative (Real t) const override;
+		 Vector2<Real> GetSecondDerivative (Real t) const override;
+		 Vector2<Real> GetThirdDerivative (Real t) const override;
 
 	protected:
 		int mDegree;
 		int mNumCtrlPoints;
-		Vector2D<Real>* mCtrlPoint;
-		Vector2D<Real>* mDer1CtrlPoint;
-		Vector2D<Real>* mDer2CtrlPoint;
-		Vector2D<Real>* mDer3CtrlPoint;
+		Vector2<Real>* mCtrlPoint;
+		Vector2<Real>* mDer1CtrlPoint;
+		Vector2<Real>* mDer2CtrlPoint;
+		Vector2<Real>* mDer3CtrlPoint;
 		Real** mChoose;
 	};
 	

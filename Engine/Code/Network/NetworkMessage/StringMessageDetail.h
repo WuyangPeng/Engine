@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 19:28)
 
 #ifndef NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_STRING_MESSAGE_DETAIL_H
@@ -25,6 +25,7 @@ Network::StringMessage<E>::StringMessage(int64_t messageID, const StringType& st
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename E>
 bool Network::StringMessage<E>::IsValid() const noexcept
 {
@@ -33,6 +34,7 @@ bool Network::StringMessage<E>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename E>
@@ -48,10 +50,11 @@ const CoreTools::Rtti& Network::StringMessage<E>::GetCurrentRttiType() noexcept
 
     return rtti;
 }
+
 template <typename E>
-Network::MessageInterfaceSharedPtr Network::StringMessage<E>::Factory(const MessageSourceSharedPtr& source, int64_t messageID)
+Network::MessageInterfaceSharedPtr Network::StringMessage<E>::Factory(MessageSource& source, int64_t messageID)
 {
-    MessageInterfaceSharedPtr object{ std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID) };
+    auto object = std::make_shared<ClassType>(LoadConstructor::ConstructorLoader, messageID);
 
     object->Load(source);
 
@@ -66,7 +69,7 @@ Network::StringMessage<E>::StringMessage(LoadConstructor value, int64_t messageI
 }
 
 template <typename E>
-void Network::StringMessage<E>::Load(const MessageSourceSharedPtr& source)
+void Network::StringMessage<E>::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -80,7 +83,7 @@ void Network::StringMessage<E>::Load(const MessageSourceSharedPtr& source)
 }
 
 template <typename E>
-void Network::StringMessage<E>::Save(const MessageTargetSharedPtr& target) const
+void Network::StringMessage<E>::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

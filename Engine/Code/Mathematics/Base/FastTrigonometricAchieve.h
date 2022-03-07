@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 14:51)
+///	引擎版本：0.8.0.2 (2022/01/29 10:57)
 
 #ifndef MATHEMATICS_BASE_FAST_TRIGONOMETRIC_ACHIEVE_H
 #define MATHEMATICS_BASE_FAST_TRIGONOMETRIC_ACHIEVE_H
@@ -25,7 +25,7 @@ Real Mathematics::FastTrigonometric<Real>::FastSinRoughCalculation(Real angle) n
     result *= angleSquare;
     result -= static_cast<Real>(1.6605e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= angle;
 
     return result;
@@ -48,7 +48,7 @@ Real Mathematics::FastTrigonometric<Real>::FastSinPreciseCalculation(Real angle)
     result *= angleSquare;
     result -= static_cast<Real>(1.666666664e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= angle;
 
     return result;
@@ -61,7 +61,29 @@ Real Mathematics::FastTrigonometric<Real>::FastSinMorePreciseCalculation(Real an
 
     auto angleSqrare = Math::Square(angle);
 
-    return angle * (Math::GetValue(1) - angleSqrare / static_cast<Real>(2.0) / static_cast<Real>(3.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(4.0) / static_cast<Real>(5.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(6.0) / static_cast<Real>(7.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(8.0) / static_cast<Real>(9.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(10.0) / static_cast<Real>(11.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(12.0) / static_cast<Real>(13.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(14.0) / static_cast<Real>(15.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(16.0) / static_cast<Real>(17.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(18.0) / static_cast<Real>(19.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(20.0) / static_cast<Real>(21.0)))))))))));
+    auto result = angleSqrare / static_cast<Real>(20.0) / static_cast<Real>(21.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(18.0) / static_cast<Real>(19.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(16.0) / static_cast<Real>(17.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(14.0) / static_cast<Real>(15.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(12.0) / static_cast<Real>(13.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(10.0) / static_cast<Real>(11.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(8.0) / static_cast<Real>(9.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(6.0) / static_cast<Real>(7.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(4.0) / static_cast<Real>(5.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(2.0) / static_cast<Real>(3.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angle;
+
+    return result;
 }
 
 template <typename Real>
@@ -75,7 +97,7 @@ Real Mathematics::FastTrigonometric<Real>::FastCosRoughCalculation(Real angle) n
     result *= angleSquare;
     result -= static_cast<Real>(4.967e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
 
     return result;
 }
@@ -97,7 +119,7 @@ Real Mathematics::FastTrigonometric<Real>::FastCosPreciseCalculation(Real angle)
     result *= angleSquare;
     result -= static_cast<Real>(4.999999963e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
 
     return result;
 }
@@ -109,7 +131,30 @@ Real Mathematics::FastTrigonometric<Real>::FastCosMorePreciseCalculation(Real an
 
     auto angleSqrare = Math::Square(angle);
 
-    return (Math::GetValue(1) - angleSqrare / static_cast<Real>(2.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(3.0) / static_cast<Real>(4.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(5.0) / static_cast<Real>(6.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(7.0) / static_cast<Real>(8.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(9.0) / static_cast<Real>(10.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(11.0) / static_cast<Real>(12.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(13.0) / static_cast<Real>(14.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(15.0) / static_cast<Real>(16.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(17.0) / static_cast<Real>(18.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(19.0) / static_cast<Real>(20.0) * (Math::GetValue(1) - angleSqrare / static_cast<Real>(21.0) / static_cast<Real>(22.0))))))))))));
+    auto result = angleSqrare / static_cast<Real>(21.0) / static_cast<Real>(22.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(19.0) / static_cast<Real>(20.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(17.0) / static_cast<Real>(18.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(15.0) / static_cast<Real>(16.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(13.0) / static_cast<Real>(14.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(11.0) / static_cast<Real>(12.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(9.0) / static_cast<Real>(10.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(7.0) / static_cast<Real>(8.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(5.0) / static_cast<Real>(6.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(3.0) / static_cast<Real>(4.0);
+    result = static_cast<Real>(1.0) - result;
+    result *= angleSqrare / static_cast<Real>(2.0);
+    result = static_cast<Real>(1.0) - result;
+
+    return result;
 }
 
 template <typename Real>
@@ -123,7 +168,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanRoughCalculation(Real angle) n
     result *= angleSquare;
     result += static_cast<Real>(3.1755e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= angle;
 
     return result;
@@ -148,7 +193,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanPreciseCalculation(Real angle)
     result *= angleSquare;
     result += static_cast<Real>(3.333314036e-01);
     result *= angleSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= angle;
 
     return result;
@@ -165,7 +210,7 @@ Real Mathematics::FastTrigonometric<Real>::FastTanMorePreciseCalculation(Real an
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
     auto root = Math::Sqrt(Math::GetValue(1) - value);
 
@@ -185,7 +230,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvSinRoughCalculation(Real value
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
     auto root = Math::Sqrt(Math::GetValue(1) - value);
 
@@ -213,7 +258,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvSinPreciseCalculation(Real val
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
     auto root = Math::Sqrt(Math::GetValue(1) - value);
 
@@ -232,7 +277,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvCosRoughCalculation(Real value
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(0), "输入值必须在范围[0,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(0) <= value && value <= Math::GetValue(1), "输入值必须在范围[0,1]！\n");
 
     auto root = Math::Sqrt(Math::GetValue(1) - value);
 
@@ -259,7 +304,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvCosPreciseCalculation(Real val
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(1), "输入值必须在范围[-1,1]！\n");
 
     auto valueSquare = Math::Square(value);
 
@@ -280,7 +325,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvTanRoughCalculation(Real value
 template <typename Real>
 Real Mathematics::FastTrigonometric<Real>::FastInvTanPreciseCalculation(Real value) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(0), "输入值必须在范围[-1,1]！\n");
+    MATHEMATICS_ASSERTION_3(Math::GetValue(-1) <= value && value <= Math::GetValue(1), "输入值必须在范围[-1,1]！\n");
 
     auto valueSquare = Math::Square(value);
 
@@ -300,7 +345,7 @@ Real Mathematics::FastTrigonometric<Real>::FastInvTanPreciseCalculation(Real val
     result *= valueSquare;
     result -= static_cast<Real>(0.3333314528);
     result *= valueSquare;
-    result += Math::GetValue(1);
+    result += static_cast<Real>(1.0);
     result *= value;
 
     return result;

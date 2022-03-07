@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/07/29 15:56)
+///	引擎版本：0.8.0.1 (2022/01/08 0:53)
 
 #ifndef CORE_TOOLS_HELPER_NAME_MACRO_H
 #define CORE_TOOLS_HELPER_NAME_MACRO_H
@@ -36,7 +36,6 @@ public:                                                                         
     NODISCARD ConstObjectSharedPtrContainer GetAllConstObjectsByName(const std::string& name) const final
 
 #define CORE_TOOLS_NAMES_IMPL_DECLARE                                                                  \
-public:                                                                                                \
     using ObjectSharedPtrContainer = std::vector<CoreTools::ObjectSharedPtr>;                          \
     using ConstObjectSharedPtrContainer = std::vector<CoreTools::ConstObjectSharedPtr>;                \
     MAYBE_NULLPTR CoreTools::ObjectSharedPtr GetObjectByName(const std::string& name);                 \
@@ -48,7 +47,7 @@ public:                                                                         
     CoreTools::ObjectSharedPtr namespaceName::className::GetObjectByName(const std::string& name)                                             \
     {                                                                                                                                         \
         CLASS_IS_VALID_0;                                                                                                                     \
-        auto found = ParentType::GetObjectByName(name);                                                                                       \
+        const auto found = ParentType::GetObjectByName(name);                                                                                 \
         if (found != nullptr)                                                                                                                 \
         {                                                                                                                                     \
             return found;                                                                                                                     \
@@ -62,14 +61,14 @@ public:                                                                         
     {                                                                                                                                         \
         CLASS_IS_VALID_0;                                                                                                                     \
         auto parentObjects = ParentType::GetAllObjectsByName(name);                                                                           \
-        auto implObjects = impl->GetAllObjectsByName(name);                                                                                   \
+        const auto implObjects = impl->GetAllObjectsByName(name);                                                                             \
         parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());                                                    \
         return parentObjects;                                                                                                                 \
     }                                                                                                                                         \
     CoreTools::ConstObjectSharedPtr namespaceName::className::GetConstObjectByName(const std::string& name) const                             \
     {                                                                                                                                         \
         CLASS_IS_VALID_CONST_0;                                                                                                               \
-        auto found = ParentType::GetConstObjectByName(name);                                                                                  \
+        const auto found = ParentType::GetConstObjectByName(name);                                                                            \
         if (found != nullptr)                                                                                                                 \
         {                                                                                                                                     \
             return found;                                                                                                                     \
@@ -83,7 +82,7 @@ public:                                                                         
     {                                                                                                                                         \
         CLASS_IS_VALID_CONST_0;                                                                                                               \
         auto parentObjects = ParentType::GetAllConstObjectsByName(name);                                                                      \
-        auto implObjects = impl->GetAllConstObjectsByName(name);                                                                              \
+        const auto implObjects = impl->GetAllConstObjectsByName(name);                                                                        \
         parentObjects.insert(parentObjects.end(), implObjects.begin(), implObjects.end());                                                    \
         return parentObjects;                                                                                                                 \
     }

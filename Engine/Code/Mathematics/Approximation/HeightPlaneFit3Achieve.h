@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 15:35)
+///	引擎版本：0.8.0.2 (2022/02/18 14:28)
 
 #ifndef MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_HEIGHT_PLANE_FIT3_ACHIEVE_H
@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::HeightPlaneFit3<Real>::HeightPlaneFit3(const Points& points)
-    : m_CoeffA{}, m_CoeffB{}, m_CoeffC{}, m_IsFit3Success{ false }
+    : coeffA{}, coeffB{}, coeffC{}, isFit3Success{ false }
 {
     Calculate(points);
 
@@ -25,11 +25,13 @@ Mathematics::HeightPlaneFit3<Real>::HeightPlaneFit3(const Points& points)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::HeightPlaneFit3<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -37,7 +39,7 @@ bool Mathematics::HeightPlaneFit3<Real>::IsFit3Success() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_IsFit3Success;
+    return isFit3Success;
 }
 
 template <typename Real>
@@ -45,9 +47,9 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffA() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_IsFit3Success)
+    if (isFit3Success)
     {
-        return m_CoeffA;
+        return coeffA;
     }
     else
     {
@@ -60,9 +62,9 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffB() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_IsFit3Success)
+    if (isFit3Success)
     {
-        return m_CoeffB;
+        return coeffB;
     }
     else
     {
@@ -75,9 +77,9 @@ Real Mathematics::HeightPlaneFit3<Real>::GetCoeffC() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    if (m_IsFit3Success)
+    if (isFit3Success)
     {
-        return m_CoeffC;
+        return coeffC;
     }
     else
     {
@@ -103,7 +105,7 @@ void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
     auto sumYY = Math::GetValue(0);
     auto sumYZ = Math::GetValue(0);
 
-    auto numPoints = static_cast<Real>(points.size());
+    const auto numPoints = static_cast<Real>(points.size());
 
     for (const auto& point : points)
     {
@@ -119,24 +121,24 @@ void Mathematics::HeightPlaneFit3<Real>::Calculate(const Points& points)
 
     try
     {
-        using Vector3 = typename LinearSystem<Real>::Vector3;
+        using Vector = typename LinearSystem<Real>::Vector3;
         using Matrix3 = typename LinearSystem<Real>::Matrix3;
 
-        Matrix3 matrix{ Vector3{ sumXX, sumXY, sumX }, Vector3{ sumXY, sumYY, sumY }, Vector3{ sumX, sumY, numPoints } };
+        Matrix3 matrix{ Vector{ sumXX, sumXY, sumX }, Vector{ sumXY, sumYY, sumY }, Vector{ sumX, sumY, numPoints } };
 
-        const Vector3 input{ sumXZ, sumYZ, sumZ };
+        const Vector input{ sumXZ, sumYZ, sumZ };
 
-        auto output = LinearSystem<Real>{}.Solve3(matrix, input);
+        const auto output = LinearSystem<Real>{}.Solve3(matrix, input);
 
-        m_CoeffA = output.at(0);
-        m_CoeffB = output.at(1);
-        m_CoeffC = output.at(2);
+        coeffA = output.at(0);
+        coeffB = output.at(1);
+        coeffC = output.at(2);
 
-        m_IsFit3Success = true;
+        isFit3Success = true;
     }
     catch (CoreTools::Error&)
     {
-        m_IsFit3Success = false;
+        isFit3Success = false;
     }
 }
 

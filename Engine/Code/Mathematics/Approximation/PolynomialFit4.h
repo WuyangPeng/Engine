@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 13:53)
+///	引擎版本：0.8.0.2 (2022/02/18 16:49)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Polynomial.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 #include <vector>
 
 namespace Mathematics
@@ -42,41 +42,44 @@ namespace Mathematics
     //         ((x-xcen)/rng)^i * ((y-ycen)/rng)^j * ((z-zcen)/rng)^k
 
     template <typename Real>
-    class PolynomialFit4Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4Impl<Real>>;
-
-    template <typename Real>
     class PolynomialFit4 final
     {
     public:
-        using PolynomialFit4Impl = PolynomialFit4Impl<Real>;
-       
-        TYPE_DECLARE(PolynomialFit4);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
+        using ClassType = PolynomialFit4<Real>;
         using Samples = std::vector<Real>;
         using Polynomial = Polynomial<Real>;
+        using Math = Math<Real>;
 
     public:
-        PolynomialFit4(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples,
-                       const Samples& wSamples, size_t xDegree, size_t yDegree, size_t zDegree);
+        PolynomialFit4(const Samples& xSamples,
+                       const Samples& ySamples,
+                       const Samples& zSamples,
+                       const Samples& wSamples,
+                       size_t xDegree,
+                       size_t yDegree,
+                       size_t zDegree);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Samples GetCoeff() const;
-        [[nodiscard]] bool IsSolveSucceed() const noexcept;
+        NODISCARD Samples GetCoeff() const;
+        NODISCARD bool IsSolveSucceed() const noexcept;
 
     private:
-        PackageType impl;
+        void Calculate(const Samples& xSamples,
+                       const Samples& ySamples,
+                       const Samples& zSamples,
+                       const Samples& wSamples,
+                       int xDegree,
+                       int yDegree,
+                       int zDegree);
+
+    private:
+        Samples coeff;
+        bool solveSucceed;
     };
 
-    using FloatPolynomialFit4 = PolynomialFit4<float>;
-    using DoublePolynomialFit4 = PolynomialFit4<double>;
+    using PolynomialFit4F = PolynomialFit4<float>;
+    using PolynomialFit4D = PolynomialFit4<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_H

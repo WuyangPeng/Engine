@@ -26,7 +26,7 @@ namespace Network
 		void ClientThread(ClientSharedPtr client, TestSocketManagerSharedPtr testSocketManagerSharedPtr);
 		void DestroyMessage();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		int m_Port;

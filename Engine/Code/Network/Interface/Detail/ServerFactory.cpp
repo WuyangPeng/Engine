@@ -1,15 +1,16 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 12:45)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:47)
 
 #include "Network/NetworkExport.h"
 
 #include "IterativeServer.h"
+#include "NullServer.h"
 #include "ReactiveServer.h"
 #include "ServerFactory.h"
 #include "ServerImpl.h"
@@ -27,7 +28,7 @@ Network::ServerFactory::ServerFactory() noexcept
 CLASS_INVARIANT_STUB_DEFINE(Network, ServerFactory)
 
 // static
-const Network::ServerFactory::ImplTypePtr Network::ServerFactory::Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
+Network::ServerFactory::ImplTypeSharedPtr Network::ServerFactory::Create(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy)
 {
     const auto patternStrategyFlag = configurationStrategy.GetPatternStrategy();
 
@@ -38,6 +39,6 @@ const Network::ServerFactory::ImplTypePtr Network::ServerFactory::Create(const S
         case ServerStrategy::Reactive:
             return make_shared<ReactiveServer>(socketManager, configurationStrategy);
         default:
-            return make_shared<ImplType>(socketManager, configurationStrategy);
+            return make_shared<NullServer>(socketManager, configurationStrategy);
     }
 }

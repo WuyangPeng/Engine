@@ -29,6 +29,7 @@
 #include "RealAddressDetail.h"
 #include "RecursiveSine.h"
 #include "ReferenceCastDetail.h"
+#include "RangeIteration.h"
 #include "SimpleDecrementer.h"
 #include "SimpleIncrementer.h"
 #include "Sqrt.h"

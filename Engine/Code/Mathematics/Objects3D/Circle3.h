@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 15:50)
+///	引擎版本：0.8.0.2 (2022/02/10 13:58)
 
 #ifndef MATHEMATICS_OBJECTS3D_CIRCLE3_H
 #define MATHEMATICS_OBJECTS3D_CIRCLE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -27,9 +27,9 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Circle3<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Math = Math<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
 
     public:
         // 含有该圆的平面是Dot(N,X-C) = 0，其中X是在平面上的任意点。
@@ -40,33 +40,37 @@ namespace Mathematics
 
         // U 是输入向量 'direction0', V 是输入向量 'direction1,
         // 和 N 是输入向量 'normal'.
-        Circle3(const Vector3D& center, const Vector3D& direction0, const Vector3D& direction1,
-                const Vector3D& normal, const Real radius, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Circle3(const Vector3& center,
+                const Vector3& direction0,
+                const Vector3& direction1,
+                const Vector3& normal,
+                const Real radius,
+                const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] const Vector3D GetDirection0() const noexcept;
-        [[nodiscard]] const Vector3D GetDirection1() const noexcept;
-        [[nodiscard]] const Vector3D GetNormal() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Vector3 GetDirection0() const noexcept;
+        NODISCARD Vector3 GetDirection1() const noexcept;
+        NODISCARD Vector3 GetNormal() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
 
-        [[nodiscard]] const Circle3 GetMove(Real t, const Vector3D& velocity) const;
+        NODISCARD Circle3 GetMove(Real t, const Vector3& velocity) const;
 
     private:
-        Vector3D m_Center;
-        Vector3D m_Direction0;
-        Vector3D m_Direction1;
-        Vector3D m_Normal;
-        Real m_Radius;
-        Real m_Epsilon;
+        Vector3 center;
+        Vector3 direction0;
+        Vector3 direction1;
+        Vector3 normal;
+        Real radius;
+        Real epsilon;
     };
 
-    using FloatCircle3 = Circle3<float>;
-    using DoubleCircle3 = Circle3<double>;
+    using Circle3F = Circle3<float>;
+    using Circle3D = Circle3<double>;
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Circle3<Real>& lhs, const Circle3<Real>& rhs, const Real epsilon);
+    NODISCARD bool Approximate(const Circle3<Real>& lhs, const Circle3<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
     // 调试输出
     template <typename Real>

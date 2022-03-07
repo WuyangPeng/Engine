@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/23 11:16)
+///	引擎版本：0.8.0.3 (2022/02/24 18:50)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_H
@@ -17,12 +17,12 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticTestIntersectorBox2Circle2 : public StaticIntersector<Real, Vector2D>
+    class StaticTestIntersectorBox2Circle2 : public StaticIntersector<Real, Vector2>
     {
     public:
         using ClassType = StaticTestIntersectorBox2Circle2<Real>;
-        using ParentType = StaticIntersector<Real, Vector2D>;
-        using Vector2D = Vector2D<Real>;
+        using ParentType = StaticIntersector<Real, Vector2>;
+        using Vector2 = Vector2<Real>;
         using Box2 = Box2<Real>;
         using Circle2 = Circle2<Real>;
         using Math = typename ParentType::Math;
@@ -32,8 +32,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Box2 GetBox() const noexcept;
-        [[nodiscard]] const Circle2 GetCircle() const noexcept;
+        NODISCARD Box2 GetBox() const noexcept;
+        NODISCARD Circle2 GetCircle() const noexcept;
 
     private:
         // 静态查找相交查询。
@@ -41,12 +41,9 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Box2 m_Box;
-        Circle2 m_Circle;
+        Box2 box;
+        Circle2 circle;
     };
-
-    using FloatStaticTestIntersectorBox2Circle2 = StaticTestIntersectorBox2Circle2<float>;
-    using DoubleStaticTestIntersectorBox2Circle2 = StaticTestIntersectorBox2Circle2<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_BOX2_CIRCLE2_H

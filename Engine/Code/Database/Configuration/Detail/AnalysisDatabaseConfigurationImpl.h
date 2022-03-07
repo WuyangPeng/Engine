@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 20:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 10:35)
 
 #ifndef DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_IMPLL_H
 #define DATABASE_CONFIGURATION_ANALYSIS_DATABASE_CONFIGURATION_IMPLL_H
@@ -34,10 +34,10 @@ namespace Database
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy(const String& name) const;
-        [[nodiscard]] ContainerConstIter begin() const noexcept;
-        [[nodiscard]] ContainerConstIter end() const noexcept;
-        [[nodiscard]] int GetSize() const;
+        NODISCARD ConfigurationStrategy GetConfigurationStrategy(const String& name) const;
+        NODISCARD ContainerConstIter begin() const noexcept;
+        NODISCARD ContainerConstIter end() const noexcept;
+        NODISCARD int GetSize() const;
 
     private:
         using BasicTree = boost::property_tree::basic_ptree<String, String>;
@@ -47,20 +47,20 @@ namespace Database
         void AnalysisJson();
         void AnalysisMain();
         void InsertStrategy(const String& name, const BasicTree& basicTree);
-        [[nodiscard]] static WrappersStrategy GetWrappersStrategy(const String& wrappers);
+        NODISCARD static WrappersStrategy GetWrappersStrategy(const String& wrappers);
 
     private:
-        [[nodiscard]] ConfigurationStrategy::FlagsOption GetFlagsOption(const BasicTree& basicTree, bool useFlagsOption);
-        [[nodiscard]] ConfigurationStrategy::StringOption GetStringOptions(const BasicTree& basicTree, bool useStringOption);
-        [[nodiscard]] ConfigurationStrategy::BooleanOption GetBooleanOptions(const BasicTree& basicTree, bool useBooleanOption);
-        [[nodiscard]] ConfigurationStrategy::IntOption GetIntOptions(const BasicTree& basicTree, bool useIntOption);
-        [[nodiscard]] ConfigurationStrategy::SSLOption GetSSLOptions(const BasicTree& basicTree, bool useSSLOption);
-        [[nodiscard]] ConfigurationStrategy::DBMapping GetDBMapping(const BasicTree& basicTree, bool useDBMapping);
+        NODISCARD ConfigurationStrategy::FlagsOption GetFlagsOption(const BasicTree& basicTree, bool useFlagsOption);
+        NODISCARD ConfigurationStrategy::StringOption GetStringOptions(const BasicTree& basicTree, bool useStringOption);
+        NODISCARD ConfigurationStrategy::BooleanOption GetBooleanOptions(const BasicTree& basicTree, bool useBooleanOption);
+        NODISCARD ConfigurationStrategy::IntOption GetIntOptions(const BasicTree& basicTree, bool useIntOption);
+        NODISCARD ConfigurationStrategy::SSLOption GetSSLOptions(const BasicTree& basicTree, bool useSSLOption);
+        NODISCARD ConfigurationStrategy::DBMapping GetDBMapping(const BasicTree& basicTree, bool useDBMapping);
 
     private:
-        Container m_Container;
-        std::string m_FileName;
-        BasicTree m_MainTree;
+        Container container;
+        std::string fileName;
+        BasicTree mainTree;
     };
 }
 

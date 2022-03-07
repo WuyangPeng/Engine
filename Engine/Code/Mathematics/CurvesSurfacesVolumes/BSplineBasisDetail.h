@@ -9,7 +9,7 @@
 
 #include "BSplineBasis.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
 
     #include "System/Helper/PragmaWarning.h"
     #include "CoreTools/Contract/Noexcept.h"
@@ -242,7 +242,7 @@ Real Mathematics::BSplineBasis<Real>::GetKnot(int j) const
 
     CoreTools::DisableNoexcept();
 
-    return Math::sm_MaxReal;
+    return Math::maxReal;
 }
 
 template <typename Real>
@@ -400,6 +400,6 @@ void Mathematics::BSplineBasis<Real>::Compute(Real t, unsigned int order, int& m
 }
     #include STSTEM_WARNING_POP
 
-#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
+#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_BASIS_DETAIL)
 
 #endif  // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_BASIS_DETAIL_H

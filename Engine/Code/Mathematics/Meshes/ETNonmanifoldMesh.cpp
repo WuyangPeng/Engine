@@ -52,14 +52,14 @@ for (/**/; titer != tend; ++titer)
 EXCEPTION_ALL_CATCH(Mathematics)
 }
 
-Mathematics::ETNonmanifoldMesh::EPtr Mathematics::ETNonmanifoldMesh ::CreateEdge(int v0, int v1)
+Mathematics::ETNonmanifoldMesh::EPtr Mathematics::ETNonmanifoldMesh ::CreateEdge(int v0, int v1) noexcept
 {
     v0;
     v1;
     return nullptr;  //    NEW0 Edge(v0, v1);
 }
 
-Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh ::CreateTriangle(int v0, int v1, int v2)
+Mathematics::ETNonmanifoldMesh::TPtr Mathematics::ETNonmanifoldMesh ::CreateTriangle(int v0, int v1, int v2) noexcept
 {
     v0;
     v1;

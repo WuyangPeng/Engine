@@ -1,17 +1,17 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/30 10:20)
+///	引擎版本：0.8.0.2 (2022/02/17 11:41)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_ACHIEVE_H
 
 #include "SingularValue.h"
-#include "SingularValueDecomposition.h" 
+#include "SingularValueDecomposition.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/Matrix3.h"
@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::SingularValue<Real>::SingularValue(const Matrix3& matrix)
-    : m_Left{}, m_Diagonal{}, m_RightTranspose{}
+    : left{}, diagonal{}, rightTranspose{}
 {
     Calculate(matrix);
 
@@ -28,11 +28,13 @@ Mathematics::SingularValue<Real>::SingularValue(const Matrix3& matrix)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::SingularValue<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // private
@@ -46,33 +48,33 @@ void Mathematics::SingularValue<Real>::Calculate(const Matrix3& matrix)
 
     Mathematics::SingularValueDecomposition<Real> decomposition{ variableMatrix };
 
-    m_Left = decomposition.GetLeftMatrix().GetMatrix3();
-    m_Diagonal = decomposition.GetDiagonalMatrix().GetMatrix3();
-    m_RightTranspose = decomposition.GetRightTransposeMatrix().GetMatrix3();
+    left = decomposition.GetLeftMatrix().GetMatrix3();
+    diagonal = decomposition.GetDiagonalMatrix().GetMatrix3();
+    rightTranspose = decomposition.GetRightTransposeMatrix().GetMatrix3();
 }
 
 template <typename Real>
-const Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetLeftMatrix() const noexcept
+Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetLeftMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Left;
+    return left;
 }
 
 template <typename Real>
-const Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetDiagonalMatrix() const noexcept
+Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetDiagonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Diagonal;
+    return diagonal;
 }
 
 template <typename Real>
-const Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetRightTransposeMatrix() const noexcept
+Mathematics::Matrix3<Real> Mathematics::SingularValue<Real>::GetRightTransposeMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_RightTranspose;
+    return rightTranspose;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SINGULAR_VALUE_ACHIEVE_H

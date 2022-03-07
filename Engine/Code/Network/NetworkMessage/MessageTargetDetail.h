@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 18:30)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_TARGET_DETAIL_H
@@ -23,21 +23,21 @@
 template <typename T>
 void Network::MessageTarget::Write(T datum)
 {
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
     static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
-    ;
 
-    const auto typeSize = CoreTools::GetStreamSize<T>(); 
+    const auto typeSize = CoreTools::GetStreamSize<T>();
 
-    return m_Target->Write(typeSize, &datum);
+    return target->Write(typeSize, &datum);
 }
 
 template <typename T>
 void Network::MessageTarget::WriteWithNumber(int32_t elementsNumber, const T* data)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     Write(elementsNumber);
     WriteWithoutNumber(elementsNumber, data);
@@ -46,24 +46,24 @@ void Network::MessageTarget::WriteWithNumber(int32_t elementsNumber, const T* da
 template <typename T>
 void Network::MessageTarget::WriteWithoutNumber(int32_t elementsNumber, const T* data)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     if (0 < elementsNumber)
     {
         const auto typeSize = CoreTools::GetStreamSize<T>();
 
-        m_Target->Write(typeSize, elementsNumber, data);
+        target->Write(typeSize, elementsNumber, data);
     }
 }
 
 template <typename T>
 void Network::MessageTarget::Write(const std::vector<T>& datum)
 {
-    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_arithmetic_v<T>, "T is not arithmetic");
 
     auto elementsNumber = boost::numeric_cast<int32_t>(datum.size());
 
@@ -77,20 +77,20 @@ void Network::MessageTarget::Write(const std::vector<T>& datum)
 template <typename T>
 void Network::MessageTarget::WriteEnum(const T datum)
 {
+    NETWORK_SELF_CLASS_IS_VALID_1;
+
     static_assert(std::is_enum_v<T>, "T is not enum");
 
-    ;
-
-    auto value = System::EnumCastUnderlying(datum);
+    const auto value = System::EnumCastUnderlying(datum);
     Write(value);
 }
 
 template <typename T>
 void Network::MessageTarget::WriteEnumWithNumber(int32_t elementsNumber, const T* data)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     Write(elementsNumber);
     WriteEnumWithoutNumber(elementsNumber, data);
@@ -99,13 +99,16 @@ void Network::MessageTarget::WriteEnumWithNumber(int32_t elementsNumber, const T
 template <typename T>
 void Network::MessageTarget::WriteEnumWithoutNumber(int32_t elementsNumber, const T* data)
 {
-    static_assert(std::is_enum_v<T>, "T is not enum");
+    NETWORK_SELF_CLASS_IS_VALID_1;
 
-    ;
+    static_assert(std::is_enum_v<T>, "T is not enum");
 
     for (auto i = 0; i < elementsNumber; ++i)
     {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26481)
         WriteEnum(data[i]);
+#include STSTEM_WARNING_POP
     }
 }
 

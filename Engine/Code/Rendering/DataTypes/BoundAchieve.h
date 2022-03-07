@@ -255,12 +255,12 @@ bool Rendering::Bound<T>::TestIntersection(const APoint& origin, const AVector& 
         return false;
     }
 
-    if (Math::Approximate(tMin, -Math::sm_MaxReal))
+    if (Math::Approximate(tMin, -Math::maxReal))
     {
         return TestLineIntersection(origin, direction, tMax);
     }
 
-    if (Math::Approximate(tMax, Math::sm_MaxReal))
+    if (Math::Approximate(tMax, Math::maxReal))
     {
         return TestRayIntersection(origin, direction, tMin);
     }
@@ -272,7 +272,7 @@ bool Rendering::Bound<T>::TestIntersection(const APoint& origin, const AVector& 
 template <typename T>
 bool Rendering::Bound<T>::TestLineIntersection(const APoint& origin, const AVector& direction, [[maybe_unused]] T tMax) const noexcept(g_Assert < 2 || g_RenderingAssert < 2)
 {
-    RENDERING_ASSERTION_2(Math::Approximate(tMax, Math::sm_MaxReal), "tmax对线必须是无穷大。\n");
+    RENDERING_ASSERTION_2(Math::Approximate(tMax, Math::maxReal), "tmax对线必须是无穷大。\n");
 
     // 测试球——直线相交
     const auto pointDifference = origin - m_Center;

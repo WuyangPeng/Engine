@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 18:35)
+///	引擎版本：0.8.0.2 (2022/02/20 15:09)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RESLUT_IMPL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RESLUT_IMPL_DETAIL_H
@@ -13,23 +13,26 @@
 #include "DistanceResultImpl.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 
 template <typename Real, typename Vector>
 Mathematics::DistanceResultImpl<Real, Vector>::DistanceResultImpl(Real distance) noexcept
-    : m_Distance{ distance }
+    : distance{ distance }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename Vector>
 bool Mathematics::DistanceResultImpl<Real, Vector>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) <= m_Distance)
+    if (Math::GetValue(0) <= distance)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename Vector>
@@ -37,7 +40,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetDistance() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Distance;
+    return distance;
 }
 
 template <typename Real, typename Vector>
@@ -49,7 +52,7 @@ Real Mathematics::DistanceResultImpl<Real, Vector>::GetContactTime() const noexc
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint() const
+Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -57,7 +60,7 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint()
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint() const
+Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -65,7 +68,7 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint()
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint([[maybe_unused]] int index) const
+Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint([[maybe_unused]] int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -73,7 +76,7 @@ const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPoint([
 }
 
 template <typename Real, typename Vector>
-const Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint([[maybe_unused]] int index) const
+Vector Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPoint([[maybe_unused]] int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -87,7 +90,7 @@ int Mathematics::DistanceResultImpl<Real, Vector>::GetLhsClosestPointSize() cons
 
     CoreTools::DisableNoexcept();
 
-    return sm_ClosestPointZeroSize;
+    return closestPointZeroSize;
 }
 
 template <typename Real, typename Vector>
@@ -97,27 +100,27 @@ int Mathematics::DistanceResultImpl<Real, Vector>::GetRhsClosestPointSize() cons
 
     CoreTools::DisableNoexcept();
 
-    return sm_ClosestPointZeroSize;
+    return closestPointZeroSize;
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceResultImpl<Real, Vector>::SetDistance(Real distance) noexcept
+void Mathematics::DistanceResultImpl<Real, Vector>::SetDistance(Real newDistance) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Distance = distance;
+    distance = newDistance;
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceResultImpl<Real, Vector>::SetSqrtDistance() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+void Mathematics::DistanceResultImpl<Real, Vector>::SetSqrtDistance(Real newDistance) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Distance = Math::Sqrt(m_Distance);
+    SetDistance(Math::Sqrt(newDistance));
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceResultImpl<Real, Vector>::SetContactTime([[maybe_unused]] Real contactTime) 
+void Mathematics::DistanceResultImpl<Real, Vector>::SetContactTime([[maybe_unused]] Real contactTime)
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
@@ -125,20 +128,19 @@ void Mathematics::DistanceResultImpl<Real, Vector>::SetContactTime([[maybe_unuse
 }
 
 template <typename Real, typename Vector>
-Real Mathematics::DistanceResultImpl<Real, Vector>::GetLhsParameter() const  
+Real Mathematics::DistanceResultImpl<Real, Vector>::GetLhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
- 
 
-      THROW_EXCEPTION(SYSTEM_TEXT("距离结果不包含接触参数！\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("距离结果不包含接触参数！\n"s));
 }
 
 template <typename Real, typename Vector>
-Real Mathematics::DistanceResultImpl<Real, Vector>::GetRhsParameter() const 
+Real Mathematics::DistanceResultImpl<Real, Vector>::GetRhsParameter() const
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-     THROW_EXCEPTION(SYSTEM_TEXT("距离结果不包含接触参数！\n"s));
+    THROW_EXCEPTION(SYSTEM_TEXT("距离结果不包含接触参数！\n"s));
 }
 
 template <typename Real, typename Vector>
@@ -150,7 +152,7 @@ bool Mathematics::DistanceResultImpl<Real, Vector>::isHaveContactTime() const no
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceResultImpl<Real, Vector>::ImplTypePtr Mathematics::DistanceResultImpl<Real, Vector>::Clone() const
+typename Mathematics::DistanceResultImpl<Real, Vector>::ImplTypeSharedPtr Mathematics::DistanceResultImpl<Real, Vector>::Clone() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

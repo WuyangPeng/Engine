@@ -6,7 +6,7 @@
 
 #include "Sphere3Testing.h"
 #include "Mathematics/Objects3D/Sphere3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -20,6 +20,12 @@ namespace Mathematics
 	template class Sphere3<float>;
 	template class Sphere3<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Sphere3Testing) 
 
@@ -40,16 +46,16 @@ void Mathematics::Sphere3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D center(firstRandomDistribution(generator),
+		Vector3D center(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
 		
-		double radius(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleSphere3 circle(center,radius);
+		Sphere3D circle(center,radius);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(center,circle.GetCenter()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(center,circle.GetCenter()));
 		ASSERT_APPROXIMATE(radius,circle.GetRadius(),1e-10);
 	}
 }

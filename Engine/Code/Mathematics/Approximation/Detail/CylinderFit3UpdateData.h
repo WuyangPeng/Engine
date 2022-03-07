@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/02 16:16)
+///	引擎版本：0.8.0.2 (2022/02/18 18:29)
 
 #ifndef MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_H
 #define MATHEMATICS_APPROXIMATION_CYLINDER_FIT3_UPDATE_DATA_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
@@ -21,28 +21,28 @@ namespace Mathematics
     {
     public:
         using ClassType = CylinderFit3UpdateData<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
 
     public:
-        CylinderFit3UpdateData(const Vector3D& point, const Vector3D& center, const Vector3D& axis);
+        CylinderFit3UpdateData(const Vector3& point, const Vector3& center, const Vector3& axis);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetPoint() const noexcept;
-        [[nodiscard]] const Vector3D GetDelta() const noexcept;
-        [[nodiscard]] const Vector3D GetDeltaCrossAxis() const noexcept;
-        [[nodiscard]] Real GetDeltaCrossAxisLengthQuartic() const noexcept;
-        [[nodiscard]] const Vector3D GetDescentDirection() const noexcept;
+        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Vector3 GetDelta() const noexcept;
+        NODISCARD Vector3 GetDeltaCrossAxis() const noexcept;
+        NODISCARD Real GetDeltaCrossAxisLengthQuartic() const noexcept;
+        NODISCARD Vector3 GetDescentDirection() const noexcept;
 
     private:
-        [[nodiscard]] static const Vector3D CalculateDescentDirection(const Vector3D& delta, const Vector3D& axis) noexcept;
+        NODISCARD static Vector3 CalculateDescentDirection(const Vector3& delta, const Vector3& axis) noexcept;
 
     private:
-        Vector3D m_Point;
-        Vector3D m_Delta;
-        Vector3D m_DeltaCrossAxis;
-        Real m_DeltaCrossAxisLengthQuartic;
-        Vector3D m_DescentDirection;
+        Vector3 point;
+        Vector3 delta;
+        Vector3 deltaCrossAxis;
+        Real deltaCrossAxisLengthQuartic;
+        Vector3 descentDirection;
     };
 }
 

@@ -8,20 +8,22 @@
 #include "CoreTools/Threading/ScopedMutex.h"
 
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
+#include "CoreTools/Threading/Flags/MutexFlags.h"
 #include "Network/Interface/SendSocket.h"
 #include "Network/NetworkMessage/NullMessage.h"
 
 using std::make_shared;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26455)
 Network::TestMessageEvent ::TestMessageEvent()
-    : ParentType{}, m_CallBackTime{ 0 }, m_TestMessageEventCriticalSection{}, m_ServerWeakPtr{}
+    : ParentType{}, m_CallBackTime{ 0 }, m_TestMessageEventCriticalSection{ CoreTools::MutexCreate::UseCriticalSection }, m_ServerWeakPtr{}
 {
     m_TestMessageEventCriticalSection.Initialize();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::TestMessageEvent ::~TestMessageEvent()
+Network::TestMessageEvent ::~TestMessageEvent() noexcept
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 
@@ -30,13 +32,15 @@ Network::TestMessageEvent ::~TestMessageEvent()
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestMessageEvent);
 
-uint64_t Network::TestMessageEvent ::GetCallBackTime() const
+uint64_t Network::TestMessageEvent ::GetCallBackTime() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return m_CallBackTime;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 void Network::TestMessageEvent ::CallBackEvent([[maybe_unused]] uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
     NETWORK_CLASS_IS_VALID_9;
@@ -54,7 +58,7 @@ void Network::TestMessageEvent ::CallBackEvent([[maybe_unused]] uint64_t socketI
     }
 }
 
-void Network::TestMessageEvent ::SetServerWeakPtr(const ServerSharedPtr& ptr)
+void Network::TestMessageEvent ::SetServerWeakPtr(const ServerSharedPtr& ptr) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 

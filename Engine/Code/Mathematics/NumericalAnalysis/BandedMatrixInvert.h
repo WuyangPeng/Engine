@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:25)
+///	引擎版本：0.8.0.2 (2022/02/12 21:33)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BANDED_MATRIX_INVERT_H
@@ -20,7 +20,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrixInvert final
+    class BandedMatrixInvert final
     {
     public:
         using ClassType = BandedMatrixInvert<Real>;
@@ -33,7 +33,7 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const VariableMatrix GetInvert() const;
+        NODISCARD VariableMatrix GetInvert() const;
 
     private:
         void Solve();
@@ -41,9 +41,9 @@ namespace Mathematics
         void BackwardEliminate(int reduceRow);
 
     private:
-        Real m_ZeroTolerance;
-        BandedMatrix m_Matrix;
-        VariableMatrix m_Output;
+        Real zeroTolerance;
+        BandedMatrix matrix;
+        VariableMatrix output;
     };
 }
 

@@ -12,7 +12,7 @@
 
 template <typename Real>
 Mathematics::Ellipse2<Real> Mathematics
-	::ContEllipse (const std::vector<Vector2D<Real> >& points)
+	::ContEllipse (const std::vector<Vector2<Real> >& points)
 {
     // Fit the points with a Gaussian distribution.  The covariance matrix
     // is M = D[0]*U[0]*U[0]^T+D[1]*U[1]*U[1]^T, where D[0] and D[1] are the
@@ -20,7 +20,7 @@ Mathematics::Ellipse2<Real> Mathematics
     // eigenvectors.
 	auto box = GaussPointsFit2<Real>(points).GetBox2();
 	Real diag[2]{ box.GetExtent0(),box.GetExtent1() };
-	Vector2D<Real> axis[2]{  box.GetAxis0(),box.GetAxis1()};
+	Vector2<Real> axis[2]{  box.GetAxis0(),box.GetAxis1()};
 
     // If either eigenvalue is nonpositive, adjust the D[] values so that
     // we actually build an ellipse.
@@ -51,8 +51,8 @@ Mathematics::Ellipse2<Real> Mathematics
     for (auto i = 0u; i < points.size(); ++i)
     {
 		auto diff = points[i] - box.GetCenter();
-        Real dot[2]{ Vector2DTools<Real>::DotProduct(axis[0],diff), 
-			         Vector2DTools<Real>::DotProduct(axis[1],diff) };
+        Real dot[2]{ Vector2Tools<Real>::DotProduct(axis[0],diff), 
+			         Vector2Tools<Real>::DotProduct(axis[1],diff) };
 		auto value = dot[0]*dot[0]/diag[0] + dot[1]*dot[1]/diag[1];
         if (value > maxValue)
         {
@@ -67,7 +67,7 @@ Mathematics::Ellipse2<Real> Mathematics
     }
 
 	auto center = box.GetCenter();
-	Vector2D<Real> ellipseAxis[2];
+	Vector2<Real> ellipseAxis[2];
 	Real extent[2];
 
 	for (auto i = 0u; i < 2; ++i)
@@ -86,11 +86,11 @@ void Mathematics
 	::ProjectEllipse (const Ellipse2<Real>& ellipse, const Line2<Real>& line,Real& smin, Real& smax)
 {
     // Center of projection interval.
-	auto center = Vector2DTools<Real>::DotProduct(line.GetDirection(),ellipse.GetCenter() - line.GetOrigin());
+	auto center = Vector2Tools<Real>::DotProduct(line.GetDirection(),ellipse.GetCenter() - line.GetOrigin());
 
     // Radius of projection interval.
-    Real tmp[2] { ellipse.GetExtent0()*(Vector2DTools<Real>::DotProduct(line.GetDirection(),ellipse.GetAxis0())),
-			      ellipse.GetExtent1()*(Vector2DTools<Real>::DotProduct(line.GetDirection(),ellipse.GetAxis1())) };
+    Real tmp[2] { ellipse.GetExtent0()*(Vector2Tools<Real>::DotProduct(line.GetDirection(),ellipse.GetAxis0())),
+			      ellipse.GetExtent1()*(Vector2Tools<Real>::DotProduct(line.GetDirection(),ellipse.GetAxis1())) };
 	auto rSqr = tmp[0]*tmp[0] + tmp[1]*tmp[1];
 	auto radius = Math<Real>::Sqrt(rSqr);
 
@@ -104,10 +104,10 @@ const Mathematics::Ellipse2<Real> Mathematics
 {
     // Compute the average of the input centers.
 	auto center = (Real{0.5})*(ellipse0.GetCenter() + ellipse1.GetCenter());
-	Vector2D<Real> axis[2];
+	Vector2<Real> axis[2];
 
     // Bounding ellipse orientation is average of input orientations.
-    if (Vector2DTools<Real>::DotProduct(ellipse0.GetAxis0(),ellipse1.GetAxis0()) >= Math<Real>::GetValue(0))
+    if (Vector2Tools<Real>::DotProduct(ellipse0.GetAxis0(),ellipse1.GetAxis0()) >= Math<Real>::GetValue(0))
     {
         axis[0] = (Real{0.5})*(ellipse0.GetAxis0() + ellipse1.GetAxis0());
         axis[0].Normalize();
@@ -117,7 +117,7 @@ const Mathematics::Ellipse2<Real> Mathematics
         axis[0] = (Real{0.5})*(ellipse0.GetAxis0() - ellipse1.GetAxis0());
         axis[0].Normalize();
     }
-    axis[1] = -Vector2DTools<Real>::GetPerp(axis[0]); 
+    axis[1] = -Vector2Tools<Real>::GetPerp(axis[0]); 
 
 	Real extent[2];
 

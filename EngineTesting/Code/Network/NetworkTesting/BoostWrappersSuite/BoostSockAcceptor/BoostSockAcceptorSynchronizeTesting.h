@@ -26,7 +26,7 @@ namespace Network
 		using AcceptFunction = bool(ClassType::*)(const TestingTypeSharedPtr& sockAcceptor);
 
 	private:
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 		void MainTest();
 

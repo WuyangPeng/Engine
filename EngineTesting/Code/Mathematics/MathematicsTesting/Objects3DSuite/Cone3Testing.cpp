@@ -6,7 +6,7 @@
 
 #include "Cone3Testing.h"
 #include "Mathematics/Objects3D/Cone3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -29,23 +29,28 @@ void Mathematics::Cone3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(ConeTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Cone3Testing
 	::ConeTest()
 {
 	default_random_engine generator{};
 	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
-	uniform_real<double> secondRandomDistribution(0.0, DoubleMath::GetHalfPI());
+	uniform_real<double> secondRandomDistribution(0.0, MathD::GetHalfPI());
 
 	const auto testLoopCount = GetTestLoopCount();
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D vertex(firstRandomDistribution(generator),
+		Vector3D vertex(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D axis(firstRandomDistribution(generator),
+		Vector3D axis(firstRandomDistribution(generator),
 			           firstRandomDistribution(generator),
 					   firstRandomDistribution(generator));
 
@@ -53,22 +58,22 @@ void Mathematics::Cone3Testing
 
 		double angle(secondRandomDistribution(generator));
 
-		double height(DoubleMath::FAbs(firstRandomDistribution(generator)));
+		double height(MathD::FAbs(firstRandomDistribution(generator)));
 
-		DoubleCone3 cone(vertex,axis,angle,height);
+		Cone3D cone(vertex,axis,angle,height);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(cone.GetVertex(),vertex));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(cone.GetAxis(),axis));
-		ASSERT_APPROXIMATE(DoubleMath::Cos(angle),cone.GetCosAngle(),1e-10);
-		ASSERT_APPROXIMATE(DoubleMath::Sin(angle),cone.GetSinAngle(),1e-10);
+		ASSERT_TRUE(Vector3ToolsD::Approximate(cone.GetVertex(),vertex));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(cone.GetAxis(),axis));
+		ASSERT_APPROXIMATE(MathD::Cos(angle),cone.GetCosAngle(),1e-10);
+		ASSERT_APPROXIMATE(MathD::Sin(angle),cone.GetSinAngle(),1e-10);
 		ASSERT_APPROXIMATE(height,cone.GetHeight(),1e-10);
 
-		DoubleCone3 secondCone(DoubleMath::Cos(angle),DoubleMath::Sin(angle),height,vertex,axis);
+		Cone3D secondCone(MathD::Cos(angle),MathD::Sin(angle),height,vertex,axis);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondCone.GetVertex(),vertex));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(secondCone.GetAxis(),axis));
-		ASSERT_APPROXIMATE(DoubleMath::Cos(angle),secondCone.GetCosAngle(),1e-10);
-		ASSERT_APPROXIMATE(DoubleMath::Sin(angle),secondCone.GetSinAngle(),1e-10);
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondCone.GetVertex(),vertex));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(secondCone.GetAxis(),axis));
+		ASSERT_APPROXIMATE(MathD::Cos(angle),secondCone.GetCosAngle(),1e-10);
+		ASSERT_APPROXIMATE(MathD::Sin(angle),secondCone.GetSinAngle(),1e-10);
 		ASSERT_APPROXIMATE(height,secondCone.GetHeight(),1e-10);
 	}
 }

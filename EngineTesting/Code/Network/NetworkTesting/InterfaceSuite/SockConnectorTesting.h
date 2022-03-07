@@ -36,7 +36,7 @@ namespace Network
 		void NetworkConstructionTest();
 		void NullConstructionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

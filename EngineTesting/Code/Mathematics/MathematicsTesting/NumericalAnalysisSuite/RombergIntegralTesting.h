@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/27 13:55)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ROMBERG_INTEGRAL_TESTING_H
@@ -11,20 +11,20 @@
 
 namespace Mathematics
 {
-	class RombergIntegralTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RombergIntegralTesting); 
+    class RombergIntegralTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(RombergIntegralTesting);
 
-	private:
-		void MainTest();  
-		void ValueTest();		 
-		
-		virtual void DoRunUnitTest() override;	
+    private:
+        void MainTest();
+        void ValueTest();
 
-		static double Solution(double input, const RombergIntegralTesting* userData);
-		double  GetUserData() const;
-	};
+        void DoRunUnitTest() override;
+
+        static double Solution(double input, const RombergIntegralTesting* userData) noexcept;
+        double GetUserData() const noexcept;
+    };
 }
 
-#endif // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ROMBERG_INTEGRAL_TESTING_H
+#endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SUITE_ROMBERG_INTEGRAL_TESTING_H

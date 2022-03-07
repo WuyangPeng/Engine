@@ -1,35 +1,38 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 0:22)
+///	引擎版本：0.8.0.2 (2022/02/07 18:19)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX4_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX4_ACHIEVE_H
 
+#include "Matrix3Detail.h"
 #include "Matrix4.h"
-#include "Vector3DTools.h"
-#include "Vector4D.h"
-#include "Vector4DTools.h"
+#include "Vector3Tools.h"
+#include "Vector4.h"
+#include "Vector4Tools.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Mathematics/NumericalAnalysis/GaussianEliminationDetail.h"
 
 template <typename Real>
 Mathematics::Matrix4<Real>::Matrix4(const ContainerType& entry, MatrixMajorFlags majorFlag)
     : m_X{}, m_Y{}, m_Z{}, m_W{}
 {
-    if (entry.size() != sm_MatrixSize)
+    if (entry.size() != matrixSize)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
     }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     if (majorFlag == MatrixMajorFlags::Row)
     {
         m_X.SetCoordinate(entry[0], entry[1], entry[2], entry[3]);
@@ -44,17 +47,20 @@ Mathematics::Matrix4<Real>::Matrix4(const ContainerType& entry, MatrixMajorFlags
         m_Z.SetCoordinate(entry[2], entry[6], entry[10], entry[14]);
         m_W.SetCoordinate(entry[3], entry[7], entry[11], entry[15]);
     }
+
 #include STSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Matrix4<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -73,14 +79,14 @@ void Mathematics::Matrix4<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = Vector4D::GetUnitX();
-    m_Y = Vector4D::GetUnitY();
-    m_Z = Vector4D::GetUnitZ();
-    m_W = Vector4D::GetUnitW();
+    m_X = Vector4::GetUnitX();
+    m_Y = Vector4::GetUnitY();
+    m_Z = Vector4::GetUnitZ();
+    m_W = Vector4::GetUnitW();
 }
 
 template <typename Real>
-const Mathematics::Vector4D<Real>& Mathematics::Matrix4<Real>::operator[](int row) const
+const Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::operator[](int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -102,18 +108,19 @@ const Mathematics::Vector4D<Real>& Mathematics::Matrix4<Real>::operator[](int ro
 }
 
 template <typename Real>
-Mathematics::Vector4D<Real>& Mathematics::Matrix4<Real>::operator[](int row)
+Mathematics::Vector4<Real>& Mathematics::Matrix4<Real>::operator[](int row)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(0 <= row && row < sm_VectorSize, "索引错误！");
 
-    return OPERATOR_SQUARE_BRACKETS(Mathematics::Vector4D<Real>, row);
+    return OPERATOR_SQUARE_BRACKETS(Mathematics::Vector4<Real>, row);
 }
 
 template <typename Real>
 const Real& Mathematics::Matrix4<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_9;
+    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "row索引错误！");
+    MATHEMATICS_ASSERTION_0(Vector4::xIndex <= column && column < Vector4::pointSize, "column索引错误！");
 
     return (*this)[row][column];
 }
@@ -122,24 +129,36 @@ template <typename Real>
 Real& Mathematics::Matrix4<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(sm_X <= row && row < sm_VectorSize, "row索引错误！");
-    MATHEMATICS_ASSERTION_0(Vector4D::sm_X <= column && column < Vector4D::sm_PointSize, "column索引错误！");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
+
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
+
 #include STSTEM_WARNING_POP
 }
 
 template <typename Real>
-const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::operator-() const noexcept
+Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Matrix4<Real>{ -m_X.GetX(), -m_X.GetY(), -m_X.GetZ(), -m_X.GetW(),
-                          -m_Y.GetX(), -m_Y.GetY(), -m_Y.GetZ(), -m_Y.GetW(),
-                          -m_Z.GetX(), -m_Z.GetY(), -m_Z.GetZ(), -m_Z.GetW(),
-                          -m_W.GetX(), -m_W.GetY(), -m_W.GetZ(), -m_W.GetW() };
+    return Matrix4<Real>{ -m_X.GetX(),
+                          -m_X.GetY(),
+                          -m_X.GetZ(),
+                          -m_X.GetW(),
+                          -m_Y.GetX(),
+                          -m_Y.GetY(),
+                          -m_Y.GetZ(),
+                          -m_Y.GetW(),
+                          -m_Z.GetX(),
+                          -m_Z.GetY(),
+                          -m_Z.GetZ(),
+                          -m_Z.GetW(),
+                          -m_W.GetX(),
+                          -m_W.GetY(),
+                          -m_W.GetZ(),
+                          -m_W.GetW() };
 }
 
 template <typename Real>
@@ -195,22 +214,34 @@ Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator/=(Real scalar) 
 }
 
 template <typename Real>
-Real Mathematics::Matrix4<Real>::QuadraticForm(const Vector4D& lhs, const Vector4D& rhs) const noexcept
+Real Mathematics::Matrix4<Real>::QuadraticForm(const Vector4& lhs, const Vector4& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    return Vector4DTools::DotProduct(lhs, (*this) * rhs);
+    return Vector4Tools::DotProduct(lhs, (*this) * rhs);
 }
 
 template <typename Real>
-const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Transpose() const noexcept
+Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Transpose() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Matrix4<Real>{ GetValue<0, 0>(), GetValue<1, 0>(), GetValue<2, 0>(), GetValue<3, 0>(),
-                          GetValue<0, 1>(), GetValue<1, 1>(), GetValue<2, 1>(), GetValue<3, 1>(),
-                          GetValue<0, 2>(), GetValue<1, 2>(), GetValue<2, 2>(), GetValue<3, 2>(),
-                          GetValue<0, 3>(), GetValue<1, 3>(), GetValue<2, 3>(), GetValue<3, 3>() };
+    return Matrix4<Real>{ GetValue<0, 0>(),
+                          GetValue<1, 0>(),
+                          GetValue<2, 0>(),
+                          GetValue<3, 0>(),
+                          GetValue<0, 1>(),
+                          GetValue<1, 1>(),
+                          GetValue<2, 1>(),
+                          GetValue<3, 1>(),
+                          GetValue<0, 2>(),
+                          GetValue<1, 2>(),
+                          GetValue<2, 2>(),
+                          GetValue<3, 2>(),
+                          GetValue<0, 3>(),
+                          GetValue<1, 3>(),
+                          GetValue<2, 3>(),
+                          GetValue<3, 3>() };
 }
 
 template <typename Real>
@@ -224,7 +255,36 @@ Mathematics::Matrix4<Real>& Mathematics::Matrix4<Real>::operator*=(const Matrix4
 }
 
 template <typename Real>
-const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Inverse(const Real epsilon) const
+Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::GaussianEliminationInverse(const Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), true, epsilon };
+
+    if (gaussianElimination.IsInverse())
+    {
+        return Matrix4{ gaussianElimination.GetInverse(), MatrixMajorFlags::Row };
+    }
+    else
+    {
+        MATHEMATICS_ASSERTION_0(false, "该矩阵不存在逆矩阵！");
+
+        return GetZero();
+    }
+}
+
+template <typename Real>
+Real Mathematics::Matrix4<Real>::GaussianEliminationDeterminant(const Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), false, epsilon };
+
+    return gaussianElimination.GetDeterminant();
+}
+
+template <typename Real>
+Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Inverse(const Real epsilon) const
 {
     // 游戏编程精粹1 02 isensee存在另一种算法。
 
@@ -276,7 +336,7 @@ const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Inverse(const Real 
 }
 
 template <typename Real>
-const Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Adjoint() const noexcept
+Mathematics::Matrix4<Real> Mathematics::Matrix4<Real>::Adjoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -335,7 +395,7 @@ Real Mathematics::Matrix4<Real>::Determinant() const noexcept
 }
 
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3D& normal, const Vector3D& origin, const Vector3D& direction) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3& normal, const Vector3& origin, const Vector3& direction) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize() && direction.IsNormalize(), "normal和direction必须是单位向量！");
@@ -361,20 +421,26 @@ void Mathematics::Matrix4<Real>::MakeObliqueProjection(const Vector3D& normal, c
     // 该矩阵被选择为每当Dot(N,D) < 0使得M[3][3] > 0
     // （投影到平面上的“正面侧”）。
 
-    auto dotNormalDirection = Vector3DTools::DotProduct(normal, direction);
-    auto dotNormalOrigin = Vector3DTools::DotProduct(normal, origin);
+    auto dotNormalDirection = Vector3Tools::DotProduct(normal, direction);
+    auto dotNormalOrigin = Vector3Tools::DotProduct(normal, origin);
 
-    m_X.SetCoordinate(direction.GetX() * normal.GetX() - dotNormalDirection, direction.GetX() * normal.GetY(),
-                      direction.GetX() * normal.GetZ(), -dotNormalOrigin * direction.GetX());
-    m_Y.SetCoordinate(direction.GetY() * normal.GetX(), direction.GetY() * normal.GetY() - dotNormalDirection,
-                      direction.GetY() * normal.GetZ(), -dotNormalOrigin * direction.GetY());
-    m_Z.SetCoordinate(direction.GetZ() * normal.GetX(), direction.GetZ() * normal.GetY(),
-                      direction.GetZ() * normal.GetZ() - dotNormalDirection, -dotNormalOrigin * direction.GetZ());
+    m_X.SetCoordinate(direction.GetX() * normal.GetX() - dotNormalDirection,
+                      direction.GetX() * normal.GetY(),
+                      direction.GetX() * normal.GetZ(),
+                      -dotNormalOrigin * direction.GetX());
+    m_Y.SetCoordinate(direction.GetY() * normal.GetX(),
+                      direction.GetY() * normal.GetY() - dotNormalDirection,
+                      direction.GetY() * normal.GetZ(),
+                      -dotNormalOrigin * direction.GetY());
+    m_Z.SetCoordinate(direction.GetZ() * normal.GetX(),
+                      direction.GetZ() * normal.GetY(),
+                      direction.GetZ() * normal.GetZ() - dotNormalDirection,
+                      -dotNormalOrigin * direction.GetZ());
     m_W.SetCoordinate(Math::GetValue(0), Math::GetValue(0), Math::GetValue(0), -dotNormalDirection);
 }
 
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3D& normal, const Vector3D& origin, const Vector3D& eye)
+void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3& normal, const Vector3& origin, const Vector3& eye)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
@@ -382,23 +448,29 @@ void Mathematics::Matrix4<Real>::MakePerspectiveProjection(const Vector3D& norma
     //     +-                                                             -+
     // M = | Dot(N,E - P) * I - E * N^T    -(Dot(N,E - P)*I - E * N^T) * E |
     //     |        -N^t                      Dot(N,E)                     |
-    //     +-                                                             -+normal
+    //     +-                                                             -+
     //
     // 其中E为眼点，P为平面上的一个点，而N是单位长度的平面法线。
 
-    auto dotNormalDirection = Vector3DTools::DotProduct(normal, eye - origin);
+    auto dotNormalDirection = Vector3Tools::DotProduct(normal, eye - origin);
 
-    m_X.SetCoordinate(dotNormalDirection - eye.GetX() * normal.GetX(), -eye.GetX() * normal.GetY(), -eye.GetX() * normal.GetZ(),
+    m_X.SetCoordinate(dotNormalDirection - eye.GetX() * normal.GetX(),
+                      -eye.GetX() * normal.GetY(),
+                      -eye.GetX() * normal.GetZ(),
                       -(GetValue<0, 0>() * eye.GetX() + GetValue<0, 1>() * eye.GetY() + GetValue<0, 2>() * eye.GetZ()));
-    m_Y.SetCoordinate(-eye.GetY() * normal.GetX(), dotNormalDirection - eye.GetY() * normal.GetY(), -eye.GetY() * normal.GetZ(),
+    m_Y.SetCoordinate(-eye.GetY() * normal.GetX(),
+                      dotNormalDirection - eye.GetY() * normal.GetY(),
+                      -eye.GetY() * normal.GetZ(),
                       -(GetValue<1, 0>() * eye.GetX() + GetValue<1, 1>() * eye.GetY() + GetValue<1, 2>() * eye.GetZ()));
-    m_Z.SetCoordinate(-eye.GetZ() * normal.GetX(), -eye.GetZ() * normal.GetY(), dotNormalDirection - eye.GetZ() * normal.GetZ(),
+    m_Z.SetCoordinate(-eye.GetZ() * normal.GetX(),
+                      -eye.GetZ() * normal.GetY(),
+                      dotNormalDirection - eye.GetZ() * normal.GetZ(),
                       -(GetValue<2, 0>() * eye.GetX() + GetValue<2, 1>() * eye.GetY() + GetValue<2, 2>() * eye.GetZ()));
-    m_W.SetCoordinate(-normal.GetX(), -normal.GetY(), -normal.GetZ(), Vector3DTools::DotProduct(normal, eye));
+    m_W.SetCoordinate(-normal.GetX(), -normal.GetY(), -normal.GetZ(), Vector3Tools::DotProduct(eye, normal));
 }
 
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeReflection(const Vector3D& normal, const Vector3D& origin) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeReflection(const Vector3& normal, const Vector3& origin) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(normal.IsNormalize(), "normal必须是单位向量！");
@@ -410,7 +482,7 @@ void Mathematics::Matrix4<Real>::MakeReflection(const Vector3D& normal, const Ve
     //
     // 其中P是平面上的点，N是一个单位长度的平面法线。
 
-    auto twoDotNormalOrigin = Math::GetValue(2) * Vector3DTools::DotProduct(normal, origin);
+    const auto twoDotNormalOrigin = Math::GetValue(2) * Vector3Tools::DotProduct(normal, origin);
 
     SetValue<0, 0>(Math::GetValue(1) - Math::GetValue(2) * normal.GetX() * normal.GetX());
     SetValue<0, 1>(-Math::GetValue(2) * normal.GetX() * normal.GetY());
@@ -439,9 +511,9 @@ void Mathematics::Matrix4<Real>::MakeFrustumMatrix44(Real left, Real right, Real
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto width = right - left;
-    auto height = top - bottom;
-    auto depth = farDistance - nearDistance;
+    const auto width = right - left;
+    const auto height = top - bottom;
+    const auto depth = farDistance - nearDistance;
 
     SetValue<0, 0>((Math::GetValue(2) * nearDistance) / width);
     SetValue<0, 1>(Math::GetValue(0));
@@ -474,7 +546,7 @@ void Mathematics::Matrix4<Real>::MakePerspectiveMatrix44(Real fieldOfViewY, Real
     // 角度转换成弧度
     angle *= Math::GetDegreeToRadian();
 
-    auto cot = Math::Cos(angle) / Math::Sin(angle);
+    const auto cot = Math::Cos(angle) / Math::Sin(angle);
 
     SetValue<0, 0>(cot / aspect);
     SetValue<0, 1>(Math::GetValue(0));
@@ -503,9 +575,9 @@ void Mathematics::Matrix4<Real>::MakeOrthoMatrix44(Real left, Real right, Real b
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    auto width = right - left;
-    auto height = top - bottom;
-    auto depth = farDistance - nearDistance;
+    const auto width = right - left;
+    const auto height = top - bottom;
+    const auto depth = farDistance - nearDistance;
 
     SetValue<0, 0>(Math::GetValue(2) / width);
     SetValue<0, 1>(Math::GetValue(0));
@@ -530,7 +602,7 @@ void Mathematics::Matrix4<Real>::MakeOrthoMatrix44(Real left, Real right, Real b
 
 // 创建使用3个基本规范化向量的方向矩阵
 template <typename Real>
-void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3D& xDirection, const Vector3D& yDirection, const Vector3D& zDirection) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3& xDirection, const Vector3& yDirection, const Vector3& zDirection) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
     MATHEMATICS_ASSERTION_1(xDirection.IsNormalize() && yDirection.IsNormalize() && zDirection.IsNormalize(), "xDirection、yDirection和zDirection不是单位向量！");
@@ -559,22 +631,87 @@ void Mathematics::Matrix4<Real>::MakeOrthoNormalMatrix44(const Vector3D& xDirect
 template <typename T>
 const typename Mathematics::Matrix4<T>::ArrayType Mathematics::Matrix4<T>::GetCoordinate() const noexcept
 {
-    return ArrayType{ m_X.GetX(), m_X.GetY(), m_X.GetZ(), m_X.GetW(),
-                      m_Y.GetX(), m_Y.GetY(), m_Y.GetZ(), m_Y.GetW(),
-                      m_Z.GetX(), m_Z.GetY(), m_Z.GetZ(), m_Z.GetW(),
-                      m_W.GetX(), m_W.GetY(), m_W.GetZ(), m_W.GetW() };
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ArrayType{ m_X.GetX(),
+                      m_X.GetY(),
+                      m_X.GetZ(),
+                      m_X.GetW(),
+                      m_Y.GetX(),
+                      m_Y.GetY(),
+                      m_Y.GetZ(),
+                      m_Y.GetW(),
+                      m_Z.GetX(),
+                      m_Z.GetY(),
+                      m_Z.GetZ(),
+                      m_Z.GetW(),
+                      m_W.GetX(),
+                      m_W.GetY(),
+                      m_W.GetZ(),
+                      m_W.GetW() };
+}
+
+template <typename Real>
+typename Mathematics::Matrix4<Real>::ContainerType Mathematics::Matrix4<Real>::GetContainer() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ContainerType{ m_X.GetX(),
+                          m_X.GetY(),
+                          m_X.GetZ(),
+                          m_X.GetW(),
+                          m_Y.GetX(),
+                          m_Y.GetY(),
+                          m_Y.GetZ(),
+                          m_Y.GetW(),
+                          m_Z.GetX(),
+                          m_Z.GetY(),
+                          m_Z.GetZ(),
+                          m_Z.GetW(),
+                          m_W.GetX(),
+                          m_W.GetY(),
+                          m_W.GetZ(),
+                          m_W.GetW() };
 }
 
 template <typename T>
 void Mathematics::Matrix4<T>::Set(const ArrayType& coordinate)
 {
+    MATHEMATICS_CLASS_IS_VALID_9;
+
     auto index = 0;
     for (auto value : coordinate)
     {
-        (*this)(index / sm_VectorSize, index % Vector4D::sm_PointSize) = value;
+        (*this)(index / vectorSize, index % Vector4::pointSize) = value;
 
         ++index;
     }
+}
+
+template <typename Real>
+Mathematics::Matrix3<Real> Mathematics::Matrix4<Real>::Project() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Matrix3 result{ MatrixInitType::Zero };
+
+    for (auto r = 0; r < Matrix3::vectorSize; ++r)
+    {
+        for (auto c = 0; c < Matrix3::vectorSize; ++c)
+        {
+            result(r, c) = (*this)(r, c);
+        }
+    }
+
+    return result;
+}
+
+template <typename Real>
+Real Mathematics::Matrix4<Real>::Trace() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return GetValue<0, 0>() + GetValue<1, 1>() + GetValue<2, 2>() + GetValue<3, 3>();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX4_ACHIEVE_H

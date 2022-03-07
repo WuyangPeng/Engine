@@ -7,23 +7,23 @@
 #ifndef MATHEMATICS_EXAMPLE_PLACEHOLDER_H
 #define MATHEMATICS_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Mathematics/MathematicsExample/MathematicsExampleDll.h" 
+#include "Example/Mathematics/MathematicsExample/MathematicsExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace MathematicsExample
 {
-	 class MATHEMATICS_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class MATHEMATICS_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // MATHEMATICS_EXAMPLE_PLACEHOLDER_H
+#endif  // MATHEMATICS_EXAMPLE_PLACEHOLDER_H

@@ -25,9 +25,9 @@ namespace Physics
 // the output rfMass by 'd' and the output rkInertia by 'd'.
 
 template <typename Real>  
-void ComputeMassProperties (const Mathematics::Vector3D<Real>* vertices, int numTriangles,
+void ComputeMassProperties (const Mathematics::Vector3<Real>* vertices, int numTriangles,
 						    const int* indices, bool bodyCoords, Real& mass,
-						    Mathematics::Vector3D<Real>& center, Mathematics::Matrix3<Real>& inertia);
+						    Mathematics::Vector3<Real>& center, Mathematics::Matrix3<Real>& inertia);
 }
 
 #endif // PHYSICS_RIGID_BODY_POLYHEDRAL_MASS_PROPERTIES_H

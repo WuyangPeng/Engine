@@ -6,17 +6,17 @@
 
 #include "IntersectorTesting.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/IntersectorTestDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 namespace Mathematics
 {
-	template class IntersectorTest<float, Vector2D>;
-	template class IntersectorTest<double, Vector2D>;
-	template class IntersectorTest<float, Vector3D>;
-	template class IntersectorTest<double, Vector3D>;
+	template class IntersectorTest<float, Vector2>;
+	template class IntersectorTest<double, Vector2>;
+	template class IntersectorTest<float, Vector3>;
+	template class IntersectorTest<double, Vector3>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, IntersectorTesting)
@@ -32,7 +32,7 @@ void Mathematics::IntersectorTesting
 {
 	for (auto i = IntersectionType::Empty; i <= IntersectionType::Other; ++i)
 	{
-		IntersectorTest<float, Vector2D> intersectorTest(IntersectionType(i), 1e-8f);
+		IntersectorTest<float, Vector2> intersectorTest(IntersectionType(i), 1e-8f);
 
 		ASSERT_ENUM_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
 		ASSERT_APPROXIMATE(intersectorTest.GetEpsilon(), 1e-8f, 1e-8f);

@@ -10,13 +10,13 @@
 #include "VertexBufferAccessor.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "CoreTools/Helper/ClassInvariant/RenderingClassInvariantMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::FloatAPoint Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::APointF Rendering::VertexBufferAccessor ::GetPosition(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor
@@ -28,7 +28,7 @@ T Rendering::VertexBufferAccessor
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorF Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
@@ -39,7 +39,7 @@ T Rendering::VertexBufferAccessor ::GetNormal(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorF Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
@@ -50,7 +50,7 @@ T Rendering::VertexBufferAccessor ::GetTangent(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::FloatAVector Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept;
+RENDERING_DEFAULT_DECLARE Mathematics::AVectorF Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept;
 
 template <typename T>
 T Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
@@ -61,7 +61,7 @@ T Rendering::VertexBufferAccessor ::GetBinormal(int index) const noexcept
 }
 
 template <>
-RENDERING_DEFAULT_DECLARE Mathematics::FloatVector2D Rendering::VertexBufferAccessor
+RENDERING_DEFAULT_DECLARE Mathematics::Vector2F Rendering::VertexBufferAccessor
 	::GetTextureCoord(int unit, int index) const;
 
 template <typename T>

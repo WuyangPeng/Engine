@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 11:44)
 
 #include "PolynomialFit4Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/PolynomialFit4Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -23,7 +23,12 @@ namespace Mathematics
 	template class PolynomialFit4<float>;
 	template class PolynomialFit4<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, PolynomialFit4Testing) 
 
 void Mathematics::PolynomialFit4Testing
@@ -62,7 +67,7 @@ void Mathematics::PolynomialFit4Testing
 		int yDegree = thirdRandomDistribution(generator);
 		int zDegree = thirdRandomDistribution(generator);
 
-		DoublePolynomialFit4 polynomialFit(x, y,z, w, xDegree,yDegree,zDegree);
+		PolynomialFit4D polynomialFit(x, y,z, w, xDegree,yDegree,zDegree);
 
 		if (polynomialFit.IsSolveSucceed())
 		{
@@ -78,14 +83,14 @@ void Mathematics::PolynomialFit4Testing
 						for (int xIndex = 0; xIndex <= xDegree; ++xIndex)
 						{						
 							auto temp = xIndex + (xDegree + 1) * (yIndex + (yDegree + 1) * zIndex);
-							sum += polynomial[temp] * DoubleMath::Pow(x[i], xIndex) * DoubleMath::Pow(y[i], yIndex) * DoubleMath::Pow(z[i], zIndex);
+							sum += polynomial[temp] * MathD::Pow(x[i], xIndex) * MathD::Pow(y[i], yIndex) * MathD::Pow(z[i], zIndex);
 						}
 					}
 				}
 
 				double value = sum - w[i];
 
-				ASSERT_LESS_EQUAL(DoubleMath::FAbs(value) , 35.0);
+				ASSERT_LESS_EQUAL(MathD::FAbs(value) , 35.0);
 			}
 		}
 	}

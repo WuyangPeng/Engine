@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 13:43)
 
 #include "Network/NetworkExport.h"
 
@@ -22,7 +22,7 @@ using std::string;
 using namespace std::literals;
 
 Network::AnalysisNetworkConfigurationImpl::AnalysisNetworkConfigurationImpl(const string& fileName)
-    : m_Container{}, m_FileName{ fileName }, m_MainTree{}
+    : container{}, fileName{ fileName }, mainTree{}
 {
     Analysis();
 
@@ -41,13 +41,13 @@ void Network::AnalysisNetworkConfigurationImpl::Analysis()
 // private
 void Network::AnalysisNetworkConfigurationImpl::AnalysisJson()
 {
-    read_json(m_FileName, m_MainTree);
+    read_json(fileName, mainTree);
 }
 
 // private
 void Network::AnalysisNetworkConfigurationImpl::AnalysisMain()
 {
-    for (const auto& ptree : m_MainTree)
+    for (const auto& ptree : mainTree)
     {
         try
         {
@@ -60,7 +60,7 @@ void Network::AnalysisNetworkConfigurationImpl::AnalysisMain()
                 << ptree.first
                 << SYSTEM_TEXT("配置值错误：")
                 << error
-                << CoreTools::LogAppenderIOManageSign::TriggerAssert;
+                << LOG_SINGLETON_TRIGGER_ASSERT;
         }
     }
 }
@@ -68,39 +68,40 @@ void Network::AnalysisNetworkConfigurationImpl::AnalysisMain()
 // private
 void Network::AnalysisNetworkConfigurationImpl::InsertStrategy(const String& name, const BasicTree& basicTree)
 {
-    auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"s), String{});
-    auto connect = basicTree.get(SYSTEM_TEXT("Connect"s), String{});
+    const auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"s), String{});
+    const auto connect = basicTree.get(SYSTEM_TEXT("Connect"s), String{});
 
     const auto wrappersStrategy = GetWrappersStrategy(wrappers);
     const auto connectStrategy = GetConnectStrategy(connect);
 
-    auto client = basicTree.get(SYSTEM_TEXT("Client"s), ClientStrategy::Disable);
-    auto server = basicTree.get(SYSTEM_TEXT("Server"s), ServerStrategy::Disable);
-    auto message = basicTree.get(SYSTEM_TEXT("Message"s), MessageStrategy::Default);
-    auto parser = basicTree.get(SYSTEM_TEXT("Parser"s), ParserStrategy::LittleEndian);
-    auto openSSL = basicTree.get(SYSTEM_TEXT("OpenSSL"s), OpenSSLStrategy::Default);
-    auto send = basicTree.get(SYSTEM_TEXT("Send"s), SocketSendMessage::Default);
+    const auto client = basicTree.get(SYSTEM_TEXT("Client"s), ClientStrategy::Disable);
+    const auto server = basicTree.get(SYSTEM_TEXT("Server"s), ServerStrategy::Disable);
+    const auto message = basicTree.get(SYSTEM_TEXT("Message"s), MessageStrategy::Default);
+    const auto parser = basicTree.get(SYSTEM_TEXT("Parser"s), ParserStrategy::LittleEndian);
+    const auto openSSL = basicTree.get(SYSTEM_TEXT("OpenSSL"s), OpenSSLStrategy::Default);
+    const auto encryptedCompression = basicTree.get(SYSTEM_TEXT("EncryptedCompression"s), EncryptedCompressionStrategy::Default);
+    const auto send = basicTree.get(SYSTEM_TEXT("Send"s), SocketSendMessage::Default);
 
     if (ClientStrategy::Disable <= client && client < ClientStrategy::End &&
         ServerStrategy::Disable <= server && server < ServerStrategy::End &&
         message < MessageStrategy::End && parser < ParserStrategy::End && openSSL < OpenSSLStrategy::End)
     {
-        auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"s), String{}));
-        auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
-        auto configurationSubStrategy = GetConfigurationSubStrategy(basicTree);
-        auto configurationParameter = GetConfigurationParameter(basicTree);
+        const auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"s), String{}));
+        const auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
+        const auto configurationSubStrategy = GetConfigurationSubStrategy(basicTree);
+        const auto configurationParameter = GetConfigurationParameter(basicTree);
 
         if (server != ServerStrategy::Disable)
         {
-            ConfigurationStrategy configurationStrategy(wrappersStrategy, connectStrategy, server, message, parser, openSSL, configurationSubStrategy, configurationParameter, send, ip, port);
+            ConfigurationStrategy configurationStrategy(wrappersStrategy, connectStrategy, server, message, parser, openSSL, encryptedCompression, configurationSubStrategy, configurationParameter, send, ip, port);
 
-            m_Container.insert({ name, configurationStrategy });
+            container.insert({ name, configurationStrategy });
         }
         else if (client != ClientStrategy::Disable)
         {
-            ConfigurationStrategy configurationStrategy(wrappersStrategy, connectStrategy, client, message, parser, openSSL, configurationSubStrategy, configurationParameter, send, ip, port);
+            ConfigurationStrategy configurationStrategy(wrappersStrategy, connectStrategy, client, message, parser, openSSL, encryptedCompression, configurationSubStrategy, configurationParameter, send, ip, port);
 
-            m_Container.insert({ name, configurationStrategy });
+            container.insert({ name, configurationStrategy });
         }
         else
         {
@@ -117,9 +118,9 @@ Network::ConfigurationStrategy Network::AnalysisNetworkConfigurationImpl::GetCon
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Container.find(name);
+    const auto iter = container.find(name);
 
-    if (iter != m_Container.cend())
+    if (iter != container.cend())
     {
         return iter->second;
     }
@@ -131,7 +132,7 @@ Network::ConfigurationStrategy Network::AnalysisNetworkConfigurationImpl::GetCon
 
 Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl::GetWrappersStrategy(const String& wrappers)
 {
-    CoreTools::CaseInsensitiveTString caseInsensitiveTString{ wrappers.c_str() };
+    const CoreTools::CaseInsensitiveTString caseInsensitiveTString{ wrappers.c_str() };
 
     if (caseInsensitiveTString == SYSTEM_TEXT("ACE"))
     {
@@ -155,7 +156,7 @@ Network::WrappersStrategy Network::AnalysisNetworkConfigurationImpl::GetWrappers
 
 Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl::GetConnectStrategy(const System::String& connect)
 {
-    CoreTools::CaseInsensitiveTString caseInsensitiveTString{ connect.c_str() };
+    const CoreTools::CaseInsensitiveTString caseInsensitiveTString{ connect.c_str() };
 
     if (caseInsensitiveTString == SYSTEM_TEXT("TCP"))
     {
@@ -179,16 +180,16 @@ Network::ConnectStrategy Network::AnalysisNetworkConfigurationImpl::GetConnectSt
 
 Network::ConfigurationSubStrategy Network::AnalysisNetworkConfigurationImpl::GetConfigurationSubStrategy(const BasicTree& basicTree)
 {
-    auto wrappersSubTree = basicTree.get_child(SYSTEM_TEXT("WrappersSub"s));
+    const auto wrappersSubTree = basicTree.get_child(SYSTEM_TEXT("WrappersSub"s));
 
-    ConfigurationSubStrategy configurationSubStrategy{};
+    auto configurationSubStrategy = ConfigurationSubStrategy::Create();
 
-    auto threads = (wrappersSubTree.get(SYSTEM_TEXT("Threads"s), 0u));
+    const auto threads = (wrappersSubTree.get(SYSTEM_TEXT("Threads"s), 0u));
     if (0 < threads)
     {
         configurationSubStrategy.Insert(WrappersSubStrategy::Threads, threads);
     }
-    auto multiContext = (wrappersSubTree.get(SYSTEM_TEXT("MultiContext"s), 0u));
+    const auto multiContext = (wrappersSubTree.get(SYSTEM_TEXT("MultiContext"s), 0u));
     if (0 < multiContext)
     {
         configurationSubStrategy.Insert(WrappersSubStrategy::MultiContext, multiContext);
@@ -199,9 +200,9 @@ Network::ConfigurationSubStrategy Network::AnalysisNetworkConfigurationImpl::Get
 
 Network::ConfigurationParameter Network::AnalysisNetworkConfigurationImpl::GetConfigurationParameter(const BasicTree& basicTree)
 {
-    auto parameterTree = basicTree.get_child(SYSTEM_TEXT("Parameter"s));
+    const auto parameterTree = basicTree.get_child(SYSTEM_TEXT("Parameter"s));
 
-    ConfigurationParameter configurationParameter{};
+    auto configurationParameter = ConfigurationParameter::Create();
 
     for (const auto& value : parameterTree)
     {
@@ -215,19 +216,19 @@ Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisN
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Container.begin();
+    return container.begin();
 }
 
 Network::AnalysisNetworkConfigurationImpl::ContainerConstIter Network::AnalysisNetworkConfigurationImpl::end() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Container.end();
+    return container.end();
 }
 
 int Network::AnalysisNetworkConfigurationImpl::GetSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Container.size());
+    return boost::numeric_cast<int>(container.size());
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/15 13:08)
+///	引擎版本：0.8.0.3 (2022/02/22 15:19)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Triangle3 : public DistanceBase<Real, Vector3D<Real>>
+    class DistanceRay3Triangle3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistanceRay3Triangle3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Ray3 = Ray3<Real>;
         using Triangle3 = Triangle3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
 
@@ -36,27 +36,27 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ray3 GetRay() const noexcept;
-        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+        NODISCARD Ray3 GetRay() const noexcept;
+        NODISCARD Triangle3 GetTriangle() const noexcept;
 
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
         // 有关最接近点的信息。
-        [[nodiscard]] Real GetTriangleBary(int index) const;
+        NODISCARD Real GetTriangleBary(int index) const;
 
     private:
-        Ray3 m_Ray;
-        Triangle3 m_Triangle;
+        Ray3 ray;
+        Triangle3 triangle;
 
         // closest0 = ray.origin+param*ray.direction
         // closest1 = sum_{i=0}^2 bary[i]*tri.vertex[i]
-        mutable Vector3D m_TriangleBary;
+        mutable Vector3 triangleBary;
     };
 
-    using FloatDistanceRay3Triangle3 = DistanceRay3Triangle3<float>;
-    using DoubleDistanceRay3Triangle3 = DistanceRay3Triangle3<double>;
+    using DistanceRay3Triangle3F = DistanceRay3Triangle3<float>;
+    using DistanceRay3Triangle3D = DistanceRay3Triangle3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY3_TRIANGLE3_H

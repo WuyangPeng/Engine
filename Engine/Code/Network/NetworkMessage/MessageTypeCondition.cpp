@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 14:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 10:28)
 
 #include "Network/NetworkExport.h"
 
@@ -16,11 +16,15 @@
 #include "Detail/MessageTypeConditionRange.h"
 #include "Detail/MessageTypeConditionSpecific.h"
 #include "System/Helper/PragmaWarning.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
-using std::make_shared;
+Network::MessageTypeCondition Network::MessageTypeCondition::CreateNullCondition()
+{
+    return MessageTypeCondition{ CoreTools::DisableNotThrow::Disable };
+}
 
 Network::MessageTypeCondition::MessageTypeCondition(const VersionType& version)
     : impl{ CoreTools::ImplCreateUseFactory::Default, version }
@@ -40,14 +44,11 @@ Network::MessageTypeCondition::MessageTypeCondition(VersionsCondition condition,
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Network::MessageTypeCondition::MessageTypeCondition()
+Network::MessageTypeCondition::MessageTypeCondition(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseFactory::Default }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Network, MessageTypeCondition)
 

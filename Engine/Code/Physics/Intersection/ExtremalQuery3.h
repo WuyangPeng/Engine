@@ -18,7 +18,7 @@ namespace Physics
     {
     public:
         using ConvexPolyhedron3 = Mathematics::ConvexPolyhedron3<Real>;
-        using Vector3D = Mathematics::Vector3D<Real>;
+        using Vector3D = Mathematics::Vector3<Real>;
 
     public:
         // Abstract base class.

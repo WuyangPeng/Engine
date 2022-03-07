@@ -43,8 +43,11 @@ CoreTools::OStreamImpl& CoreTools::OStreamImpl::operator=(OStreamImpl&& rhs) noe
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    stream = std::move(rhs.stream);
-    isCout = rhs.isCout;
+    if (this != &rhs)
+    {
+        stream = std::move(rhs.stream);
+        isCout = rhs.isCout;
+    }
 
     return *this;
 }
@@ -82,8 +85,8 @@ bool CoreTools::OStreamImpl::IsFile() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (stream)    
-        return true;    
-    else    
-        return false;    
+    if (stream)
+        return true;
+    else
+        return false;
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/19 9:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 16:38)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_DETAIL_H
@@ -21,18 +21,19 @@
 
 template <typename Generator, typename Scalar>
 CoreTools::MinHeap<Generator, Scalar>::MinHeap(int maxElements, int growBy, Scalar initialValue)
-    : m_ElementsNumber{ 0 }, m_GrowBy{ 0 < growBy ? growBy : 1 }, m_RecordStoredManager{ maxElements, initialValue }
+    : elementsNumber{ 0 }, growBy{ 0 < growBy ? growBy : 1 }, recordStoredManager{ maxElements, initialValue }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_3;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Generator, typename Scalar>
 bool CoreTools::MinHeap<Generator, Scalar>::IsValid() const noexcept
 {
     try
     {
-        if (IsValid(0, m_ElementsNumber - 1) && 0 <= m_ElementsNumber && 0 < m_GrowBy && 0 < m_RecordStoredManager.GetMaxElements())
+        if (IsValid(0, elementsNumber - 1) && 0 <= elementsNumber && 0 < growBy && 0 < recordStoredManager.GetMaxElements())
             return true;
         else
             return false;
@@ -71,22 +72,22 @@ void CoreTools::MinHeap<Generator, Scalar>::PrintMinHeapInLog() const
 
     os << SYSTEM_TEXT("最小堆信息\n");
 
-    for (auto index = 0; index < m_ElementsNumber; ++index)
+    for (auto index = 0; index < elementsNumber; ++index)
     {
         os << index
            << SYSTEM_TEXT(": realIndex = ")
-           << m_RecordStoredManager.GetUniqueIndex(index)
+           << recordStoredManager.GetUniqueIndex(index)
            << SYSTEM_TEXT(", generator = ")
-           << m_RecordStoredManager.GetGeneratorByHeapIndex(index)
+           << recordStoredManager.GetGeneratorByHeapIndex(index)
            << SYSTEM_TEXT(", value = ")
-           << m_RecordStoredManager.GetValueByHeapIndex(index)
+           << recordStoredManager.GetValueByHeapIndex(index)
            << SYSTEM_TEXT("\n");
     }
 
     LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
         << os.str();
 
-    m_RecordStoredManager.PrintIndexInLog();
+    recordStoredManager.PrintIndexInLog();
 
     LOG_SINGLETON_ENGINE_APPENDER(Info, CoreTools)
         << LogAppenderIOManageSign::Refresh;
@@ -97,7 +98,7 @@ void CoreTools::MinHeap<Generator, Scalar>::PrintMinHeapInLog() const
 template <typename Generator, typename Scalar>
 bool CoreTools::MinHeap<Generator, Scalar>::IsStoredValueLess(int lhsHeapIndex, int rhsHeapIndex) const
 {
-    return m_RecordStoredManager.GetValueByHeapIndex(lhsHeapIndex) < m_RecordStoredManager.GetValueByHeapIndex(rhsHeapIndex);
+    return recordStoredManager.GetValueByHeapIndex(lhsHeapIndex) < recordStoredManager.GetValueByHeapIndex(rhsHeapIndex);
 }
 
 template <typename Generator, typename Scalar>
@@ -111,7 +112,7 @@ int CoreTools::MinHeap<Generator, Scalar>::GetMaxElements() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    return m_RecordStoredManager.GetMaxElements();
+    return recordStoredManager.GetMaxElements();
 }
 
 template <typename Generator, typename Scalar>
@@ -119,7 +120,7 @@ int CoreTools::MinHeap<Generator, Scalar>::GetGrowBy() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    return m_GrowBy;
+    return growBy;
 }
 
 template <typename Generator, typename Scalar>
@@ -127,11 +128,11 @@ int CoreTools::MinHeap<Generator, Scalar>::GetElementsNumber() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    return m_ElementsNumber;
+    return elementsNumber;
 }
 
 template <typename Generator, typename Scalar>
-const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetMinimum() const
+CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetMinimum() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
@@ -139,25 +140,26 @@ const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, 
 }
 
 template <typename Generator, typename Scalar>
-const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByUniqueIndex(int uniqueIndex) const
+CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByUniqueIndex(int uniqueIndex) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    [[maybe_unused]] const auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
+    MAYBE_UNUSED const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
 
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < m_ElementsNumber, "无效索引\n");
+    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
 
-    return RecordType{ uniqueIndex, m_RecordStoredManager.GetGeneratorByUniqueIndex(uniqueIndex), m_RecordStoredManager.GetValueByUniqueIndex(uniqueIndex) };
+    return RecordType{ uniqueIndex, recordStoredManager.GetGeneratorByUniqueIndex(uniqueIndex), recordStoredManager.GetValueByUniqueIndex(uniqueIndex) };
 }
 
 template <typename Generator, typename Scalar>
-const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByHeapIndex(int heapIndex) const
+CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::GetRecordByHeapIndex(int heapIndex) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < m_ElementsNumber, "无效索引\n");
+    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
 
-    return RecordType{ m_RecordStoredManager.GetHeapIndex(heapIndex), m_RecordStoredManager.GetGeneratorByHeapIndex(heapIndex),
-                       m_RecordStoredManager.GetValueByHeapIndex(heapIndex) };
+    return RecordType{ recordStoredManager.GetHeapIndex(heapIndex),
+                       recordStoredManager.GetGeneratorByHeapIndex(heapIndex),
+                       recordStoredManager.GetValueByHeapIndex(heapIndex) };
 }
 
 template <typename Generator, typename Scalar>
@@ -179,12 +181,12 @@ int CoreTools::MinHeap<Generator, Scalar>::Insert(Generator generator, Scalar va
 template <typename Generator, typename Scalar>
 void CoreTools::MinHeap<Generator, Scalar>::GrowRecords()
 {
-    const auto maxElements = m_RecordStoredManager.GetMaxElements();
-    if (m_ElementsNumber == maxElements)
+    const auto maxElements = recordStoredManager.GetMaxElements();
+    if (elementsNumber == maxElements)
     {
-        const auto newMaxElements = maxElements + m_GrowBy;
+        const auto newMaxElements = maxElements + growBy;
 
-        m_RecordStoredManager.GrowBy(newMaxElements);
+        recordStoredManager.GrowBy(newMaxElements);
     }
 }
 
@@ -192,43 +194,43 @@ void CoreTools::MinHeap<Generator, Scalar>::GrowRecords()
 template <typename Generator, typename Scalar>
 void CoreTools::MinHeap<Generator, Scalar>::StoreInputInformation(Generator generator, Scalar value)
 {
-    const auto child = m_ElementsNumber++;
+    const auto child = elementsNumber++;
 
-    m_RecordStoredManager.SetGeneratorByHeapIndex(child, generator);
-    m_RecordStoredManager.SetValueByHeapIndex(child, value);
+    recordStoredManager.SetGeneratorByHeapIndex(child, generator);
+    recordStoredManager.SetValueByHeapIndex(child, value);
 }
 
 // private
 template <typename Generator, typename Scalar>
 int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInInsert(Scalar value)
 {
-    auto child = m_ElementsNumber - 1;
+    auto child = elementsNumber - 1;
 
     while (0 < child)
     {
         const auto parent = (child - 1) / 2;
-        if (m_RecordStoredManager.GetValueByHeapIndex(parent) <= value)
+        if (recordStoredManager.GetValueByHeapIndex(parent) <= value)
         {
             // parent有一个值小于或等于child的值，所以我们现在有一个有效的堆。
             break;
         }
 
         // parent具有比child更大的值。交换parent和child：
-        m_RecordStoredManager.ChangeValue(child, parent);
+        recordStoredManager.ChangeValue(child, parent);
 
         child = parent;
     }
 
-    return m_RecordStoredManager.GetUniqueIndex(child);
+    return recordStoredManager.GetUniqueIndex(child);
 }
 
 template <typename Generator, typename Scalar>
-const CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::Remove()
+CoreTools::MinHeapRecord<Generator, Scalar> CoreTools::MinHeap<Generator, Scalar>::Remove()
 {
     CORE_TOOLS_CLASS_IS_VALID_3;
 
     // 从堆的根中得到的信息。
-    RecordType root{ m_RecordStoredManager.GetHeapIndex(0), m_RecordStoredManager.GetGeneratorByHeapIndex(0), m_RecordStoredManager.GetValueByHeapIndex(0) };
+    RecordType root{ recordStoredManager.GetHeapIndex(0), recordStoredManager.GetGeneratorByHeapIndex(0), recordStoredManager.GetValueByHeapIndex(0) };
 
     RestoringValidHeapInRemove();
 
@@ -242,12 +244,12 @@ void CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInRemove()
     // 恢复堆中的树。交换第0位和last位的记录。
     // 然后通过parent-child互换向下移动第0位，直到它恢复在堆中树的位置。
 
-    const auto last = --m_ElementsNumber;
+    const auto last = --elementsNumber;
     auto parent = 0;
     auto child = 1;
 
     // 旧的记录不能丢失。它附加到插槽包含最后的旧记录。
-    m_RecordStoredManager.ChangeValue(parent, last);
+    recordStoredManager.ChangeValue(parent, last);
 
     while (child < last)
     {
@@ -269,7 +271,7 @@ void CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInRemove()
         else
         {
             // 交换child和parent的插槽。
-            m_RecordStoredManager.ChangeValue(child, parent);
+            recordStoredManager.ChangeValue(child, parent);
 
             parent = child;
             child = 2 * child + 1;
@@ -282,9 +284,9 @@ bool CoreTools::MinHeap<Generator, Scalar>::IsUniqueIndexValid(int uniqueIndex) 
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_3;
 
-    const auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
+    const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
 
-    if (0 <= heapIndex && heapIndex < m_ElementsNumber)
+    if (0 <= heapIndex && heapIndex < elementsNumber)
         return true;
     else
         return false;
@@ -296,10 +298,10 @@ int CoreTools::MinHeap<Generator, Scalar>::Update(int uniqueIndex, Scalar value)
     CORE_TOOLS_CLASS_IS_VALID_3;
 
     // 只有MinHeap才可以更新记录。
-    auto scalar = m_RecordStoredManager.GetValueByUniqueIndex(uniqueIndex);
-    const auto heapIndex = m_RecordStoredManager.GetHeapIndex(uniqueIndex);
+    auto scalar = recordStoredManager.GetValueByUniqueIndex(uniqueIndex);
+    const auto heapIndex = recordStoredManager.GetHeapIndex(uniqueIndex);
 
-    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < m_ElementsNumber, "无效索引\n");
+    CORE_TOOLS_ASSERTION_2(0 <= heapIndex && heapIndex < elementsNumber, "无效索引\n");
 
     if (scalar < value)
         return RestoringValidHeapInUpdateLargerValue(heapIndex, value);
@@ -314,16 +316,16 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue
 {
     // 新值大于旧值。它向叶子传播。
 
-    m_RecordStoredManager.SetValueByHeapIndex(heapIndex, value);
+    recordStoredManager.SetValueByHeapIndex(heapIndex, value);
 
     auto parent = heapIndex;
     auto child = 2 * parent + 1;
     auto maxChild = child;
-    while (child < m_ElementsNumber)
+    while (child < elementsNumber)
     {
         // 至少有一个child存在。找到最大值之一。
 
-        if (child < m_ElementsNumber - 1)
+        if (child < elementsNumber - 1)
         {
             // 两个child的存在。
             const auto childRight = child + 1;
@@ -338,7 +340,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue
             maxChild = child;
         }
 
-        if (value <= m_RecordStoredManager.GetValueByHeapIndex(maxChild))
+        if (value <= recordStoredManager.GetValueByHeapIndex(maxChild))
         {
             // 新的值是在正确的位置，已恢复树为一个堆。
             break;
@@ -347,7 +349,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue
         {
             // child比parent的值更大。
             // 交换maxChild和parent的插槽。
-            m_RecordStoredManager.ChangeValue(maxChild, parent);
+            recordStoredManager.ChangeValue(maxChild, parent);
 
             parent = maxChild;
             child = 2 * parent + 1;
@@ -360,7 +362,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateLargerValue
 template <typename Generator, typename Scalar>
 int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateSmallerValue(int heapIndex, Scalar value)
 {
-    m_RecordStoredManager.SetValueByHeapIndex(heapIndex, value);
+    recordStoredManager.SetValueByHeapIndex(heapIndex, value);
 
     // 新值小于旧值。它向根传播。
     auto child = heapIndex;
@@ -370,7 +372,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateSmallerValu
         // 一个parent存在。
         const auto parent = (child - 1) / 2;
 
-        if (m_RecordStoredManager.GetValueByHeapIndex(parent) <= value)
+        if (recordStoredManager.GetValueByHeapIndex(parent) <= value)
         {
             // 新的值是在正确的位置，已恢复树为一个堆。
             break;
@@ -378,7 +380,7 @@ int CoreTools::MinHeap<Generator, Scalar>::RestoringValidHeapInUpdateSmallerValu
         else
         {
             // child比parent的值更小。交换child和parent的插槽。
-            m_RecordStoredManager.ChangeValue(child, parent);
+            recordStoredManager.ChangeValue(child, parent);
 
             child = parent;
         }

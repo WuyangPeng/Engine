@@ -1,16 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 11:05)
+///	引擎版本：0.8.0.2 (2022/02/11 17:13)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_DETAIL_H
 
 #include "RationalVector2.h"
+#include "RationalVectorDetail.h"
+#include "SignRationalDetail.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
@@ -19,52 +21,56 @@
 
 template <int IntSize>
 Mathematics::RationalVector2<IntSize>::RationalVector2() noexcept
-    : m_Tuple{}
+    : tuple{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int IntSize>
 Mathematics::RationalVector2<IntSize>::RationalVector2(const RationalVector& rhs) noexcept
-    : m_Tuple{ rhs }
+    : tuple{ rhs }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int IntSize>
 Mathematics::RationalVector2<IntSize>::RationalVector2(const Rational& x, const Rational& y) noexcept
-    : m_Tuple{ x, y }
+    : tuple{ x, y }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <int IntSize>
 Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::operator=(const RationalVector& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple = rhs;
+    tuple = rhs;
 
     return *this;
 }
+
 #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int IntSize>
 bool Mathematics::RationalVector2<IntSize>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int IntSize>
-typename const Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::GetX() const
+typename Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::GetX() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple[0];
+    return tuple[0];
 }
 
 template <int IntSize>
@@ -72,15 +78,15 @@ void Mathematics::RationalVector2<IntSize>::SetX(const Rational& x)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple[0] = x;
+    tuple[0] = x;
 }
 
 template <int IntSize>
-typename const Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::GetY() const
+typename Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::GetY() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple[1];
+    return tuple[1];
 }
 
 template <int IntSize>
@@ -88,15 +94,15 @@ void Mathematics::RationalVector2<IntSize>::SetY(const Rational& y)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple[1] = y;
+    tuple[1] = y;
 }
 
 template <int IntSize>
-const Mathematics::RationalVector2<IntSize> Mathematics::RationalVector2<IntSize>::operator-() const
+Mathematics::RationalVector2<IntSize> Mathematics::RationalVector2<IntSize>::operator-() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return RationalVector2{ -m_Tuple };
+    return RationalVector2{ -tuple };
 }
 
 template <int IntSize>
@@ -104,7 +110,7 @@ Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::op
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple += rhs.m_Tuple;
+    tuple += rhs.tuple;
 
     return *this;
 }
@@ -114,7 +120,7 @@ Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::op
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple -= rhs.m_Tuple;
+    tuple -= rhs.tuple;
 
     return *this;
 }
@@ -124,7 +130,7 @@ Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::op
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple *= rational;
+    tuple *= rational;
 
     return *this;
 }
@@ -134,36 +140,36 @@ Mathematics::RationalVector2<IntSize>& Mathematics::RationalVector2<IntSize>::op
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_Tuple /= rational;
+    tuple /= rational;
 
     return *this;
 }
 
 // Returns (y,-x).
 template <int IntSize>
-const Mathematics::RationalVector2<IntSize> Mathematics::RationalVector2<IntSize>::Perp() const
+Mathematics::RationalVector2<IntSize> Mathematics::RationalVector2<IntSize>::Perp() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return RationalVector2{ m_Tuple[1], -m_Tuple[0] };
+    return RationalVector2{ tuple[1], -tuple[0] };
 }
 
 template <int IntSize>
-typename const Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::SquaredLength() const
+typename Mathematics::RationalVector2<IntSize>::Rational Mathematics::RationalVector2<IntSize>::SquaredLength() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple.SquaredLength();
+    return tuple.SquaredLength();
 }
 
 template <int IntSize>
-const Mathematics::SignRational<IntSize> Mathematics::Dot(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs)
+Mathematics::SignRational<IntSize> Mathematics::Dot(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs)
 {
     return lhs.GetX() * rhs.GetX() + lhs.GetY() * rhs.GetY();
 }
 
 template <int IntSize>
-const Mathematics::SignRational<IntSize> Mathematics::DotPerp(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs)
+Mathematics::SignRational<IntSize> Mathematics::DotPerp(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs)
 {
     return lhs.GetX() * rhs.GetY() - lhs.GetY() * rhs.GetX();
 }

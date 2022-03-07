@@ -13,7 +13,11 @@
 #include "Network/NetworkTesting/InterfaceSuite/SingletonTestingDetail.h"
 
 using std::make_shared;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26429)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockConnectorHandleTesting)
 
 void Network::BoostSockConnectorHandleTesting ::MainTest()

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 19:04)
+///	引擎版本：0.8.0.3 (2022/03/02 17:34)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_CAPSULE3_ACHIEVE_H
@@ -16,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Capsule3<Real>::StaticFindIntersectorRay3Capsule3(const Ray3& ray, const Capsule3& capsule, const Real epsilon)
-    : ParentType{ epsilon }, m_Ray{ ray }, m_Capsule{ capsule }, m_Quantity{}, m_Point0{}, m_Point1{}
+    : ParentType{ epsilon }, ray{ ray }, capsule{ capsule }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorRay3Capsule3<Real>::StaticFindIntersectorRay3C
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorRay3Capsule3<Real>::IsValid() const noexcept
 {
@@ -32,54 +33,55 @@ bool Mathematics::StaticFindIntersectorRay3Capsule3<Real>::IsValid() const noexc
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetRay() const noexcept
+Mathematics::Ray3<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetRay() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ray;
+    return ray;
 }
 
 template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetCapsule() const noexcept
+Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetCapsule() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Capsule;
+    return capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Capsule3<Real>::Find()
 {
-    const auto findShared = StaticFindIntersectorLine3Capsule3<Real>::Find(m_Ray.GetOrigin(), m_Ray.GetDirection(), m_Capsule);
+    const auto findShared = StaticFindIntersectorLine3Capsule3<Real>::Find(ray.GetOrigin(), ray.GetDirection(), capsule);
 
-    if (0 < findShared.m_Quantity && Math::GetValue(0) <= findShared.m_Parameter0)
+    if (0 < findShared.quantity && Math::GetValue(0) <= findShared.parameter0)
     {
-        m_Point0 = m_Ray.GetOrigin() + findShared.m_Parameter0 * m_Ray.GetDirection();
-        ++m_Quantity;
+        point0 = ray.GetOrigin() + findShared.parameter0 * ray.GetDirection();
+        ++quantity;
     }
 
-    if (1 < findShared.m_Quantity && Math::GetValue(0) <= findShared.m_Parameter1)
+    if (1 < findShared.quantity && Math::GetValue(0) <= findShared.parameter1)
     {
-        if (m_Quantity == 0)
+        if (quantity == 0)
         {
-            m_Point0 = m_Ray.GetOrigin() + findShared.m_Parameter1 * m_Ray.GetDirection();
+            point0 = ray.GetOrigin() + findShared.parameter1 * ray.GetDirection();
         }
         else
         {
-            m_Point1 = m_Ray.GetOrigin() + findShared.m_Parameter1 * m_Ray.GetDirection();
+            point1 = ray.GetOrigin() + findShared.parameter1 * ray.GetDirection();
         }
 
-        ++m_Quantity;
+        ++quantity;
     }
 
-    if (m_Quantity == 2)
+    if (quantity == 2)
     {
         this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (m_Quantity == 1)
+    else if (quantity == 1)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }
@@ -94,20 +96,20 @@ int Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetQuantity() const no
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorRay3Capsule3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));

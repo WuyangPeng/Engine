@@ -1,27 +1,27 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:34)
 
 #include "Network/NetworkExport.h"
 
 #include "MessageVectorBuffer.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "System/MemoryTools/MemoryHelper.h"
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Network/NetworkMessage/Flags/MessageLengthFlags.h"
-#include "System/Helper/PragmaWarning/NumericCast.h"
 
 using std::make_shared;
 
 Network::MessageVectorBuffer::MessageVectorBuffer(int count, ParserStrategy parserStrategy)
-    : ParentType{ parserStrategy }, m_Buffer(count)
+    : ParentType{ parserStrategy }, buffer(count)
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -46,14 +46,14 @@ int Network::MessageVectorBuffer::GetSize() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return boost::numeric_cast<int>(m_Buffer.size());
+    return boost::numeric_cast<int>(buffer.size());
 }
 
 const char* Network::MessageVectorBuffer::GetInitialBufferedPtr() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_Buffer.data();
+    return buffer.data();
 }
 
 char* Network::MessageVectorBuffer::GetInitialBufferedPtr() noexcept
@@ -82,5 +82,5 @@ Network::MessageVectorBuffer::ImplPtr Network::MessageVectorBuffer::Expansion(in
 // private
 void Network::MessageVectorBuffer::Resize(int count)
 {
-    m_Buffer.resize(count);
+    buffer.resize(count);
 }

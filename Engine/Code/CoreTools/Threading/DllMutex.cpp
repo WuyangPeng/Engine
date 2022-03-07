@@ -33,7 +33,10 @@ CoreTools::DllMutex& CoreTools::DllMutex::operator=(DllMutex&& rhs) noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    impl = std::move(rhs.impl);
+    if (this != &rhs)
+    {
+        impl = std::move(rhs.impl);
+    }
 
     return *this;
 }

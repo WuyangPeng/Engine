@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/09 19:03)
+///	引擎版本：0.8.0.3 (2022/02/21 16:11)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H
@@ -19,38 +19,38 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint3Box3 : public DistanceBase<Real, Vector3D<Real>>
+    class DistancePoint3Box3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistancePoint3Box3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Box3 = Box3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:
-        DistancePoint3Box3(const Vector3D& point, const Box3& ellipse) noexcept;
+        DistancePoint3Box3(const Vector3& point, const Box3& ellipse) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Vector3D GetPoint() const noexcept;
-        [[nodiscard]] const Box3 GetBox() const noexcept;
+        NODISCARD Vector3 GetPoint() const noexcept;
+        NODISCARD Box3 GetBox() const noexcept;
 
         // 静态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
         // 函数计算动态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
     private:
-        Vector3D m_Point;
-        Box3 m_Box;
+        Vector3 point;
+        Box3 box;
     };
 
-    using FloatDistancePoint3Box3 = DistancePoint3Box3<float>;
-    using DoubleDistancePoint3Box3 = DistancePoint3Box3<double>;
+    using DistancePoint3Box3F = DistancePoint3Box3<float>;
+    using DistancePoint3Box3D = DistancePoint3Box3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT3_BOX3_H

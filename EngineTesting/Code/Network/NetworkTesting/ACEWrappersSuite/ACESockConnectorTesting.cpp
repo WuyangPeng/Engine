@@ -41,6 +41,6 @@ void Network::ACESockConnectorTesting ::ConnectorTest()
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(clientConfigurationStrategy) };
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(clientConfigurationStrategy.GetIP(), clientConfigurationStrategy.GetPort(), clientConfigurationStrategy) };
 
-    [[maybe_unused]] auto value = sockConnector.Connect(sockStream, sockAddress);
+    [[maybe_unused]] const auto value = sockConnector.Connect(sockStream, sockAddress);
     sockConnector.AsyncConnect(socketManager, sockStream, sockAddress);
 }

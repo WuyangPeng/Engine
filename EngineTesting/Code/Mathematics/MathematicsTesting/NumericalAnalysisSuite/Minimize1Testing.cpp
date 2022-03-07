@@ -8,7 +8,16 @@
 #include "Mathematics/NumericalAnalysis/Minimize1Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 namespace Mathematics
 {
 	template class Minimize1<float,Minimize1Testing>;
@@ -28,7 +37,7 @@ void Mathematics::Minimize1Testing
 {
 	Minimize1<double,Minimize1Testing> minimize1(Function, 10, 10, this);
 
-	DoubleMinimize1Data result = minimize1.GetMinimum(-100, 100, 20);
+	Minimize1DataD result = minimize1.GetMinimum(-100, 100, 20);
 
 	ASSERT_APPROXIMATE(result.GetMinValue(), Function(result.GetMinLocation(), this), 1e-10);
 

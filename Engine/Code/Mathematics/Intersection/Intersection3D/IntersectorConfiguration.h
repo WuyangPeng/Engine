@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/25 11:18)
+///	引擎版本：0.8.0.3 (2022/02/25 16:56)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H
@@ -15,59 +15,47 @@
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Mathematics/Intersection/Flags/VertexProjectionMap.h"
 
+#include <array>
 #include <memory>
-#include "CoreTools/Contract/ImplStaticAssertHelper.h"
 
 namespace Mathematics
 {
     template <typename Real>
-    class IntersectorConfigurationImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<IntersectorConfigurationImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE IntersectorConfiguration final
+    class IntersectorConfiguration final
     {
     public:
-        using IntersectorConfigurationImpl = IntersectorConfigurationImpl<Real>;
+        using ClassType = IntersectorConfiguration<Real>;
 
     public:
-        void Swap(IntersectorConfiguration& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(IntersectorConfiguration);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~IntersectorConfiguration() noexcept = default;
-        IntersectorConfiguration(const IntersectorConfiguration& rhs);
-        IntersectorConfiguration& operator=(const IntersectorConfiguration& rhs);
-        IntersectorConfiguration(IntersectorConfiguration&& rhs) noexcept;
-        IntersectorConfiguration& operator=(IntersectorConfiguration&& rhs) noexcept;
-
-    public:
-        IntersectorConfiguration();
+        IntersectorConfiguration() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] VertexProjectionMap GetMap() const noexcept;
-        [[nodiscard]] Real GetMin() const noexcept;
-        [[nodiscard]] Real GetMax() const noexcept;
-        [[nodiscard]] int GetIndex(int index) const;
+        NODISCARD VertexProjectionMap GetMap() const noexcept;
+        NODISCARD Real GetMin() const noexcept;
+        NODISCARD Real GetMax() const noexcept;
+        NODISCARD int GetIndex(int index) const;
 
-        void SetMap(VertexProjectionMap vertexProjectionMap) noexcept;
-        void SetMin(Real min) noexcept;
-        void SetMax(Real max) noexcept;
+        void SetMap(VertexProjectionMap newVertexProjectionMap) noexcept;
+        void SetMin(Real newMin) noexcept;
+        void SetMax(Real newMax) noexcept;
         void SetIndex(int index, int value);
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
-    };
+        using IndexType = std::array<int, 8>;
 
-    using FloatIntersectorConfiguration = IntersectorConfiguration<float>;
-    using DoubleIntersectorConfiguration = IntersectorConfiguration<double>;
+    private:
+        // 配置的“顶点投影图”值。
+        VertexProjectionMap vertexProjectionMap;
+
+        // 顶点的顺序。
+        IndexType indexType;
+
+        // 投影间隔。
+        Real min;
+
+        Real max;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_INTERSECTOR_CONFIGURATION_H

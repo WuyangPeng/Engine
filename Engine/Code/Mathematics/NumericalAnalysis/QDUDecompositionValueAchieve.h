@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/29 21:14)
+///	引擎版本：0.8.0.2 (2022/02/17 11:47)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H
@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3& matrix)
-    : m_Orthogonal{}, m_Diagonal{}, m_UpperTriangular{}
+    : orthogonal{}, diagonal{}, upperTriangular{}
 {
     Calculate(matrix);
 
@@ -27,11 +27,13 @@ Mathematics::QDUDecompositionValue<Real>::QDUDecompositionValue(const Matrix3& m
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::QDUDecompositionValue<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // private
@@ -61,90 +63,96 @@ void Mathematics::QDUDecompositionValue<Real>::Calculate(const Matrix3& matrix)
     // 构建正交矩阵Q.
     auto invLength = Math::InvSqrt(matrix.GetValue<0, 0>() * matrix.GetValue<0, 0>() + matrix.GetValue<1, 0>() * matrix.GetValue<1, 0>() + matrix.GetValue<2, 0>() * matrix.GetValue<2, 0>());
 
-    m_Orthogonal.SetValue<0, 0>(matrix.GetValue<0, 0>() * invLength);
-    m_Orthogonal.SetValue<1, 0>(matrix.GetValue<1, 0>() * invLength);
-    m_Orthogonal.SetValue<2, 0>(matrix.GetValue<2, 0>() * invLength);
+    orthogonal.SetValue<0, 0>(matrix.GetValue<0, 0>() * invLength);
+    orthogonal.SetValue<1, 0>(matrix.GetValue<1, 0>() * invLength);
+    orthogonal.SetValue<2, 0>(matrix.GetValue<2, 0>() * invLength);
 
-    auto fDot = m_Orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + m_Orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + m_Orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
+    auto fDot = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
 
-    m_Orthogonal.SetValue<0, 1>(matrix.GetValue<0, 1>() - fDot * m_Orthogonal.GetValue<0, 0>());
-    m_Orthogonal.SetValue<1, 1>(matrix.GetValue<1, 1>() - fDot * m_Orthogonal.GetValue<1, 0>());
-    m_Orthogonal.SetValue<2, 1>(matrix.GetValue<2, 1>() - fDot * m_Orthogonal.GetValue<2, 0>());
-    invLength = Math::InvSqrt(m_Orthogonal.GetValue<0, 1>() * m_Orthogonal.GetValue<0, 1>() + m_Orthogonal.GetValue<1, 1>() * m_Orthogonal.GetValue<1, 1>() + m_Orthogonal.GetValue<2, 1>() * m_Orthogonal.GetValue<2, 1>());
-    m_Orthogonal(0, 1) *= invLength;
-    m_Orthogonal(1, 1) *= invLength;
-    m_Orthogonal(2, 1) *= invLength;
+    orthogonal.SetValue<0, 1>(matrix.GetValue<0, 1>() - fDot * orthogonal.GetValue<0, 0>());
+    orthogonal.SetValue<1, 1>(matrix.GetValue<1, 1>() - fDot * orthogonal.GetValue<1, 0>());
+    orthogonal.SetValue<2, 1>(matrix.GetValue<2, 1>() - fDot * orthogonal.GetValue<2, 0>());
+    invLength = Math::InvSqrt(orthogonal.GetValue<0, 1>() * orthogonal.GetValue<0, 1>() + orthogonal.GetValue<1, 1>() * orthogonal.GetValue<1, 1>() + orthogonal.GetValue<2, 1>() * orthogonal.GetValue<2, 1>());
+    orthogonal(0, 1) *= invLength;
+    orthogonal(1, 1) *= invLength;
+    orthogonal(2, 1) *= invLength;
 
-    fDot = m_Orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
+    fDot = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
 
-    m_Orthogonal(0, 2) = matrix.GetValue<0, 2>() - fDot * m_Orthogonal.GetValue<0, 0>();
-    m_Orthogonal(1, 2) = matrix.GetValue<1, 2>() - fDot * m_Orthogonal.GetValue<1, 0>();
-    m_Orthogonal(2, 2) = matrix.GetValue<2, 2>() - fDot * m_Orthogonal.GetValue<2, 0>();
-    fDot = m_Orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
+    orthogonal(0, 2) = matrix.GetValue<0, 2>() - fDot * orthogonal.GetValue<0, 0>();
+    orthogonal(1, 2) = matrix.GetValue<1, 2>() - fDot * orthogonal.GetValue<1, 0>();
+    orthogonal(2, 2) = matrix.GetValue<2, 2>() - fDot * orthogonal.GetValue<2, 0>();
+    fDot = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
 
-    m_Orthogonal(0, 2) -= fDot * m_Orthogonal.GetValue<0, 1>();
-    m_Orthogonal(1, 2) -= fDot * m_Orthogonal.GetValue<1, 1>();
-    m_Orthogonal(2, 2) -= fDot * m_Orthogonal.GetValue<2, 1>();
+    orthogonal(0, 2) -= fDot * orthogonal.GetValue<0, 1>();
+    orthogonal(1, 2) -= fDot * orthogonal.GetValue<1, 1>();
+    orthogonal(2, 2) -= fDot * orthogonal.GetValue<2, 1>();
 
-    invLength = Math::InvSqrt(m_Orthogonal.GetValue<0, 2>() * m_Orthogonal.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 2>() * m_Orthogonal.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 2>() * m_Orthogonal.GetValue<2, 2>());
-    m_Orthogonal(0, 2) *= invLength;
-    m_Orthogonal(1, 2) *= invLength;
-    m_Orthogonal(2, 2) *= invLength;
+    invLength = Math::InvSqrt(orthogonal.GetValue<0, 2>() * orthogonal.GetValue<0, 2>() + orthogonal.GetValue<1, 2>() * orthogonal.GetValue<1, 2>() + orthogonal.GetValue<2, 2>() * orthogonal.GetValue<2, 2>());
+    orthogonal(0, 2) *= invLength;
+    orthogonal(1, 2) *= invLength;
+    orthogonal(2, 2) *= invLength;
 
     // 保证正交矩阵行列式1（无反射）
-    auto det = m_Orthogonal.Determinant();
+    auto det = orthogonal.Determinant();
 
     if (det < Math::GetValue(0))
     {
-        m_Orthogonal = -m_Orthogonal;
+        orthogonal = -orthogonal;
     }
 
     // 建立“右边”的矩阵Real.
     Matrix3 right{};
-    right(0, 0) = m_Orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 0>() + m_Orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 0>() + m_Orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 0>();
+    right(0, 0) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 0>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 0>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 0>();
 
-    right(0, 1) = m_Orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + m_Orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + m_Orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
+    right(0, 1) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 1>();
 
-    right(1, 1) = m_Orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 1>() + m_Orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 1>() + m_Orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 1>();
+    right(1, 1) = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 1>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 1>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 1>();
 
-    right(0, 2) = m_Orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
+    right(0, 2) = orthogonal.GetValue<0, 0>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 0>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 0>() * matrix.GetValue<2, 2>();
 
-    right(1, 2) = m_Orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
+    right(1, 2) = orthogonal.GetValue<0, 1>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 1>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 1>() * matrix.GetValue<2, 2>();
 
-    right(2, 2) = m_Orthogonal.GetValue<0, 2>() * matrix.GetValue<0, 2>() + m_Orthogonal.GetValue<1, 2>() * matrix.GetValue<1, 2>() + m_Orthogonal.GetValue<2, 2>() * matrix.GetValue<2, 2>();
+    right(2, 2) = orthogonal.GetValue<0, 2>() * matrix.GetValue<0, 2>() + orthogonal.GetValue<1, 2>() * matrix.GetValue<1, 2>() + orthogonal.GetValue<2, 2>() * matrix.GetValue<2, 2>();
 
     // 缩放组件。
-    m_Diagonal.MakeDiagonal(right.GetValue<0, 0>(), right.GetValue<1, 1>(), right.GetValue<2, 2>());
+    diagonal.MakeDiagonal(right.GetValue<0, 0>(), right.GetValue<1, 1>(), right.GetValue<2, 2>());
 
     // 剪切组件。
-    auto invD00 = Math::GetValue(1) / m_Diagonal.GetValue<0, 0>();
-    m_UpperTriangular = Matrix3{ Math::GetValue(1), right.GetValue<0, 1>() * invD00, right(0, 2) * invD00,
-                                 Math::GetValue(0), Math::GetValue(1), right.GetValue<1, 2>() / m_Diagonal.GetValue<1, 1>(),
-                                 Math::GetValue(0), Math::GetValue(0), Math::GetValue(1) };
+    auto invD00 = Math::GetValue(1) / diagonal.GetValue<0, 0>();
+    upperTriangular = Matrix3{ Math::GetValue(1),
+                               right.GetValue<0, 1>() * invD00,
+                               right(0, 2) * invD00,
+                               Math::GetValue(0),
+                               Math::GetValue(1),
+                               right.GetValue<1, 2>() / diagonal.GetValue<1, 1>(),
+                               Math::GetValue(0),
+                               Math::GetValue(0),
+                               Math::GetValue(1) };
 }
 
 template <typename Real>
-typename const Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GeOrthogonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Orthogonal;
+    return orthogonal;
 }
 
 template <typename Real>
-typename const Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetDiagonalMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Diagonal;
+    return diagonal;
 }
 
 template <typename Real>
-typename const Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
+typename Mathematics::QDUDecompositionValue<Real>::Matrix3 Mathematics::QDUDecompositionValue<Real>::GetUpperTriangularMatrix() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_UpperTriangular;
+    return upperTriangular;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_ACHIEVE_H

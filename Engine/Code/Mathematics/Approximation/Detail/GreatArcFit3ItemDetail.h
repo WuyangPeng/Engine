@@ -1,61 +1,63 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 14:37)
+///	引擎版本：0.8.0.2 (2022/02/18 18:37)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_DETAIL_H
 #define MATHEMATICS_APPROXIMATION_GREAT_ARC_FIT3_ITEM_DETAIL_H
 
 #include "GreatArcFit3Item.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::GreatArcFit3Item<Real>::GreatArcFit3Item(const Vector3D& uVector, const Vector3D& vVector, const Vector3D& point)
-    : m_UDot{ Vector3DTools<Real>::DotProduct(uVector, point) }, m_VDot{ Vector3DTools<Real>::DotProduct(vVector, point) }, m_Angle{ Math<Real>::ATan2(m_VDot, m_UDot) }
+Mathematics::GreatArcFit3Item<Real>::GreatArcFit3Item(const Vector3& uVector, const Vector3& vVector, const Vector3& point) noexcept
+    : uDot{ Vector3Tools<Real>::DotProduct(uVector, point) }, vDot{ Vector3Tools<Real>::DotProduct(vVector, point) }, angle{ Math<Real>::ATan2(vDot, uDot) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::GreatArcFit3Item<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-Real Mathematics::GreatArcFit3Item<Real>::GetUDot() const
+Real Mathematics::GreatArcFit3Item<Real>::GetUDot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_UDot;
+    return uDot;
 }
 
 template <typename Real>
-Real Mathematics::GreatArcFit3Item<Real>::GetVDot() const
+Real Mathematics::GreatArcFit3Item<Real>::GetVDot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_VDot;
+    return vDot;
 }
 
 template <typename Real>
-Real Mathematics::GreatArcFit3Item<Real>::GetAngle() const
+Real Mathematics::GreatArcFit3Item<Real>::GetAngle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Angle;
+    return angle;
 }
 
 template <typename Real>
-bool Mathematics::operator<(const GreatArcFit3Item<Real>& lhs, const GreatArcFit3Item<Real>& rhs)
+bool Mathematics::operator<(const GreatArcFit3Item<Real>& lhs, const GreatArcFit3Item<Real>& rhs) noexcept
 {
     return lhs.GetAngle() < rhs.GetAngle();
 }

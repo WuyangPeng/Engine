@@ -66,7 +66,7 @@ void CoreTools::CommandTesting ::SucceedTest()
     ASSERT_EQUAL(excessArguments, "fileName");
     ASSERT_EQUAL(command.GetFileName(), "filename");
 
-    command.SetFileNmaeUsed();
+    command.SetFileNameUsed();
 
     count = command.GetExcessArgumentsCount();
 

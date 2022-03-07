@@ -41,7 +41,7 @@ namespace Rendering
         using APoint = Mathematics::APoint<float>;
         using AVector = Mathematics::AVector<float>;
         using Matrix = Mathematics::Matrix<float>;
-        using AxesAlignBoundingBox2D = Mathematics::AxesAlignBoundingBox2D<float>;
+        using AxesAlignBoundingBox2D = Mathematics::AxesAlignBoundingBox2<float>;
 		using Math = Mathematics::Math<float>;
         
     public:

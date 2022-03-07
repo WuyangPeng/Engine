@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 15:30)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 17:08)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCKET_DATA_H
 #define NETWORK_NETWORK_INTERFACE_SOCKET_DATA_H
@@ -26,15 +26,15 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] SocketType GetSocketType() const noexcept;
-        [[nodiscard]] int GetServerID() const noexcept;
+        NODISCARD SocketType GetSocketType() const noexcept;
+        NODISCARD int GetServerID() const noexcept;
 
     private:
-        SocketType m_SocketType;
-        int m_ServerID;
+        SocketType socketType;
+        int serverID;
     };
 
-     [[nodiscard]] bool NETWORK_DEFAULT_DECLARE operator<(const SocketData& lhs, const SocketData& rhs) noexcept;
+    NODISCARD bool NETWORK_DEFAULT_DECLARE operator<(const SocketData& lhs, const SocketData& rhs) noexcept;
 }
 
 #endif  // NETWORK_NETWORK_INTERFACE_SOCKET_DATA_H

@@ -23,7 +23,7 @@ namespace Mathematics
         void NoSolutionYTest();
         void UnknownTest();
 		
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 14:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 10:17)
 
 #include "Network/NetworkExport.h"
 
@@ -17,14 +17,14 @@
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/StreamMacro.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
- 
+
 Network::MessageInterface::MessageInterface(int64_t messageID) noexcept
     : m_MessageID{ messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::MessageInterface::MessageInterface([[maybe_unused]] LoadConstructor value, int64_t messageID) noexcept
+Network::MessageInterface::MessageInterface(MAYBE_UNUSED LoadConstructor value, int64_t messageID) noexcept
     : m_MessageID{ messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
@@ -79,41 +79,37 @@ int Network::MessageInterface::GetStreamingSize() const
     return size;
 }
 
-void Network::MessageInterface::Save(const MessageTargetSharedPtr& target) const
+void Network::MessageInterface::Save(MessageTarget& target) const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    auto process = target;
-
-    NETWORK_BEGIN_STREAM_SAVE(process);
+    NETWORK_BEGIN_STREAM_SAVE(target);
 
     // 写入消息号
-    process->Write(m_MessageID);
+    target.Write(m_MessageID);
 
-    NETWORK_END_STREAM_SAVE(process);
+    NETWORK_END_STREAM_SAVE(target);
 }
 
-void Network::MessageInterface::Load(const MessageSourceSharedPtr& source)
+void Network::MessageInterface::Load(MessageSource& source)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-     auto process = source;
-
-    NETWORK_BEGIN_STREAM_LOAD(process);
+    NETWORK_BEGIN_STREAM_LOAD(source);
 
     // 消息号已经在外层读取。
 
-    NETWORK_END_STREAM_LOAD(process);
+    NETWORK_END_STREAM_LOAD(source);
 }
 
-int Network::MessageInterface::GetMessageID() const
+int32_t Network::MessageInterface::GetMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_MessageID);
+    return boost::numeric_cast<int32_t>(m_MessageID);
 }
 
-int Network::MessageInterface::GetSubMessageID() const
+int32_t Network::MessageInterface::GetSubMessageID() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

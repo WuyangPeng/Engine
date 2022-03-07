@@ -22,7 +22,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
         : ParametricSurface<Real>{ Math::GetValue(0), Math::GetValue(1), Math::GetValue(0), Math::GetValue(1), true }
     {
         MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -44,7 +44,7 @@ namespace Mathematics
     }
 
     template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
+    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, Real* vKnot)
         : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
     {
         MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -66,7 +66,7 @@ namespace Mathematics
     }
 
     template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
+    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, bool vOpen)
         : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
     {
         MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -88,7 +88,7 @@ namespace Mathematics
     }
 
     template <typename Real>
-    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3D<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
+    BSplineRectangle<Real>::BSplineRectangle(int numUCtrlPoints, int numVCtrlPoints, Vector3<Real>** ctrlPoint, int uDegree, int vDegree, bool uLoop, bool vLoop, Real* uKnot, Real* vKnot)
         : ParametricSurface<Real>{ Math ::GetValue(0), Math::GetValue(1), Math ::GetValue(0), Math::GetValue(1), true }
     {
         MATHEMATICS_ASSERTION_0(numUCtrlPoints >= 2, "Invalid input\n");
@@ -120,11 +120,11 @@ namespace Mathematics
     }
 
     template <typename Real>
-    void BSplineRectangle<Real>::CreateControl(Vector3D<Real>** ctrlPoint)
+    void BSplineRectangle<Real>::CreateControl(Vector3<Real>** ctrlPoint)
     {
         const auto newNumUCtrlPoints = mNumUCtrlPoints + mUReplicate;
         const auto newNumVCtrlPoints = mNumVCtrlPoints + mVReplicate;
-        mCtrlPoint = nullptr;  // NEW2<Vector3D<Real>>(newNumVCtrlPoints, newNumUCtrlPoints);
+        mCtrlPoint = nullptr;  // NEW2<Vector3<Real>>(newNumVCtrlPoints, newNumUCtrlPoints);
 
         for (auto u = 0; u < newNumUCtrlPoints; ++u)
         {
@@ -168,7 +168,7 @@ namespace Mathematics
     }
 
     template <typename Real>
-    void BSplineRectangle<Real>::SetControlPoint(int uIndex, int vIndex, const Vector3D<Real>& ctrl)
+    void BSplineRectangle<Real>::SetControlPoint(int uIndex, int vIndex, const Vector3<Real>& ctrl)
     {
         if (0 <= uIndex && uIndex < mNumUCtrlPoints && 0 <= vIndex && vIndex < mNumVCtrlPoints)
         {
@@ -198,14 +198,14 @@ namespace Mathematics
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const noexcept
+    Vector3<Real> BSplineRectangle<Real>::GetControlPoint(int uIndex, int vIndex) const noexcept
     {
         if (0 <= uIndex && uIndex < mNumUCtrlPoints && 0 <= vIndex && vIndex < mNumVCtrlPoints)
         {
             return mCtrlPoint[uIndex][vIndex];
         }
 
-        return Vector3D<Real>{ Math ::sm_MaxReal, Math ::sm_MaxReal, Math ::sm_MaxReal };
+        return Vector3<Real>{ Math ::maxReal, Math ::maxReal, Math ::maxReal };
     }
 
     template <typename Real>
@@ -225,11 +225,11 @@ namespace Mathematics
             return mBasis[dim].GetKnot(i);
         }
 
-        return Math ::sm_MaxReal;
+        return Math ::maxReal;
     }
 
     template <typename Real>
-    void BSplineRectangle<Real>::Get(Real u, Real v, Vector3D<Real>* pos, Vector3D<Real>* derU, Vector3D<Real>* derV, Vector3D<Real>* derUU, Vector3D<Real>* derUV, Vector3D<Real>* derVV) const
+    void BSplineRectangle<Real>::Get(Real u, Real v, Vector3<Real>* pos, Vector3<Real>* derU, Vector3<Real>* derV, Vector3<Real>* derUU, Vector3<Real>* derUV, Vector3<Real>* derVV) const
     {
         int iu = 0, iumin = 0, iumax = 0;
         if (derUU)
@@ -269,7 +269,7 @@ namespace Mathematics
 
         if (pos)
         {
-            *pos = Vector3D<Real>::GetZero();
+            *pos = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -282,7 +282,7 @@ namespace Mathematics
 
         if (derU)
         {
-            *derU = Vector3D<Real>::GetZero();
+            *derU = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -295,7 +295,7 @@ namespace Mathematics
 
         if (derV)
         {
-            *derV = Vector3D<Real>::GetZero();
+            *derV = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -308,7 +308,7 @@ namespace Mathematics
 
         if (derUU)
         {
-            *derUU = Vector3D<Real>::GetZero();
+            *derUU = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -321,7 +321,7 @@ namespace Mathematics
 
         if (derUV)
         {
-            *derUV = Vector3D<Real>::GetZero();
+            *derUV = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -334,7 +334,7 @@ namespace Mathematics
 
         if (derVV)
         {
-            *derVV = Vector3D<Real>::GetZero();
+            *derVV = Vector3<Real>::GetZero();
             for (iu = iumin; iu <= iumax; ++iu)
             {
                 for (iv = ivmin; iv <= ivmax; ++iv)
@@ -347,49 +347,49 @@ namespace Mathematics
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::P(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::P(Real u, Real v) const
     {
-        Vector3D<Real> pos;
+        Vector3<Real> pos;
         Get(u, v, &pos, 0, 0, 0, 0, 0);
         return pos;
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::PU(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::PU(Real u, Real v) const
     {
-        Vector3D<Real> derU;
+        Vector3<Real> derU;
         Get(u, v, 0, &derU, 0, 0, 0, 0);
         return derU;
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::PV(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::PV(Real u, Real v) const
     {
-        Vector3D<Real> derV;
+        Vector3<Real> derV;
         Get(u, v, 0, 0, &derV, 0, 0, 0);
         return derV;
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::PUU(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::PUU(Real u, Real v) const
     {
-        Vector3D<Real> derUU;
+        Vector3<Real> derUU;
         Get(u, v, 0, 0, 0, &derUU, 0, 0);
         return derUU;
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::PUV(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::PUV(Real u, Real v) const
     {
-        Vector3D<Real> derUV;
+        Vector3<Real> derUV;
         Get(u, v, 0, 0, 0, 0, &derUV, 0);
         return derUV;
     }
 
     template <typename Real>
-    Vector3D<Real> BSplineRectangle<Real>::PVV(Real u, Real v) const
+    Vector3<Real> BSplineRectangle<Real>::PVV(Real u, Real v) const
     {
-        Vector3D<Real> derVV;
+        Vector3<Real> derVV;
         Get(u, v, 0, 0, 0, 0, 0, &derVV);
         return derVV;
     }

@@ -15,16 +15,16 @@
 #include "Mathematics/Query/Query2Rational.h"
 
 template <typename Real>
-Mathematics::Delaunay3<Real>::Delaunay3(const std::vector<Vector3D<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
+Mathematics::Delaunay3<Real>::Delaunay3(const std::vector<Vector3<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
     : Delaunay<Real>{ vertices.size(), epsilon, owner, queryType }, mVertices{ vertices }, mNumUniqueVertices{ 0 },
-      mSVertices{}, mQuery{ 0 }, m_LineOrigin{ Vector3D<Real>::sm_Zero }, m_LineDirection{ Vector3D<Real>::sm_Zero },
-      mPlaneOrigin{ Vector3D<Real>::sm_Zero }, mPathLast{ -1 }, mPath{ 0 }, mLastFaceV0{ -1 },
+      mSVertices{}, mQuery{ 0 }, m_LineOrigin{ Vector3<Real>::sm_Zero }, m_LineDirection{ Vector3<Real>::sm_Zero },
+      mPlaneOrigin{ Vector3<Real>::sm_Zero }, mPathLast{ -1 }, mPath{ 0 }, mLastFaceV0{ -1 },
       mLastFaceV1{ -1 }, mLastFaceV2{ -1 }, mLastFaceOpposite{ -1 }, mLastFaceOppositeIndex{ -1 }
 {
-    mPlaneDirection[0] = Vector3D<Real>::sm_Zero;
-    mPlaneDirection[1] = Vector3D<Real>::sm_Zero;
+    mPlaneDirection[0] = Vector3<Real>::sm_Zero;
+    mPlaneDirection[1] = Vector3<Real>::sm_Zero;
 
-    Vector3DInformation<Real> info{ mVertices, mEpsilon };
+    Vector3Information<Real> info{ mVertices, mEpsilon };
     if (info.GetDimension() == 0)
     {
         // The values of mDimension, mIndices, and mAdjacencies were
@@ -101,9 +101,9 @@ Mathematics::Delaunay3<Real>::Delaunay3(const std::vector<Vector3D<Real>>& verti
     else
     {
         // No transformation needed for exact rational arithmetic.
-        mMin = Vector3D<Real>::sm_Zero;
+        mMin = Vector3<Real>::sm_Zero;
         mScale = Math::GetValue(1);
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3D<Real>));
+        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3<Real>));
 
         if (queryType == QueryType::Rational)
         {
@@ -129,7 +129,7 @@ Mathematics::Delaunay3<Real>::Delaunay3(const std::vector<Vector3D<Real>>& verti
     // Incrementally update the tetrahedralization.  The set of processed
     // points is maintained to eliminate duplicates, either in the original
     // input points or in the points obtained by snap rounding.
-    std::set<Vector3D<Real>> processed;
+    std::set<Vector3<Real>> processed;
     for (i = 0; i < 4; ++i)
     {
         processed.insert(mSVertices[mExtreme[i]]);
@@ -187,7 +187,7 @@ Mathematics::Delaunay3<Real>::~Delaunay3()
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>* Mathematics::Delaunay3<Real>::GetVertices() const
+const Mathematics::Vector3<Real>* Mathematics::Delaunay3<Real>::GetVertices() const
 {
     return &mVertices[0];
 }
@@ -199,13 +199,13 @@ int Mathematics::Delaunay3<Real>::GetNumUniqueVertices() const
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>::GetLineOrigin() const
+const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetLineOrigin() const
 {
     return m_LineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>::GetLineDirection() const
+const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetLineDirection() const
 {
     return m_LineDirection;
 }
@@ -223,20 +223,20 @@ Mathematics::Delaunay1<Real>* Mathematics::Delaunay3<Real>::GetDelaunay1() const
     //     for (auto i = 0; i < mNumVertices; ++i)
     //     {
     //         auto diff = mVertices[i] - m_LineOrigin;
-    //         projection[i] = Vector3DTools<Real>::DotProduct(m_LineDirection, diff);
+    //         projection[i] = Vector3Tools<Real>::DotProduct(m_LineDirection, diff);
     //     }
 
     return nullptr;  //    NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true, mQueryType);
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>::GetPlaneOrigin() const
+const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetPlaneOrigin() const
 {
     return mPlaneOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::Delaunay3<Real>::GetPlaneDirection(int i) const
+const Mathematics::Vector3<Real>& Mathematics::Delaunay3<Real>::GetPlaneDirection(int i) const
 {
     return mPlaneDirection[i];
 }
@@ -250,12 +250,12 @@ Mathematics::Delaunay2<Real>* Mathematics::Delaunay3<Real>::GetDelaunay2() const
         return 0;
     }
 
-    std::vector<Vector2D<Real>> projection(mNumVertices);
+    std::vector<Vector2<Real>> projection(mNumVertices);
     for (int i = 0; i < mNumVertices; ++i)
     {
         auto diff = mVertices[i] - mPlaneOrigin;
-        projection[i][0] = Vector3DTools<Real>::DotProduct(mPlaneDirection[0], diff);
-        projection[i][1] = Vector3DTools<Real>::DotProduct(mPlaneDirection[1], diff);
+        projection[i][0] = Vector3Tools<Real>::DotProduct(mPlaneDirection[0], diff);
+        projection[i][1] = Vector3Tools<Real>::DotProduct(mPlaneDirection[1], diff);
     }
 
     return nullptr;  //    NEW0 Delaunay2<Real>(projection, mEpsilon, true, mQueryType);
@@ -330,7 +330,7 @@ bool Mathematics::Delaunay3<Real>::GetHull(int& numTriangles, int*& indices) con
 }
 
 template <typename Real>
-int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3D<Real>& p) const
+int Mathematics::Delaunay3<Real>::GetContainingTetrahedron(const Vector3<Real>& p) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
     if (mDimension != 3)
@@ -454,7 +454,7 @@ int Mathematics::Delaunay3<Real>::GetLastFace(int& v0, int& v1, int& v2, int& v3
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetVertexSet(int i, Vector3D<Real> vertices[4]) const
+bool Mathematics::Delaunay3<Real>::GetVertexSet(int i, Vector3<Real> vertices[4]) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
     if (mDimension != 3)
@@ -517,7 +517,7 @@ bool Mathematics::Delaunay3<Real>::GetAdjacentSet(int i, int adjacencies[4]) con
 }
 
 template <typename Real>
-bool Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3D<Real>& p, Real bary[4]) const
+bool Mathematics::Delaunay3<Real>::GetBarycentricSet(int i, const Vector3<Real>& p, Real bary[4]) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 3, "The dimension must be 3\n");
     if (mDimension != 3)

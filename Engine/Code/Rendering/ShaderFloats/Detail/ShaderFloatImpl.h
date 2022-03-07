@@ -32,9 +32,9 @@ namespace Rendering
 		using FloatVector = std::vector<float>;
 		using BufferSource = CoreTools::BufferSource;
 		using BufferTarget = CoreTools::BufferTarget;
-		using AVector = Mathematics::FloatAVector;
-		using APoint = Mathematics::FloatAPoint;
-		using Matrix = Mathematics::FloatMatrix;
+		using AVector = Mathematics::AVectorF;
+		using APoint = Mathematics::APointF;
+		using Matrix = Mathematics::MatrixF;
 		using Colour = Colour<float>;
 
 	public:

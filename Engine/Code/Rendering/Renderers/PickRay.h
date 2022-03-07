@@ -31,13 +31,13 @@ namespace Rendering
 
 	public:
 		PickRay();
-		PickRay(bool result, const Mathematics::FloatAPoint& origin, const Mathematics::FloatAVector& direction);
+		PickRay(bool result, const Mathematics::APointF& origin, const Mathematics::AVectorF& direction);
 	
 		CLASS_INVARIANT_DECLARE;
 
 		bool IsResult() const noexcept;
-		Mathematics::FloatAPoint GetOrigin() const noexcept;
-		Mathematics::FloatAVector GetDirection() const noexcept;
+		Mathematics::APointF GetOrigin() const noexcept;
+		Mathematics::AVectorF GetDirection() const noexcept;
 
 	private:
                 PackageType impl;

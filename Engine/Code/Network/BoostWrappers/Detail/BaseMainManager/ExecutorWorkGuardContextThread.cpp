@@ -16,16 +16,13 @@
 
 using std::make_unique;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Network::ExecutorWorkGuardContextThread::ExecutorWorkGuardContextThread()
-    : m_ExecutorWorkGuardContext{}, m_Thread{}
+Network::ExecutorWorkGuardContextThread::ExecutorWorkGuardContextThread(CoreTools::DisableNotThrow disableNotThrow)
+    : executorWorkGuardContext{ disableNotThrow }, thread{}
 {
     InitThread();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_POP
 
 Network::ExecutorWorkGuardContextThread::~ExecutorWorkGuardContextThread() noexcept
 {
@@ -40,14 +37,14 @@ Network::IOContextType& Network::ExecutorWorkGuardContextThread::GetIOContext() 
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_ExecutorWorkGuardContext.GetIOContext();
+    return executorWorkGuardContext.GetIOContext();
 }
 
 void Network::ExecutorWorkGuardContextThread::StopContext()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_ExecutorWorkGuardContext.PostStopContext();
+    executorWorkGuardContext.PostStopContext();
 
     JoinThreads();
 }
@@ -56,7 +53,7 @@ bool Network::ExecutorWorkGuardContextThread::IsContextStop() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_ExecutorWorkGuardContext.IsContextStop();
+    return executorWorkGuardContext.IsContextStop();
 }
 
 void Network::ExecutorWorkGuardContextThread::RestartContext()
@@ -65,7 +62,7 @@ void Network::ExecutorWorkGuardContextThread::RestartContext()
 
     JoinThreads();
 
-    m_ExecutorWorkGuardContext.RestartContext();
+    executorWorkGuardContext.RestartContext();
 
     InitThread();
 }
@@ -73,16 +70,16 @@ void Network::ExecutorWorkGuardContextThread::RestartContext()
 // private
 void Network::ExecutorWorkGuardContextThread::InitThread()
 {
-    m_Thread = make_unique<ThreadType>(&ExecutorWorkGuardContext::Run, &m_ExecutorWorkGuardContext);
+    thread = make_unique<ThreadType>(&ExecutorWorkGuardContext::Run, &executorWorkGuardContext);
 }
 
 // private
 void Network::ExecutorWorkGuardContextThread::JoinThreads()
 {
-    if (m_Thread != nullptr)
+    if (thread != nullptr)
     {
-        m_Thread->join();
+        thread->join();
 
-        m_Thread.reset();
+        thread.reset();
     }
 }

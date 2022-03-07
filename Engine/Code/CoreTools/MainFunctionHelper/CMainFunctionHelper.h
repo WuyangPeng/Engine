@@ -29,9 +29,9 @@ namespace CoreTools
         virtual ~CMainFunctionHelper() noexcept;
 
         CMainFunctionHelper(const CMainFunctionHelper& rhs) = delete;
-        virtual CMainFunctionHelper& operator=(const CMainFunctionHelper& rhs) = delete;
+        CMainFunctionHelper& operator=(const CMainFunctionHelper& rhs) = delete;
         CMainFunctionHelper(CMainFunctionHelper&& rhs) noexcept;
-        virtual CMainFunctionHelper& operator=(CMainFunctionHelper&& rhs) noexcept;
+        CMainFunctionHelper& operator=(CMainFunctionHelper&& rhs) noexcept;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

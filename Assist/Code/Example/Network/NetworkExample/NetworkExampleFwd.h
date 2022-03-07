@@ -7,6 +7,6 @@
 #ifndef NETWORK_EXAMPLE_FWD_H
 #define NETWORK_EXAMPLE_FWD_H
 
-#include "Macro/MacroFwd.h"
+#include "Helper/HelperFwd.h"
 
 #endif // NETWORK_EXAMPLE_FWD_H

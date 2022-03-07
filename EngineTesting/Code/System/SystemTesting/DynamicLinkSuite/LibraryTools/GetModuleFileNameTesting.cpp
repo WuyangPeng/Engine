@@ -15,6 +15,7 @@
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/SystemClassInvariantMacro.h"
 #include "CoreTools/UnitTestSuite/UnitTestDetail.h"
+#include "System/Windows/Engineering.h"
 
 #include <array>
 
@@ -76,7 +77,7 @@ void System::GetModuleFileNameTesting::GetModuleFileNameFailureTest()
 
 System::DynamicLinkString System::GetModuleFileNameTesting::GetResourcesLibraryName()
 {
-    return GetResource() + DYNAMIC_LINK_TEXT("/"s) + GetResourcesLibrary() + GetEngineeringDynamicLinkSuffix();
+    return GetResource() + DYNAMIC_LINK_TEXT("/"s) + GetResourcesLibrary() + GetEngineeringSuffix();
 }
 
 System::DynamicLinkModule System::GetModuleFileNameTesting::GetDynamicLibrary()

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:40)
 
 #include "Network/NetworkExport.h"
 
@@ -26,14 +26,14 @@ Network::NullSockAcceptor::NullSockAcceptor() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockAcceptor)
 
-bool Network::NullSockAcceptor::Accept([[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
+bool Network::NullSockAcceptor::Accept(MAYBE_UNUSED SockStream& sockStream, MAYBE_UNUSED SockAddress& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return false;
 }
 
-void Network::NullSockAcceptor::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream) noexcept
+void Network::NullSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const SockStreamSharedPtr& sockStream) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 }
@@ -45,19 +45,19 @@ bool Network::NullSockAcceptor::EnableNonBlock() noexcept
     return false;
 }
 
-void Network::NullSockAcceptor::AsyncAccept([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const SockStreamSharedPtr& sockStream, [[maybe_unused]] const SockAddressSharedPtr& sockAddress) noexcept
+void Network::NullSockAcceptor::AsyncAccept(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const SockStreamSharedPtr& sockStream, MAYBE_UNUSED const SockAddressSharedPtr& sockAddress) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 }
 
-bool Network::NullSockAcceptor::Accept([[maybe_unused]] const SockStreamSharedPtr& sockStream) noexcept
+bool Network::NullSockAcceptor::Accept(MAYBE_UNUSED SockStream& sockStream) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return false;
 }
 
-const std::string Network::NullSockAcceptor::GetAddress() const noexcept
+std::string Network::NullSockAcceptor::GetAddress() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

@@ -21,7 +21,7 @@ namespace Mathematics
 		void TestValuesTest();
         void SetStorageValueTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
         
         static double FirstEquation(double x,double y);
         static float SecondEquation(float x,float y);

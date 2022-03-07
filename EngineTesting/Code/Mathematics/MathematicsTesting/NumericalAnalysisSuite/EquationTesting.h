@@ -23,7 +23,7 @@ namespace Mathematics
         void ThriceTest();
 		void QuarticTest();
 		
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

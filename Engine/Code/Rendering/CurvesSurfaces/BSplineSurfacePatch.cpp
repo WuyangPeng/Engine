@@ -13,7 +13,7 @@
 
 #include "CoreTools/ObjectSystems/StreamDetail.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineBasisDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineRectangleDetail.h"
 #include "Mathematics/CurvesSurfacesVolumes/ParametricSurfaceDetail.h"
@@ -29,25 +29,25 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, BSplineSurfacePatch);
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
+Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, bool vOpen)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(1)
 {
     mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vOpen);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
+Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, bool uOpen, float* vKnots)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(2)
 {
     mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uOpen, vKnots);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
+Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, bool vOpen)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(3)
 {
     mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vOpen);
 }
 
-Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::FloatVector3D** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
+Rendering::BSplineSurfacePatch ::BSplineSurfacePatch(int numUCtrlPoints, int numVCtrlPoints, Mathematics::Vector3F** ctrlPoints, int uDegree, int vDegree, bool uLoop, bool vLoop, float* uKnots, float* vKnots)
     : SurfacePatch(0.0f, 1.0f, 0.0f, 1.0f, true), mConstructor(4)
 {
     mPatch = new Mathematics::BSplineRectanglef(numUCtrlPoints, numVCtrlPoints, ctrlPoints, uDegree, vDegree, uLoop, vLoop, uKnots, vKnots);
@@ -62,39 +62,39 @@ Rendering::BSplineSurfacePatch ::~BSplineSurfacePatch()
     EXCEPTION_ALL_CATCH(Rendering)
 }
 
-const Mathematics::FloatAPoint Rendering::BSplineSurfacePatch ::GetPosition(float u, float v) const
+const Mathematics::APointF Rendering::BSplineSurfacePatch ::GetPosition(float u, float v) const
 {
-    Mathematics::FloatVector3D p = mPatch->P(u, v);
+    Mathematics::Vector3F p = mPatch->P(u, v);
     return APoint(p[0], p[1], p[2]);
 }
 
-const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesU(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesU(float u, float v) const
 {
-    Mathematics::FloatVector3D pu = mPatch->PU(u, v);
+    Mathematics::Vector3F pu = mPatch->PU(u, v);
     return AVector(pu[0], pu[1], pu[2]);
 }
 
-const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesV(float u, float v) const
 {
-    Mathematics::FloatVector3D pv = mPatch->PV(u, v);
+    Mathematics::Vector3F pv = mPatch->PV(u, v);
     return AVector(pv[0], pv[1], pv[2]);
 }
 
-const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesUU(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesUU(float u, float v) const
 {
-    Mathematics::FloatVector3D puu = mPatch->PUU(u, v);
+    Mathematics::Vector3F puu = mPatch->PUU(u, v);
     return AVector(puu[0], puu[1], puu[2]);
 }
 
-const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesUV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesUV(float u, float v) const
 {
-    Mathematics::FloatVector3D puv = mPatch->PUV(u, v);
+    Mathematics::Vector3F puv = mPatch->PUV(u, v);
     return AVector(puv[0], puv[1], puv[2]);
 }
 
-const Mathematics::FloatAVector Rendering::BSplineSurfacePatch ::GetDerivativesVV(float u, float v) const
+const Mathematics::AVectorF Rendering::BSplineSurfacePatch ::GetDerivativesVV(float u, float v) const
 {
-    Mathematics::FloatVector3D pvv = mPatch->PVV(u, v);
+    Mathematics::Vector3F pvv = mPatch->PVV(u, v);
     return AVector(pvv[0], pvv[1], pvv[2]);
 }
 
@@ -116,7 +116,7 @@ void Rendering::BSplineSurfacePatch ::Load(CoreTools::BufferSource& source)
     int numCtrlPoints0, numCtrlPoints1;
     source.Read(numCtrlPoints0);
     source.Read(numCtrlPoints1);
-    Mathematics::FloatVector3D** ctrl = nullptr;  //    NEW2<Mathematics::FloatVector3D>(numCtrlPoints1, numCtrlPoints0);
+    Mathematics::Vector3F** ctrl = nullptr;  //    NEW2<Mathematics::Vector3F>(numCtrlPoints1, numCtrlPoints0);
     int i0 = 0, i1 = 0;
     for (i0 = 0; i0 < numCtrlPoints0; ++i0)
     {

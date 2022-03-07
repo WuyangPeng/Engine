@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/24 18:00)
+///	引擎版本：0.8.0.2 (2022/02/13 14:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_RESULT_CONST_ITERATOR_DETAIL_H
@@ -17,14 +17,14 @@
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIterator()
-    : m_Iter{}
+    : iter{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename ResultConstIter>
 Mathematics::EquationResultConstIterator<ResultConstIter>::EquationResultConstIterator(const ResultConstIter& iter) noexcept
-    : m_Iter{ iter }
+    : iter{ iter }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -42,7 +42,7 @@ void Mathematics::EquationResultConstIterator<ResultConstIter>::increment()
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    ++m_Iter;
+    ++iter;
 }
 
 template <typename ResultConstIter>
@@ -50,7 +50,7 @@ bool Mathematics::EquationResultConstIterator<ResultConstIter>::equal(const Equa
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter == other.m_Iter;
+    return iter == other.iter;
 }
 
 template <typename ResultConstIter>
@@ -58,18 +58,20 @@ const ResultConstIter& Mathematics::EquationResultConstIterator<ResultConstIter>
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Iter;
+    return iter;
 }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename ResultConstIter>
-const typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>::operator*() const noexcept
+typename ResultConstIter::value_type Mathematics::EquationResultConstIterator<ResultConstIter>::operator*() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return *m_Iter;
+    return *iter;
 }
+
 #include STSTEM_WARNING_POP
 
 template <typename ResultConstIter>

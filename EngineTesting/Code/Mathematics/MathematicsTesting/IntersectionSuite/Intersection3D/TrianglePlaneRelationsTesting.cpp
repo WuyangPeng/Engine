@@ -11,7 +11,7 @@
 
 #include <random>
 
- 
+ #include SYSTEM_WARNING_DISABLE(26440)
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, TrianglePlaneRelationsTesting)
 

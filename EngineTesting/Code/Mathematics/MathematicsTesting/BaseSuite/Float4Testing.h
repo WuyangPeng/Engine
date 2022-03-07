@@ -21,7 +21,7 @@ namespace Mathematics
 		void ConstructorTest();
 		void DelayCopyTest();
 
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

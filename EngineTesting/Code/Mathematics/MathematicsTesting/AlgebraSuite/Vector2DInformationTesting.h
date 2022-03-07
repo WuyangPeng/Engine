@@ -11,10 +11,10 @@
 
 namespace Mathematics
 {
-	class Vector2DInformationTesting : public CoreTools::UnitTest
+	class Vector2InformationTesting : public CoreTools::UnitTest
 	{
 	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2DInformationTesting); 
+		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(Vector2InformationTesting); 
 
 	private:
 		void MainTest();	
@@ -23,7 +23,7 @@ namespace Mathematics
 		void DirectionTest();
 		void ExtremeTest();
 
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

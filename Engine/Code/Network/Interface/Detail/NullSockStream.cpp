@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 11:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 23:42)
 
 #include "Network/NetworkExport.h"
 
@@ -31,14 +31,14 @@ Network::NullSockStream::NullSockStream() noexcept
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, NullSockStream)
 
-int Network::NullSockStream::Send([[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
+int Network::NullSockStream::Send(MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
     return 0;
 }
 
-int Network::NullSockStream::Receive([[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
+int Network::NullSockStream::Receive(MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -48,13 +48,15 @@ int Network::NullSockStream::Receive([[maybe_unused]] const MessageBufferSharedP
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
-void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const MessageBufferSharedPtr& messageBuffer)
+
+void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    CoreTools::CallbackParameters callbackParameters{ 0 };
+    CoreTools::CallbackParameters callbackParameters{ System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy) };
     callbackParameters.SetValue(0, System::EnumCastUnderlying(SocketManagerEvent::AsyncSend));
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::WrappersStrategy), System::EnumCastUnderlying(WrappersStrategy::Null));
+    
     if (!eventInterface->EventFunction(callbackParameters))
     {
         LOG_SINGLETON_ENGINE_APPENDER(Warn, Network)
@@ -62,9 +64,10 @@ void Network::NullSockStream::AsyncSend(const EventInterfaceSharedPtr& eventInte
             << LOG_SINGLETON_TRIGGER_ASSERT;
     }
 }
+
 #include STSTEM_WARNING_POP
 
-void Network::NullSockStream::AsyncReceive([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, [[maybe_unused]] const MessageBufferSharedPtr& messageBuffer) noexcept
+void Network::NullSockStream::AsyncReceive(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 }
@@ -83,7 +86,7 @@ bool Network::NullSockStream::EnableNonBlock() noexcept
     return false;
 }
 
-const string Network::NullSockStream::GetRemoteAddress() const noexcept
+string Network::NullSockStream::GetRemoteAddress() const noexcept
 {
     return string{};
 }

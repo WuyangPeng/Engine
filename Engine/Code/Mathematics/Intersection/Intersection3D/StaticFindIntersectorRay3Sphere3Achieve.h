@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 19:18)
+///	引擎版本：0.8.0.3 (2022/03/02 17:44)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_SPHERE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_RAY3_SPHERE3_ACHIEVE_H
 
 #include "StaticFindIntersectorRay3Sphere3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorRay3Sphere3<Real>::StaticFindIntersectorRay3Sphere3(const Ray3& ray, const Sphere3& sphere, const Real epsilon)
-    : ParentType{ epsilon }, m_Ray{ ray }, m_Sphere{ sphere }, m_Quantity{}, m_Point0{}, m_Point1{}, m_RayParameter0{}, m_RayParameter1{}
+    : ParentType{ epsilon }, ray{ ray }, sphere{ sphere }, quantity{}, point0{}, point1{}, rayParameter0{}, rayParameter1{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorRay3Sphere3<Real>::StaticFindIntersectorRay3Sp
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorRay3Sphere3<Real>::IsValid() const noexcept
 {
@@ -32,48 +33,49 @@ bool Mathematics::StaticFindIntersectorRay3Sphere3<Real>::IsValid() const noexce
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Ray3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetRay() const noexcept
+Mathematics::Ray3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetRay() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Ray;
+    return ray;
 }
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetSphere() const noexcept
+Mathematics::Sphere3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetSphere() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Sphere;
+    return sphere;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
 {
-    auto diff = m_Ray.GetOrigin() - m_Sphere.GetCenter();
-    auto a0 = Vector3DTools::DotProduct(diff, diff) - m_Sphere.GetRadius() * m_Sphere.GetRadius();
+    auto diff = ray.GetOrigin() - sphere.GetCenter();
+    auto a0 = Vector3Tools::DotProduct(diff, diff) - sphere.GetRadius() * sphere.GetRadius();
 
     if (a0 <= Math::GetValue(0))
     {
         // P在球体内
-        auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(), diff);
+        auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
         auto discr = a1 * a1 - a0;
         auto root = Math::Sqrt(discr);
-        m_RayParameter0 = -a1 + root;
-        m_Point0 = m_Ray.GetOrigin() + m_RayParameter0 * m_Ray.GetDirection();
-        m_Quantity = 1;
+        rayParameter0 = -a1 + root;
+        point0 = ray.GetOrigin() + rayParameter0 * ray.GetDirection();
+        quantity = 1;
         this->SetIntersectionType(IntersectionType::Point);
         return;
     }
     // 否则：P在范围之外
 
-    auto a1 = Vector3DTools::DotProduct(m_Ray.GetDirection(), diff);
+    auto a1 = Vector3Tools::DotProduct(ray.GetDirection(), diff);
     if (Math::GetValue(0) <= a1)
     {
-        m_Quantity = 0;
+        quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
@@ -81,24 +83,24 @@ void Mathematics::StaticFindIntersectorRay3Sphere3<Real>::Find()
     auto discr = a1 * a1 - a0;
     if (discr < Math::GetValue(0))
     {
-        m_Quantity = 0;
+        quantity = 0;
         this->SetIntersectionType(IntersectionType::Empty);
     }
     else if (Math::GetZeroTolerance() <= discr)
     {
         auto root = Math::Sqrt(discr);
-        m_RayParameter0 = -a1 - root;
-        m_RayParameter1 = -a1 + root;
-        m_Point0 = m_Ray.GetOrigin() + m_RayParameter0 * m_Ray.GetDirection();
-        m_Point1 = m_Ray.GetOrigin() + m_RayParameter1 * m_Ray.GetDirection();
-        m_Quantity = 2;
+        rayParameter0 = -a1 - root;
+        rayParameter1 = -a1 + root;
+        point0 = ray.GetOrigin() + rayParameter0 * ray.GetDirection();
+        point1 = ray.GetOrigin() + rayParameter1 * ray.GetDirection();
+        quantity = 2;
         this->SetIntersectionType(IntersectionType::Segment);
     }
     else
     {
-        m_RayParameter0 = -a1;
-        m_Point0 = m_Ray.GetOrigin() + m_RayParameter0 * m_Ray.GetDirection();
-        m_Quantity = 1;
+        rayParameter0 = -a1;
+        point0 = ray.GetOrigin() + rayParameter0 * ray.GetDirection();
+        quantity = 1;
         this->SetIntersectionType(IntersectionType::Point);
     }
 }
@@ -108,20 +110,20 @@ int Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetQuantity() const noe
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));
@@ -132,12 +134,12 @@ Real Mathematics::StaticFindIntersectorRay3Sphere3<Real>::GetRayParameter(int in
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_RayParameter0;
+            return rayParameter0;
         else
-            return m_RayParameter1;
+            return rayParameter1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));

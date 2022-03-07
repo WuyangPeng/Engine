@@ -24,7 +24,7 @@ namespace Mathematics
 		void CompareTest();
 		void EliminatePowersOfTwoTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

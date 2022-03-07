@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 11:09)
+///	引擎版本：0.8.0.2 (2022/02/17 18:33)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -30,8 +30,8 @@ namespace Mathematics
     {
     public:
         using ClassType = QuadraticSphereFit3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using Points = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using Points = std::vector<Vector3>;
         using Math = Math<Real>;
 
     public:
@@ -39,24 +39,24 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetCenter() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
-        [[nodiscard]] Real GetEigenValue() const noexcept;
+        NODISCARD Vector3 GetCenter() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
+        NODISCARD Real GetEigenValue() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        constexpr static int sm_EigenSystemSize = 5;
+        constexpr static int eigenSystemSize = 5;
 
     private:
-        Vector3D m_Center;
-        Real m_Radius;
-        Real m_EigenValue;
+        Vector3 center;
+        Real radius;
+        Real eigenValue;
     };
 
-    using FloatQuadraticSphereFit3 = QuadraticSphereFit3<float>;
-    using DoubleQuadraticSphereFit3 = QuadraticSphereFit3<double>;
+    using QuadraticSphereFit3F = QuadraticSphereFit3<float>;
+    using QuadraticSphereFit3D = QuadraticSphereFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_QUADRATIC_CIRCLE_FIT2_H

@@ -44,7 +44,7 @@ namespace Mathematics
 		void BitTest();
 		void ConversionTest();
 
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

@@ -17,7 +17,7 @@ void Network::NetworkUniqueIDManagerTesting
 }
 
 void Network::NetworkUniqueIDManagerTesting
-	::GetNextUniqueIDTest()
+	::GetNextUniqueIDTest() noexcept
 {
 
 }

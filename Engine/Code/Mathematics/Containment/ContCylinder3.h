@@ -17,7 +17,7 @@ namespace Mathematics
 	// the maximum distance from points to the axis.  The height is determined by
 	// projection of points onto the axis and determining the containing interval.
 	template <typename Real>
-	Cylinder3<Real> ContCylinder (const std::vector<Vector3D<Real> >& points);
+	Cylinder3<Real> ContCylinder (const std::vector<Vector3<Real> >& points);
 }
 
 #endif // MATHEMATICS_CONTAINMENT_CONT_CYLINDER3_H

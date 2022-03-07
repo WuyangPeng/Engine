@@ -19,19 +19,19 @@ namespace Mathematics
 	public:
 		// Construction and destruction.  TCBSpline2 accepts responsibility for
 		// deleting the input arrays.
-		TCBSpline2(int numSegments, Real* times, Vector2D<Real>* points, Real* tension, Real* continuity, Real* bias);
+		TCBSpline2(int numSegments, Real* times, Vector2<Real>* points, Real* tension, Real* continuity, Real* bias);
 
 		virtual ~TCBSpline2();
 
-		const Vector2D<Real>* GetPoints() const;
+		const Vector2<Real>* GetPoints() const;
 		const Real* GetTensions() const;
 		const Real* GetContinuities() const;
 		const Real* GetBiases() const;
 
-		virtual Vector2D<Real> GetPosition(Real t) const;
-		virtual Vector2D<Real> GetFirstDerivative(Real t) const;
-		virtual Vector2D<Real> GetSecondDerivative(Real t) const;
-		virtual Vector2D<Real> GetThirdDerivative(Real t) const;
+		virtual Vector2<Real> GetPosition(Real t) const;
+		virtual Vector2<Real> GetFirstDerivative(Real t) const;
+		virtual Vector2<Real> GetSecondDerivative(Real t) const;
+		virtual Vector2<Real> GetThirdDerivative(Real t) const;
 
 	protected:
 		using MultipleCurve2<Real>::mNumSegments;
@@ -44,14 +44,14 @@ namespace Mathematics
 		virtual Real GetSpeedKey(int key, Real t) const;
 		virtual Real GetLengthKey(int key, Real t0, Real t1) const;
 
-		Vector2D<Real>* mPoints;
+		Vector2<Real>* mPoints;
 		Real* mTension;
 		Real* mContinuity;
 		Real* mBias;
-		Vector2D<Real>* mA;
-		Vector2D<Real>* mB;
-		Vector2D<Real>* mC;
-		Vector2D<Real>* mD;
+		Vector2<Real>* mA;
+		Vector2<Real>* mB;
+		Vector2<Real>* mC;
+		Vector2<Real>* mD;
 
 		class   SplineKey
 		{

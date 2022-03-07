@@ -6,13 +6,12 @@
 
 #include "Toolset/Script/ScriptToolset/ScriptToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ScriptClassInvariantMacro.h"
 
-ScriptToolset::Placeholder
-	::Placeholder() 
+ScriptToolset::Placeholder ::Placeholder() noexcept
 {
-	SCRIPT_SELF_CLASS_IS_VALID_9;
+    SCRIPT_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ScriptToolset, Placeholder)

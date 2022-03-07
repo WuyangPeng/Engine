@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 15:03)
+///	引擎版本：0.8.0.1 (2022/01/09 1:49)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -25,7 +25,7 @@ using std::vector;
 CoreTools::ReadFileManager::ReadFileManager(const String& fileName)
     : impl{ CoreTools::ImplCreateUseFactory::Default, fileName }
 {
-    CORE_TOOLS_SELF_CLASS_IS_VALID_1;
+    CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, ReadFileManager)
@@ -34,26 +34,27 @@ IMPL_CONST_MEMBER_FUNCTION_DEFINE_0(CoreTools, ReadFileManager, GetFileByteSize,
 
 void CoreTools::ReadFileManager::Read(size_t itemSize, void* data)
 {
-    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->Read(itemSize, data);
 }
 
 void CoreTools::ReadFileManager::Read(size_t itemSize, size_t itemsNumber, void* data)
 {
-    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     return impl->Read(itemSize, itemsNumber, data);
 }
 
 const string CoreTools::ReadFileManager::LoadStdString()
 {
-    CORE_TOOLS_CLASS_IS_VALID_1;
+    CORE_TOOLS_CLASS_IS_VALID_9;
 
     constexpr auto alignedLength = 4;
 
-    auto length = 0;
-    Read(sizeof(int), &length);
+    int32_t length{ 0 };
+
+    Read(sizeof(int32_t), &length);
     if (length <= 0)
     {
         return string{};

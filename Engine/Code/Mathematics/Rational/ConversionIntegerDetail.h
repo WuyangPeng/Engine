@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 14:19)
+///	引擎版本：0.8.0.2 (2022/02/11 13:48)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H
@@ -22,11 +22,11 @@
 
 template <typename T>
 Mathematics::ConversionInteger<T>::ConversionInteger(T value)
-    : m_Shifting{ 0 },
-      m_Mantissa{ 0 },
-      m_Symbol{ NumericalValueSymbol::Zero },
-      m_MaxMantissaBit{ 0 },
-      m_ShiftingMantissa{ 0 }
+    : shifting{ 0 },
+      mantissa{ 0 },
+      symbol{ NumericalValueSymbol::Zero },
+      maxMantissaBit{ 0 },
+      shiftingMantissa{ 0 }
 {
     Init(value, TraitsType{});
     Amendment();
@@ -43,19 +43,19 @@ void Mathematics::ConversionInteger<T>::Init(T value, const SignedIntegerType&)
 
     if (0 <= value)
     {
-        m_Mantissa = value;
-        m_Symbol = NumericalValueSymbol::Positive;
+        mantissa = value;
+        symbol = NumericalValueSymbol::Positive;
     }
     else
     {
-        m_Mantissa = -value;
-        m_Symbol = NumericalValueSymbol::Negative;
+        mantissa = -value;
+        symbol = NumericalValueSymbol::Negative;
     }
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_Mantissa) };
-    m_Shifting = floatingPointAnalysis.GetRealExponent();
+    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
+    shifting = floatingPointAnalysis.GetRealExponent();
 
-    m_MaxMantissaBit = m_Shifting;
+    maxMantissaBit = shifting;
 }
 
 // private
@@ -64,13 +64,13 @@ void Mathematics::ConversionInteger<T>::Init(T value, const UnsignedIntegerType&
 {
     static_assert(std::is_integral_v<T>, "T isn't integral.");
 
-    m_Mantissa = value;
-    m_Symbol = NumericalValueSymbol::Positive;
+    mantissa = value;
+    symbol = NumericalValueSymbol::Positive;
 
-    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(m_Mantissa) };
-    m_Shifting = floatingPointAnalysis.GetRealExponent();
+    const FloatingPointAnalysis<double> floatingPointAnalysis{ boost::numeric_cast<double>(mantissa) };
+    shifting = floatingPointAnalysis.GetRealExponent();
 
-    m_MaxMantissaBit = m_Shifting;
+    maxMantissaBit = shifting;
 }
 
 // private
@@ -85,10 +85,10 @@ void Mathematics::ConversionInteger<T>::Init(T value, const FloatType&)
 
     if (floatingPointAnalysisType == FloatingPointAnalysisType::Valid || floatingPointAnalysisType == FloatingPointAnalysisType::Zero)
     {
-        m_Shifting = floatingPointAnalysis.GetRealExponent();
-        m_Mantissa = floatingPointAnalysis.GetRealMantissa();
-        m_Symbol = floatingPointAnalysis.GetSymbol();
-        m_MaxMantissaBit = TraitsType::g_ExponentShifting;
+        shifting = floatingPointAnalysis.GetRealExponent();
+        mantissa = floatingPointAnalysis.GetRealMantissa();
+        symbol = floatingPointAnalysis.GetSymbol();
+        maxMantissaBit = TraitsType::exponentShifting;
     }
     else
     {
@@ -108,10 +108,10 @@ void Mathematics::ConversionInteger<T>::Init(T value, const DoubleType&)
 
     if (floatingPointAnalysisType == FloatingPointAnalysisType::Valid || floatingPointAnalysisType == FloatingPointAnalysisType::Zero)
     {
-        m_Shifting = floatingPointAnalysis.GetRealExponent();
-        m_Mantissa = floatingPointAnalysis.GetRealMantissa();
-        m_Symbol = floatingPointAnalysis.GetSymbol();
-        m_MaxMantissaBit = TraitsType::g_ExponentShifting;
+        shifting = floatingPointAnalysis.GetRealExponent();
+        mantissa = floatingPointAnalysis.GetRealMantissa();
+        symbol = floatingPointAnalysis.GetSymbol();
+        maxMantissaBit = TraitsType::exponentShifting;
     }
     else
     {
@@ -124,21 +124,21 @@ template <typename T>
 void Mathematics::ConversionInteger<T>::Amendment() noexcept
 {
     // 对于（-1，1）之间的数，截断为0
-    if (m_Shifting < 0)
+    if (shifting < 0)
     {
-        m_Mantissa = 0;
-        m_Shifting = 0;
-        m_MaxMantissaBit = 0;
-        m_Symbol = NumericalValueSymbol::Positive;
+        mantissa = 0;
+        shifting = 0;
+        maxMantissaBit = 0;
+        symbol = NumericalValueSymbol::Positive;
     }
 
     // 截断小数点后的数值
-    const auto difference = m_MaxMantissaBit - m_Shifting;
+    const auto difference = maxMantissaBit - shifting;
 
     if (0 < difference)
     {
-        m_Mantissa >>= difference;
-        m_MaxMantissaBit -= difference;
+        mantissa >>= difference;
+        maxMantissaBit -= difference;
     }
 }
 
@@ -146,10 +146,10 @@ template <typename T>
 void Mathematics::ConversionInteger<T>::ShiftingMantissa() noexcept
 {
     // 对齐个位的数值
-    const auto difference = m_Shifting - m_MaxMantissaBit;
-    const auto newShifting = difference % sm_BlockSize;
+    const auto difference = shifting - maxMantissaBit;
+    const auto newShifting = difference % blockSize;
 
-    m_ShiftingMantissa = m_Mantissa << newShifting;
+    shiftingMantissa = mantissa << newShifting;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -161,19 +161,19 @@ bool Mathematics::ConversionInteger<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-int Mathematics::ConversionInteger<T>::GetShifting() const
+int Mathematics::ConversionInteger<T>::GetShifting() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Shifting;
+    return shifting;
 }
 
 template <typename T>
-uint64_t Mathematics::ConversionInteger<T>::GetMantissa() const
+uint64_t Mathematics::ConversionInteger<T>::GetMantissa() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Mantissa;
+    return mantissa;
 }
 
 template <typename T>
@@ -181,7 +181,7 @@ int Mathematics::ConversionInteger<T>::GetMaxMantissaBit() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MaxMantissaBit;
+    return maxMantissaBit;
 }
 
 template <typename T>
@@ -189,7 +189,7 @@ int Mathematics::ConversionInteger<T>::GetMantissaSize() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_Shifting + 1) / sm_BlockSize + 1;
+    return (shifting + 1) / blockSize + 1;
 }
 
 template <typename T>
@@ -197,17 +197,17 @@ int Mathematics::ConversionInteger<T>::GetCopySize() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto shiftingMantissa = m_ShiftingMantissa;
-    auto copySize = 0;
+    auto copyShiftingMantissa = shiftingMantissa;
+    auto size = 0;
 
     do
     {
-        shiftingMantissa >>= (sm_BlockSize / 2);
-        ++copySize;
+        copyShiftingMantissa >>= (blockSize / 2);
+        ++size;
 
-    } while (shiftingMantissa != 0);
+    } while (copyShiftingMantissa != 0);
 
-    return copySize;
+    return size;
 }
 
 template <typename T>
@@ -215,7 +215,7 @@ Mathematics::NumericalValueSymbol Mathematics::ConversionInteger<T>::GetSymbol()
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Symbol;
+    return symbol;
 }
 
 template <typename T>
@@ -223,7 +223,7 @@ uint64_t Mathematics::ConversionInteger<T>::GetShiftingMantissa() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_ShiftingMantissa;
+    return shiftingMantissa;
 }
 
 template <typename T>
@@ -231,9 +231,9 @@ int Mathematics::ConversionInteger<T>::GetBeginBlock() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto difference = m_Shifting - m_MaxMantissaBit;
+    const auto difference = shifting - maxMantissaBit;
 
-    return difference / sm_BlockSize;
+    return difference / blockSize;
 }
 
 #endif  // MATHEMATICS_RATIONAL_CONVERSION_INTEGER_DETAIL_H

@@ -23,7 +23,7 @@ namespace Mathematics
 		void ClosestPointsTest();
 		void MultipleClosestPointsTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/24 17:11)
+///	引擎版本：0.8.0.3 (2022/03/05 13:25)
 
 #ifndef MATHEMATICS_INTERSECTION_INTERSECTOR_LINE3_TRIANGLE3_DATA_H
 #define MATHEMATICS_INTERSECTION_INTERSECTOR_LINE3_TRIANGLE3_DATA_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "Mathematics/Objects3D/Line3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
 
@@ -23,36 +23,36 @@ namespace Mathematics
     {
     public:
         using ClassType = IntersectorLine3Triangle3Data<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Triangle3 = Triangle3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
 
     public:
         IntersectorLine3Triangle3Data(const Line3& line, const Triangle3& triangle);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const;
-        [[nodiscard]] const Triangle3 GetTriangle() const;
-        [[nodiscard]] Real GetDirectionDotNormal() const noexcept;
+        NODISCARD Line3 GetLine() const;
+        NODISCARD Triangle3 GetTriangle() const;
+        NODISCARD Real GetDirectionDotNormal() const noexcept;
 
-        [[nodiscard]] Vector3D GetOriginCrossEdge2() const noexcept;
-        [[nodiscard]] Vector3D GetEdge1CrossOrigin() const noexcept;
-        [[nodiscard]] Real GetOriginDotNormal() const noexcept;
+        NODISCARD Vector3 GetOriginCrossEdge2() const noexcept;
+        NODISCARD Vector3 GetEdge1CrossOrigin() const noexcept;
+        NODISCARD Real GetOriginDotNormal() const noexcept;
 
     private:
         void CalculateDirectionDotNormal();
 
     private:
         // 相交对象
-        Line3 m_Line;
-        Triangle3 m_Triangle;
-        Vector3D m_Origin;
-        Vector3D m_Edge1;
-        Vector3D m_Edge2;
-        Vector3D m_Normal;
-        Real m_DirectionDotNormal;
+        Line3 line;
+        Triangle3 triangle;
+        Vector3 origin;
+        Vector3 edge1;
+        Vector3 edge2;
+        Vector3 normal;
+        Real directionDotNormal;
     };
 }
 

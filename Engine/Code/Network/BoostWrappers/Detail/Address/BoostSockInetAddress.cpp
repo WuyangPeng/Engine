@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 17:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 22:26)
 
 #include "Network/NetworkExport.h"
 
@@ -24,51 +24,21 @@ using TcpType = boost::asio::ip::tcp;
 using namespace std::literals;
 
 Network::BoostSockInetAddress::BoostSockInetAddress(const string& hostName, int port)
-    : m_Endpoint{ make_address(hostName), numeric_cast<uint16_t>(port) }
+    : endpoint{ make_address(hostName), numeric_cast<uint16_t>(port) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::BoostSockInetAddress::BoostSockInetAddress() noexcept
-    : m_Endpoint{}
+    : endpoint{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 Network::BoostSockInetAddress::BoostSockInetAddress(int port)
-    : m_Endpoint{ TcpType::v4(), numeric_cast<uint16_t>(port) }
+    : endpoint{ TcpType::v4(), numeric_cast<uint16_t>(port) }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::BoostSockInetAddress::BoostSockInetAddress(BoostSockInetAddress&& rhs) noexcept
-    : m_Endpoint{ move(rhs.m_Endpoint) }
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::BoostSockInetAddress::BoostSockInetAddress(const BoostSockInetAddress& rhs) noexcept
-    : m_Endpoint{ rhs.m_Endpoint }
-{
-    NETWORK_SELF_CLASS_IS_VALID_9;
-}
-
-Network::BoostSockInetAddress& Network::BoostSockInetAddress::operator=(const BoostSockInetAddress& rhs) noexcept
-{
-    NETWORK_CLASS_IS_VALID_9;
-
-    m_Endpoint = rhs.m_Endpoint;
-
-    return *this;
-}
-
-Network::BoostSockInetAddress& Network::BoostSockInetAddress::operator=(BoostSockInetAddress&& rhs) noexcept
-{
-    NETWORK_CLASS_IS_VALID_9;
-
-    m_Endpoint = std::move(rhs.m_Endpoint);
-
-    return *this;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(Network, BoostSockInetAddress)
@@ -77,7 +47,7 @@ const Network::BoostInetAddressType& Network::BoostSockInetAddress::GetBoostInet
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Endpoint;
+    return endpoint;
 }
 
 Network::BoostInetAddressType& Network::BoostSockInetAddress::GetBoostInetAddress()
@@ -87,23 +57,23 @@ Network::BoostInetAddressType& Network::BoostSockInetAddress::GetBoostInetAddres
     return ParentType::GetBoostInetAddress();
 }
 
-const Network::BoostSockInetAddress::SockAddressPtr Network::BoostSockInetAddress::Clone() const
+Network::BoostSockInetAddress::SockAddressSharedPtr Network::BoostSockInetAddress::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     return make_shared<ClassType>(*this);
 }
 
-const std::string Network::BoostSockInetAddress::GetAddress() const
+std::string Network::BoostSockInetAddress::GetAddress() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Endpoint.address().to_string() + ":"s + to_string(GetPort());
+    return endpoint.address().to_string() + ":"s + to_string(GetPort());
 }
 
 int Network::BoostSockInetAddress::GetPort() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    return m_Endpoint.port();
+    return endpoint.port();
 }

@@ -1,21 +1,21 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/02 17:07)
+///	引擎版本：0.8.0.2 (2022/02/17 18:21)
 
 #ifndef MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_H
 #define MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Objects2D/Arc2.h"
 #include "Mathematics/Objects2D/Circle2.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 namespace Mathematics
 {
     // 椭圆为(x/a)^2 + (y/b)^2 = 1，
@@ -28,27 +28,16 @@ namespace Mathematics
     // 具有中心m_Center[i]和半径的m_Radius[i]。
 
     template <typename Real>
-    class EllipseByArcs2Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<EllipseByArcs2Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE EllipseByArcs2 final
+    class EllipseByArcs2 final
     {
     public:
-        using EllipseByArcs2Impl = EllipseByArcs2Impl<Real>;
-        
-        TYPE_DECLARE(EllipseByArcs2);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using Vector2D = Vector2D<Real>;
+        using ClassType = EllipseByArcs2<Real>;
+
+        using Vector2 = Vector2<Real>;
+        using Math = Math<Real>;
         using Arc2 = Arc2<Real>;
         using Circle2 = Circle2<Real>;
-        using PointsType = std::vector<Vector2D>;
+        using PointsType = std::vector<Vector2>;
         using Circle2Container = std::vector<Circle2>;
 
     public:
@@ -56,18 +45,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const PointsType GetPoints() const;
-        [[nodiscard]] const Circle2Container GetCircle2() const;
+        NODISCARD PointsType GetPoints() const;
+        NODISCARD Circle2Container GetCircle2() const;
 
-        [[nodiscard]] const Arc2 GetArc2(int index) const;
-        [[nodiscard]] int getNumArcs() const;
+        NODISCARD Arc2 GetArc2(int index) const;
+        NODISCARD int getNumArcs() const;
 
     private:
-        PackageType impl;
+        void Calculate(Real begin, Real end);
+
+    private:
+        PointsType points;
+        Circle2Container circle;
     };
 
-    using FloatEllipseByArcs2 = EllipseByArcs2<float>;
-    using DoubleEllipseByArcs2 = EllipseByArcs2<double>;
+    using EllipseByArcs2F = EllipseByArcs2<float>;
+    using EllipseByArcs2D = EllipseByArcs2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_ELLIPSE_BY_ARCS2_H

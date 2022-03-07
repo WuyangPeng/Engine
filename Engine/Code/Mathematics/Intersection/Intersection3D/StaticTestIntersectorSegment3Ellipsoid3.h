@@ -1,51 +1,50 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:59)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 22:26)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_ELLIPSOID3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Segment3.h"   
-#include "Mathematics/Objects3D/Ellipsoid3.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Ellipsoid3.h"
+#include "Mathematics/Objects3D/Segment3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticTestIntersectorSegment3Ellipsoid3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticTestIntersectorSegment3Ellipsoid3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Segment3 = Segment3<Real>;
-		using Ellipsoid3 = Ellipsoid3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class StaticTestIntersectorSegment3Ellipsoid3 : public StaticIntersector<Real, Vector3>
+    {
+    public:
+        using ClassType = StaticTestIntersectorSegment3Ellipsoid3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
+        using Segment3 = Segment3<Real>;
+        using Ellipsoid3 = Ellipsoid3<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-                StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
+    public:
+        StaticTestIntersectorSegment3Ellipsoid3(const Segment3& segment, const Ellipsoid3& ellipsoid, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Segment3 GetSegment() const;
-                [[nodiscard]] const Ellipsoid3 GetEllipsoid() const;
+        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
 
-	private:
-		// Static intersection queries.
-		void Test();
+    private:
+        void Test();
 
-		// The objects to intersect.
-		Segment3 m_Segment;
-		Ellipsoid3 m_Ellipsoid;
-	};
-
-	using FloatStaticTestIntersectorSegment3Ellipsoid3 = StaticTestIntersectorSegment3Ellipsoid3<float>;
-	using DoubleStaticTestIntersectorSegment3Ellipsoid3 = StaticTestIntersectorSegment3Ellipsoid3<double>;
+    private:
+        Segment3 segment;
+        Ellipsoid3 ellipsoid;
+    };
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_ELLIPSOID3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_ELLIPSOID3_H

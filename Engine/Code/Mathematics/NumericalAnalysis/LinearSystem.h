@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/25 11:20)
+///	引擎版本：0.8.0.2 (2022/02/15 11:28)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H
@@ -45,18 +45,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        void SetZeroTolerance(Real zeroTolerance) noexcept;
+        void SetZeroTolerance(Real newZeroTolerance) noexcept;
 
         // 2×2和3x3系统（避免了高斯消元的开销）
-        [[nodiscard]] Vector2 Solve2(const Matrix2& matrix, const Vector2& vector) const;
+        NODISCARD Vector2 Solve2(const Matrix2& matrix, const Vector2& vector) const;
 
-        [[nodiscard]] Vector3 Solve3(const Matrix3& matrix, const Vector3& vector) const;
+        NODISCARD Vector3 Solve3(const Matrix3& matrix, const Vector3& vector) const;
 
         // 输入:
         //     matrix[iSize][iSize], 项是 matrix[row][col]
         // 输出:
         //     求逆矩阵失败抛出异常，否则返回逆矩阵。
-        [[nodiscard]] const VariableMatrix Inverse(const VariableMatrix& matrix) const;
+        NODISCARD VariableMatrix Inverse(const VariableMatrix& matrix) const;
 
         // 输入:
         //     A[iSize][iSize] 系数矩阵，项是 A[row][col]
@@ -66,7 +66,7 @@ namespace Mathematics
         //     X[iSize] 是解X 在 AX = B
 
         // 必须保证输入vector和输出vector大小为iSize的一维数组。
-        [[nodiscard]] RealContainer Solve(const VariableMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer Solve(const VariableMatrix& matrix, const RealContainer& vector) const;
 
         // 输入:
         //     矩阵是三对角矩阵。
@@ -79,7 +79,7 @@ namespace Mathematics
 
         // 必须保证lower和upper大小为size - 1的一维数组。
         // main、right和output大小为size的一维数组。
-        [[nodiscard]] RealContainer SolveTridiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const;
+        NODISCARD RealContainer SolveTridiagonal(int size, const RealContainer& lower, const RealContainer& mainDdiagonal, const RealContainer& upper, const RealContainer& right) const;
 
         // 输入:
         //     矩阵是三对角矩阵。
@@ -91,7 +91,7 @@ namespace Mathematics
         //     求解失败抛出异常，否则返回U[size]，是解。
 
         // 必须保证right和output大小为size的一维数组。
-        [[nodiscard]] RealContainer SolveConstTridiagonal(int size, Real lower, Real mainDdiagonal, Real upper, const RealContainer& right) const;
+        NODISCARD RealContainer SolveConstTridiagonal(int size, Real lower, Real mainDdiagonal, Real upper, const RealContainer& right) const;
 
         // 解决方案采用共轭梯度法。
         // 输入:
@@ -101,7 +101,7 @@ namespace Mathematics
         //    X[size] 是解 x 为 Ax = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        [[nodiscard]] RealContainer SolveSymmetricConjugateGradient(const VariableMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveSymmetricConjugateGradient(const VariableMatrix& matrix, const RealContainer& vector) const;
 
         // 稀疏对称矩阵共轭梯度法。
         // 输入:
@@ -114,7 +114,7 @@ namespace Mathematics
         //    X[size] 是解 x 为 Ax = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        [[nodiscard]] RealContainer SolveSymmetricConjugateGradient(const SparseMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveSymmetricConjugateGradient(const SparseMatrix& matrix, const RealContainer& vector) const;
 
         // 求解带状矩阵系统。
         // 输入:
@@ -125,23 +125,23 @@ namespace Mathematics
         //     返回X[size] 是解 X 在 AX = B
 
         // 必须保证inputVector和outputVector为大小为size的一维数组。
-        [[nodiscard]] RealContainer SolveBanded(const BandedMatrix& matrix, const RealContainer& vector) const;
+        NODISCARD RealContainer SolveBanded(const BandedMatrix& matrix, const RealContainer& vector) const;
 
         // 求带状矩阵的逆
         // 输入:
         //     matrix, 带状矩阵
         // 输出:
         //     求逆失败抛出异常，否则返回逆矩阵
-        [[nodiscard]] const VariableMatrix Invert(const BandedMatrix& matrix) const;
+        NODISCARD VariableMatrix Invert(const BandedMatrix& matrix) const;
 
     private:
         // 线性系统求解容差。
         // 默认 = Math<Real>::GetZeroTolerance()
-        Real m_ZeroTolerance;
+        Real zeroTolerance;
     };
 
-    using FloatLinearSystem = LinearSystem<float>;
-    using DoubleLinearSystem = LinearSystem<double>;
+    using LinearSystemF = LinearSystem<float>;
+    using LinearSystemD = LinearSystem<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_H

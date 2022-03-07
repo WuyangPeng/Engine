@@ -36,9 +36,9 @@ namespace CoreTools
 
         ~UnitTestComposite() = default;
         UnitTestComposite(const UnitTestComposite& rhs) = delete;
-        virtual UnitTestComposite& operator=(const UnitTestComposite& rhs) = delete;
+        UnitTestComposite& operator=(const UnitTestComposite& rhs) = delete;
         UnitTestComposite(UnitTestComposite&& rhs) noexcept;
-        virtual UnitTestComposite& operator=(UnitTestComposite&& rhs) noexcept;
+        UnitTestComposite& operator=(UnitTestComposite&& rhs) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 

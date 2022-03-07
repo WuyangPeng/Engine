@@ -7,23 +7,23 @@
 #include "DynamicIntersectorTesting.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/MathematicsTesting/IntersectionSuite/Detail/DynamicIntersectorTestDetail.h"
 
 #include <random>
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 namespace Mathematics
 {
-	template class DynamicIntersectorTest<float, Vector2D>;
-	template class DynamicIntersectorTest<double, Vector2D>;
-	template class DynamicIntersectorTest<float, Vector3D>;
-	template class DynamicIntersectorTest<double, Vector3D>;
+	template class DynamicIntersectorTest<float, Vector2>;
+	template class DynamicIntersectorTest<double, Vector2>;
+	template class DynamicIntersectorTest<float, Vector3>;
+	template class DynamicIntersectorTest<double, Vector3>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DynamicIntersectorTesting)
-
+#include SYSTEM_WARNING_DISABLE(26496)
 void Mathematics::DynamicIntersectorTesting
 	::MainTest()
 {
@@ -43,15 +43,15 @@ void Mathematics::DynamicIntersectorTesting
 		for (auto i = IntersectionType::Empty; i <= IntersectionType::Other; ++i)
 		{
 			double tMax = randomDistribution(generator);
-			DoubleVector3D lhsVelocity(randomDistribution(generator),
+			Vector3D lhsVelocity(randomDistribution(generator),
 				                  randomDistribution(generator),
 								  randomDistribution(generator));
-			DoubleVector3D rhsVelocity(randomDistribution(generator),
+			Vector3D rhsVelocity(randomDistribution(generator),
 				                  randomDistribution(generator),
 								  randomDistribution(generator));
-			double contactTime = DoubleMath::FAbs(randomDistribution(generator));
+			double contactTime = MathD::FAbs(randomDistribution(generator));
 
-			DynamicIntersectorTest<double, Vector3D> intersectorTest(tMax, lhsVelocity, rhsVelocity, IntersectionType(i), contactTime, 1e-10);
+			DynamicIntersectorTest<double, Vector3> intersectorTest(tMax, lhsVelocity, rhsVelocity, IntersectionType(i), contactTime, 1e-10);
 
 			ASSERT_ENUM_EQUAL(intersectorTest.GetIntersectionType(), IntersectionType(i));
 			ASSERT_APPROXIMATE(intersectorTest.GetEpsilon(), 1e-10, 1e-10);
@@ -67,8 +67,8 @@ void Mathematics::DynamicIntersectorTesting
 
 			ASSERT_APPROXIMATE(intersectorTest.GetTMax(), tMax, 1e-10);
 			ASSERT_APPROXIMATE(intersectorTest.GetContactTime(), contactTime, 1e-10);
-			ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, intersectorTest.GetLhsVelocity(), lhsVelocity, 1e-10);
-			ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, intersectorTest.GetRhsVelocity(), rhsVelocity, 1e-10);
+			ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, intersectorTest.GetLhsVelocity(), lhsVelocity, 1e-10);
+			ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, intersectorTest.GetRhsVelocity(), rhsVelocity, 1e-10);
 		}
 	}
 }

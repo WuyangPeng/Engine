@@ -28,7 +28,7 @@ namespace Mathematics
         mF = F;
 
         int xBoundM1 = xBound - 1, yBoundM1 = yBound - 1;
-        m_Quantity = xBound * yBound;
+        quantity = xBound * yBound;
         mXMax = xMin + xSpacing * xBoundM1;
         mYMax = yMin + ySpacing * yBoundM1;
 
@@ -186,7 +186,7 @@ namespace Mathematics
     template <typename Real>
     int IntpAkimaUniform2<Real>::GetQuantity() const
     {
-        return m_Quantity;
+        return quantity;
     }
 
     template <typename Real>
@@ -384,7 +384,7 @@ namespace Mathematics
             return mPoly[iy][ix](dx, dy);
         }
 
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     template <typename Real>
@@ -398,7 +398,7 @@ namespace Mathematics
             return mPoly[iy][ix](xOrder, yOrder, dx, dy);
         }
 
-        return Math<Real>::sm_MaxReal;
+        return Math<Real>::maxReal;
     }
 
     // IntpAkimaUniform2::Polynomial

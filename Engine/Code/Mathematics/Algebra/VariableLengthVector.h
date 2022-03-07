@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/11 13:41)
+///	引擎版本：0.8.0.2 (2022/02/07 13:28)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H
@@ -16,106 +16,87 @@
 #include "System/Helper/PragmaWarning/Operators.h"
 #include "Mathematics/Base/MathDetail.h"
 
+#include <memory>
 #include <type_traits>
 #include <vector>
-#include <memory>
 
 namespace Mathematics
 {
     template <typename Real>
-    class VariableLengthVectorImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<VariableLengthVectorImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<VariableLengthVectorImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<VariableLengthVectorImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE VariableLengthVector final : private boost::additive<VariableLengthVector<Real>, boost::multiplicative<VariableLengthVector<Real>, Real, boost::totally_ordered<VariableLengthVector<Real>>>>
+    class VariableLengthVector final : private boost::additive<VariableLengthVector<Real>, boost::multiplicative<VariableLengthVector<Real>, Real, boost::totally_ordered<VariableLengthVector<Real>>>>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using VariableLengthVectorImpl = VariableLengthVectorImpl<Real>;
-
-    public:
-        void Swap(VariableLengthVector& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(VariableLengthVector);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~VariableLengthVector() noexcept = default;
-        VariableLengthVector(const VariableLengthVector& rhs);
-        VariableLengthVector& operator=(const VariableLengthVector& rhs);
-        VariableLengthVector(VariableLengthVector&& rhs) noexcept;
-        VariableLengthVector& operator=(VariableLengthVector&& rhs) noexcept;
-
+        using ClassType = VariableLengthVector;
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
         using ContainerTypeIter = typename ContainerType::iterator;
         using ContainerTypeConstIter = typename ContainerType::const_iterator;
 
     public:
-        explicit VariableLengthVector(int size = 0);
+        VariableLengthVector() noexcept;
+        explicit VariableLengthVector(int size);
         explicit VariableLengthVector(const ContainerType& container);
+        explicit VariableLengthVector(ContainerType&& container) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问
-        [[nodiscard]] int GetSize() const;
+        NODISCARD int GetSize() const;
 
-        [[nodiscard]] const Real& operator[](int index) const;
-        [[nodiscard]] Real& operator[](int index);
+        NODISCARD const Real& operator[](int index) const;
+        NODISCARD Real& operator[](int index);
 
         // 重新设置大小会清空原有数据。
         void ResetSize(int size);
 
-        [[nodiscard]] const VariableLengthVector operator-() const;
+        NODISCARD VariableLengthVector operator-() const;
 
         VariableLengthVector& operator+=(const VariableLengthVector& rhs);
         VariableLengthVector& operator-=(const VariableLengthVector& rhs);
-        VariableLengthVector& operator*=(Real scalar);
-        VariableLengthVector& operator/=(Real scalar);
+        VariableLengthVector& operator*=(Real scalar) noexcept;
+        VariableLengthVector& operator/=(Real scalar) noexcept(g_MathematicsAssert < 0);
 
         // 向量运算
-        [[nodiscard]] Real Length() const;
-        [[nodiscard]] Real SquaredLength() const;
-        void Normalize(Real epsilon = Math::GetZeroTolerance());
+        NODISCARD Real Length() const noexcept(g_MathematicsAssert < 2);
+        NODISCARD Real SquaredLength() const noexcept(g_MathematicsAssert < 2);
+        void Normalize(Real epsilon = Math::GetZeroTolerance()) noexcept(g_MathematicsAssert < 2);
 
-        [[nodiscard]] const ContainerType GetContainer() const;
-        void SetContainer(const ContainerType& container);
+        NODISCARD ContainerType GetContainer() const;
+        void SetContainer(const ContainerType& newContainer);
 
-        [[nodiscard]] ContainerTypeConstIter begin() const noexcept;
-        [[nodiscard]] ContainerTypeConstIter end() const noexcept;
+        NODISCARD ContainerTypeConstIter begin() const noexcept;
+        NODISCARD ContainerTypeConstIter end() const noexcept;
 
-        [[nodiscard]] ContainerTypeIter begin() noexcept;
-        [[nodiscard]] ContainerTypeIter end() noexcept;
+        NODISCARD ContainerTypeIter begin() noexcept;
+        NODISCARD ContainerTypeIter end() noexcept;
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        ContainerType container;
     };
 
     // STL
     template <typename Real>
-    [[nodiscard]] bool operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
+    NODISCARD bool operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
 
     template <typename Real>
-    [[nodiscard]] bool operator<(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
+    NODISCARD bool operator<(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
 
     template <typename Real>
-    [[nodiscard]] Real Dot(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
+    NODISCARD Real Dot(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs);
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs,
-                                   const Real epsilon = Math<Real>::GetZeroTolerance());
+    NODISCARD bool Approximate(const VariableLengthVector<Real>& lhs,
+                               const VariableLengthVector<Real>& rhs,
+                               const Real epsilon = Math<Real>::GetZeroTolerance());
 
     // 调试输出。
     template <typename Real>
     std::ostream& operator<<(std::ostream& outFile, const VariableLengthVector<Real>& vector);
 
-    using FloatVariableLengthVector = VariableLengthVector<float>;
-    using DoubleVariableLengthVector = VariableLengthVector<double>;
+    using VariableLengthVectorF = VariableLengthVector<float>;
+    using VariableLengthVectorD = VariableLengthVector<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_H

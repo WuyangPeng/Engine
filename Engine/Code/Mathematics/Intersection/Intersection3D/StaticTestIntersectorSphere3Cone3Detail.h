@@ -1,67 +1,89 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 22:49)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_CONE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_CONE3_DETAIL_H
 
 #include "StaticTestIntersectorSphere3Cone3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSphere3Cone3<Real>::StaticTestIntersectorSphere3Cone3(const Sphere3& rkSphere, const Cone3& rkCone, const Real epsilon)
-    : m_Sphere{ rkSphere }, mCone{ rkCone }
+Mathematics::StaticTestIntersectorSphere3Cone3<Real>::StaticTestIntersectorSphere3Cone3(const Sphere3& sphere, const Cone3& cone, const Real epsilon)
+    : ParentType{ epsilon }, sphere{ sphere }, cone{ cone }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorSphere3Cone3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>::GetSphere() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return sphere;
 }
 
 template <typename Real>
-const Mathematics::Sphere3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>
-	::GetSphere() const
+Mathematics::Cone3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>::GetCone() const noexcept
 {
-    return m_Sphere;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return cone;
 }
 
 template <typename Real>
-const Mathematics::Cone3<Real> Mathematics::StaticTestIntersectorSphere3Cone3<Real>
-	::GetCone() const
+void Mathematics::StaticTestIntersectorSphere3Cone3<Real>::Test()
 {
-    return mCone;
-}
+    auto invSin = Math::GetValue(1) / cone.GetSinAngle();
+    auto cosSqr = cone.GetCosAngle() * cone.GetCosAngle();
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorSphere3Cone3<Real>
-	::Test()
-{
-	auto invSin = (Math::GetValue(1))/mCone.GetSinAngle();
-	auto cosSqr = mCone.GetCosAngle()*mCone.GetCosAngle();
-
-	auto CmV = m_Sphere.GetCenter() - mCone.GetVertex();
-	auto D = CmV + (m_Sphere.GetRadius()*invSin)*mCone.GetAxis();
-	auto DSqrLen = Vector3DTools::VectorMagnitudeSquared(D);
-	auto e = Vector3DTools::DotProduct(D, mCone.GetAxis());
-    if (e > Math<Real>::GetValue(0) && e*e >= DSqrLen*cosSqr)
+    auto cmv = sphere.GetCenter() - cone.GetVertex();
+    auto d = cmv + (sphere.GetRadius() * invSin) * cone.GetAxis();
+    auto dSqrLen = Vector3Tools::GetLengthSquared(d);
+    auto e = Vector3Tools::DotProduct(d, cone.GetAxis());
+    if (Math ::GetValue(0) < e && e * e >= dSqrLen * cosSqr)
     {
-		auto sinSqr = mCone.GetSinAngle()*mCone.GetSinAngle();
-		DSqrLen = Vector3DTools::VectorMagnitudeSquared(CmV);
-		e = -Vector3DTools::DotProduct(CmV,mCone.GetAxis());
-        if (e > Math<Real>::GetValue(0) && e*e >= DSqrLen*sinSqr)
+        auto sinSqr = cone.GetSinAngle() * cone.GetSinAngle();
+        dSqrLen = Vector3Tools::GetLengthSquared(cmv);
+        e = -Vector3Tools::DotProduct(cmv, cone.GetAxis());
+        if (Math ::GetValue(0) < e && dSqrLen * sinSqr <= e * e)
         {
-			auto rSqr = m_Sphere.GetRadius()*m_Sphere.GetRadius();
-			if (DSqrLen <= rSqr)
-			{
-				this->SetIntersectionType(IntersectionType::Other);
-			}
-			else
-			{
-				this->SetIntersectionType(IntersectionType::Empty);
-			}
+            auto rSqr = sphere.GetRadius() * sphere.GetRadius();
+            if (dSqrLen <= rSqr)
+            {
+                this->SetIntersectionType(IntersectionType::Other);
+            }
+            else
+            {
+                this->SetIntersectionType(IntersectionType::Empty);
+            }
         }
-		this->SetIntersectionType(IntersectionType::Other);
+
+        this->SetIntersectionType(IntersectionType::Other);
     }
-	this->SetIntersectionType(IntersectionType::Empty);
-    
+
+    this->SetIntersectionType(IntersectionType::Empty);
 }
- 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_CONE3_DETAIL_H
+
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SPHERE3_CONE3_DETAIL_H

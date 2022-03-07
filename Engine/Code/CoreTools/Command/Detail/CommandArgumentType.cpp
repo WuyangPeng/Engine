@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 16:41)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 13:39)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,8 +14,8 @@
 
 using std::string;
 
-CoreTools::CommandArgumentType::CommandArgumentType(const string& argument)
-    : m_Argument{ argument }
+CoreTools::CommandArgumentType::CommandArgumentType(string argument) noexcept
+    : argument{ std::move(argument) }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -26,7 +26,7 @@ bool CoreTools::CommandArgumentType::IsArgumentsName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (!m_Argument.empty() && m_Argument.at(0) == '-' && 1 < m_Argument.size())
+    if (!argument.empty() && argument.at(0) == '-' && 1 < argument.size())
         return true;
     else
         return false;
@@ -36,10 +36,10 @@ bool CoreTools::CommandArgumentType::IsDigit() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (!m_Argument.empty())
+    if (!argument.empty())
     {
-        const auto argument = m_Argument.at(0);
-        if (argument != '-' && isdigit(static_cast<int>(argument)))
+        const auto firstArgument = argument.at(0);
+        if (firstArgument != '-' && isdigit(static_cast<int>(firstArgument)))
         {
             return true;
         }
@@ -52,7 +52,7 @@ bool CoreTools::CommandArgumentType::IsString() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    if (!m_Argument.empty() && m_Argument.at(0) != '-')
+    if (!argument.empty() && argument.at(0) != '-')
         return true;
     else
         return false;

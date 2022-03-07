@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 18:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 17:31)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NETWORK_SOCK_STREAM_H
 #define NETWORK_NETWORK_INTERFACE_NETWORK_SOCK_STREAM_H
@@ -27,24 +27,24 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] WinSocketStreamType& GetNetworkSockStream() noexcept override;
+        NODISCARD WinSocketStreamType& GetNetworkSockStream() noexcept override;
 
-        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) override;
-        [[nodiscard]] int Send(const MessageBufferSharedPtr& messageBuffer) override;
+        NODISCARD int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+        NODISCARD int Send(const MessageBufferSharedPtr& messageBuffer) override;
 
         void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
-        [[nodiscard]] bool CloseHandle() noexcept override;
-        void SetNetworkHandle(WinSocketStreamType winSocket) noexcept override;
+        NODISCARD bool CloseHandle() noexcept override;
+        void SetNetworkHandle(WinSocketStreamType newWinSocket) noexcept override;
 
-        [[nodiscard]] bool EnableNonBlock() noexcept override;
+        NODISCARD bool EnableNonBlock() noexcept override;
 
-        [[nodiscard]] const std::string GetRemoteAddress() const noexcept override;
-        [[nodiscard]] int GetRemotePort() const noexcept override;
+        NODISCARD std::string GetRemoteAddress() const noexcept override;
+        NODISCARD int GetRemotePort() const noexcept override;
 
     private:
-        WinSocketStreamType m_WinSocket;
+        WinSocketStreamType winSocket;
     };
 }
 

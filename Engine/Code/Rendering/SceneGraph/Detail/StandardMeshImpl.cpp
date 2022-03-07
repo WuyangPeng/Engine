@@ -545,7 +545,7 @@ const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::CylinderOm
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(Mathematics::FloatAPoint::GetOrigin());
+    mesh->GetModelBound().SetCenter(Mathematics::APointF::GetOrigin());
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -596,7 +596,7 @@ const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::CylinderIn
     // 重复的顶点裂缝使自动生成的边界体积稍微偏离中心。
     // 重置边界使用真实的信息。
     auto maxDist = Math::Sqrt(radius * radius + height * height);
-    mesh->GetModelBound().SetCenter(Mathematics::FloatAPoint::GetOrigin());
+    mesh->GetModelBound().SetCenter(Mathematics::APointF::GetOrigin());
     mesh->GetModelBound().SetRadius(maxDist);
 
     return mesh;
@@ -842,7 +842,7 @@ const Rendering::TrianglesMeshSharedPtr Rendering::StandardMeshImpl ::Sphere(int
     // 重置边界使用真实的信息。
     TrianglesMeshSharedPtr mesh{ std::make_shared< TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(Mathematics::FloatAPoint::GetOrigin());
+    mesh->GetModelBound().SetCenter(Mathematics::APointF::GetOrigin());
     mesh->GetModelBound().SetRadius(radius);
 
     return mesh;
@@ -1002,7 +1002,7 @@ const auto position = vertexBufferAccessor.GetPosition<APoint>(save);
     // 重置边界使用真实的信息。
     TrianglesMeshSharedPtr mesh{ std::make_shared < TrianglesMesh>(m_VertexFormat->Clone(), vertexBuffer, indexBuffer) };
 
-    mesh->GetModelBound().SetCenter(Mathematics::FloatAPoint::GetOrigin());
+    mesh->GetModelBound().SetCenter(Mathematics::APointF::GetOrigin());
     mesh->GetModelBound().SetRadius(outerRadius);
 
     return mesh;

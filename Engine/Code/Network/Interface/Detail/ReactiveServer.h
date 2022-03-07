@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 15:22)
 
 #ifndef NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_REACTIVE_SERVER_H
@@ -37,6 +37,9 @@ namespace Network
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+        void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
+
+        NODISCARD bool EventFunction(MAYBE_UNUSED const CoreTools::CallbackParameters& callbackParameters) noexcept override;
 
     private:
         using BufferType = std::vector<char>;
@@ -44,19 +47,20 @@ namespace Network
     private:
         void Init();
 
-        [[nodiscard]] bool WaitForMultipleEvents() override;
-        [[nodiscard]] bool HandleConnections(const SocketManagerSharedPtr& socketManager) override;
-        [[nodiscard]] bool HandleData(const SocketManagerSharedPtr& socketManager) override;
-        [[nodiscard]] bool ImmediatelySend(uint64_t socketID) override;
-        [[nodiscard]] bool ImmediatelySend() override;
+        NODISCARD bool WaitForMultipleEvents() override;
+        NODISCARD bool HandleConnections(SocketManager& socketManager) override;
+        NODISCARD bool HandleData(const SocketManagerSharedPtr& socketManager) override;
+        NODISCARD bool ImmediatelySend(uint64_t socketID) override;
+        NODISCARD bool ImmediatelySend() override;
+        void ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept override;
 
     private:
-        SockAcceptor m_SockAcceptor;
-        SockStreamSharedPtr m_SockStream;
-        BufferSendStreamMultiIndexContainer m_BufferSendStream;
-        HandleSetContainer m_MasterHandleSet;
-        HandleSet m_ActiveHandles;
-        MessageBufferSharedPtr m_Buffer;
+        SockAcceptor sockAcceptor;
+        SockStreamSharedPtr sockStream;
+        BufferSendStreamMultiIndexContainer bufferSendStream;
+        HandleSetContainer masterHandleSet;
+        HandleSet activeHandles;
+        MessageBufferSharedPtr buffer;
     };
 }
 

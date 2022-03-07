@@ -1,12 +1,12 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/13 16:45)
 
-#include "NetworkSockInetAddressTesting.h" 
- 
-#include "CoreTools/Helper/AssertMacro.h" 
+#include "NetworkSockInetAddressTesting.h"
+
+#include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "Network/Helper/UserMacro.h"
 #include "Network/Interface/SockAddress.h"
@@ -19,28 +19,23 @@ UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, NetworkSockInetAddressTesting)
 
 namespace Network
 {
-	using TestingType = SockAddress;
+    using TestingType = SockAddress;
 }
 
-void Network::NetworkSockInetAddressTesting
-	::MainTest()
+void Network::NetworkSockInetAddressTesting ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::AddressTest);
+    ASSERT_NOT_THROW_EXCEPTION_2(NetworkSingletonTest<ClassType>, this, &ClassType::AddressTest);
 }
 
-void Network::NetworkSockInetAddressTesting
-	::AddressTest()
+void Network::NetworkSockInetAddressTesting ::AddressTest()
 {
-	string hostName{ "127.0.0.1" };
-	uint16_t port{ 8010 };
+    string hostName{ "127.0.0.1" };
+    constexpr uint16_t port{ 8010 };
 
-	TestingType sockAddress{ hostName, port, GetNetworkServerConfigurationStrategy() };
+    TestingType sockAddress{ hostName, port, GetNetworkServerConfigurationStrategy() };
 
-	[[maybe_unused]] const auto& NetworkInetAddress = sockAddress.GetWinSockInetAddress();
+    [[maybe_unused]] const auto& NetworkInetAddress = sockAddress.GetWinSockInetAddress();
 
-	ASSERT_EQUAL(sockAddress.GetPort(), port);
-	ASSERT_EQUAL(sockAddress.GetAddress(), hostName + ":" + to_string(port));
-
- 
+    ASSERT_EQUAL(sockAddress.GetPort(), port);
+    ASSERT_EQUAL(sockAddress.GetAddress(), hostName + ":" + to_string(port));
 }
-

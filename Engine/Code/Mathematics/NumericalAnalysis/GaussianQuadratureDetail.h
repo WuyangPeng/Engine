@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/24 18:37)
+///	引擎版本：0.8.0.2 (2022/02/14 21:11)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H
@@ -16,11 +16,11 @@
 
 template <typename Real, typename UserDataType>
 Mathematics::GaussianQuadrature<Real, UserDataType>::GaussianQuadrature(Real begin, Real end, Function function, const UserDataType* userData) noexcept
-    : m_Radius{ Math::GetRational(1, 2) * (end - begin) },
-      m_Center{ Math::GetRational(1, 2) * (end + begin) },
-      m_Function{ function },
-      m_UserData{ userData },
-      m_Result{}
+    : radius{ Math::GetRational(1, 2) * (end - begin) },
+      center{ Math::GetRational(1, 2) * (end + begin) },
+      function{ function },
+      userData{ userData },
+      result{}
 {
     Calculate();
 
@@ -68,22 +68,26 @@ void Mathematics::GaussianQuadrature<Real, UserDataType>::Calculate() noexcept
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        m_Result += coeff[i] * m_Function(m_Radius * root[i] + m_Center, m_UserData);
+
+        result += coeff[i] * function(radius * root[i] + center, userData);
+
 #include STSTEM_WARNING_POP
     }
 
-    m_Result *= m_Radius;
+    result *= radius;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real, typename UserDataType>
 bool Mathematics::GaussianQuadrature<Real, UserDataType>::IsValid() const noexcept
 {
-    if (m_Function != nullptr)
+    if (function != nullptr)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real, typename UserDataType>
@@ -91,7 +95,7 @@ Real Mathematics::GaussianQuadrature<Real, UserDataType>::GetResult() const noex
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Result;
+    return result;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_GAUSSIAN_QUADRATURE_DETAIL_H

@@ -19,19 +19,19 @@ namespace Mathematics
 	public:
 		// Construction and destruction.  TCBSpline3 accepts responsibility for
 		// deleting the input arrays.
-		TCBSpline3(int numSegments, Real* times, Vector3D<Real>* points, Real* tension, Real* continuity, Real* bias);
+		TCBSpline3(int numSegments, Real* times, Vector3<Real>* points, Real* tension, Real* continuity, Real* bias);
 
 		virtual ~TCBSpline3();
 
-		const Vector3D<Real>* GetPoints() const;
+		const Vector3<Real>* GetPoints() const;
 		const Real* GetTensions() const;
 		const Real* GetContinuities() const;
 		const Real* GetBiases() const;
 
-		virtual Vector3D<Real> GetPosition(Real t) const;
-		virtual Vector3D<Real> GetFirstDerivative(Real t) const;
-		virtual Vector3D<Real> GetSecondDerivative(Real t) const;
-		virtual Vector3D<Real> GetThirdDerivative(Real t) const;
+		virtual Vector3<Real> GetPosition(Real t) const;
+		virtual Vector3<Real> GetFirstDerivative(Real t) const;
+		virtual Vector3<Real> GetSecondDerivative(Real t) const;
+		virtual Vector3<Real> GetThirdDerivative(Real t) const;
 
 	protected:
 		using MultipleCurve3<Real>::mNumSegments;
@@ -44,14 +44,14 @@ namespace Mathematics
 		virtual Real GetSpeedKey(int key, Real t) const;
 		virtual Real GetLengthKey(int key, Real t0, Real t1) const;
 
-		Vector3D<Real>* mPoints;
+		Vector3<Real>* mPoints;
 		Real* mTension;
 		Real* mContinuity;
 		Real* mBias;
-		Vector3D<Real>* mA;
-		Vector3D<Real>* mB;
-		Vector3D<Real>* mC;
-		Vector3D<Real>* mD;
+		Vector3<Real>* mA;
+		Vector3<Real>* mB;
+		Vector3<Real>* mC;
+		Vector3<Real>* mD;
 
 		class   SplineKey
 		{

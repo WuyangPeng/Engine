@@ -28,7 +28,7 @@ namespace Network
 
 		void ConnectorTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

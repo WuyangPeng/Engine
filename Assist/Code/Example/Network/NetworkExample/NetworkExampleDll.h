@@ -8,7 +8,7 @@
 #define NETWORK_EXAMPLE_DLL_DLL_H
 
 #include "System/Helper/ExportMacro.h"
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #if defined(BUILDING_NETWORK_EXAMPLE_NO_IMPORT) || defined(BUILDING_NETWORK_EXAMPLE_STATIC)
 

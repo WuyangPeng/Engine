@@ -17,7 +17,12 @@
 using std::uniform_int;
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, ConversionIntegerTesting) 
 
 void Mathematics::ConversionIntegerTesting
@@ -97,7 +102,7 @@ void Mathematics::ConversionIntegerTesting
 		ConversionInteger<float> firstIntegerConversion(firstValue);
 
 		int firstRealExponent = firstIntegerConversion.GetShifting();
-		float secondValue = FloatMath::Pow(2, static_cast<float>(firstRealExponent));
+		float secondValue = MathF::Pow(2, static_cast<float>(firstRealExponent));
 		ConversionInteger<float> secondIntegerConversion(secondValue);
 
 		ASSERT_EQUAL(firstIntegerConversion.GetShifting(),secondIntegerConversion.GetShifting());
@@ -106,7 +111,7 @@ void Mathematics::ConversionIntegerTesting
 		ConversionInteger<double> thirdIntegerConversion(thirdValue);
 
 		int secondRealExponent = thirdIntegerConversion.GetShifting();
-		double fourthValue = DoubleMath::Pow(2, static_cast<double>(secondRealExponent));
+		double fourthValue = MathD::Pow(2, static_cast<double>(secondRealExponent));
 		ConversionInteger<double> fourthIntegerConversion(fourthValue);
 
 		ASSERT_EQUAL(thirdIntegerConversion.GetShifting(),fourthIntegerConversion.GetShifting());
@@ -145,7 +150,7 @@ void Mathematics::ConversionIntegerTesting
 		uint64_t firstMantissa = firstIntegerConversion.GetMantissa();
 		NumericalValueSymbol firstSign = firstIntegerConversion.GetSymbol();
 
-		float secondValue = static_cast<float>(firstMantissa) /	FloatMath::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::g_ExponentShifting)) * FloatMath::Pow(2.0f, static_cast<float>(firstExponent));
+		float secondValue = static_cast<float>(firstMantissa) /	MathF::Pow(2.0f, static_cast<float>(IntegerTraits<float>::TraitsType::exponentShifting)) * MathF::Pow(2.0f, static_cast<float>(firstExponent));
 
 		if (firstSign == NumericalValueSymbol::Negative)
 			secondValue = -secondValue;
@@ -167,7 +172,7 @@ void Mathematics::ConversionIntegerTesting
 		uint64_t secondMantissa = thirdIntegerConversion.GetMantissa();
 		NumericalValueSymbol secondSign = thirdIntegerConversion.GetSymbol();
 
-		double fourthValue = static_cast<double>(secondMantissa) / DoubleMath::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::g_ExponentShifting)) * DoubleMath::Pow(2.0, static_cast<double>(secondExponent));
+		double fourthValue = static_cast<double>(secondMantissa) / MathD::Pow(2.0, static_cast<double>(IntegerTraits<double>::TraitsType::exponentShifting)) * MathD::Pow(2.0, static_cast<double>(secondExponent));
 
 		if (secondSign == NumericalValueSymbol::Negative)
 			fourthValue = -fourthValue;

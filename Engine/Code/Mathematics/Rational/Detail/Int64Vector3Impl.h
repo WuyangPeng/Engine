@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 13:59)
+///	引擎版本：0.8.0.2 (2022/02/11 17:00)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR3_IMPL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR3_IMPL_H
@@ -31,38 +31,38 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int64_t GetX() const;
+        NODISCARD int64_t GetX() const;
         void SetX(int64_t x);
-        [[nodiscard]] int64_t GetY() const;
+        NODISCARD int64_t GetY() const;
         void SetY(int64_t y);
-        [[nodiscard]] int64_t GetZ() const;
+        NODISCARD int64_t GetZ() const;
         void SetZ(int64_t y);
 
-        const Int64Vector3Impl operator-() const noexcept;
+        Int64Vector3Impl operator-() const noexcept;
 
         Int64Vector3Impl& operator+=(const Int64Vector3Impl& rhs) noexcept;
         Int64Vector3Impl& operator-=(const Int64Vector3Impl& rhs) noexcept;
         Int64Vector3Impl& operator*=(int64_t scalar) noexcept;
         Int64Vector3Impl& operator/=(int64_t scalar);
 
-        [[nodiscard]] int64_t SquaredLength() const noexcept;
+        NODISCARD int64_t SquaredLength() const noexcept;
 
     private:
-        Int64Vector<3> m_Tuple;
+        Int64Vector<3> tuple;
     };
 
     // 返回 Dot(lhs,rhs).
-    [[nodiscard]] int64_t Dot(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
+    NODISCARD int64_t Dot(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
 
     // 返回 Cross(this,V)
-    [[nodiscard]] Int64Vector3Impl Cross(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
+    NODISCARD Int64Vector3Impl Cross(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
 
     // 返回 Dot(this,Cross(U,V))
-    [[nodiscard]] int64_t TripleScalar(const Int64Vector3Impl& lhs, const Int64Vector3Impl& mhs, const Int64Vector3Impl& rhs);
+    NODISCARD int64_t TripleScalar(const Int64Vector3Impl& lhs, const Int64Vector3Impl& mhs, const Int64Vector3Impl& rhs);
 
-    [[nodiscard]] bool operator==(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
+    NODISCARD bool operator==(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
 
-    [[nodiscard]] bool operator<(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
+    NODISCARD bool operator<(const Int64Vector3Impl& lhs, const Int64Vector3Impl& rhs);
 }
 
 #endif  // MATHEMATICS_RATIONAL_INT64_VECTOR3_IMPL_H

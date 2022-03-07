@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 14:35)
+///	引擎版本：0.8.0.2 (2022/02/17 16:33)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_FILTERED_H
 #define MATHEMATICS_QUERY_QUERY2_FILTERED_H
@@ -24,7 +24,7 @@ namespace Mathematics
         using ClassType = Query2Filtered<Real>;
         using ParentType = Query2<Real>;
         using Math = typename ParentType::Math;
-        using Vector2D = typename ParentType::Vector2D;
+        using Vector2 = typename ParentType::Vector2;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -38,26 +38,26 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] QueryType GetType() const noexcept override;
+        NODISCARD QueryType GetType() const noexcept override;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
-        [[nodiscard]] LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
-        [[nodiscard]] LineQueryType ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD LineQueryType ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
 
-        [[nodiscard]] CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
-        [[nodiscard]] CircumcircleQueryType ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD CircumcircleQueryType ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
     private:
         using Query2Rational = Query2Rational<Real>;
 
     private:
-        Query2Rational m_RationalQuery;
-        Real m_Uncertainty;
+        Query2Rational rationalQuery;
+        Real uncertainty;
     };
 
-    using FloatQuery2Filtered = Query2Filtered<float>;
-    using DoubleQuery2Filtered = Query2Filtered<double>;
+    using Query2FilteredF = Query2Filtered<float>;
+    using Query2FilteredD = Query2Filtered<double>;
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY2_FILTERED_H

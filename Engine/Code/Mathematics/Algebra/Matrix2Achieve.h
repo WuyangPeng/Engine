@@ -1,33 +1,38 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 13:17)
+///	引擎版本：0.8.0.2 (2022/02/07 16:11)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_ACHIEVE_H
 
 #include "AVector.h"
 #include "Matrix2.h"
-#include "Vector2D.h"
-#include "Vector2DTools.h"
+#include "Matrix2EigenDecompositionDetail.h"
+#include "Matrix3Detail.h"
+#include "Vector2.h"
+#include "Vector2Tools.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+#include "Mathematics/NumericalAnalysis/GaussianEliminationDetail.h"
 
 template <typename Real>
 Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags majorFlag)
     : m_X{}, m_Y{}
 {
-    if (entry.size() != sm_MatrixSize)
+    if (entry.size() != matrixSize)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
     }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     if (majorFlag == MatrixMajorFlags::Row)
     {
         m_X.SetCoordinate(entry[0], entry[1]);
@@ -38,13 +43,14 @@ Mathematics::Matrix2<Real>::Matrix2(const ContainerType& entry, MatrixMajorFlags
         m_X.SetCoordinate(entry[0], entry[2]);
         m_Y.SetCoordinate(entry[1], entry[3]);
     }
+
 #include STSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::Matrix2<Real>::Matrix2(const Vector2D& vector0, const Vector2D& vector1, MatrixMajorFlags majorFlag)
+Mathematics::Matrix2<Real>::Matrix2(const Vector2& vector0, const Vector2& vector1, MatrixMajorFlags majorFlag)
     : m_X{}, m_Y{}
 {
     if (majorFlag == MatrixMajorFlags::Row)
@@ -54,34 +60,36 @@ Mathematics::Matrix2<Real>::Matrix2(const Vector2D& vector0, const Vector2D& vec
     }
     else
     {
-        m_X.SetCoordinate(vector0[sm_X], vector1[sm_X]);
-        m_Y.SetCoordinate(vector0[sm_Y], vector1[sm_Y]);
+        m_X.SetCoordinate(vector0[xIndex], vector1[xIndex]);
+        m_Y.SetCoordinate(vector0[yIndex], vector1[yIndex]);
     }
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
-Mathematics::Matrix2<Real>::Matrix2(const Vector2DContainerType& vectors, MatrixMajorFlags majorFlag)
+Mathematics::Matrix2<Real>::Matrix2(const Vector2ContainerType& vectors, MatrixMajorFlags majorFlag)
     : m_X{}, m_Y{}
 {
-    if (vectors.size() != sm_VectorSize)
+    if (vectors.size() != vectorSize)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数据大小错误！"s));
     }
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
+
     if (majorFlag == MatrixMajorFlags::Row)
     {
-        m_X = vectors[sm_X];
-        m_Y = vectors[sm_Y];
+        m_X = vectors[xIndex];
+        m_Y = vectors[yIndex];
     }
     else
     {
-        m_X.SetCoordinate(vectors[sm_X].GetX(), vectors[sm_Y].GetX());
-        m_Y.SetCoordinate(vectors[sm_X].GetY(), vectors[sm_Y].GetY());
+        m_X.SetCoordinate(vectors[xIndex].GetX(), vectors[yIndex].GetX());
+        m_Y.SetCoordinate(vectors[xIndex].GetY(), vectors[yIndex].GetY());
     }
+
 #include STSTEM_WARNING_POP
 
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
@@ -97,7 +105,7 @@ Mathematics::Matrix2<Real>::Matrix2(Real angle) noexcept
 }
 
 template <typename Real>
-Mathematics::Matrix2<Real>::Matrix2(const Vector2D& vector0, const Vector2D& vector1) noexcept
+Mathematics::Matrix2<Real>::Matrix2(const Vector2& vector0, const Vector2& vector1) noexcept
     : m_X{}, m_Y{}
 {
     MakeTensorProduct(vector0, vector1);
@@ -106,11 +114,13 @@ Mathematics::Matrix2<Real>::Matrix2(const Vector2D& vector0, const Vector2D& vec
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Matrix2<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -127,8 +137,8 @@ void Mathematics::Matrix2<Real>::MakeIdentity() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_X = Vector2D::GetUnitX();
-    m_Y = Vector2D::GetUnitY();
+    m_X = Vector2::GetUnitX();
+    m_Y = Vector2::GetUnitY();
 }
 
 template <typename Real>
@@ -146,11 +156,11 @@ void Mathematics::Matrix2<Real>::MakeRotation(Real angle) noexcept
     MATHEMATICS_CLASS_IS_VALID_9;
 
     m_X.SetCoordinate(Math::Cos(angle), -Math::Sin(angle));
-    m_Y.SetCoordinate(-m_X.GetY(), m_X.GetY());
+    m_Y.SetCoordinate(-m_X.GetY(), m_X.GetX());
 }
 
 template <typename Real>
-void Mathematics::Matrix2<Real>::MakeTensorProduct(const Vector2D& lhs, const Vector2D& rhs) noexcept
+void Mathematics::Matrix2<Real>::MakeTensorProduct(const Vector2& lhs, const Vector2& rhs) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
@@ -159,7 +169,7 @@ void Mathematics::Matrix2<Real>::MakeTensorProduct(const Vector2D& lhs, const Ve
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::operator-() const noexcept
+Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::operator-() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -167,7 +177,7 @@ const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::operator-() const n
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::Matrix2<Real>::operator[](int row) const
+const Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::operator[](int row) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -185,18 +195,19 @@ const Mathematics::Vector2D<Real>& Mathematics::Matrix2<Real>::operator[](int ro
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real>& Mathematics::Matrix2<Real>::operator[](int row)
+Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::operator[](int row)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(sm_X <= row && row < sm_VectorSize, "索引错误！");
 
-    return OPERATOR_SQUARE_BRACKETS(Mathematics::Vector2D<Real>, row);
+    return OPERATOR_SQUARE_BRACKETS(Mathematics::Vector2<Real>, row);
 }
 
 template <typename Real>
 const Real& Mathematics::Matrix2<Real>::operator()(int row, int column) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
+    MATHEMATICS_ASSERTION_0(xIndex <= row && row < vectorSize, "row索引错误！");
+    MATHEMATICS_ASSERTION_0(Vector2::xIndex <= column && column < Vector2::pointSize, "column索引错误！");
 
     return (*this)[row][column];
 }
@@ -205,12 +216,12 @@ template <typename Real>
 Real& Mathematics::Matrix2<Real>::operator()(int row, int column)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(sm_X <= row && row < sm_VectorSize, "row索引错误！");
-    MATHEMATICS_ASSERTION_0(Vector2D::sm_X <= column && column < Vector2D::sm_PointSize, "column索引错误！");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
+
     return const_cast<Real&>(static_cast<const ClassType&>(*this)(row, column));
+
 #include STSTEM_WARNING_POP
 }
 
@@ -259,15 +270,15 @@ Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator/=(Real scalar) 
 }
 
 template <typename Real>
-Real Mathematics::Matrix2<Real>::QuadraticForm(const Vector2D& lhs, const Vector2D& rhs) const noexcept
+Real Mathematics::Matrix2<Real>::QuadraticForm(const Vector2& lhs, const Vector2& rhs) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return Vector2DTools::DotProduct(lhs, (*this) * rhs);
+    return Vector2Tools::DotProduct(lhs, (*this) * rhs);
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Transpose() const noexcept
+Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Transpose() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -285,27 +296,56 @@ Mathematics::Matrix2<Real>& Mathematics::Matrix2<Real>::operator*=(const Matrix2
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Inverse(const Real epsilon) const
+Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Inverse(const Real epsilon) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto det = Determinant();
+    // 由于除零错误的epsilon和这里的epsilon不同，改由先除后乘。
+    const auto inv = 1 / Determinant();
 
-    if (epsilon < Math::FAbs(det))
+    if (epsilon < Math::FAbs(inv))
     {
-        // 由于除零错误的epsilon和这里的epsilon不同，改由先除后乘。
-        return Adjoint() * (1 / det);
+        return Adjoint() * inv;
     }
     else
     {
-        MATHEMATICS_ASSERTION_1(false, "该矩阵不存在逆矩阵！");
+        MATHEMATICS_ASSERTION_0(false, "该矩阵不存在逆矩阵！");
 
         return GetZero();
     }
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Adjoint() const noexcept
+Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::GaussianEliminationInverse(const Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), true, epsilon };
+
+    if (gaussianElimination.IsInverse())
+    {
+        return Matrix2{ gaussianElimination.GetInverse(), MatrixMajorFlags::Row };
+    }
+    else
+    {
+        MATHEMATICS_ASSERTION_0(false, "该矩阵不存在逆矩阵！");
+
+        return GetZero();
+    }
+}
+
+template <typename Real>
+Real Mathematics::Matrix2<Real>::GaussianEliminationDeterminant(const Real epsilon) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    GaussianElimination<Real> gaussianElimination{ vectorSize, GetContainer(), false, epsilon };
+
+    return gaussianElimination.GetDeterminant();
+}
+
+template <typename Real>
+Mathematics::Matrix2<Real> Mathematics::Matrix2<Real>::Adjoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -357,7 +397,7 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
     (*this)(1, 0) *= invLength;
 
     // 计算 q1.
-    auto dot = GetValue<0, 0>() * GetValue<0, 1>() + GetValue<1, 0>() * GetValue<1, 1>();
+    const auto dot = GetValue<0, 0>() * GetValue<0, 1>() + GetValue<1, 0>() * GetValue<1, 1>();
 
     (*this)(0, 1) -= dot * GetValue<0, 0>();
     (*this)(1, 1) -= dot * GetValue<1, 0>();
@@ -369,7 +409,7 @@ void Mathematics::Matrix2<Real>::Orthonormalize()
 }
 
 template <typename Real>
-typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matrix2<Real>::EigenDecomposition(const Real epsilon) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+typename Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics::Matrix2<Real>::EigenDecomposition(const Real epsilon) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
     MATHEMATICS_ASSERTION_1(Math::FAbs(GetValue<0, 1>() - GetValue<1, 0>()) <= epsilon, "矩阵必须是对称矩阵。");
@@ -385,12 +425,12 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
         return Matrix2EigenDecomposition{ rotation, diagonal, epsilon };
     }
 
-    auto trace = GetValue<0, 0>() + GetValue<1, 1>();
-    auto difference = GetValue<0, 0>() - GetValue<1, 1>();
-    auto discr = Math::Sqrt(difference * difference + (Math::GetValue(4) * GetValue<0, 1>() * GetValue<0, 1>()));
+    const auto trace = GetValue<0, 0>() + GetValue<1, 1>();
+    const auto difference = GetValue<0, 0>() - GetValue<1, 1>();
+    const auto discr = Math::Sqrt(difference * difference + (Math::GetValue(4) * GetValue<0, 1>() * GetValue<0, 1>()));
 
-    auto eigenvalue0 = Math::GetRational(1, 2) * (trace - discr);
-    auto eigenvalue1 = Math::GetRational(1, 2) * (trace + discr);
+    const auto eigenvalue0 = Math::GetRational(1, 2) * (trace - discr);
+    const auto eigenvalue1 = Math::GetRational(1, 2) * (trace + discr);
     const Matrix2<Real> diagonal{ eigenvalue0, eigenvalue1 };
 
     Real cosValue{};
@@ -406,7 +446,7 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
         sinValue = GetValue<0, 1>();
     }
 
-    auto invLength = Math::InvSqrt(cosValue * cosValue + sinValue * sinValue);
+    const auto invLength = Math::InvSqrt(cosValue * cosValue + sinValue * sinValue);
     cosValue *= invLength;
     sinValue *= invLength;
 
@@ -416,21 +456,58 @@ typename const Mathematics::Matrix2<Real>::Matrix2EigenDecomposition Mathematics
 }
 
 template <typename Real>
-const typename Mathematics::Matrix2<Real>::ArrayType Mathematics::Matrix2<Real>::GetCoordinate() const noexcept
+typename Mathematics::Matrix2<Real>::ArrayType Mathematics::Matrix2<Real>::GetCoordinate() const noexcept
 {
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
     return ArrayType{ m_X.GetX(), m_X.GetY(), m_Y.GetX(), m_Y.GetY() };
+}
+
+template <typename Real>
+typename Mathematics::Matrix2<Real>::ContainerType Mathematics::Matrix2<Real>::GetContainer() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ContainerType{ m_X.GetX(), m_X.GetY(), m_Y.GetX(), m_Y.GetY() };
 }
 
 template <typename Real>
 void Mathematics::Matrix2<Real>::Set(const ArrayType& coordinate)
 {
+    MATHEMATICS_CLASS_IS_VALID_9;
+
     auto index = 0;
     for (auto value : coordinate)
     {
-        (*this)(index / sm_VectorSize, index % Vector2D::sm_PointSize) = value;
+        (*this)(index / vectorSize, index % Vector2::pointSize) = value;
 
         ++index;
     }
+}
+
+template <typename Real>
+Mathematics::Matrix3<Real> Mathematics::Matrix2<Real>::Lift() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    Matrix3 result{ MatrixInitType::Identity };
+
+    for (auto r = 0; r < vectorSize; ++r)
+    {
+        for (auto c = 0; c < vectorSize; ++c)
+        {
+            result(r, c) = (*this)(r, c);
+        }
+    }
+    return result;
+}
+
+template <typename Real>
+Real Mathematics::Matrix2<Real>::Trace() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return GetValue<0, 0>() + GetValue<1, 1>();
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX2_ACHIEVE_H

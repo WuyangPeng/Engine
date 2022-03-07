@@ -11,21 +11,21 @@
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics
-	::ContSphereOfAABB(const std::vector<Vector3D<Real> >& points)
+	::ContSphereOfAABB(const std::vector<Vector3<Real> >& points)
 {    
-	auto aabb = Vector3DTools<Real>::ComputeExtremes(points);
+	auto aabb = Vector3Tools<Real>::ComputeExtremes(points);
 	auto minExtreme = aabb.GetMinPoint();
 	auto maxExtreme = aabb.GetMaxPoint();
 
 	auto halfDiagonal = (Real{0.5})*(maxExtreme - minExtreme);
-	Sphere3<Real> sphere{ (Real{0.5})*(maxExtreme + minExtreme), Vector3DTools<Real>::VectorMagnitude(halfDiagonal) };
+	Sphere3<Real> sphere{ (Real{0.5})*(maxExtreme + minExtreme), Vector3Tools<Real>::GetLength(halfDiagonal) };
     
     return sphere;
 }
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics
-	::ContSphereAverage(int numPoints, const Vector3D<Real>* points)
+	::ContSphereAverage(int numPoints, const Vector3<Real>* points)
 {
 	auto center = points[0];
     int i;
@@ -39,7 +39,7 @@ Mathematics::Sphere3<Real> Mathematics
     for (i = 0; i < numPoints; ++i)
     {
 		auto diff = points[i] - center;
-		auto radiusSqr = Vector3DTools<Real>::VectorMagnitudeSquared(diff);
+		auto radiusSqr = Vector3Tools<Real>::GetLengthSquared(diff);
 		if (radiusSqr > radius)
         {
 			radius = radiusSqr;
@@ -53,10 +53,10 @@ Mathematics::Sphere3<Real> Mathematics
 
 template <typename Real>
 bool Mathematics
-	::InSphere(const Vector3D<Real>& point, const Sphere3<Real>& sphere)
+	::InSphere(const Vector3<Real>& point, const Sphere3<Real>& sphere)
 {
 	auto diff = point - sphere.GetCenter();
-	return Vector3DTools<Real>::VectorMagnitude(diff) <= sphere.GetRadius();
+	return Vector3Tools<Real>::GetLength(diff) <= sphere.GetRadius();
 }
 
 template <typename Real>
@@ -64,7 +64,7 @@ Mathematics::Sphere3<Real> Mathematics
 	::MergeSpheres(const Sphere3<Real>& sphere0, const Sphere3<Real>& sphere1)
 {
 	auto cenDiff = sphere1.GetCenter() - sphere0.GetCenter();
-	auto lenSqr = Vector3DTools<Real>::VectorMagnitudeSquared(cenDiff);
+	auto lenSqr = Vector3Tools<Real>::GetLengthSquared(cenDiff);
 	auto rDiff = sphere1.GetRadius() - sphere0.GetRadius();
 	auto rDiffSqr = rDiff*rDiff;
 
@@ -75,7 +75,7 @@ Mathematics::Sphere3<Real> Mathematics
 
 	auto length = Math<Real>::Sqrt(lenSqr);
    
-	Vector3D<Real> center;
+	Vector3<Real> center;
     if (length > Math<Real>::GetZeroTolerance())
     {
         Real coeff = (length + rDiff)/((Math::GetValue(2))*length);

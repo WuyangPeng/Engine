@@ -31,7 +31,7 @@ namespace Mathematics
 		void EulerZXZTest();
 		void EulerZYZTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

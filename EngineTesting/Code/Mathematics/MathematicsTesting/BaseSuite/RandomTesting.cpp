@@ -41,15 +41,15 @@ void Mathematics::RandomTesting ::FloatRandomTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        auto firstRandom = FloatRandom::UnitRandom(2);
-        ASSERT_TRUE(FloatMath::GetValue(0) <= firstRandom);
-        ASSERT_TRUE(firstRandom <= FloatMath::GetValue(1));
+        auto firstRandom = RandomF::UnitRandom(2);
+        ASSERT_TRUE(MathF::GetValue(0) <= firstRandom);
+        ASSERT_TRUE(firstRandom <= MathF::GetValue(1));
 
-        auto secondRandom = FloatRandom::SymmetricRandom(3);
-        ASSERT_TRUE(FloatMath::GetValue(-1) <= secondRandom);
-        ASSERT_TRUE(secondRandom <= FloatMath::GetValue(1));
+        auto secondRandom = RandomF::SymmetricRandom(3);
+        ASSERT_TRUE(MathF::GetValue(-1) <= secondRandom);
+        ASSERT_TRUE(secondRandom <= MathF::GetValue(1));
 
-        auto thirdRandom = FloatRandom::IntervalRandom(11.0f, 21.0f, 4);
+        auto thirdRandom = RandomF::IntervalRandom(11.0f, 21.0f, 4);
         ASSERT_TRUE(11.0f <= thirdRandom && thirdRandom <= 21.0f);
     }
 }
@@ -62,15 +62,15 @@ void Mathematics::RandomTesting ::DoubleRandomTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        auto firstRandom = DoubleRandom::UnitRandom(5);
-        ASSERT_TRUE(DoubleMath::GetValue(0) <= firstRandom);
-        ASSERT_TRUE(firstRandom <= DoubleMath::GetValue(1));
+        auto firstRandom = RandomD::UnitRandom(5);
+        ASSERT_TRUE(MathD::GetValue(0) <= firstRandom);
+        ASSERT_TRUE(firstRandom <= MathD::GetValue(1));
 
-        auto secondRandom = DoubleRandom::SymmetricRandom(6);
-        ASSERT_TRUE(DoubleMath::GetValue(-1) <= secondRandom);
-        ASSERT_TRUE(secondRandom <= DoubleMath::GetValue(1));
+        auto secondRandom = RandomD::SymmetricRandom(6);
+        ASSERT_TRUE(MathD::GetValue(-1) <= secondRandom);
+        ASSERT_TRUE(secondRandom <= MathD::GetValue(1));
 
-        auto thirdRandom = DoubleRandom::IntervalRandom(21.0, 31.0, 7);
+        auto thirdRandom = RandomD::IntervalRandom(21.0, 31.0, 7);
         ASSERT_TRUE(21.0 <= thirdRandom && thirdRandom <= 31.0);
     }
 }

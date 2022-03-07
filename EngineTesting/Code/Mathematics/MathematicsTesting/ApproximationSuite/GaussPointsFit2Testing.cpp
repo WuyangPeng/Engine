@@ -7,7 +7,7 @@
 #include "GaussPointsFit2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Approximation/GaussPointsFit2Detail.h"
 
 #include <random>
@@ -21,7 +21,10 @@ namespace Mathematics
     template class GaussPointsFit2<float>;
     template class GaussPointsFit2<double>;
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, GaussPointsFit2Testing)
 
 void Mathematics::GaussPointsFit2Testing ::MainTest()
@@ -39,21 +42,21 @@ void Mathematics::GaussPointsFit2Testing ::FitTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        std::vector<DoubleVector2D> vertices;
+        std::vector<Vector2D> vertices;
         int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(DoubleVector2D(firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector2(firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
-        DoubleGaussPointsFit2 gaussPointsFit2d(vertices);
+        GaussPointsFit2D gaussPointsFit2d(vertices);
 
-        DoubleBox2 box = gaussPointsFit2d.GetBox2();
+        Box2D box = gaussPointsFit2d.GetBox2();
 
         for (int i = 0; i < size; ++i)
         {
-            double distanceSquared = DoubleVector2DTools::DistanceSquared(box.GetCenter(), vertices[i]);
+            double distanceSquared = Vector2ToolsD::DistanceSquared(box.GetCenter(), vertices[i]);
             double maxDistanceSquared = box.GetExtent0() * box.GetExtent0() + box.GetExtent1() * box.GetExtent1();
 
             ASSERT_TRUE(distanceSquared <= maxDistanceSquared);

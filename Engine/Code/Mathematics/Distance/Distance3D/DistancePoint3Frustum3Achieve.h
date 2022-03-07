@@ -1,28 +1,29 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/14 12:58)
+///	引擎版本：0.8.0.3 (2022/02/22 14:26)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT3_FRUSTUM3_ACHIEVE_H
 
 #include "DistancePoint3Frustum3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 
 template <typename Real>
-Mathematics::DistancePoint3Frustum3<Real>::DistancePoint3Frustum3(const Vector3D& point, const Frustum3& frustum) noexcept
-    : ParentType{}, m_Point{ point }, m_Frustum{ frustum }
+Mathematics::DistancePoint3Frustum3<Real>::DistancePoint3Frustum3(const Vector3& point, const Frustum3& frustum) noexcept
+    : ParentType{}, point{ point }, frustum{ frustum }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DistancePoint3Frustum3<Real>::IsValid() const noexcept
 {
@@ -31,34 +32,35 @@ bool Mathematics::DistancePoint3Frustum3<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::DistancePoint3Frustum3<Real>::GetPoint() const noexcept
+Mathematics::Vector3<Real> Mathematics::DistancePoint3Frustum3<Real>::GetPoint() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Point;
+    return point;
 }
 
 template <typename Real>
-const Mathematics::Frustum3<Real> Mathematics::DistancePoint3Frustum3<Real>::GetFrustum() const noexcept
+Mathematics::Frustum3<Real> Mathematics::DistancePoint3Frustum3<Real>::GetFrustum() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Frustum;
+    return frustum;
 }
 
 template <typename Real>
-typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared() const
+typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     // 计算相对于视锥坐标系的点的坐标。
-    auto diff = m_Point - m_Frustum.GetOrigin();
-    Vector3D test{ Vector3DTools::DotProduct(diff, m_Frustum.GetRightVector()),
-                   Vector3DTools::DotProduct(diff, m_Frustum.GetUpVector()),
-                   Vector3DTools::DotProduct(diff, m_Frustum.GetDirectionVector()) };
+    auto diff = point - frustum.GetOrigin();
+    Vector3 test{ Vector3Tools::DotProduct(diff, frustum.GetRightVector()),
+                  Vector3Tools::DotProduct(diff, frustum.GetUpVector()),
+                  Vector3Tools::DotProduct(diff, frustum.GetDirectionVector()) };
 
     // 在具有非负Real和U坐标的八分圆中执行计算。
     auto rSignChange = false;
@@ -84,12 +86,12 @@ typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathema
     }
 
     // 视锥导出参数。
-    const auto rightMin = m_Frustum.GetRightBound();
-    const auto rightMax = m_Frustum.GetDirectionRatio() * rightMin;
-    const auto upMin = m_Frustum.GetUpBound();
-    const auto upMax = m_Frustum.GetDirectionRatio() * upMin;
-    const auto directionMin = m_Frustum.GetDirectionMin();
-    const auto directionMax = m_Frustum.GetDirectionMax();
+    const auto rightMin = frustum.GetRightBound();
+    const auto rightMax = frustum.GetDirectionRatio() * rightMin;
+    const auto upMin = frustum.GetUpBound();
+    const auto upMax = frustum.GetDirectionRatio() * upMin;
+    const auto directionMin = frustum.GetDirectionMin();
+    const auto directionMax = frustum.GetDirectionMax();
     const auto rightMinSqr = rightMin * rightMin;
     const auto upMinSqr = upMin * upMin;
     const auto directionMinSqr = directionMin * directionMin;
@@ -97,12 +99,12 @@ typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathema
     const auto minRightDirectionDot = rightMinSqr + directionMinSqr;
     const auto minUpDirectionDot = upMinSqr + directionMinSqr;
     const auto minRightUpDirectionDot = rightMinSqr + minUpDirectionDot;
-    const auto maxRightDirectionDot = m_Frustum.GetDirectionRatio() * minRightDirectionDot;
-    const auto maxUpDirectionDot = m_Frustum.GetDirectionRatio() * minUpDirectionDot;
-    const auto maxRightUpDirectionDot = m_Frustum.GetDirectionRatio() * minRightUpDirectionDot;
+    const auto maxRightDirectionDot = frustum.GetDirectionRatio() * minRightDirectionDot;
+    const auto maxUpDirectionDot = frustum.GetDirectionRatio() * minUpDirectionDot;
+    const auto maxRightUpDirectionDot = frustum.GetDirectionRatio() * minRightUpDirectionDot;
 
     /// 在所有情况下，算法都会通过确定测试点所在的圆锥体的顶点，边缘和面的哪个Voronoi区域来计算最接近的点。
-    Vector3D closest{};
+    Vector3 closest{};
 
     if (directionMax <= test.GetZ())
     {
@@ -433,19 +435,21 @@ typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathema
     }
 
     // 转换回原始坐标。
-    const auto closestPoint = m_Frustum.GetOrigin() + closest.GetX() * m_Frustum.GetRightVector() +
-                              closest.GetY() * m_Frustum.GetUpVector() + closest.GetZ() * m_Frustum.GetDirectionVector();
+    const auto closestPoint = frustum.GetOrigin() +
+                              closest.GetX() * frustum.GetRightVector() +
+                              closest.GetY() * frustum.GetUpVector() +
+                              closest.GetZ() * frustum.GetDirectionVector();
 
-    return DistanceResult{ Vector3DTools::VectorMagnitudeSquared(diff), Math::GetValue(0), m_Point, closestPoint };
+    return DistanceResult{ Vector3Tools::GetLengthSquared(diff), Math::GetValue(0), point, closestPoint };
 }
 
 template <typename Real>
-typename const Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
+typename Mathematics::DistancePoint3Frustum3<Real>::DistanceResult Mathematics::DistancePoint3Frustum3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto movedPoint = m_Point.GetMove(t, lhsVelocity);
-    const auto movedEllipsoid = m_Frustum.GetMove(t, rhsVelocity);
+    const auto movedPoint = point.GetMove(t, lhsVelocity);
+    const auto movedEllipsoid = frustum.GetMove(t, rhsVelocity);
 
     ClassType distance{ movedPoint, movedEllipsoid };
     distance.SetZeroThreshold(this->GetZeroThreshold());

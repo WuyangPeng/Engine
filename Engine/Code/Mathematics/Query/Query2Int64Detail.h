@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 14:58)
+///	引擎版本：0.8.0.2 (2022/02/17 16:46)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_INT64_DETAIL_H
@@ -24,6 +24,7 @@ Mathematics::Query2Int64<Real>::Query2Int64(const VerticesType& vertices)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query2Int64<Real>::IsValid() const noexcept
 {
@@ -32,6 +33,7 @@ bool Mathematics::Query2Int64<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -51,7 +53,7 @@ Mathematics::LineQueryType Mathematics::Query2Int64<Real>::ToLine(int index, int
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2Int64<Real>::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2Int64<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
@@ -65,7 +67,7 @@ Mathematics::LineQueryType Mathematics::Query2Int64<Real>::ToLine(const Vector2D
     const auto x1 = boost::numeric_cast<int64_t>(vector1.GetX()) - boost::numeric_cast<int64_t>(vector0.GetX());
     const auto y1 = boost::numeric_cast<int64_t>(vector1.GetY()) - boost::numeric_cast<int64_t>(vector0.GetY());
 
-    auto det = QueryDotTools<int64_t>::Det2(x0, y0, x1, y1);
+    const auto det = QueryDotTools<int64_t>::Det2(x0, y0, x1, y1);
 
     if (0 < det)
         return LineQueryType::Right;
@@ -84,34 +86,34 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>::ToCircumcircl
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2Int64<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "索引错误！");
 
-    const Vector2D lhsVector{ this->GetVertice(lhsVerticesIndex) };
-    const Vector2D mhsVector{ this->GetVertice(mhsVerticesIndex) };
-    const Vector2D rhsVector{ this->GetVertice(rhsVerticesIndex) };
+    const Vector2 lhsVector{ this->GetVertice(lhsVerticesIndex) };
+    const Vector2 mhsVector{ this->GetVertice(mhsVerticesIndex) };
+    const Vector2 rhsVector{ this->GetVertice(rhsVerticesIndex) };
 
-    auto lhsPlusTestX = boost::numeric_cast<int64_t>(lhsVector.GetX() + testVector.GetX());
-    auto lhsMinusTestX = boost::numeric_cast<int64_t>(lhsVector.GetX() - testVector.GetX());
-    auto lhsPlusTestY = boost::numeric_cast<int64_t>(lhsVector.GetY() + testVector.GetY());
-    auto lhsMinusTestY = boost::numeric_cast<int64_t>(lhsVector.GetY() - testVector.GetY());
-    auto mhsPlusTestX = boost::numeric_cast<int64_t>(mhsVector.GetX() + testVector.GetX());
-    auto mhsMinusTestX = boost::numeric_cast<int64_t>(mhsVector.GetX() - testVector.GetX());
-    auto mhsPlusTestY = boost::numeric_cast<int64_t>(mhsVector.GetY() + testVector.GetY());
-    auto mhsMinusTestY = boost::numeric_cast<int64_t>(mhsVector.GetY() - testVector.GetY());
-    auto rhsPlusTestX = boost::numeric_cast<int64_t>(rhsVector.GetX() + testVector.GetX());
-    auto rhsMinusTestX = boost::numeric_cast<int64_t>(rhsVector.GetX() - testVector.GetX());
-    auto rhsPlusTestY = boost::numeric_cast<int64_t>(rhsVector.GetY() + testVector.GetY());
-    auto rhsMinusTestY = boost::numeric_cast<int64_t>(rhsVector.GetY() - testVector.GetY());
-    auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
-    auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
-    auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
+    const auto lhsPlusTestX = boost::numeric_cast<int64_t>(lhsVector.GetX() + testVector.GetX());
+    const auto lhsMinusTestX = boost::numeric_cast<int64_t>(lhsVector.GetX() - testVector.GetX());
+    const auto lhsPlusTestY = boost::numeric_cast<int64_t>(lhsVector.GetY() + testVector.GetY());
+    const auto lhsMinusTestY = boost::numeric_cast<int64_t>(lhsVector.GetY() - testVector.GetY());
+    const auto mhsPlusTestX = boost::numeric_cast<int64_t>(mhsVector.GetX() + testVector.GetX());
+    const auto mhsMinusTestX = boost::numeric_cast<int64_t>(mhsVector.GetX() - testVector.GetX());
+    const auto mhsPlusTestY = boost::numeric_cast<int64_t>(mhsVector.GetY() + testVector.GetY());
+    const auto mhsMinusTestY = boost::numeric_cast<int64_t>(mhsVector.GetY() - testVector.GetY());
+    const auto rhsPlusTestX = boost::numeric_cast<int64_t>(rhsVector.GetX() + testVector.GetX());
+    const auto rhsMinusTestX = boost::numeric_cast<int64_t>(rhsVector.GetX() - testVector.GetX());
+    const auto rhsPlusTestY = boost::numeric_cast<int64_t>(rhsVector.GetY() + testVector.GetY());
+    const auto rhsMinusTestY = boost::numeric_cast<int64_t>(rhsVector.GetY() - testVector.GetY());
+    const auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
+    const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
+    const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    auto det = QueryDotTools<int64_t>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+    const auto det = QueryDotTools<int64_t>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 
     if (0 < det)
         return CircumcircleQueryType::Inside;

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:08)
+///	引擎版本：0.8.0.2 (2022/02/13 14:43)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -16,7 +16,7 @@
 #include "Mathematics/Base/MathDetail.h"
 
 Mathematics::EquationOnce::EquationOnce(double constant, double once, double epsilon)
-    : ParentType{ epsilon }, m_Constant{ constant }, m_Once{ once }
+    : ParentType{ epsilon }, constant{ constant }, once{ once }
 {
     Calculate();
 
@@ -29,31 +29,31 @@ double Mathematics::EquationOnce::Substitution(double value) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Constant + value * m_Once;
+    return constant + value * once;
 }
 
-const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::Substitution(const Imaginary& value) const
+Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::Substitution(const Imaginary& value) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Constant + value * m_Once;
+    return constant + value * once;
 }
 
 double Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] double solution) const noexcept
 {
-    return m_Once;
+    return once;
 }
 
-const Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
+Mathematics::EquationOnce::Imaginary Mathematics::EquationOnce::SubstitutionTangent([[maybe_unused]] const Imaginary& solution) const
 {
-    return m_Once;
+    return once;
 }
 
 void Mathematics::EquationOnce::Solving()
 {
-    MATHEMATICS_ASSERTION_0(GetEpsilon() < DoubleMath::FAbs(m_Once), "除零错误！");
+    MATHEMATICS_ASSERTION_0(GetEpsilon() < MathD::FAbs(once), "除零错误！");
 
-    const auto solution = -m_Constant / m_Once;
+    const auto solution = -constant / once;
 
     SetRealResult(solution);
 }

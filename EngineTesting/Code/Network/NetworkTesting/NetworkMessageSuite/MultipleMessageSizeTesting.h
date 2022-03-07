@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 11:53)
 
 #ifndef NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_SIZE_TESTING_H
@@ -11,20 +11,20 @@
 
 namespace Network
 {
-	class MultipleMessageSizeTesting : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MultipleMessageSizeTesting);
+    class MultipleMessageSizeTesting : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(MultipleMessageSizeTesting);
 
-	private:
-		void MainTest();
+    private:
+        void MainTest();
 
-		void NineSizeTest();
-		void FiveSizeTest();
-		void TwoSizeTest();
+        void NineSizeTest() noexcept;
+        void FiveSizeTest() noexcept;
+        void TwoSizeTest() noexcept;
 
-		virtual void DoRunUnitTest() override;
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_SIZE_TESTING_H
+#endif  // NETWORK_TESTING_NETWORK_MESSAGE_SUITE_MULTIPLE_MESSAGE_SIZE_TESTING_H

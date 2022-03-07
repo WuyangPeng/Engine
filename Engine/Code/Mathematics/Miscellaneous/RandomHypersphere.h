@@ -30,7 +30,7 @@ namespace Mathematics
 	// x_i *= sin(A) for D/2 <= i < D.  The function is recursively called
 	// on the partitioned components.
 
-	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void RandomPointOnHypersphere(int dimension, double* point);
+	 void RandomPointOnHypersphere(int dimension, double* point);
 
 	// An attempt to determine the uniformity of N randomly generated
 	// points P[0] through P[N-1] on the hypersphere.  Select a positive
@@ -41,7 +41,7 @@ namespace Mathematics
 	// are not the sample points.  However, this requires generating random
 	// points to get the axes and, well, you can see the problem...
 
-	MATHEMATICS_TEMPLATE_DEFAULT_DECLARE void Histogram(int dimension, double angle, int numPoints, double** points, int* histogram) noexcept;
+	 void Histogram(int dimension, double angle, int numPoints, double** points, int* histogram) noexcept;
 
 	//An example of how to use these functions.
 	//

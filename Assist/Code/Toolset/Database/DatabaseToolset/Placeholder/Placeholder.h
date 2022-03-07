@@ -7,23 +7,23 @@
 #ifndef DATABASE_TOOLSET_PLACEHOLDER_H
 #define DATABASE_TOOLSET_PLACEHOLDER_H
 
-#include "Toolset/Database/DatabaseToolset/DatabaseToolsetDll.h" 
+#include "Toolset/Database/DatabaseToolset/DatabaseToolsetDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace DatabaseToolset
 {
-	 class DATABASE_TOOLSET_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class DATABASE_TOOLSET_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // DATABASE_TOOLSET_PLACEHOLDER_H
+#endif  // DATABASE_TOOLSET_PLACEHOLDER_H

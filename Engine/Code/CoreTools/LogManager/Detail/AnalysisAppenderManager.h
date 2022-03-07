@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 9:46)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/06 0:09)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_ANALYSIS_APPENDER_MANAGER_H
 #define CORE_TOOLS_LOG_MANAGER_ANALYSIS_APPENDER_MANAGER_H
@@ -24,14 +24,14 @@ namespace CoreTools
     {
     public:
         using ClassType = AnalysisAppenderManager;
-        using AppenderManagerPtr = std::shared_ptr<AppenderManager>;
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
 
     public:
         explicit AnalysisAppenderManager(const std::string& fileName);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] AppenderManagerPtr GetAppenderManager() const noexcept;
+        NODISCARD AppenderManagerSharedPtr GetAppenderManager() const noexcept;
 
     private:
         using String = System::String;
@@ -43,16 +43,16 @@ namespace CoreTools
         void AnalysisLogger();
         void InsertLogger(LogLevel levelType, LogFilter filterType);
         void AnalysisAppender();
-        bool AnalysisConsoleAppender();
-        bool AnalysisFileAppender();
-        bool AnalysisFileConfigurationAppender();
-        bool InsertAppender(const BasicTree& fileTreeData);
+        NODISCARD bool AnalysisConsoleAppender();
+        NODISCARD bool AnalysisFileAppender();
+        NODISCARD bool AnalysisFileConfigurationAppender();
+        NODISCARD bool InsertAppender(const BasicTree& fileTreeData);
 
     private:
-        AppenderManagerPtr m_AppenderManager;
-        std::string m_FileName;
-        BasicTree m_MainTree;
-        BasicTree m_AppenderTree;
+        AppenderManagerSharedPtr appenderManager;
+        std::string fileName;
+        BasicTree mainTree;
+        BasicTree appenderTree;
     };
 }
 

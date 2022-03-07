@@ -6,7 +6,7 @@
 
 #include "Ray3Testing.h"
 #include "Mathematics/Objects3D/Ray3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -28,7 +28,12 @@ void Mathematics::Ray3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(RayTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Ray3Testing
 	::RayTest()
 {
@@ -40,20 +45,20 @@ void Mathematics::Ray3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D origin(firstRandomDistribution(generator),
+		Vector3D origin(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D direction(firstRandomDistribution(generator),
+		Vector3D direction(firstRandomDistribution(generator),
 			                firstRandomDistribution(generator),
 							firstRandomDistribution(generator));
 
 		direction.Normalize();
 
-		DoubleRay3 line(origin,direction);
+		Ray3D line(origin,direction);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(origin,line.GetOrigin()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(direction,line.GetDirection()));	
+		ASSERT_TRUE(Vector3ToolsD::Approximate(origin,line.GetOrigin()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(direction,line.GetDirection()));	
 	}
 }
 

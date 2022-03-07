@@ -79,9 +79,9 @@
     监听服务器：GameServer（游戏服务器）。
     每个游戏根据需要开启一到多个游戏管理员服务器。
 13. ServerManager（服务器管理者）：
-    监听服务器：GatewayServer（网关服务器），LoginServer（登陆服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）、
-    WorldServer（世界服务器）、OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）、MailServer（邮件服务器）、
-    RechargeServer（充值服务器）、LogServer（日志服务器）、UpdateServer（更新服务器）、BackgroundServer（后台服务器）。
+    监听服务器：GatewayServer（网关服务器），LoginServer（登陆服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）、WorldServer（世界服务器）、
+	OfflineServer（离线服务器）、LeaderboardServer（排行榜服务器）、MailServer（邮件服务器）、RechargeServer（充值服务器）、
+	LogServer（日志服务器）、UpdateServer（更新服务器）、BackgroundServer（后台服务器）、DatabaseServer（数据库服务器）。
     每个游戏根据需要开启一个服务器管理者。
 14. UpdateServer（更新服务器）：
     监听客户端：GameClient（游戏客户端）。
@@ -92,7 +92,12 @@
     监听服务器：LoginServer（登陆服务器）、RechargeServer（充值服务器）、GameMasterServer（游戏管理员服务器）。
     主动连接服务器：ServerManager（服务器管理者）。
     每个游戏根据需要开启一个后台服务器。
-16. 其他业务服务器：
+16. DatabaseServer（数据库服务器）：
+	监听服务器：LoginServer（登陆服务器）、GameServer（游戏服务器）、FightingServer（战斗服务器）、WorldServer（世界服务器）、LeaderboardServer（排行榜服务器）、
+	MailServer（邮件服务器）、RechargeServer（充值服务器）、LogServer（日志服务器）、BackgroundServer（后台服务器）。	
+	主动连接服务器：ServerManager（服务器管理者）。
+    每个游戏根据需要开启一到多个数据库服务器。
+17. 其他业务服务器：
     主动连接服务器：ServerManager（服务器管理者）。
     可能需要监听服务器：GatewayServer（网关服务器）、GameServer（游戏服务器）。
     每个游戏根据需要开启一到多个其他业务服务器。
@@ -110,12 +115,13 @@
 8.  邮件服务器：60001——70000。
 9.  聊天服务器：70001——80000。
 10. 离线服务器：80001——90000。
-11. 其他业务服务器：90001——100000。
+11. 数据库服务器：90001——100000。
 12. 战斗服务器：100001——200000。
-13. 游戏服务器：200001——400000。
-14. 世界服务器：400001——600000。   
-15. 日志服务器：700001——800000。  
-16. 游戏管理员服务器：800001——900000。 
-17. 后台服务器：900001——1000000。
+13. 游戏服务器：200001——300000。
+14. 世界服务器：300001——400000。   
+15. 日志服务器：400001——500000。  
+16. 游戏管理员服务器：500001——600000。
+17. 后台服务器：600001——700000。
+18. 其他业务服务器：700001——1000000。
 
 ----------------------------

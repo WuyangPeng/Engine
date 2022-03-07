@@ -58,5 +58,5 @@ void CoreTools::ColumnTesting::ColumnTest()
     ASSERT_TRUE(column.IsHidden());
 
     column.SetWidth(20.0f);
-    ASSERT_APPROXIMATE(column.GetWidth(), 20.0f, Mathematics::FloatMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(column.GetWidth(), 20.0f, Mathematics::MathF::epsilon);
 }

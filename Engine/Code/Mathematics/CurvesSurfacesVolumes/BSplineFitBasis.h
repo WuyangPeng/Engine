@@ -14,7 +14,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BSplineFitBasis
+    class  BSplineFitBasis
     {
     public:
         using Math = Math<Real>;
@@ -43,7 +43,7 @@ namespace Mathematics
 
     private:
         // The number of control points and degree for the curve.
-        int m_Quantity, mDegree;
+        int quantity, mDegree;
 
         // The storage for knots and basis evaluation.
         mutable Real* mValue;  // mValue[0..degree]

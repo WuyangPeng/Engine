@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/18 18:09)
+///	引擎版本：0.8.0.3 (2022/03/01 19:01)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CYLINDER3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_CYLINDER3_ACHIEVE_H
 
 #include "StaticFindIntersectorLine3Cylinder3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::StaticFindIntersectorLine3Cylinder3(const Line3& line, const Cylinder3& cylinder, const Real epsilon)
-    : ParentType{ epsilon }, m_Line{ line }, m_Cylinder{ cylinder }, m_Quantity{}, m_Point0{}, m_Point1{}
+    : ParentType{ epsilon }, line{ line }, cylinder{ cylinder }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::StaticFindIntersectorLin
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::IsValid() const noexcept
 {
@@ -32,39 +33,40 @@ bool Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::IsValid() const noe
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetLine() const noexcept
+Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Cylinder3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetCylinder() const noexcept
+Mathematics::Cylinder3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetCylinder() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Cylinder;
+    return cylinder;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find()
 {
-    const auto findShared = Find(m_Line.GetOrigin(), m_Line.GetDirection(), m_Cylinder);
-    m_Quantity = findShared.m_Quantity;
+    const auto findShared = Find(line.GetOrigin(), line.GetDirection(), cylinder);
+    quantity = findShared.quantity;
 
-    if (m_Quantity == 2)
+    if (quantity == 2)
     {
-        m_Point0 = m_Line.GetOrigin() + findShared.m_Parameter0 * m_Line.GetDirection();
-        m_Point1 = m_Line.GetOrigin() + findShared.m_Parameter1 * m_Line.GetDirection();
+        point0 = line.GetOrigin() + findShared.parameter0 * line.GetDirection();
+        point1 = line.GetOrigin() + findShared.parameter1 * line.GetDirection();
         this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (m_Quantity == 1)
+    else if (quantity == 1)
     {
-        m_Point0 = m_Line.GetOrigin() + findShared.m_Parameter0 * m_Line.GetDirection();
+        point0 = line.GetOrigin() + findShared.parameter0 * line.GetDirection();
         this->SetIntersectionType(IntersectionType::Point);
     }
     else
@@ -78,27 +80,27 @@ int Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetQuantity() const 
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else if (index == 1)
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3D& origin, const Vector3D& dir, const Cylinder3& cylinder)
+typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::Find(const Vector3& origin, const Vector3& dir, const Cylinder3& cylinder)
 {
     FindShared findShared{};
 
@@ -106,7 +108,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     /// 如果P = x * U + y * V + z * W，则圆柱体为x^2 + y^2 = r^2，其中r为圆柱体半径。
     /// 端盖为 |z| = h/2，其中h是圆柱体高度。
     const auto wVector = cylinder.GetAxis().GetDirection();
-    const auto generateComplementBasis = Vector3DTools::GenerateComplementBasis(wVector);
+    const auto generateComplementBasis = Vector3Tools::GenerateComplementBasis(wVector);
     const auto uVector = generateComplementBasis.GetUVector();
     const auto vVector = generateComplementBasis.GetVVector();
 
@@ -115,10 +117,10 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 
     // 将输入线原点转换为圆柱坐标
     auto diff = origin - cylinder.GetAxis().GetOrigin();
-    const Vector3D point{ Vector3DTools::DotProduct(uVector, diff), Vector3DTools::DotProduct(vVector, diff), Vector3DTools::DotProduct(wVector, diff) };
+    const Vector3 point{ Vector3Tools::DotProduct(uVector, diff), Vector3Tools::DotProduct(vVector, diff), Vector3Tools::DotProduct(wVector, diff) };
 
     // 获取传入线的单位长度方向的z值（以圆柱坐标表示）。
-    auto dirZ = Vector3DTools::DotProduct(wVector, dir);
+    auto dirZ = Vector3Tools::DotProduct(wVector, dir);
 
     if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(dirZ))
     {
@@ -133,21 +135,21 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         // 线与圆筒端盘相交。
         if (Math::GetValue(0) < dirZ)
         {
-            findShared.m_Parameter0 = -point.GetZ() - halfHeight;
-            findShared.m_Parameter1 = -point.GetZ() + halfHeight;
+            findShared.parameter0 = -point.GetZ() - halfHeight;
+            findShared.parameter1 = -point.GetZ() + halfHeight;
         }
         else
         {
-            findShared.m_Parameter0 = point.GetZ() - halfHeight;
-            findShared.m_Parameter1 = point.GetZ() + halfHeight;
+            findShared.parameter0 = point.GetZ() - halfHeight;
+            findShared.parameter1 = point.GetZ() + halfHeight;
         }
 
-        findShared.m_Quantity = 2;
+        findShared.quantity = 2;
         return findShared;
     }
 
     // 将输入线单位长度方向转换为圆柱坐标
-    const Vector3D direction{ Vector3DTools::DotProduct(uVector, dir), Vector3DTools::DotProduct(vVector, dir), dirZ };
+    const Vector3 direction{ Vector3Tools::DotProduct(uVector, dir), Vector3Tools::DotProduct(vVector, dir), dirZ };
 
     if (Math::FAbs(direction.GetZ()) <= Math::GetZeroTolerance())
     {
@@ -175,16 +177,16 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             // 线在两个位置与圆柱相交。
             auto root = Math::Sqrt(discr);
             auto inv = Math::GetValue(1) / a2;
-            findShared.m_Parameter0 = (-a1 - root) * inv;
-            findShared.m_Parameter1 = (-a1 + root) * inv;
-            findShared.m_Quantity = 2;
+            findShared.parameter0 = (-a1 - root) * inv;
+            findShared.parameter1 = (-a1 + root) * inv;
+            findShared.quantity = 2;
             return findShared;
         }
         else
         {
             // 线与圆柱相切。
-            findShared.m_Parameter0 = -a1 / a2;
-            findShared.m_Quantity = 1;
+            findShared.parameter0 = -a1 / a2;
+            findShared.quantity = 1;
             return findShared;
         }
     }
@@ -198,7 +200,7 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     if (x * x + y * y <= radiusSqr)
     {
         // 顶部圆筒端盘内部的平面交点。
-        findShared.m_Parameter0 = t0;
+        findShared.parameter0 = t0;
         ++quantity;
     }
 
@@ -210,11 +212,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         // 底部圆筒端盘内部的平面交点。
         if (quantity == 0)
         {
-            findShared.m_Parameter0 = t1;
+            findShared.parameter0 = t1;
         }
         else
         {
-            findShared.m_Parameter1 = t1;
+            findShared.parameter1 = t1;
         }
         ++quantity;
     }
@@ -222,11 +224,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
     if (quantity == 2)
     {
         // 线与顶部和底部圆筒端盘相交。
-        if (findShared.m_Parameter1 < findShared.m_Parameter0)
+        if (findShared.parameter1 < findShared.parameter0)
         {
-            std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+            std::swap(findShared.parameter0, findShared.parameter1);
         }
-        findShared.m_Quantity = quantity;
+        findShared.quantity = quantity;
         return findShared;
     }
 
@@ -252,11 +254,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -267,11 +269,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -280,11 +282,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
         if (quantity == 2)
         {
             // 线与圆筒端盘之一相交，并与圆筒壁相交。
-            if (findShared.m_Parameter1 < findShared.m_Parameter0)
+            if (findShared.parameter1 < findShared.parameter0)
             {
-                std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                std::swap(findShared.parameter0, findShared.parameter1);
             }
-            findShared.m_Quantity = quantity;
+            findShared.quantity = quantity;
             return findShared;
         }
 
@@ -295,11 +297,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -310,11 +312,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -329,11 +331,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -344,11 +346,11 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
             {
                 if (quantity == 0)
                 {
-                    findShared.m_Parameter0 = tValue;
+                    findShared.parameter0 = tValue;
                 }
                 else
                 {
-                    findShared.m_Parameter1 = tValue;
+                    findShared.parameter1 = tValue;
                 }
                 ++quantity;
             }
@@ -357,13 +359,14 @@ typename Mathematics::StaticFindIntersectorLine3Cylinder3<Real>::FindShared Math
 
     if (quantity == 2)
     {
-        if (findShared.m_Parameter1 < findShared.m_Parameter0)
+        if (findShared.parameter1 < findShared.parameter0)
         {
-            std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+            std::swap(findShared.parameter0, findShared.parameter1);
         }
     }
 
-    findShared.m_Quantity = quantity;
+    findShared.quantity = quantity;
+
     return findShared;
 }
 

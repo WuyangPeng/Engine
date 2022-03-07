@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 16:52)
+///	引擎版本：0.8.0.2 (2022/02/18 17:57)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "PolynomialFitPowersData.h"
 #include "CoreTools/DataTypes/Tuple.h"
-#include "CoreTools/Helper/ExportMacro.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
-#include <vector>
+
 #include <memory>
+#include <vector>
 
 namespace Mathematics
 {
@@ -27,26 +27,15 @@ namespace Mathematics
     // 但输入数据(x,y,z,w) 首先被映射到[-1,1]^4 对数值鲁棒性。
 
     template <typename Real>
-    class PolynomialFit4PowersImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4PowersImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4PowersImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit4PowersImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit4Powers final
+    class PolynomialFit4Powers final
     {
     public:
-        using PolynomialFit4PowersImpl = PolynomialFit4PowersImpl<Real>;
-    
-        TYPE_DECLARE(PolynomialFit4Powers);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
+        using ClassType = PolynomialFit4Powers<Real>;
+
         using Samples = std::vector<Real>;
         using Tuple = CoreTools::Tuple<3, int>;
         using Powers = std::vector<Tuple>;
+        using Math = Math<Real>;
 
     public:
         // 构造函数是数据(x[i],y[i],z[i],w[i])，分别为0 <= i < numSamples。
@@ -54,35 +43,62 @@ namespace Mathematics
         // 其中，0 <= i < numXSamples, 0 <= j < numYSamples,
         //  0 <= k < numZSamples 和 m = i + numXSamples*(j + numYSamples*k)
 
-        PolynomialFit4Powers(const Samples& xSamples, const Samples& ySamples,
-                             const Samples& zSamples, const Samples& wSamples,
-                             const Powers& powers, bool isRepackage);
+        PolynomialFit4Powers(const Samples& xSamples,
+                             const Samples& ySamples,
+                             const Samples& zSamples,
+                             const Samples& wSamples,
+                             const Powers& powers,
+                             bool isRepackage);
 
         CLASS_INVARIANT_DECLARE;
 
         // 这是一个功能类，如果解线性方程组成功则返回“true”。
         // 如果不成功，则多项式求值是无效的，总是返回false。
-        [[nodiscard]] bool IsSolveSucceed() const noexcept;
+        NODISCARD bool IsSolveSucceed() const noexcept;
 
-        [[nodiscard]] Real GetXMin() const;
-        [[nodiscard]] Real GetXMax() const;
-        [[nodiscard]] Real GetYMin() const;
-        [[nodiscard]] Real GetYMax() const;
-        [[nodiscard]] Real GetZMin() const;
-        [[nodiscard]] Real GetZMax() const;
-        [[nodiscard]] Real GetWMin() const;
-        [[nodiscard]] Real GetWMax() const;
+        NODISCARD Real GetXMin() const;
+        NODISCARD Real GetXMax() const;
+        NODISCARD Real GetYMin() const;
+        NODISCARD Real GetYMax() const;
+        NODISCARD Real GetZMin() const;
+        NODISCARD Real GetZMax() const;
+        NODISCARD Real GetWMin() const;
+        NODISCARD Real GetWMax() const;
 
         // 拟合多项式的的评估。
         // 派生类可以重写此实现，有效方法基于有关传递给构造函数的具体幂的知识。
-        [[nodiscard]] Real operator()(Real x, Real y, Real z) const;
+        NODISCARD Real operator()(Real x, Real y, Real z) const;
 
     private:
-        PackageType impl;
+        void Init(const Samples& xSamples, const Samples& ySamples, const Samples& zSamples, const Samples& wSamples, bool isRepackage);
+        void InitializePowers();
+        void Repackage(const Samples& xSourceSamples,
+                       const Samples& ySourceSamples,
+                       const Samples& zSourceSamples,
+                       Samples& xTargetSamples,
+                       Samples& yTargetSamples,
+                       Samples& zTargetSamples);
+        void TransformToUnit(const Samples& xSourceSamples,
+                             const Samples& ySourceSamples,
+                             const Samples& zSourceSamples,
+                             const Samples& wSourceSamples,
+                             Samples& xTargetSamples,
+                             Samples& yTargetSamples,
+                             Samples& zTargetSamples,
+                             Samples& wTargetSamples);
+        void TransformToUnit(const Samples& sourceSamples, Samples& targetSamples, int index);
+        void DoLeastSquaresFit(const Samples& xTargetSamples,
+                               const Samples& yTargetSamples,
+                               const Samples& zTargetSamples,
+                               const Samples& wTargetSamples);
+
+    private:
+        Powers powers;
+        PolynomialFitPowersData<Real, 4> powersData;
     };
 
-    using FloatPolynomialFit4Powers = PolynomialFit4Powers<float>;
-    using DoublePolynomialFit4Powers = PolynomialFit4Powers<double>;
+    using PolynomialFit4PowersF = PolynomialFit4Powers<float>;
+    using PolynomialFit4PowersD = PolynomialFit4Powers<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT4_POWERS_H

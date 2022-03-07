@@ -16,21 +16,31 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,GaussianQuadratureTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
+#include SYSTEM_WARNING_DISABLE(26482)
+#include SYSTEM_WARNING_DISABLE(26814)
 void Mathematics::GaussianQuadratureTesting
 	::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(ResultTest);
 }
 
-double Mathematics::GaussianQuadratureTesting
-	::Solution(double input, const GaussianQuadratureTesting* userData)
+double Mathematics::GaussianQuadratureTesting ::Solution(double input, const GaussianQuadratureTesting* userData) noexcept
 {
 	return input * userData->GetUserData() + 3;
 }
 
 double Mathematics::GaussianQuadratureTesting
-	::GetUserData() const 
+	::GetUserData() const noexcept
 {
 	return -5;
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:06)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CyclicRedundancyCheck32Table::CyclicRedundancyCheck32Table() noexcept
-    : m_Table{}
+    : table{}
 {
     Calculate();
 
@@ -26,7 +26,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheck32Table)
 void CoreTools::CyclicRedundancyCheck32Table::Calculate() noexcept
 {
     auto index = 0;
-    for (auto& value : m_Table)
+    for (auto& value : table)
     {
         value = Calculate32(index);
 
@@ -34,25 +34,9 @@ void CoreTools::CyclicRedundancyCheck32Table::Calculate() noexcept
     }
 }
 
-uint32_t CoreTools::CyclicRedundancyCheck32Table::Calculate32(uint32_t index) noexcept
-{
-    auto value = index;
-    constexpr auto bitSize = 8;
-
-    for (auto i = bitSize; i > 0; i--)
-    {
-        if ((value & 1) != 0)
-            value = (value >> 1) ^ 0xEDB88320L;
-        else
-            value >>= 1;
-    }
-
-    return value;
-}
-
 uint32_t CoreTools::CyclicRedundancyCheck32Table::Get32Table(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Table.at(index);
+    return table.at(index);
 }

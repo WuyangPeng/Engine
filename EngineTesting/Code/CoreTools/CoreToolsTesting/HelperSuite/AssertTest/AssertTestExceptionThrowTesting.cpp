@@ -75,7 +75,7 @@ void CoreTools::AssertTestExceptionThrowTesting::MainTest()
 
 bool CoreTools::AssertTestExceptionThrowTesting::Approximate(float lhs, float rhs, float epsilon) noexcept
 {
-    return Mathematics::FloatMath::FAbs(lhs - rhs) <= epsilon;
+    return Mathematics::MathF::FAbs(lhs - rhs) <= epsilon;
 }
 
 void CoreTools::AssertTestExceptionThrowTesting::AssertTrueFailureThrowExceptionTest()

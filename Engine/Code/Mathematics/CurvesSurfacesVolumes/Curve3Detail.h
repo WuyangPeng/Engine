@@ -9,10 +9,10 @@
 
 #include "Curve3.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
 
 
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "System/Helper/PragmaWarning.h" 
 #include STSTEM_WARNING_PUSH
@@ -57,7 +57,7 @@ Real Mathematics::Curve3<Real>
 	::GetSpeed(Real t) const
 {
 	const auto velocity = GetFirstDerivative(t);
-	const auto speed = Vector3DTools<Real>::VectorMagnitude(velocity);
+	const auto speed = Vector3Tools<Real>::GetLength(velocity);
     return speed;
 }
 
@@ -69,7 +69,7 @@ Real Mathematics::Curve3<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
+Mathematics::Vector3<Real> Mathematics::Curve3<Real>
 	::GetTangent(Real t) const
 {
 	auto velocity = GetFirstDerivative(t);
@@ -78,47 +78,47 @@ Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
+Mathematics::Vector3<Real> Mathematics::Curve3<Real>
 	::GetNormal(Real t) const
 {
 	const auto velocity = GetFirstDerivative(t);
 	const auto acceleration = GetSecondDerivative(t);
-	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
-	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
+	auto VDotV = Vector3Tools<Real>::DotProduct(velocity,velocity);
+	auto VDotA = Vector3Tools<Real>::DotProduct(velocity,acceleration);
 	auto normal = VDotV*acceleration - VDotA*velocity;
     normal.Normalize();
     return normal;
 }
 
 template <typename Real>
-Mathematics::Vector3D<Real> Mathematics::Curve3<Real>
+Mathematics::Vector3<Real> Mathematics::Curve3<Real>
 	::GetBinormal(Real t) const
 {
 	auto velocity = GetFirstDerivative(t);
 	const auto acceleration = GetSecondDerivative(t);
-	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
-	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
+	auto VDotV = Vector3Tools<Real>::DotProduct(velocity,velocity);
+	auto VDotA = Vector3Tools<Real>::DotProduct(velocity,acceleration);
 	auto normal = VDotV*acceleration - VDotA*velocity;
     normal.Normalize();
     velocity.Normalize();
-	auto binormal = Vector3DTools<Real>::CrossProduct(velocity,normal);
+	auto binormal = Vector3Tools<Real>::CrossProduct(velocity,normal);
     return binormal;
 }
 
 template <typename Real>
 void Mathematics::Curve3<Real>
-	::GetFrame(Real t, Vector3D<Real>& position, Vector3D<Real>& tangent, Vector3D<Real>& normal, Vector3D<Real>& binormal) const
+	::GetFrame(Real t, Vector3<Real>& position, Vector3<Real>& tangent, Vector3<Real>& normal, Vector3<Real>& binormal) const
 {
     position = GetPosition(t);
 	auto velocity = GetFirstDerivative(t);
 	const auto acceleration = GetSecondDerivative(t);
-	auto VDotV = Vector3DTools<Real>::DotProduct(velocity,velocity);
-	auto VDotA = Vector3DTools<Real>::DotProduct(velocity,acceleration);
+	auto VDotV = Vector3Tools<Real>::DotProduct(velocity,velocity);
+	auto VDotA = Vector3Tools<Real>::DotProduct(velocity,acceleration);
     normal = VDotV*acceleration - VDotA*velocity;
     normal.Normalize();
     tangent = velocity;
     tangent.Normalize();
-	binormal = Vector3DTools<Real>::CrossProduct(tangent,normal);
+	binormal = Vector3Tools<Real>::CrossProduct(tangent,normal);
 }
 
 template <typename Real>
@@ -126,13 +126,13 @@ Real Mathematics::Curve3<Real>
 	::GetCurvature(Real t) const
 {
 	const auto velocity = GetFirstDerivative(t);
-	auto speedSqr = Vector3DTools<Real>::VectorMagnitudeSquared(velocity);
+	auto speedSqr = Vector3Tools<Real>::GetLengthSquared(velocity);
 
     if (speedSqr >= Math<Real>::GetZeroTolerance())
     {
 		const auto acceleration = GetSecondDerivative(t);
-		const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
-		auto numer = Vector3DTools<Real>::VectorMagnitude(cross);
+		const auto cross = Vector3Tools<Real>::CrossProduct(velocity,acceleration);
+		auto numer = Vector3Tools<Real>::GetLength(cross);
 		auto denom = Math<Real>::Pow(speedSqr, static_cast<Real>(1.5));
         return numer/denom;
     }
@@ -149,13 +149,13 @@ Real Mathematics::Curve3<Real>
 {
 	const auto velocity = GetFirstDerivative(t);
 	const auto acceleration = GetSecondDerivative(t);
-	const auto cross = Vector3DTools<Real>::CrossProduct(velocity,acceleration);
-	auto denom = Vector3DTools<Real>::VectorMagnitudeSquared(cross);
+	const auto cross = Vector3Tools<Real>::CrossProduct(velocity,acceleration);
+	auto denom = Vector3Tools<Real>::GetLengthSquared(cross);
 
     if (denom >= Math<Real>::GetZeroTolerance())
     {
 		const auto jerk = GetThirdDerivative(t);
-		auto numer = Vector3DTools<Real>::DotProduct(cross,jerk);
+		auto numer = Vector3Tools<Real>::DotProduct(cross,jerk);
         return numer/denom;
     }
     else
@@ -167,10 +167,10 @@ Real Mathematics::Curve3<Real>
 
 template <typename Real>
 void Mathematics::Curve3<Real>
-	::SubdivideByTime(int numPoints, Vector3D<Real>*& points) const
+	::SubdivideByTime(int numPoints, Vector3<Real>*& points) const
 {
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
-    points = nullptr;  // NEW1<Vector3D<Real> >(numPoints);
+    points = nullptr;  // NEW1<Vector3<Real> >(numPoints);
 
 	const auto temp1 = mTMax - mTMin;
 	const auto temp2 = numPoints - 1;
@@ -185,10 +185,10 @@ void Mathematics::Curve3<Real>
 
 template <typename Real>
 void Mathematics::Curve3<Real>
-	::SubdivideByLength(int numPoints, Vector3D<Real>*& points) const
+	::SubdivideByLength(int numPoints, Vector3<Real>*& points) const
 {
     MATHEMATICS_ASSERTION_0(numPoints >= 2, "Subdivision requires at least two points\n");
-    points = nullptr;  // NEW1<Vector3D<Real> >(numPoints);
+    points = nullptr;  // NEW1<Vector3<Real> >(numPoints);
 
 	const auto temp = numPoints - 1;
 	auto delta = GetTotalLength()/(temp);
@@ -202,6 +202,6 @@ void Mathematics::Curve3<Real>
 }
 #include STSTEM_WARNING_POP
 
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
+#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_CURVE3_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_CURVE3_DETAIL_H

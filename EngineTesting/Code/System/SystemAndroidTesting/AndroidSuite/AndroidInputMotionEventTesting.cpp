@@ -37,7 +37,7 @@ void System::AndroidInputMotionEventTesting::AndroidInputMotionEventTest()
 {
     ASSERT_ENUM_EQUAL(AndroidMotionEventGetAction(&androidInputEvent), AndroidMotionEventAction::Down);
     ASSERT_ENUM_EQUAL(AndroidMotionEventGetFlags(&androidInputEvent), AndroidMotionEvent::WindowIsObscured);
-    ASSERT_ENUM_EQUAL(AndroidndroidMotionEventGetMetaState(&androidInputEvent), AndroidMeta::None);
+    ASSERT_ENUM_EQUAL(AndroidMotionEventGetMetaState(&androidInputEvent), AndroidMeta::None);
     ASSERT_ENUM_EQUAL(AndroidMotionEventGetButtonState(&androidInputEvent), AndroidMotionEventButton::Primary);
     ASSERT_ENUM_EQUAL(AndroidMotionEventGetEdgeFlags(&androidInputEvent), AndroidMotionEventEdge::None);
     ASSERT_EQUAL(AndroidMotionEventGetDownTime(&androidInputEvent), 0);

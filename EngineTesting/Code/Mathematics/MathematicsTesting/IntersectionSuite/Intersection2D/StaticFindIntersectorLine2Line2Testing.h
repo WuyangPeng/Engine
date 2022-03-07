@@ -24,7 +24,7 @@ namespace Mathematics
 		void LineTest(); 
 		void ExceptionTest(const StaticFindIntersectorLine2Line2<float>& intersector);
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -41,7 +41,7 @@ namespace Network
 		void NetworkOperatorExceptionTest();
 		void NullOperatorExceptionTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

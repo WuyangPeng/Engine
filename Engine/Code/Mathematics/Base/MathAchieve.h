@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 15:11)
+///	引擎版本：0.8.0.2 (2022/01/29 11:24)
 
 #ifndef MATHEMATICS_BASE_MATH_ACHIEVE_H
 #define MATHEMATICS_BASE_MATH_ACHIEVE_H
@@ -19,7 +19,7 @@
 template <typename Real>
 Real Mathematics::Math<Real>::GetExponent() noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    static const auto exponent = Log(sm_MaxReal);
+    static const auto exponent = Log(maxReal);
 
     return exponent;
 }
@@ -119,7 +119,7 @@ Real Mathematics::Math<Real>::ATan(Real value) noexcept
 template <typename Real>
 Real Mathematics::Math<Real>::ATan2(Real y, Real x) noexcept
 {
-    if (sm_Epsilon < FAbs(x) || sm_Epsilon < FAbs(y))
+    if (epsilon < FAbs(x) || epsilon < FAbs(y))
     {
         return atan2(y, x);
     }
@@ -177,9 +177,9 @@ Real Mathematics::Math<Real>::FMod(Real x, Real y) noexcept(g_Assert < 3 || g_Ma
 template <typename Real>
 Mathematics::NumericalValueSymbol Mathematics::Math<Real>::Sign(Real value) noexcept
 {
-    if (sm_Epsilon < value)
+    if (epsilon < value)
         return NumericalValueSymbol::Positive;
-    else if (value < -sm_Epsilon)
+    else if (value < -epsilon)
         return NumericalValueSymbol::Negative;
     else
         return NumericalValueSymbol::Zero;
@@ -280,11 +280,11 @@ Real Mathematics::Math<Real>::Saturate(Real value) noexcept
 }
 
 template <typename Real>
-bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real epsilon) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real zeroTolerance) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(GetValue(0) <= epsilon, "epsilon必须大于0！");
+    MATHEMATICS_ASSERTION_3(GetValue(0) <= zeroTolerance, "epsilon必须大于0！");
 
-    if (FAbs(lhs - rhs) <= epsilon)
+    if (FAbs(lhs - rhs) <= zeroTolerance)
         return true;
     else
         return false;
@@ -293,12 +293,12 @@ bool Mathematics::Math<Real>::Approximate(Real lhs, Real rhs, const Real epsilon
 template <typename Real>
 bool Mathematics::Math<Real>::FloatingPointEqual(Real lhs, Real rhs, int equalDigit) noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
-    MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::g_ExponentShifting, "equalDigit必须大于0！");
+    MATHEMATICS_ASSERTION_3(0 < equalDigit && equalDigit <= IntegerTraits<Real>::TraitsType::exponentShifting, "equalDigit必须大于0！");
 
     const FloatingPointAnalysis<Real> lhsAnalysis{ lhs };
     const FloatingPointAnalysis<Real> rhsAnalysis{ rhs };
 
-    const auto shifting = IntegerTraits<Real>::TraitsType::g_ExponentShifting - equalDigit;
+    const auto shifting = IntegerTraits<Real>::TraitsType::exponentShifting - equalDigit;
 
     return (lhsAnalysis.GetSymbolValue() == rhsAnalysis.GetSymbolValue()) &&
            (lhsAnalysis.GetExponent() == rhsAnalysis.GetExponent()) &&

@@ -21,7 +21,7 @@ namespace Mathematics
 		void FromUnsignedIntTest();
 		void NegativeTest();		
 	
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 	};
 }
 

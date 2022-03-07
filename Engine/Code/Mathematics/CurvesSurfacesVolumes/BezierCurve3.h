@@ -16,7 +16,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BezierCurve3 : public SingleCurve3<Real>
+	class  BezierCurve3 : public SingleCurve3<Real>
     {
     public:
         using Math = Math<Real>;
@@ -24,7 +24,7 @@ namespace Mathematics
 	public:
 		// Construction and destruction.  BezierCurve3 accepts responsibility for
 		// deleting the input arrays.
-		BezierCurve3 (int degree, Vector3D<Real>* ctrlPoint);
+		BezierCurve3 (int degree, Vector3<Real>* ctrlPoint);
 		  ~BezierCurve3 ();
 		
 		BezierCurve3(const BezierCurve3&) = default;
@@ -33,20 +33,20 @@ namespace Mathematics
 		BezierCurve3& operator=(BezierCurve3&&) = default;
 		
 		int GetDegree () const noexcept;
-		const Vector3D<Real>* GetControlPoints () const noexcept;
+		const Vector3<Real>* GetControlPoints () const noexcept;
 		
-		  Vector3D<Real> GetPosition (Real t) const override;
-		  Vector3D<Real> GetFirstDerivative (Real t) const override;
-		  Vector3D<Real> GetSecondDerivative (Real t) const override;
-		  Vector3D<Real> GetThirdDerivative (Real t) const override;
+		  Vector3<Real> GetPosition (Real t) const override;
+		  Vector3<Real> GetFirstDerivative (Real t) const override;
+		  Vector3<Real> GetSecondDerivative (Real t) const override;
+		  Vector3<Real> GetThirdDerivative (Real t) const override;
 
 	protected:
 		int mDegree;
 		int mNumCtrlPoints;
-		Vector3D<Real>* mCtrlPoint;
-		Vector3D<Real>* mDer1CtrlPoint;
-		Vector3D<Real>* mDer2CtrlPoint;
-		Vector3D<Real>* mDer3CtrlPoint;
+		Vector3<Real>* mCtrlPoint;
+		Vector3<Real>* mDer1CtrlPoint;
+		Vector3<Real>* mDer2CtrlPoint;
+		Vector3<Real>* mDer3CtrlPoint;
 		Real** mChoose;
 	};
 	

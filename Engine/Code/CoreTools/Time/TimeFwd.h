@@ -21,6 +21,8 @@ namespace CoreTools
     class Month;
     class Day;
     class Date;
+
+    class Timer;
 }
 
 #endif  // CORE_TOOLS_TIME_FWD_H

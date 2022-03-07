@@ -9,8 +9,8 @@
 
 #include "Physics/PhysicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector3D.h" 
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector3.h" 
 
 namespace Physics
 {
@@ -59,10 +59,10 @@ namespace Physics
 		TVectorPtr mVTmp, mDVTmp1, mDVTmp2, mDVTmp3, mDVTmp4;
 	};
 
-	using ParticleSystem2f = ParticleSystemManager<float,Mathematics::FloatVector2D>;
-	using ParticleSystem2d = ParticleSystemManager<double,Mathematics::DoubleVector2D>;
-	using ParticleSystem3f = ParticleSystemManager<float,Mathematics::FloatVector3D>;
-	using ParticleSystem3d = ParticleSystemManager<double,Mathematics::DoubleVector3D>;
+	using ParticleSystem2f = ParticleSystemManager<float,Mathematics::Vector2F>;
+	using ParticleSystem2d = ParticleSystemManager<double,Mathematics::Vector2D>;
+	using ParticleSystem3f = ParticleSystemManager<float,Mathematics::Vector3F>;
+	using ParticleSystem3d = ParticleSystemManager<double,Mathematics::Vector3D>;
 }
 
 #endif // PHYSICS_PARTICLE_SYSTEM_PARTICLE_SYSTEM_MANAGER_H

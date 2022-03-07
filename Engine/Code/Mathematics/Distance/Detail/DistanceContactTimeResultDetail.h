@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 18:52)
+///	引擎版本：0.8.0.2 (2022/02/20 15:54)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CONTACT_TIME_RESULT_DETAIL_H
@@ -15,12 +15,14 @@
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26434)
+
 template <typename Real, typename Vector>
 Mathematics::DistanceContactTimeResult<Real, Vector>::DistanceContactTimeResult(Real distance, Real contactTime) noexcept
-    : ParentType{ distance }, m_ContactTime{ contactTime }
+    : ParentType{ distance }, contactTime{ contactTime }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
+
 #include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
@@ -39,19 +41,19 @@ Real Mathematics::DistanceContactTimeResult<Real, Vector>::GetContactTime() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_ContactTime;
+    return contactTime;
 }
 
 template <typename Real, typename Vector>
-void Mathematics::DistanceContactTimeResult<Real, Vector>::SetContactTime(Real contactTime) noexcept
+void Mathematics::DistanceContactTimeResult<Real, Vector>::SetContactTime(Real newContactTime) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_ContactTime = contactTime;
+    contactTime = newContactTime;
 }
 
 template <typename Real, typename Vector>
-typename Mathematics::DistanceContactTimeResult<Real, Vector>::ImplTypePtr Mathematics::DistanceContactTimeResult<Real, Vector>::Clone() const
+typename Mathematics::DistanceContactTimeResult<Real, Vector>::ImplTypeSharedPtr Mathematics::DistanceContactTimeResult<Real, Vector>::Clone() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 

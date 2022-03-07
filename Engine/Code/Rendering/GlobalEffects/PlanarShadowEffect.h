@@ -51,7 +51,7 @@ namespace Rendering
         const Mathematics::Float4& GetShadowColor(int i) const noexcept;
           ObjectInterfaceSharedPtr CloneObject() const override;
     protected:
-        bool GetProjectionMatrix(int i, Mathematics::FloatMatrix& projection);
+        bool GetProjectionMatrix(int i, Mathematics::MatrixF& projection);
 
         int mNumPlanes;
         TrianglesMeshSharedPtr* mPlanes;

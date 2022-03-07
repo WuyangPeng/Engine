@@ -65,10 +65,10 @@ void CoreTools::RowTesting::RowTest()
         ASSERT_EQUAL(row.GetRowNumber(), index);
 
         row.SetHeight(2.0);
-        ASSERT_APPROXIMATE(row.GetHeight(), 2.0, Mathematics::DoubleMath::sm_Epsilon);
+        ASSERT_APPROXIMATE(row.GetHeight(), 2.0, Mathematics::MathD::epsilon);
 
         row.SetDescent(1.0);
-        ASSERT_APPROXIMATE(row.GetDescent(), 1.0, Mathematics::DoubleMath::sm_Epsilon);
+        ASSERT_APPROXIMATE(row.GetDescent(), 1.0, Mathematics::MathD::epsilon);
 
         row.SetHidden(true);
         ASSERT_TRUE(row.IsHidden());

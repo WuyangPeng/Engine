@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:05)
+///	引擎版本：0.8.0.2 (2022/02/13 14:35)
 
 #include "Mathematics/MathematicsExport.h"
 
@@ -18,7 +18,7 @@
 #include "Mathematics/NumericalAnalysis/EquationResultConstIteratorDetail.h"
 
 Mathematics::EquationImpl::EquationImpl(double epsilon) noexcept
-    : m_Result{}, m_Epsilon{ epsilon }
+    : equationResult{}, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -29,68 +29,68 @@ double Mathematics::EquationImpl::GetEpsilon() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Epsilon;
+    return epsilon;
 }
 
 bool Mathematics::EquationImpl::IsRealResult() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.IsRealResult();
+    return equationResult.IsRealResult();
 }
 
 int Mathematics::EquationImpl::GetRealResultCount() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetRealResultCount();
+    return equationResult.GetRealResultCount();
 }
 
 int Mathematics::EquationImpl::GetImaginaryResultCount() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetImaginaryResultCount();
+    return equationResult.GetImaginaryResultCount();
 }
 
-const Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl::GetRealBegin() const noexcept
+Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl::GetRealBegin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetRealBegin();
+    return equationResult.GetRealBegin();
 }
 
-const Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl::GetRealEnd() const noexcept
+Mathematics::EquationImpl::RealConstIterator Mathematics::EquationImpl::GetRealEnd() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetRealEnd();
+    return equationResult.GetRealEnd();
 }
 
-const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl::GetImaginaryBegin() const noexcept
+Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl::GetImaginaryBegin() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetImaginaryBegin();
+    return equationResult.GetImaginaryBegin();
 }
 
-const Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl::GetImaginaryEnd() const noexcept
+Mathematics::EquationImpl::ImaginaryConstIterator Mathematics::EquationImpl::GetImaginaryEnd() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Result.GetImaginaryEnd();
+    return equationResult.GetImaginaryEnd();
 }
 
 // protected
 void Mathematics::EquationImpl::SetRealResult(double result)
 {
-    m_Result.AddRealResult(result, m_Epsilon);
+    equationResult.AddRealResult(result, epsilon);
 }
 
 // protected
 void Mathematics::EquationImpl::SetImaginaryResult(const Imaginary& result)
 {
-    m_Result.AddImaginaryResult(result, m_Epsilon);
+    equationResult.AddImaginaryResult(result, epsilon);
 }
 
 // protected
@@ -113,61 +113,57 @@ void Mathematics::EquationImpl::Calculate()
 // private
 double Mathematics::EquationImpl::NewtonMethod(double solution) const
 {
-    auto amendSolution = solution;
-
     // 没有使用无限循环，避免无法退出！
-    for (auto i = 0; i < sm_MaxTime; ++i)
+    for (auto i = 0; i < maxTime; ++i)
     {
-        const auto validateValue = Substitution(amendSolution);
-        const auto derivative = SubstitutionTangent(amendSolution);
+        const auto validateValue = Substitution(solution);
+        const auto derivative = SubstitutionTangent(solution);
 
-        if (DoubleMath::FAbs(derivative) <= m_Epsilon)
+        if (MathD::FAbs(derivative) <= epsilon)
         {
             break;
         }
 
         const auto adjustedValue = validateValue / derivative;
 
-        amendSolution -= adjustedValue;
+        solution -= adjustedValue;
 
-        if (DoubleMath::FAbs(validateValue) <= m_Epsilon || DoubleMath::FAbs(derivative) <= m_Epsilon || DoubleMath::FAbs(adjustedValue) <= m_Epsilon)
+        if (MathD::FAbs(validateValue) <= epsilon || MathD::FAbs(derivative) <= epsilon || MathD::FAbs(adjustedValue) <= epsilon)
         {
             break;
         }
     }
 
-    return amendSolution;
+    return solution;
 }
 
 // private
-const Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl::NewtonMethod(const Imaginary& solution) const
+Mathematics::EquationImpl::Imaginary Mathematics::EquationImpl::NewtonMethod(Imaginary solution) const
 {
-    auto amendSolution = solution;
-
     // 没有使用无限循环，避免无法退出！
-    for (auto i = 0; i < sm_MaxTime; ++i)
+    for (auto i = 0; i < maxTime; ++i)
     {
-        const auto validateValue = Substitution(amendSolution);
-        const auto derivative = SubstitutionTangent(amendSolution);
+        const auto validateValue = Substitution(solution);
+        const auto derivative = SubstitutionTangent(solution);
         const auto adjustedValue = validateValue / derivative;
 
-        amendSolution -= adjustedValue;
+        solution -= adjustedValue;
 
-        if ((DoubleMath::FAbs(validateValue.real()) <= m_Epsilon && DoubleMath::FAbs(validateValue.imag()) <= m_Epsilon) ||
-            (DoubleMath::FAbs(derivative.real()) <= m_Epsilon && DoubleMath::FAbs(derivative.imag()) <= m_Epsilon) ||
-            (DoubleMath::FAbs(adjustedValue.real()) <= m_Epsilon && DoubleMath::FAbs(adjustedValue.imag()) <= m_Epsilon))
+        if ((MathD::FAbs(validateValue.real()) <= epsilon && MathD::FAbs(validateValue.imag()) <= epsilon) ||
+            (MathD::FAbs(derivative.real()) <= epsilon && MathD::FAbs(derivative.imag()) <= epsilon) ||
+            (MathD::FAbs(adjustedValue.real()) <= epsilon && MathD::FAbs(adjustedValue.imag()) <= epsilon))
         {
             break;
         }
     }
 
-    return amendSolution;
+    return solution;
 }
 
 // private
-const Mathematics::EquationImpl::RealVector Mathematics::EquationImpl::NewRealResult() const
+Mathematics::EquationImpl::RealContainer Mathematics::EquationImpl::NewRealResult() const
 {
-    RealVector newRealSolve;
+    RealContainer newRealSolve{};
 
     for (auto iter = GetRealBegin(); iter != GetRealEnd(); ++iter)
     {
@@ -180,9 +176,9 @@ const Mathematics::EquationImpl::RealVector Mathematics::EquationImpl::NewRealRe
 }
 
 // private
-const Mathematics::EquationImpl::ImaginaryVector Mathematics::EquationImpl::NewImaginaryResult() const
+Mathematics::EquationImpl::ImaginaryContainer Mathematics::EquationImpl::NewImaginaryResult() const
 {
-    ImaginaryVector newImaginarySolve;
+    ImaginaryContainer newImaginarySolve{};
 
     for (auto iter = GetImaginaryBegin(); iter != GetImaginaryEnd(); ++iter)
     {
@@ -197,14 +193,14 @@ const Mathematics::EquationImpl::ImaginaryVector Mathematics::EquationImpl::NewI
 // private
 void Mathematics::EquationImpl::CleanSolution() noexcept
 {
-    m_Result.CleanSolution();
+    equationResult.CleanSolution();
 }
 
 // private
 void Mathematics::EquationImpl::Validate()
 {
-    auto newRealSolve = NewRealResult();
-    auto newImaginarySolve = NewImaginaryResult();
+    const auto newRealSolve = NewRealResult();
+    const auto newImaginarySolve = NewImaginaryResult();
 
     CleanSolution();
 
@@ -235,7 +231,7 @@ void Mathematics::EquationImpl::AddImaginaryResult(const EquationImpl& equation,
 }
 
 // private
-void Mathematics::EquationImpl::DisplaceRealResult(const RealVector& result)
+void Mathematics::EquationImpl::DisplaceRealResult(const RealContainer& result)
 {
     for (const auto& value : result)
     {
@@ -244,7 +240,7 @@ void Mathematics::EquationImpl::DisplaceRealResult(const RealVector& result)
 }
 
 // private
-void Mathematics::EquationImpl::DisplaceImaginaryResult(const ImaginaryVector& result)
+void Mathematics::EquationImpl::DisplaceImaginaryResult(const ImaginaryContainer& result)
 {
     for (const auto& value : result)
     {
@@ -254,5 +250,5 @@ void Mathematics::EquationImpl::DisplaceImaginaryResult(const ImaginaryVector& r
 
 void Mathematics::EquationImpl::SortResult()
 {
-    m_Result.SortResult();
+    equationResult.SortResult();
 }

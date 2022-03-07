@@ -6,16 +6,16 @@
 
 #include "DistanceRay3Ray3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "Mathematics/Algebra/Vector4DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistanceLine3Line3Detail.h"
 #include "Mathematics/Distance/Distance3D/DistanceRay3Ray3Detail.h"
 
 #include <random>
 
 using std::swap;
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistanceRay3Ray3Testing)
 
 void Mathematics::DistanceRay3Ray3Testing ::MainTest()
@@ -36,19 +36,19 @@ void Mathematics::DistanceRay3Ray3Testing ::BaseTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        FloatVector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        FloatVector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        FloatVector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        FloatDistanceRay3Ray3 distance(FloatRay3(lhsOrigin, lhsDirection), FloatRay3(rhsOrigin, rhsDirection));
+        DistanceRay3Ray3F distance(Ray3F(lhsOrigin, lhsDirection), Ray3F(rhsOrigin, rhsDirection));
 
         ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-3f, 1e-8f);
         ASSERT_EQUAL(distance.GetMaximumIterations(), 8);
-        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::GetZeroTolerance(), 1e-8f);
+        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::GetZeroTolerance(), 1e-8f);
 
         distance.SetDifferenceStep(1e-4f);
         ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-4f, 1e-8f);
@@ -56,14 +56,14 @@ void Mathematics::DistanceRay3Ray3Testing ::BaseTest()
         distance.SetMaximumIterations(10);
         ASSERT_EQUAL(distance.GetMaximumIterations(), 10);
 
-        distance.SetZeroThreshold(FloatMath::sm_Epsilon);
-        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::sm_Epsilon, 1e-8f);
+        distance.SetZeroThreshold(MathF::epsilon);
+        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::epsilon, 1e-8f);
 
-        typedef bool (*ApproximateFunction)(const FloatRay3& lhs, const FloatRay3& rhs, const float epsilon);
+        typedef bool (*ApproximateFunction)(const Ray3F& lhs, const Ray3F& rhs, const float epsilon);
 
         ApproximateFunction approximate = Approximate<float>;
-        ASSERT_APPROXIMATE_USE_FUNCTION(approximate, distance.GetLhsRay(), FloatRay3(lhsOrigin, lhsDirection), 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(approximate, distance.GetRhsRay(), FloatRay3(rhsOrigin, rhsDirection), 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(approximate, distance.GetLhsRay(), Ray3F(lhsOrigin, lhsDirection), 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(approximate, distance.GetRhsRay(), Ray3F(rhsOrigin, rhsDirection), 1e-8f);
     }
 }
 
@@ -76,258 +76,258 @@ void Mathematics::DistanceRay3Ray3Testing ::StaticTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        DoubleVector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        DoubleDistanceRay3Ray3 distance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, rhsDirection));
+        DistanceRay3Ray3D distance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, rhsDirection));
 
-        DoubleDistanceResult3 squaredResult = distance.GetSquared();
-        DoubleDistanceResult3 result = distance.Get();
+        DistanceResult3D squaredResult = distance.GetSquared();
+        DistanceResult3D result = distance.Get();
 
-        DoubleDistanceLine3Line3 lineDistance(DoubleLine3(lhsOrigin, lhsDirection), DoubleLine3(rhsOrigin, rhsDirection));
-        DoubleDistanceResult3 lineSquaredResult = lineDistance.GetSquared();
+        DistanceLine3Line3D lineDistance(Line3D(lhsOrigin, lhsDirection), Line3D(rhsOrigin, rhsDirection));
+        DistanceResult3D lineSquaredResult = lineDistance.GetSquared();
 
-        DoubleVector3D lhsDifference = lineSquaredResult.GetLhsClosestPoint() - lhsOrigin;
+        Vector3D lhsDifference = lineSquaredResult.GetLhsClosestPoint() - lhsOrigin;
         lhsDifference.Normalize();
-        DoubleVector3D rhsDifference = lineSquaredResult.GetRhsClosestPoint() - rhsOrigin;
+        Vector3D rhsDifference = lineSquaredResult.GetRhsClosestPoint() - rhsOrigin;
         rhsDifference.Normalize();
 
-        if (DoubleVector3DTools::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-            DoubleVector3DTools::Approximate(rhsDifference, rhsDirection, 1e-8))
+        if (Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
+            Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
             // 最小值为两个射线内部点。
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             lhsDifference2.Normalize();
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             rhsDifference2.Normalize();
 
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, lhsDifference2, lhsDirection, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, rhsDifference2, rhsDirection, 1e-8);
-            ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector3DTools::DistanceSquared(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, lhsDifference2, lhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, rhsDifference2, rhsDirection, 1e-8);
+            ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector3ToolsD::DistanceSquared(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-8);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
 
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::Distance(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-10);
+            ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::Distance(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
 
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
         }
-        else if (DoubleVector3DTools::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-                 DoubleVector3DTools::Approximate(rhsDifference, -rhsDirection, 1e-8))
+        else if (Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
+                 Vector3ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             ASSERT_TRUE(rhsDifference2.IsZero());
 
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             if (lhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - rhsOrigin),
+                                   Vector3ToolsD::GetLengthSquared(lhsOrigin - rhsOrigin),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(lhsOrigin - rhsOrigin), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(lhsOrigin - rhsOrigin), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin + distance.GetZeroThreshold() * lhsDirection - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin + distance.GetZeroThreshold() * lhsDirection - rhsOrigin));
             }
             else
             {
                 // 最小值为第二个射线的原点到第一个射线
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - rhsOrigin),
+                                   Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - rhsOrigin),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetLhsClosestPoint() - rhsOrigin), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetLhsClosestPoint() - rhsOrigin), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - rhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - rhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - rhsOrigin));
             }
         }
-        else if (DoubleVector3DTools::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
-                 DoubleVector3DTools::Approximate(rhsDifference, rhsDirection, 1e-8))
+        else if (Vector3ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
+                 Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             ASSERT_TRUE(lhsDifference2.IsZero());
 
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             if (rhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - rhsOrigin),
+                                   Vector3ToolsD::GetLengthSquared(lhsOrigin - rhsOrigin),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(lhsOrigin - rhsOrigin), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(lhsOrigin - rhsOrigin), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin + distance.GetZeroThreshold() * rhsDirection - lhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(rhsOrigin + distance.GetZeroThreshold() * rhsDirection - lhsOrigin));
             }
             else
             {
                 // 最小值为第一个射线的原点到第二个射线
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - lhsOrigin),
+                                   Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - lhsOrigin),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetRhsClosestPoint() - lhsOrigin), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetRhsClosestPoint() - lhsOrigin), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - rhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - lhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - lhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - lhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - lhsOrigin));
             }
         }
         else
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, lhsDifference, -lhsDirection, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, rhsDifference, -rhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, lhsDifference, -lhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, rhsDifference, -rhsDirection, 1e-8);
 
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                               DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()),
+                               Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()),
                                1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()), 1e-10);
+            ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
 
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - rhsOrigin));
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - lhsOrigin) + 1e-8);
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - rhsOrigin) + 1e-8);
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin - rhsOrigin));
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - lhsOrigin) + 1e-8);
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - rhsOrigin) + 1e-8);
 
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - lhsOrigin;
             if (!lhsDifference2.IsZero())
             {
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - rhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - rhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - rhsOrigin));
             }
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - rhsOrigin;
             if (!rhsDifference2.IsZero())
             {
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - lhsOrigin));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - lhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - lhsOrigin));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - lhsOrigin));
             }
         }
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-8);
 
-        DoubleDistanceRay3Ray3 firstEqualDistance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(lhsOrigin + lhsDirection, lhsDirection));
-
-        squaredResult = firstEqualDistance.GetSquared();
-        result = firstEqualDistance.Get();
-
-        ASSERT_APPROXIMATE(squaredResult.GetDistance(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-7);
-        ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-
-        DoubleDistanceRay3Ray3 secondEqualDistance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(lhsOrigin + lhsDirection, -lhsDirection));
+        DistanceRay3Ray3D firstEqualDistance(Ray3D(lhsOrigin, lhsDirection), Ray3D(lhsOrigin + lhsDirection, lhsDirection));
 
         squaredResult = firstEqualDistance.GetSquared();
         result = firstEqualDistance.Get();
 
         ASSERT_APPROXIMATE(squaredResult.GetDistance(), 0.0, 1e-10);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
         ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-7);
         ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
 
-        DoubleDistanceRay3Ray3 thirdEqualDistance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(lhsOrigin - lhsDirection, -lhsDirection));
+        DistanceRay3Ray3D secondEqualDistance(Ray3D(lhsOrigin, lhsDirection), Ray3D(lhsOrigin + lhsDirection, -lhsDirection));
+
+        squaredResult = firstEqualDistance.GetSquared();
+        result = firstEqualDistance.Get();
+
+        ASSERT_APPROXIMATE(squaredResult.GetDistance(), 0.0, 1e-10);
+        ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE(result.GetDistance(), 0.0, 1e-7);
+        ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), lhsOrigin + lhsDirection, 1e-8);
+
+        DistanceRay3Ray3D thirdEqualDistance(Ray3D(lhsOrigin, lhsDirection), Ray3D(lhsOrigin - lhsDirection, -lhsDirection));
 
         squaredResult = thirdEqualDistance.GetSquared();
         result = thirdEqualDistance.Get();
 
-        ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector3DTools::VectorMagnitudeSquared(lhsDirection), 1e-10);
+        ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector3ToolsD::GetLengthSquared(lhsDirection), 1e-10);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin - lhsDirection, 1e-8);
-        ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(lhsDirection), 1e-10);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), lhsOrigin - lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(lhsDirection), 1e-10);
         ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), lhsOrigin - lhsDirection, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), lhsOrigin - lhsDirection, 1e-8);
 
-        DoubleDistanceRay3Ray3 firstParallelDistance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, lhsDirection));
+        DistanceRay3Ray3D firstParallelDistance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, lhsDirection));
 
         squaredResult = firstParallelDistance.GetSquared();
         result = firstParallelDistance.Get();
-        double lhsDistanceSquared = DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - squaredResult.GetRhsClosestPoint());
-        double rhsDistanceSquared = DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin - squaredResult.GetLhsClosestPoint());
+        double lhsDistanceSquared = Vector3ToolsD::GetLengthSquared(lhsOrigin - squaredResult.GetRhsClosestPoint());
+        double rhsDistanceSquared = Vector3ToolsD::GetLengthSquared(rhsOrigin - squaredResult.GetLhsClosestPoint());
 
         if (lhsDistanceSquared < rhsDistanceSquared)
         {
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), lhsDistanceSquared, 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleMath::Sqrt(lhsDistanceSquared), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(lhsDistanceSquared), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
         }
         else
         {
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), rhsDistanceSquared, 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleMath::Sqrt(rhsDistanceSquared), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(rhsDistanceSquared), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
         }
 
-        DoubleDistanceRay3Ray3 secondParallelDistance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, -lhsDirection));
+        DistanceRay3Ray3D secondParallelDistance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, -lhsDirection));
 
         squaredResult = secondParallelDistance.GetSquared();
         result = secondParallelDistance.Get();
-        lhsDistanceSquared = DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin - squaredResult.GetRhsClosestPoint());
-        rhsDistanceSquared = DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin - squaredResult.GetLhsClosestPoint());
-        double originDistanceSquared = DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin - lhsOrigin);
+        lhsDistanceSquared = Vector3ToolsD::GetLengthSquared(lhsOrigin - squaredResult.GetRhsClosestPoint());
+        rhsDistanceSquared = Vector3ToolsD::GetLengthSquared(rhsOrigin - squaredResult.GetLhsClosestPoint());
+        double originDistanceSquared = Vector3ToolsD::GetLengthSquared(rhsOrigin - lhsOrigin);
 
         if (originDistanceSquared <= rhsDistanceSquared && originDistanceSquared <= lhsDistanceSquared)
         {
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), originDistanceSquared, 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleMath::Sqrt(originDistanceSquared), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(originDistanceSquared), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
         }
         else if (lhsDistanceSquared <= originDistanceSquared && lhsDistanceSquared <= rhsDistanceSquared)
         {
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), lhsDistanceSquared, 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleMath::Sqrt(lhsDistanceSquared), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(lhsDistanceSquared), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin, 1e-8);
         }
         else
         {
             ASSERT_APPROXIMATE(squaredResult.GetDistance(), rhsDistanceSquared, 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleMath::Sqrt(rhsDistanceSquared), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE(result.GetDistance(), MathD::Sqrt(rhsDistanceSquared), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), rhsOrigin, 1e-8);
         }
     }
 }
@@ -341,159 +341,159 @@ void Mathematics::DistanceRay3Ray3Testing ::DynamicTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        DoubleVector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        DoubleDistanceRay3Ray3 distance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, rhsDirection));
+        DistanceRay3Ray3D distance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, rhsDirection));
 
-        double t = DoubleMath::FAbs(randomDistribution(generator));
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double t = MathD::FAbs(randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
-        DoubleDistanceResult3 result = distance.Get(t, lhsVelocity, rhsVelocity);
+        DistanceResult3D squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
+        DistanceResult3D result = distance.Get(t, lhsVelocity, rhsVelocity);
 
-        DoubleDistanceLine3Line3 lineDistance(DoubleLine3(lhsOrigin, lhsDirection), DoubleLine3(rhsOrigin, rhsDirection));
-        DoubleDistanceResult3 lineSquaredResult = lineDistance.GetSquared(t, lhsVelocity, rhsVelocity);
+        DistanceLine3Line3D lineDistance(Line3D(lhsOrigin, lhsDirection), Line3D(rhsOrigin, rhsDirection));
+        DistanceResult3D lineSquaredResult = lineDistance.GetSquared(t, lhsVelocity, rhsVelocity);
 
-        DoubleVector3D lhsDifference = lineSquaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+        Vector3D lhsDifference = lineSquaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
         lhsDifference.Normalize();
-        DoubleVector3D rhsDifference = lineSquaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+        Vector3D rhsDifference = lineSquaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
         rhsDifference.Normalize();
 
-        if (DoubleVector3DTools::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-            DoubleVector3DTools::Approximate(rhsDifference, rhsDirection, 1e-8))
+        if (Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
+            Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
             // 最小值为两个射线内部点。
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             lhsDifference2.Normalize();
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             rhsDifference2.Normalize();
 
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, lhsDifference2, lhsDirection, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, rhsDifference2, rhsDirection, 1e-8);
-            ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector3DTools::DistanceSquared(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-10);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, lhsDifference2, lhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, rhsDifference2, rhsDirection, 1e-8);
+            ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector3ToolsD::DistanceSquared(squaredResult.GetLhsClosestPoint(), squaredResult.GetRhsClosestPoint()), 1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
 
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint()), 1e-10);
+            ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::Distance(result.GetLhsClosestPoint(), result.GetRhsClosestPoint()), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
 
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetRhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetRhsClosestPoint(), squaredResult.GetRhsClosestPoint(), 1e-8);
         }
-        else if (DoubleVector3DTools::Approximate(lhsDifference, lhsDirection, 1e-8) &&
-                 DoubleVector3DTools::Approximate(rhsDifference, -rhsDirection, 1e-8))
+        else if (Vector3ToolsD::Approximate(lhsDifference, lhsDirection, 1e-8) &&
+                 Vector3ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-8))
         {
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             ASSERT_TRUE(rhsDifference2.IsZero());
 
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             if (lhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin + t * rhsVelocity - (lhsOrigin + t * lhsVelocity)),
+                                   Vector3ToolsD::GetLengthSquared(rhsOrigin + t * rhsVelocity - (lhsOrigin + t * lhsVelocity)),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(rhsOrigin + t * rhsVelocity - (lhsOrigin + t * lhsVelocity)), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(rhsOrigin + t * rhsVelocity - (lhsOrigin + t * lhsVelocity)), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin + t * rhsVelocity, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin + t * rhsVelocity, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin + t * lhsVelocity + distance.GetZeroThreshold() * lhsDirection - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin + t * lhsVelocity + distance.GetZeroThreshold() * lhsDirection - (rhsOrigin + t * rhsVelocity)));
             }
             else
             {
                 // 最小值为第二个射线的原点到第一个射线
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)),
+                                   Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), (rhsOrigin + t * rhsVelocity), 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), (rhsOrigin + t * rhsVelocity), 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
             }
         }
-        else if (DoubleVector3DTools::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
-                 DoubleVector3DTools::Approximate(rhsDifference, rhsDirection, 1e-8))
+        else if (Vector3ToolsD::Approximate(lhsDifference, -lhsDirection, 1e-8) &&
+                 Vector3ToolsD::Approximate(rhsDifference, rhsDirection, 1e-8))
         {
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             ASSERT_TRUE(lhsDifference2.IsZero());
 
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             if (rhsDifference2.IsZero())
             {
                 // 最小值为两个射线的原点距离。
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared((lhsOrigin + t * lhsVelocity) - (rhsOrigin + t * rhsVelocity)),
+                                   Vector3ToolsD::GetLengthSquared((lhsOrigin + t * lhsVelocity) - (rhsOrigin + t * rhsVelocity)),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude((lhsOrigin + t * lhsVelocity) - (rhsOrigin + t * rhsVelocity)), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength((lhsOrigin + t * lhsVelocity) - (rhsOrigin + t * rhsVelocity)), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin + t * rhsVelocity, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), rhsOrigin + t * rhsVelocity, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(rhsOrigin + t * rhsVelocity + distance.GetZeroThreshold() * rhsDirection - (lhsOrigin + t * lhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(rhsOrigin + t * rhsVelocity + distance.GetZeroThreshold() * rhsDirection - (lhsOrigin + t * lhsVelocity)));
             }
             else
             {
                 // 最小值为第一个射线的原点到第二个射线
                 ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                                   DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)),
+                                   Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)),
                                    1e-10);
                 ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)), 1e-10);
+                ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)), 1e-10);
                 ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-                ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
+                ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), lhsOrigin + t * lhsVelocity, 1e-8);
 
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
             }
         }
         else
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, lhsDifference, -lhsDirection, 1e-8);
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, rhsDifference, -rhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, lhsDifference, -lhsDirection, 1e-8);
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, rhsDifference, -rhsDirection, 1e-8);
 
             ASSERT_APPROXIMATE(squaredResult.GetDistance(),
-                               DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()),
+                               Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()),
                                1e-10);
             ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-            ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()), 1e-10);
+            ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(squaredResult.GetRhsClosestPoint() - squaredResult.GetLhsClosestPoint()), 1e-10);
             ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
 
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)) + 1e-8);
-            ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)) + 1e-8);
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(lhsOrigin + t * lhsVelocity - (rhsOrigin + t * rhsVelocity)));
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - (lhsOrigin + t * lhsVelocity)) + 1e-8);
+            ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - (rhsOrigin + t * rhsVelocity)) + 1e-8);
 
-            DoubleVector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
+            Vector3D lhsDifference2 = squaredResult.GetLhsClosestPoint() - (lhsOrigin + t * lhsVelocity);
             if (!lhsDifference2.IsZero())
             {
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() + 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetLhsClosestPoint() - 0.1 * lhsDirection - (rhsOrigin + t * rhsVelocity)));
             }
-            DoubleVector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
+            Vector3D rhsDifference2 = squaredResult.GetRhsClosestPoint() - (rhsOrigin + t * rhsVelocity);
             if (!rhsDifference2.IsZero())
             {
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
-                ASSERT_TRUE(squaredResult.GetDistance() <= DoubleVector3DTools::VectorMagnitudeSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() + 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
+                ASSERT_TRUE(squaredResult.GetDistance() <= Vector3ToolsD::GetLengthSquared(squaredResult.GetRhsClosestPoint() - 0.1 * rhsDirection - (lhsOrigin + t * lhsVelocity)));
             }
         }
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), result.GetLhsClosestPoint(), 1e-8);
     }
 }
 
@@ -506,24 +506,24 @@ void Mathematics::DistanceRay3Ray3Testing ::DerivativeTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        DoubleVector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        DoubleDistanceRay3Ray3 distance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, rhsDirection));
+        DistanceRay3Ray3D distance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, rhsDirection));
 
-        double t = DoubleMath::FAbs(randomDistribution(generator));
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double t = MathD::FAbs(randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        DoubleDistanceResult3 funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+        DistanceResult3D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+        DistanceResult3D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         double derivativeApproximation =
             0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
@@ -533,7 +533,7 @@ void Mathematics::DistanceRay3Ray3Testing ::DerivativeTest()
 
         double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
-        DoubleDistanceResult3 distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
+        DistanceResult3D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
@@ -547,44 +547,44 @@ void Mathematics::DistanceRay3Ray3Testing ::IntervalTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsDirection.Normalize();
 
-        DoubleVector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsOrigin(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsDirection(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsDirection.Normalize();
 
-        double tMin = DoubleMath::FAbs(randomDistribution(generator));
-        double tMax = DoubleMath::FAbs(randomDistribution(generator));
+        double tMin = MathD::FAbs(randomDistribution(generator));
+        double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
             swap(tMin, tMax);
         }
 
-        DoubleDistanceRay3Ray3 distance(DoubleRay3(lhsOrigin, lhsDirection), DoubleRay3(rhsOrigin, rhsDirection));
+        DistanceRay3Ray3D distance(Ray3D(lhsOrigin, lhsDirection), Ray3D(rhsOrigin, rhsDirection));
         distance.SetMaximumIterations(20);
         distance.SetZeroThreshold(1e-6);
 
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
-        DoubleDistanceResult3 result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
+        DistanceResult3D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
+        DistanceResult3D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(DoubleMath::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-3);
+        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-3);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(),
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
                                         result.GetLhsClosestPoint(), 1e-1);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(),
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
                                         result.GetRhsClosestPoint(), 1e-1);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {
-            DoubleDistanceResult3 tResult = distance.Get(t, lhsVelocity, rhsVelocity);
-            DoubleDistanceResult3 tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
+            DistanceResult3D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
+            DistanceResult3D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
             ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance() + 1e-3);
             ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());

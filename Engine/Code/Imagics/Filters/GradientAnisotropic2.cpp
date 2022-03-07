@@ -72,22 +72,22 @@ void Imagics::GradientAnisotropic2 ::OnUpdate(int x, int y)
     // estimate for C(x+1,y)
   const  float uyEstP = 0.5f*(uyCenZ + uyCenP);
     gradMagSqr = uxCenZSqr + uyEstP*uyEstP;
-    float cxp = Mathematics::FloatMath::Exp(mMHalfParam*gradMagSqr);
+    float cxp = Mathematics::MathF::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x-1,y)
  const   float uyEstM = 0.5f*(uyCenZ + uyCenM);
     gradMagSqr = uxCenZSqr + uyEstM*uyEstM;
-    float cxm = Mathematics::FloatMath::Exp(mMHalfParam*gradMagSqr);
+    float cxm = Mathematics::MathF::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x,y+1)
  const   float uxEstP = 0.5f*(uxCenZ + uxCenP);
     gradMagSqr = uyCenZSqr + uxEstP*uxEstP;
-    float cyp = Mathematics::FloatMath::Exp(mMHalfParam*gradMagSqr);
+    float cyp = Mathematics::MathF::Exp(mMHalfParam*gradMagSqr);
 
     // estimate for C(x,y-1)
   const  float uxEstM = 0.5f*(uxCenZ + uxCenM);
     gradMagSqr = uyCenZSqr + uxEstM*uxEstM;
-    float cym = Mathematics::FloatMath::Exp(mMHalfParam*gradMagSqr);
+    float cym = Mathematics::MathF::Exp(mMHalfParam*gradMagSqr);
 
     mDst[y][x] = mUzz + mTimeStep*(cxp*uxFwd - cxm*uxBwd + cyp*uyFwd - cym*uyBwd);
 }

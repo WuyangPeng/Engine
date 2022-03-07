@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 11:09)
+///	引擎版本：0.8.0.2 (2022/02/17 11:36)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_ACHIEVE_H
@@ -23,21 +23,23 @@
 
 template <typename Real>
 Mathematics::Matrix3Tools<Real>::Matrix3Tools(const Matrix3& matrix) noexcept
-    : m_Matrix{ matrix }
+    : matrix{ matrix }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Matrix3Tools<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::Matrix3Tools<Real>::SingularValue Mathematics::Matrix3Tools<Real>::SingularValueDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::SingularValue Mathematics::Matrix3Tools<Real>::SingularValueDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -45,23 +47,23 @@ typename const Mathematics::Matrix3Tools<Real>::SingularValue Mathematics::Matri
     // 所述QDUDecomposition似乎假定输入矩阵是可逆的，
     // 但一般的QR分解具有处理非满秩矩阵。
 
-    SingularValue singularValue{ m_Matrix };
+    SingularValue singularValue{ matrix };
 
     return singularValue;
 }
 
 template <typename Real>
-typename const Mathematics::Matrix3Tools<Real>::PolarDecompositionValue Mathematics::Matrix3Tools<Real>::PolarDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::PolarDecompositionValue Mathematics::Matrix3Tools<Real>::PolarDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    PolarDecompositionValue polarDecompositionValue{ m_Matrix };
+    PolarDecompositionValue polarDecompositionValue{ matrix };
 
     return polarDecompositionValue;
 }
 
 template <typename Real>
-typename const Mathematics::Matrix3Tools<Real>::QDUDecompositionValue Mathematics::Matrix3Tools<Real>::QDUDecomposition() const
+typename Mathematics::Matrix3Tools<Real>::QDUDecompositionValue Mathematics::Matrix3Tools<Real>::QDUDecomposition() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -85,7 +87,7 @@ typename const Mathematics::Matrix3Tools<Real>::QDUDecompositionValue Mathematic
     // 所以 D = diag(r00,r11,r22) 和 U 具有项 u01 = r01/r00,
     // u02 = r02/r00, 和 u12 = r12/r11.
 
-    QDUDecompositionValue qDUDecompositionValue{ m_Matrix };
+    QDUDecompositionValue qDUDecompositionValue{ matrix };
 
     return qDUDecompositionValue;
 }

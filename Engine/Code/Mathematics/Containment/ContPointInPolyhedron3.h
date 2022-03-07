@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Ray3.h" 
 
@@ -65,7 +65,7 @@ namespace Mathematics
 		};
 		
 		// The Contains query will use ray-triangle intersection queries.
-		PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces, const TriangleFace* faces, int numRays, const Vector3D<Real>* directions);
+		PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces, const TriangleFace* faces, int numRays, const Vector3<Real>* directions);
 		
 		// For simple polyhedra with convex polygon faces.
 		class ConvexFace
@@ -92,7 +92,7 @@ namespace Mathematics
 		//   2 : Find the point of intersection of ray and plane of polygon.  Test
 		//       whether that point is inside the convex polygon using an O(log N)
 		//       test.
-		PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces, const ConvexFace* faces, int numRays, const Vector3D<Real>* directions, unsigned int method);
+		PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces, const ConvexFace* faces, int numRays, const Vector3<Real>* directions, unsigned int method);
 		
 		// For simple polyhedra with simple polygon faces that are generally
 		// not all convex.
@@ -125,11 +125,11 @@ namespace Mathematics
 		//       whether that point is inside the polygon using an O(N) test.  The
 		//       SimpleFace::Triangles array is not used for this method, so it
 		//       does not have to be initialized for each face.
-		PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces, const SimpleFace* faces, int numRays, const Vector3D<Real>* directions, unsigned intmethod);
+		PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces, const SimpleFace* faces, int numRays, const Vector3<Real>* directions, unsigned intmethod);
 		
 		// This function will select the actual algorithm based on which
 		// constructor you used for this class.
-		bool Contains (const Vector3D<Real>& p) const;
+		bool Contains (const Vector3<Real>& p) const;
 		
 	private:
 		// For all types of faces.  The ray origin is the test point.  The ray
@@ -139,18 +139,18 @@ namespace Mathematics
 		static bool FastNoIntersect (const Ray3<Real>& ray, const Plane3<Real>& plane);
 		
 		// For triangle faces
-		bool ContainsT0 (const Vector3D<Real>& p) const;
+		bool ContainsT0 (const Vector3<Real>& p) const;
 		
 		// For convex faces.
-		bool ContainsC0 (const Vector3D<Real>& p) const;
-		bool ContainsC1C2 (const Vector3D<Real>& p, unsigned int method) const;
+		bool ContainsC0 (const Vector3<Real>& p) const;
+		bool ContainsC1C2 (const Vector3<Real>& p, unsigned int method) const;
 		
 		// For simple faces.
-		bool ContainsS0 (const Vector3D<Real>& p) const;
-		bool ContainsS1 (const Vector3D<Real>& p) const;
+		bool ContainsS0 (const Vector3<Real>& p) const;
+		bool ContainsS1 (const Vector3<Real>& p) const;
 		
  
-		std::vector<Vector3D<Real> > mPoints;
+		std::vector<Vector3<Real> > mPoints;
 		
 		int mNumFaces;
 		const TriangleFace* mTFaces;
@@ -159,12 +159,12 @@ namespace Mathematics
 		
 		unsigned int mMethod;
 		int mNumRays;
-		const Vector3D<Real>* mDirections;
+		const Vector3<Real>* mDirections;
 		
 		// Temporary storage for those methods that reduce the problem to 2D
 		// point-in-polygon queries.  The array stores the projections of
 		// face vertices onto the plane of the face.  It is resized as needed.
-		mutable std::vector<Vector2D<Real> > mProjVertices;
+		mutable std::vector<Vector2<Real> > mProjVertices;
 	};
 	
 	using PointInPolyhedron3f = PointInPolyhedron3<float>;

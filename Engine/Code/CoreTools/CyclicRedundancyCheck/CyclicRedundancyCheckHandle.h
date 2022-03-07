@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 17:12)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_H
@@ -13,13 +13,12 @@
 #include "CoreTools/CoreToolsDll.h"
 
 #include "System/Helper/UnicodeUsing.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/SingletonMacro.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
-#include <boost/noncopyable.hpp>
 
 CORE_TOOLS_EXPORT_UNIQUE_PTR(CyclicRedundancyCheckHandle);
-CORE_TOOLS_NON_COPY_EXPORT_IMPL(CyclicRedundancyCheckHandleImpl); 
+CORE_TOOLS_NON_COPY_EXPORT_IMPL(CyclicRedundancyCheckHandleImpl);
 
 namespace CoreTools
 {
@@ -45,15 +44,15 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint16_t GetCCITT(int index) const;
-        [[nodiscard]] uint16_t Get16Table(int index) const;
-        [[nodiscard]] uint32_t Get32Table(int index) const;
+        NODISCARD uint16_t GetCCITT(int index) const;
+        NODISCARD uint16_t Get16Table(int index) const;
+        NODISCARD uint32_t Get32Table(int index) const;
 
     private:
         using CyclicRedundancyCheckHandleUniquePtr = std::unique_ptr<CyclicRedundancyCheckHandle>;
 
     private:
-        static CyclicRedundancyCheckHandleUniquePtr sm_CyclicRedundancyCheckHandle;
+        static CyclicRedundancyCheckHandleUniquePtr cyclicRedundancyCheckHandle;
         PackageType impl;
     };
 }

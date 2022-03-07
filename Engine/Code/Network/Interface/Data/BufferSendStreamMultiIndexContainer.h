@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 15:31)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/19 14:16)
 
 #ifndef NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
 #define NETWORK_NETWORK_INTERFACE_BUFFER_SEND_STREAM_MULTI_INDEX_CONTAINER_H
@@ -34,21 +34,21 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        void Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy);
+        void Insert(uint64_t socketID, ACEHandle handle, int bufferSize, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
 
-        [[nodiscard]] BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerBySocketID(uint64_t socketID);
-        [[nodiscard]] BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerByHandle(ACEHandle handle);
+        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerBySocketID(uint64_t socketID);
+        NODISCARD BufferSendStreamContainerSharedPtr GetBufferSendStreamContainerByHandle(ACEHandle handle);
 
         void Erase(uint64_t socketID);
-        [[nodiscard]] SocketIDContainerConstIter begin() const noexcept;
-        [[nodiscard]] SocketIDContainerConstIter end() const noexcept;
+        NODISCARD SocketIDContainerConstIter begin() const noexcept;
+        NODISCARD SocketIDContainerConstIter end() const noexcept;
 
     private:
         using HandleIDContainer = std::map<ACEHandle, BufferSendStreamContainerWeakPtr>;
 
     private:
-        SocketIDContainer m_SocketIDContainer;
-        HandleIDContainer m_HandleIDContainer;
+        SocketIDContainer socketIDContainer;
+        HandleIDContainer handleIDContainer;
     };
 }
 

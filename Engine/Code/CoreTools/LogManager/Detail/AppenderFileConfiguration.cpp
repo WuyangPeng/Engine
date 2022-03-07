@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:30)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -17,22 +17,31 @@
 
 using std::make_shared;
 
-CoreTools::AppenderFileConfiguration::AppenderFileConfiguration(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
-                                                                int maxFileSize, bool backup, const String& extensionName)
-    : ParentType{ appenderFlags, logLevel }, m_Directory{ directory }, m_ExtensionName{ extensionName },
-      m_MaxFileSize{ maxFileSize }, m_Backup{ backup }
+CoreTools::AppenderFileConfiguration::AppenderFileConfiguration(const String& directory,
+                                                                AppenderPrint appenderFlags,
+                                                                LogLevel logLevel,
+                                                                int maxFileSize,
+                                                                bool backup,
+                                                                const String& extensionName)
+    : ParentType{ appenderFlags, logLevel },
+      directory{ directory },
+      extensionName{ extensionName },
+      maxFileSize{ maxFileSize },
+      backup{ backup }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::AppenderFileConfiguration::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 < m_MaxFileSize)
+    if (ParentType::IsValid() && 0 < maxFileSize)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::AppenderType CoreTools::AppenderFileConfiguration::GetAppenderType() const noexcept
@@ -43,11 +52,11 @@ CoreTools::AppenderType CoreTools::AppenderFileConfiguration::GetAppenderType() 
 }
 
 // private
-void CoreTools::AppenderFileConfiguration::DoWrite([[maybe_unused]] const LogMessage& message, [[maybe_unused]] const LogMessagePrefix& prefix, [[maybe_unused]] const LogMessagePostfix& postfix) noexcept
+void CoreTools::AppenderFileConfiguration::DoWrite(MAYBE_UNUSED const LogMessage& message, MAYBE_UNUSED const LogMessagePrefix& prefix, MAYBE_UNUSED const LogMessagePostfix& postfix) noexcept
 {
 }
 
-const CoreTools::AppenderFileConfiguration::AppenderImplPtr CoreTools::AppenderFileConfiguration::Clone() const
+const CoreTools::AppenderFileConfiguration::AppenderImplSharedPtr CoreTools::AppenderFileConfiguration::Clone() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
@@ -58,26 +67,26 @@ System::String CoreTools::AppenderFileConfiguration::GetDirectory() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Directory;
+    return directory;
 }
 
 System::String CoreTools::AppenderFileConfiguration::GetExtensionName() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_ExtensionName;
+    return extensionName;
 }
 
 int CoreTools::AppenderFileConfiguration::GetMaxFileSize() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_MaxFileSize;
+    return maxFileSize;
 }
 
 bool CoreTools::AppenderFileConfiguration::IsBackup() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_Backup;
+    return backup;
 }

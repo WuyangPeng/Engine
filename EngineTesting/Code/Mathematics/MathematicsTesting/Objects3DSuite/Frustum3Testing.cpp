@@ -6,7 +6,7 @@
 
 #include "Frustum3Testing.h"
 #include "Mathematics/Objects3D/Frustum3Detail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -15,7 +15,12 @@
 using std::vector;
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 namespace Mathematics
 {
 	template class Frustum3<float>;
@@ -41,37 +46,37 @@ void Mathematics::Frustum3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D origin(firstRandomDistribution(generator),
+		Vector3D origin(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D firstVector(firstRandomDistribution(generator),
+		Vector3D firstVector(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		DoubleVector3D secondVector(firstRandomDistribution(generator),
+		Vector3D secondVector(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		DoubleVector3D thirdVector(firstRandomDistribution(generator),
+		Vector3D thirdVector(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 							  firstRandomDistribution(generator));
 
-		double directionMin = DoubleMath::FAbs(firstRandomDistribution(generator));
-		double directionMax = directionMin + DoubleMath::FAbs(firstRandomDistribution(generator));
+		double directionMin = MathD::FAbs(firstRandomDistribution(generator));
+		double directionMax = directionMin + MathD::FAbs(firstRandomDistribution(generator));
 
-		double upBound = DoubleVector3DTools::VectorMagnitude(firstVector);
-		double rightBound = DoubleVector3DTools::VectorMagnitude(secondVector);
+		double upBound = Vector3ToolsD::GetLength(firstVector);
+		double rightBound = Vector3ToolsD::GetLength(secondVector);
 
-		DoubleVector3DTools::Vector3DOrthonormalize orthonormalize = DoubleVector3DTools::Orthonormalize(firstVector,secondVector,thirdVector,1e-10);
+		Vector3ToolsD::Vector3Orthonormalize orthonormalize = Vector3ToolsD::Orthonormalize(firstVector,secondVector,thirdVector,1e-10);
 
-		DoubleFrustum3 frustum(origin, orthonormalize.GetUVector(),orthonormalize.GetVVector(), orthonormalize.GetWVector(),
+		Frustum3D frustum(origin, orthonormalize.GetUVector(),orthonormalize.GetVVector(), orthonormalize.GetWVector(),
 						  directionMin,directionMax,upBound,rightBound);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(origin,frustum.GetOrigin()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetUVector(),frustum.GetDirectionVector()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetVVector(),frustum.GetUpVector()));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(orthonormalize.GetWVector(),frustum.GetRightVector()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(origin,frustum.GetOrigin()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetUVector(),frustum.GetDirectionVector()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetVVector(),frustum.GetUpVector()));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(orthonormalize.GetWVector(),frustum.GetRightVector()));
 	    ASSERT_APPROXIMATE(directionMin,frustum.GetDirectionMin(),1e-10);
 		ASSERT_APPROXIMATE(directionMax,frustum.GetDirectionMax(),1e-10);
 		ASSERT_APPROXIMATE(upBound,frustum.GetUpBound(),1e-10);
@@ -81,21 +86,21 @@ void Mathematics::Frustum3Testing
 		ASSERT_APPROXIMATE(-2.0 * upBound * directionMax,frustum.GetMTwoUF(),1e-10);
 		ASSERT_APPROXIMATE(-2.0 * rightBound * directionMax,frustum.GetMTwoRF(),1e-10);
 
-		vector<DoubleVector3D> vertex = frustum.ComputeVertices();
+		vector<Vector3D> vertex = frustum.ComputeVertices();
 
-		DoubleVector3D directionScaled = frustum.GetDirectionMin() * frustum.GetDirectionVector();
-		DoubleVector3D upScaled = frustum.GetUpBound() * frustum.GetUpVector();
-		DoubleVector3D rightScaled = frustum.GetRightBound() * frustum.GetRightVector();
+		Vector3D directionScaled = frustum.GetDirectionMin() * frustum.GetDirectionVector();
+		Vector3D upScaled = frustum.GetUpBound() * frustum.GetUpVector();
+		Vector3D rightScaled = frustum.GetRightBound() * frustum.GetRightVector();
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(directionScaled - upScaled - rightScaled + frustum.GetOrigin(),vertex[0]));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(directionScaled - upScaled + rightScaled + frustum.GetOrigin(),vertex[1]));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(directionScaled + upScaled + rightScaled + frustum.GetOrigin(),vertex[2]));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(directionScaled + upScaled - rightScaled + frustum.GetOrigin(),vertex[3]));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(directionScaled - upScaled - rightScaled + frustum.GetOrigin(),vertex[0]));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(directionScaled - upScaled + rightScaled + frustum.GetOrigin(),vertex[1]));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(directionScaled + upScaled + rightScaled + frustum.GetOrigin(),vertex[2]));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(directionScaled + upScaled - rightScaled + frustum.GetOrigin(),vertex[3]));
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate((vertex[0] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[4],1e-10));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate((vertex[1] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[5],1e-10));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate((vertex[2] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(), vertex[6],1e-10));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate((vertex[3] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[7],1e-10));
+		ASSERT_TRUE(Vector3ToolsD::Approximate((vertex[0] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[4],1e-10));
+		ASSERT_TRUE(Vector3ToolsD::Approximate((vertex[1] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[5],1e-10));
+		ASSERT_TRUE(Vector3ToolsD::Approximate((vertex[2] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(), vertex[6],1e-10));
+		ASSERT_TRUE(Vector3ToolsD::Approximate((vertex[3] - frustum.GetOrigin()) * frustum.GetDirectionRatio() + frustum.GetOrigin(),vertex[7],1e-10));
 	}
 }
 

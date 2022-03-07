@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/10 12:52)
+///	引擎版本：0.8.0.3 (2022/02/21 15:46)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H
@@ -21,15 +21,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Segment3 : public DistanceBase<Real, Vector3D<Real>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Segment3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistanceRay3Segment3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Ray3 = Ray3<Real>;
         using Segment3 = Segment3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using DistanceLine3Line3Tool = DistanceLine3Line3Tool<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
@@ -39,27 +39,27 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ray3 GetRay() const noexcept;
-        [[nodiscard]] const Segment3 GetSegment() const noexcept;
+        NODISCARD Ray3 GetRay() const noexcept;
+        NODISCARD Segment3 GetSegment() const noexcept;
 
         // 静态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
         // 函数计算动态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
     private:
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
-        [[nodiscard]] const DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentEndPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsSegmentBeginPoint(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
+        NODISCARD DistanceResult GetSquaredWithClosestPointsIsRayOrigin(const DistanceLine3Line3Tool& tool, Real rhsExtent) const;
 
     private:
-        Ray3 m_Ray;
-        Segment3 m_Segment;
+        Ray3 ray;
+        Segment3 segment;
     };
 
-    using FloatDistanceRay3Segment3 = DistanceRay3Segment3<float>;
-    using DoubleDistanceRay3Segment3 = DistanceRay3Segment3<double>;
+    using DistanceRay3Segment3F = DistanceRay3Segment3<float>;
+    using DistanceRay3Segment3D = DistanceRay3Segment3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY3_SEGMENT3_H

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 11:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 15:46)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_INDEX_H
@@ -14,6 +14,7 @@
 
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
+
 CORE_TOOLS_DELAY_COPY_UNSHARED_EXPORT_IMPL(MinHeapRecordIndex, MinHeapRecordIndexImpl);
 
 namespace CoreTools
@@ -33,8 +34,8 @@ namespace CoreTools
         void PrintIndexInLog() const noexcept;
 #endif  // OPEN_CLASS_INVARIANT
 
-        [[nodiscard]] int GetMaxElements() const;
-        [[nodiscard]] int GetHeapIndex(int uniqueIndex) const;
+        NODISCARD int GetMaxElements() const;
+        NODISCARD int GetHeapIndex(int uniqueIndex) const;
 
         // 交换唯一标识索引对应的堆位置索引
         void ChangeIndex(int lhsIndex, int rhsIndex);

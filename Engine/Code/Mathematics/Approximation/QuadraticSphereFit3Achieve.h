@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 11:13)
+///	引擎版本：0.8.0.2 (2022/02/17 18:35)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_SPHERE_FIT3_ACHIEVE_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_SPHERE_FIT3_ACHIEVE_H
@@ -19,7 +19,7 @@
 
 template <typename Real>
 Mathematics::QuadraticSphereFit3<Real>::QuadraticSphereFit3(const Points& points)
-    : m_Center{}, m_Radius{}, m_EigenValue{}
+    : center{}, radius{}, eigenValue{}
 {
     Calculate(points);
 
@@ -30,26 +30,26 @@ Mathematics::QuadraticSphereFit3<Real>::QuadraticSphereFit3(const Points& points
 template <typename Real>
 void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
 {
-    EigenDecomposition<Real> eigenSystem{ sm_EigenSystemSize };
+    EigenDecomposition<Real> eigenSystem{ eigenSystemSize };
 
-    auto numPoints = boost::numeric_cast<Real>(points.size());
+    const auto numPoints = boost::numeric_cast<Real>(points.size());
 
     for (const auto& point : points)
     {
-        auto x = point.GetX();
-        auto y = point.GetY();
-        auto z = point.GetZ();
-        auto x2 = x * x;
-        auto y2 = y * y;
-        auto z2 = z * z;
-        auto xy = x * y;
-        auto xz = x * z;
-        auto yz = y * z;
-        auto r2 = x2 + y2 + z2;
-        auto xr2 = x * r2;
-        auto yr2 = y * r2;
-        auto zr2 = z * r2;
-        auto r4 = r2 * r2;
+        const auto x = point.GetX();
+        const auto y = point.GetY();
+        const auto z = point.GetZ();
+        const auto x2 = x * x;
+        const auto y2 = y * y;
+        const auto z2 = z * z;
+        const auto xy = x * y;
+        const auto xz = x * z;
+        const auto yz = y * z;
+        const auto r2 = x2 + y2 + z2;
+        const auto xr2 = x * r2;
+        const auto yr2 = y * r2;
+        const auto zr2 = z * r2;
+        const auto r4 = r2 * r2;
 
         eigenSystem(0, 1) += x;
         eigenSystem(0, 2) += y;
@@ -69,7 +69,7 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
 
     eigenSystem(0, 0) = numPoints;
 
-    for (auto row = 0; row < sm_EigenSystemSize; ++row)
+    for (auto row = 0; row < eigenSystemSize; ++row)
     {
         for (auto column = 0; column < row; ++column)
         {
@@ -77,9 +77,9 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
         }
     }
 
-    for (auto row = 0; row < sm_EigenSystemSize; ++row)
+    for (auto row = 0; row < eigenSystemSize; ++row)
     {
-        for (auto column = 0; column < sm_EigenSystemSize; ++column)
+        for (auto column = 0; column < eigenSystemSize; ++column)
         {
             eigenSystem(row, column) /= numPoints;
         }
@@ -92,19 +92,14 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
     // 当心除零
     if (Math::GetZeroTolerance() < Math::FAbs(eigenVector[4]))
     {
-        Real inv = Math::GetValue(1) / eigenVector[4];
+        auto inv = Math::GetValue(1) / eigenVector[4];
 
         std::array<Real, 4> coeff{ inv * eigenVector[0], inv * eigenVector[1], inv * eigenVector[2], inv * eigenVector[3] };
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-
-        m_Center[0] = -Math::GetRational(1, 2) * coeff[1];
-        m_Center[1] = -Math::GetRational(1, 2) * coeff[2];
-        m_Center[2] = -Math::GetRational(1, 2) * coeff[3];
-        m_Radius = Math::Sqrt(Math::FAbs(m_Center.GetX() * m_Center.GetX() + m_Center.GetY() * m_Center.GetY() + m_Center.GetZ() * m_Center.GetZ() - coeff[0]));
-
-#include STSTEM_WARNING_POP
+        center[0] = -Math::GetRational(1, 2) * coeff.at(1);
+        center[1] = -Math::GetRational(1, 2) * coeff.at(2);
+        center[2] = -Math::GetRational(1, 2) * coeff.at(3);
+        radius = Math::Sqrt(Math::FAbs(center.GetX() * center.GetX() + center.GetY() * center.GetY() + center.GetZ() * center.GetZ() - coeff.at(0)));
     }
     else
     {
@@ -113,26 +108,28 @@ void Mathematics::QuadraticSphereFit3<Real>::Calculate(const Points& points)
 
     // 对于精确配合，数字舍入误差可能使最小特征值仅仅略为负值。
     // 返回的绝对值，因为应用程序可能依赖的返回值是非负数。
-    m_EigenValue = Math::FAbs(eigenSystem.GetEigenvalue(0));
+    eigenValue = Math::FAbs(eigenSystem.GetEigenvalue(0));
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::QuadraticSphereFit3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) < m_Radius && Math::GetValue(0) <= m_EigenValue)
+    if (Math::GetValue(0) < radius && Math::GetValue(0) <= eigenValue)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::QuadraticSphereFit3<Real>::GetCenter() const noexcept
+Mathematics::Vector3<Real> Mathematics::QuadraticSphereFit3<Real>::GetCenter() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Center;
+    return center;
 }
 
 template <typename Real>
@@ -140,7 +137,7 @@ Real Mathematics::QuadraticSphereFit3<Real>::GetRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Radius;
+    return radius;
 }
 
 template <typename Real>
@@ -148,7 +145,7 @@ Real Mathematics::QuadraticSphereFit3<Real>::GetEigenValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_EigenValue;
+    return eigenValue;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_QUADRATIC_SPHERE_FIT3_ACHIEVE_H

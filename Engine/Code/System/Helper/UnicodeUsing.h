@@ -57,6 +57,8 @@ namespace System
     template <typename T>
     String ToString(const T value)
     {
+        static_assert(std::is_arithmetic_v<T>);
+
 #ifdef UNICODE
         return std::to_wstring(value);
 #else  // !UNICODE

@@ -1,7 +1,7 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/28 16:07)
 
 #ifndef MATHEMATICS_APPROXIMATION_SUITE_ORTHGONAL_LINE_FIT3_TESTING_H
@@ -11,17 +11,17 @@
 
 namespace Mathematics
 {
-	class OrthogonalLineFit3Testing : public CoreTools::UnitTest
-	{
-	public:
-		UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OrthogonalLineFit3Testing); 
+    class OrthogonalLineFit3Testing : public CoreTools::UnitTest
+    {
+    public:
+        UNIT_TEST_SUBCLASS_COMPLETE_DECLARE(OrthogonalLineFit3Testing);
 
-	private:
-		void MainTest();	
-		void FitTest();
+    private:
+        void MainTest();
+        void FitTest();
 
-		virtual void DoRunUnitTest() override; 
-	};
+        void DoRunUnitTest() override;
+    };
 }
 
-#endif // MATHEMATICS_APPROXIMATION_SUITE_ORTHGONAL_LINE_FIT3_TESTING_H
+#endif  // MATHEMATICS_APPROXIMATION_SUITE_ORTHGONAL_LINE_FIT3_TESTING_H

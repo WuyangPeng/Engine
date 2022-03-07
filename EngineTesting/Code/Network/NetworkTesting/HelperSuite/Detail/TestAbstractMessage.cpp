@@ -1,29 +1,26 @@
 // Copyright (c) 2011-2020
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.2.4 (2020/03/12 10:02)
 
-#include "TestAbstractMessage.h" 
-#include "CoreTools/Helper/MemoryMacro.h"
+#include "TestAbstractMessage.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
-#include "CoreTools/ObjectSystems/InitTerm.h" 
+#include "CoreTools/ObjectSystems/InitTerm.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Network/NetworkMessage/MessageManager.h"
-#include "Network/NetworkMessage/MessageTargetDetail.h"
 #include "Network/NetworkMessage/MessageSourceDetail.h"
+#include "Network/NetworkMessage/MessageTargetDetail.h"
 
-Network::TestAbstractMessage
-	::TestAbstractMessage()
-	:ParentType{ 0 }
+Network::TestAbstractMessage ::TestAbstractMessage() noexcept
+    : ParentType{ 0 }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-Network::TestAbstractMessage
-	::~TestAbstractMessage()
+Network::TestAbstractMessage ::~TestAbstractMessage() noexcept
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestAbstractMessage);
@@ -31,43 +28,37 @@ CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, TestAbstractMessage);
 CORE_TOOLS_RTTI_DEFINE(Network, TestAbstractMessage);
 NETWORK_ABSTRACT_FACTORY_DEFINE(Network, TestAbstractMessage);
 
-Network::TestAbstractMessage
-	::TestAbstractMessage(LoadConstructor value, int64_t messageID) noexcept
-	: ParentType{ value,messageID }
+Network::TestAbstractMessage ::TestAbstractMessage(LoadConstructor value, int64_t messageID) noexcept
+    : ParentType{ value, messageID }
 {
-	NETWORK_SELF_CLASS_IS_VALID_9;
+    NETWORK_SELF_CLASS_IS_VALID_9;
 }
 
-void Network::TestAbstractMessage
-	::Load(const Network::MessageSourceSharedPtr& source)
+void Network::TestAbstractMessage ::Load(Network::MessageSource& source)
 {
-	NETWORK_CLASS_IS_VALID_9;
+    NETWORK_CLASS_IS_VALID_9;
 
-	NETWORK_BEGIN_STREAM_LOAD(source);
+    NETWORK_BEGIN_STREAM_LOAD(source);
 
-	ParentType::Load(source);
+    ParentType::Load(source);
 
-	NETWORK_END_STREAM_LOAD(source);
+    NETWORK_END_STREAM_LOAD(source);
 }
 
-void Network::TestAbstractMessage
-	::Save(const Network::MessageTargetSharedPtr& target) const
+void Network::TestAbstractMessage ::Save(Network::MessageTarget& target) const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	NETWORK_BEGIN_STREAM_SAVE(target);
+    NETWORK_BEGIN_STREAM_SAVE(target);
 
-	ParentType::Save(target);
+    ParentType::Save(target);
 
-	NETWORK_END_STREAM_SAVE(target);
+    NETWORK_END_STREAM_SAVE(target);
 }
 
-int Network::TestAbstractMessage
-	::GetStreamingSize() const
+int Network::TestAbstractMessage ::GetStreamingSize() const
 {
-	NETWORK_CLASS_IS_VALID_CONST_9;
+    NETWORK_CLASS_IS_VALID_CONST_9;
 
-	return ParentType::GetStreamingSize();
+    return ParentType::GetStreamingSize();
 }
-
-

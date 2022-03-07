@@ -1,49 +1,48 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.2.5 (2020/03/24 14:54)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 16:10)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Objects3D/Lozenge3.h" 
-#include "Mathematics/Intersection/StaticIntersector.h" 
+#include "Mathematics/Intersection/StaticIntersector.h"
+#include "Mathematics/Objects3D/Lozenge3.h"
 
 namespace Mathematics
 {
-	template <typename Real>
-	class StaticTestIntersectorLozenge3Lozenge3 : public  StaticIntersector<Real, Vector3D>
-	{
-	public:
-		using ClassType = StaticTestIntersectorLozenge3Lozenge3<Real>;
-		using ParentType = StaticIntersector<Real, Vector3D>;
-		using Vector3D = Vector3D<Real>;
-		using Lozenge3 = Lozenge3<Real>;
-		using Vector3DTools = Vector3DTools<Real>;
-		using Math = typename ParentType::Math;
+    template <typename Real>
+    class StaticTestIntersectorLozenge3Lozenge3 : public StaticIntersector<Real, Vector3>
+    {
+    public:
+        using ClassType = StaticTestIntersectorLozenge3Lozenge3<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
+        using Lozenge3 = Lozenge3<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
+        using Math = typename ParentType::Math;
 
-	public:
-                StaticTestIntersectorLozenge3Lozenge3(const Lozenge3& lozenge0, const Lozenge3& lozenge1, const Real epsilon = Math::GetZeroTolerance());
+    public:
+        StaticTestIntersectorLozenge3Lozenge3(const Lozenge3& lozenge0, const Lozenge3& lozenge1, const Real epsilon = Math::GetZeroTolerance());
 
-		CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-		 [[nodiscard]] const Lozenge3 GetLozenge0() const;
-                [[nodiscard]] const Lozenge3 GetLozenge1() const;
+        NODISCARD Lozenge3 GetLozenge0() const noexcept;
+        NODISCARD Lozenge3 GetLozenge1() const noexcept;
 
-		// Static intersection query.
-		void Test();
+    private:
+        void Test();
 
-	private:
-		// The objects to intersect.
-		Lozenge3 mLozenge0;
-		Lozenge3 mLozenge1;
-	};
-
-	using FloatStaticTestIntersectorLozenge3Lozenge3 = StaticTestIntersectorLozenge3Lozenge3<float>;
-	using DoubleStaticTestIntersectorLozenge3Lozenge3 = StaticTestIntersectorLozenge3Lozenge3<double>;
+    private:
+        Lozenge3 lozenge0;
+        Lozenge3 lozenge1;
+    };
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LOZENGE3_LOZENGE3_H

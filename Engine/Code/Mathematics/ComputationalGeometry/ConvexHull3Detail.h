@@ -17,17 +17,17 @@
 #include <stack>
 
 template <typename Real>
-Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3D<Real>>& vertices, Real epsilon, bool bOwner, QueryType eQueryType)
-    : ConvexHull<Real>{ vertices.size(), epsilon, bOwner, eQueryType }, m_LineOrigin{ Vector3D<Real>::sm_Zero },
-      m_LineDirection{ Vector3D<Real>::sm_Zero }, mPlaneOrigin{ Vector3D<Real>::sm_Zero }
+Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3<Real>>& vertices, Real epsilon, bool bOwner, QueryType eQueryType)
+    : ConvexHull<Real>{ vertices.size(), epsilon, bOwner, eQueryType }, m_LineOrigin{ Vector3<Real>::sm_Zero },
+      m_LineDirection{ Vector3<Real>::sm_Zero }, mPlaneOrigin{ Vector3<Real>::sm_Zero }
 {
     mVertices = vertices;
-    mPlaneDirection[0] = Vector3D<Real>::sm_Zero;
-    mPlaneDirection[1] = Vector3D<Real>::sm_Zero;
+    mPlaneDirection[0] = Vector3<Real>::sm_Zero;
+    mPlaneDirection[1] = Vector3<Real>::sm_Zero;
 
     mQuery = 0;
 
-    Vector3DInformation<Real> info{ mVertices, epsilon };
+    Vector3Information<Real> info{ mVertices, epsilon };
     if (info.GetDimension() == 0)
     {
         // The values of mDimension and mIndices were already initialized by
@@ -107,7 +107,7 @@ Mathematics::ConvexHull3<Real>::ConvexHull3(const std::vector<Vector3D<Real>>& v
     {
         // No transformation needed for exact rational arithmetic or filtered
         // predicates.
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3D<Real>));
+        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector3<Real>));
 
         if (eQueryType == QueryType::Rational)
         {
@@ -172,25 +172,25 @@ Mathematics::ConvexHull3<Real>::~ConvexHull3()
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::ConvexHull3<Real>::GetLineOrigin() const
+const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetLineOrigin() const
 {
     return m_LineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::ConvexHull3<Real>::GetLineDirection() const
+const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetLineDirection() const
 {
     return m_LineDirection;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::ConvexHull3<Real>::GetPlaneOrigin() const
+const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetPlaneOrigin() const
 {
     return mPlaneOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real>& Mathematics::ConvexHull3<Real>::GetPlaneDirection(int i) const
+const Mathematics::Vector3<Real>& Mathematics::ConvexHull3<Real>::GetPlaneDirection(int i) const
 {
     return mPlaneDirection[i];
 }
@@ -208,7 +208,7 @@ Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull3<Real>::GetConvexHull1()
     for (int i = 0; i < mNumVertices; ++i)
     {
         auto diff = mVertices[i] - m_LineOrigin;
-        //projection[i] = Vector3DTools<Real>::DotProduct(m_LineDirection, diff);
+        //projection[i] = Vector3Tools<Real>::DotProduct(m_LineDirection, diff);
     }
 
     return nullptr;  //    NEW0 ConvexHull1<Real>(mNumVertices, projection, mEpsilon, true, mQueryType);
@@ -223,12 +223,12 @@ Mathematics::ConvexHull2<Real>* Mathematics::ConvexHull3<Real>::GetConvexHull2()
         return 0;
     }
 
-    std::vector<Vector2D<Real>> projection(mNumVertices);
+    std::vector<Vector2<Real>> projection(mNumVertices);
     for (auto i = 0; i < mNumVertices; ++i)
     {
         auto diff = mVertices[i] - mPlaneOrigin;
-        projection[i][0] = Vector3DTools<Real>::DotProduct(mPlaneDirection[0], diff);
-        projection[i][1] = Vector3DTools<Real>::DotProduct(mPlaneDirection[1], diff);
+        projection[i][0] = Vector3Tools<Real>::DotProduct(mPlaneDirection[0], diff);
+        projection[i][1] = Vector3Tools<Real>::DotProduct(mPlaneDirection[1], diff);
     }
 
     return nullptr;  //    NEW0 ConvexHull2<Real>(projection, mEpsilon, true, mQueryType);

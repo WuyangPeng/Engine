@@ -1,18 +1,18 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 21:36)
 
-// 日志类外部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_H
 
 #include "CoreTools/CoreToolsDll.h"
 
+#include "LogAppenderIOManager.h"
 #include "LogManagerFwd.h"
 #include "System/Helper/UnicodeUsing.h"
 #include "CoreTools/Helper/Export/NonCopyMacro.h"
@@ -38,7 +38,7 @@ namespace CoreTools
         };
 
     public:
-        explicit Log(LogCreate logCreate);
+        explicit Log(MAYBE_UNUSED LogCreate logCreate);
 
         static void Create();
         static void Destroy() noexcept;
@@ -63,8 +63,9 @@ namespace CoreTools
         using LogUniquePtr = std::unique_ptr<Log>;
 
     private:
-        static LogUniquePtr sm_Log;
+        static LogUniquePtr log;
         PackageType impl;
+        LogAppenderIOManager errorLogAppenderIOManager;
     };
 }
 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:13)
+///	引擎版本：0.8.0.1 (2022/01/09 1:41)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -34,6 +34,7 @@ CoreTools::IFStreamManagerImpl::IFStreamManagerImpl(const String& fileName)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::IFStreamManagerImpl::IsValid() const noexcept
 {
     try
@@ -48,6 +49,7 @@ bool CoreTools::IFStreamManagerImpl::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 System::String CoreTools::IFStreamManagerImpl::BackupFile() const
@@ -87,22 +89,24 @@ System::String CoreTools::IFStreamManagerImpl::GetBackupName() const
 }
 
 // priavte
-void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* osPtr) const
+void CoreTools::IFStreamManagerImpl::CopyContentToStream(OStream* stream) const
 {
-    CORE_TOOLS_ASSERTION_0(osPtr != nullptr, "指针无效");
+    CORE_TOOLS_ASSERTION_0(stream != nullptr, "指针无效");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26492)
+
     auto thisImpl = const_cast<IFStreamManagerImpl*>(this);
+
 #include STSTEM_WARNING_POP
 
     IFStreamSeekManager manager{ thisImpl->iStream };
 
     auto loc = iStream.getloc();
 
-    osPtr->imbue(loc);
+    stream->imbue(loc);
 
-    *osPtr << iStream.rdbuf();
+    *stream << iStream.rdbuf();
 }
 
 System::String CoreTools::IFStreamManagerImpl::GetFileContent() const
@@ -128,8 +132,10 @@ void CoreTools::IFStreamManagerImpl::SetSimplifiedChinese()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
 #if !defined(TCRE_USE_GCC)
+
     locale chs{ "chs" };
 
     iStream.imbue(chs);
+
 #endif  // !defined(TCRE_USE_GCC)
 }

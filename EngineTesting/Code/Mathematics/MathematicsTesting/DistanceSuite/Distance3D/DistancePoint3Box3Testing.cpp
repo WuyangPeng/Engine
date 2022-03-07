@@ -6,9 +6,9 @@
 
 #include "DistancePoint3Box3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "Mathematics/Algebra/Vector4DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance3D/DistancePoint3Box3Detail.h"
 #include "Mathematics/Objects3D/Box3Detail.h"
 #include <random>
@@ -20,7 +20,7 @@ namespace Mathematics
     template class DistancePoint3Box3<float>;
     template class DistancePoint3Box3<double>;
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, DistancePoint3Box3Testing)
 
 void Mathematics::DistancePoint3Box3Testing ::MainTest()
@@ -41,23 +41,23 @@ void Mathematics::DistancePoint3Box3Testing ::BaseTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatVector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        FloatVector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        FloatVector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        float extent0(FloatMath::FAbs(randomDistribution(generator)));
-        float extent1(FloatMath::FAbs(randomDistribution(generator)));
-        float extent2(FloatMath::FAbs(randomDistribution(generator)));
+        Vector3F center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3F axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        float extent0(MathF::FAbs(randomDistribution(generator)));
+        float extent1(MathF::FAbs(randomDistribution(generator)));
+        float extent2(MathF::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        FloatVector3DOrthonormalBasis basis = FloatVector3DTools::GenerateOrthonormalBasis(axis0);
+        Vector3OrthonormalBasisF basis = Vector3ToolsF::GenerateOrthonormalBasis(axis0);
 
-        FloatDistancePoint3Box3 distance(point, FloatBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
+        DistancePoint3Box3F distance(point, Box3F(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
         ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-3f, 1e-8f);
         ASSERT_EQUAL(distance.GetMaximumIterations(), 8);
-        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::GetZeroTolerance(), 1e-8f);
+        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::GetZeroTolerance(), 1e-8f);
 
         distance.SetDifferenceStep(1e-4f);
         ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-4f, 1e-8f);
@@ -65,11 +65,11 @@ void Mathematics::DistancePoint3Box3Testing ::BaseTest()
         distance.SetMaximumIterations(10);
         ASSERT_EQUAL(distance.GetMaximumIterations(), 10);
 
-        distance.SetZeroThreshold(FloatMath::sm_Epsilon);
-        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::sm_Epsilon, 1e-8f);
+        distance.SetZeroThreshold(MathF::epsilon);
+        ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::epsilon, 1e-8f);
 
-        ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector3DTools::Approximate, distance.GetPoint(), point, 1e-8f);
-        ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, distance.GetBox(), FloatBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2), 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsF::Approximate, distance.GetPoint(), point, 1e-8f);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, distance.GetBox(), Box3F(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2), 1e-8f);
     }
 }
 
@@ -82,30 +82,30 @@ void Mathematics::DistancePoint3Box3Testing ::StaticTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        DoubleVector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent1(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent2(DoubleMath::FAbs(randomDistribution(generator)));
+        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double extent0(MathD::FAbs(randomDistribution(generator)));
+        double extent1(MathD::FAbs(randomDistribution(generator)));
+        double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        DoubleVector3DOrthonormalBasis basis = DoubleVector3DTools::GenerateOrthonormalBasis(axis0);
+        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
-        DoubleDistancePoint3Box3 distance(point, DoubleBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
+        DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
-        DoubleDistanceResult3 squaredResult = distance.GetSquared();
-        ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector3DTools::VectorMagnitudeSquared(point - squaredResult.GetRhsClosestPoint()), 1e-10);
+        DistanceResult3D squaredResult = distance.GetSquared();
+        ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector3ToolsD::GetLengthSquared(point - squaredResult.GetRhsClosestPoint()), 1e-10);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), point, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), point, 1e-8);
 
-        DoubleDistanceResult3 result = distance.Get();
-        ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(point - squaredResult.GetRhsClosestPoint()), 1e-10);
+        DistanceResult3D result = distance.Get();
+        ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(point - squaredResult.GetRhsClosestPoint()), 1e-10);
         ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
     }
 }
 
@@ -118,35 +118,35 @@ void Mathematics::DistancePoint3Box3Testing ::DynamicTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent1(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent2(DoubleMath::FAbs(randomDistribution(generator)));
+        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double extent0(MathD::FAbs(randomDistribution(generator)));
+        double extent1(MathD::FAbs(randomDistribution(generator)));
+        double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        DoubleVector3DOrthonormalBasis basis = DoubleVector3DTools::GenerateOrthonormalBasis(axis0);
+        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
-        DoubleDistancePoint3Box3 distance(point, DoubleBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
+        DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
-        double t = DoubleMath::FAbs(randomDistribution(generator));
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double t = MathD::FAbs(randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
-        ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector3DTools::VectorMagnitudeSquared(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-7);
+        DistanceResult3D squaredResult = distance.GetSquared(t, lhsVelocity, rhsVelocity);
+        ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector3ToolsD::GetLengthSquared(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-7);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(), point + t * lhsVelocity, 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), point + t * lhsVelocity, 1e-8);
 
-        DoubleDistanceResult3 result = distance.Get(t, lhsVelocity, rhsVelocity);
-        ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector3DTools::VectorMagnitude(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
+        DistanceResult3D result = distance.Get(t, lhsVelocity, rhsVelocity);
+        ASSERT_APPROXIMATE(result.GetDistance(), Vector3ToolsD::GetLength(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
         ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
     }
 }
 
@@ -159,27 +159,27 @@ void Mathematics::DistancePoint3Box3Testing ::DerivativeTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        DoubleVector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent1(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent2(DoubleMath::FAbs(randomDistribution(generator)));
+        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double extent0(MathD::FAbs(randomDistribution(generator)));
+        double extent1(MathD::FAbs(randomDistribution(generator)));
+        double extent2(MathD::FAbs(randomDistribution(generator)));
         axis0.Normalize();
 
-        DoubleVector3DOrthonormalBasis basis = DoubleVector3DTools::GenerateOrthonormalBasis(axis0);
+        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
-        DoubleDistancePoint3Box3 distance(point, DoubleBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
+        DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
-        double t = DoubleMath::FAbs(randomDistribution(generator));
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double t = MathD::FAbs(randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-        DoubleDistanceResult3 funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+        DistanceResult3D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+        DistanceResult3D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
         double derivativeApproximation =
             0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
@@ -189,7 +189,7 @@ void Mathematics::DistancePoint3Box3Testing ::DerivativeTest()
 
         double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 
-        DoubleDistanceResult3 distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
+        DistanceResult3D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
         ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
     }
 }
@@ -203,49 +203,49 @@ void Mathematics::DistancePoint3Box3Testing ::IntervalTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D point(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
 
-        DoubleVector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        DoubleVector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
-        double extent0(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent1(DoubleMath::FAbs(randomDistribution(generator)));
-        double extent2(DoubleMath::FAbs(randomDistribution(generator)));
+        Vector3D center(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D axis0(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        double extent0(MathD::FAbs(randomDistribution(generator)));
+        double extent1(MathD::FAbs(randomDistribution(generator)));
+        double extent2(MathD::FAbs(randomDistribution(generator)));
 
         axis0.Normalize();
 
-        DoubleVector3DOrthonormalBasis basis = DoubleVector3DTools::GenerateOrthonormalBasis(axis0);
+        Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateOrthonormalBasis(axis0);
 
-        DoubleDistancePoint3Box3 distance(point, DoubleBox3(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
+        DistancePoint3Box3D distance(point, Box3D(center, basis.GetUVector(), basis.GetVVector(), basis.GetWVector(), extent0, extent1, extent2));
 
         distance.SetMaximumIterations(20);
         distance.SetZeroThreshold(1e-6);
 
-        double tMin = DoubleMath::FAbs(randomDistribution(generator));
-        double tMax = DoubleMath::FAbs(randomDistribution(generator));
+        double tMin = MathD::FAbs(randomDistribution(generator));
+        double tMax = MathD::FAbs(randomDistribution(generator));
         if (tMax < tMin)
         {
             swap(tMin, tMax);
         }
 
-        DoubleVector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D lhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         lhsVelocity.Normalize();
-        DoubleVector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
+        Vector3D rhsVelocity(randomDistribution(generator), randomDistribution(generator), randomDistribution(generator));
         rhsVelocity.Normalize();
 
-        DoubleDistanceResult3 squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
-        DoubleDistanceResult3 result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
+        DistanceResult3D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
+        DistanceResult3D result = distance.GetInterval(tMin, tMax, lhsVelocity, rhsVelocity);
 
-        ASSERT_APPROXIMATE(DoubleMath::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-5);
+        ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-5);
         ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-2);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetLhsClosestPoint(),
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
                                         result.GetLhsClosestPoint(), 1e-2);
-        ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, squaredResult.GetRhsClosestPoint(),
+        ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, squaredResult.GetRhsClosestPoint(),
                                         result.GetRhsClosestPoint(), 1e-2);
 
         for (double t = tMin; t < tMax; t += 0.1)
         {
-            DoubleDistanceResult3 tResult = distance.Get(t, lhsVelocity, rhsVelocity);
-            DoubleDistanceResult3 tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
+            DistanceResult3D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
+            DistanceResult3D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
             ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance());
             ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());

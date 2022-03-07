@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 14:56)
+///	引擎版本：0.8.0.3 (2022/02/23 13:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR1_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR1_ACHIEVE_H
@@ -23,6 +23,7 @@ Mathematics::StaticTestIntersector1<Real>::StaticTestIntersector1(Real u0, Real 
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticTestIntersector1<Real>::IsValid() const noexcept
 {
@@ -31,6 +32,7 @@ bool Mathematics::StaticTestIntersector1<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>

@@ -8,7 +8,7 @@
 #define PHYSICS_INTERSECTION_BOX_MANAGER_DETAIL_H
 
 #include "BoxManager.h"
-#include "Mathematics/Algebra/AxesAlignBoundingBox3DDetail.h"
+#include "Mathematics/Algebra/AxesAlignBoundingBox3Detail.h"
 
 #include <algorithm>
 

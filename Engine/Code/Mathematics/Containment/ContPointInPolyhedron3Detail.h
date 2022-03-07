@@ -16,28 +16,28 @@
 
 template <typename Real>
 Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces, const TriangleFace* faces,int numRays, const Vector3D<Real>* directions)
+	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces, const TriangleFace* faces,int numRays, const Vector3<Real>* directions)
 	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ faces },mCFaces{ 0 },mSFaces{ 0 },mMethod{ 0 },mNumRays{ numRays },mDirections{ directions }
 {
 }
 
 template <typename Real>
 Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces,const ConvexFace* faces, int numRays, const Vector3D<Real>* directions, unsigned int method)
+	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces,const ConvexFace* faces, int numRays, const Vector3<Real>* directions, unsigned int method)
 	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ 0 },mCFaces{ faces },mSFaces{ 0 },mMethod{ method },mNumRays{ numRays },mDirections{ directions }
 {
 }
 
 template <typename Real>
 Mathematics::PointInPolyhedron3<Real>
-	::PointInPolyhedron3(const std::vector<Vector3D<Real> >& points, int numFaces,const SimpleFace* faces,int numRays, const Vector3D<Real>* directions, unsigned int method)
+	::PointInPolyhedron3(const std::vector<Vector3<Real> >& points, int numFaces,const SimpleFace* faces,int numRays, const Vector3<Real>* directions, unsigned int method)
 	:mPoints{ points },mNumFaces{ numFaces },mTFaces{ 0 },mCFaces{ 0 },mSFaces{ faces },mMethod{ method },mNumRays{ numRays },mDirections{ directions }
 {
 }
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::Contains(const Vector3D<Real>& p) const
+	::Contains(const Vector3<Real>& p) const
 {
     if (mTFaces)
     {
@@ -74,8 +74,8 @@ template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
 	::FastNoIntersect(const Ray3<Real>& ray,const Plane3<Real>& plane)
 {
-    auto planeDistance = Vector3DTools<Real>::DotProduct(plane.GetNormal(),ray.GetOrigin()) - plane.GetConstant();
-	auto planeAngle = Vector3DTools<Real>::DotProduct(plane.GetNormal(),ray.GetDirection());
+    auto planeDistance = Vector3Tools<Real>::DotProduct(plane.GetNormal(),ray.GetOrigin()) - plane.GetConstant();
+	auto planeAngle = Vector3Tools<Real>::DotProduct(plane.GetNormal(),ray.GetDirection());
 
     if (planeDistance < Math<Real>::GetValue(0))
     {
@@ -102,7 +102,7 @@ bool Mathematics::PointInPolyhedron3<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsT0(const Vector3D<Real>& p) const
+	::ContainsT0(const Vector3<Real>& p) const
 {
 	auto insideCount = 0;
 
@@ -144,7 +144,7 @@ bool Mathematics::PointInPolyhedron3<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsC0(const Vector3D<Real>& p) const
+	::ContainsC0(const Vector3<Real>& p) const
 {
     int insideCount = 0;  
 
@@ -190,7 +190,7 @@ bool Mathematics::PointInPolyhedron3<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsS0(const Vector3D<Real>& p) const
+	::ContainsS0(const Vector3<Real>& p) const
 {
 	auto insideCount = 0;
 
@@ -242,7 +242,7 @@ bool Mathematics::PointInPolyhedron3<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsC1C2(const Vector3D<Real>& p, unsigned int method) const
+	::ContainsC1C2(const Vector3<Real>& p, unsigned int method) const
 {
 	auto insideCount = 0;
 
@@ -277,14 +277,14 @@ bool Mathematics::PointInPolyhedron3<Real>
             // Get a coordinate system for the plane.  Use vertex 0 as the
             // origin.
             const auto& V0 = mPoints[face->Indices[0]];
-            Vector3D<Real> U0, U1;
-			auto  vector3DOrthonormalBasis = Vector3DTools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
-			U0 = vector3DOrthonormalBasis.GetUVector();
-			U1 = vector3DOrthonormalBasis.GetVVector();
+            Vector3<Real> U0, U1;
+			auto  Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
+			U0 = Vector3OrthonormalBasis.GetUVector();
+			U1 = Vector3OrthonormalBasis.GetVVector();
 
             // Project the intersection onto the plane.
 			auto diff = intr - V0;
-			Vector2D<Real> projIntersect{ Vector3DTools<Real>::DotProduct(U0,diff),Vector3DTools<Real>::DotProduct(U1,diff) };
+			Vector2<Real> projIntersect{ Vector3Tools<Real>::DotProduct(U0,diff),Vector3Tools<Real>::DotProduct(U1,diff) };
 
             // Project the face vertices onto the plane of the face.
             if (face->Indices.size() > mProjVertices.size())
@@ -294,12 +294,12 @@ bool Mathematics::PointInPolyhedron3<Real>
 
             // Project the remaining vertices.  Vertex 0 is always the origin.
             const int numIndices = boost::numeric_cast<int>(face->Indices.size());
-            mProjVertices[0] = Vector2D<Real>::sm_Zero;
+            mProjVertices[0] = Vector2<Real>::sm_Zero;
             for (int k = 1; k < numIndices; ++k)
             {
                 diff = mPoints[face->Indices[k]] - V0;
-                mProjVertices[k][0] = Vector3DTools<Real>::DotProduct(U0,diff);
-                mProjVertices[k][1] = Vector3DTools<Real>::DotProduct(U1,diff);
+                mProjVertices[k][0] = Vector3Tools<Real>::DotProduct(U0,diff);
+                mProjVertices[k][1] = Vector3Tools<Real>::DotProduct(U1,diff);
             }
 
             // Test whether the intersection point is in the convex polygon.
@@ -334,7 +334,7 @@ bool Mathematics::PointInPolyhedron3<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolyhedron3<Real>
-	::ContainsS1(const Vector3D<Real>& p) const
+	::ContainsS1(const Vector3<Real>& p) const
 {
     int insideCount = 0;
 
@@ -369,15 +369,15 @@ bool Mathematics::PointInPolyhedron3<Real>
             // Get a coordinate system for the plane.  Use vertex 0 as the
             // origin.
             const auto& V0 = mPoints[face->Indices[0]];
-            Vector3D<Real> U0, U1;
+            Vector3<Real> U0, U1;
             
-			auto  vector3DOrthonormalBasis = Vector3DTools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
-			U0 = vector3DOrthonormalBasis.GetUVector();
-			U1 = vector3DOrthonormalBasis.GetVVector();
+			auto  Vector3OrthonormalBasis = Vector3Tools<Real>::GenerateComplementBasis(face->Plane.GetNormal());
+			U0 = Vector3OrthonormalBasis.GetUVector();
+			U1 = Vector3OrthonormalBasis.GetVVector();
 
             // Project the intersection onto the plane.
 			auto diff = intr - V0;
-			auto projIntersect(Vector3DTools<Real>::DotProduct(U0,diff), Vector3DTools<Real>::DotProduct(U1,diff));
+			auto projIntersect(Vector3Tools<Real>::DotProduct(U0,diff), Vector3Tools<Real>::DotProduct(U1,diff));
 
             // Project the face vertices onto the plane of the face.
             if (face->Indices.size() > mProjVertices.size())
@@ -387,12 +387,12 @@ bool Mathematics::PointInPolyhedron3<Real>
 
             // Project the remaining vertices.  Vertex 0 is always the origin.
             const int numIndices = (int)face->Indices.size();
-            mProjVertices[0] = Vector2D<Real>::sm_Zero;
+            mProjVertices[0] = Vector2<Real>::sm_Zero;
             for (auto k = 1; k < numIndices; ++k)
             {
                 diff = mPoints[face->Indices[k]] - V0;
-                mProjVertices[k][0] = Vector3DTools<Real>::DotProduct(U0,diff);
-                mProjVertices[k][1] =  Vector3DTools<Real>::DotProduct(U1,diff);
+                mProjVertices[k][0] = Vector3Tools<Real>::DotProduct(U0,diff);
+                mProjVertices[k][1] =  Vector3Tools<Real>::DotProduct(U1,diff);
             }
 
             // Test whether the intersection point is in the convex polygon.

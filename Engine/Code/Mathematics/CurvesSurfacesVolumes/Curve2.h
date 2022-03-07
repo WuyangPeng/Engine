@@ -9,12 +9,12 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 namespace Mathematics
 {
 	template <typename Real>
-	class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Curve2
+	class  Curve2
 	{
 	public:
 		// Abstract base class.
@@ -34,26 +34,26 @@ namespace Mathematics
 		void SetTimeInterval (Real tmin, Real tmax);
 		
 		// Position and derivatives.
-		virtual Vector2D<Real> GetPosition (Real t) const = 0;
-		virtual Vector2D<Real> GetFirstDerivative (Real t) const = 0;
-		virtual Vector2D<Real> GetSecondDerivative (Real t) const = 0;
-		virtual Vector2D<Real> GetThirdDerivative (Real t) const = 0;
+		virtual Vector2<Real> GetPosition (Real t) const = 0;
+		virtual Vector2<Real> GetFirstDerivative (Real t) const = 0;
+		virtual Vector2<Real> GetSecondDerivative (Real t) const = 0;
+		virtual Vector2<Real> GetThirdDerivative (Real t) const = 0;
 
 		// Differential geometric quantities.
 		Real GetSpeed (Real t) const;
 		virtual Real GetLength (Real t0, Real t1) const = 0;
 		Real GetTotalLength () const;
-		Vector2D<Real> GetTangent (Real t) const;
-		Vector2D<Real> GetNormal (Real t) const;
-		void GetFrame (Real t, Vector2D<Real>& position, Vector2D<Real>& tangent, Vector2D<Real>& normal) const;
+		Vector2<Real> GetTangent (Real t) const;
+		Vector2<Real> GetNormal (Real t) const;
+		void GetFrame (Real t, Vector2<Real>& position, Vector2<Real>& tangent, Vector2<Real>& normal) const;
 		Real GetCurvature (Real t) const;
 
 		// Inverse mapping of s = Length(t) given by t = Length^{-1}(s).
 		virtual Real GetTime (Real length, int iterations = 32, Real tolerance = static_cast<Real>(1e-06)) const = 0;
 
 		// Subdivision.
-		void SubdivideByTime (int numPoints, Vector2D<Real>*& points) const;
-		void SubdivideByLength (int numPoints, Vector2D<Real>*& points) const;
+		void SubdivideByTime (int numPoints, Vector2<Real>*& points) const;
+		void SubdivideByLength (int numPoints, Vector2<Real>*& points) const;
 
 	protected:
 		// Curve parameter is t where tmin <= t <= tmax.

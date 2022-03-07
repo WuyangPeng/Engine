@@ -1,37 +1,39 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/07 16:05)
+///	引擎版本：0.8.0.2 (2022/02/21 14:13)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_DETAIL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_DETAIL_H
 
 #include "DistanceLine2Line2Tool.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 
 template <typename Real>
-Mathematics::DistanceLine2Line2Tool<Real>::DistanceLine2Line2Tool(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin, const Vector2D& rhsDirection)
-    : m_OriginDifference{ lhsOrigin - rhsOrigin },
-      m_DirectionDot{ -Vector2DTools::DotProduct(lhsDirection, rhsDirection) },
-      m_OriginDifferenceDotLhsDirection{ Vector2DTools::DotProduct(m_OriginDifference, lhsDirection) },
-      m_OriginDifferenceDotRhsDirection{ -Vector2DTools::DotProduct(m_OriginDifference, rhsDirection) },
-      m_OriginDifferenceSquaredLength{ Vector2DTools::VectorMagnitudeSquared(m_OriginDifference) },
-      m_Det{ Math::FAbs(Math::GetValue(1) - m_DirectionDot * m_DirectionDot) }
+Mathematics::DistanceLine2Line2Tool<Real>::DistanceLine2Line2Tool(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection)
+    : originDifference{ lhsOrigin - rhsOrigin },
+      directionDot{ -Vector2Tools::DotProduct(lhsDirection, rhsDirection) },
+      originDifferenceDotLhsDirection{ Vector2Tools::DotProduct(originDifference, lhsDirection) },
+      originDifferenceDotRhsDirection{ -Vector2Tools::DotProduct(originDifference, rhsDirection) },
+      originDifferenceSquaredLength{ Vector2Tools::GetLengthSquared(originDifference) },
+      det{ Math::FAbs(Math::GetValue(1) - directionDot * directionDot) }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DistanceLine2Line2Tool<Real>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -39,7 +41,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetDet() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Det;
+    return det;
 }
 
 template <typename Real>
@@ -47,7 +49,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetLhsT() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_DirectionDot * m_OriginDifferenceDotRhsDirection - m_OriginDifferenceDotLhsDirection);
+    return (directionDot * originDifferenceDotRhsDirection - originDifferenceDotLhsDirection);
 }
 
 template <typename Real>
@@ -55,7 +57,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetRhsT() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_DirectionDot * m_OriginDifferenceDotLhsDirection - m_OriginDifferenceDotRhsDirection);
+    return (directionDot * originDifferenceDotLhsDirection - originDifferenceDotRhsDirection);
 }
 
 template <typename Real>
@@ -63,7 +65,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetLhsT(Real extent) const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_DirectionDot * extent - m_OriginDifferenceDotLhsDirection);
+    return (directionDot * extent - originDifferenceDotLhsDirection);
 }
 
 template <typename Real>
@@ -71,7 +73,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetRhsT(Real extent) const noexc
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return (m_DirectionDot * extent - m_OriginDifferenceDotRhsDirection);
+    return (directionDot * extent - originDifferenceDotRhsDirection);
 }
 
 template <typename Real>
@@ -79,7 +81,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetOriginDifferenceDotLhsDirecti
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_OriginDifferenceDotLhsDirection;
+    return originDifferenceDotLhsDirection;
 }
 
 template <typename Real>
@@ -87,7 +89,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetOriginDifferenceDotRhsDirecti
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_OriginDifferenceDotRhsDirection;
+    return originDifferenceDotRhsDirection;
 }
 
 template <typename Real>
@@ -103,7 +105,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetSquaredDistanceWithLhs() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto squaredDistance = -m_OriginDifferenceDotLhsDirection * m_OriginDifferenceDotLhsDirection + m_OriginDifferenceSquaredLength;
+    const auto squaredDistance = -originDifferenceDotLhsDirection * originDifferenceDotLhsDirection + originDifferenceSquaredLength;
 
     // 计算数值舍入误差
     return Math::GetNumericalRoundOffNonnegative(squaredDistance);
@@ -114,7 +116,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetSquaredDistanceWithRhs() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto squaredDistance = -m_OriginDifferenceDotRhsDirection * m_OriginDifferenceDotRhsDirection + m_OriginDifferenceSquaredLength;
+    const auto squaredDistance = -originDifferenceDotRhsDirection * originDifferenceDotRhsDirection + originDifferenceSquaredLength;
 
     // 计算数值舍入误差
     return Math::GetNumericalRoundOffNonnegative(squaredDistance);
@@ -125,7 +127,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetOriginDifferenceSquaredLength
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_OriginDifferenceSquaredLength;
+    return originDifferenceSquaredLength;
 }
 
 template <typename Real>
@@ -133,7 +135,7 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetDirectionDot() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_DirectionDot;
+    return directionDot;
 }
 
 template <typename Real>
@@ -141,8 +143,8 @@ Real Mathematics::DistanceLine2Line2Tool<Real>::GetOriginDifferenceDotDirectionA
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    auto sign = (Math::GetValue(0) < m_DirectionDot ? Math::GetValue(-1) : Math::GetValue(1));
-    auto average = Math::GetRational(1, 2) * (m_OriginDifferenceDotLhsDirection - sign * m_OriginDifferenceDotRhsDirection);
+    const auto sign = (Math::GetValue(0) < directionDot ? Math::GetValue(-1) : Math::GetValue(1));
+    const auto average = Math::GetRational(1, 2) * (originDifferenceDotLhsDirection - sign * originDifferenceDotRhsDirection);
 
     return average;
 }

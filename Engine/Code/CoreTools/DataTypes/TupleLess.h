@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 17:08)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 13:53)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_LESS_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_LESS_H
@@ -28,10 +28,10 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool operator()(const Tuple& lhs, const Tuple& rhs) const;
+        NODISCARD bool operator()(const Tuple& lhs, const Tuple& rhs) const;
 
     private:
-        int m_Index;
+        int index;
     };
 }
 

@@ -8,20 +8,19 @@
 
 #include "Example/Network/NetworkExample/NetworkExample.h"
 
-#include "CoreTools/CoreToolsLib.h" 
+#include "CoreTools/CoreToolsLib.h"
 
 #ifndef BUILDING_NETWORK_EXAMPLE_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_NETWORK_EXAMPLE_STATIC
+#else  // BUILDING_NETWORK_EXAMPLE_STATIC
 
-	namespace NetworkExample
-	{
-		void StaticDllLib()
-		{
+namespace NetworkExample
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_NETWORK_EXAMPLE_STATIC
+#endif  // !BUILDING_NETWORK_EXAMPLE_STATIC

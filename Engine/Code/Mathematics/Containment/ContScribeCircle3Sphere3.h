@@ -19,19 +19,19 @@ namespace Mathematics
 	
 	// Circle containing three 3D points.
 	template <typename Real> 
-	bool Circumscribe (const Vector3D<Real>& v0, const Vector3D<Real>& v1,const Vector3D<Real>& v2, Circle3<Real>& circle);
+	bool Circumscribe (const Vector3<Real>& v0, const Vector3<Real>& v1,const Vector3<Real>& v2, Circle3<Real>& circle);
 	
 	// Sphere containing four 3D points.
 	template <typename Real> 
-	bool Circumscribe (const Vector3D<Real>& v0, const Vector3D<Real>& v1, const Vector3D<Real>& v2, const Vector3D<Real>& v3,  Sphere3<Real>& sphere);
+	bool Circumscribe (const Vector3<Real>& v0, const Vector3<Real>& v1, const Vector3<Real>& v2, const Vector3<Real>& v3,  Sphere3<Real>& sphere);
 	
 	// Circle inscribing triangle of three 3D points.
 	template <typename Real>
-	bool Inscribe (const Vector3D<Real>& v0, const Vector3D<Real>& v1,const Vector3D<Real>& v2, Circle3<Real>& circle);
+	bool Inscribe (const Vector3<Real>& v0, const Vector3<Real>& v1,const Vector3<Real>& v2, Circle3<Real>& circle);
 	
 	// Sphere inscribing tetrahedron of four 3D points.
 	template <typename Real>
-	bool Inscribe (const Vector3D<Real>& v0, const Vector3D<Real>& v1, const Vector3D<Real>& v2, const Vector3D<Real>& v3, Sphere3<Real>& sphere);
+	bool Inscribe (const Vector3<Real>& v0, const Vector3<Real>& v1, const Vector3<Real>& v2, const Vector3<Real>& v3, Sphere3<Real>& sphere);
 }
 
 #endif // MATHEMATICS_CONTAINMENT_CONT_SCRIBE_CIRCLE3_SPHERE3_H

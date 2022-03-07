@@ -9,7 +9,7 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "RiemannianGeodesic.h"
 
 namespace Mathematics
@@ -34,7 +34,7 @@ namespace Mathematics
 		EllipsoidGeodesic(Real xExtent, Real yExtent, Real zExtent);
 		virtual ~EllipsoidGeodesic();
 
-		Vector3D<Real> ComputePosition(const VariableLengthVector<Real>& point);
+		Vector3<Real> ComputePosition(const VariableLengthVector<Real>& point);
 		virtual void ComputeMetric(const VariableLengthVector<Real>& point);
 		virtual void ComputeChristoffel1(const VariableLengthVector<Real>& point);
 

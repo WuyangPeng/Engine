@@ -20,7 +20,7 @@ namespace Mathematics
 		void MainTest();
 		void PolyhedronTest();
 	
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

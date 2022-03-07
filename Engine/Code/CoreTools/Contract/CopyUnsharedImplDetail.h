@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/25 16:05)
+///	引擎版本：0.8.0.1 (2022/01/10 18:23)
 
 #ifndef CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_DETAIL_H
 #define CORE_TOOLS_CONTRACT_COPY_UNSHARED_IMPL_DETAIL_H
@@ -86,6 +86,7 @@ void CoreTools::CopyUnsharedImpl<Original, Package>::Swap(CopyUnsharedImpl& rhs)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Original, typename Package>
 bool CoreTools::CopyUnsharedImpl<Original, Package>::IsValid() const noexcept
 {
@@ -94,6 +95,7 @@ bool CoreTools::CopyUnsharedImpl<Original, Package>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Original, typename Package>

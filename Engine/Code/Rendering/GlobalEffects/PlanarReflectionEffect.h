@@ -48,7 +48,7 @@ namespace Rendering
            ObjectInterfaceSharedPtr CloneObject() const override;
 
     protected:
-        void GetReflectionMatrixAndModelPlane(int i, Mathematics::FloatMatrix& reflection, Mathematics::FloatPlane& modelPlane);
+        void GetReflectionMatrixAndModelPlane(int i, Mathematics::MatrixF& reflection, Mathematics::PlaneF& modelPlane);
 
         int mNumPlanes;
         TrianglesMeshSharedPtr* mPlanes;

@@ -22,8 +22,8 @@ namespace Framework
 	{
 	public:
 		using ClassType = ObjectMotionMove;
-		using Matrix = Mathematics::FloatMatrix;
-		using AVector = Mathematics::FloatAVector;
+		using Matrix = Mathematics::MatrixF;
+		using AVector = Mathematics::AVectorF;
 		using Spatial = Rendering::Spatial;
 		using Transform = Rendering::FloatTransform;		
 		using SpatialSmartPointer = Rendering::SpatialSharedPtr;

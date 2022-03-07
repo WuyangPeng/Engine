@@ -10,8 +10,7 @@
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, UserMacroTesting)
 
-void Network::UserMacroTesting
-	::MainTest()
+void Network::UserMacroTesting ::MainTest() noexcept
 {
 
 }

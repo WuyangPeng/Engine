@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 10:14)
+///	引擎版本：0.8.0.2 (2022/02/15 11:26)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_CONST_ITERATOR_H
@@ -40,17 +40,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const SparseMatrixKey GetKey() const noexcept;
-        [[nodiscard]] const SparseMatrixMapped GetMapped() const noexcept;
+        NODISCARD SparseMatrixKey GetKey() const noexcept;
+        NODISCARD SparseMatrixMapped GetMapped() const noexcept;
 
     private:
         friend class boost::iterator_core_access;
         void increment() noexcept;
-        [[nodiscard]] bool equal(const SparseMatrixConstIterator& other) const noexcept;
-        [[nodiscard]] const SparseMatrixConstIter& dereference() const noexcept;
+        NODISCARD bool equal(const SparseMatrixConstIterator& rhs) const noexcept;
+        NODISCARD const SparseMatrixConstIter& dereference() const noexcept;
 
     private:
-        SparseMatrixConstIter m_Iter;
+        SparseMatrixConstIter iter;
     };
 }
 

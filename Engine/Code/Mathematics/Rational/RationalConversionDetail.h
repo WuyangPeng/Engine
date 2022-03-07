@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:41)
+///	引擎版本：0.8.0.2 (2022/02/11 16:35)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H
@@ -23,14 +23,14 @@
 
 template <int N, typename T>
 Mathematics::RationalConversion<N, T>::RationalConversion(const Rational& rational)
-    : m_AbsNumerator{ rational.GetNumerator().GetAbsoluteValue() },
-      m_AbsDenominator{ rational.GetDenominator().GetAbsoluteValue() },
-      m_Shifting{ m_AbsNumerator.IsZero() ? 0 : (m_AbsNumerator.GetLeadingBit() - m_AbsDenominator.GetLeadingBit()) },
-      m_Symbol{ rational.GetSign() },
-      m_Value{},
-      m_Mantissa{}
+    : absNumerator{ rational.GetNumerator().GetAbsoluteValue() },
+      absDenominator{ rational.GetDenominator().GetAbsoluteValue() },
+      shifting{ absNumerator.IsZero() ? 0 : (absNumerator.GetLeadingBit() - absDenominator.GetLeadingBit()) },
+      symbol{ rational.GetSign() },
+      value{},
+      mantissa{}
 {
-    if (!m_AbsNumerator.IsZero())
+    if (!absNumerator.IsZero())
     {
         Init(TraitsType{});
     }
@@ -46,9 +46,9 @@ void Mathematics::RationalConversion<N, T>::Init(const SignedIntegerType&)
 
     InitToIntegral();
 
-    if (m_Symbol == NumericalValueSymbol::Negative)
+    if (symbol == NumericalValueSymbol::Negative)
     {
-        m_Value = -m_Value;
+        value = -value;
     }
 }
 
@@ -87,7 +87,7 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 
     CorrectWithShifting();
 
-    if (m_Shifting <= boost::numeric_cast<int>(TraitsType::g_RealExponentDifference))
+    if (shifting <= boost::numeric_cast<int>(TraitsType::realExponentDifference))
     {
         CalculateMantissa();
     }
@@ -99,11 +99,13 @@ void Mathematics::RationalConversion<N, T>::InitToFloatingPoint()
 
     Negative();
 
-    auto mantissa = boost::numeric_cast<IntegerType>(m_Mantissa);
+    auto result = boost::numeric_cast<IntegerType>(mantissa);
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
-    m_Value = *(reinterpret_cast<T*>(&mantissa));
+
+    value = *(reinterpret_cast<T*>(&result));
+
 #include STSTEM_WARNING_POP
 }
 
@@ -113,21 +115,21 @@ void Mathematics::RationalConversion<N, T>::CorrectWithShifting()
 {
     // 有理数的形式为N/D = 2^{nbit-dbit}*(1+n)/(1+d)所示，
     // 其中n和d是在范围[0,1）。转换到N'/D' = (1+n)/(1+d)。
-    if (0 < m_Shifting)
+    if (0 < shifting)
     {
-        m_AbsDenominator <<= m_Shifting;
+        absDenominator <<= shifting;
     }
-    else if (m_Shifting < 0)
+    else if (shifting < 0)
     {
-        m_AbsNumerator <<= -m_Shifting;
+        absNumerator <<= -shifting;
     }
 
     // 表示(1+n)/(1+d) = 1+m，其中m在[0,1)，我们需要n >= d。
     // 如果n < d，转换为N"/D" = (2*(1+n))/(1+d) = 1+m，这是在 [0,1)。
-    if (m_AbsNumerator < m_AbsDenominator)
+    if (absNumerator < absDenominator)
     {
-        m_AbsNumerator <<= 1;
-        --m_Shifting;
+        absNumerator <<= 1;
+        --shifting;
     }
 }
 
@@ -137,21 +139,20 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 {
     using IntegerType = typename TraitsType::IntegerType;
 
-    constexpr auto realExponentDifference = gsl::narrow_cast<int>(TraitsType::g_RealExponentDifference);
-    constexpr auto exponentShifting = gsl::narrow_cast<int>(TraitsType::g_ExponentShifting);
+    constexpr auto realExponentDifference = gsl::narrow_cast<int>(TraitsType::realExponentDifference);
+    constexpr auto exponentShifting = gsl::narrow_cast<int>(TraitsType::exponentShifting);
 
     // -1074 double
     // -149 float
-    if (-realExponentDifference - exponentShifting + 1 <= m_Shifting)
+    if (-realExponentDifference - exponentShifting + 1 <= shifting)
     {
         IntegerType exponent{ 0 };
         IntegerType bit{ 0 };
         IntegerType shift{ 0 };
-        if (-realExponentDifference < m_Shifting)
+        if (-realExponentDifference < shifting)
         {
             // normal_float, 1.c * 2^{e - 127}
-            const auto value = m_Shifting + realExponentDifference;
-            exponent = value;
+            exponent = gsl::narrow_cast<IntegerType>(shifting) + realExponentDifference;
             bit = 1;
             shift = 0;
         }
@@ -160,8 +161,8 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
             // subnormal_float, 0.c * 2^{-126}
             exponent = 0;
             bit = 0;
-            m_AbsDenominator <<= 1;
-            shift = -(m_Shifting + realExponentDifference);
+            absDenominator <<= 1;
+            shift = -(shifting + realExponentDifference);
         }
 
         const auto beginMask = (IntegerType{ 1 } << (exponentShifting - 1)) >> shift;
@@ -170,14 +171,14 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
         {
             if (bit == 1)
             {
-                m_AbsNumerator -= m_AbsDenominator;
+                absNumerator -= absDenominator;
             }
-            m_AbsNumerator <<= 1;
+            absNumerator <<= 1;
 
-            if (m_AbsDenominator <= m_AbsNumerator)
+            if (absDenominator <= absNumerator)
             {
                 bit = 1;
-                m_Mantissa |= mask;
+                mantissa |= mask;
             }
             else
             {
@@ -185,13 +186,13 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
             }
         }
 
-        const auto value = exponent << exponentShifting;
-        m_Mantissa = boost::numeric_cast<uint64_t>(value | m_Mantissa);
+        const auto result = exponent << exponentShifting;
+        mantissa = boost::numeric_cast<uint64_t>(result | mantissa);
     }
     else
     {
         // 小于 min_subnormal_float, 截断为0。
-        m_Mantissa = 0;
+        mantissa = 0;
     }
 }
 
@@ -199,9 +200,9 @@ void Mathematics::RationalConversion<N, T>::CalculateMantissa()
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::Negative() noexcept
 {
-    if (m_Symbol == NumericalValueSymbol::Negative)
+    if (symbol == NumericalValueSymbol::Negative)
     {
-        m_Mantissa |= TraitsType::g_Symbol;
+        mantissa |= TraitsType::symbol;
     }
 }
 
@@ -209,17 +210,19 @@ void Mathematics::RationalConversion<N, T>::Negative() noexcept
 template <int N, typename T>
 void Mathematics::RationalConversion<N, T>::InitToIntegral()
 {
-    auto division = m_AbsNumerator / m_AbsDenominator;
+    auto division = absNumerator / absDenominator;
 
-    m_Value = division.GetValue<T>();
+    value = division.GetValue<T>();
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N, typename T>
 bool Mathematics::RationalConversion<N, T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename T>
@@ -227,7 +230,7 @@ T Mathematics::RationalConversion<N, T>::GetValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 #endif  // MATHEMATICS_RATIONAL_RATIONAL_CONVERSION_DETAIL_H

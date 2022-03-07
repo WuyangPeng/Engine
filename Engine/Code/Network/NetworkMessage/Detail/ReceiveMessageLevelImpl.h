@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 20:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 11:51)
 
 #ifndef NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_RECEIVE_MESSAGE_LEVEL_IMPL_H
@@ -31,18 +31,18 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetTopLevelSize() const;
-        [[nodiscard]] const ConstMessageInterfaceSharedPtr operator[](int index) const;
+        NODISCARD int GetTopLevelSize() const;
+        NODISCARD ConstMessageInterfaceSharedPtr operator[](int index) const;
 
         // 对顶层的对象进行保存。
         void Insert(const MessageInterfaceSharedPtr& message);
 
-        [[nodiscard]] MessageContainerConstIter begin() const noexcept;
-        [[nodiscard]] MessageContainerConstIter end() const noexcept;
+        NODISCARD MessageContainerConstIter begin() const noexcept;
+        NODISCARD MessageContainerConstIter end() const noexcept;
 
     private:
         // 顶层对象的流。
-        MessageContainer m_TopLevel;
+        MessageContainer topLevel;
     };
 }
 

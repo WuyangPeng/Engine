@@ -32,7 +32,7 @@ namespace Rendering
 		bool ValidBuffers() const;
                 const int* GetIndexBufferReadOnlyData() const noexcept;
 
-		const Mathematics::FloatVector3D GetPosition(int index) const noexcept;
+		const Mathematics::Vector3F GetPosition(int index) const noexcept;
 
 		const char* GetVertexBufferReadOnlyData() const noexcept;
                 int GetStride() const noexcept;

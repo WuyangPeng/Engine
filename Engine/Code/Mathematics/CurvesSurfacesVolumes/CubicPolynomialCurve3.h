@@ -25,8 +25,8 @@ namespace Mathematics
 
 		// Tessellation data.
 		int GetNumVertices() const;
-		const Vector3D<Real>* GetVertices() const;
-		Vector3D<Real>* GetVertices();
+		const Vector3<Real>* GetVertices() const;
+		Vector3<Real>* GetVertices();
 
 		// Tessellation by recursive subdivision.
 		void Tessellate(int level);
@@ -42,16 +42,16 @@ namespace Mathematics
 		{
 		public:
 			int I0, I1;
-			Vector3D<Real> Xuu[2];
+			Vector3<Real> Xuu[2];
 		};
 
 		// Subdivide curve into two halves.
-		void Subdivide(int level, Real dsqr, Vector3D<Real>* X,
+		void Subdivide(int level, Real dsqr, Vector3<Real>* X,
 			IntervalParameters& IP);
 
 		// Tessellation data.
 		int mNumVertices;
-		Vector3D<Real>* mVertices;
+		Vector3<Real>* mVertices;
 	};
 
 	using CubicPolynomialCurve3f = CubicPolynomialCurve3<float>;

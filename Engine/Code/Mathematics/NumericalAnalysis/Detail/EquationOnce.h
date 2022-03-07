@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 14:00)
+///	引擎版本：0.8.0.2 (2022/02/13 14:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_EQUATION_ONCE_H
@@ -23,23 +23,23 @@ namespace Mathematics
         using ParentType = EquationImpl;
 
     public:
-        EquationOnce(double constant, double once, double epsilon = DoubleMath::GetZeroTolerance());
+        EquationOnce(double constant, double once, double epsilon = MathD::GetZeroTolerance());
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] double Substitution(double value) const noexcept final;
-        [[nodiscard]] const Imaginary Substitution(const Imaginary& value) const final;
+        NODISCARD double Substitution(double value) const noexcept final;
+        NODISCARD Imaginary Substitution(const Imaginary& value) const final;
 
     private:
-        [[nodiscard]] double SubstitutionTangent(double solution) const noexcept final;
-        [[nodiscard]] const Imaginary SubstitutionTangent(const Imaginary& solution) const final;
+        NODISCARD double SubstitutionTangent(double solution) const noexcept final;
+        NODISCARD Imaginary SubstitutionTangent(const Imaginary& solution) const final;
 
         void Solving() final;
-        [[nodiscard]] bool Predigest() noexcept final;
+        NODISCARD bool Predigest() noexcept final;
 
     private:
-        double m_Constant;
-        double m_Once;
+        double constant;
+        double once;
     };
 }
 

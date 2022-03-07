@@ -21,7 +21,7 @@ namespace Network
 
 		void OperatingTest();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

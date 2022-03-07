@@ -54,7 +54,7 @@ const Rendering::FloatTransform Rendering::CameraNodeImpl ::GetLocalTransform() 
     transform.SetTranslate(m_Camera->GetPosition());
 
     const Matrix rotate{ m_Camera->GetDirectionVector(), m_Camera->GetUpVector(), m_Camera->GetRightVector(),
-                         Mathematics::FloatAPoint::GetOrigin(), Mathematics::MatrixMajorFlags::Column };
+                         Mathematics::APointF::GetOrigin(), Mathematics::MatrixMajorFlags::Column };
 
     transform.SetRotate(rotate);
 

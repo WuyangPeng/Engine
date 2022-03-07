@@ -34,7 +34,7 @@ void Network::ACESockAcceptorTesting
 	::AcceptorTest()
 {
 	string hostName{ "127.0.0.1" };
-	uint16_t port{ 9120 };
+    /* uint16_t port{ 9120 };
 
 #ifdef _DEBUG
 	port += 4;
@@ -47,13 +47,14 @@ void Network::ACESockAcceptorTesting
 #ifdef _WIN64
 	port += 1;
 #endif // _WIN64
+*/
 
-	TestingType sockAcceptor1{ port,GetACEServerConfigurationStrategy() };
-	TestingType sockAcceptor2{ hostName,port + 10,GetACEServerConfigurationStrategy() };
+	//TestingType sockAcceptor1{ port,GetACEServerConfigurationStrategy() };
+	//TestingType sockAcceptor2{ hostName,port + 10,GetACEServerConfigurationStrategy() };
 
-	SockStreamSharedPtr sockStream{ make_shared<SockStream>(GetACEServerConfigurationStrategy()) };
-	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetACEServerConfigurationStrategy()) };
-	SocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
+//	SockStreamSharedPtr sockStream{ make_shared<SockStream>(GetACEServerConfigurationStrategy()) };
+//	SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(GetACEServerConfigurationStrategy()) };
+//	SocketManagerSharedPtr socketManager{ make_shared<TestSocketManager>(5) };
 
 // 	sockAcceptor1.EnableNonBlock();
 // 

@@ -25,7 +25,9 @@ void Mathematics::BarycentricCoordinatesTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(BarycentricCoordinates3DTest); 
 	ASSERT_NOT_THROW_EXCEPTION_0(BarycentricCoordinates4DTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
 void Mathematics::BarycentricCoordinatesTesting
 	::BarycentricCoordinates3DTest()
 {

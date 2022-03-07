@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 19:06)
+///	引擎版本：0.8.0.2 (2022/02/11 14:19)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_DETAIL_H
@@ -22,8 +22,17 @@
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 template <int N>
+Mathematics::IntegerData<N>::IntegerData(MAYBE_UNUSED Special special) noexcept
+    : buffer{ 1 }
+{
+    static_assert(0 < N);
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+template <int N>
 Mathematics::IntegerData<N>::IntegerData() noexcept
-    : m_Buffer{}
+    : buffer{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -31,12 +40,12 @@ Mathematics::IntegerData<N>::IntegerData() noexcept
 template <int N>
 void Mathematics::IntegerData<N>::SetZero()
 {
-    m_Buffer.fill(0);
+    buffer.fill(0);
 }
 
 template <int N>
-Mathematics::IntegerData<N>::IntegerData(const DataType& data)  
-    : m_Buffer{}
+Mathematics::IntegerData<N>::IntegerData(const DataType& data)
+    : buffer{}
 {
     Init(data);
 
@@ -44,26 +53,9 @@ Mathematics::IntegerData<N>::IntegerData(const DataType& data)
 }
 
 template <int N>
-template <int Other>
-Mathematics::IntegerData<N>::IntegerData(const IntegerData<Other>& rhs)
-    : m_Buffer{}
-{
-    for (auto i = 0; i < rhs.sm_IntSize && i < sm_IntSize; ++i)
-    {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-#include SYSTEM_WARNING_DISABLE(26482)
-        m_Buffer[i] = rhs[i];
-#include STSTEM_WARNING_POP
-    }
-
-    MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-template <int N>
 template <typename T>
 Mathematics::IntegerData<N>::IntegerData(T value)
-    : m_Buffer{}
+    : buffer{}
 {
     Init(value);
 
@@ -77,7 +69,7 @@ void Mathematics::IntegerData<N>::Init(T value)
 {
     const ConversionInteger<T> conversion{ value };
 
-    auto beginBlock = boost::numeric_cast<size_t>(conversion.GetBeginBlock());
+    const auto beginBlock = boost::numeric_cast<size_t>(conversion.GetBeginBlock());
     const auto mantissa = conversion.GetShiftingMantissa();
     const auto mantissaSize = conversion.GetMantissaSize();
     const auto copySize = conversion.GetCopySize();
@@ -90,7 +82,9 @@ void Mathematics::IntegerData<N>::Init(T value)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
         memcpy(data.data() + beginBlock, &mantissa, copySize);
+
 #include STSTEM_WARNING_POP
     }
     else
@@ -109,14 +103,16 @@ void Mathematics::IntegerData<N>::Init(T value)
 }
 
 template <int N>
-void Mathematics::IntegerData<N>::Init(const DataType& data)  
+void Mathematics::IntegerData<N>::Init(const DataType& data)
 {
-    for (auto i = 0; i < boost::numeric_cast<int>(data.size()) && i < sm_IntSize; ++i)
+    for (auto i = 0; i < boost::numeric_cast<int>(data.size()) && i < intSize; ++i)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
-        m_Buffer[i] = data[i];
+
+        buffer[i] = data[i];
+
 #include STSTEM_WARNING_POP
     }
 }
@@ -126,7 +122,7 @@ bool Mathematics::IntegerData<N>::IsZero() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    for (auto value : m_Buffer)
+    for (auto value : buffer)
     {
         if (value != 0)
         {
@@ -138,23 +134,27 @@ bool Mathematics::IntegerData<N>::IsZero() const noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N>
 bool Mathematics::IntegerData<N>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
-void Mathematics::IntegerData<N>::SwapBigEndian()
+void Mathematics::IntegerData<N>::SwapBigEndian() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
 #ifdef CORE_TOOLS_BIG_ENDIAN
+
     for (auto i = 0; i <= N; ++i)
     {
-        std::swap(m_Buffer[2 * i], m_Buffer[2 * i + 1]);
+        std::swap(buffer[2 * i], buffer[2 * i + 1]);
     }
+
 #endif  // CORE_TOOLS_BIG_ENDIAN
 }
 
@@ -162,17 +162,17 @@ template <int N>
 void Mathematics::IntegerData<N>::SetBit(int index, bool on)
 {
     MATHEMATICS_CLASS_IS_VALID_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < sm_IntSize * sm_BlockSize, "索引错误！");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "索引错误！");
 
-    const auto block = index / sm_BlockSize;
-    const auto bit = index % sm_BlockSize;
+    const auto block = index / blockSize;
+    const auto bit = index % blockSize;
     if (on)
     {
-        m_Buffer.at(block) |= (1 << bit);
+        buffer.at(block) |= (1 << bit);
     }
     else
     {
-        m_Buffer.at(block) &= ~(1 << bit);
+        buffer.at(block) &= ~(1 << bit);
     }
 }
 
@@ -180,12 +180,12 @@ template <int N>
 bool Mathematics::IntegerData<N>::GetBit(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < sm_IntSize * sm_BlockSize, "索引错误！");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < intSize * blockSize, "索引错误！");
 
-    const auto block = index / sm_BlockSize;
-    const auto bit = index % sm_BlockSize;
+    const auto block = index / blockSize;
+    const auto bit = index % blockSize;
 
-    return (m_Buffer.at(block) & (1 << bit)) != 0;
+    return (buffer.at(block) & (1 << bit)) != 0;
 }
 
 template <int N>
@@ -201,7 +201,7 @@ const uint16_t& Mathematics::IntegerData<N>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Buffer.at(index);
+    return buffer.at(index);
 }
 
 template <int N>
@@ -211,14 +211,16 @@ Mathematics::NumericalValueSymbol Mathematics::IntegerData<N>::GetSign() const n
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    return (m_Buffer[sm_IntLast] & 0x8000) ? NumericalValueSymbol::Negative : NumericalValueSymbol::Positive;
+
+    return (buffer[intLast] & 0x8000) ? NumericalValueSymbol::Negative : NumericalValueSymbol::Positive;
+
 #include STSTEM_WARNING_POP
 }
 
 template <int N>
 Mathematics::NumericalValueSymbol Mathematics::IntegerData<N>::UnsignedDataCompare(const IntegerData& lhs, const IntegerData& rhs)
 {
-    for (auto index = sm_IntLast; 0 <= index; --index)
+    for (auto index = intLast; 0 <= index; --index)
     {
         if (lhs[index] < rhs[index])
         {

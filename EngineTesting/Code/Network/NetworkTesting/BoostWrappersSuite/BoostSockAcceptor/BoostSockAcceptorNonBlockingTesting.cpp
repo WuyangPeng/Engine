@@ -20,7 +20,11 @@ using std::make_shared;
 using std::thread;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostSockAcceptorNonBlockingTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Network::BoostSockAcceptorNonBlockingTesting ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::AcceptorTest);
@@ -106,7 +110,7 @@ void Network::BoostSockAcceptorNonBlockingTesting ::NonBlocking6Test()
 
 void Network::BoostSockAcceptorNonBlockingTesting ::NonBlockingAccept(const TestingTypeSharedPtr& sockAcceptor, AcceptFunction acceptFunction)
 {
-    [[maybe_unused]] auto value = sockAcceptor->EnableNonBlock();
+    [[maybe_unused]] const auto value = sockAcceptor->EnableNonBlock();
 
     thread clientThread{ &ClassType::ClientThread, this };
 
@@ -130,7 +134,7 @@ bool Network::BoostSockAcceptorNonBlockingTesting ::NonBlockingAcceptNoUseAddres
 
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
 
-    return sockAcceptor->Accept(sockStream);
+    return sockAcceptor->Accept(*sockStream);
 }
 
 bool Network::BoostSockAcceptorNonBlockingTesting ::NonBlockingAcceptUseAddress(const TestingTypeSharedPtr& sockAcceptor)
@@ -140,5 +144,5 @@ bool Network::BoostSockAcceptorNonBlockingTesting ::NonBlockingAcceptUseAddress(
     SockStreamSharedPtr sockStream{ make_shared<SockStream>(configurationStrategy) };
     SockAddressSharedPtr sockAddress{ make_shared<SockAddress>(configurationStrategy) };
 
-    return sockAcceptor->Accept(sockStream, sockAddress);
+    return sockAcceptor->Accept(*sockStream, *sockAddress);
 }

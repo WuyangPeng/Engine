@@ -1,16 +1,17 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/30 19:03)
+///	引擎版本：0.8.0.1 (2022/01/11 14:33)
 
 #include "CoreTools/CoreToolsExport.h"
 
 #include "ConsoleAlloc.h"
 #include "System/Console/ConsoleCreate.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
@@ -18,6 +19,11 @@
 
 using std::string;
 using namespace std::literals;
+
+CoreTools::ConsoleAlloc CoreTools::ConsoleAlloc::Create()
+{
+    return ConsoleAlloc{ DisableNotThrow::Disable };
+}
 
 CoreTools::ConsoleAlloc::ConsoleAlloc(MAYBE_UNUSED DisableNotThrow disableNotThrow)
     : out{ nullptr }, in{ nullptr }, error{ nullptr }
@@ -35,13 +41,12 @@ CoreTools::ConsoleAlloc::~ConsoleAlloc() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::ConsoleAlloc::IsValid() const noexcept
 {
-    if (out != nullptr && in != nullptr && error != nullptr)
-        return true;
-    else
-        return false;
+    return out != nullptr && in != nullptr && error != nullptr;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::ConsoleAlloc::OpenConsole()
@@ -74,7 +79,7 @@ void CoreTools::ConsoleAlloc::ReOpenConsole()
     }
 }
 
-void CoreTools::ConsoleAlloc::CloseConsole() noexcept
+void CoreTools::ConsoleAlloc::CloseConsole() const noexcept
 {
     CloseConsole(out);
     CloseConsole(in);

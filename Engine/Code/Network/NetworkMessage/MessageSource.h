@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 10:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 17:02)
 
 #ifndef NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
 #define NETWORK_NETWORK_MESSAGE_MESSAGE_SOURCE_H
@@ -17,8 +17,6 @@
 
 #include <string>
 #include <vector>
-
- 
 
 namespace Network
 {
@@ -40,11 +38,11 @@ namespace Network
         CLASS_INVARIANT_DECLARE;
 
         // 读取bool值为4字节
-        [[nodiscard]] bool ReadBool();
+        NODISCARD bool ReadBool();
         void ReadBool(int elementsNumber, bool* data);
 
         // 读取字符串，在字符串之前读取4个字节代表长度。没有空终止符。
-        [[nodiscard]] std::string ReadString();
+        NODISCARD std::string ReadString();
         void ReadString(int elementsNumber, std::string* data);
 
         // 原生数据读取函数
@@ -66,13 +64,13 @@ namespace Network
         void ReadEnum(int elementsNumber, T* data);
 
         // 帮助函数
-        [[nodiscard]] int GetBytesRead() const noexcept;
-        [[nodiscard]] int GetBytesTotal() const noexcept;
+        NODISCARD int GetBytesRead() const noexcept;
+        NODISCARD int GetBytesTotal() const noexcept;
         void IncrementBytesProcessed(int bytesNumber);
 
     private:
-        MessageBufferSharedPtr m_Source;
-        ParserStrategy m_ParserStrategy;
+        MessageBufferSharedPtr source;
+        ParserStrategy parserStrategy;
     };
 }
 

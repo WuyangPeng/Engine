@@ -6,7 +6,7 @@
 
 #include "Triangle2Testing.h"
 #include "Mathematics/Objects2D/Triangle2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "CoreTools/Helper/AssertMacro.h"
 
@@ -29,6 +29,12 @@ void Mathematics::Triangle2Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(TriangleTest);
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 
 void Mathematics::Triangle2Testing
 	::TriangleTest()
@@ -40,32 +46,32 @@ void Mathematics::Triangle2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 firstPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D secondPoint(firstRandomDistribution(generator),  firstRandomDistribution(generator));
+		Vector2 secondPoint(firstRandomDistribution(generator),  firstRandomDistribution(generator));
 
-		DoubleVector2D thirdPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 thirdPoint(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleTriangle2 triangle(firstPoint,secondPoint,thirdPoint);
+		Triangle2D triangle(firstPoint,secondPoint,thirdPoint);
 
-		vector<DoubleVector2D> vertex = triangle.GetVertex();
+		vector<Vector2D> vertex = triangle.GetVertex();
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[0],firstPoint));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[1],secondPoint));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[2],thirdPoint));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[0],firstPoint));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[1],secondPoint));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[2],thirdPoint));
 
-		DoubleVector2D fourthPoint(firstRandomDistribution(generator),  firstRandomDistribution(generator));
+		Vector2 fourthPoint(firstRandomDistribution(generator),  firstRandomDistribution(generator));
 				
-		DoubleVector2D diff = firstPoint - fourthPoint;
-		DoubleVector2D edge0 = secondPoint - firstPoint;
-		DoubleVector2D edge1 = thirdPoint - firstPoint;
-		double a00 = DoubleVector2DTools::VectorMagnitudeSquared(edge0);
-		double a01 = DoubleVector2DTools::DotProduct(edge0,edge1);
-		double a11 = DoubleVector2DTools::VectorMagnitudeSquared(edge1);
-		double b0 = DoubleVector2DTools::DotProduct(diff,edge0);
-		double b1 = DoubleVector2DTools::DotProduct(diff,edge1);
-		double c = DoubleVector2DTools::VectorMagnitudeSquared(diff);
-		double det = DoubleMath::FAbs(a00 * a11 - a01 * a01);
+		Vector2 diff = firstPoint - fourthPoint;
+		Vector2 edge0 = secondPoint - firstPoint;
+		Vector2 edge1 = thirdPoint - firstPoint;
+		double a00 = Vector2ToolsD::GetLengthSquared(edge0);
+		double a01 = Vector2ToolsD::DotProduct(edge0,edge1);
+		double a11 = Vector2ToolsD::GetLengthSquared(edge1);
+		double b0 = Vector2ToolsD::DotProduct(diff,edge0);
+		double b1 = Vector2ToolsD::DotProduct(diff,edge1);
+		double c = Vector2ToolsD::GetLengthSquared(diff);
+		double det = MathD::FAbs(a00 * a11 - a01 * a01);
 		double s = a01 * b1 - a11 * b0;
 		double t = a01 * b0 - a00 * b1;
 
@@ -79,26 +85,26 @@ void Mathematics::Triangle2Testing
 					{
 						if (-b0 >= a00)
 						{
-							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a00 + 2.0 * b0 + c)),1e-10);							
+							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a00 + 2.0 * b0 + c)),1e-10);							
 						}
 						else
 						{
-							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c - b0 * b0 / a00)),1e-10);	
+							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c - b0 * b0 / a00)),1e-10);	
 						}
 					}
 					else
 					{
 						if (b1 >= 0.0)
 						{
-							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c)),1e-10);	
+							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c)),1e-10);	
 						}
 						else if (-b1 >= a11)
 						{
-							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a11 + 2.0 * b1 + c)),1e-10);		
+							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a11 + 2.0 * b1 + c)),1e-10);		
 						}
 						else
 						{
-							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c - b1 * b1 / a11)), 1e-10);				
+							ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c - b1 * b1 / a11)), 1e-10);				
 						}
 					}
 				}
@@ -106,16 +112,16 @@ void Mathematics::Triangle2Testing
 				{
 					if (b1 >= 0.0)
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c)), 1e-10);				
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c)), 1e-10);				
 	
 					}
 					else if (-b1 >= a11)
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a11 + 2.0 * b1 + c)),1e-10);									
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a11 + 2.0 * b1 + c)),1e-10);									
 					}
 					else
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint), DoubleMath::Sqrt(DoubleMath::FAbs(c - b1 * b1 / a11)), 1e-10);		
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint), MathD::Sqrt(MathD::FAbs(c - b1 * b1 / a11)), 1e-10);		
 									
 					}
 				}
@@ -124,17 +130,17 @@ void Mathematics::Triangle2Testing
 			{
 				if (b0 >= 0.0)
 				{
-					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c)),1e-10);		
+					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c)),1e-10);		
 			
 				}
 				else if (-b0 >= a00)
 				{
-					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a00 + 2.0 * b0 + c)),1e-10);					
+					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a00 + 2.0 * b0 + c)),1e-10);					
 
 				}
 				else
 				{
-					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(b0 * s + c - b0 * b0/ a00)),1e-10);					
+					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(b0 * s + c - b0 * b0/ a00)),1e-10);					
 				}
 			}
 			else  
@@ -143,7 +149,7 @@ void Mathematics::Triangle2Testing
 				s *= invDet;
 				t *= invDet;			
 
-				ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)), 1e-10);	
+				ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)), 1e-10);	
 			
 			}
 		}
@@ -159,7 +165,7 @@ void Mathematics::Triangle2Testing
 					double denom = a00 - 2.0 * a01 + a11;
 					if (numer >= denom)
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a00 + 2.0 * b0 + c)), 1e-10);			
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a00 + 2.0 * b0 + c)), 1e-10);			
 			
 					}
 					else
@@ -167,7 +173,7 @@ void Mathematics::Triangle2Testing
 						s = numer / denom;
 						t = 1.0 - s;
 
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),1e-10);	
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),1e-10);	
 										
 					}
 				}
@@ -175,17 +181,17 @@ void Mathematics::Triangle2Testing
 				{
 					if (tmp1 <= 0.0)
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a11 + 2.0 * b1 + c)),1e-10);					
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a11 + 2.0 * b1 + c)),1e-10);					
 	
 					}
 					else if (b1 >= 0.0)
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt (DoubleMath::FAbs(c)), 1e-10);		
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt (MathD::FAbs(c)), 1e-10);		
 	
 					}
 					else
 					{
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(c - b1 * b1 / a11)), 1e-10);			
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(c - b1 * b1 / a11)), 1e-10);			
 		
 					
 					}
@@ -204,7 +210,7 @@ void Mathematics::Triangle2Testing
 						t = 1.0;
 						s = 0.0;
 
-						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),DoubleMath::Sqrt(DoubleMath::FAbs(a11 + 2.0 * b1 + c)), 1e-10);	
+						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),MathD::Sqrt(MathD::FAbs(a11 + 2.0 * b1 + c)), 1e-10);	
 						
 		
 					}
@@ -214,7 +220,7 @@ void Mathematics::Triangle2Testing
 						s = 1.0 - t;
 
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt(DoubleMath::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),
+								           MathD::Sqrt(MathD::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),
 									       1e-10);						
 					}
 				}
@@ -224,7 +230,7 @@ void Mathematics::Triangle2Testing
 					{
 			
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt(DoubleMath::FAbs(a00 + 2.0 * b0 + c)),
+								           MathD::Sqrt(MathD::FAbs(a00 + 2.0 * b0 + c)),
 									       1e-10);					
 
 					}
@@ -232,7 +238,7 @@ void Mathematics::Triangle2Testing
 					{
 
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt(DoubleMath::FAbs(c)),
+								           MathD::Sqrt(MathD::FAbs(c)),
 									       1e-10);					
 
 					}
@@ -240,8 +246,8 @@ void Mathematics::Triangle2Testing
 					{
 		
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt
-									       (DoubleMath::FAbs(c - b0 * b0 / a00)),
+								           MathD::Sqrt
+									       (MathD::FAbs(c - b0 * b0 / a00)),
 									       1e-10);						
 	
 					}
@@ -253,7 +259,7 @@ void Mathematics::Triangle2Testing
 				if (numer <= 0.0)
 				{
 					ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								       DoubleMath::Sqrt(DoubleMath::FAbs(a11 + 2.0 * b1 + c)),
+								       MathD::Sqrt(MathD::FAbs(a11 + 2.0 * b1 + c)),
 									   1e-10);					
 			
 				}
@@ -263,7 +269,7 @@ void Mathematics::Triangle2Testing
 					if (numer >= denom)
 					{
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt(DoubleMath::FAbs(a00 + 2.0 * b0 + c)),
+								           MathD::Sqrt(MathD::FAbs(a00 + 2.0 * b0 + c)),
 									       1e-10);				 
 
 					}
@@ -273,7 +279,7 @@ void Mathematics::Triangle2Testing
 						t = 1.0 - s;					
 
 						ASSERT_APPROXIMATE(triangle.DistanceTo(fourthPoint),
-								           DoubleMath::Sqrt(DoubleMath::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),
+								           MathD::Sqrt(MathD::FAbs(s * (a00 * s + a01 * t + 2.0 * b0) + t * (a01 * s + a11 * t + 2.0 * b1) + c)),
 									       1e-10);
 					}
 				}

@@ -7,7 +7,7 @@
 #include "Lozenge3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Lozenge3Detail.h"
 
 #include <random>
@@ -27,7 +27,12 @@ void Mathematics::Lozenge3Testing ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(LozengeTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::Lozenge3Testing ::LozengeTest()
 {
     default_random_engine generator{};
@@ -38,35 +43,35 @@ void Mathematics::Lozenge3Testing ::LozengeTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleVector3D center(firstRandomDistribution(generator),
+        Vector3D center(firstRandomDistribution(generator),
                               firstRandomDistribution(generator),
                               firstRandomDistribution(generator));
 
-        DoubleVector3D axis0(firstRandomDistribution(generator),
+        Vector3D axis0(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
 
-        DoubleVector3D axis1(firstRandomDistribution(generator),
+        Vector3D axis1(firstRandomDistribution(generator),
                              firstRandomDistribution(generator),
                              firstRandomDistribution(generator));
 
-        double extent0 = DoubleVector3DTools::VectorMagnitude(axis0);
-        double extent1 = DoubleVector3DTools::VectorMagnitude(axis1);
+        double extent0 = Vector3ToolsD::GetLength(axis0);
+        double extent1 = Vector3ToolsD::GetLength(axis1);
 
         axis0.Normalize();
         axis1.Normalize();
 
-        DoubleRectangle3 rectangle(center, axis0, axis1, extent0, extent1);
+        Rectangle3D rectangle(center, axis0, axis1, extent0, extent1);
 
-        double radius(DoubleMath::FAbs(firstRandomDistribution(generator)));
+        double radius(MathD::FAbs(firstRandomDistribution(generator)));
 
-        DoubleLozenge3 lozenge(rectangle, radius);
+        Lozenge3D lozenge(rectangle, radius);
 
         ASSERT_APPROXIMATE(radius, lozenge.GetRadius(), 1e-10);
 
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(lozenge.GetRectangle().GetCenter(), rectangle.GetCenter()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(lozenge.GetRectangle().GetAxis0(), rectangle.GetAxis0()));
-        ASSERT_TRUE(DoubleVector3DTools::Approximate(lozenge.GetRectangle().GetAxis1(), rectangle.GetAxis1()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(lozenge.GetRectangle().GetCenter(), rectangle.GetCenter()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(lozenge.GetRectangle().GetAxis0(), rectangle.GetAxis0()));
+        ASSERT_TRUE(Vector3ToolsD::Approximate(lozenge.GetRectangle().GetAxis1(), rectangle.GetAxis1()));
         ASSERT_APPROXIMATE(lozenge.GetRectangle().GetExtent0(), rectangle.GetExtent0(), 1e-10);
         ASSERT_APPROXIMATE(lozenge.GetRectangle().GetExtent1(), rectangle.GetExtent1(), 1e-10);
     }

@@ -29,7 +29,7 @@ namespace Rendering
     {
     public:
         using ClassType = SkinControllerImpl;
-        using APoint = Mathematics::FloatAPoint;
+        using APoint = Mathematics::APointF;
 
     public:
         // 顶点和骨骼的数目在对象的生存期是固定的。

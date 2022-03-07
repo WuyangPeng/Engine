@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 16:56)
 
 #include "Database/DatabaseExport.h"
 
@@ -25,7 +25,7 @@ Database::DatabaseObjectFactory::DatabaseObjectFactory() noexcept
 
 CLASS_INVARIANT_STUB_DEFINE(Database, DatabaseObjectFactory)
 
-Database::DatabaseObjectFactory::ImplTypePtr Database::DatabaseObjectFactory::Create(const ConfigurationStrategy& configurationStrategy)
+Database::DatabaseObjectFactory::ImplTypeSharedPtr Database::DatabaseObjectFactory::Create(const ConfigurationStrategy& configurationStrategy)
 {
     const auto wrappersStrategy = configurationStrategy.GetWrappersStrategy();
     switch (wrappersStrategy)
@@ -37,11 +37,6 @@ Database::DatabaseObjectFactory::ImplTypePtr Database::DatabaseObjectFactory::Cr
 
 #endif  // DATABASE_USE_MYSQL_CPP_CONNECTOR
 
-        case Database::WrappersStrategy::Null:
-        case Database::WrappersStrategy::Mysql:
-        case Database::WrappersStrategy::SQLite:
-        case Database::WrappersStrategy::SqlServer:
-        case Database::WrappersStrategy::FlatFile:
         default:
             return make_shared<NullDatabaseObject>(configurationStrategy);
     }

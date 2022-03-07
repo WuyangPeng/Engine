@@ -23,7 +23,7 @@ namespace Mathematics
 		static double Function(double value, const Minimize1Testing* minimize1Testing);
 		double GetValue() const;
 		
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

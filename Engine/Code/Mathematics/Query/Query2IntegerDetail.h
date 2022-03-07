@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 15:12)
+///	引擎版本：0.8.0.2 (2022/02/17 16:32)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_INTEGER_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY2_INTEGER_DETAIL_H
@@ -24,6 +24,7 @@ Mathematics::Query2Integer<Real>::Query2Integer(const VerticesType& vertices)
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query2Integer<Real>::IsValid() const noexcept
 {
@@ -32,6 +33,7 @@ bool Mathematics::Query2Integer<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -43,7 +45,7 @@ Mathematics::QueryType Mathematics::Query2Integer<Real>::GetType() const noexcep
 }
 
 template <typename Real>
-Mathematics::LineQueryType Mathematics::Query2Integer<Real>::ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::LineQueryType Mathematics::Query2Integer<Real>::ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
@@ -84,16 +86,16 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Integer<Real>::ToCircumcir
 }
 
 template <typename Real>
-Mathematics::CircumcircleQueryType Mathematics::Query2Integer<Real>::ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
+Mathematics::CircumcircleQueryType Mathematics::Query2Integer<Real>::ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_0(0 <= lhsVerticesIndex && lhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= mhsVerticesIndex && mhsVerticesIndex < this->GetNumVertices(), "索引错误！");
     MATHEMATICS_ASSERTION_0(0 <= rhsVerticesIndex && rhsVerticesIndex < this->GetNumVertices(), "索引错误！");
 
-    const Vector2D lhsVector{ this->GetVertice(lhsVerticesIndex) };
-    const Vector2D mhsVector{ this->GetVertice(mhsVerticesIndex) };
-    const Vector2D rhsVector{ this->GetVertice(rhsVerticesIndex) };
+    const Vector2 lhsVector{ this->GetVertice(lhsVerticesIndex) };
+    const Vector2 mhsVector{ this->GetVertice(mhsVerticesIndex) };
+    const Vector2 rhsVector{ this->GetVertice(rhsVerticesIndex) };
 
     const Integer<4> lhsPlusTestX{ lhsVector.GetX() + testVector.GetX() };
     const Integer<4> lhsMinusTestX{ lhsVector.GetX() - testVector.GetX() };
@@ -107,11 +109,11 @@ Mathematics::CircumcircleQueryType Mathematics::Query2Integer<Real>::ToCircumcir
     const Integer<4> rhsMinusTestX{ rhsVector.GetX() - testVector.GetX() };
     const Integer<4> rhsPlusTestY{ rhsVector.GetY() + testVector.GetY() };
     const Integer<4> rhsMinusTestY{ rhsVector.GetY() - testVector.GetY() };
-    auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
-    auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
-    auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
+    const auto z0 = lhsPlusTestX * lhsMinusTestX + lhsPlusTestY * lhsMinusTestY;
+    const auto z1 = mhsPlusTestX * mhsMinusTestX + mhsPlusTestY * mhsMinusTestY;
+    const auto z2 = rhsPlusTestX * rhsMinusTestX + rhsPlusTestY * rhsMinusTestY;
 
-    auto det = QueryDotTools<Integer<4>>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
+    const auto det = QueryDotTools<Integer<4>>::Det3(lhsMinusTestX, lhsMinusTestY, z0, mhsMinusTestX, mhsMinusTestY, z1, rhsMinusTestX, rhsMinusTestY, z2);
 
     if (Integer<4>{ 0 } < det)
         return CircumcircleQueryType::Inside;

@@ -94,8 +94,8 @@ namespace Physics
 		Real*** mLengthsC;         // S-by-R-by-(C-1)
 	};
 
-	using MassSpringVolume3f = MassSpringVolume<float,Mathematics::FloatVector3D>;
-	using MassSpringVolume3d = MassSpringVolume<double,Mathematics::DoubleVector3D>;
+	using MassSpringVolume3f = MassSpringVolume<float,Mathematics::Vector3F>;
+	using MassSpringVolume3d = MassSpringVolume<double,Mathematics::Vector3D>;
 
 }
 

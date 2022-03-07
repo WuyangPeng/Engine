@@ -27,16 +27,16 @@ namespace Mathematics
 	class SeparatePoints2
 	{
 	public:
-		SeparatePoints2(const std::vector<Vector2D<Real> >& points0, const std::vector<Vector2D<Real> >& points1, Line2<Real>& separatingLine);
+		SeparatePoints2(const std::vector<Vector2<Real> >& points0, const std::vector<Vector2<Real> >& points1, Line2<Real>& separatingLine);
 		
 		// Return the result of the constructor call.  If 'true', the output
 		// line 'separatingLine' is valid.
 		operator bool ();
 
 	private:
-		static int OnSameSide (const Vector2D<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges, const std::vector<Vector2D<Real> >& points);
+		static int OnSameSide (const Vector2<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges, const std::vector<Vector2<Real> >& points);
 		
-		static int WhichSide (const Vector2D<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges, const std::vector<Vector2D<Real> >& points);
+		static int WhichSide (const Vector2<Real>& lineNormal, Real lineConstant, int numEdges, const int* edges, const std::vector<Vector2<Real> >& points);
 		
 		bool mSeparated;
 	};

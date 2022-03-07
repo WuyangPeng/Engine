@@ -18,9 +18,9 @@ namespace Rendering
 	{
 	public:
 		using ClassType = ScreenTarget;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
-		using Vector2D = Mathematics::FloatVector2D;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
+		using Vector2D = Mathematics::Vector2F;
 
 	public:
 		// 创建一个空间相机在渲染目标中使用。

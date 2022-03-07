@@ -16,12 +16,16 @@ namespace Database
     class TestingHelper : public CoreTools::CMainFunctionTestingHelper
     {
     public:
-        CMAIN_FUNCTION_TESTING_HELPER_SUBCLASS_COMPLETE_DECLARE(TestingHelper);
+        using ClassType = TestingHelper;
+        using ParentType = CMainFunctionTestingHelper;
 
-        virtual int DoRun() override;
+    public:
+        TestingHelper(int argc, char** argv);
+
+        CLASS_INVARIANT_FINAL_DECLARE;
 
     private:
-        void AddSuites();
+        void InitSuite();
 
         void AddHelperSuite();
         void AddConfigurationSuite();
@@ -34,9 +38,6 @@ namespace Database
         void AddPostgreSQLSuite();
         void AddOracleSuite();
         void AddFlatFileWrappersSuite();
-
-    private:
-        CMAIN_FUNCTION_HELPER_SUBCLASS_SUITE_PTR_DECLARE;
     };
 }
 

@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "BSplineBasis.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
@@ -38,23 +38,23 @@ namespace Mathematics
 		// Control points may be changed at any time.  If any input index is
 		// invalid, the returned point is a vector whose components are all
 		// MAX_REAL.
-		void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3D<Real>& ctrlPoint) noexcept;
-		Vector3D<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const noexcept;
+		void SetControlPoint(int uIndex, int vIndex, int wIndex, const Vector3<Real>& ctrlPoint) noexcept;
+		Vector3<Real> GetControlPoint(int uIndex, int vIndex, int wIndex) const noexcept;
 
 		// The spline is defined for 0 <= u <= 1, 0 <= v <= 1, and 0 <= w <= 1.
 		// The input values should be in this domain.  Any inputs smaller than 0
 		// are clamped to 0.  Any inputs larger than 1 are clamped to 1.
-		Vector3D<Real> GetPosition(Real u, Real v, Real w) const;
-		Vector3D<Real> GetDerivativeU(Real u, Real v, Real w) const;
-		Vector3D<Real> GetDerivativeV(Real u, Real v, Real w) const;
-		Vector3D<Real> GetDerivativeW(Real u, Real v, Real w) const;
+		Vector3<Real> GetPosition(Real u, Real v, Real w) const;
+		Vector3<Real> GetDerivativeU(Real u, Real v, Real w) const;
+		Vector3<Real> GetDerivativeV(Real u, Real v, Real w) const;
+		Vector3<Real> GetDerivativeW(Real u, Real v, Real w) const;
 
 		// for array indexing:  i = 0 for u, i = 1 for v, i = 2 for w
-		Vector3D<Real> GetPosition(Real pos[3]) const;
-		Vector3D<Real> GetDerivative(int i, Real pos[3]) const;
+		Vector3<Real> GetPosition(Real pos[3]) const;
+		Vector3<Real> GetDerivative(int i, Real pos[3]) const;
 
 	private:
-		Vector3D<Real>*** mCtrlPoint;  // ctrl[unum][vnum][wnum]
+		Vector3<Real>*** mCtrlPoint;  // ctrl[unum][vnum][wnum]
 		BSplineBasis<Real> mBasis[3];
 	};
 

@@ -74,7 +74,7 @@ namespace Imagics
 		// The number of image elements.
 		int mQuantity;
 		
-		// When set to Mathematics::Mathf::sm_MaxReal, Neumann conditions are in use (zero-valued
+		// When set to Mathematics::Mathf::maxReal, Neumann conditions are in use (zero-valued
 		// derivatives on the image border).  Dirichlet conditions are used,
 		// otherwise (image is constant on the border).
 		float mBorderValue;

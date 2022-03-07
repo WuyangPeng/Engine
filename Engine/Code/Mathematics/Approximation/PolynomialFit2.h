@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 17:35)
+///	引擎版本：0.8.0.2 (2022/02/18 15:58)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_H
@@ -35,7 +35,7 @@ namespace Mathematics
     // 原始多项式的求值为
     //   w = rng * sum_{i=0}^d c'[i] * ((x-xcen) / rng)^i
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialFit2 final
+    class PolynomialFit2 final
     {
     public:
         using ClassType = PolynomialFit2<Real>;
@@ -48,19 +48,19 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Polynomial GetCoeff() const;
-        [[nodiscard]] bool IsSolveSucceed() const noexcept;
+        NODISCARD Polynomial GetCoeff() const;
+        NODISCARD bool IsSolveSucceed() const noexcept;
 
     private:
         void Calculate(const Samples& xSamples, const Samples& wSamples);
 
     private:
-        Polynomial m_Coeff;
-        bool m_SolveSucceed;
+        Polynomial coeff;
+        bool solveSucceed;
     };
 
-    using FloatPolynomialFit2 = PolynomialFit2<float>;
-    using DoublePolynomialFit2 = PolynomialFit2<double>;
+    using PolynomialFit2F = PolynomialFit2<float>;
+    using PolynomialFit2D = PolynomialFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT2_H

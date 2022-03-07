@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:19)
+///	引擎版本：0.8.0.1 (2022/01/09 1:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -45,6 +45,7 @@ CoreTools::OFStreamSeekManager::~OFStreamSeekManager() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::OFStreamSeekManager::IsValid() const noexcept
 {
     try
@@ -59,6 +60,7 @@ bool CoreTools::OFStreamSeekManager::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 CoreTools::OFStreamSeekManager::MasterPosType CoreTools::OFStreamSeekManager::GetErrorPosition()

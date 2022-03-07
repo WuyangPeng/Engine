@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 10:04)
+///	引擎版本：0.8.0.2 (2022/02/10 16:48)
 
 #ifndef MATHEMATICS_OBJECTS3D_TORUS3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_TORUS3_ACHIEVE_H
@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::Torus3<Real>::Torus3(Real outerRadius, Real innerRadius) noexcept
-    : m_OuterRadius{ outerRadius }, m_InnerRadius{ innerRadius }
+    : outerRadius{ outerRadius }, innerRadius{ innerRadius }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
@@ -27,7 +27,7 @@ Mathematics::Torus3<Real>::Torus3(Real outerRadius, Real innerRadius) noexcept
 template <typename Real>
 bool Mathematics::Torus3<Real>::IsValid() const noexcept
 {
-    if (Math::GetValue(0) < m_InnerRadius && m_InnerRadius < m_OuterRadius)
+    if (Math::GetValue(0) < innerRadius && innerRadius < outerRadius)
         return true;
     else
         return false;
@@ -39,7 +39,7 @@ Real Mathematics::Torus3<Real>::GetOuterRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_OuterRadius;
+    return outerRadius;
 }
 
 template <typename Real>
@@ -47,51 +47,51 @@ Real Mathematics::Torus3<Real>::GetInnerRadius() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_InnerRadius;
+    return innerRadius;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetPosition(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
 
-    auto twoPiS = Math::GetTwoPI() * s;
-    auto twoPiT = Math::GetTwoPI() * t;
-    auto cosTwoPiS = Math::Cos(twoPiS);
-    auto sinTwoPiS = Math::Sin(twoPiS);
-    auto cosTwoPiT = Math::Cos(twoPiT);
-    auto sinTwoPiT = Math::Sin(twoPiT);
-    auto maxRadius = m_OuterRadius + m_InnerRadius * cosTwoPiT;
+    const auto twoPiS = Math::GetTwoPI() * s;
+    const auto twoPiT = Math::GetTwoPI() * t;
+    const auto cosTwoPiS = Math::Cos(twoPiS);
+    const auto sinTwoPiS = Math::Sin(twoPiS);
+    const auto cosTwoPiT = Math::Cos(twoPiT);
+    const auto sinTwoPiT = Math::Sin(twoPiT);
+    const auto maxRadius = outerRadius + innerRadius * cosTwoPiT;
 
-    return Vector3D{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, m_InnerRadius * sinTwoPiT };
+    return Vector3{ maxRadius * cosTwoPiS, maxRadius * sinTwoPiS, innerRadius * sinTwoPiT };
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
+Mathematics::Vector3<Real> Mathematics::Torus3<Real>::GetNormal(Real s, Real t) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
     MATHEMATICS_ASSERTION_1(Math::GetValue(0) <= s && s <= Math::GetValue(1) && Math::GetValue(0) <= t && t <= Math::GetValue(1), "s和t必须在0和1之间");
 
-    auto twoPiS = Math::GetTwoPI() * s;
-    auto cosTwoPiS = Math::Cos(twoPiS);
-    auto sinTwoPiS = Math::Sin(twoPiS);
+    const auto twoPiS = Math::GetTwoPI() * s;
+    const auto cosTwoPiS = Math::Cos(twoPiS);
+    const auto sinTwoPiS = Math::Sin(twoPiS);
     const auto position = GetPosition(s, t);
 
-    Vector3D normal{ position.GetX() - m_OuterRadius * cosTwoPiS,
-                     position.GetY() - m_OuterRadius * sinTwoPiS,
-                     position.GetZ() };
+    Vector3 normal{ position.GetX() - outerRadius * cosTwoPiS,
+                    position.GetY() - outerRadius * sinTwoPiS,
+                    position.GetZ() };
     normal.Normalize();
 
     return normal;
 }
 
 template <typename Real>
-const Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3D& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
+Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParameters(const Vector3& position) const noexcept(g_Assert < 3 || g_MathematicsAssert < 3)
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto radius = Math::Sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY());
+    const auto radius = Math::Sqrt(position.GetX() * position.GetX() + position.GetY() * position.GetY());
 
     auto s = Math::GetValue(0);
 
@@ -108,7 +108,7 @@ const Mathematics::Torus3Parameters<Real> Mathematics::Torus3<Real>::GetParamete
         }
     }
 
-    auto diff = radius - m_OuterRadius;
+    auto diff = radius - outerRadius;
 
     auto t = Math::GetValue(0);
 

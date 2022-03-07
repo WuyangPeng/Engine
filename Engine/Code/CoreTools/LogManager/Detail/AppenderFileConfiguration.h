@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 9:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/06 0:15)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_CONFIGURATION_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_FILE_CONFIGURATION_H
@@ -27,28 +27,32 @@ namespace CoreTools
         using ParentType = AppenderImpl;
 
     public:
-        AppenderFileConfiguration(const String& directory, AppenderPrint appenderFlags, LogLevel logLevel,
-                                  int maxFileSize, bool backup, const String& extensionName);
+        AppenderFileConfiguration(const String& directory,
+                                  AppenderPrint appenderFlags,
+                                  LogLevel logLevel,
+                                  int maxFileSize,
+                                  bool backup,
+                                  const String& extensionName);
 
-        CLASS_INVARIANT_OVERRIDE_DECLARE;
+        CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] AppenderType GetAppenderType() const noexcept final;
+        NODISCARD AppenderType GetAppenderType() const noexcept final;
 
-        [[nodiscard]] const AppenderImplPtr Clone() const final;
+        NODISCARD const AppenderImplSharedPtr Clone() const final;
 
-        [[nodiscard]] String GetDirectory() const final;
-        [[nodiscard]] String GetExtensionName() const final;
-        [[nodiscard]] int GetMaxFileSize() const noexcept final;
-        [[nodiscard]] bool IsBackup() const noexcept final;
+        NODISCARD String GetDirectory() const final;
+        NODISCARD String GetExtensionName() const final;
+        NODISCARD int GetMaxFileSize() const noexcept final;
+        NODISCARD bool IsBackup() const noexcept final;
 
     private:
         void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) noexcept final;
 
     private:
-        String m_Directory;
-        String m_ExtensionName;
-        int m_MaxFileSize;
-        bool m_Backup;
+        String directory;
+        String extensionName;
+        int maxFileSize;
+        bool backup;
     };
 }
 

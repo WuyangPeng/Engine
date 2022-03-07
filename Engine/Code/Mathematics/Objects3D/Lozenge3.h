@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 17:44)
+///	引擎版本：0.8.0.2 (2022/02/10 17:14)
 
 #ifndef MATHEMATICS_OBJECTS3D_LOZENGE3_H
 #define MATHEMATICS_OBJECTS3D_LOZENGE3_H
@@ -19,7 +19,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Lozenge3 final
+    class Lozenge3 final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -33,16 +33,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Rectangle3 GetRectangle() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
+        NODISCARD Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
 
     private:
-        Rectangle3 m_Rectangle;
-        Real m_Radius;
+        Rectangle3 rectangle;
+        Real radius;
     };
 
-    using FloatLozenge3 = Lozenge3<float>;
-    using DoubleLozenge3 = Lozenge3<double>;
+    using Lozenge3F = Lozenge3<float>;
+    using Lozenge3D = Lozenge3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_LOZENGE3_H

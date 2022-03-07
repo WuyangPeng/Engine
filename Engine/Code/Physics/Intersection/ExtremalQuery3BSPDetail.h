@@ -12,7 +12,7 @@
 #if !defined(PHYSICS_EXPORT_TEMPLATE) || defined(PHYSICS_INCLUDED_EXTREMAL_QUERY3BSP_DETAIL)
 
     #include "CoreTools/Helper/Assertion/PhysicsCustomAssertMacro.h"
-    #include "Mathematics/Algebra/Vector3DToolsDetail.h"
+    #include "Mathematics/Algebra/Vector3ToolsDetail.h"
     #include "Mathematics/Objects3D/ConvexPolyhedron3Detail.h"
 
     #include <queue>
@@ -75,7 +75,7 @@ namespace Physics
         while (current >= 0)
         {
             SphericalArc& node = mNodes[current];
-            const int sign = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3DTools<Real>::DotProduct(direction, node.Normal)));
+            const int sign = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3Tools<Real>::DotProduct(direction, node.Normal)));
             if (sign >= 0)
             {
                 current = node.PosChild;
@@ -102,7 +102,7 @@ namespace Physics
         while (current >= 0)
         {
             SphericalArc& node = mNodes[current];
-            const int sign = static_cast<int>(-Mathematics::Math<Real>::Sign(Mathematics::Vector3DTools<Real>::DotProduct(direction, node.Normal)));
+            const int sign = static_cast<int>(-Mathematics::Math<Real>::Sign(Mathematics::Vector3Tools<Real>::DotProduct(direction, node.Normal)));
             if (sign >= 0)
             {
                 current = node.PosChild;
@@ -201,7 +201,7 @@ namespace Physics
             arc.NIndex[1] = edge.T[1];
             arc.Separation = 1;
 
-            arc.Normal = Mathematics::Vector3DTools<Real>::CrossProduct(mFaceNormals[arc.NIndex[0]], (mFaceNormals[arc.NIndex[1]]));
+            arc.Normal = Mathematics::Vector3Tools<Real>::CrossProduct(mFaceNormals[arc.NIndex[0]], (mFaceNormals[arc.NIndex[1]]));
 
             const BasicMesh::Triangle& adj = triangles[edge.T[0]];
             int j;
@@ -252,7 +252,7 @@ namespace Physics
                         sphericalArc.NIndex[1] = vertex.T[i1];
                         sphericalArc.Separation = separation;
 
-                        sphericalArc.Normal = Mathematics::Vector3DTools<Real>::CrossProduct(mFaceNormals[sphericalArc.NIndex[0]], (mFaceNormals[sphericalArc.NIndex[1]]));
+                        sphericalArc.Normal = Mathematics::Vector3Tools<Real>::CrossProduct(mFaceNormals[sphericalArc.NIndex[0]], (mFaceNormals[sphericalArc.NIndex[1]]));
 
                         sphericalArc.PosVertex = i;
                         sphericalArc.NegVertex = i;
@@ -309,7 +309,7 @@ namespace Physics
                 }
                 else
                 {
-                    sign0 = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3DTools<Real>::DotProduct(mFaceNormals[arc.NIndex[0]], node->Normal)));
+                    sign0 = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3Tools<Real>::DotProduct(mFaceNormals[arc.NIndex[0]], node->Normal)));
                 }
 
                 int sign1 = 0;
@@ -319,7 +319,7 @@ namespace Physics
                 }
                 else
                 {
-                    sign1 = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3DTools<Real>::DotProduct(mFaceNormals[arc.NIndex[1]], node->Normal)));
+                    sign1 = static_cast<int>(Mathematics::Math<Real>::Sign(Mathematics::Vector3Tools<Real>::DotProduct(mFaceNormals[arc.NIndex[1]], node->Normal)));
                 }
 
                 int doTest = 0;

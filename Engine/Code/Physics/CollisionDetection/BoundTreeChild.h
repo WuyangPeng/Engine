@@ -40,9 +40,9 @@ namespace Physics
         using ClassType = BoundTreeChild<MeshSmartPointer, Bound>;
         using Transform = Rendering::FloatTransform;
         using BoundTreeChildPtr = std::shared_ptr<ClassType>;
-        using APoint = Mathematics::FloatAPoint;
-        using AVector = Mathematics::FloatAVector;
-        using Line3 = Mathematics::FloatLine3;
+        using APoint = Mathematics::APointF;
+        using AVector = Mathematics::AVectorF;
+        using Line3 = Mathematics::Line3F;
         using Centroids = std::vector<APoint>;
         using Split = std::vector<int>;
         using ConstMeshSmartPointer = MeshSmartPointer;  // typename MeshSmartPointer::ConstType;

@@ -35,7 +35,7 @@ namespace Rendering
               PointController(PointController&& rhs) noexcept;
               PointController& operator=(PointController&& rhs) noexcept;
 		using ParentType = Controller;
-		using AVector = Mathematics::FloatAVector;
+		using AVector = Mathematics::AVectorF;
 
 	public:
 		// 所连接的对象必须是Polypoint或Polypoint派生的类。

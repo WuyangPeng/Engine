@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/09 16:59)
+///	引擎版本：0.8.0.2 (2022/02/07 14:06)
 
 #ifndef MATHEMATICS_ALGEBRA_PLANE_H
 #define MATHEMATICS_ALGEBRA_PLANE_H
@@ -30,13 +30,13 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<T>, "T must be arithmetic.");
 
         using ClassType = Plane<T>;
+        using ElementType = T;
         using Math = Math<T>;
         using APoint = APoint<T>;
         using AVector = AVector<T>;
         using HomogeneousPoint = HomogeneousPoint<T>;
-        using ElementType = T;
 
-        static constexpr auto sm_PlaneSize = HomogeneousPoint::sm_PointSize;
+        static constexpr auto planeSize = HomogeneousPoint::pointSize;
 
     public:
         // 平面表示为Dot(N,X) - c = 0，其中N = (n0,n1,n2,0)是一个单位长度的法线向量，
@@ -62,28 +62,28 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const HomogeneousPoint GetHomogeneousPoint() const noexcept;
+        NODISCARD HomogeneousPoint GetHomogeneousPoint() const noexcept;
 
         // 坐标访问
-        [[nodiscard]] const T& operator[](int index) const;
-        [[nodiscard]] T& operator[](int index);
+        NODISCARD const T& operator[](int index) const;
+        NODISCARD T& operator[](int index);
 
         // 访问单个组件。
         void SetConstant(T constant) noexcept;
-        void SetEpsilon(T epsilon) noexcept;
+        void SetEpsilon(T newEpsilon) noexcept;
         void SetNormal(const AVector& normal) noexcept(g_Assert < 2 || g_MathematicsAssert < 2);
-        [[nodiscard]] T GetConstant() const noexcept;
-        [[nodiscard]] T GetEpsilon() const noexcept;
-        [[nodiscard]] const AVector GetNormal() const noexcept;
+        NODISCARD T GetConstant() const noexcept;
+        NODISCARD T GetEpsilon() const noexcept;
+        NODISCARD AVector GetNormal() const noexcept;
 
         // 计算d = Dot(N,P)-c 其中N是平面法线和c是平面常量。这是一个符号距离。
         // 如果返回值的符号是正的，则该点是在平面上的正方向，
         // 如果是负的，则在平面负方向，
         // 如果为零，则点在平面上。
-        [[nodiscard]] T DistanceTo(const APoint& point) const noexcept;
+        NODISCARD T DistanceTo(const APoint& point) const noexcept;
 
         // 平面的正面是法线点所在的半空间，背面是另一半空间。函数返回点在平面的哪一侧。
-        [[nodiscard]] NumericalValueSymbol WhichSide(const APoint& point) const noexcept;
+        NODISCARD NumericalValueSymbol WhichSide(const APoint& point) const noexcept;
 
     private:
         // 计算：L = Length(n0,n1,n2)，并设置平面为(n0,n1,n2,-c)/L。
@@ -92,22 +92,22 @@ namespace Mathematics
 
     private:
         // 存储(n0,n1,n2,-c).
-        HomogeneousPoint m_HomogeneousPoint;
-        T m_Epsilon;
+        HomogeneousPoint homogeneousPoint;
+        T epsilon;
     };
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const Plane<T>& lhs, const Plane<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Plane<T>& lhs, const Plane<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
     // 比较（仅供STL容器使用）。
     template <typename T>
-    [[nodiscard]] bool operator==(const Plane<T>& lhs, const Plane<T>& rhs);
+    NODISCARD bool operator==(const Plane<T>& lhs, const Plane<T>& rhs);
 
     template <typename T>
-    [[nodiscard]] bool operator<(const Plane<T>& lhs, const Plane<T>& rhs);
+    NODISCARD bool operator<(const Plane<T>& lhs, const Plane<T>& rhs);
 
-    using FloatPlane = Plane<float>;
-    using DoublePlane = Plane<double>;
+    using PlaneF = Plane<float>;
+    using PlaneD = Plane<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_PLANE_H

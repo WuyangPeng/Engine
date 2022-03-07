@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:51)
 
 #include "Database/DatabaseExport.h"
 
@@ -19,26 +19,28 @@ using std::make_unique;
 #ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 Database::MysqlConnectorResult::MysqlConnectorResult(const ConfigurationStrategy& configurationStrategy, const MysqlxRowResultPtr& mysqlxRowResult) noexcept
-    : ParentType{ configurationStrategy }, m_MysqlxRowResult{ mysqlxRowResult }
+    : ParentType{ configurationStrategy }, mysqlxRowResult{ mysqlxRowResult }
 {
     DATABASE_SELF_CLASS_IS_VALID_1;
 }
 
     #ifdef OPEN_CLASS_INVARIANT
+
 bool Database::MysqlConnectorResult::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && m_MysqlxRowResult)
+    if (ParentType::IsValid() && mysqlxRowResult)
         return true;
     else
         return false;
 }
+
     #endif  // OPEN_CLASS_INVARIANT
 
-Database::ResultImpl::ResultRowPtr Database::MysqlConnectorResult::FetchOne()
+Database::ResultImpl::ResultRowUniquePtr Database::MysqlConnectorResult::FetchOne()
 {
     DATABASE_CLASS_IS_VALID_1;
 
-    auto result = m_MysqlxRowResult->fetchOne();
+    auto result = mysqlxRowResult->fetchOne();
 
     return make_unique<ResultRow>(GetConfigurationStrategy(), make_shared<MysqlxRow>(result));
 }
@@ -47,9 +49,9 @@ Database::ResultImpl::ResultRowContainer Database::MysqlConnectorResult::FetchAl
 {
     DATABASE_CLASS_IS_VALID_1;
 
-    ResultRowContainer container;
+    ResultRowContainer container{};
 
-    auto result = m_MysqlxRowResult->fetchAll();
+    auto result = mysqlxRowResult->fetchAll();
 
     for (const auto& value : result)
     {

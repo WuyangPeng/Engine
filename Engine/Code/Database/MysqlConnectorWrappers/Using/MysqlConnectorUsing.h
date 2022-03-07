@@ -1,21 +1,21 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:36)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 17:54)
 
 #ifndef DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
 #define DATABASE_MYSQL_CONNECTOR_WRAPPERS_MYSQL_CONNECTOR_USING_H
 
 #include "Database/DatabaseDll.h"
 
-#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
+#include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
+#include "System/Helper/UnicodeUsing.h"
 
-    #include "System/Helper/PragmaWarning/MysqlxXdevapi.h"
-    #include "System/Helper/UnicodeUsing.h"
+#ifdef DATABASE_USE_MYSQL_CPP_CONNECTOR
 
 namespace Database
 {

@@ -5,31 +5,34 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 13:08)
 
 #include "Vector3DOrthonormalBasisTesting.h"
-#include "Mathematics/Algebra/Vector3DOrthonormalBasisDetail.h"
+#include "Mathematics/Algebra/Vector3OrthonormalBasisDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random>  
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 using std::uniform_real;
 using std::default_random_engine;
 
 namespace Mathematics
 {
-	template class Vector3DOrthonormalBasis<float>;
-	template class Vector3DOrthonormalBasis<double>;
+	template class Vector3OrthonormalBasis<float>;
+	template class Vector3OrthonormalBasis<double>;
 }
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Vector3DOrthonormalBasisTesting) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Vector3OrthonormalBasisTesting) 
 
-void Mathematics::Vector3DOrthonormalBasisTesting
+void Mathematics::Vector3OrthonormalBasisTesting
 	::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(OrthonormalBasisTest); 
 }
-
-void Mathematics::Vector3DOrthonormalBasisTesting
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
+void Mathematics::Vector3OrthonormalBasisTesting
 	::OrthonormalBasisTest()
 {
 	default_random_engine generator{};
@@ -41,25 +44,25 @@ void Mathematics::Vector3DOrthonormalBasisTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector3D firstVector(firstRandomDistribution(generator),
+		Vector3D firstVector(firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator),
 			                  firstRandomDistribution(generator)); 
 
-		FloatVector3D secondVector(secondRandomDistribution(generator),
+		Vector3F secondVector(secondRandomDistribution(generator),
 			                   secondRandomDistribution(generator),
 			                   secondRandomDistribution(generator));
 
-		DoubleVector3DOrthonormalBasis firstOrthonormalBasis(firstVector,false);
+		Vector3OrthonormalBasisD firstOrthonormalBasis(firstVector,false);
 
 		firstVector.Normalize();
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(firstVector,firstOrthonormalBasis.GetWVector(),1e-10)); 
+		ASSERT_TRUE(Vector3ToolsD::Approximate(firstVector,firstOrthonormalBasis.GetWVector(),1e-10)); 
 
-		FloatVector3DOrthonormalBasis secondOrthonormalBasis(secondVector,false);
+		Vector3OrthonormalBasisF secondOrthonormalBasis(secondVector,false);
 
 		secondVector.Normalize(); 
 
-		ASSERT_TRUE(FloatVector3DTools::Approximate(secondVector,secondOrthonormalBasis.GetWVector(),1e-8f)); 
+		ASSERT_TRUE(Vector3ToolsF::Approximate(secondVector,secondOrthonormalBasis.GetWVector(),1e-8f)); 
 	}	
 }
 

@@ -10,12 +10,17 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 #include <random> 
-#include "Mathematics/Algebra/Vector3DTools.h"
+#include "Mathematics/Algebra/Vector3Tools.h"
 
 using std::vector;
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 namespace Mathematics
 {
 	template class Box3<float>;
@@ -40,55 +45,55 @@ void Mathematics::Box3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop) 
 	{
-		DoubleVector3D center(firstRandomDistribution(generator),
+		Vector3D center(firstRandomDistribution(generator),
 			             firstRandomDistribution(generator),
 						 firstRandomDistribution(generator));
 
-		DoubleVector3D firstAxis(firstRandomDistribution(generator),
+		Vector3D firstAxis(firstRandomDistribution(generator),
 			                firstRandomDistribution(generator),
 							firstRandomDistribution(generator));
 
-		DoubleVector3D secondAxis(firstRandomDistribution(generator),
+		Vector3D secondAxis(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		DoubleVector3D thirdAxis(firstRandomDistribution(generator),
+		Vector3D thirdAxis(firstRandomDistribution(generator),
 			                 firstRandomDistribution(generator),
 							 firstRandomDistribution(generator));
 
-		double firstExtent = DoubleVector3DTools::VectorMagnitude(firstAxis);
-		double secondExtent = DoubleVector3DTools::VectorMagnitude(secondAxis);
-		double thirdExtent = DoubleVector3DTools::VectorMagnitude(thirdAxis);
+		double firstExtent = Vector3ToolsD::GetLength(firstAxis);
+		double secondExtent = Vector3ToolsD::GetLength(secondAxis);
+		double thirdExtent = Vector3ToolsD::GetLength(thirdAxis);
 
-		DoubleVector3D fourthAxis(firstAxis);
-		DoubleVector3D fifthAxis(secondAxis);
-		DoubleVector3D sixthAxis(thirdAxis);
+		Vector3D fourthAxis(firstAxis);
+		Vector3D fifthAxis(secondAxis);
+		Vector3D sixthAxis(thirdAxis);
 
 		fourthAxis.Normalize();
 		fifthAxis.Normalize();
 		sixthAxis.Normalize();
 
-		DoubleBox3 box(center,fourthAxis,fifthAxis,sixthAxis,firstExtent,secondExtent,thirdExtent);
+		Box3D box(center,fourthAxis,fifthAxis,sixthAxis,firstExtent,secondExtent,thirdExtent);
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(box.GetCenter(),center));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(box.GetAxis0(),fourthAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(box.GetAxis1(),fifthAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(box.GetAxis2(),sixthAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(box.GetCenter(),center));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(box.GetAxis0(),fourthAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(box.GetAxis1(),fifthAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(box.GetAxis2(),sixthAxis));
 		ASSERT_APPROXIMATE(box.GetExtent0(),firstExtent,1e-10);
 		ASSERT_APPROXIMATE(box.GetExtent1(),secondExtent,1e-10);
 		ASSERT_APPROXIMATE(box.GetExtent2(),thirdExtent,1e-10);
 
-		vector<DoubleVector3D> vertex = box.ComputeVertices();
+		vector<Vector3D> vertex = box.ComputeVertices();
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[0],center - firstAxis - secondAxis - thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[1],center + firstAxis - secondAxis - thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[2],center + firstAxis + secondAxis - thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[3],center - firstAxis + secondAxis - thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[0],center - firstAxis - secondAxis - thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[1],center + firstAxis - secondAxis - thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[2],center + firstAxis + secondAxis - thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[3],center - firstAxis + secondAxis - thirdAxis));
 
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[4],center - firstAxis - secondAxis + thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[5],center + firstAxis - secondAxis + thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[6],center + firstAxis + secondAxis + thirdAxis));
-		ASSERT_TRUE(DoubleVector3DTools::Approximate(vertex[7],center - firstAxis + secondAxis + thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[4],center - firstAxis - secondAxis + thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[5],center + firstAxis - secondAxis + thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[6],center + firstAxis + secondAxis + thirdAxis));
+		ASSERT_TRUE(Vector3ToolsD::Approximate(vertex[7],center - firstAxis + secondAxis + thirdAxis));
 	}
 }
 

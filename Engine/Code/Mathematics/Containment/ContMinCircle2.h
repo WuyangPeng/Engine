@@ -23,31 +23,31 @@ namespace Mathematics
 	public:
 		// The epsilon value is a floating-point tolerance used for various
 		// computations.
-		MinCircle2 (int numPoints, const Vector2D<Real>* points,Circle2<Real>& minimal, Real epsilon = static_cast<Real>(1e-05));
+		MinCircle2 (int numPoints, const Vector2<Real>* points,Circle2<Real>& minimal, Real epsilon = static_cast<Real>(1e-05));
 		
 	private:
 		// Indices of points that support current minimum area circle.
 		class Support
 		{
 		public:
-			bool Contains (int index, Vector2D<Real>** points, Real epsilon);
+			bool Contains (int index, Vector2<Real>** points, Real epsilon);
 			
 			int Quantity;
 			int Index[3];
 		};
 		
 		// Test whether point P is inside circle C.
-		bool Contains (const Vector2D<Real>& point, const Circle2<Real>& circle, Real& distDiff);
+		bool Contains (const Vector2<Real>& point, const Circle2<Real>& circle, Real& distDiff);
 		
-		Circle2<Real> ExactCircle1 (const Vector2D<Real>& P);
-		Circle2<Real> ExactCircle2 (const Vector2D<Real>& P0, const Vector2D<Real>& P1);
-		Circle2<Real> ExactCircle3 (const Vector2D<Real>& P0, const Vector2D<Real>& P1, const Vector2D<Real>& P2);
+		Circle2<Real> ExactCircle1 (const Vector2<Real>& P);
+		Circle2<Real> ExactCircle2 (const Vector2<Real>& P0, const Vector2<Real>& P1);
+		Circle2<Real> ExactCircle3 (const Vector2<Real>& P0, const Vector2<Real>& P1, const Vector2<Real>& P2);
 		
-		Circle2<Real> UpdateSupport1 (int i, Vector2D<Real>** permuted, Support& support);
-		Circle2<Real> UpdateSupport2 (int i, Vector2D<Real>** permuted,Support& support);
-		Circle2<Real> UpdateSupport3 (int i, Vector2D<Real>** permuted,Support& support);
+		Circle2<Real> UpdateSupport1 (int i, Vector2<Real>** permuted, Support& support);
+		Circle2<Real> UpdateSupport2 (int i, Vector2<Real>** permuted,Support& support);
+		Circle2<Real> UpdateSupport3 (int i, Vector2<Real>** permuted,Support& support);
 		
-		typedef Circle2<Real> (MinCircle2<Real>::*UpdateFunction)(int, Vector2D<Real>**, Support&);
+		typedef Circle2<Real> (MinCircle2<Real>::*UpdateFunction)(int, Vector2<Real>**, Support&);
 		
 		Real mEpsilon;
 		UpdateFunction mUpdate[4];

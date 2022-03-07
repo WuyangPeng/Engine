@@ -23,8 +23,8 @@ namespace Rendering
 	public:
 		using ClassType = CurveSegment;
 		using ParentType = Object;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
 
 	protected:
 		// Construction.

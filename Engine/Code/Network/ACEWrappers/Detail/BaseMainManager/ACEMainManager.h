@@ -1,21 +1,21 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 14:32)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 13:47)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_MAIN_MANAGER_H
 #define NETWORK_ACE_WRAPPERS_ACE_MAIN_MANAGER_H
 
 #include "Network/NetworkDll.h"
 
-#ifdef NETWORK_USE_ACE
+#include "System/Helper/PragmaWarning/ACE.h"
+#include "Network/Interface/Detail/BaseMainManagerImpl.h"
 
-    #include "System/Helper/PragmaWarning/ACE.h"
-    #include "Network/Interface/Detail/BaseMainManagerImpl.h"
+#ifdef NETWORK_USE_ACE
 
 namespace Network
 {
@@ -34,7 +34,7 @@ namespace Network
     public:
         void Run() noexcept override;
 
-        [[nodiscard]] int run_i(int argc, ACE_TCHAR** argv) noexcept override;
+        NODISCARD int run_i(int argc, ACE_TCHAR** argv) noexcept override;
     };
 }
 

@@ -55,11 +55,11 @@ void Rendering::IKJointImpl ::Init() noexcept
     for (auto i = 0; i < sm_NumAxis; ++i)
     {
         m_AllowTranslation[i] = false;
-        m_MinTranslation[i] = -Mathematics::FloatMath::sm_MaxReal;
-        m_MaxTranslation[i] = Mathematics::FloatMath::sm_MaxReal;
+        m_MinTranslation[i] = -Mathematics::MathF::maxReal;
+        m_MaxTranslation[i] = Mathematics::MathF::maxReal;
         m_AllowRotation[i] = false;
-        m_MinRotation[i] = -Mathematics::FloatMath::GetPI();
-        m_MaxRotation[i] = Mathematics::FloatMath::GetPI();
+        m_MinRotation[i] = -Mathematics::MathF::GetPI();
+        m_MaxRotation[i] = Mathematics::MathF::GetPI();
     }
 }
 
@@ -230,15 +230,15 @@ const Rendering::IKJointImpl::AVector Rendering::IKJointImpl ::GetAxis(MatrixRot
     }
     else if (axisIndex == Mathematics::MatrixRotationAxis::X)
     {
-        return Mathematics::FloatAVector::GetUnitX();
+        return Mathematics::AVectorF::GetUnitX();
     }
     else if (axisIndex == Mathematics::MatrixRotationAxis::Y)
     {
-        return Mathematics::FloatAVector::GetUnitY();
+        return Mathematics::AVectorF::GetUnitY();
     }
     else  //  axisIndex == MatrixRotationAxis::Z
     {
-        return Mathematics::FloatAVector::GetUnitZ();
+        return Mathematics::AVectorF::GetUnitZ();
     }
 }
 
@@ -301,7 +301,7 @@ bool Rendering::IKJointImpl ::UpdateLocalTranslate(MatrixRotationAxis axisIndex)
         denom += goal->GetWeight();
     }
 
-    if (Mathematics::FloatMath::FAbs(denom) <= Mathematics::FloatMath::GetZeroTolerance())
+    if (Mathematics::MathF::FAbs(denom) <= Mathematics::MathF::GetZeroTolerance())
     {
         // 权重太小，没有转换。
         return false;
@@ -374,14 +374,14 @@ bool Rendering::IKJointImpl ::UpdateLocalRotate(MatrixRotationAxis axisIndex)
         denom -= goal->GetWeight() * Dot(goalMinusPoint, axisCrossAxisCrossEffectorMinusPoint);
     }
 
-    if (numer * numer + denom * denom <= Mathematics::FloatMath::GetZeroTolerance())
+    if (numer * numer + denom * denom <= Mathematics::MathF::GetZeroTolerance())
     {
         // 未定义 atan2,不旋转。
         return false;
     }
 
     // 所需角度绕axis(i)旋转。
-    auto theta = Mathematics::FloatMath::ATan2(numer, denom);
+    auto theta = Mathematics::MathF::ATan2(numer, denom);
 
     // 局部因子旋转欧拉角。
     auto rotate = m_Object->GetLocalTransform().GetRotate();
@@ -428,7 +428,7 @@ bool Rendering::IKJointImpl ::UpdateLocalRotate(MatrixRotationAxis axisIndex)
     // 更新局部旋转
     rotateMatrix3.MakeEulerZYX(euler.GetZ0Angle(), euler.GetY0Angle(), euler.GetX0Angle());
 
-    rotate = Mathematics::FloatMatrix{ rotateMatrix3 };
+    rotate = Mathematics::MatrixF{ rotateMatrix3 };
     m_Object->SetLocalTransformRotate(rotate);
 
     return true;

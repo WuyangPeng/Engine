@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/06 14:11)
+///	引擎版本：0.8.0.3 (2022/03/02 17:59)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CAPSULE3_ACHIEVE_H
@@ -17,7 +17,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::StaticFindIntersectorSegment3Capsule3(const Segment3& segment, const Capsule3& capsule, const Real epsilon)
-    : ParentType{ epsilon }, m_Segment{ segment }, m_Capsule{ capsule }, m_Quantity{}, m_Point0{}, m_Point1{}, m_Parameter0{}, m_Parameter1{}
+    : ParentType{ epsilon }, segment{ segment }, capsule{ capsule }, quantity{}, point0{}, point1{}, parameter0{}, parameter1{}
 {
     Find();
 
@@ -25,6 +25,7 @@ Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::StaticFindIntersectorS
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::IsValid() const noexcept
 {
@@ -33,56 +34,57 @@ bool Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::IsValid() const n
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetSegment() const noexcept
+Mathematics::Segment3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Segment;
+    return segment;
 }
 
 template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetCapsule() const noexcept
+Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetCapsule() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Capsule;
+    return capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::Find()
 {
-    const auto quantity = StaticFindIntersectorLine3Capsule3<Real>::Find(m_Segment.GetCenterPoint(), m_Segment.GetDirection(), m_Capsule);
+    const auto findShared = StaticFindIntersectorLine3Capsule3<Real>::Find(segment.GetCenterPoint(), segment.GetDirection(), capsule);
 
-    m_Quantity = 0;
-    for (auto i = 0; i < quantity.m_Quantity; ++i)
+    quantity = 0;
+    for (auto i = 0; i < findShared.quantity; ++i)
     {
-        auto parameter = (i == 0) ? quantity.m_Parameter0 : quantity.m_Parameter1;
-        if (Math::FAbs(parameter) <= m_Segment.GetExtent())
+        auto parameter = (i == 0) ? findShared.parameter0 : findShared.parameter1;
+        if (Math::FAbs(parameter) <= segment.GetExtent())
         {
-            if (m_Quantity == 0)
+            if (quantity == 0)
             {
-                m_Point0 = m_Segment.GetCenterPoint() + parameter * m_Segment.GetDirection();
+                point0 = segment.GetCenterPoint() + parameter * segment.GetDirection();
             }
-            else if (m_Quantity == 1)
+            else if (quantity == 1)
             {
-                m_Point1 = m_Segment.GetCenterPoint() + parameter * m_Segment.GetDirection();
+                point1 = segment.GetCenterPoint() + parameter * segment.GetDirection();
             }
         }
 
-        ++m_Quantity;
+        ++quantity;
     }
 
-    m_Parameter0 = quantity.m_Parameter0;
-    m_Parameter1 = quantity.m_Parameter1;
+    parameter0 = findShared.parameter0;
+    parameter1 = findShared.parameter1;
 
-    if (m_Quantity == 2)
+    if (quantity == 2)
     {
         this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (m_Quantity == 1)
+    else if (quantity == 1)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }
@@ -97,20 +99,20 @@ int Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetQuantity() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else if (index == 1)
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));
@@ -119,13 +121,13 @@ const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorSegment3Caps
 template <typename Real>
 Real Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetParameter0() const noexcept
 {
-    return m_Parameter0;
+    return parameter0;
 }
 
 template <typename Real>
 Real Mathematics::StaticFindIntersectorSegment3Capsule3<Real>::GetParameter1() const noexcept
 {
-    return m_Parameter1;
+    return parameter1;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_CAPSULE3_ACHIEVE_H

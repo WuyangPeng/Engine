@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 16:49)
+///	引擎版本：0.8.0.2 (2022/01/31 3:41)
 
 #ifndef MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_DETAIL_H
 #define MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_DETAIL_H
@@ -17,14 +17,14 @@
 
 template <typename Real, int WindowSize>
 Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates() noexcept
-    : m_IsValid{ false }, m_Tuple{}
+    : isValid{ false }, tuple{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_3;
 }
 
 template <typename Real, int WindowSize>
 Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bool isValid, const Tuple& tuple) noexcept
-    : m_IsValid{ isValid }, m_Tuple{ tuple }
+    : isValid{ isValid }, tuple{ tuple }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_3;
 }
@@ -33,7 +33,7 @@ Mathematics::BarycentricCoordinates<Real, WindowSize>::BarycentricCoordinates(bo
 template <typename Real, int WindowSize>
 bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsValid() const noexcept
 {
-    if (!m_IsValid || Math::FAbs(Math::GetValue(1) - m_Tuple.GetSum()) <= Math::GetZeroTolerance())
+    if (!isValid || Math::FAbs(Math::GetValue(1) - tuple.GetSum()) <= Math::GetZeroTolerance())
         return true;
     else
         return false;
@@ -44,9 +44,9 @@ template <typename Real, int WindowSize>
 Real Mathematics::BarycentricCoordinates<Real, WindowSize>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
-    MATHEMATICS_ASSERTION_0(m_IsValid, "重心坐标是无效的！");
+    MATHEMATICS_ASSERTION_0(isValid, "重心坐标是无效的！");
 
-    return m_Tuple[index];
+    return tuple[index];
 }
 
 template <typename Real, int WindowSize>
@@ -54,7 +54,7 @@ bool Mathematics::BarycentricCoordinates<Real, WindowSize>::IsBarycentricCoordin
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_3;
 
-    return m_IsValid;
+    return isValid;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_BARYCENTRIC_COORDINATES_DETAIL_H

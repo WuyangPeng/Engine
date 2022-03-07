@@ -13,7 +13,7 @@ namespace Mathematics
 {
 
 template <typename Real>
-TCBSpline3<Real>::TCBSpline3 (int numSegments, Real* times,Vector3D<Real>* points, Real* tension, Real* continuity, Real* bias)
+TCBSpline3<Real>::TCBSpline3 (int numSegments, Real* times,Vector3<Real>* points, Real* tension, Real* continuity, Real* bias)
     :MultipleCurve3<Real>(numSegments,times)
 {
     // TO DO.  Add 'boundary type' just as in natural splines.
@@ -25,10 +25,10 @@ TCBSpline3<Real>::TCBSpline3 (int numSegments, Real* times,Vector3D<Real>* point
     mContinuity = continuity;
     mBias = bias;
 
-    mA = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
-    mB = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
-    mC = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
-    mD = nullptr;  // NEW1<Vector3D<Real> >(mNumSegments);
+    mA = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
+    mB = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
+    mC = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
+    mD = nullptr;  // NEW1<Vector3<Real> >(mNumSegments);
 
     // For now, treat the first point as if it occurred twice.
     ComputePoly(0, 0, 1, 2);
@@ -56,7 +56,7 @@ TCBSpline3<Real>::~TCBSpline3 ()
 }
 
 template <typename Real>
-const Vector3D<Real>* TCBSpline3<Real>::GetPoints () const
+const Vector3<Real>* TCBSpline3<Real>::GetPoints () const
 {
     return mPoints;
 }
@@ -82,7 +82,7 @@ const Real* TCBSpline3<Real>::GetBiases () const
 template <typename Real>
 void TCBSpline3<Real>::ComputePoly (int i0, int i1, int i2, int i3)
 {
-    Vector3D<Real> diff = mPoints[i2] - mPoints[i1];
+    Vector3<Real> diff = mPoints[i2] - mPoints[i1];
     Real dt = mTimes[i2] - mTimes[i1];
 
     // Build multipliers at P1.
@@ -96,7 +96,7 @@ void TCBSpline3<Real>::ComputePoly (int i0, int i1, int i2, int i3)
     Real out1 = (Real{0.5})*adj0*oneMinusT0*oneMinusC0*oneMinusB0;
 
     // Build outgoing tangent at P1.
-    Vector3D<Real> TOut = out1*diff + out0*(mPoints[i1] - mPoints[i0]);
+    Vector3<Real> TOut = out1*diff + out0*(mPoints[i1] - mPoints[i0]);
 
     // Build multipliers at point P2.
     Real oneMinusT1 = Math::GetValue(1) - mTension[i2];
@@ -109,7 +109,7 @@ void TCBSpline3<Real>::ComputePoly (int i0, int i1, int i2, int i3)
     Real in1 = (Real{0.5})*adj1*oneMinusT1*onePlusC1*oneMinusB1;
 
     // Build incoming tangent at P2.
-    Vector3D<Real> TIn = in1*(mPoints[i3] - mPoints[i2]) + in0*diff;
+    Vector3<Real> TIn = in1*(mPoints[i3] - mPoints[i2]) + in0*diff;
 
     mA[i1] = mPoints[i1];
     mB[i1] = TOut;
@@ -118,7 +118,7 @@ void TCBSpline3<Real>::ComputePoly (int i0, int i1, int i2, int i3)
 }
 
 template <typename Real>
-Vector3D<Real> TCBSpline3<Real>::GetPosition (Real t) const
+Vector3<Real> TCBSpline3<Real>::GetPosition (Real t) const
 {
     int key;
     Real dt;
@@ -128,7 +128,7 @@ Vector3D<Real> TCBSpline3<Real>::GetPosition (Real t) const
 }
 
 template <typename Real>
-Vector3D<Real> TCBSpline3<Real>::GetFirstDerivative (Real t) const
+Vector3<Real> TCBSpline3<Real>::GetFirstDerivative (Real t) const
 {
     int key;
     Real dt;
@@ -138,7 +138,7 @@ Vector3D<Real> TCBSpline3<Real>::GetFirstDerivative (Real t) const
 }
 
 template <typename Real>
-Vector3D<Real> TCBSpline3<Real>::GetSecondDerivative (Real t) const
+Vector3<Real> TCBSpline3<Real>::GetSecondDerivative (Real t) const
 {
     int key;
     Real dt;
@@ -148,7 +148,7 @@ Vector3D<Real> TCBSpline3<Real>::GetSecondDerivative (Real t) const
 }
 
 template <typename Real>
-Vector3D<Real> TCBSpline3<Real>::GetThirdDerivative (Real t) const
+Vector3<Real> TCBSpline3<Real>::GetThirdDerivative (Real t) const
 {
     int key;
     Real dt;
@@ -160,9 +160,9 @@ Vector3D<Real> TCBSpline3<Real>::GetThirdDerivative (Real t) const
 template <typename Real>
 Real TCBSpline3<Real>::GetSpeedKey (int key, Real t) const
 {
-    Vector3D<Real> velocity = mB[key] + t*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*t));
+    Vector3<Real> velocity = mB[key] + t*(mC[key]*(Math::GetValue(2)) + mD[key]*((static_cast<Real>(3))*t));
 
-	return Vector3DTools<Real>::VectorMagnitude( velocity);
+	return Vector3Tools<Real>::GetLength( velocity);
 }
 
 template <typename Real>

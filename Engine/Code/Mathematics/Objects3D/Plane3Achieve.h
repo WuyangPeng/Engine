@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:56)
+///	引擎版本：0.8.0.2 (2022/02/10 16:17)
 
 #ifndef MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H
 #define MATHEMATICS_OBJECTS3D_PLANE3_ACHIEVE_H
@@ -17,57 +17,58 @@
 #include "Mathematics/Base/MathDetail.h"
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3D& normal, Real constant, const Real epsilon) noexcept
-    : m_Normal{ normal }, m_Constant{ constant }, m_Epsilon{ epsilon }
+Mathematics::Plane3<Real>::Plane3(const Vector3& normal, Real constant, const Real epsilon) noexcept
+    : normal{ normal }, constant{ constant }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Plane3<Real>::Plane3() noexcept
-    : m_Normal{ Vector3D::GetUnitX() }, m_Constant{}, m_Epsilon{ Math::GetZeroTolerance() }
+    : normal{ Vector3::GetUnitX() }, constant{}, epsilon{ Math::GetZeroTolerance() }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3D& normal, const Vector3D& point, const Real epsilon) noexcept
-    : m_Normal{ normal }, m_Constant{ Vector3DTools::DotProduct(normal, point) }, m_Epsilon{ epsilon }
+Mathematics::Plane3<Real>::Plane3(const Vector3& normal, const Vector3& point, const Real epsilon) noexcept
+    : normal{ normal }, constant{ Vector3Tools::DotProduct(normal, point) }, epsilon{ epsilon }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
 Mathematics::Plane3<Real>::Plane3(const Triangle3& triangle, const Real epsilon)
-    : m_Normal{}, m_Constant{}, m_Epsilon{ epsilon }
+    : normal{}, constant{}, epsilon{ epsilon }
 {
-    auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
-    auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
-    m_Normal = Vector3DTools::UnitCrossProduct(edge1, edge2);
-    m_Constant = Vector3DTools::DotProduct(m_Normal, triangle.GetVertex(0));
+    const auto edge1 = triangle.GetVertex(1) - triangle.GetVertex(0);
+    const auto edge2 = triangle.GetVertex(2) - triangle.GetVertex(0);
+    normal = Vector3Tools::UnitCrossProduct(edge1, edge2);
+    constant = Vector3Tools::DotProduct(normal, triangle.GetVertex(0));
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 template <typename Real>
-Mathematics::Plane3<Real>::Plane3(const Vector3D& point0, const Vector3D& point1, const Vector3D& point2, const Real epsilon)
-    : m_Normal{}, m_Constant{}, m_Epsilon{ epsilon }
+Mathematics::Plane3<Real>::Plane3(const Vector3& point0, const Vector3& point1, const Vector3& point2, const Real epsilon)
+    : normal{}, constant{}, epsilon{ epsilon }
 {
-    auto edge1 = point1 - point0;
-    auto edge2 = point2 - point0;
-    m_Normal = Vector3DTools::UnitCrossProduct(edge1, edge2);
-    m_Constant = Vector3DTools::DotProduct(m_Normal, point0);
+    const auto edge1 = point1 - point0;
+    const auto edge2 = point2 - point0;
+    normal = Vector3Tools::UnitCrossProduct(edge1, edge2);
+    constant = Vector3Tools::DotProduct(normal, point0);
 
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Plane3<Real>::IsValid() const noexcept
 {
     try
     {
-        if (m_Normal.IsNormalize(m_Epsilon))
+        if (normal.IsNormalize(epsilon))
             return true;
         else
             return false;
@@ -77,14 +78,15 @@ bool Mathematics::Plane3<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::Plane3<Real>::GetNormal() const noexcept
+Mathematics::Vector3<Real> Mathematics::Plane3<Real>::GetNormal() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Normal;
+    return normal;
 }
 
 template <typename Real>
@@ -92,29 +94,29 @@ Real Mathematics::Plane3<Real>::GetConstant() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Constant;
+    return constant;
 }
 
 template <typename Real>
-Real Mathematics::Plane3<Real>::DistanceTo(const Vector3D& point) const noexcept
+Real Mathematics::Plane3<Real>::DistanceTo(const Vector3& point) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return Vector3DTools::DotProduct(m_Normal, point) - m_Constant;
+    return Vector3Tools::DotProduct(normal, point) - constant;
 }
 
 template <typename Real>
-Mathematics::NumericalValueSymbol Mathematics::Plane3<Real>::WhichSide(const Vector3D& point) const noexcept
+Mathematics::NumericalValueSymbol Mathematics::Plane3<Real>::WhichSide(const Vector3& point) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto distance = DistanceTo(point);
+    const auto distance = DistanceTo(point);
 
-    if (distance < -m_Epsilon)
+    if (distance < -epsilon)
     {
         return NumericalValueSymbol::Negative;
     }
-    else if (m_Epsilon < distance)
+    else if (epsilon < distance)
     {
         return NumericalValueSymbol::Positive;
     }
@@ -125,22 +127,22 @@ Mathematics::NumericalValueSymbol Mathematics::Plane3<Real>::WhichSide(const Vec
 }
 
 template <typename Real>
-void Mathematics::Plane3<Real>::SetPlane(const Vector3D& normal, const Vector3D& point) noexcept
+void Mathematics::Plane3<Real>::SetPlane(const Vector3& newNormal, const Vector3& point) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_1;
 
-    m_Normal = normal;
+    normal = newNormal;
 
-    m_Constant = Vector3DTools::DotProduct(m_Normal, point);
+    constant = Vector3Tools::DotProduct(normal, point);
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::Plane3<Real>::GetMove(Real t, const Vector3D& velocity) const noexcept
+Mathematics::Plane3<Real> Mathematics::Plane3<Real>::GetMove(Real t, const Vector3& velocity) const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto movedConstant = GetConstant() + t * Vector3DTools::DotProduct(GetNormal(), velocity);
-    Plane3 movedPlane{ GetNormal(), movedConstant, m_Epsilon };
+    const auto movedConstant = GetConstant() + t * Vector3Tools::DotProduct(GetNormal(), velocity);
+    const Plane3 movedPlane{ GetNormal(), movedConstant, epsilon };
 
     return movedPlane;
 }

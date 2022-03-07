@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:57)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 23:01)
 
 #include "Network/NetworkExport.h"
 
@@ -17,13 +17,12 @@
 #include "Detail/ReceiveMessageLevelImpl.h"
 #include "Detail/SendMessageLevelImpl.h"
 #include "System/Helper/PragmaWarning/NumericCast.h"
-
 #include "CoreTools/Helper/Assertion/NetworkCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 
-Network::BufferSendStream::BufferSendStream(int bytesTotal, ParserStrategy parserStrategy)
-    : impl{ bytesTotal, parserStrategy }
+Network::BufferSendStream::BufferSendStream(int bytesTotal, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy)
+    : impl{ bytesTotal, parserStrategy, encryptedCompressionStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }

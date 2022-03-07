@@ -10,12 +10,12 @@
 #include "ScribeCircle2Circumscribe.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/LinearSystemDetail.h"
 
 template <typename Real>
-Mathematics::ScribeCircle2Circumscribe<Real>::ScribeCircle2Circumscribe(const Vector2D& v0, const Vector2D& v1, const Vector2D& v2)
+Mathematics::ScribeCircle2Circumscribe<Real>::ScribeCircle2Circumscribe(const Vector2& v0, const Vector2& v1, const Vector2& v2)
     : m_Points{ v0, v1, v2 }, m_Circle2{}, m_IsCircleConstructed{ false }
 {
     Calculate();
@@ -27,8 +27,8 @@ Mathematics::ScribeCircle2Circumscribe<Real>::ScribeCircle2Circumscribe(const Ve
 template <typename Real>
 void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
 {
-    auto e10 = m_Points[1] - m_Points[0];
-    auto e20 = m_Points[2] - m_Points[0];
+    auto e10 = m_Points.at(1) - m_Points.at(0);
+    auto e20 = m_Points.at(2) - m_Points.at(0);
 
     std::array<std::array<Real, 2>, 2> matrix{
         std::array<Real, 2>{ e10[0], e10[1] },
@@ -36,8 +36,8 @@ void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
     };
 
     const std::array<Real, 2> inputVector{
-        Math::GetRational(1, 2) * Vector2DTools<Real>::VectorMagnitudeSquared(e10),
-        Math::GetRational(1, 2) * Vector2DTools<Real>::VectorMagnitudeSquared(e20),
+        Math::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e10),
+        Math::GetRational(1, 2) * Vector2Tools<Real>::GetLengthSquared(e20),
     };
 
     try
@@ -46,9 +46,9 @@ void Mathematics::ScribeCircle2Circumscribe<Real>::Calculate()
 
         std::array<Real, 2> outputVector = linearSystem.Solve2(matrix, inputVector);
 
-        const Vector2D solution{ outputVector[0], outputVector[1] };
-        auto center = m_Points[0] + solution;
-        auto radius = Vector2DTools<Real>::VectorMagnitude(solution);
+        const Vector2 solution{ outputVector.at(0), outputVector.at(1) };
+        auto center = m_Points.at(0) + solution;
+        auto radius = Vector2Tools<Real>::GetLength(solution);
 
         m_Circle2.SetCircle(center, radius);
         m_IsCircleConstructed = true;
@@ -69,7 +69,7 @@ bool Mathematics::ScribeCircle2Circumscribe<Real>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-bool Mathematics::ScribeCircle2Circumscribe<Real>::IsCircleConstructed() const
+bool Mathematics::ScribeCircle2Circumscribe<Real>::IsCircleConstructed() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 

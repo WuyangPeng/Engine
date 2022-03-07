@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:00)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 14:54)
 
-// 日志输出位置IO管理器基类内部接口
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_APPENDER_IO_MANAGER_IMPL_H
 
@@ -19,7 +18,6 @@
 #include "CoreTools/LogManager/LogManagerFwd.h"
 
 #include <boost/format/format_fwd.hpp>
-
 #include <string>
 
 namespace CoreTools
@@ -28,12 +26,12 @@ namespace CoreTools
     {
     public:
         using ClassType = LogAppenderIOManagerImpl;
-        using AppenderManagerPtr = std::shared_ptr<AppenderManager>;
+        using AppenderManagerSharedPtr = std::shared_ptr<AppenderManager>;
         using String = System::String;
 
     public:
-        LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerPtr& appenderManager) noexcept;
-        LogAppenderIOManagerImpl(MAYBE_UNUSED int count) noexcept;
+        LogAppenderIOManagerImpl(LogLevel logLevel, const AppenderManagerSharedPtr& appenderManager) noexcept;
+        LogAppenderIOManagerImpl() noexcept;
         ~LogAppenderIOManagerImpl() noexcept;
 
         LogAppenderIOManagerImpl(const LogAppenderIOManagerImpl&) = delete;
@@ -58,28 +56,32 @@ namespace CoreTools
         LogAppenderIOManagerImpl& operator<<(LogAppenderIOManageSign sign) noexcept;
         LogAppenderIOManagerImpl& operator<<(const LogFileName& logFileName) noexcept;
 
-        void SetAppenderManager(const AppenderManagerPtr& appenderManager) noexcept;
+        void SetAppenderManager(const AppenderManagerSharedPtr& appenderManager) noexcept;
 
     private:
-        using LogFilterTypePtr = std::shared_ptr<LogFilter>;
-        using LogFileNamePtr = std::shared_ptr<LogFileName>;
-        using FunctionDescribedPtr = std::shared_ptr<FunctionDescribed>;
+        using LogFilterSharedPtr = std::shared_ptr<LogFilter>;
+        using LogFileNameSharedPtr = std::shared_ptr<LogFileName>;
+        using FunctionDescribedSharedPtr = std::shared_ptr<FunctionDescribed>;
 
     private:
+        template <typename T>
+        void AddMessage(T value);
+
         void Refresh();
-        [[nodiscard]] bool Write();
+        NODISCARD bool Write();
         void TriggerAssert();
         void Reset() noexcept;
+        NODISCARD bool IsDisabled() const;
 
     private:
-        LogLevel m_logLevel;
-        AppenderManagerPtr m_AppenderManager;
-        LogFilterTypePtr m_FilterTypePtr;
-        FunctionDescribedPtr m_FunctionDescribedPtr;
-        LogFileNamePtr m_LogFileNamePtr;
-        String m_Message;
-        bool m_TriggerAssert;
-        bool m_AlwaysConsole;
+        LogLevel logLevel;
+        AppenderManagerSharedPtr currentAppenderManager;
+        LogFilterSharedPtr currentFilterType;
+        FunctionDescribedSharedPtr currentFunctionDescribed;
+        LogFileNameSharedPtr currentLogFileName;
+        String logMessage;
+        bool triggerAssert;
+        bool alwaysConsole;
     };
 }
 

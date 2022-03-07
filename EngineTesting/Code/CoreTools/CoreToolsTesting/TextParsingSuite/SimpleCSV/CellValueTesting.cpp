@@ -95,7 +95,7 @@ void CoreTools::CellValueTesting::CreateDoubleTest()
     SimpleCSV::CellValue cellValue{ 1.2 };
 
     ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
-    ASSERT_APPROXIMATE(cellValue.GetDouble(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cellValue.GetDouble(), 1.2, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(cellValue.GetTypeAsString(), "float"s);
 }
 
@@ -147,7 +147,7 @@ void CoreTools::CellValueTesting::CellValueSetTest()
 
     cellValue0.Set(5.9);
     ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Float);
-    ASSERT_APPROXIMATE(cellValue0.Get<double>(), 5.9, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(cellValue0.Get<double>(), 5.9, Mathematics::MathD::epsilon);
 
     cellValue0.Set(true);
     ASSERT_ENUM_EQUAL(cellValue0.GetType(), SimpleCSV::ValueType::Boolean);
@@ -180,7 +180,7 @@ void CoreTools::CellValueTesting::CellValueEqualTest()
 
     cellValue = 5.9;
     ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Float);
-    ASSERT_APPROXIMATE(static_cast<double>(cellValue), 5.9, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(static_cast<double>(cellValue), 5.9, Mathematics::MathD::epsilon);
 
     cellValue = true;
     ASSERT_ENUM_EQUAL(cellValue.GetType(), SimpleCSV::ValueType::Boolean);

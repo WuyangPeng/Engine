@@ -27,7 +27,7 @@ namespace Mathematics
 	}
 
 	template <typename Real>
-	bool IntpLinearNonuniform2<Real>::Evaluate(const Vector2D<Real>& P, Real& F)
+	bool IntpLinearNonuniform2<Real>::Evaluate(const Vector2<Real>& P, Real& F)
 	{
 		int i = mDT->GetContainingTriangle(P);
 		if (i == -1)

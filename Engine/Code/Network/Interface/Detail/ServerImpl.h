@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 15:56)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SERVER_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SERVER_IMPL_H
@@ -19,39 +19,37 @@
 
 namespace Network
 {
-    class ServerFactory;
     class NETWORK_HIDDEN_DECLARE ServerImpl : public CoreTools::EventInterface
     {
     public:
         using ClassType = ServerImpl;
         using ParentType = EventInterface;
-        using FactoryType = ServerFactory; 
+        using FactoryType = ServerFactory;
+
     public:
         ServerImpl(const SocketManagerSharedPtr& socketManager, const ConfigurationStrategy& configurationStrategy) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
-        [[nodiscard]] bool RunServer();
+        NODISCARD ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        NODISCARD bool RunServer();
 
-        virtual void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message);
-        virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message);
-
-        [[nodiscard]] bool EventFunction(const CoreTools::CallbackParameters& callbackParameters) override;
+        virtual void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) = 0;
+        virtual void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) = 0;
 
     protected:
-        [[nodiscard]] SocketManagerSharedPtr GetSocketManagerSharedPtr();
+        NODISCARD SocketManagerSharedPtr GetSocketManagerSharedPtr();
 
     private:
-        [[nodiscard]] virtual bool WaitForMultipleEvents();
-        [[nodiscard]] virtual bool HandleConnections(const SocketManagerSharedPtr& socketManager);
-        [[nodiscard]] virtual bool HandleData(const SocketManagerSharedPtr& socketManager);
-        [[nodiscard]] virtual bool ImmediatelySend();
-        [[nodiscard]] virtual bool ImmediatelySend(uint64_t socketID);
-        virtual void ImmediatelyAsyncSend(uint64_t socketID);
+        NODISCARD virtual bool WaitForMultipleEvents() = 0;
+        NODISCARD virtual bool HandleConnections(SocketManager& socketManager) = 0;
+        NODISCARD virtual bool HandleData(const SocketManagerSharedPtr& socketManager) = 0;
+        NODISCARD virtual bool ImmediatelySend() = 0;
+        NODISCARD virtual bool ImmediatelySend(uint64_t socketID) = 0;
+        virtual void ImmediatelyAsyncSend(uint64_t socketID) = 0;
 
     private:
-        ConfigurationStrategy m_ConfigurationStrategy;
+        ConfigurationStrategy configurationStrategy;
         SocketManagerWeakPtr m_SocketManager;
     };
 }

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/19 9:56)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 14:42)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_RECORD_H
@@ -32,9 +32,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        Generator GetGenerator() const noexcept(std::is_scalar_v<Generator>);
-        Scalar GetValue() const noexcept;
-        int GetUniqueIndex() const noexcept;
+        NODISCARD Generator GetGenerator() const noexcept(std::is_scalar_v<Generator>);
+        NODISCARD Scalar GetValue() const noexcept;
+        NODISCARD int GetUniqueIndex() const noexcept;
 
         void SetGenerator(Generator generator) noexcept(std::is_scalar_v<Generator>);
         void SetValue(Scalar value) noexcept;

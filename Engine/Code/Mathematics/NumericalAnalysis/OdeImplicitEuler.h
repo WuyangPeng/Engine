@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/27 10:45)
+///	引擎版本：0.8.0.2 (2022/02/16 11:47)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_IMPLICIT_EULER_H
@@ -42,21 +42,24 @@ namespace Mathematics
                                                             const Container&,  // x
                                                             const UserDataType*);  // 用户定义数据
     public:
-        OdeImplicitEuler(int dimension, Real step, typename Function function,
-                         DerivativeFunction derivativeFunction, const UserDataType* userData);
+        OdeImplicitEuler(int dimension,
+                         Real step,
+                         typename Function function,
+                         DerivativeFunction derivativeFunction,
+                         const UserDataType* userData);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        Data Update(Real tIn, const Container& xIn) override;
+        NODISCARD Data Update(Real tIn, const Container& xIn) override;
 
     private:
         void Update(const VariableMatrix& derivative);
 
     private:
-        DerivativeFunction m_DerivativeFunction;
-        VariableMatrix m_DerivativeFunctionMatrix;
-        VariableVector m_FunctionVector;
-        VariableMatrix m_Identity;
+        DerivativeFunction derivativeFunction;
+        VariableMatrix derivativeFunctionMatrix;
+        VariableVector functionVector;
+        VariableMatrix identity;
     };
 }
 

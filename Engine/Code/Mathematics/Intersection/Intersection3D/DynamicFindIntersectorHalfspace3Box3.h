@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/31 16:32)
+///	引擎版本：0.8.0.3 (2022/02/28 11:17)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H
@@ -15,61 +15,53 @@
 #include "Mathematics/Intersection/DynamicIntersector.h"
 #include "Mathematics/Objects3D/Box3.h"
 #include "Mathematics/Objects3D/Plane3.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 /// 半空间是平面法线指向的平面侧面上的点集。 这里的查询是一个盒子和半个空格的交集。
 /// 在动态查找查询中，如果该框已经与半个空格相交，则返回值为'false'。 这个想法是寻找第一次接触。
 
 namespace Mathematics
 {
     template <typename Real>
-    class DynamicFindIntersectorHalfspace3Box3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<DynamicFindIntersectorHalfspace3Box3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DynamicFindIntersectorHalfspace3Box3 : public DynamicIntersector<Real, Vector3D>
+    class DynamicFindIntersectorHalfspace3Box3 : public DynamicIntersector<Real, Vector3>
     {
     public:
-        using DynamicFindIntersectorHalfspace3Box3Impl = DynamicFindIntersectorHalfspace3Box3Impl<Real>;
-     
-        TYPE_DECLARE(DynamicFindIntersectorHalfspace3Box3);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-        using ParentType = DynamicIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ClassType = DynamicFindIntersectorHalfspace3Box3<Real>;
+        using ParentType = DynamicIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Box3 = Box3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
+        using Container = std::vector<Vector3>;
 
     public:
-        DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace, const Box3& box,
-                                             Real tmax, const Vector3D& lhsVelocity,
-                                             const Vector3D& rhsVelocity,
+        DynamicFindIntersectorHalfspace3Box3(const Plane3& halfspace,
+                                             const Box3& box,
+                                             Real tmax,
+                                             const Vector3& lhsVelocity,
+                                             const Vector3& rhsVelocity,
                                              const Real epsilon = Math::GetZeroTolerance());
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Plane3 GetHalfspace() const noexcept;
-        [[nodiscard]] const Box3 GetBox() const noexcept;
+        NODISCARD Plane3 GetHalfspace() const noexcept;
+        NODISCARD Box3 GetBox() const noexcept;
 
         // 相交点集合为空，点，线段或矩形。 函数 GetQuantity()返回0、1、2或4。
-        [[nodiscard]] int GetQuantity() const;
-        [[nodiscard]] const Vector3D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const;
+        NODISCARD Vector3 GetPoint(int index) const;
 
     private:
         void Find();
 
     private:
-        PackageType impl;
-    };
+        // 要相交的对象。
+        Plane3 halfspace;
+        Box3 box;
 
-    using FloatDynamicFindIntersectorHalfspace3Box3 = DynamicFindIntersectorHalfspace3Box3<float>;
-    using DoubleDynamicFindIntersectorHalfspace3Box3 = DynamicFindIntersectorHalfspace3Box3<double>;
+        // 有关交集的信息。
+        Container point;
+    };
 }
 
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_FIND_INTERSECTOR_HALFSPACE3_BOX3_H

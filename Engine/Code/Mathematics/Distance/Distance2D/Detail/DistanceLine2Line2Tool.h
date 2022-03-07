@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/08 21:52)
+///	引擎版本：0.8.0.2 (2022/02/21 14:12)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE2_LINE2_TOOL_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/AlgebraFwd.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 namespace Mathematics
 {
@@ -23,35 +23,35 @@ namespace Mathematics
     public:
         using ClassType = DistanceLine2Line2Tool<Real>;
         using Math = Math<Real>;
-        using Vector2D = Vector2D<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2 = Vector2<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
 
     public:
-        DistanceLine2Line2Tool(const Vector2D& lhsOrigin, const Vector2D& lhsDirection, const Vector2D& rhsOrigin, const Vector2D& rhsDirection);
+        DistanceLine2Line2Tool(const Vector2& lhsOrigin, const Vector2& lhsDirection, const Vector2& rhsOrigin, const Vector2& rhsDirection);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetDet() const noexcept;
-        [[nodiscard]] Real GetLhsT() const noexcept;
-        [[nodiscard]] Real GetRhsT() const noexcept;
-        [[nodiscard]] Real GetLhsT(Real extent) const noexcept;
-        [[nodiscard]] Real GetRhsT(Real extent) const noexcept;
-        [[nodiscard]] Real GetOriginDifferenceDotLhsDirection() const noexcept;
-        [[nodiscard]] Real GetOriginDifferenceDotRhsDirection() const noexcept;
-        [[nodiscard]] Real GetOriginDifferenceSquaredLength() const noexcept;
-        [[nodiscard]] Real GetDirectionDot() const noexcept; 
-        [[nodiscard]] Real GetSquaredDistanceWithParallel() const noexcept;
-        [[nodiscard]] Real GetSquaredDistanceWithLhs() const noexcept;
-        [[nodiscard]] Real GetSquaredDistanceWithRhs() const noexcept;
-        [[nodiscard]] Real GetOriginDifferenceDotDirectionAverage() const noexcept;
+        NODISCARD Real GetDet() const noexcept;
+        NODISCARD Real GetLhsT() const noexcept;
+        NODISCARD Real GetRhsT() const noexcept;
+        NODISCARD Real GetLhsT(Real extent) const noexcept;
+        NODISCARD Real GetRhsT(Real extent) const noexcept;
+        NODISCARD Real GetOriginDifferenceDotLhsDirection() const noexcept;
+        NODISCARD Real GetOriginDifferenceDotRhsDirection() const noexcept;
+        NODISCARD Real GetOriginDifferenceSquaredLength() const noexcept;
+        NODISCARD Real GetDirectionDot() const noexcept;
+        NODISCARD Real GetSquaredDistanceWithParallel() const noexcept;
+        NODISCARD Real GetSquaredDistanceWithLhs() const noexcept;
+        NODISCARD Real GetSquaredDistanceWithRhs() const noexcept;
+        NODISCARD Real GetOriginDifferenceDotDirectionAverage() const noexcept;
 
     private:
-        Vector2D m_OriginDifference;
-        Real m_DirectionDot;
-        Real m_OriginDifferenceDotLhsDirection;
-        Real m_OriginDifferenceDotRhsDirection;
-        Real m_OriginDifferenceSquaredLength;
-        Real m_Det;
+        Vector2 originDifference;
+        Real directionDot;
+        Real originDifferenceDotLhsDirection;
+        Real originDifferenceDotRhsDirection;
+        Real originDifferenceSquaredLength;
+        Real det;
     };
 }
 

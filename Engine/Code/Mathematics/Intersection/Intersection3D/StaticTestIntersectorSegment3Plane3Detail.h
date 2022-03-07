@@ -1,79 +1,94 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:39)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 22:36)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_PLANE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_PLANE3_DETAIL_H
 
-#include "StaticTestIntersectorSegment3Plane3.h"
 #include "StaticTestIntersectorLine3Plane3.h"
+#include "StaticTestIntersectorSegment3Plane3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorSegment3Plane3<Real>::StaticTestIntersectorSegment3Plane3(const Segment3& rkSegment, const Plane3& rkPlane, const Real epsilon)
-    : m_Segment{ rkSegment }, m_Plane{ rkPlane }
+Mathematics::StaticTestIntersectorSegment3Plane3<Real>::StaticTestIntersectorSegment3Plane3(const Segment3& segment, const Plane3& plane, const Real epsilon) noexcept
+    : ParentType{ epsilon }, segment{ segment }, plane{ plane }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorSegment3Plane3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>::GetSegment() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return segment;
 }
 
 template <typename Real>
-const Mathematics::Segment3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>
-	::GetSegment() const
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>::GetPlane() const noexcept
 {
-    return m_Segment;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return plane;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorSegment3Plane3<Real>
-	::GetPlane() const
+void Mathematics::StaticTestIntersectorSegment3Plane3<Real>::Test() noexcept
 {
-    return m_Plane;
-}
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorSegment3Plane3<Real>
-	::Test()
-{
-	auto P0 = m_Segment.GetBeginPoint();
-	auto sdistance0 = m_Plane.DistanceTo(P0);
+    const auto p0 = segment.GetBeginPoint();
+    auto sdistance0 = plane.DistanceTo(p0);
     if (Math::FAbs(sdistance0) <= Math::GetZeroTolerance())
     {
-        sdistance0 = Math<Real>::GetValue(0);
+        sdistance0 = Math::GetValue(0);
     }
 
-	auto P1 = m_Segment.GetEndPoint();
-	auto sdistance1 = m_Plane.DistanceTo(P1);
+    const auto p1 = segment.GetEndPoint();
+    auto sdistance1 = plane.DistanceTo(p1);
     if (Math::FAbs(sdistance1) <= Math::GetZeroTolerance())
     {
-        sdistance1 = Math<Real>::GetValue(0);
+        sdistance1 = Math::GetValue(0);
     }
 
-	auto prod = sdistance0*sdistance1;
-    if (prod < Math<Real>::GetValue(0))
+    auto prod = sdistance0 * sdistance1;
+    if (prod < Math::GetValue(0))
     {
-        // The segment passes through the plane.
-		this->SetIntersectionType(IntersectionType::Point);
+        this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    if (prod > Math<Real>::GetValue(0))
+    if (Math::GetValue(0) < prod)
     {
-        // The segment is on one side of the plane.
-		this->SetIntersectionType(IntersectionType::Empty);
+        this->SetIntersectionType(IntersectionType::Empty);
         return;
     }
 
-    if (sdistance0 != Math<Real>::GetValue(0) || sdistance1 != Math<Real>::GetValue(0))
+    if (this->GetEpsilon() <= Math::FAbs(sdistance0) || this->GetEpsilon() <= Math::FAbs(sdistance1))
     {
-        // A segment end point touches the plane.
-		this->SetIntersectionType(IntersectionType::Point);
+        this->SetIntersectionType(IntersectionType::Point);
         return;
     }
 
-    // The segment is coincident with the plane.
-	this->SetIntersectionType(IntersectionType::Segment);
-   
+    this->SetIntersectionType(IntersectionType::Segment);
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_PLANE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_SEGMENT3_PLANE3_DETAIL_H

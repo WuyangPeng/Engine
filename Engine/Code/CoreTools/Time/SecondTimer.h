@@ -11,6 +11,7 @@
 #define CORE_TOOLS_TIME_SECOND_TIMER_H
 
 #include "CoreTools/CoreToolsDll.h"
+
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 

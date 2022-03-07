@@ -15,7 +15,7 @@
 // radius member of Sphere3<Real>.  Only at the end is a sqrt computed.
 template <typename Real>
 Mathematics::MinSphere3<Real>
-	::MinSphere3(int numPoints, const Vector3D<Real>* points, Sphere3<Real>& minimal, Real epsilon)
+	::MinSphere3(int numPoints, const Vector3<Real>* points, Sphere3<Real>& minimal, Real epsilon)
 	: mEpsilon{ epsilon }
 {
     mUpdate[0] = 0;
@@ -30,11 +30,11 @@ Mathematics::MinSphere3<Real>
     if (numPoints >= 1)
     {
         // Create identity permutation (0,1,...,numPoints-1).
-        Vector3D<Real>** permuted = nullptr;  // NEW1<Vector3D<Real>*>(numPoints);
+        Vector3<Real>** permuted = nullptr;  // NEW1<Vector3<Real>*>(numPoints);
         int i;
         for (i = 0; i < numPoints; ++i)
         {
-            permuted[i] = (Vector3D<Real>*)&points[i];
+            permuted[i] = (Vector3<Real>*)&points[i];
         }
 
         // Generate random permutation.
@@ -43,7 +43,7 @@ Mathematics::MinSphere3<Real>
             int j = rand() % (i+1);
             if (j != i)
             {
-                Vector3D<Real>* save = permuted[i];
+                Vector3<Real>* save = permuted[i];
                 permuted[i] = permuted[j];
                 permuted[j] = save;
             }
@@ -113,10 +113,10 @@ Mathematics::MinSphere3<Real>
 
 template <typename Real>
 bool Mathematics::MinSphere3<Real>
-	::Contains(const Vector3D<Real>& point,const Sphere3<Real>& sphere, Real& distDiff)
+	::Contains(const Vector3<Real>& point,const Sphere3<Real>& sphere, Real& distDiff)
 {
 	auto diff = point - sphere.GetCenter();
-	auto test = Vector3DTools<Real>::VectorMagnitudeSquared(diff);
+	auto test = Vector3Tools<Real>::GetLengthSquared(diff);
 
     // NOTE:  In this algorithm, Sphere3 is storing the *squared radius*,
     // so the next line of code is not in error.
@@ -127,7 +127,7 @@ bool Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::ExactSphere1(const Vector3D<Real>& P)
+	::ExactSphere1(const Vector3<Real>& P)
 {
 	Sphere3<Real> minimal{ P, Math<Real>::GetValue(0) };
     return minimal;
@@ -135,17 +135,17 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::ExactSphere2(const Vector3D<Real>& P0, const Vector3D<Real>& P1)
+	::ExactSphere2(const Vector3<Real>& P0, const Vector3<Real>& P1)
 {
 	auto diff = P1 - P0;
-	Sphere3<Real> minimal{ (Real{0.5})*(P0 + P1), Real{0.25}*Vector3DTools<Real>::VectorMagnitudeSquared(diff) };
+	Sphere3<Real> minimal{ (Real{0.5})*(P0 + P1), Real{0.25}*Vector3Tools<Real>::GetLengthSquared(diff) };
   
     return minimal;
 }
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::ExactSphere3(const Vector3D<Real>& P0,const Vector3D<Real>& P1, const Vector3D<Real>& P2)
+	::ExactSphere3(const Vector3<Real>& P0,const Vector3<Real>& P1, const Vector3<Real>& P2)
 {
     // Compute the circle (in 3D) containing p0, p1, and p2.  The Center in
     // barycentric coordinates is K = u0*p0+u1*p1+u2*p2 where u0+u1+u2=1.
@@ -173,12 +173,12 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 	auto A = P0 - P2;
 	auto B = P1 - P2;
-	auto AdA = Vector3DTools<Real>::DotProduct(A, A);
-	auto AdB = Vector3DTools<Real>::DotProduct(A,B);
-	auto BdB = Vector3DTools<Real>::DotProduct(B,B);
+	auto AdA = Vector3Tools<Real>::DotProduct(A, A);
+	auto AdB = Vector3Tools<Real>::DotProduct(A,B);
+	auto BdB = Vector3Tools<Real>::DotProduct(B,B);
 	auto det = AdA*BdB - AdB*AdB;
 
-	Vector3D<Real> center;
+	Vector3<Real> center;
 	Real  radius;
     if (Math<Real>::FAbs(det) > Math<Real>::GetValue(0))
     {
@@ -207,12 +207,12 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 		auto u2 = Math::GetValue(1) - u0 - u1;
 		center = u0*P0 + u1*P1 + u2*P2;
 		auto tmp = u0*A + u1*B;
-		radius = Vector3DTools<Real>::VectorMagnitudeSquared(tmp);
+		radius = Vector3Tools<Real>::GetLengthSquared(tmp);
     }
     else
     {
-		center = Vector3D<Real>::sm_Zero;
-		radius = Math<Real>::sm_MaxReal;
+		center = Vector3<Real>::sm_Zero;
+		radius = Math<Real>::maxReal;
     }
 	Sphere3<Real> minimal{ center,radius };
     return minimal;
@@ -220,7 +220,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::ExactSphere4(const Vector3D<Real>& P0, const Vector3D<Real>& P1, const Vector3D<Real>& P2, const Vector3D<Real>& P3)
+	::ExactSphere4(const Vector3<Real>& P0, const Vector3<Real>& P1, const Vector3<Real>& P2, const Vector3<Real>& P3)
 {
     // Compute the sphere containing p0, p1, p2, and p3.  The Center in
     // barycentric coordinates is K = u0*p0+u1*p1+u2*p2+u3*p3 where
@@ -258,9 +258,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 	auto B = P1 - P3;
 	auto C = P2 - P3;
 	Matrix3<Real> M(A, B, C, MatrixMajorFlags::Row);
-	Vector3D<Real> D{ Vector3DTools<Real>::DotProduct(A,A),
-					  Vector3DTools<Real>::DotProduct(B, B),
-					  Vector3DTools<Real>::DotProduct(C, C) };
+	Vector3<Real> D{ Vector3Tools<Real>::DotProduct(A,A),
+					  Vector3Tools<Real>::DotProduct(B, B),
+					  Vector3Tools<Real>::DotProduct(C, C) };
     D *= Real{0.5};
 
     // TODO:  With mEpsilon == 0.0, there are data sets for which this
@@ -272,7 +272,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
     // arithmetic or a filtered predicate).
 	auto invM = M.Inverse(mEpsilon);
 	 
-	Vector3D<Real>center;
+	Vector3<Real>center;
 	Real radius;
     if (invM != Matrix3<Real>::sm_Zero)
     {
@@ -281,12 +281,12 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 		auto U3 = Math::GetValue(1) - U[0] - U[1] - U[2];
 		center = U[0] * P0 + U[1] * P1 + U[2] * P2 + U3*P3;
 		auto tmp = U[0]*A + U[1]*B + U[2]*C;
-		radius = Vector3DTools<Real>::VectorMagnitudeSquared(tmp);
+		radius = Vector3Tools<Real>::GetLengthSquared(tmp);
     }
     else
     {
-		center = Vector3D<Real>::sm_Zero;
-		radius = Math<Real>::sm_MaxReal;
+		center = Vector3<Real>::sm_Zero;
+		radius = Math<Real>::maxReal;
     }
 
 	Sphere3<Real> minimal{ center, radius };
@@ -295,7 +295,7 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::UpdateSupport1(int i,Vector3D<Real>** permuted, Support& support)
+	::UpdateSupport1(int i,Vector3<Real>** permuted, Support& support)
 {
     const auto& P0 = *permuted[support.Index[0]];
     const auto& P1 = *permuted[i];
@@ -309,9 +309,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::UpdateSupport2(int i, Vector3D<Real>** permuted, Support& support)
+	::UpdateSupport2(int i, Vector3<Real>** permuted, Support& support)
 {
-    const Vector3D<Real>* point[2]
+    const Vector3<Real>* point[2]
     {
         permuted[support.Index[0]],  // P0
         permuted[support.Index[1]]   // P1
@@ -331,9 +331,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
     Sphere3<Real> sphere[numType2 + numType3];
     int indexSphere = 0;
-	auto minRSqr = Math<Real>::sm_MaxReal;
+	auto minRSqr = Math<Real>::maxReal;
     int indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::sm_MaxReal;
+	Real distDiff, minDistDiff = Math<Real>::maxReal;
     int indexMinDistDiff = -1;
 
     // Permutations of type 2.
@@ -393,9 +393,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::UpdateSupport3(int i, Vector3D<Real>** permuted, Support& support)
+	::UpdateSupport3(int i, Vector3<Real>** permuted, Support& support)
 {
-    const Vector3D<Real>* point[3]
+    const Vector3<Real>* point[3]
     {
         permuted[support.Index[0]],  // P0
         permuted[support.Index[1]],  // P1
@@ -426,9 +426,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
     Sphere3<Real> sphere[numType2 + numType3 + numType4];
     int indexSphere = 0;
-	auto minRSqr = Math<Real>::sm_MaxReal;
+	auto minRSqr = Math<Real>::maxReal;
     int indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::sm_MaxReal;
+	Real distDiff, minDistDiff = Math<Real>::maxReal;
     int indexMinDistDiff = -1;
 
     // Permutations of type 2.
@@ -523,16 +523,16 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
-	::UpdateSupport4(int i, Vector3D<Real>** permuted, Support& support)
+	::UpdateSupport4(int i, Vector3<Real>** permuted, Support& support)
 {
-    const Vector3D<Real>* point[4]
+    const Vector3<Real>* point[4]
     {
         permuted[support.Index[0]],  // P0
         permuted[support.Index[1]],  // P1
         permuted[support.Index[2]],  // P2
         permuted[support.Index[3]]   // P3
     };
-    const Vector3D<Real>& P4 = *permuted[i];
+    const Vector3<Real>& P4 = *permuted[i];
 
     // Permutations of type 2, used for calling ExactSphere2(...).
     constexpr auto numType2 = 4;
@@ -568,9 +568,9 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
     Sphere3<Real> sphere[numType2 + numType3 + numType4];
     int indexSphere = 0;
-	auto minRSqr = Math<Real>::sm_MaxReal;
+	auto minRSqr = Math<Real>::maxReal;
     int indexMinRSqr = -1;
-	Real distDiff, minDistDiff = Math<Real>::sm_MaxReal;
+	Real distDiff, minDistDiff = Math<Real>::maxReal;
 	auto indexMinDistDiff = -1;
 
     // Permutations of type 2.
@@ -707,12 +707,12 @@ Mathematics::Sphere3<Real> Mathematics::MinSphere3<Real>
 
 template <typename Real>
 bool Mathematics::MinSphere3<Real>::Support
-	::Contains(int index, Vector3D<Real>** points,Real epsilon)
+	::Contains(int index, Vector3<Real>** points,Real epsilon)
 {
     for (auto i = 0; i < Quantity; ++i)
     {
 		auto diff = *points[index] - *points[Index[i]];
-		if (Vector3DTools<Real>::VectorMagnitudeSquared(diff) < epsilon)
+		if (Vector3Tools<Real>::GetLengthSquared(diff) < epsilon)
         {
             return true;
         }

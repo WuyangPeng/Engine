@@ -33,7 +33,7 @@ namespace Rendering
                   SkinController(SkinController&& rhs) noexcept;
                   SkinController& operator=(SkinController&& rhs) noexcept;
 		using ParentType = Controller;
-		using APoint = Mathematics::FloatAPoint;
+		using APoint = Mathematics::APointF;
 
 	public:
 		// 顶点和骨骼的数目在对象的生存期是固定的。

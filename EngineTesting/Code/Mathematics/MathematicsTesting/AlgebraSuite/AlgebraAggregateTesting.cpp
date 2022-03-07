@@ -11,9 +11,9 @@
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
 #include "Mathematics/Algebra/AlgebraStreamSize.h"
 #include "Mathematics/Algebra/AlgebraAggregate.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "Mathematics/Algebra/Vector4DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
@@ -29,14 +29,15 @@ using std::uniform_int;
 using std::default_random_engine;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,AlgebraAggregateTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26440)
 void Mathematics::AlgebraAggregateTesting
 	::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(HomogeneousPointTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(Vector2DTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(Vector3DTest);
-	ASSERT_NOT_THROW_EXCEPTION_0(Vector4DTest);
+	ASSERT_NOT_THROW_EXCEPTION_0(Vector2Test);
+	ASSERT_NOT_THROW_EXCEPTION_0(Vector3Test);
+	ASSERT_NOT_THROW_EXCEPTION_0(Vector4Test);
 	ASSERT_NOT_THROW_EXCEPTION_0(AVectorTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(APointTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(VariableLengthVectorTest);
@@ -129,13 +130,13 @@ void Mathematics::AlgebraAggregateTesting
 }
 
 void Mathematics::AlgebraAggregateTesting
-	::Vector2DTest()
+	::Vector2Test()
 {
 // 	default_random_engine randomEngine{};
 // 	uniform_real<float> floatRandomDistribution{ -10.0f,10.0f };
 // 	uniform_real<double> doubleRandomDistribution{ -10.0,10.0 };
 //  
-// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector2D()) + MATHEMATICS_STREAM_SIZE(DoubleVector2D());
+// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector2()) + MATHEMATICS_STREAM_SIZE(DoubleVector2());
 // 
 // 	const auto testLoopCount = GetTestLoopCount();
 // 
@@ -151,19 +152,19 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(target.GetBytesWritten(),currentWriteBufferSize);
 // 
-// 		FloatVector2D firstVector2D{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
+// 		FloatVector2 firstVector2{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(firstVector2D);
+// 	    target.WriteAggregate(firstVector2);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector2D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector2);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 
-// 		DoubleVector2D secondVector2D{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
+// 		DoubleVector2 secondVector2{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(secondVector2D);
+// 	    target.WriteAggregate(secondVector2);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector2D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector2);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 	    ASSERT_EQUAL(maxSize,target.GetBytesWritten());
@@ -175,38 +176,38 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    FloatVector2D thirdVector2D;
+// 	    FloatVector2 thirdVector2;
 // 
-// 	    source.ReadAggregate(thirdVector2D);
+// 	    source.ReadAggregate(thirdVector2);
 // 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector2D);
-// 
-// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
-// 
-// 	    ASSERT_TRUE(FloatVector2DTools::Approximate(firstVector2D,thirdVector2D,1e-8f));
-// 
-// 	    DoubleVector2D fourthVector2D;
-// 
-// 	    source.ReadAggregate(fourthVector2D);
-// 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector2D);
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector2);
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    ASSERT_TRUE(DoubleVector2DTools::Approximate(secondVector2D, fourthVector2D,1e-10));
+// 	    ASSERT_TRUE(FloatVector2Tools::Approximate(firstVector2,thirdVector2,1e-8f));
+// 
+// 	    DoubleVector2 fourthVector2;
+// 
+// 	    source.ReadAggregate(fourthVector2);
+// 
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector2);
+// 
+// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
+// 
+// 	    ASSERT_TRUE(DoubleVector2Tools::Approximate(secondVector2, fourthVector2,1e-10));
 // 
 // 	    ASSERT_EQUAL(maxSize,source.GetBytesRead());
 // 	}
 }
 
 void Mathematics::AlgebraAggregateTesting
-	::Vector3DTest()
+	::Vector3Test()
 {
 // 	default_random_engine randomEngine{};
 // 	uniform_real<float> floatRandomDistribution{ -10.0f,10.0f };
 // 	uniform_real<double> doubleRandomDistribution{ -10.0,10.0 };
 // 
-// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector3D()) + MATHEMATICS_STREAM_SIZE(DoubleVector3D());
+// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector3()) + MATHEMATICS_STREAM_SIZE(DoubleVector3());
 // 
 // 	const auto testLoopCount = GetTestLoopCount();
 // 
@@ -222,19 +223,19 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(target.GetBytesWritten(),currentWriteBufferSize);
 // 
-// 		FloatVector3D firstVector3D{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
+// 		FloatVector3 firstVector3{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(firstVector3D);
+// 	    target.WriteAggregate(firstVector3);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector3D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector3);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 
-// 		DoubleVector3D secondVector3D{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
+// 		DoubleVector3 secondVector3{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(secondVector3D);
+// 	    target.WriteAggregate(secondVector3);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector3D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector3);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 	    ASSERT_EQUAL(maxSize,target.GetBytesWritten());
@@ -246,38 +247,38 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    FloatVector3D thirdVector3D;
+// 	    FloatVector3 thirdVector3;
 // 
-// 	    source.ReadAggregate(thirdVector3D);
+// 	    source.ReadAggregate(thirdVector3);
 // 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector3D);
-// 
-// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
-// 
-// 	    ASSERT_TRUE(FloatVector3DTools::Approximate(firstVector3D,thirdVector3D,1e-8f));
-// 
-// 	    DoubleVector3D fourthVector3D;
-// 
-// 	    source.ReadAggregate(fourthVector3D);
-// 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector3D);
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector3);
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    ASSERT_TRUE(DoubleVector3DTools::Approximate(secondVector3D, fourthVector3D,1e-10));
+// 	    ASSERT_TRUE(FloatVector3Tools::Approximate(firstVector3,thirdVector3,1e-8f));
+// 
+// 	    DoubleVector3 fourthVector3;
+// 
+// 	    source.ReadAggregate(fourthVector3);
+// 
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector3);
+// 
+// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
+// 
+// 	    ASSERT_TRUE(DoubleVector3Tools::Approximate(secondVector3, fourthVector3,1e-10));
 // 
 // 	    ASSERT_EQUAL(maxSize,source.GetBytesRead());
 // 	}
 }
 
 void Mathematics::AlgebraAggregateTesting
-	::Vector4DTest()
+	::Vector4Test()
 {
 // 	default_random_engine randomEngine{};
 // 	uniform_real<float> floatRandomDistribution{ -10.0f,10.0f };
 // 	uniform_real<double> doubleRandomDistribution{ -10.0,10.0 };
 // 
-// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector4D()) + MATHEMATICS_STREAM_SIZE(DoubleVector4D());
+// 	auto maxSize = MATHEMATICS_STREAM_SIZE(FloatVector4()) + MATHEMATICS_STREAM_SIZE(DoubleVector4());
 // 
 // 	const auto testLoopCount = GetTestLoopCount();
 // 
@@ -293,19 +294,19 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(target.GetBytesWritten(),currentWriteBufferSize);
 // 
-// 		FloatVector4D firstVector4D{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
+// 		FloatVector4 firstVector4{ floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine),floatRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(firstVector4D);
+// 	    target.WriteAggregate(firstVector4);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector4D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(firstVector4);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 
-// 		DoubleVector4D secondVector4D{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
+// 		DoubleVector4 secondVector4{ doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine),doubleRandomDistribution(randomEngine) };
 // 
-// 	    target.WriteAggregate(secondVector4D);
+// 	    target.WriteAggregate(secondVector4);
 // 
-// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector4D);
+// 	    currentWriteBufferSize += MATHEMATICS_STREAM_SIZE(secondVector4);
 // 
 // 	    ASSERT_EQUAL(currentWriteBufferSize,target.GetBytesWritten());
 // 	    ASSERT_EQUAL(maxSize,target.GetBytesWritten());
@@ -317,25 +318,25 @@ void Mathematics::AlgebraAggregateTesting
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    FloatVector4D thirdVector4D;
+// 	    FloatVector4 thirdVector4;
 // 
-// 	    source.ReadAggregate(thirdVector4D);
+// 	    source.ReadAggregate(thirdVector4);
 // 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector4D);
-// 
-// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
-// 
-// 	    ASSERT_TRUE(FloatVector4DTools::Approximate(firstVector4D,thirdVector4D,1e-8f));
-// 
-// 	    DoubleVector4D fourthVector4D;
-// 
-// 	    source.ReadAggregate(fourthVector4D);
-// 
-// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector4D);
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(thirdVector4);
 // 
 // 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
 // 
-// 	    ASSERT_TRUE(DoubleVector4DTools::Approximate(secondVector4D, fourthVector4D,1e-10));
+// 	    ASSERT_TRUE(FloatVector4Tools::Approximate(firstVector4,thirdVector4,1e-8f));
+// 
+// 	    DoubleVector4 fourthVector4;
+// 
+// 	    source.ReadAggregate(fourthVector4);
+// 
+// 	    currentReadBufferSize += MATHEMATICS_STREAM_SIZE(fourthVector4);
+// 
+// 	    ASSERT_EQUAL(source.GetBytesRead(),currentReadBufferSize);
+// 
+// 	    ASSERT_TRUE(DoubleVector4Tools::Approximate(secondVector4, fourthVector4,1e-10));
 // 
 // 	    ASSERT_EQUAL(maxSize,source.GetBytesRead());
 // 	}

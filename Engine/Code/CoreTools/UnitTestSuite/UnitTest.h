@@ -61,8 +61,10 @@ namespace CoreTools
     protected:
         // Assert用来测试对象的值是否符合预期。Error用来测试是否正确抛出异常。
 
-        void AssertTest(bool condition, const FunctionDescribed& functionDescribed,
-                        const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertTest(bool condition,
+                        const FunctionDescribed& functionDescribed,
+                        const std::string& errorMessage = std::string{},
+                        bool failureThrow = false);
 
         void AssertTrue() noexcept;
 
@@ -70,69 +72,122 @@ namespace CoreTools
         void ErrorTest(bool condition, const FunctionDescribed& functionDescribed, const std::string_view& errorMessage);
 
         template <typename LhsType, typename RhsType>
-        void AssertEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEqual(const LhsType& lhs,
+                         const RhsType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                             const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumEqual(const LhsType& lhs,
+                             const RhsType& rhs,
+                             const FunctionDescribed& functionDescribed,
+                             const std::string& errorMessage = std::string{},
+                             bool failureThrow = false);
 
         template <typename LhsType, typename MhsType, typename RhsType>
-        void AssertEqual(const LhsType& lhs, const MhsType& mhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEqual(const LhsType& lhs,
+                         const MhsType& mhs,
+                         const RhsType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                           const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertUnequal(const LhsType& lhs,
+                           const RhsType& rhs,
+                           const FunctionDescribed& functionDescribed,
+                           const std::string& errorMessage = std::string{},
+                           bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumUnequal(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                               const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumUnequal(const LhsType& lhs,
+                               const RhsType& rhs,
+                               const FunctionDescribed& functionDescribed,
+                               const std::string& errorMessage = std::string{},
+                               bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertApproximate(const LhsType& lhs, const RhsType& rhs, const std::common_type_t<LhsType, RhsType>& epsilon,
-                               const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertApproximate(const LhsType& lhs,
+                               const RhsType& rhs,
+                               const std::common_type_t<LhsType, RhsType>& epsilon,
+                               const FunctionDescribed& functionDescribed,
+                               const std::string& errorMessage = std::string{},
+                               bool failureThrow = false);
 
         template <typename Function, typename LhsType, typename RhsType, typename EpsilonType>
-        void AssertApproximateUseFunction(Function function, const LhsType& lhs, const RhsType& rhs, const EpsilonType& epsilon,
-                                          const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertApproximateUseFunction(Function function,
+                                          const LhsType& lhs,
+                                          const RhsType& rhs,
+                                          const EpsilonType& epsilon,
+                                          const FunctionDescribed& functionDescribed,
+                                          const std::string& errorMessage = std::string{},
+                                          bool failureThrow = false);
 
         // 测试是否在范围内。lhs <= test <= rhs。
         template <typename TestType, typename RangeType>
-        void AssertRange(const TestType& test, const RangeType& lhs, const RangeType& rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertRange(const TestType& test,
+                         const RangeType& lhs,
+                         const RangeType& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumLess(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                            const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumLess(const LhsType& lhs,
+                            const RhsType& rhs,
+                            const FunctionDescribed& functionDescribed,
+                            const std::string& errorMessage = std::string{},
+                            bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumLessEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                                 const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumLessEqual(const LhsType& lhs,
+                                 const RhsType& rhs,
+                                 const FunctionDescribed& functionDescribed,
+                                 const std::string& errorMessage = std::string{},
+                                 bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumGreater(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                               const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumGreater(const LhsType& lhs,
+                               const RhsType& rhs,
+                               const FunctionDescribed& functionDescribed,
+                               const std::string& errorMessage = std::string{},
+                               bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertEnumGreaterEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                                    const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEnumGreaterEqual(const LhsType& lhs,
+                                    const RhsType& rhs,
+                                    const FunctionDescribed& functionDescribed,
+                                    const std::string& errorMessage = std::string{},
+                                    bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertLess(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                        const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertLess(const LhsType& lhs,
+                        const RhsType& rhs,
+                        const FunctionDescribed& functionDescribed,
+                        const std::string& errorMessage = std::string{},
+                        bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertLessEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                             const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertLessEqual(const LhsType& lhs,
+                             const RhsType& rhs,
+                             const FunctionDescribed& functionDescribed,
+                             const std::string& errorMessage = std::string{},
+                             bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertGreater(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                           const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertGreater(const LhsType& lhs,
+                           const RhsType& rhs,
+                           const FunctionDescribed& functionDescribed,
+                           const std::string& errorMessage = std::string{},
+                           bool failureThrow = false);
 
         template <typename LhsType, typename RhsType>
-        void AssertGreaterEqual(const LhsType& lhs, const RhsType& rhs, const FunctionDescribed& functionDescribed,
-                                const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertGreaterEqual(const LhsType& lhs,
+                                const RhsType& rhs,
+                                const FunctionDescribed& functionDescribed,
+                                const std::string& errorMessage = std::string{},
+                                bool failureThrow = false);
 
         template <typename PtrType>
         void AssertEqualNullPtr(const PtrType& ptr, const FunctionDescribed& functionDescribed, const std::string& errorMessage = std::string{}, bool failureThrow = false);
@@ -146,24 +201,45 @@ namespace CoreTools
         template <typename TestClass, typename Function, typename... Types>
         void AssertThrowException(TestClass* test, Function function, const FunctionDescribed& functionDescribed, const std::string& errorMessage, Types&&... args);
 
-        void AssertFloatingPointCompleteEqual(float lhs, float rhs, const FunctionDescribed& functionDescribed,
-                                              const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertFloatingPointCompleteEqual(float lhs,
+                                              float rhs,
+                                              const FunctionDescribed& functionDescribed,
+                                              const std::string& errorMessage = std::string{},
+                                              bool failureThrow = false);
 
-        void AssertFloatingPointCompleteUnequal(float lhs, float rhs, const FunctionDescribed& functionDescribed,
-                                                const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertFloatingPointCompleteUnequal(float lhs,
+                                                float rhs,
+                                                const FunctionDescribed& functionDescribed,
+                                                const std::string& errorMessage = std::string{},
+                                                bool failureThrow = false);
 
-        void AssertFloatingPointCompleteEqual(double lhs, double rhs, const FunctionDescribed& functionDescribed,
-                                              const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertFloatingPointCompleteEqual(double lhs,
+                                              double rhs,
+                                              const FunctionDescribed& functionDescribed,
+                                              const std::string& errorMessage = std::string{},
+                                              bool failureThrow = false);
 
-        void AssertFloatingPointCompleteUnequal(double lhs, double rhs, const FunctionDescribed& functionDescribed,
-                                                const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertFloatingPointCompleteUnequal(double lhs,
+                                                double rhs,
+                                                const FunctionDescribed& functionDescribed,
+                                                const std::string& errorMessage = std::string{},
+                                                bool failureThrow = false);
 
-        void AssertEqual(const std::wstring& lhs, const std::wstring& rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
-        void AssertEqual(const char* lhs, const char* rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
-        void AssertEqual(const wchar_t* lhs, const wchar_t* rhs, const FunctionDescribed& functionDescribed,
-                         const std::string& errorMessage = std::string{}, bool failureThrow = false);
+        void AssertEqual(const std::wstring& lhs,
+                         const std::wstring& rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+        void AssertEqual(const char* lhs,
+                         const char* rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
+        void AssertEqual(const wchar_t* lhs,
+                         const wchar_t* rhs,
+                         const FunctionDescribed& functionDescribed,
+                         const std::string& errorMessage = std::string{},
+                         bool failureThrow = false);
 
         template <typename TestClass, typename Function>
         void ExecuteLoopTesting(TestClass* test, Function function);

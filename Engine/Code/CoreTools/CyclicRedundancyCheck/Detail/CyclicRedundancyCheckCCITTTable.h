@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:48)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 16:52)
 
 #ifndef CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_CCITT_TABLE_H
 #define CORE_TOOLS_CYCLIC_REDUNDANCY_CHECK_CYCLIC_REDUNDANCY_CHECK_CCITT_TABLE_H
@@ -48,7 +48,7 @@ namespace CoreTools
     // 232 --   0x7C26, 0x6C07, 0x5C64, 0x4C45, 0x3CA2, 0x2C83, 0x1CE0, 0x0CC1,
     // 240 --   0xEF1F, 0xFF3E, 0xCF5D, 0xDF7C, 0xAF9B, 0xBFBA, 0x8FD9, 0x9FF8,
     // 248 --   0x6E17, 0x7E36, 0x4E55, 0x5E74, 0x2E93, 0x3EB2, 0x0ED1, 0x1EF0
-    class CORE_TOOLS_DEFAULT_DECLARE CyclicRedundancyCheckCCITTTable final
+    class CORE_TOOLS_HIDDEN_DECLARE CyclicRedundancyCheckCCITTTable final
     {
     public:
         using ClassType = CyclicRedundancyCheckCCITTTable;
@@ -58,17 +58,17 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint16_t GetCCITT(int index) const;
+        NODISCARD uint16_t GetCCITT(int index) const;
 
     private:
-        static constexpr auto sm_TableSize = 256;
+        static constexpr auto tableSize = 256;
 
     private:
         void Calculate() noexcept;
-        uint16_t CalculateCCITT(uint32_t index) noexcept;
+        NODISCARD static uint16_t CalculateCCITT(uint32_t index) noexcept;
 
     private:
-        std::array<uint16_t, sm_TableSize> m_Table;
+        std::array<uint16_t, tableSize> table;
     };
 }
 

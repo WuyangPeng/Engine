@@ -49,11 +49,14 @@ CoreTools::SimpleCSV::XmlDataImpl& CoreTools::SimpleCSV::XmlDataImpl::operator=(
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    parentDocument = std::move(rhs.parentDocument);
-    xmlPath = std::move(rhs.xmlPath);
-    xmlID = std::move(rhs.xmlID);
-    xmlType = std::move(rhs.xmlType);
-    xmlDocument = std::move(rhs.xmlDocument);
+     if (this != &rhs)
+    {
+        parentDocument = std::move(rhs.parentDocument);
+        xmlPath = std::move(rhs.xmlPath);
+        xmlID = std::move(rhs.xmlID);
+        xmlType = std::move(rhs.xmlType);
+        xmlDocument = std::move(rhs.xmlDocument);
+    }
 
     return *this;
 }

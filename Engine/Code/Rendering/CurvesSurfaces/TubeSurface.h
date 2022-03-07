@@ -36,7 +36,7 @@ namespace Rendering
 		// not null, both must be not null.  In this case, texture coordinates are
 		// generated for the surface.
 		TubeSurface (Mathematics::Curve3f* medial, RadialFunction radial, bool closed,
-					 const Mathematics::FloatVector3D& upVector, int numMedialSamples, int mNumSliceSamples,
+					 const Mathematics::Vector3F& upVector, int numMedialSamples, int mNumSliceSamples,
 					 bool sampleByArcLength, bool insideView, const Mathematics::Float2* tcoordMin,
 					 const Mathematics::Float2* tcoordMax, VertexFormatSharedPtr vformat);
 
@@ -52,8 +52,8 @@ namespace Rendering
 		const Mathematics::Curve3f* GetMedial () const noexcept;
 		void SetRadial (RadialFunction radial) noexcept;
 		RadialFunction GetRadial () const noexcept;
-		void SetUpVector (const Mathematics::FloatVector3D& upVector) noexcept;
-		const Mathematics::FloatVector3D& GetUpVector () const noexcept;
+		void SetUpVector (const Mathematics::Vector3F& upVector) noexcept;
+		const Mathematics::Vector3F& GetUpVector () const noexcept;
 		int GetNumMedialSamples () const noexcept;
 		int GetNumSliceSamples () const noexcept;
 
@@ -64,8 +64,8 @@ namespace Rendering
 		// the slice corresponding to the medial curve evaluated at its domain
 		// minimum, tmin.  Function GetTMaxSlice accesses the slice for the
 		// domain maximum, tmax.  If the curve is closed, the slices are the same.
-		void GetTMinSlice (Mathematics::FloatVector3D* slice);
-		void GetTMaxSlice (Mathematics::FloatVector3D* slice);
+		void GetTMinSlice (Mathematics::Vector3F* slice);
+		void GetTMaxSlice (Mathematics::Vector3F* slice);
 
 		// If the medial curve is modified, for example if it is control point
 		// based and the control points are modified, then you should call this
@@ -84,7 +84,7 @@ namespace Rendering
 		Mathematics::Curve3f* mMedial;
 		RadialFunction mRadial;
 		int mNumMedialSamples, mNumSliceSamples;
-		Mathematics::FloatVector3D mUpVector;
+		Mathematics::Vector3F mUpVector;
 		float* mSin;
 		float* mCos;
 		bool mClosed, mSampleByArcLength;

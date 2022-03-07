@@ -58,7 +58,7 @@ namespace Rendering
         
         // 更新几何状态和控制器。
         // 函数计算世界转换在遍历向下传递场景图和遍历向上传递世界边界。
-		  bool Update(double applicationTime = -Mathematics::DoubleMath::sm_MaxReal) override;
+		  bool Update(double applicationTime = -Mathematics::MathD::maxReal) override;
         
         // 访问父对象。节点中调用attach/detach在子对象。
                   virtual void SetParent(Spatial* parent) noexcept;

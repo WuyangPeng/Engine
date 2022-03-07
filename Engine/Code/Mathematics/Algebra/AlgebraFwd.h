@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/11 15:19)
+///	引擎版本：0.8.0.2 (2022/01/29 13:53)
 
 #ifndef MATHEMATICS_ALGEBRA_FWD_H
 #define MATHEMATICS_ALGEBRA_FWD_H
@@ -21,49 +21,49 @@ namespace Mathematics
     class BarycentricCoordinates;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector4D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector4;
+
+    template <typename Real, bool Robust>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2Orthonormalize;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2DOrthonormalize;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2OrthonormalBasis;
+
+    template <typename Real, bool Robust>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3Orthonormalize;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2DOrthonormalBasis;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3DOrthonormalize;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3DOrthonormalBasis;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3OrthonormalBasis;
 
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox2D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox2;
 
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox3D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox3;
 
     template <typename T>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox4D;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AxesAlignBoundingBox4;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2DTools;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2Tools;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3DTools;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3Tools;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector4DTools;
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector4Tools;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector2DInformation;
+    class Vector2Information;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Vector3DInformation;
+    class Vector3Information;
 
     template <typename T>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE APoint;
@@ -78,16 +78,16 @@ namespace Mathematics
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE AVector;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE VariableLengthVector;
+    class VariableLengthVector;
 
     template <typename T>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Plane;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polynomial;
+    class Polynomial;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE PolynomialDivide;
+    class PolynomialDivide;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Matrix2;
@@ -117,13 +117,13 @@ namespace Mathematics
     class Matrix;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE VariableMatrix;
+    class VariableMatrix;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrix;
+    class BandedMatrix;
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE BandedMatrixSolve;
+    class BandedMatrixSolve;
 
     template <typename Real>
     class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Quaternion;
@@ -148,24 +148,6 @@ namespace Mathematics
     enum class BandedMatrixSolveFlags;
     enum class QuaternionClosestAxis;
     enum class QuaternionFactorFlags;
-
-    template <typename Real>
-    bool operator==(const Vector2D<Real>& lhs, const Vector2D<Real>& rhs);
-
-    template <typename Real>
-    bool operator<(const Vector2D<Real>& lhs, const Vector2D<Real>& rhs) noexcept;
-
-    template <typename Real>
-    bool operator==(const Vector3D<Real>& lhs, const Vector3D<Real>& rhs);
-
-    template <typename Real>
-    bool operator<(const Vector3D<Real>& lhs, const Vector3D<Real>& rhs);
-
-    template <typename Real>
-    bool operator==(const Vector4D<Real>& lhs, const Vector4D<Real>& rhs);
-
-    template <typename Real>
-    bool operator<(const Vector4D<Real>& lhs, const Vector4D<Real>& rhs);
 }
 
 #endif  // MATHEMATICS_ALGEBRA_FWD_H

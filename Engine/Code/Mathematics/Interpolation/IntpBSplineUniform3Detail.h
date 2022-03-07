@@ -160,7 +160,7 @@ namespace Mathematics
 				for (int k0 = mGridMin[0]; k0 <= mGridMax[0]; ++k0)
 				{
 					int index = Index(k0, k1, k2);
-					if (mData[index] == Math<Real>::sm_MaxReal)
+					if (mData[index] == Math<Real>::maxReal)
 					{
 						mData[index] = mEvaluateCallback(index);
 					}

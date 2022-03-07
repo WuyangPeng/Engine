@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:13)
+///	引擎版本：0.8.0.2 (2022/02/11 16:26)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H
@@ -23,13 +23,13 @@
 
 template <int N, typename T>
 Mathematics::IntegerDataConversion<N, T>::IntegerDataConversion(const IntegerData& data)
-    : m_AbsData{ IntegerDataAnalysis<N>(data).GetAbsoluteValue() },
-      m_Shifting{ m_AbsData.IsZero() ? 0 : IntegerDataAnalysis<N>(m_AbsData).GetLeadingBit() },
-      m_Mantissa{ 0 },
-      m_Symbol{ data.GetSign() },
-      m_Value{}
+    : absData{ IntegerDataAnalysis<N>(data).GetAbsoluteValue() },
+      shifting{ absData.IsZero() ? 0 : IntegerDataAnalysis<N>(absData).GetLeadingBit() },
+      mantissa{ 0 },
+      symbol{ data.GetSign() },
+      value{}
 {
-    if (!m_AbsData.IsZero())
+    if (!absData.IsZero())
     {
         Init(TraitsType{});
     }
@@ -43,11 +43,11 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const SignedIntegerType&)
 {
     static_assert(std::is_integral_v<T>, "T isn't integral.");
 
-    if (m_Shifting <= sizeof(T) * 8 - 1)
+    if (shifting <= sizeof(T) * 8 - 1)
     {
-        auto copySize = m_Shifting / 8 + 1;
-        memcpy(&m_Mantissa, &m_AbsData[0], copySize);
-        m_Value = boost::numeric_cast<T>(m_Mantissa);
+        auto copySize = shifting / 8 + 1;
+        memcpy(&mantissa, &absData[0], copySize);
+        value = boost::numeric_cast<T>(mantissa);
 
         SignedIntegerNegative();
     }
@@ -63,11 +63,11 @@ void Mathematics::IntegerDataConversion<N, T>::Init(const UnsignedIntegerType&)
 {
     static_assert(std::is_integral_v<T>, "T isn't integral.");
 
-    if (m_Shifting <= sizeof(T) * 8 && m_Symbol == NumericalValueSymbol::Positive)
+    if (shifting <= sizeof(T) * 8 && symbol == NumericalValueSymbol::Positive)
     {
-        auto copySize = m_Shifting / 8 + 1;
-        memcpy(&m_Mantissa, &m_AbsData[0], copySize);
-        m_Value = boost::numeric_cast<T>(m_Mantissa);
+        auto copySize = shifting / 8 + 1;
+        memcpy(&mantissa, &absData[0], copySize);
+        value = boost::numeric_cast<T>(mantissa);
     }
     else
     {
@@ -99,7 +99,7 @@ void Mathematics::IntegerDataConversion<N, T>::InitToFloatingPoint()
 {
     static_assert(std::is_floating_point_v<T>, "T isn't floating_point.");
 
-    if (m_Shifting <= TraitsType::g_RealExponentDifference)
+    if (shifting <= TraitsType::realExponentDifference)
     {
         CalculateMantissa();
         CalculateConversionValue();
@@ -117,20 +117,20 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateConversionValue()
 {
     using IntegerType = typename TraitsType::IntegerType;
 
-    IntegerType mantissa = (TraitsType::g_Mantissa & m_Mantissa);
+    IntegerType mantissaValue{ TraitsType::mantissa & mantissa };
 
     // 去掉mantissa的最高位
     IntegerType highest{ 1 };
-    highest <<= TraitsType::g_ExponentShifting;
+    highest <<= TraitsType::exponentShifting;
 
-    mantissa &= ~highest;
+    mantissaValue &= ~highest;
 
-    auto exponent = ((static_cast<IntegerType>(m_Shifting) + TraitsType::g_RealExponentDifference) << TraitsType::g_ExponentShifting);
-    exponent &= TraitsType::g_Exponent;
+    auto exponent = ((boost::numeric_cast<IntegerType>(shifting) + TraitsType::realExponentDifference) << TraitsType::exponentShifting);
+    exponent &= TraitsType::exponent;
 
-    auto conversion = exponent | mantissa;
+    auto conversion = exponent | mantissaValue;
 
-    m_Value = *(reinterpret_cast<const T*>(&conversion));
+    value = *(reinterpret_cast<const T*>(&conversion));
 }
 
 // private
@@ -139,11 +139,11 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateMantissa()
 {
     using IntegerType = typename TraitsType::IntegerType;
 
-    auto maxMantissaBit = TraitsType::g_ExponentShifting;
+    auto maxMantissaBit = TraitsType::exponentShifting;
 
     // 将m_AbsData移位到同maxMantissaBit对齐
     auto maxMantissaBitRemainder = maxMantissaBit % 16;
-    auto shiftingRemainder = m_Shifting % 16;
+    auto shiftingRemainder = shifting % 16;
     int difference = maxMantissaBitRemainder - shiftingRemainder;
 
     if (difference < 0)
@@ -153,24 +153,24 @@ void Mathematics::IntegerDataConversion<N, T>::CalculateMantissa()
 
     if (difference != 0)
     {
-        IntegerDataOperator<N> integerDataOperator{ m_AbsData };
+        IntegerDataOperator<N> integerDataOperator{ absData };
         integerDataOperator <<= difference;
     }
 
-    auto index = IntegerDataAnalysis<N>(m_AbsData).GetLeadingBlock();
+    auto index = IntegerDataAnalysis<N>(absData).GetLeadingBlock();
 
     index -= (sizeof(IntegerType) / sizeof(uint16_t) - 1);
 
-    memcpy(&m_Mantissa, &m_AbsData[index], sizeof(IntegerType));
+    memcpy(&mantissa, &absData[index], sizeof(IntegerType));
 }
 
 // private
 template <int N, typename T>
-void Mathematics::IntegerDataConversion<N, T>::Negative()
+void Mathematics::IntegerDataConversion<N, T>::Negative() noexcept
 {
-    if (m_Symbol == NumericalValueSymbol::Negative)
+    if (symbol == NumericalValueSymbol::Negative)
     {
-        m_Value = -m_Value;
+        value = -value;
     }
 }
 
@@ -178,11 +178,11 @@ void Mathematics::IntegerDataConversion<N, T>::Negative()
 template <int N, typename T>
 void Mathematics::IntegerDataConversion<N, T>::SignedIntegerNegative()
 {
-    if (m_Symbol == NumericalValueSymbol::Negative)
+    if (symbol == NumericalValueSymbol::Negative)
     {
-        if (m_Value <= std::numeric_limits<T>::max())
+        if (value <= std::numeric_limits<T>::max())
         {
-            m_Value = -m_Value;
+            value = -value;
         }
         else
         {
@@ -192,19 +192,21 @@ void Mathematics::IntegerDataConversion<N, T>::SignedIntegerNegative()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N, typename T>
 bool Mathematics::IntegerDataConversion<N, T>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N, typename T>
-T Mathematics::IntegerDataConversion<N, T>::GetValue() const
+T Mathematics::IntegerDataConversion<N, T>::GetValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Value;
+    return value;
 }
 
 #endif  // MATHEMATICS_RATIONAL_INTEGER_DATA_CONVERSION_DETAIL_H

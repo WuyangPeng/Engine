@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 10:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 16:52)
 
 #include "Database/DatabaseExport.h"
 
@@ -16,19 +16,16 @@
 using std::string;
 
 Database::CollectionImpl::CollectionImpl(const ConfigurationStrategy& configurationStrategy) noexcept
-    : m_ConfigurationStrategy{ configurationStrategy }
+    : configurationStrategy{ configurationStrategy }
 {
     DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
-Database::CollectionImpl::~CollectionImpl() noexcept
-{
-    DATABASE_SELF_CLASS_IS_VALID_9;
-}
+Database::CollectionImpl::~CollectionImpl() noexcept = default;
 
 CLASS_INVARIANT_STUB_DEFINE(Database, CollectionImpl)
 
-Database::CollectionImpl::ResultPtr Database::CollectionImpl::ExecuteDoc([[maybe_unused]] const string& findStatement, [[maybe_unused]] const BindStatementType& bindStatement, [[maybe_unused]] int limitStatement)
+Database::CollectionImpl::ResultSharedPtr Database::CollectionImpl::ExecuteDoc(MAYBE_UNUSED const string& findStatement, MAYBE_UNUSED const BindStatementType& bindStatement, MAYBE_UNUSED int limitStatement)
 {
     DATABASE_CLASS_IS_VALID_9;
 
@@ -39,5 +36,5 @@ Database::ConfigurationStrategy Database::CollectionImpl::GetConfigurationStrate
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return m_ConfigurationStrategy;
+    return configurationStrategy;
 }

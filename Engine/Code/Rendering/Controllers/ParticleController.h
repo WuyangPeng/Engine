@@ -34,7 +34,7 @@ namespace Rendering
                     ParticleController(ParticleController&& rhs) noexcept;
                     ParticleController& operator=(ParticleController&& rhs) noexcept;
 		using ParentType = Controller;
-		using AVector = Mathematics::FloatAVector;
+		using AVector = Mathematics::AVectorF;
 
 	public:
 		// 所连接的对象必须是Particles。

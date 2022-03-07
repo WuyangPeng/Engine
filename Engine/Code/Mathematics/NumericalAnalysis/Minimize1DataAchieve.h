@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 14:04)
+///	引擎版本：0.8.0.2 (2022/02/15 11:43)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_ACHIEVE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MINIMIZE1_DATA_ACHIEVE_H
@@ -17,14 +17,14 @@
 
 template <typename Real>
 Mathematics::Minimize1Data<Real>::Minimize1Data() noexcept
-    : m_MinLocation{ Math::sm_MaxReal }, m_MinValue{ Math::sm_MaxReal }
+    : mMinLocation{ Math::maxReal }, mMinValue{ Math::maxReal }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 template <typename Real>
 Mathematics::Minimize1Data<Real>::Minimize1Data(Real minLocation, Real minValue) noexcept
-    : m_MinLocation{ minLocation }, m_MinValue{ minValue }
+    : mMinLocation{ minLocation }, mMinValue{ minValue }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -42,7 +42,7 @@ Real Mathematics::Minimize1Data<Real>::GetMinLocation() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MinLocation;
+    return mMinLocation;
 }
 
 template <typename Real>
@@ -50,7 +50,7 @@ Real Mathematics::Minimize1Data<Real>::GetMinValue() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_MinValue;
+    return mMinValue;
 }
 
 template <typename Real>
@@ -58,7 +58,7 @@ void Mathematics::Minimize1Data<Real>::SetMinLocation(Real minLocation) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_MinLocation = minLocation;
+    mMinLocation = minLocation;
 }
 
 template <typename Real>
@@ -66,7 +66,7 @@ void Mathematics::Minimize1Data<Real>::SetMinValue(Real minValue) noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_MinValue = minValue;
+    mMinValue = minValue;
 }
 
 template <typename Real>
@@ -74,8 +74,8 @@ void Mathematics::Minimize1Data<Real>::SetInitValue() noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_MinLocation = Math::sm_MaxReal;
-    m_MinValue = Math::sm_MaxReal;
+    mMinLocation = Math::maxReal;
+    mMinValue = Math::maxReal;
 }
 
 template <typename Real>
@@ -83,10 +83,10 @@ void Mathematics::Minimize1Data<Real>::CompareData(Real minLocation, Real minVal
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    if (minValue < m_MinValue)
+    if (minValue < mMinValue)
     {
-        m_MinLocation = minLocation;
-        m_MinValue = minValue;
+        mMinLocation = minLocation;
+        mMinValue = minValue;
     }
 }
 

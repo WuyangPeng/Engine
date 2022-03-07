@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 19:11)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 17:40)
 
 #include "Network/NetworkExport.h"
 
@@ -19,16 +19,13 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/LogMacro.h"
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
-Network::NetworkMainManager::NetworkMainManager()
+Network::NetworkMainManager::NetworkMainManager(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : ParentType{}
 {
     Init();
 
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
-#include STSTEM_WARNING_POP
 
 Network::NetworkMainManager::~NetworkMainManager() noexcept
 {

@@ -1,13 +1,12 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 9:47)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/05 0:10)
 
-// 输出位置：控制台类
 #ifndef CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
 #define CORE_TOOLS_LOG_MANAGER_APPENDER_CONSOLE_H
 
@@ -28,9 +27,9 @@ namespace CoreTools
 
         CLASS_INVARIANT_FINAL_DECLARE;
 
-        [[nodiscard]] AppenderType GetAppenderType() const noexcept final;
+        NODISCARD AppenderType GetAppenderType() const noexcept final;
 
-        [[nodiscard]] const AppenderImplPtr Clone() const final;
+        NODISCARD const AppenderImplSharedPtr Clone() const final;
 
     private:
         void DoWrite(const LogMessage& message, const LogMessagePrefix& prefix, const LogMessagePostfix& postfix) final;

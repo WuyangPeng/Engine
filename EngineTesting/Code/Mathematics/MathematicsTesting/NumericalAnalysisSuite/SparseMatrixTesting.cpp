@@ -27,7 +27,7 @@ void Mathematics::SparseMatrixTesting
 void Mathematics::SparseMatrixTesting
 	::SparseMatrixTest() 
 {
-	DoubleSparseMatrix firstSparseMatrix(12, 10);
+	SparseMatrixD firstSparseMatrix(12, 10);
 
 	ASSERT_EQUAL(firstSparseMatrix.GetRowsNumber(), 12);
 	ASSERT_EQUAL(firstSparseMatrix.GetColumnsNumber(), 10);

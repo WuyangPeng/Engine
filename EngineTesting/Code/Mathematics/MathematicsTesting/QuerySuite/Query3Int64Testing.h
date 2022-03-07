@@ -23,7 +23,7 @@ namespace Mathematics
 		void TetrahedronTest();
 		void CircumspherTest();
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 14:11)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_FACTORY_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_ITERATOR_FACTORY_H
@@ -24,14 +24,14 @@ namespace Network
     public:
         using ClassType = HandleSetIteratorFactory;
         using ImplType = HandleSetIteratorImpl;
-        using ImplTypePtr = std::shared_ptr<ImplType>;
+        using ImplTypeSharedPtr = std::shared_ptr<ImplType>;
 
     public:
         HandleSetIteratorFactory() noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] static const ImplTypePtr Create(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet);
+        NODISCARD static ImplTypeSharedPtr Create(const ConfigurationStrategy& configurationStrategy, const HandleSet& handleSet);
     };
 }
 

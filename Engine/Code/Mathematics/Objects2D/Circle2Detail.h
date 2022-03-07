@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/13 13:40)
+///	引擎版本：0.8.0.2 (2022/02/10 10:20)
 
 #ifndef MATHEMATICS_OBJECTS2D_CIRCLE2_DETAIL_H
 #define MATHEMATICS_OBJECTS2D_CIRCLE2_DETAIL_H
@@ -19,9 +19,9 @@
 #endif  //  !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_CIRCLE2_ACHIEVE)
 
 template <typename Real>
-bool Mathematics::Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, const Real epsilon)
+bool Mathematics::Approximate(const Circle2<Real>& lhs, const Circle2<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1)
 {
-    return Vector2DTools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
+    return Vector2Tools<Real>::Approximate(lhs.GetCenter(), rhs.GetCenter(), epsilon) &&
            Math<Real>::Approximate(lhs.GetRadius(), rhs.GetRadius(), epsilon);
 }
 

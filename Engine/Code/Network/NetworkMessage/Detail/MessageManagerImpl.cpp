@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:40)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:31)
 
 #include "Network/NetworkExport.h"
 
@@ -17,8 +17,8 @@
 
 using std::string;
 
-Network::MessageManagerImpl::MessageManagerImpl(MAYBE_UNUSED int count) noexcept
-    : m_Factories{}, m_FullVersion{ CoreTools::Version::GetTCREFullVersion() }
+Network::MessageManagerImpl::MessageManagerImpl() noexcept
+    : factories{}, m_FullVersion{ CoreTools::Version::GetTCREFullVersion() }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -29,8 +29,8 @@ Network::MessageManagerImpl::FactoryFunction Network::MessageManagerImpl::Find(i
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Factories.find(messageID);
-    if (iter != m_Factories.cend())
+    const auto iter = factories.find(messageID);
+    if (iter != factories.cend())
     {
         for (const auto& value : iter->second)
         {
@@ -48,18 +48,18 @@ void Network::MessageManagerImpl::Insert(int64_t messageID, const MessageTypeCon
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_Factories[messageID].insert({ messageTypeCondition, function });
+    factories[messageID].insert({ messageTypeCondition, function });
 }
 
 void Network::MessageManagerImpl::Remove(int64_t messageID, const MessageTypeCondition& messageTypeCondition)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_Factories[messageID].erase(messageTypeCondition);
+    factories[messageID].erase(messageTypeCondition);
 
-    if (m_Factories[messageID].empty())
+    if (factories[messageID].empty())
     {
-        m_Factories.erase(messageID);
+        factories.erase(messageID);
     }
 }
 
@@ -67,7 +67,7 @@ void Network::MessageManagerImpl::Remove(int64_t messageID)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_Factories.erase(messageID);
+    factories.erase(messageID);
 }
 
 void Network::MessageManagerImpl::SetFullVersion(int fullVersion) noexcept

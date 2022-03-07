@@ -17,7 +17,12 @@ using std::swap;
 using std::uniform_int;
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 namespace Mathematics
 {
 	template class SingularValue<float>;
@@ -42,7 +47,7 @@ void Mathematics::SingularValueTesting
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleMatrix3 matrix;
+		Matrix3D matrix;
 
 		for (int m = 0; m < 3;++m)
 		{
@@ -52,16 +57,16 @@ void Mathematics::SingularValueTesting
 			}
 		}
 
-		DoubleSingularValue singularValueDecomposition(matrix);
+		SingularValueD singularValueDecomposition(matrix);
 
-		DoubleMatrix3 leftMatrix = singularValueDecomposition.GetLeftMatrix();
-		DoubleMatrix3 diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
-		DoubleMatrix3 rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
+		Matrix3D leftMatrix = singularValueDecomposition.GetLeftMatrix();
+		Matrix3D diagonalMatrix = singularValueDecomposition.GetDiagonalMatrix();
+		Matrix3D rightTransposeMatrix = singularValueDecomposition.GetRightTransposeMatrix();
 
-		DoubleMatrix3 result = leftMatrix * diagonalMatrix;
+		Matrix3D result = leftMatrix * diagonalMatrix;
 		result *= rightTransposeMatrix;
 
-		typedef bool(*VariableMatrixdApproximate)(const DoubleMatrix3& lhs,const DoubleMatrix3& rhs, const double epsilon);
+		typedef bool(*VariableMatrixdApproximate)(const Matrix3D& lhs,const Matrix3D& rhs, const double epsilon);
 
 		VariableMatrixdApproximate function = Approximate<double>;
 

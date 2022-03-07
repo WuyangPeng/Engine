@@ -41,7 +41,7 @@ namespace Rendering
         using ParentType = Spatial;
         using VisualSharedPtr = std::shared_ptr<ClassType>;
         using ConstVisualSharedPtr = std::shared_ptr<const ClassType>;
-        using APoint = Mathematics::FloatAPoint;
+        using APoint = Mathematics::APointF;
 
     public:
         explicit Visual(VisualPrimitiveType type = VisualPrimitiveType::None);

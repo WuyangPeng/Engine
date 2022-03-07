@@ -11,7 +11,8 @@
 
 using std::make_shared;
 using std::string;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
 Network::BoostSockConnectorTesting::BoostSockConnectorTesting(const OStreamShared& stream)
     : ParentType{ stream }
 {
@@ -34,7 +35,7 @@ void Network::BoostSockConnectorTesting ::DoServerThread()
 
     for (auto i = 0; i < sm_AcceptTime; ++i)
     {
-        [[maybe_unused]] auto value = server->RunServer();
+        [[maybe_unused]] const auto value = server->RunServer();
 
         if (0 < testSocketManager->GetAsyncAcceptorCount())
         {

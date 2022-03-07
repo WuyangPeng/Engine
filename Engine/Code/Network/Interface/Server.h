@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:45)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_SERVER_H
@@ -14,9 +14,10 @@
 
 #include "NetworkInternalFwd.h"
 #include "SendSocket.h"
+#include "CoreTools/Helper/Export/NonCopyMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "Network/NetworkMessage/SocketManager.h"
-#include "CoreTools/Helper/Export/NonCopyMacro.h"
+
 NETWORK_NON_COPY_EXPORT_IMPL(ServerImpl);
 
 namespace Network
@@ -32,7 +33,7 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool RunServer();
+        NODISCARD bool RunServer();
 
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
         void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;

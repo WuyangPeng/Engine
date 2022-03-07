@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 19:10)
+///	引擎版本：0.8.0.2 (2022/02/07 16:56)
 
 #ifndef MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
 #define MATHEMATICS_ALGEBRA_TRIDIAGONALIZE_H
@@ -13,8 +13,8 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Matrix3.h"
-#include "Vector2D.h"
-#include "Vector3D.h"
+#include "Vector2.h"
+#include "Vector3.h"
 
 namespace Mathematics
 {
@@ -25,19 +25,19 @@ namespace Mathematics
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
         using ClassType = Tridiagonalize<Real>;
-        using Matrix3 = Matrix3<Real>;
-        using Vector2D = Vector2D<Real>;
-        using Vector3D = Vector3D<Real>;
         using Math = Math<Real>;
+        using Matrix3 = Matrix3<Real>;
+        using Vector2 = Vector2<Real>;
+        using Vector3 = Vector3<Real>;
 
     public:
         explicit Tridiagonalize(const Matrix3& matrix);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsReflection() const noexcept;
-        [[nodiscard]] const Matrix3 GetRotation() const noexcept;
-        [[nodiscard]] const Vector3D GetDiagonal() const noexcept;
+        NODISCARD bool IsReflection() const noexcept;
+        NODISCARD Matrix3 GetRotation() const noexcept;
+        NODISCARD Vector3 GetDiagonal() const noexcept;
 
     private:
         // 支持特征分解。该Tridiagonalize函数可将Householder变换矩阵。
@@ -45,17 +45,17 @@ namespace Mathematics
         // 否则，转换是一个反射和返回值是'true'。
         // QLAlgorithm返回“true”当且仅当QL迭代方案收敛。
         void Init();
-        bool QLAlgorithm();
-        static bool IsValueNear(Real subdiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept;
+        NODISCARD bool QLAlgorithm();
+        NODISCARD static bool IsValueNear(Real subdiagonal, Real lhsDiagonal, Real rhsDiagonal) noexcept;
         void UpdateDiagonal(int lhsIndex, int rhsIndex);
         void GivensRotation(int lhsIndex, int rhsIndex, Real cosValue, Real sinValue);
 
     private:
-        Matrix3 m_InputMatrix;
-        Matrix3 m_OutputMatrix;
-        Vector3D m_Diagonal;
-        Vector2D m_Subdiagonal;
-        bool m_Reflection;
+        Matrix3 inputMatrix;
+        Matrix3 outputMatrix;
+        Vector3 diagonal;
+        Vector2 subdiagonal;
+        bool reflection;
     };
 }
 

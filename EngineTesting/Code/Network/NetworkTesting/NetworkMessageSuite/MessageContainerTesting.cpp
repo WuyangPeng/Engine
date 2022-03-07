@@ -45,10 +45,11 @@ void Network::MessageContainerTesting
 
 	for (auto i = 0; i < messageContainer.GetSize(); ++i)
 	{
-		ASSERT_EQUAL(message[i], messageContainer.GetValue(System::UnderlyingCastEnum<IntegerMessageField>(i)));
+		ASSERT_EQUAL(message.at(i), messageContainer.GetValue(System::UnderlyingCastEnum<IntegerMessageField>(i)));
 	}
 }
 
+#include SYSTEM_WARNING_DISABLE(26414)
 void Network::MessageContainerTesting
 	::StreamingTest()
 {
@@ -60,13 +61,13 @@ void Network::MessageContainerTesting
 	MessageBufferSharedPtr buffer{ make_shared<MessageBuffer>(BuffBlockSize::Size256,ParserStrategy::LittleEndian) };
 	MessageTargetSharedPtr messageTarget{ make_shared<MessageTarget>(buffer) };
 
-	messageContainer.Save(messageTarget);
+	messageContainer.Save(*messageTarget);
 
 	MessageSourceSharedPtr messageSource{ make_shared<MessageSource>(buffer) };
 
 	TestingType resultMessageContainer{ };
 
-	resultMessageContainer.Load(messageSource);
+	resultMessageContainer.Load(*messageSource);
 
 	ASSERT_EQUAL_FAILURE_THROW(messageContainer.GetSize(), resultMessageContainer.GetSize(), "数组大小不相等！");
 

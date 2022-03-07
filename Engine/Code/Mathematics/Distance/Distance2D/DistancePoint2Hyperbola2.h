@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/08 15:12)
+///	引擎版本：0.8.0.2 (2022/02/21 13:53)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_H
 #define MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/AlgebraFwd.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Distance/DistanceBase.h"
 
 namespace Mathematics
@@ -56,40 +56,40 @@ namespace Mathematics
     // 在这种情况下H(t) = 0具有唯一根 在此间隔。
     // 因此，您可以使用二分法来鲁棒地计算根。 这是我们使用的实现。
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Hyperbola2 : public DistanceBase<Real, Vector2D<Real>>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistancePoint2Hyperbola2 : public DistanceBase<Real, Vector2<Real>>
     {
     public:
         using ClassType = DistancePoint2Hyperbola2<Real>;
-        using Vector2D = Vector2D<Real>;
-        using ParentType = DistanceBase<Real, Vector2D>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2 = Vector2<Real>;
+        using ParentType = DistanceBase<Real, Vector2>;
+        using Vector2Tools = Vector2Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
 
     public:
-        DistancePoint2Hyperbola2(const Vector2D& point, const Vector2D& extent) noexcept;
+        DistancePoint2Hyperbola2(const Vector2& point, const Vector2& extent) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Vector2D GetPoint() const noexcept;
-        [[nodiscard]] const Vector2D GetExtent() const noexcept;
+        NODISCARD Vector2 GetPoint() const noexcept;
+        NODISCARD Vector2 GetExtent() const noexcept;
 
         // 静态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
         // 函数计算动态距离查询。
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector2D& lhsVelocity, const Vector2D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector2& lhsVelocity, const Vector2& rhsVelocity) const override;
 
     private:
-        [[nodiscard]] Real GetHyperbola(Real t, const Vector2D& reciprocalExtentSquared) const;
+        NODISCARD Real GetHyperbola(Real t, const Vector2& reciprocalExtentSquared) const;
 
     private:
-        Vector2D m_Point;
-        Vector2D m_Extent;
+        Vector2 point;
+        Vector2 extent;
     };
 
-    using FloatDistancePoint2Hyperbola2 = DistancePoint2Hyperbola2<float>;
-    using DoubleDistancePoint2Hyperbola2 = DistancePoint2Hyperbola2<double>;
+    using DistancePoint2Hyperbola2F = DistancePoint2Hyperbola2<float>;
+    using DistancePoint2Hyperbola2D = DistancePoint2Hyperbola2<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_POINT2_HYPERBOLA2_H

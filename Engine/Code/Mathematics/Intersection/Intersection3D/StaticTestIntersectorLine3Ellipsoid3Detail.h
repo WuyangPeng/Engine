@@ -1,104 +1,122 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 11:20)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 11:39)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H
 
 #include "StaticTestIntersectorLine3Ellipsoid3.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::StaticTestIntersectorLine3Ellipsoid3(const Line3& line, const Ellipsoid3& ellipsoid, const Real epsilon)
-    : m_Line{ line }, m_Ellipsoid{ ellipsoid }, mNegativeThreshold{}, mPositiveThreshold{}
+    : ParentType{ epsilon }, line{ line }, ellipsoid{ ellipsoid }, negativeThreshold{}, positiveThreshold{}
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::GetLine() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::GetLine() const
+Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::GetEllipsoid() const noexcept
 {
-    return m_Line;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return ellipsoid;
 }
 
 template <typename Real>
-const Mathematics::Ellipsoid3<Real> Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::GetEllipsoid() const
+void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::Test()
 {
-    return m_Ellipsoid;
-}
+    const auto matrix = ellipsoid.GetMatrix();
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::Test()
-{
-    // The ellipsoid is (X-K)^T*M*(X-K)-1 = 0 and the line is X = P+t*D.
-    // Substitute the line equation into the ellipsoid equation to obtain
-    // a quadratic equation
-    //   Q(t) = a2*t^2 + 2*a1*t + a0 = 0
-    // where a2 = D^T*M*D, a1 = D^T*M*(P-K), and a0 = (P-K)^T*M*(P-K)-1.
+    const auto diff = line.GetOrigin() - ellipsoid.GetCenter();
+    const auto matDir = matrix * line.GetDirection();
+    const auto matDiff = matrix * diff;
+    const auto a2 = Vector3Tools::DotProduct(line.GetDirection(), matDir);
+    const auto a1 = Vector3Tools::DotProduct(line.GetDirection(), matDiff);
+    const auto a0 = Vector3Tools::DotProduct(diff, matDiff) - Math::GetValue(1);
 
-	auto M = m_Ellipsoid.GetMatrix();
-
-	auto diff = m_Line.GetOrigin() - m_Ellipsoid.GetCenter();
-	auto matDir = M*m_Line.GetDirection();
-	auto matDiff = M*diff;
-	auto a2 = Vector3DTools::DotProduct(m_Line.GetDirection(),matDir);
-	auto a1 = Vector3DTools::DotProduct(m_Line.GetDirection(),matDiff);
-	auto a0 = Vector3DTools::DotProduct(diff,matDiff) - Math::GetValue(1);
-
-    // Intersection occurs if Q(t) has real roots.
-	auto discr = a1*a1 - a0*a2;
-	if (discr >= mNegativeThreshold)
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-} 
-
-template <typename Real>
-void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::SetNegativeThreshold(Real negThreshold)
-{
-    if (negThreshold <= Math<Real>::GetValue(0))
+    const auto discr = a1 * a1 - a0 * a2;
+    if (negativeThreshold <= discr)
     {
-        mNegativeThreshold = negThreshold;
+        this->SetIntersectionType(IntersectionType::Point);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
+}
+
+template <typename Real>
+void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::SetNegativeThreshold(Real negThreshold)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (negThreshold <= Math::GetValue(0))
+    {
+        negativeThreshold = negThreshold;
         return;
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Negative threshold must be nonpositive.");
+    MATHEMATICS_ASSERTION_0(false, "负阈值必须是非正的。");
 }
 
 template <typename Real>
-Real Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::GetNegativeThreshold() const
+Real Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::GetNegativeThreshold() const noexcept
 {
-    return mNegativeThreshold;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return negativeThreshold;
 }
 
 template <typename Real>
-void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::SetPositiveThreshold(Real posThreshold)
+void Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::SetPositiveThreshold(Real posThreshold)
 {
-    if (posThreshold >= Math<Real>::GetValue(0))
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (posThreshold >= Math::GetValue(0))
     {
-        mPositiveThreshold = posThreshold;
+        positiveThreshold = posThreshold;
         return;
     }
 
-    MATHEMATICS_ASSERTION_0(false, "Positive threshold must be nonnegative.");
+    MATHEMATICS_ASSERTION_0(false, "正阈值必须是非负的。");
 }
 
 template <typename Real>
-Real Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>
-	::GetPositiveThreshold() const
+Real Mathematics::StaticTestIntersectorLine3Ellipsoid3<Real>::GetPositiveThreshold() const noexcept
 {
-    return mPositiveThreshold;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return positiveThreshold;
 }
 
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_LINE3_ELLIPSOID3_DETAIL_H

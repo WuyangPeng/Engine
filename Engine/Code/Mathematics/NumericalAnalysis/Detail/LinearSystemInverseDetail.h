@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/25 15:48)
+///	引擎版本：0.8.0.2 (2022/02/17 13:48)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H
@@ -19,16 +19,16 @@
 
 template <typename Real>
 Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix& matrix, const RealContainer& input, Real zeroTolerance)
-    : m_ZeroTolerance{ zeroTolerance },
-      m_Inverse{ matrix },
-      m_Size{ m_Inverse.GetRowsNumber() },
-      m_ColumnsIndex(m_Size),
-      m_RowIndex(m_Size),
-      m_Pivoted(m_Size, false),
-      m_CurrentRow{ 0 },
-      m_CurrentColumn{ 0 },
-      m_CurrentMaxValue{},
-      m_Output{ input }
+    : zeroTolerance{ zeroTolerance },
+      inverse{ matrix },
+      size{ inverse.GetRowsNumber() },
+      columnsIndex(size),
+      rowIndex(size),
+      pivoted(size, false),
+      currentRow{ 0 },
+      currentColumn{ 0 },
+      currentMaxValue{},
+      output{ input }
 {
     Inverse();
 
@@ -37,16 +37,16 @@ Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix
 
 template <typename Real>
 Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix& matrix, Real zeroTolerance)
-    : m_ZeroTolerance{ zeroTolerance },
-      m_Inverse{ matrix },
-      m_Size{ m_Inverse.GetRowsNumber() },
-      m_ColumnsIndex(m_Size),
-      m_RowIndex(m_Size),
-      m_Pivoted(m_Size, false),
-      m_CurrentRow{ 0 },
-      m_CurrentColumn{ 0 },
-      m_CurrentMaxValue{},
-      m_Output{}
+    : zeroTolerance{ zeroTolerance },
+      inverse{ matrix },
+      size{ inverse.GetRowsNumber() },
+      columnsIndex(size),
+      rowIndex(size),
+      pivoted(size, false),
+      currentRow{ 0 },
+      currentColumn{ 0 },
+      currentMaxValue{},
+      output{}
 {
     Inverse();
 
@@ -54,17 +54,18 @@ Mathematics::LinearSystemInverse<Real>::LinearSystemInverse(const VariableMatrix
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::LinearSystemInverse<Real>::IsValid() const noexcept
 {
     try
     {
-        if (Math::GetValue(0) <= m_ZeroTolerance &&
-            m_Inverse.GetRowsNumber() == m_Inverse.GetColumnsNumber() &&
-            m_Size == boost::numeric_cast<int>(m_ColumnsIndex.size()) &&
-            m_ColumnsIndex.size() == m_RowIndex.size() &&
-            m_RowIndex.size() == m_Pivoted.size() &&
-            (m_Output.empty() || boost::numeric_cast<int>(m_Output.size()) == m_Size))
+        if (Math::GetValue(0) <= zeroTolerance &&
+            inverse.GetRowsNumber() == inverse.GetColumnsNumber() &&
+            size == boost::numeric_cast<int>(columnsIndex.size()) &&
+            columnsIndex.size() == rowIndex.size() &&
+            rowIndex.size() == pivoted.size() &&
+            (output.empty() || boost::numeric_cast<int>(output.size()) == size))
         {
             return true;
         }
@@ -78,6 +79,7 @@ bool Mathematics::LinearSystemInverse<Real>::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 // private
@@ -85,11 +87,11 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Inverse()
 {
     // 消除了完全旋转。
-    for (auto index = 0; index < m_Size; ++index)
+    for (auto index = 0; index < size; ++index)
     {
         Inverse(index);
     }
-     
+
     Rearrangement();
 }
 
@@ -99,20 +101,15 @@ void Mathematics::LinearSystemInverse<Real>::Inverse(int index)
     // 搜索矩阵（不含枢转行）的最大绝对值项。
     CalculateCurrentMaxValue();
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    m_Pivoted[m_CurrentColumn] = true;
-#include STSTEM_WARNING_POP
+    pivoted.at(currentColumn) = true;
 
     // 交换行使A[col][col]包含枢转项。
     SwapRows();
 
     // 跟踪行的排列。
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-    m_RowIndex[index] = m_CurrentRow;
-    m_ColumnsIndex[index] = m_CurrentColumn;
-#include STSTEM_WARNING_POP
+
+    rowIndex.at(index) = currentRow;
+    columnsIndex.at(index) = currentColumn;
 
     // 缩放行，以便枢轴项是1
     ScaleRow();
@@ -124,36 +121,29 @@ void Mathematics::LinearSystemInverse<Real>::Inverse(int index)
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ScaleRow()
 {
-    auto inverse = Math::GetValue(1) / m_Inverse(m_CurrentColumn, m_CurrentColumn);
-
-    m_Inverse(m_CurrentColumn, m_CurrentColumn) = Math::GetValue(1);
-    for (auto index = 0; index < m_Size; index++)
+    const auto reciprocal = Math::GetValue(1) / inverse(currentColumn, currentColumn);
+    inverse(currentColumn, currentColumn) = Math::GetValue(1);
+    for (auto index = 0; index < size; index++)
     {
-        m_Inverse(m_CurrentColumn, index) *= inverse;
+        inverse(currentColumn, index) *= reciprocal;
     }
 
-    if (!m_Output.empty())
+    if (!output.empty())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_Output[m_CurrentColumn] *= inverse;
-#include STSTEM_WARNING_POP
+        output.at(currentColumn) *= reciprocal;
     }
 }
 
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::SwapRows()
 {
-    if (m_CurrentRow != m_CurrentColumn)
+    if (currentRow != currentColumn)
     {
-        m_Inverse.SwapRows(m_CurrentRow, m_CurrentColumn);
+        inverse.SwapRows(currentRow, currentColumn);
 
-        if (!m_Output.empty())
+        if (!output.empty())
         {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-            std::swap(m_Output[m_CurrentColumn], m_Output[m_CurrentRow]);
-#include STSTEM_WARNING_POP
+            std::swap(output.at(currentColumn), output.at(currentRow));
         }
     }
 }
@@ -161,32 +151,29 @@ void Mathematics::LinearSystemInverse<Real>::SwapRows()
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
 {
-    m_CurrentMaxValue = Math::GetValue(0);
+    currentMaxValue = Math::GetValue(0);
 
-    for (auto outerIndex = 0; outerIndex < m_Size; ++outerIndex)
+    for (auto outerIndex = 0; outerIndex < size; ++outerIndex)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        if (!m_Pivoted[outerIndex])
+        if (!pivoted.at(outerIndex))
         {
-            for (auto innerIndex = 0; innerIndex < m_Size; ++innerIndex)
+            for (auto innerIndex = 0; innerIndex < size; ++innerIndex)
             {
-                if (!m_Pivoted[innerIndex])
+                if (!pivoted.at(innerIndex))
                 {
-                    auto absValue = Math::FAbs(m_Inverse(outerIndex, innerIndex));
-                    if (m_CurrentMaxValue < absValue)
+                    auto absValue = Math::FAbs(inverse(outerIndex, innerIndex));
+                    if (currentMaxValue < absValue)
                     {
-                        m_CurrentMaxValue = absValue;
-                        m_CurrentRow = outerIndex;
-                        m_CurrentColumn = innerIndex;
+                        currentMaxValue = absValue;
+                        currentRow = outerIndex;
+                        currentColumn = innerIndex;
                     }
                 }
             }
         }
-#include STSTEM_WARNING_POP
     }
 
-    if (m_CurrentMaxValue <= m_ZeroTolerance)
+    if (currentMaxValue <= zeroTolerance)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("矩阵是不可逆的。"s));
     }
@@ -196,9 +183,9 @@ void Mathematics::LinearSystemInverse<Real>::CalculateCurrentMaxValue()
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations()
 {
-    for (auto outerIndex = 0; outerIndex < m_Size; ++outerIndex)
+    for (auto outerIndex = 0; outerIndex < size; ++outerIndex)
     {
-        if (outerIndex != m_CurrentColumn)
+        if (outerIndex != currentColumn)
         {
             ZeroOutPivotColumnLocations(outerIndex);
         }
@@ -208,19 +195,16 @@ void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations()
 template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::ZeroOutPivotColumnLocations(int outerIndex)
 {
-    auto save = m_Inverse(outerIndex, m_CurrentColumn);
-    m_Inverse(outerIndex, m_CurrentColumn) = Math::GetValue(0);
-    for (int innerIndex = 0; innerIndex < m_Size; ++innerIndex)
+    auto save = inverse(outerIndex, currentColumn);
+    inverse(outerIndex, currentColumn) = Math::GetValue(0);
+    for (int innerIndex = 0; innerIndex < size; ++innerIndex)
     {
-        m_Inverse(outerIndex, innerIndex) -= m_Inverse(m_CurrentColumn, innerIndex) * save;
+        inverse(outerIndex, innerIndex) -= inverse(currentColumn, innerIndex) * save;
     }
 
-    if (!m_Output.empty())
+    if (!output.empty())
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        m_Output[outerIndex] -= m_Output[m_CurrentColumn] * save;
-#include STSTEM_WARNING_POP
+        output.at(outerIndex) -= output.at(currentColumn) * save;
     }
 }
 
@@ -229,38 +213,35 @@ template <typename Real>
 void Mathematics::LinearSystemInverse<Real>::Rearrangement()
 {
     // 重排序列使A[][]存储该原始矩阵的逆。
-    for (auto outerIndex = m_Size - 1; 0 <= outerIndex; --outerIndex)
+    for (auto outerIndex = size - 1; 0 <= outerIndex; --outerIndex)
     {
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26446)
-        auto swapRowIndex = m_RowIndex[outerIndex];
-        auto swapColumnsIndex = m_ColumnsIndex[outerIndex];
-#include STSTEM_WARNING_POP
+        auto swapRowIndex = rowIndex.at(outerIndex);
+        auto swapColumnsIndex = columnsIndex.at(outerIndex);
 
         if (swapRowIndex != swapColumnsIndex)
         {
-            for (auto innerIndex = 0; innerIndex < m_Size; ++innerIndex)
+            for (auto innerIndex = 0; innerIndex < size; ++innerIndex)
             {
-                std::swap(m_Inverse(innerIndex, swapRowIndex), m_Inverse(innerIndex, swapColumnsIndex));
+                std::swap(inverse(innerIndex, swapRowIndex), inverse(innerIndex, swapColumnsIndex));
             }
         }
     }
 }
 
 template <typename Real>
-typename const Mathematics::LinearSystemInverse<Real>::VariableMatrix Mathematics::LinearSystemInverse<Real>::GetInverse() const
+typename Mathematics::LinearSystemInverse<Real>::VariableMatrix Mathematics::LinearSystemInverse<Real>::GetInverse() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Inverse;
+    return inverse;
 }
 
 template <typename Real>
-typename const Mathematics::LinearSystemInverse<Real>::RealContainer Mathematics::LinearSystemInverse<Real>::GetResult() const
+typename Mathematics::LinearSystemInverse<Real>::RealContainer Mathematics::LinearSystemInverse<Real>::GetResult() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Output;
+    return output;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_LINEAR_SYSTEM_INVERSE_DETAIL_H

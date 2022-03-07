@@ -20,7 +20,7 @@ namespace Rendering
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
         using ProjectorSharedPtr = std::shared_ptr<ClassType>;
 		using ConstProjectorSharedPtr = std::shared_ptr<ClassType>;
-		using Matrix = Mathematics::FloatMatrix;
+		using Matrix = Mathematics::MatrixF;
 
 	public:
 		// 这类和Camera类的唯一区别是,你可以显式地指定深度的类型。

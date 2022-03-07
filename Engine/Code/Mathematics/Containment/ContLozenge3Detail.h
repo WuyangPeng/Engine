@@ -14,20 +14,20 @@
 
 template <typename Real>
 Mathematics::Lozenge3<Real> Mathematics
-	::ContLozenge (const std::vector<Vector3D<Real> >& points)
+	::ContLozenge (const std::vector<Vector3<Real> >& points)
 {
     // Fit with Gaussian.  Axis(0) corresponds to the smallest eigenvalue.
 	auto box = GaussPointsFit3<Real>(points).GetBox3();
 
 	auto diff = points[0] - box.GetCenter();
-	auto wMin = Vector3DTools<Real>::DotProduct(box.GetAxis(0),diff);
+	auto wMin = Vector3Tools<Real>::DotProduct(box.GetAxis(0),diff);
 	auto wMax = wMin;
     Real w;
    
 	for (auto i = 1u; i < points.size(); ++i)
     {
 		diff = points[i] - box.GetCenter();
-		w = Vector3DTools<Real>::DotProduct(box.GetAxis(0),diff);
+		w = Vector3Tools<Real>::DotProduct(box.GetAxis(0),diff);
         if (w < wMin)
         {
             wMin = w;
@@ -44,17 +44,17 @@ Mathematics::Lozenge3<Real> Mathematics
 	box = Box3<Real>{ newCenter, box.GetAxis0(), box.GetAxis1(), box.GetAxis2(),
 					  box.GetFirstExtent(), box.GetSecondExtent(), box.GetThirdExtent() };
 
-	auto aMin = Math<Real>::sm_MaxReal;
+	auto aMin = Math<Real>::maxReal;
 	auto aMax = -aMin;
-	auto bMin = Math<Real>::sm_MaxReal;
+	auto bMin = Math<Real>::maxReal;
 	auto bMax = -bMin;
 	auto discr, radical, u, v, test;
 	for (auto i = 0u; i < points.size(); ++i)
     {
         diff = points[i] - box.GetCenter();
-        u = Vector3DTools<Real>::DotProduct(box.GetAxis(2),diff);
-		v = Vector3DTools<Real>::DotProduct(box.GetAxis(1), diff);
-		w = Vector3DTools<Real>::DotProduct(box.GetAxis(0), diff);
+        u = Vector3Tools<Real>::DotProduct(box.GetAxis(2),diff);
+		v = Vector3Tools<Real>::DotProduct(box.GetAxis(1), diff);
+		w = Vector3Tools<Real>::DotProduct(box.GetAxis(0), diff);
         discr = rSqr - w*w;
         radical = Math<Real>::Sqrt(Math<Real>::FAbs(discr));
 
@@ -102,8 +102,8 @@ Mathematics::Lozenge3<Real> Mathematics
 	for (unsigned i = 0; i < points.size(); ++i)
     {
         diff = points[i] - box.GetCenter();
-		u = Vector2DTools<Real>::DotProduct(box.GetAxis(2),diff);
-		v = Vector2DTools<Real>::DotProduct(box.GetAxis(1),diff);
+		u = Vector2Tools<Real>::DotProduct(box.GetAxis(2),diff);
+		v = Vector2Tools<Real>::DotProduct(box.GetAxis(1),diff);
 
         Real* aExtreme = 0;
         Real* bExtreme = 0;
@@ -140,7 +140,7 @@ Mathematics::Lozenge3<Real> Mathematics
 			auto deltaU = u - *aExtreme;
 			auto deltaV = v - *bExtreme;
 			auto deltaSumSqr = deltaU*deltaU + deltaV*deltaV;
-			w = Vector2DTools<Real>::DotProduct(box.GetAxis(0),diff);
+			w = Vector2Tools<Real>::DotProduct(box.GetAxis(0),diff);
 			auto wSqr = w*w;
             test = deltaSumSqr + wSqr;
             if (test > rSqr)
@@ -153,8 +153,8 @@ Mathematics::Lozenge3<Real> Mathematics
         }
     }
 
-	Vector3D<Real> center;
-	Vector3D<Real> axis[2]{ box.GetAxis(2), box.GetAxis(1) };
+	Vector3<Real> center;
+	Vector3<Real> axis[2]{ box.GetAxis(2), box.GetAxis(1) };
 	Real extent[2];
 
 	if (aMin < aMax)
@@ -201,7 +201,7 @@ Mathematics::Lozenge3<Real> Mathematics
 
 template <typename Real>
 bool Mathematics
-	::InLozenge (const Vector3D<Real>& point, const Lozenge3<Real>& lozenge)
+	::InLozenge (const Vector3<Real>& point, const Lozenge3<Real>& lozenge)
 {
 	auto dist = DistancePoint3Rectangle3<Real>(point, lozenge.GetRectangle()).Get().GetDistance();
     return dist <= lozenge.GetRadius();

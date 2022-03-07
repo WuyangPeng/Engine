@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 16:47)
+///	引擎版本：0.8.0.2 (2022/02/11 17:16)
 
 #ifndef MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_H
 #define MATHEMATICS_RATIONAL_CONVERSION_RATIONAL_H
@@ -35,22 +35,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] uint64_t GetNumeratorMantissa() const;
-        [[nodiscard]] uint64_t GetDenominatorMantissa() const;
-        [[nodiscard]] NumericalValueSymbol GetSymbol() const;
-        [[nodiscard]] int GetNumeratorShifting() const;
-        [[nodiscard]] int GetDenominatorShifting() const;
-        [[nodiscard]] int GetMaxShifting() const;
-        [[nodiscard]] int GetReducibilityShifting() const;
+        NODISCARD uint64_t GetNumeratorMantissa() const;
+        NODISCARD uint64_t GetDenominatorMantissa() const;
+        NODISCARD NumericalValueSymbol GetSymbol() const;
+        NODISCARD int GetNumeratorShifting() const;
+        NODISCARD int GetDenominatorShifting() const;
+        NODISCARD int GetMaxShifting() const;
+        NODISCARD int GetReducibilityShifting() const;
 
         template <int N>
-        [[nodiscard]] bool IsCanConversion() const noexcept;
+        NODISCARD bool IsCanConversion() const noexcept;
 
         template <int N>
-        [[nodiscard]] const Integer<N> GetNumerator() const;
+        NODISCARD Integer<N> GetNumerator() const;
 
         template <int N>
-        [[nodiscard]] const Integer<N> GetDenominator() const;
+        NODISCARD Integer<N> GetDenominator() const;
 
     private:
         void Init(T value, const SignedIntegerType&);
@@ -58,19 +58,19 @@ namespace Mathematics
         void Init(T value, const FloatType&);
         void Init(T value, const DoubleType&);
         void InitFloatingPoint(T value);
-        [[nodiscard]] int GetAssignmentNumeratorShifting(int bit) const;
-        [[nodiscard]] int GetAssignmentDenominatorShifting(int bit) const;
-        [[nodiscard]] uint64_t GetAssignmentNumeratorMantissa(int bit) const;
-        [[nodiscard]] uint64_t GetAssignmentDenominatorMantissa(int bit) const;
+        NODISCARD int GetAssignmentNumeratorShifting(int bit) const;
+        NODISCARD int GetAssignmentDenominatorShifting(int bit) const;
+        NODISCARD uint64_t GetAssignmentNumeratorMantissa(int bit) const;
+        NODISCARD uint64_t GetAssignmentDenominatorMantissa(int bit) const;
 
     private:
-        int m_NumeratorShifting;
-        int m_DenominatorShifting;
-        uint64_t m_NumeratorMantissa;
-        uint64_t m_DenominatorMantissa;
-        NumericalValueSymbol m_Symbol;
-        int m_MaxShifting;
-        int m_ReducibilityShifting;
+        int numeratorShifting;
+        int denominatorShifting;
+        uint64_t numeratorMantissa;
+        uint64_t denominatorMantissa;
+        NumericalValueSymbol symbol;
+        int maxShifting;
+        int reducibilityShifting;
     };
 }
 

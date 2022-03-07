@@ -10,7 +10,12 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, SparseMatrixIndexTesting) 
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::SparseMatrixIndexTesting
 	::MainTest()
 {

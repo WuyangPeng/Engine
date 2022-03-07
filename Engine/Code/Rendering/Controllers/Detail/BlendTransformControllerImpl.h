@@ -27,8 +27,8 @@ namespace Rendering
 	public:
 		using ClassType = BlendTransformControllerImpl;
 		using Object = CoreTools::Object;
-		using APoint = Mathematics::FloatAPoint;
-		using Matrix = Mathematics::FloatMatrix;
+		using APoint = Mathematics::APointF;
+		using Matrix = Mathematics::MatrixF;
 		using ObjectSharedPtr = CoreTools::ObjectSharedPtr;
 		using ConstObjectSharedPtr = CoreTools::ConstObjectSharedPtr;
 

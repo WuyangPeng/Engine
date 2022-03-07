@@ -1,74 +1,77 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/22 14:05)
 
 #include "Box2Testing.h"
-#include "Mathematics/Objects2D/Box2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Objects2D/Box2Detail.h"
 
-#include <random> 
+#include <random>
 
-using std::vector;
-using std::uniform_real;
 using std::default_random_engine;
+using std::uniform_real;
+using std::vector;
 
 namespace Mathematics
 {
-	template class Box2<float>;
-	template class Box2<double>;
+    template class Box2<float>;
+    template class Box2<double>;
 }
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 
-UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Box2Testing) 
+UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, Box2Testing)
 
-void Mathematics::Box2Testing
-	::MainTest()
+void Mathematics::Box2Testing ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(BoxTest);
+    ASSERT_NOT_THROW_EXCEPTION_0(BoxTest);
 }
 
-void Mathematics::Box2Testing
-	::BoxTest()
+void Mathematics::Box2Testing ::BoxTest()
 {
-	default_random_engine generator{};
-	uniform_real<double> firstRandomDistribution{ -100.0,100.0 };
+    default_random_engine generator{};
+    uniform_real<double> firstRandomDistribution{ -100.0, 100.0 };
 
-	const auto testLoopCount = GetTestLoopCount();
+    const auto testLoopCount = GetTestLoopCount();
 
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		DoubleVector2D center(firstRandomDistribution(generator),firstRandomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector2 center(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D firstAxis(firstRandomDistribution(generator),firstRandomDistribution(generator));
+        Vector2 firstAxis(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D secondAxis(firstRandomDistribution(generator),firstRandomDistribution(generator));
+        Vector2 secondAxis(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		double firstExtent = DoubleVector2DTools::VectorMagnitude(firstAxis);
-		double secondExtent = DoubleVector2DTools::VectorMagnitude(secondAxis);
+        double firstExtent = Vector2ToolsD::GetLength(firstAxis);
+        double secondExtent = Vector2ToolsD::GetLength(secondAxis);
 
-		DoubleVector2D thirdAxis(firstAxis);
-		DoubleVector2D fourthAxis(secondAxis);
+        Vector2 thirdAxis(firstAxis);
+        Vector2 fourthAxis(secondAxis);
 
-		thirdAxis.Normalize();
-		fourthAxis.Normalize();
+        thirdAxis.Normalize();
+        fourthAxis.Normalize();
 
-		DoubleBox2 box(center,thirdAxis,fourthAxis,firstExtent,secondExtent);
+        Box2D box(center, thirdAxis, fourthAxis, firstExtent, secondExtent);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(box.GetCenter(),center));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(box.GetAxis0(),thirdAxis));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(box.GetAxis1(),fourthAxis));
-		ASSERT_APPROXIMATE(box.GetExtent0(),firstExtent,1e-10);
-		ASSERT_APPROXIMATE(box.GetExtent1(),secondExtent,1e-10);
+        ASSERT_TRUE(Vector2ToolsD::Approximate(box.GetCenter(), center));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(box.GetAxis0(), thirdAxis));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(box.GetAxis1(), fourthAxis));
+        ASSERT_APPROXIMATE(box.GetExtent0(), firstExtent, 1e-10);
+        ASSERT_APPROXIMATE(box.GetExtent1(), secondExtent, 1e-10);
 
-		vector<DoubleVector2D> vertex = box.ComputeVertices();
+        vector<Vector2D> vertex = box.ComputeVertices();
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[0],center - firstAxis - secondAxis));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[1],center + firstAxis - secondAxis));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[2],center + firstAxis + secondAxis));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(vertex[3],center - firstAxis + secondAxis));
-	}
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[0], center - firstAxis - secondAxis));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[1], center + firstAxis - secondAxis));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[2], center + firstAxis + secondAxis));
+        ASSERT_TRUE(Vector2ToolsD::Approximate(vertex[3], center - firstAxis + secondAxis));
+    }
 }
-

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 13:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 18:42)
 
 #ifndef DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DOC_RESULT_H
 #define DATABASE_SQL_INTERFACE_MYSQL_CONNECTOR_DOC_RESULT_H
@@ -24,18 +24,18 @@ namespace Database
     public:
         using ClassType = MysqlConnectorDocResult;
         using ParentType = ResultImpl;
-        using MysqlxDocResultPtr = std::shared_ptr<MysqlxDocResult>;
+        using MysqlxDocResultSharedPtr = std::shared_ptr<MysqlxDocResult>;
 
     public:
-        MysqlConnectorDocResult(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultPtr& mysqlxDocResult) noexcept;
+        MysqlConnectorDocResult(const ConfigurationStrategy& configurationStrategy, const MysqlxDocResultSharedPtr& mysqlxDocResult) noexcept;
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] ResultRowPtr FetchOne() override;
-        [[nodiscard]] ResultRowContainer FetchAll() override;
+        NODISCARD ResultRowUniquePtr FetchOne() override;
+        NODISCARD ResultRowContainer FetchAll() override;
 
     private:
-        MysqlxDocResultPtr m_MysqlxDocResult;
+        MysqlxDocResultSharedPtr mysqlxDocResult;
     };
 }
 

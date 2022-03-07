@@ -145,26 +145,26 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10001);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
     ASSERT_EQUAL(csvRow.GetChar(SYSTEM_TEXT("test1"s)), SYSTEM_TEXT('a'));
-    ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.1, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.1, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10001);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 7);
     ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("≤‚ ‘4,≤‚ ‘5,≤‚ ‘6,"s));
     ASSERT_ENUM_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::String);
 
     const auto vector2 = csvRow.GetVector2(SYSTEM_TEXT("test7"s));
-    ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2.GetY(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2.GetY(), 1.2, Mathematics::MathD::epsilon);
 
     const auto vector3 = csvRow.GetVector3(SYSTEM_TEXT("test8"s));
-    ASSERT_APPROXIMATE(vector3.GetX(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3.GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3.GetZ(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector3.GetX(), 1.2, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3.GetY(), 1.3, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3.GetZ(), 1.5, Mathematics::MathD::epsilon);
 
     const auto vector4 = csvRow.GetVector4(SYSTEM_TEXT("test9"s));
-    ASSERT_APPROXIMATE(vector4.GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetW(), 1.4, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector4.GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetW(), 1.4, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetY(), 5);
@@ -184,8 +184,8 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 2u);
-    ASSERT_APPROXIMATE(doubleArray.at(0), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(doubleArray.at(1), 1.1, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(doubleArray.at(0), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(doubleArray.at(1), 1.1, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10001 }));
     ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 7, 2 }));
@@ -193,23 +193,23 @@ void CoreTools::CSVRowTesting::CSVRow0Test()
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 2u);
-    ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2Array.at(0).GetY(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2Array.at(1).GetX(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2Array.at(1).GetY(), 1.4, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(0).GetY(), 1.2, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(1).GetX(), 1.3, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(1).GetY(), 1.4, Mathematics::MathD::epsilon);
 
     const auto vector3Array = csvRow.GetVector3Array(SYSTEM_TEXT("test21"s));
     ASSERT_EQUAL(vector3Array.size(), 1u);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetX(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetZ(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetX(), 1.2, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetY(), 1.3, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetZ(), 1.5, Mathematics::MathD::epsilon);
 
     const auto vector4Array = csvRow.GetVector4Array(SYSTEM_TEXT("test22"s));
     ASSERT_EQUAL(vector4Array.size(), 1u);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.4, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.4, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetY(), 5);
@@ -233,26 +233,26 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("id"s)), 10002);
     ASSERT_TRUE(csvRow.GetBool(SYSTEM_TEXT("test0"s)));
     ASSERT_EQUAL(csvRow.GetChar(SYSTEM_TEXT("test1"s)), SYSTEM_TEXT('b'));
-    ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.2, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(csvRow.GetDouble(SYSTEM_TEXT("test2"s)), 1.2, Mathematics::MathD::epsilon);
     ASSERT_EQUAL(csvRow.GetInt64(SYSTEM_TEXT("test3"s)), 10002);
     ASSERT_EQUAL(csvRow.GetInt(SYSTEM_TEXT("test4"s)), 3);
     ASSERT_EQUAL(csvRow.GetString(SYSTEM_TEXT("test5"s)), SYSTEM_TEXT("≤‚ ‘5"s));
     ASSERT_ENUM_EQUAL(csvRow.GetEnum<CSVDataType>(SYSTEM_TEXT("test6"s)), CSVDataType::Char);
 
     const auto vector2 = csvRow.GetVector2(SYSTEM_TEXT("test7"s));
-    ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2.GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector2.GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2.GetY(), 1.3, Mathematics::MathD::epsilon);
 
     const auto vector3 = csvRow.GetVector3(SYSTEM_TEXT("test8"s));
-    ASSERT_APPROXIMATE(vector3.GetX(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3.GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3.GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector3.GetX(), 1.2, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3.GetY(), 1.3, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3.GetZ(), 1.6, Mathematics::MathD::epsilon);
 
     const auto vector4 = csvRow.GetVector4(SYSTEM_TEXT("test9"s));
-    ASSERT_APPROXIMATE(vector4.GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4.GetW(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector4.GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetY(), 1.5, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetZ(), 1.6, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4.GetW(), 1.5, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2(SYSTEM_TEXT("test10"s)).GetY(), 6);
@@ -272,7 +272,7 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
 
     const auto doubleArray = csvRow.GetDoubleArray(SYSTEM_TEXT("test16"s));
     ASSERT_EQUAL(doubleArray.size(), 1u);
-    ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(doubleArray.at(0), 1.2, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetInt64Array(SYSTEM_TEXT("test17"s)), (vector<int64_t>{ 10002 }));
     ASSERT_EQUAL(csvRow.GetIntArray(SYSTEM_TEXT("test18"s)), (vector<int>{ 3 }));
@@ -280,21 +280,21 @@ void CoreTools::CSVRowTesting::CSVRow1Test()
 
     const auto vector2Array = csvRow.GetVector2Array(SYSTEM_TEXT("test20"s));
     ASSERT_EQUAL(vector2Array.size(), 1u);
-    ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector2Array.at(0).GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector2Array.at(0).GetY(), 1.3, Mathematics::MathD::epsilon);
 
     const auto vector3Array = csvRow.GetVector3Array(SYSTEM_TEXT("test21"s));
     ASSERT_EQUAL(vector3Array.size(), 1u);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetX(), 1.2, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetY(), 1.3, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector3Array.at(0).GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetX(), 1.2, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetY(), 1.3, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector3Array.at(0).GetZ(), 1.6, Mathematics::MathD::epsilon);
 
     const auto vector4Array = csvRow.GetVector4Array(SYSTEM_TEXT("test22"s));
     ASSERT_EQUAL(vector4Array.size(), 1u);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetX(), 1.1, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::DoubleMath::sm_Epsilon);
-    ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.5, Mathematics::DoubleMath::sm_Epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetX(), 1.1, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetY(), 1.5, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetZ(), 1.6, Mathematics::MathD::epsilon);
+    ASSERT_APPROXIMATE(vector4Array.at(0).GetW(), 1.5, Mathematics::MathD::epsilon);
 
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetX(), 1);
     ASSERT_EQUAL(csvRow.GetIntVector2Array(SYSTEM_TEXT("test23"s)).at(0).GetY(), 6);

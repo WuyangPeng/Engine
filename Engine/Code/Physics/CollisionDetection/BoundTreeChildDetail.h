@@ -12,8 +12,8 @@
 #include "CoreTools/Helper/Assertion/PhysicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/PhysicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/OrthogonalLineFit3Detail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
 #include "Rendering/SceneGraph/TriangleIndex.h"
@@ -160,7 +160,7 @@ const typename Physics::BoundTreeChild<MeshSmartPointer, Bound>::Line3 Physics::
     }
 
     // 在子网格中创建一组连续的顶点
-    std::vector<Mathematics::FloatVector3D> meshVertices;
+    std::vector<Mathematics::Vector3F> meshVertices;
     for (int i = 0; i < numVertices; ++i)
     {
         if (valid[i])
@@ -173,7 +173,7 @@ const typename Physics::BoundTreeChild<MeshSmartPointer, Bound>::Line3 Physics::
     m_ModelBound.ComputeFromData(meshVertices);
 
     // 计算子网格的分割线。
-    Mathematics::FloatOrthogonalLineFit3 fit(meshVertices);
+    Mathematics::OrthogonalLineFit3F fit(meshVertices);
 
     return fit.GetLine3();
 }

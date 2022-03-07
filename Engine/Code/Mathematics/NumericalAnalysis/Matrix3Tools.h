@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 10:55)
+///	引擎版本：0.8.0.2 (2022/02/17 11:34)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_MATRIX3_TOOLS_H
@@ -41,25 +41,25 @@ namespace Mathematics
         // 奇异值分解，M = L * D * Transpose(Real)，其中L和Real是正交的，
         // D是对角矩阵，其对角元素是非负的。
         // 返回值第一部分为left, 第二部分为diag,第三部分为rightTranspose
-        [[nodiscard]] const SingularValue SingularValueDecomposition() const;
+        NODISCARD SingularValue SingularValueDecomposition() const;
 
         // 极分解，M = Q * S，其中Q是正交的，S是对称的。
         // 这里使用奇异值分解：
         // M = L * D * Transpose(Real) = (L * Transpose(Real)) * (Real * D * Transpose(Real)) = Q * S
         // 其中Q = L * Transpose(Real)和S = Real * D * Transpose(Real)。
         // 返回值第一部分为Q，第二部分为S
-        [[nodiscard]] const PolarDecompositionValue PolarDecomposition() const;
+        NODISCARD PolarDecompositionValue PolarDecomposition() const;
 
         // 系数M = Q * D * U使用正交矩阵Q，对角矩阵D，上三角矩阵U。
         // 返回值第一部分为Q，第二部分为D，第三部分为U
-        [[nodiscard]] const QDUDecompositionValue QDUDecomposition() const;
+        NODISCARD QDUDecompositionValue QDUDecomposition() const;
 
     private:
-        Matrix3 m_Matrix;
+        Matrix3 matrix;
     };
 
-    using FloatMatrix3Tools = Matrix3Tools<float>;
-    using DoubleMatrix3Tools = Matrix3Tools<double>;
+    using Matrix3ToolsF = Matrix3Tools<float>;
+    using Matrix3ToolsD = Matrix3Tools<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX3_TOOLS_H

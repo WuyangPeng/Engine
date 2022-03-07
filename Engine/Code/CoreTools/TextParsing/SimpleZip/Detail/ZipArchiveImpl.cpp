@@ -90,9 +90,12 @@ CoreTools::SimpleZip::ZipArchiveImpl& CoreTools::SimpleZip::ZipArchiveImpl::oper
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    archivePath = std::move(rhs.archivePath);
-    zipReader = std::move(rhs.zipReader);
-    zipEntries = std::move(rhs.zipEntries);
+    if (this != &rhs)
+    {
+        archivePath = std::move(rhs.archivePath);
+        zipReader = std::move(rhs.zipReader);
+        zipEntries = std::move(rhs.zipEntries);
+    }
 
     return *this;
 }

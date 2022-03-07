@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/03 14:51)
+///	引擎版本：0.8.0.2 (2022/02/18 15:45)
 
 #ifndef MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_H
 #define MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 #include <vector>
 
@@ -26,8 +26,8 @@ namespace Mathematics
     {
     public:
         using ClassType = GreatCircleFit3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using Points = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using Points = std::vector<Vector3>;
         using Math = Math<Real>;
 
     public:
@@ -35,17 +35,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetNormal() noexcept;
+        NODISCARD Vector3 GetNormal() noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        Vector3D m_Normal;
+        Vector3 normal;
     };
 
-    using FloatGreatCircleFit3 = GreatCircleFit3<float>;
-    using DoubleGreatCircleFit3 = GreatCircleFit3<double>;
+    using GreatCircleFit3F = GreatCircleFit3<float>;
+    using GreatCircleFit3D = GreatCircleFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_GREAT_CIRCLE_FIT3_H

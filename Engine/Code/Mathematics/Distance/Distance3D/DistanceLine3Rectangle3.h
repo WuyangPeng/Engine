@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/11 13:58)
+///	引擎版本：0.8.0.3 (2022/02/22 11:51)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_LINE3_RECTANGLE3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_LINE3_RECTANGLE3_H
@@ -20,16 +20,16 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceLine3Rectangle3 : public DistanceBase<Real, Vector3D<Real>>
+    class DistanceLine3Rectangle3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistanceLine3Rectangle3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Line3 = Line3<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Rectangle3 = Rectangle3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
 
@@ -38,28 +38,28 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const noexcept;
-        [[nodiscard]] const Rectangle3 GetRectangle() const noexcept;
+        NODISCARD Line3 GetLine() const noexcept;
+        NODISCARD Rectangle3 GetRectangle() const noexcept;
 
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
-        [[nodiscard]] Real GetRectangleCoordinate(int index) const;
+        NODISCARD Real GetRectangleCoordinate(int index) const;
 
     private:
-        Line3 m_Line;
-        Rectangle3 m_Rectangle;
+        Line3 line;
+        Rectangle3 rectangle;
 
         // 有关最接近点的信息。
 
         // closest0 = line.origin + param * line.direction
         // closest1 = rect.center + param0 * rect.dir0 + param1 * rect.dir1
-        mutable Vector2D m_RectCoord;
+        mutable Vector2 rectCoord;
     };
 
-    using FloatDistanceLine3Rectangle3 = DistanceLine3Rectangle3<float>;
-    using DoubleDistanceLine3Rectangle3 = DistanceLine3Rectangle3<double>;
+    using DistanceLine3Rectangle3F = DistanceLine3Rectangle3<float>;
+    using DistanceLine3Rectangle3D = DistanceLine3Rectangle3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_LINE3_RECTANGLE3_H

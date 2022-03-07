@@ -36,7 +36,7 @@ void Database::AnalysisDatabaseConfigurationTesting
 	ASSERT_EQUAL(gameServer.GetDBUserName(), "root");
 	ASSERT_EQUAL(gameServer.GetDBPassword(), "password");
 	vector<string> clentFlags{ "CLIENT_COMPRESS", "CLIENT_IGNORE_SIGPIPE", "CLIENT_LOCAL_FILES" };
-	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(gameServer.GetFlagsOption(), clentFlags);
+	ASSERT_EQUAL(gameServer.GetFlagsOption(), clentFlags);
 
 	auto gameClient = analysisDatabaseConfiguration.GetConfigurationStrategy(SYSTEM_TEXT("GameClientDB"));
 
@@ -46,6 +46,6 @@ void Database::AnalysisDatabaseConfigurationTesting
 	ASSERT_EQUAL(gameClient.GetDBHostName(), "dbName");
 	ASSERT_EQUAL(gameClient.GetDBUserName(), "Account");
 	ASSERT_EQUAL(gameClient.GetDBPassword(), "Password");
-	ASSERT_EQUAL_DO_NOT_USE_MESSAGE(gameClient.GetFlagsOption(), vector<string>{});
+	ASSERT_EQUAL(gameClient.GetFlagsOption(), vector<string>{});
 }
 

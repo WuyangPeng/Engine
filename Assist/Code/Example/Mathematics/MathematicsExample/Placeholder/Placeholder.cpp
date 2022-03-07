@@ -6,13 +6,12 @@
 
 #include "Example/Mathematics/MathematicsExample/MathematicsExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
-MathematicsExample::Placeholder
-	::Placeholder() 
+MathematicsExample::Placeholder ::Placeholder() noexcept
 {
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(MathematicsExample, Placeholder)

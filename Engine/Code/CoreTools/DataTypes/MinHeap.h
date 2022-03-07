@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/19 9:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 14:49)
 
 #ifndef CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
 #define CORE_TOOLS_DATA_TYPE_MIN_HEAP_H
@@ -37,31 +37,31 @@ namespace CoreTools
 #ifdef OPEN_CLASS_INVARIANT
         // 前两个函数检查记录数组确实形成一个堆。最后一个函数打印堆到一个日志中。
         CLASS_INVARIANT_DECLARE;
-        bool IsValid(int startIndex, int finalIndex) const;
+        NODISCARD bool IsValid(int startIndex, int finalIndex) const;
         void PrintMinHeapInLog() const;
 #endif  // OPEN_CLASS_INVARIANT
 
-        int GetMaxElements() const;
-        int GetGrowBy() const noexcept;
-        int GetElementsNumber() const noexcept;
-        const RecordType GetMinimum() const;
-        const RecordType GetRecordByHeapIndex(int heapIndex) const;
-        const RecordType GetRecordByUniqueIndex(int uniqueIndex) const;
+        NODISCARD int GetMaxElements() const;
+        NODISCARD int GetGrowBy() const noexcept;
+        NODISCARD int GetElementsNumber() const noexcept;
+        NODISCARD RecordType GetMinimum() const;
+        NODISCARD RecordType GetRecordByHeapIndex(int heapIndex) const;
+        NODISCARD RecordType GetRecordByUniqueIndex(int uniqueIndex) const;
 
         // 插入堆数值“value”对应于识别的“generator”对象， 返回值是一个指向堆记录存储信息的唯一索引UniqueIndex。
         int Insert(Generator generator, Scalar value);
 
         // 取出堆的根。 根目录包含所有的堆元素的最小值。返回根信息。
-        const RecordType Remove();
+        RecordType Remove();
 
         // 堆记录的值必须通过调用这个函数进行修改。副作用是，堆必须相应地更新以适应新的值。返回索引的新位置HeapIndex。
         int Update(int uniqueIndex, Scalar value);
 
-        bool IsUniqueIndexValid(int uniqueIndex) const;
+        NODISCARD bool IsUniqueIndexValid(int uniqueIndex) const;
 
     private:
-        bool IsStoredValueLess(int lhsHeapIndex, int rhsHeapIndex) const;
-        bool IsStoredValueLessEqual(int lhsHeapIndex, int rhsHeapIndex) const;
+        NODISCARD bool IsStoredValueLess(int lhsHeapIndex, int rhsHeapIndex) const;
+        NODISCARD bool IsStoredValueLessEqual(int lhsHeapIndex, int rhsHeapIndex) const;
 
         void GrowRecords();
         void StoreInputInformation(Generator generator, Scalar value);
@@ -71,9 +71,9 @@ namespace CoreTools
         int RestoringValidHeapInUpdateSmallerValue(int heapIndex, Scalar value);
 
     private:
-        int m_ElementsNumber;  // 元素数目
-        int m_GrowBy;  // 增加幅度
-        RecordStoredManagerType m_RecordStoredManager;
+        int elementsNumber;  // 元素数目
+        int growBy;  // 增加幅度
+        RecordStoredManagerType recordStoredManager;
     };
 }
 

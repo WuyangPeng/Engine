@@ -29,7 +29,7 @@ namespace Mathematics
 		// Linear interpolation.  The return value is 'true' if and only if the
 		// input point P is in the convex hull of the input vertices, in which
 		// case the interpolation is valid.
-		bool Evaluate(const Vector2D<Real>& P, Real& F);
+		bool Evaluate(const Vector2<Real>& P, Real& F);
 
 	private:
 		const Delaunay2<Real>* mDT;

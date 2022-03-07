@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:43)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:34)
 
 #include "Network/NetworkExport.h"
 
@@ -26,6 +26,7 @@ Network::MessageTypeConditionSpecific::MessageTypeConditionSpecific(const Versio
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Network::MessageTypeConditionSpecific::IsValid() const noexcept
 {
     if (ParentType::IsValid() && !m_Version.empty())
@@ -33,6 +34,7 @@ bool Network::MessageTypeConditionSpecific::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 bool Network::MessageTypeConditionSpecific::IsVersionsConform(int version) const

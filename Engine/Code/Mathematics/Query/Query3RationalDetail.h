@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:29)
+///	引擎版本：0.8.0.2 (2022/02/17 16:50)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
 #define MATHEMATICS_QUERY_QUERY3_RATIONAL_DETAIL_H
@@ -21,7 +21,7 @@
 
 template <typename Real>
 Mathematics::Query3Rational<Real>::Query3Rational(const VerticesType& vertices)
-    : ParentType{ vertices }, m_RationalVertices{}
+    : ParentType{ vertices }, rationalVertices{}
 {
     Convert();
 
@@ -42,11 +42,12 @@ void Mathematics::Query3Rational<Real>::Convert()
         QueryRational rational1{ vertice.GetY() };
         QueryRational rational2{ vertice.GetZ() };
 
-        m_RationalVertices.emplace_back(rational0, rational1, rational2);
+        rationalVertices.emplace_back(rational0, rational1, rational2);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::Query3Rational<Real>::IsValid() const noexcept
 {
@@ -55,6 +56,7 @@ bool Mathematics::Query3Rational<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -69,13 +71,13 @@ template <typename Real>
 Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>::ToPlane(int index, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
-    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(m_RationalVertices.size()), "索引错误！");
+    MATHEMATICS_ASSERTION_0(0 <= index && index < boost::numeric_cast<int>(rationalVertices.size()), "索引错误！");
 
-    return ToPlane(m_RationalVertices.at(index), v0, v1, v2);
+    return ToPlane(rationalVertices.at(index), v0, v1, v2);
 }
 
 template <typename Real>
-Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>::ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const
+Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>::ToPlane(const Vector3& testVector, int v0, int v1, int v2) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -93,17 +95,17 @@ Mathematics::PlaneQueryType Mathematics::Query3Rational<Real>::ToPlane(const Que
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto x0 = rationalTest.GetX() - m_RationalVertices.at(v0).GetX();
-    auto y0 = rationalTest.GetY() - m_RationalVertices.at(v0).GetY();
-    auto z0 = rationalTest.GetZ() - m_RationalVertices.at(v0).GetZ();
-    auto x1 = m_RationalVertices.at(v1).GetX() - m_RationalVertices.at(v0).GetX();
-    auto y1 = m_RationalVertices.at(v1).GetY() - m_RationalVertices.at(v0).GetY();
-    auto z1 = m_RationalVertices.at(v1).GetZ() - m_RationalVertices.at(v0).GetZ();
-    auto x2 = m_RationalVertices.at(v2).GetX() - m_RationalVertices.at(v0).GetX();
-    auto y2 = m_RationalVertices.at(v2).GetY() - m_RationalVertices.at(v0).GetY();
-    auto z2 = m_RationalVertices.at(v2).GetZ() - m_RationalVertices.at(v0).GetZ();
+    const auto x0 = rationalTest.GetX() - rationalVertices.at(v0).GetX();
+    const auto y0 = rationalTest.GetY() - rationalVertices.at(v0).GetY();
+    const auto z0 = rationalTest.GetZ() - rationalVertices.at(v0).GetZ();
+    const auto x1 = rationalVertices.at(v1).GetX() - rationalVertices.at(v0).GetX();
+    const auto y1 = rationalVertices.at(v1).GetY() - rationalVertices.at(v0).GetY();
+    const auto z1 = rationalVertices.at(v1).GetZ() - rationalVertices.at(v0).GetZ();
+    const auto x2 = rationalVertices.at(v2).GetX() - rationalVertices.at(v0).GetX();
+    const auto y2 = rationalVertices.at(v2).GetY() - rationalVertices.at(v0).GetY();
+    const auto z2 = rationalVertices.at(v2).GetZ() - rationalVertices.at(v0).GetZ();
 
-    auto det = QueryDotTools<QueryRational>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
+    const auto det = QueryDotTools<QueryRational>::Det3(x0, y0, z0, x1, y1, z1, x2, y2, z2);
 
     if (QueryRational{} < det)
         return PlaneQueryType::PositiveSide;
@@ -118,11 +120,11 @@ Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>::ToTetrahedr
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToTetrahedron(m_RationalVertices.at(index), v0, v1, v2, v3);
+    return ToTetrahedron(rationalVertices.at(index), v0, v1, v2, v3);
 }
 
 template <typename Real>
-Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>::ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::TetrahedronQueryType Mathematics::Query3Rational<Real>::ToTetrahedron(const Vector3& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -184,11 +186,11 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>::ToCircumsp
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return ToCircumsphere(m_RationalVertices.at(index), v0, v1, v2, v3);
+    return ToCircumsphere(rationalVertices.at(index), v0, v1, v2, v3);
 }
 
 template <typename Real>
-Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>::ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const
+Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>::ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
@@ -206,10 +208,10 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>::ToCircumsp
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto& vector0 = m_RationalVertices.at(v0);
-    const auto& vector1 = m_RationalVertices.at(v1);
-    const auto& vector2 = m_RationalVertices.at(v2);
-    const auto& vector3 = m_RationalVertices.at(v3);
+    const auto& vector0 = rationalVertices.at(v0);
+    const auto& vector1 = rationalVertices.at(v1);
+    const auto& vector2 = rationalVertices.at(v2);
+    const auto& vector3 = rationalVertices.at(v3);
 
     const QueryRational s0x{ vector0.GetX() + rationalTest.GetX() };
     const QueryRational d0x{ vector0.GetX() - rationalTest.GetX() };
@@ -235,12 +237,12 @@ Mathematics::CircumsphereQueryType Mathematics::Query3Rational<Real>::ToCircumsp
     const QueryRational d3y{ vector3.GetY() - rationalTest.GetY() };
     const QueryRational s3z{ vector3.GetZ() + rationalTest.GetZ() };
     const QueryRational d3z{ vector3.GetZ() - rationalTest.GetZ() };
-    auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
-    auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
-    auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
-    auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
+    const auto w0 = s0x * d0x + s0y * d0y + s0z * d0z;
+    const auto w1 = s1x * d1x + s1y * d1y + s1z * d1z;
+    const auto w2 = s2x * d2x + s2y * d2y + s2z * d2z;
+    const auto w3 = s3x * d3x + s3y * d3y + s3z * d3z;
 
-    auto det = QueryDotTools<QueryRational>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
+    const auto det = QueryDotTools<QueryRational>::Det4(d0x, d0y, d0z, w0, d1x, d1y, d1z, w1, d2x, d2y, d2z, w2, d3x, d3y, d3z, w3);
 
     if (QueryRational{} < det)
         return CircumsphereQueryType::Outside;

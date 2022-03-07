@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 18:42)
+///	引擎版本：0.8.0.2 (2022/02/08 13:56)
 
 #ifndef MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_H
 #define MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_H
@@ -13,9 +13,9 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "AlgebraFwd.h"
+#include "Quaternion.h"
 #include "Flags/QuaternionFlags.h"
 #include "Mathematics/Base/MathDetail.h"
-#include "Quaternion.h"
 
 #include <type_traits>
 
@@ -36,12 +36,12 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] Real GetSinX() const noexcept;
-        [[nodiscard]] Real GetSinY() const noexcept;
-        [[nodiscard]] Real GetSinZ() const noexcept;
-        [[nodiscard]] Real GetCosX() const noexcept;
-        [[nodiscard]] Real GetCosY() const noexcept;
-        [[nodiscard]] Real GetCosZ() const noexcept;
+        NODISCARD Real GetSinX() const noexcept;
+        NODISCARD Real GetSinY() const noexcept;
+        NODISCARD Real GetSinZ() const noexcept;
+        NODISCARD Real GetCosX() const noexcept;
+        NODISCARD Real GetCosY() const noexcept;
+        NODISCARD Real GetCosZ() const noexcept;
 
     private:
         // 系数为 (cx + sx * i) * (cy + sy * j) * (cz + sz * k).
@@ -63,17 +63,17 @@ namespace Mathematics
         void FactorZYX() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
-        Quaternion m_Quaternion;
-        Real m_SinX;
-        Real m_CosX;
-        Real m_SinY;
-        Real m_CosY;
-        Real m_SinZ;
-        Real m_CosZ;
+        Quaternion quaternion;
+        Real sinX;
+        Real cosX;
+        Real sinY;
+        Real cosY;
+        Real sinZ;
+        Real cosZ;
     };
 
-    using FloatQuaternionFactor = QuaternionFactor<float>;
-    using DoubleQuaternionFactor = QuaternionFactor<double>;
+    using QuaternionFactorF = QuaternionFactor<float>;
+    using QuaternionFactorD = QuaternionFactor<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_QUATERNION_FACTOR_H

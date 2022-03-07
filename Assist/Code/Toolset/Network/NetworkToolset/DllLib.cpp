@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_NETWORK_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_NETWORK_STATIC
+#else  // BUILDING_NETWORK_STATIC
 
-	namespace NetworkToolset
-	{
-		void StaticDllLib()
-		{
+namespace NetworkToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_NETWORK_STATIC
+#endif  // !BUILDING_NETWORK_STATIC

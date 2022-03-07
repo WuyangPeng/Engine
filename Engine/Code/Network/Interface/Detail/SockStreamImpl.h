@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:18)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:29)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_STREAM_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_STREAM_IMPL_H
@@ -16,7 +16,6 @@
 
 namespace Network
 {
-    class SockStreamFactory;
     class NETWORK_HIDDEN_DECLARE SockStreamImpl
     {
     public:
@@ -33,27 +32,27 @@ namespace Network
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] virtual int Send(const MessageBufferSharedPtr& messageBuffer) = 0;
-        [[nodiscard]] virtual int Receive(const MessageBufferSharedPtr& messageBuffer) = 0;
+        NODISCARD virtual int Send(const MessageBufferSharedPtr& messageBuffer) = 0;
+        NODISCARD virtual int Receive(const MessageBufferSharedPtr& messageBuffer) = 0;
 
         virtual void AsyncSend(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) = 0;
         virtual void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) = 0;
 
-        [[nodiscard]] virtual ACESockStreamNativeType& GetACESockStream();
-        [[nodiscard]] virtual BoostSockStreamType& GetBoostSockStream();
-        [[nodiscard]] virtual WinSocketStreamType& GetNetworkSockStream();
+        NODISCARD virtual ACESockStreamNativeType& GetACESockStream();
+        NODISCARD virtual BoostSockStreamType& GetBoostSockStream();
+        NODISCARD virtual WinSocketStreamType& GetNetworkSockStream();
 
-        [[nodiscard]] virtual ACEHandleType GetACEHandle() const;
+        NODISCARD virtual ACEHandleType GetACEHandle() const;
 
         virtual void SetACEHandle(ACEHandleType handle);
         virtual void SetNetworkHandle(WinSocketStreamType winSocket);
 
-        [[nodiscard]] virtual bool CloseHandle() = 0;
+        NODISCARD virtual bool CloseHandle() = 0;
 
-        [[nodiscard]] virtual bool EnableNonBlock() = 0;
+        NODISCARD virtual bool EnableNonBlock() = 0;
 
-        [[nodiscard]] virtual const std::string GetRemoteAddress() const = 0;
-        [[nodiscard]] virtual int GetRemotePort() const = 0;
+        NODISCARD virtual std::string GetRemoteAddress() const = 0;
+        NODISCARD virtual int GetRemotePort() const = 0;
     };
 }
 

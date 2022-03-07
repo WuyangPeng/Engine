@@ -25,7 +25,10 @@ namespace Mathematics
 }
 
 #endif // BUILDING_MATHEMATICS_STATIC
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26446)
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,VariableLengthVectorTesting) 
 
 void Mathematics::VariableLengthVectorTesting
@@ -44,7 +47,7 @@ void Mathematics::VariableLengthVectorTesting
 	default_random_engine generator{};
 	uniform_real<float> randomDistribution{ -100.0f,100.0f }; 
 
-	FloatVariableLengthVector firstVector(5);
+	VariableLengthVectorF firstVector(5);
 
 	ASSERT_EQUAL(firstVector.GetSize(),5);
 
@@ -54,7 +57,7 @@ void Mathematics::VariableLengthVectorTesting
 		doubleVector.push_back(randomDistribution(generator));
 	}
 
-	DoubleVariableLengthVector secondVector(doubleVector);
+	VariableLengthVectorD secondVector(doubleVector);
 	ASSERT_EQUAL(secondVector.GetSize(),boost::numeric_cast<int>(doubleVector.size()));
 
 	for(int i = 0;i < 15;++i)
@@ -62,7 +65,7 @@ void Mathematics::VariableLengthVectorTesting
 		ASSERT_APPROXIMATE(secondVector[i],doubleVector[i],1e-10);
 	}
 
-	DoubleVariableLengthVector thirdVector(secondVector);
+	VariableLengthVectorD thirdVector(secondVector);
 	ASSERT_EQUAL(secondVector.GetSize(),thirdVector.GetSize());
 
 	ASSERT_TRUE(Approximate(secondVector,thirdVector,1e-10));
@@ -74,7 +77,7 @@ void Mathematics::VariableLengthVectorTesting
 		ASSERT_APPROXIMATE(secondVector[i],doubleVector[i],1e-10);
 	}
 
-	DoubleVariableLengthVector fourthVector;
+	VariableLengthVectorD fourthVector;
 	thirdVector = fourthVector;
 
 	ASSERT_EQUAL(thirdVector.GetSize(),0);	
@@ -106,8 +109,8 @@ void Mathematics::VariableLengthVectorTesting
 		doubleVector.push_back(randomDistribution(generator));
 	}
 
-	const DoubleVariableLengthVector firstVector(doubleVector);
-	DoubleVariableLengthVector secondVector(doubleVector);
+	const VariableLengthVectorD firstVector(doubleVector);
+	VariableLengthVectorD secondVector(doubleVector);
 
 	ASSERT_EQUAL(firstVector.GetSize(),15);	
 	ASSERT_EQUAL(secondVector.GetSize(),15);	
@@ -143,10 +146,10 @@ void Mathematics::VariableLengthVectorTesting
 		secondDoubleVector.push_back(randomDistribution(generator));
 	}
 
-	DoubleVariableLengthVector firstVector(firstDoubleVector);
-	DoubleVariableLengthVector secondVector(secondDoubleVector);	
+	VariableLengthVectorD firstVector(firstDoubleVector);
+	VariableLengthVectorD secondVector(secondDoubleVector);	
 
-	DoubleVariableLengthVector thirdVector = -firstVector;
+	VariableLengthVectorD thirdVector = -firstVector;
 
 	for(int i = 0;i < 15;++i)
 	{
@@ -230,7 +233,7 @@ void Mathematics::VariableLengthVectorTesting
 		firstDoubleVector.push_back(randomDistribution(generator));
 	}
 
-	DoubleVariableLengthVector firstVector(firstDoubleVector);
+	VariableLengthVectorD firstVector(firstDoubleVector);
 
 	double squaredLength = 0.0f;
 	for(int i = 0;i < 15;++i)
@@ -239,12 +242,12 @@ void Mathematics::VariableLengthVectorTesting
 	}
 
 	ASSERT_APPROXIMATE(squaredLength,firstVector.SquaredLength(),1e-10);
-	ASSERT_APPROXIMATE(DoubleMath::Sqrt(squaredLength),firstVector.Length(),1e-10);
+	ASSERT_APPROXIMATE(MathD::Sqrt(squaredLength),firstVector.Length(),1e-10);
 	firstVector.Normalize();
 
 	for(int i = 0;i < 15;++i)
 	{
-		ASSERT_APPROXIMATE(firstVector[i],firstDoubleVector[i] / DoubleMath::Sqrt(squaredLength),1e-10);	
+		ASSERT_APPROXIMATE(firstVector[i],firstDoubleVector[i] / MathD::Sqrt(squaredLength),1e-10);	
 	}
 
 	vector<double> secondDoubleVector;
@@ -253,7 +256,7 @@ void Mathematics::VariableLengthVectorTesting
 		secondDoubleVector.push_back(randomDistribution(generator));
 	}
 
-	DoubleVariableLengthVector secondVector(secondDoubleVector);
+	VariableLengthVectorD secondVector(secondDoubleVector);
 
 	double dotProduct = 0.0;
 	for(int i = 0;i < 15;++i)
@@ -282,8 +285,8 @@ void Mathematics::VariableLengthVectorTesting
 		secondDoubleVector.push_back(randomDistribution(generator));
 	}
 
-	DoubleVariableLengthVector firstVector(firstDoubleVector);
-	DoubleVariableLengthVector secondVector(secondDoubleVector);	
+	VariableLengthVectorD firstVector(firstDoubleVector);
+	VariableLengthVectorD secondVector(secondDoubleVector);	
 
 	firstVector[0] = 0.0;
 	secondVector[0] = 1.0;

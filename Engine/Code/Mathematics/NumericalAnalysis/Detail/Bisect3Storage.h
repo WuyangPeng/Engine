@@ -1,17 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/20 16:10)
+///	引擎版本：0.8.0.2 (2022/02/14 14:08)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_H
 
 #include "Mathematics/MathematicsDll.h"
 
+#include "Bisect3Node.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/NumericalAnalysis/Flags/BisectStorageType.h"
 #include "Mathematics/NumericalAnalysis/NumericalAnalysisFwd.h"
@@ -41,247 +42,244 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool TestEightCornerValues(Real beginPointX, Real beginPointY, Real beginPointZ, Real endPointX, Real endPointY, Real endPointZ);
+        NODISCARD bool TestEightCornerValues(Real beginX, Real beginY, Real beginZ, Real endX, Real endY, Real endZ);
 
-        [[nodiscard]] bool TestEdgeValues();
+        NODISCARD bool TestEdgeValues();
 
-        [[nodiscard]] const Bisect3RootSharedPtr GetBisect3Root() const noexcept;
+        NODISCARD Bisect3RootSharedPtr GetBisect3Root() const noexcept;
 
         void SetStorageValue(Real value0, Real value1, Real value2, Bisect3StorageType type) noexcept;
 
         void SetStorageValue(const Bisect3NodeSharedPtr& node) noexcept;
 
-        [[nodiscard]] Real GetBeginPointX() const noexcept;
-        [[nodiscard]] Real GetBeginPointY() const noexcept;
-        [[nodiscard]] Real GetBeginPointZ() const noexcept;
-        [[nodiscard]] Real GetEndPointX() const noexcept;
-        [[nodiscard]] Real GetEndPointY() const noexcept;
-        [[nodiscard]] Real GetEndPointZ() const noexcept;
-        [[nodiscard]] Real GetMidpointX() const noexcept;
-        [[nodiscard]] Real GetMidpointY() const noexcept;
-        [[nodiscard]] Real GetMidpointZ() const noexcept;
+        NODISCARD Real GetBeginPointX() const noexcept;
+        NODISCARD Real GetBeginPointY() const noexcept;
+        NODISCARD Real GetBeginPointZ() const noexcept;
+        NODISCARD Real GetEndPointX() const noexcept;
+        NODISCARD Real GetEndPointY() const noexcept;
+        NODISCARD Real GetEndPointZ() const noexcept;
+        NODISCARD Real GetMidpointX() const noexcept;
+        NODISCARD Real GetMidpointY() const noexcept;
+        NODISCARD Real GetMidpointZ() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXEndYBeginZValue0() const noexcept;
+        NODISCARD Real GetBeginXBeginYBeginZValue0() const noexcept;
+        NODISCARD Real GetEndXBeginYBeginZValue0() const noexcept;
+        NODISCARD Real GetBeginXEndYBeginZValue0() const noexcept;
+        NODISCARD Real GetEndXEndYBeginZValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYEndZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYEndZValue0() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYEndZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXEndYEndZValue0() const noexcept;
+        NODISCARD Real GetBeginXBeginYEndZValue0() const noexcept;
+        NODISCARD Real GetEndXBeginYEndZValue0() const noexcept;
+        NODISCARD Real GetBeginXEndYEndZValue0() const noexcept;
+        NODISCARD Real GetEndXEndYEndZValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXEndYBeginZValue1() const noexcept;
+        NODISCARD Real GetBeginXBeginYBeginZValue1() const noexcept;
+        NODISCARD Real GetEndXBeginYBeginZValue1() const noexcept;
+        NODISCARD Real GetBeginXEndYBeginZValue1() const noexcept;
+        NODISCARD Real GetEndXEndYBeginZValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYEndZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYEndZValue1() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYEndZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXEndYEndZValue1() const noexcept;
+        NODISCARD Real GetBeginXBeginYEndZValue1() const noexcept;
+        NODISCARD Real GetEndXBeginYEndZValue1() const noexcept;
+        NODISCARD Real GetBeginXEndYEndZValue1() const noexcept;
+        NODISCARD Real GetEndXEndYEndZValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXEndYBeginZValue2() const noexcept;
+        NODISCARD Real GetBeginXBeginYBeginZValue2() const noexcept;
+        NODISCARD Real GetEndXBeginYBeginZValue2() const noexcept;
+        NODISCARD Real GetBeginXEndYBeginZValue2() const noexcept;
+        NODISCARD Real GetEndXEndYBeginZValue2() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYEndZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYEndZValue2() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYEndZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXEndYEndZValue2() const noexcept;
+        NODISCARD Real GetBeginXBeginYEndZValue2() const noexcept;
+        NODISCARD Real GetEndXBeginYEndZValue2() const noexcept;
+        NODISCARD Real GetBeginXEndYEndZValue2() const noexcept;
+        NODISCARD Real GetEndXEndYEndZValue2() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXEndYMidZValue0() const noexcept;
+        NODISCARD Real GetBeginXBeginYMidZValue0() const noexcept;
+        NODISCARD Real GetEndXBeginYMidZValue0() const noexcept;
+        NODISCARD Real GetBeginXEndYMidZValue0() const noexcept;
+        NODISCARD Real GetEndXEndYMidZValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXMidYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetBeginXMidYEndZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXMidYEndZValue0() const noexcept;
+        NODISCARD Real GetBeginXMidYBeginZValue0() const noexcept;
+        NODISCARD Real GetEndXMidYBeginZValue0() const noexcept;
+        NODISCARD Real GetBeginXMidYEndZValue0() const noexcept;
+        NODISCARD Real GetEndXMidYEndZValue0() const noexcept;
 
-        [[nodiscard]] Real GetMidXBeginYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXEndYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYEndZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXEndYEndZValue0() const noexcept;
+        NODISCARD Real GetMidXBeginYBeginZValue0() const noexcept;
+        NODISCARD Real GetMidXEndYBeginZValue0() const noexcept;
+        NODISCARD Real GetMidXBeginYEndZValue0() const noexcept;
+        NODISCARD Real GetMidXEndYEndZValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXEndYMidZValue1() const noexcept;
+        NODISCARD Real GetBeginXBeginYMidZValue1() const noexcept;
+        NODISCARD Real GetEndXBeginYMidZValue1() const noexcept;
+        NODISCARD Real GetBeginXEndYMidZValue1() const noexcept;
+        NODISCARD Real GetEndXEndYMidZValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXMidYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetBeginXMidYEndZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXMidYEndZValue1() const noexcept;
+        NODISCARD Real GetBeginXMidYBeginZValue1() const noexcept;
+        NODISCARD Real GetEndXMidYBeginZValue1() const noexcept;
+        NODISCARD Real GetBeginXMidYEndZValue1() const noexcept;
+        NODISCARD Real GetEndXMidYEndZValue1() const noexcept;
 
-        [[nodiscard]] Real GetMidXBeginYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXEndYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYEndZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXEndYEndZValue1() const noexcept;
+        NODISCARD Real GetMidXBeginYBeginZValue1() const noexcept;
+        NODISCARD Real GetMidXEndYBeginZValue1() const noexcept;
+        NODISCARD Real GetMidXBeginYEndZValue1() const noexcept;
+        NODISCARD Real GetMidXEndYEndZValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXBeginYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXBeginYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetBeginXEndYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXEndYMidZValue2() const noexcept;
+        NODISCARD Real GetBeginXBeginYMidZValue2() const noexcept;
+        NODISCARD Real GetEndXBeginYMidZValue2() const noexcept;
+        NODISCARD Real GetBeginXEndYMidZValue2() const noexcept;
+        NODISCARD Real GetEndXEndYMidZValue2() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXMidYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetBeginXMidYEndZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXMidYEndZValue2() const noexcept;
+        NODISCARD Real GetBeginXMidYBeginZValue2() const noexcept;
+        NODISCARD Real GetEndXMidYBeginZValue2() const noexcept;
+        NODISCARD Real GetBeginXMidYEndZValue2() const noexcept;
+        NODISCARD Real GetEndXMidYEndZValue2() const noexcept;
 
-        [[nodiscard]] Real GetMidXBeginYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXEndYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYEndZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXEndYEndZValue2() const noexcept;
+        NODISCARD Real GetMidXBeginYBeginZValue2() const noexcept;
+        NODISCARD Real GetMidXEndYBeginZValue2() const noexcept;
+        NODISCARD Real GetMidXBeginYEndZValue2() const noexcept;
+        NODISCARD Real GetMidXEndYEndZValue2() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXMidYBeginZValue0() const noexcept;
-        [[nodiscard]] Real GetEndXMidYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXEndYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXMidYEndZValue0() const noexcept;
+        NODISCARD Real GetBeginXMidYMidZValue0() const noexcept;
+        NODISCARD Real GetMidXBeginYMidZValue0() const noexcept;
+        NODISCARD Real GetMidXMidYBeginZValue0() const noexcept;
+        NODISCARD Real GetEndXMidYMidZValue0() const noexcept;
+        NODISCARD Real GetMidXEndYMidZValue0() const noexcept;
+        NODISCARD Real GetMidXMidYEndZValue0() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXMidYBeginZValue1() const noexcept;
-        [[nodiscard]] Real GetEndXMidYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXEndYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXMidYEndZValue1() const noexcept;
+        NODISCARD Real GetBeginXMidYMidZValue1() const noexcept;
+        NODISCARD Real GetMidXBeginYMidZValue1() const noexcept;
+        NODISCARD Real GetMidXMidYBeginZValue1() const noexcept;
+        NODISCARD Real GetEndXMidYMidZValue1() const noexcept;
+        NODISCARD Real GetMidXEndYMidZValue1() const noexcept;
+        NODISCARD Real GetMidXMidYEndZValue1() const noexcept;
 
-        [[nodiscard]] Real GetBeginXMidYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXBeginYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXMidYBeginZValue2() const noexcept;
-        [[nodiscard]] Real GetEndXMidYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXEndYMidZValue2() const noexcept;
-        [[nodiscard]] Real GetMidXMidYEndZValue2() const noexcept;
+        NODISCARD Real GetBeginXMidYMidZValue2() const noexcept;
+        NODISCARD Real GetMidXBeginYMidZValue2() const noexcept;
+        NODISCARD Real GetMidXMidYBeginZValue2() const noexcept;
+        NODISCARD Real GetEndXMidYMidZValue2() const noexcept;
+        NODISCARD Real GetMidXEndYMidZValue2() const noexcept;
+        NODISCARD Real GetMidXMidYEndZValue2() const noexcept;
 
-        [[nodiscard]] Real GetMidXMidYMidZValue0() const noexcept;
-        [[nodiscard]] Real GetMidXMidYMidZValue1() const noexcept;
-        [[nodiscard]] Real GetMidXMidYMidZValue2() const noexcept;
+        NODISCARD Real GetMidXMidYMidZValue0() const noexcept;
+        NODISCARD Real GetMidXMidYMidZValue1() const noexcept;
+        NODISCARD Real GetMidXMidYMidZValue2() const noexcept;
 
     private:
         bool ZeroTest(Real x, Real y, Real z, Bisect3StorageType type);
 
     private:
-        const Bisect3& m_Bisect;
+        const Bisect3& bisect;
 
         // 顶点和中点的位置。
-        Real m_BeginPointX;
-        Real m_EndPointX;
-        Real m_MidpointX;
-        Real m_BeginPointY;
-        Real m_EndPointY;
-        Real m_MidpointY;
-        Real m_BeginPointZ;
-        Real m_EndPointZ;
-        Real m_MidpointZ;
+        Real beginPointX;
+        Real endPointX;
+        Real midpointX;
+        Real beginPointY;
+        Real endPointY;
+        Real midpointY;
+        Real beginPointZ;
+        Real endPointZ;
+        Real midpointZ;
 
         // 顶点
-        Real m_BeginXBeginYBeginZ0;
-        Real m_EndXBeginYBeginZ0;
-        Real m_BeginXEndYBeginZ0;
-        Real m_EndXEndYBeginZ0;
-        Real m_BeginXBeginYEndZ0;
-        Real m_EndXBeginYEndZ0;
-        Real m_BeginXEndYEndZ0;
-        Real m_EndXEndYEndZ0;
-        Real m_BeginXBeginYBeginZ1;
-        Real m_EndXBeginYBeginZ1;
-        Real m_BeginXEndYBeginZ1;
-        Real m_EndXEndYBeginZ1;
-        Real m_BeginXBeginYEndZ1;
-        Real m_EndXBeginYEndZ1;
-        Real m_BeginXEndYEndZ1;
-        Real m_EndXEndYEndZ1;
-        Real m_BeginXBeginYBeginZ2;
-        Real m_EndXBeginYBeginZ2;
-        Real m_BeginXEndYBeginZ2;
-        Real m_EndXEndYBeginZ2;
-        Real m_BeginXBeginYEndZ2;
-        Real m_EndXBeginYEndZ2;
-        Real m_BeginXEndYEndZ2;
-        Real m_EndXEndYEndZ2;
+        Real beginXBeginYBeginZ0;
+        Real endXBeginYBeginZ0;
+        Real beginXEndYBeginZ0;
+        Real endXEndYBeginZ0;
+        Real beginXBeginYEndZ0;
+        Real endXBeginYEndZ0;
+        Real beginXEndYEndZ0;
+        Real endXEndYEndZ0;
+        Real beginXBeginYBeginZ1;
+        Real endXBeginYBeginZ1;
+        Real beginXEndYBeginZ1;
+        Real endXEndYBeginZ1;
+        Real beginXBeginYEndZ1;
+        Real endXBeginYEndZ1;
+        Real beginXEndYEndZ1;
+        Real endXEndYEndZ1;
+        Real beginXBeginYBeginZ2;
+        Real endXBeginYBeginZ2;
+        Real beginXEndYBeginZ2;
+        Real endXEndYBeginZ2;
+        Real beginXBeginYEndZ2;
+        Real endXBeginYEndZ2;
+        Real beginXEndYEndZ2;
+        Real endXEndYEndZ2;
 
         // 边
-        Real m_BeginXBeginYMidZ0;
-        Real m_EndXBeginYMidZ0;
-        Real m_BeginXEndYMidZ0;
-        Real m_EndXEndYMidZ0;
+        Real beginXBeginYMidZ0;
+        Real endXBeginYMidZ0;
+        Real beginXEndYMidZ0;
+        Real endXEndYMidZ0;
 
-        Real m_BeginXMidYBeginZ0;
-        Real m_EndXMidYBeginZ0;
-        Real m_BeginXMidYEndZ0;
-        Real m_EndXMidYEndZ0;
+        Real beginXMidYBeginZ0;
+        Real endXMidYBeginZ0;
+        Real beginXMidYEndZ0;
+        Real endXMidYEndZ0;
 
-        Real m_MidXBeginYBeginZ0;
-        Real m_MidXEndYBeginZ0;
-        Real m_MidXBeginYEndZ0;
-        Real m_MidXEndYEndZ0;
+        Real midXBeginYBeginZ0;
+        Real midXEndYBeginZ0;
+        Real midXBeginYEndZ0;
+        Real midXEndYEndZ0;
 
-        Real m_BeginXBeginYMidZ1;
-        Real m_EndXBeginYMidZ1;
-        Real m_BeginXEndYMidZ1;
-        Real m_EndXEndYMidZ1;
+        Real beginXBeginYMidZ1;
+        Real endXBeginYMidZ1;
+        Real beginXEndYMidZ1;
+        Real endXEndYMidZ1;
 
-        Real m_BeginXMidYBeginZ1;
-        Real m_EndXMidYBeginZ1;
-        Real m_BeginXMidYEndZ1;
-        Real m_EndXMidYEndZ1;
+        Real beginXMidYBeginZ1;
+        Real endXMidYBeginZ1;
+        Real beginXMidYEndZ1;
+        Real endXMidYEndZ1;
 
-        Real m_MidXBeginYBeginZ1;
-        Real m_MidXEndYBeginZ1;
-        Real m_MidXBeginYEndZ1;
-        Real m_MidXEndYEndZ1;
+        Real midXBeginYBeginZ1;
+        Real midXEndYBeginZ1;
+        Real midXBeginYEndZ1;
+        Real midXEndYEndZ1;
 
-        Real m_BeginXBeginYMidZ2;
-        Real m_EndXBeginYMidZ2;
-        Real m_BeginXEndYMidZ2;
-        Real m_EndXEndYMidZ2;
+        Real beginXBeginYMidZ2;
+        Real endXBeginYMidZ2;
+        Real beginXEndYMidZ2;
+        Real endXEndYMidZ2;
 
-        Real m_BeginXMidYBeginZ2;
-        Real m_EndXMidYBeginZ2;
-        Real m_BeginXMidYEndZ2;
-        Real m_EndXMidYEndZ2;
+        Real beginXMidYBeginZ2;
+        Real endXMidYBeginZ2;
+        Real beginXMidYEndZ2;
+        Real endXMidYEndZ2;
 
-        Real m_MidXBeginYBeginZ2;
-        Real m_MidXEndYBeginZ2;
-        Real m_MidXBeginYEndZ2;
-        Real m_MidXEndYEndZ2;
+        Real midXBeginYBeginZ2;
+        Real midXEndYBeginZ2;
+        Real midXBeginYEndZ2;
+        Real midXEndYEndZ2;
 
         // 面
-        Real m_BeginXMidYMidZ0;
-        Real m_MidXBeginYMidZ0;
-        Real m_MidXMidYBeginZ0;
-        Real m_EndXMidYMidZ0;
-        Real m_MidXEndYMidZ0;
-        Real m_MidXMidYEndZ0;
+        Real beginXMidYMidZ0;
+        Real midXBeginYMidZ0;
+        Real midXMidYBeginZ0;
+        Real endXMidYMidZ0;
+        Real midXEndYMidZ0;
+        Real midXMidYEndZ0;
 
-        Real m_BeginXMidYMidZ1;
-        Real m_MidXBeginYMidZ1;
-        Real m_MidXMidYBeginZ1;
-        Real m_EndXMidYMidZ1;
-        Real m_MidXEndYMidZ1;
-        Real m_MidXMidYEndZ1;
+        Real beginXMidYMidZ1;
+        Real midXBeginYMidZ1;
+        Real midXMidYBeginZ1;
+        Real endXMidYMidZ1;
+        Real midXEndYMidZ1;
+        Real midXMidYEndZ1;
 
-        Real m_BeginXMidYMidZ2;
-        Real m_MidXBeginYMidZ2;
-        Real m_MidXMidYBeginZ2;
-        Real m_EndXMidYMidZ2;
-        Real m_MidXEndYMidZ2;
-        Real m_MidXMidYEndZ2;
+        Real beginXMidYMidZ2;
+        Real midXBeginYMidZ2;
+        Real midXMidYBeginZ2;
+        Real endXMidYMidZ2;
+        Real midXEndYMidZ2;
+        Real midXMidYEndZ2;
 
         // 中心
-        Real m_MidXMidYMidZ0;
-        Real m_MidXMidYMidZ1;
-        Real m_MidXMidYMidZ2;
+        Real midXMidYMidZ0;
+        Real midXMidYMidZ1;
+        Real midXMidYMidZ2;
 
-        Bisect3RootSharedPtr m_Bisect3Root;
+        Bisect3RootSharedPtr bisect3Root;
     };
-
-    using FloatBisect3Storage = Bisect3Storage<float>;
-    using DoubleBisect3Storage = Bisect3Storage<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_BISECT3_STORAGE_H

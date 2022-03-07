@@ -36,15 +36,9 @@ namespace CoreTools
         EventInterface() noexcept = default;
         virtual ~EventInterface() noexcept = default;
         EventInterface(const EventInterface& rhs) noexcept = default;
-        EventInterface(EventInterface&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
-
         EventInterface& operator=(const EventInterface& rhs) noexcept = default;
+        EventInterface(EventInterface&& rhs) noexcept = default;
         EventInterface& operator=(EventInterface&& rhs) noexcept = default;
-
-#include STSTEM_WARNING_POP
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 

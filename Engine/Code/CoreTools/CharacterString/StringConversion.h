@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/29 20:20)
+///	引擎版本：0.8.0.1 (2022/01/12 14:08)
 
 #ifndef CORE_TOOLS_CHARACTER_STRING_STRING_CONVERSION_H
 #define CORE_TOOLS_CHARACTER_STRING_STRING_CONVERSION_H
@@ -43,7 +43,7 @@ namespace CoreTools
 
         NODISCARD static CFileString StandardConversionCFileString(const String& character);
 
-        NODISCARD static std::wstring UTF8ConversionWideChar(const std::string& character); 
+        NODISCARD static std::wstring UTF8ConversionWideChar(const std::string& character);
         NODISCARD static std::string WideCharConversionUTF8(const std::wstring& character);
         NODISCARD static String UTF8ConversionStandard(const std::string& character);
         NODISCARD static String UTF8ConversionStandard(const std::wstring& character);

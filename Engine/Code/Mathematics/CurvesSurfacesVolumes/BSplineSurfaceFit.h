@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "BSplineFitBasis.h" 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Algebra/BandedMatrix.h"
 
 namespace Mathematics
@@ -23,34 +23,34 @@ namespace Mathematics
 		// constructor are
 		//   1 <= degree0 && degree0 + 1 < numControls0 <= numSamples0
 		//   1 <= degree1 && degree1 + 1 < numControls1 <= numSamples1
-		BSplineSurfaceFit(int degree0, int numControls0, int numSamples0,int degree1, int numControls1, int numSamples1,Vector3D<Real>** samples);
+		BSplineSurfaceFit(int degree0, int numControls0, int numSamples0,int degree1, int numControls1, int numSamples1,Vector3<Real>** samples);
 
 		~BSplineSurfaceFit();
 
 		// Access to input sample information.
 		int GetSampleQuantity(int i) const;
-		Vector3D<Real>** GetSamplePoints() const;
+		Vector3<Real>** GetSamplePoints() const;
 
 		// Access to output control point and surface information.
 		int GetDegree(int i) const;
 		int GetControlQuantity(int i) const;
-		Vector3D<Real>** GetControlPoints() const;
+		Vector3<Real>** GetControlPoints() const;
 		const BSplineFitBasis<Real>& GetBasis(int i) const;
 
 		// Evaluation of the B-spline surface.  It is defined for 0 <= u <= 1
 		// and 0 <= v <= 1.  If a parameter value is outside [0,1], it is clamped
 		// to [0,1].
-		Vector3D<Real> GetPosition(Real u, Real v) const;
+		Vector3<Real> GetPosition(Real u, Real v) const;
 
 	private:
 		// Input sample information.
 		int mNumSamples[2];
-		Vector3D<Real>** mSamples;
+		Vector3<Real>** mSamples;
 
 		// The fitted B-spline surface, open and with uniform knots.
 		int mDegree[2];
 		int mNumControls[2];
-		Vector3D<Real>** mControls;
+		Vector3<Real>** mControls;
 		BSplineFitBasis<Real>* mBasis[2];
 	};
 

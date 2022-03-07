@@ -7,23 +7,23 @@
 #ifndef SCRIPT_EXAMPLE_PLACEHOLDER_H
 #define SCRIPT_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Script/ScriptExample/ScriptExampleDll.h" 
+#include "Example/Script/ScriptExample/ScriptExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace ScriptExample
 {
-	 class SCRIPT_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class SCRIPT_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // SCRIPT_EXAMPLE_PLACEHOLDER_H
+#endif  // SCRIPT_EXAMPLE_PLACEHOLDER_H

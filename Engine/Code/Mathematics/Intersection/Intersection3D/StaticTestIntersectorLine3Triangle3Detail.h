@@ -1,109 +1,102 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 13:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/04 16:07)
 
 #ifndef MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
 
 #include "StaticTestIntersectorLine3Triangle3.h"
 #include "Detail/IntersectorLine3Triangle3DataDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Base/Flags/NumericalValueSymbol.h"
 #include "Mathematics/Intersection/IntersectorDetail.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 
 template <typename Real>
-Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::StaticTestIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle,const Real epsilon) 
-	:ParentType{ epsilon }, m_Line{ line }, m_Triangle{ triangle }
+Mathematics::StaticTestIntersectorLine3Triangle3<Real>::StaticTestIntersectorLine3Triangle3(const Line3& line, const Triangle3& triangle, const Real epsilon)
+    : ParentType{ epsilon }, line{ line }, triangle{ triangle }
 {
-	Test();
+    Test();
 
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
-}
-
-template <typename Real>
-Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::~StaticTestIntersectorLine3Triangle3() 
-{
-	MATHEMATICS_SELF_CLASS_IS_VALID_9;
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
-template <typename Real>
-bool Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::IsValid() const noexcept
-{
-	if (ParentType::IsValid())
-		return true;
-	else		
-		return false;		
-}
-#endif // OPEN_CLASS_INVARIANT	
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::GetLine() const
+bool Mathematics::StaticTestIntersectorLine3Triangle3<Real>::IsValid() const noexcept
 {
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
-
-    return m_Line;
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
 }
 
-template <typename Real>
-const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::GetTriangle() const
-{
-	MATHEMATICS_CLASS_IS_VALID_CONST_9;
+#endif  // OPEN_CLASS_INVARIANT
 
-	return m_Triangle;
-} 
+template <typename Real>
+Mathematics::Line3<Real> Mathematics::StaticTestIntersectorLine3Triangle3<Real>::GetLine() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return line;
+}
+
+template <typename Real>
+Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorLine3Triangle3<Real>::GetTriangle() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return triangle;
+}
 
 // private
 template <typename Real>
-void Mathematics::StaticTestIntersectorLine3Triangle3<Real>
-	::Test() 
+void Mathematics::StaticTestIntersectorLine3Triangle3<Real>::Test()
 {
-	IntersectorLine3Triangle3Data<Real> data{ m_Line,m_Triangle };
+    const IntersectorLine3Triangle3Data<Real> data{ line, triangle };
 
-	auto directionDotNormal = data.GetDirectionDotNormal();
-	auto epsilon = this->GetEpsilon();
-	auto sign = NumericalValueSymbol::Zero;
+    auto directionDotNormal = data.GetDirectionDotNormal();
+    auto epsilon = this->GetEpsilon();
+    auto sign = NumericalValueSymbol::Zero;
 
-	if (epsilon < directionDotNormal)
+    if (epsilon < directionDotNormal)
     {
         sign = NumericalValueSymbol::Positive;
     }
-	else if (directionDotNormal < epsilon)
+    else if (directionDotNormal < epsilon)
     {
         sign = NumericalValueSymbol::Negative;
         directionDotNormal = -directionDotNormal;
     }
     else
     {
-		// 线和三角形是平行的,称之为“没有交集”。
-		// 即使线是相交。
+        // 线和三角形是平行的,称之为“没有交集”。
+        // 即使线是相交。
         return;
     }
 
-	auto directionDotOriginCrossEdge2 =	sign * Vector3DTools::DotProduct(m_Line.GetDirection(),data.GetOriginCrossEdge2());
-	if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
-	{
-		auto directionDotEdge1CrossOrigin =	sign * Vector3DTools::DotProduct(m_Line.GetDirection(),  data.GetEdge1CrossOrigin());
+    auto directionDotOriginCrossEdge2 = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetOriginCrossEdge2());
+    if (Math::GetValue(0) <= directionDotOriginCrossEdge2)
+    {
+        auto directionDotEdge1CrossOrigin = sign * Vector3Tools::DotProduct(line.GetDirection(), data.GetEdge1CrossOrigin());
 
-		if (Math::GetValue(0) <= directionDotEdge1CrossOrigin)
-		{
-			if (directionDotNormal <= directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin)
-			{
-				this->SetIntersectionType(IntersectionType::Point);
-			}
-			// else: 1 < b1 + b2, 不相交
-		}
-		// else: b2 < 0, 不相交
-	}
-	// else: b1 < 0, 不相交
+        if (Math::GetValue(0) <= directionDotEdge1CrossOrigin)
+        {
+            if (directionDotNormal <= directionDotOriginCrossEdge2 + directionDotEdge1CrossOrigin)
+            {
+                this->SetIntersectionType(IntersectionType::Point);
+            }
+            // else: 1 < b1 + b2, 不相交
+        }
+        // else: b2 < 0, 不相交
+    }
+    // else: b1 < 0, 不相交
 }
 
-#endif // MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_TEST_INTERSECTOR_LINE3_TRIANGLE3_DETAIL_H

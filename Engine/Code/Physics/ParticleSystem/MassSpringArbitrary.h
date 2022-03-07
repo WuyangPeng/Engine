@@ -63,10 +63,10 @@ namespace Physics
 		std::set<int>* mAdjacent;
 	};
 
-	using MassSpringArbitrary2f = MassSpringArbitrary<float,Mathematics::FloatVector2D>;
-	using MassSpringArbitrary2d = MassSpringArbitrary<double,Mathematics::DoubleVector2D>;
-	using MassSpringArbitrary3f = MassSpringArbitrary<float,Mathematics::FloatVector3D>;
-	using MassSpringArbitrary3d = MassSpringArbitrary<double,Mathematics::DoubleVector3D>;
+	using MassSpringArbitrary2f = MassSpringArbitrary<float,Mathematics::Vector2F>;
+	using MassSpringArbitrary2d = MassSpringArbitrary<double,Mathematics::Vector2D>;
+	using MassSpringArbitrary3f = MassSpringArbitrary<float,Mathematics::Vector3F>;
+	using MassSpringArbitrary3d = MassSpringArbitrary<double,Mathematics::Vector3D>;
 }
 
 #endif // PHYSICS_PARTICLE_SYSTEM_MASS_SPRING_ARBITRARY_H

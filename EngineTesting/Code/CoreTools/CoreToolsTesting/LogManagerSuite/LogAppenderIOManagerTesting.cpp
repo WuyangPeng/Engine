@@ -8,6 +8,7 @@
 #include "System/Helper/PragmaWarning/Format.h"
 #include "System/Windows/Flags/PlatformErrorFlags.h"
 #include "CoreTools/CharacterString/StringConversion.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/FileManager/DeleteFileTools.h"
 #include "CoreTools/FileManager/IFStreamManager.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -18,7 +19,6 @@
 #include "CoreTools/LogManager/LogAppenderIOManager.h"
 #include "CoreTools/LogManager/Logger.h"
 #include "CoreTools/Time/CustomTime.h"
-#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::make_shared;
 using std::ostream;
@@ -73,7 +73,7 @@ void CoreTools::LogAppenderIOManagerTesting ::IntegerTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager{ LogLevel::Trace, appenderManager };
+    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -84,7 +84,7 @@ void CoreTools::LogAppenderIOManagerTesting ::StringTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager{ LogLevel::Trace, appenderManager };
+    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -99,7 +99,7 @@ void CoreTools::LogAppenderIOManagerTesting ::Error1Test()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager{ LogLevel::Trace, appenderManager };
+    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << errorTest;
@@ -109,7 +109,7 @@ void CoreTools::LogAppenderIOManagerTesting ::FormatTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager{ LogLevel::Trace, appenderManager };
+    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -120,7 +120,7 @@ void CoreTools::LogAppenderIOManagerTesting ::LogAppenderIOManageSignTest()
 {
     auto appenderManager = GetAppenderManager();
 
-    LogAppenderIOManager manager{ LogLevel::Trace, appenderManager };
+    LogAppenderIOManager manager = LogAppenderIOManager::Create(LogLevel::Trace, appenderManager);
 
     manager << LogFilter::CoreTools
             << CORE_TOOLS_FUNCTION_DESCRIBED
@@ -160,7 +160,7 @@ CoreTools::LogAppenderIOManagerTesting::AppenderManagerPtr CoreTools::LogAppende
 
     Logger logger{ LogFilter::CoreTools, LogLevel::Trace };
 
-    AppenderManagerPtr manager{ make_shared<AppenderManager>(DisableNotThrow::Disable) };
+    AppenderManagerPtr manager = AppenderManager::Create();
 
     [[maybe_unused]] const auto value = manager->InsertLogger(logger);
     [[maybe_unused]] auto value1 = manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender);

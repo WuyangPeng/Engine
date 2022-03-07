@@ -21,13 +21,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\Testing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingHelper.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingHelper.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingLib.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Code\Example\CoreToolsExample\CoreToolsExampleTesting\TestingMain.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Configuration\EnvironmentVariable.json">
+      <Filter>配置</Filter>
+    </None>
     <None Include="Configuration\Log.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\Testing.json">
-      <Filter>配置</Filter>
-    </None>
-    <None Include="Configuration\EnvironmentVariable.json">
       <Filter>配置</Filter>
     </None>
     <None Include="Configuration\NetworkExampleTesting.json">
@@ -35,6 +54,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\Todo\Level 0.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
+    <Text Include="Resource\Todo\Level 1.txt">
+      <Filter>资源文件\Todo</Filter>
+    </Text>
     <Text Include="Resource\Todo\Level 2.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
@@ -47,11 +72,8 @@
     <Text Include="Resource\Todo\Level 5.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 1.txt">
+    <Text Include="Resource\Todo\Level 6.txt">
       <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\ReadMe.txt">
-      <Filter>资源文件</Filter>
     </Text>
     <Text Include="Resource\Todo\Level 7.txt">
       <Filter>资源文件\Todo</Filter>
@@ -62,33 +84,11 @@
     <Text Include="Resource\Todo\Level 9.txt">
       <Filter>资源文件\Todo</Filter>
     </Text>
-    <Text Include="Resource\Todo\Level 0.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Todo\Level 6.txt">
-      <Filter>资源文件\Todo</Filter>
-    </Text>
-    <Text Include="Resource\Schedule.txt">
+    <Text Include="Resource\ReadMe.md">
       <Filter>资源文件</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\Testing.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingHelper.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingHelper.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingLib.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\Code\Example\NetworkExample\NetworkExampleTesting\TestingMain.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+    <Text Include="Resource\Schedule.md">
+      <Filter>资源文件</Filter>
+    </Text>
   </ItemGroup>
 </Project>

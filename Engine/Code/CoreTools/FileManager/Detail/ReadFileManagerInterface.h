@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:23)
+///	引擎版本：0.8.0.1 (2022/01/08 23:32)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_INTERFACE_H
 #define CORE_TOOLS_FILE_MANAGER_READ_FILE_MANAGER_INTERFACE_H
@@ -29,8 +29,8 @@ namespace CoreTools
     public:
         ReadFileManagerInterface() = default;
         virtual ~ReadFileManagerInterface() noexcept = default;
-        ReadFileManagerInterface(const ReadFileManagerInterface&) = default;
-        ReadFileManagerInterface& operator=(const ReadFileManagerInterface&) = default;
+        ReadFileManagerInterface(const ReadFileManagerInterface&) noexcept = default;
+        ReadFileManagerInterface& operator=(const ReadFileManagerInterface&) noexcept = default;
         ReadFileManagerInterface(ReadFileManagerInterface&&) noexcept = default;
         ReadFileManagerInterface& operator=(ReadFileManagerInterface&&) noexcept = default;
 

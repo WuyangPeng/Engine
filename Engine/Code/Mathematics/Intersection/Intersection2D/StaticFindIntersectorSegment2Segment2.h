@@ -1,33 +1,31 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/22 17:15)
+///	引擎版本：0.8.0.3 (2022/02/24 18:34)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_H
 
 #include "Mathematics/Algebra/AlgebraFwd.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Intersection/StaticIntersector.h"
 #include "Mathematics/Objects2D/Segment2.h"
-
-#include <array>
 
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Segment2 : public StaticIntersector<Real, Vector2D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment2Segment2 : public StaticIntersector<Real, Vector2>
     {
     public:
         using ClassType = StaticFindIntersectorSegment2Segment2<Real>;
-        using ParentType = StaticIntersector<Real, Vector2D>;
-        using Vector2D = Vector2D<Real>;
+        using ParentType = StaticIntersector<Real, Vector2>;
+        using Vector2 = Vector2<Real>;
         using Segment2 = Segment2<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,15 +33,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Segment2 GetLhsSegment() const noexcept;
-        [[nodiscard]] const Segment2 GetRhsSegment() const noexcept;
+        NODISCARD Segment2 GetLhsSegment() const noexcept;
+        NODISCARD Segment2 GetRhsSegment() const noexcept;
 
         // 相交测试使用线段的中心-范围形式。
-        // 如果从端点（Vector2D<Real>）开始并创建 Segment2<Real>对象，
+        // 如果从端点（Vector2<Real>）开始并创建 Segment2<Real>对象，
         // 则到中心-范围格式的转换可能包含小的数字舍入误差。
         // 测试相交一个端点的两个线段的交集可能由于舍入误差而导致失败。
         // 为此，您可以指定一个小的正阈值，稍微放大线段的间隔。 默认值为零。
-        [[nodiscard]] Real GetIntervalThreshold() const noexcept;
+        NODISCARD Real GetIntervalThreshold() const noexcept;
 
         // 相交集。让 q = GetQuantity()。情况是：
         //   q = 0: 线段不相交， GetIntersection() 返回IntersectionType::Empty。
@@ -52,8 +50,8 @@ namespace Mathematics
         //   q = 2: 线段是重叠的且相交是线段。
         //          GetIntersection()返回IntersectionType::Segment。
         //          访问相交线段终点使用GetPoint(0)和GetPoint(1)。
-        [[nodiscard]] int GetQuantity() const noexcept;
-        [[nodiscard]] const Vector2D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD Vector2 GetPoint(int index) const;
 
     private:
         // 静态查找相交查询。
@@ -61,19 +59,16 @@ namespace Mathematics
 
     private:
         // 要相交的对象。
-        Segment2 m_LhsSegment;
-        Segment2 m_RhsSegment;
+        Segment2 lhsSegment;
+        Segment2 rhsSegment;
 
         // 相交集
-        int m_Quantity;
+        int quantity;
 
-        Real m_IntervalThreshold;
-        Vector2D m_Point0;
-        Vector2D m_Point1;
+        Real intervalThreshold;
+        Vector2 point0;
+        Vector2 point1;
     };
-
-    using FloatStaticFindIntersectorSegment2Segment2 = StaticFindIntersectorSegment2Segment2<float>;
-    using DoubleStaticFindIntersectorSegment2Segment2 = StaticFindIntersectorSegment2Segment2<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_H

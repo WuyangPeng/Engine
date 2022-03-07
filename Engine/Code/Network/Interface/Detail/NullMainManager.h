@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:06)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 14:23)
 
 #ifndef NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
 #define NETWORK_NETWORK_INTERFACE_NULL_MAIN_MANAGER_H
@@ -30,7 +30,7 @@ namespace Network
         void Run() noexcept final;
 
         void StopContext() noexcept final;
-        [[nodiscard]] bool IsContextStop() const noexcept final;
+        NODISCARD bool IsContextStop() const noexcept final;
         void RestartContext() noexcept final;
     };
 }

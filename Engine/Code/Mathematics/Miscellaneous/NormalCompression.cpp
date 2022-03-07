@@ -7,9 +7,9 @@
 #include "Mathematics/MathematicsExport.h"
 
 #include "NormalCompression.h"
-#include "System/Helper/PragmaWarning.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
 #include "Mathematics/Base/MathDetail.h"
-#include <gsl/narrow>
+
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26426)
 #include SYSTEM_WARNING_DISABLE(26440)
@@ -18,10 +18,10 @@ static auto temp1 = 2 * gsN + 1;
 static double gsB = temp1;
 static double gsB2 = gsB * gsB;
 static auto temp2 = (gsN - 1);
-static double gsFactor = temp2 * Mathematics::DoubleMath::Sqrt(0.5);
+static double gsFactor = temp2 * Mathematics::MathD::Sqrt(0.5);
 static double gsInvFactor = 1.0 / gsFactor;
 
-void Mathematics ::CompressNormal(double x, double y, double z, unsigned short& index) noexcept
+void Mathematics ::CompressNormal(double x, double y, double z, unsigned short& index)  
 {
     // assert:  x*x + y*y + z*z = 1
 
@@ -44,8 +44,8 @@ void Mathematics ::CompressNormal(double x, double y, double z, unsigned short& 
     }
 
     // Determine mantissa.
-    const unsigned short usX = gsl::narrow_cast<unsigned short>(DoubleMath::Floor(gsFactor * x));
-    const unsigned short usY = gsl::narrow_cast<unsigned short>(DoubleMath::Floor(gsFactor * y));
+    const unsigned short usX = boost::numeric_cast<unsigned short>(MathD::Floor(gsFactor * x));
+    const unsigned short usY = boost::numeric_cast<unsigned short>(MathD::Floor(gsFactor * y));
     unsigned short mantissa = usX + ((usY * (255 - usY)) >> 1);
     index |= mantissa;
 }
@@ -57,14 +57,14 @@ void Mathematics ::UncompressNormal(unsigned short index, double& x, double& y, 
     // Extract triangular indices.
     const auto a = 8 * mantissa;
     double temp = gsB2 - a;
-    unsigned short usY = gsl::narrow_cast<unsigned short>(DoubleMath::Floor(0.5 * (gsB - DoubleMath::Sqrt(DoubleMath::FAbs(temp)))));
+    unsigned short usY = boost::numeric_cast<unsigned short>(MathD::Floor(0.5 * (gsB - MathD::Sqrt(MathD::FAbs(temp)))));
     unsigned short usX = mantissa - ((usY * (255 - usY)) >> 1);
 
     // Build approximate normal.
     x = usX * gsInvFactor;
     y = usY * gsInvFactor;
     temp = 1.0 - x * x - y * y;
-    z = DoubleMath::Sqrt(DoubleMath::FAbs(temp));
+    z = MathD::Sqrt(MathD::FAbs(temp));
 
     // Determine octant.
     if (index & 0x8000)

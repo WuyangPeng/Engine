@@ -1,19 +1,19 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/13 11:15)
+///	引擎版本：0.8.0.2 (2022/02/09 18:53)
 
 #ifndef MATHEMATICS_OBJECTS2D_ARC2_H
 #define MATHEMATICS_OBJECTS2D_ARC2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector2DTools.h"
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <iosfwd>
@@ -29,40 +29,40 @@ namespace Mathematics
 
         using ClassType = Arc2<Real>;
         using Math = Math<Real>;
-        using Vector2D = Vector2D<Real>;
-        using Vector2DTools = Vector2DTools<Real>;
+        using Vector2 = Vector2<Real>;
+        using Vector2Tools = Vector2Tools<Real>;
 
     public:
         // 圆弧是定义在圆上的两点end0和end1，
         // 以便end1通过end0逆时针方向遍历获得。
         // 应用程序负责确保end0和end1在圆环上，和他们正确的排序。
 
-        Arc2(const Vector2D& center, Real radius, const Vector2D& end0, const Vector2D& end1, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Arc2(const Vector2& center, Real radius, const Vector2& end0, const Vector2& end1, const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
         // 检验point是否在弧上。应用程序必须确保point在圆上，也就是说，|P-C| = Real。
         // 该测试适用于在B-C 和 A-C的任何角度，而不仅仅是0 到 pi弧度之间。
-        [[nodiscard]] bool Contains(const Vector2D& point) const;
+        NODISCARD bool Contains(const Vector2& point) const;
 
-        [[nodiscard]] const Vector2D GetCenter() const noexcept;
-        [[nodiscard]] Real GetRadius() const noexcept;
-        [[nodiscard]] const Vector2D GetEnd0() const noexcept;
-        [[nodiscard]] const Vector2D GetEnd1() const noexcept;
+        NODISCARD Vector2 GetCenter() const noexcept;
+        NODISCARD Real GetRadius() const noexcept;
+        NODISCARD Vector2 GetEnd0() const noexcept;
+        NODISCARD Vector2 GetEnd1() const noexcept;
 
     private:
-        Vector2D m_Center;
-        Real m_Radius;
-        Vector2D m_End0;
-        Vector2D m_End1;
-        Real m_Epsilon;
+        Vector2 center;
+        Real radius;
+        Vector2 end0;
+        Vector2 end1;
+        Real epsilon;
     };
 
-    using FloatArc2 = Arc2<float>;
-    using DoubleArc2 = Arc2<double>;
+    using Arc2F = Arc2<float>;
+    using Arc2D = Arc2<double>;
 
     template <typename Real>
-    [[nodiscard]] bool Approximate(const Arc2<Real>& lhs, const Arc2<Real>& rhs, const Real epsilon);
+    NODISCARD bool Approximate(const Arc2<Real>& lhs, const Arc2<Real>& rhs, const Real epsilon) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
     // 调试输出
     template <typename Real>

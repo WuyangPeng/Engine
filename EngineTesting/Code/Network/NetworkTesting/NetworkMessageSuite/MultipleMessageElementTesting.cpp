@@ -33,8 +33,7 @@ void Network::MultipleMessageElementTesting
 	ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
 
-void Network::MultipleMessageElementTesting
-	::BaseTest()
+void Network::MultipleMessageElementTesting ::BaseTest() noexcept
 {
 	static_assert(MultipleMessageElement<0, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Int8, "MultipleMessageElement int8 error");
 	static_assert(MultipleMessageElement<1, MultipleMessageType>::sm_ByteType == MultipleMessageByteType::Uint8, "MultipleMessageElement uint8 error");

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 14:14)
+///	引擎版本：0.8.0.2 (2022/02/11 13:46)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_CONVERSION_H
 #define MATHEMATICS_RATIONAL_INTEGER_CONVERSION_H
@@ -33,15 +33,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetShifting() const;
-        [[nodiscard]] uint64_t GetMantissa() const;
-        [[nodiscard]] NumericalValueSymbol GetSymbol() const noexcept;
-        [[nodiscard]] int GetMaxMantissaBit() const;
-        [[nodiscard]] uint64_t GetShiftingMantissa() const noexcept;
-        [[nodiscard]] int GetBeginBlock() const noexcept;
+        NODISCARD int GetShifting() const noexcept;
+        NODISCARD uint64_t GetMantissa() const noexcept;
+        NODISCARD NumericalValueSymbol GetSymbol() const noexcept;
+        NODISCARD int GetMaxMantissaBit() const;
+        NODISCARD uint64_t GetShiftingMantissa() const noexcept;
+        NODISCARD int GetBeginBlock() const noexcept;
 
-        [[nodiscard]] int GetMantissaSize() const noexcept;
-        [[nodiscard]] int GetCopySize() const noexcept;
+        NODISCARD int GetMantissaSize() const noexcept;
+        NODISCARD int GetCopySize() const noexcept;
 
     private:
         void Init(T value, const SignedIntegerType&);
@@ -52,14 +52,14 @@ namespace Mathematics
         void ShiftingMantissa() noexcept;
 
     private:
-        static constexpr auto sm_BlockSize = 16;
+        static constexpr auto blockSize = 16;
 
     private:
-        int m_Shifting;
-        uint64_t m_Mantissa;
-        NumericalValueSymbol m_Symbol;
-        int m_MaxMantissaBit;
-        uint64_t m_ShiftingMantissa;
+        int shifting;
+        uint64_t mantissa;
+        NumericalValueSymbol symbol;
+        int maxMantissaBit;
+        uint64_t shiftingMantissa;
     };
 }
 

@@ -34,7 +34,7 @@ void Network::BaseMainManagerTesting ::ACETest()
 
 void Network::BaseMainManagerTesting ::BoostTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
     ASSERT_FALSE(BASE_MAIN_MANAGER_SINGLETON.IsContextStop());
@@ -58,7 +58,7 @@ void Network::BaseMainManagerTesting ::NullTest()
 
 void Network::BaseMainManagerTesting ::ThreadsBoostTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -71,7 +71,7 @@ void Network::BaseMainManagerTesting ::ThreadsBoostTest()
 
 void Network::BaseMainManagerTesting ::MultiContextBoostTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 
     BASE_MAIN_MANAGER_SINGLETON.Run();
     BASE_MAIN_MANAGER_SINGLETON.StopContext();
@@ -98,7 +98,7 @@ void Network::BaseMainManagerTesting ::ACERunTest()
 
 void Network::BaseMainManagerTesting ::ACEGetIOContextExceptionTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 }
 
 void Network::BaseMainManagerTesting ::ACEStopContextExceptionTest()
@@ -108,7 +108,7 @@ void Network::BaseMainManagerTesting ::ACEStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting ::ACEIsContextStopExceptionTest()
 {
-    [[maybe_unused]] auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    [[maybe_unused]] const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting ::ACERestartContextExceptionTest()
@@ -123,7 +123,7 @@ void Network::BaseMainManagerTesting ::NetworkRunTest()
 
 void Network::BaseMainManagerTesting ::NetworkGetIOContextExceptionTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 }
 
 void Network::BaseMainManagerTesting ::NetworkStopContextExceptionTest()
@@ -133,7 +133,7 @@ void Network::BaseMainManagerTesting ::NetworkStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting ::NetworkIsContextStopExceptionTest()
 {
-    [[maybe_unused]] auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    [[maybe_unused]] const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting ::NetworkRestartContextExceptionTest()
@@ -148,7 +148,7 @@ void Network::BaseMainManagerTesting ::NullRunTest()
 
 void Network::BaseMainManagerTesting ::NullGetIOContextExceptionTest()
 {
-    [[maybe_unused]] auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
+    [[maybe_unused]] const auto& ioContext = BASE_MAIN_MANAGER_SINGLETON.GetIOContext();
 }
 
 void Network::BaseMainManagerTesting ::NullStopContextExceptionTest()
@@ -158,7 +158,7 @@ void Network::BaseMainManagerTesting ::NullStopContextExceptionTest()
 
 void Network::BaseMainManagerTesting ::NullIsContextStopExceptionTest()
 {
-    [[maybe_unused]] auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
+    [[maybe_unused]] const auto value = BASE_MAIN_MANAGER_SINGLETON.IsContextStop();
 }
 
 void Network::BaseMainManagerTesting ::NullRestartContextExceptionTest()

@@ -29,11 +29,11 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, Portal);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, Portal);
 CORE_TOOLS_FACTORY_DEFINE(Rendering, Portal);
 
-Rendering::Portal ::Portal(int numVertices, Mathematics::FloatAPoint* modelVertices, const Mathematics::FloatPlane& modelPlane, ConvexRegion* adjacentRegion, bool open)
+Rendering::Portal ::Portal(int numVertices, Mathematics::APointF* modelVertices, const Mathematics::PlaneF& modelPlane, ConvexRegion* adjacentRegion, bool open)
     : ParentType("Portal"), AdjacentRegion(adjacentRegion), Open(open), mNumVertices(numVertices),
       mModelVertices(modelVertices), mModelPlane(modelPlane), mWorldPlane(modelPlane)
 {
-    mWorldVertices = nullptr;  //NEW1<Mathematics::FloatAPoint>(mNumVertices);
+    mWorldVertices = nullptr;  //NEW1<Mathematics::APointF>(mNumVertices);
 }
 
 Rendering::Portal::~Portal(){
@@ -105,13 +105,13 @@ bool Rendering::Portal ::ReducedFrustum(const Culler& culler, float reducedFrust
 
     const ConstCameraSharedPtr camera = culler.GetCamera();
     const float* frustum = culler.GetFrustum();
-    float rmin = +Mathematics::FloatMath::sm_MaxReal;  // left
-    float rmax = -Mathematics::FloatMath::sm_MaxReal;  // right
-    float umin = +Mathematics::FloatMath::sm_MaxReal;  // bottom
-    float umax = -Mathematics::FloatMath::sm_MaxReal;  // top
+    float rmin = +Mathematics::MathF::maxReal;  // left
+    float rmax = -Mathematics::MathF::maxReal;  // right
+    float umin = +Mathematics::MathF::maxReal;  // bottom
+    float umax = -Mathematics::MathF::maxReal;  // top
 
-    Mathematics::FloatAVector diff{};
-    Mathematics::FloatAPoint vertexCam;
+    Mathematics::AVectorF diff{};
+    Mathematics::APointF vertexCam;
     int i = 0;
 
     if (camera->IsPerspective())
@@ -119,8 +119,8 @@ bool Rendering::Portal ::ReducedFrustum(const Culler& culler, float reducedFrust
         constexpr float epsilon = 1e-6f, invEpsilon = 1e+6f;
         int firstSign = 0, lastSign = 0;  // in {-1,0,1}
         bool signChange = false;
-        Mathematics::FloatAPoint firstVertex = Mathematics::FloatAPoint::GetOrigin();
-        Mathematics::FloatAPoint lastVertex = Mathematics::FloatAPoint::GetOrigin();
+        Mathematics::APointF firstVertex = Mathematics::APointF::GetOrigin();
+        Mathematics::APointF lastVertex = Mathematics::APointF::GetOrigin();
         float NdD = 0.0f, UdD = 0.0f, RdD = 0.0f, t = 0.0f;
 
         for (i = 0; i < mNumVertices; i++)
@@ -434,7 +434,7 @@ void Rendering::Portal ::Load(CoreTools::BufferSource& source)
     Open = source.ReadBool();
     //    source.ReadSharedPtr(AdjacentRegion);
 
-    //    mWorldVertices = NEW1<Mathematics::FloatAPoint>(mNumVertices);
+    //    mWorldVertices = NEW1<Mathematics::APointF>(mNumVertices);
 
     CORE_TOOLS_END_DEBUG_STREAM_LOAD(source);
 }

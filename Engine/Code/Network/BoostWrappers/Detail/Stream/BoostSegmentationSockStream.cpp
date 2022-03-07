@@ -1,16 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 18:14)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 0:07)
 
 #include "Network/NetworkExport.h"
 
 #include "BoostSegmentationSockStream.h"
 #include "BoostSockStreamHelper.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Interface/Data/AddressData.h"
@@ -20,8 +21,8 @@
 using boost::asio::detail::throw_error;
 using std::string;
 
-Network::BoostSegmentationSockStream::BoostSegmentationSockStream() noexcept
-    : ParentType{}, m_StreamReceive{ StreamReceive::Head }
+Network::BoostSegmentationSockStream::BoostSegmentationSockStream(CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{ disableNotThrow }, streamReceive{ StreamReceive::Head }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -34,7 +35,7 @@ int Network::BoostSegmentationSockStream::Receive(const MessageBufferSharedPtr& 
 
     try
     {
-        switch (m_StreamReceive)
+        switch (streamReceive)
         {
             case StreamReceive::Head:
             {
@@ -54,7 +55,7 @@ int Network::BoostSegmentationSockStream::Receive(const MessageBufferSharedPtr& 
     }
     catch (...)
     {
-        m_StreamReceive = StreamReceive::Head;
+        streamReceive = StreamReceive::Head;
         throw;
     }
 }
@@ -69,7 +70,7 @@ int Network::BoostSegmentationSockStream::ReceiveHead(const MessageBufferSharedP
 
     if (messageBuffer->GetReceiveCount() == 0)
     {
-        m_StreamReceive = StreamReceive::Content;
+        streamReceive = StreamReceive::Content;
 
         return ReceiveContent(messageBuffer) + receiveSize;
     }
@@ -90,7 +91,7 @@ int Network::BoostSegmentationSockStream::ReceiveContent(const MessageBufferShar
 
     if (0 < receiveSize)
     {
-        m_StreamReceive = StreamReceive::Head;
+        streamReceive = StreamReceive::Head;
 
         if (0 < messageBuffer->GetReceiveCount())
         {
@@ -107,7 +108,7 @@ void Network::BoostSegmentationSockStream::AsyncReceive(const EventInterfaceShar
 
     try
     {
-        switch (m_StreamReceive)
+        switch (streamReceive)
         {
             case StreamReceive::Head:
                 return AsyncReceiveHead(eventInterface, messageBuffer);
@@ -119,7 +120,7 @@ void Network::BoostSegmentationSockStream::AsyncReceive(const EventInterfaceShar
     }
     catch (...)
     {
-        m_StreamReceive = StreamReceive::Head;
+        streamReceive = StreamReceive::Head;
         throw;
     }
 }
@@ -145,7 +146,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveEvent(const Error
 {
     try
     {
-        switch (m_StreamReceive)
+        switch (streamReceive)
         {
             case StreamReceive::Head:
                 return SubclassAsyncReceiveHeadEvent(errorCode, eventInterface, messageBuffer, originalWriteIndex);
@@ -157,7 +158,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveEvent(const Error
     }
     catch (...)
     {
-        m_StreamReceive = StreamReceive::Head;
+        streamReceive = StreamReceive::Head;
         throw;
     }
 }
@@ -171,7 +172,7 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
 
     if (messageBuffer->GetReceiveCount() == 0)
     {
-        m_StreamReceive = StreamReceive::Content;
+        streamReceive = StreamReceive::Content;
 
         return AsyncReceiveContent(eventInterface, messageBuffer, originalWriteIndex);
     }
@@ -184,10 +185,12 @@ void Network::BoostSegmentationSockStream::SubclassAsyncReceiveHeadEvent(const E
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26415)
 #include SYSTEM_WARNING_DISABLE(26418)
+
 void Network::BoostSegmentationSockStream::SubclassAsyncReceiveContentEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex)
 {
-    m_StreamReceive = StreamReceive::Head;
+    streamReceive = StreamReceive::Head;
 
     BoostSockStreamHelper::EventReceiveFunction(errorCode, eventInterface, AddressData{ *this }, messageBuffer->GetCurrentWriteIndex() - originalWriteIndex);
 }
+
 #include STSTEM_WARNING_POP

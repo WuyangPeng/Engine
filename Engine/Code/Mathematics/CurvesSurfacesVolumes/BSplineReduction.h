@@ -9,8 +9,8 @@
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector2.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 namespace Mathematics
 {
@@ -40,7 +40,7 @@ private:
     static Real Integrand (Real t, const BSplineReduction* data);
 
     int mDegree;
-    int m_Quantity[2];
+    int quantity[2];
     int mNumKnots[2];  // N+D+2
     Real* mKnot[2];
 
@@ -48,10 +48,10 @@ private:
     int mBasis[2], mIndex[2];
 };
 
-using BSplineReduction2f = BSplineReduction<float,FloatVector2D>;
-using BSplineReduction2d = BSplineReduction<double,DoubleVector2D>;
-using BSplineReduction3f = BSplineReduction<float,FloatVector3D>;
-using BSplineReduction3d = BSplineReduction<double,DoubleVector3D>;
+using BSplineReduction2f = BSplineReduction<float,Vector2F>;
+using BSplineReduction2d = BSplineReduction<double,Vector2D>;
+using BSplineReduction3f = BSplineReduction<float,Vector3F>;
+using BSplineReduction3d = BSplineReduction<double,Vector3D>;
 
 }
 

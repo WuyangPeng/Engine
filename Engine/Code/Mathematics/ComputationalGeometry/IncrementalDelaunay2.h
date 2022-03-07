@@ -10,7 +10,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "CoreTools/DataTypes/MinHeap.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Meshes/VEManifoldMesh.h"
 #include "Mathematics/Rational/RationalVector2.h"
 
@@ -37,12 +37,12 @@ namespace Mathematics
 		// exists, its vertex-map index is simply returned.  If the position
 		// is outside the domain specified in the constructor, the return value
 		// is -1.
-		int Insert (const Vector2D<Real>& position);
+		int Insert (const Vector2<Real>& position);
 
 		// Remove a point from the triangulation.  The return value is the index
 		// associated with the vertex in the vertex map when that vertex exists.
 		// If the vertex does not exist, the return value is -1.
-		int Remove (const Vector2D<Real>& position);
+		int Remove (const Vector2<Real>& position);
 
 		// Support for debugging.  Return an index array of all the triangles,
 		// including those that connect to vertices of the supertriangle.  The
@@ -74,12 +74,12 @@ namespace Mathematics
 		// to Insert, even if Remove was called later for any inserted points.
 		// The points at indices 0, 1, and 2 are always the vertices of the
 		// supertriangle.
-		const std::vector<Vector2D<Real> >& GetVertices () const;
+		const std::vector<Vector2<Real> >& GetVertices () const;
 
 		// The unique vertices processed.  These are the actual vertices in the
 		// triangulation.  The 'int' value is the index associated with the
 		// vertex.
-		const std::map<Vector2D<Real>,int>& GetUniqueVertices () const;
+		const std::map<Vector2<Real>,int>& GetUniqueVertices () const;
 
 		// Locate those triangle edges that do not share other triangles.  The
 		// returned quantity is the number of edges in the hull.  The returned
@@ -93,7 +93,7 @@ namespace Mathematics
 		// a point.  If there is a containing triangle, the returned value is a
 		// triangle index i with 0 <= i < GetNumTriangles().  If there is not a
 		// containing triangle, -1 is returned.
-		int GetContainingTriangle (const Vector2D<Real>& p) const;
+		int GetContainingTriangle (const Vector2<Real>& p) const;
 
 		// If GetContainingTriangle returns a nonnegative value, the path of
 		// triangles searched for the containing triangles is stored in an array.
@@ -116,7 +116,7 @@ namespace Mathematics
 		// Get the vertices for triangle i.  The function returns 'true' if i is
 		// a valid triangle index, in which case the vertices are valid.
 		// Otherwise, the function returns 'false' and the vertices are invalid.
-		bool GetVertexSet (int i, Vector2D<Real> vertices[3]) const;
+		bool GetVertexSet (int i, Vector2<Real> vertices[3]) const;
 
 		// Get the vertex indices for triangle i.  The function returns 'true' if
 		// i is a valid triangle index, in which case the vertices are valid.
@@ -133,12 +133,12 @@ namespace Mathematics
 		// The function returns 'true' if i is a valid triangle index, in which
 		// case the coordinates are valid.  Otherwise, the function returns
 		// 'false' and the coordinate array is invalid.
-		bool GetBarycentricSet (int i, const Vector2D<Real>& p, Real bary[3]) const;
+		bool GetBarycentricSet (int i, const Vector2<Real>& p, Real bary[3]) const;
 		//========================================================================
 
 	private:
 		// Convenient type definitions.
-		typedef std::map<Vector2D<Real>,int> VertexMap;
+		typedef std::map<Vector2<Real>,int> VertexMap;
 		typedef SignRational<4*sizeof(Real)> QRational;
 		typedef RationalVector2<4*sizeof(Real)> QRVector;
 
@@ -147,7 +147,7 @@ namespace Mathematics
 		public:
 			Triangle (int v0, int v1, int v2);
 
-			bool IsInsertionComponent (int posIndex, const Vector2D<Real>& test,
+			bool IsInsertionComponent (int posIndex, const Vector2<Real>& test,
             Triangle* adj, const IncrementalDelaunay2* delaunay);
 
 			int DetachFrom (int adjIndex, Triangle* adj);
@@ -261,21 +261,21 @@ namespace Mathematics
 		// The directed line is <V0,V1>.  The return value is +1 when 'test' is
 		// to the right of the line, -1 when 'test' is to the left of the line,
 		// or 0 when 'test' is exactly on the line.
-		int ToLine (const Vector2D<Real>& test, int v0, int v1) const;
+		int ToLine (const Vector2<Real>& test, int v0, int v1) const;
 
 		// The triangle is <V0,V1,V2>.  The return value is +1 when 'test' is
 		// outside the triangle, -1 when 'test' is inside the triangle, or 0 when
 		// 'test' is exactly on the triangle.
-		int ToTriangle (const Vector2D<Real>& test, int v0, int v1, int v2) const;
+		int ToTriangle (const Vector2<Real>& test, int v0, int v1, int v2) const;
 
 		// The triangle of the circumcircle is <V0,V1,V2>.  The return value is
 		// +1 when 'test' is outside the circle, -1 when 'test' is inside the
 		// circle, or 0 when 'test' is exactly on the circle.
-		int ToCircumcircle (const Vector2D<Real>& test, int v0, int v1,
+		int ToCircumcircle (const Vector2<Real>& test, int v0, int v1,
                             int v2) const;
 
 		// Use a linear walk to find the triangle containing the point.
-		Triangle* GetContainingTriangleInternal (const Vector2D<Real>& position) const;
+		Triangle* GetContainingTriangleInternal (const Vector2<Real>& position) const;
 
 		// Return 'true' iff the specified triangle contains a supervertex.  This
 		// function is used by GenerateRepresentation.
@@ -293,7 +293,7 @@ namespace Mathematics
 		// positions that were passed to the Insert function.  This allows for a
 		// fast look-up of vertices by the GetContainingTriangle function.
 		VertexMap mVMap;
-		std::vector<Vector2D<Real> > mVertexPool;
+		std::vector<Vector2<Real> > mVertexPool;
 
 		// This member is used to decide whether or not to accept the results of
 		// ToLine when computed using floating-point arithmetic.  The test
@@ -309,7 +309,7 @@ namespace Mathematics
 		mutable std::vector<bool>* mRatVertexEvaluated;
 
 		// The current triangulation.
-		std::set<Triangle*> m_Triangle;
+		std::set<Triangle*> triangle;
 
 		// Compacted informatoin about the triangulation.
 		//   N = number of triangles

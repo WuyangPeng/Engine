@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/02 9:50)
+///	引擎版本：0.8.0.2 (2022/01/29 13:59)
 
 #ifndef MATHEMATICS_ALGEBRA_ALGEBRA_AGGREGATE_H
 #define MATHEMATICS_ALGEBRA_ALGEBRA_AGGREGATE_H
@@ -28,228 +28,228 @@
 #include "Quaternion.h"
 #include "VariableLengthVector.h"
 #include "VariableMatrix.h"
-#include "Vector2D.h"
-#include "Vector3D.h"
-#include "Vector4D.h"
+#include "Vector2.h"
+#include "Vector3.h"
+#include "Vector4.h"
 #include "CoreTools/ObjectSystems/BufferSource.h"
 #include "CoreTools/ObjectSystems/BufferTarget.h"
 #include "Mathematics/Base/Float.h"
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatHomogeneousPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::HomogeneousPointF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatHomogeneousPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::HomogeneousPointF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleHomogeneousPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::HomogeneousPointD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleHomogeneousPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::HomogeneousPointD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector2D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector2F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector2D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector2F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector2D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector2D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector2D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector2D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector3D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector3F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector3D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector3F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector3D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector3D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector3D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector3D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVector4D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector4F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVector4D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector4F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVector4D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Vector4D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVector4D& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Vector4D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::AVectorF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::AVectorF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::AVectorD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::AVectorD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::APointF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::APointF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::APointD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAPoint& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::APointD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableLengthVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableLengthVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::VariableLengthVectorF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableLengthVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableLengthVectorD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableLengthVector& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::VariableLengthVectorD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPlane& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPlane& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PlaneF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePlane& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::PlaneD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePlane& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PlaneD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatPolynomial& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatPolynomial& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PolynomialF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoublePolynomial& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::PolynomialD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoublePolynomial& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::PolynomialD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix2& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix2F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix2& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix2F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix2& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix2D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix2& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix2D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix3& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix3F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix3& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix3F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix3& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix3D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix3& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix3D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix4& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix4F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix4& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix4F& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix4& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Matrix4D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix4& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::Matrix4D& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::MatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::MatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::MatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::MatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatVariableMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatVariableMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::VariableMatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleVariableMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::VariableMatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleVariableMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::VariableMatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BandedMatrixF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatrix& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BandedMatrixD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatBandedMatrixSolve& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatBandedMatrixSolve& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BandedMatrixSolveF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleBandedMatrixSolve& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::BandedMatrixSolveD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleBandedMatrixSolve& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::BandedMatrixSolveD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::QuaternionF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::QuaternionF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::QuaternionD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::QuaternionD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::FloatAQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::AQuaternionF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::FloatAQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::AQuaternionF& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::DoubleAQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::AQuaternionD& datum);
 
 template <>
-MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::DoubleAQuaternion& datum);
+MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferTarget::WriteAggregate(const Mathematics::AQuaternionD& datum);
 
 template <>
 MATHEMATICS_DEFAULT_DECLARE void CoreTools::BufferSource::ReadAggregate(Mathematics::Float1& datum);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 17:07)
+///	引擎版本：0.8.0.2 (2022/02/10 18:47)
 
 #ifndef MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
 #define MATHEMATICS_RATIONAL_FLOATING_POINT_ANALYSIS_H
@@ -39,27 +39,27 @@ namespace Mathematics
 
         // 内存表示：
         // 符号位（1）、指数位（float8位、double11位）、尾数位（float23位、double52位），获取未经处理的存储值。
-        [[nodiscard]] IntegerType GetSymbolValue() const noexcept;
-        [[nodiscard]] IntegerType GetExponent() const noexcept;
-        [[nodiscard]] IntegerType GetMantissa() const noexcept;
+        NODISCARD IntegerType GetSymbolValue() const noexcept;
+        NODISCARD IntegerType GetExponent() const noexcept;
+        NODISCARD IntegerType GetMantissa() const noexcept;
 
-        [[nodiscard]] NumericalValueSymbol GetSymbol() const noexcept;
-        [[nodiscard]] FloatingPointAnalysisType GetType() const noexcept;
-        [[nodiscard]] int GetRealExponent() const;
-        [[nodiscard]] IntegerType GetRealMantissa() const noexcept;
-
-    private:
-        static constexpr IntegerType sm_Symbol{ TraitsType::g_Symbol };
-        static constexpr uint32_t sm_SymbolShifting{ TraitsType::g_SymbolShifting };
-        static constexpr IntegerType sm_Exponent{ TraitsType::g_Exponent };
-        static constexpr uint32_t sm_ExponentShifting{ TraitsType::g_ExponentShifting };
-        static constexpr IntegerType sm_MaxExponent{ sm_Exponent >> sm_ExponentShifting };
-        static constexpr uint32_t sm_RealExponentDifference{ TraitsType::g_RealExponentDifference };
-        static constexpr IntegerType sm_Mantissa{ TraitsType::g_Mantissa };
-        static constexpr IntegerType sm_QuietNaN{ TraitsType::g_QuietNaN };
+        NODISCARD NumericalValueSymbol GetSymbol() const noexcept;
+        NODISCARD FloatingPointAnalysisType GetType() const noexcept;
+        NODISCARD int GetRealExponent() const;
+        NODISCARD IntegerType GetRealMantissa() const noexcept;
 
     private:
-        T m_Value;
+        static constexpr auto symbol = TraitsType::symbol;
+        static constexpr auto symbolShifting = TraitsType::symbolShifting;
+        static constexpr auto exponent = TraitsType::exponent;
+        static constexpr auto exponentShifting = TraitsType::exponentShifting;
+        static constexpr auto maxExponent = exponent >> exponentShifting;
+        static constexpr auto realExponentDifference = TraitsType::realExponentDifference;
+        static constexpr auto mantissa = TraitsType::mantissa;
+        static constexpr auto quietNaN = TraitsType::quietNaN;
+
+    private:
+        T value;
     };
 }
 

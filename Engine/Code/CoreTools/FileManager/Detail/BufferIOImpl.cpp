@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/02 18:22)
+///	引擎版本：0.8.0.1 (2022/01/08 23:45)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -20,6 +20,7 @@ CoreTools::BufferIOImpl::BufferIOImpl() noexcept
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::BufferIOImpl::IsValid() const noexcept
 {
     if (0 <= m_BytesProcessed)
@@ -27,6 +28,7 @@ bool CoreTools::BufferIOImpl::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int CoreTools::BufferIOImpl::GetBytesProcessed() const noexcept

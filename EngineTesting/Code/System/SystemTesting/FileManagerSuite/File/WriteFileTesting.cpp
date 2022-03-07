@@ -93,7 +93,7 @@ void System::WriteFileTesting::ReadTest()
     vector<char> originalBuffer{ fileContent.begin(), fileContent.end() };
     originalBuffer.insert(originalBuffer.end(), fileContent.begin(), fileContent.end());
 
-    ASSERT_EQUAL_DO_NOT_USE_MESSAGE(buffer, originalBuffer);
+    ASSERT_EQUAL(buffer, originalBuffer);
 }
 
 void System::WriteFileTesting::WriteFileUseOverlappedTest()

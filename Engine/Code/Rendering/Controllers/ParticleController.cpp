@@ -35,7 +35,7 @@ CORE_TOOLS_RTTI_DEFINE(Rendering, ParticleController);
 CORE_TOOLS_STATIC_OBJECT_FACTORY_DEFINE(Rendering, ParticleController); 
 CORE_TOOLS_ABSTRACT_FACTORY_DEFINE(Rendering, ParticleController);
 
-Rendering::ParticleController
+Rendering::ParticleController 
 	::ParticleController() 
 	:ParentType{}, impl{ make_shared<ImplType>() }, m_Particles{ nullptr }
 {
@@ -188,7 +188,7 @@ void Rendering::ParticleController
 		localTransform.SetTranslate(translate);
 
 		const auto angle = ctrlTime * GetSystemAngularSpeed();
-		const Mathematics::FloatMatrix deltaRot{ GetSystemAngularAxis(), angle };
+		const Mathematics::MatrixF deltaRot{ GetSystemAngularAxis(), angle };
 		const auto rotate = deltaRot * localTransform.GetRotate();
 		localTransform.SetRotate(rotate);
 

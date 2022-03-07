@@ -1,50 +1,71 @@
-// Copyright (c) 2011-2019
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-// 
-// 引擎版本：0.0.0.2 (2019/07/17 11:19)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/03 21:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
 
-#include "StaticTestIntersectorHalfspace3Triangle3.h"
 #include "FindIntersectorAxis.h"
- 
+#include "StaticTestIntersectorHalfspace3Triangle3.h"
+#include "TestIntersectorAxisDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+
 template <typename Real>
 Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::StaticTestIntersectorHalfspace3Triangle3(const Plane3& halfspace, const Triangle3& triangle, const Real epsilon)
-    : m_Halfspace{ halfspace }, m_Triangle{ triangle }
+    : ParentType{ epsilon }, halfspace{ halfspace }, triangle{ triangle }
 {
-	Test();
+    Test();
+
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::IsValid() const noexcept
+{
+    if (ParentType::IsValid())
+        return true;
+    else
+        return false;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::GetHalfspace() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return halfspace;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::GetHalfspace() const noexcept
+Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::GetTriangle() const noexcept
 {
-    return m_Halfspace;
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return triangle;
 }
 
 template <typename Real>
-const Mathematics::Triangle3<Real> Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::GetTriangle() const noexcept
+void Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>::Test()
 {
-    return m_Triangle;
+    const auto projection = TestIntersectorAxis<Real>::GetProjection(halfspace.GetNormal(), triangle);
+
+    if (projection.first <= halfspace.GetConstant())
+    {
+        this->SetIntersectionType(IntersectionType::Point);
+    }
+    else
+    {
+        this->SetIntersectionType(IntersectionType::Empty);
+    }
 }
 
-template <typename Real>
-void Mathematics::StaticTestIntersectorHalfspace3Triangle3<Real>
-	::Test()
-{
-    Real fmin, fmax;
-    FindIntersectorAxis<Real>::GetProjection(m_Halfspace.GetNormal(), m_Triangle, fmin, fmax);
-
-	if (fmin <= m_Halfspace.GetConstant())
-	{
-		this->SetIntersectionType(IntersectionType::Point);
-	}
-	else
-	{
-		this->SetIntersectionType(IntersectionType::Empty);
-	}
-}
- 
-
-#endif // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H
+#endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_DETAIL_H

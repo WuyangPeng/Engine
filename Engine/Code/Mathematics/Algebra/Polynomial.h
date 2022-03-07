@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/10 10:08)
+///	引擎版本：0.8.0.2 (2022/02/07 14:24)
 
 #ifndef MATHEMATICS_ALGEBRA_POLYNOMIAL_H
 #define MATHEMATICS_ALGEBRA_POLYNOMIAL_H
@@ -25,40 +25,20 @@
 namespace Mathematics
 {
     template <typename Real>
-    class PolynomialImpl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialImpl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialImpl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<PolynomialImpl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Polynomial final : private boost::additive<Polynomial<Real>, boost::additive<Polynomial<Real>, Real, boost::multiplicative<Polynomial<Real>, Real>>>
+    class Polynomial final : private boost::additive<Polynomial<Real>, boost::additive<Polynomial<Real>, Real, boost::multiplicative<Polynomial<Real>, Real>>>
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using PolynomialImpl = PolynomialImpl<Real>;
-
-    public:
-        void Swap(Polynomial& rhs) noexcept;
-
-    public:
-        TYPE_DECLARE(Polynomial);
-        using ClassShareType = CoreTools::CopyUnsharedClasses;
-        ~Polynomial() noexcept = default;
-        Polynomial(const Polynomial& rhs);
-        Polynomial& operator=(const Polynomial& rhs);
-        Polynomial(Polynomial&& rhs) noexcept;
-        Polynomial& operator=(Polynomial&& rhs) noexcept;
+        using ClassType = Polynomial<Real>;
         using PolynomialDivide = PolynomialDivide<Real>;
         using Math = Math<Real>;
         using ContainerType = std::vector<Real>;
 
     public:
-        explicit Polynomial(int degree = 0);
+        explicit Polynomial(int degree);
         explicit Polynomial(const ContainerType& coeff);
+        explicit Polynomial(ContainerType&& coeff);
 
         CLASS_INVARIANT_DECLARE;
 
@@ -67,33 +47,34 @@ namespace Mathematics
         // 重新设置会清空旧数据。
         void ResetDegree(int degree);
 
-        [[nodiscard]] int GetDegree() const;
-        [[nodiscard]] const Real& operator[](int index) const;
-        [[nodiscard]] Real& operator[](int index);
-        [[nodiscard]] Real GetBegin() const noexcept;
-        [[nodiscard]] Real GetEnd() const noexcept;
+        NODISCARD int GetDegree() const;
+        NODISCARD const Real& operator[](int index) const;
+        NODISCARD Real& operator[](int index);
+        NODISCARD Real GetBegin() const noexcept;
+        NODISCARD Real GetEnd() const noexcept;
 
         // 计算多项式，p(t)。
-        [[nodiscard]] Real operator()(Real value) const;
+        NODISCARD Real operator()(Real value) const;
 
-        [[nodiscard]] ContainerType GetValue() const;
-        void SetValue(const ContainerType& coeff);
+        NODISCARD ContainerType GetValue() const;
+        void SetValue(const ContainerType& newCoeff);
+        void SetValue(ContainerType&& newCoeff);
 
-        [[nodiscard]] const Polynomial operator-() const;
+        NODISCARD Polynomial operator-() const;
 
         Polynomial& operator+=(const Polynomial& rhs);
         Polynomial& operator-=(const Polynomial& rhs);
         Polynomial& operator*=(const Polynomial& rhs);
-        Polynomial& operator+=(Real scalar);  // 输入是零阶的多项式
-        Polynomial& operator-=(Real scalar);  // 输入是零阶的多项式
-        Polynomial& operator*=(Real scalar);
+        Polynomial& operator+=(Real scalar) noexcept;  // 输入是零阶的多项式
+        Polynomial& operator-=(Real scalar) noexcept;  // 输入是零阶的多项式
+        Polynomial& operator*=(Real scalar) noexcept;
         Polynomial& operator/=(Real scalar);
 
         // 计算多项式的导数。
-        [[nodiscard]] const Polynomial GetDerivative() const;
+        NODISCARD Polynomial GetDerivative() const;
 
         // 反转( invpoly[i] = poly[degree-i] for 0 <= i <= degree ).
-        [[nodiscard]] const Polynomial GetInversion() const;
+        NODISCARD Polynomial GetInversion() const;
 
         // 通过消除所有的（接近）零的系数和使主导系数减少1阶。
         // 输入参数是阈值，用于指定一个系数实际上为零。
@@ -106,20 +87,32 @@ namespace Mathematics
         // 值epsilon被用作剩余多项式系统的阈值。
         // 如果比epsilon小，则系数被假设为零。
         // 返回值第一个部分为quotient，第二部分为remainder。
-        [[nodiscard]] const PolynomialDivide Divide(const Polynomial& divisor, Real epsilon) const;
+        NODISCARD PolynomialDivide Divide(const Polynomial& divisor, Real epsilon) const;
+
+        NODISCARD Polynomial GetTranslation(Real t0) const;
+        void EliminateLeadingZeros(Real epsilon);
 
     private:
-        using ImplPtr = std::shared_ptr<ImplType>;    private:        ImplPtr impl;
+        NODISCARD int GetCompressDegree(Real epsilon) const;
+
+    private:
+        ContainerType coeff;
     };
 
     template <typename Real>
-    [[nodiscard]] const Polynomial<Real> operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
+    NODISCARD Polynomial<Real> operator*(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs);
+
+    template <typename Real>
+    NODISCARD Polynomial<Real> GreatestCommonDivisor(const Polynomial<Real>& lhs, const Polynomial<Real>& rhs, Real epsilon = Math<Real>::GetZeroTolerance());
 
     template <typename T>
-    [[nodiscard]] bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
+    NODISCARD bool Approximate(const Polynomial<T>& lhs, const Polynomial<T>& rhs, const T epsilon = Math<T>::GetZeroTolerance());
 
-    using FloatPolynomial = Polynomial<float>;
-    using DoublePolynomial = Polynomial<double>;
+    template <typename Real>
+    std::vector<Polynomial<Real>> SquareFreeFactorization(const Polynomial<Real>& f);
+
+    using PolynomialF = Polynomial<float>;
+    using PolynomialD = Polynomial<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_POLYNOMIAL_H

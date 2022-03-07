@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 15:10)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 18:23)
 
 #include "Network/NetworkExport.h"
 
@@ -25,7 +25,7 @@
 using std::make_shared;
 
 Network::ACESockConnector::ACESockConnector() noexcept
-    : m_ACESockConnector{}
+    : aceSockConnector{}
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -39,7 +39,7 @@ bool Network::ACESockConnector::Connect(const SockStreamSharedPtr& sockStream, c
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    if (m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress()) == 0)
+    if (aceSockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress()) == 0)
         return true;
     else
         return false;
@@ -56,7 +56,7 @@ void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& even
     CoreTools::CallbackParameters callbackParameters{ 0 };
     callbackParameters.SetValue(System::EnumCastUnderlying(SocketManagerPoisition::Event), System::EnumCastUnderlying(SocketManagerEvent::AsyncConnect));
 
-    const auto result = m_ACESockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
+    const auto result = aceSockConnector.connect(sockStream->GetACESockStream(), sockAddress->GetACEInetAddress());
 
     if (result == 0)
     {
@@ -73,7 +73,7 @@ void Network::ACESockConnector::AsyncConnect(const EventInterfaceSharedPtr& even
 }
     #include STSTEM_WARNING_POP
 
-const Network::ACESockConnector::SockConnectorPtr Network::ACESockConnector::Clone() const
+Network::ACESockConnector::SockConnectorSharedPtr Network::ACESockConnector::Clone() const
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

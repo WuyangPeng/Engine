@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 17:26)
+///	引擎版本：0.8.0.2 (2022/02/11 17:01)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR2_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR2_H
@@ -17,6 +17,7 @@
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
 #include <iosfwd>
 
 MATHEMATICS_DELAY_COPY_UNSHARED_EXPORT_IMPL(Int64Vector2, Int64Vector2Impl);
@@ -28,8 +29,12 @@ namespace Mathematics
     public:
         DELAY_COPY_UNSHARED_TYPE_DECLARE(Int64Vector2);
 
+    private:
+        explicit Int64Vector2(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow);
+
     public:
-        Int64Vector2();
+        NODISCARD static Int64Vector2 CreateDefault();
+
         explicit Int64Vector2(const Int64Vector<2>& rhs);
         Int64Vector2(int64_t x, int64_t y);
 
@@ -37,31 +42,31 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int64_t GetX() const;
+        NODISCARD int64_t GetX() const;
         void SetX(int64_t x);
-        [[nodiscard]] int64_t GetY() const;
+        NODISCARD int64_t GetY() const;
         void SetY(int64_t y);
 
         // 返回 (y,-x).
-        [[nodiscard]] const Int64Vector2 Perp() const;
+        NODISCARD Int64Vector2 Perp() const;
 
-        [[nodiscard]] const Int64Vector2 operator-() const;
+        NODISCARD Int64Vector2 operator-() const;
 
         Int64Vector2& operator+=(const Int64Vector2& rhs);
         Int64Vector2& operator-=(const Int64Vector2& rhs);
         Int64Vector2& operator*=(int64_t scalar);
         Int64Vector2& operator/=(int64_t scalar);
 
-        [[nodiscard]] int64_t SquaredLength() const noexcept;
+        NODISCARD int64_t SquaredLength() const noexcept;
 
         // 返回 Dot(lhs,rhs).
-        [[nodiscard]] int64_t Dot(const Int64Vector2& rhs) const;
+        NODISCARD int64_t Dot(const Int64Vector2& rhs) const;
 
         // 返回 Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
-        [[nodiscard]] int64_t DotPerp(const Int64Vector2& rhs) const;
+        NODISCARD int64_t DotPerp(const Int64Vector2& rhs) const;
 
-        [[nodiscard]] bool operator==(const Int64Vector2& rhs) const;
-        [[nodiscard]] bool operator<(const Int64Vector2& rhs) const;
+        NODISCARD bool operator==(const Int64Vector2& rhs) const;
+        NODISCARD bool operator<(const Int64Vector2& rhs) const;
 
     private:
         PackageType impl;

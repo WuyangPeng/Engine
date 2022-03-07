@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 15:58)
+///	引擎版本：0.8.0.2 (2022/02/10 15:01)
 
 #ifndef MATHEMATICS_OBJECTS3D_CONE3_H
 #define MATHEMATICS_OBJECTS3D_CONE3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -27,7 +27,7 @@ namespace Mathematics
 
         using ClassType = Cone3<Real>;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
+        using Vector3 = Vector3<Real>;
 
     public:
         // 锐角锥体是Dot(A,X-V) = |X-V| cos(t)
@@ -46,35 +46,42 @@ namespace Mathematics
 
         // axis必须是单位长度和角度必须在(0,pi/2)。
         // 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
-        Cone3(const Vector3D& vertex, const Vector3D& axis, const Real angle,
-              const Real height, const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        Cone3(const Vector3& vertex,
+              const Vector3& axis,
+              const Real angle,
+              const Real height,
+              const Real epsilon = Math::GetZeroTolerance()) noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
         // axis必须是单位长度。
         // 一对(cosAngle,sinAngle)必须严格在平面的第一象限，以保证锥角为(0,pi/2)
         // 对于无限锥，设置“height”为Math<Real>::sm_MaxReal
-        Cone3(const Real cosAngle, const Real sinAngle, const Real height,
-              const Vector3D& vertex, const Vector3D& axis, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Cone3(const Real cosAngle,
+              const Real sinAngle,
+              const Real height,
+              const Vector3& vertex,
+              const Vector3& axis,
+              const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetVertex() const noexcept; 
-        [[nodiscard]] const Vector3D GetAxis() const noexcept;
-        [[nodiscard]] Real GetCosAngle() const noexcept;
-        [[nodiscard]] Real GetSinAngle() const noexcept;
-        [[nodiscard]] Real GetHeight() const noexcept;
+        NODISCARD Vector3 GetVertex() const noexcept;
+        NODISCARD Vector3 GetAxis() const noexcept;
+        NODISCARD Real GetCosAngle() const noexcept;
+        NODISCARD Real GetSinAngle() const noexcept;
+        NODISCARD Real GetHeight() const noexcept;
 
     private:
-        Vector3D m_Vertex;
-        Vector3D m_Axis;
-        Real m_CosAngle;
-        Real m_SinAngle;
-        Real m_Height;
+        Vector3 vertex;
+        Vector3 axis;
+        Real cosAngle;
+        Real sinAngle;
+        Real height;
 
-        Real m_Epsilon;
+        Real epsilon;
     };
 
-    using FloatCone3 = Cone3<float>;
-    using DoubleCone3 = Cone3<double>;
+    using Cone3F = Cone3<float>;
+    using Cone3D = Cone3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_CONE3_H

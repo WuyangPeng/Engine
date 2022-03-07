@@ -43,7 +43,7 @@ namespace Mathematics
 		void FloatFastInvTanTest();
 		void DoubleFastInvTanTest();		
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

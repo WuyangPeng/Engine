@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/22 17:54)
+///	引擎版本：0.8.0.3 (2022/02/24 18:36)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT2_SEGMENT2_ACHIEVE_H
@@ -15,13 +15,13 @@
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "Mathematics/Intersection/StaticFindIntersector1.h"
 #include "Mathematics/Intersection/StaticIntersectorDetail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::StaticFindIntersectorSegment2Segment2(const Segment2& lhsSegment, const Segment2& rhsSegment, const Real dotThreshold, const Real intervalThreshold)
-    : ParentType{ dotThreshold }, m_LhsSegment{ lhsSegment }, m_RhsSegment{ rhsSegment }, m_Quantity{ 0 }, m_IntervalThreshold{ intervalThreshold }, m_Point0{}, m_Point1{}
+    : ParentType{ dotThreshold }, lhsSegment{ lhsSegment }, rhsSegment{ rhsSegment }, quantity{ 0 }, intervalThreshold{ intervalThreshold }, point0{}, point1{}
 {
     Find();
 
@@ -33,46 +33,46 @@ template <typename Real>
 void Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Find()
 {
     auto dotThreshold = this->GetEpsilon();
-    StaticTestIntersectorLine2Classify<Real> classify{ m_LhsSegment.GetCenterPoint(), m_LhsSegment.GetDirection(), m_RhsSegment.GetCenterPoint(), m_RhsSegment.GetDirection(), true, dotThreshold };
+    StaticTestIntersectorLine2Classify<Real> classify{ lhsSegment.GetCenterPoint(), lhsSegment.GetDirection(), rhsSegment.GetCenterPoint(), rhsSegment.GetDirection(), true, dotThreshold };
 
     auto intersectionType = classify.GetIntersectionType();
 
     if (intersectionType == IntersectionType::Point)
     {
         // 测试直线-直线的相交点是否在线段上。
-        if (Math::FAbs(classify.GetParameter0()) <= m_LhsSegment.GetExtent() + m_IntervalThreshold &&
-            Math::FAbs(classify.GetParameter1()) <= m_RhsSegment.GetExtent() + m_IntervalThreshold)
+        if (Math::FAbs(classify.GetParameter0()) <= lhsSegment.GetExtent() + intervalThreshold &&
+            Math::FAbs(classify.GetParameter1()) <= rhsSegment.GetExtent() + intervalThreshold)
         {
-            m_Quantity = 1;
-            m_Point0 = m_LhsSegment.GetCenterPoint() + classify.GetParameter0() * m_LhsSegment.GetDirection();
+            quantity = 1;
+            point0 = lhsSegment.GetCenterPoint() + classify.GetParameter0() * lhsSegment.GetDirection();
         }
         else
         {
-            m_Quantity = 0;
+            quantity = 0;
             intersectionType = IntersectionType::Empty;
         }
     }
     else if (intersectionType == IntersectionType::Line)
     {
         // 计算线段m_RhsSegment终点相对于线段m_LhsSegment的位置。
-        auto difference = m_RhsSegment.GetCenterPoint() - m_LhsSegment.GetCenterPoint();
-        auto dotProduct = Vector2DTools::DotProduct(m_LhsSegment.GetDirection(), difference);
-        auto tmin = dotProduct - m_RhsSegment.GetExtent();
-        auto tmax = dotProduct + m_RhsSegment.GetExtent();
+        auto difference = rhsSegment.GetCenterPoint() - lhsSegment.GetCenterPoint();
+        auto dotProduct = Vector2Tools::DotProduct(lhsSegment.GetDirection(), difference);
+        auto tmin = dotProduct - rhsSegment.GetExtent();
+        auto tmax = dotProduct + rhsSegment.GetExtent();
 
-        StaticFindIntersector1<Real> calc{ -m_LhsSegment.GetExtent(), m_LhsSegment.GetExtent(), tmin, tmax, dotThreshold };
+        StaticFindIntersector1<Real> calc{ -lhsSegment.GetExtent(), lhsSegment.GetExtent(), tmin, tmax, dotThreshold };
 
-        m_Quantity = calc.GetNumIntersections();
-        if (m_Quantity == 2)
+        quantity = calc.GetNumIntersections();
+        if (quantity == 2)
         {
             intersectionType = IntersectionType::Segment;
-            m_Point0 = m_LhsSegment.GetCenterPoint() + calc.GetIntersection(0) * m_LhsSegment.GetDirection();
-            m_Point1 = m_LhsSegment.GetCenterPoint() + calc.GetIntersection(1) * m_LhsSegment.GetDirection();
+            point0 = lhsSegment.GetCenterPoint() + calc.GetIntersection(0) * lhsSegment.GetDirection();
+            point1 = lhsSegment.GetCenterPoint() + calc.GetIntersection(1) * lhsSegment.GetDirection();
         }
-        else if (m_Quantity == 1)
+        else if (quantity == 1)
         {
             intersectionType = IntersectionType::Point;
-            m_Point0 = m_LhsSegment.GetCenterPoint() + calc.GetIntersection(0) * m_LhsSegment.GetDirection();
+            point0 = lhsSegment.GetCenterPoint() + calc.GetIntersection(0) * lhsSegment.GetDirection();
         }
         else
         {
@@ -81,38 +81,40 @@ void Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Find()
     }
     else
     {
-        m_Quantity = 0;
+        quantity = 0;
         intersectionType = IntersectionType::Empty;
     }
 
-    ParentType::SetIntersectionType(intersectionType);
+    this->SetIntersectionType(intersectionType);
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorSegment2Segment2<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && 0 <= m_Quantity)
+    if (ParentType::IsValid() && 0 <= quantity)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-typename const Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetLhsSegment() const noexcept
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetLhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_LhsSegment;
+    return lhsSegment;
 }
 
 template <typename Real>
-typename const Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetRhsSegment() const noexcept
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Segment2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetRhsSegment() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_RhsSegment;
+    return rhsSegment;
 }
 
 template <typename Real>
@@ -120,7 +122,7 @@ int Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetQuantity() cons
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
@@ -128,21 +130,21 @@ Real Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetIntervalThresh
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntervalThreshold;
+    return intervalThreshold;
 }
 
 template <typename Real>
-typename const Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Vector2D Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetPoint(int index) const
+typename Mathematics::StaticFindIntersectorSegment2Segment2<Real>::Vector2 Mathematics::StaticFindIntersectorSegment2Segment2<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
     if (index == 0)
     {
-        return m_Point0;
+        return point0;
     }
     else if (index == 1)
     {
-        return m_Point1;
+        return point1;
     }
     else
     {

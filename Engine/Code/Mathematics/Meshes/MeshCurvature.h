@@ -19,34 +19,34 @@ namespace Mathematics
 	{
 	public:
 		// The caller is responsible for deleting the input arrays.
-		MeshCurvature (int numVertices, const Vector3D<Real>* vertices, int numTriangles, const int* indices);
+		MeshCurvature (int numVertices, const Vector3<Real>* vertices, int numTriangles, const int* indices);
 
 		virtual ~MeshCurvature ();
 
 		// Input values from the constructor.
 		int GetNumVertices () const;
-		const Vector3D<Real>* GetVertices () const;
+		const Vector3<Real>* GetVertices () const;
 		int GetNumTriangles () const;
 		const int* GetIndices () const;
 
 		// Derived quantites from the input mesh.
-		const Vector3D<Real>* GetNormals () const;
+		const Vector3<Real>* GetNormals () const;
 		const Real* GetMinCurvatures () const;
 		const Real* GetMaxCurvatures () const;
-		const Vector3D<Real>* GetMinDirections () const;
-		const Vector3D<Real>* GetMaxDirections () const;
+		const Vector3<Real>* GetMinDirections () const;
+		const Vector3<Real>* GetMaxDirections () const;
 
 	protected:
 		int mNumVertices;
-		const Vector3D<Real>* mVertices;
+		const Vector3<Real>* mVertices;
 		int mNumTriangles;
 		const int* mIndices;
 
-		Vector3D<Real>* mNormals;
+		Vector3<Real>* mNormals;
 		Real* mMinCurvatures;
 		Real* mMaxCurvatures;
-		Vector3D<Real>* mMinDirections;
-		Vector3D<Real>* mMaxDirections;
+		Vector3<Real>* mMinDirections;
+		Vector3<Real>* mMaxDirections;
 	};
 
 	using MeshCurvaturef = MeshCurvature<float>;

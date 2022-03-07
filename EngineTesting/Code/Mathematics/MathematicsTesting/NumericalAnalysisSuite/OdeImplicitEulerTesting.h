@@ -25,11 +25,11 @@ namespace Mathematics
 		void MainTest();  
 		void SolverTest();
 		
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 
 		static const std::vector<double> OdeImplicitEulerFunction(double tIn, const std::vector<double>& xIn,const OdeImplicitEulerTesting* odeEulerTesting);
 
-		static const DoubleVariableMatrix OdeImplicitEulerDerivativeFunction(double tIn, const std::vector<double>& xIn,const OdeImplicitEulerTesting* odeEulerTesting);
+		static const VariableMatrixD OdeImplicitEulerDerivativeFunction(double tIn, const std::vector<double>& xIn,const OdeImplicitEulerTesting* odeEulerTesting);
 
 	private:
 		int m_Dimension; 	

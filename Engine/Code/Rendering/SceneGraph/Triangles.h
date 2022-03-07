@@ -14,8 +14,8 @@
 #include "TrianglePosition.h"
 #include "Mathematics/Algebra/APoint.h"
 #include "Mathematics/Algebra/AVector.h"
-#include "Mathematics/Algebra/Vector3D.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector3.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Objects3D/Line3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
 
@@ -29,12 +29,12 @@ namespace Rendering
 		using ClassType = Triangles; 
 		using ParentType = Visual;
 		using ClassShareType = CoreTools::CopyUnsharedClasses;
-		using APoint = Mathematics::FloatAPoint;
-		using AVector = Mathematics::FloatAVector;
-		using Vector3D = Mathematics::FloatVector3D;
-		using Vector2D = Mathematics::FloatVector2D;
-		using Line3 = Mathematics::FloatLine3;
-		using Triangle3 = Mathematics::FloatTriangle3;
+		using APoint = Mathematics::APointF;
+		using AVector = Mathematics::AVectorF;
+		using Vector3D = Mathematics::Vector3F;
+		using Vector2D = Mathematics::Vector2F;
+		using Line3 = Mathematics::Line3F;
+		using Triangle3 = Mathematics::Triangle3F;
 		using TrianglesSharedPtr = std::shared_ptr<ClassType>;
 		using ConstTrianglesSharedPtr = std::shared_ptr<ClassType>;
 

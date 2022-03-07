@@ -9,7 +9,7 @@
 
 #include "Physics/PhysicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 
 // This class is an implementation of the algorithm in "Real-Time Fluid
 // Dynamics for Games", by Jos Stam (GDC 2003 Proceedings).  There are
@@ -21,7 +21,7 @@ namespace Physics
     class PHYSICS_TEMPLATE_DEFAULT_DECLARE Fluid3Da
     {
     public:
-        using Vector3D = Mathematics::Vector3D<Real>;
+        using Vector3D = Mathematics::Vector3<Real>;
 
     public:
         // Construction and destruction.

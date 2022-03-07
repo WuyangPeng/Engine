@@ -7,23 +7,23 @@
 #ifndef NETWORK_EXAMPLE_PLACEHOLDER_H
 #define NETWORK_EXAMPLE_PLACEHOLDER_H
 
-#include "Example/Network/NetworkExample/NetworkExampleDll.h" 
+#include "Example/Network/NetworkExample/NetworkExampleDll.h"
 
-#include "CoreTools/Helper/ExportMacro.h" 
+#include "CoreTools/Helper/ExportMacro.h"
 
 namespace NetworkExample
 {
-	 class NETWORK_EXAMPLE_DEFAULT_DECLARE Placeholder
-	 {
-	 public:
-		 using ClassType = Placeholder;
+    class NETWORK_EXAMPLE_DEFAULT_DECLARE Placeholder
+    {
+    public:
+        using ClassType = Placeholder;
 
-	 public:
-		 CLASS_INVARIANT_DECLARE;
+    public:
+        CLASS_INVARIANT_DECLARE;
 
-	 public:
-		 Placeholder();	 
-	 };	
+    public:
+        Placeholder() noexcept;
+    };
 }
 
-#endif // NETWORK_EXAMPLE_PLACEHOLDER_H
+#endif  // NETWORK_EXAMPLE_PLACEHOLDER_H

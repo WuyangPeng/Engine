@@ -12,7 +12,7 @@
 namespace Physics
 {
 	template <typename Real>
-	IntervalManager<Real>::IntervalManager(std::vector<Mathematics::Vector2D<Real> >& interval)
+	IntervalManager<Real>::IntervalManager(std::vector<Mathematics::Vector2<Real> >& interval)
 		:mInterval(&interval)
 	{
 		Initialize();
@@ -150,8 +150,8 @@ namespace Physics
 						// overlapping.  Now 'b' and 'e' are swapped, and the
 						// intervals *might be* overlapping.  Determine if they
 						// are overlapping and then insert.
-						const Mathematics::Vector2D<Real>& i0 = (*mInterval)[e0.Index];
-						const Mathematics::Vector2D<Real>& i1 = (*mInterval)[e1.Index];
+						const Mathematics::Vector2<Real>& i0 = (*mInterval)[e0.Index];
+						const Mathematics::Vector2<Real>& i1 = (*mInterval)[e1.Index];
 						if (i0[0] <= i1[1])
 						{
 							mOverlap.insert(Mathematics::EdgeKey(e0.Index, e1.Index));

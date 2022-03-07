@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 14:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/03 21:55)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H
@@ -13,24 +16,18 @@
 #include "Mathematics/Objects3D/Plane3.h"
 #include "Mathematics/Objects3D/Triangle3.h"
 
-// A halfspace is the set of points on the side of a plane to which the plane
-// normal points.  The queries here are for intersection of a triangle and a
-// halfspace.  In the dynamice find query, if the triangle is already
-// intersecting the halfspace, the return value is 'false'.  The idea is to
-// find first time of contact.
-
 namespace Mathematics
 {
     template <typename Real>
-    class StaticTestIntersectorHalfspace3Triangle3 : public StaticIntersector<Real, Vector3D>
+    class StaticTestIntersectorHalfspace3Triangle3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticTestIntersectorHalfspace3Triangle3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Plane3 = Plane3<Real>;
         using Triangle3 = Triangle3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -38,18 +35,16 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Plane3 GetHalfspace() const noexcept;
-        [[nodiscard]] const Triangle3 GetTriangle() const noexcept;
+        NODISCARD Plane3 GetHalfspace() const noexcept;
+        NODISCARD Triangle3 GetTriangle() const noexcept;
 
     private:
         void Test();
 
-        Plane3 m_Halfspace;
-        Triangle3 m_Triangle;
+    private:
+        Plane3 halfspace;
+        Triangle3 triangle;
     };
-
-    using FloatStaticTestIntersectorHalfspace3Triangle3 = StaticTestIntersectorHalfspace3Triangle3<float>;
-    using DoubleStaticTestIntersectorHalfspace3Triangle3 = StaticTestIntersectorHalfspace3Triangle3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_TEST_INTERSECTOR_HALFSPACE3_TRIANGLE3_H

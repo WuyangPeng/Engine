@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/27 18:32)
+///	引擎版本：0.8.0.1 (2022/01/12 14:09)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -63,9 +63,9 @@ void CoreTools::MultiByteConversionWideChar::CreateTarget()
 // private
 int CoreTools::MultiByteConversionWideChar::GetConversionLength()
 {
-    auto destSize = boost::numeric_cast<int>(source.size());
-    auto targetSize = boost::numeric_cast<int>(target.size());
-    auto wideChar = target.empty() ? nullptr : target.data();
+    const auto destSize = boost::numeric_cast<int>(source.size());
+    const auto targetSize = boost::numeric_cast<int>(target.size());
+    const auto wideChar = target.empty() ? nullptr : target.data();
 
     if (isUTF8)
     {
@@ -89,6 +89,7 @@ void CoreTools::MultiByteConversionWideChar::FinishConversion()
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::MultiByteConversionWideChar::IsValid() const noexcept
 {
     if (0 < lengthOfWideCharString && lengthOfWideCharString <= gsl::narrow_cast<int>(target.size()))
@@ -100,6 +101,7 @@ bool CoreTools::MultiByteConversionWideChar::IsValid() const noexcept
         return false;
     }
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 const wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation() const
@@ -108,6 +110,8 @@ const wstring CoreTools::MultiByteConversionWideChar::GetWideCharRepresentation(
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
     return wstring{ target.data(), target.data() + lengthOfWideCharString - 1 };
+
 #include STSTEM_WARNING_POP
 }

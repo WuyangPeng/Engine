@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/29 20:21)
+///	引擎版本：0.8.0.1 (2022/01/12 14:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -170,7 +170,7 @@ System::String CoreTools::StringConversion::ToFirstLetterUpper(const String& cha
         return result;
     }
 
-    std::locale locale{};
+    const std::locale locale{};
     result.at(0) = std::toupper(result.at(0), locale);
 
     return result;
@@ -185,7 +185,7 @@ System::String CoreTools::StringConversion::ToFirstLetterLower(const String& cha
         return result;
     }
 
-    std::locale locale{};
+    const std::locale locale{};
     result.at(0) = std::tolower(result.at(0), locale);
 
     return result;
@@ -195,9 +195,9 @@ System::String CoreTools::StringConversion::ToUpperMacro(const String& character
 {
     String result{};
 
-    std::locale locale{};
+    const std::locale locale{};
 
-    bool firstChar = true;
+    auto firstChar = true;
     for (auto value : character)
     {
         if (value == SYSTEM_TEXT(' '))

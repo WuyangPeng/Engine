@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 17:46)
+///	引擎版本：0.8.0.2 (2022/02/17 18:12)
 
 #ifndef MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_H
 #define MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 #include "Mathematics/Objects2D/Circle2.h"
 
 namespace Mathematics
@@ -31,9 +31,9 @@ namespace Mathematics
     {
     public:
         using ClassType = CircleFit2<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using Circle2 = Circle2<Real>;
-        using PointType = std::vector<Vector2D>;
+        using PointType = std::vector<Vector2>;
         using Math = Math<Real>;
 
     public:
@@ -41,19 +41,19 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Circle2 GetCircle() const noexcept;
+        NODISCARD Circle2 GetCircle() const noexcept;
 
     private:
         void Calculate(const PointType& points, int maxIterations, bool initialCenterIsAverage);
-        [[nodiscard]] const Vector2D GetAveragePoint(const PointType& points);
-        void Iteration(const PointType& points, const Vector2D& average);
+        NODISCARD const Vector2 GetAveragePoint(const PointType& points);
+        void Iteration(const PointType& points, const Vector2& average);
 
     private:
-        Circle2 m_Circle;
+        Circle2 circle;
     };
 
-    using FloatCircleFit2 = CircleFit2<float>;
-    using DoubleCircleFit2 = CircleFit2<double>;
+    using CircleFit2F = CircleFit2<float>;
+    using CircleFit2D = CircleFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_CIRCLE_FIT2_H

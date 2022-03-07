@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/02 17:21)
+///	引擎版本：0.8.0.2 (2022/02/07 11:15)
 
 #ifndef MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMA_BASIS_H
 #define MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMA_BASIS_H
@@ -35,9 +35,9 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const AVector GetUVector() const noexcept;
-        [[nodiscard]] const AVector GetVVector() const noexcept;
-        [[nodiscard]] const AVector GetWVector() const noexcept;
+        NODISCARD AVector GetUVector() const noexcept;
+        NODISCARD AVector GetVVector() const noexcept;
+        NODISCARD AVector GetWVector() const noexcept;
 
     private:
         void Generate();
@@ -45,15 +45,15 @@ namespace Mathematics
         void GenerateOnYOrZIsMax() noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
     private:
-        bool m_IsUnit;
-        AVector m_UVector;
-        AVector m_VVector;
-        AVector m_WVector;
-        Real m_Epsilon;
+        bool isUnit;
+        AVector uVector;
+        AVector vVector;
+        AVector wVector;
+        Real epsilon;
     };
 
-    using FloatAVectorOrthonormalBasis = AVectorOrthonormalBasis<float>;
-    using DoubleAVectorOrthonormalBasis = AVectorOrthonormalBasis<double>;
+    using AVectorOrthonormalBasisF = AVectorOrthonormalBasis<float>;
+    using AVectorOrthonormalBasisD = AVectorOrthonormalBasis<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_AVECTOR_ORTHONORMA_BASIS_H

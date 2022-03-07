@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/07/28 15:55)
+///	引擎版本：0.8.0.1 (2022/01/08 0:49)
 
 #ifndef CORE_TOOLS_HELPER_UNIT_TEST_SUITE_MACRO_H
 #define CORE_TOOLS_HELPER_UNIT_TEST_SUITE_MACRO_H
@@ -35,7 +35,7 @@ public:                                                \
     namespaceName::testName::testName(const OStreamShared& stream)  \
         : ParentType{ stream }                                      \
     {                                                               \
-        SELF_CLASS_IS_VALID_1;                                      \
+        SELF_CLASS_IS_VALID_0;                                      \
     }                                                               \
     CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(namespaceName, testName) \
     void namespaceName::testName::DoRunUnitTest()                   \

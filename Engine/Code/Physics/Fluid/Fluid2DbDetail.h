@@ -13,8 +13,9 @@
 
     #include "System/Helper/PragmaWarning.h"
 
-    #include "Mathematics/Algebra/Vector2DDetail.h"
+    #include "Mathematics/Algebra/Vector2Detail.h"
     #include "Mathematics/Base/MathDetail.h"
+#include "CoreTools/Helper/ExceptionMacro.h"
     #include STSTEM_WARNING_PUSH
     #include SYSTEM_WARNING_DISABLE(26481)
     #include SYSTEM_WARNING_DISABLE(26489)
@@ -476,7 +477,7 @@ namespace Physics
     }
 
     template <typename Real>
-    Mathematics::Vector2D<Real>** Fluid2Db<Real>::GetVelocity() const noexcept
+    Mathematics::Vector2<Real>** Fluid2Db<Real>::GetVelocity() const noexcept
     {
         return mVelocity0;
     }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/30 18:47)
+///	引擎版本：0.8.0.1 (2022/01/11 14:54)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_INSTANCE_DETAIL_H
@@ -14,6 +14,12 @@
 #include "System/Console/ConsoleHandle.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+
+template <CoreTools::StandardHandle Handle>
+CoreTools::ConsoleInstance<Handle> CoreTools::ConsoleInstance<Handle>::Create()
+{
+    return ConsoleInstance{ DisableNotThrow::Disable };
+}
 
 template <CoreTools::StandardHandle Handle>
 CoreTools::ConsoleInstance<Handle>::ConsoleInstance(MAYBE_UNUSED DisableNotThrow disableNotThrow)
@@ -28,6 +34,7 @@ CoreTools::ConsoleInstance<Handle>::ConsoleInstance(MAYBE_UNUSED DisableNotThrow
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <CoreTools::StandardHandle Handle>
 bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
 {
@@ -36,6 +43,7 @@ bool CoreTools::ConsoleInstance<Handle>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <CoreTools::StandardHandle Handle>

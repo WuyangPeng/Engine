@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/29 20:19)
+///	引擎版本：0.8.0.2 (2022/02/17 11:46)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_H
@@ -30,21 +30,21 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
     public:
-        [[nodiscard]] const Matrix3 GeOrthogonalMatrix() const noexcept;
-        [[nodiscard]] const Matrix3 GetDiagonalMatrix() const noexcept;
-        [[nodiscard]] const Matrix3 GetUpperTriangularMatrix() const noexcept;
+        NODISCARD Matrix3 GeOrthogonalMatrix() const noexcept;
+        NODISCARD Matrix3 GetDiagonalMatrix() const noexcept;
+        NODISCARD Matrix3 GetUpperTriangularMatrix() const noexcept;
 
     private:
         void Calculate(const Matrix3& matrix);
 
     private:
-        Matrix3 m_Orthogonal;
-        Matrix3 m_Diagonal;
-        Matrix3 m_UpperTriangular;
+        Matrix3 orthogonal;
+        Matrix3 diagonal;
+        Matrix3 upperTriangular;
     };
 
-    using FloatQDUDecompositionValue = QDUDecompositionValue<float>;
-    using DoubleQDUDecompositionValue = QDUDecompositionValue<double>;
+    using QDUDecompositionValueF = QDUDecompositionValue<float>;
+    using QDUDecompositionValueD = QDUDecompositionValue<double>;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_QDU_DECOMPOSITION_VALUE_H

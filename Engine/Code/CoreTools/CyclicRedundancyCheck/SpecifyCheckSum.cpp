@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 14:24)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -22,14 +22,14 @@ using std::array;
 using std::swap;
 using namespace std::literals;
 
-const int CoreTools::SpecifyCheckSum::GetSevenPowers(int index)
+int CoreTools::SpecifyCheckSum::GetSevenPowers(int index)
 {
     static array<int, sm_PowersSize> sevenPowers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
 
     return sevenPowers.at(index);
 }
 
-const int CoreTools::SpecifyCheckSum::GetNinePowers(int index)
+int CoreTools::SpecifyCheckSum::GetNinePowers(int index)
 {
     static array<int, sm_PowersSize> ninePowers{ 1, 9, 81, 729, 6561, 59049, 531441, 4782969, 43046721, 387420489 };
 
@@ -37,7 +37,7 @@ const int CoreTools::SpecifyCheckSum::GetNinePowers(int index)
 }
 
 CoreTools::SpecifyCheckSum::SpecifyCheckSum(const char* data, int length, SpecifyCheckSumPowers powers, int mod)
-    : m_OriginalCheckSum{ 0 }, m_Powers{ powers }, m_Mod{ mod }, m_Collisions{ 0 }
+    : originalCheckSum{ 0 }, powers{ powers }, mod{ mod }, collisions{ 0 }
 {
     Calculation(data, length);
 
@@ -50,14 +50,14 @@ int CoreTools::SpecifyCheckSum::GetOriginalCheckSum() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_OriginalCheckSum;
+    return originalCheckSum;
 }
 
 int CoreTools::SpecifyCheckSum::GetCollisions() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Collisions;
+    return collisions;
 }
 
 // private
@@ -71,7 +71,7 @@ void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
     array<char, sm_PowersSize> buffer{};
 
     // 获得原始数字的校验和
-    m_OriginalCheckSum = GetCheckSum(data, length);
+    originalCheckSum = GetCheckSum(data, length);
 
     // 现在将数字复制到缓冲区，我们将在那里进行转置。
     System::MemoryCopy(buffer.data(), data, length);
@@ -86,31 +86,37 @@ void CoreTools::SpecifyCheckSum::Calculation(const char* data, int length)
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         if (buffer[index] == buffer[nextIndex])
             continue;
+
 #include STSTEM_WARNING_PUSH
 
             // 否则，做转置
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         swap(buffer[nextIndex], buffer[index]);
+
 #include STSTEM_WARNING_PUSH
 
         // 得到校验和
 
         const auto transpositionCheckSum = GetCheckSum(buffer.data(), boost::numeric_cast<uint32_t>(buffer.size()));
 
-        if (transpositionCheckSum == m_OriginalCheckSum)
+        if (transpositionCheckSum == originalCheckSum)
         {
-            ++m_Collisions;
+            ++collisions;
         }
 
         // 现在撤消这个转置
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
 #include SYSTEM_WARNING_DISABLE(26482)
+
         swap(buffer[nextIndex], buffer[index]);
+
 #include STSTEM_WARNING_PUSH
     }
 }
@@ -122,15 +128,15 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
         THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s));
     }
 
-    using Function = const int (*)(int index);
+    using Function = int (*)(int index);
 
     Function function = nullptr;
 
-    if (m_Powers == SpecifyCheckSumPowers::Nine)
+    if (powers == SpecifyCheckSumPowers::Nine)
     {
         function = &ClassType::GetSevenPowers;
     }
-    else if (m_Powers == SpecifyCheckSumPowers::Seven)
+    else if (powers == SpecifyCheckSumPowers::Seven)
     {
         function = &ClassType::GetNinePowers;
     }
@@ -156,6 +162,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
         // 判断是否是数字
         if (!isdigit(static_cast<int>(data[i - 1])))
         {
@@ -164,6 +171,7 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
 
         // 将数字字符转换为数字
         const int digit{ data[i - 1] - '0' };
+
 #include STSTEM_WARNING_POP
 
         // 查找幂，乘以digit，加到和
@@ -174,14 +182,14 @@ int CoreTools::SpecifyCheckSum::GetCheckSum(const char* data, int length)
     }
 
     // 根据方法得到总和模数
-    sum %= m_Mod;
+    sum %= mod;
 
-    if (m_Mod != 11 && m_Mod != 26 && m_Mod != 10)
+    if (mod != 11 && mod != 26 && mod != 10)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("模数值错误\n"s));
     }
 
-    if (m_Mod == 11 && sum == 10)
+    if (mod == 11 && sum == 10)
     {
         sum = 0;
     }

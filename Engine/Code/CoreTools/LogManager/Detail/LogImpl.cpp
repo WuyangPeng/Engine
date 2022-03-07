@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/15 18:37)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 22:38)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -21,8 +21,8 @@ using boost::property_tree::ptree_error;
 using std::make_shared;
 using std::string;
 
-CoreTools::LogImpl::LogImpl(DisableNotThrow disableNotThrow)
-    : m_AppenderManager{ make_shared<AppenderManager>(disableNotThrow) }, m_LogAppenderIOManagerContainer{}, m_ErrorLogAppenderIOManager{ disableNotThrow }
+CoreTools::LogImpl::LogImpl(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+    : appenderManager{ AppenderManager::Create() }, logAppenderIOManagerContainer{}, errorLogAppenderIOManager{ LogAppenderIOManager::Create() }
 {
     InitIOManager();
 
@@ -34,24 +34,25 @@ void CoreTools::LogImpl::InitIOManager()
 {
     for (auto logLevelType = LogLevel::Trace; logLevelType < LogLevel::MaxLogLevels; ++logLevelType)
     {
-        m_LogAppenderIOManagerContainer.insert({ logLevelType, make_shared<LogAppenderIOManager>(logLevelType, m_AppenderManager) });
+        logAppenderIOManagerContainer.insert({ logLevelType, LogAppenderIOManager::CreateSharedPtr(logLevelType, appenderManager) });
     }
 }
 
 void CoreTools::LogImpl::ResetIOManager() noexcept
 {
-    for (auto& value : m_LogAppenderIOManagerContainer)
+    for (auto& value : logAppenderIOManagerContainer)
     {
-        value.second->SetAppenderManager(m_AppenderManager);
+        value.second->SetAppenderManager(appenderManager);
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::LogImpl::IsValid() const noexcept
 {
     try
     {
-        if (m_AppenderManager != nullptr && DisabledIsNotExist())
+        if (appenderManager != nullptr && DisabledIsNotExist())
         {
             return true;
         }
@@ -68,15 +69,16 @@ bool CoreTools::LogImpl::IsValid() const noexcept
 
 bool CoreTools::LogImpl::DisabledIsNotExist() const
 {
-    return m_LogAppenderIOManagerContainer.find(LogLevel::Disabled) == m_LogAppenderIOManagerContainer.cend();
+    return logAppenderIOManagerContainer.find(LogLevel::Disabled) == logAppenderIOManagerContainer.cend();
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::LogImpl::InsertAppender(const String& name, const Appender& appender)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (!m_AppenderManager->InsertAppender(name, appender))
+    if (!appenderManager->InsertAppender(name, appender))
     {
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("InsertAppender失败。"));
     }
@@ -86,7 +88,7 @@ void CoreTools::LogImpl::RemoveAppender(const String& name)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (!m_AppenderManager->RemoveAppender(name))
+    if (!appenderManager->RemoveAppender(name))
     {
         System::OutputDebugStringWithTChar(SYSTEM_TEXT("RemoveAppender失败。"));
     }
@@ -98,9 +100,9 @@ void CoreTools::LogImpl::LoadConfiguration(const string& fileName)
 
     try
     {
-        AnalysisAppenderManager analysis{ fileName };
+        const AnalysisAppenderManager analysis{ fileName };
 
-        m_AppenderManager = analysis.GetAppenderManager();
+        appenderManager = analysis.GetAppenderManager();
 
         ResetIOManager();
     }
@@ -159,9 +161,9 @@ CoreTools::LogAppenderIOManager& CoreTools::LogImpl::Find(LogLevel type) noexcep
 {
     try
     {
-        const auto iter = m_LogAppenderIOManagerContainer.find(type);
+        const auto iter = logAppenderIOManagerContainer.find(type);
 
-        if (iter != m_LogAppenderIOManagerContainer.cend())
+        if (iter != logAppenderIOManagerContainer.cend())
         {
             return *iter->second;
         }
@@ -172,14 +174,15 @@ CoreTools::LogAppenderIOManager& CoreTools::LogImpl::Find(LogLevel type) noexcep
     }
     catch (...)
     {
+        System::OutputDebugStringWithTChar(SYSTEM_TEXT("Find LogAppenderIOManager失败。"));
     }
 
-    return m_ErrorLogAppenderIOManager;
+    return errorLogAppenderIOManager;
 }
 
 void CoreTools::LogImpl::ReloadAppenderFile()
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    m_AppenderManager->ReloadAppenderFile();
+    appenderManager->ReloadAppenderFile();
 }

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/15 10:10)
+///	引擎版本：0.8.0.3 (2022/02/22 14:52)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_RAY3_BOX3_H
 #define MATHEMATICS_DISTANCE_DISTANCE_RAY3_BOX3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE DistanceRay3Box3 : public DistanceBase<Real, Vector3D<Real>>
+    class DistanceRay3Box3 : public DistanceBase<Real, Vector3<Real>>
     {
     public:
         using ClassType = DistanceRay3Box3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using ParentType = DistanceBase<Real, Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using ParentType = DistanceBase<Real, Vector3>;
         using Ray3 = Ray3<Real>;
         using Box3 = Box3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
         using DistanceResult = typename ParentType::DistanceResult;
 
@@ -36,20 +36,20 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Ray3 GetRay() const noexcept;
-        [[nodiscard]] const Box3 GetBox() const noexcept;
+        NODISCARD Ray3 GetRay() const noexcept;
+        NODISCARD Box3 GetBox() const noexcept;
 
-        [[nodiscard]] const DistanceResult GetSquared() const override;
+        NODISCARD DistanceResult GetSquared() const override;
 
-        [[nodiscard]] const DistanceResult GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const override;
+        NODISCARD DistanceResult GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const override;
 
     private:
-        Ray3 m_Ray;
-        Box3 m_Box;
+        Ray3 ray;
+        Box3 box;
     };
 
-    using FloatDistanceRay3Box3 = DistanceRay3Box3<float>;
-    using DoubleDistanceRay3Box3 = DistanceRay3Box3<double>;
+    using DistanceRay3Box3F = DistanceRay3Box3<float>;
+    using DistanceRay3Box3D = DistanceRay3Box3<double>;
 }
 
 #endif  // MATHEMATICS_DISTANCE_DISTANCE_RAY3_BOX3_H

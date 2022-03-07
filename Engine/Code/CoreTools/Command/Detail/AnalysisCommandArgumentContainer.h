@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 11:06)
 
 #ifndef CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
 #define CORE_TOOLS_COMMAND_MAIN_COMMAND_ARGUMENT_CONTAINER_H
@@ -29,9 +29,12 @@ namespace CoreTools
         AnalysisCommandArgumentContainer(int argumentsNumber, char** arguments);
         explicit AnalysisCommandArgumentContainer(const char* commandLine);
 
-        [[nodiscard]] CommandArgumentContainerSharedPtr GetCommandArgumentContainer() noexcept;
+        NODISCARD CommandArgumentContainerSharedPtr GetCommandArgumentContainer() const noexcept;
 
         CLASS_INVARIANT_DECLARE;
+
+    private:
+        using ArgumentContainer = std::vector<std::string>;
 
     private:
         enum class ArgumentsType
@@ -42,7 +45,7 @@ namespace CoreTools
         };
 
     private:
-        void Init(char const* const* arguments);
+        void Init(const char* const* arguments);
         void Init(const char* commandLine);
 
         void AddCommandArguments();
@@ -51,18 +54,15 @@ namespace CoreTools
         void AddNoValueArgument(int index);
         void AddEndArgumentValue(int index);
 
-        [[nodiscard]] ArgumentsType GetArgumentsType(int index);
-        [[nodiscard]] ArgumentsType GetNextArgumentsType(int index);
-
-    private:
-        using ArgumentContainer = std::vector<std::string>;
+        NODISCARD ArgumentsType GetArgumentsType(int index);
+        NODISCARD ArgumentsType GetNextArgumentsType(int index);
 
     private:
         // 索引0为程序名。
-        static constexpr auto sm_FristCheckIndex = 1;
+        static constexpr auto firstCheckIndex = 1;
 
-        ArgumentContainer m_Argument;
-        CommandArgumentContainerSharedPtr m_CommandArgumentContainer;
+        ArgumentContainer argumentContainer;
+        CommandArgumentContainerSharedPtr commandArgumentContainer;
     };
 }
 

@@ -37,7 +37,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const RhsType& rhs, co
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -78,7 +78,7 @@ void CoreTools::UnitTest::AssertEqual(const LhsType& lhs, const MhsType& mhs, co
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<MhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<MhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -114,7 +114,7 @@ void CoreTools::UnitTest::AssertUnequal(const LhsType& lhs, const RhsType& rhs, 
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -157,7 +157,7 @@ void CoreTools::UnitTest::AssertApproximate(const LhsType& lhs, const RhsType& r
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -186,7 +186,7 @@ void CoreTools::UnitTest::AssertApproximateUseFunction(Function function, const 
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -268,7 +268,7 @@ void CoreTools::UnitTest::AssertRange(const TestType& test, const RangeType& lhs
     }
     else
     {
-        if constexpr (boost::has_left_shift<TestType>::value && boost::has_left_shift<RangeType>::value)
+        if constexpr (std::is_arithmetic_v<TestType> && std::is_arithmetic_v<RangeType>)
         {
             std::stringstream stream{};
 
@@ -299,7 +299,7 @@ void CoreTools::UnitTest::AssertLess(const LhsType& lhs, const RhsType& rhs, con
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -337,7 +337,7 @@ void CoreTools::UnitTest::AssertLessEqual(const LhsType& lhs, const RhsType& rhs
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -375,7 +375,7 @@ void CoreTools::UnitTest::AssertGreater(const LhsType& lhs, const RhsType& rhs, 
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 
@@ -413,7 +413,7 @@ void CoreTools::UnitTest::AssertGreaterEqual(const LhsType& lhs, const RhsType& 
     }
     else
     {
-        if constexpr (boost::has_left_shift<LhsType>::value && boost::has_left_shift<RhsType>::value)
+        if constexpr (std::is_arithmetic_v<LhsType> && std::is_arithmetic_v<RhsType>)
         {
             std::stringstream stream{};
 

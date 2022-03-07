@@ -23,12 +23,16 @@ using std::thread;
 using std::make_shared;
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Network, BoostFixedSockStreamSynchronizeTesting)
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26414)
+#include SYSTEM_WARNING_DISABLE(26418)
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26429)
 void Network::BoostFixedSockStreamSynchronizeTesting
 	::MainTest()
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(CreateMessage);
-	ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
+	//ASSERT_NOT_THROW_EXCEPTION_2(BoostSingletonTest<ClassType>, this, &ClassType::StreamTest);
 	ASSERT_NOT_THROW_EXCEPTION_0(DestroyMessage);
 }
 
@@ -156,7 +160,7 @@ void Network::BoostFixedSockStreamSynchronizeTesting
 	constexpr auto acceptTime = GetSynchronizeAcceptTime();
 	for (auto i = 0; i < acceptTime; ++i)
 	{
-		if (sockAcceptor->Accept(sockStream))
+		if (sockAcceptor->Accept(*sockStream))
 		{
 			break;
 		}

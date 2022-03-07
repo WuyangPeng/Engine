@@ -42,7 +42,7 @@ namespace Network
 		void CopyConstructorTest(const SockAddressSharedPtr& sockAddress);
 		void CopyOperatorTest(const SockAddressSharedPtr& sockAddress);
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

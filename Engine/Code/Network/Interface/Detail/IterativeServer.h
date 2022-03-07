@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 14:18)
 
 #ifndef NETWORK_NETWORK_INTERFACE_ITERATIVE_SERVER_H
 #define NETWORK_NETWORK_INTERFACE_ITERATIVE_SERVER_H
@@ -38,20 +38,25 @@ namespace Network
         void Send(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
         void AsyncSend(uint64_t socketID, const MessageInterfaceSharedPtr& message) override;
 
+        NODISCARD bool EventFunction(MAYBE_UNUSED const CoreTools::CallbackParameters& callbackParameters) noexcept override;
+
     private:
-        [[nodiscard]] bool HandleConnections(const SocketManagerSharedPtr& socketManager) override;
-        [[nodiscard]] bool HandleData(const SocketManagerSharedPtr& socketManager) override;
-        [[nodiscard]] bool ImmediatelySend() noexcept override;
+        NODISCARD bool WaitForMultipleEvents() noexcept override;
+        NODISCARD bool HandleConnections(SocketManager& socketManager) override;
+        NODISCARD bool HandleData(const SocketManagerSharedPtr& socketManager) override;
+        NODISCARD bool ImmediatelySend(MAYBE_UNUSED uint64_t socketID) noexcept override;
+        NODISCARD bool ImmediatelySend() noexcept override;
+        void ImmediatelyAsyncSend(MAYBE_UNUSED uint64_t socketID) noexcept override;
 
     private:
         using BufferType = std::vector<char>;
         using Container = std::map<uint64_t, StreamContainer>;
 
     private:
-        SockAcceptor m_SockAcceptor;
-        Container m_StreamContainer;
-        MessageBufferSharedPtr m_ReceiveBuffer;
-        MessageBufferSharedPtr m_SendBuffer;
+        SockAcceptor sockAcceptor;
+        Container streamContainer;
+        MessageBufferSharedPtr receiveBuffer;
+        MessageBufferSharedPtr sendBuffer;
     };
 }
 

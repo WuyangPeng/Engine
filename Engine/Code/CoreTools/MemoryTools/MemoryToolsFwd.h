@@ -23,6 +23,42 @@ namespace CoreTools
 
     template <typename T>
     class Array4;
+
+    template <typename T>
+    struct SharedPtrEqual;
+
+    template <typename T>
+    struct SharedPtrUnequal;
+
+    template <typename T>
+    struct SharedPtrLess;
+
+    template <typename T>
+    struct SharedPtrLessEqual;
+
+    template <typename T>
+    struct SharedPtrGreater;
+
+    template <typename T>
+    struct SharedPtrGreaterEqual;
+
+    template <typename T>
+    struct WeakPtrEqual;
+
+    template <typename T>
+    struct WeakPtrUnequal;
+
+    template <typename T>
+    struct WeakPtrLess;
+
+    template <typename T>
+    struct WeakPtrLessEqual;
+
+    template <typename T>
+    struct WeakPtrGreater;
+
+    template <typename T>
+    struct WeakPtrGreaterEqual;
 }
 
 #endif  // CORE_TOOLS_MEMORY_TOOLS_FWD_H

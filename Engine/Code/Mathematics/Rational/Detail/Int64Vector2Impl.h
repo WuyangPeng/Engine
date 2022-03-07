@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 13:57)
+///	引擎版本：0.8.0.2 (2022/02/11 16:59)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H
@@ -31,36 +31,36 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int64_t GetX() const;
+        NODISCARD int64_t GetX() const;
         void SetX(int64_t x);
-        [[nodiscard]] int64_t GetY() const;
+        NODISCARD int64_t GetY() const;
         void SetY(int64_t y);
 
         // 返回 (y,-x).
-        [[nodiscard]] const Int64Vector2Impl Perp() const;
+        NODISCARD Int64Vector2Impl Perp() const;
 
-        [[nodiscard]] const Int64Vector2Impl operator-() const noexcept;
+        NODISCARD Int64Vector2Impl operator-() const noexcept;
 
         Int64Vector2Impl& operator+=(const Int64Vector2Impl& rhs) noexcept;
         Int64Vector2Impl& operator-=(const Int64Vector2Impl& rhs) noexcept;
         Int64Vector2Impl& operator*=(int64_t scalar) noexcept;
         Int64Vector2Impl& operator/=(int64_t scalar);
 
-        [[nodiscard]] int64_t SquaredLength() const noexcept;
+        NODISCARD int64_t SquaredLength() const noexcept;
 
     private:
-        Int64Vector<2> m_Tuple;
+        Int64Vector<2> tuple;
     };
 
     // 返回 Dot(lhs,rhs).
-    [[nodiscard]] int64_t Dot(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    NODISCARD int64_t Dot(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
     // 返回 Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x.
-    [[nodiscard]] int64_t DotPerp(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    NODISCARD int64_t DotPerp(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
-    [[nodiscard]] bool operator==(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    NODISCARD bool operator==(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 
-    [[nodiscard]] bool operator<(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
+    NODISCARD bool operator<(const Int64Vector2Impl& lhs, const Int64Vector2Impl& rhs);
 }
 
 #endif  // MATHEMATICS_RATIONAL_INT64_VECTOR2_IMPL_H

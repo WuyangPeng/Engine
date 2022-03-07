@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/10/30 14:28)
+///	引擎版本：0.8.0.2 (2022/01/28 16:19)
 
 #ifndef MATHEMATICS_BASE_RANDOM_H
 #define MATHEMATICS_BASE_RANDOM_H
@@ -31,19 +31,19 @@ namespace Mathematics
     public:
         // 产生范围在[0,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        [[nodiscard]] static Real UnitRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real UnitRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
         // 产生范围在[-1,1]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        [[nodiscard]] static Real SymmetricRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real SymmetricRandom(uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
 
         // 产生范围在[min,max]的随机数。
         // 随机数生成器可以通过调用UnitRandom先设置一个正数的种子。
-        [[nodiscard]] static Real IntervalRandom(Real min, Real max, uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
+        NODISCARD static Real IntervalRandom(Real min, Real max, uint32_t seed = 0) noexcept(g_Assert < 3 || g_MathematicsAssert < 3);
     };
 
-    using FloatRandom = Random<float>;
-    using DoubleRandom = Random<double>;
+    using RandomF = Random<float>;
+    using RandomD = Random<double>;
 }
 
 #endif  // MATHEMATICS_BASE_RANDOM_H

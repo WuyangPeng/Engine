@@ -36,24 +36,24 @@ namespace Mathematics
 		// Member access.
 		const Real* GetCoefficients() const;
 		const Matrix3<Real>& GetA() const;
-		const Vector3D<Real>& GetB() const;
+		const Vector3<Real>& GetB() const;
 		Real GetC() const;
 
 		// The quadric function.
-		virtual Real F(const Vector3D<Real>& pos) const;
+		virtual Real F(const Vector3<Real>& pos) const;
 
 		// First-order partial derivatives.
-		virtual Real FX(const Vector3D<Real>& pos) const;
-		virtual Real FY(const Vector3D<Real>& pos) const;
-		virtual Real FZ(const Vector3D<Real>& pos) const;
+		virtual Real FX(const Vector3<Real>& pos) const;
+		virtual Real FY(const Vector3<Real>& pos) const;
+		virtual Real FZ(const Vector3<Real>& pos) const;
 
 		// Second-order partial derivatives.
-		virtual Real FXX(const Vector3D<Real>& pos) const;
-		virtual Real FXY(const Vector3D<Real>& pos) const;
-		virtual Real FXZ(const Vector3D<Real>& pos) const;
-		virtual Real FYY(const Vector3D<Real>& pos) const;
-		virtual Real FYZ(const Vector3D<Real>& pos) const;
-		virtual Real FZZ(const Vector3D<Real>& pos) const;
+		virtual Real FXX(const Vector3<Real>& pos) const;
+		virtual Real FXY(const Vector3<Real>& pos) const;
+		virtual Real FXZ(const Vector3<Real>& pos) const;
+		virtual Real FYY(const Vector3<Real>& pos) const;
+		virtual Real FYZ(const Vector3<Real>& pos) const;
+		virtual Real FZZ(const Vector3<Real>& pos) const;
 
 		enum  // solution type
 		{
@@ -79,7 +79,7 @@ namespace Mathematics
 	protected:
 		Real mCoeff[10];
 		Matrix3<Real> mA;
-		Vector3D<Real> mB;
+		Vector3<Real> mB;
 		Real mC;
 
 	private:

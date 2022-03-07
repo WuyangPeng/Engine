@@ -1,18 +1,17 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 15:55)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 11:48)
 
 #ifndef CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
 #define CORE_TOOLS_COMMAND_COMMAND_ARGUMENT_H
 
 #include "CoreTools/CoreToolsDll.h"
 
-#include "CommandArgumentImpl.h"
 #include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
 #include "CoreTools/Helper/ExportMacro.h"
 
@@ -33,21 +32,21 @@ namespace CoreTools
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetIndex() const noexcept;
-        [[nodiscard]] const std::string GetName() const;
+        NODISCARD int GetIndex() const noexcept;
+        NODISCARD const std::string GetName() const;
 
-        [[nodiscard]] int GetInteger() const;
-        [[nodiscard]] float GetFloat() const;
-        [[nodiscard]] double GetDouble() const;
-        [[nodiscard]] const std::string GetString() const;
+        NODISCARD int GetInteger() const;
+        NODISCARD float GetFloat() const;
+        NODISCARD double GetDouble() const;
+        NODISCARD const std::string GetString() const;
 
-        [[nodiscard]] bool IsInteger() const noexcept;
-        [[nodiscard]] bool IsFloat() const noexcept;
-        [[nodiscard]] bool IsDouble() const noexcept;
-        [[nodiscard]] bool IsString() const noexcept;
-        [[nodiscard]] bool IsNoValue() const noexcept;
+        NODISCARD bool IsInteger() const noexcept;
+        NODISCARD bool IsFloat() const noexcept;
+        NODISCARD bool IsDouble() const noexcept;
+        NODISCARD bool IsString() const noexcept;
+        NODISCARD bool IsNoValue() const noexcept;
 
-        [[nodiscard]] bool IsUsed() const noexcept;
+        NODISCARD bool IsUsed() const noexcept;
         void SetUsed();
 
         void AddEndArgumentValue(const std::string& value);

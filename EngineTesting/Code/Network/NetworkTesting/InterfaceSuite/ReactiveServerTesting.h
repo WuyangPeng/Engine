@@ -22,10 +22,10 @@ namespace Network
 		void MainTest();
 		void CreateMessage();
 		void ReactiveServerTest();
-		void ClientThread(ClientSharedPtr client);
+		void ClientThread(Client& client);
 		void DestroyMessage();
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		int m_Port;

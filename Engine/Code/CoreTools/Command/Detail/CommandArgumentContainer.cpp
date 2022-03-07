@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/23 16:38)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/12 13:32)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -19,44 +19,43 @@ using std::string;
 using namespace std::literals;
 
 CoreTools::CommandArgumentContainer::CommandArgumentContainer(int argumentsNumber)
-    : m_ArgumentsNumber{ argumentsNumber }
+    : argumentsNumber{ argumentsNumber }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool CoreTools::CommandArgumentContainer::IsValid() const noexcept
 {
-    if (0 < m_ArgumentsNumber)
-        return true;
-    else
-        return false;
+    return 0 < argumentsNumber;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 void CoreTools::CommandArgumentContainer::AddArgument(int index, const string& argumentsName, const string& argumentsValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_0(0 < index && index < m_ArgumentsNumber, "索引错误！");
+    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "索引错误！");
 
-    CommandArgument commandArgument{ index, argumentsName, argumentsValue };
-    m_CommandArgument.insert({ argumentsName, commandArgument });
+    const CommandArgument argument{ index, argumentsName, argumentsValue };
+    commandArgument.insert({ argumentsName, argument });
 }
 
 void CoreTools::CommandArgumentContainer::AddArgument(int index, const string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
-    CORE_TOOLS_ASSERTION_0(0 < index && index < m_ArgumentsNumber, "索引错误！");
+    CORE_TOOLS_ASSERTION_0(0 < index && index < argumentsNumber, "索引错误！");
 
-    CommandArgument commandArgument{ index, argumentsName };
-    m_CommandArgument.insert({ argumentsName, commandArgument });
+    const CommandArgument argument{ index, argumentsName };
+    commandArgument.insert({ argumentsName, argument });
 }
 
 int CoreTools::CommandArgumentContainer::GetArgumentsNumber() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    return m_ArgumentsNumber;
+    return argumentsNumber;
 }
 
 bool CoreTools::CommandArgumentContainer::IsUsed(const string& argumentsName) const
@@ -70,13 +69,13 @@ void CoreTools::CommandArgumentContainer::SetUsed(const string& argumentsName)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    const auto iter = m_CommandArgument.find(argumentsName);
+    const auto iter = commandArgument.find(argumentsName);
 
-    if (iter != m_CommandArgument.cend())
+    if (iter != commandArgument.cend())
     {
-        auto& commandArgument = iter->second;
+        auto& argument = iter->second;
 
-        return commandArgument.SetUsed();
+        return argument.SetUsed();
     }
     else
     {
@@ -151,30 +150,21 @@ bool CoreTools::CommandArgumentContainer::IsExist(const string& argumentsName) c
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    const auto iter = m_CommandArgument.find(argumentsName);
-
-    if (iter != m_CommandArgument.cend())
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    return commandArgument.find(argumentsName) != commandArgument.cend();
 }
 
 void CoreTools::CommandArgumentContainer::AddEndArgumentValue(const string& argumentsValue)
 {
     CORE_TOOLS_CLASS_IS_VALID_1;
 
-    if (!m_CommandArgument.empty())
+    if (!commandArgument.empty())
     {
-        auto iter = m_CommandArgument.end();
+        auto iter = commandArgument.end();
         --iter;
 
-        auto& commandArgument = iter->second;
+        auto& argument = iter->second;
 
-        commandArgument.AddEndArgumentValue(argumentsValue);
+        argument.AddEndArgumentValue(argumentsValue);
     }
     else
     {
@@ -186,12 +176,12 @@ const string CoreTools::CommandArgumentContainer::ExcessArguments() const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    for (const auto& value : m_CommandArgument)
+    for (const auto& value : commandArgument)
     {
-        const auto& commandArgument = value.second;
-        if (!commandArgument.IsUsed())
+        const auto& argument = value.second;
+        if (!argument.IsUsed())
         {
-            return commandArgument.GetName();
+            return argument.GetName();
         }
     }
 
@@ -202,12 +192,12 @@ int CoreTools::CommandArgumentContainer::GetExcessArgumentsCount() const noexcep
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_1;
 
-    int count{ 0 };
+    auto count = 0;
 
-    for (const auto& value : m_CommandArgument)
+    for (const auto& value : commandArgument)
     {
-        const auto& commandArgument = value.second;
-        if (!commandArgument.IsUsed())
+        const auto& argument = value.second;
+        if (!argument.IsUsed())
         {
             ++count;
         }

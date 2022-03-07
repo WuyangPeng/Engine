@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.1 (2021/08/07 12:13)
+///	引擎版本：0.8.0.1 (2022/01/08 1:01)
 
 #ifndef CORE_TOOLS_HELPER_NON_COPY_MACRO_H
 #define CORE_TOOLS_HELPER_NON_COPY_MACRO_H
@@ -77,8 +77,8 @@
 #define FRAMEWORK_NON_COPY_EXPORT_IMPL(implClassName) \
     NON_COPY_EXPORT_IMPL(implClassName, FRAMEWORK)
 
-#define NON_COPY_TYPE_DECLARE(className)                  \
-    TYPE_DECLARE(className);                              \
-    using PackageType = CoreTools::NonCopyImpl<ImplType>; 
+#define NON_COPY_TYPE_DECLARE(className) \
+    TYPE_DECLARE(className);             \
+    using PackageType = CoreTools::NonCopyImpl<ImplType>;
 
 #endif  // CORE_TOOLS_HELPER_NON_COPY_MACRO_H

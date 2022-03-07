@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 20:34)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 10:37)
 
 #ifndef NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
 #define NETWORK_NETWORK_MESSAGE_BUFFER_SEND_STREAM_IMPL_H
@@ -24,20 +24,24 @@ namespace Network
         using ClassType = BufferSendStreamImpl;
 
     public:
-        BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy);
+        BufferSendStreamImpl(int bytesTotal, ParserStrategy parserStrategy, EncryptedCompressionStrategy encryptedCompressionStrategy);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool Insert(const MessageInterfaceSharedPtr& message);
+        NODISCARD bool Insert(const MessageInterfaceSharedPtr& message);
         void Save(const MessageBufferSharedPtr& messageBuffer);
         void Clear();
 
-        [[nodiscard]] bool IsEmpty() const noexcept;
-        [[nodiscard]] int GetCurrentSize() const;
+        NODISCARD bool IsEmpty() const noexcept;
+        NODISCARD int GetCurrentSize() const;
 
     private:
-        SendMessageLevel m_TopLevel;
-        ParserStrategy m_ParserStrategy;
+        void EncryptedCompression(MAYBE_UNUSED const MessageBufferSharedPtr& messageBuffer) noexcept;
+
+    private:
+        SendMessageLevel topLevel;
+        ParserStrategy parserStrategy;
+        EncryptedCompressionStrategy encryptedCompressionStrategy;
     };
 }
 

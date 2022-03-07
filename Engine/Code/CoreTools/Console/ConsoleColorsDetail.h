@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.2 (2021/08/30 18:50)
+///	引擎版本：0.8.0.1 (2022/01/11 14:54)
 
 #ifndef CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
 #define CORE_TOOLS_CONSOLE_CONSOLE_COLORS_DETAIL_H
@@ -17,8 +17,14 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 
 template <CoreTools::StandardHandle Handle>
-CoreTools::ConsoleColors<Handle>::ConsoleColors(DisableNotThrow disableNotThrow)
-    : console{ disableNotThrow }, m_TextColor{ TextColour::White }, m_BackgroundColor{ BackgroundColour::Black }
+CoreTools::ConsoleColors<Handle> CoreTools::ConsoleColors<Handle>::Create()
+{
+    return ConsoleColors{ DisableNotThrow::Disable };
+}
+
+template <CoreTools::StandardHandle Handle>
+CoreTools::ConsoleColors<Handle>::ConsoleColors(MAYBE_UNUSED DisableNotThrow disableNotThrow)
+    : console{ ConsoleInstanceHandle::Create() }, m_TextColor{ TextColour::White }, m_BackgroundColor{ BackgroundColour::Black }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }

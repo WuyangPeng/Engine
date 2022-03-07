@@ -1,21 +1,21 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 14:33)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 13:47)
 
 #ifndef NETWORK_ACE_WRAPPERS_ACE_SOCK_CONNECTOR_H
 #define NETWORK_ACE_WRAPPERS_ACE_SOCK_CONNECTOR_H
 
 #include "Network/NetworkDll.h"
 
-#ifdef NETWORK_USE_ACE
+#include "System/Helper/PragmaWarning/ACE.h"
+#include "Network/Interface/Detail/SockConnectorImpl.h"
 
-    #include "System/Helper/PragmaWarning/ACE.h"
-    #include "Network/Interface/Detail/SockConnectorImpl.h"
+#ifdef NETWORK_USE_ACE
 
 namespace Network
 {
@@ -30,13 +30,13 @@ namespace Network
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
+        NODISCARD bool Connect(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
         void AsyncConnect(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) override;
 
-        [[nodiscard]] const SockConnectorPtr Clone() const override;
+        NODISCARD SockConnectorSharedPtr Clone() const override;
 
     private:
-        ACE_SOCK_Connector m_ACESockConnector;
+        ACE_SOCK_Connector aceSockConnector;
     };
 }
 

@@ -1,33 +1,31 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.2 (2020/10/16 17:04)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 14:33)
 
 #ifndef CORE_TOOLS_DATA_TYPE_TUPLE_DETAIL_H
 #define CORE_TOOLS_DATA_TYPE_TUPLE_DETAIL_H
 
 #include "Tuple.h"
-#include "CoreTools/Helper/Assertion/CoreToolsCustomAssertMacro.h"
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
-#include "CoreTools/Helper/ExceptionMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iostream>
 
 template <int Dimension, typename Type>
 CoreTools::Tuple<Dimension, Type>::Tuple() noexcept
-    : m_Tuple{}
+    : tuple{}
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept
-    : m_Tuple{ param0 }
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept(std::is_arithmetic_v<Type>)
+    : tuple{ param0 }
 {
     static_assert(Dimension == 1, "Dimension == 1");
 
@@ -35,8 +33,8 @@ CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0) noexcept
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<ParamType>)
-    : m_Tuple{ param0, param1 }
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noexcept(std::is_arithmetic_v<Type>)
+    : tuple{ param0, param1 }
 {
     static_assert(Dimension == 2, "Dimension == 2");
 
@@ -44,8 +42,8 @@ CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1) noe
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept
-    : m_Tuple{ param0, param1, param2 }
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2) noexcept(std::is_arithmetic_v<Type>)
+    : tuple{ param0, param1, param2 }
 {
     static_assert(Dimension == 3, "Dimension == 3");
 
@@ -53,8 +51,8 @@ CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, Par
 }
 
 template <int Dimension, typename Type>
-CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept
-    : m_Tuple{ param0, param1, param2, param3 }
+CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, ParamType param2, ParamType param3) noexcept(std::is_arithmetic_v<Type>)
+    : tuple{ param0, param1, param2, param3 }
 {
     static_assert(Dimension == 4, "Dimension == 4");
 
@@ -62,11 +60,13 @@ CoreTools::Tuple<Dimension, Type>::Tuple(ParamType param0, ParamType param1, Par
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int Dimension, typename Type>
 bool CoreTools::Tuple<Dimension, Type>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int Dimension, typename Type>
@@ -74,7 +74,7 @@ const Type& CoreTools::Tuple<Dimension, Type>::operator[](int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_9;
 
-    return m_Tuple.at(index);
+    return tuple.at(index);
 }
 
 template <int Dimension, typename Type>
@@ -90,7 +90,7 @@ typename CoreTools::Tuple<Dimension, Type>::ArrayTypeConstIter CoreTools::Tuple<
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple.begin();
+    return tuple.begin();
 }
 
 template <int Dimension, typename Type>
@@ -98,7 +98,7 @@ typename CoreTools::Tuple<Dimension, Type>::ArrayTypeConstIter CoreTools::Tuple<
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Tuple.end();
+    return tuple.end();
 }
 
 template <int Dimension, typename Type>
@@ -108,7 +108,7 @@ Type CoreTools::Tuple<Dimension, Type>::GetSum() const noexcept
 
     Type sum{};
 
-    for (const auto& value : m_Tuple)
+    for (const auto& value : tuple)
     {
         sum += value;
     }

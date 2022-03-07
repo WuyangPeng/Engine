@@ -17,7 +17,8 @@ namespace Mathematics
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Bisect1Testing) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26497)
 void Mathematics::Bisect1Testing
 	::MainTest()
 {
@@ -25,13 +26,13 @@ void Mathematics::Bisect1Testing
     ASSERT_NOT_THROW_EXCEPTION_0(NoSolutionTest);
     ASSERT_NOT_THROW_EXCEPTION_0(UnknownTest);
 }
-
+#include SYSTEM_WARNING_DISABLE(26496)
 void Mathematics::Bisect1Testing
 	::HaveSolutionTest()
 {
-    DoubleBisect1 bisect1(FirstEquation,200);
+    Bisect1D bisect1(FirstEquation,200);
     
-    DoubleBisect1Root root = bisect1.Bisect(0.0,1.0);
+    Bisect1RootD root = bisect1.Bisect(0.0,1.0);
     
     ASSERT_APPROXIMATE(FirstEquation(root.GetRoot()),0.0,1e-8);
     
@@ -41,9 +42,9 @@ void Mathematics::Bisect1Testing
 void Mathematics::Bisect1Testing
 	::NoSolutionTest()
 {
-    FloatBisect1 bisect1(SecondEquation,20);
+    Bisect1F bisect1(SecondEquation,20);
     
-    FloatBisect1Root root = bisect1.Bisect(-1.0,0.0);
+    Bisect1RootF root = bisect1.Bisect(-1.0,0.0);
     
 	ASSERT_ENUM_EQUAL(root.GetBisect1RootType(), BisectRootType::NoSolution);
 }
@@ -51,9 +52,9 @@ void Mathematics::Bisect1Testing
 void Mathematics::Bisect1Testing
 	::UnknownTest()
 {
-    DoubleBisect1 bisect1(FirstEquation,20);
+    Bisect1D bisect1(FirstEquation,20);
     
-    DoubleBisect1Root root = bisect1.Bisect(0.0,1.0);
+    Bisect1RootD root = bisect1.Bisect(0.0,1.0);
     
     ASSERT_TRUE(0.0 <= root.GetRoot());
     ASSERT_TRUE(root.GetRoot() <= 1.0);

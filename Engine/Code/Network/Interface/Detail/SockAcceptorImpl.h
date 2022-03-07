@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 16:11)
 
 #ifndef NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_SOCK_ACCEPTOR_IMPL_H
@@ -16,36 +16,37 @@
 
 namespace Network
 {
-    class SockAcceptorFactory;
     class NETWORK_HIDDEN_DECLARE SockAcceptorImpl
     {
     public:
         using ClassType = SockAcceptorImpl;
-         using FactoryType = SockAcceptorFactory;
+        using FactoryType = SockAcceptorFactory;
+        using EventInterface = CoreTools::EventInterface;
+
     public:
         SockAcceptorImpl() noexcept;
         virtual ~SockAcceptorImpl() noexcept = default;
-        SockAcceptorImpl(const SockAcceptorImpl&) = delete;
-        virtual SockAcceptorImpl& operator=(const SockAcceptorImpl&) = delete;
-        SockAcceptorImpl(SockAcceptorImpl&&) noexcept = delete;
-        virtual SockAcceptorImpl& operator=(SockAcceptorImpl&&) noexcept = delete;
+        SockAcceptorImpl(const SockAcceptorImpl& rhs) = delete;
+        SockAcceptorImpl& operator=(const SockAcceptorImpl& rhs) = delete;
+        SockAcceptorImpl(SockAcceptorImpl&& rhs) noexcept = delete;
+        SockAcceptorImpl& operator=(SockAcceptorImpl&& rhs) noexcept = delete;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] virtual bool Accept(const SockStreamSharedPtr& sockStream) = 0;
-        [[nodiscard]] virtual bool Accept(const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
+        NODISCARD virtual bool Accept(SockStream& sockStream) = 0;
+        NODISCARD virtual bool Accept(SockStream& sockStream, SockAddress& sockAddress) = 0;
 
         virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream) = 0;
         virtual void AsyncAccept(const EventInterfaceSharedPtr& eventInterface, const SockStreamSharedPtr& sockStream, const SockAddressSharedPtr& sockAddress) = 0;
 
-        [[nodiscard]] virtual bool EnableNonBlock() = 0;
+        NODISCARD virtual bool EnableNonBlock() = 0;
 
-        [[nodiscard]] virtual const std::string GetAddress() const = 0;
-        [[nodiscard]] virtual int GetPort() const = 0;
+        NODISCARD virtual std::string GetAddress() const = 0;
+        NODISCARD virtual int GetPort() const = 0;
 
-        [[nodiscard]] virtual ACEHandleType GetACEHandle();
-        [[nodiscard]] virtual BoostHandleType GetBoostHandle();
-        [[nodiscard]] virtual WinSocketType GetWinSocket();
+        NODISCARD virtual ACEHandleType GetACEHandle();
+        NODISCARD virtual BoostHandleType GetBoostHandle();
+        NODISCARD virtual WinSocketType GetWinSocket();
     };
 }
 

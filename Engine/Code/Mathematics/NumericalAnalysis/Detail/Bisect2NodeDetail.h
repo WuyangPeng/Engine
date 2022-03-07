@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/19 15:50)
+///	引擎版本：0.8.0.2 (2022/02/14 11:22)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_NODE_DETAIL_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_BISECT2_NODE_DETAIL_H
@@ -18,12 +18,12 @@
 
 template <typename Real>
 Mathematics::Bisect2Node<Real>::Bisect2Node(Real x, Real y, Real functionResult0, Real functionResult1) noexcept
-    : m_X{ x },
-      m_Y{ y },
-      m_FunctionResult0{ functionResult0 },
-      m_FunctionResult1{ functionResult1 },
-      m_XNext{},
-      m_YNext{}
+    : nodeX{ x },
+      nodeY{ y },
+      nodeFunctionResult0{ functionResult0 },
+      nodeFunctionResult1{ functionResult1 },
+      xNext{},
+      yNext{}
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
@@ -41,7 +41,7 @@ Real Mathematics::Bisect2Node<Real>::GetX() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_X;
+    return nodeX;
 }
 
 template <typename Real>
@@ -49,7 +49,7 @@ Real Mathematics::Bisect2Node<Real>::GetY() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_Y;
+    return nodeY;
 }
 
 template <typename Real>
@@ -57,7 +57,7 @@ Real Mathematics::Bisect2Node<Real>::GetFunctionResult0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_FunctionResult0;
+    return nodeFunctionResult0;
 }
 
 template <typename Real>
@@ -65,7 +65,7 @@ Real Mathematics::Bisect2Node<Real>::GetFunctionResult1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_FunctionResult1;
+    return nodeFunctionResult1;
 }
 
 template <typename Real>
@@ -73,7 +73,7 @@ typename Mathematics::Bisect2Node<Real>::Bisect2NodeSharedPtr Mathematics::Bisec
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    return m_XNext;
+    return xNext;
 }
 
 template <typename Real>
@@ -81,23 +81,23 @@ typename Mathematics::Bisect2Node<Real>::Bisect2NodeSharedPtr Mathematics::Bisec
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    return m_YNext;
+    return yNext;
 }
 
 template <typename Real>
-typename Mathematics::Bisect2Node<Real>::ConstBisect2NodeSharedPtr Mathematics::Bisect2Node<Real>::GetXNext() const
+typename Mathematics::Bisect2Node<Real>::ConstBisect2NodeSharedPtr Mathematics::Bisect2Node<Real>::GetXNext() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_XNext;
+    return xNext;
 }
 
 template <typename Real>
-typename Mathematics::Bisect2Node<Real>::ConstBisect2NodeSharedPtr Mathematics::Bisect2Node<Real>::GetYNext() const
+typename Mathematics::Bisect2Node<Real>::ConstBisect2NodeSharedPtr Mathematics::Bisect2Node<Real>::GetYNext() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    return m_YNext;
+    return yNext;
 }
 
 template <typename Real>
@@ -105,7 +105,7 @@ void Mathematics::Bisect2Node<Real>::AddXNextNode(Real x, Real y, Real functionR
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_XNext = std::make_shared<Bisect2Node>(x, y, functionResult0, functionResult1);
+    xNext = std::make_shared<Bisect2Node>(x, y, functionResult0, functionResult1);
 }
 
 template <typename Real>
@@ -113,7 +113,7 @@ void Mathematics::Bisect2Node<Real>::AddYNextNode(Real x, Real y, Real functionR
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_YNext = std::make_shared<Bisect2Node>(x, y, functionResult0, functionResult1);
+    yNext = std::make_shared<Bisect2Node>(x, y, functionResult0, functionResult1);
 }
 
 template <typename Real>
@@ -121,7 +121,7 @@ void Mathematics::Bisect2Node<Real>::AddXNextNode(const Bisect2NodeSharedPtr& no
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_XNext = node;
+    xNext = node;
 }
 
 template <typename Real>
@@ -129,7 +129,7 @@ void Mathematics::Bisect2Node<Real>::AddYNextNode(const Bisect2NodeSharedPtr& no
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    m_YNext = node;
+    yNext = node;
 }
 
 template <typename Real>
@@ -137,31 +137,31 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult0SameSign() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto symbol = Math<Real>::Sign(m_FunctionResult0);
+    const auto symbol = Math::Sign(nodeFunctionResult0);
 
     if (symbol == NumericalValueSymbol::Zero)
     {
         return false;
     }
 
-    if (m_XNext != nullptr)
+    if (xNext != nullptr)
     {
-        if (Math<Real>::Sign(m_XNext->GetFunctionResult0()) != symbol)
+        if (Math::Sign(xNext->GetFunctionResult0()) != symbol)
         {
             return false;
         }
         else
         {
-            auto xNextYNext = m_XNext->GetYNext();
+            auto xNextYNext = xNext->GetYNext();
 
-            if (xNextYNext != nullptr && Math<Real>::Sign(xNextYNext->GetFunctionResult0()) != symbol)
+            if (xNextYNext != nullptr && Math::Sign(xNextYNext->GetFunctionResult0()) != symbol)
             {
                 return false;
             }
         }
     }
 
-    if (m_YNext != nullptr && Math<Real>::Sign(m_YNext->GetFunctionResult0()) != symbol)
+    if (yNext != nullptr && Math::Sign(yNext->GetFunctionResult0()) != symbol)
     {
         return false;
     }
@@ -174,31 +174,31 @@ bool Mathematics::Bisect2Node<Real>::IsFunctionResult1SameSign() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    const auto symbol = Math<Real>::Sign(m_FunctionResult1);
+    const auto symbol = Math::Sign(nodeFunctionResult1);
 
     if (symbol == NumericalValueSymbol::Zero)
     {
         return false;
     }
 
-    if (m_XNext != nullptr)
+    if (xNext != nullptr)
     {
-        if (Math<Real>::Sign(m_XNext->GetFunctionResult1()) != symbol)
+        if (Math::Sign(xNext->GetFunctionResult1()) != symbol)
         {
             return false;
         }
         else
         {
-            auto xNextYNext = m_XNext->GetYNext();
+            auto xNextYNext = xNext->GetYNext();
 
-            if (xNextYNext != nullptr && Math<Real>::Sign(xNextYNext->GetFunctionResult1()) != symbol)
+            if (xNextYNext != nullptr && Math::Sign(xNextYNext->GetFunctionResult1()) != symbol)
             {
                 return false;
             }
         }
     }
 
-    if (m_YNext != nullptr && Math<Real>::Sign(m_YNext->GetFunctionResult1()) != symbol)
+    if (yNext != nullptr && Math::Sign(yNext->GetFunctionResult1()) != symbol)
     {
         return false;
     }

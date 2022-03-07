@@ -12,8 +12,8 @@
 namespace Physics
 {
 	template <typename Real>
-	void ComputeMassProperties(const Mathematics::Vector3D<Real>* vertices, int numTriangles,const int* indices, bool bodyCoords, Real& mass,
-							   Mathematics::Vector3D<Real>& center,Mathematics::Matrix3<Real>& inertia)
+	void ComputeMassProperties(const Mathematics::Vector3<Real>* vertices, int numTriangles,const int* indices, bool bodyCoords, Real& mass,
+							   Mathematics::Vector3<Real>& center,Mathematics::Matrix3<Real>& inertia)
 	{
 		const Real oneDiv6 = (Real)(1.0 / 6.0);
 		const Real oneDiv24 = (Real)(1.0 / 24.0);
@@ -28,14 +28,14 @@ namespace Physics
 		for (i = 0; i < numTriangles; i++)
 		{
 			// Get vertices of triangle i.
-			Mathematics::Vector3D<Real> v0 = vertices[*index++];
-			Mathematics::Vector3D<Real> v1 = vertices[*index++];
-			Mathematics::Vector3D<Real> v2 = vertices[*index++];
+			Mathematics::Vector3<Real> v0 = vertices[*index++];
+			Mathematics::Vector3<Real> v1 = vertices[*index++];
+			Mathematics::Vector3<Real> v2 = vertices[*index++];
 
 			// Get cross product of edges and normal vector.
-			Mathematics::Vector3D<Real> V1mV0 = v1 - v0;
-			Mathematics::Vector3D<Real> V2mV0 = v2 - v0;
-			Mathematics::Vector3D<Real> N = Mathematics::Vector3DTools<Real>::CrossProduct(V1mV0, V2mV0);
+			Mathematics::Vector3<Real> V1mV0 = v1 - v0;
+			Mathematics::Vector3<Real> V2mV0 = v2 - v0;
+			Mathematics::Vector3<Real> N = Mathematics::Vector3Tools<Real>::CrossProduct(V1mV0, V2mV0);
 
 			// Compute integral terms.
 			Real tmp0, tmp1, tmp2;
@@ -100,7 +100,7 @@ namespace Physics
 		mass = integral[0];
 
 		// center of mass
-		center = Mathematics::Vector3D<Real>(integral[1], integral[2], integral[3]) / mass;
+		center = Mathematics::Vector3<Real>(integral[1], integral[2], integral[3]) / mass;
 
 		// inertia relative to world origin
 		inertia[0][0] = integral[5] + integral[6];

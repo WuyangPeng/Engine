@@ -24,7 +24,7 @@ namespace Mathematics
 	// collinear.  In this case M has a (nearly) zero eigenvalue, so inverting M
 	// is problematic.
 	template <typename Real>
-	Ellipse2<Real> ContEllipse (const std::vector<Vector2D<Real> >& points);
+	Ellipse2<Real> ContEllipse (const std::vector<Vector2<Real> >& points);
 	
 	// Project an ellipse onto a line.  The projection interval is [smin,smax]
 	// and corresponds to the line segment P+s*D, where smin <= s <= smax.

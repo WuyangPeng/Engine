@@ -9,7 +9,7 @@
 #include "BoxSurface.h"
 #include "CoreTools/ObjectSystems/StreamSize.h"
 #include "Mathematics/Algebra/AVectorDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
 #include "Mathematics/Base/Float.h"
 #include "Mathematics/CurvesSurfacesVolumes/BSplineVolumeDetail.h"
 #include "Rendering/Renderers/RendererManager.h"
@@ -96,8 +96,7 @@ Rendering::BoxSurface ::~BoxSurface(){
 
     EXCEPTION_TRY{
         //DELETE0(mVolume);
-}
-EXCEPTION_ALL_CATCH(Rendering)
+    } EXCEPTION_ALL_CATCH(Rendering)
 }
 
 Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows, int numCols, VertexFormatSharedPtr vformat, bool ccw, float faceValue, int permute[3])
@@ -125,13 +124,13 @@ Rendering::TrianglesMeshSharedPtr Rendering::BoxSurface ::CreateFace(int numRows
             {
                 const auto cDer = mVolume->GetDerivative(permute[0], param);
                 const auto rDer = mVolume->GetDerivative(permute[1], param);
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::FloatAVector{ sign * Mathematics::FloatVector3DTools::UnitCrossProduct(cDer, rDer) });
+                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
 
             constexpr auto numUnits = System::EnumCastUnderlying(VertexFormatFlags::MaximumNumber::TextureCoordinateUnits);
             for (auto unit = 0; unit < numUnits; ++unit)
             {
-                const Mathematics::FloatVector2D tcoord{ param[permute[0]], param[permute[1]] };
+                const Mathematics::Vector2F tcoord{ param[permute[0]], param[permute[1]] };
                 if (vba.HasTextureCoord(unit))
                 {
                     RENDERING_ASSERTION_0(vba.GetTextureCoordChannels(unit) == 2, "Texture coordinate must be 2D\n");
@@ -202,7 +201,7 @@ void Rendering::BoxSurface ::UpdateFace(int numRows, int numCols, VertexFormatSh
                 const auto cDer = mVolume->GetDerivative(permute[0], param);
                 const auto rDer = mVolume->GetDerivative(permute[1], param);
 
-                vbuffer->SetTriangleNormal(vba, i, Mathematics::FloatAVector{ sign * Mathematics::FloatVector3DTools::UnitCrossProduct(cDer, rDer) });
+                vbuffer->SetTriangleNormal(vba, i, Mathematics::AVectorF{ sign * Mathematics::Vector3ToolsF::UnitCrossProduct(cDer, rDer) });
             }
         }
     }
@@ -460,7 +459,7 @@ void Rendering::BoxSurface ::Load(CoreTools::BufferSource& source)
         {
             for (int w = 0; w < numWCtrlPoints; ++w)
             {
-                Mathematics::FloatVector3D ctrl;
+                Mathematics::Vector3F ctrl;
                 source.ReadAggregate(ctrl);
                 mVolume->SetControlPoint(u, v, w, ctrl);
             }
@@ -514,7 +513,7 @@ void Rendering::BoxSurface ::Save(CoreTools::BufferTarget& target) const
         {
             for (int w = 0; w < numWCtrlPoints; ++w)
             {
-                const Mathematics::FloatVector3D ctrl = mVolume->GetControlPoint(u, v, w);
+                const Mathematics::Vector3F ctrl = mVolume->GetControlPoint(u, v, w);
                 target.WriteAggregate(ctrl);
             }
         }
@@ -541,7 +540,7 @@ int Rendering::BoxSurface ::GetStreamingSize() const
     size += sizeof(int);  // uDegree
     size += sizeof(int);  // vDegree
     size += sizeof(int);  // wDegree
-    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * sizeof(Mathematics::FloatVector3D);
+    size += numUCtrlPoints * numVCtrlPoints * numWCtrlPoints * sizeof(Mathematics::Vector3F);
 
     size += sizeof(mNumUSamples);
     size += sizeof(mNumVSamples);

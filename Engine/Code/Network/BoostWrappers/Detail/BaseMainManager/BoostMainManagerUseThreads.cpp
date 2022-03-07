@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 17:50)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 22:30)
 
 #include "Network/NetworkExport.h"
 
@@ -15,12 +15,12 @@
 #include "CoreTools/Helper/ExceptionMacro.h"
 #include "Network/Configuration/ConfigurationSubStrategy.h"
 #include "Network/Configuration/Flags/ConfigurationStrategyFlags.h"
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 
 using std::make_unique;
-using std::move;
 
 Network::BoostMainManagerUseThreads::BoostMainManagerUseThreads(const ConfigurationSubStrategy& subStrategy)
-    : ParentType{}, m_Thread{}, m_ThreadNumber{ subStrategy.GetValue(WrappersSubStrategy::Threads) }
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, threads{}, threadNumber{ subStrategy.GetValue(WrappersSubStrategy::Threads) }
 {
     DoInitThread();
 
@@ -80,24 +80,24 @@ void Network::BoostMainManagerUseThreads::ThreadsRun()
 // private
 void Network::BoostMainManagerUseThreads::DoJoinThreads()
 {
-    for (auto& value : m_Thread)
+    for (auto& value : threads)
     {
         value.join();
     }
 
-    m_Thread.clear();
+    threads.clear();
 }
 
 // private
 void Network::BoostMainManagerUseThreads::DoInitThread()
 {
-    for (auto i = 0; i < m_ThreadNumber; ++i)
+    for (auto i = 0; i < threadNumber; ++i)
     {
         auto thread = make_unique<ThreadType>(&ClassType::ThreadsRun, this);
-        m_Thread.push_back(move(thread));
+        threads.push_back(std::move(thread));
     }
 
-    if (m_Thread.empty())
+    if (threads.empty())
     {
         THROW_EXCEPTION(SYSTEM_TEXT("boost 线程数量为零！"s));
     }

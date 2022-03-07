@@ -1,26 +1,25 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.1.1 (2020/10/15 11:02)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/07 16:14)
 
 #ifndef CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
 #define CORE_TOOLS_LOG_MANAGER_LOG_CONSOLE_TEXT_COLOR_MANAGER_IMPL_H
 
 #include "CoreTools/Console/ConsoleFwd.h"
-#include "CoreTools/LogManager/LogManagerFwd.h"
+#include "CoreTools/LogManager/LogManagerInternalFwd.h"
 
 namespace CoreTools
 {
-    class LogConsoleTextColorsManagerFactory;
     class LogConsoleTextColorsManagerImpl
     {
     public:
         using ClassType = LogConsoleTextColorsManagerImpl;
-        using  FactoryType = LogConsoleTextColorsManagerFactory;
+        using FactoryType = LogConsoleTextColorsManagerFactory;
 
     public:
         explicit LogConsoleTextColorsManagerImpl(LogLevel logLevel) noexcept;
@@ -33,14 +32,14 @@ namespace CoreTools
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] LogLevel GetLogLevel() const noexcept;
+        NODISCARD LogLevel GetLogLevel() const noexcept;
 
     protected:
-        [[nodiscard]] static TextColour GetTextColor(LogLevel logLevel) noexcept;
-        [[nodiscard]] bool GetIntensified(LogLevel logLevel) noexcept;
+        NODISCARD static TextColour GetTextColor(LogLevel logLevel) noexcept;
+        NODISCARD static bool GetIntensified(LogLevel logLevel) noexcept;
 
     private:
-        LogLevel m_LogLevel;
+        LogLevel logLevel;
     };
 }
 

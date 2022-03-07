@@ -25,7 +25,7 @@ namespace Mathematics
 		static double Function(const std::vector<double>& value, const MinimizeNTesting* minimize1Testing);
 		double GetValue() const;
 		
-		virtual void DoRunUnitTest() override;		
+		void DoRunUnitTest() override;		
 	};
 }
 

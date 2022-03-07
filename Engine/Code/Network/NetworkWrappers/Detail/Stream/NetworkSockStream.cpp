@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 19:13)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/23 17:44)
 
 #include "Network/NetworkExport.h"
 
@@ -19,7 +19,7 @@
 using std::string;
 
 Network::NetworkSockStream::NetworkSockStream() noexcept
-    : ParentType{}, m_WinSocket{ 0 }
+    : ParentType{}, winSocket{ 0 }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -33,28 +33,40 @@ int Network::NetworkSockStream::Receive(const MessageBufferSharedPtr& messageBuf
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return System::Recv(m_WinSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
+    return System::Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
 }
+#include STSTEM_WARNING_POP
 
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
 int Network::NetworkSockStream::Send(const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return System::Send(m_WinSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
+    return System::Send(winSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
 }
+#include STSTEM_WARNING_POP
 
-void Network::NetworkSockStream::AsyncReceive([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+void Network::NetworkSockStream::AsyncReceive(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    [[maybe_unused]] const auto result = System::Recv(m_WinSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
+    MAYBE_UNUSED const auto result = System::Recv(winSocket, messageBuffer->GetCurrentWriteBufferedPtr(), messageBuffer->GetSize(), System::SocketRecv::Default);
 }
+#include STSTEM_WARNING_POP
 
-void Network::NetworkSockStream::AsyncSend([[maybe_unused]] const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26415)
+#include SYSTEM_WARNING_DISABLE(26418)
+void Network::NetworkSockStream::AsyncSend(MAYBE_UNUSED const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    [[maybe_unused]] const auto result = System::Send(m_WinSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
+    MAYBE_UNUSED const auto result = System::Send(winSocket, messageBuffer->GetInitialBufferedPtr(), messageBuffer->GetSize(), System::SocketSend::Default);
 }
 #include STSTEM_WARNING_POP
 
@@ -62,21 +74,21 @@ Network::WinSocketStreamType& Network::NetworkSockStream::GetNetworkSockStream()
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return m_WinSocket;
+    return winSocket;
 }
 
 bool Network::NetworkSockStream::CloseHandle() noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    return System::CloseSocket(m_WinSocket);
+    return System::CloseSocket(winSocket);
 }
 
-void Network::NetworkSockStream::SetNetworkHandle(WinSocketStreamType winSocket) noexcept
+void Network::NetworkSockStream::SetNetworkHandle(WinSocketStreamType newWinSocket) noexcept
 {
     NETWORK_CLASS_IS_VALID_9;
 
-    m_WinSocket = winSocket;
+    winSocket = newWinSocket;
 }
 
 bool Network::NetworkSockStream::EnableNonBlock() noexcept
@@ -84,10 +96,10 @@ bool Network::NetworkSockStream::EnableNonBlock() noexcept
     NETWORK_CLASS_IS_VALID_9;
 
     unsigned long nonblock{ 1 };
-    return System::IoctlSocket(m_WinSocket, System::IoctlSocketCmd::FionBio, &nonblock);
+    return System::IoctlSocket(winSocket, System::IoctlSocketCmd::FionBio, &nonblock);
 }
 
-const string Network::NetworkSockStream::GetRemoteAddress() const noexcept
+string Network::NetworkSockStream::GetRemoteAddress() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

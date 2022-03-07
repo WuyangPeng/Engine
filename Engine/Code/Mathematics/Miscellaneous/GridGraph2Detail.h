@@ -91,7 +91,7 @@ namespace Mathematics
         for (i = 0; i < mNumVertices; ++i)
         {
             Vertex& vertex = mVertices[i];
-            vertex.Estimate = Math<Real>::sm_MaxReal;
+            vertex.Estimate = Math<Real>::maxReal;
             vertex.Predecessor = -1;
             mPending[i] = i;
         }
@@ -204,9 +204,9 @@ namespace Mathematics
     {
         for (int i = 0; i < 8; ++i)
         {
-            mWeight[i] = Math<Real>::sm_MaxReal;
+            mWeight[i] = Math<Real>::maxReal;
         }
-        Estimate = Math<Real>::sm_MaxReal;
+        Estimate = Math<Real>::maxReal;
         Predecessor = -1;
     }
 

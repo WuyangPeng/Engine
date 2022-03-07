@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 16:25)
+///	引擎版本：0.8.0.2 (2022/02/17 16:41)
 
 #ifndef MATHEMATICS_QUERY_QUERY3_RATIONAL_H
 #define MATHEMATICS_QUERY_QUERY3_RATIONAL_H
@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = Query3Rational<Real>;
         using ParentType = Query3<Real>;
         using Math = typename ParentType::Math;
-        using Vector3D = typename ParentType::Vector3D;
+        using Vector3 = typename ParentType::Vector3;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -35,16 +35,16 @@ namespace Mathematics
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
         // 运行时类型信息。
-        [[nodiscard]] QueryType GetType() const noexcept override;
+        NODISCARD QueryType GetType() const noexcept override;
 
-        [[nodiscard]] PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
-        [[nodiscard]] PlaneQueryType ToPlane(const Vector3D& testVector, int v0, int v1, int v2) const override;
+        NODISCARD PlaneQueryType ToPlane(int index, int v0, int v1, int v2) const override;
+        NODISCARD PlaneQueryType ToPlane(const Vector3& testVector, int v0, int v1, int v2) const override;
 
-        [[nodiscard]] TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const override;
-        [[nodiscard]] TetrahedronQueryType ToTetrahedron(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
+        NODISCARD TetrahedronQueryType ToTetrahedron(int index, int v0, int v1, int v2, int v3) const override;
+        NODISCARD TetrahedronQueryType ToTetrahedron(const Vector3& testVector, int v0, int v1, int v2, int v3) const override;
 
-        [[nodiscard]] CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
-        [[nodiscard]] CircumsphereQueryType ToCircumsphere(const Vector3D& testVector, int v0, int v1, int v2, int v3) const override;
+        NODISCARD CircumsphereQueryType ToCircumsphere(int index, int v0, int v1, int v2, int v3) const override;
+        NODISCARD CircumsphereQueryType ToCircumsphere(const Vector3& testVector, int v0, int v1, int v2, int v3) const override;
 
     private:
         using QueryRational = SignRational<8 * sizeof(Real)>;
@@ -53,17 +53,17 @@ namespace Mathematics
 
     private:
         void Convert();
-        [[nodiscard]] PlaneQueryType ToPlane(const QueryRationalVector& rationalTest, int v0, int v1, int v2) const;
-        [[nodiscard]] TetrahedronQueryType ToTetrahedron(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const;
-        [[nodiscard]] CircumsphereQueryType ToCircumsphere(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const;
+        NODISCARD PlaneQueryType ToPlane(const QueryRationalVector& rationalTest, int v0, int v1, int v2) const;
+        NODISCARD TetrahedronQueryType ToTetrahedron(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const;
+        NODISCARD CircumsphereQueryType ToCircumsphere(const QueryRationalVector& rationalTest, int v0, int v1, int v2, int v3) const;
 
     private:
         // 缓存输入的有理数表示。浮点数的对有理数形式的转化是缓慢的， 所以最好是跟踪哪些值已转换。
-        Container m_RationalVertices;
+        Container rationalVertices;
     };
 
-    using FloatQuery3Rational = Query3Rational<float>;
-    using DoubleQuery3Rational = Query3Rational<double>;
+    using Query3RationalF = Query3Rational<float>;
+    using Query3RationalD = Query3Rational<double>;
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY3_RATIONAL_H

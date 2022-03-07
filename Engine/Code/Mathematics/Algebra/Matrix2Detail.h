@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 11:39)
+///	引擎版本：0.8.0.2 (2022/02/07 16:11)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
 #define MATHEMATICS_ALGEBRA_MATRIX2_DETAIL_H
@@ -23,14 +23,16 @@ template <typename Real>
 template <int Row, int Column>
 Real Mathematics::Matrix2<Real>::GetValue() const noexcept
 {
-    static_assert(0 <= Row && Row < sm_VectorSize);
-    static_assert(0 <= Column && Column < Vector2D::sm_PointSize);
+    static_assert(0 <= Row && Row < vectorSize);
+    static_assert(0 <= Column && Column < Vector2::pointSize);
 
     const auto& vector = GetVector<Row>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
+
     const auto function = GetVectorGetFunction<Column>();
+
 #include STSTEM_WARNING_POP
 
     return (vector.*function)();
@@ -40,14 +42,16 @@ template <typename Real>
 template <int Row, int Column>
 void Mathematics::Matrix2<Real>::SetValue(Real value) noexcept
 {
-    static_assert(0 <= Row && Row < sm_VectorSize);
-    static_assert(0 <= Column && Column < Vector2D::sm_PointSize);
+    static_assert(0 <= Row && Row < vectorSize);
+    static_assert(0 <= Column && Column < Vector2::pointSize);
 
     auto& vector = GetVector<Row>();
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
+
     const auto function = GetVectorSetFunction<Column>();
+
 #include STSTEM_WARNING_POP
 
     (vector.*function)(value);
@@ -55,51 +59,51 @@ void Mathematics::Matrix2<Real>::SetValue(Real value) noexcept
 
 template <typename Real>
 template <int Row>
-const Mathematics::Vector2D<Real>& Mathematics::Matrix2<Real>::GetVector() const noexcept
+const Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() const noexcept
 {
-    static_assert(0 <= Row && Row < sm_VectorSize);
+    static_assert(0 <= Row && Row < vectorSize);
 
-    if constexpr (Row == sm_X)
+    if constexpr (Row == xIndex)
         return m_X;
-    else  
+    else
         return m_Y;
 }
 
 template <typename Real>
 template <int Row>
-Mathematics::Vector2D<Real>& Mathematics::Matrix2<Real>::GetVector() noexcept
+Mathematics::Vector2<Real>& Mathematics::Matrix2<Real>::GetVector() noexcept
 {
-    static_assert(0 <= Row && Row < sm_VectorSize);
+    static_assert(0 <= Row && Row < vectorSize);
 
-    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector2D&, GetVector<Row>);
+    return NON_CONST_MEMBER_CALL_CONST_MEMBER(Vector2&, GetVector<Row>);
 }
 
 template <typename Real>
 template <int Column>
-typename Mathematics::Vector2D<Real>::GetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorGetFunction() const noexcept
+typename Mathematics::Vector2<Real>::GetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorGetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector2D::sm_PointSize);
+    static_assert(0 <= Column && Column < Vector2::pointSize);
 
-    if constexpr (Column == Vector2D::sm_X)
-        return &Vector2D::GetX;
+    if constexpr (Column == Vector2::xIndex)
+        return &Vector2::GetX;
     else
-        return &Vector2D::GetY;
+        return &Vector2::GetY;
 }
 
 template <typename Real>
 template <int Column>
-typename Mathematics::Vector2D<Real>::SetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorSetFunction() const noexcept
+typename Mathematics::Vector2<Real>::SetCoordinateFunction Mathematics::Matrix2<Real>::GetVectorSetFunction() const noexcept
 {
-    static_assert(0 <= Column && Column < Vector2D::sm_PointSize);
+    static_assert(0 <= Column && Column < Vector2::pointSize);
 
-    if constexpr (Column == Vector2D::sm_X)
-        return &Vector2D::SetX;
+    if constexpr (Column == Vector2::xIndex)
+        return &Vector2::SetX;
     else
-        return &Vector2D::SetY;
+        return &Vector2::SetY;
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::operator*(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
+Mathematics::Matrix2<Real> Mathematics::operator*(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // A * B
     return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<0, 1>() * rhs.GetValue<1, 0>(),
@@ -109,19 +113,19 @@ const Mathematics::Matrix2<Real> Mathematics::operator*(const Matrix2<Real>& lhs
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::operator*(const Matrix2<Real>& matrix, const Vector2D<Real>& vector) noexcept
+Mathematics::Vector2<Real> Mathematics::operator*(const Matrix2<Real>& matrix, const Vector2<Real>& vector) noexcept
 {
-    return Vector2D<Real>{ matrix.GetValue<0, 0>() * vector.GetX() + matrix.GetValue<0, 1>() * vector.GetY(), matrix.GetValue<1, 0>() * vector.GetX() + matrix.GetValue<1, 1>() * vector.GetY() };
+    return Vector2<Real>{ matrix.GetValue<0, 0>() * vector.GetX() + matrix.GetValue<0, 1>() * vector.GetY(), matrix.GetValue<1, 0>() * vector.GetX() + matrix.GetValue<1, 1>() * vector.GetY() };
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real> Mathematics::operator*(const Vector2D<Real>& vector, const Matrix2<Real>& matrix) noexcept
+Mathematics::Vector2<Real> Mathematics::operator*(const Vector2<Real>& vector, const Matrix2<Real>& matrix) noexcept
 {
-    return Vector2D<Real>{ vector.GetX() * matrix.GetValue<0, 0>() + vector.GetY() * matrix.GetValue<1, 0>(), vector.GetX() * matrix.GetValue<0, 1>() + vector.GetY() * matrix.GetValue<1, 1>() };
+    return Vector2<Real>{ vector.GetX() * matrix.GetValue<0, 0>() + vector.GetY() * matrix.GetValue<1, 0>(), vector.GetX() * matrix.GetValue<0, 1>() + vector.GetY() * matrix.GetValue<1, 1>() };
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::TransposeTimes(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
+Mathematics::Matrix2<Real> Mathematics::TransposeTimes(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // lhs^T * rhs
     return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<1, 0>() * rhs.GetValue<1, 0>(),
@@ -131,7 +135,7 @@ const Mathematics::Matrix2<Real> Mathematics::TransposeTimes(const Matrix2<Real>
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::TimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
+Mathematics::Matrix2<Real> Mathematics::TimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // lhs * rhs^T
     return Matrix2<Real>{ lhs.GetValue<0, 0>() * rhs.GetValue<0, 0>() + lhs.GetValue<0, 1>() * rhs.GetValue<0, 1>(),
@@ -141,7 +145,7 @@ const Mathematics::Matrix2<Real> Mathematics::TimesTranspose(const Matrix2<Real>
 }
 
 template <typename Real>
-const Mathematics::Matrix2<Real> Mathematics::TransposeTimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
+Mathematics::Matrix2<Real> Mathematics::TransposeTimesTranspose(const Matrix2<Real>& lhs, const Matrix2<Real>& rhs) noexcept
 {
     // lhs^T * rhs^T
 

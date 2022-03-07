@@ -29,9 +29,9 @@ namespace Network
 
 		MessageBufferSharedPtr CreateAddMessageBuffer(ParserStrategy parserStrategy) const;
 		MessageBufferSharedPtr CreateSendMessageBuffer(int testLoopCount, ParserStrategy parserStrategy) const;
-		void AddBufferLength(MessageBufferSharedPtr& messageBuffer);
+		void AddBufferLength(MessageBuffer& messageBuffer);
 
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 
 	private:
 		static constexpr int64_t sm_MessageID{ 6 };

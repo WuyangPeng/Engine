@@ -27,7 +27,7 @@ namespace Mathematics
 		void EndIntervalTest();
 		void IterationIntervalTest();
 
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

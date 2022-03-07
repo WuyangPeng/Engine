@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/02 16:17)
+///	引擎版本：0.8.0.1 (2022/01/09 1:46)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -26,13 +26,19 @@ bool CoreTools::Endian::IsLittleEndian() noexcept(g_Assert < 0 || g_CoreToolsAss
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
     static const auto isLittleEndian = (*reinterpret_cast<const char*>(&one) != 0);
+
 #include STSTEM_WARNING_POP
 
 #ifdef SYSTEM_LITTLE_ENDIAN
+
     CORE_TOOLS_ASSERTION_0(isLittleEndian, "这不是一个小端机器！");
+
 #elif SYSTEM_BIG_ENDIAN
+
     CORE_TOOLS_ASSERTION_0(!isLittleEndian, "这不是一个大端机器！");
+
 #endif  // SYSTEM_LITTLE_ENDIAN
 
     return isLittleEndian;

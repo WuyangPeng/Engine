@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/06 18:28)
+///	引擎版本：0.8.0.2 (2022/02/07 16:54)
 
 #ifndef MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_H
 #define MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_H
@@ -34,17 +34,17 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Matrix3 GetRotation() const noexcept;
-        [[nodiscard]] const Matrix3 GetDiagonal() const noexcept;
+        NODISCARD Matrix3 GetRotation() const noexcept;
+        NODISCARD Matrix3 GetDiagonal() const noexcept;
 
     private:
-        Matrix3 m_Rotation;
-        Matrix3 m_Diagonal;
-        Real m_Epsilon;
+        Matrix3 rotation;
+        Matrix3 diagonal;
+        Real epsilon;
     };
 
-    using FloatMatrix3EigenDecomposition = Matrix3EigenDecomposition<float>;
-    using DoubleMatrix3EigenDecomposition = Matrix3EigenDecomposition<double>;
+    using Matrix3EigenDecompositionF = Matrix3EigenDecomposition<float>;
+    using Matrix3EigenDecompositionD = Matrix3EigenDecomposition<double>;
 }
 
 #endif  // MATHEMATICS_ALGEBRA_MATRIX3_EIGEN_DECOMPOSITION_H

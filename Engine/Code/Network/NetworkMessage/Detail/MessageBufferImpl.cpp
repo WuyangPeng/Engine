@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 11:58)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 19:29)
 
 #include "Network/NetworkExport.h"
 
@@ -22,35 +22,37 @@
 #include "Network/NetworkMessage/MessageInterface.h"
 
 Network::MessageBufferImpl::MessageBufferImpl(ParserStrategy parserStrategy) noexcept
-    : m_CurrentReadIndex{ 0 }, m_CurrentWriteIndex{ 0 }, m_ReceiveCount{ -1 }, m_ParserStrategy{ parserStrategy }
+    : currentReadIndex{ 0 }, currentWriteIndex{ 0 }, m_ReceiveCount{ -1 }, parserStrategy{ parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageBufferImpl::MessageBufferImpl(const MessageBufferImpl& rhs) noexcept
-    : m_CurrentReadIndex{ rhs.m_CurrentReadIndex.operator int() }, m_CurrentWriteIndex{ rhs.m_CurrentWriteIndex.operator int() },
-      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() }, m_ParserStrategy{ rhs.m_ParserStrategy }
+    : currentReadIndex{ rhs.currentReadIndex.operator int() },
+      currentWriteIndex{ rhs.currentWriteIndex.operator int() },
+      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() },
+      parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
 Network::MessageBufferImpl::MessageBufferImpl(MessageBufferImpl&& rhs) noexcept
-    : m_CurrentReadIndex{ rhs.m_CurrentReadIndex.operator int() }, m_CurrentWriteIndex{ rhs.m_CurrentWriteIndex.operator int() },
-      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() }, m_ParserStrategy{ rhs.m_ParserStrategy }
+    : currentReadIndex{ rhs.currentReadIndex.operator int() },
+      currentWriteIndex{ rhs.currentWriteIndex.operator int() },
+      m_ReceiveCount{ rhs.m_ReceiveCount.operator int() },
+      parserStrategy{ rhs.parserStrategy }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26456)
 Network::MessageBufferImpl& Network::MessageBufferImpl::operator=(const MessageBufferImpl& rhs) noexcept
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_CurrentReadIndex = rhs.m_CurrentReadIndex.operator int();
-    m_CurrentWriteIndex = rhs.m_CurrentWriteIndex.operator int();
+    currentReadIndex = rhs.currentReadIndex.operator int();
+    currentWriteIndex = rhs.currentWriteIndex.operator int();
     m_ReceiveCount = rhs.m_ReceiveCount.operator int();
-    m_ParserStrategy = rhs.m_ParserStrategy;
+    parserStrategy = rhs.parserStrategy;
 
     return *this;
 }
@@ -59,53 +61,54 @@ Network::MessageBufferImpl& Network::MessageBufferImpl::operator=(MessageBufferI
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_CurrentReadIndex = rhs.m_CurrentReadIndex.operator int();
-    m_CurrentWriteIndex = rhs.m_CurrentWriteIndex.operator int();
+    currentReadIndex = rhs.currentReadIndex.operator int();
+    currentWriteIndex = rhs.currentWriteIndex.operator int();
     m_ReceiveCount = rhs.m_ReceiveCount.operator int();
-    m_ParserStrategy = rhs.m_ParserStrategy;
+    parserStrategy = rhs.parserStrategy;
 
     return *this;
 }
-#include STSTEM_WARNING_POP
 
 #ifdef OPEN_CLASS_INVARIANT
+
 bool Network::MessageBufferImpl::IsValid() const noexcept
 {
-    if (0 <= m_CurrentReadIndex && m_CurrentReadIndex <= m_CurrentWriteIndex)
+    if (0 <= currentReadIndex && currentReadIndex <= currentWriteIndex)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 int Network::MessageBufferImpl::GetCurrentReadIndex() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_CurrentReadIndex;
+    return currentReadIndex;
 }
 
 int Network::MessageBufferImpl::GetRemainingReadCount() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_CurrentWriteIndex - m_CurrentReadIndex;
+    return currentWriteIndex - currentReadIndex;
 }
 
 void Network::MessageBufferImpl::ClearCurrentReadIndex() noexcept
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    m_CurrentReadIndex = 0;
+    currentReadIndex = 0;
 }
 
 void Network::MessageBufferImpl::AddCurrentReadIndex(int stepping)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    if (m_CurrentReadIndex + stepping <= m_CurrentWriteIndex)
+    if (currentReadIndex + stepping <= currentWriteIndex)
     {
-        m_CurrentReadIndex += stepping;
+        currentReadIndex += stepping;
     }
     else
     {
@@ -117,7 +120,7 @@ int Network::MessageBufferImpl::GetCurrentWriteIndex() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_CurrentWriteIndex;
+    return currentWriteIndex;
 }
 
 void Network::MessageBufferImpl::ClearCurrentWriteIndex() noexcept
@@ -125,23 +128,23 @@ void Network::MessageBufferImpl::ClearCurrentWriteIndex() noexcept
     NETWORK_CLASS_IS_VALID_1;
 
     ClearCurrentReadIndex();
-    m_CurrentWriteIndex = 0;
+    currentWriteIndex = 0;
 }
 
 int Network::MessageBufferImpl::GetRemainingWriteCount() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return GetSize() - m_CurrentWriteIndex;
+    return GetSize() - currentWriteIndex;
 }
 
 void Network::MessageBufferImpl::AddCurrentWriteIndex(int stepping)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    if (m_CurrentWriteIndex + stepping < GetSize())
+    if (currentWriteIndex + stepping < GetSize())
     {
-        m_CurrentWriteIndex += stepping;
+        currentWriteIndex += stepping;
     }
     else
     {
@@ -152,11 +155,13 @@ void Network::MessageBufferImpl::AddCurrentWriteIndex(int stepping)
 const char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
-    NETWORK_ASSERTION_0(m_CurrentReadIndex < GetSize(), "索引越界");
+    NETWORK_ASSERTION_0(currentReadIndex < GetSize(), "索引越界");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-    return GetInitialBufferedPtr() + m_CurrentReadIndex;
+
+    return GetInitialBufferedPtr() + currentReadIndex;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -170,11 +175,13 @@ char* Network::MessageBufferImpl::GetCurrentReadBufferedPtr()
 const char* Network::MessageBufferImpl::GetCurrentWriteBufferedPtr() const
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
-    NETWORK_ASSERTION_0(m_CurrentWriteIndex < GetSize(), "索引越界");
+    NETWORK_ASSERTION_0(currentWriteIndex < GetSize(), "索引越界");
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-    return GetInitialBufferedPtr() + m_CurrentWriteIndex;
+
+    return GetInitialBufferedPtr() + currentWriteIndex;
+
 #include STSTEM_WARNING_POP
 }
 
@@ -203,7 +210,7 @@ void Network::MessageBufferImpl::SetReceiveCount(int receiveCount)
     {
         m_ReceiveCount = receiveCount;
     }
-    else if (m_CurrentWriteIndex + m_ReceiveCount <= GetSize())
+    else if (currentWriteIndex + m_ReceiveCount <= GetSize())
     {
         m_ReceiveCount = receiveCount;
     }
@@ -250,7 +257,9 @@ int Network::MessageBufferImpl::GetMessageLength() const
     {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26490)
+
         auto totalLength = *reinterpret_cast<const int32_t*>(GetInitialBufferedPtr());
+
 #include STSTEM_WARNING_POP
 
         // 处理字节序问题
@@ -384,8 +393,8 @@ void Network::MessageBufferImpl::Write(int itemSize, int itemsNumber, const void
 
 bool Network::MessageBufferImpl::IsNeedSwap() const
 {
-    if (CoreTools::Endian::IsLittleEndian() && m_ParserStrategy != ParserStrategy::LittleEndian ||
-        CoreTools::Endian::IsBigEndian() && m_ParserStrategy != ParserStrategy::BigEndian)
+    if (CoreTools::Endian::IsLittleEndian() && parserStrategy != ParserStrategy::LittleEndian ||
+        CoreTools::Endian::IsBigEndian() && parserStrategy != ParserStrategy::BigEndian)
     {
         return true;
     }
@@ -395,20 +404,18 @@ bool Network::MessageBufferImpl::IsNeedSwap() const
     }
 }
 
-void Network::MessageBufferImpl ::PushBack(const ConstImplPtr& messageBuffer)
+void Network::MessageBufferImpl ::PushBack(const MessageBufferImpl& messageBuffer)
 {
     NETWORK_CLASS_IS_VALID_1;
 
-    auto process = messageBuffer;
-
-    const auto writeIndex = process->GetCurrentWriteIndex();
+    const auto writeIndex = messageBuffer.GetCurrentWriteIndex();
 
     if (GetSize() < GetCurrentWriteIndex() + writeIndex)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("缓冲区大小不足！"s));
     }
 
-    System::MemoryCopy(GetCurrentWriteBufferedPtr(), process->GetInitialBufferedPtr(), writeIndex);
+    System::MemoryCopy(GetCurrentWriteBufferedPtr(), messageBuffer.GetInitialBufferedPtr(), writeIndex);
 
     AddCurrentWriteIndex(writeIndex);
 }
@@ -417,5 +424,5 @@ Network::ParserStrategy Network::MessageBufferImpl::GetParserStrategy() const no
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return m_ParserStrategy;
+    return parserStrategy;
 }

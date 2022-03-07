@@ -1,18 +1,18 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/16 18:35)
+///	引擎版本：0.8.0.2 (2022/02/10 16:07)
 
 #ifndef MATHEMATICS_OBJECTS3D_FRUSTUM3_H
 #define MATHEMATICS_OBJECTS3D_FRUSTUM3_H
 
 #include "Mathematics/MathematicsDll.h"
 
-#include "Mathematics/Algebra/Vector3D.h"
+#include "Mathematics/Algebra/Vector3.h"
 #include "Mathematics/Base/MathDetail.h"
 
 #include <type_traits>
@@ -28,8 +28,8 @@ namespace Mathematics
 
         using ClassType = Frustum3<Real>;
         using Math = Math<Real>;
-        using Vector3D = Vector3D<Real>;
-        using VerticesType = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using VerticesType = std::vector<Vector3>;
 
     public:
         // 正交视锥体。
@@ -40,28 +40,35 @@ namespace Mathematics
         // 其中|s0| =|s1| = 1（四个选项）。
         // 四个角的远平面的截锥是 E + f * D + (f / n) * (s0 * u * U + s1 * r * Real)，
         // 其中|s0| = |s1| = 1（四项选择）
-        Frustum3(const Vector3D& origin, const Vector3D& directionVector, const Vector3D& upVector, const Vector3D& rightVector, Real directionMin,
-                 Real directionMax, Real upBound, Real rightBound, const Real epsilon = Math::GetZeroTolerance()) noexcept;
+        Frustum3(const Vector3& origin,
+                 const Vector3& directionVector,
+                 const Vector3& upVector,
+                 const Vector3& rightVector,
+                 Real directionMin,
+                 Real directionMax,
+                 Real upBound,
+                 Real rightBound,
+                 const Real epsilon = Math::GetZeroTolerance()) noexcept;
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetOrigin() const noexcept;
-        [[nodiscard]] const Vector3D GetDirectionVector() const noexcept;
-        [[nodiscard]] const Vector3D GetUpVector() const noexcept;
-        [[nodiscard]] const Vector3D GetRightVector() const noexcept;
-        [[nodiscard]] Real GetDirectionMin() const noexcept;
-        [[nodiscard]] Real GetDirectionMax() const noexcept;
-        [[nodiscard]] Real GetUpBound() const noexcept;
-        [[nodiscard]] Real GetRightBound() const noexcept;
+        NODISCARD Vector3 GetOrigin() const noexcept;
+        NODISCARD Vector3 GetDirectionVector() const noexcept;
+        NODISCARD Vector3 GetUpVector() const noexcept;
+        NODISCARD Vector3 GetRightVector() const noexcept;
+        NODISCARD Real GetDirectionMin() const noexcept;
+        NODISCARD Real GetDirectionMax() const noexcept;
+        NODISCARD Real GetUpBound() const noexcept;
+        NODISCARD Real GetRightBound() const noexcept;
 
-        [[nodiscard]] Real GetDirectionRatio() const noexcept;
-        [[nodiscard]] Real GetMTwoUF() const noexcept;
-        [[nodiscard]] Real GetMTwoRF() const noexcept;
+        NODISCARD Real GetDirectionRatio() const noexcept;
+        NODISCARD Real GetMTwoUF() const noexcept;
+        NODISCARD Real GetMTwoRF() const noexcept;
 
         // 返回8个顶点
-        [[nodiscard]] const VerticesType ComputeVertices() const;
+        NODISCARD VerticesType ComputeVertices() const;
 
-        [[nodiscard]] const Frustum3 GetMove(Real t, const Vector3D& velocity) const;
+        NODISCARD Frustum3 GetMove(Real t, const Vector3& velocity) const;
 
     private:
         // Update()函数必须被调用在更改了m_DirectionMin，m_DirectionMax，m_UpBound或m_RightBound时。
@@ -69,25 +76,25 @@ namespace Mathematics
         void Update() noexcept;
 
     private:
-        Vector3D m_Origin;
-        Vector3D m_DirectionVector;
-        Vector3D m_UpVector;
-        Vector3D m_RightVector;
-        Real m_DirectionMin;
-        Real m_DirectionMax;
-        Real m_UpBound;
-        Real m_RightBound;
+        Vector3 origin;
+        Vector3 directionVector;
+        Vector3 upVector;
+        Vector3 rightVector;
+        Real directionMin;
+        Real directionMax;
+        Real upBound;
+        Real rightBound;
 
         // 数值从构造函数的输入得到的。
-        Real m_DirectionRatio;
-        Real m_MTwoUF;
-        Real m_MTwoRF;
+        Real directionRatio;
+        Real mTwoUF;
+        Real mTwoRF;
 
-        Real m_Epsilon;
+        Real epsilon;
     };
 
-    using FloatFrustum3 = Frustum3<float>;
-    using DoubleFrustum3 = Frustum3<double>;
+    using Frustum3F = Frustum3<float>;
+    using Frustum3D = Frustum3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_FRUSTUM3_H

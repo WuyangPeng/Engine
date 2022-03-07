@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 11:13)
+///	引擎版本：0.8.0.2 (2022/02/11 17:14)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR3_H
@@ -37,43 +37,43 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Rational GetX() const;
+        NODISCARD Rational GetX() const;
         void SetX(const Rational& x);
-        [[nodiscard]] const Rational GetY() const;
+        NODISCARD Rational GetY() const;
         void SetY(const Rational& y);
-        [[nodiscard]] const Rational GetZ() const;
+        NODISCARD Rational GetZ() const;
         void SetZ(const Rational& z);
 
-        [[nodiscard]] const RationalVector3 operator-() const;
+        NODISCARD RationalVector3 operator-() const;
 
         RationalVector3& operator+=(const RationalVector3& rhs);
         RationalVector3& operator-=(const RationalVector3& rhs);
         RationalVector3& operator*=(const Rational& rational);
         RationalVector3& operator/=(const Rational& rational);
 
-        [[nodiscard]] const Rational SquaredLength() const;
+        NODISCARD Rational SquaredLength() const;
 
     private:
-        RationalVector m_Tuple;
+        RationalVector tuple;
     };
 
     // 返回 Dot(lhs,rhs).
     template <int IntSize>
-    [[nodiscard]] const SignRational<IntSize> Dot(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
+    NODISCARD SignRational<IntSize> Dot(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
     // 返回 Cross(lhs,rhs).
     template <int IntSize>
-    [[nodiscard]] const RationalVector3<IntSize> Cross(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
+    NODISCARD RationalVector3<IntSize> Cross(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
     // 返回 Dot(lhs,Cross(mhs,rhs)).
     template <int IntSize>
-    [[nodiscard]] const SignRational<IntSize> TripleScalar(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& mhs, const RationalVector3<IntSize>& rhs);
+    NODISCARD SignRational<IntSize> TripleScalar(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& mhs, const RationalVector3<IntSize>& rhs);
 
     template <int IntSize>
-    [[nodiscard]] bool operator==(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
+    NODISCARD bool operator==(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
     template <int IntSize>
-    [[nodiscard]] bool operator<(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
+    NODISCARD bool operator<(const RationalVector3<IntSize>& lhs, const RationalVector3<IntSize>& rhs);
 
     template <int IntSize>
     std::ostream& operator<<(std::ostream& os, const RationalVector3<IntSize>& rhs);

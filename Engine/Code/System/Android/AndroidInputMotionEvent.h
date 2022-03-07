@@ -19,7 +19,7 @@ namespace System
 {
     NODISCARD AndroidMotionEventAction SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetAction(const AndroidInputEvent* motionEvent) noexcept;
     NODISCARD AndroidMotionEvent SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetFlags(const AndroidInputEvent* motionEvent) noexcept;
-    NODISCARD AndroidMeta SYSTEM_DEFAULT_DECLARE AndroidndroidMotionEventGetMetaState(const AndroidInputEvent* motionEvent) noexcept;
+    NODISCARD AndroidMeta SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetMetaState(const AndroidInputEvent* motionEvent) noexcept;
     NODISCARD AndroidMotionEventButton SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetButtonState(const AndroidInputEvent* motionEvent) noexcept;
     NODISCARD AndroidMotionEventEdge SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetEdgeFlags(const AndroidInputEvent* motionEvent) noexcept;
     NODISCARD int64_t SYSTEM_DEFAULT_DECLARE AndroidMotionEventGetDownTime(const AndroidInputEvent* motionEvent) noexcept;

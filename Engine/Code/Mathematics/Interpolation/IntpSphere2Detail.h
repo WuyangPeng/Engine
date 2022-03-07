@@ -15,10 +15,10 @@ namespace Mathematics
     IntpSphere2<Real>::IntpSphere2(int quantity, Real* theta, Real* phi, Real* F, bool owner, QueryType queryType)
     {
         // Copy the input data.  The larger arrays are used to support wrap-around
-        // in the Delaunay triangulation for the interpolator.  The Vector2D<Real>
+        // in the Delaunay triangulation for the interpolator.  The Vector2<Real>
         // object V corresponds to (V.X(),V.Y()) = (theta,phi).
         int threeQuantity = 3 * quantity;
-        std::vector<Vector2D<Real>> wrapAngles(threeQuantity);
+        std::vector<Vector2<Real>> wrapAngles(threeQuantity);
         Real* wrapF = nullptr;  // NEW1<Real>(threeQuantity);
         for (int i = 0; i < quantity; ++i)
         {
@@ -86,7 +86,7 @@ namespace Mathematics
     template <typename Real>
     bool IntpSphere2<Real>::Evaluate(Real theta, Real phi, Real& F)
     {
-        Vector2D<Real> angles(theta, phi);
+        Vector2<Real> angles(theta, phi);
         Real thetaDeriv, phiDeriv;
         return mInterp->Evaluate(angles, F, thetaDeriv, phiDeriv);
     }

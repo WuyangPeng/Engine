@@ -1,8 +1,11 @@
-// Copyright (c) 2010-2020
-// Threading Core Render Engine
-// 作者：彭武阳，彭晔恩，彭晔泽
-//
-// 引擎版本：0.0.2.5 (2020/03/24 17:07)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.3 (2022/03/01 18:48)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_CAPSULE3_ACHIEVE_H
@@ -13,7 +16,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Capsule3<Real>::StaticFindIntersectorLine3Capsule3(const Line3& line, const Capsule3& capsule, const Real epsilon)
-    : ParentType{ epsilon }, m_Line{ line }, m_Capsule{ capsule }, m_Quantity{}, m_Point0{}, m_Point1{}
+    : ParentType{ epsilon }, line{ line }, capsule{ capsule }, quantity{}, point0{}, point1{}
 {
     Find();
 
@@ -21,6 +24,7 @@ Mathematics::StaticFindIntersectorLine3Capsule3<Real>::StaticFindIntersectorLine
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorLine3Capsule3<Real>::IsValid() const noexcept
 {
@@ -29,44 +33,45 @@ bool Mathematics::StaticFindIntersectorLine3Capsule3<Real>::IsValid() const noex
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetLine() const noexcept
+Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetCapsule() const noexcept
+Mathematics::Capsule3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetCapsule() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Capsule;
+    return capsule;
 }
 
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find()
 {
-    const auto findShared = Find(m_Line.GetOrigin(), m_Line.GetDirection(), m_Capsule);
-    m_Quantity = findShared.m_Quantity;
-    if (0 < m_Quantity)
+    const auto findShared = Find(line.GetOrigin(), line.GetDirection(), capsule);
+    quantity = findShared.quantity;
+    if (0 < quantity)
     {
-        m_Point0 = m_Line.GetOrigin() + findShared.m_Parameter0 * m_Line.GetDirection();
+        point0 = line.GetOrigin() + findShared.parameter0 * line.GetDirection();
     }
 
-    if (1 < m_Quantity)
+    if (1 < quantity)
     {
-        m_Point1 = m_Line.GetOrigin() + findShared.m_Parameter1 * m_Line.GetDirection();
+        point1 = line.GetOrigin() + findShared.parameter1 * line.GetDirection();
     }
 
-    if (m_Quantity == 2)
+    if (quantity == 2)
     {
         this->SetIntersectionType(IntersectionType::Segment);
     }
-    else if (m_Quantity == 1)
+    else if (quantity == 1)
     {
         this->SetIntersectionType(IntersectionType::Point);
     }
@@ -81,27 +86,27 @@ int Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetQuantity() const n
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Quantity;
+    return quantity;
 }
 
 template <typename Real>
-const Mathematics::Vector3D<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetPoint(int index) const
+Mathematics::Vector3<Real> Mathematics::StaticFindIntersectorLine3Capsule3<Real>::GetPoint(int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (index < m_Quantity)
+    if (index < quantity)
     {
         if (index == 0)
-            return m_Point0;
+            return point0;
         else if (index == 1)
-            return m_Point1;
+            return point1;
     }
 
     THROW_EXCEPTION(SYSTEM_TEXT("索引越界\n"s));
 }
 
 template <typename Real>
-typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3D& origin, const Vector3D& direction, const Capsule3& capsule)
+typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathematics::StaticFindIntersectorLine3Capsule3<Real>::Find(const Vector3& origin, const Vector3& direction, const Capsule3& capsule)
 {
     FindShared findShared{};
 
@@ -110,18 +115,18 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
     /// 组成胶囊减去其半球形端盖的有限圆柱体的z值|z| <= e，其中e是胶囊段的范围。
     /// 对于z > = e，上半球上限为x^2+y^2+(z-e)^2 = r^2；对于z <= -e，下半球上限为x^2+y^2+(z+e)^2 = r^2。
     const auto segmentDirection = capsule.GetSegment().GetDirection();
-    const auto vector3DOrthonormalBasis = Vector3DTools::GenerateComplementBasis(segmentDirection);
-    const auto uVector = vector3DOrthonormalBasis.GetUVector();
-    const auto vVector = vector3DOrthonormalBasis.GetVVector();
+    const auto Vector3OrthonormalBasis = Vector3Tools::GenerateComplementBasis(segmentDirection);
+    const auto uVector = Vector3OrthonormalBasis.GetUVector();
+    const auto vVector = Vector3OrthonormalBasis.GetVVector();
     auto radiusSqr = capsule.GetRadius() * capsule.GetRadius();
     auto extent = capsule.GetSegment().GetExtent();
 
     // 将输入线的原点转换为胶囊坐标。
     auto diff = origin - capsule.GetSegment().GetCenterPoint();
-    const Vector3D point{ Vector3DTools::DotProduct(uVector, diff), Vector3DTools::DotProduct(vVector, diff), Vector3DTools::DotProduct(segmentDirection, diff) };
+    const Vector3 point{ Vector3Tools::DotProduct(uVector, diff), Vector3Tools::DotProduct(vVector, diff), Vector3Tools::DotProduct(segmentDirection, diff) };
 
     // 获取线的单位长度方向在胶囊坐标中的z值。
-    auto directionDot = Vector3DTools::DotProduct(segmentDirection, direction);
+    auto directionDot = Vector3Tools::DotProduct(segmentDirection, direction);
     if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(directionDot))
     {
         // 该线平行于胶囊轴线。 确定该线是否与胶囊半球相交。
@@ -136,21 +141,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         auto zOffset = Math::Sqrt(radialSqrDist) + extent;
         if (Math::GetValue(0) < directionDot)
         {
-            findShared.m_Parameter0 = -point.GetZ() - zOffset;
-            findShared.m_Parameter1 = -point.GetZ() + zOffset;
+            findShared.parameter0 = -point.GetZ() - zOffset;
+            findShared.parameter1 = -point.GetZ() + zOffset;
         }
         else
         {
-            findShared.m_Parameter0 = point.GetZ() - zOffset;
-            findShared.m_Parameter1 = point.GetZ() + zOffset;
+            findShared.parameter0 = point.GetZ() - zOffset;
+            findShared.parameter1 = point.GetZ() + zOffset;
         }
 
-        findShared.m_Quantity = 2;
+        findShared.quantity = 2;
         return findShared;
     }
 
     // 将输入线单位长度方向转换为胶囊坐标。
-    const Vector3D dot{ Vector3DTools::DotProduct(uVector, direction), Vector3DTools::DotProduct(vVector, direction), directionDot };
+    const Vector3 dot{ Vector3Tools::DotProduct(uVector, direction), Vector3Tools::DotProduct(vVector, direction), directionDot };
 
     /// 测试线 P + t * D与无限圆柱x^2 + y^2 = r^2的交点。 这简化为计算二次方程式的根。
     /// 如果P = (px,py,pz)和 D = (dx,dy,dz)，则二次方程为
@@ -175,7 +180,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         auto zValue = point.GetZ() + tValue * dot.GetZ();
         if (Math::FAbs(zValue) <= extent)
         {
-            findShared.m_Parameter0 = tValue;
+            findShared.parameter0 = tValue;
             ++quantity;
         }
 
@@ -185,11 +190,11 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
         }
@@ -197,7 +202,7 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         if (quantity == 2)
         {
             // 线在两个地方与胶囊壁相交。
-            findShared.m_Quantity = 2;
+            findShared.quantity = 2;
             return findShared;
         }
     }
@@ -208,9 +213,9 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         auto zValue = point.GetZ() + tValue * dot.GetZ();
         if (Math::FAbs(zValue) <= extent)
         {
-            findShared.m_Parameter0 = tValue;
+            findShared.parameter0 = tValue;
 
-            findShared.m_Quantity = 1;
+            findShared.quantity = 1;
             return findShared;
         }
     }
@@ -230,21 +235,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
@@ -255,21 +260,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
@@ -282,21 +287,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
@@ -317,21 +322,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
@@ -342,21 +347,21 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
@@ -369,27 +374,28 @@ typename Mathematics::StaticFindIntersectorLine3Capsule3<Real>::FindShared Mathe
         {
             if (quantity == 0)
             {
-                findShared.m_Parameter0 = tValue;
+                findShared.parameter0 = tValue;
             }
             else
             {
-                findShared.m_Parameter1 = tValue;
+                findShared.parameter1 = tValue;
             }
             ++quantity;
             if (quantity == 2)
             {
-                if (findShared.m_Parameter1 < findShared.m_Parameter0)
+                if (findShared.parameter1 < findShared.parameter0)
                 {
-                    std::swap(findShared.m_Parameter0, findShared.m_Parameter1);
+                    std::swap(findShared.parameter0, findShared.parameter1);
                 }
 
-                findShared.m_Quantity = 2;
+                findShared.quantity = 2;
                 return findShared;
             }
         }
     }
 
-    findShared.m_Quantity = quantity;
+    findShared.quantity = quantity;
+
     return findShared;
 }
 

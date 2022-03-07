@@ -20,7 +20,7 @@ namespace Mathematics
 		void MainTest();
 		void MultiplicationTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
 	};
 }
 

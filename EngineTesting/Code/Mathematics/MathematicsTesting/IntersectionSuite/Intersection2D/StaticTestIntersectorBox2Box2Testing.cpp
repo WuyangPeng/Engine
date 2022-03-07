@@ -1,116 +1,112 @@
 // Copyright (c) 2011-2019
 // Threading Core Render Engine
 // ◊˜’ﬂ£∫≈ÌŒ‰—Ù£¨≈ÌÍ ∂˜£¨≈ÌÍ ‘Û
-// 
+//
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/30 18:52)
 
 #include "StaticTestIntersectorBox2Box2Testing.h"
-#include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorBox2Box2Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
+#include "Mathematics/Intersection/Intersection2D/StaticTestIntersectorBox2Box2Detail.h"
 
+#include "Mathematics/Algebra/Vector2Tools.h"
 #include <random>
-#include "Mathematics/Algebra/Vector2DTools.h"
-
 
 namespace Mathematics
 {
-	template class StaticTestIntersectorBox2Box2<float>;
-	template class StaticTestIntersectorBox2Box2<double>;
+    template class StaticTestIntersectorBox2Box2<float>;
+    template class StaticTestIntersectorBox2Box2<double>;
 }
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics, StaticTestIntersectorBox2Box2Testing)
 
-void Mathematics::StaticTestIntersectorBox2Box2Testing
-	::MainTest()
+void Mathematics::StaticTestIntersectorBox2Box2Testing ::MainTest()
 {
-	ASSERT_NOT_THROW_EXCEPTION_0(BoxTest); 
+    ASSERT_NOT_THROW_EXCEPTION_0(BoxTest);
 }
-
-void Mathematics::StaticTestIntersectorBox2Box2Testing
-	::BoxTest()
+#include SYSTEM_WARNING_DISABLE(26496)
+void Mathematics::StaticTestIntersectorBox2Box2Testing ::BoxTest()
 {
-	std::default_random_engine generator;
-	std::uniform_real<float> randomDistribution(-100.0f,100.0f);
+    std::default_random_engine generator;
+    std::uniform_real<float> randomDistribution(-100.0f, 100.0f);
 
-	const auto testLoopCount = GetTestLoopCount(); 
-	
-	for (auto loop = 0; loop < testLoopCount; ++loop)
-	{
-		FloatVector2D lhsCenter(randomDistribution(generator),
-			                randomDistribution(generator));		 
+    const auto testLoopCount = GetTestLoopCount();
 
-		FloatVector2D rhsCenter(randomDistribution(generator),
-			                randomDistribution(generator));
+    for (auto loop = 0; loop < testLoopCount; ++loop)
+    {
+        Vector2F lhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-		FloatVector2D lhsFirstAxis(randomDistribution(generator),
-			                   randomDistribution(generator));		 
+        Vector2F rhsCenter(randomDistribution(generator),
+                           randomDistribution(generator));
 
-		FloatVector2D rhsFirstAxis(randomDistribution(generator),
-			                   randomDistribution(generator));
+        Vector2F lhsFirstAxis(randomDistribution(generator),
+                              randomDistribution(generator));
 
-		lhsFirstAxis.Normalize();
-		rhsFirstAxis.Normalize();
+        Vector2F rhsFirstAxis(randomDistribution(generator),
+                              randomDistribution(generator));
 
-		float lhsFirstExtent = FloatMath::FAbs(randomDistribution(generator));
-		float rhsFirstExtent = FloatMath::FAbs(randomDistribution(generator));
+        lhsFirstAxis.Normalize();
+        rhsFirstAxis.Normalize();
 
-		FloatVector2D lhsSecondAxis(randomDistribution(generator),
-			                    randomDistribution(generator));		 
+        float lhsFirstExtent = MathF::FAbs(randomDistribution(generator));
+        float rhsFirstExtent = MathF::FAbs(randomDistribution(generator));
 
-		FloatVector2D rhsSecondAxis(randomDistribution(generator),
-			                    randomDistribution(generator));
+        Vector2F lhsSecondAxis(randomDistribution(generator),
+                               randomDistribution(generator));
 
-		lhsSecondAxis.Normalize();
-		rhsSecondAxis.Normalize();
+        Vector2F rhsSecondAxis(randomDistribution(generator),
+                               randomDistribution(generator));
 
-		float lhsSecondExtent = FloatMath::FAbs(randomDistribution(generator));
-		float rhsSecondExtent = FloatMath::FAbs(randomDistribution(generator));
+        lhsSecondAxis.Normalize();
+        rhsSecondAxis.Normalize();
 
-		FloatBox2 lhsBox(lhsCenter, lhsFirstAxis, lhsSecondAxis, lhsFirstExtent, lhsSecondExtent);
-		FloatBox2 rhsBox(rhsCenter,rhsFirstAxis, rhsSecondAxis, rhsFirstExtent, rhsSecondExtent);
+        float lhsSecondExtent = MathF::FAbs(randomDistribution(generator));
+        float rhsSecondExtent = MathF::FAbs(randomDistribution(generator));
 
-		FloatStaticTestIntersectorBox2Box2  intersector(lhsBox, rhsBox);
+        Box2F lhsBox(lhsCenter, lhsFirstAxis, lhsSecondAxis, lhsFirstExtent, lhsSecondExtent);
+        Box2F rhsBox(rhsCenter, rhsFirstAxis, rhsSecondAxis, rhsFirstExtent, rhsSecondExtent);
 
-		FloatVector2D boxCentersDifference = rhsCenter - lhsCenter;	 
-		 
-		float absA0DotB0 = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsFirstAxis, rhsFirstAxis));
-		float absA0DotB1 = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsFirstAxis, rhsSecondAxis));		 
-		float absADotD = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsFirstAxis,boxCentersDifference));
-	 
-		if (lhsFirstExtent + rhsFirstExtent * absA0DotB0 + rhsSecondExtent * absA0DotB1 < absADotD)
-		{
-			ASSERT_FALSE(intersector.IsIntersection());
-			continue;
-		}
+        StaticTestIntersectorBox2Box2<float> intersector(lhsBox, rhsBox);
 
-		float absA1DotB0 = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsSecondAxis, rhsFirstAxis));
-		float absA1DotB1 = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsSecondAxis, rhsSecondAxis));
-		absADotD = FloatMath::FAbs(FloatVector2DTools::DotProduct(lhsSecondAxis, boxCentersDifference));
+        Vector2F boxCentersDifference = rhsCenter - lhsCenter;
 
-		if (lhsSecondExtent + rhsFirstExtent * absA1DotB0 + rhsSecondExtent * absA1DotB1 < absADotD)
-		{
-			ASSERT_FALSE(intersector.IsIntersection());
-			continue;
-		}
+        float absA0DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsFirstAxis));
+        float absA0DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, rhsSecondAxis));
+        float absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(lhsFirstAxis, boxCentersDifference));
 
-		absADotD = FloatMath::FAbs(FloatVector2DTools::DotProduct(rhsFirstAxis, boxCentersDifference));
+        if (lhsFirstExtent + rhsFirstExtent * absA0DotB0 + rhsSecondExtent * absA0DotB1 < absADotD)
+        {
+            ASSERT_FALSE(intersector.IsIntersection());
+            continue;
+        }
 
-		if (rhsFirstExtent + lhsFirstExtent * absA0DotB0 + lhsSecondExtent * absA1DotB0 < absADotD)
-		{
-			ASSERT_FALSE(intersector.IsIntersection());
-			continue;
-		}
+        float absA1DotB0 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsFirstAxis));
+        float absA1DotB1 = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, rhsSecondAxis));
+        absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(lhsSecondAxis, boxCentersDifference));
 
-		absADotD = FloatMath::FAbs(FloatVector2DTools::DotProduct(rhsSecondAxis, boxCentersDifference));
+        if (lhsSecondExtent + rhsFirstExtent * absA1DotB0 + rhsSecondExtent * absA1DotB1 < absADotD)
+        {
+            ASSERT_FALSE(intersector.IsIntersection());
+            continue;
+        }
 
-		if (rhsSecondExtent + lhsFirstExtent * absA0DotB1 + lhsSecondExtent * absA1DotB1 < absADotD)
-		{
-			ASSERT_FALSE(intersector.IsIntersection());
-			continue;
-		}
+        absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(rhsFirstAxis, boxCentersDifference));
 
-		ASSERT_TRUE(intersector.IsIntersection());
-	}
+        if (rhsFirstExtent + lhsFirstExtent * absA0DotB0 + lhsSecondExtent * absA1DotB0 < absADotD)
+        {
+            ASSERT_FALSE(intersector.IsIntersection());
+            continue;
+        }
+
+        absADotD = MathF::FAbs(Vector2ToolsF::DotProduct(rhsSecondAxis, boxCentersDifference));
+
+        if (rhsSecondExtent + lhsFirstExtent * absA0DotB1 + lhsSecondExtent * absA1DotB1 < absADotD)
+        {
+            ASSERT_FALSE(intersector.IsIntersection());
+            continue;
+        }
+
+        ASSERT_TRUE(intersector.IsIntersection());
+    }
 }
- 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:22)
+///	引擎版本：0.8.0.2 (2022/02/11 15:59)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
 #define MATHEMATICS_RATIONAL_INTEGER_DIVISION_MULTIPLE_H
@@ -32,8 +32,8 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const IntegerData GetQuotient() const noexcept;
-        [[nodiscard]] const IntegerData GetRemainder() const noexcept;
+        NODISCARD IntegerData GetQuotient() const noexcept;
+        NODISCARD IntegerData GetRemainder() const noexcept;
 
     private:
         void Calculate();
@@ -42,22 +42,22 @@ namespace Mathematics
         void Calculate(int quotientInit);
 
     private:
-        static constexpr auto sm_Low = 0x0000FFFFu;
-        static constexpr auto sm_High = 0xFFFF0000u;
-        static constexpr auto sm_Carry = 0x00010000u;
+        static constexpr auto low = 0x0000FFFFu;
+        static constexpr auto high = 0xFFFF0000u;
+        static constexpr auto integerCarry = 0x00010000u;
 
-        const IntegerData& m_AbsNumerator;
-        const IntegerData& m_AbsDenominator;
-        IntegerData m_AdjustNumerator;
-        IntegerData m_AdjustDenominator;
-        int m_NumeratorInit;
-        int m_DenominatorInit;
-        int m_Adjust;
-        uint32_t m_FirstDigit;
-        uint32_t m_SecondDigit;
-        uint32_t m_RemainderHat;
-        IntegerData m_Quotient;
-        IntegerData m_Remainder;
+        const IntegerData& absNumerator;
+        const IntegerData& absDenominator;
+        IntegerData adjustNumerator;
+        IntegerData adjustDenominator;
+        int numeratorInit;
+        int denominatorInit;
+        int adjust;
+        uint32_t firstDigit;
+        uint32_t secondDigit;
+        uint32_t remainderHat;
+        IntegerData quotient;
+        IntegerData remainder;
     };
 }
 

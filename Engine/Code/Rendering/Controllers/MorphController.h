@@ -33,8 +33,8 @@ namespace Rendering
               MorphController(MorphController&& rhs) noexcept;
               MorphController& operator=(MorphController&& rhs) noexcept;
 		using ParentType = Controller;
-		using AVector = Mathematics::FloatAVector;
-		using APoint = Mathematics::FloatAPoint;
+		using AVector = Mathematics::AVectorF;
+		using APoint = Mathematics::APointF;
 
 	public:
 		// 顶点的数目，变形的目标，被固定对象的生存期的键。

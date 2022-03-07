@@ -1,60 +1,28 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:34)
 
 #include "Network/NetworkExport.h"
 
 #include "MultiMessageEventContainer.h"
 #include "MultiMessageEventContainerImpl.h"
 #include "PriorityMessageEventContainer.h"
+#include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "Network/NetworkMessage/Flags/MessageEventFlags.h"
 
-using std::make_shared;
+COPY_UNSHARED_CLONE_SELF_DEFINE(Network, MultiMessageEventContainer)
 
-Network::MultiMessageEventContainer::MultiMessageEventContainer([[maybe_unused]] CoreTools::DisableNotThrow disableNotThrow)
-    : ParentType{}, impl{ make_shared<ImplType>() }, m_Priority{ MessageEventPriority::Count }
+Network::MultiMessageEventContainer::MultiMessageEventContainer(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
+    : ParentType{}, impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }, m_Priority{ MessageEventPriority::Count }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::MultiMessageEventContainer::MultiMessageEventContainer(const MultiMessageEventContainer& rhs)
-    : ParentType{}, impl{ make_shared<ImplType>(*rhs.impl) }, m_Priority{ rhs.m_Priority }
-{
-    NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::MultiMessageEventContainer& Network::MultiMessageEventContainer::operator=(const MultiMessageEventContainer& rhs)
-{
-    NETWORK_CLASS_IS_VALID_1;
-
-    impl = make_shared<ImplType>(*rhs.impl);
-    m_Priority = rhs.m_Priority;
-
-    return *this;
-}
-
-Network::MultiMessageEventContainer::MultiMessageEventContainer(MultiMessageEventContainer&& rhs) noexcept
-    : ParentType{ std::move(rhs) }, impl{ std::move(rhs.impl) }, m_Priority{ rhs.m_Priority }
-{
-    NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::MultiMessageEventContainer& Network::MultiMessageEventContainer::operator=(MultiMessageEventContainer&& rhs) noexcept
-{
-    NETWORK_CLASS_IS_VALID_1;
-
-    ParentType::operator=(std::move(rhs));
-    impl = std::move(rhs.impl);
-    m_Priority = rhs.m_Priority;
-
-    return *this;
 }
 
 CLASS_INVARIANT_PARENT_IS_VALID_DEFINE(Network, MultiMessageEventContainer)
@@ -63,7 +31,7 @@ IMPL_NON_CONST_MEMBER_FUNCTION_DEFINE_1_CR_NOEXCEPT(Network, MultiMessageEventCo
 
 void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& smartPointer)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     m_Priority = MessageEventPriority::Middle;
 
@@ -72,7 +40,7 @@ void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventShared
 
 void Network::MultiMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& smartPointer, MessageEventPriority priority)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     m_Priority = priority;
 
@@ -83,7 +51,7 @@ Network::MultiMessageEventContainer::ImplPtr Network::MultiMessageEventContainer
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 
-    return make_shared<ClassType>(*this);
+    return std::make_shared<ClassType>(*this);
 }
 
 Network::MultiMessageEventContainer::ImplPtr Network::MultiMessageEventContainer::CloneToMultiMessage() const
@@ -119,7 +87,7 @@ bool Network::MultiMessageEventContainer::IsPrioritySame(MessageEventPriority pr
 
 void Network::MultiMessageEventContainer::OnEvent(uint64_t socketID, const ConstMessageInterfaceSharedPtr& message)
 {
-    ;
+    NETWORK_CLASS_IS_VALID_1;
 
     return impl->OnEvent(socketID, message);
 }

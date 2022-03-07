@@ -6,15 +6,15 @@
 
 #include "DistancePoint2Ray2Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
-#include "Mathematics/Algebra/Vector4DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
+#include "Mathematics/Algebra/Vector4ToolsDetail.h"
 #include "Mathematics/Distance/Distance2D/DistancePoint2Ray2Detail.h"
 
 #include <random>
 
 using std::swap;
-
+#include SYSTEM_WARNING_DISABLE(26496)
 namespace Mathematics
 {
 	template class DistancePoint2Ray2<float>;
@@ -43,17 +43,17 @@ void Mathematics::DistancePoint2Ray2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		FloatVector2D point(randomDistribution(generator), randomDistribution(generator));
+		Vector2F point(randomDistribution(generator), randomDistribution(generator));
 		
-		FloatVector2D rhsOrigin(randomDistribution(generator), randomDistribution(generator));
-		FloatVector2D rhsDirection(randomDistribution(generator), randomDistribution(generator));
+		Vector2F rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+		Vector2F rhsDirection(randomDistribution(generator), randomDistribution(generator));
 		rhsDirection.Normalize();
 
-		DistancePoint2Ray2<float> distance(point, FloatRay2(rhsOrigin, rhsDirection));
+		DistancePoint2Ray2<float> distance(point, Ray2F(rhsOrigin, rhsDirection));
 
 		ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-3f, 1e-8f);
 		ASSERT_EQUAL(distance.GetMaximumIterations(), 8);
-		ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::GetZeroTolerance(), 1e-8f);
+		ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::GetZeroTolerance(), 1e-8f);
 
 		distance.SetDifferenceStep(1e-4f);
 		ASSERT_APPROXIMATE(distance.GetDifferenceStep(), 1e-4f, 1e-8f);
@@ -61,11 +61,11 @@ void Mathematics::DistancePoint2Ray2Testing
 		distance.SetMaximumIterations(10);
 		ASSERT_EQUAL(distance.GetMaximumIterations(), 10);
 
-		distance.SetZeroThreshold(FloatMath::sm_Epsilon);
-		ASSERT_APPROXIMATE(distance.GetZeroThreshold(), FloatMath::sm_Epsilon, 1e-8f);
+		distance.SetZeroThreshold(MathF::epsilon);
+		ASSERT_APPROXIMATE(distance.GetZeroThreshold(), MathF::epsilon, 1e-8f);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(FloatVector2DTools::Approximate, distance.GetPoint(), point, 1e-8f);
-		ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, distance.GetRay(), FloatRay2(rhsOrigin, rhsDirection), 1e-8f);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsF::Approximate, distance.GetPoint(), point, 1e-8f);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Approximate<float>, distance.GetRay(), Ray2F(rhsOrigin, rhsDirection), 1e-8f);
 	}
 }
 
@@ -79,31 +79,31 @@ void Mathematics::DistancePoint2Ray2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D point(randomDistribution(generator), randomDistribution(generator));
+		Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-		DoubleVector2D rhsOrigin(randomDistribution(generator), randomDistribution(generator));
-		DoubleVector2D rhsDirection(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
 		rhsDirection.Normalize();
 
-		DoubleDistancePoint2Ray2 distance(point, DoubleRay2(rhsOrigin, rhsDirection));
+		DistancePoint2Ray2D distance(point, Ray2D(rhsOrigin, rhsDirection));
 			 
-		DoubleDistanceResult2 squaredResult = distance.GetSquared();
-		ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector2DTools::VectorMagnitudeSquared(point - squaredResult.GetRhsClosestPoint()), 1e-10);
+		DistanceResult2D squaredResult = distance.GetSquared();
+		ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector2ToolsD::GetLengthSquared(point - squaredResult.GetRhsClosestPoint()), 1e-10);
 		ASSERT_APPROXIMATE(squaredResult.GetContactTime(), 0.0, 1e-10);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, squaredResult.GetLhsClosestPoint(), point, 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), point, 1e-8);
 		
-		DoubleVector2D rhsDifference = rhsOrigin - squaredResult.GetRhsClosestPoint();
+		Vector2 rhsDifference = rhsOrigin - squaredResult.GetRhsClosestPoint();
 		if (!rhsDifference.IsZero())
 		{
 			rhsDifference.Normalize();
-			ASSERT_TRUE(DoubleVector2DTools::Approximate(rhsDifference, -rhsDirection, 1e-10));
+			ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10));
 		}		
 
-		DoubleDistanceResult2 result = distance.Get();
-		ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector2DTools::VectorMagnitude(point - squaredResult.GetRhsClosestPoint()), 1e-10);
+		DistanceResult2D result = distance.Get();
+		ASSERT_APPROXIMATE(result.GetDistance(), Vector2ToolsD::GetLength(point - squaredResult.GetRhsClosestPoint()), 1e-10);
 		ASSERT_APPROXIMATE(result.GetContactTime(), 0.0, 1e-10);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
 	}
 }
 
@@ -118,37 +118,37 @@ void Mathematics::DistancePoint2Ray2Testing
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
 
-		DoubleVector2D point(randomDistribution(generator), randomDistribution(generator));
+		Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-		DoubleVector2D rhsOrigin(randomDistribution(generator), randomDistribution(generator));
-		DoubleVector2D rhsDirection(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
 		rhsDirection.Normalize();
 
-		DoubleDistancePoint2Ray2 distance(point, DoubleRay2(rhsOrigin, rhsDirection));
+		DistancePoint2Ray2D distance(point, Ray2D(rhsOrigin, rhsDirection));
 
-		double t = DoubleMath::FAbs(randomDistribution(generator));
-		DoubleVector2D lhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		double t = MathD::FAbs(randomDistribution(generator));
+		Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		lhsVelocity.Normalize();
-		DoubleVector2D rhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		rhsVelocity.Normalize();
 
-		 DoubleDistanceResult2 squaredResult = distance.GetSquared(t,lhsVelocity,rhsVelocity);
-		ASSERT_APPROXIMATE(squaredResult.GetDistance(), DoubleVector2DTools::VectorMagnitudeSquared(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
+		 DistanceResult2D squaredResult = distance.GetSquared(t,lhsVelocity,rhsVelocity);
+		ASSERT_APPROXIMATE(squaredResult.GetDistance(), Vector2ToolsD::GetLengthSquared(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
 		ASSERT_APPROXIMATE(squaredResult.GetContactTime(), t, 1e-10);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, squaredResult.GetLhsClosestPoint(), point + t * lhsVelocity, 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(), point + t * lhsVelocity, 1e-8);
 		
-		DoubleVector2D rhsDifference = rhsOrigin + t * rhsVelocity - squaredResult.GetRhsClosestPoint();
+		Vector2 rhsDifference = rhsOrigin + t * rhsVelocity - squaredResult.GetRhsClosestPoint();
 		if (!rhsDifference.IsZero())
 		{
 			rhsDifference.Normalize();
-			ASSERT_TRUE(DoubleVector2DTools::Approximate(rhsDifference, -rhsDirection, 1e-10));
+			ASSERT_TRUE(Vector2ToolsD::Approximate(rhsDifference, -rhsDirection, 1e-10));
 		}
 
-		DoubleDistanceResult2 result = distance.Get(t,lhsVelocity,rhsVelocity);
-		ASSERT_APPROXIMATE(result.GetDistance(), DoubleVector2DTools::VectorMagnitude(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
+		DistanceResult2D result = distance.Get(t,lhsVelocity,rhsVelocity);
+		ASSERT_APPROXIMATE(result.GetDistance(), Vector2ToolsD::GetLength(point + t * lhsVelocity - squaredResult.GetRhsClosestPoint()), 1e-10);
 		ASSERT_APPROXIMATE(result.GetContactTime(), t, 1e-10);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, result.GetLhsClosestPoint(), squaredResult.GetLhsClosestPoint(), 1e-8);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetRhsClosestPoint(), result.GetRhsClosestPoint(), 1e-8);
 	
 	}
 }
@@ -163,22 +163,22 @@ void Mathematics::DistancePoint2Ray2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D point(randomDistribution(generator), randomDistribution(generator));
+		Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-		DoubleVector2D rhsOrigin(randomDistribution(generator), randomDistribution(generator));
-		DoubleVector2D rhsDirection(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
 		rhsDirection.Normalize();
 
-		DoubleDistancePoint2Ray2 distance(point, DoubleRay2(rhsOrigin, rhsDirection));
+		DistancePoint2Ray2D distance(point, Ray2D(rhsOrigin, rhsDirection));
 
-		double t = DoubleMath::FAbs(randomDistribution(generator));
-		DoubleVector2D lhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		double t = MathD::FAbs(randomDistribution(generator));
+		Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		lhsVelocity.Normalize();
-		DoubleVector2D rhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		rhsVelocity.Normalize();		
  
-		DoubleDistanceResult2 funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
-		DoubleDistanceResult2 funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+		DistanceResult2D funcPlus = distance.Get(t + distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
+		DistanceResult2D funcMinus = distance.Get(t - distance.GetDifferenceStep(), lhsVelocity, rhsVelocity);
 		double derivativeApproximation =
 			0.5 / distance.GetDifferenceStep() * (funcPlus.GetDistance() - funcMinus.GetDistance());
 
@@ -188,7 +188,7 @@ void Mathematics::DistancePoint2Ray2Testing
 
 		double squaredDerivativeResult = distance.GetDerivativeSquared(t, lhsVelocity, rhsVelocity);
 		
-		DoubleDistanceResult2 distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
+		DistanceResult2D distanceResult = distance.Get(t, lhsVelocity, rhsVelocity);
 		ASSERT_APPROXIMATE(squaredDerivativeResult, distanceResult.GetDistance() * derivativeApproximation * 2.0, 1e-10);
 	}
 }
@@ -203,42 +203,42 @@ void Mathematics::DistancePoint2Ray2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D point(randomDistribution(generator), randomDistribution(generator));
+		Vector2 point(randomDistribution(generator), randomDistribution(generator));
 
-		DoubleVector2D rhsOrigin(randomDistribution(generator), randomDistribution(generator));
-		DoubleVector2D rhsDirection(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsOrigin(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsDirection(randomDistribution(generator), randomDistribution(generator));
 		rhsDirection.Normalize();
 
-		DoubleDistancePoint2Ray2 distance(point, DoubleRay2(rhsOrigin, rhsDirection));
+		DistancePoint2Ray2D distance(point, Ray2D(rhsOrigin, rhsDirection));
 		distance.SetMaximumIterations(20);
 		distance.SetZeroThreshold(1e-6);
 
-		double tMin = DoubleMath::FAbs(randomDistribution(generator));
-		double tMax = DoubleMath::FAbs(randomDistribution(generator));
+		double tMin = MathD::FAbs(randomDistribution(generator));
+		double tMax = MathD::FAbs(randomDistribution(generator));
 		if (tMax < tMin)
 		{
 			swap(tMin, tMax);
 		}
 
-		DoubleVector2D lhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		Vector2 lhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		lhsVelocity.Normalize();
-		DoubleVector2D rhsVelocity(randomDistribution(generator), randomDistribution(generator));
+		Vector2 rhsVelocity(randomDistribution(generator), randomDistribution(generator));
 		rhsVelocity.Normalize();		
 
-		DoubleDistanceResult2 squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
-		DoubleDistanceResult2 result = distance.GetInterval(tMin,tMax, lhsVelocity, rhsVelocity);
+		DistanceResult2D squaredResult = distance.GetIntervalSquared(tMin, tMax, lhsVelocity, rhsVelocity);
+		DistanceResult2D result = distance.GetInterval(tMin,tMax, lhsVelocity, rhsVelocity);
 
-		ASSERT_APPROXIMATE(DoubleMath::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-4);
+		ASSERT_APPROXIMATE(MathD::Sqrt(squaredResult.GetDistance()), result.GetDistance(), 1e-4);
 		ASSERT_APPROXIMATE(squaredResult.GetContactTime(), result.GetContactTime(), 1e-1);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate, squaredResult.GetLhsClosestPoint(),
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate, squaredResult.GetLhsClosestPoint(),
 			                            result.GetLhsClosestPoint(),1e-1);
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate,squaredResult.GetRhsClosestPoint(),
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate,squaredResult.GetRhsClosestPoint(),
 			                            result.GetRhsClosestPoint(),1e-1);
 
 		for (double t = tMin; t < tMax; t += 0.1)
 		{
-			DoubleDistanceResult2 tResult = distance.Get(t, lhsVelocity, rhsVelocity);
-			DoubleDistanceResult2 tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
+			DistanceResult2D tResult = distance.Get(t, lhsVelocity, rhsVelocity);
+			DistanceResult2D tResultSquared = distance.GetSquared(t, lhsVelocity, rhsVelocity);
 
 			ASSERT_TRUE(result.GetDistance() <= tResult.GetDistance());		
 			ASSERT_TRUE(squaredResult.GetDistance() <= tResultSquared.GetDistance());

@@ -27,7 +27,7 @@ namespace Mathematics
 	class MinBox2
 	{
 	public:
-		MinBox2 (const std::vector<Vector2D<Real> >& points, Real epsilon, QueryType queryType, bool isConvexPolygon);
+		MinBox2 (const std::vector<Vector2<Real> >& points, Real epsilon, QueryType queryType, bool isConvexPolygon);
 		
 		operator Box2<Real> () const;
 		
@@ -35,8 +35,8 @@ namespace Mathematics
 		// Flags for the rotating calipers algorithm.
 		enum { F_NONE, F_LEFT, F_RIGHT, F_BOTTOM, F_TOP };
 		
-		void UpdateBox (const Vector2D<Real>& LPoint, const Vector2D<Real>& RPoint, const Vector2D<Real>& BPoint,
-                        const Vector2D<Real>& TPoint, const Vector2D<Real>& U, const Vector2D<Real>& V, Real& minAreaDiv4);
+		void UpdateBox (const Vector2<Real>& LPoint, const Vector2<Real>& RPoint, const Vector2<Real>& BPoint,
+                        const Vector2<Real>& TPoint, const Vector2<Real>& U, const Vector2<Real>& V, Real& minAreaDiv4);
 		
 		Box2<Real> mMinBox;
 	};

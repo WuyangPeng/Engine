@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/03 14:17)
+///	引擎版本：0.8.0.1 (2022/01/09 1:42)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -78,7 +78,9 @@ CoreTools::OFStreamManagerImpl::PosType CoreTools::OFStreamManagerImpl::GetOFStr
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26429)
 #include SYSTEM_WARNING_DISABLE(26492)
+
     auto thisImpl = const_cast<OFStreamManagerImpl*>(this);
+
 #include STSTEM_WARNING_POP
 
     OFStreamSeekManager manager{ thisImpl->oStream };
@@ -113,8 +115,10 @@ void CoreTools::OFStreamManagerImpl::SetSimplifiedChinese()
     CORE_TOOLS_CLASS_IS_VALID_1;
 
 #if !defined(TCRE_USE_GCC)
+
     locale chs{ "chs" };
 
     oStream.imbue(chs);
+
 #endif  // !defined(TCRE_USE_GCC)
 }

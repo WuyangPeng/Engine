@@ -9,7 +9,7 @@
 
 #include "SingleCurve2.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
 
 #include "Mathematics/NumericalAnalysis/RombergIntegralDetail.h"
 #include "System/Helper/PragmaWarning.h" 
@@ -131,6 +131,6 @@ Real Mathematics::SingleCurve2<Real>
     return t;
 }
 #include STSTEM_WARNING_POP
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
+#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_SINGLE_CURVE2_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_SINGLE_CURVE2_DETAIL_H

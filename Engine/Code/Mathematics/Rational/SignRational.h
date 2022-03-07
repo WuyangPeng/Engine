@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:50)
+///	引擎版本：0.8.0.2 (2022/02/11 16:37)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_H
 #define MATHEMATICS_RATIONAL_RATIONAL_H
@@ -29,9 +29,9 @@ namespace Mathematics
 
     public:
         // 默认有理数是0/1
-        SignRational();
+        SignRational() noexcept;
 
-        explicit SignRational(const Integer& numerator);
+        explicit SignRational(const Integer& numerator) noexcept;
         SignRational(const Integer& numerator, const Integer& denominator);
 
         // 构造转换。
@@ -44,11 +44,11 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         //成员访问
-        [[nodiscard]] const Integer GetNumerator() const noexcept;
-        [[nodiscard]] const Integer GetDenominator() const noexcept;
-        void Set(const Integer& numerator, const Integer& denominator);
+        NODISCARD Integer GetNumerator() const noexcept;
+        NODISCARD Integer GetDenominator() const noexcept;
+        void Set(const Integer& newNumerator, const Integer& newDenominator);
 
-        [[nodiscard]] const SignRational operator-() const;
+        NODISCARD SignRational operator-() const;
         SignRational& operator+=(const SignRational& rhs);
         SignRational& operator-=(const SignRational& rhs);
         SignRational& operator*=(const SignRational& rhs);
@@ -60,12 +60,12 @@ namespace Mathematics
         SignRational& operator/=(const Integer& rhs);
 
         template <typename T>
-        [[nodiscard]] T ConvertTo() const;
+        NODISCARD T ConvertTo() const;
 
         // 计算有理数的绝对值。
-        [[nodiscard]] const SignRational Abs() const;
+        NODISCARD SignRational Abs() const;
 
-        [[nodiscard]] NumericalValueSymbol GetSign() const noexcept;
+        NODISCARD NumericalValueSymbol GetSign() const noexcept;
 
     private:
         // 抵消分子和分母的任何2的乘幂。
@@ -76,21 +76,21 @@ namespace Mathematics
         void ConvertToRational(T value);
 
     private:
-        Integer m_Numerator;
-        Integer m_Denominator;
+        Integer numerator;
+        Integer denominator;
     };
 
     template <int N>
-    [[nodiscard]] const SignRational<N> operator-(const Integer<N>& integer, const SignRational<N>& rational);
+    NODISCARD SignRational<N> operator-(const Integer<N>& integer, const SignRational<N>& rational);
 
     template <int N>
-    [[nodiscard]] const SignRational<N> operator/(const Integer<N>& integer, const SignRational<N>& rational);
+    NODISCARD SignRational<N> operator/(const Integer<N>& integer, const SignRational<N>& rational);
 
     // 比较。
     template <int N>
-    [[nodiscard]] bool operator==(const SignRational<N>& lhs, const SignRational<N>& rhs);
+    NODISCARD bool operator==(const SignRational<N>& lhs, const SignRational<N>& rhs);
     template <int N>
-    [[nodiscard]] bool operator<(const SignRational<N>& lhs, const SignRational<N>& rhs);
+    NODISCARD bool operator<(const SignRational<N>& lhs, const SignRational<N>& rhs);
 
     template <int N>
     std::ostream& operator<<(std::ostream& os, const SignRational<N>& rational);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 17:55)
+///	引擎版本：0.8.0.2 (2022/01/31 3:36)
 
 #ifndef MATHEMATICS_ALGEBRA_POINT_ACHIEVE_H
 #define MATHEMATICS_ALGEBRA_POINT_ACHIEVE_H
@@ -25,7 +25,7 @@ bool Mathematics::HomogeneousPoint<T>::IsValid() const noexcept
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename T>
-const typename Mathematics::HomogeneousPoint<T>::ArrayType Mathematics::HomogeneousPoint<T>::GetCoordinate() const noexcept
+typename Mathematics::HomogeneousPoint<T>::ArrayType Mathematics::HomogeneousPoint<T>::GetCoordinate() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
@@ -37,15 +37,15 @@ const T& Mathematics::HomogeneousPoint<T>::operator[](int index) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_9;
 
-    switch (System::UnderlyingCastEnum<PointIndex>(index))
+    switch (index)
     {
-        case PointIndex::X:
+        case xIndex:
             return m_X;
-        case PointIndex::Y:
+        case yIndex:
             return m_Y;
-        case PointIndex::Z:
+        case zIndex:
             return m_Z;
-        case PointIndex::W:
+        case wIndex:
             return m_W;
         default:
             break;
@@ -136,10 +136,12 @@ void Mathematics::HomogeneousPoint<T>::Set(const ArrayType& coordinate) noexcept
 
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26446)
-    SetX(coordinate[sm_X]);
-    SetY(coordinate[sm_Y]);
-    SetZ(coordinate[sm_Z]);
-    SetW(coordinate[sm_W]);
+
+    SetX(coordinate[xIndex]);
+    SetY(coordinate[yIndex]);
+    SetZ(coordinate[zIndex]);
+    SetW(coordinate[wIndex]);
+
 #include STSTEM_WARNING_POP
 }
 

@@ -21,7 +21,7 @@ namespace Mathematics
 		void VariableMatrixTest();
 		void SparseMatrixTest();
 				
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 	};
 }
 

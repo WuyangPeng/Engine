@@ -27,7 +27,7 @@ namespace Mathematics
 		void HomogeneousPointTest();
 		void Invert3x3Test();
 		
-		virtual void DoRunUnitTest() override; 
+		void DoRunUnitTest() override; 
 	};
 }
 

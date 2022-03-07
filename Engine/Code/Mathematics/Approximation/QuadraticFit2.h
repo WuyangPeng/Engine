@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 10:50)
+///	引擎版本：0.8.0.2 (2022/02/17 18:00)
 
 #ifndef MATHEMATICS_APPROXIMATION_QUADRATIC_FIT2_H
 #define MATHEMATICS_APPROXIMATION_QUADRATIC_FIT2_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/VariableLengthVector.h"
-#include "Mathematics/Algebra/Vector2D.h"
+#include "Mathematics/Algebra/Vector2.h"
 
 namespace Mathematics
 {
@@ -30,8 +30,8 @@ namespace Mathematics
     //   要拟合点的数组。
     //
     // 输出:
-    //   m_Coeff = 二次拟合系数（特征向量）。
-    //   m_EigenValue = 是非负值，并且测量的拟合的规范形式
+    //   coeff = 二次拟合系数（特征向量）。
+    //   eigenValue = 是非负值，并且测量的拟合的规范形式
     //  （最小特征值;0 = 精确拟合，否则为正数）
 
     // 二次方程可以被分解为P^T A P + B^T P + K = 0，
@@ -45,13 +45,13 @@ namespace Mathematics
     // 特征值依赖于d_i的符号。
 
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE QuadraticFit2 final
+    class QuadraticFit2 final
     {
     public:
         using ClassType = QuadraticFit2<Real>;
-        using Vector2D = Vector2D<Real>;
+        using Vector2 = Vector2<Real>;
         using VariableLengthVector = VariableLengthVector<Real>;
-        using Points = std::vector<Vector2D>;
+        using Points = std::vector<Vector2>;
         using Math = Math<Real>;
 
     public:
@@ -59,22 +59,22 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const VariableLengthVector GetCoeff() const;
-        [[nodiscard]] Real GetEigenValue() const noexcept;
+        NODISCARD VariableLengthVector GetCoeff() const;
+        NODISCARD Real GetEigenValue() const noexcept;
 
     private:
         void Calculate(const Points& points);
 
     private:
-        constexpr static int sm_EigenSystemSize = 6;
+        constexpr static int eigenSystemSize = 6;
 
     private:
-        VariableLengthVector m_Coeff;
-        Real m_EigenValue;
+        VariableLengthVector coeff;
+        Real eigenValue;
     };
 
-    using FloatQuadraticFit2 = QuadraticFit2<float>;
-    using DoubleQuadraticFit2 = QuadraticFit2<double>;
+    using QuadraticFit2F = QuadraticFit2<float>;
+    using QuadraticFit2D = QuadraticFit2<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_QUADRATIC_FIT2_H

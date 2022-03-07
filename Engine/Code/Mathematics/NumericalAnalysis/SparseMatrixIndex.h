@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/26 10:04)
+///	引擎版本：0.8.0.2 (2022/02/15 11:09)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_INDEX_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_INDEX_H
@@ -26,15 +26,15 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] int GetRow() const noexcept;
-        [[nodiscard]] int GetColumn() const noexcept;
+        NODISCARD int GetRow() const noexcept;
+        NODISCARD int GetColumn() const noexcept;
 
     private:
-        int m_Row;
-        int m_Column;
+        int row;
+        int column;
     };
 
-    [[nodiscard]] bool MATHEMATICS_DEFAULT_DECLARE operator<(const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs) noexcept;
+    NODISCARD bool MATHEMATICS_DEFAULT_DECLARE operator<(const SparseMatrixIndex& lhs, const SparseMatrixIndex& rhs) noexcept;
 }
 
 #endif  // MATHEMATICS_NUMERICAL_ANALYSIS_SPARSE_MATRIX_INDEX_H

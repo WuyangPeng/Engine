@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.4 (2020/11/27 10:03)
+///	引擎版本：0.8.0.2 (2022/02/15 23:18)
 
 #ifndef MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_H
 #define MATHEMATICS_NUMERICAL_ANALYSIS_ODE_SOLVER_H
@@ -28,11 +28,11 @@ namespace Mathematics
 
         struct Data
         {
-            Real m_T;
-            Container m_X;
+            Real t;
+            Container x;
 
             Data(Real t, const Container& x);
-        };     
+        };
 
         // 该系统是dx/dt = F(t,x)。
         // x的维度传递给OdeSolver的构造函数，要和x和F(t,x) 大小一致。
@@ -51,27 +51,27 @@ namespace Mathematics
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual Data Update(Real tIn, const Container& xIn) = 0;
-        virtual void SetStepSize(Real step) noexcept;
-        [[nodiscard]] Real GetStepSize() const noexcept;
-        void SetUserData(const UserDataType* UserData) noexcept;
-        [[nodiscard]] const UserDataType* GetUserData() const noexcept;
-        [[nodiscard]] int GetDimension() const noexcept;
+        NODISCARD virtual Data Update(Real tIn, const Container& xIn) = 0;
+        virtual void SetStepSize(Real newStep) noexcept;
+        NODISCARD Real GetStepSize() const noexcept;
+        void SetUserData(const UserDataType* newUserData) noexcept;
+        NODISCARD const UserDataType* GetUserData() const noexcept;
+        NODISCARD int GetDimension() const noexcept;
 
     protected:
         void CalculateFunctionValue(Real tIn, const Container& xIn);
 
-        [[nodiscard]] Real GetStepFunctionValue(int index) const;
-        [[nodiscard]] Real GetFunctionValue(int index) const;
-        [[nodiscard]] const Container GetFunctionValue() const;
-        void SetFunctionValue(const Container& functionValue);
+        NODISCARD Real GetStepFunctionValue(int index) const;
+        NODISCARD Real GetFunctionValue(int index) const;
+        NODISCARD Container GetFunctionValue() const;
+        void SetFunctionValue(const Container& newFunctionValue);
 
     private:
-        int m_Dimension;
-        Function m_Function;
-        const UserDataType* m_UserData;
-        Real m_Step;
-        Container m_FunctionValue;
+        int dimension;
+        Function function;
+        const UserDataType* userData;
+        Real step;
+        Container functionValue;
     };
 }
 

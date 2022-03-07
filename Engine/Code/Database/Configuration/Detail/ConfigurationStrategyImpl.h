@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 20:25)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 11:02)
 
 #ifndef DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
 #define DATABASE_CONFIGURATION_CONFIGURATION_STRATEGY_IMPL_H
@@ -32,56 +32,71 @@ namespace Database
         using DBMapping = std::map<int, std::string>;
 
     public:
-        ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
-                                  const std::string& hostName, const std::string& userName, const std::string& password);
-        ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy, const std::string& ip, int port,
-                                  const std::string& hostName, const std::string& userName, const std::string& password,
-                                  bool pooling, int poolMaxSize, int poolQueueTimeout, int poolMaxIdleTime,
-                                  const FlagsOption& flagsOption, const StringOption& stringOption, const BooleanOption& booleanOption,
-                                  const IntOption& intOption, const SSLOption& sslOption, const DBMapping& dbMapping);
+        ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
+                                  const std::string& ip,
+                                  int port,
+                                  const std::string& hostName,
+                                  const std::string& userName,
+                                  const std::string& password);
+        ConfigurationStrategyImpl(WrappersStrategy wrappersStrategy,
+                                  const std::string& ip,
+                                  int port,
+                                  const std::string& hostName,
+                                  const std::string& userName,
+                                  const std::string& password,
+                                  bool pooling,
+                                  int poolMaxSize,
+                                  int poolQueueTimeout,
+                                  int poolMaxIdleTime,
+                                  const FlagsOption& flagsOption,
+                                  const StringOption& stringOption,
+                                  const BooleanOption& booleanOption,
+                                  const IntOption& intOption,
+                                  const SSLOption& sslOption,
+                                  const DBMapping& dbMapping);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] WrappersStrategy GetWrappersStrategy() const noexcept;
+        NODISCARD WrappersStrategy GetWrappersStrategy() const noexcept;
 
-        [[nodiscard]] std::string GetIP() const;
-        [[nodiscard]] int GetPort() const noexcept;
-        [[nodiscard]] std::string GetDBHostName() const;
-        [[nodiscard]] std::string GetDBUserName() const;
-        [[nodiscard]] std::string GetDBPassword() const;
+        NODISCARD std::string GetIP() const;
+        NODISCARD int GetPort() const noexcept;
+        NODISCARD std::string GetDBHostName() const;
+        NODISCARD std::string GetDBUserName() const;
+        NODISCARD std::string GetDBPassword() const;
 
-        [[nodiscard]] FlagsOption GetFlagsOption() const;
-        [[nodiscard]] StringOption GetStringOptions() const;
-        [[nodiscard]] BooleanOption GetBooleanOptions() const;
-        [[nodiscard]] IntOption GetIntOptions() const;
-        [[nodiscard]] SSLOption GetSSLOptions() const;
-        [[nodiscard]] DBMapping GetDBMapping() const;
-        [[nodiscard]] bool IsUseSSL() const noexcept;
-        [[nodiscard]] std::string GetDBName(int dbIndex) const;
+        NODISCARD FlagsOption GetFlagsOption() const;
+        NODISCARD StringOption GetStringOptions() const;
+        NODISCARD BooleanOption GetBooleanOptions() const;
+        NODISCARD IntOption GetIntOptions() const;
+        NODISCARD SSLOption GetSSLOptions() const;
+        NODISCARD DBMapping GetDBMapping() const;
+        NODISCARD bool IsUseSSL() const noexcept;
+        NODISCARD std::string GetDBName(int dbIndex) const;
 
-        [[nodiscard]] bool GetPooling() const noexcept;
-        [[nodiscard]] int GetPoolMaxSize() const noexcept;
-        [[nodiscard]] int GetPoolQueueTimeout() const noexcept;
-        [[nodiscard]] int GetPoolMaxIdleTime() const noexcept;
+        NODISCARD bool GetPooling() const noexcept;
+        NODISCARD int GetPoolMaxSize() const noexcept;
+        NODISCARD int GetPoolQueueTimeout() const noexcept;
+        NODISCARD int GetPoolMaxIdleTime() const noexcept;
 
     private:
-        WrappersStrategy m_WrappersStrategyFlag;
-        std::string m_IP;
-        int m_Port;
-        std::string m_HostName;
-        std::string m_UserName;
-        std::string m_Password;
-        bool m_Pooling;
-        int m_PoolMaxSize;
-        int m_PoolQueueTimeout;
-        int m_PoolMaxIdleTime;
+        WrappersStrategy wrappersStrategyFlag;
+        std::string ip;
+        int port;
+        std::string hostName;
+        std::string userName;
+        std::string password;
+        bool pooling;
+        int poolMaxSize;
+        int poolQueueTimeout;
+        int poolMaxIdleTime;
 
-        FlagsOption m_FlagsOptions;
-        StringOption m_StringOptions;
-        BooleanOption m_BooleanOptions;
-        IntOption m_IntOptions;
-        SSLOption m_SSLOptions;
-        DBMapping m_DBMapping;
+        FlagsOption flagsOptions;
+        StringOption stringOptions;
+        BooleanOption booleanOptions;
+        IntOption intOptions;
+        SSLOption sslOptions;
+        DBMapping dbMapping;
     };
 }
 

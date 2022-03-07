@@ -6,7 +6,7 @@
 
 #include "Mathematics/MathematicsExport.h"
  
-#ifdef MATHEMATICS_EXPORT_TEMPLATE
+#ifdef MATHEMATICS_EXPORT_TEMPLATE1
 
 #ifndef MATHEMATICS_INCLUDED_SINGLE_CURVE3_DETAIL
 	#define MATHEMATICS_INCLUDED_SINGLE_CURVE3_DETAIL
@@ -16,14 +16,14 @@
 
 namespace Mathematics
 {
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
+	template 
 	class SingleCurve3<float>;
 
-	template MATHEMATICS_TEMPLATE_DEFAULT_DECLARE
+	template 
 	class SingleCurve3<double>;
 }
 
-#endif // MATHEMATICS_EXPORT_TEMPLATE
+#endif // MATHEMATICS_EXPORT_TEMPLATE1
  
 
 

@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 20:27)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 11:16)
 
 #include "Database/DatabaseExport.h"
 
@@ -23,7 +23,7 @@ using std::vector;
 using namespace std::literals;
 
 Database::AnalysisDatabaseConfigurationImpl::AnalysisDatabaseConfigurationImpl(const string& fileName)
-    : m_Container{}, m_FileName{ fileName }, m_MainTree{}
+    : container{}, fileName{ fileName }, mainTree{}
 {
     Analysis();
 
@@ -42,13 +42,13 @@ void Database::AnalysisDatabaseConfigurationImpl::Analysis()
 // private
 void Database::AnalysisDatabaseConfigurationImpl::AnalysisJson()
 {
-    read_json(m_FileName, m_MainTree);
+    read_json(fileName, mainTree);
 }
 
 // private
 void Database::AnalysisDatabaseConfigurationImpl::AnalysisMain()
 {
-    for (const auto& ptree : m_MainTree)
+    for (const auto& ptree : mainTree)
     {
         try
         {
@@ -69,47 +69,61 @@ void Database::AnalysisDatabaseConfigurationImpl::AnalysisMain()
 // private
 void Database::AnalysisDatabaseConfigurationImpl::InsertStrategy(const String& name, const BasicTree& basicTree)
 {
-    auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"s), SYSTEM_TEXT(""s));
+    const auto wrappers = basicTree.get(SYSTEM_TEXT("Wrappers"s), SYSTEM_TEXT(""s));
 
     const auto wrappersStrategy = GetWrappersStrategy(wrappers);
 
-    auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"s), SYSTEM_TEXT(""s)));
-    auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
-    auto hostName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("HostName"s), SYSTEM_TEXT(""s)));
-    auto userName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("UserName"s), SYSTEM_TEXT(""s)));
-    auto password = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Password"s), SYSTEM_TEXT(""s)));
+    const auto ip = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("IP"s), SYSTEM_TEXT(""s)));
+    const auto port = basicTree.get(SYSTEM_TEXT("Port"s), 0);
+    const auto hostName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("HostName"s), SYSTEM_TEXT(""s)));
+    const auto userName = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("UserName"s), SYSTEM_TEXT(""s)));
+    const auto password = CoreTools::StringConversion::StandardConversionMultiByte(basicTree.get(SYSTEM_TEXT("Password"s), SYSTEM_TEXT(""s)));
 
-    auto pooling = basicTree.get(SYSTEM_TEXT("Pooling"s), false);
-    auto poolMaxSize = basicTree.get(SYSTEM_TEXT("PoolMaxSize"s), 0);
-    auto poolQueueTimeout = basicTree.get(SYSTEM_TEXT("PoolQueueTimeout"s), 0);
-    auto poolMaxIdleTime = basicTree.get(SYSTEM_TEXT("PoolMaxIdleTime"s), 0);
+    const auto pooling = basicTree.get(SYSTEM_TEXT("Pooling"s), false);
+    const auto poolMaxSize = basicTree.get(SYSTEM_TEXT("PoolMaxSize"s), 0);
+    const auto poolQueueTimeout = basicTree.get(SYSTEM_TEXT("PoolQueueTimeout"s), 0);
+    const auto poolMaxIdleTime = basicTree.get(SYSTEM_TEXT("PoolMaxIdleTime"s), 0);
 
-    auto useFlagsOption = (0 < basicTree.get(SYSTEM_TEXT("UseFlagsOption"s), 0u));
-    auto useStringOptions = (0 < basicTree.get(SYSTEM_TEXT("UseStringOption"s), 0u));
-    auto useBooleanOptions = (0 < basicTree.get(SYSTEM_TEXT("UseBooleanOption"s), 0u));
-    auto useIntOptions = (0 < basicTree.get(SYSTEM_TEXT("UseIntOption"s), 0u));
-    auto useSSLOptions = (0 < basicTree.get(SYSTEM_TEXT("UseSSLOption"s), 0u));
-    auto useDBMapping = (0 < basicTree.get(SYSTEM_TEXT("UseDBMapping"s), 0u));
+    const auto useFlagsOption = (0 < basicTree.get(SYSTEM_TEXT("UseFlagsOption"s), 0u));
+    const auto useStringOptions = (0 < basicTree.get(SYSTEM_TEXT("UseStringOption"s), 0u));
+    const auto useBooleanOptions = (0 < basicTree.get(SYSTEM_TEXT("UseBooleanOption"s), 0u));
+    const auto useIntOptions = (0 < basicTree.get(SYSTEM_TEXT("UseIntOption"s), 0u));
+    const auto useSSLOptions = (0 < basicTree.get(SYSTEM_TEXT("UseSSLOption"s), 0u));
+    const auto useDBMapping = (0 < basicTree.get(SYSTEM_TEXT("UseDBMapping"s), 0u));
 
-    auto flagsOption = GetFlagsOption(basicTree, useFlagsOption);
-    auto stringOptions = GetStringOptions(basicTree, useStringOptions);
-    auto booleanOptions = GetBooleanOptions(basicTree, useBooleanOptions);
-    auto intOptions = GetIntOptions(basicTree, useIntOptions);
-    auto sslOptions = GetSSLOptions(basicTree, useSSLOptions);
+    const auto flagsOption = GetFlagsOption(basicTree, useFlagsOption);
+    const auto stringOptions = GetStringOptions(basicTree, useStringOptions);
+    const auto booleanOptions = GetBooleanOptions(basicTree, useBooleanOptions);
+    const auto intOptions = GetIntOptions(basicTree, useIntOptions);
+    const auto sslOptions = GetSSLOptions(basicTree, useSSLOptions);
     auto dbMapping = GetDBMapping(basicTree, useDBMapping);
 
     dbMapping.insert({ 0, hostName });
 
-    ConfigurationStrategy configurationStrategy{ wrappersStrategy, ip, port, hostName, userName, password, pooling, poolMaxSize,
-                                                 poolQueueTimeout, poolMaxIdleTime, flagsOption, stringOptions, booleanOptions, intOptions, sslOptions, dbMapping };
+    ConfigurationStrategy configurationStrategy{ wrappersStrategy,
+                                                 ip,
+                                                 port,
+                                                 hostName,
+                                                 userName,
+                                                 password,
+                                                 pooling,
+                                                 poolMaxSize,
+                                                 poolQueueTimeout,
+                                                 poolMaxIdleTime,
+                                                 flagsOption,
+                                                 stringOptions,
+                                                 booleanOptions,
+                                                 intOptions,
+                                                 sslOptions,
+                                                 dbMapping };
 
-    m_Container.insert({ name, configurationStrategy });
+    container.insert({ name, configurationStrategy });
 }
 
 // private
 Database::ConfigurationStrategy::FlagsOption Database::AnalysisDatabaseConfigurationImpl::GetFlagsOption(const BasicTree& basicTree, bool useFlagsOption)
 {
-    vector<string> result;
+    ConfigurationStrategy::FlagsOption result{};
 
     if (useFlagsOption)
     {
@@ -131,9 +145,9 @@ Database::ConfigurationStrategy Database::AnalysisDatabaseConfigurationImpl::Get
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    const auto iter = m_Container.find(name);
+    const auto iter = container.find(name);
 
-    if (iter != m_Container.cend())
+    if (iter != container.cend())
     {
         return iter->second;
     }
@@ -175,6 +189,18 @@ Database::WrappersStrategy Database::AnalysisDatabaseConfigurationImpl::GetWrapp
     {
         return WrappersStrategy::FlatFile;
     }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("MariaDB"))
+    {
+        return WrappersStrategy::MariaDB;
+    }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("Mongo"))
+    {
+        return WrappersStrategy::Mongo;
+    }
+    else if (caseInsensitiveTString == SYSTEM_TEXT("Redis"))
+    {
+        return WrappersStrategy::Redis;
+    }
 
     THROW_EXCEPTION(SYSTEM_TEXT("数据库包装器类型不存在。"s));
 }
@@ -183,26 +209,26 @@ Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::Analys
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return m_Container.begin();
+    return container.begin();
 }
 
 Database::AnalysisDatabaseConfigurationImpl::ContainerConstIter Database::AnalysisDatabaseConfigurationImpl::end() const noexcept
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return m_Container.end();
+    return container.end();
 }
 
 int Database::AnalysisDatabaseConfigurationImpl::GetSize() const
 {
     DATABASE_CLASS_IS_VALID_CONST_9;
 
-    return boost::numeric_cast<int>(m_Container.size());
+    return boost::numeric_cast<int>(container.size());
 }
 
 Database::ConfigurationStrategy::StringOption Database::AnalysisDatabaseConfigurationImpl::GetStringOptions(const BasicTree& basicTree, bool useStringOption)
 {
-    Database::ConfigurationStrategy::StringOption result{};
+    ConfigurationStrategy::StringOption result{};
 
     if (useStringOption)
     {
@@ -220,7 +246,7 @@ Database::ConfigurationStrategy::StringOption Database::AnalysisDatabaseConfigur
 
 Database::ConfigurationStrategy::BooleanOption Database::AnalysisDatabaseConfigurationImpl::GetBooleanOptions(const BasicTree& basicTree, bool useBooleanOption)
 {
-    Database::ConfigurationStrategy::BooleanOption result{};
+    ConfigurationStrategy::BooleanOption result{};
 
     if (useBooleanOption)
     {
@@ -237,7 +263,7 @@ Database::ConfigurationStrategy::BooleanOption Database::AnalysisDatabaseConfigu
 
 Database::ConfigurationStrategy::IntOption Database::AnalysisDatabaseConfigurationImpl::GetIntOptions(const BasicTree& basicTree, bool useIntOption)
 {
-    Database::ConfigurationStrategy::IntOption result{};
+    ConfigurationStrategy::IntOption result{};
 
     if (useIntOption)
     {
@@ -254,7 +280,7 @@ Database::ConfigurationStrategy::IntOption Database::AnalysisDatabaseConfigurati
 
 Database::ConfigurationStrategy::SSLOption Database::AnalysisDatabaseConfigurationImpl::GetSSLOptions(const BasicTree& basicTree, bool useSSLOption)
 {
-    Database::ConfigurationStrategy::SSLOption result{};
+    ConfigurationStrategy::SSLOption result{};
 
     if (useSSLOption)
     {
@@ -272,7 +298,7 @@ Database::ConfigurationStrategy::SSLOption Database::AnalysisDatabaseConfigurati
 
 Database::ConfigurationStrategy::DBMapping Database::AnalysisDatabaseConfigurationImpl::GetDBMapping(const BasicTree& basicTree, bool useDBMapping)
 {
-    Database::ConfigurationStrategy::DBMapping result{};
+    ConfigurationStrategy::DBMapping result{};
 
     if (useDBMapping)
     {

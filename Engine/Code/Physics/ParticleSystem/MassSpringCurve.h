@@ -49,10 +49,10 @@ namespace Physics
 		Real* mLengths;
 	};
 
-	using MassSpringCurve2f = MassSpringCurve<float,Mathematics::FloatVector2D>;
-	using MassSpringCurve2d = MassSpringCurve<double,Mathematics::DoubleVector2D>;
-	using MassSpringCurve3f = MassSpringCurve<float,Mathematics::FloatVector3D>;
-	using MassSpringCurve3d = MassSpringCurve<double,Mathematics::DoubleVector3D>;
+	using MassSpringCurve2f = MassSpringCurve<float,Mathematics::Vector2F>;
+	using MassSpringCurve2d = MassSpringCurve<double,Mathematics::Vector2D>;
+	using MassSpringCurve3f = MassSpringCurve<float,Mathematics::Vector3F>;
+	using MassSpringCurve3d = MassSpringCurve<double,Mathematics::Vector3D>;
 }
 
 #endif // PHYSICS_PARTICLE_SYSTEM_MASS_SPRING_CURVE_H

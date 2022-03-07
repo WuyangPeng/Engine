@@ -59,108 +59,108 @@ void Imagics::FastMarch3
 
     // vertex (0,0,0)
     i = Index(0,0,0);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (xmax,0,0)
     i = Index(mXBm1,0,0);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (0,ymax,0)
     i = Index(0,mYBm1,0);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (xmax,ymax,0)
     i = Index(mXBm1,mYBm1,0);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (0,0,zmax)
     i = Index(0,0,mZBm1);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (xmax,0,zmax)
     i = Index(mXBm1,0,mZBm1);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (0,ymax,zmax)
     i = Index(0,mYBm1,mZBm1);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // vertex (xmax,ymax,zmax)
     i = Index(mXBm1,mYBm1,mZBm1);
-    mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-    mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+    mInvSpeeds[i] = Mathematics::MathF::maxReal;
+    mTimes[i] = -Mathematics::MathF::maxReal;
 
     // edges (x,0,0) and (x,ymax,0)
     for (x = 0; x < mXBound; ++x)
     {
         i = Index(x,0,0);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(x,mYBm1,0);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // edges (0,y,0) and (xmax,y,0)
     for (y = 0; y < mYBound; ++y)
     {
         i = Index(0,y,0);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(mXBm1,y,0);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // edges (x,0,zmax) and (x,ymax,zmax)
     for (x = 0; x < mXBound; ++x)
     {
         i = Index(x,0,mZBm1);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(x,mYBm1,mZBm1);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // edges (0,y,zmax) and (xmax,y,zmax)
     for (y = 0; y < mYBound; ++y)
     {
         i = Index(0,y,mZBm1);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(mXBm1,y,mZBm1);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // edges (0,0,z) and (xmax,0,z)
     for (z = 0; z < mZBound; ++z)
     {
         i = Index(0,0,z);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(mXBm1,0,z);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // edges (0,ymax,z) and (xmax,ymax,z)
     for (z = 0; z < mZBound; ++z)
     {
         i = Index(0,mYBm1,z);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
         i = Index(mXBm1,mYBm1,z);
-        mInvSpeeds[i] = Mathematics::FloatMath::sm_MaxReal;
-        mTimes[i] = -Mathematics::FloatMath::sm_MaxReal;
+        mInvSpeeds[i] = Mathematics::MathF::maxReal;
+        mTimes[i] = -Mathematics::MathF::maxReal;
     }
 
     // Compute the first batch of trial pixels.  These are pixels a grid
@@ -415,7 +415,7 @@ void Imagics::FastMarch3
                 {
                     // The quadratic equation has a real-valued solution.
                     // Choose the largest positive root for the crossing time.
-                    mTimes[i] = msOneThird*(sum + Mathematics::FloatMath::Sqrt(discr));
+                    mTimes[i] = msOneThird*(sum + Mathematics::MathF::Sqrt(discr));
                 }
                 else
                 {
@@ -447,7 +447,7 @@ void Imagics::FastMarch3
                 {
                     // The quadratic equation has a real-valued solution.
                     // Choose the largest positive root for the crossing time.
-					mTimes[i] = 0.5f*(sum + Mathematics::FloatMath::Sqrt(discr));
+					mTimes[i] = 0.5f*(sum + Mathematics::MathF::Sqrt(discr));
                 }
                 else
                 {
@@ -474,7 +474,7 @@ void Imagics::FastMarch3
                 {
                     // The quadratic equation has a real-valued solution.
                     // Choose the largest positive root for the crossing time.
-					mTimes[i] = 0.5f*(sum + Mathematics::FloatMath::Sqrt(discr));
+					mTimes[i] = 0.5f*(sum + Mathematics::MathF::Sqrt(discr));
                 }
                 else
                 {
@@ -509,7 +509,7 @@ void Imagics::FastMarch3
                 {
                     // The quadratic equation has a real-valued solution.
                     // Choose the largest positive root for the crossing time.
-					mTimes[i] = 0.5f*(sum + Mathematics::FloatMath::Sqrt(discr));
+					mTimes[i] = 0.5f*(sum + Mathematics::MathF::Sqrt(discr));
                 }
                 else
                 {

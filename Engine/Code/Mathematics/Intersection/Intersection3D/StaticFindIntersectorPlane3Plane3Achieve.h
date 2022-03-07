@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 17:00)
+///	引擎版本：0.8.0.3 (2022/03/02 16:15)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE_H
@@ -15,7 +15,7 @@
 
 template <typename Real>
 Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane3Plane3(const Plane3& plane0, const Plane3& plane1, const Real epsilon)
-    : ParentType{ epsilon }, m_Plane0{ plane0 }, m_Plane1{ plane1 }, m_IntrLine{ Vector3D::GetZero(), Vector3D::GetZero() }, m_IntrPlane{}
+    : ParentType{ epsilon }, plane0{ plane0 }, plane1{ plane1 }, intrLine{ Vector3::GetZero(), Vector3::GetZero() }, intrPlane{}
 {
     Find();
 
@@ -23,6 +23,7 @@ Mathematics::StaticFindIntersectorPlane3Plane3<Real>::StaticFindIntersectorPlane
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorPlane3Plane3<Real>::IsValid() const noexcept
 {
@@ -31,22 +32,23 @@ bool Mathematics::StaticFindIntersectorPlane3Plane3<Real>::IsValid() const noexc
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetPlane0() const noexcept
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetPlane0() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Plane0;
+    return plane0;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetPlane1() const noexcept
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetPlane1() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Plane1;
+    return plane1;
 }
 
 template <typename Real>
@@ -63,7 +65,7 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     ///   c1 = (d1 - d * d0) / det
     /// 其中det = 1 - d^2。
 
-    auto dot = Vector3DTools::DotProduct(m_Plane0.GetNormal(), m_Plane1.GetNormal());
+    auto dot = Vector3Tools::DotProduct(plane0.GetNormal(), plane1.GetNormal());
     if (Math::GetValue(1) - Math::GetZeroTolerance() <= Math::FAbs(dot))
     {
         // 这些平面是平行的。 检查它们是否共面。
@@ -71,19 +73,19 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
         if (Math::GetValue(0) <= dot)
         {
             // 法线方向相同，需要查看c0 - c1。
-            diff = m_Plane0.GetConstant() - m_Plane1.GetConstant();
+            diff = plane0.GetConstant() - plane1.GetConstant();
         }
         else
         {
             // 法线方向相反，需要查看c0 + c1。
-            diff = m_Plane0.GetConstant() + m_Plane1.GetConstant();
+            diff = plane0.GetConstant() + plane1.GetConstant();
         }
 
         if (Math::FAbs(diff) < Math::GetZeroTolerance())
         {
             // 平面共面。
             this->SetIntersectionType(IntersectionType::Plane);
-            m_IntrPlane = m_Plane0;
+            intrPlane = plane0;
             return;
         }
 
@@ -93,26 +95,26 @@ void Mathematics::StaticFindIntersectorPlane3Plane3<Real>::Find()
     }
 
     auto invDet = (Math::GetValue(1)) / (Math::GetValue(1) - dot * dot);
-    auto c0 = (m_Plane0.GetConstant() - dot * m_Plane1.GetConstant()) * invDet;
-    auto c1 = (m_Plane1.GetConstant() - dot * m_Plane0.GetConstant()) * invDet;
+    auto c0 = (plane0.GetConstant() - dot * plane1.GetConstant()) * invDet;
+    auto c1 = (plane1.GetConstant() - dot * plane0.GetConstant()) * invDet;
     this->SetIntersectionType(IntersectionType::Line);
-    m_IntrLine = Line3{ c0 * m_Plane0.GetNormal() + c1 * m_Plane1.GetNormal(), Vector3DTools::UnitCrossProduct(m_Plane0.GetNormal(), m_Plane1.GetNormal()) };
+    intrLine = Line3{ c0 * plane0.GetNormal() + c1 * plane1.GetNormal(), Vector3Tools::UnitCrossProduct(plane0.GetNormal(), plane1.GetNormal()) };
 }
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetIntersectionLine() const noexcept
+Mathematics::Line3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetIntersectionLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntrLine;
+    return intrLine;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetIntersectionPlane() const noexcept
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorPlane3Plane3<Real>::GetIntersectionPlane() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_IntrPlane;
+    return intrPlane;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_PLANE3_PLANE3_ACHIEVE_H

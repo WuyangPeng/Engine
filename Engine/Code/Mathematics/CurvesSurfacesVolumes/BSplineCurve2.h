@@ -43,11 +43,11 @@ namespace Mathematics
 		// reallocated and the first d points are replicated.  In either case the
 		// knot array is calculated accordingly.
 
-		BSplineCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, int degree, bool loop, bool open);
+		BSplineCurve2 (int numCtrlPoints, const Vector2<Real>* ctrlPoint, int degree, bool loop, bool open);
 
 		// Open, nonuniform spline.  The knot array must have n-d elements.  The
 		// elements must be nondecreasing.  Each element must be in [0,1].
-		BSplineCurve2 (int numCtrlPoints, const Vector2D<Real>* ctrlPoint, int degree, bool loop, const Real* knot);
+		BSplineCurve2 (int numCtrlPoints, const Vector2<Real>* ctrlPoint, int degree, bool loop, const Real* knot);
 
 		  ~BSplineCurve2 ();
 		BSplineCurve2(const BSplineCurve2&) = default;
@@ -64,8 +64,8 @@ namespace Mathematics
 		// Control points may be changed at any time.  The input index should be
 		// valid (0 <= i <= n).  If it is invalid, GetControlPoint returns a
 		// vector whose components are all MAX_REAL.
-		void SetControlPoint (int i, const Vector2D<Real>& ctrl) noexcept;
-		Vector2D<Real> GetControlPoint (int i) const noexcept;
+		void SetControlPoint (int i, const Vector2<Real>& ctrl) noexcept;
+		Vector2<Real> GetControlPoint (int i) const noexcept;
 
 		// The knot values can be changed only if the basis function is nonuniform
 		// and the input index is valid (0 <= i <= n-d-1).  If these conditions
@@ -77,16 +77,16 @@ namespace Mathematics
 		// an open spline clamps t to [0,1].  That is, if t > 1, t is set to 1;
 		// if t < 0, t is set to 0.  A periodic spline wraps to to [0,1].  That
 		// is, if t is outside [0,1], then t is set to t-floor(t).
-		  Vector2D<Real> GetPosition (Real t) const override;
-		  Vector2D<Real> GetFirstDerivative (Real t) const override;
-		  Vector2D<Real> GetSecondDerivative (Real t) const override;
-		  Vector2D<Real> GetThirdDerivative (Real t) const override;
+		  Vector2<Real> GetPosition (Real t) const override;
+		  Vector2<Real> GetFirstDerivative (Real t) const override;
+		  Vector2<Real> GetSecondDerivative (Real t) const override;
+		  Vector2<Real> GetThirdDerivative (Real t) const override;
 
 		// If you need position and derivatives at the same time, it is more
 		// efficient to call these functions.  Pass the addresses of those
 		// quantities whose values you want.  You may pass 0 in any argument
 		// whose value you do not want.
-		void Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, Vector2D<Real>* der2, Vector2D<Real>* der3) const;
+		void Get (Real t, Vector2<Real>* pos, Vector2<Real>* der1, Vector2<Real>* der2, Vector2<Real>* der3) const;
 
 		// Access the basis function to compute it without control points.  This
 		// is useful for least squares fitting of curves.
@@ -96,10 +96,10 @@ namespace Mathematics
 		// Replicate the necessary number of control points when the Create
 		// function has loop equal to true, in which case the spline curve must
 		// be a closed curve.
-		void CreateControl (const Vector2D<Real>* ctrlPoint);
+		void CreateControl (const Vector2<Real>* ctrlPoint);
 
 		int mNumCtrlPoints;
-		Vector2D<Real>* mCtrlPoint;  // ctrl[n+1]
+		Vector2<Real>* mCtrlPoint;  // ctrl[n+1]
 		bool mLoop;
 		BSplineBasis<Real> mBasis;
 		int mReplicate;  // the number of replicated control points

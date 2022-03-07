@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:49)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:07)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CyclicRedundancyCheckCCITTTable::CyclicRedundancyCheckCCITTTable() noexcept
-    : m_Table{}
+    : table{}
 {
     Calculate();
 
@@ -26,7 +26,7 @@ CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckCCITTTable)
 void CoreTools::CyclicRedundancyCheckCCITTTable::Calculate() noexcept
 {
     auto index = 0;
-    for (auto& value : m_Table)
+    for (auto& value : table)
     {
         value = CalculateCCITT(index);
 
@@ -57,5 +57,5 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITTTable::GetCCITT(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Table.at(index);
+    return table.at(index);
 }

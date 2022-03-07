@@ -13,7 +13,8 @@
  
 
 UNIT_TEST_SUBCLASS_COMPLETE_DEFINE(Mathematics,Bisect2CalculateTesting) 
-
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26497)
 void Mathematics::Bisect2CalculateTesting
 	::MainTest()
 {

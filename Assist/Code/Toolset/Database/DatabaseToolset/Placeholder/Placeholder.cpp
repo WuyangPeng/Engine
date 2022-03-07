@@ -6,13 +6,12 @@
 
 #include "Toolset/Database/DatabaseToolset/DatabaseToolsetExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/DatabaseClassInvariantMacro.h"
 
-DatabaseToolset::Placeholder
-	::Placeholder() 
+DatabaseToolset::Placeholder ::Placeholder() noexcept
 {
-	DATABASE_SELF_CLASS_IS_VALID_9;
+    DATABASE_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(DatabaseToolset, Placeholder)

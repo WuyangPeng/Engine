@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/09 15:00)
+///	引擎版本：0.8.0.3 (2022/02/21 16:20)
 
 #ifndef MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_ACHIEVE_H
 #define MATHEMATICS_DISTANCE_DISTANCE_CIRCLE3_CIRCLE3_ACHIEVE_H
@@ -13,19 +13,20 @@
 #include "DistanceCircle3Circle3.h"
 #include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "Mathematics/Algebra/PolynomialDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Distance/DistanceBaseDetail.h"
 #include "Mathematics/NumericalAnalysis/PolynomialRootsDetail.h"
 #include "Mathematics/Objects3D/Circle3Detail.h"
 
 template <typename Real>
 Mathematics::DistanceCircle3Circle3<Real>::DistanceCircle3Circle3(const Circle3& lhsCircle, const Circle3& rhsCircle) noexcept
-    : ParentType{}, m_LhsCircle{ lhsCircle }, m_RhsCircle{ rhsCircle }
+    : ParentType{}, lhsCircle{ lhsCircle }, rhsCircle{ rhsCircle }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_1;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DistanceCircle3Circle3<Real>::IsValid() const noexcept
 {
@@ -34,48 +35,49 @@ bool Mathematics::DistanceCircle3Circle3<Real>::IsValid() const noexcept
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Circle3<Real> Mathematics::DistanceCircle3Circle3<Real>::GetLhsCircle() const noexcept
+Mathematics::Circle3<Real> Mathematics::DistanceCircle3Circle3<Real>::GetLhsCircle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_LhsCircle;
+    return lhsCircle;
 }
 
 template <typename Real>
-const Mathematics::Circle3<Real> Mathematics::DistanceCircle3Circle3<Real>::GetRhsCircle() const noexcept
+Mathematics::Circle3<Real> Mathematics::DistanceCircle3Circle3<Real>::GetRhsCircle() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_RhsCircle;
+    return rhsCircle;
 }
 
 template <typename Real>
-const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::DistanceCircle3Circle3<Real>::GetSquared() const
+typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::DistanceCircle3Circle3<Real>::GetSquared() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    auto difference = m_RhsCircle.GetCenter() - m_LhsCircle.GetCenter();
-    auto lhs0DotRhs0 = Vector3DTools::DotProduct(m_LhsCircle.GetDirection0(), m_RhsCircle.GetDirection0());
-    auto lhs0DotRhs1 = Vector3DTools::DotProduct(m_LhsCircle.GetDirection0(), m_RhsCircle.GetDirection1());
-    auto lhs1DotRhs0 = Vector3DTools::DotProduct(m_LhsCircle.GetDirection1(), m_RhsCircle.GetDirection0());
-    auto lhs1DotRhs1 = Vector3DTools::DotProduct(m_LhsCircle.GetDirection1(), m_RhsCircle.GetDirection1());
+    auto difference = rhsCircle.GetCenter() - lhsCircle.GetCenter();
+    const auto u0u1 = Vector3Tools::DotProduct(lhsCircle.GetDirection0(), rhsCircle.GetDirection0());
+    const auto u0v1 = Vector3Tools::DotProduct(lhsCircle.GetDirection0(), rhsCircle.GetDirection1());
+    const auto v0u1 = Vector3Tools::DotProduct(lhsCircle.GetDirection1(), rhsCircle.GetDirection0());
+    const auto v0v1 = Vector3Tools::DotProduct(lhsCircle.GetDirection1(), rhsCircle.GetDirection1());
 
-    auto a0 = -Vector3DTools::DotProduct(difference, m_LhsCircle.GetDirection0());
-    auto a1 = -m_RhsCircle.GetRadius() * lhs0DotRhs0;
-    auto a2 = -m_RhsCircle.GetRadius() * lhs0DotRhs1;
-    auto a3 = Vector3DTools::DotProduct(difference, m_LhsCircle.GetDirection1());
-    auto a4 = m_RhsCircle.GetRadius() * lhs1DotRhs0;
-    auto a5 = m_RhsCircle.GetRadius() * lhs1DotRhs1;
+    const auto a0 = -Vector3Tools::DotProduct(difference, lhsCircle.GetDirection0());
+    const auto a1 = -rhsCircle.GetRadius() * u0u1;
+    const auto a2 = -rhsCircle.GetRadius() * u0v1;
+    const auto a3 = Vector3Tools::DotProduct(difference, lhsCircle.GetDirection1());
+    const auto a4 = rhsCircle.GetRadius() * v0u1;
+    const auto a5 = rhsCircle.GetRadius() * v0v1;
 
-    auto b0 = -Vector3DTools::DotProduct(difference, m_RhsCircle.GetDirection0());
-    auto b1 = m_LhsCircle.GetRadius() * lhs0DotRhs0;
-    auto b2 = m_LhsCircle.GetRadius() * lhs1DotRhs0;
-    auto b3 = Vector3DTools::DotProduct(difference, m_RhsCircle.GetDirection1());
-    auto b4 = -m_LhsCircle.GetRadius() * lhs0DotRhs1;
-    auto b5 = -m_LhsCircle.GetRadius() * lhs1DotRhs1;
+    const auto b0 = -Vector3Tools::DotProduct(difference, rhsCircle.GetDirection0());
+    const auto b1 = lhsCircle.GetRadius() * u0u1;
+    const auto b2 = lhsCircle.GetRadius() * v0u1;
+    const auto b3 = Vector3Tools::DotProduct(difference, rhsCircle.GetDirection1());
+    const auto b4 = -lhsCircle.GetRadius() * u0v1;
+    const auto b5 = -lhsCircle.GetRadius() * v0v1;
 
     // 计算多项式 p0 = p00 + p01 * z + p02 * z^2.
     Polynomial<Real> p0{ 2 };
@@ -114,8 +116,13 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
     Polynomial<Real> g0{ 4 };
     g0[0] = p0[0] * p0[0] + p1[0] * p1[0] - q0[0] * r0[0];
     g0[1] = Math::GetValue(2) * (p0[0] * p0[1] + p1[0] * p1[1]) - q0[1] * r0[0] - q1[0] * r1[1];
-    g0[2] = p0[1] * p0[1] + Math::GetValue(2) * p0[0] * p0[2] - p1[0] * p1[0] +
-            p1[1] * p1[1] - q0[2] * r0[0] - q0[0] * r0[2] - q1[1] * r1[1];
+    g0[2] = p0[1] * p0[1] +
+            Math::GetValue(2) * p0[0] * p0[2] -
+            p1[0] * p1[0] +
+            p1[1] * p1[1] -
+            q0[2] * r0[0] -
+            q0[0] * r0[2] -
+            q1[1] * r1[1];
     g0[3] = Math::GetValue(2) * (p0[1] * p0[2] - p1[0] * p1[1]) - q0[1] * r0[2] + q1[0] * r1[1];
     g0[4] = p0[2] * p0[2] - p1[1] * p1[1] - q0[2] * r0[2] + q1[1] * r1[1];
 
@@ -138,14 +145,15 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
     h[7] = Math::GetValue(2) * (g0[3] * g0[4] + g1[2] * g1[3]);
     h[8] = g0[4] * g0[4] + g1[3] * g1[3];
 
+    auto minSquaredDistance = Math::maxReal;
+    Vector3 lhsClosestPoint{};
+    Vector3 rhsClosestPoint{};
+
     PolynomialRoots<Real> polyroots{ this->GetZeroThreshold() };
     if (!polyroots.FindBisection(h, static_cast<Real>(-1.01), static_cast<Real>(1.01), 6))
     {
-        THROW_EXCEPTION(SYSTEM_TEXT("FindBisection失败！"s));
+        THROW_EXCEPTION(SYSTEM_TEXT("FindBisection失败"s));
     }
-    auto minSquaredDistance = Math::sm_MaxReal;
-    Vector3D lhsClosestPoint;
-    Vector3D rhsClosestPoint;
 
     for (auto iter = polyroots.GetBegin(); iter != polyroots.GetEnd(); ++iter)
     {
@@ -195,13 +203,13 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
             lhsCosValue *= tmp;
             lhsSinValue *= tmp;
 
-            auto closest0 = m_LhsCircle.GetCenter() + m_LhsCircle.GetRadius() * (lhsCosValue * m_LhsCircle.GetDirection0() + lhsSinValue * m_LhsCircle.GetDirection1());
+            auto closest0 = lhsCircle.GetCenter() + lhsCircle.GetRadius() * (lhsCosValue * lhsCircle.GetDirection0() + lhsSinValue * lhsCircle.GetDirection1());
 
-            auto closest1 = m_RhsCircle.GetCenter() + m_RhsCircle.GetRadius() * (rhsCosValue * m_RhsCircle.GetDirection0() + rhsSinValue * m_RhsCircle.GetDirection1());
+            auto closest1 = rhsCircle.GetCenter() + rhsCircle.GetRadius() * (rhsCosValue * rhsCircle.GetDirection0() + rhsSinValue * rhsCircle.GetDirection1());
 
             difference = closest1 - closest0;
 
-            auto squaredDistance = Vector3DTools::VectorMagnitudeSquared(difference);
+            auto squaredDistance = Vector3Tools::GetLengthSquared(difference);
             if (squaredDistance < minSquaredDistance)
             {
                 minSquaredDistance = squaredDistance;
@@ -220,12 +228,12 @@ const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathema
 }
 
 template <typename Real>
-const typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::DistanceCircle3Circle3<Real>::GetSquared(Real t, const Vector3D& lhsVelocity, const Vector3D& rhsVelocity) const
+typename Mathematics::DistanceCircle3Circle3<Real>::DistanceResult Mathematics::DistanceCircle3Circle3<Real>::GetSquared(Real t, const Vector3& lhsVelocity, const Vector3& rhsVelocity) const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    const auto lhsMovedCircle = m_LhsCircle.GetMove(t, lhsVelocity);
-    const auto rhsMovedCircle = m_RhsCircle.GetMove(t, rhsVelocity);
+    const auto lhsMovedCircle = lhsCircle.GetMove(t, lhsVelocity);
+    const auto rhsMovedCircle = rhsCircle.GetMove(t, rhsVelocity);
 
     ClassType distance{ lhsMovedCircle, rhsMovedCircle };
     distance.SetZeroThreshold(this->GetZeroThreshold());

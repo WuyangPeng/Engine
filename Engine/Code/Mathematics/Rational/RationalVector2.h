@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 11:04)
+///	引擎版本：0.8.0.2 (2022/02/11 17:12)
 
 #ifndef MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_H
 #define MATHEMATICS_RATIONAL_RATIONAL_VECTOR2_H
@@ -37,12 +37,12 @@ namespace Mathematics
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Rational GetX() const;
+        NODISCARD Rational GetX() const;
         void SetX(const Rational& x);
-        [[nodiscard]] const Rational GetY() const;
+        NODISCARD Rational GetY() const;
         void SetY(const Rational& y);
 
-        [[nodiscard]] const RationalVector2 operator-() const;
+        NODISCARD RationalVector2 operator-() const;
 
         RationalVector2& operator+=(const RationalVector2& rhs);
         RationalVector2& operator-=(const RationalVector2& rhs);
@@ -50,27 +50,27 @@ namespace Mathematics
         RationalVector2& operator/=(const Rational& rational);
 
         // 返回 (y,-x).
-        [[nodiscard]] const RationalVector2 Perp() const;
+        NODISCARD RationalVector2 Perp() const;
 
-        [[nodiscard]] const Rational SquaredLength() const;
+        NODISCARD Rational SquaredLength() const;
 
     private:
-        RationalVector m_Tuple;
+        RationalVector tuple;
     };
 
     // 返回 Dot(lhs,rhs).
     template <int IntSize>
-    [[nodiscard]] const SignRational<IntSize> Dot(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
+    NODISCARD SignRational<IntSize> Dot(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 
     // 返回 Cross((lhs.x,lhs.y,0),(rhs.x,rhs.y,0)) = lhs.x*rhs.y - lhs.y*rhs.x
     template <int IntSize>
-    [[nodiscard]] const SignRational<IntSize> DotPerp(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
+    NODISCARD SignRational<IntSize> DotPerp(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 
     template <int IntSize>
-    [[nodiscard]] bool operator==(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
+    NODISCARD bool operator==(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 
     template <int IntSize>
-    [[nodiscard]] bool operator<(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
+    NODISCARD bool operator<(const RationalVector2<IntSize>& lhs, const RationalVector2<IntSize>& rhs);
 
     template <int IntSize>
     std::ostream& operator<<(std::ostream& os, const RationalVector2<IntSize>& rhs);

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/05 11:08)
+///	引擎版本：0.8.0.2 (2022/02/08 11:58)
 
 #ifndef MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
 #define MATHEMATICS_ALGEBRA_BANDED_MATRIX_DATA_H
@@ -21,7 +21,7 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_HIDDEN_DECLARE BandedMatrixData final
+    class BandedMatrixData final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
@@ -36,22 +36,22 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 成员访问
-        [[nodiscard]] int GetSize() const noexcept;
-        [[nodiscard]] int GetBandsNumber() const;
-        [[nodiscard]] int GetStreamSize() const;
+        NODISCARD int GetSize() const noexcept;
+        NODISCARD int GetBandsNumber() const;
+        NODISCARD int GetStreamSize() const;
 
         // 重设大小会清空原有数据。
-        void ResetSize(int size, int bandsNumber);
+        void ResetSize(int newSize, int bandsNumber);
 
         // 下三角
         // GetBand(index):  0 <= index < bandMax
-        [[nodiscard]] int GetBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
+        NODISCARD int GetBandMax(int index) const noexcept(g_Assert < 1 || g_MathematicsAssert < 1);
 
-        ContainerType GetBand(int index) const;
+        NODISCARD ContainerType GetBand(int index) const;
         void SetBand(int index, const ContainerType& band);
 
-        [[nodiscard]] Real& operator()(int row, int column);
-        [[nodiscard]] const Real& operator()(int row, int column) const;
+        NODISCARD Real& operator()(int row, int column);
+        NODISCARD const Real& operator()(int row, int column) const;
 
         // 便利函数用于初始化矩阵
         void SetZero();
@@ -63,8 +63,8 @@ namespace Mathematics
         void Allocate(int bandsNumber);
 
     private:
-        int m_Size;
-        DataType m_Bands;
+        int size;
+        DataType bands;
     };
 }
 

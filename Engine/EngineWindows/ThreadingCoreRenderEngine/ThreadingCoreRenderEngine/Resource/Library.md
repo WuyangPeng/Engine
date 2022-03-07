@@ -43,12 +43,11 @@ boost（引擎直接关联）
 ----------------------------
 stlsoft（引擎直接关联）
 
-1. 版本：1.10.1-beta16。
-2. 官方网站：http://www.stlsoft.org/。
-3. 文件stlsoft.h（在stlsoft下）
-   在732行改成
-   # elif (_MSC_VER < 2000)
-   #  define STLSOFT_COMPILER_VERSION_STRING       "Visual C++ 14.1x"
+1. 版本：1.10.1-beta33。
+2. git地址：https://github.com/synesissoftware/STLSoft-1.10
+3. 在stlsoft.h第778行增加
+	# elif (_MSC_VER < 2000)
+	#   define STLSOFT_COMPILER_VERSION_STRING      "Visual C++ 16.x"
 
 ----------------------------
 ACE（引擎通过宏NETWORK_USE_ACE关联）
@@ -141,7 +140,8 @@ freeglut（引擎通过宏SYSTEM_USE_GLUT关联）
 
 1. 版本：3.2.1。
 2. 官方网站：http://freeglut.sourceforge.net/。
-3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
+3. git地址：https://github.com/dcnieho/FreeGLUT。
+4. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 wxWidgets（引擎通过宏USER_INTERFACE_USE_WX_WIDGETS关联）
@@ -159,39 +159,40 @@ opencv（引擎通过宏IMAGICS_USE_OPENCV关联）
 ----------------------------
 Visual Leak Detector（引擎Debug版本直接关联）
 
-1. 版本：2.5.1。
-2. 官方网站：https://archive.codeplex.com/?p=vld。
-3. git地址：https://github.com/KindDragon/vld.git。
-4. vld.cpp，976行去掉对高版本的VS的编译限制。
-5. Allocs.cpp第35行，testsuite.cpp第74行增加 
-   #elif _MSC_VER > 1900	// VS 2017
+1. 版本：2.7.0。
+2. git地址：https://github.com/oneiric/vld。
+3. Allocs.cpp第39行，testsuite.cpp第78行增加 
+   #elif _MSC_VER > 1927	// VS 2019
    #define CRTDLLNAME   _T("ucrtbased.dll")
-6. Allocs.cpp第60行，testsuite.cpp第98行增加 
-   #elif _MSC_VER > 1900	// VS 2017
+4. Allocs.cpp第67行，testsuite.cpp第105行增加 
+   #elif _MSC_VER > 1927	// VS 2019
    #define CRTDLLNAME   _T("ucrtbase.dll") 
-7. 工程vld_main_test增加宏_SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING。
-8. src\tests下Common.props第18行改成v142。
+5. src\tests下Common.props第18行改成v142。
 
 ----------------------------
 OpenAL Soft（引擎通过宏SOUND_EFFECT_USE_OPENAL关联）
+
 1. 版本：1.20.1。
 2. 官方网站：https://www.openal-soft.org/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 zlib（引擎直接关联）
+
 1. 版本：1.2.11。
 2. 官方网站：http://www.zlib.net/
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 freetype（引擎直接关联）
+
 1. 版本：2.10.2。
 2. 官方网站：https://www.freetype.org/
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 lua（引擎通过宏SCRIPT_USE_LUA关联）
+
 1. 版本：5.4.0。
 2. 官方网站：http://www.lua.org/
 3. 在build下建立VS工程，lua，静态库。包含以下文件：lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c 
@@ -205,12 +206,14 @@ lua（引擎通过宏SCRIPT_USE_LUA关联）
 
 ----------------------------  
 OpenXLSX （引擎通过宏CORE_TOOLS_USE_OPENXLSX关联）
+
 1. 官方网站：https://github.com/troldal/OpenXLSX。
 2. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 3. 执行OpenXLSX下的批处理文件。
 
 ----------------------------
 pugixml（引擎直接关联）
+
 1. 版本：1.11.4。
 2. 官方网站：https://github.com/zeux/pugixml。
 3. pugiconfig.hpp第47行，定义宏PUGIXML_HEADER_ONLY。
@@ -218,12 +221,14 @@ pugixml（引擎直接关联）
 ----------------------------
 
 miniz（引擎直接关联）
+
 1. 版本：2.2.0。
 2. 官方网站：https://github.com/richgel999/miniz。
 3. 使用releases page页的版本编译静态库，名为miniz。
 
 ----------------------------
 perl（引擎通过宏SCRIPT_USE_PERL关联）
+
 1. 版本：5.32.0。
 2. 官方网站：https://www.perl.org/
 3. 修改win32下的Makefile文件，134行去除注释。
@@ -240,6 +245,7 @@ perl（引擎通过宏SCRIPT_USE_PERL关联）
 
 ----------------------------
 Pantheios（引擎通过宏CORE_TOOLS_USE_PANTHEIOS关联）
+
 1. 版本：1.0.1。
 2. 官方网站：http://www.pantheios.org/
 3. 修改build\vc16.x64和build\vc16下makefile文件，
@@ -256,6 +262,7 @@ Pantheios（引擎通过宏CORE_TOOLS_USE_PANTHEIOS关联）
 
 ----------------------------
 Openrj（引擎通过宏CORE_TOOLS_USE_OPENRJ关联）
+
 1. 版本：1.6.4。
 2. 官方网站：http://www.openrj.org/
 3. 修改build\vc8下makefile文件，
@@ -271,12 +278,14 @@ Openrj（引擎通过宏CORE_TOOLS_USE_OPENRJ关联）
 
 ----------------------------
 ogg（引擎通过宏SOUND_EFFECT_USE_OGG关联）
+
 1. 版本：1.3.4。
 2. 官方网站：https://www.xiph.org/downloads/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
 
 ----------------------------
 vorbis（引擎通过宏SOUND_EFFECT_USE_VORBIS关联）
+
 1. 版本：1.3.7。
 2. 官方网站：https://www.xiph.org/downloads/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
@@ -285,6 +294,7 @@ vorbis（引擎通过宏SOUND_EFFECT_USE_VORBIS关联）
 
 ----------------------------
 FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
+
 1. 版本：1.3.5
 2. 官方网站：https://www.fltk.org/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。
@@ -305,6 +315,7 @@ FLTK（引擎通过宏USER_INTERFACE_USE_FLTK关联）
  
 ----------------------------
 chipmunk2D physics（引擎通过宏PHYSICS_USE_CHIPMUNK2D关联）
+
 1. 版本：7.0.3。
 2. 官方网站：http://chipmunk-physics.net/。
 3. 编译方式：CMake。Win32版本建立在BuildWin32下，x64版本建立在BuildX64下。

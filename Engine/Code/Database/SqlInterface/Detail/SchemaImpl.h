@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/29 9:52)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/25 14:09)
 
 #ifndef DATABASE_SQL_INTERFACE_SCHEMA_IMPL_H
 #define DATABASE_SQL_INTERFACE_SCHEMA_IMPL_H
@@ -14,18 +14,17 @@
 
 #include "Database/Configuration/ConfigurationStrategy.h"
 #include "Database/MysqlConnectorWrappers/Using/MysqlConnectorUsing.h"
+#include "Database/SqlInterface/SqlInterfaceInternalFwd.h"
 
 namespace Database
 {
-    class SchemaFactory;
     class DATABASE_HIDDEN_DECLARE SchemaImpl
     {
     public:
         using ClassType = SchemaImpl;
-        using ImplTypePtr = std::shared_ptr<ClassType>;
-        using MysqlxCollectionPtr = std::unique_ptr<MysqlxCollection>;
-        using MysqlxTablePtr = std::unique_ptr<MysqlxTable>;
         using FactoryType = SchemaFactory;
+        using MysqlxCollectionUniquePtr = std::unique_ptr<MysqlxCollection>;
+        using MysqlxTableUniquePtr = std::unique_ptr<MysqlxTable>;
 
     public:
         explicit SchemaImpl(const ConfigurationStrategy& configurationStrategy) noexcept;
@@ -37,13 +36,13 @@ namespace Database
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        [[nodiscard]] ConfigurationStrategy GetConfigurationStrategy() const noexcept;
+        NODISCARD ConfigurationStrategy GetConfigurationStrategy() const noexcept;
 
-        [[nodiscard]] virtual MysqlxCollectionPtr GetCollection(const std::string& collectionName);
-        [[nodiscard]] virtual MysqlxTablePtr GetTable(const std::string& tableonName);
+        NODISCARD virtual MysqlxCollectionUniquePtr GetCollection(const std::string& collectionName) const;
+        NODISCARD virtual MysqlxTableUniquePtr GetTable(const std::string& tableonName) const;
 
     public:
-        ConfigurationStrategy m_ConfigurationStrategy;
+        ConfigurationStrategy configurationStrategy;
     };
 }
 

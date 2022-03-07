@@ -25,7 +25,7 @@ namespace Mathematics
 		void FactorZXYTest();
 		void FactorZYXTest();
 		
-		virtual void DoRunUnitTest() override;	 
+		void DoRunUnitTest() override;	 
 	};
 }
 

@@ -6,17 +6,13 @@
 
 #include "NullSocketManager.h"
 
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 
 using std::make_shared;
 
 Network::NullSocketManager ::NullSocketManager(int64_t messageID)
-    : ParentType{}, m_Event{ make_shared<TestNetworkMessageEvent>() }, m_MessageID{ messageID }
-{
-    NETWORK_SELF_CLASS_IS_VALID_1;
-}
-
-Network::NullSocketManager ::~NullSocketManager()
+    : ParentType{ CoreTools::DisableNotThrow::Disable }, m_Event{ make_shared<TestNetworkMessageEvent>() }, m_MessageID{ messageID }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
@@ -30,14 +26,14 @@ void Network::NullSocketManager ::InitEvent(uint64_t socketID)
     InsertEvent(socketID, m_MessageID, m_Event);
 }
 
-bool Network::NullSocketManager ::EventFunction([[maybe_unused]] const CallbackParameters& callbackParameters)
+bool Network::NullSocketManager ::EventFunction([[maybe_unused]] const CallbackParameters& callbackParameters) noexcept
 {
     NETWORK_CLASS_IS_VALID_1;
 
     return true;
 }
 
-int Network::NullSocketManager ::GetValue() const
+int Network::NullSocketManager ::GetValue() const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_1;
 

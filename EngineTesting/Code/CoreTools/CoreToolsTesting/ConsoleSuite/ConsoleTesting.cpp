@@ -37,7 +37,7 @@ void CoreTools::ConsoleTesting::MainTest()
 
 void CoreTools::ConsoleTesting::InputHandleTest()
 {
-    ConsoleInstance<StandardHandle::Input> console{ DisableNotThrow::Disable };
+    ConsoleInstance<StandardHandle::Input> console = ConsoleInstance<StandardHandle::Input>::Create();
 
     auto handle = console.GetHandle();
 
@@ -47,7 +47,7 @@ void CoreTools::ConsoleTesting::InputHandleTest()
 
 void CoreTools::ConsoleTesting::OutputHandleTest()
 {
-    ConsoleInstance<StandardHandle::Output> console{ DisableNotThrow::Disable };
+    ConsoleInstance<StandardHandle::Output> console = ConsoleInstance<StandardHandle::Output>::Create();
 
     auto handle = console.GetHandle();
 
@@ -57,7 +57,7 @@ void CoreTools::ConsoleTesting::OutputHandleTest()
 
 void CoreTools::ConsoleTesting::ErrorHandleTest()
 {
-    ConsoleInstance<StandardHandle::Error> console{ DisableNotThrow::Disable };
+    ConsoleInstance<StandardHandle::Error> console = ConsoleInstance<StandardHandle::Error>::Create();
 
     auto handle = console.GetHandle();
 

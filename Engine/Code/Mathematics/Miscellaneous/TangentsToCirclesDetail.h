@@ -12,7 +12,7 @@
 namespace Mathematics
 {
 	template <typename Real>
-	static void GetDirections(const Vector2D<Real>& W, Real a,Vector2D<Real>& dir0, Vector2D<Real>& dir1)
+	static void GetDirections(const Vector2<Real>& W, Real a,Vector2<Real>& dir0, Vector2<Real>& dir1)
 	{
 		Real a2 = a * a;
 		Real wx2 = W.GetX()*W.GetX();
@@ -50,8 +50,8 @@ namespace Mathematics
 	template <typename Real>
 	bool GetTangentsToCircles(const Circle2<Real>& circle0,const Circle2<Real>& circle1, Line2<Real> line[4])
 	{
-		Vector2D<Real> W = circle1.GetCenter() - circle0.GetCenter();
-		Real wLenSqr = Vector2DTools<Real>::VectorMagnitudeSquared(W);
+		Vector2<Real> W = circle1.GetCenter() - circle0.GetCenter();
+		Real wLenSqr = Vector2Tools<Real>::GetLengthSquared(W);
 		Real rSum = circle0.GetRadius() + circle1.GetRadius();
 		if (wLenSqr <= rSum * rSum)
 		{
@@ -90,8 +90,8 @@ namespace Mathematics
 				tmp = Math<Real>::FAbs(wLenSqr - r1Sqr / (oneMinusS*oneMinusS));
 				a = Math<Real>::Sqrt(tmp);
 			}
-			Vector2D<Real> direction0;
-			Vector2D<Real> direction1;
+			Vector2<Real> direction0;
+			Vector2<Real> direction1;
 			GetDirections(W, a, direction0, direction1);
 			line[0].SetDirection(direction0);
 			line[1].SetDirection(direction1);
@@ -112,8 +112,8 @@ namespace Mathematics
 				a = Math<Real>::Sqrt(tmp);
 			}
 
-			Vector2D<Real> direction2;
-			Vector2D<Real> direction3;
+			Vector2<Real> direction2;
+			Vector2<Real> direction3;
 			GetDirections(W, a, direction2, direction3);
 			line[2].SetDirection(direction2);
 			line[3].SetDirection(direction3);
@@ -123,13 +123,13 @@ namespace Mathematics
 			// Circles effectively have same radius.
 
 			// Midpoint of circle centers.
-			Vector2D<Real> mid = ( Math::GetRational(1,2))*(circle0.GetCenter() + circle1.GetCenter());
+			Vector2<Real> mid = ( Math::GetRational(1,2))*(circle0.GetCenter() + circle1.GetCenter());
 
 			// Tangent lines passing through midpoint.
 			tmp = Math<Real>::FAbs(wLenSqr - ((Real)4)*r0Sqr);
 			a = Math<Real>::Sqrt(tmp);
-			Vector2D<Real> direction0;
-			Vector2D<Real> direction1;
+			Vector2<Real> direction0;
+			Vector2<Real> direction1;
 			GetDirections(W, a, direction0, direction1);
 			line[0].SetDirection(direction0);
 			line[1].SetDirection(direction1);
@@ -143,10 +143,10 @@ namespace Mathematics
 			//   1.  D = W
 			//   2.  a. P = mid+R0*perp(W), perp(a,b) = (b,-a)
 			//       b. P = mid-R0*perp(W)
-			line[2].SetOrigin(Vector2D<Real>(mid.GetX() + circle0.GetRadius()*W.GetY(),
+			line[2].SetOrigin(Vector2<Real>(mid.GetX() + circle0.GetRadius()*W.GetY(),
 				mid.GetY() - circle0.GetRadius()*W.GetX()));
 			line[2].SetDirection(W);
-			line[3].SetOrigin(Vector2D<Real>(mid.GetX() - circle0.GetRadius()*W.GetY(),
+			line[3].SetOrigin(Vector2<Real>(mid.GetX() - circle0.GetRadius()*W.GetY(),
 				mid.GetY() + circle0.GetRadius()*W.GetX()));
 			line[3].SetDirection(W);
 		}

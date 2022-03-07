@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 13:44)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:05)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,10 +14,22 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CyclicRedundancyCheck16Table::CyclicRedundancyCheck16Table() noexcept
-    : m_Table{ 0x0000, 0xCC01, 0xD801, 0x1400,
-               0xF001, 0x3C00, 0x2800, 0xE401,
-               0xA001, 0x6C00, 0x7800, 0xB401,
-               0x5000, 0x9C01, 0x8801, 0x4400 }
+    : table{ 0x0000,
+             0xCC01,
+             0xD801,
+             0x1400,
+             0xF001,
+             0x3C00,
+             0x2800,
+             0xE401,
+             0xA001,
+             0x6C00,
+             0x7800,
+             0xB401,
+             0x5000,
+             0x9C01,
+             0x8801,
+             0x4400 }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_9;
 }
@@ -28,5 +40,5 @@ uint16_t CoreTools::CyclicRedundancyCheck16Table::Get16Table(int index) const
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_Table.at(index);
+    return table.at(index);
 }

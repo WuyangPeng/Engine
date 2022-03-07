@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/19 10:17)
+///	引擎版本：0.8.0.2 (2022/02/11 15:19)
 
 #ifndef MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
 #define MATHEMATICS_RATIONAL_INTEGER_DATA_OPERATOR_DETAIL_H
@@ -24,17 +24,19 @@
 
 template <int N>
 Mathematics::IntegerDataOperator<N>::IntegerDataOperator(IntegerData& master) noexcept
-    : m_Master{ master }, m_Amend{ master }, m_Analysis{ master }
+    : master{ master }, amend{ master }, analysis{ master }
 {
     MATHEMATICS_SELF_CLASS_IS_VALID_9;
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <int N>
 bool Mathematics::IntegerDataOperator<N>::IsValid() const noexcept
 {
     return true;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <int N>
@@ -42,20 +44,20 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    const auto symbel = m_Master.GetSign();
+    const auto symbel = master.GetSign();
 
-    auto carry = 0u;
-    for (auto index = 0; index < sm_IntSize; ++index)
+    auto result = 0u;
+    for (auto index = 0; index < intSize; ++index)
     {
-        const auto lhsBit = m_Master[index];
+        const auto lhsBit = master[index];
         const auto rhsBit = rhs[index];
-        const auto sum = lhsBit + rhsBit + carry;
-        m_Amend.FromUnsignedInt(index, sum);
-        carry = (sum & sm_Carry) ? 1 : 0;
+        const auto sum = lhsBit + rhsBit + result;
+        amend.FromUnsignedInt(index, sum);
+        result = (sum & carry) ? 1 : 0;
     }
 
     // 测试溢出
-    if (symbel == rhs.GetSign() && m_Master.GetSign() != symbel)
+    if (symbel == rhs.GetSign() && master.GetSign() != symbel)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("IntegerData加减溢出\n"s));
     }
@@ -82,40 +84,40 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 
     // 16位块要移位的数目。
     const auto blocks = shift / 16;
-    if (sm_IntLast < blocks)
+    if (intLast < blocks)
     {
         return *this;
     }
 
     if (0 < blocks)
     {
-        auto shiftLaterIndex = boost::numeric_cast<int>(sm_IntLast);
-        auto shiftBeforeIndex = boost::numeric_cast<int>(sm_IntLast - blocks);
+        auto shiftLaterIndex = boost::numeric_cast<int>(intLast);
+        auto shiftBeforeIndex = boost::numeric_cast<int>(intLast - blocks);
         while (0 <= shiftBeforeIndex)
         {
-            m_Master[shiftLaterIndex] = m_Master[shiftBeforeIndex];
+            master[shiftLaterIndex] = master[shiftBeforeIndex];
 
             --shiftBeforeIndex;
             --shiftLaterIndex;
         }
 
-        m_Amend.SetValue(0, shiftLaterIndex + 1, 0);
+        amend.SetValue(0, shiftLaterIndex + 1, 0);
     }
 
     // 遗留的位要移位的数量
     const auto bits = shift % 16;
     if (0 < bits)
     {
-        for (auto index = sm_IntLast; 1 <= index; --index)
+        for (auto index = intLast; 1 <= index; --index)
         {
-            auto value = m_Analysis.ToUnsignedInt(index - 1, index);
+            auto value = analysis.ToUnsignedInt(index - 1, index);
             value <<= bits;
-            m_Amend.FromUnsignedInt(index, ((sm_High & value) >> 16));
+            amend.FromUnsignedInt(index, ((high & value) >> 16));
         }
 
-        auto value = m_Analysis.ToUnsignedInt(0);
+        auto value = analysis.ToUnsignedInt(0);
         value <<= bits;
-        m_Amend.FromUnsignedInt(0, (sm_Low & value));
+        amend.FromUnsignedInt(0, (low & value));
     }
 
     return *this;
@@ -129,7 +131,7 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 
     // 16位块要移位的数目。
     const auto blocks = shift / 16;
-    if (sm_IntLast < blocks)
+    if (intLast < blocks)
     {
         return *this;
     }
@@ -138,21 +140,21 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     {
         auto shiftLaterIndex = 0;
         auto shiftBeforeIndex = blocks;
-        while (shiftBeforeIndex <= sm_IntLast)
+        while (shiftBeforeIndex <= intLast)
         {
-            m_Master[shiftLaterIndex] = m_Master[shiftBeforeIndex];
+            master[shiftLaterIndex] = master[shiftBeforeIndex];
 
             ++shiftBeforeIndex;
             ++shiftLaterIndex;
         }
 
-        if (m_Master.GetSign() == NumericalValueSymbol::Positive)
+        if (master.GetSign() == NumericalValueSymbol::Positive)
         {
-            m_Amend.SetValue(shiftLaterIndex, sm_IntSize, 0);
+            amend.SetValue(shiftLaterIndex, intSize, 0);
         }
         else
         {
-            m_Amend.SetValue(shiftLaterIndex, sm_IntSize, sm_Positive);
+            amend.SetValue(shiftLaterIndex, intSize, positive);
         }
     }
 
@@ -160,20 +162,20 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
     const auto bits = shift % 16;
     if (0 < bits)
     {
-        for (auto i = 0; i <= sm_IntLast - 1; ++i)
+        for (auto i = 0; i <= intLast - 1; ++i)
         {
-            auto value = m_Analysis.ToUnsignedInt(i, i + 1);
+            auto value = analysis.ToUnsignedInt(i, i + 1);
             value >>= bits;
-            m_Amend.FromUnsignedInt(i, value);
+            amend.FromUnsignedInt(i, value);
         }
 
-        auto value = m_Analysis.ToUnsignedInt(sm_IntLast);
-        if (m_Master.GetSign() == NumericalValueSymbol::Negative)
+        auto value = analysis.ToUnsignedInt(intLast);
+        if (master.GetSign() == NumericalValueSymbol::Negative)
         {
-            value |= sm_High;  // 符号扩展
+            value |= high;  // 符号扩展
         }
         value >>= bits;
-        m_Amend.FromUnsignedInt(sm_IntLast, value);
+        amend.FromUnsignedInt(intLast, value);
     }
 
     return *this;
@@ -184,9 +186,9 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerMultiplication<N> multiplication{ m_Master, rhs };
+    IntegerMultiplication<N> multiplication{ master, rhs };
 
-    m_Master = multiplication.GetMultiplication();
+    master = multiplication.GetMultiplication();
 
     return *this;
 }
@@ -196,9 +198,9 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDivisionModulo<N> divisionModulo{ m_Master, rhs };
+    const IntegerDivisionModulo<N> divisionModulo{ master, rhs };
 
-    m_Master = divisionModulo.GetQuotient();
+    master = divisionModulo.GetQuotient();
 
     return *this;
 }
@@ -208,9 +210,9 @@ Mathematics::IntegerDataOperator<N>& Mathematics::IntegerDataOperator<N>::operat
 {
     MATHEMATICS_CLASS_IS_VALID_9;
 
-    IntegerDivisionModulo<N> divisionModulo{ m_Master, rhs };
+    const IntegerDivisionModulo<N> divisionModulo{ master, rhs };
 
-    m_Master = divisionModulo.GetRemainder();
+    master = divisionModulo.GetRemainder();
 
     return *this;
 }

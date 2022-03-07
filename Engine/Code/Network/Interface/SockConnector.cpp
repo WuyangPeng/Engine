@@ -1,22 +1,23 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 13:12)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/21 17:03)
 
 #include "Network/NetworkExport.h"
 
 #include "SockConnector.h"
 #include "Detail/SockConnectorFactory.h"
 #include "Detail/SockConnectorImpl.h"
-
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
+
 COPY_UNSHARED_CLONE_SELF_USE_CLONE_DEFINE(Network, SockConnector)
+
 Network::SockConnector::SockConnector(const ConfigurationStrategy& configurationStrategy)
     : impl{ CoreTools::ImplCreateUseFactory::Default, configurationStrategy }
 {

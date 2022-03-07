@@ -34,8 +34,8 @@ namespace Rendering
               TransformController(TransformController&& rhs) noexcept;
               TransformController& operator=(TransformController&& rhs) noexcept;
 		using ParentType = Controller;
-		using APoint = Mathematics::FloatAPoint;
-		using Matrix = Mathematics::FloatMatrix;
+		using APoint = Mathematics::APointF;
+		using Matrix = Mathematics::MatrixF;
 
 	public:
 		explicit TransformController(const FloatTransform& localTransform); 

@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.0 (2020/12/16 17:08)
+///	引擎版本：0.8.0.3 (2022/02/23 14:09)
 
 #ifndef MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_ACHIEVE_H
@@ -18,7 +18,7 @@
 
 template <typename Real>
 Mathematics::DynamicTestIntersector1<Real>::DynamicTestIntersector1(Real u0, Real u1, Real v0, Real v1, Real tMax, Real speedU, Real speedV, const Real epsilon)
-    : ParentType{ u0, u1, v0, v1, epsilon }, m_FirstTime{}, m_LastTime{}, m_Intersection{ false }
+    : ParentType{ u0, u1, v0, v1, epsilon }, firstTime{}, lastTime{}, intersection{ false }
 {
     Test(tMax, speedU, speedV);
 
@@ -46,10 +46,10 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
             if (differencePosition <= tMax * differenceSpeed)
             {
                 // 区间在指定时间内相交。
-                m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (v1 - u0) / differenceSpeed;
+                firstTime = differencePosition / differenceSpeed;
+                lastTime = (v1 - u0) / differenceSpeed;
 
-                m_Intersection = true;
+                intersection = true;
             }
         }
     }
@@ -64,42 +64,44 @@ void Mathematics::DynamicTestIntersector1<Real>::Test(Real tMax, Real speedU, Re
             if (differencePosition <= tMax * differenceSpeed)
             {
                 // 区间在指定时间内相交。
-                m_FirstTime = differencePosition / differenceSpeed;
-                m_LastTime = (u1 - v0) / differenceSpeed;
-                m_Intersection = true;
+                firstTime = differencePosition / differenceSpeed;
+                lastTime = (u1 - v0) / differenceSpeed;
+                intersection = true;
             }
         }
     }
     else
     {
         // 区间本来就相交。
-        m_FirstTime = Math::GetValue(0);
+        firstTime = Math::GetValue(0);
         if (speedU + epsilon < speedV)
         {
-            m_LastTime = (u1 - v0) / (speedV - speedU);
+            lastTime = (u1 - v0) / (speedV - speedU);
         }
         else if (speedV + epsilon < speedU)
         {
-            m_LastTime = (v1 - u0) / (speedU - speedV);
+            lastTime = (v1 - u0) / (speedU - speedV);
         }
         else
         {
-            m_LastTime = Math::sm_MaxReal;
+            lastTime = Math::maxReal;
         }
 
-        m_Intersection = true;
+        intersection = true;
     }
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::DynamicTestIntersector1<Real>::IsValid() const noexcept
 {
-    if (ParentType::IsValid() && Math::GetValue(0) <= m_FirstTime && m_FirstTime <= m_LastTime)
+    if (ParentType::IsValid() && Math::GetValue(0) <= firstTime && firstTime <= lastTime)
         return true;
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
@@ -107,7 +109,7 @@ bool Mathematics::DynamicTestIntersector1<Real>::IsIntersection() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Intersection;
+    return intersection;
 }
 
 template <typename Real>
@@ -115,9 +117,9 @@ Real Mathematics::DynamicTestIntersector1<Real>::GetFirstTime() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (m_Intersection)
+    if (intersection)
     {
-        return m_FirstTime;
+        return firstTime;
     }
     else
     {
@@ -130,13 +132,14 @@ Real Mathematics::DynamicTestIntersector1<Real>::GetLastTime() const
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    if (m_Intersection)
+    if (intersection)
     {
-        return m_LastTime;
+        return lastTime;
     }
     else
     {
         THROW_EXCEPTION(SYSTEM_TEXT("区间不相交\n"s));
     }
 }
+
 #endif  // MATHEMATICS_INTERSECTION_DYNAMIC_TEST_INTERSECTOR1_ACHIEVE_H

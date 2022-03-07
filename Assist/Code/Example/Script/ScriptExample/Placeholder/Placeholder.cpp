@@ -6,13 +6,12 @@
 
 #include "Example/Script/ScriptExample/ScriptExampleExport.h"
 
-#include "Placeholder.h" 
+#include "Placeholder.h"
 #include "CoreTools/Helper/ClassInvariant/ScriptClassInvariantMacro.h"
 
-ScriptExample::Placeholder
-	::Placeholder() 
+ScriptExample::Placeholder ::Placeholder() noexcept
 {
-	SCRIPT_SELF_CLASS_IS_VALID_9;
+    SCRIPT_SELF_CLASS_IS_VALID_9;
 }
 
 CLASS_INVARIANT_STUB_DEFINE(ScriptExample, Placeholder)

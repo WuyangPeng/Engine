@@ -6,7 +6,7 @@
 
 #include "Ray2Testing.h"
 #include "Mathematics/Objects2D/Ray2Detail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 
@@ -14,7 +14,12 @@
 
 using std::uniform_real;
 using std::default_random_engine;
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 namespace Mathematics
 {
 	template class Ray2<float>;
@@ -39,16 +44,16 @@ void Mathematics::Ray2Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		DoubleVector2D origin(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 origin(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
-		DoubleVector2D direction(firstRandomDistribution(generator), firstRandomDistribution(generator));
+		Vector2 direction(firstRandomDistribution(generator), firstRandomDistribution(generator));
 
 		direction.Normalize();
 
-		DoubleRay2 line(origin,direction);
+		Ray2D line(origin,direction);
 
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(origin,line.GetOrigin()));
-		ASSERT_TRUE(DoubleVector2DTools::Approximate(direction,line.GetDirection()));		
+		ASSERT_TRUE(Vector2ToolsD::Approximate(origin,line.GetOrigin()));
+		ASSERT_TRUE(Vector2ToolsD::Approximate(direction,line.GetDirection()));		
 	}
 }
 

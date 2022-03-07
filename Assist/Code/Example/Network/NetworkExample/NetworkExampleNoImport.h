@@ -7,7 +7,7 @@
 #ifndef NETWORK_EXAMPLE_NO_IMPORT_H
 #define NETWORK_EXAMPLE_NO_IMPORT_H
 
-#include "Macro/UserMacro.h"
+#include "Helper/UserMacro.h"
 
 #ifndef BUILDING_NETWORK_EXAMPLE_NO_IMPORT
   #define BUILDING_NETWORK_EXAMPLE_NO_IMPORT

@@ -21,13 +21,13 @@ const int Mathematics::Delaunay2<Real>
 
 template <typename Real>
 Mathematics::Delaunay2<Real>
-	::Delaunay2 (const std::vector<Vector2D<Real> >& vertices,Real epsilon, bool owner, QueryType queryType)
+	::Delaunay2 (const std::vector<Vector2<Real> >& vertices,Real epsilon, bool owner, QueryType queryType)
 	:Delaunay<Real>{ vertices.size(), epsilon, owner, queryType },mVertices{ vertices },
-	 mNumUniqueVertices{ 0 },mSVertices{},mQuery{ 0 },m_LineOrigin{ Vector2D<Real>::sm_Zero },
-	 m_LineDirection{ Vector2D<Real>::sm_Zero },mPathLast{ -1 },mPath{ 0 },mLastEdgeV0{ -1 },
+	 mNumUniqueVertices{ 0 },mSVertices{},mQuery{ 0 },m_LineOrigin{ Vector2<Real>::sm_Zero },
+	 m_LineDirection{ Vector2<Real>::sm_Zero },mPathLast{ -1 },mPath{ 0 },mLastEdgeV0{ -1 },
 	 mLastEdgeV1{ -1 },mLastEdgeOpposite{ -1 },mLastEdgeOppositeIndex{ -1 }
 {
-    Vector2DInformation<Real> info(mVertices, epsilon);
+    Vector2Information<Real> info(mVertices, epsilon);
     if (info.GetDimension() == 0)
     {
         // The values of mDimension, mIndices, and mAdjacencies were
@@ -94,9 +94,9 @@ Mathematics::Delaunay2<Real>
     else
     {
         // No transformation needed for exact rational arithmetic.
-        mMin = Vector2D<Real>::sm_Zero;
+        mMin = Vector2<Real>::sm_Zero;
         mScale = Math::GetValue(1);
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector2D<Real>));
+        memcpy(&mSVertices[0], &mVertices[0], mNumVertices*sizeof(Vector2<Real>));
 
         if (queryType == QueryType::Rational)
         {
@@ -122,7 +122,7 @@ Mathematics::Delaunay2<Real>
     // Incrementally update the triangulation.  The set of processed points
     // is maintained to eliminate duplicates, either in the original input
     // points or in the points obtained by snap rounding.
-    std::set<Vector2D<Real> > processed;
+    std::set<Vector2<Real> > processed;
     for (i = 0; i < 3; ++i)
     {
         processed.insert(mSVertices[mExtreme[i]]);
@@ -181,7 +181,7 @@ Mathematics::Delaunay2<Real>
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>* Mathematics::Delaunay2<Real>
+const Mathematics::Vector2<Real>* Mathematics::Delaunay2<Real>
 	::GetVertices () const
 {
     return &mVertices[0];
@@ -195,14 +195,14 @@ int Mathematics::Delaunay2<Real>
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::Delaunay2<Real>
+const Mathematics::Vector2<Real>& Mathematics::Delaunay2<Real>
 	::GetLineOrigin () const
 {
     return m_LineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::Delaunay2<Real>
+const Mathematics::Vector2<Real>& Mathematics::Delaunay2<Real>
 	::GetLineDirection () const
 {
     return m_LineDirection;
@@ -221,8 +221,8 @@ Mathematics::Delaunay1<Real>* Mathematics::Delaunay2<Real>
 //     Real* projection = NEW1<Real>(mNumVertices);
 //     for (int i = 0; i < mNumVertices; ++i)
 //     {
-//         Vector2D<Real> diff = mVertices[i] - m_LineOrigin;
-//         projection[i] = Vector2DTools<Real>::DotProduct(m_LineDirection,diff);
+//         Vector2<Real> diff = mVertices[i] - m_LineOrigin;
+//         projection[i] = Vector2Tools<Real>::DotProduct(m_LineDirection,diff);
 //     }
 
     return nullptr;  //NEW0 Delaunay1<Real>(mNumVertices, projection, mEpsilon, true,mQueryType);
@@ -274,7 +274,7 @@ bool Mathematics::Delaunay2<Real>
 
 template <typename Real>
 int Mathematics::Delaunay2<Real>
-	::GetContainingTriangle (const Vector2D<Real>& p) const
+	::GetContainingTriangle (const Vector2<Real>& p) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
     if (mDimension != 2)
@@ -378,7 +378,7 @@ int Mathematics::Delaunay2<Real>
 
 template <typename Real>
 bool Mathematics::Delaunay2<Real>
-	::GetVertexSet (int i, Vector2D<Real> vertices[3]) const
+	::GetVertexSet (int i, Vector2<Real> vertices[3]) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
     if (mDimension != 2)
@@ -441,7 +441,7 @@ bool Mathematics::Delaunay2<Real>
 
 template <typename Real>
 bool Mathematics::Delaunay2<Real>
-	::GetBarycentricSet (int i, const Vector2D<Real>& p,Real bary[3]) const
+	::GetBarycentricSet (int i, const Vector2<Real>& p,Real bary[3]) const
 {
     MATHEMATICS_ASSERTION_0(mDimension == 2, "The dimension must be 2\n");
     if (mDimension != 2)

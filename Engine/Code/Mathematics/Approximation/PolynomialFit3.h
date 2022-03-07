@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/12/04 13:35)
+///	引擎版本：0.8.0.2 (2022/02/18 16:26)
 
 #ifndef MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_H
 #define MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_H
@@ -13,7 +13,7 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Mathematics/Algebra/Polynomial.h"
-#include "CoreTools/Helper/Export/PerformanceUnsharedExportMacro.h"
+
 #include <vector>
 
 namespace Mathematics
@@ -40,41 +40,32 @@ namespace Mathematics
     //         ((x-xcen)/rng)^i * ((y-ycen)/rng)^j
 
     template <typename Real>
-    class PolynomialFit3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE CoreTools::PerformanceUnsharedImpl<PolynomialFit3Impl<Real>>;
-
-    template <typename Real>
     class PolynomialFit3 final
     {
     public:
-        using PolynomialFit3Impl = PolynomialFit3Impl<Real>;
-       
-        TYPE_DECLARE(PolynomialFit3);
-        using PackageType = CoreTools::PerformanceUnsharedImpl<ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
         using ClassType = PolynomialFit3<Real>;
         using Samples = std::vector<Real>;
         using Polynomial = Polynomial<Real>;
+        using Math = Math<Real>;
 
     public:
         PolynomialFit3(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, size_t xDegree, size_t yDegree);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Samples GetCoeff() const;
-        [[nodiscard]] bool IsSolveSucceed() const noexcept;
+        NODISCARD Samples GetCoeff() const;
+        NODISCARD bool IsSolveSucceed() const noexcept;
 
     private:
-        PackageType impl;
+        void Calculate(const Samples& xSamples, const Samples& ySamples, const Samples& wSamples, int xDegree, int yDegree);
+
+    private:
+        Samples coeff;
+        bool solveSucceed;
     };
 
-    using FloatPolynomialFit3 = PolynomialFit3<float>;
-    using DoublePolynomialFit3 = PolynomialFit3<double>;
+    using PolynomialFit3F = PolynomialFit3<float>;
+    using PolynomialFit3D = PolynomialFit3<double>;
 }
 
 #endif  // MATHEMATICS_APPROXIMATION_POLYNOMIAL_FIT3_H

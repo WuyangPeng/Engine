@@ -14,11 +14,11 @@
 #include "Mathematics/Query/Query2Rational.h"
 
 template <typename Real>
-Mathematics::ConvexHull2<Real>::ConvexHull2(const std::vector<Vector2D<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
+Mathematics::ConvexHull2<Real>::ConvexHull2(const std::vector<Vector2<Real>>& vertices, Real epsilon, bool owner, QueryType queryType)
     : ConvexHull<Real>{ vertices.size(), epsilon, owner, queryType }, mVertices{ vertices }, mSVertices{}, mQuery{ 0 },
-      m_LineOrigin{ Vector2D<Real>::sm_Zero }, m_LineDirection{ Vector2D<Real>::sm_Zero }
+      m_LineOrigin{ Vector2<Real>::sm_Zero }, m_LineDirection{ Vector2<Real>::sm_Zero }
 {
-    Vector2DInformation<Real> info{ mVertices, epsilon };
+    Vector2Information<Real> info{ mVertices, epsilon };
     if (info.GetDimension() == 0)
     {
         // The values of mDimension and mIndices were already initialized by
@@ -86,7 +86,7 @@ Mathematics::ConvexHull2<Real>::ConvexHull2(const std::vector<Vector2D<Real>>& v
     {
         // No transformation needed for exact rational arithmetic or filtered
         // predicates.
-        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector2D<Real>));
+        memcpy(&mSVertices[0], &mVertices[0], mNumVertices * sizeof(Vector2<Real>));
 
         if (queryType == QueryType::Rational)
         {
@@ -140,13 +140,13 @@ Mathematics::ConvexHull2<Real>::~ConvexHull2()
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::ConvexHull2<Real>::GetLineOrigin() const
+const Mathematics::Vector2<Real>& Mathematics::ConvexHull2<Real>::GetLineOrigin() const
 {
     return m_LineOrigin;
 }
 
 template <typename Real>
-const Mathematics::Vector2D<Real>& Mathematics::ConvexHull2<Real>::GetLineDirection() const
+const Mathematics::Vector2<Real>& Mathematics::ConvexHull2<Real>::GetLineDirection() const
 {
     return m_LineDirection;
 }
@@ -164,7 +164,7 @@ Mathematics::ConvexHull1<Real>* Mathematics::ConvexHull2<Real>::GetConvexHull1()
 //     for (auto i = 0; i < mNumVertices; ++i)
 //     {
 //         auto diff = mVertices[i] - m_LineOrigin;
-//         projection[i] = Vector2DTools<Real>::DotProduct(m_LineDirection, diff);
+//         projection[i] = Vector2Tools<Real>::DotProduct(m_LineDirection, diff);
 //     }
 
     return nullptr;

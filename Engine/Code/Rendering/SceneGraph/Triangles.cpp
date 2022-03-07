@@ -22,9 +22,9 @@
 #include "Mathematics/Algebra/AVectorDetail.h"
 #include "Mathematics/Algebra/HomogeneousPointDetail.h"
 #include "Mathematics/Algebra/MatrixDetail.h"
-#include "Mathematics/Algebra/Vector2DDetail.h"
-#include "Mathematics/Algebra/Vector3DDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2Detail.h"
+#include "Mathematics/Algebra/Vector3Detail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Base/MathDetail.h"
 #include "Mathematics/Intersection/Intersection3D/StaticFindIntersectorLine3Triangle3Detail.h"
 #include "Mathematics/Objects3D/Line3Detail.h"
@@ -253,8 +253,8 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
         const auto triangleIndex = GetTriangle(index);
 
         vector<APoint> localPosition(3);
-        vector<AVector> localNormal(3, Mathematics::FloatAVector::GetZero());
-        vector<AVector> localTangent(3, Mathematics::FloatAVector::GetZero());
+        vector<AVector> localNormal(3, Mathematics::AVectorF::GetZero());
+        vector<AVector> localTangent(3, Mathematics::AVectorF::GetZero());
         vector<Vector2D> localTextureCoord(3);
 
         for (auto current = 0; current < 3; ++current)
@@ -269,7 +269,7 @@ void Rendering::Triangles ::UpdateModelTangentsUseTextureCoords(const VertexBuff
         for (auto current = 0; current < 3; ++current)
         {
             const auto& currLocTangent = localTangent[current];
-            if (!Approximate(currLocTangent, Mathematics::FloatAVector::GetZero()))
+            if (!Approximate(currLocTangent, Mathematics::AVectorF::GetZero()))
             {
                 // 这个顶点已被访问。
                 continue;
@@ -316,24 +316,24 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     const auto differenceP1P0 = position1 - position0;
     const auto differenceP2P0 = position2 - position0;
 
-    if (Mathematics::FloatMath::FAbs(differenceP1P0.Length()) < Mathematics::FloatMath::GetZeroTolerance() ||
-        Mathematics::FloatMath::FAbs(differenceP2P0.Length()) < Mathematics::FloatMath::GetZeroTolerance())
+    if (Mathematics::MathF::FAbs(differenceP1P0.Length()) < Mathematics::MathF::GetZeroTolerance() ||
+        Mathematics::MathF::FAbs(differenceP2P0.Length()) < Mathematics::MathF::GetZeroTolerance())
     {
         // 这个三角形是非常小的，称之为退化退化三角形。
-        return Mathematics::FloatAVector::GetZero();
+        return Mathematics::AVectorF::GetZero();
     }
 
     // 计算顶点P0纹理坐标在边缘P1-P0的方向上的变化。
     auto differenceU1U0 = textureCoord1[0] - textureCoord0[0];
     auto differenceV1V0 = textureCoord1[1] - textureCoord0[1];
-    if (Mathematics::FloatMath::FAbs(differenceV1V0) < Mathematics::FloatMath::GetZeroTolerance())
+    if (Mathematics::MathF::FAbs(differenceV1V0) < Mathematics::MathF::GetZeroTolerance())
     {
         // 三角形实际上在纹理坐标v上没有变化。
-        if (Mathematics::FloatMath::FAbs(differenceU1U0) < Mathematics::FloatMath::GetZeroTolerance())
+        if (Mathematics::MathF::FAbs(differenceU1U0) < Mathematics::MathF::GetZeroTolerance())
         {
             // 三角形实际上在纹理坐标u上没有变化。
             // 由于纹理坐标不改变这个三角形，把它当作一个退化参数曲面。
-            return Mathematics::FloatAVector::GetZero();
+            return Mathematics::AVectorF::GetZero();
         }
 
         // 变化在所有u上是有效，所以设置切向量为T = dP / du。
@@ -344,10 +344,10 @@ const Rendering::Triangles::AVector Rendering::Triangles ::ComputeTangent(const 
     auto differenceU2U0 = textureCoord2[0] - textureCoord0[0];
     auto differenceV2V0 = textureCoord2[1] - textureCoord0[1];
     auto det = differenceV1V0 * differenceU2U0 - differenceV2V0 * differenceU1U0;
-    if (Mathematics::FloatMath::FAbs(det) < Mathematics::FloatMath::GetZeroTolerance())
+    if (Mathematics::MathF::FAbs(det) < Mathematics::MathF::GetZeroTolerance())
     {
         // 三角形顶点是共线的参数空间，所以把它当作一个退化参数曲面。
-        return Mathematics::FloatAVector::GetZero();
+        return Mathematics::AVectorF::GetZero();
     }
 
     // 三角形顶点是不共线的参数空间，所以选择切线为
@@ -366,10 +366,10 @@ const Rendering::PickRecordContainer Rendering::Triangles ::ExecuteRecursive(con
         // 将线性组件转换到模型空间坐标。
         auto worldInverseTransform = GetWorldTransform().GetInverseTransform();
         const auto modelOriginPoint = worldInverseTransform * origin;
-        const auto modelOrigin = modelOriginPoint.GetVector3D();
+        const auto modelOrigin = modelOriginPoint.GetVector3();
 
         const auto modelDirectionVector = worldInverseTransform * direction;
-        const auto modelDirection = modelDirectionVector.GetVector3D();
+        const auto modelDirection = modelDirectionVector.GetVector3();
 
         const Line3 line{ modelOrigin, modelDirection };
 

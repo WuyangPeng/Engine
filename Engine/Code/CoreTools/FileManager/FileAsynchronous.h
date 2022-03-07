@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.7.2.3 (2021/09/04 10:05)
+///	引擎版本：0.8.0.1 (2022/01/08 23:36)
 
 #ifndef CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
 #define CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H
@@ -64,6 +64,6 @@ namespace CoreTools
     };
 }
 
-#define FILE_ASYNCHRONOUS_MANAGER_SINGLETON CoreTools::FileAsynchronous::GetSingleton()
+#define FILE_ASYNCHRONOUS_SINGLETON CoreTools::FileAsynchronous::GetSingleton()
 
 #endif  // CORE_TOOLS_FILE_MANAGER_FILE_ASYNCHRONOUS_H

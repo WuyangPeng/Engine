@@ -9,8 +9,8 @@
 #include "CoreTools/Helper/ClassInvariantMacro.h"
 #include "Mathematics/Algebra/VariableLengthVectorDetail.h"
 #include "Mathematics/Algebra/VariableMatrixDetail.h"
-#include "Mathematics/Algebra/Vector2DToolsDetail.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector2ToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/NumericalAnalysis/EigenDecompositionDetail.h"
 
 #include "Mathematics/Algebra/Matrix2.h"
@@ -36,7 +36,16 @@ void Mathematics::EigenDecompositionTesting ::MainTest()
     ASSERT_NOT_THROW_EXCEPTION_0(EigenvalueNTest);
     ASSERT_NOT_THROW_EXCEPTION_0(BaseTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
+#include SYSTEM_WARNING_DISABLE(26440)
+#include SYSTEM_WARNING_DISABLE(26429)
+#include SYSTEM_WARNING_DISABLE(26432)
+#include SYSTEM_WARNING_DISABLE(26481)
 void Mathematics::EigenDecompositionTesting ::Eigenvalue2Test()
 {
     default_random_engine generator;
@@ -46,28 +55,28 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue2Test()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleMatrix2 firstMatrix(randomDistribution(generator),
+        Matrix2D firstMatrix(randomDistribution(generator),
                                   randomDistribution(generator),
                                   0.0,
                                   randomDistribution(generator));
 
         firstMatrix(1, 0) = firstMatrix(0, 1);
 
-        DoubleEigenDecomposition eigenDecomposition(firstMatrix);
+        EigenDecompositionD eigenDecomposition(firstMatrix);
 
         eigenDecomposition.Solve(true);
 
-        DoubleMatrix2 rotation = eigenDecomposition.GetEigenvectors2();
-        DoubleMatrix2 diagonal(eigenDecomposition.GetEigenvalue(0), eigenDecomposition.GetEigenvalue(1));
+        Matrix2D rotation = eigenDecomposition.GetEigenvectors2();
+        Matrix2D diagonal(eigenDecomposition.GetEigenvalue(0), eigenDecomposition.GetEigenvalue(1));
 
-        DoubleMatrix2 secondMatrix = rotation * diagonal * rotation.Transpose();
+        Matrix2D secondMatrix = rotation * diagonal * rotation.Transpose();
 
         ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-10));
 
         eigenDecomposition.Solve(false);
 
         rotation = eigenDecomposition.GetEigenvectors2();
-        diagonal = DoubleMatrix2(eigenDecomposition.GetEigenvalue(0), eigenDecomposition.GetEigenvalue(1));
+        diagonal = Matrix2D(eigenDecomposition.GetEigenvalue(0), eigenDecomposition.GetEigenvalue(1));
 
         secondMatrix = rotation * diagonal * rotation.Transpose();
 
@@ -84,7 +93,7 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        DoubleMatrix3 firstMatrix(randomDistribution(generator),
+        Matrix3D firstMatrix(randomDistribution(generator),
                                   randomDistribution(generator),
                                   randomDistribution(generator),
                                   0.0,
@@ -98,23 +107,23 @@ void Mathematics::EigenDecompositionTesting ::Eigenvalue3Test()
         firstMatrix(2, 0) = firstMatrix(0, 2);
         firstMatrix(2, 1) = firstMatrix(1, 2);
 
-        DoubleEigenDecomposition eigenDecomposition(firstMatrix);
+        EigenDecompositionD eigenDecomposition(firstMatrix);
 
         eigenDecomposition.Solve(true);
 
-        DoubleMatrix3 rotation = eigenDecomposition.GetEigenvectors3();
-        DoubleMatrix3 diagonal(eigenDecomposition.GetEigenvalue(0),
+        Matrix3D rotation = eigenDecomposition.GetEigenvectors3();
+        Matrix3D diagonal(eigenDecomposition.GetEigenvalue(0),
                                eigenDecomposition.GetEigenvalue(1),
                                eigenDecomposition.GetEigenvalue(2));
 
-        DoubleMatrix3 secondMatrix = rotation * diagonal * rotation.Transpose();
+        Matrix3D secondMatrix = rotation * diagonal * rotation.Transpose();
 
         ASSERT_TRUE(Approximate(firstMatrix, secondMatrix, 1e-8));
 
         eigenDecomposition.Solve(false);
 
         rotation = eigenDecomposition.GetEigenvectors3();
-        diagonal = DoubleMatrix3(eigenDecomposition.GetEigenvalue(0),
+        diagonal = Matrix3D(eigenDecomposition.GetEigenvalue(0),
                                  eigenDecomposition.GetEigenvalue(1),
                                  eigenDecomposition.GetEigenvalue(2));
 
@@ -135,7 +144,7 @@ void Mathematics::EigenDecompositionTesting ::EigenvalueNTest()
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
         int size = secondRandomDistribution(generator);
-        DoubleVariableMatrix firstMatrix(size, size);
+        VariableMatrixD firstMatrix(size, size);
 
         for (int row = 0; row < size; ++row)
         {
@@ -156,21 +165,21 @@ void Mathematics::EigenDecompositionTesting ::EigenvalueNTest()
             }
         }
 
-        DoubleEigenDecomposition eigenDecomposition(firstMatrix);
+        EigenDecompositionD eigenDecomposition(firstMatrix);
 
         eigenDecomposition.Solve(true);
 
-        DoubleVariableMatrix rotation = eigenDecomposition.GetEigenvectors();
-        DoubleVariableMatrix diagonal(size, size);
+        VariableMatrixD rotation = eigenDecomposition.GetEigenvectors();
+        VariableMatrixD diagonal(size, size);
 
         for (int m = 0; m < size; ++m)
         {
             diagonal(m, m) = eigenDecomposition.GetEigenvalue(m);
         }
 
-        DoubleVariableMatrix secondMatrix = rotation * diagonal * rotation.Transpose();
+        VariableMatrixD secondMatrix = rotation * diagonal * rotation.Transpose();
 
-        typedef bool (*VariableMatrixdApproximate)(const DoubleVariableMatrix& lhs, const DoubleVariableMatrix& rhs, const double epsilon);
+        typedef bool (*VariableMatrixdApproximate)(const VariableMatrixD& lhs, const VariableMatrixD& rhs, const double epsilon);
 
         VariableMatrixdApproximate function = Approximate<double>;
 
@@ -201,34 +210,34 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        FloatEigenDecomposition firstEigenDecomposition(size);
+        EigenDecompositionF firstEigenDecomposition(size);
 
         ASSERT_EQUAL(firstEigenDecomposition.GetSize(), 4);
 
-        DoubleMatrix2 firstMatrix(randomDistribution(generator),
+        Matrix2D firstMatrix(randomDistribution(generator),
                                   randomDistribution(generator),
                                   0.0,
                                   randomDistribution(generator));
 
         firstMatrix(1, 0) = firstMatrix(0, 1);
 
-        DoubleEigenDecomposition secondEigenDecomposition(2);
+        EigenDecompositionD secondEigenDecomposition(2);
         secondEigenDecomposition = firstMatrix;
 
         ASSERT_EQUAL(secondEigenDecomposition.GetSize(), 2);
 
         secondEigenDecomposition.Solve(true);
 
-        DoubleMatrix2 eigenvectors2 = secondEigenDecomposition.GetEigenvectors2();
+        Matrix2D eigenvectors2 = secondEigenDecomposition.GetEigenvectors2();
 
         for (int m = 0; m < 2; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector2DTools::Approximate,
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector2ToolsD::Approximate,
                                             secondEigenDecomposition.GetEigenvector2(m),
-                                            DoubleVector2D(eigenvectors2(0, m), eigenvectors2(1, m)), 1e-10);
+                                            Vector2(eigenvectors2(0, m), eigenvectors2(1, m)), 1e-10);
         }
 
-        DoubleMatrix3 secondMatrix(randomDistribution(generator),
+        Matrix3D secondMatrix(randomDistribution(generator),
                                    randomDistribution(generator),
                                    randomDistribution(generator),
                                    0.0,
@@ -248,17 +257,17 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
 
         secondEigenDecomposition.Solve(true);
 
-        DoubleMatrix3 eigenvectors3 = secondEigenDecomposition.GetEigenvectors3();
+        Matrix3D eigenvectors3 = secondEigenDecomposition.GetEigenvectors3();
 
         for (int m = 0; m < 3; ++m)
         {
-            ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate,
+            ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate,
                                             secondEigenDecomposition.GetEigenvector3(m),
-                                            DoubleVector3D(eigenvectors3(0, m), eigenvectors3(1, m), eigenvectors3(2, m)),
+                                            Vector3D(eigenvectors3(0, m), eigenvectors3(1, m), eigenvectors3(2, m)),
                                             1e-10);
         }
 
-        DoubleVariableMatrix thirdMatrix(size, size);
+        VariableMatrixD thirdMatrix(size, size);
 
         for (int row = 0; row < size; ++row)
         {
@@ -285,9 +294,9 @@ void Mathematics::EigenDecompositionTesting ::BaseTest()
 
         secondEigenDecomposition.Solve(true);
 
-        DoubleVariableMatrix eigenvectors = secondEigenDecomposition.GetEigenvectors();
+        VariableMatrixD eigenvectors = secondEigenDecomposition.GetEigenvectors();
 
-        typedef bool (*VariableLengthVectorApproximate)(const DoubleVariableLengthVector& lhs, const DoubleVariableLengthVector& rhs, const double epsilon);
+        typedef bool (*VariableLengthVectorApproximate)(const VariableLengthVectorD& lhs, const VariableLengthVectorD& rhs, const double epsilon);
 
         VariableLengthVectorApproximate function = Approximate<double>;
 

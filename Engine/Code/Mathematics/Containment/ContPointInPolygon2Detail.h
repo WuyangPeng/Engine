@@ -11,14 +11,14 @@
 
 template <typename Real>
 Mathematics::PointInPolygon2<Real>
-	::PointInPolygon2(int numPoints, const Vector2D<Real>* points)
+	::PointInPolygon2(int numPoints, const Vector2<Real>* points)
 	: mNumPoints{ numPoints }, mPoints{ points }
 {
 }
 
 template <typename Real>
 bool Mathematics::PointInPolygon2<Real>
-	::Contains(const Vector2D<Real>& p) const
+	::Contains(const Vector2<Real>& p) const
 {
 	auto inside = false;
     for (auto i = 0, j = mNumPoints-1; i < mNumPoints; j = i++)
@@ -54,7 +54,7 @@ bool Mathematics::PointInPolygon2<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolygon2<Real>
-	::ContainsConvexOrderN(const Vector2D<Real>& p) const
+	::ContainsConvexOrderN(const Vector2<Real>& p) const
 {
     for (int i1 = 0, i0 = mNumPoints-1; i1 < mNumPoints; i0 = i1++)
     {
@@ -72,14 +72,14 @@ bool Mathematics::PointInPolygon2<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolygon2<Real>
-	::ContainsConvexOrderLogN(const Vector2D<Real>& p) const
+	::ContainsConvexOrderLogN(const Vector2<Real>& p) const
 {
     return SubContainsPoint(p, 0, 0);
 }
 
 template <typename Real>
 bool Mathematics::PointInPolygon2<Real>
-	::ContainsQuadrilateral(const Vector2D<Real>& p) const
+	::ContainsQuadrilateral(const Vector2<Real>& p) const
 {
     if (mNumPoints != 4)
     {
@@ -134,7 +134,7 @@ bool Mathematics::PointInPolygon2<Real>
 
 template <typename Real>
 bool Mathematics::PointInPolygon2<Real>
-	::SubContainsPoint(const Vector2D<Real>& p, int i0, int i1) const
+	::SubContainsPoint(const Vector2<Real>& p, int i0, int i1) const
 {
     Real nx, ny, dx, dy;
 

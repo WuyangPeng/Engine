@@ -5,7 +5,7 @@
 // “˝«Ê≤‚ ‘∞Ê±æ£∫0.0.0.2 (2019/08/29 10:42)
 
 #include "GreatArcFit3Testing.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Objects3D/Ellipsoid3Detail.h"
 #include "Mathematics/Approximation/GreatArcFit3Detail.h"
 #include "CoreTools/Helper/AssertMacro.h"
@@ -31,7 +31,12 @@ void Mathematics::GreatArcFit3Testing
 {
 	ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::GreatArcFit3Testing
 	::FitTest()
 {
@@ -43,21 +48,21 @@ void Mathematics::GreatArcFit3Testing
 
 	for (auto loop = 0; loop < testLoopCount; ++loop)
 	{
-		std::vector<DoubleVector3D> vertices;
+		std::vector<Vector3D> vertices;
 		int size = secondRandomDistribution(generator);
 
 		for (int i = 0; i < size; ++i)
 		{
-			vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+			vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
 		}
 
-		DoubleGreatArcFit3 greatArcFit(vertices);
+		GreatArcFit3D greatArcFit(vertices);
 
-		DoubleGreatCircleFit3 greatCircleFit(vertices);
+		GreatCircleFit3D greatCircleFit(vertices);
 
-		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, greatArcFit.GetNormal(), greatCircleFit.GetNormal(), 1e-10);
+		ASSERT_APPROXIMATE_USE_FUNCTION(Vector3ToolsD::Approximate, greatArcFit.GetNormal(), greatCircleFit.GetNormal(), 1e-10);
 
-		DoubleVector3DOrthonormalBasis basis = DoubleVector3DTools::GenerateComplementBasis(greatCircleFit.GetNormal());
+		Vector3OrthonormalBasisD basis = Vector3ToolsD::GenerateComplementBasis(greatCircleFit.GetNormal());
 //  
 // 		std::vector<GreatArcFit3Item<double> > items;	 
 // 
@@ -88,13 +93,13 @@ void Mathematics::GreatArcFit3Testing
 // 			}
 // 		}
 // 
-// 		DoubleVector3D arcEnd0 = items[end0].GetUDot() * basis.GetUVector() + items[end0].GetVDot() * basis.GetVVector();
-// 		DoubleVector3D arcEnd1 = items[end1].GetUDot() * basis.GetUVector() + items[end1].GetVDot() * basis.GetVVector();
+// 		DoubleVector3 arcEnd0 = items[end0].GetUDot() * basis.GetUVector() + items[end0].GetVDot() * basis.GetVVector();
+// 		DoubleVector3 arcEnd1 = items[end1].GetUDot() * basis.GetUVector() + items[end1].GetVDot() * basis.GetVVector();
 // 		arcEnd0.Normalize();
 // 		arcEnd1.Normalize();
 // 
-// 		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, greatArcFit.GetArcEnd0(), arcEnd0, 1e-10);
-// 		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3DTools::Approximate, greatArcFit.GetArcEnd1(), arcEnd1, 1e-10);
+// 		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3Tools::Approximate, greatArcFit.GetArcEnd0(), arcEnd0, 1e-10);
+// 		ASSERT_APPROXIMATE_USE_FUNCTION(DoubleVector3Tools::Approximate, greatArcFit.GetArcEnd1(), arcEnd1, 1e-10);
 	}
 }
 

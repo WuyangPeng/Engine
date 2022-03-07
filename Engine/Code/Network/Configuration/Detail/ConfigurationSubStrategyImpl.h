@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:05)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 11:56)
 
 #ifndef NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
 #define NETWORK_NETWORK_CONFIGURATION_CONFIGURATION_STRATEGY_FACTORY_IMPL_H
@@ -28,8 +28,8 @@ namespace Network
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
-        [[nodiscard]] int GetValue(WrappersSubStrategy wrappersSubStrategy) const;
+        NODISCARD bool IsExist(WrappersSubStrategy wrappersSubStrategy) const;
+        NODISCARD int GetValue(WrappersSubStrategy wrappersSubStrategy) const;
 
         void Insert(WrappersSubStrategy wrappersSubStrategy, int value);
 
@@ -37,7 +37,7 @@ namespace Network
         using Container = std::map<WrappersSubStrategy, int>;
 
     private:
-        Container m_Container;
+        Container container;
     };
 }
 

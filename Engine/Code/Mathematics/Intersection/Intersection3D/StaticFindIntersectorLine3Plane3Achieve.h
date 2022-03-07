@@ -1,22 +1,22 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 10:47)
+///	引擎版本：0.8.0.3 (2022/03/01 19:15)
 
 #ifndef MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_ACHIEVE_H
 #define MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_ACHIEVE_H
 
 #include "StaticFindIntersectorLine3Plane3.h"
-#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h" 
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 
 template <typename Real>
 Mathematics::StaticFindIntersectorLine3Plane3<Real>::StaticFindIntersectorLine3Plane3(const Line3& line, const Plane3& plane, const Real epsilon) noexcept
-    : ParentType{ epsilon }, m_Line{ line }, m_Plane{ plane }, m_LineParameter{}
+    : ParentType{ epsilon }, line{ line }, plane{ plane }, lineParameter{}
 {
     Find();
 
@@ -24,6 +24,7 @@ Mathematics::StaticFindIntersectorLine3Plane3<Real>::StaticFindIntersectorLine3P
 }
 
 #ifdef OPEN_CLASS_INVARIANT
+
 template <typename Real>
 bool Mathematics::StaticFindIntersectorLine3Plane3<Real>::IsValid() const noexcept
 {
@@ -32,34 +33,35 @@ bool Mathematics::StaticFindIntersectorLine3Plane3<Real>::IsValid() const noexce
     else
         return false;
 }
+
 #endif  // OPEN_CLASS_INVARIANT
 
 template <typename Real>
-const Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::GetLine() const noexcept
+Mathematics::Line3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::GetLine() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Line;
+    return line;
 }
 
 template <typename Real>
-const Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::GetPlane() const noexcept
+Mathematics::Plane3<Real> Mathematics::StaticFindIntersectorLine3Plane3<Real>::GetPlane() const noexcept
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_Plane;
+    return plane;
 }
 
 // private
 template <typename Real>
 void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
 {
-    auto directionDotNormal = Vector3DTools::DotProduct(m_Line.GetDirection(), m_Plane.GetNormal());
-    auto signedDistance = m_Plane.DistanceTo(m_Line.GetOrigin());
+    auto directionDotNormal = Vector3Tools::DotProduct(line.GetDirection(), plane.GetNormal());
+    auto signedDistance = plane.DistanceTo(line.GetOrigin());
     if (Math::GetZeroTolerance() < Math::FAbs(directionDotNormal))
     {
         // 该线不平行于平面，因此它们必须相交。
-        m_LineParameter = -signedDistance / directionDotNormal;
+        lineParameter = -signedDistance / directionDotNormal;
 
         this->SetIntersectionType(IntersectionType::Point);
         return;
@@ -69,7 +71,7 @@ void Mathematics::StaticFindIntersectorLine3Plane3<Real>::Find() noexcept
     if (Math::FAbs(signedDistance) <= Math::GetZeroTolerance())
     {
         // 该线与平面重合，因此将参数选择为t = 0。
-        m_LineParameter = Math::GetValue(0);
+        lineParameter = Math::GetValue(0);
         this->SetIntersectionType(IntersectionType::Line);
 
         return;
@@ -83,7 +85,7 @@ Real Mathematics::StaticFindIntersectorLine3Plane3<Real>::GetLineParameter() con
 {
     MATHEMATICS_CLASS_IS_VALID_CONST_1;
 
-    return m_LineParameter;
+    return lineParameter;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_FIND_INTERSECTOR_LINE3_PLANE3_ACHIEVE_H

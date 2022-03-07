@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 14:09)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:10)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -14,7 +14,7 @@
 #include "CoreTools/Helper/ClassInvariant/CoreToolsClassInvariantMacro.h"
 
 CoreTools::CyclicRedundancyCheckCCITTUsingTable::CyclicRedundancyCheckCCITTUsingTable(const char* data, int length)
-    : m_CyclicRedundancyCheck{ 0 }
+    : cyclicRedundancyCheck{ 0 }
 {
     Calculation(data, length);
 
@@ -30,15 +30,17 @@ void CoreTools::CyclicRedundancyCheckCCITTUsingTable::Calculation(const char* da
         {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
-            m_CyclicRedundancyCheck = GetCCITT(m_CyclicRedundancyCheck, data[i]);
+
+            cyclicRedundancyCheck = GetCCITT(cyclicRedundancyCheck, data[i]);
+
 #include STSTEM_WARNING_POP
         }
     }
 }
 
-uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable::GetCCITT(uint16_t cyclicRedundancyCheck, uint16_t value)
+uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable::GetCCITT(uint16_t crc, uint16_t value)
 {
-    return (cyclicRedundancyCheck << 8) ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.GetCCITT((cyclicRedundancyCheck >> 8) ^ value);
+    return (crc << 8) ^ CYCLIC_REDUNDANCY_CHECK_HANDLE_SINGLETON.GetCCITT((crc >> 8) ^ value);
 }
 
 CLASS_INVARIANT_STUB_DEFINE(CoreTools, CyclicRedundancyCheckCCITTUsingTable)
@@ -47,5 +49,5 @@ uint16_t CoreTools::CyclicRedundancyCheckCCITTUsingTable::GetCyclicRedundancyChe
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CyclicRedundancyCheck;
+    return cyclicRedundancyCheck;
 }

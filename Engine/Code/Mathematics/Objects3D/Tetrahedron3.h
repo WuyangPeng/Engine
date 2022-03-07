@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/17 16:03)
+///	引擎版本：0.8.0.2 (2022/02/10 16:53)
 
 #ifndef MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H
 #define MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H
@@ -13,38 +13,25 @@
 #include "Mathematics/MathematicsDll.h"
 
 #include "Plane3.h"
-#include "Mathematics/Algebra/Vector3D.h"
-#include "CoreTools/Helper/Export/DelayCopyUnsharedMacro.h"
+#include "Mathematics/Algebra/Vector3.h"
+
 #include <type_traits>
 #include <vector>
 
 namespace Mathematics
 {
     template <typename Real>
-    class Tetrahedron3Impl;
-
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<float>>;
-    template class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<double>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE std::shared_ptr<Tetrahedron3Impl<Real>>;
-
-    template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE Tetrahedron3 final
+    class Tetrahedron3 final
     {
     public:
         static_assert(std::is_arithmetic_v<Real>, "Real must be arithmetic.");
 
-        using Tetrahedron3Impl = Tetrahedron3Impl<Real>;
-        TYPE_DECLARE(Tetrahedron3);
-        using PackageType = CoreTools::DelayCopyUnsharedImpl<Tetrahedron3,ImplType>;
-        using ClassShareType = typename PackageType::ClassShareType;
-
+        using ClassType = Tetrahedron3<Real>;
         using Math = Math<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3D = Vector3D<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
-        using ContainerType = std::vector<Vector3D>;
+        using Vector3 = Vector3<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
+        using ContainerType = std::vector<Vector3>;
         using IndicesType = std::vector<int>;
         using PlaneContainerType = std::vector<Plane3>;
 
@@ -57,32 +44,39 @@ namespace Mathematics
         //   面 2 = <V[0],V[3],V[2]>
         //   面 3 = <V[1],V[2],V[3]>
 
-        Tetrahedron3(const Vector3D& vertex0, const Vector3D& vertex1,
-                     const Vector3D& vertex2, const Vector3D& vertex3);
+        Tetrahedron3(const Vector3& vertex0,
+                     const Vector3& vertex1,
+                     const Vector3& vertex2,
+                     const Vector3& vertex3) noexcept;
 
-        explicit Tetrahedron3(const ContainerType& vertex);
+        explicit Tetrahedron3(const ContainerType& container);
 
         CLASS_INVARIANT_DECLARE;
 
-        [[nodiscard]] const Vector3D GetVertex(int index) const;
-        void SetVertex(int index, const Vector3D& vertex);
+        NODISCARD Vector3 GetVertex(int index) const;
+        void SetVertex(int index, const Vector3& vertex);
 
         // 获取顶点索引在指定的面。
-        [[nodiscard]] static IndicesType GetFaceIndices(int face);
+        NODISCARD static IndicesType GetFaceIndices(int face);
 
         // 构造四面体面的平面。
         // 该四面具有外部指向的法向量。
         // 平面索引是同前面的GetFaceIndices返回的索引相同。
-        [[nodiscard]] const PlaneContainerType GetPlanes() const;
+        NODISCARD PlaneContainerType GetPlanes() const;
 
-        [[nodiscard]] const Tetrahedron3 GetMove(Real t, const Vector3D& velocity) const;
+        NODISCARD Tetrahedron3 GetMove(Real t, const Vector3& velocity) const;
 
     private:
-        PackageType impl;
+        constexpr static auto vertexSize = 4;
+
+        using ArrayType = std::array<Vector3, vertexSize>;
+
+    private:
+        ArrayType vertexs;
     };
 
-    using FloatTetrahedron3 = Tetrahedron3<float>;
-    using DoubleTetrahedron3 = Tetrahedron3<double>;
+    using Tetrahedron3F = Tetrahedron3<float>;
+    using Tetrahedron3D = Tetrahedron3<double>;
 }
 
 #endif  // MATHEMATICS_OBJECTS3D_TETRAHEDRON3_H

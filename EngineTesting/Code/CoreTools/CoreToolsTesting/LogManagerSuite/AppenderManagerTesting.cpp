@@ -70,33 +70,33 @@ void CoreTools::AppenderManagerTesting ::LoggerTest()
 
 void CoreTools::AppenderManagerTesting ::LoggerSucceedTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::ArtificialIntellegence, LogLevel::Error)));
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::Framework, LogLevel::Info)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::ArtificialIntellegence, LogLevel::Error)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::Framework, LogLevel::Info)));
 
-    ASSERT_TRUE(manager.RemoveLogger(LogFilter::CoreTools));
-    ASSERT_TRUE(manager.RemoveLogger(LogFilter::ArtificialIntellegence));
-    ASSERT_TRUE(manager.RemoveLogger(LogFilter::Framework));
+    ASSERT_TRUE(manager->RemoveLogger(LogFilter::CoreTools));
+    ASSERT_TRUE(manager->RemoveLogger(LogFilter::ArtificialIntellegence));
+    ASSERT_TRUE(manager->RemoveLogger(LogFilter::Framework));
 }
 
 void CoreTools::AppenderManagerTesting ::InsertLoggerFailTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
-    ASSERT_FALSE(manager.InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Info)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
+    ASSERT_FALSE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Info)));
 }
 
 void CoreTools::AppenderManagerTesting ::RemoveLoggerFailTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
-    ASSERT_TRUE(manager.InsertLogger(Logger(LogFilter::Framework, LogLevel::Info)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::CoreTools, LogLevel::Debug)));
+    ASSERT_TRUE(manager->InsertLogger(Logger(LogFilter::Framework, LogLevel::Info)));
 
-    ASSERT_FALSE(manager.RemoveLogger(LogFilter::AssistTools));
+    ASSERT_FALSE(manager->RemoveLogger(LogFilter::AssistTools));
 }
 
 // Appender测试
@@ -109,27 +109,27 @@ void CoreTools::AppenderManagerTesting ::AppenderTest()
 
 void CoreTools::AppenderManagerTesting ::AppenderSucceedTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
-    ASSERT_TRUE(manager.RemoveAppender(SYSTEM_TEXT("Console"s)));
+    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
+    ASSERT_TRUE(manager->RemoveAppender(SYSTEM_TEXT("Console"s)));
 }
 
 void CoreTools::AppenderManagerTesting ::InsertAppenderFailTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
-    ASSERT_FALSE(manager.InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
+    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
+    ASSERT_FALSE(manager->InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
 }
 
 void CoreTools::AppenderManagerTesting ::RemoveAppenderFailTest()
 {
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
+    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("Console"s), Appender(AppenderPrint::All)));
 
-    ASSERT_FALSE(manager.RemoveAppender(SYSTEM_TEXT("OStream"s)));
+    ASSERT_FALSE(manager->RemoveAppender(SYSTEM_TEXT("OStream"s)));
 }
 
 // WriteMessage测试
@@ -146,42 +146,42 @@ void CoreTools::AppenderManagerTesting ::WriteMessageToFileTest()
 
     Logger firstLogger{ LogFilter::CoreTools, LogLevel::Trace };
 
-    AppenderManager manager{ DisableNotThrow::Disable };
+    auto manager = AppenderManager::Create();
 
-    ASSERT_TRUE(manager.InsertLogger(firstLogger));
-    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
+    ASSERT_TRUE(manager->InsertLogger(firstLogger));
+    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
     LogMessage traceMessage(LogLevel::Trace, LogFilter::CoreTools, g_TraceMessage, CORE_TOOLS_FUNCTION_DESCRIBED);
 
     // 这条消息被写入g_AppenderManagerTestingFileName
-    manager.Write(traceMessage);
+    manager->Write(traceMessage);
 
     Logger secondLogger(LogFilter::System, LogLevel::Info);
-    ASSERT_TRUE(manager.InsertLogger(secondLogger));
+    ASSERT_TRUE(manager->InsertLogger(secondLogger));
 
     LogMessage debugMessage{ LogLevel::Debug, LogFilter::System, g_DebugMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
-    manager.Write(debugMessage);
+    manager->Write(debugMessage);
 
     LogMessage infoMessage{ LogLevel::Info, LogFilter::CoreTools, g_InfoMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息被写入g_AppenderManagerTestingFileName
-    manager.Write(infoMessage);
+    manager->Write(infoMessage);
 
     appender.SetLogLevel(LogLevel::Error);
-    ASSERT_TRUE(manager.RemoveAppender(SYSTEM_TEXT("FileAppender"s)));
-    ASSERT_TRUE(manager.InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
+    ASSERT_TRUE(manager->RemoveAppender(SYSTEM_TEXT("FileAppender"s)));
+    ASSERT_TRUE(manager->InsertAppender(SYSTEM_TEXT("FileAppender"s), appender));
 
     LogMessage warnMessage{ LogLevel::Warn, LogFilter::CoreTools, g_WarnMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息没有被写入g_AppenderManagerTestingFileName
-    manager.Write(warnMessage);
+    manager->Write(warnMessage);
 
     LogMessage errorMessage{ LogLevel::Error, LogFilter::CoreTools, g_ErrorMessage, CORE_TOOLS_FUNCTION_DESCRIBED };
 
     // 这条消息被写入g_AppenderManagerTestingFileName
-    manager.Write(errorMessage);
+    manager->Write(errorMessage);
 }
 
 void CoreTools::AppenderManagerTesting ::FileContentTest()

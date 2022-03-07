@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.5 (2020/11/30 15:18)
+///	引擎版本：0.8.0.2 (2022/02/17 16:36)
 
 #ifndef MATHEMATICS_QUERY_QUERY2_RATIONAL_H
 #define MATHEMATICS_QUERY_QUERY2_RATIONAL_H
@@ -25,7 +25,7 @@ namespace Mathematics
         using ClassType = Query2Rational<Real>;
         using ParentType = Query2<Real>;
         using Math = typename ParentType::Math;
-        using Vector2D = typename ParentType::Vector2D;
+        using Vector2 = typename ParentType::Vector2;
         using VerticesType = typename ParentType::VerticesType;
 
     public:
@@ -34,18 +34,18 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-          [[nodiscard]] QueryType GetType() const noexcept override;
+        NODISCARD QueryType GetType() const noexcept override;
 
         // 关于一个点的各种几何对象之间的关系查询。
 
-           [[nodiscard]] LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
-          [[nodiscard]] LineQueryType ToLine(const Vector2D& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD LineQueryType ToLine(int index, int lhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD LineQueryType ToLine(const Vector2& testVector, int lhsVerticesIndex, int rhsVerticesIndex) const override;
 
-           [[nodiscard]] TriangleQueryType ToTriangle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
-          [[nodiscard]] TriangleQueryType ToTriangle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD TriangleQueryType ToTriangle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD TriangleQueryType ToTriangle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
-           [[nodiscard]] CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
-          [[nodiscard]] CircumcircleQueryType ToCircumcircle(const Vector2D& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD CircumcircleQueryType ToCircumcircle(int index, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
+        NODISCARD CircumcircleQueryType ToCircumcircle(const Vector2& testVector, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const override;
 
     private:
         using QueryRational = SignRational<4 * sizeof(Real)>;
@@ -54,17 +54,17 @@ namespace Mathematics
 
     private:
         void Convert();
-        [[nodiscard]] LineQueryType ToLine(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int rhsVerticesIndex) const;
-        [[nodiscard]] TriangleQueryType ToTriangle(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
-        [[nodiscard]] CircumcircleQueryType ToCircumcircle(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD LineQueryType ToLine(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD TriangleQueryType ToTriangle(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
+        NODISCARD CircumcircleQueryType ToCircumcircle(const QueryRationalVector& rationalTest, int lhsVerticesIndex, int mhsVerticesIndex, int rhsVerticesIndex) const;
 
     private:
-        // 缓存输入的有理数表示。浮点数的对有理数形式的转化是缓慢的， 所以最好是跟踪哪些值已转换。 
-        Container m_RationalVertices;
+        // 缓存输入的有理数表示。浮点数的对有理数形式的转化是缓慢的， 所以最好是跟踪哪些值已转换。
+        Container rationalVertices;
     };
 
-    using FloatQuery2Rational = Query2Rational<float>;
-    using DoubleQuery2Rational = Query2Rational<double>;
+    using Query2RationalF = Query2Rational<float>;
+    using Query2RationalD = Query2Rational<double>;
 }
 
 #endif  // MATHEMATICS_QUERY_QUERY2_RATIONAL_H

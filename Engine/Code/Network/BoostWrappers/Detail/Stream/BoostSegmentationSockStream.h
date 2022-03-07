@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/28 16:28)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/22 19:22)
 
 #ifndef NETWORK_BOOST_WRAPPERS_BOOST_SEGMENTATION_SOCK_STREAM_H
 #define NETWORK_BOOST_WRAPPERS_BOOST_SEGMENTATION_SOCK_STREAM_H
@@ -24,16 +24,16 @@ namespace Network
         using ParentType = BoostSockStream;
 
     public:
-        BoostSegmentationSockStream() noexcept;
+        explicit BoostSegmentationSockStream(CoreTools::DisableNotThrow disableNotThrow);
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] int Receive(const MessageBufferSharedPtr& messageBuffer) override;
+        NODISCARD int Receive(const MessageBufferSharedPtr& messageBuffer) override;
         void AsyncReceive(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer) override;
 
     private:
-        [[nodiscard]] int ReceiveHead(const MessageBufferSharedPtr& messageBuffer);
-        [[nodiscard]] int ReceiveContent(const MessageBufferSharedPtr& messageBuffer);
+        NODISCARD int ReceiveHead(const MessageBufferSharedPtr& messageBuffer);
+        NODISCARD int ReceiveContent(const MessageBufferSharedPtr& messageBuffer);
 
         void AsyncReceiveHead(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer);
         void AsyncReceiveContent(const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex);
@@ -44,7 +44,7 @@ namespace Network
         void SubclassAsyncReceiveEvent(const ErrorCodeType& errorCode, const EventInterfaceSharedPtr& eventInterface, const MessageBufferSharedPtr& messageBuffer, int originalWriteIndex) override;
 
     private:
-        StreamReceive m_StreamReceive;
+        StreamReceive streamReceive;
     };
 }
 

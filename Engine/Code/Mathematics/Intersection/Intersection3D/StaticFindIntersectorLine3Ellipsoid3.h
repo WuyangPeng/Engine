@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/20 9:54)
+///	引擎版本：0.8.0.3 (2022/03/01 19:03)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorLine3Ellipsoid3 : public StaticIntersector<Real, Vector3D>
+    class StaticFindIntersectorLine3Ellipsoid3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorLine3Ellipsoid3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Line3 = Line3<Real>;
         using Ellipsoid3 = Ellipsoid3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,11 +35,11 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Line3 GetLine() const noexcept;
-        [[nodiscard]] const Ellipsoid3 GetEllipsoid() const noexcept;
+        NODISCARD Line3 GetLine() const noexcept;
+        NODISCARD Ellipsoid3 GetEllipsoid() const noexcept;
 
-        [[nodiscard]] int GetQuantity() const noexcept;
-        [[nodiscard]] const Vector3D GetPoint(int index) const;
+        NODISCARD int GetQuantity() const noexcept;
+        NODISCARD Vector3 GetPoint(int index) const;
 
         /// 小阈值用于测试与计算有关的二次方程的判别式：Q(t) = a2 * t^2 + 2 * a1 * t + a0。
         /// 判别式为D = a1 * a1 - a0 * a2。
@@ -50,27 +50,25 @@ namespace Mathematics
         /// 以前，负阈值被硬编码为零。 正阈值被硬编码为Math<Real>::GetZeroTolerance()，
         /// 该阈值不适用于某些数据集（即，当椭圆范围很大时）。现在默认值为零。
         void SetNegativeThreshold(Real negThreshold);
-        [[nodiscard]] Real GetNegativeThreshold() const noexcept;
+        NODISCARD Real GetNegativeThreshold() const noexcept;
         void SetPositiveThreshold(Real posThreshold);
-        [[nodiscard]] Real GetPositiveThreshold() const noexcept;
+        NODISCARD Real GetPositiveThreshold() const noexcept;
 
     private:
         void Find();
 
-        Line3 m_Line;
-        Ellipsoid3 m_Ellipsoid;
+    private:
+        Line3 line;
+        Ellipsoid3 ellipsoid;
 
-        int m_Quantity;
-        Vector3D m_Point0;
-        Vector3D m_Point1;
+        int quantity;
+        Vector3 point0;
+        Vector3 point1;
 
         /// 用于测试判别式。 默认值为零。 您可以将负阈值设置为（小）负数，将正阈值设置为（小）正数。
-        Real m_NegativeThreshold;
-        Real m_PositiveThreshold;
+        Real negativeThreshold;
+        Real positiveThreshold;
     };
-
-    using FloatStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<float>;
-    using DoubleStaticFindIntersectorLine3Ellipsoid3 = StaticFindIntersectorLine3Ellipsoid3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_LINE3_ELLIPSOID3_H

@@ -13,16 +13,15 @@
 
 #ifndef BUILDING_MATHEMATICS_STATIC
 
-	#include "DllLib.h"
+    #include "DllLib.h"
 
-#else // BUILDING_MATHEMATICS_STATIC
+#else  // BUILDING_MATHEMATICS_STATIC
 
-	namespace MathematicsToolset
-	{
-		void StaticDllLib()
-		{
+namespace MathematicsToolset
+{
+    void StaticDllLib() noexcept
+    {
+    }
+}
 
-		}
-	}
-
-#endif // !BUILDING_MATHEMATICS_STATIC
+#endif  // !BUILDING_MATHEMATICS_STATIC

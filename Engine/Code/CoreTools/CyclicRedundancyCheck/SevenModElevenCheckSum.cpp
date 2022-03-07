@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.7.1.1 (2020/10/26 14:22)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/10 18:13)
 
 #include "CoreTools/CoreToolsExport.h"
 
@@ -18,15 +18,15 @@
 using std::array;
 using namespace std::literals;
 
-const int CoreTools::SevenModElevenCheckSum::GetPowers(int index)
+int CoreTools::SevenModElevenCheckSum::GetPowers(int index)
 {
-    static array<int, sm_PowersSize> powers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
+    static array<int, powersSize> powers{ 1, 7, 49, 343, 2401, 16807, 117649, 823543, 5764801, 40353607 };
 
     return powers.at(index);
 }
 
 CoreTools::SevenModElevenCheckSum::SevenModElevenCheckSum(const char* data, int length)
-    : m_CheckSum{ 0 }
+    : checkSum{ 0 }
 {
     Calculation(data, length);
 
@@ -39,7 +39,7 @@ int CoreTools::SevenModElevenCheckSum::GetCheckSum() const noexcept
 {
     CORE_TOOLS_CLASS_IS_VALID_CONST_9;
 
-    return m_CheckSum;
+    return checkSum;
 }
 
 // private
@@ -50,7 +50,7 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
         THROW_EXCEPTION(SYSTEM_TEXT("data指针为空\n"s));
     }
 
-    if (sm_PowersSize < length)
+    if (powersSize < length)
     {
         THROW_EXCEPTION(SYSTEM_TEXT("数字不能超过10位数\n"s));
     }
@@ -63,6 +63,7 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
         // 判断是否是数字
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26481)
+
         if (!isdigit(static_cast<int>(data[i - 1])))
         {
             THROW_EXCEPTION(SYSTEM_TEXT("无效数字\n"s));
@@ -70,6 +71,7 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
 
         // 将数字字符转换为数字
         const int digit{ data[i - 1] - '0' };
+
 #include STSTEM_WARNING_POP
 
         // 查找幂，乘以digit，加到和
@@ -87,5 +89,5 @@ void CoreTools::SevenModElevenCheckSum::Calculation(const char* data, int length
         mod = 0;
     }
 
-    m_CheckSum = mod;
+    checkSum = mod;
 }

@@ -153,7 +153,7 @@ void System::MessageBoxSelectionUseFlagsDataWindowsTesting::MessageBoxTest()
 
         auto iter = find(collection.cbegin(), collection.cend(), flag);
 
-        ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE(iter, collection.cend());
+        ASSERT_UNEQUAL(iter, collection.cend());
     }
 }
 

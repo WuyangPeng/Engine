@@ -22,7 +22,7 @@ namespace Mathematics
         void NoSolutionTest();
         void UnknownTest();
 	
-		virtual void DoRunUnitTest() override;
+		void DoRunUnitTest() override;
         
         static double FirstEquation(double x,double y);
         static double SecondEquation(double x,double y);

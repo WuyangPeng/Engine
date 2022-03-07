@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.3 (2020/11/18 17:09)
+///	引擎版本：0.8.0.2 (2022/02/11 16:56)
 
 #ifndef MATHEMATICS_RATIONAL_INT64_VECTOR_H
 #define MATHEMATICS_RATIONAL_INT64_VECTOR_H
@@ -14,8 +14,8 @@
 
 #include "System/Helper/PragmaWarning/Operators.h"
 
-#include <iosfwd>
 #include <array>
+#include <iosfwd>
 
 namespace Mathematics
 {
@@ -33,33 +33,33 @@ namespace Mathematics
         CLASS_INVARIANT_DECLARE;
 
         // 坐标访问
-        [[nodiscard]] const int64_t& operator[](int index) const;
-        [[nodiscard]] int64_t& operator[](int index);
+        NODISCARD const int64_t& operator[](int index) const;
+        NODISCARD int64_t& operator[](int index);
 
-        [[nodiscard]] const Int64Vector operator-() const noexcept;
+        NODISCARD Int64Vector operator-() const noexcept;
 
         Int64Vector& operator+=(const Int64Vector& rhs) noexcept;
         Int64Vector& operator-=(const Int64Vector& rhs) noexcept;
         Int64Vector& operator*=(const int64_t& scalar) noexcept;
         Int64Vector& operator/=(const int64_t& scalar);
 
-        [[nodiscard]] int64_t SquaredLength() const noexcept;
+        NODISCARD int64_t SquaredLength() const noexcept;
 
     private:
         using ArrayType = std::array<int64_t, VectorSize>;
 
     private:
-        ArrayType m_Tuple;
+        ArrayType tuple;
     };
 
     template <int VectorSize>
-    [[nodiscard]] bool operator==(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    NODISCARD bool operator==(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
 
     template <int VectorSize>
-    [[nodiscard]] bool operator<(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    NODISCARD bool operator<(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
 
     template <int VectorSize>
-    [[nodiscard]] int64_t Dot(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
+    NODISCARD int64_t Dot(const Int64Vector<VectorSize>& lhs, const Int64Vector<VectorSize>& rhs);
 
     template <int VectorSize>
     std::ostream& operator<<(std::ostream& os, const Int64Vector<VectorSize>& rhs);

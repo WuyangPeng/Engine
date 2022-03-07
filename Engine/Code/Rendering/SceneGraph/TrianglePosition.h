@@ -20,7 +20,7 @@ namespace Rendering
 	{
 	public:
 		PERFORMANCE_UNSHARED_TYPE_DECLARE(TrianglePosition);
-		using APoint = Mathematics::FloatAPoint;
+		using APoint = Mathematics::APointF;
 			
 	public:		
 		TrianglePosition(const APoint& firstPosition,const APoint& secondPosition,const APoint& thirdPosition);

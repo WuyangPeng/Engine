@@ -83,7 +83,7 @@ void System::CreateFileMappingTesting::DoCreateFileMappingTest(size_t index)
     auto fileMapProtection = fileMapProtectionFlags.at(index % fileMapProtectionFlags.size());
 
     const auto iter = mapping.find(memoryProtect);
-    ASSERT_UNEQUAL_DO_NOT_USE_MESSAGE_FAILURE_THROW(iter, mapping.end());
+    ASSERT_UNEQUAL_FAILURE_THROW(iter, mapping.end(), "");
 
     auto fileHandle = CreateSystemFile(fileMappingName.c_str(),
                                        iter->second,

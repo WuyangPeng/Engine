@@ -208,7 +208,7 @@ namespace Mathematics
         for (int j = 0; j < mDp1ToN; ++j)
         {
             int index = Index(mEvI);
-            if (mData[index] == Math<Real>::sm_MaxReal)
+            if (mData[index] == Math<Real>::maxReal)
             {
                 mData[index] = mEvaluateCallback(index);
             }

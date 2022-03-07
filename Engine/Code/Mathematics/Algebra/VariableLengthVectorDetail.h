@@ -1,33 +1,328 @@
-///	Copyright (c) 2010-2020
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.5.2.2 (2020/11/11 14:09)
+///	引擎版本：0.8.0.2 (2022/02/07 13:29)
 
 #ifndef MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
 #define MATHEMATICS_ALGEBRA_VARIABLE_LENGTH_VECTOR_DETAIL_H
 
 #include "VariableLengthVector.h"
+#include "System/Helper/PragmaWarning/NumericCast.h"
+#include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
+#include "CoreTools/Helper/ClassInvariant/MathematicsClassInvariantMacro.h"
 #include "CoreTools/Helper/ExceptionMacro.h"
+#include "CoreTools/Helper/MemberFunctionMacro.h"
 
 #include <iostream>
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VARIABLE_LENGTH_VECTOR_ACHIEVE)
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
 
-    #include "VariableLengthVectorAchieve.h"
+template <typename Real>
+Mathematics::VariableLengthVector<Real>::VariableLengthVector() noexcept
+    : container{}
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
 
-#endif  // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_VARIABLE_LENGTH_VECTOR_ACHIEVE)
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>::VariableLengthVector(int size)
+    : container(size)
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>::VariableLengthVector(const ContainerType& container)
+    : container{ container }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#include STSTEM_WARNING_POP
+
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26434)
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>::VariableLengthVector(ContainerType&& container) noexcept
+    : container{ std::move(container) }
+{
+    MATHEMATICS_SELF_CLASS_IS_VALID_9;
+}
+
+#include STSTEM_WARNING_POP
+
+#ifdef OPEN_CLASS_INVARIANT
+
+template <typename Real>
+bool Mathematics::VariableLengthVector<Real>::IsValid() const noexcept
+{
+    return true;
+}
+
+#endif  // OPEN_CLASS_INVARIANT
+
+template <typename Real>
+int Mathematics::VariableLengthVector<Real>::GetSize() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return boost::numeric_cast<int>(container.size());
+}
+
+template <typename Real>
+const Real& Mathematics::VariableLengthVector<Real>::operator[](int index) const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return container.at(index);
+}
+
+template <typename Real>
+Real& Mathematics::VariableLengthVector<Real>::operator[](int index)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    return OPERATOR_SQUARE_BRACKETS(Real, index);
+}
+
+template <typename Real>
+void Mathematics::VariableLengthVector<Real>::ResetSize(int size)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (size < 0)
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("size为负数！"s));
+    }
+
+    container.clear();
+    container.resize(size);
+    container.shrink_to_fit();
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real> Mathematics::VariableLengthVector<Real>::operator-() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    ContainerType result{};
+    for (auto value : container)
+    {
+        result.emplace_back(-value);
+    }
+
+    return VariableLengthVector{ std::move(result) };
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator+=(const VariableLengthVector& rhs)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (container.size() != rhs.container.size())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("向量大小不同！"s));
+    }
+
+    for (auto i = 0u; i < container.size(); ++i)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+        container[i] += rhs.container[i];
+
+#include STSTEM_WARNING_POP
+    }
+
+    return *this;
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator-=(const VariableLengthVector& rhs)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (container.size() != rhs.container.size())
+    {
+        THROW_EXCEPTION(SYSTEM_TEXT("向量大小不同！"s));
+    }
+
+    for (auto i = 0u; i < container.size(); ++i)
+    {
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26446)
+
+        container[i] -= rhs.container[i];
+
+#include STSTEM_WARNING_POP
+    }
+
+    return *this;
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator*=(Real scalar) noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    for (auto& value : container)
+    {
+        value *= scalar;
+    }
+
+    return *this;
+}
+
+template <typename Real>
+Mathematics::VariableLengthVector<Real>& Mathematics::VariableLengthVector<Real>::operator/=(Real scalar) noexcept(g_MathematicsAssert < 0)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    if (Math::epsilon < Math::FAbs(scalar))
+    {
+        for (auto& value : container)
+        {
+            value /= scalar;
+        }
+    }
+    else
+    {
+        MATHEMATICS_ASSERTION_0(false, "除零错误！");
+
+        for (auto& value : container)
+        {
+            value = Math::maxReal;
+        }
+    }
+
+    return *this;
+}
+
+template <typename Real>
+Real Mathematics::VariableLengthVector<Real>::Length() const noexcept(g_MathematicsAssert < 2)
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return Math::Sqrt(SquaredLength());
+}
+
+template <typename Real>
+Real Mathematics::VariableLengthVector<Real>::SquaredLength() const noexcept(g_MathematicsAssert < 2)
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    auto squaredLength = Math::GetValue(0);
+
+    for (auto value : container)
+    {
+        squaredLength += value * value;
+    }
+
+    MATHEMATICS_ASSERTION_2(0 <= squaredLength, "返回值不能为负数！");
+
+    return squaredLength;
+}
+
+template <typename Real>
+void Mathematics::VariableLengthVector<Real>::Normalize(Real epsilon) noexcept(g_MathematicsAssert < 2)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    auto length = Length();
+
+    if (epsilon < length)
+    {
+        for (auto& value : container)
+        {
+            value /= length;
+        }
+    }
+    else
+    {
+        MATHEMATICS_ASSERTION_2(false, "零向量不能正则化！");
+
+        for (auto& value : container)
+        {
+            value = Math::GetValue(0);
+        }
+    }
+}
+
+template <typename Real>
+typename Mathematics::VariableLengthVector<Real>::ContainerType Mathematics::VariableLengthVector<Real>::GetContainer() const
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return container;
+}
+
+template <typename Real>
+void Mathematics::VariableLengthVector<Real>::SetContainer(const ContainerType& newContainer)
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    container = newContainer;
+}
+
+template <typename Real>
+typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathematics::VariableLengthVector<Real>::begin() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return container.begin();
+}
+
+template <typename Real>
+typename Mathematics::VariableLengthVector<Real>::ContainerTypeConstIter Mathematics::VariableLengthVector<Real>::end() const noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_CONST_9;
+
+    return container.end();
+}
+
+template <typename Real>
+typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::begin() noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    return container.begin();
+}
+
+template <typename Real>
+typename Mathematics::VariableLengthVector<Real>::ContainerTypeIter Mathematics::VariableLengthVector<Real>::end() noexcept
+{
+    MATHEMATICS_CLASS_IS_VALID_9;
+
+    return container.end();
+}
 
 template <typename Real>
 bool Mathematics::operator==(const VariableLengthVector<Real>& lhs, const VariableLengthVector<Real>& rhs)
 {
     if (lhs.GetSize() != rhs.GetSize())
+    {
         return false;
+    }
     else
+    {
         return lhs.GetContainer() == rhs.GetContainer();
+    }
 }
 
 template <typename Real>

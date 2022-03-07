@@ -9,7 +9,7 @@
 
 #include "BSplineCurve2.h"
 
-#if !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
+#if !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
 
 
 #include "CoreTools/Helper/Assertion/MathematicsCustomAssertMacro.h"
@@ -20,7 +20,7 @@
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>
-	::BSplineCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoint, int degree, bool loop, bool open)
+	::BSplineCurve2 (int numCtrlPoints,const Vector2<Real>* ctrlPoint, int degree, bool loop, bool open)
 	:SingleCurve2<Real>{ Math::GetValue(0), Math::GetValue(1) }, mLoop{ loop }, mCtrlPoint{}
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
@@ -34,7 +34,7 @@ Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 Mathematics::BSplineCurve2<Real>
-	::BSplineCurve2 (int numCtrlPoints,const Vector2D<Real>* ctrlPoint, int degree, bool loop, const Real* knot)
+	::BSplineCurve2 (int numCtrlPoints,const Vector2<Real>* ctrlPoint, int degree, bool loop, const Real* knot)
 	:SingleCurve2<Real>(Math ::GetValue(0), Math::GetValue(1)), mLoop(loop), mCtrlPoint{}
 {
     MATHEMATICS_ASSERTION_0(numCtrlPoints >= 2, "Invalid input\n");
@@ -54,7 +54,7 @@ Mathematics::BSplineCurve2<Real>
 {
 #include STSTEM_WARNING_PUSH
 #include SYSTEM_WARNING_DISABLE(26447)
-  DELETE1(mCtrlPoint);
+  //DELETE1(mCtrlPoint);
 #include STSTEM_WARNING_POP
 }
 EXCEPTION_ALL_CATCH(Mathematics)  
@@ -63,12 +63,12 @@ EXCEPTION_ALL_CATCH(Mathematics)
 
 template <typename Real>
 void Mathematics::BSplineCurve2<Real>
-	::CreateControl (const Vector2D<Real>* ctrlPoint)
+	::CreateControl (const Vector2<Real>* ctrlPoint)
 {
 	const auto newNumCtrlPoints = mNumCtrlPoints + mReplicate;
 
-    mCtrlPoint = NEW1<Vector2D<Real> >(newNumCtrlPoints);
-    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2D<Real>));
+  //  mCtrlPoint = NEW1<Vector2<Real> >(newNumCtrlPoints);
+    memcpy(mCtrlPoint, ctrlPoint, mNumCtrlPoints*sizeof(Vector2<Real>));
 
     for (auto i = 0; i < mReplicate; ++i)
     {
@@ -113,7 +113,7 @@ bool Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 void Mathematics::BSplineCurve2<Real>
-	::SetControlPoint (int i, const Vector2D<Real>& ctrl) noexcept
+	::SetControlPoint (int i, const Vector2<Real>& ctrl) noexcept
 {
     if (0 <= i && i < mNumCtrlPoints)
     {
@@ -129,7 +129,7 @@ void Mathematics::BSplineCurve2<Real>
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
 	::GetControlPoint (int i) const noexcept
 {
     if (0 <= i && i < mNumCtrlPoints)
@@ -137,7 +137,7 @@ Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
         return mCtrlPoint[i];
     }
 
-    return Vector2D<Real>{ Math::sm_MaxReal, Math::sm_MaxReal };
+    return Vector2<Real>{ Math::maxReal, Math::maxReal };
 }
 
 template <typename Real>
@@ -156,7 +156,7 @@ Real Mathematics::BSplineCurve2<Real>
 
 template <typename Real>
 void Mathematics::BSplineCurve2<Real>
-	::Get (Real t, Vector2D<Real>* pos, Vector2D<Real>* der1, Vector2D<Real>* der2, Vector2D<Real>* der3) const
+	::Get (Real t, Vector2<Real>* pos, Vector2<Real>* der1, Vector2<Real>* der2, Vector2<Real>* der3) const
 {
     int i = 0, imin = 0, imax = 0;
     if (der3)
@@ -184,7 +184,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (pos)
     {
-        *pos = Vector2D<Real>::GetZero();
+        *pos = Vector2<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *pos += mCtrlPoint[i]*mBasis.GetD0(i);
@@ -193,7 +193,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der1)
     {
-        *der1 = Vector2D<Real>::GetZero();
+        *der1 = Vector2<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der1 += mCtrlPoint[i]*mBasis.GetD1(i);
@@ -202,7 +202,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der2)
     {
-        *der2 = Vector2D<Real>::GetZero();
+        *der2 = Vector2<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der2 += mCtrlPoint[i]*mBasis.GetD2(i);
@@ -211,7 +211,7 @@ void Mathematics::BSplineCurve2<Real>
 
     if (der3)
     {
-        *der3 = Vector2D<Real>::GetZero();
+        *der3 = Vector2<Real>::GetZero();
         for (i = imin; i <= imax; ++i)
         {
             *der3 += mCtrlPoint[i]*mBasis.GetD3(i);
@@ -227,41 +227,41 @@ Mathematics::BSplineBasis<Real>& Mathematics::BSplineCurve2<Real>
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
 	::GetPosition (Real t) const
 {
-    Vector2D<Real> pos;
+    Vector2<Real> pos;
     Get(t, &pos, 0, 0, 0);
     return pos;
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
 	::GetFirstDerivative (Real t) const
 {
-    Vector2D<Real> der1;
+    Vector2<Real> der1;
     Get(t, 0, &der1, 0, 0);
     return der1;
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
 	::GetSecondDerivative (Real t) const
 {
-    Vector2D<Real> der2;
+    Vector2<Real> der2;
     Get(t, 0, 0, &der2, 0);
     return der2;
 }
 
 template <typename Real>
-Mathematics::Vector2D<Real> Mathematics::BSplineCurve2<Real>
+Mathematics::Vector2<Real> Mathematics::BSplineCurve2<Real>
 	::GetThirdDerivative (Real t) const
 {
-    Vector2D<Real> der3;
+    Vector2<Real> der3;
     Get(t, 0, 0, 0, &der3);
     return der3;
 }
 #include STSTEM_WARNING_POP
-#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
+#endif // !defined(MATHEMATICS_EXPORT_TEMPLATE1) || defined(MATHEMATICS_INCLUDED_BSPLINE_CURVE2_DETAIL)
 
 #endif // MATHEMATICS_CURVES_SURFACES_VOLUMES_BSPLINE_CURVE2_DETAIL_H

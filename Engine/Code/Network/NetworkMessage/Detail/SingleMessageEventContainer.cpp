@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:53)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:38)
 
 #include "Network/NetworkExport.h"
 
@@ -64,7 +64,7 @@ void Network::SingleMessageEventContainer::OnEvent(uint64_t socketID, const Cons
     }
 }
 
-void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent, [[maybe_unused]] MessageEventPriority priority)
+void Network::SingleMessageEventContainer::Insert(const NetworkMessageEventSharedPtr& messageEvent, MAYBE_UNUSED MessageEventPriority priority)
 {
     NETWORK_CLASS_IS_VALID_9;
 
@@ -103,7 +103,7 @@ Network::SingleMessageEventContainer::ImplPtr Network::SingleMessageEventContain
     NETWORK_CLASS_IS_VALID_CONST_9;
 
     auto messageEvent = m_MessageEvent.lock();
-    auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>();
+    auto priorityMessageEventContainer = make_shared<PriorityMessageEventContainer>(CoreTools::DisableNotThrow::Disable);
 
     if (messageEvent)
     {
@@ -123,7 +123,7 @@ bool Network::SingleMessageEventContainer::IsCanInsert() const noexcept
         return false;
 }
 
-bool Network::SingleMessageEventContainer::IsPrioritySame([[maybe_unused]] MessageEventPriority priority) const noexcept
+bool Network::SingleMessageEventContainer::IsPrioritySame(MAYBE_UNUSED MessageEventPriority priority) const noexcept
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 

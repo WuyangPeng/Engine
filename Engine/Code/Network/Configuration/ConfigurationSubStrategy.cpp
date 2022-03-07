@@ -1,33 +1,34 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/26 19:16)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/17 13:57)
 
 #include "Network/NetworkExport.h"
 
 #include "ConfigurationSubStrategy.h"
 #include "Detail/ConfigurationSubStrategyImpl.h"
 #include "System/Helper/PragmaWarning.h"
-
+#include "CoreTools/Contract/Flags/DisableNotThrowFlags.h"
 #include "CoreTools/Contract/Flags/ImplFlags.h"
 #include "CoreTools/Helper/ClassInvariant/NetworkClassInvariantMacro.h"
 #include "CoreTools/Helper/MemberFunctionMacro.h"
+
 using std::make_shared;
 
-#include STSTEM_WARNING_PUSH
-#include SYSTEM_WARNING_DISABLE(26455)
+Network::ConfigurationSubStrategy Network::ConfigurationSubStrategy::Create()
+{
+    return ConfigurationSubStrategy{ CoreTools::DisableNotThrow::Disable };
+}
 
-Network::ConfigurationSubStrategy::ConfigurationSubStrategy()
+Network::ConfigurationSubStrategy::ConfigurationSubStrategy(MAYBE_UNUSED CoreTools::DisableNotThrow disableNotThrow)
     : impl{ CoreTools::ImplCreateUseDefaultConstruction::Default }
 {
     NETWORK_SELF_CLASS_IS_VALID_1;
 }
-
-#include STSTEM_WARNING_POP
 
 CLASS_INVARIANT_STUB_DEFINE(Network, ConfigurationSubStrategy)
 

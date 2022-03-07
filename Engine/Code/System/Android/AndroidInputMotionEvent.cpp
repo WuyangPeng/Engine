@@ -45,7 +45,7 @@ System::AndroidMotionEvent System::AndroidMotionEventGetFlags(const AndroidInput
 #endif  // SYSTEM_PLATFORM_ANDROID
 }
 
-System::AndroidMeta System::AndroidndroidMotionEventGetMetaState(const AndroidInputEvent* motionEvent) noexcept
+System::AndroidMeta System::AndroidMotionEventGetMetaState(const AndroidInputEvent* motionEvent) noexcept
 {
 #ifdef SYSTEM_PLATFORM_ANDROID
 

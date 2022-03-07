@@ -7,7 +7,7 @@
 #include "GaussPointsFit3Testing.h"
 #include "CoreTools/Helper/AssertMacro.h"
 #include "CoreTools/Helper/ClassInvariantMacro.h"
-#include "Mathematics/Algebra/Vector3DToolsDetail.h"
+#include "Mathematics/Algebra/Vector3ToolsDetail.h"
 #include "Mathematics/Approximation/GaussPointsFit3Detail.h"
 
 #include <random>
@@ -28,7 +28,12 @@ void Mathematics::GaussPointsFit3Testing ::MainTest()
 {
     ASSERT_NOT_THROW_EXCEPTION_0(FitTest);
 }
-
+#include STSTEM_WARNING_PUSH
+#include SYSTEM_WARNING_DISABLE(26490)
+#include SYSTEM_WARNING_DISABLE(26496)
+#include SYSTEM_WARNING_DISABLE(26446)
+#include SYSTEM_WARNING_DISABLE(26472)
+#include SYSTEM_WARNING_DISABLE(26475)
 void Mathematics::GaussPointsFit3Testing ::FitTest()
 {
     default_random_engine generator;
@@ -39,21 +44,21 @@ void Mathematics::GaussPointsFit3Testing ::FitTest()
 
     for (auto loop = 0; loop < testLoopCount; ++loop)
     {
-        std::vector<DoubleVector3D> vertices;
+        std::vector<Vector3D> vertices;
         int size = secondRandomDistribution(generator);
 
         for (int i = 0; i < size; ++i)
         {
-            vertices.push_back(DoubleVector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
+            vertices.push_back(Vector3D(firstRandomDistribution(generator), firstRandomDistribution(generator), firstRandomDistribution(generator)));
         }
 
         GaussPointsFit3<double> gaussPointsFit2d(vertices);
 
-        DoubleBox3 box = gaussPointsFit2d.GetBox3();
+        Box3D box = gaussPointsFit2d.GetBox3();
 
         for (int i = 0; i < size; ++i)
         {
-            double distanceSquared = DoubleVector3DTools::DistanceSquared(box.GetCenter(), vertices[i]);
+            double distanceSquared = Vector3ToolsD::DistanceSquared(box.GetCenter(), vertices[i]);
             double maxDistanceSquared = box.GetExtent0() * box.GetExtent0() + box.GetExtent1() * box.GetExtent1() + box.GetExtent2() * box.GetExtent2();
 
             ASSERT_TRUE(distanceSquared <= maxDistanceSquared);

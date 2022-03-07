@@ -24,7 +24,7 @@ namespace Mathematics
 	// collinear or (nearly) planar.  In this case M has a (nearly) zero
 	// eigenvalue, so inverting M is problematic.
 	template <typename Real>
-	Ellipsoid3<Real> ContEllipsoid (const std::vector<Vector3D<Real> >& points);
+	Ellipsoid3<Real> ContEllipsoid (const std::vector<Vector3<Real> >& points);
 	
 	// Project an ellipsoid onto a line.  The projection interval is [smin,smax]
 	// and corresponds to the line segment P+s*D, where smin <= s <= smax.

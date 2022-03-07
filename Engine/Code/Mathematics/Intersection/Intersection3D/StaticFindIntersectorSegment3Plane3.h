@@ -1,11 +1,11 @@
-///	Copyright (c) 2010-2021
+///	Copyright (c) 2010-2022
 ///	Threading Core Render Engine
 ///
 ///	作者：彭武阳，彭晔恩，彭晔泽
 ///	联系作者：94458936@qq.com
 ///
 ///	标准：std:c++17
-///	引擎版本：0.6.0.1 (2021/01/21 9:52)
+///	引擎版本：0.8.0.3 (2022/03/02 17:56)
 
 #ifndef MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H
 #define MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H
@@ -19,15 +19,15 @@
 namespace Mathematics
 {
     template <typename Real>
-    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Plane3 : public StaticIntersector<Real, Vector3D>
+    class MATHEMATICS_TEMPLATE_DEFAULT_DECLARE StaticFindIntersectorSegment3Plane3 : public StaticIntersector<Real, Vector3>
     {
     public:
         using ClassType = StaticFindIntersectorSegment3Plane3<Real>;
-        using ParentType = StaticIntersector<Real, Vector3D>;
-        using Vector3D = Vector3D<Real>;
+        using ParentType = StaticIntersector<Real, Vector3>;
+        using Vector3 = Vector3<Real>;
         using Segment3 = Segment3<Real>;
         using Plane3 = Plane3<Real>;
-        using Vector3DTools = Vector3DTools<Real>;
+        using Vector3Tools = Vector3Tools<Real>;
         using Math = typename ParentType::Math;
 
     public:
@@ -35,23 +35,21 @@ namespace Mathematics
 
         CLASS_INVARIANT_OVERRIDE_DECLARE;
 
-        [[nodiscard]] const Segment3 GetSegment() const noexcept;
-        [[nodiscard]] const Plane3 GetPlane() const noexcept;
+        NODISCARD Segment3 GetSegment() const noexcept;
+        NODISCARD Plane3 GetPlane() const noexcept;
 
-        [[nodiscard]] Real GetSegmentParameter() const noexcept;
+        NODISCARD Real GetSegmentParameter() const noexcept;
 
     private:
         // 查找交叉点查询。 相交点为P = origin + t * direction，|t| <= e，其中e是线段范围。
         void Find() noexcept;
 
-        Segment3 m_Segment;
-        Plane3 m_Plane;
+    private:
+        Segment3 segment;
+        Plane3 plane;
 
-        Real m_SegmentParameter;
+        Real segmentParameter;
     };
-
-    using FloatStaticFindIntersectorSegment3Plane3 = StaticFindIntersectorSegment3Plane3<float>;
-    using DoubleStaticFindIntersectorSegment3Plane3 = StaticFindIntersectorSegment3Plane3<double>;
 }
 
 #endif  // MATHEMATICS_INTERSECTION_STATIC_FIND_INTERSECTOR_SEGMENT3_PLANE3_H

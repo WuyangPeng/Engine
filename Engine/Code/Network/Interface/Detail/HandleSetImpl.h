@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 20:03)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/20 13:52)
 
 #ifndef NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
 #define NETWORK_NETWORK_INTERFACE_HANDLE_SET_IMPL_H
@@ -13,46 +13,46 @@
 #include "Network/NetworkDll.h"
 
 #include "Network/ACEWrappers/Using/ACEUsing.h"
+#include "Network/Interface/NetworkInternalFwd.h"
 
 #include <memory>
 
 namespace Network
 {
-    class HandleSetFactory;
     class NETWORK_HIDDEN_DECLARE HandleSetImpl
     {
     public:
         using ClassType = HandleSetImpl;
-        using ImplTypePtr = std::shared_ptr<ClassType>;
+        using ImplTypeSharedPtr = std::shared_ptr<ClassType>;
         using FactoryType = HandleSetFactory;
 
     public:
         HandleSetImpl() noexcept = default;
         virtual ~HandleSetImpl() noexcept = default;
-        HandleSetImpl(const HandleSetImpl&) = default;
-        HandleSetImpl& operator=(const HandleSetImpl&) = default;
-        HandleSetImpl(HandleSetImpl&&) noexcept = default;
-        HandleSetImpl& operator=(HandleSetImpl&&) noexcept = default;
+        HandleSetImpl(const HandleSetImpl& rhs) noexcept = default;
+        HandleSetImpl& operator=(const HandleSetImpl& rhs) noexcept = default;
+        HandleSetImpl(HandleSetImpl&& rhs) noexcept = default;
+        HandleSetImpl& operator=(HandleSetImpl&& rhs) noexcept = default;
 
         CLASS_INVARIANT_VIRTUAL_DECLARE;
 
-        virtual void SetBit(ACEHandle handle);
-        [[nodiscard]] virtual int64_t GetMaxSet() const;
-        [[nodiscard]] virtual SockFdSet* GetFdSet();
-        virtual void Sync(ACEHandle maxHandle);
-        [[nodiscard]] virtual bool IsSet(ACEHandle handle) const;
-        virtual void ClearBit(ACEHandle handle);
+        virtual void SetBit(ACEHandle handle) = 0;
+        NODISCARD virtual int64_t GetMaxSet() const = 0;
+        NODISCARD virtual SockFdSet* GetFdSet() = 0;
+        virtual void Sync(ACEHandle maxHandle) = 0;
+        NODISCARD virtual bool IsSet(ACEHandle handle) const = 0;
+        virtual void ClearBit(ACEHandle handle) = 0;
 
-        [[nodiscard]] virtual ImplTypePtr Clone() const;
+        NODISCARD virtual ImplTypeSharedPtr Clone() const = 0;
 
-        [[nodiscard]] virtual const ACEHandleSet& GetACEHandleSet() const;
+        NODISCARD virtual const ACEHandleSet& GetACEHandleSet() const = 0;
 
-        [[nodiscard]] virtual bool IsFdSetFull() const;
-        [[nodiscard]] virtual int IsFdSetCount() const;
+        NODISCARD virtual bool IsFdSetFull() const = 0;
+        NODISCARD virtual int IsFdSetCount() const = 0;
 
-        [[nodiscard]] virtual bool Select(int width);
+        NODISCARD virtual bool Select(int width) = 0;
 
-        [[nodiscard]] bool IsFdSetCountIsOne() const;
+        NODISCARD bool IsFdSetCountIsOne() const;
     };
 }
 

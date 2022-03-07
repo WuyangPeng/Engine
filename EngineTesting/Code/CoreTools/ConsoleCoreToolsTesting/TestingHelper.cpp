@@ -22,7 +22,7 @@ using std::cout;
 using std::endl;
 
 ConsoleCoreToolsTesting::TestingHelper::TestingHelper(HInstance instance, const char* commandLine, const WindowApplicationInformation& information, const EnvironmentDirectory& environmentDirectory)
-    : ParentType{ instance, commandLine, information, environmentDirectory }, consoleAlloc{ CoreTools::DisableNotThrow::Disable }
+    : ParentType{ instance, commandLine, information, environmentDirectory }, consoleAlloc{ ConsoleAlloc::Create() }
 {
     CORE_TOOLS_SELF_CLASS_IS_VALID_1;
 }

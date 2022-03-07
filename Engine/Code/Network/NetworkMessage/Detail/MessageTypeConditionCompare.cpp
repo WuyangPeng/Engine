@@ -1,11 +1,11 @@
-//	Copyright (c) 2010-2020
-//	Threading Core Render Engine
-//
-//	作者：彭武阳，彭晔恩，彭晔泽
-//	联系作者：94458936@qq.com
-//
-//	标准：std:c++17
-//	引擎版本：0.5.2.1 (2020/10/27 13:42)
+///	Copyright (c) 2010-2022
+///	Threading Core Render Engine
+///
+///	作者：彭武阳，彭晔恩，彭晔泽
+///	联系作者：94458936@qq.com
+///
+///	标准：std:c++17
+///	引擎版本：0.8.0.1 (2022/01/18 22:33)
 
 #include "Network/NetworkExport.h"
 
@@ -19,7 +19,7 @@ using std::max;
 using std::min;
 
 Network::MessageTypeConditionCompare::MessageTypeConditionCompare(VersionsCondition condition, int version) noexcept
-    : ParentType{}, m_Condition{ condition }, m_Version{ version }
+    : ParentType{}, condition{ condition }, m_Version{ version }
 {
     NETWORK_SELF_CLASS_IS_VALID_9;
 }
@@ -30,7 +30,7 @@ bool Network::MessageTypeConditionCompare::IsVersionsConform(int version) const 
 {
     NETWORK_CLASS_IS_VALID_CONST_9;
 
-    switch (m_Condition)
+    switch (condition)
     {
         case Network::VersionsCondition::Greater:
             return m_Version < version;
@@ -53,7 +53,7 @@ int Network::MessageTypeConditionCompare::GetMinVersion() const
 
     auto minVersion = 0;
 
-    switch (m_Condition)
+    switch (condition)
     {
         case Network::VersionsCondition::Greater:
             minVersion = m_Version + 1;
@@ -80,7 +80,7 @@ int Network::MessageTypeConditionCompare::GetMaxVersion() const
 
     auto minVersion = 0;
 
-    switch (m_Condition)
+    switch (condition)
     {
         case Network::VersionsCondition::Greater:
         case Network::VersionsCondition::GreaterEequal:

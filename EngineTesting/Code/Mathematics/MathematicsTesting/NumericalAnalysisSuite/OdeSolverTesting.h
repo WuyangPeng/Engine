@@ -22,7 +22,7 @@ namespace Mathematics
 		void MainTest();   
 		void SolverTest();
 		
-		virtual void DoRunUnitTest() override;	
+		void DoRunUnitTest() override;	
 
 	private:
 		int m_Dimension;

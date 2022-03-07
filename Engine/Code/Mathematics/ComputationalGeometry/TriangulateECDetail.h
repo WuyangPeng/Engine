@@ -187,7 +187,7 @@ void Mathematics::TriangulateEC<Real>
         MATHEMATICS_ASSERTION_0(Math<Real>::GetValue(0) <= epsilon && epsilon <= Math::GetValue(1),"Epsilon must be in [0,1]\n");
     }
 
-    Vector2D<Real> minValue, maxValue, range;
+    Vector2<Real> minValue, maxValue, range;
     Real scale, rmax;
     int i;
 
@@ -196,7 +196,7 @@ void Mathematics::TriangulateEC<Real>
     case QueryType::Int64:
     {
         // Transform the vertices to the square [0,2^{20}]^2.
-		auto aabb = Vector2DTools<Real>::ComputeExtremes(positions);
+		auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
 		minValue = aabb.GetMinPoint();
 		maxValue = aabb.GetMaxPoint();
       
@@ -215,7 +215,7 @@ void Mathematics::TriangulateEC<Real>
     case QueryType::Interger:
     {
         // Transform the vertices to the square [0,2^{24}]^2.
-		auto aabb = Vector2DTools<Real>::ComputeExtremes(positions);
+		auto aabb = Vector2Tools<Real>::ComputeExtremes(positions);
 		minValue = aabb.GetMinPoint();
 		maxValue = aabb.GetMaxPoint();
         range = maxValue - minValue;
@@ -446,9 +446,9 @@ void Mathematics::TriangulateEC<Real>
 
 template <typename Real>
 int Mathematics::TriangulateEC<Real>
-	::TriangleQuery (const Vector2D<Real>& position, QueryType queryType, Real epsilon, const Vector2D<Real> triangle[3]) const
+	::TriangleQuery (const Vector2<Real>& position, QueryType queryType, Real epsilon, const Vector2<Real> triangle[3]) const
 {
-	std::vector<Vector2D<Real> > triangleVec;
+	std::vector<Vector2<Real> > triangleVec;
 	triangleVec.push_back(triangle[0]);
 	triangleVec.push_back(triangle[1]);
 	triangleVec.push_back(triangle[2]);
@@ -499,11 +499,11 @@ void Mathematics::TriangulateEC<Real>
 
     // Find the edge whose intersection Intr with the ray M+t*(1,0) minimizes
     // the ray parameter t >= 0.
-	Vector2D<Real> intr{ Math<Real>::sm_MaxReal, M[1] };
+	Vector2<Real> intr{ Math<Real>::maxReal, M[1] };
     int v0min = -1, v1min = -1, endMin = -1;
     int i0, i1;
-	auto s = Math<Real>::sm_MaxReal;
-	auto t = Math<Real>::sm_MaxReal;
+	auto s = Math<Real>::maxReal;
+	auto t = Math<Real>::maxReal;
     for (i0 = numOuterVertices - 1, i1 = 0; i1 < numOuterVertices; i0 = i1++)
     {
         // Only consider edges for which the first vertex is below (or on)
@@ -597,7 +597,7 @@ void Mathematics::TriangulateEC<Real>
             // left-of the new edge.
             diff0 = mSPositions[outer[i0]] - shared;
             diff1 = mSPositions[outer[other]] - shared;
-			auto dotperp = Vector2DTools<Real>::DotPerp(diff0,diff1);
+			auto dotperp = Vector2Tools<Real>::DotPerp(diff0,diff1);
             if (dotperp > Math<Real>::GetValue(0))
             {
                 // The new edge is closer to M.
@@ -623,7 +623,7 @@ void Mathematics::TriangulateEC<Real>
         // larger than M.x, call this vertex P.  The triangle <M,I,P> must
         // contain an outer-polygon vertex that is visible to M, which is
         // possibly P itself.
-        Vector2D<Real> sTriangle[3];  // <P,M,I> or <P,I,M>
+        Vector2<Real> sTriangle[3];  // <P,M,I> or <P,I,M>
         int pIndex;
         if (mSPositions[outer[v0min]][0] > mSPositions[outer[v1min]][0])
         {
@@ -646,7 +646,7 @@ void Mathematics::TriangulateEC<Real>
         // in <M,I,P> that minimizes the angle between Real-M and (1,0).  The
         // data member mQuery is used for the reflex query.
 		auto diff = sTriangle[0] - M;
-		auto maxSqrLen = Vector2DTools<Real>::VectorMagnitudeSquared(diff);
+		auto maxSqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
 		auto maxCos = diff[0]*diff[0]/maxSqrLen;
         maxCosIndex = pIndex;
         for (i = 0; i < numOuterVertices; ++i)
@@ -663,7 +663,7 @@ void Mathematics::TriangulateEC<Real>
             {
                 // The vertex is reflex and inside the <M,I,P> triangle.
                 diff = mSPositions[curr] - M;
-				auto sqrLen = Vector2DTools<Real>::VectorMagnitudeSquared(diff);
+				auto sqrLen = Vector2Tools<Real>::GetLengthSquared(diff);
 				auto cs = diff[0]*diff[0]/sqrLen;
                 if (cs > maxCos)
                 {
